@@ -12,23 +12,23 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.dav.service.method;
+package org.zmail.cs.dav.service.method;
 
 import java.io.IOException;
 
 import javax.servlet.http.HttpServletResponse;
 
-import com.zimbra.common.mime.ContentType;
-import com.zimbra.common.mime.MimeConstants;
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.common.util.ByteUtil;
-import com.zimbra.common.util.ZimbraLog;
-import com.zimbra.cs.dav.DavContext;
-import com.zimbra.cs.dav.DavException;
-import com.zimbra.cs.dav.DavProtocol;
-import com.zimbra.cs.dav.resource.DavResource;
-import com.zimbra.cs.dav.service.DavMethod;
-import com.zimbra.cs.servlet.ETagHeaderFilter;
+import org.zmail.common.mime.ContentType;
+import org.zmail.common.mime.MimeConstants;
+import org.zmail.common.service.ServiceException;
+import org.zmail.common.util.ByteUtil;
+import org.zmail.common.util.ZmailLog;
+import org.zmail.cs.dav.DavContext;
+import org.zmail.cs.dav.DavException;
+import org.zmail.cs.dav.DavProtocol;
+import org.zmail.cs.dav.resource.DavResource;
+import org.zmail.cs.dav.service.DavMethod;
+import org.zmail.cs.servlet.ETagHeaderFilter;
 
 public class Get extends DavMethod {
     public static final String GET = "GET";
@@ -69,10 +69,10 @@ public class Get extends DavMethod {
         if (!returnContent() || !resource.hasContent(ctxt))
             return;
         resp.setHeader("Content-Disposition", "attachment");
-        if (ZimbraLog.dav.isDebugEnabled()) {
-            ZimbraLog.dav.debug("GET " + ctxt.getUri());
+        if (ZmailLog.dav.isDebugEnabled()) {
+            ZmailLog.dav.debug("GET " + ctxt.getUri());
             if (contentType != null && contentType.startsWith("text"))
-                ZimbraLog.dav.debug(new String(ByteUtil.getContent(resource.getContent(ctxt), 0), "UTF-8"));
+                ZmailLog.dav.debug(new String(ByteUtil.getContent(resource.getContent(ctxt), 0), "UTF-8"));
         }
         ByteUtil.copy(resource.getContent(ctxt), true, ctxt.getResponse().getOutputStream(), false);
     }

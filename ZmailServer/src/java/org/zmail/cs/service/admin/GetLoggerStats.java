@@ -12,7 +12,7 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.service.admin;
+package org.zmail.cs.service.admin;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -28,18 +28,18 @@ import java.util.Map;
 import java.util.Set;
 import java.util.regex.Pattern;
 
-import com.zimbra.common.account.Key;
-import com.zimbra.common.account.Key.ServerBy;
-import com.zimbra.common.localconfig.LC;
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.common.soap.AdminConstants;
-import com.zimbra.common.soap.Element;
-import com.zimbra.common.util.ZimbraLog;
-import com.zimbra.cs.account.Provisioning;
-import com.zimbra.cs.account.Server;
-import com.zimbra.cs.account.accesscontrol.AdminRight;
-import com.zimbra.cs.account.accesscontrol.Rights.Admin;
-import com.zimbra.soap.ZimbraSoapContext;
+import org.zmail.common.account.Key;
+import org.zmail.common.account.Key.ServerBy;
+import org.zmail.common.localconfig.LC;
+import org.zmail.common.service.ServiceException;
+import org.zmail.common.soap.AdminConstants;
+import org.zmail.common.soap.Element;
+import org.zmail.common.util.ZmailLog;
+import org.zmail.cs.account.Provisioning;
+import org.zmail.cs.account.Server;
+import org.zmail.cs.account.accesscontrol.AdminRight;
+import org.zmail.cs.account.accesscontrol.Rights.Admin;
+import org.zmail.soap.ZmailSoapContext;
 
 /**
  * <GetLoggerStatsRequest>
@@ -100,33 +100,33 @@ import com.zimbra.soap.ZimbraSoapContext;
  */
 public class GetLoggerStats extends AdminDocumentHandler {
     
-    private final static String ZMRRDFETCH = LC.zimbra_home.value() + "/libexec/zmrrdfetch";
+    private final static String ZMRRDFETCH = LC.zmail_home.value() + "/libexec/zmrrdfetch";
     private static final Pattern SPLIT_PATTERN = Pattern.compile("\\\"?\\s*,\\s*\\\"?");
 
     @Override
     public Element handle(Element request, Map<String, Object> context) throws ServiceException {
-        ZimbraSoapContext zsc = getZimbraSoapContext(context);
+        ZmailSoapContext zsc = getZmailSoapContext(context);
         
         
         
         // this command can only execute on the monitor host, so proxy if necessary
         Provisioning prov = Provisioning.getInstance();
-        String monitorHost = prov.getConfig().getAttr(Provisioning.A_zimbraLogHostname);
+        String monitorHost = prov.getConfig().getAttr(Provisioning.A_zmailLogHostname);
         if (monitorHost == null || monitorHost.trim().equals(""))
-            throw ServiceException.FAILURE("zimbraLogHostname is not configured", null);
+            throw ServiceException.FAILURE("zmailLogHostname is not configured", null);
         Server monitorServer = prov.get(Key.ServerBy.name, monitorHost);
         
         checkRight(zsc, context, monitorServer, Admin.R_getServerStats);
         
         if (monitorServer == null)
-            throw ServiceException.FAILURE("could not find zimbraLogHostname server: " + monitorServer, null);
+            throw ServiceException.FAILURE("could not find zmailLogHostname server: " + monitorServer, null);
         if (!prov.getLocalServer().getId().equalsIgnoreCase(monitorServer.getId()))
             return proxyRequest(request, context, monitorServer);
        
         Element response = zsc.createElement(AdminConstants.GET_LOGGER_STATS_RESPONSE);
         boolean loggerEnabled = false;
         Server local = prov.getLocalServer();
-        String[] services = local.getMultiAttr(Provisioning.A_zimbraServiceEnabled);
+        String[] services = local.getMultiAttr(Provisioning.A_zmailServiceEnabled);
         if (services != null) {
             for (int i = 0; i < services.length && !loggerEnabled; i++) {
                 loggerEnabled = "logger".equals(services[i]);
@@ -413,7 +413,7 @@ public class GetLoggerStats extends AdminDocumentHandler {
                         line = inbr.readLine();
                     }
                     catch (IOException e) {
-                        ZimbraLog.soap.error("GetLoggerStats IOE", e);
+                        ZmailLog.soap.error("GetLoggerStats IOE", e);
                         line = null;
                     }
                     

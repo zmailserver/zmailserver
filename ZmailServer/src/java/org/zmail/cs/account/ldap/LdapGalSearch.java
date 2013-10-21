@@ -14,7 +14,7 @@
  * 
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.account.ldap;
+package org.zmail.cs.account.ldap;
 
 import java.io.IOException;
 import java.security.PrivilegedActionException;
@@ -25,34 +25,34 @@ import java.util.Set;
 
 import javax.security.auth.login.LoginException;
 
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.common.util.DateUtil;
-import com.zimbra.common.util.ZimbraLog;
-import com.zimbra.cs.account.GalContact;
-import com.zimbra.cs.account.Provisioning;
-import com.zimbra.cs.account.Provisioning.SearchGalResult;
-import com.zimbra.cs.account.gal.GalOp;
-import com.zimbra.cs.account.gal.GalParams;
-import com.zimbra.cs.account.gal.GalUtil;
-import com.zimbra.cs.account.krb5.Krb5Login;
-import com.zimbra.cs.gal.GalSearchConfig;
-import com.zimbra.cs.gal.GalSearchParams;
-import com.zimbra.cs.ldap.LdapServerConfig.ExternalLdapConfig;
-import com.zimbra.cs.ldap.LdapConstants;
-import com.zimbra.cs.ldap.LdapException.LdapEntryNotFoundException;
-import com.zimbra.cs.ldap.LdapException.LdapSizeLimitExceededException;
-import com.zimbra.cs.ldap.LdapTODO.*;
-import com.zimbra.cs.ldap.ZLdapFilterFactory.FilterId;
-import com.zimbra.cs.ldap.IAttributes;
-import com.zimbra.cs.ldap.LdapClient;
-import com.zimbra.cs.ldap.LdapTODO;
-import com.zimbra.cs.ldap.LdapUsage;
-import com.zimbra.cs.ldap.LdapUtil;
-import com.zimbra.cs.ldap.SearchLdapOptions;
-import com.zimbra.cs.ldap.ZAttributes;
-import com.zimbra.cs.ldap.ZLdapContext;
-import com.zimbra.cs.ldap.ZLdapFilterFactory;
-import com.zimbra.cs.ldap.ZSearchScope;
+import org.zmail.common.service.ServiceException;
+import org.zmail.common.util.DateUtil;
+import org.zmail.common.util.ZmailLog;
+import org.zmail.cs.account.GalContact;
+import org.zmail.cs.account.Provisioning;
+import org.zmail.cs.account.Provisioning.SearchGalResult;
+import org.zmail.cs.account.gal.GalOp;
+import org.zmail.cs.account.gal.GalParams;
+import org.zmail.cs.account.gal.GalUtil;
+import org.zmail.cs.account.krb5.Krb5Login;
+import org.zmail.cs.gal.GalSearchConfig;
+import org.zmail.cs.gal.GalSearchParams;
+import org.zmail.cs.ldap.LdapServerConfig.ExternalLdapConfig;
+import org.zmail.cs.ldap.LdapConstants;
+import org.zmail.cs.ldap.LdapException.LdapEntryNotFoundException;
+import org.zmail.cs.ldap.LdapException.LdapSizeLimitExceededException;
+import org.zmail.cs.ldap.LdapTODO.*;
+import org.zmail.cs.ldap.ZLdapFilterFactory.FilterId;
+import org.zmail.cs.ldap.IAttributes;
+import org.zmail.cs.ldap.LdapClient;
+import org.zmail.cs.ldap.LdapTODO;
+import org.zmail.cs.ldap.LdapUsage;
+import org.zmail.cs.ldap.LdapUtil;
+import org.zmail.cs.ldap.SearchLdapOptions;
+import org.zmail.cs.ldap.ZAttributes;
+import org.zmail.cs.ldap.ZLdapContext;
+import org.zmail.cs.ldap.ZLdapFilterFactory;
+import org.zmail.cs.ldap.ZSearchScope;
 
 public class LdapGalSearch {
     
@@ -76,11 +76,11 @@ public class LdapGalSearch {
     
         if (url == null || url.length == 0 || base == null || filter == null) {
             if (url == null || url.length == 0)
-                ZimbraLog.gal.warn("searchLdapGal url is null");
+                ZmailLog.gal.warn("searchLdapGal url is null");
             if (base == null)
-                ZimbraLog.gal.warn("searchLdapGal base is null");
+                ZmailLog.gal.warn("searchLdapGal base is null");
             if (filter == null)
-                ZimbraLog.gal.warn("searchLdapGal queryExpr is null");
+                ZmailLog.gal.warn("searchLdapGal queryExpr is null");
             return result;
         }
     
@@ -214,7 +214,7 @@ public class LdapGalSearch {
             GalSearchConfig cfg = params.getConfig();
             GalSearchConfig.GalType galType =  params.getConfig().getGalType();
 
-            if (galType == GalSearchConfig.GalType.zimbra) {
+            if (galType == GalSearchConfig.GalType.zmail) {
                 zlc = LdapClient.getContext(LdapUsage.fromGalOp(params.getOp()));
             } else {
                 ExternalLdapConfig ldapConfig = new ExternalLdapConfig(
@@ -308,9 +308,9 @@ public class LdapGalSearch {
             try {
                 result.addMatch(lgc);
             } catch (ServiceException e) {
-                ZimbraLog.gal.warn("unable to add GAL match", e);
+                ZmailLog.gal.warn("unable to add GAL match", e);
             }
-            ZimbraLog.gal.debug("dn=" + dn + ", mts=" + mts + ", cts=" + cts);
+            ZmailLog.gal.debug("dn=" + dn + ", mts=" + mts + ", cts=" + cts);
         }
         
     }
@@ -330,14 +330,14 @@ public class LdapGalSearch {
         
         String reqAttrs[] = rules.getLdapAttrs();
       
-        if (ZimbraLog.gal.isDebugEnabled()) {
+        if (ZmailLog.gal.isDebugEnabled()) {
             StringBuffer returnAttrs = new StringBuffer();
             for (String a: reqAttrs) {
                 returnAttrs.append(a + ",");
             }
           
             zlc.debug();
-            ZimbraLog.gal.debug("searchGal: " +
+            ZmailLog.gal.debug("searchGal: " +
                     ", page size=" + pageSize + 
                     ", max results=" + maxResults + 
                     ", base=" + base + 
@@ -393,14 +393,14 @@ public class LdapGalSearch {
       
         String reqAttrs[] = rules.getLdapAttrs();
         
-        if (ZimbraLog.gal.isDebugEnabled()) {
+        if (ZmailLog.gal.isDebugEnabled()) {
             StringBuffer returnAttrs = new StringBuffer();
             for (String a: reqAttrs) {
                 returnAttrs.append(a + ",");
             }
           
             zlc.debug();
-            ZimbraLog.gal.debug("getGalEntryByDn: " +
+            ZmailLog.gal.debug("getGalEntryByDn: " +
                     ", dn=" + dn +
                     ", attrs=" + returnAttrs);
         }
@@ -411,7 +411,7 @@ public class LdapGalSearch {
             ZAttributes attrs = zlc.getAttributes(dn, reqAttrs);
             visitor.visit(dn, attrs);
         } catch (LdapEntryNotFoundException e) {
-            ZimbraLog.gal.debug("getGalEntryByDn: no such dn: " + dn, e);
+            ZmailLog.gal.debug("getGalEntryByDn: no such dn: " + dn, e);
         } catch (ServiceException e) {
             throw ServiceException.FAILURE("unable to search gal", e);
         }

@@ -12,7 +12,7 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.mime;
+package org.zmail.cs.mime;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -23,9 +23,9 @@ import java.util.Map;
 import java.util.Set;
 
 import com.google.common.base.Joiner;
-import com.zimbra.common.mailbox.ContactConstants;
-import com.zimbra.common.mime.InternetAddress;
-import com.zimbra.common.util.StringUtil;
+import org.zmail.common.mailbox.ContactConstants;
+import org.zmail.common.mime.InternetAddress;
+import org.zmail.common.util.StringUtil;
 
 /**
  * @since Jan 31, 2005

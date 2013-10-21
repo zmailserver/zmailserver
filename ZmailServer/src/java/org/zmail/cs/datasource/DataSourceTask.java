@@ -12,19 +12,19 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.datasource;
+package org.zmail.cs.datasource;
 
-import com.zimbra.common.account.Key;
-import com.zimbra.common.account.Key.DataSourceBy;
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.common.util.StringUtil;
-import com.zimbra.common.util.ZimbraLog;
-import com.zimbra.cs.account.Account;
-import com.zimbra.cs.account.DataSource;
-import com.zimbra.cs.account.Provisioning;
-import com.zimbra.cs.mailbox.Mailbox;
-import com.zimbra.cs.mailbox.MailboxManager;
-import com.zimbra.cs.mailbox.ScheduledTask;
+import org.zmail.common.account.Key;
+import org.zmail.common.account.Key.DataSourceBy;
+import org.zmail.common.service.ServiceException;
+import org.zmail.common.util.StringUtil;
+import org.zmail.common.util.ZmailLog;
+import org.zmail.cs.account.Account;
+import org.zmail.cs.account.DataSource;
+import org.zmail.cs.account.Provisioning;
+import org.zmail.cs.mailbox.Mailbox;
+import org.zmail.cs.mailbox.MailboxManager;
+import org.zmail.cs.mailbox.ScheduledTask;
 
 public class DataSourceTask extends ScheduledTask {
 
@@ -56,9 +56,9 @@ public class DataSourceTask extends ScheduledTask {
     }
     
     @Override public Void call() {
-        ZimbraLog.clearContext();
-        ZimbraLog.addMboxToContext(getMailboxId());
-        ZimbraLog.datasource.debug("Running scheduled import for DataSource %s",
+        ZmailLog.clearContext();
+        ZmailLog.addMboxToContext(getMailboxId());
+        ZmailLog.datasource.debug("Running scheduled import for DataSource %s",
             getDataSourceId());
         Mailbox mbox = null;
         
@@ -66,13 +66,13 @@ public class DataSourceTask extends ScheduledTask {
             // Look up mailbox, account and data source
             mbox = MailboxManager.getInstance().getMailboxById(getMailboxId());
             Account account = mbox.getAccount();
-            ZimbraLog.addAccountNameToContext(account.getName());
+            ZmailLog.addAccountNameToContext(account.getName());
             Provisioning prov = Provisioning.getInstance();
             DataSource ds = prov.get(account, Key.DataSourceBy.id, getDataSourceId());
             if (ds != null) {
-                ZimbraLog.addDataSourceNameToContext(ds.getName());
+                ZmailLog.addDataSourceNameToContext(ds.getName());
                 if (!ds.isEnabled()) {
-                    ZimbraLog.datasource.info("DataSource is disabled.  Cancelling future tasks.");
+                    ZmailLog.datasource.info("DataSource is disabled.  Cancelling future tasks.");
                     DataSourceManager.cancelTask(mbox, getDataSourceId());
                     return null;
                 }
@@ -80,16 +80,16 @@ public class DataSourceTask extends ScheduledTask {
                 // Do the work
                 DataSourceManager.importData(ds);
             } else {
-                ZimbraLog.datasource.info("DataSource %s was deleted.  Cancelling future tasks.",
+                ZmailLog.datasource.info("DataSource %s was deleted.  Cancelling future tasks.",
                     getDataSourceId());
                 DataSourceManager.cancelTask(mbox, getDataSourceId());
             }
         } catch (ServiceException e) {
-            ZimbraLog.datasource.warn("Scheduled DataSource import failed.", e);
+            ZmailLog.datasource.warn("Scheduled DataSource import failed.", e);
             return null;
         }
         
-        ZimbraLog.clearContext();
+        ZmailLog.clearContext();
         return null;
     }
 }

@@ -13,10 +13,10 @@
  * ***** END LICENSE BLOCK *****
  */
 
-package com.zimbra.cs.server;
+package org.zmail.cs.server;
 
 import com.google.common.base.CharMatcher;
-import com.zimbra.common.util.Log;
+import org.zmail.common.util.Log;
 
 import org.apache.mina.core.buffer.IoBuffer;
 import org.apache.mina.core.filterchain.IoFilterAdapter;

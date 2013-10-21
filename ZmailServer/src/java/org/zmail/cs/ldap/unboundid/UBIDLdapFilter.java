@@ -12,12 +12,12 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.ldap.unboundid;
+package org.zmail.cs.ldap.unboundid;
 
 import com.unboundid.ldap.sdk.Filter;
 
-import com.zimbra.cs.ldap.ZLdapFilter;
-import com.zimbra.cs.ldap.ZLdapFilterFactory.FilterId;
+import org.zmail.cs.ldap.ZLdapFilter;
+import org.zmail.cs.ldap.ZLdapFilterFactory.FilterId;
 
 public class UBIDLdapFilter extends ZLdapFilter {
     

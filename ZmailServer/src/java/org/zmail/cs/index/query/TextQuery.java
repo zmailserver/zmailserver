@@ -12,7 +12,7 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.index.query;
+package org.zmail.cs.index.query;
 
 import java.io.IOException;
 import java.io.StringReader;
@@ -29,13 +29,13 @@ import com.google.common.base.CharMatcher;
 import com.google.common.base.Joiner;
 import com.google.common.base.Strings;
 import com.google.common.collect.Lists;
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.common.util.ZimbraLog;
-import com.zimbra.cs.index.LuceneFields;
-import com.zimbra.cs.index.LuceneQueryOperation;
-import com.zimbra.cs.index.NoTermQueryOperation;
-import com.zimbra.cs.index.QueryOperation;
-import com.zimbra.cs.mailbox.Mailbox;
+import org.zmail.common.service.ServiceException;
+import org.zmail.common.util.ZmailLog;
+import org.zmail.cs.index.LuceneFields;
+import org.zmail.cs.index.LuceneQueryOperation;
+import org.zmail.cs.index.NoTermQueryOperation;
+import org.zmail.cs.index.QueryOperation;
+import org.zmail.cs.mailbox.Mailbox;
 
 /**
  * Query by text.
@@ -70,7 +70,7 @@ public class TextQuery extends Query {
             stream.end();
             stream.close();
         } catch (IOException e) { // should never happen
-            ZimbraLog.search.error("Failed to tokenize text=%s", text);
+            ZmailLog.search.error("Failed to tokenize text=%s", text);
         }
     }
 

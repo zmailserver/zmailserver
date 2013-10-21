@@ -12,7 +12,7 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.service.doc;
+package org.zmail.cs.service.doc;
 
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
@@ -28,40 +28,40 @@ import org.apache.commons.httpclient.HttpException;
 import org.apache.commons.httpclient.HttpStatus;
 import org.apache.commons.httpclient.methods.GetMethod;
 
-import com.zimbra.common.account.Key.AccountBy;
-import com.zimbra.common.account.ZAttrProvisioning;
-import com.zimbra.common.httpclient.HttpClientUtil;
-import com.zimbra.common.mime.ContentType;
-import com.zimbra.common.mime.MimeConstants;
-import com.zimbra.common.mime.MimeDetect;
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.common.service.ServiceException.Argument;
-import com.zimbra.common.service.ServiceException.InternalArgument;
-import com.zimbra.common.soap.Element;
-import com.zimbra.common.soap.MailConstants;
-import com.zimbra.common.util.ByteUtil;
-import com.zimbra.common.util.Pair;
-import com.zimbra.common.util.ZimbraHttpConnectionManager;
-import com.zimbra.cs.account.Account;
-import com.zimbra.cs.account.AuthToken;
-import com.zimbra.cs.account.Provisioning;
-import com.zimbra.cs.mailbox.Document;
-import com.zimbra.cs.mailbox.Flag;
-import com.zimbra.cs.mailbox.MailItem;
-import com.zimbra.cs.mailbox.MailServiceException;
-import com.zimbra.cs.mailbox.Mailbox;
-import com.zimbra.cs.mailbox.MailboxManager;
-import com.zimbra.cs.mailbox.Message;
-import com.zimbra.cs.mailbox.OperationContext;
-import com.zimbra.cs.mime.Mime;
-import com.zimbra.cs.mime.ParsedDocument;
-import com.zimbra.cs.service.FileUploadServlet;
-import com.zimbra.cs.service.FileUploadServlet.Upload;
-import com.zimbra.cs.service.UserServlet;
-import com.zimbra.cs.service.mail.UploadScanner;
-import com.zimbra.cs.service.util.ItemId;
-import com.zimbra.cs.service.util.ItemIdFormatter;
-import com.zimbra.soap.ZimbraSoapContext;
+import org.zmail.common.account.Key.AccountBy;
+import org.zmail.common.account.ZAttrProvisioning;
+import org.zmail.common.httpclient.HttpClientUtil;
+import org.zmail.common.mime.ContentType;
+import org.zmail.common.mime.MimeConstants;
+import org.zmail.common.mime.MimeDetect;
+import org.zmail.common.service.ServiceException;
+import org.zmail.common.service.ServiceException.Argument;
+import org.zmail.common.service.ServiceException.InternalArgument;
+import org.zmail.common.soap.Element;
+import org.zmail.common.soap.MailConstants;
+import org.zmail.common.util.ByteUtil;
+import org.zmail.common.util.Pair;
+import org.zmail.common.util.ZmailHttpConnectionManager;
+import org.zmail.cs.account.Account;
+import org.zmail.cs.account.AuthToken;
+import org.zmail.cs.account.Provisioning;
+import org.zmail.cs.mailbox.Document;
+import org.zmail.cs.mailbox.Flag;
+import org.zmail.cs.mailbox.MailItem;
+import org.zmail.cs.mailbox.MailServiceException;
+import org.zmail.cs.mailbox.Mailbox;
+import org.zmail.cs.mailbox.MailboxManager;
+import org.zmail.cs.mailbox.Message;
+import org.zmail.cs.mailbox.OperationContext;
+import org.zmail.cs.mime.Mime;
+import org.zmail.cs.mime.ParsedDocument;
+import org.zmail.cs.service.FileUploadServlet;
+import org.zmail.cs.service.FileUploadServlet.Upload;
+import org.zmail.cs.service.UserServlet;
+import org.zmail.cs.service.mail.UploadScanner;
+import org.zmail.cs.service.util.ItemId;
+import org.zmail.cs.service.util.ItemIdFormatter;
+import org.zmail.soap.ZmailSoapContext;
 
 public class SaveDocument extends DocDocumentHandler {
 
@@ -76,7 +76,7 @@ public class SaveDocument extends DocDocumentHandler {
     private static final String DEFAULT_DOCUMENT_FOLDER = "" + Mailbox.ID_FOLDER_BRIEFCASE;
 
     @Override public Element handle(Element request, Map<String, Object> context) throws ServiceException {
-        ZimbraSoapContext zsc = getZimbraSoapContext(context);
+        ZmailSoapContext zsc = getZmailSoapContext(context);
         OperationContext octxt = getOperationContext(zsc, context);
 
         Element docElem = request.getElement(MailConstants.E_DOC);
@@ -243,9 +243,9 @@ public class SaveDocument extends DocDocumentHandler {
         }
 
         String url = UserServlet.getRestUrl(acct) + "?auth=co&id=" + itemId + "&part=" + partId;
-        HttpClient client = ZimbraHttpConnectionManager.getInternalHttpConnMgr().newHttpClient();
+        HttpClient client = ZmailHttpConnectionManager.getInternalHttpConnMgr().newHttpClient();
         GetMethod get = new GetMethod(url);
-        authtoken.encode(client, get, false, acct.getAttr(ZAttrProvisioning.A_zimbraMailHost));
+        authtoken.encode(client, get, false, acct.getAttr(ZAttrProvisioning.A_zmailMailHost));
         try {
             int statusCode = HttpClientUtil.executeMethod(client, get);
             if (statusCode != HttpStatus.SC_OK) {
@@ -327,9 +327,9 @@ public class SaveDocument extends DocDocumentHandler {
             Pair<Header[], byte[]> resource = UserServlet.getRemoteResource(auth.toZAuthToken(), url);
             int status = 0;
             for (Header h : resource.getFirst()) {
-                if (h.getName().equalsIgnoreCase("X-Zimbra-Http-Status")) {
+                if (h.getName().equalsIgnoreCase("X-Zmail-Http-Status")) {
                     status = Integer.parseInt(h.getValue());
-                } else if (h.getName().equalsIgnoreCase("X-Zimbra-ItemName")) {
+                } else if (h.getName().equalsIgnoreCase("X-Zmail-ItemName")) {
                     name = h.getValue();
                 } else if (h.getName().equalsIgnoreCase("Content-Type")) {
                     contentType = h.getValue();

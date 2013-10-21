@@ -12,7 +12,7 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.qa.unittest;
+package org.zmail.qa.unittest;
 
 import java.io.IOException;
 import org.apache.commons.httpclient.Header;
@@ -22,10 +22,10 @@ import org.apache.commons.httpclient.HttpMethod;
 import org.apache.commons.httpclient.HttpStatus;
 import org.apache.commons.httpclient.methods.GetMethod;
 
-import com.zimbra.common.httpclient.HttpClientUtil;
-import com.zimbra.common.util.ZimbraLog;
-import com.zimbra.cs.account.Provisioning;
-import com.zimbra.cs.account.Server;
+import org.zmail.common.httpclient.HttpClientUtil;
+import org.zmail.common.util.ZmailLog;
+import org.zmail.cs.account.Provisioning;
+import org.zmail.cs.account.Server;
 
 import junit.framework.TestCase;
 
@@ -38,9 +38,9 @@ public class TestWsdlServlet extends TestCase {
 
         String protoHostPort;
         if (admin)
-            protoHostPort = "https://localhost:" + localServer.getIntAttr(Provisioning.A_zimbraAdminPort, 0);
+            protoHostPort = "https://localhost:" + localServer.getIntAttr(Provisioning.A_zmailAdminPort, 0);
         else
-            protoHostPort = "http://localhost:" + localServer.getIntAttr(Provisioning.A_zimbraMailPort, 0);
+            protoHostPort = "http://localhost:" + localServer.getIntAttr(Provisioning.A_zmailMailPort, 0);
 
         String url = protoHostPort + wsdlUrl;
 
@@ -52,9 +52,9 @@ public class TestWsdlServlet extends TestCase {
             int statusCode = method.getStatusCode();
             String statusLine = method.getStatusLine().toString();
 
-            ZimbraLog.test.debug("respCode=" + respCode);
-            ZimbraLog.test.debug("statusCode=" + statusCode);
-            ZimbraLog.test.debug("statusLine=" + statusLine);
+            ZmailLog.test.debug("respCode=" + respCode);
+            ZmailLog.test.debug("statusCode=" + statusCode);
+            ZmailLog.test.debug("statusLine=" + statusLine);
 
             assertTrue("Response code", respCode == expectedCode);
             assertTrue("Status code", statusCode == expectedCode);
@@ -62,11 +62,11 @@ public class TestWsdlServlet extends TestCase {
             Header[] respHeaders = method.getResponseHeaders();
             for (int i=0; i < respHeaders.length; i++) {
                 String header = respHeaders[i].toString();
-                ZimbraLog.test.debug("ResponseHeader:" + header);
+                ZmailLog.test.debug("ResponseHeader:" + header);
             }
 
             String respBody = method.getResponseBodyAsString();
-            // ZimbraLog.test.debug("Response Body:" + respBody);
+            // ZmailLog.test.debug("Response Body:" + respBody);
             return respBody;
 
         } catch (HttpException e) {
@@ -80,23 +80,23 @@ public class TestWsdlServlet extends TestCase {
         }
     }
 
-    public void testWsdlServletZimbraServicesWsdl() throws Exception {
-        String body = doWsdlServletRequest(wsdlUrlBase + "ZimbraService.wsdl", false, HttpStatus.SC_OK);
+    public void testWsdlServletZmailServicesWsdl() throws Exception {
+        String body = doWsdlServletRequest(wsdlUrlBase + "ZmailService.wsdl", false, HttpStatus.SC_OK);
         assertTrue("Body contains expected string", body.contains("wsdl:service name="));
     }
 
-    public void testWsdlServletZimbraUserServicesWsdl() throws Exception {
-        String body = doWsdlServletRequest(wsdlUrlBase + "ZimbraUserService.wsdl", false, HttpStatus.SC_OK);
+    public void testWsdlServletZmailUserServicesWsdl() throws Exception {
+        String body = doWsdlServletRequest(wsdlUrlBase + "ZmailUserService.wsdl", false, HttpStatus.SC_OK);
         assertTrue("Body contains expected string", body.contains("wsdl:service name="));
     }
 
-    public void testWsdlServletZimbraAdminServicesWsdl() throws Exception {
-        String body = doWsdlServletRequest(wsdlUrlBase + "ZimbraAdminService.wsdl", true, HttpStatus.SC_OK);
+    public void testWsdlServletZmailAdminServicesWsdl() throws Exception {
+        String body = doWsdlServletRequest(wsdlUrlBase + "ZmailAdminService.wsdl", true, HttpStatus.SC_OK);
         assertTrue("Body contains expected string", body.contains("wsdl:service name="));
     }
 
     public void testWsdlServletXsd() throws Exception {
-        String body = doWsdlServletRequest(wsdlUrlBase + "zimbraAccount.xsd", false, HttpStatus.SC_OK);
+        String body = doWsdlServletRequest(wsdlUrlBase + "zmailAccount.xsd", false, HttpStatus.SC_OK);
         assertTrue("Body contains expected string", body.contains(":schema>"));
     }
 

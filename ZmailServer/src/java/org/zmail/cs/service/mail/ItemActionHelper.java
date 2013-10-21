@@ -12,7 +12,7 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.service.mail;
+package org.zmail.cs.service.mail;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
@@ -28,55 +28,55 @@ import javax.mail.internet.MimeMessage;
 
 import org.dom4j.QName;
 
-import com.zimbra.client.ZContact;
-import com.zimbra.client.ZFolder;
-import com.zimbra.client.ZMailbox;
-import com.zimbra.client.ZMountpoint;
-import com.zimbra.common.account.Key;
-import com.zimbra.common.auth.ZAuthToken;
-import com.zimbra.common.mailbox.Color;
-import com.zimbra.common.mailbox.ContactConstants;
-import com.zimbra.common.mime.MimeConstants;
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.common.soap.Element;
-import com.zimbra.common.soap.Element.XMLElement;
-import com.zimbra.common.soap.MailConstants;
-import com.zimbra.common.soap.SoapHttpTransport;
-import com.zimbra.common.soap.SoapProtocol;
-import com.zimbra.common.util.ByteUtil;
-import com.zimbra.common.util.Pair;
-import com.zimbra.common.util.ZimbraLog;
-import com.zimbra.cs.account.Account;
-import com.zimbra.cs.account.AuthToken;
-import com.zimbra.cs.account.Provisioning;
-import com.zimbra.cs.index.SortBy;
-import com.zimbra.cs.mailbox.ACL;
-import com.zimbra.cs.mailbox.CalendarItem;
-import com.zimbra.cs.mailbox.Contact;
-import com.zimbra.cs.mailbox.ContactGroup;
-import com.zimbra.cs.mailbox.ContactGroup.Member;
-import com.zimbra.cs.mailbox.Conversation;
-import com.zimbra.cs.mailbox.Document;
-import com.zimbra.cs.mailbox.Flag;
-import com.zimbra.cs.mailbox.Folder;
-import com.zimbra.cs.mailbox.MailItem;
-import com.zimbra.cs.mailbox.MailItem.TargetConstraint;
-import com.zimbra.cs.mailbox.MailServiceException;
-import com.zimbra.cs.mailbox.Mailbox;
-import com.zimbra.cs.mailbox.Message;
-import com.zimbra.cs.mailbox.Mountpoint;
-import com.zimbra.cs.mailbox.OperationContext;
-import com.zimbra.cs.mailbox.calendar.Invite;
-import com.zimbra.cs.mailbox.calendar.ZOrganizer;
-import com.zimbra.cs.mailbox.util.TagUtil;
-import com.zimbra.cs.service.AuthProvider;
-import com.zimbra.cs.service.util.ItemId;
-import com.zimbra.cs.service.util.ItemIdFormatter;
-import com.zimbra.cs.service.util.SpamHandler;
-import com.zimbra.cs.service.util.SpamHandler.SpamReport;
-import com.zimbra.cs.store.StoreManager;
-import com.zimbra.cs.util.AccountUtil;
-import com.zimbra.cs.util.Zimbra;
+import org.zmail.client.ZContact;
+import org.zmail.client.ZFolder;
+import org.zmail.client.ZMailbox;
+import org.zmail.client.ZMountpoint;
+import org.zmail.common.account.Key;
+import org.zmail.common.auth.ZAuthToken;
+import org.zmail.common.mailbox.Color;
+import org.zmail.common.mailbox.ContactConstants;
+import org.zmail.common.mime.MimeConstants;
+import org.zmail.common.service.ServiceException;
+import org.zmail.common.soap.Element;
+import org.zmail.common.soap.Element.XMLElement;
+import org.zmail.common.soap.MailConstants;
+import org.zmail.common.soap.SoapHttpTransport;
+import org.zmail.common.soap.SoapProtocol;
+import org.zmail.common.util.ByteUtil;
+import org.zmail.common.util.Pair;
+import org.zmail.common.util.ZmailLog;
+import org.zmail.cs.account.Account;
+import org.zmail.cs.account.AuthToken;
+import org.zmail.cs.account.Provisioning;
+import org.zmail.cs.index.SortBy;
+import org.zmail.cs.mailbox.ACL;
+import org.zmail.cs.mailbox.CalendarItem;
+import org.zmail.cs.mailbox.Contact;
+import org.zmail.cs.mailbox.ContactGroup;
+import org.zmail.cs.mailbox.ContactGroup.Member;
+import org.zmail.cs.mailbox.Conversation;
+import org.zmail.cs.mailbox.Document;
+import org.zmail.cs.mailbox.Flag;
+import org.zmail.cs.mailbox.Folder;
+import org.zmail.cs.mailbox.MailItem;
+import org.zmail.cs.mailbox.MailItem.TargetConstraint;
+import org.zmail.cs.mailbox.MailServiceException;
+import org.zmail.cs.mailbox.Mailbox;
+import org.zmail.cs.mailbox.Message;
+import org.zmail.cs.mailbox.Mountpoint;
+import org.zmail.cs.mailbox.OperationContext;
+import org.zmail.cs.mailbox.calendar.Invite;
+import org.zmail.cs.mailbox.calendar.ZOrganizer;
+import org.zmail.cs.mailbox.util.TagUtil;
+import org.zmail.cs.service.AuthProvider;
+import org.zmail.cs.service.util.ItemId;
+import org.zmail.cs.service.util.ItemIdFormatter;
+import org.zmail.cs.service.util.SpamHandler;
+import org.zmail.cs.service.util.SpamHandler.SpamReport;
+import org.zmail.cs.store.StoreManager;
+import org.zmail.cs.util.AccountUtil;
+import org.zmail.cs.util.Zmail;
 
 public class ItemActionHelper {
 
@@ -509,7 +509,7 @@ public class ItemActionHelper {
             ItemId iidTarget = new ItemId(((ZMountpoint) zfolder).getCanonicalRemoteId(), mAuthenticatedAccount.getId());
             if (!mIidFolder.equals(iidTarget)) {
                 mIidFolder = iidTarget;
-                if (++mHopCount > com.zimbra.soap.ZimbraSoapContext.MAX_HOP_COUNT)
+                if (++mHopCount > org.zmail.soap.ZmailSoapContext.MAX_HOP_COUNT)
                     throw MailServiceException.TOO_MANY_HOPS(mIidRequestedFolder);
                 schedule();
                 return;
@@ -570,9 +570,9 @@ public class ItemActionHelper {
                     report.setDestAccountName(target.getName());
                     SpamHandler.getInstance().handle(mOpCtxt, mMailbox, item.getId(), item.getType(), report);
                 } catch (OutOfMemoryError e) {
-                    Zimbra.halt("out of memory", e);
+                    Zmail.halt("out of memory", e);
                 } catch (Throwable t) {
-                    ZimbraLog.mailop.info("could not train spam filter: " + new ItemId(item).toString(), t);
+                    ZmailLog.mailop.info("could not train spam filter: " + new ItemId(item).toString(), t);
                 }
             }
 
@@ -729,7 +729,7 @@ public class ItemActionHelper {
                 if (e.getCode() != ServiceException.PERM_DENIED)
                     throw e;
                 // something funky happened permissions-wise between the getEffectivePermissions check and here...
-                ZimbraLog.misc.info("could not delete original item " + item.getId() + "; treating operation as a copy instead");
+                ZmailLog.misc.info("could not delete original item " + item.getId() + "; treating operation as a copy instead");
             }
         }
     }
@@ -747,9 +747,9 @@ public class ItemActionHelper {
                 String uploadId = zmbx.uploadAttachment("message", baos.toByteArray(), MimeConstants.CT_MESSAGE_RFC822, 6000);
                 m.addAttribute(MailConstants.A_ATTACHMENT_ID, uploadId);
             } catch (IOException ioe) {
-                ZimbraLog.misc.info("could not read subpart message for part " + inv.getComponentNum() + " of item " + cal.getId(), ioe);
+                ZmailLog.misc.info("could not read subpart message for part " + inv.getComponentNum() + " of item " + cal.getId(), ioe);
             } catch (MessagingException me) {
-                ZimbraLog.misc.info("could not read subpart message for part " + inv.getComponentNum() + " of item " + cal.getId(), me);
+                ZmailLog.misc.info("could not read subpart message for part " + inv.getComponentNum() + " of item " + cal.getId(), me);
             }
         }
 

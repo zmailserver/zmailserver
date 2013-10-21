@@ -13,7 +13,7 @@
  * ***** END LICENSE BLOCK *****
  */
 
-package com.zimbra.cs.util.tnef.mapi;
+package org.zmail.cs.util.tnef.mapi;
 
 /**
  * The <code>MeetingTypeFlag</code> enum is used to represent flags

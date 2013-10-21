@@ -13,6 +13,6 @@
 # basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
 # ***** END LICENSE BLOCK *****
 #
-source /opt/zimbra/bin/zmshutil || exit 1
-zmassert -r /opt/zimbra/conf/localconfig.xml
-/opt/zimbra/bin/zmlocalconfig -m nokey zimbra_server_hostname
+source /opt/zmail/bin/zmshutil || exit 1
+zmassert -r /opt/zmail/conf/localconfig.xml
+/opt/zmail/bin/zmlocalconfig -m nokey zmail_server_hostname

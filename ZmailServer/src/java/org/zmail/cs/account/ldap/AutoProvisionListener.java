@@ -12,10 +12,10 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.account.ldap;
+package org.zmail.cs.account.ldap;
 
-import com.zimbra.cs.account.Account;
-import com.zimbra.cs.account.Domain;
+import org.zmail.cs.account.Account;
+import org.zmail.cs.account.Domain;
 
 public interface AutoProvisionListener {
     public void postCreate(Domain domain, Account acct, String externalDN);

@@ -12,9 +12,9 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.account.cache;
+package org.zmail.cs.account.cache;
 
-import com.zimbra.cs.account.Account;
+import org.zmail.cs.account.Account;
 
 public interface IAccountCache extends IEntryCache {
     public void clear();

@@ -13,7 +13,7 @@
  * ***** END LICENSE BLOCK *****
  */
 
-package com.zimbra.cs.service;
+package org.zmail.cs.service;
 
 import java.io.FilterInputStream;
 import java.io.IOException;
@@ -40,52 +40,52 @@ import org.apache.commons.httpclient.methods.GetMethod;
 import org.apache.commons.httpclient.methods.InputStreamRequestEntity;
 import org.apache.commons.httpclient.methods.PutMethod;
 
-import com.zimbra.client.ZFolder;
-import com.zimbra.client.ZMailbox;
-import com.zimbra.common.account.Key.AccountBy;
-import com.zimbra.common.auth.ZAuthToken;
-import com.zimbra.common.httpclient.HttpClientUtil;
-import com.zimbra.common.localconfig.LC;
-import com.zimbra.common.mime.ContentDisposition;
-import com.zimbra.common.mime.ContentType;
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.common.util.HttpUtil;
-import com.zimbra.common.util.L10nUtil;
-import com.zimbra.common.util.L10nUtil.MsgKey;
-import com.zimbra.common.util.Log;
-import com.zimbra.common.util.LogFactory;
-import com.zimbra.common.util.Pair;
-import com.zimbra.common.util.StringUtil;
-import com.zimbra.common.util.ZimbraHttpConnectionManager;
-import com.zimbra.common.util.ZimbraLog;
-import com.zimbra.cs.account.Account;
-import com.zimbra.cs.account.AccountServiceException;
-import com.zimbra.cs.account.AuthToken;
-import com.zimbra.cs.account.Provisioning;
-import com.zimbra.cs.account.Server;
-import com.zimbra.cs.account.ZimbraAuthTokenEncoded;
-import com.zimbra.cs.httpclient.URLUtil;
-import com.zimbra.cs.mailbox.Document;
-import com.zimbra.cs.mailbox.Folder;
-import com.zimbra.cs.mailbox.MailItem;
-import com.zimbra.cs.mailbox.MailServiceException;
-import com.zimbra.cs.mailbox.MailServiceException.NoSuchItemException;
-import com.zimbra.cs.mailbox.Mailbox;
-import com.zimbra.cs.mailbox.MailboxManager;
-import com.zimbra.cs.mailbox.Mountpoint;
-import com.zimbra.cs.mailbox.OperationContext;
-import com.zimbra.cs.service.admin.AdminAccessControl;
-import com.zimbra.cs.service.formatter.Formatter;
-import com.zimbra.cs.service.formatter.FormatterFactory;
-import com.zimbra.cs.service.formatter.FormatterFactory.FormatType;
-import com.zimbra.cs.service.formatter.IfbFormatter;
-import com.zimbra.cs.service.formatter.OctopusPatchFormatter;
-import com.zimbra.cs.service.formatter.TarFormatter;
-import com.zimbra.cs.service.formatter.ZipFormatter;
-import com.zimbra.cs.service.util.ItemId;
-import com.zimbra.cs.service.util.UserServletUtil;
-import com.zimbra.cs.servlet.ZimbraServlet;
-import com.zimbra.cs.util.AccountUtil;
+import org.zmail.client.ZFolder;
+import org.zmail.client.ZMailbox;
+import org.zmail.common.account.Key.AccountBy;
+import org.zmail.common.auth.ZAuthToken;
+import org.zmail.common.httpclient.HttpClientUtil;
+import org.zmail.common.localconfig.LC;
+import org.zmail.common.mime.ContentDisposition;
+import org.zmail.common.mime.ContentType;
+import org.zmail.common.service.ServiceException;
+import org.zmail.common.util.HttpUtil;
+import org.zmail.common.util.L10nUtil;
+import org.zmail.common.util.L10nUtil.MsgKey;
+import org.zmail.common.util.Log;
+import org.zmail.common.util.LogFactory;
+import org.zmail.common.util.Pair;
+import org.zmail.common.util.StringUtil;
+import org.zmail.common.util.ZmailHttpConnectionManager;
+import org.zmail.common.util.ZmailLog;
+import org.zmail.cs.account.Account;
+import org.zmail.cs.account.AccountServiceException;
+import org.zmail.cs.account.AuthToken;
+import org.zmail.cs.account.Provisioning;
+import org.zmail.cs.account.Server;
+import org.zmail.cs.account.ZmailAuthTokenEncoded;
+import org.zmail.cs.httpclient.URLUtil;
+import org.zmail.cs.mailbox.Document;
+import org.zmail.cs.mailbox.Folder;
+import org.zmail.cs.mailbox.MailItem;
+import org.zmail.cs.mailbox.MailServiceException;
+import org.zmail.cs.mailbox.MailServiceException.NoSuchItemException;
+import org.zmail.cs.mailbox.Mailbox;
+import org.zmail.cs.mailbox.MailboxManager;
+import org.zmail.cs.mailbox.Mountpoint;
+import org.zmail.cs.mailbox.OperationContext;
+import org.zmail.cs.service.admin.AdminAccessControl;
+import org.zmail.cs.service.formatter.Formatter;
+import org.zmail.cs.service.formatter.FormatterFactory;
+import org.zmail.cs.service.formatter.FormatterFactory.FormatType;
+import org.zmail.cs.service.formatter.IfbFormatter;
+import org.zmail.cs.service.formatter.OctopusPatchFormatter;
+import org.zmail.cs.service.formatter.TarFormatter;
+import org.zmail.cs.service.formatter.ZipFormatter;
+import org.zmail.cs.service.util.ItemId;
+import org.zmail.cs.service.util.UserServletUtil;
+import org.zmail.cs.servlet.ZmailServlet;
+import org.zmail.cs.util.AccountUtil;
 
 /**
  *
@@ -120,7 +120,7 @@ import com.zimbra.cs.util.AccountUtil;
  * </pre>
  */
 
-public class UserServlet extends ZimbraServlet {
+public class UserServlet extends ZmailServlet {
     private static final long serialVersionUID = -5313094316561384586L;
 
     public static final String SERVLET_PATH = "/home";
@@ -228,7 +228,7 @@ public class UserServlet extends ZimbraServlet {
     public static final String AUTH_NO_SET_COOKIE = "nsc"; // don't set auth token cookie after basic auth
                                                            // same as ba after bug 42782
 
-    // see https://bugzilla.zimbra.com/show_bug.cgi?id=42782#c11
+    // see https://bugzilla.zmail.com/show_bug.cgi?id=42782#c11
     public static final String AUTH_SET_COOKIE = "sc"; // set auth token cookie after basic auth
 
     public static final String AUTH_DEFAULT = "co,nsc,qp"; // all three
@@ -278,7 +278,7 @@ public class UserServlet extends ZimbraServlet {
     @Override
     public void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         UserServletContext context = null;
-        ZimbraLog.clearContext();
+        ZmailLog.clearContext();
         addRemoteIpToLoggingContext(req);
         try {
             context = createContext(req, resp, this);
@@ -296,7 +296,7 @@ public class UserServlet extends ZimbraServlet {
             // or from basic auth.  if there was no credential in either the Cookie
             // or basic auth, authAccount is set to anonymous account.
             if (context.getAuthAccount() != null) {
-                ZimbraLog.addAccountNameToContext(context.getAuthAccount().getName());
+                ZmailLog.addAccountNameToContext(context.getAuthAccount().getName());
             }
 
             doAuthGet(req, resp, context);
@@ -314,7 +314,7 @@ public class UserServlet extends ZimbraServlet {
             // add check for ServiceException root cause?
             resp.sendError(e.getHttpStatusCode(), e.getMessage());
         } finally {
-            ZimbraLog.clearContext();
+            ZmailLog.clearContext();
         }
     }
 
@@ -358,7 +358,7 @@ public class UserServlet extends ZimbraServlet {
     protected static AuthToken getProxyAuthToken(UserServletContext context) throws ServiceException {
         String encoded = Provisioning.getInstance().getProxyAuthToken(context.targetAccount.getId(), null);
         if (encoded != null) {
-            return new ZimbraAuthTokenEncoded(encoded);
+            return new ZmailAuthTokenEncoded(encoded);
         } else if (context.basicAuthHappened) {
             return context.authToken;
         } else {
@@ -484,7 +484,7 @@ public class UserServlet extends ZimbraServlet {
         context.opContext = new OperationContext(context.getAuthAccount(), isAdminRequest(req));
         Mailbox mbox = UserServletUtil.getTargetMailbox(context);
         if (mbox != null) {
-            ZimbraLog.addMboxToContext(mbox.getId());
+            ZmailLog.addMboxToContext(mbox.getId());
             if (context.reqListIds != null) {
                 resolveItems(context);
             } else {
@@ -526,7 +526,7 @@ public class UserServlet extends ZimbraServlet {
     @Override
     public void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         UserServletContext context = null;
-        ZimbraLog.clearContext();
+        ZmailLog.clearContext();
         addRemoteIpToLoggingContext(req);
         try {
             context = new UserServletContext(req, resp, this);
@@ -541,13 +541,13 @@ public class UserServlet extends ZimbraServlet {
                 return;
 
             if (context.getAuthAccount() != null) {
-                ZimbraLog.addAccountNameToContext(context.getAuthAccount().getName());
+                ZmailLog.addAccountNameToContext(context.getAuthAccount().getName());
             }
             Folder folder = null;
             String filename = null;
             Mailbox mbox = UserServletUtil.getTargetMailbox(context);
             if (mbox != null) {
-                ZimbraLog.addMboxToContext(mbox.getId());
+                ZmailLog.addMboxToContext(mbox.getId());
 
                 log.info("POST: " + context.req.getRequestURL().toString());
 
@@ -623,7 +623,7 @@ public class UserServlet extends ZimbraServlet {
             // add check for ServiceException root cause?
             resp.sendError(e.getHttpStatusCode(), e.getMessage());
         } finally {
-            ZimbraLog.clearContext();
+            ZmailLog.clearContext();
         }
     }
 
@@ -673,9 +673,9 @@ public class UserServlet extends ZimbraServlet {
 
     private static HashSet<String> ZIMBRA_DOC_CONTENT_TYPE = new HashSet<String>();
     static {
-        ZIMBRA_DOC_CONTENT_TYPE.add("application/x-zimbra-doc");
-        ZIMBRA_DOC_CONTENT_TYPE.add("application/x-zimbra-slides");
-        ZIMBRA_DOC_CONTENT_TYPE.add("application/x-zimbra-xls");
+        ZIMBRA_DOC_CONTENT_TYPE.add("application/x-zmail-doc");
+        ZIMBRA_DOC_CONTENT_TYPE.add("application/x-zmail-slides");
+        ZIMBRA_DOC_CONTENT_TYPE.add("application/x-zmail-xls");
     }
 
     private FormatType defaultFormat(UserServletContext context) {
@@ -695,7 +695,7 @@ public class UserServlet extends ZimbraServlet {
         case CONTACT:
             return context.target instanceof Folder? FormatType.CSV : FormatType.VCF;
         case DOCUMENT:
-            // Zimbra docs and folder rendering should use html formatter.
+            // Zmail docs and folder rendering should use html formatter.
             if (context.target instanceof Folder)
                 return FormatType.HTML;
             String contentType = ((Document)context.target).getContentType();
@@ -871,7 +871,7 @@ public class UserServlet extends ZimbraServlet {
             method.addRequestHeader("Content-Type", contentType);
             method.setRequestEntity(new InputStreamRequestEntity(doc.getContentStream(), doc.getSize(), contentType));
             method = HttpClientUtil.addInputStreamToHttpMethod(method, doc.getContentStream(), doc.getSize(), contentType);
-            method.addRequestHeader("X-Zimbra-Description", doc.getDescription());
+            method.addRequestHeader("X-Zmail-Description", doc.getDescription());
             method.setRequestEntity(new InputStreamRequestEntity(doc.getContentStream(), doc.getSize(), contentType));
             Pair<Header[], HttpMethod> pair = doHttpOp(authToken, method);
             return new Pair<Header[], HttpInputStream>(pair.getFirst(), new HttpInputStream(pair.getSecond()));
@@ -916,7 +916,7 @@ public class UserServlet extends ZimbraServlet {
             log.warn("can't parse target URI", e);
         }
 
-        HttpClient client = ZimbraHttpConnectionManager.getInternalHttpConnMgr().newHttpClient();
+        HttpClient client = ZmailHttpConnectionManager.getInternalHttpConnMgr().newHttpClient();
         Map<String, String> cookieMap = authToken.cookieMap(false);
         if (cookieMap != null) {
             HttpState state = new HttpState();
@@ -931,8 +931,8 @@ public class UserServlet extends ZimbraServlet {
             long contentLength = ((PutMethod)method).getRequestEntity().getContentLength();
             if (contentLength > 0) {
                 int timeEstimate = Math.max(10000, (int)(contentLength / 100));  // 100kbps in millis
-                // cannot set connection time using our ZimbrahttpConnectionManager,
-                // see comments in ZimbrahttpConnectionManager.
+                // cannot set connection time using our ZmailhttpConnectionManager,
+                // see comments in ZmailhttpConnectionManager.
                 // actually, length of the content to Put should not be a factor for
                 // establishing a connection, only read time out matter, which we set
                 // client.getHttpConnectionManager().getParams().setConnectionTimeout(timeEstimate);
@@ -953,7 +953,7 @@ public class UserServlet extends ZimbraServlet {
                         new ServiceException.InternalArgument(HTTP_STATUS_CODE, statusCode, ServiceException.Argument.Type.NUM));
 
             List<Header> headers = new ArrayList<Header>(Arrays.asList(method.getResponseHeaders()));
-            headers.add(new Header("X-Zimbra-Http-Status", ""+statusCode));
+            headers.add(new Header("X-Zmail-Http-Status", ""+statusCode));
             return new Pair<Header[], HttpMethod>(headers.toArray(new Header[0]), method);
         } catch (HttpException e) {
             throw ServiceException.RESOURCE_UNREACHABLE("HttpException while fetching " + url, e);

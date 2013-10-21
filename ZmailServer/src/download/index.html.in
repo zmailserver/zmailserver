@@ -13,11 +13,11 @@
 	<div id="header-wrap">
 		<div class="span-12" id="header">
 			<div class="span-7">
-				<h1><a title="Zimbra - the leader in open source email and collaboration" href="http://www.zimbra.com" target="_blank"><img src="./zimbra_logo.png" width="156" height="50" border="0" alt="www.zimbra.com" title="www.zimbra.com"></a></h1>
-				<div id="tagline" ><img src="./zimbra_tagline.png" width="288" height="11" border="0" alt="The leader in open source email & collaboration" title="The leader in open source email & collaboration"></div>
+				<h1><a title="Zmail - the leader in open source email and collaboration" href="http://www.zmail.com" target="_blank"><img src="./zmail_logo.png" width="156" height="50" border="0" alt="www.zmail.com" title="www.zmail.com"></a></h1>
+				<div id="tagline" ><img src="./zmail_tagline.png" width="288" height="11" border="0" alt="The leader in open source email & collaboration" title="The leader in open source email & collaboration"></div>
 			</div>
 			<div class="span-5 last">
-				<div id="top-links"><a href="http://www.zimbra.com/forums/" target="_blank">Forums</a> | <a href="http://blog.zimbra.com/" target="_blank">Blog</a> | <a href="http://wiki.zimbra.com/" target="_blank">Wiki</a></div>
+				<div id="top-links"><a href="http://www.zmail.com/forums/" target="_blank">Forums</a> | <a href="http://blog.zmail.com/" target="_blank">Blog</a> | <a href="http://wiki.zmail.com/" target="_blank">Wiki</a></div>
 			</div>
 		</div>
 	</div>
@@ -36,14 +36,14 @@
 			<tr>
 		        <td width="7%"></td>
 				<td colspan="3">
-	        <h2>Zimbra Connector for Microsoft Outlook</h2>
+	        <h2>Zmail Connector for Microsoft Outlook</h2>
 				</td>
 			</tr>
 			<tr>
 		        <td width="7%"></td>
         		<td width="63%">
-The Zimbra Connector for Microsoft Outlook (ZCO) allows users of Microsoft Outlook to connect to the Zimbra server using the MAPI protocol. Address books, Contacts, 
-Calendars, Tasks, and mail are synced directly with the Zimbra server.
+The Zmail Connector for Microsoft Outlook (ZCO) allows users of Microsoft Outlook to connect to the Zmail server using the MAPI protocol. Address books, Contacts, 
+Calendars, Tasks, and mail are synced directly with the Zmail server.
 				</td>
 		        <td width="7%"></td>
 		        <td width="23%">
@@ -77,7 +77,7 @@ Calendars, Tasks, and mail are synced directly with the Zimbra server.
 			<tr>
 		        <td width="7%"></td>
         		<td width="63%">
-This tool allows users to import Microsoft Outlook PST files to the Zimbra Server.
+This tool allows users to import Microsoft Outlook PST files to the Zmail Server.
 				</td>
 		        <td width="7%"></td>
 		        <td width="23%">
@@ -99,7 +99,7 @@ This tool allows users to import Microsoft Outlook PST files to the Zimbra Serve
 			<tr>
 		        <td width="7%"></td>
         		<td width="63%">
-This application performs a server-to-server migration of email, calendar and contacts from Microsoft Exchange to the Zimbra Server.
+This application performs a server-to-server migration of email, calendar and contacts from Microsoft Exchange to the Zmail Server.
 				</td>
 		        <td width="7%"></td>
 		        <td width="23%">
@@ -121,7 +121,7 @@ This application performs a server-to-server migration of email, calendar and co
 			<tr>
 		        <td width="7%"></td>
         		<td width="63%">
-This tool imports data within Microsoft Exchange servers and Outlook PST files to the Zimbra Server.
+This tool imports data within Microsoft Exchange servers and Outlook PST files to the Zmail Server.
 				</td>
 		        <td width="7%"></td>
 		        <td width="23%">

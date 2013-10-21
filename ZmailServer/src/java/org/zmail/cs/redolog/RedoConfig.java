@@ -19,13 +19,13 @@
  * TODO To change the template for this generated file go to
  * Window - Preferences - Java - Code Style - Code Templates
  */
-package com.zimbra.cs.redolog;
+package org.zmail.cs.redolog;
 
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.cs.account.Provisioning;
-import com.zimbra.cs.account.Server;
-import com.zimbra.cs.util.Config;
-import com.zimbra.cs.util.Zimbra;
+import org.zmail.common.service.ServiceException;
+import org.zmail.cs.account.Provisioning;
+import org.zmail.cs.account.Server;
+import org.zmail.cs.util.Config;
+import org.zmail.cs.util.Zmail;
 
 /**
  * @author jhahm
@@ -40,7 +40,7 @@ public class RedoConfig {
         try {
             theInstance = new RedoConfig();
         } catch (ServiceException e) {
-            Zimbra.halt("Unable to read redolog configuration", e);
+            Zmail.halt("Unable to read redolog configuration", e);
         }
     }
 
@@ -51,34 +51,34 @@ public class RedoConfig {
     private void reloadInstance() throws ServiceException {
         Server config = Provisioning.getInstance().getLocalServer();
 
-        mServiceHostname = config.getAttr(Provisioning.A_zimbraServiceHostname);
-        mRedoLogEnabled = config.getBooleanAttr(Provisioning.A_zimbraRedoLogEnabled, D_REDOLOG_ENABLED);
+        mServiceHostname = config.getAttr(Provisioning.A_zmailServiceHostname);
+        mRedoLogEnabled = config.getBooleanAttr(Provisioning.A_zmailRedoLogEnabled, D_REDOLOG_ENABLED);
         mRedoLogPath =
-            Config.getPathRelativeToZimbraHome(
-                    config.getAttr(Provisioning.A_zimbraRedoLogLogPath,
+            Config.getPathRelativeToZmailHome(
+                    config.getAttr(Provisioning.A_zmailRedoLogLogPath,
                                    D_REDOLOG_PATH)).getAbsolutePath();
         mRedoLogArchiveDir =
-            Config.getPathRelativeToZimbraHome(
-                    config.getAttr(Provisioning.A_zimbraRedoLogArchiveDir,
+            Config.getPathRelativeToZmailHome(
+                    config.getAttr(Provisioning.A_zmailRedoLogArchiveDir,
                                    D_REDOLOG_ARCHIVEDIR)).getAbsolutePath();
         mRedoLogRolloverFileSizeKB =
-            config.getLongAttr(Provisioning.A_zimbraRedoLogRolloverFileSizeKB,
+            config.getLongAttr(Provisioning.A_zmailRedoLogRolloverFileSizeKB,
                                D_REDOLOG_ROLLOVER_FILESIZE_KB);
         mRedoLogRolloverHardMaxFileSizeKB =
-            config.getLongAttr(Provisioning.A_zimbraRedoLogRolloverHardMaxFileSizeKB,
+            config.getLongAttr(Provisioning.A_zmailRedoLogRolloverHardMaxFileSizeKB,
                                D_REDOLOG_ROLLOVER_HARDMAX_FILESIZE_KB);
         mRedoLogRolloverMinFileAge =
-            config.getLongAttr(Provisioning.A_zimbraRedoLogRolloverMinFileAge,
+            config.getLongAttr(Provisioning.A_zmailRedoLogRolloverMinFileAge,
                                D_REDOLOG_ROLLOVER_MIN_FILE_AGE);
         mRedoLogDeleteOnRollover =
-            config.getBooleanAttr(Provisioning.A_zimbraRedoLogDeleteOnRollover,
+            config.getBooleanAttr(Provisioning.A_zmailRedoLogDeleteOnRollover,
                                   D_REDOLOG_DELETE_ON_ROLLOVER);
         mRedoLogFsyncIntervalMS =
-            config.getLongAttr(Provisioning.A_zimbraRedoLogFsyncIntervalMS,
+            config.getLongAttr(Provisioning.A_zmailRedoLogFsyncIntervalMS,
                                D_REDOLOG_FSYNC_INTERVAL_MS);
 
         mRedoLogCrashRecoveryLookbackSec =
-            config.getLongAttr(Provisioning.A_zimbraRedoLogCrashRecoveryLookbackSec,
+            config.getLongAttr(Provisioning.A_zmailRedoLogCrashRecoveryLookbackSec,
                                D_REDOLOG_CRASH_RECOVERY_LOOKBACK_SEC);
     }
 

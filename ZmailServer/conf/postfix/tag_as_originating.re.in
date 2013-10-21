@@ -1,1 +1,1 @@
-/^/  FILTER smtp-amavis:[%%zimbraLocalBindAddress%%]:10026
+/^/  FILTER smtp-amavis:[%%zmailLocalBindAddress%%]:10026

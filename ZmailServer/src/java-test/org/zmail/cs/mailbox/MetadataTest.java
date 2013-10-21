@@ -13,7 +13,7 @@
  * ***** END LICENSE BLOCK *****
  */
 
-package com.zimbra.cs.mailbox;
+package org.zmail.cs.mailbox;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -30,20 +30,20 @@ import org.junit.Test;
 
 import com.ibm.icu.util.Calendar;
 import com.ibm.icu.util.GregorianCalendar;
-import com.zimbra.common.calendar.ParsedDateTime;
-import com.zimbra.common.calendar.TimeZoneMap;
-import com.zimbra.common.calendar.WellKnownTimeZones;
-import com.zimbra.common.mailbox.ContactConstants;
-import com.zimbra.common.mime.shim.JavaMailMimeMessage;
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.common.zmime.ZSharedFileInputStream;
-import com.zimbra.cs.account.MockProvisioning;
-import com.zimbra.cs.account.Provisioning;
-import com.zimbra.cs.mailbox.Mailbox.SetCalendarItemData;
-import com.zimbra.cs.mailbox.calendar.Invite;
-import com.zimbra.cs.mime.ParsedContact;
-import com.zimbra.cs.mime.ParsedMessage;
-import com.zimbra.cs.util.JMSession;
+import org.zmail.common.calendar.ParsedDateTime;
+import org.zmail.common.calendar.TimeZoneMap;
+import org.zmail.common.calendar.WellKnownTimeZones;
+import org.zmail.common.mailbox.ContactConstants;
+import org.zmail.common.mime.shim.JavaMailMimeMessage;
+import org.zmail.common.service.ServiceException;
+import org.zmail.common.zmime.ZSharedFileInputStream;
+import org.zmail.cs.account.MockProvisioning;
+import org.zmail.cs.account.Provisioning;
+import org.zmail.cs.mailbox.Mailbox.SetCalendarItemData;
+import org.zmail.cs.mailbox.calendar.Invite;
+import org.zmail.cs.mime.ParsedContact;
+import org.zmail.cs.mime.ParsedMessage;
+import org.zmail.cs.util.JMSession;
 
 @Ignore("failing in hudson?!?")
 public class MetadataTest {
@@ -52,7 +52,7 @@ public class MetadataTest {
     public static void init() throws Exception {
         MailboxTestUtil.initServer();
         Provisioning prov = Provisioning.getInstance();
-        prov.createAccount("test@zimbra.com", "secret", new HashMap<String, Object>());
+        prov.createAccount("test@zmail.com", "secret", new HashMap<String, Object>());
     }
 
     @Before

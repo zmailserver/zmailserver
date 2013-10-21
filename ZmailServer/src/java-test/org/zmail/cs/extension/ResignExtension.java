@@ -12,17 +12,17 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.extension;
+package org.zmail.cs.extension;
 
-import com.zimbra.cs.extension.ExtensionException;
-import com.zimbra.cs.extension.ZimbraExtension;
+import org.zmail.cs.extension.ExtensionException;
+import org.zmail.cs.extension.ZmailExtension;
 
 /**
  * Test extension that lets the framework disable this extension.
  *
  * @author ysasaki
  */
-public class ResignExtension implements ZimbraExtension {
+public class ResignExtension implements ZmailExtension {
 
     private static boolean destroyed = false;
 

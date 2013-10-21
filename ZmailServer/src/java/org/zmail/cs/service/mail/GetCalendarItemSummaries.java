@@ -16,42 +16,42 @@
 /*
  * Created on Feb 17, 2005
  */
-package com.zimbra.cs.service.mail;
+package org.zmail.cs.service.mail;
 
 import java.util.Collection;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
-import com.zimbra.common.util.Log;
-import com.zimbra.common.util.LogFactory;
+import org.zmail.common.util.Log;
+import org.zmail.common.util.LogFactory;
 
-import com.zimbra.common.calendar.Geo;
-import com.zimbra.common.calendar.ParsedDateTime;
-import com.zimbra.common.calendar.ParsedDuration;
-import com.zimbra.common.localconfig.LC;
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.common.soap.MailConstants;
-import com.zimbra.common.soap.Element;
-import com.zimbra.cs.account.Account;
-import com.zimbra.cs.mailbox.Appointment;
-import com.zimbra.cs.mailbox.CalendarItem;
-import com.zimbra.cs.mailbox.MailServiceException;
-import com.zimbra.cs.mailbox.Mailbox;
-import com.zimbra.cs.mailbox.OperationContext;
-import com.zimbra.cs.mailbox.CalendarItem.AlarmData;
-import com.zimbra.cs.mailbox.Task;
-import com.zimbra.cs.mailbox.calendar.Invite;
-import com.zimbra.cs.mailbox.calendar.InviteInfo;
-import com.zimbra.cs.mailbox.calendar.RecurId;
-import com.zimbra.cs.mailbox.calendar.ZOrganizer;
-import com.zimbra.cs.mailbox.calendar.cache.CacheToXML;
-import com.zimbra.cs.mailbox.calendar.cache.CalSummaryCache;
-import com.zimbra.cs.mailbox.calendar.cache.CalendarItemData;
-import com.zimbra.cs.mailbox.calendar.cache.CalSummaryCache.CalendarDataResult;
-import com.zimbra.cs.service.util.ItemId;
-import com.zimbra.cs.service.util.ItemIdFormatter;
-import com.zimbra.soap.ZimbraSoapContext;
+import org.zmail.common.calendar.Geo;
+import org.zmail.common.calendar.ParsedDateTime;
+import org.zmail.common.calendar.ParsedDuration;
+import org.zmail.common.localconfig.LC;
+import org.zmail.common.service.ServiceException;
+import org.zmail.common.soap.MailConstants;
+import org.zmail.common.soap.Element;
+import org.zmail.cs.account.Account;
+import org.zmail.cs.mailbox.Appointment;
+import org.zmail.cs.mailbox.CalendarItem;
+import org.zmail.cs.mailbox.MailServiceException;
+import org.zmail.cs.mailbox.Mailbox;
+import org.zmail.cs.mailbox.OperationContext;
+import org.zmail.cs.mailbox.CalendarItem.AlarmData;
+import org.zmail.cs.mailbox.Task;
+import org.zmail.cs.mailbox.calendar.Invite;
+import org.zmail.cs.mailbox.calendar.InviteInfo;
+import org.zmail.cs.mailbox.calendar.RecurId;
+import org.zmail.cs.mailbox.calendar.ZOrganizer;
+import org.zmail.cs.mailbox.calendar.cache.CacheToXML;
+import org.zmail.cs.mailbox.calendar.cache.CalSummaryCache;
+import org.zmail.cs.mailbox.calendar.cache.CalendarItemData;
+import org.zmail.cs.mailbox.calendar.cache.CalSummaryCache.CalendarDataResult;
+import org.zmail.cs.service.util.ItemId;
+import org.zmail.cs.service.util.ItemIdFormatter;
+import org.zmail.soap.ZmailSoapContext;
 
 
 /**
@@ -104,7 +104,7 @@ public class GetCalendarItemSummaries extends CalendarRequest {
      * @return
      */
     static EncodeCalendarItemResult encodeCalendarItemInstances(
-            ZimbraSoapContext lc, OperationContext octxt, CalendarItem calItem,
+            ZmailSoapContext lc, OperationContext octxt, CalendarItem calItem,
             Account acct, long rangeStart, long rangeEnd, boolean newFormat)
     throws ServiceException {
         EncodeCalendarItemResult toRet = new EncodeCalendarItemResult();
@@ -464,7 +464,7 @@ public class GetCalendarItemSummaries extends CalendarRequest {
     }
     
     public Element handle(Element request, Map<String, Object> context) throws ServiceException {
-        ZimbraSoapContext zsc = getZimbraSoapContext(context);
+        ZmailSoapContext zsc = getZmailSoapContext(context);
         Mailbox mbox = getRequestedMailbox(zsc);
         Account acct = getRequestedAccount(zsc);
         

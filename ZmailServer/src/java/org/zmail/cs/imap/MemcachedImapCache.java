@@ -12,7 +12,7 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.imap;
+package org.zmail.cs.imap;
 
 import java.io.ByteArrayInputStream;
 import java.io.ObjectInputStream;
@@ -21,13 +21,13 @@ import java.io.ObjectOutputStream;
 import org.apache.commons.io.output.ByteArrayOutputStream;
 
 import com.google.common.io.Closeables;
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.common.util.ZimbraLog;
-import com.zimbra.common.util.memcached.MemcachedKey;
-import com.zimbra.common.util.memcached.MemcachedMap;
-import com.zimbra.common.util.memcached.MemcachedSerializer;
-import com.zimbra.cs.memcached.MemcachedConnector;
-import com.zimbra.cs.memcached.MemcachedKeyPrefix;
+import org.zmail.common.service.ServiceException;
+import org.zmail.common.util.ZmailLog;
+import org.zmail.common.util.memcached.MemcachedKey;
+import org.zmail.common.util.memcached.MemcachedMap;
+import org.zmail.common.util.memcached.MemcachedSerializer;
+import org.zmail.cs.memcached.MemcachedConnector;
+import org.zmail.cs.memcached.MemcachedKeyPrefix;
 
 /**
  * IMAP cache using memcached.
@@ -46,7 +46,7 @@ final class MemcachedImapCache implements ImapSessionManager.Cache {
                 map.put(new ImapMemcachedKey(key), value);
             }
         } catch (ServiceException e) {
-            ZimbraLog.imap.warn("Failed to store into cache", e);
+            ZmailLog.imap.warn("Failed to store into cache", e);
         }
     }
 
@@ -55,7 +55,7 @@ final class MemcachedImapCache implements ImapSessionManager.Cache {
         try {
             return map.get(new ImapMemcachedKey(key));
         } catch (ServiceException e) {
-            ZimbraLog.imap.warn("Failed to load from cache", e);
+            ZmailLog.imap.warn("Failed to load from cache", e);
             return null;
         }
     }
@@ -65,7 +65,7 @@ final class MemcachedImapCache implements ImapSessionManager.Cache {
         try {
             map.remove(new ImapMemcachedKey(key));
         } catch (ServiceException e) {
-            ZimbraLog.imap.warn("Failed to remove from cache", e);
+            ZmailLog.imap.warn("Failed to remove from cache", e);
         }
     }
 

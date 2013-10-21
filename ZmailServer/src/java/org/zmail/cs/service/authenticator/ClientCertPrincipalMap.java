@@ -14,7 +14,7 @@
  * 
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.service.authenticator;
+package org.zmail.cs.service.authenticator;
 
 import java.security.cert.X509Certificate;
 import java.util.ArrayList;
@@ -24,25 +24,25 @@ import java.util.regex.Pattern;
 
 import javax.servlet.http.HttpServletRequest;
 
-import com.zimbra.common.account.Key.AccountBy;
-import com.zimbra.common.account.Key.DomainBy;
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.common.util.HttpUtil;
-import com.zimbra.common.util.ZimbraLog;
-import com.zimbra.cs.account.Account;
-import com.zimbra.cs.account.Entry;
-import com.zimbra.cs.account.NamedEntry;
-import com.zimbra.cs.account.Provisioning;
-import com.zimbra.cs.account.SearchAccountsOptions;
-import com.zimbra.cs.ldap.ZLdapFilterFactory.FilterId;
-import com.zimbra.cs.service.authenticator.SSOAuthenticator.ZimbraPrincipal;
+import org.zmail.common.account.Key.AccountBy;
+import org.zmail.common.account.Key.DomainBy;
+import org.zmail.common.service.ServiceException;
+import org.zmail.common.util.HttpUtil;
+import org.zmail.common.util.ZmailLog;
+import org.zmail.cs.account.Account;
+import org.zmail.cs.account.Entry;
+import org.zmail.cs.account.NamedEntry;
+import org.zmail.cs.account.Provisioning;
+import org.zmail.cs.account.SearchAccountsOptions;
+import org.zmail.cs.ldap.ZLdapFilterFactory.FilterId;
+import org.zmail.cs.service.authenticator.SSOAuthenticator.ZmailPrincipal;
 
 public class ClientCertPrincipalMap {
     static final String LOG_PREFIX = ClientCertAuthenticator.LOG_PREFIX;
     
     private static final String RULE_DELIMITER = ",";  // seperate each rule
     private static final char LDAP_FILTER_LEADING_CHAR = '('; 
-    private static final String MAP_DELIMITER = "=";   // seperate cert filed and zimbra key
+    private static final String MAP_DELIMITER = "=";   // seperate cert filed and zmail key
         
     static abstract class CertField {
         abstract String getName();
@@ -142,21 +142,21 @@ public class ClientCertPrincipalMap {
         
     }
     
-    static enum ZimbraKey {
-        // Note: do NOT support search Zimbra account by DN because:
+    static enum ZmailKey {
+        // Note: do NOT support search Zmail account by DN because:
         // (1) DOS attack (non-existing DN will cause repeated LDAP search)
         // and
         // (2) Subject DN in the certificate mostly likely will not be an 
-        //     exact match of a Zimbra account DN.
+        //     exact match of a Zmail account DN.
         // dn, 
         name,
-        zimbraId,
-        zimbraForeignPrincipal;
+        zmailId,
+        zmailForeignPrincipal;
     }
     
     static abstract class Rule {
         abstract String getName();
-        abstract ZimbraPrincipal apply(X509Certificate cert) throws ServiceException;
+        abstract ZmailPrincipal apply(X509Certificate cert) throws ServiceException;
     }
     
     static class LdapFilterRule extends Rule {
@@ -178,9 +178,9 @@ public class ClientCertPrincipalMap {
         }
 
         @Override
-        ZimbraPrincipal apply(X509Certificate cert) throws ServiceException {
+        ZmailPrincipal apply(X509Certificate cert) throws ServiceException {
             String filter = expandFilter(cert);
-            ZimbraLog.account.debug(LOG_PREFIX + 
+            ZmailLog.account.debug(LOG_PREFIX + 
                     "search account by expanded filter(prepended with account objectClass filter): " + filter);
             
             SearchAccountsOptions searchOpts = new SearchAccountsOptions();
@@ -193,7 +193,7 @@ public class ClientCertPrincipalMap {
             
             if (entries.size() == 1) {
                 Account acct = (Account) entries.get(0);
-                return new ZimbraPrincipal(filter, acct);
+                return new ZmailPrincipal(filter, acct);
             } else {
                 return null;
             }
@@ -218,65 +218,65 @@ public class ClientCertPrincipalMap {
     
     static class FieldMapRule extends Rule {
         private CertField certField;
-        private ZimbraKey zimbraKey;
+        private ZmailKey zmailKey;
         
-        private FieldMapRule(CertField certField, ZimbraKey zimbraKey) {
+        private FieldMapRule(CertField certField, ZmailKey zmailKey) {
             this.certField = certField;
-            this.zimbraKey = zimbraKey;
+            this.zmailKey = zmailKey;
         }
         
         CertField getCertField() {
             return certField;
         }
         
-        ZimbraKey getZimbraKey() {
-            return zimbraKey;
+        ZmailKey getZmailKey() {
+            return zmailKey;
         }
 
         @Override
         String getName() {
-            return certField.getName() + MAP_DELIMITER + zimbraKey.name();
+            return certField.getName() + MAP_DELIMITER + zmailKey.name();
         }
 
         @Override
-        ZimbraPrincipal apply(X509Certificate cert) throws ServiceException {
+        ZmailPrincipal apply(X509Certificate cert) throws ServiceException {
             CertUtil certUtil = new CertUtil(cert);
                         
             String certFieldValue = certUtil.getCertField(getCertField());
             if (certFieldValue != null) {
-                Account acct = getZimbraAccount(getZimbraKey(), getCertField(), certFieldValue);
+                Account acct = getZmailAccount(getZmailKey(), getCertField(), certFieldValue);
                 if (acct != null) {
-                    return new ZimbraPrincipal(certFieldValue, acct);
+                    return new ZmailPrincipal(certFieldValue, acct);
                 }
             }
             
             return null;
         }
         
-        private Account getZimbraAccount(ZimbraKey zimbraKey, CertField certField, String certFieldValue) {
-            ZimbraLog.account.debug(LOG_PREFIX + "get account by " +
-                    zimbraKey.name() + ", " + certField.getName() + "=" + certFieldValue);
+        private Account getZmailAccount(ZmailKey zmailKey, CertField certField, String certFieldValue) {
+            ZmailLog.account.debug(LOG_PREFIX + "get account by " +
+                    zmailKey.name() + ", " + certField.getName() + "=" + certFieldValue);
             
             Provisioning prov = Provisioning.getInstance();
             Account acct = null;
             
             try {
-                switch (zimbraKey) {
+                switch (zmailKey) {
                     case name:
                         acct = prov.get(AccountBy.name, certFieldValue);
                         break;
-                    case zimbraId:
+                    case zmailId:
                         acct = prov.get(AccountBy.id, certFieldValue);
                         break;
-                    case zimbraForeignPrincipal:
+                    case zmailForeignPrincipal:
                         String foreignPrincipal = 
                             String.format(Provisioning.FP_PREFIX_CERT, certField.getName(),certFieldValue);
                         acct = prov.get(AccountBy.foreignPrincipal, foreignPrincipal);
                         break;
                 }
             } catch (ServiceException e) {
-                ZimbraLog.account.debug(LOG_PREFIX + "no matching account by " +
-                        zimbraKey.name() + ", " + certField.getName() + "=" + certFieldValue, e);
+                ZmailLog.account.debug(LOG_PREFIX + "no matching account by " +
+                        zmailKey.name() + ", " + certField.getName() + "=" + certFieldValue, e);
             }
             return acct;
         }
@@ -303,7 +303,7 @@ public class ClientCertPrincipalMap {
             entry = prov.getConfig();
         }
         
-        return entry.getAttr(Provisioning.A_zimbraMailSSLClientCertPrincipalMap);
+        return entry.getAttr(Provisioning.A_zmailMailSSLClientCertPrincipalMap);
     }
     
     private List<Rule> parse(String rawRules) throws ServiceException {
@@ -311,9 +311,9 @@ public class ClientCertPrincipalMap {
         
         if (rawRules == null) {
             // default to SUBJECT_EMAILADDRESS=name
-            Rule rule = new FieldMapRule(SubjectCertField.EMAILADDRESS, ZimbraKey.name);
+            Rule rule = new FieldMapRule(SubjectCertField.EMAILADDRESS, ZmailKey.name);
             
-            ZimbraLog.account.warn(LOG_PREFIX + "No " + Provisioning.A_zimbraMailSSLClientCertPrincipalMap +
+            ZmailLog.account.warn(LOG_PREFIX + "No " + Provisioning.A_zmailMailSSLClientCertPrincipalMap +
                     " configured, default to " + rule.getName());
             
             parsedRules.add(rule);
@@ -345,21 +345,21 @@ public class ClientCertPrincipalMap {
         String[] parts = rawRule.split(MAP_DELIMITER);
         if (parts.length != 2) {
             throw ServiceException.FAILURE("Invalid config:" + rawRule + 
-                    " in " + Provisioning.A_zimbraMailSSLClientCertPrincipalMap, null);
+                    " in " + Provisioning.A_zmailMailSSLClientCertPrincipalMap, null);
         }
         
         try {
             String certPart = parts[0].trim();
-            String zimbraPart = parts[1].trim();
+            String zmailPart = parts[1].trim();
             
             CertField certField = parseCertField(certPart);
-            ZimbraKey zimbraKey = ZimbraKey.valueOf(zimbraPart);
+            ZmailKey zmailKey = ZmailKey.valueOf(zmailPart);
             
-            Rule rule = new FieldMapRule(certField, zimbraKey);
+            Rule rule = new FieldMapRule(certField, zmailKey);
             return rule;
         } catch (ServiceException e) {
             throw ServiceException.FAILURE("Invalid config:" + rawRule + 
-                    " in " + Provisioning.A_zimbraMailSSLClientCertPrincipalMap, e);
+                    " in " + Provisioning.A_zmailMailSSLClientCertPrincipalMap, e);
         }
     }
     

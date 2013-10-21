@@ -13,7 +13,7 @@
  * ***** END LICENSE BLOCK *****
  */
 
-package com.zimbra.cs.server;
+package org.zmail.cs.server;
 
 import java.io.IOException;
 import java.io.OutputStream;
@@ -23,7 +23,7 @@ import org.apache.mina.core.future.WriteFuture;
 import org.apache.mina.core.session.IoSession;
 
 import com.google.common.base.Charsets;
-import com.zimbra.common.util.ZimbraLog;
+import org.zmail.common.util.ZmailLog;
 
 public final class NioOutputStream extends OutputStream {
     private final IoSession session;
@@ -90,7 +90,7 @@ public final class NioOutputStream extends OutputStream {
         long writeBytes = session.getScheduledWriteBytes();
         WriteFuture future = session.write(output);
         if (writeBytes > maxScheduledBytes) {
-            ZimbraLog.nio.debug("IOSession has %d scheduled write bytes; waiting for buffer to catch up", writeBytes);
+            ZmailLog.nio.debug("IOSession has %d scheduled write bytes; waiting for buffer to catch up", writeBytes);
             long start = System.currentTimeMillis();
             if (maxWritePause > 0) {
                 boolean done = future.awaitUninterruptibly(maxWritePause);
@@ -100,9 +100,9 @@ public final class NioOutputStream extends OutputStream {
             } else {
                 future.awaitUninterruptibly();
             }
-            if (ZimbraLog.nio.isDebugEnabled()) {
-                ZimbraLog.nio.debug("waited %d for %d scheduled bytes", (System.currentTimeMillis()-start), writeBytes);
-                ZimbraLog.nio.debug("now have %d scheduled bytes, %d messages; %d written bytes %d messages", session.getScheduledWriteBytes(), session.getScheduledWriteMessages(), session.getWrittenBytes(), session.getWrittenMessages());
+            if (ZmailLog.nio.isDebugEnabled()) {
+                ZmailLog.nio.debug("waited %d for %d scheduled bytes", (System.currentTimeMillis()-start), writeBytes);
+                ZmailLog.nio.debug("now have %d scheduled bytes, %d messages; %d written bytes %d messages", session.getScheduledWriteBytes(), session.getScheduledWriteMessages(), session.getWrittenBytes(), session.getWrittenMessages());
             }
         }
     }

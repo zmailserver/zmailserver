@@ -12,21 +12,21 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.fb;
+package org.zmail.cs.fb;
 
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Date;
 
-import com.zimbra.common.localconfig.LC;
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.common.soap.AccountConstants;
-import com.zimbra.common.soap.AdminConstants;
-import com.zimbra.common.soap.Element;
-import com.zimbra.common.soap.SoapHttpTransport;
-import com.zimbra.common.soap.Element.XMLElement;
-import com.zimbra.cs.httpclient.URLUtil;
+import org.zmail.common.localconfig.LC;
+import org.zmail.common.service.ServiceException;
+import org.zmail.common.soap.AccountConstants;
+import org.zmail.common.soap.AdminConstants;
+import org.zmail.common.soap.Element;
+import org.zmail.common.soap.SoapHttpTransport;
+import org.zmail.common.soap.Element.XMLElement;
+import org.zmail.cs.httpclient.URLUtil;
 
 public class FbCli {
     public static class FbProvider {
@@ -63,7 +63,7 @@ public class FbCli {
         }
     }
     public FbCli() throws ServiceException {
-        setServer(LC.zimbra_zmprov_default_soap_server.value());
+        setServer(LC.zmail_zmprov_default_soap_server.value());
     }
 
     public void setServer(String server) {
@@ -152,8 +152,8 @@ public class FbCli {
 
     private void auth() throws ServiceException, IOException {
         XMLElement req = new XMLElement(AdminConstants.AUTH_REQUEST);
-        req.addElement(AdminConstants.E_NAME).setText(LC.zimbra_ldap_user.value());
-        req.addElement(AdminConstants.E_PASSWORD).setText(LC.zimbra_ldap_password.value());
+        req.addElement(AdminConstants.E_NAME).setText(LC.zmail_ldap_user.value());
+        req.addElement(AdminConstants.E_PASSWORD).setText(LC.zmail_ldap_password.value());
         Element resp = mTransport.invoke(req);
         mTransport.setAuthToken(resp.getElement(AccountConstants.E_AUTH_TOKEN).getText());
     }

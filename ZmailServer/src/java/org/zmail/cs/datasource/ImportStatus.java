@@ -15,9 +15,9 @@
 /**
  * 
  */
-package com.zimbra.cs.datasource;
+package org.zmail.cs.datasource;
 
-import com.zimbra.cs.account.DataSource;
+import org.zmail.cs.account.DataSource;
 
 /**
  * Keeps track of the status of an import from a {@link DataSource}.

@@ -14,7 +14,7 @@
  * 
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.lmtpserver;
+package org.zmail.cs.lmtpserver;
 
 import org.junit.Assert;
 import org.junit.Test;

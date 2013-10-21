@@ -13,7 +13,7 @@
  * ***** END LICENSE BLOCK *****
  */
 
-package com.zimbra.cs.mime;
+package org.zmail.cs.mime;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -27,17 +27,17 @@ import javax.mail.internet.MimeUtility;
 import org.apache.lucene.document.Document;
 
 import com.google.common.base.Strings;
-import com.zimbra.common.calendar.ZCalendar.ZVCalendar;
-import com.zimbra.common.localconfig.DebugConfig;
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.common.util.ByteUtil;
-import com.zimbra.cs.convert.AttachmentInfo;
-import com.zimbra.cs.convert.ConversionException;
-import com.zimbra.cs.index.IndexDocument;
-import com.zimbra.cs.index.analysis.MimeTypeTokenStream;
-import com.zimbra.cs.object.MatchedObject;
-import com.zimbra.cs.object.ObjectHandler;
-import com.zimbra.cs.object.ObjectHandlerException;
+import org.zmail.common.calendar.ZCalendar.ZVCalendar;
+import org.zmail.common.localconfig.DebugConfig;
+import org.zmail.common.service.ServiceException;
+import org.zmail.common.util.ByteUtil;
+import org.zmail.cs.convert.AttachmentInfo;
+import org.zmail.cs.convert.ConversionException;
+import org.zmail.cs.index.IndexDocument;
+import org.zmail.cs.index.analysis.MimeTypeTokenStream;
+import org.zmail.cs.object.MatchedObject;
+import org.zmail.cs.object.ObjectHandler;
+import org.zmail.cs.object.ObjectHandlerException;
 
 /**
  * @since Apr 30, 2004

@@ -13,17 +13,17 @@
  * ***** END LICENSE BLOCK *****
  */
 
-package com.zimbra.cs.account;
+package org.zmail.cs.account;
 
 import java.util.Map;
 import java.util.Set;
 
-import com.zimbra.common.account.Key;
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.common.util.EmailUtil;
-import com.zimbra.common.util.ZimbraLog;
-import com.zimbra.cs.account.accesscontrol.Right;
-import com.zimbra.cs.account.names.NameUtil;
+import org.zmail.common.account.Key;
+import org.zmail.common.service.ServiceException;
+import org.zmail.common.util.EmailUtil;
+import org.zmail.common.util.ZmailLog;
+import org.zmail.cs.account.accesscontrol.Right;
+import org.zmail.cs.account.names.NameUtil;
 
 public class DomainAccessManager extends AccessManager {
 
@@ -33,12 +33,12 @@ public class DomainAccessManager extends AccessManager {
 
     @Override
     public boolean isAdequateAdminAccount(Account acct) {
-        return acct.getBooleanAttr(Provisioning.A_zimbraIsDomainAdminAccount, false) ||
-               acct.getBooleanAttr(Provisioning.A_zimbraIsAdminAccount, false);
+        return acct.getBooleanAttr(Provisioning.A_zmailIsDomainAdminAccount, false) ||
+               acct.getBooleanAttr(Provisioning.A_zmailIsAdminAccount, false);
     }
     
     public boolean canAccessAccount(AuthToken at, Account target, boolean asAdmin) throws ServiceException {
-        if (!at.isZimbraUser())
+        if (!at.isZmailUser())
             return false;
         
         checkDomainStatus(target);
@@ -47,7 +47,7 @@ public class DomainAccessManager extends AccessManager {
         if (isParentOf(at, target)) return true;
         if (!(asAdmin && at.isDomainAdmin())) return false;
         // don't allow a domain-only admin to access a global admin's account
-        if (target.getBooleanAttr(Provisioning.A_zimbraIsAdminAccount, false)) return false;
+        if (target.getBooleanAttr(Provisioning.A_zmailIsAdminAccount, false)) return false;
         Provisioning prov = Provisioning.getInstance();
         return getDomain(at).getId().equals(prov.getDomain(target).getId());
     }
@@ -72,7 +72,7 @@ public class DomainAccessManager extends AccessManager {
         checkDomainStatus(target);
         
         // admin auth account will always succeed
-        if (asAdmin && credentials.getBooleanAttr(Provisioning.A_zimbraIsAdminAccount, false))
+        if (asAdmin && credentials.getBooleanAttr(Provisioning.A_zmailIsAdminAccount, false))
             return true;
         // parent auth account will always succeed
         if (isParentOf(credentials, target))
@@ -81,11 +81,11 @@ public class DomainAccessManager extends AccessManager {
         if (!asAdmin)
             return false;
         // don't allow a domain-only admin to access a global admin's account
-        if (target.getBooleanAttr(Provisioning.A_zimbraIsAdminAccount, false))
+        if (target.getBooleanAttr(Provisioning.A_zmailIsAdminAccount, false))
             return false;
         // domain admins succeed if the target is in the same domain
         if (target.getDomainName() != null && target.getDomainName().equals(credentials.getDomainName()))
-            return credentials.getBooleanAttr(Provisioning.A_zimbraIsDomainAdminAccount, false);
+            return credentials.getBooleanAttr(Provisioning.A_zmailIsDomainAdminAccount, false);
         // everyone else is out of luck
         return false;
     }
@@ -105,21 +105,21 @@ public class DomainAccessManager extends AccessManager {
     }
 
     public boolean canAccessDomain(AuthToken at, String domainName) throws ServiceException {
-        if (!at.isZimbraUser())
+        if (!at.isZmailUser())
             return false;
         checkDomainStatus(domainName);
         return canAccessDomainInternal(at, domainName);
     }
 
     public boolean canAccessDomain(AuthToken at, Domain domain) throws ServiceException {
-        if (!at.isZimbraUser())
+        if (!at.isZmailUser())
             return false;
         checkDomainStatus(domain);
         return canAccessDomainInternal(at, domain.getName());
     }
     
     public boolean canAccessCos(AuthToken at, Cos cos) throws ServiceException {
-        if (!at.isZimbraUser())
+        if (!at.isZmailUser())
             return false;
         
         if (at.isAdmin()) return true;
@@ -128,7 +128,7 @@ public class DomainAccessManager extends AccessManager {
         String cosId = cos.getId();
         
         Domain domain = getDomain(at);
-        Set<String> allowedCoses = domain.getMultiAttrSet(Provisioning.A_zimbraDomainCOSMaxAccounts);
+        Set<String> allowedCoses = domain.getMultiAttrSet(Provisioning.A_zmailDomainCOSMaxAccounts);
         for (String c : allowedCoses) {
             String[] parts = c.split(":");
             if (parts.length != 2)
@@ -195,7 +195,7 @@ public class DomainAccessManager extends AccessManager {
         if (adminAccount == null) return false;
 
         // 0 is unlimited
-        long maxQuota = adminAccount.getLongAttr(Provisioning.A_zimbraDomainAdminMaxMailQuota, -1);
+        long maxQuota = adminAccount.getLongAttr(Provisioning.A_zmailDomainAdminMaxMailQuota, -1);
 
         // return true if they can set quotas to anything
         if (maxQuota == 0)
@@ -205,7 +205,7 @@ public class DomainAccessManager extends AccessManager {
             (quota == 0) ||        // they don't have permission to assign unlimited quota
             (quota > maxQuota)     // the quota they are tying to assign is too big
            ) {
-            ZimbraLog.account.warn(String.format("invalid attempt to change quota: admin(%s) account(%s) quota(%d) max(%d)",
+            ZmailLog.account.warn(String.format("invalid attempt to change quota: admin(%s) account(%s) quota(%d) max(%d)",
                     adminAccount.getName(), targetAccount.getName(), quota, maxQuota));
             return false;
         } else {

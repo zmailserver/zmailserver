@@ -19,14 +19,14 @@
  * TODO To change the template for this generated file go to
  * Window - Preferences - Java - Code Style - Code Templates
  */
-package com.zimbra.cs.redolog.op;
+package org.zmail.cs.redolog.op;
 
 import java.io.File;
 import java.io.IOException;
 
-import com.zimbra.cs.mailbox.MailboxOperation;
-import com.zimbra.cs.redolog.RedoLogInput;
-import com.zimbra.cs.redolog.RedoLogOutput;
+import org.zmail.cs.mailbox.MailboxOperation;
+import org.zmail.cs.redolog.RedoLogInput;
+import org.zmail.cs.redolog.RedoLogOutput;
 
 /**
  * @author jhahm
@@ -59,14 +59,14 @@ public class Rollover extends RedoableOp {
     }
 
 	/* (non-Javadoc)
-	 * @see com.zimbra.cs.redolog.op.RedoableOp#redo()
+	 * @see org.zmail.cs.redolog.op.RedoableOp#redo()
 	 */
 	public void redo() throws Exception {
         // nothing to do
 	}
 
 	/* (non-Javadoc)
-	 * @see com.zimbra.cs.redolog.op.RedoableOp#getPrintableData()
+	 * @see org.zmail.cs.redolog.op.RedoableOp#getPrintableData()
 	 */
 	protected String getPrintableData() {
         StringBuffer sb = new StringBuffer("seq=");
@@ -76,7 +76,7 @@ public class Rollover extends RedoableOp {
 	}
 
 	/* (non-Javadoc)
-	 * @see com.zimbra.cs.redolog.op.RedoableOp#serializeData(java.io.RedoLogOutput)
+	 * @see org.zmail.cs.redolog.op.RedoableOp#serializeData(java.io.RedoLogOutput)
 	 */
 	protected void serializeData(RedoLogOutput out) throws IOException {
         out.writeLong(mSeq);
@@ -84,7 +84,7 @@ public class Rollover extends RedoableOp {
 	}
 
 	/* (non-Javadoc)
-	 * @see com.zimbra.cs.redolog.op.RedoableOp#deserializeData(java.io.RedoLogInput)
+	 * @see org.zmail.cs.redolog.op.RedoableOp#deserializeData(java.io.RedoLogInput)
 	 */
 	protected void deserializeData(RedoLogInput in) throws IOException {
         mSeq = in.readLong();

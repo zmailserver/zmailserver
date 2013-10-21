@@ -12,19 +12,19 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.account.gal;
+package org.zmail.cs.account.gal;
 
 import java.util.Map;
 
-import com.zimbra.common.account.ProvisioningConstants;
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.cs.account.Domain;
-import com.zimbra.cs.account.Entry;
-import com.zimbra.cs.account.Provisioning;
-import com.zimbra.cs.account.ldap.LdapGalCredential;
-import com.zimbra.cs.gal.GalSearchConfig;
-import com.zimbra.cs.gal.ZimbraGalSearchBase;
-import com.zimbra.cs.ldap.LdapConnType;
+import org.zmail.common.account.ProvisioningConstants;
+import org.zmail.common.service.ServiceException;
+import org.zmail.cs.account.Domain;
+import org.zmail.cs.account.Entry;
+import org.zmail.cs.account.Provisioning;
+import org.zmail.cs.account.ldap.LdapGalCredential;
+import org.zmail.cs.gal.GalSearchConfig;
+import org.zmail.cs.gal.ZmailGalSearchBase;
+import org.zmail.cs.ldap.LdapConnType;
 
 public abstract class GalParams {
     
@@ -36,36 +36,36 @@ public abstract class GalParams {
         
         String pageSize = null;
         if (galOp == GalOp.sync) {
-            pageSize = ldapEntry.getAttr(Provisioning.A_zimbraGalSyncLdapPageSize);
+            pageSize = ldapEntry.getAttr(Provisioning.A_zmailGalSyncLdapPageSize);
             
             if (pageSize == null)
-                pageSize = ldapEntry.getAttr(Provisioning.A_zimbraGalLdapPageSize);
+                pageSize = ldapEntry.getAttr(Provisioning.A_zmailGalLdapPageSize);
         } else {
-            pageSize = ldapEntry.getAttr(Provisioning.A_zimbraGalLdapPageSize);
+            pageSize = ldapEntry.getAttr(Provisioning.A_zmailGalLdapPageSize);
         }
         
         setPageSize(pageSize);
         
-        mTokenizeAutoCompleteKey = ldapEntry.getAttr(Provisioning.A_zimbraGalTokenizeAutoCompleteKey);
-        mTokenizeSearchKey = ldapEntry.getAttr(Provisioning.A_zimbraGalTokenizeSearchKey);
+        mTokenizeAutoCompleteKey = ldapEntry.getAttr(Provisioning.A_zmailGalTokenizeAutoCompleteKey);
+        mTokenizeSearchKey = ldapEntry.getAttr(Provisioning.A_zmailGalTokenizeSearchKey);
         
     }
     
     GalParams(Map attrs, GalOp galOp) {
         String pageSize = null;
         if (galOp == GalOp.sync) {
-            pageSize = (String)attrs.get(Provisioning.A_zimbraGalSyncLdapPageSize);
+            pageSize = (String)attrs.get(Provisioning.A_zmailGalSyncLdapPageSize);
             
             if (pageSize == null)
-                pageSize = (String)attrs.get(Provisioning.A_zimbraGalLdapPageSize);
+                pageSize = (String)attrs.get(Provisioning.A_zmailGalLdapPageSize);
         } else {
-            pageSize = (String)attrs.get(Provisioning.A_zimbraGalLdapPageSize);
+            pageSize = (String)attrs.get(Provisioning.A_zmailGalLdapPageSize);
         }
         
         setPageSize(pageSize);
         
-        mTokenizeAutoCompleteKey = (String)attrs.get(Provisioning.A_zimbraGalTokenizeAutoCompleteKey);
-        mTokenizeSearchKey = (String)attrs.get(Provisioning.A_zimbraGalTokenizeSearchKey);
+        mTokenizeAutoCompleteKey = (String)attrs.get(Provisioning.A_zmailGalTokenizeAutoCompleteKey);
+        mTokenizeSearchKey = (String)attrs.get(Provisioning.A_zmailGalTokenizeSearchKey);
     }
     
     private void setPageSize(String pageSize) {
@@ -85,15 +85,15 @@ public abstract class GalParams {
     public String tokenizeSearchKey() { return mTokenizeSearchKey; } 
     
     /*
-     * ZimbraGalParams
+     * ZmailGalParams
      *
      */
-    public static class ZimbraGalParams extends GalParams {
+    public static class ZmailGalParams extends GalParams {
         String mSearchBase;
         
-        public ZimbraGalParams(Domain domain, GalOp galOp) throws ServiceException {
+        public ZmailGalParams(Domain domain, GalOp galOp) throws ServiceException {
             super(domain, galOp); 
-            mSearchBase = ZimbraGalSearchBase.getSearchBase(domain, galOp);
+            mSearchBase = ZmailGalSearchBase.getSearchBase(domain, galOp);
         }
         
         public String searchBase() { return mSearchBase; }
@@ -117,53 +117,53 @@ public abstract class GalParams {
             String krb5Keytab;
             
             if (galOp == GalOp.sync) {
-                mUrl = ldapEntry.getMultiAttr(Provisioning.A_zimbraGalSyncLdapURL);
-                mSearchBase = ldapEntry.getAttr(Provisioning.A_zimbraGalSyncLdapSearchBase);
-                mFilter = ldapEntry.getAttr(Provisioning.A_zimbraGalSyncLdapFilter);
+                mUrl = ldapEntry.getMultiAttr(Provisioning.A_zmailGalSyncLdapURL);
+                mSearchBase = ldapEntry.getAttr(Provisioning.A_zmailGalSyncLdapSearchBase);
+                mFilter = ldapEntry.getAttr(Provisioning.A_zmailGalSyncLdapFilter);
                 
-                startTlsEnabled = ldapEntry.getAttr(Provisioning.A_zimbraGalSyncLdapStartTlsEnabled);
-                authMech = ldapEntry.getAttr(Provisioning.A_zimbraGalSyncLdapAuthMech);
-                bindDn = ldapEntry.getAttr(Provisioning.A_zimbraGalSyncLdapBindDn);
-                bindPassword = ldapEntry.getAttr(Provisioning.A_zimbraGalSyncLdapBindPassword);
-                krb5Principal = ldapEntry.getAttr(Provisioning.A_zimbraGalSyncLdapKerberos5Principal);
-                krb5Keytab = ldapEntry.getAttr(Provisioning.A_zimbraGalSyncLdapKerberos5Keytab);
+                startTlsEnabled = ldapEntry.getAttr(Provisioning.A_zmailGalSyncLdapStartTlsEnabled);
+                authMech = ldapEntry.getAttr(Provisioning.A_zmailGalSyncLdapAuthMech);
+                bindDn = ldapEntry.getAttr(Provisioning.A_zmailGalSyncLdapBindDn);
+                bindPassword = ldapEntry.getAttr(Provisioning.A_zmailGalSyncLdapBindPassword);
+                krb5Principal = ldapEntry.getAttr(Provisioning.A_zmailGalSyncLdapKerberos5Principal);
+                krb5Keytab = ldapEntry.getAttr(Provisioning.A_zmailGalSyncLdapKerberos5Keytab);
                 
-                // fallback to zimbraGalLdap attrs is sync specific params are not set
+                // fallback to zmailGalLdap attrs is sync specific params are not set
                 if (mUrl == null || mUrl.length == 0)
-                    mUrl = ldapEntry.getMultiAttr(Provisioning.A_zimbraGalLdapURL);
+                    mUrl = ldapEntry.getMultiAttr(Provisioning.A_zmailGalLdapURL);
                 if (mSearchBase == null)
-                    mSearchBase = ldapEntry.getAttr(Provisioning.A_zimbraGalLdapSearchBase, "");
+                    mSearchBase = ldapEntry.getAttr(Provisioning.A_zmailGalLdapSearchBase, "");
                 if (mFilter == null)
-                    mFilter = ldapEntry.getAttr(Provisioning.A_zimbraGalLdapFilter);
+                    mFilter = ldapEntry.getAttr(Provisioning.A_zmailGalLdapFilter);
                 
                 if (startTlsEnabled == null)
-                    startTlsEnabled = ldapEntry.getAttr(Provisioning.A_zimbraGalLdapStartTlsEnabled);
+                    startTlsEnabled = ldapEntry.getAttr(Provisioning.A_zmailGalLdapStartTlsEnabled);
                 if (authMech == null)
-                    authMech = ldapEntry.getAttr(Provisioning.A_zimbraGalLdapAuthMech);
+                    authMech = ldapEntry.getAttr(Provisioning.A_zmailGalLdapAuthMech);
                 if (bindDn == null)
-                    bindDn = ldapEntry.getAttr(Provisioning.A_zimbraGalLdapBindDn);
+                    bindDn = ldapEntry.getAttr(Provisioning.A_zmailGalLdapBindDn);
                 if (bindPassword == null)
-                    bindPassword = ldapEntry.getAttr(Provisioning.A_zimbraGalLdapBindPassword);
+                    bindPassword = ldapEntry.getAttr(Provisioning.A_zmailGalLdapBindPassword);
                 if (krb5Principal == null)
-                    krb5Principal = ldapEntry.getAttr(Provisioning.A_zimbraGalLdapKerberos5Principal);
+                    krb5Principal = ldapEntry.getAttr(Provisioning.A_zmailGalLdapKerberos5Principal);
                 if (krb5Keytab == null)
-                    krb5Keytab = ldapEntry.getAttr(Provisioning.A_zimbraGalLdapKerberos5Keytab);
+                    krb5Keytab = ldapEntry.getAttr(Provisioning.A_zmailGalLdapKerberos5Keytab);
                 
             } else {
-                mUrl = ldapEntry.getMultiAttr(Provisioning.A_zimbraGalLdapURL);
-                mSearchBase = ldapEntry.getAttr(Provisioning.A_zimbraGalLdapSearchBase, "");
+                mUrl = ldapEntry.getMultiAttr(Provisioning.A_zmailGalLdapURL);
+                mSearchBase = ldapEntry.getAttr(Provisioning.A_zmailGalLdapSearchBase, "");
                 
                 if (galOp == GalOp.autocomplete)
-                    mFilter = ldapEntry.getAttr(Provisioning.A_zimbraGalAutoCompleteLdapFilter);
+                    mFilter = ldapEntry.getAttr(Provisioning.A_zmailGalAutoCompleteLdapFilter);
                 else
-                    mFilter = ldapEntry.getAttr(Provisioning.A_zimbraGalLdapFilter);
+                    mFilter = ldapEntry.getAttr(Provisioning.A_zmailGalLdapFilter);
             
-                startTlsEnabled = ldapEntry.getAttr(Provisioning.A_zimbraGalLdapStartTlsEnabled);
-                authMech = ldapEntry.getAttr(Provisioning.A_zimbraGalLdapAuthMech);
-                bindDn = ldapEntry.getAttr(Provisioning.A_zimbraGalLdapBindDn);
-                bindPassword = ldapEntry.getAttr(Provisioning.A_zimbraGalLdapBindPassword);
-                krb5Principal = ldapEntry.getAttr(Provisioning.A_zimbraGalLdapKerberos5Principal);
-                krb5Keytab = ldapEntry.getAttr(Provisioning.A_zimbraGalLdapKerberos5Keytab);
+                startTlsEnabled = ldapEntry.getAttr(Provisioning.A_zmailGalLdapStartTlsEnabled);
+                authMech = ldapEntry.getAttr(Provisioning.A_zmailGalLdapAuthMech);
+                bindDn = ldapEntry.getAttr(Provisioning.A_zmailGalLdapBindDn);
+                bindPassword = ldapEntry.getAttr(Provisioning.A_zmailGalLdapBindPassword);
+                krb5Principal = ldapEntry.getAttr(Provisioning.A_zmailGalLdapKerberos5Principal);
+                krb5Keytab = ldapEntry.getAttr(Provisioning.A_zmailGalLdapKerberos5Keytab);
             }
             
             boolean startTLS = startTlsEnabled == null ? false : ProvisioningConstants.TRUE.equals(startTlsEnabled);
@@ -175,7 +175,7 @@ public abstract class GalParams {
         /*
          * called from Check, where there isn't a domain object
          * 
-         * TODO, need admin UI work for zimbraGalLdapStartTlsEnabled/zimbraGalSyncLdapStartTlsEnabled
+         * TODO, need admin UI work for zmailGalLdapStartTlsEnabled/zmailGalSyncLdapStartTlsEnabled
          */
         public ExternalGalParams(Map attrs, GalOp galOp) throws ServiceException {
             super(attrs, galOp);
@@ -188,53 +188,53 @@ public abstract class GalParams {
             String krb5Keytab;
             
             if (galOp == GalOp.sync) {
-                mUrl = getMultiAttr(attrs, Provisioning.A_zimbraGalSyncLdapURL, false);
-                mSearchBase = (String)attrs.get(Provisioning.A_zimbraGalSyncLdapSearchBase);
-                mFilter = (String)attrs.get(Provisioning.A_zimbraGalSyncLdapFilter);
+                mUrl = getMultiAttr(attrs, Provisioning.A_zmailGalSyncLdapURL, false);
+                mSearchBase = (String)attrs.get(Provisioning.A_zmailGalSyncLdapSearchBase);
+                mFilter = (String)attrs.get(Provisioning.A_zmailGalSyncLdapFilter);
                 
-                startTlsEnabled = (String)attrs.get(Provisioning.A_zimbraGalSyncLdapStartTlsEnabled);
-                authMech = (String)attrs.get(Provisioning.A_zimbraGalSyncLdapAuthMech);
-                bindDn = (String)attrs.get(Provisioning.A_zimbraGalSyncLdapBindDn);
-                bindPassword = (String)attrs.get(Provisioning.A_zimbraGalSyncLdapBindPassword);
-                krb5Principal = (String)attrs.get(Provisioning.A_zimbraGalSyncLdapKerberos5Principal);
-                krb5Keytab = (String)attrs.get(Provisioning.A_zimbraGalSyncLdapKerberos5Keytab);
+                startTlsEnabled = (String)attrs.get(Provisioning.A_zmailGalSyncLdapStartTlsEnabled);
+                authMech = (String)attrs.get(Provisioning.A_zmailGalSyncLdapAuthMech);
+                bindDn = (String)attrs.get(Provisioning.A_zmailGalSyncLdapBindDn);
+                bindPassword = (String)attrs.get(Provisioning.A_zmailGalSyncLdapBindPassword);
+                krb5Principal = (String)attrs.get(Provisioning.A_zmailGalSyncLdapKerberos5Principal);
+                krb5Keytab = (String)attrs.get(Provisioning.A_zmailGalSyncLdapKerberos5Keytab);
                 
-                // fallback to zimbraGalLdap attrs is sync specific params are not set
+                // fallback to zmailGalLdap attrs is sync specific params are not set
                 if (mUrl == null || mUrl.length == 0)
-                    mUrl = getMultiAttr(attrs, Provisioning.A_zimbraGalLdapURL, true);
+                    mUrl = getMultiAttr(attrs, Provisioning.A_zmailGalLdapURL, true);
                 if (mSearchBase == null)
-                    mSearchBase = (String)attrs.get(Provisioning.A_zimbraGalLdapSearchBase);
+                    mSearchBase = (String)attrs.get(Provisioning.A_zmailGalLdapSearchBase);
                 if (mFilter == null)
-                    mFilter = getRequiredAttr(attrs, Provisioning.A_zimbraGalLdapFilter);
+                    mFilter = getRequiredAttr(attrs, Provisioning.A_zmailGalLdapFilter);
                 
                 if (startTlsEnabled == null)
-                    startTlsEnabled = (String)attrs.get(Provisioning.A_zimbraGalLdapStartTlsEnabled);
+                    startTlsEnabled = (String)attrs.get(Provisioning.A_zmailGalLdapStartTlsEnabled);
                 if (authMech == null)
-                    authMech = (String)attrs.get(Provisioning.A_zimbraGalLdapAuthMech);
+                    authMech = (String)attrs.get(Provisioning.A_zmailGalLdapAuthMech);
                 if (bindDn == null)
-                    bindDn = (String)attrs.get(Provisioning.A_zimbraGalLdapBindDn);
+                    bindDn = (String)attrs.get(Provisioning.A_zmailGalLdapBindDn);
                 if (bindPassword == null)
-                    bindPassword = (String)attrs.get(Provisioning.A_zimbraGalLdapBindPassword);
+                    bindPassword = (String)attrs.get(Provisioning.A_zmailGalLdapBindPassword);
                 if (krb5Principal == null)
-                    krb5Principal = (String)attrs.get(Provisioning.A_zimbraGalLdapKerberos5Principal);
+                    krb5Principal = (String)attrs.get(Provisioning.A_zmailGalLdapKerberos5Principal);
                 if (krb5Keytab == null)
-                    krb5Keytab = (String)attrs.get(Provisioning.A_zimbraGalLdapKerberos5Keytab);
+                    krb5Keytab = (String)attrs.get(Provisioning.A_zmailGalLdapKerberos5Keytab);
                 
             } else {
-                mUrl = getMultiAttr(attrs, Provisioning.A_zimbraGalLdapURL, true);
-                mSearchBase = (String)attrs.get(Provisioning.A_zimbraGalLdapSearchBase);
+                mUrl = getMultiAttr(attrs, Provisioning.A_zmailGalLdapURL, true);
+                mSearchBase = (String)attrs.get(Provisioning.A_zmailGalLdapSearchBase);
                 
                 if (galOp == GalOp.autocomplete)
-                    mFilter = getRequiredAttr(attrs, Provisioning.A_zimbraGalAutoCompleteLdapFilter);
+                    mFilter = getRequiredAttr(attrs, Provisioning.A_zmailGalAutoCompleteLdapFilter);
                 else
-                    mFilter = getRequiredAttr(attrs, Provisioning.A_zimbraGalLdapFilter);
+                    mFilter = getRequiredAttr(attrs, Provisioning.A_zmailGalLdapFilter);
             
-                startTlsEnabled = (String)attrs.get(Provisioning.A_zimbraGalLdapStartTlsEnabled);
-                authMech = (String)attrs.get(Provisioning.A_zimbraGalLdapAuthMech);
-                bindDn = (String)attrs.get(Provisioning.A_zimbraGalLdapBindDn);
-                bindPassword = (String)attrs.get(Provisioning.A_zimbraGalLdapBindPassword);
-                krb5Principal = (String)attrs.get(Provisioning.A_zimbraGalLdapKerberos5Principal);
-                krb5Keytab = (String)attrs.get(Provisioning.A_zimbraGalLdapKerberos5Keytab);
+                startTlsEnabled = (String)attrs.get(Provisioning.A_zmailGalLdapStartTlsEnabled);
+                authMech = (String)attrs.get(Provisioning.A_zmailGalLdapAuthMech);
+                bindDn = (String)attrs.get(Provisioning.A_zmailGalLdapBindDn);
+                bindPassword = (String)attrs.get(Provisioning.A_zmailGalLdapBindPassword);
+                krb5Principal = (String)attrs.get(Provisioning.A_zmailGalLdapKerberos5Principal);
+                krb5Keytab = (String)attrs.get(Provisioning.A_zmailGalLdapKerberos5Keytab);
             }
                 
             boolean startTLS = startTlsEnabled == null ? false : ProvisioningConstants.TRUE.equals(startTlsEnabled);

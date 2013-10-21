@@ -12,7 +12,7 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.account.accesscontrol;
+package org.zmail.cs.account.accesscontrol;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -26,38 +26,38 @@ import java.util.SortedMap;
 import java.util.TreeMap;
 
 import com.google.common.collect.Sets;
-import com.zimbra.common.account.Key;
-import com.zimbra.common.account.Key.DomainBy;
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.common.soap.AdminConstants;
-import com.zimbra.common.soap.Element;
-import com.zimbra.common.util.L10nUtil;
-import com.zimbra.common.util.ZimbraLog;
-import com.zimbra.cs.account.Account;
-import com.zimbra.cs.account.AccessManager;
-import com.zimbra.cs.account.AccountServiceException;
-import com.zimbra.cs.account.AttributeManager;
-import com.zimbra.cs.account.DynamicGroup;
-import com.zimbra.cs.account.Entry;
-import com.zimbra.cs.account.GuestAccount;
-import com.zimbra.cs.account.NamedEntry;
-import com.zimbra.cs.account.Provisioning;
-import com.zimbra.cs.account.accesscontrol.Right.RightType;
-import com.zimbra.cs.account.accesscontrol.RightBearer.Grantee;
-import com.zimbra.cs.account.accesscontrol.SearchGrants.GrantsOnTarget;
-import com.zimbra.soap.admin.message.GetAllEffectiveRightsResponse;
-import com.zimbra.soap.admin.message.GetEffectiveRightsResponse;
-import com.zimbra.soap.admin.type.EffectiveAttrInfo;
-import com.zimbra.soap.admin.type.EffectiveAttrsInfo;
-import com.zimbra.soap.admin.type.EffectiveRightsInfo;
-import com.zimbra.soap.admin.type.EffectiveRightsTarget;
-import com.zimbra.soap.admin.type.EffectiveRightsTargetInfo;
-import com.zimbra.soap.admin.type.GranteeInfo;
-import com.zimbra.soap.admin.type.InDomainInfo;
-import com.zimbra.soap.admin.type.RightWithName;
-import com.zimbra.soap.admin.type.RightsEntriesInfo;
-import com.zimbra.soap.type.NamedElement;
-import com.zimbra.soap.type.TargetBy;
+import org.zmail.common.account.Key;
+import org.zmail.common.account.Key.DomainBy;
+import org.zmail.common.service.ServiceException;
+import org.zmail.common.soap.AdminConstants;
+import org.zmail.common.soap.Element;
+import org.zmail.common.util.L10nUtil;
+import org.zmail.common.util.ZmailLog;
+import org.zmail.cs.account.Account;
+import org.zmail.cs.account.AccessManager;
+import org.zmail.cs.account.AccountServiceException;
+import org.zmail.cs.account.AttributeManager;
+import org.zmail.cs.account.DynamicGroup;
+import org.zmail.cs.account.Entry;
+import org.zmail.cs.account.GuestAccount;
+import org.zmail.cs.account.NamedEntry;
+import org.zmail.cs.account.Provisioning;
+import org.zmail.cs.account.accesscontrol.Right.RightType;
+import org.zmail.cs.account.accesscontrol.RightBearer.Grantee;
+import org.zmail.cs.account.accesscontrol.SearchGrants.GrantsOnTarget;
+import org.zmail.soap.admin.message.GetAllEffectiveRightsResponse;
+import org.zmail.soap.admin.message.GetEffectiveRightsResponse;
+import org.zmail.soap.admin.type.EffectiveAttrInfo;
+import org.zmail.soap.admin.type.EffectiveAttrsInfo;
+import org.zmail.soap.admin.type.EffectiveRightsInfo;
+import org.zmail.soap.admin.type.EffectiveRightsTarget;
+import org.zmail.soap.admin.type.EffectiveRightsTargetInfo;
+import org.zmail.soap.admin.type.GranteeInfo;
+import org.zmail.soap.admin.type.InDomainInfo;
+import org.zmail.soap.admin.type.RightWithName;
+import org.zmail.soap.admin.type.RightsEntriesInfo;
+import org.zmail.soap.type.NamedElement;
+import org.zmail.soap.type.TargetBy;
 
 public class RightCommand {
 
@@ -132,15 +132,15 @@ public class RightCommand {
         }
 
         /*
-         * add grants from a ZimbraACL
+         * add grants from a ZmailACL
          * called in server
          */
-        private void addGrants(TargetType targetType, Entry target, ZimbraACL acl,
+        private void addGrants(TargetType targetType, Entry target, ZmailACL acl,
                 Set<String> granteeFilter, Boolean isGranteeAnAdmin) {
             if (acl == null)
                 return;
 
-            for (ZimbraACE ace : acl.getAllACEs()) {
+            for (ZmailACE ace : acl.getAllACEs()) {
                 boolean isAdminRight = !ace.getRight().isUserRight();
 
                 if (isAdminRight && Boolean.FALSE == isGranteeAnAdmin) {
@@ -230,7 +230,7 @@ public class RightCommand {
         /*
          * called in server
          */
-        private ACE(TargetType targetType, Entry target, ZimbraACE ace) {
+        private ACE(TargetType targetType, Entry target, ZmailACE ace) {
             mTargetType = targetType.getCode();
             mTargetId = TargetType.getId(target);
             mTargetName = target.getLabel();
@@ -777,7 +777,7 @@ public class RightCommand {
         public static AllEffectiveRights fromJaxb(GetAllEffectiveRightsResponse resp)
         throws ServiceException {
             GranteeInfo grantee = resp.getGrantee();
-            com.zimbra.soap.type.GranteeType gt = grantee.getType();
+            org.zmail.soap.type.GranteeType gt = grantee.getType();
             String granteeType = (gt == null) ? null : gt.toString();
 
             AllEffectiveRights aer = new AllEffectiveRights(granteeType,
@@ -1112,10 +1112,10 @@ public class RightCommand {
 
         if (targetEntry != null) {
             // get ACL from the target
-            ZimbraACL zimbraAcl = ACLUtil.getACL(targetEntry);
+            ZmailACL zmailAcl = ACLUtil.getACL(targetEntry);
 
             // then filter by grnatee if grantee is specified
-            grants.addGrants(tt, targetEntry, zimbraAcl, granteeFilter, isGranteeAnAdmin);
+            grants.addGrants(tt, targetEntry, zmailAcl, granteeFilter, isGranteeAnAdmin);
 
         } else {
             /*
@@ -1136,7 +1136,7 @@ public class RightCommand {
 
             for (GrantsOnTarget grantsOnTarget : grantsOnTargets) {
                 Entry grantedOnEntry = grantsOnTarget.getTargetEntry();
-                ZimbraACL acl = grantsOnTarget.getAcl();
+                ZmailACL acl = grantsOnTarget.getAcl();
                 TargetType grantedOnTargetType = TargetType.getTargetType(grantedOnEntry);
                 grants.addGrants(grantedOnTargetType, grantedOnEntry, acl, granteeFilter, isGranteeAnAdmin);
             }
@@ -1346,7 +1346,7 @@ public class RightCommand {
         GranteeType gt = GranteeType.fromCode(granteeType);
         NamedEntry granteeEntry = null;
         String granteeId;
-        if (gt.isZimbraEntry()) {
+        if (gt.isZmailEntry()) {
             granteeEntry = GranteeType.lookupGrantee(prov, gt, granteeBy, grantee);
             granteeId = granteeEntry.getId();
         } else if (gt == GranteeType.GT_EXT_GROUP) {
@@ -1359,7 +1359,7 @@ public class RightCommand {
             granteeId = extGroup.getId();
 
         } else {
-            // for all and pub, ZimbraACE will use the correct id, granteeId here will be ignored
+            // for all and pub, ZmailACE will use the correct id, granteeId here will be ignored
             // for guest, grantee id is the email
             // for key, grantee id is the display name
             granteeId = grantee;
@@ -1371,8 +1371,8 @@ public class RightCommand {
             return;
         }
 
-        Set<ZimbraACE> aces = new HashSet<ZimbraACE>();
-        ZimbraACE ace = new ZimbraACE(granteeId, gt, r, rightModifier, secret);
+        Set<ZmailACE> aces = new HashSet<ZmailACE>();
+        ZmailACE ace = new ZmailACE(granteeId, gt, r, rightModifier, secret);
         aces.add(ace);
 
         ACLUtil.grantRight(prov, targetEntry, aces);
@@ -1396,11 +1396,11 @@ public class RightCommand {
         NamedEntry granteeEntry = null;
         String granteeId = null;
         try {
-            if (gt.isZimbraEntry()) {
+            if (gt.isZmailEntry()) {
                 granteeEntry = GranteeType.lookupGrantee(prov, gt, granteeBy, grantee);
                 granteeId = granteeEntry.getId();
             } else {
-                // for all and pub, ZimbraACE will use the correct id, granteeId here will be ignored
+                // for all and pub, ZmailACE will use the correct id, granteeId here will be ignored
                 // for guest, grantee id is the email
                 // for key, grantee id is the display name
                 granteeId = grantee;
@@ -1411,7 +1411,7 @@ public class RightCommand {
                 AccountServiceException.NO_SUCH_DISTRIBUTION_LIST.equals(code) ||
                 AccountServiceException.NO_SUCH_DOMAIN.equals(code)) {
 
-                ZimbraLog.acl.warn("revokeRight: no such grantee " + grantee);
+                ZmailLog.acl.warn("revokeRight: no such grantee " + grantee);
 
                 // grantee had been probably deleted.
                 // if granteeBy is id, we try to revoke the orphan grant
@@ -1428,7 +1428,7 @@ public class RightCommand {
         // note: if a forbidden attr is persisted in an ACL in an inline attr right
         //       (it can get in in a release before the attr is considered forbidden),
         //       the getRight() call will throw exception.
-        //       Such grants will have to be removed by "zmprov modify{Entry} zimbraACE ..."
+        //       Such grants will have to be removed by "zmprov modify{Entry} zmailACE ..."
         //       command.  We do NOT want to do any special treatment here because those
         //       grants are not even loaded into memory, which is nice and clean, we don't
         //       want to hack that part.
@@ -1438,11 +1438,11 @@ public class RightCommand {
             validateGrant(authedAcct, tt, targetEntry, gt, granteeEntry, null, r, rightModifier, true);
         }
 
-        Set<ZimbraACE> aces = new HashSet<ZimbraACE>();
-        ZimbraACE ace = new ZimbraACE(granteeId, gt, r, rightModifier, null);
+        Set<ZmailACE> aces = new HashSet<ZmailACE>();
+        ZmailACE ace = new ZmailACE(granteeId, gt, r, rightModifier, null);
         aces.add(ace);
 
-        List<ZimbraACE> revoked = ACLUtil.revokeRight(prov, targetEntry, aces);
+        List<ZmailACE> revoked = ACLUtil.revokeRight(prov, targetEntry, aces);
         if (revoked.isEmpty())
             throw AccountServiceException.NO_SUCH_GRANT(ace.dump(true));
     }
@@ -1476,8 +1476,8 @@ public class RightCommand {
         for (GrantsOnTarget grantsOnTarget : grantsOnTargets) {
             Entry targetEntry = grantsOnTarget.getTargetEntry();
 
-            Set<ZimbraACE> acesToRevoke = new HashSet<ZimbraACE>();
-            for (ZimbraACE ace : grantsOnTarget.getAcl().getAllACEs()) {
+            Set<ZmailACE> acesToRevoke = new HashSet<ZmailACE>();
+            for (ZmailACE ace : grantsOnTarget.getAcl().getAllACEs()) {
                 if (granteeId.equals(ace.getGrantee())) {
                     acesToRevoke.add(ace);
                 }

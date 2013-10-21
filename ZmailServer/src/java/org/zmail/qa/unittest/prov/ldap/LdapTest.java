@@ -12,7 +12,7 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.qa.unittest.prov.ldap;
+package org.zmail.qa.unittest.prov.ldap;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -20,14 +20,14 @@ import java.util.Date;
 import org.junit.BeforeClass;
 import static org.junit.Assert.*;
 
-import com.zimbra.common.localconfig.DebugConfig;
-import com.zimbra.common.localconfig.KnownKey;
-import com.zimbra.common.util.CliUtil;
-import com.zimbra.common.util.Log;
-import com.zimbra.common.util.ZimbraLog;
-import com.zimbra.cs.account.accesscontrol.RightManager;
-import com.zimbra.cs.ldap.unboundid.InMemoryLdapServer;
-import com.zimbra.qa.unittest.prov.ProvTest;
+import org.zmail.common.localconfig.DebugConfig;
+import org.zmail.common.localconfig.KnownKey;
+import org.zmail.common.util.CliUtil;
+import org.zmail.common.util.Log;
+import org.zmail.common.util.ZmailLog;
+import org.zmail.cs.account.accesscontrol.RightManager;
+import org.zmail.cs.ldap.unboundid.InMemoryLdapServer;
+import org.zmail.qa.unittest.prov.ProvTest;
 
 public class LdapTest extends ProvTest {
     private static final String LDAP_TEST_BASE_DOMAIN = "ldaptest";
@@ -76,12 +76,12 @@ public class LdapTest extends ProvTest {
         perJVMInited = true;
 
         CliUtil.toolSetup(Log.Level.error.name());
-        ZimbraLog.test.setLevel(Log.Level.info);
-        // ZimbraLog.acl.setLevel(Log.Level.debug);
-        // ZimbraLog.autoprov.setLevel(Log.Level.debug);
-        // ZimbraLog.account.setLevel(Log.Level.debug);
-        // ZimbraLog.ldap.setLevel(Log.Level.debug);
-        // ZimbraLog.soap.setLevel(Log.Level.trace);
+        ZmailLog.test.setLevel(Log.Level.info);
+        // ZmailLog.acl.setLevel(Log.Level.debug);
+        // ZmailLog.autoprov.setLevel(Log.Level.debug);
+        // ZmailLog.account.setLevel(Log.Level.debug);
+        // ZmailLog.ldap.setLevel(Log.Level.debug);
+        // ZmailLog.soap.setLevel(Log.Level.trace);
 
         if (useInMemoryLdapServerOverride != null) {
             boolean useInMemoryLdapServer =
@@ -96,7 +96,7 @@ public class LdapTest extends ProvTest {
                 fail();
             }
         }
-        ZimbraLog.test.info("useInMemoryLdapServer = " + InMemoryLdapServer.isOn());
+        ZmailLog.test.info("useInMemoryLdapServer = " + InMemoryLdapServer.isOn());
 
         RightManager.getInstance(true);
 

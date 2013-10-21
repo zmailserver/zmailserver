@@ -12,7 +12,7 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.store;
+package org.zmail.cs.store;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -26,11 +26,11 @@ import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.zip.GZIPOutputStream;
 
-import com.zimbra.common.localconfig.DebugConfig;
-import com.zimbra.common.localconfig.LC;
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.common.util.ByteUtil;
-import com.zimbra.common.util.ZimbraLog;
+import org.zmail.common.localconfig.DebugConfig;
+import org.zmail.common.localconfig.LC;
+import org.zmail.common.service.ServiceException;
+import org.zmail.common.util.ByteUtil;
+import org.zmail.common.util.ZmailLog;
 
 public class BlobBuilder {
     protected Blob blob;
@@ -125,7 +125,7 @@ public class BlobBuilder {
         return false;
     }
 
-    private static final int BUFLEN = Math.max(LC.zimbra_store_copy_buffer_size_kb.intValue(), 1) * 1024;
+    private static final int BUFLEN = Math.max(LC.zmail_store_copy_buffer_size_kb.intValue(), 1) * 1024;
 
     public BlobBuilder append(InputStream in) throws IOException {
         byte[] buffer = new byte[BUFLEN];
@@ -234,8 +234,8 @@ public class BlobBuilder {
             blob.setDigest(ByteUtil.encodeFSSafeBase64(digest.digest()));
             blob.setRawSize(totalBytes);
         }
-        if (ZimbraLog.store.isDebugEnabled())
-            ZimbraLog.store.debug("stored " + this);
+        if (ZmailLog.store.isDebugEnabled())
+            ZmailLog.store.debug("stored " + this);
 
         finished = true;
         return blob;

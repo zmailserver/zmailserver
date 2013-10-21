@@ -12,7 +12,7 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.index.analysis;
+package org.zmail.cs.index.analysis;
 
 import java.io.IOException;
 import java.io.StringReader;
@@ -32,22 +32,22 @@ import org.apache.lucene.analysis.tokenattributes.CharTermAttribute;
 
 import com.google.common.base.Strings;
 import com.google.common.net.InternetDomainName;
-import com.zimbra.common.localconfig.LC;
-import com.zimbra.common.mime.InternetAddress;
+import org.zmail.common.localconfig.LC;
+import org.zmail.common.mime.InternetAddress;
 
 /**
  * RFC822 address tokenizer.
  * <p>
  * For example:
- * {@literal "Zimbra Japan" <support@zimbra.vmware.co.jp>} is tokenized as:
+ * {@literal "Zmail Japan" <support@zmail.vmware.co.jp>} is tokenized as:
  * <ul>
- *  <li>zimbra japan
- *  <li>zimbra
+ *  <li>zmail japan
+ *  <li>zmail
  *  <li>japan
- *  <li>support@zimbra.vmware.co.jp
+ *  <li>support@zmail.vmware.co.jp
  *  <li>support
- *  <li>@zimbra.vmware.co.jp
- *  <li>zimbra.vmware.co.jp
+ *  <li>@zmail.vmware.co.jp
+ *  <li>zmail.vmware.co.jp
  *  <li>@vmware
  *  <li>vmware
  * </ul>
@@ -158,8 +158,8 @@ public final class RFC822AddressTokenStream extends TokenStream {
     }
 
     private void add(String token) {
-        if (token.length() <= LC.zimbra_index_rfc822address_max_token_length.intValue() &&
-                tokens.size() < LC.zimbra_index_rfc822address_max_token_count.intValue()) {
+        if (token.length() <= LC.zmail_index_rfc822address_max_token_length.intValue() &&
+                tokens.size() < LC.zmail_index_rfc822address_max_token_count.intValue()) {
             tokens.add(token);
         }
     }

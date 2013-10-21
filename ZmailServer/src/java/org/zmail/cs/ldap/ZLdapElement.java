@@ -12,9 +12,9 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.ldap;
+package org.zmail.cs.ldap;
 
-import com.zimbra.common.util.ZimbraLog;
+import org.zmail.common.util.ZmailLog;
 
 public abstract class ZLdapElement {
     
@@ -43,7 +43,7 @@ public abstract class ZLdapElement {
             buffer.append(e.toString()); // Throwable.toString() returns a short description of this throwable.
             
             // also log it
-            ZimbraLog.ldap.debug(e);
+            ZmailLog.ldap.debug(e);
         }
         
         public String getString() {
@@ -57,17 +57,17 @@ public abstract class ZLdapElement {
 
             @Override
             public void print(String txt) {
-                ZimbraLog.ldap.debug(txt);
+                ZmailLog.ldap.debug(txt);
             }
         
             @Override
             public void println(String txt) {
-                ZimbraLog.ldap.debug(txt);
+                ZmailLog.ldap.debug(txt);
             }
 
             @Override
             public void printStackTrace(Throwable e) {
-                ZimbraLog.ldap.debug(e);
+                ZmailLog.ldap.debug(e);
             }
     };
     

@@ -14,11 +14,11 @@
  * 
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.account;
+package org.zmail.cs.account;
 
 import java.util.Set;
 
-import com.zimbra.common.service.ServiceException;
+import org.zmail.common.service.ServiceException;
 
 public interface AliasedEntry {
 

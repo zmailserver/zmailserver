@@ -21,12 +21,12 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import com.proviciel.utils.ProvicielLog;
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.cs.account.Account;
-import com.zimbra.cs.account.AuthTokenException;
-import com.zimbra.cs.account.Provisioning;
-import com.zimbra.cs.account.ZimbraAuthToken;
-import com.zimbra.cs.account.auth.AuthContext.Protocol;
+import org.zmail.common.service.ServiceException;
+import org.zmail.cs.account.Account;
+import org.zmail.cs.account.AuthTokenException;
+import org.zmail.cs.account.Provisioning;
+import org.zmail.cs.account.ZmailAuthToken;
+import org.zmail.cs.account.auth.AuthContext.Protocol;
 
 
 public class ServicesServlet extends HttpServlet {
@@ -66,7 +66,7 @@ public class ServicesServlet extends HttpServlet {
 			}
 		}
 		token = AuthCookie.authCookie(req, resp, account);
-		if(ZimbraAuthToken.getAuthToken(token).getAccount() == null){
+		if(ZmailAuthToken.getAuthToken(token).getAccount() == null){
 			throw new AuthTokenException("No account associated with token");
 		} else {
 			JSONObject json = new JSONObject();

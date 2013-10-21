@@ -12,7 +12,7 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.account;
+package org.zmail.cs.account;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -26,41 +26,41 @@ import javax.mail.internet.InternetAddress;
 
 import com.google.common.annotations.VisibleForTesting;
 import com.google.common.collect.Lists;
-import com.zimbra.common.account.Key;
-import com.zimbra.common.account.Key.AccountBy;
-import com.zimbra.common.account.Key.UCServiceBy;
-import com.zimbra.common.account.ProvisioningConstants;
-import com.zimbra.common.account.ZAttrProvisioning;
-import com.zimbra.common.localconfig.LC;
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.common.util.ExceptionToString;
-import com.zimbra.common.util.L10nUtil;
-import com.zimbra.common.util.StringUtil;
-import com.zimbra.common.util.ZimbraLog;
-import com.zimbra.cs.account.accesscontrol.Right;
-import com.zimbra.cs.account.accesscontrol.RightCommand;
-import com.zimbra.cs.account.accesscontrol.RightModifier;
-import com.zimbra.cs.account.auth.AuthContext;
-import com.zimbra.cs.account.gal.GalOp;
-import com.zimbra.cs.account.names.NameUtil;
-import com.zimbra.cs.extension.ExtensionUtil;
-import com.zimbra.cs.gal.GalSearchParams;
-import com.zimbra.cs.ldap.ZLdapFilterFactory.FilterId;
-import com.zimbra.cs.mime.MimeTypeInfo;
-import com.zimbra.cs.util.AccountUtil;
-import com.zimbra.soap.admin.type.CacheEntryType;
-import com.zimbra.soap.admin.type.CmdRightsInfo;
-import com.zimbra.soap.admin.type.CountObjectsType;
-import com.zimbra.soap.admin.type.DataSourceType;
-import com.zimbra.soap.admin.type.DistributionListSelector;
-import com.zimbra.soap.admin.type.DomainSelector;
-import com.zimbra.soap.admin.type.ServerSelector;
-import com.zimbra.soap.admin.type.UCServiceSelector;
-import com.zimbra.soap.type.AccountSelector;
-import com.zimbra.soap.type.AutoProvPrincipalBy;
-import com.zimbra.soap.type.GalSearchType;
-import com.zimbra.soap.type.NamedElement;
-import com.zimbra.soap.type.TargetBy;
+import org.zmail.common.account.Key;
+import org.zmail.common.account.Key.AccountBy;
+import org.zmail.common.account.Key.UCServiceBy;
+import org.zmail.common.account.ProvisioningConstants;
+import org.zmail.common.account.ZAttrProvisioning;
+import org.zmail.common.localconfig.LC;
+import org.zmail.common.service.ServiceException;
+import org.zmail.common.util.ExceptionToString;
+import org.zmail.common.util.L10nUtil;
+import org.zmail.common.util.StringUtil;
+import org.zmail.common.util.ZmailLog;
+import org.zmail.cs.account.accesscontrol.Right;
+import org.zmail.cs.account.accesscontrol.RightCommand;
+import org.zmail.cs.account.accesscontrol.RightModifier;
+import org.zmail.cs.account.auth.AuthContext;
+import org.zmail.cs.account.gal.GalOp;
+import org.zmail.cs.account.names.NameUtil;
+import org.zmail.cs.extension.ExtensionUtil;
+import org.zmail.cs.gal.GalSearchParams;
+import org.zmail.cs.ldap.ZLdapFilterFactory.FilterId;
+import org.zmail.cs.mime.MimeTypeInfo;
+import org.zmail.cs.util.AccountUtil;
+import org.zmail.soap.admin.type.CacheEntryType;
+import org.zmail.soap.admin.type.CmdRightsInfo;
+import org.zmail.soap.admin.type.CountObjectsType;
+import org.zmail.soap.admin.type.DataSourceType;
+import org.zmail.soap.admin.type.DistributionListSelector;
+import org.zmail.soap.admin.type.DomainSelector;
+import org.zmail.soap.admin.type.ServerSelector;
+import org.zmail.soap.admin.type.UCServiceSelector;
+import org.zmail.soap.type.AccountSelector;
+import org.zmail.soap.type.AutoProvPrincipalBy;
+import org.zmail.soap.type.GalSearchType;
+import org.zmail.soap.type.NamedElement;
+import org.zmail.soap.type.TargetBy;
 
 /**
  * @since Sep 23, 2004
@@ -92,14 +92,14 @@ public abstract class Provisioning extends ZAttrProvisioning {
 
     /**
      * For kerberos5 auth, we allow specifying a principal on a per-account basis.
-     * If zimbraForeignPrincipal is in the format of kerberos5:{principal-name}, we
+     * If zmailForeignPrincipal is in the format of kerberos5:{principal-name}, we
      * use the {principal-name} instead of {user-part}@{kerberos5-realm-of-the-domain}
      */
     public static final String FP_PREFIX_KERBEROS5 = "kerberos5:";
 
     /**
      * Used to store Active Directory account name for the user for free/busy
-     * replication from Zimbra to Exchange.
+     * replication from Zmail to Exchange.
      */
     public static final String FP_PREFIX_AD = "ad:";
 
@@ -179,7 +179,7 @@ public abstract class Provisioning extends ZAttrProvisioning {
     public static final String MAIL_FORWARDREPLY_FORMAT_SAME = "same";
 
     /**
-     * Possible values for zimbraMailMode and ZimbraReverseProxyMailMode. "mixed"
+     * Possible values for zmailMailMode and ZmailReverseProxyMailMode. "mixed"
      * means web server should authenticate in HTTPS and redirect to HTTP (useful
      * if all clients are on the intranet and you want only do authentication in
      * the clear - TODO we should add networks to not redirect to at some point
@@ -203,7 +203,7 @@ public abstract class Provisioning extends ZAttrProvisioning {
     }
 
     /**
-     * Possible values for zimbraMailReferMode
+     * Possible values for zmailMailReferMode
      */
     public static final String MAIL_REFER_MODE_ALWAYS = "always";
     public static final String MAIL_REFER_MODE_WRONGHOST = "wronghost";
@@ -256,7 +256,7 @@ public abstract class Provisioning extends ZAttrProvisioning {
                         cacheMode = CacheMode.DEFAULT;
                     }
 
-                    String className = LC.zimbra_class_provisioning.value();
+                    String className = LC.zmail_class_provisioning.value();
 
                     if (className != null && !className.equals("")) {
                         Class<?> klass = null;
@@ -273,21 +273,21 @@ public abstract class Provisioning extends ZAttrProvisioning {
                                     singleton =
                                             (Provisioning) klass.getConstructor(CacheMode.class).newInstance(cacheMode);
                                 } catch (NoSuchMethodException e) {
-                                    ZimbraLog.account.error("could not find constructor with CacheMode parameter '" +
+                                    ZmailLog.account.error("could not find constructor with CacheMode parameter '" +
                                             className + "'; defaulting to LdapProvisioning", e);
                                 }
                             } else {
                                 singleton = (Provisioning) klass.newInstance();
                             }
                         } catch (Exception e) {
-                            ZimbraLog.account.error("could not instantiate Provisioning interface of class '" +
+                            ZmailLog.account.error("could not instantiate Provisioning interface of class '" +
                                     className + "'; defaulting to LdapProvisioning", e);
                         }
                     }
 
                     if (singleton == null) {
-                        singleton = new com.zimbra.cs.account.ldap.LdapProvisioning(cacheMode);
-                        ZimbraLog.account.error("defaulting to " + singleton.getClass().getCanonicalName());
+                        singleton = new org.zmail.cs.account.ldap.LdapProvisioning(cacheMode);
+                        ZmailLog.account.error("defaulting to " + singleton.getClass().getCanonicalName());
                     }
                 }
             }
@@ -469,7 +469,7 @@ public abstract class Provisioning extends ZAttrProvisioning {
             Domain domain = getDomain(Key.DomainBy.name, parts[1], true);
             if (domain != null) {
                 if (!domain.isLocal()) {
-                    String targetDomainId = domain.getAttr(A_zimbraDomainAliasTargetId);
+                    String targetDomainId = domain.getAttr(A_zmailDomainAliasTargetId);
                     if (targetDomainId != null) {
                         domain = getDomainById(targetDomainId);
                         if (domain != null) {
@@ -559,33 +559,33 @@ public abstract class Provisioning extends ZAttrProvisioning {
     }
 
     /**
-     * @param zimbraId the zimbraId of the dl we are checking for
+     * @param zmailId the zmailId of the dl we are checking for
      * @return true if this account (or one of the dl it belongs to) is a member of the specified dl.
      * @throws ServiceException
      */
-    public abstract boolean inDistributionList(Account acct, String zimbraId)
+    public abstract boolean inDistributionList(Account acct, String zmailId)
     throws ServiceException;
 
     /**
-     * @param zimbraId the zimbraId of the dl we are checking for
+     * @param zmailId the zmailId of the dl we are checking for
      * @return true if this distribution list (or one of the dl it belongs to) is a member
      *         of the specified dl.
      * @throws ServiceException
      */
-    public boolean inDistributionList(DistributionList list, String zimbraId)
+    public boolean inDistributionList(DistributionList list, String zmailId)
     throws ServiceException {
         throw ServiceException.UNSUPPORTED();
     }
 
     /**
-     * @return set of all the zimbraId's of lists this account belongs to, including any
+     * @return set of all the zmailId's of lists this account belongs to, including any
      *         list in other list.
      * @throws ServiceException
      */
     public abstract Set<String> getDistributionLists(Account acct) throws ServiceException;
 
     /**
-     * @return set of all the zimbraId's of direct lists this account belongs to
+     * @return set of all the zmailId's of direct lists this account belongs to
      * @throws ServiceException
      */
     public abstract Set<String> getDirectDistributionLists(Account acct) throws ServiceException;
@@ -619,8 +619,8 @@ public abstract class Provisioning extends ZAttrProvisioning {
      * directly or indirectly a member of
      */
     public static class MemberOf {
-        private String mId;            // zimbraId of this group
-        private boolean mIsAdminGroup; // if this group is an admin group (zimbraIsAdminGroup == TRUE)
+        private String mId;            // zmailId of this group
+        private boolean mIsAdminGroup; // if this group is an admin group (zmailIsAdminGroup == TRUE)
         private boolean mIsDynamicGroup; // if this group is a dynamic group
 
         public MemberOf(String id, boolean isAdminGroup, boolean isDynamicGroup) {
@@ -684,7 +684,7 @@ public abstract class Provisioning extends ZAttrProvisioning {
      *
      * @param list
      * @param adminGroupsOnly return admin groups only
-     * @return List of all the zimbraId's of lists this list belongs to, including any list in other list.
+     * @return List of all the zmailId's of lists this list belongs to, including any list in other list.
      *         The returned List is sorted by "shortest distance" to the list, the sorter the distance is,
      *         the earlier it appears in the returned List.
      * @throws ServiceException
@@ -738,7 +738,7 @@ public abstract class Provisioning extends ZAttrProvisioning {
      * Creates the specified account. The A_uid attribute is automatically
      * created and should not be passed in.
      *
-     * If A_zimbraId is passed in the attrs list, createAccount honors it if it is a valid uuid per RFC 4122.
+     * If A_zmailId is passed in the attrs list, createAccount honors it if it is a valid uuid per RFC 4122.
      * It is caller's responsibility to ensure the uuid passed in is unique in the namespace.
      * createAccount does not check for uniqueness of the uuid passed in as an argument.
      *
@@ -747,9 +747,9 @@ public abstract class Provisioning extends ZAttrProvisioning {
      * HashMap attrs  = new HashMap();
      * attrs.put(Provisioning.A_sn, "Schemers");
      * attrs.put(Provisioning.A_cn, "Roland Schemers");
-     * attrs.put(Provisioning.A_zimbraMailStatus, Provisioning.MAIL_STATUS_ENABLED);
-     * attrs.put(Provisioning.A_zimbraMailHost, "server1");
-     * attrs.put(Provisioning.A_zimbraMailDeliveryAddress, "roland@tiiq.net");
+     * attrs.put(Provisioning.A_zmailMailStatus, Provisioning.MAIL_STATUS_ENABLED);
+     * attrs.put(Provisioning.A_zmailMailHost, "server1");
+     * attrs.put(Provisioning.A_zmailMailDeliveryAddress, "roland@tiiq.net");
      * prov.createAccount("roland@tiiq.net", "dsferulz", attrs);
      * </pre>
      *
@@ -778,18 +778,18 @@ public abstract class Provisioning extends ZAttrProvisioning {
     /**
      * deletes the specified account, removing the account and all email aliases.
      * does not remove any mailbox associated with the account.
-     * @param zimbraId
+     * @param zmailId
      * @throws ServiceException
      */
-    public abstract void deleteAccount(String zimbraId) throws ServiceException;
+    public abstract void deleteAccount(String zmailId) throws ServiceException;
 
     /**
      * renames the specified account
-     * @param zimbraId
+     * @param zmailId
      * @param newName
      * @throws ServiceException
      */
-    public abstract void renameAccount(String zimbraId, String newName) throws ServiceException;
+    public abstract void renameAccount(String zmailId, String newName) throws ServiceException;
 
     /**
      * Looks up an account by the specified key.
@@ -833,7 +833,7 @@ public abstract class Provisioning extends ZAttrProvisioning {
      *
      * @param loginName the login name (the name presented to the autoenticator) identifying the user
      * @param loginPassword password if provided
-     * @param authMech auth mechanism via which the principal was successfully authenticated to zimbra
+     * @param authMech auth mechanism via which the principal was successfully authenticated to zmail
      *                 null if the principal had not been authenticated
      * @param domain
      * @return an account instance if the account is successfully created
@@ -1088,9 +1088,9 @@ public abstract class Provisioning extends ZAttrProvisioning {
      */
     public NamedEntry searchAliasTarget(Alias alias, boolean mustFind)
     throws ServiceException {
-        String targetId = alias.getAttr(Provisioning.A_zimbraAliasTargetId);
+        String targetId = alias.getAttr(Provisioning.A_zmailAliasTargetId);
 
-        String query = "(" + Provisioning.A_zimbraId + "=" + targetId + ")";
+        String query = "(" + Provisioning.A_zmailId + "=" + targetId + ")";
 
         SearchDirectoryOptions options = new SearchDirectoryOptions();
         options.setTypes(SearchDirectoryOptions.ObjectType.accounts,
@@ -1176,12 +1176,12 @@ public abstract class Provisioning extends ZAttrProvisioning {
     }
 
     /**
-     *  Creates a zimbraDomain object in the directory. Also creates parent domains as needed (as simple dcObject entries though,
-     *  not zimbraDomain objects). The extra attrs that can be passed in are:<p />
+     *  Creates a zmailDomain object in the directory. Also creates parent domains as needed (as simple dcObject entries though,
+     *  not zmailDomain objects). The extra attrs that can be passed in are:<p />
      * <dl>
      * <dt>description</dt>
      * <dd>textual description of the domain</dd>
-     * <dt>zimbraNotes</dt>
+     * <dt>zmailNotes</dt>
      * <dd>additional notes about the domain</dd>
      * </dl>
      * <p />
@@ -1225,13 +1225,13 @@ public abstract class Provisioning extends ZAttrProvisioning {
         throw ServiceException.UNSUPPORTED();
     }
 
-    public abstract void deleteDomain(String zimbraId) throws ServiceException;
+    public abstract void deleteDomain(String zmailId) throws ServiceException;
 
     public abstract Cos createCos(String name, Map<String, Object> attrs) throws ServiceException;
 
     public abstract Cos copyCos(String srcCosId, String destCosName) throws ServiceException;
 
-    public abstract void renameCos(String zimbraId, String newName) throws ServiceException;
+    public abstract void renameCos(String zmailId, String newName) throws ServiceException;
 
     public abstract Cos get(Key.CosBy keyType, String key) throws ServiceException;
 
@@ -1240,19 +1240,19 @@ public abstract class Provisioning extends ZAttrProvisioning {
 
     public abstract List<Cos> getAllCos()  throws ServiceException;
 
-    public abstract void deleteCos(String zimbraId) throws ServiceException;
+    public abstract void deleteCos(String zmailId) throws ServiceException;
 
     public abstract Server getLocalServer() throws ServiceException;
 
     public static boolean onLocalServer(Account account) throws ServiceException {
-        String target    = account.getAttr(Provisioning.A_zimbraMailHost);
-        String localhost = getInstance().getLocalServer().getAttr(Provisioning.A_zimbraServiceHostname);
+        String target    = account.getAttr(Provisioning.A_zmailMailHost);
+        String localhost = getInstance().getLocalServer().getAttr(Provisioning.A_zmailServiceHostname);
         return (target != null && target.equalsIgnoreCase(localhost));
     }
 
     public static boolean onLocalServer(Group group) throws ServiceException {
-        String target    = group.getAttr(Provisioning.A_zimbraMailHost);
-        String localhost = getInstance().getLocalServer().getAttr(Provisioning.A_zimbraServiceHostname);
+        String target    = group.getAttr(Provisioning.A_zmailMailHost);
+        String localhost = getInstance().getLocalServer().getAttr(Provisioning.A_zmailServiceHostname);
         return (target != null && target.equalsIgnoreCase(localhost));
     }
 
@@ -1268,18 +1268,18 @@ public abstract class Provisioning extends ZAttrProvisioning {
 
     public abstract List<Server> getAllServers(String service)  throws ServiceException;
 
-    public abstract void deleteServer(String zimbraId) throws ServiceException;
+    public abstract void deleteServer(String zmailId) throws ServiceException;
 
     /*
      * UC service
      */
     public abstract UCService createUCService(String name, Map<String, Object> attrs) throws ServiceException;
-    public abstract void deleteUCService(String zimbraId) throws ServiceException;
+    public abstract void deleteUCService(String zmailId) throws ServiceException;
     public abstract UCService get(UCServiceBy keyName, String key) throws ServiceException;
     public abstract List<UCService> getAllUCServices()  throws ServiceException;
-    public abstract void renameUCService(String zimbraId, String newName) throws ServiceException;
+    public abstract void renameUCService(String zmailId, String newName) throws ServiceException;
 
-    public String updatePresenceSessionId(String zimbraId, String username, String password)
+    public String updatePresenceSessionId(String zmailId, String username, String password)
     throws ServiceException {
         throw ServiceException.UNSUPPORTED();
     }
@@ -1297,7 +1297,7 @@ public abstract class Provisioning extends ZAttrProvisioning {
 
     public abstract DistributionList get(Key.DistributionListBy keyType, String key) throws ServiceException;
 
-    public abstract void deleteDistributionList(String zimbraId) throws ServiceException;
+    public abstract void deleteDistributionList(String zmailId) throws ServiceException;
 
     public abstract void addMembers(DistributionList list, String[] members) throws ServiceException;
 
@@ -1307,7 +1307,7 @@ public abstract class Provisioning extends ZAttrProvisioning {
 
     public abstract void removeAlias(DistributionList dl, String alias) throws ServiceException;
 
-    public abstract void renameDistributionList(String zimbraId, String newName) throws ServiceException;
+    public abstract void renameDistributionList(String zmailId, String newName) throws ServiceException;
 
     public boolean isDistributionList(String addr) {
         return false;
@@ -1371,11 +1371,11 @@ public abstract class Provisioning extends ZAttrProvisioning {
         throw ServiceException.UNSUPPORTED();
     }
 
-    public void deleteGroup(String zimbraId) throws ServiceException {
+    public void deleteGroup(String zmailId) throws ServiceException {
         throw ServiceException.UNSUPPORTED();
     }
 
-    public void renameGroup(String zimbraId, String newName) throws ServiceException {
+    public void renameGroup(String zmailId, String newName) throws ServiceException {
         throw ServiceException.UNSUPPORTED();
     }
 
@@ -1421,7 +1421,7 @@ public abstract class Provisioning extends ZAttrProvisioning {
     }
 
     /**
-     * @return set of all the zimbraId's of groups this account belongs to, including
+     * @return set of all the zmailId's of groups this account belongs to, including
      *         dynamic groups and direct/nested static distribution lists.
      * @throws ServiceException
      */
@@ -1443,14 +1443,14 @@ public abstract class Provisioning extends ZAttrProvisioning {
     }
 
     /**
-     * @param zimbraId zimbraId of the group (static or dynamic) we are checking for
+     * @param zmailId zmailId of the group (static or dynamic) we are checking for
      * @return true if this account is a member of the specified group, and the group
      *         is eligible as a grantee of ACL.
      *         If the group is a static group, also true if this account is a member of a
      *         group that is a member of the specified group.
      * @throws ServiceException
      */
-    public boolean inACLGroup(Account acct, String zimbraId) throws ServiceException {
+    public boolean inACLGroup(Account acct, String zmailId) throws ServiceException {
         throw ServiceException.UNSUPPORTED();
     }
 
@@ -1467,14 +1467,14 @@ public abstract class Provisioning extends ZAttrProvisioning {
     public abstract void deleteZimlet(String name) throws ServiceException;
 
     /**
-     * Creates the specified calendar resource. The A_zimbraId and A_uid attributes are
+     * Creates the specified calendar resource. The A_zmailId and A_uid attributes are
      * automatically created and should not be passed in.
      *
      * For example:
      * <pre>
      * HashMap attrs  = new HashMap();
-     * attrs.put(Provisioning.A_zimbraCalResType, "Location");
-     * attrs.put(Provisioning.A_zimbraCalResAutoRespondEnabled, "TRUE");
+     * attrs.put(Provisioning.A_zmailCalResType, "Location");
+     * attrs.put(Provisioning.A_zmailCalResAutoRespondEnabled, "TRUE");
      * prov.createCalendarResource("room-1001@domain.com", attrs);
      * </pre>
      *
@@ -1489,18 +1489,18 @@ public abstract class Provisioning extends ZAttrProvisioning {
     /**
      * deletes the specified calendar resource, removing the account and all email aliases.
      * does not remove any mailbox associated with the resourceaccount.
-     * @param zimbraId
+     * @param zmailId
      * @throws ServiceException
      */
-    public abstract void deleteCalendarResource(String zimbraId) throws ServiceException;
+    public abstract void deleteCalendarResource(String zmailId) throws ServiceException;
 
     /**
      * renames the specified calendar resource
-     * @param zimbraId
+     * @param zmailId
      * @param newName
      * @throws ServiceException
      */
-    public abstract void renameCalendarResource(String zimbraId, String newName) throws ServiceException;
+    public abstract void renameCalendarResource(String zmailId, String newName) throws ServiceException;
 
     public abstract CalendarResource get(Key.CalendarResourceBy keyType, String key) throws ServiceException;
 
@@ -1527,7 +1527,7 @@ public abstract class Provisioning extends ZAttrProvisioning {
     }
 
     private static Locale getEntryLocale(Entry entry) {
-        return getEntryLocale(entry, A_zimbraLocale);
+        return getEntryLocale(entry, A_zmailLocale);
     }
 
     public Locale getLocale(Entry entry) throws ServiceException {
@@ -1535,8 +1535,8 @@ public abstract class Provisioning extends ZAttrProvisioning {
             // Order of precedence for Account's locale: (including
             // CalendarResource which extends Account)
             //
-            // 1. zimbraPrefLocale set at Account level
-            // 2. zimbraPrefLocale set at COS level
+            // 1. zmailPrefLocale set at Account level
+            // 2. zmailPrefLocale set at COS level
             // 3. locale set at Account level
             // 4. locale set at Account's COS level
             // 5. locale set at Account's domain level
@@ -1544,10 +1544,10 @@ public abstract class Provisioning extends ZAttrProvisioning {
             // 7. locale set at global Config level
             // 8. Locale.getDefault() of current JVM
             Account account = (Account) entry;
-            Locale lc = getEntryLocale(account, A_zimbraPrefLocale);
+            Locale lc = getEntryLocale(account, A_zmailPrefLocale);
             if (lc != null) return lc;
             Cos cos = getCOS(account);
-            lc = getEntryLocale(cos, A_zimbraPrefLocale);
+            lc = getEntryLocale(cos, A_zmailPrefLocale);
             if (lc != null) return lc;
             lc = getEntryLocale(account);
             if (lc != null) return lc;
@@ -1641,7 +1641,7 @@ public abstract class Provisioning extends ZAttrProvisioning {
     }
 
     public enum GalMode {
-        zimbra, // only use internal
+        zmail, // only use internal
         ldap,   // only use exteranl gal
         both;   // use both gals (combine results)
 
@@ -1776,13 +1776,13 @@ public abstract class Provisioning extends ZAttrProvisioning {
     }
 
     /**
-     * Interface for CalDAV.  It needs to always search in Zimbra only,
-     * regardless of zimbraGalMode configured on the domain.
+     * Interface for CalDAV.  It needs to always search in Zmail only,
+     * regardless of zmailGalMode configured on the domain.
      *
      * @param d domain
      * @param query LDAP search query
      * @param type address type to search
-     * @param mode if given, use the provided mode, if null, use mode(zimbraGalMode) configured on the domain
+     * @param mode if given, use the provided mode, if null, use mode(zmailGalMode) configured on the domain
      * @param token return entries created/modified after timestamp
      * @return List of GalContact objects
      * @throws ServiceException
@@ -1805,36 +1805,36 @@ public abstract class Provisioning extends ZAttrProvisioning {
             String value = account.getAttr(name, null);
             if (value != null) attrs.put(name, value);
         }
-        if (attrs.get(A_zimbraPrefIdentityName) == null)
-            attrs.put(A_zimbraPrefIdentityName, ProvisioningConstants.DEFAULT_IDENTITY_NAME);
+        if (attrs.get(A_zmailPrefIdentityName) == null)
+            attrs.put(A_zmailPrefIdentityName, ProvisioningConstants.DEFAULT_IDENTITY_NAME);
 
-        String fromAddress = (String) attrs.get(A_zimbraPrefFromAddress);
-        String fromDisplay = (String) attrs.get(A_zimbraPrefFromDisplay);
+        String fromAddress = (String) attrs.get(A_zmailPrefFromAddress);
+        String fromDisplay = (String) attrs.get(A_zmailPrefFromDisplay);
 
         if (fromAddress == null || fromDisplay == null) {
             InternetAddress ia = AccountUtil.getFriendlyEmailAddress(account);
-            if (fromAddress == null) attrs.put(A_zimbraPrefFromAddress, ia.getAddress());
-            if (fromDisplay == null) attrs.put(A_zimbraPrefFromDisplay, ia.getPersonal());
+            if (fromAddress == null) attrs.put(A_zmailPrefFromAddress, ia.getAddress());
+            if (fromDisplay == null) attrs.put(A_zmailPrefFromDisplay, ia.getPersonal());
         }
-        attrs.put(A_zimbraPrefIdentityId, account.getId());
+        attrs.put(A_zmailPrefIdentityId, account.getId());
 
         /*
-         *   In 4.0 we had a boolean setting zimbraPrefForwardReplyInOriginalFormat, In 4.5,
-         *   that has been obsoleted in favor of zimbraPrefForwardReplyFormat which is an
+         *   In 4.0 we had a boolean setting zmailPrefForwardReplyInOriginalFormat, In 4.5,
+         *   that has been obsoleted in favor of zmailPrefForwardReplyFormat which is an
          *   enum whose values are text/html/same. The default identity needs to correctly
          *   initialize the new value, and it should probably take into account the value of
-         *   zimbraPrefComposeFormat.
+         *   zmailPrefComposeFormat.
          */
-        if (attrs.get(A_zimbraPrefForwardReplyFormat) == null) {
-            boolean forwardReplyInOriginalFormat = account.getBooleanAttr(Provisioning.A_zimbraPrefForwardReplyInOriginalFormat, false);
+        if (attrs.get(A_zmailPrefForwardReplyFormat) == null) {
+            boolean forwardReplyInOriginalFormat = account.getBooleanAttr(Provisioning.A_zmailPrefForwardReplyInOriginalFormat, false);
             if (forwardReplyInOriginalFormat) {
-                attrs.put(A_zimbraPrefForwardReplyFormat, MAIL_FORWARDREPLY_FORMAT_SAME);
+                attrs.put(A_zmailPrefForwardReplyFormat, MAIL_FORWARDREPLY_FORMAT_SAME);
             } else {
-                String composeFormat = account.getAttr(Provisioning.A_zimbraPrefComposeFormat, null);
+                String composeFormat = account.getAttr(Provisioning.A_zmailPrefComposeFormat, null);
                 if (composeFormat == null)
-                    attrs.put(A_zimbraPrefForwardReplyFormat, MAIL_FORMAT_TEXT);
+                    attrs.put(A_zmailPrefForwardReplyFormat, MAIL_FORMAT_TEXT);
                 else
-                    attrs.put(A_zimbraPrefForwardReplyFormat, composeFormat);
+                    attrs.put(A_zmailPrefForwardReplyFormat, composeFormat);
             }
         }
         return new Identity(account, ProvisioningConstants.DEFAULT_IDENTITY_NAME, account.getId(), attrs, this);
@@ -2007,7 +2007,7 @@ public abstract class Provisioning extends ZAttrProvisioning {
 
     public ShareLocator createShareLocator(String id, String ownerAccountId) throws ServiceException {
         Map<String, Object> attrs = new HashMap<String, Object>();
-        attrs.put(Provisioning.A_zimbraShareOwnerAccountId, ownerAccountId);
+        attrs.put(Provisioning.A_zmailShareOwnerAccountId, ownerAccountId);
         return createShareLocator(id, attrs);
     }
 

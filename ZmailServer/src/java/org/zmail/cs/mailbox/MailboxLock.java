@@ -12,13 +12,13 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.mailbox;
+package org.zmail.cs.mailbox;
 
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.locks.ReentrantLock;
 
-import com.zimbra.common.localconfig.LC;
-import com.zimbra.common.util.ZimbraLog;
+import org.zmail.common.localconfig.LC;
+import org.zmail.common.util.ZmailLog;
 
 /**
  * {@link MailboxLock} is a replacement of the implicit monitor lock using {@code synchronized} methods or statements on
@@ -43,7 +43,7 @@ public final class MailboxLock {
             return;
         }
         int queueLength = lock.getQueueLength();
-        if (queueLength >= LC.zimbra_mailbox_lock_max_waiting_threads.intValue()) {
+        if (queueLength >= LC.zmail_mailbox_lock_max_waiting_threads.intValue()) {
             // Too many threads are already waiting for the lock, can't let you queued. We don't want to log stack trace
             // here because once requests back up, each new incoming request falls into here, which creates too much
             // noise in the logs.
@@ -51,7 +51,7 @@ public final class MailboxLock {
         }
         try {
             // Wait for the lock up to the timeout.
-            if (lock.tryLock(LC.zimbra_mailbox_lock_timeout.intValue(), TimeUnit.SECONDS)) {
+            if (lock.tryLock(LC.zmail_mailbox_lock_timeout.intValue(), TimeUnit.SECONDS)) {
                 return;
             }
 
@@ -120,7 +120,7 @@ public final class MailboxLock {
         private void logStackTrace() {
             StringBuilder out = new StringBuilder("Failed to lock mailbox\n");
             lock.printStackTrace(out);
-            ZimbraLog.mailbox.error(out, this);
+            ZmailLog.mailbox.error(out, this);
         }
     }
 

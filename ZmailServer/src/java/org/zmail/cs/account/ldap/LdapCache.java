@@ -12,36 +12,36 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.account.ldap;
+package org.zmail.cs.account.ldap;
 
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-import com.zimbra.common.localconfig.LC;
-import com.zimbra.common.account.Key.DomainBy;
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.common.util.Constants;
-import com.zimbra.cs.account.Account;
-import com.zimbra.cs.account.Domain;
-import com.zimbra.cs.account.Group;
-import com.zimbra.cs.account.NamedEntry;
-import com.zimbra.cs.account.Provisioning;
-import com.zimbra.cs.account.Server;
-import com.zimbra.cs.account.ShareLocator;
-import com.zimbra.cs.account.UCService;
-import com.zimbra.cs.account.XMPPComponent;
-import com.zimbra.cs.account.cache.AccountCache;
-import com.zimbra.cs.account.cache.DomainCache;
-import com.zimbra.cs.account.cache.IAccountCache;
-import com.zimbra.cs.account.cache.IDomainCache;
-import com.zimbra.cs.account.cache.IMimeTypeCache;
-import com.zimbra.cs.account.cache.INamedEntryCache;
-import com.zimbra.cs.account.cache.NamedEntryCache;
-import com.zimbra.cs.account.cache.DomainCache.GetFromDomainCacheOption;
-import com.zimbra.cs.account.ldap.entry.LdapCos;
-import com.zimbra.cs.account.ldap.entry.LdapZimlet;
-import com.zimbra.cs.mime.MimeTypeInfo;
+import org.zmail.common.localconfig.LC;
+import org.zmail.common.account.Key.DomainBy;
+import org.zmail.common.service.ServiceException;
+import org.zmail.common.util.Constants;
+import org.zmail.cs.account.Account;
+import org.zmail.cs.account.Domain;
+import org.zmail.cs.account.Group;
+import org.zmail.cs.account.NamedEntry;
+import org.zmail.cs.account.Provisioning;
+import org.zmail.cs.account.Server;
+import org.zmail.cs.account.ShareLocator;
+import org.zmail.cs.account.UCService;
+import org.zmail.cs.account.XMPPComponent;
+import org.zmail.cs.account.cache.AccountCache;
+import org.zmail.cs.account.cache.DomainCache;
+import org.zmail.cs.account.cache.IAccountCache;
+import org.zmail.cs.account.cache.IDomainCache;
+import org.zmail.cs.account.cache.IMimeTypeCache;
+import org.zmail.cs.account.cache.INamedEntryCache;
+import org.zmail.cs.account.cache.NamedEntryCache;
+import org.zmail.cs.account.cache.DomainCache.GetFromDomainCacheOption;
+import org.zmail.cs.account.ldap.entry.LdapCos;
+import org.zmail.cs.account.ldap.entry.LdapZimlet;
+import org.zmail.cs.mime.MimeTypeInfo;
 
 /**
  * @author pshao

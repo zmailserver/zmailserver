@@ -12,23 +12,23 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.datasource.imap;
+package org.zmail.cs.datasource.imap;
 
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.common.util.ZimbraLog;
-import com.zimbra.cs.account.DataSource;
-import com.zimbra.cs.datasource.DataSourceFolderMapping;
-import com.zimbra.cs.datasource.DataSourceManager;
-import com.zimbra.cs.mailbox.MailItem;
-import com.zimbra.cs.mailbox.Mailbox;
-import com.zimbra.cs.db.DbDataSource.DataSourceItem;
-import com.zimbra.cs.db.DbDataSource;
-import com.zimbra.cs.db.DbImapFolder;
-import com.zimbra.cs.db.DbImapMessage;
+import org.zmail.common.service.ServiceException;
+import org.zmail.common.util.ZmailLog;
+import org.zmail.cs.account.DataSource;
+import org.zmail.cs.datasource.DataSourceFolderMapping;
+import org.zmail.cs.datasource.DataSourceManager;
+import org.zmail.cs.mailbox.MailItem;
+import org.zmail.cs.mailbox.Mailbox;
+import org.zmail.cs.db.DbDataSource.DataSourceItem;
+import org.zmail.cs.db.DbDataSource;
+import org.zmail.cs.db.DbImapFolder;
+import org.zmail.cs.db.DbImapMessage;
 
 public class ImapFolder extends DataSourceFolderMapping {
     private String localPath;
@@ -116,7 +116,7 @@ public class ImapFolder extends DataSourceFolderMapping {
         if (mappings.size() == 0) {
             Mailbox mbox = DataSourceManager.getInstance().getMailbox(ds);
 
-            ZimbraLog.datasource.info("Upgrading IMAP data for %s", ds.getName());
+            ZmailLog.datasource.info("Upgrading IMAP data for %s", ds.getName());
             DbDataSource.deleteAllMappings(ds);
             try {
                 for (ImapFolder folderTracker : DbImapFolder.getImapFolders(

@@ -13,7 +13,7 @@
  * ***** END LICENSE BLOCK *****
  */
 
-package com.zimbra.cs.store.file;
+package org.zmail.cs.store.file;
 
 import java.io.PrintWriter;
 import java.util.ArrayList;
@@ -26,14 +26,14 @@ import org.apache.commons.cli.Option;
 import org.apache.commons.cli.Options;
 import org.apache.commons.cli.ParseException;
 
-import com.zimbra.common.soap.Element;
-import com.zimbra.common.util.CliUtil;
-import com.zimbra.cs.account.soap.SoapProvisioning;
-import com.zimbra.soap.JaxbUtil;
-import com.zimbra.soap.admin.message.DedupeBlobsRequest;
-import com.zimbra.soap.admin.message.DedupeBlobsResponse;
-import com.zimbra.soap.admin.type.IntIdAttr;
-import com.zimbra.soap.admin.type.VolumeIdAndProgress;
+import org.zmail.common.soap.Element;
+import org.zmail.common.util.CliUtil;
+import org.zmail.cs.account.soap.SoapProvisioning;
+import org.zmail.soap.JaxbUtil;
+import org.zmail.soap.admin.message.DedupeBlobsRequest;
+import org.zmail.soap.admin.message.DedupeBlobsResponse;
+import org.zmail.soap.admin.type.IntIdAttr;
+import org.zmail.soap.admin.type.VolumeIdAndProgress;
 
 public class BlobDeduperUtil {
 
@@ -119,7 +119,7 @@ public class BlobDeduperUtil {
     private void run() throws Exception {
         CliUtil.toolSetup();
         SoapProvisioning prov = SoapProvisioning.getAdminInstance();
-        prov.soapZimbraAdminAuthenticate();
+        prov.soapZmailAdminAuthenticate();
         DedupeBlobsRequest request = new DedupeBlobsRequest(action);
         for (short volumeId : volumeIds) {
             request.addVolume(new IntIdAttr(volumeId));

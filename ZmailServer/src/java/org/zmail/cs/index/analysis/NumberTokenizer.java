@@ -12,7 +12,7 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.index.analysis;
+package org.zmail.cs.index.analysis;
 
 import java.io.IOException;
 import java.io.Reader;

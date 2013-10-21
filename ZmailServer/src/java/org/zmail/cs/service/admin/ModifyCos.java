@@ -16,22 +16,22 @@
 /*
  * Created on Jun 17, 2004
  */
-package com.zimbra.cs.service.admin;
+package org.zmail.cs.service.admin;
 
 import java.util.List;
 import java.util.Map;
 
-import com.zimbra.common.account.Key;
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.common.soap.AdminConstants;
-import com.zimbra.common.soap.Element;
-import com.zimbra.common.util.ZimbraLog;
-import com.zimbra.cs.account.AccountServiceException;
-import com.zimbra.cs.account.Cos;
-import com.zimbra.cs.account.Provisioning;
-import com.zimbra.cs.account.accesscontrol.AdminRight;
-import com.zimbra.cs.account.accesscontrol.Rights.Admin;
-import com.zimbra.soap.ZimbraSoapContext;
+import org.zmail.common.account.Key;
+import org.zmail.common.service.ServiceException;
+import org.zmail.common.soap.AdminConstants;
+import org.zmail.common.soap.Element;
+import org.zmail.common.util.ZmailLog;
+import org.zmail.cs.account.AccountServiceException;
+import org.zmail.cs.account.Cos;
+import org.zmail.cs.account.Provisioning;
+import org.zmail.cs.account.accesscontrol.AdminRight;
+import org.zmail.cs.account.accesscontrol.Rights.Admin;
+import org.zmail.soap.ZmailSoapContext;
 
 /**
  * @author schemers
@@ -40,7 +40,7 @@ public class ModifyCos extends AdminDocumentHandler {
 
 	public Element handle(Element request, Map<String, Object> context) throws ServiceException {
 
-        ZimbraSoapContext zsc = getZimbraSoapContext(context);
+        ZmailSoapContext zsc = getZmailSoapContext(context);
 	    Provisioning prov = Provisioning.getInstance();
 
 	    String id = request.getElement(AdminConstants.E_ID).getText();
@@ -55,7 +55,7 @@ public class ModifyCos extends AdminDocumentHandler {
         // pass in true to checkImmutable
         prov.modifyAttrs(cos, attrs, true);
 
-        ZimbraLog.security.info(ZimbraLog.encodeAttrs(
+        ZmailLog.security.info(ZmailLog.encodeAttrs(
                 new String[] {"cmd", "ModifyCos","name", cos.getName()}, attrs));
         
 	    Element response = zsc.createElement(AdminConstants.MODIFY_COS_RESPONSE);

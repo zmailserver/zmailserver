@@ -12,7 +12,7 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.qa.unittest;
+package org.zmail.qa.unittest;
 
 import java.io.InputStream;
 import java.util.HashMap;
@@ -27,24 +27,24 @@ import junit.framework.TestCase;
 
 import org.junit.Assert;
 
-import com.zimbra.client.ZContact;
-import com.zimbra.client.ZMailbox;
-import com.zimbra.client.ZMailbox.ContactSortBy;
-import com.zimbra.client.ZMailbox.ZAttachmentInfo;
-import com.zimbra.client.ZMailbox.ZImportContactsResult;
-import com.zimbra.client.ZSearchParams;
-import com.zimbra.common.account.Key;
-import com.zimbra.common.soap.SoapFaultException;
-import com.zimbra.common.util.ByteUtil;
-import com.zimbra.common.util.Constants;
-import com.zimbra.cs.account.Account;
-import com.zimbra.cs.account.Provisioning;
-import com.zimbra.cs.mailbox.ACL;
-import com.zimbra.cs.mailbox.Contact;
-import com.zimbra.cs.mailbox.Contact.Attachment;
-import com.zimbra.cs.mailbox.MailServiceException;
-import com.zimbra.cs.mailbox.Mailbox;
-import com.zimbra.cs.mailbox.MailboxManager;
+import org.zmail.client.ZContact;
+import org.zmail.client.ZMailbox;
+import org.zmail.client.ZMailbox.ContactSortBy;
+import org.zmail.client.ZMailbox.ZAttachmentInfo;
+import org.zmail.client.ZMailbox.ZImportContactsResult;
+import org.zmail.client.ZSearchParams;
+import org.zmail.common.account.Key;
+import org.zmail.common.soap.SoapFaultException;
+import org.zmail.common.util.ByteUtil;
+import org.zmail.common.util.Constants;
+import org.zmail.cs.account.Account;
+import org.zmail.cs.account.Provisioning;
+import org.zmail.cs.mailbox.ACL;
+import org.zmail.cs.mailbox.Contact;
+import org.zmail.cs.mailbox.Contact.Attachment;
+import org.zmail.cs.mailbox.MailServiceException;
+import org.zmail.cs.mailbox.Mailbox;
+import org.zmail.cs.mailbox.MailboxManager;
 
 
 public class TestContacts
@@ -57,18 +57,18 @@ extends TestCase {
     @Override public void setUp()
     throws Exception {
         cleanUp();
-        mOriginalMaxContacts = TestUtil.getAccountAttr(USER_NAME, Provisioning.A_zimbraContactMaxNumEntries);
+        mOriginalMaxContacts = TestUtil.getAccountAttr(USER_NAME, Provisioning.A_zmailContactMaxNumEntries);
     }
 
     /**
-     * Confirms that {@link Provisioning#A_zimbraContactMaxNumEntries} is enforced (bug 29627).
+     * Confirms that {@link Provisioning#A_zmailContactMaxNumEntries} is enforced (bug 29627).
      */
     public void testMaxContacts()
     throws Exception {
         ZMailbox mbox = TestUtil.getZMailbox(USER_NAME);
         List<ZContact> contacts = mbox.getAllContacts(null, ContactSortBy.nameAsc, false, null);
         int max = contacts.size() + 2;
-        TestUtil.setAccountAttr(USER_NAME, Provisioning.A_zimbraContactMaxNumEntries, Integer.toString(max));
+        TestUtil.setAccountAttr(USER_NAME, Provisioning.A_zmailContactMaxNumEntries, Integer.toString(max));
         Map<String, String> attrs = new HashMap<String, String>();
         int i;
         for (i = 1; i <= 10; i++) {
@@ -295,7 +295,7 @@ extends TestCase {
 
     @Override public void tearDown()
     throws Exception {
-        TestUtil.setAccountAttr(USER_NAME, Provisioning.A_zimbraContactMaxNumEntries, mOriginalMaxContacts);
+        TestUtil.setAccountAttr(USER_NAME, Provisioning.A_zmailContactMaxNumEntries, mOriginalMaxContacts);
         cleanUp();
     }
 

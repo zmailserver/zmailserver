@@ -11,7 +11,7 @@ supported flags:
 
 supported formats:
 
-    zimbra-csv
+    zmail-csv
     yahoo-csv
     thunderbird-csv
     outlook-2003-csv
@@ -30,13 +30,13 @@ type attribute:
 
     multivalue :
 
-        merge columns into a single Zimbra field.
+        merge columns into a single Zmail field.
 
             <column name="Home Address,Home Address 2" field="homeStreet" type="multivalue"/>
 
     tag :
 
-        translate the value of into Zimbra tag.
+        translate the value of into Zmail tag.
 
             <column name="Category" type="tag"/>
 
@@ -126,7 +126,7 @@ type attribute:
          However :      03/04/2004 could mean 4th March 2004 or 3rd April 2004
          If no order is specified, "03/04/2004" will be imported as "'03/04/2004'"
          If a date order of "dmy" applies to the import format, it will be
-         imported as 3rd April 2004 (Internal Zimbra format 2004-04-03)
+         imported as 3rd April 2004 (Internal Zmail format 2004-04-03)
 
          Note that for some formats, the order heavily depends on the
          environment where the export was done and better data fidelity
@@ -137,7 +137,7 @@ type attribute:
         <dateformat format="yahoo-csv" order="mdy"/>
     </dateformats>
 
-    <format name="zimbra-csv" type="csv" flag="allfields,default">
+    <format name="zmail-csv" type="csv" flag="allfields,default">
     </format>
 
     <format name="yahoo-csv" type="csv">

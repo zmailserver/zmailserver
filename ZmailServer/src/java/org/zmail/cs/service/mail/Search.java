@@ -13,7 +13,7 @@
  * ***** END LICENSE BLOCK *****
  */
 
-package com.zimbra.cs.service.mail;
+package org.zmail.cs.service.mail;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -25,40 +25,40 @@ import java.util.Set;
 import com.google.common.base.Strings;
 import com.google.common.collect.Iterables;
 import com.google.common.io.Closeables;
-import com.zimbra.common.auth.ZAuthToken;
-import com.zimbra.common.localconfig.LC;
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.common.soap.Element;
-import com.zimbra.common.soap.MailConstants;
-import com.zimbra.common.util.ZimbraLog;
-import com.zimbra.cs.account.Account;
-import com.zimbra.cs.account.Provisioning;
-import com.zimbra.common.account.Key;
-import com.zimbra.common.account.Key.AccountBy;
-import com.zimbra.cs.account.Server;
-import com.zimbra.cs.index.QueryInfo;
-import com.zimbra.cs.index.ResultsPager;
-import com.zimbra.cs.index.SearchParams;
-import com.zimbra.cs.index.SearchParams.ExpandResults;
-import com.zimbra.cs.index.SortBy;
-import com.zimbra.cs.index.ZimbraHit;
-import com.zimbra.cs.index.ZimbraQueryResults;
-import com.zimbra.cs.mailbox.MailItem;
-import com.zimbra.cs.mailbox.MailServiceException;
-import com.zimbra.cs.mailbox.Mailbox;
-import com.zimbra.cs.mailbox.MailboxManager;
-import com.zimbra.cs.mailbox.OperationContext;
-import com.zimbra.cs.mailbox.calendar.cache.CacheToXML;
-import com.zimbra.cs.mailbox.calendar.cache.CalSummaryCache;
-import com.zimbra.cs.mailbox.calendar.cache.CalSummaryCache.CalendarDataResult;
-import com.zimbra.cs.mailbox.calendar.cache.CalendarCacheManager;
-import com.zimbra.cs.mailbox.calendar.cache.CalendarData;
-import com.zimbra.cs.mailbox.calendar.cache.CalendarItemData;
-import com.zimbra.cs.service.util.ItemId;
-import com.zimbra.cs.service.util.ItemIdFormatter;
-import com.zimbra.cs.util.AccountUtil;
-import com.zimbra.client.ZMailbox;
-import com.zimbra.soap.ZimbraSoapContext;
+import org.zmail.common.auth.ZAuthToken;
+import org.zmail.common.localconfig.LC;
+import org.zmail.common.service.ServiceException;
+import org.zmail.common.soap.Element;
+import org.zmail.common.soap.MailConstants;
+import org.zmail.common.util.ZmailLog;
+import org.zmail.cs.account.Account;
+import org.zmail.cs.account.Provisioning;
+import org.zmail.common.account.Key;
+import org.zmail.common.account.Key.AccountBy;
+import org.zmail.cs.account.Server;
+import org.zmail.cs.index.QueryInfo;
+import org.zmail.cs.index.ResultsPager;
+import org.zmail.cs.index.SearchParams;
+import org.zmail.cs.index.SearchParams.ExpandResults;
+import org.zmail.cs.index.SortBy;
+import org.zmail.cs.index.ZmailHit;
+import org.zmail.cs.index.ZmailQueryResults;
+import org.zmail.cs.mailbox.MailItem;
+import org.zmail.cs.mailbox.MailServiceException;
+import org.zmail.cs.mailbox.Mailbox;
+import org.zmail.cs.mailbox.MailboxManager;
+import org.zmail.cs.mailbox.OperationContext;
+import org.zmail.cs.mailbox.calendar.cache.CacheToXML;
+import org.zmail.cs.mailbox.calendar.cache.CalSummaryCache;
+import org.zmail.cs.mailbox.calendar.cache.CalSummaryCache.CalendarDataResult;
+import org.zmail.cs.mailbox.calendar.cache.CalendarCacheManager;
+import org.zmail.cs.mailbox.calendar.cache.CalendarData;
+import org.zmail.cs.mailbox.calendar.cache.CalendarItemData;
+import org.zmail.cs.service.util.ItemId;
+import org.zmail.cs.service.util.ItemIdFormatter;
+import org.zmail.cs.util.AccountUtil;
+import org.zmail.client.ZMailbox;
+import org.zmail.soap.ZmailSoapContext;
 
 /**
  * @since May 26, 2004
@@ -67,7 +67,7 @@ public class Search extends MailDocumentHandler  {
 
     @Override
     public Element handle(Element request, Map<String, Object> context) throws ServiceException {
-        ZimbraSoapContext zsc = getZimbraSoapContext(context);
+        ZmailSoapContext zsc = getZmailSoapContext(context);
         Mailbox mbox = getRequestedMailbox(zsc);
         Account account = getRequestedAccount(zsc);
         OperationContext octxt = getOperationContext(zsc, context);
@@ -92,7 +92,7 @@ public class Search extends MailDocumentHandler  {
             }
         }
 
-        ZimbraQueryResults results = mbox.index.search(zsc.getResponseProtocol(), octxt, params);
+        ZmailQueryResults results = mbox.index.search(zsc.getResponseProtocol(), octxt, params);
         try {
             // create the XML response Element
             Element response = zsc.createElement(MailConstants.SEARCH_RESPONSE);
@@ -106,7 +106,7 @@ public class Search extends MailDocumentHandler  {
         }
     }
 
-    protected static void putInfo(Element response, ZimbraQueryResults results) {
+    protected static void putInfo(Element response, ZmailQueryResults results) {
         List<QueryInfo> qinfo = results.getResultInfo();
         if (qinfo.size() > 0) {
             Element qinfoElt = response.addElement(MailConstants.E_INFO);
@@ -116,7 +116,7 @@ public class Search extends MailDocumentHandler  {
         }
     }
 
-    private void putHits(ZimbraSoapContext zsc, OperationContext octxt, Element el, ZimbraQueryResults results,
+    private void putHits(ZmailSoapContext zsc, OperationContext octxt, Element el, ZmailQueryResults results,
             SearchParams params) throws ServiceException {
 
         if (params.getInlineRule() == ExpandResults.HITS) {
@@ -141,7 +141,7 @@ public class Search extends MailDocumentHandler  {
         resp.setSortOrder(pager.getSortOrder());
 
         while (pager.hasNext() && resp.size() < params.getLimit()) {
-            ZimbraHit hit = pager.getNextHit();
+            ZmailHit hit = pager.getNextHit();
             resp.add(hit);
         }
 
@@ -158,7 +158,7 @@ public class Search extends MailDocumentHandler  {
      * @param zsc not used, may be used in subclass
      * @throws ServiceException subclass may throw
      */
-    protected List<String> getFolderIdListIfSimpleAppointmentsQuery(SearchParams params, ZimbraSoapContext zsc)
+    protected List<String> getFolderIdListIfSimpleAppointmentsQuery(SearchParams params, ZmailSoapContext zsc)
             throws ServiceException {
         // types = "appointment"
         Set<MailItem.Type> types = params.getTypes();
@@ -226,7 +226,7 @@ public class Search extends MailDocumentHandler  {
     }
 
     private static void runSimpleAppointmentQuery(Element parent, SearchParams params, OperationContext octxt,
-            ZimbraSoapContext zsc, Account authAcct, Mailbox mbox, List<String> folderIdStrs) throws ServiceException {
+            ZmailSoapContext zsc, Account authAcct, Mailbox mbox, List<String> folderIdStrs) throws ServiceException {
         Set<MailItem.Type> types = params.getTypes();
         MailItem.Type type = types.size() == 1 ? Iterables.getOnlyElement(types) : MailItem.Type.APPOINTMENT;
 
@@ -279,11 +279,11 @@ public class Search extends MailDocumentHandler  {
                             String ecode = e.getCode();
                             if (ecode.equals(ServiceException.PERM_DENIED)) {
                                 // share permission was revoked
-                                ZimbraLog.calendar.warn(
+                                ZmailLog.calendar.warn(
                                         "Ignoring permission error during calendar search of folder " + ifmt.formatItemId(folderId), e);
                             } else if (ecode.equals(MailServiceException.NO_SUCH_FOLDER)) {
                                 // shared calendar folder was deleted by the owner
-                                ZimbraLog.calendar.warn(
+                                ZmailLog.calendar.warn(
                                         "Ignoring deleted calendar folder " + ifmt.formatItemId(folderId));
                             } else {
                                 throw e;
@@ -311,7 +311,7 @@ public class Search extends MailDocumentHandler  {
                         continue;
                     Account targetAcct = prov.get(AccountBy.id, acctId);
                     if (targetAcct == null) {
-                        ZimbraLog.calendar.warn("Skipping unknown account " + acctId + " during calendar search");
+                        ZmailLog.calendar.warn("Skipping unknown account " + acctId + " during calendar search");
                         continue;
                     }
                     Mailbox targetMbox = mboxMgr.getMailboxByAccount(targetAcct);
@@ -323,7 +323,7 @@ public class Search extends MailDocumentHandler  {
         }
     }
 
-    private static void addCalendarDataToResponse(Element parent, ZimbraSoapContext zsc, ItemIdFormatter ifmt,
+    private static void addCalendarDataToResponse(Element parent, ZmailSoapContext zsc, ItemIdFormatter ifmt,
             CalendarData calData, boolean allowPrivateAccess) throws ServiceException {
         for (Iterator<CalendarItemData> itemIter = calData.calendarItemIterator(); itemIter.hasNext(); ) {
             CalendarItemData calItemData = itemIter.next();
@@ -337,7 +337,7 @@ public class Search extends MailDocumentHandler  {
     }
 
     private static void searchLocalAccountCalendars(Element parent, SearchParams params, OperationContext octxt,
-            ZimbraSoapContext zsc, Account authAcct, Mailbox targetMbox, List<Integer> folderIds, MailItem.Type type)
+            ZmailSoapContext zsc, Account authAcct, Mailbox targetMbox, List<Integer> folderIds, MailItem.Type type)
             throws ServiceException {
         ItemIdFormatter ifmt = new ItemIdFormatter(authAcct.getId(), targetMbox.getAccountId(), false);
         long rangeStart = params.getCalItemExpandStart();
@@ -353,11 +353,11 @@ public class Search extends MailDocumentHandler  {
                 String ecode = e.getCode();
                 if (ecode.equals(ServiceException.PERM_DENIED)) {
                     // share permission was revoked
-                    ZimbraLog.calendar.warn(
+                    ZmailLog.calendar.warn(
                             "Ignoring permission error during calendar search of folder " + ifmt.formatItemId(folderId), e);
                 } else if (ecode.equals(MailServiceException.NO_SUCH_FOLDER)) {
                     // shared calendar folder was deleted by the owner
-                    ZimbraLog.calendar.warn(
+                    ZmailLog.calendar.warn(
                             "Ignoring deleted calendar folder " + ifmt.formatItemId(folderId));
                 } else {
                     throw e;
@@ -367,7 +367,7 @@ public class Search extends MailDocumentHandler  {
     }
 
     private static void searchRemoteAccountCalendars(
-            Element parent, SearchParams params, ZimbraSoapContext zsc,
+            Element parent, SearchParams params, ZmailSoapContext zsc,
             Account authAcct, Map<String, List<Integer>> accountFolders)
     throws ServiceException {
         String nominalTargetAcctId = null;  // mail service soap requests want to see a target account
@@ -424,12 +424,12 @@ public class Search extends MailDocumentHandler  {
             List<Integer> folderIds = entry.getValue();
             Account acct = prov.get(AccountBy.id, acctId);
             if (acct == null) {
-                ZimbraLog.calendar.warn("Skipping unknown account " + acctId + " during calendar search");
+                ZmailLog.calendar.warn("Skipping unknown account " + acctId + " during calendar search");
                 continue;
             }
             Server server = prov.getServer(acct);
             if (server == null) {
-                ZimbraLog.calendar.warn("Skipping account " + acctId + " during calendar search because its home server is unknown");
+                ZmailLog.calendar.warn("Skipping account " + acctId + " during calendar search because its home server is unknown");
                 continue;
             }
             Map<String, List<Integer>> map = groupedByServer.get(server);

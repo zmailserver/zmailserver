@@ -8,14 +8,14 @@ The file upload servlet is an http client that supports RFC 1867, form-based fil
 The RFC is available here: http://www.ietf.org/rfc/rfc1867.txt
 
 The default url to the file upload servlet is http://server:port/service/upload.
-By default this url maps to com.zimbra.cs.service.FileUploadServlet (see web.xml
+By default this url maps to org.zmail.cs.service.FileUploadServlet (see web.xml
 in the tomcat WEB-INF directory for your URL/servlet mapping).
 
 For authentication, you must specify your auth token in a cookie.  Normally, the servlet reads
 the token from cookie "ZM_AUTH_TOKEN"; but if "?admin=1" is specified as a URI query parameter
 the servlet will look at cookie "ZM_ADMIN_AUTH_TOKEN".
 
-If you were to submit an html form to upload to the zimbra server, it would look like this:
+If you were to submit an html form to upload to the zmail server, it would look like this:
 
 	<html>
 	<body>

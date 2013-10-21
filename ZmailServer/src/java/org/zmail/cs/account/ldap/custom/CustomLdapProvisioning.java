@@ -12,9 +12,9 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.account.ldap.custom;
+package org.zmail.cs.account.ldap.custom;
 
-import com.zimbra.cs.account.ldap.LdapProvisioning;
+import org.zmail.cs.account.ldap.LdapProvisioning;
 
 public class CustomLdapProvisioning extends LdapProvisioning {
     

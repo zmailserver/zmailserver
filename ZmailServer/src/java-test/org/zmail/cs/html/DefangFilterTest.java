@@ -14,7 +14,7 @@
  * 
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.html;
+package org.zmail.cs.html;
 
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
@@ -26,11 +26,11 @@ import java.util.Set;
 import org.junit.Assert;
 import org.junit.Test;
 
-import com.zimbra.common.mime.MimeConstants;
-import com.zimbra.common.util.ByteUtil;
-import com.zimbra.cs.mime.MPartInfo;
-import com.zimbra.cs.mime.Mime;
-import com.zimbra.cs.mime.ParsedMessage;
+import org.zmail.common.mime.MimeConstants;
+import org.zmail.common.util.ByteUtil;
+import org.zmail.cs.mime.MPartInfo;
+import org.zmail.cs.mime.Mime;
+import org.zmail.cs.mime.ParsedMessage;
 
 /**
  * Tired of regressions in the defang filter. Unit test based on fixes I found in bugzilla over the years for different
@@ -106,7 +106,7 @@ public class DefangFilterTest {
         String result = DefangFactory.getDefanger(MimeConstants.CT_TEXT_HTML).defang(htmlStream, true);
 
         // Make sure this has been replaced
-        Assert.assertTrue(!result.contains("src=\"_media/zimbra_logo.gif\""));
+        Assert.assertTrue(!result.contains("src=\"_media/zmail_logo.gif\""));
     }
 
 

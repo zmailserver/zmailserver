@@ -28,8 +28,8 @@ use XmlElement;
 use XmlDoc;
 use Soap;
 
-my $ACCTNS = "urn:zimbraAccount";
-my $MAILNS = "urn:zimbraMail";
+my $ACCTNS = "urn:zmailAccount";
+my $MAILNS = "urn:zmailMail";
 
 my $url = "http://localhost:7070/service/soap/";
 
@@ -60,10 +60,10 @@ my $authToken = $authResponse->find_child('authToken')->content;
 
 print "authToken($authToken)\n";
 
-my $context = $SOAP->zimbraContext($authToken);
+my $context = $SOAP->zmailContext($authToken);
 
 #
-#<SearchRequest xmlns="urn:zimbraMail">
+#<SearchRequest xmlns="urn:zmailMail">
 # <query>tag:\unseen</query>
 #</SearchRequest>
 

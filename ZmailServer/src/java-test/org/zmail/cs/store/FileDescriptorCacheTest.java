@@ -13,7 +13,7 @@
  * ***** END LICENSE BLOCK *****
  */
 
-package com.zimbra.cs.store;
+package org.zmail.cs.store;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
@@ -32,9 +32,9 @@ import org.junit.Test;
 
 import com.google.common.collect.Lists;
 import com.google.common.io.Files;
-import com.zimbra.common.util.ByteUtil;
-import com.zimbra.common.util.FileCache;
-import com.zimbra.common.util.FileUtil;
+import org.zmail.common.util.ByteUtil;
+import org.zmail.common.util.FileCache;
+import org.zmail.common.util.FileUtil;
 
 public class FileDescriptorCacheTest {
 

@@ -13,10 +13,10 @@
  * ***** END LICENSE BLOCK *****
  */
 
-package com.zimbra.cs.mailbox.calendar.cache;
+package org.zmail.cs.mailbox.calendar.cache;
 
-import com.zimbra.common.util.memcached.MemcachedKey;
-import com.zimbra.cs.memcached.MemcachedKeyPrefix;
+import org.zmail.common.util.memcached.MemcachedKey;
+import org.zmail.cs.memcached.MemcachedKeyPrefix;
 
 // cache key for a calendar folder in an account
 public class CalendarKey implements MemcachedKey {

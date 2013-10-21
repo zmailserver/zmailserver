@@ -12,21 +12,21 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.mailbox;
+package org.zmail.cs.mailbox;
 
 import java.util.Random;
 import java.util.concurrent.Callable;
 
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.common.util.ScheduledTaskCallback;
-import com.zimbra.common.util.TaskScheduler;
-import com.zimbra.common.util.ZimbraLog;
-import com.zimbra.cs.account.Provisioning;
-import com.zimbra.cs.db.DbPool;
-import com.zimbra.cs.db.DbScheduledTask;
-import com.zimbra.cs.db.DbPool.DbConnection;
-import com.zimbra.cs.mailbox.acl.ExpireGrantsTaskCallback;
-import com.zimbra.cs.mailbox.alerts.CalItemReminderTaskCallback;
+import org.zmail.common.service.ServiceException;
+import org.zmail.common.util.ScheduledTaskCallback;
+import org.zmail.common.util.TaskScheduler;
+import org.zmail.common.util.ZmailLog;
+import org.zmail.cs.account.Provisioning;
+import org.zmail.cs.db.DbPool;
+import org.zmail.cs.db.DbScheduledTask;
+import org.zmail.cs.db.DbPool.DbConnection;
+import org.zmail.cs.mailbox.acl.ExpireGrantsTaskCallback;
+import org.zmail.cs.mailbox.alerts.CalItemReminderTaskCallback;
 
 /**
  * Manages persistent scheduled tasks.  Properties of recurring tasks
@@ -41,13 +41,13 @@ public class ScheduledTaskManager {
     public static void startup()
     throws ServiceException {
         if (sScheduler != null) {
-            ZimbraLog.scheduler.info("Scheduled tasks have already been initialized", new Exception());
+            ZmailLog.scheduler.info("Scheduled tasks have already been initialized", new Exception());
             return;
         }
 
         // Start scheduled task threads
         Provisioning prov = Provisioning.getInstance();
-        int numThreads = prov.getLocalServer().getIntAttr(Provisioning.A_zimbraScheduledTaskNumThreads, 20);
+        int numThreads = prov.getLocalServer().getIntAttr(Provisioning.A_zmailScheduledTaskNumThreads, 20);
         int minThreads = numThreads / 2;
         sScheduler = new TaskScheduler<ScheduledTaskResult>(null, minThreads, numThreads);
         sScheduler.addCallback(new TaskCleanup());
@@ -58,7 +58,7 @@ public class ScheduledTaskManager {
             try {
                 schedule(null, task);
             } catch (ServiceException e) {
-                ZimbraLog.scheduler.warn("Unable to schedule %s.", task, e);
+                ZmailLog.scheduler.warn("Unable to schedule %s.", task, e);
             }
         }
 
@@ -184,7 +184,7 @@ public class ScheduledTaskManager {
                 DbScheduledTask.deleteTask(conn, task.getClass().getName(), task.getName());
                 conn.commit();
             } catch (ServiceException e) {
-                ZimbraLog.scheduler.warn("Unable to clean up %s", task, e);
+                ZmailLog.scheduler.warn("Unable to clean up %s", task, e);
             } finally {
                 DbPool.quietClose(conn);
             }

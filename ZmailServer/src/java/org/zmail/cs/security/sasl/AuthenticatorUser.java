@@ -13,9 +13,9 @@
  * ***** END LICENSE BLOCK *****
  */
 
-package com.zimbra.cs.security.sasl;
+package org.zmail.cs.security.sasl;
 
-import com.zimbra.common.util.Log;
+import org.zmail.common.util.Log;
 
 import java.io.IOException;
 

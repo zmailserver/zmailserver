@@ -35,7 +35,7 @@ sub setCheckedCalendarFlag($) {
     my ($mailboxId) = @_;
     my $sql = <<EOF_SET_CHECKED_CALENDAR_FLAG;
     
-UPDATE mailbox$mailboxId.mail_item mi, zimbra.mailbox mbx
+UPDATE mailbox$mailboxId.mail_item mi, zmail.mailbox mbx
 SET flags = flags | 2097152,
     mod_metadata = change_checkpoint + 100,
     change_checkpoint = change_checkpoint + 200

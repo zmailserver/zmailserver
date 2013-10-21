@@ -12,7 +12,7 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.ldap;
+package org.zmail.cs.ldap;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -20,10 +20,10 @@ import java.util.Map;
 // TODO: get rid of this
 import javax.naming.ldap.Rdn;
 
-import com.zimbra.common.util.ByteUtil;
-import com.zimbra.common.util.UUIDUtil;
-import com.zimbra.cs.account.Provisioning;
-import com.zimbra.cs.ldap.LdapTODO.TODO;
+import org.zmail.common.util.ByteUtil;
+import org.zmail.common.util.UUIDUtil;
+import org.zmail.cs.account.Provisioning;
+import org.zmail.cs.ldap.LdapTODO.TODO;
 
 
 public class LdapUtil {
@@ -78,7 +78,7 @@ public class LdapUtil {
      * convert a binaryTransferAttrName to the real attrName
      *
      * e.g. userCertificate;binary => userCertificate
-     *      zimbraId => zimbraId
+     *      zmailId => zmailId
      */
     public static String binaryTransferAttrNameToAttrName(String transferAttrName) {
         if (transferAttrName.endsWith(";binary")) {
@@ -92,8 +92,8 @@ public class LdapUtil {
 
     /**
      * escape *()\ in specified string to make sure user-supplied string doesn't open a security hole.
-     * i.e., if the format string is "(sn=*%s*)", and the user types in "a)(zimbraIsAdminAccount=TRUE)(cn=a",
-     * we don't want to search for "(sn=*a)(zimbraIsAdminAccount=TRUE)(cn=a*)".
+     * i.e., if the format string is "(sn=*%s*)", and the user types in "a)(zmailIsAdminAccount=TRUE)(cn=a",
+     * we don't want to search for "(sn=*a)(zmailIsAdminAccount=TRUE)(cn=a*)".
      *
      * @param s
      * @return
@@ -169,17 +169,17 @@ public class LdapUtil {
       * %d = domain as foo.com
       * %D = domain as dc=foo,dc=com
       *
-      * exchange example, where the exchange domian is different than the zimbra one
+      * exchange example, where the exchange domian is different than the zmail one
       *
-      * zimbraAuthMech      ldap
-      * zimbraAuthLdapURL   ldap://exch1/
-      * zimbraAuthLdapDn    %n@example.zimbra.com
+      * zmailAuthMech      ldap
+      * zmailAuthLdapURL   ldap://exch1/
+      * zmailAuthLdapDn    %n@example.zmail.com
       *
       * our own LDAP example:
       *
-      * zimbraAuthMech       ldap
-      * zimbraAuthLdapURL    ldap://server.example.zimbra.com/
-      * zimbraAuthLdapUserDn uid=%u,ou=people,%D
+      * zmailAuthMech       ldap
+      * zmailAuthLdapURL    ldap://server.example.zmail.com/
+      * zmailAuthLdapUserDn uid=%u,ou=people,%D
       */
     public static String computeDn(String name, String template) {
        if (template == null || template.equals("") || template.equals("%n")) {

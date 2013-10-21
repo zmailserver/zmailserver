@@ -33,7 +33,7 @@ ALTER TABLE current_volumes ADD CONSTRAINT
     FOREIGN KEY (secondary_message_volume_id)
     REFERENCES volume(id);
 END_OF_SQL
-    Migrate::log("Removing MESSAGE_VOLUME_ID colume from zimbra.mailbox table");
+    Migrate::log("Removing MESSAGE_VOLUME_ID colume from zmail.mailbox table");
     Migrate::runSql($sql);
 }
 

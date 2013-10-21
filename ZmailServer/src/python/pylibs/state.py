@@ -58,8 +58,8 @@ class State:
 		}
 
 	def __init__(self):
-		self.baseDir		  = "/opt/zimbra"
-		self.pidFile		  = "/opt/zimbra/log/zmconfigd.pid"
+		self.baseDir		  = "/opt/zmail"
+		self.pidFile		  = "/opt/zmail/log/zmconfigd.pid"
 		self.hostname		  = None
 		self.firstRun         = True
 		self.forced           = False
@@ -318,7 +318,7 @@ class State:
 
 	def getLocalConfig(self, cf = None):
 		self.localconfig.load()
-		self.hostname = self.localconfig["zimbra_server_hostname"]
+		self.hostname = self.localconfig["zmail_server_hostname"]
 		if cf:
 			cf.setVals(self)
 
@@ -785,7 +785,7 @@ class State:
 	#   explode
 	#
 	# args supported:
-	#  SERVER:key - use command gs with zimbra_server_hostname, get value of key
+	#  SERVER:key - use command gs with zmail_server_hostname, get value of key
 	#
 
 	def xformConfigVariable(self, match):

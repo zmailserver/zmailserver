@@ -12,7 +12,7 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.db;
+package org.zmail.cs.db;
 
 import java.util.List;
 import java.util.Set;
@@ -23,11 +23,11 @@ import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
-import com.zimbra.common.localconfig.LC;
-import com.zimbra.cs.account.MockProvisioning;
-import com.zimbra.cs.account.Provisioning;
-import com.zimbra.cs.db.DbPool.DbConnection;
-import com.zimbra.cs.mailbox.Mailbox;
+import org.zmail.common.localconfig.LC;
+import org.zmail.cs.account.MockProvisioning;
+import org.zmail.cs.account.Provisioning;
+import org.zmail.cs.db.DbPool.DbConnection;
+import org.zmail.cs.mailbox.Mailbox;
 
 /**
  * Unit test for {@link DbMailbox}.
@@ -41,7 +41,7 @@ public class DbMailboxTest {
     @BeforeClass
     public static void init() throws Exception {
         Provisioning.setInstance(new MockProvisioning());
-        LC.zimbra_class_database.setDefault(HSQLDB.class.getName());
+        LC.zmail_class_database.setDefault(HSQLDB.class.getName());
         DbPool.startup();
         HSQLDB.createDatabase();
     }

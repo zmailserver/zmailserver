@@ -12,7 +12,7 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.session;
+package org.zmail.cs.session;
 
 /**
  * Simple struct used to communicate error codes for individual accounts during a wait 

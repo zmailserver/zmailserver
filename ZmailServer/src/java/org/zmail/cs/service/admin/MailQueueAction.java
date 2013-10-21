@@ -12,32 +12,32 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.service.admin;
+package org.zmail.cs.service.admin;
 
 import java.util.List;
 import java.util.Map;
 
 import org.apache.lucene.search.Query;
 
-import com.zimbra.common.account.Key;
-import com.zimbra.common.account.Key.ServerBy;
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.common.soap.AdminConstants;
-import com.zimbra.common.soap.Element;
-import com.zimbra.cs.account.Provisioning;
-import com.zimbra.cs.account.Server;
-import com.zimbra.cs.account.accesscontrol.AdminRight;
-import com.zimbra.cs.account.accesscontrol.Rights.Admin;
-import com.zimbra.cs.rmgmt.RemoteMailQueue;
-import com.zimbra.cs.rmgmt.RemoteMailQueue.QueueAction;
-import com.zimbra.cs.rmgmt.RemoteMailQueue.QueueAttr;
-import com.zimbra.soap.ZimbraSoapContext;
+import org.zmail.common.account.Key;
+import org.zmail.common.account.Key.ServerBy;
+import org.zmail.common.service.ServiceException;
+import org.zmail.common.soap.AdminConstants;
+import org.zmail.common.soap.Element;
+import org.zmail.cs.account.Provisioning;
+import org.zmail.cs.account.Server;
+import org.zmail.cs.account.accesscontrol.AdminRight;
+import org.zmail.cs.account.accesscontrol.Rights.Admin;
+import org.zmail.cs.rmgmt.RemoteMailQueue;
+import org.zmail.cs.rmgmt.RemoteMailQueue.QueueAction;
+import org.zmail.cs.rmgmt.RemoteMailQueue.QueueAttr;
+import org.zmail.soap.ZmailSoapContext;
 
 public class MailQueueAction extends AdminDocumentHandler {
 
     @Override
     public Element handle(Element request, Map<String, Object> context) throws ServiceException {
-        ZimbraSoapContext zsc = getZimbraSoapContext(context);
+        ZmailSoapContext zsc = getZmailSoapContext(context);
         Provisioning prov = Provisioning.getInstance();
 
         Element serverElem = request.getElement(AdminConstants.E_SERVER);

@@ -12,7 +12,7 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.imap;
+package org.zmail.cs.imap;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -28,30 +28,30 @@ import com.google.common.base.Function;
 import com.google.common.base.Preconditions;
 import com.google.common.collect.Sets;
 import com.google.common.util.concurrent.ThreadFactoryBuilder;
-import com.zimbra.common.localconfig.DebugConfig;
-import com.zimbra.common.localconfig.LC;
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.common.soap.SoapProtocol;
-import com.zimbra.common.util.Constants;
-import com.zimbra.common.util.Pair;
-import com.zimbra.common.util.ZimbraLog;
-import com.zimbra.cs.imap.ImapHandler.ImapExtension;
-import com.zimbra.cs.index.SearchParams;
-import com.zimbra.cs.index.SortBy;
-import com.zimbra.cs.index.ZimbraHit;
-import com.zimbra.cs.index.ZimbraQueryResults;
-import com.zimbra.cs.mailbox.Flag;
-import com.zimbra.cs.mailbox.Folder;
-import com.zimbra.cs.mailbox.MailItem;
-import com.zimbra.cs.mailbox.Mailbox;
-import com.zimbra.cs.mailbox.MailboxManager;
-import com.zimbra.cs.mailbox.OperationContext;
-import com.zimbra.cs.mailbox.SearchFolder;
-import com.zimbra.cs.mailbox.util.TagUtil;
-import com.zimbra.cs.memcached.MemcachedConnector;
-import com.zimbra.cs.session.Session;
-import com.zimbra.cs.util.EhcacheManager;
-import com.zimbra.cs.util.Zimbra;
+import org.zmail.common.localconfig.DebugConfig;
+import org.zmail.common.localconfig.LC;
+import org.zmail.common.service.ServiceException;
+import org.zmail.common.soap.SoapProtocol;
+import org.zmail.common.util.Constants;
+import org.zmail.common.util.Pair;
+import org.zmail.common.util.ZmailLog;
+import org.zmail.cs.imap.ImapHandler.ImapExtension;
+import org.zmail.cs.index.SearchParams;
+import org.zmail.cs.index.SortBy;
+import org.zmail.cs.index.ZmailHit;
+import org.zmail.cs.index.ZmailQueryResults;
+import org.zmail.cs.mailbox.Flag;
+import org.zmail.cs.mailbox.Folder;
+import org.zmail.cs.mailbox.MailItem;
+import org.zmail.cs.mailbox.Mailbox;
+import org.zmail.cs.mailbox.MailboxManager;
+import org.zmail.cs.mailbox.OperationContext;
+import org.zmail.cs.mailbox.SearchFolder;
+import org.zmail.cs.mailbox.util.TagUtil;
+import org.zmail.cs.memcached.MemcachedConnector;
+import org.zmail.cs.session.Session;
+import org.zmail.cs.util.EhcacheManager;
+import org.zmail.cs.util.Zmail;
 
 final class ImapSessionManager {
     static final long SERIALIZER_INTERVAL_MSEC =
@@ -76,8 +76,8 @@ final class ImapSessionManager {
 
     private ImapSessionManager() {
         if (SERIALIZER_INTERVAL_MSEC > 0) {
-            Zimbra.sTimer.schedule(new SessionSerializerTask(), SERIALIZER_INTERVAL_MSEC, SERIALIZER_INTERVAL_MSEC);
-            ZimbraLog.imap.debug("initializing IMAP session serializer task");
+            Zmail.sTimer.schedule(new SessionSerializerTask(), SERIALIZER_INTERVAL_MSEC, SERIALIZER_INTERVAL_MSEC);
+            ZmailLog.imap.debug("initializing IMAP session serializer task");
         }
         if (LC.imap_use_ehcache.booleanValue()) {
             activeSessionCache = new EhcacheImapCache(EhcacheManager.IMAP_ACTIVE_SESSION_CACHE, true);
@@ -122,7 +122,7 @@ final class ImapSessionManager {
 
         @Override
         public void run() {
-            ZimbraLog.imap.debug("running IMAP session serializer task");
+            ZmailLog.imap.debug("running IMAP session serializer task");
 
             try {
                 long cutoff = SESSION_INACTIVITY_SERIALIZATION_TIME > 0 ?
@@ -163,11 +163,11 @@ final class ImapSessionManager {
 
                 for (ImapSession session : pageable) {
                     try {
-                        ZimbraLog.imap.debug("Paging out session due to staleness or total memory footprint: %s (sid %s)",
+                        ZmailLog.imap.debug("Paging out session due to staleness or total memory footprint: %s (sid %s)",
                                 session.getPath(), session.getSessionId());
                         session.unload(true);
                     } catch (Exception e) {
-                        ZimbraLog.imap.warn("error serializing session; clearing", e);
+                        ZmailLog.imap.warn("error serializing session; clearing", e);
                         // XXX: make sure this doesn't result in a loop
                         quietRemoveSession(session);
                     }
@@ -175,30 +175,30 @@ final class ImapSessionManager {
 
                 for (ImapSession session : overflow) {
                     try {
-                        ZimbraLog.imap.debug("Loading/unloading paged session due to queued notification overflow: %s (sid %s)",
+                        ZmailLog.imap.debug("Loading/unloading paged session due to queued notification overflow: %s (sid %s)",
                                 session.getPath(), session.getSessionId());
                         if (session.reload() instanceof ImapFolder) {
                             session.unload(true);
                         } else {
-                            ZimbraLog.imap.debug("unable to reload session during paged overflow replay; probably evicted from cache");
+                            ZmailLog.imap.debug("unable to reload session during paged overflow replay; probably evicted from cache");
                             quietRemoveSession(session);
                         }
                     } catch (ImapSessionClosedException ignore) {
                     } catch (Exception e) {
-                        ZimbraLog.imap.warn("error deserializing overflowed session; clearing", e);
+                        ZmailLog.imap.warn("error deserializing overflowed session; clearing", e);
                         // XXX: make sure this doesn't result in a loop
                         quietRemoveSession(session);
                     }
                 }
 
                 for (ImapSession session : droppable) {
-                    ZimbraLog.imap.debug("Removing session due to having too many noninteractive sessions: %s (sid %s)",
+                    ZmailLog.imap.debug("Removing session due to having too many noninteractive sessions: %s (sid %s)",
                             session.getPath(), session.getSessionId());
                     // only noninteractive sessions get added to droppable list, so this next conditional should never be true
                     quietRemoveSession(session);
                 }
             } catch (Throwable t) {  //don't let exceptions kill the timer
-                ZimbraLog.imap.warn("Error during IMAP session serializer task", t);
+                ZmailLog.imap.warn("Error during IMAP session serializer task", t);
             }
         }
 
@@ -215,7 +215,7 @@ final class ImapSessionManager {
                 }
                 session.detach();
             } catch (Exception e) {
-                ZimbraLog.imap.warn("skipping error while trying to remove session", e);
+                ZmailLog.imap.warn("skipping error while trying to remove session", e);
             }
         }
     }
@@ -231,7 +231,7 @@ final class ImapSessionManager {
     }
 
     Pair<ImapSession, InitialFolderValues> openFolder(ImapPath path, byte params, ImapHandler handler) throws ServiceException {
-        ZimbraLog.imap.debug("opening folder: %s", path);
+        ZmailLog.imap.debug("opening folder: %s", path);
 
         if (!path.isSelectable()) {
             throw ServiceException.PERM_DENIED("cannot select folder: " + path);
@@ -301,7 +301,7 @@ final class ImapSessionManager {
                 }
             }
             i4folder.setInitialSize();
-            ZimbraLog.imap.debug("added %s", i4list);
+            ZmailLog.imap.debug("added %s", i4list);
 
             ImapSession session = null;
             try {
@@ -347,9 +347,9 @@ final class ImapSessionManager {
 
         Mailbox mbox = search.getMailbox();
         try {
-            ZimbraQueryResults zqr = mbox.index.search(SoapProtocol.Soap12, octxt, params);
+            ZmailQueryResults zqr = mbox.index.search(SoapProtocol.Soap12, octxt, params);
             try {
-                for (ZimbraHit hit = zqr.getNext(); hit != null; hit = zqr.getNext()) {
+                for (ZmailHit hit = zqr.getNext(); hit != null; hit = zqr.getNext()) {
                     i4list.add(hit.getImapMessage());
                 }
             } finally {
@@ -379,7 +379,7 @@ final class ImapSessionManager {
                         return null;
                     }
                     // found a matching session, so just copy its contents!
-                    ZimbraLog.imap.info("copying message data from existing session: %s", i4listener.getPath());
+                    ZmailLog.imap.info("copying message data from existing session: %s", i4listener.getPath());
 
                     final List<ImapMessage> i4list = new ArrayList<ImapMessage>(i4selected.getSize());
                     i4selected.traverse(new Function<ImapMessage, Void>() {
@@ -409,7 +409,7 @@ final class ImapSessionManager {
         if (i4folder == null) { // cache miss
             return null;
         }
-        ZimbraLog.imap.info("copying message data from serialized session: %s", folder.getPath());
+        ZmailLog.imap.info("copying message data from serialized session: %s", folder.getPath());
 
         final List<ImapMessage> i4list = new ArrayList<ImapMessage>(i4folder.getSize());
         i4folder.traverse(new Function<ImapMessage, Void>() {
@@ -434,7 +434,7 @@ final class ImapSessionManager {
             List<ImapMessage> actual = mbox.openImapFolder(octxt, folder.getId());
             Collections.sort(actual);
             if (i4list.size() != actual.size()) {
-                ZimbraLog.imap.error("IMAP session cache consistency check failed: inconsistent list lengths " +
+                ZmailLog.imap.error("IMAP session cache consistency check failed: inconsistent list lengths " +
                         "folder=%s,cache=%d,db=%d,diff={cache:%s,db:%s},dupes=%s", fid, i4list.size(), actual.size(),
                         diff(i4list, actual), diff(actual, i4list), dupeCheck(i4list));
                 clearCache(folder);
@@ -444,14 +444,14 @@ final class ImapSessionManager {
             for (Iterator<ImapMessage> it1 = i4list.iterator(), it2 = actual.iterator(); it1.hasNext() || it2.hasNext(); ) {
                 ImapMessage msg1 = it1.next(), msg2 = it2.next();
                 if (msg1.msgId != msg2.msgId || msg1.imapUid != msg2.imapUid) {
-                    ZimbraLog.imap.error("IMAP session cache consistency check failed: id mismatch " +
+                    ZmailLog.imap.error("IMAP session cache consistency check failed: id mismatch " +
                             "folder=%s,cache=%d/%d,db=%d/%d,diff={cache:%s,db:%s}",
                             fid, msg1.msgId, msg1.imapUid, msg2.msgId, msg2.imapUid,
                             diff(i4list, actual), diff(actual, i4list));
                     clearCache(folder);
                     return actual;
                 } else if (msg1.flags != msg2.flags || msg1.sflags != msg2.sflags || !TagUtil.tagsMatch(msg1.tags, msg2.tags)) {
-                    ZimbraLog.imap.error("IMAP session cache consistency check failed: flag/tag/sflag mismatch " +
+                    ZmailLog.imap.error("IMAP session cache consistency check failed: flag/tag/sflag mismatch " +
                             "folder=%s,cache=%X/[%s]/%X,db=%X/[%s]/%X,diff={cache:%s,db:%s}", fid,
                             msg1.flags, TagUtil.encodeTags(msg1.tags), msg1.sflags,
                             msg2.flags, TagUtil.encodeTags(msg2.tags), msg2.sflags,
@@ -462,7 +462,7 @@ final class ImapSessionManager {
             }
             return i4list;
         } catch (ServiceException e) {
-            ZimbraLog.imap.info("  ** error caught during IMAP session cache consistency check; falling back to reload", e);
+            ZmailLog.imap.info("  ** error caught during IMAP session cache consistency check; falling back to reload", e);
             clearCache(folder);
             return null;
         }
@@ -520,10 +520,10 @@ final class ImapSessionManager {
         if (SERIALIZE_ON_CLOSE) {
             try {
                 // could use session.serialize() if we want to leave it in memory...
-                ZimbraLog.imap.debug("Paging session during close: %s", session.getPath());
+                ZmailLog.imap.debug("Paging session during close: %s", session.getPath());
                 session.unload(false);
             } catch (Exception e) {
-                ZimbraLog.imap.warn("Skipping error while trying to serialize during close (%s)", session.getPath(), e);
+                ZmailLog.imap.warn("Skipping error while trying to serialize during close (%s)", session.getPath(), e);
             }
         }
 
@@ -636,7 +636,7 @@ final class ImapSessionManager {
             inactiveSessionCache.remove(key);
         } else {
             //removal from active is unsafe; not great to have inconsistent state but it is nicer than bombing totally
-            ZimbraLog.imap.warn("Inconsistent active cache entry %s cannot be removed. Client state may not be accurate", key);
+            ZmailLog.imap.warn("Inconsistent active cache entry %s cannot be removed. Client state may not be accurate", key);
         }
     }
 

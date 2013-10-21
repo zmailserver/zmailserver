@@ -19,7 +19,7 @@
  * TODO To change the template for this generated file go to
  * Window - Preferences - Java - Code Generation - Code and Comments
  */
-package com.zimbra.cs.redolog;
+package org.zmail.cs.redolog;
 
 import java.io.File;
 import java.io.FilenameFilter;
@@ -32,10 +32,10 @@ import java.util.Comparator;
 import java.util.Date;
 import java.util.TimeZone;
 
-import com.zimbra.common.util.Log;
-import com.zimbra.common.util.LogFactory;
+import org.zmail.common.util.Log;
+import org.zmail.common.util.LogFactory;
 
-import com.zimbra.common.util.FileUtil;
+import org.zmail.common.util.FileUtil;
 
 /**
  * @author jhahm

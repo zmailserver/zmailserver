@@ -12,7 +12,7 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.soap;
+package org.zmail.soap;
 
 import java.io.FileInputStream;
 import java.io.IOException;
@@ -37,20 +37,20 @@ import org.dom4j.Namespace;
 import org.dom4j.QName;
 
 import com.google.common.base.Objects;
-import com.zimbra.common.localconfig.LC;
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.common.soap.AccountConstants;
-import com.zimbra.common.soap.AdminConstants;
-import com.zimbra.common.soap.Element;
-import com.zimbra.common.soap.Element.ElementFactory;
-import com.zimbra.common.soap.Element.JSONElement;
-import com.zimbra.common.soap.Element.XMLElement;
-import com.zimbra.common.soap.HeaderConstants;
-import com.zimbra.common.soap.SoapHttpTransport;
-import com.zimbra.common.soap.SoapTransport;
-import com.zimbra.common.util.ByteUtil;
-import com.zimbra.common.util.CliUtil;
-import com.zimbra.common.util.StringUtil;
+import org.zmail.common.localconfig.LC;
+import org.zmail.common.service.ServiceException;
+import org.zmail.common.soap.AccountConstants;
+import org.zmail.common.soap.AdminConstants;
+import org.zmail.common.soap.Element;
+import org.zmail.common.soap.Element.ElementFactory;
+import org.zmail.common.soap.Element.JSONElement;
+import org.zmail.common.soap.Element.XMLElement;
+import org.zmail.common.soap.HeaderConstants;
+import org.zmail.common.soap.SoapHttpTransport;
+import org.zmail.common.soap.SoapTransport;
+import org.zmail.common.util.ByteUtil;
+import org.zmail.common.util.CliUtil;
+import org.zmail.common.util.StringUtil;
 
 public class SoapCommandUtil implements SoapTransport.DebugListener {
 
@@ -58,10 +58,10 @@ public class SoapCommandUtil implements SoapTransport.DebugListener {
         new TreeMap<String, Namespace>();
 
     private static final String DEFAULT_ADMIN_URL = String.format("https://%s:%d/service/admin/soap",
-        LC.zimbra_zmprov_default_soap_server.value(),
-        LC.zimbra_admin_service_port.intValue());
-    private static final String DEFAULT_URL = "http://" + LC.zimbra_zmprov_default_soap_server.value()
-                    + (LC.zimbra_mail_service_port.intValue() == 80 ? "" : ":" + LC.zimbra_mail_service_port.intValue())
+        LC.zmail_zmprov_default_soap_server.value(),
+        LC.zmail_admin_service_port.intValue());
+    private static final String DEFAULT_URL = "http://" + LC.zmail_zmprov_default_soap_server.value()
+                    + (LC.zmail_mail_service_port.intValue() == 80 ? "" : ":" + LC.zmail_mail_service_port.intValue())
                     + "/service/soap";
 
     private static final String LO_HELP = "help";
@@ -94,13 +94,13 @@ public class SoapCommandUtil implements SoapTransport.DebugListener {
 
     static {
         // Namespaces
-        sTypeToNamespace.put(TYPE_MAIL, Namespace.get("urn:zimbraMail"));
-        sTypeToNamespace.put(TYPE_ADMIN, Namespace.get("urn:zimbraAdmin"));
-        sTypeToNamespace.put(TYPE_ACCOUNT, Namespace.get("urn:zimbraAccount"));
-        sTypeToNamespace.put(TYPE_IM, Namespace.get("urn:zimbraIM"));
-        sTypeToNamespace.put(TYPE_MOBILE, Namespace.get("urn:zimbraSync"));
-        sTypeToNamespace.put(TYPE_OFFLINE, Namespace.get("urn:zimbraOffline"));
-        sTypeToNamespace.put(TYPE_VOICE, Namespace.get("urn:zimbraVoice"));
+        sTypeToNamespace.put(TYPE_MAIL, Namespace.get("urn:zmailMail"));
+        sTypeToNamespace.put(TYPE_ADMIN, Namespace.get("urn:zmailAdmin"));
+        sTypeToNamespace.put(TYPE_ACCOUNT, Namespace.get("urn:zmailAccount"));
+        sTypeToNamespace.put(TYPE_IM, Namespace.get("urn:zmailIM"));
+        sTypeToNamespace.put(TYPE_MOBILE, Namespace.get("urn:zmailSync"));
+        sTypeToNamespace.put(TYPE_OFFLINE, Namespace.get("urn:zmailOffline"));
+        sTypeToNamespace.put(TYPE_VOICE, Namespace.get("urn:zmailVoice"));
     }
 
     private final Options mOptions = new Options();
@@ -159,7 +159,7 @@ public class SoapCommandUtil implements SoapTransport.DebugListener {
         mOptions.addOption(opt);
 
         mOptions.addOption(new Option("z", LO_ZADMIN, false,
-            "Authenticate with zimbra admin name/password from localconfig."));
+            "Authenticate with zmail admin name/password from localconfig."));
         mOptions.addOption(new Option("v", LO_VERBOSE, false,
             "Print the request."));
         mOptions.addOption(new Option("vv", LO_VERY_VERBOSE, false,
@@ -242,9 +242,9 @@ public class SoapCommandUtil implements SoapTransport.DebugListener {
         mAdminAccountName = CliUtil.getOptionValue(cl, LO_ADMIN);
 
         if (!CliUtil.hasOption(cl, LO_ADMIN) && CliUtil.hasOption(cl, LO_ZADMIN)) {
-            mAdminAccountName = LC.zimbra_ldap_user.value();
+            mAdminAccountName = LC.zmail_ldap_user.value();
             if (!CliUtil.hasOption(cl, LO_PASSWORD)) {
-                mPassword = LC.zimbra_ldap_password.value();
+                mPassword = LC.zmail_ldap_password.value();
             }
         }
 
@@ -299,9 +299,9 @@ public class SoapCommandUtil implements SoapTransport.DebugListener {
         } else if (CliUtil.hasOption(cl, LO_NO_JAXB)) {
             useJaxb = false;
         } else {
-            // zmsoap's command line fits reasonably well with how Zimbra XML SOAP works, so there shouldn't be much
+            // zmsoap's command line fits reasonably well with how Zmail XML SOAP works, so there shouldn't be much
             // value in using JAXB to validate the request before sending it in that case.  However the fit is NOT
-            // that good with how Zimbra JSON SOAP works - for instance there isn't an obvious way to specify
+            // that good with how Zmail JSON SOAP works - for instance there isn't an obvious way to specify
             // key value pairs.  passing the XML equivalent of the comand line spec into JAXB and getting the JSON
             // back from the object should take care of this deficiency.
             useJaxb = mUseJson;

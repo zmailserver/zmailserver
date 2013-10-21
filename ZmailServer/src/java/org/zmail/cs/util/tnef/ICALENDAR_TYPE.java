@@ -13,7 +13,7 @@
  * ***** END LICENSE BLOCK *****
  */
 
-package com.zimbra.cs.util.tnef;
+package org.zmail.cs.util.tnef;
 
     public enum ICALENDAR_TYPE {
         VEVENT, VTODO;

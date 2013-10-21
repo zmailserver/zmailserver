@@ -16,12 +16,12 @@
 /*
  * Created on 2004. 10. 12.
  */
-package com.zimbra.cs.store;
+package org.zmail.cs.store;
 
 import java.io.IOException;
 import java.io.Serializable;
 
-import com.zimbra.cs.mailbox.Mailbox;
+import org.zmail.cs.mailbox.Mailbox;
 
 public abstract class MailboxBlob {
     public static class MailboxBlobInfo implements Serializable {

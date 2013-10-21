@@ -30,7 +30,7 @@ exit(0);
 
 sub resetFolderCounts() {
     my $sql = <<RESET_CONTACT_COUNT_EOF;
-UPDATE zimbra.mailbox
+UPDATE zmail.mailbox
 SET contact_count = NULL;
 
 RESET_CONTACT_COUNT_EOF

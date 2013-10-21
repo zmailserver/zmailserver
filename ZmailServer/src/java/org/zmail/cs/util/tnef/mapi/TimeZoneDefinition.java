@@ -13,11 +13,11 @@
  * ***** END LICENSE BLOCK *****
  */
 
-package com.zimbra.cs.util.tnef.mapi;
+package org.zmail.cs.util.tnef.mapi;
 
-import com.zimbra.common.util.Log;
-import com.zimbra.common.util.ZimbraLog;
-import com.zimbra.cs.util.tnef.IcalUtil;
+import org.zmail.common.util.Log;
+import org.zmail.common.util.ZmailLog;
+import org.zmail.cs.util.tnef.IcalUtil;
 
 import java.io.IOException;
 import java.net.URISyntaxException;
@@ -79,7 +79,7 @@ import net.freeutils.tnef.RawInputStream;
 
 public class TimeZoneDefinition {
 
-    static Log sLog = ZimbraLog.tnef;
+    static Log sLog = ZmailLog.tnef;
 
     private String timezoneName; // KeyName
     private TZRule effectiveRule;

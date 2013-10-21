@@ -13,30 +13,30 @@
  * ***** END LICENSE BLOCK *****
  */
 
-package com.zimbra.cs.stats;
+package org.zmail.cs.stats;
 
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-import com.zimbra.common.stats.Accumulator;
-import com.zimbra.common.stats.DeltaCalculator;
-import com.zimbra.cs.db.DbPool;
-import com.zimbra.cs.mailbox.MessageCache;
+import org.zmail.common.stats.Accumulator;
+import org.zmail.common.stats.DeltaCalculator;
+import org.zmail.cs.db.DbPool;
+import org.zmail.cs.mailbox.MessageCache;
 
 public class JmxServerStats implements JmxServerStatsMBean {
 
-    private DeltaCalculator mDbConn = new DeltaCalculator(ZimbraPerf.STOPWATCH_DB_CONN);
-    private DeltaCalculator mLdapConn = new DeltaCalculator(ZimbraPerf.STOPWATCH_LDAP_DC);
-    private DeltaCalculator mItemCache = new DeltaCalculator(ZimbraPerf.COUNTER_MBOX_ITEM_CACHE);
-    private DeltaCalculator mMailboxCache = new DeltaCalculator(ZimbraPerf.COUNTER_MBOX_CACHE);
-    private DeltaCalculator mMessageCache = new DeltaCalculator(ZimbraPerf.COUNTER_MBOX_MSG_CACHE);
+    private DeltaCalculator mDbConn = new DeltaCalculator(ZmailPerf.STOPWATCH_DB_CONN);
+    private DeltaCalculator mLdapConn = new DeltaCalculator(ZmailPerf.STOPWATCH_LDAP_DC);
+    private DeltaCalculator mItemCache = new DeltaCalculator(ZmailPerf.COUNTER_MBOX_ITEM_CACHE);
+    private DeltaCalculator mMailboxCache = new DeltaCalculator(ZmailPerf.COUNTER_MBOX_CACHE);
+    private DeltaCalculator mMessageCache = new DeltaCalculator(ZmailPerf.COUNTER_MBOX_MSG_CACHE);
     
-    private DeltaCalculator mAddMessage = new DeltaCalculator(ZimbraPerf.STOPWATCH_MBOX_ADD_MSG);
-    private DeltaCalculator mImap = new DeltaCalculator(ZimbraPerf.STOPWATCH_IMAP);
-    private DeltaCalculator mPop = new DeltaCalculator(ZimbraPerf.STOPWATCH_POP);
-    private DeltaCalculator mSoap = new DeltaCalculator(ZimbraPerf.STOPWATCH_SOAP);
-    private DeltaCalculator mBisSeek = new DeltaCalculator(ZimbraPerf.COUNTER_BLOB_INPUT_STREAM_SEEK_RATE); 
+    private DeltaCalculator mAddMessage = new DeltaCalculator(ZmailPerf.STOPWATCH_MBOX_ADD_MSG);
+    private DeltaCalculator mImap = new DeltaCalculator(ZmailPerf.STOPWATCH_IMAP);
+    private DeltaCalculator mPop = new DeltaCalculator(ZmailPerf.STOPWATCH_POP);
+    private DeltaCalculator mSoap = new DeltaCalculator(ZmailPerf.STOPWATCH_SOAP);
+    private DeltaCalculator mBisSeek = new DeltaCalculator(ZmailPerf.COUNTER_BLOB_INPUT_STREAM_SEEK_RATE); 
     
     private final List<Accumulator> mAccumulators;
     
@@ -59,7 +59,7 @@ public class JmxServerStats implements JmxServerStatsMBean {
     }
     
     public long getDatabaseConnectionGets() {
-        return ZimbraPerf.STOPWATCH_DB_CONN.getCount();
+        return ZmailPerf.STOPWATCH_DB_CONN.getCount();
     }
 
     public long getDatabaseConnectionGetMs() {
@@ -75,31 +75,31 @@ public class JmxServerStats implements JmxServerStatsMBean {
     }
     
     public long getLdapDirectoryContextGets() {
-        return ZimbraPerf.STOPWATCH_LDAP_DC.getCount();
+        return ZmailPerf.STOPWATCH_LDAP_DC.getCount();
     }
 
     public long getLmtpDeliveredBytes() {
-        return ZimbraPerf.COUNTER_LMTP_DLVD_BYTES.getTotal();
+        return ZmailPerf.COUNTER_LMTP_DLVD_BYTES.getTotal();
     }
 
     public long getLmtpReceivedBytes() {
-        return ZimbraPerf.COUNTER_LMTP_RCVD_BYTES.getTotal();
+        return ZmailPerf.COUNTER_LMTP_RCVD_BYTES.getTotal();
     }
 
     public long getLmtpDeliveredMessages() {
-        return ZimbraPerf.COUNTER_LMTP_DLVD_MSGS.getTotal();
+        return ZmailPerf.COUNTER_LMTP_DLVD_MSGS.getTotal();
     }
 
     public long getLmtpReceivedMessages() {
-        return ZimbraPerf.COUNTER_LMTP_RCVD_MSGS.getTotal();
+        return ZmailPerf.COUNTER_LMTP_RCVD_MSGS.getTotal();
     }
 
     public long getLmtpRecipients() {
-        return ZimbraPerf.COUNTER_LMTP_RCVD_RCPT.getTotal();
+        return ZmailPerf.COUNTER_LMTP_RCVD_RCPT.getTotal();
     }
 
     public long getImapRequests() {
-        return ZimbraPerf.STOPWATCH_IMAP.getCount();
+        return ZmailPerf.STOPWATCH_IMAP.getCount();
     }
 
     public long getItemCacheHitRate() {
@@ -111,11 +111,11 @@ public class JmxServerStats implements JmxServerStatsMBean {
     }
 
     public long getMailboxCacheSize() {
-        return ZimbraPerf.getMailboxCacheSize();
+        return ZmailPerf.getMailboxCacheSize();
     }
 
     public long getMailboxGets() {
-        return ZimbraPerf.STOPWATCH_MBOX_GET.getCount();
+        return ZmailPerf.STOPWATCH_MBOX_GET.getCount();
     }
 
     public long getMailboxGetMs() {
@@ -135,11 +135,11 @@ public class JmxServerStats implements JmxServerStatsMBean {
     }
 
     public long getMessagesAdded() {
-        return ZimbraPerf.STOPWATCH_MBOX_ADD_MSG.getCount();
+        return ZmailPerf.STOPWATCH_MBOX_ADD_MSG.getCount();
     }
 
     public long getSoapRequests() {
-        return ZimbraPerf.STOPWATCH_SOAP.getCount();
+        return ZmailPerf.STOPWATCH_SOAP.getCount();
     }
 
     public long getSoapResponseMs() {
@@ -147,7 +147,7 @@ public class JmxServerStats implements JmxServerStatsMBean {
     }
 
     public long getBlobInputStreamReads() {
-        return ZimbraPerf.COUNTER_BLOB_INPUT_STREAM_READ.getCount();
+        return ZmailPerf.COUNTER_BLOB_INPUT_STREAM_READ.getCount();
     }
 
     public long getBlobInputStreamSeekRate() {
@@ -159,7 +159,7 @@ public class JmxServerStats implements JmxServerStatsMBean {
     }
 
     public long getPopRequests() {
-        return ZimbraPerf.STOPWATCH_POP.getCount();
+        return ZmailPerf.STOPWATCH_POP.getCount();
     }
 
     public long getPopResponseMs() {

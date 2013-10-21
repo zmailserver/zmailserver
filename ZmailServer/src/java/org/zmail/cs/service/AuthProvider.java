@@ -13,7 +13,7 @@
  * ***** END LICENSE BLOCK *****
  */
 
-package com.zimbra.cs.service;
+package org.zmail.cs.service;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -23,20 +23,20 @@ import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 
 import com.google.common.base.Strings;
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.common.soap.Element;
-import com.zimbra.common.localconfig.LC;
-import com.zimbra.common.util.Log;
-import com.zimbra.common.util.LogFactory;
-import com.zimbra.common.util.ZimbraLog;
-import com.zimbra.cs.account.Account;
-import com.zimbra.cs.account.AuthToken;
-import com.zimbra.cs.account.AuthTokenException;
-import com.zimbra.cs.account.Provisioning;
-import com.zimbra.cs.account.auth.AuthMechanism.AuthMech;
-import com.zimbra.common.account.Key.AccountBy;
-import com.zimbra.cs.service.admin.AdminAccessControl;
-import com.zimbra.cs.servlet.ZimbraServlet;
+import org.zmail.common.service.ServiceException;
+import org.zmail.common.soap.Element;
+import org.zmail.common.localconfig.LC;
+import org.zmail.common.util.Log;
+import org.zmail.common.util.LogFactory;
+import org.zmail.common.util.ZmailLog;
+import org.zmail.cs.account.Account;
+import org.zmail.cs.account.AuthToken;
+import org.zmail.cs.account.AuthTokenException;
+import org.zmail.cs.account.Provisioning;
+import org.zmail.cs.account.auth.AuthMechanism.AuthMech;
+import org.zmail.common.account.Key.AccountBy;
+import org.zmail.cs.service.admin.AdminAccessControl;
+import org.zmail.cs.servlet.ZmailServlet;
 
 public abstract class AuthProvider {
         
@@ -49,8 +49,8 @@ public abstract class AuthProvider {
     private static List<AuthProvider> enabledProviders = null;
     
     static {
-        register(new ZimbraAuthProvider());
-        // register(new ZimbraOAuthProvider());
+        register(new ZmailAuthProvider());
+        // register(new ZmailOAuthProvider());
         refresh();
     }
     
@@ -73,17 +73,17 @@ public abstract class AuthProvider {
      */
     public static void refresh() {
         List<AuthProvider> providerList = new ArrayList<AuthProvider>();
-        String[] providers = LC.zimbra_auth_provider.value().split(",");
+        String[] providers = LC.zmail_auth_provider.value().split(",");
         for (String provider : providers) {
             
             /*
-             * ignore zimbra and oauth auth providers, they are built-in providers.
+             * ignore zmail and oauth auth providers, they are built-in providers.
              * 
-             * If no external auth providers is configured, zimbra and oauth providers 
+             * If no external auth providers is configured, zmail and oauth providers 
              * will be used.
              */
-            if (ZimbraAuthProvider.ZIMBRA_AUTH_PROVIDER.equals(provider) ||
-                ZimbraOAuthProvider.ZIMBRA_OAUTH_PROVIDER.equals(provider)) {
+            if (ZmailAuthProvider.ZIMBRA_AUTH_PROVIDER.equals(provider) ||
+                ZmailOAuthProvider.ZIMBRA_OAUTH_PROVIDER.equals(provider)) {
                 continue;
             }
             
@@ -96,10 +96,10 @@ public abstract class AuthProvider {
             }
         }
         
-        // always add the zimbra providers if there is no provider configured. 
+        // always add the zmail providers if there is no provider configured. 
         if (providerList.size() == 0) {
-            providerList.add(registeredProviders.get(ZimbraAuthProvider.ZIMBRA_AUTH_PROVIDER));
-            // providerList.add(registeredProviders.get(ZimbraOAuthProvider.ZIMBRA_OAUTH_PROVIDER));
+            providerList.add(registeredProviders.get(ZmailAuthProvider.ZIMBRA_AUTH_PROVIDER));
+            // providerList.add(registeredProviders.get(ZmailOAuthProvider.ZIMBRA_OAUTH_PROVIDER));
         }
         
         setProviders(providerList);
@@ -234,9 +234,9 @@ public abstract class AuthProvider {
         }
         
         long lifetime = isAdmin ?
-                acct.getTimeInterval(Provisioning.A_zimbraAdminAuthTokenLifetime, 
+                acct.getTimeInterval(Provisioning.A_zmailAdminAuthTokenLifetime, 
                         AuthToken.DEFAULT_AUTH_LIFETIME * 1000) :                                    
-                acct.getTimeInterval(Provisioning.A_zimbraAuthTokenLifetime, 
+                acct.getTimeInterval(Provisioning.A_zmailAuthTokenLifetime, 
                         AuthToken.DEFAULT_AUTH_LIFETIME * 1000);
         return authToken(acct, lifetime);        
     }
@@ -281,7 +281,7 @@ public abstract class AuthProvider {
      * @param req
      * @return whether http basic authentication is allowed
      */
-    protected boolean allowHttpBasicAuth(HttpServletRequest req, ZimbraServlet servlet) {
+    protected boolean allowHttpBasicAuth(HttpServletRequest req, ZmailServlet servlet) {
         return true;
     }
     
@@ -290,7 +290,7 @@ public abstract class AuthProvider {
      * @param req
      * @return whether accesskey authentication is allowed
      */
-    protected boolean allowURLAccessKeyAuth(HttpServletRequest req, ZimbraServlet servlet) {
+    protected boolean allowURLAccessKeyAuth(HttpServletRequest req, ZmailServlet servlet) {
         return false;
     }
 
@@ -352,9 +352,9 @@ public abstract class AuthProvider {
 
     /**
      * For SOAP, we do not pass in isAdminReq, because with the current flow in SoapEngine, 
-     * at the point when the SOAP context(ZimbraSoapContext) is examined, we haven't looked 
+     * at the point when the SOAP context(ZmailSoapContext) is examined, we haven't looked 
      * at the SOAP body yet.  Whether admin auth is required is based on the SOAP command, 
-     * which has to be extracted from the body.  ZimbraAuthProvider always retrieves the 
+     * which has to be extracted from the body.  ZmailAuthProvider always retrieves the 
      * encoded auth token from the fixed tag, so does YahooYT auth.  
      * This should be fine for now.
      *    
@@ -513,7 +513,7 @@ public abstract class AuthProvider {
     }
     
     public static AuthToken getAdminAuthToken() throws ServiceException {
-        Account acct = Provisioning.getInstance().get(AccountBy.adminName, LC.zimbra_ldap_user.value());
+        Account acct = Provisioning.getInstance().get(AccountBy.adminName, LC.zmail_ldap_user.value());
         return AuthProvider.getAuthToken(acct, true);
     }
     
@@ -562,7 +562,7 @@ public abstract class AuthProvider {
         throw AuthProviderException.FAILURE("cannot get authtoken from account " + acct.getName());
     }
     
-    public static boolean allowBasicAuth(HttpServletRequest req, ZimbraServlet servlet) {
+    public static boolean allowBasicAuth(HttpServletRequest req, ZmailServlet servlet) {
         List<AuthProvider> providers = getProviders();
         for (AuthProvider ap : providers) {
             if (ap.allowHttpBasicAuth(req, servlet)) {
@@ -572,7 +572,7 @@ public abstract class AuthProvider {
         return false;
     }
     
-    public static boolean allowAccessKeyAuth(HttpServletRequest req, ZimbraServlet servlet) {
+    public static boolean allowAccessKeyAuth(HttpServletRequest req, ZmailServlet servlet) {
         List<AuthProvider> providers = getProviders();
         for (AuthProvider ap : providers) {
             if (ap.allowURLAccessKeyAuth(req, servlet)) {
@@ -590,7 +590,7 @@ public abstract class AuthProvider {
             if (ServiceException.AUTH_EXPIRED.equals(e.getCode())) {
                 // we may not want to expose the details to malicious caller
                 // debug log the message and throw a vanilla AUTH_EXPIRED 
-                ZimbraLog.account.debug("auth token validation failed", e);
+                ZmailLog.account.debug("auth token validation failed", e);
                 throw ServiceException.AUTH_EXPIRED();
             } else {
                 // rethrow the same exception
@@ -618,7 +618,7 @@ public abstract class AuthProvider {
         }
         
         if (addToLoggingContext) {
-            ZimbraLog.addAccountNameToContext(acct.getName());
+            ZmailLog.addAccountNameToContext(acct.getName());
         }
         
         if (!acct.checkAuthTokenValidityValue(at)) {

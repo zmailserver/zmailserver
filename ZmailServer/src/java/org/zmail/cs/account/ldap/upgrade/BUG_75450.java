@@ -12,25 +12,25 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.account.ldap.upgrade;
+package org.zmail.cs.account.ldap.upgrade;
 
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.cs.account.Cos;
-import com.zimbra.cs.account.Domain;
-import com.zimbra.cs.account.Entry.EntryType;
-import com.zimbra.cs.account.Provisioning;
-import com.zimbra.cs.ldap.LdapClient;
-import com.zimbra.cs.ldap.LdapServerType;
-import com.zimbra.cs.ldap.LdapUsage;
-import com.zimbra.cs.ldap.ZLdapContext;
+import org.zmail.common.service.ServiceException;
+import org.zmail.cs.account.Cos;
+import org.zmail.cs.account.Domain;
+import org.zmail.cs.account.Entry.EntryType;
+import org.zmail.cs.account.Provisioning;
+import org.zmail.cs.ldap.LdapClient;
+import org.zmail.cs.ldap.LdapServerType;
+import org.zmail.cs.ldap.LdapUsage;
+import org.zmail.cs.ldap.ZLdapContext;
 
 public class BUG_75450 extends UpgradeOp {
 
-    private static final String ATTR_NAME = Provisioning.A_zimbraPrefSkin;
+    private static final String ATTR_NAME = Provisioning.A_zmailPrefSkin;
     private static final String FROM_VALUE = "carbon";
     private static final String TO_VALUE = "serenity";
 

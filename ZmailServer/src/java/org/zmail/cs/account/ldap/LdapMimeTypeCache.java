@@ -12,20 +12,20 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.account.ldap;
+package org.zmail.cs.account.ldap;
 
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import com.zimbra.common.localconfig.LC;
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.common.util.Constants;
-import com.zimbra.cs.account.Provisioning;
-import com.zimbra.cs.account.cache.IMimeTypeCache;
-import com.zimbra.cs.account.ldap.LdapProv;
-import com.zimbra.cs.mime.MimeTypeInfo;
+import org.zmail.common.localconfig.LC;
+import org.zmail.common.service.ServiceException;
+import org.zmail.common.util.Constants;
+import org.zmail.cs.account.Provisioning;
+import org.zmail.cs.account.cache.IMimeTypeCache;
+import org.zmail.cs.account.ldap.LdapProv;
+import org.zmail.cs.mime.MimeTypeInfo;
 
 public class LdapMimeTypeCache implements IMimeTypeCache {
 	

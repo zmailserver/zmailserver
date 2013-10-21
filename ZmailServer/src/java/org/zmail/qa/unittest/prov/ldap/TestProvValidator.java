@@ -12,7 +12,7 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.qa.unittest.prov.ldap;
+package org.zmail.qa.unittest.prov.ldap;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -23,14 +23,14 @@ import org.junit.*;
 
 import static org.junit.Assert.*;
 
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.cs.account.Account;
-import com.zimbra.cs.account.AccountServiceException;
-import com.zimbra.cs.account.Cos;
-import com.zimbra.cs.account.Domain;
-import com.zimbra.cs.account.Provisioning;
-import com.zimbra.common.account.Key.AccountBy;
-import com.zimbra.common.account.ProvisioningConstants;
+import org.zmail.common.service.ServiceException;
+import org.zmail.cs.account.Account;
+import org.zmail.cs.account.AccountServiceException;
+import org.zmail.cs.account.Cos;
+import org.zmail.cs.account.Domain;
+import org.zmail.cs.account.Provisioning;
+import org.zmail.common.account.Key.AccountBy;
+import org.zmail.common.account.ProvisioningConstants;
 
 public class TestProvValidator extends LdapTest {
     
@@ -62,7 +62,7 @@ public class TestProvValidator extends LdapTest {
     throws Exception {
         Map<String, Object> domainAttrs = new HashMap<String, Object>();
         String cosLimit = makeCosLimit(cos, limit); 
-        domainAttrs.put(Provisioning.A_zimbraDomainCOSMaxAccounts, cosLimit);
+        domainAttrs.put(Provisioning.A_zmailDomainCOSMaxAccounts, cosLimit);
         
         Domain domain = provUtil.createDomain(domainName + "." + BASE_DOMAIN_NAME, domainAttrs);
         return domain;
@@ -72,7 +72,7 @@ public class TestProvValidator extends LdapTest {
     throws Exception {
         Map<String, Object> domainAttrs = new HashMap<String, Object>();
         String featureLimit = makeFeatureLimit(feature, limit); 
-        domainAttrs.put(Provisioning.A_zimbraDomainFeatureMaxAccounts, featureLimit);
+        domainAttrs.put(Provisioning.A_zmailDomainFeatureMaxAccounts, featureLimit);
         
         Domain domain = provUtil.createDomain(domainName + "." + BASE_DOMAIN_NAME, domainAttrs);
         return domain;
@@ -88,7 +88,7 @@ public class TestProvValidator extends LdapTest {
         
         for (int i = 0; i <= COS_MAX_ACCOUNTS; i++) {
             Map<String, Object> attrs = new HashMap<String, Object>();
-            attrs.put(Provisioning.A_zimbraCOSId, cos.getId());
+            attrs.put(Provisioning.A_zmailCOSId, cos.getId());
             
             boolean caughtLimitExceeded = false;
             try {
@@ -118,7 +118,7 @@ public class TestProvValidator extends LdapTest {
         
         for (int i = 0; i < COS_MAX_ACCOUNTS; i++) {
             Map<String, Object> attrs = new HashMap<String, Object>();
-            attrs.put(Provisioning.A_zimbraCOSId, cos.getId());
+            attrs.put(Provisioning.A_zmailCOSId, cos.getId());
             Account acct = provUtil.createAccount("acct-" + i, domain, attrs);
         }
         
@@ -129,7 +129,7 @@ public class TestProvValidator extends LdapTest {
         try {
             // attempt to change the account to the cos at limit
             Map<String, Object> attrs = new HashMap<String, Object>();
-            attrs.put(Provisioning.A_zimbraCOSId, cos.getId());
+            attrs.put(Provisioning.A_zmailCOSId, cos.getId());
             prov.modifyAttrs(acct, attrs);
         } catch (ServiceException e) {
             if (AccountServiceException.TOO_MANY_ACCOUNTS.equals(e.getCode())) {
@@ -143,7 +143,7 @@ public class TestProvValidator extends LdapTest {
     
     @Test
     public void testFeatureMaxCreateAccount() throws Exception {
-        final String FEATURE = Provisioning.A_zimbraFeatureAdvancedSearchEnabled;
+        final String FEATURE = Provisioning.A_zmailFeatureAdvancedSearchEnabled;
         final int FEATURE_MAX_ACCOUNTS = 2;
         
         Domain domain = createDomainWithFeatureLimit(genDomainSegmentName(), FEATURE, FEATURE_MAX_ACCOUNTS);
@@ -174,7 +174,7 @@ public class TestProvValidator extends LdapTest {
     @Test
     @Ignore  // bug existed prior to unboundid SDK work
     public void testFeatureMaxModifyAccount() throws Exception {
-        final String FEATURE = Provisioning.A_zimbraFeatureAdvancedSearchEnabled;
+        final String FEATURE = Provisioning.A_zmailFeatureAdvancedSearchEnabled;
         final int FEATURE_MAX_ACCOUNTS = 2;
         
         Domain domain = createDomainWithFeatureLimit(genDomainSegmentName(), FEATURE, FEATURE_MAX_ACCOUNTS);

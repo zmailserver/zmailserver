@@ -14,4 +14,4 @@
 # ***** END LICENSE BLOCK *****
 # 
 
-exec `dirname $0`/zmjava com.zimbra.cs.redolog.util.RedoLogVerify "$@"
+exec `dirname $0`/zmjava org.zmail.cs.redolog.util.RedoLogVerify "$@"

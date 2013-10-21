@@ -13,33 +13,33 @@
  * ***** END LICENSE BLOCK *****
  */
 
-package com.zimbra.cs.service.mail;
+package org.zmail.cs.service.mail;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.common.soap.Element;
-import com.zimbra.common.soap.MailConstants;
-import com.zimbra.cs.account.AccessManager;
-import com.zimbra.cs.account.AccountServiceException;
-import com.zimbra.cs.account.NamedEntry;
-import com.zimbra.cs.account.Provisioning;
-import com.zimbra.common.account.Key;
-import com.zimbra.common.account.Key.AccountBy;
-import com.zimbra.cs.account.accesscontrol.RightManager;
-import com.zimbra.cs.account.accesscontrol.TargetType;
-import com.zimbra.cs.account.accesscontrol.UserRight;
-import com.zimbra.cs.service.account.DiscoverRights;
-import com.zimbra.cs.util.AccountUtil;
-import com.zimbra.soap.ZimbraSoapContext;
-import com.zimbra.soap.type.TargetBy;
+import org.zmail.common.service.ServiceException;
+import org.zmail.common.soap.Element;
+import org.zmail.common.soap.MailConstants;
+import org.zmail.cs.account.AccessManager;
+import org.zmail.cs.account.AccountServiceException;
+import org.zmail.cs.account.NamedEntry;
+import org.zmail.cs.account.Provisioning;
+import org.zmail.common.account.Key;
+import org.zmail.common.account.Key.AccountBy;
+import org.zmail.cs.account.accesscontrol.RightManager;
+import org.zmail.cs.account.accesscontrol.TargetType;
+import org.zmail.cs.account.accesscontrol.UserRight;
+import org.zmail.cs.service.account.DiscoverRights;
+import org.zmail.cs.util.AccountUtil;
+import org.zmail.soap.ZmailSoapContext;
+import org.zmail.soap.type.TargetBy;
 
 public class CheckPermission extends MailDocumentHandler {
 
     public Element handle(Element request, Map<String, Object> context) throws ServiceException {
-        ZimbraSoapContext zsc = getZimbraSoapContext(context);
+        ZmailSoapContext zsc = getZmailSoapContext(context);
         Provisioning prov = Provisioning.getInstance();
         
         Element eTarget = request.getElement(MailConstants.E_TARGET);

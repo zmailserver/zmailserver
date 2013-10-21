@@ -12,7 +12,7 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.httpclient;
+package org.zmail.cs.httpclient;
 
 import java.net.URI;
 import java.net.URISyntaxException;
@@ -21,9 +21,9 @@ import org.apache.commons.httpclient.HttpClient;
 import org.apache.commons.httpclient.UsernamePasswordCredentials;
 import org.apache.commons.httpclient.auth.AuthScope;
 
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.common.util.ZimbraLog;
-import com.zimbra.cs.account.Provisioning;
+import org.zmail.common.service.ServiceException;
+import org.zmail.common.util.ZmailLog;
+import org.zmail.cs.account.Provisioning;
 
 public class HttpProxyUtil {
     
@@ -34,7 +34,7 @@ public class HttpProxyUtil {
     
     public static synchronized void configureProxy(HttpClient client) {
         try {
-            String url = Provisioning.getInstance().getLocalServer().getAttr(Provisioning.A_zimbraHttpProxyURL, null);
+            String url = Provisioning.getInstance().getLocalServer().getAttr(Provisioning.A_zmailHttpProxyURL, null);
             if (url == null) return;
 
             // need to initializae all the statics
@@ -52,16 +52,16 @@ public class HttpProxyUtil {
                     }
                 }
             }
-            if (ZimbraLog.misc.isDebugEnabled()) {
-                ZimbraLog.misc.debug("setting proxy: "+url);
+            if (ZmailLog.misc.isDebugEnabled()) {
+                ZmailLog.misc.debug("setting proxy: "+url);
             }
             client.getHostConfiguration().setProxy(sProxyUri.getHost(), sProxyUri.getPort());
             if (sProxyAuthScope != null && sProxyCreds != null) 
                 client.getState().setProxyCredentials(sProxyAuthScope, sProxyCreds);
         } catch (ServiceException e) {
-            ZimbraLog.misc.warn("Unable to configureProxy: "+e.getMessage(), e);
+            ZmailLog.misc.warn("Unable to configureProxy: "+e.getMessage(), e);
         } catch (URISyntaxException e) {
-            ZimbraLog.misc.warn("Unable to configureProxy: "+e.getMessage(), e);
+            ZmailLog.misc.warn("Unable to configureProxy: "+e.getMessage(), e);
         }
     }
 }

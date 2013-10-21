@@ -13,12 +13,12 @@
  * ***** END LICENSE BLOCK *****
  */
 
-package com.zimbra.cs.imap;
+package org.zmail.cs.imap;
 
-import com.zimbra.common.util.Log;
-import com.zimbra.common.util.ZimbraLog;
-import com.zimbra.cs.security.sasl.Authenticator;
-import com.zimbra.cs.security.sasl.AuthenticatorUser;
+import org.zmail.common.util.Log;
+import org.zmail.common.util.ZmailLog;
+import org.zmail.cs.security.sasl.Authenticator;
+import org.zmail.cs.security.sasl.AuthenticatorUser;
 
 import java.io.IOException;
 
@@ -68,7 +68,7 @@ class ImapAuthenticatorUser implements AuthenticatorUser {
     }
 
     @Override public Log getLog() {
-        return ZimbraLog.imap;
+        return ZmailLog.imap;
     }
 
     @Override public boolean isSSLEnabled() {

@@ -12,7 +12,7 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.qa.unittest.prov.soap;
+package org.zmail.qa.unittest.prov.soap;
 
 import java.util.Collections;
 import java.util.List;
@@ -26,27 +26,27 @@ import static org.junit.Assert.*;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 import com.google.common.collect.Sets;
-import com.zimbra.common.soap.SoapTransport;
-import com.zimbra.common.util.Pair;
-import com.zimbra.cs.account.Account;
-import com.zimbra.cs.account.Domain;
-import com.zimbra.cs.account.Group;
-import com.zimbra.cs.account.NamedEntry;
-import com.zimbra.cs.account.Provisioning;
-import com.zimbra.cs.account.accesscontrol.Right;
-import com.zimbra.qa.unittest.TestUtil;
-import com.zimbra.qa.unittest.prov.Verify;
-import com.zimbra.soap.account.message.CheckRightsRequest;
-import com.zimbra.soap.account.message.CheckRightsResponse;
-import com.zimbra.soap.account.message.GrantRightsRequest;
-import com.zimbra.soap.account.message.GrantRightsResponse;
-import com.zimbra.soap.account.type.AccountACEInfo;
-import com.zimbra.soap.account.type.CheckRightsRightInfo;
-import com.zimbra.soap.account.type.CheckRightsTargetInfo;
-import com.zimbra.soap.account.type.CheckRightsTargetSpec;
-import com.zimbra.soap.type.GranteeType;
-import com.zimbra.soap.type.TargetBy;
-import com.zimbra.soap.type.TargetType;
+import org.zmail.common.soap.SoapTransport;
+import org.zmail.common.util.Pair;
+import org.zmail.cs.account.Account;
+import org.zmail.cs.account.Domain;
+import org.zmail.cs.account.Group;
+import org.zmail.cs.account.NamedEntry;
+import org.zmail.cs.account.Provisioning;
+import org.zmail.cs.account.accesscontrol.Right;
+import org.zmail.qa.unittest.TestUtil;
+import org.zmail.qa.unittest.prov.Verify;
+import org.zmail.soap.account.message.CheckRightsRequest;
+import org.zmail.soap.account.message.CheckRightsResponse;
+import org.zmail.soap.account.message.GrantRightsRequest;
+import org.zmail.soap.account.message.GrantRightsResponse;
+import org.zmail.soap.account.type.AccountACEInfo;
+import org.zmail.soap.account.type.CheckRightsRightInfo;
+import org.zmail.soap.account.type.CheckRightsTargetInfo;
+import org.zmail.soap.account.type.CheckRightsTargetSpec;
+import org.zmail.soap.type.GranteeType;
+import org.zmail.soap.type.TargetBy;
+import org.zmail.soap.type.TargetType;
 
 public class TestCheckRights extends SoapTest {
     private static SoapProvTestUtil provUtil;
@@ -73,7 +73,7 @@ public class TestCheckRights extends SoapTest {
         GrantRightsRequest req = new GrantRightsRequest();
         
         AccountACEInfo ace = new AccountACEInfo(granteeType, right);
-        ace.setZimbraId(grantee.getId());
+        ace.setZmailId(grantee.getId());
         req.addAce(ace);
         GrantRightsResponse resp = invokeJaxb(transport, req);
     }
@@ -189,7 +189,7 @@ public class TestCheckRights extends SoapTest {
         prov.addAlias(targetAcct, alias1);
         prov.addAlias(targetAcct, alias2);
         prov.modifyAttrs(targetAcct, 
-                Collections.singletonMap(Provisioning.A_zimbraPrefAllowAddressForDelegatedSender, alias1));
+                Collections.singletonMap(Provisioning.A_zmailPrefAllowAddressForDelegatedSender, alias1));
         
         grantRight(targetAcct, GranteeType.usr, acct, right);
         

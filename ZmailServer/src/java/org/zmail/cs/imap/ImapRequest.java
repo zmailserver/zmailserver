@@ -12,25 +12,25 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.imap;
+package org.zmail.cs.imap;
 
 import com.google.common.base.Charsets;
 import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.ImmutableSet;
-import com.zimbra.common.util.ZimbraLog;
-import com.zimbra.cs.imap.ImapSearch.AllSearch;
-import com.zimbra.cs.imap.ImapSearch.AndOperation;
-import com.zimbra.cs.imap.ImapSearch.ContentSearch;
-import com.zimbra.cs.imap.ImapSearch.DateSearch;
-import com.zimbra.cs.imap.ImapSearch.FlagSearch;
-import com.zimbra.cs.imap.ImapSearch.HeaderSearch;
-import com.zimbra.cs.imap.ImapSearch.LogicalOperation;
-import com.zimbra.cs.imap.ImapSearch.ModifiedSearch;
-import com.zimbra.cs.imap.ImapSearch.NotOperation;
-import com.zimbra.cs.imap.ImapSearch.OrOperation;
-import com.zimbra.cs.imap.ImapSearch.RelativeDateSearch;
-import com.zimbra.cs.imap.ImapSearch.SequenceSearch;
-import com.zimbra.cs.imap.ImapSearch.SizeSearch;
+import org.zmail.common.util.ZmailLog;
+import org.zmail.cs.imap.ImapSearch.AllSearch;
+import org.zmail.cs.imap.ImapSearch.AndOperation;
+import org.zmail.cs.imap.ImapSearch.ContentSearch;
+import org.zmail.cs.imap.ImapSearch.DateSearch;
+import org.zmail.cs.imap.ImapSearch.FlagSearch;
+import org.zmail.cs.imap.ImapSearch.HeaderSearch;
+import org.zmail.cs.imap.ImapSearch.LogicalOperation;
+import org.zmail.cs.imap.ImapSearch.ModifiedSearch;
+import org.zmail.cs.imap.ImapSearch.NotOperation;
+import org.zmail.cs.imap.ImapSearch.OrOperation;
+import org.zmail.cs.imap.ImapSearch.RelativeDateSearch;
+import org.zmail.cs.imap.ImapSearch.SequenceSearch;
+import org.zmail.cs.imap.ImapSearch.SizeSearch;
 import org.apache.commons.codec.binary.Base64;
 
 import java.io.ByteArrayOutputStream;
@@ -661,7 +661,7 @@ abstract class ImapRequest {
         try {
             return ImapPath.FOLDER_ENCODING_CHARSET.decode(ByteBuffer.wrap(raw.getBytes(Charsets.US_ASCII))).toString();
         } catch (Exception e) {
-            ZimbraLog.imap.debug("ignoring error while decoding folder name: %s", raw, e);
+            ZmailLog.imap.debug("ignoring error while decoding folder name: %s", raw, e);
             return raw;
         }
     }

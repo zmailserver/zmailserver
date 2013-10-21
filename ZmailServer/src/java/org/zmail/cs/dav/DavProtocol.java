@@ -12,13 +12,13 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.dav;
+package org.zmail.cs.dav;
 
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.HashMap;
 
-import com.zimbra.common.mime.MimeConstants;
+import org.zmail.common.mime.MimeConstants;
 
 // HTTP protocol extensions and headers for WebDAV
 public class DavProtocol {

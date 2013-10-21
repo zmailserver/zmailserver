@@ -12,10 +12,10 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.service.formatter;
+package org.zmail.cs.service.formatter;
 
-import com.zimbra.common.soap.Element;
-import com.zimbra.cs.service.formatter.FormatterFactory.FormatType;
+import org.zmail.common.soap.Element;
+import org.zmail.cs.service.formatter.FormatterFactory.FormatType;
 
 public class JsonFormatter extends XmlFormatter {
 

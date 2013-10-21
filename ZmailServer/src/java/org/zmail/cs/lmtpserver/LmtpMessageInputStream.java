@@ -12,7 +12,7 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.lmtpserver;
+package org.zmail.cs.lmtpserver;
 
 import java.io.IOException;
 import java.io.InputStream;

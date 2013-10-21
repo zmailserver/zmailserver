@@ -12,19 +12,19 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.account.accesscontrol;
+package org.zmail.cs.account.accesscontrol;
 
-import com.zimbra.common.account.Key;
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.common.util.ZimbraLog;
+import org.zmail.common.account.Key;
+import org.zmail.common.service.ServiceException;
+import org.zmail.common.util.ZmailLog;
 
-import com.zimbra.cs.account.Account;
-import com.zimbra.cs.account.AuthToken;
-import com.zimbra.cs.account.DomainAccessManager;
-import com.zimbra.cs.account.Entry;
-import com.zimbra.cs.account.GuestAccount;
-import com.zimbra.cs.account.Provisioning;
-import com.zimbra.cs.account.accesscontrol.Rights.User;
+import org.zmail.cs.account.Account;
+import org.zmail.cs.account.AuthToken;
+import org.zmail.cs.account.DomainAccessManager;
+import org.zmail.cs.account.Entry;
+import org.zmail.cs.account.GuestAccount;
+import org.zmail.cs.account.Provisioning;
+import org.zmail.cs.account.accesscontrol.Rights.User;
 
 /*
  * - domain based access manager
@@ -93,7 +93,7 @@ public class DomainACLAccessManager extends DomainAccessManager {
             }
                 
         } catch (ServiceException e) {
-            ZimbraLog.account.warn("ACL checking failed: " + 
+            ZmailLog.account.warn("ACL checking failed: " + 
                                    "grantee=" + grantee.getName() + 
                                    ", target=" + target.getLabel() + 
                                    ", right=" + rightNeeded.getName() + 
@@ -107,14 +107,14 @@ public class DomainACLAccessManager extends DomainAccessManager {
             Account granteeAcct;
             if (grantee == null)
                 granteeAcct = GuestAccount.ANONYMOUS_ACCT;
-            else if (grantee.isZimbraUser())
+            else if (grantee.isZmailUser())
                 granteeAcct = Provisioning.getInstance().get(Key.AccountBy.id, grantee.getAccountId());
             else
                 granteeAcct = new GuestAccount(grantee);
             
             return canDo(granteeAcct, target, rightNeeded, asAdmin, defaultGrant);
         } catch (ServiceException e) {
-            ZimbraLog.account.warn("ACL checking failed: " +
+            ZmailLog.account.warn("ACL checking failed: " +
                                    "grantee=" + grantee.getAccountId() +
                                    ", target=" + target.getLabel() +
                                    ", right=" + rightNeeded.getName() +
@@ -135,7 +135,7 @@ public class DomainACLAccessManager extends DomainAccessManager {
             
             return canDo(granteeAcct, target, rightNeeded, asAdmin, defaultGrant);
         } catch (ServiceException e) {
-            ZimbraLog.account.warn("ACL checking failed: " + 
+            ZmailLog.account.warn("ACL checking failed: " + 
                                    "grantee=" + granteeEmail + 
                                    ", target=" + target.getLabel() + 
                                    ", right=" + rightNeeded.getName() + 

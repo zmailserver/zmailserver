@@ -1,7 +1,7 @@
 I. SPNEGO SSO
 
-   The SPNEGO SSO feature allows AD domain users to enter their Zimbra mailbox without 
-   having to re-authenticate themselves to Zimbra by entering their Zimbra credentials.
+   The SPNEGO SSO feature allows AD domain users to enter their Zmail mailbox without 
+   having to re-authenticate themselves to Zmail by entering their Zmail credentials.
     
    Microsoft's Active Directory/Kerberos implementation is the single authentication store.
    
@@ -22,13 +22,13 @@ I. SPNEGO SSO
    
    - User logon to a Windows/AD domain.
    - The logged-on user must have acquired Kerberos credentials from the domain.
-   - The logged-on user then attempts to access Zimbra. 
-   - Zimbra is configured to redirect the request to a URL under SPNEGO protection. 
-   - The Zimbra server asks for authentication with Kerberos (by using SPNEGO). 
-   - The client obtains a ticket for the requested service from the KDC and presents these credentials back to Zimbra server.
-   - The Zimbra server extracts the user's credentials and authenticates the user.
-   - The request is then redirected to the requested webapp with a Zimbra auth token.
-   - The webapp adapts the Zimbra auth token and let the user in without requesting for hist Zimbra login/password.
+   - The logged-on user then attempts to access Zmail. 
+   - Zmail is configured to redirect the request to a URL under SPNEGO protection. 
+   - The Zmail server asks for authentication with Kerberos (by using SPNEGO). 
+   - The client obtains a ticket for the requested service from the KDC and presents these credentials back to Zmail server.
+   - The Zmail server extracts the user's credentials and authenticates the user.
+   - The request is then redirected to the requested webapp with a Zmail auth token.
+   - The webapp adapts the Zmail auth token and let the user in without requesting for hist Zmail login/password.
 
    Important notes:
        If you enable SPNEGO SSO on a domain, you must inform/instruct all users to configure 
@@ -54,43 +54,43 @@ I. SPNEGO SSO
        If The browser is properly configured, it will respond to the challenge.  If the user is
        logged on as a local user, the SPNEGO token in the response will not be accepted by the server.
        At this point, server will redirect the request to the regular username/password 
-       login page, and user can log in by entering their Zimbra username/password.
+       login page, and user can log in by entering their Zmail username/password.
        
 
 
-II. Zimbra UI Flow
+II. Zmail UI Flow
 
 Login:
 1. user login to Windows or Mac as an AD domain user or a local user
 
-2. user browses to the regular Zimbra entry URL, e.g. http://dogfood.zimbra.com
+2. user browses to the regular Zmail entry URL, e.g. http://dogfood.zmail.com
 
-3. a domain(e.g. zimbra.com) gets resolved by virtual host name (dogfood.zimbra.com)
+3. a domain(e.g. zmail.com) gets resolved by virtual host name (dogfood.zmail.com)
 
-4. zimbraWebClientLoginURL on domain redirects user to the spnego authentication 
+4. zmailWebClientLoginURL on domain redirects user to the spnego authentication 
    servlet.  The servlet is under spnego protection.  All requests must present a 
    valid spnego token when challenged.
 
 5. spnego authentication happens, followed by the authorization process that 
-   verifies the user indeed has an active account on the Zimbra system.
+   verifies the user indeed has an active account on the Zmail system.
 
 6. if spnego auth succeeds, goto 7, if failed goto step 11.
 
 7. user is redirected into the requested webapp.
 
 Logout:
-8. user clicks on the "logout" button, and gets redirected to the zimbraWebClientLogOutURL 
+8. user clicks on the "logout" button, and gets redirected to the zmailWebClientLogOutURL 
    configured on the domain.
 
 9. the logout URL points to the SSO logout page, which has a "Launch" button.  
 
-10. user clicks on "Launch", and gets redirected to the regular Zimbra entry page (goto step 2)
+10. user clicks on "Launch", and gets redirected to the regular Zmail entry page (goto step 2)
  
 Error: 
-11. (spnego authentication or Zimbra authorization failed) user is redirected to the error URL, 
+11. (spnego authentication or Zmail authorization failed) user is redirected to the error URL, 
     which is defaulted to the regular username/password screen.
 
-12. user can attempt to login by entering his Zimbra username/password.
+12. user can attempt to login by entering his Zmail username/password.
 
 
 III. Configuration
@@ -112,19 +112,19 @@ On the Windows Server AD domain controller:
     - Fill in the following:
           Full name: {a display name}
 
-          User Logon Name: HTTP/{zimbra-mailbox-server-name} (the domain is automatically filled)
-          (Note: this is the value for the {zimbra-mailbox-server-name} parameter in the setspn command (see below), and 
-                 this is the value to be set for the zimbraSpnegoAuthTargetName server attribute in LDAP.)
+          User Logon Name: HTTP/{zmail-mailbox-server-name} (the domain is automatically filled)
+          (Note: this is the value for the {zmail-mailbox-server-name} parameter in the setspn command (see below), and 
+                 this is the value to be set for the zmailSpnegoAuthTargetName server attribute in LDAP.)
 
           User Logon Name (pre-Windows 2000): {Active Directory service account name} 
           (Note: this is the name you use for the -mapUser {AD-user} parameter in the setspn and ktpass commands (see below).)
 
       e.g.
-          Full name: zimbra-dogfood
+          Full name: zmail-dogfood
 
-          User Logon Name: HTTP/dogfood.zimbra.com
+          User Logon Name: HTTP/dogfood.zmail.com
 
-          User Logon Name (pre-Windows 2000): zimbra-dogfood 
+          User Logon Name (pre-Windows 2000): zmail-dogfood 
       
     - click on Next
 
@@ -140,22 +140,22 @@ On the Windows Server AD domain controller:
 
 (B) Add the Service Principal Names (SPN) directory property for an Active Directory service account. 
 
-    setspn -A {zimbra-mailbox-server-name} {AD-user}
+    setspn -A {zmail-mailbox-server-name} {AD-user}
     
     e.g.
     - list registered SPNs (there is none)
-      C:\>setspn -L zimbra-dogfood
-      Registered ServicePrincipalNames for CN=zimbra-dogfood,CN=Users,DC=vmware,DC=com:
+      C:\>setspn -L zmail-dogfood
+      Registered ServicePrincipalNames for CN=zmail-dogfood,CN=Users,DC=vmware,DC=com:
 
     - add SPN for the service account
-      C:\>setspn -A HTTP/dogfood.zimbra.com zimbra-dogfood
-      Registering ServicePrincipalNames for CN=zimbra-dogfood,CN=Users,DC=vmware,DC=com HTTP/dogfood.zimbra.com
+      C:\>setspn -A HTTP/dogfood.zmail.org zmail-dogfood
+      Registering ServicePrincipalNames for CN=zmail-dogfood,CN=Users,DC=vmware,DC=com HTTP/dogfood.zmail.com
       Updated object
 
     - list registered SPNs (should see the one we just added)
-      C:\>setspn -L zimbra-dogfood
-      Registered ServicePrincipalNames for CN=zimbra-dogfood,CN=Users,DC=vmware,DC=com:
-      HTTP/dogfood.zimbra.com
+      C:\>setspn -L zmail-dogfood
+      Registered ServicePrincipalNames for CN=zmail-dogfood,CN=Users,DC=vmware,DC=com:
+      HTTP/dogfood.zmail.com
 
 
 (C) Create the keytab file
@@ -165,180 +165,180 @@ On the Windows Server AD domain controller:
     e.g.
     The following will create jetty.keytab file under c:\Temp\spnego:
     
-    C:\>ktpass -out c:\Temp\spnego\jetty.keytab -princ HTTP/dogfood.zimbra.com@VMWARE.COM -mapUser zimbra-dogfood -mapOp set -pass test123 -crypto RC4-HMAC-NT -pType KRB5_NT_PRINCIPAL
+    C:\>ktpass -out c:\Temp\spnego\jetty.keytab -princ HTTP/dogfood.zmail.com@VMWARE.COM -mapUser zmail-dogfood -mapOp set -pass test123 -crypto RC4-HMAC-NT -pType KRB5_NT_PRINCIPAL
     Targeting domain controller: test-dc.vmware.com
     Using legacy password setting method
-    Successfully mapped HTTP/dogfood.zimbra.com to zimbra-dogfood.
+    Successfully mapped HTTP/dogfood.zmail.com to zmail-dogfood.
     Key created.
     Output keytab to c:\Temp\spnego\jetty.keytab:
     Keytab version: 0x502
-    keysize 71 HTTP/dogfood.zimbra.com@VMWARE.COM ptype 1 (KRB5_NT_PRINCIPAL) vno3 etype 0x17 (RC4-HMAC) keylength 16 (0xc383f6a25f1e195d5aef495c980c2bfe)
+    keysize 71 HTTP/dogfood.zmail.com@VMWARE.COM ptype 1 (KRB5_NT_PRINCIPAL) vno3 etype 0x17 (RC4-HMAC) keylength 16 (0xc383f6a25f1e195d5aef495c980c2bfe)
     
     
-(D) Place the Keytab File on Zimbraserver   
-    copy jetty.keytab created in step (C) to the zimbra server (e.g. dogfood.zimbra.com) as /opt/zimbra/data/mailboxd/spnego/jetty.keytab
+(D) Place the Keytab File on Zmailserver   
+    copy jetty.keytab created in step (C) to the zmail server (e.g. dogfood.zmail.com) as /opt/zmail/data/mailboxd/spnego/jetty.keytab
 
     Note: Do not rename the keytab file, the name(jetty.keytab) is referenced from various configuration files.
 
 In a proxy - multi mailstore set-up, create a keytab file with proxy hostname as did on step (A) and copy it to all mailstores as did in step (D).
 
-For a non proxy - multil mailstore set-up, Repeat steps (A) to (D) for each zimbra server(e.g. catfood.zimbra.com, corp.zimbra.com).
+For a non proxy - multil mailstore set-up, Repeat steps (A) to (D) for each zmail server(e.g. catfood.zmail.com, corp.zmail.com).
 
 =====================
-2. Configure Zimbra
+2. Configure Zmail
 =====================
 - For production system, do 2.1, 2.2, 2.3.
 
-- For dev system: do "ant spnego-dev-deploy" under ZimbraServer.
+- For dev system: do "ant spnego-dev-deploy" under ZmailServer.
 
 
 2.1. Configure Global Config
 ----------------------------
-We support only one REALM per Zimbra installation.
+We support only one REALM per Zmail installation.
 
 Modify the following global config attributes with "zmprov mcf" command.
 
-zimbraSpnegoAuthEnabled     : TRUE
-                              e.g. zmprov mcf zimbraSpnegoAuthEnabled TRUE
+zmailSpnegoAuthEnabled     : TRUE
+                              e.g. zmprov mcf zmailSpnegoAuthEnabled TRUE
 
-zimbraSpnegoAuthErrorURL    : URL to redirect users to on spnego auth failure.
+zmailSpnegoAuthErrorURL    : URL to redirect users to on spnego auth failure.
                               If not set, the default is the requested webapp's 
                               regular login page.
                      
-zimbraSpnegoAuthRealm       : the kerberos realm in the domain controller
-                              e.g. zmprov mcf zimbraSpnegoAuthRealm VMWARE.COM
+zmailSpnegoAuthRealm       : the kerberos realm in the domain controller
+                              e.g. zmprov mcf zmailSpnegoAuthRealm VMWARE.COM
 
 
 2.2. Configure Servers
 ----------------------
-On each zimbra server, modify the following global config attributes with "zmprov ms" command.
+On each zmail server, modify the following global config attributes with "zmprov ms" command.
 
-zimbraSpnegoAuthTargetName  : the name for the service user in III. 1. (A), 
-                              e.g. zmprov ms dogfood.zimbra.com zimbraSpnegoAuthTargetName HTTP/dogfood.zimbra.com
-                                   zmprov ms catfood.zimbra.com zimbraSpnegoAuthTargetName HTTP/catfood.zimbra.com
+zmailSpnegoAuthTargetName  : the name for the service user in III. 1. (A), 
+                              e.g. zmprov ms dogfood.zmail.org zmailSpnegoAuthTargetName HTTP/dogfood.zmail.com
+                                   zmprov ms catfood.zmail.org zmailSpnegoAuthTargetName HTTP/catfood.zmail.com
 
-zimbraSpnegoAuthPrincipal   : {zimbraSpnegoAuthTargetName}@{zimbraSpnegoAuthRealm}
-                              e.g. zmprov ms dogfood.zimbra.com zimbraSpnegoAuthPrincipal HTTP/dogfood.zimbra.com@VMWARE.COM
-                                   zmprov ms catfood.zimbra.com zimbraSpnegoAuthPrincipal HTTP/catfood.zimbra.com@VMWARE.COM
+zmailSpnegoAuthPrincipal   : {zmailSpnegoAuthTargetName}@{zmailSpnegoAuthRealm}
+                              e.g. zmprov ms dogfood.zmail.org zmailSpnegoAuthPrincipal HTTP/dogfood.zmail.com@VMWARE.COM
+                                   zmprov ms catfood.zmail.org zmailSpnegoAuthPrincipal HTTP/catfood.zmail.com@VMWARE.COM
   
 
 2.3. Configure Domain
 ---------------------
 (A) Setup kerberos Realm for the domain
-    zmprov md {domain} zimbraAuthKerberos5Realm {kerberos-realm}
+    zmprov md {domain} zmailAuthKerberos5Realm {kerberos-realm}
 
-    {kerberos-realm} should be the same realm set in global config attribute zimbraSpnegoAuthRealm
+    {kerberos-realm} should be the same realm set in global config attribute zmailSpnegoAuthRealm
     
     e.g. 
-    zmprov md zimbra.com zimbraAuthKerberos5Realm VMWARE.COM
+    zmprov md zmail.org zmailAuthKerberos5Realm VMWARE.COM
     
     Principal mapping:
     ------------------
     The SPNEGO token carries a user's kerberos principal.  After a user's SPNEGO token 
-    is authenticated, ZCS servers need to identify the user in Zimbra's LDAP.   
-    A kerberos principal is mapped to a Zimbra account by the following mechanism:
+    is authenticated, ZCS servers need to identify the user in Zmail's LDAP.   
+    A kerberos principal is mapped to a Zmail account by the following mechanism:
     
     Method 1. domain basis
          
               Requires the localpart of the kerberos principal be identical to the localpart 
-              of one the user's Zimbra email address (primary or alaises).
+              of one the user's Zmail email address (primary or alaises).
             
               A kerberos principal: 
                    {localpart-of-kerberos-principal}@{kerberos-realm}
-              is mapped to Zimbra account: 
-                   {localpart-of-kerberos-principal}@{zimbra-domain-with-zimbraAuthKerberos5Realm-set-to-the-kerberos-realm}
+              is mapped to Zmail account: 
+                   {localpart-of-kerberos-principal}@{zmail-domain-with-zmailAuthKerberos5Realm-set-to-the-kerberos-realm}
               
               For example, 
-              The setting: zmprov md zimbra.com zimbraAuthKerberos5Realm VMWARE.COM
+              The setting: zmprov md zmail.org zmailAuthKerberos5Realm VMWARE.COM
               will map kerberos princiapl: user1@VMWARE.COM 
-              to Zimbra account: user1@zimbra.com
+              to Zmail account: user1@zmail.com
               
-              It is a config error if multiple domains have zimbraAuthKerberos5Realm set to 
+              It is a config error if multiple domains have zmailAuthKerberos5Realm set to 
               the same realm.  In that case a MULTIPLE_ENTRIES_MATCHED exception will be thrown.
               
     or
     
     Method 2. account basis
               If method1 cannot fulfill all possible mappings, per-account basis mapping 
-              is also supported.   This can map a Zimbra user to any kerberos principal, it 
-              also allows uzers in the same Zimbra domain to be mapped to different kerberos 
+              is also supported.   This can map a Zmail user to any kerberos principal, it 
+              also allows uzers in the same Zmail domain to be mapped to different kerberos 
               realms.
               
-              Account level mapping is configured by setting zimbraForeignPrincipal to 
+              Account level mapping is configured by setting zmailForeignPrincipal to 
               "kerberos5:{kerberos-principal}"
               
               For example, 
-              zmrpov ma user1@zimbra.com zimbraForeignPrincipal kerberos5:foo@REALM1.COM
-              zmrpov ma user2@zimbra.com zimbraForeignPrincipal kerberos5:bar@REALM2.COM
+              zmrpov ma user1@zmail.org zmailForeignPrincipal kerberos5:foo@REALM1.COM
+              zmrpov ma user2@zmail.org zmailForeignPrincipal kerberos5:bar@REALM2.COM
               
-              It is a config error if multple accounts have he same zimbraForeignPrincipal.
+              It is a config error if multple accounts have he same zmailForeignPrincipal.
               In that case a MULTIPLE_ENTRIES_MATCHED exception will be thrown.
               
               
     Method 1 and 2 can co-exist.  The lookup will first try to find the account by 
-    zimbraForeignPrincipal (method 2).  If no account is found, it will fallback to use 
+    zmailForeignPrincipal (method 2).  If no account is found, it will fallback to use 
     domain based mapping (method 1).
     
     
 (B) Setup virtual host for the domain
-    zmprov md {domain} +zimbraVirtualHostname {virtual-hostname-1} +zimbraVirtualHostname {virtual-hostname-2} ...
+    zmprov md {domain} +zmailVirtualHostname {virtual-hostname-1} +zmailVirtualHostname {virtual-hostname-2} ...
     
-    virtual-hostname-* are the hostnames you can browse to for the Zimbra WEB UI.
+    virtual-hostname-* are the hostnames you can browse to for the Zmail WEB UI.
     e.g.
-    zmprov md zimbra.com +zimbraVirtualHostname dogfood.zimbra.com +zimbraVirtualHostname catfood.zimbra.com
+    zmprov md zmail.com +zmailVirtualHostname dogfood.zmail.com +zmailVirtualHostname catfood.zmail.com
     
     
 (C) Setup web client login URL and UAs/IP addresses allowed for the login URL on the domain
     - Set login URL.  Login URL is the URL to redirect to for logging in and when
-      Zimbra auth token is expired.  Set it to the spnego authentication servlet.
-      zmprov md {domain} zimbraWebClientLoginURL '/service/spnego'
+      Zmail auth token is expired.  Set it to the spnego authentication servlet.
+      zmprov md {domain} zmailWebClientLoginURL '/service/spnego'
     
     - Honor only supported platforms and browsers.  
-      zimbraWebClientLoginURLAllowedUA is a multi-valued attribute, values are regex.
+      zmailWebClientLoginURLAllowedUA is a multi-valued attribute, values are regex.
       If not set, all UAs are honored. If multiple values are set, an UA is honored  
       as long as it matches any one of the values.  If UA is not honored, the request 
-      will not be redirected to zimbraWebClientLoginURL.
-      zmprov md {domain} +zimbraWebClientLoginURLAllowedUA {UA-regex-1} +zimbraWebClientLoginURLAllowedUA {UA-regex-2} ...
+      will not be redirected to zmailWebClientLoginURL.
+      zmprov md {domain} +zmailWebClientLoginURLAllowedUA {UA-regex-1} +zmailWebClientLoginURLAllowedUA {UA-regex-2} ...
       
-      e.g. honor zimbraWebClientLoginURL only for Firefox/IE/Chrome/Safari on Windows, and Safari on Mac)
-      zmprov md {domain} +zimbraWebClientLoginURLAllowedUA '.*Windows.*Firefox/3.*'
-      zmprov md {domain} +zimbraWebClientLoginURLAllowedUA '.*MSIE.*Windows.*'
-      zmprov md {domain} +zimbraWebClientLoginURLAllowedUA '.*Windows.*Chrome.*'
-      zmprov md {domain} +zimbraWebClientLoginURLAllowedUA '.*Windows.*Safari.*'
-      zmprov md {domain} +zimbraWebClientLoginURLAllowedUA '.*Macintosh.*Safari.*'
+      e.g. honor zmailWebClientLoginURL only for Firefox/IE/Chrome/Safari on Windows, and Safari on Mac)
+      zmprov md {domain} +zmailWebClientLoginURLAllowedUA '.*Windows.*Firefox/3.*'
+      zmprov md {domain} +zmailWebClientLoginURLAllowedUA '.*MSIE.*Windows.*'
+      zmprov md {domain} +zmailWebClientLoginURLAllowedUA '.*Windows.*Chrome.*'
+      zmprov md {domain} +zmailWebClientLoginURLAllowedUA '.*Windows.*Safari.*'
+      zmprov md {domain} +zmailWebClientLoginURLAllowedUA '.*Macintosh.*Safari.*'
 
     - Honor only seletced client IP addresses
-      zimbraWebClientLoginURLAllowedIP is a multi-valued attribute, values are regex.
+      zmailWebClientLoginURLAllowedIP is a multi-valued attribute, values are regex.
       If not set, any client IP address is honored. If multiple values are set, an IP address is honored  
       as long as it matches any one of the values.  If client IP is not honored, the request 
-      will not be redirected to zimbraWebClientLoginURL.
-      zmprov md {domain} +zimbraWebClientLoginURLAllowedIP '10\.112\.205\.[1-9][0-9]'
+      will not be redirected to zmailWebClientLoginURL.
+      zmprov md {domain} +zmailWebClientLoginURLAllowedIP '10\.112\.205\.[1-9][0-9]'
       
       
 (D) Setup web client logout URL and UAs allowed for the logout URL on the domain
     - Set logout URL.  Logout URL is the URL to redirect to when user clicks on "Logout".
-      zmprov md {domain} zimbraWebClientLogoutURL '../?sso=1'
+      zmprov md {domain} zmailWebClientLogoutURL '../?sso=1'
     
     - Honor only supported platforms and browsers.  
-      zimbraWebClientLogoutURLAllowedUA is a multi-valued attribute, values are regex.
+      zmailWebClientLogoutURLAllowedUA is a multi-valued attribute, values are regex.
       If not set, all UAs are honored. If multiple values are set, an UA is honored  
       as long as it matches any one of the values.  If UA is not honored, user will not be 
-      redirected to zimbraWebClientLogoutURL when logged out.
-      zmprov md {domain} +zimbraWebClientLogoutURLAllowedUA {UA-regex-1} +zimbraWebClientLogoutURLAllowedUA {UA-regex-2} ...
+      redirected to zmailWebClientLogoutURL when logged out.
+      zmprov md {domain} +zmailWebClientLogoutURLAllowedUA {UA-regex-1} +zmailWebClientLogoutURLAllowedUA {UA-regex-2} ...
       
-      e.g. honor zimbraWebClientLogoutURL only for Firefox/IE/Chrome/Safari on Windows, and Safari on Mac)
-      zmprov md {domain} +zimbraWebClientLogoutURLAllowedUA '.*Windows.*Firefox/3.*'
-      zmprov md {domain} +zimbraWebClientLogoutURLAllowedUA '.*MSIE.*Windows.*'
-      zmprov md {domain} +zimbraWebClientLogoutURLAllowedUA '.*Windows.*Chrome.*'
-      zmprov md {domain} +zimbraWebClientLogoutURLAllowedUA '.*Windows.*Safari.*'
-      zmprov md {domain} +zimbraWebClientLogoutURLAllowedUA '.*Macintosh.*Safari.*'
+      e.g. honor zmailWebClientLogoutURL only for Firefox/IE/Chrome/Safari on Windows, and Safari on Mac)
+      zmprov md {domain} +zmailWebClientLogoutURLAllowedUA '.*Windows.*Firefox/3.*'
+      zmprov md {domain} +zmailWebClientLogoutURLAllowedUA '.*MSIE.*Windows.*'
+      zmprov md {domain} +zmailWebClientLogoutURLAllowedUA '.*Windows.*Chrome.*'
+      zmprov md {domain} +zmailWebClientLogoutURLAllowedUA '.*Windows.*Safari.*'
+      zmprov md {domain} +zmailWebClientLogoutURLAllowedUA '.*Macintosh.*Safari.*'
 
     - Honor only seletced client IP addresses
-      zimbraWebClientLogoutURLAllowedIP is a multi-valued attribute, values are regex.
+      zmailWebClientLogoutURLAllowedIP is a multi-valued attribute, values are regex.
       If not set, any client IP address is honored. If multiple values are set, an IP address is honored  
       as long as it matches any one of the values.  If client IP is not honored, user will not be 
-      redirected to zimbraWebClientLogoutURL when logged out.
-      zmprov md {domain} +zimbraWebClientLogoutURLAllowedIP '10\.112\.205\.[1-9][0-9]'
+      redirected to zmailWebClientLogoutURL when logged out.
+      zmprov md {domain} +zmailWebClientLogoutURLAllowedIP '10\.112\.205\.[1-9][0-9]'
 
 ===========================
 3. Configure Your Browser
@@ -353,8 +353,8 @@ Windows
              * set network.negotiate-auth.delegation-uris to http://,https://
              * set network.negotiate-auth.trusted-uris to http://,https://
              or
-             * set network.negotiate-auth.delegation-uris to http://dogfood.zimbra.com,https://dogfood.zimbra.com,http://catfood.zimbra.com,https://catfood.zimbra.com
-             * set network.negotiate-auth.trusted-uris to http://dogfood.zimbra.com,https://dogfood.zimbra.com,http://catfood.zimbra.com,https://catfood.zimbra.com
+             * set network.negotiate-auth.delegation-uris to http://dogfood.zmail.com,https://dogfood.zmail.com,http://catfood.zmail.com,https://catfood.zmail.com
+             * set network.negotiate-auth.trusted-uris to http://dogfood.zmail.com,https://dogfood.zmail.com,http://catfood.zmail.com,https://catfood.zmail.com
     
     IE/Chrome/Safari:
         1. Tools -> Options -> Security -> Local Intranet -> Sites
@@ -380,25 +380,25 @@ Mac
   
   Your ticket as a domain user will be saved on the computer.
   Ths token will be picked up by the spnego aware browser and send in 
-  the Authorization header to zimbra server.
+  the Authorization header to zmail server.
   
 - Browse to the regualr ZWC entry page:
-  e.g. http://dogfood.zimbra.com
+  e.g. http://dogfood.zmail.com
   
-- You should be redirected to your inbox, without being prompted for Zimbra username/password.
+- You should be redirected to your inbox, without being prompted for Zmail username/password.
 
   
 What happens behind the scene in ZCS server:
   - A domain gets resolved by the virtual host name setting.
-    (zimbraVirtualHostname on domain)
+    (zmailVirtualHostname on domain)
   
   - The request gets redirected to the login URL on the domain.
-    (zimbraWebClientLoginURL on domain)
+    (zmailWebClientLoginURL on domain)
   
-  - spnego authentication and Zimbra authorization happens
+  - spnego authentication and Zmail authorization happens
   
   - if authentication or authorization fails, user will be redirected to an error URL.
-    (zimbraSpnegoAuthErrorURL on global config)
+    (zmailSpnegoAuthErrorURL on global config)
     
   - if authentication and authorization succeeds, user will be redirected into the 
     requested webapp.
@@ -422,8 +422,8 @@ What happens behind the scene in ZCS server:
     Check your browser settings, and make sure it is one of the supported browsers/platforms.  
 
 
-(3) If you are redirected to the error URL specified in zimbraSpnegoAuthErrorURL (or the login 
-    page if zimbraSpnegoAuthErrorURL is not set), that means authentication or authorization 
+(3) If you are redirected to the error URL specified in zmailSpnegoAuthErrorURL (or the login 
+    page if zmailSpnegoAuthErrorURL is not set), that means authentication or authorization 
     failed.
      
     Take a network trace, make sure the browser send Authorization header(Appendix A: HTTP Flow, 5) 
@@ -438,7 +438,7 @@ What happens behind the scene in ZCS server:
    
     - add in log4j.properties:
       log4j.logger.org.mortbay.log=DEBUG 
-      log4j.logger.zimbra.account=DEBUG
+      log4j.logger.zmail.account=DEBUG
     
     then restart mailbox server.
      
@@ -456,13 +456,13 @@ What happens behind the scene in ZCS server:
 ===========================================
 Kerberos auth and SPNEGO can co-exists on a domain.   Use case is using kerberos as the 
 mechanism for verifying user principal/password against a KDC, instead of the native 
-Zimbra LDAP, when user cannot get in by SPNEGO.
+Zmail LDAP, when user cannot get in by SPNEGO.
 
-When SPNEGO auth fails, user is redirected to the Zimbra login screen if browser is 
-configured properly.   Users can enter their Zimbra username/password on the login screen to 
-login manually.  Domain attribute zimbraAuthMech controls the mechanism for verifying  
-password.   If zimbraAuthMech is set to "kerberos5", user entered username is used to first 
-identify a valid Zimbra user (must be provisionined in Zimbra LDAP), then from Zimbra user 
+When SPNEGO auth fails, user is redirected to the Zmail login screen if browser is 
+configured properly.   Users can enter their Zmail username/password on the login screen to 
+login manually.  Domain attribute zmailAuthMech controls the mechanism for verifying  
+password.   If zmailAuthMech is set to "kerberos5", user entered username is used to first 
+identify a valid Zmail user (must be provisionined in Zmail LDAP), then from Zmail user 
 is mapped to a kerberos principal, the kerberos principal + password is then validated 
 against a KDC.   This KDC could be different from, or the same as the KDC that Active Directory 
 domain controller(for SPNEGO auth) is running as.    
@@ -472,38 +472,38 @@ For SPNEGO auth, KDC is not contacted from mailbox server.  The kerberos token s
 Authorization http header along with jetty's keytab file can identify/authenticate the 
 user.
 
-For kerberos auth (zimbraAuthMech="kerberos5"), mailbox server needs to contact KDC to 
-validate principal+password.   For java kerberos client (i.e. Zimbra mailbox server), 
+For kerberos auth (zmailAuthMech="kerberos5"), mailbox server needs to contact KDC to 
+validate principal+password.   For java kerberos client (i.e. Zmail mailbox server), 
 the default realm and KDC for the realm is specify in a kerberos config file.  Location of 
 this config file can be specified in JVM argument java.security.krb5.conf. If not specified,
-default is /etc/krb5.conf.   When SPNEGO is enabled in Zimbra, java.security.krb5.conf 
-for mailbox server is set to "/opt/zimbra/jetty/etc/krb5.ini".   Therefore, that is the 
+default is /etc/krb5.conf.   When SPNEGO is enabled in Zmail, java.security.krb5.conf 
+for mailbox server is set to "/opt/zmail/jetty/etc/krb5.ini".   Therefore, that is the 
 effective file for configuring kerberos auth.
 
-/opt/zimbra/jetty/etc/krb5.ini is rewritten from /opt/zimbra/jetty/etc/krb5.ini.in 
+/opt/zmail/jetty/etc/krb5.ini is rewritten from /opt/zmail/jetty/etc/krb5.ini.in 
 each time when mailbox server restarts.  To configure, you need to modify the 
-/opt/zimbra/jetty/etc/krb5.ini.in file, not /opt/zimbra/jetty/etc/krb5.ini.
+/opt/zmail/jetty/etc/krb5.ini.in file, not /opt/zmail/jetty/etc/krb5.ini.
 
 Under [realms] section, kdc and admin_server are not set for SPNEGO auth, but they are 
 required for kerberos auth.   
 
 To configure:
 
-(1) Edit /opt/zimbra/jetty/etc/krb5.ini.in
+(1) Edit /opt/zmail/jetty/etc/krb5.ini.in
 
 change:
 
 [realms]
-%%zimbraSpnegoAuthRealm%% = {
-                default_domain = %%zimbraSpnegoAuthRealm%%
+%%zmailSpnegoAuthRealm%% = {
+                default_domain = %%zmailSpnegoAuthRealm%%
 }
 
 to:
 
-%%zimbraSpnegoAuthRealm%% = {
+%%zmailSpnegoAuthRealm%% = {
                 kdc = YOUR-KDC
                 admin_server = YOUR-ADMIN-SERVER
-                default_domain = %%zimbraSpnegoAuthRealm%%
+                default_domain = %%zmailSpnegoAuthRealm%%
 }
 
 
@@ -515,8 +515,8 @@ kdc/admin_server for kerberos auth is running.
 
 The restriction is, the realm for SPNEGO and kerberos auth must be the same.  
 For SPNEGO auth, the kerberos principal in the Authorization header is mapped to a 
-unique Zimbra account.  For kerberos auth, the Zimbra account is mapped to a unique kerberos 
-principal.  The mapping (by domain attribute zimbraAuthKerberos5Realm) is the same for both.
+unique Zmail account.  For kerberos auth, the Zmail account is mapped to a unique kerberos 
+principal.  The mapping (by domain attribute zmailAuthKerberos5Realm) is the same for both.
 
 
 =======================
@@ -524,10 +524,10 @@ Appendix A: HTTP Flow
 =======================
 
 ------------
-1. Request: accessing the zimbra Entry page
+1. Request: accessing the zmail Entry page
 ------------
 GET / HTTP/1.1
-Host: dogfood.zimbra.com
+Host: dogfood.zmail.com
 User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10_5_8; en-us) AppleWebKit/533.17.8 (KHTML, like Gecko) Version/5.0.1 Safari/533.17.8
 Accept: application/xml,application/xhtml+xml,text/html;q=0.9,text/plain;q=0.8,image/png,*/*;q=0.5
 Accept-Language: en-us
@@ -535,7 +535,7 @@ Accept-Encoding: gzip, deflate
 Connection: keep-alive
 
 ------------
-2. Response: redirect the request to the URL in zimbraWebClientLoginURL on the domain (resolved by zimbraVirtualHostname)
+2. Response: redirect the request to the URL in zmailWebClientLoginURL on the domain (resolved by zmailVirtualHostname)
 ------------
 HTTP/1.1 302 Found
 Date: Tue, 14 Dec 2010 23:53:06 GMT
@@ -544,14 +544,14 @@ Cache-Control: no-store, no-cache, must-revalidate, max-age=0
 Pragma: no-cache
 Content-Type: text/html; charset=utf-8
 Content-Language: en-US
-Location: http://dogfood.zimbra.com/service/spnego
+Location: http://dogfood.zmail.com/service/spnego
 Content-Length: 0
 
 ------------
 3. Request: client follows the redirect, which is under SPNEGO protection
 ------------
 GET /service/spnego HTTP/1.1
-Host: dogfood.zimbra.com
+Host: dogfood.zmail.com
 Accept-Encoding: gzip, deflate
 Accept-Language: en-us
 User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10_5_8; en-us) AppleWebKit/533.17.8 (KHTML, like Gecko) Version/5.0.1 Safari/533.17.8
@@ -572,7 +572,7 @@ Content-Length: 1396
 5. Request: client sends another request, with SPNEGO auth scheme and ticket, in reply to the challange
 ------------
 GET /service/spnego HTTP/1.1
-Host: dogfood.zimbra.com
+Host: dogfood.zmail.com
 Accept-Encoding: gzip, deflate
 Accept-Language: en-us
 User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10_5_8; en-us) AppleWebKit/533.17.8 (KHTML, like Gecko) Version/5.0.1 Safari/533.17.8
@@ -581,20 +581,20 @@ Connection: keep-alive
 Authorization: Negotiate YIIEwgYGKwYBBQUCo...
 
 ------------
-6. Response: SPNEGO authentication and authorization succeeded, return the Zimbra auth token in cookie, and redirect the request to the requested webapp
+6. Response: SPNEGO authentication and authorization succeeded, return the Zmail auth token in cookie, and redirect the request to the requested webapp
 ------------
 HTTP/1.1 302 Found
 Date: Tue, 14 Dec 2010 23:53:07 GMT
 Expires: Thu, 01 Jan 1970 00:00:00 GMT
 Set-Cookie: ZM_AUTH_TOKEN=0_902d89a99ac5179bb952d6788d5705daa235ddce_69643d33363a64316539393733612d333264332d343761352d616334652d3738663965323839636162663b6578703d31333a313239323534333538373031313b747970653d363a7a696d6272613b;Path=/
-Location: http://dogfood.zimbra.com/zimbra/mail
+Location: http://dogfood.zmail.org/zmail/mail
 Content-Length: 0
 
 ------------
-7. Request: follows the redirect with the Zimbra auth token cookie
+7. Request: follows the redirect with the Zmail auth token cookie
 ------------
-GET /zimbra/mail HTTP/1.1
-Host: dogfood.zimbra.com
+GET /zmail/mail HTTP/1.1
+Host: dogfood.zmail.com
 Accept-Encoding: gzip, deflate
 Accept-Language: en-us
 User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10_5_8; en-us) AppleWebKit/533.17.8 (KHTML, like Gecko) Version/5.0.1 Safari/533.17.8
@@ -618,36 +618,36 @@ Content-Length: 17810
 
 
 ====================================================================================
-Appendix B: Scripts to setup SPNEGO SSO on dogfood.zimbra.com and catfood.zimbra.com
+Appendix B: Scripts to setup SPNEGO SSO on dogfood.zmail.com and catfood.zmail.com
 ====================================================================================
 - Obtaining the keytab files
   https://helpzilla.eng.vmware.com/show_bug.cgi?id=652768
 
-  then place the corresponding keytab file under /opt/zimbra/jetty/etc on dogfood/catfood.
+  then place the corresponding keytab file under /opt/zmail/jetty/etc on dogfood/catfood.
   
 
-- Configuring Zimbra
-zmprov mcf zimbraSpnegoAuthEnabled TRUE
-zmprov mcf zimbraSpnegoAuthRealm VMWARE.COM
+- Configuring Zmail
+zmprov mcf zmailSpnegoAuthEnabled TRUE
+zmprov mcf zmailSpnegoAuthRealm VMWARE.COM
 
-zmprov ms dogfood.zimbra.com zimbraSpnegoAuthTargetName HTTP/dogfood.zimbra.com
-zmprov ms catfood.zimbra.com zimbraSpnegoAuthTargetName HTTP/catfood.zimbra.com
-zmprov ms dogfood.zimbra.com zimbraSpnegoAuthPrincipal HTTP/dogfood.zimbra.com@VMWARE.COM
-zmprov ms catfood.zimbra.com zimbraSpnegoAuthPrincipal HTTP/catfood.zimbra.com@VMWARE.COM
+zmprov ms dogfood.zmail.org zmailSpnegoAuthTargetName HTTP/dogfood.zmail.com
+zmprov ms catfood.zmail.org zmailSpnegoAuthTargetName HTTP/catfood.zmail.com
+zmprov ms dogfood.zmail.org zmailSpnegoAuthPrincipal HTTP/dogfood.zmail.com@VMWARE.COM
+zmprov ms catfood.zmail.org zmailSpnegoAuthPrincipal HTTP/catfood.zmail.com@VMWARE.COM
 
-zmprov md zimbra.com zimbraAuthKerberos5Realm VMWARE.COM
-zmprov md zimbra.com +zimbraVirtualHostname dogfood.zimbra.com +zimbraVirtualHostname catfood.zimbra.com
-zmprov md zimbra.com zimbraWebClientLoginURL '/service/spnego'
-zmprov md zimbra.com +zimbraWebClientLoginURLAllowedUA '.*Windows.*Firefox/3.*'
-zmprov md zimbra.com +zimbraWebClientLoginURLAllowedUA '.*MSIE.*Windows.*'
-zmprov md zimbra.com +zimbraWebClientLoginURLAllowedUA '.*Windows.*Chrome.*'
-zmprov md zimbra.com +zimbraWebClientLoginURLAllowedUA '.*Windows.*Safari.*'
-zmprov md zimbra.com +zimbraWebClientLoginURLAllowedUA '.*Macintosh.*Safari.*'
-zmprov md zimbra.com zimbraWebClientLogoutURL '../?sso=1'
-zmprov md zimbra.com +zimbraWebClientLogoutURLAllowedUA '.*Windows.*Firefox/3.*'
-zmprov md zimbra.com +zimbraWebClientLogoutURLAllowedUA '.*MSIE.*Windows.*'
-zmprov md zimbra.com +zimbraWebClientLogoutURLAllowedUA '.*Windows.*Chrome.*'
-zmprov md zimbra.com +zimbraWebClientLogoutURLAllowedUA '.*Windows.*Safari.*'
-zmprov md zimbra.com +zimbraWebClientLogoutURLAllowedUA '.*Macintosh.*Safari.*'
+zmprov md zmail.org zmailAuthKerberos5Realm VMWARE.COM
+zmprov md zmail.com +zmailVirtualHostname dogfood.zmail.com +zmailVirtualHostname catfood.zmail.com
+zmprov md zmail.org zmailWebClientLoginURL '/service/spnego'
+zmprov md zmail.com +zmailWebClientLoginURLAllowedUA '.*Windows.*Firefox/3.*'
+zmprov md zmail.com +zmailWebClientLoginURLAllowedUA '.*MSIE.*Windows.*'
+zmprov md zmail.com +zmailWebClientLoginURLAllowedUA '.*Windows.*Chrome.*'
+zmprov md zmail.com +zmailWebClientLoginURLAllowedUA '.*Windows.*Safari.*'
+zmprov md zmail.com +zmailWebClientLoginURLAllowedUA '.*Macintosh.*Safari.*'
+zmprov md zmail.org zmailWebClientLogoutURL '../?sso=1'
+zmprov md zmail.com +zmailWebClientLogoutURLAllowedUA '.*Windows.*Firefox/3.*'
+zmprov md zmail.com +zmailWebClientLogoutURLAllowedUA '.*MSIE.*Windows.*'
+zmprov md zmail.com +zmailWebClientLogoutURLAllowedUA '.*Windows.*Chrome.*'
+zmprov md zmail.com +zmailWebClientLogoutURLAllowedUA '.*Windows.*Safari.*'
+zmprov md zmail.com +zmailWebClientLogoutURLAllowedUA '.*Macintosh.*Safari.*'
       
       

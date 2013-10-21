@@ -12,7 +12,7 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.zimlet;
+package org.zmail.cs.zimlet;
 
 import java.io.*;
 import java.util.regex.Matcher;
@@ -28,14 +28,14 @@ import javax.servlet.ServletResponse;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.zimbra.cs.account.*;
-import com.zimbra.common.account.Key.AccountBy;
-import com.zimbra.cs.servlet.ZimbraServlet;
-import com.zimbra.cs.service.admin.AdminAccessControl;
-import com.zimbra.common.localconfig.LC;
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.common.util.ZimbraLog;
-import com.zimbra.common.util.TemplateCompiler;
+import org.zmail.cs.account.*;
+import org.zmail.common.account.Key.AccountBy;
+import org.zmail.cs.servlet.ZmailServlet;
+import org.zmail.cs.service.admin.AdminAccessControl;
+import org.zmail.common.localconfig.LC;
+import org.zmail.common.service.ServiceException;
+import org.zmail.common.util.ZmailLog;
+import org.zmail.common.util.TemplateCompiler;
 
 /**
  * 
@@ -43,10 +43,10 @@ import com.zimbra.common.util.TemplateCompiler;
  * @author Andy Clark
  */
 @SuppressWarnings("serial")
-public class ZimletFilter extends ZimbraServlet implements Filter {
+public class ZimletFilter extends ZmailServlet implements Filter {
 
-    public static final String ALL_ZIMLETS = "com.zimbra.cs.zimlet.All";
-    public static final String ALLOWED_ZIMLETS = "com.zimbra.cs.zimlet.Allowed";
+    public static final String ALL_ZIMLETS = "org.zmail.cs.zimlet.All";
+    public static final String ALLOWED_ZIMLETS = "org.zmail.cs.zimlet.Allowed";
 
 	private static final String ZIMLET_URL = "^/service/zimlet/(?:_dev/)?([^/\\?]+)([/\\?]?)(.*)$";
     private static final String ZIMLET_RES_URL_PREFIX = "/service/zimlet/res/";
@@ -64,7 +64,7 @@ public class ZimletFilter extends ZimbraServlet implements Filter {
 	private AuthToken getAuthTokenForApp(HttpServletRequest req, HttpServletResponse resp, boolean doNotSendHttpError)
 			throws IOException, ServiceException {
 		Config config = Provisioning.getInstance().getConfig();
-		int adminPort = config.getIntAttr(Provisioning.A_zimbraAdminPort, 0);
+		int adminPort = config.getIntAttr(Provisioning.A_zmailAdminPort, 0);
 		if (adminPort == req.getLocalPort()) {
 			return getAdminAuthTokenFromCookie(req, resp, doNotSendHttpError);
 		}
@@ -83,7 +83,7 @@ public class ZimletFilter extends ZimbraServlet implements Filter {
 		try {
         	authToken = getAuthTokenForApp(req, resp, false);
 		} catch (ServiceException se) {
-        	ZimbraLog.zimlet.info("can't get authToken: "+se.getMessage());
+        	ZmailLog.zimlet.info("can't get authToken: "+se.getMessage());
         	resp.sendError(HttpServletResponse.SC_FORBIDDEN);
         	return;
         }
@@ -94,7 +94,7 @@ public class ZimletFilter extends ZimbraServlet implements Filter {
         }
 
         boolean isAdminAuth = false;
-//		ZimbraLog.zimlet.info(">>> isAdminAuth: "+isAdminAuth);
+//		ZmailLog.zimlet.info(">>> isAdminAuth: "+isAdminAuth);
 
         // get list of allowed zimlets
         Provisioning prov = Provisioning.getInstance();
@@ -132,7 +132,7 @@ public class ZimletFilter extends ZimbraServlet implements Filter {
 			}
 		}
 		catch (ServiceException e) {
-			ZimbraLog.zimlet.info("unable to get list of zimlets");
+			ZmailLog.zimlet.info("unable to get list of zimlets");
 			resp.sendError(HttpServletResponse.SC_FORBIDDEN);
 			return;
 		}
@@ -152,7 +152,7 @@ public class ZimletFilter extends ZimbraServlet implements Filter {
         else {
             Matcher matcher = mPattern.matcher(uri);
             if (!matcher.matches()) {
-                ZimbraLog.zimlet.info("no zimlet specified in request");
+                ZmailLog.zimlet.info("no zimlet specified in request");
                 resp.sendError(HttpServletResponse.SC_FORBIDDEN);
                 return;
             }
@@ -173,27 +173,27 @@ public class ZimletFilter extends ZimbraServlet implements Filter {
 
                 Zimlet zimlet = prov.getZimlet(zimletName);
                 if (zimlet == null) {
-                    ZimbraLog.zimlet.info("no such zimlet: "+zimletName);
+                    ZmailLog.zimlet.info("no such zimlet: "+zimletName);
                     iter.remove();
                     allZimlets.remove(zimlet);
                     continue;
                 }
 
                 if (!allowedZimletNames.contains(zimletName)) {
-                    ZimbraLog.zimlet.info("unauthorized request to zimlet "+zimletName+" from user "+authToken.getAccountId());
+                    ZmailLog.zimlet.info("unauthorized request to zimlet "+zimletName+" from user "+authToken.getAccountId());
                     iter.remove();
                     allZimlets.remove(zimlet);
                     continue;
                 }
 
 				if (zimlet.isExtension() && !isAdminAuth) {
-//					ZimbraLog.zimlet.info("!!!!! removing extension zimlet: "+zimletName);
+//					ZmailLog.zimlet.info("!!!!! removing extension zimlet: "+zimletName);
 					iter.remove();
                     allZimlets.remove(zimlet);
 				}
 			}
             catch (ServiceException se) {
-                ZimbraLog.zimlet.info("service exception to zimlet "+zimletName+" from user "+authToken.getAccountId()+": "+se.getMessage());
+                ZmailLog.zimlet.info("service exception to zimlet "+zimletName+" from user "+authToken.getAccountId()+": "+se.getMessage());
                 iter.remove();
             }
         }

@@ -13,20 +13,20 @@
  * ***** END LICENSE BLOCK *****
  */
 
-package com.zimbra.cs.util;
+package org.zmail.cs.util;
 
 import java.util.Arrays;
 import java.util.Collections;
 
-import com.zimbra.common.lmtp.SmtpToLmtp;
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.common.util.Log;
-import com.zimbra.common.util.LogFactory;
-import com.zimbra.cs.account.Account;
-import com.zimbra.cs.account.Group;
-import com.zimbra.cs.account.Provisioning;
-import com.zimbra.common.account.Key;
-import com.zimbra.common.account.Key.AccountBy;
+import org.zmail.common.lmtp.SmtpToLmtp;
+import org.zmail.common.service.ServiceException;
+import org.zmail.common.util.Log;
+import org.zmail.common.util.LogFactory;
+import org.zmail.cs.account.Account;
+import org.zmail.cs.account.Group;
+import org.zmail.cs.account.Provisioning;
+import org.zmail.common.account.Key;
+import org.zmail.common.account.Key.AccountBy;
 
 /**
  * Validates recipients and expands distribution lists for the dev

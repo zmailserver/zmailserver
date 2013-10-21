@@ -12,7 +12,7 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.account.ldap;
+package org.zmail.cs.account.ldap;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -21,17 +21,17 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-import com.zimbra.common.mailbox.ContactConstants;
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.common.util.StringUtil;
-import com.zimbra.common.util.ZimbraLog;
-import com.zimbra.cs.account.Config;
-import com.zimbra.cs.account.Domain;
-import com.zimbra.cs.account.Entry;
-import com.zimbra.cs.account.Provisioning;
-import com.zimbra.cs.account.grouphandler.GroupHandler;
-import com.zimbra.cs.ldap.IAttributes;
-import com.zimbra.cs.ldap.ILdapContext;
+import org.zmail.common.mailbox.ContactConstants;
+import org.zmail.common.service.ServiceException;
+import org.zmail.common.util.StringUtil;
+import org.zmail.common.util.ZmailLog;
+import org.zmail.cs.account.Config;
+import org.zmail.cs.account.Domain;
+import org.zmail.cs.account.Entry;
+import org.zmail.cs.account.Provisioning;
+import org.zmail.cs.account.grouphandler.GroupHandler;
+import org.zmail.cs.ldap.IAttributes;
+import org.zmail.cs.ldap.ILdapContext;
 
 
 /*
@@ -46,28 +46,28 @@ public class LdapGalMapRules {
     private GroupHandler mGroupHandler;
     private boolean mFetchGroupMembers;
     private boolean mNeedSMIMECerts;
-    private static final String OLD_DEFAULT_GROUPHANDLER = "com.zimbra.cs.gal.ADGalGroupHandler";
-    private static final String CURRENT_DEFAULT_GROUPHANDLER = "com.zimbra.cs.account.grouphandler.ADGroupHandler";
+    private static final String OLD_DEFAULT_GROUPHANDLER = "org.zmail.cs.gal.ADGalGroupHandler";
+    private static final String CURRENT_DEFAULT_GROUPHANDLER = "org.zmail.cs.account.grouphandler.ADGroupHandler";
 
     public LdapGalMapRules(String[] rules, String[] valueMaps, String groupHandlerClass) {
         init(rules, valueMaps, groupHandlerClass);
     }
     
-    public LdapGalMapRules(Config config, boolean isZimbraGal) {
-        init(config, isZimbraGal);
+    public LdapGalMapRules(Config config, boolean isZmailGal) {
+        init(config, isZmailGal);
     }
     
-    public LdapGalMapRules(Domain domain, boolean isZimbraGal) {
-        init(domain, isZimbraGal);
+    public LdapGalMapRules(Domain domain, boolean isZmailGal) {
+        init(domain, isZmailGal);
     }
 
-    private void init(Entry entry, boolean isZimbraGal) {
+    private void init(Entry entry, boolean isZmailGal) {
         String groupHanlderClass = null;
-        if (!isZimbraGal)
-            groupHanlderClass = entry.getAttr(Provisioning.A_zimbraGalLdapGroupHandlerClass);
+        if (!isZmailGal)
+            groupHanlderClass = entry.getAttr(Provisioning.A_zmailGalLdapGroupHandlerClass);
         
-        init(entry.getMultiAttr(Provisioning.A_zimbraGalLdapAttrMap),
-             entry.getMultiAttr(Provisioning.A_zimbraGalLdapValueMap), 
+        init(entry.getMultiAttr(Provisioning.A_zmailGalLdapAttrMap),
+             entry.getMultiAttr(Provisioning.A_zmailGalLdapValueMap), 
              groupHanlderClass);
     }
     
@@ -90,7 +90,7 @@ public class LdapGalMapRules {
             groupHandlerClass = CURRENT_DEFAULT_GROUPHANDLER;
         }
         mGroupHandler = GroupHandler.getHandler(groupHandlerClass);
-        ZimbraLog.gal.debug("groupHandlerClass=" + groupHandlerClass + ", handler instantiated=" + mGroupHandler.getClass().getCanonicalName());
+        ZmailLog.gal.debug("groupHandlerClass=" + groupHandlerClass + ", handler instantiated=" + mGroupHandler.getClass().getCanonicalName());
     }
     
     public void setFetchGroupMembers(boolean fetchGroupMembers) {
@@ -131,7 +131,7 @@ public class LdapGalMapRules {
                 }
                 contactAttrs.put(ContactConstants.A_type, ContactConstants.TYPE_GROUP);
             } catch (ServiceException e) {
-                ZimbraLog.gal.warn("unable to retrieve group members ", e);
+                ZmailLog.gal.warn("unable to retrieve group members ", e);
             }
         }
         

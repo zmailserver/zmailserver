@@ -14,19 +14,19 @@
 # ***** END LICENSE BLOCK *****
 # 
 
-if [ x`whoami` != xzimbra ]; then
-    echo "Error: must be run as zimbra user"
+if [ x`whoami` != xzmail ]; then
+    echo "Error: must be run as zmail user"
   exit 1
 fi
 
 source `dirname $0`/zmshutil || exit 1
 zmsetvars \
-    zimbra_home \
-    zimbra_log_directory
+    zmail_home \
+    zmail_log_directory
 
 servicename=nginx
-configfile=${zimbra_home}/conf/${servicename}.conf
-pidfile=${zimbra_log_directory}/${servicename}.pid
+configfile=${zmail_home}/conf/${servicename}.conf
+pidfile=${zmail_log_directory}/${servicename}.pid
 pid=""
 
 getpid()
@@ -54,7 +54,7 @@ checkrunning()
 
 case "$1" in 
   start)
-    if [ ! -L /opt/zimbra/nginx ]; then
+    if [ ! -L /opt/zmail/nginx ]; then
       echo "Error: nginx not installed"
       exit 1
     fi
@@ -70,7 +70,7 @@ case "$1" in
       exit 0
     fi
     if [ "x$2" = "x" ]; then
-      ${zimbra_home}/libexec/configrewrite proxy > /dev/null 2>&1
+      ${zmail_home}/libexec/configrewrite proxy > /dev/null 2>&1
     fi
 
     if [ ! -f ${configfile} ]; then
@@ -88,7 +88,7 @@ case "$1" in
         exit 1
     fi
 
-    sudo ${zimbra_home}/${servicename}/sbin/${servicename} -c ${configfile}
+    sudo ${zmail_home}/${servicename}/sbin/${servicename} -c ${configfile}
     for ((i=0; i < 30; i++)); do
       checkrunning
       if [ $running = 1 ]; then

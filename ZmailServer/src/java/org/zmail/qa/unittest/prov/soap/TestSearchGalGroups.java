@@ -12,7 +12,7 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.qa.unittest.prov.soap;
+package org.zmail.qa.unittest.prov.soap;
 
 import java.util.List;
 import java.util.Map;
@@ -23,23 +23,23 @@ import org.junit.Test;
 
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
-import com.zimbra.common.account.ZAttrProvisioning;
-import com.zimbra.common.account.Key.GranteeBy;
-import com.zimbra.common.mailbox.ContactConstants;
-import com.zimbra.common.soap.SoapTransport;
-import com.zimbra.cs.account.Account;
-import com.zimbra.cs.account.Domain;
-import com.zimbra.cs.account.Group;
-import com.zimbra.cs.account.Provisioning;
-import com.zimbra.cs.account.accesscontrol.GranteeType;
-import com.zimbra.cs.account.accesscontrol.TargetType;
-import com.zimbra.qa.unittest.prov.Verify;
-import com.zimbra.soap.account.message.SearchGalRequest;
-import com.zimbra.soap.account.message.SearchGalResponse;
-import com.zimbra.soap.account.type.ContactInfo;
-import com.zimbra.soap.account.type.MemberOfSelector;
-import com.zimbra.soap.type.ContactAttr;
-import com.zimbra.soap.type.TargetBy;
+import org.zmail.common.account.ZAttrProvisioning;
+import org.zmail.common.account.Key.GranteeBy;
+import org.zmail.common.mailbox.ContactConstants;
+import org.zmail.common.soap.SoapTransport;
+import org.zmail.cs.account.Account;
+import org.zmail.cs.account.Domain;
+import org.zmail.cs.account.Group;
+import org.zmail.cs.account.Provisioning;
+import org.zmail.cs.account.accesscontrol.GranteeType;
+import org.zmail.cs.account.accesscontrol.TargetType;
+import org.zmail.qa.unittest.prov.Verify;
+import org.zmail.soap.account.message.SearchGalRequest;
+import org.zmail.soap.account.message.SearchGalResponse;
+import org.zmail.soap.account.type.ContactInfo;
+import org.zmail.soap.account.type.MemberOfSelector;
+import org.zmail.soap.type.ContactAttr;
+import org.zmail.soap.type.TargetBy;
 
 public class TestSearchGalGroups extends SoapTest {
     private static SoapProvTestUtil provUtil;
@@ -96,7 +96,7 @@ public class TestSearchGalGroups extends SoapTest {
                     email = attr.getValue();
                 } else if (ContactConstants.A_type.equals(key)) {
                     type = attr.getValue();
-                } else if (Provisioning.A_zimbraDistributionListSubscriptionPolicy.equals(key)) {
+                } else if (Provisioning.A_zmailDistributionListSubscriptionPolicy.equals(key)) {
                     subsPolicy = attr.getValue();
                 }
             }
@@ -114,7 +114,7 @@ public class TestSearchGalGroups extends SoapTest {
         SKIP_FOR_INMEM_LDAP_SERVER(SkipTestReason.DN_SUBTREE_MATCH_FILTER);
         
         Map<String, Object> attrs = Maps.newHashMap();
-        attrs.put(Provisioning.A_zimbraDistributionListSubscriptionPolicy, 
+        attrs.put(Provisioning.A_zmailDistributionListSubscriptionPolicy, 
                 ZAttrProvisioning.DistributionListSubscriptionPolicy.ACCEPT.name());
         Group group = provUtil.createGroup(genGroupNameLocalPart(), domain, attrs, false);
         Account acct = provUtil.createAccount(genAcctNameLocalPart(), domain);

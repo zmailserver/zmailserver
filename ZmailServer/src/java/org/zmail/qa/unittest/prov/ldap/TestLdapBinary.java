@@ -12,7 +12,7 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.qa.unittest.prov.ldap;
+package org.zmail.qa.unittest.prov.ldap;
 
 import java.util.HashMap;
 import java.util.List;
@@ -21,16 +21,16 @@ import java.util.Map;
 import org.junit.*;
 import static org.junit.Assert.*;
 
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.common.util.StringUtil;
-import com.zimbra.cs.account.Account;
-import com.zimbra.cs.account.AccountServiceException;
-import com.zimbra.cs.account.Domain;
-import com.zimbra.cs.account.Entry;
-import com.zimbra.cs.account.Provisioning;
-import com.zimbra.common.account.Key.AccountBy;
-import com.zimbra.qa.unittest.TestUtil;
-import com.zimbra.qa.unittest.prov.BinaryLdapData;
+import org.zmail.common.service.ServiceException;
+import org.zmail.common.util.StringUtil;
+import org.zmail.cs.account.Account;
+import org.zmail.cs.account.AccountServiceException;
+import org.zmail.cs.account.Domain;
+import org.zmail.cs.account.Entry;
+import org.zmail.cs.account.Provisioning;
+import org.zmail.common.account.Key.AccountBy;
+import org.zmail.qa.unittest.TestUtil;
+import org.zmail.qa.unittest.prov.BinaryLdapData;
 
 public class TestLdapBinary extends LdapTest {
     
@@ -38,16 +38,16 @@ public class TestLdapBinary extends LdapTest {
      * To run this unit test:
      * 
      * (to get the two test attrs added in the schema)
-     * cp -f /Users/pshao/p4/main/ZimbraServer/data/unittest/ldap/attrs-unittest.xml /opt/zimbra/conf/attrs
+     * cp -f /Users/pshao/p4/main/ZmailServer/data/unittest/ldap/attrs-unittest.xml /opt/zmail/conf/attrs
      * ant refresh-ldap-schema
      * ant generate-getters
      * ant init-unittest
      * 
-    <attr id="10000" name="zimbraUnittestBinary" type="binary" max="5000" cardinality="single" optionalIn="account" since="8.0.0">
+    <attr id="10000" name="zmailUnittestBinary" type="binary" max="5000" cardinality="single" optionalIn="account" since="8.0.0">
       <desc>binary data</desc>
     </attr>
     
-    <attr id="10001" name="zimbraUnittestCertificate" type="certificate" cardinality="single" optionalIn="account" since="8.0.0">
+    <attr id="10001" name="zmailUnittestCertificate" type="certificate" cardinality="single" optionalIn="account" since="8.0.0">
       <desc>binary data</desc>
     </attr>
 
@@ -58,7 +58,7 @@ public class TestLdapBinary extends LdapTest {
     private static Domain domain;
     private static final String USER = "test-ldap-binary";
     
-    private static final String CONTENT_NAME = BinaryLdapData.DATA_PATH + "zimbra.jpeg";
+    private static final String CONTENT_NAME = BinaryLdapData.DATA_PATH + "zmail.jpeg";
     
     private static final String CONTENT_NAME_1 = BinaryLdapData.DATA_PATH + "1.jpeg";
     private static final String CONTENT_NAME_2 = BinaryLdapData.DATA_PATH + "2.jpeg";
@@ -69,20 +69,20 @@ public class TestLdapBinary extends LdapTest {
     
     private static final String CONTENT_NAME_TOO_LARGE = BinaryLdapData.DATA_PATH + "too_large.txt";
 
-    // private static final String ATTR_SINGLE = "zimbraBinary";
-    // private static final String ATTR_MULTI = "zimbraBinaryMulti";
+    // private static final String ATTR_SINGLE = "zmailBinary";
+    // private static final String ATTR_MULTI = "zmailBinaryMulti";
     
     private static SingleValuedTestData ZIMBRA_BINARY_SINGLE = new SingleValuedTestData(
-            "zimbraUnittestBinary", CONTENT_NAME);
+            "zmailUnittestBinary", CONTENT_NAME);
     
     private static SingleValuedTestData ZIMBRA_CERTIFICATE_SINGLE = new SingleValuedTestData(
-            "zimbraUnittestCertificate", CERT_NAME_1);
+            "zmailUnittestCertificate", CERT_NAME_1);
     
     private static SingleValuedTestData ZIMBRA_BINARY_SINGLE_TEST_TOO_LARGE = new SingleValuedTestData(
-            "zimbraUnittestBinary", CONTENT_NAME_TOO_LARGE);
+            "zmailUnittestBinary", CONTENT_NAME_TOO_LARGE);
     
     private static MultiValuedTestData ZIMBRA_BINARY_MULTI = new MultiValuedTestData(
-            Provisioning.A_zimbraPrefMailSMIMECertificate,
+            Provisioning.A_zmailPrefMailSMIMECertificate,
             new String[]{CONTENT_NAME_1, CONTENT_NAME_2, CONTENT_NAME_3},
             new String[]{CONTENT_NAME_1, CONTENT_NAME_2},
             new String[]{CONTENT_NAME_3}

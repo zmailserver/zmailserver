@@ -13,7 +13,7 @@
  * ***** END LICENSE BLOCK *****
  */
 
-package com.zimbra.cs.client.soap;
+package org.zmail.cs.client.soap;
 
 /**
  * An exception that can occur due to client-side errors.  

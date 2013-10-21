@@ -12,38 +12,38 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.account.accesscontrol;
+package org.zmail.cs.account.accesscontrol;
 
 import java.util.HashMap;
 import java.util.Map;
 
-import com.zimbra.common.account.Key;
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.cs.account.Account;
-import com.zimbra.cs.account.AccountServiceException;
-import com.zimbra.cs.account.CalendarResource;
-import com.zimbra.cs.account.Config;
-import com.zimbra.cs.account.Cos;
-import com.zimbra.cs.account.DistributionList;
-import com.zimbra.cs.account.Domain;
-import com.zimbra.cs.account.DynamicGroup;
-import com.zimbra.cs.account.Entry;
-import com.zimbra.cs.account.Provisioning;
-import com.zimbra.cs.account.Provisioning.GroupMembership;
-import com.zimbra.cs.account.Server;
-import com.zimbra.cs.account.UCService;
-import com.zimbra.cs.account.XMPPComponent;
-import com.zimbra.cs.account.Zimlet;
+import org.zmail.common.account.Key;
+import org.zmail.common.service.ServiceException;
+import org.zmail.cs.account.Account;
+import org.zmail.cs.account.AccountServiceException;
+import org.zmail.cs.account.CalendarResource;
+import org.zmail.cs.account.Config;
+import org.zmail.cs.account.Cos;
+import org.zmail.cs.account.DistributionList;
+import org.zmail.cs.account.Domain;
+import org.zmail.cs.account.DynamicGroup;
+import org.zmail.cs.account.Entry;
+import org.zmail.cs.account.Provisioning;
+import org.zmail.cs.account.Provisioning.GroupMembership;
+import org.zmail.cs.account.Server;
+import org.zmail.cs.account.UCService;
+import org.zmail.cs.account.XMPPComponent;
+import org.zmail.cs.account.Zimlet;
 
 /**
  * @author pshao
  */
 public class PseudoTarget {
     
-    static class PseudoZimbraId {
+    static class PseudoZmailId {
         private static final String PSEUDO_ZIMBRA_ID = "aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa";
         
-        static String getPseudoZimbraId() {
+        static String getPseudoZmailId() {
             return PSEUDO_ZIMBRA_ID;
         }
         
@@ -261,9 +261,9 @@ public class PseudoTarget {
         Entry targetEntry = null;
         Config config = prov.getConfig();
         
-        String zimbraId = PseudoZimbraId.getPseudoZimbraId();
+        String zmailId = PseudoZmailId.getPseudoZmailId();
         Map<String, Object> attrMap = new HashMap<String, Object>();
-        attrMap.put(Provisioning.A_zimbraId, zimbraId);
+        attrMap.put(Provisioning.A_zmailId, zmailId);
         
         Domain pseudoDomain = null;
         Domain domain = null;
@@ -294,10 +294,10 @@ public class PseudoTarget {
                 if (cos == null) {
                     throw AccountServiceException.NO_SUCH_COS(cosStr);
                 }
-                attrMap.put(Provisioning.A_zimbraCOSId, cos.getId());
+                attrMap.put(Provisioning.A_zmailCOSId, cos.getId());
             } else {
                 String domainCosId = domain != null ? 
-                        domain.getAttr(Provisioning.A_zimbraDomainDefaultCOSId, null) : null;
+                        domain.getAttr(Provisioning.A_zmailDomainDefaultCOSId, null) : null;
                 if (domainCosId != null) {
                     cos = prov.get(Key.CosBy.id, domainCosId);
                 }
@@ -308,14 +308,14 @@ public class PseudoTarget {
             
             if (targetType == TargetType.account) {
                 targetEntry = new PseudoAccount("pseudo@"+domain.getName(),
-                                           zimbraId,
+                                           zmailId,
                                            attrMap,
                                            cos.getAccountDefaults(),
                                            prov,
                                            pseudoDomain);
             } else {
                 targetEntry = new PseudoCalendarResource("pseudo@"+domain.getName(),
-                                           zimbraId,
+                                           zmailId,
                                            attrMap,
                                            cos.getAccountDefaults(),
                                            prov,
@@ -324,29 +324,29 @@ public class PseudoTarget {
             break;
             
         case cos:  
-            targetEntry = new PseudoCos("pseudocos", zimbraId, attrMap, prov);
+            targetEntry = new PseudoCos("pseudocos", zmailId, attrMap, prov);
             break;
         case dl:
-            targetEntry = new PseudoDistributionList("pseudo@"+domain.getName(), zimbraId, attrMap, prov, pseudoDomain);
+            targetEntry = new PseudoDistributionList("pseudo@"+domain.getName(), zmailId, attrMap, prov, pseudoDomain);
             break;
         case group:
-            targetEntry = new PseudoDynamicGroup("pseudo@"+domain.getName(), zimbraId, attrMap, prov, pseudoDomain);
+            targetEntry = new PseudoDynamicGroup("pseudo@"+domain.getName(), zmailId, attrMap, prov, pseudoDomain);
             break;    
         case domain:
             String name = domainName == null ? "pseudo.pseudo" : domainName;
-            targetEntry = new PseudoDomain(name, zimbraId, attrMap, config.getDomainDefaults(), prov);
+            targetEntry = new PseudoDomain(name, zmailId, attrMap, config.getDomainDefaults(), prov);
             break;
         case server:  
-            targetEntry = new PseudoServer("pseudo.pseudo", zimbraId, attrMap, config.getServerDefaults(), prov);
+            targetEntry = new PseudoServer("pseudo.pseudo", zmailId, attrMap, config.getServerDefaults(), prov);
             break;
         case ucservice:  
-            targetEntry = new PseudoUCService("pseudo", zimbraId, attrMap, prov);
+            targetEntry = new PseudoUCService("pseudo", zmailId, attrMap, prov);
             break;
         case xmppcomponent:
-            targetEntry = new PseudoXMPPComponent("pseudo", zimbraId, attrMap, prov);
+            targetEntry = new PseudoXMPPComponent("pseudo", zmailId, attrMap, prov);
             break;
         case zimlet:
-            targetEntry = new PseudoZimlet("pseudo", zimbraId, attrMap, prov);
+            targetEntry = new PseudoZimlet("pseudo", zmailId, attrMap, prov);
             break;
         default: 
             throw ServiceException.INVALID_REQUEST("unsupported target for createPseudoTarget: " + targetType.getCode(), null);

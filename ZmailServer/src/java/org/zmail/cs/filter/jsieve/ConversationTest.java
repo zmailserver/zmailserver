@@ -12,7 +12,7 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.filter.jsieve;
+package org.zmail.cs.filter.jsieve;
 
 import java.util.Iterator;
 import java.util.List;
@@ -26,15 +26,15 @@ import org.apache.jsieve.exception.SieveException;
 import org.apache.jsieve.mail.MailAdapter;
 import org.apache.jsieve.tests.AbstractTest;
 
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.cs.filter.ZimbraMailAdapter;
-import com.zimbra.cs.filter.ZimbraSieveException;
-import com.zimbra.cs.index.SortBy;
-import com.zimbra.cs.mailbox.Conversation;
-import com.zimbra.cs.mailbox.Flag;
-import com.zimbra.cs.mailbox.Mailbox;
-import com.zimbra.cs.mailbox.Message;
-import com.zimbra.cs.mime.ParsedMessage;
+import org.zmail.common.service.ServiceException;
+import org.zmail.cs.filter.ZmailMailAdapter;
+import org.zmail.cs.filter.ZmailSieveException;
+import org.zmail.cs.index.SortBy;
+import org.zmail.cs.mailbox.Conversation;
+import org.zmail.cs.mailbox.Flag;
+import org.zmail.cs.mailbox.Mailbox;
+import org.zmail.cs.mailbox.Message;
+import org.zmail.cs.mime.ParsedMessage;
 
 /**
  * SIEVE test whether the conversation which the message is about to belong to is what the user started or has
@@ -93,16 +93,16 @@ public final class ConversationTest extends AbstractTest {
 
     @Override
     protected boolean executeBasic(MailAdapter mail, Arguments args, SieveContext ctx) throws SieveException {
-        if (!(mail instanceof ZimbraMailAdapter)) {
+        if (!(mail instanceof ZmailMailAdapter)) {
             return false;
         }
-        ZimbraMailAdapter adapter = (ZimbraMailAdapter) mail;
+        ZmailMailAdapter adapter = (ZmailMailAdapter) mail;
         Mailbox mbox = adapter.getMailbox();
         List<Conversation> convs;
         try {
             convs = mbox.lookupConversation(adapter.getParsedMessage());
         } catch (ServiceException e) {
-            throw new ZimbraSieveException(e);
+            throw new ZmailSieveException(e);
         }
         if (convs.isEmpty()) {
             return false;
@@ -124,7 +124,7 @@ public final class ConversationTest extends AbstractTest {
                                 }
                             }
                         } catch (ServiceException e) {
-                            throw new ZimbraSieveException(e);
+                            throw new ZmailSieveException(e);
                         }
                     }
                 }

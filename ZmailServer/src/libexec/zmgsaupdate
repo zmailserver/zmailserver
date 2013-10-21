@@ -16,17 +16,17 @@
 
 source `dirname $0`/../bin/zmshutil || exit 1
 zmsetvars \
-  zimbra_ldap_password \
+  zmail_ldap_password \
   ldap_url
 
 LDAP_URL=`echo ${ldap_url} | awk '{ print $1 }'`
 
-GSA_ID_LIST=`/opt/zimbra/bin/ldapsearch -x -H ${LDAP_URL} -w ${zimbra_ldap_password} -D uid=zimbra,cn=admins,cn=zimbra -b '' '(&(objectClass=zimbraDomain)(zimbraGalAccountId=*))' zimbraGalAccountId | awk '{if ($1 ~ /^zimbraGalAccountId:$/) { print $2 } }'`
+GSA_ID_LIST=`/opt/zmail/bin/ldapsearch -x -H ${LDAP_URL} -w ${zmail_ldap_password} -D uid=zmail,cn=admins,cn=zmail -b '' '(&(objectClass=zmailDomain)(zmailGalAccountId=*))' zmailGalAccountId | awk '{if ($1 ~ /^zmailGalAccountId:$/) { print $2 } }'`
 
 MY_HOSTNAME=`zmhostname`
 for ID in $GSA_ID_LIST
 do
-  GSA_MAIL_HOST=`/opt/zimbra/bin/ldapsearch -x -H ${LDAP_URL} -w ${zimbra_ldap_password} -D uid=zimbra,cn=admins,cn=zimbra -b '' '(&(objectClass=zimbraAccount)(zimbraId='${ID}'))' zimbraMailHost | awk '{if ($1 ~ /^zimbraMailHost:$/) { print $2 } }'`
+  GSA_MAIL_HOST=`/opt/zmail/bin/ldapsearch -x -H ${LDAP_URL} -w ${zmail_ldap_password} -D uid=zmail,cn=admins,cn=zmail -b '' '(&(objectClass=zmailAccount)(zmailId='${ID}'))' zmailMailHost | awk '{if ($1 ~ /^zmailMailHost:$/) { print $2 } }'`
   if [ "x${GSA_MAIL_HOST}" == "x${MY_HOSTNAME}" ]
   then
     zmgsautil trickleSync -i ${ID} -n InternalGAL

@@ -1,4 +1,4 @@
-package com.zimbra.cs.service.admin;
+package org.zmail.cs.service.admin;
 
 import java.util.List;
 import java.util.Map;
@@ -19,25 +19,25 @@ import javax.servlet.http.HttpServletResponse;
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.common.soap.AdminConstants;
-import com.zimbra.common.soap.Element;
-import com.zimbra.common.util.ZimbraCookie;
-import com.zimbra.cs.account.accesscontrol.AdminRight;
-import com.zimbra.soap.SoapServlet;
-import com.zimbra.soap.ZimbraSoapContext;
+import org.zmail.common.service.ServiceException;
+import org.zmail.common.soap.AdminConstants;
+import org.zmail.common.soap.Element;
+import org.zmail.common.util.ZmailCookie;
+import org.zmail.cs.account.accesscontrol.AdminRight;
+import org.zmail.soap.SoapServlet;
+import org.zmail.soap.ZmailSoapContext;
 
 public class ClearCookie extends AdminDocumentHandler {
     
     @Override
     public Element handle(Element request, Map<String, Object> context)
             throws ServiceException {
-        ZimbraSoapContext zsc = getZimbraSoapContext(context);
+        ZmailSoapContext zsc = getZmailSoapContext(context);
         HttpServletResponse servletResp = (HttpServletResponse)context.get(SoapServlet.SERVLET_RESPONSE);
         
         for (Element eCookie : request.listElements(AdminConstants.E_COOKIE)) {
             String cookie = eCookie.getAttribute(AdminConstants.A_NAME);
-            ZimbraCookie.clearCookie(servletResp, cookie);
+            ZmailCookie.clearCookie(servletResp, cookie);
         }
         
         Element resp = zsc.createElement(AdminConstants.CLEAR_COOKIE_RESPONSE);

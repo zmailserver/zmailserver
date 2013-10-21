@@ -12,21 +12,21 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.account.accesscontrol;
+package org.zmail.cs.account.accesscontrol;
 
 import java.util.HashSet;
 import java.util.Set;
 
-import com.zimbra.common.account.Key.DomainBy;
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.common.util.ZimbraLog;
-import com.zimbra.cs.account.Account;
-import com.zimbra.cs.account.DistributionList;
-import com.zimbra.cs.account.Domain;
-import com.zimbra.cs.account.DynamicGroup;
-import com.zimbra.cs.account.NamedEntry;
-import com.zimbra.cs.account.Provisioning;
-import com.zimbra.cs.account.Provisioning.GroupMembership;
+import org.zmail.common.account.Key.DomainBy;
+import org.zmail.common.service.ServiceException;
+import org.zmail.common.util.ZmailLog;
+import org.zmail.cs.account.Account;
+import org.zmail.cs.account.DistributionList;
+import org.zmail.cs.account.Domain;
+import org.zmail.cs.account.DynamicGroup;
+import org.zmail.cs.account.NamedEntry;
+import org.zmail.cs.account.Provisioning;
+import org.zmail.cs.account.Provisioning.GroupMembership;
 
 public abstract class RightBearer {
     protected NamedEntry mRightBearer;
@@ -152,10 +152,10 @@ public abstract class RightBearer {
      */
     static boolean isValidGranteeForAdminRights(GranteeType gt, NamedEntry grantee) {
         if (gt == GranteeType.GT_USER) {
-            return (!grantee.getBooleanAttr(Provisioning.A_zimbraIsAdminAccount, false) &&
-                    grantee.getBooleanAttr(Provisioning.A_zimbraIsDelegatedAdminAccount, false));
+            return (!grantee.getBooleanAttr(Provisioning.A_zmailIsAdminAccount, false) &&
+                    grantee.getBooleanAttr(Provisioning.A_zmailIsDelegatedAdminAccount, false));
         } else if (gt == GranteeType.GT_GROUP) {
-            return grantee.getBooleanAttr(Provisioning.A_zimbraIsAdminGroup, false);
+            return grantee.getBooleanAttr(Provisioning.A_zmailIsAdminGroup, false);
         } else if (gt == GranteeType.GT_EXT_GROUP) {
             return true;
         } else {
@@ -163,10 +163,10 @@ public abstract class RightBearer {
         }
     }
     
-    static boolean matchesGrantee(Grantee grantee, ZimbraACE ace) throws ServiceException {
-        // set of zimbraIds the grantee in question can assume: including 
-        //   - zimbraId of the grantee
-        //   - all zimbra internal admin groups the grantee is in 
+    static boolean matchesGrantee(Grantee grantee, ZmailACE ace) throws ServiceException {
+        // set of zmailIds the grantee in question can assume: including 
+        //   - zmailId of the grantee
+        //   - all zmail internal admin groups the grantee is in 
         Set<String> granteeIds = grantee.getIdAndGroupIds();
         if (granteeIds.contains(ace.getGrantee())) {
             return true;

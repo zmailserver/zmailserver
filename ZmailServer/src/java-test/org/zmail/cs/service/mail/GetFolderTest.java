@@ -12,7 +12,7 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.service.mail;
+package org.zmail.cs.service.mail;
 
 import java.util.List;
 import java.util.Map;
@@ -26,18 +26,18 @@ import org.junit.Test;
 
 import com.google.common.collect.ImmutableSet;
 import com.google.common.collect.Maps;
-import com.zimbra.common.account.Key;
-import com.zimbra.common.soap.Element;
-import com.zimbra.common.soap.MailConstants;
-import com.zimbra.cs.account.Account;
-import com.zimbra.cs.account.Provisioning;
-import com.zimbra.cs.mailbox.ACL;
-import com.zimbra.cs.mailbox.Folder;
-import com.zimbra.cs.mailbox.MailItem;
-import com.zimbra.cs.mailbox.Mailbox;
-import com.zimbra.cs.mailbox.MailboxManager;
-import com.zimbra.cs.mailbox.MailboxTestUtil;
-import com.zimbra.cs.mailbox.Mountpoint;
+import org.zmail.common.account.Key;
+import org.zmail.common.soap.Element;
+import org.zmail.common.soap.MailConstants;
+import org.zmail.cs.account.Account;
+import org.zmail.cs.account.Provisioning;
+import org.zmail.cs.mailbox.ACL;
+import org.zmail.cs.mailbox.Folder;
+import org.zmail.cs.mailbox.MailItem;
+import org.zmail.cs.mailbox.Mailbox;
+import org.zmail.cs.mailbox.MailboxManager;
+import org.zmail.cs.mailbox.MailboxTestUtil;
+import org.zmail.cs.mailbox.Mountpoint;
 
 public class GetFolderTest {
     @BeforeClass
@@ -46,11 +46,11 @@ public class GetFolderTest {
         Provisioning prov = Provisioning.getInstance();
 
         Map<String, Object> attrs = Maps.newHashMap();
-        prov.createAccount("test@zimbra.com", "secret", attrs);
+        prov.createAccount("test@zmail.com", "secret", attrs);
 
         attrs = Maps.newHashMap();
-        attrs.put(Provisioning.A_zimbraId, UUID.randomUUID().toString());
-        prov.createAccount("test2@zimbra.com", "secret", attrs);
+        attrs.put(Provisioning.A_zmailId, UUID.randomUUID().toString());
+        prov.createAccount("test2@zmail.com", "secret", attrs);
     }
 
     @Before
@@ -60,7 +60,7 @@ public class GetFolderTest {
 
     @Test
     public void depth() throws Exception {
-        Account acct = Provisioning.getInstance().get(Key.AccountBy.name, "test@zimbra.com");
+        Account acct = Provisioning.getInstance().get(Key.AccountBy.name, "test@zmail.com");
         Mailbox mbox = MailboxManager.getInstance().getMailboxByAccount(acct);
 
         mbox.createFolder(null, "Inbox/foo/bar/baz", new Folder.FolderOptions().setDefaultView(MailItem.Type.DOCUMENT));
@@ -103,7 +103,7 @@ public class GetFolderTest {
 
     @Test
     public void view() throws Exception {
-        Account acct = Provisioning.getInstance().get(Key.AccountBy.name, "test@zimbra.com");
+        Account acct = Provisioning.getInstance().get(Key.AccountBy.name, "test@zmail.com");
         Mailbox mbox = MailboxManager.getInstance().getMailboxByAccount(acct);
 
         Folder.FolderOptions fopt = new Folder.FolderOptions().setDefaultView(MailItem.Type.DOCUMENT);
@@ -136,8 +136,8 @@ public class GetFolderTest {
 
     @Test
     public void mount() throws Exception {
-        Account acct = Provisioning.getInstance().get(Key.AccountBy.name, "test@zimbra.com");
-        Account acct2 = Provisioning.getInstance().get(Key.AccountBy.name, "test2@zimbra.com");
+        Account acct = Provisioning.getInstance().get(Key.AccountBy.name, "test@zmail.com");
+        Account acct2 = Provisioning.getInstance().get(Key.AccountBy.name, "test2@zmail.com");
 
         Mailbox mbox = MailboxManager.getInstance().getMailboxByAccount(acct);
         Mailbox mbox2 = MailboxManager.getInstance().getMailboxByAccount(acct2);

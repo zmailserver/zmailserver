@@ -12,7 +12,7 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.filter.jsieve;
+package org.zmail.cs.filter.jsieve;
 
 import javax.mail.MessagingException;
 
@@ -23,9 +23,9 @@ import org.apache.jsieve.mail.MailAdapter;
 import org.apache.jsieve.tests.AbstractTest;
 
 import com.google.common.base.Strings;
-import com.zimbra.cs.filter.ZimbraMailAdapter;
-import com.zimbra.cs.mime.ParsedAddress;
-import com.zimbra.cs.mime.ParsedMessage;
+import org.zmail.cs.filter.ZmailMailAdapter;
+import org.zmail.cs.mime.ParsedAddress;
+import org.zmail.cs.mime.ParsedMessage;
 
 /**
  * SIEVE test for Socialcast notifications.
@@ -42,10 +42,10 @@ public final class SocialcastTest extends AbstractTest {
 
     @Override
     protected boolean executeBasic(MailAdapter mail, Arguments args, SieveContext ctx) throws SieveException {
-        if (!(mail instanceof ZimbraMailAdapter)) {
+        if (!(mail instanceof ZmailMailAdapter)) {
             return false;
         }
-        ZimbraMailAdapter adapter = (ZimbraMailAdapter) mail;
+        ZmailMailAdapter adapter = (ZmailMailAdapter) mail;
 
         ParsedMessage pm = adapter.getParsedMessage();
         ParsedAddress sender = pm.getParsedSender();

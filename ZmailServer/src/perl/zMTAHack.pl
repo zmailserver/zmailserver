@@ -17,7 +17,7 @@ use strict;
 #
 # Braindead hack by Tim -- listens on the SMTP port and if the TO address has a
 # domain which maches the value of the ZIMBRA_HOSTNAME environment variable) then it 
-# fwds the message to the LMTP on the zimbra server...otherwise it relays this message
+# fwds the message to the LMTP on the zmail server...otherwise it relays this message
 # via this machine's default SMTP (ie exch1)
 #
 
@@ -27,10 +27,10 @@ $SIG{CHLD} = 'IGNORE';  # zombie prevention
 my $server = new Net::SMTP::Server('localhost', 25) ||
   croak("[$$] Unable to handle client connection: $!\n");
 
-my $zimbra_hostname  = $ENV{"ZIMBRA_HOSTNAME"};
+my $zmail_hostname  = $ENV{"ZIMBRA_HOSTNAME"};
 
-if (!defined($zimbra_hostname)) {
-    die "\"ZIMBRA_HOSTNAME\" must be set and must contain the Zimbra Server which you want to route email to";
+if (!defined($zmail_hostname)) {
+    die "\"ZIMBRA_HOSTNAME\" must be set and must contain the Zmail Server which you want to route email to";
 }
 
 
@@ -41,7 +41,7 @@ if (!defined($zimbra_hostname)) {
 my $remoteuser_prefix = $ENV{"ZMTA_REMOTEUSER_PREFIX"};
 my $remoteuser_server  = $ENV{"ZMTA_REMOTEUSER_SERVER"};
 
-print "[$$] Starting SMTP Hack on port 25.  Local delivery domain = $zimbra_hostname\n";
+print "[$$] Starting SMTP Hack on port 25.  Local delivery domain = $zmail_hostname\n";
 
 if (defined $remoteuser_prefix) {
   print "\tUsernames which begin with \"$remoteuser_prefix\" for the local delivery domain will be delivered to LMTP on \"$remoteuser_server\"\n";
@@ -75,7 +75,7 @@ while(my $conn = $server->accept()) {
             # if the target domain matches the REMOTEUSER_PREFIX, then
             # change the domain (to be REMOTEUSER_SERVER)
             if (defined $remoteuser_prefix && defined $remoteuser_server) {
-              if ($domain eq lc($zimbra_hostname) && $rcpt=~/^$remoteuser_prefix/) {
+              if ($domain eq lc($zmail_hostname) && $rcpt=~/^$remoteuser_prefix/) {
                 $domain = $remoteuser_server;
               }
             }
@@ -113,7 +113,7 @@ while(my $conn = $server->accept()) {
         }
 
         # child process
-        if ((lc($domain) eq lc($zimbra_hostname)) || (defined $remoteuser_server && (lc($domain) eq lc($remoteuser_server)))) {
+        if ((lc($domain) eq lc($zmail_hostname)) || (defined $remoteuser_server && (lc($domain) eq lc($remoteuser_server)))) {
             print "    [$$] Got a local message from $senderForLogging to $rcptStr (domain=$domain)\n";
 #            my $lmtp = Net::LMTP->new('localhost', 7025, Hello => 'localhost');
             my $lmtp = Net::LMTP->new($domain, 7025, Hello => $domain);

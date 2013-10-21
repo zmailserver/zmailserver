@@ -12,13 +12,13 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.account.callback;
+package org.zmail.cs.account.callback;
 
 import java.util.Map;
 
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.cs.account.AttributeCallback;
-import com.zimbra.cs.account.Entry;
+import org.zmail.common.service.ServiceException;
+import org.zmail.cs.account.AttributeCallback;
+import org.zmail.cs.account.Entry;
 
 public class WorkingHours extends AttributeCallback {
 
@@ -40,7 +40,7 @@ public class WorkingHours extends AttributeCallback {
         if (value.length() == 0) {
             return;  // Allow unsetting.
         }
-        com.zimbra.cs.fb.WorkingHours.validateWorkingHoursPref(value);
+        org.zmail.cs.fb.WorkingHours.validateWorkingHoursPref(value);
     }
 
     @Override

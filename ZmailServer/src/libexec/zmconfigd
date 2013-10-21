@@ -16,7 +16,7 @@
 
 #set tempdir
 import tempfile
-tempfile.tempdir="/opt/zimbra/data/tmp"
+tempfile.tempdir="/opt/zmail/data/tmp"
 
 import sys
 import os
@@ -146,7 +146,7 @@ state.State.mState = myState
 myConfig = conf.Config()
 conf.Config.mConfig = myConfig;
 myState.getLocalConfig(myConfig)
-PropertyConfigurator.configure(myState.localconfig["zimbra_home"]+"/conf/zmconfigd.log4j.properties")
+PropertyConfigurator.configure(myState.localconfig["zmail_home"]+"/conf/zmconfigd.log4j.properties")
 Log.initLogging(myConfig)
 Ldap.initLdap(myConfig)
 

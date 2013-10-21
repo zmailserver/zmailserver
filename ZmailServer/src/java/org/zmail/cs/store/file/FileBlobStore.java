@@ -12,31 +12,31 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.store.file;
+package org.zmail.cs.store.file;
 
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 
-import com.zimbra.common.localconfig.DebugConfig;
-import com.zimbra.common.localconfig.LC;
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.common.util.FileCache;
-import com.zimbra.common.util.FileUtil;
-import com.zimbra.common.util.SystemUtil;
-import com.zimbra.common.util.ZimbraLog;
-import com.zimbra.cs.mailbox.Mailbox;
-import com.zimbra.cs.store.Blob;
-import com.zimbra.cs.store.BlobBuilder;
-import com.zimbra.cs.store.BlobInputStream;
-import com.zimbra.cs.store.FileDescriptorCache;
-import com.zimbra.cs.store.IncomingDirectory;
-import com.zimbra.cs.store.MailboxBlob;
-import com.zimbra.cs.store.StagedBlob;
-import com.zimbra.cs.store.StoreManager;
-import com.zimbra.cs.volume.Volume;
-import com.zimbra.cs.volume.VolumeManager;
-import com.zimbra.znative.IO;
+import org.zmail.common.localconfig.DebugConfig;
+import org.zmail.common.localconfig.LC;
+import org.zmail.common.service.ServiceException;
+import org.zmail.common.util.FileCache;
+import org.zmail.common.util.FileUtil;
+import org.zmail.common.util.SystemUtil;
+import org.zmail.common.util.ZmailLog;
+import org.zmail.cs.mailbox.Mailbox;
+import org.zmail.cs.store.Blob;
+import org.zmail.cs.store.BlobBuilder;
+import org.zmail.cs.store.BlobInputStream;
+import org.zmail.cs.store.FileDescriptorCache;
+import org.zmail.cs.store.IncomingDirectory;
+import org.zmail.cs.store.MailboxBlob;
+import org.zmail.cs.store.StagedBlob;
+import org.zmail.cs.store.StoreManager;
+import org.zmail.cs.volume.Volume;
+import org.zmail.cs.volume.VolumeManager;
+import org.zmail.znative.IO;
 
 /**
  * @since 2004.10.13
@@ -49,7 +49,7 @@ public final class FileBlobStore extends StoreManager {
         IncomingDirectory.startSweeper();
 
         // initialize file uncompressed file cache and file descriptor cache
-        File tmpDir = new File(LC.zimbra_tmp_directory.value());
+        File tmpDir = new File(LC.zmail_tmp_directory.value());
         File ufCacheDir = new File(tmpDir, "uncompressed");
         FileUtil.ensureDirExists(ufCacheDir);
         FileCache<String> ufCache = FileCache.Builder.createWithStringKey(ufCacheDir, false)
@@ -154,10 +154,10 @@ public final class FileBlobStore extends StoreManager {
         BlobInputStream.getFileDescriptorCache().remove(dest.getPath());  // Prevent stale cache read.
         String destPath = dest.getAbsolutePath();
 
-        if (ZimbraLog.store.isDebugEnabled()) {
+        if (ZmailLog.store.isDebugEnabled()) {
             long srcSize = srcFile.length();
             long srcRawSize = src.getRawSize();
-            ZimbraLog.store.debug("Copying %s (size=%d, raw size=%d) to %s for mailbox %d, id %d.",
+            ZmailLog.store.debug("Copying %s (size=%d, raw size=%d) to %s for mailbox %d, id %d.",
                 srcPath, srcSize, srcRawSize, destPath, destMbox.getId(), destItemId);
         }
 
@@ -205,10 +205,10 @@ public final class FileBlobStore extends StoreManager {
         String destPath = dest.getAbsolutePath();
         BlobInputStream.getFileDescriptorCache().remove(destPath);  // Prevent stale cache read.
 
-        if (ZimbraLog.store.isDebugEnabled()) {
+        if (ZmailLog.store.isDebugEnabled()) {
             long srcSize = srcFile.length();
             long srcRawSize = src.getRawSize();
-            ZimbraLog.store.debug("Linking %s (size=%d, raw size=%d) to %s for mailbox %d, id %d.",
+            ZmailLog.store.debug("Linking %s (size=%d, raw size=%d) to %s for mailbox %d, id %d.",
                 srcPath, srcSize, srcRawSize, destPath, destMbox.getId(), destItemId);
         }
 
@@ -225,18 +225,18 @@ public final class FileBlobStore extends StoreManager {
                 // item gets the ID of the uncommitted item
                 if (dest.exists()) {
                     File destBak = new File(destPath + ".bak");
-                    ZimbraLog.store.warn("Destination file exists.  Backing up to " + destBak.getAbsolutePath());
+                    ZmailLog.store.warn("Destination file exists.  Backing up to " + destBak.getAbsolutePath());
                     if (destBak.exists()) {
                         String bak = destBak.getAbsolutePath();
-                        ZimbraLog.store.warn(bak + " already exists.  Deleting to make room for new backup file");
+                        ZmailLog.store.warn(bak + " already exists.  Deleting to make room for new backup file");
                         if (!destBak.delete()) {
-                            ZimbraLog.store.warn("Unable to delete " + bak);
+                            ZmailLog.store.warn("Unable to delete " + bak);
                             throw e;
                         }
                     }
                     File destTmp = new File(destPath);
                     if (!destTmp.renameTo(destBak)) {
-                        ZimbraLog.store.warn("Can't rename " + destTmp.getAbsolutePath() + " to .bak");
+                        ZmailLog.store.warn("Can't rename " + destTmp.getAbsolutePath() + " to .bak");
                         throw e;
                     }
                     // Existing file is now renamed to <file>.bak.
@@ -272,10 +272,10 @@ public final class FileBlobStore extends StoreManager {
         BlobInputStream.getFileDescriptorCache().remove(destPath);  // Prevent stale cache read.
         ensureParentDirExists(destFile);
 
-        if (ZimbraLog.store.isDebugEnabled()) {
+        if (ZmailLog.store.isDebugEnabled()) {
             long srcSize = srcFile.length();
             long srcRawSize = blob.getRawSize();
-            ZimbraLog.store.debug("Renaming %s (size=%d, raw size=%d) to %s for mailbox %d, id %d.",
+            ZmailLog.store.debug("Renaming %s (size=%d, raw size=%d) to %s for mailbox %d, id %d.",
                 srcPath, srcSize, srcRawSize, destPath, destMbox.getId(), destItemId);
         }
 
@@ -333,7 +333,7 @@ public final class FileBlobStore extends StoreManager {
         if (file == null) {
             return false;
         }
-        ZimbraLog.store.debug("Deleting %s.", file.getPath());
+        ZmailLog.store.debug("Deleting %s.", file.getPath());
         BlobInputStream.getFileDescriptorCache().remove(file.getPath());  // Prevent stale cache read.
         boolean deleted = file.delete();
         if (deleted) {

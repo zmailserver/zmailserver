@@ -14,12 +14,12 @@
  * 
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.qa.unittest.prov;
+package org.zmail.qa.unittest.prov;
 
 import org.junit.Rule;
 import org.junit.rules.TestName;
 
-import com.zimbra.cs.ldap.unboundid.InMemoryLdapServer;
+import org.zmail.cs.ldap.unboundid.InMemoryLdapServer;
 
 public class ProvTest {
 

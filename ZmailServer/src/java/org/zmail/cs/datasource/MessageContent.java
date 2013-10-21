@@ -12,18 +12,18 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.datasource;
+package org.zmail.cs.datasource;
 
 import java.io.IOException;
 import java.io.InputStream;
 
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.common.util.BufferStream;
-import com.zimbra.common.util.ZimbraLog;
-import com.zimbra.cs.mailbox.DeliveryContext;
-import com.zimbra.cs.mime.ParsedMessage;
-import com.zimbra.cs.store.Blob;
-import com.zimbra.cs.store.StoreManager;
+import org.zmail.common.service.ServiceException;
+import org.zmail.common.util.BufferStream;
+import org.zmail.common.util.ZmailLog;
+import org.zmail.cs.mailbox.DeliveryContext;
+import org.zmail.cs.mime.ParsedMessage;
+import org.zmail.cs.store.Blob;
+import org.zmail.cs.store.StoreManager;
 
 public class MessageContent {
     private Blob blob;
@@ -43,7 +43,7 @@ public class MessageContent {
             
             long realSize = bs.readFrom(is);
             if (realSize != sizeHint) {
-                // ZimbraLog.datasource.debug("Content size mismatch: expected %d but got %d bytes", sizeHint, realSize);
+                // ZmailLog.datasource.debug("Content size mismatch: expected %d but got %d bytes", sizeHint, realSize);
             }
             data = bs.toByteArray();
             bs.close();
@@ -68,7 +68,7 @@ public class MessageContent {
         try {
             return (int) blob.getRawSize();
         } catch (IOException e) {
-            ZimbraLog.datasource.error("Unable to determine size of %s.", blob.getPath(), e);
+            ZmailLog.datasource.error("Unable to determine size of %s.", blob.getPath(), e);
         }
         return 0;
     }

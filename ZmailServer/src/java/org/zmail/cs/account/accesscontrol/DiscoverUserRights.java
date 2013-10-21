@@ -12,20 +12,20 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.account.accesscontrol;
+package org.zmail.cs.account.accesscontrol;
 
 import java.util.Map;
 import java.util.Set;
 
 import com.google.common.collect.Maps;
 import com.google.common.collect.Sets;
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.common.util.StringUtil;
-import com.zimbra.cs.account.Account;
-import com.zimbra.cs.account.Entry;
-import com.zimbra.cs.account.Group;
-import com.zimbra.cs.account.Provisioning;
-import com.zimbra.cs.account.ldap.entry.LdapEntry;
+import org.zmail.common.service.ServiceException;
+import org.zmail.common.util.StringUtil;
+import org.zmail.cs.account.Account;
+import org.zmail.cs.account.Entry;
+import org.zmail.cs.account.Group;
+import org.zmail.cs.account.Provisioning;
+import org.zmail.cs.account.ldap.entry.LdapEntry;
 
 /**
  * @author pshao
@@ -77,9 +77,9 @@ public class DiscoverUserRights {
 
         for (SearchGrants.GrantsOnTarget grants : searchResults) {
             Entry targetEntry = grants.getTargetEntry();
-            ZimbraACL acl = grants.getAcl();
+            ZmailACL acl = grants.getAcl();
 
-            for (ZimbraACE ace : acl.getAllACEs()) {
+            for (ZmailACE ace : acl.getAllACEs()) {
                 Right right = ace.getRight();
 
                 if (rights.contains(right) && !isSameEntry(targetEntry, acct)) {

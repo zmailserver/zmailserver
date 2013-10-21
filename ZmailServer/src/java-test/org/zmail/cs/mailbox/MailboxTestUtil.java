@@ -13,7 +13,7 @@
  * ***** END LICENSE BLOCK *****
  */
 
-package com.zimbra.cs.mailbox;
+package org.zmail.cs.mailbox;
 
 import java.io.File;
 import java.io.IOException;
@@ -28,28 +28,28 @@ import javax.mail.util.ByteArrayDataSource;
 
 import com.google.common.base.Strings;
 import com.google.common.io.Files;
-import com.zimbra.common.calendar.ZCalendar.ZVCalendar;
-import com.zimbra.common.localconfig.LC;
-import com.zimbra.common.mime.ContentDisposition;
-import com.zimbra.common.mime.MimeConstants;
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.common.util.ZimbraLog;
-import com.zimbra.common.zmime.ZMimeBodyPart;
-import com.zimbra.common.zmime.ZMimeMultipart;
-import com.zimbra.cs.account.Account;
-import com.zimbra.cs.account.MockProvisioning;
-import com.zimbra.cs.account.Provisioning;
-import com.zimbra.cs.db.DbPool;
-import com.zimbra.cs.db.HSQLDB;
-import com.zimbra.cs.mailbox.calendar.Invite;
-import com.zimbra.cs.mime.Mime;
-import com.zimbra.cs.mime.ParsedMessage;
-import com.zimbra.cs.store.MockStoreManager;
-import com.zimbra.cs.store.StoreManager;
-import com.zimbra.cs.store.http.HttpStoreManagerTest.MockHttpStoreManager;
-import com.zimbra.cs.store.http.MockHttpStore;
-import com.zimbra.cs.util.JMSession;
-import com.zimbra.soap.DocumentHandler;
+import org.zmail.common.calendar.ZCalendar.ZVCalendar;
+import org.zmail.common.localconfig.LC;
+import org.zmail.common.mime.ContentDisposition;
+import org.zmail.common.mime.MimeConstants;
+import org.zmail.common.service.ServiceException;
+import org.zmail.common.util.ZmailLog;
+import org.zmail.common.zmime.ZMimeBodyPart;
+import org.zmail.common.zmime.ZMimeMultipart;
+import org.zmail.cs.account.Account;
+import org.zmail.cs.account.MockProvisioning;
+import org.zmail.cs.account.Provisioning;
+import org.zmail.cs.db.DbPool;
+import org.zmail.cs.db.HSQLDB;
+import org.zmail.cs.mailbox.calendar.Invite;
+import org.zmail.cs.mime.Mime;
+import org.zmail.cs.mime.ParsedMessage;
+import org.zmail.cs.store.MockStoreManager;
+import org.zmail.cs.store.StoreManager;
+import org.zmail.cs.store.http.HttpStoreManagerTest.MockHttpStoreManager;
+import org.zmail.cs.store.http.MockHttpStore;
+import org.zmail.cs.util.JMSession;
+import org.zmail.soap.DocumentHandler;
 
 public final class MailboxTestUtil {
 
@@ -66,18 +66,18 @@ public final class MailboxTestUtil {
     /**
      * Initializes the provisioning.
      *
-     * @param zimbraServerDir the directory that contains the ZimbraServer project
+     * @param zmailServerDir the directory that contains the ZmailServer project
      * @throws Exception
      */
-    public static void initProvisioning(String zimbraServerDir) throws Exception {
-        zimbraServerDir = Strings.nullToEmpty(zimbraServerDir);
+    public static void initProvisioning(String zmailServerDir) throws Exception {
+        zmailServerDir = Strings.nullToEmpty(zmailServerDir);
         System.setProperty("log4j.configuration", "log4j-test.properties");
-        // Don't load from /opt/zimbra/conf
-        System.setProperty("zimbra.config", zimbraServerDir + "src/java-test/localconfig-test.xml");
+        // Don't load from /opt/zmail/conf
+        System.setProperty("zmail.config", zmailServerDir + "src/java-test/localconfig-test.xml");
         LC.reload();
-        LC.zimbra_attrs_directory.setDefault(zimbraServerDir + "conf/attrs");
-        LC.zimbra_rights_directory.setDefault(zimbraServerDir + "conf/rights");
-        LC.timezone_file.setDefault(zimbraServerDir + "conf/timezones.ics");
+        LC.zmail_attrs_directory.setDefault(zmailServerDir + "conf/attrs");
+        LC.zmail_rights_directory.setDefault(zmailServerDir + "conf/rights");
+        LC.timezone_file.setDefault(zmailServerDir + "conf/timezones.ics");
 
         // default MIME handlers are now set up in MockProvisioning constructor
         Provisioning.setInstance(new MockProvisioning());
@@ -92,42 +92,42 @@ public final class MailboxTestUtil {
 
     /**
      * Initializes the provisioning, database, index and store manager.
-     * @param zimbraServerDir the directory that contains the ZimbraServer project
+     * @param zmailServerDir the directory that contains the ZmailServer project
      * @throws Exception
      */
-    public static void initServer(String zimbraServerDir) throws Exception {
-        initServer(MockStoreManager.class, zimbraServerDir);
+    public static void initServer(String zmailServerDir) throws Exception {
+        initServer(MockStoreManager.class, zmailServerDir);
     }
 
     public static void initServer(Class<? extends StoreManager> storeManagerClass) throws Exception {
         initServer(storeManagerClass, "");
     }
 
-    public static void initServer(Class<? extends StoreManager> storeManagerClass, String zimbraServerDir, boolean OctopusInstance) throws Exception {
-        initProvisioning(zimbraServerDir);
+    public static void initServer(Class<? extends StoreManager> storeManagerClass, String zmailServerDir, boolean OctopusInstance) throws Exception {
+        initProvisioning(zmailServerDir);
 
-        LC.zimbra_class_database.setDefault(HSQLDB.class.getName());
+        LC.zmail_class_database.setDefault(HSQLDB.class.getName());
         DbPool.startup();
-        HSQLDB.createDatabase(zimbraServerDir, OctopusInstance);
+        HSQLDB.createDatabase(zmailServerDir, OctopusInstance);
 
         MailboxManager.setInstance(null);
         MailboxIndex.setIndexStoreFactory("lucene");
 
-        LC.zimbra_class_store.setDefault(storeManagerClass.getName());
+        LC.zmail_class_store.setDefault(storeManagerClass.getName());
         StoreManager.getInstance().startup();
     }
 
-    public static void initServer(Class<? extends StoreManager> storeManagerClass, String zimbraServerDir) throws Exception {
-        initProvisioning(zimbraServerDir);
+    public static void initServer(Class<? extends StoreManager> storeManagerClass, String zmailServerDir) throws Exception {
+        initProvisioning(zmailServerDir);
 
-        LC.zimbra_class_database.setDefault(HSQLDB.class.getName());
+        LC.zmail_class_database.setDefault(HSQLDB.class.getName());
         DbPool.startup();
-        HSQLDB.createDatabase(zimbraServerDir, false);
+        HSQLDB.createDatabase(zmailServerDir, false);
 
         MailboxManager.setInstance(null);
         MailboxIndex.setIndexStoreFactory("lucene");
 
-        LC.zimbra_class_store.setDefault(storeManagerClass.getName());
+        LC.zmail_class_store.setDefault(storeManagerClass.getName());
         StoreManager.getInstance().startup();
     }
 
@@ -140,10 +140,10 @@ public final class MailboxTestUtil {
 
     /**
      * Clears the database and index.
-     * @param zimbraServerDir the directory that contains the ZimbraServer project
+     * @param zmailServerDir the directory that contains the ZmailServer project
      */
-    public static void clearData(String zimbraServerDir) throws Exception {
-        HSQLDB.clearDatabase(zimbraServerDir);
+    public static void clearData(String zmailServerDir) throws Exception {
+        HSQLDB.clearDatabase(zmailServerDir);
         MailboxManager.getInstance().clearCache();
         MailboxIndex.shutdown();
         File index = new File("build/test/index");
@@ -170,7 +170,7 @@ public final class MailboxTestUtil {
             if (recurCount > 10) {
                 throw new IOException("Gave up after multiple IOExceptions", ioe);
             }
-            ZimbraLog.test.info("delete dir failed due to IOException (probably files still in use). Waiting a moment and trying again");
+            ZmailLog.test.info("delete dir failed due to IOException (probably files still in use). Waiting a moment and trying again");
             //wait a moment and try again; this can bomb if files still being written by some thread
             try {
                 Thread.sleep(2500);

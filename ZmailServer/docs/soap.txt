@@ -38,12 +38,12 @@ URL for posting to SOAP is:
 
 -------------------------------
 
-urn:zimbra  -- top-level namespace for global attributes/elements
+urn:zmail  -- top-level namespace for global attributes/elements
 
 
 <soap:Envelope xmlns:soap="http://www.w3.org/2003/05/soap-envelope">
   <soap:Header>
-    <context xmlns="urn:zimbra">
+    <context xmlns="urn:zmail">
       [<authToken>...</authToken>]
       [<authTokenControl voidOnExpired="1"/>]
       [<session [id="{returned-from-server-in-last-response}" [seq="{highest_notification_received}"] [type="admin"]/>]
@@ -127,7 +127,7 @@ element involving the session.)  If there is a session, there will be a
 
 <soap:Envelope xmlns:soap="http://www.w3.org/2003/05/soap-envelope">
   [<soap:Header>
-     <context xmlns="urn:zimbra">
+     <context xmlns="urn:zmail">
        <session id="{session-id}" [type="admin"]/>
        <change token="{change-id}"/>
        [<refresh>
@@ -176,7 +176,7 @@ batch requests:
 
 <soap:Envelope xmlns:soap="http://www.w3.org/2003/05/soap-envelope">
   <soap:Header>
-    <context xmlns="urn:zimbra">
+    <context xmlns="urn:zmail">
        <authToken>...</authToken>
        [<session [id="{returned-from-server-in-last-response}"]/>]
        [<account by="name|id">{account-name-or-id}</account>]
@@ -184,7 +184,7 @@ batch requests:
     </context>
   </soap:Header>
  <soap:Body>
-  <BatchRequest xmlns="urn:zimbra" onerror="continue*|stop">
+  <BatchRequest xmlns="urn:zmail" onerror="continue*|stop">
     <FooRequest requestId="1">
     </FooRequest>
     <BarRequest requestId="2">
@@ -197,7 +197,7 @@ response:
 
 <soap:Envelope xmlns:soap="http://www.w3.org/2003/05/soap-envelope">
   [<soap:Header>
-     <context xmlns="urn:zimbra">
+     <context xmlns="urn:zmail">
        <session id="{session-id}" [type="admin"]>
        [<refresh>
           <mbx s="{bytes-used}" [acct="{remote-mailbox-owner-id}"]/>
@@ -226,7 +226,7 @@ response:
      </context>
    <soap:/Header>]
  <soap:Body>
-  <BatchResponse xmlns="urn:zimbra">
+  <BatchResponse xmlns="urn:zmail">
     <soap:Fault requestId="1">
     </soap:Fault>
     <BarResponse ... requestId="2">
@@ -261,7 +261,7 @@ Example:
   {
     "Header": {
       "context": {
-        "_jsns": "urn:zimbra",
+        "_jsns": "urn:zmail",
         "authToken": {
           "_content": "0_3e761bdc...303b"
         }
@@ -269,7 +269,7 @@ Example:
     },
     "Body": {
       "FooRequest": {
-        "_jsns": "urn:zimbra",
+        "_jsns": "urn:zmail",
         "name": "attribute content",
         "_content": "element content"
       }
@@ -284,7 +284,7 @@ SOAP request with JSON response:
 
   <soap:Envelope ...>
     <soap:Header>
-      <context xmlns="urn:zimbra">
+      <context xmlns="urn:zmail">
         ...
         <format type='js' />
       </context>
@@ -299,7 +299,7 @@ JSON request with XML response:
       "context": {
         ...
         "format": { "type": "xml" },
-        "_jsns": "urn:zimbra"
+        "_jsns": "urn:zmail"
       }
     },
      ...
@@ -326,7 +326,7 @@ SOAP 1.2
     </soap:Code>
     <soap:Reason><soap:Text>...</soap:Text><soap:Reason>
     <soap:Detail>
-      <Error xmlns="urn:zimbra">
+      <Error xmlns="urn:zmail">
         <Code>...</Code>
         [<a n="{name}" t="{type}">{value}</a>]* // error information (arguments, e.g. ID that was bad, or whatever)
       </Error>
@@ -343,7 +343,7 @@ SOAP 1.1
    <soap:faultcode>soap:Server</soap:faultcode>
    <soap:faultstring>Server Error</soap:faultstring>
    <soap:detail>
-     <Error xmlns="urn:zimbra">
+     <Error xmlns="urn:zmail">
         <Code>...</Code>
         [<a n="{name}" t="{type}">{value}</a>]* // error information (arguments, e.g. ID that was bad, or whatever)
       </Error>
@@ -352,7 +352,7 @@ SOAP 1.1
  </soap:Body>
 </soapEnvelope>
 
-global soap/system errors used with zimbra:Error/Code:
+global soap/system errors used with zmail:Error/Code:
 
  service.FAILURE          - generic system failure
  service.INVALID_REQUEST  - bad request (missing args, etc)
@@ -373,7 +373,7 @@ global soap/system errors used with zimbra:Error/Code:
  service.NON_READONLY_OPERATION_DENIED -
 
 -----------------------------
- urn:zimbraAccount
+ urn:zmailAccount
 
  account error/codes: (includes service.*):
 
@@ -416,7 +416,7 @@ global soap/system errors used with zimbra:Error/Code:
    account.TOO_MANY_DATA_SOURCES
    account.TOO_MANY_SEARCH_RESULTS
 
- <AuthRequest xmlns="urn:zimbraAccount" [persistAuthTokenCookie="1"]>
+ <AuthRequest xmlns="urn:zmailAccount" [persistAuthTokenCookie="1"]>
    [<account by="name|id|foreignPrincipal">...</account>]
    [<password>...</password>]
    [<preauth timestamp="{timestamp}" expires="{expires}">{computed-preauth-value}</preauth>]
@@ -457,7 +457,7 @@ If verifyAccount="0" (default), only the auth token is verified and any <account
   {mail-host} = host additional SOAP requests should be directed to. Always returned, might be same as original host request was sent to.
 
   {virtual-host} = if specified (in conjunction with by="name"), virtual-host is used to determine the domain of the account name, if it
-                   does not include a domain component. For example, if the domain foo.com has a zimbraVirtualHostname of "mail.foo.com",
+                   does not include a domain component. For example, if the domain foo.com has a zmailVirtualHostname of "mail.foo.com",
                    and an auth request comes in for "joe" with a virtualHost of "mail.foo.com", then the request will be equivalent to
                    logging in with "joe@foo.com".
 
@@ -482,7 +482,7 @@ If verifyAccount="0" (default), only the auth token is verified and any <account
 <ChangePasswordResponse/>
 
    {virtual-host} = if specified virtual-host is used to determine the domain of the account name, if it
-                   does not include a domain component. For example, if the domain foo.com has a zimbraVirtualHostname of "mail.foo.com",
+                   does not include a domain component. For example, if the domain foo.com has a zmailVirtualHostname of "mail.foo.com",
                    and an auth request comes in for "joe" with a virtualHost of "mail.foo.com", then the request will be equivalent to
                    logging in with "joe@foo.com".
 
@@ -490,7 +490,7 @@ If verifyAccount="0" (default), only the auth token is verified and any <account
 
 ---------------------------
 
-<EndSessionRequest xmlns="urn:zimbraAccount"/>
+<EndSessionRequest xmlns="urn:zmailAccount"/>
 
 Ends the current session, removing it from all caches.  Called when
 the browser app (or other session-using app) shuts down.  Has no
@@ -605,7 +605,7 @@ effect if called in a <nosession> context.
 
   prefs = user-settable preferences
   attrs = account attrs that aren't user-settable, but the front-end needs.
-          Only attributes listed in zimbraAccountClientAttrs will be returned.
+          Only attributes listed in zmailAccountClientAttrs will be returned.
 
   {mail-url} = URL to talk to for soap service for this account. i.e:
 
@@ -644,8 +644,8 @@ effect if called in a <nosession> context.
 
   attr = account attrs. Currently only these attrs are returned:
 
-      zimbraId       - the unique UUID of the zimbra account
-      zimbraMailHost - the server on which this user's mail resides
+      zmailId       - the unique UUID of the zmail account
+      zmailMailHost - the server on which this user's mail resides
       displayName    - Display name for the account
 
   {soap-url} = URL to talk to for soap service for this account. i.e:
@@ -657,7 +657,7 @@ effect if called in a <nosession> context.
 
   {account-base-public-url} = base public URL for the requested account
   {change-password-url} = URL to talk to in order to change a password.  Not returned if not configured via domain
-                          attribute zimbraChangePasswordURL
+                          attribute zmailChangePasswordURL
 
 ----------------------------
 
@@ -668,8 +668,8 @@ effect if called in a <nosession> context.
 </GetAvailableSkinsResponse>
 
 Returns intersection of installed skins on the server and the list
-specified in the zimbraAvailableSkin on an account (or its
-CoS).  If none is set in zimbraAvailableSkin, it returns the
+specified in the zmailAvailableSkin on an account (or its
+CoS).  If none is set in zmailAvailableSkin, it returns the
 entire list of installed skins.  The installed skin list is obtained
 by a directory scan of the designated location of skins on a server.
 
@@ -774,7 +774,7 @@ import and export of addressbook.
  </AutoCompleteGalResponse>
 
   - the number of entries in the response is limited by Account/COS attribute
-    zimbraContactAutoCompleteMaxResults with default value of 20.
+    zmailContactAutoCompleteMaxResults with default value of 20.
 
   {type} = type of addresses to auto-complete on
            "account" for regular user accounts, aliases and distribution lists
@@ -811,7 +811,7 @@ import and export of addressbook.
   {folders} - comma separates list of folder IDs.
 
   - the number of entries in the response is limited by Account/COS attribute
-    zimbraContactAutoCompleteMaxResults with default value of 20.
+    zmailContactAutoCompleteMaxResults with default value of 20.
   - email field contains comma separated email addresses in case of group
   - display field contains string that should be displayed by the client
   - isGroup: if the entry is a group
@@ -868,7 +868,7 @@ import and export of addressbook.
 
  Notes:
    SearchCalendarResourcesRequest:
-   attrs - comma-separated list of attrs to return ("displayName", "zimbraId", "zimbraCalResType")
+   attrs - comma-separated list of attrs to return ("displayName", "zmailId", "zmailCalResType")
    sortBy - name of attribute to sort on. default is the calendar resource name.
    sortAscending - whether to sort in ascending order (0/1), 1 is default
 
@@ -949,28 +949,28 @@ import and export of addressbook.
 </CreateIdentityResponse>
 
 
-Allowed attributes (see objectclass zimbraIdentity in zimbra.schema)
+Allowed attributes (see objectclass zmailIdentity in zmail.schema)
 
-  zimbraPrefBccAddress
-    zimbraPrefForwardIncludeOriginalText
-    zimbraPrefForwardReplyFormat
-    zimbraPrefForwardReplyPrefixChar
-    zimbraPrefFromAddress
-    zimbraPrefFromDisplay
-  zimbraPrefMailSignature
-    zimbraPrefMailSignatureEnabled
-    zimbraPrefMailSignatureStyle
-    zimbraPrefReplyIncludeOriginalText
-    zimbraPrefReplyToAddress
-    zimbraPrefReplyToDisplay
-    zimbraPrefReplyToEnabled
-    zimbraPrefSaveToSent
-    zimbraPrefSentMailFolder
-    zimbraPrefUseDefaultIdentitySettings
-    zimbraPrefWhenInFolderIds
-    zimbraPrefWhenInFoldersEnabled
-    zimbraPrefWhenSentToAddresses
-    zimbraPrefWhenSentToEnabled
+  zmailPrefBccAddress
+    zmailPrefForwardIncludeOriginalText
+    zmailPrefForwardReplyFormat
+    zmailPrefForwardReplyPrefixChar
+    zmailPrefFromAddress
+    zmailPrefFromDisplay
+  zmailPrefMailSignature
+    zmailPrefMailSignatureEnabled
+    zmailPrefMailSignatureStyle
+    zmailPrefReplyIncludeOriginalText
+    zmailPrefReplyToAddress
+    zmailPrefReplyToDisplay
+    zmailPrefReplyToEnabled
+    zmailPrefSaveToSent
+    zmailPrefSentMailFolder
+    zmailPrefUseDefaultIdentitySettings
+    zmailPrefWhenInFolderIds
+    zmailPrefWhenInFoldersEnabled
+    zmailPrefWhenSentToAddresses
+    zmailPrefWhenSentToEnabled
 
 
 ---------
@@ -1071,7 +1071,7 @@ Allowed attributes (see objectclass zimbraIdentity in zimbra.schema)
 
 ---------
 
-urn:zimbraMail
+urn:zmailMail
 
  mail error/codes: (includes service.*)
 
@@ -1274,7 +1274,7 @@ Folders:
        u="{unread}" [i4u="{imap-unread}"] n="{msg-count}" [i4n="{imap-count}"] s="{total-size}" [view="{default-type}"]
        [url="{remote-url}"] [activesyncdisabled="0|1"] [perm="{effective-perms}"] [rest="{rest-url}"]>
     <acl [internalGrantExpiry="{millis-since-epoch}"] [guestGrantExpiry="{millis-since-epoch}"]>
-      <grant perm="{rights}" gt="{grantee-type}" zid="{zimbra-id}" [expiry="{millis-since-epoch}"] [d="{grantee-name}"] [pw="{password-for-guest}"] [key="{access-key}"]/>*
+      <grant perm="{rights}" gt="{grantee-type}" zid="{zmail-id}" [expiry="{millis-since-epoch}"] [d="{grantee-name}"] [pw="{password-for-guest}"] [key="{access-key}"]/>*
     </acl>?
     <retentionPolicy> ... </retentionPolicy>?
   </folder>
@@ -1295,7 +1295,7 @@ Folders:
   {effective-perms} = for remote folders, the access rights the authenticated user has on the folder
                         - will contain the calculated (c)reate folder permission if the user has
                           both (i)nsert and (r)ead access on the folder
-  {zimbra-id}    = the Zimbra account id, or if the {grantee-type} is "guest", the user's email address
+  {zmail-id}    = the Zmail account id, or if the {grantee-type} is "guest", the user's email address
 
     folders can have an optional ACL set on them for sharing.  if they do (and the authenticated
     user has (a)dminister rights on the folder), an <acl> element will be returned containing
@@ -1321,8 +1321,8 @@ Folders:
                      "dom" (domain), 
                      "cos",
                      "all" (all authenticated users), "pub" (public authenticated and unauthenticated access),
-                     "guest" (non-Zimbra email address and password),
-                     "key" (non-Zimbra email address and access key)
+                     "guest" (non-Zmail email address and password),
+                     "key" (non-Zmail email address and access key)
     {zid}          = grantee id
     {grantee-name} = name or email address of the principal being granted rights.
                      optional if {grantee-type} is "all"/"guest"/"pub".  When specified in a request,
@@ -1359,7 +1359,7 @@ attributes are required.
 
 Mountpoints:
 
-  <link id="{folder-id}" name="{folder-name}" l="{parent-id}" [f="{flags}"] owner="{owner's-display-name}" zid="{owner's-zimbra-id}"
+  <link id="{folder-id}" name="{folder-name}" l="{parent-id}" [f="{flags}"] owner="{owner's-display-name}" zid="{owner's-zmail-id}"
         rid="{id-of-shared-item}" ruuid="{UUID-of-shared-item}" oname="{owner's-name-for-item}" [color="{color}"] [view="{default-type}"]
         reminder="{reminder-enabled}"/>
 
@@ -1367,7 +1367,7 @@ Mountpoints:
   {parent-id}    = id of parent folder (absent for root folder)
   {flags}        = checked in UI (#), exclude free/(b)usy info, IMAP subscribed (*)
   {owner's-display-name} = primary email address of the owner of the linked-to resource
-  {owner's-zimbra-id} = Zimbra id (guid) of the owner of the linked-to resource
+  {owner's-zmail-id} = Zmail id (guid) of the owner of the linked-to resource
   {id-of-shared-item} = item id of the linked-to resource in the remote mailbox
   {UUID-of-shared-item} = UUID of the linked-to resource in the remote mailbox
   {owner's-name-for-item} = The name presently used for the item by the owner
@@ -1939,7 +1939,7 @@ if <header>s are requested, any matching headers are inlined into the response
 
 <GetMsgResponse>
   <m id="{message-id}" [origid="..." rt="r|w"] [part="{part}"] f="{flags}" tn="{tag-names}" s="{size}" [d="{received-date}"] sd="{date-header}" [rd="{resent-date}"] l="{folder}" (cid="{conv}")
-     (cif="{X-Zimbra-Calendar-Intended-For header}")
+     (cif="{X-Zmail-Calendar-Intended-For header}")
   >
     <e ... [isGroup="1|0"] [exp="1|0"]/>*
     <su>{subject}</su>
@@ -1982,7 +1982,7 @@ If needExp is "1" in the request, two additional flags will be included in <e> e
 <CreateFolderRequest>
   <folder name="..." [l="{parent-folder}"] [fie="1"] [view="{default-type}"] [color="{color}"] [rgb="{rgb-color}"] [f="{flags}"] [url="{url}"] [sync="1"]>
     <acl [internalGrantExpiry="{millis-since-epoch}"] [guestGrantExpiry="{millis-since-epoch}"]>
-      <grant perm="{rights}" gt="{grantee-type}" zid="{zimbra-id}" [expiry="{millis-since-epoch}"] [d="{grantee-name}"] [key="{access-key}"]/>*
+      <grant perm="{rights}" gt="{grantee-type}" zid="{zmail-id}" [expiry="{millis-since-epoch}"] [d="{grantee-name}"] [key="{access-key}"]/>*
     </acl>?
   </folder>
 </CreateFolderRequest>
@@ -2102,7 +2102,7 @@ If needExp is "1" in the request, two additional flags will be included in <e> e
 
 <FolderActionRequest>
   <action id="{list}" op="read|delete|rename|move|trash|empty|color|[!]grant|revokeorphangrants|url|import|sync|fb|[!]check|update|[!]syncon|retentionpolicy|[!]disableactivesync" [l="{target-folder}"]
-                      [name="{new-name}"] [color="{new-color}"] [rgb="{rgb-color}"] [zid="{grantee-zimbra-id}"] [url="{target-url}"]
+                      [name="{new-name}"] [color="{new-color}"] [rgb="{rgb-color}"] [zid="{grantee-zmail-id}"] [url="{target-url}"]
                       [excludeFreeBusy="{exclude-free-busy-boolean}">
     [<grant perm="..." gt="..." zid="..." [expiry="{millis-since-epoch}"] [d="..."] [key="..."]/>]
     [<retentionPolicy> ... </retentionPolicy>]
@@ -2110,7 +2110,7 @@ If needExp is "1" in the request, two additional flags will be included in <e> e
 </FolderActionRequest>
 
 <FolderActionResponse>
-  <action id="{list}" op="read|delete|empty|rename|move|trash|color|grant|url|import|sync|fb|[!]check|update" [zid="{grantee-zimbra-id}"]/>
+  <action id="{list}" op="read|delete|empty|rename|move|trash|color|grant|url|import|sync|fb|[!]check|update" [zid="{grantee-zmail-id}"]/>
 </FolderActionResponse>
 
 Actions:
@@ -2142,12 +2142,12 @@ Actions:
   </action>
     - add the <grant> object to the folder
 
-  <action op="!grant" id="{list}" zid="{grantee-zimbra-id}"/>
-    - revoke access from {grantee-zimbra-id}
+  <action op="!grant" id="{list}" zid="{grantee-zmail-id}"/>
+    - revoke access from {grantee-zmail-id}
         (you can use "00000000-0000-0000-0000-000000000000" to revoke acces granted to "all"
         or use "99999999-9999-9999-9999-999999999999" to revoke acces granted to "pub" )
 
-  <action op="revokeorphangrants" id="{folder-id}" zid="{grantee-zimbra-id}" gt="{grantee-type}"/>
+  <action op="revokeorphangrants" id="{folder-id}" zid="{grantee-zmail-id}" gt="{grantee-type}"/>
     - revoke orphan grants on the folder hierarchy granted to the grantee specified by zid and gt
       "orphan grant" is a grant whose grantee object is deleted/non-existing.  Server will throw
       INVALID_REQUEST if zid points to an existing object,
@@ -2192,7 +2192,7 @@ Actions:
            list may only have 1 element for actions empty, sync, fb, check, !check, url, import, grant, !grant, revokeorphangrants,
            !flag, !tag, syncon, !syncon, retentionpolicy
 
-output of "grant" action includes the zimbra id the rights were granted on
+output of "grant" action includes the zmail id the rights were granted on
 
 note that "delete", "empty", "rename", "move", "color", "update" can be used on search folders as well as standard folders
 
@@ -2266,7 +2266,7 @@ u,n attributes present iff count > 0
 
 <CreateMountpointRequest>
   <link l="{folder}" name="{mountpoint-name}" [view="..."] [color="{color}"] [rgb="{rgb-color}"] [f="{flags}"] [fie="1"]
-         [zid="{owner's-zimbra-id}" | owner="{owner's-email-address}"] [rid="{id-of-shared-item}" | path="{path-to-shared-item}"]
+         [zid="{owner's-zmail-id}" | owner="{owner's-email-address}"] [rid="{id-of-shared-item}" | path="{path-to-shared-item}"]
          [reminder="0"]/>
 </CreateMountpointRequest>
 
@@ -2364,7 +2364,7 @@ isCalendarForward - Indicates whether this a forward of calendar invitation in w
                    the same {send-uid} and the server will try to check the status of the previous SendMsg attempt
 
   {header-name}, {header-value} - custom RFC822 header name and value respectively. Only header names specified in
-    zimbraCustomMimeHeaderNameAllowed global config are allowed for security reasons.
+    zmailCustomMimeHeaderNameAllowed global config are allowed for security reasons.
 
 ----------------------------
 
@@ -2545,8 +2545,8 @@ Contacts:
                   I: inlined member (member name and email address is embeded in the contact group)
 
   {member-value} = if type=C: itemId of another contact.  If the referenced contact is in a
-                              shared folder, the itemId must be qualified by zimbraId of the
-                              owner.  e.g. {zimbraId}:{itemId}
+                              shared folder, the itemId must be qualified by zmailId of the
+                              owner.  e.g. {zmailId}:{itemId}
                    if type=G: GAL entry ref (returned in SearcgGalResponse)
                    if type=I: name and email address in the form of: "{name}" <{email}>
 
@@ -2654,7 +2654,7 @@ NOTE: should we return modified attrs in response?
                        Note: for performance reason, derefGroupMember is supported
                        only when specific contact ids are specified.
 
-  {returnHiddenAttrs} : whether to return contact hidden attrs defined in zimbraContactHiddenAttributes.
+  {returnHiddenAttrs} : whether to return contact hidden attrs defined in zmailContactHiddenAttributes.
                         ignored if <a> is present.
 
   {max-members} : number of max GAL group members to return.
@@ -2681,18 +2681,18 @@ contact group members are returned as sub-elements of <m>.
 If for any(transient or permanent) reason a member cannot be dereferenced, then there will be no sub-element under <m>.
 
 For example:
-<GetContactsResponse xmlns="urn:zimbraMail">
+<GetContactsResponse xmlns="urn:zmailMail">
   <cn id="680" fileAsStr="group1" d="1308612784000" rev="900" l="7">
     <a n="nickname">group one</a>
     <a n="type">group</a>
     <a n="fileAs">8:group1</a>
-    <m value="user@zimbra.com" type="I"/>
+    <m value="user@zmail.com" type="I"/>
     <m value="282" type="C">
       <cn id="282" fileAsStr="Smith, John" d="1308547353000" rev="27" l="7">
         <a n="lastName">Smith</a>
-        <a n="email">jsmith@example.zimbra.com</a>
-        <a n="workURL">http://www.example.zimbra.com</a>
-        <a n="company">Zimbra</a>
+        <a n="email">jsmith@example.zmail.com</a>
+        <a n="workURL">http://www.example.zmail.com</a>
+        <a n="company">Zmail</a>
         <a n="workCountry">US</a>
         <a n="workState">CA</a>
         <a n="workPhone">(408) 123-4567</a>
@@ -2704,9 +2704,9 @@ For example:
         <a n="createTimeStamp">20110620052132Z</a>
         <a n="lastName">user1</a>
         <a n="email">user1@phoebe.mbp</a>
-        <a n="zimbraId">b4bf7953-c10f-449e-b7fe-3df48eea36f8</a>
+        <a n="zmailId">b4bf7953-c10f-449e-b7fe-3df48eea36f8</a>
         <a n="objectClass">inetOrgPerson</a>
-        <a n="objectClass">zimbraAccount</a>
+        <a n="objectClass">zmailAccount</a>
         <a n="objectClass">amavisAccount</a>
         <a n="fullName">Demo User One</a>
         <a n="dn">uid=user1,ou=people,dc=phoebe,dc=mbp</a>
@@ -2754,9 +2754,9 @@ for op="update", caller can specify any or all of: l="{folder}", tn="{tag-names}
 {folder-id} = optional folder id to import contacts into
 
 {attach-upload-id} = attachment id from upload server. If specified, then body of content is ignored.
-{csv-format} = the format of csv being imported.  when it's not defined Zimbra
+{csv-format} = the format of csv being imported.  when it's not defined Zmail
                format is assumed.  the supported formats are defined in
-               $ZIMBRA_HOME/conf/zimbra-contact-fields.xml
+               $ZIMBRA_HOME/conf/zmail-contact-fields.xml
 {csv-locale} = The locale to use when there are multiple {csv-format} locales defined.  When it is not
                specified, the {csv-format} with no locale specification is used.
 
@@ -2773,7 +2773,7 @@ TODO: should have an option on import that matches email addresses to existing c
 {content-type} = currently, the only supported content type is "csv" (comma-separated values)
 {folder-id} = optional folder id to export contacts from
 {csv-format} = optional csv format for exported contacts.  the supported formats
-               are defined in $ZIMBRA_HOME/conf/zimbra-contact-fields.xml
+               are defined in $ZIMBRA_HOME/conf/zmail-contact-fields.xml
 {csv-locale} = The locale to use when there are multiple {csv-format} locales defined.  When it is not
                specified, the {csv-format} with no locale specification is used.
 {csv-delimiter} = optional delimiter to use in the resulting csv file
@@ -2788,14 +2788,14 @@ EXAMPLE:
 
 <SearchResponse hits="2" offset="...">
    <c id="12344" n="2" d="10023420023" tn="foo,tag2" f="1">
-     <e p="Roland Schemers" a="schemers@example.zimbra.com" d="Roland"/>
-     <e p="Dan Karp" a="dan@example.zimbra.com" d="Dan"/>
+     <e p="Roland Schemers" a="schemers@example.zmail.com" d="Roland"/>
+     <e p="Dan Karp" a="dan@example.zmail.com" d="Dan"/>
      <su>Speaking of animals</su>
      <fr>I am still looking for my monkey!</fr>
    </c>
    <c id="456" n="2" d="10023420023" tn="tag2,qux" a="1">
-     <e p="Roland Schemers" a="schemers@example.zimbra.com" d="Roland"/>
-     <e p="Ross Dargahi" a="ross@example.zimbra.com" d="Ross"/>
+     <e p="Roland Schemers" a="schemers@example.zmail.com" d="Roland"/>
+     <e p="Ross Dargahi" a="ross@example.zmail.com" d="Ross"/>
      <su>phone numbers</su>
      <fr>(650) 123-4567</fr>
    </c>
@@ -2813,12 +2813,12 @@ EXAMPLE:
   <c id="12345" tn="foo,tag2" n="2">
    <su>Speaking of animals</su>
    <m id="123445" f="1" s="1234" d="10002323">
-     <e p="Dan Karp" a="dan@example.zimbra.com"/>
+     <e p="Dan Karp" a="dan@example.zmail.com"/>
      <fr>This is the fragment</fr>
    </m>
    <m id="9845" a="1" s="128981" d="10002323">
-     <e t="f" p="Roland Schemers" a="schemers@example.zimbra.com"/>
-     <e t="t" p="Dan Karp" a="dan@example.zimbra.com"/>
+     <e t="f" p="Roland Schemers" a="schemers@example.zmail.com"/>
+     <e t="t" p="Dan Karp" a="dan@example.zmail.com"/>
      <fr>This is another frag</fr>
      <mp part="" ct="multipart/mixed">
        <mp part="1" ct="text/plain" body=1">
@@ -2844,8 +2844,8 @@ EXAMPLE:
 
 <GetMsgResponse>
    <m id="9845" a="1" s="128981" d="10002323">
-     <e t="f" id="1" p="Roland Schemers" a="schemers@example.zimbra.com"/>
-     <e t="t" id="2" p="Dan Karp" a="dan@example.zimbra.com"/>
+     <e t="f" id="1" p="Roland Schemers" a="schemers@example.zmail.com"/>
+     <e t="t" id="2" p="Dan Karp" a="dan@example.zmail.com"/>
      <su>Speaking of animals</su>
      <fr>This is another frag</fr>
      <mp part="" ct="multipart/mixed"/>
@@ -2866,12 +2866,12 @@ message. blah blah blah</content>
 
 EXAMPLE:
 
-<mail:BrowseRequest xmlns:mail="urn:zimbraMail">
+<mail:BrowseRequest xmlns:mail="urn:zmailMail">
    <query>from:roland</query>
    <browseBy>attachments</browseBy>
 </mail:BrowseRequest>
 
-<mail:BrowseResponse xmlns:mail="urn:zimbraMail">
+<mail:BrowseResponse xmlns:mail="urn:zmailMail">
   <bd>application/pdf</bd>
   <bd>application/msword</bd>
   <bd>application/vnd.ms-powerpoint</bd>
@@ -2903,7 +2903,7 @@ is 0, delegate mailbox notifications will be ignored.  The default is 1.
 
 Some clients (notably browsers) have a global-limit on the number of
 outstanding sockets...in situations with two App Instances connected
-to one Zimbra Server, the browser app my appear to 'hang' if two app
+to one Zmail Server, the browser app my appear to 'hang' if two app
 sessions attempt to do a blocking-NoOp simultaneously.  Since the apps
 are completely separate in the browser, it is impossible for the apps
 to coordinate with each other -- therefore the 'limitToOneBlocked'
@@ -2921,8 +2921,8 @@ The client may specifiy a custom timeout-length for their request if
 they know something about the particular underlying network.  The
 server may or may not honor this request (depending on server
 configured max/min values: see LocalConfig variables
-zimbra_noop_default_timeout, zimbra_noop_min_timeout and
-zimbra_noop_max_timeout)
+zmail_noop_default_timeout, zmail_noop_min_timeout and
+zmail_noop_max_timeout)
 
 -----------------------
 
@@ -3180,11 +3180,11 @@ interface is available or not.
 
 {name} : the optional name of the aspell dictionary that will be used to
 check spelling.  If not specified, the the dictionary will be either
-zimbraPrefSpellDictionary or the account's locale, in that order.
+zmailPrefSpellDictionary or the account's locale, in that order.
 
 {words} : comma-separated list of words to ignore just for this request.
 These words are added to the user's personal dictionary of ignore words
-stored as zimbraPrefSpellIgnoreWord.
+stored as zmailPrefSpellIgnoreWord.
 
 ---------------------------
 
@@ -3210,7 +3210,7 @@ java.util.Locale.getAvailableLocales(), sorted by display name (name attribute).
   ...
 </GetAvailableLocalesResponse>
 
-Returns intersection of all translated locales installed on the server and the list specified in zimbraAvailableLocale.
+Returns intersection of all translated locales installed on the server and the list specified in zmailAvailableLocale.
 The locale list in the response is sorted by display name (name attribute).
 
 {locale-id} : locale id. e.g. en_US
@@ -3219,7 +3219,7 @@ The locale list in the response is sorted by display name (name attribute).
                 if the locale is en_US and the preferred locale is fr_CA, name will contain "anglais (Etats-Unis)"
 
                 The preferred locale is determined with the following precedence:
-                (1) zimbraPrefLocale of the target account if it is present
+                (1) zmailPrefLocale of the target account if it is present
                 (2) Otherwise the locale specified in the Accept-Language http header if it is present
                 (3) Otherwise the locale returned by Provisioning.getLocale, which uses a predefined fallback
                     chain to determine the preferable locale.
@@ -3445,7 +3445,7 @@ WaitSet: scalable mechanism for listening for changes to one or more accounts
 
 Get account level permissions.
 
-Note: to be deprecated in Zimbra 9.  Use zimbraAccount GetRights instead.
+Note: to be deprecated in Zmail 9.  Use zmailAccount GetRights instead.
 
 <GetPermissionRequest>
    <!-- get only the permissions for the specified rights -->
@@ -3457,7 +3457,7 @@ If no <ace> elements are provided, all ACEs are returned in the response.
 If <ace> elements are provided, only those ACEs with specified rights are returned in the response.
 
 <GetPermissionResponse>
-  <ace right="{right}" [deny="{deny}"] gt="{grantee-type}" zid="{zimbra-id}" [d="{grantee-name}"] [pw="{password}"] [key="{accesskey}"]/>*
+  <ace right="{right}" [deny="{deny}"] gt="{grantee-type}" zid="{zmail-id}" [d="{grantee-name}"] [pw="{password}"] [key="{accesskey}"]/>*
 </GetPermissionResponse>
 
     {right}        = viewFreeBusy | invite
@@ -3466,14 +3466,14 @@ If <ace> elements are provided, only those ACEs with specified rights are return
                      if a right is specifically denied
 
     {grantee-type} = the type of grantee:
-                     usr - Zimbra user
-                     grp - Zimbra group(distribution list)
+                     usr - Zmail user
+                     grp - Zmail group(distribution list)
                      all - all authenticated users
-                     gst - non-Zimbra email address and password (not yet supported)
+                     gst - non-Zmail email address and password (not yet supported)
                      key - external user with an accesskey
                      pub - public authenticated and unauthenticated access
 
-    {zimbra-id}    = zimbraId of the grantee
+    {zmail-id}    = zmailId of the grantee
 
     {grantee-name} = name or email address of the grantee.
                      ot present if {grantee-type} is "all" or "pub"
@@ -3486,10 +3486,10 @@ If <ace> elements are provided, only those ACEs with specified rights are return
 
 Grant account level permissions.
 
-Note: to be deprecated in Zimbra 9.  Use zimbraAccount GrantRights instead.
+Note: to be deprecated in Zmail 9.  Use zmailAccount GrantRights instead.
 
 <GrantPermissionRequest>
-  <ace right="{right}" [deny="{deny}"] gt="{grantee-type}" [zid="{zimbra-id}"] [d="{grantee-name}"] [pw="{password}"] [key="{accesskey}"]/>+
+  <ace right="{right}" [deny="{deny}"] gt="{grantee-type}" [zid="{zmail-id}"] [d="{grantee-name}"] [pw="{password}"] [key="{accesskey}"]/>+
 </GrantPermissionRequest>
 
   If gt is:
@@ -3513,16 +3513,16 @@ Note: to be deprecated in Zimbra 9.  Use zimbraAccount GrantRights instead.
 GrantPermissionResponse returns permissions that are successfully granted.
 
 <GrantPermissionResponse>
-  <ace right="{right}" [deny="{deny}"] gt="{grantee-type}" zid="{zimbra-id}" [d="{grantee-name}"] [pw="{password}"] [key="{accesskey}"]/>*
+  <ace right="{right}" [deny="{deny}"] gt="{grantee-type}" zid="{zmail-id}" [d="{grantee-name}"] [pw="{password}"] [key="{accesskey}"]/>*
 </GrantPermissionResponse>
 ---------------------------
 
 Revoke account level permissions.
 
-Note: to be deprecated in Zimbra 9.  Use zimbraAccount RevokeRights instead.
+Note: to be deprecated in Zmail 9.  Use zmailAccount RevokeRights instead.
 
 <RevokePermissionRequest>
-  <ace right="{right}" [deny="{deny}"] gt="{grantee-type}" [zid="{zimbra-id}"] [d="{grantee-name}"]/>*
+  <ace right="{right}" [deny="{deny}"] gt="{grantee-type}" [zid="{zmail-id}"] [d="{grantee-name}"]/>*
 </RevokePermissionRequest>
 
   Same notes as those for GrantPermissionRequest about identifying the grantee.
@@ -3530,12 +3530,12 @@ Note: to be deprecated in Zimbra 9.  Use zimbraAccount RevokeRights instead.
 RevokePermissionResponse returns permissions that are successfully revoked.
 
 <RevokePermissionResponse>
-  <ace right="{right}" [deny="{deny}"] gt="{grantee-type}" zid="{zimbra-id}" [d="{grantee-name}"] [pw="{password}"] [key="{accesskey}"]/>*
+  <ace right="{right}" [deny="{deny}"] gt="{grantee-type}" zid="{zmail-id}" [d="{grantee-name}"] [pw="{password}"] [key="{accesskey}"]/>*
 </RevokePermissionResponse>
 
 ---------------------------
 
-Note: to be deprecated in Zimbra 9.  Use zimbraAccount CheckRights instead.
+Note: to be deprecated in Zmail 9.  Use zmailAccount CheckRights instead.
 
 <CheckPermissionRequest>
   <target type="{target-type}" by="id|name">...</target>
@@ -3587,7 +3587,7 @@ If no <ace> elements are provided, all ACEs are returned in the response.
 If <ace> elements are provided, only those ACEs with specified rights are returned in the response.
 
 <GetRightsResponse>
-  <ace right="{right}" [deny="{deny}"] gt="{grantee-type}" zid="{zimbra-id}" [d="{grantee-name}"] [pw="{password}"] [key="{accesskey}"]/>*
+  <ace right="{right}" [deny="{deny}"] gt="{grantee-type}" zid="{zmail-id}" [d="{grantee-name}"] [pw="{password}"] [key="{accesskey}"]/>*
 </GetRightsResponse>
 
     {right}        = viewFreeBusy | invite
@@ -3596,14 +3596,14 @@ If <ace> elements are provided, only those ACEs with specified rights are return
                      if a right is specifically denied
 
     {grantee-type} = the type of grantee:
-                     usr - Zimbra user
-                     grp - Zimbra group(distribution list)
+                     usr - Zmail user
+                     grp - Zmail group(distribution list)
                      all - all authenticated users
-                     gst - non-Zimbra email address and password (not yet supported)
+                     gst - non-Zmail email address and password (not yet supported)
                      key - external user with an accesskey
                      pub - public authenticated and unauthenticated access
 
-    {zimbra-id}    = zimbraId of the grantee
+    {zmail-id}    = zmailId of the grantee
 
     {grantee-name} = name or email address of the grantee.
                      ot present if {grantee-type} is "all" or "pub"
@@ -3617,7 +3617,7 @@ If <ace> elements are provided, only those ACEs with specified rights are return
 Grant account level rights.
 
 <GrantRightsRequest>
-  <ace right="{right}" [deny="{deny}"] gt="{grantee-type}" [zid="{zimbra-id}"] [d="{grantee-name}"] [pw="{password}"] [key="{accesskey}"] [chkgt="{checkGranteeType}"]/>+
+  <ace right="{right}" [deny="{deny}"] gt="{grantee-type}" [zid="{zmail-id}"] [d="{grantee-name}"] [pw="{password}"] [key="{accesskey}"] [chkgt="{checkGranteeType}"]/>+
 </GrantRightsRequest>
 
   If gt is:
@@ -3642,14 +3642,14 @@ Grant account level rights.
 GrantRightsResponse returns rights that are successfully granted.
 
 <GrantRightsResponse>
-  <ace right="{right}" [deny="{deny}"] gt="{grantee-type}" zid="{zimbra-id}" [d="{grantee-name}"] [pw="{password}"] [key="{accesskey}"]/>*
+  <ace right="{right}" [deny="{deny}"] gt="{grantee-type}" zid="{zmail-id}" [d="{grantee-name}"] [pw="{password}"] [key="{accesskey}"]/>*
 </GrantRightsResponse>
 ---------------------------
 
 Revoke account level rights.
 
 <RevokeRightsRequest>
-  <ace right="{right}" [deny="{deny}"] gt="{grantee-type}" [zid="{zimbra-id}"] [d="{grantee-name}"]/>*
+  <ace right="{right}" [deny="{deny}"] gt="{grantee-type}" [zid="{zmail-id}"] [d="{grantee-name}"]/>*
 </RevokeRightsRequest>
 
   Same notes as those for GrantRightsRequest about identifying the grantee.
@@ -3657,7 +3657,7 @@ Revoke account level rights.
 RevokeRightsResponse returns rights that are successfully revoked.
 
 <RevokeRightsResponse>
-  <ace right="{right}" [deny="{deny}"] gt="{grantee-type}" zid="{zimbra-id}" [d="{grantee-name}"] [pw="{password}"] [key="{accesskey}"]/>*
+  <ace right="{right}" [deny="{deny}"] gt="{grantee-type}" zid="{zmail-id}" [d="{grantee-name}"] [pw="{password}"] [key="{accesskey}"]/>*
 </RevokeRightsResponse>
 
 ---------------------------
@@ -3673,9 +3673,9 @@ Notes:
      
   2. For sendAs, sendOnBehalgOf, sendAsDistList, sendOnBehalgOfDistList rights,
      name attribute is not returned on <target> elements.  Instead, addresses 
-     in the target entry's zimbraPrefAllowAddressForDelegatedSender are returned in   
+     in the target entry's zmailPrefAllowAddressForDelegatedSender are returned in   
      <e a="{email-address}"/> elements under the <target> element.  
-     If zimbraPrefAllowAddressForDelegatedSender is not set on the target entry, the entry's 
+     If zmailPrefAllowAddressForDelegatedSender is not set on the target entry, the entry's 
      primary email address will be return in the only <e a="{email-address}"/> element 
      under the <target> element.
      
@@ -3737,7 +3737,7 @@ e.g.
 
 Check if the authed user has the specified right(s) on a target.
 
-{key} = if by id, zimbraId of the target entry
+{key} = if by id, zmailId of the target entry
         if by name, name of the target entry
 {target-type} = account | calresource | dl | domain
 
@@ -3765,7 +3765,7 @@ allow = 1 | 0
   <info version="{version-string}" release="{release-string}" buildDate="{YYYYMMDD-hhmm}" buildHost="{host-name}"/>
 </GetVersionInfoResponse>
 
-This request will return a SOAP fault if the zimbraSoapExposeVersion
+This request will return a SOAP fault if the zmailSoapExposeVersion
 server/globalconfig attribute is set to FALSE.
 
 ---------------------------
@@ -3872,7 +3872,7 @@ Notes on {grantee_type}, {grantee-id}, {grantee-name}:
                  return "no shares" instead of error when an invalid user name/id is used.
 
 Notes:
-- if <owner> is *not* specified server will search the LDAP for published shares (zimbraSharedItem
+- if <owner> is *not* specified server will search the LDAP for published shares (zmailSharedItem
   account attribute) accessible to the authed user.
 
 - if <owner> *is* specified, server will iterate through the owner's mailbox to discover all
@@ -3882,7 +3882,7 @@ Notes:
         - shared with any group(and parent groups) the account belongs. (*is* supported)
         - shared with the cos assigned to the account.                  (*is* supported)
         - shared with the domain this account is in.                    (*is* supported)
-        - shared with all authed users (i.e. all Zimbra users)          (*is* supported)
+        - shared with all authed users (i.e. all Zmail users)          (*is* supported)
         - shared with the public                                        (*is* supported)
 
 
@@ -4035,7 +4035,7 @@ Notes: SendVerificationCodeRequest results in a random verification code being g
 <VerifyCodeResponse success="0|1">
 
 Notes: Request for validating the verification code sent to a device. After successful validation the server
-sets device email address as the value of zimbraCalendarReminderDeviceEmail account attribute.
+sets device email address as the value of zmailCalendarReminderDeviceEmail account attribute.
 
 
 <InvalidateReminderDeviceRequest a="{device-email-address}"/>
@@ -4072,11 +4072,11 @@ added to Documents only.
 
 <GetShareNotificationsResponse>
    [<share id="{notification-item-id}" d="{date}" status="new|seen">
-      <grantor id="{zimbra-id}" email="{email-address}" name="{display-name}"/>
+      <grantor id="{zmail-id}" email="{email-address}" name="{display-name}"/>
       <link id="{shared-item-id}" name="{item-name}" view="{item-type}" perm="{permissions-granted}"/>
     </share>]*
    [<revoke id="{notification-item-id}" d="{date}" [expire="1"]>
-      <grantor id="{zimbra-id}" email="{email-address}" name="{display-name}"/>
+      <grantor id="{zmail-id}" email="{email-address}" name="{display-name}"/>
       <link id="{revoked-item-id}" name="{item-name}" view="{item-type}"/>
     </revoke>]*
 </GetShareNotificationsResponse>
@@ -4166,10 +4166,10 @@ Notes:
 
    dynamic = whether this is a dynamic distribution list
    grantee-type = 
-                usr - a Zimbra internal user
-                grp - a Zimbra internal group
+                usr - a Zmail internal user
+                grp - a Zmail internal group
                 egp - an external AD group
-                all - all Zimbra users (id and name will not be present)
+                all - all Zmail users (id and name will not be present)
                 pub - public (id and name will not be present)
      
 -----------------------------
@@ -4206,10 +4206,10 @@ Notes:
        rejectSubsReq  reject subscription/un-subscription request
 
   grantee-type:      
-     usr - a Zimbra internal user
-     grp - a Zimbra internal group
+     usr - a Zmail internal user
+     grp - a Zmail internal group
      egr - an external AD group
-     all - all Zimbra users (by and {name-or-id} are ignored)
+     all - all Zmail users (by and {name-or-id} are ignored)
      pub - public (by and {name-or-id} are ignored)
      email - an email address.  Server will lookup in directory and determine the actual grantee
      

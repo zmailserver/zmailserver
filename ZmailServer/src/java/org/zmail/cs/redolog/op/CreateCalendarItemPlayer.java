@@ -13,7 +13,7 @@
  * ***** END LICENSE BLOCK *****
  */
 
-package com.zimbra.cs.redolog.op;
+package org.zmail.cs.redolog.op;
 
 public interface CreateCalendarItemPlayer {
     public int getCalendarItemId();

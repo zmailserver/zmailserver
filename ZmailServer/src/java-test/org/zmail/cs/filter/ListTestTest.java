@@ -12,7 +12,7 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.filter;
+package org.zmail.cs.filter;
 
 import java.util.HashMap;
 import java.util.List;
@@ -22,18 +22,18 @@ import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
-import com.zimbra.cs.account.Account;
-import com.zimbra.cs.account.MockProvisioning;
-import com.zimbra.cs.account.Provisioning;
-import com.zimbra.cs.filter.jsieve.ListTest;
-import com.zimbra.cs.mailbox.DeliveryContext;
-import com.zimbra.cs.mailbox.Mailbox;
-import com.zimbra.cs.mailbox.MailboxManager;
-import com.zimbra.cs.mailbox.MailboxTestUtil;
-import com.zimbra.cs.mailbox.Message;
-import com.zimbra.cs.mailbox.OperationContext;
-import com.zimbra.cs.mime.ParsedMessage;
-import com.zimbra.cs.service.util.ItemId;
+import org.zmail.cs.account.Account;
+import org.zmail.cs.account.MockProvisioning;
+import org.zmail.cs.account.Provisioning;
+import org.zmail.cs.filter.jsieve.ListTest;
+import org.zmail.cs.mailbox.DeliveryContext;
+import org.zmail.cs.mailbox.Mailbox;
+import org.zmail.cs.mailbox.MailboxManager;
+import org.zmail.cs.mailbox.MailboxTestUtil;
+import org.zmail.cs.mailbox.Message;
+import org.zmail.cs.mailbox.OperationContext;
+import org.zmail.cs.mime.ParsedMessage;
+import org.zmail.cs.service.util.ItemId;
 
 /**
  * Unit test for {@link ListTest}.
@@ -46,7 +46,7 @@ public final class ListTestTest {
     public static void init() throws Exception {
         MailboxTestUtil.initServer();
         Provisioning prov = Provisioning.getInstance();
-        prov.createAccount("test@zimbra.com", "secret", new HashMap<String, Object>());
+        prov.createAccount("test@zmail.com", "secret", new HashMap<String, Object>());
     }
 
     @Before
@@ -61,9 +61,9 @@ public final class ListTestTest {
         account.setMailSieveScript("if list { tag \"list\"; }");
         Mailbox mbox = MailboxManager.getInstance().getMailboxByAccount(account);
 
-        // X-Zimbra-DL header exists
+        // X-Zmail-DL header exists
         List<ItemId> ids = RuleManager.applyRulesToIncomingMessage(new OperationContext(mbox), mbox,
-                new ParsedMessage("From: sender@zimbra.com\nX-Zimbra-DL: list@zimbra.com\nSubject: test".getBytes(), false),
+                new ParsedMessage("From: sender@zmail.com\nX-Zmail-DL: list@zmail.com\nSubject: test".getBytes(), false),
                 0, account.getName(), new DeliveryContext(), Mailbox.ID_FOLDER_INBOX, true);
         Assert.assertEquals(1, ids.size());
         Message msg = mbox.getMessageById(null, ids.get(0).getId());
@@ -71,7 +71,7 @@ public final class ListTestTest {
 
         // List-Id header exists
         ids = RuleManager.applyRulesToIncomingMessage(new OperationContext(mbox), mbox,
-                new ParsedMessage("From: sender@zimbra.com\nList-Id: list.zimbra.com\nSubject: test".getBytes(), false),
+                new ParsedMessage("From: sender@zmail.com\nList-Id: list.zmail.com\nSubject: test".getBytes(), false),
                 0, account.getName(), new DeliveryContext(), Mailbox.ID_FOLDER_INBOX, true);
         Assert.assertEquals(1, ids.size());
         msg = mbox.getMessageById(null, ids.get(0).getId());

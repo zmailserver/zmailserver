@@ -12,22 +12,22 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.service.mail;
+package org.zmail.cs.service.mail;
 
 import java.net.URL;
 import java.util.HashMap;
 import java.util.Map;
 
-import com.zimbra.common.soap.SoapProtocol;
-import com.zimbra.cs.account.Account;
-import com.zimbra.cs.account.GuestAccount;
-import com.zimbra.cs.service.AuthProvider;
-import com.zimbra.cs.service.MockHttpServletRequest;
-import com.zimbra.soap.DocumentService;
-import com.zimbra.soap.MockSoapEngine;
-import com.zimbra.soap.SoapEngine;
-import com.zimbra.soap.SoapServlet;
-import com.zimbra.soap.ZimbraSoapContext;
+import org.zmail.common.soap.SoapProtocol;
+import org.zmail.cs.account.Account;
+import org.zmail.cs.account.GuestAccount;
+import org.zmail.cs.service.AuthProvider;
+import org.zmail.cs.service.MockHttpServletRequest;
+import org.zmail.soap.DocumentService;
+import org.zmail.soap.MockSoapEngine;
+import org.zmail.soap.SoapEngine;
+import org.zmail.soap.SoapServlet;
+import org.zmail.soap.ZmailSoapContext;
 
 public class ServiceTestUtil {
 
@@ -45,7 +45,7 @@ public class ServiceTestUtil {
 
     public static Map<String, Object> getRequestContext(Account authAcct, Account targetAcct, DocumentService service) throws Exception {
         Map<String, Object> context = new HashMap<String, Object>();
-        context.put(SoapEngine.ZIMBRA_CONTEXT, new ZimbraSoapContext(AuthProvider.getAuthToken(authAcct), targetAcct.getId(), SoapProtocol.Soap12, SoapProtocol.Soap12));
+        context.put(SoapEngine.ZIMBRA_CONTEXT, new ZmailSoapContext(AuthProvider.getAuthToken(authAcct), targetAcct.getId(), SoapProtocol.Soap12, SoapProtocol.Soap12));
         context.put(SoapServlet.SERVLET_REQUEST, new MockHttpServletRequest("test".getBytes("UTF-8"), new URL("http://localhost:7070/service/FooRequest"), ""));
         context.put(SoapEngine.ZIMBRA_ENGINE, new MockSoapEngine(service));
         return context;

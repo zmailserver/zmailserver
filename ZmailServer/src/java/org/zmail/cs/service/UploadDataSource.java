@@ -16,7 +16,7 @@
 /*
  * Created on Dec 9, 2004
  */
-package com.zimbra.cs.service;
+package org.zmail.cs.service;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -24,8 +24,8 @@ import java.io.OutputStream;
 
 import javax.activation.DataSource;
 
-import com.zimbra.common.mime.ContentType;
-import com.zimbra.cs.service.FileUploadServlet.Upload;
+import org.zmail.common.mime.ContentType;
+import org.zmail.cs.service.FileUploadServlet.Upload;
 
 /**
  * @author dkarp

@@ -16,17 +16,17 @@
 /**
  * @author bburtin
  */
-package com.zimbra.cs.db;
+package org.zmail.cs.db;
 
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.common.util.ZimbraLog;
+import org.zmail.common.service.ServiceException;
+import org.zmail.common.util.ZmailLog;
 
 public class DbTableMaintenance {
     
     public static int runMaintenance()
     throws ServiceException {
         if (!(Db.getInstance() instanceof MySQL)) {
-            ZimbraLog.mailbox.warn("Table maintenance only supported for MySQL.");
+            ZmailLog.mailbox.warn("Table maintenance only supported for MySQL.");
             return 0;
         }
         
@@ -34,14 +34,14 @@ public class DbTableMaintenance {
         DbResults results = DbUtil.executeQuery(
             "SELECT table_schema, table_name " +
             "FROM INFORMATION_SCHEMA.TABLES " +
-            "WHERE table_schema = 'zimbra' " +
+            "WHERE table_schema = 'zmail' " +
             "OR table_schema LIKE '" + DbMailbox.DB_PREFIX_MAILBOX_GROUP + "%'");
 
         while (results.next()) {
             String dbName = results.getString("TABLE_SCHEMA");
             String tableName = results.getString("TABLE_NAME");
             String sql = String.format("ANALYZE TABLE %s.%s", dbName, tableName); 
-            ZimbraLog.mailbox.info("Running %s", sql);
+            ZmailLog.mailbox.info("Running %s", sql);
             DbUtil.executeUpdate(sql);
             numTables++;
         }

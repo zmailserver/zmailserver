@@ -13,19 +13,19 @@
  * ***** END LICENSE BLOCK *****
  */
 
-package com.zimbra.cs.account;
+package org.zmail.cs.account;
 
 import java.util.HashMap;
 import java.util.Map;
 
-import com.zimbra.common.mailbox.ContactConstants;
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.common.soap.AccountConstants;
-import com.zimbra.common.soap.Element;
-import com.zimbra.common.soap.MailConstants;
-import com.zimbra.common.util.StringUtil;
+import org.zmail.common.mailbox.ContactConstants;
+import org.zmail.common.service.ServiceException;
+import org.zmail.common.soap.AccountConstants;
+import org.zmail.common.soap.Element;
+import org.zmail.common.soap.MailConstants;
+import org.zmail.common.util.StringUtil;
 
-import com.zimbra.cs.gal.GalSearchConfig.GalType;
+import org.zmail.cs.gal.GalSearchConfig.GalType;
 
 /**
  * @author schemers
@@ -52,19 +52,19 @@ public class GalContact implements Comparable {
         mAttrs = attrs;
     }
 
-    public boolean isZimbraGal() {
-        return GalType.zimbra == mGalType;
+    public boolean isZmailGal() {
+        return GalType.zmail == mGalType;
     }
     
     /* (non-Javadoc)
-     * @see com.zimbra.cs.account.GalContact#getId()
+     * @see org.zmail.cs.account.GalContact#getId()
      */
     public String getId() {
         return mId;
     }
 
     /* (non-Javadoc)
-     * @see com.zimbra.cs.account.GalContact#getAttrs()
+     * @see org.zmail.cs.account.GalContact#getAttrs()
      */
     public Map<String, Object> getAttrs() {
         return mAttrs;

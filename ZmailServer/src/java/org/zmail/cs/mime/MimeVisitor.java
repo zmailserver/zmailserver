@@ -13,7 +13,7 @@
  * ***** END LICENSE BLOCK *****
  */
 
-package com.zimbra.cs.mime;
+package org.zmail.cs.mime;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -25,9 +25,9 @@ import javax.mail.internet.MimeMessage;
 import javax.mail.internet.MimeMultipart;
 import javax.mail.internet.MimePart;
 
-import com.zimbra.common.localconfig.LC;
-import com.zimbra.common.util.ZimbraLog;
-import com.zimbra.common.mime.MimeConstants;
+import org.zmail.common.localconfig.LC;
+import org.zmail.common.util.ZmailLog;
+import org.zmail.common.mime.MimeConstants;
 
 /**
  * Walks a JavaMail MIME tree and calls the abstract methods for each node. 
@@ -45,17 +45,17 @@ public abstract class MimeVisitor {
 
         static {
             try {
-                if (LC.zimbra_converter_enabled_uuencode.booleanValue())
+                if (LC.zmail_converter_enabled_uuencode.booleanValue())
                     registerConverter(UUEncodeConverter.class);
             } catch (Exception e) {
-                ZimbraLog.misc.error("error loading UUENCODE converter", e);
+                ZmailLog.misc.error("error loading UUENCODE converter", e);
             }
 
             try {
-                if (LC.zimbra_converter_enabled_tnef.booleanValue())
+                if (LC.zmail_converter_enabled_tnef.booleanValue())
                     registerConverter(TnefConverter.class);
             } catch (Exception e) {
-                ZimbraLog.misc.error("error loading TNEF converter", e);
+                ZmailLog.misc.error("error loading TNEF converter", e);
             }
         }
 
@@ -65,7 +65,7 @@ public abstract class MimeVisitor {
      *  but instead are executed every time the message is accessed. */
     public static void registerConverter(Class<? extends MimeVisitor> vclass) {
         if (vclass != null) {
-            ZimbraLog.lmtp.debug("Registering MIME converter: %s", vclass.getName());
+            ZmailLog.lmtp.debug("Registering MIME converter: %s", vclass.getName());
             sMimeConverters.add(vclass);
         }
     }
@@ -73,7 +73,7 @@ public abstract class MimeVisitor {
     /** Removes a <tt>MimeVisitor</tt> from the list of converters. */
     public static void unregisterConverter(Class<? extends MimeVisitor> vclass) {
         if (vclass != null) {
-            ZimbraLog.lmtp.debug("Unregistering MIME converter: %s", vclass.getName());
+            ZmailLog.lmtp.debug("Unregistering MIME converter: %s", vclass.getName());
             sMimeConverters.remove(vclass);
         }
     }
@@ -94,7 +94,7 @@ public abstract class MimeVisitor {
      *  message is saved to disk or sent via SMTP. */
     public static void registerMutator(Class<? extends MimeVisitor> vclass) {
         if (vclass != null) {
-            ZimbraLog.lmtp.debug("Registering MIME mutator: %s", vclass.getName());
+            ZmailLog.lmtp.debug("Registering MIME mutator: %s", vclass.getName());
             sMimeMutators.add(vclass);
         }
     }
@@ -102,7 +102,7 @@ public abstract class MimeVisitor {
     /** Removes a <tt>MimeVisitor</tt> from the list of mutators. */
     public static void unregisterMutator(Class<? extends MimeVisitor> vclass) {
         if (vclass != null) {
-            ZimbraLog.lmtp.debug("Unregistering MIME mutator: %s", vclass.getName());
+            ZmailLog.lmtp.debug("Unregistering MIME mutator: %s", vclass.getName());
             sMimeMutators.remove(vclass);
         }
     }
@@ -176,7 +176,7 @@ public abstract class MimeVisitor {
         return accept(mm, 0);
     }
 
-    private static final int MAX_VISITOR_DEPTH = LC.zimbra_converter_depth_max.intValue();
+    private static final int MAX_VISITOR_DEPTH = LC.zmail_converter_depth_max.intValue();
 
     private synchronized final boolean accept(MimePart mp, int depth) throws MessagingException {
         // do not recurse beyond a fixed depth
@@ -197,7 +197,7 @@ public abstract class MimeVisitor {
             try {
                 content = Mime.getMultipartContent(mp, ctype);
             } catch (Exception e) {
-                ZimbraLog.extensions.warn("could not fetch multipart content; skipping", e);
+                ZmailLog.extensions.warn("could not fetch multipart content; skipping", e);
             }
             if (content instanceof MimeMultipart) {
                 MimeMultipart multi = (MimeMultipart) content;
@@ -213,11 +213,11 @@ public abstract class MimeVisitor {
                             if (accept((MimeBodyPart) bp, depth + 1))
                                 modified = multiModified = true;
                         } else {
-                            ZimbraLog.extensions.info("unexpected BodyPart subclass: " + bp.getClass().getName());
+                            ZmailLog.extensions.info("unexpected BodyPart subclass: " + bp.getClass().getName());
                         }
                     }
                 } catch (MessagingException e) {
-                    ZimbraLog.extensions.warn("could not fetch body subpart; skipping remainder", e);
+                    ZmailLog.extensions.warn("could not fetch body subpart; skipping remainder", e);
                 }
 
                 if (visitMultipart(multi, VisitPhase.VISIT_END))
@@ -230,14 +230,14 @@ public abstract class MimeVisitor {
             try {
                 content = Mime.getMessageContent(mp);
             } catch (Exception e) {
-                ZimbraLog.extensions.warn("could not fetch attached message content; skipping", e);
+                ZmailLog.extensions.warn("could not fetch attached message content; skipping", e);
             }
             if (content != null)
                 modified |= accept(content, depth + 1);
         } else if (mp instanceof MimeBodyPart) {
             modified |= visitBodyPart((MimeBodyPart) mp);
         } else if (!(mp instanceof MimeMessage)) {
-            ZimbraLog.extensions.info("unexpected MimePart subclass: " + mp.getClass().getName() + " (ctype='" + ctype + "')");
+            ZmailLog.extensions.info("unexpected MimePart subclass: " + mp.getClass().getName() + " (ctype='" + ctype + "')");
         }
 
         if (mp instanceof MimeMessage) {

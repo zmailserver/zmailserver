@@ -55,15 +55,15 @@ if ($ARGV[1] ne "") {
     $msgID = $ARGV[0];
 }
 
-my $ACCTNS = "urn:zimbraAccount";
-my $MAILNS = "urn:zimbraMail";
+my $ACCTNS = "urn:zmailAccount";
+my $MAILNS = "urn:zmailMail";
 
 my $url = "http://localhost:7070/service/soap/";
 
 my $SOAP = $Soap::Soap12;
 my $d = new XmlDoc;
 $d->start('AuthRequest', $ACCTNS);
-$d->add('account', undef, { by => "name"}, 'user1@example.zimbra.com');
+$d->add('account', undef, { by => "name"}, 'user1@example.zmail.com');
 $d->add('password', undef, undef, "test123");
 $d->end();
 
@@ -77,7 +77,7 @@ print "authToken($authToken)\n";
 my $sessionId = $authResponse->find_child('sessionId')->content;
 print "sessionId = $sessionId\n";
 
-my $context = $SOAP->zimbraContext($authToken, $sessionId);
+my $context = $SOAP->zmailContext($authToken, $sessionId);
 
 my $contextStr = $context->to_string("pretty");
 print("Context = $contextStr\n");

@@ -12,7 +12,7 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.mailbox;
+package org.zmail.cs.mailbox;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -23,20 +23,20 @@ import java.util.Map;
 import javax.mail.MessagingException;
 import javax.mail.internet.MimeMessage;
 
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.common.util.ByteUtil;
-import com.zimbra.common.util.Log;
-import com.zimbra.common.util.LogFactory;
-import com.zimbra.common.util.ZimbraLog;
-import com.zimbra.cs.account.Provisioning;
-import com.zimbra.cs.db.DbMailItem;
-import com.zimbra.cs.mime.ExpandMimeMessage;
-import com.zimbra.cs.mime.Mime;
-import com.zimbra.cs.stats.ZimbraPerf;
-import com.zimbra.cs.store.BlobInputStream;
-import com.zimbra.cs.store.MailboxBlob;
-import com.zimbra.cs.store.StoreManager;
-import com.zimbra.cs.util.JMSession;
+import org.zmail.common.service.ServiceException;
+import org.zmail.common.util.ByteUtil;
+import org.zmail.common.util.Log;
+import org.zmail.common.util.LogFactory;
+import org.zmail.common.util.ZmailLog;
+import org.zmail.cs.account.Provisioning;
+import org.zmail.cs.db.DbMailItem;
+import org.zmail.cs.mime.ExpandMimeMessage;
+import org.zmail.cs.mime.Mime;
+import org.zmail.cs.stats.ZmailPerf;
+import org.zmail.cs.store.BlobInputStream;
+import org.zmail.cs.store.MailboxBlob;
+import org.zmail.cs.store.StoreManager;
+import org.zmail.cs.util.JMSession;
 
 public class MessageCache {
 
@@ -67,7 +67,7 @@ public class MessageCache {
 
     public static void loadSettings() throws ServiceException {
         sMaxCacheSize = Provisioning.getInstance().getLocalServer().getMessageCacheSize();
-        ZimbraLog.cache.info("setting message cache size to " + sMaxCacheSize);
+        ZmailLog.cache.info("setting message cache size to " + sMaxCacheSize);
     }
 
     /** Returns the number of messages in the cache. */
@@ -141,8 +141,8 @@ public class MessageCache {
      *                          or when the file does not exist.
      * @see #getRawContent()
      * @see #getItemContent()
-     * @see com.zimbra.cs.mime.TnefConverter
-     * @see com.zimbra.cs.mime.UUEncodeConverter */
+     * @see org.zmail.cs.mime.TnefConverter
+     * @see org.zmail.cs.mime.UUEncodeConverter */
     static MimeMessage getMimeMessage(MailItem item, boolean expand) throws ServiceException {
         String digest = item.getDigest();
         CacheNode cnode = null;
@@ -208,10 +208,10 @@ public class MessageCache {
 
         if (cacheHit) {
             sLog.debug("Cache hit for item %d: digest=%s, expand=%b.", item.getId(), item.getDigest(), expand);
-            ZimbraPerf.COUNTER_MBOX_MSG_CACHE.increment(100);
+            ZmailPerf.COUNTER_MBOX_MSG_CACHE.increment(100);
         } else {
             sLog.debug("Cache miss for item %d: digest=%s, expand=%b.", item.getId(), item.getDigest(), expand);
-            ZimbraPerf.COUNTER_MBOX_MSG_CACHE.increment(0);
+            ZmailPerf.COUNTER_MBOX_MSG_CACHE.increment(0);
         }
 
         if (expand) {

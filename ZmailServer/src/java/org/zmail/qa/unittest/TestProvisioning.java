@@ -13,7 +13,7 @@
  * ***** END LICENSE BLOCK *****
  */
 
-package com.zimbra.qa.unittest;
+package org.zmail.qa.unittest;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
@@ -27,30 +27,30 @@ import java.util.Set;
 import junit.framework.AssertionFailedError;
 import junit.framework.TestCase;
 
-import com.zimbra.common.account.Key;
-import com.zimbra.common.account.Key.CacheEntryBy;
-import com.zimbra.common.account.ProvisioningConstants;
-import com.zimbra.soap.admin.type.CacheEntryType;
-import com.zimbra.soap.admin.type.DataSourceType;
-import com.zimbra.common.localconfig.LC;
-import com.zimbra.common.util.CliUtil;
-import com.zimbra.common.util.SetUtil;
-import com.zimbra.common.util.StringUtil;
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.cs.account.*;
-import com.zimbra.cs.account.Provisioning.CacheEntry;
-import com.zimbra.cs.account.SearchDirectoryOptions.ObjectType;
-import com.zimbra.cs.account.auth.AuthContext;
-import com.zimbra.cs.account.auth.ZimbraCustomAuth;
-import com.zimbra.cs.account.auth.AuthMechanism.AuthMech;
-import com.zimbra.cs.account.ldap.LdapProv;
-import com.zimbra.cs.account.ldap.custom.CustomLdapProvisioning;
-import com.zimbra.cs.account.ldap.entry.LdapEntry;
-import com.zimbra.cs.account.soap.SoapProvisioning;
-import com.zimbra.cs.ldap.LdapUtil;
-import com.zimbra.cs.ldap.ZLdapFilterFactory.FilterId;
-import com.zimbra.cs.mime.MimeTypeInfo;
-import com.zimbra.soap.type.GalSearchType;
+import org.zmail.common.account.Key;
+import org.zmail.common.account.Key.CacheEntryBy;
+import org.zmail.common.account.ProvisioningConstants;
+import org.zmail.soap.admin.type.CacheEntryType;
+import org.zmail.soap.admin.type.DataSourceType;
+import org.zmail.common.localconfig.LC;
+import org.zmail.common.util.CliUtil;
+import org.zmail.common.util.SetUtil;
+import org.zmail.common.util.StringUtil;
+import org.zmail.common.service.ServiceException;
+import org.zmail.cs.account.*;
+import org.zmail.cs.account.Provisioning.CacheEntry;
+import org.zmail.cs.account.SearchDirectoryOptions.ObjectType;
+import org.zmail.cs.account.auth.AuthContext;
+import org.zmail.cs.account.auth.ZmailCustomAuth;
+import org.zmail.cs.account.auth.AuthMechanism.AuthMech;
+import org.zmail.cs.account.ldap.LdapProv;
+import org.zmail.cs.account.ldap.custom.CustomLdapProvisioning;
+import org.zmail.cs.account.ldap.entry.LdapEntry;
+import org.zmail.cs.account.soap.SoapProvisioning;
+import org.zmail.cs.ldap.LdapUtil;
+import org.zmail.cs.ldap.ZLdapFilterFactory.FilterId;
+import org.zmail.cs.mime.MimeTypeInfo;
+import org.zmail.soap.type.GalSearchType;
 
 public class TestProvisioning extends TestCase {
 
@@ -136,7 +136,7 @@ public class TestProvisioning extends TestCase {
 
         mSoapProv = new SoapProvisioning();
         mSoapProv.soapSetURI(TestUtil.getAdminSoapUrl());
-        mSoapProv.soapZimbraAdminAuthenticate();
+        mSoapProv.soapZmailAdminAuthenticate();
 
 
         TEST_ID = TestProvisioningUtil.genTestId();
@@ -163,7 +163,7 @@ public class TestProvisioning extends TestCase {
         NEW_EMAIL = NEW_NAME + "-" + TEST_ID + "@" + DOMAIN_NAME;
         NEW_EMAIL_IN_OTHER_DOMAIN = NEW_NAME + "-" + TEST_ID + "@" + OTHER_DOMAIN_NAME;
 
-        DEFAULT_LDAP_ADMIN_USER = LC.zimbra_ldap_user.value();
+        DEFAULT_LDAP_ADMIN_USER = LC.zmail_ldap_user.value();
         ADMIN_USER =  "admin";
         ADMIN_EMAIL = ADMIN_USER + "@" + DOMAIN_NAME;
         ACCT_USER = "acct-1";
@@ -222,11 +222,11 @@ public class TestProvisioning extends TestCase {
             sNeedLdapPaging.add("getAllDistributionLists");
             sNeedLdapPaging.add("getDistributionLists_account");
             sNeedLdapPaging.add("getDistributionLists_account_directonly_via");
-            sNeedLdapPaging.add("inDistributionList");  // com.zimbra.cs.mailbox.ACL.Grant.matches
-            sNeedLdapPaging.add("searchAccounts");      // com.zimbra.cs.backup.BackupManager.getAccountsOnServer, com.zimbra.cs.service.admin.FixCalendarTimeZone.getAccountsOnServer
+            sNeedLdapPaging.add("inDistributionList");  // org.zmail.cs.mailbox.ACL.Grant.matches
+            sNeedLdapPaging.add("searchAccounts");      // org.zmail.cs.backup.BackupManager.getAccountsOnServer, org.zmail.cs.service.admin.FixCalendarTimeZone.getAccountsOnServer
             sNeedLdapPaging.add("searchAccounts_domain");
             sNeedLdapPaging.add("searchCalendarResources");
-            sNeedLdapPaging.add("searchCalendarResources_domain");  // com.zimbra.cs.service.account.SearchCalendarResources
+            sNeedLdapPaging.add("searchCalendarResources_domain");  // org.zmail.cs.service.account.SearchCalendarResources
             sNeedLdapPaging.add("searchDirectory");
         }
 
@@ -352,7 +352,7 @@ public class TestProvisioning extends TestCase {
 
         List<NamedEntry> mVisited = new ArrayList<NamedEntry>();
 
-        public void visit(com.zimbra.cs.account.NamedEntry entry) throws ServiceException {
+        public void visit(org.zmail.cs.account.NamedEntry entry) throws ServiceException {
             mVisited.add(entry);
         }
 
@@ -382,7 +382,7 @@ public class TestProvisioning extends TestCase {
         return mProv.searchDirectory(options);
     }
 
-    public static class TestCustomAuth extends ZimbraCustomAuth {
+    public static class TestCustomAuth extends ZmailCustomAuth {
 
         Account mTheOnlyAcctThatCanAuth;
         String  mTheOnlyPasswordIKnowAbout;
@@ -424,7 +424,7 @@ public class TestProvisioning extends TestCase {
 
     private void setDefaultDomain(String domain) throws Exception {
         Map<String, Object> confAttrs = new HashMap<String, Object>();
-        confAttrs.put(Provisioning.A_zimbraDefaultDomainName, domain);
+        confAttrs.put(Provisioning.A_zmailDefaultDomainName, domain);
         mProv.modifyAttrs(mProv.getConfig(), confAttrs, true);
     }
 
@@ -483,14 +483,14 @@ public class TestProvisioning extends TestCase {
         int numVirtualHosts = 500;
 
         Map<String, Object> attrs = new HashMap<String, Object>();
-        attrs.put(Provisioning.A_zimbraPreAuthKey, PRE_AUTH_KEY);
-        // test lots of zimbraVirtualHostname on a domain
+        attrs.put(Provisioning.A_zmailPreAuthKey, PRE_AUTH_KEY);
+        // test lots of zmailVirtualHostname on a domain
         Set<String> virtualHosts = new HashSet<String>();
         for (int i=0; i<numVirtualHosts; i++) {
             String virtualHostName = "vhost-" + i + "-" + TEST_ID + ".com";
             virtualHosts.add(virtualHostName);
         }
-        attrs.put(Provisioning.A_zimbraVirtualHostname, virtualHosts.toArray(new String[0]));
+        attrs.put(Provisioning.A_zmailVirtualHostname, virtualHosts.toArray(new String[0]));
         Domain entry = mProv.createDomain(DOMAIN_NAME, attrs);
 
         Domain entryGot = mProv.get(Key.DomainBy.id, entry.getId());
@@ -536,7 +536,7 @@ public class TestProvisioning extends TestCase {
         // modify server
         /*
         Map<String, Object> attrs = new HashMap<String, Object>();
-        attrs.put(Provisioning.A_zimbraServiceEnabled, "blah");
+        attrs.put(Provisioning.A_zmailServiceEnabled, "blah");
         mProv.modifyAttrs(entry, attrs);
         */
 
@@ -556,7 +556,7 @@ public class TestProvisioning extends TestCase {
         System.out.println("Testing zimlet");
 
         Map<String, Object> zimletAttrs = new HashMap<String, Object>();
-        zimletAttrs.put(Provisioning.A_zimbraZimletVersion, "1.0");
+        zimletAttrs.put(Provisioning.A_zmailZimletVersion, "1.0");
         Zimlet entry = mProv.createZimlet(ZIMLET_NAME, zimletAttrs);
 
         Zimlet entryGot = mProv.getZimlet(ZIMLET_NAME);
@@ -576,14 +576,14 @@ public class TestProvisioning extends TestCase {
     private void externalAuthTest(Account account, boolean startTLS) throws Exception {
         Domain domain = mProv.getDomain(account);
         Map attrsToMod = new HashMap<String, Object>();
-        attrsToMod.put(Provisioning.A_zimbraAuthMech, AuthMech.ldap.name());
-        attrsToMod.put(Provisioning.A_zimbraAuthLdapURL, "ldap://" + LC.zimbra_server_hostname.value() + ":389");
-        attrsToMod.put(Provisioning.A_zimbraAuthLdapSearchFilter, "(zimbraMailDeliveryAddress=%n)");
-        attrsToMod.put(Provisioning.A_zimbraAuthLdapSearchBindPassword, LC.zimbra_ldap_password.value());
-        attrsToMod.put(Provisioning.A_zimbraAuthLdapSearchBindDn, LC.zimbra_ldap_userdn.value());
+        attrsToMod.put(Provisioning.A_zmailAuthMech, AuthMech.ldap.name());
+        attrsToMod.put(Provisioning.A_zmailAuthLdapURL, "ldap://" + LC.zmail_server_hostname.value() + ":389");
+        attrsToMod.put(Provisioning.A_zmailAuthLdapSearchFilter, "(zmailMailDeliveryAddress=%n)");
+        attrsToMod.put(Provisioning.A_zmailAuthLdapSearchBindPassword, LC.zmail_ldap_password.value());
+        attrsToMod.put(Provisioning.A_zmailAuthLdapSearchBindDn, LC.zmail_ldap_userdn.value());
 
         if (startTLS)
-            attrsToMod.put(Provisioning.A_zimbraAuthLdapStartTlsEnabled, "TRUE");
+            attrsToMod.put(Provisioning.A_zmailAuthLdapStartTlsEnabled, "TRUE");
 
         mProv.modifyAttrs(domain, attrsToMod, true);
         mProv.authAccount(account, PASSWORD, AuthContext.Protocol.test);
@@ -592,7 +592,7 @@ public class TestProvisioning extends TestCase {
     private void authTest(Account account) throws Exception  {
         System.out.println("Testing auth");
 
-        // zimbra auth
+        // zmail auth
         mProv.authAccount(account, PASSWORD, AuthContext.Protocol.test);
 
         // external ldap auth, test using our own ldap
@@ -609,18 +609,18 @@ public class TestProvisioning extends TestCase {
 
         // kerberos5 auth
         attrsToMod.clear();
-        attrsToMod.put(Provisioning.A_zimbraAuthMech, AuthMech.kerberos5.name());
-        attrsToMod.put(Provisioning.A_zimbraAuthKerberos5Realm, "PHOEBE.LOCAL");
+        attrsToMod.put(Provisioning.A_zmailAuthMech, AuthMech.kerberos5.name());
+        attrsToMod.put(Provisioning.A_zmailAuthKerberos5Realm, "PHOEBE.LOCAL");
         mProv.modifyAttrs(domain, attrsToMod, true);
         // by domain realm mapping    acct-1@PHOEBE.LOCAL has to be created (sudo /usr/local/sbin/kadmin.local addprinc command)
         // mProv.authAccount(account, PASSWORD, "unittest"); uncomment after krb5 server is fixed
         attrsToMod.clear();
-        attrsToMod.put(Provisioning.A_zimbraForeignPrincipal, "kerberos5:user1@PHOEBE.LOCAL");
+        attrsToMod.put(Provisioning.A_zmailForeignPrincipal, "kerberos5:user1@PHOEBE.LOCAL");
         mProv.modifyAttrs(account, attrsToMod, true);
         // by specific foreignPrincipal   user1-1@PHOEBE.LOCAL has to be created (sudo /usr/local/sbin/kadmin.local addprinc command)
         // mProv.authAccount(account, PASSWORD, "unittest");  uncomment after krb5 server is fixed
 
-        // skip these tests, as there could be multiple domain with PHOEBE.LOCAL in zimbraAuthKerberos5Realm  from previous test
+        // skip these tests, as there could be multiple domain with PHOEBE.LOCAL in zmailAuthKerberos5Realm  from previous test
         // to test, remove all previous test domains and uncomment the following.
         /*
         Account acctNonExist = mProv.get(Key.AccountBy.krb5Principal, "bad@PHOEBE.LOCAL");
@@ -639,9 +639,9 @@ public class TestProvisioning extends TestCase {
         attrsToMod.clear();
         String customAuthHandlerName = "test";
         String args = "http://blah.com:123    green \" ocean blue   \"  \"\" yelllow \"\"";
-        attrsToMod.put(Provisioning.A_zimbraAuthMech, AuthMech.custom.name() + ":" + customAuthHandlerName + " " + args);
+        attrsToMod.put(Provisioning.A_zmailAuthMech, AuthMech.custom.name() + ":" + customAuthHandlerName + " " + args);
         mProv.modifyAttrs(domain, attrsToMod, true);
-        ZimbraCustomAuth.register(customAuthHandlerName, new TestCustomAuth(account, PASSWORD));
+        ZmailCustomAuth.register(customAuthHandlerName, new TestCustomAuth(account, PASSWORD));
         mProv.authAccount(account, PASSWORD, AuthContext.Protocol.test);
 
         // try an auth failure
@@ -653,7 +653,7 @@ public class TestProvisioning extends TestCase {
         }
 
         // done testing auth mech, set auth meth back
-        attrsToMod.put(Provisioning.A_zimbraAuthMech, AuthMech.zimbra.name());
+        attrsToMod.put(Provisioning.A_zmailAuthMech, AuthMech.zmail.name());
         mProv.modifyAttrs(domain, attrsToMod, true);
 
         // preauth
@@ -699,7 +699,7 @@ public class TestProvisioning extends TestCase {
         Map<String, Object> acctAttrs = new HashMap<String, Object>();
         mCustomProvTester.addAttr(acctAttrs, BASE_DN_PSEUDO_ATTR, ACCT_BASE_DN);
         mCustomProvTester.addAttr(acctAttrs, ACCT_NAMING_ATTR, namingAttrValue(ADMIN_USER));
-        acctAttrs.put(Provisioning.A_zimbraIsAdminAccount, "TRUE");
+        acctAttrs.put(Provisioning.A_zmailIsAdminAccount, "TRUE");
         entry = mProv.createAccount(ADMIN_EMAIL, PASSWORD, acctAttrs);
 
         Account entryGot = mProv.get(Key.AccountBy.name, ADMIN_EMAIL);
@@ -731,9 +731,9 @@ public class TestProvisioning extends TestCase {
         Map<String, Object> acctAttrs = new HashMap<String, Object>();
         mCustomProvTester.addAttr(acctAttrs, BASE_DN_PSEUDO_ATTR, ACCT_BASE_DN);
         mCustomProvTester.addAttr(acctAttrs, ACCT_NAMING_ATTR, ACCT_NAMING_ATTR_VALUE);
-        acctAttrs.put(Provisioning.A_zimbraCOSId, cos.getId());
-        acctAttrs.put(Provisioning.A_zimbraForeignPrincipal, new String[]{"kerberos5:"+krb5Principal1,"kerberos5:"+krb5Principal2});
-        acctAttrs.put(Provisioning.A_zimbraPrefFromAddress, ACCT_EMAIL);
+        acctAttrs.put(Provisioning.A_zmailCOSId, cos.getId());
+        acctAttrs.put(Provisioning.A_zmailForeignPrincipal, new String[]{"kerberos5:"+krb5Principal1,"kerberos5:"+krb5Principal2});
+        acctAttrs.put(Provisioning.A_zmailPrefFromAddress, ACCT_EMAIL);
         Account entry = mProv.createAccount(ACCT_EMAIL, PASSWORD, acctAttrs);
         String entryId = entry.getId();
         String acctDn = ACCT_NAMING_ATTR + "=" + ACCT_NAMING_ATTR_VALUE + "," + ACCT_BASE_DN;
@@ -743,7 +743,7 @@ public class TestProvisioning extends TestCase {
         Map<String, Object> acctAttrsSpecialChars = new HashMap<String, Object>();
         mCustomProvTester.addAttr(acctAttrsSpecialChars, BASE_DN_PSEUDO_ATTR, ACCT_BASE_DN);
         mCustomProvTester.addAttr(acctAttrsSpecialChars, ACCT_NAMING_ATTR, namingAttrValue(ACCT_USER_SPECIAL_CHARS));
-        acctAttrs.put(Provisioning.A_zimbraCOSId, cos.getId());
+        acctAttrs.put(Provisioning.A_zmailCOSId, cos.getId());
         Account entrySpecialChars = mProv.createAccount(ACCT_EMAIL_SPECIAL_CHARS, PASSWORD, acctAttrsSpecialChars);
         String acctSpecialCharsDn = ACCT_NAMING_ATTR + "=" + namingAttrValue(ACCT_USER_SPECIAL_CHARS) + "," + ACCT_BASE_DN;
         mCustomProvTester.verifyDn(entrySpecialChars, acctSpecialCharsDn);
@@ -797,14 +797,14 @@ public class TestProvisioning extends TestCase {
         acctAttrs.clear();
         mCustomProvTester.addAttr(acctAttrs, BASE_DN_PSEUDO_ATTR, ACCT_BASE_DN);
         mCustomProvTester.addAttr(acctAttrs, ACCT_NAMING_ATTR, namingAttrValue(user));
-        acctAttrs.put(Provisioning.A_zimbraForeignPrincipal, new String[]{"kerberos5:"+krb5PrincipalDup});
+        acctAttrs.put(Provisioning.A_zmailForeignPrincipal, new String[]{"kerberos5:"+krb5PrincipalDup});
         Account acctX = mProv.createAccount(user+"@" + DOMAIN_NAME, "test123", acctAttrs);
         
         user = "accty-dup-kerberos";
         acctAttrs.clear();
         mCustomProvTester.addAttr(acctAttrs, BASE_DN_PSEUDO_ATTR, ACCT_BASE_DN);
         mCustomProvTester.addAttr(acctAttrs, ACCT_NAMING_ATTR, namingAttrValue(user));
-        acctAttrs.put(Provisioning.A_zimbraForeignPrincipal, new String[]{"kerberos5:"+krb5PrincipalDup});
+        acctAttrs.put(Provisioning.A_zmailForeignPrincipal, new String[]{"kerberos5:"+krb5PrincipalDup});
         Account acctY = mProv.createAccount(user+"@" + DOMAIN_NAME, "test123", acctAttrs);
         try {
             mProv.get(Key.AccountBy.krb5Principal, krb5PrincipalDup);
@@ -815,8 +815,8 @@ public class TestProvisioning extends TestCase {
 
         // get account by krb5Principal using domain realm mapping
         Map<String, Object> domainAttrs = new HashMap<String, Object>();
-        domainAttrs.put(Provisioning.A_zimbraAuthMech, "kerberos5"); // not necessary, put it to make sure if it is present things should still work
-        domainAttrs.put(Provisioning.A_zimbraAuthKerberos5Realm, "JUNKREALM.COM");
+        domainAttrs.put(Provisioning.A_zmailAuthMech, "kerberos5"); // not necessary, put it to make sure if it is present things should still work
+        domainAttrs.put(Provisioning.A_zmailAuthKerberos5Realm, "JUNKREALM.COM");
         String krb5DomainName = "krb-test." + DOMAIN_NAME;
         Domain krb5TestDomain = mProv.createDomain(krb5DomainName, domainAttrs);
         
@@ -870,7 +870,7 @@ public class TestProvisioning extends TestCase {
             // re-get the entry since it might've been changed after the rename
             entry = mProv.get(Key.AccountBy.id, entryId);
             assertEquals(NEW_EMAIL,
-                    entry.getAttr(Provisioning.A_zimbraPrefFromAddress));
+                    entry.getAttr(Provisioning.A_zmailPrefFromAddress));
             if (mCustomProvTester.isCustom()) {
                 // make sure it is still in the same dn
                 mCustomProvTester.verifyDn(entry, acctDn);
@@ -983,7 +983,7 @@ public class TestProvisioning extends TestCase {
 
     private void doLocaleTest(Account acct, String locale) throws Exception {
         Map<String, Object> attrs = new HashMap<String, Object>();
-        attrs.put(Provisioning.A_zimbraPrefLocale, locale);
+        attrs.put(Provisioning.A_zmailPrefLocale, locale);
         mSoapProv.modifyAttrs(acct, attrs, true);
 
         String provLocale = mSoapProv.getLocale(acct).toString();
@@ -994,7 +994,7 @@ public class TestProvisioning extends TestCase {
     }
 
     private void localeTest() throws Exception {
-        System.out.println("Testing locale"); // bug 23218: entry.getLocale() is not refreshed on modifying locale (zimbraPrefLocale/zimbraLocale)
+        System.out.println("Testing locale"); // bug 23218: entry.getLocale() is not refreshed on modifying locale (zmailPrefLocale/zmailLocale)
 
         Account acct = mSoapProv.get(Key.AccountBy.name, ACCT_EMAIL);
         assertNotNull(acct);
@@ -1012,8 +1012,8 @@ public class TestProvisioning extends TestCase {
         mCustomProvTester.addAttr(crAttrs, BASE_DN_PSEUDO_ATTR, ACCT_BASE_DN);
         mCustomProvTester.addAttr(crAttrs, ACCT_NAMING_ATTR, namingAttrValue(CR_USER));
         crAttrs.put(Provisioning.A_displayName, CR_USER);
-        crAttrs.put(Provisioning.A_zimbraCalResType, "Equipment");
-        crAttrs.put(Provisioning.A_zimbraCOSId, cos.getId());
+        crAttrs.put(Provisioning.A_zmailCalResType, "Equipment");
+        crAttrs.put(Provisioning.A_zmailCOSId, cos.getId());
         CalendarResource entry = mProv.createCalendarResource(CR_EMAIL, PASSWORD, crAttrs);
         mProv.addAlias(entry, CR_ALIAS_EMAIL);
 
@@ -1072,7 +1072,7 @@ public class TestProvisioning extends TestCase {
          */
         // first, temporarily set the default domain to the special char domain if we are
         // custom DIT.
-        String curDefaultDomain = mProv.getConfig().getAttr(Provisioning.A_zimbraDefaultDomainName);
+        String curDefaultDomain = mProv.getConfig().getAttr(Provisioning.A_zmailDefaultDomainName);
         if (mCustomProvTester.isCustom())
             setDefaultDomain(DOMAIN_NAME_SPECIAL_CHARS);
         Map<String, Object> dlAttrsSpecialChars = new HashMap<String, Object>();
@@ -1154,19 +1154,19 @@ public class TestProvisioning extends TestCase {
         System.out.println("Testing data source");
 
         Map<String, Object> dsAttrs = new HashMap<String, Object>();
-        dsAttrs.put(Provisioning.A_zimbraDataSourceEnabled, "TRUE");
-        dsAttrs.put(Provisioning.A_zimbraDataSourceConnectionType, "ssl");
-        dsAttrs.put(Provisioning.A_zimbraDataSourceFolderId, "inbox");
-        dsAttrs.put(Provisioning.A_zimbraDataSourceHost, "pop.google.com");
-        dsAttrs.put(Provisioning.A_zimbraDataSourceLeaveOnServer, "TRUE");
-        dsAttrs.put(Provisioning.A_zimbraDataSourcePassword, PASSWORD);
-        dsAttrs.put(Provisioning.A_zimbraDataSourcePort, "9999");
-        dsAttrs.put(Provisioning.A_zimbraDataSourceUsername, "mickymouse");
-        dsAttrs.put(Provisioning.A_zimbraDataSourceEmailAddress, "micky@google.com");
-        dsAttrs.put(Provisioning.A_zimbraPrefDefaultSignatureId, LdapUtil.generateUUID()); // just some random id, not used anywhere
-        dsAttrs.put(Provisioning.A_zimbraPrefFromDisplay, "Micky Mouse");
-        dsAttrs.put(Provisioning.A_zimbraPrefReplyToAddress, "goofy@yahoo.com");
-        dsAttrs.put(Provisioning.A_zimbraPrefReplyToDisplay, "Micky");
+        dsAttrs.put(Provisioning.A_zmailDataSourceEnabled, "TRUE");
+        dsAttrs.put(Provisioning.A_zmailDataSourceConnectionType, "ssl");
+        dsAttrs.put(Provisioning.A_zmailDataSourceFolderId, "inbox");
+        dsAttrs.put(Provisioning.A_zmailDataSourceHost, "pop.google.com");
+        dsAttrs.put(Provisioning.A_zmailDataSourceLeaveOnServer, "TRUE");
+        dsAttrs.put(Provisioning.A_zmailDataSourcePassword, PASSWORD);
+        dsAttrs.put(Provisioning.A_zmailDataSourcePort, "9999");
+        dsAttrs.put(Provisioning.A_zmailDataSourceUsername, "mickymouse");
+        dsAttrs.put(Provisioning.A_zmailDataSourceEmailAddress, "micky@google.com");
+        dsAttrs.put(Provisioning.A_zmailPrefDefaultSignatureId, LdapUtil.generateUUID()); // just some random id, not used anywhere
+        dsAttrs.put(Provisioning.A_zmailPrefFromDisplay, "Micky Mouse");
+        dsAttrs.put(Provisioning.A_zmailPrefReplyToAddress, "goofy@yahoo.com");
+        dsAttrs.put(Provisioning.A_zmailPrefReplyToDisplay, "Micky");
 
         DataSource entry = mProv.createDataSource(account, DataSourceType.pop3, DATA_SOURCE_NAME, dsAttrs);
 
@@ -1179,7 +1179,7 @@ public class TestProvisioning extends TestCase {
         TestProvisioningUtil.verifyEntries(list, new NamedEntry[]{entry}, true);
 
         Map attrsToMod = new HashMap<String, Object>();
-        attrsToMod.put(Provisioning.A_zimbraDataSourcePollingInterval, "100");
+        attrsToMod.put(Provisioning.A_zmailDataSourcePollingInterval, "100");
         mProv.modifyDataSource(account, entry.getId(), attrsToMod);
 
         return entry;
@@ -1189,12 +1189,12 @@ public class TestProvisioning extends TestCase {
         System.out.println("Testing identity");
 
         Map<String, Object> identityAttrs = new HashMap<String, Object>();
-        identityAttrs.put(Provisioning.A_zimbraPrefDefaultSignatureId, LdapUtil.generateUUID());  // just some random id, not used anywhere
-        identityAttrs.put(Provisioning.A_zimbraPrefFromAddress, "micky.mouse@zimbra,com");
-        identityAttrs.put(Provisioning.A_zimbraPrefFromDisplay, "Micky Mouse");
-        identityAttrs.put(Provisioning.A_zimbraPrefReplyToEnabled, "TRUE");
-        identityAttrs.put(Provisioning.A_zimbraPrefReplyToAddress, "goofy@yahoo.com");
-        identityAttrs.put(Provisioning.A_zimbraPrefReplyToDisplay, "Micky");
+        identityAttrs.put(Provisioning.A_zmailPrefDefaultSignatureId, LdapUtil.generateUUID());  // just some random id, not used anywhere
+        identityAttrs.put(Provisioning.A_zmailPrefFromAddress, "micky.mouse@zmail,com");
+        identityAttrs.put(Provisioning.A_zmailPrefFromDisplay, "Micky Mouse");
+        identityAttrs.put(Provisioning.A_zmailPrefReplyToEnabled, "TRUE");
+        identityAttrs.put(Provisioning.A_zmailPrefReplyToAddress, "goofy@yahoo.com");
+        identityAttrs.put(Provisioning.A_zmailPrefReplyToDisplay, "Micky");
         Identity entry = mProv.createIdentity(account, IDENTITY_NAME, identityAttrs);
 
         Identity entryGot = mProv.get(account, Key.IdentityBy.id, entry.getId());
@@ -1210,13 +1210,13 @@ public class TestProvisioning extends TestCase {
 
         // modify
         Map attrsToMod = new HashMap<String, Object>();
-        attrsToMod.put(Provisioning.A_zimbraPrefReplyToDisplay, "MM");
+        attrsToMod.put(Provisioning.A_zmailPrefReplyToDisplay, "MM");
         mProv.modifyIdentity(account, IDENTITY_NAME, attrsToMod);
 
         // rename
         String newName = "identity-new-name";
         attrsToMod.clear();
-        attrsToMod.put(Provisioning.A_zimbraPrefIdentityName, newName);
+        attrsToMod.put(Provisioning.A_zmailPrefIdentityName, newName);
         mProv.modifyIdentity(account, IDENTITY_NAME, attrsToMod);
 
         // get by new name
@@ -1226,7 +1226,7 @@ public class TestProvisioning extends TestCase {
 
         // rename back
         attrsToMod.clear();
-        attrsToMod.put(Provisioning.A_zimbraPrefIdentityName, IDENTITY_NAME);
+        attrsToMod.put(Provisioning.A_zmailPrefIdentityName, IDENTITY_NAME);
         mProv.modifyIdentity(account, newName, attrsToMod);
 
         // refresh the entry to return
@@ -1240,7 +1240,7 @@ public class TestProvisioning extends TestCase {
 
         // create a signature
         Map<String, Object> signatureAttrs = new HashMap<String, Object>();
-        signatureAttrs.put(Provisioning.A_zimbraPrefMailSignature, SIGNATURE_VALUE);
+        signatureAttrs.put(Provisioning.A_zmailPrefMailSignature, SIGNATURE_VALUE);
         Signature entry = mProv.createSignature(account, SIGNATURE_NAME, signatureAttrs);
 
         // get the signature by id
@@ -1256,17 +1256,17 @@ public class TestProvisioning extends TestCase {
         TestProvisioningUtil.verifyEntries(list, new NamedEntry[]{entry}, true);
 
         // since this is the only signature, it should be automatically set as the default signature of the account
-        String defaultSigId = account.getAttr(Provisioning.A_zimbraPrefDefaultSignatureId);
+        String defaultSigId = account.getAttr(Provisioning.A_zmailPrefDefaultSignatureId);
         assertEquals(entry.getId(), defaultSigId);
 
         // modify the signature value
         Map attrsToMod = new HashMap<String, Object>();
-        attrsToMod.put(Provisioning.A_zimbraPrefMailSignature, SIGNATURE_VALUE_MODIFIED);
+        attrsToMod.put(Provisioning.A_zmailPrefMailSignature, SIGNATURE_VALUE_MODIFIED);
         mProv.modifySignature(account, entry.getId(), attrsToMod);
 
         // make sure we get the modified value back
         entryGot = mProv.get(account, Key.SignatureBy.id, entry.getId());
-        assertEquals(SIGNATURE_VALUE_MODIFIED, entryGot.getAttr(Provisioning.A_zimbraPrefMailSignature));
+        assertEquals(SIGNATURE_VALUE_MODIFIED, entryGot.getAttr(Provisioning.A_zmailPrefMailSignature));
 
         /*
         // try to delete the signature, since it is the default signature (because it is the only one)
@@ -1286,7 +1286,7 @@ public class TestProvisioning extends TestCase {
         signatureAttrs.clear();
         Signature secondEntry = mProv.createSignature(account, secondSigName, signatureAttrs);
         Map<String, Object> acctAttrs = new HashMap<String, Object>();
-        acctAttrs.put(Provisioning.A_zimbraPrefDefaultSignatureId, secondEntry.getId());
+        acctAttrs.put(Provisioning.A_zmailPrefDefaultSignatureId, secondEntry.getId());
         mProv.modifyAttrs(account, acctAttrs);
 
         // now we can delete the first signature
@@ -1295,9 +1295,9 @@ public class TestProvisioning extends TestCase {
         // rename the defaulf signature, default signature id should reman the same
         String secondSigNameNew = "second-sig-new-name";
         signatureAttrs.clear();
-        signatureAttrs.put(Provisioning.A_zimbraSignatureName, secondSigNameNew);
+        signatureAttrs.put(Provisioning.A_zmailSignatureName, secondSigNameNew);
         mProv.modifySignature(account, secondEntry.getId(), signatureAttrs);
-        defaultSigId = account.getAttr(Provisioning.A_zimbraPrefDefaultSignatureId);
+        defaultSigId = account.getAttr(Provisioning.A_zmailPrefDefaultSignatureId);
         assertEquals(secondEntry.getId(), defaultSigId);
         // refresh the entry, since it was moved
         secondEntry = mProv.get(account, Key.SignatureBy.name, secondSigNameNew);
@@ -1306,35 +1306,35 @@ public class TestProvisioning extends TestCase {
         String thirdSigName = "third-sig";
         signatureAttrs.clear();
         Signature thirdEntry = mProv.createSignature(account, thirdSigName, signatureAttrs);
-        String acctSigName = account.getAttr(Provisioning.A_zimbraSignatureName);
+        String acctSigName = account.getAttr(Provisioning.A_zmailSignatureName);
         assertEquals(thirdSigName, acctSigName);
 
         list = mProv.getAllSignatures(account);
         TestProvisioningUtil.verifyEntries(list, new NamedEntry[]{secondEntry, thirdEntry}, true);
 
-        // now, verify that if A_zimbraPrefMailSignature is present on the account and if
-        // A_zimbraPrefSignatureName is not present on the account, system should return
+        // now, verify that if A_zmailPrefMailSignature is present on the account and if
+        // A_zmailPrefSignatureName is not present on the account, system should return
         // it as a signature using the account's name, and generate an id for it
         // first, we delete the third sig, just to clear the account signature entry
         mProv.deleteSignature(account, thirdEntry.getId());
 
-        // manually set the A_zimbraPrefMailSignature on the aqccount
+        // manually set the A_zmailPrefMailSignature on the aqccount
         String aSigValueOnAccount = "a signature value on account";
         String accountSigName = account.getName();
         acctAttrs.clear();
-        acctAttrs.put(Provisioning.A_zimbraPrefMailSignature, aSigValueOnAccount);
+        acctAttrs.put(Provisioning.A_zmailPrefMailSignature, aSigValueOnAccount);
         mProv.modifyAttrs(account, acctAttrs);
 
         // get the account signature, by its name, which is the account's name
         Signature acctSig = mProv.get(account, Key.SignatureBy.name, accountSigName);
         assertEquals(account.getName(), acctSig.getName());
         assertNotSame(account.getId(), acctSig.getId());
-        assertEquals(acctSig.getAttr(Provisioning.A_zimbraPrefMailSignature), aSigValueOnAccount);
+        assertEquals(acctSig.getAttr(Provisioning.A_zmailPrefMailSignature), aSigValueOnAccount);
 
         // get the account signature, by it's id
         acctSig = mProv.get(account, Key.SignatureBy.id, acctSig.getId());
         assertNotSame(account.getId(), acctSig.getId());
-        assertEquals(acctSig.getAttr(Provisioning.A_zimbraPrefMailSignature), aSigValueOnAccount);
+        assertEquals(acctSig.getAttr(Provisioning.A_zmailPrefMailSignature), aSigValueOnAccount);
 
         // get all signatures, the account entry should be included
         list = mProv.getAllSignatures(account);
@@ -1345,21 +1345,21 @@ public class TestProvisioning extends TestCase {
 
         // set it(un-named account signature, with just a sig value) up again, for testing rename
         acctAttrs.clear();
-        acctAttrs.put(Provisioning.A_zimbraPrefMailSignature, aSigValueOnAccount);
+        acctAttrs.put(Provisioning.A_zmailPrefMailSignature, aSigValueOnAccount);
         mProv.modifyAttrs(account, acctAttrs);
 
         // get the account signature, by its name, which is the account's name
         acctSig = mProv.get(account, Key.SignatureBy.name, accountSigName);
         // set it to the default signature
         acctAttrs.clear();
-        acctAttrs.put(Provisioning.A_zimbraPrefDefaultSignatureId, acctSig.getId());
+        acctAttrs.put(Provisioning.A_zmailPrefDefaultSignatureId, acctSig.getId());
         mProv.modifyAttrs(account, acctAttrs);
-        assertEquals(acctSig.getAttr(Provisioning.A_zimbraPrefMailSignature), aSigValueOnAccount);
+        assertEquals(acctSig.getAttr(Provisioning.A_zmailPrefMailSignature), aSigValueOnAccount);
 
         // rename it!
         String accountSigNameNew = "account-sig-new-name";
         signatureAttrs.clear();
-        signatureAttrs.put(Provisioning.A_zimbraSignatureName, accountSigNameNew);
+        signatureAttrs.put(Provisioning.A_zmailSignatureName, accountSigNameNew);
         mProv.modifySignature(account, acctSig.getId(), signatureAttrs);
 
         // make sure we can get it by the new name
@@ -1367,12 +1367,12 @@ public class TestProvisioning extends TestCase {
         assertEquals(renamedAcctSig.getId(), acctSig.getId());
 
         // make sure the default sig id is not changed
-        defaultSigId = account.getAttr(Provisioning.A_zimbraPrefDefaultSignatureId);
+        defaultSigId = account.getAttr(Provisioning.A_zmailPrefDefaultSignatureId);
         assertEquals(acctSig.getId(), defaultSigId);
 
         // change the default signature to something else
         acctAttrs.clear();
-        acctAttrs.put(Provisioning.A_zimbraPrefDefaultSignatureId, secondEntry.getName());
+        acctAttrs.put(Provisioning.A_zmailPrefDefaultSignatureId, secondEntry.getName());
         mProv.modifyAttrs(account, acctAttrs);
 
         // now delete it!
@@ -1384,7 +1384,7 @@ public class TestProvisioning extends TestCase {
         System.out.println("Testing entry");
 
         Map attrsToMod = new HashMap<String, Object>();
-        attrsToMod.put(Provisioning.A_zimbraId, "junk");
+        attrsToMod.put(Provisioning.A_zmailId, "junk");
 
         try {
             mProv.modifyAttrs(entry, attrsToMod, true);
@@ -1411,20 +1411,20 @@ public class TestProvisioning extends TestCase {
 
     private void externalGalTest(Domain domain, boolean startTLS) throws Exception {
         Map<String, String> attrs = new HashMap<String, String>();
-        attrs.put(Provisioning.A_zimbraGalMode, AuthMech.ldap.name());
-        attrs.put(Provisioning.A_zimbraGalLdapURL, "ldap://" + LC.zimbra_server_hostname.value() + ":389"); // cannot be localhost for startTLS
+        attrs.put(Provisioning.A_zmailGalMode, AuthMech.ldap.name());
+        attrs.put(Provisioning.A_zmailGalLdapURL, "ldap://" + LC.zmail_server_hostname.value() + ":389"); // cannot be localhost for startTLS
 
-        attrs.put(Provisioning.A_zimbraGalLdapBindDn, LC.zimbra_ldap_userdn.value());
-        attrs.put(Provisioning.A_zimbraGalLdapBindPassword, "zimbra");
-        attrs.put(Provisioning.A_zimbraGalLdapFilter, "(mail=*%s*)");
+        attrs.put(Provisioning.A_zmailGalLdapBindDn, LC.zmail_ldap_userdn.value());
+        attrs.put(Provisioning.A_zmailGalLdapBindPassword, "zmail");
+        attrs.put(Provisioning.A_zmailGalLdapFilter, "(mail=*%s*)");
 
-        // attrs.put(Provisioning.A_zimbraGalLdapAuthMech, Provisioning.LDAP_AM_KERBEROS5);
-        attrs.put(Provisioning.A_zimbraGalLdapKerberos5Principal, "ldap/phoebe.local@PHOEBE.LOCAL");
-        attrs.put(Provisioning.A_zimbraGalLdapKerberos5Keytab, "/etc/krb5.keytab");
+        // attrs.put(Provisioning.A_zmailGalLdapAuthMech, Provisioning.LDAP_AM_KERBEROS5);
+        attrs.put(Provisioning.A_zmailGalLdapKerberos5Principal, "ldap/phoebe.local@PHOEBE.LOCAL");
+        attrs.put(Provisioning.A_zmailGalLdapKerberos5Keytab, "/etc/krb5.keytab");
 
         if (startTLS) {
-            attrs.put(Provisioning.A_zimbraGalLdapStartTlsEnabled, "TRUE");
-            attrs.put(Provisioning.A_zimbraGalSyncLdapStartTlsEnabled, "TRUE");
+            attrs.put(Provisioning.A_zmailGalLdapStartTlsEnabled, "TRUE");
+            attrs.put(Provisioning.A_zmailGalSyncLdapStartTlsEnabled, "TRUE");
         }
 
         mProv.modifyAttrs(domain, attrs, true);
@@ -1478,7 +1478,7 @@ public class TestProvisioning extends TestCase {
 
         Account acct = mProv.get(Key.AccountBy.name, ACCT_EMAIL);
 
-        String query = "(" + Provisioning.A_zimbraMailDeliveryAddress + "=" + ACCT_EMAIL + ")";
+        String query = "(" + Provisioning.A_zmailMailDeliveryAddress + "=" + ACCT_EMAIL + ")";
         List list = null;
 
         if (!Flag.needLdapPaging("searchDirectory")) {
@@ -1566,8 +1566,8 @@ public class TestProvisioning extends TestCase {
             attrs.clear();
             mCustomProvTester.addAttr(attrs, BASE_DN_PSEUDO_ATTR, ACCT_BASE_DN);
             mCustomProvTester.addAttr(attrs, ACCT_NAMING_ATTR, namingAttrValue(parentNameLocal));
-            attrs.put(Provisioning.A_zimbraChildAccount, cids);
-            attrs.put(Provisioning.A_zimbraPrefChildVisibleAccount, SetUtil.union(temp, visibleCids, idsNotChild));
+            attrs.put(Provisioning.A_zmailChildAccount, cids);
+            attrs.put(Provisioning.A_zmailPrefChildVisibleAccount, SetUtil.union(temp, visibleCids, idsNotChild));
             parent = mProv.createAccount(parentName, PASSWORD, attrs);
             fail();
         } catch (ServiceException e) {
@@ -1579,14 +1579,14 @@ public class TestProvisioning extends TestCase {
         attrs.clear();
         mCustomProvTester.addAttr(attrs, BASE_DN_PSEUDO_ATTR, ACCT_BASE_DN);
         mCustomProvTester.addAttr(attrs, ACCT_NAMING_ATTR, namingAttrValue(parentNameLocal));
-        attrs.put(Provisioning.A_zimbraChildAccount, cids);
-        attrs.put(Provisioning.A_zimbraPrefChildVisibleAccount, visibleCids);
+        attrs.put(Provisioning.A_zmailChildAccount, cids);
+        attrs.put(Provisioning.A_zmailPrefChildVisibleAccount, visibleCids);
         parent = mProv.createAccount(parentName, PASSWORD, attrs);
 
         // add a non child as visible
         try {
             attrs.clear();
-            attrs.put("+" + Provisioning.A_zimbraPrefChildVisibleAccount, idsNotChild);
+            attrs.put("+" + Provisioning.A_zmailPrefChildVisibleAccount, idsNotChild);
 
             mProv.modifyAttrs(parent, attrs);
             fail();
@@ -1597,24 +1597,24 @@ public class TestProvisioning extends TestCase {
 
         // add a child and set to visible in same request
         attrs.clear();
-        attrs.put("+" + Provisioning.A_zimbraChildAccount, idsNotChild);
-        attrs.put("+" + Provisioning.A_zimbraPrefChildVisibleAccount, idsNotChild);
+        attrs.put("+" + Provisioning.A_zmailChildAccount, idsNotChild);
+        attrs.put("+" + Provisioning.A_zmailPrefChildVisibleAccount, idsNotChild);
         mProv.modifyAttrs(parent, attrs);
 
         // remove a child, it should be automatically removed from the visible children
         attrs.clear();
-        attrs.put("-" + Provisioning.A_zimbraChildAccount, idsNotChild);
+        attrs.put("-" + Provisioning.A_zmailChildAccount, idsNotChild);
         mProv.modifyAttrs(parent, attrs);
         // verify it
-        Set<String> curAttrs = parent.getMultiAttrSet(Provisioning.A_zimbraPrefChildVisibleAccount);
+        Set<String> curAttrs = parent.getMultiAttrSet(Provisioning.A_zmailPrefChildVisibleAccount);
         assertFalse(curAttrs.contains(idsNotChild));
 
         // remove all visible children
         attrs.clear();
-        attrs.put(Provisioning.A_zimbraChildAccount, "");
+        attrs.put(Provisioning.A_zmailChildAccount, "");
         mProv.modifyAttrs(parent, attrs);
         // verify it
-        curAttrs = parent.getMultiAttrSet(Provisioning.A_zimbraPrefChildVisibleAccount);
+        curAttrs = parent.getMultiAttrSet(Provisioning.A_zmailPrefChildVisibleAccount);
         assertEquals(0, curAttrs.size());
 
         // delete all accounts
@@ -1674,7 +1674,7 @@ public class TestProvisioning extends TestCase {
         /*
          * cos
          */
-        String cosAttr = Provisioning.A_zimbraPrefSkin;
+        String cosAttr = Provisioning.A_zmailPrefSkin;
         Cos cos = mSoapProv.get(Key.CosBy.name, COS_NAME);
         assertNotNull(cos);
 
@@ -1718,7 +1718,7 @@ public class TestProvisioning extends TestCase {
         /*
          * config
          */
-        String configAttr = "zimbraWebClientLoginUrl";
+        String configAttr = "zmailWebClientLoginUrl";
         Config config = mSoapProv.getConfig();
         assertNotNull(config);
 
@@ -1762,7 +1762,7 @@ public class TestProvisioning extends TestCase {
         Domain domain = mProv.getDomain(acct);
         assertNotNull(domain);
 
-        String attr = Provisioning.A_zimbraPrefSkin;
+        String attr = Provisioning.A_zmailPrefSkin;
 
         Map<String, Object> attrs = new HashMap<String, Object>();
         attrs.clear();
@@ -1809,7 +1809,7 @@ public class TestProvisioning extends TestCase {
     private Set<String> getAvailableSkins_prior_bug31596(Account acct) throws ServiceException {
 
         // 1) if set on account/cos, use it
-        Set<String> skins = acct.getMultiAttrSet(Provisioning.A_zimbraAvailableSkin);
+        Set<String> skins = acct.getMultiAttrSet(Provisioning.A_zmailAvailableSkin);
         if (skins.size() > 0)
             return skins;
 
@@ -1817,7 +1817,7 @@ public class TestProvisioning extends TestCase {
         Domain domain = Provisioning.getInstance().getDomain(acct);
         if (domain == null)
             return skins;
-        return domain.getMultiAttrSet(Provisioning.A_zimbraAvailableSkin);
+        return domain.getMultiAttrSet(Provisioning.A_zmailAvailableSkin);
     }
 
     private void attributeInheritanceTestMultiValue_prior_bug31596() throws Exception {
@@ -1829,7 +1829,7 @@ public class TestProvisioning extends TestCase {
         Domain domain = mProv.getDomain(acct);
         assertNotNull(domain);
 
-        String attr = Provisioning.A_zimbraAvailableSkin;
+        String attr = Provisioning.A_zmailAvailableSkin;
 
         Map<String, Object> attrs = new HashMap<String, Object>();
         attrs.clear();
@@ -1856,7 +1856,7 @@ public class TestProvisioning extends TestCase {
         Domain domain = mProv.getDomain(acct);
         assertNotNull(domain);
 
-        String attr = Provisioning.A_zimbraAvailableSkin;
+        String attr = Provisioning.A_zmailAvailableSkin;
 
         Map<String, Object> attrs = new HashMap<String, Object>();
         attrs.clear();
@@ -1943,7 +1943,7 @@ public class TestProvisioning extends TestCase {
             // we temporarily changed the default domain to the special char
             // domain  in diestributionListTest so that it can be created.
             // now we have to do the same hack to it can be removed!!!
-            String defaultDomain = mProv.getConfig().getAttr(Provisioning.A_zimbraDefaultDomainName);
+            String defaultDomain = mProv.getConfig().getAttr(Provisioning.A_zmailDefaultDomainName);
             if (mCustomProvTester.isCustom() && dl.getDomainName().equals(DOMAIN_NAME_SPECIAL_CHARS))
                 setDefaultDomain(DOMAIN_NAME_SPECIAL_CHARS);
 
@@ -1991,7 +1991,7 @@ public class TestProvisioning extends TestCase {
 
     public static void main(String[] args) throws Exception {
         CliUtil.toolSetup("WARN");
-        // ZimbraLog.toolSetupLog4j("DEBUG", "/Users/pshao/p4/main/ZimbraServer/conf/log4j.properties.zmprov-l");
+        // ZmailLog.toolSetupLog4j("DEBUG", "/Users/pshao/p4/main/ZmailServer/conf/log4j.properties.zmprov-l");
         // TestUtil.runTest(new TestSuite(TestProvisioning.class));
 
         TestProvisioning t = new TestProvisioning();

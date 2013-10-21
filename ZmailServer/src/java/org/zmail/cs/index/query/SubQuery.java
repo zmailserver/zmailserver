@@ -12,12 +12,12 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.index.query;
+package org.zmail.cs.index.query;
 
 import java.util.List;
 
-import com.zimbra.cs.index.QueryOperation;
-import com.zimbra.cs.mailbox.Mailbox;
+import org.zmail.cs.index.QueryOperation;
+import org.zmail.cs.mailbox.Mailbox;
 
 /**
  * Special query that wraps sub queries.

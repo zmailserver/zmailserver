@@ -12,7 +12,7 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.service.admin;
+package org.zmail.cs.service.admin;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -25,26 +25,26 @@ import java.util.Set;
 
 import org.dom4j.QName;
 
-import com.zimbra.common.soap.AccountConstants;
-import com.zimbra.common.soap.Element;
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.common.util.SetUtil;
-import com.zimbra.soap.DocumentHandler;
-import com.zimbra.soap.SoapEngine;
-import com.zimbra.soap.ZimbraSoapContext;
-import com.zimbra.common.soap.AdminConstants;
-import com.zimbra.cs.account.accesscontrol.AdminRight;
-import com.zimbra.cs.account.accesscontrol.AttrRight;
-import com.zimbra.cs.account.accesscontrol.RightManager;
-import com.zimbra.cs.account.accesscontrol.Rights.Admin;
-import com.zimbra.cs.account.accesscontrol.TargetType;
-import com.zimbra.cs.ldap.LdapTODO.*;
-import com.zimbra.soap.DocumentDispatcher;
+import org.zmail.common.soap.AccountConstants;
+import org.zmail.common.soap.Element;
+import org.zmail.common.service.ServiceException;
+import org.zmail.common.util.SetUtil;
+import org.zmail.soap.DocumentHandler;
+import org.zmail.soap.SoapEngine;
+import org.zmail.soap.ZmailSoapContext;
+import org.zmail.common.soap.AdminConstants;
+import org.zmail.cs.account.accesscontrol.AdminRight;
+import org.zmail.cs.account.accesscontrol.AttrRight;
+import org.zmail.cs.account.accesscontrol.RightManager;
+import org.zmail.cs.account.accesscontrol.Rights.Admin;
+import org.zmail.cs.account.accesscontrol.TargetType;
+import org.zmail.cs.ldap.LdapTODO.*;
+import org.zmail.soap.DocumentDispatcher;
 
 public class GetRightsDoc extends AdminDocumentHandler {
 
     public Element handle(Element request, Map<String, Object> context) throws ServiceException {
-        ZimbraSoapContext lc = getZimbraSoapContext(context);
+        ZmailSoapContext lc = getZmailSoapContext(context);
         
         HashSet<String> specificPackages = null;
         for (Element ePackage : request.listElements(AdminConstants.E_PACKAGE)) {
@@ -138,7 +138,7 @@ public class GetRightsDoc extends AdminDocumentHandler {
 
     @ACLTODO //  handle dynamic group
     private void genDomainAdminRights(Map<String, Object> context, Element response) throws ServiceException {
-        Element eDomainAdmin = response.addElement("domainAdmin-copypaste-to-zimbra-rights-domainadmin-xml-template");
+        Element eDomainAdmin = response.addElement("domainAdmin-copypaste-to-zmail-rights-domainadmin-xml-template");
         
         SoapEngine engine = (SoapEngine) context.get(SoapEngine.ZIMBRA_ENGINE);
         DocumentDispatcher dispatcher = engine.getDocumentDispatcher();

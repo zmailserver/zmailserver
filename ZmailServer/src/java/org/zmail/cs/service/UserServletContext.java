@@ -12,7 +12,7 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.service;
+package org.zmail.cs.service;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -33,31 +33,31 @@ import org.apache.commons.fileupload.servlet.ServletFileUpload;
 
 import com.google.common.base.Charsets;
 import com.google.common.base.Objects;
-import com.zimbra.common.account.Key.AccountBy;
-import com.zimbra.common.localconfig.LC;
-import com.zimbra.common.mime.ContentDisposition;
-import com.zimbra.common.mime.ContentType;
-import com.zimbra.common.mime.MimeConstants;
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.common.util.ByteUtil;
-import com.zimbra.common.util.DateUtil;
-import com.zimbra.common.util.HttpUtil;
-import com.zimbra.common.util.L10nUtil;
-import com.zimbra.common.util.L10nUtil.MsgKey;
-import com.zimbra.common.util.StringUtil;
-import com.zimbra.common.util.ZimbraLog;
-import com.zimbra.cs.account.Account;
-import com.zimbra.cs.account.AuthToken;
-import com.zimbra.cs.account.GuestAccount;
-import com.zimbra.cs.account.Provisioning;
-import com.zimbra.cs.fb.FreeBusyQuery;
-import com.zimbra.cs.mailbox.MailItem;
-import com.zimbra.cs.mailbox.MailServiceException;
-import com.zimbra.cs.mailbox.Mailbox;
-import com.zimbra.cs.mailbox.OperationContext;
-import com.zimbra.cs.service.formatter.Formatter;
-import com.zimbra.cs.service.formatter.FormatterFactory.FormatType;
-import com.zimbra.cs.service.util.ItemId;
+import org.zmail.common.account.Key.AccountBy;
+import org.zmail.common.localconfig.LC;
+import org.zmail.common.mime.ContentDisposition;
+import org.zmail.common.mime.ContentType;
+import org.zmail.common.mime.MimeConstants;
+import org.zmail.common.service.ServiceException;
+import org.zmail.common.util.ByteUtil;
+import org.zmail.common.util.DateUtil;
+import org.zmail.common.util.HttpUtil;
+import org.zmail.common.util.L10nUtil;
+import org.zmail.common.util.L10nUtil.MsgKey;
+import org.zmail.common.util.StringUtil;
+import org.zmail.common.util.ZmailLog;
+import org.zmail.cs.account.Account;
+import org.zmail.cs.account.AuthToken;
+import org.zmail.cs.account.GuestAccount;
+import org.zmail.cs.account.Provisioning;
+import org.zmail.cs.fb.FreeBusyQuery;
+import org.zmail.cs.mailbox.MailItem;
+import org.zmail.cs.mailbox.MailServiceException;
+import org.zmail.cs.mailbox.Mailbox;
+import org.zmail.cs.mailbox.OperationContext;
+import org.zmail.cs.service.formatter.Formatter;
+import org.zmail.cs.service.formatter.FormatterFactory.FormatType;
+import org.zmail.cs.service.util.ItemId;
 
 public class UserServletContext {
     public final HttpServletRequest req;
@@ -480,7 +480,7 @@ public class UserServletContext {
     // don't use this for a large upload.  use getUpload() instead.
     public byte[] getPostBody() throws ServiceException, IOException, UserServletException {
         long sizeLimit = Provisioning.getInstance().getLocalServer().getLongAttr(
-                Provisioning.A_zimbraFileUploadMaxSize, DEFAULT_MAX_POST_SIZE);
+                Provisioning.A_zmailFileUploadMaxSize, DEFAULT_MAX_POST_SIZE);
         InputStream is = getRequestInputStream(sizeLimit);
         try {
             return ByteUtil.getContent(is, req.getContentLength(), sizeLimit);
@@ -560,10 +560,10 @@ public class UserServletContext {
         if (limit == 0) {
             if (req.getParameter("lbfums") != null) {
                 limit = Provisioning.getInstance().getLocalServer().getLongAttr(
-                        Provisioning.A_zimbraFileUploadMaxSize, DEFAULT_MAX_SIZE);
+                        Provisioning.A_zmailFileUploadMaxSize, DEFAULT_MAX_SIZE);
             } else {
                 limit = Provisioning.getInstance().getConfig().getLongAttr(
-                        Provisioning.A_zimbraMtaMaxMessageSize, DEFAULT_MAX_SIZE);
+                        Provisioning.A_zmailMtaMaxMessageSize, DEFAULT_MAX_SIZE);
             }
         }
         if (ServletFileUpload.isMultipartContent(req)) {
@@ -609,7 +609,7 @@ public class UserServletContext {
         else
             params.put(UserServlet.UPLOAD_NAME, filename);
         params.put(UserServlet.UPLOAD_TYPE, contentType);
-        ZimbraLog.mailbox.info("UserServlet received file %s - %d request bytes",
+        ZmailLog.mailbox.info("UserServlet received file %s - %d request bytes",
             filename, req.getContentLength());
         return is;
     }

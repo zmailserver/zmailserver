@@ -12,7 +12,7 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.db;
+package org.zmail.cs.db;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -33,23 +33,23 @@ import com.google.common.base.Strings;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 import com.google.common.collect.Sets;
-import com.zimbra.common.localconfig.DebugConfig;
-import com.zimbra.common.mailbox.Color;
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.common.util.ArrayUtil;
-import com.zimbra.common.util.ZimbraLog;
-import com.zimbra.cs.db.DbPool.DbConnection;
-import com.zimbra.cs.mailbox.Flag;
-import com.zimbra.cs.mailbox.Folder;
-import com.zimbra.cs.mailbox.MailItem;
-import com.zimbra.cs.mailbox.MailServiceException;
-import com.zimbra.cs.mailbox.Mailbox;
-import com.zimbra.cs.mailbox.Metadata;
-import com.zimbra.cs.mailbox.RetentionPolicyManager;
-import com.zimbra.cs.mailbox.Tag;
-import com.zimbra.cs.mailbox.MailItem.PendingDelete;
-import com.zimbra.cs.mailbox.MailItem.UnderlyingData;
-import com.zimbra.soap.mail.type.RetentionPolicy;
+import org.zmail.common.localconfig.DebugConfig;
+import org.zmail.common.mailbox.Color;
+import org.zmail.common.service.ServiceException;
+import org.zmail.common.util.ArrayUtil;
+import org.zmail.common.util.ZmailLog;
+import org.zmail.cs.db.DbPool.DbConnection;
+import org.zmail.cs.mailbox.Flag;
+import org.zmail.cs.mailbox.Folder;
+import org.zmail.cs.mailbox.MailItem;
+import org.zmail.cs.mailbox.MailServiceException;
+import org.zmail.cs.mailbox.Mailbox;
+import org.zmail.cs.mailbox.Metadata;
+import org.zmail.cs.mailbox.RetentionPolicyManager;
+import org.zmail.cs.mailbox.Tag;
+import org.zmail.cs.mailbox.MailItem.PendingDelete;
+import org.zmail.cs.mailbox.MailItem.UnderlyingData;
+import org.zmail.soap.mail.type.RetentionPolicy;
 
 public final class DbTag {
     public static final String TABLE_TAG = "tag";
@@ -292,7 +292,7 @@ public final class DbTag {
                     data.unreadCount += unread;
                     data.size += count;
                 } else {
-                    ZimbraLog.mailbox.warn("inconsistent DB state: items with no corresponding tag (tag id %d)", tagId);
+                    ZmailLog.mailbox.warn("inconsistent DB state: items with no corresponding tag (tag id %d)", tagId);
                 }
             }
         } catch (SQLException e) {

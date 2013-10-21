@@ -12,7 +12,7 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.dav.client;
+package org.zmail.cs.dav.client;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
@@ -30,9 +30,9 @@ import org.dom4j.QName;
 import org.dom4j.io.OutputFormat;
 import org.dom4j.io.XMLWriter;
 
-import com.zimbra.common.util.Pair;
-import com.zimbra.cs.dav.DavContext.Depth;
-import com.zimbra.cs.dav.DavElements;
+import org.zmail.common.util.Pair;
+import org.zmail.cs.dav.DavContext.Depth;
+import org.zmail.cs.dav.DavElements;
 
 public class DavRequest {
 	

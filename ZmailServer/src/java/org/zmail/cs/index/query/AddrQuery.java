@@ -12,7 +12,7 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.index.query;
+package org.zmail.cs.index.query;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -20,7 +20,7 @@ import java.util.Set;
 
 import org.apache.lucene.analysis.Analyzer;
 
-import com.zimbra.cs.index.LuceneFields;
+import org.zmail.cs.index.LuceneFields;
 
 /**
  * A simpler way of expressing (to:FOO or from:FOO or cc:FOO).

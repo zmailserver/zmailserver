@@ -17,15 +17,15 @@
  * Created on Jan 11, 2005
  *
  */
-package com.zimbra.cs.filter;
+package org.zmail.cs.filter;
 
 import org.apache.jsieve.exception.SieveException;
 
 @SuppressWarnings("serial")
-public class ZimbraSieveException extends SieveException {
+public class ZmailSieveException extends SieveException {
     private Throwable mCause;
     
-    public ZimbraSieveException(Throwable t) {
+    public ZmailSieveException(Throwable t) {
         mCause = t;
     }
     

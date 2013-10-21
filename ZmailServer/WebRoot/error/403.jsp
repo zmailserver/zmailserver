@@ -14,7 +14,7 @@
  * 
  * ***** END LICENSE BLOCK *****
 -->
-<%@ page import="com.zimbra.common.util.L10nUtil,com.zimbra.common.util.L10nUtil.MsgKey" %>
+<%@ page import="org.zmail.common.util.L10nUtil,org.zmail.common.util.L10nUtil.MsgKey" %>
 <HTML>
 <HEAD>
     <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1"/>

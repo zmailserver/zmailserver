@@ -13,7 +13,7 @@
  * ***** END LICENSE BLOCK *****
  */
 
-package com.zimbra.cs.index;
+package org.zmail.cs.index;
 
 import java.io.IOException;
 import java.io.StringReader;
@@ -27,19 +27,19 @@ import org.apache.lucene.analysis.tokenattributes.PositionIncrementAttribute;
 import org.junit.Assert;
 import org.junit.Test;
 
-import com.zimbra.cs.index.ZimbraAnalyzer;
+import org.zmail.cs.index.ZmailAnalyzer;
 
 /**
- * Unit test for {@link ZimbraAnalyzer}.
+ * Unit test for {@link ZmailAnalyzer}.
  *
  * @author ysasaki
  */
-public final class ZimbraAnalyzerTest {
+public final class ZmailAnalyzerTest {
 
     @Test
     public void size() throws Exception {
         String src = "123 26 1000000 100000000 1,000,000,000 1,000,000,000,000,000";
-        TokenStream stream = ZimbraAnalyzer.getInstance().tokenStream(LuceneFields.L_SORT_SIZE, new StringReader(src));
+        TokenStream stream = ZmailAnalyzer.getInstance().tokenStream(LuceneFields.L_SORT_SIZE, new StringReader(src));
         Assert.assertEquals(Arrays.asList("123", "26", "1000000", "100000000", "1000000000", "1000000000000000"),
                 toTokens(stream));
     }
@@ -47,7 +47,7 @@ public final class ZimbraAnalyzerTest {
     @Test
     public void filename() throws Exception {
         String src = "This is my-filename.test.pdf";
-        TokenStream stream = ZimbraAnalyzer.getInstance().tokenStream(LuceneFields.L_FILENAME, new StringReader(src));
+        TokenStream stream = ZmailAnalyzer.getInstance().tokenStream(LuceneFields.L_FILENAME, new StringReader(src));
         Assert.assertEquals(Arrays.asList("this", "is", "my-filename", "test", "pdf"), toTokens(stream));
     }
 
@@ -58,7 +58,7 @@ public final class ZimbraAnalyzerTest {
      */
     @Test
     public void positionIncrement() throws Exception {
-        TokenStream stream = ZimbraAnalyzer.getInstance().tokenStream(
+        TokenStream stream = ZmailAnalyzer.getInstance().tokenStream(
                 LuceneFields.L_H_SUBJECT, new StringReader("It's a test."));
         PositionIncrementAttribute posIncrAtt = stream.addAttribute(PositionIncrementAttribute.class);
         while (stream.incrementToken()) {
@@ -71,7 +71,7 @@ public final class ZimbraAnalyzerTest {
     @Test
     public void phraseQuery() throws Exception {
         String src = "three^two";
-        TokenStream stream = ZimbraAnalyzer.getInstance().tokenStream(LuceneFields.L_CONTENT, new StringReader(src));
+        TokenStream stream = ZmailAnalyzer.getInstance().tokenStream(LuceneFields.L_CONTENT, new StringReader(src));
         Assert.assertEquals(Arrays.asList("three", "two"), toTokens(stream));
     }
 

@@ -13,22 +13,22 @@
  * ***** END LICENSE BLOCK *****
  */
 
-package com.zimbra.cs.account.ldap;
+package org.zmail.cs.account.ldap;
 
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
-import com.zimbra.common.account.Key;
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.common.util.Log;
-import com.zimbra.common.util.LogFactory;
-import com.zimbra.cs.account.Account;
-import com.zimbra.cs.account.Domain;
-import com.zimbra.cs.account.EntryCacheDataKey;
-import com.zimbra.cs.account.Provisioning;
-import com.zimbra.cs.extension.ExtensionUtil;
+import org.zmail.common.account.Key;
+import org.zmail.common.service.ServiceException;
+import org.zmail.common.util.Log;
+import org.zmail.common.util.LogFactory;
+import org.zmail.cs.account.Account;
+import org.zmail.cs.account.Domain;
+import org.zmail.cs.account.EntryCacheDataKey;
+import org.zmail.cs.account.Provisioning;
+import org.zmail.cs.extension.ExtensionUtil;
 
 /**
  * 
@@ -42,14 +42,14 @@ public abstract class DomainNameMappingHandler {
     
     
     /**
-     * Given a foreign name and params, return a zimbra account name
+     * Given a foreign name and params, return a zmail account name
      * 
      * @param foreignName
      * @param params
-     * @param zimbraDomainName
+     * @param zmailDomainName
      * @return
      */
-    public abstract String mapName(String foreignName, String params, String zimbraDomainName) throws ServiceException;
+    public abstract String mapName(String foreignName, String params, String zmailDomainName) throws ServiceException;
     
     
     private static class HandlerInfo {
@@ -98,7 +98,7 @@ public abstract class DomainNameMappingHandler {
     
     private static class UnknownDomainNameMappingHandler extends DomainNameMappingHandler {
         @Override
-        public String mapName(String foreignName, String params, String zimbraDomainName) {
+        public String mapName(String foreignName, String params, String zmailDomainName) {
             return null; // should never be called
         }
     }
@@ -158,19 +158,19 @@ public abstract class DomainNameMappingHandler {
         return handlers.get(application);
     }
 
-    public static String mapName(HandlerConfig handlerConfig, String foreignName, String zimbraDomainName) throws ServiceException {
+    public static String mapName(HandlerConfig handlerConfig, String foreignName, String zmailDomainName) throws ServiceException {
         DomainNameMappingHandler handler = getHandler(handlerConfig);
         
         if (handler instanceof UnknownDomainNameMappingHandler)
             throw ServiceException.FAILURE("unable to load domain name mapping handler " + 
                     handlerConfig.getClassName() + " for application:" + handlerConfig.getApplicaiton(), null);
 
-        return handler.mapName(foreignName, handlerConfig.getParams(), zimbraDomainName);
+        return handler.mapName(foreignName, handlerConfig.getParams(), zmailDomainName);
     }
 
 
     static class DummyHandler extends DomainNameMappingHandler {
-        public String mapName(String foreignName, String params, String zimbraDomainName) throws ServiceException{
+        public String mapName(String foreignName, String params, String zmailDomainName) throws ServiceException{
             return "user2@phoebe.mbp";
         }
     }
@@ -184,7 +184,7 @@ public abstract class DomainNameMappingHandler {
         domain.addForeignName("app2:name2");
         domain.addForeignName("app3:name3");
         
-        domain.addForeignNameHandler("app1:com.zimbra.cs.account.ldap.DomainNameMappingHandler$DummyHandler:p1, p2, p3");
+        domain.addForeignNameHandler("app1:org.zmail.cs.account.ldap.DomainNameMappingHandler$DummyHandler:p1, p2, p3");
         
         Account acct;
         

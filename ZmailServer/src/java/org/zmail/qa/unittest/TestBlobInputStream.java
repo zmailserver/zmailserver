@@ -12,7 +12,7 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.qa.unittest;
+package org.zmail.qa.unittest;
 
 import java.io.File;
 import java.io.FileWriter;
@@ -24,9 +24,9 @@ import javax.mail.internet.SharedInputStream;
 
 import junit.framework.TestCase;
 
-import com.zimbra.cs.account.Provisioning;
-import com.zimbra.cs.store.BlobInputStream;
-import com.zimbra.cs.store.StoreManager;
+import org.zmail.cs.account.Provisioning;
+import org.zmail.cs.store.BlobInputStream;
+import org.zmail.cs.store.StoreManager;
 
 /**
  * This test is server-side because it depends on <tt>FileDescriptorCache</tt>.
@@ -38,7 +38,7 @@ public class TestBlobInputStream extends TestCase {
     
     public void setUp()
     throws Exception {
-        mOrigBufferSize = TestUtil.getServerAttr(Provisioning.A_zimbraMailFileDescriptorBufferSize);
+        mOrigBufferSize = TestUtil.getServerAttr(Provisioning.A_zmailMailFileDescriptorBufferSize);
     }
     
     /**
@@ -48,7 +48,7 @@ public class TestBlobInputStream extends TestCase {
     throws Exception {
         int[] bufferSizes = new int[] { 0, 1, 4, 5, 9, 10, 99, 999, 1000, 2000 }; 
         for (int bufferSize : bufferSizes) {
-            TestUtil.setServerAttr(Provisioning.A_zimbraMailFileDescriptorBufferSize, Integer.toString(bufferSize));
+            TestUtil.setServerAttr(Provisioning.A_zmailMailFileDescriptorBufferSize, Integer.toString(bufferSize));
             runBlobInputStreamTest();
             runLargeFileTest();
         }
@@ -297,6 +297,6 @@ public class TestBlobInputStream extends TestCase {
     	if (mFile != null && mFile.exists()) {
     		mFile.delete();
     	}
-    	TestUtil.setServerAttr(Provisioning.A_zimbraMailFileDescriptorBufferSize, mOrigBufferSize);
+    	TestUtil.setServerAttr(Provisioning.A_zmailMailFileDescriptorBufferSize, mOrigBufferSize);
     }
 }

@@ -13,7 +13,7 @@
  * ***** END LICENSE BLOCK *****
  */
 
-package com.zimbra.cs.fb;
+package org.zmail.cs.fb;
 
 import java.text.ParseException;
 import java.util.Calendar;
@@ -23,23 +23,23 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
-import com.zimbra.common.calendar.ICalTimeZone;
-import com.zimbra.common.calendar.ParsedDateTime;
-import com.zimbra.common.calendar.ParsedDuration;
-import com.zimbra.common.calendar.TimeZoneMap;
-import com.zimbra.common.calendar.ZWeekDay;
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.cs.account.AccessManager;
-import com.zimbra.cs.account.Account;
-import com.zimbra.cs.account.accesscontrol.Rights.User;
-import com.zimbra.cs.fb.FreeBusy.Interval;
-import com.zimbra.cs.fb.FreeBusy.IntervalList;
-import com.zimbra.cs.mailbox.CalendarItem.Instance;
-import com.zimbra.cs.mailbox.calendar.IcalXmlStrMap;
-import com.zimbra.cs.mailbox.calendar.Recurrence;
-import com.zimbra.cs.mailbox.calendar.Util;
-import com.zimbra.cs.mailbox.calendar.ZRecur;
-import com.zimbra.cs.mailbox.calendar.Recurrence.IRecurrence;
+import org.zmail.common.calendar.ICalTimeZone;
+import org.zmail.common.calendar.ParsedDateTime;
+import org.zmail.common.calendar.ParsedDuration;
+import org.zmail.common.calendar.TimeZoneMap;
+import org.zmail.common.calendar.ZWeekDay;
+import org.zmail.common.service.ServiceException;
+import org.zmail.cs.account.AccessManager;
+import org.zmail.cs.account.Account;
+import org.zmail.cs.account.accesscontrol.Rights.User;
+import org.zmail.cs.fb.FreeBusy.Interval;
+import org.zmail.cs.fb.FreeBusy.IntervalList;
+import org.zmail.cs.mailbox.CalendarItem.Instance;
+import org.zmail.cs.mailbox.calendar.IcalXmlStrMap;
+import org.zmail.cs.mailbox.calendar.Recurrence;
+import org.zmail.cs.mailbox.calendar.Util;
+import org.zmail.cs.mailbox.calendar.ZRecur;
+import org.zmail.cs.mailbox.calendar.Recurrence.IRecurrence;
 
 public class WorkingHours {
 

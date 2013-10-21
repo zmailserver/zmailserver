@@ -12,7 +12,7 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.qa.unittest.prov.ldap;
+package org.zmail.qa.unittest.prov.ldap;
 
 import static org.junit.Assert.*;
 
@@ -24,14 +24,14 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 
 import com.google.common.collect.Maps;
-import com.zimbra.cs.account.Account;
-import com.zimbra.cs.account.Cos;
-import com.zimbra.cs.account.Domain;
-import com.zimbra.cs.account.Group;
-import com.zimbra.cs.account.Provisioning;
-import com.zimbra.cs.account.Server;
-import com.zimbra.qa.unittest.TestUtil;
-import com.zimbra.soap.admin.type.CountObjectsType;
+import org.zmail.cs.account.Account;
+import org.zmail.cs.account.Cos;
+import org.zmail.cs.account.Domain;
+import org.zmail.cs.account.Group;
+import org.zmail.cs.account.Provisioning;
+import org.zmail.cs.account.Server;
+import org.zmail.qa.unittest.TestUtil;
+import org.zmail.soap.admin.type.CountObjectsType;
 
 public class TestLdapProvCountObjects extends LdapTest {
 

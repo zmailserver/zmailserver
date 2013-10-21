@@ -18,9 +18,9 @@
  *
  * Window - Preferences - Java - Code Style - Code Templates
  */
-package com.zimbra.cs.account;
+package org.zmail.cs.account;
 
-import com.zimbra.common.service.ServiceException;
+import org.zmail.common.service.ServiceException;
 
 import java.util.Map;
 
@@ -40,7 +40,7 @@ public class Server extends ZAttrServer {
         return EntryType.SERVER;
     }
 
-    public void deleteServer(String zimbraId) throws ServiceException {
+    public void deleteServer(String zmailId) throws ServiceException {
         getProvisioning().deleteServer(getId());
     }
 
@@ -57,7 +57,7 @@ public class Server extends ZAttrServer {
         if (mailTransport == null)
             return true;
         
-        String serviceName = getAttr(Provisioning.A_zimbraServiceHostname, null);
+        String serviceName = getAttr(Provisioning.A_zmailServiceHostname, null);
         
         String[] parts = mailTransport.split(":");
         if (serviceName != null && parts.length == 3) {
@@ -69,7 +69,7 @@ public class Server extends ZAttrServer {
     }
     
     public boolean hasMailboxService() {
-        return getMultiAttrSet(Provisioning.A_zimbraServiceEnabled).contains(Provisioning.SERVICE_MAILBOX);
+        return getMultiAttrSet(Provisioning.A_zmailServiceEnabled).contains(Provisioning.SERVICE_MAILBOX);
     }
     
     public boolean isLocalServer() throws ServiceException {

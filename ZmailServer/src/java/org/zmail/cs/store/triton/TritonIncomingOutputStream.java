@@ -12,7 +12,7 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.store.triton;
+package org.zmail.cs.store.triton;
 
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
@@ -24,13 +24,13 @@ import org.apache.commons.httpclient.HttpClient;
 import org.apache.commons.httpclient.HttpStatus;
 import org.apache.commons.httpclient.methods.PostMethod;
 
-import com.zimbra.common.httpclient.HttpClientUtil;
-import com.zimbra.common.localconfig.LC;
-import com.zimbra.common.util.ZimbraHttpConnectionManager;
-import com.zimbra.common.util.ZimbraLog;
-import com.zimbra.cs.store.BlobBuilder;
-import com.zimbra.cs.store.external.ExternalResumableOutputStream;
-import com.zimbra.cs.store.triton.TritonBlobStoreManager.HashType;
+import org.zmail.common.httpclient.HttpClientUtil;
+import org.zmail.common.localconfig.LC;
+import org.zmail.common.util.ZmailHttpConnectionManager;
+import org.zmail.common.util.ZmailLog;
+import org.zmail.cs.store.BlobBuilder;
+import org.zmail.cs.store.external.ExternalResumableOutputStream;
+import org.zmail.cs.store.triton.TritonBlobStoreManager.HashType;
 
 /**
  * Output stream that writes to TDS, calculates digest, and buffers to local BlobBuilder
@@ -81,7 +81,7 @@ public class TritonIncomingOutputStream extends ExternalResumableOutputStream {
     }
 
     private void sendHttpData() throws IOException {
-        HttpClient client = ZimbraHttpConnectionManager.getInternalHttpConnMgr().newHttpClient();
+        HttpClient client = ZmailHttpConnectionManager.getInternalHttpConnMgr().newHttpClient();
         PostMethod post;
         boolean started = false;
         if (uploadUrl.isInitialized()) {
@@ -91,7 +91,7 @@ public class TritonIncomingOutputStream extends ExternalResumableOutputStream {
             post = new PostMethod(baseUrl + "/blob");
         }
         try {
-            ZimbraLog.store.info("posting to %s",post.getURI());
+            ZmailLog.store.info("posting to %s",post.getURI());
             HttpClientUtil.addInputStreamToHttpMethod(post, new ByteArrayInputStream(baos.toByteArray()), baos.size(), "application/octet-stream");
             post.addRequestHeader(TritonHeaders.CONTENT_LENGTH, baos.size()+"");
             post.addRequestHeader(TritonHeaders.HASH_TYPE, hashType.toString());

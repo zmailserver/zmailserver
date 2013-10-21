@@ -12,25 +12,25 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.account.ldap.upgrade;
+package org.zmail.cs.account.ldap.upgrade;
 
 import java.util.HashMap;
 import java.util.Map;
 
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.cs.account.Domain;
-import com.zimbra.cs.account.NamedEntry;
-import com.zimbra.cs.account.Provisioning;
-import com.zimbra.cs.account.Entry.EntryType;
-import com.zimbra.cs.account.ldap.entry.LdapDomain;
-import com.zimbra.cs.ldap.IAttributes;
-import com.zimbra.cs.ldap.LdapClient;
-import com.zimbra.cs.ldap.LdapServerType;
-import com.zimbra.cs.ldap.LdapUsage;
-import com.zimbra.cs.ldap.SearchLdapOptions;
-import com.zimbra.cs.ldap.ZAttributes;
-import com.zimbra.cs.ldap.ZLdapContext;
-import com.zimbra.cs.ldap.ZSearchScope;
+import org.zmail.common.service.ServiceException;
+import org.zmail.cs.account.Domain;
+import org.zmail.cs.account.NamedEntry;
+import org.zmail.cs.account.Provisioning;
+import org.zmail.cs.account.Entry.EntryType;
+import org.zmail.cs.account.ldap.entry.LdapDomain;
+import org.zmail.cs.ldap.IAttributes;
+import org.zmail.cs.ldap.LdapClient;
+import org.zmail.cs.ldap.LdapServerType;
+import org.zmail.cs.ldap.LdapUsage;
+import org.zmail.cs.ldap.SearchLdapOptions;
+import org.zmail.cs.ldap.ZAttributes;
+import org.zmail.cs.ldap.ZLdapContext;
+import org.zmail.cs.ldap.ZSearchScope;
 
 public class BUG_32557 extends UpgradeOp {
     
@@ -92,11 +92,11 @@ public class BUG_32557 extends UpgradeOp {
     @Override
     void doUpgrade() throws ServiceException {
         
-        String query = "(&(objectClass=zimbraDomain)(!(objectClass=amavisAccount)))";
+        String query = "(&(objectClass=zmailDomain)(!(objectClass=amavisAccount)))";
         String bases[] = prov.getDIT().getSearchBases(Provisioning.SD_DOMAIN_FLAG);
         String attrs[] = new String[] {Provisioning.A_objectClass,
-                                       Provisioning.A_zimbraId,
-                                       Provisioning.A_zimbraDomainName};
+                                       Provisioning.A_zmailId,
+                                       Provisioning.A_zmailDomainName};
                 
         ZLdapContext zlc = null; 
         Bug32557Visitor visitor = new Bug32557Visitor(this, zlc);

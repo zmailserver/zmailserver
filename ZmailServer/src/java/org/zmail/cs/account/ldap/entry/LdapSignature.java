@@ -12,12 +12,12 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.account.ldap.entry;
+package org.zmail.cs.account.ldap.entry;
 
-import com.zimbra.cs.account.Account;
-import com.zimbra.cs.account.Provisioning;
-import com.zimbra.cs.ldap.LdapException;
-import com.zimbra.cs.ldap.ZAttributes;
+import org.zmail.cs.account.Account;
+import org.zmail.cs.account.Provisioning;
+import org.zmail.cs.ldap.LdapException;
+import org.zmail.cs.ldap.ZAttributes;
 
 /**
  * 
@@ -29,8 +29,8 @@ public class LdapSignature extends LdapSignatureBase {
     private String mDn;
 
     public LdapSignature(Account acct, String dn, ZAttributes attrs, Provisioning prov) throws LdapException {
-        super(acct, attrs.getAttrString(Provisioning.A_zimbraSignatureName),
-                attrs.getAttrString(Provisioning.A_zimbraSignatureId),
+        super(acct, attrs.getAttrString(Provisioning.A_zmailSignatureName),
+                attrs.getAttrString(Provisioning.A_zmailSignatureId),
                 attrs.getAttrs(), prov);
         mDn = dn;
     }

@@ -12,7 +12,7 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.qa.unittest.prov.ldap;
+package org.zmail.qa.unittest.prov.ldap;
 
 import java.io.ByteArrayInputStream;
 import java.security.SecureRandom;
@@ -23,19 +23,19 @@ import org.junit.*;
 import static org.junit.Assert.*;
 
 import com.google.common.collect.Maps;
-import com.zimbra.common.account.Key;
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.common.util.ByteUtil;
-import com.zimbra.cs.account.Account;
-import com.zimbra.cs.account.AuthToken;
-import com.zimbra.cs.account.Cos;
-import com.zimbra.cs.account.Domain;
-import com.zimbra.cs.account.Provisioning;
-import com.zimbra.cs.service.AuthProvider;
-import com.zimbra.cs.service.FileUploadServlet;
-import com.zimbra.cs.service.FileUploadServlet.Upload;
+import org.zmail.common.account.Key;
+import org.zmail.common.service.ServiceException;
+import org.zmail.common.util.ByteUtil;
+import org.zmail.cs.account.Account;
+import org.zmail.cs.account.AuthToken;
+import org.zmail.cs.account.Cos;
+import org.zmail.cs.account.Domain;
+import org.zmail.cs.account.Provisioning;
+import org.zmail.cs.service.AuthProvider;
+import org.zmail.cs.service.FileUploadServlet;
+import org.zmail.cs.service.FileUploadServlet.Upload;
 
-public class TestProvZimbraId extends LdapTest {
+public class TestProvZmailId extends LdapTest {
     
     private static final String ZIMBRA_ID = "1234567890@" + genTestId();
     
@@ -56,25 +56,25 @@ public class TestProvZimbraId extends LdapTest {
     }
     
     @Test
-    public void createAccountWithZimbraId() throws Exception {
-        String zimbraId = ZIMBRA_ID;
+    public void createAccountWithZmailId() throws Exception {
+        String zmailId = ZIMBRA_ID;
         
         Map<String, Object> attrs = Maps.newHashMap();
-        attrs.put(Provisioning.A_zimbraId, zimbraId);
+        attrs.put(Provisioning.A_zmailId, zmailId);
         Account acct = provUtil.createAccount(genAcctNameLocalPart(), domain, attrs);
-        assertEquals(zimbraId, acct.getId());
+        assertEquals(zmailId, acct.getId());
         
         // get account by id
-        Account acctById = prov.get(Key.AccountBy.id, zimbraId);
+        Account acctById = prov.get(Key.AccountBy.id, zmailId);
         assertNotNull(acctById);
     }
     
     @Test
-    public void createAccountWithInvalidZimbraId() throws Exception {
-        String zimbraId = "containing:colon";
+    public void createAccountWithInvalidZmailId() throws Exception {
+        String zmailId = "containing:colon";
         
         Map<String, Object> attrs = Maps.newHashMap();
-        attrs.put(Provisioning.A_zimbraId, zimbraId);
+        attrs.put(Provisioning.A_zmailId, zmailId);
         
         boolean caughtException = false;
         try {
@@ -94,7 +94,7 @@ public class TestProvZimbraId extends LdapTest {
         Cos cos = provUtil.createCos(cosName);
         
         Map<String, Object> attrs = Maps.newHashMap();
-        attrs.put(Provisioning.A_zimbraCOSId, cosName); // use cos name instead of id
+        attrs.put(Provisioning.A_zmailCOSId, cosName); // use cos name instead of id
         Account acct = provUtil.createAccount(genAcctNameLocalPart(), domain, attrs);
         
         Cos acctCos = prov.getCOS(acct);
@@ -109,7 +109,7 @@ public class TestProvZimbraId extends LdapTest {
         Cos cos = provUtil.createCos(cosName);
         
         Map<String, Object> attrs = Maps.newHashMap();
-        attrs.put(Provisioning.A_zimbraCOSId, cos.getId());
+        attrs.put(Provisioning.A_zmailCOSId, cos.getId());
         Account acct = provUtil.createAccount(genAcctNameLocalPart(), domain, attrs);
         
         Cos acctCos = prov.getCOS(acct);
@@ -127,7 +127,7 @@ public class TestProvZimbraId extends LdapTest {
         sr.nextBytes(body);
         
         Upload ulSaved = FileUploadServlet.saveUpload(
-                new ByteArrayInputStream(body), "zimbraId-test", "text/plain", acct.getId());
+                new ByteArrayInputStream(body), "zmailId-test", "text/plain", acct.getId());
         // System.out.println("Upload id is: " + ulSaved.getId());
         
         AuthToken authToken = AuthProvider.getAuthToken(acct);

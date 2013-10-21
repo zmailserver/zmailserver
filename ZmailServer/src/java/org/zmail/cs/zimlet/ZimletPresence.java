@@ -12,13 +12,13 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.zimlet;
+package org.zmail.cs.zimlet;
 
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
 
-import com.zimbra.common.service.ServiceException;
+import org.zmail.common.service.ServiceException;
 
 public class ZimletPresence {
 

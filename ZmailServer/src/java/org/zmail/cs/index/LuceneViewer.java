@@ -12,7 +12,7 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.index;
+package org.zmail.cs.index;
 
 import java.io.File;
 import java.io.FileWriter;
@@ -45,7 +45,7 @@ import org.apache.lucene.index.TermPositions;
 import org.apache.lucene.index.CheckIndex.Status;
 import org.apache.lucene.store.Directory;
 
-import com.zimbra.common.util.SetUtil;
+import org.zmail.common.util.SetUtil;
 
 public class LuceneViewer {
 
@@ -451,7 +451,7 @@ public class LuceneViewer {
         }
 
         protected String getCommandUsage() {
-            return("zmjava com.zimbra.cs.index.LuceneViewer <options> [term filter options]");
+            return("zmjava org.zmail.cs.index.LuceneViewer <options> [term filter options]");
         }
 
         private void usage(ParseException e, boolean exit) {
@@ -485,9 +485,9 @@ public class LuceneViewer {
             System.err.println();
             System.err.println();
             System.err.println("Sample command lines:");
-            System.err.println("zmjava com.zimbra.cs.index.LuceneViewer -a dump -i /opt/zimbra/index/0/2/index/0 -o /tmp/user1-index-dump.txt");
-            System.err.println("zmjava com.zimbra.cs.index.LuceneViewer -a dump -v -f1 l.content -t1 jay -f2 subject -t2 howdy -i /opt/zimbra/index/0/2/index/0 -o /tmp/user1-index-dump.txt");
-            System.err.println("zmjava com.zimbra.cs.index.LuceneViewer -a dump -f1 from jay@test.com -i /opt/zimbra/index/0/2/index/0 -o /tmp/user1-index-dump.txt");
+            System.err.println("zmjava org.zmail.cs.index.LuceneViewer -a dump -i /opt/zmail/index/0/2/index/0 -o /tmp/user1-index-dump.txt");
+            System.err.println("zmjava org.zmail.cs.index.LuceneViewer -a dump -v -f1 l.content -t1 jay -f2 subject -t2 howdy -i /opt/zmail/index/0/2/index/0 -o /tmp/user1-index-dump.txt");
+            System.err.println("zmjava org.zmail.cs.index.LuceneViewer -a dump -f1 from jay@test.com -i /opt/zmail/index/0/2/index/0 -o /tmp/user1-index-dump.txt");
 
             if (exit) {
                 System.exit(1);

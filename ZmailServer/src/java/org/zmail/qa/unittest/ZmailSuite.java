@@ -13,7 +13,7 @@
  * ***** END LICENSE BLOCK *****
  */
 
-package com.zimbra.qa.unittest;
+package org.zmail.qa.unittest;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -24,22 +24,22 @@ import junit.framework.TestSuite;
 
 import org.junit.runner.JUnitCore;
 
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.common.util.ZimbraLog;
-import com.zimbra.cs.extension.ExtensionUtil;
-import com.zimbra.qa.unittest.server.TestCalDavImportServer;
-import com.zimbra.qa.unittest.server.TestDataSourceServer;
-import com.zimbra.qa.unittest.server.TestDocumentServer;
-import com.zimbra.qa.unittest.server.TestNotificationServer;
-import com.zimbra.qa.unittest.server.TestPop3ImportServer;
+import org.zmail.common.service.ServiceException;
+import org.zmail.common.util.ZmailLog;
+import org.zmail.cs.extension.ExtensionUtil;
+import org.zmail.qa.unittest.server.TestCalDavImportServer;
+import org.zmail.qa.unittest.server.TestDataSourceServer;
+import org.zmail.qa.unittest.server.TestDocumentServer;
+import org.zmail.qa.unittest.server.TestNotificationServer;
+import org.zmail.qa.unittest.server.TestPop3ImportServer;
 
 /**
- * Complete unit test suite for the Zimbra code base.
+ * Complete unit test suite for the Zmail code base.
  *
  * @author bburtin
  *
  */
-public class ZimbraSuite extends TestSuite
+public class ZmailSuite extends TestSuite
 {
     private static final List<Class<? extends TestCase>> sClasses = new ArrayList<Class<? extends TestCase>>();
 
@@ -133,15 +133,15 @@ public class ZimbraSuite extends TestSuite
             if (testName.indexOf('.') < 0) {
                 // short name...check the suite
                 boolean found = false;
-                for (Class<? extends TestCase> c : ZimbraSuite.sClasses) {
+                for (Class<? extends TestCase> c : ZmailSuite.sClasses) {
                     if (testName.equals(c.getSimpleName())) {
                         tests.add(c);
                         found = true;
                     }
                 }
                 if (!found) {
-                    ZimbraLog.test.warn("Could not find test %s.  Make sure it's registered with %s.",
-                        testName, ZimbraSuite.class.getName());
+                    ZmailLog.test.warn("Could not find test %s.  Make sure it's registered with %s.",
+                        testName, ZmailSuite.class.getName());
                 }
             } else {
                 Class<? extends TestCase> testClass;

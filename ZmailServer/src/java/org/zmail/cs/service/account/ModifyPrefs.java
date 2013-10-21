@@ -16,7 +16,7 @@
 /*
  * Created on May 26, 2004
  */
-package com.zimbra.cs.service.account;
+package org.zmail.cs.service.account;
 
 import java.util.HashMap;
 import java.util.HashSet;
@@ -24,26 +24,26 @@ import java.util.Map;
 import java.util.Set;
 
 import com.google.common.base.Strings;
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.common.soap.AccountConstants;
-import com.zimbra.common.soap.Element;
-import com.zimbra.common.soap.Element.KeyValuePair;
-import com.zimbra.common.util.StringUtil;
-import com.zimbra.cs.account.Account;
-import com.zimbra.cs.account.AttributeInfo;
-import com.zimbra.cs.account.AttributeManager;
-import com.zimbra.cs.account.Provisioning;
-import com.zimbra.soap.ZimbraSoapContext;
+import org.zmail.common.service.ServiceException;
+import org.zmail.common.soap.AccountConstants;
+import org.zmail.common.soap.Element;
+import org.zmail.common.soap.Element.KeyValuePair;
+import org.zmail.common.util.StringUtil;
+import org.zmail.cs.account.Account;
+import org.zmail.cs.account.AttributeInfo;
+import org.zmail.cs.account.AttributeManager;
+import org.zmail.cs.account.Provisioning;
+import org.zmail.soap.ZmailSoapContext;
 
 /**
  * @author schemers
  */
 public class ModifyPrefs extends AccountDocumentHandler {
 
-    public static final String PREF_PREFIX = "zimbraPref";
+    public static final String PREF_PREFIX = "zmailPref";
 
     public Element handle(Element request, Map<String, Object> context) throws ServiceException {
-        ZimbraSoapContext zsc = getZimbraSoapContext(context);
+        ZmailSoapContext zsc = getZmailSoapContext(context);
         Account account = getRequestedAccount(zsc);
 
         if (!canModifyOptions(zsc, account))
@@ -80,8 +80,8 @@ public class ModifyPrefs extends AccountDocumentHandler {
             }
         }
 
-        if (prefs.containsKey(Provisioning.A_zimbraPrefMailForwardingAddress)) {
-            if (!account.getBooleanAttr(Provisioning.A_zimbraFeatureMailForwardingEnabled, false))
+        if (prefs.containsKey(Provisioning.A_zmailPrefMailForwardingAddress)) {
+            if (!account.getBooleanAttr(Provisioning.A_zmailFeatureMailForwardingEnabled, false))
                 throw ServiceException.PERM_DENIED("forwarding not enabled");
         }
 

@@ -29,8 +29,8 @@ use XmlElement;
 use XmlDoc;
 use Soap;
 
-my $ACCTNS = "urn:zimbraAccount";
-my $MAILNS = "urn:zimbraMail";
+my $ACCTNS = "urn:zmailAccount";
+my $MAILNS = "urn:zmailMail";
 
 my $invId;
 my $mode = 0; # >= 2: remove attendee (broken right now)
@@ -67,7 +67,7 @@ my $authToken = $authResponse->find_child('authToken')->content;
 my $sessionId = $authResponse->find_child('sessionId')->content;
 #print "sessionId = $sessionId\n";
 
-my $context = $SOAP->zimbraContext($authToken, $sessionId);
+my $context = $SOAP->zmailContext($authToken, $sessionId);
 
 my $contextStr = $context->to_string("pretty");
 #print("Context = $contextStr\n");
@@ -85,7 +85,7 @@ $d->start('m', undef, undef, undef);
 
     $d->add('e', undef,
             {
-                'a' => "user2\@timbre.example.zimbra.com",
+                'a' => "user2\@timbre.example.zmail.com",
                 't' => "t"
                 } );
     
@@ -105,7 +105,7 @@ $d->start('m', undef, undef, undef);
 
 # $d->add('e', undef,
 #         {
-#             'a' => "tim\@example.zimbra.com",
+#             'a' => "tim\@example.zmail.com",
 #             't' => "t"
 #             } );
 # } 
@@ -128,10 +128,10 @@ $d->add('s', undef, { 'd', => $startTime, });
 $d->add('e', undef, { 'd', => $endTime, });
 
 
-    $d->add('or', undef, { 'd' => "user1", 'a' => "user1\@example.zimbra.com" } );
+    $d->add('or', undef, { 'd' => "user1", 'a' => "user1\@example.zmail.com" } );
 
     $d->add('at', undef, { 'd' => "user2",
-                           'a' => "user2\@example.zimbra.com",
+                           'a' => "user2\@example.zmail.com",
                            'role' => "REQ",
                            'ptst' => "NE",
                        });

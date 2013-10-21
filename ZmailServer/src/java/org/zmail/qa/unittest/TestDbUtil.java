@@ -13,16 +13,16 @@
  * ***** END LICENSE BLOCK *****
  */
 
-package com.zimbra.qa.unittest;
+package org.zmail.qa.unittest;
 
 import junit.framework.TestCase;
 
-import com.zimbra.cs.db.Db;
-import com.zimbra.cs.db.DbMailbox;
-import com.zimbra.cs.db.DbPool;
-import com.zimbra.cs.db.DbUtil;
-import com.zimbra.cs.db.DbPool.DbConnection;
-import com.zimbra.cs.mailbox.Mailbox;
+import org.zmail.cs.db.Db;
+import org.zmail.cs.db.DbMailbox;
+import org.zmail.cs.db.DbPool;
+import org.zmail.cs.db.DbUtil;
+import org.zmail.cs.db.DbPool.DbConnection;
+import org.zmail.cs.mailbox.Mailbox;
 
 /**
  * @author bburtin

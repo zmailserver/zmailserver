@@ -12,21 +12,21 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.service.admin;
+package org.zmail.cs.service.admin;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.common.soap.AdminConstants;
-import com.zimbra.common.soap.Element;
-import com.zimbra.common.soap.MailConstants;
-import com.zimbra.cs.account.accesscontrol.AdminRight;
-import com.zimbra.cs.account.accesscontrol.Rights.Admin;
-import com.zimbra.cs.session.IWaitSet;
-import com.zimbra.cs.session.WaitSetMgr;
-import com.zimbra.soap.ZimbraSoapContext;
+import org.zmail.common.service.ServiceException;
+import org.zmail.common.soap.AdminConstants;
+import org.zmail.common.soap.Element;
+import org.zmail.common.soap.MailConstants;
+import org.zmail.cs.account.accesscontrol.AdminRight;
+import org.zmail.cs.account.accesscontrol.Rights.Admin;
+import org.zmail.cs.session.IWaitSet;
+import org.zmail.cs.session.WaitSetMgr;
+import org.zmail.soap.ZmailSoapContext;
 
 /**
  * This API is used to dump the internal state of a wait set.  This API is intended
@@ -38,7 +38,7 @@ public class QueryWaitSet extends AdminDocumentHandler {
     public Element handle(Element request, Map<String, Object> context)
     throws ServiceException {
         
-        ZimbraSoapContext zsc = getZimbraSoapContext(context);
+        ZmailSoapContext zsc = getZmailSoapContext(context);
         WaitSetMgr.checkRightForAllAccounts(zsc); // must be a global admin
         
         Element response = zsc.createElement(AdminConstants.QUERY_WAIT_SET_RESPONSE);

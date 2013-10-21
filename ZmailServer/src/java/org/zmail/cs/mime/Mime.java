@@ -13,7 +13,7 @@
  * ***** END LICENSE BLOCK *****
  */
 
-package com.zimbra.cs.mime;
+package org.zmail.cs.mime;
 
 import java.io.BufferedInputStream;
 import java.io.ByteArrayInputStream;
@@ -64,25 +64,25 @@ import com.google.common.base.Strings;
 import com.google.common.collect.ImmutableSet;
 import com.ibm.icu.text.CharsetDetector;
 import com.ibm.icu.text.CharsetMatch;
-import com.zimbra.common.localconfig.LC;
-import com.zimbra.common.mime.ContentDisposition;
-import com.zimbra.common.mime.ContentType;
-import com.zimbra.common.mime.MimeConstants;
-import com.zimbra.common.mime.shim.JavaMailInternetAddress;
-import com.zimbra.common.util.ByteUtil;
-import com.zimbra.common.util.CharsetUtil;
-import com.zimbra.common.util.Log;
-import com.zimbra.common.util.LogFactory;
-import com.zimbra.common.util.StringUtil;
-import com.zimbra.common.util.ZimbraLog;
-import com.zimbra.common.zmime.ZInternetHeader;
-import com.zimbra.common.zmime.ZMimeBodyPart;
-import com.zimbra.common.zmime.ZMimeMessage;
-import com.zimbra.common.zmime.ZMimeMultipart;
-import com.zimbra.common.zmime.ZMimePart;
-import com.zimbra.cs.account.Account;
-import com.zimbra.cs.util.JMSession;
-import com.zimbra.cs.util.Zimbra;
+import org.zmail.common.localconfig.LC;
+import org.zmail.common.mime.ContentDisposition;
+import org.zmail.common.mime.ContentType;
+import org.zmail.common.mime.MimeConstants;
+import org.zmail.common.mime.shim.JavaMailInternetAddress;
+import org.zmail.common.util.ByteUtil;
+import org.zmail.common.util.CharsetUtil;
+import org.zmail.common.util.Log;
+import org.zmail.common.util.LogFactory;
+import org.zmail.common.util.StringUtil;
+import org.zmail.common.util.ZmailLog;
+import org.zmail.common.zmime.ZInternetHeader;
+import org.zmail.common.zmime.ZMimeBodyPart;
+import org.zmail.common.zmime.ZMimeMessage;
+import org.zmail.common.zmime.ZMimeMultipart;
+import org.zmail.common.zmime.ZMimePart;
+import org.zmail.cs.account.Account;
+import org.zmail.cs.util.JMSession;
+import org.zmail.cs.util.Zmail;
 
 /**
  * @since Apr 17, 2004
@@ -203,7 +203,7 @@ public class Mime {
                             emptyMultipart = multi;
                         }
                         if (MimeConstants.CT_MULTIPART_APPLEDOUBLE.equalsIgnoreCase(getContentType(mp))) {
-                            ZimbraLog.misc.debug("appledouble with no children; assuming it is malformed and really applefile");
+                            ZmailLog.misc.debug("appledouble with no children; assuming it is malformed and really applefile");
                             mpart.mContentType = mpart.mContentType.replace(MimeConstants.CT_MULTIPART_APPLEDOUBLE, MimeConstants.CT_APPLEFILE);
                         }
                     }
@@ -226,7 +226,7 @@ public class Mime {
         }
 
         if (emptyMultipart != null && parts.size() == 1) {
-            ZimbraLog.misc.debug("single multipart with no children. promoting the preamble into a single text part");
+            ZmailLog.misc.debug("single multipart with no children. promoting the preamble into a single text part");
             parts.remove(0);
             MPartInfo mpart = new MPartInfo();
             ZMimeBodyPart mp = new  ZMimeBodyPart();
@@ -276,13 +276,13 @@ public class Mime {
         return mpart;
     }
 
-    private static boolean isZimbraJavaMailShim(Object o) {
-        return ZMimeMessage.usingZimbraParser() && (o instanceof ZMimePart || o instanceof ZMimeMultipart);
+    private static boolean isZmailJavaMailShim(Object o) {
+        return ZMimeMessage.usingZmailParser() && (o instanceof ZMimePart || o instanceof ZMimeMultipart);
     }
 
     private static MimeMultipart validateMultipart(MimeMultipart multi, MimePart mp) throws MessagingException, IOException {
         // our MIME parser preparses the multipart, so if an object exists then it's valid
-        if (multi == null || isZimbraJavaMailShim(multi)) {
+        if (multi == null || isZmailJavaMailShim(multi)) {
             return multi;
         }
 
@@ -603,7 +603,7 @@ public class Mime {
     }
 
     public static void repairTransferEncoding(MimePart mp) throws MessagingException {
-        if (isZimbraJavaMailShim(mp)) {
+        if (isZmailJavaMailShim(mp)) {
             return;
         }
 
@@ -704,7 +704,7 @@ public class Mime {
      * i.e., if someone searches for messages with attachment types of "text/plain", we probably wouldn't want
      * every multipart/mixed message showing up, since 99% of them will have a first body part of text/plain.
      *
-     * Note: Zimbra folder sharing notifications are not considered attachments for this purpose.
+     * Note: Zmail folder sharing notifications are not considered attachments for this purpose.
      *
      * @param mpi
      * @return
@@ -741,7 +741,7 @@ public class Mime {
             }
         }
 
-        // Zimbra folder sharing notifications are not considered attachments.
+        // Zmail folder sharing notifications are not considered attachments.
         if (ctype.equals(MimeConstants.CT_XML_ZIMBRA_SHARE) ||
             ctype.equals(MimeConstants.CT_XML_ZIMBRA_DL_SUBSCRIPTION)) {
             return false;
@@ -772,7 +772,7 @@ public class Mime {
 
     /** Returns true if any of the given message parts qualify as top-level
      *  "attachments" for the purpose of displaying the little paperclip icon
-     *  in the web UI.  Note that Zimbra folder sharing notifications are
+     *  in the web UI.  Note that Zmail folder sharing notifications are
      *  expressly *not* considered attachments for this purpose. */
     public static boolean hasAttachment(List<MPartInfo> parts) {
         for (MPartInfo mpi : parts) {
@@ -821,7 +821,7 @@ public class Mime {
         } catch (Throwable e) {
             // Catch everything in case MIME parser was not robust enough to handle a malformed header.
             if (e instanceof OutOfMemoryError) {
-                Zimbra.halt("MIME parser failed: " + header, e);
+                Zmail.halt("MIME parser failed: " + header, e);
             } else if (!(e instanceof AddressException)) {
                 sLog.error("MIME parser failed: " + header, e);
             }
@@ -922,7 +922,7 @@ public class Mime {
                 return ctdefault;
             return getContentType(cthdr);
         } catch (MessagingException e) {
-            ZimbraLog.extensions.warn("could not fetch part's content-type; defaulting to " + MimeConstants.CT_DEFAULT, e);
+            ZmailLog.extensions.warn("could not fetch part's content-type; defaulting to " + MimeConstants.CT_DEFAULT, e);
             return MimeConstants.CT_DEFAULT;
         }
     }
@@ -1380,9 +1380,9 @@ public class Mime {
 
 
     public static void main(String[] args) throws MessagingException, IOException {
-        String s = URLDecoder.decode("Zimbra%20&#26085;&#26412;&#35486;&#21270;&#12398;&#32771;&#24942;&#28857;.txt", "utf-8");
+        String s = URLDecoder.decode("Zmail%20&#26085;&#26412;&#35486;&#21270;&#12398;&#32771;&#24942;&#28857;.txt", "utf-8");
         System.out.println(s);
-        System.out.println(expandNumericCharacterReferences("Zimbra%20&#26085;&#26412;&#35486;&#21270;&#12398;&#32771;&#24942;&#28857;.txt&#x40;&;&#;&#x;&#&#3876;&#55"));
+        System.out.println(expandNumericCharacterReferences("Zmail%20&#26085;&#26412;&#35486;&#21270;&#12398;&#32771;&#24942;&#28857;.txt&#x40;&;&#;&#x;&#&#3876;&#55"));
 
         MimeMessage mm = new FixedMimeMessage(JMSession.getSession(), new SharedFileInputStream("C:\\Temp\\mail\\24245"));
         InputStream is = new RawContentMultipartDataSource(mm, new ContentType(mm.getContentType())).getInputStream();
@@ -1398,7 +1398,7 @@ public class Mime {
      *  PipedOutputStream}.  This workaround is necessary because JavaMail does
      *  not provide {@code InputStream} access to the content. */
     public static InputStream getInputStream(MimeMessage mm) throws IOException {
-//        if (isZimbraJavaMailShim(mm)) {
+//        if (isZmailJavaMailShim(mm)) {
 //            return ((ZMimeMessage) mm).getMessageStream();
 //        }
 
@@ -1495,7 +1495,7 @@ public class Mime {
                 empty = false;
             } else if (c == '>') {
                 if (!empty) {
-                    refs.add(new com.zimbra.common.mime.InternetAddress(value.substring(astart, pos)).getAddress());
+                    refs.add(new org.zmail.common.mime.InternetAddress(value.substring(astart, pos)).getAddress());
                 }
                 empty = true;
                 astart = pos;
@@ -1504,7 +1504,7 @@ public class Mime {
             }
         }
         if (!empty) {
-            refs.add(new com.zimbra.common.mime.InternetAddress(value.substring(astart, pos)).getAddress());
+            refs.add(new org.zmail.common.mime.InternetAddress(value.substring(astart, pos)).getAddress());
         }
 
         return refs;

@@ -16,7 +16,7 @@
  * Created on Oct 23, 2005
  */
 
-package com.zimbra.cs.service;
+package org.zmail.cs.service;
 
 import java.io.BufferedInputStream;
 import java.io.IOException;
@@ -52,30 +52,30 @@ import org.apache.commons.httpclient.util.DateParseException;
 import com.google.common.annotations.VisibleForTesting;
 import com.google.common.base.Strings;
 import com.google.common.io.Closeables;
-import com.zimbra.common.calendar.ZCalendar.ZCalendarBuilder;
-import com.zimbra.common.calendar.ZCalendar.ZVCalendar;
-import com.zimbra.common.httpclient.HttpClientUtil;
-import com.zimbra.common.mime.ContentType;
-import com.zimbra.common.mime.MimeConstants;
-import com.zimbra.common.mime.shim.JavaMailInternetAddress;
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.common.soap.Element;
-import com.zimbra.common.util.DateUtil;
-import com.zimbra.common.util.FileUtil;
-import com.zimbra.common.util.ZimbraHttpConnectionManager;
-import com.zimbra.common.util.ZimbraLog;
-import com.zimbra.common.zmime.ZMimeBodyPart;
-import com.zimbra.common.zmime.ZMimeMultipart;
-import com.zimbra.cs.account.Account;
-import com.zimbra.cs.httpclient.HttpProxyUtil;
-import com.zimbra.cs.ldap.LdapUtil;
-import com.zimbra.cs.mailbox.Folder;
-import com.zimbra.cs.mailbox.calendar.Invite;
-import com.zimbra.cs.mime.Mime;
-import com.zimbra.cs.mime.ParsedMessage;
-import com.zimbra.cs.util.BuildInfo;
-import com.zimbra.cs.util.JMSession;
-import com.zimbra.cs.util.Zimbra;
+import org.zmail.common.calendar.ZCalendar.ZCalendarBuilder;
+import org.zmail.common.calendar.ZCalendar.ZVCalendar;
+import org.zmail.common.httpclient.HttpClientUtil;
+import org.zmail.common.mime.ContentType;
+import org.zmail.common.mime.MimeConstants;
+import org.zmail.common.mime.shim.JavaMailInternetAddress;
+import org.zmail.common.service.ServiceException;
+import org.zmail.common.soap.Element;
+import org.zmail.common.util.DateUtil;
+import org.zmail.common.util.FileUtil;
+import org.zmail.common.util.ZmailHttpConnectionManager;
+import org.zmail.common.util.ZmailLog;
+import org.zmail.common.zmime.ZMimeBodyPart;
+import org.zmail.common.zmime.ZMimeMultipart;
+import org.zmail.cs.account.Account;
+import org.zmail.cs.httpclient.HttpProxyUtil;
+import org.zmail.cs.ldap.LdapUtil;
+import org.zmail.cs.mailbox.Folder;
+import org.zmail.cs.mailbox.calendar.Invite;
+import org.zmail.cs.mime.Mime;
+import org.zmail.cs.mime.ParsedMessage;
+import org.zmail.cs.util.BuildInfo;
+import org.zmail.cs.util.JMSession;
+import org.zmail.cs.util.Zmail;
 
 public class FeedManager {
 
@@ -138,8 +138,8 @@ public class FeedManager {
     }
 
     private static String getBrowserTag() {
-        String tag = " Zimbra/" + BuildInfo.MAJORVERSION + "." + BuildInfo.MINORVERSION + "." + BuildInfo.MICROVERSION;
-        return tag.indexOf("unknown") == -1 ? tag : " Zimbra/8.0";
+        String tag = " Zmail/" + BuildInfo.MAJORVERSION + "." + BuildInfo.MINORVERSION + "." + BuildInfo.MICROVERSION;
+        return tag.indexOf("unknown") == -1 ? tag : " Zmail/8.0";
     }
 
     public static final int MAX_REDIRECTS = 3;
@@ -185,11 +185,11 @@ public class FeedManager {
     throws ServiceException, HttpException, IOException {
         assert !Strings.isNullOrEmpty(url);
 
-        HttpClient client = ZimbraHttpConnectionManager.getExternalHttpConnMgr().newHttpClient();
+        HttpClient client = ZmailHttpConnectionManager.getExternalHttpConnMgr().newHttpClient();
         HttpProxyUtil.configureProxy(client);
 
         // cannot set connection timeout because it'll affect all HttpClients associated with the conn mgr.
-        // see comments in ZimbraHttpConnectionManager
+        // see comments in ZmailHttpConnectionManager
         // client.setConnectionTimeout(10000);
 
         HttpMethodParams params = new HttpMethodParams();
@@ -222,7 +222,7 @@ public class FeedManager {
                             try {
                                 user = URLDecoder.decode(user, "UTF-8");
                             } catch (OutOfMemoryError e) {
-                                Zimbra.halt("out of memory", e);
+                                Zmail.halt("out of memory", e);
                             } catch (Throwable t) { }
                         }
                         UsernamePasswordCredentials creds = new UsernamePasswordCredentials(user, httpurl.getPassword());
@@ -234,7 +234,7 @@ public class FeedManager {
                 try {
                     get = new GetMethod(url);
                 } catch (OutOfMemoryError e) {
-                    Zimbra.halt("out of memory", e);  return null;
+                    Zmail.halt("out of memory", e);  return null;
                 } catch (Throwable t) {
                     throw ServiceException.INVALID_REQUEST("invalid url for feed: " + url, t);
                 }
@@ -269,14 +269,14 @@ public class FeedManager {
                                 Date d = org.apache.commons.httpclient.util.DateUtil.parseDate(lastModHdr.getValue());
                                 lastModified = d.getTime();
                             } catch (DateParseException e) {
-                                ZimbraLog.misc.warn("unable to parse Last-Modified/Date header: " + lastModHdr.getValue(), e);
+                                ZmailLog.misc.warn("unable to parse Last-Modified/Date header: " + lastModHdr.getValue(), e);
                                 lastModified = System.currentTimeMillis();
                             }
                         } else {
                             lastModified = System.currentTimeMillis();
                         }
                     } else if (statusCode == HttpServletResponse.SC_NOT_MODIFIED) {
-                        ZimbraLog.misc.debug("Remote data at " + url + " not modified since last sync");
+                        ZmailLog.misc.debug("Remote data at " + url + " not modified since last sync");
                         return new RemoteDataInfo(statusCode, redirects, null, expectedCharset, lastModified);
                     } else {
                         throw ServiceException.RESOURCE_UNREACHABLE(get.getStatusLine().toString(), null);

@@ -12,7 +12,7 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.qa.unittest.prov.ldap;
+package org.zmail.qa.unittest.prov.ldap;
 
 import java.util.HashMap;
 import java.util.HashSet;
@@ -26,34 +26,34 @@ import org.junit.Test;
 
 import static org.junit.Assert.*;
 
-import com.zimbra.common.account.Key;
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.common.util.SetUtil;
-import com.zimbra.cs.account.Account;
-import com.zimbra.cs.account.Domain;
-import com.zimbra.cs.account.Entry;
-import com.zimbra.cs.account.Group;
-import com.zimbra.cs.account.NamedEntry;
-import com.zimbra.cs.account.Provisioning;
-import com.zimbra.cs.account.AttributeClass;
-import com.zimbra.cs.account.AttributeManager;
-import com.zimbra.cs.account.Zimlet;
-import com.zimbra.cs.account.accesscontrol.ACLUtil;
-import com.zimbra.cs.account.accesscontrol.AdminRight;
-import com.zimbra.cs.account.accesscontrol.AllowedAttrs;
-import com.zimbra.cs.account.accesscontrol.CheckAttrRight;
-import com.zimbra.cs.account.accesscontrol.GranteeType;
-import com.zimbra.cs.account.accesscontrol.Right;
-import com.zimbra.cs.account.accesscontrol.RightCommand;
-import com.zimbra.cs.account.accesscontrol.TargetType;
-import com.zimbra.cs.account.accesscontrol.ZimbraACE;
-import com.zimbra.cs.account.accesscontrol.RightBearer.Grantee;
-import com.zimbra.cs.account.ldap.LdapProv;
-import com.zimbra.qa.unittest.TestUtil;
-import com.zimbra.qa.unittest.prov.Verify;
-import com.zimbra.qa.unittest.prov.ldap.ACLTestUtil.AllowOrDeny;
-import com.zimbra.qa.unittest.prov.ldap.ACLTestUtil.GetOrSet;
-import com.zimbra.soap.type.TargetBy;
+import org.zmail.common.account.Key;
+import org.zmail.common.service.ServiceException;
+import org.zmail.common.util.SetUtil;
+import org.zmail.cs.account.Account;
+import org.zmail.cs.account.Domain;
+import org.zmail.cs.account.Entry;
+import org.zmail.cs.account.Group;
+import org.zmail.cs.account.NamedEntry;
+import org.zmail.cs.account.Provisioning;
+import org.zmail.cs.account.AttributeClass;
+import org.zmail.cs.account.AttributeManager;
+import org.zmail.cs.account.Zimlet;
+import org.zmail.cs.account.accesscontrol.ACLUtil;
+import org.zmail.cs.account.accesscontrol.AdminRight;
+import org.zmail.cs.account.accesscontrol.AllowedAttrs;
+import org.zmail.cs.account.accesscontrol.CheckAttrRight;
+import org.zmail.cs.account.accesscontrol.GranteeType;
+import org.zmail.cs.account.accesscontrol.Right;
+import org.zmail.cs.account.accesscontrol.RightCommand;
+import org.zmail.cs.account.accesscontrol.TargetType;
+import org.zmail.cs.account.accesscontrol.ZmailACE;
+import org.zmail.cs.account.accesscontrol.RightBearer.Grantee;
+import org.zmail.cs.account.ldap.LdapProv;
+import org.zmail.qa.unittest.TestUtil;
+import org.zmail.qa.unittest.prov.Verify;
+import org.zmail.qa.unittest.prov.ldap.ACLTestUtil.AllowOrDeny;
+import org.zmail.qa.unittest.prov.ldap.ACLTestUtil.GetOrSet;
+import org.zmail.soap.type.TargetBy;
 
 public class TestACLAttrRight extends LdapTest {
     
@@ -94,15 +94,15 @@ public class TestACLAttrRight extends LdapTest {
         Set<String> EMPTY_SET = new HashSet<String>();
         
         ATTRS_SOME = new HashMap<String, Object>();
-        ATTRS_SOME.put(Provisioning.A_zimbraMailQuota, "123");
-        ATTRS_SOME.put(Provisioning.A_zimbraQuotaWarnPercent, "123");
-        ATTRS_SOME.put(Provisioning.A_zimbraQuotaWarnInterval, "123");
-        ATTRS_SOME.put(Provisioning.A_zimbraQuotaWarnMessage, "123");
+        ATTRS_SOME.put(Provisioning.A_zmailMailQuota, "123");
+        ATTRS_SOME.put(Provisioning.A_zmailQuotaWarnPercent, "123");
+        ATTRS_SOME.put(Provisioning.A_zmailQuotaWarnInterval, "123");
+        ATTRS_SOME.put(Provisioning.A_zmailQuotaWarnMessage, "123");
         
         ATTRS_SOME_MORE = new HashMap<String, Object>(ATTRS_SOME);
-        ATTRS_SOME_MORE.put(Provisioning.A_zimbraFeatureMailEnabled, "TRUE");
-        ATTRS_SOME_MORE.put(Provisioning.A_zimbraFeatureCalendarEnabled, "TRUE");
-        ATTRS_SOME_MORE.put(Provisioning.A_zimbraPrefLocale, "en-us");
+        ATTRS_SOME_MORE.put(Provisioning.A_zmailFeatureMailEnabled, "TRUE");
+        ATTRS_SOME_MORE.put(Provisioning.A_zmailFeatureCalendarEnabled, "TRUE");
+        ATTRS_SOME_MORE.put(Provisioning.A_zmailPrefLocale, "en-us");
         
         Set<String> ALL_ACCOUNT_ATTRS = null;
         ALL_ACCOUNT_ATTRS = AttributeManager.getInstance().getAllAttrsInClass(AttributeClass.account);
@@ -139,7 +139,7 @@ public class TestACLAttrRight extends LdapTest {
     
     /*
      * TODO: following methods (grantRight and verify) copied from legacy 
-     *       com.zimbra.qa.unittest.TestACL.  
+     *       org.zmail.qa.unittest.TestACL.  
      *       Move to ACLTestUtil if used in other classes as we continue to renovate ACL 
      *       unit tests.
      * 
@@ -153,12 +153,12 @@ public class TestACLAttrRight extends LdapTest {
      * This is for testing user rights, which goes to RightUtil directly (i.e. not through RightCommand)
      * 
      */
-    private List<ZimbraACE> grantRight(TargetType targetType, Entry target, Set<ZimbraACE> aces) throws ServiceException {
+    private List<ZmailACE> grantRight(TargetType targetType, Entry target, Set<ZmailACE> aces) throws ServiceException {
         /*
          * make sure all rights are user right, tests written earlier could still be using 
          * this to grant
          */
-        for (ZimbraACE ace : aces) {
+        for (ZmailACE ace : aces) {
             assertTrue(ace.getRight().isUserRight());
         }
         

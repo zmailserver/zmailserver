@@ -12,7 +12,7 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.qa.unittest.prov.ldap;
+package org.zmail.qa.unittest.prov.ldap;
 
 import java.util.HashMap;
 import java.util.HashSet;
@@ -23,15 +23,15 @@ import java.util.Set;
 import org.junit.*;
 import static org.junit.Assert.*;
 
-import com.zimbra.common.account.Key;
-import com.zimbra.common.account.Key.AccountBy;
-import com.zimbra.cs.account.Account;
-import com.zimbra.cs.account.AccountServiceException;
-import com.zimbra.cs.account.DataSource;
-import com.zimbra.cs.account.Domain;
-import com.zimbra.cs.account.Provisioning;
-import com.zimbra.qa.unittest.prov.Names;
-import com.zimbra.soap.admin.type.CacheEntryType;
+import org.zmail.common.account.Key;
+import org.zmail.common.account.Key.AccountBy;
+import org.zmail.cs.account.Account;
+import org.zmail.cs.account.AccountServiceException;
+import org.zmail.cs.account.DataSource;
+import org.zmail.cs.account.Domain;
+import org.zmail.cs.account.Provisioning;
+import org.zmail.qa.unittest.prov.Names;
+import org.zmail.soap.admin.type.CacheEntryType;
 
 public class TestLdapProvDataSource extends LdapTest {
     private static LdapProvTestUtil provUtil;
@@ -127,7 +127,7 @@ public class TestLdapProvDataSource extends LdapTest {
         DataSource dataSource = createDataSource(acct, DATA_SOURCE_NAME);
         
         Map<String, Object> attrs = new HashMap<String, Object>();
-        String MODIFIED_ATTR_NAME = Provisioning.A_zimbraDataSourceHost;
+        String MODIFIED_ATTR_NAME = Provisioning.A_zmailDataSourceHost;
         String MODIFIED_ATTR_VALUE = "modifyDataSource.com";
         attrs.put(MODIFIED_ATTR_NAME, MODIFIED_ATTR_VALUE);
         prov.modifyDataSource(acct, dataSource.getId(), attrs);
@@ -149,8 +149,8 @@ public class TestLdapProvDataSource extends LdapTest {
         DataSource dataSource = createDataSource(acct, DATA_SOURCE_NAME);
         
         Map<String, Object> attrs = new HashMap<String, Object>();
-        // modifying zimbraDataSourceName will rename the data source and trigger a LDAP moddn
-        String MODIFIED_ATTR_NAME = Provisioning.A_zimbraDataSourceName;
+        // modifying zmailDataSourceName will rename the data source and trigger a LDAP moddn
+        String MODIFIED_ATTR_NAME = Provisioning.A_zmailDataSourceName;
         String NEW_DATA_SOURCE_NAME = Names.makeDataSourceName(genDataSourceName("new"));  
         String MODIFIED_ATTR_VALUE = NEW_DATA_SOURCE_NAME;
         attrs.put(MODIFIED_ATTR_NAME, MODIFIED_ATTR_VALUE);

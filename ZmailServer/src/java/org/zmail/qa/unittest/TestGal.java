@@ -13,7 +13,7 @@
  * ***** END LICENSE BLOCK *****
  */
 
-package com.zimbra.qa.unittest;
+package org.zmail.qa.unittest;
 
 import java.util.Arrays;
 import java.util.Enumeration;
@@ -26,24 +26,24 @@ import java.util.Set;
 import junit.framework.TestCase;
 import junit.framework.TestSuite;
 
-import com.zimbra.common.localconfig.LC;
-import com.zimbra.common.mailbox.ContactConstants;
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.common.util.CliUtil;
-import com.zimbra.cs.account.Account;
-import com.zimbra.cs.account.AttributeType;
-import com.zimbra.cs.account.Domain;
-import com.zimbra.cs.account.GalContact;
-import com.zimbra.cs.account.NamedEntry;
-import com.zimbra.cs.account.Provisioning;
-import com.zimbra.common.account.Key;
-import com.zimbra.common.account.Key.AccountBy;
-import com.zimbra.common.account.Key.DomainBy;
-import com.zimbra.cs.account.Provisioning.GalMode;
-import com.zimbra.cs.account.Provisioning.SearchGalResult;
-import com.zimbra.cs.account.gal.GalConstants;
-import com.zimbra.cs.mailbox.Contact;
-import com.zimbra.soap.type.GalSearchType;
+import org.zmail.common.localconfig.LC;
+import org.zmail.common.mailbox.ContactConstants;
+import org.zmail.common.service.ServiceException;
+import org.zmail.common.util.CliUtil;
+import org.zmail.cs.account.Account;
+import org.zmail.cs.account.AttributeType;
+import org.zmail.cs.account.Domain;
+import org.zmail.cs.account.GalContact;
+import org.zmail.cs.account.NamedEntry;
+import org.zmail.cs.account.Provisioning;
+import org.zmail.common.account.Key;
+import org.zmail.common.account.Key.AccountBy;
+import org.zmail.common.account.Key.DomainBy;
+import org.zmail.cs.account.Provisioning.GalMode;
+import org.zmail.cs.account.Provisioning.SearchGalResult;
+import org.zmail.cs.account.gal.GalConstants;
+import org.zmail.cs.mailbox.Contact;
+import org.zmail.soap.type.GalSearchType;
 
 
 public class TestGal extends TestCase {
@@ -54,10 +54,10 @@ public class TestGal extends TestCase {
     private static String QUERY = ACCT_NAME_PREFIX;
     private static int NUM_ACCOUNTS = 1000;
     
-    private static int MAX_PAGE_SIZE = 1000; // defined in zimbra-attrs.xml
+    private static int MAX_PAGE_SIZE = 1000; // defined in zmail-attrs.xml
     private static int UNLIMITED = 0;
     private static int LIMITED = 100;
-    // sizelimit in /opt/zimbra/conf/slapd.conf
+    // sizelimit in /opt/zmail/conf/slapd.conf
     // set LDAP_SERVER_SIZE_LIMIT to either UNLIMITED or LIMITED and set slapd.conf accordingly, then restart ldap server
     private static int LDAP_SERVER_SIZE_LIMIT = UNLIMITED; 
     private String DOMAIN_NAME = TestProvisioningUtil.baseDomainName(TEST_CLASS_NAME, null);
@@ -161,46 +161,46 @@ public class TestGal extends TestCase {
     }
     
     /*
-     * create a domain and make it ready for external GAL uisng Zimbra LDAP
+     * create a domain and make it ready for external GAL uisng Zmail LDAP
      */
     private void setupDomain(String domainName, String domainBaseDn) throws Exception {
         // create the domain and accounts if they have not been created yet
         Domain domain = mProv.get(Key.DomainBy.name, domainName);
         if (domain == null) {
             Map<String, Object> attrs = new HashMap<String, Object>();
-            // setup zimbra OpenLDAP for external GAL
-            attrs.put(Provisioning.A_zimbraGalLdapURL, "ldap://localhost:389");
-            attrs.put(Provisioning.A_zimbraGalLdapBindDn, LC.zimbra_ldap_userdn.value());
-            attrs.put(Provisioning.A_zimbraGalLdapBindPassword, LC.zimbra_ldap_password.value());
-            attrs.put(Provisioning.A_zimbraGalLdapSearchBase, domainBaseDn);
-            attrs.put(Provisioning.A_zimbraGalLdapFilter, "zimbraAccounts");
+            // setup zmail OpenLDAP for external GAL
+            attrs.put(Provisioning.A_zmailGalLdapURL, "ldap://localhost:389");
+            attrs.put(Provisioning.A_zmailGalLdapBindDn, LC.zmail_ldap_userdn.value());
+            attrs.put(Provisioning.A_zmailGalLdapBindPassword, LC.zmail_ldap_password.value());
+            attrs.put(Provisioning.A_zmailGalLdapSearchBase, domainBaseDn);
+            attrs.put(Provisioning.A_zmailGalLdapFilter, "zmailAccounts");
             
-            attrs.put(Provisioning.A_zimbraGalSyncLdapURL, "ldap://localhost:389");
-            attrs.put(Provisioning.A_zimbraGalSyncLdapBindDn, LC.zimbra_ldap_userdn.value());
-            attrs.put(Provisioning.A_zimbraGalSyncLdapBindPassword, LC.zimbra_ldap_password.value());
-            attrs.put(Provisioning.A_zimbraGalSyncLdapSearchBase, domainBaseDn);
-            attrs.put(Provisioning.A_zimbraGalSyncLdapFilter, "zimbraAccounts");
+            attrs.put(Provisioning.A_zmailGalSyncLdapURL, "ldap://localhost:389");
+            attrs.put(Provisioning.A_zmailGalSyncLdapBindDn, LC.zmail_ldap_userdn.value());
+            attrs.put(Provisioning.A_zmailGalSyncLdapBindPassword, LC.zmail_ldap_password.value());
+            attrs.put(Provisioning.A_zmailGalSyncLdapSearchBase, domainBaseDn);
+            attrs.put(Provisioning.A_zmailGalSyncLdapFilter, "zmailAccounts");
             domain = mProv.createDomain(domainName, attrs);
         }
         assertNotNull(domain);
         
-        assertEquals(domain.getAttr(Provisioning.A_zimbraGalLdapURL), "ldap://localhost:389");
-        assertEquals(domain.getAttr(Provisioning.A_zimbraGalLdapBindDn), LC.zimbra_ldap_userdn.value());
-        assertEquals(domain.getAttr(Provisioning.A_zimbraGalLdapBindPassword), LC.zimbra_ldap_password.value());
-        assertEquals(domain.getAttr(Provisioning.A_zimbraGalLdapSearchBase), domainBaseDn);
-        assertEquals(domain.getAttr(Provisioning.A_zimbraGalLdapFilter), "zimbraAccounts");
+        assertEquals(domain.getAttr(Provisioning.A_zmailGalLdapURL), "ldap://localhost:389");
+        assertEquals(domain.getAttr(Provisioning.A_zmailGalLdapBindDn), LC.zmail_ldap_userdn.value());
+        assertEquals(domain.getAttr(Provisioning.A_zmailGalLdapBindPassword), LC.zmail_ldap_password.value());
+        assertEquals(domain.getAttr(Provisioning.A_zmailGalLdapSearchBase), domainBaseDn);
+        assertEquals(domain.getAttr(Provisioning.A_zmailGalLdapFilter), "zmailAccounts");
         
-        assertEquals(domain.getAttr(Provisioning.A_zimbraGalSyncLdapURL), "ldap://localhost:389");
-        assertEquals(domain.getAttr(Provisioning.A_zimbraGalSyncLdapBindDn), LC.zimbra_ldap_userdn.value());
-        assertEquals(domain.getAttr(Provisioning.A_zimbraGalSyncLdapBindPassword), LC.zimbra_ldap_password.value());
-        assertEquals(domain.getAttr(Provisioning.A_zimbraGalSyncLdapSearchBase), domainBaseDn);
-        assertEquals(domain.getAttr(Provisioning.A_zimbraGalSyncLdapFilter), "zimbraAccounts");
+        assertEquals(domain.getAttr(Provisioning.A_zmailGalSyncLdapURL), "ldap://localhost:389");
+        assertEquals(domain.getAttr(Provisioning.A_zmailGalSyncLdapBindDn), LC.zmail_ldap_userdn.value());
+        assertEquals(domain.getAttr(Provisioning.A_zmailGalSyncLdapBindPassword), LC.zmail_ldap_password.value());
+        assertEquals(domain.getAttr(Provisioning.A_zmailGalSyncLdapSearchBase), domainBaseDn);
+        assertEquals(domain.getAttr(Provisioning.A_zmailGalSyncLdapFilter), "zmailAccounts");
         
         setupTokenize(domainName, null, null);
         domain = mProv.get(Key.DomainBy.name, domainName);
         assertNotNull(domain);
-        assertEquals(domain.getAttr(Provisioning.A_zimbraGalTokenizeAutoCompleteKey), null);
-        assertEquals(domain.getAttr(Provisioning.A_zimbraGalTokenizeSearchKey), null);
+        assertEquals(domain.getAttr(Provisioning.A_zmailGalTokenizeAutoCompleteKey), null);
+        assertEquals(domain.getAttr(Provisioning.A_zmailGalTokenizeSearchKey), null);
     }
     
     private void createAccount(String userName, String firstName, String lastName) throws Exception {
@@ -273,12 +273,12 @@ public class TestGal extends TestCase {
         assertNotNull(domain);
         
         Map<String, Object> attrs = new HashMap<String, Object>();
-        attrs.put(Provisioning.A_zimbraGalMode, galMode.toString());
-        attrs.put(Provisioning.A_zimbraGalLdapPageSize, ""+pageSize);
+        attrs.put(Provisioning.A_zmailGalMode, galMode.toString());
+        attrs.put(Provisioning.A_zmailGalLdapPageSize, ""+pageSize);
         
         // set domain limit to be larger than total number of accounts so test parameters 
         // in autoComplete tests can be effective instead of being limited by the domain limit.
-        attrs.put(Provisioning.A_zimbraGalMaxResults, ""+more(NUM_ACCOUNTS));
+        attrs.put(Provisioning.A_zmailGalMaxResults, ""+more(NUM_ACCOUNTS));
         mProv.modifyAttrs(domain, attrs);
     }
     
@@ -288,9 +288,9 @@ public class TestGal extends TestCase {
         assertNotNull(domain);
         
         Map<String, Object> attrs = new HashMap<String, Object>();
-        attrs.put(Provisioning.A_zimbraGalMode, galMode.toString());
-        attrs.put(Provisioning.A_zimbraGalLdapPageSize, ""+pageSize);
-        attrs.put(Provisioning.A_zimbraGalMaxResults, ""+domainLimit);
+        attrs.put(Provisioning.A_zmailGalMode, galMode.toString());
+        attrs.put(Provisioning.A_zmailGalLdapPageSize, ""+pageSize);
+        attrs.put(Provisioning.A_zmailGalMaxResults, ""+domainLimit);
         mProv.modifyAttrs(domain, attrs);
     }
     
@@ -300,9 +300,9 @@ public class TestGal extends TestCase {
         assertNotNull(domain);
         
         Map<String, Object> attrs = new HashMap<String, Object>();
-        attrs.put(Provisioning.A_zimbraGalMode, galMode.toString());
-        attrs.put(Provisioning.A_zimbraGalSyncLdapPageSize, ""+pageSize);
-        attrs.put(Provisioning.A_zimbraGalMaxResults, ""+domainLimit);
+        attrs.put(Provisioning.A_zmailGalMode, galMode.toString());
+        attrs.put(Provisioning.A_zmailGalSyncLdapPageSize, ""+pageSize);
+        attrs.put(Provisioning.A_zmailGalMaxResults, ""+domainLimit);
         mProv.modifyAttrs(domain, attrs);
     }
     
@@ -379,7 +379,7 @@ public class TestGal extends TestCase {
         // modify some accounts
         int numDelta = NUM_ACCOUNTS/10;
         Map<String, Object> attrs = new HashMap<String, Object>();
-        attrs.put(Provisioning.A_zimbraNotes, "blah");
+        attrs.put(Provisioning.A_zmailNotes, "blah");
         
         for (int i=0; i<numDelta; i++) {
             String acctName = acctName(i);
@@ -499,17 +499,17 @@ public class TestGal extends TestCase {
     }
     
     public void testAutoCompleteGal() throws Exception {
-        autoCompleteGal(GalMode.zimbra);
+        autoCompleteGal(GalMode.zmail);
         autoCompleteGal(GalMode.ldap);
     }
     
     public void testSearchGal() throws Exception {
-        searchGal(GalMode.zimbra);
+        searchGal(GalMode.zmail);
         searchGal(GalMode.ldap);
     }
     
     public void testSyncGal() throws Exception {
-        syncGal(GalMode.zimbra);
+        syncGal(GalMode.zmail);
         syncGal(GalMode.ldap);
     }
     
@@ -520,14 +520,14 @@ public class TestGal extends TestCase {
         Map<String, Object> attrs = new HashMap<String, Object>();
         
         if (galMode != null)
-            attrs.put(Provisioning.A_zimbraGalMode, galMode.toString());
+            attrs.put(Provisioning.A_zmailGalMode, galMode.toString());
         
         if (andOr == null) {
-            attrs.put(Provisioning.A_zimbraGalTokenizeAutoCompleteKey, "");
-            attrs.put(Provisioning.A_zimbraGalTokenizeSearchKey, "");
+            attrs.put(Provisioning.A_zmailGalTokenizeAutoCompleteKey, "");
+            attrs.put(Provisioning.A_zmailGalTokenizeSearchKey, "");
         } else {
-            attrs.put(Provisioning.A_zimbraGalTokenizeAutoCompleteKey, andOr);
-            attrs.put(Provisioning.A_zimbraGalTokenizeSearchKey, andOr);
+            attrs.put(Provisioning.A_zmailGalTokenizeAutoCompleteKey, andOr);
+            attrs.put(Provisioning.A_zmailGalTokenizeSearchKey, andOr);
         }
 
         mProv.modifyAttrs(domain, attrs);
@@ -622,14 +622,14 @@ public class TestGal extends TestCase {
     }
     
     public void testTokenizeKey() throws Exception {
-        autoCompleteWithTokenizeAND(GalMode.zimbra);
+        autoCompleteWithTokenizeAND(GalMode.zmail);
         autoCompleteWithTokenizeAND(GalMode.ldap);
-        autoCompleteWithTokenizeOR(GalMode.zimbra);
+        autoCompleteWithTokenizeOR(GalMode.zmail);
         autoCompleteWithTokenizeOR(GalMode.ldap);
         
-        searchWithTokenizeAND(GalMode.zimbra);
+        searchWithTokenizeAND(GalMode.zmail);
         searchWithTokenizeAND(GalMode.ldap);
-        searchWithTokenizeOR(GalMode.zimbra);
+        searchWithTokenizeOR(GalMode.zmail);
         searchWithTokenizeOR(GalMode.ldap);
     }
     

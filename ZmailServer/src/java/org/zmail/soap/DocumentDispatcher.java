@@ -12,7 +12,7 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.soap;
+package org.zmail.soap;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -22,10 +22,10 @@ import java.util.Map;
 
 import org.dom4j.QName;
 
-import com.zimbra.common.localconfig.LC;
-import com.zimbra.common.soap.Element;
-import com.zimbra.common.util.ZimbraLog;
-import com.zimbra.cs.service.admin.AdminDocumentHandler;
+import org.zmail.common.localconfig.LC;
+import org.zmail.common.soap.Element;
+import org.zmail.common.util.ZmailLog;
+import org.zmail.cs.service.admin.AdminDocumentHandler;
 
 /**
  * @since May 26, 2004
@@ -45,17 +45,17 @@ public final class DocumentDispatcher {
         responses = new HashMap<QName, QName>();
 
         String whiteListString = LC.get("admin_soap_white_list");
-        ZimbraLog.soap.debug("Loading admin SOAP white list");
+        ZmailLog.soap.debug("Loading admin SOAP white list");
         if (whiteListString.length() > 0) {
             includeList = new ArrayList<String>(Arrays.asList(whiteListString.split("(,[\n\r]*)")));
         } else {
-            ZimbraLog.soap.debug("No white list found. All available admin SOAP handlers will be loaded.");
+            ZmailLog.soap.debug("No white list found. All available admin SOAP handlers will be loaded.");
         }
     }
 
     void clearSoapWhiteList() {
         if (includeList != null) {
-            ZimbraLog.soap.debug("clearing admin SOAP white list");
+            ZmailLog.soap.debug("clearing admin SOAP white list");
             includeList.clear();
         }
     }
@@ -64,10 +64,10 @@ public final class DocumentDispatcher {
         if (handler instanceof AdminDocumentHandler) {
             if (!(includeList == null) && !includeList.isEmpty()
                     && !includeList.contains(String.format("%s::%s", qname.getNamespaceURI(), qname.getQualifiedName()))) {
-                ZimbraLog.soap.debug("skipping %s::%s", qname.getNamespaceURI(), qname.getQualifiedName());
+                ZmailLog.soap.debug("skipping %s::%s", qname.getNamespaceURI(), qname.getQualifiedName());
                 return;
             }
-            ZimbraLog.soap.debug("Registering %s::%s", qname.getNamespaceURI(), qname.getQualifiedName());
+            ZmailLog.soap.debug("Registering %s::%s", qname.getNamespaceURI(), qname.getQualifiedName());
         }
 
         handlers.put(qname, handler);

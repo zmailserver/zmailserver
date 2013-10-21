@@ -13,7 +13,7 @@
  * ***** END LICENSE BLOCK *****
  */
 
-package com.zimbra.cs.service;
+package org.zmail.cs.service;
 
 import java.io.IOException;
 import java.util.HashMap;
@@ -29,59 +29,59 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.google.common.collect.Lists;
-import com.zimbra.common.localconfig.DebugConfig;
-import com.zimbra.common.util.L10nUtil;
-import com.zimbra.common.util.StringUtil;
+import org.zmail.common.localconfig.DebugConfig;
+import org.zmail.common.util.L10nUtil;
+import org.zmail.common.util.StringUtil;
 import org.apache.commons.codec.binary.Hex;
 
-import com.zimbra.client.ZFolder;
-import com.zimbra.client.ZMailbox;
-import com.zimbra.client.ZMountpoint;
-import com.zimbra.common.account.ProvisioningConstants;
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.common.util.BlobMetaData;
-import com.zimbra.common.util.Log;
-import com.zimbra.common.util.LogFactory;
-import com.zimbra.common.util.ZimbraLog;
-import com.zimbra.cs.account.Account;
-import com.zimbra.cs.account.AuthToken;
-import com.zimbra.cs.account.AuthTokenException;
-import com.zimbra.cs.account.AuthTokenKey;
-import com.zimbra.cs.account.Domain;
-import com.zimbra.cs.account.GuestAccount;
-import com.zimbra.cs.account.NamedEntry;
-import com.zimbra.cs.account.Provisioning;
-import com.zimbra.cs.account.SearchAccountsOptions;
-import com.zimbra.cs.account.ShareInfoData;
-import com.zimbra.cs.account.ZimbraAuthToken;
-import com.zimbra.cs.ldap.ZLdapFilterFactory;
-import com.zimbra.cs.mailbox.ACL;
-import com.zimbra.cs.mailbox.Flag;
-import com.zimbra.cs.mailbox.MailItem;
-import com.zimbra.cs.mailbox.Mailbox;
-import com.zimbra.cs.mailbox.MailboxManager;
-import com.zimbra.cs.mailbox.Mountpoint;
-import com.zimbra.cs.mailbox.acl.AclPushSerializer;
-import com.zimbra.cs.servlet.ZimbraServlet;
-import com.zimbra.cs.util.AccountUtil;
-import com.zimbra.soap.mail.message.FolderActionRequest;
-import com.zimbra.soap.mail.type.FolderActionSelector;
+import org.zmail.client.ZFolder;
+import org.zmail.client.ZMailbox;
+import org.zmail.client.ZMountpoint;
+import org.zmail.common.account.ProvisioningConstants;
+import org.zmail.common.service.ServiceException;
+import org.zmail.common.util.BlobMetaData;
+import org.zmail.common.util.Log;
+import org.zmail.common.util.LogFactory;
+import org.zmail.common.util.ZmailLog;
+import org.zmail.cs.account.Account;
+import org.zmail.cs.account.AuthToken;
+import org.zmail.cs.account.AuthTokenException;
+import org.zmail.cs.account.AuthTokenKey;
+import org.zmail.cs.account.Domain;
+import org.zmail.cs.account.GuestAccount;
+import org.zmail.cs.account.NamedEntry;
+import org.zmail.cs.account.Provisioning;
+import org.zmail.cs.account.SearchAccountsOptions;
+import org.zmail.cs.account.ShareInfoData;
+import org.zmail.cs.account.ZmailAuthToken;
+import org.zmail.cs.ldap.ZLdapFilterFactory;
+import org.zmail.cs.mailbox.ACL;
+import org.zmail.cs.mailbox.Flag;
+import org.zmail.cs.mailbox.MailItem;
+import org.zmail.cs.mailbox.Mailbox;
+import org.zmail.cs.mailbox.MailboxManager;
+import org.zmail.cs.mailbox.Mountpoint;
+import org.zmail.cs.mailbox.acl.AclPushSerializer;
+import org.zmail.cs.servlet.ZmailServlet;
+import org.zmail.cs.util.AccountUtil;
+import org.zmail.soap.mail.message.FolderActionRequest;
+import org.zmail.soap.mail.type.FolderActionSelector;
 
-public class ExternalUserProvServlet extends ZimbraServlet {
+public class ExternalUserProvServlet extends ZmailServlet {
 
     private static final Log logger = LogFactory.getLog(ExternalUserProvServlet.class);
 
     @Override
     public void init() throws ServletException {
         String name = getServletName();
-        ZimbraLog.account.info("Servlet " + name + " starting up");
+        ZmailLog.account.info("Servlet " + name + " starting up");
         super.init();
     }
 
     @Override
     public void destroy() {
         String name = getServletName();
-        ZimbraLog.account.info("Servlet " + name + " shutting down");
+        ZmailLog.account.info("Servlet " + name + " shutting down");
         super.destroy();
     }
 
@@ -112,7 +112,7 @@ public class ExternalUserProvServlet extends ZimbraServlet {
                     resp.addCookie(new Cookie("ZM_PRELIM_AUTH_TOKEN", param));
                     req.setAttribute("extuseremail", extUserEmail);
                     RequestDispatcher dispatcher =
-                            getServletContext().getContext("/zimbra").getRequestDispatcher("/public/extuserprov.jsp");
+                            getServletContext().getContext("/zmail").getRequestDispatcher("/public/extuserprov.jsp");
                     dispatcher.forward(req, resp);
                 }
             } else {
@@ -195,7 +195,7 @@ public class ExternalUserProvServlet extends ZimbraServlet {
                 } else {
                     req.setAttribute("virtualacctdomain", domain.getName());
                     RequestDispatcher dispatcher =
-                            getServletContext().getContext("/zimbra").getRequestDispatcher("/public/login.jsp");
+                            getServletContext().getContext("/zmail").getRequestDispatcher("/public/login.jsp");
                     dispatcher.forward(req, resp);
                 }
             }
@@ -267,9 +267,9 @@ public class ExternalUserProvServlet extends ZimbraServlet {
             // search all shares accessible to the external user
             SearchAccountsOptions searchOpts = new SearchAccountsOptions(
                     domain, new String[] {
-                            Provisioning.A_zimbraId,
+                            Provisioning.A_zmailId,
                             Provisioning.A_displayName,
-                            Provisioning.A_zimbraSharedItem });
+                            Provisioning.A_zmailSharedItem });
             // get all groups extUserEmail belongs to
             GuestAccount guestAcct = new GuestAccount(extUserEmail, null);
             List<String> groupIds = prov.getGroupMembership(guestAcct, false).groupIds();
@@ -284,16 +284,16 @@ public class ExternalUserProvServlet extends ZimbraServlet {
 
             // create external account
             Map<String, Object> attrs = new HashMap<String, Object>();
-            attrs.put(Provisioning.A_zimbraIsExternalVirtualAccount, ProvisioningConstants.TRUE);
-            attrs.put(Provisioning.A_zimbraExternalUserMailAddress, extUserEmail);
-            attrs.put(Provisioning.A_zimbraMailHost, prov.getLocalServer().getServiceHostname());
+            attrs.put(Provisioning.A_zmailIsExternalVirtualAccount, ProvisioningConstants.TRUE);
+            attrs.put(Provisioning.A_zmailExternalUserMailAddress, extUserEmail);
+            attrs.put(Provisioning.A_zmailMailHost, prov.getLocalServer().getServiceHostname());
             if (!StringUtil.isNullOrEmpty(displayName)) {
                 attrs.put(Provisioning.A_displayName, displayName);
             }
-            attrs.put(Provisioning.A_zimbraHideInGal, ProvisioningConstants.TRUE);
-            attrs.put(Provisioning.A_zimbraMailStatus, Provisioning.MailStatus.disabled.toString());
+            attrs.put(Provisioning.A_zmailHideInGal, ProvisioningConstants.TRUE);
+            attrs.put(Provisioning.A_zmailMailStatus, Provisioning.MailStatus.disabled.toString());
             if (!StringUtil.isNullOrEmpty(password)) {
-                attrs.put(Provisioning.A_zimbraVirtualAccountInitialPasswordSet, ProvisioningConstants.TRUE);
+                attrs.put(Provisioning.A_zmailVirtualAccountInitialPasswordSet, ProvisioningConstants.TRUE);
             }
             grantee = prov.createAccount(mapExtEmailToAcctName(extUserEmail, domain), password, attrs);
 
@@ -373,19 +373,19 @@ public class ExternalUserProvServlet extends ZimbraServlet {
         for (MailItem.Type type : viewTypes) {
             switch (type) {
                 case DOCUMENT:
-                    appFeatureAttrs.put(Provisioning.A_zimbraFeatureBriefcasesEnabled, ProvisioningConstants.TRUE);
+                    appFeatureAttrs.put(Provisioning.A_zmailFeatureBriefcasesEnabled, ProvisioningConstants.TRUE);
                     break;
                 case APPOINTMENT:
-                    appFeatureAttrs.put(Provisioning.A_zimbraFeatureCalendarEnabled, ProvisioningConstants.TRUE);
+                    appFeatureAttrs.put(Provisioning.A_zmailFeatureCalendarEnabled, ProvisioningConstants.TRUE);
                     break;
                 case CONTACT:
-                    appFeatureAttrs.put(Provisioning.A_zimbraFeatureContactsEnabled, ProvisioningConstants.TRUE);
+                    appFeatureAttrs.put(Provisioning.A_zmailFeatureContactsEnabled, ProvisioningConstants.TRUE);
                     break;
                 case TASK:
-                    appFeatureAttrs.put(Provisioning.A_zimbraFeatureTasksEnabled, ProvisioningConstants.TRUE);
+                    appFeatureAttrs.put(Provisioning.A_zmailFeatureTasksEnabled, ProvisioningConstants.TRUE);
                     break;
                 case MESSAGE:
-                    appFeatureAttrs.put(Provisioning.A_zimbraFeatureMailEnabled, ProvisioningConstants.TRUE);
+                    appFeatureAttrs.put(Provisioning.A_zmailFeatureMailEnabled, ProvisioningConstants.TRUE);
                     break;
                 default:
                     // we don't care about other types
@@ -412,7 +412,7 @@ public class ExternalUserProvServlet extends ZimbraServlet {
             if (key == null) {
                 throw new ServletException("unknown key version");
             }
-            String computedHmac = ZimbraAuthToken.getHmac(data, key.getKey());
+            String computedHmac = ZmailAuthToken.getHmac(data, key.getKey());
             if (!computedHmac.equals(hmac)) {
                 throw new ServletException("hmac failure");
             }

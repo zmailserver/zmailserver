@@ -12,7 +12,7 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.mailbox.util;
+package org.zmail.cs.mailbox.util;
 
 import java.util.ArrayList;
 import java.util.EnumMap;
@@ -22,8 +22,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-import com.zimbra.common.util.Pair;
-import com.zimbra.cs.mailbox.MailItem;
+import org.zmail.common.util.Pair;
+import org.zmail.cs.mailbox.MailItem;
 
 public final class TypedIdList implements Iterable<Map.Entry<MailItem.Type, List<TypedIdList.ItemInfo>>> {
     public static class ItemInfo extends Pair<Integer, String> {

@@ -21,7 +21,7 @@ use LWP::UserAgent;
 use Getopt::Long;
 use XmlDoc;
 use Soap;
-use ZimbraSoapTest;
+use ZmailSoapTest;
 
 # specific to this app
 my ($id, $perm, $granteeType, $granteeName, $inh);
@@ -48,7 +48,7 @@ END_OF_USAGE
     die $usage;
 }
 
-my $z = ZimbraSoapTest->new($user, $host, $pw);
+my $z = ZmailSoapTest->new($user, $host, $pw);
 $z->doStdAuth();
 
 my $d = new XmlDoc;

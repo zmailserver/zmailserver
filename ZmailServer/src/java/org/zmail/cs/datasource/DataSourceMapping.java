@@ -12,14 +12,14 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.datasource;
+package org.zmail.cs.datasource;
 
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.cs.account.DataSource;
-import com.zimbra.cs.db.DbDataSource;
-import com.zimbra.cs.db.DbDataSource.DataSourceItem;
-import com.zimbra.cs.mailbox.MailServiceException;
-import com.zimbra.cs.mailbox.Metadata;
+import org.zmail.common.service.ServiceException;
+import org.zmail.cs.account.DataSource;
+import org.zmail.cs.db.DbDataSource;
+import org.zmail.cs.db.DbDataSource.DataSourceItem;
+import org.zmail.cs.mailbox.MailServiceException;
+import org.zmail.cs.mailbox.Metadata;
 
 public class DataSourceMapping {
     protected DataSource ds;
@@ -70,7 +70,7 @@ public class DataSourceMapping {
     
     public int getItemFlags() throws ServiceException {
         if (dsi.itemFlags == -1) {
-            com.zimbra.cs.mailbox.Message localMsg =
+            org.zmail.cs.mailbox.Message localMsg =
                 DataSourceManager.getInstance().getMailbox(ds).getMessageById(null, dsi.itemId);
             dsi.itemFlags = localMsg.getFlagBitmask();
         }

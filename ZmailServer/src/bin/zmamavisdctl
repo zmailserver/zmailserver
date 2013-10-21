@@ -14,36 +14,36 @@
 # ***** END LICENSE BLOCK *****
 # 
 
-if [ x`whoami` != xzimbra ]; then
-  echo Error: must be run as zimbra user
+if [ x`whoami` != xzmail ]; then
+  echo Error: must be run as zmail user
   exit 1
 fi
 
-if [ ! -L "/opt/zimbra/amavisd" ]; then
+if [ ! -L "/opt/zmail/amavisd" ]; then
   exit 0
 fi
 
-export LD_LIBRARY_PATH=/opt/zimbra/openldap/lib:/opt/zimbra/openssl/lib:$LD_LIBRARY_PATH
+export LD_LIBRARY_PATH=/opt/zmail/openldap/lib:/opt/zmail/openssl/lib:$LD_LIBRARY_PATH
 
 source `dirname $0`/zmshutil || exit 1
 zmsetvars \
-  zimbra_home \
-  zimbra_log_directory
+  zmail_home \
+  zmail_log_directory
 
-platform=`/opt/zimbra/libexec/get_plat_tag.sh`
-pidfile=${zimbra_log_directory}/amavisd.pid
+platform=`/opt/zmail/libexec/get_plat_tag.sh`
+pidfile=${zmail_log_directory}/amavisd.pid
 
-if [ ! -d "/opt/zimbra/data/amavisd/.spamassassin" ]; then
-    mkdir -p /opt/zimbra/data/amavisd/.spamassassin
+if [ ! -d "/opt/zmail/data/amavisd/.spamassassin" ]; then
+    mkdir -p /opt/zmail/data/amavisd/.spamassassin
 fi
 
-if [ ! -d "/opt/zimbra/data/amavisd/db" ]; then
-    mkdir -p /opt/zimbra/data/amavisd/db
+if [ ! -d "/opt/zmail/data/amavisd/db" ]; then
+    mkdir -p /opt/zmail/data/amavisd/db
 fi
 
 rewriteconfig() {
-  /opt/zimbra/libexec/configrewrite amavis > /dev/null 2>&1
-  /opt/zimbra/libexec/zmaltermimeconfig > /dev/null 2>&1
+  /opt/zmail/libexec/configrewrite amavis > /dev/null 2>&1
+  /opt/zmail/libexec/zmaltermimeconfig > /dev/null 2>&1
 }
 
 checkrunning() {
@@ -54,7 +54,7 @@ checkrunning() {
   #  If no PID file or PID file is empty, then get PID from scanning the proc table.
   if [ "x$PID" = "x" ]; then
     # PID file is NULL.  Get info from proc table.
-    PID=`/bin/ps axo user,pid,ppid,command | awk '{ if ((($4 ~ /^amavisd$/) || ($4 ~ /^\/opt\/zimbra\/amavisd\/sbin\/amavisd$/)) && ($5 ~ /^\(master\)$/)) { print $2 } }'`
+    PID=`/bin/ps axo user,pid,ppid,command | awk '{ if ((($4 ~ /^amavisd$/) || ($4 ~ /^\/opt\/zmail\/amavisd\/sbin\/amavisd$/)) && ($5 ~ /^\(master\)$/)) { print $2 } }'`
   fi
   # If PID is still not set, then we cannot find any amavisd (master) process.  Assume amavisd is not running.
   if [ "x$PID" = "x" ]; then
@@ -64,11 +64,11 @@ checkrunning() {
 
   # If we get to this point the PID was defined in the PID file.  But we're not sure we trust it's validity
   # so we're going the verify it from /bin/ps output!
-  PID=`/bin/ps axo user,pid,ppid,command | awk '{ if (($2 == '$PID') && (($4 ~ /^amavisd$/) || ($4 ~ /^\/opt\/zimbra\/amavisd\/sbin\/amavisd$/)) && ($5 ~ /^\(master\)$/)) { print $2 } }'`
+  PID=`/bin/ps axo user,pid,ppid,command | awk '{ if (($2 == '$PID') && (($4 ~ /^amavisd$/) || ($4 ~ /^\/opt\/zmail\/amavisd\/sbin\/amavisd$/)) && ($5 ~ /^\(master\)$/)) { print $2 } }'`
   # If PID is NULL now, then the PID stored in the PID file was bogus!
   # Let's try to find the true amavisd (master) process ID
   if [ "x$PID" = "x" ]; then
-    PID=`/bin/ps axo user,pid,ppid,command | awk '{ if ((($4 ~ /^amavisd$/) || ($4 ~ /^\/opt\/zimbra\/amavisd\/sbin\/amavisd$/)) && ($5 ~ /^\(master\)$/)) { print $2 } }'`
+    PID=`/bin/ps axo user,pid,ppid,command | awk '{ if ((($4 ~ /^amavisd$/) || ($4 ~ /^\/opt\/zmail\/amavisd\/sbin\/amavisd$/)) && ($5 ~ /^\(master\)$/)) { print $2 } }'`
   fi
   # If the PID is still NULL now, it really must not be running.
   if [ "x$PID" = "x" ]; then
@@ -93,38 +93,38 @@ case "$1" in
       echo "amavisd is already running."
       exit 0
     else
-      if [ ! -d /opt/zimbra/data/amavisd/quarantine ]; then
-        mkdir /opt/zimbra/data/amavisd/quarantine
+      if [ ! -d /opt/zmail/data/amavisd/quarantine ]; then
+        mkdir /opt/zmail/data/amavisd/quarantine
       fi
-      if [ ! -d /opt/zimbra/data/amavisd/db ]; then
-        mkdir /opt/zimbra/data/amavisd/db
+      if [ ! -d /opt/zmail/data/amavisd/db ]; then
+        mkdir /opt/zmail/data/amavisd/db
       fi
-      if [ ! -f /opt/zimbra/data/amavisd/db/DB_CONFIG -o ! -s /opt/zimbra/data/amavisd/db/DB_CONFIG ]; then
-        if [ -f /opt/zimbra/conf/custom/amavisd/DB_CONFIG ]; then
-          cp -f /opt/zimbra/conf/custom/amavisd/DB_CONFIG /opt/zimbra/data/amavisd/db/DB_CONFIG
+      if [ ! -f /opt/zmail/data/amavisd/db/DB_CONFIG -o ! -s /opt/zmail/data/amavisd/db/DB_CONFIG ]; then
+        if [ -f /opt/zmail/conf/custom/amavisd/DB_CONFIG ]; then
+          cp -f /opt/zmail/conf/custom/amavisd/DB_CONFIG /opt/zmail/data/amavisd/db/DB_CONFIG
         else
-          cp -f /opt/zimbra/amavisd/DB_CONFIG.amavisd /opt/zimbra/data/amavisd/db/DB_CONFIG
+          cp -f /opt/zmail/amavisd/DB_CONFIG.amavisd /opt/zmail/data/amavisd/db/DB_CONFIG
         fi
       fi
-      if [ ! -d /opt/zimbra/data/amavisd/tmp ]; then
-        mkdir /opt/zimbra/data/amavisd/tmp
+      if [ ! -d /opt/zmail/data/amavisd/tmp ]; then
+        mkdir /opt/zmail/data/amavisd/tmp
       else 
-        find /opt/zimbra/data/amavisd/tmp -maxdepth 1 -type d -name 'amavis-*' -exec rm -rf {} \; > /dev/null 2>&1
+        find /opt/zmail/data/amavisd/tmp -maxdepth 1 -type d -name 'amavis-*' -exec rm -rf {} \; > /dev/null 2>&1
       fi
-      if [ ! -d /opt/zimbra/data/amavisd/var ]; then
-        mkdir /opt/zimbra/data/amavisd/var
+      if [ ! -d /opt/zmail/data/amavisd/var ]; then
+        mkdir /opt/zmail/data/amavisd/var
       fi
       if [ x$2 = "x" ]; then
         rewriteconfig
       fi
-      if [ ! -f ${zimbra_home}/data/amavisd/.spamassassin/bayes_toks ]; then
+      if [ ! -f ${zmail_home}/data/amavisd/.spamassassin/bayes_toks ]; then
         # Initial bayes seeding.
-        cp -f ${zimbra_home}/amavisd/.spamassassin/init/* \
-          ${zimbra_home}/data/amavisd/.spamassassin/
-        chmod 644 ${zimbra_home}/data/amavisd/.spamassassin/bayes*
+        cp -f ${zmail_home}/amavisd/.spamassassin/init/* \
+          ${zmail_home}/data/amavisd/.spamassassin/
+        chmod 644 ${zmail_home}/data/amavisd/.spamassassin/bayes*
       fi
-      ${zimbra_home}/amavisd/sbin/amavisd -c \
-        ${zimbra_home}/conf/amavisd.conf &
+      ${zmail_home}/amavisd/sbin/amavisd -c \
+        ${zmail_home}/conf/amavisd.conf &
       for ((i=0; i < 30; i++)); do
         checkrunning
         if [ $RUNNING = 1 ]; then 

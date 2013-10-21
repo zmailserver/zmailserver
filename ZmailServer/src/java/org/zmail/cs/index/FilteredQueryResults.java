@@ -12,16 +12,16 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.index;
+package org.zmail.cs.index;
 
 import java.io.IOException;
 import java.util.Comparator;
 import java.util.List;
 import java.util.Set;
 
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.cs.mailbox.Flag;
-import com.zimbra.cs.mailbox.MailItem;
+import org.zmail.common.service.ServiceException;
+import org.zmail.cs.mailbox.Flag;
+import org.zmail.cs.mailbox.MailItem;
 
 /**
  * Result set that does filtering.of the results.
@@ -32,8 +32,8 @@ import com.zimbra.cs.mailbox.MailItem;
  *  <li>Supports cursor filtering for proxied hits
  * </ul>
  */
-public final class FilteredQueryResults implements ZimbraQueryResults {
-    private final ZimbraQueryResults results;
+public final class FilteredQueryResults implements ZmailQueryResults {
+    private final ZmailQueryResults results;
     private final SearchParams searchParams;
 
     private boolean filterTagDeleted = false;
@@ -41,12 +41,12 @@ public final class FilteredQueryResults implements ZimbraQueryResults {
     private Set<TaskHit.Status> allowedTaskStatuses = null;
 
     //enable cursor filtering for remote Contact sorting!!
-    private ZimbraHit firstHit = null;
-    private ZimbraHit endHit = null;
-    private Comparator<ZimbraHit> comp = null;
+    private ZmailHit firstHit = null;
+    private ZmailHit endHit = null;
+    private Comparator<ZmailHit> comp = null;
 
 
-    FilteredQueryResults(ZimbraQueryResults other, SearchParams params) {
+    FilteredQueryResults(ZmailQueryResults other, SearchParams params) {
         results = other;
         searchParams = params;
 
@@ -118,7 +118,7 @@ public final class FilteredQueryResults implements ZimbraQueryResults {
     }
 
     @Override
-    public ZimbraHit skipToHit(int hitNo) throws ServiceException {
+    public ZmailHit skipToHit(int hitNo) throws ServiceException {
         resetIterator();
         for (int i = 0; i < hitNo; i++) {
             if (!hasNext()) {
@@ -130,8 +130,8 @@ public final class FilteredQueryResults implements ZimbraQueryResults {
     }
 
     @Override
-    public ZimbraHit getNext() throws ServiceException {
-        ZimbraHit toRet = peekNext();
+    public ZmailHit getNext() throws ServiceException {
+        ZmailHit toRet = peekNext();
         if (toRet != null) {
             results.getNext(); // skip the current hit
         }
@@ -152,7 +152,7 @@ public final class FilteredQueryResults implements ZimbraQueryResults {
      * @return TRUE if the passed-in hit should be filtered (removed) from
      * the result set
      */
-    private boolean shouldFilter(ZimbraHit hit) throws ServiceException {
+    private boolean shouldFilter(ZmailHit hit) throws ServiceException {
         if (allowedTaskStatuses != null) {
             if (hit instanceof TaskHit) {
                 if (!allowedTaskStatuses.contains(((TaskHit)hit).getStatus())) {
@@ -189,8 +189,8 @@ public final class FilteredQueryResults implements ZimbraQueryResults {
 
 
     @Override
-    public ZimbraHit peekNext() throws ServiceException {
-        ZimbraHit cur = results.peekNext();
+    public ZmailHit peekNext() throws ServiceException {
+        ZmailHit cur = results.peekNext();
         while (cur != null) {
             boolean filterThisHit = false;
             if (cur instanceof ConversationHit) {

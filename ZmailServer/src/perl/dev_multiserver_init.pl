@@ -37,7 +37,7 @@ You must run this script on the 'primary' server (the one that LDAP will be runn
 
   Optional:
      PRIMARY_HOSTNAME - hostname of the 'primary' server (defaults to `hostname`)
-     REMOTE_JAVA_HOME - on the 'secondary' server, the path to JAVA (defaults to '/opt/zimbra/java')
+     REMOTE_JAVA_HOME - on the 'secondary' server, the path to JAVA (defaults to '/opt/zmail/java')
      ENABLE_IM - if set, enable IM on both boxes (defaults to no)
 
 
@@ -52,7 +52,7 @@ This script does the following things:
   4) create test users: "secondary[1-3]\@DOMAIN" where DOMAIN is derived from the PRIMARY_HOSTNAME
   5) configure SSH keys for admin console, so that it can be used properly
   6) optionally enable IM on both servers
-  7) start the zimbra services
+  7) start the zmail services
 
 END_OF_USAGE
   die $usage;
@@ -67,7 +67,7 @@ if (!defined $PRIMARY) {
 }
 if (!defined $REMOTE_JAVA_HOME) {
   #/usr/lib/jvm/java-1.5.0-sun/
-  $REMOTE_JAVA_HOME = "/opt/zimbra/java";
+  $REMOTE_JAVA_HOME = "/opt/zmail/java";
 }
 if (!defined $PRIMARY || !defined $SECONDARY || !defined $REMOTE_USER || !defined $REMOTE_JAVA_HOME) {
   usage();
@@ -94,7 +94,7 @@ sub loc($) {
 sub remote($) {
   my $cmd = shift();
   print "REMOTE: $cmd\n";
-  $cmd = "ssh $SECONDARY PATH=\$PATH:~/bin:/usr/local/bin:/opt/zimbra/bin:/opt/zimbra/openldap/bin:/opt/zimbra/java/bin:/opt/zimbra/snmp/bin:/bin:/sbin:/usr/bin:/usr/sbin LD_LIBRARY_PATH=/opt/zimbra/lib: ZIMBRA_HOME=/opt/zimbra ZIMBRA_HOSTNAME=$SECONDARY JAVA_HOME=$REMOTE_JAVA_HOME ZIMBRA_USE_JETTY=1 $cmd";
+  $cmd = "ssh $SECONDARY PATH=\$PATH:~/bin:/usr/local/bin:/opt/zmail/bin:/opt/zmail/openldap/bin:/opt/zmail/java/bin:/opt/zmail/snmp/bin:/bin:/sbin:/usr/bin:/usr/sbin LD_LIBRARY_PATH=/opt/zmail/lib: ZIMBRA_HOME=/opt/zmail ZIMBRA_HOSTNAME=$SECONDARY JAVA_HOME=$REMOTE_JAVA_HOME ZIMBRA_USE_JETTY=1 $cmd";
   my $ret = `$cmd`;
   print $ret;
   return $ret;
@@ -118,51 +118,51 @@ remote "zmlocalconfig -e ldap_is_master=false";
 print "About to start ldap locally - if you get a password prompt, it's because the 'ldap start' script is trying to sudo -- add yourself to sudoers, or type your password\n";
 loc "ldap start";
 loc "zmprov -l cs $SECONDARY";
-loc "zmprov -l ms $SECONDARY +zimbraServiceInstalled mailbox +zimbraServiceEnabled mailbox";
-loc "zmprov -l ms $SECONDARY zimbraMailMode http zimbraMailPort 7070 zimbraSmtpHostname $PRIMARY";
+loc "zmprov -l ms $SECONDARY +zmailServiceInstalled mailbox +zmailServiceEnabled mailbox";
+loc "zmprov -l ms $SECONDARY zmailMailMode http zmailMailPort 7070 zmailSmtpHostname $PRIMARY";
 
 #7) Add the new server account to the pool of mail servers.  This is necessary so you can create mailboxes on either server.
 my $prim_zid = "UNKNOWN";
-if (loc("zmprov -l gs $PRIMARY zimbraid") =~ /zimbraId:\s([0-9a-f\-]+)/) {
+if (loc("zmprov -l gs $PRIMARY zmailid") =~ /zmailId:\s([0-9a-f\-]+)/) {
   $prim_zid = $1;
 }
-print "Primary ZimbraID is $prim_zid\n";
+print "Primary ZmailID is $prim_zid\n";
 
 my $sec_zid = "UNKNOWN";
-if (loc("zmprov -l gs $SECONDARY zimbraid") =~ /zimbraId:\s([0-9a-f\-]+)/) {
+if (loc("zmprov -l gs $SECONDARY zmailid") =~ /zmailId:\s([0-9a-f\-]+)/) {
   $sec_zid = $1;
 }
-print "Secondary ZimbraID is $sec_zid\n";
+print "Secondary ZmailID is $sec_zid\n";
 
-loc "zmprov -l mc default zimbraMailHostPool $prim_zid zimbraMailHostPool $sec_zid";
+loc "zmprov -l mc default zmailMailHostPool $prim_zid zmailMailHostPool $sec_zid";
 
 #9) OPTIONAL: Set up SSH keys so remote admin/management will work.  This is necessary to make some parts of the admin console work, and probably in other places too.
-loc "zmlocalconfig -e zimbra_user=$REMOTE_USER";
-remote "zmlocalconfig -e zimbra_user=$REMOTE_USER";
+loc "zmlocalconfig -e zmail_user=$REMOTE_USER";
+remote "zmlocalconfig -e zmail_user=$REMOTE_USER";
 
-loc "/opt/zimbra/bin/zmupdateauthkeys";
-remote "/opt/zimbra/bin/zmupdateauthkeys";
+loc "/opt/zmail/bin/zmupdateauthkeys";
+remote "/opt/zmail/bin/zmupdateauthkeys";
 
-loc "zmprov -l ms $PRIMARY zimbraRemoteManagementUser $REMOTE_USER";
-loc "zmprov -l ms $SECONDARY zimbraRemoteManagementUser $REMOTE_USER";
+loc "zmprov -l ms $PRIMARY zmailRemoteManagementUser $REMOTE_USER";
+loc "zmprov -l ms $SECONDARY zmailRemoteManagementUser $REMOTE_USER";
 
 if (defined($ENABLE_IM)) {
-  both "zmprov -l mcf zimbraXMPPEnabled TRUE";
-  both "zmprov -l mc default zimbraFeatureIMEnabled TRUE";
-  both "zmprov -l mc default zimbraFeatureInstantNotify TRUE";
+  both "zmprov -l mcf zmailXMPPEnabled TRUE";
+  both "zmprov -l mc default zmailFeatureIMEnabled TRUE";
+  both "zmprov -l mc default zmailFeatureInstantNotify TRUE";
 }
 
-loc "mkdir /tmp/zimbra";
+loc "mkdir /tmp/zmail";
 loc "mysql.server start";
-remote "mkdir /tmp/zimbra";
+remote "mkdir /tmp/zmail";
 remote "mysql.server start";
 
 loc "jetty start";
 remote "jetty start";
 
-loc "zmprov ca secondary1\@$PRIMARY test123 displayName \"Seocndary One\" zimbraMailHost $SECONDARY";
-loc "zmprov ca secondary2\@$PRIMARY test123 displayName \"Seocndary Two\" zimbraMailHost $SECONDARY";
-loc "zmprov ca secondary3\@$PRIMARY test123 displayName \"Seocndary Three\" zimbraMailHost $SECONDARY";
+loc "zmprov ca secondary1\@$PRIMARY test123 displayName \"Seocndary One\" zmailMailHost $SECONDARY";
+loc "zmprov ca secondary2\@$PRIMARY test123 displayName \"Seocndary Two\" zmailMailHost $SECONDARY";
+loc "zmprov ca secondary3\@$PRIMARY test123 displayName \"Seocndary Three\" zmailMailHost $SECONDARY";
 
 
 

@@ -13,7 +13,7 @@
  * ***** END LICENSE BLOCK *****
  */
 
-package com.zimbra.cs.mime;
+package org.zmail.cs.mime;
 
 import java.io.File;
 import java.io.IOException;
@@ -29,11 +29,11 @@ import javax.mail.internet.MimeMessage;
 
 import com.google.common.collect.HashMultimap;
 import com.google.common.collect.Multimap;
-import com.zimbra.common.localconfig.LC;
-import com.zimbra.common.util.ByteUtil;
-import com.zimbra.common.util.FileUtil;
-import com.zimbra.common.util.Log;
-import com.zimbra.common.util.LogFactory;
+import org.zmail.common.localconfig.LC;
+import org.zmail.common.util.ByteUtil;
+import org.zmail.common.util.FileUtil;
+import org.zmail.common.util.Log;
+import org.zmail.common.util.LogFactory;
 
 public class TnefFileCache {
 
@@ -67,7 +67,7 @@ public class TnefFileCache {
     public synchronized static void startup()
     throws IOException {
         if (sInstance == null) {
-            File cacheDir = new File(LC.zimbra_tmp_directory.value() + File.separator + "tnef");
+            File cacheDir = new File(LC.zmail_tmp_directory.value() + File.separator + "tnef");
             sLog.debug("Initializing TNEF cache in %s", cacheDir);
             FileUtil.deleteDir(cacheDir);
             FileUtil.ensureDirExists(cacheDir);

@@ -12,21 +12,21 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.dav.caldav;
+package org.zmail.cs.dav.caldav;
 
 import java.util.Iterator;
 
-import com.zimbra.common.account.Key.AccountBy;
-import com.zimbra.common.calendar.ZCalendar.ICalTok;
-import com.zimbra.common.calendar.ZCalendar.ZComponent;
-import com.zimbra.common.calendar.ZCalendar.ZProperty;
-import com.zimbra.common.calendar.ZCalendar.ZVCalendar;
-import com.zimbra.common.localconfig.DebugConfig;
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.common.util.ZimbraLog;
-import com.zimbra.cs.account.Account;
-import com.zimbra.cs.account.Provisioning;
-import com.zimbra.cs.util.AccountUtil.AccountAddressMatcher;
+import org.zmail.common.account.Key.AccountBy;
+import org.zmail.common.calendar.ZCalendar.ICalTok;
+import org.zmail.common.calendar.ZCalendar.ZComponent;
+import org.zmail.common.calendar.ZCalendar.ZProperty;
+import org.zmail.common.calendar.ZCalendar.ZVCalendar;
+import org.zmail.common.localconfig.DebugConfig;
+import org.zmail.common.service.ServiceException;
+import org.zmail.common.util.ZmailLog;
+import org.zmail.cs.account.Account;
+import org.zmail.cs.account.Provisioning;
+import org.zmail.cs.util.AccountUtil.AccountAddressMatcher;
 
 public class CalDavUtils {
 
@@ -48,7 +48,7 @@ public class CalDavUtils {
                         }
                     } catch (ServiceException e) {
                         // ignore
-                        ZimbraLog.dav.warn("could not get the account matcher for " + address, e);
+                        ZmailLog.dav.warn("could not get the account matcher for " + address, e);
                     }
                 }
                 for (Iterator<ZProperty> propIter = comp.getPropertyIterator(); propIter.hasNext(); ) {
@@ -64,7 +64,7 @@ public class CalDavUtils {
                                 }
                             } catch (ServiceException e) {
                                 // ignore
-                                ZimbraLog.dav.warn("exception while matching the attendee address " + att, e);
+                                ZmailLog.dav.warn("exception while matching the attendee address " + att, e);
                             }
                         } else {
                             // We haven't seen this case occur, but just in case.

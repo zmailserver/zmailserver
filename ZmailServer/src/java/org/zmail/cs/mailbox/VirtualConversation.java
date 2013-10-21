@@ -12,16 +12,16 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.mailbox;
+package org.zmail.cs.mailbox;
 
 import java.util.Collections;
 import java.util.List;
 
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.cs.db.DbMailItem;
-import com.zimbra.cs.index.SortBy;
-import com.zimbra.cs.mailbox.MailItem.CustomMetadata.CustomMetadataList;
-import com.zimbra.cs.session.PendingModifications.Change;
+import org.zmail.common.service.ServiceException;
+import org.zmail.cs.db.DbMailItem;
+import org.zmail.cs.index.SortBy;
+import org.zmail.cs.mailbox.MailItem.CustomMetadata.CustomMetadataList;
+import org.zmail.cs.session.PendingModifications.Change;
 
 /**
  * @since Jun 14, 2005

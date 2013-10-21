@@ -13,7 +13,7 @@
  * ***** END LICENSE BLOCK *****
  */
 
-package com.zimbra.cs.account.auth;
+package org.zmail.cs.account.auth;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -22,52 +22,52 @@ import java.util.StringTokenizer;
 
 import javax.security.auth.login.LoginException;
 
-import com.zimbra.cs.account.Account;
-import com.zimbra.cs.account.AccountServiceException.AuthFailedServiceException;
-import com.zimbra.cs.account.Domain;
-import com.zimbra.cs.account.Provisioning;
-import com.zimbra.cs.account.krb5.Krb5Login;
-import com.zimbra.cs.account.krb5.Krb5Principal;
-import com.zimbra.cs.account.ldap.LdapProv;
-import com.zimbra.cs.account.ldap.entry.LdapEntry;
-import com.zimbra.cs.account.auth.AuthContext;
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.common.util.StringUtil;
-import com.zimbra.common.util.ZimbraLog;
+import org.zmail.cs.account.Account;
+import org.zmail.cs.account.AccountServiceException.AuthFailedServiceException;
+import org.zmail.cs.account.Domain;
+import org.zmail.cs.account.Provisioning;
+import org.zmail.cs.account.krb5.Krb5Login;
+import org.zmail.cs.account.krb5.Krb5Principal;
+import org.zmail.cs.account.ldap.LdapProv;
+import org.zmail.cs.account.ldap.entry.LdapEntry;
+import org.zmail.cs.account.auth.AuthContext;
+import org.zmail.common.service.ServiceException;
+import org.zmail.common.util.StringUtil;
+import org.zmail.common.util.ZmailLog;
 
 public abstract class AuthMechanism {
     
     public static enum AuthMech {
         /**
-         * zimbraAuthMech type of "zimbra" means our own (use userPassword)
+         * zmailAuthMech type of "zmail" means our own (use userPassword)
          */
-        zimbra,
+        zmail,
         
         /**
-         * zimbraAuthMech type of "ldap" means use configured LDAP attrs
-         * (zimbraAuthLdapURL, zimbraAuthLdapBindDn)
+         * zmailAuthMech type of "ldap" means use configured LDAP attrs
+         * (zmailAuthLdapURL, zmailAuthLdapBindDn)
          */
         ldap,
         
         /**
-         * zimbraAuthMech type of "ad" means use configured LDAP attrs
-         * (zimbraAuthLdapURL, zimbraAuthLdapBindDn) for use with ActiveDirectory
+         * zmailAuthMech type of "ad" means use configured LDAP attrs
+         * (zmailAuthLdapURL, zmailAuthLdapBindDn) for use with ActiveDirectory
          */
         ad,
         
         /**
-         * zimbraAuthMech type of "kerberos5" means use kerberos5 authentication.
+         * zmailAuthMech type of "kerberos5" means use kerberos5 authentication.
          * The principal can be obtained by, either:
-         * (1) {email-local-part}@{domain-attr-zimbraAuthKerberos5Realm}
+         * (1) {email-local-part}@{domain-attr-zmailAuthKerberos5Realm}
          * or
-         * (2) {principal-name} if account zimbraForeignPrincipal is in the format of
+         * (2) {principal-name} if account zmailForeignPrincipal is in the format of
          *     kerberos5:{principal-name}
          */
         kerberos5,
         
         /**
-         * zimbraAuthMech type of "custom:{handler}" means use registered extension
-         * of ZimbraCustomAuth.authenticate() method
+         * zmailAuthMech type of "custom:{handler}" means use registered extension
+         * of ZmailCustomAuth.authenticate() method
          * see customauth.txt
          */
         custom;
@@ -93,9 +93,9 @@ public abstract class AuthMechanism {
     
     public static AuthMechanism newInstance(Account acct, Map<String, Object> context) 
     throws ServiceException {
-        String authMechStr = AuthMech.zimbra.name();
+        String authMechStr = AuthMech.zmail.name();
         
-        // bypass domain AuthMech and always use Zimbra auth for external virtual accounts 
+        // bypass domain AuthMech and always use Zmail auth for external virtual accounts 
         
         if (!acct.isIsExternalVirtualAccount()) {
             Provisioning prov = Provisioning.getInstance();
@@ -108,7 +108,7 @@ public abstract class AuthMechanism {
                 if (asAdmin != null && asAdmin) {
                     am = domain.getAuthMechAdmin();
                     if (am == null) {
-                        // fallback to zimbraAuthMech if zimbraAuthMechAdmin is not specified
+                        // fallback to zmailAuthMech if zmailAuthMechAdmin is not specified
                         am = domain.getAuthMech();
                     }
                 } else {
@@ -129,8 +129,8 @@ public abstract class AuthMechanism {
                 AuthMech authMech = AuthMech.fromString(authMechStr);
                 
                 switch (authMech) {
-                    case zimbra:
-                        return new ZimbraAuth(authMech);
+                    case zmail:
+                        return new ZmailAuth(authMech);
                     case ldap:
                     case ad:
                         return new LdapAuth(authMech);
@@ -138,24 +138,24 @@ public abstract class AuthMechanism {
                         return new Kerberos5Auth(authMech);
                 }
             } catch (ServiceException e) {
-                ZimbraLog.account.warn("invalid auth mech", e);
+                ZmailLog.account.warn("invalid auth mech", e);
             }
             
-            ZimbraLog.account.warn("unknown value for " + Provisioning.A_zimbraAuthMech+": " 
+            ZmailLog.account.warn("unknown value for " + Provisioning.A_zmailAuthMech+": " 
                     + authMechStr+", falling back to default mech");
-            return new ZimbraAuth(AuthMech.zimbra);
+            return new ZmailAuth(AuthMech.zmail);
         }
 
     }
     
-    public static void doZimbraAuth(LdapProv prov, Domain domain, Account acct, String password, 
+    public static void doZmailAuth(LdapProv prov, Domain domain, Account acct, String password, 
             Map<String, Object> authCtxt) 
     throws ServiceException {
-        ZimbraAuth zimbraAuth = new ZimbraAuth(AuthMech.zimbra);
-        zimbraAuth.doAuth(prov, domain, acct, password, authCtxt);
+        ZmailAuth zmailAuth = new ZmailAuth(AuthMech.zmail);
+        zmailAuth.doAuth(prov, domain, acct, password, authCtxt);
     }
 
-    public boolean isZimbraAuth() {
+    public boolean isZmailAuth() {
         return false;
     }
     
@@ -181,14 +181,14 @@ public abstract class AuthMechanism {
     }
     
     /*
-     * ZimbraAuth 
+     * ZmailAuth 
      */
-    public static class ZimbraAuth extends AuthMechanism {
-        ZimbraAuth(AuthMech authMech) {
+    public static class ZmailAuth extends AuthMechanism {
+        ZmailAuth(AuthMech authMech) {
             super(authMech);
         }
         
-        public boolean isZimbraAuth() {
+        public boolean isZmailAuth() {
             return true;
         }
         
@@ -210,8 +210,8 @@ public abstract class AuthMechanism {
                             namePassedIn(authCtxt), "invalid password"); 
                 }
             } else if (acct instanceof LdapEntry) {
-                // not SSHA, authenticate to Zimbra LDAP
-                prov.zimbraLdapAuthenticate(acct, password, authCtxt);
+                // not SSHA, authenticate to Zmail LDAP
+                prov.zmailLdapAuthenticate(acct, password, authCtxt);
                 return;  // good password, RETURN   
             }
             throw AuthFailedServiceException.AUTH_FAILED(acct.getName(), namePassedIn(authCtxt));       
@@ -275,10 +275,10 @@ public abstract class AuthMechanism {
      * CustomAuth
      */
     static class CustomAuth extends AuthMechanism {
-        private String authMechStr;  // value of the zimbraAuthMech attribute
+        private String authMechStr;  // value of the zmailAuthMech attribute
         
         private String mHandlerName = ""; 
-        private ZimbraCustomAuth mHandler;
+        private ZmailCustomAuth mHandler;
         List<String> mArgs;
         
         CustomAuth(AuthMech authMech, String authMechStr) {
@@ -313,17 +313,17 @@ public abstract class AuthMechanism {
                 }
                 
                 if (!StringUtil.isNullOrEmpty(mHandlerName))
-                    mHandler = ZimbraCustomAuth.getHandler(mHandlerName);
+                    mHandler = ZmailCustomAuth.getHandler(mHandlerName);
             }
             
-            if (ZimbraLog.account.isDebugEnabled()) {
+            if (ZmailLog.account.isDebugEnabled()) {
                 StringBuffer sb = null;
                 if (mArgs != null) {
                     sb = new StringBuffer();
                     for (String s : mArgs)
                         sb.append("[" + s + "] ");
                 }
-                ZimbraLog.account.debug("CustomAuth: handlerName=" + mHandlerName + ", args=" + sb);
+                ZmailLog.account.debug("CustomAuth: handlerName=" + mHandlerName + ", args=" + sb);
             }
         }
         

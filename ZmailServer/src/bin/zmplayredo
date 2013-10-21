@@ -16,12 +16,12 @@
 
 source `dirname $0`/zmshutil || exit 1
 zmsetvars \
-	zimbra_home \
-	zimbra_log_directory
+	zmail_home \
+	zmail_log_directory
 
 u=`id -un`
-if [ $u != ${zimbra_user} ]; then
-    echo "Error: must be run as ${zimbra_user} user"
+if [ $u != ${zmail_user} ]; then
+    echo "Error: must be run as ${zmail_user} user"
     exit 1
 fi
 
@@ -38,7 +38,7 @@ for opt in $@; do
     fi
 done
 
-ropid=${zimbra_log_directory}/zmplayredo.pid
+ropid=${zmail_log_directory}/zmplayredo.pid
 
 if [ $opth -eq 0 ]; then
     if isrunning; then
@@ -52,19 +52,19 @@ if [ $opth -eq 0 ]; then
     fi
 fi
 
-if [ -d ${zimbra_java_home}/jre ]; then
-    JRE_EXT_DIR=${zimbra_java_home}/jre/lib/ext
+if [ -d ${zmail_java_home}/jre ]; then
+    JRE_EXT_DIR=${zmail_java_home}/jre/lib/ext
 else
     JRE_EXT_DIR=/System/Library/Frameworks/JavaVM.framework/Versions/CurrentJDK/Home/lib/ext
-    #JRE_EXT_DIR=${zimbra_java_home}/lib/ext
+    #JRE_EXT_DIR=${zmail_java_home}/lib/ext
 fi
 
-jardirs=${JRE_EXT_DIR}:${zimbra_home}/mailboxd/lib:${zimbra_home}/mailboxd/common/lib:${zimbra_home}/lib/jars
-if [ -e ${zimbra_home}/lib/ext-common ]; then
-    jardirs=${jardirs}:${zimbra_home}/lib/ext-common
+jardirs=${JRE_EXT_DIR}:${zmail_home}/mailboxd/lib:${zmail_home}/mailboxd/common/lib:${zmail_home}/lib/jars
+if [ -e ${zmail_home}/lib/ext-common ]; then
+    jardirs=${jardirs}:${zmail_home}/lib/ext-common
 fi
-for jd in `find ${zimbra_home}/lib/ext -type d` ; do
-    if [ ${jd} != ${zimbra_home}/lib/ext ]; then
+for jd in `find ${zmail_home}/lib/ext -type d` ; do
+    if [ ${jd} != ${zmail_home}/lib/ext ]; then
         jardirs="${jardirs}:${jd}"
     fi
 done
@@ -77,9 +77,9 @@ if [ -n "$jm" ] ; then
     xms_xmx_options="-Xms${jm}m -Xmx${jm}m"
 fi
 
-java_version=$(${zimbra_java_home}/bin/java -version 2>&1 | grep "java version" | sed -e 's/"//g' | awk '{print $NF}' | awk -F_ '{print $1}')
+java_version=$(${zmail_java_home}/bin/java -version 2>&1 | grep "java version" | sed -e 's/"//g' | awk '{print $NF}' | awk -F_ '{print $1}')
 if [ x"$java_version" = "x1.6.0" ]; then
-  java_options="-XX:ErrorFile=${zimbra_home}/log"
+  java_options="-XX:ErrorFile=${zmail_home}/log"
 else
   java_options=""
 fi
@@ -97,13 +97,13 @@ for opt in $mailboxd_java_options ; do
 done
 
 echo $$ > $ropid
-${zimbra_java_home}/bin/java \
+${zmail_java_home}/bin/java \
     ${java_options} \
     ${xms_xmx_options} ${sanitized_options} \
-    -Dzimbra.config=${zimbra_home}/conf/localconfig.xml \
-    -Djava.library.path=${zimbra_home}/lib \
+    -Dzmail.config=${zmail_home}/conf/localconfig.xml \
+    -Djava.library.path=${zmail_home}/lib \
     -Djava.ext.dirs=${jardirs} \
-    com.zimbra.cs.redolog.util.PlaybackUtil "$@"
+    org.zmail.cs.redolog.util.PlaybackUtil "$@"
 rc=$?
 rm -f $ropid
 exit $rc

@@ -12,7 +12,7 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.index.analysis;
+package org.zmail.cs.index.analysis;
 
 import java.io.IOException;
 import java.io.Reader;
@@ -28,7 +28,7 @@ import org.apache.lucene.analysis.tokenattributes.CharTermAttribute;
 import org.apache.lucene.analysis.tokenattributes.TypeAttribute;
 
 import com.google.common.base.CharMatcher;
-import com.zimbra.cs.index.LuceneIndex;
+import org.zmail.cs.index.LuceneIndex;
 
 /**
  * Hybrid {@link Analyzer} of {@code StandardAnalyzer} and {@code CJKAnalyzer}.

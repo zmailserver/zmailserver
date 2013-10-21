@@ -14,8 +14,8 @@
 # ***** END LICENSE BLOCK *****
 # 
 
-if [ x`whoami` != "xzimbra" ]; then
-  echo "Error: must be run as user zimbra"
+if [ x`whoami` != "xzmail" ]; then
+  echo "Error: must be run as user zmail"
   exit 1
 fi
 
@@ -31,14 +31,14 @@ zmsetvars -f
 #
 # Sanity checks
 #
-zmassert -x ${zimbra_home}/libexec/zmmycnf
-zmassert -x ${zimbra_home}/bin/mysqladmin
-zmassert -x ${zimbra_home}/bin/mysql
-zmassert -x ${zimbra_home}/bin/zmlocalconfig
-zmassert -x ${zimbra_home}/bin/zmmypasswd
+zmassert -x ${zmail_home}/libexec/zmmycnf
+zmassert -x ${zmail_home}/bin/mysqladmin
+zmassert -x ${zmail_home}/bin/mysql
+zmassert -x ${zmail_home}/bin/zmlocalconfig
+zmassert -x ${zmail_home}/bin/zmmypasswd
 zmassert -x ${mysql_directory}/scripts/mysql_install_db
-zmassert -r ${zimbra_db_directory}/db.sql
-zmassert -r ${zimbra_db_directory}/versions-init.sql
+zmassert -r ${zmail_db_directory}/db.sql
+zmassert -r ${zmail_db_directory}/versions-init.sql
 
 for opt in "$@"; do
   case "$opt" in
@@ -80,16 +80,16 @@ fi
 #
 echo '*' Creating required directories
 mkdir -p ${mysql_data_directory}
-mkdir -p ${zimbra_index_directory}
-mkdir -p ${zimbra_store_directory}
-mkdir -p ${zimbra_log_directory}
+mkdir -p ${zmail_index_directory}
+mkdir -p ${zmail_store_directory}
+mkdir -p ${zmail_log_directory}
 
 #
 # Generate a mysql config file
 #
 echo '*' Generating mysql config ${mysql_mycnf}
 rm -f ${mysql_mycnf}
-${zimbra_home}/libexec/zmmycnf --innodb-buffer-pool-memory-percent \
+${zmail_home}/libexec/zmmycnf --innodb-buffer-pool-memory-percent \
   $mysql_memory_percent > ${mysql_mycnf}
 
 #
@@ -98,17 +98,17 @@ ${zimbra_home}/libexec/zmmycnf --innodb-buffer-pool-memory-percent \
 echo '*' Creating database in ${mysql_data_directory}
 (cd ${mysql_directory}; ./scripts/mysql_install_db \
     --defaults-file=${mysql_mycnf}) \
-    >> ${zimbra_log_directory}/zmmyinit.log 2>&1
+    >> ${zmail_log_directory}/zmmyinit.log 2>&1
 
 #
 # Start mysql server
 #
 echo '*' Starting mysql server
-${zimbra_home}/bin/mysql.server start \
-    >> ${zimbra_log_directory}/zmmyinit.log 2>&1
+${zmail_home}/bin/mysql.server start \
+    >> ${zmail_log_directory}/zmmyinit.log 2>&1
 
 # make sure we can connect before continuing 
-until `echo "show processlist" | ${zimbra_home}/bin/mysql -u root --password= > /dev/null 2>&1`; do
+until `echo "show processlist" | ${zmail_home}/bin/mysql -u root --password= > /dev/null 2>&1`; do
   let i++
   sleep 5
   if [ $i -gt 25 ]; then
@@ -120,58 +120,58 @@ until `echo "show processlist" | ${zimbra_home}/bin/mysql -u root --password= > 
 done
 
 #
-# Load zimbra sql files
+# Load zmail sql files
 #
-echo '*' Loading schema ${zimbra_db_directory}/db.sql 
-${zimbra_home}/bin/mysql -u root --password= < \
-    ${zimbra_db_directory}/db.sql
+echo '*' Loading schema ${zmail_db_directory}/db.sql 
+${zmail_home}/bin/mysql -u root --password= < \
+    ${zmail_db_directory}/db.sql
 
-if [ -f "${zimbra_db_directory}/create_sharing_database.sql" ];then
-  echo '*' Loading schema ${zimbra_db_directory}/create_sharing_database.sql 
-  ${zimbra_home}/bin/mysql -u root --password= < \
-      ${zimbra_db_directory}/create_sharing_database.sql
+if [ -f "${zmail_db_directory}/create_sharing_database.sql" ];then
+  echo '*' Loading schema ${zmail_db_directory}/create_sharing_database.sql 
+  ${zmail_home}/bin/mysql -u root --password= < \
+      ${zmail_db_directory}/create_sharing_database.sql
 fi
 
-echo '*' Loading version from ${zimbra_db_directory}/versions-init.sql
-${zimbra_home}/bin/mysql -u root --password= < \
-    ${zimbra_db_directory}/versions-init.sql
+echo '*' Loading version from ${zmail_db_directory}/versions-init.sql
+${zmail_home}/bin/mysql -u root --password= < \
+    ${zmail_db_directory}/versions-init.sql
 
-if [ -f "${zimbra_db_directory}/backup-version-init.sql" ]; then
-  echo '*' Loading version from ${zimbra_db_directory}/backup-version-init.sql
-  ${zimbra_home}/bin/mysql -u root --password= < \
-    ${zimbra_db_directory}/backup-version-init.sql
+if [ -f "${zmail_db_directory}/backup-version-init.sql" ]; then
+  echo '*' Loading version from ${zmail_db_directory}/backup-version-init.sql
+  ${zmail_home}/bin/mysql -u root --password= < \
+    ${zmail_db_directory}/backup-version-init.sql
 fi
 
 #
 # Delete wildcard user login entries
 #
-${zimbra_home}/bin/mysql -u root --password= -e "DROP USER ''@'localhost'; DROP USER ''@'`hostname`';"
+${zmail_home}/bin/mysql -u root --password= -e "DROP USER ''@'localhost'; DROP USER ''@'`hostname`';"
 
 #
 # Generate passwords for mysql into local config
 #
 if [ x$sql_root_pw = "x" ]; then
-    echo '*' Setting random passwd for mysql root user in zimbra localconfig
-    ${zimbra_home}/bin/zmlocalconfig -r -f -e mysql_root_password
+    echo '*' Setting random passwd for mysql root user in zmail localconfig
+    ${zmail_home}/bin/zmlocalconfig -r -f -e mysql_root_password
     
-    echo '*' Setting random passwd for mysql zimbra user in zimbra localconfig
-    ${zimbra_home}/bin/zmlocalconfig -r -f -e zimbra_mysql_password
+    echo '*' Setting random passwd for mysql zmail user in zmail localconfig
+    ${zmail_home}/bin/zmlocalconfig -r -f -e zmail_mysql_password
 else
-    echo '*' Setting passwd for mysql root user in zimbra localconfig
-    ${zimbra_home}/bin/zmlocalconfig -f -e mysql_root_password=$sql_root_pw
-    echo '*' Setting passwd for mysql zimbra user in zimbra localconfig
-    ${zimbra_home}/bin/zmlocalconfig -f -e zimbra_mysql_password=$sql_root_pw
+    echo '*' Setting passwd for mysql root user in zmail localconfig
+    ${zmail_home}/bin/zmlocalconfig -f -e mysql_root_password=$sql_root_pw
+    echo '*' Setting passwd for mysql zmail user in zmail localconfig
+    ${zmail_home}/bin/zmlocalconfig -f -e zmail_mysql_password=$sql_root_pw
 fi
 
 #
 # Change mysql root user password, but first read back the passwords 
-# zimbra local config - they was generated above.  Note that we can not
+# zmail local config - they was generated above.  Note that we can not
 # use 'zmmypasswd --root' here because of bootstrapping problems - at
 # this stage we know that the root password is empty.
 #
-zmsetvars -f mysql_root_password zimbra_mysql_password
+zmsetvars -f mysql_root_password zmail_mysql_password
 echo '*' Changing mysql root user password
-cat <<EOF | ${zimbra_home}/bin/mysql -u root --password=
+cat <<EOF | ${zmail_home}/bin/mysql -u root --password=
     SET PASSWORD FOR 'root'@'localhost' = PASSWORD('${mysql_root_password}');
     SET PASSWORD FOR 'root'@'`hostname`' = PASSWORD('${mysql_root_password}');
     SET PASSWORD FOR 'root'@'127.0.0.1' = PASSWORD('${mysql_root_password}');
@@ -179,6 +179,6 @@ cat <<EOF | ${zimbra_home}/bin/mysql -u root --password=
     SET PASSWORD FOR 'root'@'localhost.localdomain' = PASSWORD('${mysql_root_password}');
 EOF
 
-echo '*' Changing mysql zimbra user password
-${zimbra_home}/bin/zmmypasswd ${zimbra_mysql_password}
+echo '*' Changing mysql zmail user password
+${zmail_home}/bin/zmmypasswd ${zmail_mysql_password}
 

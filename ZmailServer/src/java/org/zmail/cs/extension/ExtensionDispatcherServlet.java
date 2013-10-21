@@ -17,7 +17,7 @@
  * Created on Oct 26, 2005
  *
  */
-package com.zimbra.cs.extension;
+package org.zmail.cs.extension;
 
 import java.io.IOException;
 import java.util.Collections;
@@ -29,11 +29,11 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.zimbra.cs.account.Provisioning;
-import com.zimbra.cs.account.Server;
-import com.zimbra.cs.servlet.ZimbraServlet;
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.common.util.ZimbraLog;
+import org.zmail.cs.account.Provisioning;
+import org.zmail.cs.account.Server;
+import org.zmail.cs.servlet.ZmailServlet;
+import org.zmail.common.service.ServiceException;
+import org.zmail.common.util.ZmailLog;
 
 /**
  * Registers {@link ExtensionHttpHandler} for extensions and dispatches HTTP requests to them.
@@ -44,7 +44,7 @@ import com.zimbra.common.util.ZimbraLog;
  * @author kchen
  *
  */
-public class ExtensionDispatcherServlet extends ZimbraServlet {
+public class ExtensionDispatcherServlet extends ZmailServlet {
     private static Map sHandlers = Collections.synchronizedMap(new HashMap());
     public static final String EXTENSION_PATH = "/service/extension";
     
@@ -54,14 +54,14 @@ public class ExtensionDispatcherServlet extends ZimbraServlet {
      * @param handler
      * @throws ServiceException
      */
-    public static void register(ZimbraExtension ext, ExtensionHttpHandler handler) throws ServiceException {
+    public static void register(ZmailExtension ext, ExtensionHttpHandler handler) throws ServiceException {
         handler.init(ext);
         String name = handler.getPath();
         synchronized (sHandlers) {
             if (sHandlers.containsKey(name))
                 throw ServiceException.FAILURE("HTTP handler already registered: " + name, null);
             sHandlers.put(name, handler);
-            ZimbraLog.extensions.info("registered handler at " + name);
+            ZmailLog.extensions.info("registered handler at " + name);
         }
     }
     
@@ -87,7 +87,7 @@ public class ExtensionDispatcherServlet extends ZimbraServlet {
     }
     
     public void service(HttpServletRequest req, HttpServletResponse resp) throws IOException, ServletException {
-        ZimbraLog.clearContext();
+        ZmailLog.clearContext();
         try {
             ExtensionHttpHandler handler = getHandler(req);
             String method = req.getMethod();
@@ -109,7 +109,7 @@ public class ExtensionDispatcherServlet extends ZimbraServlet {
      * Calls the destroy method for handlers belonging to the extension, and unregisters them.
      * @param ext
      */
-    public static void unregister(ZimbraExtension ext) {
+    public static void unregister(ZmailExtension ext) {
         synchronized(sHandlers) {
             for (Iterator it = sHandlers.keySet().iterator(); it.hasNext(); ) {
                 String path = (String) it.next();
@@ -118,7 +118,7 @@ public class ExtensionDispatcherServlet extends ZimbraServlet {
                     try {
                         handler.destroy();
                     } catch (Exception e) {
-                        ZimbraLog.extensions.warn("Error in destroy for handler " + handler.getClass(), e);
+                        ZmailLog.extensions.warn("Error in destroy for handler " + handler.getClass(), e);
                     } finally {
                         it.remove();
                     }
@@ -133,15 +133,15 @@ public class ExtensionDispatcherServlet extends ZimbraServlet {
         String extPath = uri.substring(pos + EXTENSION_PATH.length());
         if (extPath.length() == 0)
             throw ServiceException.INVALID_REQUEST("Invalid request: " + uri, null);
-        ZimbraLog.extensions.debug("getting handler registered at " + extPath);
+        ZmailLog.extensions.debug("getting handler registered at " + extPath);
         ExtensionHttpHandler handler = getHandler(extPath);
         if (handler == null)
             throw ServiceException.FAILURE("Extension HTTP handler not found at " + extPath, null);
         if (handler.hideFromDefaultPorts()) {
         	Server server = Provisioning.getInstance().getLocalServer();
         	int port = req.getLocalPort();
-        	int mailPort = server.getIntAttr(Provisioning.A_zimbraMailPort, 0);
-        	int mailSslPort = server.getIntAttr(Provisioning.A_zimbraMailSSLPort, 0);
+        	int mailPort = server.getIntAttr(Provisioning.A_zmailMailPort, 0);
+        	int mailSslPort = server.getIntAttr(Provisioning.A_zmailMailSSLPort, 0);
         	if (port == mailPort || port == mailSslPort)
         		throw ServiceException.FAILURE("extension not supported on this port", null);
         }

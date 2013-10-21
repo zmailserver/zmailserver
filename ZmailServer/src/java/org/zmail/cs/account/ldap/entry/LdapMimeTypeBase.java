@@ -12,15 +12,15 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.account.ldap.entry;
+package org.zmail.cs.account.ldap.entry;
 
 import java.util.Map;
 import java.util.Set;
 import java.util.TreeSet;
 
-import com.zimbra.cs.account.Entry;
-import com.zimbra.cs.account.Provisioning;
-import com.zimbra.cs.mime.MimeTypeInfo;
+import org.zmail.cs.account.Entry;
+import org.zmail.cs.account.Provisioning;
+import org.zmail.cs.mime.MimeTypeInfo;
 
 /**
  * 
@@ -49,15 +49,15 @@ public abstract class LdapMimeTypeBase extends Entry implements LdapEntry, MimeT
     }
 
     public String[] getMimeTypes() {
-        return super.getMultiAttr(Provisioning.A_zimbraMimeType);
+        return super.getMultiAttr(Provisioning.A_zmailMimeType);
     }
 
     public String getHandlerClass() {
-        return super.getAttr(Provisioning.A_zimbraMimeHandlerClass, null);
+        return super.getAttr(Provisioning.A_zmailMimeHandlerClass, null);
     }
 
     public boolean isIndexingEnabled() {
-        return super.getBooleanAttr(Provisioning.A_zimbraMimeIndexingEnabled, true);
+        return super.getBooleanAttr(Provisioning.A_zmailMimeIndexingEnabled, true);
     }
 
     public String getDescription() {
@@ -65,7 +65,7 @@ public abstract class LdapMimeTypeBase extends Entry implements LdapEntry, MimeT
     }
 
     public Set<String> getFileExtensions() {
-        String[] extensions = super.getMultiAttr(Provisioning.A_zimbraMimeFileExtension);
+        String[] extensions = super.getMultiAttr(Provisioning.A_zmailMimeFileExtension);
         Set<String> extSet = new TreeSet<String>();
         for (String ext : extensions) {
             if (ext != null) {
@@ -76,10 +76,10 @@ public abstract class LdapMimeTypeBase extends Entry implements LdapEntry, MimeT
     }
 
     public String getExtension() {
-        return super.getAttr(Provisioning.A_zimbraMimeHandlerExtension, null);
+        return super.getAttr(Provisioning.A_zmailMimeHandlerExtension, null);
     }
 
     public int getPriority() {
-        return super.getIntAttr(Provisioning.A_zimbraMimePriority, 0);
+        return super.getIntAttr(Provisioning.A_zmailMimePriority, 0);
     }
 }

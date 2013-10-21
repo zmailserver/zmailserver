@@ -12,14 +12,14 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.account;
+package org.zmail.cs.account;
 
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.Map;
 import java.util.Set;
 
-import com.zimbra.common.account.SignatureUtil;
+import org.zmail.common.account.SignatureUtil;
 
 public class Signature extends AccountProperty implements Comparable {
 
@@ -39,7 +39,7 @@ public class Signature extends AccountProperty implements Comparable {
      */
     public void setId(String id) {
         mId = id;
-        getRawAttrs().put(Provisioning.A_zimbraSignatureId, id);
+        getRawAttrs().put(Provisioning.A_zmailSignatureId, id);
     }
     
     public static class SignatureContent {

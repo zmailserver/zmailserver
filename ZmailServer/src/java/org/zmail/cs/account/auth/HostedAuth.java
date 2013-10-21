@@ -12,7 +12,7 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.account.auth;
+package org.zmail.cs.account.auth;
 
 import java.io.IOException;
 import java.util.List;
@@ -25,13 +25,13 @@ import org.apache.commons.httpclient.HttpStatus;
 import org.apache.commons.httpclient.methods.GetMethod;
 import org.apache.commons.httpclient.methods.PostMethod;
 
-import com.zimbra.common.httpclient.HttpClientUtil;
-import com.zimbra.common.util.ZimbraHttpConnectionManager;
-import com.zimbra.cs.account.Account;
-import com.zimbra.cs.account.AccountServiceException.AuthFailedServiceException;
-import com.zimbra.cs.account.auth.AuthContext;
+import org.zmail.common.httpclient.HttpClientUtil;
+import org.zmail.common.util.ZmailHttpConnectionManager;
+import org.zmail.cs.account.Account;
+import org.zmail.cs.account.AccountServiceException.AuthFailedServiceException;
+import org.zmail.cs.account.auth.AuthContext;
 
-public class HostedAuth extends ZimbraCustomAuth {
+public class HostedAuth extends ZmailCustomAuth {
 	//public static String HEADER_AUTH_METHOD = "Auth-Method";
 	public static String HEADER_AUTH_USER = "Auth-User";
 	public static String HEADER_AUTH_PASSWORD = "Auth-Pass";
@@ -47,7 +47,7 @@ public class HostedAuth extends ZimbraCustomAuth {
 	public static String AUTH_STATUS_OK = "OK";
 	
 	/**
-	 * zmprov md test.com zimbraAuthMech 'custom:hosted http://auth.customer.com:80'
+	 * zmprov md test.org zmailAuthMech 'custom:hosted http://auth.customer.com:80'
 	 * 
 	 *  This custom auth module takes arguments in the following form:
 	 * {URL} [GET|POST - default is GET] [encryption method - defautl is plain] [auth protocol - default is imap] 
@@ -55,7 +55,7 @@ public class HostedAuth extends ZimbraCustomAuth {
 	 **/
 	public void authenticate(Account acct, String password,
 			Map<String, Object> context, List<String> args) throws Exception {
-		HttpClient client = ZimbraHttpConnectionManager.getExternalHttpConnMgr().newHttpClient();
+		HttpClient client = ZmailHttpConnectionManager.getExternalHttpConnMgr().newHttpClient();
 		HttpMethod method = null;
 		
 		String targetURL = args.get(0);

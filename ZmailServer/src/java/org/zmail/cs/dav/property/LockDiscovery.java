@@ -12,16 +12,16 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.dav.property;
+package org.zmail.cs.dav.property;
 
 import java.util.HashSet;
 
 import org.dom4j.Element;
 
-import com.zimbra.cs.dav.DavContext;
-import com.zimbra.cs.dav.DavElements;
-import com.zimbra.cs.dav.LockMgr;
-import com.zimbra.cs.dav.LockMgr.Lock;
+import org.zmail.cs.dav.DavContext;
+import org.zmail.cs.dav.DavElements;
+import org.zmail.cs.dav.LockMgr;
+import org.zmail.cs.dav.LockMgr.Lock;
 
 /**
  * RFC 2518bis section 15.8

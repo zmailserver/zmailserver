@@ -13,15 +13,15 @@
  * ***** END LICENSE BLOCK *****
  */
 
-package com.zimbra.qa.unittest;
+package org.zmail.qa.unittest;
 
-import com.zimbra.common.account.Key.AccountBy;
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.cs.account.Account;
-import com.zimbra.cs.account.Config;
-import com.zimbra.cs.account.Provisioning;
-import com.zimbra.cs.mailbox.Mailbox;
-import com.zimbra.cs.mailbox.MailboxManager;
+import org.zmail.common.account.Key.AccountBy;
+import org.zmail.common.service.ServiceException;
+import org.zmail.cs.account.Account;
+import org.zmail.cs.account.Config;
+import org.zmail.cs.account.Provisioning;
+import org.zmail.cs.mailbox.Mailbox;
+import org.zmail.cs.mailbox.MailboxManager;
 
 /**
  * Utilities for tests related to accounts.
@@ -46,8 +46,8 @@ public class AccountTestUtil {
 
     public static String getDomain()
     throws ServiceException {
-        Config config = Provisioning.getInstance().getConfig(Provisioning.A_zimbraDefaultDomainName);
-        String domain = config.getAttr(Provisioning.A_zimbraDefaultDomainName, null);
+        Config config = Provisioning.getInstance().getConfig(Provisioning.A_zmailDefaultDomainName);
+        String domain = config.getAttr(Provisioning.A_zmailDefaultDomainName, null);
         assert(domain != null && domain.length() > 0);
         return domain;
     }

@@ -13,28 +13,28 @@
  * ***** END LICENSE BLOCK *****
  */
 
-package com.zimbra.cs.service.admin;
+package org.zmail.cs.service.admin;
 
 import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 
-import com.zimbra.cs.account.AccountServiceException;
-import com.zimbra.cs.account.DistributionList;
-import com.zimbra.cs.account.DynamicGroup;
-import com.zimbra.cs.account.Group;
-import com.zimbra.cs.account.Provisioning;
-import com.zimbra.cs.account.ShareInfo;
-import com.zimbra.cs.account.accesscontrol.AdminRight;
-import com.zimbra.cs.account.accesscontrol.Rights.Admin;
-import com.zimbra.cs.mailbox.OperationContext;
-import com.zimbra.common.account.Key.DistributionListBy;
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.common.util.ZimbraLog;
-import com.zimbra.common.soap.AdminConstants;
-import com.zimbra.common.soap.Element;
-import com.zimbra.soap.ZimbraSoapContext;
+import org.zmail.cs.account.AccountServiceException;
+import org.zmail.cs.account.DistributionList;
+import org.zmail.cs.account.DynamicGroup;
+import org.zmail.cs.account.Group;
+import org.zmail.cs.account.Provisioning;
+import org.zmail.cs.account.ShareInfo;
+import org.zmail.cs.account.accesscontrol.AdminRight;
+import org.zmail.cs.account.accesscontrol.Rights.Admin;
+import org.zmail.cs.mailbox.OperationContext;
+import org.zmail.common.account.Key.DistributionListBy;
+import org.zmail.common.service.ServiceException;
+import org.zmail.common.util.ZmailLog;
+import org.zmail.common.soap.AdminConstants;
+import org.zmail.common.soap.Element;
+import org.zmail.soap.ZmailSoapContext;
 
 public class AddDistributionListMember extends DistributionListDocumentHandler {
 
@@ -53,7 +53,7 @@ public class AddDistributionListMember extends DistributionListDocumentHandler {
     
     public Element handle(Element request, Map<String, Object> context) throws ServiceException {
         
-        ZimbraSoapContext zsc = getZimbraSoapContext(context);
+        ZmailSoapContext zsc = getZmailSoapContext(context);
         OperationContext octxt = getOperationContext(zsc, context);
         Provisioning prov = Provisioning.getInstance();
         
@@ -79,7 +79,7 @@ public class AddDistributionListMember extends DistributionListDocumentHandler {
         
         String[] members = (String[]) memberList.toArray(new String[0]); 
         prov.addGroupMembers(group, members);
-        ZimbraLog.security.info(ZimbraLog.encodeAttrs(
+        ZmailLog.security.info(ZmailLog.encodeAttrs(
                     new String[] {"cmd", "AddDistributionListMember","name", group.getName(), 
                     "members", Arrays.deepToString(members)})); 
         
@@ -88,7 +88,7 @@ public class AddDistributionListMember extends DistributionListDocumentHandler {
             // do nothing for now
         } else {
             boolean sendShareInfoMsg = 
-                group.getBooleanAttr(Provisioning.A_zimbraDistributionListSendShareMessageToNewMembers, true);
+                group.getBooleanAttr(Provisioning.A_zmailDistributionListSendShareMessageToNewMembers, true);
             if (sendShareInfoMsg) {
                 ShareInfo.NotificationSender.sendShareInfoMessage(octxt, (DistributionList) group, members);
             }

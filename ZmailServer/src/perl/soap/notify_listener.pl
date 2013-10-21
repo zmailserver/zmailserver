@@ -21,7 +21,7 @@ use LWP::UserAgent;
 use Getopt::Long;
 use XmlDoc;
 use Soap;
-use ZimbraSoapTest;
+use ZmailSoapTest;
 
 #standard options
 my ($sessionId, $authToken, $user, $pw, $host, $help);  #standard
@@ -50,7 +50,7 @@ $soapargs{ 'NOTIFY'} = 1;
 if (defined($sessionId)) {
   $soapargs{'SESSIONID'} = $sessionId;
 }
-my $z = ZimbraSoapTest->new($user, $host, $pw, \%soapargs);
+my $z = ZmailSoapTest->new($user, $host, $pw, \%soapargs);
 $z->verbose(3);
 
 if (defined($sessionId) && defined($authToken)) {

@@ -12,15 +12,15 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.qa.unittest;
+package org.zmail.qa.unittest;
 
 import javax.mail.MessagingException;
 import javax.mail.internet.MimeBodyPart;
 import javax.mail.internet.MimeMessage;
 import javax.mail.internet.MimeMultipart;
 
-import com.zimbra.cs.mime.Mime;
-import com.zimbra.cs.mime.MimeVisitor;
+import org.zmail.cs.mime.Mime;
+import org.zmail.cs.mime.MimeVisitor;
 
 /**
  * Replaces <tt>"oldsubject"</tt> with <tt>"newsubject"</tt> in a <tt>MimeMessage</tt>'s

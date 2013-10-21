@@ -14,7 +14,7 @@
  * 
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.ldap.unboundid;
+package org.zmail.cs.ldap.unboundid;
 
 import static com.unboundid.util.Debug.debugException;
 

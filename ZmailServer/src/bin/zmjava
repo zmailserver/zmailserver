@@ -18,47 +18,47 @@
 source `dirname $0`/zmshutil || exit 1
 zmsetvars -f
 
-if [ -d ${zimbra_java_home}/jre ]; then
-    JRE_EXT_DIR=${zimbra_java_home}/jre/lib/ext
+if [ -d ${zmail_java_home}/jre ]; then
+    JRE_EXT_DIR=${zmail_java_home}/jre/lib/ext
 else
     #JRE_EXT_DIR=/System/Library/Frameworks/JavaVM.framework/Versions/1.5/Home/lib/ext
-    JRE_EXT_DIR=${zimbra_java_home}/lib/ext
+    JRE_EXT_DIR=${zmail_java_home}/lib/ext
 fi
 
 if [ -f ".hotspot_compiler" ]; then
-  cd $zimbra_home
+  cd $zmail_home
 fi
 case "`uname`" in
 CYGWIN*) PATHSEP=";";;
 *) PATHSEP=":";;
 esac
 
-ZIMBRA_EXTENSIONS="backup clamscanner network zimbra-license zimbrahsm zimbrasync"
-ZIMBRA_EXT_DIR="/opt/zimbra/lib/ext-common"
+ZIMBRA_EXTENSIONS="backup clamscanner network zmail-license zmailhsm zmailsync"
+ZIMBRA_EXT_DIR="/opt/zmail/lib/ext-common"
 for i in $ZIMBRA_EXTENSIONS; do
-  if [ -d "/opt/zimbra/lib/ext/$i" ]; then
-   ZIMBRA_EXT_DIR="${ZIMBRA_EXT_DIR}${PATHSEP}/opt/zimbra/lib/ext/$i"
+  if [ -d "/opt/zmail/lib/ext/$i" ]; then
+   ZIMBRA_EXT_DIR="${ZIMBRA_EXT_DIR}${PATHSEP}/opt/zmail/lib/ext/$i"
   fi
 done 
 
-java_version=$(${zimbra_java_home}/bin/java -version 2>&1 | grep "java version" | sed -e 's/"//g' | awk '{print $NF}' | awk -F_ '{print $1}')
+java_version=$(${zmail_java_home}/bin/java -version 2>&1 | grep "java version" | sed -e 's/"//g' | awk '{print $NF}' | awk -F_ '{print $1}')
 if [ x"$java_version" = "x1.6.0" ]; then
-  java_options="-XX:ErrorFile=${zimbra_home}/log"
+  java_options="-XX:ErrorFile=${zmail_home}/log"
 else 
   java_options=""
 fi 
 
-if [ x${zimbra_zmjava_java_library_path} = "x" ]; then
-  zimbra_zmjava_java_library_path=${zimbra_home}/lib
+if [ x${zmail_zmjava_java_library_path} = "x" ]; then
+  zmail_zmjava_java_library_path=${zmail_home}/lib
 fi  
 
-if [ x${zimbra_zmjava_java_ext_dirs} = "x" ]; then
-  zimbra_zmjava_java_ext_dirs=${JRE_EXT_DIR}${PATHSEP}${zimbra_home}/lib/jars${PATHSEP}${ZIMBRA_EXT_DIR}
+if [ x${zmail_zmjava_java_ext_dirs} = "x" ]; then
+  zmail_zmjava_java_ext_dirs=${JRE_EXT_DIR}${PATHSEP}${zmail_home}/lib/jars${PATHSEP}${ZIMBRA_EXT_DIR}
 fi  
 
-exec ${zimbra_java_home}/bin/java ${java_options} \
-     -client ${zimbra_zmjava_options} \
-     -Dzimbra.home=${zimbra_home} \
-     -Djava.library.path=${zimbra_zmjava_java_library_path} \
-     -Djava.ext.dirs=${zimbra_zmjava_java_ext_dirs} \
+exec ${zmail_java_home}/bin/java ${java_options} \
+     -client ${zmail_zmjava_options} \
+     -Dzmail.home=${zmail_home} \
+     -Djava.library.path=${zmail_zmjava_java_library_path} \
+     -Djava.ext.dirs=${zmail_zmjava_java_ext_dirs} \
      "$@"

@@ -12,11 +12,11 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.mailclient.imap;
+package org.zmail.cs.mailclient.imap;
 
-import com.zimbra.common.util.ZimbraLog;
-import com.zimbra.cs.mailclient.MailConfig;
-import com.zimbra.cs.mailclient.util.Config;
+import org.zmail.common.util.ZmailLog;
+import org.zmail.cs.mailclient.MailConfig;
+import org.zmail.cs.mailclient.util.Config;
 
 import java.io.File;
 import java.io.IOException;
@@ -67,7 +67,7 @@ public class ImapConfig extends MailConfig {
      * Creates a new {@link ImapConfig}.
      */
     public ImapConfig() {
-        super(ZimbraLog.imap_client);
+        super(ZmailLog.imap_client);
     }
 
     /**
@@ -76,7 +76,7 @@ public class ImapConfig extends MailConfig {
      * @param host the IMAP server host name
      */
     public ImapConfig(String host) {
-        super(ZimbraLog.imap_client, host);
+        super(ZmailLog.imap_client, host);
     }
 
     /**

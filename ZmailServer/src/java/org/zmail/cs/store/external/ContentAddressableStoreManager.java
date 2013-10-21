@@ -12,7 +12,7 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.store.external;
+package org.zmail.cs.store.external;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -20,12 +20,12 @@ import java.security.DigestInputStream;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.common.util.ByteUtil;
-import com.zimbra.common.util.ZimbraLog;
-import com.zimbra.cs.mailbox.Mailbox;
-import com.zimbra.cs.store.Blob;
-import com.zimbra.cs.store.StagedBlob;
+import org.zmail.common.service.ServiceException;
+import org.zmail.common.util.ByteUtil;
+import org.zmail.common.util.ZmailLog;
+import org.zmail.cs.mailbox.Mailbox;
+import org.zmail.cs.store.Blob;
+import org.zmail.cs.store.StagedBlob;
 
 /**
  * Abstract framework for StoreManager implementations which require content hash or other content-based locator
@@ -79,9 +79,9 @@ public abstract class ContentAddressableStoreManager extends ExternalStoreManage
     @Override
     public StagedBlob stage(Blob blob, Mailbox mbox) throws IOException, ServiceException {
         if (supports(StoreFeature.RESUMABLE_UPLOAD) && blob instanceof ExternalUploadedBlob && blob.getRawSize() > 0) {
-            ZimbraLog.store.debug("blob already uploaded, just need to commit");
+            ZmailLog.store.debug("blob already uploaded, just need to commit");
             String locator = ((ExternalResumableUpload) this).finishUpload((ExternalUploadedBlob) blob);
-            ZimbraLog.store.debug("staged to locator %s", locator);
+            ZmailLog.store.debug("staged to locator %s", locator);
             localCache.put(locator, getContent(blob));
             return new ExternalStagedBlob(mbox, blob.getDigest(), blob.getRawSize(), locator);
         } else {
@@ -90,7 +90,7 @@ public abstract class ContentAddressableStoreManager extends ExternalStoreManage
             try {
                 StagedBlob staged = stage(is, blob.getRawSize(), mbox, locator);
                 if (staged != null) {
-                    ZimbraLog.store.debug("staged to locator %s", staged.getLocator());
+                    ZmailLog.store.debug("staged to locator %s", staged.getLocator());
                     localCache.put(staged.getLocator(), getContent(blob));
                 }
                 return staged;

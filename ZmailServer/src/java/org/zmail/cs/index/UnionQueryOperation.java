@@ -12,7 +12,7 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.index;
+package org.zmail.cs.index;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -21,10 +21,10 @@ import java.util.List;
 import java.util.Set;
 
 import com.google.common.collect.ImmutableSet;
-import com.zimbra.cs.mailbox.Mailbox;
-import com.zimbra.common.service.ServiceException;
+import org.zmail.cs.mailbox.Mailbox;
+import org.zmail.common.service.ServiceException;
 
-import com.zimbra.common.util.ZimbraLog;
+import org.zmail.common.util.ZmailLog;
 
 /**
  * A list of query operations which are unioned together.
@@ -34,7 +34,7 @@ import com.zimbra.common.util.ZimbraLog;
 public final class UnionQueryOperation extends CombiningQueryOperation {
 
     private boolean atStart = true; // don't re-fill buffer twice if they call hasNext() then reset() w/o actually getting next
-    private ZimbraHit cachedNextHit = null;
+    private ZmailHit cachedNextHit = null;
 
     @Override
     public long getCursorOffset() {
@@ -63,9 +63,9 @@ public final class UnionQueryOperation extends CombiningQueryOperation {
     }
 
     @Override
-    public ZimbraHit getNext() throws ServiceException {
+    public ZmailHit getNext() throws ServiceException {
         atStart = false;
-        ZimbraHit toRet = cachedNextHit;
+        ZmailHit toRet = cachedNextHit;
         // this "if" is here so we don't keep calling internalGetNext when we've reached the end of the results...
         if (cachedNextHit != null) {
             cachedNextHit = null;
@@ -76,7 +76,7 @@ public final class UnionQueryOperation extends CombiningQueryOperation {
     }
 
     @Override
-    public ZimbraHit peekNext() {
+    public ZmailHit peekNext() {
         return cachedNextHit;
     }
 
@@ -94,7 +94,7 @@ public final class UnionQueryOperation extends CombiningQueryOperation {
             } else {
                 // mergesort: loop through QueryOperations and find the "best" hit
                 int currentBestHitOffset = -1;
-                ZimbraHit currentBestHit = null;
+                ZmailHit currentBestHit = null;
                 for (int i = 0; i < operations.size(); i++) {
                     QueryOperation op = operations.get(i);
                     if (op.hasNext()) {
@@ -102,7 +102,7 @@ public final class UnionQueryOperation extends CombiningQueryOperation {
                             currentBestHitOffset = i;
                             currentBestHit = op.peekNext();
                         } else {
-                            ZimbraHit opNext = op.peekNext();
+                            ZmailHit opNext = op.peekNext();
                             int result = opNext.compareTo(context.getResults().getSortBy(), currentBestHit);
                             if (result < 0) {
                                 // "before"
@@ -322,7 +322,7 @@ public final class UnionQueryOperation extends CombiningQueryOperation {
         assert(context == null);
         context = ctx;
         for (QueryOperation op : operations) {
-            ZimbraLog.search.debug("Executing: %s", op);
+            ZmailLog.search.debug("Executing: %s", op);
             // add 1 to chunk size b/c we buffer
             op.begin(new QueryContext(ctx.getMailbox(), ctx.getResults(), ctx.getParams(), ctx.getChunkSize() + 1));
         }

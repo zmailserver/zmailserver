@@ -12,21 +12,21 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.service.mail;
+package org.zmail.cs.service.mail;
 
 import java.util.Map;
 
-import com.zimbra.common.account.Key;
-import com.zimbra.common.account.Key.DataSourceBy;
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.common.soap.Element;
-import com.zimbra.common.soap.MailConstants;
-import com.zimbra.common.util.ZimbraLog;
-import com.zimbra.cs.account.Account;
-import com.zimbra.cs.account.DataSource;
-import com.zimbra.cs.account.Provisioning;
-import com.zimbra.cs.datasource.DataSourceManager;
-import com.zimbra.soap.ZimbraSoapContext;
+import org.zmail.common.account.Key;
+import org.zmail.common.account.Key.DataSourceBy;
+import org.zmail.common.service.ServiceException;
+import org.zmail.common.soap.Element;
+import org.zmail.common.soap.MailConstants;
+import org.zmail.common.util.ZmailLog;
+import org.zmail.cs.account.Account;
+import org.zmail.cs.account.DataSource;
+import org.zmail.cs.account.Provisioning;
+import org.zmail.cs.datasource.DataSourceManager;
+import org.zmail.soap.ZmailSoapContext;
 
 
 public class ImportData extends MailDocumentHandler {
@@ -34,7 +34,7 @@ public class ImportData extends MailDocumentHandler {
     @Override
     public Element handle(Element request, Map<String, Object> context)
             throws ServiceException {
-        ZimbraSoapContext zsc = getZimbraSoapContext(context);
+        ZmailSoapContext zsc = getZmailSoapContext(context);
         Provisioning prov = Provisioning.getInstance();
         Account account = getRequestedAccount(zsc);
 
@@ -56,7 +56,7 @@ public class ImportData extends MailDocumentHandler {
                 throw ServiceException.INVALID_REQUEST("must specify either 'id' or 'name'", null);
             }
 
-            ZimbraLog.addDataSourceNameToContext(ds.getName());
+            ZmailLog.addDataSourceNameToContext(ds.getName());
             DataSourceManager.asyncImportData(ds);
         }
 

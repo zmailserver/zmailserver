@@ -12,37 +12,37 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.qa.unittest;
+package org.zmail.qa.unittest;
 
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.common.util.CliUtil;
-import com.zimbra.cs.account.Account;
-import com.zimbra.cs.account.CalendarResource;
-import com.zimbra.cs.account.Cos;
-import com.zimbra.cs.account.DistributionList;
-import com.zimbra.cs.account.Domain;
-import com.zimbra.cs.account.NamedEntry;
-import com.zimbra.cs.account.Server;
-import com.zimbra.cs.account.UCService;
-import com.zimbra.cs.account.XMPPComponent;
-import com.zimbra.cs.account.Zimlet;
-import com.zimbra.cs.account.Provisioning;
-import com.zimbra.common.account.Key.AccountBy;
-import com.zimbra.common.account.Key.CalendarResourceBy;
-import com.zimbra.common.account.Key.CosBy;
-import com.zimbra.common.account.Key.DistributionListBy;
-import com.zimbra.common.account.Key.DomainBy;
-import com.zimbra.common.account.Key.ServerBy;
-import com.zimbra.common.account.Key.UCServiceBy;
-import com.zimbra.common.account.Key.XMPPComponentBy;
-import com.zimbra.cs.account.accesscontrol.GranteeType;
-import com.zimbra.cs.account.accesscontrol.Right;
-import com.zimbra.cs.account.accesscontrol.TargetType;
+import org.zmail.common.service.ServiceException;
+import org.zmail.common.util.CliUtil;
+import org.zmail.cs.account.Account;
+import org.zmail.cs.account.CalendarResource;
+import org.zmail.cs.account.Cos;
+import org.zmail.cs.account.DistributionList;
+import org.zmail.cs.account.Domain;
+import org.zmail.cs.account.NamedEntry;
+import org.zmail.cs.account.Server;
+import org.zmail.cs.account.UCService;
+import org.zmail.cs.account.XMPPComponent;
+import org.zmail.cs.account.Zimlet;
+import org.zmail.cs.account.Provisioning;
+import org.zmail.common.account.Key.AccountBy;
+import org.zmail.common.account.Key.CalendarResourceBy;
+import org.zmail.common.account.Key.CosBy;
+import org.zmail.common.account.Key.DistributionListBy;
+import org.zmail.common.account.Key.DomainBy;
+import org.zmail.common.account.Key.ServerBy;
+import org.zmail.common.account.Key.UCServiceBy;
+import org.zmail.common.account.Key.XMPPComponentBy;
+import org.zmail.cs.account.accesscontrol.GranteeType;
+import org.zmail.cs.account.accesscontrol.Right;
+import org.zmail.cs.account.accesscontrol.TargetType;
 
 public class TestACLGrant extends TestACL {
 
@@ -70,7 +70,7 @@ public class TestACLGrant extends TestACL {
         if (cr == null) {
             Map<String, Object> attrs = new HashMap<String, Object>();
             attrs.put(Provisioning.A_displayName, "CALENDAR_RESOURCE_NAME");
-            attrs.put(Provisioning.A_zimbraCalResType, "Equipment");
+            attrs.put(Provisioning.A_zmailCalResType, "Equipment");
             cr = mProv.createCalendarResource(CALENDAR_RESOURCE_NAME, PASSWORD, attrs);
         }
         return cr;
@@ -115,9 +115,9 @@ public class TestACLGrant extends TestACL {
         XMPPComponent xmppCpnt = mProv.get(XMPPComponentBy.name, XMPP_COMPONENT_NAME);
         if (xmppCpnt == null) {
             Map<String, Object> attrs = new HashMap<String, Object>();
-            attrs.put(Provisioning.A_zimbraXMPPComponentCategory, "whatever");
-            attrs.put(Provisioning.A_zimbraXMPPComponentClassName, "whatever");
-            attrs.put(Provisioning.A_zimbraXMPPComponentType, "whatever");
+            attrs.put(Provisioning.A_zmailXMPPComponentCategory, "whatever");
+            attrs.put(Provisioning.A_zmailXMPPComponentClassName, "whatever");
+            attrs.put(Provisioning.A_zmailXMPPComponentType, "whatever");
             xmppCpnt = mProv.createXMPPComponent(XMPP_COMPONENT_NAME, getDomain(), getServer(), attrs);
         }
         return xmppCpnt;
@@ -127,7 +127,7 @@ public class TestACLGrant extends TestACL {
         Zimlet zimlet = mProv.getZimlet(ZIMLET_NAME);
         if (zimlet == null) {
             Map<String, Object> attrs = new HashMap<String, Object>();
-            attrs.put(Provisioning.A_zimbraZimletVersion, "1.0");
+            attrs.put(Provisioning.A_zmailZimletVersion, "1.0");
             zimlet = mProv.createZimlet(ZIMLET_NAME, attrs);
         }
         return zimlet;

@@ -1,7 +1,7 @@
 The timezones.ics File
 ----------------------
 
-The /opt/zimbra/conf/timezones.ics file lists all time zones known to ZCS.
+The /opt/zmail/conf/timezones.ics file lists all time zones known to ZCS.
 When a calendar object references a time zone, the name is looked up in this
 file to find the zone definition, including GMT offset and daylight savings
 rules.  Some of the time zones are marked as primary.  The primary time zones
@@ -46,8 +46,8 @@ or the data files themselves.  Look at the diff from the previous version of
 timezones.ics and compare the changes against the published time zone policy
 changes.
 
-6. Check in the timezones.ics file under ZimbraServer/conf, and windows-names
-and extra-data files under ZimbraServer/conf/tz.
+6. Check in the timezones.ics file under ZmailServer/conf, and windows-names
+and extra-data files under ZmailServer/conf/tz.
 
 
 The windows-names File

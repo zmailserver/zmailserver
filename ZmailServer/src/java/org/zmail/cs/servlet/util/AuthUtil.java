@@ -12,7 +12,7 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.servlet.util;
+package org.zmail.cs.servlet.util;
 
 import java.io.IOException;
 import java.util.HashMap;
@@ -23,22 +23,22 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.apache.commons.codec.binary.Base64;
 
-import com.zimbra.common.account.Key;
-import com.zimbra.common.account.Key.AccountBy;
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.common.util.HttpUtil;
-import com.zimbra.common.util.Log;
-import com.zimbra.common.util.LogFactory;
-import com.zimbra.cs.account.Account;
-import com.zimbra.cs.account.AuthToken;
-import com.zimbra.cs.account.AuthTokenException;
-import com.zimbra.cs.account.Domain;
-import com.zimbra.cs.account.GuestAccount;
-import com.zimbra.cs.account.Provisioning;
-import com.zimbra.cs.account.auth.AuthContext;
-import com.zimbra.cs.service.AuthProvider;
-import com.zimbra.cs.service.UserServletException;
-import com.zimbra.cs.servlet.ZimbraServlet;
+import org.zmail.common.account.Key;
+import org.zmail.common.account.Key.AccountBy;
+import org.zmail.common.service.ServiceException;
+import org.zmail.common.util.HttpUtil;
+import org.zmail.common.util.Log;
+import org.zmail.common.util.LogFactory;
+import org.zmail.cs.account.Account;
+import org.zmail.cs.account.AuthToken;
+import org.zmail.cs.account.AuthTokenException;
+import org.zmail.cs.account.Domain;
+import org.zmail.cs.account.GuestAccount;
+import org.zmail.cs.account.Provisioning;
+import org.zmail.cs.account.auth.AuthContext;
+import org.zmail.cs.service.AuthProvider;
+import org.zmail.cs.service.UserServletException;
+import org.zmail.cs.servlet.ZmailServlet;
 
 public class AuthUtil {
     private static Log mLog = LogFactory.getLog(AuthUtil.class);
@@ -53,10 +53,10 @@ public class AuthUtil {
      * @throws ServiceException
      */
     public static boolean isAdminRequest(HttpServletRequest req) throws ServiceException {
-        int adminPort = Provisioning.getInstance().getLocalServer().getIntAttr(Provisioning.A_zimbraAdminPort, -1);
+        int adminPort = Provisioning.getInstance().getLocalServer().getIntAttr(Provisioning.A_zmailAdminPort, -1);
         if (req.getLocalPort() == adminPort) {
             //can still be in offline server where port=adminPort
-            int mailPort = Provisioning.getInstance().getLocalServer().getIntAttr(Provisioning.A_zimbraMailPort, -1);
+            int mailPort = Provisioning.getInstance().getLocalServer().getIntAttr(Provisioning.A_zmailMailPort, -1);
             if (mailPort == adminPort) //we are in offline, so check cookie
                 return getAdminAuthTokenFromCookie(req) != null;
             else
@@ -133,7 +133,7 @@ public class AuthUtil {
 
     public static Account basicAuthRequest(HttpServletRequest req,
                                            HttpServletResponse resp,
-                                           ZimbraServlet servlet,
+                                           ZmailServlet servlet,
                                            boolean sendChallenge) throws IOException, ServiceException
     {
         if (!AuthProvider.allowBasicAuth(req, servlet))
@@ -203,8 +203,8 @@ public class AuthUtil {
         }
         try {
             Map<String, Object> authCtxt = new HashMap<String, Object>();
-            authCtxt.put(AuthContext.AC_ORIGINATING_CLIENT_IP, ZimbraServlet.getOrigIp(req));
-            authCtxt.put(AuthContext.AC_REMOTE_IP, ZimbraServlet.getClientIp(req));
+            authCtxt.put(AuthContext.AC_ORIGINATING_CLIENT_IP, ZmailServlet.getOrigIp(req));
+            authCtxt.put(AuthContext.AC_REMOTE_IP, ZmailServlet.getClientIp(req));
             authCtxt.put(AuthContext.AC_ACCOUNT_NAME_PASSEDIN, userPassedIn);
             authCtxt.put(AuthContext.AC_USER_AGENT, req.getHeader("User-Agent"));
             prov.authAccount(acct, pass, AuthContext.Protocol.http_basic, authCtxt);
@@ -245,7 +245,7 @@ public class AuthUtil {
 
     public static String getRealmHeader(String realm)  {
         if (realm == null)
-            realm = "Zimbra";
+            realm = "Zmail";
         return "BASIC realm=\"" + realm + "\"";
     }
 

@@ -12,11 +12,11 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.account.cache;
+package org.zmail.cs.account.cache;
 
 import java.util.List;
 
-import com.zimbra.cs.account.NamedEntry;
+import org.zmail.cs.account.NamedEntry;
 
 public interface INamedEntryCache<E extends NamedEntry> extends IEntryCache {
     public void clear();

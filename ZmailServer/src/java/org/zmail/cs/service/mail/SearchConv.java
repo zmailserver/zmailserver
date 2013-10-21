@@ -13,7 +13,7 @@
  * ***** END LICENSE BLOCK *****
  */
 
-package com.zimbra.cs.service.mail;
+package org.zmail.cs.service.mail;
 
 import java.util.ArrayList;
 import java.util.EnumSet;
@@ -22,30 +22,30 @@ import java.util.Map;
 
 import com.google.common.base.Strings;
 import com.google.common.io.Closeables;
-import com.zimbra.common.account.Key.AccountBy;
-import com.zimbra.common.localconfig.LC;
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.common.soap.Element;
-import com.zimbra.common.soap.MailConstants;
-import com.zimbra.common.soap.SoapFaultException;
-import com.zimbra.common.util.ZimbraLog;
-import com.zimbra.cs.account.Account;
-import com.zimbra.cs.account.Provisioning;
-import com.zimbra.cs.index.SearchParams;
-import com.zimbra.cs.index.SearchParams.ExpandResults;
-import com.zimbra.cs.index.SortBy;
-import com.zimbra.cs.index.ZimbraHit;
-import com.zimbra.cs.index.ZimbraQueryResults;
-import com.zimbra.cs.mailbox.Conversation;
-import com.zimbra.cs.mailbox.Flag;
-import com.zimbra.cs.mailbox.MailItem;
-import com.zimbra.cs.mailbox.Mailbox;
-import com.zimbra.cs.mailbox.Message;
-import com.zimbra.cs.mailbox.OperationContext;
-import com.zimbra.cs.service.util.ItemId;
-import com.zimbra.cs.service.util.ItemIdFormatter;
-import com.zimbra.cs.session.PendingModifications.Change;
-import com.zimbra.soap.ZimbraSoapContext;
+import org.zmail.common.account.Key.AccountBy;
+import org.zmail.common.localconfig.LC;
+import org.zmail.common.service.ServiceException;
+import org.zmail.common.soap.Element;
+import org.zmail.common.soap.MailConstants;
+import org.zmail.common.soap.SoapFaultException;
+import org.zmail.common.util.ZmailLog;
+import org.zmail.cs.account.Account;
+import org.zmail.cs.account.Provisioning;
+import org.zmail.cs.index.SearchParams;
+import org.zmail.cs.index.SearchParams.ExpandResults;
+import org.zmail.cs.index.SortBy;
+import org.zmail.cs.index.ZmailHit;
+import org.zmail.cs.index.ZmailQueryResults;
+import org.zmail.cs.mailbox.Conversation;
+import org.zmail.cs.mailbox.Flag;
+import org.zmail.cs.mailbox.MailItem;
+import org.zmail.cs.mailbox.Mailbox;
+import org.zmail.cs.mailbox.Message;
+import org.zmail.cs.mailbox.OperationContext;
+import org.zmail.cs.service.util.ItemId;
+import org.zmail.cs.service.util.ItemIdFormatter;
+import org.zmail.cs.session.PendingModifications.Change;
+import org.zmail.soap.ZmailSoapContext;
 
 /**
  * @since Nov 30, 2004
@@ -56,7 +56,7 @@ public final class SearchConv extends Search {
 
     @Override
     public Element handle(Element request, Map<String, Object> context) throws ServiceException {
-        ZimbraSoapContext zsc = getZimbraSoapContext(context);
+        ZmailSoapContext zsc = getZmailSoapContext(context);
         Mailbox mbox = getRequestedMailbox(zsc);
         OperationContext octxt = getOperationContext(zsc, context);
         ItemIdFormatter ifmt = new ItemIdFormatter(zsc);
@@ -73,7 +73,7 @@ public final class SearchConv extends Search {
 
         Element response = null;
         if (cid.belongsTo(mbox)) { // local
-            ZimbraQueryResults results =  mbox.index.search(zsc.getResponseProtocol(), octxt, params);
+            ZmailQueryResults results =  mbox.index.search(zsc.getResponseProtocol(), octxt, params);
             try {
                 response = zsc.createElement(MailConstants.SEARCH_CONV_RESPONSE);
                 response.addAttribute(MailConstants.A_QUERY_OFFSET, Integer.toString(params.getOffset()));
@@ -127,7 +127,7 @@ public final class SearchConv extends Search {
                 // re-writing the query in a format that is OK to proxy to the other server -- since the
                 // query has an "AND conv:remote-conv-id" part, the query parser will figure out the right
                 // format for us.  TODO somehow make this functionality a bit more exposed in the
-                // ZimbraQuery APIs...
+                // ZmailQuery APIs...
                 String rewrittenQueryString = mbox.getRewrittenQueryString(octxt, params);
                 proxyRequest.addAttribute(MailConstants.E_QUERY, rewrittenQueryString, Element.Disposition.CONTENT);
 
@@ -157,7 +157,7 @@ public final class SearchConv extends Search {
      * @throws ServiceException
      */
     private boolean putHits(OperationContext octxt, ItemIdFormatter ifmt, SearchResponse resp, List<Message> msgs,
-            ZimbraQueryResults results, SearchParams params)
+            ZmailQueryResults results, SearchParams params)
     throws ServiceException {
 
         int offset = params.getOffset();
@@ -165,13 +165,13 @@ public final class SearchConv extends Search {
         int size = msgs.size() <= limit + offset ? msgs.size() - offset : limit;
 
         if (size > 0) {
-            // Array of ZimbraHit ptrs for matches, 1 entry for every message
-            // we might return from conv. NULL means no ZimbraHit presumably b/c the message didn't match the search.
+            // Array of ZmailHit ptrs for matches, 1 entry for every message
+            // we might return from conv. NULL means no ZmailHit presumably b/c the message didn't match the search.
             // Note that the match for msgs[i] is matched[i-offset]!!!!
-            ZimbraHit[] matched = new ZimbraHit[size];
+            ZmailHit[] matched = new ZmailHit[size];
             // For each hit, see if the hit message is in this conv (msgs).
             while (results.hasNext()) {
-                ZimbraHit hit = results.getNext();
+                ZmailHit hit = results.getNext();
                 // we only bother checking the messages between offset and offset + size,
                 // since only they are getting returned.
                 for (int i = offset; i < offset + size; i++) {
@@ -208,7 +208,7 @@ public final class SearchConv extends Search {
             try {
                 msg.getMailbox().alterTag(octxt, msg.getId(), msg.getType(), Flag.FlagInfo.UNREAD, false, null);
             } catch (ServiceException e) {
-                ZimbraLog.search.warn("problem marking message as read (ignored): %d", msg.getId(), e);
+                ZmailLog.search.warn("problem marking message as read (ignored): %d", msg.getId(), e);
             }
         }
 

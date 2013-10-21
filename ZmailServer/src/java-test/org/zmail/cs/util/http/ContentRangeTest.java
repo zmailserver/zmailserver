@@ -13,7 +13,7 @@
  * ***** END LICENSE BLOCK *****
  */
 
-package com.zimbra.cs.util.http;
+package org.zmail.cs.util.http;
 
 import org.eclipse.jetty.http.HttpException;
 import org.junit.Assert;

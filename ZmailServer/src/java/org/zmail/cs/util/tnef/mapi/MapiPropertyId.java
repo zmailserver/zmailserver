@@ -13,15 +13,15 @@
  * ***** END LICENSE BLOCK *****
  */
 
-package com.zimbra.cs.util.tnef.mapi;
+package org.zmail.cs.util.tnef.mapi;
 
 import java.io.IOException;
 import java.util.Date;
 import java.util.List;
 
-import com.zimbra.cs.util.tnef.IcalUtil;
-import com.zimbra.cs.util.tnef.MSGUID;
-import com.zimbra.cs.util.tnef.SchedulingViewOfTnef;
+import org.zmail.cs.util.tnef.IcalUtil;
+import org.zmail.cs.util.tnef.MSGUID;
+import org.zmail.cs.util.tnef.SchedulingViewOfTnef;
 
 import net.fortuna.ical4j.model.DateTime;
 import net.freeutils.tnef.Attr;

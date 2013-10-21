@@ -12,11 +12,11 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.index;
+package org.zmail.cs.index;
 
 import java.io.IOException;
 import java.io.OutputStream;
-import com.zimbra.common.util.Log;
+import org.zmail.common.util.Log;
 
 public class LoggingOutputStream extends OutputStream
 {

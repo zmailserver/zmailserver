@@ -12,21 +12,21 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.soap;
+package org.zmail.soap;
 
-import com.zimbra.common.account.Key;
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.common.soap.AccountConstants;
-import com.zimbra.common.soap.Element;
-import com.zimbra.common.soap.SoapHttpTransport;
-import com.zimbra.common.soap.SoapProtocol;
-import com.zimbra.common.util.Pair;
-import com.zimbra.common.util.ZimbraLog;
-import com.zimbra.cs.account.AccountServiceException;
-import com.zimbra.cs.account.AuthToken;
-import com.zimbra.cs.account.Provisioning;
-import com.zimbra.cs.account.Server;
-import com.zimbra.cs.httpclient.URLUtil;
+import org.zmail.common.account.Key;
+import org.zmail.common.service.ServiceException;
+import org.zmail.common.soap.AccountConstants;
+import org.zmail.common.soap.Element;
+import org.zmail.common.soap.SoapHttpTransport;
+import org.zmail.common.soap.SoapProtocol;
+import org.zmail.common.util.Pair;
+import org.zmail.common.util.ZmailLog;
+import org.zmail.cs.account.AccountServiceException;
+import org.zmail.cs.account.AuthToken;
+import org.zmail.cs.account.Provisioning;
+import org.zmail.cs.account.Server;
+import org.zmail.cs.httpclient.URLUtil;
 
 import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
@@ -56,7 +56,7 @@ public final class ProxyTarget {
         if (qs != null)
             requestStr = requestStr + "?" + qs;
 
-        int localAdminPort = prov.getLocalServer().getIntAttr(Provisioning.A_zimbraAdminPort, 0);
+        int localAdminPort = prov.getLocalServer().getIntAttr(Provisioning.A_zmailAdminPort, 0);
         if (!prov.isOfflineProxyServer(mServer) && req.getLocalPort() == localAdminPort) {
             url = URLUtil.getAdminURL(mServer, requestStr, true);
         } else {
@@ -106,11 +106,11 @@ public final class ProxyTarget {
         }
     }
 
-    public Element dispatch(Element request, ZimbraSoapContext zsc) throws ServiceException {
+    public Element dispatch(Element request, ZmailSoapContext zsc) throws ServiceException {
         return execute(request, zsc).getSecond();
     }
 
-    public Pair<Element, Element> execute(Element request, ZimbraSoapContext zsc) throws ServiceException {
+    public Pair<Element, Element> execute(Element request, ZmailSoapContext zsc) throws ServiceException {
         if (zsc == null)
             return new Pair<Element, Element>(null, dispatch(request));
 
@@ -121,7 +121,7 @@ public final class ProxyTarget {
         /* Bug 77604 When a user has been configured to change their password on next login, the resulting proxied
          * ChangePasswordRequest was failing because account was specified in context but no authentication token
          * was supplied.  The server handler rejects a context which has account information but no authentication
-         * info - see ZimbraSoapContext constructor - solution is to exclude the account info from the context.
+         * info - see ZmailSoapContext constructor - solution is to exclude the account info from the context.
          */
         boolean excludeAccountDetails = AccountConstants.CHANGE_PASSWORD_REQUEST.equals(request.getQName());
         Element envelope = proto.soapEnvelope(request, zsc.toProxyContext(proto, excludeAccountDetails));
@@ -138,7 +138,7 @@ public final class ProxyTarget {
             transport.setResponseProtocol(zsc.getResponseProtocol());
             Element response = transport.invokeRaw(envelope);
             Element body = transport.extractBodyElement(response);
-            return new Pair<Element, Element>(transport.getZimbraContext(), body);
+            return new Pair<Element, Element>(transport.getZmailContext(), body);
         } catch (IOException e) {
             throw ServiceException.PROXY_ERROR(e, mURL);
         } finally {

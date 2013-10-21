@@ -14,28 +14,28 @@
 # ***** END LICENSE BLOCK *****
 # 
 #
-# Init file for zimbra mail
+# Init file for zmail mail
 #
 # chkconfig: 345 99 01
-# description: Zimbra mail service
+# description: Zmail mail service
 #
 ### BEGIN INIT INFO
-# Provides:       zimbra
+# Provides:       zmail
 # Required-Start: $network $remote_fs $syslog $time nscd cron
 # Required-Stop:  $network $remote_fs $syslog $time
 # Default-Start:  3 5
-# Description:    Zimbra mail service
+# Description:    Zmail mail service
 ### END INIT INFO
 
 
 command()
 {
-	if [ -f /opt/zimbra/redolog/redo.log ]; then
-		chown -f zimbra:zimbra /opt/zimbra/redolog/redo.log
+	if [ -f /opt/zmail/redolog/redo.log ]; then
+		chown -f zmail:zmail /opt/zmail/redolog/redo.log
 	fi
-	# su - zimbra -c "zmcontrol $1 </dev/null >>/opt/zimbra/log/startup.log 2>&1"
+	# su - zmail -c "zmcontrol $1 </dev/null >>/opt/zmail/log/startup.log 2>&1"
 	# bug 45842
-	su - zimbra -c "zmcontrol $1 </dev/null"
+	su - zmail -c "zmcontrol $1 </dev/null"
 }
 
 case "$1" in
@@ -44,21 +44,21 @@ case "$1" in
 		command startup
 		RETVAL=$?
     if [ -d /var/lock/subsys -a $RETVAL -eq 0 ]; then
-      touch /var/lock/subsys/zimbra
+      touch /var/lock/subsys/zmail
     fi
 		;;
 	start)
 		command startup
 		RETVAL=$?
     if [ -d /var/lock/subsys -a $RETVAL -eq 0 ]; then
-      touch /var/lock/subsys/zimbra
+      touch /var/lock/subsys/zmail
     fi
 		;;
 	stop)
 		command shutdown
 		RETVAL=$?
     if [ -d /var/lock/subsys -a $RETVAL -eq 0 ]; then
-      rm -f /var/lock/subsys/zimbra
+      rm -f /var/lock/subsys/zmail
     fi
 		;;
 	reload|status)

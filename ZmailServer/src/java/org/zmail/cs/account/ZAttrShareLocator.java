@@ -13,12 +13,12 @@
  * ***** END LICENSE BLOCK *****
  */
 
-package com.zimbra.cs.account;
+package org.zmail.cs.account;
 
 import java.util.HashMap;
 import java.util.Map;
 
-import com.zimbra.common.account.ZAttr;
+import org.zmail.common.account.ZAttr;
 
 /**
  * AUTO-GENERATED. DO NOT EDIT.
@@ -48,10 +48,10 @@ public abstract class ZAttrShareLocator extends NamedEntry {
      * RFC2256: common name(s) for which the entity is known by
      *
      * @param cn new value
-     * @throws com.zimbra.common.service.ServiceException if error during update
+     * @throws org.zmail.common.service.ServiceException if error during update
      */
     @ZAttr(id=-1)
-    public void setCn(String cn) throws com.zimbra.common.service.ServiceException {
+    public void setCn(String cn) throws org.zmail.common.service.ServiceException {
         HashMap<String,Object> attrs = new HashMap<String,Object>();
         attrs.put(Provisioning.A_cn, cn);
         getProvisioning().modifyAttrs(this, attrs);
@@ -74,10 +74,10 @@ public abstract class ZAttrShareLocator extends NamedEntry {
     /**
      * RFC2256: common name(s) for which the entity is known by
      *
-     * @throws com.zimbra.common.service.ServiceException if error during update
+     * @throws org.zmail.common.service.ServiceException if error during update
      */
     @ZAttr(id=-1)
-    public void unsetCn() throws com.zimbra.common.service.ServiceException {
+    public void unsetCn() throws org.zmail.common.service.ServiceException {
         HashMap<String,Object> attrs = new HashMap<String,Object>();
         attrs.put(Provisioning.A_cn, "");
         getProvisioning().modifyAttrs(this, attrs);
@@ -99,57 +99,57 @@ public abstract class ZAttrShareLocator extends NamedEntry {
     /**
      * account ID of the owner of the shared folder
      *
-     * @return zimbraShareOwnerAccountId, or null if unset
+     * @return zmailShareOwnerAccountId, or null if unset
      *
      * @since ZCS 8.0.0
      */
     @ZAttr(id=1375)
     public String getShareOwnerAccountId() {
-        return getAttr(Provisioning.A_zimbraShareOwnerAccountId, null);
+        return getAttr(Provisioning.A_zmailShareOwnerAccountId, null);
     }
 
     /**
      * account ID of the owner of the shared folder
      *
-     * @param zimbraShareOwnerAccountId new value
-     * @throws com.zimbra.common.service.ServiceException if error during update
+     * @param zmailShareOwnerAccountId new value
+     * @throws org.zmail.common.service.ServiceException if error during update
      *
      * @since ZCS 8.0.0
      */
     @ZAttr(id=1375)
-    public void setShareOwnerAccountId(String zimbraShareOwnerAccountId) throws com.zimbra.common.service.ServiceException {
+    public void setShareOwnerAccountId(String zmailShareOwnerAccountId) throws org.zmail.common.service.ServiceException {
         HashMap<String,Object> attrs = new HashMap<String,Object>();
-        attrs.put(Provisioning.A_zimbraShareOwnerAccountId, zimbraShareOwnerAccountId);
+        attrs.put(Provisioning.A_zmailShareOwnerAccountId, zmailShareOwnerAccountId);
         getProvisioning().modifyAttrs(this, attrs);
     }
 
     /**
      * account ID of the owner of the shared folder
      *
-     * @param zimbraShareOwnerAccountId new value
+     * @param zmailShareOwnerAccountId new value
      * @param attrs existing map to populate, or null to create a new map
      * @return populated map to pass into Provisioning.modifyAttrs
      *
      * @since ZCS 8.0.0
      */
     @ZAttr(id=1375)
-    public Map<String,Object> setShareOwnerAccountId(String zimbraShareOwnerAccountId, Map<String,Object> attrs) {
+    public Map<String,Object> setShareOwnerAccountId(String zmailShareOwnerAccountId, Map<String,Object> attrs) {
         if (attrs == null) attrs = new HashMap<String,Object>();
-        attrs.put(Provisioning.A_zimbraShareOwnerAccountId, zimbraShareOwnerAccountId);
+        attrs.put(Provisioning.A_zmailShareOwnerAccountId, zmailShareOwnerAccountId);
         return attrs;
     }
 
     /**
      * account ID of the owner of the shared folder
      *
-     * @throws com.zimbra.common.service.ServiceException if error during update
+     * @throws org.zmail.common.service.ServiceException if error during update
      *
      * @since ZCS 8.0.0
      */
     @ZAttr(id=1375)
-    public void unsetShareOwnerAccountId() throws com.zimbra.common.service.ServiceException {
+    public void unsetShareOwnerAccountId() throws org.zmail.common.service.ServiceException {
         HashMap<String,Object> attrs = new HashMap<String,Object>();
-        attrs.put(Provisioning.A_zimbraShareOwnerAccountId, "");
+        attrs.put(Provisioning.A_zmailShareOwnerAccountId, "");
         getProvisioning().modifyAttrs(this, attrs);
     }
 
@@ -164,7 +164,7 @@ public abstract class ZAttrShareLocator extends NamedEntry {
     @ZAttr(id=1375)
     public Map<String,Object> unsetShareOwnerAccountId(Map<String,Object> attrs) {
         if (attrs == null) attrs = new HashMap<String,Object>();
-        attrs.put(Provisioning.A_zimbraShareOwnerAccountId, "");
+        attrs.put(Provisioning.A_zmailShareOwnerAccountId, "");
         return attrs;
     }
 

@@ -12,7 +12,7 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.mailbox;
+package org.zmail.cs.mailbox;
 
 import java.security.SecureRandom;
 import java.sql.PreparedStatement;
@@ -28,21 +28,21 @@ import com.google.common.base.Strings;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
-import com.zimbra.common.localconfig.DebugConfig;
-import com.zimbra.common.mailbox.Color;
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.common.util.ZimbraLog;
-import com.zimbra.cs.db.Db;
-import com.zimbra.cs.db.DbMailItem;
-import com.zimbra.cs.db.DbMailbox;
-import com.zimbra.cs.db.DbPool;
-import com.zimbra.cs.db.DbPool.DbConnection;
-import com.zimbra.cs.db.DbTag;
-import com.zimbra.cs.db.DbUtil;
-import com.zimbra.cs.index.SortBy;
-import com.zimbra.cs.mailbox.MailItem.UnderlyingData;
-import com.zimbra.cs.mailbox.acl.AclPushSerializer;
-import com.zimbra.cs.service.util.SyncToken;
+import org.zmail.common.localconfig.DebugConfig;
+import org.zmail.common.mailbox.Color;
+import org.zmail.common.service.ServiceException;
+import org.zmail.common.util.ZmailLog;
+import org.zmail.cs.db.Db;
+import org.zmail.cs.db.DbMailItem;
+import org.zmail.cs.db.DbMailbox;
+import org.zmail.cs.db.DbPool;
+import org.zmail.cs.db.DbPool.DbConnection;
+import org.zmail.cs.db.DbTag;
+import org.zmail.cs.db.DbUtil;
+import org.zmail.cs.index.SortBy;
+import org.zmail.cs.mailbox.MailItem.UnderlyingData;
+import org.zmail.cs.mailbox.acl.AclPushSerializer;
+import org.zmail.cs.service.util.SyncToken;
 
 /**
  * Utility class to upgrade mailbox.
@@ -162,7 +162,7 @@ public final class MailboxUpgrade {
             // fetch highest_indexed
             String highestIndexed = null;
             stmt = conn.prepareStatement("SELECT highest_indexed FROM " +
-                    DbMailbox.qualifyZimbraTableName(mbox, "mailbox") + " WHERE id = ?");
+                    DbMailbox.qualifyZmailTableName(mbox, "mailbox") + " WHERE id = ?");
             stmt.setInt(1, mbox.getId());
             rs = stmt.executeQuery();
             if (rs.next()) {
@@ -193,7 +193,7 @@ public final class MailboxUpgrade {
             stmt.close();
 
             // clear highest_indexed
-            stmt = conn.prepareStatement("UPDATE " + DbMailbox.qualifyZimbraTableName(mbox, "mailbox") +
+            stmt = conn.prepareStatement("UPDATE " + DbMailbox.qualifyZmailTableName(mbox, "mailbox") +
                     " SET highest_indexed = NULL WHERE id = ?");
             stmt.setInt(1, mbox.getId());
             stmt.executeUpdate();
@@ -211,9 +211,9 @@ public final class MailboxUpgrade {
         ContactGroup.MigrateContactGroup migrate = new ContactGroup.MigrateContactGroup(mbox);
         try {
             migrate.handle();
-            ZimbraLog.mailbox.info("contact group migration finished for mailbox " + mbox.getId());
+            ZmailLog.mailbox.info("contact group migration finished for mailbox " + mbox.getId());
         } catch (Exception e) {
-            ZimbraLog.mailbox.warn("contact group migration failed", e);
+            ZmailLog.mailbox.warn("contact group migration failed", e);
         }
     }
 
@@ -241,7 +241,7 @@ public final class MailboxUpgrade {
         DbConnection conn = DbPool.getConnection(mbox);
         try {
             if (alreadyUpgradedTo2_1(conn, mbox)) {
-                ZimbraLog.mailbox.warn("detected already-migrated mailbox %d during migration to version 2.1; skipping.", mbox.getId());
+                ZmailLog.mailbox.warn("detected already-migrated mailbox %d during migration to version 2.1; skipping.", mbox.getId());
             } else {
                 // for flags that we want to be searchable, put an entry in the TAG table
                 for (int tagId : Mailbox.REIFIED_FLAGS) {
@@ -361,7 +361,7 @@ public final class MailboxUpgrade {
             stmt.setInt(pos, finfo.id);
             rs = stmt.executeQuery();
             if (rs.next() && rs.getInt(1) > 0) {
-                ZimbraLog.mailbox.debug(finfo.name() + " flag already exists");
+                ZmailLog.mailbox.debug(finfo.name() + " flag already exists");
                 return true;
             }
 

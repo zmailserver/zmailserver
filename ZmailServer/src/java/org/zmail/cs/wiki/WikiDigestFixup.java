@@ -13,7 +13,7 @@
  * ***** END LICENSE BLOCK *****
  */
 
-package com.zimbra.cs.wiki;
+package org.zmail.cs.wiki;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -23,18 +23,18 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.zimbra.cs.account.AccountServiceException;
-import com.zimbra.cs.db.DbPool;
-import com.zimbra.cs.db.DbPool.DbConnection;
-import com.zimbra.cs.mailbox.MailItem;
-import com.zimbra.cs.mailbox.Mailbox;
-import com.zimbra.cs.mailbox.MailboxManager;
-import com.zimbra.cs.mailbox.OperationContext;
-import com.zimbra.cs.store.MailboxBlob;
-import com.zimbra.cs.store.StoreManager;
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.common.util.ByteUtil;
-import com.zimbra.common.util.CliUtil;
+import org.zmail.cs.account.AccountServiceException;
+import org.zmail.cs.db.DbPool;
+import org.zmail.cs.db.DbPool.DbConnection;
+import org.zmail.cs.mailbox.MailItem;
+import org.zmail.cs.mailbox.Mailbox;
+import org.zmail.cs.mailbox.MailboxManager;
+import org.zmail.cs.mailbox.OperationContext;
+import org.zmail.cs.store.MailboxBlob;
+import org.zmail.cs.store.StoreManager;
+import org.zmail.common.service.ServiceException;
+import org.zmail.common.util.ByteUtil;
+import org.zmail.common.util.CliUtil;
 
 /**
  * Migration utility to fix the mail_item.blob_digest database column

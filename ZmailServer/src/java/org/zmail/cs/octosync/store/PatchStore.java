@@ -14,16 +14,16 @@
  * 
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.octosync.store;
+package org.zmail.cs.octosync.store;
 
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.cs.octosync.PatchManifest;
-import com.zimbra.cs.octosync.store.BlobStore.StoredBlob;
-import com.zimbra.cs.store.IncomingBlob;
+import org.zmail.common.service.ServiceException;
+import org.zmail.cs.octosync.PatchManifest;
+import org.zmail.cs.octosync.store.BlobStore.StoredBlob;
+import org.zmail.cs.store.IncomingBlob;
 
 /**
  * Encapsulates functionality for storing and retrieving patches and their manifests.

@@ -56,10 +56,10 @@ our $Soap11 = new Soap11;
 our $LogRequest = 0;
 our $LogResponse = 0;
 
-our $ZIMBRA_ACCT_NS = "urn:zimbraAccount";
-our $ZIMBRA_MAIL_NS = "urn:zimbraMail";
-our $ZIMBRA_ADMIN_NS = "urn:zimbraAdmin";
-our $ZIMBRA_IM_NS = "urn:zimbraIM";
+our $ZIMBRA_ACCT_NS = "urn:zmailAccount";
+our $ZIMBRA_MAIL_NS = "urn:zmailMail";
+our $ZIMBRA_ADMIN_NS = "urn:zmailAdmin";
+our $ZIMBRA_IM_NS = "urn:zmailIM";
 
 sub setLogLevel {
     shift(); 
@@ -211,7 +211,7 @@ sub getAdminUrl
 }
 
 #    
-# returns a ZimbraContext
+# returns a ZmailContext
 #
 sub stdAuthByName {
   my ($self, $url, $acctName, $passwd, $opts) = @_;
@@ -220,7 +220,7 @@ sub stdAuthByName {
     
 
 #    
-# returns a ZimbraContext
+# returns a ZmailContext
 #
 sub adminAuthByName {
   my ($self, $url, $acctName, $passwd, $opts) = @_;
@@ -238,7 +238,7 @@ sub doAuthByName {
     $sessionId = $opts->{SESSIONID};
   }
 
-  my $ctxt = new XmlElement("context", "urn:zimbra");
+  my $ctxt = new XmlElement("context", "urn:zmail");
   if (!defined($opts) || !defined($opts->{NOTIFY})) {
     $ctxt->add_child(new XmlElement("nosession"));
   } else {
@@ -289,10 +289,10 @@ sub doAuthByName {
     $wantcontext = 1;
   }
   
-  return $self->zimbraContext($authToken, $sessionId, $wantcontext, $opts);
+  return $self->zmailContext($authToken, $sessionId, $wantcontext, $opts);
 }
 
-sub zimbraContext {
+sub zmailContext {
 	my ($self, $authtoken, $sessionId, $wantcontext, $opts) = @_;
 
 #    if (defined($sessionId)) {
@@ -306,7 +306,7 @@ sub zimbraContext {
       $notSeq = $opts->{NOTSEQ};
     }
     
-	my $context = new XmlElement("context", "urn:zimbra");
+	my $context = new XmlElement("context", "urn:zmail");
 	my $auth = new XmlElement("authToken");
 	$auth->content($authtoken);
 	$context->add_child($auth);

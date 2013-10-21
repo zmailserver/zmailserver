@@ -13,7 +13,7 @@
  * ***** END LICENSE BLOCK *****
  */
 
-package com.zimbra.cs.memcached;
+package org.zmail.cs.memcached;
 
 /**
  * List of all memcached key prefixes used by ZCS

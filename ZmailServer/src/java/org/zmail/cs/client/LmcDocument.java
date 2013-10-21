@@ -12,7 +12,7 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.client;
+package org.zmail.cs.client;
 
 public class LmcDocument {
 	protected String mId;

@@ -1,12 +1,12 @@
-To: "Zimbra Community Developer" <user1@example.com>
-From: "Zimbra Team" <zimbra@example.com>
+To: "Zmail Community Developer" <user1@example.com>
+From: "Zmail Team" <zmail@example.com>
 Subject: Welcome to the Zimbra Collaboration Suite source!
 Date: Fri, 26 Aug 2005 14:45:18 -0700
 
 Greetings.
 
 This is a sample message in the source code.  You can drop
-other sample messages in this directory (ZimbraServer\data\TestMailRaw)
+other sample messages in this directory (ZmailServer\data\TestMailRaw)
 - during a "ant reset-the-world" these messages are 
 inserted into the 'user1' mailbox.
 
@@ -16,5 +16,5 @@ or equivalent function to see your message in its RFC822
 form.
 
 If you have any questions about the build, do not hesitate
-to search for answers on our forums (http://www.zimbra.com/forums),
+to search for answers on our forums (http://www.zmail.com/forums),
 or to ask us a question of your own!

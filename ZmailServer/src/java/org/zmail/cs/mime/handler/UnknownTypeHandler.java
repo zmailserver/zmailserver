@@ -12,12 +12,12 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.mime.handler;
+package org.zmail.cs.mime.handler;
 
 import org.apache.lucene.document.Document;
 
-import com.zimbra.cs.convert.AttachmentInfo;
-import com.zimbra.cs.mime.MimeHandler;
+import org.zmail.cs.convert.AttachmentInfo;
+import org.zmail.cs.mime.MimeHandler;
 
 /**
  * {@link MimeHandler} for no conversion.

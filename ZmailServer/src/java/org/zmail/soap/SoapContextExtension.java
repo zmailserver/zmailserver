@@ -12,16 +12,16 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.soap;
+package org.zmail.soap;
 
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.common.soap.Element;
-import com.zimbra.common.util.ZimbraLog;
-import com.zimbra.cs.session.SoapSession;
+import org.zmail.common.service.ServiceException;
+import org.zmail.common.soap.Element;
+import org.zmail.common.util.ZmailLog;
+import org.zmail.cs.session.SoapSession;
 
 public abstract class SoapContextExtension {
 	
@@ -30,12 +30,12 @@ public abstract class SoapContextExtension {
 	
 	public static void register(String name, SoapContextExtension sce) {
 		synchronized (sExtensions) {
-			ZimbraLog.soap.info("Adding context extension: " + name);
+			ZmailLog.soap.info("Adding context extension: " + name);
 			sExtensions.add(sce);
 		}
 	}
 	
-	public static void addExtensionHeaders(Element context, ZimbraSoapContext zsc, SoapSession session) throws ServiceException {
+	public static void addExtensionHeaders(Element context, ZmailSoapContext zsc, SoapSession session) throws ServiceException {
 		SoapContextExtension[] exts = null;
 		synchronized (sExtensions) {
 			exts = new SoapContextExtension[sExtensions.size()];
@@ -46,5 +46,5 @@ public abstract class SoapContextExtension {
 		}
 	}
 
-	public abstract void addExtensionHeader(Element context, ZimbraSoapContext zsc,  SoapSession session) throws ServiceException;
+	public abstract void addExtensionHeader(Element context, ZmailSoapContext zsc,  SoapSession session) throws ServiceException;
 }

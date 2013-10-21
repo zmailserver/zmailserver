@@ -13,15 +13,15 @@
  * ***** END LICENSE BLOCK *****
  */
 
-package com.zimbra.cs.index;
+package org.zmail.cs.index;
 
 import org.apache.lucene.document.Document;
 
 import com.google.common.base.Objects;
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.cs.mailbox.Mailbox;
-import com.zimbra.cs.mailbox.MailItem;
-import com.zimbra.cs.mailbox.Message;
+import org.zmail.common.service.ServiceException;
+import org.zmail.cs.mailbox.Mailbox;
+import org.zmail.cs.mailbox.MailItem;
+import org.zmail.cs.mailbox.Message;
 
 /**
  * Inderect result object wrapped around Lucene {@link Document}.
@@ -35,13 +35,13 @@ import com.zimbra.cs.mailbox.Message;
  * @since Oct 15, 2004
  * @author tim
  */
-public final class MessagePartHit extends ZimbraHit {
+public final class MessagePartHit extends ZmailHit {
 
     private final Document document;
     private MessageHit hit;
     private final int itemId;
 
-    protected MessagePartHit(ZimbraQueryResultsImpl res, Mailbox mbx, int id,
+    protected MessagePartHit(ZmailQueryResultsImpl res, Mailbox mbx, int id,
             Message msg, Document doc, Object sortValue) {
         super(res, mbx, sortValue);
         itemId = id;

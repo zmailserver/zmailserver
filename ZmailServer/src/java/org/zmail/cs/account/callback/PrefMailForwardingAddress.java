@@ -12,17 +12,17 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.account.callback;
+package org.zmail.cs.account.callback;
 
 import java.util.Map;
 
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.common.util.ZimbraLog;
-import com.zimbra.cs.account.Account;
-import com.zimbra.cs.account.AttributeCallback;
-import com.zimbra.cs.account.Entry;
-import com.zimbra.cs.account.Provisioning;
-import com.zimbra.cs.account.callback.CallbackContext.DataKey;
+import org.zmail.common.service.ServiceException;
+import org.zmail.common.util.ZmailLog;
+import org.zmail.cs.account.Account;
+import org.zmail.cs.account.AttributeCallback;
+import org.zmail.cs.account.Entry;
+import org.zmail.cs.account.Provisioning;
+import org.zmail.cs.account.callback.CallbackContext.DataKey;
 
 public class PrefMailForwardingAddress extends AttributeCallback {
 
@@ -58,7 +58,7 @@ public class PrefMailForwardingAddress extends AttributeCallback {
             try {
                 maxLen = Integer.parseInt(maxLenInCtxt);
             } catch (NumberFormatException e) {
-                ZimbraLog.account.warn("encountered invalid " + 
+                ZmailLog.account.warn("encountered invalid " + 
                         DataKey.MAIL_FORWARDING_ADDRESS_MAX_LEN.name() + ": " + maxLenInCtxt);
             }
         }
@@ -68,7 +68,7 @@ public class PrefMailForwardingAddress extends AttributeCallback {
             try {
                 maxLen = Integer.parseInt(maxAddrsInCtxt);
             } catch (NumberFormatException e) {
-                ZimbraLog.account.warn("encountered invalid " + 
+                ZmailLog.account.warn("encountered invalid " + 
                         DataKey.MAIL_FORWARDING_ADDRESS_MAX_NUM_ADDRS.name() + ": " + maxAddrsInCtxt);
             }
         } 
@@ -88,14 +88,14 @@ public class PrefMailForwardingAddress extends AttributeCallback {
         
         if (newValue.length() > maxLen) {
             throw ServiceException.INVALID_REQUEST("value is too long, the limit(" + 
-                    Provisioning.A_zimbraMailForwardingAddressMaxLength + ") is " + 
+                    Provisioning.A_zmailMailForwardingAddressMaxLength + ") is " + 
                     maxLen, null);
         }
         
         String[] addrs = newValue.split(",");
         if (addrs.length > maxAddrs) {
             throw ServiceException.INVALID_REQUEST("value is too long, the limit(" + 
-                    Provisioning.A_zimbraMailForwardingAddressMaxNumAddrs + ") is " + 
+                    Provisioning.A_zmailMailForwardingAddressMaxNumAddrs + ") is " + 
                     maxAddrs, null);
         }
     }

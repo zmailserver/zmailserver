@@ -14,15 +14,15 @@
  * 
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.account.callback;
+package org.zmail.cs.account.callback;
 
 import java.util.Map;
 
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.common.util.ZimbraLog;
-import com.zimbra.cs.account.AttributeCallback;
-import com.zimbra.cs.account.Entry;
-import com.zimbra.cs.account.auth.AuthMechanism;
+import org.zmail.common.service.ServiceException;
+import org.zmail.common.util.ZmailLog;
+import org.zmail.cs.account.AttributeCallback;
+import org.zmail.cs.account.Entry;
+import org.zmail.cs.account.auth.AuthMechanism;
 
 public class AuthMech extends AttributeCallback {
 
@@ -49,7 +49,7 @@ public class AuthMech extends AttributeCallback {
                     AuthMechanism.AuthMech mech = AuthMechanism.AuthMech.fromString(authMech);
                     valid = true;
                 } catch (ServiceException e) {
-                    ZimbraLog.account.error("invalud auth mech", e);
+                    ZmailLog.account.error("invalud auth mech", e);
                 }
             }
            

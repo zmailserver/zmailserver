@@ -1,4 +1,4 @@
-<zimbraDirSync>    
+<zmailDirSync>    
     <masterURL>ldap://exchange2003.example.com</masterURL>
     <masterFilter>objectclass=person</masterFilter>
     <masterSearchBase>\</masterSearchBase>
@@ -17,4 +17,4 @@
 	<attributeMap>
         <attr local="displayName" master="name"/>
     </attributeMap>
-</zimbraDirSync>
+</zmailDirSync>

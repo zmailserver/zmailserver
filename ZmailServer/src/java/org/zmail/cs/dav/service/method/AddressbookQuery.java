@@ -12,7 +12,7 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.dav.service.method;
+package org.zmail.cs.dav.service.method;
 
 import java.util.Collection;
 
@@ -20,16 +20,16 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.dom4j.Element;
 
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.cs.dav.DavContext;
-import com.zimbra.cs.dav.DavElements;
-import com.zimbra.cs.dav.DavException;
-import com.zimbra.cs.dav.DavContext.RequestProp;
-import com.zimbra.cs.dav.carddav.Filter;
-import com.zimbra.cs.dav.resource.AddressObject;
-import com.zimbra.cs.dav.resource.AddressbookCollection;
-import com.zimbra.cs.dav.resource.DavResource;
-import com.zimbra.cs.dav.service.DavResponse;
+import org.zmail.common.service.ServiceException;
+import org.zmail.cs.dav.DavContext;
+import org.zmail.cs.dav.DavElements;
+import org.zmail.cs.dav.DavException;
+import org.zmail.cs.dav.DavContext.RequestProp;
+import org.zmail.cs.dav.carddav.Filter;
+import org.zmail.cs.dav.resource.AddressObject;
+import org.zmail.cs.dav.resource.AddressbookCollection;
+import org.zmail.cs.dav.resource.DavResource;
+import org.zmail.cs.dav.service.DavResponse;
 
 /*
  * draft-daboo-carddav-02 section 10.5

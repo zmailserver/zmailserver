@@ -12,13 +12,13 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.session;
+package org.zmail.cs.session;
 
 import java.util.Set;
 
-import com.zimbra.cs.mailbox.MailItem;
-import com.zimbra.cs.redolog.CommitId;
-import com.zimbra.cs.redolog.RedoCommitCallback;
+import org.zmail.cs.mailbox.MailItem;
+import org.zmail.cs.redolog.CommitId;
+import org.zmail.cs.redolog.RedoCommitCallback;
 
 public class AllAccountsRedoCommitCallback implements RedoCommitCallback {
     private final String accountId;

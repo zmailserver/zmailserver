@@ -12,7 +12,7 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.filter;
+package org.zmail.cs.filter;
 
 import javax.mail.internet.MimeMessage;
 import javax.mail.util.SharedByteArrayInputStream;
@@ -22,13 +22,13 @@ import junit.framework.Assert;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.cs.account.Config;
-import com.zimbra.cs.account.MockProvisioning;
-import com.zimbra.cs.account.Provisioning;
-import com.zimbra.cs.mime.Mime;
-import com.zimbra.cs.service.util.SpamHandler;
-import com.zimbra.cs.util.JMSession;
+import org.zmail.common.service.ServiceException;
+import org.zmail.cs.account.Config;
+import org.zmail.cs.account.MockProvisioning;
+import org.zmail.cs.account.Provisioning;
+import org.zmail.cs.mime.Mime;
+import org.zmail.cs.service.util.SpamHandler;
+import org.zmail.cs.util.JMSession;
 
 /**
  * Unit tests for spam/whitelist filtering
@@ -49,8 +49,8 @@ public class SpamTest {
      */
     @Test
     public void whitelist() throws Exception {
-        String raw = "From: sender@zimbra.com\n" +
-                "To: recipient@zimbra.com\n" +
+        String raw = "From: sender@zmail.com\n" +
+                "To: recipient@zmail.com\n" +
                 "X-Spam-Flag: YES\n" +
                 "Subject: test\n" +
                 "\n" +
@@ -59,8 +59,8 @@ public class SpamTest {
         Assert.assertTrue(SpamHandler.isSpam(msg));
 
         // add a whitelist header to the previous message
-        raw = "From: sender@zimbra.com\n" +
-                "To: recipient@zimbra.com\n" +
+        raw = "From: sender@zmail.com\n" +
+                "To: recipient@zmail.com\n" +
                 "X-Whitelist-Flag: YES\n" +
                 "X-Spam-Flag: YES\n" +
                 "Subject: test\n" +

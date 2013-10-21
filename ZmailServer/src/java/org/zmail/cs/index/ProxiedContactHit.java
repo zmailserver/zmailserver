@@ -13,15 +13,15 @@
  * ***** END LICENSE BLOCK *****
  */
 
-package com.zimbra.cs.index;
+package org.zmail.cs.index;
 
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.common.soap.MailConstants;
-import com.zimbra.common.soap.Element;
-import com.zimbra.common.util.ZimbraLog;
+import org.zmail.common.service.ServiceException;
+import org.zmail.common.soap.MailConstants;
+import org.zmail.common.soap.Element;
+import org.zmail.common.util.ZmailLog;
 
 /**
- * A {@link ZimbraHit} which is being proxied from another server: i.e. we did a SOAP request somewhere else and are now
+ * A {@link ZmailHit} which is being proxied from another server: i.e. we did a SOAP request somewhere else and are now
  * wrapping results we got from request.
  */
 public final class ProxiedContactHit extends ProxiedHit  {
@@ -29,7 +29,7 @@ public final class ProxiedContactHit extends ProxiedHit  {
     /**
      * @param sortValue - typically A_FILE_AS_STR rather than A_SORT_FIELD (the value for general ProxiedHits)
      */
-    public ProxiedContactHit(ZimbraQueryResultsImpl results, Element elt, String sortValue) {
+    public ProxiedContactHit(ZmailQueryResultsImpl results, Element elt, String sortValue) {
         super(results, elt, sortValue);
     }
 

@@ -23,11 +23,11 @@ from datetime import date
 numdays = 7
 
 # Find the current total number of log files
-p = subprocess.Popen('ls /opt/zimbra/log/access_log* | wc -l', shell=True, stdout=subprocess.PIPE)
+p = subprocess.Popen('ls /opt/zmail/log/access_log* | wc -l', shell=True, stdout=subprocess.PIPE)
 numlogfiles = p.stdout.read()
 
 # Get the list of log files to read
-lscmdfmt = 'ls /opt/zimbra/log/access_log* | tail -%d | head -%d'
+lscmdfmt = 'ls /opt/zmail/log/access_log* | tail -%d | head -%d'
 if numlogfiles > numdays:
     lscmd = lscmdfmt % (numdays + 1, numdays)
 else:
@@ -47,7 +47,7 @@ for file in p.stdout.readlines():
         if not re.match('(zm.*|ZCS.*|zclient.*|.*ZCB.*|Jakarta.*|curl.*|-)', ua) is None:
             continue
         requrl = l[1]
-        if not re.match('(.*/zimbraAdmin.*|.*/service/admin.*)', requrl) is None:
+        if not re.match('(.*/zmailAdmin.*|.*/service/admin.*)', requrl) is None:
             continue
         result = l[2].split()[0]
         if result != '200':
@@ -62,7 +62,7 @@ for file in p.stdout.readlines():
         else:
             resultmap[key] = curval + 1
 
-reportfile = '/opt/zimbra/zmstat/client_usage_report_%s.csv' % (date.today().isoformat())
+reportfile = '/opt/zmail/zmstat/client_usage_report_%s.csv' % (date.today().isoformat())
 subprocess.call('rm -f %s' % reportfile, shell=True)
 csv = open(reportfile, 'w')
 subprocess.call('echo Writing %s ..' % reportfile, shell=True)

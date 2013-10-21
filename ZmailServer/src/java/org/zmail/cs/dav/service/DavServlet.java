@@ -12,7 +12,7 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.dav.service;
+package org.zmail.cs.dav.service;
 
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
@@ -38,65 +38,65 @@ import org.dom4j.Document;
 import org.dom4j.DocumentException;
 import org.dom4j.Element;
 
-import com.zimbra.client.ZFolder;
-import com.zimbra.client.ZMailbox;
-import com.zimbra.common.account.Key;
-import com.zimbra.common.account.Key.AccountBy;
-import com.zimbra.common.httpclient.HttpClientUtil;
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.common.util.ByteUtil;
-import com.zimbra.common.util.HttpUtil;
-import com.zimbra.common.util.Pair;
-import com.zimbra.common.util.ZimbraHttpConnectionManager;
-import com.zimbra.common.util.ZimbraLog;
-import com.zimbra.cs.account.Account;
-import com.zimbra.cs.account.AuthToken;
-import com.zimbra.cs.account.AuthTokenException;
-import com.zimbra.cs.account.Provisioning;
-import com.zimbra.cs.account.Server;
-import com.zimbra.cs.dav.DavContext;
-import com.zimbra.cs.dav.DavContext.KnownUserAgent;
-import com.zimbra.cs.dav.DavElements;
-import com.zimbra.cs.dav.DavException;
-import com.zimbra.cs.dav.DavProtocol;
-import com.zimbra.cs.dav.DomUtil;
-import com.zimbra.cs.dav.service.method.Acl;
-import com.zimbra.cs.dav.service.method.Copy;
-import com.zimbra.cs.dav.service.method.Delete;
-import com.zimbra.cs.dav.service.method.Get;
-import com.zimbra.cs.dav.service.method.Head;
-import com.zimbra.cs.dav.service.method.Lock;
-import com.zimbra.cs.dav.service.method.MkCalendar;
-import com.zimbra.cs.dav.service.method.MkCol;
-import com.zimbra.cs.dav.service.method.Move;
-import com.zimbra.cs.dav.service.method.Options;
-import com.zimbra.cs.dav.service.method.Post;
-import com.zimbra.cs.dav.service.method.PropFind;
-import com.zimbra.cs.dav.service.method.PropPatch;
-import com.zimbra.cs.dav.service.method.Put;
-import com.zimbra.cs.dav.service.method.Report;
-import com.zimbra.cs.dav.service.method.Unlock;
-import com.zimbra.cs.mailbox.Folder;
-import com.zimbra.cs.mailbox.MailServiceException;
-import com.zimbra.cs.mailbox.Mailbox;
-import com.zimbra.cs.mailbox.MailboxManager;
-import com.zimbra.cs.mailbox.Mountpoint;
-import com.zimbra.cs.mailbox.calendar.cache.AccountCtags;
-import com.zimbra.cs.mailbox.calendar.cache.AccountKey;
-import com.zimbra.cs.mailbox.calendar.cache.CalendarCacheManager;
-import com.zimbra.cs.mailbox.calendar.cache.CtagInfo;
-import com.zimbra.cs.mailbox.calendar.cache.CtagResponseCache;
-import com.zimbra.cs.mailbox.calendar.cache.CtagResponseCache.CtagResponseCacheKey;
-import com.zimbra.cs.mailbox.calendar.cache.CtagResponseCache.CtagResponseCacheValue;
-import com.zimbra.cs.memcached.MemcachedConnector;
-import com.zimbra.cs.service.AuthProvider;
-import com.zimbra.cs.service.FileUploadServlet.Upload;
-import com.zimbra.cs.service.util.ItemId;
-import com.zimbra.cs.servlet.ZimbraServlet;
-import com.zimbra.cs.util.AccountUtil;
+import org.zmail.client.ZFolder;
+import org.zmail.client.ZMailbox;
+import org.zmail.common.account.Key;
+import org.zmail.common.account.Key.AccountBy;
+import org.zmail.common.httpclient.HttpClientUtil;
+import org.zmail.common.service.ServiceException;
+import org.zmail.common.util.ByteUtil;
+import org.zmail.common.util.HttpUtil;
+import org.zmail.common.util.Pair;
+import org.zmail.common.util.ZmailHttpConnectionManager;
+import org.zmail.common.util.ZmailLog;
+import org.zmail.cs.account.Account;
+import org.zmail.cs.account.AuthToken;
+import org.zmail.cs.account.AuthTokenException;
+import org.zmail.cs.account.Provisioning;
+import org.zmail.cs.account.Server;
+import org.zmail.cs.dav.DavContext;
+import org.zmail.cs.dav.DavContext.KnownUserAgent;
+import org.zmail.cs.dav.DavElements;
+import org.zmail.cs.dav.DavException;
+import org.zmail.cs.dav.DavProtocol;
+import org.zmail.cs.dav.DomUtil;
+import org.zmail.cs.dav.service.method.Acl;
+import org.zmail.cs.dav.service.method.Copy;
+import org.zmail.cs.dav.service.method.Delete;
+import org.zmail.cs.dav.service.method.Get;
+import org.zmail.cs.dav.service.method.Head;
+import org.zmail.cs.dav.service.method.Lock;
+import org.zmail.cs.dav.service.method.MkCalendar;
+import org.zmail.cs.dav.service.method.MkCol;
+import org.zmail.cs.dav.service.method.Move;
+import org.zmail.cs.dav.service.method.Options;
+import org.zmail.cs.dav.service.method.Post;
+import org.zmail.cs.dav.service.method.PropFind;
+import org.zmail.cs.dav.service.method.PropPatch;
+import org.zmail.cs.dav.service.method.Put;
+import org.zmail.cs.dav.service.method.Report;
+import org.zmail.cs.dav.service.method.Unlock;
+import org.zmail.cs.mailbox.Folder;
+import org.zmail.cs.mailbox.MailServiceException;
+import org.zmail.cs.mailbox.Mailbox;
+import org.zmail.cs.mailbox.MailboxManager;
+import org.zmail.cs.mailbox.Mountpoint;
+import org.zmail.cs.mailbox.calendar.cache.AccountCtags;
+import org.zmail.cs.mailbox.calendar.cache.AccountKey;
+import org.zmail.cs.mailbox.calendar.cache.CalendarCacheManager;
+import org.zmail.cs.mailbox.calendar.cache.CtagInfo;
+import org.zmail.cs.mailbox.calendar.cache.CtagResponseCache;
+import org.zmail.cs.mailbox.calendar.cache.CtagResponseCache.CtagResponseCacheKey;
+import org.zmail.cs.mailbox.calendar.cache.CtagResponseCache.CtagResponseCacheValue;
+import org.zmail.cs.memcached.MemcachedConnector;
+import org.zmail.cs.service.AuthProvider;
+import org.zmail.cs.service.FileUploadServlet.Upload;
+import org.zmail.cs.service.util.ItemId;
+import org.zmail.cs.servlet.ZmailServlet;
+import org.zmail.cs.util.AccountUtil;
 
 @SuppressWarnings("serial")
-public class DavServlet extends ZimbraServlet {
+public class DavServlet extends ZmailServlet {
 
 	public static final String DAV_PATH = "/dav";
 
@@ -149,9 +149,9 @@ public class DavServlet extends ZimbraServlet {
     	} catch (Exception e) {
     		return RequestType.none;
     	}
-    	boolean allowPassword = server.getBooleanAttr(Provisioning.A_zimbraCalendarCalDavClearTextPasswordEnabled, true);
-    	int sslPort = server.getIntAttr(Provisioning.A_zimbraMailSSLPort, 443);
-    	int mailPort = server.getIntAttr(Provisioning.A_zimbraMailPort, 80);
+    	boolean allowPassword = server.getBooleanAttr(Provisioning.A_zmailCalendarCalDavClearTextPasswordEnabled, true);
+    	int sslPort = server.getIntAttr(Provisioning.A_zmailMailSSLPort, 443);
+    	int mailPort = server.getIntAttr(Provisioning.A_zmailMailPort, 80);
     	int incomingPort = req.getLocalPort();
     	if (incomingPort == sslPort)
     		return RequestType.both;
@@ -162,9 +162,9 @@ public class DavServlet extends ZimbraServlet {
     }
 
 	public void service(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		ZimbraLog.clearContext();
+		ZmailLog.clearContext();
 		addRemoteIpToLoggingContext(req);
-		ZimbraLog.addUserAgentToContext(req.getHeader(DavProtocol.HEADER_USER_AGENT));
+		ZmailLog.addUserAgentToContext(req.getHeader(DavProtocol.HEADER_USER_AGENT));
 
 		RequestType rtype = getAllowedRequestType(req);
 
@@ -174,14 +174,14 @@ public class DavServlet extends ZimbraServlet {
 		}
 
 		/*
-		if (ZimbraLog.dav.isDebugEnabled()) {
+		if (ZmailLog.dav.isDebugEnabled()) {
 			java.util.Enumeration en = req.getHeaderNames();
 			while (en.hasMoreElements()) {
 				String n = (String)en.nextElement();
 				java.util.Enumeration vals = req.getHeaders(n);
 				while (vals.hasMoreElements()) {
 					String v = (String)vals.nextElement();
-		        	ZimbraLog.dav.debug("HEADER "+n+": "+v);
+		        	ZmailLog.dav.debug("HEADER "+n+": "+v);
 				}
 			}
 		}
@@ -202,14 +202,14 @@ public class DavServlet extends ZimbraServlet {
 				} catch (Exception e) {}
 				return;
 			}
-			ZimbraLog.addToContext(ZimbraLog.C_ANAME, authUser.getName());
+			ZmailLog.addToContext(ZmailLog.C_ANAME, authUser.getName());
 			ctxt = new DavContext(req, resp, authUser);
 		} catch (AuthTokenException e) {
-			ZimbraLog.dav.error("error getting authenticated user", e);
+			ZmailLog.dav.error("error getting authenticated user", e);
 			resp.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
 			return;
 		} catch (ServiceException e) {
-			ZimbraLog.dav.error("error getting authenticated user", e);
+			ZmailLog.dav.error("error getting authenticated user", e);
 			resp.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
 			return;
 		}
@@ -225,16 +225,16 @@ public class DavServlet extends ZimbraServlet {
 
         CacheStates cache = null;
         try {
-            if (ZimbraLog.dav.isDebugEnabled()) {
+            if (ZmailLog.dav.isDebugEnabled()) {
                 try {
                     Upload upload = ctxt.getUpload();
                     if (upload.getSize() > 0 && upload.getContentType().startsWith("text")) {
-                        ZimbraLog.dav.debug("REQUEST:\n"+new String(ByteUtil.readInput(upload.getInputStream(), -1, 2048), "UTF-8"));
+                        ZmailLog.dav.debug("REQUEST:\n"+new String(ByteUtil.readInput(upload.getInputStream(), -1, 2048), "UTF-8"));
                     }
                 } catch (DavException de) {
                     throw de;
                 } catch (Exception e) {
-                    ZimbraLog.dav.debug("ouch", e);
+                    ZmailLog.dav.debug("ouch", e);
                 }
             }
         	cache = checkCachedResponse(ctxt, authUser);
@@ -249,42 +249,42 @@ public class DavServlet extends ZimbraServlet {
 		} catch (DavException e) {
 			if (e.getCause() instanceof MailServiceException.NoSuchItemException ||
 					e.getStatus() == HttpServletResponse.SC_NOT_FOUND)
-				ZimbraLog.dav.info(ctxt.getUri()+" not found");
+				ZmailLog.dav.info(ctxt.getUri()+" not found");
 			else if (e.getStatus() == HttpServletResponse.SC_MOVED_TEMPORARILY ||
 					 e.getStatus() == HttpServletResponse.SC_MOVED_PERMANENTLY)
-				ZimbraLog.dav.info("sending redirect");
+				ZmailLog.dav.info("sending redirect");
 
 			try {
 				if (e.isStatusSet()) {
 					resp.setStatus(e.getStatus());
 					if (e.hasErrorMessage())
 						e.writeErrorMsg(resp.getOutputStream());
-	                ZimbraLog.dav.info("sending http error %d because: %s", e.getStatus(), e.getMessage());
+	                ZmailLog.dav.info("sending http error %d because: %s", e.getStatus(), e.getMessage());
 	                if (e.getCause() != null)
-	                    ZimbraLog.dav.debug("exception: ", e.getCause());
+	                    ZmailLog.dav.debug("exception: ", e.getCause());
 				} else {
-					ZimbraLog.dav.error("error handling method "+method.getName(), e);
+					ZmailLog.dav.error("error handling method "+method.getName(), e);
 					resp.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
 				}
 			} catch (IllegalStateException ise) {
-                ZimbraLog.dav.debug("can't write error msg", ise);
+                ZmailLog.dav.debug("can't write error msg", ise);
 			}
 		} catch (ServiceException e) {
 			if (e instanceof MailServiceException.NoSuchItemException) {
-				ZimbraLog.dav.info(ctxt.getUri()+" not found");
+				ZmailLog.dav.info(ctxt.getUri()+" not found");
 				resp.sendError(HttpServletResponse.SC_NOT_FOUND);
 				return;
 			}
-			ZimbraLog.dav.error("error handling method "+method.getName(), e);
+			ZmailLog.dav.error("error handling method "+method.getName(), e);
 			resp.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
 		} catch (Exception e) {
-			ZimbraLog.dav.error("error handling method "+method.getName(), e);
+			ZmailLog.dav.error("error handling method "+method.getName(), e);
 			try {
 				resp.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
 			} catch (Exception ex) {}
 		} finally {
             long t1 = System.currentTimeMillis();
-            ZimbraLog.dav.info("DavServlet operation "+method.getName()+" to "+req.getPathInfo()+" (depth: "+ctxt.getDepth().name()+") finished in "+(t1-t0)+"ms");
+            ZmailLog.dav.info("DavServlet operation "+method.getName()+" to "+req.getPathInfo()+" (depth: "+ctxt.getDepth().name()+") finished in "+(t1-t0)+"ms");
 			if (cache != null)
 			    cacheCleanUp(ctxt, cache);
 		    ctxt.cleanup();
@@ -387,7 +387,7 @@ public class DavServlet extends ZimbraServlet {
                                     }
                                 }
                 		        if (cacheHit) {
-                                    ZimbraLog.dav.debug("CTAG REQUEST CACHE HIT");
+                                    ZmailLog.dav.debug("CTAG REQUEST CACHE HIT");
                 		            // All good.  Send cached response.
                                     ctxt.setStatus(DavProtocol.STATUS_MULTI_STATUS);
                 		            HttpServletResponse response = ctxt.getResponse();
@@ -397,7 +397,7 @@ public class DavServlet extends ZimbraServlet {
                 		            response.setContentLength(ctagResponse.getRawLength());
 
                 		            byte[] unzipped = null;
-                		            if (ZimbraLog.dav.isDebugEnabled() || (ctagResponse.isGzipped() && !cache.gzipAccepted)) {
+                		            if (ZmailLog.dav.isDebugEnabled() || (ctagResponse.isGzipped() && !cache.gzipAccepted)) {
                 		                if (ctagResponse.isGzipped()) {
                                             ByteArrayInputStream bais = new ByteArrayInputStream(respData);
                                             ByteArrayOutputStream baos = new ByteArrayOutputStream();
@@ -412,8 +412,8 @@ public class DavServlet extends ZimbraServlet {
                 		                } else {
                 		                    unzipped = respData;
                 		                }
-                		                if (ZimbraLog.dav.isDebugEnabled())
-                                            ZimbraLog.dav.debug("RESPONSE:\n" + new String(unzipped, "UTF-8"));
+                		                if (ZmailLog.dav.isDebugEnabled())
+                                            ZmailLog.dav.debug("RESPONSE:\n" + new String(unzipped, "UTF-8"));
                 		            }
                 		            if (!ctagResponse.isGzipped()) {
                                         response.getOutputStream().write(respData);
@@ -453,7 +453,7 @@ public class DavServlet extends ZimbraServlet {
     		        }
 		        }
                 if (!ctxt.isResponseSent())
-                    ZimbraLog.dav.debug("CTAG REQUEST CACHE MISS");
+                    ZmailLog.dav.debug("CTAG REQUEST CACHE MISS");
 		    }
 		}
 		return cache;
@@ -492,7 +492,7 @@ public class DavServlet extends ZimbraServlet {
 	        try {
 	        	cache.ctagResponseCache.put(cache.ctagCacheKey, ctagCacheVal);
             } catch (ServiceException e) {
-                ZimbraLog.dav.warn("Unable to cache ctag response", e);
+                ZmailLog.dav.warn("Unable to cache ctag response", e);
                 // No big deal if we can't cache the response.  Just move on.
             }
 	    }
@@ -537,7 +537,7 @@ public class DavServlet extends ZimbraServlet {
 			target = new ItemId(mp.getOwnerId(), mp.getRemoteId());
 			extraPath = match.getSecond();
 		} catch (ServiceException e) {
-			ZimbraLog.dav.debug("can't get path", e);
+			ZmailLog.dav.debug("can't get path", e);
 			return false;
 		}
 
@@ -596,8 +596,8 @@ public class DavServlet extends ZimbraServlet {
         // build proxy request
 		String url = getProxyUrl(ctxt.getRequest(), server, DAV_PATH) + HttpUtil.urlEscape("/" + acct.getName() + path + "/" + (extraPath == null ? "" : extraPath));
 		HttpState state = new HttpState();
-        authToken.encode(state, false, server.getAttr(Provisioning.A_zimbraServiceHostname));
-        HttpClient client = ZimbraHttpConnectionManager.getInternalHttpConnMgr().newHttpClient();
+        authToken.encode(state, false, server.getAttr(Provisioning.A_zmailServiceHostname));
+        HttpClient client = ZmailHttpConnectionManager.getInternalHttpConnMgr().newHttpClient();
         client.setState(state);
         HttpMethod method = m.toHttpMethod(ctxt, url);
         for (String h : PROXY_REQUEST_HEADERS) {
@@ -618,7 +618,7 @@ public class DavServlet extends ZimbraServlet {
         case DavProtocol.STATUS_MULTI_STATUS:
         	// rewrite the <href> element in the response to point to local mountpoint.
         	try {
-        		Document response = com.zimbra.common.soap.Element.getSAXReader().read(in);
+        		Document response = org.zmail.common.soap.Element.getSAXReader().read(in);
         		Element top = response.getRootElement();
         		for (Object responseObj : top.elements(DavElements.E_RESPONSE)) {
         			if (!(responseObj instanceof Element))
@@ -628,12 +628,12 @@ public class DavServlet extends ZimbraServlet {
                 	if (v.startsWith(newPrefix))
                 		href.setText(prefix + v.substring(newPrefix.length()+1));
         		}
-        		if (ZimbraLog.dav.isDebugEnabled())
-        			ZimbraLog.dav.debug("PROXY RESPONSE:\n"+new String(DomUtil.getBytes(response), "UTF-8"));
+        		if (ZmailLog.dav.isDebugEnabled())
+        			ZmailLog.dav.debug("PROXY RESPONSE:\n"+new String(DomUtil.getBytes(response), "UTF-8"));
         		DomUtil.writeDocumentToStream(response, ctxt.getResponse().getOutputStream());
 	            ctxt.responseSent();
         	} catch (DocumentException e) {
-        		ZimbraLog.dav.warn("proxy request failed", e);
+        		ZmailLog.dav.warn("proxy request failed", e);
         		return false;
         	}
         	break;

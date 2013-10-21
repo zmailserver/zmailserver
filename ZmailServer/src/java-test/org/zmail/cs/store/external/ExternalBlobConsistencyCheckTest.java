@@ -14,7 +14,7 @@
  * 
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.store.external;
+package org.zmail.cs.store.external;
 
 import java.io.File;
 import java.io.FileWriter;
@@ -22,14 +22,14 @@ import java.io.IOException;
 import java.util.Collection;
 import java.util.List;
 
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.cs.account.MockProvisioning;
-import com.zimbra.cs.mailbox.Mailbox;
-import com.zimbra.cs.mailbox.MailboxManager;
-import com.zimbra.cs.store.AbstractBlobConsistencyCheckTest;
-import com.zimbra.cs.store.MailboxBlob;
-import com.zimbra.cs.store.StoreManager;
-import com.zimbra.cs.store.file.BlobConsistencyChecker;
+import org.zmail.common.service.ServiceException;
+import org.zmail.cs.account.MockProvisioning;
+import org.zmail.cs.mailbox.Mailbox;
+import org.zmail.cs.mailbox.MailboxManager;
+import org.zmail.cs.store.AbstractBlobConsistencyCheckTest;
+import org.zmail.cs.store.MailboxBlob;
+import org.zmail.cs.store.StoreManager;
+import org.zmail.cs.store.file.BlobConsistencyChecker;
 
 public class ExternalBlobConsistencyCheckTest extends AbstractBlobConsistencyCheckTest {
 

@@ -12,14 +12,14 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.milter;
+package org.zmail.cs.milter;
 
-import com.zimbra.common.localconfig.LC;
-import com.zimbra.common.util.Log;
-import com.zimbra.common.util.ZimbraLog;
-import com.zimbra.cs.account.Provisioning;
-import com.zimbra.cs.server.ServerConfig;
-import com.zimbra.cs.util.Config;
+import org.zmail.common.localconfig.LC;
+import org.zmail.common.util.Log;
+import org.zmail.common.util.ZmailLog;
+import org.zmail.cs.account.Provisioning;
+import org.zmail.cs.server.ServerConfig;
+import org.zmail.cs.util.Config;
 
 public class MilterConfig extends ServerConfig {
     private static final String PROTOCOL = "MILTER";
@@ -31,28 +31,28 @@ public class MilterConfig extends ServerConfig {
     @Override
     public int getBindPort() {
         int port = LC.milter_bind_port.intValue();
-        return port != 0 ? port : getIntAttr(Provisioning.A_zimbraMilterBindPort, Config.D_MILTER_BIND_PORT);
+        return port != 0 ? port : getIntAttr(Provisioning.A_zmailMilterBindPort, Config.D_MILTER_BIND_PORT);
     }
 
     @Override
     public String getBindAddress() {
         String addr = LC.milter_bind_address.value();
-        return addr != null ? addr : getAttr(Provisioning.A_zimbraMilterBindAddress, "127.0.0.1");
+        return addr != null ? addr : getAttr(Provisioning.A_zmailMilterBindAddress, "127.0.0.1");
     }
 
     @Override
     public int getMaxThreads() {
-        return getIntAttr(Provisioning.A_zimbraMilterNumThreads, super.getMaxThreads());
+        return getIntAttr(Provisioning.A_zmailMilterNumThreads, super.getMaxThreads());
     }
 
     @Override
     public Log getLog() {
-        return ZimbraLog.milter;
+        return ZmailLog.milter;
     }
 
     @Override
     public int getMaxConnections() {
-        return getIntAttr(Provisioning.A_zimbraMilterMaxConnections, super.getMaxConnections());
+        return getIntAttr(Provisioning.A_zmailMilterMaxConnections, super.getMaxConnections());
     }
 
     @Override

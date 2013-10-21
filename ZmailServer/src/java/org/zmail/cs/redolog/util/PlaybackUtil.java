@@ -13,7 +13,7 @@
  * ***** END LICENSE BLOCK *****
  */
 
-package com.zimbra.cs.redolog.util;
+package org.zmail.cs.redolog.util;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -39,32 +39,32 @@ import org.apache.log4j.Appender;
 import org.apache.log4j.ConsoleAppender;
 import org.apache.log4j.Logger;
 
-import com.zimbra.common.localconfig.LC;
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.common.util.CliUtil;
-import com.zimbra.common.util.ZimbraLog;
-import com.zimbra.cs.account.Provisioning;
-import com.zimbra.cs.account.Server;
-import com.zimbra.cs.db.DbPool;
-import com.zimbra.cs.redolog.RedoPlayer;
-import com.zimbra.cs.redolog.RolloverManager;
-import com.zimbra.cs.redolog.logger.FileHeader;
-import com.zimbra.cs.redolog.logger.FileLogReader;
-import com.zimbra.cs.util.Config;
-import com.zimbra.cs.util.SoapCLI;
-import com.zimbra.cs.util.Zimbra;
+import org.zmail.common.localconfig.LC;
+import org.zmail.common.service.ServiceException;
+import org.zmail.common.util.CliUtil;
+import org.zmail.common.util.ZmailLog;
+import org.zmail.cs.account.Provisioning;
+import org.zmail.cs.account.Server;
+import org.zmail.cs.db.DbPool;
+import org.zmail.cs.redolog.RedoPlayer;
+import org.zmail.cs.redolog.RolloverManager;
+import org.zmail.cs.redolog.logger.FileHeader;
+import org.zmail.cs.redolog.logger.FileLogReader;
+import org.zmail.cs.util.Config;
+import org.zmail.cs.util.SoapCLI;
+import org.zmail.cs.util.Zmail;
 
 /**
  * zmplayredo: Program for playing back redologs.
  *
  * This program is intended to be run with mailboxd process stopped.
  * Some diagnostic information is logged to stdout/stderr.  Most of
- * the logging goes to /opt/zimbra/log/mailbox.log, with log level
- * controlled by /opt/zimbra/conf/log4j.properties file.
+ * the logging goes to /opt/zmail/log/mailbox.log, with log level
+ * controlled by /opt/zmail/conf/log4j.properties file.
  *
  * When it is run without options it replays all redologs found under
- * /opt/zimbra/redolog/archive directory, in sequence order, followed
- * by /opt/zimbra/redolog/redo.log.  For each redolog all committed
+ * /opt/zmail/redolog/archive directory, in sequence order, followed
+ * by /opt/zmail/redolog/redo.log.  For each redolog all committed
  * operations are replayed.
  *
  * Specify --mailboxId <mailbox id> option to replay committed operations
@@ -270,16 +270,16 @@ public class PlaybackUtil {
                     throw new FileNotFoundException("No such file: " + f.getAbsolutePath());
             }
         } else {
-            // By default, use /opt/zimbra/redolog/archive/*, then /opt/zimbra/redolog/redo.log,
+            // By default, use /opt/zmail/redolog/archive/*, then /opt/zmail/redolog/redo.log,
             // ordered by log sequence.
             Provisioning prov = Provisioning.getInstance();
             Server server = prov.getLocalServer();
             String archiveDirPath =
-                Config.getPathRelativeToZimbraHome(
-                        server.getAttr(Provisioning.A_zimbraRedoLogArchiveDir, "redolog/archive")).getAbsolutePath();
+                Config.getPathRelativeToZmailHome(
+                        server.getAttr(Provisioning.A_zmailRedoLogArchiveDir, "redolog/archive")).getAbsolutePath();
             String redoLogPath =
-                Config.getPathRelativeToZimbraHome(
-                        server.getAttr(Provisioning.A_zimbraRedoLogLogPath, "redolog/redo.log")).getAbsolutePath();
+                Config.getPathRelativeToZmailHome(
+                        server.getAttr(Provisioning.A_zmailRedoLogLogPath, "redolog/redo.log")).getAbsolutePath();
 
             File archiveDir = new File(archiveDirPath);
             if (archiveDir.exists()) {
@@ -341,11 +341,11 @@ public class PlaybackUtil {
                     }
                     mPlayer.scanLog(redolog, true, mboxIdMap, mParams.fromTime, until);
                 } catch (OutOfMemoryError oome) {
-                    Zimbra.halt("OutOfMemoryError while replaying redolog: " + oome.getMessage(), oome);
+                    Zmail.halt("OutOfMemoryError while replaying redolog: " + oome.getMessage(), oome);
                 } catch (Throwable t) {
                     if (mParams.stopOnError)
                         throw t;
-                    ZimbraLog.redolog.warn("Ignoring error and moving on: " + t.getMessage(), t);
+                    ZmailLog.redolog.warn("Ignoring error and moving on: " + t.getMessage(), t);
                 }
             }
         } finally {
@@ -375,7 +375,7 @@ public class PlaybackUtil {
 
     private static void setup() throws ServiceException {
         // set up log4j
-        ZimbraLog.toolSetupLog4j("INFO", LC.zimbra_log4j_properties.value());
+        ZmailLog.toolSetupLog4j("INFO", LC.zmail_log4j_properties.value());
         // remove the console appender if any
         Logger rootLogger = Logger.getRootLogger();
         Appender consoleAppender = null;
@@ -390,10 +390,10 @@ public class PlaybackUtil {
             rootLogger.removeAppender(consoleAppender);
 
         DbPool.startup();
-        Zimbra.startupCLI();
+        Zmail.startupCLI();
     }
 
     private static void teardown() throws ServiceException {
-        Zimbra.shutdown();
+        Zmail.shutdown();
     }
 }

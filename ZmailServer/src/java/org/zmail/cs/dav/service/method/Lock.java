@@ -12,7 +12,7 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.dav.service.method;
+package org.zmail.cs.dav.service.method;
 
 import java.io.IOException;
 import java.util.List;
@@ -22,17 +22,17 @@ import javax.servlet.http.HttpServletResponse;
 import org.dom4j.Document;
 import org.dom4j.Element;
 
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.cs.dav.DavContext;
-import com.zimbra.cs.dav.DavContext.Depth;
-import com.zimbra.cs.dav.DavElements;
-import com.zimbra.cs.dav.DavException;
-import com.zimbra.cs.dav.DavProtocol;
-import com.zimbra.cs.dav.LockMgr;
-import com.zimbra.cs.dav.LockMgr.LockScope;
-import com.zimbra.cs.dav.LockMgr.LockType;
-import com.zimbra.cs.dav.property.LockDiscovery;
-import com.zimbra.cs.dav.service.DavMethod;
+import org.zmail.common.service.ServiceException;
+import org.zmail.cs.dav.DavContext;
+import org.zmail.cs.dav.DavContext.Depth;
+import org.zmail.cs.dav.DavElements;
+import org.zmail.cs.dav.DavException;
+import org.zmail.cs.dav.DavProtocol;
+import org.zmail.cs.dav.LockMgr;
+import org.zmail.cs.dav.LockMgr.LockScope;
+import org.zmail.cs.dav.LockMgr.LockType;
+import org.zmail.cs.dav.property.LockDiscovery;
+import org.zmail.cs.dav.service.DavMethod;
 
 public class Lock extends DavMethod {
 	public static final String LOCK  = "LOCK";

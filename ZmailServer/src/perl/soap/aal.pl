@@ -27,7 +27,7 @@ use Getopt::Long;
 use XmlElement;
 use XmlDoc;
 use Soap;
-use ZimbraSoapTest;
+use ZmailSoapTest;
 
 #standard options
 my ($admin, $user, $pw, $host, $help, $adminHost); #standard
@@ -51,7 +51,7 @@ END_OF_USAGE
   die $usage;
 }
 
-my $z = ZimbraSoapTest->new($user, $host, $pw, undef, $adminHost);
+my $z = ZmailSoapTest->new($user, $host, $pw, undef, $adminHost);
 $z->doAdminAuth();
 
 my $SOAP = $Soap::Soap12;

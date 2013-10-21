@@ -12,7 +12,7 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.db;
+package org.zmail.cs.db;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -23,13 +23,13 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.common.util.StringUtil;
-import com.zimbra.common.util.ZimbraLog;
-import com.zimbra.cs.db.DbPool.DbConnection;
-import com.zimbra.cs.mailbox.MailboxManager;
-import com.zimbra.cs.mailbox.Metadata;
-import com.zimbra.cs.mailbox.ScheduledTask;
+import org.zmail.common.service.ServiceException;
+import org.zmail.common.util.StringUtil;
+import org.zmail.common.util.ZmailLog;
+import org.zmail.cs.db.DbPool.DbConnection;
+import org.zmail.cs.mailbox.MailboxManager;
+import org.zmail.cs.mailbox.Metadata;
+import org.zmail.cs.mailbox.ScheduledTask;
 
 /**
  * Database persistence code for <tt>DataSourceTask</tt>s.
@@ -44,7 +44,7 @@ public class DbScheduledTask {
     public static void createTask(DbConnection conn, ScheduledTask task)
     throws ServiceException {
 
-        ZimbraLog.scheduler.debug("Creating %s", task);
+        ZmailLog.scheduler.debug("Creating %s", task);
 
         PreparedStatement stmt = null;
         try {
@@ -79,7 +79,7 @@ public class DbScheduledTask {
      */
     public static List<ScheduledTask> getTasks(String className, int mailboxId)
     throws ServiceException {
-        ZimbraLog.scheduler.debug("Retrieving tasks for class %s, mailbox %d", className, mailboxId);
+        ZmailLog.scheduler.debug("Retrieving tasks for class %s, mailbox %d", className, mailboxId);
 
         List<ScheduledTask> tasks = new ArrayList<ScheduledTask>();
 
@@ -122,12 +122,12 @@ public class DbScheduledTask {
                     if (obj instanceof ScheduledTask) {
                         task = (ScheduledTask) obj;
                     } else {
-                        ZimbraLog.scheduler.warn("Class %s is not an instance of ScheduledTask for task %s",
+                        ZmailLog.scheduler.warn("Class %s is not an instance of ScheduledTask for task %s",
                             className, name);
                         continue;
                     }
                 } catch (Exception e) {
-                    ZimbraLog.scheduler.warn("Unable to instantiate class %s for task %s.  " +
+                    ZmailLog.scheduler.warn("Unable to instantiate class %s for task %s.  " +
                         "Class must be an instance of %s and have a constructor with no arguments.",
                         className, name, ScheduledTask.class.getSimpleName(), e);
                     continue;
@@ -141,7 +141,7 @@ public class DbScheduledTask {
                 try {
                     setProperties(task, rs.getString("metadata"));
                 } catch (ServiceException e) {
-                    ZimbraLog.scheduler.warn("Unable to read metadata for %s.  Not scheduling this task.", task, e);
+                    ZmailLog.scheduler.warn("Unable to read metadata for %s.  Not scheduling this task.", task, e);
                     continue;
                 }
 
@@ -155,13 +155,13 @@ public class DbScheduledTask {
             DbPool.quietClose(conn);
         }
 
-        ZimbraLog.scheduler.info("Loaded %d scheduled data source tasks", tasks.size());
+        ZmailLog.scheduler.info("Loaded %d scheduled data source tasks", tasks.size());
         return tasks;
     }
 
     public static void updateTask(DbConnection conn, ScheduledTask task)
     throws ServiceException {
-        ZimbraLog.scheduler.debug("Updating %s", task);
+        ZmailLog.scheduler.debug("Updating %s", task);
 
         PreparedStatement stmt = null;
         try {
@@ -206,7 +206,7 @@ public class DbScheduledTask {
     public static void deleteTask(DbConnection conn, String className, String taskName)
     throws ServiceException {
 
-        ZimbraLog.scheduler.debug("Deleting scheduled task from the database.  className=%s, taskName=%s",
+        ZmailLog.scheduler.debug("Deleting scheduled task from the database.  className=%s, taskName=%s",
             className, taskName);
 
         PreparedStatement stmt = null;

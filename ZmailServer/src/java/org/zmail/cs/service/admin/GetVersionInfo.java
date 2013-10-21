@@ -13,26 +13,26 @@
  * ***** END LICENSE BLOCK *****
  */
 
-package com.zimbra.cs.service.admin;
+package org.zmail.cs.service.admin;
 
 import java.util.List;
 import java.util.Map;
 
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.common.soap.Element;
-import com.zimbra.common.util.StringUtil;
-import com.zimbra.soap.ZimbraSoapContext;
-import com.zimbra.soap.admin.message.GetVersionInfoResponse;
-import com.zimbra.soap.admin.type.VersionInfo;
+import org.zmail.common.service.ServiceException;
+import org.zmail.common.soap.Element;
+import org.zmail.common.util.StringUtil;
+import org.zmail.soap.ZmailSoapContext;
+import org.zmail.soap.admin.message.GetVersionInfoResponse;
+import org.zmail.soap.admin.type.VersionInfo;
 
-import com.zimbra.cs.account.accesscontrol.AdminRight;
-import com.zimbra.cs.util.BuildInfo;
+import org.zmail.cs.account.accesscontrol.AdminRight;
+import org.zmail.cs.util.BuildInfo;
 
 public class GetVersionInfo extends AdminDocumentHandler {
 
     public Element handle(Element request, Map<String, Object> context)
     throws ServiceException {
-        ZimbraSoapContext lc = getZimbraSoapContext(context);
+        ZmailSoapContext lc = getZmailSoapContext(context);
 
         VersionInfo versionInfo = new VersionInfo();
         String fullVersionInfo = BuildInfo.VERSION;

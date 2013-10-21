@@ -12,38 +12,38 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.account.accesscontrol;
+package org.zmail.cs.account.accesscontrol;
 
 import java.util.List;
 
-import com.zimbra.common.account.Key.DomainBy;
-import com.zimbra.common.localconfig.LC;
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.common.util.Constants;
-import com.zimbra.cs.account.Account;
-import com.zimbra.cs.account.AccountServiceException;
-import com.zimbra.cs.account.AuthToken;
-import com.zimbra.cs.account.Domain;
-import com.zimbra.cs.account.EntryCacheDataKey;
-import com.zimbra.cs.account.NamedEntry;
-import com.zimbra.cs.account.Provisioning;
-import com.zimbra.cs.account.Provisioning.GroupMembership;
-import com.zimbra.cs.account.Provisioning.MemberOf;
-import com.zimbra.cs.account.accesscontrol.ZimbraACE.ExternalGroupInfo;
-import com.zimbra.cs.account.cache.NamedEntryCache;
-import com.zimbra.cs.account.grouphandler.ADGroupHandler;
-import com.zimbra.cs.account.grouphandler.GroupHandler;
-import com.zimbra.cs.account.ldap.LdapProv;
-import com.zimbra.cs.ldap.LdapClient;
-import com.zimbra.cs.ldap.LdapConstants;
-import com.zimbra.cs.ldap.LdapException;
-import com.zimbra.cs.ldap.LdapUsage;
-import com.zimbra.cs.ldap.LdapUtil;
-import com.zimbra.cs.ldap.ZAttributes;
-import com.zimbra.cs.ldap.ZLdapContext;
-import com.zimbra.cs.ldap.ZSearchResultEntry;
-import com.zimbra.cs.ldap.LdapServerConfig.ExternalLdapConfig;
-import com.zimbra.cs.ldap.ZLdapFilterFactory.FilterId;
+import org.zmail.common.account.Key.DomainBy;
+import org.zmail.common.localconfig.LC;
+import org.zmail.common.service.ServiceException;
+import org.zmail.common.util.Constants;
+import org.zmail.cs.account.Account;
+import org.zmail.cs.account.AccountServiceException;
+import org.zmail.cs.account.AuthToken;
+import org.zmail.cs.account.Domain;
+import org.zmail.cs.account.EntryCacheDataKey;
+import org.zmail.cs.account.NamedEntry;
+import org.zmail.cs.account.Provisioning;
+import org.zmail.cs.account.Provisioning.GroupMembership;
+import org.zmail.cs.account.Provisioning.MemberOf;
+import org.zmail.cs.account.accesscontrol.ZmailACE.ExternalGroupInfo;
+import org.zmail.cs.account.cache.NamedEntryCache;
+import org.zmail.cs.account.grouphandler.ADGroupHandler;
+import org.zmail.cs.account.grouphandler.GroupHandler;
+import org.zmail.cs.account.ldap.LdapProv;
+import org.zmail.cs.ldap.LdapClient;
+import org.zmail.cs.ldap.LdapConstants;
+import org.zmail.cs.ldap.LdapException;
+import org.zmail.cs.ldap.LdapUsage;
+import org.zmail.cs.ldap.LdapUtil;
+import org.zmail.cs.ldap.ZAttributes;
+import org.zmail.cs.ldap.ZLdapContext;
+import org.zmail.cs.ldap.ZSearchResultEntry;
+import org.zmail.cs.ldap.LdapServerConfig.ExternalLdapConfig;
+import org.zmail.cs.ldap.ZLdapFilterFactory.FilterId;
 
 public class ExternalGroup extends NamedEntry {
     
@@ -54,27 +54,27 @@ public class ExternalGroup extends NamedEntry {
     
     private String dn;
     private GroupHandler groupHandler;
-    private String zimbraDomainId;
+    private String zmailDomainId;
     
     /*
-     * id:   {zimbra domain id}:{external group name}
-     * name: {zimbra domain name}:{external group name}
+     * id:   {zmail domain id}:{external group name}
+     * name: {zmail domain name}:{external group name}
      */
-    ExternalGroup(String dn, String id, String name, String zimbraDomainId,
+    ExternalGroup(String dn, String id, String name, String zmailDomainId,
             ZAttributes attrs, GroupHandler groupHandler, Provisioning prov) 
     throws LdapException {
         super(name, id, attrs.getAttrs(), null, prov);
         this.dn = dn;
         this.groupHandler = groupHandler;
-        this.zimbraDomainId = zimbraDomainId;
+        this.zmailDomainId = zmailDomainId;
     }
     
     public String getDN() {
         return dn;
     }
     
-    public String getZimbraDomainId() {
-        return zimbraDomainId;
+    public String getZmailDomainId() {
+        return zmailDomainId;
     }
     
     boolean inGroup(Account acct, boolean asAdmin) throws ServiceException {
@@ -98,7 +98,7 @@ public class ExternalGroup extends NamedEntry {
     }
     
     /*
-     * domainBy: id when extGroupGrantee is obtained in fron persisted ZimbraACE   
+     * domainBy: id when extGroupGrantee is obtained in fron persisted ZmailACE   
      *           name when extGroupGrantee is provided to zmprov or SOAP. 
      *         
      */
@@ -130,12 +130,12 @@ public class ExternalGroup extends NamedEntry {
         LdapProv prov = LdapProv.getInst();
         
         ExternalGroupInfo extGrpInfo = ExternalGroupInfo.parse(extGroupGrantee);
-        String zimbraDomain = extGrpInfo.getZimbraDmain();
+        String zmailDomain = extGrpInfo.getZmailDmain();
         String extGroupName = extGrpInfo.getExternalGroupName();
         
-        Domain domain = prov.get(domainBy, zimbraDomain);
+        Domain domain = prov.get(domainBy, zmailDomain);
         if (domain == null) {
-            throw AccountServiceException.NO_SUCH_DOMAIN(zimbraDomain);
+            throw AccountServiceException.NO_SUCH_DOMAIN(zmailDomain);
         }
         
         String searchBase = domain.getExternalGroupLdapSearchBase();

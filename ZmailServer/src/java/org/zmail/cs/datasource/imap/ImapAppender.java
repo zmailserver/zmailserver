@@ -12,7 +12,7 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.datasource.imap;
+package org.zmail.cs.datasource.imap;
 
 import java.io.File;
 import java.io.IOException;
@@ -30,25 +30,25 @@ import javax.mail.util.SharedByteArrayInputStream;
 
 import com.google.common.annotations.VisibleForTesting;
 import com.google.common.base.Joiner;
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.common.util.ZimbraLog;
-import com.zimbra.common.zmime.ZMimeMessage;
-import com.zimbra.common.zmime.ZSharedFileInputStream;
-import com.zimbra.cs.datasource.SyncUtil;
-import com.zimbra.cs.mailbox.Message;
-import com.zimbra.cs.mailclient.imap.AppendResult;
-import com.zimbra.cs.mailclient.imap.CAtom;
-import com.zimbra.cs.mailclient.imap.Envelope;
-import com.zimbra.cs.mailclient.imap.Flags;
-import com.zimbra.cs.mailclient.imap.ImapConnection;
-import com.zimbra.cs.mailclient.imap.ImapRequest;
-import com.zimbra.cs.mailclient.imap.Literal;
-import com.zimbra.cs.mailclient.imap.MailboxInfo;
-import com.zimbra.cs.mailclient.imap.MailboxName;
-import com.zimbra.cs.mailclient.imap.MessageData;
-import com.zimbra.cs.mailclient.imap.ResponseText;
-import com.zimbra.cs.store.MailboxBlob;
-import com.zimbra.cs.store.StoreManager;
+import org.zmail.common.service.ServiceException;
+import org.zmail.common.util.ZmailLog;
+import org.zmail.common.zmime.ZMimeMessage;
+import org.zmail.common.zmime.ZSharedFileInputStream;
+import org.zmail.cs.datasource.SyncUtil;
+import org.zmail.cs.mailbox.Message;
+import org.zmail.cs.mailclient.imap.AppendResult;
+import org.zmail.cs.mailclient.imap.CAtom;
+import org.zmail.cs.mailclient.imap.Envelope;
+import org.zmail.cs.mailclient.imap.Flags;
+import org.zmail.cs.mailclient.imap.ImapConnection;
+import org.zmail.cs.mailclient.imap.ImapRequest;
+import org.zmail.cs.mailclient.imap.Literal;
+import org.zmail.cs.mailclient.imap.MailboxInfo;
+import org.zmail.cs.mailclient.imap.MailboxName;
+import org.zmail.cs.mailclient.imap.MessageData;
+import org.zmail.cs.mailclient.imap.ResponseText;
+import org.zmail.cs.store.MailboxBlob;
+import org.zmail.cs.store.StoreManager;
 
 public class ImapAppender {
     private final ImapConnection connection;
@@ -166,10 +166,10 @@ public class ImapAppender {
                 List<Long> found = findUids(nextSeq(it, 5), mi);
                 if (found.size() > 0) {
                     if (found.size() > 1) {
-                        ZimbraLog.imap_client.warn("found more than one (%d)"+
+                        ZmailLog.imap_client.warn("found more than one (%d)"+
                                 "matching UID during appendSlow. Probably a leftover dupe from earlier bugs?",found.size());
-                        if (ZimbraLog.imap_client.isDebugEnabled()) {
-                            ZimbraLog.imap_client.debug("potential duplicate ids = %s",Joiner.on(',').join(found));
+                        if (ZmailLog.imap_client.isDebugEnabled()) {
+                            ZmailLog.imap_client.debug("potential duplicate ids = %s",Joiner.on(',').join(found));
                         }
                     }
                     return found.get(0);
@@ -178,11 +178,11 @@ public class ImapAppender {
         } catch(Exception e) {
             //if this is a real exception (e.g. network went down) next command will fail regardless.
             //otherwise, don't allow appendSlow to create loop
-            ZimbraLog.imap_client.warn("Dedupe search in appendSlow failed.",e);
+            ZmailLog.imap_client.warn("Dedupe search in appendSlow failed.",e);
         }
         //this usually is OK, and actually the way Exchange has been working due to size check in matches()
         //we delete the local tracker and allow next sync to get the current version of message
-        ZimbraLog.imap_client.warn("append slow failed to find appended message id");
+        ZmailLog.imap_client.warn("append slow failed to find appended message id");
         // If still not found, then give up :(
         return -1;
     }
@@ -269,7 +269,7 @@ public class ImapAppender {
                 }
             };
             mm = msg.getMimeMessage(false);
-            flags = SyncUtil.zimbraToImapFlags(msg.getFlagBitmask());
+            flags = SyncUtil.zmailToImapFlags(msg.getFlagBitmask());
             date = SyncUtil.getInternalDate(msg, mm);
         }
 

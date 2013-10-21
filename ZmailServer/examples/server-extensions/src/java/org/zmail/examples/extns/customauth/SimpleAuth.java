@@ -12,13 +12,13 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.examples.extns.customauth;
+package org.zmail.examples.extns.customauth;
 
-import com.zimbra.common.soap.Element;
-import com.zimbra.common.util.SystemUtil;
-import com.zimbra.common.util.ZimbraLog;
-import com.zimbra.cs.account.Account;
-import com.zimbra.cs.account.auth.ZimbraCustomAuth;
+import org.zmail.common.soap.Element;
+import org.zmail.common.util.SystemUtil;
+import org.zmail.common.util.ZmailLog;
+import org.zmail.cs.account.Account;
+import org.zmail.cs.account.auth.ZmailCustomAuth;
 
 import java.io.FileInputStream;
 import java.util.HashMap;
@@ -26,23 +26,23 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * A simple authentication mechanism that reads usernames/passwords from /opt/zimbra/conf/users.xml file.
+ * A simple authentication mechanism that reads usernames/passwords from /opt/zmail/conf/users.xml file.
  *
  * @author vmahajan
  */
-public class SimpleAuth extends ZimbraCustomAuth {
+public class SimpleAuth extends ZmailCustomAuth {
 
     private static Map<String, String> userPassMap = new HashMap<String, String>();
 
     static {
         try {
-            Element usersElt = Element.parseXML(new FileInputStream("/opt/zimbra/conf/users.xml"));
+            Element usersElt = Element.parseXML(new FileInputStream("/opt/zmail/conf/users.xml"));
             List<Element> userEltList = usersElt.getPathElementList(new String[]{"user"});
             for (Element userElt : userEltList) {
                 userPassMap.put(userElt.getAttribute("name"), userElt.getAttribute("password"));
             }
         } catch (Exception e) {
-            ZimbraLog.extensions.error(SystemUtil.getStackTrace(e));
+            ZmailLog.extensions.error(SystemUtil.getStackTrace(e));
         }
     }
 

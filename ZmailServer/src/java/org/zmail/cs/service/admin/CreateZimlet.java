@@ -12,27 +12,27 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.service.admin;
+package org.zmail.cs.service.admin;
 
 import java.util.List;
 import java.util.Map;
 
-import com.zimbra.cs.account.Provisioning;
-import com.zimbra.cs.account.Zimlet;
-import com.zimbra.cs.account.accesscontrol.AdminRight;
-import com.zimbra.cs.account.accesscontrol.TargetType;
-import com.zimbra.cs.account.accesscontrol.Rights.Admin;
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.common.util.ZimbraLog;
-import com.zimbra.common.soap.AdminConstants;
-import com.zimbra.common.soap.Element;
-import com.zimbra.soap.ZimbraSoapContext;
+import org.zmail.cs.account.Provisioning;
+import org.zmail.cs.account.Zimlet;
+import org.zmail.cs.account.accesscontrol.AdminRight;
+import org.zmail.cs.account.accesscontrol.TargetType;
+import org.zmail.cs.account.accesscontrol.Rights.Admin;
+import org.zmail.common.service.ServiceException;
+import org.zmail.common.util.ZmailLog;
+import org.zmail.common.soap.AdminConstants;
+import org.zmail.common.soap.Element;
+import org.zmail.soap.ZmailSoapContext;
 
 public class CreateZimlet extends AdminDocumentHandler {
 
 	public Element handle(Element request, Map<String, Object> context) throws ServiceException {
 	    
-        ZimbraSoapContext lc = getZimbraSoapContext(context);
+        ZmailSoapContext lc = getZmailSoapContext(context);
 	    Provisioning prov = Provisioning.getInstance();
 	    
 	    String name = request.getAttribute(AdminConstants.E_NAME).toLowerCase();
@@ -43,7 +43,7 @@ public class CreateZimlet extends AdminDocumentHandler {
         
 	    Zimlet zimlet = prov.createZimlet(name, attrs);
 
-        ZimbraLog.security.info(ZimbraLog.encodeAttrs(
+        ZmailLog.security.info(ZmailLog.encodeAttrs(
                 new String[] {"cmd", "CreateZimlet","name", name}, attrs));
 
 	    Element response = lc.createElement(AdminConstants.CREATE_ZIMLET_RESPONSE);

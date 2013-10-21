@@ -13,20 +13,20 @@
  * ***** END LICENSE BLOCK *****
  */
 
-package com.zimbra.cs.mailbox.calendar.cache;
+package org.zmail.cs.mailbox.calendar.cache;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import com.zimbra.common.calendar.Geo;
-import com.zimbra.common.calendar.ParsedDateTime;
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.cs.mailbox.Metadata;
-import com.zimbra.cs.mailbox.calendar.IcalXmlStrMap;
-import com.zimbra.cs.mailbox.calendar.Invite;
-import com.zimbra.cs.mailbox.calendar.RecurId;
-import com.zimbra.cs.mailbox.calendar.ZAttendee;
-import com.zimbra.cs.mailbox.calendar.ZOrganizer;
+import org.zmail.common.calendar.Geo;
+import org.zmail.common.calendar.ParsedDateTime;
+import org.zmail.common.service.ServiceException;
+import org.zmail.cs.mailbox.Metadata;
+import org.zmail.cs.mailbox.calendar.IcalXmlStrMap;
+import org.zmail.cs.mailbox.calendar.Invite;
+import org.zmail.cs.mailbox.calendar.RecurId;
+import org.zmail.cs.mailbox.calendar.ZAttendee;
+import org.zmail.cs.mailbox.calendar.ZOrganizer;
 
 // default instance, or instance overridden by an exception
 // null value returned by a getter means to inherit from default instance of appointment/task
@@ -305,7 +305,7 @@ public class FullInstanceData extends InstanceData {
         Geo geo = null;
         Metadata metaGeo = meta.getMap(FN_GEO, true);
         if (metaGeo != null)
-            geo = com.zimbra.cs.mailbox.calendar.Util.decodeGeoFromMetadata(metaGeo);
+            geo = org.zmail.cs.mailbox.calendar.Util.decodeGeoFromMetadata(metaGeo);
 
         init(invId, compNum, recurId, seq, dtStamp, org, isOrg, attendees, hasAlarm, hasAttachment, draft, neverSent,
              summary, location, fragment, descInMeta, desc, descHtml,
@@ -372,7 +372,7 @@ public class FullInstanceData extends InstanceData {
             }
         }
         if (mGeo != null) {
-            meta.put(FN_GEO, com.zimbra.cs.mailbox.calendar.Util.encodeMetadata(mGeo));
+            meta.put(FN_GEO, org.zmail.cs.mailbox.calendar.Util.encodeMetadata(mGeo));
         }
 
         return meta;

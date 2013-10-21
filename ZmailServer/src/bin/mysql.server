@@ -20,12 +20,12 @@ zmsetvars \
   mysql_pidfile \
   mysql_mycnf \
   mysql_errlogfile \
-  zimbra_home \
-  zimbra_user \
-  zimbra_tmp_directory 
+  zmail_home \
+  zmail_user \
+  zmail_tmp_directory 
 
-if [ x`whoami` != "x${zimbra_user}" ]; then
-  echo Error: must be run as zimbra user
+if [ x`whoami` != "x${zmail_user}" ]; then
+  echo Error: must be run as zmail user
   exit 1
 fi
 
@@ -33,12 +33,12 @@ if [ ! -d ${mysql_directory}/bin ]; then
   exit 0
 fi
 
-if [ ! -d ${zimbra_tmp_directory}/mysql ]; then
-  mkdir -p ${zimbra_tmp_directory}/mysql > /dev/null 2>&1
+if [ ! -d ${zmail_tmp_directory}/mysql ]; then
+  mkdir -p ${zmail_tmp_directory}/mysql > /dev/null 2>&1
 fi
 
 zmassert -d ${mysql_directory}
-zmassert -d ${zimbra_tmp_directory}
+zmassert -d ${zmail_tmp_directory}
 zmassert -x ${mysql_directory}/bin/mysqld_safe
 zmassert -r ${mysql_mycnf}
 zmassert -d `dirname ${mysql_pidfile}`
@@ -47,7 +47,7 @@ zmassert -d `dirname ${mysql_pidfile}`
 # innodb will open the database before binding and writing out the pid
 # potentially corrupting the files
 # prevent multiple init scripts from running at the same time.
-initlockfile=${zimbra_tmp_directory}/mysql/mysql.server.lock
+initlockfile=${zmail_tmp_directory}/mysql/mysql.server.lock
 checkInitLock() {
   if [ -f "$initlockfile" ]; then
     initpid=$(cat $initlockfile)
@@ -98,12 +98,12 @@ case "$1" in
       --defaults-file=${mysql_mycnf} \
       --external-locking \
       --log-error=${mysql_errlogfile} \
-      --malloc-lib=${zimbra_home}/tcmalloc/lib/libtcmalloc_minimal.so \
+      --malloc-lib=${zmail_home}/tcmalloc/lib/libtcmalloc_minimal.so \
       --ledir=${mysql_directory}/bin < /dev/null > /dev/null 2>&1 &
     SQLSTARTED=0
     for ((i = 0; i < 60; i++))
     do
-      ${zimbra_home}/bin/mysqladmin -s ping 2>&1 > /dev/null
+      ${zmail_home}/bin/mysqladmin -s ping 2>&1 > /dev/null
       if [ $? = 0 ]; then
         SQLSTARTED=1
         break

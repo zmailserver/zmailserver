@@ -21,24 +21,24 @@ use File::Path;
 use File::Temp qw/ tempfile /;
 
 # Options
-my $user = "zimbra";
-my $password = "zimbra";
-my $database = "zimbra";
+my $user = "zmail";
+my $password = "zmail";
+my $database = "zmail";
 my $mySqlCommand = "mysql";
 my $verbose = 0;
 my $usage = 0;
-my $zimbra_tmp_directory;
+my $zmail_tmp_directory;
 
-if (-f "/opt/zimbra/bin/zmlocalconfig") {
-    $password = getLocalConfig("zimbra_mysql_password");
-    $user = getLocalConfig("zimbra_mysql_user");
-    $zimbra_tmp_directory = getLocalConfig("zimbra_tmp_directory");
-    $zimbra_tmp_directory = "/opt/zimbra/data/tmp"
-      if ($zimbra_tmp_directory eq "");
+if (-f "/opt/zmail/bin/zmlocalconfig") {
+    $password = getLocalConfig("zmail_mysql_password");
+    $user = getLocalConfig("zmail_mysql_user");
+    $zmail_tmp_directory = getLocalConfig("zmail_tmp_directory");
+    $zmail_tmp_directory = "/opt/zmail/data/tmp"
+      if ($zmail_tmp_directory eq "");
 }
 
-if ( !-d $zimbra_tmp_directory ) {
-  File::Path::mkpath("$zimbra_tmp_directory");
+if ( !-d $zmail_tmp_directory ) {
+  File::Path::mkpath("$zmail_tmp_directory");
 }
 
 GetOptions("verbose" => \$verbose, "user=s" => \$user, "password=s" => \$password,
@@ -237,7 +237,7 @@ sub runSql($) {
     # close(LASTSCRIPT);
 
     # Run the mysql command and redirect output to a temp file
-    my (undef, $tempFile) = tempfile("zmmysqlstatus.XXXX", DIR=>"$zimbra_tmp_directory",  OPEN=>1);
+    my (undef, $tempFile) = tempfile("zmmysqlstatus.XXXX", DIR=>"$zmail_tmp_directory",  OPEN=>1);
     my $command = "$mySqlCommand --user=$user --password=$password " .
         "--database=$database --batch --skip-column-names";
     open(MYSQL, "| $command > $tempFile") || die "Unable to run $command";
@@ -263,7 +263,7 @@ sub runSql($) {
 sub getLocalConfig {
   my ($key,$force) = @_;
 
-  my $val = `/opt/zimbra/bin/zmlocalconfig -q -x -s -m nokey ${key} 2> /dev/null`;
+  my $val = `/opt/zmail/bin/zmlocalconfig -q -x -s -m nokey ${key} 2> /dev/null`;
   chomp $val;
   return $val;
 }
@@ -272,9 +272,9 @@ sub usage() {
     print <<USAGE_EOF
 Usage: $PROGRAM_NAME
   -h, --help           Displays this usage message
-  -u, --user=name      MySQL user name (default: "zimbra")
-  -p, --password=name  MySQL password (default: "zimbra")
-  -d, --database=name  MySQL database (default: "zimbra")
+  -u, --user=name      MySQL user name (default: "zmail")
+  -p, --password=name  MySQL password (default: "zmail")
+  -d, --database=name  MySQL database (default: "zmail")
   -m, --mysql=command  MySQL client command name (default: "mysql")
   -v, --verbose        Displays variable descriptions
 USAGE_EOF

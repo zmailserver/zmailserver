@@ -12,17 +12,17 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.account.accesscontrol;
+package org.zmail.cs.account.accesscontrol;
 
-import com.zimbra.common.localconfig.LC;
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.common.util.ZimbraLog;
-import com.zimbra.cs.account.Account;
-import com.zimbra.cs.account.Entry;
-import com.zimbra.cs.account.GuestAccount;
-import com.zimbra.cs.account.Provisioning;
-import com.zimbra.cs.account.accesscontrol.Rights.Admin;
-import com.zimbra.soap.admin.type.CacheEntryType;
+import org.zmail.common.localconfig.LC;
+import org.zmail.common.service.ServiceException;
+import org.zmail.common.util.ZmailLog;
+import org.zmail.cs.account.Account;
+import org.zmail.cs.account.Entry;
+import org.zmail.cs.account.GuestAccount;
+import org.zmail.cs.account.Provisioning;
+import org.zmail.cs.account.accesscontrol.Rights.Admin;
+import org.zmail.soap.admin.type.CacheEntryType;
 
 public class PermissionCache {
     
@@ -72,7 +72,7 @@ public class PermissionCache {
         try {
             prov.flushCache(CacheEntryType.all, null);
         } catch (ServiceException e) {
-            ZimbraLog.acl.warn("unable to flush cache", e);
+            ZmailLog.acl.warn("unable to flush cache", e);
         }
 
         // clear the permission cache
@@ -100,8 +100,8 @@ public class PermissionCache {
         
         CachedPermission perm = PermCacheManager.getInstance().get(target, cacheKey, rightNeeded);
         
-        if (ZimbraLog.acl.isDebugEnabled()) {
-            ZimbraLog.acl.debug("PermissionCache get: " + perm.toString() + 
+        if (ZmailLog.acl.isDebugEnabled()) {
+            ZmailLog.acl.debug("PermissionCache get: " + perm.toString() + 
                     " (target=" + target.getLabel() + ", grantee=" + grantee.getName() + 
                     ", right=" + rightNeeded.getName() + ", canDelegateNeeded=" + canDelegateNeeded + ")");
         }
@@ -126,8 +126,8 @@ public class PermissionCache {
 
         PermCacheManager.getInstance().put(target, cacheKey, rightNeeded, perm);
        
-        if (ZimbraLog.acl.isDebugEnabled()) {
-            ZimbraLog.acl.debug("PermissionCache put: " + perm.toString() + 
+        if (ZmailLog.acl.isDebugEnabled()) {
+            ZmailLog.acl.debug("PermissionCache put: " + perm.toString() + 
                     " (target=" + target.getLabel() + ", grantee=" + grantee.getName() + 
                     ", right=" + rightNeeded.getName() + ", canDelegateNeeded=" + canDelegateNeeded + ")");
         }
@@ -193,7 +193,7 @@ public class PermissionCache {
         
         if (id == null) {
             // for some weird reason, there is no identifier for the accessing account
-            ZimbraLog.acl.debug("unable to build cache key: " + grantee.getName());
+            ZmailLog.acl.debug("unable to build cache key: " + grantee.getName());
             return null;
         }
         

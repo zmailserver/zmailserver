@@ -13,10 +13,10 @@ package com.proviciel.service;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.cs.mailbox.Folder;
-import com.zimbra.cs.mailbox.Mailbox;
-import com.zimbra.cs.mailbox.OperationContext;
+import org.zmail.common.service.ServiceException;
+import org.zmail.cs.mailbox.Folder;
+import org.zmail.cs.mailbox.Mailbox;
+import org.zmail.cs.mailbox.OperationContext;
 
 
 public class JournalMessagesOpts {

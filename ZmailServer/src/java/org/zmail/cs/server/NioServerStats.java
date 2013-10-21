@@ -12,7 +12,7 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.server;
+package org.zmail.cs.server;
 
 import org.apache.mina.core.service.IoAcceptor;
 import org.apache.mina.core.service.IoServiceStatistics;

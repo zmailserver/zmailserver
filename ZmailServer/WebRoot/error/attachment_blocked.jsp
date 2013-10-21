@@ -1,4 +1,4 @@
-<%@ page import="com.zimbra.common.util.L10nUtil,com.zimbra.common.util.L10nUtil.MsgKey" %>
+<%@ page import="org.zmail.common.util.L10nUtil,org.zmail.common.util.L10nUtil.MsgKey" %>
 <HTML>
 <BODY>
 <%--

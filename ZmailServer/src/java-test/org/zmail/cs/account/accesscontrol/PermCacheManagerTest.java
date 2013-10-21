@@ -13,7 +13,7 @@
  * ***** END LICENSE BLOCK *****
  */
 
-package com.zimbra.cs.account.accesscontrol;
+package org.zmail.cs.account.accesscontrol;
 
 import org.junit.Assert;
 import org.junit.Test;
@@ -22,13 +22,13 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
-import com.zimbra.common.localconfig.LC;
-import com.zimbra.common.util.Constants;
-import com.zimbra.cs.account.AccessManager;
-import com.zimbra.cs.account.Account;
-import com.zimbra.cs.account.accesscontrol.PermissionCache.CachedPermission;
-import com.zimbra.cs.account.accesscontrol.Rights.User;
-import com.zimbra.cs.ldap.LdapUtil;
+import org.zmail.common.localconfig.LC;
+import org.zmail.common.util.Constants;
+import org.zmail.cs.account.AccessManager;
+import org.zmail.cs.account.Account;
+import org.zmail.cs.account.accesscontrol.PermissionCache.CachedPermission;
+import org.zmail.cs.account.accesscontrol.Rights.User;
+import org.zmail.cs.ldap.LdapUtil;
 
 public class PermCacheManagerTest {
     

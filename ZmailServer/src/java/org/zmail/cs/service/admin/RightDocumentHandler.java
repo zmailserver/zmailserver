@@ -12,21 +12,21 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.service.admin;
+package org.zmail.cs.service.admin;
 
-import com.zimbra.common.account.Key;
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.common.soap.AdminConstants;
-import com.zimbra.common.soap.Element;
-import com.zimbra.common.util.Pair;
-import com.zimbra.common.util.ZimbraLog;
-import com.zimbra.cs.account.Entry;
-import com.zimbra.cs.account.NamedEntry;
-import com.zimbra.cs.account.Provisioning;
-import com.zimbra.cs.account.accesscontrol.GranteeType;
-import com.zimbra.cs.account.accesscontrol.TargetType;
-import com.zimbra.cs.account.accesscontrol.Rights.Admin;
-import com.zimbra.soap.ZimbraSoapContext;
+import org.zmail.common.account.Key;
+import org.zmail.common.service.ServiceException;
+import org.zmail.common.soap.AdminConstants;
+import org.zmail.common.soap.Element;
+import org.zmail.common.util.Pair;
+import org.zmail.common.util.ZmailLog;
+import org.zmail.cs.account.Entry;
+import org.zmail.cs.account.NamedEntry;
+import org.zmail.cs.account.Provisioning;
+import org.zmail.cs.account.accesscontrol.GranteeType;
+import org.zmail.cs.account.accesscontrol.TargetType;
+import org.zmail.cs.account.accesscontrol.Rights.Admin;
+import org.zmail.soap.ZmailSoapContext;
 
 public abstract class RightDocumentHandler extends AdminDocumentHandler {
     
@@ -52,7 +52,7 @@ public abstract class RightDocumentHandler extends AdminDocumentHandler {
     }
     */
     
-    protected void checkCheckRightRight(ZimbraSoapContext zsc, 
+    protected void checkCheckRightRight(ZmailSoapContext zsc, 
             GranteeType granteeType, Key.GranteeBy granteeBy, String grantee) 
     throws ServiceException {
         checkCheckRightRight(zsc, granteeType, granteeBy, grantee, false);
@@ -71,7 +71,7 @@ public abstract class RightDocumentHandler extends AdminDocumentHandler {
      * @return whether the checkRight right is checked
      * @throws ServiceException
      */
-    protected boolean checkCheckRightRight(ZimbraSoapContext zsc, 
+    protected boolean checkCheckRightRight(ZmailSoapContext zsc, 
             GranteeType granteeType, Key.GranteeBy granteeBy, String grantee, 
             boolean granteeCanBeExternalEmailAddr) throws ServiceException {
         
@@ -82,7 +82,7 @@ public abstract class RightDocumentHandler extends AdminDocumentHandler {
                 granteeType, granteeBy, grantee);  
         } catch (ServiceException e) {
             // grantee to check could be an external email address
-            ZimbraLog.acl.debug("unable to find grantee" , e);
+            ZmailLog.acl.debug("unable to find grantee" , e);
         }
         
         if (granteeEntry != null) {

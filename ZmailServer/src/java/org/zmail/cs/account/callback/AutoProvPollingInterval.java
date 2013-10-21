@@ -12,18 +12,18 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.account.callback;
+package org.zmail.cs.account.callback;
 
 import java.util.Map;
 
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.common.util.ZimbraLog;
-import com.zimbra.cs.account.AttributeCallback;
-import com.zimbra.cs.account.AutoProvisionThread;
-import com.zimbra.cs.account.Entry;
-import com.zimbra.cs.account.Provisioning;
-import com.zimbra.cs.account.Server;
-import com.zimbra.cs.util.Zimbra;
+import org.zmail.common.service.ServiceException;
+import org.zmail.common.util.ZmailLog;
+import org.zmail.cs.account.AttributeCallback;
+import org.zmail.cs.account.AutoProvisionThread;
+import org.zmail.cs.account.Entry;
+import org.zmail.cs.account.Provisioning;
+import org.zmail.cs.account.Server;
+import org.zmail.cs.util.Zmail;
 
 public class AutoProvPollingInterval extends AttributeCallback {
 
@@ -35,12 +35,12 @@ public class AutoProvPollingInterval extends AttributeCallback {
     
     @Override
     public void postModify(CallbackContext context, String attrName, Entry entry) {
-        if (!Provisioning.A_zimbraAutoProvPollingInterval.equalsIgnoreCase(attrName)) {
+        if (!Provisioning.A_zmailAutoProvPollingInterval.equalsIgnoreCase(attrName)) {
             return;
         }
         
         // do not run this callback unless inside the server
-        if (!Zimbra.started()) {
+        if (!Zmail.started()) {
             return;
         }
         
@@ -53,14 +53,14 @@ public class AutoProvPollingInterval extends AttributeCallback {
                 }
             }
         } catch (ServiceException e) {
-            ZimbraLog.misc.warn("unable to validate server", e);
+            ZmailLog.misc.warn("unable to validate server", e);
             return;
         }
         
         try {
             AutoProvisionThread.switchAutoProvThreadIfNecessary();
         } catch (ServiceException e) {
-            ZimbraLog.autoprov.error("unable to switch auto provisioning thread", e);
+            ZmailLog.autoprov.error("unable to switch auto provisioning thread", e);
         }
     }
 

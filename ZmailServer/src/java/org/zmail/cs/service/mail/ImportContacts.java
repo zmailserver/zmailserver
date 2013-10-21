@@ -13,7 +13,7 @@
  * ***** END LICENSE BLOCK *****
  */
 
-package com.zimbra.cs.service.mail;
+package org.zmail.cs.service.mail;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -24,32 +24,32 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.common.soap.MailConstants;
-import com.zimbra.common.soap.Element;
-import com.zimbra.common.util.StringUtil;
-import com.zimbra.cs.mailbox.Contact;
-import com.zimbra.cs.mailbox.ContactGroup;
-import com.zimbra.cs.mailbox.MailItem;
-import com.zimbra.cs.mailbox.MailServiceException;
-import com.zimbra.cs.mailbox.Mailbox;
-import com.zimbra.cs.mailbox.OperationContext;
-import com.zimbra.cs.mailbox.Tag;
-import com.zimbra.cs.mailbox.util.TagUtil;
-import com.zimbra.cs.mime.ParsedContact;
-import com.zimbra.cs.service.FileUploadServlet;
-import com.zimbra.cs.service.FileUploadServlet.Upload;
-import com.zimbra.cs.service.formatter.ContactCSV;
-import com.zimbra.cs.service.formatter.ContactCSV.ParseException;
-import com.zimbra.cs.service.util.ItemId;
-import com.zimbra.cs.service.util.ItemIdFormatter;
-import com.zimbra.client.ZMailbox;
-import com.zimbra.soap.ZimbraSoapContext;
-import com.zimbra.soap.JaxbUtil;
-import com.zimbra.soap.mail.message.ImportContactsRequest;
-import com.zimbra.soap.mail.message.ImportContactsResponse;
-import com.zimbra.soap.mail.type.Content;
-import com.zimbra.soap.mail.type.ImportContact;
+import org.zmail.common.service.ServiceException;
+import org.zmail.common.soap.MailConstants;
+import org.zmail.common.soap.Element;
+import org.zmail.common.util.StringUtil;
+import org.zmail.cs.mailbox.Contact;
+import org.zmail.cs.mailbox.ContactGroup;
+import org.zmail.cs.mailbox.MailItem;
+import org.zmail.cs.mailbox.MailServiceException;
+import org.zmail.cs.mailbox.Mailbox;
+import org.zmail.cs.mailbox.OperationContext;
+import org.zmail.cs.mailbox.Tag;
+import org.zmail.cs.mailbox.util.TagUtil;
+import org.zmail.cs.mime.ParsedContact;
+import org.zmail.cs.service.FileUploadServlet;
+import org.zmail.cs.service.FileUploadServlet.Upload;
+import org.zmail.cs.service.formatter.ContactCSV;
+import org.zmail.cs.service.formatter.ContactCSV.ParseException;
+import org.zmail.cs.service.util.ItemId;
+import org.zmail.cs.service.util.ItemIdFormatter;
+import org.zmail.client.ZMailbox;
+import org.zmail.soap.ZmailSoapContext;
+import org.zmail.soap.JaxbUtil;
+import org.zmail.soap.mail.message.ImportContactsRequest;
+import org.zmail.soap.mail.message.ImportContactsResponse;
+import org.zmail.soap.mail.type.Content;
+import org.zmail.soap.mail.type.ImportContact;
 
 /**
  * @author schemers
@@ -72,7 +72,7 @@ public class ImportContacts extends MailDocumentHandler  {
 
     @Override
     public Element handle(Element request, Map<String, Object> context) throws ServiceException {
-        ZimbraSoapContext zsc = getZimbraSoapContext(context);
+        ZmailSoapContext zsc = getZmailSoapContext(context);
         Mailbox mbox = getRequestedMailbox(zsc);
         OperationContext octxt = getOperationContext(zsc, context);
         ItemIdFormatter ifmt = new ItemIdFormatter(zsc);
@@ -132,7 +132,7 @@ public class ImportContacts extends MailDocumentHandler  {
         return zsc.jaxbToElement(resp);
     }
 
-    private static BufferedReader parseUploadedContent(ZimbraSoapContext lc, String attachId, List<Upload> uploads)
+    private static BufferedReader parseUploadedContent(ZmailSoapContext lc, String attachId, List<Upload> uploads)
     throws ServiceException {
         Upload up = FileUploadServlet.fetchUpload(lc.getAuthtokenAccountId(), attachId, lc.getAuthToken());
         if (up == null) {

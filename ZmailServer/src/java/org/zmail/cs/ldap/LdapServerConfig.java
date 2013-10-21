@@ -12,12 +12,12 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.ldap;
+package org.zmail.cs.ldap;
 
 import java.util.Set;
 
-import com.zimbra.common.localconfig.LC;
-import com.zimbra.common.util.StringUtil;
+import org.zmail.common.localconfig.LC;
+import org.zmail.common.util.StringUtil;
 
 
 /**
@@ -93,7 +93,7 @@ public abstract class LdapServerConfig {
     
     private LdapServerConfig() {
         
-        // load common settings, for both Zimbra LDAP and external LDAP
+        // load common settings, for both Zmail LDAP and external LDAP
         
         //
         // SSL settings
@@ -122,13 +122,13 @@ public abstract class LdapServerConfig {
     }
     
     
-    public static class ZimbraLdapConfig extends LdapServerConfig {
+    public static class ZmailLdapConfig extends LdapServerConfig {
         private LdapServerType serverType;
         
-        // This is a Zimbra LDAP setting only.
+        // This is a Zmail LDAP setting only.
         private final int connPoolInitSize;
         
-        public ZimbraLdapConfig(LdapServerType serverType) {
+        public ZmailLdapConfig(LdapServerType serverType) {
             super();
             
             this.serverType = serverType;
@@ -143,19 +143,19 @@ public abstract class LdapServerConfig {
             /*
              * admin bind DN and bind password
              */
-            this.adminBindDN = LC.zimbra_ldap_userdn.value();
-            this.adminBindPassword = LC.zimbra_ldap_password.value();
+            this.adminBindDN = LC.zmail_ldap_userdn.value();
+            this.adminBindPassword = LC.zmail_ldap_password.value();
             
             /*
              * startTLS settings
              */
             // Whether the LDAP server supports the startTLS operation.
             boolean ldap_starttls_supported = "1".equals(LC.ldap_starttls_supported.value());
-            // Whether starttls is required for java ldap client when it establishes connections to the Zimbra ldap server
+            // Whether starttls is required for java ldap client when it establishes connections to the Zmail ldap server
             boolean ldap_starttls_required = LC.ldap_starttls_required.booleanValue();
-            boolean zimbra_require_interprocess_security = "1".equals(LC.zimbra_require_interprocess_security.value());
+            boolean zmail_require_interprocess_security = "1".equals(LC.zmail_require_interprocess_security.value());
             
-            this.wantStartTLS = (ldap_starttls_supported && ldap_starttls_required && zimbra_require_interprocess_security);
+            this.wantStartTLS = (ldap_starttls_supported && ldap_starttls_required && zmail_require_interprocess_security);
             
             this.connType = LdapConnType.getConnType(this.ldapURL, this.wantStartTLS);
         }
@@ -212,7 +212,7 @@ public abstract class LdapServerConfig {
     
     public static class ExternalLdapConfig extends LdapServerConfig {
         
-        // only in external LDAP settings, in ZimbraLDAP the deref policy is never
+        // only in external LDAP settings, in ZmailLDAP the deref policy is never
         protected String derefAliasPolicy;  
         
         private String authMech;

@@ -1,26 +1,26 @@
-Return-Path: qa-test1@zimbra.com
-Received: from mta03.zimbra.com (LHLO mta03.zimbra.com) (10.113.63.63) by
- corp.zimbra.com with LMTP; Wed, 18 Apr 2012 21:30:16 -0700 (PDT)
+Return-Path: qa-test1@zmail.com
+Received: from mta03.zmail.com (LHLO mta03.zmail.com) (10.113.63.63) by
+ corp.zmail.com with LMTP; Wed, 18 Apr 2012 21:30:16 -0700 (PDT)
 Received: from localhost (localhost.localdomain [127.0.0.1])
-	by mta03.zimbra.com (Postfix) with ESMTP id AD948A6C022
-	for <qa-test1@zimbra.com>; Wed, 18 Apr 2012 21:30:16 -0700 (PDT)
-X-Virus-Scanned: amavisd-new at mta03.zimbra.com
+	by mta03.zmail.com (Postfix) with ESMTP id AD948A6C022
+	for <qa-test1@zmail.com>; Wed, 18 Apr 2012 21:30:16 -0700 (PDT)
+X-Virus-Scanned: amavisd-new at mta03.zmail.com
 X-Spam-Flag: NO
 X-Spam-Score: -2.91
 X-Spam-Level: 
 X-Spam-Status: No, score=-2.91 tagged_above=-10 required=3
 	tests=[ALL_TRUSTED=-1, BAYES_00=-1.9, T_RP_MATCHES_RCVD=-0.01]
 	autolearn=ham
-Received: from mta03.zimbra.com ([127.0.0.1])
-	by localhost (mta03.zimbra.com [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id Sepi57FWuWka for <qa-test1@zimbra.com>;
+Received: from mta03.zmail.com ([127.0.0.1])
+	by localhost (mta03.zmail.com [127.0.0.1]) (amavisd-new, port 10024)
+	with ESMTP id Sepi57FWuWka for <qa-test1@zmail.com>;
 	Wed, 18 Apr 2012 21:30:08 -0700 (PDT)
-Received: from corp.zimbra.com (corp.zimbra.com [10.113.63.58])
-	by mta03.zimbra.com (Postfix) with ESMTP id 3EC57A6C002
-	for <qa-test1@zimbra.com>; Wed, 18 Apr 2012 21:30:08 -0700 (PDT)
+Received: from corp.zmail.com (corp.zmail.com [10.113.63.58])
+	by mta03.zmail.com (Postfix) with ESMTP id 3EC57A6C002
+	for <qa-test1@zmail.com>; Wed, 18 Apr 2012 21:30:08 -0700 (PDT)
 Date: Wed, 18 Apr 2012 21:30:08 -0700 (PDT)
-From: Qa Test1 <qa-test1@zimbra.com>
-To: Jeff Wagner <qa-test1@zimbra.com>
+From: Qa Test1 <qa-test1@zmail.com>
+To: Jeff Wagner <qa-test1@zmail.com>
 Message-ID: <825759456.11.1334809858826.JavaMail.jwagner@prome-2n-dhcp138.eng.vmware.com>
 In-Reply-To: <1333291928.20.1334350452532.JavaMail.jwagner@prome-2n-dhcp138.eng.vmware.com>
 Subject: Re: Sign Test
@@ -28,7 +28,7 @@ MIME-Version: 1.0
 Content-Type: application/pkcs7-mime; name=smime.p7m; 
 	smime-type=enveloped-data
 Content-Transfer-Encoding: base64
-X-Mailer: Zimbra 7.2.0_GA_2670 (ZimbraWebClient - FF3.0 (Mac)/7.2.0_GA_2670)
+X-Mailer: Zmail 7.2.0_GA_2670 (ZmailWebClient - FF3.0 (Mac)/7.2.0_GA_2670)
 
 MIAGCSqGSIb3DQEHA6CAMIACAQAxggNqMIIBsQIBADCBmDCBijELMAkGA1UEBhMCVVMxCzAJBgNV
 BAgTAkNBMRIwEAYDVQQHEwlQYWxvIEFsdG8xDzANBgNVBAoTBlppbWJyYTEPMA0GA1UECxMGVk13

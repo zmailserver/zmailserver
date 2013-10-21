@@ -12,7 +12,7 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.qa.unittest.prov.ldap;
+package org.zmail.qa.unittest.prov.ldap;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
@@ -28,39 +28,39 @@ import static org.junit.Assert.*;
 
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
-import com.zimbra.common.account.Key.CosBy;
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.cs.account.Account;
-import com.zimbra.cs.account.AccountServiceException;
-import com.zimbra.cs.account.Alias;
-import com.zimbra.cs.account.CalendarResource;
-import com.zimbra.cs.account.DistributionList;
-import com.zimbra.cs.account.Domain;
-import com.zimbra.cs.account.DynamicGroup;
-import com.zimbra.cs.account.Group;
-import com.zimbra.cs.account.NamedEntry;
-import com.zimbra.cs.account.Provisioning;
-import com.zimbra.cs.account.SearchAccountsOptions;
-import com.zimbra.cs.account.SearchDirectoryOptions;
-import com.zimbra.cs.account.Server;
-import com.zimbra.cs.account.Signature;
-import com.zimbra.cs.account.SearchAccountsOptions.IncludeType;
-import com.zimbra.cs.account.SearchDirectoryOptions.MakeObjectOpt;
-import com.zimbra.cs.account.SearchDirectoryOptions.ObjectType;
-import com.zimbra.cs.account.SearchDirectoryOptions.SortOpt;
-import com.zimbra.cs.account.ldap.LdapProv;
-import com.zimbra.cs.account.ldap.entry.LdapDomain;
-import com.zimbra.cs.ldap.LdapException;
-import com.zimbra.cs.ldap.LdapUtil;
-import com.zimbra.cs.ldap.ZLdapFilter;
-import com.zimbra.cs.ldap.ZLdapFilterFactory;
-import com.zimbra.cs.ldap.ZLdapFilterFactory.FilterId;
-import com.zimbra.cs.mailbox.ACL;
-import com.zimbra.qa.QA.Bug;
-import com.zimbra.qa.unittest.TestUtil;
-import com.zimbra.qa.unittest.prov.Names;
-import com.zimbra.qa.unittest.prov.ProvTest;
-import com.zimbra.qa.unittest.prov.Verify;
+import org.zmail.common.account.Key.CosBy;
+import org.zmail.common.service.ServiceException;
+import org.zmail.cs.account.Account;
+import org.zmail.cs.account.AccountServiceException;
+import org.zmail.cs.account.Alias;
+import org.zmail.cs.account.CalendarResource;
+import org.zmail.cs.account.DistributionList;
+import org.zmail.cs.account.Domain;
+import org.zmail.cs.account.DynamicGroup;
+import org.zmail.cs.account.Group;
+import org.zmail.cs.account.NamedEntry;
+import org.zmail.cs.account.Provisioning;
+import org.zmail.cs.account.SearchAccountsOptions;
+import org.zmail.cs.account.SearchDirectoryOptions;
+import org.zmail.cs.account.Server;
+import org.zmail.cs.account.Signature;
+import org.zmail.cs.account.SearchAccountsOptions.IncludeType;
+import org.zmail.cs.account.SearchDirectoryOptions.MakeObjectOpt;
+import org.zmail.cs.account.SearchDirectoryOptions.ObjectType;
+import org.zmail.cs.account.SearchDirectoryOptions.SortOpt;
+import org.zmail.cs.account.ldap.LdapProv;
+import org.zmail.cs.account.ldap.entry.LdapDomain;
+import org.zmail.cs.ldap.LdapException;
+import org.zmail.cs.ldap.LdapUtil;
+import org.zmail.cs.ldap.ZLdapFilter;
+import org.zmail.cs.ldap.ZLdapFilterFactory;
+import org.zmail.cs.ldap.ZLdapFilterFactory.FilterId;
+import org.zmail.cs.mailbox.ACL;
+import org.zmail.qa.QA.Bug;
+import org.zmail.qa.unittest.TestUtil;
+import org.zmail.qa.unittest.prov.Names;
+import org.zmail.qa.unittest.prov.ProvTest;
+import org.zmail.qa.unittest.prov.Verify;
 
 public class TestLdapProvSearchDirectory extends LdapTest {
 
@@ -165,7 +165,7 @@ public class TestLdapProvSearchDirectory extends LdapTest {
 
         Map<String, Object> crAttrs = Maps.newHashMap();
         crAttrs.put(Provisioning.A_displayName, "ACCT_LOCALPART");
-        crAttrs.put(Provisioning.A_zimbraCalResType, Provisioning.CalResType.Equipment.name());
+        crAttrs.put(Provisioning.A_zmailCalResType, Provisioning.CalResType.Equipment.name());
         Account acct = createAccount(prov, ACCT_LOCALPART, searchDomain, null);
         CalendarResource cr = createCalendarResource(CR_LOCALPART, searchDomain, crAttrs);
 
@@ -174,7 +174,7 @@ public class TestLdapProvSearchDirectory extends LdapTest {
         SearchAccountsOptions opts;
 
         // 1. test search accounts, including cr
-        opts = new SearchAccountsOptions(searchDomain, new String[]{Provisioning.A_zimbraId});
+        opts = new SearchAccountsOptions(searchDomain, new String[]{Provisioning.A_zmailId});
         opts.setMakeObjectOpt(MakeObjectOpt.NO_DEFAULTS);
         result = prov.searchAccountsOnServer(server, opts);
         Verify.verifyEquals(Lists.newArrayList(acct, cr), result, false);
@@ -182,7 +182,7 @@ public class TestLdapProvSearchDirectory extends LdapTest {
         // 2. test maxResults
         boolean caughtTooManySearchResultsException = false;
         try {
-            opts = new SearchAccountsOptions(searchDomain, new String[]{Provisioning.A_zimbraId});
+            opts = new SearchAccountsOptions(searchDomain, new String[]{Provisioning.A_zmailId});
             opts.setMakeObjectOpt(MakeObjectOpt.NO_DEFAULTS);
             opts.setMaxResults(1);
             result = prov.searchAccountsOnServer(server, opts);
@@ -195,20 +195,20 @@ public class TestLdapProvSearchDirectory extends LdapTest {
 
 
         // 3. search accounts only
-        opts = new SearchAccountsOptions(searchDomain, new String[]{Provisioning.A_zimbraId});
+        opts = new SearchAccountsOptions(searchDomain, new String[]{Provisioning.A_zmailId});
         opts.setMakeObjectOpt(MakeObjectOpt.NO_DEFAULTS);
         opts.setIncludeType(IncludeType.ACCOUNTS_ONLY);
         result = prov.searchAccountsOnServer(server, opts);
         Verify.verifyEquals(Lists.newArrayList(acct), result, false);
 
         // 4. test sorting
-        opts = new SearchAccountsOptions(searchDomain, new String[]{Provisioning.A_zimbraId});
+        opts = new SearchAccountsOptions(searchDomain, new String[]{Provisioning.A_zmailId});
         opts.setMakeObjectOpt(MakeObjectOpt.NO_DEFAULTS);
         opts.setSortOpt(SortOpt.SORT_DESCENDING);
         result = prov.searchAccountsOnServer(server, opts);
         Verify.verifyEquals(Lists.newArrayList(cr, acct), result, true);
 
-        opts = new SearchAccountsOptions(searchDomain, new String[]{Provisioning.A_zimbraId});
+        opts = new SearchAccountsOptions(searchDomain, new String[]{Provisioning.A_zmailId});
         opts.setMakeObjectOpt(MakeObjectOpt.NO_DEFAULTS);
         opts.setSortOpt(SortOpt.SORT_ASCENDING);
         result = prov.searchAccountsOnServer(server, opts);
@@ -282,22 +282,22 @@ public class TestLdapProvSearchDirectory extends LdapTest {
         List<String> GRANTEE_IDS = Lists.newArrayList(GRANTEE_ID_1, GRANTEE_ID_2, GRANTEE_ID_3);
 
         Map<String, Object> attrs1 = Maps.newHashMap();
-        attrs1.put(Provisioning.A_zimbraSharedItem, "granteeId:" + GRANTEE_ID_3 + "blah blah");
+        attrs1.put(Provisioning.A_zmailSharedItem, "granteeId:" + GRANTEE_ID_3 + "blah blah");
         Account acct1 = createAccount(genAcctNameLocalPart("1"), attrs1);
 
         Map<String, Object> attrs2 = Maps.newHashMap();
-        attrs2.put(Provisioning.A_zimbraSharedItem, "blah" + "granteeType:pub" + " blah");
+        attrs2.put(Provisioning.A_zmailSharedItem, "blah" + "granteeType:pub" + " blah");
         Account acct2 = createAccount(genAcctNameLocalPart("2"), attrs2);
 
         Map<String, Object> attrs3 = Maps.newHashMap();
-        attrs3.put(Provisioning.A_zimbraSharedItem, "blah" + "granteeType:all" + " blah");
+        attrs3.put(Provisioning.A_zmailSharedItem, "blah" + "granteeType:all" + " blah");
         Account acct3 = createAccount(genAcctNameLocalPart("3"), attrs3);
 
         SearchAccountsOptions searchOpts = new SearchAccountsOptions(
                  new String[] {
-                        Provisioning.A_zimbraId,
+                        Provisioning.A_zmailId,
                         Provisioning.A_displayName,
-                        Provisioning.A_zimbraSharedItem });
+                        Provisioning.A_zmailSharedItem });
 
         ZLdapFilter filter = ZLdapFilterFactory.getInstance().accountsByGrants(GRANTEE_IDS, true, false);
         searchOpts.setFilter(filter);
@@ -341,15 +341,15 @@ public class TestLdapProvSearchDirectory extends LdapTest {
         Account acct1 = createAccount(genAcctNameLocalPart("1"));
 
         Map<String, Object> acct2Attrs = Maps.newHashMap();
-        acct2Attrs.put(Provisioning.A_zimbraExcludeFromCMBSearch, "TRUE");
+        acct2Attrs.put(Provisioning.A_zmailExcludeFromCMBSearch, "TRUE");
         Account acct2 = createAccount(genAcctNameLocalPart("2"), acct2Attrs);
 
         Map<String, Object> acct3Attrs = Maps.newHashMap();
-        acct3Attrs.put(Provisioning.A_zimbraExcludeFromCMBSearch, "FALSE");
+        acct3Attrs.put(Provisioning.A_zmailExcludeFromCMBSearch, "FALSE");
         Account acct3 = createAccount(genAcctNameLocalPart("3"), acct3Attrs);
 
-        String [] returnAttrs = {Provisioning.A_displayName, Provisioning.A_zimbraId, Provisioning.A_uid,
-                Provisioning.A_zimbraArchiveAccount, Provisioning.A_zimbraMailHost};
+        String [] returnAttrs = {Provisioning.A_displayName, Provisioning.A_zmailId, Provisioning.A_uid,
+                Provisioning.A_zmailArchiveAccount, Provisioning.A_zmailMailHost};
 
         // use domain so our assertion will work, production code does not a domain
         SearchAccountsOptions searchOpts = new SearchAccountsOptions(domain, returnAttrs);
@@ -369,19 +369,19 @@ public class TestLdapProvSearchDirectory extends LdapTest {
         /*
         // legacy code and LDAP trace before refactoring
         List<NamedEntry> accounts = prov.searchAccounts(
-                "(|(!(" + Provisioning.A_zimbraExcludeFromCMBSearch + "=*))(" +
-                Provisioning.A_zimbraExcludeFromCMBSearch + "=FALSE))",
+                "(|(!(" + Provisioning.A_zmailExcludeFromCMBSearch + "=*))(" +
+                Provisioning.A_zmailExcludeFromCMBSearch + "=FALSE))",
                 attrs, null, false, Provisioning.searchDirectoryStringToMask("accounts"));
 
-        Oct  9 13:00:09 pshao-macbookpro-2 slapd[73952]: conn=1327 op=101 SRCH base="" scope=2 deref=0 filter="(&(|(!(zimbraExcludeFromCMBSearch=*))(zimbraExcludeFromCMBSearch=FALSE))(&(objectClass=zimbraAccount)(!(objectClass=zimbraCalendarResource))))"
-        Oct  9 13:00:09 pshao-macbookpro-2 slapd[73952]: conn=1327 op=101 SRCH attr=zimbraCOSId objectClass zimbraDomainName zimbraACE displayName zimbraId uid zimbraArchiveAccount zimbraMailHost
+        Oct  9 13:00:09 pshao-macbookpro-2 slapd[73952]: conn=1327 op=101 SRCH base="" scope=2 deref=0 filter="(&(|(!(zmailExcludeFromCMBSearch=*))(zmailExcludeFromCMBSearch=FALSE))(&(objectClass=zmailAccount)(!(objectClass=zmailCalendarResource))))"
+        Oct  9 13:00:09 pshao-macbookpro-2 slapd[73952]: conn=1327 op=101 SRCH attr=zmailCOSId objectClass zmailDomainName zmailACE displayName zmailId uid zmailArchiveAccount zmailMailHost
         */
 
         /*
          * LDAP trace after reactoring
          *
-         Oct  9 13:43:26 pshao-macbookpro-2 slapd[73952]: conn=1345 op=107 SRCH base="ou=people,dc=com,dc=zimbra,dc=qa,dc=unittest,dc=testldapprovaccount" scope=2 deref=0 filter="(&(&(objectClass=zimbraAccount)(!(objectClass=zimbraCalendarResource)))(|(!(zimbraExcludeFromCMBSearch=*))(zimbraExcludeFromCMBSearch=FALSE)))"
-         Oct  9 13:43:26 pshao-macbookpro-2 slapd[73952]: conn=1345 op=107 SRCH attr=zimbraCOSId objectClass zimbraDomainName zimbraACE displayName zimbraId uid zimbraArchiveAccount zimbraMailHost
+         Oct  9 13:43:26 pshao-macbookpro-2 slapd[73952]: conn=1345 op=107 SRCH base="ou=people,dc=com,dc=zmail,dc=qa,dc=unittest,dc=testldapprovaccount" scope=2 deref=0 filter="(&(&(objectClass=zmailAccount)(!(objectClass=zmailCalendarResource)))(|(!(zmailExcludeFromCMBSearch=*))(zmailExcludeFromCMBSearch=FALSE)))"
+         Oct  9 13:43:26 pshao-macbookpro-2 slapd[73952]: conn=1345 op=107 SRCH attr=zmailCOSId objectClass zmailDomainName zmailACE displayName zmailId uid zmailArchiveAccount zmailMailHost
          */
     }
 
@@ -392,20 +392,20 @@ public class TestLdapProvSearchDirectory extends LdapTest {
         Account acct1 = createAccount(genAcctNameLocalPart("1"));
 
         Map<String, Object> acct2Attrs = Maps.newHashMap();
-        acct2Attrs.put(Provisioning.A_zimbraExcludeFromCMBSearch, "TRUE");
+        acct2Attrs.put(Provisioning.A_zmailExcludeFromCMBSearch, "TRUE");
         Account acct2 = createAccount(genAcctNameLocalPart("2"), acct2Attrs);
 
         Map<String, Object> acct3Attrs = Maps.newHashMap();
-        acct3Attrs.put(Provisioning.A_zimbraExcludeFromCMBSearch, "FALSE");
+        acct3Attrs.put(Provisioning.A_zmailExcludeFromCMBSearch, "FALSE");
         Account acct3 = createAccount(genAcctNameLocalPart("3"), acct3Attrs);
 
         Map<String, Object> acct4Attrs = Maps.newHashMap();
-        acct4Attrs.put(Provisioning.A_zimbraExcludeFromCMBSearch, "FALSE");
-        acct4Attrs.put(Provisioning.A_zimbraArchiveAccount, "archive@test.com");
+        acct4Attrs.put(Provisioning.A_zmailExcludeFromCMBSearch, "FALSE");
+        acct4Attrs.put(Provisioning.A_zmailArchiveAccount, "archive@test.com");
         Account acct4 = createAccount(genAcctNameLocalPart("4"), acct4Attrs);
 
-        String [] returnAttrs = {Provisioning.A_displayName, Provisioning.A_zimbraId, Provisioning.A_uid,
-                Provisioning.A_zimbraArchiveAccount, Provisioning.A_zimbraMailHost};
+        String [] returnAttrs = {Provisioning.A_displayName, Provisioning.A_zmailId, Provisioning.A_uid,
+                Provisioning.A_zmailArchiveAccount, Provisioning.A_zmailMailHost};
 
         // use domain so our assertion will work, production code does not a domain
         SearchAccountsOptions searchOpts = new SearchAccountsOptions(domain, returnAttrs);
@@ -425,20 +425,20 @@ public class TestLdapProvSearchDirectory extends LdapTest {
         /*
         // legacy code and LDAP trace before refactoring
         List<NamedEntry> accounts = prov.searchAccounts(
-                "(&(" + Provisioning.A_zimbraArchiveAccount + "=*)(|(!(" +
-                Provisioning.A_zimbraExcludeFromCMBSearch + "=*))(" +
-                Provisioning.A_zimbraExcludeFromCMBSearch + "=FALSE)))",
+                "(&(" + Provisioning.A_zmailArchiveAccount + "=*)(|(!(" +
+                Provisioning.A_zmailExcludeFromCMBSearch + "=*))(" +
+                Provisioning.A_zmailExcludeFromCMBSearch + "=FALSE)))",
                 returnAttrs,null,false,Provisioning.searchDirectoryStringToMask("accounts"));
 
-        Oct  9 16:40:05 pshao-macbookpro-2 slapd[73952]: conn=1388 op=172 SRCH base="" scope=2 deref=0 filter="(&(&(zimbraArchiveAccount=*)(|(!(zimbraExcludeFromCMBSearch=*))(zimbraExcludeFromCMBSearch=FALSE)))(&(objectClass=zimbraAccount)(!(objectClass=zimbraCalendarResource))))"
-        Oct  9 16:40:05 pshao-macbookpro-2 slapd[73952]: conn=1388 op=172 SRCH attr=zimbraCOSId objectClass zimbraDomainName zimbraACE displayName zimbraId uid zimbraArchiveAccount zimbraMailHost
+        Oct  9 16:40:05 pshao-macbookpro-2 slapd[73952]: conn=1388 op=172 SRCH base="" scope=2 deref=0 filter="(&(&(zmailArchiveAccount=*)(|(!(zmailExcludeFromCMBSearch=*))(zmailExcludeFromCMBSearch=FALSE)))(&(objectClass=zmailAccount)(!(objectClass=zmailCalendarResource))))"
+        Oct  9 16:40:05 pshao-macbookpro-2 slapd[73952]: conn=1388 op=172 SRCH attr=zmailCOSId objectClass zmailDomainName zmailACE displayName zmailId uid zmailArchiveAccount zmailMailHost
         */
 
         /*
          * LDAP trace after reactoring
          *
-        Oct  9 17:03:11 pshao-macbookpro-2 slapd[73952]: conn=1413 op=125 SRCH base="ou=people,dc=com,dc=zimbra,dc=qa,dc=unittest,dc=testldapprovaccount" scope=2 deref=0 filter="(&(&(objectClass=zimbraAccount)(!(objectClass=zimbraCalendarResource)))(zimbraArchiveAccount=*)(|(!(zimbraExcludeFromCMBSearch=*))(zimbraExcludeFromCMBSearch=FALSE)))"
-        Oct  9 17:03:11 pshao-macbookpro-2 slapd[73952]: conn=1413 op=125 SRCH attr=zimbraCOSId objectClass zimbraDomainName zimbraACE displayName zimbraId uid zimbraArchiveAccount zimbraMailHost
+        Oct  9 17:03:11 pshao-macbookpro-2 slapd[73952]: conn=1413 op=125 SRCH base="ou=people,dc=com,dc=zmail,dc=qa,dc=unittest,dc=testldapprovaccount" scope=2 deref=0 filter="(&(&(objectClass=zmailAccount)(!(objectClass=zmailCalendarResource)))(zmailArchiveAccount=*)(|(!(zmailExcludeFromCMBSearch=*))(zmailExcludeFromCMBSearch=FALSE)))"
+        Oct  9 17:03:11 pshao-macbookpro-2 slapd[73952]: conn=1413 op=125 SRCH attr=zmailCOSId objectClass zmailDomainName zmailACE displayName zmailId uid zmailArchiveAccount zmailMailHost
         */
     }
 
@@ -448,26 +448,26 @@ public class TestLdapProvSearchDirectory extends LdapTest {
         Account acct1 = createAccount(genAcctNameLocalPart("1"));
 
         Map<String, Object> acct2Attrs = Maps.newHashMap();
-        acct2Attrs.put(Provisioning.A_zimbraExcludeFromCMBSearch, "TRUE");
+        acct2Attrs.put(Provisioning.A_zmailExcludeFromCMBSearch, "TRUE");
         Account acct2 = createAccount(genAcctNameLocalPart("2"), acct2Attrs);
 
         Map<String, Object> acct3Attrs = Maps.newHashMap();
-        acct3Attrs.put(Provisioning.A_zimbraExcludeFromCMBSearch, "FALSE");
+        acct3Attrs.put(Provisioning.A_zmailExcludeFromCMBSearch, "FALSE");
         Account acct3 = createAccount(genAcctNameLocalPart("3"), acct3Attrs);
 
         Map<String, Object> acct4Attrs = Maps.newHashMap();
-        acct4Attrs.put(Provisioning.A_zimbraExcludeFromCMBSearch, "FALSE");
-        acct4Attrs.put(Provisioning.A_zimbraIsSystemResource, "TRUE");
+        acct4Attrs.put(Provisioning.A_zmailExcludeFromCMBSearch, "FALSE");
+        acct4Attrs.put(Provisioning.A_zmailIsSystemResource, "TRUE");
         Account acct4 = createAccount(genAcctNameLocalPart("4"), acct4Attrs);
 
         Map<String, Object> acct5Attrs = Maps.newHashMap();
-        acct5Attrs.put(Provisioning.A_zimbraExcludeFromCMBSearch, "FALSE");
-        acct5Attrs.put(Provisioning.A_zimbraIsSystemResource, "FALSE");
+        acct5Attrs.put(Provisioning.A_zmailExcludeFromCMBSearch, "FALSE");
+        acct5Attrs.put(Provisioning.A_zmailIsSystemResource, "FALSE");
         Account acct5 = createAccount(genAcctNameLocalPart("5"), acct5Attrs);
 
 
-        String [] returnAttrs = {Provisioning.A_displayName, Provisioning.A_zimbraId, Provisioning.A_uid,
-                Provisioning.A_zimbraArchiveAccount, Provisioning.A_zimbraMailHost};
+        String [] returnAttrs = {Provisioning.A_displayName, Provisioning.A_zmailId, Provisioning.A_uid,
+                Provisioning.A_zmailArchiveAccount, Provisioning.A_zmailMailHost};
 
         // use domain so our assertion will work, production code does not a domain
         SearchAccountsOptions searchOpts = new SearchAccountsOptions(domain, returnAttrs);
@@ -488,20 +488,20 @@ public class TestLdapProvSearchDirectory extends LdapTest {
         /*
         // legacy code and LDAP trace before refactoring
         List<NamedEntry> accounts = prov.searchAccounts(
-                "(&(!(" + Provisioning.A_zimbraIsSystemResource + "=*))(|(!(" +
-                Provisioning.A_zimbraExcludeFromCMBSearch + "=*))(" +
-                Provisioning.A_zimbraExcludeFromCMBSearch + "=FALSE)))",
+                "(&(!(" + Provisioning.A_zmailIsSystemResource + "=*))(|(!(" +
+                Provisioning.A_zmailExcludeFromCMBSearch + "=*))(" +
+                Provisioning.A_zmailExcludeFromCMBSearch + "=FALSE)))",
                 returnAttrs, null, false, Provisioning.searchDirectoryStringToMask("accounts"));
 
-        Oct  9 14:55:09 pshao-macbookpro-2 slapd[73952]: conn=1352 op=172 SRCH base="" scope=2 deref=0 filter="(&(&(!(zimbraIsSystemResource=*))(|(!(zimbraExcludeFromCMBSearch=*))(zimbraExcludeFromCMBSearch=FALSE)))(&(objectClass=zimbraAccount)(!(objectClass=zimbraCalendarResource))))"
-        Oct  9 14:55:09 pshao-macbookpro-2 slapd[73952]: conn=1352 op=172 SRCH attr=zimbraCOSId objectClass zimbraDomainName zimbraACE displayName zimbraId uid zimbraArchiveAccount zimbraMailHost
+        Oct  9 14:55:09 pshao-macbookpro-2 slapd[73952]: conn=1352 op=172 SRCH base="" scope=2 deref=0 filter="(&(&(!(zmailIsSystemResource=*))(|(!(zmailExcludeFromCMBSearch=*))(zmailExcludeFromCMBSearch=FALSE)))(&(objectClass=zmailAccount)(!(objectClass=zmailCalendarResource))))"
+        Oct  9 14:55:09 pshao-macbookpro-2 slapd[73952]: conn=1352 op=172 SRCH attr=zmailCOSId objectClass zmailDomainName zmailACE displayName zmailId uid zmailArchiveAccount zmailMailHost
         */
 
         /*
          * LDAP trace after reactoring
          *
-        Oct  9 16:18:04 pshao-macbookpro-2 slapd[73952]: conn=1381 op=127 SRCH base="ou=people,dc=com,dc=zimbra,dc=qa,dc=unittest,dc=testldapprovaccount" scope=2 deref=0 filter="(&(&(objectClass=zimbraAccount)(!(objectClass=zimbraCalendarResource)))(!(zimbraIsSystemResource=TRUE))(|(!(zimbraExcludeFromCMBSearch=*))(zimbraExcludeFromCMBSearch=FALSE)))"
-        Oct  9 16:18:04 pshao-macbookpro-2 slapd[73952]: conn=1381 op=127 SRCH attr=zimbraCOSId objectClass zimbraDomainName zimbraACE displayName zimbraId uid zimbraArchiveAccount zimbraMailHost
+        Oct  9 16:18:04 pshao-macbookpro-2 slapd[73952]: conn=1381 op=127 SRCH base="ou=people,dc=com,dc=zmail,dc=qa,dc=unittest,dc=testldapprovaccount" scope=2 deref=0 filter="(&(&(objectClass=zmailAccount)(!(objectClass=zmailCalendarResource)))(!(zmailIsSystemResource=TRUE))(|(!(zmailExcludeFromCMBSearch=*))(zmailExcludeFromCMBSearch=FALSE)))"
+        Oct  9 16:18:04 pshao-macbookpro-2 slapd[73952]: conn=1381 op=127 SRCH attr=zmailCOSId objectClass zmailDomainName zmailACE displayName zmailId uid zmailArchiveAccount zmailMailHost
         */
     }
 
@@ -556,13 +556,13 @@ public class TestLdapProvSearchDirectory extends LdapTest {
         // TOO_MANY_SEARCH_RESULTS will be thrown
         List<NamedEntry> entries = prov.searchDirectory(options);
 
-        Oct  9 19:28:20 pshao-macbookpro-2 slapd[73952]: conn=1417 op=165 SRCH base="" scope=2 deref=0 filter="(&(objectClass=zimbraAccount)(uid=sslclientcertprincipalmap))"
+        Oct  9 19:28:20 pshao-macbookpro-2 slapd[73952]: conn=1417 op=165 SRCH base="" scope=2 deref=0 filter="(&(objectClass=zmailAccount)(uid=sslclientcertprincipalmap))"
         Oct  9 19:28:20 pshao-macbookpro-2 slapd[73952]: conn=1417 op=165 SEARCH RESULT tag=101 err=0 nentries=0 text=
         */
 
         /*
          // LDAP trace after refactoring
-         Oct  9 19:58:39 pshao-macbookpro-2 slapd[73952]: conn=1438 op=220 SRCH base="" scope=2 deref=0 filter="(&(|(objectClass=zimbraAccount)(objectClass=zimbraCalendarResource))(uid=sslclientcertprincipalmap))"
+         Oct  9 19:58:39 pshao-macbookpro-2 slapd[73952]: conn=1438 op=220 SRCH base="" scope=2 deref=0 filter="(&(|(objectClass=zmailAccount)(objectClass=zmailCalendarResource))(uid=sslclientcertprincipalmap))"
 
          */
     }
@@ -586,7 +586,7 @@ public class TestLdapProvSearchDirectory extends LdapTest {
             throw ServiceException.INVALID_REQUEST("invalid grantee type for revokeOrphanGrants", null);
         }
 
-        String query = "(" + Provisioning.A_zimbraId + "=" + granteeId + ")";
+        String query = "(" + Provisioning.A_zmailId + "=" + granteeId + ")";
         opts.setFilterString(FilterId.SEARCH_GRANTEE, query);
         opts.setOnMaster(true);  // search the grantee on LDAP master
 
@@ -608,7 +608,7 @@ public class TestLdapProvSearchDirectory extends LdapTest {
         else
             throw ServiceException.INVALID_REQUEST("invalid grantee type for revokeOrphanGrants", null);
 
-        String query = "(" + Provisioning.A_zimbraId + "=" + granteeId + ")";
+        String query = "(" + Provisioning.A_zmailId + "=" + granteeId + ")";
 
         Provisioning.SearchOptions opts = new SearchOptions();
         opts.setFlags(flags);
@@ -618,12 +618,12 @@ public class TestLdapProvSearchDirectory extends LdapTest {
         Provisioning prov = Provisioning.getInstance();
         List<NamedEntry> entries = prov.searchDirectory(opts);
 
-        Oct  9 23:09:26 pshao-macbookpro-2 slapd[73952]: conn=1531 op=209 SRCH base="" scope=2 deref=0 filter="(&(zimbraId=8b435b63-40c3-4de7-b105-869cbafea29b)(|(objectClass=zimbraAccount)(objectClass=zimbraCalendarResource)))"
+        Oct  9 23:09:26 pshao-macbookpro-2 slapd[73952]: conn=1531 op=209 SRCH base="" scope=2 deref=0 filter="(&(zmailId=8b435b63-40c3-4de7-b105-869cbafea29b)(|(objectClass=zmailAccount)(objectClass=zmailCalendarResource)))"
         */
 
         /*
          // LDAP trace after refactoring
-        Oct  9 23:26:59 pshao-macbookpro-2 slapd[73952]: conn=1535 op=209 SRCH base="" scope=2 deref=0 filter="(&(|(objectClass=zimbraAccount)(objectClass=zimbraCalendarResource))(zimbraId=561fcc6d-6a09-432e-8346-3f1752eea3f9))"
+        Oct  9 23:26:59 pshao-macbookpro-2 slapd[73952]: conn=1535 op=209 SRCH base="" scope=2 deref=0 filter="(&(|(objectClass=zmailAccount)(objectClass=zmailCalendarResource))(zmailId=561fcc6d-6a09-432e-8346-3f1752eea3f9))"
 
          */
     }
@@ -733,7 +733,7 @@ public class TestLdapProvSearchDirectory extends LdapTest {
         int flags = Provisioning.SD_ACCOUNT_FLAG + Provisioning.SD_CALENDAR_RESOURCE_FLAG + Provisioning.SD_DISTRIBUTION_LIST_FLAG;
         ((LdapProvisioning) prov).searchObjects(null, null, searchBase, flags, visitor, 0);
          *
-         Oct 12 22:10:43 pshao-macbookpro-2 slapd[3065]: conn=1081 op=434 SRCH base="ou=people,dc=com,dc=zimbra,dc=qa,dc=unittest,dc=testldapprovsearchdirectory" scope=2 deref=0 filter="(|(objectClass=zimbraAccount)(objectClass=zimbraDistributionList)(objectClass=zimbraCalendarResource))"
+         Oct 12 22:10:43 pshao-macbookpro-2 slapd[3065]: conn=1081 op=434 SRCH base="ou=people,dc=com,dc=zmail,dc=qa,dc=unittest,dc=testldapprovsearchdirectory" scope=2 deref=0 filter="(|(objectClass=zmailAccount)(objectClass=zmailDistributionList)(objectClass=zmailCalendarResource))"
          Oct 12 22:10:43 pshao-macbookpro-2 slapd[3065]: conn=1081 op=434 SEARCH RESULT tag=101 err=0 nentries=3 text=
 
          */
@@ -850,7 +850,7 @@ public class TestLdapProvSearchDirectory extends LdapTest {
         options.setTypes(ObjectType.accounts);
         options.setSortOpt(SortOpt.SORT_ASCENDING);
         options.setFilterString(FilterId.UNITTEST,
-                String.format("(zimbraMailDeliveryAddress=%s)", acctUnicodeName));
+                String.format("(zmailMailDeliveryAddress=%s)", acctUnicodeName));
         options.setConvertIDNToAscii(true);
         List<NamedEntry> entries = prov.searchDirectory(options);
 
@@ -878,12 +878,12 @@ public class TestLdapProvSearchDirectory extends LdapTest {
 
         String[] returnAttrs = new String[] {
                 Provisioning.A_displayName,
-                Provisioning.A_zimbraId,
-                Provisioning.A_zimbraMailHost,
+                Provisioning.A_zmailId,
+                Provisioning.A_zmailMailHost,
                 Provisioning.A_uid,
-                Provisioning.A_zimbraAccountStatus,
-                Provisioning.A_zimbraIsAdminAccount,
-                Provisioning.A_zimbraMailStatus
+                Provisioning.A_zmailAccountStatus,
+                Provisioning.A_zmailIsAdminAccount,
+                Provisioning.A_zmailMailStatus
         };
 
         SearchDirectoryOptions searchOpts = new SearchDirectoryOptions();
@@ -1008,8 +1008,8 @@ public class TestLdapProvSearchDirectory extends LdapTest {
         SearchDirectoryOptions options = new SearchDirectoryOptions();
         options.setDomain(subDomain);
         options.setTypes(SearchDirectoryOptions.ObjectType.accounts);
-        options.setFilterString(FilterId.UNITTEST, "(zimbraMailDeliveryAddress=*.*)");
-        options.setReturnAttrs(new String[] {Provisioning.A_zimbraMailDeliveryAddress});
+        options.setFilterString(FilterId.UNITTEST, "(zmailMailDeliveryAddress=*.*)");
+        options.setReturnAttrs(new String[] {Provisioning.A_zmailMailDeliveryAddress});
         options.setConvertIDNToAscii(true);
 
         List<NamedEntry> entries = prov.searchDirectory(options);
@@ -1080,7 +1080,7 @@ public class TestLdapProvSearchDirectory extends LdapTest {
         options.setDomain(prov.getDomain(expected));
         options.setTypes(SearchDirectoryOptions.ObjectType.accounts);
         options.setFilterString(FilterId.UNITTEST, String.format("(%s=%s)", filterAttr, filterValue));
-        options.setReturnAttrs(new String[] {Provisioning.A_zimbraMailDeliveryAddress});
+        options.setReturnAttrs(new String[] {Provisioning.A_zmailMailDeliveryAddress});
         options.setConvertIDNToAscii(true);
 
         List<NamedEntry> entries = prov.searchDirectory(options);
@@ -1100,7 +1100,7 @@ public class TestLdapProvSearchDirectory extends LdapTest {
         SearchDirectoryOptions options = new SearchDirectoryOptions();
         options.setTypes(SearchDirectoryOptions.ObjectType.accounts);
         options.setFilterString(FilterId.UNITTEST, filter);
-        options.setReturnAttrs(new String[] {Provisioning.A_zimbraId});
+        options.setReturnAttrs(new String[] {Provisioning.A_zmailId});
         options.setConvertIDNToAscii(true);
 
         String errorCode = null;

@@ -12,7 +12,7 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.soap;
+package org.zmail.soap;
 
 import java.util.Map;
 
@@ -22,27 +22,27 @@ import org.dom4j.QName;
 import org.eclipse.jetty.continuation.Continuation;
 
 import com.google.common.base.Strings;
-import com.zimbra.common.account.Key.AccountBy;
-import com.zimbra.common.auth.ZAuthToken;
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.common.soap.Element;
-import com.zimbra.common.soap.HeaderConstants;
-import com.zimbra.common.soap.SoapProtocol;
-import com.zimbra.common.soap.SoapTransport;
-import com.zimbra.common.util.Log;
-import com.zimbra.common.util.LogFactory;
-import com.zimbra.cs.account.Account;
-import com.zimbra.cs.account.AccountServiceException;
-import com.zimbra.cs.account.AuthToken;
-import com.zimbra.cs.account.AuthTokenException;
-import com.zimbra.cs.account.Provisioning;
-import com.zimbra.cs.mailbox.OperationContext;
-import com.zimbra.cs.service.AuthProvider;
-import com.zimbra.cs.session.Session;
-import com.zimbra.cs.session.SessionCache;
-import com.zimbra.cs.session.SoapSession;
-import com.zimbra.cs.session.SoapSession.PushChannel;
-import com.zimbra.cs.util.BuildInfo;
+import org.zmail.common.account.Key.AccountBy;
+import org.zmail.common.auth.ZAuthToken;
+import org.zmail.common.service.ServiceException;
+import org.zmail.common.soap.Element;
+import org.zmail.common.soap.HeaderConstants;
+import org.zmail.common.soap.SoapProtocol;
+import org.zmail.common.soap.SoapTransport;
+import org.zmail.common.util.Log;
+import org.zmail.common.util.LogFactory;
+import org.zmail.cs.account.Account;
+import org.zmail.cs.account.AccountServiceException;
+import org.zmail.cs.account.AuthToken;
+import org.zmail.cs.account.AuthTokenException;
+import org.zmail.cs.account.Provisioning;
+import org.zmail.cs.mailbox.OperationContext;
+import org.zmail.cs.service.AuthProvider;
+import org.zmail.cs.session.Session;
+import org.zmail.cs.session.SessionCache;
+import org.zmail.cs.session.SoapSession;
+import org.zmail.cs.session.SoapSession.PushChannel;
+import org.zmail.cs.util.BuildInfo;
 
 /**
  * This class models the soap context (the data from the soap envelope)
@@ -50,7 +50,7 @@ import com.zimbra.cs.util.BuildInfo;
  *
  * @since May 29, 2004
  */
-public final class ZimbraSoapContext {
+public final class ZmailSoapContext {
 
     final class SessionInfo {
         String sessionId;
@@ -83,8 +83,8 @@ public final class ZimbraSoapContext {
             }
 
             @Override
-            public ZimbraSoapContext getSoapContext() {
-                return ZimbraSoapContext.this;
+            public ZmailSoapContext getSoapContext() {
+                return ZmailSoapContext.this;
             }
 
             @Override
@@ -108,7 +108,7 @@ public final class ZimbraSoapContext {
         }
     }
 
-    private static final Log sLog = LogFactory.getLog(ZimbraSoapContext.class);
+    private static final Log sLog = LogFactory.getLog(ZmailSoapContext.class);
     public static final int MAX_HOP_COUNT = 5;
 
     private ZAuthToken mRawAuthToken;
@@ -140,7 +140,7 @@ public final class ZimbraSoapContext {
     private String mVia;
 
     //zdsync: for parsing locally constructed soap requests
-    public ZimbraSoapContext(AuthToken authToken, String accountId,
+    public ZmailSoapContext(AuthToken authToken, String accountId,
             SoapProtocol reqProtocol, SoapProtocol respProtocol) throws ServiceException {
         this(authToken, accountId, reqProtocol, respProtocol, 0);
     }
@@ -150,7 +150,7 @@ public final class ZimbraSoapContext {
      * <p>
      * Hop count is not checked for TOO_MANY_HOPS in this route.
      */
-    public ZimbraSoapContext(AuthToken authToken, String accountId,
+    public ZmailSoapContext(AuthToken authToken, String accountId,
             SoapProtocol reqProtocol, SoapProtocol respProtocol, int hopCount)
         throws ServiceException {
 
@@ -167,47 +167,47 @@ public final class ZimbraSoapContext {
     }
 
     /**
-     * Creates a {@link ZimbraSoapContext} from another existing
-     * {@link ZimbraSoapContext} for use in proxying.
+     * Creates a {@link ZmailSoapContext} from another existing
+     * {@link ZmailSoapContext} for use in proxying.
      *
      * @param zsc context to clone
      */
-    public ZimbraSoapContext(ZimbraSoapContext zsc) throws ServiceException {
+    public ZmailSoapContext(ZmailSoapContext zsc) throws ServiceException {
         this(zsc, zsc.mRequestedAccountId);
     }
 
     /**
-     * Creates a {@link ZimbraSoapContext} from another existing
-     * {@link ZimbraSoapContext} for use in proxying.
+     * Creates a {@link ZmailSoapContext} from another existing
+     * {@link ZmailSoapContext} for use in proxying.
      *
      * @param zsc context to clone
      * @param targetAccountId different account ID from the original request
      */
-    public ZimbraSoapContext(ZimbraSoapContext zsc, String targetAccountId)
+    public ZmailSoapContext(ZmailSoapContext zsc, String targetAccountId)
     throws ServiceException {
         this(zsc, targetAccountId, null);
     }
 
     /**
-     * Creates a {@link ZimbraSoapContext} from another existing
-     * {@link ZimbraSoapContext} for use in proxying.
+     * Creates a {@link ZmailSoapContext} from another existing
+     * {@link ZmailSoapContext} for use in proxying.
      *
      * @param zsc context to clone
      * @param targetAccountId different account ID from the original request
      * @param session If session is non-null, it will be used for proxy notifications
      * @throws ServiceException
      */
-    public ZimbraSoapContext(ZimbraSoapContext zsc, String targetAccountId, Session session)
+    public ZmailSoapContext(ZmailSoapContext zsc, String targetAccountId, Session session)
     throws ServiceException {
         this(zsc, null, targetAccountId, session);
     }
 
-    /** Creates a <code>ZimbraSoapContext</code> from another existing
-     *  <code>ZimbraSoapContext</code> for use in proxying.
+    /** Creates a <code>ZmailSoapContext</code> from another existing
+     *  <code>ZmailSoapContext</code> for use in proxying.
      *  If session is non-null, it will be used for proxy notifications.
      *  If authToken is not null, the auth token in the clone will be replaced by authToken.
      */
-    public ZimbraSoapContext(ZimbraSoapContext zsc, AuthToken authToken, String targetAccountId, Session session)
+    public ZmailSoapContext(ZmailSoapContext zsc, AuthToken authToken, String targetAccountId, Session session)
     throws ServiceException {
         mUserAgent = zsc.mUserAgent;
         mRequestIP = zsc.mRequestIP;
@@ -233,13 +233,13 @@ public final class ZimbraSoapContext {
     }
 
     /**
-     * Creates a {@link ZimbraSoapContext} from the {@code <context>}
+     * Creates a {@link ZmailSoapContext} from the {@code <context>}
      * {@link Element} from the SOAP header.
      *
      * @param ctxt {@code <context>} Element (can be null if not present in request)
      * @param context The engine context, which might contain the auth token
      * @param requestProtocol  The SOAP protocol used for the request */
-    public ZimbraSoapContext(Element ctxt, Map<String, Object> context,
+    public ZmailSoapContext(Element ctxt, Map<String, Object> context,
             SoapProtocol requestProtocol) throws ServiceException {
 
         if (ctxt != null && !ctxt.getQName().equals(HeaderConstants.CONTEXT))
@@ -286,7 +286,7 @@ public final class ZimbraSoapContext {
             // ignore and leave null
             mAuthToken = null;
             if (sLog.isDebugEnabled())
-                sLog.debug("ZimbraContext AuthToken error: " + e.getMessage(), e);
+                sLog.debug("ZmailContext AuthToken error: " + e.getMessage(), e);
         }
 
         // find out if we're executing in another user's context
@@ -478,7 +478,7 @@ public final class ZimbraSoapContext {
         return mAuthToken != null && AuthToken.isAnyAdmin(mAuthToken);
     }
 
-    public ZimbraSoapContext disableNotifications() {
+    public ZmailSoapContext disableNotifications() {
         mSessionEnabled = false;
         mSessionInfo = null;
         return this;
@@ -580,7 +580,7 @@ public final class ZimbraSoapContext {
     /**
      * Serializes this object for use in a proxied SOAP request.
      * <p>
-     * The attributes encapsulated by the {@link ZimbraSoapContext} -- the response protocol, the auth token, etc. are
+     * The attributes encapsulated by the {@link ZmailSoapContext} -- the response protocol, the auth token, etc. are
      * carried forward, except that if {@code excludeAccountDetails} is set, any account details are omitted.
      */
     Element toProxyContext(SoapProtocol proto, boolean excludeAccountDetails) {
@@ -635,7 +635,7 @@ public final class ZimbraSoapContext {
     /**
      * Serializes this object for use in a proxied SOAP request.
      * <p>
-     * The attributes encapsulated by the {@link ZimbraSoapContext} -- the
+     * The attributes encapsulated by the {@link ZmailSoapContext} -- the
      * response protocol, the auth token, etc. -- are carried forward.
      */
     Element toProxyContext(SoapProtocol proto) {

@@ -12,7 +12,7 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.qa.unittest;
+package org.zmail.qa.unittest;
 
 import java.util.HashMap;
 import java.util.List;
@@ -34,35 +34,35 @@ import org.apache.commons.httpclient.methods.GetMethod;
 import junit.framework.TestCase;
 import junit.framework.TestSuite;
 
-import com.zimbra.common.auth.ZAuthToken;
-import com.zimbra.common.httpclient.HttpClientUtil;
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.common.soap.AccountConstants;
-import com.zimbra.common.soap.Element;
-import com.zimbra.common.util.CliUtil;
-import com.zimbra.cs.account.Account;
-import com.zimbra.cs.account.AuthToken;
-import com.zimbra.cs.account.AuthTokenException;
-import com.zimbra.cs.service.AuthProvider;
-import com.zimbra.cs.service.AuthProviderException;
-import com.zimbra.cs.service.UserServlet;
-import com.zimbra.cs.servlet.ZimbraServlet;
-import com.zimbra.cs.account.Provisioning;
-import com.zimbra.common.account.Key.AccountBy;
-import com.zimbra.client.ZFolder;
-import com.zimbra.client.ZGrant;
-import com.zimbra.client.ZMailbox;
-import com.zimbra.client.ZMountpoint;
-import com.zimbra.client.ZSearchParams;
+import org.zmail.common.auth.ZAuthToken;
+import org.zmail.common.httpclient.HttpClientUtil;
+import org.zmail.common.service.ServiceException;
+import org.zmail.common.soap.AccountConstants;
+import org.zmail.common.soap.Element;
+import org.zmail.common.util.CliUtil;
+import org.zmail.cs.account.Account;
+import org.zmail.cs.account.AuthToken;
+import org.zmail.cs.account.AuthTokenException;
+import org.zmail.cs.service.AuthProvider;
+import org.zmail.cs.service.AuthProviderException;
+import org.zmail.cs.service.UserServlet;
+import org.zmail.cs.servlet.ZmailServlet;
+import org.zmail.cs.account.Provisioning;
+import org.zmail.common.account.Key.AccountBy;
+import org.zmail.client.ZFolder;
+import org.zmail.client.ZGrant;
+import org.zmail.client.ZMailbox;
+import org.zmail.client.ZMountpoint;
+import org.zmail.client.ZSearchParams;
 
 /*
  * To test key grant:
  * 
- * 1. In com.zimbra.cs.service.AuthProvider, uncomment 
- *    // register(new com.zimbra.qa.unittest.TestAccessKeyGrant.DummyAuthProvider());
+ * 1. In org.zmail.cs.service.AuthProvider, uncomment 
+ *    // register(new org.zmail.qa.unittest.TestAccessKeyGrant.DummyAuthProvider());
  *    
- * 2. In /opt/zimbra/conf/localconfig.xml, set: 
-<key name="zimbra_auth_provider">
+ * 2. In /opt/zmail/conf/localconfig.xml, set: 
+<key name="zmail_auth_provider">
     <value>DUMMY_AUTH_PROVIDER</value>
 </key>
 
@@ -140,7 +140,7 @@ public class TestAccessKeyGrant extends TestCase {
             throw AuthProviderException.NO_AUTH_DATA();
         }
         
-        protected boolean allowURLAccessKeyAuth(HttpServletRequest req, ZimbraServlet servlet) {
+        protected boolean allowURLAccessKeyAuth(HttpServletRequest req, ZmailServlet servlet) {
             return true;
         }
 
@@ -256,7 +256,7 @@ public class TestAccessKeyGrant extends TestCase {
         }
 
         @Override
-        public boolean isZimbraUser() {
+        public boolean isZmailUser() {
             // TODO Auto-generated method stub
             return mAccessKey == null;
         }
@@ -422,18 +422,18 @@ public class TestAccessKeyGrant extends TestCase {
      *    mbox user1@phoebe.mac> mfg Calendar key k1@key.com r
      *    
      *    grab the access key from the FolderActionResponse:
-     *        <FolderActionResponse xmlns="urn:zimbraMail">
+     *        <FolderActionResponse xmlns="urn:zmailMail">
      *            <action d="k1@key.com" key="3c4877ed3948511cee39379debbf968d" op="grant" zid="k1@key.com" id="10"/>
      *        </FolderActionResponse>
      *        
      * 2. paste the access key to the test (TODO, automate it)        
      *    
-     * 3. In com.zimbra.cs.service.AuthProvider, uncomment // register(new com.zimbra.qa.unittest.TestAccessKeyGrant.DummyAuthProvider());
+     * 3. In org.zmail.cs.service.AuthProvider, uncomment // register(new org.zmail.qa.unittest.TestAccessKeyGrant.DummyAuthProvider());
      * 
      * 4. ant deploy-war
      * 
      * 5. modify localconfig.xml, add:
-     *    <key name="zimbra_auth_provider">
+     *    <key name="zmail_auth_provider">
      *        <value>DUMMY_AUTH_PROVIDER</value>
      *    </key>
      *
@@ -470,7 +470,7 @@ public class TestAccessKeyGrant extends TestCase {
         
         /*
         Cookie authCookie = new Cookie(restURL.getURL().getHost(), "ZM_AUTH_TOKEN", mAuthToken, "/", null, false);
-        Cookie sessionCookie = new Cookie(restURL.getURL().getHost(), "JSESSIONID", mSessionId, "/zimbra", null, false);
+        Cookie sessionCookie = new Cookie(restURL.getURL().getHost(), "JSESSIONID", mSessionId, "/zmail", null, false);
         initialState.addCookie(authCookie);
         initialState.addCookie(sessionCookie);
         */

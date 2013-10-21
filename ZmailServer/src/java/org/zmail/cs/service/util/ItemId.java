@@ -15,28 +15,28 @@
 /*
  * Created on Sep 27, 2005
  */
-package com.zimbra.cs.service.util;
+package org.zmail.cs.service.util;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.common.util.ZimbraLog;
-import com.zimbra.cs.account.Account;
-import com.zimbra.cs.account.AccountServiceException;
-import com.zimbra.cs.account.Provisioning;
-import com.zimbra.common.account.Key;
-import com.zimbra.common.account.Key.AccountBy;
-import com.zimbra.cs.mailbox.Folder;
-import com.zimbra.cs.mailbox.MailItem;
-import com.zimbra.cs.mailbox.MailServiceException;
-import com.zimbra.cs.mailbox.Mailbox;
-import com.zimbra.cs.mailbox.Mountpoint;
-import com.zimbra.cs.mailbox.OperationContext;
-import com.zimbra.soap.DocumentHandler;
-import com.zimbra.soap.ZimbraSoapContext;
+import org.zmail.common.service.ServiceException;
+import org.zmail.common.util.ZmailLog;
+import org.zmail.cs.account.Account;
+import org.zmail.cs.account.AccountServiceException;
+import org.zmail.cs.account.Provisioning;
+import org.zmail.common.account.Key;
+import org.zmail.common.account.Key.AccountBy;
+import org.zmail.cs.mailbox.Folder;
+import org.zmail.cs.mailbox.MailItem;
+import org.zmail.cs.mailbox.MailServiceException;
+import org.zmail.cs.mailbox.Mailbox;
+import org.zmail.cs.mailbox.Mountpoint;
+import org.zmail.cs.mailbox.OperationContext;
+import org.zmail.soap.DocumentHandler;
+import org.zmail.soap.ZmailSoapContext;
 
 public class ItemId implements java.io.Serializable {
     private static final long serialVersionUID = -9044615129495573523L;
@@ -68,7 +68,7 @@ public class ItemId implements java.io.Serializable {
         mAccountId = acctId;  mId = id;  mSubpartId = subId;
     }
 
-    public ItemId(String encoded, ZimbraSoapContext zsc) throws ServiceException {
+    public ItemId(String encoded, ZmailSoapContext zsc) throws ServiceException {
         this(encoded, zsc.getRequestedAccountId());
     }
 
@@ -116,7 +116,7 @@ public class ItemId implements java.io.Serializable {
         Account acctTarget = Provisioning.getInstance().get(AccountBy.id, mAccountId);
         if (acctTarget == null)
             throw AccountServiceException.NO_SUCH_ACCOUNT(mAccountId);
-        return DocumentHandler.getLocalHost().equalsIgnoreCase(acctTarget.getAttr(Provisioning.A_zimbraMailHost));
+        return DocumentHandler.getLocalHost().equalsIgnoreCase(acctTarget.getAttr(Provisioning.A_zmailMailHost));
     }
 
     /** Returns whether the item belongs to the mailbox owned by the passed-in
@@ -196,7 +196,7 @@ public class ItemId implements java.io.Serializable {
                     boolean isMountpoint = true;
                     int hopCount = 0;
                     // resolve local mountpoint to a real folder; deal with possible mountpoint chain
-                    while (isMountpoint && hopCount < ZimbraSoapContext.MAX_HOP_COUNT) {
+                    while (isMountpoint && hopCount < ZmailSoapContext.MAX_HOP_COUNT) {
                         Folder folder = mbox.getFolderById(octxt, folderId);
                         isMountpoint = folder instanceof Mountpoint;
                         if (isMountpoint) {
@@ -216,7 +216,7 @@ public class ItemId implements java.io.Serializable {
                             hopCount++;
                         }
                     }
-                    if (hopCount >= ZimbraSoapContext.MAX_HOP_COUNT)
+                    if (hopCount >= ZmailSoapContext.MAX_HOP_COUNT)
                         throw MailServiceException.TOO_MANY_HOPS(iidFolder);
                 }
                 List<Integer> folderList = foldersMap.get(targetAccountId);
@@ -230,11 +230,11 @@ public class ItemId implements java.io.Serializable {
                 ItemIdFormatter ifmt = new ItemIdFormatter(targetAccountId, targetAccountId, false);
                 if (ecode.equals(ServiceException.PERM_DENIED)) {
                     // share permission was revoked
-                    ZimbraLog.calendar.warn(
+                    ZmailLog.calendar.warn(
                             "Ignorable permission error " + ifmt.formatItemId(folderId), e);
                 } else if (ecode.equals(MailServiceException.NO_SUCH_FOLDER)) {
                     // shared calendar folder was deleted by the owner
-                    ZimbraLog.calendar.warn(
+                    ZmailLog.calendar.warn(
                             "Ignoring deleted folder " + ifmt.formatItemId(folderId));
                 } else {
                     throw e;

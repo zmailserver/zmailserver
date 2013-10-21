@@ -12,7 +12,7 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.dav.resource;
+package org.zmail.cs.dav.resource;
 
 import java.io.ByteArrayInputStream;
 import java.io.InputStream;
@@ -22,23 +22,23 @@ import javax.mail.internet.MimeMessage;
 import javax.servlet.http.HttpServletResponse;
 
 import com.google.common.io.Closeables;
-import com.zimbra.common.util.ByteUtil;
-import com.zimbra.common.util.ZimbraLog;
-import com.zimbra.cs.account.Account;
-import com.zimbra.cs.account.Provisioning;
-import com.zimbra.common.account.Key.AccountBy;
-import com.zimbra.cs.dav.DavContext;
-import com.zimbra.cs.dav.DavElements;
-import com.zimbra.cs.dav.DavException;
-import com.zimbra.cs.index.MessageHit;
-import com.zimbra.cs.index.SortBy;
-import com.zimbra.cs.index.ZimbraHit;
-import com.zimbra.cs.index.ZimbraQueryResults;
-import com.zimbra.cs.mailbox.Mailbox;
-import com.zimbra.cs.mailbox.MailboxManager;
-import com.zimbra.cs.mailbox.Message;
-import com.zimbra.cs.mime.MPartInfo;
-import com.zimbra.cs.mime.Mime;
+import org.zmail.common.util.ByteUtil;
+import org.zmail.common.util.ZmailLog;
+import org.zmail.cs.account.Account;
+import org.zmail.cs.account.Provisioning;
+import org.zmail.common.account.Key.AccountBy;
+import org.zmail.cs.dav.DavContext;
+import org.zmail.cs.dav.DavElements;
+import org.zmail.cs.dav.DavException;
+import org.zmail.cs.index.MessageHit;
+import org.zmail.cs.index.SortBy;
+import org.zmail.cs.index.ZmailHit;
+import org.zmail.cs.index.ZmailQueryResults;
+import org.zmail.cs.mailbox.Mailbox;
+import org.zmail.cs.mailbox.MailboxManager;
+import org.zmail.cs.mailbox.Message;
+import org.zmail.cs.mime.MPartInfo;
+import org.zmail.cs.mime.Mime;
 
 /**
  * Attachment is a DAV resource that represents email attachments.
@@ -80,7 +80,7 @@ public class Attachment extends PhantomResource {
         query.append(name);
         if (needQuotes)
             query.append("'");
-        ZimbraQueryResults zqr = null;
+        ZmailQueryResults zqr = null;
         boolean found = false;
         try {
             Account account = prov.get(AccountBy.name, user);
@@ -88,7 +88,7 @@ public class Attachment extends PhantomResource {
             // if more than one attachments with the same name, take the first one.
             zqr = mbox.index.search(ctxt.getOperationContext(), query.toString(), SEARCH_TYPES, SortBy.NAME_ASC, 10);
             if (zqr.hasNext()) {
-                ZimbraHit hit = zqr.getNext();
+                ZmailHit hit = zqr.getNext();
                 if (hit instanceof MessageHit) {
                     Message message = ((MessageHit)hit).getMessage();
                     setCreationDate(message.getDate());
@@ -109,7 +109,7 @@ public class Attachment extends PhantomResource {
                 }
             }
         } catch (Exception e) {
-            ZimbraLog.dav.error("can't search for: attachment="+name, e);
+            ZmailLog.dav.error("can't search for: attachment="+name, e);
         } finally {
             Closeables.closeQuietly(zqr);
         }

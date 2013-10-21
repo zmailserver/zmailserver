@@ -13,7 +13,7 @@
  * ***** END LICENSE BLOCK *****
  */
 
-package com.zimbra.cs.store.file;
+package org.zmail.cs.store.file;
 
 import java.io.File;
 import java.io.IOException;
@@ -29,22 +29,22 @@ import java.util.Set;
 import org.apache.commons.collections.MultiMap;
 import org.apache.commons.collections.map.MultiValueMap;
 
-import com.zimbra.common.localconfig.DebugConfig;
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.common.util.Pair;
-import com.zimbra.common.util.ZimbraLog;
-import com.zimbra.cs.db.DbMailItem;
-import com.zimbra.cs.db.DbMailbox;
-import com.zimbra.cs.db.DbPool;
-import com.zimbra.cs.db.DbPool.DbConnection;
-import com.zimbra.cs.db.DbVolumeBlobs;
-import com.zimbra.cs.mailbox.MailServiceException;
-import com.zimbra.cs.store.MailboxBlob.MailboxBlobInfo;
-import com.zimbra.cs.util.SpoolingCache;
-import com.zimbra.cs.volume.Volume;
-import com.zimbra.cs.volume.Volume.VolumeMetadata;
-import com.zimbra.cs.volume.VolumeManager;
-import com.zimbra.znative.IO;
+import org.zmail.common.localconfig.DebugConfig;
+import org.zmail.common.service.ServiceException;
+import org.zmail.common.util.Pair;
+import org.zmail.common.util.ZmailLog;
+import org.zmail.cs.db.DbMailItem;
+import org.zmail.cs.db.DbMailbox;
+import org.zmail.cs.db.DbPool;
+import org.zmail.cs.db.DbPool.DbConnection;
+import org.zmail.cs.db.DbVolumeBlobs;
+import org.zmail.cs.mailbox.MailServiceException;
+import org.zmail.cs.store.MailboxBlob.MailboxBlobInfo;
+import org.zmail.cs.util.SpoolingCache;
+import org.zmail.cs.volume.Volume;
+import org.zmail.cs.volume.Volume.VolumeMetadata;
+import org.zmail.cs.volume.VolumeManager;
+import org.zmail.znative.IO;
 
 public class BlobDeduper {
     
@@ -76,7 +76,7 @@ public class BlobDeduper {
         }
         // dedupe the paths
         if (blobs.size() > 1) {
-            ZimbraLog.misc.debug("Deduping " + blobs.size() + " files for digest " + digest + " volume " + volume.getId());
+            ZmailLog.misc.debug("Deduping " + blobs.size() + " files for digest " + digest + " volume " + volume.getId());
             return deDupe(blobs);
         } else if (blobs.size() == 1) { 
             // mark the blob as processed if there is only one blob for given digest.
@@ -183,7 +183,7 @@ public class BlobDeduper {
                     linksCreated++;
                     sizeSaved += blob.getFileInfo().getSize();
                 } catch (IOException e) {
-                    ZimbraLog.misc.warn("Ignoring the error while deduping " + path, e);
+                    ZmailLog.misc.warn("Ignoring the error while deduping " + path, e);
                 } finally {
                     if (tempFile.exists()) {
                         tempFile.delete();
@@ -191,7 +191,7 @@ public class BlobDeduper {
                 }
             }
         } catch (IOException e) {
-            ZimbraLog.misc.warn("Ignoring the error while creating a link for " + srcPath, e);
+            ZmailLog.misc.warn("Ignoring the error while creating a link for " + srcPath, e);
         } finally { // delete the hold file
             if (holdFile.exists()) {
                 holdFile.delete();
@@ -213,7 +213,7 @@ public class BlobDeduper {
     
     public synchronized void stopProcessing() {
         if (inProgress) {
-            ZimbraLog.misc.info("Setting stopProcessing flag.");
+            ZmailLog.misc.info("Setting stopProcessing flag.");
             stopProcessing = true;
         }
     }
@@ -384,7 +384,7 @@ public class BlobDeduper {
                     vol = updateMetadata(vol.getId(), metadata);
                     setVolumeBlobsProgress(vol.getId(), i+1 + "/" + groupIds.size());
                     if (isStopProcessing()) {
-                        ZimbraLog.misc.info("Recieved the stop signal. Stopping the deduplication process.");
+                        ZmailLog.misc.info("Recieved the stop signal. Stopping the deduplication process.");
                         throw ServiceException.INTERRUPTED("received stop signal");
                     }
                 }
@@ -403,7 +403,7 @@ public class BlobDeduper {
         public void run() {   
             for (short volumeId : volumeIds) {
                 try {
-                    ZimbraLog.misc.info("Running deduper for volume %d", volumeId);
+                    ZmailLog.misc.info("Running deduper for volume %d", volumeId);
                     Volume vol = VolumeManager.getInstance().getVolume(volumeId);
                     // populate the volume_blox table first;
                     populateVolumeBlobs(vol);
@@ -423,17 +423,17 @@ public class BlobDeduper {
                         count++;
                         setBlobDigestsProgress(volumeId, count + "/" + digests.size());
                         if (isStopProcessing()) {
-                            ZimbraLog.misc.info("Recieved the stop signal. Stopping the deduplication process.");
+                            ZmailLog.misc.info("Recieved the stop signal. Stopping the deduplication process.");
                             break;
                         }
                     }
                 } catch (Throwable t) {
-                    ZimbraLog.misc.error("error while performing deduplication", t);
+                    ZmailLog.misc.error("error while performing deduplication", t);
                 } finally {
                     resetProgress();
                 }
             }
-            ZimbraLog.misc.info("Deduping done. Total of " + totalLinksCreated
+            ZmailLog.misc.info("Deduping done. Total of " + totalLinksCreated
                     + " links created and saved approximately " + totalSizeSaved + " bytes.");
         }
     }

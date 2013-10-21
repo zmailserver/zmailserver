@@ -12,33 +12,33 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.session;
+package org.zmail.cs.session;
 
 import java.io.UnsupportedEncodingException;
 import java.util.LinkedList;
 import java.util.Map;
 
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.common.soap.Element;
-import com.zimbra.common.soap.ZimbraNamespace;
-import com.zimbra.common.util.ByteUtil;
-import com.zimbra.common.util.LruMap;
-import com.zimbra.common.util.ZimbraLog;
-import com.zimbra.cs.account.Server;
-import com.zimbra.cs.iochannel.CrossServerNotification;
-import com.zimbra.cs.iochannel.MessageChannel;
-import com.zimbra.cs.iochannel.MessageChannelException;
-import com.zimbra.cs.mailbox.Mailbox;
-import com.zimbra.soap.ZimbraSoapContext;
+import org.zmail.common.service.ServiceException;
+import org.zmail.common.soap.Element;
+import org.zmail.common.soap.ZmailNamespace;
+import org.zmail.common.util.ByteUtil;
+import org.zmail.common.util.LruMap;
+import org.zmail.common.util.ZmailLog;
+import org.zmail.cs.account.Server;
+import org.zmail.cs.iochannel.CrossServerNotification;
+import org.zmail.cs.iochannel.MessageChannel;
+import org.zmail.cs.iochannel.MessageChannelException;
+import org.zmail.cs.mailbox.Mailbox;
+import org.zmail.soap.ZmailSoapContext;
 
 public class RemoteSoapSession extends SoapSession {
     /** Creates a <tt>SoapSession</tt> owned by the given account homed on
      *  a different server.  It thus cannot listen on its own {@link Mailbox}.
      * @see Session#register() */
-    public RemoteSoapSession(ZimbraSoapContext zsc) {
+    public RemoteSoapSession(ZmailSoapContext zsc) {
         super(zsc);
         try {
-            authUserCtxt = new ZimbraSoapContext(zsc);
+            authUserCtxt = new ZmailSoapContext(zsc);
         } catch (ServiceException e) {
         }
     }
@@ -63,13 +63,13 @@ public class RemoteSoapSession extends SoapSession {
     }
 
     @Override
-    public void putRefresh(Element ctxt, ZimbraSoapContext zsc) {
-        ctxt.addUniqueElement(ZimbraNamespace.E_REFRESH);
+    public void putRefresh(Element ctxt, ZmailSoapContext zsc) {
+        ctxt.addUniqueElement(ZmailNamespace.E_REFRESH);
         return;
     }
 
     @Override
-    public Element putNotifications(Element ctxt, ZimbraSoapContext zsc, int lastSequence) {
+    public Element putNotifications(Element ctxt, ZmailSoapContext zsc, int lastSequence) {
         if (ctxt == null) {
             return null;
         }
@@ -86,7 +86,7 @@ public class RemoteSoapSession extends SoapSession {
         return ctxt;
     }
 
-    private ZimbraSoapContext authUserCtxt;
+    private ZmailSoapContext authUserCtxt;
 
     /* per account cache of recently sent notifications for deduping */
     private static final Map<String,LinkedList<String>> sentNotifications;
@@ -107,7 +107,7 @@ public class RemoteSoapSession extends SoapSession {
         }
 
         @Override
-        public ZimbraSoapContext getSoapContext() {
+        public ZmailSoapContext getSoapContext() {
             return null;
         }
 
@@ -127,7 +127,7 @@ public class RemoteSoapSession extends SoapSession {
             try {
                 ntfn = CrossServerNotification.create(RemoteSoapSession.this, authUserCtxt);
             } catch (MessageChannelException e) {
-                ZimbraLog.session.warn("unable to create CrossServerNotification", e);
+                ZmailLog.session.warn("unable to create CrossServerNotification", e);
                 return;
             }
             if (!checkDuplicateNotification(ntfn)) {

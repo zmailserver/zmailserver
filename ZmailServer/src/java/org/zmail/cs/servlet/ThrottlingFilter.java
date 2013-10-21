@@ -12,7 +12,7 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.servlet;
+package org.zmail.cs.servlet;
 
 import java.io.IOException;
 import java.util.concurrent.ConcurrentHashMap;
@@ -31,9 +31,9 @@ import javax.servlet.http.HttpSession;
 import javax.servlet.http.HttpSessionBindingEvent;
 import javax.servlet.http.HttpSessionBindingListener;
 
-import com.zimbra.common.localconfig.LC;
-import com.zimbra.common.util.RemoteIP;
-import com.zimbra.common.util.ZimbraLog;
+import org.zmail.common.localconfig.LC;
+import org.zmail.common.util.RemoteIP;
+import org.zmail.common.util.ZmailLog;
 
 /**
  * This Servlet {@link Filter} limits the number of concurrent HTTP requests per
@@ -91,10 +91,10 @@ public final class ThrottlingFilter implements Filter {
                 tracker.release();
             }
         } else {
-            new RemoteIP(hreq, ZimbraServlet.getTrustedIPs()).addToLoggingContext();
-            ZimbraLog.addToContext("jsessionid", session.getId());
-            ZimbraLog.misc.warn("too many concurrent HTTP requests");
-            ZimbraLog.clearContext();
+            new RemoteIP(hreq, ZmailServlet.getTrustedIPs()).addToLoggingContext();
+            ZmailLog.addToContext("jsessionid", session.getId());
+            ZmailLog.misc.warn("too many concurrent HTTP requests");
+            ZmailLog.clearContext();
             hresp.sendError(HttpServletResponse.SC_SERVICE_UNAVAILABLE,
                     "too many concurrent HTTP requests");
         }

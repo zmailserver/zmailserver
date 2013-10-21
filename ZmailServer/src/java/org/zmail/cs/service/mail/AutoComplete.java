@@ -12,30 +12,30 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.service.mail;
+package org.zmail.cs.service.mail;
 
 import java.util.ArrayList;
 import java.util.Map;
 
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.common.soap.MailConstants;
-import com.zimbra.common.soap.Element;
-import com.zimbra.cs.account.Account;
-import com.zimbra.cs.account.Provisioning;
-import com.zimbra.cs.mailbox.ContactAutoComplete;
-import com.zimbra.cs.mailbox.OperationContext;
-import com.zimbra.cs.mailbox.ContactAutoComplete.AutoCompleteResult;
-import com.zimbra.cs.mailbox.ContactAutoComplete.ContactEntry;
-import com.zimbra.cs.service.util.ItemId;
-import com.zimbra.soap.ZimbraSoapContext;
-import com.zimbra.soap.type.GalSearchType;
+import org.zmail.common.service.ServiceException;
+import org.zmail.common.soap.MailConstants;
+import org.zmail.common.soap.Element;
+import org.zmail.cs.account.Account;
+import org.zmail.cs.account.Provisioning;
+import org.zmail.cs.mailbox.ContactAutoComplete;
+import org.zmail.cs.mailbox.OperationContext;
+import org.zmail.cs.mailbox.ContactAutoComplete.AutoCompleteResult;
+import org.zmail.cs.mailbox.ContactAutoComplete.ContactEntry;
+import org.zmail.cs.service.util.ItemId;
+import org.zmail.soap.ZmailSoapContext;
+import org.zmail.soap.type.GalSearchType;
 
 public class AutoComplete extends MailDocumentHandler {
 
     @Override
     public Element handle(Element request, Map<String, Object> context) throws ServiceException {
-        ZimbraSoapContext zsc = getZimbraSoapContext(context);
-        Account account = getRequestedAccount(getZimbraSoapContext(context));
+        ZmailSoapContext zsc = getZmailSoapContext(context);
+        Account account = getRequestedAccount(getZmailSoapContext(context));
         OperationContext octxt = getOperationContext(zsc, context);
 
         String name = request.getAttribute(MailConstants.A_NAME);
@@ -69,12 +69,12 @@ public class AutoComplete extends MailDocumentHandler {
         return array;
     }
 
-    protected AutoCompleteResult query(Element request, ZimbraSoapContext zsc, Account account,
+    protected AutoCompleteResult query(Element request, ZmailSoapContext zsc, Account account,
             boolean excludeGal, String name, int limit, GalSearchType type, OperationContext octxt) throws ServiceException {
         return query(request, zsc, account, excludeGal, name, limit, type, false, octxt);
     }
 
-    protected AutoCompleteResult query(Element request, ZimbraSoapContext zsc, Account account,
+    protected AutoCompleteResult query(Element request, ZmailSoapContext zsc, Account account,
             boolean excludeGal, String name, int limit, GalSearchType type, boolean needCanExpand, OperationContext octxt) throws ServiceException {
        if (!canAccessAccount(zsc, account))
             throw ServiceException.PERM_DENIED("can not access account");

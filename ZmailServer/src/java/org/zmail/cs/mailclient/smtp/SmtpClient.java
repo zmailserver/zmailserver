@@ -13,7 +13,7 @@
  * ***** END LICENSE BLOCK *****
  */
 
-package com.zimbra.cs.mailclient.smtp;
+package org.zmail.cs.mailclient.smtp;
 
 import java.io.PrintStream;
 
@@ -24,9 +24,9 @@ import org.apache.commons.cli.HelpFormatter;
 import org.apache.commons.cli.Options;
 import org.apache.commons.cli.ParseException;
 
-import com.zimbra.common.util.Log;
-import com.zimbra.cs.mailclient.MailClient;
-import com.zimbra.cs.mailclient.MailConfig;
+import org.zmail.common.util.Log;
+import org.zmail.cs.mailclient.MailClient;
+import org.zmail.cs.mailclient.MailConfig;
 
 public final class SmtpClient extends MailClient {
 

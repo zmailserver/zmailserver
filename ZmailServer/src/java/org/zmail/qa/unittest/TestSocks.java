@@ -12,10 +12,10 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.qa.unittest;
+package org.zmail.qa.unittest;
 
-import com.zimbra.common.net.ProxySelectors;
-import com.zimbra.common.net.SocketFactories;
+import org.zmail.common.net.ProxySelectors;
+import org.zmail.common.net.SocketFactories;
 import junit.framework.TestCase;
 
 import javax.net.SocketFactory;

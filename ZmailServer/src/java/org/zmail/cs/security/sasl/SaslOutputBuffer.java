@@ -13,9 +13,9 @@
  * ***** END LICENSE BLOCK *****
  */
 
-package com.zimbra.cs.security.sasl;
+package org.zmail.cs.security.sasl;
 
-import com.zimbra.cs.server.NioUtil;
+import org.zmail.cs.server.NioUtil;
 
 import javax.security.sasl.SaslException;
 

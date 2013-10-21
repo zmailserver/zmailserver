@@ -12,7 +12,7 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.mime;
+package org.zmail.cs.mime;
 
 import javax.mail.internet.MimeMessage;
 import javax.mail.util.SharedByteArrayInputStream;
@@ -21,8 +21,8 @@ import org.junit.Assert;
 import org.junit.Test;
 
 import com.google.common.base.Charsets;
-import com.zimbra.cs.mime.Mime.FixedMimeMessage;
-import com.zimbra.cs.util.JMSession;
+import org.zmail.cs.mime.Mime.FixedMimeMessage;
+import org.zmail.cs.util.JMSession;
 
 /**
  * Unit test for {@link FixedMimeMessage}.
@@ -33,8 +33,8 @@ public final class FixedMimeMessageTest {
 
     @Test
     public void messageId() throws Exception {
-        String raw = "From: sender@zimbra.com\n" +
-            "To: recipient@zimbra.com\n" +
+        String raw = "From: sender@zmail.com\n" +
+            "To: recipient@zmail.com\n" +
             "Subject: test\n" +
             "\n" +
             "Hello World.";
@@ -45,24 +45,24 @@ public final class FixedMimeMessageTest {
         message.saveChanges();
         Assert.assertNotNull(message.getMessageID());
 
-        raw = "From: sender@zimbra.com\n" +
-            "To: recipient@zimbra.com\n" +
+        raw = "From: sender@zmail.com\n" +
+            "To: recipient@zmail.com\n" +
             "Subject: test\n" +
-            "Message-ID: <12345@zimbra.com>" +
+            "Message-ID: <12345@zmail.com>" +
             "\n" +
             "Hello World.";
 
         message = new FixedMimeMessage(JMSession.getSession(), new SharedByteArrayInputStream(raw.getBytes()));
-        Assert.assertEquals("<12345@zimbra.com>", message.getMessageID());
+        Assert.assertEquals("<12345@zmail.com>", message.getMessageID());
         message.setHeader("X-TEST", "test");
         message.saveChanges();
-        Assert.assertEquals("<12345@zimbra.com>", message.getMessageID());
+        Assert.assertEquals("<12345@zmail.com>", message.getMessageID());
     }
 
     @Test
     public void contentTransferEncoding() throws Exception {
-        String raw = "From: sender@zimbra.com\n" +
-            "To: recipient@zimbra.com\n" +
+        String raw = "From: sender@zmail.com\n" +
+            "To: recipient@zmail.com\n" +
             "Subject: test\n" +
             "Content-Type: text/plain; charset=ISO-2022-JP\n" +
             "\n" +

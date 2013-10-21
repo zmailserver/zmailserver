@@ -14,14 +14,14 @@
  * 
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.qa.unittest.prov.ldap;
+package org.zmail.qa.unittest.prov.ldap;
 
 import static org.junit.Assert.assertNotNull;
 
 import org.junit.*;
 
-import com.zimbra.cs.account.GlobalGrant;
-import com.zimbra.cs.account.Provisioning;
+import org.zmail.cs.account.GlobalGrant;
+import org.zmail.cs.account.Provisioning;
 
 public class TestLdapProvGlobalGrant extends LdapTest {
 

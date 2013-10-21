@@ -12,21 +12,21 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.service.admin;
+package org.zmail.cs.service.admin;
 
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.common.soap.AdminConstants;
-import com.zimbra.common.soap.Element;
-import com.zimbra.cs.account.Account;
-import com.zimbra.cs.account.Domain;
-import com.zimbra.cs.account.NamedEntry;
-import com.zimbra.cs.account.Provisioning;
-import com.zimbra.cs.account.SearchAccountsOptions;
-import com.zimbra.cs.account.SearchAccountsOptions.IncludeType;
-import com.zimbra.cs.account.SearchDirectoryOptions.MakeObjectOpt;
-import com.zimbra.cs.account.accesscontrol.AccessControlUtil;
-import com.zimbra.cs.mailbox.MailboxManager;
-import com.zimbra.soap.ZimbraSoapContext;
+import org.zmail.common.service.ServiceException;
+import org.zmail.common.soap.AdminConstants;
+import org.zmail.common.soap.Element;
+import org.zmail.cs.account.Account;
+import org.zmail.cs.account.Domain;
+import org.zmail.cs.account.NamedEntry;
+import org.zmail.cs.account.Provisioning;
+import org.zmail.cs.account.SearchAccountsOptions;
+import org.zmail.cs.account.SearchAccountsOptions.IncludeType;
+import org.zmail.cs.account.SearchDirectoryOptions.MakeObjectOpt;
+import org.zmail.cs.account.accesscontrol.AccessControlUtil;
+import org.zmail.cs.mailbox.MailboxManager;
+import org.zmail.soap.ZmailSoapContext;
 
 import java.util.HashMap;
 import java.util.List;
@@ -35,7 +35,7 @@ import java.util.Map;
 public class GetAggregateQuotaUsageOnServer extends AdminDocumentHandler {
 
     public Element handle(Element request, Map<String, Object> context) throws ServiceException {
-        ZimbraSoapContext zsc = getZimbraSoapContext(context);
+        ZmailSoapContext zsc = getZmailSoapContext(context);
         if (!AccessControlUtil.isGlobalAdmin(getAuthenticatedAccount(zsc))) {
             throw ServiceException.PERM_DENIED("only global admin is allowed");
         }

@@ -13,7 +13,7 @@
  * ***** END LICENSE BLOCK *****
  */
 
-package com.zimbra.cs.service.mail;
+package org.zmail.cs.service.mail;
 
 import static org.junit.Assert.assertTrue;
 
@@ -31,27 +31,27 @@ import org.junit.Before;
 import org.junit.Test;
 
 import com.google.common.collect.Maps;
-import com.zimbra.common.account.Key;
-import com.zimbra.common.calendar.ICalTimeZone;
-import com.zimbra.common.calendar.ParsedDateTime;
-import com.zimbra.common.calendar.ZCalendar.ZComponent;
-import com.zimbra.common.calendar.ZCalendar.ZVCalendar;
-import com.zimbra.common.soap.Element;
-import com.zimbra.common.soap.MailConstants;
-import com.zimbra.cs.account.Account;
-import com.zimbra.cs.account.Provisioning;
-import com.zimbra.cs.index.SortBy;
-import com.zimbra.cs.mailbox.ACL;
-import com.zimbra.cs.mailbox.Folder;
-import com.zimbra.cs.mailbox.MailItem;
-import com.zimbra.cs.mailbox.MailSender;
-import com.zimbra.cs.mailbox.Mailbox;
-import com.zimbra.cs.mailbox.Mailbox.AddInviteData;
-import com.zimbra.cs.mailbox.Mailbox.MailboxData;
-import com.zimbra.cs.mailbox.MailboxManager;
-import com.zimbra.cs.mailbox.MailboxTestUtil;
-import com.zimbra.cs.mailbox.calendar.Invite;
-import com.zimbra.cs.mailbox.calendar.ZOrganizer;
+import org.zmail.common.account.Key;
+import org.zmail.common.calendar.ICalTimeZone;
+import org.zmail.common.calendar.ParsedDateTime;
+import org.zmail.common.calendar.ZCalendar.ZComponent;
+import org.zmail.common.calendar.ZCalendar.ZVCalendar;
+import org.zmail.common.soap.Element;
+import org.zmail.common.soap.MailConstants;
+import org.zmail.cs.account.Account;
+import org.zmail.cs.account.Provisioning;
+import org.zmail.cs.index.SortBy;
+import org.zmail.cs.mailbox.ACL;
+import org.zmail.cs.mailbox.Folder;
+import org.zmail.cs.mailbox.MailItem;
+import org.zmail.cs.mailbox.MailSender;
+import org.zmail.cs.mailbox.Mailbox;
+import org.zmail.cs.mailbox.Mailbox.AddInviteData;
+import org.zmail.cs.mailbox.Mailbox.MailboxData;
+import org.zmail.cs.mailbox.MailboxManager;
+import org.zmail.cs.mailbox.MailboxTestUtil;
+import org.zmail.cs.mailbox.calendar.Invite;
+import org.zmail.cs.mailbox.calendar.ZOrganizer;
 
 
 
@@ -68,15 +68,15 @@ public class GetMsgTest {
         Provisioning prov = Provisioning.getInstance();
 
         Map<String, Object> attrs = Maps.newHashMap();
-        prov.createDomain("zimbra.com", attrs);
+        prov.createDomain("zmail.com", attrs);
 
         attrs = Maps.newHashMap();
-        attrs.put(Provisioning.A_zimbraId, UUID.randomUUID().toString());
-        prov.createAccount("test@zimbra.com", "secret", attrs);
+        attrs.put(Provisioning.A_zmailId, UUID.randomUUID().toString());
+        prov.createAccount("test@zmail.com", "secret", attrs);
 
         attrs = Maps.newHashMap();
-        attrs.put(Provisioning.A_zimbraId, UUID.randomUUID().toString());
-        prov.createAccount("test2@zimbra.com", "secret", attrs);
+        attrs.put(Provisioning.A_zmailId, UUID.randomUUID().toString());
+        prov.createAccount("test2@zmail.com", "secret", attrs);
 
         // this MailboxManager does everything except actually send mail
         MailboxManager.setInstance(new MailboxManager() {
@@ -115,8 +115,8 @@ public class GetMsgTest {
     @Test
     public void testHandle() throws Exception {
 
-        Account acct1 = Provisioning.getInstance().get(Key.AccountBy.name, "test@zimbra.com");
-        Account acct2 = Provisioning.getInstance().get(Key.AccountBy.name, "test2@zimbra.com");
+        Account acct1 = Provisioning.getInstance().get(Key.AccountBy.name, "test@zmail.com");
+        Account acct2 = Provisioning.getInstance().get(Key.AccountBy.name, "test2@zmail.com");
 
         Mailbox mbox1 = MailboxManager.getInstance().getMailboxByAccount(acct1);
 
@@ -136,7 +136,7 @@ public class GetMsgTest {
         invite.setDtEnd(e);
         invite.setPriority("5");
         invite.setClassProp("PRI");
-        invite.setOrganizer(new ZOrganizer("test@zimbra.com", null));
+        invite.setOrganizer(new ZOrganizer("test@zmail.com", null));
         invite.setUid(UUID.randomUUID().toString());
         invite.setMethod("REQUEST");
         invite.setName("Testing");
@@ -159,7 +159,7 @@ public class GetMsgTest {
             .handle(request, ServiceTestUtil.getRequestContext(acct1));
         Element organizer = response.getElement("m").getElement("inv").getElement("comp").getElement("or");
         String organizerString =  organizer.prettyPrint();
-        assertTrue(organizerString.contains("a=\"test@zimbra.com\" url=\"test@zimbra.com\""));
+        assertTrue(organizerString.contains("a=\"test@zmail.com\" url=\"test@zmail.com\""));
 
          mbox1.grantAccess(null, 10, acct2.getId(),
             ACL.GRANTEE_USER, ACL.RIGHT_READ, null);
@@ -170,7 +170,7 @@ public class GetMsgTest {
        link.addAttribute("reminder", 0);
        link.addAttribute("name", "sharedcal");
        link.addAttribute("path", "/Calendar");
-       link.addAttribute("owner",  "test@zimbra.com");
+       link.addAttribute("owner",  "test@zmail.com");
        link.addAttribute("l", 10);
        link.addAttribute("view", "appoinment");
        response = new CreateMountpoint().handle(request, ServiceTestUtil.getRequestContext(acct2));
@@ -188,7 +188,7 @@ public class GetMsgTest {
             .handle(request, ServiceTestUtil.getRequestContext(acct2, acct1));
 
         organizerString =  response.getElement("m").prettyPrint();
-        assertTrue(!organizerString.contains("a=\"test@zimbra.com\" url=\"test@zimbra.com\""));
+        assertTrue(!organizerString.contains("a=\"test@zmail.com\" url=\"test@zmail.com\""));
 
         request = new Element.XMLElement("FolderAction");
         action = request.addElement("action");

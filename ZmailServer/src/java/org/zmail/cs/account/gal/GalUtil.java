@@ -12,14 +12,14 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.account.gal;
+package org.zmail.cs.account.gal;
 
 import java.util.HashMap;
 import java.util.Map;
 
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.cs.ldap.LdapUtil;
-import com.zimbra.cs.ldap.ZLdapFilterFactory;
+import org.zmail.common.service.ServiceException;
+import org.zmail.cs.ldap.LdapUtil;
+import org.zmail.cs.ldap.ZLdapFilterFactory;
 
 public class GalUtil {
 

@@ -12,7 +12,7 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.service.formatter;
+package org.zmail.cs.service.formatter;
 
 import java.awt.image.BufferedImage;
 import java.io.ByteArrayInputStream;
@@ -43,42 +43,42 @@ import javax.servlet.http.HttpServletResponse;
 import com.google.common.base.Charsets;
 import com.google.common.base.Strings;
 import com.google.common.collect.ImmutableSet;
-import com.zimbra.common.localconfig.LC;
-import com.zimbra.common.mime.MimeConstants;
-import com.zimbra.common.mime.MimeDetect;
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.common.util.ByteUtil;
-import com.zimbra.common.util.HttpUtil;
-import com.zimbra.common.util.ImageUtil;
-import com.zimbra.common.util.Log;
-import com.zimbra.common.util.LogFactory;
-import com.zimbra.common.util.StringUtil;
-import com.zimbra.cs.account.Provisioning;
-import com.zimbra.cs.extension.ExtensionUtil;
-import com.zimbra.cs.html.BrowserDefang;
-import com.zimbra.cs.html.DefangFactory;
-import com.zimbra.cs.mailbox.CalendarItem;
-import com.zimbra.cs.mailbox.Contact;
-import com.zimbra.cs.mailbox.DeliveryOptions;
-import com.zimbra.cs.mailbox.Document;
-import com.zimbra.cs.mailbox.Folder;
-import com.zimbra.cs.mailbox.MailItem;
-import com.zimbra.cs.mailbox.MailServiceException;
-import com.zimbra.cs.mailbox.MailServiceException.NoSuchItemException;
-import com.zimbra.cs.mailbox.Mailbox;
-import com.zimbra.cs.mailbox.Message;
-import com.zimbra.cs.mime.MPartInfo;
-import com.zimbra.cs.mime.Mime;
-import com.zimbra.cs.mime.ParsedDocument;
-import com.zimbra.cs.mime.ParsedMessage;
-import com.zimbra.cs.service.UserServlet;
-import com.zimbra.cs.service.UserServletContext;
-import com.zimbra.cs.service.UserServletException;
-import com.zimbra.cs.service.formatter.FormatterFactory.FormatType;
-import com.zimbra.cs.service.mail.UploadScanner;
-import com.zimbra.cs.servlet.ETagHeaderFilter;
-import com.zimbra.cs.store.Blob;
-import com.zimbra.cs.store.StoreManager;
+import org.zmail.common.localconfig.LC;
+import org.zmail.common.mime.MimeConstants;
+import org.zmail.common.mime.MimeDetect;
+import org.zmail.common.service.ServiceException;
+import org.zmail.common.util.ByteUtil;
+import org.zmail.common.util.HttpUtil;
+import org.zmail.common.util.ImageUtil;
+import org.zmail.common.util.Log;
+import org.zmail.common.util.LogFactory;
+import org.zmail.common.util.StringUtil;
+import org.zmail.cs.account.Provisioning;
+import org.zmail.cs.extension.ExtensionUtil;
+import org.zmail.cs.html.BrowserDefang;
+import org.zmail.cs.html.DefangFactory;
+import org.zmail.cs.mailbox.CalendarItem;
+import org.zmail.cs.mailbox.Contact;
+import org.zmail.cs.mailbox.DeliveryOptions;
+import org.zmail.cs.mailbox.Document;
+import org.zmail.cs.mailbox.Folder;
+import org.zmail.cs.mailbox.MailItem;
+import org.zmail.cs.mailbox.MailServiceException;
+import org.zmail.cs.mailbox.MailServiceException.NoSuchItemException;
+import org.zmail.cs.mailbox.Mailbox;
+import org.zmail.cs.mailbox.Message;
+import org.zmail.cs.mime.MPartInfo;
+import org.zmail.cs.mime.Mime;
+import org.zmail.cs.mime.ParsedDocument;
+import org.zmail.cs.mime.ParsedMessage;
+import org.zmail.cs.service.UserServlet;
+import org.zmail.cs.service.UserServletContext;
+import org.zmail.cs.service.UserServletException;
+import org.zmail.cs.service.formatter.FormatterFactory.FormatType;
+import org.zmail.cs.service.mail.UploadScanner;
+import org.zmail.cs.servlet.ETagHeaderFilter;
+import org.zmail.cs.store.Blob;
+import org.zmail.cs.store.StoreManager;
 
 public final class NativeFormatter extends Formatter {
 
@@ -114,7 +114,7 @@ public final class NativeFormatter extends Formatter {
     @Override
     public void formatCallback(UserServletContext context) throws IOException, ServiceException, UserServletException, ServletException {
         try {
-            sendZimbraHeaders(context, context.resp, context.target);
+            sendZmailHeaders(context, context.resp, context.target);
             HttpUtil.Browser browser = HttpUtil.guessBrowser(context.req);
             if (browser == HttpUtil.Browser.IE) {
                 context.resp.addHeader("X-Content-Type-Options", "nosniff"); // turn off content detection..
@@ -220,7 +220,7 @@ public final class NativeFormatter extends Formatter {
             if (browser == HttpUtil.Browser.IE && contentType.length() > 80)
                 contentType = shortContentType;
 
-            boolean html = checkGlobalOverride(Provisioning.A_zimbraAttachmentsViewInHtmlOnly,
+            boolean html = checkGlobalOverride(Provisioning.A_zmailAttachmentsViewInHtmlOnly,
                     context.getAuthAccount()) || (context.hasView() && context.getView().equals(HTML_VIEW));
             InputStream in = null;
             try {
@@ -251,7 +251,7 @@ public final class NativeFormatter extends Formatter {
                         }
                         size = enc == null || enc.equals("7bit") || enc.equals("8bit") || enc.equals("binary") ? mp.getSize() : 0;
                     }
-                    String defaultCharset = context.targetAccount.getAttr(Provisioning.A_zimbraPrefMailDefaultCharset, null);
+                    String defaultCharset = context.targetAccount.getAttr(Provisioning.A_zmailPrefMailDefaultCharset, null);
                     sendbackOriginalDoc(in, contentType, defaultCharset, Mime.getFilename(mp), mp.getDescription(), size, context.req, context.resp);
                 } else {
                     in = mp.getInputStream();
@@ -328,8 +328,8 @@ public final class NativeFormatter extends Formatter {
         if (HTML_VIEW.equals(context.getView()) && ExtensionUtil.getExtension("convertd") != null && !(contentType != null && contentType.startsWith(MimeConstants.CT_TEXT_HTML))) {
             handleConversion(context, is, doc.getName(), doc.getContentType(), doc.getDigest(), doc.getSize());
         } else {
-            String defaultCharset = context.targetAccount.getAttr(Provisioning.A_zimbraPrefMailDefaultCharset, null);
-            boolean neuter = doc.getAccount().getBooleanAttr(Provisioning.A_zimbraNotebookSanitizeHtml, true);
+            String defaultCharset = context.targetAccount.getAttr(Provisioning.A_zmailPrefMailDefaultCharset, null);
+            boolean neuter = doc.getAccount().getBooleanAttr(Provisioning.A_zmailNotebookSanitizeHtml, true);
             if (neuter)
                 sendbackOriginalDoc(is, contentType, defaultCharset, doc.getName(), null, doc.getSize(), context.req, context.resp);
             else
@@ -441,7 +441,7 @@ public final class NativeFormatter extends Formatter {
             }
 
             pd = new ParsedDocument(blob, filename, contentType, System.currentTimeMillis(), creator,
-                    context.req.getHeader("X-Zimbra-Description"), true);
+                    context.req.getHeader("X-Zmail-Description"), true);
 
             item = mbox.getItemByPath(context.opContext, filename, folder.getId());
             // XXX: should we just overwrite here instead?
@@ -461,7 +461,7 @@ public final class NativeFormatter extends Formatter {
             item = mbox.createDocument(context.opContext, folder.getId(), pd, MailItem.Type.DOCUMENT, 0);
         }
 
-        sendZimbraHeaders(context, context.resp, item);
+        sendZmailHeaders(context, context.resp, item);
     }
 
     private static long getContentLength(HttpServletRequest req)
@@ -472,28 +472,28 @@ public final class NativeFormatter extends Formatter {
         return contentLengthStr != null ? Long.parseLong(contentLengthStr) : -1;
     }
 
-    public static void sendZimbraHeaders(UserServletContext context, HttpServletResponse resp, MailItem item) {
+    public static void sendZmailHeaders(UserServletContext context, HttpServletResponse resp, MailItem item) {
         if (resp == null || item == null)
             return;
 
         if (context.wantCustomHeaders) {
-            resp.addHeader("X-Zimbra-ItemId", item.getId() + "");
-            resp.addHeader("X-Zimbra-Version", item.getVersion() + "");
-            resp.addHeader("X-Zimbra-Modified", item.getChangeDate() + "");
-            resp.addHeader("X-Zimbra-Change", item.getModifiedSequence() + "");
-            resp.addHeader("X-Zimbra-Revision", item.getSavedSequence() + "");
-            resp.addHeader("X-Zimbra-ItemType", item.getType().toString());
+            resp.addHeader("X-Zmail-ItemId", item.getId() + "");
+            resp.addHeader("X-Zmail-Version", item.getVersion() + "");
+            resp.addHeader("X-Zmail-Modified", item.getChangeDate() + "");
+            resp.addHeader("X-Zmail-Change", item.getModifiedSequence() + "");
+            resp.addHeader("X-Zmail-Revision", item.getSavedSequence() + "");
+            resp.addHeader("X-Zmail-ItemType", item.getType().toString());
             try {
                 String val = item.getName();
                 if (!StringUtil.isAsciiString(val)) {
                     val = MimeUtility.encodeText(val, "utf-8", "B");
                 }
-                resp.addHeader("X-Zimbra-ItemName", val);
+                resp.addHeader("X-Zmail-ItemName", val);
                 val = item.getPath();
                 if (!StringUtil.isAsciiString(val)) {
                     val = MimeUtility.encodeText(val, "utf-8", "B");
                 }
-                resp.addHeader("X-Zimbra-ItemPath", val);
+                resp.addHeader("X-Zmail-ItemPath", val);
             } catch (UnsupportedEncodingException e1) {
             } catch (ServiceException e) {
             }

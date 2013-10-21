@@ -12,7 +12,7 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.service.mail;
+package org.zmail.cs.service.mail;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -29,27 +29,27 @@ import javax.mail.internet.MimeMessage;
 import javax.mail.internet.MimeMultipart;
 import javax.mail.internet.MimePart;
 
-import com.zimbra.common.localconfig.LC;
-import com.zimbra.common.mime.MimeConstants;
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.common.soap.Element;
-import com.zimbra.common.soap.MailConstants;
-import com.zimbra.common.util.ByteUtil;
-import com.zimbra.common.zmime.ZSharedFileInputStream;
-import com.zimbra.cs.mailbox.DeliveryOptions;
-import com.zimbra.cs.mailbox.MailItem;
-import com.zimbra.cs.mailbox.MailServiceException;
-import com.zimbra.cs.mailbox.Mailbox;
-import com.zimbra.cs.mailbox.Message;
-import com.zimbra.cs.mailbox.OperationContext;
-import com.zimbra.cs.mime.Mime;
-import com.zimbra.cs.mime.ParsedMessage;
-import com.zimbra.cs.service.util.ItemId;
-import com.zimbra.cs.service.util.ItemIdFormatter;
-import com.zimbra.cs.store.Blob;
-import com.zimbra.cs.store.BlobInputStream;
-import com.zimbra.cs.util.JMSession;
-import com.zimbra.soap.ZimbraSoapContext;
+import org.zmail.common.localconfig.LC;
+import org.zmail.common.mime.MimeConstants;
+import org.zmail.common.service.ServiceException;
+import org.zmail.common.soap.Element;
+import org.zmail.common.soap.MailConstants;
+import org.zmail.common.util.ByteUtil;
+import org.zmail.common.zmime.ZSharedFileInputStream;
+import org.zmail.cs.mailbox.DeliveryOptions;
+import org.zmail.cs.mailbox.MailItem;
+import org.zmail.cs.mailbox.MailServiceException;
+import org.zmail.cs.mailbox.Mailbox;
+import org.zmail.cs.mailbox.Message;
+import org.zmail.cs.mailbox.OperationContext;
+import org.zmail.cs.mime.Mime;
+import org.zmail.cs.mime.ParsedMessage;
+import org.zmail.cs.service.util.ItemId;
+import org.zmail.cs.service.util.ItemIdFormatter;
+import org.zmail.cs.store.Blob;
+import org.zmail.cs.store.BlobInputStream;
+import org.zmail.cs.util.JMSession;
+import org.zmail.soap.ZmailSoapContext;
 
 public class RemoveAttachments extends MailDocumentHandler {
 
@@ -59,7 +59,7 @@ public class RemoveAttachments extends MailDocumentHandler {
     @Override protected String[] getResponseItemPath()  { return RESPONSE_ITEM_PATH; }
 
     @Override public Element handle(Element request, Map<String, Object> context) throws ServiceException {
-        ZimbraSoapContext zsc = getZimbraSoapContext(context);
+        ZmailSoapContext zsc = getZmailSoapContext(context);
         Mailbox mbox = getRequestedMailbox(zsc);
         OperationContext octxt = getOperationContext(zsc, context);
         ItemIdFormatter ifmt = new ItemIdFormatter(zsc);

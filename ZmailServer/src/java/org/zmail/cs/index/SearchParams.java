@@ -13,7 +13,7 @@
  * ***** END LICENSE BLOCK *****
  */
 
-package com.zimbra.cs.index;
+package org.zmail.cs.index;
 
 import java.util.EnumSet;
 import java.util.HashSet;
@@ -28,26 +28,26 @@ import com.google.common.base.Joiner;
 import com.google.common.base.Splitter;
 import com.google.common.base.Strings;
 import com.google.common.collect.ImmutableMap;
-import com.zimbra.common.calendar.ICalTimeZone;
-import com.zimbra.common.calendar.WellKnownTimeZones;
-import com.zimbra.common.localconfig.DebugConfig;
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.common.soap.Element;
-import com.zimbra.common.soap.MailConstants;
-import com.zimbra.common.util.StringUtil;
-import com.zimbra.common.util.ZimbraLog;
-import com.zimbra.cs.mailbox.MailItem;
-import com.zimbra.cs.mailbox.MailServiceException;
-import com.zimbra.cs.service.mail.CalendarUtils;
-import com.zimbra.cs.service.mail.ToXML.OutputParticipants;
-import com.zimbra.cs.service.util.ItemId;
-import com.zimbra.soap.ZimbraSoapContext;
+import org.zmail.common.calendar.ICalTimeZone;
+import org.zmail.common.calendar.WellKnownTimeZones;
+import org.zmail.common.localconfig.DebugConfig;
+import org.zmail.common.service.ServiceException;
+import org.zmail.common.soap.Element;
+import org.zmail.common.soap.MailConstants;
+import org.zmail.common.util.StringUtil;
+import org.zmail.common.util.ZmailLog;
+import org.zmail.cs.mailbox.MailItem;
+import org.zmail.cs.mailbox.MailServiceException;
+import org.zmail.cs.service.mail.CalendarUtils;
+import org.zmail.cs.service.mail.ToXML.OutputParticipants;
+import org.zmail.cs.service.util.ItemId;
+import org.zmail.soap.ZmailSoapContext;
 
 /**
  * Encapsulates all parameters in a search request.
  * <p>
  * IMPORTANT NOTE: if you add new parameters, you MUST add parsing/serialization code to the
- * {@link #encodeParams(Element)} and {@link #parse(Element, ZimbraSoapContext, String)}) APIs.
+ * {@link #encodeParams(Element)} and {@link #parse(Element, ZmailSoapContext, String)}) APIs.
  * This IS NOT optional and will break cross-server search if you do not comply.
  */
 public final class SearchParams implements Cloneable {
@@ -56,7 +56,7 @@ public final class SearchParams implements Cloneable {
     private static final int MAX_LIMIT = 10000000; // 10M
     private final static Pattern LOCALE_PATTERN = Pattern.compile("([a-zA-Z]{2})(?:[-_]([a-zA-Z]{2})([-_](.+))?)?");
 
-    private ZimbraSoapContext requestContext;
+    private ZmailSoapContext requestContext;
 
     /**
      * this parameter is intentionally NOT encoded into XML, it is encoded manually by the ProxiedQueryResults proxying
@@ -105,7 +105,7 @@ public final class SearchParams implements Cloneable {
         quick = value;
     }
 
-    public ZimbraSoapContext getRequestContext() {
+    public ZmailSoapContext getRequestContext() {
         return requestContext;
     }
 
@@ -463,7 +463,7 @@ public final class SearchParams implements Cloneable {
      * @param requestedAccount account who's mailbox we should search in
      * @param zsc SoapContext of the request
      */
-    public static SearchParams parse(Element request, ZimbraSoapContext zsc, String defaultQueryStr)
+    public static SearchParams parse(Element request, ZmailSoapContext zsc, String defaultQueryStr)
             throws ServiceException {
         SearchParams params = new SearchParams();
 
@@ -496,7 +496,7 @@ public final class SearchParams implements Cloneable {
                     TaskHit.Status status = TaskHit.Status.valueOf(task.toUpperCase());
                     params.allowableTaskStatuses.add(status);
                 } catch (IllegalArgumentException e) {
-                    ZimbraLog.index.debug("Skipping unknown task completion status: %s", task);
+                    ZmailLog.index.debug("Skipping unknown task completion status: %s", task);
                 }
             }
         }
@@ -726,7 +726,7 @@ public final class SearchParams implements Cloneable {
             return id != null && id.equals(itemId);
         }
 
-        public static ExpandResults valueOf(String value, ZimbraSoapContext zsc) throws ServiceException {
+        public static ExpandResults valueOf(String value, ZmailSoapContext zsc) throws ServiceException {
             if (value == null) {
                 return NONE;
             }

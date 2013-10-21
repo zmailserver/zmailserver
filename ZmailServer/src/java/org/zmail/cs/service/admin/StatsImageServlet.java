@@ -17,7 +17,7 @@
  * Created on Dec 20, 2004
  * @author Greg Solovyev
  * */
-package com.zimbra.cs.service.admin;
+package org.zmail.cs.service.admin;
 
 import java.io.*;
 
@@ -30,22 +30,22 @@ import org.apache.commons.httpclient.HttpException;
 import org.apache.commons.httpclient.HttpState;
 import org.apache.commons.httpclient.HttpStatus;
 import org.apache.commons.httpclient.methods.GetMethod;
-import com.zimbra.common.util.Log;
-import com.zimbra.common.util.LogFactory;
-import com.zimbra.common.util.ZimbraCookie;
-import com.zimbra.common.util.ZimbraHttpConnectionManager;
+import org.zmail.common.util.Log;
+import org.zmail.common.util.LogFactory;
+import org.zmail.common.util.ZmailCookie;
+import org.zmail.common.util.ZmailHttpConnectionManager;
 
 
-import com.zimbra.cs.account.AuthToken;
-import com.zimbra.cs.account.AuthTokenException;
-import com.zimbra.cs.account.Provisioning;
-import com.zimbra.cs.servlet.ZimbraServlet;
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.common.util.ByteUtil;
-import com.zimbra.common.httpclient.HttpClientUtil;
-import com.zimbra.common.localconfig.LC;
+import org.zmail.cs.account.AuthToken;
+import org.zmail.cs.account.AuthTokenException;
+import org.zmail.cs.account.Provisioning;
+import org.zmail.cs.servlet.ZmailServlet;
+import org.zmail.common.service.ServiceException;
+import org.zmail.common.util.ByteUtil;
+import org.zmail.common.httpclient.HttpClientUtil;
+import org.zmail.common.localconfig.LC;
 
-public class StatsImageServlet extends ZimbraServlet {
+public class StatsImageServlet extends ZmailServlet {
 
     private static Log mLog = LogFactory.getLog(StatsImageServlet.class);
 
@@ -88,11 +88,11 @@ public class StatsImageServlet extends ZimbraServlet {
         	
         	
 	        //check if this is the logger host, otherwise proxy the request to the logger host 
-			String serviceHostname = Provisioning.getInstance().getLocalServer().getAttr(Provisioning.A_zimbraServiceHostname);
-			String logHost  = Provisioning.getInstance().getConfig().getAttr(Provisioning.A_zimbraLogHostname);
+			String serviceHostname = Provisioning.getInstance().getLocalServer().getAttr(Provisioning.A_zmailServiceHostname);
+			String logHost  = Provisioning.getInstance().getConfig().getAttr(Provisioning.A_zmailLogHostname);
 			if(!serviceHostname.equalsIgnoreCase(logHost)) {
 				StringBuffer url = new StringBuffer("https");
-				url.append("://").append(logHost).append(':').append(LC.zimbra_admin_service_port.value());
+				url.append("://").append(logHost).append(':').append(LC.zmail_admin_service_port.value());
 				url.append(reqPath);
 				String queryStr = req.getQueryString();
 				if(queryStr != null)
@@ -101,11 +101,11 @@ public class StatsImageServlet extends ZimbraServlet {
 				// create an HTTP client with the same cookies
 		        HttpState state = new HttpState();
 		        try {
-		            state.addCookie(new org.apache.commons.httpclient.Cookie(logHost, ZimbraCookie.COOKIE_ZM_ADMIN_AUTH_TOKEN, authToken.getEncoded(), "/", null, false));
+		            state.addCookie(new org.apache.commons.httpclient.Cookie(logHost, ZmailCookie.COOKIE_ZM_ADMIN_AUTH_TOKEN, authToken.getEncoded(), "/", null, false));
 		        } catch (AuthTokenException ate) {
 		            throw ServiceException.PROXY_ERROR(ate, url.toString());
 		        }
-		        HttpClient client = ZimbraHttpConnectionManager.getInternalHttpConnMgr().newHttpClient();
+		        HttpClient client = ZmailHttpConnectionManager.getInternalHttpConnMgr().newHttpClient();
 		        client.setState(state);
 		        GetMethod get = new GetMethod(url.toString());
 		        try {

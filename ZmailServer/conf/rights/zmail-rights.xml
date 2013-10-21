@@ -91,36 +91,36 @@
 <right name="configurePasswordStrength" type="setAttrs" targetType="account,calresource,cos">
   <desc>configure password strength</desc>
   <attrs>
-      <a n="zimbraPasswordMinLength"/>
-      <a n="zimbraPasswordMaxLength"/>
-      <a n="zimbraPasswordMinUpperCaseChars"/>
-      <a n="zimbraPasswordMinLowerCaseChars"/>
-      <a n="zimbraPasswordMinNumericChars"/>
-      <a n="zimbraPasswordMinPunctuationChars"/>
+      <a n="zmailPasswordMinLength"/>
+      <a n="zmailPasswordMaxLength"/>
+      <a n="zmailPasswordMinUpperCaseChars"/>
+      <a n="zmailPasswordMinLowerCaseChars"/>
+      <a n="zmailPasswordMinNumericChars"/>
+      <a n="zmailPasswordMinPunctuationChars"/>
   </attrs>
 </right>
 
 <right name="viewAdminSavedSearch" type="getAttrs" targetType="account,calresource">
   <desc>view admin saved searches</desc>
   <attrs>
-      <a n="zimbraAdminSavedSearches"/>
+      <a n="zmailAdminSavedSearches"/>
   </attrs>
 </right>
 
 <right name="setAdminSavedSearch" type="setAttrs" targetType="account,calresource">
   <desc>save admin saved searches</desc>
   <attrs>
-      <a n="zimbraAdminSavedSearches"/>
+      <a n="zmailAdminSavedSearches"/>
   </attrs>
 </right>  
 
 <right name="configureQuota" type="setAttrs" targetType="account,cos">
   <desc>configure quota</desc>
   <attrs>
-      <a n="zimbraMailQuota"/>
-      <a n="zimbraQuotaWarnPercent"/>
-      <a n="zimbraQuotaWarnInterval"/>
-      <a n="zimbraQuotaWarnMessage"/>
+      <a n="zmailMailQuota"/>
+      <a n="zmailQuotaWarnPercent"/>
+      <a n="zmailQuotaWarnInterval"/>
+      <a n="zmailQuotaWarnMessage"/>
   </attrs>
 </right> 
 
@@ -141,7 +141,7 @@
 <right name="configureAdminUI" type="setAttrs" targetType="account,dl">
   <desc>configure admin UI components</desc>
   <attrs>
-    <a n="zimbraAdminConsoleUIComponents"/>
+    <a n="zmailAdminConsoleUIComponents"/>
   </attrs>
 </right>
 
@@ -244,7 +244,7 @@
 <right name="configureCosConstraint" type="setAttrs" targetType="cos">
   <desc>configure cos constraint</desc>
   <attrs>
-    <a n="zimbraConstraint"/>
+    <a n="zmailConstraint"/>
   </attrs>
 </right>
 
@@ -265,7 +265,7 @@
 <right name="configureGlobalConfigConstraint" type="setAttrs" targetType="config">
   <desc>configure global config constraint</desc>
   <attrs>
-    <a n="zimbraConstraint"/>
+    <a n="zmailConstraint"/>
   </attrs>
 </right>
 
@@ -445,7 +445,7 @@
 <right name="configureWikiAccount" type="setAttrs" targetType="domain,config">
   <desc>configure attributes for wiki account</desc>
    <attrs>
-    <a n="zimbraNotebookAccount"/>                                
+    <a n="zmailNotebookAccount"/>                                
   </attrs> 
 </right>
 
@@ -453,35 +453,35 @@
 <right name="configureExternalGAL" type="setAttrs" targetType="domain">
   <desc>configure attributes for external GAL</desc>
    <attrs>
-    <a n="zimbraGalMode"/>
-    <a n="zimbraGalLdapURL"/>
-    <a n="zimbraGalLdapSearchBase"/>
-    <a n="zimbraGalLdapBindDn"/>
-    <a n="zimbraGalLdapBindPassword"/>
-    <a n="zimbraGalLdapFilter"/>
-    <a n="zimbraGalAutoCompleteLdapFilter"/>
-    <a n="zimbraGalSyncLdapURL"/>
-    <a n="zimbraGalSyncLdapSearchBase"/>
-    <a n="zimbraGalSyncLdapFilter"/>
-    <a n="zimbraGalSyncLdapAuthMech"/>
-    <a n="zimbraGalSyncLdapBindDn"/>
-    <a n="zimbraGalSyncLdapBindPassword"/>                                   
+    <a n="zmailGalMode"/>
+    <a n="zmailGalLdapURL"/>
+    <a n="zmailGalLdapSearchBase"/>
+    <a n="zmailGalLdapBindDn"/>
+    <a n="zmailGalLdapBindPassword"/>
+    <a n="zmailGalLdapFilter"/>
+    <a n="zmailGalAutoCompleteLdapFilter"/>
+    <a n="zmailGalSyncLdapURL"/>
+    <a n="zmailGalSyncLdapSearchBase"/>
+    <a n="zmailGalSyncLdapFilter"/>
+    <a n="zmailGalSyncLdapAuthMech"/>
+    <a n="zmailGalSyncLdapBindDn"/>
+    <a n="zmailGalSyncLdapBindPassword"/>                                   
   </attrs> 
 </right>
 
 <right name="configureExternalAuth" type="setAttrs" targetType="domain">
   <desc>configure attributes for external auth</desc>
    <attrs>
-    <a n="zimbraAuthMech"/>
-    <a n="zimbraAuthLdapURL"/>
-    <a n="zimbraAuthLdapBindDn"/>
-    <a n="zimbraAuthLdapSearchBase"/>
-    <a n="zimbraAuthLdapSearchFilter"/>
-    <a n="zimbraAuthLdapSearchBindDn"/>
-    <a n="zimbraAuthLdapSearchBindPassword"/>      
-    <a n="zimbraAuthFallbackToLocal"/>
-    <a n="zimbraAuthKerberos5Realm"/>
-    <a n="zimbraAuthLdapStartTlsEnabled"/>
+    <a n="zmailAuthMech"/>
+    <a n="zmailAuthLdapURL"/>
+    <a n="zmailAuthLdapBindDn"/>
+    <a n="zmailAuthLdapSearchBase"/>
+    <a n="zmailAuthLdapSearchFilter"/>
+    <a n="zmailAuthLdapSearchBindDn"/>
+    <a n="zmailAuthLdapSearchBindPassword"/>      
+    <a n="zmailAuthFallbackToLocal"/>
+    <a n="zmailAuthKerberos5Realm"/>
+    <a n="zmailAuthLdapStartTlsEnabled"/>
   </attrs> 
 </right>         
 
@@ -715,7 +715,7 @@
 </right>
 
 <right name="installZCSLicense" type="preset" targetType="global">
-    <desc>install Zimbra License file on the target server</desc>
+    <desc>install Zmail License file on the target server</desc>
 </right>
    
 <right name="getAllFreeBusyProviders" type="preset" targetType="global">
@@ -723,7 +723,7 @@
 </right>
 
 <right name="checkSoftwareUpdates" type="preset" targetType="global">
-    <desc>check for Zimbra software updates</desc>
+    <desc>check for Zmail software updates</desc>
 </right>
 
 <right name="uploadClientSoftware" type="preset" targetType="global">
@@ -747,7 +747,7 @@
       Use just the one same right on all target types for now.
          
       e.g. If this right is granted on a domain, the grantee 
-            can see zimbraACE on the domain, all DLs, and all 
+            can see zmailACE on the domain, all DLs, and all 
             accounts in the domain.
             
             To do things like:
@@ -755,24 +755,24 @@
              but cannot see any grants on the domain entry itself"
             
             grant an inline right on the domain entry, like:
-                get:account:zimbraACE
+                get:account:zmailACE
             and do not grant this right.
             
             This right the equivalent of the sum of the following inline
             rights:
-                get.account.zimbraACE
-                get.calresource.zimbraACE
-                get.cos.zimbraACE
-                get.dl.zimbraACE
-                get.domain.zimbraACE
-                get.server.zimbraACE
-                get.xmppcomponent.zimbraACE
-                get.zimlet.zimbraACE
-                get.config.zimbraACE
-                get.global.zimbraACE
+                get.account.zmailACE
+                get.calresource.zmailACE
+                get.cos.zmailACE
+                get.dl.zmailACE
+                get.domain.zmailACE
+                get.server.zmailACE
+                get.xmppcomponent.zmailACE
+                get.zimlet.zmailACE
+                get.config.zmailACE
+                get.global.zmailACE
   -->
   <attrs>
-      <a n="zimbraACE"/>
+      <a n="zmailACE"/>
   </attrs>
 </right>
 

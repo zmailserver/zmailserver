@@ -21,7 +21,7 @@ use LWP::UserAgent;
 use Getopt::Long;
 use XmlDoc;
 use Soap;
-use ZimbraSoapTest;
+use ZmailSoapTest;
 
 # specific to this app
 my ($op, $gwName, $remName, $remPw);
@@ -52,7 +52,7 @@ if ($op eq "reg" && (!defined($remName) || !defined($remPw))) {
   die $usage;
 }
 
-my $z = ZimbraSoapTest->new($user, $host, $pw);
+my $z = ZmailSoapTest->new($user, $host, $pw);
 $z->doStdAuth();
 
 my $d = new XmlDoc;

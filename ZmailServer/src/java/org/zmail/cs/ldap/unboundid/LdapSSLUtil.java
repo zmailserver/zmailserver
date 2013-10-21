@@ -12,7 +12,7 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.ldap.unboundid;
+package org.zmail.cs.ldap.unboundid;
 
 import java.security.GeneralSecurityException;
 
@@ -21,9 +21,9 @@ import javax.net.ssl.SSLSocketFactory;
 import javax.net.ssl.TrustManager;
 
 import com.unboundid.util.ssl.SSLUtil;
-import com.zimbra.common.net.SocketFactories;
-import com.zimbra.common.net.TrustManagers;
-import com.zimbra.cs.ldap.LdapException;
+import org.zmail.common.net.SocketFactories;
+import org.zmail.common.net.TrustManagers;
+import org.zmail.cs.ldap.LdapException;
 
 public class LdapSSLUtil {
     

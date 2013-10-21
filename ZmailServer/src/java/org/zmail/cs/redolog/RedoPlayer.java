@@ -12,7 +12,7 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.redolog;
+package org.zmail.cs.redolog;
 
 import java.io.File;
 import java.io.IOException;
@@ -28,15 +28,15 @@ import java.util.Map.Entry;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentMap;
 
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.common.util.ZimbraLog;
-import com.zimbra.cs.redolog.logger.FileLogReader;
-import com.zimbra.cs.redolog.logger.LogWriter;
-import com.zimbra.cs.redolog.op.AbortTxn;
-import com.zimbra.cs.redolog.op.Checkpoint;
-import com.zimbra.cs.redolog.op.CommitTxn;
-import com.zimbra.cs.redolog.op.RedoableOp;
-import com.zimbra.cs.redolog.op.StoreIncomingBlob;
+import org.zmail.common.service.ServiceException;
+import org.zmail.common.util.ZmailLog;
+import org.zmail.cs.redolog.logger.FileLogReader;
+import org.zmail.cs.redolog.logger.LogWriter;
+import org.zmail.cs.redolog.op.AbortTxn;
+import org.zmail.cs.redolog.op.Checkpoint;
+import org.zmail.cs.redolog.op.CommitTxn;
+import org.zmail.cs.redolog.op.RedoableOp;
+import org.zmail.cs.redolog.op.StoreIncomingBlob;
 
 /**
  * @since 2004. 7. 22.
@@ -129,8 +129,8 @@ public class RedoPlayer {
                 //
                 // We have scan to the end of the file to know with certainty we've gone past the time limit.
 
-                if (ZimbraLog.redolog.isDebugEnabled())
-                    ZimbraLog.redolog.debug("Read: " + op);
+                if (ZmailLog.redolog.isDebugEnabled())
+                    ZmailLog.redolog.debug("Read: " + op);
 
                 processOp(op, redoCommitted, mboxIDsMap, startTime, endTime, ignoreCommitsAtOrAfter);
             }
@@ -141,7 +141,7 @@ public class RedoPlayer {
             // assume the second case and truncate the file after the last
             // successfully read item.
 
-            ZimbraLog.redolog.warn("IOException while reading redolog file", e);
+            ZmailLog.redolog.warn("IOException while reading redolog file", e);
 
             long size = logReader.getSize();
             if (lastPosition < size) {
@@ -152,11 +152,11 @@ public class RedoPlayer {
                     logfile.getAbsolutePath() +
                     ".";
                 if (mWritable) {
-                    ZimbraLog.redolog.warn(msg + "  File will be truncated to " +
+                    ZmailLog.redolog.warn(msg + "  File will be truncated to " +
                             lastPosition + " bytes.");
                     logReader.truncate(lastPosition);
                 } else
-                    ZimbraLog.redolog.warn(msg);
+                    ZmailLog.redolog.warn(msg);
             }
         } finally {
             logReader.close();
@@ -183,7 +183,7 @@ public class RedoPlayer {
                 if (mHasOrphanOps) {
                     RedoableOp x = mOrphanOps.remove(op.getTransactionId());
                     if (x != null)
-                        ZimbraLog.redolog.error("Detected out-of-order insertion of change record for orphans commit/abort: change=" + op + ", orphan=" + x);
+                        ZmailLog.redolog.error("Detected out-of-order insertion of change record for orphans commit/abort: change=" + op + ", orphan=" + x);
                 }
             }
         } else {
@@ -197,7 +197,7 @@ public class RedoPlayer {
                     synchronized (mOpsMapGuard) {
                         if (mOpsMap.size() != txns.size()) {
                             // Unexpected discrepancy
-                            if (ZimbraLog.redolog.isDebugEnabled()) {
+                            if (ZmailLog.redolog.isDebugEnabled()) {
                                 StringBuffer sb1 = new StringBuffer("Current Uncommitted Ops: ");
                                 StringBuffer sb2 = new StringBuffer("Checkpoint Uncommitted Ops: ");
                                 int i = 0;
@@ -214,7 +214,7 @@ public class RedoPlayer {
                                         sb2.append(", ");
                                     sb2.append(id);
                                 }
-                                ZimbraLog.redolog.info("Checkpoint discrepancy: # current uncommitted ops = " + mOpsMap.size() +
+                                ZmailLog.redolog.info("Checkpoint discrepancy: # current uncommitted ops = " + mOpsMap.size() +
                                         ", # checkpoint uncommitted ops = " + txns.size() +
                                         "\nMAP DUMP:\n" + sb1.toString() + "\n" + sb2.toString());
                             }
@@ -224,7 +224,7 @@ public class RedoPlayer {
                     synchronized (mOpsMapGuard) {
                         if (mOpsMap.size() != 0) {
                             // Unexpected discrepancy
-                            if (ZimbraLog.redolog.isDebugEnabled()) {
+                            if (ZmailLog.redolog.isDebugEnabled()) {
                                 StringBuffer sb1 = new StringBuffer("Current Uncommitted Ops: ");
                                 int i = 0;
                                 for (Iterator it = mOpsMap.keySet().iterator(); it.hasNext(); i++) {
@@ -233,7 +233,7 @@ public class RedoPlayer {
                                         sb1.append(", ");
                                     sb1.append(id);
                                 }
-                                ZimbraLog.redolog.info("Checkpoint discrepancy: # current uncommitted ops = " +
+                                ZmailLog.redolog.info("Checkpoint discrepancy: # current uncommitted ops = " +
                                         mOpsMap.size() + " instead of 0\nMAP DUMP:\n" +
                                         sb1.toString());
                             }
@@ -253,11 +253,11 @@ public class RedoPlayer {
                         prepareOp = (RedoableOp) mOpsMap.remove(op.getTransactionId());
                         if (prepareOp == null) {
                             mHasOrphanOps = true;
-                            ZimbraLog.redolog.error("Commit/abort record encountered before corresponding change record (" + op + ")");
+                            ZmailLog.redolog.error("Commit/abort record encountered before corresponding change record (" + op + ")");
                             TransactionId tid = op.getTransactionId();
                             RedoableOp x = (RedoableOp) mOrphanOps.get(tid);
                             if (x != null)
-                                ZimbraLog.redolog.error("Op [" + op + "] is already in orphans map: value=" + x);
+                                ZmailLog.redolog.error("Op [" + op + "] is already in orphans map: value=" + x);
                             mOrphanOps.put(tid, op);
                         }
                     }
@@ -318,18 +318,18 @@ public class RedoPlayer {
                         }
                         if (allowRedo) {
                             if (mSkipDeleteOps && prepareOp.isDeleteOp()) {
-                                ZimbraLog.redolog.info("Skipping delete op: " + prepareOp.toString());
+                                ZmailLog.redolog.info("Skipping delete op: " + prepareOp.toString());
                             } else {
                                 try {
-                                    if (ZimbraLog.redolog.isDebugEnabled())
-                                        ZimbraLog.redolog.debug("Redoing: " + prepareOp.toString());
+                                    if (ZmailLog.redolog.isDebugEnabled())
+                                        ZmailLog.redolog.debug("Redoing: " + prepareOp.toString());
                                     prepareOp.setUnloggedReplay(mUnloggedReplay);
                                     playOp(prepareOp);
                                 } catch(Exception e) {
                                     if (!ignoreReplayErrors())
                                         throw ServiceException.FAILURE("Error executing redoOp", e);
                                     else
-                                        ZimbraLog.redolog.warn(
+                                        ZmailLog.redolog.warn(
                                                 "Ignoring error during redo log replay: " + e.getMessage(), e);
                                 }
                             }
@@ -360,12 +360,12 @@ public class RedoPlayer {
             Integer newId = mailboxConflicts.get(op.getMailboxId());
             
             if (newId != null) {
-                ZimbraLog.redolog.warn("mailbox conflict, mapping old ID %d to %d", op.getMailboxId(), newId);
+                ZmailLog.redolog.warn("mailbox conflict, mapping old ID %d to %d", op.getMailboxId(), newId);
                 op.setMailboxId(newId);
             }
             op.redo();
         } catch (MailboxIdConflictException mice) {
-            ZimbraLog.redolog.warn("found mismatched mailboxId %d expected %d", mice.getFoundId(), mice.getExpectedId());
+            ZmailLog.redolog.warn("found mismatched mailboxId %d expected %d", mice.getFoundId(), mice.getExpectedId());
             mailboxConflicts.put(mice.getExpectedId(), mice.getFoundId());
         }
     }
@@ -412,13 +412,13 @@ public class RedoPlayer {
             numOps = mOpsMap.size();
         }
         if (numOps == 0) {
-            ZimbraLog.redolog.info("No uncommitted transactions to redo");
+            ZmailLog.redolog.info("No uncommitted transactions to redo");
             return 0;
         }
 
         synchronized (mOpsMapGuard) {
             Set entrySet = mOpsMap.entrySet();
-            ZimbraLog.redolog.info("Redoing " + numOps + " uncommitted transactions");
+            ZmailLog.redolog.info("Redoing " + numOps + " uncommitted transactions");
             for (Iterator it = entrySet.iterator(); it.hasNext(); ) {
                 Map.Entry entry = (Entry) it.next();
                 RedoableOp op = (RedoableOp) entry.getValue();
@@ -426,20 +426,20 @@ public class RedoPlayer {
                     continue;
 
                 if (op.deferCrashRecovery()) {
-                    ZimbraLog.redolog.info("Deferring crash recovery to after startup: " + op);
+                    ZmailLog.redolog.info("Deferring crash recovery to after startup: " + op);
                     postStartupRecoveryOps.add(op);
                     continue;
                 }
 
-                if (ZimbraLog.redolog.isInfoEnabled())
-                    ZimbraLog.redolog.info("REDOING: " + op);
+                if (ZmailLog.redolog.isInfoEnabled())
+                    ZmailLog.redolog.info("REDOING: " + op);
 
                 boolean success = false;
                 try {
                     op.redo();
                     success = true;
                 } catch (Exception e) {
-                    ZimbraLog.redolog.error("Redo failed for [" + op + "]." +
+                    ZmailLog.redolog.error("Redo failed for [" + op + "]." +
                             "  Backend state of affected item is indeterminate." +
                             "  Marking operation as aborted and moving on.", e);
                 } finally {

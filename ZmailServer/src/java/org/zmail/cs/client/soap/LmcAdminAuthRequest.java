@@ -13,17 +13,17 @@
  * ***** END LICENSE BLOCK *****
  */
 
-package com.zimbra.cs.client.soap;
+package org.zmail.cs.client.soap;
 
 import org.dom4j.DocumentHelper;
 import org.dom4j.Element;
 
-import com.zimbra.common.auth.ZAuthToken;
-import com.zimbra.common.soap.DomUtil;
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.common.soap.AdminConstants;
-import com.zimbra.common.soap.HeaderConstants;
-import com.zimbra.cs.client.*;
+import org.zmail.common.auth.ZAuthToken;
+import org.zmail.common.soap.DomUtil;
+import org.zmail.common.service.ServiceException;
+import org.zmail.common.soap.AdminConstants;
+import org.zmail.common.soap.HeaderConstants;
+import org.zmail.cs.client.*;
 
 public class LmcAdminAuthRequest extends LmcSoapRequest {
 

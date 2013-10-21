@@ -12,7 +12,7 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.account.accesscontrol;
+package org.zmail.cs.account.accesscontrol;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -20,28 +20,28 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-import com.zimbra.common.util.Log;
-import com.zimbra.common.util.ZimbraLog;
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.cs.mailbox.ACL;
+import org.zmail.common.util.Log;
+import org.zmail.common.util.ZmailLog;
+import org.zmail.common.service.ServiceException;
+import org.zmail.cs.mailbox.ACL;
 
-public class ZimbraACL {
-    private static final Log sLog = ZimbraLog.acl;
+public class ZmailACL {
+    private static final Log sLog = ZmailLog.acl;
 
     // all aces
-    private List<ZimbraACE> mAces = new ArrayList<ZimbraACE>();
+    private List<ZmailACE> mAces = new ArrayList<ZmailACE>();
     
     // positive grants, but not delegable, *not* including subdomain grants
-    private Set<ZimbraACE> mAllowedNotDelegable = new HashSet<ZimbraACE>();
+    private Set<ZmailACE> mAllowedNotDelegable = new HashSet<ZmailACE>();
     
     // positive grants, and delegable
-    private Set<ZimbraACE> mAllowedDelegable = new HashSet<ZimbraACE>();
+    private Set<ZmailACE> mAllowedDelegable = new HashSet<ZmailACE>();
     
     // negative grants
-    private Set<ZimbraACE> mDenied = new HashSet<ZimbraACE>();
+    private Set<ZmailACE> mDenied = new HashSet<ZmailACE>();
     
     // subdomain grants
-    private Set<ZimbraACE> mSubDomain = new HashSet<ZimbraACE>();
+    private Set<ZmailACE> mSubDomain = new HashSet<ZmailACE>();
 
     // for the containsRight call, can probably remove now
     private Set<Right> mContainsRight = new HashSet<Right>();
@@ -56,14 +56,14 @@ public class ZimbraACL {
      * @param aces
      * @throws ServiceException
      */
-    ZimbraACL(String[] aces, TargetType targetType, String targetName) throws ServiceException {
+    ZmailACL(String[] aces, TargetType targetType, String targetName) throws ServiceException {
         RightManager rm = RightManager.getInstance();
         for (String aceStr : aces) {
             try {
-                ZimbraACE ace = new ZimbraACE(aceStr, rm, targetType, targetName);
+                ZmailACE ace = new ZmailACE(aceStr, rm, targetType, targetName);
                 addACE(ace);
             } catch (ServiceException e) {
-                ZimbraLog.acl.warn("cannot parse ACE: " + aceStr + ", skipped", e);
+                ZmailLog.acl.warn("cannot parse ACE: " + aceStr + ", skipped", e);
             }
         }
     }
@@ -76,7 +76,7 @@ public class ZimbraACL {
      * @param aces
      * @throws ServiceException
      */
-    ZimbraACL(Set<ZimbraACE> aces) throws ServiceException {
+    ZmailACL(Set<ZmailACE> aces) throws ServiceException {
         grantAccess(aces);
     }
     
@@ -85,18 +85,18 @@ public class ZimbraACL {
      * 
      * @param other
      */
-    private ZimbraACL(ZimbraACL other) {
+    private ZmailACL(ZmailACL other) {
         if (other.mAces != null) {
-            for (ZimbraACE ace : other.mAces)
+            for (ZmailACE ace : other.mAces)
                 addACE(ace.clone());
         }
     }
     
     /**
-     * returns a deep copy of the ZimbraACL object 
+     * returns a deep copy of the ZmailACL object 
      */
-    public ZimbraACL clone() {
-        return new ZimbraACL(this);
+    public ZmailACL clone() {
+        return new ZmailACL(this);
     }
     
     /**
@@ -114,7 +114,7 @@ public class ZimbraACL {
      * 
      * @param aceToGrant
      */
-    private void addACE(ZimbraACE aceToGrant) {
+    private void addACE(ZmailACE aceToGrant) {
         if (aceToGrant.deny()) {
             mAces.add(0, aceToGrant);  // add to the front
             mDenied.add(aceToGrant);
@@ -133,7 +133,7 @@ public class ZimbraACL {
         mContainsRight.add(aceToGrant.getRight());
     }
     
-    private void removeACE(ZimbraACE aceToRevoke) {
+    private void removeACE(ZmailACE aceToRevoke) {
         mAces.remove(aceToRevoke);
         if (aceToRevoke.deny())
             mDenied.remove(aceToRevoke);
@@ -150,8 +150,8 @@ public class ZimbraACL {
      * @param aceToGrant ace to revoke
      * @return whether aceToGrant was actually added to the ACL. 
      */
-    private boolean grant(ZimbraACE aceToGrant) {
-        for (ZimbraACE ace : mAces) {
+    private boolean grant(ZmailACE aceToGrant) {
+        for (ZmailACE ace : mAces) {
             if (ace.isGrantee(aceToGrant.getGrantee()) &&
                 ace.getRight().isTheSameRight(aceToGrant.getRight())) {
                 
@@ -189,8 +189,8 @@ public class ZimbraACL {
      * @param aceToRevoke ace to revoke
      * @return whether aceToRevoke was actually removed from the ACL. 
      */
-    private boolean revoke(ZimbraACE aceToRevoke) {
-        for (ZimbraACE ace : mAces) {
+    private boolean revoke(ZmailACE aceToRevoke) {
+        for (ZmailACE ace : mAces) {
             if (ace.isGrantee(aceToRevoke.getGrantee()) &&
                 ace.getRight().getName().equals(aceToRevoke.getRight().getName()) &&
                 ace.getRightModifier() == aceToRevoke.getRightModifier()) {
@@ -201,9 +201,9 @@ public class ZimbraACL {
         return false;
     }
    
-    List<ZimbraACE> grantAccess(Set<ZimbraACE> acesToGrant) {
-        List<ZimbraACE> granted = new ArrayList<ZimbraACE>();
-        for (ZimbraACE ace : acesToGrant) {
+    List<ZmailACE> grantAccess(Set<ZmailACE> acesToGrant) {
+        List<ZmailACE> granted = new ArrayList<ZmailACE>();
+        for (ZmailACE ace : acesToGrant) {
             if (grant(ace))
                 granted.add(ace);
         }
@@ -223,11 +223,11 @@ public class ZimbraACL {
      *      then the aceToRevoke will NOT be revoked, because it does not match.
      * 
      * @param aceToRevoke ace to revoke
-     * @return the set of ZimbraACE that are successfully revoked.
+     * @return the set of ZmailACE that are successfully revoked.
      */
-    List<ZimbraACE> revokeAccess(Set<ZimbraACE> acesToRevoke) {
-        List<ZimbraACE> revoked = new ArrayList<ZimbraACE>();
-        for (ZimbraACE ace : acesToRevoke) {
+    List<ZmailACE> revokeAccess(Set<ZmailACE> acesToRevoke) {
+        List<ZmailACE> revoked = new ArrayList<ZmailACE>();
+        for (ZmailACE ace : acesToRevoke) {
             if (revoke(ace))
                 revoked.add(ace);
         }
@@ -238,26 +238,26 @@ public class ZimbraACL {
      * Get all ACEs
      * @return all ACEs
      */
-    List<ZimbraACE> getAllACEs() {
+    List<ZmailACE> getAllACEs() {
         return mAces;
     }
     
     // for collecting group ACLs
-    Set<ZimbraACE> getAllowedNotDelegableACEs() {
+    Set<ZmailACE> getAllowedNotDelegableACEs() {
         return mAllowedNotDelegable;
     }
     
     // for collecting group ACLs
-    Set<ZimbraACE> getAllowedDelegableACEs() {
+    Set<ZmailACE> getAllowedDelegableACEs() {
         return mAllowedDelegable;
     }
     
     // for collecting group ACLs
-    Set<ZimbraACE> getDeniedACEs() {
+    Set<ZmailACE> getDeniedACEs() {
         return mDenied;
     }
     
-    Set<ZimbraACE> getSubDomainACEs() {
+    Set<ZmailACE> getSubDomainACEs() {
         return mSubDomain;
     }    
     
@@ -267,10 +267,10 @@ public class ZimbraACL {
      * @param rights specified rights.
      * @return ACEs with right specified in rights
      */
-    List<ZimbraACE> getACEs(Set<? extends Right> rights) {
-        List<ZimbraACE> result = new ArrayList<ZimbraACE>();
+    List<ZmailACE> getACEs(Set<? extends Right> rights) {
+        List<ZmailACE> result = new ArrayList<ZmailACE>();
         
-        for (ZimbraACE ace : mAces) {
+        for (ZmailACE ace : mAces) {
             if (rights.contains(ace.getRight())) {
                 result.add(ace);
             }
@@ -282,7 +282,7 @@ public class ZimbraACL {
     List<String> serialize() {
         List<String> aces = new ArrayList<String>();
         
-        for (ZimbraACE ace : mAces) {
+        for (ZmailACE ace : mAces) {
             aces.add(ace.serialize());
         }
         return aces;
@@ -293,9 +293,9 @@ public class ZimbraACL {
     */
     
     // dump a colection of ZimrbaACE to [...] [...] ...
-    private static String dump(Collection<ZimbraACE> aces) {
+    private static String dump(Collection<ZmailACE> aces) {
         StringBuffer sb = new StringBuffer();
-        for (ZimbraACE ace : aces)
+        for (ZmailACE ace : aces)
             sb.append(ace.dump(false) + " ");
         
         return sb.toString();
@@ -314,7 +314,7 @@ public class ZimbraACL {
         // aces.add("00000000-0000-0000-0000-000000000000 ALL -invite");
         
         try {
-            ZimbraACL acl = new ZimbraACL(aces, TargetType.account, "user1@phoebe.mac");
+            ZmailACL acl = new ZmailACL(aces, TargetType.account, "user1@phoebe.mac");
             List<String> serialized = acl.serialize();
             for (String ace : serialized)
                 System.out.println(ace);

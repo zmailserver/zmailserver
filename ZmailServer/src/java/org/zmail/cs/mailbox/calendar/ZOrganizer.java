@@ -12,22 +12,22 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.mailbox.calendar;
+package org.zmail.cs.mailbox.calendar;
 
 import java.util.List;
 
-import com.zimbra.common.calendar.CalendarUtil;
-import com.zimbra.common.calendar.ZCalendar.ICalTok;
-import com.zimbra.common.calendar.ZCalendar.ZParameter;
-import com.zimbra.common.calendar.ZCalendar.ZProperty;
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.common.soap.Element;
-import com.zimbra.common.soap.MailConstants;
-import com.zimbra.cs.account.IDNUtil;
-import com.zimbra.cs.mailbox.Metadata;
-import com.zimbra.cs.service.mail.ToXML;
-import com.zimbra.soap.JaxbUtil;
-import com.zimbra.soap.mail.type.CalOrganizer;
+import org.zmail.common.calendar.CalendarUtil;
+import org.zmail.common.calendar.ZCalendar.ICalTok;
+import org.zmail.common.calendar.ZCalendar.ZParameter;
+import org.zmail.common.calendar.ZCalendar.ZProperty;
+import org.zmail.common.service.ServiceException;
+import org.zmail.common.soap.Element;
+import org.zmail.common.soap.MailConstants;
+import org.zmail.cs.account.IDNUtil;
+import org.zmail.cs.mailbox.Metadata;
+import org.zmail.cs.service.mail.ToXML;
+import org.zmail.soap.JaxbUtil;
+import org.zmail.soap.mail.type.CalOrganizer;
 
 public class ZOrganizer extends CalendarUser {
     public ZOrganizer(String address, String cn) {
@@ -59,7 +59,7 @@ public class ZOrganizer extends CalendarUser {
         return ICalTok.ORGANIZER;
     }
 
-    // Note: CalOrganizer represents an organizer in the "urn:zimbraMail"
+    // Note: CalOrganizer represents an organizer in the "urn:zmailMail"
     //       namespace.
     public CalOrganizer toJaxb() {
         CalOrganizer org = new CalOrganizer();
@@ -80,7 +80,7 @@ public class ZOrganizer extends CalendarUser {
 
     public Element toXml(Element parent) {
         // TODO:  See Bug 61429.  This can be called for SOAP headers in
-        // namespace "urn:Zimbra" as well as for namespace "urn:ZimbraMail",
+        // namespace "urn:Zmail" as well as for namespace "urn:ZmailMail",
         // so, we cannot just use one JAXB object to represent an organizer.
         // return JaxbUtil.addChildElementFromJaxb(parent,
         //         MailConstants.E_CAL_ORGANIZER, MailConstants.NAMESPACE_STR,

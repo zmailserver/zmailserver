@@ -12,7 +12,7 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.db;
+package org.zmail.cs.db;
 
 import java.io.ByteArrayInputStream;
 import java.io.File;
@@ -31,28 +31,28 @@ import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.common.util.ZimbraLog;
-import com.zimbra.cs.account.Account;
-import com.zimbra.cs.account.MockProvisioning;
-import com.zimbra.cs.account.Provisioning;
-import com.zimbra.cs.db.DbPool.DbConnection;
-import com.zimbra.cs.mailbox.DeliveryOptions;
-import com.zimbra.cs.mailbox.Document;
-import com.zimbra.cs.mailbox.MailItem;
-import com.zimbra.cs.mailbox.Mailbox;
-import com.zimbra.cs.mailbox.MailboxManager;
-import com.zimbra.cs.mailbox.MailboxTestUtil;
-import com.zimbra.cs.mailbox.Message;
-import com.zimbra.cs.mime.ParsedDocument;
-import com.zimbra.cs.mime.ParsedMessage;
-import com.zimbra.cs.store.MailboxBlob.MailboxBlobInfo;
-import com.zimbra.cs.store.StoreManager;
-import com.zimbra.cs.store.file.BlobReference;
-import com.zimbra.cs.store.file.FileBlobStore;
-import com.zimbra.cs.util.SpoolingCache;
-import com.zimbra.cs.volume.Volume;
-import com.zimbra.cs.volume.VolumeManager;
+import org.zmail.common.service.ServiceException;
+import org.zmail.common.util.ZmailLog;
+import org.zmail.cs.account.Account;
+import org.zmail.cs.account.MockProvisioning;
+import org.zmail.cs.account.Provisioning;
+import org.zmail.cs.db.DbPool.DbConnection;
+import org.zmail.cs.mailbox.DeliveryOptions;
+import org.zmail.cs.mailbox.Document;
+import org.zmail.cs.mailbox.MailItem;
+import org.zmail.cs.mailbox.Mailbox;
+import org.zmail.cs.mailbox.MailboxManager;
+import org.zmail.cs.mailbox.MailboxTestUtil;
+import org.zmail.cs.mailbox.Message;
+import org.zmail.cs.mime.ParsedDocument;
+import org.zmail.cs.mime.ParsedMessage;
+import org.zmail.cs.store.MailboxBlob.MailboxBlobInfo;
+import org.zmail.cs.store.StoreManager;
+import org.zmail.cs.store.file.BlobReference;
+import org.zmail.cs.store.file.FileBlobStore;
+import org.zmail.cs.util.SpoolingCache;
+import org.zmail.cs.volume.Volume;
+import org.zmail.cs.volume.VolumeManager;
 
 public class DbVolumeBlobsTest {
 
@@ -64,13 +64,13 @@ public class DbVolumeBlobsTest {
     public static void init() throws Exception {
         MailboxTestUtil.initServer();
         Provisioning prov = Provisioning.getInstance();
-        prov.createAccount("test@zimbra.com", "secret", new HashMap<String, Object>());
-        System.setProperty("zimbra.native.required", "false");
+        prov.createAccount("test@zmail.com", "secret", new HashMap<String, Object>());
+        System.setProperty("zmail.native.required", "false");
 
         Map<String, Object> attrs = new HashMap<String, Object>();
-        attrs.put(Provisioning.A_zimbraId, UUID.randomUUID().toString());
+        attrs.put(Provisioning.A_zmailId, UUID.randomUUID().toString());
 
-        prov.createAccount("test2@zimbra.com", "secret", attrs);
+        prov.createAccount("test2@zmail.com", "secret", attrs);
         //need MVCC since the VolumeManager code creates connections internally
         HSQLDB db = (HSQLDB) Db.getInstance();
         db.useMVCC(null);
@@ -91,7 +91,7 @@ public class DbVolumeBlobsTest {
     public void tearDown() throws Exception {
         conn.close();
         if (VolumeManager.getInstance().getCurrentMessageVolume() != originalVolume) {
-            ZimbraLog.store.info("setting back to original volume");
+            ZmailLog.store.info("setting back to original volume");
             VolumeManager.getInstance().setCurrentVolume(Volume.TYPE_MESSAGE, originalVolume.getId());
         }
         StoreManager.getInstance().shutdown();
@@ -107,7 +107,7 @@ public class DbVolumeBlobsTest {
         Mailbox mbox = MailboxManager.getInstance().getMailboxByAccountId(MockProvisioning.DEFAULT_ACCOUNT_ID);
         DeliveryOptions opt = new DeliveryOptions();
         opt.setFolderId(Mailbox.ID_FOLDER_INBOX);
-        Message msg = mbox.addMessage(null, new ParsedMessage("From: from1@zimbra.com\r\nTo: to1@zimbra.com".getBytes(), false), opt, null);
+        Message msg = mbox.addMessage(null, new ParsedMessage("From: from1@zmail.com\r\nTo: to1@zmail.com".getBytes(), false), opt, null);
 
         Volume vol = VolumeManager.getInstance().getCurrentMessageVolume();
 
@@ -128,7 +128,7 @@ public class DbVolumeBlobsTest {
         
         DeliveryOptions opt = new DeliveryOptions();
         opt.setFolderId(Mailbox.ID_FOLDER_INBOX);
-        Message msg = mbox.addMessage(null, new ParsedMessage("From: from1@zimbra.com\r\nTo: to1@zimbra.com".getBytes(), false), opt, null);
+        Message msg = mbox.addMessage(null, new ParsedMessage("From: from1@zmail.com\r\nTo: to1@zmail.com".getBytes(), false), opt, null);
 
         Volume vol = VolumeManager.getInstance().getCurrentMessageVolume();
         MailboxBlobInfo blobInfo = new MailboxBlobInfo(null, mbox.getId(), msg.getId(), msg.getSavedSequence(), String.valueOf(vol.getId()), null);
@@ -147,10 +147,10 @@ public class DbVolumeBlobsTest {
         DeliveryOptions opt = new DeliveryOptions();
         opt.setFolderId(Mailbox.ID_FOLDER_INBOX);
         int ts1 = (int) (System.currentTimeMillis()/1000);
-        Message msg1 = mbox.addMessage(null, new ParsedMessage("From: from1@zimbra.com\r\nTo: to1@zimbra.com".getBytes(), false), opt, null);
+        Message msg1 = mbox.addMessage(null, new ParsedMessage("From: from1@zmail.com\r\nTo: to1@zmail.com".getBytes(), false), opt, null);
         Thread.sleep(1000);
         int ts2 = (int) (System.currentTimeMillis()/1000);
-        Message msg2 = mbox.addMessage(null, new ParsedMessage("From: from1@zimbra.com\r\nTo: to1@zimbra.com".getBytes(), false), opt, null);
+        Message msg2 = mbox.addMessage(null, new ParsedMessage("From: from1@zmail.com\r\nTo: to1@zmail.com".getBytes(), false), opt, null);
         Thread.sleep(1000);
         int ts3 = (int) (System.currentTimeMillis()/1000);
         Iterable<MailboxBlobInfo> allBlobs = null;
@@ -170,7 +170,7 @@ public class DbVolumeBlobsTest {
         Volume vol = VolumeManager.getInstance().getCurrentMessageVolume();
 
         for (int i = 0; i < 10; i++) {
-            Message msg = mbox.addMessage(null, new ParsedMessage(("From: from" + i + "@zimbra.com\r\nTo: to1@zimbra.com").getBytes(), false), opt, null);
+            Message msg = mbox.addMessage(null, new ParsedMessage(("From: from" + i + "@zmail.com\r\nTo: to1@zmail.com").getBytes(), false), opt, null);
             digestToPath.put(msg.getDigest(), msg.getBlob().getLocalBlob().getFile().getPath());
         }
         Iterable<MailboxBlobInfo> allBlobs = null;
@@ -198,8 +198,8 @@ public class DbVolumeBlobsTest {
         Volume vol = VolumeManager.getInstance().getCurrentMessageVolume();
 
         for (int i = 0; i < 5; i++) {
-            mbox.addMessage(null, new ParsedMessage(("From: from" + i + "@zimbra.com\r\nTo: to1@zimbra.com").getBytes(), false), opt, null);
-            mbox.addMessage(null, new ParsedMessage(("From: from" + i + "@zimbra.com\r\nTo: to1@zimbra.com").getBytes(), false), opt, null);
+            mbox.addMessage(null, new ParsedMessage(("From: from" + i + "@zmail.com\r\nTo: to1@zmail.com").getBytes(), false), opt, null);
+            mbox.addMessage(null, new ParsedMessage(("From: from" + i + "@zmail.com\r\nTo: to1@zmail.com").getBytes(), false), opt, null);
         }
         Iterable<MailboxBlobInfo> allBlobs = null;
         allBlobs = DbMailItem.getAllBlobs(conn, mbox.getSchemaGroupId(), vol.getId(), -1, -1);
@@ -219,7 +219,7 @@ public class DbVolumeBlobsTest {
         Volume vol = VolumeManager.getInstance().getCurrentMessageVolume();
 
         for (int i = 0; i < 10; i++) {
-            Message msg = mbox.addMessage(null, new ParsedMessage(("From: from" + i + "@zimbra.com\r\nTo: to1@zimbra.com").getBytes(), false), opt, null);
+            Message msg = mbox.addMessage(null, new ParsedMessage(("From: from" + i + "@zmail.com\r\nTo: to1@zmail.com").getBytes(), false), opt, null);
             digestToPath.put(msg.getDigest(), msg.getBlob().getLocalBlob().getFile().getPath());
             mbox.delete(null, msg.getId(), msg.getType());
         }
@@ -325,7 +325,7 @@ public class DbVolumeBlobsTest {
         Mailbox mbox = MailboxManager.getInstance().getMailboxByAccountId(MockProvisioning.DEFAULT_ACCOUNT_ID);
         DeliveryOptions opt = new DeliveryOptions();
         opt.setFolderId(Mailbox.ID_FOLDER_INBOX);
-        Message msg = mbox.addMessage(null, new ParsedMessage("From: from1@zimbra.com\r\nTo: to1@zimbra.com".getBytes(), false), opt, null);
+        Message msg = mbox.addMessage(null, new ParsedMessage("From: from1@zmail.com\r\nTo: to1@zmail.com".getBytes(), false), opt, null);
 
         Volume vol = VolumeManager.getInstance().getCurrentMessageVolume();
 
@@ -348,7 +348,7 @@ public class DbVolumeBlobsTest {
         Mailbox mbox = MailboxManager.getInstance().getMailboxByAccountId(MockProvisioning.DEFAULT_ACCOUNT_ID);
         DeliveryOptions opt = new DeliveryOptions();
         opt.setFolderId(Mailbox.ID_FOLDER_INBOX);
-        Message msg = mbox.addMessage(null, new ParsedMessage("From: from1@zimbra.com\r\nTo: to1@zimbra.com".getBytes(), false), opt, null);
+        Message msg = mbox.addMessage(null, new ParsedMessage("From: from1@zmail.com\r\nTo: to1@zmail.com".getBytes(), false), opt, null);
 
         Volume vol = VolumeManager.getInstance().getCurrentMessageVolume();
 
@@ -368,7 +368,7 @@ public class DbVolumeBlobsTest {
         Mailbox mbox = MailboxManager.getInstance().getMailboxByAccountId(MockProvisioning.DEFAULT_ACCOUNT_ID);
         DeliveryOptions opt = new DeliveryOptions();
         opt.setFolderId(Mailbox.ID_FOLDER_INBOX);
-        ParsedMessage pm = new ParsedMessage("From: from1@zimbra.com\r\nTo: to1@zimbra.com".getBytes(), false);
+        ParsedMessage pm = new ParsedMessage("From: from1@zmail.com\r\nTo: to1@zmail.com".getBytes(), false);
         Message msg = mbox.addMessage(null, pm, opt, null);
 
         Volume vol = VolumeManager.getInstance().getCurrentMessageVolume();
@@ -384,7 +384,7 @@ public class DbVolumeBlobsTest {
         Assert.assertEquals(path, getPath(blobs.get(0)));
 
 
-        Account acct2 = Provisioning.getInstance().getAccount("test2@zimbra.com");
+        Account acct2 = Provisioning.getInstance().getAccount("test2@zmail.com");
         Mailbox mbox2 = MailboxManager.getInstance().getMailboxByAccount(acct2);
         Message msg2 = mbox2.addMessage(null, pm, opt, null);
 
@@ -420,7 +420,7 @@ public class DbVolumeBlobsTest {
         Mailbox mbox = MailboxManager.getInstance().getMailboxByAccountId(MockProvisioning.DEFAULT_ACCOUNT_ID);
         DeliveryOptions opt = new DeliveryOptions();
         opt.setFolderId(Mailbox.ID_FOLDER_INBOX);
-        ParsedMessage pm = new ParsedMessage("From: from1@zimbra.com\r\nTo: to1@zimbra.com".getBytes(), false);
+        ParsedMessage pm = new ParsedMessage("From: from1@zmail.com\r\nTo: to1@zmail.com".getBytes(), false);
         Message msg = mbox.addMessage(null, pm, opt, null);
 
         Volume vol = VolumeManager.getInstance().getCurrentMessageVolume();

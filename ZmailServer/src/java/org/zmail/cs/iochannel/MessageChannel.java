@@ -12,20 +12,20 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.iochannel;
+package org.zmail.cs.iochannel;
 
 import java.io.IOException;
 import java.nio.ByteBuffer;
 
-import com.zimbra.common.iochannel.Client;
-import com.zimbra.common.iochannel.Client.PeerServer;
-import com.zimbra.common.iochannel.IOChannelException;
-import com.zimbra.common.iochannel.Server;
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.common.util.Log;
-import com.zimbra.common.util.LogFactory;
-import com.zimbra.cs.account.Account;
-import com.zimbra.cs.account.Provisioning;
+import org.zmail.common.iochannel.Client;
+import org.zmail.common.iochannel.Client.PeerServer;
+import org.zmail.common.iochannel.IOChannelException;
+import org.zmail.common.iochannel.Server;
+import org.zmail.common.service.ServiceException;
+import org.zmail.common.util.Log;
+import org.zmail.common.util.LogFactory;
+import org.zmail.cs.account.Account;
+import org.zmail.cs.account.Provisioning;
 
 /**
  * MessageChannel is a service in ZCS that allows a message to be sent
@@ -82,7 +82,7 @@ public class MessageChannel {
                 log.error("account %s doesn't exist", accountId);
                 return;
             }
-            com.zimbra.cs.account.Server targetServer = targetAccount.getServer();
+            org.zmail.cs.account.Server targetServer = targetAccount.getServer();
             String peerHostname;
             PeerServer peer;
             if (targetServer == null ||

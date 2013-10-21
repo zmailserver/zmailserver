@@ -13,37 +13,37 @@
  * ***** END LICENSE BLOCK *****
  */
 
-package com.zimbra.cs.service;
+package org.zmail.cs.service;
 
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
-import com.zimbra.common.soap.Element;
-import com.zimbra.common.soap.HeaderConstants;
-import com.zimbra.common.util.StringUtil;
-import com.zimbra.common.util.ZimbraCookie;
-import com.zimbra.cs.account.Account;
-import com.zimbra.cs.account.AuthToken;
-import com.zimbra.cs.account.AuthTokenException;
-import com.zimbra.cs.account.ZimbraAuthToken;
-import com.zimbra.cs.account.auth.AuthMechanism.AuthMech;
-import com.zimbra.soap.SoapServlet;
+import org.zmail.common.soap.Element;
+import org.zmail.common.soap.HeaderConstants;
+import org.zmail.common.util.StringUtil;
+import org.zmail.common.util.ZmailCookie;
+import org.zmail.cs.account.Account;
+import org.zmail.cs.account.AuthToken;
+import org.zmail.cs.account.AuthTokenException;
+import org.zmail.cs.account.ZmailAuthToken;
+import org.zmail.cs.account.auth.AuthMechanism.AuthMech;
+import org.zmail.soap.SoapServlet;
 
-public class ZimbraAuthProvider extends AuthProvider {
+public class ZmailAuthProvider extends AuthProvider {
 
-    public static final String ZIMBRA_AUTH_PROVIDER = "zimbra";
+    public static final String ZIMBRA_AUTH_PROVIDER = "zmail";
     
-    ZimbraAuthProvider() {
+    ZmailAuthProvider() {
         this(ZIMBRA_AUTH_PROVIDER);
     }
     
-    protected ZimbraAuthProvider(String name) {
+    protected ZmailAuthProvider(String name) {
         super(name);
     }
 
     private String getEncodedAuthTokenFromCookie(HttpServletRequest req, boolean isAdminReq) {
-        String cookieName = ZimbraCookie.authTokenCookieName(isAdminReq);
+        String cookieName = ZmailCookie.authTokenCookieName(isAdminReq);
         String encodedAuthToken = null;
         javax.servlet.http.Cookie cookies[] =  req.getCookies();
         if (cookies != null) {
@@ -100,28 +100,28 @@ public class ZimbraAuthProvider extends AuthProvider {
             throw AuthProviderException.NO_AUTH_DATA();
         }
         
-        return ZimbraAuthToken.getAuthToken(encodedAuthToken);
+        return ZmailAuthToken.getAuthToken(encodedAuthToken);
     }
     
     @Override
     protected AuthToken authToken(Account acct) {
-        return new ZimbraAuthToken(acct);
+        return new ZmailAuthToken(acct);
     }
     
     @Override
     protected AuthToken authToken(Account acct, boolean isAdmin, AuthMech authMech) {
-        return new ZimbraAuthToken(acct, isAdmin, authMech);
+        return new ZmailAuthToken(acct, isAdmin, authMech);
     }
     
     @Override
     protected AuthToken authToken(Account acct, long expires) {
-        return new ZimbraAuthToken(acct, expires);
+        return new ZmailAuthToken(acct, expires);
     }
     
     @Override
     protected AuthToken authToken(Account acct, long expires, boolean isAdmin, 
             Account adminAcct) {
-        return new ZimbraAuthToken(acct, expires, isAdmin, adminAcct, null);
+        return new ZmailAuthToken(acct, expires, isAdmin, adminAcct, null);
     }
     
 }

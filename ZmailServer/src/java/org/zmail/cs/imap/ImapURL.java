@@ -12,7 +12,7 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.imap;
+package org.zmail.cs.imap;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -24,23 +24,23 @@ import java.util.HashMap;
 import javax.mail.MessagingException;
 import javax.mail.internet.MimeMessage;
 
-import com.zimbra.cs.account.Account;
-import com.zimbra.cs.account.AuthToken;
-import com.zimbra.cs.account.Provisioning;
-import com.zimbra.common.account.Key.AccountBy;
-import com.zimbra.cs.imap.ImapPartSpecifier.BinaryDecodingException;
-import com.zimbra.cs.mailbox.MailItem;
-import com.zimbra.cs.mailbox.Mailbox;
-import com.zimbra.cs.mailbox.OperationContext;
-import com.zimbra.cs.mailbox.MailServiceException.NoSuchItemException;
-import com.zimbra.cs.mime.Mime;
-import com.zimbra.cs.service.AuthProvider;
-import com.zimbra.cs.service.UserServlet;
-import com.zimbra.cs.util.JMSession;
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.common.util.ByteUtil;
-import com.zimbra.common.util.Pair;
-import com.zimbra.common.util.ZimbraLog;
+import org.zmail.cs.account.Account;
+import org.zmail.cs.account.AuthToken;
+import org.zmail.cs.account.Provisioning;
+import org.zmail.common.account.Key.AccountBy;
+import org.zmail.cs.imap.ImapPartSpecifier.BinaryDecodingException;
+import org.zmail.cs.mailbox.MailItem;
+import org.zmail.cs.mailbox.Mailbox;
+import org.zmail.cs.mailbox.OperationContext;
+import org.zmail.cs.mailbox.MailServiceException.NoSuchItemException;
+import org.zmail.cs.mime.Mime;
+import org.zmail.cs.service.AuthProvider;
+import org.zmail.cs.service.UserServlet;
+import org.zmail.cs.util.JMSession;
+import org.zmail.common.service.ServiceException;
+import org.zmail.common.util.ByteUtil;
+import org.zmail.common.util.Pair;
+import org.zmail.common.util.ZmailLog;
 
 final class ImapURL {
     private static class ImapUrlException extends ImapParseException {
@@ -68,7 +68,7 @@ final class ImapURL {
         parse(tag, handler.getCredentials(), url);
         mURL = url;
 
-        if (mPath == null || mPath.asZimbraPath().length() == 0) {
+        if (mPath == null || mPath.asZmailPath().length() == 0) {
             if (handler.getState() != ImapHandler.State.SELECTED)
                 throw new ImapUrlException(tag, url, "IMAP URL must specify folder if session not SELECTED");
             mPath = handler.getCurrentSession().getPath();
@@ -215,7 +215,7 @@ final class ImapURL {
         try {
             return ByteUtil.getContent(content.getSecond(), (int) Math.min(content.getFirst(), Integer.MAX_VALUE));
         } catch (IOException e) {
-            ZimbraLog.imap.info("error reading content from IMAP URL", e);
+            ZmailLog.imap.info("error reading content from IMAP URL", e);
         }
         throw new ImapUrlException(tag, mURL, "error fetching IMAP URL content");
     }
@@ -283,15 +283,15 @@ final class ImapURL {
             return part;
 
         } catch (NoSuchItemException e) {
-            ZimbraLog.imap.info("no such message", e);
+            ZmailLog.imap.info("no such message", e);
         } catch (ServiceException e) {
-            ZimbraLog.imap.info("can't fetch content from IMAP URL", e);
+            ZmailLog.imap.info("can't fetch content from IMAP URL", e);
         } catch (MessagingException e) {
-            ZimbraLog.imap.info("can't fetch content from IMAP URL", e);
+            ZmailLog.imap.info("can't fetch content from IMAP URL", e);
         } catch (IOException e) {
-            ZimbraLog.imap.info("error reading content from IMAP URL", e);
+            ZmailLog.imap.info("error reading content from IMAP URL", e);
         } catch (BinaryDecodingException e) {
-            ZimbraLog.imap.info("can't fetch content from IMAP URL", e);
+            ZmailLog.imap.info("can't fetch content from IMAP URL", e);
         }
         throw new ImapUrlException(tag, mURL, "error fetching IMAP URL content");
     }

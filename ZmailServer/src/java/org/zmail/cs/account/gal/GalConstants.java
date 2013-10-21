@@ -12,7 +12,7 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.account.gal;
+package org.zmail.cs.account.gal;
 
 public class GalConstants {
     public static String TOKENIZE_KEY_AND = "and";

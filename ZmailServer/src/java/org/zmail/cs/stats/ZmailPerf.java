@@ -13,7 +13,7 @@
  * ***** END LICENSE BLOCK *****
  */
 
-package com.zimbra.cs.stats;
+package org.zmail.cs.stats;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
@@ -33,28 +33,28 @@ import java.util.concurrent.CopyOnWriteArrayList;
 import javax.management.MBeanServer;
 import javax.management.ObjectName;
 
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.common.stats.Accumulator;
-import com.zimbra.common.stats.Counter;
-import com.zimbra.common.stats.DeltaCalculator;
-import com.zimbra.common.stats.RealtimeStats;
-import com.zimbra.common.stats.RealtimeStatsCallback;
-import com.zimbra.common.stats.StatsDumper;
-import com.zimbra.common.stats.StatsDumperDataSource;
-import com.zimbra.common.stats.StopWatch;
-import com.zimbra.common.util.Constants;
-import com.zimbra.common.util.Log;
-import com.zimbra.common.util.LogFactory;
-import com.zimbra.common.util.StringUtil;
-import com.zimbra.common.util.ZimbraLog;
-import com.zimbra.cs.db.DbPool;
-import com.zimbra.cs.mailbox.MailboxManager;
-import com.zimbra.cs.util.MemoryStats;
+import org.zmail.common.service.ServiceException;
+import org.zmail.common.stats.Accumulator;
+import org.zmail.common.stats.Counter;
+import org.zmail.common.stats.DeltaCalculator;
+import org.zmail.common.stats.RealtimeStats;
+import org.zmail.common.stats.RealtimeStatsCallback;
+import org.zmail.common.stats.StatsDumper;
+import org.zmail.common.stats.StatsDumperDataSource;
+import org.zmail.common.stats.StopWatch;
+import org.zmail.common.util.Constants;
+import org.zmail.common.util.Log;
+import org.zmail.common.util.LogFactory;
+import org.zmail.common.util.StringUtil;
+import org.zmail.common.util.ZmailLog;
+import org.zmail.cs.db.DbPool;
+import org.zmail.cs.mailbox.MailboxManager;
+import org.zmail.cs.util.MemoryStats;
 
 /**
  * A collection of methods for keeping track of server performance statistics.
  */
-public class ZimbraPerf {
+public class ZmailPerf {
 
     @Target({ElementType.FIELD})
     @Retention(RetentionPolicy.RUNTIME)
@@ -62,7 +62,7 @@ public class ZimbraPerf {
         String value();
     }
 
-    static Log log = LogFactory.getLog(ZimbraPerf.class);
+    static Log log = LogFactory.getLog(ZmailPerf.class);
 
     @Description("Number of database connections in use")
     public static final String RTS_DB_POOL_SIZE = "db_pool_size";
@@ -374,7 +374,7 @@ public class ZimbraPerf {
     private static void initDescriptions() {
         descriptions = Collections.synchronizedMap(descriptions);
 
-        for (Field f : ZimbraPerf.class.getDeclaredFields()) {
+        for (Field f : ZmailPerf.class.getDeclaredFields()) {
             if (f.isAnnotationPresent(Description.class)) {
                 try {
                     Object o = f.get(null);
@@ -383,7 +383,7 @@ public class ZimbraPerf {
                         descriptions.put((String) o, description);
                     }
                 } catch (IllegalAccessException e) {
-                    ZimbraLog.perf.warn("Unexpected @Description annotation on field %s.", f.getName(), e);
+                    ZmailLog.perf.warn("Unexpected @Description annotation on field %s.", f.getName(), e);
                 }
             }
         }
@@ -412,13 +412,13 @@ public class ZimbraPerf {
 
 
     /**
-     * This may only be called BEFORE ZimbraPerf.initialize is called, otherwise the column
+     * This may only be called BEFORE ZmailPerf.initialize is called, otherwise the column
      * names will not be output correctly into the logs
      */
     public static void addRealtimeStatName(String name, String description) {
         if (sIsInitialized)
-            throw new IllegalStateException("Cannot add stat name after ZimbraPerf.initialize() is called");
-        ZimbraLog.perf.debug("Adding realtime stat '%s': %s", name, description);
+            throw new IllegalStateException("Cannot add stat name after ZmailPerf.initialize() is called");
+        ZmailLog.perf.debug("Adding realtime stat '%s': %s", name, description);
         realtimeStats.addName(name);
         descriptions.put(name, description);
     }
@@ -454,7 +454,7 @@ public class ZimbraPerf {
 
     public synchronized static void initialize() {
         if (sIsInitialized) {
-            log.warn("Detected a second call to ZimbraPerf.initialize()", new Exception());
+            log.warn("Detected a second call to ZmailPerf.initialize()", new Exception());
             return;
         }
         initDescriptions();
@@ -477,9 +477,9 @@ public class ZimbraPerf {
         MBeanServer jmxServer = ManagementFactory.getPlatformMBeanServer();
         jmxServerStats = new JmxServerStats();
         try {
-            jmxServer.registerMBean(jmxServerStats, new ObjectName("ZimbraCollaborationSuite:type=ServerStats"));
+            jmxServer.registerMBean(jmxServerStats, new ObjectName("ZmailCollaborationSuite:type=ServerStats"));
         } catch (Exception e) {
-            ZimbraLog.perf.warn("Unable to register JMX interface.", e);
+            ZmailLog.perf.warn("Unable to register JMX interface.", e);
         }
 
         sIsInitialized = true;
@@ -495,7 +495,7 @@ public class ZimbraPerf {
             try {
                 mailboxCacheSize = MailboxManager.getInstance().getCacheSize();
             } catch (ServiceException e) {
-                ZimbraLog.perf.warn("Unable to determine mailbox cache size.", e);
+                ZmailLog.perf.warn("Unable to determine mailbox cache size.", e);
             }
             mailboxCacheSizeTimestamp = now;
         }
@@ -503,7 +503,7 @@ public class ZimbraPerf {
     }
 
     /**
-     * Scheduled task that writes a row to zimbrastats.csv with the latest
+     * Scheduled task that writes a row to zmailstats.csv with the latest
      * <tt>Accumulator</tt> data.
      */
     private static final class MailboxdStats

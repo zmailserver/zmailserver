@@ -12,26 +12,26 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.qa.unittest.prov.ldap;
+package org.zmail.qa.unittest.prov.ldap;
 
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-import com.zimbra.cs.account.Provisioning;
-import com.zimbra.cs.account.ldap.LdapDIT;
-import com.zimbra.cs.account.ldap.LdapProv;
-import com.zimbra.cs.ldap.LdapClient;
-import com.zimbra.cs.ldap.LdapServerType;
-import com.zimbra.cs.ldap.LdapUsage;
-import com.zimbra.cs.ldap.ZLdapContext;
-import com.zimbra.cs.ldap.ZLdapFilter;
-import com.zimbra.cs.ldap.ZLdapFilterFactory;
-import com.zimbra.cs.ldap.ZSearchControls;
-import com.zimbra.cs.ldap.ZSearchResultEntry;
-import com.zimbra.cs.ldap.ZSearchResultEnumeration;
-import com.zimbra.cs.ldap.ZSearchScope;
+import org.zmail.cs.account.Provisioning;
+import org.zmail.cs.account.ldap.LdapDIT;
+import org.zmail.cs.account.ldap.LdapProv;
+import org.zmail.cs.ldap.LdapClient;
+import org.zmail.cs.ldap.LdapServerType;
+import org.zmail.cs.ldap.LdapUsage;
+import org.zmail.cs.ldap.ZLdapContext;
+import org.zmail.cs.ldap.ZLdapFilter;
+import org.zmail.cs.ldap.ZLdapFilterFactory;
+import org.zmail.cs.ldap.ZSearchControls;
+import org.zmail.cs.ldap.ZSearchResultEntry;
+import org.zmail.cs.ldap.ZSearchResultEnumeration;
+import org.zmail.cs.ldap.ZSearchScope;
 
 public class Cleanup {
         

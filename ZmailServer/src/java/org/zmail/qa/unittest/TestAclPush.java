@@ -12,25 +12,25 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.qa.unittest;
+package org.zmail.qa.unittest;
 
 import java.util.Collections;
 import java.util.List;
 
 import junit.framework.TestCase;
 
-import com.zimbra.client.ZMailbox;
-import com.zimbra.cs.account.Account;
-import com.zimbra.cs.account.DistributionList;
-import com.zimbra.cs.account.Provisioning;
-import com.zimbra.cs.mailbox.ACL;
-import com.zimbra.cs.mailbox.Folder;
-import com.zimbra.cs.mailbox.MailItem;
-import com.zimbra.cs.mailbox.Mailbox;
-import com.zimbra.cs.mailbox.MailboxManager;
-import com.zimbra.soap.account.message.GetShareInfoRequest;
-import com.zimbra.soap.account.message.GetShareInfoResponse;
-import com.zimbra.soap.type.ShareInfo;
+import org.zmail.client.ZMailbox;
+import org.zmail.cs.account.Account;
+import org.zmail.cs.account.DistributionList;
+import org.zmail.cs.account.Provisioning;
+import org.zmail.cs.mailbox.ACL;
+import org.zmail.cs.mailbox.Folder;
+import org.zmail.cs.mailbox.MailItem;
+import org.zmail.cs.mailbox.Mailbox;
+import org.zmail.cs.mailbox.MailboxManager;
+import org.zmail.soap.account.message.GetShareInfoRequest;
+import org.zmail.soap.account.message.GetShareInfoResponse;
+import org.zmail.soap.type.ShareInfo;
 
 /**
  */

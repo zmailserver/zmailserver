@@ -17,15 +17,15 @@
 
 source `dirname $0`/zmshutil || exit 1
 zmsetvars \
-    zimbra_home \
-    zimbra_tmp_directory \
-    zimbra_log_directory
+    zmail_home \
+    zmail_tmp_directory \
+    zmail_log_directory
 
-configfile=${zimbra_home}/conf/logswatchrc
-pidfile=${zimbra_log_directory}/logswatch.pid
-zmrrdfetchpidfile=${zimbra_log_directory}/zmrrdfetch-server.pid
+configfile=${zmail_home}/conf/logswatchrc
+pidfile=${zmail_log_directory}/logswatch.pid
+zmrrdfetchpidfile=${zmail_log_directory}/zmrrdfetch-server.pid
 zmrrdfetchpid=""
-logfile=${zimbra_log_directory}/zmlogswatch.out
+logfile=${zmail_log_directory}/zmlogswatch.out
 pid=""
 os=$(uname -s)
 
@@ -69,20 +69,20 @@ case "$1" in
       exit 0
     fi
 
-    ${zimbra_home}/bin/zmprov -l gs `${zimbra_home}/bin/zmhostname` zimbraServiceEnabled | grep -qw logger
+    ${zmail_home}/bin/zmprov -l gs `${zmail_home}/bin/zmhostname` zmailServiceEnabled | grep -qw logger
     if [ $? = 1 ]; then
-        echo "zimbra logger service is not enabled!  failed."
+        echo "zmail logger service is not enabled!  failed."
         exit 1
     fi
 
-    if [ ! -d ${zimbra_tmp_directory} ]; then
-      mkdir -p ${zimbra_tmp_directory} > /dev/null 2>&1
+    if [ ! -d ${zmail_tmp_directory} ]; then
+      mkdir -p ${zmail_tmp_directory} > /dev/null 2>&1
     fi
 
-    ${zimbra_home}/libexec/logswatch --config-file=${configfile} \
+    ${zmail_home}/libexec/logswatch --config-file=${configfile} \
       --use-cpan-file-tail --pid-file=${pidfile} --daemon \
-      --script-dir=${zimbra_tmp_directory} \
-      -t /var/log/zimbra-stats.log > $logfile 2>&1
+      --script-dir=${zmail_tmp_directory} \
+      -t /var/log/zmail-stats.log > $logfile 2>&1
     for ((i=0; i < 30; i++)); do
       checkrunning
       if [ $running = 1 ]; then

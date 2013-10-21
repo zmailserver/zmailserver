@@ -76,8 +76,8 @@ CREATE TABLE IF NOT EXISTS ${DATABASE_NAME}.mail_item_dumpster (
 
    -- Must not enforce unique index on (mailbox_id, folder_id, name) for the dumpster version!
 
-   CONSTRAINT fk_mail_item_dumpster_mailbox_id FOREIGN KEY (mailbox_id) REFERENCES zimbra.mailbox(id),
-   CONSTRAINT fk_mail_item_dumpster_volume_id FOREIGN KEY (volume_id) REFERENCES zimbra.volume(id)
+   CONSTRAINT fk_mail_item_dumpster_mailbox_id FOREIGN KEY (mailbox_id) REFERENCES zmail.mailbox(id),
+   CONSTRAINT fk_mail_item_dumpster_volume_id FOREIGN KEY (volume_id) REFERENCES zmail.volume(id)
 ) ENGINE = InnoDB;
 
 CREATE TABLE IF NOT EXISTS ${DATABASE_NAME}.revision_dumpster (
@@ -96,7 +96,7 @@ CREATE TABLE IF NOT EXISTS ${DATABASE_NAME}.revision_dumpster (
 
    PRIMARY KEY (mailbox_id, item_id, version),
 
-   CONSTRAINT fk_revision_dumpster_mailbox_id FOREIGN KEY (mailbox_id) REFERENCES zimbra.mailbox(id),
+   CONSTRAINT fk_revision_dumpster_mailbox_id FOREIGN KEY (mailbox_id) REFERENCES zmail.mailbox(id),
    CONSTRAINT fk_revision_dumpster_item_id FOREIGN KEY (mailbox_id, item_id) REFERENCES ${DATABASE_NAME}.mail_item_dumpster(mailbox_id, id) ON DELETE CASCADE
 ) ENGINE = InnoDB;
 
@@ -108,7 +108,7 @@ CREATE TABLE IF NOT EXISTS ${DATABASE_NAME}.appointment_dumpster (
    end_time    DATETIME,
 
    PRIMARY KEY (mailbox_id, uid),
-   CONSTRAINT fk_appointment_dumpster_mailbox_id FOREIGN KEY (mailbox_id) REFERENCES zimbra.mailbox(id),
+   CONSTRAINT fk_appointment_dumpster_mailbox_id FOREIGN KEY (mailbox_id) REFERENCES zmail.mailbox(id),
    CONSTRAINT fk_appointment_dumpster_item_id FOREIGN KEY (mailbox_id, item_id) REFERENCES ${DATABASE_NAME}.mail_item_dumpster(mailbox_id, id) ON DELETE CASCADE
 ) ENGINE = InnoDB;
 

@@ -1,14 +1,14 @@
 
-CREATE DATABASE zimbra_antispam;
-ALTER DATABASE zimbra_antispam DEFAULT CHARACTER SET utf8;
+CREATE DATABASE zmail_antispam;
+ALTER DATABASE zmail_antispam DEFAULT CHARACTER SET utf8;
 
-USE zimbra_antispam;
+USE zmail_antispam;
 
-GRANT ALL ON zimbra_antispam.* TO 'zimbra' IDENTIFIED BY 'zimbra';
-GRANT ALL ON zimbra_antispam.* TO 'zimbra'@'127.0.0.1' IDENTIFIED BY 'zimbra';
-GRANT ALL ON zimbra_antispam.* TO 'zimbra'@'localhost' IDENTIFIED BY 'zimbra';
-GRANT ALL ON zimbra_antispam.* TO 'zimbra'@'localhost.localdomain' IDENTIFIED BY 'zimbra';
-GRANT ALL ON zimbra_antispam.* TO 'root'@'localhost.localdomain' IDENTIFIED BY 'zimbra';
+GRANT ALL ON zmail_antispam.* TO 'zmail' IDENTIFIED BY 'zmail';
+GRANT ALL ON zmail_antispam.* TO 'zmail'@'127.0.0.1' IDENTIFIED BY 'zmail';
+GRANT ALL ON zmail_antispam.* TO 'zmail'@'localhost' IDENTIFIED BY 'zmail';
+GRANT ALL ON zmail_antispam.* TO 'zmail'@'localhost.localdomain' IDENTIFIED BY 'zmail';
+GRANT ALL ON zmail_antispam.* TO 'root'@'localhost.localdomain' IDENTIFIED BY 'zmail';
 
 
 CREATE TABLE bayes_expire (

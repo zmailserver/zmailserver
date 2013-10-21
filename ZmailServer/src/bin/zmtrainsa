@@ -20,35 +20,35 @@ autoTrainSystem() {
   timestampit "Starting spam/ham extraction from system accounts."
   spamdir=`mktemp -d -t spam.XXXXXXX` || exit 1
   hamdir=`mktemp -d -t ham.XXXXXXX` || exit 1
-  ${zimbra_home}/libexec/zmspamextract ${spam_account} -o ${spamdir}
-  ${zimbra_home}/libexec/zmspamextract ${ham_account} -o ${hamdir}
+  ${zmail_home}/libexec/zmspamextract ${spam_account} -o ${spamdir}
+  ${zmail_home}/libexec/zmspamextract ${ham_account} -o ${hamdir}
   timestampit "Finished extracting spam/ham from system accounts."
 
   timestampit "Starting spamassassin training."
-  ${zimbra_home}/libexec/sa-learn -p ${zimbra_home}/conf/sa/salocal.cf \
+  ${zmail_home}/libexec/sa-learn -p ${zmail_home}/conf/sa/salocal.cf \
     --dbpath ${db_path} -L --no-sync \
-    --siteconfigpath ${zimbra_home}/conf/spamassassin --spam ${spamdir}
+    --siteconfigpath ${zmail_home}/conf/spamassassin --spam ${spamdir}
 
-  ${zimbra_home}/libexec/sa-learn -p ${zimbra_home}/conf/sa/salocal.cf \
+  ${zmail_home}/libexec/sa-learn -p ${zmail_home}/conf/sa/salocal.cf \
     --dbpath ${db_path} -L --no-sync \
-    --siteconfigpath ${zimbra_home}/conf/spamassassin --ham ${hamdir}
+    --siteconfigpath ${zmail_home}/conf/spamassassin --ham ${hamdir}
 
-  ${zimbra_home}/libexec/sa-learn -p ${zimbra_home}/conf/sa/salocal.cf \
-    --siteconfigpath ${zimbra_home}/conf/spamassassin \
+  ${zmail_home}/libexec/sa-learn -p ${zmail_home}/conf/sa/salocal.cf \
+    --siteconfigpath ${zmail_home}/conf/spamassassin \
     --dbpath ${db_path} --sync
   timestampit "Finished spamassassin training."
 
   if [ x"$amavis_dspam_enabled" = "xtrue" ]; then
     timestampit "Starting dspam training"
-    ${zimbra_home}/dspam/bin/dspam_train zimbra ${spamdir} ${hamdir}
+    ${zmail_home}/dspam/bin/dspam_train zmail ${spamdir} ${hamdir}
     #for f in ${spamdir}/*; do
-      #test -f ${f} && ${zimbra_home}/dspam/bin/dspam_corpus --addspam zimbra ${f}
+      #test -f ${f} && ${zmail_home}/dspam/bin/dspam_corpus --addspam zmail ${f}
     #done
     #for f in ${hamdir}/*; do
-      #test -f ${f} && ${zimbra_home}/dspam/bin/dspam_corpus zimbra ${f}
+      #test -f ${f} && ${zmail_home}/dspam/bin/dspam_corpus zmail ${f}
     #done
 
-    ${zimbra_home}/dspam/bin/dspam_clean -p0 $USER
+    ${zmail_home}/dspam/bin/dspam_clean -p0 $USER
     timestampit "Finished dspam training"
   fi
 
@@ -66,14 +66,14 @@ trainAccountFolder() {
   fi
 
   timestampit  "Starting spamassassin $MODE training for $USER using folder $FOLDER"
-  ${zimbra_home}/libexec/zmspamextract -r -m $USER -o ${tempdir} -q in:${FOLDER}
+  ${zmail_home}/libexec/zmspamextract -r -m $USER -o ${tempdir} -q in:${FOLDER}
 
-  ${zimbra_home}/libexec/sa-learn -p ${zimbra_home}/conf/sa/salocal.cf \
+  ${zmail_home}/libexec/sa-learn -p ${zmail_home}/conf/sa/salocal.cf \
     --dbpath ${db_path} -L --no-sync \
-    --siteconfigpath ${zimbra_home}/conf/spamassassin --${MODE} ${tempdir}
+    --siteconfigpath ${zmail_home}/conf/spamassassin --${MODE} ${tempdir}
 
-  ${zimbra_home}/libexec/sa-learn -p ${zimbra_home}/conf/sa/salocal.cf \
-    --siteconfigpath ${zimbra_home}/conf/spamassassin \
+  ${zmail_home}/libexec/sa-learn -p ${zmail_home}/conf/sa/salocal.cf \
+    --siteconfigpath ${zmail_home}/conf/spamassassin \
     --dbpath ${db_path} --sync
   timestampit  "Finished spamassassin $MODE training for $USER using folder $FOLDER"
 
@@ -83,10 +83,10 @@ trainAccountFolder() {
       MODE="innocent"
     fi
 
-    ${zimbra_home}/dspam/bin/dspam --user zimbra --class=${MODE} --source=corpus --mode=teft \
+    ${zmail_home}/dspam/bin/dspam --user zmail --class=${MODE} --source=corpus --mode=teft \
       --feature=chained,noise --stdout
 
-    ${zimbra_home}/dspam/bin/dspam_clean -p0 $USER
+    ${zmail_home}/dspam/bin/dspam_clean -p0 $USER
     timestampit  "Finished dspam $MODE training for $USER using folder $FOLDER"
   fi
 
@@ -104,47 +104,47 @@ usage() {
   exit 1
 }
 
-if [ x`whoami` != xzimbra ]; then
-    echo Error: must be run as zimbra user
+if [ x`whoami` != xzmail ]; then
+    echo Error: must be run as zmail user
   exit 1
 fi
 
-if [ ! -h "/opt/zimbra/amavisd" ]; then
+if [ ! -h "/opt/zmail/amavisd" ]; then
     echo "Error: SpamAssassin not installed"
     exit 1
 fi
 
 source `dirname $0`/zmshutil || exit 1
 zmsetvars \
-  zimbra_home \
-  zimbra_server_hostname \
+  zmail_home \
+  zmail_server_hostname \
   amavis_dspam_enabled \
   antispam_mysql_enabled \
-  zimbra_spam_externalIsSpamAccount \
-  zimbra_spam_externalIsNotSpamAccount \
+  zmail_spam_externalIsSpamAccount \
+  zmail_spam_externalIsNotSpamAccount \
   zmtrainsa_cleanup_host 
 
 amavis_dspam_enabled=$(echo $amavis_dspam_enabled | tr A-Z a-z)
 antispam_mysql_enabled=$(echo $antispam_mysql_enabled | tr A-Z a-z)
 zmtrainsa_cleanup_host=$(echo $zmtrainsa_cleanup_host | tr A-Z a-z)
 
-if [ "x${zimbra_spam_externalIsSpamAccount}" = "x" ]; then
+if [ "x${zmail_spam_externalIsSpamAccount}" = "x" ]; then
   spam_account="-s"
 else 
-  spam_account="-m ${zimbra_spam_externalIsSpamAccount}"
+  spam_account="-m ${zmail_spam_externalIsSpamAccount}"
 fi
 
-if [ "x${zimbra_spam_externalIsNotSpamAccount}" = "x" ]; then
+if [ "x${zmail_spam_externalIsNotSpamAccount}" = "x" ]; then
   ham_account="-n"
 else 
-  ham_account="-m ${zimbra_spam_externalIsNotSpamAccount}"
+  ham_account="-m ${zmail_spam_externalIsNotSpamAccount}"
 fi
 
 # Set db_path
 if [ x"$antispam_mysql_enabled" = "xtrue" ]; then
-  db_path=${zimbra_home}/data/amavisd/mysql/data
+  db_path=${zmail_home}/data/amavisd/mysql/data
 else
-  db_path=${zimbra_home}/data/amavisd/.spamassassin
+  db_path=${zmail_home}/data/amavisd/.spamassassin
 fi
 
 
@@ -158,12 +158,12 @@ if [ x$1 = "x--cleanup" ]; then
   if [ x${zmtrainsa_cleanup_host} = "xtrue" ]; then
     timestampit "Starting spam/ham cleanup"
     mydir=`mktemp -d -t cleanup.XXXXXX` || exit 1
-    ${zimbra_home}/libexec/zmspamextract ${spam_account} -o ${mydir} -d
-    ${zimbra_home}/libexec/zmspamextract ${ham_account} -o ${mydir} -d
+    ${zmail_home}/libexec/zmspamextract ${spam_account} -o ${mydir} -d
+    ${zmail_home}/libexec/zmspamextract ${ham_account} -o ${mydir} -d
     /bin/rm -rf ${mydir}
     timestampit "Finished spam/ham cleanup"
   else 
-    timestampit "Cleanup skipped: $zimbra_server_hostname is not a spam/ham cleanup host."
+    timestampit "Cleanup skipped: $zmail_server_hostname is not a spam/ham cleanup host."
   fi
   exit
 fi

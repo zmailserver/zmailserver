@@ -12,18 +12,18 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.account.callback;
+package org.zmail.cs.account.callback;
 
 import java.util.Map;
 
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.cs.account.AttributeCallback;
-import com.zimbra.cs.account.Entry;
-import com.zimbra.cs.account.AttributeInfo;
+import org.zmail.common.service.ServiceException;
+import org.zmail.cs.account.AttributeCallback;
+import org.zmail.cs.account.Entry;
+import org.zmail.cs.account.AttributeInfo;
 
 /**
  * Callback for validating attributes that should've been declared
- * email in zimbra-attrs.xml but had been declared as string.  
+ * email in zmail-attrs.xml but had been declared as string.  
  * 
  * To avoid LDAP upgrade complication, we use this callback for
  * validating the format.  If the attr had been declared as 

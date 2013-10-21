@@ -16,7 +16,7 @@
 /*
  * Created on 2004. 7. 21.
  */
-package com.zimbra.cs.redolog.op;
+package org.zmail.cs.redolog.op;
 
 import java.io.File;
 import java.io.IOException;
@@ -30,27 +30,27 @@ import java.util.zip.GZIPInputStream;
 import javax.activation.DataSource;
 
 import com.google.common.collect.Lists;
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.common.util.ByteUtil;
-import com.zimbra.common.util.StringUtil;
-import com.zimbra.cs.mailbox.Conversation;
-import com.zimbra.cs.mailbox.DeliveryContext;
-import com.zimbra.cs.mailbox.DeliveryOptions;
-import com.zimbra.cs.mailbox.MailItem.CustomMetadata;
-import com.zimbra.cs.mailbox.MailServiceException;
-import com.zimbra.cs.mailbox.Mailbox;
-import com.zimbra.cs.mailbox.MailboxManager;
-import com.zimbra.cs.mailbox.MailboxOperation;
-import com.zimbra.cs.mailbox.OperationContext;
-import com.zimbra.cs.mailbox.calendar.IcalXmlStrMap;
-import com.zimbra.cs.mailbox.util.TagUtil;
-import com.zimbra.cs.mime.ParsedMessage;
-import com.zimbra.cs.mime.ParsedMessageOptions;
-import com.zimbra.cs.redolog.RedoException;
-import com.zimbra.cs.redolog.RedoLogInput;
-import com.zimbra.cs.redolog.RedoLogOutput;
-import com.zimbra.cs.store.Blob;
-import com.zimbra.cs.store.StoreManager;
+import org.zmail.common.service.ServiceException;
+import org.zmail.common.util.ByteUtil;
+import org.zmail.common.util.StringUtil;
+import org.zmail.cs.mailbox.Conversation;
+import org.zmail.cs.mailbox.DeliveryContext;
+import org.zmail.cs.mailbox.DeliveryOptions;
+import org.zmail.cs.mailbox.MailItem.CustomMetadata;
+import org.zmail.cs.mailbox.MailServiceException;
+import org.zmail.cs.mailbox.Mailbox;
+import org.zmail.cs.mailbox.MailboxManager;
+import org.zmail.cs.mailbox.MailboxOperation;
+import org.zmail.cs.mailbox.OperationContext;
+import org.zmail.cs.mailbox.calendar.IcalXmlStrMap;
+import org.zmail.cs.mailbox.util.TagUtil;
+import org.zmail.cs.mime.ParsedMessage;
+import org.zmail.cs.mime.ParsedMessageOptions;
+import org.zmail.cs.redolog.RedoException;
+import org.zmail.cs.redolog.RedoLogInput;
+import org.zmail.cs.redolog.RedoLogOutput;
+import org.zmail.cs.store.Blob;
+import org.zmail.cs.store.StoreManager;
 
 public class CreateMessage extends RedoableOp
 implements CreateCalendarItemPlayer, CreateCalendarItemRecorder {

@@ -12,7 +12,7 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.imap;
+package org.zmail.cs.imap;
 
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
@@ -28,13 +28,13 @@ import javax.mail.internet.MimeBodyPart;
 import javax.mail.internet.MimeMessage;
 import javax.mail.internet.MimePart;
 
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.common.util.ByteUtil;
-import com.zimbra.common.util.Pair;
-import com.zimbra.common.util.StringUtil;
-import com.zimbra.common.util.ZimbraLog;
-import com.zimbra.cs.mailbox.MailItem;
-import com.zimbra.cs.mime.Mime;
+import org.zmail.common.service.ServiceException;
+import org.zmail.common.util.ByteUtil;
+import org.zmail.common.util.Pair;
+import org.zmail.common.util.StringUtil;
+import org.zmail.common.util.ZmailLog;
+import org.zmail.cs.mailbox.MailItem;
+import org.zmail.cs.mime.Mime;
 
 class ImapPartSpecifier {
     static class BinaryDecodingException extends Exception {
@@ -339,7 +339,7 @@ class ImapPartSpecifier {
                         length = Math.max(0, mp.getSize());
                     }
                 } else {
-                    ZimbraLog.imap.debug("getting content of part; not MimeBodyPart: " + this);
+                    ZmailLog.imap.debug("getting content of part; not MimeBodyPart: " + this);
                     return ImapMessage.EMPTY_CONTENT;
                 }
             } else if (modifier.startsWith("HEADER")) {

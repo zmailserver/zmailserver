@@ -12,7 +12,7 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.qa.unittest.prov.ldap;
+package org.zmail.qa.unittest.prov.ldap;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -26,28 +26,28 @@ import org.apache.commons.httpclient.HttpClient;
 import org.apache.commons.httpclient.HttpMethod;
 import org.apache.commons.httpclient.HttpState;
 
-import com.zimbra.common.auth.ZAuthToken;
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.common.soap.Element;
-import com.zimbra.cs.account.AuthToken;
-import com.zimbra.cs.account.AuthTokenException;
-import com.zimbra.cs.account.Entry;
-import com.zimbra.cs.account.AccessManager.ViaGrant;
-import com.zimbra.cs.account.accesscontrol.GranteeType;
-import com.zimbra.cs.account.accesscontrol.Right;
-import com.zimbra.cs.account.accesscontrol.RightManager;
-import com.zimbra.cs.account.accesscontrol.RightModifier;
-import com.zimbra.cs.account.accesscontrol.TargetType;
-import com.zimbra.cs.account.accesscontrol.Rights.Admin;
-import com.zimbra.cs.account.accesscontrol.Rights.User;
+import org.zmail.common.auth.ZAuthToken;
+import org.zmail.common.service.ServiceException;
+import org.zmail.common.soap.Element;
+import org.zmail.cs.account.AuthToken;
+import org.zmail.cs.account.AuthTokenException;
+import org.zmail.cs.account.Entry;
+import org.zmail.cs.account.AccessManager.ViaGrant;
+import org.zmail.cs.account.accesscontrol.GranteeType;
+import org.zmail.cs.account.accesscontrol.Right;
+import org.zmail.cs.account.accesscontrol.RightManager;
+import org.zmail.cs.account.accesscontrol.RightModifier;
+import org.zmail.cs.account.accesscontrol.TargetType;
+import org.zmail.cs.account.accesscontrol.Rights.Admin;
+import org.zmail.cs.account.accesscontrol.Rights.User;
 
 public class ACLTestUtil {
     
     /*
-     * if not running from ZimbraServer/build.xml, do:
+     * if not running from ZmailServer/build.xml, do:
      * 
      * zmlocalconfig -e debug_running_unittest=true
-     * cp /Users/pshao/p4/main/ZimbraServer/data/unittest/ldap/rights-unittest.xml /opt/zimbra/conf/rights
+     * cp /Users/pshao/p4/main/ZmailServer/data/unittest/ldap/rights-unittest.xml /opt/zmail/conf/rights
      * 
      */
     
@@ -389,7 +389,7 @@ public class ACLTestUtil {
         }
     
         @Override
-        public boolean isZimbraUser() {
+        public boolean isZmailUser() {
             // TODO Auto-generated method stub
             return false;
         }
@@ -511,11 +511,11 @@ public class ACLTestUtil {
     
     /*
     static void installUnitTestRights() throws Exception {
-        FileUtil.copy("data/unittest/ldap/rights-unittest.xml", "/opt/zimbra/conf/rights/rights-unittest.xml");
+        FileUtil.copy("data/unittest/ldap/rights-unittest.xml", "/opt/zmail/conf/rights/rights-unittest.xml");
     }
     
     static void uninstallUnitTestRights() throws Exception {
-        FileUtil.delete(new File("/opt/zimbra/conf/rights/rights-unittest.xml"));
+        FileUtil.delete(new File("/opt/zmail/conf/rights/rights-unittest.xml"));
     }
     */
 

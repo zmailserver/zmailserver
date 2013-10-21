@@ -24,23 +24,23 @@ use List::Util qw(min);
 #############
 
 my $MYSQL = "mysql";
-my $LOGMYSQL = "/opt/zimbra/bin/logmysql";
-my $DB_USER = "zimbra";
-my $DB_PASSWORD = "zimbra";
-my $LOGGER_DB_PASSWORD = "zimbra";
-my $DATABASE = "zimbra";
-my $LOGGER_DATABASE = "zimbra_logger";
-my $ZIMBRA_HOME = $ENV{ZIMBRA_HOME} || '/opt/zimbra';
+my $LOGMYSQL = "/opt/zmail/bin/logmysql";
+my $DB_USER = "zmail";
+my $DB_PASSWORD = "zmail";
+my $LOGGER_DB_PASSWORD = "zmail";
+my $DATABASE = "zmail";
+my $LOGGER_DATABASE = "zmail_logger";
+my $ZIMBRA_HOME = $ENV{ZIMBRA_HOME} || '/opt/zmail';
 my $ZMLOCALCONFIG = "$ZIMBRA_HOME/bin/zmlocalconfig";
 my $ZMSOAP = "$ZIMBRA_HOME/bin/zmsoap";
 my $SQLLOGFH;
 
 if ($^O !~ /MSWin/i) {
-    $DB_PASSWORD = `$ZMLOCALCONFIG -s -m nokey zimbra_mysql_password`;
+    $DB_PASSWORD = `$ZMLOCALCONFIG -s -m nokey zmail_mysql_password`;
     chomp $DB_PASSWORD;
-    $DB_USER = `$ZMLOCALCONFIG -m nokey zimbra_mysql_user`;
+    $DB_USER = `$ZMLOCALCONFIG -m nokey zmail_mysql_user`;
     chomp $DB_USER;
-    $MYSQL = "/opt/zimbra/bin/mysql";
+    $MYSQL = "/opt/zmail/bin/mysql";
 }
 
 sub getSchemaVersion {
@@ -104,7 +104,7 @@ sub updateLoggerSchemaVersion($$) {
     verifyLoggerSchemaVersion($oldVersion);
 
     my $sql = <<SET_SCHEMA_VERSION_EOF;
-UPDATE zimbra_logger.config SET value = '$newVersion' WHERE name = 'db.version';
+UPDATE zmail_logger.config SET value = '$newVersion' WHERE name = 'db.version';
 SET_SCHEMA_VERSION_EOF
 
     Migrate::log("Updating logger DB schema version from $oldVersion to $newVersion.");
@@ -314,7 +314,7 @@ sub runSqlParallel(@) {
       # set an alarm in case the command hangs.
       $SIG{ALRM} = sub { &alarm_handler($array,$timeout,$quiet) };
       alarm($timeout);
-      my $data_source = "dbi:mysql:database=$DATABASE;mysql_read_default_file=/opt/zimbra/conf/my.cnf;mysql_socket=/opt/zimbra/db/mysql.sock";
+      my $data_source = "dbi:mysql:database=$DATABASE;mysql_read_default_file=/opt/zmail/conf/my.cnf;mysql_socket=/opt/zmail/db/mysql.sock";
       my $dbh;
       until ($dbh) {
         $dbh = DBI->connect($data_source, $DB_USER, $DB_PASSWORD, { PrintError => 0 }); 
@@ -402,12 +402,12 @@ sub log($) {
 sub logSql($) {
   my ($input) = @_;
   unless (defined($SQLLOGFH)) {
-    $SQLLOGFH = new FileHandle ">> /opt/zimbra/log/sqlMigration.log";
+    $SQLLOGFH = new FileHandle ">> /opt/zmail/log/sqlMigration.log";
     select $SQLLOGFH;
     $|=1;
     select STDOUT;
-    chmod 0644, "/opt/zimbra/log/sqlMigration.log";
-    `chown zimbra:zimbra /opt/zimbra/log/sqlMigration.log`;
+    chmod 0644, "/opt/zmail/log/sqlMigration.log";
+    `chown zmail:zmail /opt/zmail/log/sqlMigration.log`;
   }
   my $output = scalar(localtime()).": $input\n";
   print $SQLLOGFH $output;
@@ -421,9 +421,9 @@ sub loadOutdatedMailboxes($) {
     my @slice = splice(@acctids, 0, 50);
     Migrate::log("migrating account(s): @slice");
 
-    my $request = '<BatchRequest xmlns="urn:zimbra">';
+    my $request = '<BatchRequest xmlns="urn:zmail">';
     foreach my $acctid (@slice) {
-      $request .= "<GetMailboxRequest xmlns=\"urn:zimbraAdmin\"><mbox id=\"$acctid\"/></GetMailboxRequest>";
+      $request .= "<GetMailboxRequest xmlns=\"urn:zmailAdmin\"><mbox id=\"$acctid\"/></GetMailboxRequest>";
     }
     $request .= '</BatchRequest>';
     

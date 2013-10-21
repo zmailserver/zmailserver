@@ -12,7 +12,7 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.qa.unittest.prov.soap;
+package org.zmail.qa.unittest.prov.soap;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -24,22 +24,22 @@ import static org.junit.Assert.*;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
-import com.zimbra.common.mailbox.ContactConstants;
-import com.zimbra.common.soap.AccountConstants;
-import com.zimbra.common.soap.AdminConstants;
-import com.zimbra.common.soap.Element;
-import com.zimbra.common.soap.MailConstants;
-import com.zimbra.common.soap.SoapTransport;
-import com.zimbra.common.util.StringUtil;
-import com.zimbra.common.util.ZimbraLog;
-import com.zimbra.cs.account.GalContact;
-import com.zimbra.cs.account.Provisioning;
-import com.zimbra.cs.account.EntrySearchFilter.Operator;
-import com.zimbra.common.account.ProvisioningConstants;
-import com.zimbra.cs.account.soap.SoapProvisioning;
-import com.zimbra.cs.gal.ZimbraGalSearchBase.PredefinedSearchBase;
-import com.zimbra.qa.unittest.TestUtil;
-import com.zimbra.qa.unittest.prov.BinaryLdapData;
+import org.zmail.common.mailbox.ContactConstants;
+import org.zmail.common.soap.AccountConstants;
+import org.zmail.common.soap.AdminConstants;
+import org.zmail.common.soap.Element;
+import org.zmail.common.soap.MailConstants;
+import org.zmail.common.soap.SoapTransport;
+import org.zmail.common.util.StringUtil;
+import org.zmail.common.util.ZmailLog;
+import org.zmail.cs.account.GalContact;
+import org.zmail.cs.account.Provisioning;
+import org.zmail.cs.account.EntrySearchFilter.Operator;
+import org.zmail.common.account.ProvisioningConstants;
+import org.zmail.cs.account.soap.SoapProvisioning;
+import org.zmail.cs.gal.ZmailGalSearchBase.PredefinedSearchBase;
+import org.zmail.qa.unittest.TestUtil;
+import org.zmail.qa.unittest.prov.BinaryLdapData;
 
 public class TestSearchGal extends SoapTest {
     private static final boolean DO_CREATE_DOMAINS = true;
@@ -175,7 +175,7 @@ public class TestSearchGal extends SoapTest {
             // pagination is not supported
             assertFalse(paginationSupported);
             
-            // limit is ignored, ldap search is limited by zimbraGalMaxResults
+            // limit is ignored, ldap search is limited by zmailGalMaxResults
             // should find all objects, plus the authed user
             assertEquals(NUM_ALL_OBJECTS + 1, result.size());
         } else {
@@ -306,11 +306,11 @@ public class TestSearchGal extends SoapTest {
     throws Exception {
         Map<String, Object> attrs;
         
-        ZimbraLog.test.info("Creating domain " + domainName);
+        ZmailLog.test.info("Creating domain " + domainName);
         attrs = null;
         if (searchBase != null) {
             attrs = new HashMap<String, Object>();
-            attrs.put(Provisioning.A_zimbraGalInternalSearchBase, searchBase.name());
+            attrs.put(Provisioning.A_zmailGalInternalSearchBase, searchBase.name());
         }
         prov.createDomain(domainName, attrs);
         
@@ -334,7 +334,7 @@ public class TestSearchGal extends SoapTest {
         // create a hideInGal account
         String acctName = TestUtil.getAddress(ACCOUNT_PREFIX + "-hide-in-gal", domainName);
         attrs = new HashMap<String, Object>();
-        attrs.put(Provisioning.A_zimbraHideInGal, ProvisioningConstants.TRUE);
+        attrs.put(Provisioning.A_zmailHideInGal, ProvisioningConstants.TRUE);
         prov.createAccount(acctName, "test123", attrs);
         
         
@@ -348,7 +348,7 @@ public class TestSearchGal extends SoapTest {
         // create a hideInGal DL
         String dlName = TestUtil.getAddress(DISTRIBUTION_LIST_PREFIX + "-hide-in-gal", domainName);
         attrs = new HashMap<String, Object>();
-        attrs.put(Provisioning.A_zimbraHideInGal, ProvisioningConstants.TRUE);
+        attrs.put(Provisioning.A_zmailHideInGal, ProvisioningConstants.TRUE);
         prov.createGroup(dlName, attrs, false);
         
         
@@ -362,7 +362,7 @@ public class TestSearchGal extends SoapTest {
         // create a hideInGal dynamic group
         String dynGroupName = TestUtil.getAddress(DYNAMIC_GROUP_PREFIX + "-hide-in-gal", domainName);
         attrs = new HashMap<String, Object>();
-        attrs.put(Provisioning.A_zimbraHideInGal, ProvisioningConstants.TRUE);
+        attrs.put(Provisioning.A_zmailHideInGal, ProvisioningConstants.TRUE);
         prov.createGroup(dynGroupName, attrs, true);
         
     }

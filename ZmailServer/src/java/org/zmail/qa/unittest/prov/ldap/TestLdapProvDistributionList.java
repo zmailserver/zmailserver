@@ -12,7 +12,7 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.qa.unittest.prov.ldap;
+package org.zmail.qa.unittest.prov.ldap;
 
 import java.util.HashMap;
 import java.util.HashSet;
@@ -25,21 +25,21 @@ import org.junit.*;
 import static org.junit.Assert.*;
 
 import com.google.common.collect.Maps;
-import com.zimbra.common.account.Key;
-import com.zimbra.common.account.Key.AccountBy;
-import com.zimbra.common.account.Key.DistributionListBy;
-import com.zimbra.common.util.StringUtil;
-import com.zimbra.cs.account.Account;
-import com.zimbra.cs.account.AccountServiceException;
-import com.zimbra.cs.account.DistributionList;
-import com.zimbra.cs.account.Domain;
-import com.zimbra.cs.account.Provisioning;
-import com.zimbra.cs.account.Server;
-import com.zimbra.qa.QA.Bug;
-import com.zimbra.qa.unittest.TestUtil;
-import com.zimbra.qa.unittest.prov.Names;
-import com.zimbra.qa.unittest.prov.Verify;
-import com.zimbra.soap.admin.type.CacheEntryType;
+import org.zmail.common.account.Key;
+import org.zmail.common.account.Key.AccountBy;
+import org.zmail.common.account.Key.DistributionListBy;
+import org.zmail.common.util.StringUtil;
+import org.zmail.cs.account.Account;
+import org.zmail.cs.account.AccountServiceException;
+import org.zmail.cs.account.DistributionList;
+import org.zmail.cs.account.Domain;
+import org.zmail.cs.account.Provisioning;
+import org.zmail.cs.account.Server;
+import org.zmail.qa.QA.Bug;
+import org.zmail.qa.unittest.TestUtil;
+import org.zmail.qa.unittest.prov.Names;
+import org.zmail.qa.unittest.prov.Verify;
+import org.zmail.soap.admin.type.CacheEntryType;
 
 public class TestLdapProvDistributionList extends LdapTest {
     private static LdapProvTestUtil provUtil;
@@ -179,9 +179,9 @@ public class TestLdapProvDistributionList extends LdapTest {
         DistributionList dl = createDistributionList(DL_NAME_LOCALPART);
         String DL_ID = dl.getId();
         
-        // set zimbraPrefAllowAddressForDelegatedSender
+        // set zmailPrefAllowAddressForDelegatedSender
         Map<String, Object> attrs = Maps.newHashMap();
-        attrs.put(Provisioning.A_zimbraPrefAllowAddressForDelegatedSender, dl.getName());
+        attrs.put(Provisioning.A_zmailPrefAllowAddressForDelegatedSender, dl.getName());
         prov.modifyAttrs(dl, attrs);
         
         prov.renameDistributionList(DL_ID, DL_NEW_NAME);
@@ -190,9 +190,9 @@ public class TestLdapProvDistributionList extends LdapTest {
         getDistributionListById(DL_ID);
         getDistributionListByName(DL_NEW_NAME);
         
-        // make sure zimbraPrefAllowAddressForDelegatedSender is updated
+        // make sure zmailPrefAllowAddressForDelegatedSender is updated
         DistributionList renamedDl = prov.get(DistributionListBy.name, DL_NEW_NAME);
-        Set<String> addrsForDelegatedSender = renamedDl.getMultiAttrSet(Provisioning.A_zimbraPrefAllowAddressForDelegatedSender);
+        Set<String> addrsForDelegatedSender = renamedDl.getMultiAttrSet(Provisioning.A_zmailPrefAllowAddressForDelegatedSender);
         assertEquals(1, addrsForDelegatedSender.size());
         assertTrue(addrsForDelegatedSender.contains(DL_NEW_NAME));
         
@@ -211,9 +211,9 @@ public class TestLdapProvDistributionList extends LdapTest {
         DistributionList dl = createDistributionList(DL_NAME_LOCALPART);
         String DL_ID = dl.getId();
         
-        // set zimbraPrefAllowAddressForDelegatedSender
+        // set zmailPrefAllowAddressForDelegatedSender
         Map<String, Object> attrs = Maps.newHashMap();
-        attrs.put(Provisioning.A_zimbraPrefAllowAddressForDelegatedSender, dl.getName());
+        attrs.put(Provisioning.A_zmailPrefAllowAddressForDelegatedSender, dl.getName());
         prov.modifyAttrs(dl, attrs);
         
         prov.renameDistributionList(DL_ID, DL_NEW_NAME);
@@ -221,9 +221,9 @@ public class TestLdapProvDistributionList extends LdapTest {
         getDistributionListById(DL_ID);
         getDistributionListByName(DL_NEW_NAME);
         
-        // make sure zimbraPrefAllowAddressForDelegatedSender is updated
+        // make sure zmailPrefAllowAddressForDelegatedSender is updated
         DistributionList renamedDl = prov.get(DistributionListBy.name, DL_NEW_NAME);
-        Set<String> addrsForDelegatedSender = renamedDl.getMultiAttrSet(Provisioning.A_zimbraPrefAllowAddressForDelegatedSender);
+        Set<String> addrsForDelegatedSender = renamedDl.getMultiAttrSet(Provisioning.A_zmailPrefAllowAddressForDelegatedSender);
         assertEquals(1, addrsForDelegatedSender.size());
         assertTrue(addrsForDelegatedSender.contains(DL_NEW_NAME));
         
@@ -241,8 +241,8 @@ public class TestLdapProvDistributionList extends LdapTest {
         
         Map<String, Object> attrs = new HashMap<String, Object>();
         // add initial members
-        StringUtil.addToMultiMap(attrs, Provisioning.A_zimbraMailForwardingAddress, MEMBER_1);
-        StringUtil.addToMultiMap(attrs, Provisioning.A_zimbraMailForwardingAddress, MEMBER_2);
+        StringUtil.addToMultiMap(attrs, Provisioning.A_zmailMailForwardingAddress, MEMBER_1);
+        StringUtil.addToMultiMap(attrs, Provisioning.A_zmailMailForwardingAddress, MEMBER_2);
         
         DistributionList dl = createDistributionList(DL_NAME_LOCALPART, attrs);
         
@@ -268,10 +268,10 @@ public class TestLdapProvDistributionList extends LdapTest {
         
         Map<String, Object> attrs = new HashMap<String, Object>();
         // add initial members
-        StringUtil.addToMultiMap(attrs, Provisioning.A_zimbraMailForwardingAddress, MEMBER_1);
-        StringUtil.addToMultiMap(attrs, Provisioning.A_zimbraMailForwardingAddress, MEMBER_2);
-        StringUtil.addToMultiMap(attrs, Provisioning.A_zimbraMailForwardingAddress, MEMBER_3);
-        StringUtil.addToMultiMap(attrs, Provisioning.A_zimbraMailForwardingAddress, MEMBER_4);
+        StringUtil.addToMultiMap(attrs, Provisioning.A_zmailMailForwardingAddress, MEMBER_1);
+        StringUtil.addToMultiMap(attrs, Provisioning.A_zmailMailForwardingAddress, MEMBER_2);
+        StringUtil.addToMultiMap(attrs, Provisioning.A_zmailMailForwardingAddress, MEMBER_3);
+        StringUtil.addToMultiMap(attrs, Provisioning.A_zmailMailForwardingAddress, MEMBER_4);
         
         DistributionList dl = createDistributionList(DL_NAME_LOCALPART, attrs);
         
@@ -461,7 +461,7 @@ public class TestLdapProvDistributionList extends LdapTest {
         
         // group2.addMembers(new String[]{group2.getName()}); // no longer allowed in LdapProvisioning
         Map<String, Object> attrs = Maps.newHashMap();
-        attrs.put("+" + Provisioning.A_zimbraMailForwardingAddress, group2.getName());
+        attrs.put("+" + Provisioning.A_zmailMailForwardingAddress, group2.getName());
         prov.modifyAttrs(group2, attrs);// modifyAttrs directly
         
         group1.addMembers(new String[]{acct1.getName(), acct2.getName()});

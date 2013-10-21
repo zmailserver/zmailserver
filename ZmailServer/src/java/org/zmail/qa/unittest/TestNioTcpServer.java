@@ -13,11 +13,11 @@
  * ***** END LICENSE BLOCK *****
  */
 
-package com.zimbra.qa.unittest;
+package org.zmail.qa.unittest;
 
-import com.zimbra.common.util.TaskUtil;
-import com.zimbra.cs.server.NioUtil;
-import com.zimbra.cs.imap.LiteralInfo;
+import org.zmail.common.util.TaskUtil;
+import org.zmail.cs.server.NioUtil;
+import org.zmail.cs.imap.LiteralInfo;
 import junit.framework.TestCase;
 
 import java.nio.ByteBuffer;

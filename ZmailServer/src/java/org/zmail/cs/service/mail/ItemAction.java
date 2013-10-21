@@ -12,7 +12,7 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.service.mail;
+package org.zmail.cs.service.mail;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -20,37 +20,37 @@ import java.util.List;
 import java.util.Map;
 
 import com.google.common.base.Joiner;
-import com.zimbra.client.ZFolder;
-import com.zimbra.client.ZMailbox;
-import com.zimbra.client.ZMountpoint;
-import com.zimbra.common.account.Key;
-import com.zimbra.common.auth.ZAuthToken;
-import com.zimbra.common.mailbox.Color;
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.common.soap.Element;
-import com.zimbra.common.soap.MailConstants;
-import com.zimbra.common.soap.SoapProtocol;
-import com.zimbra.common.util.ArrayUtil;
-import com.zimbra.common.util.ZimbraLog;
-import com.zimbra.cs.account.Account;
-import com.zimbra.cs.account.AuthToken;
-import com.zimbra.cs.account.Provisioning;
-import com.zimbra.cs.mailbox.Flag;
-import com.zimbra.cs.mailbox.Folder;
-import com.zimbra.cs.mailbox.MailItem;
-import com.zimbra.cs.mailbox.MailItem.TargetConstraint;
-import com.zimbra.cs.mailbox.MailServiceException;
-import com.zimbra.cs.mailbox.Mailbox;
-import com.zimbra.cs.mailbox.MailboxManager;
-import com.zimbra.cs.mailbox.Mountpoint;
-import com.zimbra.cs.mailbox.OperationContext;
-import com.zimbra.cs.mailbox.util.TagUtil;
-import com.zimbra.cs.service.util.ItemId;
-import com.zimbra.cs.session.Session;
-import com.zimbra.cs.session.SoapSession;
-import com.zimbra.cs.util.AccountUtil;
-import com.zimbra.soap.SoapEngine;
-import com.zimbra.soap.ZimbraSoapContext;
+import org.zmail.client.ZFolder;
+import org.zmail.client.ZMailbox;
+import org.zmail.client.ZMountpoint;
+import org.zmail.common.account.Key;
+import org.zmail.common.auth.ZAuthToken;
+import org.zmail.common.mailbox.Color;
+import org.zmail.common.service.ServiceException;
+import org.zmail.common.soap.Element;
+import org.zmail.common.soap.MailConstants;
+import org.zmail.common.soap.SoapProtocol;
+import org.zmail.common.util.ArrayUtil;
+import org.zmail.common.util.ZmailLog;
+import org.zmail.cs.account.Account;
+import org.zmail.cs.account.AuthToken;
+import org.zmail.cs.account.Provisioning;
+import org.zmail.cs.mailbox.Flag;
+import org.zmail.cs.mailbox.Folder;
+import org.zmail.cs.mailbox.MailItem;
+import org.zmail.cs.mailbox.MailItem.TargetConstraint;
+import org.zmail.cs.mailbox.MailServiceException;
+import org.zmail.cs.mailbox.Mailbox;
+import org.zmail.cs.mailbox.MailboxManager;
+import org.zmail.cs.mailbox.Mountpoint;
+import org.zmail.cs.mailbox.OperationContext;
+import org.zmail.cs.mailbox.util.TagUtil;
+import org.zmail.cs.service.util.ItemId;
+import org.zmail.cs.session.Session;
+import org.zmail.cs.session.SoapSession;
+import org.zmail.cs.util.AccountUtil;
+import org.zmail.soap.SoapEngine;
+import org.zmail.soap.ZmailSoapContext;
 
 /**
  * @since May 29, 2005
@@ -81,7 +81,7 @@ public class ItemAction extends MailDocumentHandler {
 
     @Override
     public Element handle(Element request, Map<String, Object> context) throws ServiceException {
-        ZimbraSoapContext zsc = getZimbraSoapContext(context);
+        ZmailSoapContext zsc = getZmailSoapContext(context);
 
         Element action = request.getElement(MailConstants.E_ACTION);
         String operation = action.getAttribute(MailConstants.A_OPERATION).toLowerCase();
@@ -103,7 +103,7 @@ public class ItemAction extends MailDocumentHandler {
     protected String handleCommon(Map<String, Object> context, Element request, String opAttr, MailItem.Type type)
     throws ServiceException {
         Element action = request.getElement(MailConstants.E_ACTION);
-        ZimbraSoapContext zsc = getZimbraSoapContext(context);
+        ZmailSoapContext zsc = getZmailSoapContext(context);
         Mailbox mbox = getRequestedMailbox(zsc);
         OperationContext octxt = getOperationContext(zsc, context);
         SoapProtocol responseProto = zsc.getResponseProtocol();
@@ -229,7 +229,7 @@ public class ItemAction extends MailDocumentHandler {
         }
     }
 
-    private Account forceRemoteSession(ZimbraSoapContext zsc, Map<String, Object> context, OperationContext octxt, String op, Element action)
+    private Account forceRemoteSession(ZmailSoapContext zsc, Map<String, Object> context, OperationContext octxt, String op, Element action)
     throws ServiceException {
         // only proxying notification from the user's home-server master session
         if (!zsc.isNotificationEnabled()) {
@@ -259,7 +259,7 @@ public class ItemAction extends MailDocumentHandler {
         Account owner = null;
         int hopCount = 0;
         ZAuthToken zat = null;
-        while (hopCount < ZimbraSoapContext.MAX_HOP_COUNT) {
+        while (hopCount < ZmailSoapContext.MAX_HOP_COUNT) {
             owner = Provisioning.getInstance().getAccountById(iidFolder.getAccountId());
             if (Provisioning.onLocalServer(owner)) {
                 try {
@@ -290,7 +290,7 @@ public class ItemAction extends MailDocumentHandler {
             }
             hopCount++;
         }
-        if (hopCount >= ZimbraSoapContext.MAX_HOP_COUNT) {
+        if (hopCount >= ZmailSoapContext.MAX_HOP_COUNT) {
             throw MailServiceException.TOO_MANY_HOPS(iidRequested);
         }
 
@@ -313,7 +313,7 @@ public class ItemAction extends MailDocumentHandler {
         }
     }
 
-    static void partitionItems(ZimbraSoapContext zsc, String ids, List<Integer> local, Map<String, StringBuilder> remote)
+    static void partitionItems(ZmailSoapContext zsc, String ids, List<Integer> local, Map<String, StringBuilder> remote)
     throws ServiceException {
         Account acct = getRequestedAccount(zsc);
         for (String target : ids.split(",")) {
@@ -336,7 +336,7 @@ public class ItemAction extends MailDocumentHandler {
         String folderStr = action.getAttribute(MailConstants.A_FOLDER, null);
         if (folderStr != null) {
             // fully qualify the folder ID (if any) in order for proxying to work
-            ItemId iidFolder = new ItemId(folderStr, getZimbraSoapContext(context));
+            ItemId iidFolder = new ItemId(folderStr, getZmailSoapContext(context));
             action.addAttribute(MailConstants.A_FOLDER, iidFolder.toString());
         }
 
@@ -353,7 +353,7 @@ public class ItemAction extends MailDocumentHandler {
                 String completed = response.getElement(MailConstants.E_ACTION).getAttribute(MailConstants.A_ID);
                 successes.append(completed.length() > 0 && successes.length() > 0 ? "," : "").append(completed);
             } catch (ServiceException e) {
-                ZimbraLog.misc.warn("could not extract ItemAction successes from proxied response", e);
+                ZmailLog.misc.warn("could not extract ItemAction successes from proxied response", e);
             }
         }
 

@@ -19,17 +19,17 @@
  * TODO To change the template for this generated file go to
  * Window - Preferences - Java - Code Generation - Code and Comments
  */
-package com.zimbra.cs.redolog.logger;
+package org.zmail.cs.redolog.logger;
 
 import java.io.EOFException;
 import java.io.File;
 import java.io.IOException;
 import java.io.RandomAccessFile;
 
-import com.zimbra.common.util.ZimbraLog;
+import org.zmail.common.util.ZmailLog;
 
-import com.zimbra.cs.redolog.RedoLogInput;
-import com.zimbra.cs.redolog.op.RedoableOp;
+import org.zmail.cs.redolog.RedoLogInput;
+import org.zmail.cs.redolog.op.RedoableOp;
 
 /**
  * @author jhahm
@@ -99,7 +99,7 @@ public class FileLogReader {
                     String msg = String.format(
                             "Skipped bad bytes in redolog %s; resuming at offset 0x%08x after skipping %d bytes",
                             mFile.getAbsolutePath(), currPos, currPos - pos);
-                    ZimbraLog.redolog.warn(msg);
+                    ZmailLog.redolog.warn(msg);
                 }
                 return op;
             } catch (IOException e) {
@@ -109,7 +109,7 @@ public class FileLogReader {
                     String msg = String.format(
                             "Error while parsing redolog %s, offset=0x%08x; bad bytes will be skipped",
                             mFile.getAbsolutePath(), pos);
-                    ZimbraLog.redolog.warn(msg, e);
+                    ZmailLog.redolog.warn(msg, e);
                 }
             }
             first = false;

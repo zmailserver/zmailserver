@@ -12,7 +12,7 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.service.account;
+package org.zmail.cs.service.account;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -29,33 +29,33 @@ import javax.mail.internet.MimeMultipart;
 
 import com.google.common.collect.Lists;
 import com.sun.mail.smtp.SMTPMessage;
-import com.zimbra.common.account.ZAttrProvisioning.DistributionListSubscriptionPolicy;
-import com.zimbra.common.account.ZAttrProvisioning.DistributionListUnsubscriptionPolicy;
-import com.zimbra.common.mime.MimeConstants;
-import com.zimbra.common.mime.shim.JavaMailInternetAddress;
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.common.soap.AccountConstants;
-import com.zimbra.common.soap.Element;
-import com.zimbra.common.soap.MailConstants;
-import com.zimbra.common.util.L10nUtil;
-import com.zimbra.common.util.L10nUtil.MsgKey;
-import com.zimbra.common.util.ZimbraLog;
-import com.zimbra.common.zmime.ZMimeBodyPart;
-import com.zimbra.common.zmime.ZMimeMultipart;
-import com.zimbra.cs.account.Account;
-import com.zimbra.cs.account.Group;
-import com.zimbra.cs.account.Provisioning;
-import com.zimbra.cs.util.AccountUtil;
-import com.zimbra.cs.util.JMSession;
-import com.zimbra.soap.ZimbraSoapContext;
-import com.zimbra.soap.account.type.DistributionListSubscribeOp;
-import com.zimbra.soap.account.type.DistributionListSubscribeStatus;
+import org.zmail.common.account.ZAttrProvisioning.DistributionListSubscriptionPolicy;
+import org.zmail.common.account.ZAttrProvisioning.DistributionListUnsubscriptionPolicy;
+import org.zmail.common.mime.MimeConstants;
+import org.zmail.common.mime.shim.JavaMailInternetAddress;
+import org.zmail.common.service.ServiceException;
+import org.zmail.common.soap.AccountConstants;
+import org.zmail.common.soap.Element;
+import org.zmail.common.soap.MailConstants;
+import org.zmail.common.util.L10nUtil;
+import org.zmail.common.util.L10nUtil.MsgKey;
+import org.zmail.common.util.ZmailLog;
+import org.zmail.common.zmime.ZMimeBodyPart;
+import org.zmail.common.zmime.ZMimeMultipart;
+import org.zmail.cs.account.Account;
+import org.zmail.cs.account.Group;
+import org.zmail.cs.account.Provisioning;
+import org.zmail.cs.util.AccountUtil;
+import org.zmail.cs.util.JMSession;
+import org.zmail.soap.ZmailSoapContext;
+import org.zmail.soap.account.type.DistributionListSubscribeOp;
+import org.zmail.soap.account.type.DistributionListSubscribeStatus;
 
 public class SubscribeDistributionList extends DistributionListDocumentHandler {
 
     @Override
     public Element handle(Element request, Map<String, Object> context) throws ServiceException {
-        ZimbraSoapContext zsc = getZimbraSoapContext(context);
+        ZmailSoapContext zsc = getZmailSoapContext(context);
         Provisioning prov = Provisioning.getInstance();
         Account acct = getRequestedAccount(zsc);
         
@@ -133,7 +133,7 @@ public class SubscribeDistributionList extends DistributionListDocumentHandler {
             }
 
             if (accepted) {
-                ZimbraLog.security.info(ZimbraLog.encodeAttrs(
+                ZmailLog.security.info(ZmailLog.encodeAttrs(
                             new String[] {"cmd", "SubscribeDistributionList","name", group.getName(),
                             "op", op.name(),
                             "member", Arrays.deepToString(members)}));
@@ -172,7 +172,7 @@ public class SubscribeDistributionList extends DistributionListDocumentHandler {
                 Address fromAddr = AccountUtil.getFriendlyEmailAddress(requestingAcct);
 
                 Address replyToAddr = fromAddr;
-                String replyTo = requestingAcct.getAttr(Provisioning.A_zimbraPrefReplyToAddress);
+                String replyTo = requestingAcct.getAttr(Provisioning.A_zmailPrefReplyToAddress);
                 if (replyTo != null) {
                     replyToAddr = new JavaMailInternetAddress(replyTo);
                 }
@@ -203,7 +203,7 @@ public class SubscribeDistributionList extends DistributionListDocumentHandler {
                 buildContentAndSend(out, locale, "group subscription request");
 
             } catch (MessagingException e) {
-                ZimbraLog.account.warn("send share info notification failed, rcpt='" +
+                ZmailLog.account.warn("send share info notification failed, rcpt='" +
                         Arrays.deepToString(owners) +"'", e);
             }
         }
@@ -262,7 +262,7 @@ public class SubscribeDistributionList extends DistributionListDocumentHandler {
         private String xmlPart(Locale locale) {
             StringBuilder sb = new StringBuilder();
 
-            final String URI = "urn:zimbraDLSubscription";
+            final String URI = "urn:zmailDLSubscription";
             final String VERSION = "0.1";
 
             // make notes xml friendly

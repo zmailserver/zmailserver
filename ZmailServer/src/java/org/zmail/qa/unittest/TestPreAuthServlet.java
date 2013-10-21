@@ -12,7 +12,7 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.qa.unittest;
+package org.zmail.qa.unittest;
 
 import java.io.IOException;
 import java.util.HashMap;
@@ -23,15 +23,15 @@ import org.apache.commons.httpclient.HttpException;
 import org.apache.commons.httpclient.HttpMethod;
 import org.apache.commons.httpclient.methods.GetMethod;
 
-import com.zimbra.common.httpclient.HttpClientUtil;
-import com.zimbra.cs.account.Account;
-import com.zimbra.cs.account.Domain;
-import com.zimbra.cs.account.PreAuthKey;
-import com.zimbra.cs.account.Provisioning;
-import com.zimbra.common.account.Key;
-import com.zimbra.common.account.Key.AccountBy;
-import com.zimbra.cs.account.Server;
-import com.zimbra.cs.ldap.LdapConstants;
+import org.zmail.common.httpclient.HttpClientUtil;
+import org.zmail.cs.account.Account;
+import org.zmail.cs.account.Domain;
+import org.zmail.cs.account.PreAuthKey;
+import org.zmail.cs.account.Provisioning;
+import org.zmail.common.account.Key;
+import org.zmail.common.account.Key.AccountBy;
+import org.zmail.cs.account.Server;
+import org.zmail.cs.ldap.LdapConstants;
 
 import junit.framework.TestCase;
 
@@ -42,7 +42,7 @@ public class TestPreAuthServlet extends TestCase {
         Domain domain = Provisioning.getInstance().get(Key.DomainBy.name, domainName);
         String preAuthKey = PreAuthKey.generateRandomPreAuthKey();
         Map<String, Object> attrs = new HashMap<String, Object>();
-        attrs.put(Provisioning.A_zimbraPreAuthKey, preAuthKey);
+        attrs.put(Provisioning.A_zmailPreAuthKey, preAuthKey);
         Provisioning.getInstance().modifyAttrs(domain, attrs);
         return preAuthKey;
     }
@@ -90,9 +90,9 @@ public class TestPreAuthServlet extends TestCase {
         
         String protoHostPort;
         if (admin)
-            protoHostPort = "https://localhost:" + localServer.getIntAttr(Provisioning.A_zimbraAdminPort, 0);
+            protoHostPort = "https://localhost:" + localServer.getIntAttr(Provisioning.A_zmailAdminPort, 0);
         else
-            protoHostPort = "http://localhost:" + localServer.getIntAttr(Provisioning.A_zimbraMailPort, 0);
+            protoHostPort = "http://localhost:" + localServer.getIntAttr(Provisioning.A_zmailMailPort, 0);
         
         String url = protoHostPort + preAuthUrl;
         
@@ -150,7 +150,7 @@ public class TestPreAuthServlet extends TestCase {
         Provisioning prov = Provisioning.getInstance();
         Server server = prov.getLocalServer();
         Map<String, Object> attrs = new HashMap<String, Object>();
-        attrs.put(Provisioning.A_zimbraMailReferMode, "always");
+        attrs.put(Provisioning.A_zmailMailReferMode, "always");
         prov.modifyAttrs(server, attrs);
         
         doPreAuth("user1", false, false);
@@ -158,7 +158,7 @@ public class TestPreAuthServlet extends TestCase {
         doPreAuth("domainadmin", true, false);
         
         // set refer mode back
-        attrs.put(Provisioning.A_zimbraMailReferMode, "wronghost");
+        attrs.put(Provisioning.A_zmailMailReferMode, "wronghost");
         prov.modifyAttrs(server, attrs);
         */
     }
@@ -167,11 +167,11 @@ public class TestPreAuthServlet extends TestCase {
         Account acct = Provisioning.getInstance().get(AccountBy.name, user);
         
         System.out.println();
-        System.out.println(Provisioning.A_zimbraAccountStatus + ": " + acct.getAttr(Provisioning.A_zimbraAccountStatus));
-        System.out.println(Provisioning.A_zimbraPasswordLockoutLockedTime + ": " + acct.getAttr(Provisioning.A_zimbraPasswordLockoutLockedTime));
+        System.out.println(Provisioning.A_zmailAccountStatus + ": " + acct.getAttr(Provisioning.A_zmailAccountStatus));
+        System.out.println(Provisioning.A_zmailPasswordLockoutLockedTime + ": " + acct.getAttr(Provisioning.A_zmailPasswordLockoutLockedTime));
 
-        System.out.println(Provisioning.A_zimbraPasswordLockoutFailureTime + ": ");
-        String[] failureTime = acct.getMultiAttr(Provisioning.A_zimbraPasswordLockoutFailureTime);
+        System.out.println(Provisioning.A_zmailPasswordLockoutFailureTime + ": ");
+        String[] failureTime = acct.getMultiAttr(Provisioning.A_zmailPasswordLockoutFailureTime);
         for (String ft : failureTime)
             System.out.println("    " + ft);
         
@@ -189,16 +189,16 @@ public class TestPreAuthServlet extends TestCase {
         int lockoutAfterNumFailures = 3;
         
         // setup lockout config attrs
-        attrs.put(Provisioning.A_zimbraPasswordLockoutEnabled, LdapConstants.LDAP_TRUE);
-        attrs.put(Provisioning.A_zimbraPasswordLockoutDuration, "1m");
-        attrs.put(Provisioning.A_zimbraPasswordLockoutMaxFailures, lockoutAfterNumFailures+"");
-        attrs.put(Provisioning.A_zimbraPasswordLockoutFailureLifetime, "30s");
+        attrs.put(Provisioning.A_zmailPasswordLockoutEnabled, LdapConstants.LDAP_TRUE);
+        attrs.put(Provisioning.A_zmailPasswordLockoutDuration, "1m");
+        attrs.put(Provisioning.A_zmailPasswordLockoutMaxFailures, lockoutAfterNumFailures+"");
+        attrs.put(Provisioning.A_zmailPasswordLockoutFailureLifetime, "30s");
         
         // put the account in active mode, clean all lockout attrs that might have been set 
         // in previous test
-        attrs.put(Provisioning.A_zimbraAccountStatus, "active");
-        attrs.put(Provisioning.A_zimbraPasswordLockoutLockedTime, "");
-        attrs.put(Provisioning.A_zimbraPasswordLockoutFailureTime, "");
+        attrs.put(Provisioning.A_zmailAccountStatus, "active");
+        attrs.put(Provisioning.A_zmailPasswordLockoutLockedTime, "");
+        attrs.put(Provisioning.A_zmailPasswordLockoutFailureTime, "");
         
         prov.modifyAttrs(acct, attrs);
         
@@ -216,26 +216,26 @@ public class TestPreAuthServlet extends TestCase {
             System.out.println("\n\n");
             
             if (i >= lockoutAfterNumFailures-1)
-                assertEquals("lockout", a.getAttr(Provisioning.A_zimbraAccountStatus));
+                assertEquals("lockout", a.getAttr(Provisioning.A_zmailAccountStatus));
             else
-                assertEquals("active", a.getAttr(Provisioning.A_zimbraAccountStatus));
+                assertEquals("active", a.getAttr(Provisioning.A_zmailAccountStatus));
             
             // sleep two seconds
             Thread.sleep(2000);
         }
         
         /*
-        zimbraPasswordLockoutDuration: 3m
-        zimbraPasswordLockoutEnabled: TRUE
-        zimbraPasswordLockoutFailureLifetime: 1m
-        zimbraPasswordLockoutMaxFailures: 5
+        zmailPasswordLockoutDuration: 3m
+        zmailPasswordLockoutEnabled: TRUE
+        zmailPasswordLockoutFailureLifetime: 1m
+        zmailPasswordLockoutMaxFailures: 5
 
-        <attr id="378" name="zimbraPasswordLockoutEnabled" type="boolean" cardinality="single" optionalIn="account,cos" flags="accountInherited,domainAdminModifiable">
-        <attr id="379" name="zimbraPasswordLockoutDuration" type="duration" cardinality="single" optionalIn="account,cos" flags="accountInherited,domainAdminModifiable">
-        <attr id="380" name="zimbraPasswordLockoutMaxFailures" type="integer" cardinality="single" optionalIn="account,cos" flags="accountInherited,domainAdminModifiable">
-        <attr id="381" name="zimbraPasswordLockoutFailureLifetime" type="duration" cardinality="single" optionalIn="account,cos" flags="accountInherited,domainAdminModifiable">
-        <attr id="382" name="zimbraPasswordLockoutLockedTime" type="gentime" cardinality="single" optionalIn="account" flags="domainAdminModifiable">
-        <attr id="383" name="zimbraPasswordLockoutFailureTime" type="gentime" cardinality="multi" optionalIn="account" flags="domainAdminModifiable">
+        <attr id="378" name="zmailPasswordLockoutEnabled" type="boolean" cardinality="single" optionalIn="account,cos" flags="accountInherited,domainAdminModifiable">
+        <attr id="379" name="zmailPasswordLockoutDuration" type="duration" cardinality="single" optionalIn="account,cos" flags="accountInherited,domainAdminModifiable">
+        <attr id="380" name="zmailPasswordLockoutMaxFailures" type="integer" cardinality="single" optionalIn="account,cos" flags="accountInherited,domainAdminModifiable">
+        <attr id="381" name="zmailPasswordLockoutFailureLifetime" type="duration" cardinality="single" optionalIn="account,cos" flags="accountInherited,domainAdminModifiable">
+        <attr id="382" name="zmailPasswordLockoutLockedTime" type="gentime" cardinality="single" optionalIn="account" flags="domainAdminModifiable">
+        <attr id="383" name="zmailPasswordLockoutFailureTime" type="gentime" cardinality="multi" optionalIn="account" flags="domainAdminModifiable">
         */
     }
     

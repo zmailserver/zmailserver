@@ -12,7 +12,7 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.mailbox;
+package org.zmail.cs.mailbox;
 
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
@@ -27,22 +27,22 @@ import javax.mail.internet.MimeMessage;
 import com.google.common.base.Objects;
 import com.google.common.base.Strings;
 import com.google.common.collect.Lists;
-import com.zimbra.common.account.ZAttrProvisioning.MailThreadingAlgorithm;
-import com.zimbra.common.localconfig.DebugConfig;
-import com.zimbra.common.mime.HeaderUtils;
-import com.zimbra.common.mime.MimeHeader;
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.common.util.ByteUtil;
-import com.zimbra.common.util.Constants;
-import com.zimbra.common.util.ZimbraLog;
-import com.zimbra.cs.account.Account;
-import com.zimbra.cs.account.Provisioning;
-import com.zimbra.cs.db.DbMailItem;
-import com.zimbra.cs.mime.Mime;
-import com.zimbra.cs.mime.ParsedMessage;
+import org.zmail.common.account.ZAttrProvisioning.MailThreadingAlgorithm;
+import org.zmail.common.localconfig.DebugConfig;
+import org.zmail.common.mime.HeaderUtils;
+import org.zmail.common.mime.MimeHeader;
+import org.zmail.common.service.ServiceException;
+import org.zmail.common.util.ByteUtil;
+import org.zmail.common.util.Constants;
+import org.zmail.common.util.ZmailLog;
+import org.zmail.cs.account.Account;
+import org.zmail.cs.account.Provisioning;
+import org.zmail.cs.db.DbMailItem;
+import org.zmail.cs.mime.Mime;
+import org.zmail.cs.mime.ParsedMessage;
 
 /** Manages message threading into {@link Conversation}s based on the {@link
- *  Account} attribute {@link Provisioning#A_zimbraMailThreadingAlgorithm}.
+ *  Account} attribute {@link Provisioning#A_zmailMailThreadingAlgorithm}.
  *  <p>
  *  If their threading mode is {@link MailThreadingAlgorithm#none}, no
  *  conversation threading is performed.
@@ -93,7 +93,7 @@ public final class Threader {
      *  Threading can be disabled on a system-wide basis via the localconfig
      *  key {@code debug_disable_conversation}.  If threading has not been
      *  disabled, the threading mode is retrieved from the {@link Account}
-     *  attribute {@link Provisioning#A_zimbraMailThreadingAlgorithm}.
+     *  attribute {@link Provisioning#A_zmailMailThreadingAlgorithm}.
      *  If this attribute is unset, we default to {@link
      *  MailThreadingAlgorithm#references}.
      * @see DebugConfig#disableConversation */
@@ -219,7 +219,7 @@ public final class Threader {
 
             byte[] tindex = HeaderUtils.decodeB2047(tidxHdr.trim());
             if (tindex.length % 5 != 2) {
-                ZimbraLog.mailbox.debug("  ignoring Thread-Index of decoded length %d", tindex.length);
+                ZmailLog.mailbox.debug("  ignoring Thread-Index of decoded length %d", tindex.length);
                 return null;
             }
             return tindex;
@@ -265,7 +265,7 @@ public final class Threader {
             if (mode.isNone()) {
                 return Collections.emptyList();
             }
-            ZimbraLog.mailbox.debug("  threading message \"%s\" (%s)", pm.getSubject(), pm.getMessageID());
+            ZmailLog.mailbox.debug("  threading message \"%s\" (%s)", pm.getSubject(), pm.getMessageID());
 
             List<Conversation> matches = Collections.emptyList();
             if (!mode.isSubject()) {
@@ -313,10 +313,10 @@ public final class Threader {
         if (refHashes == null || refHashes.isEmpty()) {
             return Collections.emptyList();
         }
-        ZimbraLog.mailbox.debug("  lookup by references (%s): %s", mode, refHashes);
+        ZmailLog.mailbox.debug("  lookup by references (%s): %s", mode, refHashes);
         List<MailItem.UnderlyingData> dlist = DbMailItem.getByHashes(mbox, refHashes);
         if (dlist == null || dlist.isEmpty()) {
-            ZimbraLog.mailbox.debug("  no reference matches found");
+            ZmailLog.mailbox.debug("  no reference matches found");
             return Collections.emptyList();
         }
 
@@ -328,14 +328,14 @@ public final class Threader {
                 matches.add((Conversation) mbox.getMessage(data).getParent());
             }
         }
-        ZimbraLog.mailbox.debug("  found %d reference match(es)", matches.size());
+        ZmailLog.mailbox.debug("  found %d reference match(es)", matches.size());
 
         if (mode.isSubjrefs()) {
             // constrain the matches to those with the same normalized subject
             for (int i = matches.size() - 1; i >= 0; i--) {
                 Conversation hit = matches.get(i);
                 if (!pm.getNormalizedSubject().equals(hit.getNormalizedSubject())) {
-                    ZimbraLog.mailbox.debug("  dropping one reference match due to non-matching subjects");
+                    ZmailLog.mailbox.debug("  dropping one reference match due to non-matching subjects");
                     matches.remove(i);
                     // need to trim refHashes so as not to overwrite the hashes that mapped to the other subject's thread
                     // FIXME: this trimming may be a little too aggressive, may miss some out-of-order delivery cases
@@ -343,7 +343,7 @@ public final class Threader {
                 }
             }
             if (matches.isEmpty()) {
-                ZimbraLog.mailbox.debug("  no valid reference matches found");
+                ZmailLog.mailbox.debug("  no valid reference matches found");
             }
         }
         assert matches != null;
@@ -378,26 +378,26 @@ public final class Threader {
             return null;
         }
 
-        ZimbraLog.mailbox.debug("  lookup by subject (%s): %s", mode, pm.getNormalizedSubject());
+        ZmailLog.mailbox.debug("  lookup by subject (%s): %s", mode, pm.getNormalizedSubject());
         Conversation conv = mbox.getConversationByHash(subjHash);
         if (conv == null) {
-            ZimbraLog.mailbox.debug("  no subject matches found");
+            ZmailLog.mailbox.debug("  no subject matches found");
             return Collections.emptyList();
         }
 
-        ZimbraLog.mailbox.debug("  found conversation %d for subject hash: %s", conv.getId(), subjHash);
+        ZmailLog.mailbox.debug("  found conversation %d for subject hash: %s", conv.getId(), subjHash);
 
-        // the caller can specify the received date via ParsedMessge constructor or X-Zimbra-Received header
+        // the caller can specify the received date via ParsedMessge constructor or X-Zmail-Received header
         long window = pm.isReply() ? CONVERSATION_REPLY_WINDOW : CONVERSATION_NONREPLY_WINDOW;
         if (pm.getReceivedDate() > conv.getDate() + window) {
             // if the last message in the conv was more than 1 month ago, it's probably not related...
-            ZimbraLog.mailbox.debug("  but rejected it because it's too old");
+            ZmailLog.mailbox.debug("  but rejected it because it's too old");
             return Collections.emptyList();
         }
 
         if (!pm.isReply() && conv.getSize() > CONVERSATION_NONREPLY_SIZE_LIMIT) {
             // put a cap on the number of non-reply messages accumulating in a conversation
-            ZimbraLog.mailbox.debug("  but rejected it because it's too big to add a non-reply");
+            ZmailLog.mailbox.debug("  but rejected it because it's too big to add a non-reply");
             return Collections.emptyList();
         }
 
@@ -435,7 +435,7 @@ public final class Threader {
     void changeThreadingTargets(Message msg, Conversation conv) throws ServiceException {
         if (conv != null && msg != null && isEnabled() && !mode.isSubject()) {
             DbMailItem.changeOpenTargets(msg, conv.getId());
-            ZimbraLog.mailbox.debug("  transferred hashes from message %d to conv %d", msg.getId(), conv.getId());
+            ZmailLog.mailbox.debug("  transferred hashes from message %d to conv %d", msg.getId(), conv.getId());
         }
     }
 

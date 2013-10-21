@@ -12,7 +12,7 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.mime;
+package org.zmail.cs.mime;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -36,33 +36,33 @@ import javax.mail.util.SharedByteArrayInputStream;
 import org.json.JSONException;
 
 import com.google.common.base.Strings;
-import com.zimbra.common.localconfig.DebugConfig;
-import com.zimbra.common.mailbox.ContactConstants;
-import com.zimbra.common.mime.ContentDisposition;
-import com.zimbra.common.mime.MimeConstants;
-import com.zimbra.common.mime.MimeDetect;
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.common.util.ByteUtil;
-import com.zimbra.common.util.CalculatorStream;
-import com.zimbra.common.util.StringUtil;
-import com.zimbra.common.util.ZimbraLog;
-import com.zimbra.common.zmime.ZMimeBodyPart;
-import com.zimbra.common.zmime.ZMimeMultipart;
-import com.zimbra.cs.account.Account;
-import com.zimbra.cs.convert.ConversionException;
-import com.zimbra.cs.index.IndexDocument;
-import com.zimbra.cs.index.LuceneFields;
-import com.zimbra.cs.index.analysis.FieldTokenStream;
-import com.zimbra.cs.index.analysis.NormalizeTokenFilter;
-import com.zimbra.cs.index.analysis.RFC822AddressTokenStream;
-import com.zimbra.cs.mailbox.Contact;
-import com.zimbra.cs.mailbox.Contact.Attachment;
-import com.zimbra.cs.mailbox.Contact.DerefGroupMembersOption;
-import com.zimbra.cs.mailbox.ContactGroup;
-import com.zimbra.cs.mailbox.MailServiceException;
-import com.zimbra.cs.mailbox.Mailbox;
-import com.zimbra.cs.object.ObjectHandlerException;
-import com.zimbra.cs.util.JMSession;
+import org.zmail.common.localconfig.DebugConfig;
+import org.zmail.common.mailbox.ContactConstants;
+import org.zmail.common.mime.ContentDisposition;
+import org.zmail.common.mime.MimeConstants;
+import org.zmail.common.mime.MimeDetect;
+import org.zmail.common.service.ServiceException;
+import org.zmail.common.util.ByteUtil;
+import org.zmail.common.util.CalculatorStream;
+import org.zmail.common.util.StringUtil;
+import org.zmail.common.util.ZmailLog;
+import org.zmail.common.zmime.ZMimeBodyPart;
+import org.zmail.common.zmime.ZMimeMultipart;
+import org.zmail.cs.account.Account;
+import org.zmail.cs.convert.ConversionException;
+import org.zmail.cs.index.IndexDocument;
+import org.zmail.cs.index.LuceneFields;
+import org.zmail.cs.index.analysis.FieldTokenStream;
+import org.zmail.cs.index.analysis.NormalizeTokenFilter;
+import org.zmail.cs.index.analysis.RFC822AddressTokenStream;
+import org.zmail.cs.mailbox.Contact;
+import org.zmail.cs.mailbox.Contact.Attachment;
+import org.zmail.cs.mailbox.Contact.DerefGroupMembersOption;
+import org.zmail.cs.mailbox.ContactGroup;
+import org.zmail.cs.mailbox.MailServiceException;
+import org.zmail.cs.mailbox.Mailbox;
+import org.zmail.cs.object.ObjectHandlerException;
+import org.zmail.cs.util.JMSession;
 
 public final class ParsedContact {
 
@@ -168,7 +168,7 @@ public final class ParsedContact {
                 try {
                     value = Contact.encodeMultiValueAttr((String[]) entry.getValue());
                 } catch (JSONException e) {
-                    ZimbraLog.index.warn("Error encoding multi valued attribute " + key, e);
+                    ZmailLog.index.warn("Error encoding multi valued attribute " + key, e);
                 }
             } else if (entry.getValue() instanceof String) {
                 value = StringUtil.stripControlCharacters((String) entry.getValue());
@@ -546,7 +546,7 @@ public final class ParsedContact {
                 curValuesList = new ArrayList<String>(Arrays.asList(Contact.parseMultiValueAttr(curValue)));
             } catch (JSONException e) {
                 // log a warning and continue
-                ZimbraLog.misc.warn("unable to modify contact for: " +
+                ZmailLog.misc.warn("unable to modify contact for: " +
                         "field=" + name + ", value=" + newValue + ", op=" + op.name() +
                         ".  delta entry ignored", e);
                 return;
@@ -576,7 +576,7 @@ public final class ParsedContact {
                     newMultiValues = Contact.encodeMultiValueAttr(newValues);
                 } catch (JSONException e) {
                     // log a warning and continue
-                    ZimbraLog.misc.warn("unable to modify contact for: " +
+                    ZmailLog.misc.warn("unable to modify contact for: " +
                             "field=" + name + ", value=" + newValue + ", op=" + op.name() +
                             ".  delta entry ignored", e);
                     return;
@@ -625,7 +625,7 @@ public final class ParsedContact {
         } catch (ServiceException e) {
             throw e;
         } catch (Exception e) {
-            ZimbraLog.index.warn("exception while analyzing contact; attachments will be partially indexed", e);
+            ZmailLog.index.warn("exception while analyzing contact; attachments will be partially indexed", e);
         }
         return this;
     }
@@ -648,7 +648,7 @@ public final class ParsedContact {
                 } catch (MimeHandlerException e) {
                     String part = attach.getPartName();
                     String ctype = attach.getContentType();
-                    ZimbraLog.index.warn("Parse error on attachment " + part + " (" + ctype + ")", e);
+                    ZmailLog.index.warn("Parse error on attachment " + part + " (" + ctype + ")", e);
                     if (conversionError == null && ConversionException.isTemporaryCauseOf(e)) {
                         conversionError = ServiceException.FAILURE("failed to analyze part", e.getCause());
                         mHasTemporaryAnalysisFailure = true;
@@ -656,7 +656,7 @@ public final class ParsedContact {
                 } catch (ObjectHandlerException e) {
                     String part = attach.getPartName();
                     String ctype = attach.getContentType();
-                    ZimbraLog.index.warn("Parse error on attachment " + part + " (" + ctype + ")", e);
+                    ZmailLog.index.warn("Parse error on attachment " + part + " (" + ctype + ")", e);
                 }
             }
         }

@@ -12,18 +12,18 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.qa.unittest;
+package org.zmail.qa.unittest;
 
 import java.util.List;
 
 import junit.framework.TestCase;
 
-import com.zimbra.common.mime.MimeConstants;
-import com.zimbra.cs.account.Provisioning;
-import com.zimbra.cs.mailbox.Mailbox;
-import com.zimbra.client.ZMailbox;
-import com.zimbra.client.ZMessage;
-import com.zimbra.client.ZSearchParams;
+import org.zmail.common.mime.MimeConstants;
+import org.zmail.cs.account.Provisioning;
+import org.zmail.cs.mailbox.Mailbox;
+import org.zmail.client.ZMailbox;
+import org.zmail.client.ZMessage;
+import org.zmail.client.ZSearchParams;
 
 
 public class TestIndex extends TestCase {
@@ -35,7 +35,7 @@ public class TestIndex extends TestCase {
     
     public void setUp()
     throws Exception {
-        mOriginalTextLimit = Integer.parseInt(TestUtil.getServerAttr(Provisioning.A_zimbraAttachmentsIndexedTextLimit));
+        mOriginalTextLimit = Integer.parseInt(TestUtil.getServerAttr(Provisioning.A_zmailAttachmentsIndexedTextLimit));
         cleanUp();
     }
     
@@ -132,7 +132,7 @@ public class TestIndex extends TestCase {
     
     private void setTextLimit(int numBytes)
     throws Exception {
-        TestUtil.setServerAttr(Provisioning.A_zimbraAttachmentsIndexedTextLimit, Integer.toString(numBytes));
+        TestUtil.setServerAttr(Provisioning.A_zmailAttachmentsIndexedTextLimit, Integer.toString(numBytes));
     }
     
     public void tearDown()

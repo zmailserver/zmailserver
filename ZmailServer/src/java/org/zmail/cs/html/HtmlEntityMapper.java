@@ -12,7 +12,7 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.html;
+package org.zmail.cs.html;
 
 import java.util.HashMap;
 import java.util.Map;

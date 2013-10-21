@@ -13,7 +13,7 @@
  * ***** END LICENSE BLOCK *****
  */
 
-package com.zimbra.cs.service.account;
+package org.zmail.cs.service.account;
 
 import java.util.Locale;
 import java.util.Map;
@@ -21,20 +21,20 @@ import java.util.Set;
 
 import javax.servlet.http.HttpServletRequest;
 
-import com.zimbra.cs.account.Account;
-import com.zimbra.cs.account.Provisioning;
-import com.zimbra.common.util.L10nUtil;
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.common.soap.Element;
-import com.zimbra.common.soap.AccountConstants;
-import com.zimbra.common.util.StringUtil;
-import com.zimbra.soap.SoapServlet;
-import com.zimbra.soap.ZimbraSoapContext;
+import org.zmail.cs.account.Account;
+import org.zmail.cs.account.Provisioning;
+import org.zmail.common.util.L10nUtil;
+import org.zmail.common.service.ServiceException;
+import org.zmail.common.soap.Element;
+import org.zmail.common.soap.AccountConstants;
+import org.zmail.common.util.StringUtil;
+import org.zmail.soap.SoapServlet;
+import org.zmail.soap.ZmailSoapContext;
 
 public class GetAvailableLocales extends AccountDocumentHandler {
 
     public Element handle(Element request, Map<String, Object> context) throws ServiceException {
-        ZimbraSoapContext zsc = getZimbraSoapContext(context);
+        ZmailSoapContext zsc = getZmailSoapContext(context);
         Account account = getRequestedAccount(zsc);
 
         if (!canAccessAccount(zsc, account))
@@ -46,7 +46,7 @@ public class GetAvailableLocales extends AccountDocumentHandler {
         Locale installedLocales[] = L10nUtil.getLocalesSorted(displayLocale);
 
         // get avail locales for this account/COS
-        Set<String> allowedLocales = account.getMultiAttrSet(Provisioning.A_zimbraAvailableLocale);
+        Set<String> allowedLocales = account.getMultiAttrSet(Provisioning.A_zmailAvailableLocale);
 
         Locale[] availLocales = null;
         if (allowedLocales.size() > 0)
@@ -65,8 +65,8 @@ public class GetAvailableLocales extends AccountDocumentHandler {
     }
     
     private Locale getDisplayLocale(Account acct, Map<String, Object> context) throws ServiceException {
-        // use zimbraPrefLocale is it is present 
-        String locale = acct.getAttr(Provisioning.A_zimbraPrefLocale, false);
+        // use zmailPrefLocale is it is present 
+        String locale = acct.getAttr(Provisioning.A_zmailPrefLocale, false);
         
         // otherwise use Accept-Language header
         if (StringUtil.isNullOrEmpty(locale)) {

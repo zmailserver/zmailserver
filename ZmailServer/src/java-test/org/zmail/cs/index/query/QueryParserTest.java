@@ -12,7 +12,7 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.index.query;
+package org.zmail.cs.index.query;
 
 import java.util.Calendar;
 import java.util.EnumSet;
@@ -25,16 +25,16 @@ import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.cs.account.MockProvisioning;
-import com.zimbra.cs.account.Provisioning;
-import com.zimbra.cs.index.ZimbraAnalyzer;
-import com.zimbra.cs.index.query.parser.QueryParser;
-import com.zimbra.cs.mailbox.MailItem;
-import com.zimbra.cs.mailbox.MailServiceException;
-import com.zimbra.cs.mailbox.Mailbox;
-import com.zimbra.cs.mailbox.MailboxManager;
-import com.zimbra.cs.mailbox.MailboxTestUtil;
+import org.zmail.common.service.ServiceException;
+import org.zmail.cs.account.MockProvisioning;
+import org.zmail.cs.account.Provisioning;
+import org.zmail.cs.index.ZmailAnalyzer;
+import org.zmail.cs.index.query.parser.QueryParser;
+import org.zmail.cs.mailbox.MailItem;
+import org.zmail.cs.mailbox.MailServiceException;
+import org.zmail.cs.mailbox.Mailbox;
+import org.zmail.cs.mailbox.MailboxManager;
+import org.zmail.cs.mailbox.MailboxTestUtil;
 
 /**
  * Unit test for {@link QueryParser}.
@@ -48,34 +48,34 @@ public final class QueryParserTest {
     public static void init() throws Exception {
         MailboxTestUtil.initServer();
         Provisioning prov = Provisioning.getInstance();
-        prov.createAccount("test@zimbra.com", "secret", new HashMap<String, Object>());
+        prov.createAccount("test@zmail.com", "secret", new HashMap<String, Object>());
 
         Mailbox mbox = MailboxManager.getInstance().getMailboxByAccountId(MockProvisioning.DEFAULT_ACCOUNT_ID);
-        parser = new QueryParser(mbox, ZimbraAnalyzer.getInstance());
+        parser = new QueryParser(mbox, ZmailAnalyzer.getInstance());
     }
 
     @Test
     public void defaultClause() throws Exception {
-        String src = "zimbra";
-        Assert.assertEquals("Q(l.content:zimbra)", Query.toString(parser.parse(src)));
+        String src = "zmail";
+        Assert.assertEquals("Q(l.content:zmail)", Query.toString(parser.parse(src)));
     }
 
     @Test
     public void modifier() throws Exception {
-        String src = "+content:zimbra";
-        Assert.assertEquals("+Q(l.content:zimbra)", Query.toString(parser.parse(src)));
+        String src = "+content:zmail";
+        Assert.assertEquals("+Q(l.content:zmail)", Query.toString(parser.parse(src)));
 
-        src = "-content:zimbra";
-        Assert.assertEquals("-Q(l.content:zimbra)", Query.toString(parser.parse(src)));
+        src = "-content:zmail";
+        Assert.assertEquals("-Q(l.content:zmail)", Query.toString(parser.parse(src)));
 
-        src = "not content:zimbra";
-        Assert.assertEquals("-Q(l.content:zimbra)", Query.toString(parser.parse(src)));
+        src = "not content:zmail";
+        Assert.assertEquals("-Q(l.content:zmail)", Query.toString(parser.parse(src)));
 
-        src = "from:(+@zimbra.com)";
-        Assert.assertEquals("(+Q(from:@zimbra.com))", Query.toString(parser.parse(src)));
+        src = "from:(+@zmail.com)";
+        Assert.assertEquals("(+Q(from:@zmail.com))", Query.toString(parser.parse(src)));
 
-        src = "from:(-@zimbra.com)";
-        Assert.assertEquals("(-Q(from:@zimbra.com))", Query.toString(parser.parse(src)));
+        src = "from:(-@zmail.com)";
+        Assert.assertEquals("(-Q(from:@zmail.com))", Query.toString(parser.parse(src)));
     }
 
     @Test
@@ -450,17 +450,17 @@ public final class QueryParserTest {
 
     @Test
     public void field() throws Exception {
-        String src = "#company:\"zimbra:vmware\"";
+        String src = "#company:\"zmail:vmware\"";
         List<Query> result = parser.parse(src);
-        Assert.assertEquals("Q(l.field:company:zimbra:vmware)", Query.toString(result));
+        Assert.assertEquals("Q(l.field:company:zmail:vmware)", Query.toString(result));
 
         TextQuery query = (TextQuery) result.get(0);
-        Assert.assertEquals("#company:\"zimbra:vmware\"",
-                query.toQueryString(query.getField(), "company:zimbra:vmware"));
-        Assert.assertEquals("#company:\"zimbra@vmware\"",
-                query.toQueryString(query.getField(), "company:zimbra@vmware"));
-        Assert.assertEquals("#company:\"zimbra\\\"vmware\"",
-                query.toQueryString(query.getField(), "company:zimbra\"vmware"));
+        Assert.assertEquals("#company:\"zmail:vmware\"",
+                query.toQueryString(query.getField(), "company:zmail:vmware"));
+        Assert.assertEquals("#company:\"zmail@vmware\"",
+                query.toQueryString(query.getField(), "company:zmail@vmware"));
+        Assert.assertEquals("#company:\"zmail\\\"vmware\"",
+                query.toQueryString(query.getField(), "company:zmail\"vmware"));
     }
 
     @Test
@@ -471,7 +471,7 @@ public final class QueryParserTest {
 
     @Test
     public void contact() throws Exception {
-        QueryParser parser = new QueryParser(null, ZimbraAnalyzer.getInstance());
+        QueryParser parser = new QueryParser(null, ZmailAnalyzer.getInstance());
         String src = "contact:\"Conf -\"";
         Assert.assertEquals("Q(CONTACT:conf,-)", Query.toString(parser.parse(src)));
 
@@ -490,11 +490,11 @@ public final class QueryParserTest {
 
     @Test
     public void contactContent() throws Exception {
-        QueryParser parser = new QueryParser(null, ZimbraAnalyzer.getInstance());
+        QueryParser parser = new QueryParser(null, ZmailAnalyzer.getInstance());
         parser.setTypes(EnumSet.of(MailItem.Type.CONTACT));
 
-        String src = "zimbra";
-        Assert.assertEquals("(Q(CONTACT:zimbra) || Q(l.content:zimbra))", Query.toString(parser.parse(src)));
+        String src = "zmail";
+        Assert.assertEquals("(Q(CONTACT:zmail) || Q(l.content:zmail))", Query.toString(parser.parse(src)));
 
         src = "in"; // stop word
         Assert.assertEquals("(Q(CONTACT:in) || Q(l.content:))", Query.toString(parser.parse(src)));
@@ -502,16 +502,16 @@ public final class QueryParserTest {
 
     @Test
     public void quoted() throws Exception {
-        QueryParser parser = new QueryParser(null, ZimbraAnalyzer.getInstance());
+        QueryParser parser = new QueryParser(null, ZmailAnalyzer.getInstance());
         parser.setTypes(EnumSet.of(MailItem.Type.CONTACT));
 
-        Assert.assertEquals("(Q(CONTACT:zimbra,quoted,test) || Q(l.content:zimbra,quoted,test))",
-                Query.toString(parser.parse("\"Zimbra \\\"quoted\\\" test\"")));
+        Assert.assertEquals("(Q(CONTACT:zmail,quoted,test) || Q(l.content:zmail,quoted,test))",
+                Query.toString(parser.parse("\"Zmail \\\"quoted\\\" test\"")));
     }
 
     @Test
     public void quick() throws Exception {
-        QueryParser parser = new QueryParser(null, ZimbraAnalyzer.getInstance());
+        QueryParser parser = new QueryParser(null, ZmailAnalyzer.getInstance());
         parser.setQuick(true);
 
         Assert.assertEquals("Q(l.content:all,hands,meeting[*])", Query.toString(parser.parse("all hands meeting")));

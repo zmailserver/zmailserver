@@ -13,22 +13,22 @@
  * ***** END LICENSE BLOCK *****
  */
 
-package com.zimbra.cs.service.mail;
+package org.zmail.cs.service.mail;
 
 import java.util.Map;
 
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.common.soap.Element;
-import com.zimbra.cs.mailbox.RetentionPolicyManager;
-import com.zimbra.soap.JaxbUtil;
-import com.zimbra.soap.ZimbraSoapContext;
-import com.zimbra.soap.mail.message.GetSystemRetentionPolicyResponse;
+import org.zmail.common.service.ServiceException;
+import org.zmail.common.soap.Element;
+import org.zmail.cs.mailbox.RetentionPolicyManager;
+import org.zmail.soap.JaxbUtil;
+import org.zmail.soap.ZmailSoapContext;
+import org.zmail.soap.mail.message.GetSystemRetentionPolicyResponse;
 
 public class GetSystemRetentionPolicy extends MailDocumentHandler {
 
     @Override
     public Element handle(Element request, Map<String, Object> context) throws ServiceException {
-        ZimbraSoapContext zsc = getZimbraSoapContext(context);
+        ZmailSoapContext zsc = getZmailSoapContext(context);
         
         GetSystemRetentionPolicyResponse res = new GetSystemRetentionPolicyResponse(
             RetentionPolicyManager.getInstance().getSystemRetentionPolicy(getRequestedAccount(zsc)));

@@ -12,7 +12,7 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.service.formatter;
+package org.zmail.cs.service.formatter;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -34,16 +34,16 @@ import org.apache.commons.codec.net.QuotedPrintableCodec;
 import org.json.JSONException;
 
 import com.google.common.base.Strings;
-import com.zimbra.cs.mailbox.Contact;
-import com.zimbra.cs.mailbox.Contact.Attachment;
-import com.zimbra.cs.mailbox.Contact.DerefGroupMembersOption;
-import com.zimbra.cs.mime.ParsedContact;
-import com.zimbra.cs.util.Zimbra;
-import com.zimbra.common.mailbox.ContactConstants;
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.common.util.DateUtil;
-import com.zimbra.common.util.ZimbraLog;
-import com.zimbra.common.mime.MimeConstants;
+import org.zmail.cs.mailbox.Contact;
+import org.zmail.cs.mailbox.Contact.Attachment;
+import org.zmail.cs.mailbox.Contact.DerefGroupMembersOption;
+import org.zmail.cs.mime.ParsedContact;
+import org.zmail.cs.util.Zmail;
+import org.zmail.common.mailbox.ContactConstants;
+import org.zmail.common.service.ServiceException;
+import org.zmail.common.util.DateUtil;
+import org.zmail.common.util.ZmailLog;
+import org.zmail.common.mime.MimeConstants;
 
 public class VCard {
 
@@ -585,7 +585,7 @@ public class VCard {
         return formatContact(con, vcattrs, includeXProps, true);
     }
 
-    public static VCard formatContact(Contact con, Collection<String> vcattrs, boolean includeXProps, boolean includeZimbraXProps) {
+    public static VCard formatContact(Contact con, Collection<String> vcattrs, boolean includeXProps, boolean includeZmailXProps) {
         Map<String, String> fields = con.getFields();
         List<Attachment> attachments = con.getAttachments();
         List<String> emails = con.getEmailAddresses(DerefGroupMembersOption.NONE);
@@ -713,9 +713,9 @@ public class VCard {
                         sb.append(field).append(":\r\n ").append(encoded).append("\r\n");
                     }
                 } catch (OutOfMemoryError e) {
-                    Zimbra.halt("out of memory", e);
+                    Zmail.halt("out of memory", e);
                 } catch (Throwable t) {
-                    ZimbraLog.misc.info("error fetching attachment content: " + attach.getName(), t);
+                    ZmailLog.misc.info("error fetching attachment content: " + attach.getName(), t);
                 }
             }
         }
@@ -748,14 +748,14 @@ public class VCard {
             sb.append("REV:").append(new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'").format(new Date(con.getDate()))).append("\r\n");
         if (vcattrs == null || vcattrs.contains("UID"))
             sb.append("UID:").append(uid).append("\r\n");
-        // sb.append("MAILER:Zimbra ").append(BuildInfo.VERSION).append("\r\n");
-        if ((vcattrs == null && includeZimbraXProps) || (vcattrs != null && vcattrs.contains("X-ZIMBRA-IMADDRESS"))) {
+        // sb.append("MAILER:Zmail ").append(BuildInfo.VERSION).append("\r\n");
+        if ((vcattrs == null && includeZmailXProps) || (vcattrs != null && vcattrs.contains("X-ZIMBRA-IMADDRESS"))) {
             encodeField(sb, "X-ZIMBRA-IMADDRESS", "imAddress", true, 1, fields);
         }
-        if ((vcattrs == null && includeZimbraXProps) || (vcattrs != null && vcattrs.contains("X-ZIMBRA-ANNIVERSARY"))) {
+        if ((vcattrs == null && includeZmailXProps) || (vcattrs != null && vcattrs.contains("X-ZIMBRA-ANNIVERSARY"))) {
             encodeField(sb, "X-ZIMBRA-ANNIVERSARY", ContactConstants.A_anniversary, false, 2, fields);
         }
-        if ((vcattrs == null && includeZimbraXProps) || (vcattrs != null && vcattrs.contains("X-ZIMBRA-MAIDENNAME"))) {
+        if ((vcattrs == null && includeZmailXProps) || (vcattrs != null && vcattrs.contains("X-ZIMBRA-MAIDENNAME"))) {
             String maidenName = con.get(ContactConstants.A_maidenName);
             if (maidenName != null)
                 sb.append("X-ZIMBRA-MAIDENNAME:").append(maidenName).append("\r\n");
@@ -899,7 +899,7 @@ public class VCard {
 
     public static void main(String args[]) throws ServiceException {
         parseVCard("BEGIN:VCARD\r\n\r\nFN\n :dr. john doe\nADR;HOME;WORK:;;Hambone Ltd.\\N5 Main St.;Charlotte;NC;24243\nEMAIL:foo@bar.con\nEMAIL:bar@goo.com\nN:doe;john;\\;\\\\;dr.;;;;\nEND:VCARD\n");
-        parseVCard("BEGIN:VCARD\r\n\r\nFN\n :john doe\\, jr.\nORG:Zimbra;Marketing;Annoying Marketing\nA.TEL;type=fax,WORK:+1-800-555-1212\nTEL;type=home,work,voice:+1-800-555-1313\nNOTE;QUOTED-PRINTABLE:foo=3Dbar\nc.D.e.NOTE;ENCODING=B;charset=iso-8859-1:SWYgeW91IGNhbiByZWFkIHRoaXMgeW8=\nEND:VCARD\n");
+        parseVCard("BEGIN:VCARD\r\n\r\nFN\n :john doe\\, jr.\nORG:Zmail;Marketing;Annoying Marketing\nA.TEL;type=fax,WORK:+1-800-555-1212\nTEL;type=home,work,voice:+1-800-555-1313\nNOTE;QUOTED-PRINTABLE:foo=3Dbar\nc.D.e.NOTE;ENCODING=B;charset=iso-8859-1:SWYgeW91IGNhbiByZWFkIHRoaXMgeW8=\nEND:VCARD\n");
         parseVCard("BEGIN : VCARD\nFN\n :john doe\\, jr.\nAGENT:\\nBEGIN:VCARD\\nEND:VCARD\nEND:VCARD");
 //        parseVCard("BEGIN:VCARD\r\n\r\nFN\n :john doe\nA.TEL;WORK:+1-800-555-1212\n.:?\n:\nEND:VCARD\n");
     }

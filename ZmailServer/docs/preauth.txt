@@ -8,16 +8,16 @@ already signed into a portal and wants to enter the mail application, they
 should not have to be prompted again for their password.
 
 This can be accomplished by having the mail link they click on in the portal
-construct a special URL and redirect the user to the Zimbra server, which 
+construct a special URL and redirect the user to the Zmail server, which 
 will then verify the data passed in the URL and create authentication token 
-(the standard mechanism within Zimbra to identify users), save it in a cookie,
+(the standard mechanism within Zmail to identify users), save it in a cookie,
 and redirect the user to the mail app.
 
 ------------------------------------------------------------
 How does it work?
 ------------------------------------------------------------
 
-It works by having a key that is shared between the third party and Zimbra.
+It works by having a key that is shared between the third party and Zmail.
 Knowing this key, the third party specifies the desired username, a timestamp
 (to ensure the request is "fresh"), optionally an expiration time, and then
 computes a SHA-1 HMAC over that data using  secret key.
@@ -43,7 +43,7 @@ computed-preauth values below. Also make sure you keep it secret, as it
 can be used to generate valid auth tokens for any user in the given domain!
 
 Behind the scenes, this command is simply generating 32 random bytes,
-hex encoding them, then setting the "zimbraPreAuthKey" attr for the specified
+hex encoding them, then setting the "zmailPreAuthKey" attr for the specified
 domain with the value of the key.
 
 After generating the key, you'll probably need to restart the ZCS server so it
@@ -105,7 +105,7 @@ The preauth value is computed as follows:
      (in that order, order is definitely important!), separated by "|"
 
   2. compute the HMAC on that value using the shared key
-     (the zimbraPreAuthKey value for the account's domain, generating one
+     (the zmailPreAuthKey value for the account's domain, generating one
       is described below).
 
   3. convert the HMAC value into a hex string.
@@ -139,11 +139,11 @@ The resulting URL would be:
     &timestamp=1135280708088&preauth=b248f6cfd027edd45c5369f8490125204772f844
 
 Hitting that URL on the ZCS server will cause the preauth value to be verified,
-followed by a redirect to /zimbra/mail with the auth token in a cookie.
+followed by a redirect to /zmail/mail with the auth token in a cookie.
 
-If a URL other then /zimbra/mail is desired, then you can also pass in a redirectURL:
+If a URL other then /zmail/mail is desired, then you can also pass in a redirectURL:
 
- ...&redirectURL=/zimbra/h/
+ ...&redirectURL=/zmail/h/
 
 
 If you are pre-authing an admin, the value to use with the hmac would be:
@@ -163,7 +163,7 @@ passing in a password, you specify <preauth> data.
 
 For example:
 
- <AuthRequest xmlns="urn:zimbraAccount">
+ <AuthRequest xmlns="urn:zmailAccount">
    <account by="name|id|foreignPrincipal">{account-identifier}</account>
    <preauth timestamp="{timestamp}" 
             expires="{expires}">{computed-preauth}</preauth>
@@ -171,7 +171,7 @@ For example:
 
 The values are exactly the same as they were for the URL case:
 
- <AuthRequest xmlns="urn:zimbraAccount">
+ <AuthRequest xmlns="urn:zmailAccount">
    <account>john.doe@domain.com</account>
    <preauth timestamp="1135280708088"
             expires="0}">b248f6cfd027edd45c5369f8490125204772f844</preauth>
@@ -182,10 +182,10 @@ The auth token will be return in the AuthResponse. At which point, you can
 
 https://server/service/preauth?isredirect=1&authtoken={...}
 
-Going to this URL will set the cookie and redirect to /zimbra/mail. If a URL other
-then /zimbra/mail is desired, then you can also pass in a redirectURL:
+Going to this URL will set the cookie and redirect to /zmail/mail. If a URL other
+then /zmail/mail is desired, then you can also pass in a redirectURL:
 
- ...&redirectURL=/zimbra/h/
+ ...&redirectURL=/zmail/h/
 
 ------------------------------------------------------------
 Sample Java code for computing the preauth value
@@ -305,7 +305,7 @@ Take that value, and set it below as the value of DOMAIN_KEY
 
 3) redirect users to this (this, as in *this* file after you install it) JSP page:
 
-http://server/zimbra/preauth.jsp
+http://server/zmail/preauth.jsp
 
 And it will construct the preauth URL
 

@@ -12,13 +12,13 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.account.accesscontrol;
+package org.zmail.cs.account.accesscontrol;
 
 import java.util.Arrays;
 import java.util.Set;
 
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.cs.account.accesscontrol.generated.RightConsts;
+import org.zmail.common.service.ServiceException;
+import org.zmail.cs.account.accesscontrol.generated.RightConsts;
 
 public abstract class Right extends RightConsts implements Comparable<Right> {
 
@@ -121,7 +121,7 @@ public abstract class Right extends RightConsts implements Comparable<Right> {
     }
 
     /**
-     * - right name stored in zimbraACE.
+     * - right name stored in zmailACE.
      * - right name appear in XML
      * - right name displayed by CLI
      *

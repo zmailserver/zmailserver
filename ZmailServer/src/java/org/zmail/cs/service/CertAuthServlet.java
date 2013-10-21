@@ -12,7 +12,7 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.service;
+package org.zmail.cs.service;
 
 import java.io.IOException;
 import java.util.regex.Matcher;
@@ -23,18 +23,18 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.zimbra.common.account.ZAttrProvisioning.MailSSLClientCertMode;
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.common.util.ZimbraLog;
-import com.zimbra.cs.account.AuthToken;
-import com.zimbra.cs.account.AccountServiceException.AuthFailedServiceException;
-import com.zimbra.cs.account.auth.AuthContext;
-import com.zimbra.cs.account.Provisioning;
-import com.zimbra.cs.account.Server;
-import com.zimbra.cs.service.authenticator.SSOAuthenticator;
-import com.zimbra.cs.service.authenticator.SSOAuthenticator.SSOAuthenticatorServiceException;
-import com.zimbra.cs.service.authenticator.SSOAuthenticator.ZimbraPrincipal;
-import com.zimbra.cs.service.authenticator.ClientCertAuthenticator;
+import org.zmail.common.account.ZAttrProvisioning.MailSSLClientCertMode;
+import org.zmail.common.service.ServiceException;
+import org.zmail.common.util.ZmailLog;
+import org.zmail.cs.account.AuthToken;
+import org.zmail.cs.account.AccountServiceException.AuthFailedServiceException;
+import org.zmail.cs.account.auth.AuthContext;
+import org.zmail.cs.account.Provisioning;
+import org.zmail.cs.account.Server;
+import org.zmail.cs.service.authenticator.SSOAuthenticator;
+import org.zmail.cs.service.authenticator.SSOAuthenticator.SSOAuthenticatorServiceException;
+import org.zmail.cs.service.authenticator.SSOAuthenticator.ZmailPrincipal;
+import org.zmail.cs.service.authenticator.ClientCertAuthenticator;
 
 public class CertAuthServlet extends SSOServlet {
     
@@ -55,7 +55,7 @@ public class CertAuthServlet extends SSOServlet {
     @Override
     public void doGet(HttpServletRequest req, HttpServletResponse resp) 
     throws ServletException, IOException {
-        ZimbraLog.clearContext();
+        ZmailLog.clearContext();
         addRemoteIpToLoggingContext(req);
         addUAToLoggingContext(req);
         
@@ -65,7 +65,7 @@ public class CertAuthServlet extends SSOServlet {
         boolean isAdminRequest = false;
         if (!matcher.matches()) {
             String msg = "resource not allowed on the certauth servlet: " + url;
-            ZimbraLog.account.error(msg);
+            ZmailLog.account.error(msg);
             sendback403Message(req, resp, msg);
             return;
         } else {
@@ -76,7 +76,7 @@ public class CertAuthServlet extends SSOServlet {
         
         try {
             SSOAuthenticator authenticator = new ClientCertAuthenticator(req, resp);
-            ZimbraPrincipal principal = null;
+            ZmailPrincipal principal = null;
             
             principal = authenticator.authenticate();
             AuthToken authToken = authorize(req, AuthContext.Protocol.client_certificate, principal, isAdminRequest);
@@ -88,7 +88,7 @@ public class CertAuthServlet extends SSOServlet {
             if (e instanceof AuthFailedServiceException) {
                 reason = ((AuthFailedServiceException) e).getReason(", %s");
             }
-            ZimbraLog.account.debug("client certificate auth failed: " + e.getMessage() + reason, e);
+            ZmailLog.account.debug("client certificate auth failed: " + e.getMessage() + reason, e);
             
             dispatchOnError(req, resp, isAdminRequest, e.getMessage());
         }
@@ -108,7 +108,7 @@ public class CertAuthServlet extends SSOServlet {
             try {
                 redirectToErrorPage(req, resp, isAdminRequest, null);
             } catch (ServiceException e) {
-                ZimbraLog.account.error("failed to redirect to error page (" + msg + ")", e);
+                ZmailLog.account.error("failed to redirect to error page (" + msg + ")", e);
                 sendback403Message(req, resp, msg);
             }
         } else {
@@ -129,9 +129,9 @@ public class CertAuthServlet extends SSOServlet {
                     return;
                 }
             } catch (IOException e) {
-                ZimbraLog.account.warn("unable to forward to forbidden page" + forbiddenPage, e);
+                ZmailLog.account.warn("unable to forward to forbidden page" + forbiddenPage, e);
             } catch (ServletException e) {
-                ZimbraLog.account.warn("unable to forward to forbidden page" + forbiddenPage, e);
+                ZmailLog.account.warn("unable to forward to forbidden page" + forbiddenPage, e);
             }
         }
         
@@ -142,7 +142,7 @@ public class CertAuthServlet extends SSOServlet {
     
     private boolean missingClientCertOK() {
         try {
-            // should not have to checked the zimbraMailSSLClientCertMode.
+            // should not have to checked the zmailMailSSLClientCertMode.
             // If it is NeedClientAuth and there is not client cert, the 
             // requested should have failed during ssl handshake.
             // This is just a sanity check, just in case.
@@ -152,7 +152,7 @@ public class CertAuthServlet extends SSOServlet {
                 return true;
             }
         } catch (ServiceException e) {
-            ZimbraLog.account.debug("unable to get local server", e);
+            ZmailLog.account.debug("unable to get local server", e);
         }
         return false;
     }

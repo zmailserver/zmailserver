@@ -12,7 +12,7 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.mailbox;
+package org.zmail.cs.mailbox;
 
 import java.util.EnumSet;
 import java.util.HashMap;
@@ -24,26 +24,26 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 
 import com.google.common.io.ByteStreams;
-import com.zimbra.common.soap.Element;
-import com.zimbra.common.soap.Element.XMLElement;
-import com.zimbra.common.soap.MailConstants;
-import com.zimbra.common.soap.SoapProtocol;
-import com.zimbra.cs.account.Account;
-import com.zimbra.cs.account.MockProvisioning;
-import com.zimbra.cs.account.Provisioning;
-import com.zimbra.cs.db.DbPool;
-import com.zimbra.cs.db.DbPool.DbConnection;
-import com.zimbra.cs.db.DbUtil;
-import com.zimbra.cs.index.IndexDocument;
-import com.zimbra.cs.index.LuceneFields;
-import com.zimbra.cs.index.SearchParams;
-import com.zimbra.cs.index.SortBy;
-import com.zimbra.cs.index.ZimbraQueryResults;
-import com.zimbra.cs.mailbox.Flag.FlagInfo;
-import com.zimbra.cs.mime.ParsedMessage;
-import com.zimbra.cs.service.mail.ToXML;
-import com.zimbra.cs.service.util.ItemIdFormatter;
-import com.zimbra.qa.unittest.TestUtil;
+import org.zmail.common.soap.Element;
+import org.zmail.common.soap.Element.XMLElement;
+import org.zmail.common.soap.MailConstants;
+import org.zmail.common.soap.SoapProtocol;
+import org.zmail.cs.account.Account;
+import org.zmail.cs.account.MockProvisioning;
+import org.zmail.cs.account.Provisioning;
+import org.zmail.cs.db.DbPool;
+import org.zmail.cs.db.DbPool.DbConnection;
+import org.zmail.cs.db.DbUtil;
+import org.zmail.cs.index.IndexDocument;
+import org.zmail.cs.index.LuceneFields;
+import org.zmail.cs.index.SearchParams;
+import org.zmail.cs.index.SortBy;
+import org.zmail.cs.index.ZmailQueryResults;
+import org.zmail.cs.mailbox.Flag.FlagInfo;
+import org.zmail.cs.mime.ParsedMessage;
+import org.zmail.cs.service.mail.ToXML;
+import org.zmail.cs.service.util.ItemIdFormatter;
+import org.zmail.qa.unittest.TestUtil;
 
 /**
  * Unit test for {@link Message}.
@@ -57,7 +57,7 @@ public final class MessageTest {
         MailboxTestUtil.initServer();
 
         Provisioning prov = Provisioning.getInstance();
-        prov.createAccount("test@zimbra.com", "secret", new HashMap<String, Object>());
+        prov.createAccount("test@zmail.com", "secret", new HashMap<String, Object>());
     }
 
     @Before
@@ -91,19 +91,19 @@ public final class MessageTest {
         DeliveryOptions opt = new DeliveryOptions();
         opt.setFolderId(Mailbox.ID_FOLDER_INBOX);
         Message msg1 = mbox.addMessage(null, new ParsedMessage(
-                "From: from1@zimbra.com\r\nTo: to1@zimbra.com".getBytes(), false), opt, null);
+                "From: from1@zmail.com\r\nTo: to1@zmail.com".getBytes(), false), opt, null);
         Message msg2 = mbox.addMessage(null, new ParsedMessage(
-                "From: from2@zimbra.com\r\nTo: to2 <to2@zimbra.com>".getBytes(), false), opt, null);
+                "From: from2@zmail.com\r\nTo: to2 <to2@zmail.com>".getBytes(), false), opt, null);
         Message msg3 = mbox.addMessage(null, new ParsedMessage(
-                "From: from3@zimbra.com\r\nTo: to3-1 <to3-1@zimbra.com>, to3-2 <to3-2@zimbra.com>".getBytes(),
+                "From: from3@zmail.com\r\nTo: to3-1 <to3-1@zmail.com>, to3-2 <to3-2@zmail.com>".getBytes(),
                 false), opt, null);
 
-        Assert.assertEquals("to1@zimbra.com", msg1.getSortRecipients());
+        Assert.assertEquals("to1@zmail.com", msg1.getSortRecipients());
         Assert.assertEquals("to2", msg2.getSortRecipients());
         Assert.assertEquals("to3-1, to3-2", msg3.getSortRecipients());
 
         DbConnection conn = DbPool.getConnection(mbox);
-        Assert.assertEquals("to1@zimbra.com", DbUtil.executeQuery(conn,
+        Assert.assertEquals("to1@zmail.com", DbUtil.executeQuery(conn,
                 "SELECT recipients FROM mboxgroup1.mail_item WHERE mailbox_id = ? AND id = ?",
                 mbox.getId(), msg1.getId()).getString(1));
         Assert.assertEquals("to2", DbUtil.executeQuery(conn,
@@ -122,14 +122,14 @@ public final class MessageTest {
         DeliveryOptions opt = new DeliveryOptions();
         opt.setFolderId(Mailbox.ID_FOLDER_SPAM);
         Message msg = mbox.addMessage(null, new ParsedMessage(
-                "From: spammer@zimbra.com\r\nTo: test@zimbra.com".getBytes(), false), opt, null);
+                "From: spammer@zmail.com\r\nTo: test@zmail.com".getBytes(), false), opt, null);
         MailboxTestUtil.index(mbox);
 
         SearchParams params = new SearchParams();
         params.setSortBy(SortBy.NONE);
         params.setTypes(EnumSet.of(MailItem.Type.MESSAGE));
         params.setQueryString("from:spammer");
-        ZimbraQueryResults result = mbox.index.search(SoapProtocol.Soap12, new OperationContext(mbox), params);
+        ZmailQueryResults result = mbox.index.search(SoapProtocol.Soap12, new OperationContext(mbox), params);
         Assert.assertFalse(result.hasNext());
 
         mbox.move(new OperationContext(mbox), msg.getId(), MailItem.Type.MESSAGE, Mailbox.ID_FOLDER_INBOX);
@@ -148,7 +148,7 @@ public final class MessageTest {
         opt.setFolderId(Mailbox.ID_FOLDER_INBOX);
         opt.setFlags(FlagInfo.POST.toBitmask());
         Message msg = mbox.addMessage(null, new ParsedMessage(
-                "From: test@zimbra.com\r\nTo: test@zimbra.com".getBytes(), false), opt, null);
+                "From: test@zmail.com\r\nTo: test@zmail.com".getBytes(), false), opt, null);
 
         // Validate flag.
         Assert.assertTrue((msg.getFlagBitmask() & Flag.FlagInfo.POST.toBitmask()) != 0);
@@ -176,7 +176,7 @@ public final class MessageTest {
         DeliveryOptions opt = new DeliveryOptions();
         opt.setFolderId(Mailbox.ID_FOLDER_INBOX);
         Message msg = mbox.addMessage(null, new ParsedMessage(
-                "From: test@zimbra.com\r\nTo: test@zimbra.com".getBytes(), false), opt, null);
+                "From: test@zmail.com\r\nTo: test@zmail.com".getBytes(), false), opt, null);
         // try setting the post flag
         mbox.setTags(null, msg.getId(), MailItem.Type.MESSAGE, FlagInfo.POST.toBitmask(), null);
         msg = mbox.getMessageById(null, msg.getId());

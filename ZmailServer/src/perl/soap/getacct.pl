@@ -25,8 +25,8 @@ use XmlElement;
 use XmlDoc;
 use Soap;
 
-my $ACCTNS = "urn:zimbraAdmin";
-my $MAILNS = "urn:zimbraAdmin";
+my $ACCTNS = "urn:zmailAdmin";
+my $MAILNS = "urn:zmailAdmin";
 
 # If you're using ActivePerl, you'll need to go and install the Crypt::SSLeay
 # module for htps: to work...
@@ -46,8 +46,8 @@ if (defined $ARGV[0] && $ARGV[0] ne "") {
 my $SOAP = $Soap::Soap12;
 my $d = new XmlDoc;
 $d->start('AuthRequest', $ACCTNS);
-$d->add('name', undef, undef, "zimbra");
-$d->add('password', undef, undef, "zimbra");
+$d->add('name', undef, undef, "zmail");
+$d->add('password', undef, undef, "zmail");
 $d->end();
 
 my $authResponse = $SOAP->invoke($url, $d->root());
@@ -60,7 +60,7 @@ print "authToken($authToken)\n";
 my $sessionId = $authResponse->find_child('sessionId')->content;
 print "sessionId = $sessionId\n";
 
-my $context = $SOAP->zimbraContext($authToken, $sessionId);
+my $context = $SOAP->zmailContext($authToken, $sessionId);
 
 my $contextStr = $context->to_string("pretty");
 print("Context = $contextStr\n");

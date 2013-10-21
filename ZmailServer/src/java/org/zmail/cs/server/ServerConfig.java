@@ -13,17 +13,17 @@
  * ***** END LICENSE BLOCK *****
  */
 
-package com.zimbra.cs.server;
+package org.zmail.cs.server;
 
 import java.net.ServerSocket;
 import java.nio.channels.ServerSocketChannel;
 
-import com.zimbra.common.localconfig.LC;
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.common.util.Constants;
-import com.zimbra.common.util.Log;
-import com.zimbra.common.util.NetUtil;
-import com.zimbra.cs.account.Provisioning;
+import org.zmail.common.localconfig.LC;
+import org.zmail.common.service.ServiceException;
+import org.zmail.common.util.Constants;
+import org.zmail.common.util.Log;
+import org.zmail.common.util.NetUtil;
+import org.zmail.cs.account.Provisioning;
 
 public abstract class ServerConfig {
     private String protocol;
@@ -44,7 +44,7 @@ public abstract class ServerConfig {
     }
 
     public String getServerName() {
-        return LC.zimbra_server_hostname.value();
+        return LC.zmail_server_hostname.value();
     }
 
     public String getServerVersion() {
@@ -100,7 +100,7 @@ public abstract class ServerConfig {
         if (name != null && !name.isEmpty()) {
             sb.append(name).append(' ');
         }
-        sb.append("Zimbra ");
+        sb.append("Zmail ");
         String version = getServerVersion();
         if (version != null && !version.isEmpty()) {
             sb.append(version).append(' ');
@@ -109,7 +109,7 @@ public abstract class ServerConfig {
     }
 
     public String[] getSslExcludedCiphers() {
-        String key = Provisioning.A_zimbraSSLExcludeCipherSuites;
+        String key = Provisioning.A_zmailSSLExcludeCipherSuites;
         try {
             return Provisioning.getInstance().getConfig().getMultiAttr(key);
         } catch (ServiceException e) {
@@ -195,18 +195,18 @@ public abstract class ServerConfig {
         }
     }
 
-    protected com.zimbra.cs.account.Server getLocalServer() throws ServiceException {
+    protected org.zmail.cs.account.Server getLocalServer() throws ServiceException {
         return Provisioning.getInstance().getLocalServer();
     }
 
-    protected com.zimbra.cs.account.Config getGlobalConfig() throws ServiceException {
+    protected org.zmail.cs.account.Config getGlobalConfig() throws ServiceException {
         return Provisioning.getInstance().getConfig();
     }
 
     public boolean isServiceEnabled() {
         try {
             return Provisioning.getInstance().getLocalServer().getBooleanAttr(
-                    Provisioning.A_zimbraUserServicesEnabled, true);
+                    Provisioning.A_zmailUserServicesEnabled, true);
         } catch (ServiceException e) {
             getLog().error("Unabled to determine the service availability", e);
             return false;
@@ -214,7 +214,7 @@ public abstract class ServerConfig {
     }
 
     public String[] getIgnoredHosts() throws ServiceException {
-        return getLocalServer().getMultiAttr(Provisioning.A_zimbraThrottleSafeHosts);
+        return getLocalServer().getMultiAttr(Provisioning.A_zmailThrottleSafeHosts);
     }
 }
 

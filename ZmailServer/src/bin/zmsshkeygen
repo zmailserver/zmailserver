@@ -16,23 +16,23 @@
 
 source `dirname $0`/../bin/zmshutil || exit 1
 zmsetvars \
-	zimbra_home \
-	zimbra_server_hostname
+	zmail_home \
+	zmail_server_hostname
 
-keyattr="zimbraSshPublicKey"
+keyattr="zmailSshPublicKey"
 
-zmprov="/opt/zimbra/bin/zmprov -m -l"
+zmprov="/opt/zmail/bin/zmprov -m -l"
 
-keyfile="${zimbra_home}/.ssh/zimbra_identity"
+keyfile="${zmail_home}/.ssh/zmail_identity"
 
-mkdir -p ${zimbra_home}/.ssh
+mkdir -p ${zmail_home}/.ssh
 
-if [ ! -d "${zimbra_home}/.ssh" ]; then
-  echo "Unable to create ${zimbra_home}/.ssh."
+if [ ! -d "${zmail_home}/.ssh" ]; then
+  echo "Unable to create ${zmail_home}/.ssh."
   exit 1
 fi
 
-chmod 700 ${zimbra_home}/.ssh
+chmod 700 ${zmail_home}/.ssh
 
 rm -f ${keyfile}
 
@@ -45,8 +45,8 @@ if [ $keytype != "dsa" -a $keytype != "rsa" ]; then
 fi
 
 ssh-keygen -f ${keyfile} -b 1024 -N '' \
-	-t ${keytype} -C ${zimbra_server_hostname}
+	-t ${keytype} -C ${zmail_server_hostname}
 
 pubkey=`cat ${keyfile}.pub`
 
-${zmprov} ms ${zimbra_server_hostname} ${keyattr} "${pubkey}"
+${zmprov} ms ${zmail_server_hostname} ${keyattr} "${pubkey}"

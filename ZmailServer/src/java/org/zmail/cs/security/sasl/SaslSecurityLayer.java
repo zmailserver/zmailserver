@@ -12,7 +12,7 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.security.sasl;
+package org.zmail.cs.security.sasl;
 
 import javax.security.sasl.Sasl;
 import javax.security.sasl.SaslClient;

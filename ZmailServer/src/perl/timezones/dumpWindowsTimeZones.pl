@@ -252,7 +252,7 @@ foreach my $tzname ($tzRoot->SubKeyNames()) {
 @tzlist = sort tzComparator @tzlist;
 
 print "BEGIN:VCALENDAR\n";
-print "PRODID:Zimbra-Calendar-Provider\n";
+print "PRODID:Zmail-Calendar-Provider\n";
 print "VERSION:2.0\n";
 print "METHOD:PUBLISH\n";
 my $first = 1;

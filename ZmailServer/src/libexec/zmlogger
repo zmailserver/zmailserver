@@ -14,11 +14,11 @@
 # ***** END LICENSE BLOCK *****
 #
 
-use lib qw(/opt/zimbra/zimbramon/lib);
+use lib qw(/opt/zmail/zmailmon/lib);
 use strict;
 use warnings;
-use Zimbra::Mon::Zmstat;
-use Zimbra::Mon::LoggerSchema;
+use Zmail::Mon::Zmstat;
+use Zmail::Mon::LoggerSchema;
 use RRDs;
 use DBI;
 use FileHandle;
@@ -54,9 +54,9 @@ sub catchSignal {
   exit 0;
 }
 
-Zimbra::Mon::Zmstat::getLocalConfig();
-$zmrrdfetch = $Zimbra::Mon::Zmstat::LC{zimbra_home} . "/libexec/zmrrdfetch";
-$zmrrdfetch_pid = $Zimbra::Mon::Zmstat::LC{zimbra_log_directory} . "/zmrrdfetch-server.pid";
+Zmail::Mon::Zmstat::getLocalConfig();
+$zmrrdfetch = $Zmail::Mon::Zmstat::LC{zmail_home} . "/libexec/zmrrdfetch";
+$zmrrdfetch_pid = $Zmail::Mon::Zmstat::LC{zmail_log_directory} . "/zmrrdfetch-server.pid";
 
 my @CREATE_DDL = (
     q{CREATE TABLE IF NOT EXISTS hosts (
@@ -430,7 +430,7 @@ sub upgrade_schema($) {
 }
 
 sub init() {
-    $logger_directory = $Zimbra::Mon::Zmstat::LC{logger_data_directory};
+    $logger_directory = $Zmail::Mon::Zmstat::LC{logger_data_directory};
     $logger_rrd_directory   = "$logger_directory/rrds";
 
     mkdir($logger_directory)     if (! -d $logger_directory);
@@ -463,7 +463,7 @@ sub runserver() {
 	use Socket;
 	use Carp;
 	
-	my $port = $Zimbra::Mon::Zmstat::LC{'logger_zmrrdfetch_port'};
+	my $port = $Zmail::Mon::Zmstat::LC{'logger_zmrrdfetch_port'};
 	my $proto = getprotobyname('tcp');
 	
 	socket(Server, PF_INET, SOCK_STREAM, $proto)               || die "socket: $!";
@@ -529,10 +529,10 @@ sub run() {
     my %fragments; # workaround for syslogd 1024 byte limit
 
     my $mailboxdre = qr/\[(\w+\.csv)\] .* slogger - (\w+\.csv): (.*):: (.*)$/;
-    my $zimbramonmtare = qr/MTA: (\S+): (.*):: (.*)$/;
-    my $zimbramonstatre = qr/zmstat (\S+\.csv): (.*):: (.*)$/;
-    my $zimbramonstatusre = qr/STATUS: (\S+): (\S+): (\w+)\s*/;
-    my $zimbramonqueuere = qr/QUEUE: (\d+) (\d+)\s*$/;
+    my $zmailmonmtare = qr/MTA: (\S+): (.*):: (.*)$/;
+    my $zmailmonstatre = qr/zmstat (\S+\.csv): (.*):: (.*)$/;
+    my $zmailmonstatusre = qr/STATUS: (\S+): (\S+): (\w+)\s*/;
+    my $zmailmonqueuere = qr/QUEUE: (\d+) (\d+)\s*$/;
     
     while (<>) {
         my $line = $_;
@@ -561,11 +561,11 @@ sub run() {
             next;
         }
         my ($csv_file, $headers, $data);
-        if ($app eq 'zimbramon') {
+        if ($app eq 'zmailmon') {
             my @match;
-            if (@match = ($msg =~ m/$zimbramonstatre/)) {
+            if (@match = ($msg =~ m/$zmailmonstatre/)) {
                 ($csv_file, $headers, $data) = @match;
-            } elsif (@match = ($msg =~ m/$zimbramonstatusre/)) {
+            } elsif (@match = ($msg =~ m/$zmailmonstatusre/)) {
                 my ($hostname, $service, $status) = @match;
                 my $syslog_hostname = $host;
                 map_host($dbh, $syslog_hostname, $hostname);
@@ -574,12 +574,12 @@ sub run() {
                 $csv_file = 'zmstatuslog';
                 $headers  = $service;
                 $data     = $status eq 'Running' ? 1 : 0;
-            } elsif (@match = ($msg =~ m/$zimbramonqueuere/)) {
+            } elsif (@match = ($msg =~ m/$zmailmonqueuere/)) {
                 my ($kbs, $msgs) = @match;
                 $csv_file = 'zmqueuelog';
                 $headers  = 'kB,msgs';
                 $data     = "$kbs,$msgs";
-            } elsif (@match = ($msg =~ m/$zimbramonmtare/)) {
+            } elsif (@match = ($msg =~ m/$zmailmonmtare/)) {
                 ($host, $headers, $data) = @match;
                 $csv_file = 'zmmtastats';
             }

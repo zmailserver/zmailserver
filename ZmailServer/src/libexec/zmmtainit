@@ -49,7 +49,7 @@ else
    STARTTLS="no"
 fi
 
-PLAT=`/bin/bash ${zimbra_home}/libexec/get_plat_tag.sh`
+PLAT=`/bin/bash ${zmail_home}/libexec/get_plat_tag.sh`
 if [ "X$PLAT" = "XMACOSXx86_10.5" -o "X$PLAT" = "XMACOSXx86_10.6" -o "X$PLAT" = "XMACOSXx86_10.7" ]; then
   postfix_owner=_postfix
 else
@@ -57,20 +57,20 @@ else
 fi
 
 
-confdir=/opt/zimbra/conf
+confdir=/opt/zmail/conf
 mkdir -p ${confdir}
 
 cat<<EOF > ${confdir}/ldap-vmm.cf
 server_host = ${ldap_url}
 server_port = ${ldap_port}
 search_base =
-query_filter = (&(zimbraMailDeliveryAddress=%s)(zimbraMailStatus=enabled))
-result_attribute = zimbraMailDeliveryAddress
+query_filter = (&(zmailMailDeliveryAddress=%s)(zmailMailStatus=enabled))
+result_attribute = zmailMailDeliveryAddress
 version = 3
 start_tls = ${STARTTLS}
-tls_ca_cert_dir = /opt/zimbra/conf/ca
+tls_ca_cert_dir = /opt/zmail/conf/ca
 bind = yes
-bind_dn = uid=zmpostfix,cn=appaccts,cn=zimbra
+bind_dn = uid=zmpostfix,cn=appaccts,cn=zmail
 bind_pw = ${ldap_postfix_password}
 timeout = 30
 EOF
@@ -79,13 +79,13 @@ cat<<EOF > ${confdir}/ldap-vmd.cf
 server_host = ${ldap_url}
 server_port = ${ldap_port}
 search_base =
-query_filter = (&(zimbraDomainName=%s)(zimbraDomainType=local)(zimbraMailStatus=enabled))
-result_attribute = zimbraDomainName
+query_filter = (&(zmailDomainName=%s)(zmailDomainType=local)(zmailMailStatus=enabled))
+result_attribute = zmailDomainName
 version = 3
 start_tls = ${STARTTLS}
-tls_ca_cert_dir = /opt/zimbra/conf/ca
+tls_ca_cert_dir = /opt/zmail/conf/ca
 bind = yes
-bind_dn = uid=zmpostfix,cn=appaccts,cn=zimbra
+bind_dn = uid=zmpostfix,cn=appaccts,cn=zmail
 bind_pw = ${ldap_postfix_password}
 timeout = 30
 EOF
@@ -94,13 +94,13 @@ cat<<EOF > ${confdir}/ldap-vam.cf
 server_host = ${ldap_url}
 server_port = ${ldap_port}
 search_base =
-query_filter = (&(|(zimbraMailDeliveryAddress=%s)(zimbraMailAlias=%s)(zimbraMailCatchAllAddress=%s))(zimbraMailStatus=enabled))
-result_attribute = zimbraMailDeliveryAddress,zimbraMailForwardingAddress,zimbraPrefMailForwardingAddress,zimbraMailCatchAllForwardingAddress
+query_filter = (&(|(zmailMailDeliveryAddress=%s)(zmailMailAlias=%s)(zmailMailCatchAllAddress=%s))(zmailMailStatus=enabled))
+result_attribute = zmailMailDeliveryAddress,zmailMailForwardingAddress,zmailPrefMailForwardingAddress,zmailMailCatchAllForwardingAddress
 version = 3
 start_tls = ${STARTTLS}
-tls_ca_cert_dir = /opt/zimbra/conf/ca
+tls_ca_cert_dir = /opt/zmail/conf/ca
 bind = yes
-bind_dn = uid=zmpostfix,cn=appaccts,cn=zimbra
+bind_dn = uid=zmpostfix,cn=appaccts,cn=zmail
 bind_pw = ${ldap_postfix_password}
 timeout = 30
 special_result_attribute = member
@@ -110,13 +110,13 @@ cat<<EOF > ${confdir}/ldap-vad.cf
 server_host = ${ldap_url}
 server_port = ${ldap_port}
 search_base =
-query_filter = (&(zimbraDomainName=%s)(zimbraDomainType=alias)(zimbraMailStatus=enabled))
-result_attribute = zimbraDomainName
+query_filter = (&(zmailDomainName=%s)(zmailDomainType=alias)(zmailMailStatus=enabled))
+result_attribute = zmailDomainName
 version = 3
 start_tls = ${STARTTLS}
-tls_ca_cert_dir = /opt/zimbra/conf/ca
+tls_ca_cert_dir = /opt/zmail/conf/ca
 bind = yes
-bind_dn = uid=zmpostfix,cn=appaccts,cn=zimbra
+bind_dn = uid=zmpostfix,cn=appaccts,cn=zmail
 bind_pw = ${ldap_postfix_password}
 timeout = 30
 EOF
@@ -125,13 +125,13 @@ cat<<EOF > ${confdir}/ldap-scm.cf
 server_host = ${ldap_url}
 server_port = ${ldap_port}
 search_base = 
-query_filter = (&(|(zimbraMailDeliveryAddress=%s)(zimbraMailAlias=%s)(zimbraMailCatchAllAddress=%s))(zimbraMailStatus=enabled))
-result_attribute = zimbraMailCanonicalAddress,zimbraMailCatchAllCanonicalAddress
+query_filter = (&(|(zmailMailDeliveryAddress=%s)(zmailMailAlias=%s)(zmailMailCatchAllAddress=%s))(zmailMailStatus=enabled))
+result_attribute = zmailMailCanonicalAddress,zmailMailCatchAllCanonicalAddress
 version = 3
 start_tls = ${STARTTLS}
-tls_ca_cert_dir = /opt/zimbra/conf/ca
+tls_ca_cert_dir = /opt/zmail/conf/ca
 bind = yes
-bind_dn = uid=zmpostfix,cn=appaccts,cn=zimbra
+bind_dn = uid=zmpostfix,cn=appaccts,cn=zmail
 bind_pw = ${ldap_postfix_password}
 timeout = 30
 EOF
@@ -140,13 +140,13 @@ cat<<EOF > ${confdir}/ldap-transport.cf
 server_host = ${ldap_url}
 server_port = ${ldap_port}
 search_base =
-query_filter = (&(|(zimbraMailDeliveryAddress=%s)(zimbraDomainName=%s))(zimbraMailStatus=enabled))
-result_attribute = zimbraMailTransport
+query_filter = (&(|(zmailMailDeliveryAddress=%s)(zmailDomainName=%s))(zmailMailStatus=enabled))
+result_attribute = zmailMailTransport
 version = 3
 start_tls = ${STARTTLS}
-tls_ca_cert_dir = /opt/zimbra/conf/ca
+tls_ca_cert_dir = /opt/zmail/conf/ca
 bind = yes
-bind_dn = uid=zmpostfix,cn=appaccts,cn=zimbra
+bind_dn = uid=zmpostfix,cn=appaccts,cn=zmail
 bind_pw = ${ldap_postfix_password}
 timeout = 30
 EOF

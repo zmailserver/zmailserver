@@ -16,7 +16,7 @@
 /*
  * Created on May 26, 2004
  */
-package com.zimbra.cs.service.account;
+package org.zmail.cs.service.account;
 
 import java.io.IOException;
 import java.util.Map;
@@ -26,21 +26,21 @@ import org.eclipse.jetty.io.nio.SelectChannelEndPoint;
 import org.eclipse.jetty.server.AbstractHttpConnection;
 import org.eclipse.jetty.util.thread.Timeout;
 
-import com.zimbra.common.localconfig.LC;
-import com.zimbra.common.mailbox.ContactConstants;
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.common.soap.AccountConstants;
-import com.zimbra.common.soap.MailConstants;
-import com.zimbra.common.util.ZimbraLog;
-import com.zimbra.cs.account.Account;
-import com.zimbra.cs.account.GalContact;
-import com.zimbra.cs.account.Provisioning;
-import com.zimbra.cs.gal.GalSearchControl;
-import com.zimbra.cs.gal.GalSearchParams;
-import com.zimbra.cs.gal.GalSearchResultCallback;
-import com.zimbra.common.soap.Element;
-import com.zimbra.soap.type.GalSearchType;
-import com.zimbra.soap.ZimbraSoapContext;
+import org.zmail.common.localconfig.LC;
+import org.zmail.common.mailbox.ContactConstants;
+import org.zmail.common.service.ServiceException;
+import org.zmail.common.soap.AccountConstants;
+import org.zmail.common.soap.MailConstants;
+import org.zmail.common.util.ZmailLog;
+import org.zmail.cs.account.Account;
+import org.zmail.cs.account.GalContact;
+import org.zmail.cs.account.Provisioning;
+import org.zmail.cs.gal.GalSearchControl;
+import org.zmail.cs.gal.GalSearchParams;
+import org.zmail.cs.gal.GalSearchResultCallback;
+import org.zmail.common.soap.Element;
+import org.zmail.soap.type.GalSearchType;
+import org.zmail.soap.ZmailSoapContext;
 
 /**
  * @author schemers
@@ -51,8 +51,8 @@ public class SyncGal extends GalDocumentHandler {
     public Element handle(Element request, Map<String, Object> context) throws ServiceException {
         disableJettyTimeout();
         
-        ZimbraSoapContext zsc = getZimbraSoapContext(context);
-        Account account = getRequestedAccount(getZimbraSoapContext(context));
+        ZmailSoapContext zsc = getZmailSoapContext(context);
+        Account account = getRequestedAccount(getZmailSoapContext(context));
 
         if (!canAccessAccount(zsc, account))
             throw ServiceException.PERM_DENIED("can not access account");
@@ -82,24 +82,24 @@ public class SyncGal extends GalDocumentHandler {
         return true;
     }
     
-    // bug 51189, return zimbraMailForwardingAddress for groups members
+    // bug 51189, return zmailMailForwardingAddress for groups members
     // for pre 7.0 ZCO/ZCB clients
     private static class SyncGalCallback extends GalSearchResultCallback {
-        private static final String UA_ZCO = "ZimbraConnectorForOutlook";
-        private static final String UA_ZCB = "ZimbraConnectorForBES";
+        private static final String UA_ZCO = "ZmailConnectorForOutlook";
+        private static final String UA_ZCB = "ZmailConnectorForBES";
         
         boolean mNeedPreHelixCompatibility;
         
         private SyncGalCallback(GalSearchParams params) {
             super(params);
             
-            ZimbraSoapContext zsc = params.getSoapContext();
+            ZmailSoapContext zsc = params.getSoapContext();
             if (zsc != null) {
                 String ua = zsc.getUserAgent();
                 
                 // user agent is in the format of: name + "/" + version;
-                // ZCO: ZimbraConnectorForOutlook/7.0.0.0
-                // ZCB: ZimbraConnectorForBES/7.0.0.0
+                // ZCO: ZmailConnectorForOutlook/7.0.0.0
+                // ZCB: ZmailConnectorForBES/7.0.0.0
                 if (ua != null) {
                     String[] parts = ua.split("/");
                     if (parts.length == 2) {
@@ -114,7 +114,7 @@ public class SyncGal extends GalDocumentHandler {
                                     if (major < 7)
                                         mNeedPreHelixCompatibility = true;
                                 } catch (NumberFormatException e) {
-                                    ZimbraLog.gal.debug("unable to parse user agent version " + version, e);
+                                    ZmailLog.gal.debug("unable to parse user agent version " + version, e);
                                 }
                             }
                         }
@@ -135,13 +135,13 @@ public class SyncGal extends GalDocumentHandler {
         @Override
         public void handleContact(GalContact c) throws ServiceException {
             if (mNeedPreHelixCompatibility && c.isGroup()) {
-                boolean isZimbraGroup = c.getSingleAttr(Provisioning.A_zimbraId) != null;
-                if (isZimbraGroup) {
+                boolean isZmailGroup = c.getSingleAttr(Provisioning.A_zmailId) != null;
+                if (isZmailGroup) {
                     Map<String, Object> attrs = c.getAttrs();
                     Object member = attrs.get(ContactConstants.A_member);
-                    Object mailForwardingAddress = attrs.get(Provisioning.A_zimbraMailForwardingAddress);
+                    Object mailForwardingAddress = attrs.get(Provisioning.A_zmailMailForwardingAddress);
                     if (member != null && mailForwardingAddress == null) {
-                        attrs.put(Provisioning.A_zimbraMailForwardingAddress, member);
+                        attrs.put(Provisioning.A_zmailMailForwardingAddress, member);
                         attrs.remove(ContactConstants.A_member);
                     }
                 }
@@ -168,7 +168,7 @@ public class SyncGal extends GalDocumentHandler {
      * in this case.
      */
     private void disableJettyTimeout() {
-        if (LC.zimbra_gal_sync_disable_timeout.booleanValue()) {
+        if (LC.zmail_gal_sync_disable_timeout.booleanValue()) {
             EndPoint endPoint = AbstractHttpConnection.getCurrentConnection().getEndPoint();
             if (endPoint instanceof SelectChannelEndPoint) {
                 SelectChannelEndPoint scEndPoint = (SelectChannelEndPoint) endPoint;

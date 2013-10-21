@@ -12,33 +12,33 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.qa.unittest;
+package org.zmail.qa.unittest;
 
 import java.util.Arrays;
 
 import junit.framework.TestCase;
 
-import com.zimbra.cs.account.Provisioning;
-import com.zimbra.cs.account.soap.SoapProvisioning;
-import com.zimbra.client.ZFolder;
-import com.zimbra.client.ZMailbox;
-import com.zimbra.client.ZTag;
-import com.zimbra.soap.admin.message.CreateSystemRetentionPolicyRequest;
-import com.zimbra.soap.admin.message.CreateSystemRetentionPolicyResponse;
-import com.zimbra.soap.admin.message.DeleteSystemRetentionPolicyRequest;
-import com.zimbra.soap.admin.message.DeleteSystemRetentionPolicyResponse;
-import com.zimbra.soap.admin.message.GetSystemRetentionPolicyRequest;
-import com.zimbra.soap.admin.message.GetSystemRetentionPolicyResponse;
-import com.zimbra.soap.admin.message.ModifySystemRetentionPolicyRequest;
-import com.zimbra.soap.admin.message.ModifySystemRetentionPolicyResponse;
-import com.zimbra.soap.mail.message.FolderActionRequest;
-import com.zimbra.soap.mail.message.FolderActionResponse;
-import com.zimbra.soap.mail.message.TagActionRequest;
-import com.zimbra.soap.mail.message.TagActionResponse;
-import com.zimbra.soap.mail.type.FolderActionSelector;
-import com.zimbra.soap.mail.type.Policy;
-import com.zimbra.soap.mail.type.RetentionPolicy;
-import com.zimbra.soap.mail.type.TagActionSelector;
+import org.zmail.cs.account.Provisioning;
+import org.zmail.cs.account.soap.SoapProvisioning;
+import org.zmail.client.ZFolder;
+import org.zmail.client.ZMailbox;
+import org.zmail.client.ZTag;
+import org.zmail.soap.admin.message.CreateSystemRetentionPolicyRequest;
+import org.zmail.soap.admin.message.CreateSystemRetentionPolicyResponse;
+import org.zmail.soap.admin.message.DeleteSystemRetentionPolicyRequest;
+import org.zmail.soap.admin.message.DeleteSystemRetentionPolicyResponse;
+import org.zmail.soap.admin.message.GetSystemRetentionPolicyRequest;
+import org.zmail.soap.admin.message.GetSystemRetentionPolicyResponse;
+import org.zmail.soap.admin.message.ModifySystemRetentionPolicyRequest;
+import org.zmail.soap.admin.message.ModifySystemRetentionPolicyResponse;
+import org.zmail.soap.mail.message.FolderActionRequest;
+import org.zmail.soap.mail.message.FolderActionResponse;
+import org.zmail.soap.mail.message.TagActionRequest;
+import org.zmail.soap.mail.message.TagActionResponse;
+import org.zmail.soap.mail.type.FolderActionSelector;
+import org.zmail.soap.mail.type.Policy;
+import org.zmail.soap.mail.type.RetentionPolicy;
+import org.zmail.soap.mail.type.TagActionSelector;
 
 public class TestPurge extends TestCase {
 
@@ -195,8 +195,8 @@ public class TestPurge extends TestCase {
 
         // Get system policy with the mail API.
         ZMailbox mbox = TestUtil.getZMailbox(USER_NAME);
-        com.zimbra.soap.mail.message.GetSystemRetentionPolicyResponse mailRes =
-            mbox.invokeJaxb(new com.zimbra.soap.mail.message.GetSystemRetentionPolicyRequest());
+        org.zmail.soap.mail.message.GetSystemRetentionPolicyResponse mailRes =
+            mbox.invokeJaxb(new org.zmail.soap.mail.message.GetSystemRetentionPolicyRequest());
         assertEquals(rp, mailRes.getRetentionPolicy());
 
         // Modify lifetime.

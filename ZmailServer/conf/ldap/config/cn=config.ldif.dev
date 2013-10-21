@@ -1,8 +1,8 @@
 dn: cn=config
 objectClass: olcGlobal
 cn: config
-olcConfigDir: /opt/zimbra/data/ldap/config
-olcArgsFile: /opt/zimbra/openldap/var/run/slapd.args
+olcConfigDir: /opt/zmail/data/ldap/config
+olcArgsFile: /opt/zmail/openldap/var/run/slapd.args
 olcAttributeOptions: lang-
 olcAuthzPolicy: none
 olcConcurrency: 0
@@ -17,7 +17,7 @@ olcIndexSubstrAnyStep: 2
 olcIndexIntLen: 4
 olcLocalSSF: 71
 olcLogLevel: Stats
-olcPidFile: /opt/zimbra/openldap/var/run/slapd.pid
+olcPidFile: /opt/zmail/openldap/var/run/slapd.pid
 olcReadOnly: FALSE
 olcSaslSecProps: noplain,noanonymous
 olcSockbufMaxIncoming: 262143

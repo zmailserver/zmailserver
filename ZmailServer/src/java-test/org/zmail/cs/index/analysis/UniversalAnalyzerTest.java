@@ -12,7 +12,7 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.index.analysis;
+package org.zmail.cs.index.analysis;
 
 import java.io.IOException;
 import java.io.StringReader;
@@ -56,7 +56,7 @@ public final class UniversalAnalyzerTest {
         testSTD("foo      bar .  FOO <> BAR");
         testSTD("\"QUOTED\" word");
 
-        testSTD("Zimbra is awesome.");
+        testSTD("Zmail is awesome.");
     }
 
     @Test
@@ -185,7 +185,7 @@ public final class UniversalAnalyzerTest {
 
     @Test
     public void wikipedia() throws Exception {
-        String src = new String(ByteStreams.toByteArray(getClass().getResourceAsStream("wikipedia-zimbra.txt")),
+        String src = new String(ByteStreams.toByteArray(getClass().getResourceAsStream("wikipedia-zmail.txt")),
                 Charsets.ISO_8859_1);
         assertOffset = false;
         testSTD(src);

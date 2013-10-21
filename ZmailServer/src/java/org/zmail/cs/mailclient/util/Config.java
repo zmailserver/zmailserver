@@ -12,7 +12,7 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.mailclient.util;
+package org.zmail.cs.mailclient.util;
 
 import java.util.Properties;
 import java.beans.BeanInfo;

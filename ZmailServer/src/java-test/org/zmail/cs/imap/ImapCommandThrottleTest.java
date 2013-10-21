@@ -13,7 +13,7 @@
  * ***** END LICENSE BLOCK *****
  */
 
-package com.zimbra.cs.imap;
+package org.zmail.cs.imap;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -28,31 +28,31 @@ import junit.framework.Assert;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
-import com.zimbra.common.localconfig.LC;
-import com.zimbra.cs.imap.AbstractListCommand;
-import com.zimbra.cs.imap.AppendCommand;
-import com.zimbra.cs.imap.AppendMessage;
-import com.zimbra.cs.imap.CopyCommand;
-import com.zimbra.cs.imap.ExamineCommand;
-import com.zimbra.cs.imap.FetchCommand;
-import com.zimbra.cs.imap.ImapCommand;
-import com.zimbra.cs.imap.ImapCommandThrottle;
-import com.zimbra.cs.imap.ImapHandler;
-import com.zimbra.cs.imap.ImapPartSpecifier;
-import com.zimbra.cs.imap.ImapPath;
-import com.zimbra.cs.imap.ListCommand;
-import com.zimbra.cs.imap.Literal;
-import com.zimbra.cs.imap.QResyncInfo;
-import com.zimbra.cs.imap.SearchCommand;
-import com.zimbra.cs.imap.SelectCommand;
-import com.zimbra.cs.imap.AppendMessage.Part;
-import com.zimbra.cs.imap.ImapHandler.StoreAction;
-import com.zimbra.cs.imap.ImapSearch.SequenceSearch;
-import com.zimbra.cs.imap.ImapSearch.FlagSearch;
-import com.zimbra.cs.imap.ImapSearch.AndOperation;
-import com.zimbra.cs.imap.ImapSearch.OrOperation;
-import com.zimbra.cs.imap.ImapSearch.AllSearch;
-import com.zimbra.cs.mailbox.MailboxTestUtil;
+import org.zmail.common.localconfig.LC;
+import org.zmail.cs.imap.AbstractListCommand;
+import org.zmail.cs.imap.AppendCommand;
+import org.zmail.cs.imap.AppendMessage;
+import org.zmail.cs.imap.CopyCommand;
+import org.zmail.cs.imap.ExamineCommand;
+import org.zmail.cs.imap.FetchCommand;
+import org.zmail.cs.imap.ImapCommand;
+import org.zmail.cs.imap.ImapCommandThrottle;
+import org.zmail.cs.imap.ImapHandler;
+import org.zmail.cs.imap.ImapPartSpecifier;
+import org.zmail.cs.imap.ImapPath;
+import org.zmail.cs.imap.ListCommand;
+import org.zmail.cs.imap.Literal;
+import org.zmail.cs.imap.QResyncInfo;
+import org.zmail.cs.imap.SearchCommand;
+import org.zmail.cs.imap.SelectCommand;
+import org.zmail.cs.imap.AppendMessage.Part;
+import org.zmail.cs.imap.ImapHandler.StoreAction;
+import org.zmail.cs.imap.ImapSearch.SequenceSearch;
+import org.zmail.cs.imap.ImapSearch.FlagSearch;
+import org.zmail.cs.imap.ImapSearch.AndOperation;
+import org.zmail.cs.imap.ImapSearch.OrOperation;
+import org.zmail.cs.imap.ImapSearch.AllSearch;
+import org.zmail.cs.mailbox.MailboxTestUtil;
 
 public class ImapCommandThrottleTest {
 

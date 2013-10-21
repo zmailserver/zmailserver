@@ -36,10 +36,10 @@ exit(0);
 
 sub addContactCountColumn() {
     my $sql = <<ADD_CONTACT_COUNT_COLUMN_EOF;
-ALTER TABLE zimbra.mailbox
+ALTER TABLE zmail.mailbox
 ADD COLUMN contact_count INTEGER UNSIGNED DEFAULT 0 AFTER item_id_checkpoint;
 
-UPDATE zimbra.mailbox
+UPDATE zmail.mailbox
 SET contact_count = NULL;
 
 ADD_CONTACT_COUNT_COLUMN_EOF

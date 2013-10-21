@@ -69,7 +69,7 @@ sub getOutdir() {
 }
 
 sub getLocalServerName() {
-    my $server = `$ZMLOCALCONFIG -m nokey zimbra_server_hostname`;
+    my $server = `$ZMLOCALCONFIG -m nokey zmail_server_hostname`;
     chomp($server);
     return $server;
 }
@@ -82,7 +82,7 @@ sub getTriggerTimeMinutes($) {
 	chomp($line);
 	my ($key, $val) = split(/:\s*/, $line);
         if (defined($key) && defined($val) &&
-	    $key eq 'zimbraPrefCalendarApptReminderWarningTime') {
+	    $key eq 'zmailPrefCalendarApptReminderWarningTime') {
 	    return $val;
 	}
     }

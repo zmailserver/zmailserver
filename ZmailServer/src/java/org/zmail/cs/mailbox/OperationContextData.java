@@ -12,17 +12,17 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.mailbox;
+package org.zmail.cs.mailbox;
 
 import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.common.util.SetUtil;
-import com.zimbra.common.util.ZimbraLog;
-import com.zimbra.cs.account.Provisioning;
-import com.zimbra.cs.mailbox.Mailbox.FolderNode;
+import org.zmail.common.service.ServiceException;
+import org.zmail.common.util.SetUtil;
+import org.zmail.common.util.ZmailLog;
+import org.zmail.cs.account.Provisioning;
+import org.zmail.cs.mailbox.Mailbox.FolderNode;
 
 public abstract class OperationContextData {
     
@@ -207,7 +207,7 @@ public abstract class OperationContextData {
                         result = Provisioning.getInstance().getNamesForIds(idHolders[bucket], entryType);
                 } catch (ServiceException e) {
                     // log a warning, return an empty map, and let the flow continue
-                    ZimbraLog.mailbox.warn("cannot lookup user grantee names", e);
+                    ZmailLog.mailbox.warn("cannot lookup user grantee names", e);
                     mEncounteredLDAPFailure = true; // so that we don't mark grants invalid
                 }
                 
@@ -285,7 +285,7 @@ public abstract class OperationContextData {
                         //   glitches like an not synced LDAP replica can return us "not found" without 
                         //   throwing a NamingException, which is caught and returned from our LDAP code 
                         //   as a ServiceException.  
-                        // See http://bugzilla.zimbra.com/show_bug.cgi?id=39806#c4 
+                        // See http://bugzilla.zmail.com/show_bug.cgi?id=39806#c4 
                         if (mEncounteredLDAPFailure) {
                             return EMPTY_NAME;
                         } else {

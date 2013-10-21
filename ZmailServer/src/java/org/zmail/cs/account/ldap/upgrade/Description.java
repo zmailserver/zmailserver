@@ -14,12 +14,12 @@
  * 
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.account.ldap.upgrade;
+package org.zmail.cs.account.ldap.upgrade;
 
 import java.util.Arrays;
 
-import com.zimbra.cs.account.FileGenUtil;
-import com.zimbra.cs.account.Entry.EntryType;
+import org.zmail.cs.account.FileGenUtil;
+import org.zmail.cs.account.Entry.EntryType;
 
 
 public class Description {

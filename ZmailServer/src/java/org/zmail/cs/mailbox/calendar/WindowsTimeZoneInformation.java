@@ -13,10 +13,10 @@
  * ***** END LICENSE BLOCK *****
  */
 
-package com.zimbra.cs.mailbox.calendar;
+package org.zmail.cs.mailbox.calendar;
 
-import com.zimbra.common.calendar.ICalTimeZone;
-import com.zimbra.common.calendar.ICalTimeZone.SimpleOnset;
+import org.zmail.common.calendar.ICalTimeZone;
+import org.zmail.common.calendar.ICalTimeZone.SimpleOnset;
 
 /**
  * Java representation of Windows TIME_ZONE_INFORMATION structure in Winbase.h

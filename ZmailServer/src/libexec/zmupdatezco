@@ -14,15 +14,15 @@
 # ***** END LICENSE BLOCK *****
 # 
 
-if [ x`whoami` != xzimbra ]; then
-    echo Error: must be run as zimbra user
+if [ x`whoami` != xzmail ]; then
+    echo Error: must be run as zmail user
     exit 1
 fi
 
 source `dirname $0`/../bin/zmshutil || exit 1
 zmsetvars
 
-download_dir=${mailboxd_directory}/webapps/zimbra/downloads
+download_dir=${mailboxd_directory}/webapps/zmail/downloads
 
 client_file=$1
 
@@ -63,4 +63,4 @@ for file in `ls ${download_dir}/${client_file_appglob}`; do
 done
 
 
-${zimbra_home}/bin/zmmailboxdctl update
+${zmail_home}/bin/zmmailboxdctl update

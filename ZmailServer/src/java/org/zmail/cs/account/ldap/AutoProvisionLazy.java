@@ -12,7 +12,7 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.account.ldap;
+package org.zmail.cs.account.ldap;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -20,16 +20,16 @@ import java.util.Set;
 
 import javax.security.auth.login.LoginException;
 
-import com.zimbra.common.account.ZAttrProvisioning.AutoProvAuthMech;
-import com.zimbra.common.account.ZAttrProvisioning.AutoProvMode;
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.common.util.ZimbraLog;
-import com.zimbra.cs.account.Account;
-import com.zimbra.cs.account.Domain;
-import com.zimbra.cs.account.Provisioning;
-import com.zimbra.cs.account.AccountServiceException.AuthFailedServiceException;
-import com.zimbra.cs.account.auth.AuthMechanism.AuthMech;
-import com.zimbra.cs.account.krb5.Krb5Login;
+import org.zmail.common.account.ZAttrProvisioning.AutoProvAuthMech;
+import org.zmail.common.account.ZAttrProvisioning.AutoProvMode;
+import org.zmail.common.service.ServiceException;
+import org.zmail.common.util.ZmailLog;
+import org.zmail.cs.account.Account;
+import org.zmail.cs.account.Domain;
+import org.zmail.cs.account.Provisioning;
+import org.zmail.cs.account.AccountServiceException.AuthFailedServiceException;
+import org.zmail.cs.account.auth.AuthMechanism.AuthMech;
+import org.zmail.cs.account.krb5.Krb5Login;
 
 class AutoProvisionLazy extends AutoProvision {
     private String loginName;
@@ -72,27 +72,27 @@ class AutoProvisionLazy extends AutoProvision {
     }
     
     private boolean autoProvisionEnabled() {
-        Set<String> authMechsEnabled = domain.getMultiAttrSet(Provisioning.A_zimbraAutoProvAuthMech);
-        Set<String> modesEnabled = domain.getMultiAttrSet(Provisioning.A_zimbraAutoProvMode);
+        Set<String> authMechsEnabled = domain.getMultiAttrSet(Provisioning.A_zmailAutoProvAuthMech);
+        Set<String> modesEnabled = domain.getMultiAttrSet(Provisioning.A_zmailAutoProvMode);
         return authMechsEnabled.contains(authedByMech.name()) && modesEnabled.contains(AutoProvMode.LAZY.name());
     }
     
     private Account createAccount() throws ServiceException {
         ExternalEntry externalEntry = getExternalAttrsByName(loginName);
-        String acctZimbraName = mapName(externalEntry.getAttrs(), loginName);
+        String acctZmailName = mapName(externalEntry.getAttrs(), loginName);
         
-        ZimbraLog.autoprov.info("auto creating account in LAZY mode: " + acctZimbraName);
-        return createAccount(acctZimbraName, externalEntry, null, AutoProvMode.LAZY);
+        ZmailLog.autoprov.info("auto creating account in LAZY mode: " + acctZmailName);
+        return createAccount(acctZmailName, externalEntry, null, AutoProvMode.LAZY);
     }
     
     private AutoProvAuthMech auth() {
-        String authMechStr = domain.getAttr(Provisioning.A_zimbraAuthMech);
+        String authMechStr = domain.getAttr(Provisioning.A_zmailAuthMech);
         AuthMech authMech = null;
         
         try {
             authMech = AuthMech.fromString(authMechStr);
         } catch (ServiceException e) {
-            ZimbraLog.autoprov.debug("invalid auth mech " + authMechStr, e);
+            ZmailLog.autoprov.debug("invalid auth mech " + authMechStr, e);
         }
         
         // only support external LDAP auth for now
@@ -102,14 +102,14 @@ class AutoProvisionLazy extends AutoProvision {
                 prov.externalLdapAuth(domain, authMech, loginName, loginPassword, authCtxt);
                 return AutoProvAuthMech.LDAP;
             } catch (ServiceException e) {
-                ZimbraLog.autoprov.info("unable to authenticate " + loginName + " for auto provisioning", e);
+                ZmailLog.autoprov.info("unable to authenticate " + loginName + " for auto provisioning", e);
             }
         } else if (AuthMech.kerberos5 == authMech) {
             try {
                 Krb5Login.verifyPassword(loginName, loginPassword);
                 return AutoProvAuthMech.KRB5;
             } catch (LoginException e) {
-                ZimbraLog.autoprov.info("unable to authenticate " + loginName + " for auto provisioning", e);
+                ZmailLog.autoprov.info("unable to authenticate " + loginName + " for auto provisioning", e);
             }
         } else {
             // unsupported auth mechanism for lazy auto provision

@@ -13,33 +13,33 @@
  * ***** END LICENSE BLOCK *****
  */
 
-package com.zimbra.cs.service.account;
+package org.zmail.cs.service.account;
 
 import com.google.common.base.Strings;
-import com.zimbra.common.calendar.TZIDMapper;
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.common.soap.AccountConstants;
-import com.zimbra.common.soap.Element;
-import com.zimbra.common.soap.Element.KeyValuePair;
-import com.zimbra.common.util.ZimbraLog;
-import com.zimbra.cs.account.AccessManager.AttrRightChecker;
-import com.zimbra.cs.account.Account;
-import com.zimbra.cs.account.AttributeManager;
-import com.zimbra.cs.account.AttributeManager.IDNType;
-import com.zimbra.cs.account.CalendarResource;
-import com.zimbra.cs.account.DataSource;
-import com.zimbra.cs.account.EntrySearchFilter;
-import com.zimbra.cs.account.IDNUtil;
-import com.zimbra.cs.account.EntrySearchFilter.Multi;
-import com.zimbra.cs.account.EntrySearchFilter.Single;
-import com.zimbra.cs.account.EntrySearchFilter.Visitor;
-import com.zimbra.cs.account.Signature.SignatureContent;
-import com.zimbra.cs.account.accesscontrol.GranteeType;
-import com.zimbra.cs.account.accesscontrol.ZimbraACE;
-import com.zimbra.cs.account.Identity;
-import com.zimbra.cs.account.Provisioning;
-import com.zimbra.cs.account.Signature;
-import com.zimbra.common.util.L10nUtil;
+import org.zmail.common.calendar.TZIDMapper;
+import org.zmail.common.service.ServiceException;
+import org.zmail.common.soap.AccountConstants;
+import org.zmail.common.soap.Element;
+import org.zmail.common.soap.Element.KeyValuePair;
+import org.zmail.common.util.ZmailLog;
+import org.zmail.cs.account.AccessManager.AttrRightChecker;
+import org.zmail.cs.account.Account;
+import org.zmail.cs.account.AttributeManager;
+import org.zmail.cs.account.AttributeManager.IDNType;
+import org.zmail.cs.account.CalendarResource;
+import org.zmail.cs.account.DataSource;
+import org.zmail.cs.account.EntrySearchFilter;
+import org.zmail.cs.account.IDNUtil;
+import org.zmail.cs.account.EntrySearchFilter.Multi;
+import org.zmail.cs.account.EntrySearchFilter.Single;
+import org.zmail.cs.account.EntrySearchFilter.Visitor;
+import org.zmail.cs.account.Signature.SignatureContent;
+import org.zmail.cs.account.accesscontrol.GranteeType;
+import org.zmail.cs.account.accesscontrol.ZmailACE;
+import org.zmail.cs.account.Identity;
+import org.zmail.cs.account.Provisioning;
+import org.zmail.cs.account.Signature;
+import org.zmail.common.util.L10nUtil;
 
 import java.util.Iterator;
 import java.util.Locale;
@@ -100,7 +100,7 @@ public class ToXML {
         try {
             attrMgr = AttributeManager.getInstance();
         } catch (ServiceException se) {
-            ZimbraLog.account.warn("failed to get AttributeManager instance", se);
+            ZmailLog.account.warn("failed to get AttributeManager instance", se);
         }
         
         for (Iterator iter = attrs.entrySet().iterator(); iter.hasNext(); ) {
@@ -109,12 +109,12 @@ public class ToXML {
             Object value = entry.getValue();
 
             // Never return data source passwords
-            if (name.equalsIgnoreCase(Provisioning.A_zimbraDataSourcePassword))
+            if (name.equalsIgnoreCase(Provisioning.A_zmailDataSourcePassword))
                 continue;
 
             // Never return password.
             if (name.equalsIgnoreCase(Provisioning.A_userPassword) || 
-                name.equalsIgnoreCase(Provisioning.A_zimbraUCPassword)) {
+                name.equalsIgnoreCase(Provisioning.A_zmailUCPassword)) {
                 value = "VALUE-BLOCKED";
             }
             
@@ -132,7 +132,7 @@ public class ToXML {
                     encodeAttr(e, name, sv[i], AccountConstants.E_A, key, idnType, allowed);
                 }
             } else if (value instanceof String) {
-                value = fixupZimbraPrefTimeZoneId(name, (String)value);
+                value = fixupZmailPrefTimeZoneId(name, (String)value);
                 encodeAttr(e, name, (String)value, AccountConstants.E_A, key, idnType, allowed);
             }
         }       
@@ -219,7 +219,7 @@ public class ToXML {
             e.addElement(AccountConstants.E_CONTENT).addAttribute(AccountConstants.A_TYPE, c.getMimeType()).addText(c.getContent());
         }
         
-        String contactId = signature.getAttr(Provisioning.A_zimbraPrefMailSignatureContactId);
+        String contactId = signature.getAttr(Provisioning.A_zmailPrefMailSignatureContactId);
         if (contactId != null)
             e.addElement(AccountConstants.E_CONTACT_ID).setText(contactId);
         
@@ -265,14 +265,14 @@ public class ToXML {
     /**
      * Fixup for time zone id.  Always use canonical (Olson ZoneInfo) ID.
      */
-    public static String fixupZimbraPrefTimeZoneId(String attrName, String attrValue) {
-        if (Provisioning.A_zimbraPrefTimeZoneId.equals(attrName))
+    public static String fixupZmailPrefTimeZoneId(String attrName, String attrValue) {
+        if (Provisioning.A_zmailPrefTimeZoneId.equals(attrName))
             return TZIDMapper.canonicalize(attrValue);
         else
             return attrValue;
     }
     
-    public static Element encodeACE(Element parent, ZimbraACE ace) {
+    public static Element encodeACE(Element parent, ZmailACE ace) {
         Element eACE = parent.addElement(AccountConstants.E_ACE)
                 .addAttribute(AccountConstants.A_ZIMBRA_ID, ace.getGrantee())
                 .addAttribute(AccountConstants.A_GRANT_TYPE, ace.getGranteeType().getCode())

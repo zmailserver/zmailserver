@@ -14,19 +14,19 @@
  * 
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.account.callback;
+package org.zmail.cs.account.callback;
 
 import java.util.Map;
 import java.util.Set;
 
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.cs.account.AttributeCallback;
-import com.zimbra.cs.account.Entry;
+import org.zmail.common.service.ServiceException;
+import org.zmail.cs.account.AttributeCallback;
+import org.zmail.cs.account.Entry;
 
 public class MtaRelayHost extends AttributeCallback {
 
     /**
-     * ensure there can be only one value on zimbraMtaRelayHost
+     * ensure there can be only one value on zmailMtaRelayHost
      */
     @Override
     public void preModify(CallbackContext context, String attrName, Object value,

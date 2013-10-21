@@ -14,7 +14,7 @@
  * 
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.fb;
+package org.zmail.cs.fb;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -24,11 +24,11 @@ import java.util.Map;
 import com.microsoft.schemas.exchange.services._2006.types.MapiPropertyTypeType;
 import com.microsoft.schemas.exchange.services._2006.types.NonEmptyArrayOfPropertyValuesType;
 import com.microsoft.schemas.exchange.services._2006.types.PathToExtendedFieldType;
-import com.zimbra.common.localconfig.LC;
-import com.zimbra.common.util.ZimbraLog;
-import com.zimbra.cs.fb.FreeBusy.Interval;
-import com.zimbra.cs.fb.FreeBusy.IntervalList;
-import com.zimbra.cs.mailbox.calendar.IcalXmlStrMap;
+import org.zmail.common.localconfig.LC;
+import org.zmail.common.util.ZmailLog;
+import org.zmail.cs.fb.FreeBusy.Interval;
+import org.zmail.cs.fb.FreeBusy.IntervalList;
+import org.zmail.cs.mailbox.calendar.IcalXmlStrMap;
 
 public class ExchangeEWSMessage extends ExchangeMessage {
 
@@ -218,7 +218,7 @@ public class ExchangeEWSMessage extends ExchangeMessage {
                     for (int i = 0; i < encodedList.size(); i++)
                         raw[i] = encodedList.get(i).byteValue();
                 } catch (Exception e) {
-                    ZimbraLog.fb.warn("error converting millis to minutes for month " +
+                    ZmailLog.fb.warn("error converting millis to minutes for month " +
                         m,
                         e);
                     continue;

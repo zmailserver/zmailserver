@@ -12,7 +12,7 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.store.http;
+package org.zmail.cs.store.http;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -26,13 +26,13 @@ import org.apache.commons.httpclient.methods.DeleteMethod;
 import org.apache.commons.httpclient.methods.GetMethod;
 import org.apache.commons.httpclient.methods.PostMethod;
 
-import com.zimbra.common.httpclient.HttpClientUtil;
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.common.util.ByteUtil;
-import com.zimbra.common.util.ZimbraHttpConnectionManager;
-import com.zimbra.cs.mailbox.Mailbox;
-import com.zimbra.cs.service.UserServlet;
-import com.zimbra.cs.store.external.ExternalStoreManager;
+import org.zmail.common.httpclient.HttpClientUtil;
+import org.zmail.common.service.ServiceException;
+import org.zmail.common.util.ByteUtil;
+import org.zmail.common.util.ZmailHttpConnectionManager;
+import org.zmail.cs.mailbox.Mailbox;
+import org.zmail.cs.service.UserServlet;
+import org.zmail.cs.store.external.ExternalStoreManager;
 
 public abstract class HttpStoreManager extends ExternalStoreManager {
 
@@ -52,7 +52,7 @@ public abstract class HttpStoreManager extends ExternalStoreManager {
         }
         ByteUtil.PositionInputStream pin = new ByteUtil.PositionInputStream(new DigestInputStream(in, digest));
 
-        HttpClient client = ZimbraHttpConnectionManager.getInternalHttpConnMgr().newHttpClient();
+        HttpClient client = ZmailHttpConnectionManager.getInternalHttpConnMgr().newHttpClient();
         PostMethod post = new PostMethod(getPostUrl(mbox));
         try {
             HttpClientUtil.addInputStreamToHttpMethod(post, pin, actualSize, "application/octet-stream");
@@ -70,7 +70,7 @@ public abstract class HttpStoreManager extends ExternalStoreManager {
     @Override
     public InputStream readStreamFromStore(String locator, Mailbox mbox)
                     throws IOException {
-        HttpClient client = ZimbraHttpConnectionManager.getInternalHttpConnMgr().newHttpClient();
+        HttpClient client = ZmailHttpConnectionManager.getInternalHttpConnMgr().newHttpClient();
         GetMethod get = new GetMethod(getGetUrl(mbox, locator));
         int statusCode = HttpClientUtil.executeMethod(client, get);
         if (statusCode == HttpStatus.SC_OK) {
@@ -84,7 +84,7 @@ public abstract class HttpStoreManager extends ExternalStoreManager {
     @Override
     public boolean deleteFromStore(String locator, Mailbox mbox)
                     throws IOException {
-        HttpClient client = ZimbraHttpConnectionManager.getInternalHttpConnMgr().newHttpClient();
+        HttpClient client = ZmailHttpConnectionManager.getInternalHttpConnMgr().newHttpClient();
         DeleteMethod delete = new DeleteMethod(getDeleteUrl(mbox, locator));
         try {
             int statusCode = HttpClientUtil.executeMethod(client, delete);

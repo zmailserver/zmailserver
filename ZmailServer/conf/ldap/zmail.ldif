@@ -1,143 +1,143 @@
-dn: cn=zimbra
+dn: cn=zmail
 objectclass: organizationalRole
-description: Zimbra Systems Application Data
-cn: zimbra
+description: Zmail Systems Application Data
+cn: zmail
 
-dn: cn=admins,cn=zimbra
+dn: cn=admins,cn=zmail
 objectclass: organizationalRole
 description: admin accounts
 cn: admins
 
 # place holder for initial admin
-dn: uid=zimbra,cn=admins,cn=zimbra
-uid: zimbra
-objectclass: zimbraAccount
+dn: uid=zmail,cn=admins,cn=zmail
+uid: zmail
+objectclass: zmailAccount
 objectclass: organizationalPerson
 objectClass: inetOrgPerson
-cn: zimbra
-sn: zimbra
-zimbraAccountStatus: active
-zimbraIsAdminAccount: TRUE
-zimbraIsSystemResource: TRUE
-zimbraId: e0fafd89-1360-11d9-8661-000a95d98ef2
-description: The master zimbra admin account
+cn: zmail
+sn: zmail
+zmailAccountStatus: active
+zmailIsAdminAccount: TRUE
+zmailIsSystemResource: TRUE
+zmailId: e0fafd89-1360-11d9-8661-000a95d98ef2
+description: The master zmail admin account
 userPassword: {SSHA}8+r0nkcErptqasSrFPcT0k81NFrbTcAS
 
 # place holder for replica account
-dn: uid=zmreplica,cn=admins,cn=zimbra
+dn: uid=zmreplica,cn=admins,cn=zmail
 uid: zmreplica
-objectclass: zimbraAccount
+objectclass: zmailAccount
 objectclass: organizationalPerson
 objectClass: inetOrgPerson
 cn: zmreplica
 sn: zmreplica
-zimbraAccountStatus: active
-zimbraIsSystemResource: TRUE
-zimbraId: D020C0FE-4F5E-11DC-B033-C3A8E67A905E
-description: The zimbra replication account
+zmailAccountStatus: active
+zmailIsSystemResource: TRUE
+zmailId: D020C0FE-4F5E-11DC-B033-C3A8E67A905E
+description: The zmail replication account
 userPassword: {SSHA}4M5vIBjKvm9mNdvkL6YAXRdok8M81vru
 
-dn: cn=appaccts,cn=zimbra
+dn: cn=appaccts,cn=zmail
 objectclass: organizationalRole
 description: application accounts
 cn: appaccts
 
 # place holder for nginx account
-dn: uid=zmnginx,cn=appaccts,cn=zimbra
+dn: uid=zmnginx,cn=appaccts,cn=zmail
 uid: zmnginx
-objectclass: zimbraAccount
+objectclass: zmailAccount
 objectclass: organizationalPerson
 objectClass: inetOrgPerson
 cn: zmnginx
 sn: zmnginx
-zimbraAccountStatus: active
-zimbraIsAdminAccount: TRUE
-zimbraIsSystemResource: TRUE
-zimbraId: DA336C18-4F5E-11DC-8514-DCA8E67A905E
-description: The zimbra nginx account
+zmailAccountStatus: active
+zmailIsAdminAccount: TRUE
+zmailIsSystemResource: TRUE
+zmailId: DA336C18-4F5E-11DC-8514-DCA8E67A905E
+description: The zmail nginx account
 userPassword: {SSHA}0TiyKd2oSDfY7OISyEmuEf8+iqdFlYk7
 
 # place holder for postfix account
-dn: uid=zmpostfix,cn=appaccts,cn=zimbra
+dn: uid=zmpostfix,cn=appaccts,cn=zmail
 uid: zmpostfix
-objectclass: zimbraAccount
+objectclass: zmailAccount
 objectclass: organizationalPerson
 objectClass: inetOrgPerson
 cn: zmpostfix
 sn: zmpostfix
-zimbraAccountStatus: active
-zimbraIsSystemResource: TRUE
-zimbraId: a8255e5f-142b-4aa0-8aab-f8591b6455ba
-description: The zimbra postfix account
+zmailAccountStatus: active
+zmailIsSystemResource: TRUE
+zmailId: a8255e5f-142b-4aa0-8aab-f8591b6455ba
+description: The zmail postfix account
 userPassword: {SSHA}Cx6IUWjKNw5JGsaBQsLOcDmugUPyI0E4
 
 # place holder for amavis account
-dn: uid=zmamavis,cn=appaccts,cn=zimbra
+dn: uid=zmamavis,cn=appaccts,cn=zmail
 uid: zmamavis
-objectclass: zimbraAccount
+objectclass: zmailAccount
 objectclass: organizationalPerson
 objectClass: inetOrgPerson
 cn: zmamavis
 sn: zmamavis
-zimbraAccountStatus: active
-zimbraIsSystemResource: TRUE
-zimbraId: 12A0779A-88B6-11DC-AA4B-97F9DEB0B34E
-description: The zimbra amavis account
+zmailAccountStatus: active
+zmailIsSystemResource: TRUE
+zmailId: 12A0779A-88B6-11DC-AA4B-97F9DEB0B34E
+description: The zmail amavis account
 userPassword: {SSHA}+3rEY5SCrc3KlzJxLQmm735pnRTPgnT2
 
 # place holder for BES searcher account
-dn: uid=zmbes-searcher,cn=appaccts,cn=zimbra
+dn: uid=zmbes-searcher,cn=appaccts,cn=zmail
 uid: zmbes-searcher
-objectclass: zimbraAccount
+objectclass: zmailAccount
 objectclass: organizationalPerson
 objectClass: inetOrgPerson
 cn: zmbes-searcher
 sn: zmbes-searcher
-zimbraAccountStatus: active
-zimbraIsSystemResource: TRUE
-zimbraId: 30C08DC0-DB30-11E0-A9E3-832DA18C185A
-description: The zimbra BES searcher account
+zmailAccountStatus: active
+zmailIsSystemResource: TRUE
+zmailId: 30C08DC0-DB30-11E0-A9E3-832DA18C185A
+description: The zmail BES searcher account
 userPassword: {SSHA}HdIhXsO3HVQI3NB0aU/ZfJ0ZjTnP/2Ld
 
 # place holder for global group tree
-dn: cn=groups,cn=zimbra
+dn: cn=groups,cn=zmail
 objectClass: organizationalRole
 cn: groups
 description: global dynamic groups
 
 # zimlets
-dn: cn=zimlets,cn=zimbra
+dn: cn=zimlets,cn=zmail
 objectclass: organizationalRole
 cn: zimlets
 description: for storing Zimlet configuration
 
 # for storing class-of-service config
-dn: cn=cos,cn=zimbra
+dn: cn=cos,cn=zmail
 objectclass: organizationalRole
 cn: cos
 
 # for storing server info
-dn: cn=servers,cn=zimbra
+dn: cn=servers,cn=zmail
 objectclass: organizationalRole
 cn: servers
 
 # for storing UC service info
-dn: cn=ucservices,cn=zimbra
+dn: cn=ucservices,cn=zmail
 objectclass: organizationalRole
 cn: ucservices
 
 # for storing xmpp component info
-dn: cn=xmppcomponents,cn=zimbra
+dn: cn=xmppcomponents,cn=zmail
 objectclass: organizationalRole
 cn: xmppcomponents
 
 # for granting global rights
-dn: cn=globalgrant,cn=zimbra
-objectclass: zimbraAclTarget
+dn: cn=globalgrant,cn=zmail
+objectclass: zmailAclTarget
 description: acl target for global grants
 cn: globalgrant
 
 # for storing share locators
-dn: cn=sharelocators,cn=zimbra
+dn: cn=sharelocators,cn=zmail
 objectclass: organizationalRole
 cn: sharelocators

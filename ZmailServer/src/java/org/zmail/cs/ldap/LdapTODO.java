@@ -12,10 +12,10 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.ldap;
+package org.zmail.cs.ldap;
 
-import com.zimbra.common.util.ZimbraLog;
-import com.zimbra.cs.util.Zimbra;
+import org.zmail.common.util.ZmailLog;
+import org.zmail.cs.util.Zmail;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
@@ -55,7 +55,7 @@ public class LdapTODO {
     
     public static void TODO(String message) {
         LdapException e = LdapException.TODO(); // get get the stack printed
-        Zimbra.halt("TODO", e);
+        Zmail.halt("TODO", e);
     }
     
     public static enum FailCode {
@@ -78,7 +78,7 @@ public class LdapTODO {
      * Can be turned on/off by turning assertion in the JVM on/off
      */
     public static void FAIL(FailCode code) {
-        ZimbraLog.ldap.error("assertion failure: " + code.name());
+        ZmailLog.ldap.error("assertion failure: " + code.name());
         assert(false);
     }
     

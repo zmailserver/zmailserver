@@ -12,7 +12,7 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.qa.unittest;
+package org.zmail.qa.unittest;
 
 import java.util.HashMap;
 import java.util.HashSet;
@@ -23,42 +23,42 @@ import java.util.Set;
 import junit.framework.TestCase;
 import junit.framework.AssertionFailedError;
 
-import com.zimbra.common.account.Key;
-import com.zimbra.common.account.ProvisioningConstants;
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.common.util.CliUtil;
-import com.zimbra.common.util.ZimbraLog;
+import org.zmail.common.account.Key;
+import org.zmail.common.account.ProvisioningConstants;
+import org.zmail.common.service.ServiceException;
+import org.zmail.common.util.CliUtil;
+import org.zmail.common.util.ZmailLog;
 
-import com.zimbra.cs.account.AccessManager;
-import com.zimbra.cs.account.AccessManager.ViaGrant;
-import com.zimbra.cs.account.Account;
-import com.zimbra.cs.account.AuthToken;
-import com.zimbra.cs.account.DistributionList;
-import com.zimbra.cs.account.Domain;
-import com.zimbra.cs.account.Entry;
-import com.zimbra.cs.account.GuestAccount;
-import com.zimbra.cs.account.NamedEntry;
-import com.zimbra.cs.account.Provisioning;
-import com.zimbra.cs.account.Provisioning.CacheEntry;
-import com.zimbra.cs.account.Zimlet;
-import com.zimbra.cs.account.accesscontrol.AdminRight;
-import com.zimbra.cs.account.accesscontrol.CheckAttrRight;
-import com.zimbra.cs.account.accesscontrol.RightBearer.Grantee;
-import com.zimbra.cs.account.accesscontrol.GranteeType;
-import com.zimbra.cs.account.accesscontrol.Right;
-import com.zimbra.cs.account.accesscontrol.AllowedAttrs;
-import com.zimbra.cs.account.accesscontrol.RightCommand;
-import com.zimbra.cs.account.accesscontrol.RightManager;
-import com.zimbra.cs.account.accesscontrol.RightModifier;
-import com.zimbra.cs.account.accesscontrol.Rights.User;
-import com.zimbra.cs.account.accesscontrol.ACLUtil;
-import com.zimbra.cs.account.accesscontrol.ACLAccessManager;
-import com.zimbra.cs.account.accesscontrol.TargetType;
-import com.zimbra.cs.account.accesscontrol.ZimbraACE;
-import com.zimbra.cs.service.AuthProvider;
-import com.zimbra.qa.unittest.prov.ldap.ACLTestUtil;
-import com.zimbra.soap.admin.type.CacheEntryType;
-import com.zimbra.soap.type.TargetBy;
+import org.zmail.cs.account.AccessManager;
+import org.zmail.cs.account.AccessManager.ViaGrant;
+import org.zmail.cs.account.Account;
+import org.zmail.cs.account.AuthToken;
+import org.zmail.cs.account.DistributionList;
+import org.zmail.cs.account.Domain;
+import org.zmail.cs.account.Entry;
+import org.zmail.cs.account.GuestAccount;
+import org.zmail.cs.account.NamedEntry;
+import org.zmail.cs.account.Provisioning;
+import org.zmail.cs.account.Provisioning.CacheEntry;
+import org.zmail.cs.account.Zimlet;
+import org.zmail.cs.account.accesscontrol.AdminRight;
+import org.zmail.cs.account.accesscontrol.CheckAttrRight;
+import org.zmail.cs.account.accesscontrol.RightBearer.Grantee;
+import org.zmail.cs.account.accesscontrol.GranteeType;
+import org.zmail.cs.account.accesscontrol.Right;
+import org.zmail.cs.account.accesscontrol.AllowedAttrs;
+import org.zmail.cs.account.accesscontrol.RightCommand;
+import org.zmail.cs.account.accesscontrol.RightManager;
+import org.zmail.cs.account.accesscontrol.RightModifier;
+import org.zmail.cs.account.accesscontrol.Rights.User;
+import org.zmail.cs.account.accesscontrol.ACLUtil;
+import org.zmail.cs.account.accesscontrol.ACLAccessManager;
+import org.zmail.cs.account.accesscontrol.TargetType;
+import org.zmail.cs.account.accesscontrol.ZmailACE;
+import org.zmail.cs.service.AuthProvider;
+import org.zmail.qa.unittest.prov.ldap.ACLTestUtil;
+import org.zmail.soap.admin.type.CacheEntryType;
+import org.zmail.soap.type.TargetBy;
 
 
 public abstract class TestACL extends TestCase {
@@ -99,7 +99,7 @@ public abstract class TestACL extends TestCase {
             
             // create a system admin account
             Map<String, Object> attrs = new HashMap<String, Object>();
-            attrs.put(Provisioning.A_zimbraIsAdminAccount, ProvisioningConstants.TRUE);
+            attrs.put(Provisioning.A_zmailIsAdminAccount, ProvisioningConstants.TRUE);
             String sysAdminEmail = getEmailAddr("sysadmin");
             mSysAdminAcct = mProv.createAccount(sysAdminEmail, PASSWORD, attrs);
                 
@@ -132,7 +132,7 @@ public abstract class TestACL extends TestCase {
     }
     
     static void logToConsole(String level) {
-        ZimbraLog.toolSetupLog4j(level, "/Users/pshao/sandbox/conf/log4j.properties.phoebe");
+        ZmailLog.toolSetupLog4j(level, "/Users/pshao/sandbox/conf/log4j.properties.phoebe");
     }
     
     
@@ -182,13 +182,13 @@ public abstract class TestACL extends TestCase {
     
     protected Account createAdminAccount(String email) throws ServiceException {
         Map<String, Object> attrs = new HashMap<String, Object>();
-        attrs.put(Provisioning.A_zimbraIsAdminAccount, ProvisioningConstants.TRUE);
+        attrs.put(Provisioning.A_zmailIsAdminAccount, ProvisioningConstants.TRUE);
         return mProv.createAccount(email, PASSWORD, attrs);
     }
     
     protected DistributionList createAdminGroup(String email) throws ServiceException {
         Map<String, Object> attrs = new HashMap<String, Object>();
-        attrs.put(Provisioning.A_zimbraIsAdminGroup, ProvisioningConstants.TRUE);
+        attrs.put(Provisioning.A_zmailIsAdminGroup, ProvisioningConstants.TRUE);
         return mProv.createDistributionList(email, attrs);
     }
     
@@ -198,21 +198,21 @@ public abstract class TestACL extends TestCase {
     
     protected void makeAccountAdmin(Account acct) throws ServiceException {
         Map<String, Object> attrs = new HashMap<String, Object>();
-        attrs.put(Provisioning.A_zimbraIsAdminAccount, ProvisioningConstants.TRUE);
+        attrs.put(Provisioning.A_zmailIsAdminAccount, ProvisioningConstants.TRUE);
         mProv.modifyAttrs(acct, attrs);
         flushAccountCache(acct);
     }
     
     protected void makeGroupAdmin(DistributionList group) throws ServiceException {
         Map<String, Object> attrs = new HashMap<String, Object>();
-        attrs.put(Provisioning.A_zimbraIsAdminGroup, ProvisioningConstants.TRUE);
+        attrs.put(Provisioning.A_zmailIsAdminGroup, ProvisioningConstants.TRUE);
         mProv.modifyAttrs(group, attrs);
         mProv.flushCache(CacheEntryType.group, null);
     }
     
     protected void makeGroupNonAdmin(DistributionList group) throws ServiceException {
         Map<String, Object> attrs = new HashMap<String, Object>();
-        attrs.put(Provisioning.A_zimbraIsAdminGroup, ProvisioningConstants.FALSE);
+        attrs.put(Provisioning.A_zmailIsAdminGroup, ProvisioningConstants.FALSE);
         mProv.modifyAttrs(group, attrs);
         mProv.flushCache(CacheEntryType.group, null);
     }
@@ -338,38 +338,38 @@ public abstract class TestACL extends TestCase {
     protected static final GetOrSet SET = GetOrSet.SET;
     
     // construct a ACE with "pub" grantee type
-    protected ZimbraACE newPubACE(Right right, AllowOrDeny allowDeny) throws ServiceException {
-        return new ZimbraACE(GuestAccount.GUID_PUBLIC, GranteeType.GT_PUBLIC, right, allowDeny.toRightModifier(), null);
+    protected ZmailACE newPubACE(Right right, AllowOrDeny allowDeny) throws ServiceException {
+        return new ZmailACE(GuestAccount.GUID_PUBLIC, GranteeType.GT_PUBLIC, right, allowDeny.toRightModifier(), null);
     }
     
     // construct a ACE with "all" authuser grantee type
-    protected ZimbraACE newAllACE(Right right, AllowOrDeny allowDeny) throws ServiceException {
-        return new ZimbraACE(GuestAccount.GUID_AUTHUSER, GranteeType.GT_AUTHUSER, right, allowDeny.toRightModifier(), null);
+    protected ZmailACE newAllACE(Right right, AllowOrDeny allowDeny) throws ServiceException {
+        return new ZmailACE(GuestAccount.GUID_AUTHUSER, GranteeType.GT_AUTHUSER, right, allowDeny.toRightModifier(), null);
     }
     
     // construct a ACE with "usr" grantee type
-    protected ZimbraACE newUsrACE(Account acct, Right right, AllowOrDeny allowDeny) throws ServiceException {
-        return new ZimbraACE(acct.getId(), GranteeType.GT_USER, right, allowDeny.toRightModifier(), null);
+    protected ZmailACE newUsrACE(Account acct, Right right, AllowOrDeny allowDeny) throws ServiceException {
+        return new ZmailACE(acct.getId(), GranteeType.GT_USER, right, allowDeny.toRightModifier(), null);
     }
     
     // construct a ACE with "grp" grantee type
-    protected ZimbraACE newGrpACE(DistributionList dl, Right right, AllowOrDeny allowDeny) throws ServiceException {
-        return new ZimbraACE(dl.getId(), GranteeType.GT_GROUP, right, allowDeny.toRightModifier(), null);
+    protected ZmailACE newGrpACE(DistributionList dl, Right right, AllowOrDeny allowDeny) throws ServiceException {
+        return new ZmailACE(dl.getId(), GranteeType.GT_GROUP, right, allowDeny.toRightModifier(), null);
     }
     
     // construct a ACE with "key" grantee type
-    protected ZimbraACE newKeyACE(String nameOrEmail, String accessKey, Right right, AllowOrDeny allowDeny) throws ServiceException {
-        return new ZimbraACE(nameOrEmail, GranteeType.GT_KEY, right, allowDeny.toRightModifier(), accessKey);
+    protected ZmailACE newKeyACE(String nameOrEmail, String accessKey, Right right, AllowOrDeny allowDeny) throws ServiceException {
+        return new ZmailACE(nameOrEmail, GranteeType.GT_KEY, right, allowDeny.toRightModifier(), accessKey);
     }
     
-    Set<ZimbraACE> makeUsrGrant(Account grantee, Right right, AllowOrDeny alloworDeny) throws ServiceException {
-        Set<ZimbraACE> aces = new HashSet<ZimbraACE>();
+    Set<ZmailACE> makeUsrGrant(Account grantee, Right right, AllowOrDeny alloworDeny) throws ServiceException {
+        Set<ZmailACE> aces = new HashSet<ZmailACE>();
         aces.add(newUsrACE(grantee, right, alloworDeny));
         return aces;
     }
     
-    Set<ZimbraACE> makeGrpGrant(DistributionList grantee, Right right, AllowOrDeny alloworDeny) throws ServiceException {
-        Set<ZimbraACE> aces = new HashSet<ZimbraACE>();
+    Set<ZmailACE> makeGrpGrant(DistributionList grantee, Right right, AllowOrDeny alloworDeny) throws ServiceException {
+        Set<ZmailACE> aces = new HashSet<ZmailACE>();
         aces.add(newGrpACE(grantee, right, alloworDeny));
         return aces;
     }
@@ -615,12 +615,12 @@ public abstract class TestACL extends TestCase {
      * This is for testing user rights, which goes to RightUtil directly (i.e. not through RightCommand)
      * 
      */
-    protected List<ZimbraACE> grantRight(TargetType targetType, Entry target, Set<ZimbraACE> aces) throws ServiceException {
+    protected List<ZmailACE> grantRight(TargetType targetType, Entry target, Set<ZmailACE> aces) throws ServiceException {
         /*
          * make sure all rights are user right, tests written earlier could still be using 
          * this to grant
          */
-        for (ZimbraACE ace : aces) {
+        for (ZmailACE ace : aces) {
             assertTrue(ace.getRight().isUserRight());
         }
         
@@ -661,7 +661,7 @@ public abstract class TestACL extends TestCase {
                       right.getName(), RightModifier.RM_CAN_DELEGATE);
     }
         
-    protected List<ZimbraACE> revokeRight(TargetType targetType, Entry target, Set<ZimbraACE> aces) throws ServiceException {
+    protected List<ZmailACE> revokeRight(TargetType targetType, Entry target, Set<ZmailACE> aces) throws ServiceException {
         // call TargetType.lookupTarget instead of passing the target entry directly for two reasons:
         // 1. to simulate how grants are done in the real server/zmprov
         // 2. convert DistributionList to AclGroup
@@ -719,24 +719,24 @@ public abstract class TestACL extends TestCase {
     }
     
 /*
-  Note: do *not* copy it to /Users/pshao/p4/main/ZimbraServer/conf
+  Note: do *not* copy it to /Users/pshao/p4/main/ZmailServer/conf
         that could accidently generate a RightDef.java with our test rights.
         
-  cp /Users/pshao/p4/main/ZimbraServer/data/unittest/ldap/rights-unittest.xml /opt/zimbra/conf/rights
+  cp /Users/pshao/p4/main/ZmailServer/data/unittest/ldap/rights-unittest.xml /opt/zmail/conf/rights
   and
   uncomment sCoreRightDefFiles.add("rights-unittest.xml"); in RightManager
   
-  zmlocalconfig -e zimbra_class_accessmanager=com.zimbra.cs.account.accesscontrol.ACLAccessManager
+  zmlocalconfig -e zmail_class_accessmanager=org.zmail.cs.account.accesscontrol.ACLAccessManager
   then restart server
   
   or:
-  <key name="zimbra_class_accessmanager">
-    <value>com.zimbra.cs.account.accesscontrol.ACLAccessManager</value>
+  <key name="zmail_class_accessmanager">
+    <value>org.zmail.cs.account.accesscontrol.ACLAccessManager</value>
   </key>
 */
     public static void main(String[] args) throws Exception {
         CliUtil.toolSetup("INFO");
-        // ZimbraLog.toolSetupLog4j("DEBUG", "/Users/pshao/sandbox/conf/log4j.properties.phoebe");
+        // ZmailLog.toolSetupLog4j("DEBUG", "/Users/pshao/sandbox/conf/log4j.properties.phoebe");
         
         if (mAM instanceof ACLAccessManager) {
             TestUtil.runTest(TestACLGrant.class);

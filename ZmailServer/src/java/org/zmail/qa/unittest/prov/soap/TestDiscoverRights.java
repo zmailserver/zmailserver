@@ -12,7 +12,7 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.qa.unittest.prov.soap;
+package org.zmail.qa.unittest.prov.soap;
 
 import static org.junit.Assert.*;
 
@@ -24,24 +24,24 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 
 import com.google.common.collect.Lists;
-import com.zimbra.common.account.Key.GranteeBy;
-import com.zimbra.common.soap.SoapTransport;
-import com.zimbra.cs.account.Account;
-import com.zimbra.cs.account.Domain;
-import com.zimbra.cs.account.Group;
-import com.zimbra.cs.account.Provisioning;
-import com.zimbra.cs.account.accesscontrol.GranteeType;
-import com.zimbra.cs.account.accesscontrol.Right;
-import com.zimbra.cs.account.accesscontrol.TargetType;
-import com.zimbra.cs.account.accesscontrol.Rights.User;
-import com.zimbra.qa.QA.Bug;
-import com.zimbra.qa.unittest.TestUtil;
-import com.zimbra.qa.unittest.prov.Verify;
-import com.zimbra.soap.account.message.DiscoverRightsRequest;
-import com.zimbra.soap.account.message.DiscoverRightsResponse;
-import com.zimbra.soap.account.type.DiscoverRightsInfo;
-import com.zimbra.soap.account.type.DiscoverRightsTarget;
-import com.zimbra.soap.type.TargetBy;
+import org.zmail.common.account.Key.GranteeBy;
+import org.zmail.common.soap.SoapTransport;
+import org.zmail.cs.account.Account;
+import org.zmail.cs.account.Domain;
+import org.zmail.cs.account.Group;
+import org.zmail.cs.account.Provisioning;
+import org.zmail.cs.account.accesscontrol.GranteeType;
+import org.zmail.cs.account.accesscontrol.Right;
+import org.zmail.cs.account.accesscontrol.TargetType;
+import org.zmail.cs.account.accesscontrol.Rights.User;
+import org.zmail.qa.QA.Bug;
+import org.zmail.qa.unittest.TestUtil;
+import org.zmail.qa.unittest.prov.Verify;
+import org.zmail.soap.account.message.DiscoverRightsRequest;
+import org.zmail.soap.account.message.DiscoverRightsResponse;
+import org.zmail.soap.account.type.DiscoverRightsInfo;
+import org.zmail.soap.account.type.DiscoverRightsTarget;
+import org.zmail.soap.type.TargetBy;
 
 public class TestDiscoverRights extends SoapTest {
 

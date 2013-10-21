@@ -17,7 +17,7 @@
  * Created on Nov 11, 2004
  *
  */
-package com.zimbra.cs.filter.jsieve;
+package org.zmail.cs.filter.jsieve;
 
 import java.text.DateFormat;
 import java.text.ParseException;
@@ -38,7 +38,7 @@ import org.apache.jsieve.TagArgument;
 import org.apache.jsieve.mail.MailAdapter;
 import org.apache.jsieve.tests.AbstractTest;
 
-import com.zimbra.cs.filter.ZimbraMailAdapter;
+import org.zmail.cs.filter.ZmailMailAdapter;
 
 public class DateTest extends AbstractTest {
     
@@ -92,7 +92,7 @@ public class DateTest extends AbstractTest {
         if (argumentsIter.hasNext())
             throw new SyntaxException("Found unexpected argument(s)");               
         
-        if (!(mail instanceof ZimbraMailAdapter))
+        if (!(mail instanceof ZmailMailAdapter))
             return false;
         return test(mail, comparator, date);
     }
@@ -104,7 +104,7 @@ public class DateTest extends AbstractTest {
 
     private boolean test(MailAdapter mail, String comparator, Date date) throws SieveException {
         // get the date from the mail
-        MimeMessage mimeMsg = ((ZimbraMailAdapter) mail).getMimeMessage();
+        MimeMessage mimeMsg = ((ZmailMailAdapter) mail).getMimeMessage();
         try {
             Date msgDate = mimeMsg.getSentDate();
             if (msgDate == null) {

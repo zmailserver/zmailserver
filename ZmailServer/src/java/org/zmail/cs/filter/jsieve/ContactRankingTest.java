@@ -12,7 +12,7 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.filter.jsieve;
+package org.zmail.cs.filter.jsieve;
 
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -27,12 +27,12 @@ import org.apache.jsieve.exception.SieveException;
 import org.apache.jsieve.mail.MailAdapter;
 import org.apache.jsieve.tests.AbstractTest;
 
-import com.zimbra.common.mime.InternetAddress;
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.common.util.ZimbraLog;
-import com.zimbra.cs.filter.ZimbraMailAdapter;
-import com.zimbra.cs.mailbox.ContactRankings;
-import com.zimbra.cs.mailbox.Mailbox;
+import org.zmail.common.mime.InternetAddress;
+import org.zmail.common.service.ServiceException;
+import org.zmail.common.util.ZmailLog;
+import org.zmail.cs.filter.ZmailMailAdapter;
+import org.zmail.cs.mailbox.ContactRankings;
+import org.zmail.cs.mailbox.Mailbox;
 
 /**
  * SIEVE test that returns true if the email address in the specified header exists in the contact ranking table.
@@ -73,10 +73,10 @@ public final class ContactRankingTest extends AbstractTest {
     @Override
     protected boolean executeBasic(MailAdapter mail, Arguments args, SieveContext ctx) throws SieveException {
         assert(headers != null);
-        if (!(mail instanceof ZimbraMailAdapter)) {
+        if (!(mail instanceof ZmailMailAdapter)) {
             return false;
         }
-        Mailbox mbox = ((ZimbraMailAdapter) mail).getMailbox();
+        Mailbox mbox = ((ZmailMailAdapter) mail).getMailbox();
         List<InternetAddress> addrs = new ArrayList<InternetAddress>();
         for (String header : headers) {
             for (String value : mail.getHeader(header)) {
@@ -91,7 +91,7 @@ public final class ContactRankingTest extends AbstractTest {
                 }
             }
         } catch (ServiceException e) {
-            ZimbraLog.filter.error("Failed to lookup ranking", e);
+            ZmailLog.filter.error("Failed to lookup ranking", e);
         }
         return false;
     }

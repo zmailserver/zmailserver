@@ -12,7 +12,7 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.ldap.unboundid;
+package org.zmail.cs.ldap.unboundid;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -24,8 +24,8 @@ import java.util.Set;
 import com.unboundid.ldap.sdk.schema.ObjectClassDefinition;
 import com.unboundid.ldap.sdk.schema.Schema;
 
-import com.zimbra.cs.ldap.LdapException;
-import com.zimbra.cs.ldap.ZLdapSchema;
+import org.zmail.cs.ldap.LdapException;
+import org.zmail.cs.ldap.ZLdapSchema;
 
 public class UBIDLdapSchema extends ZLdapSchema {
 

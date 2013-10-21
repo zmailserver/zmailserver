@@ -12,7 +12,7 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.qa.unittest.prov.ldap;
+package org.zmail.qa.unittest.prov.ldap;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
@@ -29,15 +29,15 @@ import org.junit.AfterClass;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
-import com.zimbra.common.account.Key;
-import com.zimbra.common.account.Key.AccountBy;
-import com.zimbra.cs.account.Account;
-import com.zimbra.cs.account.AccountServiceException;
-import com.zimbra.cs.account.Domain;
-import com.zimbra.cs.account.Identity;
-import com.zimbra.cs.account.Provisioning;
-import com.zimbra.qa.unittest.prov.Names;
-import com.zimbra.soap.admin.type.CacheEntryType;
+import org.zmail.common.account.Key;
+import org.zmail.common.account.Key.AccountBy;
+import org.zmail.cs.account.Account;
+import org.zmail.cs.account.AccountServiceException;
+import org.zmail.cs.account.Domain;
+import org.zmail.cs.account.Identity;
+import org.zmail.cs.account.Provisioning;
+import org.zmail.qa.unittest.prov.Names;
+import org.zmail.soap.admin.type.CacheEntryType;
 
 public class TestLdapProvIdentity extends LdapTest {
     private static LdapProvTestUtil provUtil;
@@ -145,7 +145,7 @@ public class TestLdapProvIdentity extends LdapTest {
         Identity identity = createIdentity(acct, IDENTITYE_NAME);
         
         Map<String, Object> attrs = new HashMap<String, Object>();
-        String MODIFIED_ATTR_NAME = Provisioning.A_zimbraPrefFromDisplay;
+        String MODIFIED_ATTR_NAME = Provisioning.A_zmailPrefFromDisplay;
         String MODIFIED_ATTR_VALUE = "modifyIdentity";
         attrs.put(MODIFIED_ATTR_NAME, MODIFIED_ATTR_VALUE);
         prov.modifyIdentity(acct, identity.getName(), attrs);
@@ -167,8 +167,8 @@ public class TestLdapProvIdentity extends LdapTest {
         Identity identity = createIdentity(acct, IDENTITYE_NAME);
         
         Map<String, Object> attrs = new HashMap<String, Object>();
-        // modifying zimbraPrefIdentityName will rename the identity and trigger a LDAP moddn
-        String MODIFIED_ATTR_NAME = Provisioning.A_zimbraPrefIdentityName;
+        // modifying zmailPrefIdentityName will rename the identity and trigger a LDAP moddn
+        String MODIFIED_ATTR_NAME = Provisioning.A_zmailPrefIdentityName;
         String NEW_IDENTITY_NAME = genIdentityName("new");  
         String MODIFIED_ATTR_VALUE = NEW_IDENTITY_NAME;
         attrs.put(MODIFIED_ATTR_NAME, MODIFIED_ATTR_VALUE);

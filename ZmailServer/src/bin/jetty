@@ -162,7 +162,7 @@ then
 fi
 
 #########################################################################
-# Zimbra tweak, because we want to keep jetty.conf under $JETTY_HOME/etc
+# Zmail tweak, because we want to keep jetty.conf under $JETTY_HOME/etc
 #########################################################################
 if [ -f $JETTY_HOME/etc/jettyrc ] ; then
   . $JETTY_HOME/etc/jettyrc
@@ -288,7 +288,7 @@ fi
 #####################################################
 # Add jetty properties to Java VM options.
 #####################################################
-MAILBOXD_JAVA_OPTIONS=`/opt/zimbra/bin/zmlocalconfig -x -m nokey mailboxd_java_options`
+MAILBOXD_JAVA_OPTIONS=`/opt/zmail/bin/zmlocalconfig -x -m nokey mailboxd_java_options`
 JAVA_OPTIONS="$MAILBOXD_JAVA_OPTIONS $JAVA_OPTIONS -Djetty.home=$JETTY_HOME"
 
 #####################################################
@@ -299,13 +299,13 @@ JAVA_OPTIONS="$MAILBOXD_JAVA_OPTIONS $JAVA_OPTIONS -Djetty.home=$JETTY_HOME"
 #       In production, the jetty startup script (zmmailboxdctl) uses
 #       zmconfigd config rewrite to avoid a zmprov call.
 #
-# SPNEGO_ENABLED_CONFIG =`/opt/zimbra/bin/zmprov -l gcf zimbraSpnegoAuthEnabled`
-SPNEGO_ENABLED_CONFIG="zimbraSpnegoAuthEnabled: FALSE"
-SPNEGO_ENABLED=`echo $SPNEGO_ENABLED_CONFIG | sed -e 's/zimbraSpnegoAuthEnabled: //g'`
+# SPNEGO_ENABLED_CONFIG =`/opt/zmail/bin/zmprov -l gcf zmailSpnegoAuthEnabled`
+SPNEGO_ENABLED_CONFIG="zmailSpnegoAuthEnabled: FALSE"
+SPNEGO_ENABLED=`echo $SPNEGO_ENABLED_CONFIG | sed -e 's/zmailSpnegoAuthEnabled: //g'`
 
 if [ "$SPNEGO_ENABLED" = "TRUE" ] 
 then
-  SPNEGO_JAVA_OPTIONS=`/opt/zimbra/bin/zmlocalconfig -x -m nokey spnego_java_options`
+  SPNEGO_JAVA_OPTIONS=`/opt/zmail/bin/zmlocalconfig -x -m nokey spnego_java_options`
 #  SPNEGO_JAVA_OPTIONS="$SPNEGO_JAVA_OPTIONS -Dsun.security.spnego.debug=all"
   JAVA_OPTIONS="$JAVA_OPTIONS $SPNEGO_JAVA_OPTIONS"
 fi

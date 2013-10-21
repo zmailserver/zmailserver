@@ -12,7 +12,7 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.fb;
+package org.zmail.cs.fb;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -32,21 +32,21 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-import com.zimbra.common.account.Key;
-import com.zimbra.common.localconfig.LC;
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.common.soap.Element;
-import com.zimbra.common.util.ByteUtil;
-import com.zimbra.common.util.ZimbraLog;
-import com.zimbra.cs.account.Account;
-import com.zimbra.cs.account.Provisioning;
-import com.zimbra.cs.mailbox.MailItem;
-import com.zimbra.cs.mailbox.MailItem.Type;
-import com.zimbra.cs.mailbox.calendar.IcalXmlStrMap;
-import com.zimbra.cs.mailbox.Mailbox;
-import com.zimbra.cs.mailbox.MailboxListener;
-import com.zimbra.cs.mailbox.MailboxManager;
-import com.zimbra.cs.service.mail.ToXML;
+import org.zmail.common.account.Key;
+import org.zmail.common.localconfig.LC;
+import org.zmail.common.service.ServiceException;
+import org.zmail.common.soap.Element;
+import org.zmail.common.util.ByteUtil;
+import org.zmail.common.util.ZmailLog;
+import org.zmail.cs.account.Account;
+import org.zmail.cs.account.Provisioning;
+import org.zmail.cs.mailbox.MailItem;
+import org.zmail.cs.mailbox.MailItem.Type;
+import org.zmail.cs.mailbox.calendar.IcalXmlStrMap;
+import org.zmail.cs.mailbox.Mailbox;
+import org.zmail.cs.mailbox.MailboxListener;
+import org.zmail.cs.mailbox.MailboxManager;
+import org.zmail.cs.service.mail.ToXML;
 
 public abstract class FreeBusyProvider {
     
@@ -145,7 +145,7 @@ public abstract class FreeBusyProvider {
     public abstract void addFreeBusyRequest(Request req) throws FreeBusyUserNotFoundException;
     public abstract List<FreeBusy> getResults();
 
-    // propagation of Zimbra users free/busy to 3rd party system
+    // propagation of Zmail users free/busy to 3rd party system
     public abstract boolean registerForMailboxChanges();
     public abstract boolean registerForMailboxChanges(String accountId);
     public abstract Set<MailItem.Type> registerForItemTypes();
@@ -166,7 +166,7 @@ public abstract class FreeBusyProvider {
         String name = p.getName();
         FreeBusySyncQueue queue = sPUSHQUEUES.get(name);
         if (queue != null) {
-            ZimbraLog.fb.warn("free/busy provider "+name+" has been already registered.");
+            ZmailLog.fb.warn("free/busy provider "+name+" has been already registered.");
         }
         queue = new FreeBusySyncQueue(p);
         sPUSHQUEUES.put(name, queue);
@@ -191,7 +191,7 @@ public abstract class FreeBusyProvider {
                     try {
                         queue.writeToDisk();
                     } catch (IOException e) {
-                        ZimbraLog.fb.error("can't write to the queue "+queue.getFilename());
+                        ZmailLog.fb.error("can't write to the queue "+queue.getFilename());
                     }
                     queue.notify();
                 }
@@ -217,7 +217,7 @@ public abstract class FreeBusyProvider {
                 }
             }
             if (!succeed) {
-                ZimbraLog.fb.error("can't find free/busy provider for user "+emailAddr);
+                ZmailLog.fb.error("can't find free/busy provider for user "+emailAddr);
                 ret.add(FreeBusy.nodataFreeBusy(emailAddr, start, end));
             }
         }
@@ -331,7 +331,7 @@ public abstract class FreeBusyProvider {
             try {
                 readFromDisk();
             } catch (IOException e) {
-                ZimbraLog.fb.error("error reading from the queue", e);
+                ZmailLog.fb.error("error reading from the queue", e);
             }
         }
 
@@ -378,7 +378,7 @@ public abstract class FreeBusyProvider {
 
                 } catch (Exception e) {
                     mLastFailed = System.currentTimeMillis();
-                    ZimbraLog.fb.error("error while syncing freebusy for "+mProvider.getName(), e);
+                    ZmailLog.fb.error("error while syncing freebusy for "+mProvider.getName(), e);
                 }
             }
         }
@@ -398,7 +398,7 @@ public abstract class FreeBusyProvider {
             for (String id : this)
                 buf.append("\n").append(id);
             if (buf.length() > MAX_FILE_SIZE) {
-                ZimbraLog.fb.error("The free/busy replication queue is too large. #elem="+size());
+                ZmailLog.fb.error("The free/busy replication queue is too large. #elem="+size());
                 return;
             }
             FileOutputStream out = null;
@@ -418,7 +418,7 @@ public abstract class FreeBusyProvider {
                 f.createNewFile();
             long len = f.length();
             if (len > MAX_FILE_SIZE) {
-                ZimbraLog.fb.error("The free/busy replication queue is too large: "+mFilename+" ("+len+")");
+                ZmailLog.fb.error("The free/busy replication queue is too large: "+mFilename+" ("+len+")");
                 return;
             }
             FileInputStream in = null;
@@ -435,7 +435,7 @@ public abstract class FreeBusyProvider {
                 return;
             int numTokens = Integer.parseInt(tokens[0]);
             if (numTokens != tokens.length) {
-                ZimbraLog.fb.error("The free/busy replication queue is inconsistent: "
+                ZmailLog.fb.error("The free/busy replication queue is inconsistent: "
                         +"numTokens="+numTokens+", actual="+tokens.length);
                 return;
             }

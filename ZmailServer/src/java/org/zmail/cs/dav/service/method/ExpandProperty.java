@@ -12,7 +12,7 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.dav.service.method;
+package org.zmail.cs.dav.service.method;
 
 import javax.servlet.http.HttpServletResponse;
 
@@ -24,17 +24,17 @@ import org.dom4j.DocumentHelper;
 import org.dom4j.Element;
 import org.dom4j.QName;
 
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.common.util.ZimbraLog;
-import com.zimbra.cs.dav.DavContext;
-import com.zimbra.cs.dav.DavElements;
-import com.zimbra.cs.dav.DavException;
-import com.zimbra.cs.dav.DavProtocol;
-import com.zimbra.cs.dav.property.ResourceProperty;
-import com.zimbra.cs.dav.resource.DavResource;
-import com.zimbra.cs.dav.resource.UrlNamespace;
-import com.zimbra.cs.dav.service.DavResponse;
-import com.zimbra.cs.dav.service.DavResponse.PropStat;
+import org.zmail.common.service.ServiceException;
+import org.zmail.common.util.ZmailLog;
+import org.zmail.cs.dav.DavContext;
+import org.zmail.cs.dav.DavElements;
+import org.zmail.cs.dav.DavException;
+import org.zmail.cs.dav.DavProtocol;
+import org.zmail.cs.dav.property.ResourceProperty;
+import org.zmail.cs.dav.resource.DavResource;
+import org.zmail.cs.dav.resource.UrlNamespace;
+import org.zmail.cs.dav.service.DavResponse;
+import org.zmail.cs.dav.service.DavResponse.PropStat;
 
 /*
  * rfc 3253 section 3.8
@@ -105,7 +105,7 @@ public class ExpandProperty extends Report {
 	                        try {
 	                            url = URLDecoder.decode(url, "UTF-8");
 	                        } catch (UnsupportedEncodingException e) {
-	                            ZimbraLog.dav.warn("can't decode url %s", url, e);
+	                            ZmailLog.dav.warn("can't decode url %s", url, e);
 	                        }
 	                        try {
 	                            DavResource target = UrlNamespace.getResourceAtUrl(ctxt, url);
@@ -113,7 +113,7 @@ public class ExpandProperty extends Report {
 	                            expandProperties(ctxt, target, property, targetElem);
 	                            propstat.add(rp.getName(), targetElem);
 	                        } catch (DavException e) {
-	                            ZimbraLog.dav.warn("can't find resource for "+url, e);
+	                            ZmailLog.dav.warn("can't find resource for "+url, e);
 	                        }
 						}
 					}

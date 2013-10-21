@@ -14,7 +14,7 @@ Java Code
 
 The primary localization class is:
 
-    com.zimbra.cs.util.L10nUtil
+    org.zmail.cs.util.L10nUtil
 
 This class has a static public method called getMessage():
 
@@ -30,8 +30,8 @@ So, for example, you can do this to get a localized string for
 "<calendar resource> has been scheduled for your appointment" line that appears
 in the auto-accept reply:
 
-    ipmort com.zimbra.cs.util.L10nUtil;
-	import com.zimbra.cs.util.L10nUtil.MsgKey;
+    ipmort org.zmail.cs.util.L10nUtil;
+	import org.zmail.cs.util.L10nUtil.MsgKey;
 	...
 	Locale lc = <some locale>
 	String resName = <calendar resource display name>
@@ -42,9 +42,9 @@ in the auto-accept reply:
 Message Files
 -------------
 
-All message files are stored under /opt/zimbra/conf/msgs directory.  The deafult
+All message files are stored under /opt/zmail/conf/msgs directory.  The deafult
 message file is called "ZsMsg.properties".  This name was chosen to be
-consistent with the convention used in web client code.  "Z" is for Zimbra and
+consistent with the convention used in web client code.  "Z" is for Zmail and
 "s" is for server.  To add localize for a particular locale, you can add a file
 named "ZsMsg_<locale name>.properties" to this directory and restart Tomcat.
 Whether you're adding a new localized message file or editing one, Tomcat must

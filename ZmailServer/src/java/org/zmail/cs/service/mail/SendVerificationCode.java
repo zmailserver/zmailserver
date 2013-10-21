@@ -14,7 +14,7 @@
  * 
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.service.mail;
+package org.zmail.cs.service.mail;
 
 import java.security.SecureRandom;
 import java.util.Collections;
@@ -25,19 +25,19 @@ import javax.mail.internet.MimeMessage;
 
 import org.apache.commons.codec.binary.Hex;
 
-import com.zimbra.common.mime.MimeConstants;
-import com.zimbra.common.mime.shim.JavaMailInternetAddress;
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.common.soap.Element;
-import com.zimbra.common.soap.MailConstants;
-import com.zimbra.common.util.L10nUtil;
-import com.zimbra.common.util.LruMap;
-import com.zimbra.common.util.ZimbraLog;
-import com.zimbra.cs.mailbox.MailSender;
-import com.zimbra.cs.mailbox.Mailbox;
-import com.zimbra.cs.mime.Mime;
-import com.zimbra.cs.util.JMSession;
-import com.zimbra.soap.ZimbraSoapContext;
+import org.zmail.common.mime.MimeConstants;
+import org.zmail.common.mime.shim.JavaMailInternetAddress;
+import org.zmail.common.service.ServiceException;
+import org.zmail.common.soap.Element;
+import org.zmail.common.soap.MailConstants;
+import org.zmail.common.util.L10nUtil;
+import org.zmail.common.util.LruMap;
+import org.zmail.common.util.ZmailLog;
+import org.zmail.cs.mailbox.MailSender;
+import org.zmail.cs.mailbox.Mailbox;
+import org.zmail.cs.mime.Mime;
+import org.zmail.cs.util.JMSession;
+import org.zmail.soap.ZmailSoapContext;
 
 /**
  * Handler for sending a verification code to a device.
@@ -48,7 +48,7 @@ public class SendVerificationCode extends MailDocumentHandler {
 
     @Override
     public Element handle(Element request, Map<String, Object> context) throws ServiceException {
-        ZimbraSoapContext zsc = getZimbraSoapContext(context);
+        ZmailSoapContext zsc = getZmailSoapContext(context);
         // email address corresponding to device
         String emailAddr = request.getAttribute(MailConstants.A_ADDRESS);
         String code = generateVerificationCode();
@@ -74,7 +74,7 @@ public class SendVerificationCode extends MailDocumentHandler {
     }
 
     static String generateVerificationCode() {
-        ZimbraLog.misc.debug("Generating verification code");
+        ZmailLog.misc.debug("Generating verification code");
         SecureRandom random = new SecureRandom();
         byte bytes[] = new byte[3];
         random.nextBytes(bytes);

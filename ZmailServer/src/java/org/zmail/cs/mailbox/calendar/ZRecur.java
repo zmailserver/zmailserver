@@ -12,7 +12,7 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.mailbox.calendar;
+package org.zmail.cs.mailbox.calendar;
 
 import java.text.ParseException;
 import java.util.ArrayList;
@@ -27,15 +27,15 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Set;
 
-import com.zimbra.common.calendar.ICalTimeZone;
-import com.zimbra.common.calendar.ParsedDateTime;
-import com.zimbra.common.calendar.TimeZoneMap;
-import com.zimbra.common.calendar.ZWeekDay;
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.common.util.ZimbraLog;
-import com.zimbra.cs.account.Provisioning;
-import com.zimbra.cs.account.Server;
-import com.zimbra.cs.util.Zimbra;
+import org.zmail.common.calendar.ICalTimeZone;
+import org.zmail.common.calendar.ParsedDateTime;
+import org.zmail.common.calendar.TimeZoneMap;
+import org.zmail.common.calendar.ZWeekDay;
+import org.zmail.common.service.ServiceException;
+import org.zmail.common.util.ZmailLog;
+import org.zmail.cs.account.Provisioning;
+import org.zmail.cs.account.Server;
+import org.zmail.cs.util.Zmail;
 
 public class ZRecur implements Cloneable {
 
@@ -88,22 +88,22 @@ public class ZRecur implements Cloneable {
         try {
             Server server = Provisioning.getInstance().getLocalServer();
             String val;
-            val = server.getAttr(Provisioning.A_zimbraCalendarRecurrenceMaxInstances);
+            val = server.getAttr(Provisioning.A_zmailCalendarRecurrenceMaxInstances);
             sExpansionLimits.maxInstances = val == null ? 0 : Integer.parseInt(val);
-            val = server.getAttr(Provisioning.A_zimbraCalendarRecurrenceDailyMaxDays);
+            val = server.getAttr(Provisioning.A_zmailCalendarRecurrenceDailyMaxDays);
             sExpansionLimits.maxDays = val == null ? 730 : Integer.parseInt(val);
-            val = server.getAttr(Provisioning.A_zimbraCalendarRecurrenceWeeklyMaxWeeks);
+            val = server.getAttr(Provisioning.A_zmailCalendarRecurrenceWeeklyMaxWeeks);
             sExpansionLimits.maxWeeks = val == null ? 520 : Integer.parseInt(val);
-            val = server.getAttr(Provisioning.A_zimbraCalendarRecurrenceMonthlyMaxMonths);
+            val = server.getAttr(Provisioning.A_zmailCalendarRecurrenceMonthlyMaxMonths);
             sExpansionLimits.maxMonths = val == null ? 360 : Integer.parseInt(val);
-            val = server.getAttr(Provisioning.A_zimbraCalendarRecurrenceYearlyMaxYears);
+            val = server.getAttr(Provisioning.A_zmailCalendarRecurrenceYearlyMaxYears);
             sExpansionLimits.maxYears = val == null ? 100 : Integer.parseInt(val);
-            val = server.getAttr(Provisioning.A_zimbraCalendarRecurrenceOtherFrequencyMaxYears);
+            val = server.getAttr(Provisioning.A_zmailCalendarRecurrenceOtherFrequencyMaxYears);
             sExpansionLimits.maxYearsOtherFreqs = val == null ? 1 : Integer.parseInt(val);
         } catch (NumberFormatException e) {
-            Zimbra.halt("Can't initialize recurrence expansion limits", e);
+            Zmail.halt("Can't initialize recurrence expansion limits", e);
         } catch (ServiceException e) {
-            Zimbra.halt("Can't initialize recurrence expansion limits", e);
+            Zmail.halt("Can't initialize recurrence expansion limits", e);
         }
     }
 
@@ -904,7 +904,7 @@ public class ZRecur implements Cloneable {
                 else
                     numConsecutiveIterationsWithoutMatchingInstance = 0;
                 if (numConsecutiveIterationsWithoutMatchingInstance >= 4) {
-                    ZimbraLog.calendar.warn("Invalid recurrence rule: " + toString());
+                    ZmailLog.calendar.warn("Invalid recurrence rule: " + toString());
                     return toRet;
                 }
             }
@@ -1415,8 +1415,8 @@ public class ZRecur implements Cloneable {
             for (String tok : str.split("\\s*;\\s*")) {
                 String[] s = tok.split("\\s*=\\s*");
                 if (s.length != 2) {
-                    if (ZimbraLog.calendar.isDebugEnabled())
-                        ZimbraLog.calendar.debug(new Formatter().format("Parse error for recur: \"%s\" at token \"%s\"", str, tok));
+                    if (ZmailLog.calendar.isDebugEnabled())
+                        ZmailLog.calendar.debug(new Formatter().format("Parse error for recur: \"%s\" at token \"%s\"", str, tok));
                     continue;
                 }
 
@@ -1487,7 +1487,7 @@ public class ZRecur implements Cloneable {
                         break;
                     }
                 } catch(IllegalArgumentException e) {
-                    ZimbraLog.calendar.warn("Skipping RECUR token: \"%s\" in Recur \"%s\" due to parse error", s[0], str, e);
+                    ZmailLog.calendar.warn("Skipping RECUR token: \"%s\" in Recur \"%s\" due to parse error", s[0], str, e);
                 }
             }
             // Convert monthly BYDAY+BYSETPOS combo into simpler BYDAY format.  (bug 35568, 59771)
@@ -1569,7 +1569,7 @@ public class ZRecur implements Cloneable {
                     list.add(readInt);
                 }
             } catch (Exception e) {
-                ZimbraLog.calendar.debug(new Formatter().format("Skipping unparsable Recur int list entry: \"%s\" in parameter list: \"%s\"", s, str));
+                ZmailLog.calendar.debug(new Formatter().format("Skipping unparsable Recur int list entry: \"%s\" in parameter list: \"%s\"", s, str));
             }
         Collections.sort(list);
     }

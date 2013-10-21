@@ -14,29 +14,29 @@
  * 
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.examples.extns.storemanager;
+package org.zmail.examples.extns.storemanager;
 
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.common.util.FileUtil;
-import com.zimbra.common.util.ZimbraLog;
-import com.zimbra.cs.extension.ExtensionException;
-import com.zimbra.cs.extension.ZimbraExtension;
-import com.zimbra.cs.mailbox.Mailbox;
-import com.zimbra.cs.store.external.ExternalStoreManager;
+import org.zmail.common.service.ServiceException;
+import org.zmail.common.util.FileUtil;
+import org.zmail.common.util.ZmailLog;
+import org.zmail.cs.extension.ExtensionException;
+import org.zmail.cs.extension.ZmailExtension;
+import org.zmail.cs.mailbox.Mailbox;
+import org.zmail.cs.store.external.ExternalStoreManager;
 
-public class ExampleStoreManager extends ExternalStoreManager implements ZimbraExtension {
+public class ExampleStoreManager extends ExternalStoreManager implements ZmailExtension {
 
     String directory = "/tmp/examplestore/blobs";
 
     @Override
     public void startup() throws IOException, ServiceException {
         super.startup();
-        ZimbraLog.store.info("Using ExampleStoreManager. If you are seeing this in production you have done something WRONG!");
+        ZmailLog.store.info("Using ExampleStoreManager. If you are seeing this in production you have done something WRONG!");
         FileUtil.mkdirs(new File(directory));
     }
 
@@ -52,7 +52,7 @@ public class ExampleStoreManager extends ExternalStoreManager implements ZimbraE
     private File getNewFile(Mailbox mbox) throws IOException {
         String baseName = dirName(mbox);
         FileUtil.mkdirs(new File(baseName));
-        baseName += "/zimbrablob";
+        baseName += "/zmailblob";
         String name = baseName;
         synchronized (this) {
             int count = 1;
@@ -62,7 +62,7 @@ public class ExampleStoreManager extends ExternalStoreManager implements ZimbraE
                 file = new File(name+".msg");
             }
             if (file.createNewFile()) {
-                ZimbraLog.store.debug("writing to new file %s",file.getName());
+                ZmailLog.store.debug("writing to new file %s",file.getName());
                 return file;
             } else {
                 throw new IOException("unable to create new file");
@@ -98,7 +98,7 @@ public class ExampleStoreManager extends ExternalStoreManager implements ZimbraE
     }
 
     
-    //ZimbraExtension stub so class can be loaded by ExtensionUtil.
+    //ZmailExtension stub so class can be loaded by ExtensionUtil.
     @Override
     public String getName() {
         return "StoreManagerExtension";

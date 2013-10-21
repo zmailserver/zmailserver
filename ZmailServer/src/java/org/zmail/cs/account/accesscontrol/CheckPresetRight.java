@@ -12,29 +12,29 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.account.accesscontrol;
+package org.zmail.cs.account.accesscontrol;
 
 import java.util.List;
 
-import com.zimbra.common.account.Key.DomainBy;
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.common.util.Log;
-import com.zimbra.common.util.ZimbraLog;
-import com.zimbra.cs.account.Account;
-import com.zimbra.cs.account.Domain;
-import com.zimbra.cs.account.Entry;
-import com.zimbra.cs.account.Group;
-import com.zimbra.cs.account.AccessManager.ViaGrant;
-import com.zimbra.cs.account.Provisioning.GroupMembership;
-import com.zimbra.cs.account.accesscontrol.PermissionCache.CachedPermission;
-import com.zimbra.cs.account.accesscontrol.Rights.Admin;
+import org.zmail.common.account.Key.DomainBy;
+import org.zmail.common.service.ServiceException;
+import org.zmail.common.util.Log;
+import org.zmail.common.util.ZmailLog;
+import org.zmail.cs.account.Account;
+import org.zmail.cs.account.Domain;
+import org.zmail.cs.account.Entry;
+import org.zmail.cs.account.Group;
+import org.zmail.cs.account.AccessManager.ViaGrant;
+import org.zmail.cs.account.Provisioning.GroupMembership;
+import org.zmail.cs.account.accesscontrol.PermissionCache.CachedPermission;
+import org.zmail.cs.account.accesscontrol.Rights.Admin;
 
 /**
  * Check if grantee is allowed for rightNeeded on target entry.
  */ 
 
 public class CheckPresetRight extends CheckRight {
-    private static final Log sLog = ZimbraLog.acl;
+    private static final Log sLog = ZmailLog.acl;
 
     private Account mGranteeAcct;
     private ViaGrant mVia;
@@ -118,7 +118,7 @@ public class CheckPresetRight extends CheckRight {
         return mGranteeGroups;
     }
     
-    private boolean matchesGroupGrantee(ZimbraACE ace) throws ServiceException {
+    private boolean matchesGroupGrantee(ZmailACE ace) throws ServiceException {
         if (getGranteeGroups().groupIds().contains(ace.getGrantee())) {
             return true;
         } else if (ace.getGranteeType() == GranteeType.GT_EXT_GROUP) {
@@ -167,7 +167,7 @@ public class CheckPresetRight extends CheckRight {
         // target is a dl, we need to know if the dl returned from TargetIterator 
         // is the target itself or one of the groups the target is in.  So we check 
         // the actual target separately
-        List<ZimbraACE> acl = ACLUtil.getAllACEs(mTarget);
+        List<ZmailACE> acl = ACLUtil.getAllACEs(mTarget);
         if (acl != null) {
             result = checkTarget(acl, false);
             if (result != null) {
@@ -213,9 +213,9 @@ public class CheckPresetRight extends CheckRight {
             } else {
                 // end of group targets, put all collected denied and allowed grants into one 
                 // list, as if they are granted on the same entry, then check.  
-                // We put denied in the front, so it is consistent with ZimbraACL.getAllACEs
+                // We put denied in the front, so it is consistent with ZmailACL.getAllACEs
                 if (groupACLs != null) {
-                    List<ZimbraACE> aclsOnGroupTargets = groupACLs.getAllACLs();
+                    List<ZmailACE> aclsOnGroupTargets = groupACLs.getAllACLs();
                     if (aclsOnGroupTargets != null) {
                         result = checkTarget(aclsOnGroupTargets, false);
                     }
@@ -247,7 +247,7 @@ public class CheckPresetRight extends CheckRight {
         }
     }
     
-    private Boolean checkTarget(List<ZimbraACE> acl, boolean subDomain) 
+    private Boolean checkTarget(List<ZmailACE> acl, boolean subDomain) 
     throws ServiceException {
         Boolean result = null;
         
@@ -270,13 +270,13 @@ public class CheckPresetRight extends CheckRight {
         
         // if right is an user right, check domain, authed users and public grantees
         if (mRightNeeded.isUserRight()) {
-            // as an zimbra user in the same domain
+            // as an zmail user in the same domain
             result = checkPresetRight(acl, (short)(GranteeFlag.F_DOMAIN), subDomain);
             if (result != null) {
                 return result;
             }
             
-            // all authed zimbra user
+            // all authed zmail user
             result = checkPresetRight(acl, (short)(GranteeFlag.F_AUTHUSER), subDomain);
             if (result != null) {
                 return result;
@@ -309,7 +309,7 @@ public class CheckPresetRight extends CheckRight {
      *                 
      * subDomain: whether we want the grant to be for sub domains only
      */
-    private boolean matchesPresetRight(ZimbraACE ace, short granteeFlags, boolean subDomain) 
+    private boolean matchesPresetRight(ZmailACE ace, short granteeFlags, boolean subDomain) 
     throws ServiceException {
         GranteeType granteeType = ace.getGranteeType();
         if (!granteeType.hasFlags(granteeFlags)) {
@@ -355,7 +355,7 @@ public class CheckPresetRight extends CheckRight {
      * @param acl
      * @param granteeFlags For admin rights, because of negative grants and the more "specific" 
      *                     grantee takes precedence over the less "specific" grantee, we can't 
-     *                     just do a single ZimbraACE.match to see if a grantee matches the grant.
+     *                     just do a single ZmailACE.match to see if a grantee matches the grant.
      *                     Instead, we need to check more specific grantee types first, then 
      *                     go on the the less specific ones.  granteeFlags specifies the 
      *                     grantee type(s) we are checking for this call.
@@ -367,10 +367,10 @@ public class CheckPresetRight extends CheckRight {
      * @return
      * @throws ServiceException
      */
-    private Boolean checkPresetRight(List<ZimbraACE> acl, short granteeFlags, boolean subDomain) 
+    private Boolean checkPresetRight(List<ZmailACE> acl, short granteeFlags, boolean subDomain) 
     throws ServiceException {
         Boolean result = null;
-        for (ZimbraACE ace : acl) {
+        for (ZmailACE ace : acl) {
             if (!matchesPresetRight(ace, granteeFlags, subDomain)) {
                 continue;
             }
@@ -388,25 +388,25 @@ public class CheckPresetRight extends CheckRight {
     }
     
     /*
-     * Like checkPresetRight, but checks group grantees.  Instead of calling ZimbraACE.match, 
+     * Like checkPresetRight, but checks group grantees.  Instead of calling ZmailACE.match, 
      * which checks group grants using inDistributionList, we do it the other way around 
      * by obtaining a GroupMembership object that contains all the groups the account is 
      * in that are "eligible"(for adming rights, the group's admin flag must be on) for 
      * the grant.   We check if the grantee of the grant is one of the eligible groups the 
-     * account is in.  If the grantee on the zimbraACE is an external group, check if 
+     * account is in.  If the grantee on the zmailACE is an external group, check if 
      * the account is in the external group. 
      *
      * Eligible:
      *   - for admin rights granted to a group, the grant is effective only if the group 
-     *     has zimbraIsAdminGroup=TRUE.  If the group's zimbraIsAdminGroup is set to false 
+     *     has zmailIsAdminGroup=TRUE.  If the group's zmailIsAdminGroup is set to false 
      *     after a grant is made, the grant is still there on the target entry, but 
      *     becomes useless.
      */
-    private Boolean checkGroupPresetRight(List<ZimbraACE> acl, short granteeFlags, boolean subDomain) 
+    private Boolean checkGroupPresetRight(List<ZmailACE> acl, short granteeFlags, boolean subDomain) 
     throws ServiceException {
         Boolean result = null;
         
-        for (ZimbraACE ace : acl) {
+        for (ZmailACE ace : acl) {
             if (!matchesPresetRight(ace, granteeFlags, subDomain)) {
                 continue;
             }
@@ -422,7 +422,7 @@ public class CheckPresetRight extends CheckRight {
         return result;
     }
     
-    private Boolean gotResult(ZimbraACE ace) throws ServiceException {
+    private Boolean gotResult(ZmailACE ace) throws ServiceException {
         if (ace.deny()) {
             if (sLog.isDebugEnabled()) {
                 sLog.debug("Right " + "[" + mRightNeeded.getName() + "]" + 

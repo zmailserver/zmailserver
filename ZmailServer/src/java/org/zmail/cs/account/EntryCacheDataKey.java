@@ -14,7 +14,7 @@
  * 
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.account;
+package org.zmail.cs.account;
 
 // TODO: move all cache data keys here.
 //       currently they are scattered everywhere

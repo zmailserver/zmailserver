@@ -1,33 +1,33 @@
-objectIdentifier ZimbraHsmAttrType ZimbraLDAP:4
+objectIdentifier ZmailHsmAttrType ZmailLDAP:4
 
-objectIdentifier zimbraHsmGlobalConfig ZimbraHsmAttrType:1
-objectIdentifier zimbraHsmServer ZimbraHsmAttrType:2
+objectIdentifier zmailHsmGlobalConfig ZmailHsmAttrType:1
+objectIdentifier zmailHsmServer ZmailHsmAttrType:2
 
-#objectIdentifier zimbraHsmAge ZimbraHsmAttrType:20
+#objectIdentifier zmailHsmAge ZmailHsmAttrType:20
 
-#attributetype ( zimbraHsmAge
-	#NAME 'zimbraHsmAge'
+#attributetype ( zmailHsmAge
+	#NAME 'zmailHsmAge'
 	#DESC 'minimum age of mail items whose filesystem data will be moved to secondary storage (nnnnn[hmsd])'
 	#EQUALITY caseIgnoreIA5Match
 	#SYNTAX 1.3.6.1.4.1.1466.115.121.1.26{32}
 	#SINGLE-VALUE )	
 
-# Extends global config entry (dn: cn=config,cn=zimbra)
+# Extends global config entry (dn: cn=config,cn=zmail)
 # with hsm-related attributes.
-objectclass ( zimbraHsmGlobalConfig
-	NAME 'zimbraHsmGlobalConfig'
+objectclass ( zmailHsmGlobalConfig
+	NAME 'zmailHsmGlobalConfig'
 	DESC 'global configuration for HSM'
 	SUP top AUXILIARY
 	MAY (
-		zimbraHsmAge
+		zmailHsmAge
 	))
 
-# Extends each server entry (dn: cn=<server>,cn=servers,cn=zimbra)
+# Extends each server entry (dn: cn=<server>,cn=servers,cn=zmail)
 # with hsm-related attributes.
-objectclass ( zimbraHsmServer
-	NAME 'zimbraHsmServer'
+objectclass ( zmailHsmServer
+	NAME 'zmailHsmServer'
 	DESC 'Server-specific configuration for HSM'
-	SUP zimbraHsmGlobalConfig AUXILIARY
+	SUP zmailHsmGlobalConfig AUXILIARY
 	MAY (
-		zimbraHsmAge
+		zmailHsmAge
 	))

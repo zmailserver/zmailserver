@@ -12,31 +12,31 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.account.accesscontrol;
+package org.zmail.cs.account.accesscontrol;
 
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 
-import com.zimbra.common.account.Key;
-import com.zimbra.common.account.Key.CosBy;
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.common.util.EmailUtil;
-import com.zimbra.common.util.ZimbraLog;
-import com.zimbra.cs.account.AccessManager;
-import com.zimbra.cs.account.Account;
-import com.zimbra.cs.account.AuthToken;
-import com.zimbra.cs.account.Cos;
-import com.zimbra.cs.account.Domain;
-import com.zimbra.cs.account.Entry;
-import com.zimbra.cs.account.Group;
-import com.zimbra.cs.account.GuestAccount;
-import com.zimbra.cs.account.Provisioning;
-import com.zimbra.cs.account.accesscontrol.RightBearer.Grantee;
-import com.zimbra.cs.account.accesscontrol.RightCommand.AllEffectiveRights;
-import com.zimbra.cs.account.accesscontrol.Rights.Admin;
-import com.zimbra.cs.account.accesscontrol.Rights.User;
+import org.zmail.common.account.Key;
+import org.zmail.common.account.Key.CosBy;
+import org.zmail.common.service.ServiceException;
+import org.zmail.common.util.EmailUtil;
+import org.zmail.common.util.ZmailLog;
+import org.zmail.cs.account.AccessManager;
+import org.zmail.cs.account.Account;
+import org.zmail.cs.account.AuthToken;
+import org.zmail.cs.account.Cos;
+import org.zmail.cs.account.Domain;
+import org.zmail.cs.account.Entry;
+import org.zmail.cs.account.Group;
+import org.zmail.cs.account.GuestAccount;
+import org.zmail.cs.account.Provisioning;
+import org.zmail.cs.account.accesscontrol.RightBearer.Grantee;
+import org.zmail.cs.account.accesscontrol.RightCommand.AllEffectiveRights;
+import org.zmail.cs.account.accesscontrol.Rights.Admin;
+import org.zmail.cs.account.accesscontrol.Rights.User;
 
 /**
  * @author pshao
@@ -50,8 +50,8 @@ public class ACLAccessManager extends AccessManager implements AdminConsoleCapab
 
     @Override
     public boolean isAdequateAdminAccount(Account acct) {
-        return acct.getBooleanAttr(Provisioning.A_zimbraIsDelegatedAdminAccount, false) ||
-               acct.getBooleanAttr(Provisioning.A_zimbraIsAdminAccount, false);
+        return acct.getBooleanAttr(Provisioning.A_zmailIsDelegatedAdminAccount, false) ||
+               acct.getBooleanAttr(Provisioning.A_zmailIsAdminAccount, false);
     }
 
     private Account actualTargetForAdminLoginAs(Account target) throws ServiceException {
@@ -179,10 +179,10 @@ public class ACLAccessManager extends AccessManager implements AdminConsoleCapab
     throws ServiceException {
         // throw ServiceException.FAILURE("internal error", null);  // should never be called
 
-        // for bug 42896, we now have to do the same check on zimbraDomainAdminMaxMailQuota
+        // for bug 42896, we now have to do the same check on zmailDomainAdminMaxMailQuota
         // until we come up with a framework to support constraints on a per admin basis.
         // the following call is ugly!
-        return com.zimbra.cs.account.DomainAccessManager.canSetMailQuota(at, targetAccount, mailQuota);
+        return org.zmail.cs.account.DomainAccessManager.canSetMailQuota(at, targetAccount, mailQuota);
     }
 
     @Override
@@ -193,7 +193,7 @@ public class ACLAccessManager extends AccessManager implements AdminConsoleCapab
         try {
             return canDo(grantee, target, rightNeeded, asAdmin, null);
         } catch (ServiceException e) {
-            ZimbraLog.acl.warn("right denied", e);
+            ZmailLog.acl.warn("right denied", e);
             return false;
         }
     }
@@ -206,7 +206,7 @@ public class ACLAccessManager extends AccessManager implements AdminConsoleCapab
         try {
             return canDo(grantee, target, rightNeeded, asAdmin, null);
         } catch (ServiceException e) {
-            ZimbraLog.acl.warn("right denied", e);
+            ZmailLog.acl.warn("right denied", e);
             return false;
         }
     }
@@ -219,7 +219,7 @@ public class ACLAccessManager extends AccessManager implements AdminConsoleCapab
         try {
             return canDo(granteeEmail, target, rightNeeded, asAdmin, null);
         } catch (ServiceException e) {
-            ZimbraLog.acl.warn("right denied", e);
+            ZmailLog.acl.warn("right denied", e);
             return false;
         }
     }
@@ -254,7 +254,7 @@ public class ACLAccessManager extends AccessManager implements AdminConsoleCapab
                 return canDo(granteeAcct, target, rightNeeded, asAdmin, via);
             }
         } catch (ServiceException e) {
-            ZimbraLog.acl.warn("ACL checking failed", e);
+            ZmailLog.acl.warn("ACL checking failed", e);
         }
 
         return false;
@@ -269,7 +269,7 @@ public class ACLAccessManager extends AccessManager implements AdminConsoleCapab
                 return canDo(granteeAcct, target, rightNeeded, asAdmin, via);
             }
         } catch (ServiceException e) {
-            ZimbraLog.acl.warn("ACL checking failed", e);
+            ZmailLog.acl.warn("ACL checking failed", e);
         }
 
         return false;
@@ -377,7 +377,7 @@ public class ACLAccessManager extends AccessManager implements AdminConsoleCapab
 
         if (targetType == TargetType.account ||
             targetType == TargetType.calresource) {
-            cosStr = (String)attrs.get(Provisioning.A_zimbraCOSId);
+            cosStr = (String)attrs.get(Provisioning.A_zmailCOSId);
             if (cosStr != null) {
                 if (Provisioning.isUUID(cosStr)) {
                     cosBy = CosBy.id;
@@ -503,7 +503,7 @@ public class ACLAccessManager extends AccessManager implements AdminConsoleCapab
                 if (fallback != null) {
                     Boolean fallbackResult = fallback.checkRight(grantee, target, asAdmin);
                     if (fallbackResult != null) {
-                        ZimbraLog.acl.debug("checkPresetRight fallback to: " + fallbackResult.booleanValue());
+                        ZmailLog.acl.debug("checkPresetRight fallback to: " + fallbackResult.booleanValue());
                         return fallbackResult.booleanValue();
                     }
                 }
@@ -513,14 +513,14 @@ public class ACLAccessManager extends AccessManager implements AdminConsoleCapab
                     // see if there is a configured default
                     Boolean defaultValue = rightNeeded.getDefault();
                     if (defaultValue != null) {
-                        ZimbraLog.acl.debug("checkPresetRight default to: " + defaultValue.booleanValue());
+                        ZmailLog.acl.debug("checkPresetRight default to: " + defaultValue.booleanValue());
                         return defaultValue.booleanValue();
                     }
                 }
             }
 
         } catch (ServiceException e) {
-            ZimbraLog.acl.warn("ACL checking failed: " +
+            ZmailLog.acl.warn("ACL checking failed: " +
                                "grantee=" + grantee.getName() +
                                ", target=" + target.getLabel() +
                                ", right=" + rightNeeded.getName() +

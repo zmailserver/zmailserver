@@ -14,11 +14,11 @@
  * 
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.db;
+package org.zmail.cs.db;
 
 import java.sql.SQLException;
 
-import com.zimbra.common.util.ZimbraLog;
+import org.zmail.common.util.ZmailLog;
 /**
  * Abstract class used to wrap a SQL execute command with retry logic 
  */
@@ -61,7 +61,7 @@ public abstract class AbstractRetry<T> {
                 if (retryException(e)) {
                     sqle = e;
                     tries++;
-                    ZimbraLog.dbconn.warn("retrying connection attempt:"+tries+" due to possibly recoverable exception: ",e);
+                    ZmailLog.dbconn.warn("retrying connection attempt:"+tries+" due to possibly recoverable exception: ",e);
                     incrementTotalRetries();
                     try {
                         Thread.sleep(RETRY_DELAY);

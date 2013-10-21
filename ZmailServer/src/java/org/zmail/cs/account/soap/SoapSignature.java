@@ -13,17 +13,17 @@
  * ***** END LICENSE BLOCK *****
  */
 
-package com.zimbra.cs.account.soap;
+package org.zmail.cs.account.soap;
 
-import com.zimbra.common.account.SignatureUtil;
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.common.soap.AccountConstants;
-import com.zimbra.common.soap.Element;
-import com.zimbra.common.util.StringUtil;
-import com.zimbra.common.zclient.ZClientException;
-import com.zimbra.cs.account.Account;
-import com.zimbra.cs.account.Provisioning;
-import com.zimbra.cs.account.Signature;
+import org.zmail.common.account.SignatureUtil;
+import org.zmail.common.service.ServiceException;
+import org.zmail.common.soap.AccountConstants;
+import org.zmail.common.soap.Element;
+import org.zmail.common.util.StringUtil;
+import org.zmail.common.zclient.ZClientException;
+import org.zmail.cs.account.Account;
+import org.zmail.cs.account.Provisioning;
+import org.zmail.cs.account.Signature;
 
 import java.util.HashMap;
 import java.util.List;
@@ -50,11 +50,11 @@ class SoapSignature extends Signature implements SoapEntry {
             String attr = (String)entry.getKey();
             String value = (String)entry.getValue();
             
-            if (attr.equals(Provisioning.A_zimbraSignatureId) && !StringUtil.isNullOrEmpty(value))
+            if (attr.equals(Provisioning.A_zmailSignatureId) && !StringUtil.isNullOrEmpty(value))
                 signature.addAttribute(AccountConstants.A_ID, value);
-            else if (attr.equals(Provisioning.A_zimbraSignatureName) && !StringUtil.isNullOrEmpty(value))
+            else if (attr.equals(Provisioning.A_zmailSignatureName) && !StringUtil.isNullOrEmpty(value))
                 signature.addAttribute(AccountConstants.A_NAME, value);
-            else if (attr.equals(Provisioning.A_zimbraPrefMailSignatureContactId) && !StringUtil.isNullOrEmpty(value))
+            else if (attr.equals(Provisioning.A_zmailPrefMailSignatureContactId) && !StringUtil.isNullOrEmpty(value))
                 signature.addElement(AccountConstants.E_CONTACT_ID).setText(value);
             else {
                 String mimeType = SignatureUtil.attrNameToMimeType(attr);
@@ -69,12 +69,12 @@ class SoapSignature extends Signature implements SoapEntry {
     private static Map<String, Object> fromXML(Element signature) throws ServiceException {
         List<Element> contents = signature.listElements(AccountConstants.E_CONTENT);
         Map<String,Object> attrs = new HashMap<String, Object>();
-        attrs.put(Provisioning.A_zimbraSignatureId, signature.getAttribute(AccountConstants.A_ID));
-        attrs.put(Provisioning.A_zimbraSignatureName, signature.getAttribute(AccountConstants.A_NAME));
+        attrs.put(Provisioning.A_zmailSignatureId, signature.getAttribute(AccountConstants.A_ID));
+        attrs.put(Provisioning.A_zmailSignatureName, signature.getAttribute(AccountConstants.A_NAME));
         
         Element eContactId = signature.getOptionalElement(AccountConstants.E_CONTACT_ID);
         if (eContactId != null)
-            attrs.put(Provisioning.A_zimbraPrefMailSignatureContactId, eContactId.getText());
+            attrs.put(Provisioning.A_zmailPrefMailSignatureContactId, eContactId.getText());
         
         for (Element eContent : contents) {
             String type = eContent.getAttribute(AccountConstants.A_TYPE);

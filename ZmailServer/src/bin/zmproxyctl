@@ -14,29 +14,29 @@
 # ***** END LICENSE BLOCK *****
 # 
 
-BASE=/opt/zimbra
+BASE=/opt/zmail
 SCRIPTS="zmnginxctl"
 
 case "$1" in 
 	start)
 		for i in $SCRIPTS; do
-			/opt/zimbra/bin/$i start $2
+			/opt/zmail/bin/$i start $2
 		done
 	;;
 	stop)
 		for i in $SCRIPTS; do
-			/opt/zimbra/bin/$i stop $2
+			/opt/zmail/bin/$i stop $2
 		done
 	;;
 	restart|reload)
 		for i in $SCRIPTS; do
-			/opt/zimbra/bin/$i $1 $2
+			/opt/zmail/bin/$i $1 $2
 		done
 	;;
 	status)
 		STATUS=0
 		for i in $SCRIPTS; do
-		  /opt/zimbra/bin/$i status > /dev/null 2>&1
+		  /opt/zmail/bin/$i status > /dev/null 2>&1
 		  R=$?
 			if [ $R -ne "0" ]; then
 				echo "$i is not running"

@@ -13,7 +13,7 @@
  * ***** END LICENSE BLOCK *****
  */
 
-package com.zimbra.cs.service.mail;
+package org.zmail.cs.service.mail;
 
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -25,42 +25,42 @@ import java.util.Map;
 import java.util.Set;
 import java.util.TreeSet;
 
-import com.zimbra.common.calendar.ICalTimeZone;
-import com.zimbra.common.calendar.WellKnownTimeZones;
-import com.zimbra.common.localconfig.LC;
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.common.soap.Element;
-import com.zimbra.common.soap.MailConstants;
-import com.zimbra.common.util.ZimbraLog;
-import com.zimbra.cs.account.Account;
-import com.zimbra.cs.account.AccountServiceException;
-import com.zimbra.cs.account.AuthToken;
-import com.zimbra.cs.account.Provisioning;
-import com.zimbra.cs.account.Server;
-import com.zimbra.common.account.Key;
-import com.zimbra.common.account.Key.AccountBy;
-import com.zimbra.cs.mailbox.Folder;
-import com.zimbra.cs.mailbox.MailItem;
-import com.zimbra.cs.mailbox.MailServiceException;
-import com.zimbra.cs.mailbox.Mailbox;
-import com.zimbra.cs.mailbox.MailboxManager;
-import com.zimbra.cs.mailbox.Mountpoint;
-import com.zimbra.cs.mailbox.OperationContext;
-import com.zimbra.cs.mailbox.calendar.IcalXmlStrMap;
-import com.zimbra.cs.mailbox.calendar.Util;
-import com.zimbra.cs.mailbox.calendar.cache.CalSummaryCache;
-import com.zimbra.cs.mailbox.calendar.cache.CalendarCacheManager;
-import com.zimbra.cs.mailbox.calendar.cache.CalendarData;
-import com.zimbra.cs.mailbox.calendar.cache.CalendarItemData;
-import com.zimbra.cs.mailbox.calendar.cache.InstanceData;
-import com.zimbra.cs.mailbox.calendar.cache.CalSummaryCache.CalendarDataResult;
-import com.zimbra.cs.service.util.ItemId;
-import com.zimbra.cs.service.util.ItemIdFormatter;
-import com.zimbra.cs.util.AccountUtil;
-import com.zimbra.client.ZMailbox;
-import com.zimbra.client.ZMailbox.ZGetMiniCalResult;
-import com.zimbra.client.ZMailbox.ZMiniCalError;
-import com.zimbra.soap.ZimbraSoapContext;
+import org.zmail.common.calendar.ICalTimeZone;
+import org.zmail.common.calendar.WellKnownTimeZones;
+import org.zmail.common.localconfig.LC;
+import org.zmail.common.service.ServiceException;
+import org.zmail.common.soap.Element;
+import org.zmail.common.soap.MailConstants;
+import org.zmail.common.util.ZmailLog;
+import org.zmail.cs.account.Account;
+import org.zmail.cs.account.AccountServiceException;
+import org.zmail.cs.account.AuthToken;
+import org.zmail.cs.account.Provisioning;
+import org.zmail.cs.account.Server;
+import org.zmail.common.account.Key;
+import org.zmail.common.account.Key.AccountBy;
+import org.zmail.cs.mailbox.Folder;
+import org.zmail.cs.mailbox.MailItem;
+import org.zmail.cs.mailbox.MailServiceException;
+import org.zmail.cs.mailbox.Mailbox;
+import org.zmail.cs.mailbox.MailboxManager;
+import org.zmail.cs.mailbox.Mountpoint;
+import org.zmail.cs.mailbox.OperationContext;
+import org.zmail.cs.mailbox.calendar.IcalXmlStrMap;
+import org.zmail.cs.mailbox.calendar.Util;
+import org.zmail.cs.mailbox.calendar.cache.CalSummaryCache;
+import org.zmail.cs.mailbox.calendar.cache.CalendarCacheManager;
+import org.zmail.cs.mailbox.calendar.cache.CalendarData;
+import org.zmail.cs.mailbox.calendar.cache.CalendarItemData;
+import org.zmail.cs.mailbox.calendar.cache.InstanceData;
+import org.zmail.cs.mailbox.calendar.cache.CalSummaryCache.CalendarDataResult;
+import org.zmail.cs.service.util.ItemId;
+import org.zmail.cs.service.util.ItemIdFormatter;
+import org.zmail.cs.util.AccountUtil;
+import org.zmail.client.ZMailbox;
+import org.zmail.client.ZMailbox.ZGetMiniCalResult;
+import org.zmail.client.ZMailbox.ZMiniCalError;
+import org.zmail.soap.ZmailSoapContext;
 
 /*
 <GetMiniCalRequest s="range start time in millis" e="range end time in millis">
@@ -77,7 +77,7 @@ public class GetMiniCal extends CalendarRequest {
     @Override
     public Element handle(Element request, Map<String, Object> context)
             throws ServiceException {
-        ZimbraSoapContext zsc = getZimbraSoapContext(context);
+        ZmailSoapContext zsc = getZmailSoapContext(context);
         Mailbox mbox = getRequestedMailbox(zsc);
         Account authAcct = getAuthenticatedAccount(zsc);
         OperationContext octxt = getOperationContext(zsc, context);
@@ -147,10 +147,10 @@ public class GetMiniCal extends CalendarRequest {
                             ItemId iid = new ItemId(acctId, folderId);
                             ItemId reqIid = reverseMap.get(iid);  // Error must mention folder id requested by client.
                             if (reqIid != null) {
-                                ZimbraLog.calendar.warn("Error accessing calendar folder " + ifmt.formatItemId(reqIid), e);
+                                ZmailLog.calendar.warn("Error accessing calendar folder " + ifmt.formatItemId(reqIid), e);
                                 addError(response, ifmt.formatItemId(reqIid), e.getCode(), e.getMessage());
                             } else {
-                                ZimbraLog.calendar.warn("Error accessing calendar folder; resolved id=" +
+                                ZmailLog.calendar.warn("Error accessing calendar folder; resolved id=" +
                                         ifmt.formatItemId(iid) + " (missing reverse mapping)", e);
                                 addError(response, ifmt.formatItemId(iid), e.getCode(), e.getMessage());
                             }
@@ -174,7 +174,7 @@ public class GetMiniCal extends CalendarRequest {
                     List<Integer> folderIds = entry.getValue();
                     Account targetAcct = prov.get(AccountBy.id, acctId);
                     if (targetAcct == null) {
-                        ZimbraLog.calendar.warn("Skipping unknown account " + acctId + " during minical search");
+                        ZmailLog.calendar.warn("Skipping unknown account " + acctId + " during minical search");
                         continue;
                     }
                     Mailbox targetMbox = mboxMgr.getMailboxByAccount(targetAcct);
@@ -185,10 +185,10 @@ public class GetMiniCal extends CalendarRequest {
                             ItemId iid = new ItemId(acctId, folderId);
                             ItemId reqIid = reverseMap.get(iid);  // Error must mention folder id requested by client.
                             if (reqIid != null) {
-                                ZimbraLog.calendar.warn("Error accessing calendar folder " + ifmt.formatItemId(reqIid), e);
+                                ZmailLog.calendar.warn("Error accessing calendar folder " + ifmt.formatItemId(reqIid), e);
                                 addError(response, ifmt.formatItemId(reqIid), e.getCode(), e.getMessage());
                             } else {
-                                ZimbraLog.calendar.warn("Error accessing calendar folder; resolved id=" +
+                                ZmailLog.calendar.warn("Error accessing calendar folder; resolved id=" +
                                         ifmt.formatItemId(iid) + " (missing reverse mapping)", e);
                                 addError(response, ifmt.formatItemId(iid), e.getCode(), e.getMessage());
                             }
@@ -258,7 +258,7 @@ public class GetMiniCal extends CalendarRequest {
     }
 
     private static void doRemoteFolders(
-            ZimbraSoapContext zsc, String remoteAccountId, List<String> remoteFolders, long rangeStart, long rangeEnd,
+            ZmailSoapContext zsc, String remoteAccountId, List<String> remoteFolders, long rangeStart, long rangeEnd,
             Set<String> busyDates, Element response, Map<ItemId, ItemId> reverseIidMap, ItemIdFormatter ifmt) {
         try {
             Account target = Provisioning.getInstance().get(Key.AccountBy.id, remoteAccountId);
@@ -290,7 +290,7 @@ public class GetMiniCal extends CalendarRequest {
                 }
             }
         } catch (ServiceException e) {
-            ZimbraLog.calendar.warn("Error making remote GetMiniCalRequest", e);
+            ZmailLog.calendar.warn("Error making remote GetMiniCalRequest", e);
             // Mark all remote folders with the same error.
             for (String remoteFid : remoteFolders) {
                 try {
@@ -356,7 +356,7 @@ public class GetMiniCal extends CalendarRequest {
                     boolean isMountpoint = true;
                     int hopCount = 0;
                     // resolve local mountpoint to a real folder; deal with possible mountpoint chain
-                    while (isMountpoint && hopCount < ZimbraSoapContext.MAX_HOP_COUNT) {
+                    while (isMountpoint && hopCount < ZmailSoapContext.MAX_HOP_COUNT) {
                         Folder folder = mbox.getFolderById(octxt, folderId);
                         isMountpoint = folder instanceof Mountpoint;
                         if (isMountpoint) {
@@ -373,13 +373,13 @@ public class GetMiniCal extends CalendarRequest {
                             hopCount++;
                         }
                     }
-                    if (hopCount >= ZimbraSoapContext.MAX_HOP_COUNT)
+                    if (hopCount >= ZmailSoapContext.MAX_HOP_COUNT)
                         error = MailServiceException.TOO_MANY_HOPS(iidFolder);
                 }
                 result.put(iidFolder, new Resolved(new ItemId(targetAccountId, folderId), error));
             } catch (ServiceException e) {
                 ItemIdFormatter ifmt = new ItemIdFormatter();
-                ZimbraLog.calendar.warn("Error resolving calendar folder " + ifmt.formatItemId(iidFolder), e);
+                ZmailLog.calendar.warn("Error resolving calendar folder " + ifmt.formatItemId(iidFolder), e);
                 result.put(iidFolder, new Resolved(new ItemId(targetAccountId, folderId), e));
             }
         }

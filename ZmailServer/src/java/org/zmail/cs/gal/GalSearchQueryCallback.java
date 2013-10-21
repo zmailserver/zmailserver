@@ -14,7 +14,7 @@
  * 
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.gal;
+package org.zmail.cs.gal;
 
 public interface GalSearchQueryCallback {
 
@@ -26,7 +26,7 @@ public interface GalSearchQueryCallback {
     
     /**
      * 
-     * @return extra query to be ANDed with the query for Zimbra GAL LDAP search
+     * @return extra query to be ANDed with the query for Zmail GAL LDAP search
      */
-    public String getZimbraLdapSearchQuery();
+    public String getZmailLdapSearchQuery();
 }

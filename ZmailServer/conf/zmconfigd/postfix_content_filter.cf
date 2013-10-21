@@ -1,1 +1,1 @@
-smtp-amavis:[%%zimbraLocalBindAddress%%]:10024
+smtp-amavis:[%%zmailLocalBindAddress%%]:10024

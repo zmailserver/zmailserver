@@ -38,7 +38,7 @@ sub getLocalConfig {
 	if (defined ($ENV{zmsetvars})) {
 		return $ENV{$key};
 	}
-	open CONF, "/opt/zimbra/bin/zmlocalconfig -q -m shell |" or die "Can't open local config: $!";
+	open CONF, "/opt/zmail/bin/zmlocalconfig -q -m shell |" or die "Can't open local config: $!";
 	my @conf = <CONF>;
 	close CONF;
 
@@ -154,15 +154,15 @@ sub processQ {
 	
 }
 
-getLocalConfig('zimbra_home');
+getLocalConfig('zmail_home');
 
-$queue_directory = `$ENV{zimbra_home}/postfix/sbin/postconf -h queue_directory`;
+$queue_directory = `$ENV{zmail_home}/postfix/sbin/postconf -h queue_directory`;
 chomp $queue_directory;
 
-$hash_queue_depth = `$ENV{zimbra_home}/postfix/sbin/postconf -h hash_queue_depth`;
+$hash_queue_depth = `$ENV{zmail_home}/postfix/sbin/postconf -h hash_queue_depth`;
 chomp $hash_queue_depth;
 
-#$queue_directory="/opt/zimbra/data/postfix/spool";
+#$queue_directory="/opt/zmail/data/postfix/spool";
 #print STDERR "$queue_directory\n";
 
 my @queues = qw/incoming hold active deferred corrupt/;

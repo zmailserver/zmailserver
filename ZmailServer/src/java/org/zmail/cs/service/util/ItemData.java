@@ -12,7 +12,7 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.service.util;
+package org.zmail.cs.service.util;
 
 import java.io.IOException;
 import java.util.List;
@@ -22,10 +22,10 @@ import org.json.JSONObject;
 
 import com.google.common.annotations.VisibleForTesting;
 import com.google.common.collect.Lists;
-import com.zimbra.cs.mailbox.Flag;
-import com.zimbra.cs.mailbox.MailItem;
-import com.zimbra.cs.mailbox.Metadata;
-import com.zimbra.cs.mailbox.util.TagUtil;
+import org.zmail.cs.mailbox.Flag;
+import org.zmail.cs.mailbox.MailItem;
+import org.zmail.cs.mailbox.Metadata;
+import org.zmail.cs.mailbox.util.TagUtil;
 
 public class ItemData {
     public String sender, extra, flags, path, tags;

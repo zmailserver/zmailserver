@@ -12,7 +12,7 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.examples.extns.samlprovider;
+package org.zmail.examples.extns.samlprovider;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -26,16 +26,16 @@ import org.apache.commons.httpclient.HttpClient;
 import org.apache.commons.httpclient.HttpMethod;
 import org.apache.commons.httpclient.HttpState;
 
-import com.zimbra.common.account.Key.AccountBy;
-import com.zimbra.common.auth.ZAuthToken;
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.common.soap.Element;
-import com.zimbra.common.util.SystemUtil;
-import com.zimbra.common.util.ZimbraLog;
-import com.zimbra.cs.account.Account;
-import com.zimbra.cs.account.AuthToken;
-import com.zimbra.cs.account.AuthTokenException;
-import com.zimbra.cs.account.Provisioning;
+import org.zmail.common.account.Key.AccountBy;
+import org.zmail.common.auth.ZAuthToken;
+import org.zmail.common.service.ServiceException;
+import org.zmail.common.soap.Element;
+import org.zmail.common.util.SystemUtil;
+import org.zmail.common.util.ZmailLog;
+import org.zmail.cs.account.Account;
+import org.zmail.cs.account.AuthToken;
+import org.zmail.cs.account.AuthTokenException;
+import org.zmail.cs.account.Provisioning;
 
 /**
  * SAML auth token.
@@ -68,7 +68,7 @@ public class SamlAuthToken extends AuthToken {
             expires = dateFormat.parse(notOnOrAfter);
             authnStmtElt = samlAssertionElt.getElement("AuthnStatement");
         } catch (Exception e) {
-            ZimbraLog.extensions.error(e);
+            ZmailLog.extensions.error(e);
             throw new AuthTokenException("Error in parsing SAML auth token", e);
         }
         if (authnStmtElt == null)
@@ -87,7 +87,7 @@ public class SamlAuthToken extends AuthToken {
         try {
             acct = prov.get(AccountBy.name, subjectNameId);
         } catch (ServiceException e) {
-            ZimbraLog.extensions.error(SystemUtil.getStackTrace(e));
+            ZmailLog.extensions.error(SystemUtil.getStackTrace(e));
             return null;
         }
         if (acct != null)
@@ -126,7 +126,7 @@ public class SamlAuthToken extends AuthToken {
     }
 
     @Override
-    public boolean isZimbraUser() {
+    public boolean isZmailUser() {
         return true;
     }
 
@@ -152,7 +152,7 @@ public class SamlAuthToken extends AuthToken {
      * @param method http method
      * @param isAdminReq is admin request
      * @param cookieDomain cookie domain
-     * @throws com.zimbra.common.service.ServiceException
+     * @throws org.zmail.common.service.ServiceException
      *
      */
     @Override
@@ -165,7 +165,7 @@ public class SamlAuthToken extends AuthToken {
      * @param state http state
      * @param isAdminReq is admin request
      * @param cookieDomain cookie domain
-     * @throws com.zimbra.common.service.ServiceException
+     * @throws org.zmail.common.service.ServiceException
      *
      */
     @Override
@@ -179,7 +179,7 @@ public class SamlAuthToken extends AuthToken {
      * @param isAdminReq is admin request
      * @param secureCookie secure cookie
      * @param remember is auth token persisted by client after logout
-     * @throws com.zimbra.common.service.ServiceException
+     * @throws org.zmail.common.service.ServiceException
      */
     @Override
     public void encode(HttpServletResponse resp, boolean isAdminReq, boolean secureCookie, boolean remember) throws ServiceException {

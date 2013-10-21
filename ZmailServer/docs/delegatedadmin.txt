@@ -6,7 +6,7 @@ Role based delegate admin is about "who" can do "what" on "which" objects.
 The following terms are used in modeling and implementation of the system:
 
 1.1 Grantees - "who" can do
-    One or a group of Zimbra admin users that can be granted permissions for scoped 
+    One or a group of Zmail admin users that can be granted permissions for scoped 
     operations(i.e. rights) on specified target objects.
         Grantee can be:
             - an account: 
@@ -84,7 +84,7 @@ The following terms are used in modeling and implementation of the system:
       - An ACE defines a grant.
       - An ACE is stored in an LDAP attribute on the target entry.
       - An ACE consists of three parts:
-            (1) Zimbra ID of the grantee  (e.g. 6ecd16b8-5ced-4aa0-8f95-bdc331d8c22a)
+            (1) Zmail ID of the grantee  (e.g. 6ecd16b8-5ced-4aa0-8f95-bdc331d8c22a)
             (2) Type of the grantee       (e.g. usr)
             (3) Allowed or denied right   (e.g. -createAccount)
           
@@ -161,7 +161,7 @@ Depending on the context, there are three aspects of targets that need to be dea
 
 3.1.1 System-Defined Rights
 
-      System rights are defined in ZimbraServer/conf/zimbra-rights.xml file
+      System rights are defined in ZmailServer/conf/zmail-rights.xml file
       
       There are 4 types of rights: preset, setAttrs, getAttrs, combo
         
@@ -217,7 +217,7 @@ Depending on the context, there are three aspects of targets that need to be dea
 3.1.1.2 getAttr Right
       - Allows reading attribute values.
             e.g. getAccount - get all attributes of account
-                 viewQuota  - get zimbraMailQuota, zimbraQuotaWarnPercent, zimbraQuotaWarnInterval, zimbraQuotaWarnMessage attributes
+                 viewQuota  - get zmailMailQuota, zmailQuotaWarnPercent, zmailQuotaWarnInterval, zmailQuotaWarnMessage attributes
                  
       - Can be associated with none or multiple target types.           
       
@@ -225,7 +225,7 @@ Depending on the context, there are three aspects of targets that need to be dea
 3.1.1.3 setAttr Right
       - Allows modifying and reading attribute values.
             e.g. modifyAccount  = modify all attributes of account
-                 configureQuota - get zimbraMailQuota, zimbraQuotaWarnPercent, zimbraQuotaWarnInterval, zimbraQuotaWarnMessage attributes
+                 configureQuota - get zmailMailQuota, zmailQuotaWarnPercent, zmailQuotaWarnInterval, zmailQuotaWarnMessage attributes
 
       - Can be associated with none or multiple target types.   
 
@@ -257,12 +257,12 @@ Depending on the context, there are three aspects of targets that need to be dea
         {attribute-name}: attribute name
        
      -  e.g.
-          set.account.zimbraMailStatus
-          get.domain.zimbraMailStatus
-          set.cos.zimbraMailQuota
+          set.account.zmailMailStatus
+          get.domain.zmailMailStatus
+          set.cos.zmailMailQuota
           
-     - In a grant(zimbraACE), it shows up at the spot for {right}
-          2246ffcf-1ae2-402a-be91-bc0b3be4c0f0 usr set.account.zimbraMailStatus
+     - In a grant(zmailACE), it shows up at the spot for {right}
+          2246ffcf-1ae2-402a-be91-bc0b3be4c0f0 usr set.account.zmailMailStatus
                 
 
 3.2 Target Types of a Right
@@ -276,11 +276,11 @@ Depending on the context, there are three aspects of targets that need to be dea
     - For getAttrs/setAttrs rights: one, or multiple
           The right is only applicable on those target types
           
-          e.g. 1. can modify zimbraMailStatus on accounts
+          e.g. 1. can modify zmailMailStatus on accounts
                   <right name="configureAccountMailStatus" type="setAttrs" targetType="account">
                       <desc>configure account mail status</desc>
                       <attrs>
-                          <a n="zimbraMailStatus"/>
+                          <a n="zmailMailStatus"/>
                       </attrs>
                   </right>
                   
@@ -288,11 +288,11 @@ Depending on the context, there are three aspects of targets that need to be dea
                   - if granted on a distribution list, can modify zMS on all accounts in the DL
                   - if granted on an account, can modify zMS on the account
 
-          e.g. 2. can modify zimbraMailStatus on domains
+          e.g. 2. can modify zmailMailStatus on domains
                   <right name="configureDomainMailStatus" type="setAttrs" targetType="domain,distributionlist,account">
                       <desc>configure domain mail status</desc>
                       <attrs>
-                          <a n="zimbraMailStatus"/>
+                          <a n="zmailMailStatus"/>
                       </attrs>
                   </right>
                 
@@ -301,11 +301,11 @@ Depending on the context, there are three aspects of targets that need to be dea
                     and on all direct/indirect account members in the DL.
                   - if granted on an account, can modify zMS on the account
 
-          e.g. 3. can modify zimbraMailStatus on domains
+          e.g. 3. can modify zmailMailStatus on domains
                   <right name="configureDomainMailStatus" type="setAttrs" targetType="domain">
                       <desc>configure domain mail status</desc>
                       <attrs>
-                          <a n="zimbraMailStatus"/>
+                          <a n="zmailMailStatus"/>
                       </attrs>
                   </right>
                 
@@ -361,17 +361,17 @@ Depending on the context, there are three aspects of targets that need to be dea
              
             e.g. 
             1. Q: target allows modifyAccount right to the current admin, but does not have an ACE entry for configureQuota right 
-                  - can the current admin modify zimbraMailQuota of the target?
+                  - can the current admin modify zmailMailQuota of the target?
                A: Yes.  Because (3):(B)="allow write all" => result in (X)
             
             2. Q: target allows modifyAccount right to the current admin, but has an entry for "deny configureQuota" 
-                  - can the current admin modify zimbraMailQuota of the target?
+                  - can the current admin modify zmailMailQuota of the target?
                A: No.  Because (3):(B)="allow write all" and (8):(D)="deny write some" => result in (Z)
             
             3. Q: target has ACE entry "deny getAccount" and an ACE entry "allow configureQuota" for the current admin 
-                  - can the current admin see the value of zimbraMailQuota of the target?
+                  - can the current admin see the value of zmailMailQuota of the target?
                A: No.   Because (5):(C)="deny read all" and (4):(A)="allow read some" =>  => result in (Z)
-                  However, if the question is "can the current admin *modify* the value of zimbraMailQuota of the target?" the answer would be Yes.
+                  However, if the question is "can the current admin *modify* the value of zmailMailQuota of the target?" the answer would be Yes.
                   Because (5):(D)="not specified" and (4):(B)="allow write some" => result in (X)
       
 
@@ -379,10 +379,10 @@ Depending on the context, there are three aspects of targets that need to be dea
     Attributes cannot be modified to a value beyond the constraints for the attribute.   If there is no constraint 
     for an attribute, it can be modified to any value allowed by the attribute syntax.
     
-    Constraints are defined in the multi-value attribute zimbraConstraint, each value in zimbraConstraint specifies 
-    the constraint for an attribute.  zimbraConstraint can be set on COS and global config entries.
+    Constraints are defined in the multi-value attribute zmailConstraint, each value in zmailConstraint specifies 
+    the constraint for an attribute.  zmailConstraint can be set on COS and global config entries.
     
-    Each zimbraConstraint value is in the format of:
+    Each zmailConstraint value is in the format of:
     
         {attr-name}:{min-max} | {values}
         {min-max} = [min={min-value}][:max={max-value}]  (min and max are inclusive)
@@ -391,43 +391,43 @@ Depending on the context, there are three aspects of targets that need to be dea
         - for neumeric(integer, interval, port) attributes:
               {attr-name}:{min-max}
               
-              e.g. zimbraPasswordMinLength:min=4:max=6 (can be set to value between 4 and 6)
-                   zimbraPrefOutOfOfficeCacheDuration:min=1m:max=7d (can be set to value between 1m and 7d)
-                   zimbraMailQuota:min=100000000 (min=100000000, no max limit)
-                   zimbraSignatureMaxNumEntries:max=10 (no min limit, max=10)
+              e.g. zmailPasswordMinLength:min=4:max=6 (can be set to value between 4 and 6)
+                   zmailPrefOutOfOfficeCacheDuration:min=1m:max=7d (can be set to value between 1m and 7d)
+                   zmailMailQuota:min=100000000 (min=100000000, no max limit)
+                   zmailSignatureMaxNumEntries:max=10 (no min limit, max=10)
               
         - for boolean attributes:
               {attr-name}:{values}
               
-              e.g. zimbraFeatureMailEnabled:values=TRUE,FALSE (can be set to TRUE or FALSE)
-                   zimbraFeatureContactsEnabled:values=FALSE (can be set to FALSE)
+              e.g. zmailFeatureMailEnabled:values=TRUE,FALSE (can be set to TRUE or FALSE)
+                   zmailFeatureContactsEnabled:values=FALSE (can be set to FALSE)
                    
         - for enum attributes:
               {attr-name}:{values}
              
-              e.g. zimbraDomainStatus:values=active,maintenance,locked,closed
-                   zimbraGalMode:values=zimbra 
+              e.g. zmailDomainStatus:values=active,maintenance,locked,closed
+                   zmailGalMode:values=zmail 
     
-    For account and cos attributes, constraints are specified in the corresponding COS attribute zimbraConstraint.
-    For domain and  server attributes, constraints are specified in the global config attribute zimbraConstraint.
+    For account and cos attributes, constraints are specified in the corresponding COS attribute zmailConstraint.
+    For domain and  server attributes, constraints are specified in the global config attribute zmailConstraint.
     
-    An admin is allowed to set attributes beyond constraints only if he has right to modify the zimbraConstraint 
+    An admin is allowed to set attributes beyond constraints only if he has right to modify the zmailConstraint 
     attribute that defines the constraint for the object he is modifying.  
     
-    For example, if zimbraConstraint on cos C has:
-          zimbraPasswordMinLength:min=6:max=8
-          zimbraSignatureMaxNumEntries:max=10
+    For example, if zmailConstraint on cos C has:
+          zmailPasswordMinLength:min=6:max=8
+          zmailSignatureMaxNumEntries:max=10
           
-    - if the authed admin has right to modify zimbraConstraint on cos C (and has right to modify the corresponding
+    - if the authed admin has right to modify zmailConstraint on cos C (and has right to modify the corresponding
       account/cos attributes), he can set:
-          zimbraPasswordMinLength to any value
-          zimbraSignatureMaxNumEntries to any value
+          zmailPasswordMinLength to any value
+          zmailSignatureMaxNumEntries to any value
           all attributes to any value on cos C and accounts assigned to cos C
           
-    - if the authed admin does not have right to modify zimbraConstraint on cos C (and has right to modify the 
+    - if the authed admin does not have right to modify zmailConstraint on cos C (and has right to modify the 
       corresponding account/cos attributes), he can set:    
-          zimbraPasswordMinLength to between 6 and 8
-          zimbraSignatureMaxNumEntries to a value less than or equal to 10
+          zmailPasswordMinLength to between 6 and 8
+          zmailSignatureMaxNumEntries to a value less than or equal to 10
           all other attributes to any value on cos C and accounts assigned to cos C
     
     
@@ -676,7 +676,7 @@ Internally, the algorithm for deciding on cross domain ACL checking is:
 4.1 Admin Accounts and Admin Groups
 
 4.1.1 System Admin Account
-      A "system admin account" is an account with the account attribute zimbraIsAdminAccount set to TRUE.
+      A "system admin account" is an account with the account attribute zmailIsAdminAccount set to TRUE.
 
       - A "system admin" is a "can do all" admin.  It is allowed for all admin SOAP commands, including 
         granting/revoking *any* right on *any* target to *any* admin/group.   
@@ -684,39 +684,39 @@ Internally, the algorithm for deciding on cross domain ACL checking is:
       - When a right is checked, if the authed admin is a system admin, it is always allowed.  Server does *not* 
         check any ACL, whether positive or negative.  
       
-      - A system admin can create other system admins, by setting their zimbraIsAdminAccount to TRUE.
+      - A system admin can create other system admins, by setting their zmailIsAdminAccount to TRUE.
     
       - A system admin should not received any grant(i.e. be the grantee of grants), because it is 
         already allowed for everything.  Granting to a system admin is considered an operational error.  
         
         
 4.1.2 Delegated Admin Account and Admin Group
-      A "delegated admin account" is an account with the account attribute zimbraIsDelegatedAdminAccount set to TRUE.
-      An "admin group" is a distribution list with the DL attribute zimbraIsAdminGroup set to TRUE.
+      A "delegated admin account" is an account with the account attribute zmailIsDelegatedAdminAccount set to TRUE.
+      An "admin group" is a distribution list with the DL attribute zmailIsAdminGroup set to TRUE.
       
       - Only delegated admin accounts and admin groups can be granted admin rights.
         (i.e. be the grantee of an admin grant.)
         
-      - If a delegated admin is "promoted" to a system admin (setting zimbraIsAdminAccount to TRUE), all existing 
+      - If a delegated admin is "promoted" to a system admin (setting zmailIsAdminAccount to TRUE), all existing 
         grants, including negative grants, will be *ignored*, and everythings will be allowed.  
-        Note: - server will not automatically set zimbraIsDelegatedAdminAccount to FALSE, nor will it 
+        Note: - server will not automatically set zmailIsDelegatedAdminAccount to FALSE, nor will it 
                 enforce the admin to do so.  
               - all grants will still be in tact, server will not automatically revoke all existing grants, 
                 nor will it enforce the admin to do so.
               
-      - If a system admin is "demoted" to a delegated admin (setting zimbraIsAdminAccount to FALSE and 
-        zimbraIsDelegatedAdminAccount TO TRUE), if there are any existing grants, they will start to take effect.
+      - If a system admin is "demoted" to a delegated admin (setting zmailIsAdminAccount to FALSE and 
+        zmailIsDelegatedAdminAccount TO TRUE), if there are any existing grants, they will start to take effect.
         
       
 4.1.3 Grants Are Valid only When the Grantee's Admin Flag is On 
-      - When an account's zimbraIsDelegatedAdminAccount attribute changed from TRUE to FALSE, all existing grants to 
+      - When an account's zmailIsDelegatedAdminAccount attribute changed from TRUE to FALSE, all existing grants to 
         the delegated admin account become invalid.  
-        When zimbraIsDelegatedAdminAccount is changed from FALSE to TRUE, all existing grants automatically become 
+        When zmailIsDelegatedAdminAccount is changed from FALSE to TRUE, all existing grants automatically become 
         valid again.
 
-      - When a group's zimbraIsAdminGroup is is changed from TRUE to FALSE, all existing grants to the admin 
+      - When a group's zmailIsAdminGroup is is changed from TRUE to FALSE, all existing grants to the admin 
         group become invalid.    
-        When zimbraIsAdminGroup is changed from FALSE to TRUE, all existing grants automatically become valid again.
+        When zmailIsAdminGroup is changed from FALSE to TRUE, all existing grants automatically become valid again.
 
       - The above let admins temporary disable things without having to blow away and later recreate the grants.
 
@@ -745,8 +745,8 @@ Internally, the algorithm for deciding on cross domain ACL checking is:
            Then, 
            - adminA cannot grant changePassword (he can only execute the right himself)
            - adminA can grant the modifyAccount right on dl@test.com
-           - adminA can grant inline rights set.account.zimbraMailStatus or get.account.zimbraMailStatus,
-             because get/set account zimbraMailStatus is "part of" the modifyAccount right.
+           - adminA can grant inline rights set.account.zmailMailStatus or get.account.zmailMailStatus,
+             because get/set account zmailMailStatus is "part of" the modifyAccount right.
            - adminA can grant the addDistributionMember right
            - Rights can be granted on dl@test.com or any dl/account members of dl@test.com.
       
@@ -756,12 +756,12 @@ Internally, the algorithm for deciding on cross domain ACL checking is:
             
             e.g continue with the above example, if user1@test.com and user2@test.com are members 
                 of dl@test.com, and there is a negative grant on user1@test.com that denies adminA 
-                to modify zimbraFeatureCalendarEnabled, like:
-                     {id-of-adminA} usr -set.account.zimbraFeatureCalendarEnabled
+                to modify zmailFeatureCalendarEnabled, like:
+                     {id-of-adminA} usr -set.account.zmailFeatureCalendarEnabled
                      
                 Then:
                 - adminA *cannot* grant the modifyAccount right on dl@test.com to others(e.g. adminB).  
-                  Because if the granting is allowed, then adminB will be able to set zimbraFeatureCalendarEnabled 
+                  Because if the granting is allowed, then adminB will be able to set zmailFeatureCalendarEnabled 
                   on account user1@test.com, which adminA is not allowed to do.
                 - adminA *can* still grant the modifyAccount right on user2@test.com to others.
                     
@@ -807,20 +807,20 @@ Internally, the algorithm for deciding on cross domain ACL checking is:
 
 5.1 Grants
 
-    A grant, which is represented by an ACE, is stored in a LDAP attribute zimbraACE on target entries.  
+    A grant, which is represented by an ACE, is stored in a LDAP attribute zmailACE on target entries.  
 
-    zimbraACE:
+    zmailACE:
     ---------- 
         type="astring"
         cardinality="multi" (each value is an Access Control Entry, hence making an ACL)
         optionalIn="account,distributionList,cos,domain,globalConfig,server,xmppcomponent,zimlet"
             
             
-    zimbraACE Format:
+    zmailACE Format:
     -----------------   
-        {grantee-zimbraId} {grantee-type} [{right-modifier}]{right} 
+        {grantee-zmailId} {grantee-type} [{right-modifier}]{right} 
         
-            {grantee-zimbraId} = zimbraId of the grantee
+            {grantee-zmailId} = zmailId of the grantee
             
             {grantee-type} = usr - grantee is an admin account
                              grp - grantee is a group of admin accounts
@@ -859,13 +859,13 @@ Internally, the algorithm for deciding on cross domain ACL checking is:
                   c2e3fd70-97ac-43a4-8caa-4bf681251a49 usr configureQuota
                       ==> account c2e3fd70-97ac-43a4-8caa-4bf681251a49 can configure quota of this account.
                       
-                  2246ffcf-1ae2-402a-be91-bc0b3be4c0f0 usr set.account.zimbraMailStatus
-                      ==> account 2246ffcf-1ae2-402a-be91-bc0b3be4c0f0 can set account attribute zimbraMailStatus.
+                  2246ffcf-1ae2-402a-be91-bc0b3be4c0f0 usr set.account.zmailMailStatus
+                      ==> account 2246ffcf-1ae2-402a-be91-bc0b3be4c0f0 can set account attribute zmailMailStatus.
                        
         
     Indexing:
     ---------    
-        zimbraACE is indexed.  This is to discover the "all rights granted to a grantee G" information for admin console.
+        zmailACE is indexed.  This is to discover the "all rights granted to a grantee G" information for admin console.
         
     
     Queries:
@@ -876,7 +876,7 @@ Internally, the algorithm for deciding on cross domain ACL checking is:
 
     
 5.2 Add the "global grant" Entry
-    DN: cn=globalgrant,cn=zimbra
+    DN: cn=globalgrant,cn=zmail
     
     - For granting grants that affect all entries on the system.  e.g all cos's, all servers, all domains.
     
@@ -886,29 +886,29 @@ Internally, the algorithm for deciding on cross domain ACL checking is:
 
 5.3 Add ACL Related Attributes
 
-- zimbraACE 
+- zmailACE 
        see 5.1
 
-- zimbraConstratint
-      <attr id="766" name="zimbraConstraint" type="string" cardinality="multi" optionalIn="globalConfig,cos" since="6.0">
+- zmailConstratint
+      <attr id="766" name="zmailConstraint" type="string" cardinality="multi" optionalIn="globalConfig,cos" since="6.0">
         <desc>
             attribute constraints
             TODO: fill all the constraints
         </desc>
       </attr>
 
-- zimbraIsDelegatedAdminAccount
+- zmailIsDelegatedAdminAccount
       see 4.
 
-- zimbraIsAdminGroup
+- zmailIsAdminGroup
       see 4.
       
      
 5.4 Deprecated Attributes
 
-- zimbraIsDomainAdminAccount
-      All right checking will be based on ACL.   zimbraIsDomainAdminAccount will be ignored throughout the server code.
-      Current accounts with zimbraIsDomainAdminAccount=TRUE will be migrated by granting them the equivalent rights.
+- zmailIsDomainAdminAccount
+      All right checking will be based on ACL.   zmailIsDomainAdminAccount will be ignored throughout the server code.
+      Current accounts with zmailIsDomainAdminAccount=TRUE will be migrated by granting them the equivalent rights.
       
       
 =====================
@@ -1036,7 +1036,7 @@ Internally, the algorithm for deciding on cross domain ACL checking is:
 7. Admin SOAP
 ===============
 
-See ZimbraServer/docs/soap-right.txt for SOAP requests and response.
+See ZmailServer/docs/soap-right.txt for SOAP requests and response.
 
 7.1 Granting and Revoking Rights on a Target
     
@@ -1121,10 +1121,10 @@ Admin console will only display/enable the UI components that are:
 (1) Allowed to the authenticated admin baesd on the effective rights granted to the 
     admin and/or to an admin group the admin belongs.
 and
-(2) Enabled by zimbraAdminConsoleUIComponents
-    zimbraAdminConsoleUIComponents is a multi-value attribute on account and distributuon list.
-    Admin console will only enable views/tabs that are listed in zimbraAdminConsoleUIComponents.
-    UI components not listed in zimbraAdminConsoleUIComponents will be disabled, even when the 
+(2) Enabled by zmailAdminConsoleUIComponents
+    zmailAdminConsoleUIComponents is a multi-value attribute on account and distributuon list.
+    Admin console will only enable views/tabs that are listed in zmailAdminConsoleUIComponents.
+    UI components not listed in zmailAdminConsoleUIComponents will be disabled, even when the 
     authed admin has enough rights for the tasks.
 
 
@@ -1143,19 +1143,19 @@ TODO: document the list of all admin console UI components.
     officially supported feature.  That is, after upgrading to GnR, the only officially supported 
     permission checking scheme is the ACL based admin.
     
-    The legacy domain based access manager looks at the authed account's zimbraIsAdminAccount 
-    and zimbraIsDomainAdminAccount attributes.  It does *not* look at any ACL.
+    The legacy domain based access manager looks at the authed account's zmailIsAdminAccount 
+    and zmailIsDomainAdminAccount attributes.  It does *not* look at any ACL.
     
-    The new pure ACL based access manager looks at the authed account's zimbraIsAdminAccount 
-    and zimbraIsDelegatedAdminAccount.  If zimbraIsAdminAccount is TRUE, everything is allowed, 
-    without checking any ACL.  Otherwise if zimbraIsDelegatedAdminAccount, it checks ACLs 
+    The new pure ACL based access manager looks at the authed account's zmailIsAdminAccount 
+    and zmailIsDelegatedAdminAccount.  If zmailIsAdminAccount is TRUE, everything is allowed, 
+    without checking any ACL.  Otherwise if zmailIsDelegatedAdminAccount, it checks ACLs 
     granted to the account or any admin groups it belongs.
     
     To use the legacy domain based access manager, do:
-        zmlocalconfig -e zimbra_class_accessmanager=com.zimbra.cs.account.accesscontrol.DomainACLAccessManager
+        zmlocalconfig -e zmail_class_accessmanager=org.zmail.cs.account.accesscontrol.DomainACLAccessManager
     
     To use the new pure ACL based access manager, do:
-        zmlocalconfig -e zimbra_class_accessmanager=com.zimbra.cs.account.accesscontrol.ACLAccessManager
+        zmlocalconfig -e zmail_class_accessmanager=org.zmail.cs.account.accesscontrol.ACLAccessManager
         
     then restart the server.
     
@@ -1166,12 +1166,12 @@ TODO: document the list of all admin console UI components.
 
 10.2 Migrating Current Admin Accounts
 
-10.2.1 For current global admins (zimbraIsAdminAccount),
-       Nothing needs to be done.  The zimbraIsAdminAccount attribute will continue to allow  
+10.2.1 For current global admins (zmailIsAdminAccount),
+       Nothing needs to be done.  The zmailIsAdminAccount attribute will continue to allow  
        them to do anything.  
 
-10.2.2 For current domain admins (zimbraIsDomainAdminAccount),
-       (1) set zimbraIsDelegatedAdminAccount to TRUE
+10.2.2 For current domain admins (zmailIsDomainAdminAccount),
+       (1) set zmailIsDelegatedAdminAccount to TRUE
        
        (2) Grant the following rights to them.  These rights will give them exactly the 
            same(no more no less) privilege they had in FRANKLIN.
@@ -1200,7 +1200,7 @@ TODO: document the list of all admin console UI components.
 
 10.3 Reference and Documentations
 
-(1) ZimbraServer/docs/rights.txt
+(1) ZmailServer/docs/rights.txt
         Rights needed for each admin SOAP command and notes.
         This file is generated by running the "zmprov getRightsDoc(grd) command.
         It is also checked in p4.
@@ -1224,14 +1224,14 @@ TODO: document the list of all admin console UI components.
 11. References, requirements
 ===========================
 - Kevin Kluge's requirement doc: 
-  https://dogfood.zimbra.com/home/kluge/Public/delegateAdmin
+  https://dogfood.zmail.com/home/kluge/Public/delegateAdmin
 
 - role based delegate administration
-  http://bugzilla.zimbra.com/show_bug.cgi?id=11515
+  http://bugzilla.zmail.com/show_bug.cgi?id=11515
 
 - server side infrastructure for role based delegated administration
-  http://bugzilla.zimbra.com/show_bug.cgi?id=18277
+  http://bugzilla.zmail.com/show_bug.cgi?id=18277
 
 - Customer Care App Requirements 
-  http://twiki.corp.yahoo.com/view/Mail/ZimbraCustomerCareApp
+  http://twiki.corp.yahoo.com/view/Mail/ZmailCustomerCareApp
   

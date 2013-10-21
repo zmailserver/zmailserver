@@ -12,7 +12,7 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.dav.resource;
+package org.zmail.cs.dav.resource;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -31,37 +31,37 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.dom4j.Element;
 
-import com.zimbra.common.account.Key.AccountBy;
-import com.zimbra.common.calendar.ParsedDateTime;
-import com.zimbra.common.calendar.ParsedDuration;
-import com.zimbra.common.calendar.ZCalendar;
-import com.zimbra.common.calendar.ZCalendar.ICalTok;
-import com.zimbra.common.calendar.ZCalendar.ZComponent;
-import com.zimbra.common.calendar.ZCalendar.ZProperty;
-import com.zimbra.common.mime.MimeConstants;
-import com.zimbra.common.mime.shim.JavaMailInternetAddress;
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.common.util.ZimbraLog;
-import com.zimbra.cs.account.Account;
-import com.zimbra.cs.account.Provisioning;
-import com.zimbra.cs.dav.DavContext;
-import com.zimbra.cs.dav.DavElements;
-import com.zimbra.cs.dav.DavException;
-import com.zimbra.cs.dav.DavProtocol;
-import com.zimbra.cs.dav.caldav.CalDavUtils;
-import com.zimbra.cs.fb.FreeBusy;
-import com.zimbra.cs.fb.FreeBusyQuery;
-import com.zimbra.cs.mailbox.Folder;
-import com.zimbra.cs.mailbox.Mailbox;
-import com.zimbra.cs.mailbox.MailboxManager;
-import com.zimbra.cs.mailbox.calendar.CalendarMailSender;
-import com.zimbra.cs.mailbox.calendar.FriendlyCalendaringDescription;
-import com.zimbra.cs.mailbox.calendar.IcalXmlStrMap;
-import com.zimbra.cs.mailbox.calendar.Invite;
-import com.zimbra.cs.mailbox.calendar.ZAttendee;
-import com.zimbra.cs.mailbox.calendar.ZOrganizer;
-import com.zimbra.cs.util.AccountUtil;
-import com.zimbra.cs.util.AccountUtil.AccountAddressMatcher;
+import org.zmail.common.account.Key.AccountBy;
+import org.zmail.common.calendar.ParsedDateTime;
+import org.zmail.common.calendar.ParsedDuration;
+import org.zmail.common.calendar.ZCalendar;
+import org.zmail.common.calendar.ZCalendar.ICalTok;
+import org.zmail.common.calendar.ZCalendar.ZComponent;
+import org.zmail.common.calendar.ZCalendar.ZProperty;
+import org.zmail.common.mime.MimeConstants;
+import org.zmail.common.mime.shim.JavaMailInternetAddress;
+import org.zmail.common.service.ServiceException;
+import org.zmail.common.util.ZmailLog;
+import org.zmail.cs.account.Account;
+import org.zmail.cs.account.Provisioning;
+import org.zmail.cs.dav.DavContext;
+import org.zmail.cs.dav.DavElements;
+import org.zmail.cs.dav.DavException;
+import org.zmail.cs.dav.DavProtocol;
+import org.zmail.cs.dav.caldav.CalDavUtils;
+import org.zmail.cs.fb.FreeBusy;
+import org.zmail.cs.fb.FreeBusyQuery;
+import org.zmail.cs.mailbox.Folder;
+import org.zmail.cs.mailbox.Mailbox;
+import org.zmail.cs.mailbox.MailboxManager;
+import org.zmail.cs.mailbox.calendar.CalendarMailSender;
+import org.zmail.cs.mailbox.calendar.FriendlyCalendaringDescription;
+import org.zmail.cs.mailbox.calendar.IcalXmlStrMap;
+import org.zmail.cs.mailbox.calendar.Invite;
+import org.zmail.cs.mailbox.calendar.ZAttendee;
+import org.zmail.cs.mailbox.calendar.ZOrganizer;
+import org.zmail.cs.util.AccountUtil;
+import org.zmail.cs.util.AccountUtil.AccountAddressMatcher;
 
 public class ScheduleOutbox extends Collection {
     public ScheduleOutbox(DavContext ctxt, Folder f) throws DavException, ServiceException {
@@ -87,7 +87,7 @@ public class ScheduleOutbox extends Collection {
         }
         if (req == null)
             throw new DavException("empty request", HttpServletResponse.SC_BAD_REQUEST);
-        ZimbraLog.dav.debug("originator: "+originator);
+        ZmailLog.dav.debug("originator: "+originator);
 
         boolean isVEventOrVTodo = ICalTok.VEVENT.equals(req.getTok()) || ICalTok.VTODO.equals(req.getTok());
         boolean isOrganizerMethod = false, isCancel = false;
@@ -159,7 +159,7 @@ public class ScheduleOutbox extends Collection {
                     }
                 }
                 if (changed) {
-                    ZimbraLog.dav.debug("changing originator to " + originator + " to match the address/alias used in ORGANIZER/ATTENDEE");
+                    ZmailLog.dav.debug("changing originator to " + originator + " to match the address/alias used in ORGANIZER/ATTENDEE");
                 }
             }
         }
@@ -203,7 +203,7 @@ public class ScheduleOutbox extends Collection {
                                     }
                                 }
                                 if (!isAttendee) {
-                                    ZimbraLog.dav.info("Ignoring non-attendee recipient " + rcpt + " of CANCEL request; likely a client bug");
+                                    ZmailLog.dav.info("Ignoring non-attendee recipient " + rcpt + " of CANCEL request; likely a client bug");
                                     continue;
                                 }
                             }
@@ -217,7 +217,7 @@ public class ScheduleOutbox extends Collection {
 
         Element scheduleResponse = ctxt.getDavResponse().getTop(DavElements.E_SCHEDULE_RESPONSE);
         for (String rcpt : rcptArray) {
-            ZimbraLog.dav.debug("recipient email: "+rcpt);
+            ZmailLog.dav.debug("recipient email: "+rcpt);
             Element resp = scheduleResponse.addElement(DavElements.E_CALDAV_RESPONSE);
             switch (req.getTok()) {
             case VFREEBUSY:
@@ -253,7 +253,7 @@ public class ScheduleOutbox extends Collection {
             throw new DavException("can't parse date", HttpServletResponse.SC_BAD_REQUEST, pe);
         }
 
-        ZimbraLog.dav.debug("rcpt: "+rcpt+", start: "+new Date(start)+", end: "+new Date(end));
+        ZmailLog.dav.debug("rcpt: "+rcpt+", start: "+new Date(start)+", end: "+new Date(end));
 
         FreeBusy fb = null;
         if (ctxt.isFreebusyEnabled()) {
@@ -324,7 +324,7 @@ public class ScheduleOutbox extends Collection {
             if (organizerProp != null) {
                 String organizerStr = this.getAddressFromPrincipalURL(new ZOrganizer(organizerProp).getAddress());
                 if (!AccountUtil.addressMatchesAccount(getMailbox(ctxt).getAccount(), organizerStr)) {
-                    ZimbraLog.dav.debug("scheduling appointment on behalf of %s", organizerStr);
+                    ZmailLog.dav.debug("scheduling appointment on behalf of %s", organizerStr);
                 }
             }
         } else if (method.equals("REPLY")) {

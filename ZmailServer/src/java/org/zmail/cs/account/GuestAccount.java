@@ -17,7 +17,7 @@
 /**
  * 
  */
-package com.zimbra.cs.account;
+package org.zmail.cs.account;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -38,7 +38,7 @@ public class GuestAccount extends Account {
     private static Map<String, Object> getAnonAttrs() {
         Map<String,Object> attrs = new HashMap<String,Object>();
         attrs.put(Provisioning.A_uid, "public");
-        attrs.put(Provisioning.A_zimbraId, GuestAccount.GUID_PUBLIC);
+        attrs.put(Provisioning.A_zmailId, GuestAccount.GUID_PUBLIC);
         return attrs;
     }
     

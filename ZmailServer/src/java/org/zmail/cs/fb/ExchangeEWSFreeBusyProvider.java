@@ -14,7 +14,7 @@
  * 
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.fb;
+package org.zmail.cs.fb;
 
 import java.io.IOException;
 import java.net.MalformedURLException;
@@ -68,20 +68,20 @@ import com.microsoft.schemas.exchange.services._2006.messages.ResponseMessageTyp
 import com.microsoft.schemas.exchange.services._2006.messages.UpdateItemResponseType;
 import com.microsoft.schemas.exchange.services._2006.messages.UpdateItemType;
 import com.microsoft.schemas.exchange.services._2006.types.*;
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.common.util.Constants;
-import com.zimbra.common.util.ZimbraLog;
-import com.zimbra.cs.account.Account;
-import com.zimbra.cs.account.Config;
-import com.zimbra.cs.account.Domain;
-import com.zimbra.cs.account.Provisioning;
-import com.zimbra.common.account.Key;
-import com.zimbra.common.account.Key.AccountBy;
-import com.zimbra.cs.fb.ExchangeFreeBusyProvider.AuthScheme;
-import com.zimbra.cs.fb.ExchangeFreeBusyProvider.ExchangeUserResolver;
-import com.zimbra.cs.fb.ExchangeFreeBusyProvider.ServerInfo;
-import com.zimbra.cs.mailbox.MailItem;
-import com.zimbra.cs.mailbox.MailItem.Type;
+import org.zmail.common.service.ServiceException;
+import org.zmail.common.util.Constants;
+import org.zmail.common.util.ZmailLog;
+import org.zmail.cs.account.Account;
+import org.zmail.cs.account.Config;
+import org.zmail.cs.account.Domain;
+import org.zmail.cs.account.Provisioning;
+import org.zmail.common.account.Key;
+import org.zmail.common.account.Key.AccountBy;
+import org.zmail.cs.fb.ExchangeFreeBusyProvider.AuthScheme;
+import org.zmail.cs.fb.ExchangeFreeBusyProvider.ExchangeUserResolver;
+import org.zmail.cs.fb.ExchangeFreeBusyProvider.ServerInfo;
+import org.zmail.cs.mailbox.MailItem;
+import org.zmail.cs.mailbox.MailItem.Type;
 
 public class ExchangeEWSFreeBusyProvider extends FreeBusyProvider {
     public static final int FB_INTERVAL = 30;
@@ -90,13 +90,13 @@ public class ExchangeEWSFreeBusyProvider extends FreeBusyProvider {
     private static ExchangeWebService factory = null;
     
     static {
-        ZimbraLog.fb.debug("Setting MailcapCommandMap handlers back to default");
+        ZmailLog.fb.debug("Setting MailcapCommandMap handlers back to default");
         MailcapCommandMap mc = (MailcapCommandMap)CommandMap.getDefaultCommandMap();
         mc.addMailcap("application/xml;;x-java-content-handler=com.sun.mail.handlers.text_xml");
         mc.addMailcap("text/xml;;x-java-content-handler=com.sun.mail.handlers.text_xml");
         mc.addMailcap("text/plain;;x-java-content-handler=com.sun.mail.handlers.text_plain");
         CommandMap.setDefaultCommandMap(mc);
-        ZimbraLog.fb.debug("Done Setting MailcapCommandMap handlers");
+        ZmailLog.fb.debug("Done Setting MailcapCommandMap handlers");
         
         URL wsdlUrl = ExchangeWebService.class.getResource("/Services.wsdl");
         factory = new ExchangeWebService(wsdlUrl,
@@ -162,15 +162,15 @@ public class ExchangeEWSFreeBusyProvider extends FreeBusyProvider {
         @Override
         public ServerInfo getServerInfo(String emailAddr) {
             String url =
-                getAttr(Provisioning.A_zimbraFreebusyExchangeURL, emailAddr);
+                getAttr(Provisioning.A_zmailFreebusyExchangeURL, emailAddr);
             String user =
-                getAttr(Provisioning.A_zimbraFreebusyExchangeAuthUsername,
+                getAttr(Provisioning.A_zmailFreebusyExchangeAuthUsername,
                     emailAddr);
             String pass =
-                getAttr(Provisioning.A_zimbraFreebusyExchangeAuthPassword,
+                getAttr(Provisioning.A_zmailFreebusyExchangeAuthPassword,
                     emailAddr);
             String scheme =
-                getAttr(Provisioning.A_zimbraFreebusyExchangeAuthScheme,
+                getAttr(Provisioning.A_zmailFreebusyExchangeAuthScheme,
                     emailAddr);
             if (url == null || user == null || pass == null || scheme == null)
                 return null;
@@ -181,13 +181,13 @@ public class ExchangeEWSFreeBusyProvider extends FreeBusyProvider {
             info.authPassword = pass;
             info.scheme = AuthScheme.valueOf(scheme);
             info.org =
-                getAttr(Provisioning.A_zimbraFreebusyExchangeUserOrg, emailAddr);
+                getAttr(Provisioning.A_zmailFreebusyExchangeUserOrg, emailAddr);
             try {
                 Account acct =
                     Provisioning.getInstance().get(AccountBy.name, emailAddr);
                 if (acct != null) {
                     String fps[] =
-                        acct.getMultiAttr(Provisioning.A_zimbraForeignPrincipal);
+                        acct.getMultiAttr(Provisioning.A_zmailForeignPrincipal);
                     if (fps != null && fps.length > 0) {
                         for (String fp : fps) {
                             if (fp.startsWith(Provisioning.FP_PREFIX_AD)) {
@@ -203,7 +203,7 @@ public class ExchangeEWSFreeBusyProvider extends FreeBusyProvider {
             } catch (ServiceException se) {
                 info.cn = null;
             }
-			String exchangeType = getAttr(Provisioning.A_zimbraFreebusyExchangeServerType, emailAddr);
+			String exchangeType = getAttr(Provisioning.A_zmailFreebusyExchangeServerType, emailAddr);
 			info.enabled = TYPE_EWS.equals(exchangeType);
             return info;
         }
@@ -230,7 +230,7 @@ public class ExchangeEWSFreeBusyProvider extends FreeBusyProvider {
                 }
                 val = prov.getConfig().getAttr(attr, null);
             } catch (ServiceException se) {
-                ZimbraLog.fb.error("can't get attr " + attr, se);
+                ZmailLog.fb.error("can't get attr " + attr, se);
             }
             return val;
         }
@@ -247,19 +247,19 @@ public class ExchangeEWSFreeBusyProvider extends FreeBusyProvider {
         try {
             config = Provisioning.getInstance().getConfig();
         } catch (ServiceException se) {
-            ZimbraLog.fb.warn("cannot fetch config", se);
+            ZmailLog.fb.warn("cannot fetch config", se);
             return false;
         }
         String url =
-            config.getAttr(Provisioning.A_zimbraFreebusyExchangeURL, null);
+            config.getAttr(Provisioning.A_zmailFreebusyExchangeURL, null);
         String user =
-            config.getAttr(Provisioning.A_zimbraFreebusyExchangeAuthUsername,
+            config.getAttr(Provisioning.A_zmailFreebusyExchangeAuthUsername,
                 null);
         String pass =
-            config.getAttr(Provisioning.A_zimbraFreebusyExchangeAuthPassword,
+            config.getAttr(Provisioning.A_zmailFreebusyExchangeAuthPassword,
                 null);
         String scheme =
-            config.getAttr(Provisioning.A_zimbraFreebusyExchangeAuthScheme,
+            config.getAttr(Provisioning.A_zmailFreebusyExchangeAuthScheme,
                 null);
         return (url != null && user != null && pass != null && scheme != null);
     }
@@ -302,7 +302,7 @@ public class ExchangeEWSFreeBusyProvider extends FreeBusyProvider {
                 .getFolderOrCalendarFolderOrContactsFolder()
                 .get(0);
         } else {
-            ZimbraLog.fb.error("Could not find the folder in Exchange : " + distinguishedFolderId.toString());
+            ZmailLog.fb.error("Could not find the folder in Exchange : " + distinguishedFolderId.toString());
         }
 
         return null;
@@ -368,7 +368,7 @@ public class ExchangeEWSFreeBusyProvider extends FreeBusyProvider {
                 .getFolders()
                 .getFolderOrCalendarFolderOrContactsFolder();
         }
-        ZimbraLog.fb.warn("findFolderByProp " + ffRespMessage.getResponseCode());
+        ZmailLog.fb.warn("findFolderByProp " + ffRespMessage.getResponseCode());
         return null;
     }
 
@@ -432,7 +432,7 @@ public class ExchangeEWSFreeBusyProvider extends FreeBusyProvider {
                 .getFolders()
                 .getFolderOrCalendarFolderOrContactsFolder();
         }
-        ZimbraLog.fb.warn("findFolderByPartialProp " +
+        ZmailLog.fb.warn("findFolderByPartialProp " +
             ffRespMessage.getResponseCode());
         return null;
     }
@@ -498,16 +498,16 @@ public class ExchangeEWSFreeBusyProvider extends FreeBusyProvider {
                 .getItems()
                 .getItemOrMessageOrCalendarItem();
         }
-        ZimbraLog.fb.warn("findItemByProp " + fiRespMessage.getResponseCode());
+        ZmailLog.fb.warn("findItemByProp " + fiRespMessage.getResponseCode());
         return null;
     }
 
     public boolean handleMailboxChange(String accountId) {
-        ZimbraLog.fb.debug("Entering handleMailboxChange() for account : " + accountId);
+        ZmailLog.fb.debug("Entering handleMailboxChange() for account : " + accountId);
         String email = getEmailAddress(accountId);
 		ServerInfo serverInfo = getServerInfo(email);
 		if (email == null || !serverInfo.enabled) {
-		    ZimbraLog.fb.debug("Exiting handleMailboxChange() for account : " + accountId);
+		    ZmailLog.fb.debug("Exiting handleMailboxChange() for account : " + accountId);
 			return true;  // no retry
 		}
 		
@@ -515,36 +515,36 @@ public class ExchangeEWSFreeBusyProvider extends FreeBusyProvider {
         try {
             fb = getFreeBusy(accountId, FreeBusyQuery.CALENDAR_FOLDER_ALL);
         } catch (ServiceException se) {
-            ZimbraLog.fb.warn("can't get freebusy for account " + accountId, se);
-            ZimbraLog.fb.debug("Exiting handleMailboxChange() for account : " + accountId);
+            ZmailLog.fb.warn("can't get freebusy for account " + accountId, se);
+            ZmailLog.fb.debug("Exiting handleMailboxChange() for account : " + accountId);
             // retry the request if it's receivers fault.
             return !se.isReceiversFault();
         }
         if (email == null || fb == null) {
-            ZimbraLog.fb.warn("account not found / incorrect / wrong host: " +
+            ZmailLog.fb.warn("account not found / incorrect / wrong host: " +
                 accountId);
-            ZimbraLog.fb.debug("Exiting handleMailboxChange() for account : " + accountId);
+            ZmailLog.fb.debug("Exiting handleMailboxChange() for account : " + accountId);
             return true; // no retry
         }
 
         if (serverInfo == null || serverInfo.org == null ||
             serverInfo.cn == null) {
-            ZimbraLog.fb.warn("no exchange server info for user " + email);
-            ZimbraLog.fb.debug("Exiting handleMailboxChange() for account : " + accountId);
+            ZmailLog.fb.warn("no exchange server info for user " + email);
+            ZmailLog.fb.debug("Exiting handleMailboxChange() for account : " + accountId);
             return true; // no retry
         }
         if (null == service) {
             try {
                 if (!initService(serverInfo)) {
-                    ZimbraLog.fb.error("failed to initialize exchange service object " +
+                    ZmailLog.fb.error("failed to initialize exchange service object " +
                         serverInfo.url);
-                    ZimbraLog.fb.debug("Exiting handleMailboxChange() for account : " + accountId);
+                    ZmailLog.fb.debug("Exiting handleMailboxChange() for account : " + accountId);
                     return true;
                 }
             } catch (MalformedURLException e) {
-                ZimbraLog.fb.error("exception while trying to initialize exchange service object " +
+                ZmailLog.fb.error("exception while trying to initialize exchange service object " +
                     serverInfo.url);
-                ZimbraLog.fb.debug("Exiting handleMailboxChange() for account : " + accountId);
+                ZmailLog.fb.debug("Exiting handleMailboxChange() for account : " + accountId);
                 return true;
             }
         }
@@ -556,7 +556,7 @@ public class ExchangeEWSFreeBusyProvider extends FreeBusyProvider {
                 (FolderType)bindFolder(DistinguishedFolderIdNameType.PUBLICFOLDERSROOT,
                     DefaultShapeNamesType.ALL_PROPERTIES);
             if (publicFolderRoot == null) {
-                ZimbraLog.fb.error("Could not find the public root folder on exchange");
+                ZmailLog.fb.error("Could not find the public root folder on exchange");
                 return true;
             }
             List<BaseFolderType> resultsNonIpm =
@@ -736,22 +736,22 @@ public class ExchangeEWSFreeBusyProvider extends FreeBusyProvider {
 
                         }
                     } else {
-                        ZimbraLog.fb.error("Could not find the Exchange folder containing '" + serverInfo.org + 
-                                "'. Make sure zimbraFreebusyExchangeUserOrg is configured correctly and it exists on Exchange");
+                        ZmailLog.fb.error("Could not find the Exchange folder containing '" + serverInfo.org + 
+                                "'. Make sure zmailFreebusyExchangeUserOrg is configured correctly and it exists on Exchange");
                     }
                 } else {
-                    ZimbraLog.fb.error("Could not find the Exchange folder 'SCHEDULE+ FREE BUSY'");
+                    ZmailLog.fb.error("Could not find the Exchange folder 'SCHEDULE+ FREE BUSY'");
                 }
             } else {
-                ZimbraLog.fb.error("Could not find the Exchange folder 'NON_IPM_SUBTREE'");
+                ZmailLog.fb.error("Could not find the Exchange folder 'NON_IPM_SUBTREE'");
             }
 
             return true;
 
         } catch (Exception e) {
-            ZimbraLog.fb.error("error commucating to " + serverInfo.url, e);
+            ZmailLog.fb.error("error commucating to " + serverInfo.url, e);
         } finally {
-            ZimbraLog.fb.debug("Exiting handleMailboxChange() for account : " + accountId);
+            ZmailLog.fb.debug("Exiting handleMailboxChange() for account : " + accountId);
         }
 
         return false;// retry
@@ -766,7 +766,7 @@ public class ExchangeEWSFreeBusyProvider extends FreeBusyProvider {
 		Request r = req.get(0);
 		ServerInfo serverInfo = (ServerInfo) r.data;
 		if (serverInfo == null) {
-			ZimbraLog.fb.warn("no exchange server info for user "+r.email);
+			ZmailLog.fb.warn("no exchange server info for user "+r.email);
 			return ret;
 		}
 		
@@ -832,11 +832,11 @@ public class ExchangeEWSFreeBusyProvider extends FreeBusyProvider {
                     .getFreeBusyResponse();
 
         } catch (DatatypeConfigurationException dce) {
-            ZimbraLog.fb.warn("getFreeBusyForHost DatatypeConfiguration failure",
+            ZmailLog.fb.warn("getFreeBusyForHost DatatypeConfiguration failure",
                 dce);
             return getEmptyList(req);
         } catch (Exception e) {
-            ZimbraLog.fb.warn("getFreeBusyForHost failure", e);
+            ZmailLog.fb.warn("getFreeBusyForHost failure", e);
             return getEmptyList(req);
         }
         
@@ -848,12 +848,12 @@ public class ExchangeEWSFreeBusyProvider extends FreeBusyProvider {
 						.getAddress()) {
 					if (ResponseClassType.SUCCESS != attendeeAvailability
 							.getResponseMessage().getResponseClass()) {
-						ZimbraLog.fb
+						ZmailLog.fb
 								.warn("Error in response. continuing to next one");
 						i++;
 						continue;
 					}
-					ZimbraLog.fb.debug("Availability for "
+					ZmailLog.fb.debug("Availability for "
 							+ attendees.getMailboxData().get(i).getEmail()
 									.getAddress()
 							+ " ["
@@ -905,7 +905,7 @@ public class ExchangeEWSFreeBusyProvider extends FreeBusyProvider {
                     try {
                         initService(info);
                     } catch (MalformedURLException e) {
-                        ZimbraLog.fb.warn("failed to initialize provider", e);
+                        ZmailLog.fb.warn("failed to initialize provider", e);
                     }
                 }
                 break;
@@ -940,7 +940,7 @@ public class ExchangeEWSFreeBusyProvider extends FreeBusyProvider {
                 ret.addAll(this.getFreeBusyForHost(entry.getKey(),
                     entry.getValue()));
             } catch (IOException e) {
-                ZimbraLog.fb.error("error communicating to " + entry.getKey(),
+                ZmailLog.fb.error("error communicating to " + entry.getKey(),
                     e);
             }
         }
@@ -995,7 +995,7 @@ public class ExchangeEWSFreeBusyProvider extends FreeBusyProvider {
         Calendar cal = GregorianCalendar.getInstance();
         int curYear = cal.get(Calendar.YEAR);
         try {
-            long dur = getTimeInterval(Provisioning.A_zimbraFreebusyExchangeCachedIntervalStart, accountId, 0);
+            long dur = getTimeInterval(Provisioning.A_zmailFreebusyExchangeCachedIntervalStart, accountId, 0);
             cal.setTimeInMillis(System.currentTimeMillis() - dur);
         } catch (ServiceException se) {
             // set to 1 week ago
@@ -1019,7 +1019,7 @@ public class ExchangeEWSFreeBusyProvider extends FreeBusyProvider {
         long duration = Constants.MILLIS_PER_MONTH * 2;
         Calendar cal = GregorianCalendar.getInstance();
         try {
-            duration = getTimeInterval(Provisioning.A_zimbraFreebusyExchangeCachedInterval, accountId, duration);
+            duration = getTimeInterval(Provisioning.A_zmailFreebusyExchangeCachedInterval, accountId, duration);
         } catch (ServiceException se) {}
         cal.setTimeInMillis(cachedFreeBusyStartTime(accountId) + duration);
         // normalize the time to 00:00:00

@@ -26,7 +26,7 @@ At every interval prints "time<tab>RSS<tab>VIRT".
 Usage: memmon.pl [-i <interval>] [-p <pid>]
    -i: interval between samples, in number of seconds (default 10)
    -p: process ID to monitor
-       By default, pid stored in /opt/zimbra/log/tomcat.pid file is used.
+       By default, pid stored in /opt/zmail/log/tomcat.pid file is used.
 USAGE
     exit(1);
 }

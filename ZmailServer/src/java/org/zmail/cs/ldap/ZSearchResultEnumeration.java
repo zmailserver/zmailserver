@@ -12,9 +12,9 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.ldap;
+package org.zmail.cs.ldap;
 
-import com.zimbra.cs.ldap.LdapTODO.*;
+import org.zmail.cs.ldap.LdapTODO.*;
 
 /*
  * migration path for javax.naming.NamingEnumeration interface

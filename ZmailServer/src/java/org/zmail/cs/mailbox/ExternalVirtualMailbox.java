@@ -12,12 +12,12 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.mailbox;
+package org.zmail.cs.mailbox;
 
-import com.zimbra.common.service.ServiceException;
+import org.zmail.common.service.ServiceException;
 
 /**
- * Mailbox for accounts with zimbraIsExternalVirtualAccount set to TRUE.
+ * Mailbox for accounts with zmailIsExternalVirtualAccount set to TRUE.
  */
 public class ExternalVirtualMailbox extends Mailbox {
 

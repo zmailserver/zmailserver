@@ -12,7 +12,7 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.qa.unittest.prov.ldap;
+package org.zmail.qa.unittest.prov.ldap;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -24,22 +24,22 @@ import org.junit.BeforeClass;
 import org.junit.*;
 import static org.junit.Assert.*;
 
-import com.zimbra.cs.account.Account;
-import com.zimbra.cs.account.Domain;
-import com.zimbra.cs.account.Provisioning;
-import com.zimbra.cs.ldap.IAttributes;
-import com.zimbra.cs.ldap.LdapClient;
-import com.zimbra.cs.ldap.LdapConstants;
-import com.zimbra.cs.ldap.LdapUsage;
-import com.zimbra.cs.ldap.SearchLdapOptions;
-import com.zimbra.cs.ldap.ZLdapContext;
-import com.zimbra.cs.ldap.ZLdapFilter;
-import com.zimbra.cs.ldap.ZLdapFilterFactory;
-import com.zimbra.cs.ldap.ZSearchControls;
-import com.zimbra.cs.ldap.ZSearchResultEntry;
-import com.zimbra.cs.ldap.ZSearchResultEnumeration;
-import com.zimbra.cs.ldap.ZSearchScope;
-import com.zimbra.cs.ldap.LdapException.LdapSizeLimitExceededException;
+import org.zmail.cs.account.Account;
+import org.zmail.cs.account.Domain;
+import org.zmail.cs.account.Provisioning;
+import org.zmail.cs.ldap.IAttributes;
+import org.zmail.cs.ldap.LdapClient;
+import org.zmail.cs.ldap.LdapConstants;
+import org.zmail.cs.ldap.LdapUsage;
+import org.zmail.cs.ldap.SearchLdapOptions;
+import org.zmail.cs.ldap.ZLdapContext;
+import org.zmail.cs.ldap.ZLdapFilter;
+import org.zmail.cs.ldap.ZLdapFilterFactory;
+import org.zmail.cs.ldap.ZSearchControls;
+import org.zmail.cs.ldap.ZSearchResultEntry;
+import org.zmail.cs.ldap.ZSearchResultEnumeration;
+import org.zmail.cs.ldap.ZSearchScope;
+import org.zmail.cs.ldap.LdapException.LdapSizeLimitExceededException;
 
 public class TestLdapZLdapContext extends LdapTest {
     private static LdapProvTestUtil provUtil;

@@ -11,37 +11,37 @@
 /* basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.service.mail;
+package org.zmail.cs.service.mail;
 
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
-import com.zimbra.common.calendar.ParsedDateTime;
-import com.zimbra.common.calendar.ParsedDuration;
-import com.zimbra.common.calendar.TimeZoneMap;
-import com.zimbra.common.localconfig.LC;
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.common.soap.Element;
-import com.zimbra.common.soap.MailConstants;
-import com.zimbra.common.util.Constants;
-import com.zimbra.cs.account.Account;
-import com.zimbra.cs.mailbox.CalendarItem.Instance;
-import com.zimbra.cs.mailbox.calendar.RecurId;
-import com.zimbra.cs.mailbox.calendar.Recurrence.CancellationRule;
-import com.zimbra.cs.mailbox.calendar.Recurrence.ExceptionRule;
-import com.zimbra.cs.mailbox.calendar.Recurrence.IException;
-import com.zimbra.cs.mailbox.calendar.Recurrence.IRecurrence;
-import com.zimbra.cs.mailbox.calendar.Recurrence.RecurrenceRule;
-import com.zimbra.cs.mailbox.calendar.Util;
-import com.zimbra.soap.ZimbraSoapContext;
+import org.zmail.common.calendar.ParsedDateTime;
+import org.zmail.common.calendar.ParsedDuration;
+import org.zmail.common.calendar.TimeZoneMap;
+import org.zmail.common.localconfig.LC;
+import org.zmail.common.service.ServiceException;
+import org.zmail.common.soap.Element;
+import org.zmail.common.soap.MailConstants;
+import org.zmail.common.util.Constants;
+import org.zmail.cs.account.Account;
+import org.zmail.cs.mailbox.CalendarItem.Instance;
+import org.zmail.cs.mailbox.calendar.RecurId;
+import org.zmail.cs.mailbox.calendar.Recurrence.CancellationRule;
+import org.zmail.cs.mailbox.calendar.Recurrence.ExceptionRule;
+import org.zmail.cs.mailbox.calendar.Recurrence.IException;
+import org.zmail.cs.mailbox.calendar.Recurrence.IRecurrence;
+import org.zmail.cs.mailbox.calendar.Recurrence.RecurrenceRule;
+import org.zmail.cs.mailbox.calendar.Util;
+import org.zmail.soap.ZmailSoapContext;
 
 public class ExpandRecur extends MailDocumentHandler {
 
     @Override
     public Element handle(Element request, Map<String, Object> context) throws ServiceException {
-        ZimbraSoapContext zsc = getZimbraSoapContext(context);
+        ZmailSoapContext zsc = getZmailSoapContext(context);
         Account authAcct = getAuthenticatedAccount(zsc);
 
         long rangeStart = request.getAttributeLong(MailConstants.A_CAL_START_TIME);

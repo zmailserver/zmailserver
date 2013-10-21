@@ -12,34 +12,34 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.account.ldap.upgrade;
+package org.zmail.cs.account.ldap.upgrade;
 
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.common.util.StringUtil;
-import com.zimbra.cs.account.Config;
-import com.zimbra.cs.account.Entry;
-import com.zimbra.cs.account.Provisioning;
-import com.zimbra.cs.account.Server;
-import com.zimbra.cs.account.accesscontrol.TargetType;
+import org.zmail.common.service.ServiceException;
+import org.zmail.common.util.StringUtil;
+import org.zmail.cs.account.Config;
+import org.zmail.cs.account.Entry;
+import org.zmail.cs.account.Provisioning;
+import org.zmail.cs.account.Server;
+import org.zmail.cs.account.accesscontrol.TargetType;
 
 public class BUG_58514 extends UpgradeOp {
 
     
     @Override
     void doUpgrade() throws ServiceException {
-        upgradeZimbraGalLdapAttrMap();
-        upgradeZimbraContactHiddenAttributes();
+        upgradeZmailGalLdapAttrMap();
+        upgradeZmailContactHiddenAttributes();
     }
     
-    private void upgradeZimbraGalLdapAttrMap() throws ServiceException {
-        final String attrName = Provisioning.A_zimbraGalLdapAttrMap;
+    private void upgradeZmailGalLdapAttrMap() throws ServiceException {
+        final String attrName = Provisioning.A_zmailGalLdapAttrMap;
         
-        final String valueToRemove = "binary zimbraPrefMailSMIMECertificate,userCertificate,userSMIMECertificate=SMIMECertificate";
+        final String valueToRemove = "binary zmailPrefMailSMIMECertificate,userCertificate,userSMIMECertificate=SMIMECertificate";
         
         final String[] valuesToAdd = new String[] {
             "(certificate) userCertificate=userCertificate",
@@ -64,8 +64,8 @@ public class BUG_58514 extends UpgradeOp {
         modifyAttrs(config, attrs);
     }
     
-    private void upgradeZimbraContactHiddenAttributes(Entry entry) throws ServiceException {
-        final String attrName = Provisioning.A_zimbraContactHiddenAttributes;
+    private void upgradeZmailContactHiddenAttributes(Entry entry) throws ServiceException {
+        final String attrName = Provisioning.A_zmailContactHiddenAttributes;
         final String SMIMECertificate = "SMIMECertificate";
         
         String curValue = entry.getAttr(attrName, false);
@@ -99,14 +99,14 @@ public class BUG_58514 extends UpgradeOp {
         
     }
     
-    private void upgradeZimbraContactHiddenAttributes() throws ServiceException {
+    private void upgradeZmailContactHiddenAttributes() throws ServiceException {
         Config config = prov.getConfig();
-        upgradeZimbraContactHiddenAttributes(config);
+        upgradeZmailContactHiddenAttributes(config);
         
         List<Server> servers = prov.getAllServers();
         
         for (Server server : servers) {
-            upgradeZimbraContactHiddenAttributes(server);
+            upgradeZmailContactHiddenAttributes(server);
         }
     }
 }

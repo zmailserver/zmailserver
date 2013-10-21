@@ -13,7 +13,7 @@
  * ***** END LICENSE BLOCK *****
  */
 
-package com.zimbra.cs.imap;
+package org.zmail.cs.imap;
 
 public abstract class ImapCommand {
     private long createTime;

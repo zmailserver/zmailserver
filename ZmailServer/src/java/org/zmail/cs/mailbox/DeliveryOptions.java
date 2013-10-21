@@ -13,11 +13,11 @@
  * ***** END LICENSE BLOCK *****
  */
 
-package com.zimbra.cs.mailbox;
+package org.zmail.cs.mailbox;
 
 import java.util.Collection;
 
-import com.zimbra.cs.mailbox.MailItem.CustomMetadata;
+import org.zmail.cs.mailbox.MailItem.CustomMetadata;
 
 /**
  * Specifies options for new messages created with {@link Mailbox#addMessage}.

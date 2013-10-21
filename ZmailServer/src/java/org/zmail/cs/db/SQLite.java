@@ -12,7 +12,7 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.db;
+package org.zmail.cs.db;
 
 import java.io.BufferedWriter;
 import java.io.File;
@@ -41,11 +41,11 @@ import org.apache.commons.pool.impl.GenericObjectPool;
 
 import com.google.common.base.Joiner;
 import com.google.common.base.Strings;
-import com.zimbra.common.localconfig.LC;
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.common.util.ZimbraLog;
-import com.zimbra.cs.db.DbPool.DbConnection;
-import com.zimbra.cs.db.DbPool.PoolConfig;
+import org.zmail.common.localconfig.LC;
+import org.zmail.common.service.ServiceException;
+import org.zmail.common.util.ZmailLog;
+import org.zmail.cs.db.DbPool.DbConnection;
+import org.zmail.cs.db.DbPool.PoolConfig;
 
 public final class SQLite extends Db {
 
@@ -137,7 +137,7 @@ public final class SQLite extends Db {
         if (pageSize.equals("0"))
             pageSize = null;
         syncMode = LC.sqlite_sync_mode.value();
-        ZimbraLog.dbconn.info("sqlite driver running with " +
+        ZmailLog.dbconn.info("sqlite driver running with " +
             (cacheSize == null ? "default" : cacheSize) + " cache cache, " +
             (pageSize == null ? "default" : pageSize) + " page size, " +
             journalMode + " journal mode, " + syncMode + " sync mode");
@@ -158,7 +158,7 @@ public final class SQLite extends Db {
         PreparedStatement stmt = null;
 
         try {
-            String prefix = dbname == null || dbname.equals("zimbra") ? "" : dbname + ".";
+            String prefix = dbname == null || dbname.equals("zmail") ? "" : dbname + ".";
             (stmt = conn.prepareStatement("PRAGMA " + prefix + key +
                 (value == null ? "" : " = " + value))).execute();
         } finally {
@@ -213,23 +213,23 @@ public final class SQLite extends Db {
                 if (!autocommit)
                     conn.getConnection().setAutoCommit(true);
                 if (dbname == null)
-                    dbname = "zimbra";
+                    dbname = "zmail";
                 registerDatabaseInterest(conn, dbname);
-                if (level > 0 && dbname.endsWith("zimbra")) {
+                if (level > 0 && dbname.endsWith("zmail")) {
                     if (level == 2)
                         (stmt = conn.prepareStatement("VACUUM")).execute();
                     else
                         pragma(conn.getConnection(), dbname, "incremental_vacuum", null);
                 }
                 (stmt = conn.prepareStatement("ANALYZE " + dbname)).execute();
-                ZimbraLog.dbconn.debug("sqlite " +
+                ZmailLog.dbconn.debug("sqlite " +
                     (level > 0 ? "vacuum" : "analyze") + ' ' + dbname);
             } finally {
                 if (!autocommit) {
                     try {
                         conn.getConnection().setAutoCommit(autocommit);
                     } catch (SQLException sqle) {
-                        ZimbraLog.dbconn.warn("failed to reset autocommit to false. probably caused by prior errors %s", dbname);
+                        ZmailLog.dbconn.warn("failed to reset autocommit to false. probably caused by prior errors %s", dbname);
                         DbPool.quietClose(conn);
                         throw ServiceException.FAILURE("failed to reset autocommit to false",sqle);
                     }
@@ -254,7 +254,7 @@ public final class SQLite extends Db {
             for (Iterator<String> it = attachedDBs.keySet().iterator(); attachedDBs.size() >= MAX_ATTACHED_DATABASES && it.hasNext(); ) {
                 String name = it.next();
 
-                if (!name.equals("zimbra") && detachDatabase(conn, name))
+                if (!name.equals("zmail") && detachDatabase(conn, name))
                     it.remove();
             }
         }
@@ -272,7 +272,7 @@ public final class SQLite extends Db {
             (stmt = conn.prepareStatement("ATTACH DATABASE \"" + getDatabaseFilename(dbname) + "\" AS " + dbname)).execute();
             pragmas(conn.getConnection(), dbname);
         } catch (SQLException e) {
-            ZimbraLog.dbconn.error("database " + dbname + " attach failed", e);
+            ZmailLog.dbconn.error("database " + dbname + " attach failed", e);
             if (!"database is already attached".equals(e.getMessage()))
                 throw e;
         } finally {
@@ -280,7 +280,7 @@ public final class SQLite extends Db {
                 try {
                     conn.getConnection().setAutoCommit(autocommit);
                 } catch (SQLException sqle) {
-                    ZimbraLog.dbconn.warn("failed to reset autocommit to false. probably caused by prior errors " + dbname);
+                    ZmailLog.dbconn.warn("failed to reset autocommit to false. probably caused by prior errors " + dbname);
                     DbPool.quietClose(conn);
                     throw ServiceException.FAILURE("failed to reset autocommit to false",sqle);
                 }
@@ -310,7 +310,7 @@ public final class SQLite extends Db {
             return true;
         } catch (SQLException e) {
             if (!deleted.containsKey(dbname)) { 
-                ZimbraLog.dbconn.warn("database overflow autoclose failed for DB " + dbname, e);
+                ZmailLog.dbconn.warn("database overflow autoclose failed for DB " + dbname, e);
                 return false;
             } else {
                 return true;
@@ -320,7 +320,7 @@ public final class SQLite extends Db {
                 try {
                     conn.getConnection().setAutoCommit(autocommit);
                 } catch (SQLException sqle) {
-                    ZimbraLog.dbconn.warn("failed to reset autocommit to false. probably caused by prior errors %s", dbname);
+                    ZmailLog.dbconn.warn("failed to reset autocommit to false. probably caused by prior errors %s", dbname);
                     DbPool.quietClose(conn);
                     throw ServiceException.FAILURE("failed to reset autocommit to false",sqle);
                 }
@@ -335,7 +335,7 @@ public final class SQLite extends Db {
             lock = lockMap.get(mboxId);
             if (lock != null && lock.isHeldByCurrentThread()) {
                 lock.unlock();
-                ZimbraLog.dbconn.trace("unlocked mbox %d",mboxId);
+                ZmailLog.dbconn.trace("unlocked mbox %d",mboxId);
             }
         }
     }
@@ -351,7 +351,7 @@ public final class SQLite extends Db {
     private boolean checkLockMap(int mboxId) {
         for (Entry<Integer, ReentrantLock> entry : lockMap.entrySet()) {
             if (entry.getKey().intValue() != mboxId && entry.getValue().isHeldByCurrentThread()) {
-                ZimbraLog.dbconn.debug("already holding db lock for mbox %d",entry.getKey());
+                ZmailLog.dbconn.debug("already holding db lock for mbox %d",entry.getKey());
                 if (entry.getKey().intValue() != -1) {
                     return false;
                 }
@@ -362,7 +362,7 @@ public final class SQLite extends Db {
 
     @Override
     void preOpen(Integer mboxId) {
-        ZimbraLog.dbconn.trace("trying to lock mbox %d",mboxId);
+        ZmailLog.dbconn.trace("trying to lock mbox %d",mboxId);
         assert(checkLockMap(mboxId));
         ReentrantLock lock = lockMap.get(mboxId);
         if (lock == null) {
@@ -382,9 +382,9 @@ public final class SQLite extends Db {
         } catch (InterruptedException e) {
         }
         if (!locked) {
-            ZimbraLog.dbconn.warn("Unable to get db lock for mbox %d",mboxId);
+            ZmailLog.dbconn.warn("Unable to get db lock for mbox %d",mboxId);
         } else {
-            ZimbraLog.dbconn.trace("locked mbox %d",mboxId);
+            ZmailLog.dbconn.trace("locked mbox %d",mboxId);
         }
     }
 
@@ -410,7 +410,7 @@ public final class SQLite extends Db {
 
             registerDatabaseInterest(conn, dbname);
             stmt = conn.prepareStatement("SELECT COUNT(*) FROM " +
-                (dbname.equals("zimbra") ? "" : dbname + ".") +
+                (dbname.equals("zmail") ? "" : dbname + ".") +
                 "sqlite_master WHERE type='table'");
             rs = stmt.executeQuery();
             boolean complete = rs.next() ? (rs.getInt(1) >= 1) : false;
@@ -422,7 +422,7 @@ public final class SQLite extends Db {
                 try {
                     conn.getConnection().setAutoCommit(autocommit);
                 } catch (SQLException sqle) {
-                    ZimbraLog.dbconn.warn("failed to reset autocommit to false. probably caused by prior errors %s", dbname);
+                    ZmailLog.dbconn.warn("failed to reset autocommit to false. probably caused by prior errors %s", dbname);
                     DbPool.quietClose(conn);
                     throw ServiceException.FAILURE("failed to reset autocommit to false",sqle);
                 }
@@ -440,17 +440,17 @@ public final class SQLite extends Db {
         try {
             detachDatabase(conn, dbname);
         } catch (ServiceException se) {
-            ZimbraLog.dbconn.warn("failed to detach while deleting");
+            ZmailLog.dbconn.warn("failed to detach while deleting");
         }
         deleted.put(dbname,true);
-        ZimbraLog.dbconn.info("deleting database file for DB '" + dbname + "'");
+        ZmailLog.dbconn.info("deleting database file for DB '" + dbname + "'");
         new File(getDatabaseFilename(dbname)).delete();
         new File(getDatabaseFilename(dbname) + "-journal").delete();
     }
 
 
     public String getDatabaseFilename(String dbname) {
-        return LC.zimbra_home.value() + File.separator + "sqlite" + File.separator + dbname + ".db";
+        return LC.zmail_home.value() + File.separator + "sqlite" + File.separator + dbname + ".db";
     }
 
     final class SQLiteConfig extends DbPool.PoolConfig {
@@ -458,7 +458,7 @@ public final class SQLite extends Db {
             mDriverClassName = "org.sqlite.JDBC";
             mPoolSize = DEFAULT_CONNECTION_POOL_SIZE;
             mRootUrl = null;
-            mConnectionUrl = "jdbc:sqlite:" + getDatabaseFilename("zimbra");
+            mConnectionUrl = "jdbc:sqlite:" + getDatabaseFilename("zmail");
             mLoggerUrl = null;
             mSupportsStatsCallback = false;
             mDatabaseProperties = getSQLiteProperties();
@@ -483,9 +483,9 @@ public final class SQLite extends Db {
             if (configvalue != null && !configvalue.trim().equals(""))
                 value = Math.max(1, Integer.parseInt(configvalue));
         } catch (NumberFormatException nfe) {
-            ZimbraLog.dbconn.warn("exception parsing '" + keyname  + "' config; defaulting limit to " + defaultvalue, nfe);
+            ZmailLog.dbconn.warn("exception parsing '" + keyname  + "' config; defaulting limit to " + defaultvalue, nfe);
         }
-        ZimbraLog.dbconn.info("setting " + description + " to " + value);
+        ZmailLog.dbconn.info("setting " + description + " to " + value);
         return value;
     }
 
@@ -528,7 +528,7 @@ public final class SQLite extends Db {
         outFile.delete();
 
         try {
-            String redoVer = com.zimbra.cs.redolog.Version.latest().toString();
+            String redoVer = org.zmail.cs.redolog.Version.latest().toString();
             String outStr = "-- AUTO-GENERATED .SQL FILE - Generated by the SQLite versions tool\n" +
                 "INSERT INTO config(name, value, description) VALUES\n" +
                 "\t('db.version', '" + Versions.DB_VERSION + "', 'db schema version');\n" +

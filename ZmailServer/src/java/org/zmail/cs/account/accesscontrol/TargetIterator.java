@@ -12,30 +12,30 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.account.accesscontrol;
+package org.zmail.cs.account.accesscontrol;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
-import com.zimbra.common.account.Key;
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.cs.account.Account;
-import com.zimbra.cs.account.CalendarResource;
-import com.zimbra.cs.account.Config;
-import com.zimbra.cs.account.Cos;
-import com.zimbra.cs.account.DistributionList;
-import com.zimbra.cs.account.Domain;
-import com.zimbra.cs.account.DynamicGroup;
-import com.zimbra.cs.account.Entry;
-import com.zimbra.cs.account.GlobalGrant;
-import com.zimbra.cs.account.Provisioning;
-import com.zimbra.cs.account.Provisioning.GroupMembership;
-import com.zimbra.cs.account.Server;
-import com.zimbra.cs.account.UCService;
-import com.zimbra.cs.account.XMPPComponent;
-import com.zimbra.cs.account.Zimlet;
-import com.zimbra.cs.ldap.LdapTODO.*;
+import org.zmail.common.account.Key;
+import org.zmail.common.service.ServiceException;
+import org.zmail.cs.account.Account;
+import org.zmail.cs.account.CalendarResource;
+import org.zmail.cs.account.Config;
+import org.zmail.cs.account.Cos;
+import org.zmail.cs.account.DistributionList;
+import org.zmail.cs.account.Domain;
+import org.zmail.cs.account.DynamicGroup;
+import org.zmail.cs.account.Entry;
+import org.zmail.cs.account.GlobalGrant;
+import org.zmail.cs.account.Provisioning;
+import org.zmail.cs.account.Provisioning.GroupMembership;
+import org.zmail.cs.account.Server;
+import org.zmail.cs.account.UCService;
+import org.zmail.cs.account.XMPPComponent;
+import org.zmail.cs.account.Zimlet;
+import org.zmail.cs.ldap.LdapTODO.*;
 
 @ACLTODO   // check refs of targetType.dl and handle the same for group
 

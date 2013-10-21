@@ -14,7 +14,7 @@
  * 
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.html;
+package org.zmail.cs.html;
 
 import java.io.IOException;
 import java.io.Writer;

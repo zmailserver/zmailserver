@@ -12,7 +12,7 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.qa.unittest;
+package org.zmail.qa.unittest;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
@@ -30,18 +30,18 @@ import junit.framework.TestCase;
 import org.apache.commons.httpclient.HttpClient;
 import org.apache.commons.httpclient.methods.GetMethod;
 
-import com.zimbra.client.ZDocument;
-import com.zimbra.client.ZMailbox;
-import com.zimbra.common.httpclient.HttpClientUtil;
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.common.util.ByteUtil;
-import com.zimbra.common.util.tar.TarEntry;
-import com.zimbra.common.util.tar.TarInputStream;
-import com.zimbra.common.zmime.ZMimeMessage;
-import com.zimbra.cs.account.Account;
-import com.zimbra.cs.account.Provisioning;
-import com.zimbra.cs.mailbox.Mailbox;
-import com.zimbra.cs.util.JMSession;
+import org.zmail.client.ZDocument;
+import org.zmail.client.ZMailbox;
+import org.zmail.common.httpclient.HttpClientUtil;
+import org.zmail.common.service.ServiceException;
+import org.zmail.common.util.ByteUtil;
+import org.zmail.common.util.tar.TarEntry;
+import org.zmail.common.util.tar.TarInputStream;
+import org.zmail.common.zmime.ZMimeMessage;
+import org.zmail.cs.account.Account;
+import org.zmail.cs.account.Provisioning;
+import org.zmail.cs.mailbox.Mailbox;
+import org.zmail.cs.util.JMSession;
 
 
 public class TestUserServlet
@@ -60,7 +60,7 @@ extends TestCase {
         // Add a test message, in case the account is empty.
         ZMailbox mbox = TestUtil.getZMailbox(USER_NAME);
         TestUtil.addMessage(mbox, NAME_PREFIX);
-        originalSanitizeHtml = TestUtil.getAccountAttr(USER_NAME, Provisioning.A_zimbraNotebookSanitizeHtml);
+        originalSanitizeHtml = TestUtil.getAccountAttr(USER_NAME, Provisioning.A_zmailNotebookSanitizeHtml);
     }
 
     public void testTarFormatter()
@@ -141,7 +141,7 @@ extends TestCase {
     }
 
     /**
-     * Verifies that the value of {@code zimbraNotebookSanitizeHtml} does not
+     * Verifies that the value of {@code zmailNotebookSanitizeHtml} does not
      * affect the {@code Content-Type} header (bug 67752).
      */
     public void testSanitizeHtmlContentType() throws ServiceException, IOException {
@@ -170,7 +170,7 @@ extends TestCase {
     @Override
     public void tearDown()
     throws Exception {
-        TestUtil.setAccountAttr(USER_NAME, Provisioning.A_zimbraNotebookSanitizeHtml, originalSanitizeHtml);
+        TestUtil.setAccountAttr(USER_NAME, Provisioning.A_zmailNotebookSanitizeHtml, originalSanitizeHtml);
         cleanUp();
     }
 

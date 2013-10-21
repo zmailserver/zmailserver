@@ -97,7 +97,7 @@ note: others like debug, etc, are considered to be app-specific and will get pas
 
 preauth notes:
 
- We'll want to modify it to by default redirect to /zimbra, not /zimbra/mail.
+ We'll want to modify it to by default redirect to /zmail, not /zmail/mail.
 
  We'll should also modify it to inject cookie via zauthtoken query param and login page
  to avoid an extra redirect (when preauth is sent to wrong server)
@@ -109,7 +109,7 @@ preauth notes:
 
 ----------------------------------------------------------------------------------
 
- TODO: modify AuthRequest that takes and <authToken> to check "zimbraPasswordMustChange",
+ TODO: modify AuthRequest that takes and <authToken> to check "zmailPasswordMustChange",
        and if set, treat the token like it was expired.
 
 ------------------------------------------------------------------------------------

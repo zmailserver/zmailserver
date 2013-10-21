@@ -12,7 +12,7 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.qa.unittest.prov.ldap;
+package org.zmail.qa.unittest.prov.ldap;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
@@ -33,49 +33,49 @@ import org.junit.Test;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 import com.google.common.collect.Sets;
-import com.zimbra.common.account.Key;
-import com.zimbra.common.account.ProvisioningConstants;
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.cs.account.AccessManager;
-import com.zimbra.cs.account.Account;
-import com.zimbra.cs.account.AuthToken;
-import com.zimbra.cs.account.CalendarResource;
-import com.zimbra.cs.account.Config;
-import com.zimbra.cs.account.Cos;
-import com.zimbra.cs.account.DistributionList;
-import com.zimbra.cs.account.Domain;
-import com.zimbra.cs.account.DynamicGroup;
-import com.zimbra.cs.account.Entry;
-import com.zimbra.cs.account.GlobalGrant;
-import com.zimbra.cs.account.Group;
-import com.zimbra.cs.account.GuestAccount;
-import com.zimbra.cs.account.NamedEntry;
-import com.zimbra.cs.account.Provisioning;
-import com.zimbra.cs.account.Server;
-import com.zimbra.cs.account.UCService;
-import com.zimbra.cs.account.Zimlet;
-import com.zimbra.cs.account.accesscontrol.AttrRight;
-import com.zimbra.cs.account.accesscontrol.CheckRight;
-import com.zimbra.cs.account.accesscontrol.ComboRight;
-import com.zimbra.cs.account.accesscontrol.GranteeType;
-import com.zimbra.cs.account.accesscontrol.PresetRight;
-import com.zimbra.cs.account.accesscontrol.Right;
-import com.zimbra.cs.account.accesscontrol.Right.RightType;
-import com.zimbra.cs.account.accesscontrol.RightCommand;
-import com.zimbra.cs.account.accesscontrol.RightCommand.AllEffectiveRights;
-import com.zimbra.cs.account.accesscontrol.RightCommand.DomainedRightsByTargetType;
-import com.zimbra.cs.account.accesscontrol.RightCommand.EffectiveRights;
-import com.zimbra.cs.account.accesscontrol.RightCommand.Grants;
-import com.zimbra.cs.account.accesscontrol.RightCommand.RightAggregation;
-import com.zimbra.cs.account.accesscontrol.RightCommand.RightsByTargetType;
-import com.zimbra.cs.account.accesscontrol.Rights.Admin;
-import com.zimbra.cs.account.accesscontrol.TargetType;
-import com.zimbra.cs.account.accesscontrol.UserRight;
-import com.zimbra.cs.account.auth.AuthMechanism.AuthMech;
-import com.zimbra.cs.account.ldap.LdapProv;
-import com.zimbra.cs.account.ldap.entry.LdapDomain;
-import com.zimbra.qa.unittest.prov.ProvTestUtil;
-import com.zimbra.soap.type.TargetBy;
+import org.zmail.common.account.Key;
+import org.zmail.common.account.ProvisioningConstants;
+import org.zmail.common.service.ServiceException;
+import org.zmail.cs.account.AccessManager;
+import org.zmail.cs.account.Account;
+import org.zmail.cs.account.AuthToken;
+import org.zmail.cs.account.CalendarResource;
+import org.zmail.cs.account.Config;
+import org.zmail.cs.account.Cos;
+import org.zmail.cs.account.DistributionList;
+import org.zmail.cs.account.Domain;
+import org.zmail.cs.account.DynamicGroup;
+import org.zmail.cs.account.Entry;
+import org.zmail.cs.account.GlobalGrant;
+import org.zmail.cs.account.Group;
+import org.zmail.cs.account.GuestAccount;
+import org.zmail.cs.account.NamedEntry;
+import org.zmail.cs.account.Provisioning;
+import org.zmail.cs.account.Server;
+import org.zmail.cs.account.UCService;
+import org.zmail.cs.account.Zimlet;
+import org.zmail.cs.account.accesscontrol.AttrRight;
+import org.zmail.cs.account.accesscontrol.CheckRight;
+import org.zmail.cs.account.accesscontrol.ComboRight;
+import org.zmail.cs.account.accesscontrol.GranteeType;
+import org.zmail.cs.account.accesscontrol.PresetRight;
+import org.zmail.cs.account.accesscontrol.Right;
+import org.zmail.cs.account.accesscontrol.Right.RightType;
+import org.zmail.cs.account.accesscontrol.RightCommand;
+import org.zmail.cs.account.accesscontrol.RightCommand.AllEffectiveRights;
+import org.zmail.cs.account.accesscontrol.RightCommand.DomainedRightsByTargetType;
+import org.zmail.cs.account.accesscontrol.RightCommand.EffectiveRights;
+import org.zmail.cs.account.accesscontrol.RightCommand.Grants;
+import org.zmail.cs.account.accesscontrol.RightCommand.RightAggregation;
+import org.zmail.cs.account.accesscontrol.RightCommand.RightsByTargetType;
+import org.zmail.cs.account.accesscontrol.Rights.Admin;
+import org.zmail.cs.account.accesscontrol.TargetType;
+import org.zmail.cs.account.accesscontrol.UserRight;
+import org.zmail.cs.account.auth.AuthMechanism.AuthMech;
+import org.zmail.cs.account.ldap.LdapProv;
+import org.zmail.cs.account.ldap.entry.LdapDomain;
+import org.zmail.qa.unittest.prov.ProvTestUtil;
+import org.zmail.soap.type.TargetBy;
 
 public class TestACLAll extends LdapTest {
 
@@ -345,7 +345,7 @@ public class TestACLAll extends LdapTest {
 
         Map<String, Object> attrs = new HashMap<String, Object>();
         attrs.put(Provisioning.A_displayName, localpart);
-        attrs.put(Provisioning.A_zimbraCalResType, "Equipment");
+        attrs.put(Provisioning.A_zmailCalResType, "Equipment");
 
         return provUtil.createCalendarResource(localpart, domain, attrs);
     }
@@ -376,7 +376,7 @@ public class TestACLAll extends LdapTest {
     private DistributionList createAdminDistributionList(String localpart, Domain domain)
     throws Exception {
         Map<String, Object> attrs = new HashMap<String, Object>();
-        attrs.put(Provisioning.A_zimbraIsAdminGroup, ProvisioningConstants.TRUE);
+        attrs.put(Provisioning.A_zmailIsAdminGroup, ProvisioningConstants.TRUE);
         return createDistributionList(localpart, domain, attrs);
     }
 
@@ -407,7 +407,7 @@ public class TestACLAll extends LdapTest {
     private DynamicGroup createAdminDynamicGroup(String localpart, Domain domain)
     throws Exception {
         Map<String, Object> attrs = new HashMap<String, Object>();
-        attrs.put(Provisioning.A_zimbraIsAdminGroup, ProvisioningConstants.TRUE);
+        attrs.put(Provisioning.A_zmailIsAdminGroup, ProvisioningConstants.TRUE);
         return createDynamicGroup(localpart, domain, attrs);
     }
 
@@ -430,7 +430,7 @@ public class TestACLAll extends LdapTest {
 
     private Zimlet createZimlet() throws Exception {
         Map<String, Object> attrs = new HashMap<String, Object>();
-        attrs.put(Provisioning.A_zimbraZimletVersion, "1.0");
+        attrs.put(Provisioning.A_zmailZimletVersion, "1.0");
         return provUtil.createZimlet(zimletName(), attrs);
     }
 
@@ -719,11 +719,11 @@ public class TestACLAll extends LdapTest {
                     domain.addAuthLdapURL("ldap://localhost:389", domainAttrs);
                     domain.setAuthLdapBindDn("uid=%u,ou=people," + extDomainDN, domainAttrs);
                     // setup external group search parameters
-                    domain.setAuthLdapSearchBindDn(LC.zimbra_ldap_userdn.value(), domainAttrs);
-                    domain.setAuthLdapSearchBindPassword(LC.zimbra_ldap_password.value(), domainAttrs);
+                    domain.setAuthLdapSearchBindDn(LC.zmail_ldap_userdn.value(), domainAttrs);
+                    domain.setAuthLdapSearchBindPassword(LC.zmail_ldap_password.value(), domainAttrs);
                     domain.setExternalGroupLdapSearchBase(extDomainDN, domainAttrs);
-                    domain.setExternalGroupLdapSearchFilter("(&(objectClass=zimbraGroup)(cn=%u))", domainAttrs);
-                    domain.setExternalGroupHandlerClass("com.zimbra.qa.unittest.UnittestGroupHandler", domainAttrs);
+                    domain.setExternalGroupLdapSearchFilter("(&(objectClass=zmailGroup)(cn=%u))", domainAttrs);
+                    domain.setExternalGroupHandlerClass("org.zmail.qa.unittest.UnittestGroupHandler", domainAttrs);
                     mProv.modifyAttrs(domain, domainAttrs);
 
                     // create a group in the external directory and add a member
@@ -732,9 +732,9 @@ public class TestACLAll extends LdapTest {
                     Account extAcct = createUserAccount(acctLocalpart, extDomain);
                     mProv.addGroupMembers(extGroup, new String[]{extAcct.getName()});
 
-                    // create the admin account in Zimbra directory and map it to the external account
-                    Account zimbraAcct = createDelegatedAdminAccount(acctLocalpart, domain);
-                    allowedAccts.add(zimbraAcct);
+                    // create the admin account in Zmail directory and map it to the external account
+                    Account zmailAcct = createDelegatedAdminAccount(acctLocalpart, domain);
+                    allowedAccts.add(zmailAcct);
                     */
 
                     domain.addAuthLdapURL("***", domainAttrs);
@@ -742,15 +742,15 @@ public class TestACLAll extends LdapTest {
                     domain.setAuthLdapSearchBindPassword("***", domainAttrs);
                     domain.setExternalGroupLdapSearchBase("OU=Engineering,DC=vmware,DC=com", domainAttrs);
                     domain.setExternalGroupLdapSearchFilter("(&(objectClass=group)(mail=%n))", domainAttrs);
-                    domain.setExternalGroupHandlerClass("com.zimbra.cs.account.grouphandler.ADGroupHandler", domainAttrs);
+                    domain.setExternalGroupHandlerClass("org.zmail.cs.account.grouphandler.ADGroupHandler", domainAttrs);
                     prov.modifyAttrs(domain, domainAttrs);
 
                     String extGroupName = "ENG_pao_users_home4@vmware.com"; // "ESPPEnrollment-USA@vmware.com";
 
-                    // create the admin account in Zimbra directory and map it to the external account
-                    Account zimbraAcct = createDelegatedAdminAccount(acctLocalpart, domain);
-                    zimbraAcct.setAuthLdapExternalDn("CN=Phoebe Shao,OU=PAO_Users,OU=PaloAlto_California_USA,OU=NALA,OU=SITES,OU=Engineering,DC=vmware,DC=com");
-                    allowedAccts.add(zimbraAcct);
+                    // create the admin account in Zmail directory and map it to the external account
+                    Account zmailAcct = createDelegatedAdminAccount(acctLocalpart, domain);
+                    zmailAcct.setAuthLdapExternalDn("CN=Phoebe Shao,OU=PAO_Users,OU=PaloAlto_California_USA,OU=NALA,OU=SITES,OU=Engineering,DC=vmware,DC=com");
+                    allowedAccts.add(zmailAcct);
                     // =======================
 
                     granteeName = domain.getName() + ":" + extGroupName;
@@ -946,7 +946,7 @@ public class TestACLAll extends LdapTest {
         assertEquals(expectInvalidRequest, gotInvalidRequestException);
 
         // reload the entry after the grant.  DistributionList and DynamicGroups are
-        // not cached after creation.  The object on which the mod for ZimbraACE is
+        // not cached after creation.  The object on which the mod for ZmailACE is
         // done will be a different newly created object because it is fetched from
         // cache in TargetType.lookupTarget.  Fetch it from the same cache.
         // This only needs to be done in this unittest.  In production code, everywhere

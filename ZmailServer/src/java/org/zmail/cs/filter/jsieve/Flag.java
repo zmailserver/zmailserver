@@ -12,7 +12,7 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.filter.jsieve;
+package org.zmail.cs.filter.jsieve;
 
 import java.util.List;
 

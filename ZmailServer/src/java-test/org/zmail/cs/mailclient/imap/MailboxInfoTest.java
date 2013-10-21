@@ -13,7 +13,7 @@
  * ***** END LICENSE BLOCK *****
  */
 
-package com.zimbra.cs.mailclient.imap;
+package org.zmail.cs.mailclient.imap;
 
 import com.google.common.base.Charsets;
 import junit.framework.TestCase;

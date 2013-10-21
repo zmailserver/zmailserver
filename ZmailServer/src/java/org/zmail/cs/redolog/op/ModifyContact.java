@@ -16,7 +16,7 @@
 /*
  * Created on 2004. 12. 13.
  */
-package com.zimbra.cs.redolog.op;
+package org.zmail.cs.redolog.op;
 
 import java.io.File;
 import java.io.IOException;
@@ -24,14 +24,14 @@ import java.io.InputStream;
 import java.util.HashMap;
 import java.util.Map;
 
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.common.util.ByteUtil;
-import com.zimbra.cs.mailbox.Mailbox;
-import com.zimbra.cs.mailbox.MailboxManager;
-import com.zimbra.cs.mailbox.MailboxOperation;
-import com.zimbra.cs.mime.ParsedContact;
-import com.zimbra.cs.redolog.RedoLogInput;
-import com.zimbra.cs.redolog.RedoLogOutput;
+import org.zmail.common.service.ServiceException;
+import org.zmail.common.util.ByteUtil;
+import org.zmail.cs.mailbox.Mailbox;
+import org.zmail.cs.mailbox.MailboxManager;
+import org.zmail.cs.mailbox.MailboxOperation;
+import org.zmail.cs.mime.ParsedContact;
+import org.zmail.cs.redolog.RedoLogInput;
+import org.zmail.cs.redolog.RedoLogOutput;
 
 public class ModifyContact extends RedoableOp {
 

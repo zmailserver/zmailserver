@@ -14,7 +14,7 @@
  * 
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.account.accesscontrol;
+package org.zmail.cs.account.accesscontrol;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -24,31 +24,31 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-import com.zimbra.common.account.Key.DistributionListBy;
-import com.zimbra.common.account.Key.DomainBy;
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.common.util.ZimbraLog;
-import com.zimbra.cs.account.Account;
-import com.zimbra.cs.account.DistributionList;
-import com.zimbra.cs.account.Domain;
-import com.zimbra.cs.account.DynamicGroup;
-import com.zimbra.cs.account.Entry;
-import com.zimbra.cs.account.Group;
-import com.zimbra.cs.account.NamedEntry;
-import com.zimbra.cs.account.Provisioning;
-import com.zimbra.cs.account.accesscontrol.RightBearer.GlobalAdmin;
-import com.zimbra.cs.account.accesscontrol.RightBearer.Grantee;
-import com.zimbra.cs.account.accesscontrol.RightCommand.AllEffectiveRights;
-import com.zimbra.cs.account.accesscontrol.RightCommand.EffectiveRights;
-import com.zimbra.cs.account.accesscontrol.SearchGrants.GrantsOnTarget;
-import com.zimbra.cs.account.ldap.LdapDIT;
-import com.zimbra.cs.account.ldap.LdapProv;
-import com.zimbra.cs.ldap.IAttributes;
-import com.zimbra.cs.ldap.ZLdapFilter;
-import com.zimbra.cs.ldap.ZLdapFilterFactory;
-import com.zimbra.cs.ldap.LdapTODO.ACLTODO;
-import com.zimbra.cs.ldap.SearchLdapOptions.SearchLdapVisitor;
-import com.zimbra.soap.type.TargetBy;
+import org.zmail.common.account.Key.DistributionListBy;
+import org.zmail.common.account.Key.DomainBy;
+import org.zmail.common.service.ServiceException;
+import org.zmail.common.util.ZmailLog;
+import org.zmail.cs.account.Account;
+import org.zmail.cs.account.DistributionList;
+import org.zmail.cs.account.Domain;
+import org.zmail.cs.account.DynamicGroup;
+import org.zmail.cs.account.Entry;
+import org.zmail.cs.account.Group;
+import org.zmail.cs.account.NamedEntry;
+import org.zmail.cs.account.Provisioning;
+import org.zmail.cs.account.accesscontrol.RightBearer.GlobalAdmin;
+import org.zmail.cs.account.accesscontrol.RightBearer.Grantee;
+import org.zmail.cs.account.accesscontrol.RightCommand.AllEffectiveRights;
+import org.zmail.cs.account.accesscontrol.RightCommand.EffectiveRights;
+import org.zmail.cs.account.accesscontrol.SearchGrants.GrantsOnTarget;
+import org.zmail.cs.account.ldap.LdapDIT;
+import org.zmail.cs.account.ldap.LdapProv;
+import org.zmail.cs.ldap.IAttributes;
+import org.zmail.cs.ldap.ZLdapFilter;
+import org.zmail.cs.ldap.ZLdapFilterFactory;
+import org.zmail.cs.ldap.LdapTODO.ACLTODO;
+import org.zmail.cs.ldap.SearchLdapOptions.SearchLdapVisitor;
+import org.zmail.soap.type.TargetBy;
 
 @ACLTODO   // check refs of targetType.dl and handle the same for group
 public class CollectAllEffectiveRights {
@@ -87,9 +87,9 @@ public class CollectAllEffectiveRights {
         }
         
         private static void debug(String msg, Set<GroupShape> shapes) {
-            if (ZimbraLog.acl.isDebugEnabled()) {
+            if (ZmailLog.acl.isDebugEnabled()) {
                 for (GroupShape shape : shapes) {
-                    ZimbraLog.acl.debug(msg + "\n" + shape.toString());
+                    ZmailLog.acl.debug(msg + "\n" + shape.toString());
                 }
             }
         }
@@ -230,7 +230,7 @@ public class CollectAllEffectiveRights {
                 String name = mLdapDIT.dnToEmail(dn, ldapAttrs);
                 mNames.add(name);
             } catch (ServiceException e) {
-                ZimbraLog.acl.warn("cannot get name from dn [" + dn + "]", e);
+                ZmailLog.acl.warn("cannot get name from dn [" + dn + "]", e);
             }
         }
         
@@ -297,13 +297,13 @@ public class CollectAllEffectiveRights {
         // we want all target types
         Set<TargetType> targetTypesToSearch = new HashSet<TargetType>(Arrays.asList(TargetType.values()));
 
-        // get the set of zimbraId of the grantees to search for
+        // get the set of zmailId of the grantees to search for
         Set<String> granteeIdsToSearch = mGrantee.getIdAndGroupIds();
         
         // add external group grants that *may* apply
         if (mGrantee.isAccount()) {
             Domain domain = mProv.getDomain(mGrantee.getAccount());
-            granteeIdsToSearch.add(ZimbraACE.ExternalGroupInfo.encode(domain.getId(), ""));
+            granteeIdsToSearch.add(ZmailACE.ExternalGroupInfo.encode(domain.getId(), ""));
         }
         
         SearchGrants searchGrants = new SearchGrants(mProv, targetTypesToSearch, granteeIdsToSearch);
@@ -322,7 +322,7 @@ public class CollectAllEffectiveRights {
         //
         for (GrantsOnTarget grantsOnTarget : grantsOnTargets) {
             Entry grantedOnEntry = grantsOnTarget.getTargetEntry();
-            ZimbraACL acl = grantsOnTarget.getAcl();
+            ZmailACL acl = grantsOnTarget.getAcl();
             TargetType targetType = TargetType.getTargetType(grantedOnEntry);
             
             if (targetType == TargetType.global) {
@@ -431,7 +431,7 @@ public class CollectAllEffectiveRights {
             }
         }
         
-        if (ZimbraLog.acl.isDebugEnabled()) {
+        if (ZmailLog.acl.isDebugEnabled()) {
             GroupShape.debug("accountShapes", accountShapes);
             GroupShape.debug("calendarResourceShapes", calendarResourceShapes);
             GroupShape.debug("distributionListShapes", distributionListShapes);
@@ -459,7 +459,7 @@ public class CollectAllEffectiveRights {
         //
         for (GrantsOnTarget grantsOnTarget : grantsOnTargets) {
             Entry grantedOnEntry = grantsOnTarget.getTargetEntry();
-            ZimbraACL acl = grantsOnTarget.getAcl();
+            ZmailACL acl = grantsOnTarget.getAcl();
             TargetType targetType = TargetType.getTargetType(grantedOnEntry);
             
             if (targetType != TargetType.global) {
@@ -599,7 +599,7 @@ public class CollectAllEffectiveRights {
         mResult.addDomainEntry(targetType, domainName, er);
     }
     
-    private void computeSubDomainRightsInheritedFromDomain(ZimbraACL acl, Domain grantedOnDomain) 
+    private void computeSubDomainRightsInheritedFromDomain(ZmailACL acl, Domain grantedOnDomain) 
     throws ServiceException {
         
         boolean noSubDomainGrants = acl.getSubDomainACEs().isEmpty();
@@ -630,24 +630,24 @@ public class CollectAllEffectiveRights {
         
         String base = mProv.getDIT().domainNameToDN(domain.getName());
         ZLdapFilter filter = ZLdapFilterFactory.getInstance().allDomains();
-        String returnAttrs[] = new String[] {Provisioning.A_zimbraId};
+        String returnAttrs[] = new String[] {Provisioning.A_zmailId};
         SearchSubDomainVisitor visitor = new SearchSubDomainVisitor();
         
         mProv.searchLdapOnMaster(base, filter, returnAttrs, visitor);
         
-        List<String> zimbraIds = visitor.getResults();
-        for (String zimbraId : zimbraIds) {
-            if (zimbraId.equalsIgnoreCase(domain.getId())) {
+        List<String> zmailIds = visitor.getResults();
+        for (String zmailId : zmailIds) {
+            if (zmailId.equalsIgnoreCase(domain.getId())) {
                 // the search returns the domain itself too, skip it
                 continue;
             }
             
             try {
                 Domain subDomain = (Domain)TargetType.lookupTarget(mProv, 
-                        TargetType.domain, TargetBy.id, zimbraId);
+                        TargetType.domain, TargetBy.id, zmailId);
                 subDomains.add(subDomain);
             } catch (ServiceException e) {
-                ZimbraLog.acl.warn("canot find domain by id " + zimbraId, e);
+                ZmailLog.acl.warn("canot find domain by id " + zmailId, e);
             }
         }
         
@@ -659,9 +659,9 @@ public class CollectAllEffectiveRights {
 
         @Override
         public void visit(String dn, Map<String, Object> attrs, IAttributes ldapAttrs) {
-            String zimbraId = (String)attrs.get(Provisioning.A_zimbraId);
-            if (zimbraId != null) {
-                mDomainIds.add(zimbraId);
+            String zmailId = (String)attrs.get(Provisioning.A_zmailId);
+            if (zmailId != null) {
+                mDomainIds.add(zmailId);
             }
         }
         

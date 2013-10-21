@@ -13,9 +13,9 @@
  * ***** END LICENSE BLOCK *****
  */
 
-package com.zimbra.cs.mailclient.smtp;
+package org.zmail.cs.mailclient.smtp;
 
-import com.zimbra.cs.mailclient.CommandFailedException;
+import org.zmail.cs.mailclient.CommandFailedException;
 
 @SuppressWarnings("serial")
 final class InvalidRecipientException extends CommandFailedException {

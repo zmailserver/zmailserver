@@ -12,7 +12,7 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.store.external;
+package org.zmail.cs.store.external;
 
 import java.io.File;
 import java.io.FileOutputStream;
@@ -28,20 +28,20 @@ import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.common.util.ZimbraLog;
-import com.zimbra.cs.account.MockProvisioning;
-import com.zimbra.cs.account.Provisioning;
-import com.zimbra.cs.mailbox.Mailbox;
-import com.zimbra.cs.mailbox.MailboxManager;
-import com.zimbra.cs.mailbox.MailboxTestUtil;
-import com.zimbra.cs.store.Blob;
-import com.zimbra.cs.store.BlobBuilder;
-import com.zimbra.cs.store.IncomingBlob;
-import com.zimbra.cs.store.MailboxBlob;
-import com.zimbra.cs.store.StagedBlob;
-import com.zimbra.cs.store.StoreManager;
-import com.zimbra.qa.unittest.TestUtil;
+import org.zmail.common.service.ServiceException;
+import org.zmail.common.util.ZmailLog;
+import org.zmail.cs.account.MockProvisioning;
+import org.zmail.cs.account.Provisioning;
+import org.zmail.cs.mailbox.Mailbox;
+import org.zmail.cs.mailbox.MailboxManager;
+import org.zmail.cs.mailbox.MailboxTestUtil;
+import org.zmail.cs.store.Blob;
+import org.zmail.cs.store.BlobBuilder;
+import org.zmail.cs.store.IncomingBlob;
+import org.zmail.cs.store.MailboxBlob;
+import org.zmail.cs.store.StagedBlob;
+import org.zmail.cs.store.StoreManager;
+import org.zmail.qa.unittest.TestUtil;
 
 public class StoreManagerNegativeTest {
 
@@ -51,7 +51,7 @@ public class StoreManagerNegativeTest {
     public static void init() throws Exception {
         MailboxTestUtil.initServer();
         MailboxTestUtil.initProvisioning();
-        Provisioning.getInstance().createAccount("test@zimbra.com", "secret", new HashMap<String, Object>());
+        Provisioning.getInstance().createAccount("test@zmail.com", "secret", new HashMap<String, Object>());
     }
 
     @Before
@@ -175,7 +175,7 @@ public class StoreManagerNegativeTest {
                         upFile = new File(name + ".upl");
                     }
                     if (upFile.createNewFile()) {
-                        ZimbraLog.store.debug("writing to new file %s", upFile.getName());
+                        ZmailLog.store.debug("writing to new file %s", upFile.getName());
                         file = upFile;
                     } else {
                         throw new IOException("unable to create new file");

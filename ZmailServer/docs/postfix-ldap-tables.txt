@@ -17,27 +17,27 @@ attr                           |unknown|       | valid | valid |       | user  |
  |                             |rcpt   | acct  | local | alias | dist  | canon |alias  |port   |all    |canon  |
  v                feature ->   |reject | alias |domain |domain | list  | ical  |domain |maps   |mailbox|ical   |
 -----------------------------------------------------------------------------------------------------------------------
-zimbraMailDeliveryAddress      | vmm-v | vam-v |       |       |       | scm-k |       | trm-k | vam-v |       | vam-k
+zmailMailDeliveryAddress      | vmm-v | vam-v |       |       |       | scm-k |       | trm-k | vam-v |       | vam-k
                                | vmm-k |       |       |       |       |       |       |       |       |       |
 -----------------------------------------------------------------------------------------------------------------------
-zimbraMailForwardingAddress    |       | vam-v |       |       | vam-v |       |       |       |       |       | vam-v
+zmailMailForwardingAddress    |       | vam-v |       |       | vam-v |       |       |       |       |       | vam-v
 -----------------------------------------------------------------------------------------------------------------------
-zimbraMailAlias                |       | vam-k |       |       | vam-k | scm-k |       |       |       |       |
+zmailMailAlias                |       | vam-k |       |       | vam-k | scm-k |       |       |       |       |
 -----------------------------------------------------------------------------------------------------------------------
-zimbraMailCanonicalAddress     |       |       |       |       |       | scm-v |       |       |       |       |
+zmailMailCanonicalAddress     |       |       |       |       |       | scm-v |       |       |       |       |
 -----------------------------------------------------------------------------------------------------------------------
-zimbraMailStatus               | vmm-k | vam-k | vmd-k | vad-k | vam-k | scm-k | vam-k | trm-k | vam-k | scm-k | vam-k
+zmailMailStatus               | vmm-k | vam-k | vmd-k | vad-k | vam-k | scm-k | vam-k | trm-k | vam-k | scm-k | vam-k
 -----------------------------------------------------------------------------------------------------------------------
-zimbraDomainName               |       |       | vmd-k | vad-k |       |       |       |       |       |       |
+zmailDomainName               |       |       | vmd-k | vad-k |       |       |       |       |       |       |
                                |       |       | vmd-v | vad-v |       |       |       |       |       |       |
 -----------------------------------------------------------------------------------------------------------------------
-zimbraDomainType               |       |       | vmd-k | vad-k |       |       |       |       |       |       |
+zmailDomainType               |       |       | vmd-k | vad-k |       |       |       |       |       |       |
 -----------------------------------------------------------------------------------------------------------------------
-zimbraCatchAllAddress          |       |       | vmd-k | vad-k |       |       | vam-k |       | vam-k | scm-k |
+zmailCatchAllAddress          |       |       | vmd-k | vad-k |       |       | vam-k |       | vam-k | scm-k |
 -----------------------------------------------------------------------------------------------------------------------
-zimbraCatchAllForwardingAddress|       |       | vmd-k | vad-k |       |       | vam-v |       |       |       |
+zmailCatchAllForwardingAddress|       |       | vmd-k | vad-k |       |       | vam-v |       |       |       |
 -----------------------------------------------------------------------------------------------------------------------
-zimbraMailCanonicalAddress     |       |       |       |       |       |       |       |       |       | scm-v |
+zmailMailCanonicalAddress     |       |       |       |       |       |       |       |       |       | scm-v |
 -----------------------------------------------------------------------------------------------------------------------
-zimbraMailTransport            |       |       |       |       |       |       |       | trm-v |       |       |
+zmailMailTransport            |       |       |       |       |       |       |       | trm-v |       |       |
 -----------------------------------------------------------------------------------------------------------------------

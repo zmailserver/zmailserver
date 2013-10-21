@@ -12,19 +12,19 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.service.admin;
+package org.zmail.cs.service.admin;
 
 import java.util.Map;
 
 import org.dom4j.DocumentException;
 
-import com.zimbra.common.localconfig.ConfigException;
-import com.zimbra.common.localconfig.LC;
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.common.soap.Element;
-import com.zimbra.common.util.ZimbraLog;
-import com.zimbra.soap.ZimbraSoapContext;
-import com.zimbra.soap.admin.message.ReloadLocalConfigResponse;
+import org.zmail.common.localconfig.ConfigException;
+import org.zmail.common.localconfig.LC;
+import org.zmail.common.service.ServiceException;
+import org.zmail.common.soap.Element;
+import org.zmail.common.util.ZmailLog;
+import org.zmail.soap.ZmailSoapContext;
+import org.zmail.soap.admin.message.ReloadLocalConfigResponse;
 
 /**
  * Reload the local config file on the fly.
@@ -44,15 +44,15 @@ public final class ReloadLocalConfig extends AdminDocumentHandler {
         try {
             LC.reload();
         } catch (DocumentException e) {
-            ZimbraLog.misc.error("Failed to reload LocalConfig", e);
+            ZmailLog.misc.error("Failed to reload LocalConfig", e);
             throw AdminServiceException.FAILURE("Failed to reload LocalConfig", e);
         } catch (ConfigException e) {
-            ZimbraLog.misc.error("Failed to reload LocalConfig", e);
+            ZmailLog.misc.error("Failed to reload LocalConfig", e);
             throw AdminServiceException.FAILURE("Failed to reload LocalConfig", e);
         }
-        ZimbraLog.misc.info("LocalConfig reloaded");
+        ZmailLog.misc.info("LocalConfig reloaded");
 
-        ZimbraSoapContext zsc = getZimbraSoapContext(context);
+        ZmailSoapContext zsc = getZmailSoapContext(context);
         return zsc.jaxbToElement(new ReloadLocalConfigResponse());
     }
 

@@ -12,7 +12,7 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.ldap.unboundid;
+package org.zmail.cs.ldap.unboundid;
 
 import java.util.Arrays;
 import java.util.HashSet;
@@ -42,42 +42,42 @@ import com.unboundid.ldap.sdk.controls.AssertionRequestControl;
 import com.unboundid.ldap.sdk.controls.SimplePagedResultsControl;
 import com.unboundid.ldap.sdk.extensions.StartTLSExtendedRequest;
 import com.unboundid.ldap.sdk.schema.Schema;
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.common.util.ZimbraLog;
-import com.zimbra.cs.ldap.LdapConnType;
-import com.zimbra.cs.ldap.LdapConstants;
-import com.zimbra.cs.ldap.LdapException;
-import com.zimbra.cs.ldap.LdapOp;
-import com.zimbra.cs.ldap.LdapServerConfig;
-import com.zimbra.cs.ldap.LdapServerConfig.ExternalLdapConfig;
-import com.zimbra.cs.ldap.LdapServerConfig.ZimbraLdapConfig;
-import com.zimbra.cs.ldap.LdapServerType;
-import com.zimbra.cs.ldap.LdapUsage;
-import com.zimbra.cs.ldap.SearchLdapOptions;
-import com.zimbra.cs.ldap.ZAttributes;
-import com.zimbra.cs.ldap.ZLdapContext;
-import com.zimbra.cs.ldap.ZLdapFilter;
-import com.zimbra.cs.ldap.ZLdapFilterFactory;
-import com.zimbra.cs.ldap.ZLdapSchema;
-import com.zimbra.cs.ldap.ZModificationList;
-import com.zimbra.cs.ldap.ZMutableEntry;
-import com.zimbra.cs.ldap.ZSearchControls;
-import com.zimbra.cs.ldap.ZSearchResultEnumeration;
-import com.zimbra.cs.stats.ZimbraPerf;
+import org.zmail.common.service.ServiceException;
+import org.zmail.common.util.ZmailLog;
+import org.zmail.cs.ldap.LdapConnType;
+import org.zmail.cs.ldap.LdapConstants;
+import org.zmail.cs.ldap.LdapException;
+import org.zmail.cs.ldap.LdapOp;
+import org.zmail.cs.ldap.LdapServerConfig;
+import org.zmail.cs.ldap.LdapServerConfig.ExternalLdapConfig;
+import org.zmail.cs.ldap.LdapServerConfig.ZmailLdapConfig;
+import org.zmail.cs.ldap.LdapServerType;
+import org.zmail.cs.ldap.LdapUsage;
+import org.zmail.cs.ldap.SearchLdapOptions;
+import org.zmail.cs.ldap.ZAttributes;
+import org.zmail.cs.ldap.ZLdapContext;
+import org.zmail.cs.ldap.ZLdapFilter;
+import org.zmail.cs.ldap.ZLdapFilterFactory;
+import org.zmail.cs.ldap.ZLdapSchema;
+import org.zmail.cs.ldap.ZModificationList;
+import org.zmail.cs.ldap.ZMutableEntry;
+import org.zmail.cs.ldap.ZSearchControls;
+import org.zmail.cs.ldap.ZSearchResultEnumeration;
+import org.zmail.cs.stats.ZmailPerf;
 
 public class UBIDLdapContext extends ZLdapContext {
     
     private static boolean initialized = false;
     
-    private static ZimbraLdapConfig replicaConfig;
-    private static ZimbraLdapConfig masterConfig;
+    private static ZmailLdapConfig replicaConfig;
+    private static ZmailLdapConfig masterConfig;
     
     private static LDAPConnectionPool replicaConnPool;
     private static LDAPConnectionPool masterConnPool;
     
     private LDAPConnectionPool connPool;
     private LDAPConnection conn;
-    private boolean isZimbraLdap;
+    private boolean isZmailLdap;
     private DereferencePolicy derefAliasPolicy;
     
     public static synchronized void init(boolean alwaysUseMaster) throws LdapException {
@@ -89,7 +89,7 @@ public class UBIDLdapContext extends ZLdapContext {
         
         initialized = true;
         
-        masterConfig = new ZimbraLdapConfig(LdapServerType.MASTER);
+        masterConfig = new ZmailLdapConfig(LdapServerType.MASTER);
         masterConnPool = LdapConnectionPool.createConnectionPool(
                 LdapConnectionPool.CP_ZIMBRA_MASTER, masterConfig);
         
@@ -97,7 +97,7 @@ public class UBIDLdapContext extends ZLdapContext {
             replicaConfig = masterConfig;
             replicaConnPool = masterConnPool;
         } else {
-            replicaConfig = new ZimbraLdapConfig(LdapServerType.REPLICA);
+            replicaConfig = new ZmailLdapConfig(LdapServerType.REPLICA);
             replicaConnPool = LdapConnectionPool.createConnectionPool(
                     LdapConnectionPool.CP_ZIMBRA_REPLICA, replicaConfig);
         }
@@ -129,11 +129,11 @@ public class UBIDLdapContext extends ZLdapContext {
     }
     
     /*
-     * Zimbra LDAP
+     * Zmail LDAP
      */
     public UBIDLdapContext(LdapServerType serverType, LdapUsage usage) throws LdapException {
         super(usage);
-        isZimbraLdap = true;
+        isZmailLdap = true;
         derefAliasPolicy = DereferencePolicy.NEVER;
         
         if (serverType.isMaster()) {
@@ -150,7 +150,7 @@ public class UBIDLdapContext extends ZLdapContext {
      */
     public UBIDLdapContext(ExternalLdapConfig config, LdapUsage usage) throws LdapException {
         super(usage);
-        isZimbraLdap = false;
+        isZmailLdap = false;
         setDerefAliasPolicy(config);
         
         connPool = LdapConnectionPool.getConnPoolByConfig(config);
@@ -169,14 +169,14 @@ public class UBIDLdapContext extends ZLdapContext {
            // TODO: this is for backward compatibility with the legacy code - remvoe or enhance
             // TODO: should have a timer for each connection pool
             long start = 0;
-            if (isZimbraLdap) {
-                start = ZimbraPerf.STOPWATCH_LDAP_DC.start();
+            if (isZmailLdap) {
+                start = ZmailPerf.STOPWATCH_LDAP_DC.start();
             }
             
             LDAPConnection connection = UBIDLdapOperation.GET_CONNECTION.execute(this, pool);
             
-            if (isZimbraLdap) {
-                ZimbraPerf.STOPWATCH_LDAP_DC.stop(start);
+            if (isZmailLdap) {
+                ZmailPerf.STOPWATCH_LDAP_DC.stop(start);
             }
             
             LdapConnectionPool.debugCheckOut(pool, connection);
@@ -200,7 +200,7 @@ public class UBIDLdapContext extends ZLdapContext {
     }
     
     private LdapException mapToLdapException(String message, LDAPException e) {
-        if (isZimbraLdap) {
+        if (isZmailLdap) {
             return UBIDLdapException.mapToLdapException(message, e);
         } else {
             // need more precise mapping for external LDAP exceptions so we
@@ -224,7 +224,7 @@ public class UBIDLdapContext extends ZLdapContext {
         } else if ("searching".equalsIgnoreCase(derefPolicy)) {
             derefAliasPolicy = DereferencePolicy.SEARCHING;
         } else {
-            ZimbraLog.ldap.warn("invalid deref alias policy: " + derefPolicy +
+            ZmailLog.ldap.warn("invalid deref alias policy: " + derefPolicy +
                     ", default to never");
             derefAliasPolicy = DereferencePolicy.NEVER;
         }
@@ -598,7 +598,7 @@ public class UBIDLdapContext extends ZLdapContext {
      * 
      * This is method is called for:
      *   - external LDAP auth
-     *   - auth to Zimbra LDAP server when the stored password is not SSHA.
+     *   - auth to Zmail LDAP server when the stored password is not SSHA.
      *   
      * @param urls
      * @param wantStartTLS
@@ -694,7 +694,7 @@ public class UBIDLdapContext extends ZLdapContext {
         ldapAuthenticate(config, bindDN, password, LdapUsage.LDAP_AUTH_EXTERNAL);
     }
     
-    static void zimbraLdapAuthenticate(String bindDN, String password) 
+    static void zmailLdapAuthenticate(String bindDN, String password) 
     throws ServiceException {
         ldapAuthenticate(replicaConfig, bindDN, password, LdapUsage.LDAP_AUTH_ZIMBRA); 
     }

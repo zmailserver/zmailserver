@@ -12,16 +12,16 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.mailclient.imap;
+package org.zmail.cs.mailclient.imap;
 
-import com.zimbra.common.util.Constants;
-import com.zimbra.cs.mailclient.MailConnection;
-import com.zimbra.cs.mailclient.MailException;
-import com.zimbra.cs.mailclient.MailInputStream;
-import com.zimbra.cs.mailclient.MailOutputStream;
-import com.zimbra.cs.mailclient.CommandFailedException;
-import com.zimbra.cs.mailclient.ParseException;
-import com.zimbra.cs.mailclient.util.Ascii;
+import org.zmail.common.util.Constants;
+import org.zmail.cs.mailclient.MailConnection;
+import org.zmail.cs.mailclient.MailException;
+import org.zmail.cs.mailclient.MailInputStream;
+import org.zmail.cs.mailclient.MailOutputStream;
+import org.zmail.cs.mailclient.CommandFailedException;
+import org.zmail.cs.mailclient.ParseException;
+import org.zmail.cs.mailclient.util.Ascii;
 
 import java.io.IOException;
 import java.io.InputStream;

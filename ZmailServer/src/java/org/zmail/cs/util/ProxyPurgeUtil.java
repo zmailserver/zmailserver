@@ -13,9 +13,9 @@
  * ***** END LICENSE BLOCK *****
  */
 
-package com.zimbra.cs.util;
-import com.zimbra.common.util.ZimbraLog;
-import com.zimbra.common.util.memcached.ZimbraMemcachedClient;
+package org.zmail.cs.util;
+import org.zmail.common.util.ZmailLog;
+import org.zmail.common.util.memcached.ZmailMemcachedClient;
 
 import org.apache.commons.cli.CommandLine;
 import org.apache.commons.cli.CommandLineParser;
@@ -25,17 +25,17 @@ import org.apache.commons.cli.ParseException;
 import java.util.*;
 import java.io.*;
 
-import com.zimbra.cs.account.Account;
-import com.zimbra.cs.account.Domain;
-import com.zimbra.cs.account.Provisioning;
-import com.zimbra.cs.account.Server;
-import com.zimbra.cs.account.ldap.LdapProvisioning;
-import com.zimbra.cs.ldap.LdapClient;
-import com.zimbra.cs.ldap.LdapServerType;
-import com.zimbra.cs.ldap.LdapUsage;
-import com.zimbra.common.account.Key;
-import com.zimbra.common.account.Key.DomainBy;
-import com.zimbra.common.service.ServiceException;
+import org.zmail.cs.account.Account;
+import org.zmail.cs.account.Domain;
+import org.zmail.cs.account.Provisioning;
+import org.zmail.cs.account.Server;
+import org.zmail.cs.account.ldap.LdapProvisioning;
+import org.zmail.cs.ldap.LdapClient;
+import org.zmail.cs.ldap.LdapServerType;
+import org.zmail.cs.ldap.LdapUsage;
+import org.zmail.common.account.Key;
+import org.zmail.common.account.Key.DomainBy;
+import org.zmail.common.service.ServiceException;
 
 /** @author mansoor peerbhoy 
  */
@@ -70,9 +70,9 @@ public class ProxyPurgeUtil
         }
 
         if (commandLine.hasOption("v")) { logLevel = "DEBUG"; }
-        ZimbraLog.toolSetupLog4j (logLevel, null, false);
+        ZmailLog.toolSetupLog4j (logLevel, null, false);
 
-        /* Initialize the logging system and the zimbra environment */
+        /* Initialize the logging system and the zmail environment */
         prov = Provisioning.getInstance();
 
         /* Get the list of servers running the memcached service
@@ -83,8 +83,8 @@ public class ProxyPurgeUtil
 
         for (Iterator<Server> it=memcachedServers.iterator(); it.hasNext();) {
             Server s = it.next();
-            String serverName = s.getAttr (Provisioning.A_zimbraServiceHostname, "localhost");
-            String servicePort = s.getAttr (Provisioning.A_zimbraMemcachedBindPort, memcachedPort);
+            String serverName = s.getAttr (Provisioning.A_zmailServiceHostname, "localhost");
+            String servicePort = s.getAttr (Provisioning.A_zmailMemcachedBindPort, memcachedPort);
             servers.add (serverName + ":" + servicePort);
         }
 
@@ -150,8 +150,8 @@ public class ProxyPurgeUtil
             
             for (Iterator<Server> it=memcachedServers.iterator(); it.hasNext();) {
                 Server s = it.next();
-                String serverName = s.getAttr (Provisioning.A_zimbraServiceHostname, "localhost");
-                String servicePort = s.getAttr (Provisioning.A_zimbraMemcachedBindPort, memcachedPort);
+                String serverName = s.getAttr (Provisioning.A_zmailServiceHostname, "localhost");
+                String servicePort = s.getAttr (Provisioning.A_zmailMemcachedBindPort, memcachedPort);
                 servers.add (serverName + ":" + servicePort);
             }
             
@@ -159,10 +159,10 @@ public class ProxyPurgeUtil
         
         // Connect to all memcached servers.
         int numServers = servers.size();
-        ArrayList<ZimbraMemcachedClient> zmcs = new ArrayList<ZimbraMemcachedClient>();
+        ArrayList<ZmailMemcachedClient> zmcs = new ArrayList<ZmailMemcachedClient>();
         
         for (int i = 0; i < numServers; ++i) {
-            ZimbraMemcachedClient zmc = new ZimbraMemcachedClient();
+            ZmailMemcachedClient zmc = new ZmailMemcachedClient();
             zmc.connect(new String[] { servers.get(i) }, false, null, 0, 5000);
             zmcs.add(zmc);
         }
@@ -179,8 +179,8 @@ public class ProxyPurgeUtil
             // to the login name, by first looking up an existing domain by the IP address of
             // the proxy interface where the connection came in. If no such domain is found,
             // then NGINX falls back to the default domain name specified by the config
-            // attribute zimbraDefaultDomainName.
-            // The IP to domain mapping is done based on the zimbraVirtualIPAddress attribute
+            // attribute zmailDefaultDomainName.
+            // The IP to domain mapping is done based on the zmailVirtualIPAddress attribute
             // of the domain (The IP-to-domain mapping is a many-to-one relationship.) 
             //
             // For the zmproxypurge utility if the account supplied (-a option) is:
@@ -308,7 +308,7 @@ public class ProxyPurgeUtil
             }
  
             for (int i = 0; i < numServers; ++i) {
-                ZimbraMemcachedClient zmc = zmcs.get(i);
+                ZmailMemcachedClient zmc = zmcs.get(i);
                 
                 for (String route : routes) {
                     if (purge) {
@@ -324,8 +324,8 @@ public class ProxyPurgeUtil
             }
         }
 
-        for (ZimbraMemcachedClient zmc : zmcs) {
-            zmc.disconnect(ZimbraMemcachedClient.DEFAULT_TIMEOUT);
+        for (ZmailMemcachedClient zmc : zmcs) {
+            zmc.disconnect(ZmailMemcachedClient.DEFAULT_TIMEOUT);
         }
     }
 

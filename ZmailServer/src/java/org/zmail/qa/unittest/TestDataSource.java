@@ -12,7 +12,7 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.qa.unittest;
+package org.zmail.qa.unittest;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -21,28 +21,28 @@ import java.util.Map;
 
 import junit.framework.TestCase;
 
-import com.zimbra.client.ZCalDataSource;
-import com.zimbra.client.ZDataSource;
-import com.zimbra.client.ZFolder;
-import com.zimbra.client.ZGrant.GranteeType;
-import com.zimbra.client.ZMailbox;
-import com.zimbra.client.ZMessage;
-import com.zimbra.client.ZRssDataSource;
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.common.soap.AccountConstants;
-import com.zimbra.common.soap.Element;
-import com.zimbra.common.soap.Element.XMLElement;
-import com.zimbra.common.soap.MailConstants;
-import com.zimbra.common.util.HttpUtil;
-import com.zimbra.common.util.ZimbraLog;
-import com.zimbra.cs.account.Account;
-import com.zimbra.cs.account.Cos;
-import com.zimbra.cs.account.DataSource;
-import com.zimbra.cs.account.Provisioning;
-import com.zimbra.cs.ldap.LdapConstants;
-import com.zimbra.cs.mailbox.Mailbox;
-import com.zimbra.soap.admin.type.DataSourceType;
-import com.zimbra.soap.type.DataSource.ConnectionType;
+import org.zmail.client.ZCalDataSource;
+import org.zmail.client.ZDataSource;
+import org.zmail.client.ZFolder;
+import org.zmail.client.ZGrant.GranteeType;
+import org.zmail.client.ZMailbox;
+import org.zmail.client.ZMessage;
+import org.zmail.client.ZRssDataSource;
+import org.zmail.common.service.ServiceException;
+import org.zmail.common.soap.AccountConstants;
+import org.zmail.common.soap.Element;
+import org.zmail.common.soap.Element.XMLElement;
+import org.zmail.common.soap.MailConstants;
+import org.zmail.common.util.HttpUtil;
+import org.zmail.common.util.ZmailLog;
+import org.zmail.cs.account.Account;
+import org.zmail.cs.account.Cos;
+import org.zmail.cs.account.DataSource;
+import org.zmail.cs.account.Provisioning;
+import org.zmail.cs.ldap.LdapConstants;
+import org.zmail.cs.mailbox.Mailbox;
+import org.zmail.soap.admin.type.DataSourceType;
+import org.zmail.soap.type.DataSource.ConnectionType;
 
 public class TestDataSource extends TestCase {
 
@@ -67,22 +67,22 @@ public class TestDataSource extends TestCase {
         // Remember original polling intervals.
         Account account = TestUtil.getAccount(USER_NAME);
         Cos cos = account.getCOS();
-        mOriginalAccountPollingInterval = account.getAttr(Provisioning.A_zimbraDataSourcePollingInterval, false);
+        mOriginalAccountPollingInterval = account.getAttr(Provisioning.A_zmailDataSourcePollingInterval, false);
         if (mOriginalAccountPollingInterval == null) {
             mOriginalAccountPollingInterval = "";
         }
-        mOriginalAccountPop3PollingInterval = account.getAttr(Provisioning.A_zimbraDataSourcePop3PollingInterval, false);
+        mOriginalAccountPop3PollingInterval = account.getAttr(Provisioning.A_zmailDataSourcePop3PollingInterval, false);
         if (mOriginalAccountPop3PollingInterval == null) {
             mOriginalAccountPop3PollingInterval = "";
         }
-        mOriginalAccountImapPollingInterval = account.getAttr(Provisioning.A_zimbraDataSourceImapPollingInterval, false);
+        mOriginalAccountImapPollingInterval = account.getAttr(Provisioning.A_zmailDataSourceImapPollingInterval, false);
         if (mOriginalAccountImapPollingInterval == null) {
             mOriginalAccountImapPollingInterval = "";
         }
 
-        mOriginalCosPollingInterval = cos.getAttr(Provisioning.A_zimbraDataSourcePollingInterval, "");
-        mOriginalCosPop3PollingInterval = cos.getAttr(Provisioning.A_zimbraDataSourcePop3PollingInterval, "");
-        mOriginalCosImapPollingInterval = cos.getAttr(Provisioning.A_zimbraDataSourceImapPollingInterval, "");
+        mOriginalCosPollingInterval = cos.getAttr(Provisioning.A_zmailDataSourcePollingInterval, "");
+        mOriginalCosPop3PollingInterval = cos.getAttr(Provisioning.A_zmailDataSourcePop3PollingInterval, "");
+        mOriginalCosImapPollingInterval = cos.getAttr(Provisioning.A_zmailDataSourceImapPollingInterval, "");
     }
 
     public void testPollingInterval()
@@ -91,25 +91,25 @@ public class TestDataSource extends TestCase {
         Provisioning prov = Provisioning.getInstance();
         Account account = TestUtil.getAccount(USER_NAME);
         Map<String, Object> attrs = new HashMap<String, Object>();
-        attrs.put(Provisioning.A_zimbraDataSourceEnabled, LdapConstants.LDAP_FALSE);
-        attrs.put(Provisioning.A_zimbraDataSourceHost, "testhost");
-        attrs.put(Provisioning.A_zimbraDataSourcePort, "0");
-        attrs.put(Provisioning.A_zimbraDataSourceUsername, "testuser");
-        attrs.put(Provisioning.A_zimbraDataSourcePassword, "testpass");
-        attrs.put(Provisioning.A_zimbraDataSourceFolderId, "1");
-        attrs.put(Provisioning.A_zimbraDataSourceConnectionType, ConnectionType.cleartext.toString());
+        attrs.put(Provisioning.A_zmailDataSourceEnabled, LdapConstants.LDAP_FALSE);
+        attrs.put(Provisioning.A_zmailDataSourceHost, "testhost");
+        attrs.put(Provisioning.A_zmailDataSourcePort, "0");
+        attrs.put(Provisioning.A_zmailDataSourceUsername, "testuser");
+        attrs.put(Provisioning.A_zmailDataSourcePassword, "testpass");
+        attrs.put(Provisioning.A_zmailDataSourceFolderId, "1");
+        attrs.put(Provisioning.A_zmailDataSourceConnectionType, ConnectionType.cleartext.toString());
         DataSource ds = prov.createDataSource(account, DataSourceType.pop3, NAME_PREFIX + " testPollingInterval", attrs);
 
         // Valid polling interval
-        assertNotNull("Min not defined", account.getAttr(Provisioning.A_zimbraDataSourceMinPollingInterval));
-        long min = account.getTimeInterval(Provisioning.A_zimbraDataSourceMinPollingInterval, 0) / 1000;
+        assertNotNull("Min not defined", account.getAttr(Provisioning.A_zmailDataSourceMinPollingInterval));
+        long min = account.getTimeInterval(Provisioning.A_zmailDataSourceMinPollingInterval, 0) / 1000;
         attrs.clear();
-        attrs.put(Provisioning.A_zimbraDataSourcePollingInterval, Long.toString(min));
+        attrs.put(Provisioning.A_zmailDataSourcePollingInterval, Long.toString(min));
         prov.modifyDataSource(account, ds.getId(), attrs);
 
         // Invalid polling interval
         attrs.clear();
-        attrs.put(Provisioning.A_zimbraDataSourcePollingInterval, Long.toString(min - 1));
+        attrs.put(Provisioning.A_zmailDataSourcePollingInterval, Long.toString(min - 1));
         try {
             prov.modifyDataSource(account, ds.getId(), attrs);
             fail("modifyDataSource() was not supposed to succeed");
@@ -130,14 +130,14 @@ public class TestDataSource extends TestCase {
         // Create data source.
         Provisioning prov = Provisioning.getInstance();
         Map<String, Object> attrs = new HashMap<String, Object>();
-        attrs.put(Provisioning.A_zimbraDataSourceEnabled, LdapConstants.LDAP_TRUE);
-        attrs.put(Provisioning.A_zimbraDataSourceHost, "localhost");
-        attrs.put(Provisioning.A_zimbraDataSourcePort, TestUtil.getServerAttr(Provisioning.A_zimbraPop3BindPort));
-        attrs.put(Provisioning.A_zimbraDataSourceUsername, "user2");
-        attrs.put(Provisioning.A_zimbraDataSourcePassword, TestUtil.DEFAULT_PASSWORD);
-        attrs.put(Provisioning.A_zimbraDataSourceFolderId, Integer.toString(Mailbox.ID_FOLDER_INBOX));
-        attrs.put(Provisioning.A_zimbraDataSourceConnectionType, ConnectionType.cleartext.toString());
-        attrs.put(Provisioning.A_zimbraDataSourceLeaveOnServer, LdapConstants.LDAP_TRUE);
+        attrs.put(Provisioning.A_zmailDataSourceEnabled, LdapConstants.LDAP_TRUE);
+        attrs.put(Provisioning.A_zmailDataSourceHost, "localhost");
+        attrs.put(Provisioning.A_zmailDataSourcePort, TestUtil.getServerAttr(Provisioning.A_zmailPop3BindPort));
+        attrs.put(Provisioning.A_zmailDataSourceUsername, "user2");
+        attrs.put(Provisioning.A_zmailDataSourcePassword, TestUtil.DEFAULT_PASSWORD);
+        attrs.put(Provisioning.A_zmailDataSourceFolderId, Integer.toString(Mailbox.ID_FOLDER_INBOX));
+        attrs.put(Provisioning.A_zmailDataSourceConnectionType, ConnectionType.cleartext.toString());
+        attrs.put(Provisioning.A_zmailDataSourceLeaveOnServer, LdapConstants.LDAP_TRUE);
         DataSource ds = prov.createDataSource(account, DataSourceType.pop3, DS_NAME, attrs);
 
         // Make sure error status is not set.
@@ -151,7 +151,7 @@ public class TestDataSource extends TestCase {
 
         // Change to an invalid password, make sure error status is set.
         attrs.clear();
-        attrs.put(Provisioning.A_zimbraDataSourcePassword, "bogus");
+        attrs.put(Provisioning.A_zmailDataSourcePassword, "bogus");
         prov.modifyDataSource(account, ds.getId(), attrs);
         zds = TestUtil.getDataSource(mbox, DS_NAME);
         long startTimestamp = System.currentTimeMillis() - 1000; // timestamp is returned in seconds, not millis
@@ -159,7 +159,7 @@ public class TestDataSource extends TestCase {
         confirmErrorStatus(mbox, startTimestamp);
 
         // Fix password, make sure that error status is reset (bug 39050).
-        attrs.put(Provisioning.A_zimbraDataSourcePassword, TestUtil.DEFAULT_PASSWORD);
+        attrs.put(Provisioning.A_zmailDataSourcePassword, TestUtil.DEFAULT_PASSWORD);
         prov.modifyDataSource(account, ds.getId(), attrs);
         confirmErrorStatus(mbox, null);
 
@@ -222,13 +222,13 @@ public class TestDataSource extends TestCase {
         Provisioning prov = Provisioning.getInstance();
         Account account = TestUtil.getAccount(USER_NAME);
         Map<String, Object> attrs = new HashMap<String, Object>();
-        attrs.put(Provisioning.A_zimbraDataSourceEnabled, LdapConstants.LDAP_FALSE);
-        attrs.put(Provisioning.A_zimbraDataSourceHost, "testhost");
-        attrs.put(Provisioning.A_zimbraDataSourcePort, "0");
-        attrs.put(Provisioning.A_zimbraDataSourceUsername, "testuser");
-        attrs.put(Provisioning.A_zimbraDataSourcePassword, "testpass");
-        attrs.put(Provisioning.A_zimbraDataSourceFolderId, "1");
-        attrs.put(Provisioning.A_zimbraDataSourceConnectionType, ConnectionType.cleartext.toString());
+        attrs.put(Provisioning.A_zmailDataSourceEnabled, LdapConstants.LDAP_FALSE);
+        attrs.put(Provisioning.A_zmailDataSourceHost, "testhost");
+        attrs.put(Provisioning.A_zmailDataSourcePort, "0");
+        attrs.put(Provisioning.A_zmailDataSourceUsername, "testuser");
+        attrs.put(Provisioning.A_zmailDataSourcePassword, "testpass");
+        attrs.put(Provisioning.A_zmailDataSourceFolderId, "1");
+        attrs.put(Provisioning.A_zmailDataSourceConnectionType, ConnectionType.cleartext.toString());
         String name = NAME_PREFIX + " testNegativePollingInterval";
         DataSource ds = prov.createDataSource(account, DataSourceType.pop3, name, attrs);
 
@@ -238,14 +238,14 @@ public class TestDataSource extends TestCase {
 
         // Test polling interval = 0.
         attrs.clear();
-        attrs.put(Provisioning.A_zimbraDataSourcePollingInterval, "0");
+        attrs.put(Provisioning.A_zmailDataSourcePollingInterval, "0");
         prov.modifyDataSource(account, ds.getId(), attrs);
         ds = account.getDataSourceByName(name);
         assertFalse(ds.isScheduled());
 
         // Test polling interval > 0.
         attrs.clear();
-        attrs.put(Provisioning.A_zimbraDataSourcePollingInterval, "365d");
+        attrs.put(Provisioning.A_zmailDataSourcePollingInterval, "365d");
         prov.modifyDataSource(account, ds.getId(), attrs);
         ds = account.getDataSourceByName(name);
         assertTrue(ds.isScheduled());
@@ -262,14 +262,14 @@ public class TestDataSource extends TestCase {
 
         Provisioning prov = Provisioning.getInstance();
         Map<String, Object> attrs = new HashMap<String, Object>();
-        attrs.put(Provisioning.A_zimbraDataSourceEnabled, LdapConstants.LDAP_FALSE);
-        attrs.put(Provisioning.A_zimbraDataSourceHost, "localhost");
-        int port = Integer.parseInt(TestUtil.getServerAttr(Provisioning.A_zimbraPop3BindPort));
-        attrs.put(Provisioning.A_zimbraDataSourcePort, Integer.toString(port));
-        attrs.put(Provisioning.A_zimbraDataSourceUsername, "user2");
-        attrs.put(Provisioning.A_zimbraDataSourcePassword, "test123");
-        attrs.put(Provisioning.A_zimbraDataSourceFolderId, folder.getId());
-        attrs.put(Provisioning.A_zimbraDataSourceConnectionType, ConnectionType.cleartext.toString());
+        attrs.put(Provisioning.A_zmailDataSourceEnabled, LdapConstants.LDAP_FALSE);
+        attrs.put(Provisioning.A_zmailDataSourceHost, "localhost");
+        int port = Integer.parseInt(TestUtil.getServerAttr(Provisioning.A_zmailPop3BindPort));
+        attrs.put(Provisioning.A_zmailDataSourcePort, Integer.toString(port));
+        attrs.put(Provisioning.A_zmailDataSourceUsername, "user2");
+        attrs.put(Provisioning.A_zmailDataSourcePassword, "test123");
+        attrs.put(Provisioning.A_zmailDataSourceFolderId, folder.getId());
+        attrs.put(Provisioning.A_zmailDataSourceConnectionType, ConnectionType.cleartext.toString());
         String dsName = NAME_PREFIX + " testMigratePollingInterval";
         DataSource ds = prov.createDataSource(account, DataSourceType.pop3, dsName, attrs);
 
@@ -289,10 +289,10 @@ public class TestDataSource extends TestCase {
         cos = account.getCOS();
         ds = account.getDataSourceByName(dsName);
 
-        assertEquals("1h", account.getAttr(Provisioning.A_zimbraDataSourcePop3PollingInterval));
-        assertEquals("1h", account.getAttr(Provisioning.A_zimbraDataSourceImapPollingInterval));
-        assertEquals("2h", cos.getAttr(Provisioning.A_zimbraDataSourcePop3PollingInterval));
-        assertEquals("2h", cos.getAttr(Provisioning.A_zimbraDataSourceImapPollingInterval));
+        assertEquals("1h", account.getAttr(Provisioning.A_zmailDataSourcePop3PollingInterval));
+        assertEquals("1h", account.getAttr(Provisioning.A_zmailDataSourceImapPollingInterval));
+        assertEquals("2h", cos.getAttr(Provisioning.A_zmailDataSourcePop3PollingInterval));
+        assertEquals("2h", cos.getAttr(Provisioning.A_zmailDataSourceImapPollingInterval));
     }
 
     /**
@@ -310,8 +310,8 @@ public class TestDataSource extends TestCase {
         TestUtil.addMessage(mbox, subject, sourceFolder.getId());
 
         // Create destination folder that syncs to the source folder via RSS.
-        String urlString = String.format("https://%s:%s/home/%s%s.rss", TestUtil.getServerAttr(Provisioning.A_zimbraServiceHostname),
-                                            TestUtil.getServerAttr(Provisioning.A_zimbraMailSSLPort), USER_NAME, sourceFolder.getPath());
+        String urlString = String.format("https://%s:%s/home/%s%s.rss", TestUtil.getServerAttr(Provisioning.A_zmailServiceHostname),
+                                            TestUtil.getServerAttr(Provisioning.A_zmailMailSSLPort), USER_NAME, sourceFolder.getPath());
         urlString = HttpUtil.encodePath(urlString);
         ZFolder rssFolder = mbox.createFolder(parentId, NAME_PREFIX + " testRss destination", null, null, null, urlString);
 
@@ -362,7 +362,7 @@ public class TestDataSource extends TestCase {
             folder = mbox.createFolder(parentId, NAME_PREFIX + " testCal", ZFolder.View.appointment, null, null, urlString);
         } catch (ServiceException e) {
             assertEquals(ServiceException.RESOURCE_UNREACHABLE, e.getCode());
-            ZimbraLog.test.warn("Unable to test calendar data source for %s: %s", urlString, e.toString());
+            ZmailLog.test.warn("Unable to test calendar data source for %s: %s", urlString, e.toString());
             return;
         }
 
@@ -375,7 +375,7 @@ public class TestDataSource extends TestCase {
         // is running on a box that's not connected to the internet.
         String error = mbox.testDataSource(ds);
         if (error != null) {
-            ZimbraLog.test.warn("Unable to test iCal data source for %s: %s.", urlString, error);
+            ZmailLog.test.warn("Unable to test iCal data source for %s: %s.", urlString, error);
             return;
         }
 

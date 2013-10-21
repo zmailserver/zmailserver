@@ -16,15 +16,15 @@
 /*
  * Created on Apr 18, 2004
  */
-package com.zimbra.cs.mime;
+package org.zmail.cs.mime;
 
 import java.util.List;
 
 import javax.mail.MessagingException;
 import javax.mail.internet.MimePart;
 
-import com.zimbra.common.mime.ContentType;
-import com.zimbra.common.mime.MimeConstants;
+import org.zmail.common.mime.ContentType;
+import org.zmail.common.mime.MimeConstants;
 
 public class MPartInfo {
     MimePart mPart;

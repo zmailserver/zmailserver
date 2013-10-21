@@ -16,7 +16,7 @@
 /*
  * Created on 2005. 6. 7.
  */
-package com.zimbra.cs.store;
+package org.zmail.cs.store;
 
 import java.io.File;
 import java.io.IOException;
@@ -28,9 +28,9 @@ import java.util.zip.GZIPInputStream;
 import org.apache.commons.io.FileUtils;
 
 import com.google.common.base.Objects;
-import com.zimbra.common.util.ByteUtil;
-import com.zimbra.common.util.FileUtil;
-import com.zimbra.common.zmime.ZSharedFileInputStream;
+import org.zmail.common.util.ByteUtil;
+import org.zmail.common.util.FileUtil;
+import org.zmail.common.zmime.ZSharedFileInputStream;
 
 /**
  * Represents a blob in blob store incoming directory.  An incoming blob

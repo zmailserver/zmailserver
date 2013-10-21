@@ -94,11 +94,11 @@ This document should get updated when we add SASL IMAP support, etc.
 
 13. Create IMAP service principle
 
-For each server, create a service principle for the Zimbra IMAP service.
+For each server, create a service principle for the Zmail IMAP service.
 This should be of the form "imap/<host>@<realm>" where <host> is the fully
-qualified host name of the Zimbra server and <realm> is the Kerberos
+qualified host name of the Zmail server and <realm> is the Kerberos
 realm name. The server host name *must* match the the value of the
-"zimbra_server_hostname" local configuration property. For example:
+"zmail_server_hostname" local configuration property. For example:
 
 macpro:/usr/local schemers$ /usr/local/sbin/kadmin.local
 Authenticating as principal schemers/admin@MACPRO.LOCAL with password.
@@ -110,54 +110,54 @@ Principal "imap/macpro.local@MACPRO.LOCAL" created.
 
 For each server, a keytab file must be created with the service principle
 key. This file should be located in $ZIMBRA_ROOT/conf/krb5.keytab where
-ZIMBRA_ROOT is the Zimbra installation directory (i.e. /opt/zimbra).
+ZIMBRA_ROOT is the Zmail installation directory (i.e. /opt/zmail).
 
 macpro:/usr/local schemers$ /usr/local/sbin/kadmin.local
 Authenticating as principal schemers/admin@MACPRO.LOCAL with password.
-kadmin:  ktadd -keytab /opt/zimbra/conf/krb5.keytab imap/macpro.local@MACPRO.LOCAL
-Entry for principal imap/macpro.local@MACPRO.LOCAL with kvno 3, encryption type Triple DES cbc mode with HMAC/sha1 added to keytab WRFILE:/opt/zimbra/conf/krb5.keytab.
-Entry for principal imap/macpro.local@MACPRO.LOCAL with kvno 3, encryption type DES cbc mode with CRC-32 added to keytab WRFILE:/opt/zimbra/conf/krb5.
+kadmin:  ktadd -keytab /opt/zmail/conf/krb5.keytab imap/macpro.local@MACPRO.LOCAL
+Entry for principal imap/macpro.local@MACPRO.LOCAL with kvno 3, encryption type Triple DES cbc mode with HMAC/sha1 added to keytab WRFILE:/opt/zmail/conf/krb5.keytab.
+Entry for principal imap/macpro.local@MACPRO.LOCAL with kvno 3, encryption type DES cbc mode with CRC-32 added to keytab WRFILE:/opt/zmail/conf/krb5.
 
 15. Set ZIMBRA_KERBEROS_REALM environment variable
 
-This is used by the build script to automatically provision zimbraForeignPrinciple for the 'user1' test user account. Otherwise, the default is to use the ZIMBRA.COM realm.
+This is used by the build script to automatically provision zmailForeignPrinciple for the 'user1' test user account. Otherwise, the default is to use the ZIMBRA.COM realm.
 
 
 ===================================================================================
-Provisioning Tasks on the Zimbra side:
+Provisioning Tasks on the Zmail side:
 
 (A) Prepare a domain for kerberos5 authentication :
     1. Set domain authentication mechanism to kerberos5
-           zmprov md example.com zimbraAuthMech kerberos5
+           zmprov md example.org zmailAuthMech kerberos5
 
-    2. Set domain zimbraAuthKerberos5Realm to the kerberos5 realm in which users in this Zimbra domain are created in the kerberos database
-           zmprov md example.com zimbraAuthKerberos5Realm EXAMPLE.COM
+    2. Set domain zmailAuthKerberos5Realm to the kerberos5 realm in which users in this Zmail domain are created in the kerberos database
+           zmprov md example.org zmailAuthKerberos5Realm EXAMPLE.COM
 
 
-(B) Provision Zimbra accounts  
-    When a user attempts to login to Zimbra as user/password, and when the domain's zimbraAuthMech is "kerberos5", 
+(B) Provision Zmail accounts  
+    When a user attempts to login to Zmail as user/password, and when the domain's zmailAuthMech is "kerberos5", 
     system will authenticate to a kerberos KDC instead of LDAP.
     
     Kerberos credential for the user is:
         password: password entered by user
         principal: the kerberos principal for a user can be resolved by one of the two ways.
-                   Method 1.  {localpart-of-Zimbra-email-address}@{zimbraAuthKerberos5Realm} 
+                   Method 1.  {localpart-of-Zmail-email-address}@{zmailAuthKerberos5Realm} 
                         For example, for user1@example.com, the kerberos principal will be user1@EXAMPLE.COM
                 
                    or
                 
-                   Method 2. Kerberos principal can also be resolved on a per-account basis, instead of using the realm defined in zimbraAuthKerberos5Realm.
-                       This allows accounts in the same Zimbra domain to be mapped to different kerberos realms.  
-                       To do this, Set the account's zimbraForeignPrincipal as kerberos5:{kerberos5-principal}.  
-                       If zimbraForeignPrincipal of the account starts with "kerberos5:", system will authenticate to kerberos using the text appears after the 
-                       "kerberos5:" in zimbraForeignPrincipal as the principal.  
+                   Method 2. Kerberos principal can also be resolved on a per-account basis, instead of using the realm defined in zmailAuthKerberos5Realm.
+                       This allows accounts in the same Zmail domain to be mapped to different kerberos realms.  
+                       To do this, Set the account's zmailForeignPrincipal as kerberos5:{kerberos5-principal}.  
+                       If zmailForeignPrincipal of the account starts with "kerberos5:", system will authenticate to kerberos using the text appears after the 
+                       "kerberos5:" in zmailForeignPrincipal as the principal.  
                 
                        For example:
-                           zmprov ma user2@example.com +zimbraForeignPrincipal kerberos5:foo@MYREALM.COM
+                           zmprov ma user2@example.com +zmailForeignPrincipal kerberos5:foo@MYREALM.COM
                 
                        In the above example, for user2@example.com, the kerberos principal will be foo@MYREALM.COM
                        
-                    Note, method 2 take precedence over method 1.  That is, if the account has a zimbraForeignPrincipal in the form of 
+                    Note, method 2 take precedence over method 1.  That is, if the account has a zmailForeignPrincipal in the form of 
                     "kerberos5:{kerberos5-principal}", system will resolve the kerberos principal using method 2, otherwise it will use method 1.   
                     If authentication failed using method 2, it does NOT fallback to method 1.
 

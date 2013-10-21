@@ -13,7 +13,7 @@
  * ***** END LICENSE BLOCK *****
  */
 
-package com.zimbra.qa.unittest.prov.ldap;
+package org.zmail.qa.unittest.prov.ldap;
 
 import java.io.BufferedWriter;
 import java.io.IOException;
@@ -38,23 +38,23 @@ import org.apache.commons.httpclient.params.HttpMethodParams;
 import org.junit.*;
 import static org.junit.Assert.*;
 
-import com.zimbra.common.account.Key;
-import com.zimbra.common.account.ProvisioningConstants;
-import com.zimbra.common.httpclient.HttpClientUtil;
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.cs.account.Account;
-import com.zimbra.cs.account.AccountServiceException;
-import com.zimbra.cs.account.AttributeManager.IDNType;
-import com.zimbra.cs.account.ldap.LdapProv;
-import com.zimbra.cs.account.CalendarResource;
-import com.zimbra.cs.account.Config;
-import com.zimbra.cs.account.DistributionList;
-import com.zimbra.cs.account.IDNUtil;
-import com.zimbra.cs.account.Domain;
-import com.zimbra.cs.account.NamedEntry;
-import com.zimbra.cs.account.Provisioning;
-import com.zimbra.cs.service.UserServlet;
-import com.zimbra.qa.unittest.prov.Names;
+import org.zmail.common.account.Key;
+import org.zmail.common.account.ProvisioningConstants;
+import org.zmail.common.httpclient.HttpClientUtil;
+import org.zmail.common.service.ServiceException;
+import org.zmail.cs.account.Account;
+import org.zmail.cs.account.AccountServiceException;
+import org.zmail.cs.account.AttributeManager.IDNType;
+import org.zmail.cs.account.ldap.LdapProv;
+import org.zmail.cs.account.CalendarResource;
+import org.zmail.cs.account.Config;
+import org.zmail.cs.account.DistributionList;
+import org.zmail.cs.account.IDNUtil;
+import org.zmail.cs.account.Domain;
+import org.zmail.cs.account.NamedEntry;
+import org.zmail.cs.account.Provisioning;
+import org.zmail.cs.service.UserServlet;
+import org.zmail.qa.unittest.prov.Names;
 
 /*
  * 
@@ -111,7 +111,7 @@ public class TestProvIDN extends LdapTest {
         Map<String, Object> attrs = new HashMap<String, Object>();
         attrs.put(Provisioning.A_description, "====="+description+"=====");
         attrs.put(Provisioning.A_displayName, email);
-        attrs.put(Provisioning.A_zimbraCalResType, "Equipment");
+        attrs.put(Provisioning.A_zmailCalResType, "Equipment");
         CalendarResource cr = prov.createCalendarResource(email, PASSWORD, attrs);
         assertNotNull(cr);
         return cr;
@@ -268,15 +268,15 @@ public class TestProvIDN extends LdapTest {
     private void setAddressAttrsTest(EntryType entryType, NamedEntry entry, Names.IDNName name) throws Exception {
         Map<String, Object> attrs = new HashMap<String, Object>();
         
-        attrs.put(Provisioning.A_zimbraMailCanonicalAddress, "canonical-" + name.uName());
-        attrs.put("+" + Provisioning.A_zimbraMailForwardingAddress, "extra-1-forwarding-" + name.uName());
-        attrs.put("+" + Provisioning.A_zimbraMailForwardingAddress, "extra-2-forwarding-" + name.uName());
-        attrs.put("+" + Provisioning.A_zimbraMailDeliveryAddress, "extra-1-delivery-" + name.uName());
-        attrs.put("+" + Provisioning.A_zimbraMailDeliveryAddress, "extra-2-delivery-" + name.uName());
+        attrs.put(Provisioning.A_zmailMailCanonicalAddress, "canonical-" + name.uName());
+        attrs.put("+" + Provisioning.A_zmailMailForwardingAddress, "extra-1-forwarding-" + name.uName());
+        attrs.put("+" + Provisioning.A_zmailMailForwardingAddress, "extra-2-forwarding-" + name.uName());
+        attrs.put("+" + Provisioning.A_zmailMailDeliveryAddress, "extra-1-delivery-" + name.uName());
+        attrs.put("+" + Provisioning.A_zmailMailDeliveryAddress, "extra-2-delivery-" + name.uName());
         
-        attrs.put("+" + Provisioning.A_zimbraMailCatchAllAddress, "@" + name.uName());
-        attrs.put("+" + Provisioning.A_zimbraMailCatchAllCanonicalAddress, "@" + name.uName());
-        attrs.put("+" + Provisioning.A_zimbraMailCatchAllForwardingAddress, "@" + name.uName());
+        attrs.put("+" + Provisioning.A_zmailMailCatchAllAddress, "@" + name.uName());
+        attrs.put("+" + Provisioning.A_zmailMailCatchAllCanonicalAddress, "@" + name.uName());
+        attrs.put("+" + Provisioning.A_zmailMailCatchAllForwardingAddress, "@" + name.uName());
         
         prov.modifyAttrs(entry, attrs);
     }
@@ -327,8 +327,8 @@ public class TestProvIDN extends LdapTest {
         
         Config config = prov.getConfig();
         
-        // save he current value of zimbraAllowNonLDHCharsInDomain
-        String curAllowNonLDH = config.getAttr(Provisioning.A_zimbraAllowNonLDHCharsInDomain);
+        // save he current value of zmailAllowNonLDHCharsInDomain
+        String curAllowNonLDH = config.getAttr(Provisioning.A_zmailAllowNonLDHCharsInDomain);
         
         // test values
         String goodEnglish       = "good" + "." + BASE_DOMAIN_NAME;
@@ -337,9 +337,9 @@ public class TestProvIDN extends LdapTest {
         String LDHIDN_comma      = makeTestDomainName("ldh'ldh");
         
         
-        // when zimbraAllowNonLDHCharsInDomain is TRUE
+        // when zmailAllowNonLDHCharsInDomain is TRUE
         Map<String, Object> attrs = new HashMap<String, Object>();
-        attrs.put(Provisioning.A_zimbraAllowNonLDHCharsInDomain, ProvisioningConstants.TRUE);
+        attrs.put(Provisioning.A_zmailAllowNonLDHCharsInDomain, ProvisioningConstants.TRUE);
         prov.modifyAttrs(config, attrs);
         
         String prefix = "allowtest.";  // so that we don't run into domain exist problem
@@ -348,9 +348,9 @@ public class TestProvIDN extends LdapTest {
         doTestInvalidNames(prefix + LDHEnglish_comma, true);  // test failed. javamail does not allow it anymore, fix? bug 41123
         doTestInvalidNames(prefix + LDHIDN_comma, true);      // test failed. javamail does not allow it anymore. fix? bug 41123
         
-        // when zimbraAllowNonLDHCharsInDomain is FALSE
+        // when zmailAllowNonLDHCharsInDomain is FALSE
         attrs.clear();
-        attrs.put(Provisioning.A_zimbraAllowNonLDHCharsInDomain, ProvisioningConstants.FALSE);
+        attrs.put(Provisioning.A_zmailAllowNonLDHCharsInDomain, ProvisioningConstants.FALSE);
         prov.modifyAttrs(config, attrs);
         
         prefix = "notallowtest.";
@@ -361,7 +361,7 @@ public class TestProvIDN extends LdapTest {
         
         // restore the orig config value back
         attrs.clear();
-        attrs.put(Provisioning.A_zimbraAllowNonLDHCharsInDomain, curAllowNonLDH);
+        attrs.put(Provisioning.A_zmailAllowNonLDHCharsInDomain, curAllowNonLDH);
         prov.modifyAttrs(config, attrs);
     }
     
@@ -502,7 +502,7 @@ public class TestProvIDN extends LdapTest {
         
         /*
         Cookie authCookie = new Cookie(restURL.getURL().getHost(), "ZM_AUTH_TOKEN", mAuthToken, "/", null, false);
-        Cookie sessionCookie = new Cookie(restURL.getURL().getHost(), "JSESSIONID", mSessionId, "/zimbra", null, false);
+        Cookie sessionCookie = new Cookie(restURL.getURL().getHost(), "JSESSIONID", mSessionId, "/zmail", null, false);
         initialState.addCookie(authCookie);
         initialState.addCookie(sessionCookie);
         */

@@ -15,17 +15,17 @@
 /*
  * Created on Aug 31, 2005
  */
-package com.zimbra.cs.session;
+package org.zmail.cs.session;
 
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.common.util.Constants;
-import com.zimbra.cs.account.Domain;
-import com.zimbra.cs.account.EntrySearchFilter;
-import com.zimbra.cs.account.NamedEntry;
-import com.zimbra.cs.account.SearchDirectoryOptions;
-import com.zimbra.cs.account.SearchDirectoryOptions.SortOpt;
-import com.zimbra.cs.account.ldap.LdapEntrySearchFilter;
-import com.zimbra.cs.ldap.ZLdapFilterFactory.FilterId;
+import org.zmail.common.service.ServiceException;
+import org.zmail.common.util.Constants;
+import org.zmail.cs.account.Domain;
+import org.zmail.cs.account.EntrySearchFilter;
+import org.zmail.cs.account.NamedEntry;
+import org.zmail.cs.account.SearchDirectoryOptions;
+import org.zmail.cs.account.SearchDirectoryOptions.SortOpt;
+import org.zmail.cs.account.ldap.LdapEntrySearchFilter;
+import org.zmail.cs.ldap.ZLdapFilterFactory.FilterId;
 
 import java.util.HashMap;
 import java.util.List;
@@ -72,13 +72,13 @@ public class AdminSession extends Session {
         DirectorySearchParams params = new DirectorySearchParams(searchOpts, rightChecker);
         
         boolean needToSearch =  (offset == 0) || (mSearchParams == null) || !mSearchParams.equals(params);
-        //ZimbraLog.account.info("this="+this+" mSearchParams="+mSearchParams+" equal="+!params.equals(mSearchParams));
+        //ZmailLog.account.info("this="+this+" mSearchParams="+mSearchParams+" equal="+!params.equals(mSearchParams));
         if (needToSearch) {
-            //ZimbraLog.account.info("doing new search: "+query+ " offset="+offset);
+            //ZmailLog.account.info("doing new search: "+query+ " offset="+offset);
             params.doSearch();
             mSearchParams = params;
         } else {
-            //ZimbraLog.account.info("cached search: "+query+ " offset="+offset);
+            //ZmailLog.account.info("cached search: "+query+ " offset="+offset);
         }
         return mSearchParams.getResult();
     }

@@ -161,10 +161,10 @@ saved-search-related:     (UNIMPLEMENTED)
 
   my:{name-of-saved-search}
 
-  i.e., could have a saved search of "domain:example.zimbra.com"
-  called "zimbra" and say:
+  i.e., could have a saved search of "domain:example.zmail.com"
+  called "zmail" and say:
 
-  my:zimbra
+  my:zmail
 
 object-related fields:
 

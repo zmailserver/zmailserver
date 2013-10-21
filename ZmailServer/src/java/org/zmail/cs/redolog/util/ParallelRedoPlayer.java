@@ -13,16 +13,16 @@
  * ***** END LICENSE BLOCK *****
  */
 
-package com.zimbra.cs.redolog.util;
+package org.zmail.cs.redolog.util;
 
 import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.LinkedBlockingQueue;
 
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.common.util.ZimbraLog;
-import com.zimbra.cs.redolog.RedoPlayer;
-import com.zimbra.cs.redolog.op.RedoableOp;
-import com.zimbra.cs.util.Zimbra;
+import org.zmail.common.service.ServiceException;
+import org.zmail.common.util.ZmailLog;
+import org.zmail.cs.redolog.RedoPlayer;
+import org.zmail.cs.redolog.op.RedoableOp;
+import org.zmail.cs.util.Zmail;
 
 public class ParallelRedoPlayer extends RedoPlayer {
 
@@ -32,7 +32,7 @@ public class ParallelRedoPlayer extends RedoPlayer {
                               boolean ignoreReplayErrors, boolean skipDeleteOps,
                               int numThreads, int queueCapacity, boolean handleMailboxConflict) {
         super(writable, unloggedReplay, ignoreReplayErrors, skipDeleteOps, handleMailboxConflict);
-        ZimbraLog.redolog.debug("Starting ParallelRedoPlayer");
+        ZmailLog.redolog.debug("Starting ParallelRedoPlayer");
         numThreads = Math.max(numThreads, 1);
         mPlayerThreads = new PlayerThread[numThreads];
         for (int i = 0; i < numThreads; i++) {
@@ -45,7 +45,7 @@ public class ParallelRedoPlayer extends RedoPlayer {
     }
 
     @Override public void shutdown() {
-        ZimbraLog.redolog.debug("Shutting down ParallelRedoPlayer");
+        ZmailLog.redolog.debug("Shutting down ParallelRedoPlayer");
         try {
             super.shutdown();
         } finally {
@@ -53,7 +53,7 @@ public class ParallelRedoPlayer extends RedoPlayer {
                 mPlayerThreads[i].shutdown();
             }
         }
-        ZimbraLog.redolog.debug("ParallelRedoPlayer shutdown complete");
+        ZmailLog.redolog.debug("ParallelRedoPlayer shutdown complete");
     }
 
     @Override protected void playOp(RedoableOp op) throws Exception {
@@ -62,8 +62,8 @@ public class ParallelRedoPlayer extends RedoPlayer {
         if (mboxId == RedoableOp.MAILBOX_ID_ALL || mboxId == RedoableOp.UNKNOWN_ID) {
             // Multi-mailbox ops are executed by the main thread to prevent later ops
             // that depend on this op's result aren't run out of order.
-            if (ZimbraLog.redolog.isDebugEnabled())
-                ZimbraLog.redolog.info("Executing: " + op.toString());
+            if (ZmailLog.redolog.isDebugEnabled())
+                ZmailLog.redolog.info("Executing: " + op.toString());
             op.redo();
         } else {
             // Ops for the same mailbox must be played back in order.  To ensure that,
@@ -73,8 +73,8 @@ public class ParallelRedoPlayer extends RedoPlayer {
             int index = Math.abs(mboxId % mPlayerThreads.length);
             PlayerThread player = mPlayerThreads[index];
             RedoTask task = new RedoTask(op);
-            if (ZimbraLog.redolog.isDebugEnabled())
-                ZimbraLog.redolog.info("Enqueuing: " + op.toString());
+            if (ZmailLog.redolog.isDebugEnabled())
+                ZmailLog.redolog.info("Enqueuing: " + op.toString());
             try {
                 player.enqueue(task);
             } catch (InterruptedException e) {}
@@ -165,8 +165,8 @@ public class ParallelRedoPlayer extends RedoPlayer {
 
                 RedoableOp op = task.getOp();
                 try {
-                    if (ZimbraLog.redolog.isDebugEnabled()) {
-                        ZimbraLog.redolog.info("Executing: " + op.toString());
+                    if (ZmailLog.redolog.isDebugEnabled()) {
+                        ZmailLog.redolog.info("Executing: " + op.toString());
                     }
                     if (handleMailboxConflict) {
                         redoOpWithMboxConflict(op);
@@ -174,9 +174,9 @@ public class ParallelRedoPlayer extends RedoPlayer {
                         op.redo();
                     }
                 } catch (OutOfMemoryError oome) {
-                    Zimbra.halt("Out of memory while executing redo op", oome);
+                    Zmail.halt("Out of memory while executing redo op", oome);
                 } catch (Throwable e) {
-                    ZimbraLog.redolog.error("Unable to execute redo op: " + op.toString(), e);
+                    ZmailLog.redolog.error("Unable to execute redo op: " + op.toString(), e);
                     if (!ignoreReplayErrors())
                         raiseError(e);
                 }

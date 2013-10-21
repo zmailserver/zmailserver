@@ -12,7 +12,7 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.account.accesscontrol;
+package org.zmail.cs.account.accesscontrol;
 
 import java.io.BufferedWriter;
 import java.io.File;
@@ -48,20 +48,20 @@ import org.dom4j.io.XMLWriter;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Multimap;
 import com.google.common.collect.TreeMultimap;
-import com.zimbra.common.localconfig.DebugConfig;
-import com.zimbra.common.localconfig.LC;
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.common.util.CliUtil;
-import com.zimbra.common.util.SetUtil;
-import com.zimbra.common.util.StringUtil;
-import com.zimbra.common.util.ZimbraLog;
+import org.zmail.common.localconfig.DebugConfig;
+import org.zmail.common.localconfig.LC;
+import org.zmail.common.service.ServiceException;
+import org.zmail.common.util.CliUtil;
+import org.zmail.common.util.SetUtil;
+import org.zmail.common.util.StringUtil;
+import org.zmail.common.util.ZmailLog;
 
-import com.zimbra.cs.account.AccountServiceException;
-import com.zimbra.cs.account.AttributeClass;
-import com.zimbra.cs.account.AttributeManager;
-import com.zimbra.cs.account.FileGenUtil;
-import com.zimbra.cs.account.accesscontrol.Right.RightType;
-import com.zimbra.cs.account.accesscontrol.Rights.Admin;
+import org.zmail.cs.account.AccountServiceException;
+import org.zmail.cs.account.AttributeClass;
+import org.zmail.cs.account.AttributeManager;
+import org.zmail.cs.account.FileGenUtil;
+import org.zmail.cs.account.accesscontrol.Right.RightType;
+import org.zmail.cs.account.accesscontrol.Rights.Admin;
 
 
 public class RightManager {
@@ -104,8 +104,8 @@ public class RightManager {
         private static final HashSet<String> sCoreRightDefFiles = new HashSet<String>();
         
         static void init(boolean unittest) {
-            sCoreRightDefFiles.add("zimbra-rights.xml");
-            sCoreRightDefFiles.add("zimbra-user-rights.xml");
+            sCoreRightDefFiles.add("zmail-rights.xml");
+            sCoreRightDefFiles.add("zmail-user-rights.xml");
             
             if (unittest || DebugConfig.running_unittest) {
                 sCoreRightDefFiles.add("rights-unittest.xml");
@@ -136,7 +136,7 @@ public class RightManager {
     
     public static synchronized RightManager getInstance(boolean unittest) 
     throws ServiceException {
-        return getInstance(LC.zimbra_rights_directory.value(), unittest);
+        return getInstance(LC.zmail_rights_directory.value(), unittest);
     }
     
     private static synchronized RightManager getInstance(String dir, boolean unittest) 
@@ -150,7 +150,7 @@ public class RightManager {
         try {
             Right.init(mInstance);
         } catch (ServiceException e) {
-            ZimbraLog.acl.error("failed to initialize known right from: " + dir, e);
+            ZmailLog.acl.error("failed to initialize known right from: " + dir, e);
             throw e;
         }
         return mInstance;
@@ -167,7 +167,7 @@ public class RightManager {
             throw ServiceException.FAILURE("rights directory is not a directory: " + dir, null);
         }
         
-        ZimbraLog.acl.debug("Loading rights from " + fdir.getAbsolutePath());
+        ZmailLog.acl.debug("Loading rights from " + fdir.getAbsolutePath());
                 
         File[] files = fdir.listFiles();
         List<File> yetToProcess = new ArrayList<File>(Arrays.asList(files));
@@ -177,7 +177,7 @@ public class RightManager {
             File file = yetToProcess.get(0);
             
             if (!file.getPath().endsWith(".xml") || !file.isFile()) {
-                ZimbraLog.acl.warn("while loading rights, ignoring none .xml file or sub folder: " + file);
+                ZmailLog.acl.warn("while loading rights, ignoring none .xml file or sub folder: " + file);
                 yetToProcess.remove(file);
                 continue;
             }
@@ -419,13 +419,13 @@ public class RightManager {
         if (clazz == null)
             return null;
         if (clazz.indexOf('.') == -1)
-            clazz = "com.zimbra.cs.account.accesscontrol.fallback." + clazz;
+            clazz = "org.zmail.cs.account.accesscontrol.fallback." + clazz;
         try {
             cb = (CheckRightFallback) Class.forName(clazz).newInstance();
             if (cb != null)
                 cb.setRight(right);
         } catch (Exception e) {
-            ZimbraLog.acl.warn("loadFallback " + clazz + " for right " + right.getName() +  " caught exception", e);
+            ZmailLog.acl.warn("loadFallback " + clazz + " for right " + right.getName() +  " caught exception", e);
         }
         return cb;
     }
@@ -484,7 +484,7 @@ public class RightManager {
             } else if (elem.getName().equals(E_RIGHT)) {
                 if (!seenRight) {
                     seenRight = true;
-                    ZimbraLog.acl.debug("Loading " + file.getAbsolutePath());
+                    ZmailLog.acl.debug("Loading " + file.getAbsolutePath());
                 }
                 loadRight(elem, file, allowPresetRight);
             } else if (elem.getName().equals(E_HELP)) {
@@ -745,7 +745,7 @@ public class RightManager {
         StringBuilder result = new StringBuilder();
         
         result.append(FileGenUtil.genDoNotModifyDisclaimer("#", RightManager.class.getSimpleName()));
-        result.append("# Zimbra rights");
+        result.append("# Zmail rights");
         result.append("\n\n");
         
         genMessageProperties(result, getAllUserRights());
@@ -924,9 +924,9 @@ public class RightManager {
         }
         
         private static void check() throws ServiceException  {
-            ZimbraLog.toolSetupLog4j("DEBUG", "/Users/pshao/sandbox/conf/log4j.properties.phoebe");
+            ZmailLog.toolSetupLog4j("DEBUG", "/Users/pshao/sandbox/conf/log4j.properties.phoebe");
             
-            RightManager rm = new RightManager("/Users/pshao/p4/main/ZimbraServer/conf/rights", false);
+            RightManager rm = new RightManager("/Users/pshao/p4/main/ZmailServer/conf/rights", false);
             System.out.println(rm.dump(null));
         }
         
@@ -1066,7 +1066,7 @@ public class RightManager {
                     FileGenUtil.replaceFile(regenFile, rm.genMessageProperties());
                     break;
                 case genAdminDocs:
-                    // zmjava com.zimbra.cs.account.accesscontrol.RightManager -a genAdminDocs -i /Users/pshao/p4/main/ZimbraServer/conf/rights -o /Users/pshao/temp
+                    // zmjava org.zmail.cs.account.accesscontrol.RightManager -a genAdminDocs -i /Users/pshao/p4/main/ZmailServer/conf/rights -o /Users/pshao/temp
                     rm.genAdminDocs(outputDir);
                     break;
                 case validate:

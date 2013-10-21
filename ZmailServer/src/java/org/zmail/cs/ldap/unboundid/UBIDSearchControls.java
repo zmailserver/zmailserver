@@ -12,15 +12,15 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.ldap.unboundid;
+package org.zmail.cs.ldap.unboundid;
 
 import java.util.Arrays;
 import java.util.List;
 
 import com.unboundid.ldap.sdk.SearchScope;
 
-import com.zimbra.cs.ldap.ZSearchControls;
-import com.zimbra.cs.ldap.ZSearchScope;
+import org.zmail.cs.ldap.ZSearchControls;
+import org.zmail.cs.ldap.ZSearchScope;
 
 
 public class UBIDSearchControls extends ZSearchControls {

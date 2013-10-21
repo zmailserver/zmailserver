@@ -16,33 +16,33 @@ SECTION amavis
 	LOCAL av_notify_user
 	LOCAL ldap_url
 	LOCAL ldap_amavis_password
-	VAR zimbraMtaBlockedExtension
-	VAR zimbraVirusWarnRecipient
-	VAR zimbraSpamKillPercent
-	VAR zimbraSpamTagPercent
-	VAR zimbraSpamSubjectTag
-	VAR zimbraAmavisQuarantineAccount
-	VAR zimbraMtaMyNetworks
-	VAR zimbraDomainMandatoryMailSignatureEnabled
-	VAR zimbraIPMode
-	VAR zimbraQuarantineBannedItems
+	VAR zmailMtaBlockedExtension
+	VAR zmailVirusWarnRecipient
+	VAR zmailSpamKillPercent
+	VAR zmailSpamTagPercent
+	VAR zmailSpamSubjectTag
+	VAR zmailAmavisQuarantineAccount
+	VAR zmailMtaMyNetworks
+	VAR zmailDomainMandatoryMailSignatureEnabled
+	VAR zmailIPMode
+	VAR zmailQuarantineBannedItems
 	RESTART archiving antispam antivirus mta
 
 SECTION antivirus DEPENDS amavis
 	REWRITE conf/clamd.conf.in conf/clamd.conf
 	REWRITE conf/freshclam.conf.in conf/freshclam.conf MODE 0600
-	VAR zimbraVirusWarnAdmin
-	VAR zimbraVirusDefinitionsUpdateFrequency
-	VAR zimbraVirusBlockEncryptedArchive
-  	VAR zimbraMtaMaxMessageSize
+	VAR zmailVirusWarnAdmin
+	VAR zmailVirusDefinitionsUpdateFrequency
+	VAR zmailVirusBlockEncryptedArchive
+  	VAR zmailMtaMaxMessageSize
 	RESTART antivirus mta
 
 SECTION antispam DEPENDS amavis
 	REWRITE conf/salocal.cf.in conf/sa/salocal.cf
 	REWRITE conf/dspam.conf.in conf/dspam.conf
-	VAR zimbraMtaMyNetworks
-	VAR zimbraMtaAntiSpamLockMethod
-	VAR zimbraIPMode
+	VAR zmailMtaMyNetworks
+	VAR zmailMtaAntiSpamLockMethod
+	VAR zmailIPMode
 	LOCAL antispam_mysql_enabled
 	LOCAL antispam_mysql_host
 	LOCAL antispam_mysql_port
@@ -59,62 +59,62 @@ SECTION mta DEPENDS amavis
 	REWRITE postfix/conf/tag_as_foreign.re.in postfix/conf/tag_as_foreign.re
 	REWRITE postfix/conf/tag_as_originating.re.in postfix/conf/tag_as_originating.re
 	REWRITE conf/mta_milter_options.in conf/mta_milter_options
-	VAR zimbraMilterServerEnabled
-	VAR zimbraIPMode
-	VAR zimbraMtaRestriction
-	VAR zimbraMtaFallbackRelayHost
-	VAR zimbraMtaAuthEnabled
-	VAR zimbraMtaBlockedExtension
-	VAR zimbraMtaRecipientDelimiter
-	VAR zimbraMtaMyNetworks
-	VAR zimbraMtaMyOrigin
-	VAR zimbraMtaMyHostname
-	VAR zimbraMilterServerEnabled
-	VAR zimbraMilterServerBindAddress
-	VAR zimbraMilterServerBindPort
-	VAR zimbraMtaSmtpdMilters
-	VAR zimbraMtaNonSmtpdMilters
+	VAR zmailMilterServerEnabled
+	VAR zmailIPMode
+	VAR zmailMtaRestriction
+	VAR zmailMtaFallbackRelayHost
+	VAR zmailMtaAuthEnabled
+	VAR zmailMtaBlockedExtension
+	VAR zmailMtaRecipientDelimiter
+	VAR zmailMtaMyNetworks
+	VAR zmailMtaMyOrigin
+	VAR zmailMtaMyHostname
+	VAR zmailMilterServerEnabled
+	VAR zmailMilterServerBindAddress
+	VAR zmailMilterServerBindPort
+	VAR zmailMtaSmtpdMilters
+	VAR zmailMtaNonSmtpdMilters
 	if LOCAL postfix_enable_smtpd_policyd
 		POSTCONF policy_time_limit				LOCAL postfix_policy_time_limit
 	fi
 	if LOCAL !postfix_enable_smtpd_policyd
 		POSTCONFD policy_time_limit
 	fi
-	if VAR zimbraMtaMyNetworks
-		POSTCONF mynetworks VAR zimbraMtaMyNetworks
+	if VAR zmailMtaMyNetworks
+		POSTCONF mynetworks VAR zmailMtaMyNetworks
 	fi
-	if VAR zimbraMtaMyOrigin
-		POSTCONF myorigin VAR zimbraMtaMyOrigin
+	if VAR zmailMtaMyOrigin
+		POSTCONF myorigin VAR zmailMtaMyOrigin
 	fi
-	if VAR zimbraMtaMyDestination
-		POSTCONF mydestination VAR zimbraMtaMyDestination
+	if VAR zmailMtaMyDestination
+		POSTCONF mydestination VAR zmailMtaMyDestination
 	fi
 	POSTCONF smtpd_milters
-	if VAR zimbraMtaSmtpdMilters
-		POSTCONF smtpd_milters VAR zimbraMtaSmtpdMilters
+	if VAR zmailMtaSmtpdMilters
+		POSTCONF smtpd_milters VAR zmailMtaSmtpdMilters
 	fi
 	POSTCONF non_smtpd_milters
-	if VAR zimbraMtaNonSmtpdMilters
-		POSTCONF non_smtpd_milters VAR zimbraMtaNonSmtpdMilters
+	if VAR zmailMtaNonSmtpdMilters
+		POSTCONF non_smtpd_milters VAR zmailMtaNonSmtpdMilters
 	fi
 	if SERVICE !cbpolicyd
 		POSTCONF smtpd_end_of_data_restrictions
 	fi
-	LOCAL zimbra_server_hostname
+	LOCAL zmail_server_hostname
 	REWRITE conf/postfix_header_checks.in conf/postfix_header_checks
-	POSTCONF myhostname		LOCAL zimbra_server_hostname
-	if VAR zimbraMtaMyHostname
-		POSTCONF myhostname VAR zimbraMtaMyHostname
+	POSTCONF myhostname		LOCAL zmail_server_hostname
+	if VAR zmailMtaMyHostname
+		POSTCONF myhostname VAR zmailMtaMyHostname
 	fi
-	POSTCONF recipient_delimiter	                VAR zimbraMtaRecipientDelimiter
-	POSTCONF smtpd_sasl_auth_enable               VAR zimbraMtaSaslAuthEnable
-	POSTCONF smtpd_tls_auth_only	                VAR zimbraMtaTlsAuthOnly
-	POSTCONF smtpd_tls_security_level			                 VAR zimbraMtaTlsSecurityLevel
-	POSTCONF disable_dns_lookups	                VAR !zimbraMtaDnsLookupsEnabled	
-	POSTCONF message_size_limit		                VAR zimbraMtaMaxMessageSize
+	POSTCONF recipient_delimiter	                VAR zmailMtaRecipientDelimiter
+	POSTCONF smtpd_sasl_auth_enable               VAR zmailMtaSaslAuthEnable
+	POSTCONF smtpd_tls_auth_only	                VAR zmailMtaTlsAuthOnly
+	POSTCONF smtpd_tls_security_level			                 VAR zmailMtaTlsSecurityLevel
+	POSTCONF disable_dns_lookups	                VAR !zmailMtaDnsLookupsEnabled	
+	POSTCONF message_size_limit		                VAR zmailMtaMaxMessageSize
 	POSTCONF mailbox_size_limit		                0
-	POSTCONF relayhost				                    VAR zimbraMtaRelayHost
-	POSTCONF smtp_fallback_relay			VAR zimbraMtaFallbackRelayHost
+	POSTCONF relayhost				                    VAR zmailMtaRelayHost
+	POSTCONF smtp_fallback_relay			VAR zmailMtaFallbackRelayHost
 	POSTCONF smtpd_recipient_restrictions FILE zmconfigd/smtpd_recipient_restrictions.cf
 	POSTCONF smtpd_relay_restrictions FILE zmconfigd/smtpd_relay_restrictions.cf
 	POSTCONF smtpd_sender_restrictions FILE zmconfigd/smtpd_sender_restrictions.cf
@@ -130,7 +130,7 @@ SECTION mta DEPENDS amavis
 	POSTCONF daemon_directory					            LOCAL postfix_daemon_directory
 	POSTCONF delay_warning_time                   LOCAL postfix_delay_warning_time
 	POSTCONF header_checks						            LOCAL postfix_header_checks
-	if VAR zimbraMtaBlockedExtensionWarnRecipient
+	if VAR zmailMtaBlockedExtensionWarnRecipient
 		POSTCONF header_checks
 	fi
 	POSTCONF mailq_path							              LOCAL postfix_mailq_path
@@ -175,7 +175,7 @@ SECTION mta DEPENDS amavis
 	POSTCONF smtp_tls_security_level		LOCAL postfix_smtp_tls_security_level
 	POSTCONF smtp_sasl_mechanism_filter		LOCAL postfix_smtp_sasl_mechanism_filter
 	POSTCONF smtp_sasl_password_maps		LOCAL postfix_smtp_sasl_password_maps
-	POSTCONF inet_protocols				VAR zimbraPostconfProtocol
+	POSTCONF inet_protocols				VAR zmailPostconfProtocol
 	RESTART mta
 
 SECTION opendkim DEPENDS mta
@@ -183,8 +183,8 @@ SECTION opendkim DEPENDS mta
 	LOCAL ldap_starttls_supported
 	LOCAL av_notify_user
 	LOCAL ldap_url
-	VAR zimbraMtaMyNetworks
-	VAR zimbraIPMode
+	VAR zmailMtaMyNetworks
+	VAR zmailIPMode
 	REWRITE conf/opendkim.conf.in conf/opendkim.conf
 	REWRITE conf/opendkim-localnets.conf.in conf/opendkim-localnets.conf
 	RESTART opendkim
@@ -197,48 +197,48 @@ SECTION sasl
 	RESTART mta sasl
 
 SECTION webxml
-	VAR zimbraMailPort
-	VAR zimbraMailSSLPort
-	VAR zimbraIPMode
-	REWRITE mailboxd/etc/zimbra.web.xml.in mailboxd/webapps/zimbra/WEB-INF/web.xml
-	REWRITE mailboxd/etc/zimbraAdmin.web.xml.in mailboxd/webapps/zimbraAdmin/WEB-INF/web.xml
+	VAR zmailMailPort
+	VAR zmailMailSSLPort
+	VAR zmailIPMode
+	REWRITE mailboxd/etc/zmail.web.xml.in mailboxd/webapps/zmail/WEB-INF/web.xml
+	REWRITE mailboxd/etc/zmailAdmin.web.xml.in mailboxd/webapps/zmailAdmin/WEB-INF/web.xml
 	REWRITE mailboxd/etc/service.web.xml.in mailboxd/webapps/service/WEB-INF/web.xml
 	REWRITE mailboxd/etc/zimlet.web.xml.in mailboxd/webapps/zimlet/WEB-INF/web.xml
 	REWRITE mailboxd/etc/krb5.ini.in mailboxd/etc/krb5.ini
 	REWRITE mailboxd/etc/spnego.conf.in mailboxd/etc/spnego.conf
 	REWRITE mailboxd/etc/spnego.properties.in mailboxd/etc/spnego.properties
-	REWRITE mailboxd/etc/zimbra-jetty-env.xml.in mailboxd/webapps/zimbra/WEB-INF/jetty-env.xml
-	REWRITE mailboxd/etc/zimbraAdmin-jetty-env.xml.in mailboxd/webapps/zimbraAdmin/WEB-INF/jetty-env.xml
+	REWRITE mailboxd/etc/zmail-jetty-env.xml.in mailboxd/webapps/zmail/WEB-INF/jetty-env.xml
+	REWRITE mailboxd/etc/zmailAdmin-jetty-env.xml.in mailboxd/webapps/zmailAdmin/WEB-INF/jetty-env.xml
 	RESTART mailboxd
 
 SECTION mailbox
-	VAR zimbraMailPort
-	VAR zimbraMailSSLPort
-	VAR zimbraLogToSyslog
-	VAR zimbraAdminURL
-	VAR zimbraLmtpBindPort
-	VAR zimbraPop3ServerEnabled
-	VAR zimbraPop3BindAddress
-	VAR zimbraPop3BindPort
-	VAR zimbraPop3SSLServerEnabled
-	VAR zimbraPop3SSLBindAddress
-	VAR zimbraPop3SSLBindPort
-	VAR zimbraImapServerEnabled
-	VAR zimbraImapBindAddress
-	VAR zimbraImapBindPort
-	VAR zimbraImapSSLServerEnabled
-	VAR zimbraImapSSLBindAddress
-	VAR zimbraImapSSLBindPort
-	VAR zimbraHttpNumThreads
+	VAR zmailMailPort
+	VAR zmailMailSSLPort
+	VAR zmailLogToSyslog
+	VAR zmailAdminURL
+	VAR zmailLmtpBindPort
+	VAR zmailPop3ServerEnabled
+	VAR zmailPop3BindAddress
+	VAR zmailPop3BindPort
+	VAR zmailPop3SSLServerEnabled
+	VAR zmailPop3SSLBindAddress
+	VAR zmailPop3SSLBindPort
+	VAR zmailImapServerEnabled
+	VAR zmailImapBindAddress
+	VAR zmailImapBindPort
+	VAR zmailImapSSLServerEnabled
+	VAR zmailImapSSLBindAddress
+	VAR zmailImapSSLBindPort
+	VAR zmailHttpNumThreads
 	VAR nio_imap_enabled
-	VAR zimbraSSLExcludeCipherSuites
-	VAR zimbraSSLExcludeCipherSuitesXML
-	VAR zimbraMailBindAddress
-	VAR zimbraMailSSLBindAddress
+	VAR zmailSSLExcludeCipherSuites
+	VAR zmailSSLExcludeCipherSuitesXML
+	VAR zmailMailBindAddress
+	VAR zmailMailSSLBindAddress
 	LOCAL mailboxd_keystore_password
 	LOCAL mailboxd_truststore_password
-	LOCAL zimbra_uid
-	LOCAL zimbra_gid
+	LOCAL zmail_uid
+	LOCAL zmail_gid
 	REWRITE conf/log4j.properties.in conf/log4j.properties
 	REWRITE mailboxd/etc/jetty.properties.in mailboxd/etc/jetty.properties
 	REWRITE mailboxd/etc/jetty.xml.in mailboxd/etc/jetty.xml
@@ -250,49 +250,49 @@ SECTION proxy
 	VAR getAllMemcachedServers
 	VAR getAllReverseProxyBackends
 	VAR getAllReverseProxyURLs
-	VAR zimbraFileUploadMaxSize
-	VAR zimbraImapProxyBindPort
-	VAR zimbraImapSSLProxyBindPort
-	VAR zimbraMailProxyPort
-	VAR zimbraMailSSLProxyPort
-	VAR zimbraPop3ProxyBindPort
-	VAR zimbraPop3SSLProxyBindPort
-	VAR zimbraReverseProxyAdminEnabled 
-	VAR zimbraReverseProxyAuthWaitInterval
-	VAR zimbraReverseProxyCacheEntryTTL
-	VAR zimbraReverseProxyCacheFetchTimeout
-	VAR zimbraReverseProxyCacheReconnectInterval
-	VAR zimbraReverseProxyDefaultRealm
-	VAR zimbraReverseProxyHttpEnabled
-	VAR zimbraReverseProxyImapEnabledCapability
-	VAR zimbraReverseProxyImapExposeVersionOnBanner
-	VAR zimbraReverseProxyImapSaslGssapiEnabled
-	VAR zimbraReverseProxyImapSaslPlainEnabled
-	VAR zimbraReverseProxyImapStartTlsMode
-	VAR zimbraReverseProxyInactivityTimeout
-	VAR zimbraReverseProxyIPLoginLimit
-	VAR zimbraReverseProxyIPLoginLimitTime
-	VAR zimbraReverseProxyIpThrottleMsg
-	VAR zimbraReverseProxyLogLevel
-	VAR zimbraReverseProxyMailEnabled
-	VAR zimbraReverseProxyMailMode
-	VAR zimbraReverseProxyPassErrors
-	VAR zimbraReverseProxyPop3EnabledCapability
-	VAR zimbraReverseProxyPop3ExposeVersionOnBanner
-	VAR zimbraReverseProxyPop3SaslGssapiEnabled
-	VAR zimbraReverseProxyPop3SaslPlainEnabled
-	VAR zimbraReverseProxyPop3StartTlsMode
-	VAR zimbraReverseProxyRouteLookupTimeout 
-	VAR zimbraReverseProxySendPop3Xoip
-	VAR zimbraReverseProxySSLCiphers
-	VAR zimbraReverseProxyUpstreamPollingTimeout
-	VAR zimbraReverseProxyUpstreamReadTimeout
-	VAR zimbraReverseProxyUpstreamSendTimeout
-	VAR zimbraReverseProxyUserLoginLimit
-	VAR zimbraReverseProxyUserLoginLimitTime
-	VAR zimbraReverseProxyUserThrottleMsg
-	VAR zimbraReverseProxyWorkerConnections
-	VAR zimbraReverseProxyWorkerProcesses
+	VAR zmailFileUploadMaxSize
+	VAR zmailImapProxyBindPort
+	VAR zmailImapSSLProxyBindPort
+	VAR zmailMailProxyPort
+	VAR zmailMailSSLProxyPort
+	VAR zmailPop3ProxyBindPort
+	VAR zmailPop3SSLProxyBindPort
+	VAR zmailReverseProxyAdminEnabled 
+	VAR zmailReverseProxyAuthWaitInterval
+	VAR zmailReverseProxyCacheEntryTTL
+	VAR zmailReverseProxyCacheFetchTimeout
+	VAR zmailReverseProxyCacheReconnectInterval
+	VAR zmailReverseProxyDefaultRealm
+	VAR zmailReverseProxyHttpEnabled
+	VAR zmailReverseProxyImapEnabledCapability
+	VAR zmailReverseProxyImapExposeVersionOnBanner
+	VAR zmailReverseProxyImapSaslGssapiEnabled
+	VAR zmailReverseProxyImapSaslPlainEnabled
+	VAR zmailReverseProxyImapStartTlsMode
+	VAR zmailReverseProxyInactivityTimeout
+	VAR zmailReverseProxyIPLoginLimit
+	VAR zmailReverseProxyIPLoginLimitTime
+	VAR zmailReverseProxyIpThrottleMsg
+	VAR zmailReverseProxyLogLevel
+	VAR zmailReverseProxyMailEnabled
+	VAR zmailReverseProxyMailMode
+	VAR zmailReverseProxyPassErrors
+	VAR zmailReverseProxyPop3EnabledCapability
+	VAR zmailReverseProxyPop3ExposeVersionOnBanner
+	VAR zmailReverseProxyPop3SaslGssapiEnabled
+	VAR zmailReverseProxyPop3SaslPlainEnabled
+	VAR zmailReverseProxyPop3StartTlsMode
+	VAR zmailReverseProxyRouteLookupTimeout 
+	VAR zmailReverseProxySendPop3Xoip
+	VAR zmailReverseProxySSLCiphers
+	VAR zmailReverseProxyUpstreamPollingTimeout
+	VAR zmailReverseProxyUpstreamReadTimeout
+	VAR zmailReverseProxyUpstreamSendTimeout
+	VAR zmailReverseProxyUserLoginLimit
+	VAR zmailReverseProxyUserLoginLimitTime
+	VAR zmailReverseProxyUserThrottleMsg
+	VAR zmailReverseProxyWorkerConnections
+	VAR zmailReverseProxyWorkerProcesses
 	PROXYGEN
 	RESTART proxy
 

@@ -12,28 +12,28 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.service.account;
+package org.zmail.cs.service.account;
 
 import java.util.Iterator;
 import java.util.Map;
 
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.common.soap.AccountConstants;
-import com.zimbra.cs.account.Account;
-import com.zimbra.cs.account.AccountServiceException;
-import com.zimbra.cs.account.Identity;
-import com.zimbra.cs.account.Provisioning;
-import com.zimbra.common.account.Key;
-import com.zimbra.common.account.Key.AccountBy;
-import com.zimbra.common.account.Key.IdentityBy;
-import com.zimbra.soap.DocumentHandler;
-import com.zimbra.common.soap.Element;
-import com.zimbra.soap.ZimbraSoapContext;
+import org.zmail.common.service.ServiceException;
+import org.zmail.common.soap.AccountConstants;
+import org.zmail.cs.account.Account;
+import org.zmail.cs.account.AccountServiceException;
+import org.zmail.cs.account.Identity;
+import org.zmail.cs.account.Provisioning;
+import org.zmail.common.account.Key;
+import org.zmail.common.account.Key.AccountBy;
+import org.zmail.common.account.Key.IdentityBy;
+import org.zmail.soap.DocumentHandler;
+import org.zmail.common.soap.Element;
+import org.zmail.soap.ZmailSoapContext;
 
 public class ModifyIdentity extends DocumentHandler {
     
     public Element handle(Element request, Map<String, Object> context) throws ServiceException {
-        ZimbraSoapContext zsc = getZimbraSoapContext(context);
+        ZmailSoapContext zsc = getZmailSoapContext(context);
         Account account = getRequestedAccount(zsc);
         Identity identity = null;
         
@@ -45,9 +45,9 @@ public class ModifyIdentity extends DocumentHandler {
         Element eIdentity = request.getElement(AccountConstants.E_IDENTITY);
         Map<String,Object> attrs = AccountService.getAttrs(eIdentity, AccountConstants.A_NAME);
         
-        // remove anything that doesn't start with zimbraPref. ldap will also do additional checks
+        // remove anything that doesn't start with zmailPref. ldap will also do additional checks
         for (Iterator<String> it = attrs.keySet().iterator(); it.hasNext(); )
-            if (!it.next().toLowerCase().startsWith("zimbrapref")) // if this changes, make sure we don't let them ever change objectclass
+            if (!it.next().toLowerCase().startsWith("zmailpref")) // if this changes, make sure we don't let them ever change objectclass
                 it.remove();
 
         String key, id = eIdentity.getAttribute(AccountConstants.A_ID, null);

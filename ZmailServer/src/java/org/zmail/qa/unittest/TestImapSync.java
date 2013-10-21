@@ -12,22 +12,22 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.qa.unittest;
+package org.zmail.qa.unittest;
 
 import org.junit.*;
-import com.zimbra.client.ZMailbox;
-import com.zimbra.client.ZDataSource;
-import com.zimbra.client.ZFolder;
-import com.zimbra.client.ZImapDataSource;
-import com.zimbra.cs.mailclient.imap.ImapConnection;
-import com.zimbra.cs.mailclient.imap.ImapConfig;
-import com.zimbra.cs.mailclient.imap.ListData;
-import com.zimbra.cs.mailclient.imap.MailboxInfo;
-import com.zimbra.cs.mailclient.MailConfig;
-import com.zimbra.cs.account.DataSource;
-import com.zimbra.common.util.Log;
-import com.zimbra.common.util.ZimbraLog;
-import com.zimbra.soap.type.DataSource.ConnectionType;
+import org.zmail.client.ZMailbox;
+import org.zmail.client.ZDataSource;
+import org.zmail.client.ZFolder;
+import org.zmail.client.ZImapDataSource;
+import org.zmail.cs.mailclient.imap.ImapConnection;
+import org.zmail.cs.mailclient.imap.ImapConfig;
+import org.zmail.cs.mailclient.imap.ListData;
+import org.zmail.cs.mailclient.imap.MailboxInfo;
+import org.zmail.cs.mailclient.MailConfig;
+import org.zmail.cs.account.DataSource;
+import org.zmail.common.util.Log;
+import org.zmail.common.util.ZmailLog;
+import org.zmail.soap.type.DataSource.ConnectionType;
 
 import java.io.IOException;
 import java.util.List;
@@ -35,7 +35,7 @@ import java.util.List;
 public class TestImapSync {
     private static final String LOCAL_USER = "TestImapSync";
     private static final String TEST_FOLDER_1 = "TestOne";
-    private static final Log LOG = ZimbraLog.test;
+    private static final Log LOG = ZmailLog.test;
 
     private final ImapConfig config;
     private final String pass;

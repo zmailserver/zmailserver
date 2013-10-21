@@ -12,7 +12,7 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.dav.service.method;
+package org.zmail.cs.dav.service.method;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -23,25 +23,25 @@ import org.dom4j.DocumentHelper;
 import org.dom4j.Element;
 import org.dom4j.QName;
 
-import com.zimbra.common.account.Key;
-import com.zimbra.common.mailbox.ContactConstants;
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.common.util.Pair;
-import com.zimbra.cs.account.Account;
-import com.zimbra.cs.account.GalContact;
-import com.zimbra.cs.account.Provisioning;
-import com.zimbra.cs.account.Provisioning.SearchGalResult;
-import com.zimbra.cs.dav.DavContext;
-import com.zimbra.cs.dav.DavElements;
-import com.zimbra.cs.dav.DavException;
-import com.zimbra.cs.dav.DavProtocol;
-import com.zimbra.cs.dav.DavContext.RequestProp;
-import com.zimbra.cs.dav.property.Acl.Ace;
-import com.zimbra.cs.dav.resource.DavResource;
-import com.zimbra.cs.dav.resource.MailItemResource;
-import com.zimbra.cs.dav.resource.UrlNamespace;
-import com.zimbra.cs.dav.service.DavResponse;
-import com.zimbra.soap.type.GalSearchType;
+import org.zmail.common.account.Key;
+import org.zmail.common.mailbox.ContactConstants;
+import org.zmail.common.service.ServiceException;
+import org.zmail.common.util.Pair;
+import org.zmail.cs.account.Account;
+import org.zmail.cs.account.GalContact;
+import org.zmail.cs.account.Provisioning;
+import org.zmail.cs.account.Provisioning.SearchGalResult;
+import org.zmail.cs.dav.DavContext;
+import org.zmail.cs.dav.DavElements;
+import org.zmail.cs.dav.DavException;
+import org.zmail.cs.dav.DavProtocol;
+import org.zmail.cs.dav.DavContext.RequestProp;
+import org.zmail.cs.dav.property.Acl.Ace;
+import org.zmail.cs.dav.resource.DavResource;
+import org.zmail.cs.dav.resource.MailItemResource;
+import org.zmail.cs.dav.resource.UrlNamespace;
+import org.zmail.cs.dav.service.DavResponse;
+import org.zmail.soap.type.GalSearchType;
 
 public class AclReports extends Report {
 	@Override
@@ -108,7 +108,7 @@ public class AclReports extends Report {
 		if (prop.equals(DavElements.E_DISPLAYNAME)) {
 		    if (!authAccount.isFeatureGalEnabled() || !authAccount.isFeatureGalAutoCompleteEnabled())
 		        return ret;
-	        SearchGalResult result = prov.searchGal(prov.getDomain(authAccount), match, type, Provisioning.GalMode.zimbra, null);
+	        SearchGalResult result = prov.searchGal(prov.getDomain(authAccount), match, type, Provisioning.GalMode.zmail, null);
 	        for (GalContact ct : result.getMatches()) {
 	            String email = (String)ct.getAttrs().get(ContactConstants.A_email);
 	            if (email != null) {
@@ -144,7 +144,7 @@ public class AclReports extends Report {
 		Provisioning prov = Provisioning.getInstance();
 		for (Ace ace : aces) {
 			if (ace.hasHref()) {
-				Account acct = prov.get(Key.AccountBy.id, ace.getZimbraId());
+				Account acct = prov.get(Key.AccountBy.id, ace.getZmailId());
 				if (acct != null)
 					ret.add(UrlNamespace.getPrincipal(ctxt, acct));
 			}

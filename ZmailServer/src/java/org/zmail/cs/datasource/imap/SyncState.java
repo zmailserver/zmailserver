@@ -12,14 +12,14 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.datasource.imap;
+package org.zmail.cs.datasource.imap;
 
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.common.util.ZimbraLog;
-import com.zimbra.cs.account.DataSource;
-import com.zimbra.cs.mailbox.Folder;
-import com.zimbra.cs.mailbox.MailItem;
-import com.zimbra.cs.mailbox.Mailbox;
+import org.zmail.common.service.ServiceException;
+import org.zmail.common.util.ZmailLog;
+import org.zmail.cs.account.DataSource;
+import org.zmail.cs.mailbox.Folder;
+import org.zmail.cs.mailbox.MailItem;
+import org.zmail.cs.mailbox.Mailbox;
 
 import java.util.Collections;
 import java.util.HashMap;
@@ -64,12 +64,12 @@ final class SyncState {
     }
 
     public boolean checkAndResetHasChanges(DataSource ds) throws ServiceException {
-        //ZimbraLog.datasource.debug("checkAndResetHasChanges: lastChangeId = %d, changeId = %d",
+        //ZmailLog.datasource.debug("checkAndResetHasChanges: lastChangeId = %d, changeId = %d",
         //    lastChangeId, mbox.getLastChangeID());
         // Always true if there are remote INBOX changes or this is the
         // first time we've checked
         if (hasRemoteInboxChanges || lastChangeId <= 0) {
-            ZimbraLog.datasource.debug("Forcing sync due to remote INBOX changes");
+            ZmailLog.datasource.debug("Forcing sync due to remote INBOX changes");
             hasRemoteInboxChanges = false;
             return true;
         }
@@ -81,14 +81,14 @@ final class SyncState {
         // changes to INBOX since the last time we checked
         FolderChanges fc = FolderChanges.getChanges(ds, lastChangeId);
         if (fc.hasChanges()) {
-            ZimbraLog.datasource.debug("Forcing sync due to local folder changes: %s", fc);
+            ZmailLog.datasource.debug("Forcing sync due to local folder changes: %s", fc);
             lastChangeId = fc.getLastChangeId();
             return true;
         }
         inboxChanges = MessageChanges.getChanges(ds, inboxFolder, lastChangeId);
         lastChangeId = Math.min(inboxChanges.getLastChangeId(), fc.getLastChangeId());
         if (inboxChanges.hasChanges()) {
-            ZimbraLog.datasource.debug("Forcing sync due to local INBOX changes: %s", inboxChanges);
+            ZmailLog.datasource.debug("Forcing sync due to local INBOX changes: %s", inboxChanges);
             return true;
         }
         return false;

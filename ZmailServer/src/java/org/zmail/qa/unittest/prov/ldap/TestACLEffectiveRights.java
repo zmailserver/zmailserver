@@ -12,7 +12,7 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.qa.unittest.prov.ldap;
+package org.zmail.qa.unittest.prov.ldap;
 
 import static org.junit.Assert.*;
 
@@ -25,27 +25,27 @@ import org.junit.AfterClass;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
-import com.zimbra.common.account.Key;
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.cs.account.Account;
-import com.zimbra.cs.account.Domain;
-import com.zimbra.cs.account.Group;
-import com.zimbra.cs.account.Provisioning;
-import com.zimbra.cs.account.accesscontrol.GranteeType;
+import org.zmail.common.account.Key;
+import org.zmail.common.service.ServiceException;
+import org.zmail.cs.account.Account;
+import org.zmail.cs.account.Domain;
+import org.zmail.cs.account.Group;
+import org.zmail.cs.account.Provisioning;
+import org.zmail.cs.account.accesscontrol.GranteeType;
 
-import com.zimbra.cs.account.accesscontrol.InlineAttrRight;
-import com.zimbra.cs.account.accesscontrol.Right;
-import com.zimbra.cs.account.accesscontrol.RightCommand;
-import com.zimbra.cs.account.accesscontrol.RightManager;
-import com.zimbra.cs.account.accesscontrol.RightModifier;
-import com.zimbra.cs.account.accesscontrol.TargetType;
-import com.zimbra.cs.account.accesscontrol.RightCommand.AllEffectiveRights;
-import com.zimbra.cs.account.accesscontrol.RightCommand.EffectiveAttr;
-import com.zimbra.cs.account.accesscontrol.RightCommand.EffectiveRights;
-import com.zimbra.cs.account.accesscontrol.RightCommand.RightsByTargetType;
-import com.zimbra.cs.account.ldap.LdapProv;
-import com.zimbra.qa.QA.Bug;
-import com.zimbra.soap.type.TargetBy;
+import org.zmail.cs.account.accesscontrol.InlineAttrRight;
+import org.zmail.cs.account.accesscontrol.Right;
+import org.zmail.cs.account.accesscontrol.RightCommand;
+import org.zmail.cs.account.accesscontrol.RightManager;
+import org.zmail.cs.account.accesscontrol.RightModifier;
+import org.zmail.cs.account.accesscontrol.TargetType;
+import org.zmail.cs.account.accesscontrol.RightCommand.AllEffectiveRights;
+import org.zmail.cs.account.accesscontrol.RightCommand.EffectiveAttr;
+import org.zmail.cs.account.accesscontrol.RightCommand.EffectiveRights;
+import org.zmail.cs.account.accesscontrol.RightCommand.RightsByTargetType;
+import org.zmail.cs.account.ldap.LdapProv;
+import org.zmail.qa.QA.Bug;
+import org.zmail.soap.type.TargetBy;
 
 public class TestACLEffectiveRights extends LdapTest {
     
@@ -157,7 +157,7 @@ public class TestACLEffectiveRights extends LdapTest {
         
         String presetRightUnderTest = Right.RT_deleteDistributionList;
         
-        String attrUnderTest = Provisioning.A_zimbraHideInGal;
+        String attrUnderTest = Provisioning.A_zmailHideInGal;
         String attrRightUnderTest = 
             InlineAttrRight.composeSetRight(TargetType.dl, attrUnderTest);
         

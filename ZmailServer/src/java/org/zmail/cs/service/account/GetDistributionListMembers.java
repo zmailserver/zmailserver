@@ -12,31 +12,31 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.service.account;
+package org.zmail.cs.service.account;
 
 import java.util.Map;
 
-import com.zimbra.common.account.Key.DistributionListBy;
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.common.soap.AccountConstants;
-import com.zimbra.common.soap.AdminConstants;
-import com.zimbra.common.soap.Element;
-import com.zimbra.common.soap.MailConstants;
-import com.zimbra.common.util.ZimbraLog;
-import com.zimbra.cs.account.Account;
-import com.zimbra.cs.account.AccountServiceException;
-import com.zimbra.cs.account.Group;
-import com.zimbra.cs.account.Group.GroupOwner;
-import com.zimbra.cs.account.Provisioning;
-import com.zimbra.cs.account.Server;
-import com.zimbra.cs.gal.GalGroupMembers;
-import com.zimbra.cs.gal.GalGroupMembers.DLMembers;
-import com.zimbra.cs.gal.GalGroupMembers.DLMembersResult;
-import com.zimbra.cs.gal.GalGroupMembers.GalContactDLMembers;
-import com.zimbra.cs.gal.GalGroupMembers.LdapDLMembers;
-import com.zimbra.cs.gal.GalGroupMembers.ProxiedDLMembers;
-import com.zimbra.cs.gal.GalSearchControl;
-import com.zimbra.soap.ZimbraSoapContext;
+import org.zmail.common.account.Key.DistributionListBy;
+import org.zmail.common.service.ServiceException;
+import org.zmail.common.soap.AccountConstants;
+import org.zmail.common.soap.AdminConstants;
+import org.zmail.common.soap.Element;
+import org.zmail.common.soap.MailConstants;
+import org.zmail.common.util.ZmailLog;
+import org.zmail.cs.account.Account;
+import org.zmail.cs.account.AccountServiceException;
+import org.zmail.cs.account.Group;
+import org.zmail.cs.account.Group.GroupOwner;
+import org.zmail.cs.account.Provisioning;
+import org.zmail.cs.account.Server;
+import org.zmail.cs.gal.GalGroupMembers;
+import org.zmail.cs.gal.GalGroupMembers.DLMembers;
+import org.zmail.cs.gal.GalGroupMembers.DLMembersResult;
+import org.zmail.cs.gal.GalGroupMembers.GalContactDLMembers;
+import org.zmail.cs.gal.GalGroupMembers.LdapDLMembers;
+import org.zmail.cs.gal.GalGroupMembers.ProxiedDLMembers;
+import org.zmail.cs.gal.GalSearchControl;
+import org.zmail.soap.ZmailSoapContext;
 
 /**
  * @author pshao
@@ -62,7 +62,7 @@ public class GetDistributionListMembers extends GalDocumentHandler {
     
     public Element handle(Element request, Map<String, Object> context) 
     throws ServiceException {
-        ZimbraSoapContext zsc = getZimbraSoapContext(context);
+        ZmailSoapContext zsc = getZmailSoapContext(context);
         Account account = getRequestedAccount(zsc);
         
         if (!canAccessAccount(zsc, account)) {
@@ -176,15 +176,15 @@ public class GetDistributionListMembers extends GalDocumentHandler {
             Server server = group.getServer();
             if (server == null) {
                 // just execute locally
-                ZimbraLog.account.warn(String.format(
+                ZmailLog.account.warn(String.format(
                         "unable to find home server (%s) for group %s, " + 
                         "getting members from LDAP on local server" ,
-                        group.getAttr(Provisioning.A_zimbraMailHost), group.getName()));
+                        group.getAttr(Provisioning.A_zmailMailHost), group.getName()));
                 // do it locally
                 return getMembersFromLdap(account, group);
             } else {
                 // proxy to the home server of the group
-                ZimbraLog.account.debug(
+                ZmailLog.account.debug(
                         String.format("Proxying request to home server (%s) of group %s",
                         server.getName(), group.getName()));
                 
@@ -213,10 +213,10 @@ public class GetDistributionListMembers extends GalDocumentHandler {
         }
         
         if (allow) {
-            ZimbraLog.account.debug("Retrieving group members from LDAP for group " + group.getName());
+            ZmailLog.account.debug("Retrieving group members from LDAP for group " + group.getName());
             return new LdapDLMembers(group);
         } else {
-            ZimbraLog.account.debug("account " + account.getName() + 
+            ZmailLog.account.debug("account " + account.getName() + 
                     " is not allowed to get members from ldap for group " + group.getName());
             return null;
         }
@@ -294,11 +294,11 @@ public class GetDistributionListMembers extends GalDocumentHandler {
     }
 
     
-    protected Element processDLMembers(ZimbraSoapContext zsc, String dlName, Account account, 
+    protected Element processDLMembers(ZmailSoapContext zsc, String dlName, Account account, 
             int limit, int offset, DLMembers dlMembers) throws ServiceException {
 
-        if (!GalSearchControl.canExpandGalGroup(dlName, dlMembers.getDLZimbraId(), account)) {
-            ZimbraLog.misc.warn("dlName: %s, dlMembers(%s) size %d, id %s", dlName, dlMembers.getClass(), dlMembers.getTotal(), dlMembers.getDLZimbraId());
+        if (!GalSearchControl.canExpandGalGroup(dlName, dlMembers.getDLZmailId(), account)) {
+            ZmailLog.misc.warn("dlName: %s, dlMembers(%s) size %d, id %s", dlName, dlMembers.getClass(), dlMembers.getTotal(), dlMembers.getDLZmailId());
             Group dl = Provisioning.getInstance().getGroup(DistributionListBy.name, dlName);
             if (dl == null) {
                 throw ServiceException.NOT_FOUND(dlName + " does not exist");

@@ -12,23 +12,23 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.dav.resource;
+package org.zmail.cs.dav.resource;
 
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.common.util.ZimbraLog;
-import com.zimbra.cs.account.Account;
-import com.zimbra.cs.account.Provisioning;
-import com.zimbra.common.account.Key.AccountBy;
-import com.zimbra.cs.dav.DavContext;
-import com.zimbra.cs.index.BrowseTerm;
-import com.zimbra.cs.index.DomainBrowseTerm;
-import com.zimbra.cs.mailbox.Mailbox;
-import com.zimbra.cs.mailbox.MailboxManager;
+import org.zmail.common.service.ServiceException;
+import org.zmail.common.util.ZmailLog;
+import org.zmail.cs.account.Account;
+import org.zmail.cs.account.Provisioning;
+import org.zmail.common.account.Key.AccountBy;
+import org.zmail.cs.dav.DavContext;
+import org.zmail.cs.index.BrowseTerm;
+import org.zmail.cs.index.DomainBrowseTerm;
+import org.zmail.cs.mailbox.Mailbox;
+import org.zmail.cs.mailbox.MailboxManager;
 
 /**
  * BrowseWrapper is used to generate the phantom folder hierarchy.
@@ -84,9 +84,9 @@ public class BrowseWrapper extends PhantomResource {
                 return browseByType(ctxt);
             }
         } catch (ServiceException e) {
-            ZimbraLog.dav.error("can't generate browse resource: uri="+getUri(), e);
+            ZmailLog.dav.error("can't generate browse resource: uri="+getUri(), e);
         } catch (IOException e) {
-            ZimbraLog.dav.error("can't generate browse resource: uri="+getUri(), e);
+            ZmailLog.dav.error("can't generate browse resource: uri="+getUri(), e);
         }
         return Collections.emptyList();
     }

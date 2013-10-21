@@ -18,56 +18,56 @@ The following needs to be added to the account view:
  - need to handle new "lockout" status (not be confused with "locked", which is a manually set status)
  
  If an account is locked out due to this mechanism, it's status will be set to "lockout". Ideally it would be nice to
- show zimbraPasswordLockoutLockedTime and all values of zimbraPasswordLockoutFailureTime.
+ show zmailPasswordLockoutLockedTime and all values of zmailPasswordLockoutFailureTime.
 
 ------------------------------------------------------------
 
-zimbraAccountStatus will be modified to include a new "lockout" state
+zmailAccountStatus will be modified to include a new "lockout" state
 
 The following attributes will be added COS/Account (account overrides COS)
 
-zimbraPasswordLockoutEnabled TRUE/FALSE
+zmailPasswordLockoutEnabled TRUE/FALSE
 
        This attribute specifies the action that should be taken when
        a user has made a number of failed attempts to authenticate
-       to Zimbra.  If zimbraPasswordLockoutEnabled is TRUE, the user
-       will  not  be allowed to attempt to authenticate to Zimbra after
+       to Zmail.  If zmailPasswordLockoutEnabled is TRUE, the user
+       will  not  be allowed to attempt to authenticate to Zmail after
        there have been a specified number of consecutive failed login attempts.
        The maximum number of consecutive failed login attempts allowed 
-       is specified by the zimbraPasswordLockoutMaxFailures attribute.  
+       is specified by the zmailPasswordLockoutMaxFailures attribute.  
  
-       If zimbraPasswordLockoutEnabled is not present, or if its  value
+       If zmailPasswordLockoutEnabled is not present, or if its  value
        is "FALSE", the password may be used to authenticate no matter 
        how many consecutive failed login attempts have been made.
 
-zimbraPasswordLockoutDuration
+zmailPasswordLockoutDuration
 
        This attribute contains the duration during which the password
-       cannot  be  used  to  authenticate the user to Zimbra due to too
+       cannot  be  used  to  authenticate the user to Zmail due to too
        many consecutive failed login attempts. 
 
-       If zimbraPasswordLockoutDuration is not present, or if its value is 
+       If zmailPasswordLockoutDuration is not present, or if its value is 
        zero (0), the password cannot be used to authenticate the user to
-       Zimbra again until it is reset by an administrator (by changing the account status
+       Zmail again until it is reset by an administrator (by changing the account status
        back to active).
 
-zimbraPasswordLockoutMaxFailures
+zmailPasswordLockoutMaxFailures
 
        This  attribute contains the number of consecutive failed login attempts
        after which the password may not be used to authenticate a user to
-       Zimbra. If zimbraPasswordLockoutMaxFailures is not present, or its
+       Zmail. If zmailPasswordLockoutMaxFailures is not present, or its
        value is zero (0), then a user will be allowed to continue to attempt 
-       to  authenticate  to Zimbra, no matter how many consecutive failed 
+       to  authenticate  to Zmail, no matter how many consecutive failed 
        login attempts have  occurred.
 
-zimbraPasswordLockoutFailureLifetime
+zmailPasswordLockoutFailureLifetime
 
        This  attribute contains the duration after which old consecu-
        tive failed login attempts are purged from  the  list,  even though 
        no  successful  authentication  has occurred. It used to determine
        the window in which a failed login is considered "consecutive". 
 
-       If zimbraPasswordLockoutFailureLifetime is not present, or its 
+       If zmailPasswordLockoutFailureLifetime is not present, or its 
        value is  zero  (0), the  list will only be reset by a successful 
        authentication.
 
@@ -82,30 +82,30 @@ zimbraPasswordLockoutFailureLifetime
 
 These attributes are on an individual Account
 
-zimbraPasswordLockoutLockedTime
+zmailPasswordLockoutLockedTime
 
        This attribute contains the time that the user's  account  was  locked.
        If  the  account has been locked, the password may no longer be used to
-       authenticate the user to Zimbra. 
+       authenticate the user to Zmail. 
 
        An account is considered locked if the current time is less than the
-       value zimbraPasswordLockoutLockedTime + zimbraPasswordLockoutDuration.
+       value zmailPasswordLockoutLockedTime + zmailPasswordLockoutDuration.
 
-zimbraPasswordLockoutFailureTime
+zmailPasswordLockoutFailureTime
 
-       If zimbraPasswordLockoutEnabled is set, then this attribute contains the
+       If zmailPasswordLockoutEnabled is set, then this attribute contains the
        timestamps of each of the consecutive  authentication failures made on 
        an account.
 
-       If more then zimbraPasswordLockoutMaxFailures timestamps accumulate
+       If more then zmailPasswordLockoutMaxFailures timestamps accumulate
        here then the account will be locked,
-       zimbraPasswordLockoutLockedTime will be set to the current time, and
-       zimbraAccountStatus will be set to "lockout".
+       zmailPasswordLockoutLockedTime will be set to the current time, and
+       zmailAccountStatus will be set to "lockout".
 
        Excess timestamps beyond those allowed by 
-       zimbraPasswordLockoutMaxFailures  will be purged.  
+       zmailPasswordLockoutMaxFailures  will be purged.  
 
        When a successful authentication is made, all 
-       zimbraPasswordFailureTime entries are removed.
+       zmailPasswordFailureTime entries are removed.
 
 ---------------------------------

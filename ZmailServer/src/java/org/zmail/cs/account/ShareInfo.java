@@ -12,7 +12,7 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.account;
+package org.zmail.cs.account;
 
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
@@ -44,39 +44,39 @@ import org.apache.commons.codec.binary.Hex;
 
 import com.google.common.base.Strings;
 import com.sun.mail.smtp.SMTPMessage;
-import com.zimbra.common.account.Key;
-import com.zimbra.common.account.Key.AccountBy;
-import com.zimbra.common.account.ZAttrProvisioning.AccountStatus;
-import com.zimbra.common.mime.MimeConstants;
-import com.zimbra.common.mime.shim.JavaMailInternetAddress;
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.common.soap.Element;
-import com.zimbra.common.soap.MailConstants.ShareConstants;
-import com.zimbra.common.soap.SoapProtocol;
-import com.zimbra.common.util.BlobMetaData;
-import com.zimbra.common.util.L10nUtil;
-import com.zimbra.common.util.L10nUtil.MsgKey;
-import com.zimbra.common.util.Pair;
-import com.zimbra.common.util.ZimbraLog;
-import com.zimbra.common.zmime.ZMimeBodyPart;
-import com.zimbra.common.zmime.ZMimeMultipart;
-import com.zimbra.cs.account.Provisioning.GroupMembership;
-import com.zimbra.cs.account.Provisioning.PublishedShareInfoVisitor;
-import com.zimbra.cs.ldap.ZLdapFilterFactory;
-import com.zimbra.cs.mailbox.ACL;
-import com.zimbra.cs.mailbox.Folder;
-import com.zimbra.cs.mailbox.MailItem;
-import com.zimbra.cs.mailbox.Mailbox;
-import com.zimbra.cs.mailbox.Mailbox.FolderNode;
-import com.zimbra.cs.mailbox.MailboxManager;
-import com.zimbra.cs.mailbox.MetadataList;
-import com.zimbra.cs.mailbox.Mountpoint;
-import com.zimbra.cs.mailbox.OperationContext;
-import com.zimbra.cs.mailbox.acl.AclPushSerializer;
-import com.zimbra.cs.servlet.ZimbraServlet;
-import com.zimbra.cs.util.AccountUtil;
-import com.zimbra.cs.util.JMSession;
-import com.zimbra.soap.mail.message.SendShareNotificationRequest.Action;
+import org.zmail.common.account.Key;
+import org.zmail.common.account.Key.AccountBy;
+import org.zmail.common.account.ZAttrProvisioning.AccountStatus;
+import org.zmail.common.mime.MimeConstants;
+import org.zmail.common.mime.shim.JavaMailInternetAddress;
+import org.zmail.common.service.ServiceException;
+import org.zmail.common.soap.Element;
+import org.zmail.common.soap.MailConstants.ShareConstants;
+import org.zmail.common.soap.SoapProtocol;
+import org.zmail.common.util.BlobMetaData;
+import org.zmail.common.util.L10nUtil;
+import org.zmail.common.util.L10nUtil.MsgKey;
+import org.zmail.common.util.Pair;
+import org.zmail.common.util.ZmailLog;
+import org.zmail.common.zmime.ZMimeBodyPart;
+import org.zmail.common.zmime.ZMimeMultipart;
+import org.zmail.cs.account.Provisioning.GroupMembership;
+import org.zmail.cs.account.Provisioning.PublishedShareInfoVisitor;
+import org.zmail.cs.ldap.ZLdapFilterFactory;
+import org.zmail.cs.mailbox.ACL;
+import org.zmail.cs.mailbox.Folder;
+import org.zmail.cs.mailbox.MailItem;
+import org.zmail.cs.mailbox.Mailbox;
+import org.zmail.cs.mailbox.Mailbox.FolderNode;
+import org.zmail.cs.mailbox.MailboxManager;
+import org.zmail.cs.mailbox.MetadataList;
+import org.zmail.cs.mailbox.Mountpoint;
+import org.zmail.cs.mailbox.OperationContext;
+import org.zmail.cs.mailbox.acl.AclPushSerializer;
+import org.zmail.cs.servlet.ZmailServlet;
+import org.zmail.cs.util.AccountUtil;
+import org.zmail.cs.util.JMSession;
+import org.zmail.soap.mail.message.SendShareNotificationRequest.Action;
 
 
 public class ShareInfo {
@@ -116,7 +116,7 @@ public class ShareInfo {
 //     * serialize this ShareInfo into String persisted in LDAP
 //     *
 //     * The format is:
-//     * owner-zimbraId:itemId:btencoded-metadata
+//     * owner-zmailId:itemId:btencoded-metadata
 //     *
 //     * @return
 //     */
@@ -501,10 +501,10 @@ public class ShareInfo {
 
             SearchAccountsOptions searchOpts = new SearchAccountsOptions(
                     new String[] {
-                           Provisioning.A_zimbraId,
+                           Provisioning.A_zmailId,
                            Provisioning.A_displayName,
-                           Provisioning.A_zimbraSharedItem,
-                           Provisioning.A_zimbraAccountStatus});
+                           Provisioning.A_zmailSharedItem,
+                           Provisioning.A_zmailAccountStatus});
            searchOpts.setFilter(ZLdapFilterFactory.getInstance().accountsByGrants(
                    granteeIds, includePublicShares, includeAllAuthedShares));
            List<NamedEntry> accounts = prov.searchDirectory(searchOpts);
@@ -625,7 +625,7 @@ public class ShareInfo {
         }
 
         private static String getExtUserLoginURL(Account owner) throws ServiceException {
-            return ZimbraServlet.getServiceUrl(
+            return ZmailServlet.getServiceUrl(
                     owner.getServer(),
                     Provisioning.getInstance().getDomain(owner),
                     "?virtualacctdomain=" + owner.getDomainName());
@@ -646,10 +646,10 @@ public class ShareInfo {
             }
             String data = new String(Hex.encodeHex(encodedBuff.toString().getBytes()));
             AuthTokenKey key = AuthTokenKey.getCurrentKey();
-            String hmac = ZimbraAuthToken.getHmac(data, key.getKey());
+            String hmac = ZmailAuthToken.getHmac(data, key.getKey());
             String encoded = key.getVersion() + "_" + hmac + "_" + data;
             String path = "/service/extuserprov/?p=" + encoded;
-            return ZimbraServlet.getServiceUrl(
+            return ZmailServlet.getServiceUrl(
                     account.getServer(), Provisioning.getInstance().getDomain(account), path);
         }
 
@@ -802,7 +802,7 @@ public class ShareInfo {
                     key = MsgKey.octopus_share_notification_email_bodyFolderDesc;
                 }
             } catch (ServiceException e) {
-                ZimbraLog.account.warn("failed to retrieve Octopus info from LDAP " + e);
+                ZmailLog.account.warn("failed to retrieve Octopus info from LDAP " + e);
             }
             return L10nUtil.getMessage(key, locale, folderView);
         }
@@ -895,7 +895,7 @@ public class ShareInfo {
                 // get all shares published on the DL and all parent DLs
                 Published.getPublished(prov, dl, false, null, visitor);
             } catch (ServiceException e) {
-                ZimbraLog.account.warn("failed to retrieve share info for dl: " + dl.getName(), e);
+                ZmailLog.account.warn("failed to retrieve share info for dl: " + dl.getName(), e);
                 return;
             }
 
@@ -908,9 +908,9 @@ public class ShareInfo {
                     // send a separate mail to each member being added instead of sending one mail to all members being added
                     sendMessage(prov, authedAcct, dl, member, visitor);
                 } catch (MessagingException e) {
-                    ZimbraLog.account.warn("failed to send share info message", e);
+                    ZmailLog.account.warn("failed to send share info message", e);
                 } catch (ServiceException e) {
-                    ZimbraLog.account.warn("failed to send share info message", e);
+                    ZmailLog.account.warn("failed to send share info message", e);
                 }
             }
         }
@@ -929,7 +929,7 @@ public class ShareInfo {
         }
 
         /*
-         * 1. if dl.zimbraDistributionListSendShareMessageFromAddress is set, use that.
+         * 1. if dl.zmailDistributionListSendShareMessageFromAddress is set, use that.
          * 2. otherwise if the authed admin has a valid email address, use that.
          * 3. otherwise use the DL's address.
          */
@@ -938,8 +938,8 @@ public class ShareInfo {
 
             InternetAddress addr;
 
-            // 1. if dl.zimbraDistributionListSendShareMessageFromAddress is set, use that.
-            String dlssmfa = dl.getAttr(Provisioning.A_zimbraDistributionListSendShareMessageFromAddress);
+            // 1. if dl.zmailDistributionListSendShareMessageFromAddress is set, use that.
+            String dlssmfa = dl.getAttr(Provisioning.A_zmailDistributionListSendShareMessageFromAddress);
             try {
                 if (dlssmfa != null) {
                     addr = new JavaMailInternetAddress(dlssmfa);
@@ -947,8 +947,8 @@ public class ShareInfo {
                 }
             } catch (AddressException e) {
                 // log and try the next one
-                ZimbraLog.account.warn("invalid address in " +
-                        Provisioning.A_zimbraDistributionListSendShareMessageFromAddress +
+                ZmailLog.account.warn("invalid address in " +
+                        Provisioning.A_zmailDistributionListSendShareMessageFromAddress +
                         " on distribution list entry " + dl.getName() +
                         ", ignored", e);
             }
@@ -961,7 +961,7 @@ public class ShareInfo {
                     addr.validate();
 
                     Address replyToAddr = addr;
-                    String replyTo = fromAcct.getAttr(Provisioning.A_zimbraPrefReplyToAddress);
+                    String replyTo = fromAcct.getAttr(Provisioning.A_zmailPrefReplyToAddress);
                     if (replyTo != null)
                         replyToAddr = new JavaMailInternetAddress(replyTo);
                     return new Pair<Address, Address>(addr, replyToAddr);
@@ -1018,7 +1018,7 @@ public class ShareInfo {
             StringBuilder rcptAddr = new StringBuilder();
             for (Address a : rcpts)
                 rcptAddr.append(a.toString());
-            ZimbraLog.account.info("share info notification sent rcpt='" + rcptAddr + "' Message-ID=" + out.getMessageID());
+            ZmailLog.account.info("share info notification sent rcpt='" + rcptAddr + "' Message-ID=" + out.getMessageID());
         }
 
         private static void sendMessage(Provisioning prov,

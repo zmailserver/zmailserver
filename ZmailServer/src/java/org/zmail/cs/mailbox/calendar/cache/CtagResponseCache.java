@@ -13,20 +13,20 @@
  * ***** END LICENSE BLOCK *****
  */
 
-package com.zimbra.cs.mailbox.calendar.cache;
+package org.zmail.cs.mailbox.calendar.cache;
 
 import java.io.UnsupportedEncodingException;
 import java.util.HashMap;
 import java.util.Map;
 
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.common.util.memcached.MemcachedKey;
-import com.zimbra.common.util.memcached.MemcachedMap;
-import com.zimbra.common.util.memcached.MemcachedSerializer;
-import com.zimbra.common.util.memcached.ZimbraMemcachedClient;
-import com.zimbra.cs.mailbox.Metadata;
-import com.zimbra.cs.memcached.MemcachedKeyPrefix;
-import com.zimbra.cs.memcached.MemcachedConnector;
+import org.zmail.common.service.ServiceException;
+import org.zmail.common.util.memcached.MemcachedKey;
+import org.zmail.common.util.memcached.MemcachedMap;
+import org.zmail.common.util.memcached.MemcachedSerializer;
+import org.zmail.common.util.memcached.ZmailMemcachedClient;
+import org.zmail.cs.mailbox.Metadata;
+import org.zmail.cs.memcached.MemcachedKeyPrefix;
+import org.zmail.cs.memcached.MemcachedConnector;
 
 // for CalDAV
 // caches responses for PROPFIND-ctag requests
@@ -35,7 +35,7 @@ public class CtagResponseCache {
     private MemcachedMap<CtagResponseCacheKey, CtagResponseCacheValue> mMemcachedLookup;
 
     CtagResponseCache() {
-        ZimbraMemcachedClient memcachedClient = MemcachedConnector.getClient();
+        ZmailMemcachedClient memcachedClient = MemcachedConnector.getClient();
         CtagResponseSerializer serializer = new CtagResponseSerializer();
         mMemcachedLookup =
             new MemcachedMap<CtagResponseCacheKey, CtagResponseCacheValue>(memcachedClient, serializer); 

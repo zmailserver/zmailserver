@@ -12,12 +12,12 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.store.triton;
+package org.zmail.cs.store.triton;
 
 import java.io.IOException;
 
-import com.zimbra.cs.store.Blob;
-import com.zimbra.cs.store.external.ExternalUploadedBlob;
+import org.zmail.cs.store.Blob;
+import org.zmail.cs.store.external.ExternalUploadedBlob;
 
 /**
  * Blob wrapper which includes a previously generated Locator

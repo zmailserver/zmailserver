@@ -12,17 +12,17 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.account.ldap.entry;
+package org.zmail.cs.account.ldap.entry;
 
 import java.util.Set;
 
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.cs.account.DynamicGroup;
-import com.zimbra.cs.account.NamedEntry;
-import com.zimbra.cs.account.Provisioning;
-import com.zimbra.cs.account.ldap.LdapProvisioning;
-import com.zimbra.cs.ldap.LdapException;
-import com.zimbra.cs.ldap.ZAttributes;
+import org.zmail.common.service.ServiceException;
+import org.zmail.cs.account.DynamicGroup;
+import org.zmail.cs.account.NamedEntry;
+import org.zmail.cs.account.Provisioning;
+import org.zmail.cs.account.ldap.LdapProvisioning;
+import org.zmail.cs.ldap.LdapException;
+import org.zmail.cs.ldap.ZAttributes;
 
 /**
  * @author pshao
@@ -35,7 +35,7 @@ public class LdapDynamicGroup extends DynamicGroup implements LdapEntry {
 
     public LdapDynamicGroup(String dn, String email, ZAttributes attrs, Provisioning prov)
     throws LdapException {
-        super(email, attrs.getAttrString(Provisioning.A_zimbraId), attrs.getAttrs(), prov);
+        super(email, attrs.getAttrString(Provisioning.A_zmailId), attrs.getAttrs(), prov);
         this.dn = dn;
     }
 
@@ -89,13 +89,13 @@ public class LdapDynamicGroup extends DynamicGroup implements LdapEntry {
 
     }
 
-    public static String getDefaultDynamicUnitMemberURL(String zimbraId) {
-        return String.format("ldap:///??sub?(zimbraMemberOf=%s)", zimbraId);
+    public static String getDefaultDynamicUnitMemberURL(String zmailId) {
+        return String.format("ldap:///??sub?(zmailMemberOf=%s)", zmailId);
     }
 
-    public static String getDefaultMemberURL(String zimbraId, String staticUnitZimbraId) {
-        return String.format("ldap:///??sub?(|(zimbraMemberOf=%s)(zimbraId=%s))",
-                zimbraId, staticUnitZimbraId);
+    public static String getDefaultMemberURL(String zmailId, String staticUnitZmailId) {
+        return String.format("ldap:///??sub?(|(zmailMemberOf=%s)(zmailId=%s))",
+                zmailId, staticUnitZmailId);
     }
 
     public static class DynamicUnit extends NamedEntry implements LdapEntry {
@@ -104,7 +104,7 @@ public class LdapDynamicGroup extends DynamicGroup implements LdapEntry {
 
         public DynamicUnit(String dn, String name, ZAttributes attrs, Provisioning prov)
         throws LdapException {
-            super(name, attrs.getAttrString(Provisioning.A_zimbraId), attrs.getAttrs(), null, prov);
+            super(name, attrs.getAttrString(Provisioning.A_zmailId), attrs.getAttrs(), null, prov);
             this.dn = dn;
             this.emailAddr = attrs.getAttrString(Provisioning.A_mail);
         }
@@ -125,13 +125,13 @@ public class LdapDynamicGroup extends DynamicGroup implements LdapEntry {
     }
 
     public static class StaticUnit extends NamedEntry implements LdapEntry {
-        public static final String MEMBER_ATTR = Provisioning.A_zimbraMailForwardingAddress;
+        public static final String MEMBER_ATTR = Provisioning.A_zmailMailForwardingAddress;
 
         private String dn;
 
         public StaticUnit(String dn, String name, ZAttributes attrs, Provisioning prov)
         throws LdapException {
-            super(name, attrs.getAttrString(Provisioning.A_zimbraId), attrs.getAttrs(), null, prov);
+            super(name, attrs.getAttrString(Provisioning.A_zmailId), attrs.getAttrs(), null, prov);
             this.dn = dn;
         }
 

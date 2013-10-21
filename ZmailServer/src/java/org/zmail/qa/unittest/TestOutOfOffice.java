@@ -13,23 +13,23 @@
  * ***** END LICENSE BLOCK *****
  */
 
-package com.zimbra.qa.unittest;
+package org.zmail.qa.unittest;
 
 import java.util.Date;
 
 import junit.framework.TestCase;
 
-import com.zimbra.common.util.Constants;
-import com.zimbra.common.util.ZimbraLog;
-import com.zimbra.cs.account.Account;
-import com.zimbra.cs.account.Provisioning;
-import com.zimbra.cs.db.DbOutOfOffice;
-import com.zimbra.cs.db.DbPool;
-import com.zimbra.cs.db.DbPool.DbConnection;
-import com.zimbra.cs.mailbox.Mailbox;
-import com.zimbra.client.ZEmailAddress;
-import com.zimbra.client.ZMailbox;
-import com.zimbra.client.ZMessage;
+import org.zmail.common.util.Constants;
+import org.zmail.common.util.ZmailLog;
+import org.zmail.cs.account.Account;
+import org.zmail.cs.account.Provisioning;
+import org.zmail.cs.db.DbOutOfOffice;
+import org.zmail.cs.db.DbPool;
+import org.zmail.cs.db.DbPool.DbConnection;
+import org.zmail.cs.mailbox.Mailbox;
+import org.zmail.client.ZEmailAddress;
+import org.zmail.client.ZMailbox;
+import org.zmail.client.ZMessage;
 
 /**
  * Tests out-of-office notification.  All tests must be run inside the server, because
@@ -53,8 +53,8 @@ extends TestCase {
     private static String NAME_PREFIX = TestOutOfOffice.class.getSimpleName();
     private static String RECIPIENT_NAME = "user1";
     private static String SENDER_NAME = "user2";
-    private static String RECIPIENT1_ADDRESS = "TestOutOfOffice1@example.zimbra.com";
-    private static String RECIPIENT2_ADDRESS = "TestOutOfOffice2@example.zimbra.com";
+    private static String RECIPIENT1_ADDRESS = "TestOutOfOffice1@example.zmail.com";
+    private static String RECIPIENT2_ADDRESS = "TestOutOfOffice2@example.zmail.com";
 
     protected void setUp() throws Exception {
         super.setUp();
@@ -65,14 +65,14 @@ extends TestCase {
         Account recipient = TestUtil.getAccount(RECIPIENT_NAME);
         mOriginalFromAddress = recipient.getPrefFromAddress();
         mOriginalFromDisplay = recipient.getPrefFromDisplay();
-        mOriginalAllowAnyFrom = TestUtil.getAccountAttr(RECIPIENT_NAME, Provisioning.A_zimbraAllowAnyFromAddress);
+        mOriginalAllowAnyFrom = TestUtil.getAccountAttr(RECIPIENT_NAME, Provisioning.A_zmailAllowAnyFromAddress);
         mOriginalReplyEnabled =
-            TestUtil.getAccountAttr(RECIPIENT_NAME, Provisioning.A_zimbraPrefOutOfOfficeReplyEnabled);
+            TestUtil.getAccountAttr(RECIPIENT_NAME, Provisioning.A_zmailPrefOutOfOfficeReplyEnabled);
         mOriginalFromDate = recipient.getPrefOutOfOfficeFromDateAsString();
         mOriginalUntilDate = recipient.getPrefOutOfOfficeUntilDateAsString();
         mOriginalReplyToAddress = recipient.getPrefReplyToAddress();
         mOriginalReplyToDisplay = recipient.getPrefReplyToDisplay();
-        mOriginalReplyToEnabled = TestUtil.getAccountAttr(RECIPIENT_NAME, Provisioning.A_zimbraPrefReplyToEnabled);
+        mOriginalReplyToEnabled = TestUtil.getAccountAttr(RECIPIENT_NAME, Provisioning.A_zmailPrefReplyToEnabled);
 
         cleanUp();
 }
@@ -175,7 +175,7 @@ extends TestCase {
         subject = NAME_PREFIX + " testPrefFromAddress 3";
         TestUtil.sendMessage(senderMbox, RECIPIENT_NAME, subject);
         reply = TestUtil.waitForMessage(senderMbox, "in:inbox subject:\"" + subject + "\"");
-        ZimbraLog.test.info("Second reply:\n" + TestUtil.getContent(senderMbox, reply.getId()));
+        ZmailLog.test.info("Second reply:\n" + TestUtil.getContent(senderMbox, reply.getId()));
 
         // Validate addresses.
         fromAddress = getAddress(reply, ZEmailAddress.EMAIL_TYPE_FROM);
@@ -204,14 +204,14 @@ extends TestCase {
         Account recipient = TestUtil.getAccount(RECIPIENT_NAME);
         recipient.setPrefFromAddress(mOriginalFromAddress);
         recipient.setPrefFromDisplay(mOriginalFromDisplay);
-        TestUtil.setAccountAttr(RECIPIENT_NAME, Provisioning.A_zimbraAllowAnyFromAddress, mOriginalAllowAnyFrom);
+        TestUtil.setAccountAttr(RECIPIENT_NAME, Provisioning.A_zmailAllowAnyFromAddress, mOriginalAllowAnyFrom);
 
-        TestUtil.setAccountAttr(RECIPIENT_NAME, Provisioning.A_zimbraPrefOutOfOfficeReplyEnabled, mOriginalReplyEnabled);
-        TestUtil.setAccountAttr(RECIPIENT_NAME, Provisioning.A_zimbraPrefOutOfOfficeFromDate, mOriginalFromDate);
-        TestUtil.setAccountAttr(RECIPIENT_NAME, Provisioning.A_zimbraPrefOutOfOfficeUntilDate, mOriginalUntilDate);
+        TestUtil.setAccountAttr(RECIPIENT_NAME, Provisioning.A_zmailPrefOutOfOfficeReplyEnabled, mOriginalReplyEnabled);
+        TestUtil.setAccountAttr(RECIPIENT_NAME, Provisioning.A_zmailPrefOutOfOfficeFromDate, mOriginalFromDate);
+        TestUtil.setAccountAttr(RECIPIENT_NAME, Provisioning.A_zmailPrefOutOfOfficeUntilDate, mOriginalUntilDate);
         recipient.setPrefReplyToAddress(mOriginalReplyToAddress);
         recipient.setPrefReplyToDisplay(mOriginalReplyToDisplay);
-        TestUtil.setAccountAttr(RECIPIENT_NAME, Provisioning.A_zimbraPrefReplyToEnabled, mOriginalReplyToEnabled);
+        TestUtil.setAccountAttr(RECIPIENT_NAME, Provisioning.A_zmailPrefReplyToEnabled, mOriginalReplyToEnabled);
 
         super.tearDown();
     }

@@ -12,7 +12,7 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.imap;
+package org.zmail.cs.imap;
 
 import java.io.IOException;
 import java.net.InetSocketAddress;
@@ -25,7 +25,7 @@ import org.junit.After;
 import org.junit.Test;
 
 import com.google.common.base.Charsets;
-import com.zimbra.cs.util.MockTcpServer;
+import org.zmail.cs.util.MockTcpServer;
 
 /**
  * Unit test for {@link ImapProxy}.
@@ -51,7 +51,7 @@ public final class ImapProxyTest {
             .sendLine("* CAPABILITY IMAP4rev1 AUTH=X-ZIMBRA")
             .reply(Pattern.compile("(.*) CAPABILITY"), "{0} OK CAPABILITY\r\n")
             .recvLine() // ID
-            .sendLine("* ID (\"NAME\" \"Zimbra\")")
+            .sendLine("* ID (\"NAME\" \"Zmail\")")
             .reply(Pattern.compile("(.*) ID"), "{0} OK ID completed\r\n")
             .recvLine() // AUTHENTICATE
             .sendLine("+ ready for literal")
@@ -63,7 +63,7 @@ public final class ImapProxyTest {
             .build().start(PORT);
 
         MockImapHandler handler = new MockImapHandler();
-        ImapProxy proxy = new ImapProxy(new InetSocketAddress(PORT), "test@zimbra.com", "secret", handler);
+        ImapProxy proxy = new ImapProxy(new InetSocketAddress(PORT), "test@zmail.com", "secret", handler);
         proxy.proxy("001", "NOOP");
         try {
             proxy.proxy("002", "NOOP");

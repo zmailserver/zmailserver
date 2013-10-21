@@ -12,7 +12,7 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.ldap.unboundid;
+package org.zmail.cs.ldap.unboundid;
 
 import java.io.IOException;
 import java.io.PrintStream;
@@ -32,27 +32,27 @@ import com.unboundid.ldap.sdk.SearchScope;
 import com.unboundid.ldap.sdk.schema.Schema;
 import com.unboundid.ldif.LDIFException;
 import com.unboundid.ldif.LDIFWriter;
-import com.zimbra.common.localconfig.DebugConfig;
-import com.zimbra.common.localconfig.LC;
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.cs.account.auth.PasswordUtil;
-import com.zimbra.cs.ldap.LdapClient;
-import com.zimbra.cs.ldap.LdapConstants;
-import com.zimbra.cs.ldap.LdapException;
-import com.zimbra.cs.ldap.LdapServerConfig;
-import com.zimbra.cs.ldap.LdapUsage;
-import com.zimbra.cs.ldap.LdapUtil;
+import org.zmail.common.localconfig.DebugConfig;
+import org.zmail.common.localconfig.LC;
+import org.zmail.common.service.ServiceException;
+import org.zmail.cs.account.auth.PasswordUtil;
+import org.zmail.cs.ldap.LdapClient;
+import org.zmail.cs.ldap.LdapConstants;
+import org.zmail.cs.ldap.LdapException;
+import org.zmail.cs.ldap.LdapServerConfig;
+import org.zmail.cs.ldap.LdapUsage;
+import org.zmail.cs.ldap.LdapUtil;
 
 public class InMemoryLdapServer {
     public static final String ZIMBRA_LDAP_SERVER = "ZIMBRA_LDAP_SERVER";
     
     public static final String UNITTEST_BASE_DOMAIN_SEGMENT = "unittest";
     
-    private static final String UNITTEST_DATA_PATH = LC.zimbra_home.value() + 
+    private static final String UNITTEST_DATA_PATH = LC.zmail_home.value() + 
             "/unittest/ldap/InMemoryLdapServer";
     
-    private static final String SCHEMA_FILE_NAME = "zimbra_schema.ldif";
-    private static final String DIT_FILE_NAME = "zimbra_dit.ldif";
+    private static final String SCHEMA_FILE_NAME = "zmail_schema.ldif";
+    private static final String DIT_FILE_NAME = "zmail_dit.ldif";
     
     private static Map<String, Server> servers = Maps.newHashMap();
     
@@ -112,8 +112,8 @@ public class InMemoryLdapServer {
         return server.getConnectionPool(config);
     }
     
-    // only used for external LDAP auth, just use the default Zimbra server, as all
-    // unit tests are using the Zimbra LDAP server for external LDAP server
+    // only used for external LDAP auth, just use the default Zmail server, as all
+    // unit tests are using the Zmail LDAP server for external LDAP server
     static LDAPConnection getConnection() throws LdapException {
         Server server = getServer(ZIMBRA_LDAP_SERVER);
         return server.getConnection();
@@ -129,7 +129,7 @@ public class InMemoryLdapServer {
     }
     
     public static void export() throws LdapException {
-        String path = LC.zimbra_tmp_directory.value() + "/inmem_ldap_%s.ldif";
+        String path = LC.zmail_tmp_directory.value() + "/inmem_ldap_%s.ldif";
         
         for (Map.Entry<String, Server> entry : servers.entrySet()) {
             String serverName = entry.getKey();
@@ -228,10 +228,10 @@ public class InMemoryLdapServer {
                 
                 // get top level domain name setup in reset-all.
                 // In reset-all, the default domain name is the same as the local server name
-                String domainName = LC.zimbra_server_hostname.value();
+                String domainName = LC.zmail_server_hostname.value();
                 String topLevelDomainDN = LdapUtil.domainToTopLevelDN(domainName);
                 
-                List<String> baseDNs = Lists.newArrayList("cn=zimbra", topLevelDomainDN, "dc=com");
+                List<String> baseDNs = Lists.newArrayList("cn=zmail", topLevelDomainDN, "dc=com");
                 List<String> extraBaseDNs = serverConfig.extraBaseDNs();
                 if (extraBaseDNs != null) {
                     baseDNs.addAll(extraBaseDNs);
@@ -346,7 +346,7 @@ public class InMemoryLdapServer {
         }
         
         /**
-         * Generate LDIF files for Zimbra schema and the entire DIT from the 
+         * Generate LDIF files for Zmail schema and the entire DIT from the 
          * current image of LDAP database.
          */
         private void generateLDIF() {

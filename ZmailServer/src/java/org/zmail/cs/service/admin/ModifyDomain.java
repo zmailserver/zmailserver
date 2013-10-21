@@ -16,20 +16,20 @@
 /*
  * Created on Jun 17, 2004
  */
-package com.zimbra.cs.service.admin;
+package org.zmail.cs.service.admin;
 
-import com.zimbra.common.account.Key;
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.common.soap.AdminConstants;
-import com.zimbra.common.soap.Element;
-import com.zimbra.common.util.ZimbraLog;
-import com.zimbra.cs.account.AccountServiceException;
-import com.zimbra.cs.account.Cos;
-import com.zimbra.cs.account.Domain;
-import com.zimbra.cs.account.Provisioning;
-import com.zimbra.cs.account.accesscontrol.AdminRight;
-import com.zimbra.cs.account.accesscontrol.Rights.Admin;
-import com.zimbra.soap.ZimbraSoapContext;
+import org.zmail.common.account.Key;
+import org.zmail.common.service.ServiceException;
+import org.zmail.common.soap.AdminConstants;
+import org.zmail.common.soap.Element;
+import org.zmail.common.util.ZmailLog;
+import org.zmail.cs.account.AccountServiceException;
+import org.zmail.cs.account.Cos;
+import org.zmail.cs.account.Domain;
+import org.zmail.cs.account.Provisioning;
+import org.zmail.cs.account.accesscontrol.AdminRight;
+import org.zmail.cs.account.accesscontrol.Rights.Admin;
+import org.zmail.soap.ZmailSoapContext;
 
 import java.util.List;
 import java.util.Map;
@@ -45,7 +45,7 @@ public class ModifyDomain extends AdminDocumentHandler {
     
 	public Element handle(Element request, Map<String, Object> context) throws ServiceException {
 
-        ZimbraSoapContext zsc = getZimbraSoapContext(context);
+        ZmailSoapContext zsc = getZmailSoapContext(context);
 	    Provisioning prov = Provisioning.getInstance();
 
 	    String id = request.getAttribute(AdminConstants.E_ID);
@@ -61,13 +61,13 @@ public class ModifyDomain extends AdminDocumentHandler {
         checkDomainRight(zsc, domain, attrs);
         
         // check to see if domain default cos is being changed, need right on new cos 
-        checkCos(zsc, attrs, Provisioning.A_zimbraDomainDefaultCOSId);
-        checkCos(zsc, attrs, Provisioning.A_zimbraDomainDefaultExternalUserCOSId);
+        checkCos(zsc, attrs, Provisioning.A_zmailDomainDefaultCOSId);
+        checkCos(zsc, attrs, Provisioning.A_zmailDomainDefaultExternalUserCOSId);
 
         // pass in true to checkImmutable
         prov.modifyAttrs(domain, attrs, true);
 
-        ZimbraLog.security.info(ZimbraLog.encodeAttrs(
+        ZmailLog.security.info(ZmailLog.encodeAttrs(
                 new String[] {"cmd", "ModifyDomain","name", domain.getName()}, attrs));	    
 
         Element response = zsc.createElement(AdminConstants.MODIFY_DOMAIN_RESPONSE);
@@ -75,7 +75,7 @@ public class ModifyDomain extends AdminDocumentHandler {
 	    return response;
 	}
 	
-    private void checkCos(ZimbraSoapContext zsc, Map<String, Object> attrs, String defaultCOSIdAttrName)
+    private void checkCos(ZmailSoapContext zsc, Map<String, Object> attrs, String defaultCOSIdAttrName)
             throws ServiceException {
         String newDomainCosId = ModifyAccount.getStringAttrNewValue(defaultCOSIdAttrName, attrs);
         if (newDomainCosId == null)
@@ -103,8 +103,8 @@ public class ModifyDomain extends AdminDocumentHandler {
         notes.add(String.format(AdminRightCheckPoint.Notes.MODIFY_ENTRY, 
                 Admin.R_modifyDomain.getName(), "domain"));
         
-        notes.add("Notes on " + Provisioning.A_zimbraDomainDefaultCOSId + ": " +
-                "If setting " + Provisioning.A_zimbraDomainDefaultCOSId + ", needs the " + Admin.R_assignCos.getName() + 
+        notes.add("Notes on " + Provisioning.A_zmailDomainDefaultCOSId + ": " +
+                "If setting " + Provisioning.A_zmailDomainDefaultCOSId + ", needs the " + Admin.R_assignCos.getName() + 
                 " right on the cos.");
     }
 }

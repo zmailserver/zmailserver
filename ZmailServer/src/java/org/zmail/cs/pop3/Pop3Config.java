@@ -13,17 +13,17 @@
  * ***** END LICENSE BLOCK *****
  */
 
-package com.zimbra.cs.pop3;
+package org.zmail.cs.pop3;
 
-import com.zimbra.common.localconfig.LC;
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.common.util.Log;
-import com.zimbra.common.util.ZimbraLog;
-import com.zimbra.cs.server.ServerConfig;
-import com.zimbra.cs.util.BuildInfo;
-import com.zimbra.cs.util.Config;
+import org.zmail.common.localconfig.LC;
+import org.zmail.common.service.ServiceException;
+import org.zmail.common.util.Log;
+import org.zmail.common.util.ZmailLog;
+import org.zmail.cs.server.ServerConfig;
+import org.zmail.cs.util.BuildInfo;
+import org.zmail.cs.util.Config;
 
-import static com.zimbra.cs.account.Provisioning.*;
+import static org.zmail.cs.account.Provisioning.*;
 
 public class Pop3Config extends ServerConfig {
     private static final String PROTOCOL = "POP3";
@@ -34,31 +34,31 @@ public class Pop3Config extends ServerConfig {
 
     @Override
     public String getServerName() {
-        return getAttr(A_zimbraPop3AdvertisedName, LC.zimbra_server_hostname.value());
+        return getAttr(A_zmailPop3AdvertisedName, LC.zmail_server_hostname.value());
     }
 
     @Override
     public String getServerVersion() {
-        return getBooleanAttr(A_zimbraPop3ExposeVersionOnBanner, false) ?
+        return getBooleanAttr(A_zmailPop3ExposeVersionOnBanner, false) ?
             BuildInfo.VERSION : null;
     }
 
     @Override
     public String getBindAddress() {
         return getAttr(isSslEnabled() ?
-            A_zimbraPop3SSLBindAddress : A_zimbraPop3BindAddress, null);
+            A_zmailPop3SSLBindAddress : A_zmailPop3BindAddress, null);
     }
 
     @Override
     public int getBindPort() {
         return isSslEnabled() ?
-            getIntAttr(A_zimbraPop3SSLBindPort, Config.D_POP3_SSL_BIND_PORT) :
-            getIntAttr(A_zimbraPop3BindPort, Config.D_POP3_BIND_PORT);
+            getIntAttr(A_zmailPop3SSLBindPort, Config.D_POP3_SSL_BIND_PORT) :
+            getIntAttr(A_zmailPop3BindPort, Config.D_POP3_BIND_PORT);
     }
 
     @Override
     public int getShutdownTimeout() {
-       return getIntAttr(A_zimbraPop3ShutdownGraceSeconds, super.getShutdownTimeout());
+       return getIntAttr(A_zmailPop3ShutdownGraceSeconds, super.getShutdownTimeout());
     }
 
     @Override
@@ -68,7 +68,7 @@ public class Pop3Config extends ServerConfig {
 
     @Override
     public int getMaxThreads() {
-        return getIntAttr(A_zimbraPop3NumThreads, super.getMaxThreads());
+        return getIntAttr(A_zmailPop3NumThreads, super.getMaxThreads());
     }
 
     @Override
@@ -78,7 +78,7 @@ public class Pop3Config extends ServerConfig {
 
     @Override
     public int getMaxConnections() {
-        return getIntAttr(A_zimbraPop3MaxConnections, super.getMaxConnections());
+        return getIntAttr(A_zmailPop3MaxConnections, super.getMaxConnections());
     }
 
     @Override
@@ -88,7 +88,7 @@ public class Pop3Config extends ServerConfig {
 
     @Override
     public Log getLog() {
-        return ZimbraLog.pop;
+        return ZmailLog.pop;
     }
 
     @Override
@@ -97,10 +97,10 @@ public class Pop3Config extends ServerConfig {
     }
 
     public boolean isCleartextLoginsEnabled() {
-        return getBooleanAttr(A_zimbraPop3CleartextLoginEnabled, false);
+        return getBooleanAttr(A_zmailPop3CleartextLoginEnabled, false);
     }
 
     public boolean isSaslGssapiEnabled() {
-        return getBooleanAttr(A_zimbraPop3SaslGssapiEnabled, false);
+        return getBooleanAttr(A_zmailPop3SaslGssapiEnabled, false);
     }
 }

@@ -21,7 +21,7 @@ use LWP::UserAgent;
 use Getopt::Long;
 use XmlDoc;
 use Soap;
-use ZimbraSoapTest;
+use ZmailSoapTest;
 
 # specific to this app
 my ($tests);
@@ -49,7 +49,7 @@ END_OF_USAGE
 my %soapargs;
 $soapargs{'TIMEOUT'} = 10 * 60;
 
-my $z = ZimbraSoapTest->new($user, $host, $pw, \%soapargs);
+my $z = ZmailSoapTest->new($user, $host, $pw, \%soapargs);
 $z->doAdminAuth();
 
 my $d = new XmlDoc;

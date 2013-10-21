@@ -12,7 +12,7 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.mailbox;
+package org.zmail.cs.mailbox;
 
 import java.io.ByteArrayInputStream;
 import java.io.InputStream;
@@ -25,13 +25,13 @@ import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
-import com.zimbra.common.account.Key;
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.cs.account.Account;
-import com.zimbra.cs.account.MockProvisioning;
-import com.zimbra.cs.account.Provisioning;
-import com.zimbra.cs.mailbox.MailItem.Type;
-import com.zimbra.cs.mime.ParsedDocument;
+import org.zmail.common.account.Key;
+import org.zmail.common.service.ServiceException;
+import org.zmail.cs.account.Account;
+import org.zmail.cs.account.MockProvisioning;
+import org.zmail.cs.account.Provisioning;
+import org.zmail.cs.mailbox.MailItem.Type;
+import org.zmail.cs.mime.ParsedDocument;
 
 public class CommentTest {
 
@@ -43,7 +43,7 @@ public class CommentTest {
     public static void init() throws Exception {
         MailboxTestUtil.initServer();
         Provisioning prov = Provisioning.getInstance();
-        prov.createAccount("test@zimbra.com", "secret", new HashMap<String, Object>()).setDumpsterEnabled(true);
+        prov.createAccount("test@zmail.com", "secret", new HashMap<String, Object>()).setDumpsterEnabled(true);
     }
 
     @Before
@@ -107,9 +107,9 @@ public class CommentTest {
     public void deleteOwnComment() throws Exception {
         Provisioning prov = Provisioning.getInstance();
         HashMap<String,Object> attrs = new HashMap<String,Object>();
-        attrs.put(Provisioning.A_zimbraId, "17dd075e-2b47-44e6-8cb8-7fdfa18c1a9f");
-        Account grantee = prov.createAccount("grantee@zimbra.com", "secret", attrs);
-        Account owner = prov.get(Key.AccountBy.name, "test@zimbra.com");
+        attrs.put(Provisioning.A_zmailId, "17dd075e-2b47-44e6-8cb8-7fdfa18c1a9f");
+        Account grantee = prov.createAccount("grantee@zmail.com", "secret", attrs);
+        Account owner = prov.get(Key.AccountBy.name, "test@zmail.com");
         mbox.grantAccess(new OperationContext(owner), folder.getId(), grantee.getId(), ACL.GRANTEE_USER, ACL.stringToRights("rwd"), null);
         Comment ownComment = mbox.createComment(new OperationContext(grantee), doc.mId, "own comment", grantee.getId());
         mbox.delete(new OperationContext(grantee), ownComment.mId, Type.COMMENT);
@@ -119,12 +119,12 @@ public class CommentTest {
     public void deleteOthersComment() throws Exception {
         Provisioning prov = Provisioning.getInstance();
         HashMap<String,Object> attrs = new HashMap<String,Object>();
-        attrs.put(Provisioning.A_zimbraId, "17dd075e-2b47-44e6-8cb8-7fdfa18c1a9f");
-        Account grantee1 = prov.createAccount("grantee1@zimbra.com", "secret", attrs);
+        attrs.put(Provisioning.A_zmailId, "17dd075e-2b47-44e6-8cb8-7fdfa18c1a9f");
+        Account grantee1 = prov.createAccount("grantee1@zmail.com", "secret", attrs);
         attrs = new HashMap<String,Object>();
-        attrs.put(Provisioning.A_zimbraId, "a4e41fbe-9c3e-4ab5-8b34-c42f17e251cd");
-        Account grantee2 = prov.createAccount("grantee2@zimbra.com", "secret", attrs);
-        Account owner = prov.get(Key.AccountBy.name, "test@zimbra.com");
+        attrs.put(Provisioning.A_zmailId, "a4e41fbe-9c3e-4ab5-8b34-c42f17e251cd");
+        Account grantee2 = prov.createAccount("grantee2@zmail.com", "secret", attrs);
+        Account owner = prov.get(Key.AccountBy.name, "test@zmail.com");
         mbox.grantAccess(new OperationContext(owner), folder.getId(), grantee1.getId(), ACL.GRANTEE_USER, ACL.stringToRights("rwd"), null);
         mbox.grantAccess(new OperationContext(owner), folder.getId(), grantee2.getId(), ACL.GRANTEE_USER, ACL.stringToRights("rwd"), null);
         Comment ownComment = mbox.createComment(new OperationContext(grantee1), doc.mId, "grantee1's comment", grantee1.getId());

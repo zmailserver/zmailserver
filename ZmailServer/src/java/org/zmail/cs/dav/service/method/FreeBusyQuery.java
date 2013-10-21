@@ -12,7 +12,7 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.dav.service.method;
+package org.zmail.cs.dav.service.method;
 
 import java.io.IOException;
 
@@ -20,14 +20,14 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.dom4j.Element;
 
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.common.mime.MimeConstants;
-import com.zimbra.cs.dav.DavContext;
-import com.zimbra.cs.dav.DavElements;
-import com.zimbra.cs.dav.DavException;
-import com.zimbra.cs.dav.caldav.Range.TimeRange;
-import com.zimbra.cs.dav.resource.CalendarCollection;
-import com.zimbra.cs.dav.resource.DavResource;
+import org.zmail.common.service.ServiceException;
+import org.zmail.common.mime.MimeConstants;
+import org.zmail.cs.dav.DavContext;
+import org.zmail.cs.dav.DavElements;
+import org.zmail.cs.dav.DavException;
+import org.zmail.cs.dav.caldav.Range.TimeRange;
+import org.zmail.cs.dav.resource.CalendarCollection;
+import org.zmail.cs.dav.resource.DavResource;
 
 /*
  * draft-dusseault-caldav section 9.11

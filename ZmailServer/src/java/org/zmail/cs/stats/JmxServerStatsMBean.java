@@ -13,7 +13,7 @@
  * ***** END LICENSE BLOCK *****
  */
 
-package com.zimbra.cs.stats;
+package org.zmail.cs.stats;
 
 public interface JmxServerStatsMBean
 {

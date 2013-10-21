@@ -12,23 +12,23 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.qa.unittest.server;
+package org.zmail.qa.unittest.server;
 
 import junit.framework.TestCase;
 
-import com.zimbra.client.ZFolder;
-import com.zimbra.client.ZImapDataSource;
-import com.zimbra.client.ZMailbox;
-import com.zimbra.cs.account.Account;
-import com.zimbra.cs.account.Cos;
-import com.zimbra.cs.account.Provisioning;
-import com.zimbra.cs.account.Server;
-import com.zimbra.cs.datasource.DataSourceManager;
-import com.zimbra.cs.ldap.LdapConstants;
-import com.zimbra.cs.mailbox.Mailbox;
-import com.zimbra.cs.mailbox.ScheduledTask;
-import com.zimbra.qa.unittest.TestUtil;
-import com.zimbra.soap.type.DataSource.ConnectionType;
+import org.zmail.client.ZFolder;
+import org.zmail.client.ZImapDataSource;
+import org.zmail.client.ZMailbox;
+import org.zmail.cs.account.Account;
+import org.zmail.cs.account.Cos;
+import org.zmail.cs.account.Provisioning;
+import org.zmail.cs.account.Server;
+import org.zmail.cs.datasource.DataSourceManager;
+import org.zmail.cs.ldap.LdapConstants;
+import org.zmail.cs.mailbox.Mailbox;
+import org.zmail.cs.mailbox.ScheduledTask;
+import org.zmail.qa.unittest.TestUtil;
+import org.zmail.soap.type.DataSource.ConnectionType;
 
 public class TestDataSourceServer extends TestCase {
 
@@ -51,22 +51,22 @@ public class TestDataSourceServer extends TestCase {
         // Remember original polling intervals.
         Account account = TestUtil.getAccount(USER_NAME);
         Cos cos = account.getCOS();
-        mOriginalAccountPollingInterval = account.getAttr(Provisioning.A_zimbraDataSourcePollingInterval, false);
+        mOriginalAccountPollingInterval = account.getAttr(Provisioning.A_zmailDataSourcePollingInterval, false);
         if (mOriginalAccountPollingInterval == null) {
             mOriginalAccountPollingInterval = "";
         }
-        mOriginalAccountPop3PollingInterval = account.getAttr(Provisioning.A_zimbraDataSourcePop3PollingInterval, false);
+        mOriginalAccountPop3PollingInterval = account.getAttr(Provisioning.A_zmailDataSourcePop3PollingInterval, false);
         if (mOriginalAccountPop3PollingInterval == null) {
             mOriginalAccountPop3PollingInterval = "";
         }
-        mOriginalAccountImapPollingInterval = account.getAttr(Provisioning.A_zimbraDataSourceImapPollingInterval, false);
+        mOriginalAccountImapPollingInterval = account.getAttr(Provisioning.A_zmailDataSourceImapPollingInterval, false);
         if (mOriginalAccountImapPollingInterval == null) {
             mOriginalAccountImapPollingInterval = "";
         }
         
-        mOriginalCosPollingInterval = cos.getAttr(Provisioning.A_zimbraDataSourcePollingInterval, "");
-        mOriginalCosPop3PollingInterval = cos.getAttr(Provisioning.A_zimbraDataSourcePop3PollingInterval, "");
-        mOriginalCosImapPollingInterval = cos.getAttr(Provisioning.A_zimbraDataSourceImapPollingInterval, "");
+        mOriginalCosPollingInterval = cos.getAttr(Provisioning.A_zmailDataSourcePollingInterval, "");
+        mOriginalCosPop3PollingInterval = cos.getAttr(Provisioning.A_zmailDataSourcePop3PollingInterval, "");
+        mOriginalCosImapPollingInterval = cos.getAttr(Provisioning.A_zmailDataSourceImapPollingInterval, "");
     }
     
     public void testScheduling()
@@ -83,8 +83,8 @@ public class TestDataSourceServer extends TestCase {
         
         // Test scheduling based on polling interval. 
         Mailbox mbox = TestUtil.getMailbox(USER_NAME);
-        String attrName = Provisioning.A_zimbraDataSourcePollingInterval;
-        String imapAttrName = Provisioning.A_zimbraDataSourceImapPollingInterval;
+        String attrName = Provisioning.A_zmailDataSourcePollingInterval;
+        String imapAttrName = Provisioning.A_zmailDataSourceImapPollingInterval;
         TestUtil.setDataSourceAttr(USER_NAME, zds.getName(), attrName, "0");
         checkSchedule(mbox, dsId, null);
         
@@ -106,7 +106,7 @@ public class TestDataSourceServer extends TestCase {
         TestUtil.setDataSourceAttr(USER_NAME, zds.getName(), attrName, "");
         checkSchedule(mbox, dsId, 300000);
         
-        TestUtil.setDataSourceAttr(USER_NAME, zds.getName(), Provisioning.A_zimbraDataSourceEnabled, LdapConstants.LDAP_FALSE);
+        TestUtil.setDataSourceAttr(USER_NAME, zds.getName(), Provisioning.A_zmailDataSourceEnabled, LdapConstants.LDAP_FALSE);
         checkSchedule(mbox, dsId, null);
     }
     

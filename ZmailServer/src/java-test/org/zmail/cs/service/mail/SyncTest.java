@@ -12,7 +12,7 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.service.mail;
+package org.zmail.cs.service.mail;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -23,29 +23,29 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 
 import com.google.common.collect.ImmutableMap;
-import com.zimbra.common.account.Key;
-import com.zimbra.common.mailbox.Color;
-import com.zimbra.common.mailbox.ContactConstants;
-import com.zimbra.common.soap.Element;
-import com.zimbra.common.soap.MailConstants;
-import com.zimbra.common.soap.SoapProtocol;
-import com.zimbra.cs.account.Account;
-import com.zimbra.cs.account.Provisioning;
-import com.zimbra.cs.mailbox.Mailbox;
-import com.zimbra.cs.mailbox.MailboxManager;
-import com.zimbra.cs.mailbox.MailboxTestUtil;
-import com.zimbra.cs.mailbox.MailItem;
-import com.zimbra.cs.mime.ParsedContact;
-import com.zimbra.cs.service.AuthProvider;
-import com.zimbra.soap.SoapEngine;
-import com.zimbra.soap.ZimbraSoapContext;
+import org.zmail.common.account.Key;
+import org.zmail.common.mailbox.Color;
+import org.zmail.common.mailbox.ContactConstants;
+import org.zmail.common.soap.Element;
+import org.zmail.common.soap.MailConstants;
+import org.zmail.common.soap.SoapProtocol;
+import org.zmail.cs.account.Account;
+import org.zmail.cs.account.Provisioning;
+import org.zmail.cs.mailbox.Mailbox;
+import org.zmail.cs.mailbox.MailboxManager;
+import org.zmail.cs.mailbox.MailboxTestUtil;
+import org.zmail.cs.mailbox.MailItem;
+import org.zmail.cs.mime.ParsedContact;
+import org.zmail.cs.service.AuthProvider;
+import org.zmail.soap.SoapEngine;
+import org.zmail.soap.ZmailSoapContext;
 
 public class SyncTest {
     @BeforeClass
     public static void init() throws Exception {
         MailboxTestUtil.initServer();
         Provisioning prov = Provisioning.getInstance();
-        prov.createAccount("test@zimbra.com", "secret", new HashMap<String, Object>());
+        prov.createAccount("test@zmail.com", "secret", new HashMap<String, Object>());
     }
 
     @Before
@@ -55,7 +55,7 @@ public class SyncTest {
 
     @Test
     public void tags() throws Exception {
-        Account acct = Provisioning.getInstance().get(Key.AccountBy.name, "test@zimbra.com");
+        Account acct = Provisioning.getInstance().get(Key.AccountBy.name, "test@zmail.com");
         Mailbox mbox = MailboxManager.getInstance().getMailboxByAccount(acct);
 
         mbox.beginTrackingSync();
@@ -68,7 +68,7 @@ public class SyncTest {
         Element request = new Element.XMLElement(MailConstants.SYNC_REQUEST);
 
         Map<String, Object> context = new HashMap<String, Object>();
-        context.put(SoapEngine.ZIMBRA_CONTEXT, new ZimbraSoapContext(AuthProvider.getAuthToken(acct), acct.getId(), SoapProtocol.Soap12, SoapProtocol.Soap12));
+        context.put(SoapEngine.ZIMBRA_CONTEXT, new ZmailSoapContext(AuthProvider.getAuthToken(acct), acct.getId(), SoapProtocol.Soap12, SoapProtocol.Soap12));
         Element response = new Sync().handle(request, context);
         String token = response.getAttribute(MailConstants.A_TOKEN);
 

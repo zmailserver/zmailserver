@@ -12,14 +12,14 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.ldap;
+package org.zmail.cs.ldap;
 
 import java.util.Map;
 import java.util.Set;
 
-import com.zimbra.common.util.ZimbraLog;
-import com.zimbra.cs.ldap.LdapTODO.TODO;
-import com.zimbra.cs.ldap.ZLdapFilterFactory.FilterId;
+import org.zmail.common.util.ZmailLog;
+import org.zmail.cs.ldap.LdapTODO.TODO;
+import org.zmail.cs.ldap.ZLdapFilterFactory.FilterId;
 
 
 public class SearchLdapOptions {
@@ -69,7 +69,7 @@ public class SearchLdapOptions {
         public void visit(String dn, Map<String, Object> attrs, IAttributes ldapAttrs)
         throws StopIteratingException {
             assert(false);
-            ZimbraLog.ldap.warn("default implementation of SearchLdapVisitor.visit is invoked");
+            ZmailLog.ldap.warn("default implementation of SearchLdapVisitor.visit is invoked");
             throw new StopIteratingException();
         }
         
@@ -87,7 +87,7 @@ public class SearchLdapOptions {
         public void visit(String dn, IAttributes ldapAttrs)
         throws StopIteratingException {
             assert(false);
-            ZimbraLog.ldap.warn("default implementation of SearchLdapVisitor.visit is invoked");
+            ZmailLog.ldap.warn("default implementation of SearchLdapVisitor.visit is invoked");
             throw new StopIteratingException();
         }
     }

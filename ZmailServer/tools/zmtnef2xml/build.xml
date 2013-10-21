@@ -11,8 +11,8 @@
 	<property name="src.java.dir" location="src/java" />
 	<property name="build.dir" location="build" />
 	<property name="build.classes.dir" location="${build.dir}/classes" />
-	<property name="zimbra.home.dir" location="/opt/zimbra" />
-	<property name="common.dir" location="../../../ZimbraCommon"/>
+	<property name="zmail.home.dir" location="/opt/zmail" />
+	<property name="common.dir" location="../../../ZmailCommon"/>
 	<property name="common.jars.dir" location="${common.dir}/jars"/>
 
 	<path id="all.java.path">
@@ -42,7 +42,7 @@
 				<zipfileset dir="${build.classes.dir}" prefix="" />
 				<zipfileset src="${common.jars.dir}/tnef-1.6.0.jar" />
 				<manifest>
-					<attribute name="Main-Class" value="com.zimbra.zmtnef2xml.Main" />
+					<attribute name="Main-Class" value="org.zmail.zmtnef2xml.Main" />
 				</manifest>
 			</jar>
 	</target>

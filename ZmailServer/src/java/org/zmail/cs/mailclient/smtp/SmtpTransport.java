@@ -12,7 +12,7 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.mailclient.smtp;
+package org.zmail.cs.mailclient.smtp;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -41,8 +41,8 @@ import com.google.common.base.Strings;
 import com.google.common.collect.Iterables;
 import com.sun.mail.smtp.SMTPMessage;
 import com.sun.mail.util.PropUtil;
-import com.zimbra.common.util.ZimbraLog;
-import com.zimbra.cs.util.BuildInfo;
+import org.zmail.common.util.ZmailLog;
+import org.zmail.cs.util.BuildInfo;
 
 /**
  * A custom SMTP {@link Transport} implementation using {@link SmtpConnection}.
@@ -102,7 +102,7 @@ import com.zimbra.cs.util.BuildInfo;
 public class SmtpTransport extends Transport {
 
     public static final Provider PROVIDER = new Provider(
-            Provider.Type.TRANSPORT, "smtp", SmtpTransport.class.getName(), "Zimbra", BuildInfo.VERSION);
+            Provider.Type.TRANSPORT, "smtp", SmtpTransport.class.getName(), "Zmail", BuildInfo.VERSION);
 
     private SmtpConnection connection;
     private final boolean ssl;
@@ -223,10 +223,10 @@ public class SmtpTransport extends Transport {
                 connection.sendMessage(rcpts, (MimeMessage) msg);
             }
         } catch (MessagingException e) {
-            ZimbraLog.smtp.warn("Failed to send message", e);
+            ZmailLog.smtp.warn("Failed to send message", e);
             notify(e, msg, rcpts);
         } catch (IOException e) {
-            ZimbraLog.smtp.warn("Failed to send message", e);
+            ZmailLog.smtp.warn("Failed to send message", e);
             notify(e, msg, rcpts);
         }
         notify(null, msg, rcpts);

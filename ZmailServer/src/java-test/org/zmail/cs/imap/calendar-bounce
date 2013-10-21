@@ -1,43 +1,43 @@
 Received: from localhost (localhost.localdomain [127.0.0.1])
-	by dogfood.zimbra.com (Postfix) with ESMTP id D756073523
-	for <dkarp@zimbra.com>; Wed,  8 Nov 2006 16:51:30 -0800 (PST)
+	by dogfood.zmail.com (Postfix) with ESMTP id D756073523
+	for <dkarp@zmail.com>; Wed,  8 Nov 2006 16:51:30 -0800 (PST)
 X-DSPAM-Result: Innocent
 X-DSPAM-Confidence: 0.9997
 X-DSPAM-Probability: 0.0000
 X-DSPAM-Signature: 45527b92190111346712775
 X-DSPAM-Factors: 27,
-X-Virus-Scanned: amavisd-new at dogfood.zimbra.com
+X-Virus-Scanned: amavisd-new at dogfood.zmail.com
 X-Spam-Score: -4.221
 X-Spam-Level: 
 X-Spam-Status: No, score=-4.221 tagged_above=-10 required=3
 	tests=[ALL_TRUSTED=-1.8, AWL=-0.527, BAYES_00=-2.599, DSPAM_HAM=-0.5,
 	HTML_40_50=0.496, HTML_MESSAGE=0.001, MPART_ALT_DIFF_COUNT=0.708]
-Received: from dogfood.zimbra.com ([127.0.0.1])
-	by localhost (dogfood.zimbra.com [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id rlH66ClJBdpt for <dkarp@zimbra.com>;
+Received: from dogfood.zmail.com ([127.0.0.1])
+	by localhost (dogfood.zmail.com [127.0.0.1]) (amavisd-new, port 10024)
+	with ESMTP id rlH66ClJBdpt for <dkarp@zmail.com>;
 	Wed,  8 Nov 2006 16:51:29 -0800 (PST)
-Received: from mta02.zimbra.com (mta02.zimbra.com [4.78.240.39])
-	by dogfood.zimbra.com (Postfix) with ESMTP id C4D0573522
-	for <dkarp@zimbra.com>; Wed,  8 Nov 2006 16:51:29 -0800 (PST)
-Received: by mta02.zimbra.com (Postfix)
+Received: from mta02.zmail.com (mta02.zmail.com [4.78.240.39])
+	by dogfood.zmail.com (Postfix) with ESMTP id C4D0573522
+	for <dkarp@zmail.com>; Wed,  8 Nov 2006 16:51:29 -0800 (PST)
+Received: by mta02.zmail.com (Postfix)
 	id 07DB1810C39; Wed,  8 Nov 2006 16:46:31 -0800 (PST)
 Date: Wed,  8 Nov 2006 16:46:31 -0800 (PST)
-From: MAILER-DAEMON@mta02.zimbra.com (Mail Delivery System)
+From: MAILER-DAEMON@mta02.zmail.com (Mail Delivery System)
 Subject: Undelivered Mail Returned to Sender
-To: dkarp@zimbra.com
+To: dkarp@zmail.com
 MIME-Version: 1.0
 Content-Type: multipart/report; report-type=delivery-status;
-	boundary="6E4E3810C27.1163033191/mta02.zimbra.com"
+	boundary="6E4E3810C27.1163033191/mta02.zmail.com"
 Content-Transfer-Encoding: 8bit
-Message-Id: <20061109004631.07DB1810C39@mta02.zimbra.com>
+Message-Id: <20061109004631.07DB1810C39@mta02.zmail.com>
 
 This is a MIME-encapsulated message.
 
---6E4E3810C27.1163033191/mta02.zimbra.com
+--6E4E3810C27.1163033191/mta02.zmail.com
 Content-Description: Notification
 Content-Type: text/plain
 
-This is the Postfix program at host mta02.zimbra.com.
+This is the Postfix program at host mta02.zmail.com.
 
 I'm sorry to have to inform you that your message could not be
 be delivered to one or more recipients. It's attached below.
@@ -62,13 +62,13 @@ delete your own text from the attached returned message.
     gmail-smtp-in.l.google.com[72.14.215.114] said: 550 5.1.1 No such user
     c18si105209hub (in reply to RCPT TO command)
 
---6E4E3810C27.1163033191/mta02.zimbra.com
+--6E4E3810C27.1163033191/mta02.zmail.com
 Content-Description: Delivery report
 Content-Type: message/delivery-status
 
-Reporting-MTA: dns; mta02.zimbra.com
+Reporting-MTA: dns; mta02.zmail.com
 X-Postfix-Queue-ID: 6E4E3810C27
-X-Postfix-Sender: rfc822; dkarp@zimbra.com
+X-Postfix-Sender: rfc822; dkarp@zmail.com
 Arrival-Date: Wed,  8 Nov 2006 16:46:26 -0800 (PST)
 
 Final-Recipient: rfc822; ptangptangwhoop@cs.stanford.edu
@@ -92,27 +92,27 @@ Status: 5.0.0
 Diagnostic-Code: X-Postfix; host gmail-smtp-in.l.google.com[72.14.215.114]
     said: 550 5.1.1 No such user c18si105209hub (in reply to RCPT TO command)
 
---6E4E3810C27.1163033191/mta02.zimbra.com
+--6E4E3810C27.1163033191/mta02.zmail.com
 Content-Description: Undelivered Message
 Content-Type: message/rfc822
 Content-Transfer-Encoding: 8bit
 
-Received: from dogfood.zimbra.com (dogfood.liquidsys.com [66.92.25.198])
-	by mta02.zimbra.com (Postfix) with ESMTP id 6E4E3810C27;
+Received: from dogfood.zmail.com (dogfood.liquidsys.com [66.92.25.198])
+	by mta02.zmail.com (Postfix) with ESMTP id 6E4E3810C27;
 	Wed,  8 Nov 2006 16:46:26 -0800 (PST)
 Received: from localhost (localhost.localdomain [127.0.0.1])
-	by dogfood.zimbra.com (Postfix) with ESMTP id D1BA073523;
+	by dogfood.zmail.com (Postfix) with ESMTP id D1BA073523;
 	Wed,  8 Nov 2006 16:51:24 -0800 (PST)
-X-Virus-Scanned: amavisd-new at dogfood.zimbra.com
-Received: from dogfood.zimbra.com ([127.0.0.1])
-	by localhost (dogfood.zimbra.com [127.0.0.1]) (amavisd-new, port 10024)
+X-Virus-Scanned: amavisd-new at dogfood.zmail.com
+Received: from dogfood.zmail.com ([127.0.0.1])
+	by localhost (dogfood.zmail.com [127.0.0.1]) (amavisd-new, port 10024)
 	with ESMTP id ACl2P-CHVuPN; Wed,  8 Nov 2006 16:51:23 -0800 (PST)
-Received: from dogfood.zimbra.com (localhost.localdomain [127.0.0.1])
-	by dogfood.zimbra.com (Postfix) with ESMTP id E40F373522;
+Received: from dogfood.zmail.com (localhost.localdomain [127.0.0.1])
+	by dogfood.zmail.com (Postfix) with ESMTP id E40F373522;
 	Wed,  8 Nov 2006 16:51:23 -0800 (PST)
-Message-ID: <401784674.13511163033483783.JavaMail.root@dogfood.zimbra.com>
+Message-ID: <401784674.13511163033483783.JavaMail.root@dogfood.zmail.com>
 Date: Wed, 8 Nov 2006 16:51:23 -0800 (PST)
-From: Dan Karp <dkarp@zimbra.com>
+From: Dan Karp <dkarp@zmail.com>
 To: squigglehopting@yahoo.com, murdleymurdleywhoptee@gmail.com,
 	ptangptangwhoop@cs.stanford.edu
 Subject: testing appointment bounce
@@ -127,7 +127,7 @@ Content-Transfer-Encoding: 7bit
 The following is a new meeting request:
 
 Subject: testing appointment bounce 
-Organizer: "Dan Karp" <dkarp@zimbra.com> 
+Organizer: "Dan Karp" <dkarp@zmail.com> 
 
 Time: Wednesday, November 8, 2006, 5:00:00 PM - 6:00:00 PM
  
@@ -145,7 +145,7 @@ Content-Transfer-Encoding: 7bit
 <p>
 <table border='0'>
 <tr><th align=left>Subject:</th><td>testing appointment bounce </td></tr>
-<tr><th align=left>Organizer:</th><td>"Dan Karp" &lt;dkarp@zimbra.com&gt; </td></tr>
+<tr><th align=left>Organizer:</th><td>"Dan Karp" &lt;dkarp@zmail.com&gt; </td></tr>
 </table>
 <p>
 <table border='0'>
@@ -160,7 +160,7 @@ Content-Type: text/calendar; name=meeting.ics; method=REQUEST; charset=utf-8
 Content-Transfer-Encoding: 7bit
 
 BEGIN:VCALENDAR
-PRODID:Zimbra-Calendar-Provider
+PRODID:Zmail-Calendar-Provider
 VERSION:2.0
 METHOD:REQUEST
 BEGIN:VTIMEZONE
@@ -180,7 +180,7 @@ END:DAYLIGHT
 END:VTIMEZONE
 BEGIN:VEVENT
 UID:4dd50a2d-1bb9-403f-9c17-be8356cdf6f6
-ORGANIZER:MAILTO:dkarp@zimbra.com
+ORGANIZER:MAILTO:dkarp@zmail.com
 SUMMARY:testing appointment bounce
 DTSTART;TZID="(GMT-08.00) Pacific Time (US & Canada) / Tijuana":20061108T170
  000
@@ -200,7 +200,7 @@ ATTENDEE;ROLE=REQ-PARTICIPANT;PARTSTAT=NEEDS-ACTION;RSVP=TRUE:MAILTO:ptangpt
 DTSTAMP:20061109T005123Z
 SEQUENCE:0
 DESCRIPTION:The following is a new meeting request:\n\nSubject: testing appo
- intment bounce \nOrganizer: \"Dan Karp\" <dkarp@zimbra.com> \n\nTime: Wednes
+ intment bounce \nOrganizer: \"Dan Karp\" <dkarp@zmail.com> \n\nTime: Wednes
  day\, November 8\, 2006\, 5:00:00 PM - 6:00:00 PM\n \nInvitees: squigglehopt
  ing@yahoo.com\; murdleymurdleywhoptee@gmail.com\; ptangptangwhoop@cs.stanfor
  d.edu \n\n*~*~*~*~*~*~*~*~*~*\n\nTesting bounce messages.
@@ -209,4 +209,4 @@ END:VCALENDAR
 ------=_Part_235_901532167.1163033483782--
 
 
---6E4E3810C27.1163033191/mta02.zimbra.com--
+--6E4E3810C27.1163033191/mta02.zmail.com--

@@ -12,7 +12,7 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.qa.unittest.prov.ldap;
+package org.zmail.qa.unittest.prov.ldap;
 
 import java.util.HashMap;
 import java.util.List;
@@ -23,19 +23,19 @@ import org.junit.*;
 import static org.junit.Assert.*;
 
 import com.google.common.collect.Maps;
-import com.zimbra.common.account.Key;
-import com.zimbra.common.account.Key.AccountBy;
-import com.zimbra.common.account.Key.CosBy;
-import com.zimbra.cs.account.Account;
-import com.zimbra.cs.account.AccountServiceException;
-import com.zimbra.cs.account.Cos;
-import com.zimbra.cs.account.Domain;
-import com.zimbra.cs.account.Entry;
-import com.zimbra.cs.account.Provisioning;
-import com.zimbra.cs.account.Provisioning.CacheEntry;
-import com.zimbra.qa.QA.Bug;
-import com.zimbra.qa.unittest.prov.Names;
-import com.zimbra.soap.admin.type.CacheEntryType;
+import org.zmail.common.account.Key;
+import org.zmail.common.account.Key.AccountBy;
+import org.zmail.common.account.Key.CosBy;
+import org.zmail.cs.account.Account;
+import org.zmail.cs.account.AccountServiceException;
+import org.zmail.cs.account.Cos;
+import org.zmail.cs.account.Domain;
+import org.zmail.cs.account.Entry;
+import org.zmail.cs.account.Provisioning;
+import org.zmail.cs.account.Provisioning.CacheEntry;
+import org.zmail.qa.QA.Bug;
+import org.zmail.qa.unittest.prov.Names;
+import org.zmail.soap.admin.type.CacheEntryType;
 
 public class TestLdapProvCos extends LdapTest {
 
@@ -154,9 +154,9 @@ public class TestLdapProvCos extends LdapTest {
             
             if (valueInDefaultCos instanceof String) {
                 assertTrue(valueInCopiedCos instanceof String);
-                if (!Provisioning.A_zimbraId.equals(attrName) &&
-                        !Provisioning.A_zimbraCreateTimestamp.equals(attrName) &&
-                        !Provisioning.A_zimbraACE.equals(attrName) &&
+                if (!Provisioning.A_zmailId.equals(attrName) &&
+                        !Provisioning.A_zmailCreateTimestamp.equals(attrName) &&
+                        !Provisioning.A_zmailACE.equals(attrName) &&
                         !Provisioning.A_cn.equals(attrName) &&
                         !Provisioning.A_description.equals(attrName)) {
                     assertEquals((String) valueInDefaultCos, (String) valueInCopiedCos);
@@ -178,7 +178,7 @@ public class TestLdapProvCos extends LdapTest {
         /*
          * Attr in defaultCosAttrs but not in copiedCosAttrs: description
          * 
-         * zimbraCreateTimestamp will be in the default cos only if upgrade 22033 
+         * zmailCreateTimestamp will be in the default cos only if upgrade 22033 
          * has been run after reset-the-world - i.r. whether TestLdapUpgrade has been
          * run.
          */
@@ -192,7 +192,7 @@ public class TestLdapProvCos extends LdapTest {
                 System.out.println("Attr in copiedCosAttrs but not in defaultCosAttrs: " + attr);
             }
         }
-        if (defaultCosAttrs.containsKey(Provisioning.A_zimbraCreateTimestamp)) {
+        if (defaultCosAttrs.containsKey(Provisioning.A_zmailCreateTimestamp)) {
             assertEquals(defaultCosAttrs.size() - 1, copiedCosAttrs.size());
         } else {
             assertEquals(defaultCosAttrs.size(), copiedCosAttrs.size());
@@ -249,7 +249,7 @@ public class TestLdapProvCos extends LdapTest {
     
     @Test
     public void domainCos() throws Exception {
-        String ATTR_NAME = Provisioning.A_zimbraMailQuota;
+        String ATTR_NAME = Provisioning.A_zmailMailQuota;
         
         final String COS1_NAME = genCosName("1");
         final String COS2_NAME = genCosName("2");
@@ -275,7 +275,7 @@ public class TestLdapProvCos extends LdapTest {
         domainDefaultCosAttrs.put(ATTR_NAME, DOMAIN_DEFAULT_COS_VALUE);
         Cos domainDefaultCos = createCos(DOMAIN_DEFAULT_COS_NAME, domainDefaultCosAttrs);
         
-        modifyAttr(domain, Provisioning.A_zimbraDomainDefaultCOSId, domainDefaultCos.getId());
+        modifyAttr(domain, Provisioning.A_zmailDomainDefaultCOSId, domainDefaultCos.getId());
 
         Account acct = provUtil.createAccount(genAcctNameLocalPart(), domain);
         final String ACCT_NAME = acct.getName();
@@ -293,7 +293,7 @@ public class TestLdapProvCos extends LdapTest {
         
         // modify domain default cos, should still be the old cos value
         // known bug. This is fine for now - don't have a use case/bug for this, have to fix if needed
-        modifyAttr(domain, Provisioning.A_zimbraDomainDefaultCOSId, cos1.getId());
+        modifyAttr(domain, Provisioning.A_zmailDomainDefaultCOSId, cos1.getId());
         assertEquals(DOMAIN_DEFAULT_COS_VALUE, acct.getAttr(ATTR_NAME)); 
         
         // flush cache, re-get acct, we now should get the updated cos value
@@ -303,7 +303,7 @@ public class TestLdapProvCos extends LdapTest {
         
         // remove domain default cos, should get the system default cos value,
         // but because of the bug, will still be the old cos value (known bug)
-        modifyAttr(domain, Provisioning.A_zimbraDomainDefaultCOSId, null);
+        modifyAttr(domain, Provisioning.A_zmailDomainDefaultCOSId, null);
         assertEquals(COS1_VALUE, acct.getAttr(ATTR_NAME));
         
         // flush cache, we now should get the updated cos value
@@ -316,7 +316,7 @@ public class TestLdapProvCos extends LdapTest {
     
     @Test
     public void acctCos() throws Exception {
-        String ATTR_NAME = Provisioning.A_zimbraMailQuota;
+        String ATTR_NAME = Provisioning.A_zmailMailQuota;
         
         final String COS1_NAME = genCosName("1");
         final String COS2_NAME = genCosName("2");
@@ -339,25 +339,25 @@ public class TestLdapProvCos extends LdapTest {
         domainDefaultCosAttrs.put(ATTR_NAME, DOMAIN_DEFAULT_COS_VALUE);
         Cos domainDefaultCos = createCos(DOMAIN_DEFAULT_COS_NAME, domainDefaultCosAttrs);
         
-        modifyAttr(domain, Provisioning.A_zimbraDomainDefaultCOSId, domainDefaultCos.getId());
+        modifyAttr(domain, Provisioning.A_zmailDomainDefaultCOSId, domainDefaultCos.getId());
         
         Account acct = provUtil.createAccount(genAcctNameLocalPart(), domain);
         final String ACCT_NAME = acct.getName();
         
         // set cos on account
-        modifyAttr(acct, Provisioning.A_zimbraCOSId, cos1.getId());
+        modifyAttr(acct, Provisioning.A_zmailCOSId, cos1.getId());
         assertEquals(COS1_VALUE, acct.getAttr(ATTR_NAME));
         
         // modify cos on account
-        modifyAttr(acct, Provisioning.A_zimbraCOSId, cos2.getId());
+        modifyAttr(acct, Provisioning.A_zmailCOSId, cos2.getId());
         assertEquals(COS2_VALUE, acct.getAttr(ATTR_NAME));
         
         // remove cos from account, should get the domain default cos
-        modifyAttr(acct, Provisioning.A_zimbraCOSId, null);
+        modifyAttr(acct, Provisioning.A_zmailCOSId, null);
         assertEquals(DOMAIN_DEFAULT_COS_VALUE, acct.getAttr(ATTR_NAME));
         
         // set cos on account again
-        modifyAttr(acct, Provisioning.A_zimbraCOSId, cos1.getId());
+        modifyAttr(acct, Provisioning.A_zmailCOSId, cos1.getId());
         assertEquals(COS1_VALUE, acct.getAttr(ATTR_NAME));
         
         // set the attr directly on account
@@ -372,8 +372,8 @@ public class TestLdapProvCos extends LdapTest {
     @Test
     @Bug(bug=67716)
     public void bug67716() throws Exception {
-        // case does match the case declared in zimbra-attrs.xml
-        String ATTR_REAL_ANME = Provisioning.A_zimbraMailQuota;
+        // case does match the case declared in zmail-attrs.xml
+        String ATTR_REAL_ANME = Provisioning.A_zmailMailQuota;
         String ATTR_LOWERCASE_NAME = ATTR_REAL_ANME.toLowerCase();
         String ATTR_VALUE = "12345";
         Map<String, Object> attrs = Maps.newHashMap();

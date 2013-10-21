@@ -12,7 +12,7 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.imap;
+package org.zmail.cs.imap;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
@@ -24,29 +24,29 @@ import java.util.Set;
 import javax.security.auth.login.LoginException;
 
 import com.google.common.collect.ImmutableSet;
-import com.zimbra.common.localconfig.LC;
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.common.util.Constants;
-import com.zimbra.common.util.ZimbraLog;
-import com.zimbra.cs.account.Account;
-import com.zimbra.cs.account.Provisioning;
-import com.zimbra.cs.account.Server;
-import com.zimbra.cs.mailclient.MailConfig;
-import com.zimbra.cs.mailclient.MailInputStream;
-import com.zimbra.cs.mailclient.auth.Authenticator;
-import com.zimbra.cs.mailclient.auth.AuthenticatorFactory;
-import com.zimbra.cs.mailclient.imap.IDInfo;
-import com.zimbra.cs.mailclient.imap.ImapConfig;
-import com.zimbra.cs.mailclient.imap.ImapConnection;
-import com.zimbra.cs.security.sasl.ZimbraAuthenticator;
-import com.zimbra.cs.service.AuthProvider;
-import com.zimbra.cs.util.BuildInfo;
+import org.zmail.common.localconfig.LC;
+import org.zmail.common.service.ServiceException;
+import org.zmail.common.util.Constants;
+import org.zmail.common.util.ZmailLog;
+import org.zmail.cs.account.Account;
+import org.zmail.cs.account.Provisioning;
+import org.zmail.cs.account.Server;
+import org.zmail.cs.mailclient.MailConfig;
+import org.zmail.cs.mailclient.MailInputStream;
+import org.zmail.cs.mailclient.auth.Authenticator;
+import org.zmail.cs.mailclient.auth.AuthenticatorFactory;
+import org.zmail.cs.mailclient.imap.IDInfo;
+import org.zmail.cs.mailclient.imap.ImapConfig;
+import org.zmail.cs.mailclient.imap.ImapConnection;
+import org.zmail.cs.security.sasl.ZmailAuthenticator;
+import org.zmail.cs.service.AuthProvider;
+import org.zmail.cs.util.BuildInfo;
 
 final class ImapProxy {
     private static final Set<String> UNSTRUCTURED_CODES = ImmutableSet.of("OK", "NO", "BAD", "PREAUTH", "BYE");
     private static final AuthenticatorFactory AUTH_FACTORY = new AuthenticatorFactory();
     static {
-        AUTH_FACTORY.register(ZimbraAuthenticator.MECHANISM, ZimbraClientAuthenticator.class);
+        AUTH_FACTORY.register(ZmailAuthenticator.MECHANISM, ZmailClientAuthenticator.class);
     }
 
     private final ImapHandler handler;
@@ -70,21 +70,21 @@ final class ImapProxy {
         String host = server.getServiceHostname();
         ImapConfig config = new ImapConfig();
         config.setAuthenticationId(acct.getName());
-        config.setMechanism(ZimbraAuthenticator.MECHANISM);
+        config.setMechanism(ZmailAuthenticator.MECHANISM);
         config.setAuthenticatorFactory(AUTH_FACTORY);
         config.setReadTimeout(LC.javamail_imap_timeout.intValue());
         config.setConnectTimeout(config.getReadTimeout());
         config.setHost(host);
         if (server.isImapServerEnabled()) {
-            config.setPort(server.getIntAttr(Provisioning.A_zimbraImapBindPort, ImapConfig.DEFAULT_PORT));
+            config.setPort(server.getIntAttr(Provisioning.A_zmailImapBindPort, ImapConfig.DEFAULT_PORT));
         } else if (server.isImapSSLServerEnabled()) {
-            config.setPort(server.getIntAttr(Provisioning.A_zimbraImapSSLBindPort, ImapConfig.DEFAULT_SSL_PORT));
+            config.setPort(server.getIntAttr(Provisioning.A_zmailImapSSLBindPort, ImapConfig.DEFAULT_SSL_PORT));
             config.setSecurity(MailConfig.Security.SSL);
         } else {
             throw ServiceException.PROXY_ERROR(new Exception("no open IMAP port for server " + host), path.asImapPath());
         }
 
-        ZimbraLog.imap.info("opening proxy connection (user=%s, host=%s, path=%s)",
+        ZmailLog.imap.info("opening proxy connection (user=%s, host=%s, path=%s)",
                 acct.getName(), host, path.getReferent().asImapPath());
         connection = new ImapConnection(config);
         try {
@@ -106,7 +106,7 @@ final class ImapProxy {
         path = null;
         ImapConfig config = new ImapConfig();
         config.setAuthenticationId(username);
-        config.setMechanism(ZimbraAuthenticator.MECHANISM);
+        config.setMechanism(ZmailAuthenticator.MECHANISM);
         config.setAuthenticatorFactory(AUTH_FACTORY);
         config.setHost(remote.getHostName());
         config.setPort(remote.getPort());
@@ -138,7 +138,7 @@ final class ImapProxy {
             return;
 
         // FIXME: should close cleanly (i.e. with tagged LOGOUT)
-        ZimbraLog.imap.info("closing proxy connection");
+        ZmailLog.imap.info("closing proxy connection");
         conn.close();
     }
 
@@ -228,7 +228,7 @@ final class ImapProxy {
                         // don't set <code>success</code> until we're past things that can throw IOExceptions
                         success = ok;
                     } catch (IOException e) {
-                        ZimbraLog.imap.warn("error encountered during IDLE; dropping connection", e);
+                        ZmailLog.imap.warn("error encountered during IDLE; dropping connection", e);
                     }
                     if (!success) {
                         handler.dropConnection(true);
@@ -319,7 +319,7 @@ final class ImapProxy {
                 boolean proxy = (first != '+' || isIdle) && (!tagged || includeTaggedResponse);
 
                 ByteArrayOutputStream line = proxy ? new ByteArrayOutputStream() : null;
-                StringBuilder debug = proxy && ZimbraLog.imap.isDebugEnabled() ? new StringBuilder("  pxy: ") : null;
+                StringBuilder debug = proxy && ZmailLog.imap.isDebugEnabled() ? new StringBuilder("  pxy: ") : null;
                 StringBuilder condition = new StringBuilder(10);
 
                 boolean quoted = false, escaped = false, space1 = false, space2 = false;
@@ -394,7 +394,7 @@ final class ImapProxy {
                 }
 
                 if (debug != null)
-                    ZimbraLog.imap.debug(debug.toString());
+                    ZmailLog.imap.debug(debug.toString());
 
                 if (tagged)
                     break;
@@ -410,7 +410,7 @@ final class ImapProxy {
     }
 
 
-    public static final class ZimbraClientAuthenticator extends Authenticator {
+    public static final class ZmailClientAuthenticator extends Authenticator {
         private String username, authtoken;
         private boolean complete;
 
@@ -418,7 +418,7 @@ final class ImapProxy {
             username = config.getAuthenticationId();  authtoken = password;
         }
 
-        @Override public String getMechanism() { return ZimbraAuthenticator.MECHANISM; }
+        @Override public String getMechanism() { return ZmailAuthenticator.MECHANISM; }
         @Override public boolean isComplete()  { return complete; }
 
         @Override public boolean hasInitialResponse()  { return true; }

@@ -13,7 +13,7 @@
  * ***** END LICENSE BLOCK *****
  */
 
-package com.zimbra.cs.index;
+package org.zmail.cs.index;
 
 import java.util.LinkedHashMap;
 import java.util.Map;
@@ -21,21 +21,21 @@ import java.util.Set;
 
 import org.apache.lucene.document.Document;
 
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.cs.db.DbSearch;
-import com.zimbra.cs.imap.ImapMessage;
-import com.zimbra.cs.mailbox.CalendarItem;
-import com.zimbra.cs.mailbox.Contact;
-import com.zimbra.cs.mailbox.MailItem;
-import com.zimbra.cs.mailbox.Mailbox;
-import com.zimbra.cs.mailbox.Message;
-import com.zimbra.cs.mailbox.Note;
-import com.zimbra.cs.mailbox.Task;
+import org.zmail.common.service.ServiceException;
+import org.zmail.cs.db.DbSearch;
+import org.zmail.cs.imap.ImapMessage;
+import org.zmail.cs.mailbox.CalendarItem;
+import org.zmail.cs.mailbox.Contact;
+import org.zmail.cs.mailbox.MailItem;
+import org.zmail.cs.mailbox.Mailbox;
+import org.zmail.cs.mailbox.Message;
+import org.zmail.cs.mailbox.Note;
+import org.zmail.cs.mailbox.Task;
 
 /**
  * @since Oct 15, 2004
  */
-abstract class ZimbraQueryResultsImpl implements ZimbraQueryResults {
+abstract class ZmailQueryResultsImpl implements ZmailQueryResults {
 
     static final class LRUHashMap<T, U> extends LinkedHashMap<T, U> {
         private static final long serialVersionUID = -6181398012977532525L;
@@ -72,7 +72,7 @@ abstract class ZimbraQueryResultsImpl implements ZimbraQueryResults {
     private final SortBy sortBy;
     private final SearchParams.Fetch fetch;
 
-    ZimbraQueryResultsImpl(Set<MailItem.Type> types, SortBy sort, SearchParams.Fetch fetch) {
+    ZmailQueryResultsImpl(Set<MailItem.Type> types, SortBy sort, SearchParams.Fetch fetch) {
         this.types = types;
         this.fetch = fetch;
         this.sortBy = sort;
@@ -86,7 +86,7 @@ abstract class ZimbraQueryResultsImpl implements ZimbraQueryResults {
     };
 
     @Override
-    public abstract ZimbraHit skipToHit(int hitNo) throws ServiceException;
+    public abstract ZmailHit skipToHit(int hitNo) throws ServiceException;
 
     @Override
     public boolean hasNext() throws ServiceException {
@@ -170,7 +170,7 @@ abstract class ZimbraQueryResultsImpl implements ZimbraQueryResults {
         return hit;
     }
 
-    protected DocumentHit getDocumentHit(Mailbox mbx, int id, com.zimbra.cs.mailbox.Document item,
+    protected DocumentHit getDocumentHit(Mailbox mbx, int id, org.zmail.cs.mailbox.Document item,
             Document doc, Object sortValue) {
         return new DocumentHit(this, mbx, id, item, doc, sortValue);
     }
@@ -188,11 +188,11 @@ abstract class ZimbraQueryResultsImpl implements ZimbraQueryResults {
 
     /**
      * We've got a {@link Mailbox}, a {@link DbSearch.Result} and (optionally) a Lucene Doc...
-     * that's everything we need to build a real ZimbraHit.
+     * that's everything we need to build a real ZmailHit.
      *
      * @param doc - Optional, only set if this search had a Lucene part
      */
-    ZimbraHit getZimbraHit(Mailbox mbox, DbSearch.Result sr, Document doc, DbSearch.FetchMode fetch) {
+    ZmailHit getZmailHit(Mailbox mbox, DbSearch.Result sr, Document doc, DbSearch.FetchMode fetch) {
         MailItem item = null;
         ImapMessage i4msg = null;
         int modseq = -1, parentId = 0;
@@ -211,7 +211,7 @@ abstract class ZimbraQueryResultsImpl implements ZimbraQueryResults {
                 break;
         }
 
-        ZimbraHit result = null;
+        ZmailHit result = null;
         switch (sr.getType()) {
             case CHAT:
             case MESSAGE:
@@ -235,7 +235,7 @@ abstract class ZimbraQueryResultsImpl implements ZimbraQueryResults {
                 break;
             case DOCUMENT:
             case WIKI:
-                result = getDocumentHit(mbox, sr.getId(), (com.zimbra.cs.mailbox.Document) item, doc, sr.getSortValue());
+                result = getDocumentHit(mbox, sr.getId(), (org.zmail.cs.mailbox.Document) item, doc, sr.getSortValue());
                 break;
             default:
                 assert(false);

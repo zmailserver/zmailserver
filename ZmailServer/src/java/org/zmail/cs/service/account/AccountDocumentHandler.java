@@ -12,7 +12,7 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.service.account;
+package org.zmail.cs.service.account;
 
 import java.util.HashSet;
 import java.util.Map;
@@ -20,17 +20,17 @@ import java.util.Set;
 
 import javax.servlet.http.HttpServletRequest;
 
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.common.soap.AccountConstants;
-import com.zimbra.common.soap.Element;
-import com.zimbra.common.util.ZimbraLog;
-import com.zimbra.cs.account.AttributeClass;
-import com.zimbra.cs.account.AttributeManager;
-import com.zimbra.cs.account.Provisioning;
-import com.zimbra.cs.account.Provisioning.MailMode;
-import com.zimbra.cs.account.Server;
-import com.zimbra.soap.DocumentHandler;
-import com.zimbra.soap.SoapServlet;
+import org.zmail.common.service.ServiceException;
+import org.zmail.common.soap.AccountConstants;
+import org.zmail.common.soap.Element;
+import org.zmail.common.util.ZmailLog;
+import org.zmail.cs.account.AttributeClass;
+import org.zmail.cs.account.AttributeManager;
+import org.zmail.cs.account.Provisioning;
+import org.zmail.cs.account.Provisioning.MailMode;
+import org.zmail.cs.account.Server;
+import org.zmail.soap.DocumentHandler;
+import org.zmail.soap.SoapServlet;
 
 
 public abstract class AccountDocumentHandler extends DocumentHandler {
@@ -60,17 +60,17 @@ public abstract class AccountDocumentHandler extends DocumentHandler {
         
         // clear text
         Server server = Provisioning.getInstance().getLocalServer();
-        String modeString = server.getAttr(Provisioning.A_zimbraMailMode, null);
+        String modeString = server.getAttr(Provisioning.A_zmailMailMode, null);
         if (modeString == null) {
             // not likely, but just log and let it through
-            ZimbraLog.soap.warn("missing " + Provisioning.A_zimbraMailMode + 
+            ZmailLog.soap.warn("missing " + Provisioning.A_zmailMailMode + 
                                 " for checking password security, allowing the request");
             return true;
         }
             
         MailMode mailMode = Provisioning.MailMode.fromString(modeString);
         if (mailMode == MailMode.mixed && 
-            !server.getBooleanAttr(Provisioning.A_zimbraMailClearTextPasswordEnabled, true)) 
+            !server.getBooleanAttr(Provisioning.A_zmailMailClearTextPasswordEnabled, true)) 
             return false;
         else
             return true;

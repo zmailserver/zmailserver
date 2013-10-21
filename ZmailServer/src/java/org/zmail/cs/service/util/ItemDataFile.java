@@ -12,7 +12,7 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.service.util;
+package org.zmail.cs.service.util;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -36,11 +36,11 @@ import org.apache.commons.cli.HelpFormatter;
 import org.apache.commons.cli.Options;
 import org.apache.commons.cli.UnrecognizedOptionException;
 
-import com.zimbra.common.util.ZimbraLog;
-import com.zimbra.common.util.tar.*;
-import com.zimbra.cs.mailbox.MailItem;
-import com.zimbra.cs.mailbox.MailServiceException;
-import com.zimbra.cs.service.util.ItemData;
+import org.zmail.common.util.ZmailLog;
+import org.zmail.common.util.tar.*;
+import org.zmail.cs.mailbox.MailItem;
+import org.zmail.cs.mailbox.MailServiceException;
+import org.zmail.cs.service.util.ItemData;
 
 public class ItemDataFile {
     public static void create(String path, OutputStream os) throws IOException {
@@ -281,7 +281,7 @@ public class ItemDataFile {
         opts.addOption("n", "nometa", false, "ignore metadata");
         opts.addOption("p", "path", true, "extracted backup path");
         opts.addOption("t", "types", true, "item types");
-        ZimbraLog.toolSetupLog4j("ERROR", null);
+        ZmailLog.toolSetupLog4j("ERROR", null);
         try {
             CommandLine cl = parser.parse(opts, args);
             String path = ".";

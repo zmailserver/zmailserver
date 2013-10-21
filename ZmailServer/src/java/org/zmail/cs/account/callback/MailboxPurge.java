@@ -12,18 +12,18 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.account.callback;
+package org.zmail.cs.account.callback;
 
 import java.util.Map;
 
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.common.util.ZimbraLog;
-import com.zimbra.cs.account.AttributeCallback;
-import com.zimbra.cs.account.Entry;
-import com.zimbra.cs.account.Provisioning;
-import com.zimbra.cs.account.Server;
-import com.zimbra.cs.mailbox.PurgeThread;
-import com.zimbra.cs.util.Zimbra;
+import org.zmail.common.service.ServiceException;
+import org.zmail.common.util.ZmailLog;
+import org.zmail.cs.account.AttributeCallback;
+import org.zmail.cs.account.Entry;
+import org.zmail.cs.account.Provisioning;
+import org.zmail.cs.account.Server;
+import org.zmail.cs.mailbox.PurgeThread;
+import org.zmail.cs.util.Zmail;
 
 /**
  * Starts the mailbox purge thread if it is not running and the purge sleep
@@ -38,12 +38,12 @@ public class MailboxPurge extends AttributeCallback {
 
     @Override
     public void postModify(CallbackContext context, String attrName, Entry entry) {
-        if (!Provisioning.A_zimbraMailPurgeSleepInterval.equals(attrName)) {
+        if (!Provisioning.A_zmailMailPurgeSleepInterval.equals(attrName)) {
             return;
         }
         
         // do not run this callback unless inside the server
-        if (!Zimbra.started())
+        if (!Zmail.started())
             return;
         
         Server localServer = null;
@@ -51,11 +51,11 @@ public class MailboxPurge extends AttributeCallback {
         try {
             localServer = Provisioning.getInstance().getLocalServer();
         } catch (ServiceException e) {
-            ZimbraLog.misc.warn("unable to get local server");
+            ZmailLog.misc.warn("unable to get local server");
             return;
         }
         
-        boolean hasMailboxService = localServer.getMultiAttrSet(Provisioning.A_zimbraServiceEnabled).contains("mailbox");
+        boolean hasMailboxService = localServer.getMultiAttrSet(Provisioning.A_zmailServiceEnabled).contains("mailbox");
         
         if (!hasMailboxService)
             return;
@@ -67,9 +67,9 @@ public class MailboxPurge extends AttributeCallback {
                 return;
         }
 
-        ZimbraLog.purge.info("Mailbox purge interval set to %s.",
-            localServer.getAttr(Provisioning.A_zimbraMailPurgeSleepInterval, null));
-        long interval = localServer.getTimeInterval(Provisioning.A_zimbraMailPurgeSleepInterval, 0);
+        ZmailLog.purge.info("Mailbox purge interval set to %s.",
+            localServer.getAttr(Provisioning.A_zmailMailPurgeSleepInterval, null));
+        long interval = localServer.getTimeInterval(Provisioning.A_zmailMailPurgeSleepInterval, 0);
         if (interval > 0 && !PurgeThread.isRunning()) {
             PurgeThread.startup();
         }

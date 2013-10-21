@@ -13,36 +13,36 @@
  * ***** END LICENSE BLOCK *****
  */
 
-package com.zimbra.cs.gal;
+package org.zmail.cs.gal;
 
 import java.util.Arrays;
 import java.util.List;
 
-import com.zimbra.common.account.Key.DistributionListBy;
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.common.util.ZimbraLog;
-import com.zimbra.cs.account.Account;
-import com.zimbra.cs.account.AccountServiceException;
-import com.zimbra.cs.account.AttributeClass;
-import com.zimbra.cs.account.Group;
-import com.zimbra.cs.account.Provisioning;
-import com.zimbra.cs.account.accesscontrol.ExternalGroup;
-import com.zimbra.cs.account.grouphandler.GroupHandler;
-import com.zimbra.cs.ldap.IAttributes;
-import com.zimbra.cs.ldap.ILdapContext;
-import com.zimbra.cs.ldap.IAttributes.CheckBinary;
+import org.zmail.common.account.Key.DistributionListBy;
+import org.zmail.common.service.ServiceException;
+import org.zmail.common.util.ZmailLog;
+import org.zmail.cs.account.Account;
+import org.zmail.cs.account.AccountServiceException;
+import org.zmail.cs.account.AttributeClass;
+import org.zmail.cs.account.Group;
+import org.zmail.cs.account.Provisioning;
+import org.zmail.cs.account.accesscontrol.ExternalGroup;
+import org.zmail.cs.account.grouphandler.GroupHandler;
+import org.zmail.cs.ldap.IAttributes;
+import org.zmail.cs.ldap.ILdapContext;
+import org.zmail.cs.ldap.IAttributes.CheckBinary;
 
-public class ZimbraGalGroupHandler extends GroupHandler {
+public class ZmailGalGroupHandler extends GroupHandler {
 
     @Override
     public boolean isGroup(IAttributes ldapAttrs) {
         try {
             List<String> objectclass = ldapAttrs.getMultiAttrStringAsList(
                     Provisioning.A_objectClass, IAttributes.CheckBinary.NOCHECK);
-            return objectclass.contains(AttributeClass.OC_zimbraDistributionList) ||
-                   objectclass.contains(AttributeClass.OC_zimbraGroup);
+            return objectclass.contains(AttributeClass.OC_zmailDistributionList) ||
+                   objectclass.contains(AttributeClass.OC_zmailGroup);
         } catch (ServiceException e) {
-            ZimbraLog.gal.warn("unable to get attribute " + Provisioning.A_objectClass, e);
+            ZmailLog.gal.warn("unable to get attribute " + Provisioning.A_objectClass, e);
         }
         return false;
     }
@@ -50,19 +50,19 @@ public class ZimbraGalGroupHandler extends GroupHandler {
     @Override
     public String[] getMembers(ILdapContext ldapContext, String searchBase,
             String entryDN, IAttributes ldapAttrs) throws ServiceException {
-        ZimbraLog.gal.debug("Fetching members for group " + ldapAttrs.getAttrString(Provisioning.A_mail));
+        ZmailLog.gal.debug("Fetching members for group " + ldapAttrs.getAttrString(Provisioning.A_mail));
         List<String> objectclass =
             ldapAttrs.getMultiAttrStringAsList(Provisioning.A_objectClass, CheckBinary.NOCHECK);
 
         String[] members = null;
-        if (objectclass.contains(AttributeClass.OC_zimbraDistributionList)) {
-            members = ldapAttrs.getMultiAttrString(Provisioning.A_zimbraMailForwardingAddress);
-        } else if (objectclass.contains(AttributeClass.OC_zimbraGroup)) {
-            String zimbraId = ldapAttrs.getAttrString(Provisioning.A_zimbraId);
+        if (objectclass.contains(AttributeClass.OC_zmailDistributionList)) {
+            members = ldapAttrs.getMultiAttrString(Provisioning.A_zmailMailForwardingAddress);
+        } else if (objectclass.contains(AttributeClass.OC_zmailGroup)) {
+            String zmailId = ldapAttrs.getAttrString(Provisioning.A_zmailId);
             Provisioning prov = Provisioning.getInstance();
-            Group group = prov.getGroupBasic(DistributionListBy.id, zimbraId);
+            Group group = prov.getGroupBasic(DistributionListBy.id, zmailId);
             if (group == null) {
-                throw AccountServiceException.NO_SUCH_GROUP(zimbraId);
+                throw AccountServiceException.NO_SUCH_GROUP(zmailId);
             }
             members = prov.getGroupMembers(group);
         }

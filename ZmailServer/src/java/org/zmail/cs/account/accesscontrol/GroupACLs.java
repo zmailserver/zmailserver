@@ -14,7 +14,7 @@
  * 
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.account.accesscontrol;
+package org.zmail.cs.account.accesscontrol;
 
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -22,13 +22,13 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.cs.account.Account;
-import com.zimbra.cs.account.DistributionList;
-import com.zimbra.cs.account.Entry;
-import com.zimbra.cs.account.Group;
-import com.zimbra.cs.account.NamedEntry;
-import com.zimbra.cs.account.Provisioning;
+import org.zmail.common.service.ServiceException;
+import org.zmail.cs.account.Account;
+import org.zmail.cs.account.DistributionList;
+import org.zmail.cs.account.Entry;
+import org.zmail.cs.account.Group;
+import org.zmail.cs.account.NamedEntry;
+import org.zmail.cs.account.Provisioning;
 
 /*
  * aux class for collecting ACLs on all groups the perspective target entry
@@ -38,12 +38,12 @@ import com.zimbra.cs.account.Provisioning;
 public class GroupACLs {
     private NamedEntry target;
     
-    // Set of zimbraId of groups the account target is a direct member of
+    // Set of zmailId of groups the account target is a direct member of
     private Set<String> directGroupsOfAccountTarget;
     
-    private Set<ZimbraACE> aclsOnGroupTargetsAllowedNotDelegable = new HashSet<ZimbraACE>();
-    private Set<ZimbraACE> aclsOnGroupTargetsAllowedDelegable = new HashSet<ZimbraACE>();
-    private Set<ZimbraACE> aclsOnGroupTargetsDenied = new HashSet<ZimbraACE>();
+    private Set<ZmailACE> aclsOnGroupTargetsAllowedNotDelegable = new HashSet<ZmailACE>();
+    private Set<ZmailACE> aclsOnGroupTargetsAllowedDelegable = new HashSet<ZmailACE>();
+    private Set<ZmailACE> aclsOnGroupTargetsDenied = new HashSet<ZmailACE>();
     
     GroupACLs(Entry target) throws ServiceException {
         if (target instanceof Account) {
@@ -58,7 +58,7 @@ public class GroupACLs {
         }
     }
     
-    private boolean applies(Group grantedOn, ZimbraACE ace) {
+    private boolean applies(Group grantedOn, ZmailACE ace) {
         if (!ace.disinheritSubGroups()) {
             return true;
         }
@@ -77,12 +77,12 @@ public class GroupACLs {
     void collectACL(Group grantedOn, boolean skipPositiveGrants) 
     throws ServiceException {
         
-        Set<ZimbraACE> allowedNotDelegable = ACLUtil.getAllowedNotDelegableACEs(grantedOn);
-        Set<ZimbraACE> allowedDelegable = ACLUtil.getAllowedDelegableACEs(grantedOn);
-        Set<ZimbraACE> denied = ACLUtil.getDeniedACEs(grantedOn);
+        Set<ZmailACE> allowedNotDelegable = ACLUtil.getAllowedNotDelegableACEs(grantedOn);
+        Set<ZmailACE> allowedDelegable = ACLUtil.getAllowedDelegableACEs(grantedOn);
+        Set<ZmailACE> denied = ACLUtil.getDeniedACEs(grantedOn);
         
         if (allowedNotDelegable != null && !skipPositiveGrants) {
-            for (ZimbraACE ace : allowedNotDelegable) {
+            for (ZmailACE ace : allowedNotDelegable) {
                 if (applies(grantedOn, ace)) {
                     aclsOnGroupTargetsAllowedNotDelegable.add(ace);
                 }
@@ -90,7 +90,7 @@ public class GroupACLs {
         }
         
         if (allowedDelegable != null && !skipPositiveGrants) {
-            for (ZimbraACE ace : allowedDelegable) {
+            for (ZmailACE ace : allowedDelegable) {
                 if (applies(grantedOn, ace)) {
                     aclsOnGroupTargetsAllowedDelegable.add(ace);
                 }
@@ -98,7 +98,7 @@ public class GroupACLs {
         }
         
         if (denied != null) {
-            for (ZimbraACE ace : denied) {
+            for (ZmailACE ace : denied) {
                 if (applies(grantedOn, ace)) {
                     aclsOnGroupTargetsDenied.add(ace);
                 }
@@ -110,14 +110,14 @@ public class GroupACLs {
      * put all denied and allowed grants into one list, as if they are granted 
      * on the same entry.   We put denied in the front, followed by allowed and 
      * delegable, followed by allowed but not delegable, so it is consistent with 
-     * ZimbraACL.getAllACEs
+     * ZmailACL.getAllACEs
      */
-    List<ZimbraACE> getAllACLs() {
+    List<ZmailACE> getAllACLs() {
         if (!aclsOnGroupTargetsAllowedNotDelegable.isEmpty() ||
             !aclsOnGroupTargetsAllowedDelegable.isEmpty() ||   
             !aclsOnGroupTargetsDenied.isEmpty()) {
                 
-            List<ZimbraACE> aclsOnGroupTargets = new ArrayList<ZimbraACE>();
+            List<ZmailACE> aclsOnGroupTargets = new ArrayList<ZmailACE>();
             aclsOnGroupTargets.addAll(aclsOnGroupTargetsDenied);
             aclsOnGroupTargets.addAll(aclsOnGroupTargetsAllowedDelegable);
             aclsOnGroupTargets.addAll(aclsOnGroupTargetsAllowedNotDelegable);

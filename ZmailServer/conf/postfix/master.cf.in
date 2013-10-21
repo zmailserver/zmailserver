@@ -7,11 +7,11 @@
 #               (yes)   (yes)   (yes)   (never) (100)
 # ==========================================================================
 smtp      inet  n       -       n       -       -       smtpd
-%%uncomment SERVICE:opendkim%%	-o content_filter=scan:[%%zimbraLocalBindAddress%%]:10030
-%%uncomment LOCAL:postjournal_enabled%%	-o smtpd_proxy_filter=[%%zimbraLocalBindAddress%%]:10027
+%%uncomment SERVICE:opendkim%%	-o content_filter=scan:[%%zmailLocalBindAddress%%]:10030
+%%uncomment LOCAL:postjournal_enabled%%	-o smtpd_proxy_filter=[%%zmailLocalBindAddress%%]:10027
 %%uncomment LOCAL:postjournal_enabled%%	-o smtpd_proxy_options=speed_adjust
 465    inet  n       -       n       -       -       smtpd
-%%uncomment SERVICE:opendkim%%	-o content_filter=scan:[%%zimbraLocalBindAddress%%]:10030
+%%uncomment SERVICE:opendkim%%	-o content_filter=scan:[%%zmailLocalBindAddress%%]:10030
 	-o smtpd_tls_wrappermode=yes 
 	-o smtpd_sasl_auth_enable=yes
 	-o smtpd_client_restrictions=
@@ -21,13 +21,13 @@ smtp      inet  n       -       n       -       -       smtpd
 	-o smtpd_relay_restrictions=permit_sasl_authenticated,reject
 	-o syslog_name=postfix/smtps
 	-o milter_macro_daemon_name=ORIGINATING
-%%uncomment LOCAL:postjournal_enabled%%	-o smtpd_proxy_filter=[%%zimbraLocalBindAddress%%]:10027
+%%uncomment LOCAL:postjournal_enabled%%	-o smtpd_proxy_filter=[%%zmailLocalBindAddress%%]:10027
 %%uncomment LOCAL:postjournal_enabled%%	-o smtpd_proxy_options=speed_adjust
 submission inet n      -       n       -       -       smtpd
-%%uncomment SERVICE:opendkim%%	-o content_filter=scan:[%%zimbraLocalBindAddress%%]:10030
+%%uncomment SERVICE:opendkim%%	-o content_filter=scan:[%%zmailLocalBindAddress%%]:10030
 	-o smtpd_etrn_restrictions=reject
-	-o smtpd_sasl_auth_enable=%%zimbraMtaSaslAuthEnable%%
-	-o smtpd_tls_security_level=%%zimbraMtaTlsSecurityLevel%%
+	-o smtpd_sasl_auth_enable=%%zmailMtaSaslAuthEnable%%
+	-o smtpd_tls_security_level=%%zmailMtaTlsSecurityLevel%%
 	-o smtpd_client_restrictions=permit_sasl_authenticated,reject
 	-o smtpd_data_restrictions=
 	-o smtpd_helo_restrictions=
@@ -35,7 +35,7 @@ submission inet n      -       n       -       -       smtpd
 	-o smtpd_relay_restrictions=permit_sasl_authenticated,reject
 	-o syslog_name=postfix/submission
 	-o milter_macro_daemon_name=ORIGINATING
-%%uncomment LOCAL:postjournal_enabled%%	-o smtpd_proxy_filter=[%%zimbraLocalBindAddress%%]:10027
+%%uncomment LOCAL:postjournal_enabled%%	-o smtpd_proxy_filter=[%%zmailLocalBindAddress%%]:10027
 %%uncomment LOCAL:postjournal_enabled%%	-o smtpd_proxy_options=speed_adjust
 scan      unix  -       -       n       -       10      smtp
 	-o smtp_send_xforward_command=yes
@@ -66,7 +66,7 @@ lmtp      unix  -       -       n       -       -       lmtp
 anvil     unix  -       -       n       -       1       anvil
 scache	  unix	-	-	n	-	1	scache
 %%uncomment LOCAL:postfix_enable_smtpd_policyd%%policy    unix  -       n       n       -       0       spawn
-%%uncomment LOCAL:postfix_enable_smtpd_policyd%%	user=zimbra argv=/usr/bin/perl /opt/zimbra/libexec/zmpostfixpolicyd
+%%uncomment LOCAL:postfix_enable_smtpd_policyd%%	user=zmail argv=/usr/bin/perl /opt/zmail/libexec/zmpostfixpolicyd
 #
 # ====================================================================
 # Interfaces to non-Postfix software. Be sure to examine the manual
@@ -111,7 +111,7 @@ smtp-amavis unix -      -       n       -       10  smtp
 	-o smtp_send_xforward_command=yes
 	-o disable_dns_lookups=yes
 	-o max_use=20
-[%%zimbraLocalBindAddress%%]:10025 inet n  -       n       -       -  smtpd
+[%%zmailLocalBindAddress%%]:10025 inet n  -       n       -       -  smtpd
 	-o content_filter=
 	-o local_recipient_maps=
 	-o virtual_mailbox_maps=
@@ -139,7 +139,7 @@ smtp-amavis unix -      -       n       -       10  smtp
 	-o receive_override_options=no_header_body_checks,no_unknown_recipient_checks,no_address_mappings
 	-o local_header_rewrite_clients=
 	-o syslog_name=postfix/amavisd
-[%%zimbraLocalBindAddress%%]:10030 inet n - n - - smtpd
+[%%zmailLocalBindAddress%%]:10030 inet n - n - - smtpd
 	-o local_recipient_maps=
 	-o virtual_mailbox_maps=
 	-o virtual_alias_maps=
@@ -156,15 +156,15 @@ smtp-amavis unix -      -       n       -       10  smtp
 	-o smtpd_data_restrictions=
 	-o smtpd_end_of_data_restrictions=
 	-o syslog_name=postfix/dkimmilter
-%%uncomment SERVICE:antispam%%	-o content_filter=smtp-amavis:[%%zimbraLocalBindAddress%%]:10032
+%%uncomment SERVICE:antispam%%	-o content_filter=smtp-amavis:[%%zmailLocalBindAddress%%]:10032
 #
 # PostJournal
 #
-[%%zimbraLocalBindAddress%%]:10027 inet n   n       n       -       -       spawn
+[%%zmailLocalBindAddress%%]:10027 inet n   n       n       -       -       spawn
 	-o smtp_send_xforward_command=yes
-	user=zimbra argv=/opt/zimbra/postfix-journal/bin/postjournal
+	user=zmail argv=/opt/zmail/postfix-journal/bin/postjournal
 
-[%%zimbraLocalBindAddress%%]:10028 inet n  -       n       -       -  smtpd
+[%%zmailLocalBindAddress%%]:10028 inet n  -       n       -       -  smtpd
 	-o smtpd_authorized_xforward_hosts=127.0.0.0/8
 	-o smtpd_client_restrictions=
 	-o smtpd_proxy_filter=
@@ -177,7 +177,7 @@ smtp-amavis unix -      -       n       -       10  smtp
 	-o receive_override_options=no_unknown_recipient_checks
 	-o syslog_name=postfix/reinject
 
-[%%zimbraLocalBindAddress%%]:10029 inet n  -       n       -       -  smtpd
+[%%zmailLocalBindAddress%%]:10029 inet n  -       n       -       -  smtpd
 	-o smtpd_client_restrictions=
 	-o smtpd_proxy_filter=
 	-o content_filter=

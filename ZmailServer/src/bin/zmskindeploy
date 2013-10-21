@@ -19,7 +19,7 @@ BIN_ROOT=`dirname $0`
 
 source ${BIN_ROOT}/zmshutil || exit 1
 zmsetvars \
-  zimbra_home \
+  zmail_home \
   mailboxd_directory \
   skins_directory
 
@@ -72,7 +72,7 @@ SKIN_WORK_BASE=`dirname "${skins_directory}"`
 
 BASE_URL=/`basename "${SKIN_WORK_BASE}"`
 
-CP="${zimbra_home}/lib/jars/zimbracommon.jar:${SKIN_WORK_BASE}/WEB-INF/classes"
+CP="${zmail_home}/lib/jars/zmailcommon.jar:${SKIN_WORK_BASE}/WEB-INF/classes"
 
 # Make sure source exists, and copy it to working dir
 if [ -d "$SKIN_SRC" ]; then
@@ -127,7 +127,7 @@ pushd $SKIN_WORK_DIR > /dev/null
 TEMPLATES=`find . -type f -name \*.template`
 if [ -n "${TEMPLATES}" ]; then
     echo "Processing templates..."
-    ${BIN_ROOT}/zmjava -cp "$CP" com.zimbra.common.util.TemplateCompiler \
+    ${BIN_ROOT}/zmjava -cp "$CP" org.zmail.common.util.TemplateCompiler \
         --prefix "${SKIN_NAME}" \
         --authoritative \
         --inputdir "${SKIN_WORK_DIR}" \
@@ -147,11 +147,11 @@ if [ -d img ]; then
 
     if [ -n "${IMAGE_SUBDIRS}" ]; then
         echo "Processing images..."
-        ${BIN_ROOT}/zmjava -cp "$CP" com.zimbra.kabuki.tools.img.ImageMerger \
+        ${BIN_ROOT}/zmjava -cp "$CP" org.zmail.kabuki.tools.img.ImageMerger \
             --css-path "${BASE_URL}/skins/${SKIN_NAME}/img/" \
             --css-file "images.css" \
             --js-file "images.css.js" \
-	    --spacerimagespath "${zimbra_home}/jetty/webapps/zimbra/img/zimbra/" \
+	    --spacerimagespath "${zmail_home}/jetty/webapps/zmail/img/zmail/" \
             --no-append \
             --output "${SKIN_DEST_DIR}/img" \
             --input "${IMAGE_SUBDIRS}" > /dev/null
@@ -167,11 +167,11 @@ if [ -d img ]; then
             fi
             IMAGE_SUBDIRS="${IMAGE_SUBDIRS}${E}"
         done
-        ${BIN_ROOT}/zmjava -cp "$CP" com.zimbra.kabuki.tools.img.ImageMerger \
+        ${BIN_ROOT}/zmjava -cp "$CP" org.zmail.kabuki.tools.img.ImageMerger \
             --css-path "${BASE_URL}/skins/${SKIN_NAME}/img/" \
             --css-file "images_${LOCID}.css" \
             --js-file "images.css.js" \
-            --spacerimagespath "${zimbra_home}/jetty/webapps/zimbra/img/zimbra/" \
+            --spacerimagespath "${zmail_home}/jetty/webapps/zmail/img/zmail/" \
 	    --no-append \
             --output "${SKIN_DEST_DIR}/img" \
             --input "${IMAGE_SUBDIRS}" > /dev/null
@@ -181,7 +181,7 @@ fi
 
 popd > /dev/null
 
-${BIN_ROOT}/zmprov mcf +ZimbraInstalledSkin ${SKIN_NAME}
+${BIN_ROOT}/zmprov mcf +ZmailInstalledSkin ${SKIN_NAME}
 
 if [ $? = 0 ]; then
   echo "${SKIN_NAME} successfully installed." 

@@ -12,23 +12,23 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.qa.unittest;
+package org.zmail.qa.unittest;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import junit.framework.TestCase;
 
-import com.zimbra.client.ZFilterAction;
-import com.zimbra.client.ZFilterCondition;
-import com.zimbra.client.ZFilterRule;
-import com.zimbra.client.ZFilterRules;
-import com.zimbra.client.ZMailbox;
-import com.zimbra.client.ZMessage;
-import com.zimbra.client.ZTag;
-import com.zimbra.client.ZFilterAction.ZTagAction;
-import com.zimbra.client.ZFilterCondition.HeaderOp;
-import com.zimbra.client.ZFilterCondition.ZHeaderCondition;
+import org.zmail.client.ZFilterAction;
+import org.zmail.client.ZFilterCondition;
+import org.zmail.client.ZFilterRule;
+import org.zmail.client.ZFilterRules;
+import org.zmail.client.ZMailbox;
+import org.zmail.client.ZMessage;
+import org.zmail.client.ZTag;
+import org.zmail.client.ZFilterAction.ZTagAction;
+import org.zmail.client.ZFilterCondition.HeaderOp;
+import org.zmail.client.ZFilterCondition.ZHeaderCondition;
 
 public class TestTagFilterRules
 extends TestCase

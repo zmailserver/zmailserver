@@ -12,15 +12,15 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.store.external;
+package org.zmail.cs.store.external;
 
 import java.io.IOException;
 import java.io.OutputStream;
 
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.cs.store.Blob;
-import com.zimbra.cs.store.BlobBuilder;
-import com.zimbra.cs.store.BufferingIncomingBlob;
+import org.zmail.common.service.ServiceException;
+import org.zmail.cs.store.Blob;
+import org.zmail.cs.store.BlobBuilder;
+import org.zmail.cs.store.BufferingIncomingBlob;
 
 /**
  * IncomingBlob implementation which streams data directly to external store during upload

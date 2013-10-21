@@ -12,7 +12,7 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.imap;
+package org.zmail.cs.imap;
 
 import java.util.HashSet;
 import java.util.Map;
@@ -24,18 +24,18 @@ import org.apache.mina.filter.codec.ProtocolDecoder;
 import org.apache.mina.filter.codec.ProtocolEncoder;
 
 import com.google.common.collect.ImmutableMap;
-import com.zimbra.common.localconfig.LC;
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.common.stats.RealtimeStatsCallback;
-import com.zimbra.common.util.Log;
-import com.zimbra.common.util.ZimbraLog;
-import com.zimbra.cs.account.Provisioning;
-import com.zimbra.cs.account.Server;
-import com.zimbra.cs.server.NioConnection;
-import com.zimbra.cs.server.NioHandler;
-import com.zimbra.cs.server.NioServer;
-import com.zimbra.cs.server.ServerThrottle;
-import com.zimbra.cs.stats.ZimbraPerf;
+import org.zmail.common.localconfig.LC;
+import org.zmail.common.service.ServiceException;
+import org.zmail.common.stats.RealtimeStatsCallback;
+import org.zmail.common.util.Log;
+import org.zmail.common.util.ZmailLog;
+import org.zmail.cs.account.Provisioning;
+import org.zmail.cs.account.Server;
+import org.zmail.cs.server.NioConnection;
+import org.zmail.cs.server.NioHandler;
+import org.zmail.cs.server.NioServer;
+import org.zmail.cs.server.ServerThrottle;
+import org.zmail.cs.stats.ZmailPerf;
 
 public final class NioImapServer extends NioServer implements ImapServer, RealtimeStatsCallback {
     private final NioImapDecoder decoder;
@@ -47,7 +47,7 @@ public final class NioImapServer extends NioServer implements ImapServer, Realti
         decoder.setMaxLineLength(config.getMaxRequestSize());
         decoder.setMaxLiteralSize(config.getMaxMessageSize());
         registerMBean(getName());
-        ZimbraPerf.addStatsCallback(this);
+        ZmailPerf.addStatsCallback(this);
         Set<String> safeHosts = new HashSet<String>();
         for (Server server : Provisioning.getInstance().getAllServers()) {
             safeHosts.add(server.getServiceHostname());
@@ -90,13 +90,13 @@ public final class NioImapServer extends NioServer implements ImapServer, Realti
 
     @Override
     public Log getLog() {
-        return ZimbraLog.imap;
+        return ZmailLog.imap;
     }
 
     @Override
     public Map<String, Object> getStatData() {
-        String connStatName = getConfig().isSslEnabled() ? ZimbraPerf.RTS_IMAP_SSL_CONN : ZimbraPerf.RTS_IMAP_CONN;
-        String threadStatName = getConfig().isSslEnabled() ? ZimbraPerf.RTS_IMAP_SSL_THREADS : ZimbraPerf.RTS_IMAP_THREADS;
+        String connStatName = getConfig().isSslEnabled() ? ZmailPerf.RTS_IMAP_SSL_CONN : ZmailPerf.RTS_IMAP_CONN;
+        String threadStatName = getConfig().isSslEnabled() ? ZmailPerf.RTS_IMAP_SSL_THREADS : ZmailPerf.RTS_IMAP_THREADS;
         return ImmutableMap.of(connStatName, (Object) getNumConnections(), threadStatName, getNumThreads());
     }
 }

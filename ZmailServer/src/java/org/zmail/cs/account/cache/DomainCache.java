@@ -19,16 +19,16 @@
  * TODO To change the template for this generated file go to
  * Window - Preferences - Java - Code Style - Code Templates
  */
-package com.zimbra.cs.account.cache;
+package org.zmail.cs.account.cache;
 
 import java.util.Map;
 
-import com.zimbra.common.util.MapUtil;
+import org.zmail.common.util.MapUtil;
 
-import com.zimbra.common.account.Key.DomainBy;
-import com.zimbra.common.stats.Counter;
-import com.zimbra.cs.account.Domain;
-import com.zimbra.cs.account.Provisioning;
+import org.zmail.common.account.Key.DomainBy;
+import org.zmail.common.stats.Counter;
+import org.zmail.cs.account.Domain;
+import org.zmail.cs.account.Provisioning;
 
 /**
  * @author schemers
@@ -52,7 +52,7 @@ public class DomainCache implements IDomainCache {
     
     /*
      * for caching non-existing domains so we don't repeatedly search LDAP for domains 
-     * that do not exist in Zimbra LDAP.
+     * that do not exist in Zmail LDAP.
      * 
      * entries in the NegativeCache has the same TTS/max as this DomainCache.
      */
@@ -173,15 +173,15 @@ public class DomainCache implements IDomainCache {
             mNegativeNameCache.remove(entry.getName());
             mNegativeIdCache.remove(entry.getId());
             
-            String vhost[] = entry.getMultiAttr(Provisioning.A_zimbraVirtualHostname);            
+            String vhost[] = entry.getMultiAttr(Provisioning.A_zmailVirtualHostname);            
             for (String vh : vhost)
                 mNegativeVirtualHostnameCache.remove(vh.toLowerCase());
             
-            String foreignName[] = entry.getMultiAttr(Provisioning.A_zimbraForeignName);            
+            String foreignName[] = entry.getMultiAttr(Provisioning.A_zmailForeignName);            
             for (String fn : foreignName)
                 mNegativeForeignNameCache.remove(fn.toLowerCase());
             
-            String krb5Realm = entry.getAttr(Provisioning.A_zimbraAuthKerberos5Realm);
+            String krb5Realm = entry.getAttr(Provisioning.A_zmailAuthKerberos5Realm);
             if (krb5Realm != null)
                 mNegativeKrb5RealmCache.remove(krb5Realm);
         }
@@ -228,15 +228,15 @@ public class DomainCache implements IDomainCache {
             mNameCache.remove(entry.getName());
             mIdCache.remove(entry.getId());
             
-            String vhost[] = entry.getMultiAttr(Provisioning.A_zimbraVirtualHostname);            
+            String vhost[] = entry.getMultiAttr(Provisioning.A_zmailVirtualHostname);            
             for (String vh : vhost)
                 mVirtualHostnameCache.remove(vh.toLowerCase());
             
-            String foreignName[] = entry.getMultiAttr(Provisioning.A_zimbraForeignName);            
+            String foreignName[] = entry.getMultiAttr(Provisioning.A_zmailForeignName);            
             for (String fn : foreignName)
                 mForeignNameCache.remove(fn.toLowerCase());
             
-            String krb5Realm = entry.getAttr(Provisioning.A_zimbraAuthKerberos5Realm);
+            String krb5Realm = entry.getAttr(Provisioning.A_zmailAuthKerberos5Realm);
             if (krb5Realm != null)
                 mKrb5RealmCache.remove(krb5Realm);
         }
@@ -263,15 +263,15 @@ public class DomainCache implements IDomainCache {
             mNameCache.put(entry.getName(), cacheEntry);
             mIdCache.put(entry.getId(), cacheEntry);
             
-            String vhost[] = entry.getMultiAttr(Provisioning.A_zimbraVirtualHostname);            
+            String vhost[] = entry.getMultiAttr(Provisioning.A_zmailVirtualHostname);            
             for (String vh : vhost)
                 mVirtualHostnameCache.put(vh.toLowerCase(), cacheEntry);          
             
-            String foreignName[] = entry.getMultiAttr(Provisioning.A_zimbraForeignName);            
+            String foreignName[] = entry.getMultiAttr(Provisioning.A_zmailForeignName);            
             for (String fn : foreignName)
                 mForeignNameCache.put(fn.toLowerCase(), cacheEntry);  
             
-            String krb5Realm = entry.getAttr(Provisioning.A_zimbraAuthKerberos5Realm);
+            String krb5Realm = entry.getAttr(Provisioning.A_zmailAuthKerberos5Realm);
             if (krb5Realm != null)
                 mKrb5RealmCache.put(krb5Realm, cacheEntry);
         } else {

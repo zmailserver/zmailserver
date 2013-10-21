@@ -13,17 +13,17 @@
  * ***** END LICENSE BLOCK *****
  */
 
-package com.zimbra.cs.account.soap;
+package org.zmail.cs.account.soap;
 
 import java.util.Map;
 
-import com.zimbra.soap.admin.type.DataSourceType;
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.common.soap.AccountConstants;
-import com.zimbra.cs.account.Account;
-import com.zimbra.cs.account.DataSource;
-import com.zimbra.cs.account.Provisioning;
-import com.zimbra.common.soap.Element;
+import org.zmail.soap.admin.type.DataSourceType;
+import org.zmail.common.service.ServiceException;
+import org.zmail.common.soap.AccountConstants;
+import org.zmail.cs.account.Account;
+import org.zmail.cs.account.DataSource;
+import org.zmail.cs.account.Provisioning;
+import org.zmail.common.soap.Element;
 
 class SoapDataSource extends DataSource implements SoapEntry {
         

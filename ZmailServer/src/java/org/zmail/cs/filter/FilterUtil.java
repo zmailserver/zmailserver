@@ -12,7 +12,7 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.filter;
+package org.zmail.cs.filter;
 
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
@@ -32,42 +32,42 @@ import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 
 import com.google.common.collect.Sets;
-import com.zimbra.client.ZFolder;
-import com.zimbra.client.ZMailbox;
-import com.zimbra.common.account.Key.AccountBy;
-import com.zimbra.common.localconfig.LC;
-import com.zimbra.common.mime.MimeConstants;
-import com.zimbra.common.mime.shim.JavaMailInternetAddress;
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.common.soap.Element;
-import com.zimbra.common.soap.MailConstants;
-import com.zimbra.common.util.ArrayUtil;
-import com.zimbra.common.util.CharsetUtil;
-import com.zimbra.common.util.L10nUtil;
-import com.zimbra.common.util.Pair;
-import com.zimbra.common.util.StringUtil;
-import com.zimbra.common.util.ZimbraLog;
-import com.zimbra.common.zmime.ZInternetHeader;
-import com.zimbra.cs.account.Account;
-import com.zimbra.cs.account.AuthToken;
-import com.zimbra.cs.account.Provisioning;
-import com.zimbra.cs.filter.jsieve.ActionFlag;
-import com.zimbra.cs.mailbox.DeliveryContext;
-import com.zimbra.cs.mailbox.DeliveryOptions;
-import com.zimbra.cs.mailbox.Folder;
-import com.zimbra.cs.mailbox.MailItem;
-import com.zimbra.cs.mailbox.MailSender;
-import com.zimbra.cs.mailbox.Mailbox;
-import com.zimbra.cs.mailbox.Message;
-import com.zimbra.cs.mailbox.Mountpoint;
-import com.zimbra.cs.mailbox.OperationContext;
-import com.zimbra.cs.mime.MPartInfo;
-import com.zimbra.cs.mime.Mime;
-import com.zimbra.cs.mime.ParsedMessage;
-import com.zimbra.cs.service.AuthProvider;
-import com.zimbra.cs.service.util.ItemId;
-import com.zimbra.cs.util.AccountUtil;
-import com.zimbra.cs.util.JMSession;
+import org.zmail.client.ZFolder;
+import org.zmail.client.ZMailbox;
+import org.zmail.common.account.Key.AccountBy;
+import org.zmail.common.localconfig.LC;
+import org.zmail.common.mime.MimeConstants;
+import org.zmail.common.mime.shim.JavaMailInternetAddress;
+import org.zmail.common.service.ServiceException;
+import org.zmail.common.soap.Element;
+import org.zmail.common.soap.MailConstants;
+import org.zmail.common.util.ArrayUtil;
+import org.zmail.common.util.CharsetUtil;
+import org.zmail.common.util.L10nUtil;
+import org.zmail.common.util.Pair;
+import org.zmail.common.util.StringUtil;
+import org.zmail.common.util.ZmailLog;
+import org.zmail.common.zmime.ZInternetHeader;
+import org.zmail.cs.account.Account;
+import org.zmail.cs.account.AuthToken;
+import org.zmail.cs.account.Provisioning;
+import org.zmail.cs.filter.jsieve.ActionFlag;
+import org.zmail.cs.mailbox.DeliveryContext;
+import org.zmail.cs.mailbox.DeliveryOptions;
+import org.zmail.cs.mailbox.Folder;
+import org.zmail.cs.mailbox.MailItem;
+import org.zmail.cs.mailbox.MailSender;
+import org.zmail.cs.mailbox.Mailbox;
+import org.zmail.cs.mailbox.Message;
+import org.zmail.cs.mailbox.Mountpoint;
+import org.zmail.cs.mailbox.OperationContext;
+import org.zmail.cs.mime.MPartInfo;
+import org.zmail.cs.mime.Mime;
+import org.zmail.cs.mime.ParsedMessage;
+import org.zmail.cs.service.AuthProvider;
+import org.zmail.cs.service.util.ItemId;
+import org.zmail.cs.util.AccountUtil;
+import org.zmail.cs.util.JMSession;
 
 public final class FilterUtil {
 
@@ -111,7 +111,7 @@ public final class FilterUtil {
         try {
             return Integer.parseInt(s);
         } catch (NumberFormatException e) {
-            ZimbraLog.soap.warn("Unable to parse index value %s for element %s.  Ignoring order.",
+            ZmailLog.soap.warn("Unable to parse index value %s for element %s.  Ignoring order.",
                 s, actionElement.getName());
             return 0;
         }
@@ -156,7 +156,7 @@ public final class FilterUtil {
             octxt, Mailbox.ID_FOLDER_USER_ROOT, folderPath);
         Folder folder = folderAndPath.getFirst();
         String remainingPath = folderAndPath.getSecond();
-        ZimbraLog.filter.debug("Attempting to file to %s, remainingPath=%s.", folder, remainingPath);
+        ZmailLog.filter.debug("Attempting to file to %s, remainingPath=%s.", folder, remainingPath);
 
         if (folder instanceof Mountpoint) {
             Mountpoint mountpoint = (Mountpoint) folder;
@@ -186,7 +186,7 @@ public final class FilterUtil {
                     throw ServiceException.FAILURE("Unable to get message content", e);
                 }
                 String msgId = remoteMbox.addMessage(remoteFolder.getId(),
-                        com.zimbra.cs.mailbox.Flag.toString(flags), null, 0, content, false);
+                        org.zmail.cs.mailbox.Flag.toString(flags), null, 0, content, false);
                 return new ItemId(msgId, remoteAccountId);
             } else {
                 String msg = String.format("Unable to find remote folder %s for mountpoint %s.",
@@ -196,7 +196,7 @@ public final class FilterUtil {
         } else {
             if (!StringUtil.isNullOrEmpty(remainingPath)) {
                 // Only part of the folder path matched.  Auto-create the remaining path.
-                ZimbraLog.filter.info("Could not find folder %s.  Automatically creating it.",
+                ZmailLog.filter.info("Could not find folder %s.  Automatically creating it.",
                     folderPath);
                 folder = mbox.createFolder(octxt, folderPath, new Folder.FolderOptions().setDefaultView(MailItem.Type.MESSAGE));
             }
@@ -240,7 +240,7 @@ public final class FilterUtil {
         return ZMailbox.getMailbox(zoptions);
     }
 
-    public static final String HEADER_FORWARDED = "X-Zimbra-Forwarded";
+    public static final String HEADER_FORWARDED = "X-Zmail-Forwarded";
 
     public static void redirect(OperationContext octxt, Mailbox sourceMbox, MimeMessage msg, String destinationAddress)
     throws ServiceException {
@@ -259,14 +259,14 @@ public final class FilterUtil {
         } catch (MessagingException e) {
             try {
                 outgoingMsg = createRedirectMsgOnError(msg);
-                ZimbraLog.filter.info("Message format error detected.  Wrapper class in use.  %s", e.toString());
+                ZmailLog.filter.info("Message format error detected.  Wrapper class in use.  %s", e.toString());
             } catch (MessagingException again) {
                 throw ServiceException.FAILURE("Message format error detected.  Workaround failed.", again);
             }
         } catch (IOException e) {
             try {
                 outgoingMsg = createRedirectMsgOnError(msg);
-                ZimbraLog.filter.info("Message format error detected.  Wrapper class in use.  %s", e.toString());
+                ZmailLog.filter.info("Message format error detected.  Wrapper class in use.  %s", e.toString());
             } catch (MessagingException me) {
                 throw ServiceException.FAILURE("Message format error detected.  Workaround failed.", me);
             }
@@ -294,7 +294,7 @@ public final class FilterUtil {
             sender.setRecipients(destinationAddress);
             sender.sendMimeMessage(octxt, sourceMbox, outgoingMsg);
         } catch (MessagingException e) {
-            ZimbraLog.filter.warn("Envelope sender will be set to the default value.", e);
+            ZmailLog.filter.warn("Envelope sender will be set to the default value.", e);
         }
     }
 
@@ -302,7 +302,7 @@ public final class FilterUtil {
     throws MessagingException {
         String envelopeSender = msg.getHeader("Return-Path", null);
         String ct = Mime.getContentType(msg, "text/plain");
-        ZimbraLog.filter.debug("isDeliveryStatusNotification(): Return-Path=%s, Auto-Submitted=%s, Content-Type=%s.",
+        ZmailLog.filter.debug("isDeliveryStatusNotification(): Return-Path=%s, Auto-Submitted=%s, Content-Type=%s.",
             envelopeSender, msg.getHeader("Auto-Submitted", null), ct);
 
         if (StringUtil.isNullOrEmpty(envelopeSender) || envelopeSender.equals("<>")) {
@@ -325,7 +325,7 @@ public final class FilterUtil {
             throw ServiceException.FAILURE(error, null);
         }
         if (isDeliveryStatusNotification(mimeMessage)) {
-            ZimbraLog.filter.debug("Not auto-replying to a DSN message");
+            ZmailLog.filter.debug("Not auto-replying to a DSN message");
             return;
         }
 
@@ -455,7 +455,7 @@ public final class FilterUtil {
      * Gets appropriate charset for the given data. The charset preference order is:
      *                `
      * 1. "us-ascii"
-     * 2. Account's zimbraPrefMailDefaultCharset attr
+     * 2. Account's zmailPrefMailDefaultCharset attr
      * 3. "utf-8"
      *
      * @param account
@@ -466,7 +466,7 @@ public final class FilterUtil {
         if (MimeConstants.P_CHARSET_ASCII.equals(CharsetUtil.checkCharset(data, MimeConstants.P_CHARSET_ASCII))) {
             return MimeConstants.P_CHARSET_ASCII;
         } else {
-            return CharsetUtil.checkCharset(data, account.getAttr(Provisioning.A_zimbraPrefMailDefaultCharset, MimeConstants.P_CHARSET_UTF8));
+            return CharsetUtil.checkCharset(data, account.getAttr(Provisioning.A_zmailPrefMailDefaultCharset, MimeConstants.P_CHARSET_UTF8));
         }
     }
 
@@ -484,7 +484,7 @@ public final class FilterUtil {
                 return new String(bodyBytes, 0, indexToExclude, MimeConstants.P_CHARSET_UTF8);
             }
         } catch (UnsupportedEncodingException e) {
-            ZimbraLog.filter.error("Error while truncating body", e);
+            ZmailLog.filter.error("Error while truncating body", e);
         }
         return body;
     }
@@ -510,7 +510,7 @@ public final class FilterUtil {
             vars.put("body",
                      Mime.getStringContent(bodyPart.getMimePart(), mailbox.getAccount().getPrefMailDefaultCharset()));
         } catch (IOException e) {
-            ZimbraLog.filter.warn("Error in reading text body", e);
+            ZmailLog.filter.warn("Error in reading text body", e);
         }
         return vars;
     }
@@ -532,7 +532,7 @@ public final class FilterUtil {
 
     /**
      * Returns <tt>true</tt> if the current account's name is
-     * specified in one of the X-Zimbra-Forwarded headers.
+     * specified in one of the X-Zmail-Forwarded headers.
      */
     private static boolean isMailLoop(Mailbox sourceMbox, MimeMessage msg)
     throws ServiceException {

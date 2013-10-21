@@ -13,12 +13,12 @@
  * ***** END LICENSE BLOCK *****
  */
 
-package com.zimbra.cs.account;
+package org.zmail.cs.account;
 
-public class ZimbraAuthTokenEncoded extends ZimbraAuthToken {
+public class ZmailAuthTokenEncoded extends ZmailAuthToken {
     private String encoded;
     
-    public ZimbraAuthTokenEncoded(String encoded) {
+    public ZmailAuthTokenEncoded(String encoded) {
         this.encoded = encoded;
     }
     

@@ -12,26 +12,26 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.service.admin;
+package org.zmail.cs.service.admin;
 
 import java.util.List;
 import java.util.Map;
 
-import com.zimbra.common.account.Key;
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.common.soap.AccountConstants;
-import com.zimbra.common.soap.AdminConstants;
-import com.zimbra.cs.account.AccountServiceException;
-import com.zimbra.cs.account.Domain;
-import com.zimbra.cs.account.Provisioning;
-import com.zimbra.cs.account.accesscontrol.AdminRight;
-import com.zimbra.cs.account.accesscontrol.Rights.Admin;
-import com.zimbra.cs.gal.GalSearchControl;
-import com.zimbra.cs.gal.GalSearchParams;
-import com.zimbra.cs.gal.GalSearchResultCallback;
-import com.zimbra.common.soap.Element;
-import com.zimbra.soap.ZimbraSoapContext;
-import com.zimbra.soap.type.GalSearchType;
+import org.zmail.common.account.Key;
+import org.zmail.common.service.ServiceException;
+import org.zmail.common.soap.AccountConstants;
+import org.zmail.common.soap.AdminConstants;
+import org.zmail.cs.account.AccountServiceException;
+import org.zmail.cs.account.Domain;
+import org.zmail.cs.account.Provisioning;
+import org.zmail.cs.account.accesscontrol.AdminRight;
+import org.zmail.cs.account.accesscontrol.Rights.Admin;
+import org.zmail.cs.gal.GalSearchControl;
+import org.zmail.cs.gal.GalSearchParams;
+import org.zmail.cs.gal.GalSearchResultCallback;
+import org.zmail.common.soap.Element;
+import org.zmail.soap.ZmailSoapContext;
+import org.zmail.soap.type.GalSearchType;
 
 /**
  * @since May 26, 2004
@@ -49,7 +49,7 @@ public class SearchGal extends AdminGalDocumentHandler {
 
     @Override
     public Element handle(Element request, Map<String, Object> context) throws ServiceException {
-        ZimbraSoapContext zsc = getZimbraSoapContext(context);
+        ZmailSoapContext zsc = getZmailSoapContext(context);
 
         String domainName = request.getAttribute(AdminConstants.A_DOMAIN);
         Provisioning prov = Provisioning.getInstance();

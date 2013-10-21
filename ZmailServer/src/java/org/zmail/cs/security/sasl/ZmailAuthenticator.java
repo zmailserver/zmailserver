@@ -12,7 +12,7 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.security.sasl;
+package org.zmail.cs.security.sasl;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -20,20 +20,20 @@ import java.io.OutputStream;
 
 import javax.security.sasl.SaslServer;
 
-import com.zimbra.common.account.Key;
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.cs.account.Account;
-import com.zimbra.cs.account.AuthToken;
-import com.zimbra.cs.account.AuthTokenException;
-import com.zimbra.cs.account.Provisioning;
-import com.zimbra.cs.account.ZimbraAuthToken;
-import com.zimbra.cs.account.auth.AuthContext;
-import com.zimbra.cs.service.AuthProvider;
+import org.zmail.common.account.Key;
+import org.zmail.common.service.ServiceException;
+import org.zmail.cs.account.Account;
+import org.zmail.cs.account.AuthToken;
+import org.zmail.cs.account.AuthTokenException;
+import org.zmail.cs.account.Provisioning;
+import org.zmail.cs.account.ZmailAuthToken;
+import org.zmail.cs.account.auth.AuthContext;
+import org.zmail.cs.service.AuthProvider;
 
-public class ZimbraAuthenticator extends Authenticator {
+public class ZmailAuthenticator extends Authenticator {
     public static final String MECHANISM = "X-ZIMBRA";
 
-    public ZimbraAuthenticator(AuthenticatorUser user) {
+    public ZmailAuthenticator(AuthenticatorUser user) {
         super(MECHANISM, user);
     }
 
@@ -77,7 +77,7 @@ public class ZimbraAuthenticator extends Authenticator {
         Provisioning prov = Provisioning.getInstance();
         AuthToken at;
         try {
-            at = ZimbraAuthToken.getAuthToken(authtoken);
+            at = ZmailAuthToken.getAuthToken(authtoken);
         } catch (AuthTokenException e) {
             return null;
         }

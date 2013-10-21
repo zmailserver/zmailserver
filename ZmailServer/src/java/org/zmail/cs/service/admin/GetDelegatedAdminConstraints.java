@@ -12,39 +12,39 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.service.admin;
+package org.zmail.cs.service.admin;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-import com.zimbra.common.account.Key;
-import com.zimbra.common.account.Key.CosBy;
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.common.soap.AdminConstants;
-import com.zimbra.common.soap.Element;
-import com.zimbra.cs.account.AccountServiceException;
-import com.zimbra.cs.account.Cos;
-import com.zimbra.cs.account.Entry;
-import com.zimbra.cs.account.Provisioning;
-import com.zimbra.cs.account.accesscontrol.AdminRight;
-import com.zimbra.cs.account.accesscontrol.AttributeConstraint;
-import com.zimbra.cs.account.accesscontrol.TargetType;
-import com.zimbra.soap.ZimbraSoapContext;
+import org.zmail.common.account.Key;
+import org.zmail.common.account.Key.CosBy;
+import org.zmail.common.service.ServiceException;
+import org.zmail.common.soap.AdminConstants;
+import org.zmail.common.soap.Element;
+import org.zmail.cs.account.AccountServiceException;
+import org.zmail.cs.account.Cos;
+import org.zmail.cs.account.Entry;
+import org.zmail.cs.account.Provisioning;
+import org.zmail.cs.account.accesscontrol.AdminRight;
+import org.zmail.cs.account.accesscontrol.AttributeConstraint;
+import org.zmail.cs.account.accesscontrol.TargetType;
+import org.zmail.soap.ZmailSoapContext;
 
 public class GetDelegatedAdminConstraints extends AdminDocumentHandler {
 
-    private static final String CONSTRAINT_ATTR = Provisioning.A_zimbraConstraint;
+    private static final String CONSTRAINT_ATTR = Provisioning.A_zmailConstraint;
     
     @Override
     public Element handle(Element request, Map<String, Object> context) throws ServiceException {
-        ZimbraSoapContext zsc = getZimbraSoapContext(context);
+        ZmailSoapContext zsc = getZmailSoapContext(context);
         Provisioning prov = Provisioning.getInstance();
 
         Entry entry = getEntry(request);
         
         AdminAccessControl.GetAttrsRight gar = new AdminAccessControl.GetAttrsRight();
-        gar.addAttr(Provisioning.A_zimbraConstraint);
+        gar.addAttr(Provisioning.A_zmailConstraint);
         checkRight(zsc, context, entry, gar);
         
         Map<String, AttributeConstraint> constraints = AttributeConstraint.getConstraint(entry);

@@ -12,7 +12,7 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.index;
+package org.zmail.cs.index;
 
 import java.io.File;
 import java.io.IOException;
@@ -29,9 +29,9 @@ import org.apache.lucene.store.NIOFSDirectory;
 import org.apache.lucene.store.SimpleFSDirectory;
 import org.apache.lucene.store.SingleInstanceLockFactory;
 
-import com.zimbra.common.localconfig.LC;
-import com.zimbra.common.util.ZimbraLog;
-import com.zimbra.cs.stats.ZimbraPerf;
+import org.zmail.common.localconfig.LC;
+import org.zmail.common.util.ZmailLog;
+import org.zmail.cs.stats.ZmailPerf;
 
 /**
  * Lucene {@link FSDirectory} wrapper to count I/O bytes.
@@ -51,7 +51,7 @@ public final class LuceneDirectory extends Directory {
     /**
      * Creates a new {@link LuceneDirectory} with {@code SingleInstanceLockFactory}.
      * <p>
-     * You can switch Lucene's {@link FSDirectory} implementation by {@link LC#zimbra_index_lucene_io_impl}.
+     * You can switch Lucene's {@link FSDirectory} implementation by {@link LC#zmail_index_lucene_io_impl}.
      * <ul>
      *  <li>{@code null} -Lucene will try to pick the best {@link FSDirectory} implementation given the current
      *      environment. Currently this returns {@link MMapDirectory} for most Solaris and Windows 64-bit JREs,
@@ -80,7 +80,7 @@ public final class LuceneDirectory extends Directory {
      * @param path directory path
      */
     public static LuceneDirectory open(File path) throws IOException {
-        String impl = LC.zimbra_index_lucene_io_impl.value();
+        String impl = LC.zmail_index_lucene_io_impl.value();
         FSDirectory dir;
         if ("nio".equals(impl)) {
             dir = new NIOFSDirectory(path, new SingleInstanceLockFactory());
@@ -91,7 +91,7 @@ public final class LuceneDirectory extends Directory {
         } else {
             dir = FSDirectory.open(path, new SingleInstanceLockFactory());
         }
-        ZimbraLog.index.info("OpenLuceneIndex impl=%s,dir=%s", dir.getClass().getSimpleName(), path);
+        ZmailLog.index.info("OpenLuceneIndex impl=%s,dir=%s", dir.getClass().getSimpleName(), path);
         return new LuceneDirectory(dir);
     }
 
@@ -188,7 +188,7 @@ public final class LuceneDirectory extends Directory {
 
     private static final class LuceneIndexInput extends IndexInput {
         private final IndexInput input;
-        private boolean disableCounters = LC.zimbra_index_disable_perf_counters.booleanValue();
+        private boolean disableCounters = LC.zmail_index_disable_perf_counters.booleanValue();
 
         LuceneIndexInput(IndexInput in) {
             input = in;
@@ -197,7 +197,7 @@ public final class LuceneDirectory extends Directory {
         @Override
         public byte readByte() throws IOException {
             if (!disableCounters) {
-                ZimbraPerf.COUNTER_IDX_BYTES_READ.increment(1);
+                ZmailPerf.COUNTER_IDX_BYTES_READ.increment(1);
             }
             return input.readByte();
         }
@@ -205,7 +205,7 @@ public final class LuceneDirectory extends Directory {
         @Override
         public void readBytes(byte[] b, int offset, int len) throws IOException {
             if (!disableCounters) {
-                ZimbraPerf.COUNTER_IDX_BYTES_READ.increment(len);
+                ZmailPerf.COUNTER_IDX_BYTES_READ.increment(len);
             }
             input.readBytes(b, offset, len);
         }
@@ -214,7 +214,7 @@ public final class LuceneDirectory extends Directory {
         public void readBytes(byte[] b, int offset, int len, boolean useBuffer)
             throws IOException {
             if (!disableCounters) {
-                ZimbraPerf.COUNTER_IDX_BYTES_READ.increment(len);
+                ZmailPerf.COUNTER_IDX_BYTES_READ.increment(len);
             }
             input.readBytes(b, offset, len, useBuffer);
         }
@@ -252,7 +252,7 @@ public final class LuceneDirectory extends Directory {
 
     private static final class LuceneIndexOutput extends IndexOutput {
         private final IndexOutput output;
-        private boolean disableCounters = LC.zimbra_index_disable_perf_counters.booleanValue();
+        private boolean disableCounters = LC.zmail_index_disable_perf_counters.booleanValue();
 
         LuceneIndexOutput(IndexOutput out) {
             output = out;
@@ -261,7 +261,7 @@ public final class LuceneDirectory extends Directory {
         @Override
         public void writeByte(byte b) throws IOException {
             if (!disableCounters) {
-                ZimbraPerf.COUNTER_IDX_BYTES_WRITTEN.increment(1);
+                ZmailPerf.COUNTER_IDX_BYTES_WRITTEN.increment(1);
             }
             output.writeByte(b);
         }
@@ -269,7 +269,7 @@ public final class LuceneDirectory extends Directory {
         @Override
         public void writeBytes(byte[] b, int len) throws IOException {
             if (!disableCounters) {
-                ZimbraPerf.COUNTER_IDX_BYTES_WRITTEN.increment(len);
+                ZmailPerf.COUNTER_IDX_BYTES_WRITTEN.increment(len);
             }
             output.writeBytes(b, len);
         }
@@ -277,7 +277,7 @@ public final class LuceneDirectory extends Directory {
         @Override
         public void writeBytes(byte[] b, int offset, int len) throws IOException {
             if (!disableCounters) {
-                ZimbraPerf.COUNTER_IDX_BYTES_WRITTEN.increment(len);
+                ZmailPerf.COUNTER_IDX_BYTES_WRITTEN.increment(len);
             }
             output.writeBytes(b, offset, len);
         }

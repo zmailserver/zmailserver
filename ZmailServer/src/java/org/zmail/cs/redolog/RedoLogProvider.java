@@ -16,13 +16,13 @@
 /*
  * Created on 2005. 6. 29.
  */
-package com.zimbra.cs.redolog;
+package org.zmail.cs.redolog;
 
-import com.zimbra.cs.account.Provisioning;
-import com.zimbra.cs.account.Server;
-import com.zimbra.cs.util.Zimbra;
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.common.util.ZimbraLog;
+import org.zmail.cs.account.Provisioning;
+import org.zmail.cs.account.Server;
+import org.zmail.cs.util.Zmail;
+import org.zmail.common.service.ServiceException;
+import org.zmail.common.util.ZmailLog;
 
 /**
  * @author jhahm
@@ -35,7 +35,7 @@ public abstract class RedoLogProvider {
     	try {
 			theInstance = loadProvider();
 		} catch (ServiceException e) {
-            Zimbra.halt("Unable to initialize redolog provider", e);
+            Zmail.halt("Unable to initialize redolog provider", e);
 		}
     }
 
@@ -48,18 +48,18 @@ public abstract class RedoLogProvider {
         RedoLogProvider provider = null;
         Class providerClass = null;
         Server config = Provisioning.getInstance().getLocalServer();
-        String className = config.getAttr(Provisioning.A_zimbraRedoLogProvider);
+        String className = config.getAttr(Provisioning.A_zmailRedoLogProvider);
         try {
             if (className != null) {
                 providerClass = Class.forName(className);
             } else {
                 providerClass = DefaultRedoLogProvider.class;
-                ZimbraLog.misc.debug("Redolog provider name not specified.  Using default " +
+                ZmailLog.misc.debug("Redolog provider name not specified.  Using default " +
                                      providerClass.getName());
             }
             provider = (RedoLogProvider) providerClass.newInstance();
         } catch (OutOfMemoryError e) {
-            Zimbra.halt("out of memory", e);
+            Zmail.halt("out of memory", e);
         } catch (Throwable e) {
         	throw ServiceException.FAILURE("Unable to load redolog provider " + className, e);
         }

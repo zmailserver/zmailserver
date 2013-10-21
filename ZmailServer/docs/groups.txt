@@ -51,13 +51,13 @@ If we look at "all@test.com", we see that it has one member, engineering@test.co
 prov> gdlm all@test.com
 # distributionList all@test.com memberCount=1
 mail: all@test.com
-objectClass: zimbraDistributionList
-objectClass: zimbraMailRecipient
+objectClass: zmailDistributionList
+objectClass: zmailMailRecipient
 uid: all
-zimbraId: 711ccbd1-86c9-494a-b561-dca40a864b1b
-zimbraMailAlias: all@test.com
-zimbraMailForwardingAddress: engineering@test.com
-zimbraMailStatus: enabled
+zmailId: 711ccbd1-86c9-494a-b561-dca40a864b1b
+zmailMailAlias: all@test.com
+zmailMailForwardingAddress: engineering@test.com
+zmailMailStatus: enabled
 
 
 If we look at engineering@etst.com, we see that is has one member, user1@test.com:
@@ -65,13 +65,13 @@ If we look at engineering@etst.com, we see that is has one member, user1@test.co
 prov> gdl engineering@test.com
 # distributionList engineering@test.com memberCount=1
 mail: engineering@test.com
-objectClass: zimbraDistributionList
-objectClass: zimbraMailRecipient
+objectClass: zmailDistributionList
+objectClass: zmailMailRecipient
 uid: engineering
-zimbraId: ae18f02a-efd0-4066-b8f3-f14b8629a6b6
-zimbraMailAlias: engineering@test.com
-zimbraMailForwardingAddress: user1@test.com
-zimbraMailStatus: enabled
+zmailId: ae18f02a-efd0-4066-b8f3-f14b8629a6b6
+zmailMailAlias: engineering@test.com
+zmailMailForwardingAddress: user1@test.com
+zmailMailStatus: enabled
 
 If we look at all the DLs that user1 belongs to, we get both all@test.com and
 engineering@test.com:
@@ -140,11 +140,11 @@ NOTES
 
 Remote Users
 ------------
-Only local users (a user that Zimbra is authoritative for) get access rights when
+Only local users (a user that Zmail is authoritative for) get access rights when
 added to a DL. For example, adding joe.random@yahoo.com a DL that is used in an ACL 
 doesn't grant them access.
 
-In the future, it will be possible for two Zimbra installations to set up a trust
+In the future, it will be possible for two Zmail installations to set up a trust
 relationship, in which case adding a remote user from one of those domains could actually
 grant access to local resources.
 
@@ -165,5 +165,5 @@ issues:
 
 - ACLs on DLs to control who can manage them
 
-- well known DLs - could use WKD for fine-grained access control (i.e., zimbra-account-read DL
+- well known DLs - could use WKD for fine-grained access control (i.e., zmail-account-read DL
   membership could allow its members read access to accounts in the admin console).

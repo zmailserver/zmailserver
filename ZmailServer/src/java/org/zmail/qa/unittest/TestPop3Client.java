@@ -12,7 +12,7 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.qa.unittest;
+package org.zmail.qa.unittest;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -21,12 +21,12 @@ import junit.framework.TestCase;
 
 import org.apache.log4j.BasicConfigurator;
 
-import com.zimbra.common.util.Log;
-import com.zimbra.cs.mailclient.pop3.Pop3Capabilities;
-import com.zimbra.cs.mailclient.pop3.Pop3Config;
-import com.zimbra.cs.mailclient.pop3.Pop3Connection;
-import com.zimbra.cs.mailclient.util.SSLUtil;
-import com.zimbra.cs.mailclient.MailConfig;
+import org.zmail.common.util.Log;
+import org.zmail.cs.mailclient.pop3.Pop3Capabilities;
+import org.zmail.cs.mailclient.pop3.Pop3Config;
+import org.zmail.cs.mailclient.pop3.Pop3Connection;
+import org.zmail.cs.mailclient.util.SSLUtil;
+import org.zmail.cs.mailclient.MailConfig;
 
 public class TestPop3Client extends TestCase {
     private Pop3Config config;
@@ -72,7 +72,7 @@ public class TestPop3Client extends TestCase {
         assertNotNull(caps);
         assertTrue(caps.hasCapability(Pop3Capabilities.STLS));
         assertTrue(caps.hasCapability("StLs"));
-        assertTrue(caps.hasCapability(Pop3Capabilities.IMPLEMENTATION, "ZimbraInc"));
+        assertTrue(caps.hasCapability(Pop3Capabilities.IMPLEMENTATION, "ZmailInc"));
         assertFalse(caps.hasCapability(Pop3Capabilities.EXPIRE, "NEVER"));
         //connection.getLogger().debug("Capabilities BEFORE = " + caps);
         login();

@@ -12,7 +12,7 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.qa.unittest;
+package org.zmail.qa.unittest;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -24,27 +24,27 @@ import javax.mail.internet.MailDateFormat;
 
 import junit.framework.TestCase;
 
-import com.zimbra.client.ZDataSource;
-import com.zimbra.client.ZFilterAction;
-import com.zimbra.client.ZFilterAction.ZFileIntoAction;
-import com.zimbra.client.ZFilterCondition;
-import com.zimbra.client.ZFilterCondition.HeaderOp;
-import com.zimbra.client.ZFilterCondition.ZHeaderCondition;
-import com.zimbra.client.ZFilterRule;
-import com.zimbra.client.ZFilterRules;
-import com.zimbra.client.ZFolder;
-import com.zimbra.client.ZMailbox;
-import com.zimbra.client.ZMessage;
-import com.zimbra.client.ZPop3DataSource;
-import com.zimbra.common.account.Key;
-import com.zimbra.common.account.ProvisioningConstants;
-import com.zimbra.cs.account.Account;
-import com.zimbra.cs.account.DataSource;
-import com.zimbra.cs.account.Provisioning;
-import com.zimbra.cs.db.DbPop3Message;
-import com.zimbra.cs.mailbox.Mailbox;
-import com.zimbra.cs.mailbox.MailboxManager;
-import com.zimbra.soap.admin.type.DataSourceType;
+import org.zmail.client.ZDataSource;
+import org.zmail.client.ZFilterAction;
+import org.zmail.client.ZFilterAction.ZFileIntoAction;
+import org.zmail.client.ZFilterCondition;
+import org.zmail.client.ZFilterCondition.HeaderOp;
+import org.zmail.client.ZFilterCondition.ZHeaderCondition;
+import org.zmail.client.ZFilterRule;
+import org.zmail.client.ZFilterRules;
+import org.zmail.client.ZFolder;
+import org.zmail.client.ZMailbox;
+import org.zmail.client.ZMessage;
+import org.zmail.client.ZPop3DataSource;
+import org.zmail.common.account.Key;
+import org.zmail.common.account.ProvisioningConstants;
+import org.zmail.cs.account.Account;
+import org.zmail.cs.account.DataSource;
+import org.zmail.cs.account.Provisioning;
+import org.zmail.cs.db.DbPop3Message;
+import org.zmail.cs.mailbox.Mailbox;
+import org.zmail.cs.mailbox.MailboxManager;
+import org.zmail.soap.admin.type.DataSourceType;
 
 public class TestPop3Import extends TestCase {
     private static final String USER_NAME = "user1";
@@ -172,16 +172,16 @@ public class TestPop3Import extends TestCase {
     private void createDataSource() throws Exception {
         Provisioning prov = Provisioning.getInstance();
         Account account = TestUtil.getAccount(USER_NAME);
-        int port = Integer.parseInt(TestUtil.getServerAttr(Provisioning.A_zimbraPop3BindPort));
+        int port = Integer.parseInt(TestUtil.getServerAttr(Provisioning.A_zmailPop3BindPort));
         Map<String, Object> attrs = new HashMap<String, Object>();
-        attrs.put(Provisioning.A_zimbraDataSourceEnabled, ProvisioningConstants.FALSE);
-        attrs.put(Provisioning.A_zimbraDataSourceHost, "localhost");
-        attrs.put(Provisioning.A_zimbraDataSourcePort, Integer.toString(port));
-        attrs.put(Provisioning.A_zimbraDataSourceUsername, "user1");
-        attrs.put(Provisioning.A_zimbraDataSourcePassword, "test123");
-        attrs.put(Provisioning.A_zimbraDataSourceFolderId, Integer.toString(Mailbox.ID_FOLDER_INBOX));
-        attrs.put(Provisioning.A_zimbraDataSourceConnectionType, "cleartext");
-        attrs.put(Provisioning.A_zimbraDataSourceLeaveOnServer, ProvisioningConstants.FALSE);
+        attrs.put(Provisioning.A_zmailDataSourceEnabled, ProvisioningConstants.FALSE);
+        attrs.put(Provisioning.A_zmailDataSourceHost, "localhost");
+        attrs.put(Provisioning.A_zmailDataSourcePort, Integer.toString(port));
+        attrs.put(Provisioning.A_zmailDataSourceUsername, "user1");
+        attrs.put(Provisioning.A_zmailDataSourcePassword, "test123");
+        attrs.put(Provisioning.A_zmailDataSourceFolderId, Integer.toString(Mailbox.ID_FOLDER_INBOX));
+        attrs.put(Provisioning.A_zmailDataSourceConnectionType, "cleartext");
+        attrs.put(Provisioning.A_zmailDataSourceLeaveOnServer, ProvisioningConstants.FALSE);
         prov.createDataSource(account, DataSourceType.pop3, DATA_SOURCE_NAME, attrs);
     }
     

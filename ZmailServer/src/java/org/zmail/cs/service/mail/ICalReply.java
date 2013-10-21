@@ -12,29 +12,29 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.service.mail;
+package org.zmail.cs.service.mail;
 
 import java.util.List;
 import java.util.Map;
 
-import com.zimbra.common.calendar.ZCalendar.ICalTok;
-import com.zimbra.common.calendar.ZCalendar.ZCalendarBuilder;
-import com.zimbra.common.calendar.ZCalendar.ZVCalendar;
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.common.soap.MailConstants;
-import com.zimbra.common.soap.Element;
-import com.zimbra.cs.mailbox.Mailbox;
-import com.zimbra.cs.mailbox.OperationContext;
-import com.zimbra.cs.mailbox.calendar.Invite;
-import com.zimbra.common.soap.SoapFaultException;
-import com.zimbra.soap.ZimbraSoapContext;
+import org.zmail.common.calendar.ZCalendar.ICalTok;
+import org.zmail.common.calendar.ZCalendar.ZCalendarBuilder;
+import org.zmail.common.calendar.ZCalendar.ZVCalendar;
+import org.zmail.common.service.ServiceException;
+import org.zmail.common.soap.MailConstants;
+import org.zmail.common.soap.Element;
+import org.zmail.cs.mailbox.Mailbox;
+import org.zmail.cs.mailbox.OperationContext;
+import org.zmail.cs.mailbox.calendar.Invite;
+import org.zmail.common.soap.SoapFaultException;
+import org.zmail.soap.ZmailSoapContext;
 
 public class ICalReply extends MailDocumentHandler {
 
     @Override
     public Element handle(Element request, Map<String, Object> context)
             throws ServiceException, SoapFaultException {
-        ZimbraSoapContext zsc = getZimbraSoapContext(context);
+        ZmailSoapContext zsc = getZmailSoapContext(context);
         Mailbox mbox = getRequestedMailbox(zsc);
         OperationContext octxt = getOperationContext(zsc, context);
 

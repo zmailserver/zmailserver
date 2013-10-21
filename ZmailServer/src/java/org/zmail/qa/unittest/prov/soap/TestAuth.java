@@ -12,7 +12,7 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.qa.unittest.prov.soap;
+package org.zmail.qa.unittest.prov.soap;
 
 import static org.junit.Assert.*;
 
@@ -41,42 +41,42 @@ import org.junit.Test;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 import com.google.common.collect.Sets;
-import com.zimbra.common.account.ProvisioningConstants;
-import com.zimbra.common.account.Key.AccountBy;
-import com.zimbra.common.account.ZAttrProvisioning.AccountStatus;
-import com.zimbra.common.auth.ZAuthToken;
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.common.soap.AccountConstants;
-import com.zimbra.common.soap.AdminConstants;
-import com.zimbra.common.soap.Element;
-import com.zimbra.common.soap.HeaderConstants;
-import com.zimbra.common.soap.SoapFaultException;
-import com.zimbra.common.soap.SoapHttpTransport;
-import com.zimbra.common.soap.SoapProtocol;
-import com.zimbra.common.soap.SoapTransport;
-import com.zimbra.common.util.ByteUtil;
-import com.zimbra.common.util.ZimbraCookie;
-import com.zimbra.common.util.ZimbraHttpConnectionManager;
-import com.zimbra.cs.account.Account;
-import com.zimbra.cs.account.AccountServiceException;
-import com.zimbra.cs.account.Domain;
-import com.zimbra.cs.account.Provisioning;
-import com.zimbra.cs.service.ZimbraOAuthProvider;
-import com.zimbra.qa.unittest.TestUtil;
-import com.zimbra.qa.unittest.prov.Verify;
-import com.zimbra.qa.unittest.prov.soap.SoapDebugListener.Level;
-import com.zimbra.soap.account.message.AuthRequest;
-import com.zimbra.soap.account.message.AuthResponse;
-import com.zimbra.soap.account.message.GetInfoRequest;
-import com.zimbra.soap.account.message.GetInfoResponse;
-import com.zimbra.soap.account.type.Attr;
-import com.zimbra.soap.account.type.AuthToken;
-import com.zimbra.soap.admin.message.ClearCookieRequest;
-import com.zimbra.soap.admin.message.ClearCookieResponse;
-import com.zimbra.soap.admin.message.NoOpRequest;
-import com.zimbra.soap.admin.message.NoOpResponse;
-import com.zimbra.soap.admin.type.CookieSpec;
-import com.zimbra.soap.type.AccountSelector;
+import org.zmail.common.account.ProvisioningConstants;
+import org.zmail.common.account.Key.AccountBy;
+import org.zmail.common.account.ZAttrProvisioning.AccountStatus;
+import org.zmail.common.auth.ZAuthToken;
+import org.zmail.common.service.ServiceException;
+import org.zmail.common.soap.AccountConstants;
+import org.zmail.common.soap.AdminConstants;
+import org.zmail.common.soap.Element;
+import org.zmail.common.soap.HeaderConstants;
+import org.zmail.common.soap.SoapFaultException;
+import org.zmail.common.soap.SoapHttpTransport;
+import org.zmail.common.soap.SoapProtocol;
+import org.zmail.common.soap.SoapTransport;
+import org.zmail.common.util.ByteUtil;
+import org.zmail.common.util.ZmailCookie;
+import org.zmail.common.util.ZmailHttpConnectionManager;
+import org.zmail.cs.account.Account;
+import org.zmail.cs.account.AccountServiceException;
+import org.zmail.cs.account.Domain;
+import org.zmail.cs.account.Provisioning;
+import org.zmail.cs.service.ZmailOAuthProvider;
+import org.zmail.qa.unittest.TestUtil;
+import org.zmail.qa.unittest.prov.Verify;
+import org.zmail.qa.unittest.prov.soap.SoapDebugListener.Level;
+import org.zmail.soap.account.message.AuthRequest;
+import org.zmail.soap.account.message.AuthResponse;
+import org.zmail.soap.account.message.GetInfoRequest;
+import org.zmail.soap.account.message.GetInfoResponse;
+import org.zmail.soap.account.type.Attr;
+import org.zmail.soap.account.type.AuthToken;
+import org.zmail.soap.admin.message.ClearCookieRequest;
+import org.zmail.soap.admin.message.ClearCookieResponse;
+import org.zmail.soap.admin.message.NoOpRequest;
+import org.zmail.soap.admin.message.NoOpResponse;
+import org.zmail.soap.admin.type.CookieSpec;
+import org.zmail.soap.type.AccountSelector;
 
 public class TestAuth extends SoapTest {
     
@@ -134,7 +134,7 @@ public class TestAuth extends SoapTest {
                 String requestedAccountId, String changeToken, String tokenType)
                 throws ServiceException, IOException {
             String uri = isAdmin ? TestUtil.getAdminSoapUrl() : TestUtil.getSoapUrl();
-            HttpClient httpClient = ZimbraHttpConnectionManager.getInternalHttpConnMgr().newHttpClient();
+            HttpClient httpClient = ZmailHttpConnectionManager.getInternalHttpConnMgr().newHttpClient();
             
             ZAuthToken zAuthToken = new ZAuthToken(authTokenForCookie);
             Map<String, String> cookieMap = zAuthToken.cookieMap(isAdmin);
@@ -300,12 +300,12 @@ public class TestAuth extends SoapTest {
         admin.setAdminAuthTokenLifetime(authTokenLifetime);
         
         SoapHttpTransport transportAdmin = new SoapHttpTransport(TestUtil.getAdminSoapUrl());
-        transportAdmin.setHttpDebugListener(new VerifyCookieExpireListener(ZimbraCookie.COOKIE_ZM_ADMIN_AUTH_TOKEN));
+        transportAdmin.setHttpDebugListener(new VerifyCookieExpireListener(ZmailCookie.COOKIE_ZM_ADMIN_AUTH_TOKEN));
         
-        com.zimbra.soap.admin.message.AuthRequest reqAdmin = 
-            new com.zimbra.soap.admin.message.AuthRequest(admin.getName(), "test123");
+        org.zmail.soap.admin.message.AuthRequest reqAdmin = 
+            new org.zmail.soap.admin.message.AuthRequest(admin.getName(), "test123");
         reqAdmin.setPersistAuthTokenCookie(Boolean.TRUE);
-        com.zimbra.soap.admin.message.AuthResponse respAdmin = invokeJaxb(transportAdmin, reqAdmin);
+        org.zmail.soap.admin.message.AuthResponse respAdmin = invokeJaxb(transportAdmin, reqAdmin);
         
         /*
          * test account auth
@@ -316,12 +316,12 @@ public class TestAuth extends SoapTest {
         acct.setAuthTokenLifetime(authTokenLifetime);
         
         SoapHttpTransport transportAcct = new SoapHttpTransport(TestUtil.getSoapUrl());
-        transportAcct.setHttpDebugListener(new VerifyCookieExpireListener(ZimbraCookie.COOKIE_ZM_AUTH_TOKEN));
+        transportAcct.setHttpDebugListener(new VerifyCookieExpireListener(ZmailCookie.COOKIE_ZM_AUTH_TOKEN));
         
-        com.zimbra.soap.account.message.AuthRequest reqAcct = 
-            new com.zimbra.soap.account.message.AuthRequest(AccountSelector.fromName(acct.getName()), "test123");
+        org.zmail.soap.account.message.AuthRequest reqAcct = 
+            new org.zmail.soap.account.message.AuthRequest(AccountSelector.fromName(acct.getName()), "test123");
         reqAcct.setPersistAuthTokenCookie(Boolean.TRUE);
-        com.zimbra.soap.account.message.AuthResponse respAcct = invokeJaxb(transportAcct, reqAcct);
+        org.zmail.soap.account.message.AuthResponse respAcct = invokeJaxb(transportAcct, reqAcct);
         
         provUtil.deleteAccount(admin);
         provUtil.deleteAccount(acct);
@@ -355,7 +355,7 @@ public class TestAuth extends SoapTest {
         }
         assertTrue(caughtAuthExpired);
         
-        List<CookieSpec> cookiesToClear = Lists.newArrayList(new CookieSpec(ZimbraCookie.COOKIE_ZM_ADMIN_AUTH_TOKEN));
+        List<CookieSpec> cookiesToClear = Lists.newArrayList(new CookieSpec(ZmailCookie.COOKIE_ZM_ADMIN_AUTH_TOKEN));
         ClearCookieRequest req = new ClearCookieRequest(cookiesToClear);
         
         /*
@@ -427,7 +427,7 @@ public class TestAuth extends SoapTest {
     public void accountStatusMaintenance() throws Exception {
         Account acct = provUtil.createAccount(genAcctNameLocalPart(), domain,
                 Collections.singletonMap(
-                Provisioning.A_zimbraAccountStatus, (Object)AccountStatus.maintenance.name()));
+                Provisioning.A_zmailAccountStatus, (Object)AccountStatus.maintenance.name()));
         
         String errorCode = null;
         try {
@@ -466,7 +466,7 @@ public class TestAuth extends SoapTest {
     
     @Test
     public void attrsReturnedInAuthResponse() throws Exception {
-        String ATTR_NAME = Provisioning.A_zimbraFeatureExternalFeedbackEnabled;
+        String ATTR_NAME = Provisioning.A_zmailFeatureExternalFeedbackEnabled;
         String ATTR_VALUE = ProvisioningConstants.TRUE;
             
         Map<String, Object> attrs = Maps.newHashMap();
@@ -477,8 +477,8 @@ public class TestAuth extends SoapTest {
         SoapHttpTransport transport = new SoapHttpTransport(TestUtil.getSoapUrl());
         transport.setHttpDebugListener(new SoapDebugListener());
         
-        com.zimbra.soap.type.AccountSelector acctSel = 
-            new com.zimbra.soap.type.AccountSelector(com.zimbra.soap.type.AccountBy.name, acct.getName());
+        org.zmail.soap.type.AccountSelector acctSel = 
+            new org.zmail.soap.type.AccountSelector(org.zmail.soap.type.AccountBy.name, acct.getName());
         
         AuthRequest req = new AuthRequest(acctSel, "test123");
         req.addAttr(ATTR_NAME);
@@ -532,7 +532,7 @@ public class TestAuth extends SoapTest {
         
         String accessToken = "whatever";
         Element eAccessToken = eAuthToken.addElement(AccountConstants.E_A);
-        eAccessToken.addAttribute(AccountConstants.A_N, ZimbraOAuthProvider.OAUTH_ACCESS_TOKEN);
+        eAccessToken.addAttribute(AccountConstants.A_N, ZmailOAuthProvider.OAUTH_ACCESS_TOKEN);
         eAccessToken.setText(accessToken);
         
         // <account>

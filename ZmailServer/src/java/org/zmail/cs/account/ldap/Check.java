@@ -13,7 +13,7 @@
  * ***** END LICENSE BLOCK *****
  */
 
-package com.zimbra.cs.account.ldap;
+package org.zmail.cs.account.ldap;
 
 import java.io.IOException;
 import java.net.ConnectException;
@@ -23,11 +23,11 @@ import java.util.Map;
 
 import javax.net.ssl.SSLHandshakeException;
 
-import com.zimbra.cs.account.Account;
-import com.zimbra.cs.account.Provisioning;
-import com.zimbra.cs.fb.ExchangeEWSFreeBusyProvider;
-import com.zimbra.cs.fb.ExchangeFreeBusyProvider;
-import com.zimbra.common.service.ServiceException;
+import org.zmail.cs.account.Account;
+import org.zmail.cs.account.Provisioning;
+import org.zmail.cs.fb.ExchangeEWSFreeBusyProvider;
+import org.zmail.cs.fb.ExchangeFreeBusyProvider;
+import org.zmail.common.service.ServiceException;
 
 public class Check {
 

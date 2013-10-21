@@ -12,45 +12,45 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.service.mail;
+package org.zmail.cs.service.mail;
 
 import java.util.List;
 
-import com.zimbra.common.localconfig.LC;
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.common.soap.Element;
-import com.zimbra.common.soap.MailConstants;
-import com.zimbra.common.util.Log;
-import com.zimbra.common.util.LogFactory;
-import com.zimbra.cs.account.Account;
-import com.zimbra.cs.index.CalendarItemHit;
-import com.zimbra.cs.index.ContactHit;
-import com.zimbra.cs.index.ConversationHit;
-import com.zimbra.cs.index.DocumentHit;
-import com.zimbra.cs.index.MessageHit;
-import com.zimbra.cs.index.MessagePartHit;
-import com.zimbra.cs.index.NoteHit;
-import com.zimbra.cs.index.ProxiedHit;
-import com.zimbra.cs.index.QueryInfo;
-import com.zimbra.cs.index.SearchParams;
-import com.zimbra.cs.index.SearchParams.ExpandResults;
-import com.zimbra.cs.index.SortBy;
-import com.zimbra.cs.index.ZimbraHit;
-import com.zimbra.cs.mailbox.Appointment;
-import com.zimbra.cs.mailbox.CalendarItem;
-import com.zimbra.cs.mailbox.Conversation;
-import com.zimbra.cs.mailbox.Flag;
-import com.zimbra.cs.mailbox.MailItem;
-import com.zimbra.cs.mailbox.Message;
-import com.zimbra.cs.mailbox.OperationContext;
-import com.zimbra.cs.mailbox.WikiItem;
-import com.zimbra.cs.service.mail.GetCalendarItemSummaries.EncodeCalendarItemResult;
-import com.zimbra.cs.service.mail.ToXML.EmailType;
-import com.zimbra.cs.service.util.ItemId;
-import com.zimbra.cs.service.util.ItemIdFormatter;
-import com.zimbra.cs.session.PendingModifications;
-import com.zimbra.soap.DocumentHandler;
-import com.zimbra.soap.ZimbraSoapContext;
+import org.zmail.common.localconfig.LC;
+import org.zmail.common.service.ServiceException;
+import org.zmail.common.soap.Element;
+import org.zmail.common.soap.MailConstants;
+import org.zmail.common.util.Log;
+import org.zmail.common.util.LogFactory;
+import org.zmail.cs.account.Account;
+import org.zmail.cs.index.CalendarItemHit;
+import org.zmail.cs.index.ContactHit;
+import org.zmail.cs.index.ConversationHit;
+import org.zmail.cs.index.DocumentHit;
+import org.zmail.cs.index.MessageHit;
+import org.zmail.cs.index.MessagePartHit;
+import org.zmail.cs.index.NoteHit;
+import org.zmail.cs.index.ProxiedHit;
+import org.zmail.cs.index.QueryInfo;
+import org.zmail.cs.index.SearchParams;
+import org.zmail.cs.index.SearchParams.ExpandResults;
+import org.zmail.cs.index.SortBy;
+import org.zmail.cs.index.ZmailHit;
+import org.zmail.cs.mailbox.Appointment;
+import org.zmail.cs.mailbox.CalendarItem;
+import org.zmail.cs.mailbox.Conversation;
+import org.zmail.cs.mailbox.Flag;
+import org.zmail.cs.mailbox.MailItem;
+import org.zmail.cs.mailbox.Message;
+import org.zmail.cs.mailbox.OperationContext;
+import org.zmail.cs.mailbox.WikiItem;
+import org.zmail.cs.service.mail.GetCalendarItemSummaries.EncodeCalendarItemResult;
+import org.zmail.cs.service.mail.ToXML.EmailType;
+import org.zmail.cs.service.util.ItemId;
+import org.zmail.cs.service.util.ItemIdFormatter;
+import org.zmail.cs.session.PendingModifications;
+import org.zmail.soap.DocumentHandler;
+import org.zmail.soap.ZmailSoapContext;
 
 /**
  * A helper class to build a search SOAP response.
@@ -60,7 +60,7 @@ import com.zimbra.soap.ZimbraSoapContext;
 final class SearchResponse {
     protected static final Log LOG = LogFactory.getLog(SearchResponse.class);
 
-    private final ZimbraSoapContext zsc;
+    private final ZmailSoapContext zsc;
     private final ItemIdFormatter ifmt;
     private final SearchParams params;
     private final Element element;
@@ -71,7 +71,7 @@ final class SearchResponse {
     private SortBy sortOrder = SortBy.NONE;;
     private boolean allRead = false;
 
-    SearchResponse(ZimbraSoapContext zsc, OperationContext octxt, Element el, SearchParams params) {
+    SearchResponse(ZmailSoapContext zsc, OperationContext octxt, Element el, SearchParams params) {
         this.zsc = zsc;
         this.params = params;
         this.octxt = octxt;
@@ -130,7 +130,7 @@ final class SearchResponse {
      * @param hit hit to append
      * @throws ServiceException error
      */
-    void add(ZimbraHit hit) throws ServiceException {
+    void add(ZmailHit hit) throws ServiceException {
         Element el = null;
         if (params.getFetchMode() == SearchParams.Fetch.IDS) {
             if (hit instanceof ConversationHit) {

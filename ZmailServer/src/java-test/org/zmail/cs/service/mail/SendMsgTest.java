@@ -12,7 +12,7 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.service.mail;
+package org.zmail.cs.service.mail;
 
 import java.io.BufferedWriter;
 import java.io.File;
@@ -41,29 +41,29 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 
 import com.google.common.collect.Maps;
-import com.zimbra.common.localconfig.LC;
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.common.soap.Element;
-import com.zimbra.common.soap.MailConstants;
-import com.zimbra.common.util.ByteUtil;
-import com.zimbra.common.zmime.ZContentType;
-import com.zimbra.common.zmime.ZMimeMessage;
-import com.zimbra.cs.account.Account;
-import com.zimbra.cs.account.Provisioning;
-import com.zimbra.cs.mailbox.DeliveryOptions;
-import com.zimbra.cs.mailbox.Flag;
-import com.zimbra.cs.mailbox.MailItem;
-import com.zimbra.cs.mailbox.MailSender;
-import com.zimbra.cs.mailbox.MailServiceException.NoSuchItemException;
-import com.zimbra.cs.mailbox.Mailbox;
-import com.zimbra.cs.mailbox.Mailbox.MailboxData;
-import com.zimbra.cs.mailbox.MailboxManager;
-import com.zimbra.cs.mailbox.MailboxTest;
-import com.zimbra.cs.mailbox.MailboxTestUtil;
-import com.zimbra.cs.mailbox.Message;
-import com.zimbra.cs.mime.ParsedMessage;
-import com.zimbra.cs.service.FileUploadServlet;
-import com.zimbra.cs.util.JMSession;
+import org.zmail.common.localconfig.LC;
+import org.zmail.common.service.ServiceException;
+import org.zmail.common.soap.Element;
+import org.zmail.common.soap.MailConstants;
+import org.zmail.common.util.ByteUtil;
+import org.zmail.common.zmime.ZContentType;
+import org.zmail.common.zmime.ZMimeMessage;
+import org.zmail.cs.account.Account;
+import org.zmail.cs.account.Provisioning;
+import org.zmail.cs.mailbox.DeliveryOptions;
+import org.zmail.cs.mailbox.Flag;
+import org.zmail.cs.mailbox.MailItem;
+import org.zmail.cs.mailbox.MailSender;
+import org.zmail.cs.mailbox.MailServiceException.NoSuchItemException;
+import org.zmail.cs.mailbox.Mailbox;
+import org.zmail.cs.mailbox.Mailbox.MailboxData;
+import org.zmail.cs.mailbox.MailboxManager;
+import org.zmail.cs.mailbox.MailboxTest;
+import org.zmail.cs.mailbox.MailboxTestUtil;
+import org.zmail.cs.mailbox.Message;
+import org.zmail.cs.mime.ParsedMessage;
+import org.zmail.cs.service.FileUploadServlet;
+import org.zmail.cs.util.JMSession;
 
 public class SendMsgTest {
 
@@ -72,11 +72,11 @@ public class SendMsgTest {
         MailboxTestUtil.initServer();
         Provisioning prov = Provisioning.getInstance();
 
-        prov.createAccount("test@zimbra.com", "secret", Maps.<String, Object>newHashMap());
+        prov.createAccount("test@zmail.com", "secret", Maps.<String, Object>newHashMap());
 
         Map<String, Object> attrs = Maps.newHashMap();
-        attrs.put(Provisioning.A_zimbraId, UUID.randomUUID().toString());
-        prov.createAccount("rcpt@zimbra.com", "secret", attrs);
+        attrs.put(Provisioning.A_zmailId, UUID.randomUUID().toString());
+        prov.createAccount("rcpt@zmail.com", "secret", attrs);
 
         // this MailboxManager does everything except use SMTP to deliver mail
         MailboxManager.setInstance(new DirectInsertionMailboxManager());
@@ -167,7 +167,7 @@ public class SendMsgTest {
 
     @Test
     public void deleteDraft() throws Exception {
-        Account acct = Provisioning.getInstance().getAccountByName("test@zimbra.com");
+        Account acct = Provisioning.getInstance().getAccountByName("test@zmail.com");
         Mailbox mbox = MailboxManager.getInstance().getMailboxByAccount(acct);
 
         // first, add draft message
@@ -180,7 +180,7 @@ public class SendMsgTest {
         Element request = new Element.JSONElement(MailConstants.SEND_MSG_REQUEST);
         Element m = request.addElement(MailConstants.E_MSG).addAttribute(MailConstants.A_DRAFT_ID, draftId).addAttribute(MailConstants.E_SUBJECT, "dinner appt");
         m.addUniqueElement(MailConstants.E_MIMEPART).addAttribute(MailConstants.A_CONTENT_TYPE, "text/plain").addAttribute(MailConstants.E_CONTENT, "foo bar");
-        m.addElement(MailConstants.E_EMAIL).addAttribute(MailConstants.A_ADDRESS_TYPE, ToXML.EmailType.TO.toString()).addAttribute(MailConstants.A_ADDRESS, "rcpt@zimbra.com");
+        m.addElement(MailConstants.E_EMAIL).addAttribute(MailConstants.A_ADDRESS_TYPE, ToXML.EmailType.TO.toString()).addAttribute(MailConstants.A_ADDRESS, "rcpt@zmail.com");
         new SendMsg().handle(request, ServiceTestUtil.getRequestContext(acct));
 
         // finally, verify that the draft is gone
@@ -193,12 +193,12 @@ public class SendMsgTest {
 
     @Test
     public void testSendFromDraft() throws Exception {
-        Account acct = Provisioning.getInstance().getAccountByName("test@zimbra.com");
+        Account acct = Provisioning.getInstance().getAccountByName("test@zmail.com");
         Mailbox mbox = MailboxManager.getInstance().getMailboxByAccount(acct);
 
         // first, add draft message
         MimeMessage mm = new MimeMessage(Session.getInstance(new Properties()));
-        mm.setRecipients(RecipientType.TO, "rcpt@zimbra.com");
+        mm.setRecipients(RecipientType.TO, "rcpt@zmail.com");
         mm.saveChanges();
         ParsedMessage pm = new ParsedMessage(mm, false);
         int draftId = mbox.saveDraft(null, pm, Mailbox.ID_AUTO_INCREMENT).getId();
@@ -223,9 +223,9 @@ public class SendMsgTest {
 
     @Test
     public void sendUpload() throws Exception {
-        Assert.assertTrue("using Zimbra MIME parser", ZMimeMessage.usingZimbraParser());
+        Assert.assertTrue("using Zmail MIME parser", ZMimeMessage.usingZmailParser());
 
-        Account rcpt = Provisioning.getInstance().getAccountByName("rcpt@zimbra.com");
+        Account rcpt = Provisioning.getInstance().getAccountByName("rcpt@zmail.com");
         Mailbox mbox = MailboxManager.getInstance().getMailboxByAccount(rcpt);
         
         // Configure test timezones.ics file.
@@ -247,7 +247,7 @@ public class SendMsgTest {
         request.addUniqueElement(MailConstants.E_MSG).addAttribute(MailConstants.A_ATTACHMENT_ID, up.getId());
         new SendMsg().handle(request, ServiceTestUtil.getRequestContext(rcpt));
 
-        Account acct = Provisioning.getInstance().getAccountByName("test@zimbra.com");
+        Account acct = Provisioning.getInstance().getAccountByName("test@zmail.com");
         mbox = MailboxManager.getInstance().getMailboxByAccount(acct);
         Message msg = (Message) mbox.getItemList(null, MailItem.Type.MESSAGE).get(0);
         MimeMessage mm = msg.getMimeMessage();

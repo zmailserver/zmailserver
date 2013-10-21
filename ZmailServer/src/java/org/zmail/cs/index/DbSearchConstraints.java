@@ -12,7 +12,7 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.index;
+package org.zmail.cs.index;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -32,15 +32,15 @@ import com.google.common.collect.Iterables;
 import com.google.common.collect.Multimap;
 import com.google.common.collect.Multimaps;
 import com.google.common.collect.Sets;
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.common.util.ZimbraLog;
-import com.zimbra.cs.mailbox.Flag;
-import com.zimbra.cs.mailbox.Folder;
-import com.zimbra.cs.mailbox.MailItem;
-import com.zimbra.cs.mailbox.Mailbox;
-import com.zimbra.cs.mailbox.Mountpoint;
-import com.zimbra.cs.mailbox.Tag;
-import com.zimbra.cs.service.util.ItemId;
+import org.zmail.common.service.ServiceException;
+import org.zmail.common.util.ZmailLog;
+import org.zmail.cs.mailbox.Flag;
+import org.zmail.cs.mailbox.Folder;
+import org.zmail.cs.mailbox.MailItem;
+import org.zmail.cs.mailbox.Mailbox;
+import org.zmail.cs.mailbox.Mountpoint;
+import org.zmail.cs.mailbox.Tag;
+import org.zmail.cs.service.util.ItemId;
 
 /**
  * An interface to a tree of ANDed and ORed search constraints for the DB-backed data in a search request.
@@ -460,7 +460,7 @@ public interface DbSearchConstraints extends Cloneable {
             if (other.convId != 0) {
                 if (convId != 0) {
                     if (convId != other.convId) {
-                        ZimbraLog.index.debug("ANDING a constraint with incompatible convIds, this is a NO_RESULTS constraint now");
+                        ZmailLog.index.debug("ANDING a constraint with incompatible convIds, this is a NO_RESULTS constraint now");
                         noResults = true;
                     }
                 } else {
@@ -472,7 +472,7 @@ public interface DbSearchConstraints extends Cloneable {
             if (other.remoteConvId != null) {
                 if (remoteConvId != null) {
                     if (!remoteConvId.equals(other.remoteConvId)) {
-                        ZimbraLog.index.debug("ANDING a constraint with incompatible remoteConvIds, this is a NO_RESULTS constraint now");
+                        ZmailLog.index.debug("ANDING a constraint with incompatible remoteConvIds, this is a NO_RESULTS constraint now");
                         noResults = true;
                     }
                 } else {
@@ -536,7 +536,7 @@ public interface DbSearchConstraints extends Cloneable {
             } else if (other.hasIndexId != null) {
                 if (!hasIndexId.equals(other.hasIndexId)) {
                     noResults = true;
-                    ZimbraLog.index.debug("Adding a HAS_NO_INDEXIDS constraint to a HAS_INDEXIDS one, this is a NO_RESULTS result");
+                    ZmailLog.index.debug("Adding a HAS_NO_INDEXIDS constraint to a HAS_INDEXIDS one, this is a NO_RESULTS result");
                     return;
                 }
             }
@@ -757,7 +757,7 @@ public interface DbSearchConstraints extends Cloneable {
                 if (convId == 0) {
                     convId = cid;
                 } else {
-                    ZimbraLog.search.debug("Query requested two conflicting convIDs, this is now a no-results-query");
+                    ZmailLog.search.debug("Query requested two conflicting convIDs, this is now a no-results-query");
                     convId = Integer.MAX_VALUE;
                     noResults = true;
                 }
@@ -779,7 +779,7 @@ public interface DbSearchConstraints extends Cloneable {
                 if (remoteConvId == null) {
                     remoteConvId = cid;
                 } else {
-                    ZimbraLog.search.debug("Query requested two conflicting Remote convIDs, this is now a no-results-query");
+                    ZmailLog.search.debug("Query requested two conflicting Remote convIDs, this is now a no-results-query");
                     remoteConvId = new ItemId(cid.getAccountId(), Integer.MAX_VALUE);
                     noResults = true;
                 }
@@ -794,7 +794,7 @@ public interface DbSearchConstraints extends Cloneable {
         void addInRemoteFolder(ItemId id, String subfolderPath, boolean includeSubfolders, boolean bool) {
             if (bool) {
                 if ((!remoteFolders.isEmpty() && !remoteFolders.contains(id)) || excludeRemoteFolders.contains(id)) {
-                    ZimbraLog.search.debug("AND of conflicting remote folders, no-results-query");
+                    ZmailLog.search.debug("AND of conflicting remote folders, no-results-query");
                     noResults = true;
                 }
                 remoteFolders.clear();
@@ -804,7 +804,7 @@ public interface DbSearchConstraints extends Cloneable {
                 if (remoteFolders.contains(id)) {
                     remoteFolders.remove(id);
                     if (remoteFolders.isEmpty()) {
-                        ZimbraLog.search.debug("AND of conflicting remote folders, no-results-query");
+                        ZmailLog.search.debug("AND of conflicting remote folders, no-results-query");
                         noResults = true;
                     }
                 }
@@ -815,7 +815,7 @@ public interface DbSearchConstraints extends Cloneable {
         void addInFolder(Folder folder, boolean bool) {
             if (bool) {
                 if ((!folders.isEmpty() && !folders.contains(folder)) || excludeFolders.contains(folder)) {
-                    ZimbraLog.search.debug("AND of conflicting folders, no-results-query");
+                    ZmailLog.search.debug("AND of conflicting folders, no-results-query");
                     noResults = true;
                 }
                 folders.clear();
@@ -825,7 +825,7 @@ public interface DbSearchConstraints extends Cloneable {
                 if (folders.contains(folder)) {
                     folders.remove(folder);
                     if (folders.isEmpty()) {
-                        ZimbraLog.search.debug("AND of conflicting folders, no-results-query");
+                        ZmailLog.search.debug("AND of conflicting folders, no-results-query");
                         noResults = true;
                     }
                 }
@@ -846,7 +846,7 @@ public interface DbSearchConstraints extends Cloneable {
             if (!bool) {
                 // if they are weird enough to say "NOT is:anywhere" then we
                 // just make it a no-results-query.
-                ZimbraLog.search.debug("addAnyFolderClause(FALSE) called -- changing to no-results-query.");
+                ZmailLog.search.debug("addAnyFolderClause(FALSE) called -- changing to no-results-query.");
                 noResults = true;
             }
         }

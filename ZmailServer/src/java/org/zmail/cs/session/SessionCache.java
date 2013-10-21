@@ -16,7 +16,7 @@
 /*
  * Created on Sep 15, 2004
  */
-package com.zimbra.cs.session;
+package org.zmail.cs.session;
 
 import java.util.Collection;
 import java.util.HashMap;
@@ -24,13 +24,13 @@ import java.util.List;
 import java.util.Map;
 import java.util.TimerTask;
 
-import com.zimbra.common.stats.RealtimeStatsCallback;
-import com.zimbra.common.util.Constants;
-import com.zimbra.common.util.Log;
-import com.zimbra.common.util.LogFactory;
-import com.zimbra.common.util.ZimbraLog;
-import com.zimbra.cs.stats.ZimbraPerf;
-import com.zimbra.cs.util.Zimbra;
+import org.zmail.common.stats.RealtimeStatsCallback;
+import org.zmail.common.util.Constants;
+import org.zmail.common.util.Log;
+import org.zmail.common.util.LogFactory;
+import org.zmail.common.util.ZmailLog;
+import org.zmail.cs.stats.ZmailPerf;
+import org.zmail.cs.util.Zmail;
 
 /** A Simple Cache with timeout (based on last-accessed time) for a {@link Session}. objects<p>
  *
@@ -73,8 +73,8 @@ public final class SessionCache {
 
         Session.Type type = getSessionTypeFromId(sessionId);
         Session s = getSessionMap(type).get(accountId, sessionId);
-        if (s == null && ZimbraLog.session.isDebugEnabled()) {
-            ZimbraLog.session.debug("no session with id " + sessionId + " found (accountId: " + accountId + ")");
+        if (s == null && ZmailLog.session.isDebugEnabled()) {
+            ZmailLog.session.debug("no session with id " + sessionId + " found (accountId: " + accountId + ")");
         }
         return s;
     }
@@ -122,8 +122,8 @@ public final class SessionCache {
         if (sShutdown || session == null || !session.isAddedToSessionCache())
             return null;
 
-        if (ZimbraLog.session.isDebugEnabled())
-            ZimbraLog.session.debug("Unregistering session " + session.getSessionId());
+        if (ZmailLog.session.isDebugEnabled())
+            ZmailLog.session.debug("Unregistering session " + session.getSessionId());
 
         Session.Type type = session.getSessionType();
         return getSessionMap(type).remove(session.getAuthenticatedAccountId(), session.getSessionId());
@@ -131,8 +131,8 @@ public final class SessionCache {
 
     /** Initializes the session cache and starts the sweeper timer. */
     public static void startup() {
-        Zimbra.sTimer.schedule(new SweepMapTimerTask(), 30000, SESSION_SWEEP_INTERVAL_MSEC);
-        ZimbraPerf.addStatsCallback(new StatsCallback());
+        Zmail.sTimer.schedule(new SweepMapTimerTask(), 30000, SESSION_SWEEP_INTERVAL_MSEC);
+        ZmailPerf.addStatsCallback(new StatsCallback());
     }
 
     /** Empties the session cache and cleans up any existing {@link Session}s.
@@ -238,7 +238,7 @@ public final class SessionCache {
                 sessionTypeCounter + ".  Accounts: " + accountList);
         }
         if (manySessionsList.length() > 0) {
-            ZimbraLog.session.info("Found accounts that have a large number of sessions: " + manySessionsList);
+            ZmailLog.session.info("Found accounts that have a large number of sessions: " + manySessionsList);
         }
     }
 
@@ -273,11 +273,11 @@ public final class SessionCache {
     private static final class StatsCallback implements RealtimeStatsCallback {
         StatsCallback()  { }
 
-        /* @see com.zimbra.common.stats.RealtimeStatsCallback#getStatData() */
+        /* @see org.zmail.common.stats.RealtimeStatsCallback#getStatData() */
         public Map<String, Object> getStatData() {
             Map<String, Object> data = new HashMap<String, Object>();
             SessionMap soapMap = getSessionMap(Session.Type.SOAP);
-            data.put(ZimbraPerf.RTS_SOAP_SESSIONS, soapMap.totalActiveSessions());
+            data.put(ZmailPerf.RTS_SOAP_SESSIONS, soapMap.totalActiveSessions());
             return data;
         }
     }
@@ -301,8 +301,8 @@ public final class SessionCache {
                     removedByType[sessionMap.getType().getIndex()]+=toReap.size();
 
                     for (Session s : toReap) {
-                        if (ZimbraLog.session.isDebugEnabled())
-                            ZimbraLog.session.debug("Removing cached session: " + s);
+                        if (ZmailLog.session.isDebugEnabled())
+                            ZmailLog.session.debug("Removing cached session: " + s);
                         assert(!Thread.holdsLock(sessionMap));
                         // IMPORTANT: Clean up sessions *after* releasing lock on Session Map
                         // If Session.doCleanup() is called with sMap locked, it can lead
@@ -332,8 +332,8 @@ public final class SessionCache {
                 }
             } catch (Throwable e) { //don't let exceptions kill the timer
                 if (e instanceof OutOfMemoryError)
-                    Zimbra.halt("Caught out of memory error", e);
-                ZimbraLog.session.warn("Caught exception in SessionCache timer", e);
+                    Zmail.halt("Caught out of memory error", e);
+                ZmailLog.session.warn("Caught exception in SessionCache timer", e);
             }
 
         }

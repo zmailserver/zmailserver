@@ -12,7 +12,7 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.qa.unittest;
+package org.zmail.qa.unittest;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
@@ -21,14 +21,14 @@ import java.net.Socket;
 import java.util.HashMap;
 import java.util.Map;
 
-import com.zimbra.common.account.ProvisioningConstants;
-import com.zimbra.common.net.SocketFactories;
+import org.zmail.common.account.ProvisioningConstants;
+import org.zmail.common.net.SocketFactories;
 import junit.framework.TestCase;
 
-import com.zimbra.cs.account.Provisioning;
-import com.zimbra.cs.account.Server;
+import org.zmail.cs.account.Provisioning;
+import org.zmail.cs.account.Server;
 
-import static com.zimbra.common.net.SocketFactories.dummySSLSocketFactory;
+import static org.zmail.common.net.SocketFactories.dummySSLSocketFactory;
 
 public final class TestPop3ImapAuth extends TestCase {
 
@@ -48,7 +48,7 @@ public final class TestPop3ImapAuth extends TestCase {
     private static final String POP3_XOIP = "XOIP 100.99.98.97" + CRLF;
     private static final String POP3_XOIP_RESPONSE = "\\+OK";
 
-    private static final String IMAP_CONNECT_RESPONSE = "\\* OK .* Zimbra IMAP4rev1 server ready";
+    private static final String IMAP_CONNECT_RESPONSE = "\\* OK .* Zmail IMAP4rev1 server ready";
     private static final String IMAP_LOGIN = "1 LOGIN user1 test123" + CRLF;
     private static final String IMAP_LOGIN_RESPONSE = "1 OK.*LOGIN completed";
     private static final String IMAP_CLEARTEXT_FAILED_RESPONSE = "1 NO cleartext logins disabled";
@@ -75,12 +75,12 @@ public final class TestPop3ImapAuth extends TestCase {
         SocketFactories.registerProtocols(true);
         mProv = Provisioning.getInstance();
         Server server = mProv.getLocalServer();
-        mOrigPop3CleartextLoginEnabled = server.getBooleanAttr(Provisioning.A_zimbraPop3CleartextLoginEnabled, false);
-        mOrigImapCleartextLoginEnabled = server.getBooleanAttr(Provisioning.A_zimbraImapCleartextLoginEnabled, false);
-        mPop3CleartextPort = server.getIntAttr(Provisioning.A_zimbraPop3BindPort, 7110);
-        mPop3SslPort = server.getIntAttr(Provisioning.A_zimbraPop3SSLBindPort, 7995);
-        mImapCleartextPort = server.getIntAttr(Provisioning.A_zimbraImapBindPort, 7143);
-        mImapSslPort = server.getIntAttr(Provisioning.A_zimbraImapSSLBindPort, 7995);
+        mOrigPop3CleartextLoginEnabled = server.getBooleanAttr(Provisioning.A_zmailPop3CleartextLoginEnabled, false);
+        mOrigImapCleartextLoginEnabled = server.getBooleanAttr(Provisioning.A_zmailImapCleartextLoginEnabled, false);
+        mPop3CleartextPort = server.getIntAttr(Provisioning.A_zmailPop3BindPort, 7110);
+        mPop3SslPort = server.getIntAttr(Provisioning.A_zmailPop3SSLBindPort, 7995);
+        mImapCleartextPort = server.getIntAttr(Provisioning.A_zmailImapBindPort, 7143);
+        mImapSslPort = server.getIntAttr(Provisioning.A_zmailImapSSLBindPort, 7995);
     }
 
     public void testPop3CleartextTrue() throws Exception {
@@ -256,11 +256,11 @@ public final class TestPop3ImapAuth extends TestCase {
     }
 
     private void setPop3Cleartext(boolean value) throws Exception {
-        setServerAttr(Provisioning.A_zimbraPop3CleartextLoginEnabled, value);
+        setServerAttr(Provisioning.A_zmailPop3CleartextLoginEnabled, value);
     }
 
     private void setImapCleartext(boolean value) throws Exception {
-        setServerAttr(Provisioning.A_zimbraImapCleartextLoginEnabled, value);
+        setServerAttr(Provisioning.A_zmailImapCleartextLoginEnabled, value);
     }
 
     private void setServerAttr(String attrName, boolean value) throws Exception {

@@ -13,7 +13,7 @@
  * ***** END LICENSE BLOCK *****
  */
 
-package com.zimbra.cs.localconfig;
+package org.zmail.cs.localconfig;
 
 import java.io.IOException;
 import java.lang.reflect.Field;
@@ -29,25 +29,25 @@ import org.apache.commons.cli.Options;
 import org.apache.commons.cli.ParseException;
 import org.dom4j.DocumentException;
 
-import com.zimbra.common.localconfig.ConfigException;
-import com.zimbra.common.localconfig.ConfigWriter;
-import com.zimbra.common.localconfig.KnownKey;
-import com.zimbra.common.localconfig.LC;
-import com.zimbra.common.localconfig.LocalConfig;
-import com.zimbra.common.localconfig.Logging;
-import com.zimbra.common.localconfig.LC.Reloadable;
-import com.zimbra.common.localconfig.LC.Supported;
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.common.soap.AdminConstants;
-import com.zimbra.common.soap.SoapHttpTransport;
-import com.zimbra.common.util.CliUtil;
-import com.zimbra.common.util.RandomPassword;
-import com.zimbra.common.util.ZimbraLog;
-import com.zimbra.common.zclient.ZClientException;
-import com.zimbra.cs.account.Provisioning;
-import com.zimbra.cs.account.soap.SoapProvisioning;
-import com.zimbra.soap.JaxbUtil;
-import com.zimbra.soap.admin.message.ReloadLocalConfigRequest;
+import org.zmail.common.localconfig.ConfigException;
+import org.zmail.common.localconfig.ConfigWriter;
+import org.zmail.common.localconfig.KnownKey;
+import org.zmail.common.localconfig.LC;
+import org.zmail.common.localconfig.LocalConfig;
+import org.zmail.common.localconfig.Logging;
+import org.zmail.common.localconfig.LC.Reloadable;
+import org.zmail.common.localconfig.LC.Supported;
+import org.zmail.common.service.ServiceException;
+import org.zmail.common.soap.AdminConstants;
+import org.zmail.common.soap.SoapHttpTransport;
+import org.zmail.common.util.CliUtil;
+import org.zmail.common.util.RandomPassword;
+import org.zmail.common.util.ZmailLog;
+import org.zmail.common.zclient.ZClientException;
+import org.zmail.cs.account.Provisioning;
+import org.zmail.cs.account.soap.SoapProvisioning;
+import org.zmail.soap.JaxbUtil;
+import org.zmail.soap.admin.message.ReloadLocalConfigRequest;
 /**
  * zmlocalconfig CLI.
  */
@@ -137,11 +137,11 @@ public final class LocalConfigCLI {
         }
 
         // Load known keys from BackupLC if available
-        loadExtensionLC("com.zimbra.cs.backup.BackupLC");
-        // Load known keys from ZimbraOpenOfficeExt if available
-        loadExtensionLC("com.zimbra.openoffice.config.OpenOfficeLC");
-        // Load known keys from ZimbraVoice if available
-        loadExtensionLC("com.zimbra.cs.voice.VoiceLC");
+        loadExtensionLC("org.zmail.cs.backup.BackupLC");
+        // Load known keys from ZmailOpenOfficeExt if available
+        loadExtensionLC("org.zmail.openoffice.config.OpenOfficeLC");
+        // Load known keys from ZmailVoice if available
+        loadExtensionLC("org.zmail.cs.voice.VoiceLC");
 
         // info/docs for supported keys
         if (cl.hasOption("i")) {
@@ -316,14 +316,14 @@ public final class LocalConfigCLI {
     }
 
     private void reload() throws ServiceException {
-        String host = LC.zimbra_zmprov_default_soap_server.value();
-        int port = LC.zimbra_admin_service_port.intValue();
+        String host = LC.zmail_zmprov_default_soap_server.value();
+        int port = LC.zmail_admin_service_port.intValue();
         SoapHttpTransport transport = new SoapHttpTransport(
                 "https://" + host + ":" + port + AdminConstants.ADMIN_SERVICE_URI);
 
         SoapProvisioning prov = new SoapProvisioning();
         prov.soapSetURI(transport.getURI());
-        prov.soapZimbraAdminAuthenticate();
+        prov.soapZmailAdminAuthenticate();
         transport.setAuthToken(prov.getAuthToken());
 
         try {
@@ -336,10 +336,10 @@ public final class LocalConfigCLI {
     public static void main(String[] args) {
         // Don't call CliUtil.toolSetup() until it's necessary as JNI libs
         // aren't in place in some cases during build.
-        Logging.setUseZimbraLog(false);
-        // Some of the things we call have ZimbraLog lines in them, setup a basic logger to stderr
+        Logging.setUseZmailLog(false);
+        // Some of the things we call have ZmailLog lines in them, setup a basic logger to stderr
         // to take care of those
-        ZimbraLog.toolSetupLog4jConsole("WARN", true, false);
+        ZmailLog.toolSetupLog4jConsole("WARN", true, false);
         new LocalConfigCLI().exec(args);
     }
 

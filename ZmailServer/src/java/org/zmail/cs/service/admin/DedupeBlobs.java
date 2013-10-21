@@ -13,35 +13,35 @@
  * ***** END LICENSE BLOCK *****
  */
 
-package com.zimbra.cs.service.admin;
+package org.zmail.cs.service.admin;
 
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.common.soap.Element;
-import com.zimbra.common.util.Pair;
-import com.zimbra.cs.account.accesscontrol.AdminRight;
-import com.zimbra.cs.store.StoreManager;
-import com.zimbra.cs.store.file.BlobDeduper;
-import com.zimbra.cs.store.file.FileBlobStore;
-import com.zimbra.cs.volume.Volume;
-import com.zimbra.cs.volume.VolumeManager;
-import com.zimbra.soap.JaxbUtil;
-import com.zimbra.soap.ZimbraSoapContext;
-import com.zimbra.soap.admin.message.DedupeBlobsRequest;
-import com.zimbra.soap.admin.message.DedupeBlobsResponse;
-import com.zimbra.soap.admin.message.DedupeBlobsResponse.DedupStatus;
-import com.zimbra.soap.admin.type.IntIdAttr;
-import com.zimbra.soap.admin.type.VolumeIdAndProgress;
+import org.zmail.common.service.ServiceException;
+import org.zmail.common.soap.Element;
+import org.zmail.common.util.Pair;
+import org.zmail.cs.account.accesscontrol.AdminRight;
+import org.zmail.cs.store.StoreManager;
+import org.zmail.cs.store.file.BlobDeduper;
+import org.zmail.cs.store.file.FileBlobStore;
+import org.zmail.cs.volume.Volume;
+import org.zmail.cs.volume.VolumeManager;
+import org.zmail.soap.JaxbUtil;
+import org.zmail.soap.ZmailSoapContext;
+import org.zmail.soap.admin.message.DedupeBlobsRequest;
+import org.zmail.soap.admin.message.DedupeBlobsResponse;
+import org.zmail.soap.admin.message.DedupeBlobsResponse.DedupStatus;
+import org.zmail.soap.admin.type.IntIdAttr;
+import org.zmail.soap.admin.type.VolumeIdAndProgress;
 
 public final class DedupeBlobs extends AdminDocumentHandler {
 
     @Override
     public Element handle(Element request, Map<String, Object> context) throws ServiceException {
-        ZimbraSoapContext zsc = getZimbraSoapContext(context);
+        ZmailSoapContext zsc = getZmailSoapContext(context);
         checkRight(zsc, context, null, AdminRight.PR_SYSTEM_ADMIN_ONLY);
         StoreManager sm = StoreManager.getInstance();
         if (!(sm instanceof FileBlobStore)) {

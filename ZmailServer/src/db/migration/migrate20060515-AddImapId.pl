@@ -34,15 +34,15 @@ exit(0);
 sub addImapSyncColumn()
 {
     my $sql = <<ADD_TRACKING_IMAP_COLUMN_EOF;
-ALTER TABLE zimbra.mailbox
+ALTER TABLE zmail.mailbox
 MODIFY tracking_sync INTEGER UNSIGNED NOT NULL DEFAULT 0;
 
-ALTER TABLE zimbra.mailbox
+ALTER TABLE zmail.mailbox
 ADD COLUMN tracking_imap BOOLEAN NOT NULL DEFAULT 0 AFTER tracking_sync;
 
 ADD_TRACKING_IMAP_COLUMN_EOF
 
-    Migrate::log("Adding zimbra.mailbox.tracking_imap.");
+    Migrate::log("Adding zmail.mailbox.tracking_imap.");
     Migrate::runSql($sql);
 }
 

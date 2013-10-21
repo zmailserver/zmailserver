@@ -12,7 +12,7 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.mailbox;
+package org.zmail.cs.mailbox;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -28,22 +28,22 @@ import java.util.Map;
 import java.util.Set;
 
 import com.google.common.base.Objects;
-import com.zimbra.common.mailbox.Color;
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.common.util.ArrayUtil;
-import com.zimbra.common.util.ListUtil;
-import com.zimbra.common.util.StringUtil;
-import com.zimbra.common.util.ZimbraLog;
-import com.zimbra.cs.account.AccessManager;
-import com.zimbra.cs.account.Account;
-import com.zimbra.cs.db.DbMailItem;
-import com.zimbra.cs.db.DbTag;
-import com.zimbra.cs.imap.ImapSession;
-import com.zimbra.cs.mailbox.MailItem.CustomMetadata.CustomMetadataList;
-import com.zimbra.cs.session.PendingModifications.Change;
-import com.zimbra.cs.session.Session;
-import com.zimbra.cs.util.AccountUtil;
-import com.zimbra.soap.mail.type.RetentionPolicy;
+import org.zmail.common.mailbox.Color;
+import org.zmail.common.service.ServiceException;
+import org.zmail.common.util.ArrayUtil;
+import org.zmail.common.util.ListUtil;
+import org.zmail.common.util.StringUtil;
+import org.zmail.common.util.ZmailLog;
+import org.zmail.cs.account.AccessManager;
+import org.zmail.cs.account.Account;
+import org.zmail.cs.db.DbMailItem;
+import org.zmail.cs.db.DbTag;
+import org.zmail.cs.imap.ImapSession;
+import org.zmail.cs.mailbox.MailItem.CustomMetadata.CustomMetadataList;
+import org.zmail.cs.session.PendingModifications.Change;
+import org.zmail.cs.session.Session;
+import org.zmail.cs.util.AccountUtil;
+import org.zmail.soap.mail.type.RetentionPolicy;
 
 /**
  * @since Aug 18, 2004
@@ -662,7 +662,7 @@ public class Folder extends MailItem {
             imapMODSEQ  = mMailbox.getLastChangeID();
         }
         DbMailItem.persistCounts(this, encodeMetadata());
-        ZimbraLog.mailbox.debug("\"%s\": updating folder counts (c%d/d%d/u%d/du%d/s%d)", getName(),
+        ZmailLog.mailbox.debug("\"%s\": updating folder counts (c%d/d%d/u%d/du%d/s%d)", getName(),
                                 mData.size, deletedCount, mData.unreadCount, deletedUnreadCount, totalSize);
     }
 
@@ -821,7 +821,7 @@ public class Folder extends MailItem {
         data.metadata = encodeMetadata(color, 1, 1, custom, attributes, view, null, new SyncData(url), id + 1, 0,
                 mbox.getOperationChangeID(), -1, 0, 0, 0, null, false);
         data.contentChanged(mbox);
-        ZimbraLog.mailop.info("adding folder %s: id=%d, parentId=%d.", name, data.id, data.parentId);
+        ZmailLog.mailop.info("adding folder %s: id=%d, parentId=%d.", name, data.id, data.parentId);
         new DbMailItem(mbox).create(data);
 
         Folder folder = new Folder(mbox, data);
@@ -855,7 +855,7 @@ public class Folder extends MailItem {
      *  cannot add a remote data source to an existing folder, as refreshing
      *  the linked content empties the folder.<p>
      *
-     *  This is <i>not</i> used to mount other Zimbra users' folders; to do
+     *  This is <i>not</i> used to mount other Zmail users' folders; to do
      *  that, use a {@link Mountpoint}.
      *
      * @param url  The new URL for the folder, or <tt>null</tt> to remove the
@@ -940,7 +940,7 @@ public class Folder extends MailItem {
         }
         //doesn't work on system folders!!
         if (mId < Mailbox.FIRST_USER_ID) {
-            ZimbraLog.mailop.warn("Cannot disable activesync access for system folder " + mId);
+            ZmailLog.mailop.warn("Cannot disable activesync access for system folder " + mId);
             return;
         }
 
@@ -992,11 +992,11 @@ public class Folder extends MailItem {
         }
 
         // mark all messages in this folder as read in the database
-        if (ZimbraLog.mailop.isDebugEnabled() && targets.size() > 0) {
+        if (ZmailLog.mailop.isDebugEnabled() && targets.size() > 0) {
             String state = unread ? "unread" : "read";
             String context = getMailopContext(this);
             for (List<Integer> ids : ListUtil.split(targets, 200)) {
-                ZimbraLog.mailop.debug("marking messages in %s as %s.  ids: %s", context, state, StringUtil.join(",", ids));
+                ZmailLog.mailop.debug("marking messages in %s as %s.  ids: %s", context, state, StringUtil.join(",", ids));
             }
         }
         DbMailItem.alterUnread(mMailbox, targets, unread);
@@ -1039,8 +1039,8 @@ public class Folder extends MailItem {
         markItemModified(tag instanceof Flag ? Change.FLAGS : Change.TAGS);
         tagChanged(tag, newValue);
 
-        if (ZimbraLog.mailop.isDebugEnabled()) {
-            ZimbraLog.mailop.debug("setting " + getMailopContext(tag) + " for " + getMailopContext(this));
+        if (ZmailLog.mailop.isDebugEnabled()) {
+            ZmailLog.mailop.debug("setting " + getMailopContext(tag) + " for " + getMailopContext(this));
         }
         DbTag.alterTag(tag, Arrays.asList(mId), newValue);
 
@@ -1122,7 +1122,7 @@ public class Folder extends MailItem {
         parent.removeChild(this);
         target.addChild(this);
 
-        ZimbraLog.mailop.info("moving %s to %s", getMailopContext(this), getMailopContext(target));
+        ZmailLog.mailop.info("moving %s to %s", getMailopContext(this), getMailopContext(target));
 
         // and update the folder's data (in memory and DB)
         mData.folderId = target.getId();
@@ -1226,7 +1226,7 @@ public class Folder extends MailItem {
                 subfolder.delete(writeTombstones);
             }
         }
-        ZimbraLog.mailbox.info("deleting folder id=%d,path=%s", getId(), getPath());
+        ZmailLog.mailbox.info("deleting folder id=%d,path=%s", getId(), getPath());
         super.delete(writeTombstones);
 
         if (rights != null) {
@@ -1304,7 +1304,7 @@ public class Folder extends MailItem {
             while (iter.hasNext()) {
                 Folder f = iter.next();
                 if  (f.getChangeDate() >= beforeDate) {
-                    ZimbraLog.purge.info("Skipping the recently modified/moved folder %s", f.getPath());
+                    ZmailLog.purge.info("Skipping the recently modified/moved folder %s", f.getPath());
                     iter.remove();
                 }
             }

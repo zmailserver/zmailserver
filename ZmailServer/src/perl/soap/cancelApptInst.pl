@@ -29,8 +29,8 @@ use XmlElement;
 use XmlDoc;
 use Soap;
 
-my $ACCTNS = "urn:zimbraAccount";
-my $MAILNS = "urn:zimbraMail";
+my $ACCTNS = "urn:zmailAccount";
+my $MAILNS = "urn:zmailMail";
 
 my $invId;
 my $userId;
@@ -63,7 +63,7 @@ my $authToken = $authResponse->find_child('authToken')->content;
 my $sessionId = $authResponse->find_child('sessionId')->content;
 #print "sessionId = $sessionId\n";
 
-my $context = $SOAP->zimbraContext($authToken, $sessionId);
+my $context = $SOAP->zmailContext($authToken, $sessionId);
 
 my $contextStr = $context->to_string("pretty");
 #print("Context = $contextStr\n");
@@ -95,18 +95,18 @@ $d->add("inst", undef, { 'd'=>$instId });
 $d->start('m', undef, undef, undef);
 
 if ($userId eq "user1") {
-    $d->add('e', undef, { 'a' => "tim\@example.zimbra.com",
+    $d->add('e', undef, { 'a' => "tim\@example.zmail.com",
                           't' => "t" } );
 
     $d->add('e', undef,
             {
-                'a' => "user2\@timbre.example.zimbra.com",
+                'a' => "user2\@timbre.example.zmail.com",
                 't' => "t"
                 } );
 
     $d->add('e', undef,
             {
-                'a' => "user1\@timbre.example.zimbra.com",
+                'a' => "user1\@timbre.example.zmail.com",
                 't' => "t"
                 } );
 } else {

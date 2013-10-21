@@ -50,58 +50,58 @@ class ServerConfig(config.Config):
 
 		self.config = dict([(e.getKey(), e.getValue()) for e in sorted(c.output, key=lambda x: x.getKey())])
 
-		if self["zimbraSSLExcludeCipherSuites"] is not None:
-			v = self["zimbraSSLExcludeCipherSuites"]
+		if self["zmailSSLExcludeCipherSuites"] is not None:
+			v = self["zmailSSLExcludeCipherSuites"]
 			v = str(v)
-			self["zimbraSSLExcludeCipherSuites"] = ' '.join(sorted(v.split(), key=str.lower))
-			self["zimbraSSLExcludeCipherSuitesXML"] = '\n'.join([''.join(('<Item>',val,'</Item>')) for val in self["zimbraSSLExcludeCipherSuites"].split()])
+			self["zmailSSLExcludeCipherSuites"] = ' '.join(sorted(v.split(), key=str.lower))
+			self["zmailSSLExcludeCipherSuitesXML"] = '\n'.join([''.join(('<Item>',val,'</Item>')) for val in self["zmailSSLExcludeCipherSuites"].split()])
 
-		if self["zimbraMtaMyNetworks"] is not None:
-			self["zimbraMtaMyNetworksPerLine"] = '\n'.join([''.join((val,'')) for val in self["zimbraMtaMyNetworks"].split()])
+		if self["zmailMtaMyNetworks"] is not None:
+			self["zmailMtaMyNetworksPerLine"] = '\n'.join([''.join((val,'')) for val in self["zmailMtaMyNetworks"].split()])
 
-		if self["zimbraServiceEnabled"] is not None:
-			for v in self["zimbraServiceEnabled"].split():
-				self.serviceconfig[v] = "zimbraServiceEnabled"
+		if self["zmailServiceEnabled"] is not None:
+			for v in self["zmailServiceEnabled"].split():
+				self.serviceconfig[v] = "zmailServiceEnabled"
 				if (v == "mailbox"):
-					self.serviceconfig["mailboxd"] = "zimbraServiceEnabled"
+					self.serviceconfig["mailboxd"] = "zmailServiceEnabled"
 				elif (v == "mta"):
-					self.serviceconfig["sasl"] = "zimbraServiceEnabled"
+					self.serviceconfig["sasl"] = "zmailServiceEnabled"
 
-		if self["zimbraIPMode"] is not None:
-			self["zimbraIPv4BindAddress"] = "127.0.0.1"
-			v = self["zimbraIPMode"]
+		if self["zmailIPMode"] is not None:
+			self["zmailIPv4BindAddress"] = "127.0.0.1"
+			v = self["zmailIPMode"]
 			v = str(v)
 			v = v.lower()
 			if v == "ipv4":
-				self["zimbraLocalBindAddress"] = "127.0.0.1"
-				self["zimbraPostconfProtocol"] = "ipv4"
-				self["zimbraAmavisListenSockets"] = "'10024','10026','10032'"
-				self["zimbraInetMode"] = "inet"
-				if self["zimbraMilterBindAddress"] is None:
-					self["zimbraMilterBindAddress"] = "127.0.0.1"
+				self["zmailLocalBindAddress"] = "127.0.0.1"
+				self["zmailPostconfProtocol"] = "ipv4"
+				self["zmailAmavisListenSockets"] = "'10024','10026','10032'"
+				self["zmailInetMode"] = "inet"
+				if self["zmailMilterBindAddress"] is None:
+					self["zmailMilterBindAddress"] = "127.0.0.1"
 			if v == "ipv6":
-				self["zimbraLocalBindAddress"] = "::1"
-				self["zimbraPostconfProtocol"] = "ipv6"
-				self["zimbraAmavisListenSockets"] = "'[::1]:10024','[::1]:10026','[::1]:10032'"
-				self["zimbraInetMode"] = "inet6"
-				if self["zimbraMilterBindAddress"] is None:
-					self["zimbraMilterBindAddress"] = "[::1]"
+				self["zmailLocalBindAddress"] = "::1"
+				self["zmailPostconfProtocol"] = "ipv6"
+				self["zmailAmavisListenSockets"] = "'[::1]:10024','[::1]:10026','[::1]:10032'"
+				self["zmailInetMode"] = "inet6"
+				if self["zmailMilterBindAddress"] is None:
+					self["zmailMilterBindAddress"] = "[::1]"
 			if v == "both":
-				self["zimbraLocalBindAddress"] = "::1"
-				self["zimbraPostconfProtocol"] = "all"
-				self["zimbraAmavisListenSockets"] = "'10024','10026','10032','[::1]:10024','[::1]:10026','[::1]:10032'"
-				self["zimbraInetMode"] = "inet6"
-				if self["zimbraMilterBindAddress"] is None:
-					self["zimbraMilterBindAddress"] = "[::1]"
+				self["zmailLocalBindAddress"] = "::1"
+				self["zmailPostconfProtocol"] = "all"
+				self["zmailAmavisListenSockets"] = "'10024','10026','10032','[::1]:10024','[::1]:10026','[::1]:10032'"
+				self["zmailInetMode"] = "inet6"
+				if self["zmailMilterBindAddress"] is None:
+					self["zmailMilterBindAddress"] = "[::1]"
 
 		milter = None
-		if (self["zimbraMilterServerEnabled"] == "TRUE"):
-			milter = "inet:%s:%s" % (self["zimbraMilterBindAddress"],self["zimbraMilterBindPort"])
+		if (self["zmailMilterServerEnabled"] == "TRUE"):
+			milter = "inet:%s:%s" % (self["zmailMilterBindAddress"],self["zmailMilterBindPort"])
 
-		if self["zimbraMtaSmtpdMilters"] is not None and milter is not None:
-			self["zimbraMtaSmtpdMilters"] = "%s, %s" % (self["zimbraMtaSmtpdMilters"], milter)
-		elif self["zimbraMtaSmtpdMilters"] is None and milter is not None:
-			self["zimbraMtaSmtpdMilters"] = milter
+		if self["zmailMtaSmtpdMilters"] is not None and milter is not None:
+			self["zmailMtaSmtpdMilters"] = "%s, %s" % (self["zmailMtaSmtpdMilters"], milter)
+		elif self["zmailMtaSmtpdMilters"] is None and milter is not None:
+			self["zmailMtaSmtpdMilters"] = milter
 
 		dt = time.clock()-t1
 		Log.logMsg(5,"Serverconfig loaded in %.2f seconds" % dt)

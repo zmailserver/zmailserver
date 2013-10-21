@@ -13,7 +13,7 @@
  * ***** END LICENSE BLOCK *****
  */
 
-package com.zimbra.cs.util.tnef;
+package org.zmail.cs.util.tnef;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.net.URISyntaxException;
@@ -23,9 +23,9 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 
-import com.zimbra.common.util.Log;
-import com.zimbra.common.util.ZimbraLog;
-import com.zimbra.cs.util.tnef.mapi.TimeZoneDefinition;
+import org.zmail.common.util.Log;
+import org.zmail.common.util.ZmailLog;
+import org.zmail.cs.util.tnef.mapi.TimeZoneDefinition;
 import java.util.Iterator;
 
 import net.fortuna.ical4j.data.ContentHandler;
@@ -42,7 +42,7 @@ import net.freeutils.tnef.TNEFUtils;
 
 public class IcalUtil {
 
-    static Log sLog = ZimbraLog.tnef;
+    static Log sLog = ZmailLog.tnef;
     
     public static void addProperty(ContentHandler icalOutput, Property icalProp)
             throws ParserException, URISyntaxException,IOException, ParseException {

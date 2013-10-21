@@ -13,16 +13,16 @@
  * ***** END LICENSE BLOCK *****
  */
 
-package com.zimbra.cs.account;
+package org.zmail.cs.account;
 
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
-import com.zimbra.common.account.ZAttr;
-import com.zimbra.common.account.ZAttrProvisioning;
-import com.zimbra.common.util.DateUtil;
-import com.zimbra.common.util.StringUtil;
+import org.zmail.common.account.ZAttr;
+import org.zmail.common.account.ZAttrProvisioning;
+import org.zmail.common.util.DateUtil;
+import org.zmail.common.util.StringUtil;
 
 /**
  * AUTO-GENERATED. DO NOT EDIT.
@@ -52,10 +52,10 @@ public abstract class ZAttrDynamicGroup extends Group {
      * RFC2256: descriptive information
      *
      * @param description new value
-     * @throws com.zimbra.common.service.ServiceException if error during update
+     * @throws org.zmail.common.service.ServiceException if error during update
      */
     @ZAttr(id=-1)
-    public void setDescription(String[] description) throws com.zimbra.common.service.ServiceException {
+    public void setDescription(String[] description) throws org.zmail.common.service.ServiceException {
         HashMap<String,Object> attrs = new HashMap<String,Object>();
         attrs.put(Provisioning.A_description, description);
         getProvisioning().modifyAttrs(this, attrs);
@@ -79,10 +79,10 @@ public abstract class ZAttrDynamicGroup extends Group {
      * RFC2256: descriptive information
      *
      * @param description new to add to existing values
-     * @throws com.zimbra.common.service.ServiceException if error during update
+     * @throws org.zmail.common.service.ServiceException if error during update
      */
     @ZAttr(id=-1)
-    public void addDescription(String description) throws com.zimbra.common.service.ServiceException {
+    public void addDescription(String description) throws org.zmail.common.service.ServiceException {
         HashMap<String,Object> attrs = new HashMap<String,Object>();
         StringUtil.addToMultiMap(attrs, "+" + Provisioning.A_description, description);
         getProvisioning().modifyAttrs(this, attrs);
@@ -106,10 +106,10 @@ public abstract class ZAttrDynamicGroup extends Group {
      * RFC2256: descriptive information
      *
      * @param description existing value to remove
-     * @throws com.zimbra.common.service.ServiceException if error during update
+     * @throws org.zmail.common.service.ServiceException if error during update
      */
     @ZAttr(id=-1)
-    public void removeDescription(String description) throws com.zimbra.common.service.ServiceException {
+    public void removeDescription(String description) throws org.zmail.common.service.ServiceException {
         HashMap<String,Object> attrs = new HashMap<String,Object>();
         StringUtil.addToMultiMap(attrs, "-" + Provisioning.A_description, description);
         getProvisioning().modifyAttrs(this, attrs);
@@ -132,10 +132,10 @@ public abstract class ZAttrDynamicGroup extends Group {
     /**
      * RFC2256: descriptive information
      *
-     * @throws com.zimbra.common.service.ServiceException if error during update
+     * @throws org.zmail.common.service.ServiceException if error during update
      */
     @ZAttr(id=-1)
-    public void unsetDescription() throws com.zimbra.common.service.ServiceException {
+    public void unsetDescription() throws org.zmail.common.service.ServiceException {
         HashMap<String,Object> attrs = new HashMap<String,Object>();
         attrs.put(Provisioning.A_description, "");
         getProvisioning().modifyAttrs(this, attrs);
@@ -168,10 +168,10 @@ public abstract class ZAttrDynamicGroup extends Group {
      * RFC2798: preferred name to be used when displaying entries
      *
      * @param displayName new value
-     * @throws com.zimbra.common.service.ServiceException if error during update
+     * @throws org.zmail.common.service.ServiceException if error during update
      */
     @ZAttr(id=-1)
-    public void setDisplayName(String displayName) throws com.zimbra.common.service.ServiceException {
+    public void setDisplayName(String displayName) throws org.zmail.common.service.ServiceException {
         HashMap<String,Object> attrs = new HashMap<String,Object>();
         attrs.put(Provisioning.A_displayName, displayName);
         getProvisioning().modifyAttrs(this, attrs);
@@ -194,10 +194,10 @@ public abstract class ZAttrDynamicGroup extends Group {
     /**
      * RFC2798: preferred name to be used when displaying entries
      *
-     * @throws com.zimbra.common.service.ServiceException if error during update
+     * @throws org.zmail.common.service.ServiceException if error during update
      */
     @ZAttr(id=-1)
-    public void unsetDisplayName() throws com.zimbra.common.service.ServiceException {
+    public void unsetDisplayName() throws org.zmail.common.service.ServiceException {
         HashMap<String,Object> attrs = new HashMap<String,Object>();
         attrs.put(Provisioning.A_displayName, "");
         getProvisioning().modifyAttrs(this, attrs);
@@ -230,10 +230,10 @@ public abstract class ZAttrDynamicGroup extends Group {
      * RFC1274: RFC822 Mailbox
      *
      * @param mail new value
-     * @throws com.zimbra.common.service.ServiceException if error during update
+     * @throws org.zmail.common.service.ServiceException if error during update
      */
     @ZAttr(id=-1)
-    public void setMail(String mail) throws com.zimbra.common.service.ServiceException {
+    public void setMail(String mail) throws org.zmail.common.service.ServiceException {
         HashMap<String,Object> attrs = new HashMap<String,Object>();
         attrs.put(Provisioning.A_mail, mail);
         getProvisioning().modifyAttrs(this, attrs);
@@ -256,10 +256,10 @@ public abstract class ZAttrDynamicGroup extends Group {
     /**
      * RFC1274: RFC822 Mailbox
      *
-     * @throws com.zimbra.common.service.ServiceException if error during update
+     * @throws org.zmail.common.service.ServiceException if error during update
      */
     @ZAttr(id=-1)
-    public void unsetMail() throws com.zimbra.common.service.ServiceException {
+    public void unsetMail() throws org.zmail.common.service.ServiceException {
         HashMap<String,Object> attrs = new HashMap<String,Object>();
         attrs.put(Provisioning.A_mail, "");
         getProvisioning().modifyAttrs(this, attrs);
@@ -292,10 +292,10 @@ public abstract class ZAttrDynamicGroup extends Group {
      * Identifies an URL associated with each member of a group
      *
      * @param memberURL new value
-     * @throws com.zimbra.common.service.ServiceException if error during update
+     * @throws org.zmail.common.service.ServiceException if error during update
      */
     @ZAttr(id=-1)
-    public void setMemberURL(String memberURL) throws com.zimbra.common.service.ServiceException {
+    public void setMemberURL(String memberURL) throws org.zmail.common.service.ServiceException {
         HashMap<String,Object> attrs = new HashMap<String,Object>();
         attrs.put(Provisioning.A_memberURL, memberURL);
         getProvisioning().modifyAttrs(this, attrs);
@@ -318,10 +318,10 @@ public abstract class ZAttrDynamicGroup extends Group {
     /**
      * Identifies an URL associated with each member of a group
      *
-     * @throws com.zimbra.common.service.ServiceException if error during update
+     * @throws org.zmail.common.service.ServiceException if error during update
      */
     @ZAttr(id=-1)
-    public void unsetMemberURL() throws com.zimbra.common.service.ServiceException {
+    public void unsetMemberURL() throws org.zmail.common.service.ServiceException {
         HashMap<String,Object> attrs = new HashMap<String,Object>();
         attrs.put(Provisioning.A_memberURL, "");
         getProvisioning().modifyAttrs(this, attrs);
@@ -341,126 +341,126 @@ public abstract class ZAttrDynamicGroup extends Group {
     }
 
     /**
-     * Zimbra access control list
+     * Zmail access control list
      *
-     * @return zimbraACE, or empty array if unset
+     * @return zmailACE, or empty array if unset
      *
      * @since ZCS 5.0.7
      */
     @ZAttr(id=659)
     public String[] getACE() {
-        return getMultiAttr(Provisioning.A_zimbraACE);
+        return getMultiAttr(Provisioning.A_zmailACE);
     }
 
     /**
-     * Zimbra access control list
+     * Zmail access control list
      *
-     * @param zimbraACE new value
-     * @throws com.zimbra.common.service.ServiceException if error during update
+     * @param zmailACE new value
+     * @throws org.zmail.common.service.ServiceException if error during update
      *
      * @since ZCS 5.0.7
      */
     @ZAttr(id=659)
-    public void setACE(String[] zimbraACE) throws com.zimbra.common.service.ServiceException {
+    public void setACE(String[] zmailACE) throws org.zmail.common.service.ServiceException {
         HashMap<String,Object> attrs = new HashMap<String,Object>();
-        attrs.put(Provisioning.A_zimbraACE, zimbraACE);
+        attrs.put(Provisioning.A_zmailACE, zmailACE);
         getProvisioning().modifyAttrs(this, attrs);
     }
 
     /**
-     * Zimbra access control list
+     * Zmail access control list
      *
-     * @param zimbraACE new value
+     * @param zmailACE new value
      * @param attrs existing map to populate, or null to create a new map
      * @return populated map to pass into Provisioning.modifyAttrs
      *
      * @since ZCS 5.0.7
      */
     @ZAttr(id=659)
-    public Map<String,Object> setACE(String[] zimbraACE, Map<String,Object> attrs) {
+    public Map<String,Object> setACE(String[] zmailACE, Map<String,Object> attrs) {
         if (attrs == null) attrs = new HashMap<String,Object>();
-        attrs.put(Provisioning.A_zimbraACE, zimbraACE);
+        attrs.put(Provisioning.A_zmailACE, zmailACE);
         return attrs;
     }
 
     /**
-     * Zimbra access control list
+     * Zmail access control list
      *
-     * @param zimbraACE new to add to existing values
-     * @throws com.zimbra.common.service.ServiceException if error during update
+     * @param zmailACE new to add to existing values
+     * @throws org.zmail.common.service.ServiceException if error during update
      *
      * @since ZCS 5.0.7
      */
     @ZAttr(id=659)
-    public void addACE(String zimbraACE) throws com.zimbra.common.service.ServiceException {
+    public void addACE(String zmailACE) throws org.zmail.common.service.ServiceException {
         HashMap<String,Object> attrs = new HashMap<String,Object>();
-        StringUtil.addToMultiMap(attrs, "+" + Provisioning.A_zimbraACE, zimbraACE);
+        StringUtil.addToMultiMap(attrs, "+" + Provisioning.A_zmailACE, zmailACE);
         getProvisioning().modifyAttrs(this, attrs);
     }
 
     /**
-     * Zimbra access control list
+     * Zmail access control list
      *
-     * @param zimbraACE new to add to existing values
+     * @param zmailACE new to add to existing values
      * @param attrs existing map to populate, or null to create a new map
      * @return populated map to pass into Provisioning.modifyAttrs
      *
      * @since ZCS 5.0.7
      */
     @ZAttr(id=659)
-    public Map<String,Object> addACE(String zimbraACE, Map<String,Object> attrs) {
+    public Map<String,Object> addACE(String zmailACE, Map<String,Object> attrs) {
         if (attrs == null) attrs = new HashMap<String,Object>();
-        StringUtil.addToMultiMap(attrs, "+" + Provisioning.A_zimbraACE, zimbraACE);
+        StringUtil.addToMultiMap(attrs, "+" + Provisioning.A_zmailACE, zmailACE);
         return attrs;
     }
 
     /**
-     * Zimbra access control list
+     * Zmail access control list
      *
-     * @param zimbraACE existing value to remove
-     * @throws com.zimbra.common.service.ServiceException if error during update
+     * @param zmailACE existing value to remove
+     * @throws org.zmail.common.service.ServiceException if error during update
      *
      * @since ZCS 5.0.7
      */
     @ZAttr(id=659)
-    public void removeACE(String zimbraACE) throws com.zimbra.common.service.ServiceException {
+    public void removeACE(String zmailACE) throws org.zmail.common.service.ServiceException {
         HashMap<String,Object> attrs = new HashMap<String,Object>();
-        StringUtil.addToMultiMap(attrs, "-" + Provisioning.A_zimbraACE, zimbraACE);
+        StringUtil.addToMultiMap(attrs, "-" + Provisioning.A_zmailACE, zmailACE);
         getProvisioning().modifyAttrs(this, attrs);
     }
 
     /**
-     * Zimbra access control list
+     * Zmail access control list
      *
-     * @param zimbraACE existing value to remove
+     * @param zmailACE existing value to remove
      * @param attrs existing map to populate, or null to create a new map
      * @return populated map to pass into Provisioning.modifyAttrs
      *
      * @since ZCS 5.0.7
      */
     @ZAttr(id=659)
-    public Map<String,Object> removeACE(String zimbraACE, Map<String,Object> attrs) {
+    public Map<String,Object> removeACE(String zmailACE, Map<String,Object> attrs) {
         if (attrs == null) attrs = new HashMap<String,Object>();
-        StringUtil.addToMultiMap(attrs, "-" + Provisioning.A_zimbraACE, zimbraACE);
+        StringUtil.addToMultiMap(attrs, "-" + Provisioning.A_zmailACE, zmailACE);
         return attrs;
     }
 
     /**
-     * Zimbra access control list
+     * Zmail access control list
      *
-     * @throws com.zimbra.common.service.ServiceException if error during update
+     * @throws org.zmail.common.service.ServiceException if error during update
      *
      * @since ZCS 5.0.7
      */
     @ZAttr(id=659)
-    public void unsetACE() throws com.zimbra.common.service.ServiceException {
+    public void unsetACE() throws org.zmail.common.service.ServiceException {
         HashMap<String,Object> attrs = new HashMap<String,Object>();
-        attrs.put(Provisioning.A_zimbraACE, "");
+        attrs.put(Provisioning.A_zmailACE, "");
         getProvisioning().modifyAttrs(this, attrs);
     }
 
     /**
-     * Zimbra access control list
+     * Zmail access control list
      *
      * @param attrs existing map to populate, or null to create a new map
      * @return populated map to pass into Provisioning.modifyAttrs
@@ -470,126 +470,126 @@ public abstract class ZAttrDynamicGroup extends Group {
     @ZAttr(id=659)
     public Map<String,Object> unsetACE(Map<String,Object> attrs) {
         if (attrs == null) attrs = new HashMap<String,Object>();
-        attrs.put(Provisioning.A_zimbraACE, "");
+        attrs.put(Provisioning.A_zmailACE, "");
         return attrs;
     }
 
     /**
      * UI components available for the authed admin in admin console
      *
-     * @return zimbraAdminConsoleUIComponents, or empty array if unset
+     * @return zmailAdminConsoleUIComponents, or empty array if unset
      *
      * @since ZCS 6.0.0_BETA1
      */
     @ZAttr(id=761)
     public String[] getAdminConsoleUIComponents() {
-        return getMultiAttr(Provisioning.A_zimbraAdminConsoleUIComponents);
+        return getMultiAttr(Provisioning.A_zmailAdminConsoleUIComponents);
     }
 
     /**
      * UI components available for the authed admin in admin console
      *
-     * @param zimbraAdminConsoleUIComponents new value
-     * @throws com.zimbra.common.service.ServiceException if error during update
+     * @param zmailAdminConsoleUIComponents new value
+     * @throws org.zmail.common.service.ServiceException if error during update
      *
      * @since ZCS 6.0.0_BETA1
      */
     @ZAttr(id=761)
-    public void setAdminConsoleUIComponents(String[] zimbraAdminConsoleUIComponents) throws com.zimbra.common.service.ServiceException {
+    public void setAdminConsoleUIComponents(String[] zmailAdminConsoleUIComponents) throws org.zmail.common.service.ServiceException {
         HashMap<String,Object> attrs = new HashMap<String,Object>();
-        attrs.put(Provisioning.A_zimbraAdminConsoleUIComponents, zimbraAdminConsoleUIComponents);
+        attrs.put(Provisioning.A_zmailAdminConsoleUIComponents, zmailAdminConsoleUIComponents);
         getProvisioning().modifyAttrs(this, attrs);
     }
 
     /**
      * UI components available for the authed admin in admin console
      *
-     * @param zimbraAdminConsoleUIComponents new value
+     * @param zmailAdminConsoleUIComponents new value
      * @param attrs existing map to populate, or null to create a new map
      * @return populated map to pass into Provisioning.modifyAttrs
      *
      * @since ZCS 6.0.0_BETA1
      */
     @ZAttr(id=761)
-    public Map<String,Object> setAdminConsoleUIComponents(String[] zimbraAdminConsoleUIComponents, Map<String,Object> attrs) {
+    public Map<String,Object> setAdminConsoleUIComponents(String[] zmailAdminConsoleUIComponents, Map<String,Object> attrs) {
         if (attrs == null) attrs = new HashMap<String,Object>();
-        attrs.put(Provisioning.A_zimbraAdminConsoleUIComponents, zimbraAdminConsoleUIComponents);
+        attrs.put(Provisioning.A_zmailAdminConsoleUIComponents, zmailAdminConsoleUIComponents);
         return attrs;
     }
 
     /**
      * UI components available for the authed admin in admin console
      *
-     * @param zimbraAdminConsoleUIComponents new to add to existing values
-     * @throws com.zimbra.common.service.ServiceException if error during update
+     * @param zmailAdminConsoleUIComponents new to add to existing values
+     * @throws org.zmail.common.service.ServiceException if error during update
      *
      * @since ZCS 6.0.0_BETA1
      */
     @ZAttr(id=761)
-    public void addAdminConsoleUIComponents(String zimbraAdminConsoleUIComponents) throws com.zimbra.common.service.ServiceException {
+    public void addAdminConsoleUIComponents(String zmailAdminConsoleUIComponents) throws org.zmail.common.service.ServiceException {
         HashMap<String,Object> attrs = new HashMap<String,Object>();
-        StringUtil.addToMultiMap(attrs, "+" + Provisioning.A_zimbraAdminConsoleUIComponents, zimbraAdminConsoleUIComponents);
+        StringUtil.addToMultiMap(attrs, "+" + Provisioning.A_zmailAdminConsoleUIComponents, zmailAdminConsoleUIComponents);
         getProvisioning().modifyAttrs(this, attrs);
     }
 
     /**
      * UI components available for the authed admin in admin console
      *
-     * @param zimbraAdminConsoleUIComponents new to add to existing values
+     * @param zmailAdminConsoleUIComponents new to add to existing values
      * @param attrs existing map to populate, or null to create a new map
      * @return populated map to pass into Provisioning.modifyAttrs
      *
      * @since ZCS 6.0.0_BETA1
      */
     @ZAttr(id=761)
-    public Map<String,Object> addAdminConsoleUIComponents(String zimbraAdminConsoleUIComponents, Map<String,Object> attrs) {
+    public Map<String,Object> addAdminConsoleUIComponents(String zmailAdminConsoleUIComponents, Map<String,Object> attrs) {
         if (attrs == null) attrs = new HashMap<String,Object>();
-        StringUtil.addToMultiMap(attrs, "+" + Provisioning.A_zimbraAdminConsoleUIComponents, zimbraAdminConsoleUIComponents);
+        StringUtil.addToMultiMap(attrs, "+" + Provisioning.A_zmailAdminConsoleUIComponents, zmailAdminConsoleUIComponents);
         return attrs;
     }
 
     /**
      * UI components available for the authed admin in admin console
      *
-     * @param zimbraAdminConsoleUIComponents existing value to remove
-     * @throws com.zimbra.common.service.ServiceException if error during update
+     * @param zmailAdminConsoleUIComponents existing value to remove
+     * @throws org.zmail.common.service.ServiceException if error during update
      *
      * @since ZCS 6.0.0_BETA1
      */
     @ZAttr(id=761)
-    public void removeAdminConsoleUIComponents(String zimbraAdminConsoleUIComponents) throws com.zimbra.common.service.ServiceException {
+    public void removeAdminConsoleUIComponents(String zmailAdminConsoleUIComponents) throws org.zmail.common.service.ServiceException {
         HashMap<String,Object> attrs = new HashMap<String,Object>();
-        StringUtil.addToMultiMap(attrs, "-" + Provisioning.A_zimbraAdminConsoleUIComponents, zimbraAdminConsoleUIComponents);
+        StringUtil.addToMultiMap(attrs, "-" + Provisioning.A_zmailAdminConsoleUIComponents, zmailAdminConsoleUIComponents);
         getProvisioning().modifyAttrs(this, attrs);
     }
 
     /**
      * UI components available for the authed admin in admin console
      *
-     * @param zimbraAdminConsoleUIComponents existing value to remove
+     * @param zmailAdminConsoleUIComponents existing value to remove
      * @param attrs existing map to populate, or null to create a new map
      * @return populated map to pass into Provisioning.modifyAttrs
      *
      * @since ZCS 6.0.0_BETA1
      */
     @ZAttr(id=761)
-    public Map<String,Object> removeAdminConsoleUIComponents(String zimbraAdminConsoleUIComponents, Map<String,Object> attrs) {
+    public Map<String,Object> removeAdminConsoleUIComponents(String zmailAdminConsoleUIComponents, Map<String,Object> attrs) {
         if (attrs == null) attrs = new HashMap<String,Object>();
-        StringUtil.addToMultiMap(attrs, "-" + Provisioning.A_zimbraAdminConsoleUIComponents, zimbraAdminConsoleUIComponents);
+        StringUtil.addToMultiMap(attrs, "-" + Provisioning.A_zmailAdminConsoleUIComponents, zmailAdminConsoleUIComponents);
         return attrs;
     }
 
     /**
      * UI components available for the authed admin in admin console
      *
-     * @throws com.zimbra.common.service.ServiceException if error during update
+     * @throws org.zmail.common.service.ServiceException if error during update
      *
      * @since ZCS 6.0.0_BETA1
      */
     @ZAttr(id=761)
-    public void unsetAdminConsoleUIComponents() throws com.zimbra.common.service.ServiceException {
+    public void unsetAdminConsoleUIComponents() throws org.zmail.common.service.ServiceException {
         HashMap<String,Object> attrs = new HashMap<String,Object>();
-        attrs.put(Provisioning.A_zimbraAdminConsoleUIComponents, "");
+        attrs.put(Provisioning.A_zmailAdminConsoleUIComponents, "");
         getProvisioning().modifyAttrs(this, attrs);
     }
 
@@ -604,7 +604,7 @@ public abstract class ZAttrDynamicGroup extends Group {
     @ZAttr(id=761)
     public Map<String,Object> unsetAdminConsoleUIComponents(Map<String,Object> attrs) {
         if (attrs == null) attrs = new HashMap<String,Object>();
-        attrs.put(Provisioning.A_zimbraAdminConsoleUIComponents, "");
+        attrs.put(Provisioning.A_zmailAdminConsoleUIComponents, "");
         return attrs;
     }
 
@@ -615,100 +615,100 @@ public abstract class ZAttrDynamicGroup extends Group {
      *
      * @see #getCreateTimestampAsString()
      *
-     * @return zimbraCreateTimestamp as Date, null if unset or unable to parse
+     * @return zmailCreateTimestamp as Date, null if unset or unable to parse
      *
      * @since ZCS 6.0.0_BETA1
      */
     @ZAttr(id=790)
     public Date getCreateTimestamp() {
-        return getGeneralizedTimeAttr(Provisioning.A_zimbraCreateTimestamp, null);
+        return getGeneralizedTimeAttr(Provisioning.A_zmailCreateTimestamp, null);
     }
 
     /**
      * time object was created
      *
-     * @return zimbraCreateTimestamp, or null if unset
+     * @return zmailCreateTimestamp, or null if unset
      *
      * @since ZCS 6.0.0_BETA1
      */
     @ZAttr(id=790)
     public String getCreateTimestampAsString() {
-        return getAttr(Provisioning.A_zimbraCreateTimestamp, null);
+        return getAttr(Provisioning.A_zmailCreateTimestamp, null);
     }
 
     /**
      * time object was created
      *
-     * @param zimbraCreateTimestamp new value
-     * @throws com.zimbra.common.service.ServiceException if error during update
+     * @param zmailCreateTimestamp new value
+     * @throws org.zmail.common.service.ServiceException if error during update
      *
      * @since ZCS 6.0.0_BETA1
      */
     @ZAttr(id=790)
-    public void setCreateTimestamp(Date zimbraCreateTimestamp) throws com.zimbra.common.service.ServiceException {
+    public void setCreateTimestamp(Date zmailCreateTimestamp) throws org.zmail.common.service.ServiceException {
         HashMap<String,Object> attrs = new HashMap<String,Object>();
-        attrs.put(Provisioning.A_zimbraCreateTimestamp, zimbraCreateTimestamp==null ? "" : DateUtil.toGeneralizedTime(zimbraCreateTimestamp));
+        attrs.put(Provisioning.A_zmailCreateTimestamp, zmailCreateTimestamp==null ? "" : DateUtil.toGeneralizedTime(zmailCreateTimestamp));
         getProvisioning().modifyAttrs(this, attrs);
     }
 
     /**
      * time object was created
      *
-     * @param zimbraCreateTimestamp new value
+     * @param zmailCreateTimestamp new value
      * @param attrs existing map to populate, or null to create a new map
      * @return populated map to pass into Provisioning.modifyAttrs
      *
      * @since ZCS 6.0.0_BETA1
      */
     @ZAttr(id=790)
-    public Map<String,Object> setCreateTimestamp(Date zimbraCreateTimestamp, Map<String,Object> attrs) {
+    public Map<String,Object> setCreateTimestamp(Date zmailCreateTimestamp, Map<String,Object> attrs) {
         if (attrs == null) attrs = new HashMap<String,Object>();
-        attrs.put(Provisioning.A_zimbraCreateTimestamp, zimbraCreateTimestamp==null ? "" : DateUtil.toGeneralizedTime(zimbraCreateTimestamp));
+        attrs.put(Provisioning.A_zmailCreateTimestamp, zmailCreateTimestamp==null ? "" : DateUtil.toGeneralizedTime(zmailCreateTimestamp));
         return attrs;
     }
 
     /**
      * time object was created
      *
-     * @param zimbraCreateTimestamp new value
-     * @throws com.zimbra.common.service.ServiceException if error during update
+     * @param zmailCreateTimestamp new value
+     * @throws org.zmail.common.service.ServiceException if error during update
      *
      * @since ZCS 6.0.0_BETA1
      */
     @ZAttr(id=790)
-    public void setCreateTimestampAsString(String zimbraCreateTimestamp) throws com.zimbra.common.service.ServiceException {
+    public void setCreateTimestampAsString(String zmailCreateTimestamp) throws org.zmail.common.service.ServiceException {
         HashMap<String,Object> attrs = new HashMap<String,Object>();
-        attrs.put(Provisioning.A_zimbraCreateTimestamp, zimbraCreateTimestamp);
+        attrs.put(Provisioning.A_zmailCreateTimestamp, zmailCreateTimestamp);
         getProvisioning().modifyAttrs(this, attrs);
     }
 
     /**
      * time object was created
      *
-     * @param zimbraCreateTimestamp new value
+     * @param zmailCreateTimestamp new value
      * @param attrs existing map to populate, or null to create a new map
      * @return populated map to pass into Provisioning.modifyAttrs
      *
      * @since ZCS 6.0.0_BETA1
      */
     @ZAttr(id=790)
-    public Map<String,Object> setCreateTimestampAsString(String zimbraCreateTimestamp, Map<String,Object> attrs) {
+    public Map<String,Object> setCreateTimestampAsString(String zmailCreateTimestamp, Map<String,Object> attrs) {
         if (attrs == null) attrs = new HashMap<String,Object>();
-        attrs.put(Provisioning.A_zimbraCreateTimestamp, zimbraCreateTimestamp);
+        attrs.put(Provisioning.A_zmailCreateTimestamp, zmailCreateTimestamp);
         return attrs;
     }
 
     /**
      * time object was created
      *
-     * @throws com.zimbra.common.service.ServiceException if error during update
+     * @throws org.zmail.common.service.ServiceException if error during update
      *
      * @since ZCS 6.0.0_BETA1
      */
     @ZAttr(id=790)
-    public void unsetCreateTimestamp() throws com.zimbra.common.service.ServiceException {
+    public void unsetCreateTimestamp() throws org.zmail.common.service.ServiceException {
         HashMap<String,Object> attrs = new HashMap<String,Object>();
-        attrs.put(Provisioning.A_zimbraCreateTimestamp, "");
+        attrs.put(Provisioning.A_zmailCreateTimestamp, "");
         getProvisioning().modifyAttrs(this, attrs);
     }
 
@@ -723,7 +723,7 @@ public abstract class ZAttrDynamicGroup extends Group {
     @ZAttr(id=790)
     public Map<String,Object> unsetCreateTimestamp(Map<String,Object> attrs) {
         if (attrs == null) attrs = new HashMap<String,Object>();
-        attrs.put(Provisioning.A_zimbraCreateTimestamp, "");
+        attrs.put(Provisioning.A_zmailCreateTimestamp, "");
         return attrs;
     }
 
@@ -733,13 +733,13 @@ public abstract class ZAttrDynamicGroup extends Group {
      *
      * <p>Valid values: [ACCEPT, APPROVAL, REJECT]
      *
-     * @return zimbraDistributionListSubscriptionPolicy, or null if unset and/or has invalid value
+     * @return zmailDistributionListSubscriptionPolicy, or null if unset and/or has invalid value
      *
      * @since ZCS 8.0.0
      */
     @ZAttr(id=1275)
     public ZAttrProvisioning.DistributionListSubscriptionPolicy getDistributionListSubscriptionPolicy() {
-        try { String v = getAttr(Provisioning.A_zimbraDistributionListSubscriptionPolicy); return v == null ? null : ZAttrProvisioning.DistributionListSubscriptionPolicy.fromString(v); } catch(com.zimbra.common.service.ServiceException e) { return null; }
+        try { String v = getAttr(Provisioning.A_zmailDistributionListSubscriptionPolicy); return v == null ? null : ZAttrProvisioning.DistributionListSubscriptionPolicy.fromString(v); } catch(org.zmail.common.service.ServiceException e) { return null; }
     }
 
     /**
@@ -748,13 +748,13 @@ public abstract class ZAttrDynamicGroup extends Group {
      *
      * <p>Valid values: [ACCEPT, APPROVAL, REJECT]
      *
-     * @return zimbraDistributionListSubscriptionPolicy, or null if unset
+     * @return zmailDistributionListSubscriptionPolicy, or null if unset
      *
      * @since ZCS 8.0.0
      */
     @ZAttr(id=1275)
     public String getDistributionListSubscriptionPolicyAsString() {
-        return getAttr(Provisioning.A_zimbraDistributionListSubscriptionPolicy, null);
+        return getAttr(Provisioning.A_zmailDistributionListSubscriptionPolicy, null);
     }
 
     /**
@@ -763,15 +763,15 @@ public abstract class ZAttrDynamicGroup extends Group {
      *
      * <p>Valid values: [ACCEPT, APPROVAL, REJECT]
      *
-     * @param zimbraDistributionListSubscriptionPolicy new value
-     * @throws com.zimbra.common.service.ServiceException if error during update
+     * @param zmailDistributionListSubscriptionPolicy new value
+     * @throws org.zmail.common.service.ServiceException if error during update
      *
      * @since ZCS 8.0.0
      */
     @ZAttr(id=1275)
-    public void setDistributionListSubscriptionPolicy(ZAttrProvisioning.DistributionListSubscriptionPolicy zimbraDistributionListSubscriptionPolicy) throws com.zimbra.common.service.ServiceException {
+    public void setDistributionListSubscriptionPolicy(ZAttrProvisioning.DistributionListSubscriptionPolicy zmailDistributionListSubscriptionPolicy) throws org.zmail.common.service.ServiceException {
         HashMap<String,Object> attrs = new HashMap<String,Object>();
-        attrs.put(Provisioning.A_zimbraDistributionListSubscriptionPolicy, zimbraDistributionListSubscriptionPolicy.toString());
+        attrs.put(Provisioning.A_zmailDistributionListSubscriptionPolicy, zmailDistributionListSubscriptionPolicy.toString());
         getProvisioning().modifyAttrs(this, attrs);
     }
 
@@ -781,16 +781,16 @@ public abstract class ZAttrDynamicGroup extends Group {
      *
      * <p>Valid values: [ACCEPT, APPROVAL, REJECT]
      *
-     * @param zimbraDistributionListSubscriptionPolicy new value
+     * @param zmailDistributionListSubscriptionPolicy new value
      * @param attrs existing map to populate, or null to create a new map
      * @return populated map to pass into Provisioning.modifyAttrs
      *
      * @since ZCS 8.0.0
      */
     @ZAttr(id=1275)
-    public Map<String,Object> setDistributionListSubscriptionPolicy(ZAttrProvisioning.DistributionListSubscriptionPolicy zimbraDistributionListSubscriptionPolicy, Map<String,Object> attrs) {
+    public Map<String,Object> setDistributionListSubscriptionPolicy(ZAttrProvisioning.DistributionListSubscriptionPolicy zmailDistributionListSubscriptionPolicy, Map<String,Object> attrs) {
         if (attrs == null) attrs = new HashMap<String,Object>();
-        attrs.put(Provisioning.A_zimbraDistributionListSubscriptionPolicy, zimbraDistributionListSubscriptionPolicy.toString());
+        attrs.put(Provisioning.A_zmailDistributionListSubscriptionPolicy, zmailDistributionListSubscriptionPolicy.toString());
         return attrs;
     }
 
@@ -800,15 +800,15 @@ public abstract class ZAttrDynamicGroup extends Group {
      *
      * <p>Valid values: [ACCEPT, APPROVAL, REJECT]
      *
-     * @param zimbraDistributionListSubscriptionPolicy new value
-     * @throws com.zimbra.common.service.ServiceException if error during update
+     * @param zmailDistributionListSubscriptionPolicy new value
+     * @throws org.zmail.common.service.ServiceException if error during update
      *
      * @since ZCS 8.0.0
      */
     @ZAttr(id=1275)
-    public void setDistributionListSubscriptionPolicyAsString(String zimbraDistributionListSubscriptionPolicy) throws com.zimbra.common.service.ServiceException {
+    public void setDistributionListSubscriptionPolicyAsString(String zmailDistributionListSubscriptionPolicy) throws org.zmail.common.service.ServiceException {
         HashMap<String,Object> attrs = new HashMap<String,Object>();
-        attrs.put(Provisioning.A_zimbraDistributionListSubscriptionPolicy, zimbraDistributionListSubscriptionPolicy);
+        attrs.put(Provisioning.A_zmailDistributionListSubscriptionPolicy, zmailDistributionListSubscriptionPolicy);
         getProvisioning().modifyAttrs(this, attrs);
     }
 
@@ -818,16 +818,16 @@ public abstract class ZAttrDynamicGroup extends Group {
      *
      * <p>Valid values: [ACCEPT, APPROVAL, REJECT]
      *
-     * @param zimbraDistributionListSubscriptionPolicy new value
+     * @param zmailDistributionListSubscriptionPolicy new value
      * @param attrs existing map to populate, or null to create a new map
      * @return populated map to pass into Provisioning.modifyAttrs
      *
      * @since ZCS 8.0.0
      */
     @ZAttr(id=1275)
-    public Map<String,Object> setDistributionListSubscriptionPolicyAsString(String zimbraDistributionListSubscriptionPolicy, Map<String,Object> attrs) {
+    public Map<String,Object> setDistributionListSubscriptionPolicyAsString(String zmailDistributionListSubscriptionPolicy, Map<String,Object> attrs) {
         if (attrs == null) attrs = new HashMap<String,Object>();
-        attrs.put(Provisioning.A_zimbraDistributionListSubscriptionPolicy, zimbraDistributionListSubscriptionPolicy);
+        attrs.put(Provisioning.A_zmailDistributionListSubscriptionPolicy, zmailDistributionListSubscriptionPolicy);
         return attrs;
     }
 
@@ -837,14 +837,14 @@ public abstract class ZAttrDynamicGroup extends Group {
      *
      * <p>Valid values: [ACCEPT, APPROVAL, REJECT]
      *
-     * @throws com.zimbra.common.service.ServiceException if error during update
+     * @throws org.zmail.common.service.ServiceException if error during update
      *
      * @since ZCS 8.0.0
      */
     @ZAttr(id=1275)
-    public void unsetDistributionListSubscriptionPolicy() throws com.zimbra.common.service.ServiceException {
+    public void unsetDistributionListSubscriptionPolicy() throws org.zmail.common.service.ServiceException {
         HashMap<String,Object> attrs = new HashMap<String,Object>();
-        attrs.put(Provisioning.A_zimbraDistributionListSubscriptionPolicy, "");
+        attrs.put(Provisioning.A_zmailDistributionListSubscriptionPolicy, "");
         getProvisioning().modifyAttrs(this, attrs);
     }
 
@@ -862,7 +862,7 @@ public abstract class ZAttrDynamicGroup extends Group {
     @ZAttr(id=1275)
     public Map<String,Object> unsetDistributionListSubscriptionPolicy(Map<String,Object> attrs) {
         if (attrs == null) attrs = new HashMap<String,Object>();
-        attrs.put(Provisioning.A_zimbraDistributionListSubscriptionPolicy, "");
+        attrs.put(Provisioning.A_zmailDistributionListSubscriptionPolicy, "");
         return attrs;
     }
 
@@ -872,13 +872,13 @@ public abstract class ZAttrDynamicGroup extends Group {
      *
      * <p>Valid values: [ACCEPT, APPROVAL, REJECT]
      *
-     * @return zimbraDistributionListUnsubscriptionPolicy, or null if unset and/or has invalid value
+     * @return zmailDistributionListUnsubscriptionPolicy, or null if unset and/or has invalid value
      *
      * @since ZCS 8.0.0
      */
     @ZAttr(id=1276)
     public ZAttrProvisioning.DistributionListUnsubscriptionPolicy getDistributionListUnsubscriptionPolicy() {
-        try { String v = getAttr(Provisioning.A_zimbraDistributionListUnsubscriptionPolicy); return v == null ? null : ZAttrProvisioning.DistributionListUnsubscriptionPolicy.fromString(v); } catch(com.zimbra.common.service.ServiceException e) { return null; }
+        try { String v = getAttr(Provisioning.A_zmailDistributionListUnsubscriptionPolicy); return v == null ? null : ZAttrProvisioning.DistributionListUnsubscriptionPolicy.fromString(v); } catch(org.zmail.common.service.ServiceException e) { return null; }
     }
 
     /**
@@ -887,13 +887,13 @@ public abstract class ZAttrDynamicGroup extends Group {
      *
      * <p>Valid values: [ACCEPT, APPROVAL, REJECT]
      *
-     * @return zimbraDistributionListUnsubscriptionPolicy, or null if unset
+     * @return zmailDistributionListUnsubscriptionPolicy, or null if unset
      *
      * @since ZCS 8.0.0
      */
     @ZAttr(id=1276)
     public String getDistributionListUnsubscriptionPolicyAsString() {
-        return getAttr(Provisioning.A_zimbraDistributionListUnsubscriptionPolicy, null);
+        return getAttr(Provisioning.A_zmailDistributionListUnsubscriptionPolicy, null);
     }
 
     /**
@@ -902,15 +902,15 @@ public abstract class ZAttrDynamicGroup extends Group {
      *
      * <p>Valid values: [ACCEPT, APPROVAL, REJECT]
      *
-     * @param zimbraDistributionListUnsubscriptionPolicy new value
-     * @throws com.zimbra.common.service.ServiceException if error during update
+     * @param zmailDistributionListUnsubscriptionPolicy new value
+     * @throws org.zmail.common.service.ServiceException if error during update
      *
      * @since ZCS 8.0.0
      */
     @ZAttr(id=1276)
-    public void setDistributionListUnsubscriptionPolicy(ZAttrProvisioning.DistributionListUnsubscriptionPolicy zimbraDistributionListUnsubscriptionPolicy) throws com.zimbra.common.service.ServiceException {
+    public void setDistributionListUnsubscriptionPolicy(ZAttrProvisioning.DistributionListUnsubscriptionPolicy zmailDistributionListUnsubscriptionPolicy) throws org.zmail.common.service.ServiceException {
         HashMap<String,Object> attrs = new HashMap<String,Object>();
-        attrs.put(Provisioning.A_zimbraDistributionListUnsubscriptionPolicy, zimbraDistributionListUnsubscriptionPolicy.toString());
+        attrs.put(Provisioning.A_zmailDistributionListUnsubscriptionPolicy, zmailDistributionListUnsubscriptionPolicy.toString());
         getProvisioning().modifyAttrs(this, attrs);
     }
 
@@ -920,16 +920,16 @@ public abstract class ZAttrDynamicGroup extends Group {
      *
      * <p>Valid values: [ACCEPT, APPROVAL, REJECT]
      *
-     * @param zimbraDistributionListUnsubscriptionPolicy new value
+     * @param zmailDistributionListUnsubscriptionPolicy new value
      * @param attrs existing map to populate, or null to create a new map
      * @return populated map to pass into Provisioning.modifyAttrs
      *
      * @since ZCS 8.0.0
      */
     @ZAttr(id=1276)
-    public Map<String,Object> setDistributionListUnsubscriptionPolicy(ZAttrProvisioning.DistributionListUnsubscriptionPolicy zimbraDistributionListUnsubscriptionPolicy, Map<String,Object> attrs) {
+    public Map<String,Object> setDistributionListUnsubscriptionPolicy(ZAttrProvisioning.DistributionListUnsubscriptionPolicy zmailDistributionListUnsubscriptionPolicy, Map<String,Object> attrs) {
         if (attrs == null) attrs = new HashMap<String,Object>();
-        attrs.put(Provisioning.A_zimbraDistributionListUnsubscriptionPolicy, zimbraDistributionListUnsubscriptionPolicy.toString());
+        attrs.put(Provisioning.A_zmailDistributionListUnsubscriptionPolicy, zmailDistributionListUnsubscriptionPolicy.toString());
         return attrs;
     }
 
@@ -939,15 +939,15 @@ public abstract class ZAttrDynamicGroup extends Group {
      *
      * <p>Valid values: [ACCEPT, APPROVAL, REJECT]
      *
-     * @param zimbraDistributionListUnsubscriptionPolicy new value
-     * @throws com.zimbra.common.service.ServiceException if error during update
+     * @param zmailDistributionListUnsubscriptionPolicy new value
+     * @throws org.zmail.common.service.ServiceException if error during update
      *
      * @since ZCS 8.0.0
      */
     @ZAttr(id=1276)
-    public void setDistributionListUnsubscriptionPolicyAsString(String zimbraDistributionListUnsubscriptionPolicy) throws com.zimbra.common.service.ServiceException {
+    public void setDistributionListUnsubscriptionPolicyAsString(String zmailDistributionListUnsubscriptionPolicy) throws org.zmail.common.service.ServiceException {
         HashMap<String,Object> attrs = new HashMap<String,Object>();
-        attrs.put(Provisioning.A_zimbraDistributionListUnsubscriptionPolicy, zimbraDistributionListUnsubscriptionPolicy);
+        attrs.put(Provisioning.A_zmailDistributionListUnsubscriptionPolicy, zmailDistributionListUnsubscriptionPolicy);
         getProvisioning().modifyAttrs(this, attrs);
     }
 
@@ -957,16 +957,16 @@ public abstract class ZAttrDynamicGroup extends Group {
      *
      * <p>Valid values: [ACCEPT, APPROVAL, REJECT]
      *
-     * @param zimbraDistributionListUnsubscriptionPolicy new value
+     * @param zmailDistributionListUnsubscriptionPolicy new value
      * @param attrs existing map to populate, or null to create a new map
      * @return populated map to pass into Provisioning.modifyAttrs
      *
      * @since ZCS 8.0.0
      */
     @ZAttr(id=1276)
-    public Map<String,Object> setDistributionListUnsubscriptionPolicyAsString(String zimbraDistributionListUnsubscriptionPolicy, Map<String,Object> attrs) {
+    public Map<String,Object> setDistributionListUnsubscriptionPolicyAsString(String zmailDistributionListUnsubscriptionPolicy, Map<String,Object> attrs) {
         if (attrs == null) attrs = new HashMap<String,Object>();
-        attrs.put(Provisioning.A_zimbraDistributionListUnsubscriptionPolicy, zimbraDistributionListUnsubscriptionPolicy);
+        attrs.put(Provisioning.A_zmailDistributionListUnsubscriptionPolicy, zmailDistributionListUnsubscriptionPolicy);
         return attrs;
     }
 
@@ -976,14 +976,14 @@ public abstract class ZAttrDynamicGroup extends Group {
      *
      * <p>Valid values: [ACCEPT, APPROVAL, REJECT]
      *
-     * @throws com.zimbra.common.service.ServiceException if error during update
+     * @throws org.zmail.common.service.ServiceException if error during update
      *
      * @since ZCS 8.0.0
      */
     @ZAttr(id=1276)
-    public void unsetDistributionListUnsubscriptionPolicy() throws com.zimbra.common.service.ServiceException {
+    public void unsetDistributionListUnsubscriptionPolicy() throws org.zmail.common.service.ServiceException {
         HashMap<String,Object> attrs = new HashMap<String,Object>();
-        attrs.put(Provisioning.A_zimbraDistributionListUnsubscriptionPolicy, "");
+        attrs.put(Provisioning.A_zmailDistributionListUnsubscriptionPolicy, "");
         getProvisioning().modifyAttrs(this, attrs);
     }
 
@@ -1001,56 +1001,56 @@ public abstract class ZAttrDynamicGroup extends Group {
     @ZAttr(id=1276)
     public Map<String,Object> unsetDistributionListUnsubscriptionPolicy(Map<String,Object> attrs) {
         if (attrs == null) attrs = new HashMap<String,Object>();
-        attrs.put(Provisioning.A_zimbraDistributionListUnsubscriptionPolicy, "");
+        attrs.put(Provisioning.A_zmailDistributionListUnsubscriptionPolicy, "");
         return attrs;
     }
 
     /**
      * hide entry in Global Address List
      *
-     * @return zimbraHideInGal, or false if unset
+     * @return zmailHideInGal, or false if unset
      */
     @ZAttr(id=353)
     public boolean isHideInGal() {
-        return getBooleanAttr(Provisioning.A_zimbraHideInGal, false);
+        return getBooleanAttr(Provisioning.A_zmailHideInGal, false);
     }
 
     /**
      * hide entry in Global Address List
      *
-     * @param zimbraHideInGal new value
-     * @throws com.zimbra.common.service.ServiceException if error during update
+     * @param zmailHideInGal new value
+     * @throws org.zmail.common.service.ServiceException if error during update
      */
     @ZAttr(id=353)
-    public void setHideInGal(boolean zimbraHideInGal) throws com.zimbra.common.service.ServiceException {
+    public void setHideInGal(boolean zmailHideInGal) throws org.zmail.common.service.ServiceException {
         HashMap<String,Object> attrs = new HashMap<String,Object>();
-        attrs.put(Provisioning.A_zimbraHideInGal, zimbraHideInGal ? Provisioning.TRUE : Provisioning.FALSE);
+        attrs.put(Provisioning.A_zmailHideInGal, zmailHideInGal ? Provisioning.TRUE : Provisioning.FALSE);
         getProvisioning().modifyAttrs(this, attrs);
     }
 
     /**
      * hide entry in Global Address List
      *
-     * @param zimbraHideInGal new value
+     * @param zmailHideInGal new value
      * @param attrs existing map to populate, or null to create a new map
      * @return populated map to pass into Provisioning.modifyAttrs
      */
     @ZAttr(id=353)
-    public Map<String,Object> setHideInGal(boolean zimbraHideInGal, Map<String,Object> attrs) {
+    public Map<String,Object> setHideInGal(boolean zmailHideInGal, Map<String,Object> attrs) {
         if (attrs == null) attrs = new HashMap<String,Object>();
-        attrs.put(Provisioning.A_zimbraHideInGal, zimbraHideInGal ? Provisioning.TRUE : Provisioning.FALSE);
+        attrs.put(Provisioning.A_zmailHideInGal, zmailHideInGal ? Provisioning.TRUE : Provisioning.FALSE);
         return attrs;
     }
 
     /**
      * hide entry in Global Address List
      *
-     * @throws com.zimbra.common.service.ServiceException if error during update
+     * @throws org.zmail.common.service.ServiceException if error during update
      */
     @ZAttr(id=353)
-    public void unsetHideInGal() throws com.zimbra.common.service.ServiceException {
+    public void unsetHideInGal() throws org.zmail.common.service.ServiceException {
         HashMap<String,Object> attrs = new HashMap<String,Object>();
-        attrs.put(Provisioning.A_zimbraHideInGal, "");
+        attrs.put(Provisioning.A_zmailHideInGal, "");
         getProvisioning().modifyAttrs(this, attrs);
     }
 
@@ -1063,61 +1063,61 @@ public abstract class ZAttrDynamicGroup extends Group {
     @ZAttr(id=353)
     public Map<String,Object> unsetHideInGal(Map<String,Object> attrs) {
         if (attrs == null) attrs = new HashMap<String,Object>();
-        attrs.put(Provisioning.A_zimbraHideInGal, "");
+        attrs.put(Provisioning.A_zmailHideInGal, "");
         return attrs;
     }
 
     /**
-     * Zimbra Systems Unique ID
+     * Zmail Systems Unique ID
      *
-     * @return zimbraId, or null if unset
+     * @return zmailId, or null if unset
      */
     @ZAttr(id=1)
     public String getId() {
-        return getAttr(Provisioning.A_zimbraId, null);
+        return getAttr(Provisioning.A_zmailId, null);
     }
 
     /**
-     * Zimbra Systems Unique ID
+     * Zmail Systems Unique ID
      *
-     * @param zimbraId new value
-     * @throws com.zimbra.common.service.ServiceException if error during update
+     * @param zmailId new value
+     * @throws org.zmail.common.service.ServiceException if error during update
      */
     @ZAttr(id=1)
-    public void setId(String zimbraId) throws com.zimbra.common.service.ServiceException {
+    public void setId(String zmailId) throws org.zmail.common.service.ServiceException {
         HashMap<String,Object> attrs = new HashMap<String,Object>();
-        attrs.put(Provisioning.A_zimbraId, zimbraId);
+        attrs.put(Provisioning.A_zmailId, zmailId);
         getProvisioning().modifyAttrs(this, attrs);
     }
 
     /**
-     * Zimbra Systems Unique ID
+     * Zmail Systems Unique ID
      *
-     * @param zimbraId new value
+     * @param zmailId new value
      * @param attrs existing map to populate, or null to create a new map
      * @return populated map to pass into Provisioning.modifyAttrs
      */
     @ZAttr(id=1)
-    public Map<String,Object> setId(String zimbraId, Map<String,Object> attrs) {
+    public Map<String,Object> setId(String zmailId, Map<String,Object> attrs) {
         if (attrs == null) attrs = new HashMap<String,Object>();
-        attrs.put(Provisioning.A_zimbraId, zimbraId);
+        attrs.put(Provisioning.A_zmailId, zmailId);
         return attrs;
     }
 
     /**
-     * Zimbra Systems Unique ID
+     * Zmail Systems Unique ID
      *
-     * @throws com.zimbra.common.service.ServiceException if error during update
+     * @throws org.zmail.common.service.ServiceException if error during update
      */
     @ZAttr(id=1)
-    public void unsetId() throws com.zimbra.common.service.ServiceException {
+    public void unsetId() throws org.zmail.common.service.ServiceException {
         HashMap<String,Object> attrs = new HashMap<String,Object>();
-        attrs.put(Provisioning.A_zimbraId, "");
+        attrs.put(Provisioning.A_zmailId, "");
         getProvisioning().modifyAttrs(this, attrs);
     }
 
     /**
-     * Zimbra Systems Unique ID
+     * Zmail Systems Unique ID
      *
      * @param attrs existing map to populate, or null to create a new map
      * @return populated map to pass into Provisioning.modifyAttrs
@@ -1125,7 +1125,7 @@ public abstract class ZAttrDynamicGroup extends Group {
     @ZAttr(id=1)
     public Map<String,Object> unsetId(Map<String,Object> attrs) {
         if (attrs == null) attrs = new HashMap<String,Object>();
-        attrs.put(Provisioning.A_zimbraId, "");
+        attrs.put(Provisioning.A_zmailId, "");
         return attrs;
     }
 
@@ -1133,28 +1133,28 @@ public abstract class ZAttrDynamicGroup extends Group {
      * if the dynamic group can be a legitimate grantee for folder grantees;
      * and a legitimate grantee or target for delegated admin grants
      *
-     * @return zimbraIsACLGroup, or false if unset
+     * @return zmailIsACLGroup, or false if unset
      *
      * @since ZCS 8.0.0
      */
     @ZAttr(id=1242)
     public boolean isIsACLGroup() {
-        return getBooleanAttr(Provisioning.A_zimbraIsACLGroup, false);
+        return getBooleanAttr(Provisioning.A_zmailIsACLGroup, false);
     }
 
     /**
      * if the dynamic group can be a legitimate grantee for folder grantees;
      * and a legitimate grantee or target for delegated admin grants
      *
-     * @param zimbraIsACLGroup new value
-     * @throws com.zimbra.common.service.ServiceException if error during update
+     * @param zmailIsACLGroup new value
+     * @throws org.zmail.common.service.ServiceException if error during update
      *
      * @since ZCS 8.0.0
      */
     @ZAttr(id=1242)
-    public void setIsACLGroup(boolean zimbraIsACLGroup) throws com.zimbra.common.service.ServiceException {
+    public void setIsACLGroup(boolean zmailIsACLGroup) throws org.zmail.common.service.ServiceException {
         HashMap<String,Object> attrs = new HashMap<String,Object>();
-        attrs.put(Provisioning.A_zimbraIsACLGroup, zimbraIsACLGroup ? Provisioning.TRUE : Provisioning.FALSE);
+        attrs.put(Provisioning.A_zmailIsACLGroup, zmailIsACLGroup ? Provisioning.TRUE : Provisioning.FALSE);
         getProvisioning().modifyAttrs(this, attrs);
     }
 
@@ -1162,16 +1162,16 @@ public abstract class ZAttrDynamicGroup extends Group {
      * if the dynamic group can be a legitimate grantee for folder grantees;
      * and a legitimate grantee or target for delegated admin grants
      *
-     * @param zimbraIsACLGroup new value
+     * @param zmailIsACLGroup new value
      * @param attrs existing map to populate, or null to create a new map
      * @return populated map to pass into Provisioning.modifyAttrs
      *
      * @since ZCS 8.0.0
      */
     @ZAttr(id=1242)
-    public Map<String,Object> setIsACLGroup(boolean zimbraIsACLGroup, Map<String,Object> attrs) {
+    public Map<String,Object> setIsACLGroup(boolean zmailIsACLGroup, Map<String,Object> attrs) {
         if (attrs == null) attrs = new HashMap<String,Object>();
-        attrs.put(Provisioning.A_zimbraIsACLGroup, zimbraIsACLGroup ? Provisioning.TRUE : Provisioning.FALSE);
+        attrs.put(Provisioning.A_zmailIsACLGroup, zmailIsACLGroup ? Provisioning.TRUE : Provisioning.FALSE);
         return attrs;
     }
 
@@ -1179,14 +1179,14 @@ public abstract class ZAttrDynamicGroup extends Group {
      * if the dynamic group can be a legitimate grantee for folder grantees;
      * and a legitimate grantee or target for delegated admin grants
      *
-     * @throws com.zimbra.common.service.ServiceException if error during update
+     * @throws org.zmail.common.service.ServiceException if error during update
      *
      * @since ZCS 8.0.0
      */
     @ZAttr(id=1242)
-    public void unsetIsACLGroup() throws com.zimbra.common.service.ServiceException {
+    public void unsetIsACLGroup() throws org.zmail.common.service.ServiceException {
         HashMap<String,Object> attrs = new HashMap<String,Object>();
-        attrs.put(Provisioning.A_zimbraIsACLGroup, "");
+        attrs.put(Provisioning.A_zmailIsACLGroup, "");
         getProvisioning().modifyAttrs(this, attrs);
     }
 
@@ -1202,64 +1202,64 @@ public abstract class ZAttrDynamicGroup extends Group {
     @ZAttr(id=1242)
     public Map<String,Object> unsetIsACLGroup(Map<String,Object> attrs) {
         if (attrs == null) attrs = new HashMap<String,Object>();
-        attrs.put(Provisioning.A_zimbraIsACLGroup, "");
+        attrs.put(Provisioning.A_zmailIsACLGroup, "");
         return attrs;
     }
 
     /**
      * set to true for admin groups
      *
-     * @return zimbraIsAdminGroup, or false if unset
+     * @return zmailIsAdminGroup, or false if unset
      *
      * @since ZCS 6.0.0_BETA1
      */
     @ZAttr(id=802)
     public boolean isIsAdminGroup() {
-        return getBooleanAttr(Provisioning.A_zimbraIsAdminGroup, false);
+        return getBooleanAttr(Provisioning.A_zmailIsAdminGroup, false);
     }
 
     /**
      * set to true for admin groups
      *
-     * @param zimbraIsAdminGroup new value
-     * @throws com.zimbra.common.service.ServiceException if error during update
+     * @param zmailIsAdminGroup new value
+     * @throws org.zmail.common.service.ServiceException if error during update
      *
      * @since ZCS 6.0.0_BETA1
      */
     @ZAttr(id=802)
-    public void setIsAdminGroup(boolean zimbraIsAdminGroup) throws com.zimbra.common.service.ServiceException {
+    public void setIsAdminGroup(boolean zmailIsAdminGroup) throws org.zmail.common.service.ServiceException {
         HashMap<String,Object> attrs = new HashMap<String,Object>();
-        attrs.put(Provisioning.A_zimbraIsAdminGroup, zimbraIsAdminGroup ? Provisioning.TRUE : Provisioning.FALSE);
+        attrs.put(Provisioning.A_zmailIsAdminGroup, zmailIsAdminGroup ? Provisioning.TRUE : Provisioning.FALSE);
         getProvisioning().modifyAttrs(this, attrs);
     }
 
     /**
      * set to true for admin groups
      *
-     * @param zimbraIsAdminGroup new value
+     * @param zmailIsAdminGroup new value
      * @param attrs existing map to populate, or null to create a new map
      * @return populated map to pass into Provisioning.modifyAttrs
      *
      * @since ZCS 6.0.0_BETA1
      */
     @ZAttr(id=802)
-    public Map<String,Object> setIsAdminGroup(boolean zimbraIsAdminGroup, Map<String,Object> attrs) {
+    public Map<String,Object> setIsAdminGroup(boolean zmailIsAdminGroup, Map<String,Object> attrs) {
         if (attrs == null) attrs = new HashMap<String,Object>();
-        attrs.put(Provisioning.A_zimbraIsAdminGroup, zimbraIsAdminGroup ? Provisioning.TRUE : Provisioning.FALSE);
+        attrs.put(Provisioning.A_zmailIsAdminGroup, zmailIsAdminGroup ? Provisioning.TRUE : Provisioning.FALSE);
         return attrs;
     }
 
     /**
      * set to true for admin groups
      *
-     * @throws com.zimbra.common.service.ServiceException if error during update
+     * @throws org.zmail.common.service.ServiceException if error during update
      *
      * @since ZCS 6.0.0_BETA1
      */
     @ZAttr(id=802)
-    public void unsetIsAdminGroup() throws com.zimbra.common.service.ServiceException {
+    public void unsetIsAdminGroup() throws org.zmail.common.service.ServiceException {
         HashMap<String,Object> attrs = new HashMap<String,Object>();
-        attrs.put(Provisioning.A_zimbraIsAdminGroup, "");
+        attrs.put(Provisioning.A_zmailIsAdminGroup, "");
         getProvisioning().modifyAttrs(this, attrs);
     }
 
@@ -1274,56 +1274,56 @@ public abstract class ZAttrDynamicGroup extends Group {
     @ZAttr(id=802)
     public Map<String,Object> unsetIsAdminGroup(Map<String,Object> attrs) {
         if (attrs == null) attrs = new HashMap<String,Object>();
-        attrs.put(Provisioning.A_zimbraIsAdminGroup, "");
+        attrs.put(Provisioning.A_zmailIsAdminGroup, "");
         return attrs;
     }
 
     /**
      * locale of entry, e.g. en_US
      *
-     * @return zimbraLocale, or null if unset
+     * @return zmailLocale, or null if unset
      */
     @ZAttr(id=345)
     public String getLocaleAsString() {
-        return getAttr(Provisioning.A_zimbraLocale, null);
+        return getAttr(Provisioning.A_zmailLocale, null);
     }
 
     /**
      * locale of entry, e.g. en_US
      *
-     * @param zimbraLocale new value
-     * @throws com.zimbra.common.service.ServiceException if error during update
+     * @param zmailLocale new value
+     * @throws org.zmail.common.service.ServiceException if error during update
      */
     @ZAttr(id=345)
-    public void setLocale(String zimbraLocale) throws com.zimbra.common.service.ServiceException {
+    public void setLocale(String zmailLocale) throws org.zmail.common.service.ServiceException {
         HashMap<String,Object> attrs = new HashMap<String,Object>();
-        attrs.put(Provisioning.A_zimbraLocale, zimbraLocale);
+        attrs.put(Provisioning.A_zmailLocale, zmailLocale);
         getProvisioning().modifyAttrs(this, attrs);
     }
 
     /**
      * locale of entry, e.g. en_US
      *
-     * @param zimbraLocale new value
+     * @param zmailLocale new value
      * @param attrs existing map to populate, or null to create a new map
      * @return populated map to pass into Provisioning.modifyAttrs
      */
     @ZAttr(id=345)
-    public Map<String,Object> setLocale(String zimbraLocale, Map<String,Object> attrs) {
+    public Map<String,Object> setLocale(String zmailLocale, Map<String,Object> attrs) {
         if (attrs == null) attrs = new HashMap<String,Object>();
-        attrs.put(Provisioning.A_zimbraLocale, zimbraLocale);
+        attrs.put(Provisioning.A_zmailLocale, zmailLocale);
         return attrs;
     }
 
     /**
      * locale of entry, e.g. en_US
      *
-     * @throws com.zimbra.common.service.ServiceException if error during update
+     * @throws org.zmail.common.service.ServiceException if error during update
      */
     @ZAttr(id=345)
-    public void unsetLocale() throws com.zimbra.common.service.ServiceException {
+    public void unsetLocale() throws org.zmail.common.service.ServiceException {
         HashMap<String,Object> attrs = new HashMap<String,Object>();
-        attrs.put(Provisioning.A_zimbraLocale, "");
+        attrs.put(Provisioning.A_zmailLocale, "");
         getProvisioning().modifyAttrs(this, attrs);
     }
 
@@ -1336,110 +1336,110 @@ public abstract class ZAttrDynamicGroup extends Group {
     @ZAttr(id=345)
     public Map<String,Object> unsetLocale(Map<String,Object> attrs) {
         if (attrs == null) attrs = new HashMap<String,Object>();
-        attrs.put(Provisioning.A_zimbraLocale, "");
+        attrs.put(Provisioning.A_zmailLocale, "");
         return attrs;
     }
 
     /**
      * RFC822 email address of this recipient for accepting mail
      *
-     * @return zimbraMailAlias, or empty array if unset
+     * @return zmailMailAlias, or empty array if unset
      */
     @ZAttr(id=20)
     public String[] getMailAlias() {
-        return getMultiAttr(Provisioning.A_zimbraMailAlias);
+        return getMultiAttr(Provisioning.A_zmailMailAlias);
     }
 
     /**
      * RFC822 email address of this recipient for accepting mail
      *
-     * @param zimbraMailAlias new value
-     * @throws com.zimbra.common.service.ServiceException if error during update
+     * @param zmailMailAlias new value
+     * @throws org.zmail.common.service.ServiceException if error during update
      */
     @ZAttr(id=20)
-    public void setMailAlias(String[] zimbraMailAlias) throws com.zimbra.common.service.ServiceException {
+    public void setMailAlias(String[] zmailMailAlias) throws org.zmail.common.service.ServiceException {
         HashMap<String,Object> attrs = new HashMap<String,Object>();
-        attrs.put(Provisioning.A_zimbraMailAlias, zimbraMailAlias);
+        attrs.put(Provisioning.A_zmailMailAlias, zmailMailAlias);
         getProvisioning().modifyAttrs(this, attrs);
     }
 
     /**
      * RFC822 email address of this recipient for accepting mail
      *
-     * @param zimbraMailAlias new value
+     * @param zmailMailAlias new value
      * @param attrs existing map to populate, or null to create a new map
      * @return populated map to pass into Provisioning.modifyAttrs
      */
     @ZAttr(id=20)
-    public Map<String,Object> setMailAlias(String[] zimbraMailAlias, Map<String,Object> attrs) {
+    public Map<String,Object> setMailAlias(String[] zmailMailAlias, Map<String,Object> attrs) {
         if (attrs == null) attrs = new HashMap<String,Object>();
-        attrs.put(Provisioning.A_zimbraMailAlias, zimbraMailAlias);
+        attrs.put(Provisioning.A_zmailMailAlias, zmailMailAlias);
         return attrs;
     }
 
     /**
      * RFC822 email address of this recipient for accepting mail
      *
-     * @param zimbraMailAlias new to add to existing values
-     * @throws com.zimbra.common.service.ServiceException if error during update
+     * @param zmailMailAlias new to add to existing values
+     * @throws org.zmail.common.service.ServiceException if error during update
      */
     @ZAttr(id=20)
-    public void addMailAlias(String zimbraMailAlias) throws com.zimbra.common.service.ServiceException {
+    public void addMailAlias(String zmailMailAlias) throws org.zmail.common.service.ServiceException {
         HashMap<String,Object> attrs = new HashMap<String,Object>();
-        StringUtil.addToMultiMap(attrs, "+" + Provisioning.A_zimbraMailAlias, zimbraMailAlias);
+        StringUtil.addToMultiMap(attrs, "+" + Provisioning.A_zmailMailAlias, zmailMailAlias);
         getProvisioning().modifyAttrs(this, attrs);
     }
 
     /**
      * RFC822 email address of this recipient for accepting mail
      *
-     * @param zimbraMailAlias new to add to existing values
+     * @param zmailMailAlias new to add to existing values
      * @param attrs existing map to populate, or null to create a new map
      * @return populated map to pass into Provisioning.modifyAttrs
      */
     @ZAttr(id=20)
-    public Map<String,Object> addMailAlias(String zimbraMailAlias, Map<String,Object> attrs) {
+    public Map<String,Object> addMailAlias(String zmailMailAlias, Map<String,Object> attrs) {
         if (attrs == null) attrs = new HashMap<String,Object>();
-        StringUtil.addToMultiMap(attrs, "+" + Provisioning.A_zimbraMailAlias, zimbraMailAlias);
+        StringUtil.addToMultiMap(attrs, "+" + Provisioning.A_zmailMailAlias, zmailMailAlias);
         return attrs;
     }
 
     /**
      * RFC822 email address of this recipient for accepting mail
      *
-     * @param zimbraMailAlias existing value to remove
-     * @throws com.zimbra.common.service.ServiceException if error during update
+     * @param zmailMailAlias existing value to remove
+     * @throws org.zmail.common.service.ServiceException if error during update
      */
     @ZAttr(id=20)
-    public void removeMailAlias(String zimbraMailAlias) throws com.zimbra.common.service.ServiceException {
+    public void removeMailAlias(String zmailMailAlias) throws org.zmail.common.service.ServiceException {
         HashMap<String,Object> attrs = new HashMap<String,Object>();
-        StringUtil.addToMultiMap(attrs, "-" + Provisioning.A_zimbraMailAlias, zimbraMailAlias);
+        StringUtil.addToMultiMap(attrs, "-" + Provisioning.A_zmailMailAlias, zmailMailAlias);
         getProvisioning().modifyAttrs(this, attrs);
     }
 
     /**
      * RFC822 email address of this recipient for accepting mail
      *
-     * @param zimbraMailAlias existing value to remove
+     * @param zmailMailAlias existing value to remove
      * @param attrs existing map to populate, or null to create a new map
      * @return populated map to pass into Provisioning.modifyAttrs
      */
     @ZAttr(id=20)
-    public Map<String,Object> removeMailAlias(String zimbraMailAlias, Map<String,Object> attrs) {
+    public Map<String,Object> removeMailAlias(String zmailMailAlias, Map<String,Object> attrs) {
         if (attrs == null) attrs = new HashMap<String,Object>();
-        StringUtil.addToMultiMap(attrs, "-" + Provisioning.A_zimbraMailAlias, zimbraMailAlias);
+        StringUtil.addToMultiMap(attrs, "-" + Provisioning.A_zmailMailAlias, zmailMailAlias);
         return attrs;
     }
 
     /**
      * RFC822 email address of this recipient for accepting mail
      *
-     * @throws com.zimbra.common.service.ServiceException if error during update
+     * @throws org.zmail.common.service.ServiceException if error during update
      */
     @ZAttr(id=20)
-    public void unsetMailAlias() throws com.zimbra.common.service.ServiceException {
+    public void unsetMailAlias() throws org.zmail.common.service.ServiceException {
         HashMap<String,Object> attrs = new HashMap<String,Object>();
-        attrs.put(Provisioning.A_zimbraMailAlias, "");
+        attrs.put(Provisioning.A_zmailMailAlias, "");
         getProvisioning().modifyAttrs(this, attrs);
     }
 
@@ -1452,56 +1452,56 @@ public abstract class ZAttrDynamicGroup extends Group {
     @ZAttr(id=20)
     public Map<String,Object> unsetMailAlias(Map<String,Object> attrs) {
         if (attrs == null) attrs = new HashMap<String,Object>();
-        attrs.put(Provisioning.A_zimbraMailAlias, "");
+        attrs.put(Provisioning.A_zmailMailAlias, "");
         return attrs;
     }
 
     /**
      * the server hosting the account&#039;s mailbox
      *
-     * @return zimbraMailHost, or null if unset
+     * @return zmailMailHost, or null if unset
      */
     @ZAttr(id=4)
     public String getMailHost() {
-        return getAttr(Provisioning.A_zimbraMailHost, null);
+        return getAttr(Provisioning.A_zmailMailHost, null);
     }
 
     /**
      * the server hosting the account&#039;s mailbox
      *
-     * @param zimbraMailHost new value
-     * @throws com.zimbra.common.service.ServiceException if error during update
+     * @param zmailMailHost new value
+     * @throws org.zmail.common.service.ServiceException if error during update
      */
     @ZAttr(id=4)
-    public void setMailHost(String zimbraMailHost) throws com.zimbra.common.service.ServiceException {
+    public void setMailHost(String zmailMailHost) throws org.zmail.common.service.ServiceException {
         HashMap<String,Object> attrs = new HashMap<String,Object>();
-        attrs.put(Provisioning.A_zimbraMailHost, zimbraMailHost);
+        attrs.put(Provisioning.A_zmailMailHost, zmailMailHost);
         getProvisioning().modifyAttrs(this, attrs);
     }
 
     /**
      * the server hosting the account&#039;s mailbox
      *
-     * @param zimbraMailHost new value
+     * @param zmailMailHost new value
      * @param attrs existing map to populate, or null to create a new map
      * @return populated map to pass into Provisioning.modifyAttrs
      */
     @ZAttr(id=4)
-    public Map<String,Object> setMailHost(String zimbraMailHost, Map<String,Object> attrs) {
+    public Map<String,Object> setMailHost(String zmailMailHost, Map<String,Object> attrs) {
         if (attrs == null) attrs = new HashMap<String,Object>();
-        attrs.put(Provisioning.A_zimbraMailHost, zimbraMailHost);
+        attrs.put(Provisioning.A_zmailMailHost, zmailMailHost);
         return attrs;
     }
 
     /**
      * the server hosting the account&#039;s mailbox
      *
-     * @throws com.zimbra.common.service.ServiceException if error during update
+     * @throws org.zmail.common.service.ServiceException if error during update
      */
     @ZAttr(id=4)
-    public void unsetMailHost() throws com.zimbra.common.service.ServiceException {
+    public void unsetMailHost() throws org.zmail.common.service.ServiceException {
         HashMap<String,Object> attrs = new HashMap<String,Object>();
-        attrs.put(Provisioning.A_zimbraMailHost, "");
+        attrs.put(Provisioning.A_zmailMailHost, "");
         getProvisioning().modifyAttrs(this, attrs);
     }
 
@@ -1514,7 +1514,7 @@ public abstract class ZAttrDynamicGroup extends Group {
     @ZAttr(id=4)
     public Map<String,Object> unsetMailHost(Map<String,Object> attrs) {
         if (attrs == null) attrs = new HashMap<String,Object>();
-        attrs.put(Provisioning.A_zimbraMailHost, "");
+        attrs.put(Provisioning.A_zmailMailHost, "");
         return attrs;
     }
 
@@ -1523,11 +1523,11 @@ public abstract class ZAttrDynamicGroup extends Group {
      *
      * <p>Valid values: [enabled, disabled]
      *
-     * @return zimbraMailStatus, or null if unset and/or has invalid value
+     * @return zmailMailStatus, or null if unset and/or has invalid value
      */
     @ZAttr(id=15)
     public ZAttrProvisioning.MailStatus getMailStatus() {
-        try { String v = getAttr(Provisioning.A_zimbraMailStatus); return v == null ? null : ZAttrProvisioning.MailStatus.fromString(v); } catch(com.zimbra.common.service.ServiceException e) { return null; }
+        try { String v = getAttr(Provisioning.A_zmailMailStatus); return v == null ? null : ZAttrProvisioning.MailStatus.fromString(v); } catch(org.zmail.common.service.ServiceException e) { return null; }
     }
 
     /**
@@ -1535,11 +1535,11 @@ public abstract class ZAttrDynamicGroup extends Group {
      *
      * <p>Valid values: [enabled, disabled]
      *
-     * @return zimbraMailStatus, or null if unset
+     * @return zmailMailStatus, or null if unset
      */
     @ZAttr(id=15)
     public String getMailStatusAsString() {
-        return getAttr(Provisioning.A_zimbraMailStatus, null);
+        return getAttr(Provisioning.A_zmailMailStatus, null);
     }
 
     /**
@@ -1547,13 +1547,13 @@ public abstract class ZAttrDynamicGroup extends Group {
      *
      * <p>Valid values: [enabled, disabled]
      *
-     * @param zimbraMailStatus new value
-     * @throws com.zimbra.common.service.ServiceException if error during update
+     * @param zmailMailStatus new value
+     * @throws org.zmail.common.service.ServiceException if error during update
      */
     @ZAttr(id=15)
-    public void setMailStatus(ZAttrProvisioning.MailStatus zimbraMailStatus) throws com.zimbra.common.service.ServiceException {
+    public void setMailStatus(ZAttrProvisioning.MailStatus zmailMailStatus) throws org.zmail.common.service.ServiceException {
         HashMap<String,Object> attrs = new HashMap<String,Object>();
-        attrs.put(Provisioning.A_zimbraMailStatus, zimbraMailStatus.toString());
+        attrs.put(Provisioning.A_zmailMailStatus, zmailMailStatus.toString());
         getProvisioning().modifyAttrs(this, attrs);
     }
 
@@ -1562,14 +1562,14 @@ public abstract class ZAttrDynamicGroup extends Group {
      *
      * <p>Valid values: [enabled, disabled]
      *
-     * @param zimbraMailStatus new value
+     * @param zmailMailStatus new value
      * @param attrs existing map to populate, or null to create a new map
      * @return populated map to pass into Provisioning.modifyAttrs
      */
     @ZAttr(id=15)
-    public Map<String,Object> setMailStatus(ZAttrProvisioning.MailStatus zimbraMailStatus, Map<String,Object> attrs) {
+    public Map<String,Object> setMailStatus(ZAttrProvisioning.MailStatus zmailMailStatus, Map<String,Object> attrs) {
         if (attrs == null) attrs = new HashMap<String,Object>();
-        attrs.put(Provisioning.A_zimbraMailStatus, zimbraMailStatus.toString());
+        attrs.put(Provisioning.A_zmailMailStatus, zmailMailStatus.toString());
         return attrs;
     }
 
@@ -1578,13 +1578,13 @@ public abstract class ZAttrDynamicGroup extends Group {
      *
      * <p>Valid values: [enabled, disabled]
      *
-     * @param zimbraMailStatus new value
-     * @throws com.zimbra.common.service.ServiceException if error during update
+     * @param zmailMailStatus new value
+     * @throws org.zmail.common.service.ServiceException if error during update
      */
     @ZAttr(id=15)
-    public void setMailStatusAsString(String zimbraMailStatus) throws com.zimbra.common.service.ServiceException {
+    public void setMailStatusAsString(String zmailMailStatus) throws org.zmail.common.service.ServiceException {
         HashMap<String,Object> attrs = new HashMap<String,Object>();
-        attrs.put(Provisioning.A_zimbraMailStatus, zimbraMailStatus);
+        attrs.put(Provisioning.A_zmailMailStatus, zmailMailStatus);
         getProvisioning().modifyAttrs(this, attrs);
     }
 
@@ -1593,14 +1593,14 @@ public abstract class ZAttrDynamicGroup extends Group {
      *
      * <p>Valid values: [enabled, disabled]
      *
-     * @param zimbraMailStatus new value
+     * @param zmailMailStatus new value
      * @param attrs existing map to populate, or null to create a new map
      * @return populated map to pass into Provisioning.modifyAttrs
      */
     @ZAttr(id=15)
-    public Map<String,Object> setMailStatusAsString(String zimbraMailStatus, Map<String,Object> attrs) {
+    public Map<String,Object> setMailStatusAsString(String zmailMailStatus, Map<String,Object> attrs) {
         if (attrs == null) attrs = new HashMap<String,Object>();
-        attrs.put(Provisioning.A_zimbraMailStatus, zimbraMailStatus);
+        attrs.put(Provisioning.A_zmailMailStatus, zmailMailStatus);
         return attrs;
     }
 
@@ -1609,12 +1609,12 @@ public abstract class ZAttrDynamicGroup extends Group {
      *
      * <p>Valid values: [enabled, disabled]
      *
-     * @throws com.zimbra.common.service.ServiceException if error during update
+     * @throws org.zmail.common.service.ServiceException if error during update
      */
     @ZAttr(id=15)
-    public void unsetMailStatus() throws com.zimbra.common.service.ServiceException {
+    public void unsetMailStatus() throws org.zmail.common.service.ServiceException {
         HashMap<String,Object> attrs = new HashMap<String,Object>();
-        attrs.put(Provisioning.A_zimbraMailStatus, "");
+        attrs.put(Provisioning.A_zmailMailStatus, "");
         getProvisioning().modifyAttrs(this, attrs);
     }
 
@@ -1629,56 +1629,56 @@ public abstract class ZAttrDynamicGroup extends Group {
     @ZAttr(id=15)
     public Map<String,Object> unsetMailStatus(Map<String,Object> attrs) {
         if (attrs == null) attrs = new HashMap<String,Object>();
-        attrs.put(Provisioning.A_zimbraMailStatus, "");
+        attrs.put(Provisioning.A_zmailMailStatus, "");
         return attrs;
     }
 
     /**
      * administrative notes
      *
-     * @return zimbraNotes, or null if unset
+     * @return zmailNotes, or null if unset
      */
     @ZAttr(id=9)
     public String getNotes() {
-        return getAttr(Provisioning.A_zimbraNotes, null);
+        return getAttr(Provisioning.A_zmailNotes, null);
     }
 
     /**
      * administrative notes
      *
-     * @param zimbraNotes new value
-     * @throws com.zimbra.common.service.ServiceException if error during update
+     * @param zmailNotes new value
+     * @throws org.zmail.common.service.ServiceException if error during update
      */
     @ZAttr(id=9)
-    public void setNotes(String zimbraNotes) throws com.zimbra.common.service.ServiceException {
+    public void setNotes(String zmailNotes) throws org.zmail.common.service.ServiceException {
         HashMap<String,Object> attrs = new HashMap<String,Object>();
-        attrs.put(Provisioning.A_zimbraNotes, zimbraNotes);
+        attrs.put(Provisioning.A_zmailNotes, zmailNotes);
         getProvisioning().modifyAttrs(this, attrs);
     }
 
     /**
      * administrative notes
      *
-     * @param zimbraNotes new value
+     * @param zmailNotes new value
      * @param attrs existing map to populate, or null to create a new map
      * @return populated map to pass into Provisioning.modifyAttrs
      */
     @ZAttr(id=9)
-    public Map<String,Object> setNotes(String zimbraNotes, Map<String,Object> attrs) {
+    public Map<String,Object> setNotes(String zmailNotes, Map<String,Object> attrs) {
         if (attrs == null) attrs = new HashMap<String,Object>();
-        attrs.put(Provisioning.A_zimbraNotes, zimbraNotes);
+        attrs.put(Provisioning.A_zmailNotes, zmailNotes);
         return attrs;
     }
 
     /**
      * administrative notes
      *
-     * @throws com.zimbra.common.service.ServiceException if error during update
+     * @throws org.zmail.common.service.ServiceException if error during update
      */
     @ZAttr(id=9)
-    public void unsetNotes() throws com.zimbra.common.service.ServiceException {
+    public void unsetNotes() throws org.zmail.common.service.ServiceException {
         HashMap<String,Object> attrs = new HashMap<String,Object>();
-        attrs.put(Provisioning.A_zimbraNotes, "");
+        attrs.put(Provisioning.A_zmailNotes, "");
         getProvisioning().modifyAttrs(this, attrs);
     }
 
@@ -1691,7 +1691,7 @@ public abstract class ZAttrDynamicGroup extends Group {
     @ZAttr(id=9)
     public Map<String,Object> unsetNotes(Map<String,Object> attrs) {
         if (attrs == null) attrs = new HashMap<String,Object>();
-        attrs.put(Provisioning.A_zimbraNotes, "");
+        attrs.put(Provisioning.A_zmailNotes, "");
         return attrs;
     }
 
@@ -1699,28 +1699,28 @@ public abstract class ZAttrDynamicGroup extends Group {
      * Addresses of the account that can be used by allowed delegated senders
      * as From and Sender address.
      *
-     * @return zimbraPrefAllowAddressForDelegatedSender, or empty array if unset
+     * @return zmailPrefAllowAddressForDelegatedSender, or empty array if unset
      *
      * @since ZCS 8.0.0
      */
     @ZAttr(id=1333)
     public String[] getPrefAllowAddressForDelegatedSender() {
-        return getMultiAttr(Provisioning.A_zimbraPrefAllowAddressForDelegatedSender);
+        return getMultiAttr(Provisioning.A_zmailPrefAllowAddressForDelegatedSender);
     }
 
     /**
      * Addresses of the account that can be used by allowed delegated senders
      * as From and Sender address.
      *
-     * @param zimbraPrefAllowAddressForDelegatedSender new value
-     * @throws com.zimbra.common.service.ServiceException if error during update
+     * @param zmailPrefAllowAddressForDelegatedSender new value
+     * @throws org.zmail.common.service.ServiceException if error during update
      *
      * @since ZCS 8.0.0
      */
     @ZAttr(id=1333)
-    public void setPrefAllowAddressForDelegatedSender(String[] zimbraPrefAllowAddressForDelegatedSender) throws com.zimbra.common.service.ServiceException {
+    public void setPrefAllowAddressForDelegatedSender(String[] zmailPrefAllowAddressForDelegatedSender) throws org.zmail.common.service.ServiceException {
         HashMap<String,Object> attrs = new HashMap<String,Object>();
-        attrs.put(Provisioning.A_zimbraPrefAllowAddressForDelegatedSender, zimbraPrefAllowAddressForDelegatedSender);
+        attrs.put(Provisioning.A_zmailPrefAllowAddressForDelegatedSender, zmailPrefAllowAddressForDelegatedSender);
         getProvisioning().modifyAttrs(this, attrs);
     }
 
@@ -1728,16 +1728,16 @@ public abstract class ZAttrDynamicGroup extends Group {
      * Addresses of the account that can be used by allowed delegated senders
      * as From and Sender address.
      *
-     * @param zimbraPrefAllowAddressForDelegatedSender new value
+     * @param zmailPrefAllowAddressForDelegatedSender new value
      * @param attrs existing map to populate, or null to create a new map
      * @return populated map to pass into Provisioning.modifyAttrs
      *
      * @since ZCS 8.0.0
      */
     @ZAttr(id=1333)
-    public Map<String,Object> setPrefAllowAddressForDelegatedSender(String[] zimbraPrefAllowAddressForDelegatedSender, Map<String,Object> attrs) {
+    public Map<String,Object> setPrefAllowAddressForDelegatedSender(String[] zmailPrefAllowAddressForDelegatedSender, Map<String,Object> attrs) {
         if (attrs == null) attrs = new HashMap<String,Object>();
-        attrs.put(Provisioning.A_zimbraPrefAllowAddressForDelegatedSender, zimbraPrefAllowAddressForDelegatedSender);
+        attrs.put(Provisioning.A_zmailPrefAllowAddressForDelegatedSender, zmailPrefAllowAddressForDelegatedSender);
         return attrs;
     }
 
@@ -1745,15 +1745,15 @@ public abstract class ZAttrDynamicGroup extends Group {
      * Addresses of the account that can be used by allowed delegated senders
      * as From and Sender address.
      *
-     * @param zimbraPrefAllowAddressForDelegatedSender new to add to existing values
-     * @throws com.zimbra.common.service.ServiceException if error during update
+     * @param zmailPrefAllowAddressForDelegatedSender new to add to existing values
+     * @throws org.zmail.common.service.ServiceException if error during update
      *
      * @since ZCS 8.0.0
      */
     @ZAttr(id=1333)
-    public void addPrefAllowAddressForDelegatedSender(String zimbraPrefAllowAddressForDelegatedSender) throws com.zimbra.common.service.ServiceException {
+    public void addPrefAllowAddressForDelegatedSender(String zmailPrefAllowAddressForDelegatedSender) throws org.zmail.common.service.ServiceException {
         HashMap<String,Object> attrs = new HashMap<String,Object>();
-        StringUtil.addToMultiMap(attrs, "+" + Provisioning.A_zimbraPrefAllowAddressForDelegatedSender, zimbraPrefAllowAddressForDelegatedSender);
+        StringUtil.addToMultiMap(attrs, "+" + Provisioning.A_zmailPrefAllowAddressForDelegatedSender, zmailPrefAllowAddressForDelegatedSender);
         getProvisioning().modifyAttrs(this, attrs);
     }
 
@@ -1761,16 +1761,16 @@ public abstract class ZAttrDynamicGroup extends Group {
      * Addresses of the account that can be used by allowed delegated senders
      * as From and Sender address.
      *
-     * @param zimbraPrefAllowAddressForDelegatedSender new to add to existing values
+     * @param zmailPrefAllowAddressForDelegatedSender new to add to existing values
      * @param attrs existing map to populate, or null to create a new map
      * @return populated map to pass into Provisioning.modifyAttrs
      *
      * @since ZCS 8.0.0
      */
     @ZAttr(id=1333)
-    public Map<String,Object> addPrefAllowAddressForDelegatedSender(String zimbraPrefAllowAddressForDelegatedSender, Map<String,Object> attrs) {
+    public Map<String,Object> addPrefAllowAddressForDelegatedSender(String zmailPrefAllowAddressForDelegatedSender, Map<String,Object> attrs) {
         if (attrs == null) attrs = new HashMap<String,Object>();
-        StringUtil.addToMultiMap(attrs, "+" + Provisioning.A_zimbraPrefAllowAddressForDelegatedSender, zimbraPrefAllowAddressForDelegatedSender);
+        StringUtil.addToMultiMap(attrs, "+" + Provisioning.A_zmailPrefAllowAddressForDelegatedSender, zmailPrefAllowAddressForDelegatedSender);
         return attrs;
     }
 
@@ -1778,15 +1778,15 @@ public abstract class ZAttrDynamicGroup extends Group {
      * Addresses of the account that can be used by allowed delegated senders
      * as From and Sender address.
      *
-     * @param zimbraPrefAllowAddressForDelegatedSender existing value to remove
-     * @throws com.zimbra.common.service.ServiceException if error during update
+     * @param zmailPrefAllowAddressForDelegatedSender existing value to remove
+     * @throws org.zmail.common.service.ServiceException if error during update
      *
      * @since ZCS 8.0.0
      */
     @ZAttr(id=1333)
-    public void removePrefAllowAddressForDelegatedSender(String zimbraPrefAllowAddressForDelegatedSender) throws com.zimbra.common.service.ServiceException {
+    public void removePrefAllowAddressForDelegatedSender(String zmailPrefAllowAddressForDelegatedSender) throws org.zmail.common.service.ServiceException {
         HashMap<String,Object> attrs = new HashMap<String,Object>();
-        StringUtil.addToMultiMap(attrs, "-" + Provisioning.A_zimbraPrefAllowAddressForDelegatedSender, zimbraPrefAllowAddressForDelegatedSender);
+        StringUtil.addToMultiMap(attrs, "-" + Provisioning.A_zmailPrefAllowAddressForDelegatedSender, zmailPrefAllowAddressForDelegatedSender);
         getProvisioning().modifyAttrs(this, attrs);
     }
 
@@ -1794,16 +1794,16 @@ public abstract class ZAttrDynamicGroup extends Group {
      * Addresses of the account that can be used by allowed delegated senders
      * as From and Sender address.
      *
-     * @param zimbraPrefAllowAddressForDelegatedSender existing value to remove
+     * @param zmailPrefAllowAddressForDelegatedSender existing value to remove
      * @param attrs existing map to populate, or null to create a new map
      * @return populated map to pass into Provisioning.modifyAttrs
      *
      * @since ZCS 8.0.0
      */
     @ZAttr(id=1333)
-    public Map<String,Object> removePrefAllowAddressForDelegatedSender(String zimbraPrefAllowAddressForDelegatedSender, Map<String,Object> attrs) {
+    public Map<String,Object> removePrefAllowAddressForDelegatedSender(String zmailPrefAllowAddressForDelegatedSender, Map<String,Object> attrs) {
         if (attrs == null) attrs = new HashMap<String,Object>();
-        StringUtil.addToMultiMap(attrs, "-" + Provisioning.A_zimbraPrefAllowAddressForDelegatedSender, zimbraPrefAllowAddressForDelegatedSender);
+        StringUtil.addToMultiMap(attrs, "-" + Provisioning.A_zmailPrefAllowAddressForDelegatedSender, zmailPrefAllowAddressForDelegatedSender);
         return attrs;
     }
 
@@ -1811,14 +1811,14 @@ public abstract class ZAttrDynamicGroup extends Group {
      * Addresses of the account that can be used by allowed delegated senders
      * as From and Sender address.
      *
-     * @throws com.zimbra.common.service.ServiceException if error during update
+     * @throws org.zmail.common.service.ServiceException if error during update
      *
      * @since ZCS 8.0.0
      */
     @ZAttr(id=1333)
-    public void unsetPrefAllowAddressForDelegatedSender() throws com.zimbra.common.service.ServiceException {
+    public void unsetPrefAllowAddressForDelegatedSender() throws org.zmail.common.service.ServiceException {
         HashMap<String,Object> attrs = new HashMap<String,Object>();
-        attrs.put(Provisioning.A_zimbraPrefAllowAddressForDelegatedSender, "");
+        attrs.put(Provisioning.A_zmailPrefAllowAddressForDelegatedSender, "");
         getProvisioning().modifyAttrs(this, attrs);
     }
 
@@ -1834,56 +1834,56 @@ public abstract class ZAttrDynamicGroup extends Group {
     @ZAttr(id=1333)
     public Map<String,Object> unsetPrefAllowAddressForDelegatedSender(Map<String,Object> attrs) {
         if (attrs == null) attrs = new HashMap<String,Object>();
-        attrs.put(Provisioning.A_zimbraPrefAllowAddressForDelegatedSender, "");
+        attrs.put(Provisioning.A_zmailPrefAllowAddressForDelegatedSender, "");
         return attrs;
     }
 
     /**
      * address to put in reply-to header
      *
-     * @return zimbraPrefReplyToAddress, or null if unset
+     * @return zmailPrefReplyToAddress, or null if unset
      */
     @ZAttr(id=60)
     public String getPrefReplyToAddress() {
-        return getAttr(Provisioning.A_zimbraPrefReplyToAddress, null);
+        return getAttr(Provisioning.A_zmailPrefReplyToAddress, null);
     }
 
     /**
      * address to put in reply-to header
      *
-     * @param zimbraPrefReplyToAddress new value
-     * @throws com.zimbra.common.service.ServiceException if error during update
+     * @param zmailPrefReplyToAddress new value
+     * @throws org.zmail.common.service.ServiceException if error during update
      */
     @ZAttr(id=60)
-    public void setPrefReplyToAddress(String zimbraPrefReplyToAddress) throws com.zimbra.common.service.ServiceException {
+    public void setPrefReplyToAddress(String zmailPrefReplyToAddress) throws org.zmail.common.service.ServiceException {
         HashMap<String,Object> attrs = new HashMap<String,Object>();
-        attrs.put(Provisioning.A_zimbraPrefReplyToAddress, zimbraPrefReplyToAddress);
+        attrs.put(Provisioning.A_zmailPrefReplyToAddress, zmailPrefReplyToAddress);
         getProvisioning().modifyAttrs(this, attrs);
     }
 
     /**
      * address to put in reply-to header
      *
-     * @param zimbraPrefReplyToAddress new value
+     * @param zmailPrefReplyToAddress new value
      * @param attrs existing map to populate, or null to create a new map
      * @return populated map to pass into Provisioning.modifyAttrs
      */
     @ZAttr(id=60)
-    public Map<String,Object> setPrefReplyToAddress(String zimbraPrefReplyToAddress, Map<String,Object> attrs) {
+    public Map<String,Object> setPrefReplyToAddress(String zmailPrefReplyToAddress, Map<String,Object> attrs) {
         if (attrs == null) attrs = new HashMap<String,Object>();
-        attrs.put(Provisioning.A_zimbraPrefReplyToAddress, zimbraPrefReplyToAddress);
+        attrs.put(Provisioning.A_zmailPrefReplyToAddress, zmailPrefReplyToAddress);
         return attrs;
     }
 
     /**
      * address to put in reply-to header
      *
-     * @throws com.zimbra.common.service.ServiceException if error during update
+     * @throws org.zmail.common.service.ServiceException if error during update
      */
     @ZAttr(id=60)
-    public void unsetPrefReplyToAddress() throws com.zimbra.common.service.ServiceException {
+    public void unsetPrefReplyToAddress() throws org.zmail.common.service.ServiceException {
         HashMap<String,Object> attrs = new HashMap<String,Object>();
-        attrs.put(Provisioning.A_zimbraPrefReplyToAddress, "");
+        attrs.put(Provisioning.A_zmailPrefReplyToAddress, "");
         getProvisioning().modifyAttrs(this, attrs);
     }
 
@@ -1896,56 +1896,56 @@ public abstract class ZAttrDynamicGroup extends Group {
     @ZAttr(id=60)
     public Map<String,Object> unsetPrefReplyToAddress(Map<String,Object> attrs) {
         if (attrs == null) attrs = new HashMap<String,Object>();
-        attrs.put(Provisioning.A_zimbraPrefReplyToAddress, "");
+        attrs.put(Provisioning.A_zmailPrefReplyToAddress, "");
         return attrs;
     }
 
     /**
      * personal part of email address put in reply-to header
      *
-     * @return zimbraPrefReplyToDisplay, or null if unset
+     * @return zmailPrefReplyToDisplay, or null if unset
      */
     @ZAttr(id=404)
     public String getPrefReplyToDisplay() {
-        return getAttr(Provisioning.A_zimbraPrefReplyToDisplay, null);
+        return getAttr(Provisioning.A_zmailPrefReplyToDisplay, null);
     }
 
     /**
      * personal part of email address put in reply-to header
      *
-     * @param zimbraPrefReplyToDisplay new value
-     * @throws com.zimbra.common.service.ServiceException if error during update
+     * @param zmailPrefReplyToDisplay new value
+     * @throws org.zmail.common.service.ServiceException if error during update
      */
     @ZAttr(id=404)
-    public void setPrefReplyToDisplay(String zimbraPrefReplyToDisplay) throws com.zimbra.common.service.ServiceException {
+    public void setPrefReplyToDisplay(String zmailPrefReplyToDisplay) throws org.zmail.common.service.ServiceException {
         HashMap<String,Object> attrs = new HashMap<String,Object>();
-        attrs.put(Provisioning.A_zimbraPrefReplyToDisplay, zimbraPrefReplyToDisplay);
+        attrs.put(Provisioning.A_zmailPrefReplyToDisplay, zmailPrefReplyToDisplay);
         getProvisioning().modifyAttrs(this, attrs);
     }
 
     /**
      * personal part of email address put in reply-to header
      *
-     * @param zimbraPrefReplyToDisplay new value
+     * @param zmailPrefReplyToDisplay new value
      * @param attrs existing map to populate, or null to create a new map
      * @return populated map to pass into Provisioning.modifyAttrs
      */
     @ZAttr(id=404)
-    public Map<String,Object> setPrefReplyToDisplay(String zimbraPrefReplyToDisplay, Map<String,Object> attrs) {
+    public Map<String,Object> setPrefReplyToDisplay(String zmailPrefReplyToDisplay, Map<String,Object> attrs) {
         if (attrs == null) attrs = new HashMap<String,Object>();
-        attrs.put(Provisioning.A_zimbraPrefReplyToDisplay, zimbraPrefReplyToDisplay);
+        attrs.put(Provisioning.A_zmailPrefReplyToDisplay, zmailPrefReplyToDisplay);
         return attrs;
     }
 
     /**
      * personal part of email address put in reply-to header
      *
-     * @throws com.zimbra.common.service.ServiceException if error during update
+     * @throws org.zmail.common.service.ServiceException if error during update
      */
     @ZAttr(id=404)
-    public void unsetPrefReplyToDisplay() throws com.zimbra.common.service.ServiceException {
+    public void unsetPrefReplyToDisplay() throws org.zmail.common.service.ServiceException {
         HashMap<String,Object> attrs = new HashMap<String,Object>();
-        attrs.put(Provisioning.A_zimbraPrefReplyToDisplay, "");
+        attrs.put(Provisioning.A_zmailPrefReplyToDisplay, "");
         getProvisioning().modifyAttrs(this, attrs);
     }
 
@@ -1958,56 +1958,56 @@ public abstract class ZAttrDynamicGroup extends Group {
     @ZAttr(id=404)
     public Map<String,Object> unsetPrefReplyToDisplay(Map<String,Object> attrs) {
         if (attrs == null) attrs = new HashMap<String,Object>();
-        attrs.put(Provisioning.A_zimbraPrefReplyToDisplay, "");
+        attrs.put(Provisioning.A_zmailPrefReplyToDisplay, "");
         return attrs;
     }
 
     /**
      * TRUE if we should set a reply-to header
      *
-     * @return zimbraPrefReplyToEnabled, or false if unset
+     * @return zmailPrefReplyToEnabled, or false if unset
      */
     @ZAttr(id=405)
     public boolean isPrefReplyToEnabled() {
-        return getBooleanAttr(Provisioning.A_zimbraPrefReplyToEnabled, false);
+        return getBooleanAttr(Provisioning.A_zmailPrefReplyToEnabled, false);
     }
 
     /**
      * TRUE if we should set a reply-to header
      *
-     * @param zimbraPrefReplyToEnabled new value
-     * @throws com.zimbra.common.service.ServiceException if error during update
+     * @param zmailPrefReplyToEnabled new value
+     * @throws org.zmail.common.service.ServiceException if error during update
      */
     @ZAttr(id=405)
-    public void setPrefReplyToEnabled(boolean zimbraPrefReplyToEnabled) throws com.zimbra.common.service.ServiceException {
+    public void setPrefReplyToEnabled(boolean zmailPrefReplyToEnabled) throws org.zmail.common.service.ServiceException {
         HashMap<String,Object> attrs = new HashMap<String,Object>();
-        attrs.put(Provisioning.A_zimbraPrefReplyToEnabled, zimbraPrefReplyToEnabled ? Provisioning.TRUE : Provisioning.FALSE);
+        attrs.put(Provisioning.A_zmailPrefReplyToEnabled, zmailPrefReplyToEnabled ? Provisioning.TRUE : Provisioning.FALSE);
         getProvisioning().modifyAttrs(this, attrs);
     }
 
     /**
      * TRUE if we should set a reply-to header
      *
-     * @param zimbraPrefReplyToEnabled new value
+     * @param zmailPrefReplyToEnabled new value
      * @param attrs existing map to populate, or null to create a new map
      * @return populated map to pass into Provisioning.modifyAttrs
      */
     @ZAttr(id=405)
-    public Map<String,Object> setPrefReplyToEnabled(boolean zimbraPrefReplyToEnabled, Map<String,Object> attrs) {
+    public Map<String,Object> setPrefReplyToEnabled(boolean zmailPrefReplyToEnabled, Map<String,Object> attrs) {
         if (attrs == null) attrs = new HashMap<String,Object>();
-        attrs.put(Provisioning.A_zimbraPrefReplyToEnabled, zimbraPrefReplyToEnabled ? Provisioning.TRUE : Provisioning.FALSE);
+        attrs.put(Provisioning.A_zmailPrefReplyToEnabled, zmailPrefReplyToEnabled ? Provisioning.TRUE : Provisioning.FALSE);
         return attrs;
     }
 
     /**
      * TRUE if we should set a reply-to header
      *
-     * @throws com.zimbra.common.service.ServiceException if error during update
+     * @throws org.zmail.common.service.ServiceException if error during update
      */
     @ZAttr(id=405)
-    public void unsetPrefReplyToEnabled() throws com.zimbra.common.service.ServiceException {
+    public void unsetPrefReplyToEnabled() throws org.zmail.common.service.ServiceException {
         HashMap<String,Object> attrs = new HashMap<String,Object>();
-        attrs.put(Provisioning.A_zimbraPrefReplyToEnabled, "");
+        attrs.put(Provisioning.A_zmailPrefReplyToEnabled, "");
         getProvisioning().modifyAttrs(this, attrs);
     }
 
@@ -2020,7 +2020,7 @@ public abstract class ZAttrDynamicGroup extends Group {
     @ZAttr(id=405)
     public Map<String,Object> unsetPrefReplyToEnabled(Map<String,Object> attrs) {
         if (attrs == null) attrs = new HashMap<String,Object>();
-        attrs.put(Provisioning.A_zimbraPrefReplyToEnabled, "");
+        attrs.put(Provisioning.A_zmailPrefReplyToEnabled, "");
         return attrs;
     }
 

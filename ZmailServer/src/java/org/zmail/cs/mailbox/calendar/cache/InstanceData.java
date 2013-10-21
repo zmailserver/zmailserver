@@ -13,10 +13,10 @@
  * ***** END LICENSE BLOCK *****
  */
 
-package com.zimbra.cs.mailbox.calendar.cache;
+package org.zmail.cs.mailbox.calendar.cache;
 
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.cs.mailbox.Metadata;
+import org.zmail.common.service.ServiceException;
+import org.zmail.cs.mailbox.Metadata;
 
 // instance that is expanded from recurrence but not overridden by an exception
 // null value returned by a getter means to inherit from default instance of appointment/task

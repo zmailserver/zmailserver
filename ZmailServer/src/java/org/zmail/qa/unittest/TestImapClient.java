@@ -13,7 +13,7 @@
  * ***** END LICENSE BLOCK *****
  */
 
-package com.zimbra.qa.unittest;
+package org.zmail.qa.unittest;
 
 import static org.junit.Assert.assertArrayEquals;
 import static org.junit.Assert.assertEquals;
@@ -48,32 +48,32 @@ import org.junit.Test;
 import org.junit.runner.JUnitCore;
 import org.junit.runner.Request;
 
-import com.zimbra.common.util.Log;
-import com.zimbra.common.zmime.ZMimeMessage;
-import com.zimbra.cs.datasource.imap.ImapAppender;
-import com.zimbra.cs.mailclient.CommandFailedException;
-import com.zimbra.cs.mailclient.MailConfig;
-import com.zimbra.cs.mailclient.MailException;
-import com.zimbra.cs.mailclient.imap.AppendResult;
-import com.zimbra.cs.mailclient.imap.Body;
-import com.zimbra.cs.mailclient.imap.BodyStructure;
-import com.zimbra.cs.mailclient.imap.CAtom;
-import com.zimbra.cs.mailclient.imap.Envelope;
-import com.zimbra.cs.mailclient.imap.Flags;
-import com.zimbra.cs.mailclient.imap.IDInfo;
-import com.zimbra.cs.mailclient.imap.ImapCapabilities;
-import com.zimbra.cs.mailclient.imap.ImapConfig;
-import com.zimbra.cs.mailclient.imap.ImapConnection;
-import com.zimbra.cs.mailclient.imap.ImapResponse;
-import com.zimbra.cs.mailclient.imap.ImapUtil;
-import com.zimbra.cs.mailclient.imap.ListData;
-import com.zimbra.cs.mailclient.imap.Literal;
-import com.zimbra.cs.mailclient.imap.MailboxInfo;
-import com.zimbra.cs.mailclient.imap.MessageData;
-import com.zimbra.cs.mailclient.imap.ResponseHandler;
-import com.zimbra.cs.mailclient.util.Ascii;
-import com.zimbra.cs.mailclient.util.SSLUtil;
-import com.zimbra.cs.util.JMSession;
+import org.zmail.common.util.Log;
+import org.zmail.common.zmime.ZMimeMessage;
+import org.zmail.cs.datasource.imap.ImapAppender;
+import org.zmail.cs.mailclient.CommandFailedException;
+import org.zmail.cs.mailclient.MailConfig;
+import org.zmail.cs.mailclient.MailException;
+import org.zmail.cs.mailclient.imap.AppendResult;
+import org.zmail.cs.mailclient.imap.Body;
+import org.zmail.cs.mailclient.imap.BodyStructure;
+import org.zmail.cs.mailclient.imap.CAtom;
+import org.zmail.cs.mailclient.imap.Envelope;
+import org.zmail.cs.mailclient.imap.Flags;
+import org.zmail.cs.mailclient.imap.IDInfo;
+import org.zmail.cs.mailclient.imap.ImapCapabilities;
+import org.zmail.cs.mailclient.imap.ImapConfig;
+import org.zmail.cs.mailclient.imap.ImapConnection;
+import org.zmail.cs.mailclient.imap.ImapResponse;
+import org.zmail.cs.mailclient.imap.ImapUtil;
+import org.zmail.cs.mailclient.imap.ListData;
+import org.zmail.cs.mailclient.imap.Literal;
+import org.zmail.cs.mailclient.imap.MailboxInfo;
+import org.zmail.cs.mailclient.imap.MessageData;
+import org.zmail.cs.mailclient.imap.ResponseHandler;
+import org.zmail.cs.mailclient.util.Ascii;
+import org.zmail.cs.mailclient.util.SSLUtil;
+import org.zmail.cs.util.JMSession;
 
 public class TestImapClient {
     private ImapConfig config;
@@ -88,9 +88,9 @@ public class TestImapClient {
     private static final String PASS = "test123";
 
     private static final String MESSAGE =
-        "Return-Path: dac@zimbra.com\r\n" +
+        "Return-Path: dac@zmail.com\r\n" +
         "Date: Fri, 27 Feb 2004 15:24:43 -0800 (PST)\r\n" +
-        "From: dac <dac@zimbra.com>\r\n" +
+        "From: dac <dac@zmail.com>\r\n" +
         "To: bozo <bozo@foo.com>\r\n" +
         "\r\n" +
         "This is a test message.\r\n";
@@ -322,7 +322,7 @@ public class TestImapClient {
         connect();
         IDInfo id1 = connection.id(id);
         assertNotNull(id1);
-        assertEquals("Zimbra", id1.get(IDInfo.NAME));
+        assertEquals("Zmail", id1.get(IDInfo.NAME));
         IDInfo id2 = connection.id(new IDInfo());
         assertEquals(id1, id2);
     }

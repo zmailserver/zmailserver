@@ -13,13 +13,13 @@
  * ***** END LICENSE BLOCK *****
  */
 
-package com.zimbra.cs.server;
+package org.zmail.cs.server;
 
 import org.junit.Assert;
 import org.junit.Test;
 
 import com.google.common.collect.Sets;
-import com.zimbra.cs.server.ServerThrottle;
+import org.zmail.cs.server.ServerThrottle;
 
 public class ServerThrottleTest {
 
@@ -133,6 +133,6 @@ public class ServerThrottleTest {
 
     @Test
     public void testUnknownHost() {
-        ServerThrottle.configureThrottle("IMAP", 1, 1, Sets.newHashSet("nosuchhost", "www.zimbra.com"));
+        ServerThrottle.configureThrottle("IMAP", 1, 1, Sets.newHashSet("nosuchhost", "www.zmail.com"));
     }
 }

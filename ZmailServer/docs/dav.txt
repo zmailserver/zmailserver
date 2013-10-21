@@ -1,4 +1,4 @@
-There are two primary applications using DAV with Zimbra server.
+There are two primary applications using DAV with Zmail server.
 
 - WebDAV to access mail attachments and Notebook documents in the 
   users mailbox.
@@ -16,7 +16,7 @@ Start -> My Network Places -> Add a network place
 
 Then Choose another network location.  Type in the main DAV URL.  
 The system will then prompt authentication dialog.  Type in 
-Zimbra username and password.
+Zmail username and password.
 
 On Mac OS X, Finder has built in support for WebDAV.  
 Menu -> Go -> Connect to server.  Then type in the main DAV URL, 
@@ -31,7 +31,7 @@ the sender.
 
 The second use case is with CalDAV compliant calendar client.  There
 are several CalDAV clients available.  Currently  the most popular 
-and feature rich client is Leopard iCal.  Zimbra CalDAV has been
+and feature rich client is Leopard iCal.  Zmail CalDAV has been
 tested against the release build of Leopard.  Some of the other
 calendar clients that support iCal are Mozilla Lightning, Mozilla
 Sunbird, Gnome Evolution, and OSAF Chandler.
@@ -56,7 +56,7 @@ to use ics import mode, first the user needs to export the
 calendar folder as ics, save to a file, then import the file into 
 the target calendar application.  Using ics import mode, the 
 changes made to the 3rd party calendar is saved as a local copy, 
-and does not automatically synchronize with Zimbra server.  When
+and does not automatically synchronize with Zmail server.  When
 using CalDAV client, the changes are immediately saved to the server,
 unless the client is run in the offline mode.  There is no manual
 file based synchronization needed as with ics import mode.

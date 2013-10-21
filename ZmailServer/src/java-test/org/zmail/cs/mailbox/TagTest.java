@@ -12,7 +12,7 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.mailbox;
+package org.zmail.cs.mailbox;
 
 import java.util.List;
 import java.util.Map;
@@ -27,18 +27,18 @@ import org.junit.Test;
 
 import com.google.common.collect.Maps;
 import com.google.common.collect.Sets;
-import com.zimbra.common.account.Key;
-import com.zimbra.common.mailbox.Color;
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.cs.account.Account;
-import com.zimbra.cs.account.MockProvisioning;
-import com.zimbra.cs.account.Provisioning;
-import com.zimbra.cs.db.DbTag;
-import com.zimbra.cs.mailbox.MailServiceException.NoSuchItemException;
-import com.zimbra.cs.mailbox.MailboxTest.MockListener;
-import com.zimbra.cs.mailbox.util.TagUtil;
-import com.zimbra.cs.mime.ParsedMessage;
-import com.zimbra.cs.session.PendingModifications.Change;
+import org.zmail.common.account.Key;
+import org.zmail.common.mailbox.Color;
+import org.zmail.common.service.ServiceException;
+import org.zmail.cs.account.Account;
+import org.zmail.cs.account.MockProvisioning;
+import org.zmail.cs.account.Provisioning;
+import org.zmail.cs.db.DbTag;
+import org.zmail.cs.mailbox.MailServiceException.NoSuchItemException;
+import org.zmail.cs.mailbox.MailboxTest.MockListener;
+import org.zmail.cs.mailbox.util.TagUtil;
+import org.zmail.cs.mime.ParsedMessage;
+import org.zmail.cs.session.PendingModifications.Change;
 
 public class TagTest {
 
@@ -47,11 +47,11 @@ public class TagTest {
         MailboxTestUtil.initServer();
 
         Provisioning prov = Provisioning.getInstance();
-        prov.createAccount("test@zimbra.com", "secret", Maps.<String, Object>newHashMap());
+        prov.createAccount("test@zmail.com", "secret", Maps.<String, Object>newHashMap());
 
         Map<String, Object> attrs = Maps.newHashMap();
-        attrs.put(Provisioning.A_zimbraId, UUID.randomUUID().toString());
-        prov.createAccount("test2@zimbra.com", "secret", attrs);
+        attrs.put(Provisioning.A_zmailId, UUID.randomUUID().toString());
+        prov.createAccount("test2@zmail.com", "secret", attrs);
     }
 
     @Before
@@ -447,7 +447,7 @@ public class TagTest {
 
     @Test
     public void permissions() throws Exception {
-        Account acct2 = Provisioning.getInstance().get(Key.AccountBy.name, "test2@zimbra.com");
+        Account acct2 = Provisioning.getInstance().get(Key.AccountBy.name, "test2@zmail.com");
         OperationContext octxt2 = new OperationContext(acct2);
 
         Mailbox mbox = MailboxManager.getInstance().getMailboxByAccountId(MockProvisioning.DEFAULT_ACCOUNT_ID);

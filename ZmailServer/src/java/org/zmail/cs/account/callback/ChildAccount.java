@@ -13,19 +13,19 @@
  * ***** END LICENSE BLOCK *****
  */
 
-package com.zimbra.cs.account.callback;
+package org.zmail.cs.account.callback;
 
 import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.cs.account.Account;
-import com.zimbra.cs.account.AccountServiceException;
-import com.zimbra.cs.account.AttributeCallback;
-import com.zimbra.cs.account.Entry;
-import com.zimbra.cs.account.Provisioning;
-import com.zimbra.common.account.Key.AccountBy;
+import org.zmail.common.service.ServiceException;
+import org.zmail.cs.account.Account;
+import org.zmail.cs.account.AccountServiceException;
+import org.zmail.cs.account.AttributeCallback;
+import org.zmail.cs.account.Entry;
+import org.zmail.cs.account.Provisioning;
+import org.zmail.common.account.Key.AccountBy;
  
 public class ChildAccount extends AttributeCallback {
     
@@ -35,7 +35,7 @@ public class ChildAccount extends AttributeCallback {
     throws ServiceException {
 
         /*
-         * This callback is for both zimbraPrefChildVisibleAccount and zimbraChildAccount, and it handles
+         * This callback is for both zmailPrefChildVisibleAccount and zmailChildAccount, and it handles
          * both in one shot.  If we've been called just return.
          */ 
         if (context.isDoneAndSetIfNot(ChildAccount.class)) {
@@ -44,11 +44,11 @@ public class ChildAccount extends AttributeCallback {
         
         // the +/- has been striped off from attrName but we need that info, it is in attrsToModify
         
-        MultiValueMod visibleChildrenMod = multiValueMod(attrsToModify, Provisioning.A_zimbraPrefChildVisibleAccount);
-        MultiValueMod allChildrenMod = multiValueMod(attrsToModify, Provisioning.A_zimbraChildAccount);
+        MultiValueMod visibleChildrenMod = multiValueMod(attrsToModify, Provisioning.A_zmailPrefChildVisibleAccount);
+        MultiValueMod allChildrenMod = multiValueMod(attrsToModify, Provisioning.A_zmailChildAccount);
 
-        Set<String> visibleChildren = newValuesToBe(visibleChildrenMod, entry, Provisioning.A_zimbraPrefChildVisibleAccount);
-        Set<String> allChildren = newValuesToBe(allChildrenMod, entry, Provisioning.A_zimbraChildAccount);
+        Set<String> visibleChildren = newValuesToBe(visibleChildrenMod, entry, Provisioning.A_zmailPrefChildVisibleAccount);
+        Set<String> allChildren = newValuesToBe(allChildrenMod, entry, Provisioning.A_zmailChildAccount);
 
         //if child account has already been deleted, let it go
         if (allChildren != null && !allChildren.contains(value)) {
@@ -56,7 +56,7 @@ public class ChildAccount extends AttributeCallback {
         }
 
         if (allChildrenMod != null && allChildrenMod.deleting()) {
-            attrsToModify.put(Provisioning.A_zimbraPrefChildVisibleAccount, "");
+            attrsToModify.put(Provisioning.A_zmailPrefChildVisibleAccount, "");
         } else {
             Set<String> vidsToRemove = new HashSet<String>();
             for (String vid : visibleChildren) {
@@ -70,12 +70,12 @@ public class ChildAccount extends AttributeCallback {
                     if (allChildrenMod!=null && allChildrenMod.removing() && visibleChildrenMod==null)
                         vidsToRemove.add(vid);
                     else
-                        throw ServiceException.INVALID_REQUEST("visible child id " + vid + " is not one of " + Provisioning.A_zimbraChildAccount, null);
+                        throw ServiceException.INVALID_REQUEST("visible child id " + vid + " is not one of " + Provisioning.A_zmailChildAccount, null);
                 }
             }
 
             if (vidsToRemove.size() > 0)
-                attrsToModify.put("-" + Provisioning.A_zimbraPrefChildVisibleAccount, vidsToRemove.toArray(new String[vidsToRemove.size()]));
+                attrsToModify.put("-" + Provisioning.A_zmailPrefChildVisibleAccount, vidsToRemove.toArray(new String[vidsToRemove.size()]));
         }
 
         // check circular relationship

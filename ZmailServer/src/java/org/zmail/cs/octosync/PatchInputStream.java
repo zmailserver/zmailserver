@@ -13,7 +13,7 @@
  * ***** END LICENSE BLOCK *****
  */
 
-package com.zimbra.cs.octosync;
+package org.zmail.cs.octosync;
 
 import java.io.ByteArrayInputStream;
 import java.io.DataInputStream;
@@ -27,11 +27,11 @@ import java.util.Arrays;
 import org.apache.commons.codec.binary.Hex;
 import org.apache.commons.io.input.TeeInputStream;
 
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.common.util.Log;
-import com.zimbra.common.util.LogFactory;
-import com.zimbra.cs.mailbox.Mailbox;
-import com.zimbra.cs.mailbox.OperationContext;
+import org.zmail.common.service.ServiceException;
+import org.zmail.common.util.Log;
+import org.zmail.common.util.LogFactory;
+import org.zmail.cs.mailbox.Mailbox;
+import org.zmail.cs.mailbox.OperationContext;
 
 
 /**

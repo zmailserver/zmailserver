@@ -12,7 +12,7 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.qa.unittest.prov.ldap;
+package org.zmail.qa.unittest.prov.ldap;
 
 import java.io.File;
 import java.io.IOException;
@@ -33,15 +33,15 @@ import org.newsclub.net.unix.AFUNIXSocketException;
 import com.unboundid.ldap.sdk.LDAPConnectionPool;
 import com.unboundid.ldap.sdk.LDAPConnectionPoolStatistics;
 
-import com.zimbra.common.localconfig.LC;
-import com.zimbra.common.util.CliUtil;
-import com.zimbra.cs.ldap.LdapClient;
-import com.zimbra.cs.ldap.LdapUsage;
-import com.zimbra.cs.ldap.ZAttributes;
-import com.zimbra.cs.ldap.LdapTODO.*;
-import com.zimbra.cs.ldap.unboundid.LdapConnectionPool;
-import com.zimbra.cs.ldap.unboundid.UBIDLdapContext;
-import com.zimbra.qa.unittest.prov.LocalconfigTestUtil;
+import org.zmail.common.localconfig.LC;
+import org.zmail.common.util.CliUtil;
+import org.zmail.cs.ldap.LdapClient;
+import org.zmail.cs.ldap.LdapUsage;
+import org.zmail.cs.ldap.ZAttributes;
+import org.zmail.cs.ldap.LdapTODO.*;
+import org.zmail.cs.ldap.unboundid.LdapConnectionPool;
+import org.zmail.cs.ldap.unboundid.UBIDLdapContext;
+import org.zmail.qa.unittest.prov.LocalconfigTestUtil;
 
 
 // Note: do not extend LdapTest, because LdapClient will be initialized in LdapTest.init(),
@@ -64,22 +64,22 @@ public class TestLdapConnectivity {
     
     /*
      * To run this test:
-       1. To enable TLS, modifying /opt/zimbra/conf/slapd.conf to uncomment the three lines:
-          TLSCertificateFile /opt/zimbra/conf/slapd.crt
-          TLSCertificateKeyFile /opt/zimbra/conf/slapd.key
+       1. To enable TLS, modifying /opt/zmail/conf/slapd.conf to uncomment the three lines:
+          TLSCertificateFile /opt/zmail/conf/slapd.crt
+          TLSCertificateKeyFile /opt/zmail/conf/slapd.key
           TLSVerifyClient never   
           
        2. To listen to ldaps
-          edit /opt/zimbra/bin/ldap
+          edit /opt/zmail/bin/ldap
           modify the line:
     
-          sudo /opt/zimbra/libexec/zmslapd -l LOCAL0 -4 -u `whoami` -h "ldap://:389/" \
-                        -f /opt/zimbra/conf/slapd.conf
+          sudo /opt/zmail/libexec/zmslapd -l LOCAL0 -4 -u `whoami` -h "ldap://:389/" \
+                        -f /opt/zmail/conf/slapd.conf
     
           to:
     
-          sudo /opt/zimbra/libexec/zmslapd -l LOCAL0 -4 -u `whoami` -h "ldap://:389/ ldaps://:636/" \
-                        -f /opt/zimbra/conf/slapd.conf       
+          sudo /opt/zmail/libexec/zmslapd -l LOCAL0 -4 -u `whoami` -h "ldap://:389/ ldaps://:636/" \
+                        -f /opt/zmail/conf/slapd.conf       
           
         StartTLS and ldaps cannot co-exist in production, because if ldap url contains ldaps,
         then startTLS will never be used regardless of the LC keys.
@@ -88,12 +88,12 @@ public class TestLdapConnectivity {
         LdapClient.initialize()/LdapClient.shutdown() is called before/after each test.
                                     
      * 
-     * Note: ssl_allow_mismatched_certs behavior is different in ZimbraLdapContext(JNDI) 
+     * Note: ssl_allow_mismatched_certs behavior is different in ZmailLdapContext(JNDI) 
      *       and unboundid.
      *       
      *       (ssl_allow_mismatched_certs only applies to STRATTLS, *not* ldaps.)
      *       
-     *       Legacy ZimbraLdapContext allows it only when ssl_allow_mismatched_certs 
+     *       Legacy ZmailLdapContext allows it only when ssl_allow_mismatched_certs 
      *       is true.  If ssl_allow_mismatched_certs is false, JNDI throws:
      *       Caused by: java.security.cert.CertificateException: No name matching localhost found
      *   at sun.security.util.HostnameChecker.matchDNS(HostnameChecker.java:210)
@@ -146,7 +146,7 @@ public class TestLdapConnectivity {
         // JNDI: OK
         
         STARTTLS_T_UNTRUSTED_F_MISMATCHED("ldap://localhost:389", "ldap://localhost:389", "1", "true", "false"),
-        // JNDI: ERROR: service.FAILURE (system failure: ZimbraLdapContext) (cause: javax.net.ssl.SSLPeerUnverifiedException hostname of the server 'localhost' does not match the hostname in the server's certificate.)
+        // JNDI: ERROR: service.FAILURE (system failure: ZmailLdapContext) (cause: javax.net.ssl.SSLPeerUnverifiedException hostname of the server 'localhost' does not match the hostname in the server's certificate.)
         /*
         Caused by: java.security.cert.CertificateException: No name matching localhost found
         at sun.security.util.HostnameChecker.matchDNS(HostnameChecker.java:210)
@@ -158,14 +158,14 @@ public class TestLdapConnectivity {
         // JNDI: OK
         
         STARTTLS_F_UNTRUSTED_F_MISMATCHED("ldap://localhost:389", "ldap://localhost:389", "1", "false", "false");
-        // JNDI: ERROR: service.FAILURE (system failure: ZimbraLdapContext) (cause: javax.net.ssl.SSLPeerUnverifiedException hostname of the server 'localhost' does not match the hostname in the server's certificate.)
+        // JNDI: ERROR: service.FAILURE (system failure: ZmailLdapContext) (cause: javax.net.ssl.SSLPeerUnverifiedException hostname of the server 'localhost' does not match the hostname in the server's certificate.)
         
         
         private String ldap_url;
         private String ldap_master_url;
         private String ldap_starttls_supported;
         // private String ldap_starttls_required;   default(true) is OK
-        // private String zimbra_require_interprocess_security;  default(1) is OK
+        // private String zmail_require_interprocess_security;  default(1) is OK
         private String ssl_allow_untrusted_certs;
         private String ssl_allow_mismatched_certs;
         
@@ -282,8 +282,8 @@ public class TestLdapConnectivity {
             UBIDLdapContext zlc1 = getContext();
             assertEquals(expectedPort, zlc1.getNative().getConnectedPort());
             
-            ZAttributes attrs = zlc1.getAttributes("cn=zimbra", null);
-            assertEquals("Zimbra Systems Application Data", attrs.getAttrString("description"));
+            ZAttributes attrs = zlc1.getAttributes("cn=zmail", null);
+            assertEquals("Zmail Systems Application Data", attrs.getAttrString("description"));
             
             UBIDLdapContext zlc2 = getContext();
             assertEquals(expectedPort, zlc2.getNative().getConnectedPort());
@@ -352,7 +352,7 @@ public class TestLdapConnectivity {
      */
     
     /**
-     * Needs -Djava.library.path=/opt/zimbra/lib (where the native lib is) when running in Eclipse.
+     * Needs -Djava.library.path=/opt/zmail/lib (where the native lib is) when running in Eclipse.
      * 
      * A simple junixsocket demo server
      * 
@@ -393,7 +393,7 @@ public class TestLdapConnectivity {
     }
     
     /**
-     * Needs -Djava.library.path=/opt/zimbra/lib (where the native lib is) when running in Eclipse.
+     * Needs -Djava.library.path=/opt/zmail/lib (where the native lib is) when running in Eclipse.
      * 
      * A simple junixsocket demo client.
      * 

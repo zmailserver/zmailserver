@@ -12,7 +12,7 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.dav.carddav;
+package org.zmail.cs.dav.carddav;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -25,24 +25,24 @@ import org.dom4j.Element;
 import org.dom4j.QName;
 
 import com.google.common.io.Closeables;
-import com.zimbra.common.mailbox.ContactConstants;
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.common.util.ZimbraLog;
-import com.zimbra.cs.dav.DavContext;
-import com.zimbra.cs.dav.DavElements;
-import com.zimbra.cs.dav.resource.AddressObject;
-import com.zimbra.cs.dav.resource.AddressbookCollection;
-import com.zimbra.cs.gal.GalSearchControl;
-import com.zimbra.cs.gal.GalSearchParams;
-import com.zimbra.cs.gal.GalSearchResultCallback;
-import com.zimbra.cs.index.ContactHit;
-import com.zimbra.cs.index.SortBy;
-import com.zimbra.cs.index.ZimbraHit;
-import com.zimbra.cs.index.ZimbraQueryResults;
-import com.zimbra.cs.mailbox.Contact;
-import com.zimbra.cs.mailbox.MailItem;
-import com.zimbra.cs.mailbox.Mailbox;
-import com.zimbra.soap.type.GalSearchType;
+import org.zmail.common.mailbox.ContactConstants;
+import org.zmail.common.service.ServiceException;
+import org.zmail.common.util.ZmailLog;
+import org.zmail.cs.dav.DavContext;
+import org.zmail.cs.dav.DavElements;
+import org.zmail.cs.dav.resource.AddressObject;
+import org.zmail.cs.dav.resource.AddressbookCollection;
+import org.zmail.cs.gal.GalSearchControl;
+import org.zmail.cs.gal.GalSearchParams;
+import org.zmail.cs.gal.GalSearchResultCallback;
+import org.zmail.cs.index.ContactHit;
+import org.zmail.cs.index.SortBy;
+import org.zmail.cs.index.ZmailHit;
+import org.zmail.cs.index.ZmailQueryResults;
+import org.zmail.cs.mailbox.Contact;
+import org.zmail.cs.mailbox.MailItem;
+import org.zmail.cs.mailbox.Mailbox;
+import org.zmail.soap.type.GalSearchType;
 
 /*
  * draft-daboo-carddav-02 section 10.7
@@ -188,7 +188,7 @@ public abstract class Filter {
                 else if (name.equals(DavElements.CardDav.E_IS_NOT_DEFINED))
                     mIsNotDefinedSet = true;
                 else
-                    ZimbraLog.dav.info("unrecognized filter "+name.getNamespaceURI()+":"+name.getName());
+                    ZmailLog.dav.info("unrecognized filter "+name.getNamespaceURI()+":"+name.getName());
             }
         }
     }
@@ -237,11 +237,11 @@ public abstract class Filter {
             }
 
             @Override
-            public com.zimbra.common.soap.Element handleContact(Contact c) {
+            public org.zmail.common.soap.Element handleContact(Contact c) {
                 try {
                     result.add(new AddressObject(ctxt, c));
                 } catch (ServiceException e) {
-                    ZimbraLog.dav.error("can't include gal search result", e);
+                    ZmailLog.dav.error("can't include gal search result", e);
                 }
                 return null;
             }
@@ -282,24 +282,24 @@ public abstract class Filter {
             }
             search.append(")");
             String filter = search.toString();
-            ZimbraLog.dav.debug("Search Filter: %s", filter);
-            ZimbraQueryResults zqr = null;
+            ZmailLog.dav.debug("Search Filter: %s", filter);
+            ZmailQueryResults zqr = null;
             try {
                 Mailbox mbox = ctxt.getTargetMailbox();
                 if (mbox == null) {
-                    ZimbraLog.dav.debug("Can't get target mailbox for %s", ctxt.getUser());
+                    ZmailLog.dav.debug("Can't get target mailbox for %s", ctxt.getUser());
                     return result;
                 }
                 zqr = mbox.index.search(ctxt.getOperationContext(), filter,
                         EnumSet.of(MailItem.Type.CONTACT), SortBy.NAME_ASC, 100);
                 while (zqr.hasNext()) {
-                    ZimbraHit hit = zqr.getNext();
+                    ZmailHit hit = zqr.getNext();
                     if (hit instanceof ContactHit) {
                         result.add(new AddressObject(ctxt, ((ContactHit) hit).getContact()));
                     }
                 }
             } catch (Exception e) {
-                ZimbraLog.dav.warn("can't get target mailbox", e);
+                ZmailLog.dav.warn("can't get target mailbox", e);
                 return result;
             } finally {
                 Closeables.closeQuietly(zqr);
@@ -312,7 +312,7 @@ public abstract class Filter {
                 query.append(mText);
                 if (mMatch == MatchType.contains || mMatch == MatchType.starts_with)
                     query.append("*");
-                ZimbraLog.dav.debug("Gal query: %s", query.toString());
+                ZmailLog.dav.debug("Gal query: %s", query.toString());
 
                 GalSearchParams params = new GalSearchParams(ctxt.getAuthAccount());
                 params.setType(GalSearchType.account);
@@ -323,9 +323,9 @@ public abstract class Filter {
                     gal.search();
                 } catch (ServiceException e) {
                     if (ServiceException.PERM_DENIED.equals(e.getCode()))
-                        ZimbraLog.dav.debug("Can't get gal search result for %s (%s)", ctxt.getUser(), e.getMessage());
+                        ZmailLog.dav.debug("Can't get gal search result for %s (%s)", ctxt.getUser(), e.getMessage());
                     else
-                        ZimbraLog.dav.error("Can't get gal search result for %s", ctxt.getUser());
+                        ZmailLog.dav.error("Can't get gal search result for %s", ctxt.getUser());
                 }
             }
             return result;

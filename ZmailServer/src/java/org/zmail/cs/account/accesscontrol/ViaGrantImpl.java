@@ -12,9 +12,9 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.account.accesscontrol;
+package org.zmail.cs.account.accesscontrol;
 
-import com.zimbra.cs.account.AccessManager.ViaGrant;
+import org.zmail.cs.account.AccessManager.ViaGrant;
 
 public class ViaGrantImpl extends ViaGrant {
     String mTargetType;

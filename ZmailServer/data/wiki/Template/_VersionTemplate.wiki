@@ -1,4 +1,4 @@
-<div id='ZimbraWikiPage'>
+<div id='ZmailWikiPage'>
 	<table class="zmwiki-chromeTable" cellpadding="0" cellspacing="0"><tbody>
 	<tr><td class="zmwiki-headerContainer" colspan=2>
 		<wiklet class='INLINE' page="_Header" inherit="true" />

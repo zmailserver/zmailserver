@@ -12,14 +12,14 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.ldap.unboundid;
+package org.zmail.cs.ldap.unboundid;
 
 import javax.net.SocketFactory;
 
 import com.unboundid.ldap.sdk.LDAPConnectionOptions;
-import com.zimbra.cs.ldap.LdapServerConfig;
-import com.zimbra.cs.ldap.LdapConnType;
-import com.zimbra.cs.ldap.LdapException;
+import org.zmail.cs.ldap.LdapServerConfig;
+import org.zmail.cs.ldap.LdapConnType;
+import org.zmail.cs.ldap.LdapException;
 
 public class LdapConnUtil {
 

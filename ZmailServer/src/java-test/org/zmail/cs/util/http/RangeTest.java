@@ -12,7 +12,7 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.util.http;
+package org.zmail.cs.util.http;
 
 import static org.junit.Assert.*;
 
@@ -23,7 +23,7 @@ import org.eclipse.jetty.http.HttpException;
 import org.junit.Assert;
 import org.junit.Test;
 
-import com.zimbra.common.util.Pair;
+import org.zmail.common.util.Pair;
 
 public class RangeTest
 {

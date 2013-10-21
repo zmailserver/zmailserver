@@ -12,7 +12,7 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.service.mail;
+package org.zmail.cs.service.mail;
 
 import java.util.Locale;
 import java.util.Map;
@@ -22,48 +22,48 @@ import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeBodyPart;
 import javax.mail.internet.MimeMessage;
 
-import com.zimbra.common.util.ZimbraLog;
+import org.zmail.common.util.ZmailLog;
 
-import com.zimbra.common.auth.ZAuthToken;
-import com.zimbra.common.calendar.ICalTimeZone;
-import com.zimbra.common.calendar.ParsedDateTime;
-import com.zimbra.common.calendar.TimeZoneMap;
-import com.zimbra.common.calendar.ZCalendar.ZVCalendar;
-import com.zimbra.common.mime.shim.JavaMailInternetAddress;
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.common.soap.MailConstants;
-import com.zimbra.common.soap.Element;
-import com.zimbra.common.soap.SoapProtocol;
-import com.zimbra.cs.account.Account;
-import com.zimbra.cs.account.AuthToken;
-import com.zimbra.cs.account.CalendarResource;
-import com.zimbra.cs.account.Provisioning;
-import com.zimbra.common.account.Key;
-import com.zimbra.common.account.Key.AccountBy;
-import com.zimbra.cs.mailbox.ACL;
-import com.zimbra.cs.mailbox.CalendarItem;
-import com.zimbra.cs.mailbox.MailItem;
-import com.zimbra.cs.mailbox.MailSender;
-import com.zimbra.cs.mailbox.MailServiceException;
-import com.zimbra.cs.mailbox.Mailbox;
-import com.zimbra.cs.mailbox.Message;
-import com.zimbra.cs.mailbox.OperationContext;
-import com.zimbra.cs.mailbox.Mailbox.AddInviteData;
-import com.zimbra.cs.mailbox.calendar.CalendarMailSender;
-import com.zimbra.cs.mailbox.calendar.IcalXmlStrMap;
-import com.zimbra.cs.mailbox.calendar.Invite;
-import com.zimbra.cs.mailbox.calendar.RecurId;
-import com.zimbra.cs.mailbox.calendar.ZAttendee;
-import com.zimbra.cs.mailbox.calendar.CalendarMailSender.Verb;
-import com.zimbra.cs.mime.ParsedMessage;
-import com.zimbra.cs.service.AuthProvider;
-import com.zimbra.cs.service.util.ItemId;
-import com.zimbra.cs.service.util.ItemIdFormatter;
-import com.zimbra.cs.util.AccountUtil;
-import com.zimbra.client.ZMailbox;
-import com.zimbra.common.util.L10nUtil;
-import com.zimbra.common.util.L10nUtil.MsgKey;
-import com.zimbra.soap.ZimbraSoapContext;
+import org.zmail.common.auth.ZAuthToken;
+import org.zmail.common.calendar.ICalTimeZone;
+import org.zmail.common.calendar.ParsedDateTime;
+import org.zmail.common.calendar.TimeZoneMap;
+import org.zmail.common.calendar.ZCalendar.ZVCalendar;
+import org.zmail.common.mime.shim.JavaMailInternetAddress;
+import org.zmail.common.service.ServiceException;
+import org.zmail.common.soap.MailConstants;
+import org.zmail.common.soap.Element;
+import org.zmail.common.soap.SoapProtocol;
+import org.zmail.cs.account.Account;
+import org.zmail.cs.account.AuthToken;
+import org.zmail.cs.account.CalendarResource;
+import org.zmail.cs.account.Provisioning;
+import org.zmail.common.account.Key;
+import org.zmail.common.account.Key.AccountBy;
+import org.zmail.cs.mailbox.ACL;
+import org.zmail.cs.mailbox.CalendarItem;
+import org.zmail.cs.mailbox.MailItem;
+import org.zmail.cs.mailbox.MailSender;
+import org.zmail.cs.mailbox.MailServiceException;
+import org.zmail.cs.mailbox.Mailbox;
+import org.zmail.cs.mailbox.Message;
+import org.zmail.cs.mailbox.OperationContext;
+import org.zmail.cs.mailbox.Mailbox.AddInviteData;
+import org.zmail.cs.mailbox.calendar.CalendarMailSender;
+import org.zmail.cs.mailbox.calendar.IcalXmlStrMap;
+import org.zmail.cs.mailbox.calendar.Invite;
+import org.zmail.cs.mailbox.calendar.RecurId;
+import org.zmail.cs.mailbox.calendar.ZAttendee;
+import org.zmail.cs.mailbox.calendar.CalendarMailSender.Verb;
+import org.zmail.cs.mime.ParsedMessage;
+import org.zmail.cs.service.AuthProvider;
+import org.zmail.cs.service.util.ItemId;
+import org.zmail.cs.service.util.ItemIdFormatter;
+import org.zmail.cs.util.AccountUtil;
+import org.zmail.client.ZMailbox;
+import org.zmail.common.util.L10nUtil;
+import org.zmail.common.util.L10nUtil.MsgKey;
+import org.zmail.soap.ZmailSoapContext;
 
 /**
  * @since Mar 2, 2005
@@ -81,7 +81,7 @@ public class SendInviteReply extends CalendarRequest {
 
     @Override
     public Element handle(Element request, Map<String, Object> context) throws ServiceException {
-        ZimbraSoapContext zsc = getZimbraSoapContext(context);
+        ZmailSoapContext zsc = getZmailSoapContext(context);
         Mailbox mbox = getRequestedMailbox(zsc);
         Account acct = getRequestedAccount(zsc);
         Account authAcct = getAuthenticatedAccount(zsc);
@@ -158,7 +158,7 @@ public class SendInviteReply extends CalendarRequest {
 
             if (intendedAcct != null) {
                 // trace logging: let's just indicate we're replying to a remote appointment
-                ZimbraLog.calendar.info("<SendInviteReply> (remote mbox) id=%s, verb=%s, notifyOrg=%s",
+                ZmailLog.calendar.info("<SendInviteReply> (remote mbox) id=%s, verb=%s, notifyOrg=%s",
                         new ItemIdFormatter(zsc).formatItemId(iid),
                         verb.toString(), Boolean.toString(updateOrg));
 
@@ -270,11 +270,11 @@ public class SendInviteReply extends CalendarRequest {
             String calItemIdStr = calItem != null ? Integer.toString(calItem.getId()) : "none";
             String folderIdStr = calItem != null ? Integer.toString(calItem.getFolderId()) : "none";
             if (exceptDt == null)
-                ZimbraLog.calendar.info("<SendInviteReply> id=%s, folderId=%s, verb=%s, notifyOrg=%s, subject=\"%s\", UID=%s",
+                ZmailLog.calendar.info("<SendInviteReply> id=%s, folderId=%s, verb=%s, notifyOrg=%s, subject=\"%s\", UID=%s",
                         calItemIdStr, folderIdStr, verb.toString(), Boolean.toString(updateOrg),
                         oldInv.isPublic() ? oldInv.getName() : "(private)", oldInv.getUid());
             else
-                ZimbraLog.calendar.info("<SendInviteReply> id=%s, folderId=%s, verb=%s, notifyOrg=%s, subject=\"%s\", UID=%s, recurId=%s",
+                ZmailLog.calendar.info("<SendInviteReply> id=%s, folderId=%s, verb=%s, notifyOrg=%s, subject=\"%s\", UID=%s, recurId=%s",
                         calItemIdStr, folderIdStr, verb.toString(), Boolean.toString(updateOrg),
                         oldInv.isPublic() ? oldInv.getName() : "(private)", oldInv.getUid(), exceptDt.getUtcString());
 
@@ -420,7 +420,7 @@ public class SendInviteReply extends CalendarRequest {
                 }
                 mbox.move(octxt, inviteMsgId, MailItem.Type.MESSAGE, Mailbox.ID_FOLDER_TRASH);
             } catch (MailServiceException.NoSuchItemException nsie) {
-                ZimbraLog.calendar.debug("can't move nonexistent invite to Trash: " + inviteMsgId);
+                ZmailLog.calendar.debug("can't move nonexistent invite to Trash: " + inviteMsgId);
             }
         }
 

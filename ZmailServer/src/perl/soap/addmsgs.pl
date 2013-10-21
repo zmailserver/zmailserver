@@ -28,8 +28,8 @@ use XmlElement;
 use XmlDoc;
 use Soap;
 
-my $ACCTNS = "urn:zimbraAccount";
-my $MAILNS = "urn:zimbraMail";
+my $ACCTNS = "urn:zmailAccount";
+my $MAILNS = "urn:zmailMail";
 
 #my $url = "http://localhost:7070/service/soap/";
 my $url = "http://token:7070/service/soap/";
@@ -37,7 +37,7 @@ my $url = "http://token:7070/service/soap/";
 my $SOAP = $Soap::Soap12;
 my $d = new XmlDoc;
 $d->start('AuthRequest', $ACCTNS);
-$d->add('account', undef, { by => "name"}, 'user1@example.zimbra.com');
+$d->add('account', undef, { by => "name"}, 'user1@example.zmail.com');
 $d->add('password', undef, undef, "mypassWord");
 $d->end();
 
@@ -51,7 +51,7 @@ my $authToken = $authResponse->find_child('authToken')->content;
 
 print "authToken($authToken)\n";
 
-my $context = $SOAP->zimbraContext($authToken);
+my $context = $SOAP->zmailContext($authToken);
 
 #
 # <AddMsgRequest>

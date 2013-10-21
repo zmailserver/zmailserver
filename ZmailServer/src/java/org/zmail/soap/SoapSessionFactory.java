@@ -12,14 +12,14 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.soap;
+package org.zmail.soap;
 
-import com.zimbra.common.localconfig.LC;
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.common.util.ZimbraLog;
-import com.zimbra.cs.extension.ExtensionUtil;
-import com.zimbra.cs.session.RemoteSoapSession;
-import com.zimbra.cs.session.SoapSession;
+import org.zmail.common.localconfig.LC;
+import org.zmail.common.service.ServiceException;
+import org.zmail.common.util.ZmailLog;
+import org.zmail.cs.extension.ExtensionUtil;
+import org.zmail.cs.session.RemoteSoapSession;
+import org.zmail.cs.session.SoapSession;
 
 public class SoapSessionFactory {
 
@@ -27,7 +27,7 @@ public class SoapSessionFactory {
 
     public synchronized static SoapSessionFactory getInstance() {
         if (sSessionFactory == null) {
-            String className = LC.zimbra_class_soapsessionfactory.value();
+            String className = LC.zmail_class_soapsessionfactory.value();
             if (className != null && !className.equals("")) {
                 try {
                     try {
@@ -37,7 +37,7 @@ public class SoapSessionFactory {
                         sSessionFactory = (SoapSessionFactory) ExtensionUtil.findClass(className).newInstance();
                     }
                 } catch (Exception e) {
-                    ZimbraLog.account.error("could not instantiate SoapSessionFactory class '" + className + "'; defaulting to SoapSessionFactory", e);
+                    ZmailLog.account.error("could not instantiate SoapSessionFactory class '" + className + "'; defaulting to SoapSessionFactory", e);
                 }
             }
             if (sSessionFactory == null) {
@@ -47,7 +47,7 @@ public class SoapSessionFactory {
         return sSessionFactory;
     }
 
-    public SoapSession getSoapSession(ZimbraSoapContext zsc) throws ServiceException {
+    public SoapSession getSoapSession(ZmailSoapContext zsc) throws ServiceException {
         if (zsc.isAuthUserOnLocalhost()) {
             return new SoapSession(zsc);
         } else {

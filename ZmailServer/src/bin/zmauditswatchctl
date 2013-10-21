@@ -14,32 +14,32 @@
 # ***** END LICENSE BLOCK *****
 # 
 
-if [ x`whoami` != xzimbra ]; then
-    echo Error: must be run as zimbra user
+if [ x`whoami` != xzmail ]; then
+    echo Error: must be run as zmail user
   exit 1
 fi
 
 source `dirname $0`/zmshutil || exit 1
 zmsetvars \
-    zimbra_home \
-    zimbra_log_directory \
-    zimbra_tmp_directory \
-    zimbra_swatch_acct_threshold \
-    zimbra_swatch_ip_threshold \
-    zimbra_swatch_ipacct_threshold \
-    zimbra_swatch_total_threshold \
-    zimbra_swatch_threshold_seconds \
-    zimbra_swatch_notice_user 
+    zmail_home \
+    zmail_log_directory \
+    zmail_tmp_directory \
+    zmail_swatch_acct_threshold \
+    zmail_swatch_ip_threshold \
+    zmail_swatch_ipacct_threshold \
+    zmail_swatch_total_threshold \
+    zmail_swatch_threshold_seconds \
+    zmail_swatch_notice_user 
 
-configfile=${zimbra_home}/conf/auditswatchrc
-pidfile=${zimbra_log_directory}/auditswatch.pid
-logfile=${zimbra_log_directory}/zmauditswatch.out
+configfile=${zmail_home}/conf/auditswatchrc
+pidfile=${zmail_log_directory}/auditswatch.pid
+logfile=${zmail_log_directory}/zmauditswatch.out
 pid=""
-zimbra_swatch_acct_threshold=${zimbra_swatch_acct_threshold:=10}
-zimbra_swatch_ip_threshold=${zimbra_swatch_ip_threshold:=20}
-zimbra_swatch_ipacct_threshold=${zimbra_swatch_ipacct_threshold:=10}
-zimbra_swatch_total_threshold=${zimbra_swatch_total_threshold:=100}
-zimbra_swatch_threshold_seconds=${zimbra_swatch_threshold_seconds:=60}
+zmail_swatch_acct_threshold=${zmail_swatch_acct_threshold:=10}
+zmail_swatch_ip_threshold=${zmail_swatch_ip_threshold:=20}
+zmail_swatch_ipacct_threshold=${zmail_swatch_ipacct_threshold:=10}
+zmail_swatch_total_threshold=${zmail_swatch_total_threshold:=100}
+zmail_swatch_threshold_seconds=${zmail_swatch_threshold_seconds:=60}
 
 
 getpid()
@@ -78,43 +78,43 @@ case "$1" in
       exit 0
     fi
 
-    if [ x"${zimbra_swatch_notice_user}" = "x" ]; then
+    if [ x"${zmail_swatch_notice_user}" = "x" ]; then
       echo "Must have a notification email address defined."
-      echo "Set localconfig -e zimbra_swatch_notice_user=admin@example.com"
+      echo "Set localconfig -e zmail_swatch_notice_user=admin@example.com"
       exit 1
     else 
-      zimbra_swatch_notice_user=$(echo ${zimbra_swatch_notice_user} | sed -e 's/\@/\\\\@/')
+      zmail_swatch_notice_user=$(echo ${zmail_swatch_notice_user} | sed -e 's/\@/\\\\@/')
     fi
 
     if [ -f ${configfile}.custom ]; then
-      sed -e s/@@zimbra_swatch_acct_threshold@@/${zimbra_swatch_acct_threshold}/ \
-        -e s/@@zimbra_swatch_ip_threshold@@/${zimbra_swatch_ip_threshold}/ \
-        -e s/@@zimbra_swatch_ipacct_threshold@@/${zimbra_swatch_ipacct_threshold}/ \
-        -e s/@@zimbra_swatch_total_threshold@@/${zimbra_swatch_total_threshold}/ \
-        -e s/@@zimbra_swatch_threshold_seconds@@/${zimbra_swatch_threshold_seconds}/ \
-        -e s/@@zimbra_swatch_notice_user@@/${zimbra_swatch_notice_user}/ \
+      sed -e s/@@zmail_swatch_acct_threshold@@/${zmail_swatch_acct_threshold}/ \
+        -e s/@@zmail_swatch_ip_threshold@@/${zmail_swatch_ip_threshold}/ \
+        -e s/@@zmail_swatch_ipacct_threshold@@/${zmail_swatch_ipacct_threshold}/ \
+        -e s/@@zmail_swatch_total_threshold@@/${zmail_swatch_total_threshold}/ \
+        -e s/@@zmail_swatch_threshold_seconds@@/${zmail_swatch_threshold_seconds}/ \
+        -e s/@@zmail_swatch_notice_user@@/${zmail_swatch_notice_user}/ \
         ${configfile}.in > ${configfile}
     elif [ -f ${configfile}.in ]; then
-      sed -e s/@@zimbra_swatch_acct_threshold@@/${zimbra_swatch_acct_threshold}/ \
-        -e s/@@zimbra_swatch_ip_threshold@@/${zimbra_swatch_ip_threshold}/ \
-        -e s/@@zimbra_swatch_ipacct_threshold@@/${zimbra_swatch_ipacct_threshold}/ \
-        -e s/@@zimbra_swatch_total_threshold@@/${zimbra_swatch_total_threshold}/ \
-        -e s/@@zimbra_swatch_threshold_seconds@@/${zimbra_swatch_threshold_seconds}/ \
-        -e s/@@zimbra_swatch_notice_user@@/${zimbra_swatch_notice_user}/ \
+      sed -e s/@@zmail_swatch_acct_threshold@@/${zmail_swatch_acct_threshold}/ \
+        -e s/@@zmail_swatch_ip_threshold@@/${zmail_swatch_ip_threshold}/ \
+        -e s/@@zmail_swatch_ipacct_threshold@@/${zmail_swatch_ipacct_threshold}/ \
+        -e s/@@zmail_swatch_total_threshold@@/${zmail_swatch_total_threshold}/ \
+        -e s/@@zmail_swatch_threshold_seconds@@/${zmail_swatch_threshold_seconds}/ \
+        -e s/@@zmail_swatch_notice_user@@/${zmail_swatch_notice_user}/ \
         ${configfile}.in > ${configfile}
     else
       echo "${configfile} template not found."
       exit 1
     fi
 
-    if [ ! -d ${zimbra_tmp_directory} ]; then
-      mkdir -p ${zimbra_tmp_directory} > /dev/null 2>&1
+    if [ ! -d ${zmail_tmp_directory} ]; then
+      mkdir -p ${zmail_tmp_directory} > /dev/null 2>&1
     fi
        
-    ${zimbra_home}/libexec/auditswatch --config-file=${configfile} \
+    ${zmail_home}/libexec/auditswatch --config-file=${configfile} \
       --use-cpan-file-tail \
-      --script-dir=${zimbra_tmp_directory} \
-      --tail-file /opt/zimbra/log/audit.log > $logfile 2>&1 &
+      --script-dir=${zmail_tmp_directory} \
+      --tail-file /opt/zmail/log/audit.log > $logfile 2>&1 &
     pid=$!
     if [ "x$pid" != 'x' ]; then
       if [ -f $logfile ]; then

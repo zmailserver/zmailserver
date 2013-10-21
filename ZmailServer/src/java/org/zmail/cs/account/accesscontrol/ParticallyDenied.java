@@ -14,30 +14,30 @@
  * 
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.account.accesscontrol;
+package org.zmail.cs.account.accesscontrol;
 
 import java.util.HashSet;
 import java.util.Set;
 
-import com.zimbra.common.account.Key;
-import com.zimbra.common.account.Key.DistributionListBy;
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.common.util.Log;
-import com.zimbra.common.util.SetUtil;
-import com.zimbra.common.util.ZimbraLog;
-import com.zimbra.cs.account.Account;
-import com.zimbra.cs.account.DistributionList;
-import com.zimbra.cs.account.Domain;
-import com.zimbra.cs.account.Entry;
-import com.zimbra.cs.account.GlobalGrant;
-import com.zimbra.cs.account.Provisioning;
-import com.zimbra.cs.account.Provisioning.GroupMembership;
-import com.zimbra.cs.account.accesscontrol.RightBearer.Grantee;
-import com.zimbra.cs.account.accesscontrol.SearchGrants.GrantsOnTarget;
+import org.zmail.common.account.Key;
+import org.zmail.common.account.Key.DistributionListBy;
+import org.zmail.common.service.ServiceException;
+import org.zmail.common.util.Log;
+import org.zmail.common.util.SetUtil;
+import org.zmail.common.util.ZmailLog;
+import org.zmail.cs.account.Account;
+import org.zmail.cs.account.DistributionList;
+import org.zmail.cs.account.Domain;
+import org.zmail.cs.account.Entry;
+import org.zmail.cs.account.GlobalGrant;
+import org.zmail.cs.account.Provisioning;
+import org.zmail.cs.account.Provisioning.GroupMembership;
+import org.zmail.cs.account.accesscontrol.RightBearer.Grantee;
+import org.zmail.cs.account.accesscontrol.SearchGrants.GrantsOnTarget;
 
 public class ParticallyDenied {
 
-    private static final Log sLog = ZimbraLog.acl;
+    private static final Log sLog = ZmailLog.acl;
     
     private static boolean isSubTarget(Provisioning prov, Entry targetSup, Entry targetSub) throws ServiceException {
        
@@ -116,10 +116,10 @@ public class ParticallyDenied {
             Entry grantedOnEntry = grantsOnTarget.getTargetEntry();
             
             if (isSubTarget(prov, targetToGrant, grantedOnEntry)) {
-                ZimbraACL grants = grantsOnTarget.getAcl();
+                ZmailACL grants = grantsOnTarget.getAcl();
                 
                 // check denied grants
-                for (ZimbraACE ace : grants.getDeniedACEs()) {
+                for (ZmailACE ace : grants.getDeniedACEs()) {
                     if ((granteeId != null && granteeId.equals(ace.getGrantee())) ||
                         (granteeGroups != null && granteeGroups.contains(ace.getGrantee()))) {   
 
@@ -191,7 +191,7 @@ public class ParticallyDenied {
         if (targetTypesToSearch.isEmpty())
             return;
         
-        // get the set of zimbraId of the grantees to search for
+        // get the set of zmailId of the grantees to search for
         Grantee grantee = new Grantee(grantor);
         Set<String> granteeIdsToSearch = grantee.getIdAndGroupIds();
         

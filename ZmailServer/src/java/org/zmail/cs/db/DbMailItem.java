@@ -13,7 +13,7 @@
  * ***** END LICENSE BLOCK *****
  */
 
-package com.zimbra.cs.db;
+package org.zmail.cs.db;
 
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
@@ -51,37 +51,37 @@ import com.google.common.collect.Multimaps;
 import com.google.common.collect.SetMultimap;
 import com.google.common.collect.Sets;
 import com.proviciel.db.JournalDbMailItem;
-import com.zimbra.common.localconfig.DebugConfig;
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.common.util.ListUtil;
-import com.zimbra.common.util.Pair;
-import com.zimbra.common.util.StringUtil;
-import com.zimbra.common.util.UUIDUtil;
-import com.zimbra.common.util.ZimbraLog;
-import com.zimbra.cs.db.DbPool.DbConnection;
-import com.zimbra.cs.imap.ImapMessage;
-import com.zimbra.cs.index.SortBy;
-import com.zimbra.cs.mailbox.CalendarItem;
-import com.zimbra.cs.mailbox.Conversation;
-import com.zimbra.cs.mailbox.Flag;
-import com.zimbra.cs.mailbox.Folder;
-import com.zimbra.cs.mailbox.MailItem;
-import com.zimbra.cs.mailbox.MailItem.PendingDelete;
-import com.zimbra.cs.mailbox.MailItem.UnderlyingData;
-import com.zimbra.cs.mailbox.MailServiceException;
-import com.zimbra.cs.mailbox.Mailbox;
-import com.zimbra.cs.mailbox.Message;
-import com.zimbra.cs.mailbox.Metadata;
-import com.zimbra.cs.mailbox.Note;
-import com.zimbra.cs.mailbox.Tag;
-import com.zimbra.cs.mailbox.VirtualConversation;
-import com.zimbra.cs.mailbox.util.TagUtil;
-import com.zimbra.cs.mailbox.util.TypedIdList;
-import com.zimbra.cs.pop3.Pop3Message;
-import com.zimbra.cs.session.PendingModifications.Change;
-import com.zimbra.cs.store.MailboxBlob;
-import com.zimbra.cs.store.StoreManager;
-import com.zimbra.cs.util.SpoolingCache;
+import org.zmail.common.localconfig.DebugConfig;
+import org.zmail.common.service.ServiceException;
+import org.zmail.common.util.ListUtil;
+import org.zmail.common.util.Pair;
+import org.zmail.common.util.StringUtil;
+import org.zmail.common.util.UUIDUtil;
+import org.zmail.common.util.ZmailLog;
+import org.zmail.cs.db.DbPool.DbConnection;
+import org.zmail.cs.imap.ImapMessage;
+import org.zmail.cs.index.SortBy;
+import org.zmail.cs.mailbox.CalendarItem;
+import org.zmail.cs.mailbox.Conversation;
+import org.zmail.cs.mailbox.Flag;
+import org.zmail.cs.mailbox.Folder;
+import org.zmail.cs.mailbox.MailItem;
+import org.zmail.cs.mailbox.MailItem.PendingDelete;
+import org.zmail.cs.mailbox.MailItem.UnderlyingData;
+import org.zmail.cs.mailbox.MailServiceException;
+import org.zmail.cs.mailbox.Mailbox;
+import org.zmail.cs.mailbox.Message;
+import org.zmail.cs.mailbox.Metadata;
+import org.zmail.cs.mailbox.Note;
+import org.zmail.cs.mailbox.Tag;
+import org.zmail.cs.mailbox.VirtualConversation;
+import org.zmail.cs.mailbox.util.TagUtil;
+import org.zmail.cs.mailbox.util.TypedIdList;
+import org.zmail.cs.pop3.Pop3Message;
+import org.zmail.cs.session.PendingModifications.Change;
+import org.zmail.cs.store.MailboxBlob;
+import org.zmail.cs.store.StoreManager;
+import org.zmail.cs.util.SpoolingCache;
 
 /**
  * DAO for MAIL_ITEM table.
@@ -1172,7 +1172,7 @@ public class DbMailItem {
     public static void closeOldConversations(Mailbox mbox, int beforeDate) throws ServiceException {
         DbConnection conn = mbox.getOperationConnection();
         PreparedStatement stmt = null;
-        ZimbraLog.purge.debug("Closing conversations dated before %d.", beforeDate);
+        ZmailLog.purge.debug("Closing conversations dated before %d.", beforeDate);
         try {
             String mailboxJoin = (DebugConfig.disableMailboxGroups ? "" : " AND mi.mailbox_id = open_conversation.mailbox_id");
             stmt = conn.prepareStatement("DELETE FROM " + getConversationTableName(mbox) +
@@ -1186,7 +1186,7 @@ public class DbMailItem {
             stmt.setInt(pos++, beforeDate);
             int numRows = stmt.executeUpdate();
             if (numRows > 0) {
-                ZimbraLog.purge.info("Closed %d conversations dated before %d.", numRows, beforeDate);
+                ZmailLog.purge.info("Closed %d conversations dated before %d.", numRows, beforeDate);
             }
         } catch (SQLException e) {
             throw ServiceException.FAILURE("closing open conversations dated before " + beforeDate, e);
@@ -1781,7 +1781,7 @@ public class DbMailItem {
                             tombstones.add(type, Integer.parseInt(stone.substring(0, delimiter)), Strings.emptyToNull(stone.substring(delimiter + 1)));
                         }
                     } catch (NumberFormatException nfe) {
-                        ZimbraLog.mailbox.warn("unparseable TOMBSTONE entry: %s", stone);
+                        ZmailLog.mailbox.warn("unparseable TOMBSTONE entry: %s", stone);
                     }
                 }
             }
@@ -1827,7 +1827,7 @@ public class DbMailItem {
                 stmt.setLong(pos++, cutoff);
                 int numRows = stmt.executeUpdate();
                 if (numRows > 0) {
-                    ZimbraLog.mailbox.info("Purged %d tombstones dated before %d.", numRows, beforeDate);
+                    ZmailLog.mailbox.info("Purged %d tombstones dated before %d.", numRows, beforeDate);
                 }
             }
 
@@ -1943,7 +1943,7 @@ public class DbMailItem {
                     stmt.executeUpdate();
 
                     data.parentId = data.folderId;
-                    ZimbraLog.mailbox.info("correcting PARENT_ID column for %s %d", MailItem.Type.of(data.type), data.id);
+                    ZmailLog.mailbox.info("correcting PARENT_ID column for %s %d", MailItem.Type.of(data.type), data.id);
                 }
             }
 
@@ -1999,7 +1999,7 @@ public class DbMailItem {
                         fcounts.deletedUnreadCount += unread;
                     }
                 } else {
-                    ZimbraLog.mailbox.warn("inconsistent DB state: items with no corresponding folder (folder id %d)", folderId);
+                    ZmailLog.mailbox.warn("inconsistent DB state: items with no corresponding folder (folder id %d)", folderId);
                 }
             }
 
@@ -2027,7 +2027,7 @@ public class DbMailItem {
                 if (data != null) {
                     folderData.get(data).totalSize += size;
                 } else {
-                    ZimbraLog.mailbox.warn("inconsistent DB state: revisions with no corresponding folder (folder ID " + folderId + ")");
+                    ZmailLog.mailbox.warn("inconsistent DB state: revisions with no corresponding folder (folder ID " + folderId + ")");
                 }
             }
 
@@ -2890,12 +2890,12 @@ public class DbMailItem {
                     try {
                         MailboxBlob mblob = sm.getMailboxBlob(mbox, id, revision, locator);
                         if (mblob == null) {
-                            ZimbraLog.mailbox.warn("missing blob for id: %d, change: %d", id, revision);
+                            ZmailLog.mailbox.warn("missing blob for id: %d, change: %d", id, revision);
                         } else {
                             info.blobs.add(mblob);
                         }
                     } catch (Exception e1) {
-                        ZimbraLog.mailbox.warn("Exception while getting mailbox blob", e1);
+                        ZmailLog.mailbox.warn("Exception while getting mailbox blob", e1);
                     }
                 }
 
@@ -2957,7 +2957,7 @@ public class DbMailItem {
                         try {
                             MailboxBlob mblob = sm.getMailboxBlob(mbox, rs.getInt(1), rs.getInt(4), rs.getString(5));
                             if (mblob == null) {
-                                ZimbraLog.mailbox.error("missing blob for id: %d, change: %s",
+                                ZmailLog.mailbox.error("missing blob for id: %d, change: %s",
                                         rs.getInt(1), rs.getInt(4));
                             } else {
                                 info.blobs.add(mblob);
@@ -3288,7 +3288,7 @@ public class DbMailItem {
                 stmt = conn.prepareStatement(query);
                 getAllBlobs(stmt, volumeId, lastSyncDate, currentSyncDate, blobs);
             }
-            ZimbraLog.mailbox.info("got blob list for group %d volume %d (%d blobs)", groupId, volumeId, blobs.size());
+            ZmailLog.mailbox.info("got blob list for group %d volume %d (%d blobs)", groupId, volumeId, blobs.size());
             return blobs;
         } catch (SQLException e) {
             throw ServiceException.FAILURE("fetching blob list for group " + groupId, e);
@@ -3337,7 +3337,7 @@ public class DbMailItem {
                     " WHERE " + IN_THIS_MAILBOX_AND + "blob_digest IS NOT NULL");
             getAllBlobs(stmt, mbox.getAccountId(), mbox.getId(), blobs);
 
-            ZimbraLog.mailbox.info("got blob list for mailbox %d (%d blobs)", mbox.getId(), blobs.size());
+            ZmailLog.mailbox.info("got blob list for mailbox %d (%d blobs)", mbox.getId(), blobs.size());
 
             return blobs;
         } catch (SQLException e) {

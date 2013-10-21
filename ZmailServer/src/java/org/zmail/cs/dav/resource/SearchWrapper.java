@@ -12,7 +12,7 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.dav.resource;
+package org.zmail.cs.dav.resource;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -20,22 +20,22 @@ import java.util.HashMap;
 import java.util.List;
 
 import com.google.common.io.Closeables;
-import com.zimbra.common.soap.SoapProtocol;
-import com.zimbra.common.util.ZimbraLog;
-import com.zimbra.cs.account.Account;
-import com.zimbra.cs.account.Provisioning;
-import com.zimbra.common.account.Key.AccountBy;
-import com.zimbra.cs.dav.DavContext;
-import com.zimbra.cs.index.MessageHit;
-import com.zimbra.cs.index.SearchParams;
-import com.zimbra.cs.index.SortBy;
-import com.zimbra.cs.index.ZimbraHit;
-import com.zimbra.cs.index.ZimbraQueryResults;
-import com.zimbra.cs.mailbox.Mailbox;
-import com.zimbra.cs.mailbox.MailboxManager;
-import com.zimbra.cs.mailbox.Message;
-import com.zimbra.cs.mime.MPartInfo;
-import com.zimbra.cs.mime.Mime;
+import org.zmail.common.soap.SoapProtocol;
+import org.zmail.common.util.ZmailLog;
+import org.zmail.cs.account.Account;
+import org.zmail.cs.account.Provisioning;
+import org.zmail.common.account.Key.AccountBy;
+import org.zmail.cs.dav.DavContext;
+import org.zmail.cs.index.MessageHit;
+import org.zmail.cs.index.SearchParams;
+import org.zmail.cs.index.SortBy;
+import org.zmail.cs.index.ZmailHit;
+import org.zmail.cs.index.ZmailQueryResults;
+import org.zmail.cs.mailbox.Mailbox;
+import org.zmail.cs.mailbox.MailboxManager;
+import org.zmail.cs.mailbox.Message;
+import org.zmail.cs.mime.MPartInfo;
+import org.zmail.cs.mime.Mime;
 
 /**
  * SearchWrapper is a phantom resource that resembles a Collection (folder)
@@ -117,7 +117,7 @@ public class SearchWrapper extends PhantomResource {
         ArrayList<DavResource> children = new ArrayList<DavResource>();
         String user = ctxt.getUser();
         Provisioning prov = Provisioning.getInstance();
-        ZimbraQueryResults zqr = null;
+        ZmailQueryResults zqr = null;
         try {
             Account account = prov.get(AccountBy.name, user);
             Mailbox mbox = MailboxManager.getInstance().getMailboxByAccount(account);
@@ -130,12 +130,12 @@ public class SearchWrapper extends PhantomResource {
             params.setChunkSize(SEARCH_LIMIT);
             zqr = mbox.index.search(SoapProtocol.Soap12, ctxt.getOperationContext(), params);
             while (zqr.hasNext()) {
-                ZimbraHit hit = zqr.getNext();
+                ZmailHit hit = zqr.getNext();
                 if (hit instanceof MessageHit)
                     addAttachmentResources((MessageHit) hit, children);
             }
         } catch (Exception e) {
-            ZimbraLog.dav.error("can't search: uri="+getUri(), e);
+            ZmailLog.dav.error("can't search: uri="+getUri(), e);
         } finally {
             Closeables.closeQuietly(zqr);
         }
@@ -155,7 +155,7 @@ public class SearchWrapper extends PhantomResource {
                     children.add(new Attachment(getUri()+name, getOwner(), msg.getDate(), p.getSize()));
             }
         } catch (Exception e) {
-            ZimbraLog.dav.error("can't get attachments from msg: itemid:"+hit.getItemId(), e);
+            ZmailLog.dav.error("can't get attachments from msg: itemid:"+hit.getItemId(), e);
         }
     }
 }

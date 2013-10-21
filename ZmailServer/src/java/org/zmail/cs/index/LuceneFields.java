@@ -13,9 +13,9 @@
  * ***** END LICENSE BLOCK *****
  */
 
-package com.zimbra.cs.index;
+package org.zmail.cs.index;
 
-import com.zimbra.cs.mailbox.Flag;
+import org.zmail.cs.mailbox.Flag;
 
 /**
  * Standard Lucene fields.

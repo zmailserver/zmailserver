@@ -12,7 +12,7 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.dav.resource;
+package org.zmail.cs.dav.resource;
 
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
@@ -22,21 +22,21 @@ import java.util.List;
 
 import javax.servlet.http.HttpServletResponse;
 
-import com.zimbra.common.mime.MimeConstants;
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.common.util.ZimbraLog;
-import com.zimbra.cs.dav.DavContext;
-import com.zimbra.cs.dav.DavElements;
-import com.zimbra.cs.dav.DavException;
-import com.zimbra.cs.dav.DavProtocol;
-import com.zimbra.cs.dav.property.Acl;
-import com.zimbra.cs.mailbox.Document;
-import com.zimbra.cs.mailbox.Folder;
-import com.zimbra.cs.mailbox.MailItem;
-import com.zimbra.cs.mailbox.MailServiceException;
-import com.zimbra.cs.mailbox.MailServiceException.NoSuchItemException;
-import com.zimbra.cs.mailbox.Mailbox;
-import com.zimbra.cs.service.FileUploadServlet;
+import org.zmail.common.mime.MimeConstants;
+import org.zmail.common.service.ServiceException;
+import org.zmail.common.util.ZmailLog;
+import org.zmail.cs.dav.DavContext;
+import org.zmail.cs.dav.DavElements;
+import org.zmail.cs.dav.DavException;
+import org.zmail.cs.dav.DavProtocol;
+import org.zmail.cs.dav.property.Acl;
+import org.zmail.cs.mailbox.Document;
+import org.zmail.cs.mailbox.Folder;
+import org.zmail.cs.mailbox.MailItem;
+import org.zmail.cs.mailbox.MailServiceException;
+import org.zmail.cs.mailbox.MailServiceException.NoSuchItemException;
+import org.zmail.cs.mailbox.Mailbox;
+import org.zmail.cs.service.FileUploadServlet;
 
 /**
  * RFC 2518bis section 5.
@@ -113,7 +113,7 @@ public class Collection extends MailItemResource {
                     children.add(rs);
             }
         } catch (ServiceException e) {
-            ZimbraLog.dav.error("can't get children from folder: id="+mId, e);
+            ZmailLog.dav.error("can't get children from folder: id="+mId, e);
         }
         // this is where we add the phantom folder for attachment browser.
         if (isRootCollection()) {

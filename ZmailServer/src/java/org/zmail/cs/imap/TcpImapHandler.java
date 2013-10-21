@@ -12,16 +12,16 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.imap;
+package org.zmail.cs.imap;
 
 import com.google.common.io.Closeables;
-import com.zimbra.common.io.TcpServerInputStream;
-import com.zimbra.common.localconfig.LC;
-import com.zimbra.common.util.Constants;
-import com.zimbra.common.util.NetUtil;
-import com.zimbra.common.util.ZimbraLog;
-import com.zimbra.cs.stats.ZimbraPerf;
-import com.zimbra.cs.server.ProtocolHandler;
+import org.zmail.common.io.TcpServerInputStream;
+import org.zmail.common.localconfig.LC;
+import org.zmail.common.util.Constants;
+import org.zmail.common.util.NetUtil;
+import org.zmail.common.util.ZmailLog;
+import org.zmail.cs.stats.ZmailPerf;
+import org.zmail.cs.server.ProtocolHandler;
 
 import javax.net.ssl.SSLSocket;
 import javax.net.ssl.SSLSocketFactory;
@@ -56,7 +56,7 @@ final class TcpImapHandler extends ProtocolHandler {
         delegate.output = new BufferedOutputStream(connection.getOutputStream());
 
         if (!config.isServiceEnabled()) {
-            ZimbraLog.imap.debug("dropping connection because user services are disabled");
+            ZmailLog.imap.debug("dropping connection because user services are disabled");
             dropConnection();
             return false;
         }
@@ -99,7 +99,7 @@ final class TcpImapHandler extends ProtocolHandler {
                 throw new ImapParseException(request.getTag(), "maximum request size exceeded");
             }
 
-            long start = ZimbraPerf.STOPWATCH_IMAP.start();
+            long start = ZmailPerf.STOPWATCH_IMAP.start();
             // check account status before executing command
             if (!delegate.checkAccountStatus()) {
                 return false;
@@ -112,9 +112,9 @@ final class TcpImapHandler extends ProtocolHandler {
             }
             // FIXME Shouldn't we do these before executing the request??
             setIdle(false);
-            ZimbraPerf.STOPWATCH_IMAP.stop(start);
+            ZmailPerf.STOPWATCH_IMAP.stop(start);
             if (delegate.lastCommand != null) {
-                ZimbraPerf.IMAP_TRACKER.addStat(delegate.lastCommand.toUpperCase(), start);
+                ZmailPerf.IMAP_TRACKER.addStat(delegate.lastCommand.toUpperCase(), start);
             }
             return keepGoing && (LC.imap_max_consecutive_error.intValue() <= 0 || delegate.consecutiveError < LC.imap_max_consecutive_error.intValue());
         } catch (TcpImapRequest.ImapContinuationException e) {
@@ -130,11 +130,11 @@ final class TcpImapHandler extends ProtocolHandler {
             delegate.handleParseException(e);
             return LC.imap_max_consecutive_error.intValue() <= 0 || delegate.consecutiveError < LC.imap_max_consecutive_error.intValue();
         } catch (ImapException e) { // session closed
-            ZimbraLog.imap.debug("stop processing", e);
+            ZmailLog.imap.debug("stop processing", e);
             return false;
         } catch (IOException e) {
             if (socket.isClosed()) {
-                ZimbraLog.imap.debug("stop processing", e);
+                ZmailLog.imap.debug("stop processing", e);
                 return false;
             }
             throw e;
@@ -162,18 +162,18 @@ final class TcpImapHandler extends ProtocolHandler {
 
         // TODO in the TcpServer case, is this duplicated effort with
         // session timeout code that also drops connections?
-        ZimbraLog.imap.debug("dropping connection for inactivity");
+        ZmailLog.imap.debug("dropping connection for inactivity");
         dropConnection();
     }
 
     void INFO(String message, Throwable e) {
-        if (ZimbraLog.imap.isInfoEnabled())
-            ZimbraLog.imap.info(withClientInfo(message), e);
+        if (ZmailLog.imap.isInfoEnabled())
+            ZmailLog.imap.info(withClientInfo(message), e);
     }
 
     void INFO(String message) {
-        if (ZimbraLog.imap.isInfoEnabled())
-            ZimbraLog.imap.info(withClientInfo(message));
+        if (ZmailLog.imap.isInfoEnabled())
+            ZmailLog.imap.info(withClientInfo(message));
     }
 
     private StringBuilder withClientInfo(String message) {
@@ -207,7 +207,7 @@ final class TcpImapHandler extends ProtocolHandler {
 
         @Override
         void sendLine(String line, boolean flush) throws IOException {
-            ZimbraLog.imap.trace("S: %s", line);
+            ZmailLog.imap.trace("S: %s", line);
             OutputStream os = output;
             if (os == null) {
                 return;
@@ -243,10 +243,10 @@ final class TcpImapHandler extends ProtocolHandler {
             }.start();
 
             if (credentials != null && !goodbyeSent) {
-                ZimbraLog.imap.info("dropping connection for user %s (server-initiated)", credentials.getUsername());
+                ZmailLog.imap.info("dropping connection for user %s (server-initiated)", credentials.getUsername());
             }
 
-            ZimbraLog.addIpToContext(remoteIp);
+            ZmailLog.addIpToContext(remoteIp);
             try {
                 OutputStream os = output;
                 if (os != null) {
@@ -265,13 +265,13 @@ final class TcpImapHandler extends ProtocolHandler {
                     authenticator = null;
                 }
             } catch (IOException e) {
-                if (ZimbraLog.imap.isDebugEnabled()) {
-                    ZimbraLog.imap.debug("I/O error while closing connection", e);
+                if (ZmailLog.imap.isDebugEnabled()) {
+                    ZmailLog.imap.debug("I/O error while closing connection", e);
                 } else {
-                    ZimbraLog.imap.debug("I/O error while closing connection: " + e);
+                    ZmailLog.imap.debug("I/O error while closing connection: " + e);
                 }
             } finally {
-                ZimbraLog.clearContext();
+                ZmailLog.clearContext();
             }
         }
 
@@ -293,7 +293,7 @@ final class TcpImapHandler extends ProtocolHandler {
             try {
                 socket.close(); // blocking read from this socket will throw SocketException
             } catch (Throwable e) {
-                ZimbraLog.imap.debug("Failed to close socket", e);
+                ZmailLog.imap.debug("Failed to close socket", e);
             }
         }
 
@@ -329,7 +329,7 @@ final class TcpImapHandler extends ProtocolHandler {
             NetUtil.setSSLEnabledCipherSuites(tlsconn, config.getSslExcludedCiphers());
             tlsconn.setUseClientMode(false);
             startHandshake(tlsconn);
-            ZimbraLog.imap.debug("suite: " + tlsconn.getSession().getCipherSuite());
+            ZmailLog.imap.debug("suite: " + tlsconn.getSession().getCipherSuite());
             input = new TcpServerInputStream(tlsconn.getInputStream());
             output = new BufferedOutputStream(tlsconn.getOutputStream());
             startedTLS = true;

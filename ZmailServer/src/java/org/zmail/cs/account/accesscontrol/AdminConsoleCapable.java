@@ -14,13 +14,13 @@
  * 
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.account.accesscontrol;
+package org.zmail.cs.account.accesscontrol;
 
 import java.util.Set;
 
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.cs.account.Entry;
-import com.zimbra.cs.account.accesscontrol.RightCommand.AllEffectiveRights;
+import org.zmail.common.service.ServiceException;
+import org.zmail.cs.account.Entry;
+import org.zmail.cs.account.accesscontrol.RightCommand.AllEffectiveRights;
 
 interface AdminConsoleCapable {
 

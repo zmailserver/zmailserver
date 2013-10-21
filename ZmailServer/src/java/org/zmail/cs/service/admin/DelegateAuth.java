@@ -16,22 +16,22 @@
 /*
  * Created on May 26, 2004
  */
-package com.zimbra.cs.service.admin;
+package org.zmail.cs.service.admin;
 
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.common.soap.AdminConstants;
-import com.zimbra.common.soap.Element;
-import com.zimbra.common.util.ZimbraLog;
-import com.zimbra.cs.account.Account;
-import com.zimbra.cs.account.AccountServiceException;
-import com.zimbra.cs.account.AuthToken;
-import com.zimbra.cs.account.AuthTokenException;
-import com.zimbra.cs.account.Provisioning;
-import com.zimbra.common.account.Key.AccountBy;
-import com.zimbra.cs.account.accesscontrol.AdminRight;
-import com.zimbra.cs.account.accesscontrol.Rights.Admin;
-import com.zimbra.cs.service.AuthProvider;
-import com.zimbra.soap.ZimbraSoapContext;
+import org.zmail.common.service.ServiceException;
+import org.zmail.common.soap.AdminConstants;
+import org.zmail.common.soap.Element;
+import org.zmail.common.util.ZmailLog;
+import org.zmail.cs.account.Account;
+import org.zmail.cs.account.AccountServiceException;
+import org.zmail.cs.account.AuthToken;
+import org.zmail.cs.account.AuthTokenException;
+import org.zmail.cs.account.Provisioning;
+import org.zmail.common.account.Key.AccountBy;
+import org.zmail.cs.account.accesscontrol.AdminRight;
+import org.zmail.cs.account.accesscontrol.Rights.Admin;
+import org.zmail.cs.service.AuthProvider;
+import org.zmail.soap.ZmailSoapContext;
 
 import java.util.List;
 import java.util.Map;
@@ -52,7 +52,7 @@ public class DelegateAuth extends AdminDocumentHandler {
     }
 
     public Element handle(Element request, Map<String, Object> context) throws ServiceException {
-        ZimbraSoapContext zsc = getZimbraSoapContext(context);
+        ZmailSoapContext zsc = getZmailSoapContext(context);
 
         Element a = request.getElement(AdminConstants.E_ACCOUNT);
         String key = a.getAttribute(AdminConstants.A_BY);
@@ -77,11 +77,11 @@ public class DelegateAuth extends AdminDocumentHandler {
         
         checkAdminLoginAsRight(zsc, prov, account);
         
-        ZimbraLog.security.info(ZimbraLog.encodeAttrs(
+        ZmailLog.security.info(ZmailLog.encodeAttrs(
                 new String[] {"cmd", "DelegateAuth","accountId", account.getId(),"accountName", account.getName()})); 
 
         Element response = zsc.createElement(AdminConstants.DELEGATE_AUTH_RESPONSE);
-        long maxLifetime = account.getTimeInterval(Provisioning.A_zimbraAuthTokenLifetime, DEFAULT_AUTH_LIFETIME*1000); 
+        long maxLifetime = account.getTimeInterval(Provisioning.A_zmailAuthTokenLifetime, DEFAULT_AUTH_LIFETIME*1000); 
 
         // take the min of requested lifetime vs maxLifetime
         long expires = System.currentTimeMillis()+ Math.min(lifetime, maxLifetime);
@@ -105,8 +105,8 @@ public class DelegateAuth extends AdminDocumentHandler {
     
     /*
     public static void main(String args[]) throws ServiceException, AuthTokenException {
-        Account acct = Provisioning.getInstance().getAccountByName("user2@slapshot.example.zimbra.com");
-        Account admin = Provisioning.getInstance().getAccountByName("admin@slapshot.example.zimbra.com");        
+        Account acct = Provisioning.getInstance().getAccountByName("user2@slapshot.example.zmail.com");
+        Account admin = Provisioning.getInstance().getAccountByName("admin@slapshot.example.zmail.com");        
         AuthToken at = new AuthToken(acct, System.currentTimeMillis()+DEFAULT_AUTH_LIFETIME*1000, false, admin);
         String token = at.getEncoded();
         System.out.println(token);

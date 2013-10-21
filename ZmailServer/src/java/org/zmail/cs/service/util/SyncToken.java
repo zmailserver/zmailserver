@@ -12,7 +12,7 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.service.util;
+package org.zmail.cs.service.util;
 
 import java.util.Enumeration;
 
@@ -21,9 +21,9 @@ import junit.framework.TestFailure;
 import junit.framework.TestResult;
 import junit.framework.TestSuite;
 
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.common.util.CliUtil;
-import com.zimbra.cs.mailbox.MailServiceException;
+import org.zmail.common.service.ServiceException;
+import org.zmail.common.util.CliUtil;
+import org.zmail.cs.mailbox.MailServiceException;
 
 /**
  * A short identifier which identifies the synchronization state between a client and the server.

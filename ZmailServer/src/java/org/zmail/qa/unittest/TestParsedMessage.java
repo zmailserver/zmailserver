@@ -12,7 +12,7 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.qa.unittest;
+package org.zmail.qa.unittest;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;
@@ -24,14 +24,14 @@ import javax.mail.util.SharedByteArrayInputStream;
 
 import junit.framework.TestCase;
 
-import com.zimbra.common.util.ByteUtil;
-import com.zimbra.common.zmime.ZMimeMessage;
-import com.zimbra.cs.mailbox.DeliveryOptions;
-import com.zimbra.cs.mailbox.Mailbox;
-import com.zimbra.cs.mailbox.Message;
-import com.zimbra.cs.mime.MimeVisitor;
-import com.zimbra.cs.mime.ParsedMessage;
-import com.zimbra.cs.util.JMSession;
+import org.zmail.common.util.ByteUtil;
+import org.zmail.common.zmime.ZMimeMessage;
+import org.zmail.cs.mailbox.DeliveryOptions;
+import org.zmail.cs.mailbox.Mailbox;
+import org.zmail.cs.mailbox.Message;
+import org.zmail.cs.mime.MimeVisitor;
+import org.zmail.cs.mime.ParsedMessage;
+import org.zmail.cs.util.JMSession;
 
 public class TestParsedMessage
 extends TestCase {

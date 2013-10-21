@@ -16,8 +16,8 @@
 # ***** END LICENSE BLOCK *****
 # 
 
-source /opt/zimbra/bin/zmshutil || exit 1
+source /opt/zmail/bin/zmshutil || exit 1
 zmsetvars \
-	zimbra_tmp_directory
+	zmail_tmp_directory
 
-find ${zimbra_tmp_directory} -maxdepth 1 -type f -mtime +7 -exec rm -f {} \; > /dev/null 2>&1
+find ${zmail_tmp_directory} -maxdepth 1 -type f -mtime +7 -exec rm -f {} \; > /dev/null 2>&1

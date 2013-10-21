@@ -12,7 +12,7 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.zimlet;
+package org.zmail.cs.zimlet;
 
 import java.util.Collections;
 import java.util.HashSet;
@@ -22,11 +22,11 @@ import java.util.concurrent.TimeUnit;
 
 import com.google.common.collect.ImmutableSet;
 import com.google.common.collect.MapMaker;
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.common.util.ZimbraLog;
-import com.zimbra.cs.account.Account;
-import com.zimbra.cs.account.Provisioning;
-import com.zimbra.soap.account.type.Prop;
+import org.zmail.common.service.ServiceException;
+import org.zmail.common.util.ZmailLog;
+import org.zmail.cs.account.Account;
+import org.zmail.cs.account.Provisioning;
+import org.zmail.soap.account.type.Prop;
 
 /**
  *
@@ -50,12 +50,12 @@ public final class ZimletUserProperties {
     }
 
     private ZimletUserProperties(Account account) {
-        String[] props = account.getMultiAttr(Provisioning.A_zimbraZimletUserProperties);
+        String[] props = account.getMultiAttr(Provisioning.A_zmailZimletUserProperties);
         for (String prop : props) {
             try {
                 properties.add(new Prop(prop));
             } catch (IllegalArgumentException e) {
-                ZimbraLog.zimlet.warn("invalid property: %s", e.getMessage());
+                ZmailLog.zimlet.warn("invalid property: %s", e.getMessage());
             }
         }
     }
@@ -82,6 +82,6 @@ public final class ZimletUserProperties {
             props[index++] = prop.getSerialization();
         }
         Provisioning.getInstance().modifyAttrs(account,
-                Collections.singletonMap(Provisioning.A_zimbraZimletUserProperties, props));
+                Collections.singletonMap(Provisioning.A_zmailZimletUserProperties, props));
     }
 }

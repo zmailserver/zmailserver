@@ -12,7 +12,7 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.datasource.imap;
+package org.zmail.cs.datasource.imap;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -20,8 +20,8 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 
-import com.zimbra.cs.mailclient.imap.ImapConnection;
-import com.zimbra.cs.mailclient.imap.ListData;
+import org.zmail.cs.mailclient.imap.ImapConnection;
+import org.zmail.cs.mailclient.imap.ListData;
 
 public final class ImapUtil {
     private static final String INBOX = "INBOX";
@@ -30,7 +30,7 @@ public final class ImapUtil {
     // Used for sorting ListData lexicographically in reverse order. This
     // ensures that inferior mailboxes will be processed before their
     // parents which avoids problems when deleting folders. Also, ignore
-    // case when comparing mailbox names so we can remove duplicates (Zimbra
+    // case when comparing mailbox names so we can remove duplicates (Zmail
     // folder names are case insensitive).
     private static final Comparator<ListData> COMPARATOR =
         new Comparator<ListData>() {

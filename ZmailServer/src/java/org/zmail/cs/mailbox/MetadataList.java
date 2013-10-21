@@ -12,15 +12,15 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.mailbox;
+package org.zmail.cs.mailbox;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.common.util.BEncoding;
-import com.zimbra.common.util.BEncoding.BEncodingException;
+import org.zmail.common.service.ServiceException;
+import org.zmail.common.util.BEncoding;
+import org.zmail.common.util.BEncoding.BEncodingException;
 
 /**
  * @since Jul 8, 2005

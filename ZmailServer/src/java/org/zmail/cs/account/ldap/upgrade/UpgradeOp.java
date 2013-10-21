@@ -12,26 +12,26 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.account.ldap.upgrade;
+package org.zmail.cs.account.ldap.upgrade;
 
 import java.util.Map;
 
 import org.apache.commons.cli.CommandLine;
 import org.apache.commons.cli.HelpFormatter;
 
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.cs.account.Entry;
-import com.zimbra.cs.account.ldap.LdapProv;
-import com.zimbra.cs.account.ldap.entry.LdapEntry;
-import com.zimbra.cs.ldap.LdapClient;
-import com.zimbra.cs.ldap.LdapException;
-import com.zimbra.cs.ldap.LdapServerType;
-import com.zimbra.cs.ldap.LdapUsage;
-import com.zimbra.cs.ldap.ZLdapContext;
-import com.zimbra.cs.ldap.ZLdapFilter;
-import com.zimbra.cs.ldap.ZLdapFilterFactory;
-import com.zimbra.cs.ldap.ZMutableEntry;
-import com.zimbra.cs.ldap.ZLdapFilterFactory.FilterId;
+import org.zmail.common.service.ServiceException;
+import org.zmail.cs.account.Entry;
+import org.zmail.cs.account.ldap.LdapProv;
+import org.zmail.cs.account.ldap.entry.LdapEntry;
+import org.zmail.cs.ldap.LdapClient;
+import org.zmail.cs.ldap.LdapException;
+import org.zmail.cs.ldap.LdapServerType;
+import org.zmail.cs.ldap.LdapUsage;
+import org.zmail.cs.ldap.ZLdapContext;
+import org.zmail.cs.ldap.ZLdapFilter;
+import org.zmail.cs.ldap.ZLdapFilterFactory;
+import org.zmail.cs.ldap.ZMutableEntry;
+import org.zmail.cs.ldap.ZLdapFilterFactory.FilterId;
 
 public abstract class UpgradeOp {
 

@@ -13,7 +13,7 @@
  * ***** END LICENSE BLOCK *****
  */
 
-package com.zimbra.cs.service;
+package org.zmail.cs.service;
 
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
@@ -28,40 +28,40 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 
-import com.zimbra.common.mime.ContentDisposition;
-import com.zimbra.common.mime.MimeConstants;
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.common.util.ByteUtil;
-import com.zimbra.common.util.HttpUtil;
-import com.zimbra.common.util.Log;
-import com.zimbra.common.util.LogFactory;
-import com.zimbra.common.util.ZimbraLog;
-import com.zimbra.cs.account.Account;
-import com.zimbra.cs.account.AuthToken;
-import com.zimbra.cs.account.Provisioning;
-import com.zimbra.cs.account.Server;
-import com.zimbra.common.account.Key;
-import com.zimbra.common.account.Key.AccountBy;
-import com.zimbra.common.account.Key.ServerBy;
-import com.zimbra.cs.html.DefangFactory;
-import com.zimbra.cs.html.HtmlDefang;
-import com.zimbra.cs.mailbox.CalendarItem;
-import com.zimbra.cs.mailbox.MailItem;
-import com.zimbra.cs.mailbox.Mailbox;
-import com.zimbra.cs.mailbox.MailboxManager;
-import com.zimbra.cs.mailbox.Message;
-import com.zimbra.cs.mailbox.OperationContext;
-import com.zimbra.cs.mailbox.MailServiceException.NoSuchItemException;
-import com.zimbra.cs.mailbox.calendar.CalendarMailSender;
-import com.zimbra.cs.mailbox.calendar.Invite;
-import com.zimbra.cs.mailbox.util.TagUtil;
-import com.zimbra.cs.mime.Mime;
-import com.zimbra.cs.service.FileUploadServlet.Upload;
-import com.zimbra.cs.service.util.*;
-import com.zimbra.cs.servlet.ZimbraServlet;
-import com.zimbra.cs.util.AccountUtil;
-import com.zimbra.common.util.L10nUtil;
-import com.zimbra.common.util.L10nUtil.MsgKey;
+import org.zmail.common.mime.ContentDisposition;
+import org.zmail.common.mime.MimeConstants;
+import org.zmail.common.service.ServiceException;
+import org.zmail.common.util.ByteUtil;
+import org.zmail.common.util.HttpUtil;
+import org.zmail.common.util.Log;
+import org.zmail.common.util.LogFactory;
+import org.zmail.common.util.ZmailLog;
+import org.zmail.cs.account.Account;
+import org.zmail.cs.account.AuthToken;
+import org.zmail.cs.account.Provisioning;
+import org.zmail.cs.account.Server;
+import org.zmail.common.account.Key;
+import org.zmail.common.account.Key.AccountBy;
+import org.zmail.common.account.Key.ServerBy;
+import org.zmail.cs.html.DefangFactory;
+import org.zmail.cs.html.HtmlDefang;
+import org.zmail.cs.mailbox.CalendarItem;
+import org.zmail.cs.mailbox.MailItem;
+import org.zmail.cs.mailbox.Mailbox;
+import org.zmail.cs.mailbox.MailboxManager;
+import org.zmail.cs.mailbox.Message;
+import org.zmail.cs.mailbox.OperationContext;
+import org.zmail.cs.mailbox.MailServiceException.NoSuchItemException;
+import org.zmail.cs.mailbox.calendar.CalendarMailSender;
+import org.zmail.cs.mailbox.calendar.Invite;
+import org.zmail.cs.mailbox.util.TagUtil;
+import org.zmail.cs.mime.Mime;
+import org.zmail.cs.service.FileUploadServlet.Upload;
+import org.zmail.cs.service.util.*;
+import org.zmail.cs.servlet.ZmailServlet;
+import org.zmail.cs.util.AccountUtil;
+import org.zmail.common.util.L10nUtil;
+import org.zmail.common.util.L10nUtil.MsgKey;
 
 /**
  * The content servlet returns an attachment document in its original format.
@@ -69,7 +69,7 @@ import com.zimbra.common.util.L10nUtil.MsgKey;
  * to ConversionServlet.
  */
 
-public class ContentServlet extends ZimbraServlet {
+public class ContentServlet extends ZmailServlet {
     private static final long serialVersionUID = 6466028729668217319L;
 
     public static final String SERVLET_PATH = "/service/content";
@@ -125,16 +125,16 @@ public class ContentServlet extends ZimbraServlet {
 
             String authId = token.getAccountId();
             String accountId = iid.getAccountId() != null ? iid.getAccountId() : authId;
-            AccountUtil.addAccountToLogContext(Provisioning.getInstance(), accountId, ZimbraLog.C_NAME, ZimbraLog.C_ID, token);
+            AccountUtil.addAccountToLogContext(Provisioning.getInstance(), accountId, ZmailLog.C_NAME, ZmailLog.C_ID, token);
             if (!accountId.equalsIgnoreCase(authId))
-                ZimbraLog.addToContext(ZimbraLog.C_AID, authId);
+                ZmailLog.addToContext(ZmailLog.C_AID, authId);
 
             Mailbox mbox = MailboxManager.getInstance().getMailboxByAccountId(accountId);
             if (mbox == null) {
                 resp.sendError(HttpServletResponse.SC_BAD_REQUEST, L10nUtil.getMessage(MsgKey.errMailboxNotFound, req));
                 return;
             }
-            ZimbraLog.addMboxToContext(mbox.getId());
+            ZmailLog.addMboxToContext(mbox.getId());
 
             MailItem item = mbox.getItemById(new OperationContext(token), iid.getId(), MailItem.Type.UNKNOWN, fromDumpster);
             if (item == null) {
@@ -149,24 +149,24 @@ public class ContentServlet extends ZimbraServlet {
                     StringBuffer hdr = new StringBuffer();
                     if (sync) {
                         // for sync, return metadata as headers to avoid extra SOAP round-trips
-                        resp.addHeader("X-Zimbra-Tags", TagUtil.getTagIdString(item));
-                        resp.addHeader("X-Zimbra-Tag-Names", TagUtil.encodeTags(item.getTags()));
-                        resp.addHeader("X-Zimbra-Flags", item.getFlagString());
-                        resp.addHeader("X-Zimbra-Received", Long.toString(item.getDate()));
-                        resp.addHeader("X-Zimbra-Modified", Long.toString(item.getChangeDate()));
+                        resp.addHeader("X-Zmail-Tags", TagUtil.getTagIdString(item));
+                        resp.addHeader("X-Zmail-Tag-Names", TagUtil.encodeTags(item.getTags()));
+                        resp.addHeader("X-Zmail-Flags", item.getFlagString());
+                        resp.addHeader("X-Zmail-Received", Long.toString(item.getDate()));
+                        resp.addHeader("X-Zmail-Modified", Long.toString(item.getChangeDate()));
                         // also return metadata inline in the message content for now
-                        hdr.append("X-Zimbra-Tags: ").append(TagUtil.getTagIdString(item)).append("\n");
-                        hdr.append("X-Zimbra-Tag-Names: ").append(TagUtil.encodeTags(item.getTags()));
-                        hdr.append("X-Zimbra-Flags: ").append(item.getFlagString()).append("\n");
-                        hdr.append("X-Zimbra-Received: ").append(item.getDate()).append("\n");
-                        hdr.append("X-Zimbra-Modified: ").append(item.getChangeDate()).append("\n");
+                        hdr.append("X-Zmail-Tags: ").append(TagUtil.getTagIdString(item)).append("\n");
+                        hdr.append("X-Zmail-Tag-Names: ").append(TagUtil.encodeTags(item.getTags()));
+                        hdr.append("X-Zmail-Flags: ").append(item.getFlagString()).append("\n");
+                        hdr.append("X-Zmail-Received: ").append(item.getDate()).append("\n");
+                        hdr.append("X-Zmail-Modified: ").append(item.getChangeDate()).append("\n");
                     }
 
                     if (item instanceof Message) {
                         Message msg = (Message) item;
                         if (sync) {
-                            resp.addHeader("X-Zimbra-Conv", Integer.toString(msg.getConversationId()));
-                            hdr.append("X-Zimbra-Conv: ").append(msg.getConversationId()).append("\n");
+                            resp.addHeader("X-Zmail-Conv", Integer.toString(msg.getConversationId()));
+                            hdr.append("X-Zmail-Conv: ").append(msg.getConversationId()).append("\n");
                             resp.getOutputStream().write(hdr.toString().getBytes());
                         }
 
@@ -222,7 +222,7 @@ public class ContentServlet extends ZimbraServlet {
                         if (contentType.toLowerCase().startsWith(MimeConstants.CT_TEXT_HTML) && (FORMAT_DEFANGED_HTML.equals(fmt) || FORMAT_DEFANGED_HTML_NOT_IMAGES.equals(fmt))) {
                             sendbackDefangedHtml(mp, contentType, resp, fmt);
                         } else {
-                            if (!isTrue(Provisioning.A_zimbraAttachmentsViewInHtmlOnly, mbox.getAccountId())) {
+                            if (!isTrue(Provisioning.A_zmailAttachmentsViewInHtmlOnly, mbox.getAccountId())) {
                                 sendbackOriginalDoc(mp, contentType, req, resp);
                             } else {
                                 req.setAttribute(ATTR_MIMEPART, mp);
@@ -244,7 +244,7 @@ public class ContentServlet extends ZimbraServlet {
         } catch (ServiceException e) {
             returnError(resp, e);
         } finally {
-            ZimbraLog.clearContext();
+            ZmailLog.clearContext();
         }
         /*
          out.println("hello world "+req.getParameter("id"));
@@ -362,7 +362,7 @@ public class ContentServlet extends ZimbraServlet {
 
     @Override
     public void doGet(HttpServletRequest req, HttpServletResponse resp) throws IOException, ServletException {
-        ZimbraLog.clearContext();
+        ZmailLog.clearContext();
         addRemoteIpToLoggingContext(req);
 
         mLog.debug("request url: %s, path info: ", req.getRequestURL(), req.getPathInfo());
@@ -371,7 +371,7 @@ public class ContentServlet extends ZimbraServlet {
         if (authToken == null)
             return;
 
-        if (isTrue(Provisioning.A_zimbraAttachmentsBlocked, authToken.getAccountId())) {
+        if (isTrue(Provisioning.A_zmailAttachmentsBlocked, authToken.getAccountId())) {
             sendbackBlockMessage(req, resp);
             return;
         }

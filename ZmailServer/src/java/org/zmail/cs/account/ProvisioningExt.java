@@ -14,12 +14,12 @@
  * 
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.account;
+package org.zmail.cs.account;
 
 import java.util.ArrayList;
 
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.cs.util.Zimbra;
+import org.zmail.common.service.ServiceException;
+import org.zmail.cs.util.Zmail;
 
 public abstract class ProvisioningExt {
     
@@ -29,7 +29,7 @@ public abstract class ProvisioningExt {
         public boolean enabled() {
             // skip if the listener needs to run inside the server 
             // and we are not inside the server
-            return !(serverOnly() && !Zimbra.started());
+            return !(serverOnly() && !Zmail.started());
         }
     }
 

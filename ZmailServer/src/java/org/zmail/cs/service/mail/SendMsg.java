@@ -12,7 +12,7 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.service.mail;
+package org.zmail.cs.service.mail;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -31,53 +31,53 @@ import javax.mail.internet.MimeBodyPart;
 import javax.mail.internet.MimeMessage;
 import javax.mail.internet.MimeMultipart;
 
-import com.zimbra.client.ZMailbox;
-import com.zimbra.common.account.Key;
-import com.zimbra.common.auth.ZAuthToken;
-import com.zimbra.common.calendar.ZCalendar.ICalTok;
-import com.zimbra.common.calendar.ZCalendar.ZCalendarBuilder;
-import com.zimbra.common.calendar.ZCalendar.ZComponent;
-import com.zimbra.common.calendar.ZCalendar.ZParameter;
-import com.zimbra.common.calendar.ZCalendar.ZProperty;
-import com.zimbra.common.calendar.ZCalendar.ZVCalendar;
-import com.zimbra.common.mime.ContentType;
-import com.zimbra.common.mime.MimeConstants;
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.common.soap.Element;
-import com.zimbra.common.soap.MailConstants;
-import com.zimbra.common.util.ByteUtil;
-import com.zimbra.common.util.Constants;
-import com.zimbra.common.util.Log;
-import com.zimbra.common.util.LogFactory;
-import com.zimbra.common.util.Pair;
-import com.zimbra.common.util.ZimbraLog;
-import com.zimbra.common.zmime.ZMimeMessage;
-import com.zimbra.cs.account.Account;
-import com.zimbra.cs.account.AuthToken;
-import com.zimbra.cs.account.Provisioning;
-import com.zimbra.cs.mailbox.CalendarItem;
-import com.zimbra.cs.mailbox.MailItem;
-import com.zimbra.cs.mailbox.MailSender;
-import com.zimbra.cs.mailbox.MailServiceException;
-import com.zimbra.cs.mailbox.Mailbox;
-import com.zimbra.cs.mailbox.MailboxManager;
-import com.zimbra.cs.mailbox.Message;
-import com.zimbra.cs.mailbox.OperationContext;
-import com.zimbra.cs.mailbox.calendar.CalendarDataSource;
-import com.zimbra.cs.mailbox.calendar.CalendarMailSender;
-import com.zimbra.cs.mailbox.calendar.Invite;
-import com.zimbra.cs.mailbox.calendar.RecurId;
-import com.zimbra.cs.mailbox.calendar.ZOrganizer;
-import com.zimbra.cs.mime.Mime;
-import com.zimbra.cs.mime.MimeVisitor;
-import com.zimbra.cs.service.FileUploadServlet;
-import com.zimbra.cs.service.FileUploadServlet.Upload;
-import com.zimbra.cs.service.mail.ParseMimeMessage.MimeMessageData;
-import com.zimbra.cs.service.util.ItemId;
-import com.zimbra.cs.service.util.ItemIdFormatter;
-import com.zimbra.cs.util.AccountUtil;
-import com.zimbra.cs.util.JMSession;
-import com.zimbra.soap.ZimbraSoapContext;
+import org.zmail.client.ZMailbox;
+import org.zmail.common.account.Key;
+import org.zmail.common.auth.ZAuthToken;
+import org.zmail.common.calendar.ZCalendar.ICalTok;
+import org.zmail.common.calendar.ZCalendar.ZCalendarBuilder;
+import org.zmail.common.calendar.ZCalendar.ZComponent;
+import org.zmail.common.calendar.ZCalendar.ZParameter;
+import org.zmail.common.calendar.ZCalendar.ZProperty;
+import org.zmail.common.calendar.ZCalendar.ZVCalendar;
+import org.zmail.common.mime.ContentType;
+import org.zmail.common.mime.MimeConstants;
+import org.zmail.common.service.ServiceException;
+import org.zmail.common.soap.Element;
+import org.zmail.common.soap.MailConstants;
+import org.zmail.common.util.ByteUtil;
+import org.zmail.common.util.Constants;
+import org.zmail.common.util.Log;
+import org.zmail.common.util.LogFactory;
+import org.zmail.common.util.Pair;
+import org.zmail.common.util.ZmailLog;
+import org.zmail.common.zmime.ZMimeMessage;
+import org.zmail.cs.account.Account;
+import org.zmail.cs.account.AuthToken;
+import org.zmail.cs.account.Provisioning;
+import org.zmail.cs.mailbox.CalendarItem;
+import org.zmail.cs.mailbox.MailItem;
+import org.zmail.cs.mailbox.MailSender;
+import org.zmail.cs.mailbox.MailServiceException;
+import org.zmail.cs.mailbox.Mailbox;
+import org.zmail.cs.mailbox.MailboxManager;
+import org.zmail.cs.mailbox.Message;
+import org.zmail.cs.mailbox.OperationContext;
+import org.zmail.cs.mailbox.calendar.CalendarDataSource;
+import org.zmail.cs.mailbox.calendar.CalendarMailSender;
+import org.zmail.cs.mailbox.calendar.Invite;
+import org.zmail.cs.mailbox.calendar.RecurId;
+import org.zmail.cs.mailbox.calendar.ZOrganizer;
+import org.zmail.cs.mime.Mime;
+import org.zmail.cs.mime.MimeVisitor;
+import org.zmail.cs.service.FileUploadServlet;
+import org.zmail.cs.service.FileUploadServlet.Upload;
+import org.zmail.cs.service.mail.ParseMimeMessage.MimeMessageData;
+import org.zmail.cs.service.util.ItemId;
+import org.zmail.cs.service.util.ItemIdFormatter;
+import org.zmail.cs.util.AccountUtil;
+import org.zmail.cs.util.JMSession;
+import org.zmail.soap.ZmailSoapContext;
 
 /**
  * Process the {@code <SendMsg>} request from the client and send an email message.
@@ -96,7 +96,7 @@ public final class SendMsg extends MailDocumentHandler {
 
     @Override
     public Element handle(Element request, Map<String, Object> context) throws ServiceException {
-        ZimbraSoapContext zsc = getZimbraSoapContext(context);
+        ZmailSoapContext zsc = getZmailSoapContext(context);
         Mailbox mbox = getRequestedMailbox(zsc);
         AccountUtil.checkQuotaWhenSendMail(mbox);
 
@@ -248,17 +248,17 @@ public final class SendMsg extends MailDocumentHandler {
                 }
             }
         } catch (Exception e) {
-            ZimbraLog.soap.warn("Ignoring error while sending Calendar Invitation Forward Notification", e);
+            ZmailLog.soap.warn("Ignoring error while sending Calendar Invitation Forward Notification", e);
         }
 
         return id;
     }
 
-    static MimeMessage parseUploadedMessage(ZimbraSoapContext zsc, String attachId, MimeMessageData mimeData) throws ServiceException {
+    static MimeMessage parseUploadedMessage(ZmailSoapContext zsc, String attachId, MimeMessageData mimeData) throws ServiceException {
         return parseUploadedMessage(zsc, attachId, mimeData, false);
     }
 
-    static MimeMessage parseUploadedMessage(ZimbraSoapContext zsc, String attachId, MimeMessageData mimeData,
+    static MimeMessage parseUploadedMessage(ZmailSoapContext zsc, String attachId, MimeMessageData mimeData,
                                             boolean needCalendarSentByFixup)
     throws ServiceException {
         boolean anySystemMutators = MimeVisitor.anyMutatorsRegistered();
@@ -345,7 +345,7 @@ public final class SendMsg extends MailDocumentHandler {
     }
 
 
-    private void deleteDraft(ItemId iidDraft, OperationContext octxt, Mailbox localMbox, ZimbraSoapContext zsc) {
+    private void deleteDraft(ItemId iidDraft, OperationContext octxt, Mailbox localMbox, ZmailSoapContext zsc) {
         try {
             if (iidDraft.belongsTo(localMbox)) {
                 localMbox.delete(octxt, iidDraft.getId(), MailItem.Type.MESSAGE);
@@ -363,7 +363,7 @@ public final class SendMsg extends MailDocumentHandler {
             }
         } catch (ServiceException e) {
             // draft delete failure mustn't affect response to SendMsg request
-            ZimbraLog.soap.info("failed to delete draft after message send: %s", iidDraft);
+            ZmailLog.soap.info("failed to delete draft after message send: %s", iidDraft);
         }
     }
 
@@ -590,7 +590,7 @@ public final class SendMsg extends MailDocumentHandler {
                                     if (sentBy == null) {
                                         prop.addParameter(new ZParameter(ICalTok.SENT_BY, mSentBy));
                                         modified = true;
-                                        ZimbraLog.calendar.info(
+                                        ZmailLog.calendar.info(
                                                 "Fixed up " + token + " (" + addr +
                                                 ") by adding SENT-BY=" + mSentBy);
                                     }
@@ -691,7 +691,7 @@ public final class SendMsg extends MailDocumentHandler {
 
                 // Put the correct organizer.
                 comp.addProperty(fixedOrganizer);
-                ZimbraLog.calendar.info("Fixed up ORGANIZER in a REPLY from ZCO");
+                ZmailLog.calendar.info("Fixed up ORGANIZER in a REPLY from ZCO");
             }
             return true;
         }

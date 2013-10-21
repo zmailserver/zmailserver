@@ -12,19 +12,19 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.util;
+package org.zmail.cs.util;
 
 import java.io.File;
 import java.sql.Timestamp;
 import java.util.Iterator;
 import java.util.Map;
 
-import com.zimbra.common.localconfig.LC;
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.common.util.ZimbraLog;
-import com.zimbra.cs.db.DbConfig;
-import com.zimbra.cs.db.DbPool;
-import com.zimbra.cs.db.DbPool.DbConnection;
+import org.zmail.common.localconfig.LC;
+import org.zmail.common.service.ServiceException;
+import org.zmail.common.util.ZmailLog;
+import org.zmail.cs.db.DbConfig;
+import org.zmail.cs.db.DbPool;
+import org.zmail.cs.db.DbPool.DbConnection;
 
 /**
  * @since Apr 19, 2004
@@ -76,7 +76,7 @@ public final class Config {
             try {
                 init(null);
             } catch (Exception e) {
-                Zimbra.halt("Config initialization failed", e);
+                Zmail.halt("Config initialization failed", e);
             }
         }
     }
@@ -115,7 +115,7 @@ public final class Config {
         try {
             intValue = Integer.parseInt(value);
         } catch (NumberFormatException e) {
-            ZimbraLog.misc.warn("Invalid integer value '%s' for config key '%s'.  Returning default value %d.",
+            ZmailLog.misc.warn("Invalid integer value '%s' for config key '%s'.  Returning default value %d.",
                 value, name, intValue);
         }
         return intValue;
@@ -143,7 +143,7 @@ public final class Config {
         try {
             longValue = Long.parseLong(value);
         } catch (NumberFormatException e) {
-            ZimbraLog.misc.warn("Invalid long value '%s' for config key '%s'.  Returning default value %d.",
+            ZmailLog.misc.warn("Invalid long value '%s' for config key '%s'.  Returning default value %d.",
                 value, name, longValue);
         }
         return longValue;
@@ -164,16 +164,16 @@ public final class Config {
 
     /**
      * Returns a File object representing the path relative to the
-     * Zimbra home directory.
+     * Zmail home directory.
      * @param path
      * @return
      */
-    public static File getPathRelativeToZimbraHome(String path) {
+    public static File getPathRelativeToZmailHome(String path) {
         char first = path.charAt(0);
         if (first == File.separatorChar || first == '/')
             return new File(path);
 
-        String home = LC.zimbra_home.value();
+        String home = LC.zmail_home.value();
         return new File(home, path);
     }
 

@@ -16,9 +16,9 @@
 
 source `dirname $0`/../bin/zmshutil || exit 1
 zmsetvars \
-    zimbra_home \
-    zimbra_log_directory \
-    zimbra_db_directory \
+    zmail_home \
+    zmail_log_directory \
+    zmail_db_directory \
     antispam_mysql_mycnf \
     antispam_mysql_data_directory \
     antispam_mysql_directory \
@@ -29,30 +29,30 @@ sql_root_pw=$1
 #
 # Sanity checks
 #
-zmassert -x ${zimbra_home}/bin/antispam-mysqladmin
-zmassert -x ${zimbra_home}/bin/antispam-mysql
-zmassert -x ${zimbra_home}/bin/zmlocalconfig
-zmassert -x ${zimbra_home}/bin/zmantispamdbpasswd
+zmassert -x ${zmail_home}/bin/antispam-mysqladmin
+zmassert -x ${zmail_home}/bin/antispam-mysql
+zmassert -x ${zmail_home}/bin/zmlocalconfig
+zmassert -x ${zmail_home}/bin/zmantispamdbpasswd
 zmassert -x ${antispam_mysql_directory}/scripts/mysql_install_db
-zmassert -r ${zimbra_home}/data/amavisd/mysql/antispamdb.sql
+zmassert -r ${zmail_home}/data/amavisd/mysql/antispamdb.sql
 
 #
 # Create necessary directories
 #
 #echo '*' Creating required directories
 #mkdir -p ${antispam_mysql_data_directory}
-#chmod -R 755 /opt/zimbra/data/amavisd/mysql
+#chmod -R 755 /opt/zmail/data/amavisd/mysql
 
 # Check if log directory exists.  If not, create.
-if [ ! -d ${zimbra_log_directory} ]; then
-	mkdir -p ${zimbra_log_directory}
+if [ ! -d ${zmail_log_directory} ]; then
+	mkdir -p ${zmail_log_directory}
 fi
 
 #
 # Create antispam-my.cnf file if it does not exist
 #
 if [ ! -s ${antispam_mysql_mycnf} ]; then 
-    ${zimbra_home}/libexec/zmantispammycnf > ${antispam_mysql_mycnf}
+    ${zmail_home}/libexec/zmantispammycnf > ${antispam_mysql_mycnf}
 fi
 
 #
@@ -63,14 +63,14 @@ echo '*' Creating database in ${antispam_mysql_data_directory}
     --basedir=${antispam_mysql_directory} \
     --datadir=${antispam_mysql_data_directory} \
     --defaults-file=${antispam_mysql_mycnf} ) \
-    >> ${zimbra_log_directory}/zmantispamdbinit.log 2>&1
+    >> ${zmail_log_directory}/zmantispamdbinit.log 2>&1
 
 #
 # Start mysql server for antispam db
 #
 #echo '*' Starting antispam mysql server
-#${zimbra_home}/bin/antispam-mysql.server start \
-#    >> ${zimbra_log_directory}/antispam-mysql.log 2>&1
+#${zmail_home}/bin/antispam-mysql.server start \
+#    >> ${zmail_log_directory}/antispam-mysql.log 2>&1
 #sleep 30
 zmassert -d `dirname ${antispam_mysql_pidfile}`
 if [ -f ${antispam_mysql_pidfile} ]; then
@@ -97,7 +97,7 @@ ${antispam_mysql_directory}/bin/mysqld_safe \
 SQLSTARTED=0
 for ((i = 0; i < 60; i++))
 do
-    ${zimbra_home}/bin/antispam-mysqladmin -s ping 2>&1 > /dev/null
+    ${zmail_home}/bin/antispam-mysqladmin -s ping 2>&1 > /dev/null
     if [ $? = 0 ]; then
         SQLSTARTED=1
         break
@@ -113,38 +113,38 @@ fi
 
 
 #
-# Load zimbra sql files
+# Load zmail sql files
 #
-echo '*' Loading schema ${zimbra_home}/data/amavisd/mysql/antispamdb.sql 
-${zimbra_home}/bin/antispam-mysql -u root --password= < \
-    ${zimbra_home}/data/amavisd/mysql/antispamdb.sql
+echo '*' Loading schema ${zmail_home}/data/amavisd/mysql/antispamdb.sql 
+${zmail_home}/bin/antispam-mysql -u root --password= < \
+    ${zmail_home}/data/amavisd/mysql/antispamdb.sql
 
 
 #
 # Generate passwords for mysql into local config
 #
 if [ x$sql_root_pw = "x" ]; then
-    echo '*' Setting random password for antispam mysql root user in zimbra local config
-    ${zimbra_home}/bin/zmlocalconfig -r -f -e antispam_mysql_root_password
+    echo '*' Setting random password for antispam mysql root user in zmail local config
+    ${zmail_home}/bin/zmlocalconfig -r -f -e antispam_mysql_root_password
 
-    echo '*' Setting random password for antispam mysql zimbra user in zimbra local config
-    ${zimbra_home}/bin/zmlocalconfig -r -f -e antispam_mysql_password
+    echo '*' Setting random password for antispam mysql zmail user in zmail local config
+    ${zmail_home}/bin/zmlocalconfig -r -f -e antispam_mysql_password
 else
-    echo '*' Setting password for antispam mysql root user in zimbra local config
-    ${zimbra_home}/bin/zmlocalconfig -f -e antispam_mysql_root_password=$sql_root_pw
-    echo '*' Setting password for antispam mysql zimbra user in zimbra local config
-    ${zimbra_home}/bin/zmlocalconfig -f -e antispam_mysql_password=$sql_root_pw
+    echo '*' Setting password for antispam mysql root user in zmail local config
+    ${zmail_home}/bin/zmlocalconfig -f -e antispam_mysql_root_password=$sql_root_pw
+    echo '*' Setting password for antispam mysql zmail user in zmail local config
+    ${zmail_home}/bin/zmlocalconfig -f -e antispam_mysql_password=$sql_root_pw
 fi
 
 #
 # Change mysql root user password, but first read back the passwords 
-# zimbra local config - they was generated above.  Note that we can not
+# zmail local config - they was generated above.  Note that we can not
 # use 'zmmypasswd --root' here because of bootstrapping problems - at
 # this stage we know that the root password is empty.
 #
 zmsetvars -f antispam_mysql_root_password antispam_mysql_password
 echo '*' Changing antispam mysql root user password
-${zimbra_home}/bin/antispam-mysqladmin -u root --password= password ${antispam_mysql_root_password}
+${zmail_home}/bin/antispam-mysqladmin -u root --password= password ${antispam_mysql_root_password}
 
 echo '*' Changing antispam mysql user password
-${zimbra_home}/bin/zmantispamdbpasswd ${antispam_mysql_password}
+${zmail_home}/bin/zmantispamdbpasswd ${antispam_mysql_password}

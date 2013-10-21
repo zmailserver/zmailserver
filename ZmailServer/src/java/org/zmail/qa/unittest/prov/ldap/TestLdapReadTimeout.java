@@ -14,7 +14,7 @@
  * 
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.qa.unittest.prov.ldap;
+package org.zmail.qa.unittest.prov.ldap;
 
 import java.io.PrintWriter;
 import java.text.SimpleDateFormat;
@@ -307,8 +307,8 @@ public class TestLdapReadTimeout {
      * /Users/pshao/dev/workspace/sandbox/sandbox/bin>/System/Library/Frameworks/JavaVM.framework/Versions/1.6/Home/bin/java  LdapReadTimeout
      * /System/Library/Frameworks/JavaVM.framework/Versions/1.6/Home/bin/java LdapReadTimeout
      * 
-     * zmjava com.zimbra.qa.unittest.TestLdapReadTimeout -s 5
-     * zmjava com.zimbra.qa.unittest.TestLdapReadTimeout -H ldap://localhost:389 -D uid=zimbra,cn=admins,cn=zimbra -w zimbra -s 5
+     * zmjava org.zmail.qa.unittest.TestLdapReadTimeout -s 5
+     * zmjava org.zmail.qa.unittest.TestLdapReadTimeout -H ldap://localhost:389 -D uid=zmail,cn=admins,cn=zmail -w zmail -s 5
      * 
      * @param args
      */
@@ -354,13 +354,13 @@ public class TestLdapReadTimeout {
         if (cl.hasOption(O_BINDDN)) {
             bindDN = cl.getOptionValue(O_BINDDN);
         } else {
-            bindDN =  "uid=zimbra,cn=admins,cn=zimbra";
+            bindDN =  "uid=zmail,cn=admins,cn=zmail";
         }
         
         if (cl.hasOption(O_PASSWORD)) {
             password = cl.getOptionValue(O_PASSWORD);
         } else {
-            password =  "zimbra";
+            password =  "zmail";
         }
         
         if (cl.hasOption(O_SLEEP)) {

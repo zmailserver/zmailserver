@@ -20,7 +20,7 @@ sub usage {
     print "    verbose-on: $availVB\n\n";
     print "    output-format: $availFM\n\n";
 
-    print "For example:\n    $0 -f dogfood.dmp -s ../../../build/ldap-config/zimbra.schema -t account -t cos\n\n";
+    print "For example:\n    $0 -f dogfood.dmp -s ../../../build/ldap-config/zmail.schema -t account -t cos\n\n";
 
     # foreach (@ARGV) {
     #     print "$_\n";
@@ -163,41 +163,41 @@ sub rtrim($) {
 sub captureEntryType(@) {
     local($curEntryType, $attrVal) = ($_[0], $_[1]);
     
-    if ($attrVal eq "zimbraAccount") {
+    if ($attrVal eq "zmailAccount") {
         if ($curEntryType ne $ET_CALENDER_RESOURCE) {
             return $ET_ACCOUNT;
         } else {
             return $curEntryType;
         }
-    } elsif ($attrVal eq "zimbraAlias") {
+    } elsif ($attrVal eq "zmailAlias") {
         return $ET_ALIAS;
-    } elsif ($attrVal eq "zimbraCalendarResource") {
+    } elsif ($attrVal eq "zmailCalendarResource") {
         return $ET_CALENDER_RESOURCE;
-    } elsif ($attrVal eq "zimbraGlobalConfig") {
+    } elsif ($attrVal eq "zmailGlobalConfig") {
         return $ET_CONFIG;
-    } elsif ($attrVal eq "zimbraCOS") {
+    } elsif ($attrVal eq "zmailCOS") {
         return $ET_COS;
-    } elsif ($attrVal eq "zimbraDataSource") {
+    } elsif ($attrVal eq "zmailDataSource") {
         return $ET_DATA_SOURCE;
-    } elsif ($attrVal eq "zimbraDistributionList") {
+    } elsif ($attrVal eq "zmailDistributionList") {
         return $ET_DISTRIBUTION_LIST;
-    } elsif ($attrVal eq "zimbraDomain") {
+    } elsif ($attrVal eq "zmailDomain") {
         return $ET_DOMAIN;
-    } elsif ($attrVal eq "zimbraIdentity") {
+    } elsif ($attrVal eq "zmailIdentity") {
         return $ET_IDENTITY;
-    } elsif ($attrVal eq "zimbraImapDataSource") {
+    } elsif ($attrVal eq "zmailImapDataSource") {
         return $ET_IMAP_DATA_SOURCE;
-    } elsif ($attrVal eq "zimbraMimeEntry") {
+    } elsif ($attrVal eq "zmailMimeEntry") {
         return $ET_MIME;
-    } elsif ($attrVal eq "zimbraObjectEntry") {
+    } elsif ($attrVal eq "zmailObjectEntry") {
         return $ET_OBJECT;
-    } elsif ($attrVal eq "zimbraPop3DataSource") {
+    } elsif ($attrVal eq "zmailPop3DataSource") {
         return $ET_POP3_DATA_SOURCE;
-    } elsif ($attrVal eq "zimbraSecurityGroup") {
+    } elsif ($attrVal eq "zmailSecurityGroup") {
         return $ET_SECURITY_GROUP;
-    } elsif ($attrVal eq "zimbraServer") {
+    } elsif ($attrVal eq "zmailServer") {
         return $ET_SERVER;
-    } elsif ($attrVal eq "zimbraZimletEntry") {
+    } elsif ($attrVal eq "zmailZimletEntry") {
         return $ET_ZIMLET;
     } else {
         return $curEntryType;

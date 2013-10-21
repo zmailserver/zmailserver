@@ -21,8 +21,8 @@ my $dfilename=$ARGV[1];
 
 my $id = getpwuid($<);
 chomp $id;
-if ($id ne "zimbra") {
-    print STDERR "Error: must be run as zimbra user\n";
+if ($id ne "zmail") {
+    print STDERR "Error: must be run as zmail user\n";
 	exit (1);
 }
 
@@ -57,7 +57,7 @@ my $host = "";
 foreach my $sline (@slines) {
 	while ($sline =~ m/\@\@([^\@]+)\@\@/g) {
 		my $sr = $1;
-		my $rep=`/opt/zimbra/bin/zmlocalconfig -s -q -m nokey $sr`;
+		my $rep=`/opt/zmail/bin/zmlocalconfig -s -q -m nokey $sr`;
 		chomp $rep;
 		$sline =~ s/\@\@$sr\@\@/$rep/g;
 	}
@@ -68,7 +68,7 @@ foreach my $sline (@slines) {
 	#	comment(args) - replace with comment char "#" if true (or value exists)
 	#
 	# args supported:
-	#	SERVER:key - use command gs with zimbra_server_hostname, get value of key
+	#	SERVER:key - use command gs with zmail_server_hostname, get value of key
 	#
 	while ($sline =~ m/%%([^%]+)%%/g) {
 		my $sr = $1;
@@ -77,16 +77,16 @@ foreach my $sline (@slines) {
 			my ($cmd, $key, $pattern) = ($sr =~ m/comment ([^:]+):(\S+) (.*)/);
 			if ($cmd eq "SERVER") {
 				if ($host eq "") {
-					$host=`/opt/zimbra/bin/zmlocalconfig -q -m nokey zimbra_server_hostname`;
+					$host=`/opt/zmail/bin/zmlocalconfig -q -m nokey zmail_server_hostname`;
 					chomp $host;
 				}
-				$rep = `/opt/zimbra/bin/zmprov -l gs $host | sed -e 's/[^ ]* //' | grep $pattern`;
+				$rep = `/opt/zmail/bin/zmprov -l gs $host | sed -e 's/[^ ]* //' | grep $pattern`;
 				if ($rep ne "") {
 					$rep = "#";
 				}
 			}
 		} else {
-			$rep=`/opt/zimbra/bin/zmprov -l gcf $sr | sed -e 's/[^ ]* //'`;
+			$rep=`/opt/zmail/bin/zmprov -l gcf $sr | sed -e 's/[^ ]* //'`;
 			chomp $rep;
 		}
 		$sline =~ s/%%$sr%%/$rep/g;

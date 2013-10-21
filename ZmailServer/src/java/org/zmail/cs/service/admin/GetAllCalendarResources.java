@@ -13,25 +13,25 @@
  * ***** END LICENSE BLOCK *****
  */
 
-package com.zimbra.cs.service.admin;
+package org.zmail.cs.service.admin;
 
 import java.util.List;
 
 import org.dom4j.QName;
 
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.common.soap.AdminConstants;
-import com.zimbra.common.soap.Element;
-import com.zimbra.cs.account.Account;
-import com.zimbra.cs.account.CalendarResource;
-import com.zimbra.cs.account.Domain;
-import com.zimbra.cs.account.NamedEntry;
-import com.zimbra.cs.account.Provisioning;
-import com.zimbra.cs.account.Server;
-import com.zimbra.cs.account.accesscontrol.AdminRight;
-import com.zimbra.cs.account.accesscontrol.Rights.Admin;
-import com.zimbra.cs.service.admin.GetAllAccounts.AccountVisitor;
-import com.zimbra.soap.ZimbraSoapContext;
+import org.zmail.common.service.ServiceException;
+import org.zmail.common.soap.AdminConstants;
+import org.zmail.common.soap.Element;
+import org.zmail.cs.account.Account;
+import org.zmail.cs.account.CalendarResource;
+import org.zmail.cs.account.Domain;
+import org.zmail.cs.account.NamedEntry;
+import org.zmail.cs.account.Provisioning;
+import org.zmail.cs.account.Server;
+import org.zmail.cs.account.accesscontrol.AdminRight;
+import org.zmail.cs.account.accesscontrol.Rights.Admin;
+import org.zmail.cs.service.admin.GetAllAccounts.AccountVisitor;
+import org.zmail.soap.ZmailSoapContext;
 
 /**
  * @author jhahm
@@ -43,12 +43,12 @@ public class GetAllCalendarResources extends GetAllAccounts {
     }
     
     protected static class CalendarResourceVisitor extends AccountVisitor {
-        CalendarResourceVisitor(ZimbraSoapContext zsc, AdminDocumentHandler handler, Element parent) 
+        CalendarResourceVisitor(ZmailSoapContext zsc, AdminDocumentHandler handler, Element parent) 
         throws ServiceException {
             super(zsc, handler, parent);
         }
         
-        public void visit(com.zimbra.cs.account.NamedEntry entry) throws ServiceException {
+        public void visit(org.zmail.cs.account.NamedEntry entry) throws ServiceException {
             if (mHandler.hasRightsToList(mZsc, entry, Admin.R_listCalendarResource, null))
                 ToXML.encodeCalendarResource(mParent, (CalendarResource)entry, true, null, mAAC.getAttrRightChecker(entry));
         }
@@ -58,7 +58,7 @@ public class GetAllCalendarResources extends GetAllAccounts {
      * server s is not used, need to use the same signature as GetAllAccounts.doDomain 
      * so the overridden doDomain is called.
      */
-    protected void doDomain(ZimbraSoapContext zsc, final Element e, Domain d, Server s) throws ServiceException {
+    protected void doDomain(ZmailSoapContext zsc, final Element e, Domain d, Server s) throws ServiceException {
         CalendarResourceVisitor visitor = new CalendarResourceVisitor(zsc, this, e);
         Provisioning.getInstance().getAllCalendarResources(d, s, visitor);
     }

@@ -12,7 +12,7 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.mailbox;
+package org.zmail.cs.mailbox;
 
 import java.lang.ref.SoftReference;
 import java.util.ArrayList;
@@ -28,25 +28,25 @@ import java.util.concurrent.CopyOnWriteArrayList;
 
 import com.google.common.annotations.VisibleForTesting;
 import com.google.common.base.Preconditions;
-import com.zimbra.common.account.Key.AccountBy;
-import com.zimbra.common.localconfig.DebugConfig;
-import com.zimbra.common.localconfig.LC;
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.common.util.ZimbraLog;
-import com.zimbra.cs.account.Account;
-import com.zimbra.cs.account.AccountServiceException;
-import com.zimbra.cs.account.NamedEntry;
-import com.zimbra.cs.account.Provisioning;
-import com.zimbra.cs.db.DbMailbox;
-import com.zimbra.cs.db.DbPool;
-import com.zimbra.cs.db.DbPool.DbConnection;
-import com.zimbra.cs.extension.ExtensionUtil;
-import com.zimbra.cs.index.IndexStore;
-import com.zimbra.cs.mailbox.Mailbox.MailboxData;
-import com.zimbra.cs.redolog.op.CreateMailbox;
-import com.zimbra.cs.stats.ZimbraPerf;
-import com.zimbra.cs.util.AccountUtil;
-import com.zimbra.cs.util.Zimbra;
+import org.zmail.common.account.Key.AccountBy;
+import org.zmail.common.localconfig.DebugConfig;
+import org.zmail.common.localconfig.LC;
+import org.zmail.common.service.ServiceException;
+import org.zmail.common.util.ZmailLog;
+import org.zmail.cs.account.Account;
+import org.zmail.cs.account.AccountServiceException;
+import org.zmail.cs.account.NamedEntry;
+import org.zmail.cs.account.Provisioning;
+import org.zmail.cs.db.DbMailbox;
+import org.zmail.cs.db.DbPool;
+import org.zmail.cs.db.DbPool.DbConnection;
+import org.zmail.cs.extension.ExtensionUtil;
+import org.zmail.cs.index.IndexStore;
+import org.zmail.cs.mailbox.Mailbox.MailboxData;
+import org.zmail.cs.redolog.op.CreateMailbox;
+import org.zmail.cs.stats.ZmailPerf;
+import org.zmail.cs.util.AccountUtil;
+import org.zmail.cs.util.Zmail;
 
 public class MailboxManager {
 
@@ -90,29 +90,29 @@ public class MailboxManager {
     }
 
     private void notifyMailboxAvailable(Mailbox mbox) {
-        if (ZimbraLog.mbxmgr.isInfoEnabled())
-            ZimbraLog.mbxmgr.info("Mailbox "+mbox.getId()+ " account "+mbox.getAccountId()+" AVAILABLE");
+        if (ZmailLog.mbxmgr.isInfoEnabled())
+            ZmailLog.mbxmgr.info("Mailbox "+mbox.getId()+ " account "+mbox.getAccountId()+" AVAILABLE");
         for (Listener listener : mListeners)
             listener.mailboxAvailable(mbox);
     }
 
     private void notifyMailboxLoaded(Mailbox mbox) {
-        if (ZimbraLog.mbxmgr.isInfoEnabled())
-            ZimbraLog.mbxmgr.info("Mailbox "+mbox.getId()+ " account "+mbox.getAccountId()+" LOADED");
+        if (ZmailLog.mbxmgr.isInfoEnabled())
+            ZmailLog.mbxmgr.info("Mailbox "+mbox.getId()+ " account "+mbox.getAccountId()+" LOADED");
         for (Listener listener : mListeners)
             listener.mailboxLoaded(mbox);
     }
 
     private void notifyMailboxCreated(Mailbox mbox) {
-        if (ZimbraLog.mbxmgr.isInfoEnabled())
-            ZimbraLog.mbxmgr.info("Mailbox "+mbox.getId()+ " account "+mbox.getAccountId()+" CREATED");
+        if (ZmailLog.mbxmgr.isInfoEnabled())
+            ZmailLog.mbxmgr.info("Mailbox "+mbox.getId()+ " account "+mbox.getAccountId()+" CREATED");
         for (Listener listener : mListeners)
             listener.mailboxCreated(mbox);
     }
 
     private void notifyMailboxDeleted(String accountId) {
-        if (ZimbraLog.mbxmgr.isInfoEnabled())
-            ZimbraLog.mbxmgr.info("Mailbox for account "+accountId+" DELETED");
+        if (ZmailLog.mbxmgr.isInfoEnabled())
+            ZmailLog.mbxmgr.info("Mailbox for account "+accountId+" DELETED");
         for (Listener listener : mListeners)
             listener.mailboxDeleted(accountId);
     }
@@ -151,7 +151,7 @@ public class MailboxManager {
     }
 
     protected MailboxMap createCache() {
-        return new MailboxMap(LC.zimbra_mailbox_manager_hardref_cache.intValue());
+        return new MailboxMap(LC.zmail_mailbox_manager_hardref_cache.intValue());
     }
 
     /**
@@ -166,7 +166,7 @@ public class MailboxManager {
 
     public synchronized static MailboxManager getInstance() throws ServiceException {
         if (sInstance == null) {
-            String className = LC.zimbra_class_mboxmanager.value();
+            String className = LC.zmail_class_mboxmanager.value();
             if (className != null && !className.equals("")) {
                 try {
                     try {
@@ -176,7 +176,7 @@ public class MailboxManager {
                         sInstance = (MailboxManager) ExtensionUtil.findClass(className).newInstance();
                     }
                 } catch (Exception e) {
-                    ZimbraLog.account.error("could not instantiate MailboxManager interface of class '" + className + "'; defaulting to MailboxManager", e);
+                    ZmailLog.account.error("could not instantiate MailboxManager interface of class '" + className + "'; defaulting to MailboxManager", e);
                 }
             }
             if (sInstance == null)
@@ -426,14 +426,14 @@ public class MailboxManager {
         if (mailboxId <= 0)
             throw MailServiceException.NO_SUCH_MBOX(mailboxId);
 
-        long startTime = ZimbraPerf.STOPWATCH_MBOX_GET.start();
+        long startTime = ZmailPerf.STOPWATCH_MBOX_GET.start();
 
         Mailbox mbox = null;
         synchronized (this) {
             // check to see if the mailbox has already been cached
             Object cached = retrieveFromCache(mailboxId, true);
             if (cached instanceof Mailbox) {
-                ZimbraPerf.COUNTER_MBOX_CACHE.increment(100);
+                ZmailPerf.COUNTER_MBOX_CACHE.increment(100);
                 mbox = (Mailbox) cached;
             }
         }
@@ -444,7 +444,7 @@ public class MailboxManager {
         }
 
         if (mbox == null) { // not found in cache
-            ZimbraPerf.COUNTER_MBOX_CACHE.increment(0);
+            ZmailPerf.COUNTER_MBOX_CACHE.increment(0);
             MailboxData data;
             DbConnection conn = DbPool.getConnection();
             try {
@@ -496,7 +496,7 @@ public class MailboxManager {
             notifyMailboxLoaded(mbox);
         }
 
-        ZimbraPerf.STOPWATCH_MBOX_GET.stop(startTime);
+        ZmailPerf.STOPWATCH_MBOX_GET.stop(startTime);
 
         if (maintenanceLocks.containsKey(mbox.getAccountId()) && mbox.getMaintenance() == null) {
             //case here where mailbox was unloaded (due to memory pressure or similar) but
@@ -642,7 +642,7 @@ public class MailboxManager {
         synchronized (this) {
             Object obj = cache.get(maintenance.getMailboxId());
             if (obj != maintenance) {
-                ZimbraLog.mailbox.debug("maintenance ended with wrong object. passed %s; expected %s", maintenance, obj);
+                ZmailLog.mailbox.debug("maintenance ended with wrong object. passed %s; expected %s", maintenance, obj);
                 throw MailServiceException.MAINTENANCE(maintenance.getMailboxId(), "attempting to end maintenance with wrong object");
             }
             // start by removing the lock from the Mailbox object cache
@@ -667,10 +667,10 @@ public class MailboxManager {
                         // Note: mbox is left in maintenance mode.
                     } else {
                         if (mbox.endMaintenance(success)) {
-                            ZimbraLog.mailbox.debug("no longer in maintenace; caching mailbox");
+                            ZmailLog.mailbox.debug("no longer in maintenace; caching mailbox");
                             cacheMailbox(maintenance.getMailbox());
                         } else {
-                            ZimbraLog.mailbox.debug("still in maintenance; caching lock");
+                            ZmailLog.mailbox.debug("still in maintenance; caching lock");
                             cache.put(mbox.getId(), mbox.getMaintenance());
                         }
                     }
@@ -704,7 +704,7 @@ public class MailboxManager {
     /** Returns an array of all the mailbox IDs on this host in an undefined
      *  order. Note that <code>Mailbox</code>es are lazily created, so this is
      *  not the same as the set of mailboxes for accounts whose
-     *  <code>zimbraMailHost</code> LDAP attribute points to this server. */
+     *  <code>zmailMailHost</code> LDAP attribute points to this server. */
     public int[] getMailboxIds() {
         int i = 0;
         synchronized (this) {
@@ -729,7 +729,7 @@ public class MailboxManager {
 
     /** Returns an array of the account IDs of all the mailboxes on this host.
      *  Note that <code>Mailbox</code>es are lazily created, so this is not
-     *  the same as the set of accounts whose <code>zimbraMailHost</code> LDAP
+     *  the same as the set of accounts whose <code>zmailMailHost</code> LDAP
      *  attribute points to this server.*/
     public String[] getAccountIds() {
         int i = 0;
@@ -757,7 +757,7 @@ public class MailboxManager {
     }
 
 
-    /** Returns the zimbra IDs and approximate sizes for all mailboxes on
+    /** Returns the zmail IDs and approximate sizes for all mailboxes on
      *  the system.  Note that mailboxes are created lazily, so there may be
      *  accounts homed on this system for whom there is is not yet a mailbox
      *  and hence are not included in the returned <code>Map</code>.
@@ -855,7 +855,7 @@ public class MailboxManager {
 
             // create the mailbox row and the mailbox database
             MailboxData data = DbMailbox.createMailbox(conn, id, account.getId(), account.getName(), -1);
-            ZimbraLog.mailbox.info("Creating mailbox with id %d and group id %d for %s.", data.id, data.schemaGroupId, account.getName());
+            ZmailLog.mailbox.info("Creating mailbox with id %d and group id %d for %s.", data.id, data.schemaGroupId, account.getName());
 
             mbox = account.isIsExternalVirtualAccount() ?
                     instantiateExternalVirtualMailbox(data) : instantiateMailbox(data);
@@ -875,12 +875,12 @@ public class MailboxManager {
         } catch (ServiceException e) {
             // Log exception here, just in case.  If badness happens during rollback
             // the original exception will be lost.
-            ZimbraLog.mailbox.error("Error during mailbox creation", e);
+            ZmailLog.mailbox.error("Error during mailbox creation", e);
             throw e;
         } catch (OutOfMemoryError e) {
-            Zimbra.halt("out of memory", e);
+            Zmail.halt("out of memory", e);
         } catch (Throwable t) {
-            ZimbraLog.mailbox.error("Error during mailbox creation", t);
+            ZmailLog.mailbox.error("Error during mailbox creation", t);
             throw ServiceException.FAILURE("createMailbox", t);
         } finally {
             try {
@@ -918,11 +918,11 @@ public class MailboxManager {
                 sb.append("2) key=" + entry.getKey() + "; val=" + entry.getValue() + "(class= " + entry.getValue().getClass().getName() + ",hash=" + entry.getValue().hashCode() + ")");
         }
         sb.append("----------------------------------------------------------------------\n");
-        ZimbraLog.mailbox.debug(sb.toString());
+        ZmailLog.mailbox.debug(sb.toString());
     }
 
     public void lockoutMailbox(String accountId) throws ServiceException {
-        ZimbraLog.mailbox.debug("locking out mailbox for account %s", accountId);
+        ZmailLog.mailbox.debug("locking out mailbox for account %s", accountId);
         Mailbox mbox = getMailboxByAccountId(accountId);
         MailboxMaintenance maintenance = beginMaintenance(accountId, mbox.getId());
         maintenance.setNestedAllowed(true);
@@ -931,7 +931,7 @@ public class MailboxManager {
     }
 
     public void undoLockout(String accountId, boolean endMaintenance) throws ServiceException {
-        ZimbraLog.mailbox.debug("undoing lockout for account %s", accountId);
+        ZmailLog.mailbox.debug("undoing lockout for account %s", accountId);
         MailboxMaintenance maintenance = maintenanceLocks.remove(accountId);
         if (maintenance == null) {
             throw ServiceException.FAILURE("No lock known for account " + accountId, null);
@@ -947,14 +947,14 @@ public class MailboxManager {
     }
 
     public boolean isMailboxLockedOut(String accountId) {
-        if (ZimbraLog.mailbox.isDebugEnabled()) {
-            ZimbraLog.mailbox.debug("Checking is locked for account %s? %s", accountId, maintenanceLocks.containsKey(accountId));
+        if (ZmailLog.mailbox.isDebugEnabled()) {
+            ZmailLog.mailbox.debug("Checking is locked for account %s? %s", accountId, maintenanceLocks.containsKey(accountId));
         }
         return maintenanceLocks.containsKey(accountId);
     }
 
     public void registerOuterMaintenanceThread(String accountId) throws MailServiceException {
-        ZimbraLog.mailbox.debug("registering maintenance thread for account %s", accountId);
+        ZmailLog.mailbox.debug("registering maintenance thread for account %s", accountId);
         MailboxMaintenance maintenance = maintenanceLocks.get(accountId);
         if (maintenance != null) {
             maintenance.registerOuterAllowedThread(Thread.currentThread());
@@ -962,7 +962,7 @@ public class MailboxManager {
     }
 
     public void unregisterMaintenanceThread(String accountId) {
-        ZimbraLog.mailbox.debug("unregistering maintenance thread for account %s", accountId);
+        ZmailLog.mailbox.debug("unregistering maintenance thread for account %s", accountId);
         MailboxMaintenance maintenance = maintenanceLocks.get(accountId);
         if (maintenance != null) {
             maintenance.removeAllowedThread(Thread.currentThread());
@@ -1030,7 +1030,7 @@ public class MailboxManager {
                 if (obj instanceof SoftReference) {
                     obj = ((SoftReference<?>) obj).get();
                     if (trackGC && obj == null)
-                        ZimbraLog.mailbox.debug("mailbox " + key + " has been GCed; reloading");
+                        ZmailLog.mailbox.debug("mailbox " + key + " has been GCed; reloading");
                 }
             }
             return obj;

@@ -12,7 +12,7 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.service.authenticator;
+package org.zmail.cs.service.authenticator;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -57,15 +57,15 @@ import javax.servlet.http.HttpServletResponse;
 import sun.security.x509.AuthorityInfoAccessExtension;
 import sun.security.x509.X509CertImpl;
 
-import com.zimbra.common.account.Key.AccountBy;
-import com.zimbra.common.localconfig.DebugConfig;
-import com.zimbra.common.localconfig.LC;
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.common.util.ZimbraLog;
-import com.zimbra.cs.account.Account;
-import com.zimbra.cs.account.AccountServiceException.AuthFailedServiceException;
-import com.zimbra.cs.account.Provisioning;
-import com.zimbra.cs.service.authenticator.ClientCertPrincipalMap.Rule;
+import org.zmail.common.account.Key.AccountBy;
+import org.zmail.common.localconfig.DebugConfig;
+import org.zmail.common.localconfig.LC;
+import org.zmail.common.service.ServiceException;
+import org.zmail.common.util.ZmailLog;
+import org.zmail.cs.account.Account;
+import org.zmail.cs.account.AccountServiceException.AuthFailedServiceException;
+import org.zmail.cs.account.Provisioning;
+import org.zmail.cs.service.authenticator.ClientCertPrincipalMap.Rule;
 
 public class ClientCertAuthenticator extends SSOAuthenticator {
 
@@ -81,7 +81,7 @@ public class ClientCertAuthenticator extends SSOAuthenticator {
     }
     
     @Override
-    public ZimbraPrincipal authenticate() throws ServiceException {
+    public ZmailPrincipal authenticate() throws ServiceException {
         X509Certificate cert = getCert();
 
         if (DebugConfig.certAuthCaptureClientCertificate) {
@@ -93,31 +93,31 @@ public class ClientCertAuthenticator extends SSOAuthenticator {
         
         for (Rule rule : rules) {
             try {
-                ZimbraLog.account.debug(LOG_PREFIX + "Attempting rule " + rule.getName());
-                ZimbraPrincipal zimbraPrincipal = rule.apply(cert);
-                if (zimbraPrincipal != null) {
-                    return zimbraPrincipal;
+                ZmailLog.account.debug(LOG_PREFIX + "Attempting rule " + rule.getName());
+                ZmailPrincipal zmailPrincipal = rule.apply(cert);
+                if (zmailPrincipal != null) {
+                    return zmailPrincipal;
                 }
-                ZimbraLog.account.debug(LOG_PREFIX + "Rule " + rule.getName() + " not matched");
+                ZmailLog.account.debug(LOG_PREFIX + "Rule " + rule.getName() + " not matched");
                 
             } catch (ServiceException e) {
-                ZimbraLog.account.debug(LOG_PREFIX + "Rule " + rule.getName() + " not matched", e);
+                ZmailLog.account.debug(LOG_PREFIX + "Rule " + rule.getName() + " not matched", e);
             }
         }
         
         throw AuthFailedServiceException.AUTH_FAILED(cert.toString(),
-                "ClientCertAuthenticator - no matching Zimbra principal from client certificate.", (Throwable)null);
+                "ClientCertAuthenticator - no matching Zmail principal from client certificate.", (Throwable)null);
     }
     
     /*
      * Save the client cert to file for debugging.
-     * To view: /opt/zimbra/openssl/bin/openssl x509 -in /opt/zimbra/data/tmp/clientcert.*** -text
+     * To view: /opt/zmail/openssl/bin/openssl x509 -in /opt/zmail/data/tmp/clientcert.*** -text
      */
     private void captureClientCert(X509Certificate cert) {
         
         SimpleDateFormat fmt = new SimpleDateFormat("yyyyMMdd-HHmmss.S");
         try {
-            File file = new File(LC.zimbra_tmp_directory.value() + "/clientcert." + fmt.format(new Date()));
+            File file = new File(LC.zmail_tmp_directory.value() + "/clientcert." + fmt.format(new Date()));
             
             // Get the encoded form which is suitable for exporting
             byte[] buf = cert.getEncoded();
@@ -131,9 +131,9 @@ public class ClientCertAuthenticator extends SSOAuthenticator {
             wr.flush();
             os.close();
         } catch (CertificateEncodingException e) {
-            ZimbraLog.account.debug(LOG_PREFIX +  "unable to capture cert", e);
+            ZmailLog.account.debug(LOG_PREFIX +  "unable to capture cert", e);
         } catch (IOException e) {
-            ZimbraLog.account.debug(LOG_PREFIX + "unable to capture cert", e);
+            ZmailLog.account.debug(LOG_PREFIX + "unable to capture cert", e);
         }
     }
     
@@ -167,7 +167,7 @@ public class ClientCertAuthenticator extends SSOAuthenticator {
                         if (acct != null) {
                             return acct;
                         } else {
-                            ZimbraLog.account.debug(LOG_PREFIX + "account not found: " + email);
+                            ZmailLog.account.debug(LOG_PREFIX + "account not found: " + email);
                         }
                     }
                 }
@@ -199,7 +199,7 @@ public class ClientCertAuthenticator extends SSOAuthenticator {
                 cert.checkValidity();
                 
                 if( IsAIAInfoPresent(cert) ) {
-                    ZimbraLog.account.debug(LOG_PREFIX +  "found AuthorityInfoAccess extension in client certificate");
+                    ZmailLog.account.debug(LOG_PREFIX +  "found AuthorityInfoAccess extension in client certificate");
                     List<X509Certificate> certificates = new ArrayList<X509Certificate>();
                     certificates.add(cert);
 
@@ -219,7 +219,7 @@ public class ClientCertAuthenticator extends SSOAuthenticator {
                         TrustAnchor ta = new TrustAnchor(rootCACert, null);
                         trustedCertsSet.add(ta);
 
-                        ZimbraLog.account.debug(LOG_PREFIX +  "adding certificate with issuer DN:" + rootCACert.getIssuerDN().toString() + " signature name:"  + rootCACert.getSigAlgName());
+                        ZmailLog.account.debug(LOG_PREFIX +  "adding certificate with issuer DN:" + rootCACert.getIssuerDN().toString() + " signature name:"  + rootCACert.getSigAlgName());
                       }
 
                     // init PKIX parameters
@@ -237,7 +237,7 @@ public class ClientCertAuthenticator extends SSOAuthenticator {
                     CertPathValidator cpv = CertPathValidator.getInstance("PKIX");
                     PKIXCertPathValidatorResult cpv_result = (PKIXCertPathValidatorResult) cpv.validate(cp, params);
 
-                    ZimbraLog.account.debug(LOG_PREFIX +  cpv_result.toString());
+                    ZmailLog.account.debug(LOG_PREFIX +  cpv_result.toString());
                 }
             } catch (CertificateExpiredException e) {
                 throw AuthFailedServiceException.AUTH_FAILED(getSubjectDNForLogging(cert), "client certificate expired", e);

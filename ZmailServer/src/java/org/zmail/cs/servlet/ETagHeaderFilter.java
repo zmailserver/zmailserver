@@ -12,7 +12,7 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.servlet;
+package org.zmail.cs.servlet;
 
 import java.io.IOException;
 
@@ -28,7 +28,7 @@ import javax.servlet.http.HttpServletResponseWrapper;
 /** Explicitly sets ETag header in response; bypassing Jetty ETag generation */
 public class ETagHeaderFilter implements Filter {
 
-    public static String ZIMBRA_ETAG_HEADER = "X-Zimbra-ETag";
+    public static String ZIMBRA_ETAG_HEADER = "X-Zmail-ETag";
 
     @Override
     public void destroy() {

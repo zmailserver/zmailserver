@@ -12,7 +12,7 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.milter;
+package org.zmail.cs.milter;
 
 import java.io.IOException;
 import java.nio.charset.Charset;
@@ -27,23 +27,23 @@ import com.google.common.base.Charsets;
 import com.google.common.base.Joiner;
 import com.google.common.base.Strings;
 import com.google.common.collect.Sets;
-import com.zimbra.common.account.Key;
-import com.zimbra.common.mime.InternetAddress;
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.common.util.ZimbraLog;
-import com.zimbra.cs.account.Group;
-import com.zimbra.cs.account.Provisioning;
-import com.zimbra.cs.account.AccessManager;
-import com.zimbra.cs.account.accesscontrol.Rights.User;
-import com.zimbra.cs.server.NioConnection;
-import com.zimbra.cs.server.NioHandler;
+import org.zmail.common.account.Key;
+import org.zmail.common.mime.InternetAddress;
+import org.zmail.common.service.ServiceException;
+import org.zmail.common.util.ZmailLog;
+import org.zmail.cs.account.Group;
+import org.zmail.cs.account.Provisioning;
+import org.zmail.cs.account.AccessManager;
+import org.zmail.cs.account.accesscontrol.Rights.User;
+import org.zmail.cs.server.NioConnection;
+import org.zmail.cs.server.NioHandler;
 
 /**
  * Milter protocol handler.
  *
  * <ul>
  *  <li>Check ACL to see if the sender is allowed to send a message to the DL.
- *  <li>Add {@code X-Zimbra-DL: DL1, DL2...} header if one or more recipients are a DL. {@code List-Id} header
+ *  <li>Add {@code X-Zmail-DL: DL1, DL2...} header if one or more recipients are a DL. {@code List-Id} header
  *      (RFC 2919) is not supported because it requires to fork the message. Let's say, "To: listA, listB", user1
  *      belongs to listA, user2 belongs to listB. The user1 should receive "List-Id: listA", and the user2 should
  *      receive "List-Id: listB", which requires Milter to fork the message into each DLs. However, this is not
@@ -119,19 +119,19 @@ public final class MilterHandler implements NioHandler {
 
     @Override
     public void connectionClosed() throws IOException {
-        ZimbraLog.milter.info("Connection closed");
+        ZmailLog.milter.info("Connection closed");
         dropConnection();
     }
 
     @Override
     public void connectionIdle() throws IOException {
-        ZimbraLog.milter.debug("Dropping connection for inactivity");
+        ZmailLog.milter.debug("Dropping connection for inactivity");
         dropConnection();
     }
 
     @Override
     public void connectionOpened() throws IOException {
-        ZimbraLog.milter.info("Connection opened");
+        ZmailLog.milter.info("Connection opened");
         clear();
     }
 
@@ -141,7 +141,7 @@ public final class MilterHandler implements NioHandler {
         try {
             processCommand(command);
         } catch (ServiceException e) {
-            ZimbraLog.milter.error("Server error: %s", e.getMessage(), e);
+            ZmailLog.milter.error("Server error: %s", e.getMessage(), e);
             dropConnection(); // aborting the session
         }
     }
@@ -155,7 +155,7 @@ public final class MilterHandler implements NioHandler {
 
     @Override
     public void setLoggingContext() {
-        ZimbraLog.addConnectionIdToContext(String.valueOf(connection.getId()));
+        ZmailLog.addConnectionIdToContext(String.valueOf(connection.getId()));
     }
 
     @Override
@@ -223,7 +223,7 @@ public final class MilterHandler implements NioHandler {
         if (addr != null) {
             String value = normalizeAddr(addr);
             context.put(attr, value);
-            ZimbraLog.milter.debug("%s=%s", attr, value);
+            ZmailLog.milter.debug("%s=%s", attr, value);
         }
     }
 
@@ -255,7 +255,7 @@ public final class MilterHandler implements NioHandler {
     }
 
     private void SMFIR_ChgHeader(int index, String name, String value) throws IOException {
-        ZimbraLog.milter.info("Add %s: %s", name, value);
+        ZmailLog.milter.info("Add %s: %s", name, value);
         // sizeof(unit32) + name.length + NUL + value.length + NUL
         IoBuffer buf = IoBuffer.allocate(6 + name.length() + value.length());
         buf.putUnsignedInt(index);
@@ -265,32 +265,32 @@ public final class MilterHandler implements NioHandler {
     }
 
     private void SMFIC_Connect(MilterPacket command) throws IOException {
-        ZimbraLog.milter.debug("SMFIC_Connect");
+        ZmailLog.milter.debug("SMFIC_Connect");
         IoBuffer data = getDataBuffer(command);
         if (data != null) {
             context.put(Context.HOSTNAME, data.getString(CHARSET.newDecoder()));
             context.put(Context.PROTOFAMILY, new String(new byte[] {data.get()}, CHARSET));
             context.put(Context.PORT, String.valueOf(data.getUnsignedShort()));
             context.put(Context.ADDRESS, data.getString(CHARSET.newDecoder()));
-            ZimbraLog.milter.info("Connection Info %s", context);
+            ZmailLog.milter.info("Connection Info %s", context);
         }
         connection.send(new MilterPacket(SMFIR_CONTINUE));
     }
 
     private void SMFIC_Mail() {
-        ZimbraLog.milter.debug("SMFIC_Mail");
+        ZmailLog.milter.debug("SMFIC_Mail");
         connection.send(new MilterPacket(SMFIR_CONTINUE));
     }
 
     private void SMFIC_Rcpt() throws ServiceException {
-        ZimbraLog.milter.debug("SMFIC_Rcpt");
+        ZmailLog.milter.debug("SMFIC_Rcpt");
         String sender = context.get(Context.SENDER);
         if (sender == null) {
-            ZimbraLog.milter.warn("Empty sender");
+            ZmailLog.milter.warn("Empty sender");
         }
         String rcpt = context.get(Context.RECIPIENT);
         if (rcpt == null) {
-            ZimbraLog.milter.warn("Empty recipient");
+            ZmailLog.milter.warn("Empty recipient");
         }
         if (sender == null || rcpt == null) {
             connection.send(new MilterPacket(SMFIR_TEMPFAIL));
@@ -299,25 +299,25 @@ public final class MilterHandler implements NioHandler {
         if (prov.isDistributionList(rcpt)) {
             Group group = prov.getGroupBasic(Key.DistributionListBy.name, rcpt);
             if (group != null && !accessMgr.canDo(sender, group, User.R_sendToDistList, false)) {
-                ZimbraLog.milter.debug("Sender is not allowed to email this distribution list: " + rcpt);
+                ZmailLog.milter.debug("Sender is not allowed to email this distribution list: " + rcpt);
                 SMFIR_ReplyCode("571", "571 Sender is not allowed to email this distribution list: " + rcpt);
                 return;
             }
             lists.add(group);
-            ZimbraLog.milter.debug("group " + group + " has been added into the list.");
+            ZmailLog.milter.debug("group " + group + " has been added into the list.");
         } else {
-            ZimbraLog.milter.debug(rcpt + " is not a distribution list.");
+            ZmailLog.milter.debug(rcpt + " is not a distribution list.");
         }
         connection.send(new MilterPacket(SMFIR_CONTINUE));
     }
 
     private void SMFIC_Abort() {
-        ZimbraLog.milter.info("SMFIC_Abort session reset");
+        ZmailLog.milter.info("SMFIC_Abort session reset");
         clear();
     }
 
     private void SMFIC_Macro(MilterPacket command) throws IOException {
-        ZimbraLog.milter.debug("SMFIC_Macro");
+        ZmailLog.milter.debug("SMFIC_Macro");
         IoBuffer data = getDataBuffer(command);
         if (data != null) {
             byte cmd = data.get();
@@ -330,7 +330,7 @@ public final class MilterHandler implements NioHandler {
     }
 
     private void SMFIC_OptNeg() {
-        ZimbraLog.milter.debug("SMFIC_OptNeg");
+        ZmailLog.milter.debug("SMFIC_OptNeg");
         IoBuffer data = IoBuffer.allocate(12, false);
         data.putInt(2); // version
         data.putInt(SMFIF_ADDHDRS | SMFIF_CHGHDRS); // actions
@@ -341,12 +341,12 @@ public final class MilterHandler implements NioHandler {
     }
 
     private void SMFIC_Header() {
-        ZimbraLog.milter.debug("SMFIC_Header");
+        ZmailLog.milter.debug("SMFIC_Header");
         connection.send(new MilterPacket(SMFIR_ACCEPT)); // stop processing when we hit headers
     }
 
     private void SMFIC_BodyEOB() throws IOException {
-        ZimbraLog.milter.debug("SMFIC_BodyEOB");
+        ZmailLog.milter.debug("SMFIC_BodyEOB");
         Set<String> listAddrs = Sets.newHashSetWithExpectedSize(lists.size());
         Set<String> replyToAddrs = Sets.newHashSetWithExpectedSize(lists.size());
         for (Group group : lists) {
@@ -364,7 +364,7 @@ public final class MilterHandler implements NioHandler {
             }
         }
         if (!listAddrs.isEmpty()) {
-            SMFIR_ChgHeader(1, "X-Zimbra-DL", Joiner.on(", ").join(listAddrs));
+            SMFIR_ChgHeader(1, "X-Zmail-DL", Joiner.on(", ").join(listAddrs));
         }
         if (!replyToAddrs.isEmpty()) {
             SMFIR_ChgHeader(1, "Reply-To", Joiner.on(", ").join(replyToAddrs));
@@ -373,7 +373,7 @@ public final class MilterHandler implements NioHandler {
     }
 
     private void SMFIC_Quit() {
-        ZimbraLog.milter.debug("SMFIC_Quit");
+        ZmailLog.milter.debug("SMFIC_Quit");
         dropConnection();
     }
 

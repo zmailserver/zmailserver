@@ -12,22 +12,22 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.account.callback;
+package org.zmail.cs.account.callback;
 
 import java.util.Map;
 
-import com.zimbra.common.account.Key.DomainBy;
-import com.zimbra.common.account.ZAttrProvisioning.AutoProvMode;
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.common.util.ZimbraLog;
-import com.zimbra.cs.account.AccountServiceException;
-import com.zimbra.cs.account.AttributeCallback;
-import com.zimbra.cs.account.AutoProvisionThread;
-import com.zimbra.cs.account.Domain;
-import com.zimbra.cs.account.Entry;
-import com.zimbra.cs.account.Provisioning;
-import com.zimbra.cs.account.Server;
-import com.zimbra.cs.util.Zimbra;
+import org.zmail.common.account.Key.DomainBy;
+import org.zmail.common.account.ZAttrProvisioning.AutoProvMode;
+import org.zmail.common.service.ServiceException;
+import org.zmail.common.util.ZmailLog;
+import org.zmail.cs.account.AccountServiceException;
+import org.zmail.cs.account.AttributeCallback;
+import org.zmail.cs.account.AutoProvisionThread;
+import org.zmail.cs.account.Domain;
+import org.zmail.cs.account.Entry;
+import org.zmail.cs.account.Provisioning;
+import org.zmail.cs.account.Server;
+import org.zmail.cs.util.Zmail;
 
 /**
  * Ensure domains scheduled for EAGER auto provision have EAGER auto provision 
@@ -42,7 +42,7 @@ public class AutoProvScheduledDomains extends AttributeCallback {
         
         Provisioning prov = Provisioning.getInstance();
         
-        MultiValueMod mod = multiValueMod(attrsToModify, Provisioning.A_zimbraAutoProvScheduledDomains);
+        MultiValueMod mod = multiValueMod(attrsToModify, Provisioning.A_zmailAutoProvScheduledDomains);
         if (mod != null && (mod.adding() || mod.replacing())) {
             for (String domainName : mod.valuesSet()) {
                 Domain domain = prov.get(DomainBy.name, domainName);
@@ -59,14 +59,14 @@ public class AutoProvScheduledDomains extends AttributeCallback {
     }
     
     private boolean autoProvisionEnabled(Domain domain) {
-        return domain.getMultiAttrSet(Provisioning.A_zimbraAutoProvMode).contains(AutoProvMode.EAGER.name());
+        return domain.getMultiAttrSet(Provisioning.A_zmailAutoProvMode).contains(AutoProvMode.EAGER.name());
     }
     
     
     @Override
     public void postModify(CallbackContext context, String attrName, Entry entry) {
         // do not run this callback unless inside the server
-        if (!Zimbra.started()) {
+        if (!Zmail.started()) {
             return;
         }
         
@@ -79,14 +79,14 @@ public class AutoProvScheduledDomains extends AttributeCallback {
                 }
             }
         } catch (ServiceException e) {
-            ZimbraLog.misc.warn("unable to validate server", e);
+            ZmailLog.misc.warn("unable to validate server", e);
             return;
         }
         
         try {
             AutoProvisionThread.switchAutoProvThreadIfNecessary();
         } catch (ServiceException e) {
-            ZimbraLog.autoprov.error("unable to switch auto provisioning thread", e);
+            ZmailLog.autoprov.error("unable to switch auto provisioning thread", e);
         }
     }
 

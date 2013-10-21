@@ -12,23 +12,23 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.index.query;
+package org.zmail.cs.index.query;
 
 import java.util.List;
 
 import com.google.common.base.Strings;
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.common.util.Pair;
-import com.zimbra.cs.index.DBQueryOperation;
-import com.zimbra.cs.index.IntersectionQueryOperation;
-import com.zimbra.cs.index.NoResultsQueryOperation;
-import com.zimbra.cs.index.QueryOperation;
-import com.zimbra.cs.index.UnionQueryOperation;
-import com.zimbra.cs.mailbox.Folder;
-import com.zimbra.cs.mailbox.MailServiceException;
-import com.zimbra.cs.mailbox.Mailbox;
-import com.zimbra.cs.mailbox.Mountpoint;
-import com.zimbra.cs.service.util.ItemId;
+import org.zmail.common.service.ServiceException;
+import org.zmail.common.util.Pair;
+import org.zmail.cs.index.DBQueryOperation;
+import org.zmail.cs.index.IntersectionQueryOperation;
+import org.zmail.cs.index.NoResultsQueryOperation;
+import org.zmail.cs.index.QueryOperation;
+import org.zmail.cs.index.UnionQueryOperation;
+import org.zmail.cs.mailbox.Folder;
+import org.zmail.cs.mailbox.MailServiceException;
+import org.zmail.cs.mailbox.Mailbox;
+import org.zmail.cs.mailbox.Mountpoint;
+import org.zmail.cs.service.util.ItemId;
 
 /**
  * Query IN or UNDER a folder.

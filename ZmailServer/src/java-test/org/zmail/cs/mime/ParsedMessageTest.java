@@ -12,7 +12,7 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.mime;
+package org.zmail.cs.mime;
 
 import java.util.Arrays;
 import java.util.List;
@@ -23,14 +23,14 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 
 import com.google.common.io.ByteStreams;
-import com.zimbra.common.util.L10nUtil;
-import com.zimbra.common.util.Pair;
-import com.zimbra.common.util.ZimbraLog;
-import com.zimbra.cs.account.MockProvisioning;
-import com.zimbra.cs.account.Provisioning;
-import com.zimbra.cs.index.IndexDocument;
-import com.zimbra.cs.index.LuceneFields;
-import com.zimbra.cs.index.analysis.RFC822AddressTokenStream;
+import org.zmail.common.util.L10nUtil;
+import org.zmail.common.util.Pair;
+import org.zmail.common.util.ZmailLog;
+import org.zmail.cs.account.MockProvisioning;
+import org.zmail.cs.account.Provisioning;
+import org.zmail.cs.index.IndexDocument;
+import org.zmail.cs.index.LuceneFields;
+import org.zmail.cs.index.analysis.RFC822AddressTokenStream;
 
 /**
  * Unit test for {@link ParsedMessage}.
@@ -138,7 +138,7 @@ public final class ParsedMessageTest {
     public void encryptedFragment() throws Exception {
         String msgWasEncrypted = L10nUtil.getMessage(L10nUtil.MsgKey.encryptedMessageFragment);
         if (msgWasEncrypted == null) {
-            ZimbraLog.misc.error("'encryptedMessageFragment' key missing from ZsMsg.properties");
+            ZmailLog.misc.error("'encryptedMessageFragment' key missing from ZsMsg.properties");
             msgWasEncrypted = "";
         }
 

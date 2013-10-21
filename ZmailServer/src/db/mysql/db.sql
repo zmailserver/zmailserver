@@ -12,23 +12,23 @@
 -- basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
 -- ***** END LICENSE BLOCK *****
 --
-CREATE DATABASE zimbra;
-ALTER DATABASE zimbra DEFAULT CHARACTER SET utf8;
+CREATE DATABASE zmail;
+ALTER DATABASE zmail DEFAULT CHARACTER SET utf8;
 
-USE zimbra;
+USE zmail;
 
-GRANT ALL ON zimbra.* TO 'zimbra' IDENTIFIED BY 'zimbra';
-GRANT ALL ON zimbra.* TO 'zimbra'@'localhost' IDENTIFIED BY 'zimbra';
-GRANT ALL ON zimbra.* TO 'zimbra'@'localhost.localdomain' IDENTIFIED BY 'zimbra';
-GRANT ALL ON zimbra.* TO 'root'@'localhost.localdomain' IDENTIFIED BY 'zimbra';
+GRANT ALL ON zmail.* TO 'zmail' IDENTIFIED BY 'zmail';
+GRANT ALL ON zmail.* TO 'zmail'@'localhost' IDENTIFIED BY 'zmail';
+GRANT ALL ON zmail.* TO 'zmail'@'localhost.localdomain' IDENTIFIED BY 'zmail';
+GRANT ALL ON zmail.* TO 'root'@'localhost.localdomain' IDENTIFIED BY 'zmail';
 
--- The zimbra user needs to be able to create and drop databases and perform
+-- The zmail user needs to be able to create and drop databases and perform
 -- backup and restore operations.  Give
--- zimbra root access for now to keep things simple until there is a need
+-- zmail root access for now to keep things simple until there is a need
 -- to add more security.
-GRANT ALL ON *.* TO 'zimbra' WITH GRANT OPTION;
-GRANT ALL ON *.* TO 'zimbra'@'localhost' WITH GRANT OPTION;
-GRANT ALL ON *.* TO 'zimbra'@'localhost.localdomain' WITH GRANT OPTION;
+GRANT ALL ON *.* TO 'zmail' WITH GRANT OPTION;
+GRANT ALL ON *.* TO 'zmail'@'localhost' WITH GRANT OPTION;
+GRANT ALL ON *.* TO 'zmail'@'localhost.localdomain' WITH GRANT OPTION;
 GRANT ALL ON *.* TO 'root'@'localhost.localdomain' WITH GRANT OPTION;
 
 -- -----------------------------------------------------------------------
@@ -72,10 +72,10 @@ CREATE TABLE current_volumes (
 
 INSERT INTO volume (id, type, name, path, file_bits, file_group_bits,
     mailbox_bits, mailbox_group_bits, compress_blobs, compression_threshold)
-  VALUES (1, 1, 'message1', '/opt/zimbra/store', 12, 8, 12, 8, 0, 4096);
+  VALUES (1, 1, 'message1', '/opt/zmail/store', 12, 8, 12, 8, 0, 4096);
 INSERT INTO volume (id, type, name, path, file_bits, file_group_bits,
     mailbox_bits, mailbox_group_bits, compress_blobs, compression_threshold)
-  VALUES (2, 10, 'index1',   '/opt/zimbra/index', 12, 8, 12, 8, 0, 4096);
+  VALUES (2, 10, 'index1',   '/opt/zmail/index', 12, 8, 12, 8, 0, 4096);
 
 INSERT INTO current_volumes (message_volume_id, index_volume_id, next_mailbox_id) VALUES (1, 2, 1);
 COMMIT;

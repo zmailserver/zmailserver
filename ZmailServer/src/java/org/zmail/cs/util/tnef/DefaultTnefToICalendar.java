@@ -13,7 +13,7 @@
  * ***** END LICENSE BLOCK *****
  */
 
-package com.zimbra.cs.util.tnef;
+package org.zmail.cs.util.tnef;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -48,19 +48,19 @@ import net.freeutils.tnef.MAPIProp;
 import net.freeutils.tnef.MAPIProps;
 import net.freeutils.tnef.TNEFInputStream;
 
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.common.util.Log;
-import com.zimbra.common.util.ZimbraLog;
-import com.zimbra.cs.util.tnef.TNEFtoIcalendarServiceException.UnsupportedTnefCalendaringMsgException;
-import com.zimbra.cs.util.tnef.mapi.BusyStatus;
-import com.zimbra.cs.util.tnef.mapi.ChangedInstanceInfo;
-import com.zimbra.cs.util.tnef.mapi.ExceptionInfoOverrideFlag;
-import com.zimbra.cs.util.tnef.mapi.MapiPropertyId;
-import com.zimbra.cs.util.tnef.mapi.MeetingTypeFlag;
-import com.zimbra.cs.util.tnef.mapi.RecurrenceDefinition;
-import com.zimbra.cs.util.tnef.mapi.TaskMode;
-import com.zimbra.cs.util.tnef.mapi.TaskStatus;
-import com.zimbra.cs.util.tnef.mapi.TimeZoneDefinition;
+import org.zmail.common.service.ServiceException;
+import org.zmail.common.util.Log;
+import org.zmail.common.util.ZmailLog;
+import org.zmail.cs.util.tnef.TNEFtoIcalendarServiceException.UnsupportedTnefCalendaringMsgException;
+import org.zmail.cs.util.tnef.mapi.BusyStatus;
+import org.zmail.cs.util.tnef.mapi.ChangedInstanceInfo;
+import org.zmail.cs.util.tnef.mapi.ExceptionInfoOverrideFlag;
+import org.zmail.cs.util.tnef.mapi.MapiPropertyId;
+import org.zmail.cs.util.tnef.mapi.MeetingTypeFlag;
+import org.zmail.cs.util.tnef.mapi.RecurrenceDefinition;
+import org.zmail.cs.util.tnef.mapi.TaskMode;
+import org.zmail.cs.util.tnef.mapi.TaskStatus;
+import org.zmail.cs.util.tnef.mapi.TimeZoneDefinition;
 import net.fortuna.ical4j.model.parameter.Cn;
 import net.fortuna.ical4j.model.parameter.SentBy;
 import net.fortuna.ical4j.model.property.Action;
@@ -84,7 +84,7 @@ import net.fortuna.ical4j.model.property.XProperty;
  */
 public class DefaultTnefToICalendar implements TnefToICalendar {
 
-    static Log sLog = ZimbraLog.tnef;
+    static Log sLog = ZmailLog.tnef;
 
     private RecurrenceDefinition recurDef;
     private DtStamp dtstamp;
@@ -93,7 +93,7 @@ public class DefaultTnefToICalendar implements TnefToICalendar {
     private ICALENDAR_TYPE icalType;
 
     /* (non-Javadoc)
-     * @see com.zimbra.cs.util.tnef.TnefToICalendar#convert(java.io.InputStream, net.fortuna.ical4j.data.ContentHandler)
+     * @see org.zmail.cs.util.tnef.TnefToICalendar#convert(java.io.InputStream, net.fortuna.ical4j.data.ContentHandler)
      */
     public boolean convert(MimeMessage mimeMsg, InputStream tnefInput, ContentHandler icalOutput)
             throws ServiceException {
@@ -267,7 +267,7 @@ public class DefaultTnefToICalendar implements TnefToICalendar {
             icalOutput.startCalendar();
             // Results in a 2nd PRODID in iCalendar
             // IcalUtil.addProperty(icalOutput, Property.PRODID,
-            //         "Zimbra-TNEF-iCalendar-Converter");
+            //         "Zmail-TNEF-iCalendar-Converter");
             IcalUtil.addProperty(icalOutput, method);
             if (recurDef != null) {
                 String MsCalScale = recurDef.xMicrosoftCalscale();
@@ -424,7 +424,7 @@ public class DefaultTnefToICalendar implements TnefToICalendar {
             addAttendees(icalOutput, mimeMsg, partstat, replyWanted);
             // According to MS-OXCICAL, we could add "RESOURCES" properties from PidLidNonSendableBcc
             // with ';' replaced with ','.  These are resources without a mail address
-            // Not done as Zimbra doesn't currently support "RESOURCES".
+            // Not done as Zmail doesn't currently support "RESOURCES".
             if (categories != null) {
                 CategoryList cl = new CategoryList();
                 for (String category:categories) {

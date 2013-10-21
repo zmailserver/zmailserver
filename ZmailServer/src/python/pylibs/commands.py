@@ -21,12 +21,12 @@ import subprocess
 import time
 import StringIO
 
-from com.zimbra.cs.account import Provisioning
-from com.zimbra.cs.account.ldap import LdapProvisioning
-from com.zimbra.common.localconfig import LC
-from com.zimbra.cs.extension import ExtensionDispatcherServlet
-from com.zimbra.cs.httpclient import URLUtil
-from com.zimbra.cs.util import ProxyConfGen
+from org.zmail.cs.account import Provisioning
+from org.zmail.cs.account.ldap import LdapProvisioning
+from org.zmail.common.localconfig import LC
+from org.zmail.cs.extension import ExtensionDispatcherServlet
+from org.zmail.cs.httpclient import URLUtil
+from org.zmail.cs.util import ProxyConfGen
 
 exe = {
 	"POSTCONF"      : "postfix/sbin/postconf -e",
@@ -56,7 +56,7 @@ exe = {
 	}
 
 class Command:
-	PropertyConfigurator.configure("/opt/zimbra/conf/zmconfigd.log4j.properties");
+	PropertyConfigurator.configure("/opt/zmail/conf/zmconfigd.log4j.properties");
 	P = Provisioning.getInstance(Provisioning.CacheMode.OFF)
 
 	@classmethod
@@ -69,7 +69,7 @@ class Command:
 			except:
 				pass  # mailboxd is down, or not running here, either way we don't care.
 
-	def __init__(self, desc, name, cmd=None, func=None, args=None, base="/opt/zimbra"):
+	def __init__(self, desc, name, cmd=None, func=None, args=None, base="/opt/zmail"):
 		self.desc = desc
 		self.name = name
 		self.cmd = None
@@ -163,7 +163,7 @@ def gamau(sArgs=None, aArgs=None):
 		P = Command.P
 		o = []
 		for server in P.getAllServers():
-			if server.getBooleanAttr(Provisioning.A_zimbraMtaAuthTarget, False):
+			if server.getBooleanAttr(Provisioning.A_zmailMtaAuthTarget, False):
 				o.append(URLUtil.getAdminURL(server))
 
 		output = o
@@ -184,8 +184,8 @@ def garpu(sArgs=None, aArgs=None):
 		REVERSE_PROXY_PORT = 7072
 		REVERSE_PROXY_PATH = ExtensionDispatcherServlet.EXTENSION_PATH + "/nginx-lookup"
 		for server in P.getAllServers():
-			if server.getBooleanAttr(Provisioning.A_zimbraReverseProxyLookupTarget, False):
-				o.append("%s%s:%d%s" % (REVERSE_PROXY_PROTO, server.getAttr(Provisioning.A_zimbraServiceHostname, ""),REVERSE_PROXY_PORT,REVERSE_PROXY_PATH))
+			if server.getBooleanAttr(Provisioning.A_zmailReverseProxyLookupTarget, False):
+				o.append("%s%s:%d%s" % (REVERSE_PROXY_PROTO, server.getAttr(Provisioning.A_zmailServiceHostname, ""),REVERSE_PROXY_PORT,REVERSE_PROXY_PATH))
 
 		output = o
 
@@ -202,18 +202,18 @@ def garpb(sArgs=None, aArgs=None):
 		P = Command.P
 		o = []
 		for server in P.getAllServers():
-			isTarget = server.getBooleanAttr(Provisioning.A_zimbraReverseProxyLookupTarget, False)
+			isTarget = server.getBooleanAttr(Provisioning.A_zmailReverseProxyLookupTarget, False)
 			if not isTarget:
 				continue
-			mode = server.getAttr(Provisioning.A_zimbraMailMode, None)
+			mode = server.getAttr(Provisioning.A_zmailMailMode, None)
 			if mode is None:
 				continue
 			if not Provisioning.MailMode.fromString(mode) in \
 				(Provisioning.MailMode.http, Provisioning.MailMode.mixed, Provisioning.MailMode.both):
 				continue
 
-			backendPort = server.getIntAttr(Provisioning.A_zimbraMailPort, 0)
-			serviceName = server.getAttr(Provisioning.A_zimbraServiceHostname, "")
+			backendPort = server.getIntAttr(Provisioning.A_zmailMailPort, 0)
+			serviceName = server.getAttr(Provisioning.A_zmailServiceHostname, "")
 
 			o.append("    server %s:%d;" % (serviceName,backendPort))
 
@@ -238,7 +238,7 @@ def gamcs(sArgs=None, aArgs=None):
 		P = Command.P
 		o = []
 		for server in P.getAllServers(Provisioning.SERVICE_MEMCACHED):
-			o.append("%s:%s" % (server.getAttr(Provisioning.A_zimbraServiceHostname, ""),server.getAttr(Provisioning.A_zimbraMemcachedBindPort, "")))
+			o.append("%s:%s" % (server.getAttr(Provisioning.A_zmailServiceHostname, ""),server.getAttr(Provisioning.A_zmailMemcachedBindPort, "")))
 
 		output = o
 
@@ -296,7 +296,7 @@ commands = {
 	"gs:enabled" : Command(
 		desc = "Enabled Services for host",
 		name = "gs:enabled",
-		cmd  = exe['ZMPROV']+" gs %s zimbraServiceEnabled",
+		cmd  = exe['ZMPROV']+" gs %s zmailServiceEnabled",
 	),
 	"gs" : Command(
 		desc = "Configuration for server ",

@@ -19,15 +19,15 @@
  * TODO To change the template for this generated file go to
  * Window - Preferences - Java - Code Style - Code Templates
  */
-package com.zimbra.cs.account.cache;
+package org.zmail.cs.account.cache;
 
 import java.util.List;
 import java.util.Map;
 
-import com.zimbra.common.util.MapUtil;
+import org.zmail.common.util.MapUtil;
 
-import com.zimbra.common.stats.Counter;
-import com.zimbra.cs.account.NamedEntry;
+import org.zmail.common.stats.Counter;
+import org.zmail.cs.account.NamedEntry;
 
 /**
  * @author schemers

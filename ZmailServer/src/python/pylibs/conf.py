@@ -20,15 +20,15 @@ class Config:
 	def __init__(self):
 		self.config = {}
 		self.progname 	= "zmconfigd"
-		if (os.getenv("zimbra_server_hostname") is not None):
-			self.hostname 	= os.getenv("zimbra_server_hostname")
+		if (os.getenv("zmail_server_hostname") is not None):
+			self.hostname 	= os.getenv("zmail_server_hostname")
 		else:
-			self.hostname 	= os.popen("/opt/zimbra/bin/zmhostname").readline().strip()
+			self.hostname 	= os.popen("/opt/zmail/bin/zmhostname").readline().strip()
 		if (self.hostname is None or self.hostname == ""):
 			os._exit(1)
 		self.wd_all 	= False
 		self.debug 		= False
-		self.baseDir	= "/opt/zimbra"
+		self.baseDir	= "/opt/zmail"
 		self.logStatus 	= { 
 						4 : "Debug", 
 						3 : "Info", 

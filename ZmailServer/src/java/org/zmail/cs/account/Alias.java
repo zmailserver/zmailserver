@@ -19,13 +19,13 @@
  * TODO To change the template for this generated file go to
  * Window - Preferences - Java - Code Style - Code Templates
  */
-package com.zimbra.cs.account;
+package org.zmail.cs.account;
 
 import java.util.Map;
 
-import com.zimbra.cs.account.accesscontrol.TargetType;
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.common.util.ZimbraLog;
+import org.zmail.cs.account.accesscontrol.TargetType;
+import org.zmail.common.service.ServiceException;
+import org.zmail.common.util.ZmailLog;
 
 /**
  * @author anandp
@@ -58,7 +58,7 @@ public class Alias extends MailTarget {
         try {
             mTarget = prov.getAliasTarget(this, false);
         } catch (ServiceException e) {
-            ZimbraLog.account.warn("cannot find target " +  getId() + " for alias " + getName(), e);
+            ZmailLog.account.warn("cannot find target " +  getId() + " for alias " + getName(), e);
         }
         
         // set the dangling flag so we don't search again next time when called

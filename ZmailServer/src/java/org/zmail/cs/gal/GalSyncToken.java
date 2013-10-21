@@ -12,17 +12,17 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.gal;
+package org.zmail.cs.gal;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashMap;
 
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.common.util.DateUtil;
-import com.zimbra.common.util.ZimbraLog;
-import com.zimbra.cs.ldap.LdapUtil;
+import org.zmail.common.service.ServiceException;
+import org.zmail.common.util.DateUtil;
+import org.zmail.common.util.ZmailLog;
+import org.zmail.cs.ldap.LdapUtil;
 
 public class GalSyncToken {
 	public GalSyncToken(String token) {
@@ -101,11 +101,11 @@ public class GalSyncToken {
 	}
 	
 	public void merge(GalSyncToken that) {
-		ZimbraLog.gal.debug("merging token "+this+" with "+that);
+		ZmailLog.gal.debug("merging token "+this+" with "+that);
 		mLdapTimestamp = LdapUtil.getEarlierTimestamp(this.mLdapTimestamp, that.mLdapTimestamp);
 		for (String aid : that.mChangeIdMap.keySet())
 			mChangeIdMap.put(aid, that.mChangeIdMap.get(aid));
-		ZimbraLog.gal.debug("result: "+this);
+		ZmailLog.gal.debug("result: "+this);
 	}
 	
 	public String toString() {

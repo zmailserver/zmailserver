@@ -12,28 +12,28 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.account.ldap.upgrade;
+package org.zmail.cs.account.ldap.upgrade;
 
 import java.util.Map;
 
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.cs.account.Provisioning;
-import com.zimbra.cs.ldap.IAttributes;
-import com.zimbra.cs.ldap.LdapClient;
-import com.zimbra.cs.ldap.LdapConstants;
-import com.zimbra.cs.ldap.LdapServerType;
-import com.zimbra.cs.ldap.LdapUsage;
-import com.zimbra.cs.ldap.SearchLdapOptions;
-import com.zimbra.cs.ldap.ZLdapContext;
-import com.zimbra.cs.ldap.ZLdapFilterFactory;
-import com.zimbra.cs.ldap.ZMutableEntry;
-import com.zimbra.cs.ldap.SearchLdapOptions.SearchLdapVisitor;
+import org.zmail.common.service.ServiceException;
+import org.zmail.cs.account.Provisioning;
+import org.zmail.cs.ldap.IAttributes;
+import org.zmail.cs.ldap.LdapClient;
+import org.zmail.cs.ldap.LdapConstants;
+import org.zmail.cs.ldap.LdapServerType;
+import org.zmail.cs.ldap.LdapUsage;
+import org.zmail.cs.ldap.SearchLdapOptions;
+import org.zmail.cs.ldap.ZLdapContext;
+import org.zmail.cs.ldap.ZLdapFilterFactory;
+import org.zmail.cs.ldap.ZMutableEntry;
+import org.zmail.cs.ldap.SearchLdapOptions.SearchLdapVisitor;
 
 public class BUG_50465 extends UpgradeOp {
 
-    private static String ATTR_SPREADSHEET = Provisioning.A_zimbraFeatureBriefcaseSpreadsheetEnabled;
-    private static String ATTR_SLIDES = Provisioning.A_zimbraFeatureBriefcaseSlidesEnabled;
-    private static String ATTR_NOTEBOOK = Provisioning.A_zimbraFeatureNotebookEnabled;
+    private static String ATTR_SPREADSHEET = Provisioning.A_zmailFeatureBriefcaseSpreadsheetEnabled;
+    private static String ATTR_SLIDES = Provisioning.A_zmailFeatureBriefcaseSlidesEnabled;
+    private static String ATTR_NOTEBOOK = Provisioning.A_zmailFeatureNotebookEnabled;
     
     @Override
     void doUpgrade() throws ServiceException {

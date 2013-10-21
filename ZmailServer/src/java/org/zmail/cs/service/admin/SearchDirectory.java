@@ -16,34 +16,34 @@
 /*
  * Created on Jun 17, 2004
  */
-package com.zimbra.cs.service.admin;
+package org.zmail.cs.service.admin;
 
-import com.zimbra.common.account.Key;
-import com.zimbra.common.localconfig.LC;
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.common.soap.AdminConstants;
-import com.zimbra.cs.account.Account;
-import com.zimbra.cs.account.AccountServiceException;
-import com.zimbra.cs.account.Alias;
-import com.zimbra.cs.account.CalendarResource;
-import com.zimbra.cs.account.Cos;
-import com.zimbra.cs.account.DistributionList;
-import com.zimbra.cs.account.Domain;
-import com.zimbra.cs.account.DynamicGroup;
-import com.zimbra.cs.account.NamedEntry;
-import com.zimbra.cs.account.Provisioning;
-import com.zimbra.cs.account.SearchDirectoryOptions;
-import com.zimbra.cs.account.SearchDirectoryOptions.MakeObjectOpt;
-import com.zimbra.cs.account.SearchDirectoryOptions.SortOpt;
-import com.zimbra.cs.account.accesscontrol.HardRules.HardRule;
-import com.zimbra.cs.account.accesscontrol.Rights.Admin;
-import com.zimbra.cs.account.accesscontrol.AdminRight;
-import com.zimbra.cs.account.accesscontrol.TargetType;
-import com.zimbra.cs.ldap.ZLdapFilterFactory.FilterId;
-import com.zimbra.cs.session.AdminSession;
-import com.zimbra.cs.session.Session;
-import com.zimbra.common.soap.Element;
-import com.zimbra.soap.ZimbraSoapContext;
+import org.zmail.common.account.Key;
+import org.zmail.common.localconfig.LC;
+import org.zmail.common.service.ServiceException;
+import org.zmail.common.soap.AdminConstants;
+import org.zmail.cs.account.Account;
+import org.zmail.cs.account.AccountServiceException;
+import org.zmail.cs.account.Alias;
+import org.zmail.cs.account.CalendarResource;
+import org.zmail.cs.account.Cos;
+import org.zmail.cs.account.DistributionList;
+import org.zmail.cs.account.Domain;
+import org.zmail.cs.account.DynamicGroup;
+import org.zmail.cs.account.NamedEntry;
+import org.zmail.cs.account.Provisioning;
+import org.zmail.cs.account.SearchDirectoryOptions;
+import org.zmail.cs.account.SearchDirectoryOptions.MakeObjectOpt;
+import org.zmail.cs.account.SearchDirectoryOptions.SortOpt;
+import org.zmail.cs.account.accesscontrol.HardRules.HardRule;
+import org.zmail.cs.account.accesscontrol.Rights.Admin;
+import org.zmail.cs.account.accesscontrol.AdminRight;
+import org.zmail.cs.account.accesscontrol.TargetType;
+import org.zmail.cs.ldap.ZLdapFilterFactory.FilterId;
+import org.zmail.cs.session.AdminSession;
+import org.zmail.cs.session.Session;
+import org.zmail.common.soap.Element;
+import org.zmail.soap.ZmailSoapContext;
 
 import java.util.Arrays;
 import java.util.EnumSet;
@@ -62,7 +62,7 @@ public class SearchDirectory extends AdminDocumentHandler {
     
     private static final String SEARCH_DIRECTORY_ACCOUNT_DATA = "SearchDirectoryAccount";
 
-    public static final int MAX_SEARCH_RESULTS = LC.zimbra_directory_max_search_result.intValue();
+    public static final int MAX_SEARCH_RESULTS = LC.zmail_directory_max_search_result.intValue();
     
     /**
      * must be careful and only allow access to domain if domain admin
@@ -72,7 +72,7 @@ public class SearchDirectory extends AdminDocumentHandler {
     }
     
     public Element handle(Element request, Map<String, Object> context) throws ServiceException {
-        ZimbraSoapContext zsc = getZimbraSoapContext(context);
+        ZmailSoapContext zsc = getZmailSoapContext(context);
         Provisioning prov = Provisioning.getInstance();
 
         String query = request.getAttribute(AdminConstants.E_QUERY, null);
@@ -100,12 +100,12 @@ public class SearchDirectory extends AdminDocumentHandler {
             throw ServiceException.INVALID_REQUEST("cannot specify domain with coses flag", null);
         }
         
-        // add zimbraMailTransport if account is requested
+        // add zmailMailTransport if account is requested
         // it is needed for figuring out if the account is an "external"(not yet migrated) account.
         String attrsStr = origAttrsStr;
         if (objTypes.contains(SearchDirectoryOptions.ObjectType.accounts) &&
-            attrsStr != null && !attrsStr.contains(Provisioning.A_zimbraMailTransport)) {
-            attrsStr = attrsStr + "," + Provisioning.A_zimbraMailTransport;
+            attrsStr != null && !attrsStr.contains(Provisioning.A_zmailMailTransport)) {
+            attrsStr = attrsStr + "," + Provisioning.A_zmailMailTransport;
         }
         
         String[] attrs = attrsStr == null ? null : attrsStr.split(",");

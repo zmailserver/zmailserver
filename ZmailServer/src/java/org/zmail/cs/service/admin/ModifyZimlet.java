@@ -12,33 +12,33 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.service.admin;
+package org.zmail.cs.service.admin;
 
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import com.zimbra.common.account.Key;
-import com.zimbra.common.account.Key.CosBy;
-import com.zimbra.common.account.ProvisioningConstants;
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.common.soap.AdminConstants;
-import com.zimbra.cs.account.AccountServiceException;
-import com.zimbra.cs.account.Cos;
-import com.zimbra.cs.account.Provisioning;
-import com.zimbra.cs.account.Zimlet;
-import com.zimbra.cs.account.accesscontrol.AdminRight;
-import com.zimbra.cs.account.accesscontrol.Rights.Admin;
-import com.zimbra.cs.zimlet.ZimletException;
-import com.zimbra.cs.zimlet.ZimletUtil;
-import com.zimbra.common.soap.Element;
-import com.zimbra.soap.ZimbraSoapContext;
+import org.zmail.common.account.Key;
+import org.zmail.common.account.Key.CosBy;
+import org.zmail.common.account.ProvisioningConstants;
+import org.zmail.common.service.ServiceException;
+import org.zmail.common.soap.AdminConstants;
+import org.zmail.cs.account.AccountServiceException;
+import org.zmail.cs.account.Cos;
+import org.zmail.cs.account.Provisioning;
+import org.zmail.cs.account.Zimlet;
+import org.zmail.cs.account.accesscontrol.AdminRight;
+import org.zmail.cs.account.accesscontrol.Rights.Admin;
+import org.zmail.cs.zimlet.ZimletException;
+import org.zmail.cs.zimlet.ZimletUtil;
+import org.zmail.common.soap.Element;
+import org.zmail.soap.ZmailSoapContext;
 
 public class ModifyZimlet extends AdminDocumentHandler {
 
 	@Override
 	public Element handle(Element request, Map<String, Object> context) throws ServiceException {
-		ZimbraSoapContext zsc = getZimbraSoapContext(context);
+		ZmailSoapContext zsc = getZmailSoapContext(context);
         
 		Element z = request.getElement(AdminConstants.E_ZIMLET);
 		
@@ -58,7 +58,7 @@ public class ModifyZimlet extends AdminDocumentHandler {
 		return response;
 	}
 	
-    void doAcl(ZimbraSoapContext zsc, Map<String, Object> context, Element z) throws ServiceException {
+    void doAcl(ZmailSoapContext zsc, Map<String, Object> context, Element z) throws ServiceException {
 	    String name = z.getAttribute(AdminConstants.A_NAME);
         Element a = z.getElement(AdminConstants.E_ACL);
         String cosName = a.getAttribute(AdminConstants.A_COS, null);
@@ -86,7 +86,7 @@ public class ModifyZimlet extends AdminDocumentHandler {
 		}
 	}
 
-    void doStatus(ZimbraSoapContext zsc, Map<String, Object> context, Element z) throws ServiceException {
+    void doStatus(ZmailSoapContext zsc, Map<String, Object> context, Element z) throws ServiceException {
 	    String name = z.getAttribute(AdminConstants.A_NAME);
 	    
 	    Zimlet zimlet = Provisioning.getInstance().getZimlet(name);
@@ -99,7 +99,7 @@ public class ModifyZimlet extends AdminDocumentHandler {
 	    boolean status = val.equalsIgnoreCase("enabled");
 
 	    Map<String, String> attrRightNeeded = new HashMap<String,String>();
-	    attrRightNeeded.put(Provisioning.A_zimbraZimletEnabled, status ? ProvisioningConstants.TRUE : ProvisioningConstants.FALSE);
+	    attrRightNeeded.put(Provisioning.A_zmailZimletEnabled, status ? ProvisioningConstants.TRUE : ProvisioningConstants.FALSE);
 	    checkRight(zsc, context, zimlet, attrRightNeeded);
 	    
 		try {
@@ -109,7 +109,7 @@ public class ModifyZimlet extends AdminDocumentHandler {
 		}
 	}
 
-    void doPriority(ZimbraSoapContext zsc, Map<String, Object> context, Element z) throws ServiceException {
+    void doPriority(ZmailSoapContext zsc, Map<String, Object> context, Element z) throws ServiceException {
 	    String name = z.getAttribute(AdminConstants.A_NAME);
 	    
 	    Zimlet zimlet = Provisioning.getInstance().getZimlet(name);
@@ -123,10 +123,10 @@ public class ModifyZimlet extends AdminDocumentHandler {
         // ===========
         // check right
         //
-        // need right to modify zimbraZimletPriority on *all* zimlets, because
+        // need right to modify zmailZimletPriority on *all* zimlets, because
         // all zimlets can be re-prioritized.
         Map<String, String> attrRightNeeded = new HashMap<String,String>();
-        attrRightNeeded.put(Provisioning.A_zimbraZimletPriority, null); // yuck, pass null for the value
+        attrRightNeeded.put(Provisioning.A_zmailZimletPriority, null); // yuck, pass null for the value
         
         List<Zimlet> allZimlets = Provisioning.getInstance().listAllZimlets();
         for (Zimlet zl : allZimlets) {
@@ -145,8 +145,8 @@ public class ModifyZimlet extends AdminDocumentHandler {
         relatedRights.add(Admin.R_manageZimlet);
         relatedRights.add(Admin.R_modifyZimlet);
         notes.add("For acl: needs " + Admin.R_manageZimlet.getName() + " on cos.");
-        notes.add("For status: needs right to set " + Provisioning.A_zimbraZimletEnabled + " on the zimlet");
-        notes.add("For priority: needs right to set " + Provisioning.A_zimbraZimletPriority + " on *all* zimlets, " +
+        notes.add("For status: needs right to set " + Provisioning.A_zmailZimletEnabled + " on the zimlet");
+        notes.add("For priority: needs right to set " + Provisioning.A_zmailZimletPriority + " on *all* zimlets, " +
                 "because potentially the attribute can be modified on all zimlets.");
     }
 }

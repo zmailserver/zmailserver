@@ -16,7 +16,7 @@
 /*
  * Created on Apr 7, 2005
  */
-package com.zimbra.cs.index;
+package org.zmail.cs.index;
 
 /**
  * @author dkarp

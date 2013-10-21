@@ -13,21 +13,21 @@
  * ***** END LICENSE BLOCK *****
  */
 
-package com.zimbra.qa.unittest;
+package org.zmail.qa.unittest;
 
 import java.util.HashMap;
 import java.util.Map;
 
 import junit.framework.TestCase;
 
-import com.zimbra.cs.account.Account;
-import com.zimbra.cs.account.Provisioning;
-import com.zimbra.common.account.Key.AccountBy;
-import com.zimbra.cs.client.LmcSession;
-import com.zimbra.cs.client.soap.LmcSearchRequest;
-import com.zimbra.cs.mailbox.Mailbox;
-import com.zimbra.cs.mailbox.MailboxManager;
-import com.zimbra.common.soap.SoapFaultException;
+import org.zmail.cs.account.Account;
+import org.zmail.cs.account.Provisioning;
+import org.zmail.common.account.Key.AccountBy;
+import org.zmail.cs.client.LmcSession;
+import org.zmail.cs.client.soap.LmcSearchRequest;
+import org.zmail.cs.mailbox.Mailbox;
+import org.zmail.cs.mailbox.MailboxManager;
+import org.zmail.common.soap.SoapFaultException;
 
 public class TestAuthentication
 extends TestCase {
@@ -45,7 +45,7 @@ extends TestCase {
         // Create temporary account
         String address = TestUtil.getAddress(USER_NAME);
         Map<String, Object> attrs = new HashMap<String, Object>();
-        attrs.put("zimbraMailHost", TestUtil.getDomain());
+        attrs.put("zmailMailHost", TestUtil.getDomain());
         attrs.put("cn", "Unit test temporary user");
         attrs.put("displayName", "Unit test temporary user");
         Account account = mProv.createAccount(address, PASSWORD, attrs);

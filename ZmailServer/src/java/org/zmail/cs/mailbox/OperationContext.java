@@ -12,22 +12,22 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.mailbox;
+package org.zmail.cs.mailbox;
 
 import java.util.HashMap;
 import java.util.Map;
 
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.cs.account.Account;
-import com.zimbra.cs.account.AccountServiceException;
-import com.zimbra.cs.account.AuthToken;
-import com.zimbra.cs.account.GuestAccount;
-import com.zimbra.cs.account.Provisioning;
-import com.zimbra.common.account.Key.AccountBy;
-import com.zimbra.cs.redolog.op.RedoableOp;
-import com.zimbra.cs.service.AuthProvider;
-import com.zimbra.cs.session.Session;
-import com.zimbra.cs.util.AccountUtil;
+import org.zmail.common.service.ServiceException;
+import org.zmail.cs.account.Account;
+import org.zmail.cs.account.AccountServiceException;
+import org.zmail.cs.account.AuthToken;
+import org.zmail.cs.account.GuestAccount;
+import org.zmail.cs.account.Provisioning;
+import org.zmail.common.account.Key.AccountBy;
+import org.zmail.cs.redolog.op.RedoableOp;
+import org.zmail.cs.service.AuthProvider;
+import org.zmail.cs.session.Session;
+import org.zmail.cs.util.AccountUtil;
 
 public class OperationContext {
     public static final boolean CHECK_CREATED = false, CHECK_MODIFIED = true;
@@ -71,7 +71,7 @@ public class OperationContext {
         String accountId = auth.getAccountId();
         isAdmin = AuthToken.isAnyAdmin(auth);
         authuser = Provisioning.getInstance().get(AccountBy.id, accountId, authToken);
-        if (authuser == null || !auth.isZimbraUser()) {
+        if (authuser == null || !auth.isZmailUser()) {
             if (auth.getDigest() != null || auth.getAccessKey() != null) {
                 authuser = new GuestAccount(auth);
             } else {
@@ -153,7 +153,7 @@ public class OperationContext {
     }
 
     /**
-     * @see com.zimbra.cs.service.mail.CalendarRequest#isOnBehalfOfRequest(com.zimbra.soap.ZimbraSoapContext)
+     * @see org.zmail.cs.service.mail.CalendarRequest#isOnBehalfOfRequest(org.zmail.soap.ZmailSoapContext)
      */
     public boolean isOnBehalfOfRequest(Mailbox mbox) {
         if (!isDelegatedRequest(mbox)) {

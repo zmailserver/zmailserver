@@ -12,22 +12,22 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.index;
+package org.zmail.cs.index;
 
 import org.apache.lucene.document.Document;
 
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.cs.mailbox.MailItem;
-import com.zimbra.cs.mailbox.Mailbox;
+import org.zmail.common.service.ServiceException;
+import org.zmail.cs.mailbox.MailItem;
+import org.zmail.cs.mailbox.Mailbox;
 
-public final class DocumentHit extends ZimbraHit {
+public final class DocumentHit extends ZmailHit {
 
     private final int itemId;
     private final Document luceneDoc;
-    private com.zimbra.cs.mailbox.Document docItem;
+    private org.zmail.cs.mailbox.Document docItem;
 
-    DocumentHit(ZimbraQueryResultsImpl results, Mailbox mbx, int id,
-            com.zimbra.cs.mailbox.Document docItem, Document luceneDoc, Object sortKey) {
+    DocumentHit(ZmailQueryResultsImpl results, Mailbox mbx, int id,
+            org.zmail.cs.mailbox.Document docItem, Document luceneDoc, Object sortKey) {
         super(results, mbx, sortKey);
         this.itemId = id;
         this.luceneDoc = luceneDoc;
@@ -50,8 +50,8 @@ public final class DocumentHit extends ZimbraHit {
 
     @Override
     void setItem(MailItem item) {
-        if (item instanceof com.zimbra.cs.mailbox.Document) {
-            docItem = (com.zimbra.cs.mailbox.Document) item;
+        if (item instanceof org.zmail.cs.mailbox.Document) {
+            docItem = (org.zmail.cs.mailbox.Document) item;
         }
     }
 
@@ -70,7 +70,7 @@ public final class DocumentHit extends ZimbraHit {
         return getDocument();
     }
 
-    public com.zimbra.cs.mailbox.Document getDocument() throws ServiceException {
+    public org.zmail.cs.mailbox.Document getDocument() throws ServiceException {
         if (docItem == null) {
             docItem = getMailbox().getDocumentById(null, itemId);
         }

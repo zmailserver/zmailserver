@@ -12,7 +12,7 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.account.accesscontrol;
+package org.zmail.cs.account.accesscontrol;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -25,21 +25,21 @@ import java.util.Set;
 import java.util.SortedMap;
 import java.util.TreeMap;
 
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.common.util.Log;
-import com.zimbra.common.util.SetUtil;
-import com.zimbra.common.util.ZimbraLog;
-import com.zimbra.cs.account.Domain;
-import com.zimbra.cs.account.Entry;
-import com.zimbra.cs.account.Group;
-import com.zimbra.cs.account.Provisioning;
-import com.zimbra.cs.account.accesscontrol.RightBearer.GlobalAdmin;
-import com.zimbra.cs.account.accesscontrol.RightBearer.Grantee;
-import com.zimbra.cs.service.account.ToXML;
+import org.zmail.common.service.ServiceException;
+import org.zmail.common.util.Log;
+import org.zmail.common.util.SetUtil;
+import org.zmail.common.util.ZmailLog;
+import org.zmail.cs.account.Domain;
+import org.zmail.cs.account.Entry;
+import org.zmail.cs.account.Group;
+import org.zmail.cs.account.Provisioning;
+import org.zmail.cs.account.accesscontrol.RightBearer.GlobalAdmin;
+import org.zmail.cs.account.accesscontrol.RightBearer.Grantee;
+import org.zmail.cs.service.account.ToXML;
 
 public class CollectEffectiveRights {
     
-    private static final Log sLog = ZimbraLog.acl;
+    private static final Log sLog = ZmailLog.acl;
     
     private RightBearer mRightBearer;
     private Entry mTarget;
@@ -204,7 +204,7 @@ public class CollectEffectiveRights {
         CheckAttrRight.CollectAttrsResult car = CheckAttrRight.CollectAttrsResult.SOME;
         
         // check the target entry itself
-        List<ZimbraACE> acl = ACLUtil.getAllACEs(mTarget);
+        List<ZmailACE> acl = ACLUtil.getAllACEs(mTarget);
         if (acl != null) {
             collectAdminPresetRightOnTarget(acl, targetType, relativity, false, allowed, denied);
             relativity += 2;
@@ -249,9 +249,9 @@ public class CollectEffectiveRights {
             } else {
                 // end of group targets, put all collected denied and allowed grants into one list, as if 
                 // they are granted on the same entry, then check.  We put denied in the front, so it is 
-                // consistent with ZimbraACL.getAllACEs
+                // consistent with ZmailACL.getAllACEs
                 if (groupACLs != null) {
-                    List<ZimbraACE> aclsOnGroupTargets = groupACLs.getAllACLs();
+                    List<ZmailACE> aclsOnGroupTargets = groupACLs.getAllACLs();
                     if (aclsOnGroupTargets != null) {
                         collectAdminPresetRightOnTarget(aclsOnGroupTargets, targetType, 
                                 relativity, false, allowed, denied);
@@ -297,7 +297,7 @@ public class CollectEffectiveRights {
         return allowed.keySet();
     }
 
-    private void collectAdminPresetRightOnTarget(List<ZimbraACE> acl, TargetType targeType,
+    private void collectAdminPresetRightOnTarget(List<ZmailACE> acl, TargetType targeType,
             Integer relativity, boolean subDomain,
             Map<Right, Integer> allowed, Map<Right, Integer> denied) 
     throws ServiceException {
@@ -312,12 +312,12 @@ public class CollectEffectiveRights {
                 subDomain, allowed,  denied);
     }
     
-    private void collectAdminPresetRights(List<ZimbraACE> acl, TargetType targetType,
+    private void collectAdminPresetRights(List<ZmailACE> acl, TargetType targetType,
             short granteeFlags, Integer relativity, boolean subDomain,
             Map<Right, Integer> allowed, Map<Right, Integer> denied) 
     throws ServiceException {
         
-        for (ZimbraACE ace : acl) {
+        for (ZmailACE ace : acl) {
             GranteeType granteeType = ace.getGranteeType();
             if (!granteeType.hasFlags(granteeFlags))
                 continue;
@@ -406,7 +406,7 @@ public class CollectEffectiveRights {
             
             Object defaultValue = mTarget.getAttrDefault(attrName);
             if (defaultValue instanceof String) {
-                defaultValue = ToXML.fixupZimbraPrefTimeZoneId(attrName, (String)defaultValue);
+                defaultValue = ToXML.fixupZmailPrefTimeZoneId(attrName, (String)defaultValue);
                 defaultValues = new HashSet<String>();
                 defaultValues.add((String)defaultValue);
             } else if (defaultValue instanceof String[]) {

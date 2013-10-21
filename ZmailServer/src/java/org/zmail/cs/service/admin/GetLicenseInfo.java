@@ -13,19 +13,19 @@
  * ***** END LICENSE BLOCK *****
  */
 
-package com.zimbra.cs.service.admin;
+package org.zmail.cs.service.admin;
 
 import java.util.List;
 import java.util.Map;
 
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.common.soap.Element;
-import com.zimbra.soap.ZimbraSoapContext;
-import com.zimbra.soap.admin.message.GetLicenseInfoResponse;
-import com.zimbra.soap.admin.type.LicenseExpirationInfo;
+import org.zmail.common.service.ServiceException;
+import org.zmail.common.soap.Element;
+import org.zmail.soap.ZmailSoapContext;
+import org.zmail.soap.admin.message.GetLicenseInfoResponse;
+import org.zmail.soap.admin.type.LicenseExpirationInfo;
 
-import com.zimbra.common.localconfig.LC;
-import com.zimbra.cs.account.accesscontrol.AdminRight;
+import org.zmail.common.localconfig.LC;
+import org.zmail.cs.account.accesscontrol.AdminRight;
 
 public class GetLicenseInfo extends AdminDocumentHandler {
 
@@ -33,7 +33,7 @@ public class GetLicenseInfo extends AdminDocumentHandler {
 
     public Element handle(Element request, Map<String, Object> context)
     throws ServiceException {
-        ZimbraSoapContext lc = getZimbraSoapContext(context);
+        ZmailSoapContext lc = getZmailSoapContext(context);
 
         String expirationDate = LC.get(TRIAL_EXPIRATION_DATE_KEY);
         LicenseExpirationInfo expirationInfo =

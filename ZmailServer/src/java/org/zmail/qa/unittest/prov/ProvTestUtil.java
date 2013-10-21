@@ -14,7 +14,7 @@
  * 
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.qa.unittest.prov;
+package org.zmail.qa.unittest.prov;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
@@ -29,31 +29,31 @@ import java.util.Map;
 
 import com.google.common.base.Strings;
 import com.google.common.collect.Maps;
-import com.zimbra.common.account.Key;
-import com.zimbra.common.account.ProvisioningConstants;
-import com.zimbra.common.account.Key.AccountBy;
-import com.zimbra.common.account.Key.CacheEntryBy;
-import com.zimbra.common.account.Key.CalendarResourceBy;
-import com.zimbra.cs.account.Account;
-import com.zimbra.cs.account.CalendarResource;
-import com.zimbra.cs.account.Config;
-import com.zimbra.cs.account.Cos;
-import com.zimbra.cs.account.DataSource;
-import com.zimbra.cs.account.DistributionList;
-import com.zimbra.cs.account.Domain;
-import com.zimbra.cs.account.DynamicGroup;
-import com.zimbra.cs.account.Group;
-import com.zimbra.cs.account.IDNUtil;
-import com.zimbra.cs.account.NamedEntry;
-import com.zimbra.cs.account.Provisioning;
-import com.zimbra.cs.account.Server;
-import com.zimbra.cs.account.UCService;
-import com.zimbra.cs.account.Zimlet;
-import com.zimbra.cs.account.Provisioning.CacheEntry;
-import com.zimbra.cs.ldap.LdapConstants;
-import com.zimbra.qa.unittest.TestUtil;
-import com.zimbra.soap.admin.type.CacheEntryType;
-import com.zimbra.soap.admin.type.DataSourceType;
+import org.zmail.common.account.Key;
+import org.zmail.common.account.ProvisioningConstants;
+import org.zmail.common.account.Key.AccountBy;
+import org.zmail.common.account.Key.CacheEntryBy;
+import org.zmail.common.account.Key.CalendarResourceBy;
+import org.zmail.cs.account.Account;
+import org.zmail.cs.account.CalendarResource;
+import org.zmail.cs.account.Config;
+import org.zmail.cs.account.Cos;
+import org.zmail.cs.account.DataSource;
+import org.zmail.cs.account.DistributionList;
+import org.zmail.cs.account.Domain;
+import org.zmail.cs.account.DynamicGroup;
+import org.zmail.cs.account.Group;
+import org.zmail.cs.account.IDNUtil;
+import org.zmail.cs.account.NamedEntry;
+import org.zmail.cs.account.Provisioning;
+import org.zmail.cs.account.Server;
+import org.zmail.cs.account.UCService;
+import org.zmail.cs.account.Zimlet;
+import org.zmail.cs.account.Provisioning.CacheEntry;
+import org.zmail.cs.ldap.LdapConstants;
+import org.zmail.qa.unittest.TestUtil;
+import org.zmail.soap.admin.type.CacheEntryType;
+import org.zmail.soap.admin.type.DataSourceType;
 
 public abstract class ProvTestUtil {
     public static final String DEFAULT_UC_PROVIDER = "mitel";
@@ -118,8 +118,8 @@ public abstract class ProvTestUtil {
     }
 
     public String getSystemDefaultDomainName() throws Exception {
-        Config config = prov.getConfig(Provisioning.A_zimbraDefaultDomainName);
-        String domainName = config.getAttr(Provisioning.A_zimbraDefaultDomainName, null);
+        Config config = prov.getConfig(Provisioning.A_zmailDefaultDomainName);
+        String domainName = config.getAttr(Provisioning.A_zmailDefaultDomainName, null);
         assertFalse(Strings.isNullOrEmpty(domainName));
         return domainName;
     }
@@ -194,7 +194,7 @@ public abstract class ProvTestUtil {
 
     public Account createExternalAccount(String localPart, Domain domain) throws Exception {
         Map<String, Object> attrs = Maps.newHashMap();
-        attrs.put(Provisioning.A_zimbraIsExternalVirtualAccount, ProvisioningConstants.TRUE);
+        attrs.put(Provisioning.A_zmailIsExternalVirtualAccount, ProvisioningConstants.TRUE);
         return createAccount(localPart, domain, attrs);
     }
 
@@ -218,7 +218,7 @@ public abstract class ProvTestUtil {
 
     public Account createGlobalAdmin(String acctName, String password) throws Exception {
         Map<String, Object> attrs = Maps.newHashMap();
-        attrs.put(Provisioning.A_zimbraIsAdminAccount, ProvisioningConstants.TRUE);
+        attrs.put(Provisioning.A_zmailIsAdminAccount, ProvisioningConstants.TRUE);
         return createAccount(acctName, password, attrs);
     }
 
@@ -239,7 +239,7 @@ public abstract class ProvTestUtil {
 
     public Account createDelegatedAdmin(String acctName, String password) throws Exception {
         Map<String, Object> attrs = Maps.newHashMap();
-        attrs.put(Provisioning.A_zimbraIsDelegatedAdminAccount, ProvisioningConstants.TRUE);
+        attrs.put(Provisioning.A_zmailIsDelegatedAdminAccount, ProvisioningConstants.TRUE);
         return createAccount(acctName, password, attrs);
     }
 
@@ -258,7 +258,7 @@ public abstract class ProvTestUtil {
 
     public Account createSystemAccount(String acctName) throws Exception {
         Map<String, Object> attrs = Maps.newHashMap();
-        attrs.put(Provisioning.A_zimbraIsSystemAccount, ProvisioningConstants.TRUE);
+        attrs.put(Provisioning.A_zmailIsSystemAccount, ProvisioningConstants.TRUE);
         return createAccount(acctName, attrs);
     }
 
@@ -269,7 +269,7 @@ public abstract class ProvTestUtil {
 
     public Account createSystemResource(String acctName) throws Exception {
         Map<String, Object> attrs = Maps.newHashMap();
-        attrs.put(Provisioning.A_zimbraIsSystemResource, ProvisioningConstants.TRUE);
+        attrs.put(Provisioning.A_zmailIsSystemResource, ProvisioningConstants.TRUE);
         return createAccount(acctName, attrs);
     }
 
@@ -284,7 +284,7 @@ public abstract class ProvTestUtil {
         if (attrs == null) {
             attrs = new HashMap<String, Object>();
             attrs.put(Provisioning.A_displayName, localPart);
-            attrs.put(Provisioning.A_zimbraCalResType, Provisioning.CalResType.Equipment.name());
+            attrs.put(Provisioning.A_zmailCalResType, Provisioning.CalResType.Equipment.name());
         }
 
         String crName = TestUtil.getAddress(localPart, domain.getName());
@@ -349,7 +349,7 @@ public abstract class ProvTestUtil {
     public Group createAdminGroup(String groupName, boolean dynamic)
     throws Exception {
         Map<String, Object> attrs = Maps.newHashMap();
-        attrs.put(Provisioning.A_zimbraIsAdminGroup, ProvisioningConstants.TRUE);
+        attrs.put(Provisioning.A_zmailIsAdminGroup, ProvisioningConstants.TRUE);
         return createGroup(groupName, attrs, dynamic);
     }
 
@@ -484,7 +484,7 @@ public abstract class ProvTestUtil {
     throws Exception {
         if (attrs == null) {
             attrs = new HashMap<String, Object>();
-            attrs.put(Provisioning.A_zimbraUCProvider, DEFAULT_UC_PROVIDER);
+            attrs.put(Provisioning.A_zmailUCProvider, DEFAULT_UC_PROVIDER);
         }
 
         UCService ucService = prov.get(Key.UCServiceBy.name, ucServiceName);
@@ -515,11 +515,11 @@ public abstract class ProvTestUtil {
     public DataSource createDataSourceRaw(Account acct, String dataSourceName)
     throws Exception {
         Map<String, Object> attrs = new HashMap<String, Object>();
-        attrs.put(Provisioning.A_zimbraDataSourceEnabled, LdapConstants.LDAP_TRUE);
-        attrs.put(Provisioning.A_zimbraDataSourceFolderId, "123");
-        attrs.put(Provisioning.A_zimbraDataSourceConnectionType, "ssl");
-        attrs.put(Provisioning.A_zimbraDataSourceHost, "zimbra.com");
-        attrs.put(Provisioning.A_zimbraDataSourcePort, "9999");
+        attrs.put(Provisioning.A_zmailDataSourceEnabled, LdapConstants.LDAP_TRUE);
+        attrs.put(Provisioning.A_zmailDataSourceFolderId, "123");
+        attrs.put(Provisioning.A_zmailDataSourceConnectionType, "ssl");
+        attrs.put(Provisioning.A_zmailDataSourceHost, "zmail.com");
+        attrs.put(Provisioning.A_zmailDataSourcePort, "9999");
         DataSource ds = prov.createDataSource(acct, DataSourceType.pop3, dataSourceName, attrs);
 
         createdAccountSubordinates.add(ds);

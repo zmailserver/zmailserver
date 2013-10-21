@@ -12,7 +12,7 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.util;
+package org.zmail.cs.util;
 
 import java.util.HashMap;
 
@@ -25,17 +25,17 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 
 import com.sun.mail.smtp.SMTPMessage;
-import com.zimbra.common.account.ZAttrProvisioning.ShareNotificationMtaConnectionType;
-import com.zimbra.common.mime.shim.JavaMailInternetAddress;
-import com.zimbra.common.util.Log.Level;
-import com.zimbra.common.util.ZimbraLog;
-import com.zimbra.cs.account.Account;
-import com.zimbra.cs.account.Domain;
-import com.zimbra.cs.account.MockProvisioning;
-import com.zimbra.cs.account.Provisioning;
-import com.zimbra.cs.account.Server;
-import com.zimbra.cs.mailclient.smtp.SmtpTransport;
-import com.zimbra.cs.mailclient.smtp.SmtpsTransport;
+import org.zmail.common.account.ZAttrProvisioning.ShareNotificationMtaConnectionType;
+import org.zmail.common.mime.shim.JavaMailInternetAddress;
+import org.zmail.common.util.Log.Level;
+import org.zmail.common.util.ZmailLog;
+import org.zmail.cs.account.Account;
+import org.zmail.cs.account.Domain;
+import org.zmail.cs.account.MockProvisioning;
+import org.zmail.cs.account.Provisioning;
+import org.zmail.cs.account.Server;
+import org.zmail.cs.mailclient.smtp.SmtpTransport;
+import org.zmail.cs.mailclient.smtp.SmtpsTransport;
 
 /**
  * Unit test for {@link JMSession}.
@@ -68,7 +68,7 @@ public class JMSessionTest {
     public void testRelayMta() throws Exception {
         Provisioning prov = Provisioning.getInstance();
         Server server = prov.getLocalServer();
-        server.setShareNotificationMtaHostname("mta02.zimbra.com");
+        server.setShareNotificationMtaHostname("mta02.zmail.com");
         server.setShareNotificationMtaPort(25);
         server.setShareNotificationMtaAuthRequired(true);
         server.setShareNotificationMtaConnectionType(ShareNotificationMtaConnectionType.STARTTLS);
@@ -76,17 +76,17 @@ public class JMSessionTest {
         server.setShareNotificationMtaAuthPassword("test123");
 
         SMTPMessage out = new SMTPMessage(JMSession.getRelaySession());
-        InternetAddress address = new JavaMailInternetAddress("test-jylee@zimbra.com");
+        InternetAddress address = new JavaMailInternetAddress("test-jylee@zmail.com");
         out.setFrom(address);
 
-        address = new JavaMailInternetAddress("test-jylee@zimbra.com");
+        address = new JavaMailInternetAddress("test-jylee@zmail.com");
         out.setRecipient(javax.mail.Message.RecipientType.TO, address);
 
         out.setSubject("test mail");
         out.setText("hello world");
 
         out.saveChanges();
-        ZimbraLog.smtp.setLevel(Level.trace);
+        ZmailLog.smtp.setLevel(Level.trace);
         Transport.send(out);
     }
 

@@ -13,16 +13,16 @@
  * ***** END LICENSE BLOCK *****
  */
 
-package com.zimbra.cs.security.sasl;
+package org.zmail.cs.security.sasl;
 
 import javax.security.sasl.SaslServer;
 
-import com.zimbra.common.account.Key;
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.common.util.ZimbraLog;
-import com.zimbra.cs.account.Account;
-import com.zimbra.cs.account.Provisioning;
-import com.zimbra.cs.account.auth.AuthContext;
+import org.zmail.common.account.Key;
+import org.zmail.common.service.ServiceException;
+import org.zmail.common.util.ZmailLog;
+import org.zmail.cs.account.Account;
+import org.zmail.cs.account.Provisioning;
+import org.zmail.cs.account.auth.AuthContext;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -85,7 +85,7 @@ public class PlainAuthenticator extends Authenticator {
         Provisioning prov = Provisioning.getInstance();
         Account authAccount = prov.get(Key.AccountBy.name, authenticateId);
         if (authAccount == null) {
-            ZimbraLog.account.info("authentication failed for " + authenticateId + " (no such account)");
+            ZmailLog.account.info("authentication failed for " + authenticateId + " (no such account)");
             return null;
         }
 

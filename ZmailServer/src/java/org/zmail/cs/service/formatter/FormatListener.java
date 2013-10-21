@@ -12,10 +12,10 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.service.formatter;
+package org.zmail.cs.service.formatter;
 
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.cs.service.UserServletContext;
+import org.zmail.common.service.ServiceException;
+import org.zmail.cs.service.UserServletContext;
 
 /**
  * Interface for classes which need to known when a formatter is running

@@ -13,28 +13,28 @@
  * ***** END LICENSE BLOCK *****
  */
 
-package com.zimbra.cs.fb;
+package org.zmail.cs.fb;
 
 import java.io.IOException;
 import java.io.StringWriter;
 import java.text.ParseException;
 import java.util.*;
 
-import com.zimbra.common.calendar.ICalTimeZone;
-import com.zimbra.common.calendar.ParsedDateTime;
-import com.zimbra.common.calendar.TimeZoneMap;
-import com.zimbra.common.calendar.ZCalendar;
-import com.zimbra.common.calendar.ZCalendar.ICalTok;
-import com.zimbra.common.calendar.ZCalendar.ZComponent;
-import com.zimbra.common.calendar.ZCalendar.ZParameter;
-import com.zimbra.common.calendar.ZCalendar.ZProperty;
-import com.zimbra.common.localconfig.LC;
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.cs.ldap.LdapUtil;
-import com.zimbra.cs.mailbox.calendar.IcalXmlStrMap;
-import com.zimbra.cs.mailbox.calendar.Invite;
-import com.zimbra.cs.mailbox.calendar.Period;
-import com.zimbra.cs.mailbox.calendar.ZOrganizer;
+import org.zmail.common.calendar.ICalTimeZone;
+import org.zmail.common.calendar.ParsedDateTime;
+import org.zmail.common.calendar.TimeZoneMap;
+import org.zmail.common.calendar.ZCalendar;
+import org.zmail.common.calendar.ZCalendar.ICalTok;
+import org.zmail.common.calendar.ZCalendar.ZComponent;
+import org.zmail.common.calendar.ZCalendar.ZParameter;
+import org.zmail.common.calendar.ZCalendar.ZProperty;
+import org.zmail.common.localconfig.LC;
+import org.zmail.common.service.ServiceException;
+import org.zmail.cs.ldap.LdapUtil;
+import org.zmail.cs.mailbox.calendar.IcalXmlStrMap;
+import org.zmail.cs.mailbox.calendar.Invite;
+import org.zmail.cs.mailbox.calendar.Period;
+import org.zmail.cs.mailbox.calendar.ZOrganizer;
 
 /**
  * @author tim
@@ -430,7 +430,7 @@ public class FreeBusy implements Iterable<FreeBusy.Interval> {
 		ParsedDateTime endTime = ParsedDateTime.fromUTCTime(mEnd);
 		
 		StringBuilder toRet = new StringBuilder("BEGIN:VCALENDAR").append(NL);
-		toRet.append("PRODID:").append(ZCalendar.sZimbraProdID).append(NL);
+		toRet.append("PRODID:").append(ZCalendar.sZmailProdID).append(NL);
         toRet.append("VERSION:").append(ZCalendar.sIcalVersion).append(NL);
         toRet.append("METHOD:").append(m.name()).append(NL);
 		toRet.append("BEGIN:VFREEBUSY").append(NL);
@@ -500,7 +500,7 @@ public class FreeBusy implements Iterable<FreeBusy.Interval> {
         long now = System.currentTimeMillis();
 
         writer.append("BEGIN:VCALENDAR").append(NL);
-        writer.append("PRODID:").append(ZCalendar.sZimbraProdID).append(NL);
+        writer.append("PRODID:").append(ZCalendar.sZmailProdID).append(NL);
         writer.append("VERSION:").append(ZCalendar.sIcalVersion).append(NL);
         writer.append("METHOD:").append(publish).append(NL);
 

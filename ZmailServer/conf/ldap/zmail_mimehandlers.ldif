@@ -1,62 +1,62 @@
 
 # for storing mime config
-dn: cn=mime,cn=config,cn=zimbra
+dn: cn=mime,cn=config,cn=zmail
 objectClass: organizationalRole
 cn: mime
 description: for storing MIME configuration
 
-dn: cn=message/rfc822,cn=mime,cn=config,cn=zimbra
-zimbraMimeType: message/rfc822
+dn: cn=message/rfc822,cn=mime,cn=config,cn=zmail
+zmailMimeType: message/rfc822
 cn: message/rfc822
-objectClass: zimbraMimeEntry
-zimbraMimeIndexingEnabled: TRUE
-zimbraMimeHandlerClass: MessageRFC822Handler
+objectClass: zmailMimeEntry
+zmailMimeIndexingEnabled: TRUE
+zmailMimeHandlerClass: MessageRFC822Handler
 description: Mail Message
 
-dn: cn=text/html,cn=mime,cn=config,cn=zimbra
-zimbraMimeType: text/html
-zimbraMimeType: application/x-zimbra-doc
+dn: cn=text/html,cn=mime,cn=config,cn=zmail
+zmailMimeType: text/html
+zmailMimeType: application/x-zmail-doc
 cn: text/html
-objectClass: zimbraMimeEntry
-zimbraMimeIndexingEnabled: TRUE
-zimbraMimeHandlerClass: com.zimbra.cs.mime.handler.TextHtmlHandler
-zimbraMimeFileExtension: html
-zimbraMimeFileExtension: htm
+objectClass: zmailMimeEntry
+zmailMimeIndexingEnabled: TRUE
+zmailMimeHandlerClass: org.zmail.cs.mime.handler.TextHtmlHandler
+zmailMimeFileExtension: html
+zmailMimeFileExtension: htm
 description: HTML Document
 
-dn: cn=text/enriched,cn=mime,cn=config,cn=zimbra
-zimbraMimeType: text/enriched
+dn: cn=text/enriched,cn=mime,cn=config,cn=zmail
+zmailMimeType: text/enriched
 cn: text/enriched
-objectClass: zimbraMimeEntry
-zimbraMimeIndexingEnabled: TRUE
-zimbraMimeHandlerClass: TextEnrichedHandler
-zimbraMimeFileExtension: txe
+objectClass: zmailMimeEntry
+zmailMimeIndexingEnabled: TRUE
+zmailMimeHandlerClass: TextEnrichedHandler
+zmailMimeFileExtension: txe
 description: Enriched Text Document
 
-dn: cn=text/plain,cn=mime,cn=config,cn=zimbra
-zimbraMimeType: text/plain
+dn: cn=text/plain,cn=mime,cn=config,cn=zmail
+zmailMimeType: text/plain
 cn: text/plain
-objectClass: zimbraMimeEntry
-zimbraMimeIndexingEnabled: TRUE
-zimbraMimeHandlerClass: TextPlainHandler
-zimbraMimeFileExtension: text
-zimbraMimeFileExtension: txt
+objectClass: zmailMimeEntry
+zmailMimeIndexingEnabled: TRUE
+zmailMimeHandlerClass: TextPlainHandler
+zmailMimeFileExtension: text
+zmailMimeFileExtension: txt
 description: Plain Text Document
 
-dn: cn=text/calendar,cn=mime,cn=config,cn=zimbra
-zimbraMimeType: text/calendar
+dn: cn=text/calendar,cn=mime,cn=config,cn=zmail
+zmailMimeType: text/calendar
 cn: text/calendar
-objectClass: zimbraMimeEntry
-zimbraMimeIndexingEnabled: TRUE
-zimbraMimeHandlerClass: TextCalendarHandler
-zimbraMimeFileExtension: ics
-zimbraMimeFileExtension: vcs
+objectClass: zmailMimeEntry
+zmailMimeIndexingEnabled: TRUE
+zmailMimeHandlerClass: TextCalendarHandler
+zmailMimeFileExtension: ics
+zmailMimeFileExtension: vcs
 description: iCalendar Document
 
-dn: cn=all,cn=mime,cn=config,cn=zimbra
-zimbraMimeType: all
+dn: cn=all,cn=mime,cn=config,cn=zmail
+zmailMimeType: all
 cn: all
-objectClass: zimbraMimeEntry
-zimbraMimeIndexingEnabled: TRUE
-zimbraMimeHandlerClass: UnknownTypeHandler
+objectClass: zmailMimeEntry
+zmailMimeIndexingEnabled: TRUE
+zmailMimeHandlerClass: UnknownTypeHandler
 description: All Documents

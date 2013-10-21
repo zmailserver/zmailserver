@@ -12,7 +12,7 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.index.analysis;
+package org.zmail.cs.index.analysis;
 
 import java.io.IOException;
 import java.util.Iterator;
@@ -25,8 +25,8 @@ import org.apache.lucene.analysis.tokenattributes.CharTermAttribute;
 import org.apache.lucene.util.NumericUtils;
 
 import com.google.common.base.Strings;
-import com.zimbra.common.util.ZimbraLog;
-import com.zimbra.cs.index.LuceneFields;
+import org.zmail.common.util.ZmailLog;
+import org.zmail.cs.index.LuceneFields;
 
 /**
  * {@link TokenStream} for structured-data field.
@@ -98,7 +98,7 @@ public final class FieldTokenStream extends TokenStream {
         if (token.length() <= MAX_TOKEN_LEN && tokens.size() < MAX_TOKEN_COUNT) {
             tokens.add(token);
         } else {
-            ZimbraLog.index.warn("Unable to index: %.30s", token);
+            ZmailLog.index.warn("Unable to index: %.30s", token);
         }
     }
 

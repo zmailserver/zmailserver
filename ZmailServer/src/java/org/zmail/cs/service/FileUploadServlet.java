@@ -12,7 +12,7 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.service;
+package org.zmail.cs.service;
 
 import java.io.File;
 import java.io.FileFilter;
@@ -51,46 +51,46 @@ import org.apache.commons.httpclient.methods.GetMethod;
 import org.apache.commons.lang.StringEscapeUtils;
 
 import com.google.common.base.Strings;
-import com.zimbra.common.account.Key;
-import com.zimbra.common.httpclient.HttpClientUtil;
-import com.zimbra.common.localconfig.LC;
-import com.zimbra.common.mime.ContentDisposition;
-import com.zimbra.common.mime.ContentType;
-import com.zimbra.common.mime.MimeConstants;
-import com.zimbra.common.mime.MimeDetect;
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.common.service.ServiceException.Argument;
-import com.zimbra.common.service.ServiceException.InternalArgument;
-import com.zimbra.common.soap.Element;
-import com.zimbra.common.soap.MailConstants;
-import com.zimbra.common.util.ByteUtil;
-import com.zimbra.common.util.Constants;
-import com.zimbra.common.util.FileUtil;
-import com.zimbra.common.util.Log;
-import com.zimbra.common.util.LogFactory;
-import com.zimbra.common.util.MapUtil;
-import com.zimbra.common.util.StringUtil;
-import com.zimbra.common.util.ZimbraHttpConnectionManager;
-import com.zimbra.common.util.ZimbraLog;
-import com.zimbra.cs.account.Account;
-import com.zimbra.cs.account.AuthToken;
-import com.zimbra.cs.account.Provisioning;
-import com.zimbra.cs.account.Server;
-import com.zimbra.cs.ldap.LdapUtil;
-import com.zimbra.cs.mailbox.MailServiceException;
-import com.zimbra.cs.mailbox.Mailbox;
-import com.zimbra.cs.mailbox.MailboxManager;
-import com.zimbra.cs.servlet.ZimbraServlet;
-import com.zimbra.cs.store.BlobInputStream;
-import com.zimbra.cs.util.AccountUtil;
-import com.zimbra.cs.util.Zimbra;
+import org.zmail.common.account.Key;
+import org.zmail.common.httpclient.HttpClientUtil;
+import org.zmail.common.localconfig.LC;
+import org.zmail.common.mime.ContentDisposition;
+import org.zmail.common.mime.ContentType;
+import org.zmail.common.mime.MimeConstants;
+import org.zmail.common.mime.MimeDetect;
+import org.zmail.common.service.ServiceException;
+import org.zmail.common.service.ServiceException.Argument;
+import org.zmail.common.service.ServiceException.InternalArgument;
+import org.zmail.common.soap.Element;
+import org.zmail.common.soap.MailConstants;
+import org.zmail.common.util.ByteUtil;
+import org.zmail.common.util.Constants;
+import org.zmail.common.util.FileUtil;
+import org.zmail.common.util.Log;
+import org.zmail.common.util.LogFactory;
+import org.zmail.common.util.MapUtil;
+import org.zmail.common.util.StringUtil;
+import org.zmail.common.util.ZmailHttpConnectionManager;
+import org.zmail.common.util.ZmailLog;
+import org.zmail.cs.account.Account;
+import org.zmail.cs.account.AuthToken;
+import org.zmail.cs.account.Provisioning;
+import org.zmail.cs.account.Server;
+import org.zmail.cs.ldap.LdapUtil;
+import org.zmail.cs.mailbox.MailServiceException;
+import org.zmail.cs.mailbox.Mailbox;
+import org.zmail.cs.mailbox.MailboxManager;
+import org.zmail.cs.servlet.ZmailServlet;
+import org.zmail.cs.store.BlobInputStream;
+import org.zmail.cs.util.AccountUtil;
+import org.zmail.cs.util.Zmail;
 
-public class FileUploadServlet extends ZimbraServlet {
+public class FileUploadServlet extends ZmailServlet {
     private static final long serialVersionUID = -3156986245375108467L;
 
     // bug 27610
-    // We now limit file upload size for messages by zimbraMtaMaxMessageSize
-    // If this query param is present in the URI, upload size is limited by zimbraFileUploadMaxSize,
+    // We now limit file upload size for messages by zmailMtaMaxMessageSize
+    // If this query param is present in the URI, upload size is limited by zmailFileUploadMaxSize,
     // This allows customer to allow larger documents/briefcase files than messages sent via SMTP.
     protected static final String PARAM_LIMIT_BY_FILE_UPLOAD_MAX_SIZE = "lbfums";
 
@@ -221,7 +221,7 @@ public class FileUploadServlet extends ZimbraServlet {
 
     static final long DEFAULT_MAX_SIZE = 10 * 1024 * 1024;
 
-    /** Returns the zimbra id of the server the specified upload resides on.
+    /** Returns the zmail id of the server the specified upload resides on.
      *
      * @param uploadId  The id of the upload.
      * @throws ServiceException if the upload id is malformed. */
@@ -294,7 +294,7 @@ public class FileUploadServlet extends ZimbraServlet {
                ContentServlet.PARAM_EXPUNGE + "=true";
 
         // create an HTTP client with auth cookie to fetch the file from the remote ContentServlet
-        HttpClient client = ZimbraHttpConnectionManager.getInternalHttpConnMgr().newHttpClient();
+        HttpClient client = ZmailHttpConnectionManager.getInternalHttpConnMgr().newHttpClient();
         GetMethod get = new GetMethod(url);
         authtoken.encode(client, get, false, hostname);
         try {
@@ -394,7 +394,7 @@ public class FileUploadServlet extends ZimbraServlet {
 
     protected static String getUploadDir() {
         if (sUploadDir == null) {
-            sUploadDir = LC.zimbra_tmp_directory.value() + "/upload";
+            sUploadDir = LC.zmail_tmp_directory.value() + "/upload";
         }
         return sUploadDir;
     }
@@ -437,12 +437,12 @@ public class FileUploadServlet extends ZimbraServlet {
 
     @Override
     public void doPost(HttpServletRequest req, HttpServletResponse resp) throws IOException, ServletException {
-        ZimbraLog.clearContext();
+        ZmailLog.clearContext();
         addRemoteIpToLoggingContext(req);
 
         String fmt = req.getParameter(ContentServlet.PARAM_FORMAT);
 
-        ZimbraLog.addUserAgentToContext(req.getHeader("User-Agent"));
+        ZmailLog.addUserAgentToContext(req.getHeader("User-Agent"));
 
         // file upload requires authentication
         boolean isAdminRequest = false;
@@ -469,7 +469,7 @@ public class FileUploadServlet extends ZimbraServlet {
                 if (Provisioning.onLocalServer(acct)) {
                     Mailbox mbox = MailboxManager.getInstance().getMailboxByAccount(acct, false);
                     if (mbox != null) {
-                        ZimbraLog.addMboxToContext(mbox.getId());
+                        ZmailLog.addMboxToContext(mbox.getId());
                     }
                 }
             }
@@ -721,12 +721,12 @@ public class FileUploadServlet extends ZimbraServlet {
         try {
             if (limitByFileUploadMaxSize) {
                 maxSize = Provisioning.getInstance().getLocalServer().getLongAttr(
-                        Provisioning.A_zimbraFileUploadMaxSize, DEFAULT_MAX_SIZE);
+                        Provisioning.A_zmailFileUploadMaxSize, DEFAULT_MAX_SIZE);
             } else {
                 maxSize = Provisioning.getInstance().getConfig().getLongAttr(
-                        Provisioning.A_zimbraMtaMaxMessageSize, DEFAULT_MAX_SIZE);
+                        Provisioning.A_zmailMtaMaxMessageSize, DEFAULT_MAX_SIZE);
                 if (maxSize == 0) {
-                    /* zimbraMtaMaxMessageSize=0 means "no limit".  The return value from this function gets used
+                    /* zmailMtaMaxMessageSize=0 means "no limit".  The return value from this function gets used
                      * by FileUploadBase "sizeMax" where "-1" means "no limit"
                      */
                     maxSize = -1;
@@ -734,7 +734,7 @@ public class FileUploadServlet extends ZimbraServlet {
             }
         } catch (ServiceException e) {
             mLog.error("Unable to read " +
-                      ((limitByFileUploadMaxSize) ? Provisioning.A_zimbraFileUploadMaxSize : Provisioning.A_zimbraMtaMaxMessageSize) +
+                      ((limitByFileUploadMaxSize) ? Provisioning.A_zmailFileUploadMaxSize : Provisioning.A_zmailMtaMaxMessageSize) +
                       " attribute", e);
         }
         return maxSize;
@@ -775,7 +775,7 @@ public class FileUploadServlet extends ZimbraServlet {
         }
         cleanupLeftoverTempFiles();
 
-        Zimbra.sTimer.schedule(new MapReaperTask(), REAPER_INTERVAL_MSEC, REAPER_INTERVAL_MSEC);
+        Zmail.sTimer.schedule(new MapReaperTask(), REAPER_INTERVAL_MSEC, REAPER_INTERVAL_MSEC);
     }
 
     @Override
@@ -822,9 +822,9 @@ public class FileUploadServlet extends ZimbraServlet {
                 }
             } catch (Throwable e) { //don't let exceptions kill the timer
                 if (e instanceof OutOfMemoryError) {
-                    Zimbra.halt("Caught out of memory error", e);
+                    Zmail.halt("Caught out of memory error", e);
                 }
-                ZimbraLog.system.warn("Caught exception in FileUploadServlet timer", e);
+                ZmailLog.system.warn("Caught exception in FileUploadServlet timer", e);
             }
         }
     }

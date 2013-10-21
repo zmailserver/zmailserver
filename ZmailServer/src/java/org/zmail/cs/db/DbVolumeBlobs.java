@@ -12,7 +12,7 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.db;
+package org.zmail.cs.db;
 
 import java.io.IOException;
 import java.sql.PreparedStatement;
@@ -21,16 +21,16 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.cs.db.DbPool.DbConnection;
-import com.zimbra.cs.mailbox.MailItem;
-import com.zimbra.cs.mailbox.MailServiceException;
-import com.zimbra.cs.mailbox.Mailbox;
-import com.zimbra.cs.store.MailboxBlob.MailboxBlobInfo;
-import com.zimbra.cs.store.file.BlobReference;
-import com.zimbra.cs.store.file.FileBlobStore;
-import com.zimbra.cs.util.SpoolingCache;
-import com.zimbra.cs.volume.Volume;
+import org.zmail.common.service.ServiceException;
+import org.zmail.cs.db.DbPool.DbConnection;
+import org.zmail.cs.mailbox.MailItem;
+import org.zmail.cs.mailbox.MailServiceException;
+import org.zmail.cs.mailbox.Mailbox;
+import org.zmail.cs.store.MailboxBlob.MailboxBlobInfo;
+import org.zmail.cs.store.file.BlobReference;
+import org.zmail.cs.store.file.FileBlobStore;
+import org.zmail.cs.util.SpoolingCache;
+import org.zmail.cs.volume.Volume;
 
 
 public final class DbVolumeBlobs {

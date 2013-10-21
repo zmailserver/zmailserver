@@ -12,7 +12,7 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.service.mail;
+package org.zmail.cs.service.mail;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -38,54 +38,54 @@ import javax.mail.util.SharedByteArrayInputStream;
 import com.google.common.base.Charsets;
 import com.google.common.base.Strings;
 import com.google.common.collect.ImmutableSet;
-import com.zimbra.common.calendar.ZCalendar;
-import com.zimbra.common.localconfig.LC;
-import com.zimbra.common.mime.ContentDisposition;
-import com.zimbra.common.mime.ContentType;
-import com.zimbra.common.mime.MimeConstants;
-import com.zimbra.common.mime.MimeHeader;
-import com.zimbra.common.mime.shim.JavaMailInternetAddress;
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.common.soap.Element;
-import com.zimbra.common.soap.MailConstants;
-import com.zimbra.common.util.CharsetUtil;
-import com.zimbra.common.util.Pair;
-import com.zimbra.common.util.StringUtil;
-import com.zimbra.common.util.ZimbraLog;
-import com.zimbra.common.zmime.ZMimeBodyPart;
-import com.zimbra.common.zmime.ZMimeMessage;
-import com.zimbra.common.zmime.ZMimeMultipart;
-import com.zimbra.cs.account.Account;
-import com.zimbra.cs.account.Config;
-import com.zimbra.cs.account.IDNUtil;
-import com.zimbra.cs.account.Provisioning;
-import com.zimbra.cs.index.Fragment;
-import com.zimbra.cs.mailbox.Document;
-import com.zimbra.cs.mailbox.Flag;
-import com.zimbra.cs.mailbox.Folder;
-import com.zimbra.cs.mailbox.MailItem;
-import com.zimbra.cs.mailbox.MailSender.SafeSendFailedException;
-import com.zimbra.cs.mailbox.MailServiceException;
-import com.zimbra.cs.mailbox.MailServiceException.NoSuchItemException;
-import com.zimbra.cs.mailbox.Mailbox;
-import com.zimbra.cs.mailbox.MailboxManager;
-import com.zimbra.cs.mailbox.Message;
-import com.zimbra.cs.mailbox.Mountpoint;
-import com.zimbra.cs.mailbox.OperationContext;
-import com.zimbra.cs.mailbox.calendar.CalendarMailSender;
-import com.zimbra.cs.mailbox.calendar.Invite;
-import com.zimbra.cs.mime.MailboxBlobDataSource;
-import com.zimbra.cs.mime.Mime;
-import com.zimbra.cs.service.FileUploadServlet;
-import com.zimbra.cs.service.FileUploadServlet.Upload;
-import com.zimbra.cs.service.UploadDataSource;
-import com.zimbra.cs.service.UserServlet;
-import com.zimbra.cs.service.formatter.VCard;
-import com.zimbra.cs.service.mail.ToXML.EmailType;
-import com.zimbra.cs.service.util.ItemId;
-import com.zimbra.cs.util.JMSession;
-import com.zimbra.soap.DocumentHandler;
-import com.zimbra.soap.ZimbraSoapContext;
+import org.zmail.common.calendar.ZCalendar;
+import org.zmail.common.localconfig.LC;
+import org.zmail.common.mime.ContentDisposition;
+import org.zmail.common.mime.ContentType;
+import org.zmail.common.mime.MimeConstants;
+import org.zmail.common.mime.MimeHeader;
+import org.zmail.common.mime.shim.JavaMailInternetAddress;
+import org.zmail.common.service.ServiceException;
+import org.zmail.common.soap.Element;
+import org.zmail.common.soap.MailConstants;
+import org.zmail.common.util.CharsetUtil;
+import org.zmail.common.util.Pair;
+import org.zmail.common.util.StringUtil;
+import org.zmail.common.util.ZmailLog;
+import org.zmail.common.zmime.ZMimeBodyPart;
+import org.zmail.common.zmime.ZMimeMessage;
+import org.zmail.common.zmime.ZMimeMultipart;
+import org.zmail.cs.account.Account;
+import org.zmail.cs.account.Config;
+import org.zmail.cs.account.IDNUtil;
+import org.zmail.cs.account.Provisioning;
+import org.zmail.cs.index.Fragment;
+import org.zmail.cs.mailbox.Document;
+import org.zmail.cs.mailbox.Flag;
+import org.zmail.cs.mailbox.Folder;
+import org.zmail.cs.mailbox.MailItem;
+import org.zmail.cs.mailbox.MailSender.SafeSendFailedException;
+import org.zmail.cs.mailbox.MailServiceException;
+import org.zmail.cs.mailbox.MailServiceException.NoSuchItemException;
+import org.zmail.cs.mailbox.Mailbox;
+import org.zmail.cs.mailbox.MailboxManager;
+import org.zmail.cs.mailbox.Message;
+import org.zmail.cs.mailbox.Mountpoint;
+import org.zmail.cs.mailbox.OperationContext;
+import org.zmail.cs.mailbox.calendar.CalendarMailSender;
+import org.zmail.cs.mailbox.calendar.Invite;
+import org.zmail.cs.mime.MailboxBlobDataSource;
+import org.zmail.cs.mime.Mime;
+import org.zmail.cs.service.FileUploadServlet;
+import org.zmail.cs.service.FileUploadServlet.Upload;
+import org.zmail.cs.service.UploadDataSource;
+import org.zmail.cs.service.UserServlet;
+import org.zmail.cs.service.formatter.VCard;
+import org.zmail.cs.service.mail.ToXML.EmailType;
+import org.zmail.cs.service.util.ItemId;
+import org.zmail.cs.util.JMSession;
+import org.zmail.soap.DocumentHandler;
+import org.zmail.soap.ZmailSoapContext;
 
 /**
  * @since Sep 29, 2004
@@ -128,7 +128,7 @@ public final class ParseMimeMessage {
             throw ServiceException.FAILURE("encoding error", e);
         }
         long maxSize = Provisioning.getInstance().getConfig().getLongAttr(
-                Provisioning.A_zimbraMtaMaxMessageSize, DEFAULT_MAX_SIZE);
+                Provisioning.A_zmailMtaMaxMessageSize, DEFAULT_MAX_SIZE);
         if ((maxSize != 0 /* 0 means "no limit" */) && (content.length > maxSize)) {
             throw ServiceException.INVALID_REQUEST("inline message too large", null);
         }
@@ -149,9 +149,9 @@ public final class ParseMimeMessage {
      *
      */
     static abstract class InviteParser {
-        abstract protected InviteParserResult parseInviteElement(ZimbraSoapContext zsc, OperationContext octxt, Account account, Element invElement) throws ServiceException;
+        abstract protected InviteParserResult parseInviteElement(ZmailSoapContext zsc, OperationContext octxt, Account account, Element invElement) throws ServiceException;
 
-        public final InviteParserResult parse(ZimbraSoapContext zsc, OperationContext octxt, Account account, Element invElement) throws ServiceException {
+        public final InviteParserResult parse(ZmailSoapContext zsc, OperationContext octxt, Account account, Element invElement) throws ServiceException {
             mResult = parseInviteElement(zsc, octxt, account, invElement);
             return mResult;
         }
@@ -170,7 +170,7 @@ public final class ParseMimeMessage {
     // by default, no invite allowed
     static InviteParser NO_INV_ALLOWED_PARSER = new InviteParser() {
         @Override
-        public InviteParserResult parseInviteElement(ZimbraSoapContext zsc, OperationContext octxt, Account account, Element inviteElem)
+        public InviteParserResult parseInviteElement(ZmailSoapContext zsc, OperationContext octxt, Account account, Element inviteElem)
         throws ServiceException {
             throw ServiceException.INVALID_REQUEST("No <inv> element allowed for this request", null);
         }
@@ -198,7 +198,7 @@ public final class ParseMimeMessage {
         }
     }
 
-    public static MimeMessage parseMimeMsgSoap(ZimbraSoapContext zsc, OperationContext octxt, Mailbox mbox,
+    public static MimeMessage parseMimeMsgSoap(ZmailSoapContext zsc, OperationContext octxt, Mailbox mbox,
                                                Element msgElem, MimeBodyPart[] additionalParts, MimeMessageData out)
     throws ServiceException {
         return parseMimeMsgSoap(zsc, octxt, mbox, msgElem, additionalParts, NO_INV_ALLOWED_PARSER, out);
@@ -243,7 +243,7 @@ public final class ParseMimeMessage {
     /** Class encapsulating common data passed among methods. */
     private static class ParseMessageContext {
         MimeMessageData out;
-        ZimbraSoapContext zsc;
+        ZmailSoapContext zsc;
         OperationContext octxt;
         Mailbox mbox;
         boolean use2231;
@@ -254,9 +254,9 @@ public final class ParseMimeMessage {
         ParseMessageContext() {
             try {
                 Config config = Provisioning.getInstance().getConfig();
-                maxSize = config.getLongAttr(Provisioning.A_zimbraMtaMaxMessageSize, -1);
+                maxSize = config.getLongAttr(Provisioning.A_zmailMtaMaxMessageSize, -1);
             } catch (ServiceException e) {
-                ZimbraLog.soap.warn("Unable to determine max message size.  Disabling limit check.", e);
+                ZmailLog.soap.warn("Unable to determine max message size.  Disabling limit check.", e);
             }
             if (maxSize < 0) {
                 maxSize = Long.MAX_VALUE;
@@ -265,7 +265,7 @@ public final class ParseMimeMessage {
 
         void incrementSize(String name, long numBytes) throws MailServiceException {
             size += numBytes;
-            ZimbraLog.soap.debug("Adding %s, incrementing size by %d to %d.", name, numBytes, size);
+            ZmailLog.soap.debug("Adding %s, incrementing size by %d to %d.", name, numBytes, size);
             if ((maxSize != 0 /* 0 means "no limit" */) && (size > maxSize)) {
                 throw MailServiceException.MESSAGE_TOO_BIG(maxSize, size);
             }
@@ -282,7 +282,7 @@ public final class ParseMimeMessage {
      * @param inviteParser Callback which handles {@code <inv>} embedded invite components
      * @param out Holds info about things we parsed out of the message that the caller might want to know about
      */
-    public static MimeMessage parseMimeMsgSoap(ZimbraSoapContext zsc, OperationContext octxt, Mailbox mbox,
+    public static MimeMessage parseMimeMsgSoap(ZmailSoapContext zsc, OperationContext octxt, Mailbox mbox,
             Element msgElem, MimeBodyPart[] additionalParts, InviteParser inviteParser, MimeMessageData out)
     throws ServiceException {
         assert(msgElem.getName().equals(MailConstants.E_MSG)); // msgElem == "<m>" E_MSG
@@ -387,7 +387,7 @@ public final class ParseMimeMessage {
                 } else if (eName.equals(MailConstants.E_SUBJECT)) { /* <su> */
                     // mm.setSubject(elem.getText(), "utf-8");
                 } else if (eName.equals(MailConstants.E_FRAG)) { /* <f> */
-                    ZimbraLog.soap.debug("Ignoring message fragment data");
+                    ZmailLog.soap.debug("Ignoring message fragment data");
                 } else if (eName.equals(MailConstants.E_INVITE)) { /* <inv> */
                     // Already processed above.  Ignore it.
                 } else if (eName.equals(MailConstants.E_CAL_TZ)) { /* <tz> */
@@ -400,7 +400,7 @@ public final class ParseMimeMessage {
                         throw ServiceException.INVALID_REQUEST("header '" + name + "' not allowed", null);
                     }
                 } else {
-                    ZimbraLog.soap.warn("unsupported child element '%s' under parent %s",
+                    ZmailLog.soap.warn("unsupported child element '%s' under parent %s",
                             elem.getName(), msgElem.getName());
                 }
             }
@@ -492,7 +492,7 @@ public final class ParseMimeMessage {
             } catch (NoSuchItemException nsie) {
                 if (!optional)
                     throw nsie;
-                ZimbraLog.soap.info("skipping missing optional attachment: " + elem);
+                ZmailLog.soap.info("skipping missing optional attachment: " + elem);
             }
         }
     }
@@ -780,7 +780,7 @@ public final class ParseMimeMessage {
     throws MessagingException, ServiceException {
         ctxt.incrementSize("attached document", (long) (doc.getSize() * 1.33));
         ContentType ct = new ContentType(doc.getContentType());
-        if (MimeConstants.isZimbraDocument(ct.getContentType())) {
+        if (MimeConstants.isZmailDocument(ct.getContentType())) {
             ct = new ContentType(MimeConstants.CT_TEXT_HTML);
         }
 

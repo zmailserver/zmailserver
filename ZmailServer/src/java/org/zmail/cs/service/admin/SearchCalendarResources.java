@@ -13,32 +13,32 @@
  * ***** END LICENSE BLOCK *****
  */
 
-package com.zimbra.cs.service.admin;
+package org.zmail.cs.service.admin;
 
 import java.util.List;
 import java.util.Map;
 
-import com.zimbra.common.account.Key;
-import com.zimbra.common.account.Key.DomainBy;
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.common.soap.AdminConstants;
-import com.zimbra.common.soap.Element;
-import com.zimbra.cs.account.AccountServiceException;
-import com.zimbra.cs.account.CalendarResource;
-import com.zimbra.cs.account.Domain;
-import com.zimbra.cs.account.EntrySearchFilter;
-import com.zimbra.cs.account.NamedEntry;
-import com.zimbra.cs.account.Provisioning;
-import com.zimbra.cs.account.SearchDirectoryOptions;
-import com.zimbra.cs.account.SearchDirectoryOptions.SortOpt;
-import com.zimbra.cs.account.accesscontrol.AdminRight;
-import com.zimbra.cs.account.accesscontrol.Rights.Admin;
-import com.zimbra.cs.account.ldap.LdapEntrySearchFilter;
-import com.zimbra.cs.gal.GalExtraSearchFilter;
-import com.zimbra.cs.ldap.ZLdapFilterFactory.FilterId;
-import com.zimbra.cs.session.AdminSession;
-import com.zimbra.cs.session.Session;
-import com.zimbra.soap.ZimbraSoapContext;
+import org.zmail.common.account.Key;
+import org.zmail.common.account.Key.DomainBy;
+import org.zmail.common.service.ServiceException;
+import org.zmail.common.soap.AdminConstants;
+import org.zmail.common.soap.Element;
+import org.zmail.cs.account.AccountServiceException;
+import org.zmail.cs.account.CalendarResource;
+import org.zmail.cs.account.Domain;
+import org.zmail.cs.account.EntrySearchFilter;
+import org.zmail.cs.account.NamedEntry;
+import org.zmail.cs.account.Provisioning;
+import org.zmail.cs.account.SearchDirectoryOptions;
+import org.zmail.cs.account.SearchDirectoryOptions.SortOpt;
+import org.zmail.cs.account.accesscontrol.AdminRight;
+import org.zmail.cs.account.accesscontrol.Rights.Admin;
+import org.zmail.cs.account.ldap.LdapEntrySearchFilter;
+import org.zmail.cs.gal.GalExtraSearchFilter;
+import org.zmail.cs.ldap.ZLdapFilterFactory.FilterId;
+import org.zmail.cs.session.AdminSession;
+import org.zmail.cs.session.Session;
+import org.zmail.soap.ZmailSoapContext;
 
 /**
  * @author jhahm
@@ -57,7 +57,7 @@ public class SearchCalendarResources extends AdminDocumentHandler {
 
     public Element handle(Element request, Map<String, Object> context)
     throws ServiceException {
-        ZimbraSoapContext zsc = getZimbraSoapContext(context);
+        ZmailSoapContext zsc = getZmailSoapContext(context);
         Provisioning prov = Provisioning.getInstance();
 
         int limit = (int) request.getAttributeLong(AdminConstants.A_LIMIT,

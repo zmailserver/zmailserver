@@ -12,7 +12,7 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.store.triton;
+package org.zmail.cs.store.triton;
 
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
@@ -29,18 +29,18 @@ import org.apache.commons.httpclient.methods.GetMethod;
 import org.apache.commons.httpclient.methods.PostMethod;
 
 import com.google.common.annotations.VisibleForTesting;
-import com.zimbra.common.httpclient.HttpClientUtil;
-import com.zimbra.common.localconfig.LC;
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.common.util.ZimbraHttpConnectionManager;
-import com.zimbra.common.util.ZimbraLog;
-import com.zimbra.cs.mailbox.Mailbox;
-import com.zimbra.cs.service.UserServlet;
-import com.zimbra.cs.store.Blob;
-import com.zimbra.cs.store.external.ExternalUploadedBlob;
-import com.zimbra.cs.store.external.ExternalResumableIncomingBlob;
-import com.zimbra.cs.store.external.ExternalResumableUpload;
-import com.zimbra.cs.store.external.SisStore;
+import org.zmail.common.httpclient.HttpClientUtil;
+import org.zmail.common.localconfig.LC;
+import org.zmail.common.service.ServiceException;
+import org.zmail.common.util.ZmailHttpConnectionManager;
+import org.zmail.common.util.ZmailLog;
+import org.zmail.cs.mailbox.Mailbox;
+import org.zmail.cs.service.UserServlet;
+import org.zmail.cs.store.Blob;
+import org.zmail.cs.store.external.ExternalUploadedBlob;
+import org.zmail.cs.store.external.ExternalResumableIncomingBlob;
+import org.zmail.cs.store.external.ExternalResumableUpload;
+import org.zmail.cs.store.external.SisStore;
 
 /**
  * StoreManager implementation which uses the TDS Blob API for storing and retrieving blobs
@@ -75,7 +75,7 @@ public class TritonBlobStoreManager extends SisStore implements ExternalResumabl
         }
         MessageDigest digest = newDigest();
         emptyLocator = getLocator(digest.digest());
-        ZimbraLog.store.info("TDS Blob store manager using url %s hashType %s",url, hashType);
+        ZmailLog.store.info("TDS Blob store manager using url %s hashType %s",url, hashType);
         super.startup();
     }
 
@@ -118,7 +118,7 @@ public class TritonBlobStoreManager extends SisStore implements ExternalResumabl
                 try {
                     //SHA0 is not implemented in base Java classes since it was withdrawn in 1993 before Java was released
                     //we use cryptix here for demo, but we aren't bothering with legal approval since we're requiring TDS to switch to SHA-256
-                    //so need to drop cryptix32.jar into /opt/zimbra/jetty/webapps/service/WEB-INF/lib during install
+                    //so need to drop cryptix32.jar into /opt/zmail/jetty/webapps/service/WEB-INF/lib during install
                     digest = (MessageDigest) Class.forName("cryptix.provider.md.SHA0").newInstance();
                 } catch (Exception e) {
                     throw ServiceException.FAILURE("unable to load SHA0 digest due to exception", e);
@@ -131,16 +131,16 @@ public class TritonBlobStoreManager extends SisStore implements ExternalResumabl
 
     @Override
     protected void writeStreamToStore(InputStream in, long actualSize, Mailbox mbox, String locator) throws IOException, ServiceException {
-        HttpClient client = ZimbraHttpConnectionManager.getInternalHttpConnMgr().newHttpClient();
+        HttpClient client = ZmailHttpConnectionManager.getInternalHttpConnMgr().newHttpClient();
         if (actualSize < 0) {
             throw ServiceException.FAILURE("Must use resumable upload (i.e. StoreManager.newIncomingBlob()) if size is unknown", null);
         }
         else if (actualSize == 0) {
-            ZimbraLog.store.info("storing empty blob");
+            ZmailLog.store.info("storing empty blob");
             return; //don't bother writing empty file to remote
         }
         PostMethod post = new PostMethod(blobApiUrl);
-        ZimbraLog.store.info("posting to %s with locator %s", post.getURI(), locator);
+        ZmailLog.store.info("posting to %s with locator %s", post.getURI(), locator);
         try {
             HttpClientUtil.addInputStreamToHttpMethod(post, in, actualSize, "application/octet-stream");
             post.addRequestHeader(TritonHeaders.CONTENT_LENGTH, actualSize+"");
@@ -150,7 +150,7 @@ public class TritonBlobStoreManager extends SisStore implements ExternalResumabl
             if (statusCode == HttpStatus.SC_CREATED) {
                 return;
             } else {
-                ZimbraLog.store.error("failed with code %d response: %s", statusCode, post.getResponseBodyAsString());
+                ZmailLog.store.error("failed with code %d response: %s", statusCode, post.getResponseBodyAsString());
                 throw ServiceException.FAILURE("unable to store blob " + statusCode + ":" + post.getStatusText(), null);
             }
         } finally {
@@ -161,10 +161,10 @@ public class TritonBlobStoreManager extends SisStore implements ExternalResumabl
     @Override
     public InputStream readStreamFromStore(String locator, Mailbox mbox)
                     throws IOException {
-        HttpClient client = ZimbraHttpConnectionManager.getInternalHttpConnMgr().newHttpClient();
+        HttpClient client = ZmailHttpConnectionManager.getInternalHttpConnMgr().newHttpClient();
         GetMethod get = new GetMethod(blobApiUrl + locator);
         get.addRequestHeader(TritonHeaders.HASH_TYPE, hashType.toString());
-        ZimbraLog.store.info("getting %s", get.getURI());
+        ZmailLog.store.info("getting %s", get.getURI());
         int statusCode = HttpClientUtil.executeMethod(client, get);
         if (statusCode == HttpStatus.SC_OK) {
             return new UserServlet.HttpInputStream(get);
@@ -172,7 +172,7 @@ public class TritonBlobStoreManager extends SisStore implements ExternalResumabl
             get.releaseConnection();
             if (statusCode == HttpStatus.SC_NOT_FOUND && emptyLocator.equals(locator)) {
                 //empty file edge case. could compare hash before this, but that hurts perf. for normal case
-                ZimbraLog.store.info("returning input stream for empty blob");
+                ZmailLog.store.info("returning input stream for empty blob");
                 return new ByteArrayInputStream(new byte[0]);
             } else {
                 throw new IOException("unexpected return code during blob GET: " + get.getStatusText());
@@ -183,11 +183,11 @@ public class TritonBlobStoreManager extends SisStore implements ExternalResumabl
     @Override
     public boolean deleteFromStore(String locator, Mailbox mbox)
                     throws IOException {
-        HttpClient client = ZimbraHttpConnectionManager.getInternalHttpConnMgr().newHttpClient();
+        HttpClient client = ZmailHttpConnectionManager.getInternalHttpConnMgr().newHttpClient();
         DeleteMethod delete = new DeleteMethod(blobApiUrl + locator);
         delete.addRequestHeader(TritonHeaders.HASH_TYPE, hashType.toString());
         try {
-            ZimbraLog.store.info("deleting %s", delete.getURI());
+            ZmailLog.store.info("deleting %s", delete.getURI());
             int statusCode = HttpClientUtil.executeMethod(client, delete);
             if (statusCode == HttpStatus.SC_OK) {
                 return true;
@@ -208,8 +208,8 @@ public class TritonBlobStoreManager extends SisStore implements ExternalResumabl
     public String finishUpload(ExternalUploadedBlob blob) throws IOException, ServiceException {
         TritonBlob tb = (TritonBlob) blob;
         PostMethod post = new PostMethod(url + tb.getUploadId());
-        ZimbraLog.store.info("posting to %s with locator %s", post.getURI(), tb.getLocator());
-        HttpClient client = ZimbraHttpConnectionManager.getInternalHttpConnMgr().newHttpClient();
+        ZmailLog.store.info("posting to %s with locator %s", post.getURI(), tb.getLocator());
+        HttpClient client = ZmailHttpConnectionManager.getInternalHttpConnMgr().newHttpClient();
         try {
             post.addRequestHeader(TritonHeaders.OBJECTID, tb.getLocator());
             post.addRequestHeader(TritonHeaders.HASH_TYPE, hashType.toString());
@@ -218,7 +218,7 @@ public class TritonBlobStoreManager extends SisStore implements ExternalResumabl
             if (statusCode == HttpStatus.SC_CREATED) {
                 return tb.getLocator();
             } else {
-                ZimbraLog.store.error("failed with code %d response: %s", statusCode, post.getResponseBodyAsString());
+                ZmailLog.store.error("failed with code %d response: %s", statusCode, post.getResponseBodyAsString());
                 throw ServiceException.FAILURE("unable to store blob " + statusCode + ":" + post.getStatusText(), null);
             }
         } finally {
@@ -235,9 +235,9 @@ public class TritonBlobStoreManager extends SisStore implements ExternalResumabl
      */
     private boolean sisCreate(byte[] hash) throws IOException {
         String locator = getLocator(hash);
-        HttpClient client = ZimbraHttpConnectionManager.getInternalHttpConnMgr().newHttpClient();
+        HttpClient client = ZmailHttpConnectionManager.getInternalHttpConnMgr().newHttpClient();
         PostMethod post = new PostMethod(blobApiUrl + locator);
-        ZimbraLog.store.info("SIS create URL: %s", post.getURI());
+        ZmailLog.store.info("SIS create URL: %s", post.getURI());
         try {
             post.addRequestHeader(TritonHeaders.HASH_TYPE, hashType.toString());
             int statusCode = HttpClientUtil.executeMethod(client, post);
@@ -252,11 +252,11 @@ public class TritonBlobStoreManager extends SisStore implements ExternalResumabl
                 }
             } else if (statusCode == HttpStatus.SC_BAD_REQUEST) {
                 //does not exist, probably wrong hash algorithm
-                ZimbraLog.store.warn("failed with code %d response: %s", statusCode, post.getResponseBodyAsString());
+                ZmailLog.store.warn("failed with code %d response: %s", statusCode, post.getResponseBodyAsString());
                 return false;
             } else {
                 //unexpected condition
-                ZimbraLog.store.error("failed with code %d response: %s", statusCode, post.getResponseBodyAsString());
+                ZmailLog.store.error("failed with code %d response: %s", statusCode, post.getResponseBodyAsString());
                 throw new IOException("unable to SIS create " + statusCode + ":" + post.getStatusText(), null);
             }
         } finally {

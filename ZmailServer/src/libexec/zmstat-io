@@ -16,9 +16,9 @@
 
 use strict;
 use Getopt::Long;
-use lib "/opt/zimbra/zimbramon/lib";
-use Zimbra::Mon::Zmstat;
-use Zimbra::Mon::Logger;
+use lib "/opt/zmail/zmailmon/lib";
+use Zmail::Mon::Zmstat;
+use Zmail::Mon::Logger;
 
 zmstatInit();
 
@@ -118,7 +118,7 @@ sub usage() {
     print STDERR <<_USAGE_;
 Usage: zmstat-io [options]
 -i, --interval: output a line every N seconds
--l, --log:      log file (default is /opt/zimbra/zmstat/io[-x].csv)
+-l, --log:      log file (default is /opt/zmail/zmstat/io[-x].csv)
 -x, --xtended:  extended output
 -c, --console:  output to stdout
 
@@ -256,7 +256,7 @@ while (1) {
         my $values = join(', ', @vals);
         $LOGFH->print("$tstamp, $values\n");
         my $fn = $xtended ? "io-x.csv" : "io.csv";
-        Zimbra::Mon::Logger::LogStats( "info", "zmstat $fn: ${HEADING}:: $tstamp, $values"); 
+        Zmail::Mon::Logger::LogStats( "info", "zmstat $fn: ${HEADING}:: $tstamp, $values"); 
         $LOGFH->flush();
         $ROTATE_DEFER = 0;
         if ($ROTATE_NOW) {

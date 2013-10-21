@@ -13,7 +13,7 @@
  * ***** END LICENSE BLOCK *****
  */
 
-package com.zimbra.cs.account;
+package org.zmail.cs.account;
 
 import java.io.UnsupportedEncodingException;
 import java.lang.IllegalAccessException;
@@ -32,24 +32,24 @@ import javax.mail.internet.InternetAddress;
 import gnu.inet.encoding.IDNA;
 import gnu.inet.encoding.IDNAException;
 
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.common.util.ZimbraLog;
-import com.zimbra.common.mime.MimeConstants;
-import com.zimbra.common.mime.shim.JavaMailInternetAddress;
-import com.zimbra.cs.account.AttributeManager.IDNType;
+import org.zmail.common.service.ServiceException;
+import org.zmail.common.util.ZmailLog;
+import org.zmail.common.mime.MimeConstants;
+import org.zmail.common.mime.shim.JavaMailInternetAddress;
+import org.zmail.cs.account.AttributeManager.IDNType;
 
 public class IDNUtil {
     public static final String ACE_PREFIX = "xn--";
     
-    private static abstract class ZimbraIDN {
+    private static abstract class ZmailIDN {
         private static final boolean sAllowUnassigned = true;
         private static final boolean sUseSTD3ASCIIRules = false;
         
-        private static final ZimbraIDN INSTANCE = ZimbraIDN.getInstance();
+        private static final ZmailIDN INSTANCE = ZmailIDN.getInstance();
         
-        private static ZimbraIDN getInstance() {
+        private static ZmailIDN getInstance() {
             
-            ZimbraIDN instance = JavaIDN.getInstance(sAllowUnassigned, sUseSTD3ASCIIRules);
+            ZmailIDN instance = JavaIDN.getInstance(sAllowUnassigned, sUseSTD3ASCIIRules);
             if (instance == null)
                 instance = new GnuIDN(sAllowUnassigned, sUseSTD3ASCIIRules);
             
@@ -64,7 +64,7 @@ public class IDNUtil {
                 return INSTANCE.toASCII(input);
             } catch (ServiceException e) {
                 // if for any reason it cannot be converted, just INFO log and return the input as is
-                ZimbraLog.account.info("domain [" + input + "] cannot be converted to ASCII", e);
+                ZmailLog.account.info("domain [" + input + "] cannot be converted to ASCII", e);
                 return input;
             }
         }
@@ -74,13 +74,13 @@ public class IDNUtil {
                 return INSTANCE.toUnicode(input);
             } catch (ServiceException e) {
                 // if for any reason it cannot be converted, just INFO log and return the input as is
-                ZimbraLog.account.info("domain [" + input + "] cannot be converted to Unicode", e);
+                ZmailLog.account.info("domain [" + input + "] cannot be converted to Unicode", e);
                 return input;
             }
         }
     }
     
-    private static class JavaIDN extends ZimbraIDN {
+    private static class JavaIDN extends ZmailIDN {
         private static final String SEGMENT_DELIM = ".";
         
         private int mFlags;
@@ -233,7 +233,7 @@ public class IDNUtil {
        the one in JDK1.6 at some point. 
                                
      */
-    private static class GnuIDN extends ZimbraIDN {
+    private static class GnuIDN extends ZmailIDN {
         private boolean mAllowUnassigned;
         private boolean mUseSTD3ASCIIRules;
         
@@ -288,14 +288,14 @@ public class IDNUtil {
      * convert an unicode domain name to ACE(ASCII Compatible Encoding)
      */
     public static String toAsciiDomainName(String name) {
-        return ZimbraIDN.convertToASCII(name);
+        return ZmailIDN.convertToASCII(name);
     }
     
     /*
      * convert an  ASCII domain name to unicode
      */
     public static String toUnicodeDomainName(String name) {
-        return ZimbraIDN.convertToUnicode(name);
+        return ZmailIDN.convertToUnicode(name);
     }
     
     public static String toAsciiEmail(String emailAddress) throws ServiceException {
@@ -372,10 +372,10 @@ public class IDNUtil {
                 //
                 return ia.toString(); 
             } catch (UnsupportedEncodingException e) {
-                ZimbraLog.account.info("cannot convert to ascii, returning original addr: [" + name + "]", e);
+                ZmailLog.account.info("cannot convert to ascii, returning original addr: [" + name + "]", e);
             }
         } catch (AddressException e) {
-            ZimbraLog.account.info("cannot convert to ascii, returning original addr: [" + name + "]", e);
+            ZmailLog.account.info("cannot convert to ascii, returning original addr: [" + name + "]", e);
         }
         
         return name;
@@ -435,9 +435,9 @@ public class IDNUtil {
              */
             return ia.toString(); 
         } catch (UnsupportedEncodingException e) {    
-            ZimbraLog.account.info("cannot convert to ascii, returning original addr: [" + name + "]", e);
+            ZmailLog.account.info("cannot convert to ascii, returning original addr: [" + name + "]", e);
         } catch (AddressException e) {
-            ZimbraLog.account.info("cannot convert to ascii, returning original addr: [" + name + "]", e);
+            ZmailLog.account.info("cannot convert to ascii, returning original addr: [" + name + "]", e);
         }
         
         return name;
@@ -504,10 +504,10 @@ public class IDNUtil {
                  */
                 return ia.toUnicodeString();
             } catch (UnsupportedEncodingException e) {
-                ZimbraLog.account.info("cannot convert to unicode, returning original addr: [" + name + "]", e);
+                ZmailLog.account.info("cannot convert to unicode, returning original addr: [" + name + "]", e);
             }
         } catch (AddressException e) {
-            ZimbraLog.account.info("cannot convert to unicode, returning original addr: [" + name + "]", e);
+            ZmailLog.account.info("cannot convert to unicode, returning original addr: [" + name + "]", e);
         }
         
         return name;

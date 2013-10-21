@@ -12,9 +12,9 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.qa.unittest.prov;
+package org.zmail.qa.unittest.prov;
 
-import com.zimbra.cs.account.IDNUtil;
+import org.zmail.cs.account.IDNUtil;
 
 public class Names {
     

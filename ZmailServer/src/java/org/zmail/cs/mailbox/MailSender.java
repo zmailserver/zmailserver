@@ -13,7 +13,7 @@
  * ***** END LICENSE BLOCK *****
  */
 
-package com.zimbra.cs.mailbox;
+package org.zmail.cs.mailbox;
 
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
@@ -42,41 +42,41 @@ import javax.mail.internet.MimeMessage;
 import com.google.common.base.Joiner;
 import com.google.common.base.Objects;
 import com.google.common.base.Strings;
-import com.zimbra.client.ZMailbox;
-import com.zimbra.common.account.Key;
-import com.zimbra.common.account.Key.AccountBy;
-import com.zimbra.common.localconfig.DebugConfig;
-import com.zimbra.common.mime.shim.JavaMailInternetAddress;
-import com.zimbra.common.mime.shim.JavaMailInternetHeaders;
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.common.util.ArrayUtil;
-import com.zimbra.common.util.ByteUtil;
-import com.zimbra.common.util.ListUtil;
-import com.zimbra.common.util.Pair;
-import com.zimbra.common.util.StringUtil;
-import com.zimbra.common.util.SystemUtil;
-import com.zimbra.common.util.ZimbraLog;
-import com.zimbra.cs.account.AccessManager;
-import com.zimbra.cs.account.Account;
-import com.zimbra.cs.account.AuthToken;
-import com.zimbra.cs.account.Domain;
-import com.zimbra.cs.account.Identity;
-import com.zimbra.cs.account.Provisioning;
-import com.zimbra.cs.filter.RuleManager;
-import com.zimbra.cs.mailbox.MailServiceException.NoSuchItemException;
-import com.zimbra.cs.mailbox.Threader.ThreadIndex;
-import com.zimbra.cs.mime.Mime;
-import com.zimbra.cs.mime.MimeVisitor;
-import com.zimbra.cs.mime.ParsedMessage;
-import com.zimbra.cs.service.AuthProvider;
-import com.zimbra.cs.service.FileUploadServlet;
-import com.zimbra.cs.service.FileUploadServlet.Upload;
-import com.zimbra.cs.service.UserServlet;
-import com.zimbra.cs.service.util.ItemId;
-import com.zimbra.cs.util.AccountUtil;
-import com.zimbra.cs.util.AccountUtil.AccountAddressMatcher;
-import com.zimbra.cs.util.BuildInfo;
-import com.zimbra.cs.util.JMSession;
+import org.zmail.client.ZMailbox;
+import org.zmail.common.account.Key;
+import org.zmail.common.account.Key.AccountBy;
+import org.zmail.common.localconfig.DebugConfig;
+import org.zmail.common.mime.shim.JavaMailInternetAddress;
+import org.zmail.common.mime.shim.JavaMailInternetHeaders;
+import org.zmail.common.service.ServiceException;
+import org.zmail.common.util.ArrayUtil;
+import org.zmail.common.util.ByteUtil;
+import org.zmail.common.util.ListUtil;
+import org.zmail.common.util.Pair;
+import org.zmail.common.util.StringUtil;
+import org.zmail.common.util.SystemUtil;
+import org.zmail.common.util.ZmailLog;
+import org.zmail.cs.account.AccessManager;
+import org.zmail.cs.account.Account;
+import org.zmail.cs.account.AuthToken;
+import org.zmail.cs.account.Domain;
+import org.zmail.cs.account.Identity;
+import org.zmail.cs.account.Provisioning;
+import org.zmail.cs.filter.RuleManager;
+import org.zmail.cs.mailbox.MailServiceException.NoSuchItemException;
+import org.zmail.cs.mailbox.Threader.ThreadIndex;
+import org.zmail.cs.mime.Mime;
+import org.zmail.cs.mime.MimeVisitor;
+import org.zmail.cs.mime.ParsedMessage;
+import org.zmail.cs.service.AuthProvider;
+import org.zmail.cs.service.FileUploadServlet;
+import org.zmail.cs.service.FileUploadServlet.Upload;
+import org.zmail.cs.service.UserServlet;
+import org.zmail.cs.service.util.ItemId;
+import org.zmail.cs.util.AccountUtil;
+import org.zmail.cs.util.AccountUtil.AccountAddressMatcher;
+import org.zmail.cs.util.BuildInfo;
+import org.zmail.cs.util.JMSession;
 
 public class MailSender {
 
@@ -213,7 +213,7 @@ public class MailSender {
     /**
      * @param saveToSent if <tt>true</tt>, save the message to the user's
      * <tt>Sent</tt> folder after sending.  The default is the account's
-     * <tt>zimbraPrefSaveToSent</tt> attribute value.
+     * <tt>zmailPrefSaveToSent</tt> attribute value.
      */
     public MailSender setSaveToSent(boolean saveToSent) {
         mSaveToSent = saveToSent;
@@ -265,7 +265,7 @@ public class MailSender {
 
     /**
      * Sets the address sent for <tt>MAIL FROM</tt> in the SMTP session.
-     * Default behavior: if <tt>zimbraSmtpRestrictEnvelopeFrom</tt> is <tt>true</tt>,
+     * Default behavior: if <tt>zmailSmtpRestrictEnvelopeFrom</tt> is <tt>true</tt>,
      * <tt>MAIL FROM</tt> will always be set to the account's name.  Otherwise
      * it is set to the value of the <tt>Sender</tt> or <tt>From</tt> header
      * in the outgoing message, in that order.
@@ -277,7 +277,7 @@ public class MailSender {
 
     public static int getSentFolderId(Mailbox mbox, Identity identity) throws ServiceException {
         int folderId = Mailbox.ID_FOLDER_SENT;
-        String sentFolder = identity.getAttr(Provisioning.A_zimbraPrefSentMailFolder, null);
+        String sentFolder = identity.getAttr(Provisioning.A_zmailPrefSentMailFolder, null);
         if (sentFolder != null) {
             try {
                 folderId = mbox.getFolderByPath(null, sentFolder).getId();
@@ -288,7 +288,7 @@ public class MailSender {
 
     public static int getSentFolderId(Mailbox mbox) throws ServiceException {
         int folderId = Mailbox.ID_FOLDER_SENT;
-        String sentFolder = mbox.getAccount().getAttr(Provisioning.A_zimbraPrefSentMailFolder, null);
+        String sentFolder = mbox.getAccount().getAttr(Provisioning.A_zmailPrefSentMailFolder, null);
         if (sentFolder != null) {
             try {
                 folderId = mbox.getFolderByPath(null, sentFolder).getId();
@@ -428,7 +428,7 @@ public class MailSender {
                     zmbox.deleteMessage("" + msgId);
                 }
             } catch (ServiceException e) {
-                ZimbraLog.smtp.warn("ignoring error while deleting saved sent message: " + msgId, e);
+                ZmailLog.smtp.warn("ignoring error while deleting saved sent message: " + msgId, e);
             }
         }
     }
@@ -507,7 +507,7 @@ public class MailSender {
                     vclass.newInstance().accept(mm);
                 }
             } catch (Exception e) {
-                ZimbraLog.smtp.warn("failure to modify outbound message; aborting send", e);
+                ZmailLog.smtp.warn("failure to modify outbound message; aborting send", e);
                 throw ServiceException.FAILURE("mutator error; aborting send", e);
             }
 
@@ -521,7 +521,7 @@ public class MailSender {
             // Bug: 66823
             // createAutoContact() uses Lucene search to determine whether the address to be added in emailed contact;
             // If the user has SaveInSent preference set, a copy of the message is stored on Sent folder. With
-            // zimbraBatchedIndexingSize is set to 1 or, with any search request the item stored in the sent folder
+            // zmailBatchedIndexingSize is set to 1 or, with any search request the item stored in the sent folder
             // gets indexed right away which causes createAutoContact() to skip the sender addresses to be added.
             // To avoid this problem; let's determine a list of new address which we might need to add to emailed
             // contact later before we add the message to sent folder.
@@ -572,7 +572,7 @@ public class MailSender {
                     pm = new ParsedMessage(mm, mm.getSentDate().getTime(), mbox.attachmentsIndexingEnabled());
 
                     // save it to the requested folder
-                    String sentFolder = mIdentity.getAttr(Provisioning.A_zimbraPrefSentMailFolder, "" + Mailbox.ID_FOLDER_SENT);
+                    String sentFolder = mIdentity.getAttr(Provisioning.A_zmailPrefSentMailFolder, "" + Mailbox.ID_FOLDER_SENT);
                     String msgId = zmbxSave.addMessage(sentFolder, "s", null, mm.getSentDate().getTime(), pm.getRawData(), true);
                     RollbackData rollback = new RollbackData(zmbxSave, authuser, msgId);
                     rollbacks.add(rollback);
@@ -621,7 +621,7 @@ public class MailSender {
                 try {
                     Notification.getInstance().interceptIfNecessary(mbox, mm, "send message", null);
                 } catch (ServiceException e) {
-                    ZimbraLog.mailbox.error("Unable to send lawful intercept message.", e);
+                    ZmailLog.mailbox.error("Unable to send lawful intercept message.", e);
                 }
             }
 
@@ -642,26 +642,26 @@ public class MailSender {
                 try {
                     ContactRankings.increment(octxt.getAuthenticatedUser().getId(), sentAddresses);
                 } catch (Exception e) {
-                    ZimbraLog.smtp.error("Failed to update contact rankings", e);
+                    ZmailLog.smtp.error("Failed to update contact rankings", e);
                 }
                 if (authuser.isPrefAutoAddAddressEnabled()) {
                     //intersect the lists;
                     newAddrs.retainAll(sentAddresses);
 
-                    // convert JavaMail Address to Zimbra InternetAddress
-                    List<com.zimbra.common.mime.InternetAddress> iaddrs =
-                        new ArrayList<com.zimbra.common.mime.InternetAddress>(newAddrs.size());
+                    // convert JavaMail Address to Zmail InternetAddress
+                    List<org.zmail.common.mime.InternetAddress> iaddrs =
+                        new ArrayList<org.zmail.common.mime.InternetAddress>(newAddrs.size());
                     for (Address addr : newAddrs) {
                         if (addr instanceof InternetAddress) {
                             InternetAddress iaddr = (InternetAddress) addr;
-                            iaddrs.add(new com.zimbra.common.mime.InternetAddress(
+                            iaddrs.add(new org.zmail.common.mime.InternetAddress(
                                     iaddr.getPersonal(), iaddr.getAddress()));
                         }
                     }
                     try {
                         mbox.createAutoContact(octxt, iaddrs);
                     } catch (IOException e) {
-                        ZimbraLog.smtp.warn("Failed to auto-add contact addrs=%s", iaddrs, e);
+                        ZmailLog.smtp.warn("Failed to auto-add contact addrs=%s", iaddrs, e);
                     }
                 }
             }
@@ -727,14 +727,14 @@ public class MailSender {
                 return ZMailbox.getMailbox(options);
             }
         } catch (Exception e) {
-            ZimbraLog.smtp.info("could not fetch home mailbox for delegated send", e);
+            ZmailLog.smtp.info("could not fetch home mailbox for delegated send", e);
             return null;
         }
     }
 
     public void logMessage(MimeMessage mm, String smtpHost, ItemId origMsgId, Collection<Upload> uploads, String replyType) {
         // Log sent message info
-        if (ZimbraLog.smtp.isInfoEnabled()) {
+        if (ZmailLog.smtp.isInfoEnabled()) {
             StringBuilder msg = new StringBuilder("Sending message");
             if (smtpHost != null) {
                 msg.append(" to MTA at ").append(smtpHost);
@@ -753,7 +753,7 @@ public class MailSender {
             if (uploads != null && uploads.size() > 0) {
                 msg.append(", uploads=" + uploads);
             }
-            ZimbraLog.smtp.info(msg);
+            ZmailLog.smtp.info(msg);
         }
     }
 
@@ -781,7 +781,7 @@ public class MailSender {
         boolean addMailer = prov.getConfig().isSmtpSendAddMailer();
         if (addMailer) {
             String ua = octxt != null ? octxt.getUserAgent() : null;
-            String mailer = "Zimbra " + BuildInfo.VERSION + (ua == null ? "" : " (" + ua + ")");
+            String mailer = "Zmail " + BuildInfo.VERSION + (ua == null ? "" : " (" + ua + ")");
             mm.addHeader(X_MAILER, mailer);
         }
 
@@ -853,7 +853,7 @@ public class MailSender {
         }
         if (sender != null) {
             // send-obo requested.
-            // Restrict Sender value to owned addresses.  Not even zimbraAllowFromAddress is acceptable.
+            // Restrict Sender value to owned addresses.  Not even zmailAllowFromAddress is acceptable.
             AccountAddressMatcher matcher = new AccountAddressMatcher(authuser, true);
             if (!matcher.matches(sender.getAddress())) {
                 sender = AccountUtil.getFriendlyEmailAddress(authuser);
@@ -1011,7 +1011,7 @@ public class MailSender {
                     Exception chained = e.getNextException();
                     if (chained instanceof SocketException || chained instanceof UnknownHostException) {
                         String hostString = (hostname != null ? " " + hostname : "");
-                        ZimbraLog.smtp.warn("Unable to connect to SMTP server%s: %s.", hostString, chained.toString());
+                        ZmailLog.smtp.warn("Unable to connect to SMTP server%s: %s.", hostString, chained.toString());
 
                         if (mTrackBadHosts) {
                             JMSession.markSmtpHostBad(hostname);
@@ -1020,7 +1020,7 @@ public class MailSender {
                         if (hostname == null) {
                             throw e;
                         }
-                        ZimbraLog.smtp.info("Attempting to send to %s.", hostname);
+                        ZmailLog.smtp.info("Attempting to send to %s.", hostname);
                     } else {
                         throw e;
                     }
@@ -1069,7 +1069,7 @@ public class MailSender {
         if (mEnvelopeFrom != null) {
             mSession.getProperties().setProperty("mail.smtp.from", mEnvelopeFrom);
         }
-        ZimbraLog.smtp.debug("Sending message %s to SMTP host %s with properties: %s",
+        ZmailLog.smtp.debug("Sending message %s to SMTP host %s with properties: %s",
                              mm.getMessageID(), hostname, mSession.getProperties());
         Transport transport = mSession.getTransport("smtp");
         try {
@@ -1085,7 +1085,7 @@ public class MailSender {
         if (mEnvelopeFrom != null) {
             mSession.getProperties().setProperty("mail.smtp.from", mEnvelopeFrom);
         }
-        ZimbraLog.smtp.debug("Testing connection to SMTP host %s with properties: %s",
+        ZmailLog.smtp.debug("Testing connection to SMTP host %s with properties: %s",
                              hostname, mSession.getProperties());
         Transport transport = mSession.getTransport("smtp");
         try {
@@ -1116,7 +1116,7 @@ public class MailSender {
                         connectError = e;
                     }
                     String hostString = (hostname != null ? " " + hostname : "");
-                    ZimbraLog.smtp.warn("Unable to connect to SMTP server%s: %s.", hostString, chained.toString());
+                    ZmailLog.smtp.warn("Unable to connect to SMTP server%s: %s.", hostString, chained.toString());
                     if (mTrackBadHosts) {
                         JMSession.markSmtpHostBad(hostname);
                     }
@@ -1135,7 +1135,7 @@ public class MailSender {
      */
     public static void relayMessage(MimeMessage mm) throws MessagingException, ServiceException {
         Session session = JMSession.getRelaySession();
-        ZimbraLog.smtp.debug("Sending message %s with properties: %s",
+        ZmailLog.smtp.debug("Sending message %s with properties: %s",
                 mm.getMessageID(), session.getProperties());
         Transport transport = session.getTransport("smtp");
         try {

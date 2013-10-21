@@ -15,69 +15,69 @@
 /**
  *
  */
-package com.zimbra.cs.account;
+package org.zmail.cs.account;
 
 import java.util.HashMap;
 import java.util.Map;
 
-import com.zimbra.common.service.ServiceException;
+import org.zmail.common.service.ServiceException;
 
 public enum AttributeClass {
-    mailRecipient("zimbraMailRecipient",        false),
-    account("zimbraAccount",                    true),
-    alias("zimbraAlias",                        true),
-    distributionList("zimbraDistributionList",  true),
-    cos("zimbraCOS",                            true),
-    globalConfig("zimbraGlobalConfig",          true),
-    domain("zimbraDomain",                      true),
-    securityGroup("zimbraSecurityGroup",        false),
-    server("zimbraServer",                      true),
-    ucService("zimbraUCService",                true),
-    mimeEntry("zimbraMimeEntry",                true),
-    objectEntry("zimbraObjectEntry",            false),
-    timeZone("zimbraTimeZone",                  false),
-    zimletEntry("zimbraZimletEntry",            true),
-    calendarResource("zimbraCalendarResource",  true),
-    identity("zimbraIdentity",                  true),
-    dataSource("zimbraDataSource",              true),
-    pop3DataSource("zimbraPop3DataSource",      true),
-    imapDataSource("zimbraImapDataSource",      true),
-    rssDataSource("zimbraRssDataSource",        true),
-    liveDataSource("zimbraLiveDataSource",      true),
-    galDataSource("zimbraGalDataSource",        true),
-    signature("zimbraSignature",                true),
-    xmppComponent("zimbraXMPPComponent",        true),
-    aclTarget("zimbraAclTarget",                true),
-    group("zimbraGroup",                        true),
-    groupDynamicUnit("zimbraGroupDynamicUnit",  false),
-    groupStaticUnit("zimbraGroupStaticUnit",    false),
-    shareLocator("zimbraShareLocator",          true);
+    mailRecipient("zmailMailRecipient",        false),
+    account("zmailAccount",                    true),
+    alias("zmailAlias",                        true),
+    distributionList("zmailDistributionList",  true),
+    cos("zmailCOS",                            true),
+    globalConfig("zmailGlobalConfig",          true),
+    domain("zmailDomain",                      true),
+    securityGroup("zmailSecurityGroup",        false),
+    server("zmailServer",                      true),
+    ucService("zmailUCService",                true),
+    mimeEntry("zmailMimeEntry",                true),
+    objectEntry("zmailObjectEntry",            false),
+    timeZone("zmailTimeZone",                  false),
+    zimletEntry("zmailZimletEntry",            true),
+    calendarResource("zmailCalendarResource",  true),
+    identity("zmailIdentity",                  true),
+    dataSource("zmailDataSource",              true),
+    pop3DataSource("zmailPop3DataSource",      true),
+    imapDataSource("zmailImapDataSource",      true),
+    rssDataSource("zmailRssDataSource",        true),
+    liveDataSource("zmailLiveDataSource",      true),
+    galDataSource("zmailGalDataSource",        true),
+    signature("zmailSignature",                true),
+    xmppComponent("zmailXMPPComponent",        true),
+    aclTarget("zmailAclTarget",                true),
+    group("zmailGroup",                        true),
+    groupDynamicUnit("zmailGroupDynamicUnit",  false),
+    groupStaticUnit("zmailGroupStaticUnit",    false),
+    shareLocator("zmailShareLocator",          true);
 
-    public static final String OC_zimbraAccount = account.getOCName();
-    public static final String OC_zimbraAclTarget = aclTarget.getOCName();
-    public static final String OC_zimbraAlias = alias.getOCName();
-    public static final String OC_zimbraCalendarResource = calendarResource.getOCName();
-    public static final String OC_zimbraCOS = cos.getOCName();
-    public static final String OC_zimbraDataSource = dataSource.getOCName();
-    public static final String OC_zimbraDistributionList = distributionList.getOCName();
-    public static final String OC_zimbraDomain = domain.getOCName();
-    public static final String OC_zimbraGalDataSource = galDataSource.getOCName();
-    public static final String OC_zimbraGlobalConfig = globalConfig.getOCName();
-    public static final String OC_zimbraGroup = group.getOCName();
-    public static final String OC_zimbraGroupDynamicUnit = groupDynamicUnit.getOCName();
-    public static final String OC_zimbraGroupStaticUnit = groupStaticUnit.getOCName();
-    public static final String OC_zimbraIdentity = identity.getOCName();
-    public static final String OC_zimbraImapDataSource = imapDataSource.getOCName();
-    public static final String OC_zimbraMailRecipient = mailRecipient.getOCName();
-    public static final String OC_zimbraMimeEntry = mimeEntry.getOCName();
-    public static final String OC_zimbraPop3DataSource = pop3DataSource.getOCName();
-    public static final String OC_zimbraRssDataSource = rssDataSource.getOCName();
-    public static final String OC_zimbraServer = server.getOCName();
-    public static final String OC_zimbraUCService = ucService.getOCName();
-    public static final String OC_zimbraSignature = signature.getOCName();
-    public static final String OC_zimbraXMPPComponent = xmppComponent.getOCName();
-    public static final String OC_zimbraZimletEntry = zimletEntry.getOCName();
-    public static final String OC_zimbraShareLocator = shareLocator.getOCName();
+    public static final String OC_zmailAccount = account.getOCName();
+    public static final String OC_zmailAclTarget = aclTarget.getOCName();
+    public static final String OC_zmailAlias = alias.getOCName();
+    public static final String OC_zmailCalendarResource = calendarResource.getOCName();
+    public static final String OC_zmailCOS = cos.getOCName();
+    public static final String OC_zmailDataSource = dataSource.getOCName();
+    public static final String OC_zmailDistributionList = distributionList.getOCName();
+    public static final String OC_zmailDomain = domain.getOCName();
+    public static final String OC_zmailGalDataSource = galDataSource.getOCName();
+    public static final String OC_zmailGlobalConfig = globalConfig.getOCName();
+    public static final String OC_zmailGroup = group.getOCName();
+    public static final String OC_zmailGroupDynamicUnit = groupDynamicUnit.getOCName();
+    public static final String OC_zmailGroupStaticUnit = groupStaticUnit.getOCName();
+    public static final String OC_zmailIdentity = identity.getOCName();
+    public static final String OC_zmailImapDataSource = imapDataSource.getOCName();
+    public static final String OC_zmailMailRecipient = mailRecipient.getOCName();
+    public static final String OC_zmailMimeEntry = mimeEntry.getOCName();
+    public static final String OC_zmailPop3DataSource = pop3DataSource.getOCName();
+    public static final String OC_zmailRssDataSource = rssDataSource.getOCName();
+    public static final String OC_zmailServer = server.getOCName();
+    public static final String OC_zmailUCService = ucService.getOCName();
+    public static final String OC_zmailSignature = signature.getOCName();
+    public static final String OC_zmailXMPPComponent = xmppComponent.getOCName();
+    public static final String OC_zmailZimletEntry = zimletEntry.getOCName();
+    public static final String OC_zmailShareLocator = shareLocator.getOCName();
 
     private static class TM {
         static Map<String, AttributeClass> sOCMap = new HashMap<String, AttributeClass>();

@@ -1,5 +1,5 @@
 -----------------------------
- urn:zimbraAdmin
+ urn:zmailAdmin
 -----------------------------
 
 ----------------------------------------------------------
@@ -138,8 +138,8 @@ Check if a principal has the specified right on target.
              <grantee by="name">admin@D</grantee>
              <right>configureQuota</right>
              <attrs>
-                 <a n="zimbraMailQuota">100000</a>
-                 <a n="zimbraQuotaWarnPercent">80</a>
+                 <a n="zmailMailQuota">100000</a>
+                 <a n="zmailQuotaWarnPercent">80</a>
              <attrs>    
          </CheckRightRequest>
               
@@ -270,9 +270,9 @@ if <grantee> is omitted, it means the account identified by the auth token.
         <right n="renameAccount"/>
         <right n="deleteAccount"/>
         <setAttrs>
-          <a n="zimbraMailQuota" min="100000000"/>
-          <a n="zimbraMailStatus"/>
-          <a n="zimbraFeatureMailEnabled" values="TRUE,FALSE"/>
+          <a n="zmailMailQuota" min="100000000"/>
+          <a n="zmailMailStatus"/>
+          <a n="zmailFeatureMailEnabled" values="TRUE,FALSE"/>
           ...
         </setAttrs>
         <getAttrs>
@@ -321,7 +321,7 @@ e.g. 1  creating an account:
 
 <GetCreateObjectAttrsResponse>
     <setAttrs>
-          <a n="zimbraMailQuota"/>
+          <a n="zmailMailQuota"/>
               <constraint>
                   <min>1</min>
                   <max>3</max>
@@ -329,8 +329,8 @@ e.g. 1  creating an account:
               <default>
                   <v>2</v>
               </default>
-          <a n="zimbraMailStatus"/>
-          <a n="zimbraFeatureCalendarEnabled"/>
+          <a n="zmailMailStatus"/>
+          <a n="zmailFeatureCalendarEnabled"/>
           ...
     </setAttrs>
 </GetCreateObjectAttrsResponse>
@@ -345,9 +345,9 @@ e.g. 2 creating a server:
 <GetCreateObjectAttrsResponse>
     <target type="server"/>
     <setAttrs>
-          <a n="zimbraLmtpExposeVersionOnBanner"/>
-          <a n="zimbraXMPPServerDialbackKey"/>
-          <a n="zimbraReverseProxyImapEnabledCapability"/>
+          <a n="zmailLmtpExposeVersionOnBanner"/>
+          <a n="zmailXMPPServerDialbackKey"/>
+          <a n="zmailReverseProxyImapEnabledCapability"/>
               <constraint>
                   <values>
                       <v>IMAP4rev1</v>
@@ -414,11 +414,11 @@ Get all effective *admin* rights.
     
 e.g.
 
-    <GetAllEffectiveRightsRequest xmlns="urn:zimbraAdmin">
+    <GetAllEffectiveRightsRequest xmlns="urn:zmailAdmin">
       <grantee type="usr" by="name">admin1@test.com</grantee>
     </GetAllEffectiveRightsRequest>
     
-    <GetAllEffectiveRightsResponse xmlns="urn:zimbraAdmin">
+    <GetAllEffectiveRightsResponse xmlns="urn:zmailAdmin">
       <grantee name="admin1@test.com" id="a13b4659-ea6a-4050-bb58-65a9559138d1"/>
       <target type="cos">
         <entries>
@@ -457,19 +457,19 @@ e.g.
             <setAttrs>
               <a n="c"/>
               ...
-              <a n="zimbraAccountCalendarUserType"/>
-              <a n="zimbraAccountStatus"/>
-              <a n="zimbraAdminAuthTokenLifetime">
+              <a n="zmailAccountCalendarUserType"/>
+              <a n="zmailAccountStatus"/>
+              <a n="zmailAdminAuthTokenLifetime">
                 <default>
                   <v>12h</v>
                 </default>
               </a>
-              <a n="zimbraAdminSavedSearches"/>
+              <a n="zmailAdminSavedSearches"/>
               ...
-              <a n="zimbraZimletAvailableZimlets">
+              <a n="zmailZimletAvailableZimlets">
                 <default>
-                  <v>com_zimbra_ymemoticons</v>
-                  <v>com_zimbra_local</v>
+                  <v>org_zmail_ymemoticons</v>
+                  <v>org_zmail_local</v>
                 </default>
               </a>
               ...
@@ -484,8 +484,8 @@ e.g.
             <right n="renameAccount"/>
             <right n="adminLoginAs"/>
             <setAttrs>
-              <a n="zimbraAccountCalendarUserType"/>
-              <a n="zimbraAccountStatus"/>
+              <a n="zmailAccountCalendarUserType"/>
+              <a n="zmailAccountStatus"/>
               ...
             </setAttrs>
             <getAttrs all="1"/>
@@ -497,7 +497,7 @@ e.g.
           <rights>
             <right n="renameAccount"/>
             <setAttrs>
-              <a n="zimbraAccountStatus"/>
+              <a n="zmailAccountStatus"/>
               ...
             </setAttrs>
             <getAttrs all="1"/>
@@ -556,7 +556,7 @@ e.g.
             <right n="listDomain"/>
             <setAttrs>
               <a n="description"/>
-              <a n="zimbraAdminConsoleLoginURL"/>
+              <a n="zmailAdminConsoleLoginURL"/>
               ...
             </setAttrs>
             <getAttrs all="1"/>
@@ -583,12 +583,12 @@ e.g.
               <a n="cn"/>
               <a n="description"/>
               <a n="displayName"/>
-              <a n="zimbraHideInGal"/>
-              <a n="zimbraLocale"/>
-              <a n="zimbraMailCanonicalAddress"/>
-              <a n="zimbraMailForwardingAddress"/>
-              <a n="zimbraMailStatus"/>
-              <a n="zimbraNotes"/>
+              <a n="zmailHideInGal"/>
+              <a n="zmailLocale"/>
+              <a n="zmailMailCanonicalAddress"/>
+              <a n="zmailMailForwardingAddress"/>
+              <a n="zmailMailStatus"/>
+              <a n="zmailNotes"/>
             </setAttrs>
             <getAttrs all="1"/>
           </rights>
@@ -598,10 +598,10 @@ e.g.
           <rights>
             <right n="publishDistributionListShareInfo"/>
             <setAttrs>
-              <a n="zimbraMailCanonicalAddress"/>
-              <a n="zimbraMailForwardingAddress"/>
-              <a n="zimbraMailStatus"/>
-              <a n="zimbraNotes"/>
+              <a n="zmailMailCanonicalAddress"/>
+              <a n="zmailMailForwardingAddress"/>
+              <a n="zmailMailStatus"/>
+              <a n="zmailNotes"/>
             </setAttrs>
             <getAttrs all="1"/>
           </rights>
@@ -613,10 +613,10 @@ e.g.
             <right n="addDistributionListAlias"/>
             <right n="addDistributionListMember"/>
             <setAttrs>
-              <a n="zimbraMailCanonicalAddress"/>
-              <a n="zimbraMailForwardingAddress"/>
-              <a n="zimbraMailStatus"/>
-              <a n="zimbraNotes"/>
+              <a n="zmailMailCanonicalAddress"/>
+              <a n="zmailMailForwardingAddress"/>
+              <a n="zmailMailStatus"/>
+              <a n="zmailNotes"/>
             </setAttrs>
             <getAttrs all="1"/>
           </rights>
@@ -626,10 +626,10 @@ e.g.
           <entry name="dl4@domain1.com"/>
           <rights>
             <setAttrs>
-              <a n="zimbraMailCanonicalAddress"/>
-              <a n="zimbraMailForwardingAddress"/>
-              <a n="zimbraMailStatus"/>
-              <a n="zimbraNotes"/>
+              <a n="zmailMailCanonicalAddress"/>
+              <a n="zmailMailForwardingAddress"/>
+              <a n="zmailMailStatus"/>
+              <a n="zmailNotes"/>
             </setAttrs>
             <getAttrs all="1"/>
           </rights>
@@ -639,7 +639,7 @@ e.g.
 
     
 ----------------------------------------------------------
-Returns the union of the zimbraAdminConsoleUIComponents values on the 
+Returns the union of the zmailAdminConsoleUIComponents values on the 
 specified account/dl entry and that on all admin groups the entry
 belongs.
               
@@ -742,7 +742,7 @@ right-class: right class
 See <GetRightResponse> for description of each <right> in the response. 
 
 ----------------------------------------------------------
-Get constraints (zimbraConstraint) for delegated admin on global config or a cos
+Get constraints (zmailConstraint) for delegated admin on global config or a cos
 
 <GetDelegatedAdminConstraintsRequest type="config|cos" [id="..."] [name="..."]>
   [<a name="{attr-name}">+]
@@ -773,11 +773,11 @@ will not appear in the response.
 e.g.
 
 <GetDelegatedAdminConstraintsRequest type="cos" name="cos1">
-  <a name="zimbraMailQuota">
+  <a name="zmailMailQuota">
 </GetDelegatedAdminConstraintsRequest> 
   
 <GetDelegatedAdminConstraintsResponse type="cos" id="e00428a1-0c00-11d9-836a-000d93afea2a" name="cos1">  
-  <a n="zimbraMailQuota">
+  <a n="zmailMailQuota">
     <constraint>
       <max>524288000</max>
       <min>20971520</min>
@@ -786,7 +786,7 @@ e.g.
 </GetDelegatedAdminConstraintsResponse>
 
 ----------------------------------------------------------
-Modify constraint (zimbraConstraint) for delegated admin on global config or a cos
+Modify constraint (zmailConstraint) for delegated admin on global config or a cos
 
 <ModifyDelegatedAdminConstraintsRequest type="config|cos" [id="..."] [name="..."]>
   <a name="{attr-name}">

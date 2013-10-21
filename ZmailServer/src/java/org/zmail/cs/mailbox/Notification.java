@@ -13,7 +13,7 @@
  * ***** END LICENSE BLOCK *****
  */
 
-package com.zimbra.cs.mailbox;
+package org.zmail.cs.mailbox;
 
 import java.io.IOException;
 import java.util.Collections;
@@ -33,28 +33,28 @@ import javax.mail.internet.MimeMessage;
 import javax.mail.internet.MimeMultipart;
 
 import com.sun.mail.smtp.SMTPMessage;
-import com.zimbra.common.mime.MimeConstants;
-import com.zimbra.common.mime.shim.JavaMailInternetAddress;
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.common.util.CharsetUtil;
-import com.zimbra.common.util.Constants;
-import com.zimbra.common.util.EmailUtil;
-import com.zimbra.common.util.L10nUtil;
-import com.zimbra.common.util.StringUtil;
-import com.zimbra.common.util.ZimbraLog;
-import com.zimbra.common.zmime.ZMimeBodyPart;
-import com.zimbra.common.zmime.ZMimeMessage;
-import com.zimbra.common.zmime.ZMimeMultipart;
-import com.zimbra.cs.account.Account;
-import com.zimbra.cs.account.Provisioning;
-import com.zimbra.cs.db.DbOutOfOffice;
-import com.zimbra.cs.db.DbPool;
-import com.zimbra.cs.db.DbPool.DbConnection;
-import com.zimbra.cs.lmtpserver.LmtpCallback;
-import com.zimbra.cs.mime.Mime;
-import com.zimbra.cs.mime.ParsedMessage;
-import com.zimbra.cs.util.AccountUtil;
-import com.zimbra.cs.util.JMSession;
+import org.zmail.common.mime.MimeConstants;
+import org.zmail.common.mime.shim.JavaMailInternetAddress;
+import org.zmail.common.service.ServiceException;
+import org.zmail.common.util.CharsetUtil;
+import org.zmail.common.util.Constants;
+import org.zmail.common.util.EmailUtil;
+import org.zmail.common.util.L10nUtil;
+import org.zmail.common.util.StringUtil;
+import org.zmail.common.util.ZmailLog;
+import org.zmail.common.zmime.ZMimeBodyPart;
+import org.zmail.common.zmime.ZMimeMessage;
+import org.zmail.common.zmime.ZMimeMultipart;
+import org.zmail.cs.account.Account;
+import org.zmail.cs.account.Provisioning;
+import org.zmail.cs.db.DbOutOfOffice;
+import org.zmail.cs.db.DbPool;
+import org.zmail.cs.db.DbPool.DbConnection;
+import org.zmail.cs.lmtpserver.LmtpCallback;
+import org.zmail.cs.mime.Mime;
+import org.zmail.cs.mime.ParsedMessage;
+import org.zmail.cs.util.AccountUtil;
+import org.zmail.cs.util.JMSession;
 
 public class Notification implements LmtpCallback {
 
@@ -104,17 +104,17 @@ public class Notification implements LmtpCallback {
         try {
             notifyIfNecessary(account, newMessage, recipientEmail);
         } catch (MessagingException e) {
-            ZimbraLog.mailbox.warn("Unable to send new mail notification", e);
+            ZmailLog.mailbox.warn("Unable to send new mail notification", e);
         } catch (ServiceException e) {
-            ZimbraLog.mailbox.warn("Unable to send new mail notification", e);
+            ZmailLog.mailbox.warn("Unable to send new mail notification", e);
         }
 
         try {
             outOfOfficeIfNecessary(account, mbox, newMessage, recipientEmail, envelopeSender);
         } catch (MessagingException e) {
-            ZimbraLog.mailbox.warn("Unable to send out-of-office reply", e);
+            ZmailLog.mailbox.warn("Unable to send out-of-office reply", e);
         } catch (ServiceException e) {
-            ZimbraLog.mailbox.warn("Unable to send out-of-office reply", e);
+            ZmailLog.mailbox.warn("Unable to send out-of-office reply", e);
         }
     }
 
@@ -124,7 +124,7 @@ public class Notification implements LmtpCallback {
         try {
             outOfOfficeIfNecessary(account, mbox, pm, recipientEmail, envelopeSender);
         } catch (Exception e) {
-            ZimbraLog.mailbox.warn("Unable to send out-of-office reply", e);
+            ZmailLog.mailbox.warn("Unable to send out-of-office reply", e);
         }
     }
 
@@ -164,8 +164,8 @@ public class Notification implements LmtpCallback {
     throws ServiceException, MessagingException {
 
         boolean replyEnabled = account.isPrefOutOfOfficeReplyEnabled();
-        if (ZimbraLog.mailbox.isDebugEnabled()) {
-            ZimbraLog.mailbox.debug("outofoffice reply enabled=" + replyEnabled + " rcpt='" + rcpt + "' mid=" + msgId);
+        if (ZmailLog.mailbox.isDebugEnabled()) {
+            ZmailLog.mailbox.debug("outofoffice reply enabled=" + replyEnabled + " rcpt='" + rcpt + "' mid=" + msgId);
         }
         if (!replyEnabled) {
             return;
@@ -173,12 +173,12 @@ public class Notification implements LmtpCallback {
 
         // Check if we are in any configured out of office interval
         Date now = new Date();
-        Date fromDate = account.getGeneralizedTimeAttr(Provisioning.A_zimbraPrefOutOfOfficeFromDate, null);
+        Date fromDate = account.getGeneralizedTimeAttr(Provisioning.A_zmailPrefOutOfOfficeFromDate, null);
         if (fromDate != null && now.before(fromDate)) {
             ofailed("from date not reached", null, rcpt, msgId);
             return;
         }
-        Date untilDate = account.getGeneralizedTimeAttr(Provisioning.A_zimbraPrefOutOfOfficeUntilDate, null);
+        Date untilDate = account.getGeneralizedTimeAttr(Provisioning.A_zmailPrefOutOfOfficeUntilDate, null);
         if (untilDate != null && now.after(untilDate)) {
             ofailed("until date reached", null, rcpt, msgId);
             return;
@@ -259,7 +259,7 @@ public class Notification implements LmtpCallback {
         }
 
         // Check if recipient was directly mentioned in to/cc of this message
-        String[] otherAccountAddrs = account.getMultiAttr(Provisioning.A_zimbraPrefOutOfOfficeDirectAddress);
+        String[] otherAccountAddrs = account.getMultiAttr(Provisioning.A_zmailPrefOutOfOfficeDirectAddress);
         if (!AccountUtil.isDirectRecipient(account, otherAccountAddrs, mm, OUT_OF_OFFICE_DIRECT_CHECK_NUM_RECIPIENTS)) {
             ofailed("not direct", destination, rcpt, msgId);
             return;
@@ -269,7 +269,7 @@ public class Notification implements LmtpCallback {
         DbConnection conn = null;
         try {
             conn = DbPool.getConnection(mbox);
-            if (DbOutOfOffice.alreadySent(conn, mbox, destination, account.getTimeInterval(Provisioning.A_zimbraPrefOutOfOfficeCacheDuration, DEFAULT_OUT_OF_OFFICE_CACHE_DURATION_MILLIS))) {
+            if (DbOutOfOffice.alreadySent(conn, mbox, destination, account.getTimeInterval(Provisioning.A_zmailPrefOutOfOfficeCacheDuration, DEFAULT_OUT_OF_OFFICE_CACHE_DURATION_MILLIS))) {
                 ofailed("already sent", destination, rcpt, msgId);
                 return;
             }
@@ -310,7 +310,7 @@ public class Notification implements LmtpCallback {
             }
 
             // Auto-Submitted
-            out.setHeader("Auto-Submitted", "auto-replied (zimbra; vacation)");
+            out.setHeader("Auto-Submitted", "auto-replied (zmail; vacation)");
 
             // Precedence (discourage older systems from responding)
             out.setHeader("Precedence", "bulk");
@@ -320,11 +320,11 @@ public class Notification implements LmtpCallback {
             boolean sendExternalReply = account.isPrefOutOfOfficeExternalReplyEnabled() &&
                     !isInternalSender(destination, account) && isOfExternalSenderType(destination, account, mbox);
             String body = account.getAttr(sendExternalReply ?
-                    Provisioning.A_zimbraPrefOutOfOfficeExternalReply : Provisioning.A_zimbraPrefOutOfOfficeReply, "");
+                    Provisioning.A_zmailPrefOutOfOfficeExternalReply : Provisioning.A_zmailPrefOutOfOfficeReply, "");
             charset = getCharset(account, body);
             out.setText(body, charset);
 
-            if (Provisioning.getInstance().getConfig().getBooleanAttr(Provisioning.A_zimbraAutoSubmittedNullReturnPath, true)) {
+            if (Provisioning.getInstance().getConfig().getBooleanAttr(Provisioning.A_zmailAutoSubmittedNullReturnPath, true)) {
                 out.setEnvelopeFrom("<>");
             } else {
                 out.setEnvelopeFrom(account.getName());
@@ -334,7 +334,7 @@ public class Notification implements LmtpCallback {
             sender.setSaveToSent(false);
             sender.setDsnNotifyOptions(MailSender.DsnNotifyOption.NEVER);
             sender.sendMimeMessage(null, mbox, out);
-            ZimbraLog.mailbox.info("outofoffice sent dest='" + destination + "' rcpt='" + rcpt + "' mid=" + msgId);
+            ZmailLog.mailbox.info("outofoffice sent dest='" + destination + "' rcpt='" + rcpt + "' mid=" + msgId);
 
             // Save so we will not send to again
             try {
@@ -369,9 +369,9 @@ public class Notification implements LmtpCallback {
             case ALLNOTINAB:
                 try {
                     return !mbox.index.existsInContacts(
-                            Collections.singleton(new com.zimbra.common.mime.InternetAddress(senderAddr)));
+                            Collections.singleton(new org.zmail.common.mime.InternetAddress(senderAddr)));
                 } catch (IOException e) {
-                    ZimbraLog.mailbox.error("Failed to lookup contacts", e);
+                    ZmailLog.mailbox.error("Failed to lookup contacts", e);
                     return true;
                 }
             case ALL:
@@ -381,7 +381,7 @@ public class Notification implements LmtpCallback {
     }
 
     private String getCharset(Account account, String data) {
-        String requestedCharset = account.getAttr(Provisioning.A_zimbraPrefMailDefaultCharset, MimeConstants.P_CHARSET_UTF8);
+        String requestedCharset = account.getAttr(Provisioning.A_zmailPrefMailDefaultCharset, MimeConstants.P_CHARSET_UTF8);
         return CharsetUtil.checkCharset(data, requestedCharset);
     }
 
@@ -392,13 +392,13 @@ public class Notification implements LmtpCallback {
     private void notifyIfNecessary(Account account, Message msg, String rcpt)
     throws MessagingException, ServiceException {
         // Does user have new mail notification turned on
-        boolean notify = account.getBooleanAttr(Provisioning.A_zimbraPrefNewMailNotificationEnabled, false);
+        boolean notify = account.getBooleanAttr(Provisioning.A_zmailPrefNewMailNotificationEnabled, false);
         if (!notify) {
             return;
         }
 
         // Validate notification address
-        String destination = account.getAttr(Provisioning.A_zimbraPrefNewMailNotificationAddress);
+        String destination = account.getAttr(Provisioning.A_zmailPrefNewMailNotificationAddress);
         if (destination == null) {
             nfailed("destination not set", null, rcpt, msg, null);
             return;
@@ -452,9 +452,9 @@ public class Notification implements LmtpCallback {
         }
 
         // Assemble message components
-        String from = account.getAttr(Provisioning.A_zimbraNewMailNotificationFrom);
-        String subject = account.getAttr(Provisioning.A_zimbraNewMailNotificationSubject);
-        String body = account.getAttr(Provisioning.A_zimbraNewMailNotificationBody);
+        String from = account.getAttr(Provisioning.A_zmailNewMailNotificationFrom);
+        String subject = account.getAttr(Provisioning.A_zmailNewMailNotificationSubject);
+        String body = account.getAttr(Provisioning.A_zmailNewMailNotificationBody);
         if (from == null || subject == null || body == null) {
             nfailed("null from, subject or body", destination, rcpt, msg);
             return;
@@ -490,16 +490,16 @@ public class Notification implements LmtpCallback {
 
             String envFrom = "<>";
             try {
-                if (!Provisioning.getInstance().getConfig().getBooleanAttr(Provisioning.A_zimbraAutoSubmittedNullReturnPath, true)) {
+                if (!Provisioning.getInstance().getConfig().getBooleanAttr(Provisioning.A_zmailAutoSubmittedNullReturnPath, true)) {
                     envFrom = account.getName();
                 }
             } catch (ServiceException se) {
-                ZimbraLog.mailbox.warn("error encoutered looking up return path configuration, using null return path instead", se);
+                ZmailLog.mailbox.warn("error encoutered looking up return path configuration, using null return path instead", se);
             }
             smtpSession.getProperties().setProperty("mail.smtp.from", envFrom);
 
             Transport.send(out);
-            ZimbraLog.mailbox.info("notification sent dest='" + destination + "' rcpt='" + rcpt + "' mid=" + msg.getId());
+            ZmailLog.mailbox.info("notification sent dest='" + destination + "' rcpt='" + rcpt + "' mid=" + msg.getId());
         } catch (MessagingException me) {
             nfailed("send failed", destination, rcpt, msg, me);
         }
@@ -514,7 +514,7 @@ public class Notification implements LmtpCallback {
     }
 
     /**
-     * If <tt>zimbraInterceptAddress</tt> is specified, sends a message to that
+     * If <tt>zmailInterceptAddress</tt> is specified, sends a message to that
      * address with the given message attached.
      *
      * @param operation name of the operation being performed (send, add message, save draft, etc.)
@@ -524,14 +524,14 @@ public class Notification implements LmtpCallback {
     throws ServiceException {
             // Don't do anything if intercept is turned off.
             Account account = mbox.getAccount();
-            String[] interceptAddresses = account.getMultiAttr(Provisioning.A_zimbraInterceptAddress);
+            String[] interceptAddresses = account.getMultiAttr(Provisioning.A_zmailInterceptAddress);
             if (interceptAddresses.length == 0) {
                 return;
             }
 
             for (String interceptAddress : interceptAddresses) {
                 try {
-                    ZimbraLog.mailbox.info("Sending intercept of message %s to %s.", msg.getMessageID(), interceptAddress);
+                    ZmailLog.mailbox.info("Sending intercept of message %s to %s.", msg.getMessageID(), interceptAddress);
 
                     // Fill templates
                     String folderName = "none";
@@ -549,13 +549,13 @@ public class Notification implements LmtpCallback {
                     vars.put("FOLDER_ID", folderId);
                     vars.put("NEWLINE", "\r\n");
 
-                    String from = StringUtil.fillTemplate(account.getAttr(Provisioning.A_zimbraInterceptFrom), vars);
-                    String subject = StringUtil.fillTemplate(account.getAttr(Provisioning.A_zimbraInterceptSubject), vars);
-                    String bodyText = StringUtil.fillTemplate(account.getAttr(Provisioning.A_zimbraInterceptBody), vars);
+                    String from = StringUtil.fillTemplate(account.getAttr(Provisioning.A_zmailInterceptFrom), vars);
+                    String subject = StringUtil.fillTemplate(account.getAttr(Provisioning.A_zmailInterceptSubject), vars);
+                    String bodyText = StringUtil.fillTemplate(account.getAttr(Provisioning.A_zmailInterceptBody), vars);
 
                     // Assemble outgoing message
                     MimeMessage attached = msg;
-                    boolean headersOnly = account.getBooleanAttr(Provisioning.A_zimbraInterceptSendHeadersOnly, false);
+                    boolean headersOnly = account.getBooleanAttr(Provisioning.A_zmailInterceptSendHeadersOnly, false);
                     if (headersOnly) {
                         attached = new MimeMessageWithId(msg.getMessageID());
                         Enumeration e = msg.getAllHeaderLines();
@@ -567,7 +567,7 @@ public class Notification implements LmtpCallback {
                     }
 
                     SMTPMessage out = new SMTPMessage(JMSession.getSmtpSession());
-                    out.setHeader("Auto-Submitted", "auto-replied (zimbra; intercept)");
+                    out.setHeader("Auto-Submitted", "auto-replied (zmail; intercept)");
                     InternetAddress address = new JavaMailInternetAddress(from);
                     out.setFrom(address);
 
@@ -600,7 +600,7 @@ public class Notification implements LmtpCallback {
                     // clean up after ourselves...
                     multi.removeBodyPart(part2);
                 } catch (MessagingException e) {
-                    ZimbraLog.lmtp.warn("Unable to send intercept message to %s.", interceptAddress, e);
+                    ZmailLog.lmtp.warn("Unable to send intercept message to %s.", interceptAddress, e);
                 }
             }
     }
@@ -633,7 +633,7 @@ public class Notification implements LmtpCallback {
         if (destAddr != null) {
             sb.append(" dest='").append(destAddr).append("'");
         }
-        ZimbraLog.mailbox.info(sb.toString(), e);
+        ZmailLog.mailbox.info(sb.toString(), e);
     }
 
     private static void nfailed(String why, String destAddr, String rcptAddr, Message msg, Exception e) {

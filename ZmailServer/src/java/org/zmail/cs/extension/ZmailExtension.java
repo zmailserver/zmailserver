@@ -12,22 +12,22 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.extension;
+package org.zmail.cs.extension;
 
-import com.zimbra.common.service.ServiceException;
+import org.zmail.common.service.ServiceException;
 
 /**
- * Zimbra extension. An extension to the Zimbra server is packaged as a jar
+ * Zmail extension. An extension to the Zmail server is packaged as a jar
  * file with its manifest containing the header:
  * <p>
  * <code>
- *   Zimbra-Extension-Class: <i>name of implementation class of this interface</i>
+ *   Zmail-Extension-Class: <i>name of implementation class of this interface</i>
  * </code>
  * <p>
  * The extension is deployed by dropping the jar file into the
- * <i>zimbra_home</i>/lib/ext/<i>ext</i> directory. It is loaded upon server startup.
+ * <i>zmail_home</i>/lib/ext/<i>ext</i> directory. It is loaded upon server startup.
  */
-public interface ZimbraExtension {
+public interface ZmailExtension {
 
     /**
      * Defines a name for the extension. It must be an identifier.

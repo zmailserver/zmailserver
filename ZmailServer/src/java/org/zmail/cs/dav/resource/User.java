@@ -12,7 +12,7 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.dav.resource;
+package org.zmail.cs.dav.resource;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -27,30 +27,30 @@ import org.dom4j.DocumentHelper;
 import org.dom4j.Element;
 import org.dom4j.QName;
 
-import com.zimbra.common.auth.ZAuthToken;
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.common.util.Pair;
-import com.zimbra.common.util.ZimbraLog;
-import com.zimbra.cs.account.Account;
-import com.zimbra.cs.account.Provisioning;
-import com.zimbra.common.account.Key.AccountBy;
-import com.zimbra.cs.dav.DavContext;
-import com.zimbra.cs.dav.DavElements;
-import com.zimbra.cs.dav.DavException;
-import com.zimbra.cs.dav.property.Acl;
-import com.zimbra.cs.dav.property.CalDavProperty;
-import com.zimbra.cs.dav.property.CardDavProperty;
-import com.zimbra.cs.dav.property.ResourceProperty;
-import com.zimbra.cs.mailbox.ACL;
-import com.zimbra.cs.mailbox.Folder;
-import com.zimbra.cs.mailbox.MailItem;
-import com.zimbra.cs.mailbox.Mailbox;
-import com.zimbra.cs.mailbox.MailboxManager;
-import com.zimbra.cs.mailbox.Mountpoint;
-import com.zimbra.cs.mailbox.ACL.Grant;
-import com.zimbra.cs.service.AuthProvider;
-import com.zimbra.client.ZFolder;
-import com.zimbra.client.ZMailbox;
+import org.zmail.common.auth.ZAuthToken;
+import org.zmail.common.service.ServiceException;
+import org.zmail.common.util.Pair;
+import org.zmail.common.util.ZmailLog;
+import org.zmail.cs.account.Account;
+import org.zmail.cs.account.Provisioning;
+import org.zmail.common.account.Key.AccountBy;
+import org.zmail.cs.dav.DavContext;
+import org.zmail.cs.dav.DavElements;
+import org.zmail.cs.dav.DavException;
+import org.zmail.cs.dav.property.Acl;
+import org.zmail.cs.dav.property.CalDavProperty;
+import org.zmail.cs.dav.property.CardDavProperty;
+import org.zmail.cs.dav.property.ResourceProperty;
+import org.zmail.cs.mailbox.ACL;
+import org.zmail.cs.mailbox.Folder;
+import org.zmail.cs.mailbox.MailItem;
+import org.zmail.cs.mailbox.Mailbox;
+import org.zmail.cs.mailbox.MailboxManager;
+import org.zmail.cs.mailbox.Mountpoint;
+import org.zmail.cs.mailbox.ACL.Grant;
+import org.zmail.cs.service.AuthProvider;
+import org.zmail.client.ZFolder;
+import org.zmail.client.ZMailbox;
 
 public class User extends Principal {
 
@@ -113,7 +113,7 @@ public class User extends Principal {
     public void patchProperties(DavContext ctxt, Collection<Element> set, Collection<QName> remove) throws DavException, IOException {
         if (true)
             return;
-        // supporting ACL manipulation in CalDAV will be confusing.  In Zimbra model we send out
+        // supporting ACL manipulation in CalDAV will be confusing.  In Zmail model we send out
         // share notification email, and recipient actively accepts the share.  But iCal
         // supports proxy read/write groups and memberships of each users.  We can partly
         // support iCal models for existing shares.  for new shares, we can try sending out
@@ -136,11 +136,11 @@ public class User extends Principal {
                     try {
                         UrlNamespace.getPrincipalAtUrl(ctxt, principalPath);
                     } catch (DavException e) {
-                        ZimbraLog.dav.warn("can't find principal at %s", path);
+                        ZmailLog.dav.warn("can't find principal at %s", path);
                         continue;
                     }
                     if (!(principal instanceof User)) {
-                        ZimbraLog.dav.warn("not a user principal path %s", path);
+                        ZmailLog.dav.warn("not a user principal path %s", path);
                         continue;
                     }
                     Account target = ((User)principal).mAccount;
@@ -150,7 +150,7 @@ public class User extends Principal {
                         mbox.grantAccess(ctxt.getOperationContext(), Mailbox.ID_FOLDER_CALENDAR, target.getId(), ACL.GRANTEE_USER, perm, null);
                         mbox.grantAccess(ctxt.getOperationContext(), Mailbox.ID_FOLDER_TASKS, target.getId(), ACL.GRANTEE_USER, perm, null);
                     } catch (ServiceException se) {
-                        ZimbraLog.dav.warn("can't modify acl on %s for %s", mAccount.getName(), path);
+                        ZmailLog.dav.warn("can't modify acl on %s for %s", mAccount.getName(), path);
                     }
                 }
             }
@@ -227,11 +227,11 @@ public class User extends Principal {
                         }
                         mps.add(new Pair<Mountpoint,ZFolder>(mp, folder));
                     } catch (ServiceException se) {
-                        ZimbraLog.dav.warn("can't get remote folder", se);
+                        ZmailLog.dav.warn("can't get remote folder", se);
                     }
                 }
             } catch (ServiceException se) {
-                ZimbraLog.dav.warn("can't get mailbox", se);
+                ZmailLog.dav.warn("can't get mailbox", se);
             }
             return mps;
         }
@@ -261,7 +261,7 @@ public class User extends Principal {
                             group.addElement(DavElements.E_HREF).setText(UrlNamespace.getPrincipalUrl(mAccount, owner)+"calendar-proxy-read");
                     }
                 } catch (ServiceException se) {
-                    ZimbraLog.dav.warn("can't convert rights", se);
+                    ZmailLog.dav.warn("can't convert rights", se);
                 }
             }
             return group;
@@ -299,7 +299,7 @@ public class User extends Principal {
                     }
                 }
             } catch (ServiceException se) {
-                ZimbraLog.dav.warn("can't get mailbox", se);
+                ZmailLog.dav.warn("can't get mailbox", se);
             }
             return group;
         }
@@ -334,7 +334,7 @@ public class User extends Principal {
                         }
                     }
                 } catch (ServiceException se) {
-                    ZimbraLog.dav.warn("can't convert rights", se);
+                    ZmailLog.dav.warn("can't convert rights", se);
                 }
             }
             for (Element e : proxies.values()) {
@@ -368,7 +368,7 @@ public class User extends Principal {
                         }
                     }
                 } catch (ServiceException se) {
-                    ZimbraLog.dav.warn("can't convert rights", se);
+                    ZmailLog.dav.warn("can't convert rights", se);
                 }
             }
             return proxy;

@@ -13,7 +13,7 @@
  * ***** END LICENSE BLOCK *****
  */
 
-package com.zimbra.cs.service.mail;
+package org.zmail.cs.service.mail;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -21,30 +21,30 @@ import java.util.Map;
 
 import javax.mail.internet.MimeMessage;
 
-import com.zimbra.common.calendar.ZCalendar.ZVCalendar;
-import com.zimbra.common.mime.MimeConstants;
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.common.soap.Element;
-import com.zimbra.common.soap.MailConstants;
-import com.zimbra.common.util.ZimbraLog;
-import com.zimbra.cs.account.Account;
-import com.zimbra.cs.mailbox.CalendarItem;
-import com.zimbra.cs.mailbox.CalendarItem.ReplyInfo;
-import com.zimbra.cs.mailbox.Flag;
-import com.zimbra.cs.mailbox.Folder;
-import com.zimbra.cs.mailbox.MailItem;
-import com.zimbra.cs.mailbox.Mailbox;
-import com.zimbra.cs.mailbox.Mailbox.SetCalendarItemData;
-import com.zimbra.cs.mailbox.OperationContext;
-import com.zimbra.cs.mailbox.calendar.IcalXmlStrMap;
-import com.zimbra.cs.mailbox.calendar.Invite;
-import com.zimbra.cs.mailbox.util.TagUtil;
-import com.zimbra.cs.mime.ParsedMessage;
-import com.zimbra.cs.mime.ParsedMessage.CalendarPartInfo;
-import com.zimbra.cs.service.mail.ParseMimeMessage.InviteParserResult;
-import com.zimbra.cs.service.util.ItemId;
-import com.zimbra.cs.service.util.ItemIdFormatter;
-import com.zimbra.soap.ZimbraSoapContext;
+import org.zmail.common.calendar.ZCalendar.ZVCalendar;
+import org.zmail.common.mime.MimeConstants;
+import org.zmail.common.service.ServiceException;
+import org.zmail.common.soap.Element;
+import org.zmail.common.soap.MailConstants;
+import org.zmail.common.util.ZmailLog;
+import org.zmail.cs.account.Account;
+import org.zmail.cs.mailbox.CalendarItem;
+import org.zmail.cs.mailbox.CalendarItem.ReplyInfo;
+import org.zmail.cs.mailbox.Flag;
+import org.zmail.cs.mailbox.Folder;
+import org.zmail.cs.mailbox.MailItem;
+import org.zmail.cs.mailbox.Mailbox;
+import org.zmail.cs.mailbox.Mailbox.SetCalendarItemData;
+import org.zmail.cs.mailbox.OperationContext;
+import org.zmail.cs.mailbox.calendar.IcalXmlStrMap;
+import org.zmail.cs.mailbox.calendar.Invite;
+import org.zmail.cs.mailbox.util.TagUtil;
+import org.zmail.cs.mime.ParsedMessage;
+import org.zmail.cs.mime.ParsedMessage.CalendarPartInfo;
+import org.zmail.cs.service.mail.ParseMimeMessage.InviteParserResult;
+import org.zmail.cs.service.util.ItemId;
+import org.zmail.cs.service.util.ItemIdFormatter;
+import org.zmail.soap.ZmailSoapContext;
 
 public class SetCalendarItem extends CalendarRequest {
 
@@ -75,7 +75,7 @@ public class SetCalendarItem extends CalendarRequest {
         }
 
         @Override
-        public ParseMimeMessage.InviteParserResult parseInviteElement(ZimbraSoapContext zc, OperationContext octxt,
+        public ParseMimeMessage.InviteParserResult parseInviteElement(ZmailSoapContext zc, OperationContext octxt,
                 Account account, Element inviteElem) throws ServiceException {
             Element content = inviteElem.getOptionalElement(MailConstants.E_CONTENT);
             if (content != null) {
@@ -95,7 +95,7 @@ public class SetCalendarItem extends CalendarRequest {
 
     @Override
     public Element handle(Element request, Map<String, Object> context) throws ServiceException {
-        ZimbraSoapContext zsc = getZimbraSoapContext(context);
+        ZmailSoapContext zsc = getZmailSoapContext(context);
         Mailbox mbox = getRequestedMailbox(zsc);
         OperationContext octxt = getOperationContext(zsc, context);
         ItemIdFormatter ifmt = new ItemIdFormatter(zsc);
@@ -141,16 +141,16 @@ public class SetCalendarItem extends CalendarRequest {
                 String reqCalItemId = inv.getAttribute(MailConstants.A_CAL_ID);
                 String uid = inv.getAttribute(MailConstants.A_UID);
                 boolean uidSame = (calItem == null || (calItem.getUid() == null && uid == null) || (calItem.getUid() != null && (calItem.getUid().equals(uid) || (Invite.isOutlookUid(calItem.getUid()) && calItem.getUid().equalsIgnoreCase(uid))))); //new or same as requested, or Outlook and case-insensitive equal
-                if (ZimbraLog.calendar.isInfoEnabled()) {
+                if (ZmailLog.calendar.isInfoEnabled()) {
                     StringBuilder logBuf = new StringBuilder();
                     if (!reqCalItemId.equals(itemId)) {
                         logBuf.append("Mapped requested id ").append(reqCalItemId).append(" -> ").append(itemId);
                     }
                     if (!uidSame) {
                         logBuf.append(" ?? requested UID ").append(uid).append(" differs from mapped ").append(calItem.getUid());
-                        ZimbraLog.calendar.warn(logBuf.toString());
+                        ZmailLog.calendar.warn(logBuf.toString());
                     } else if (logBuf.length() > 0) {
-                        ZimbraLog.calendar.info(logBuf.toString());
+                        ZmailLog.calendar.info(logBuf.toString());
                     }
                 }
                 assert(uidSame);
@@ -166,7 +166,7 @@ public class SetCalendarItem extends CalendarRequest {
         }
     }
 
-    static SetCalendarItemData getSetCalendarItemData(ZimbraSoapContext zsc, OperationContext octxt, Account acct, Mailbox mbox, Element e, ParseMimeMessage.InviteParser parser)
+    static SetCalendarItemData getSetCalendarItemData(ZmailSoapContext zsc, OperationContext octxt, Account acct, Mailbox mbox, Element e, ParseMimeMessage.InviteParser parser)
     throws ServiceException {
         String partStatStr = e.getAttribute(MailConstants.A_CAL_PARTSTAT, IcalXmlStrMap.PARTSTAT_NEEDS_ACTION);
 
@@ -243,7 +243,7 @@ public class SetCalendarItem extends CalendarRequest {
         public long nextAlarm;
     }
 
-    public static SetCalendarItemParseResult parseSetAppointmentRequest(Element request, ZimbraSoapContext zsc,
+    public static SetCalendarItemParseResult parseSetAppointmentRequest(Element request, ZmailSoapContext zsc,
             OperationContext octxt, Folder folder, MailItem.Type type, boolean parseIds) throws ServiceException {
         Account acct = getRequestedAccount(zsc);
         Mailbox mbox = getRequestedMailbox(zsc);

@@ -12,44 +12,44 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.qa.unittest.prov.ldap;
+package org.zmail.qa.unittest.prov.ldap;
 
 import org.junit.*;
 import static org.junit.Assert.*;
 
-import com.zimbra.cs.ldap.LdapUtil;
+import org.zmail.cs.ldap.LdapUtil;
 
 public class TestLdapUtil extends LdapTest {
 
     @Test
     public void testAuthDN() {
         
-        assertEquals("schemers@example.zimbra.com", 
-                LdapUtil.computeDn("schemers@example.zimbra.com", null));
+        assertEquals("schemers@example.zmail.com", 
+                LdapUtil.computeDn("schemers@example.zmail.com", null));
         
-        assertEquals("schemers@example.zimbra.com",
-                LdapUtil.computeDn("schemers@example.zimbra.com", ""));
+        assertEquals("schemers@example.zmail.com",
+                LdapUtil.computeDn("schemers@example.zmail.com", ""));
         
         assertEquals("WTF",
-                LdapUtil.computeDn("schemers@example.zimbra.com", "WTF"));
+                LdapUtil.computeDn("schemers@example.zmail.com", "WTF"));
         
-        assertEquals("schemers@example.zimbra.com",
-                LdapUtil.computeDn("schemers@example.zimbra.com", "%n"));
+        assertEquals("schemers@example.zmail.com",
+                LdapUtil.computeDn("schemers@example.zmail.com", "%n"));
         
         assertEquals("schemers",
-                LdapUtil.computeDn("schemers@example.zimbra.com", "%u"));
+                LdapUtil.computeDn("schemers@example.zmail.com", "%u"));
         
-        assertEquals("example.zimbra.com",
-                LdapUtil.computeDn("schemers@example.zimbra.com", "%d"));
+        assertEquals("example.zmail.com",
+                LdapUtil.computeDn("schemers@example.zmail.com", "%d"));
         
-        assertEquals("dc=example,dc=zimbra,dc=com",
-                LdapUtil.computeDn("schemers@example.zimbra.com", "%D"));
+        assertEquals("dc=example,dc=zmail,dc=com",
+                LdapUtil.computeDn("schemers@example.zmail.com", "%D"));
         
-        assertEquals("uid=schemers,ou=people,dc=example,dc=zimbra,dc=com",
-                LdapUtil.computeDn("schemers@example.zimbra.com", "uid=%u,ou=people,%D"));
+        assertEquals("uid=schemers,ou=people,dc=example,dc=zmail,dc=com",
+                LdapUtil.computeDn("schemers@example.zmail.com", "uid=%u,ou=people,%D"));
         
-        assertEquals("n(schemers@example.zimbra.com)u(schemers)d(example.zimbra.com)D(dc=example,dc=zimbra,dc=com)(%)",
-                LdapUtil.computeDn("schemers@example.zimbra.com", "n(%n)u(%u)d(%d)D(%D)(%%)"));
+        assertEquals("n(schemers@example.zmail.com)u(schemers)d(example.zmail.com)D(dc=example,dc=zmail,dc=com)(%)",
+                LdapUtil.computeDn("schemers@example.zmail.com", "n(%n)u(%u)d(%d)D(%D)(%%)"));
     }
     
     @Test
@@ -70,14 +70,14 @@ public class TestLdapUtil extends LdapTest {
         System.out.println(escapedValue);
         
         /*
-        String raw = "(&(objectclass=zimbraIdentity)(zimbraPrefIdentityName=## ,+\"\\<>;\u4e2d\u6587---createIdentity ))";
+        String raw = "(&(objectclass=zmailIdentity)(zmailPrefIdentityName=## ,+\"\\<>;\u4e2d\u6587---createIdentity ))";
         String escaped = com.unboundid.ldap.sdk.Filter.encodeValue(raw);
         System.out.println(escaped);
         */
         
         /*
         com.unboundid.ldap.sdk.Filter filter = 
-            com.unboundid.ldap.sdk.Filter.create("(&(objectclass=zimbraIdentity)(zimbraPrefIdentityName=## ,+\"\\<>;\u4e2d\u6587---createIdentity ))");
+            com.unboundid.ldap.sdk.Filter.create("(&(objectclass=zmailIdentity)(zmailPrefIdentityName=## ,+\"\\<>;\u4e2d\u6587---createIdentity ))");
         String norm = filter.toNormalizedString();
         System.out.println(norm);
         */

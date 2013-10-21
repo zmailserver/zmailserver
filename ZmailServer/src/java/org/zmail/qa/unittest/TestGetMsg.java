@@ -12,17 +12,17 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.qa.unittest;
+package org.zmail.qa.unittest;
 
 import junit.framework.TestCase;
 
-import com.zimbra.cs.account.Provisioning;
-import com.zimbra.cs.mime.handler.TextEnrichedHandler;
-import com.zimbra.client.ZGetMessageParams;
-import com.zimbra.client.ZMailbox;
-import com.zimbra.client.ZMessage;
-import com.zimbra.client.ZMessage.ZMimePart;
-import com.zimbra.common.mime.MimeConstants;
+import org.zmail.cs.account.Provisioning;
+import org.zmail.cs.mime.handler.TextEnrichedHandler;
+import org.zmail.client.ZGetMessageParams;
+import org.zmail.client.ZMailbox;
+import org.zmail.client.ZMessage;
+import org.zmail.client.ZMessage.ZMimePart;
+import org.zmail.common.mime.MimeConstants;
 
 public class TestGetMsg
 extends TestCase {
@@ -35,7 +35,7 @@ extends TestCase {
     public void setUp()
     throws Exception {
         cleanUp();
-        mOriginalContentMaxSize = TestUtil.getServerAttr(Provisioning.A_zimbraMailContentMaxSize);
+        mOriginalContentMaxSize = TestUtil.getServerAttr(Provisioning.A_zmailMailContentMaxSize);
     }
     
     public void testPlainMessageContent()
@@ -71,9 +71,9 @@ extends TestCase {
         verifyMessageContent(mbox, msgId, false, 24, 24, true, body, contentType);
         verifyMessageContent(mbox, msgId, true, 24, 24, true, body, contentType);
         
-        // Set zimbraMailMaxContentLength and confirm that the content
+        // Set zmailMailMaxContentLength and confirm that the content
         // gets truncated.
-        TestUtil.setServerAttr(Provisioning.A_zimbraMailContentMaxSize, "24");
+        TestUtil.setServerAttr(Provisioning.A_zmailMailContentMaxSize, "24");
         verifyMessageContent(mbox, msgId, false, null, 24, true, body, contentType);
         verifyMessageContent(mbox, msgId, true, null, 24, true, body, contentType);
     }
@@ -109,7 +109,7 @@ extends TestCase {
     public void tearDown()
     throws Exception {
         cleanUp();
-        TestUtil.setServerAttr(Provisioning.A_zimbraMailContentMaxSize, mOriginalContentMaxSize);
+        TestUtil.setServerAttr(Provisioning.A_zmailMailContentMaxSize, mOriginalContentMaxSize);
     }
     
     private void cleanUp()

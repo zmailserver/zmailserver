@@ -13,11 +13,11 @@
  * ***** END LICENSE BLOCK *****
  */
 
-package com.zimbra.cs.account.soap;
+package org.zmail.cs.account.soap;
 
 import java.util.Map;
 
-import com.zimbra.common.service.ServiceException;
+import org.zmail.common.service.ServiceException;
 
 interface SoapEntry {
     

@@ -12,18 +12,18 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.examples.extns.soapservice;
+package org.zmail.examples.extns.soapservice;
 
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.cs.extension.ZimbraExtension;
-import com.zimbra.soap.SoapServlet;
+import org.zmail.common.service.ServiceException;
+import org.zmail.cs.extension.ZmailExtension;
+import org.zmail.soap.SoapServlet;
 
 /**
- * Extension that augments the Zimbra SOAP service.
+ * Extension that augments the Zmail SOAP service.
  *
  * @author vmahajan
  */
-public class SoapServiceExtension implements ZimbraExtension {
+public class SoapServiceExtension implements ZmailExtension {
 
     /**
      * Defines a name for the extension. It must be an identifier.
@@ -37,7 +37,7 @@ public class SoapServiceExtension implements ZimbraExtension {
     /**
      * Initializes the extension. Called when the extension is loaded.
      *
-     * @throws com.zimbra.common.service.ServiceException
+     * @throws org.zmail.common.service.ServiceException
      */
     public void init() throws ServiceException {
         SoapServlet.addService("SoapServlet", new SoapExtnService());

@@ -12,7 +12,7 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.mailbox;
+package org.zmail.cs.mailbox;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -33,30 +33,30 @@ import com.google.common.base.Strings;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Lists;
 import com.google.common.io.Closeables;
-import com.zimbra.common.account.Key;
-import com.zimbra.common.mailbox.ContactConstants;
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.common.soap.Element;
-import com.zimbra.common.soap.MailConstants;
-import com.zimbra.common.soap.SoapProtocol;
-import com.zimbra.common.util.ZimbraLog;
-import com.zimbra.cs.account.Account;
-import com.zimbra.cs.account.GalContact;
-import com.zimbra.cs.account.Provisioning;
-import com.zimbra.cs.gal.GalGroup;
-import com.zimbra.cs.gal.GalGroupInfoProvider;
-import com.zimbra.cs.gal.GalSearchControl;
-import com.zimbra.cs.gal.GalSearchParams;
-import com.zimbra.cs.gal.GalSearchResultCallback;
-import com.zimbra.cs.index.ContactHit;
-import com.zimbra.cs.index.ProxiedHit;
-import com.zimbra.cs.index.SearchParams;
-import com.zimbra.cs.index.SortBy;
-import com.zimbra.cs.index.ZimbraHit;
-import com.zimbra.cs.index.ZimbraQueryResults;
-import com.zimbra.cs.service.util.ItemId;
-import com.zimbra.soap.type.GalSearchType;
-import com.zimbra.soap.ZimbraSoapContext;
+import org.zmail.common.account.Key;
+import org.zmail.common.mailbox.ContactConstants;
+import org.zmail.common.service.ServiceException;
+import org.zmail.common.soap.Element;
+import org.zmail.common.soap.MailConstants;
+import org.zmail.common.soap.SoapProtocol;
+import org.zmail.common.util.ZmailLog;
+import org.zmail.cs.account.Account;
+import org.zmail.cs.account.GalContact;
+import org.zmail.cs.account.Provisioning;
+import org.zmail.cs.gal.GalGroup;
+import org.zmail.cs.gal.GalGroupInfoProvider;
+import org.zmail.cs.gal.GalSearchControl;
+import org.zmail.cs.gal.GalSearchParams;
+import org.zmail.cs.gal.GalSearchResultCallback;
+import org.zmail.cs.index.ContactHit;
+import org.zmail.cs.index.ProxiedHit;
+import org.zmail.cs.index.SearchParams;
+import org.zmail.cs.index.SortBy;
+import org.zmail.cs.index.ZmailHit;
+import org.zmail.cs.index.ZmailQueryResults;
+import org.zmail.cs.service.util.ItemId;
+import org.zmail.soap.type.GalSearchType;
+import org.zmail.soap.ZmailSoapContext;
 
 public class ContactAutoComplete {
     public static final class AutoCompleteResult {
@@ -167,13 +167,13 @@ public class ContactAutoComplete {
         }
 
         void setIsGalGroup(String email, Map<String,? extends Object> attrs, Account authedAcct, boolean needCanExpand) {
-            setIsGalGroup(email, (String)attrs.get(ContactConstants.A_zimbraId), authedAcct, needCanExpand);
+            setIsGalGroup(email, (String)attrs.get(ContactConstants.A_zmailId), authedAcct, needCanExpand);
         }
 
-        void setIsGalGroup(String email, String zimbraId, Account authedAcct, boolean needCanExpand) {
+        void setIsGalGroup(String email, String zmailId, Account authedAcct, boolean needCanExpand) {
             boolean canExpand = false;
             if (needCanExpand) {
-                canExpand = GalSearchControl.canExpandGalGroup(email, zimbraId, authedAcct);
+                canExpand = GalSearchControl.canExpandGalGroup(email, zmailId, authedAcct);
             }
             setIsGalGroup(canExpand);
         }
@@ -265,7 +265,7 @@ public class ContactAutoComplete {
     private Collection<String> mEmailKeys;
 
     private GalSearchType mSearchType;
-    private ZimbraSoapContext mZsc;
+    private ZmailSoapContext mZsc;
     private Account mAuthedAcct;
     private Account mRequestedAcct;
     private OperationContext octxt;
@@ -277,7 +277,7 @@ public class ContactAutoComplete {
         this(acct, null, octxt);
     }
 
-    public ContactAutoComplete(Account acct, ZimbraSoapContext zsc, OperationContext octxt) {
+    public ContactAutoComplete(Account acct, ZmailSoapContext zsc, OperationContext octxt) {
         mZsc = zsc;
         this.octxt = octxt;
         try {
@@ -299,7 +299,7 @@ public class ContactAutoComplete {
                 mAuthedAcct = mRequestedAcct;
             }
         } catch (ServiceException e) {
-            ZimbraLog.gal.warn("error initializing ContactAutoComplete", e);
+            ZmailLog.gal.warn("error initializing ContactAutoComplete", e);
         }
         if (mEmailKeys == null) {
             mEmailKeys = DEFAULT_EMAIL_KEYS;
@@ -332,7 +332,7 @@ public class ContactAutoComplete {
     }
 
     public AutoCompleteResult query(String str, Collection<Integer> folders, int limit) throws ServiceException {
-        ZimbraLog.gal.debug("AutoComplete querying: %s", str);
+        ZmailLog.gal.debug("AutoComplete querying: %s", str);
         long t0 = System.currentTimeMillis();
         AutoCompleteResult result = new AutoCompleteResult(limit);
         result.rankings = new ContactRankings(getRequestedAcctId());
@@ -369,7 +369,7 @@ public class ContactAutoComplete {
 
         long t3 = System.currentTimeMillis();
 
-        ZimbraLog.gal.info("autocomplete: overall=%dms, ranking=%dms, folder=%dms, gal=%dms",
+        ZmailLog.gal.info("autocomplete: overall=%dms, ranking=%dms, folder=%dms, gal=%dms",
                 t3 - t0, t1 - t0, t2 - t1, t3 - t2);
         return result;
     }
@@ -399,7 +399,7 @@ public class ContactAutoComplete {
     }
 
     private void queryGal(String str, AutoCompleteResult result) {
-        ZimbraLog.gal.debug("querying gal");
+        ZmailLog.gal.debug("querying gal");
         GalSearchParams params = new GalSearchParams(mRequestedAcct, mZsc);
         params.setQuery(str);
         params.setType(mSearchType);
@@ -412,13 +412,13 @@ public class ContactAutoComplete {
                 gal.autocomplete();
             } catch (ServiceException e) {
                 if (ServiceException.PERM_DENIED.equals(e.getCode())) {
-                    ZimbraLog.gal.debug("cannot autocomplete gal: %s", e.getMessage()); // do not log stack
+                    ZmailLog.gal.debug("cannot autocomplete gal: %s", e.getMessage()); // do not log stack
                 } else {
                     throw e;
                 }
             }
         } catch (Exception e) {
-            ZimbraLog.gal.warn("cannot autocomplete gal", e);
+            ZmailLog.gal.warn("cannot autocomplete gal", e);
             return;
         }
     }
@@ -439,20 +439,20 @@ public class ContactAutoComplete {
 
         @Override
         public Element handleContact(Contact c) throws ServiceException {
-            ZimbraLog.gal.debug("gal entry: %d", c.getId());
+            ZmailLog.gal.debug("gal entry: %d", c.getId());
             handleContactAttrs(c.getFields());
             return null;
         }
 
         @Override
         public void visit(GalContact c) throws ServiceException {
-            ZimbraLog.gal.debug("gal entry: %s", c.getId());
+            ZmailLog.gal.debug("gal entry: %s", c.getId());
             handleContactAttrs(c.getAttrs());
         }
 
         @Override
         public void handleElement(Element e) throws ServiceException {
-            ZimbraLog.gal.debug("gal entry: %s", e.getAttribute(MailConstants.A_ID));
+            ZmailLog.gal.debug("gal entry: %s", e.getAttribute(MailConstants.A_ID));
             handleContactAttrs(parseContactElement(e));
         }
 
@@ -484,7 +484,7 @@ public class ContactAutoComplete {
 
     /**
      *  Add contact entry to result
-     *  @see com.zimbra.cs.mailbox.OfflineGalContactAutoComplete
+     *  @see org.zmail.cs.mailbox.OfflineGalContactAutoComplete
      */
     protected void addEntry(ContactEntry entry, AutoCompleteResult result) {
         result.addEntry(entry);
@@ -643,7 +643,7 @@ public class ContactAutoComplete {
                         resolveGroupInfo(entry, email);
                     }
                     addEntry(entry, result);
-                    ZimbraLog.gal.debug("adding %s", entry.getEmail());
+                    ZmailLog.gal.debug("adding %s", entry.getEmail());
                     if (folderId == FOLDER_ID_GAL) {
                         // we've matched the first email address for this
                         // GAL contact.  move onto the next contact.
@@ -660,14 +660,14 @@ public class ContactAutoComplete {
                 entry.mFolderId = folderId;
                 entry.setIsContactGroup();
                 result.addEntry(entry);
-                ZimbraLog.gal.debug("adding %s", entry.getKey());
+                ZmailLog.gal.debug("adding %s", entry.getKey());
             }
         }
     }
 
     private void queryFolders(String str, Collection<Integer> folderIDs, int limit, AutoCompleteResult result) throws ServiceException {
         str = str.toLowerCase();
-        ZimbraQueryResults qres = null;
+        ZmailQueryResults qres = null;
         try {
             Mailbox mbox = MailboxManager.getInstance().getMailboxByAccountId(getRequestedAcctId());
             List<Folder> folders = new ArrayList<Folder>();
@@ -704,16 +704,16 @@ public class ContactAutoComplete {
             params.setLimit(limit + 1);
             params.setPrefetch(true);
             params.setFetchMode(SearchParams.Fetch.NORMAL);
-            ZimbraLog.gal.debug("querying contact folders: %s", params.getQueryString());
+            ZmailLog.gal.debug("querying contact folders: %s", params.getQueryString());
             qres = mbox.index.search(SoapProtocol.Soap12, octxt, params);
             while (qres.hasNext()) {
-                ZimbraHit hit = qres.getNext();
+                ZmailHit hit = qres.getNext();
                 Map<String,String> fields = null;
                 ItemId id = null;
                 int fid = 0;
                 if (hit instanceof ContactHit) {
                     Contact c = ((ContactHit) hit).getContact();
-                    ZimbraLog.gal.debug("hit: %d", c.getId());
+                    ZmailLog.gal.debug("hit: %d", c.getId());
                     fields = c.getFields();
                     id = new ItemId(c);
                     fid = c.getFolderId();
@@ -721,7 +721,7 @@ public class ContactAutoComplete {
                     fields = new HashMap<String, String>();
                     Element top = ((ProxiedHit) hit).getElement();
                     id = new ItemId(top.getAttribute(MailConstants.A_ID), (String) null);
-                    ZimbraLog.gal.debug("hit: %s", id);
+                    ZmailLog.gal.debug("hit: %s", id);
                     ItemId fiid = new ItemId(top.getAttribute(MailConstants.A_FOLDER), (String) null);
                     Mountpoint mp = mountpoints.get(fiid);
                     if (mp != null) {
@@ -736,7 +736,7 @@ public class ContactAutoComplete {
                             String name = elt.getAttribute(MailConstants.A_ATTRIBUTE_NAME);
                             fields.put(name, elt.getText());
                         } catch (ServiceException se) {
-                            ZimbraLog.gal.warn("error handling proxied query result " + hit);
+                            ZmailLog.gal.warn("error handling proxied query result " + hit);
                         }
                     }
                 } else {

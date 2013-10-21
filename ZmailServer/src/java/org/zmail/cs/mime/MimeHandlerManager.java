@@ -12,7 +12,7 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.mime;
+package org.zmail.cs.mime;
 
 import java.util.List;
 import java.util.Map;
@@ -20,19 +20,19 @@ import java.util.concurrent.ConcurrentHashMap;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import com.zimbra.common.localconfig.LC;
-import com.zimbra.common.mime.MimeConstants;
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.common.util.FileUtil;
-import com.zimbra.common.util.Log;
-import com.zimbra.common.util.LogFactory;
-import com.zimbra.common.util.StringUtil;
-import com.zimbra.common.util.ZimbraLog;
-import com.zimbra.cs.account.Provisioning;
-import com.zimbra.cs.account.Server;
-import com.zimbra.cs.extension.ExtensionUtil;
-import com.zimbra.cs.mime.handler.NoOpMimeHandler;
-import com.zimbra.cs.mime.handler.UnknownTypeHandler;
+import org.zmail.common.localconfig.LC;
+import org.zmail.common.mime.MimeConstants;
+import org.zmail.common.service.ServiceException;
+import org.zmail.common.util.FileUtil;
+import org.zmail.common.util.Log;
+import org.zmail.common.util.LogFactory;
+import org.zmail.common.util.StringUtil;
+import org.zmail.common.util.ZmailLog;
+import org.zmail.cs.account.Provisioning;
+import org.zmail.cs.account.Server;
+import org.zmail.cs.extension.ExtensionUtil;
+import org.zmail.cs.mime.handler.NoOpMimeHandler;
+import org.zmail.cs.mime.handler.UnknownTypeHandler;
 
 
 public class MimeHandlerManager {
@@ -74,7 +74,7 @@ public class MimeHandlerManager {
     throws MimeHandlerException {
         sLog.debug("Getting MIME handler for type %s, filename '%s'", mimeType, filename);
 
-        if (!LC.zimbra_enable_text_extraction.booleanValue()) {
+        if (!LC.zmail_enable_text_extraction.booleanValue()) {
             return new NoOpMimeHandler();
         }
         
@@ -99,14 +99,14 @@ public class MimeHandlerManager {
     /**
      * Returns the maximum number of characters that can be returned by
      * {@link MimeHandler#getContent}.
-     * @see Provisioning#A_zimbraAttachmentsIndexedTextLimit
+     * @see Provisioning#A_zmailAttachmentsIndexedTextLimit
      */
     public static int getIndexedTextLimit() {
         int length = 1024 * 1024;
         try {
             Provisioning prov = Provisioning.getInstance();
             Server server = prov.getLocalServer();
-            length = server.getIntAttr(Provisioning.A_zimbraAttachmentsIndexedTextLimit, length);
+            length = server.getIntAttr(Provisioning.A_zmailAttachmentsIndexedTextLimit, length);
         } catch (ServiceException e) {
             sLog.warn("Unable to determine maximum indexed content length", e);
         }
@@ -168,7 +168,7 @@ public class MimeHandlerManager {
 
             if (mt.getHandlerClass() == null) {
                 String msg = String.format("%s not specified for MIME handler %s.",
-                    Provisioning.A_zimbraMimeHandlerClass, mt.getDescription());
+                    Provisioning.A_zmailMimeHandlerClass, mt.getDescription());
                 throw new MimeHandlerException(msg);
             }
 
@@ -176,7 +176,7 @@ public class MimeHandlerManager {
             HandlerInfo handlerInfo = new HandlerInfo();
             String className = mt.getHandlerClass();
             if (className.indexOf('.') == -1) {
-                className = "com.zimbra.cs.mime.handler." + className;
+                className = "org.zmail.cs.mime.handler." + className;
             }
             handlerInfo.mimeType = mt;
             handlerInfo.realMimeType = mimeType;
@@ -229,8 +229,8 @@ public class MimeHandlerManager {
             }
         }
         if (retVal != null && retVal.getHandlerClass() == null) {
-            ZimbraLog.mailbox.warn("%s not defined for MIME handler %s",
-                Provisioning.A_zimbraMimeHandlerClass, retVal.getDescription());
+            ZmailLog.mailbox.warn("%s not defined for MIME handler %s",
+                Provisioning.A_zmailMimeHandlerClass, retVal.getDescription());
         }
         return retVal;
     }

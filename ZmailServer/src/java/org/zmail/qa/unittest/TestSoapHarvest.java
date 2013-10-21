@@ -13,7 +13,7 @@
  * ***** END LICENSE BLOCK *****
  */
 
-package com.zimbra.qa.unittest;
+package org.zmail.qa.unittest;
 
 import java.io.IOException;
 
@@ -26,8 +26,8 @@ import org.apache.commons.httpclient.methods.StringRequestEntity;
 import org.junit.Assert;
 import org.junit.Test;
 
-import com.zimbra.client.ZMailbox;
-import com.zimbra.common.httpclient.HttpClientUtil;
+import org.zmail.client.ZMailbox;
+import org.zmail.common.httpclient.HttpClientUtil;
 
 public class TestSoapHarvest extends TestCase {
 
@@ -41,8 +41,8 @@ public class TestSoapHarvest extends TestCase {
     private String getNoOpRequest(String userId, String authToken) {
         return "<soap:Envelope xmlns:soap=\"http://www.w3.org/2003/05/soap-envelope\">" +
         "<soap:Header>"+
-        "<context xmlns=\"urn:zimbra\">"+
-        "<userAgent name=\"Zimbra Junit\" version=\"0.0\"/>"+
+        "<context xmlns=\"urn:zmail\">"+
+        "<userAgent name=\"Zmail Junit\" version=\"0.0\"/>"+
         (authToken != null ? "<authToken>" + authToken + "</authToken>" : "") +
         "<nosession/>"+
         "<account by=\"name\">"+
@@ -51,7 +51,7 @@ public class TestSoapHarvest extends TestCase {
         "</context>"+
         "</soap:Header>"+
         "<soap:Body>"+
-        "<NoOpRequest xmlns=\"urn:zimbraMail\" />"+
+        "<NoOpRequest xmlns=\"urn:zmailMail\" />"+
         "</soap:Body>"+
         "</soap:Envelope>";
     }
@@ -59,8 +59,8 @@ public class TestSoapHarvest extends TestCase {
     private String getSearchRequest(String userId, String authToken) {
         return "<soap:Envelope xmlns:soap=\"http://www.w3.org/2003/05/soap-envelope\">" +
         "<soap:Header>"+
-        "<context xmlns=\"urn:zimbra\">"+
-        "<userAgent name=\"Zimbra Junit\" version=\"0.0\"/>"+
+        "<context xmlns=\"urn:zmail\">"+
+        "<userAgent name=\"Zmail Junit\" version=\"0.0\"/>"+
         (authToken != null ? "<authToken>" + authToken + "</authToken>" : "") +
         "<nosession/>"+
         "<account by=\"name\">"+
@@ -69,7 +69,7 @@ public class TestSoapHarvest extends TestCase {
         "</context>"+
         "</soap:Header>"+
         "<soap:Body>"+
-        "<GetInfoRequest xmlns=\"urn:zimbraAccount\" sections=\"mbox\"/>"+
+        "<GetInfoRequest xmlns=\"urn:zmailAccount\" sections=\"mbox\"/>"+
         "</soap:Body>"+
         "</soap:Envelope>";
     }

@@ -19,13 +19,13 @@
  * TODO To change the template for this generated file go to
  * Window - Preferences - Java - Code Generation - Code and Comments
  */
-package com.zimbra.cs.redolog.op;
+package org.zmail.cs.redolog.op;
 
 import java.io.IOException;
 
-import com.zimbra.cs.mailbox.MailboxOperation;
-import com.zimbra.cs.redolog.RedoLogInput;
-import com.zimbra.cs.redolog.RedoLogOutput;
+import org.zmail.cs.mailbox.MailboxOperation;
+import org.zmail.cs.redolog.RedoLogInput;
+import org.zmail.cs.redolog.RedoLogOutput;
 
 /**
  * THIS REDOLOG OPERATION IS DEPRECATED.  Backing up a mailbox will no longer

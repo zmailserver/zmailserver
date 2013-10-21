@@ -13,21 +13,21 @@
  * ***** END LICENSE BLOCK *****
  */
 
-package com.zimbra.cs.index;
+package org.zmail.cs.index;
 
-import com.zimbra.cs.mailbox.MailItem;
+import org.zmail.cs.mailbox.MailItem;
 
 /**
- * Mock implementation of {@link ZimbraHit} for testing.
+ * Mock implementation of {@link ZmailHit} for testing.
  *
  * @author ysasaki
  */
-public final class MockHit extends ZimbraHit {
+public final class MockHit extends ZmailHit {
     private int id;
     private int convId;
     private MailItem mailItem;
 
-    public MockHit(ZimbraQueryResultsImpl results, int id, Object sortValue) {
+    public MockHit(ZmailQueryResultsImpl results, int id, Object sortValue) {
         super(results, null, sortValue);
         this.id = id;
     }

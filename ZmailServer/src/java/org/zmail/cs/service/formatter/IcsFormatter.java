@@ -12,7 +12,7 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.service.formatter;
+package org.zmail.cs.service.formatter;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -26,27 +26,27 @@ import java.util.Set;
 import javax.mail.Part;
 import javax.servlet.ServletException;
 
-import com.zimbra.common.calendar.ZCalendar.ZCalendarBuilder;
-import com.zimbra.common.calendar.ZCalendar.ZICalendarParseHandler;
-import com.zimbra.common.calendar.ZCalendar.ZVCalendar;
-import com.zimbra.common.localconfig.LC;
-import com.zimbra.common.mime.MimeConstants;
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.common.util.FileBufferedWriter;
-import com.zimbra.common.util.HttpUtil;
-import com.zimbra.common.util.HttpUtil.Browser;
-import com.zimbra.cs.mailbox.CalendarItem;
-import com.zimbra.cs.mailbox.Folder;
-import com.zimbra.cs.mailbox.MailItem;
-import com.zimbra.cs.mailbox.OperationContext;
-import com.zimbra.cs.mailbox.CalendarItem.Instance;
-import com.zimbra.cs.mailbox.calendar.IcsImportParseHandler;
-import com.zimbra.cs.mailbox.calendar.Invite;
-import com.zimbra.cs.mailbox.calendar.IcsImportParseHandler.ImportInviteVisitor;
-import com.zimbra.cs.mime.Mime;
-import com.zimbra.cs.service.UserServletContext;
-import com.zimbra.cs.service.UserServletException;
-import com.zimbra.cs.service.formatter.FormatterFactory.FormatType;
+import org.zmail.common.calendar.ZCalendar.ZCalendarBuilder;
+import org.zmail.common.calendar.ZCalendar.ZICalendarParseHandler;
+import org.zmail.common.calendar.ZCalendar.ZVCalendar;
+import org.zmail.common.localconfig.LC;
+import org.zmail.common.mime.MimeConstants;
+import org.zmail.common.service.ServiceException;
+import org.zmail.common.util.FileBufferedWriter;
+import org.zmail.common.util.HttpUtil;
+import org.zmail.common.util.HttpUtil.Browser;
+import org.zmail.cs.mailbox.CalendarItem;
+import org.zmail.cs.mailbox.Folder;
+import org.zmail.cs.mailbox.MailItem;
+import org.zmail.cs.mailbox.OperationContext;
+import org.zmail.cs.mailbox.CalendarItem.Instance;
+import org.zmail.cs.mailbox.calendar.IcsImportParseHandler;
+import org.zmail.cs.mailbox.calendar.Invite;
+import org.zmail.cs.mailbox.calendar.IcsImportParseHandler.ImportInviteVisitor;
+import org.zmail.cs.mime.Mime;
+import org.zmail.cs.service.UserServletContext;
+import org.zmail.cs.service.UserServletException;
+import org.zmail.cs.service.formatter.FormatterFactory.FormatType;
 
 public class IcsFormatter extends Formatter {
 
@@ -69,8 +69,8 @@ public class IcsFormatter extends Formatter {
     public void formatCallback(UserServletContext context) throws IOException, ServiceException {
         Iterator<? extends MailItem> iterator = null;
         List<CalendarItem> calItems = new ArrayList<CalendarItem>();
-        //ZimbraLog.mailbox.info("start = "+new Date(context.getStartTime()));
-        //ZimbraLog.mailbox.info("end = "+new Date(context.getEndTime()));
+        //ZmailLog.mailbox.info("start = "+new Date(context.getStartTime()));
+        //ZmailLog.mailbox.info("end = "+new Date(context.getEndTime()));
         try {
             long start = context.getStartTime();
             long end = context.getEndTime();

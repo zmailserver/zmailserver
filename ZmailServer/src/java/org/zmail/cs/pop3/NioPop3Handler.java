@@ -13,12 +13,12 @@
  * ***** END LICENSE BLOCK *****
  */
 
-package com.zimbra.cs.pop3;
+package org.zmail.cs.pop3;
 
-import com.zimbra.common.util.ZimbraLog;
-import com.zimbra.cs.server.NioHandler;
-import com.zimbra.cs.server.NioConnection;
-import com.zimbra.cs.server.NioOutputStream;
+import org.zmail.common.util.ZmailLog;
+import org.zmail.cs.server.NioHandler;
+import org.zmail.cs.server.NioConnection;
+import org.zmail.cs.server.NioOutputStream;
 
 import java.io.IOException;
 import java.net.InetSocketAddress;
@@ -48,7 +48,7 @@ final class NioPop3Handler extends Pop3Handler implements NioHandler {
 
     @Override
     public void connectionIdle() {
-        ZimbraLog.pop.debug("idle connection");
+        ZmailLog.pop.debug("idle connection");
         dropConnection();
     }
 
@@ -62,7 +62,7 @@ final class NioPop3Handler extends Pop3Handler implements NioHandler {
     @Override
     public void exceptionCaught(Throwable e) throws IOException {
         if (e instanceof javax.net.ssl.SSLException) {
-            ZimbraLog.pop.error("Error detected by SSL subsystem, dropping connection:" + e);
+            ZmailLog.pop.error("Error detected by SSL subsystem, dropping connection:" + e);
             dropConnection();  // Bug 79904 prevent using SSL port in plain text
         } else if (e instanceof RecoverableProtocolDecoderException) {
             RecoverableProtocolDecoderException re = (RecoverableProtocolDecoderException) e;

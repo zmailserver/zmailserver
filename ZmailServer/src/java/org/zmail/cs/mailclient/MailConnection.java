@@ -12,7 +12,7 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.mailclient;
+package org.zmail.cs.mailclient;
 
 import org.apache.commons.codec.binary.Base64;
 
@@ -31,10 +31,10 @@ import java.net.Socket;
 import java.net.InetSocketAddress;
 import java.net.SocketException;
 
-import com.zimbra.common.util.Log;
-import com.zimbra.cs.mailclient.util.Ascii;
-import com.zimbra.cs.mailclient.auth.AuthenticatorFactory;
-import com.zimbra.cs.mailclient.auth.Authenticator;
+import org.zmail.common.util.Log;
+import org.zmail.cs.mailclient.util.Ascii;
+import org.zmail.cs.mailclient.auth.AuthenticatorFactory;
+import org.zmail.cs.mailclient.auth.Authenticator;
 
 /**
  * Base class for all mail protocol connection types.

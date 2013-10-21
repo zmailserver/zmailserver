@@ -3,12 +3,12 @@ ${BANNER}
 ${ZIMBRA_ROOT_OIDS}
 
 ###########################################################################
-# attribute group OIDs.  Eg: objectIdentifier ZimbraAttrType ZimbraLDAP:1
+# attribute group OIDs.  Eg: objectIdentifier ZmailAttrType ZmailLDAP:1
 ###########################################################################
 ${GROUP_OIDS}
 
 ###########################################################################
-# attribute OIDs Eg: objectIdentifier zimbraId ZimbraAttrType:1
+# attribute OIDs Eg: objectIdentifier zmailId ZmailAttrType:1
 ###########################################################################
 ${ATTRIBUTE_OIDS}
 
@@ -45,8 +45,8 @@ ${OC_OIDS}
 #
 # Eg:
 # 
-# attributetype ( zimbraAccountStatus
-#	NAME ( 'zimbraAccountStatus' )
+# attributetype ( zmailAccountStatus
+#	NAME ( 'zmailAccountStatus' )
 #	DESC 'account status (TODO: enumerate valid values here)'
 #	EQUALITY caseIgnoreMatch
 #	SUBSTR caseIgnoreSubstringsMatch
@@ -60,8 +60,8 @@ ${OC_OIDS}
 # A generic attr like this is probably seductive, but would probably cause
 # too much pain long term...
 #
-#attributetype ( zimbraAttr
-#	NAME ( 'zimbraAttr' )
+#attributetype ( zmailAttr
+#	NAME ( 'zmailAttr' )
 #	DESC 'generic name=value attribute'
 #	EQUALITY caseIgnoreMatch
 #	SUBSTR caseIgnoreSubstringsMatch

@@ -1,11 +1,11 @@
-# NGINX POP/IMAP proxy configuration file for use with Zimbra
+# NGINX POP/IMAP proxy configuration file for use with Zmail
 # 
 
 # Refer to nginx wiki at http://wiki.codemongers.com/ for configuration syntax
 # 
 
-# change UID/GID to zimbra/zimbra upon startup
-user zimbra zimbra;
+# change UID/GID to zmail/zmail upon startup
+user zmail zmail;
 
 # number of worker processes to start 
 # multiply this by worker_connections to get the maximum number of connections 
@@ -18,19 +18,19 @@ worker_processes  4;
 #error_log  logs/error.log  notice;
 #error_log  logs/error.log  info;
 
-pid        /opt/zimbra/log/nginx.pid;
-error_log  /opt/zimbra/log/nginx.log info;
+pid        /opt/zmail/log/nginx.pid;
+error_log  /opt/zmail/log/nginx.log info;
 
 
 events {
     # number of simultaneous connections that each worker process can 
     # handle simultaneously
     # note that this number should not exceed the hard limit of the 
-    # RLIMIT_NOFILE resource limit that is set for the zimbra user, because
+    # RLIMIT_NOFILE resource limit that is set for the zmail user, because
     # RLIMIT_NOFILE defines the maximum number of open file descriptors that
     # a process running as a user can have - by default, limits.conf on a 
-    # zimbra system will ensure that the zimbra user has more than 10k file
-    # descriptors allowed for a zimbra process
+    # zmail system will ensure that the zmail user has more than 10k file
+    # descriptors allowed for a zmail process
 
     # (note) also see worker_rlimit_nofile at 
     # http://wiki.codemongers.com/NginxMainModule#worker_rlimit_nofile
@@ -172,7 +172,7 @@ mail {
     # this directive
     # If this value is set to 0, then no throttling will take place for any IP
     # 
-    mail_login_ip_max               %%zimbraReverseProxyIPLoginLimit%%;
+    mail_login_ip_max               %%zmailReverseProxyIPLoginLimit%%;
 
     # mail_login_ip_ttl
     # 
@@ -185,7 +185,7 @@ mail {
     # The semantics for such a configuration would then be -
     # "allow maximum 1000 users per hour from any given IP address"
     #
-    mail_login_ip_ttl               %%zimbraReverseProxyIPLoginLimitTime%%s;
+    mail_login_ip_ttl               %%zmailReverseProxyIPLoginLimitTime%%s;
 
     # Define a textual message that should be displayed to the user when
     # his/her connection is rejected based on IP overusage
@@ -205,12 +205,12 @@ mail {
     # because the login name itself is over-usage
     # A value of 0 indicates that no throttling will take place for any user
     # 
-    mail_login_user_max             %%zimbraReverseProxyUserLoginLimit%%;
-    mail_login_user_ttl             %%zimbraReverseProxyUserLoginLimitTime%%s;
+    mail_login_user_max             %%zmailReverseProxyUserLoginLimit%%;
+    mail_login_user_ttl             %%zmailReverseProxyUserLoginLimitTime%%s;
     mail_login_user_rejectmsg       "Login rejected for this user";
 
     # XOIP
-%%uncomment VAR:!zimbraReverseProxySendPop3Xoip%%    proxy_issue_pop3_xoip off;
+%%uncomment VAR:!zmailReverseProxySendPop3Xoip%%    proxy_issue_pop3_xoip off;
 
     # Supported SASL Authentication mechanisms
     # 
@@ -232,10 +232,10 @@ mail {
     # 
 
     pop3_auth               plain;
-%%uncomment VAR:zimbraReverseProxyPop3SaslGssapiEnabled%%    pop3_auth               gssapi;
+%%uncomment VAR:zmailReverseProxyPop3SaslGssapiEnabled%%    pop3_auth               gssapi;
 
     imap_auth               plain;
-%%uncomment VAR:zimbraReverseProxyImapSaslGssapiEnabled%%    imap_auth               gssapi;
+%%uncomment VAR:zmailReverseProxyImapSaslGssapiEnabled%%    imap_auth               gssapi;
 
     # Specify whether to use literal strings while issuing the LOGIN command
     # to the upstream server. If set to on, then it means that NGINX will use
@@ -259,63 +259,63 @@ mail {
     # (starttls moved to per-server config)
     # starttls on;
     ssl_prefer_server_ciphers on;
-    ssl_certificate             /opt/zimbra/conf/nginx.crt;
-    ssl_certificate_key         /opt/zimbra/conf/nginx.key;
+    ssl_certificate             /opt/zmail/conf/nginx.crt;
+    ssl_certificate_key         /opt/zmail/conf/nginx.key;
     
     # Ciphers configuration
     #
     # Permitted ciphers. Ciphers are assigned in the formats supported by OpenSSL
     #
-%%uncomment VAR:zimbraReverseProxySSLCiphers%%        ssl_ciphers %%zimbraReverseProxySSLCiphers%%;
+%%uncomment VAR:zmailReverseProxySSLCiphers%%        ssl_ciphers %%zmailReverseProxySSLCiphers%%;
 
     # POP3 proxy configuration
     # 
-%%uncomment VAR:zimbraReverseProxyMailEnabled%%    server {
-%%uncomment VAR:zimbraReverseProxyMailEnabled%%        listen %%zimbraPop3ProxyBindPort%%;
-%%uncomment VAR:zimbraReverseProxyMailEnabled%%        protocol pop3;
-%%uncomment VAR:zimbraReverseProxyMailEnabled%%        proxy on;
+%%uncomment VAR:zmailReverseProxyMailEnabled%%    server {
+%%uncomment VAR:zmailReverseProxyMailEnabled%%        listen %%zmailPop3ProxyBindPort%%;
+%%uncomment VAR:zmailReverseProxyMailEnabled%%        protocol pop3;
+%%uncomment VAR:zmailReverseProxyMailEnabled%%        proxy on;
         # sasl_service_name defaults to "pop" when protocol=pop3, "imap" when protocol=imap
-%%uncomment VAR:zimbraReverseProxyMailEnabled%%        sasl_service_name       "pop";
+%%uncomment VAR:zmailReverseProxyMailEnabled%%        sasl_service_name       "pop";
         # starttls=on implies cleartext login enabled
         # starttls=only implies cleartext login requires SSL/TLS
-%%uncomment VAR:zimbraReverseProxyMailEnabled%%        starttls                %%zimbraReverseProxyPop3StartTlsMode%%;
-%%uncomment VAR:zimbraReverseProxyMailEnabled%%    }
+%%uncomment VAR:zmailReverseProxyMailEnabled%%        starttls                %%zmailReverseProxyPop3StartTlsMode%%;
+%%uncomment VAR:zmailReverseProxyMailEnabled%%    }
 
-%%uncomment VAR:zimbraReverseProxyMailEnabled%%    server {
-%%uncomment VAR:zimbraReverseProxyMailEnabled%%        listen %%zimbraPop3SSLProxyBindPort%%;
-%%uncomment VAR:zimbraReverseProxyMailEnabled%%        protocol pop3;
-%%uncomment VAR:zimbraReverseProxyMailEnabled%%        proxy on;
-%%uncomment VAR:zimbraReverseProxyMailEnabled%%        ssl on;
+%%uncomment VAR:zmailReverseProxyMailEnabled%%    server {
+%%uncomment VAR:zmailReverseProxyMailEnabled%%        listen %%zmailPop3SSLProxyBindPort%%;
+%%uncomment VAR:zmailReverseProxyMailEnabled%%        protocol pop3;
+%%uncomment VAR:zmailReverseProxyMailEnabled%%        proxy on;
+%%uncomment VAR:zmailReverseProxyMailEnabled%%        ssl on;
         # sasl_service_name defaults to "pop" when protocol=pop3, "imap" when protocol=imap
-%%uncomment VAR:zimbraReverseProxyMailEnabled%%        sasl_service_name       "pop";
-%%uncomment VAR:zimbraReverseProxyMailEnabled%%    }
+%%uncomment VAR:zmailReverseProxyMailEnabled%%        sasl_service_name       "pop";
+%%uncomment VAR:zmailReverseProxyMailEnabled%%    }
 
     # IMAP proxy configuration
     # 
-%%uncomment VAR:zimbraReverseProxyMailEnabled%%    server {
-%%uncomment VAR:zimbraReverseProxyMailEnabled%%        listen %%zimbraImapProxyBindPort%%;
-%%uncomment VAR:zimbraReverseProxyMailEnabled%%        protocol imap;
-%%uncomment VAR:zimbraReverseProxyMailEnabled%%        proxy on;
+%%uncomment VAR:zmailReverseProxyMailEnabled%%    server {
+%%uncomment VAR:zmailReverseProxyMailEnabled%%        listen %%zmailImapProxyBindPort%%;
+%%uncomment VAR:zmailReverseProxyMailEnabled%%        protocol imap;
+%%uncomment VAR:zmailReverseProxyMailEnabled%%        proxy on;
         # sasl_service_name defaults to "pop" when protocol=pop3, "imap" when protocol=imap
-%%uncomment VAR:zimbraReverseProxyMailEnabled%%        sasl_service_name       "imap";
+%%uncomment VAR:zmailReverseProxyMailEnabled%%        sasl_service_name       "imap";
         # starttls=on implies cleartext login enabled
         # starttls=only implies cleartext login requires SSL/TLS
-%%uncomment VAR:zimbraReverseProxyMailEnabled%%        starttls                %%zimbraReverseProxyImapStartTlsMode%%;
-%%uncomment VAR:zimbraReverseProxyMailEnabled%%    }
+%%uncomment VAR:zmailReverseProxyMailEnabled%%        starttls                %%zmailReverseProxyImapStartTlsMode%%;
+%%uncomment VAR:zmailReverseProxyMailEnabled%%    }
 
-%%uncomment VAR:zimbraReverseProxyMailEnabled%%    server {
-%%uncomment VAR:zimbraReverseProxyMailEnabled%%        listen %%zimbraImapSSLProxyBindPort%%;
-%%uncomment VAR:zimbraReverseProxyMailEnabled%%        protocol imap;
-%%uncomment VAR:zimbraReverseProxyMailEnabled%%        proxy on;
-%%uncomment VAR:zimbraReverseProxyMailEnabled%%        ssl on;
+%%uncomment VAR:zmailReverseProxyMailEnabled%%    server {
+%%uncomment VAR:zmailReverseProxyMailEnabled%%        listen %%zmailImapSSLProxyBindPort%%;
+%%uncomment VAR:zmailReverseProxyMailEnabled%%        protocol imap;
+%%uncomment VAR:zmailReverseProxyMailEnabled%%        proxy on;
+%%uncomment VAR:zmailReverseProxyMailEnabled%%        ssl on;
         # sasl_service_name defaults to "pop" when protocol=pop3, "imap" when protocol=imap
-%%uncomment VAR:zimbraReverseProxyMailEnabled%%        sasl_service_name       "imap";
-%%uncomment VAR:zimbraReverseProxyMailEnabled%%    }
+%%uncomment VAR:zmailReverseProxyMailEnabled%%        sasl_service_name       "imap";
+%%uncomment VAR:zmailReverseProxyMailEnabled%%    }
 }
 
 http {
 
-    # . Define an upstream section which represents a set of zimbra mailbox
+    # . Define an upstream section which represents a set of zmail mailbox
     #   servers to which we will proxy
     # . Declare one server entry inside the upstream block for each known 
     #   mailbox server - in a single node install, there should be just one
@@ -323,7 +323,7 @@ http {
     #   In a multi-node install, there should be one server entry per mailbox
     #   server
     # . The name of the upstream block will be sent against the Host: header
-    #   to the real servers ("zimbra" is used in the example below, but it is 
+    #   to the real servers ("zmail" is used in the example below, but it is 
     #   probably better to use a fully qualified name here)
     # . If the name of the proxy server needs to be sent instead, then 
     # . Also include the zmauth directive (with no arguments) in the upstream 
@@ -333,10 +333,10 @@ http {
     # . A decoded ZM_AUTH_TOKEN may look like (no line sep) -
     #          id=36:cc00ce85-8c0b-49eb-8e08-a8aab43ce836;
     #          exp=13:1196504658160;
-    #          type=6:zimbra;
+    #          type=6:zmail;
     #          mailhost=14:127.0.0.1:7070;
     #
-    upstream zimbra
+    upstream zmail
     {
 	%%getAllReverseProxyBackends%%
         zmauth;
@@ -346,28 +346,28 @@ http {
     # http/https login
     # see http://wiki.codemongers.com/NginxMailCoreModule
     # 
-%%uncomment VAR:zimbraReverseProxyHttpEnabled%% %%explode zmroutehandlers VAR:getAllReverseProxyURLs;%%
-%%uncomment VAR:zimbraReverseProxyHttpEnabled%%    zmroute_timeout 15s;
+%%uncomment VAR:zmailReverseProxyHttpEnabled%% %%explode zmroutehandlers VAR:getAllReverseProxyURLs;%%
+%%uncomment VAR:zmailReverseProxyHttpEnabled%%    zmroute_timeout 15s;
 
-%%uncomment VAR:zimbraReverseProxyHttpEnabled%% server {
-%%uncomment VAR:zimbraReverseProxyHttpEnabled%%     listen %%zimbraMailProxyPort%%;
-%%uncomment VAR:zimbraReverseProxyHttpEnabled%%     client_max_body_size %%zimbraFileUploadMaxSize%%;
-%%uncomment VAR:zimbraReverseProxyHttpEnabled%%     location / {
+%%uncomment VAR:zmailReverseProxyHttpEnabled%% server {
+%%uncomment VAR:zmailReverseProxyHttpEnabled%%     listen %%zmailMailProxyPort%%;
+%%uncomment VAR:zmailReverseProxyHttpEnabled%%     client_max_body_size %%zmailFileUploadMaxSize%%;
+%%uncomment VAR:zmailReverseProxyHttpEnabled%%     location / {
             # Proxy to the collection of servers identified by the upstream
-            # block 'zimbra'
+            # block 'zmail'
             #
-%%uncomment VAR:zimbraReverseProxyHttpEnabled%%         proxy_pass http://zimbra;
+%%uncomment VAR:zmailReverseProxyHttpEnabled%%         proxy_pass http://zmail;
 
             # Set the X-Forwarded-For request header to indicate the IP address
             # of the end-client on whose behalf the proxying has been done
             # (usually required for security and audit purposes)
             #
-%%uncomment VAR:zimbraReverseProxyHttpEnabled%%         proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+%%uncomment VAR:zmailReverseProxyHttpEnabled%%         proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
 
             # Set the Host header to an appropriate value when communicating
             # with the upstream server
             # If not specified, the name of the upstream block (in this case,
-            # "zimbra") will be sent against the Host header to the backend
+            # "zmail") will be sent against the Host header to the backend
             # server
             # Reasonable values here are -
             #   $proxy_host (default)   The name of the upstream block
@@ -377,22 +377,22 @@ http {
             #
             # proxy_set_header Host            $proxy_host;
             # proxy_set_header Host            $server_name;
-%%uncomment VAR:zimbraReverseProxyHttpEnabled%%         proxy_set_header Host            $http_host;
+%%uncomment VAR:zmailReverseProxyHttpEnabled%%         proxy_set_header Host            $http_host;
 
-%%uncomment VAR:zimbraReverseProxyHttpEnabled%%     }
-%%uncomment VAR:zimbraReverseProxyHttpEnabled%% }
+%%uncomment VAR:zmailReverseProxyHttpEnabled%%     }
+%%uncomment VAR:zmailReverseProxyHttpEnabled%% }
     # HTTPS Proxy
-%%uncomment VAR:zimbraReverseProxyHttpEnabled%% server {
-%%uncomment VAR:zimbraReverseProxyHttpEnabled%%     listen %%zimbraMailSSLProxyPort%%;
-%%uncomment VAR:zimbraReverseProxyHttpEnabled%%     client_max_body_size %%zimbraFileUploadMaxSize%%;
-%%uncomment VAR:zimbraReverseProxyHttpEnabled%%     ssl                  on;
-%%uncomment VAR:zimbraReverseProxyHttpEnabled%%     ssl_certificate      /opt/zimbra/conf/nginx.crt;
-%%uncomment VAR:zimbraReverseProxyHttpEnabled%%     ssl_certificate_key  /opt/zimbra/conf/nginx.key;
-%%uncomment VAR:zimbraReverseProxyHttpEnabled%%     location / {
-%%uncomment VAR:zimbraReverseProxyHttpEnabled%%         proxy_pass       http://zimbra;
-%%uncomment VAR:zimbraReverseProxyHttpEnabled%%         proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
-%%uncomment VAR:zimbraReverseProxyHttpEnabled%%         proxy_set_header Host            $http_host;
-%%uncomment VAR:zimbraReverseProxyHttpEnabled%%     }
-%%uncomment VAR:zimbraReverseProxyHttpEnabled%% }
+%%uncomment VAR:zmailReverseProxyHttpEnabled%% server {
+%%uncomment VAR:zmailReverseProxyHttpEnabled%%     listen %%zmailMailSSLProxyPort%%;
+%%uncomment VAR:zmailReverseProxyHttpEnabled%%     client_max_body_size %%zmailFileUploadMaxSize%%;
+%%uncomment VAR:zmailReverseProxyHttpEnabled%%     ssl                  on;
+%%uncomment VAR:zmailReverseProxyHttpEnabled%%     ssl_certificate      /opt/zmail/conf/nginx.crt;
+%%uncomment VAR:zmailReverseProxyHttpEnabled%%     ssl_certificate_key  /opt/zmail/conf/nginx.key;
+%%uncomment VAR:zmailReverseProxyHttpEnabled%%     location / {
+%%uncomment VAR:zmailReverseProxyHttpEnabled%%         proxy_pass       http://zmail;
+%%uncomment VAR:zmailReverseProxyHttpEnabled%%         proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+%%uncomment VAR:zmailReverseProxyHttpEnabled%%         proxy_set_header Host            $http_host;
+%%uncomment VAR:zmailReverseProxyHttpEnabled%%     }
+%%uncomment VAR:zmailReverseProxyHttpEnabled%% }
 
 }

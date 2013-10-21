@@ -13,23 +13,23 @@
  * ***** END LICENSE BLOCK *****
  */
 
-package com.zimbra.cs.mailbox.calendar.cache;
+package org.zmail.cs.mailbox.calendar.cache;
 
 import java.util.Iterator;
 import java.util.List;
 
-import com.zimbra.common.calendar.Geo;
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.common.soap.Element;
-import com.zimbra.common.soap.MailConstants;
-import com.zimbra.common.util.ArrayUtil;
-import com.zimbra.cs.account.IDNUtil;
-import com.zimbra.cs.mailbox.MailItem;
-import com.zimbra.cs.mailbox.calendar.Alarm;
-import com.zimbra.cs.mailbox.calendar.ZOrganizer;
-import com.zimbra.cs.mailbox.util.TagUtil;
-import com.zimbra.cs.service.util.ItemIdFormatter;
-import com.zimbra.soap.ZimbraSoapContext;
+import org.zmail.common.calendar.Geo;
+import org.zmail.common.service.ServiceException;
+import org.zmail.common.soap.Element;
+import org.zmail.common.soap.MailConstants;
+import org.zmail.common.util.ArrayUtil;
+import org.zmail.cs.account.IDNUtil;
+import org.zmail.cs.mailbox.MailItem;
+import org.zmail.cs.mailbox.calendar.Alarm;
+import org.zmail.cs.mailbox.calendar.ZOrganizer;
+import org.zmail.cs.mailbox.util.TagUtil;
+import org.zmail.cs.service.util.ItemIdFormatter;
+import org.zmail.soap.ZmailSoapContext;
 
 public class CacheToXML {
 
@@ -263,7 +263,7 @@ public class CacheToXML {
         }
     }
 
-    public static Element encodeCalendarItemData(ZimbraSoapContext zsc, ItemIdFormatter ifmt,
+    public static Element encodeCalendarItemData(ZmailSoapContext zsc, ItemIdFormatter ifmt,
                                                  CalendarItemData calItemData,
                                                  boolean allowPrivateAccess, boolean legacyFormat)
     throws ServiceException {
@@ -320,7 +320,7 @@ public class CacheToXML {
         return calItemElem;
     }
 
-    public static void encodeCalendarData(ZimbraSoapContext zsc, ItemIdFormatter ifmt, Element parent, CalendarData calData,
+    public static void encodeCalendarData(ZmailSoapContext zsc, ItemIdFormatter ifmt, Element parent, CalendarData calData,
                                           boolean allowPrivateAccess, boolean legacyFormat)
     throws ServiceException {
         for (Iterator<CalendarItemData> iter = calData.calendarItemIterator(); iter.hasNext(); ) {

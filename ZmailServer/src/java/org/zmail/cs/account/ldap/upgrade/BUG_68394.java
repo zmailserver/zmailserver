@@ -14,23 +14,23 @@
  * 
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.account.ldap.upgrade;
+package org.zmail.cs.account.ldap.upgrade;
 
 import java.util.HashMap;
 import java.util.Map;
 
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.cs.account.Config;
-import com.zimbra.cs.account.Provisioning;
-import com.zimbra.cs.account.Entry.EntryType;
-import com.zimbra.cs.ldap.LdapClient;
-import com.zimbra.cs.ldap.LdapServerType;
-import com.zimbra.cs.ldap.LdapUsage;
-import com.zimbra.cs.ldap.ZLdapContext;
+import org.zmail.common.service.ServiceException;
+import org.zmail.cs.account.Config;
+import org.zmail.cs.account.Provisioning;
+import org.zmail.cs.account.Entry.EntryType;
+import org.zmail.cs.ldap.LdapClient;
+import org.zmail.cs.ldap.LdapServerType;
+import org.zmail.cs.ldap.LdapUsage;
+import org.zmail.cs.ldap.ZLdapContext;
 
 public class BUG_68394 extends UpgradeOp {
 
-    private static final String ATTR_NAME = Provisioning.A_zimbraMailSSLClientCertPort;
+    private static final String ATTR_NAME = Provisioning.A_zmailMailSSLClientCertPort;
     private static final String OLD_VALUE = "0";
     private static final String NEW_VALUE = "9443";
 

@@ -12,7 +12,7 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.db;
+package org.zmail.cs.db;
 
 import java.io.InputStream;
 import java.io.Reader;
@@ -32,8 +32,8 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 
-import com.zimbra.common.util.ZimbraLog;
-import com.zimbra.cs.util.Zimbra;
+import org.zmail.common.util.ZmailLog;
+import org.zmail.cs.util.Zmail;
 
 import org.apache.commons.dbcp.DelegatingPreparedStatement;
 import org.apache.commons.dbcp.DelegatingConnection;
@@ -71,7 +71,7 @@ class DebugPreparedStatement extends DelegatingPreparedStatement {
     }
 
     public static void setSlowSqlThreshold(long millis) {
-        ZimbraLog.sqltrace.info("Setting slow SQL threshold to %dms.", millis);
+        ZmailLog.sqltrace.info("Setting slow SQL threshold to %dms.", millis);
         sSlowSqlThreshold = millis;
     }
 
@@ -122,22 +122,22 @@ class DebugPreparedStatement extends DelegatingPreparedStatement {
         long time = System.currentTimeMillis() - mStartTime;
         if (time > sSlowSqlThreshold) {
             String sql = getSql();
-            ZimbraLog.sqltrace.info("Slow execution (%dms): %s", time,  sql);
-        } else if (ZimbraLog.sqltrace.isDebugEnabled()) {
+            ZmailLog.sqltrace.info("Slow execution (%dms): %s", time,  sql);
+        } else if (ZmailLog.sqltrace.isDebugEnabled()) {
             String sql = getSql();
-            ZimbraLog.sqltrace.debug(sql + " - " + time + "ms" + getHashCodeString());
+            ZmailLog.sqltrace.debug(sql + " - " + time + "ms" + getHashCodeString());
         }
     }
     
     private void logException(SQLException e) {
-        if (ZimbraLog.sqltrace.isDebugEnabled()) {
-            ZimbraLog.sqltrace.debug(e.toString() + ": " + getSql() + getHashCodeString());
+        if (ZmailLog.sqltrace.isDebugEnabled()) {
+            ZmailLog.sqltrace.debug(e.toString() + ": " + getSql() + getHashCodeString());
         }
     }
     
     private void processDbError(SQLException e) {
         if (Db.errorMatches(e, Db.Error.TABLE_FULL))
-            Zimbra.halt("DB out of space", e);
+            Zmail.halt("DB out of space", e);
     }
 
     private String getHashCodeString() {
@@ -145,7 +145,7 @@ class DebugPreparedStatement extends DelegatingPreparedStatement {
         try {
             hashCodeString= ", conn=" + mStmt.getConnection().hashCode();
         } catch (SQLException e) {
-            ZimbraLog.sqltrace.warn("Unable to determine connection hashcode", e);
+            ZmailLog.sqltrace.warn("Unable to determine connection hashcode", e);
         }
         return hashCodeString;
     }

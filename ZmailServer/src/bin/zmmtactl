@@ -15,19 +15,19 @@
 # 
 source `dirname $0`/zmshutil || exit 1
 zmsetvars \
-	zimbra_home \
+	zmail_home \
   postfix_mail_owner \
   postfix_setgid_group \
-	zimbra_server_hostname 
+	zmail_server_hostname 
 
-BASE=${zimbra_home:=/opt/zimbra}
+BASE=${zmail_home:=/opt/zmail}
 
-if [ -f "${zimbra_home}/conf/mta_milter_options" ]; then
-  source ${zimbra_home}/conf/mta_milter_options
+if [ -f "${zmail_home}/conf/mta_milter_options" ]; then
+  source ${zmail_home}/conf/mta_milter_options
 fi
-zimbraMilterServerEnabled=${zimbraMilterServerEnabled:=FALSE}
+zmailMilterServerEnabled=${zmailMilterServerEnabled:=FALSE}
 
-if [ x"$zimbraMilterServerEnabled" = "xTRUE" ]; then
+if [ x"$zmailMilterServerEnabled" = "xTRUE" ]; then
   SCRIPTS="postfix zmsaslauthdctl zmmilterctl"
 else 
   SCRIPTS="postfix zmsaslauthdctl"
@@ -35,13 +35,13 @@ fi
 
 rewriteconfig() {
   echo -n "Rewriting configuration files..."
-  if [ -L ${zimbra_home}/postfix ]; then
-    if [ ! -f ${zimbra_home}/postfix/conf/main.cf ]; then
-      touch ${zimbra_home}/postfix/conf/main.cf
-      ${zimbra_home}/bin/postconf -e mail_owner=${postfix_mail_owner} setgid_group=${postfix_setgid_group}
+  if [ -L ${zmail_home}/postfix ]; then
+    if [ ! -f ${zmail_home}/postfix/conf/main.cf ]; then
+      touch ${zmail_home}/postfix/conf/main.cf
+      ${zmail_home}/bin/postconf -e mail_owner=${postfix_mail_owner} setgid_group=${postfix_setgid_group}
     fi
   fi
-  /opt/zimbra/libexec/configrewrite antispam antivirus opendkim mta sasl  > /dev/null 2>&1
+  /opt/zmail/libexec/configrewrite antispam antivirus opendkim mta sasl  > /dev/null 2>&1
   if [ $? = 0 ]; then
     echo "done."
   else
@@ -56,7 +56,7 @@ case "$1" in
 		fi
 		STATUS=0
 		for i in $SCRIPTS; do
-			/opt/zimbra/bin/$i start norewrite
+			/opt/zmail/bin/$i start norewrite
 			R=$?
 			if [ $R -ne "0" ]; then
 				echo "$i failed to start"
@@ -67,7 +67,7 @@ case "$1" in
 	;;
 	stop)
 		for i in $SCRIPTS; do
-			/opt/zimbra/bin/$i stop
+			/opt/zmail/bin/$i stop
 		done
 	;;
 	reload|restart)
@@ -76,16 +76,16 @@ case "$1" in
 		fi
 		for i in $SCRIPTS; do
       if [ "x$i" = "xpostfix" ]; then
-        /opt/zimbra/bin/$i reload
+        /opt/zmail/bin/$i reload
       else 
-			  /opt/zimbra/bin/$i $1
+			  /opt/zmail/bin/$i $1
       fi
 		done
 	;;
 	status)
 		STATUS=0
 		for i in $SCRIPTS; do
-			/opt/zimbra/bin/$i status > /dev/null 2>&1
+			/opt/zmail/bin/$i status > /dev/null 2>&1
 			R=$?
 			if [ $R -ne "0" ]; then
 				echo "$i is not running"

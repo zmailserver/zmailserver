@@ -14,7 +14,7 @@
  * 
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.octosync.store;
+package org.zmail.cs.octosync.store;
 
 import java.io.DataInputStream;
 
@@ -23,8 +23,8 @@ import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
-import com.zimbra.cs.mailbox.MailboxTestUtil;
-import com.zimbra.cs.store.StoreManager;
+import org.zmail.cs.mailbox.MailboxTestUtil;
+import org.zmail.cs.store.StoreManager;
 
 public class PatchStoreTest
 {

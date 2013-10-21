@@ -13,7 +13,7 @@
  * ***** END LICENSE BLOCK *****
  */
 
-package com.zimbra.cs.client;
+package org.zmail.cs.client;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -25,10 +25,10 @@ import org.apache.commons.httpclient.HttpState;
 import org.apache.commons.httpclient.cookie.CookiePolicy;
 import org.apache.commons.httpclient.methods.GetMethod;
 
-import com.zimbra.common.auth.ZAuthToken;
-import com.zimbra.common.httpclient.HttpClientUtil;
-import com.zimbra.common.util.ZimbraHttpConnectionManager;
-import com.zimbra.cs.client.soap.LmcSoapClientException;
+import org.zmail.common.auth.ZAuthToken;
+import org.zmail.common.httpclient.HttpClientUtil;
+import org.zmail.common.util.ZmailHttpConnectionManager;
+import org.zmail.cs.client.soap.LmcSoapClientException;
 
 public class LmcMessage {
     private String mID;
@@ -123,7 +123,7 @@ public class LmcMessage {
         if (session == null)
             System.err.println(System.currentTimeMillis() + " " + Thread.currentThread() + " LmcMessage.downloadAttachment session=null");
         
-        HttpClient client = ZimbraHttpConnectionManager.getInternalHttpConnMgr().newHttpClient();
+        HttpClient client = ZmailHttpConnectionManager.getInternalHttpConnMgr().newHttpClient();
         String url = baseURL + "?id=" + getID() + "&part=" + partNo;
         GetMethod get = new GetMethod(url);
 

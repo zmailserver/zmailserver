@@ -13,7 +13,7 @@
  * ***** END LICENSE BLOCK *****
  */
 
-package com.zimbra.cs.mailbox.calendar.cache;
+package org.zmail.cs.mailbox.calendar.cache;
 
 import java.util.Collection;
 import java.util.HashMap;
@@ -23,33 +23,33 @@ import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.Set;
 
-import com.zimbra.common.calendar.ParsedDateTime;
-import com.zimbra.common.localconfig.LC;
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.common.util.Pair;
-import com.zimbra.common.util.ZimbraLog;
-import com.zimbra.cs.account.Account;
-import com.zimbra.cs.account.Provisioning;
-import com.zimbra.common.account.Key.AccountBy;
-import com.zimbra.cs.mailbox.ACL;
-import com.zimbra.cs.mailbox.Appointment;
-import com.zimbra.cs.mailbox.CalendarItem;
-import com.zimbra.cs.mailbox.Folder;
-import com.zimbra.cs.mailbox.MailItem;
-import com.zimbra.cs.mailbox.MailServiceException;
-import com.zimbra.cs.mailbox.Mailbox;
-import com.zimbra.cs.mailbox.MailboxManager;
-import com.zimbra.cs.mailbox.OperationContext;
-import com.zimbra.cs.mailbox.MailboxManager.FetchMode;
-import com.zimbra.cs.mailbox.acl.FolderACL;
-import com.zimbra.cs.mailbox.calendar.Invite;
-import com.zimbra.cs.mailbox.calendar.InviteInfo;
-import com.zimbra.cs.mailbox.util.TagUtil;
-import com.zimbra.cs.memcached.MemcachedConnector;
-import com.zimbra.cs.session.PendingModifications;
-import com.zimbra.cs.session.PendingModifications.Change;
-import com.zimbra.cs.session.PendingModifications.ModificationKey;
-import com.zimbra.cs.stats.ZimbraPerf;
+import org.zmail.common.calendar.ParsedDateTime;
+import org.zmail.common.localconfig.LC;
+import org.zmail.common.service.ServiceException;
+import org.zmail.common.util.Pair;
+import org.zmail.common.util.ZmailLog;
+import org.zmail.cs.account.Account;
+import org.zmail.cs.account.Provisioning;
+import org.zmail.common.account.Key.AccountBy;
+import org.zmail.cs.mailbox.ACL;
+import org.zmail.cs.mailbox.Appointment;
+import org.zmail.cs.mailbox.CalendarItem;
+import org.zmail.cs.mailbox.Folder;
+import org.zmail.cs.mailbox.MailItem;
+import org.zmail.cs.mailbox.MailServiceException;
+import org.zmail.cs.mailbox.Mailbox;
+import org.zmail.cs.mailbox.MailboxManager;
+import org.zmail.cs.mailbox.OperationContext;
+import org.zmail.cs.mailbox.MailboxManager.FetchMode;
+import org.zmail.cs.mailbox.acl.FolderACL;
+import org.zmail.cs.mailbox.calendar.Invite;
+import org.zmail.cs.mailbox.calendar.InviteInfo;
+import org.zmail.cs.mailbox.util.TagUtil;
+import org.zmail.cs.memcached.MemcachedConnector;
+import org.zmail.cs.session.PendingModifications;
+import org.zmail.cs.session.PendingModifications.Change;
+import org.zmail.cs.session.PendingModifications.ModificationKey;
+import org.zmail.cs.stats.ZmailPerf;
 
 // TODO: caching remote calendars
 // TODO: TTL instead of last-modified time check, if folder configured that way or remote
@@ -98,7 +98,7 @@ public class CalSummaryCache {
 
             Invite defaultInvite = calItem.getDefaultInviteOrNull();
             if (defaultInvite == null) {
-                ZimbraLog.calendar.info(
+                ZmailLog.calendar.info(
                         "Could not load defaultinfo for calendar item with id=" +
                         calItem.getId() + "; SKIPPING");
                 return null;
@@ -200,7 +200,7 @@ public class CalSummaryCache {
                     }
                     calItemData.addInstance(instData);
                 } catch (MailServiceException.NoSuchItemException e) {
-                    ZimbraLog.calendar.info("Error could not get instance "+inst.getMailItemId()+"-"+inst.getComponentNum()+
+                    ZmailLog.calendar.info("Error could not get instance "+inst.getMailItemId()+"-"+inst.getComponentNum()+
                         " for appt "+calItem.getId(), e);
                 }
             }
@@ -208,9 +208,9 @@ public class CalSummaryCache {
                 return null;
             calItemData.setActualRange(actualRangeStart, actualRangeEnd);
         } catch(MailServiceException.NoSuchItemException e) {
-            ZimbraLog.calendar.info("Error could not get default invite for calendar item: "+ calItem.getId(), e);
+            ZmailLog.calendar.info("Error could not get default invite for calendar item: "+ calItem.getId(), e);
         } catch (RuntimeException e) {
-            ZimbraLog.calendar.info("Caught Exception "+e+ " while getting summary info for calendar item: "+calItem.getId(), e);
+            ZmailLog.calendar.info("Caught Exception "+e+ " while getting summary info for calendar item: "+calItem.getId(), e);
         }
         return calItemData;
     }
@@ -502,8 +502,8 @@ public class CalSummaryCache {
         CalendarDataResult result = new CalendarDataResult();
 
         if (!LC.calendar_cache_enabled.booleanValue()) {
-            ZimbraPerf.COUNTER_CALENDAR_CACHE_HIT.increment(0);
-            ZimbraPerf.COUNTER_CALENDAR_CACHE_MEM_HIT.increment(0);
+            ZmailPerf.COUNTER_CALENDAR_CACHE_HIT.increment(0);
+            ZmailPerf.COUNTER_CALENDAR_CACHE_MEM_HIT.increment(0);
             if (!targetAcctOnLocalServer)
                 return null;
             Mailbox mbox = MailboxManager.getInstance().getMailboxByAccount(targetAcct);
@@ -527,8 +527,8 @@ public class CalSummaryCache {
         CalSummaryKey key = new CalSummaryKey(targetAcctId, folderId);
             CalendarData calData = mMemcachedCache.getForRange(key, rangeStart, rangeEnd);
             if (calData != null) {
-                ZimbraPerf.COUNTER_CALENDAR_CACHE_HIT.increment(1);
-                ZimbraPerf.COUNTER_CALENDAR_CACHE_MEM_HIT.increment(1);
+                ZmailPerf.COUNTER_CALENDAR_CACHE_HIT.increment(1);
+                ZmailPerf.COUNTER_CALENDAR_CACHE_MEM_HIT.increment(1);
             result.data = calData;
             return result;
             }
@@ -584,7 +584,7 @@ public class CalSummaryCache {
                     dataFrom = CacheLevel.File;
                 }
             } catch (ServiceException e) {
-                ZimbraLog.calendar.warn("Error loading cached calendar summary", e);
+                ZmailLog.calendar.warn("Error loading cached calendar summary", e);
             }
         }
 
@@ -630,7 +630,7 @@ public class CalSummaryCache {
             try {
                 FileStore.saveCalendarData(mbox.getId(), calData);  // persist it
             } catch (ServiceException e) {
-                ZimbraLog.calendar.warn("Error persisting calendar summary cache", e);
+                ZmailLog.calendar.warn("Error persisting calendar summary cache", e);
             }
         }
 
@@ -660,20 +660,20 @@ public class CalSummaryCache {
         switch (dataFrom) {
         case Memory:
         case Memcached:
-            ZimbraPerf.COUNTER_CALENDAR_CACHE_HIT.increment(1);
-            ZimbraPerf.COUNTER_CALENDAR_CACHE_MEM_HIT.increment(1);
+            ZmailPerf.COUNTER_CALENDAR_CACHE_HIT.increment(1);
+            ZmailPerf.COUNTER_CALENDAR_CACHE_MEM_HIT.increment(1);
             break;
         case File:
-            ZimbraPerf.COUNTER_CALENDAR_CACHE_HIT.increment(1);
-            ZimbraPerf.COUNTER_CALENDAR_CACHE_MEM_HIT.increment(0);
+            ZmailPerf.COUNTER_CALENDAR_CACHE_HIT.increment(1);
+            ZmailPerf.COUNTER_CALENDAR_CACHE_MEM_HIT.increment(0);
             break;
         case Miss:
         default:
-            ZimbraPerf.COUNTER_CALENDAR_CACHE_HIT.increment(0);
-            ZimbraPerf.COUNTER_CALENDAR_CACHE_MEM_HIT.increment(0);
+            ZmailPerf.COUNTER_CALENDAR_CACHE_HIT.increment(0);
+            ZmailPerf.COUNTER_CALENDAR_CACHE_MEM_HIT.increment(0);
             break;
         }
-        ZimbraPerf.COUNTER_CALENDAR_CACHE_LRU_SIZE.increment(lruSize);
+        ZmailPerf.COUNTER_CALENDAR_CACHE_LRU_SIZE.increment(lruSize);
 
         return result;
     }
@@ -689,7 +689,7 @@ public class CalSummaryCache {
         try {
             FileStore.deleteCalendarData(mboxId, folderId);
         } catch (ServiceException e) {
-            ZimbraLog.calendar.warn("Error deleting calendar summary cache", e);
+            ZmailLog.calendar.warn("Error deleting calendar summary cache", e);
         }
     }
 
@@ -766,7 +766,7 @@ public class CalSummaryCache {
                         try {
                             mbox = MailboxManager.getInstance().getMailboxByAccountId(acctId, FetchMode.DO_NOT_AUTOCREATE);
                         } catch (ServiceException e) {
-                            ZimbraLog.calendar.error("Error looking up the mailbox of account in delete notification: account=" + acctId, e);
+                            ZmailLog.calendar.error("Error looking up the mailbox of account in delete notification: account=" + acctId, e);
                             continue;
                         }
                     }

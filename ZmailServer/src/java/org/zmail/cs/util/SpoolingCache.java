@@ -12,7 +12,7 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.util;
+package org.zmail.cs.util;
 
 import java.io.BufferedOutputStream;
 import java.io.File;
@@ -29,8 +29,8 @@ import java.util.List;
 import java.util.NoSuchElementException;
 
 import com.google.common.annotations.VisibleForTesting;
-import com.zimbra.common.localconfig.LC;
-import com.zimbra.common.util.ByteUtil;
+import org.zmail.common.localconfig.LC;
+import org.zmail.common.util.ByteUtil;
 
 public class SpoolingCache<K extends Serializable> implements Iterable<K> {
     final int memlimit;
@@ -56,7 +56,7 @@ public class SpoolingCache<K extends Serializable> implements Iterable<K> {
             memcache.add(item);
         } else {
             if (oos == null) {
-                diskcache = File.createTempFile("scache", ".tmp", new File(LC.zimbra_tmp_directory.value()));
+                diskcache = File.createTempFile("scache", ".tmp", new File(LC.zmail_tmp_directory.value()));
                 oos = new ObjectOutputStream(new BufferedOutputStream(new FileOutputStream(diskcache)));
             }
             oos.writeObject(item);

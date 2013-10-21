@@ -13,24 +13,24 @@
  * ***** END LICENSE BLOCK *****
  */
 
-package com.zimbra.cs.account.soap;
+package org.zmail.cs.account.soap;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import com.zimbra.common.account.Key;
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.common.soap.AdminConstants;
-import com.zimbra.common.soap.Element;
-import com.zimbra.cs.account.DistributionList;
-import com.zimbra.cs.account.Provisioning;
-import com.zimbra.common.soap.Element.XMLElement;
-import com.zimbra.soap.admin.type.Attr;
-import com.zimbra.soap.admin.type.DLInfo;
-import com.zimbra.soap.admin.type.DistributionListInfo;
-import com.zimbra.soap.admin.type.DistributionListMembershipInfo;
+import org.zmail.common.account.Key;
+import org.zmail.common.service.ServiceException;
+import org.zmail.common.soap.AdminConstants;
+import org.zmail.common.soap.Element;
+import org.zmail.cs.account.DistributionList;
+import org.zmail.cs.account.Provisioning;
+import org.zmail.common.soap.Element.XMLElement;
+import org.zmail.soap.admin.type.Attr;
+import org.zmail.soap.admin.type.DLInfo;
+import org.zmail.soap.admin.type.DistributionListInfo;
+import org.zmail.soap.admin.type.DistributionListMembershipInfo;
 
 class SoapDistributionList extends DistributionList implements SoapEntry {
 
@@ -65,9 +65,9 @@ class SoapDistributionList extends DistributionList implements SoapEntry {
         super(dlInfo.getName(), dlInfo.getId(), 
                 Attr.collectionToMap(dlInfo.getAttrList()), prov);
         
-        // DLInfo does not supply zimbraId
+        // DLInfo does not supply zmailId
         Map<String, Object> attrs = getRawAttrs();
-        attrs.put(Provisioning.A_zimbraId, dlInfo.getId());
+        attrs.put(Provisioning.A_zmailId, dlInfo.getId());
         
         // DLInfo does not supply membership info
         addDlm(new ArrayList<String>(), getRawAttrs());
@@ -81,7 +81,7 @@ class SoapDistributionList extends DistributionList implements SoapEntry {
     }
 
     private void addDlm(List <String> members, Map<String, Object> attrs) {
-        attrs.put(Provisioning.A_zimbraMailForwardingAddress,
+        attrs.put(Provisioning.A_zmailMailForwardingAddress,
                 members.toArray(new String[members.size()]));
     }
 

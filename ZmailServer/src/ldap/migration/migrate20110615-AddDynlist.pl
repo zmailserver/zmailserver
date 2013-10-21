@@ -14,38 +14,38 @@
 # ***** END LICENSE BLOCK *****
 # 
 use strict;
-use lib '/opt/zimbra/zimbramon/lib';
+use lib '/opt/zmail/zmailmon/lib';
 use Net::LDAP;
 use XML::Simple;
 use Getopt::Std;
 
-if ( ! -d "/opt/zimbra/openldap/etc" ) {
+if ( ! -d "/opt/zmail/openldap/etc" ) {
   print "ERROR: openldap does not appear to be installed - exiting\n";
   exit(1);
 }
 
 my $id = getpwuid($<);
 chomp $id;
-if ($id ne "zimbra") {
-    print STDERR "Error: must be run as zimbra user\n";
+if ($id ne "zmail") {
+    print STDERR "Error: must be run as zmail user\n";
     exit (1);
 }
 
 
-my $localxml = XMLin("/opt/zimbra/conf/localconfig.xml");
+my $localxml = XMLin("/opt/zmail/conf/localconfig.xml");
 my $ldap_root_password = $localxml->{key}->{ldap_root_password}->{value};
 chomp($ldap_root_password);
 my $ldap_is_master = $localxml->{key}->{ldap_is_master}->{value};
 chomp($ldap_is_master);
-my $zimbra_home = $localxml->{key}->{zimbra_home}->{value};
+my $zmail_home = $localxml->{key}->{zmail_home}->{value};
 
-if ($zimbra_home eq "") {
-   $zimbra_home = "/opt/zimbra";
+if ($zmail_home eq "") {
+   $zmail_home = "/opt/zmail";
 }
 
-my $zmprov="${zimbra_home}/bin/zmprov -l --";
+my $zmprov="${zmail_home}/bin/zmprov -l --";
 
-my $ldap = Net::LDAP->new('ldapi://%2fopt%2fzimbra%2fopenldap%2fvar%2frun%2fldapi/') or die "$@";
+my $ldap = Net::LDAP->new('ldapi://%2fopt%2fzmail%2fopenldap%2fvar%2frun%2fldapi/') or die "$@";
 
 my $mesg = $ldap->bind("cn=config", password=>"$ldap_root_password");
 
@@ -92,7 +92,7 @@ if ($size == 0) {
   $mesg->code && warn "failed to add entry: ", $mesg->error ;
 }
 
-$dn = "cn=groups,cn=zimbra";
+$dn = "cn=groups,cn=zmail";
 $mesg = $ldap->add( "$dn",
                        attr => [
                          'description' => 'global dynamic groups',
@@ -125,7 +125,7 @@ foreach my $domain (@DOMAINS) {
 #Add acl for postfix
 my $dn=$bdn;
 my ($entry,@attrvals,$aclNumber,$attrMod);
-my $aclsearch='to attrs=zimbraId,zimbraMailAddress,zimbraMailAlias,zimbraMailCanonicalAddress,zimbraMailCatchAllAddress,zimbraMailCatchAllCanonicalAddress,zimbraMailCatchAllForwardingAddress,zimbraMailDeliveryAddress,zimbraMailForwardingAddress,zimbraPrefMailForwardingAddress,zimbraMailHost,zimbraMailStatus,zimbraMailTransport,zimbraDomainName,zimbraDomainType,zimbraPrefMailLocalDeliveryDisabled  by dn.children="cn=admins,cn=zimbra" write  by dn.base="uid=zmpostfix,cn=appaccts,cn=zimbra" read  by dn.base="uid=zmamavis,cn=appaccts,cn=zimbra" read  by \* none';
+my $aclsearch='to attrs=zmailId,zmailMailAddress,zmailMailAlias,zmailMailCanonicalAddress,zmailMailCatchAllAddress,zmailMailCatchAllCanonicalAddress,zmailMailCatchAllForwardingAddress,zmailMailDeliveryAddress,zmailMailForwardingAddress,zmailPrefMailForwardingAddress,zmailMailHost,zmailMailStatus,zmailMailTransport,zmailDomainName,zmailDomainType,zmailPrefMailLocalDeliveryDisabled  by dn.children="cn=admins,cn=zmail" write  by dn.base="uid=zmpostfix,cn=appaccts,cn=zmail" read  by dn.base="uid=zmamavis,cn=appaccts,cn=zmail" read  by \* none';
 $mesg = $ldap ->search(
                     base=>"$bdn",
                     filter=>"(olcAccess=$aclsearch)",
@@ -140,13 +140,13 @@ if ($size != 0)  {
   $aclNumber=-1;
   $attrMod="";
   foreach my $attr (@attrvals) {
-    if ($attr =~ /to attrs=zimbraId/) {
+    if ($attr =~ /to attrs=zmailId/) {
       ($aclNumber) = $attr =~ /^\{(\d+)\}*/;
       $attrMod=$attr;
     }
   }
   if ($aclNumber != -1 && $attrMod ne "") {
-    $attrMod =~ s/zimbraPrefMailLocalDeliveryDisabled  /zimbraPrefMailLocalDeliveryDisabled,member,memberURL,zimbraMemberOf  /;
+    $attrMod =~ s/zmailPrefMailLocalDeliveryDisabled  /zmailPrefMailLocalDeliveryDisabled,member,memberURL,zmailMemberOf  /;
     $mesg = $ldap->modify(
         $dn,
         delete => {olcAccess => "{$aclNumber}"},
@@ -157,7 +157,7 @@ if ($size != 0)  {
     );
   }
 } else {
-  $aclsearch='to attrs=zimbraId,zimbraMailAddress,zimbraMailAlias,zimbraMailCanonicalAddress,zimbraMailCatchAllAddress,zimbraMailCatchAllCanonicalAddress,zimbraMailCatchAllForwardingAddress,zimbraMailDeliveryAddress,zimbraMailForwardingAddress,zimbraPrefMailForwardingAddress,zimbraMailHost,zimbraMailStatus,zimbraMailTransport,zimbraDomainName,zimbraDomainType,zimbraPrefMailLocalDeliveryDisabled  by dn.children="cn=admins,cn=zimbra" write  by dn.base="uid=zmpostfix,cn=appaccts,cn=zimbra" read  by dn.base="uid=zmamavis,cn=appaccts,cn=zimbra" read  by \* read';
+  $aclsearch='to attrs=zmailId,zmailMailAddress,zmailMailAlias,zmailMailCanonicalAddress,zmailMailCatchAllAddress,zmailMailCatchAllCanonicalAddress,zmailMailCatchAllForwardingAddress,zmailMailDeliveryAddress,zmailMailForwardingAddress,zmailPrefMailForwardingAddress,zmailMailHost,zmailMailStatus,zmailMailTransport,zmailDomainName,zmailDomainType,zmailPrefMailLocalDeliveryDisabled  by dn.children="cn=admins,cn=zmail" write  by dn.base="uid=zmpostfix,cn=appaccts,cn=zmail" read  by dn.base="uid=zmamavis,cn=appaccts,cn=zmail" read  by \* read';
   $mesg = $ldap ->search(
                     base=>"$bdn",
                     filter=>"(olcAccess=$aclsearch)",
@@ -171,13 +171,13 @@ if ($size != 0)  {
     $aclNumber=-1;
     $attrMod="";
     foreach my $attr (@attrvals) {
-      if ($attr =~ /to attrs=zimbraId/) {
+      if ($attr =~ /to attrs=zmailId/) {
         ($aclNumber) = $attr =~ /^\{(\d+)\}*/;
         $attrMod=$attr;
       }
     }
     if ($aclNumber != -1 && $attrMod ne "") {
-      $attrMod =~ s/zimbraPrefMailLocalDeliveryDisabled  /zimbraPrefMailLocalDeliveryDisabled,member,memberURL,zimbraMemberOf  /;
+      $attrMod =~ s/zmailPrefMailLocalDeliveryDisabled  /zmailPrefMailLocalDeliveryDisabled,member,memberURL,zmailMemberOf  /;
       $mesg = $ldap->modify(
           $dn,
           delete => {olcAccess => "{$aclNumber}"},
@@ -190,8 +190,8 @@ if ($size != 0)  {
   }
 }
 
-my $acl='{9}to dn.subtree="cn=groups,cn=zimbra" attrs=zimbraMailAlias,member,zimbraMailStatus,entry  by dn.children="cn=admins,cn=zimbra" write  by dn.base="uid=zmpostfix,cn=appaccts,cn=zimbra" read';
-$aclsearch='to dn.subtree="cn=groups,cn=zimbra" attrs=zimbraMailAlias,member,zimbraMailStatus,entry  by dn.children="cn=admins,cn=zimbra" write  by dn.base="uid=zmpostfix,cn=appaccts,cn=zimbra" read';
+my $acl='{9}to dn.subtree="cn=groups,cn=zmail" attrs=zmailMailAlias,member,zmailMailStatus,entry  by dn.children="cn=admins,cn=zmail" write  by dn.base="uid=zmpostfix,cn=appaccts,cn=zmail" read';
+$aclsearch='to dn.subtree="cn=groups,cn=zmail" attrs=zmailMailAlias,member,zmailMailStatus,entry  by dn.children="cn=admins,cn=zmail" write  by dn.base="uid=zmpostfix,cn=appaccts,cn=zmail" read';
 $mesg = $ldap ->search(
                     base=>"$bdn",
                     filter=>"(olcAccess=$aclsearch)",

@@ -14,15 +14,15 @@
  * 
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.util.tnef.mapi;
+package org.zmail.cs.util.tnef.mapi;
 
 import java.io.IOException;
 import java.util.TimeZone;
 
-import com.zimbra.common.util.Log;
-import com.zimbra.common.util.ZimbraLog;
-import com.zimbra.cs.util.tnef.mapi.SYSTEMTIME;
-import com.zimbra.cs.util.tnef.mapi.TimeZoneDefinition;
+import org.zmail.common.util.Log;
+import org.zmail.common.util.ZmailLog;
+import org.zmail.cs.util.tnef.mapi.SYSTEMTIME;
+import org.zmail.cs.util.tnef.mapi.TimeZoneDefinition;
 
 import net.freeutils.tnef.RawInputStream;
 
@@ -33,7 +33,7 @@ public class TnefTimeZone {
     // In such cases a default time zone ID can be used!!
     public static final String DEFAULT_TNEF_TIMEZONE_ID = "TnefTimeZone";
     
-    static Log sLog = ZimbraLog.tnef;
+    static Log sLog = ZmailLog.tnef;
     
     // [MS-OXOCAL] - v20100729
     // Appointment and Meeting Object Protocol Specification

@@ -13,7 +13,7 @@
  * ***** END LICENSE BLOCK *****
  */
 
-package com.zimbra.cs.util;
+package org.zmail.cs.util;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -21,12 +21,12 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Set;
 
-import com.zimbra.common.localconfig.LC;
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.common.util.ClassLoaderUtil;
-import com.zimbra.common.util.ZimbraLog;
-import com.zimbra.cs.account.Account;
-import com.zimbra.cs.account.Provisioning;
+import org.zmail.common.localconfig.LC;
+import org.zmail.common.service.ServiceException;
+import org.zmail.common.util.ClassLoaderUtil;
+import org.zmail.common.util.ZmailLog;
+import org.zmail.cs.account.Account;
+import org.zmail.cs.account.Provisioning;
 
 public class SkinUtil {
 
@@ -45,7 +45,7 @@ public class SkinUtil {
     }
 
     private static String[] loadSkins() throws ServiceException {
-		ZimbraLog.webclient.debug("Loading skins..." );
+		ZmailLog.webclient.debug("Loading skins..." );
         String skinsDir = LC.skins_directory.value();
         ClassLoader classLoader = ClassLoaderUtil.getClassLoaderByDirectory(skinsDir);
         if (classLoader == null)
@@ -70,7 +70,7 @@ public class SkinUtil {
         String[] sortedSkins = skins.toArray(new String[skins.size()]);
         Arrays.sort(sortedSkins);
 
-		ZimbraLog.webclient.debug("Skin loading complete." );
+		ZmailLog.webclient.debug("Skin loading complete." );
         return sortedSkins;
     }
 
@@ -98,7 +98,7 @@ public class SkinUtil {
     }
 
     private static Set<String> getAvailableSkins(Account acct) throws ServiceException {
-        return acct.getMultiAttrSet(Provisioning.A_zimbraAvailableSkin);
+        return acct.getMultiAttrSet(Provisioning.A_zmailAvailableSkin);
     }
 
 	public static String chooseSkin(Account acct, String requestedSkin) throws ServiceException {
@@ -107,14 +107,14 @@ public class SkinUtil {
 		// If the requested skin is installed and allowed, return it.
 		Set<String> allowedSkins = getAvailableSkins(acct);
 		if (checkSkin(requestedSkin, installedSkins, allowedSkins)) {
-			ZimbraLog.webclient.debug("Loading requested skin "+requestedSkin );
+			ZmailLog.webclient.debug("Loading requested skin "+requestedSkin );
 			return requestedSkin;
 		}
 
 		// If the account/cos's pref skin is installed and allowed, return it.
-		String prefSkin = acct.getAttr(Provisioning.A_zimbraPrefSkin);
+		String prefSkin = acct.getAttr(Provisioning.A_zmailPrefSkin);
 		if (checkSkin(prefSkin, installedSkins, allowedSkins)) {
-			ZimbraLog.webclient.debug("Loading account skin "+prefSkin );
+			ZmailLog.webclient.debug("Loading account skin "+prefSkin );
 			return prefSkin;
 		}
 
@@ -123,14 +123,14 @@ public class SkinUtil {
 		String usuallyAvailableSkin = "serenity";
 		if (prefSkin != usuallyAvailableSkin) {
 			if (checkSkin(usuallyAvailableSkin, installedSkins, allowedSkins)) {
-				ZimbraLog.webclient.debug("Loading default skin "+usuallyAvailableSkin );
+				ZmailLog.webclient.debug("Loading default skin "+usuallyAvailableSkin );
 				return usuallyAvailableSkin;
 			}
 		}
 
 		// Return some installed skin.
 		if (installedSkins.length > 0) {
-			ZimbraLog.webclient.debug("Returning first known skin "+installedSkins[0] );
+			ZmailLog.webclient.debug("Returning first known skin "+installedSkins[0] );
 			return installedSkins[0];
 		}
 

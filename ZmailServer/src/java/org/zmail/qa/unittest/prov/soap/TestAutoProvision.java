@@ -12,7 +12,7 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.qa.unittest.prov.soap;
+package org.zmail.qa.unittest.prov.soap;
 
 import static org.junit.Assert.*;
 
@@ -31,44 +31,44 @@ import org.junit.Test;
 
 import com.google.common.collect.Maps;
 import com.google.common.collect.Sets;
-import com.zimbra.common.account.Key.AccountBy;
-import com.zimbra.common.account.ZAttrProvisioning.AutoProvAuthMech;
-import com.zimbra.common.account.ZAttrProvisioning.AutoProvMode;
-import com.zimbra.common.httpclient.HttpClientUtil;
-import com.zimbra.common.localconfig.LC;
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.common.soap.AccountConstants;
-import com.zimbra.common.soap.Element;
-import com.zimbra.common.soap.SoapHttpTransport;
-import com.zimbra.common.soap.SoapTransport;
-import com.zimbra.common.util.Constants;
-import com.zimbra.common.util.StringUtil;
-import com.zimbra.cs.account.Account;
-import com.zimbra.cs.account.AccountServiceException;
-import com.zimbra.cs.account.AuthToken;
-import com.zimbra.cs.account.Domain;
-import com.zimbra.cs.account.PreAuthKey;
-import com.zimbra.cs.account.Provisioning;
-import com.zimbra.cs.account.Server;
-import com.zimbra.cs.account.auth.AuthMechanism.AuthMech;
-import com.zimbra.cs.ldap.LdapException;
-import com.zimbra.cs.ldap.LdapUtil;
-import com.zimbra.qa.QA.Bug;
-import com.zimbra.qa.unittest.TestPreAuthServlet;
-import com.zimbra.qa.unittest.TestUtil;
-import com.zimbra.qa.unittest.prov.AutoProvisionTestUtil;
-import com.zimbra.qa.unittest.prov.Verify;
-import com.zimbra.soap.admin.message.AutoProvAccountRequest;
-import com.zimbra.soap.admin.message.AutoProvAccountResponse;
-import com.zimbra.soap.admin.message.AutoProvTaskControlRequest;
-import com.zimbra.soap.admin.message.AutoProvTaskControlResponse;
-import com.zimbra.soap.admin.message.AutoProvTaskControlRequest.Action;
-import com.zimbra.soap.admin.message.AutoProvTaskControlResponse.Status;
-import com.zimbra.soap.admin.type.AccountInfo;
-import com.zimbra.soap.admin.type.CountObjectsType;
-import com.zimbra.soap.admin.type.DomainSelector;
-import com.zimbra.soap.admin.type.PrincipalSelector;
-import com.zimbra.soap.type.AutoProvPrincipalBy;
+import org.zmail.common.account.Key.AccountBy;
+import org.zmail.common.account.ZAttrProvisioning.AutoProvAuthMech;
+import org.zmail.common.account.ZAttrProvisioning.AutoProvMode;
+import org.zmail.common.httpclient.HttpClientUtil;
+import org.zmail.common.localconfig.LC;
+import org.zmail.common.service.ServiceException;
+import org.zmail.common.soap.AccountConstants;
+import org.zmail.common.soap.Element;
+import org.zmail.common.soap.SoapHttpTransport;
+import org.zmail.common.soap.SoapTransport;
+import org.zmail.common.util.Constants;
+import org.zmail.common.util.StringUtil;
+import org.zmail.cs.account.Account;
+import org.zmail.cs.account.AccountServiceException;
+import org.zmail.cs.account.AuthToken;
+import org.zmail.cs.account.Domain;
+import org.zmail.cs.account.PreAuthKey;
+import org.zmail.cs.account.Provisioning;
+import org.zmail.cs.account.Server;
+import org.zmail.cs.account.auth.AuthMechanism.AuthMech;
+import org.zmail.cs.ldap.LdapException;
+import org.zmail.cs.ldap.LdapUtil;
+import org.zmail.qa.QA.Bug;
+import org.zmail.qa.unittest.TestPreAuthServlet;
+import org.zmail.qa.unittest.TestUtil;
+import org.zmail.qa.unittest.prov.AutoProvisionTestUtil;
+import org.zmail.qa.unittest.prov.Verify;
+import org.zmail.soap.admin.message.AutoProvAccountRequest;
+import org.zmail.soap.admin.message.AutoProvAccountResponse;
+import org.zmail.soap.admin.message.AutoProvTaskControlRequest;
+import org.zmail.soap.admin.message.AutoProvTaskControlResponse;
+import org.zmail.soap.admin.message.AutoProvTaskControlRequest.Action;
+import org.zmail.soap.admin.message.AutoProvTaskControlResponse.Status;
+import org.zmail.soap.admin.type.AccountInfo;
+import org.zmail.soap.admin.type.CountObjectsType;
+import org.zmail.soap.admin.type.DomainSelector;
+import org.zmail.soap.admin.type.PrincipalSelector;
+import org.zmail.soap.type.AutoProvPrincipalBy;
 
 public class TestAutoProvision extends SoapTest {
     
@@ -76,8 +76,8 @@ public class TestAutoProvision extends SoapTest {
     private static Provisioning prov;
     private static Domain extDomain;
     private static String extDomainDn;
-    private static String extDomainAdminBindDn = LC.zimbra_ldap_userdn.value();
-    private static String extDomainAdminBindPassword = LC.zimbra_ldap_password.value();
+    private static String extDomainAdminBindDn = LC.zmail_ldap_userdn.value();
+    private static String extDomainAdminBindPassword = LC.zmail_ldap_password.value();
     
     private static String DEFAULT_AUTOPROV_INITIAL_SLEEP_MS = String.valueOf(5 * Constants.MILLIS_PER_MINUTE);
     private static String DEFAULT_AUTOPROV_POLLING_INTERVAL = "15m";
@@ -101,7 +101,7 @@ public class TestAutoProvision extends SoapTest {
     // put everything back, in case the test did not run through previously
     private static void revertAllToDefault() throws Exception {
         
-        SoapTransport transport = authZimbraAdmin();
+        SoapTransport transport = authZmailAdmin();
         modifyLocalconfigAndReload(transport, LC.autoprov_initial_sleep_ms, DEFAULT_AUTOPROV_INITIAL_SLEEP_MS);
         
         Server localServer = prov.getLocalServer();
@@ -109,13 +109,13 @@ public class TestAutoProvision extends SoapTest {
         localServer.unsetAutoProvScheduledDomains();
     }
     
-    private String getZimbraDomainName(String testName) {
+    private String getZmailDomainName(String testName) {
         return testName + "." + baseDomainName();
     }
     
-    private Domain createZimbraDomain(String testName, Map<String, Object> zimbraDomainAttrs) 
+    private Domain createZmailDomain(String testName, Map<String, Object> zmailDomainAttrs) 
     throws Exception {
-        return provUtil.createDomain(getZimbraDomainName(testName), zimbraDomainAttrs);
+        return provUtil.createDomain(getZmailDomainName(testName), zmailDomainAttrs);
     }
     
     private String createExternalAcctEntry(String localPart) throws Exception {
@@ -139,8 +139,8 @@ public class TestAutoProvision extends SoapTest {
         return extAcctName;
     }
     
-    private Map<String, Object> commonZimbraDomainAttrs() {
-        return AutoProvisionTestUtil.commonZimbraDomainAttrs();
+    private Map<String, Object> commonZmailDomainAttrs() {
+        return AutoProvisionTestUtil.commonZmailDomainAttrs();
     }
     
     private void verifyAcctAutoProvisioned(Account acct, String expectedAcctName) 
@@ -151,9 +151,9 @@ public class TestAutoProvision extends SoapTest {
     
     private String getAuthTokenAcctId(String authToken) throws Exception {
         Map attrs = AuthToken.getInfo(authToken);
-        String zimbraId = (String) attrs.get("id");  // hardcode id here, C_ID in ZimbraAuthToken is private
-        assertNotNull(zimbraId);
-        return zimbraId;
+        String zmailId = (String) attrs.get("id");  // hardcode id here, C_ID in ZmailAuthToken is private
+        assertNotNull(zmailId);
+        return zmailId;
     }
     
     
@@ -174,17 +174,17 @@ public class TestAutoProvision extends SoapTest {
         String extAcctLocalPart = testName;
         String extAcctName = createExternalAcctEntry(extAcctLocalPart, externalPassword, null);
         
-        Map<String, Object> zimbraDomainAttrs = commonZimbraDomainAttrs();
+        Map<String, Object> zmailDomainAttrs = commonZmailDomainAttrs();
         // setup auto prov
-        zimbraDomainAttrs.put(Provisioning.A_zimbraAutoProvLdapSearchBase, extDomainDn);
-        zimbraDomainAttrs.put(Provisioning.A_zimbraAutoProvLdapSearchFilter, "(uid=%u)");
+        zmailDomainAttrs.put(Provisioning.A_zmailAutoProvLdapSearchBase, extDomainDn);
+        zmailDomainAttrs.put(Provisioning.A_zmailAutoProvLdapSearchFilter, "(uid=%u)");
         // setup external LDAP auth
-        zimbraDomainAttrs.put(Provisioning.A_zimbraAuthMech, AuthMech.ldap.name());
-        zimbraDomainAttrs.put(Provisioning.A_zimbraAuthLdapURL, "ldap://localhost:389");
-        zimbraDomainAttrs.put(Provisioning.A_zimbraAuthLdapBindDn, "uid=%u,ou=people," + extDomainDn);
-        Domain zimbraDomain = createZimbraDomain(testName, zimbraDomainAttrs);
+        zmailDomainAttrs.put(Provisioning.A_zmailAuthMech, AuthMech.ldap.name());
+        zmailDomainAttrs.put(Provisioning.A_zmailAuthLdapURL, "ldap://localhost:389");
+        zmailDomainAttrs.put(Provisioning.A_zmailAuthLdapBindDn, "uid=%u,ou=people," + extDomainDn);
+        Domain zmailDomain = createZmailDomain(testName, zmailDomainAttrs);
         
-        String loginName = extAcctLocalPart + "@" + zimbraDomain.getName();
+        String loginName = extAcctLocalPart + "@" + zmailDomain.getName();
         
         // make the soap request
         SoapHttpTransport transport = new SoapHttpTransport(TestUtil.getSoapUrl());
@@ -215,23 +215,23 @@ public class TestAutoProvision extends SoapTest {
         String extAcctLocalPart = testName;
         String extAcctName = createExternalAcctEntry(extAcctLocalPart, externalPassword, null);
         
-        Map<String, Object> zimbraDomainAttrs = commonZimbraDomainAttrs();
+        Map<String, Object> zmailDomainAttrs = commonZmailDomainAttrs();
         // setup auto prov
-        // commonZimbraDomainAttrs added only LDAP, add preauth here
-        StringUtil.addToMultiMap(zimbraDomainAttrs, Provisioning.A_zimbraAutoProvAuthMech, AutoProvAuthMech.PREAUTH.name());
-        zimbraDomainAttrs.put(Provisioning.A_zimbraAutoProvLdapSearchBase, extDomainDn);
-        zimbraDomainAttrs.put(Provisioning.A_zimbraAutoProvLdapSearchFilter, "(uid=%u)");
+        // commonZmailDomainAttrs added only LDAP, add preauth here
+        StringUtil.addToMultiMap(zmailDomainAttrs, Provisioning.A_zmailAutoProvAuthMech, AutoProvAuthMech.PREAUTH.name());
+        zmailDomainAttrs.put(Provisioning.A_zmailAutoProvLdapSearchBase, extDomainDn);
+        zmailDomainAttrs.put(Provisioning.A_zmailAutoProvLdapSearchFilter, "(uid=%u)");
         // setup external LDAP auth
-        zimbraDomainAttrs.put(Provisioning.A_zimbraAuthMech, AuthMech.ldap.name());
-        zimbraDomainAttrs.put(Provisioning.A_zimbraAuthLdapURL, "ldap://localhost:389");
-        zimbraDomainAttrs.put(Provisioning.A_zimbraAuthLdapBindDn, "uid=%u,ou=people," + extDomainDn);
+        zmailDomainAttrs.put(Provisioning.A_zmailAuthMech, AuthMech.ldap.name());
+        zmailDomainAttrs.put(Provisioning.A_zmailAuthLdapURL, "ldap://localhost:389");
+        zmailDomainAttrs.put(Provisioning.A_zmailAuthLdapBindDn, "uid=%u,ou=people," + extDomainDn);
         // setup preauth
         String preAuthKey = PreAuthKey.generateRandomPreAuthKey();
-        zimbraDomainAttrs.put(Provisioning.A_zimbraPreAuthKey, preAuthKey);
+        zmailDomainAttrs.put(Provisioning.A_zmailPreAuthKey, preAuthKey);
         
-        Domain zimbraDomain = createZimbraDomain(testName, zimbraDomainAttrs);
+        Domain zmailDomain = createZmailDomain(testName, zmailDomainAttrs);
         
-        String loginName = extAcctLocalPart + "@" + zimbraDomain.getName();
+        String loginName = extAcctLocalPart + "@" + zmailDomain.getName();
         
         // preauth data
         HashMap<String,String> params = new HashMap<String,String>();
@@ -280,16 +280,16 @@ public class TestAutoProvision extends SoapTest {
         
         String krb5Realm = "MYREALM";
         
-        Map<String, Object> zimbraDomainAttrs = commonZimbraDomainAttrs();
+        Map<String, Object> zmailDomainAttrs = commonZmailDomainAttrs();
         // setup auto prov
-        StringUtil.addToMultiMap(zimbraDomainAttrs, Provisioning.A_zimbraAutoProvAuthMech, AutoProvAuthMech.KRB5.name());
-        zimbraDomainAttrs.put(Provisioning.A_zimbraAutoProvLdapSearchBase, extDomainDn);
-        zimbraDomainAttrs.put(Provisioning.A_zimbraAutoProvLdapSearchFilter, "(uid=%u)");
+        StringUtil.addToMultiMap(zmailDomainAttrs, Provisioning.A_zmailAutoProvAuthMech, AutoProvAuthMech.KRB5.name());
+        zmailDomainAttrs.put(Provisioning.A_zmailAutoProvLdapSearchBase, extDomainDn);
+        zmailDomainAttrs.put(Provisioning.A_zmailAutoProvLdapSearchFilter, "(uid=%u)");
         // setup auth mech and krb5 realm on domain
-        zimbraDomainAttrs.put(Provisioning.A_zimbraAuthMech, AuthMech.kerberos5.name());
-        zimbraDomainAttrs.put(Provisioning.A_zimbraAuthKerberos5Realm, krb5Realm);
-        zimbraDomainAttrs.put(Provisioning.A_zimbraAuthKerberos5Realm, krb5Realm);
-        Domain zimbraDomain = createZimbraDomain(testName, zimbraDomainAttrs);
+        zmailDomainAttrs.put(Provisioning.A_zmailAuthMech, AuthMech.kerberos5.name());
+        zmailDomainAttrs.put(Provisioning.A_zmailAuthKerberos5Realm, krb5Realm);
+        zmailDomainAttrs.put(Provisioning.A_zmailAuthKerberos5Realm, krb5Realm);
+        Domain zmailDomain = createZmailDomain(testName, zmailDomainAttrs);
         
         String loginName = extAcctLocalPart + "@" + krb5Realm;
         
@@ -321,23 +321,23 @@ public class TestAutoProvision extends SoapTest {
         String extAcctLocalPart = testName;
         String extAcctName = createExternalAcctEntry(extAcctLocalPart, externalPassword, null);
         
-        Map<String, Object> zimbraDomainAttrs = commonZimbraDomainAttrs();
+        Map<String, Object> zmailDomainAttrs = commonZmailDomainAttrs();
         // setup auto prov
-        // commonZimbraDomainAttrs added only LDAP, add preauth here
-        StringUtil.addToMultiMap(zimbraDomainAttrs, Provisioning.A_zimbraAutoProvAuthMech, AutoProvAuthMech.PREAUTH.name());
-        zimbraDomainAttrs.put(Provisioning.A_zimbraAutoProvLdapSearchBase, extDomainDn);
-        zimbraDomainAttrs.put(Provisioning.A_zimbraAutoProvLdapSearchFilter, "(uid=%u)");
+        // commonZmailDomainAttrs added only LDAP, add preauth here
+        StringUtil.addToMultiMap(zmailDomainAttrs, Provisioning.A_zmailAutoProvAuthMech, AutoProvAuthMech.PREAUTH.name());
+        zmailDomainAttrs.put(Provisioning.A_zmailAutoProvLdapSearchBase, extDomainDn);
+        zmailDomainAttrs.put(Provisioning.A_zmailAutoProvLdapSearchFilter, "(uid=%u)");
         // setup external LDAP auth
-        zimbraDomainAttrs.put(Provisioning.A_zimbraAuthMech, AuthMech.ldap.name());
-        zimbraDomainAttrs.put(Provisioning.A_zimbraAuthLdapURL, "ldap://localhost:389");
-        zimbraDomainAttrs.put(Provisioning.A_zimbraAuthLdapBindDn, "uid=%u,ou=people," + extDomainDn);
+        zmailDomainAttrs.put(Provisioning.A_zmailAuthMech, AuthMech.ldap.name());
+        zmailDomainAttrs.put(Provisioning.A_zmailAuthLdapURL, "ldap://localhost:389");
+        zmailDomainAttrs.put(Provisioning.A_zmailAuthLdapBindDn, "uid=%u,ou=people," + extDomainDn);
         // setup preauth
         String preAuthKey = PreAuthKey.generateRandomPreAuthKey();
-        zimbraDomainAttrs.put(Provisioning.A_zimbraPreAuthKey, preAuthKey);
+        zmailDomainAttrs.put(Provisioning.A_zmailPreAuthKey, preAuthKey);
         
-        Domain zimbraDomain = createZimbraDomain(testName, zimbraDomainAttrs);
+        Domain zmailDomain = createZmailDomain(testName, zmailDomainAttrs);
         
-        String loginName = extAcctLocalPart + "@" + zimbraDomain.getName();
+        String loginName = extAcctLocalPart + "@" + zmailDomain.getName();
         
         // preauth data
         String preAuthUrl = TestPreAuthServlet.genPreAuthUrl(preAuthKey, loginName, false, false);
@@ -407,10 +407,10 @@ public class TestAutoProvision extends SoapTest {
     
     @Test
     public void attributeCallbackAutoProvScheduledDomains() throws Exception {
-        Domain domain1 = createZimbraDomain(genDomainSegmentName("1"), null);
+        Domain domain1 = createZmailDomain(genDomainSegmentName("1"), null);
         domain1.setAutoProvMode(Provisioning.AutoProvMode.EAGER);
         
-        Domain domain2 = createZimbraDomain(genDomainSegmentName("2"), null);
+        Domain domain2 = createZmailDomain(genDomainSegmentName("2"), null);
         domain2.setAutoProvMode(Provisioning.AutoProvMode.EAGER);
         
         Account admin = provUtil.createGlobalAdmin(genAcctNameLocalPart(), domain1);
@@ -448,7 +448,7 @@ public class TestAutoProvision extends SoapTest {
         /*
          * try to schedule a domain not in EAGER mode, verify the attempt fails
          */
-        Domain domain3 = createZimbraDomain(genDomainSegmentName("3"), null);
+        Domain domain3 = createZmailDomain(genDomainSegmentName("3"), null);
         domain3.setAutoProvMode(Provisioning.AutoProvMode.MANUAL);
         String exceptionCaught = null;
         try {
@@ -461,10 +461,10 @@ public class TestAutoProvision extends SoapTest {
     
     @Test 
     public void nonEagerDomainRemovedFromScheduledDomains() throws Exception {
-        Domain domain1 = createZimbraDomain(genDomainSegmentName("1"), null);
+        Domain domain1 = createZmailDomain(genDomainSegmentName("1"), null);
         domain1.setAutoProvMode(Provisioning.AutoProvMode.EAGER);
         
-        Domain domain2 = createZimbraDomain(genDomainSegmentName("2"), null);
+        Domain domain2 = createZmailDomain(genDomainSegmentName("2"), null);
         domain2.setAutoProvMode(Provisioning.AutoProvMode.EAGER);
         
         Account admin = provUtil.createGlobalAdmin(genAcctNameLocalPart(), domain1);
@@ -536,10 +536,10 @@ public class TestAutoProvision extends SoapTest {
     
     @Test
     public void attributeCallbackAutoProvPollingInterval() throws Exception {
-        Domain domain1 = createZimbraDomain(genDomainSegmentName("1"), null);
+        Domain domain1 = createZmailDomain(genDomainSegmentName("1"), null);
         domain1.setAutoProvMode(Provisioning.AutoProvMode.EAGER);
         
-        Domain domain2 = createZimbraDomain(genDomainSegmentName("2"), null);
+        Domain domain2 = createZmailDomain(genDomainSegmentName("2"), null);
         domain2.setAutoProvMode(Provisioning.AutoProvMode.EAGER);
         
         Account admin = provUtil.createGlobalAdmin(genAcctNameLocalPart(), domain1);
@@ -581,7 +581,7 @@ public class TestAutoProvision extends SoapTest {
     
     @Test
     public void autoProvTaskControl() throws Exception {
-        Domain domain = createZimbraDomain(genDomainSegmentName(), null);
+        Domain domain = createZmailDomain(genDomainSegmentName(), null);
         Account admin = provUtil.createGlobalAdmin(genAcctNameLocalPart(), domain);
         SoapTransport transport = authAdmin(admin.getName());
         
@@ -638,19 +638,19 @@ public class TestAutoProvision extends SoapTest {
             createExternalAcctEntry("eagerMode-" + i, "test123", null);
         }
         
-        Map<String, Object> zimbraDomainAttrs = AutoProvisionTestUtil.commonZimbraDomainAttrs();
+        Map<String, Object> zmailDomainAttrs = AutoProvisionTestUtil.commonZmailDomainAttrs();
         // setup auto prov
-        zimbraDomainAttrs.put(Provisioning.A_zimbraAutoProvLdapSearchBase, extDomainDn);
-        zimbraDomainAttrs.put(Provisioning.A_zimbraAutoProvLdapSearchFilter, 
+        zmailDomainAttrs.put(Provisioning.A_zmailAutoProvLdapSearchBase, extDomainDn);
+        zmailDomainAttrs.put(Provisioning.A_zmailAutoProvLdapSearchFilter, 
                 "(&(uid=%u)(mail=eagerMode*)" + AutoProvisionTestUtil.MarkEntryProvisionedListener.NOT_PROVED_FILTER + ")");
-        zimbraDomainAttrs.put(Provisioning.A_zimbraAutoProvAccountNameMap, Provisioning.A_uid);
+        zmailDomainAttrs.put(Provisioning.A_zmailAutoProvAccountNameMap, Provisioning.A_uid);
         
-        zimbraDomainAttrs.put(Provisioning.A_zimbraAutoProvListenerClass, 
+        zmailDomainAttrs.put(Provisioning.A_zmailAutoProvListenerClass, 
                 TestDomainLockListener.class.getName());
-        Domain zimbraDomain = createZimbraDomain(genDomainSegmentName(), zimbraDomainAttrs);
+        Domain zmailDomain = createZmailDomain(genDomainSegmentName(), zmailDomainAttrs);
         
         // create a domain for the admin so the admin account won't interfere with our account counting
-        Domain domain = provUtil.createDomain(getZimbraDomainName("admin-domain"));
+        Domain domain = provUtil.createDomain(getZmailDomainName("admin-domain"));
         Account admin = provUtil.createGlobalAdmin(genAcctNameLocalPart(), domain);
         SoapTransport transport = authAdmin(admin.getName());
         
@@ -668,7 +668,7 @@ public class TestAutoProvision extends SoapTest {
                 
         // schedule the domain on local server
         Server localServer = prov.getLocalServer();
-        localServer.addAutoProvScheduledDomains(zimbraDomain.getName());
+        localServer.addAutoProvScheduledDomains(zmailDomain.getName());
 
         
         /*
@@ -681,7 +681,7 @@ public class TestAutoProvision extends SoapTest {
          * TestDomainLockListener.HOLD_IT_AT_THIS_ENTRYth account is auto provisioned
          */
         while (true) {
-            long numAcctsAutoProvisioned = prov.countObjects(CountObjectsType.account, zimbraDomain, null);
+            long numAcctsAutoProvisioned = prov.countObjects(CountObjectsType.account, zmailDomain, null);
             if (numAcctsAutoProvisioned == TestDomainLockListener.HOLD_IT_AT_THIS_ENTRY) {
                 break;
             }
@@ -693,8 +693,8 @@ public class TestAutoProvision extends SoapTest {
         /*
          * verify the domain is locked, since the eager auto prov thread should be at work
          */
-        prov.reload(zimbraDomain);
-        assertEquals(localServer.getId(), zimbraDomain.getAutoProvLock());
+        prov.reload(zmailDomain);
+        assertEquals(localServer.getId(), zmailDomain.getAutoProvLock());
         
         
         /*
@@ -706,8 +706,8 @@ public class TestAutoProvision extends SoapTest {
          * verify the thread is stopped, and the domain is unlocked
          */
         verifyAutoProvTask(transport, Action.status, Status.idle);
-        prov.reload(zimbraDomain);
-        assertNull(zimbraDomain.getAutoProvLock());
+        prov.reload(zmailDomain);
+        assertNull(zmailDomain.getAutoProvLock());
         
         /*
          * done test, set the LC key back
@@ -719,20 +719,20 @@ public class TestAutoProvision extends SoapTest {
     @Bug(bug=70720)
     public void errorHandling() throws Exception {
         /*
-         * create and setup zimbra domain
+         * create and setup zmail domain
          */
         Map<String, Object> domainAttrs = Maps.newHashMap();
-        domainAttrs.put(Provisioning.A_zimbraAutoProvLdapURL, "ldap://localhost:389");
-        domainAttrs.put(Provisioning.A_zimbraAutoProvLdapAdminBindDn, extDomainAdminBindDn);
-        domainAttrs.put(Provisioning.A_zimbraAutoProvLdapAdminBindPassword, extDomainAdminBindPassword);
-        StringUtil.addToMultiMap(domainAttrs, Provisioning.A_zimbraAutoProvMode, AutoProvMode.LAZY.name());
-        StringUtil.addToMultiMap(domainAttrs, Provisioning.A_zimbraAutoProvMode, AutoProvMode.MANUAL.name());
-        domainAttrs.put(Provisioning.A_zimbraAutoProvLdapSearchFilter, "(cn=auth*)");
-        // domainAttrs.put(Provisioning.A_zimbraAutoProvLdapSearchFilter, "(cn=%n)");
-        domainAttrs.put(Provisioning.A_zimbraAutoProvLdapSearchBase, extDomainDn);
-        domainAttrs.put(Provisioning.A_zimbraAutoProvAccountNameMap, "cn");
-        domainAttrs.put(Provisioning.A_zimbraAutoProvAttrMap, "userPassword=userPassword");
-        Domain domain = createZimbraDomain(genDomainSegmentName(), domainAttrs);
+        domainAttrs.put(Provisioning.A_zmailAutoProvLdapURL, "ldap://localhost:389");
+        domainAttrs.put(Provisioning.A_zmailAutoProvLdapAdminBindDn, extDomainAdminBindDn);
+        domainAttrs.put(Provisioning.A_zmailAutoProvLdapAdminBindPassword, extDomainAdminBindPassword);
+        StringUtil.addToMultiMap(domainAttrs, Provisioning.A_zmailAutoProvMode, AutoProvMode.LAZY.name());
+        StringUtil.addToMultiMap(domainAttrs, Provisioning.A_zmailAutoProvMode, AutoProvMode.MANUAL.name());
+        domainAttrs.put(Provisioning.A_zmailAutoProvLdapSearchFilter, "(cn=auth*)");
+        // domainAttrs.put(Provisioning.A_zmailAutoProvLdapSearchFilter, "(cn=%n)");
+        domainAttrs.put(Provisioning.A_zmailAutoProvLdapSearchBase, extDomainDn);
+        domainAttrs.put(Provisioning.A_zmailAutoProvAccountNameMap, "cn");
+        domainAttrs.put(Provisioning.A_zmailAutoProvAttrMap, "userPassword=userPassword");
+        Domain domain = createZmailDomain(genDomainSegmentName(), domainAttrs);
         
         /*
          * create external accounts
@@ -756,7 +756,7 @@ public class TestAutoProvision extends SoapTest {
         /*
          * do a manual auto provision
          */
-        SoapTransport transport = authZimbraAdmin();
+        SoapTransport transport = authZmailAdmin();
         DomainSelector domainSel = new DomainSelector(DomainSelector.DomainBy.name, domain.getName());
         PrincipalSelector principalSel = PrincipalSelector.create(AutoProvPrincipalBy.name, "authaccount04");
         AutoProvAccountRequest req = AutoProvAccountRequest.create(domainSel, principalSel);
@@ -805,25 +805,25 @@ public class TestAutoProvision extends SoapTest {
         assertTrue(caughtException);
         
         /*
-        <CreateDomainRequest xmlns="urn:zimbraAdmin">
+        <CreateDomainRequest xmlns="urn:zmailAdmin">
             <name>autoprov44.1330496906457.com</name>
-            <a n="zimbraAutoProvLdapURL">ldap://zqa-003.eng.vmware.com:389/</a>
-            <a n="zimbraAutoProvLdapAdminBindDn">administrator@zimbraqa.com</a>
-            <a n="zimbraAutoProvLdapAdminBindPassword">liquidsys</a>
-            <a n="zimbraAutoProvMode">LAZY</a>
-            <a n="zimbraAutoProvMode">MANUAL</a>
-            <a n="zimbraAutoProvLdapSearchFilter">(cn=auth*)</a>
-            <a n="zimbraAutoProvLdapSearchBase">OU=CommonUsers,DC=zimbraqa,DC=com</a>
-            <a n="zimbraAutoProvAccountNameMap">cn</a>
-            <a n="zimbraAutoProvAttrMap">userPassword=userPassword</a>
+            <a n="zmailAutoProvLdapURL">ldap://zqa-003.eng.vmware.com:389/</a>
+            <a n="zmailAutoProvLdapAdminBindDn">administrator@zmailqa.com</a>
+            <a n="zmailAutoProvLdapAdminBindPassword">liquidsys</a>
+            <a n="zmailAutoProvMode">LAZY</a>
+            <a n="zmailAutoProvMode">MANUAL</a>
+            <a n="zmailAutoProvLdapSearchFilter">(cn=auth*)</a>
+            <a n="zmailAutoProvLdapSearchBase">OU=CommonUsers,DC=zmailqa,DC=com</a>
+            <a n="zmailAutoProvAccountNameMap">cn</a>
+            <a n="zmailAutoProvAttrMap">userPassword=userPassword</a>
         </CreateDomainRequest>
         
-        zmsoap  -z AutoProvAccountRequest domain=bug70720.com.zimbra.qa.unittest.prov.soap.testautoprovision.soaptest.unittest @by=name ../principal=authaccount04 @by=name          
+        zmsoap  -z AutoProvAccountRequest domain=bug70720.org.zmail.qa.unittest.prov.soap.testautoprovision.soaptest.unittest @by=name ../principal=authaccount04 @by=name          
         
         this zmsoap yields the following soap:
         
-        <AutoProvAccountRequest xmlns="urn:zimbraAdmin">
-            <domain by="name">bug70720.com.zimbra.qa.unittest.prov.soap.testautoprovision.soaptest.unittest</domain>
+        <AutoProvAccountRequest xmlns="urn:zmailAdmin">
+            <domain by="name">bug70720.org.zmail.qa.unittest.prov.soap.testautoprovision.soaptest.unittest</domain>
             <principal by="name">authaccount04</principal>
         </AutoProvAccountRequest>
         */

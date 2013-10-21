@@ -12,7 +12,7 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.wiki;
+package org.zmail.cs.wiki;
 
 import java.io.IOException;
 import java.text.DateFormat;
@@ -25,23 +25,23 @@ import java.util.List;
 import java.util.Map;
 import java.util.StringTokenizer;
 
-import com.zimbra.common.mime.MimeConstants;
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.common.util.ZimbraLog;
-import com.zimbra.cs.account.Account;
-import com.zimbra.cs.account.Provisioning;
-import com.zimbra.common.account.Key.AccountBy;
-import com.zimbra.cs.index.SortBy;
-import com.zimbra.cs.mailbox.Document;
-import com.zimbra.cs.mailbox.Folder;
-import com.zimbra.cs.mailbox.Mailbox;
-import com.zimbra.cs.mailbox.MailItem;
-import com.zimbra.cs.mailbox.WikiItem;
-import com.zimbra.cs.service.UserServlet;
-import com.zimbra.cs.service.doc.DocServiceException;
-import com.zimbra.cs.wiki.WikiPage.WikiContext;
-import com.zimbra.common.util.L10nUtil;
-import com.zimbra.common.util.L10nUtil.MsgKey;
+import org.zmail.common.mime.MimeConstants;
+import org.zmail.common.service.ServiceException;
+import org.zmail.common.util.ZmailLog;
+import org.zmail.cs.account.Account;
+import org.zmail.cs.account.Provisioning;
+import org.zmail.common.account.Key.AccountBy;
+import org.zmail.cs.index.SortBy;
+import org.zmail.cs.mailbox.Document;
+import org.zmail.cs.mailbox.Folder;
+import org.zmail.cs.mailbox.Mailbox;
+import org.zmail.cs.mailbox.MailItem;
+import org.zmail.cs.mailbox.WikiItem;
+import org.zmail.cs.service.UserServlet;
+import org.zmail.cs.service.doc.DocServiceException;
+import org.zmail.cs.wiki.WikiPage.WikiContext;
+import org.zmail.common.util.L10nUtil;
+import org.zmail.common.util.L10nUtil.MsgKey;
 
 /**
  * Wikis are now obsolete but this class has been retained to aid migrating legacy data.
@@ -364,7 +364,7 @@ public class WikiTemplate implements Comparable<WikiTemplate> {
         public abstract WikiTemplate findInclusion(Context ctxt) throws ServiceException,IOException;
         public String reportError(String errorMsg) {
             String msg = "Error handling wiklet " + getName() + ": " + errorMsg;
-            ZimbraLog.doc.error(msg);
+            ZmailLog.doc.error(msg);
             return msg;
         }
         protected String handleTemplates(Context ctxt,

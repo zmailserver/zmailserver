@@ -12,14 +12,14 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.session;
+package org.zmail.cs.session;
 
 import java.util.Set;
 
 import com.google.common.collect.Sets;
-import com.zimbra.common.util.ZimbraLog;
-import com.zimbra.cs.mailbox.MailItem;
-import com.zimbra.cs.service.util.SyncToken;
+import org.zmail.common.util.ZmailLog;
+import org.zmail.cs.mailbox.MailItem;
+import org.zmail.cs.service.util.SyncToken;
 
 /**
  * A session subclass which is used when an external entity wants to listen on a
@@ -78,23 +78,23 @@ public class WaitSetSession extends Session {
 
     @Override
     public void notifyPendingChanges(PendingModifications pns, int changeId, Session source) {
-        boolean trace = ZimbraLog.session.isTraceEnabled();
+        boolean trace = ZmailLog.session.isTraceEnabled();
         if (trace)
-            ZimbraLog.session.trace("Notifying WaitSetSession: change id=" + changeId +
+            ZmailLog.session.trace("Notifying WaitSetSession: change id=" + changeId +
                     ", highest change id=" + mHighestChangeId + ", sync token=" + mSyncToken);
         if (changeId > mHighestChangeId) {
             mHighestChangeId = changeId;
         }
         if (mSyncToken != null && mSyncToken.after(mHighestChangeId)) {
-            if (trace) ZimbraLog.session.trace("Not signaling waitset; sync token is later than highest change id");
+            if (trace) ZmailLog.session.trace("Not signaling waitset; sync token is later than highest change id");
             return; // don't signal, sync token stopped us
         }
         if (!Sets.intersection(interest, pns.changedTypes).isEmpty()) {
-            if (trace) ZimbraLog.session.trace("Signaling waitset");
+            if (trace) ZmailLog.session.trace("Signaling waitset");
             mWs.signalDataReady(this);
         } else {
-            if (trace) ZimbraLog.session.trace("Not signaling waitset; waitset is not interested in change type");
+            if (trace) ZmailLog.session.trace("Not signaling waitset; waitset is not interested in change type");
         }
-        if (trace) ZimbraLog.session.trace("WaitSetSession.notifyPendingChanges done");
+        if (trace) ZmailLog.session.trace("WaitSetSession.notifyPendingChanges done");
     }
 }

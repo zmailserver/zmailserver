@@ -14,16 +14,16 @@
  * 
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.service.admin;
+package org.zmail.cs.service.admin;
 
 import java.util.List;
 import java.util.Map;
 
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.common.soap.Element;
-import com.zimbra.cs.account.accesscontrol.AdminRight;
-import com.zimbra.soap.ZimbraSoapContext;
-import com.zimbra.soap.admin.message.NoOpResponse;
+import org.zmail.common.service.ServiceException;
+import org.zmail.common.soap.Element;
+import org.zmail.cs.account.accesscontrol.AdminRight;
+import org.zmail.soap.ZmailSoapContext;
+import org.zmail.soap.admin.message.NoOpResponse;
 
 /**
  * 
@@ -35,7 +35,7 @@ public class NoOp extends AdminDocumentHandler {
     @Override
     public Element handle(Element request, Map<String, Object> context)
             throws ServiceException {
-        ZimbraSoapContext zsc = getZimbraSoapContext(context);
+        ZmailSoapContext zsc = getZmailSoapContext(context);
         return zsc.jaxbToElement(new NoOpResponse());
     }
     

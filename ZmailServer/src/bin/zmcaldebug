@@ -30,15 +30,15 @@ sub printMsg($$) {
 
 sub getAdminUserPasswd() {
     my ($user, $passwd);
-    open(LC, "zmlocalconfig -s zimbra_ldap_user zimbra_ldap_password |")
+    open(LC, "zmlocalconfig -s zmail_ldap_user zmail_ldap_password |")
         or die "can't invoke zmlocalconfig: $!";
     my $line;
     while (defined($line = <LC>)) {
         chomp($line);
         my ($key, $val) = split(/ = /, $line, 2);
-	if ($key eq 'zimbra_ldap_user') {
+	if ($key eq 'zmail_ldap_user') {
             $user = $val;
-	} elsif ($key eq 'zimbra_ldap_password') {
+	} elsif ($key eq 'zmail_ldap_password') {
             $passwd = $val;
         }
     }
@@ -51,14 +51,14 @@ sub getAuthRequest($$) {
     my $req = <<_REQUEST_;
 <soap:Envelope xmlns:soap="http://www.w3.org/2003/05/soap-envelope">
   <soap:Header>
-    <context xmlns="urn:zimbra">
+    <context xmlns="urn:zmail">
       <authToken/>
       <nosession/>
       <userAgent name="$0"/>
     </context>
   </soap:Header>
   <soap:Body>
-    <AuthRequest xmlns="urn:zimbraAdmin">
+    <AuthRequest xmlns="urn:zmailAdmin">
       <name>$user</name>
       <password>$password</password>
     </AuthRequest>
@@ -91,7 +91,7 @@ sub makeAuthRequest($$$) {
 sub getMainEmailAddress($) {
     my $email = shift;
     my $mainEmail = $email;
-    my $attr = 'zimbraMailDeliveryAddress';
+    my $attr = 'zmailMailDeliveryAddress';
     my $cmd = "zmprov -l ga $email $attr";
     open(ZMPROV, "$cmd |") or die "can't invoke zmprov: $!";
     my $line;
@@ -113,8 +113,8 @@ sub queryMboxAndGroupIds($) {
     if (!defined($mainEmail)) {
         die "can't determine main email address for $email";
     }
-    my $query = "SELECT id, group_id FROM zimbra.mailbox WHERE comment='$mainEmail'";
-    my $cmd = "mysql -A zimbra -e \"$query\" -s --skip-column-names";
+    my $query = "SELECT id, group_id FROM zmail.mailbox WHERE comment='$mainEmail'";
+    my $cmd = "mysql -A zmail -e \"$query\" -s --skip-column-names";
     open(MYSQL, "$cmd |") or die "can't invoke $cmd: $!";
     my $line;
     if (defined($line = <MYSQL>)) {
@@ -133,8 +133,8 @@ sub queryMboxAndGroupIds($) {
 sub queryGroupId($) {
     my $mboxId = shift;
     my ($groupId, $email);
-    my $query = "SELECT group_id, comment FROM zimbra.mailbox WHERE id=$mboxId";
-    my $cmd = "mysql -A zimbra -e \"$query\" -s --skip-column-names";
+    my $query = "SELECT group_id, comment FROM zmail.mailbox WHERE id=$mboxId";
+    my $cmd = "mysql -A zmail -e \"$query\" -s --skip-column-names";
     open(MYSQL, "$cmd |") or die "can't invoke $cmd: $!";
     my $line;
     if (defined($line = <MYSQL>)) {
@@ -154,7 +154,7 @@ sub getCalItemIdAndSubjectFromUID($$$) {
     my ($mboxId, $groupId, $uid) = @_;
     my ($calItemId, $subject);
     my $query = "SELECT appt.item_id, mi.subject FROM mboxgroup$groupId.appointment appt, mboxgroup$groupId.mail_item mi WHERE appt.mailbox_id=$mboxId AND appt.uid='$uid' AND mi.mailbox_id=$mboxId AND mi.id=appt.item_id";
-    my $cmd = "mysql -A zimbra -e \"$query\" -s --skip-column-names";
+    my $cmd = "mysql -A zmail -e \"$query\" -s --skip-column-names";
     open(MYSQL, "$cmd |") or die "can't invoke $cmd: $!";
     my $line;
     if (defined($line = <MYSQL>)) {
@@ -193,7 +193,7 @@ sub makeRowHash($$) {
 
 sub runQuery($) {
     my $query = shift;
-    my $cmd = "mysql -A zimbra -e \"$query\" -t";
+    my $cmd = "mysql -A zmail -e \"$query\" -t";
     open(MYSQL, "$cmd |") or die "can't invoke $cmd: $!";
     my $queryOutput = "sql> $query;\n";
     my @colNames;

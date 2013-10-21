@@ -12,7 +12,7 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.fb;
+package org.zmail.cs.fb;
 
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
@@ -27,40 +27,40 @@ import java.util.Set;
 
 import javax.servlet.http.HttpServletRequest;
 
-import com.zimbra.cs.servlet.ZimbraServlet;
+import org.zmail.cs.servlet.ZmailServlet;
 import org.apache.commons.httpclient.HttpClient;
 import org.apache.commons.httpclient.HttpMethod;
 import org.apache.commons.httpclient.methods.GetMethod;
 
-import com.zimbra.common.calendar.ZCalendar.ICalTok;
-import com.zimbra.common.calendar.ZCalendar.ZCalendarBuilder;
-import com.zimbra.common.calendar.ZCalendar.ZComponent;
-import com.zimbra.common.calendar.ZCalendar.ZVCalendar;
-import com.zimbra.common.httpclient.HttpClientUtil;
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.common.soap.Element;
-import com.zimbra.common.soap.MailConstants;
-import com.zimbra.common.soap.SoapFaultException;
-import com.zimbra.common.util.ByteUtil;
-import com.zimbra.common.util.ZimbraHttpConnectionManager;
-import com.zimbra.common.util.ZimbraLog;
-import com.zimbra.cs.account.Account;
-import com.zimbra.cs.account.AuthTokenException;
-import com.zimbra.cs.account.Provisioning;
-import com.zimbra.cs.account.Server;
-import com.zimbra.common.account.Key;
-import com.zimbra.common.account.Key.AccountBy;
-import com.zimbra.cs.httpclient.HttpProxyUtil;
-import com.zimbra.cs.mailbox.MailItem;
-import com.zimbra.cs.service.UserServlet;
-import com.zimbra.cs.service.mail.ToXML;
-import com.zimbra.soap.DocumentHandler;
-import com.zimbra.soap.ProxyTarget;
-import com.zimbra.soap.ZimbraSoapContext;
+import org.zmail.common.calendar.ZCalendar.ICalTok;
+import org.zmail.common.calendar.ZCalendar.ZCalendarBuilder;
+import org.zmail.common.calendar.ZCalendar.ZComponent;
+import org.zmail.common.calendar.ZCalendar.ZVCalendar;
+import org.zmail.common.httpclient.HttpClientUtil;
+import org.zmail.common.service.ServiceException;
+import org.zmail.common.soap.Element;
+import org.zmail.common.soap.MailConstants;
+import org.zmail.common.soap.SoapFaultException;
+import org.zmail.common.util.ByteUtil;
+import org.zmail.common.util.ZmailHttpConnectionManager;
+import org.zmail.common.util.ZmailLog;
+import org.zmail.cs.account.Account;
+import org.zmail.cs.account.AuthTokenException;
+import org.zmail.cs.account.Provisioning;
+import org.zmail.cs.account.Server;
+import org.zmail.common.account.Key;
+import org.zmail.common.account.Key.AccountBy;
+import org.zmail.cs.httpclient.HttpProxyUtil;
+import org.zmail.cs.mailbox.MailItem;
+import org.zmail.cs.service.UserServlet;
+import org.zmail.cs.service.mail.ToXML;
+import org.zmail.soap.DocumentHandler;
+import org.zmail.soap.ProxyTarget;
+import org.zmail.soap.ZmailSoapContext;
 
 public class RemoteFreeBusyProvider extends FreeBusyProvider {
 
-    public RemoteFreeBusyProvider(HttpServletRequest httpReq, ZimbraSoapContext zsc,
+    public RemoteFreeBusyProvider(HttpServletRequest httpReq, ZmailSoapContext zsc,
                                   long start, long end, String exApptUid) {
         mRemoteAccountMap = new HashMap<String,StringBuilder>();
         mRequestList = new ArrayList<Request>();
@@ -73,11 +73,11 @@ public class RemoteFreeBusyProvider extends FreeBusyProvider {
 
     @Override
     public FreeBusyProvider getInstance() {
-        // special case this class as it's used to get free/busy of zimbra accounts
+        // special case this class as it's used to get free/busy of zmail accounts
         // on a remote mailbox host, and we can perform some shortcuts i.e.
         // returning the proxied response straight to the main response.
         // plus it requires additional resources such as original
-        // HttpServletRequest and ZimbraSoapContext.
+        // HttpServletRequest and ZmailSoapContext.
         return null;
     }
 
@@ -86,7 +86,7 @@ public class RemoteFreeBusyProvider extends FreeBusyProvider {
         Account account = (Account) req.data;
         if (account == null)
             return;
-        String hostname = account.getAttr(Provisioning.A_zimbraMailHost);
+        String hostname = account.getAttr(Provisioning.A_zmailMailHost);
         StringBuilder buf = mRemoteAccountMap.get(hostname);
         if (buf == null)
             buf = new StringBuilder(req.email);
@@ -125,12 +125,12 @@ public class RemoteFreeBusyProvider extends FreeBusyProvider {
                         authToken = mSoapCtxt.getAuthToken().getEncoded();
                 } catch (AuthTokenException e) {}
                 if (authToken != null) {
-                    targetUrl.append("&").append(ZimbraServlet.QP_ZAUTHTOKEN).append("=");
+                    targetUrl.append("&").append(ZmailServlet.QP_ZAUTHTOKEN).append("=");
                     try {
                         targetUrl.append(URLEncoder.encode(authToken, "UTF-8"));
                     } catch (UnsupportedEncodingException e) {}
                 }
-                HttpClient client = ZimbraHttpConnectionManager.getInternalHttpConnMgr().newHttpClient();
+                HttpClient client = ZmailHttpConnectionManager.getInternalHttpConnMgr().newHttpClient();
                 HttpProxyUtil.configureProxy(client);
                 method = new GetMethod(targetUrl.toString());
                 String fbMsg;
@@ -153,7 +153,7 @@ public class RemoteFreeBusyProvider extends FreeBusyProvider {
                     }
                 }
             } catch (ServiceException e) {
-                ZimbraLog.fb.warn("can't get free/busy information for "+req.email, e);
+                ZmailLog.fb.warn("can't get free/busy information for "+req.email, e);
             } finally {
                 if (method != null)
                     method.releaseConnection();
@@ -230,13 +230,13 @@ public class RemoteFreeBusyProvider extends FreeBusyProvider {
                     for (Element thisElt : remoteResponse.listElements())
                         response.addElement(thisElt.detach());
                 } else {
-                    ZimbraLog.fb.debug("Account " + idStrs[0] + " not found while searching free/busy");
+                    ZmailLog.fb.debug("Account " + idStrs[0] + " not found while searching free/busy");
                 }
             } catch (SoapFaultException e) {
-                ZimbraLog.fb.error("cannot get free/busy for "+idStrs[0], e);
+                ZmailLog.fb.error("cannot get free/busy for "+idStrs[0], e);
                 addFailedAccounts(response, idStrs);
             } catch (ServiceException e) {
-                ZimbraLog.fb.error("cannot get free/busy for "+idStrs[0], e);
+                ZmailLog.fb.error("cannot get free/busy for "+idStrs[0], e);
                 addFailedAccounts(response, idStrs);
             }
         }
@@ -251,7 +251,7 @@ public class RemoteFreeBusyProvider extends FreeBusyProvider {
     private Map<String,StringBuilder> mRemoteAccountMap;
     private ArrayList<Request> mRequestList;
     private HttpServletRequest mHttpReq;
-    private ZimbraSoapContext mSoapCtxt;
+    private ZmailSoapContext mSoapCtxt;
     private long mStart;
     private long mEnd;
     private String mExApptUid;  // UID of appointment to exclude from free/busy search
@@ -262,9 +262,9 @@ public class RemoteFreeBusyProvider extends FreeBusyProvider {
         }
     }
 
-    protected Element proxyRequest(Element request, String acctId, ZimbraSoapContext zsc) throws ServiceException {
+    protected Element proxyRequest(Element request, String acctId, ZmailSoapContext zsc) throws ServiceException {
         // new context for proxied request has a different "requested account"
-        ZimbraSoapContext zscTarget = new ZimbraSoapContext(zsc, acctId);
+        ZmailSoapContext zscTarget = new ZmailSoapContext(zsc, acctId);
         Provisioning prov = Provisioning.getInstance();
         Account acct = prov.get(Key.AccountBy.id, acctId);
         Server server = prov.getServer(acct);

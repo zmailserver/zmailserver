@@ -14,4 +14,4 @@
 # ***** END LICENSE BLOCK *****
 # 
 
-exec `dirname $0`/zmjava com.zimbra.cs.util.ProxyPurgeUtil "$@"
+exec `dirname $0`/zmjava org.zmail.cs.util.ProxyPurgeUtil "$@"

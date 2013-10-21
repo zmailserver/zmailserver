@@ -12,14 +12,14 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.service.doc;
+package org.zmail.cs.service.doc;
 
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.common.soap.MailConstants;
-import com.zimbra.common.soap.Element;
-import com.zimbra.cs.service.mail.MailDocumentHandler;
-import com.zimbra.cs.service.util.ItemId;
-import com.zimbra.soap.ZimbraSoapContext;
+import org.zmail.common.service.ServiceException;
+import org.zmail.common.soap.MailConstants;
+import org.zmail.common.soap.Element;
+import org.zmail.cs.service.mail.MailDocumentHandler;
+import org.zmail.cs.service.util.ItemId;
+import org.zmail.soap.ZmailSoapContext;
 
 public abstract class DocDocumentHandler extends MailDocumentHandler {
     private static final String[] TARGET_ID_PATH = new String[] { MailConstants.E_WIKIWORD, MailConstants.A_ID };
@@ -49,11 +49,11 @@ public abstract class DocDocumentHandler extends MailDocumentHandler {
     @Override
     protected boolean checkMountpointProxy(Element request)  { return true; }
 
-    protected String getAuthor(ZimbraSoapContext zsc) throws ServiceException {
+    protected String getAuthor(ZmailSoapContext zsc) throws ServiceException {
         return getAuthenticatedAccount(zsc).getName();
     }
 
-    protected ItemId getRequestedFolder(Element request, ZimbraSoapContext zsc) throws ServiceException {
+    protected ItemId getRequestedFolder(Element request, ZmailSoapContext zsc) throws ServiceException {
         for (Element elem : request.listElements()) {
             String fid = elem.getAttribute(MailConstants.A_FOLDER, null);
             if (fid != null) {

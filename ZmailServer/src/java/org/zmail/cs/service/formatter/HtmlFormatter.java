@@ -12,7 +12,7 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.service.formatter;
+package org.zmail.cs.service.formatter;
 
 import java.io.IOException;
 
@@ -23,48 +23,48 @@ import javax.servlet.ServletException;
 
 import org.apache.commons.httpclient.Header;
 
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.common.util.Pair;
-import com.zimbra.cs.account.Account;
-import com.zimbra.cs.account.AuthToken;
-import com.zimbra.cs.account.AuthTokenException;
-import com.zimbra.cs.account.GuestAccount;
-import com.zimbra.cs.account.Provisioning;
-import com.zimbra.cs.mailbox.Folder;
-import com.zimbra.cs.mailbox.MailItem;
-import com.zimbra.cs.mailbox.Mountpoint;
-import com.zimbra.cs.service.AuthProvider;
-import com.zimbra.cs.service.UserServlet;
-import com.zimbra.cs.service.UserServletContext;
-import com.zimbra.cs.service.UserServletException;
-import com.zimbra.cs.service.UserServlet.HttpInputStream;
-import com.zimbra.cs.service.formatter.FormatterFactory.FormatType;
+import org.zmail.common.service.ServiceException;
+import org.zmail.common.util.Pair;
+import org.zmail.cs.account.Account;
+import org.zmail.cs.account.AuthToken;
+import org.zmail.cs.account.AuthTokenException;
+import org.zmail.cs.account.GuestAccount;
+import org.zmail.cs.account.Provisioning;
+import org.zmail.cs.mailbox.Folder;
+import org.zmail.cs.mailbox.MailItem;
+import org.zmail.cs.mailbox.Mountpoint;
+import org.zmail.cs.service.AuthProvider;
+import org.zmail.cs.service.UserServlet;
+import org.zmail.cs.service.UserServletContext;
+import org.zmail.cs.service.UserServletException;
+import org.zmail.cs.service.UserServlet.HttpInputStream;
+import org.zmail.cs.service.formatter.FormatterFactory.FormatType;
 
 public class HtmlFormatter extends Formatter {
 
-    private static final String PATH_MAIN_CONTEXT  = "/zimbra";
+    private static final String PATH_MAIN_CONTEXT  = "/zmail";
     private static final String PATH_JSP_REST_PAGE = "/h/rest";
     private static final long   AUTH_EXPIRATION = 60L * 60L * 1000L;
 
-    private static final String ATTR_REQUEST_URI         = "zimbra_request_uri";
+    private static final String ATTR_REQUEST_URI         = "zmail_request_uri";
 
-    private static final String ATTR_INTERNAL_DISPATCH   = "zimbra_internal_dispatch";
-    private static final String ATTR_AUTH_TOKEN          = "zimbra_authToken";
-    private static final String ATTR_TARGET_ACCOUNT_NAME = "zimbra_target_account_name";
-    private static final String ATTR_TARGET_ACCOUNT_ID   = "zimbra_target_account_id";
-    private static final String ATTR_TARGET_ITEM_ID      = "zimbra_target_item_id";
-    private static final String ATTR_TARGET_ITEM_TYPE    = "zimbra_target_item_type";
-    private static final String ATTR_TARGET_ITEM_COLOR   = "zimbra_target_item_color";
-    private static final String ATTR_TARGET_ITEM_VIEW    = "zimbra_target_item_view";
-    private static final String ATTR_TARGET_ITEM_PATH    = "zimbra_target_item_path";
-    private static final String ATTR_TARGET_ITEM_NAME    = "zimbra_target_item_name";
+    private static final String ATTR_INTERNAL_DISPATCH   = "zmail_internal_dispatch";
+    private static final String ATTR_AUTH_TOKEN          = "zmail_authToken";
+    private static final String ATTR_TARGET_ACCOUNT_NAME = "zmail_target_account_name";
+    private static final String ATTR_TARGET_ACCOUNT_ID   = "zmail_target_account_id";
+    private static final String ATTR_TARGET_ITEM_ID      = "zmail_target_item_id";
+    private static final String ATTR_TARGET_ITEM_TYPE    = "zmail_target_item_type";
+    private static final String ATTR_TARGET_ITEM_COLOR   = "zmail_target_item_color";
+    private static final String ATTR_TARGET_ITEM_VIEW    = "zmail_target_item_view";
+    private static final String ATTR_TARGET_ITEM_PATH    = "zmail_target_item_path";
+    private static final String ATTR_TARGET_ITEM_NAME    = "zmail_target_item_name";
 
-    private static final String ATTR_TARGET_ACCOUNT_PREF_TIME_ZONE   = "zimbra_target_account_prefTimeZoneId";
-    private static final String ATTR_TARGET_ACCOUNT_PREF_SKIN   = "zimbra_target_account_prefSkin";
-    private static final String ATTR_TARGET_ACCOUNT_PREF_LOCALE   = "zimbra_target_account_prefLocale";
-    private static final String ATTR_TARGET_ACCOUNT_PREF_CALENDAR_FIRST_DAY_OF_WEEK   = "zimbra_target_account_prefCalendarFirstDayOfWeek";
-    private static final String ATTR_TARGET_ACCOUNT_PREF_CALENDAR_DAY_HOUR_START   = "zimbra_target_account_prefCalendarDayHourStart";
-    private static final String ATTR_TARGET_ACCOUNT_PREF_CALENDAR_DAY_HOUR_END  = "zimbra_target_account_prefCalendarDayHourEnd";
+    private static final String ATTR_TARGET_ACCOUNT_PREF_TIME_ZONE   = "zmail_target_account_prefTimeZoneId";
+    private static final String ATTR_TARGET_ACCOUNT_PREF_SKIN   = "zmail_target_account_prefSkin";
+    private static final String ATTR_TARGET_ACCOUNT_PREF_LOCALE   = "zmail_target_account_prefLocale";
+    private static final String ATTR_TARGET_ACCOUNT_PREF_CALENDAR_FIRST_DAY_OF_WEEK   = "zmail_target_account_prefCalendarFirstDayOfWeek";
+    private static final String ATTR_TARGET_ACCOUNT_PREF_CALENDAR_DAY_HOUR_START   = "zmail_target_account_prefCalendarDayHourStart";
+    private static final String ATTR_TARGET_ACCOUNT_PREF_CALENDAR_DAY_HOUR_END  = "zmail_target_account_prefCalendarDayHourEnd";
 
     @Override
     public void formatCallback(UserServletContext context) throws UserServletException,
@@ -119,13 +119,13 @@ public class HtmlFormatter extends Formatter {
             String remoteItemName = null;
             String remoteItemPath = null;
             for (Header h : remoteItem.getFirst())
-                if (h.getName().compareToIgnoreCase("X-Zimbra-ItemId") == 0)
+                if (h.getName().compareToIgnoreCase("X-Zmail-ItemId") == 0)
                     remoteItemId = h.getValue();
-                else if (h.getName().compareToIgnoreCase("X-Zimbra-ItemType") == 0)
+                else if (h.getName().compareToIgnoreCase("X-Zmail-ItemType") == 0)
                     remoteItemType = h.getValue();
-                else if (h.getName().compareToIgnoreCase("X-Zimbra-ItemName") == 0)
+                else if (h.getName().compareToIgnoreCase("X-Zmail-ItemName") == 0)
                     remoteItemName = h.getValue();
-                else if (h.getName().compareToIgnoreCase("X-Zimbra-ItemPath") == 0)
+                else if (h.getName().compareToIgnoreCase("X-Zmail-ItemPath") == 0)
                     remoteItemPath = h.getValue();
 
             context.req.setAttribute(ATTR_TARGET_ITEM_ID, remoteItemId);
@@ -143,12 +143,12 @@ public class HtmlFormatter extends Formatter {
         if (targetAccount != null) {
             context.req.setAttribute(ATTR_TARGET_ACCOUNT_NAME, targetAccount.getName());
             context.req.setAttribute(ATTR_TARGET_ACCOUNT_ID, targetAccount.getId());
-            context.req.setAttribute(ATTR_TARGET_ACCOUNT_PREF_TIME_ZONE, targetAccount.getAttr(Provisioning.A_zimbraPrefTimeZoneId));
-            context.req.setAttribute(ATTR_TARGET_ACCOUNT_PREF_SKIN, targetAccount.getAttr(Provisioning.A_zimbraPrefSkin));
-            context.req.setAttribute(ATTR_TARGET_ACCOUNT_PREF_LOCALE, targetAccount.getAttr(Provisioning.A_zimbraPrefLocale));
-            context.req.setAttribute(ATTR_TARGET_ACCOUNT_PREF_CALENDAR_FIRST_DAY_OF_WEEK, targetAccount.getAttr(Provisioning.A_zimbraPrefCalendarFirstDayOfWeek));
-            context.req.setAttribute(ATTR_TARGET_ACCOUNT_PREF_CALENDAR_DAY_HOUR_START, targetAccount.getAttr(Provisioning.A_zimbraPrefCalendarDayHourStart));
-            context.req.setAttribute(ATTR_TARGET_ACCOUNT_PREF_CALENDAR_DAY_HOUR_END, targetAccount.getAttr(Provisioning.A_zimbraPrefCalendarDayHourEnd));
+            context.req.setAttribute(ATTR_TARGET_ACCOUNT_PREF_TIME_ZONE, targetAccount.getAttr(Provisioning.A_zmailPrefTimeZoneId));
+            context.req.setAttribute(ATTR_TARGET_ACCOUNT_PREF_SKIN, targetAccount.getAttr(Provisioning.A_zmailPrefSkin));
+            context.req.setAttribute(ATTR_TARGET_ACCOUNT_PREF_LOCALE, targetAccount.getAttr(Provisioning.A_zmailPrefLocale));
+            context.req.setAttribute(ATTR_TARGET_ACCOUNT_PREF_CALENDAR_FIRST_DAY_OF_WEEK, targetAccount.getAttr(Provisioning.A_zmailPrefCalendarFirstDayOfWeek));
+            context.req.setAttribute(ATTR_TARGET_ACCOUNT_PREF_CALENDAR_DAY_HOUR_START, targetAccount.getAttr(Provisioning.A_zmailPrefCalendarDayHourStart));
+            context.req.setAttribute(ATTR_TARGET_ACCOUNT_PREF_CALENDAR_DAY_HOUR_END, targetAccount.getAttr(Provisioning.A_zmailPrefCalendarDayHourEnd));
         }
         if (targetItem != null) {
             context.req.setAttribute(ATTR_TARGET_ITEM_ID, targetItem.getId());

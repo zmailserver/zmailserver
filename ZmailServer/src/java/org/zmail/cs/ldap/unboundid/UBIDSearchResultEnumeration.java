@@ -12,16 +12,16 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.ldap.unboundid;
+package org.zmail.cs.ldap.unboundid;
 
 import java.util.Iterator;
 
 import com.unboundid.ldap.sdk.SearchResult;
 import com.unboundid.ldap.sdk.SearchResultEntry;
 
-import com.zimbra.cs.ldap.LdapException;
-import com.zimbra.cs.ldap.ZSearchResultEntry;
-import com.zimbra.cs.ldap.ZSearchResultEnumeration;
+import org.zmail.cs.ldap.LdapException;
+import org.zmail.cs.ldap.ZSearchResultEntry;
+import org.zmail.cs.ldap.ZSearchResultEnumeration;
 
 public class UBIDSearchResultEnumeration implements ZSearchResultEnumeration {
 

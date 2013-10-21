@@ -12,7 +12,7 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.qa.unittest;
+package org.zmail.qa.unittest;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -29,24 +29,24 @@ import java.util.regex.Pattern;
 
 import junit.framework.TestCase;
 
-import com.zimbra.client.ZEmailAddress;
-import com.zimbra.client.ZGetMessageParams;
-import com.zimbra.client.ZMailbox;
-import com.zimbra.client.ZMailbox.ZOutgoingMessage;
-import com.zimbra.client.ZMailbox.ZOutgoingMessage.AttachedMessagePart;
-import com.zimbra.client.ZMailbox.ZOutgoingMessage.MessagePart;
-import com.zimbra.client.ZMessage;
-import com.zimbra.client.ZMessage.ZMimePart;
-import com.zimbra.common.localconfig.LC;
-import com.zimbra.common.mime.MimeConstants;
-import com.zimbra.common.soap.SoapFaultException;
-import com.zimbra.common.util.ByteUtil;
-import com.zimbra.common.util.ZimbraLog;
-import com.zimbra.cs.account.Provisioning;
-import com.zimbra.cs.ldap.LdapConstants;
-import com.zimbra.cs.mailbox.MailSender;
-import com.zimbra.cs.mailbox.MailServiceException;
-import com.zimbra.cs.mailbox.Mailbox;
+import org.zmail.client.ZEmailAddress;
+import org.zmail.client.ZGetMessageParams;
+import org.zmail.client.ZMailbox;
+import org.zmail.client.ZMailbox.ZOutgoingMessage;
+import org.zmail.client.ZMailbox.ZOutgoingMessage.AttachedMessagePart;
+import org.zmail.client.ZMailbox.ZOutgoingMessage.MessagePart;
+import org.zmail.client.ZMessage;
+import org.zmail.client.ZMessage.ZMimePart;
+import org.zmail.common.localconfig.LC;
+import org.zmail.common.mime.MimeConstants;
+import org.zmail.common.soap.SoapFaultException;
+import org.zmail.common.util.ByteUtil;
+import org.zmail.common.util.ZmailLog;
+import org.zmail.cs.account.Provisioning;
+import org.zmail.cs.ldap.LdapConstants;
+import org.zmail.cs.mailbox.MailSender;
+import org.zmail.cs.mailbox.MailServiceException;
+import org.zmail.cs.mailbox.Mailbox;
 
 public class TestSendAndReceive extends TestCase {
 
@@ -63,8 +63,8 @@ public class TestSendAndReceive extends TestCase {
     @Override
     public void setUp() throws Exception {
         cleanUp();
-        mOriginalSmtpSendAddAuthenticatedUser = TestUtil.getConfigAttr(Provisioning.A_zimbraSmtpSendAddAuthenticatedUser);
-        mOriginalDomainSmtpPort = TestUtil.getDomainAttr(USER_NAME, Provisioning.A_zimbraSmtpPort);
+        mOriginalSmtpSendAddAuthenticatedUser = TestUtil.getConfigAttr(Provisioning.A_zmailSmtpSendAddAuthenticatedUser);
+        mOriginalDomainSmtpPort = TestUtil.getDomainAttr(USER_NAME, Provisioning.A_zmailSmtpPort);
         mOriginalSmtpHostname = Provisioning.getInstance().getLocalServer().getSmtpHostname();
     }
 
@@ -136,7 +136,7 @@ public class TestSendAndReceive extends TestCase {
         while (line != null) {
             Matcher matcher = PAT_RECEIVED.matcher(line);
             if (matcher.matches()) {
-                ZimbraLog.test.debug("Found " + line);
+                ZmailLog.test.debug("Found " + line);
                 foundReceived = true;
             }
 
@@ -144,7 +144,7 @@ public class TestSendAndReceive extends TestCase {
             if (matcher.matches()) {
                 foundReturnPath = true;
                 assertEquals("Sender doesn't match", sender, matcher.group(1));
-                ZimbraLog.test.debug("Found " + line);
+                ZmailLog.test.debug("Found " + line);
             }
             line = reader.readLine();
         }
@@ -156,19 +156,19 @@ public class TestSendAndReceive extends TestCase {
 
     /**
      * Confirms that the message received date is set to the value of the
-     * <tt>X-Zimbra-Received</tt> header.
+     * <tt>X-Zmail-Received</tt> header.
      */
-    public void testZimbraReceivedHeader()
+    public void testZmailReceivedHeader()
     throws Exception {
         ZMailbox mbox = TestUtil.getZMailbox(USER_NAME);
 
         // Add message.
         String msgContent = new String(ByteUtil.getContent(new File(
-            LC.zimbra_home.value() + "/unittest/testZimbraReceivedHeader.msg")));
+            LC.zmail_home.value() + "/unittest/testZmailReceivedHeader.msg")));
         TestUtil.addMessageLmtp(new String[] { USER_NAME }, USER_NAME, msgContent);
 
         // Test date.
-        List<ZMessage> messages = TestUtil.search(mbox, "subject:testZimbraReceivedHeader");
+        List<ZMessage> messages = TestUtil.search(mbox, "subject:testZmailReceivedHeader");
         assertEquals("Unexpected message count", 1, messages.size());
         ZMessage msg = messages.get(0);
         Calendar cal = Calendar.getInstance(mbox.getPrefs().getTimeZone());
@@ -180,21 +180,21 @@ public class TestSendAndReceive extends TestCase {
 
     /**
      * Confirms that <tt>X-Authenticated-User</tt> is set on outgoing messages when
-     * <tt>zimbraSmtpSendAddAuthenticatedUser</tt> is set to <tt>TRUE</tt>.
+     * <tt>zmailSmtpSendAddAuthenticatedUser</tt> is set to <tt>TRUE</tt>.
      */
     public void testAuthenticatedUserHeader()
     throws Exception {
         ZMailbox mbox = TestUtil.getZMailbox(USER_NAME);
 
         // X-Authenticated-User not sent.
-        TestUtil.setConfigAttr(Provisioning.A_zimbraSmtpSendAddAuthenticatedUser, LdapConstants.LDAP_FALSE);
+        TestUtil.setConfigAttr(Provisioning.A_zmailSmtpSendAddAuthenticatedUser, LdapConstants.LDAP_FALSE);
         String subject = NAME_PREFIX + " testAuthenticatedUserHeader false";
         TestUtil.sendMessage(mbox, USER_NAME, subject);
         ZMessage msg = TestUtil.waitForMessage(mbox, "in:inbox subject:\"" + subject + "\"");
         assertNull(TestUtil.getHeaderValue(mbox, msg, MailSender.X_AUTHENTICATED_USER));
 
         // X-Authenticated-User sent.
-        TestUtil.setConfigAttr(Provisioning.A_zimbraSmtpSendAddAuthenticatedUser, LdapConstants.LDAP_TRUE);
+        TestUtil.setConfigAttr(Provisioning.A_zmailSmtpSendAddAuthenticatedUser, LdapConstants.LDAP_TRUE);
         subject = NAME_PREFIX + " testAuthenticatedUserHeader true";
         TestUtil.sendMessage(mbox, USER_NAME, subject);
         msg = TestUtil.waitForMessage(mbox, "in:inbox subject:\"" + subject + "\"");
@@ -213,7 +213,7 @@ public class TestSendAndReceive extends TestCase {
         TestUtil.waitForMessage(mbox, "in:inbox subject:\"" + subject + "\"");
 
         // Set domain SMTP port to a bogus value and confirm that the send fails.
-        TestUtil.setDomainAttr(USER_NAME, Provisioning.A_zimbraSmtpPort, "35");
+        TestUtil.setDomainAttr(USER_NAME, Provisioning.A_zmailSmtpPort, "35");
         subject = NAME_PREFIX + " testDomainSmtpSettings 2";
         boolean sendFailed = false;
         try {
@@ -335,8 +335,8 @@ public class TestSendAndReceive extends TestCase {
     @Override
     public void tearDown() throws Exception {
         cleanUp();
-        TestUtil.setConfigAttr(Provisioning.A_zimbraSmtpSendAddAuthenticatedUser, mOriginalSmtpSendAddAuthenticatedUser);
-        TestUtil.setDomainAttr(USER_NAME, Provisioning.A_zimbraSmtpPort, mOriginalDomainSmtpPort);
+        TestUtil.setConfigAttr(Provisioning.A_zmailSmtpSendAddAuthenticatedUser, mOriginalSmtpSendAddAuthenticatedUser);
+        TestUtil.setDomainAttr(USER_NAME, Provisioning.A_zmailSmtpPort, mOriginalDomainSmtpPort);
         Provisioning.getInstance().getLocalServer().setSmtpHostname(mOriginalSmtpHostname);
     }
 

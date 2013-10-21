@@ -12,7 +12,7 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.qa.unittest.prov.ldap;
+package org.zmail.qa.unittest.prov.ldap;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -21,16 +21,16 @@ import java.util.Set;
 import org.junit.*;
 import static org.junit.Assert.*;
 
-import com.zimbra.cs.account.Account;
-import com.zimbra.cs.account.AccountServiceException;
-import com.zimbra.cs.account.Domain;
-import com.zimbra.cs.account.Provisioning;
-import com.zimbra.common.account.Key.AccountBy;
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.cs.ldap.unboundid.InMemoryLdapServer;
-import com.zimbra.qa.unittest.TestUtil;
-import com.zimbra.qa.unittest.prov.BinaryLdapData;
-import com.zimbra.soap.admin.type.CacheEntryType;
+import org.zmail.cs.account.Account;
+import org.zmail.cs.account.AccountServiceException;
+import org.zmail.cs.account.Domain;
+import org.zmail.cs.account.Provisioning;
+import org.zmail.common.account.Key.AccountBy;
+import org.zmail.common.service.ServiceException;
+import org.zmail.cs.ldap.unboundid.InMemoryLdapServer;
+import org.zmail.qa.unittest.TestUtil;
+import org.zmail.qa.unittest.prov.BinaryLdapData;
+import org.zmail.soap.admin.type.CacheEntryType;
 
 public class TestLdapProvModifyAttrs extends LdapTest {
     private static LdapProvTestUtil provUtil;
@@ -140,7 +140,7 @@ public class TestLdapProvModifyAttrs extends LdapTest {
     
     @Test
     public void addMultiValue() throws Exception {
-        String ATTR_NAME = Provisioning.A_zimbraACE;
+        String ATTR_NAME = Provisioning.A_zmailACE;
         String ATTR_VALUE_1 = "addMultiValue-1";
         String ATTR_VALUE_2 = "addMultiValue-2";
         String ATTR_VALUE_3 = "addMultiValue-3";
@@ -185,7 +185,7 @@ public class TestLdapProvModifyAttrs extends LdapTest {
     
     @Test
     public void removeMultiValue() throws Exception {
-        String ATTR_NAME = Provisioning.A_zimbraACE;
+        String ATTR_NAME = Provisioning.A_zmailACE;
         String ATTR_VALUE_1 = "removeMultiValue-1";
         String ATTR_VALUE_2 = "removeMultiValue-2";
         String ATTR_VALUE_3 = "removeMultiValue-3";
@@ -207,7 +207,7 @@ public class TestLdapProvModifyAttrs extends LdapTest {
     
     @Test
     public void unsetMultiValue() throws Exception {
-        String ATTR_NAME = Provisioning.A_zimbraACE;
+        String ATTR_NAME = Provisioning.A_zmailACE;
         String ATTR_VALUE_1 = "removeMultiValue-1";
         String ATTR_VALUE_2 = "removeMultiValue-2";
         String ATTR_VALUE_3 = "removeMultiValue-3";
@@ -228,7 +228,7 @@ public class TestLdapProvModifyAttrs extends LdapTest {
     @Test
     public void invalidAttrValue() throws Exception {
         // set multiple values to a single-valued attr
-        String ATTR_NAME = Provisioning.A_zimbraPrefSkin;
+        String ATTR_NAME = Provisioning.A_zmailPrefSkin;
         String ATTR_VALUE_1 = "invalidAttrValue-1";
         String ATTR_VALUE_2 = "invalidAttrValue-2";
         

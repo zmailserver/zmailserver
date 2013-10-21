@@ -12,16 +12,16 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.qa.unittest.prov.ldap;
+package org.zmail.qa.unittest.prov.ldap;
 
 import java.util.List;
 
 import org.junit.*;
 import static org.junit.Assert.*;
 
-import com.zimbra.cs.account.Provisioning;
-import com.zimbra.cs.mime.MimeTypeInfo;
-import com.zimbra.cs.mime.handler.UnknownTypeHandler;
+import org.zmail.cs.account.Provisioning;
+import org.zmail.cs.mime.MimeTypeInfo;
+import org.zmail.cs.mime.handler.UnknownTypeHandler;
 
 public class TestLdapProvMimeType extends LdapTest {
     private static Provisioning prov;

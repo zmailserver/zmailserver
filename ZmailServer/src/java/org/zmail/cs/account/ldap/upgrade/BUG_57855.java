@@ -12,29 +12,29 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.account.ldap.upgrade;
+package org.zmail.cs.account.ldap.upgrade;
 
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
 
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.common.util.StringUtil;
-import com.zimbra.cs.account.Config;
-import com.zimbra.cs.account.Provisioning;
+import org.zmail.common.service.ServiceException;
+import org.zmail.common.util.StringUtil;
+import org.zmail.cs.account.Config;
+import org.zmail.cs.account.Provisioning;
 
 public class BUG_57855 extends UpgradeOp {
 
     
     @Override
     void doUpgrade() throws ServiceException {
-        upgradeZimbraGalLdapFilterDef();
+        upgradeZmailGalLdapFilterDef();
     }
     
-    void upgradeZimbraGalLdapFilterDef() throws ServiceException {
+    void upgradeZmailGalLdapFilterDef() throws ServiceException {
         Config config = prov.getConfig();
         
-        String attrName = Provisioning.A_zimbraGalLdapFilterDef;
+        String attrName = Provisioning.A_zmailGalLdapFilterDef;
         String[] addValues = new String[] {
                 "email_has:(mail=*%s*)",
                 "email2_has:(mail=*%s*)",

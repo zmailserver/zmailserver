@@ -12,7 +12,7 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.dav.client;
+package org.zmail.cs.dav.client;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -27,14 +27,14 @@ import org.dom4j.Document;
 import org.dom4j.Element;
 import org.dom4j.QName;
 
-import com.zimbra.common.util.ByteUtil;
-import com.zimbra.common.util.ZimbraLog;
-import com.zimbra.common.mime.MimeConstants;
-import com.zimbra.cs.dav.DavContext.Depth;
-import com.zimbra.cs.dav.DavElements;
-import com.zimbra.cs.dav.DavException;
-import com.zimbra.cs.dav.DavProtocol;
-import com.zimbra.cs.service.UserServlet.HttpInputStream;
+import org.zmail.common.util.ByteUtil;
+import org.zmail.common.util.ZmailLog;
+import org.zmail.common.mime.MimeConstants;
+import org.zmail.cs.dav.DavContext.Depth;
+import org.zmail.cs.dav.DavElements;
+import org.zmail.cs.dav.DavException;
+import org.zmail.cs.dav.DavProtocol;
+import org.zmail.cs.service.UserServlet.HttpInputStream;
 
 public class CalDavClient extends WebDavClient {
 
@@ -74,7 +74,7 @@ public class CalDavClient extends WebDavClient {
             int status = m.getStatusCode();
             if (status >= 400)
                 return null;
-            Document doc = com.zimbra.common.soap.Element.getSAXReader().read(m.getResponseBodyAsStream());
+            Document doc = org.zmail.common.soap.Element.getSAXReader().read(m.getResponseBodyAsStream());
             Element top = doc.getRootElement();
             for (Object obj : top.elements(DavElements.E_RESPONSE)) {
                 if (obj instanceof Element) {
@@ -190,7 +190,7 @@ public class CalDavClient extends WebDavClient {
 	public String sendCalendarData(Appointment appt) throws IOException, DavException {
 		HttpInputStream resp = sendPut(appt.href, appt.data.getBytes("UTF-8"), MimeConstants.CT_TEXT_CALENDAR, appt.etag, null);
 		String etag = resp.getHeader(DavProtocol.HEADER_ETAG);
-		ZimbraLog.dav.debug("ETags: "+appt.etag+", "+etag);
+		ZmailLog.dav.debug("ETags: "+appt.etag+", "+etag);
 		int status = resp.getStatusCode();
 		if (status != HttpStatus.SC_OK && status != HttpStatus.SC_CREATED && status != HttpStatus.SC_NO_CONTENT) {
 			throw new DavException("Can't send calendar data (status="+status+")", status);

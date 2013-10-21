@@ -14,14 +14,14 @@
  * 
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.octosync.store;
+package org.zmail.cs.octosync.store;
 
 import java.io.IOException;
 import java.io.InputStream;
 
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.cs.store.Blob;
-import com.zimbra.cs.store.IncomingBlob;
+import org.zmail.common.service.ServiceException;
+import org.zmail.cs.store.Blob;
+import org.zmail.cs.store.IncomingBlob;
 
 
 /**

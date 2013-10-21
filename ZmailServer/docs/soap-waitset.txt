@@ -1,7 +1,7 @@
 WaitSet: scalable mechanism for listening for changes to one or more accounts
 --------------------------------------------------------------------------------
 
-Non-admin versions in the 'zimbraMail' Namespace:
+Non-admin versions in the 'zmailMail' Namespace:
 -------------------------------------------------
 <CreateWaitSetRequest>
 <CreateWaitSetResponse>
@@ -11,7 +11,7 @@ Non-admin versions in the 'zimbraMail' Namespace:
 <DestroyWaitSetResponse>
 
 
-Admin versions in the 'zimbraAdmin' Namespace:
+Admin versions in the 'zmailAdmin' Namespace:
 -------------------------------------------------
 <AdminCreateWaitSetRequest>
 <AdminCreateWaitSetResponse>
@@ -118,12 +118,12 @@ they know something about the particular underlying network.  The
 server may or may not honor this request (depending on server
 configured max/min values).  The server will allow a wider range of
 requested timeouts from admin auth tokens. See LocalConfig values:
-zimbra_waitset_default_request_timeout,
-zimbra_waitset_min_request_timeout, 
-zimbra_waitset_max_request_timeout,
-zimbra_admin_waitset_default_request_timeout,
-zimbra_admin_waitset_min_request_timeout, and
-zimbra_admin_waitset_max_request_timeout
+zmail_waitset_default_request_timeout,
+zmail_waitset_min_request_timeout, 
+zmail_waitset_max_request_timeout,
+zmail_admin_waitset_default_request_timeout,
+zmail_admin_waitset_min_request_timeout, and
+zmail_admin_waitset_max_request_timeout
 
 
 ================
@@ -207,7 +207,7 @@ There are three basic use cases for WaitSets:
 
 
 2) Wait on many accounts (admin-only -- Remember to use the
-   zimbraAdmin namespace):
+   zmailAdmin namespace):
 <AdminCreateWaitSetRequest defTypes="TYPES"/>
    <add>
       <a id="ACCTID" [token="lastKnownSyncToken"]/>

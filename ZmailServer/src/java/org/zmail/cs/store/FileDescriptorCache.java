@@ -13,7 +13,7 @@
  * ***** END LICENSE BLOCK *****
  */
 
-package com.zimbra.cs.store;
+package org.zmail.cs.store;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -27,15 +27,15 @@ import java.util.List;
 import java.util.Map;
 import java.util.zip.GZIPInputStream;
 
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.common.stats.Counter;
-import com.zimbra.common.util.FileCache;
-import com.zimbra.common.util.FileUtil;
-import com.zimbra.common.util.Log;
-import com.zimbra.common.util.LogFactory;
-import com.zimbra.common.util.ZimbraLog;
-import com.zimbra.cs.account.Provisioning;
-import com.zimbra.cs.account.Server;
+import org.zmail.common.service.ServiceException;
+import org.zmail.common.stats.Counter;
+import org.zmail.common.util.FileCache;
+import org.zmail.common.util.FileUtil;
+import org.zmail.common.util.Log;
+import org.zmail.common.util.LogFactory;
+import org.zmail.common.util.ZmailLog;
+import org.zmail.cs.account.Provisioning;
+import org.zmail.cs.account.Server;
 
 /**
  * Caches file descriptors to blobs in the mail store.  If the blob is compressed,
@@ -84,7 +84,7 @@ public class FileDescriptorCache
         int fileDescriptorCacheSize = server.getMailFileDescriptorCacheSize();
 
         sLog.info("Loading settings: %s=%d.",
-            Provisioning.A_zimbraMailFileDescriptorCacheSize, fileDescriptorCacheSize);
+            Provisioning.A_zmailMailFileDescriptorCacheSize, fileDescriptorCacheSize);
 
         setMaxSize(fileDescriptorCacheSize);
 
@@ -256,7 +256,7 @@ public class FileDescriptorCache
                     if (success)
                         iter.remove();
                 } catch (IOException e) {
-                    ZimbraLog.store.warn("Unable to close file descriptor for " + info.path, e);
+                    ZmailLog.store.warn("Unable to close file descriptor for " + info.path, e);
                     iter.remove();
                 }
             }
@@ -294,7 +294,7 @@ public class FileDescriptorCache
                     mInactiveCache.add(new SharedFileInfo(path, file));
                 }
             } catch (IOException e) {
-                ZimbraLog.store.warn("Unable to close file descriptor for " + path, e);
+                ZmailLog.store.warn("Unable to close file descriptor for " + path, e);
             }
         }
 

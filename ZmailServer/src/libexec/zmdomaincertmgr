@@ -20,17 +20,17 @@ if [ x`whoami` != "xroot" ]; then
 fi
 umask 027
 
-platform=$(/opt/zimbra/libexec/get_plat_tag.sh 2> /dev/null := UNKNOWN)
-source /opt/zimbra/bin/zmshutil || exit 1
+platform=$(/opt/zmail/libexec/get_plat_tag.sh 2> /dev/null := UNKNOWN)
+source /opt/zmail/bin/zmshutil || exit 1
 zmsetvars -f \
-  zimbra_home \
-  zimbra_log_directory \
-  zimbra_server_hostname \
-  zimbra_tmp_directory \
-  zimbra_java_home \
-  zimbra_uid \
-  zimbra_gid \
-  zimbra_zmcertmgr_expiration_threshold \
+  zmail_home \
+  zmail_log_directory \
+  zmail_server_hostname \
+  zmail_tmp_directory \
+  zmail_java_home \
+  zmail_uid \
+  zmail_gid \
+  zmail_zmcertmgr_expiration_threshold \
   ldap_is_master \
   ldap_host \
   mailboxd_directory \
@@ -41,43 +41,43 @@ zmsetvars -f \
   postfix_smtpd_tls_cert_file \
   postfix_smtpd_tls_key_file
   
-export JAVA_HOME=${zimbra_java_home}
+export JAVA_HOME=${zmail_java_home}
 
-java_version=$(${zimbra_java_home}/bin/java -version 2>&1 | grep "java version" | sed -e 's/"//g' | awk '{print $NF}' | awk -F_ '{print $1}')
+java_version=$(${zmail_java_home}/bin/java -version 2>&1 | grep "java version" | sed -e 's/"//g' | awk '{print $NF}' | awk -F_ '{print $1}')
 if [ x"$java_version" = "x1.6.0" ]; then
-  java_options="-XX:ErrorFile=${zimbra_home}/log"
+  java_options="-XX:ErrorFile=${zmail_home}/log"
 else
   java_options=""
 fi
 
-zimbra_home=${zimbra_home:=/opt/zimbra}
-zimbra_conf_directory=${zimbra_home}/conf
-exp_thres_days=${zimbra_zmcertmgr_expiration_threshold:=30}
+zmail_home=${zmail_home:=/opt/zmail}
+zmail_conf_directory=${zmail_home}/conf
+exp_thres_days=${zmail_zmcertmgr_expiration_threshold:=30}
 exp_thres_secs=$(($exp_thres_days*24*60*60))
 
-zimbra_domain_cert_directory=${zimbra_conf_directory}/domaincerts
+zmail_domain_cert_directory=${zmail_conf_directory}/domaincerts
 
-if [ -x "${zimbra_home}/openssl/bin/openssl" ]; then
-  openssl=${zimbra_home}/openssl/bin/openssl
+if [ -x "${zmail_home}/openssl/bin/openssl" ]; then
+  openssl=${zmail_home}/openssl/bin/openssl
 else
   openssl=openssl
 fi
 
 # this avoid "unable to write 'random state' errors from openssl
-export RANDFILE=${zimbra_home}/ssl/.rnd
+export RANDFILE=${zmail_home}/ssl/.rnd
 
 #OUTPUT_PREFIX="##### OUTPUT:"
 ERROR_PREFIX="XXXXX ERROR:"
 
-if [ -f "${zimbra_java_home}/lib/security/cacerts" ]; then
-  CACERTS=${zimbra_java_home}/lib/security/cacerts
+if [ -f "${zmail_java_home}/lib/security/cacerts" ]; then
+  CACERTS=${zmail_java_home}/lib/security/cacerts
 else
-  CACERTS=${zimbra_java_home}/jre/lib/security/cacerts
+  CACERTS=${zmail_java_home}/jre/lib/security/cacerts
 fi
 
 isLdapRunning() {
 
-  su - zimbra -c "/opt/zimbra/bin/ldap status > /dev/null 2>&1"
+  su - zmail -c "/opt/zmail/bin/ldap status > /dev/null 2>&1"
   LDAP_IS_RUNNING=$?
   
 }
@@ -90,7 +90,7 @@ saveConfigKey() {
   if [ $location = "global" ]; then
     local zmprov_opts="mcf"
   elif [ $location = "server" ]; then
-    local zmprov_opts="ms ${zimbra_server_hostname}"
+    local zmprov_opts="ms ${zmail_server_hostname}"
   elif [ $location = "domain" ]; then
     local domain=$4
     local zmprov_opts="md ${domain}"
@@ -100,7 +100,7 @@ saveConfigKey() {
   fi
 
   echo -n "** Saving $location config key $key..."
-  su - zimbra -c "${zimbra_home}/bin/zmprov -m -l -- ${zmprov_opts} ${key} \"$content\" 2> /dev/null"
+  su - zmail -c "${zmail_home}/bin/zmprov -m -l -- ${zmprov_opts} ${key} \"$content\" 2> /dev/null"
   if [ $? = 0 ]; then
     echo "done."
   else
@@ -117,7 +117,7 @@ loadConfigKey() {
   elif [ $location = "server" ]; then
     local server=$4
     if [ x"${server}" = "x" ]; then
-      server=${zimbra_server_hostname}
+      server=${zmail_server_hostname}
     fi
     local zmprov_opts="gs ${server}"
   elif [ $location = "domain" ]; then
@@ -127,14 +127,14 @@ loadConfigKey() {
     echo "Unknown config section $location"
     return
   fi
-  TMPDIR=${zimbra_tmp_directory}
+  TMPDIR=${zmail_tmp_directory}
   local tmpfile=`mktemp -t zmcertmgr.XXXXXX 2> /dev/null` || (echo "Failed to create tmpfile" && exit 1)
-  chown ${zimbra_uid} ${tmpfile}
+  chown ${zmail_uid} ${tmpfile}
   if [ ! -s ${file} ]; then
     echo -n "** Retrieving $location config key $key..."
-    su - zimbra -c "${zimbra_home}/bin/zmprov -m -l -- ${zmprov_opts} ${key} | sed  -e 's/^${key}: //' > ${tmpfile} 2> /dev/null" 2>/dev/null && mv -f ${tmpfile} ${file} 2> /dev/null
+    su - zmail -c "${zmail_home}/bin/zmprov -m -l -- ${zmprov_opts} ${key} | sed  -e 's/^${key}: //' > ${tmpfile} 2> /dev/null" 2>/dev/null && mv -f ${tmpfile} ${file} 2> /dev/null
     if [ $? = 0 -a -s "${file}" ]; then
-      chown ${zimbra_uid} ${file} 2> /dev/null
+      chown ${zmail_uid} ${file} 2> /dev/null
       chmod 400 ${file} 2> /dev/null
       echo "done."
     else
@@ -147,10 +147,10 @@ loadConfigKey() {
 deployCerts() {
 
   if [ "x$1" = "x-force" ]; then
-    rm -rf ${zimbra_domain_cert_directory} > /dev/null 2>&1
+    rm -rf ${zmail_domain_cert_directory} > /dev/null 2>&1
   fi
   
-  DOMAINS=$(su - zimbra -c "${zimbra_home}/bin/zmprov -m -l -- garpd | awk '{print \$1}'")
+  DOMAINS=$(su - zmail -c "${zmail_home}/bin/zmprov -m -l -- garpd | awk '{print \$1}'")
   if [ $? != 0 ]; then
     echo "Unable to retrieve list of domains with SSL certificates";
     exit 1
@@ -185,8 +185,8 @@ saveDomainCertToLdap() {
     return
   fi
 
-  saveConfigKey "zimbraSSLCertificate" ${current_crt} "domain" ${domain}
-  saveConfigKey "zimbraSSLPrivateKey" ${current_key} "domain" ${domain}
+  saveConfigKey "zmailSSLCertificate" ${current_crt} "domain" ${domain}
+  saveConfigKey "zmailSSLPrivateKey" ${current_key} "domain" ${domain}
 }
 
 getDomainCertFromLdap() {
@@ -194,16 +194,16 @@ getDomainCertFromLdap() {
   if [ x"$domain" = "x" ]; then
     echo "$ERROR_PREFIX Domain must be specified"
   fi
-  if [ ! -d ${zimbra_domain_cert_directory} ]; then
-    mkdir -p ${zimbra_domain_cert_directory}
+  if [ ! -d ${zmail_domain_cert_directory} ]; then
+    mkdir -p ${zmail_domain_cert_directory}
   fi
-  chown ${zimbra_uid}:${zimbra_gid} ${zimbra_domain_cert_directory} 2> /dev/null
-  chmod 755 ${zimbra_domain_cert_directory} 2> /dev/null
-  current_crt=${zimbra_domain_cert_directory}/${domain}.crt
-  current_key=${zimbra_domain_cert_directory}/${domain}.key
+  chown ${zmail_uid}:${zmail_gid} ${zmail_domain_cert_directory} 2> /dev/null
+  chmod 755 ${zmail_domain_cert_directory} 2> /dev/null
+  current_crt=${zmail_domain_cert_directory}/${domain}.crt
+  current_key=${zmail_domain_cert_directory}/${domain}.key
 
-  loadConfigKey "zimbraSSLCertificate" ${current_crt} "domain" ${domain}
-  loadConfigKey "zimbraSSLPrivateKey" ${current_key} "domain" ${domain}
+  loadConfigKey "zmailSSLCertificate" ${current_crt} "domain" ${domain}
+  loadConfigKey "zmailSSLPrivateKey" ${current_key} "domain" ${domain}
 }
 
 viewstagedcrt() {
@@ -277,7 +277,7 @@ checkCertExpiration() {
   fi
 
   if [ $VIEW = "all" -o $VIEW = "mta" ]; then
-    service_crt=/opt/zimbra/conf/smtpd.crt
+    service_crt=/opt/zmail/conf/smtpd.crt
     #echo "::service mta::"
     if [ -f "${service_crt}" ]; then
       ${openssl} x509  -in ${service_crt} -noout -checkend ${exp_thres_secs}
@@ -292,7 +292,7 @@ checkCertExpiration() {
   fi
 
   if [ $VIEW = "all" -o $VIEW = "proxy" ]; then
-    service_crt=/opt/zimbra/conf/nginx.crt
+    service_crt=/opt/zmail/conf/nginx.crt
     #echo "::service proxy::"
     if [ -f "${service_crt}" ]; then
       ${openssl} x509  -in ${service_crt} -noout -checkend ${exp_thres_secs}
@@ -307,11 +307,11 @@ checkCertExpiration() {
   fi
   
   if [ $VIEW = "all" -o $VIEW = "mailboxd" ]; then
-    service_der=/opt/zimbra/mailboxd/etc/mailboxd.der
-    service_crt=/opt/zimbra/mailboxd/etc/mailboxd.pem
+    service_der=/opt/zmail/mailboxd/etc/mailboxd.der
+    service_crt=/opt/zmail/mailboxd/etc/mailboxd.pem
     #echo "::service mailboxd::"
     tmpfile=`mktemp -t zmcertmgr.XXXXXX 2> /dev/null` || (echo "${ERROR_PREFIX} Failed to create tmpfile" && exit 1)
-    ${zimbra_java_home}/bin/keytool -export -file ${service_der} -alias ${mailboxd_server} \
+    ${zmail_java_home}/bin/keytool -export -file ${service_der} -alias ${mailboxd_server} \
       -keystore ${mailboxd_keystore} -storepass ${mailboxd_keystore_password} > ${tmpfile} 2>&1
     if [ $? != 0 ]; then
       echo "${ERROR_PREFIX} failed to export ${service_crt} from keystore."
@@ -334,7 +334,7 @@ checkCertExpiration() {
   fi
 
   if [ $VIEW = "all" -o $VIEW = "ldap" ]; then
-    service_crt=/opt/zimbra/conf/slapd.crt
+    service_crt=/opt/zmail/conf/slapd.crt
     #echo "::service ldap::"
     if [ -f "${service_crt}" ]; then
       ${openssl} x509  -in ${service_crt} -noout -checkend ${exp_thres_secs}
@@ -362,7 +362,7 @@ viewdeployedcrt() {
   fi
 
   if [ $VIEW = "all" -o $VIEW = "mta" ]; then
-    service_crt=/opt/zimbra/conf/smtpd.crt
+    service_crt=/opt/zmail/conf/smtpd.crt
     echo "::service mta::"
     if [ -f "${service_crt}" ]; then
       ${openssl} x509  -in ${service_crt} -dates -subject -issuer -noout
@@ -373,7 +373,7 @@ viewdeployedcrt() {
   fi
 
   if [ $VIEW = "all" -o $VIEW = "proxy" ]; then
-    service_crt=/opt/zimbra/conf/nginx.crt
+    service_crt=/opt/zmail/conf/nginx.crt
     echo "::service proxy::"
     if [ -f "${service_crt}" ]; then
       ${openssl} x509  -in ${service_crt} -dates -subject -issuer -noout
@@ -384,11 +384,11 @@ viewdeployedcrt() {
   fi
   
   if [ $VIEW = "all" -o $VIEW = "mailboxd" ]; then
-    service_der=/opt/zimbra/mailboxd/etc/mailboxd.der
-    service_crt=/opt/zimbra/mailboxd/etc/mailboxd.pem
+    service_der=/opt/zmail/mailboxd/etc/mailboxd.der
+    service_crt=/opt/zmail/mailboxd/etc/mailboxd.pem
     echo "::service mailboxd::"
     tmpfile=`mktemp -t zmcertmgr.XXXXXX 2> /dev/null` || (echo "${ERROR_PREFIX} Failed to create tmpfile" && exit 1)
-    ${zimbra_java_home}/bin/keytool -export -file ${service_der} -alias ${mailboxd_server} \
+    ${zmail_java_home}/bin/keytool -export -file ${service_der} -alias ${mailboxd_server} \
       -keystore ${mailboxd_keystore} -storepass ${mailboxd_keystore_password} > ${tmpfile} 2>&1
     if [ $? != 0 ]; then
       echo "${ERROR_PREFIX} failed to export ${service_crt} from keystore."
@@ -407,7 +407,7 @@ viewdeployedcrt() {
   fi
 
   if [ $VIEW = "all" -o $VIEW = "ldap" ]; then
-    service_crt=/opt/zimbra/conf/slapd.crt
+    service_crt=/opt/zmail/conf/slapd.crt
     echo "::service ldap::"
     if [ -f "${service_crt}" ]; then
       ${openssl} x509  -in ${service_crt} -dates -subject -issuer -noout

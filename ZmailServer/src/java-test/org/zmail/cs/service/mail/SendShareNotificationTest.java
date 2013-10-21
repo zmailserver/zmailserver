@@ -12,7 +12,7 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.service.mail;
+package org.zmail.cs.service.mail;
 
 import java.io.IOException;
 import java.util.Arrays;
@@ -33,24 +33,24 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 
 import com.google.common.collect.Maps;
-import com.zimbra.common.account.Key;
-import com.zimbra.common.mime.MimeConstants;
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.common.soap.Element;
-import com.zimbra.common.soap.MailConstants;
-import com.zimbra.cs.account.Account;
-import com.zimbra.cs.account.Provisioning;
-import com.zimbra.cs.account.ShareInfoData;
-import com.zimbra.cs.mailbox.ACL;
-import com.zimbra.cs.mailbox.Folder;
-import com.zimbra.cs.mailbox.MailItem;
-import com.zimbra.cs.mailbox.MailSender;
-import com.zimbra.cs.mailbox.Mailbox;
-import com.zimbra.cs.mailbox.MailboxTestUtil;
-import com.zimbra.cs.mailbox.Mailbox.MailboxData;
-import com.zimbra.cs.mailbox.MailboxManager;
-import com.zimbra.cs.service.util.ItemId;
-import com.zimbra.soap.mail.message.SendShareNotificationRequest;
+import org.zmail.common.account.Key;
+import org.zmail.common.mime.MimeConstants;
+import org.zmail.common.service.ServiceException;
+import org.zmail.common.soap.Element;
+import org.zmail.common.soap.MailConstants;
+import org.zmail.cs.account.Account;
+import org.zmail.cs.account.Provisioning;
+import org.zmail.cs.account.ShareInfoData;
+import org.zmail.cs.mailbox.ACL;
+import org.zmail.cs.mailbox.Folder;
+import org.zmail.cs.mailbox.MailItem;
+import org.zmail.cs.mailbox.MailSender;
+import org.zmail.cs.mailbox.Mailbox;
+import org.zmail.cs.mailbox.MailboxTestUtil;
+import org.zmail.cs.mailbox.Mailbox.MailboxData;
+import org.zmail.cs.mailbox.MailboxManager;
+import org.zmail.cs.service.util.ItemId;
+import org.zmail.soap.mail.message.SendShareNotificationRequest;
 
 public class SendShareNotificationTest extends SendShareNotification {
 
@@ -86,18 +86,18 @@ public class SendShareNotificationTest extends SendShareNotification {
         Provisioning prov = Provisioning.getInstance();
 
         Map<String, Object> attrs = Maps.newHashMap();
-        prov.createDomain("zimbra.com", attrs);
+        prov.createDomain("zmail.com", attrs);
 
         attrs = Maps.newHashMap();
-        prov.createAccount("test@zimbra.com", "secret", attrs);
+        prov.createAccount("test@zmail.com", "secret", attrs);
 
         attrs = Maps.newHashMap();
-        attrs.put(Provisioning.A_zimbraId, UUID.randomUUID().toString());
-        prov.createAccount("test2@zimbra.com", "secret", attrs);
+        attrs.put(Provisioning.A_zmailId, UUID.randomUUID().toString());
+        prov.createAccount("test2@zmail.com", "secret", attrs);
 
         attrs = Maps.newHashMap();
-        attrs.put(Provisioning.A_zimbraId, UUID.randomUUID().toString());
-        prov.createAccount("test3@zimbra.com", "secret", attrs);
+        attrs.put(Provisioning.A_zmailId, UUID.randomUUID().toString());
+        prov.createAccount("test3@zmail.com", "secret", attrs);
 
         // this MailboxManager does everything except actually send mail
         MailboxManager.setInstance(new MailboxManager() {
@@ -131,8 +131,8 @@ public class SendShareNotificationTest extends SendShareNotification {
     @Test
     public void shareByOwner() throws Exception {
         revoke = false;
-        Account acct = Provisioning.getInstance().get(Key.AccountBy.name, "test@zimbra.com");
-        Account acct2 = Provisioning.getInstance().get(Key.AccountBy.name, "test2@zimbra.com");
+        Account acct = Provisioning.getInstance().get(Key.AccountBy.name, "test@zmail.com");
+        Account acct2 = Provisioning.getInstance().get(Key.AccountBy.name, "test2@zmail.com");
 
         Mailbox mbox = MailboxManager.getInstance().getMailboxByAccount(acct);
         Folder f = mbox.createFolder(null, "f1", Mailbox.ID_FOLDER_BRIEFCASE, new Folder.FolderOptions().setDefaultView(MailItem.Type.DOCUMENT));
@@ -141,16 +141,16 @@ public class SendShareNotificationTest extends SendShareNotification {
 
         Element request = new Element.XMLElement(MailConstants.SEND_SHARE_NOTIFICATION_REQUEST);
         request.addElement(MailConstants.E_ITEM).addAttribute(MailConstants.A_ID, f.getId());
-        request.addElement(MailConstants.E_EMAIL).addAttribute(MailConstants.A_ADDRESS, "test2@zimbra.com");
+        request.addElement(MailConstants.E_EMAIL).addAttribute(MailConstants.A_ADDRESS, "test2@zmail.com");
         handle(request, ServiceTestUtil.getRequestContext(acct));
     }
 
     @Test
     public void shareByAdmin() throws Exception {
         revoke = false;
-        Account acct = Provisioning.getInstance().get(Key.AccountBy.name, "test@zimbra.com");
-        Account acct2 = Provisioning.getInstance().get(Key.AccountBy.name, "test2@zimbra.com");
-        Account acct3 = Provisioning.getInstance().get(Key.AccountBy.name, "test3@zimbra.com");
+        Account acct = Provisioning.getInstance().get(Key.AccountBy.name, "test@zmail.com");
+        Account acct2 = Provisioning.getInstance().get(Key.AccountBy.name, "test2@zmail.com");
+        Account acct3 = Provisioning.getInstance().get(Key.AccountBy.name, "test3@zmail.com");
 
         Mailbox mbox = MailboxManager.getInstance().getMailboxByAccount(acct);
         Folder f = mbox.createFolder(null, "f1", Mailbox.ID_FOLDER_BRIEFCASE, new Folder.FolderOptions().setDefaultView(MailItem.Type.DOCUMENT));
@@ -160,14 +160,14 @@ public class SendShareNotificationTest extends SendShareNotification {
 
         Element request = new Element.XMLElement(MailConstants.SEND_SHARE_NOTIFICATION_REQUEST);
         request.addElement(MailConstants.E_ITEM).addAttribute(MailConstants.A_ID, new ItemId(acct.getId(), f.getId()).toString());
-        request.addElement(MailConstants.E_EMAIL).addAttribute(MailConstants.A_ADDRESS, "test3@zimbra.com");
+        request.addElement(MailConstants.E_EMAIL).addAttribute(MailConstants.A_ADDRESS, "test3@zmail.com");
         handle(request, ServiceTestUtil.getRequestContext(acct));
     }
 
     @Test
     public void revoke() throws Exception {
         revoke = true;
-        Account acct = Provisioning.getInstance().get(Key.AccountBy.name, "test@zimbra.com");
+        Account acct = Provisioning.getInstance().get(Key.AccountBy.name, "test@zmail.com");
 
         Mailbox mbox = MailboxManager.getInstance().getMailboxByAccount(acct);
         Folder f = mbox.createFolder(null, "f1", Mailbox.ID_FOLDER_BRIEFCASE, new Folder.FolderOptions().setDefaultView(MailItem.Type.DOCUMENT));
@@ -175,7 +175,7 @@ public class SendShareNotificationTest extends SendShareNotification {
         Element request = new Element.XMLElement(MailConstants.SEND_SHARE_NOTIFICATION_REQUEST);
         request.addAttribute(MailConstants.A_ACTION, "revoke");
         request.addElement(MailConstants.E_ITEM).addAttribute(MailConstants.A_ID, f.getId());
-        request.addElement(MailConstants.E_EMAIL).addAttribute(MailConstants.A_ADDRESS, "test2@zimbra.com");
+        request.addElement(MailConstants.E_EMAIL).addAttribute(MailConstants.A_ADDRESS, "test2@zmail.com");
         handle(request, ServiceTestUtil.getRequestContext(acct));
     }
 }

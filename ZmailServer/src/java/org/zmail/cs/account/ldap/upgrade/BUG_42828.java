@@ -12,52 +12,52 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.account.ldap.upgrade;
+package org.zmail.cs.account.ldap.upgrade;
 
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import com.zimbra.common.mailbox.ContactConstants;
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.common.util.StringUtil;
-import com.zimbra.cs.account.Config;
-import com.zimbra.cs.account.Entry;
-import com.zimbra.cs.account.Provisioning;
-import com.zimbra.cs.account.Server;
+import org.zmail.common.mailbox.ContactConstants;
+import org.zmail.common.service.ServiceException;
+import org.zmail.common.util.StringUtil;
+import org.zmail.cs.account.Config;
+import org.zmail.cs.account.Entry;
+import org.zmail.cs.account.Provisioning;
+import org.zmail.cs.account.Server;
 
 public class BUG_42828 extends UpgradeOp {
 
     @Override
     void doUpgrade() throws ServiceException {
-        upgrade_zimbraGalLdapAttrMap();
-        upgrade_zimbraContactHiddenAttributes();
+        upgrade_zmailGalLdapAttrMap();
+        upgrade_zmailContactHiddenAttributes();
     }
     
-    void upgrade_zimbraGalLdapAttrMap() throws ServiceException {
+    void upgrade_zmailGalLdapAttrMap() throws ServiceException {
         
-        String attrName = Provisioning.A_zimbraGalLdapAttrMap;
+        String attrName = Provisioning.A_zmailGalLdapAttrMap;
         
         Config config = prov.getConfig();
         
         printer.println();
         printer.println("Checking " + config.getLabel() + " for " + attrName);
         
-        String oldCalResType = "zimbraCalResType=zimbraCalResType";
-        String newCalResType = "zimbraCalResType,msExchResourceSearchProperties=zimbraCalResType";
+        String oldCalResType = "zmailCalResType=zmailCalResType";
+        String newCalResType = "zmailCalResType,msExchResourceSearchProperties=zmailCalResType";
         
-        String oldCalResLocationDisplayName = "zimbraCalResLocationDisplayName=zimbraCalResLocationDisplayName";
-        String newCalResLocationDisplayName = "zimbraCalResLocationDisplayName,displayName=zimbraCalResLocationDisplayName";
+        String oldCalResLocationDisplayName = "zmailCalResLocationDisplayName=zmailCalResLocationDisplayName";
+        String newCalResLocationDisplayName = "zmailCalResLocationDisplayName,displayName=zmailCalResLocationDisplayName";
         
-        String oldMailForwardingAddress = "zimbraMailForwardingAddress=zimbraMailForwardingAddress";
-        String newMailForwardingAddress = "zimbraMailForwardingAddress=member";
+        String oldMailForwardingAddress = "zmailMailForwardingAddress=zmailMailForwardingAddress";
+        String newMailForwardingAddress = "zmailMailForwardingAddress=member";
         
-        String zimbraCalResBuilding = "zimbraCalResBuilding=zimbraCalResBuilding";
-        String zimbraCalResCapacity = "zimbraCalResCapacity,msExchResourceCapacity=zimbraCalResCapacity";
-        String zimbraCalResFloor = "zimbraCalResFloor=zimbraCalResFloor";
-        String zimbraCalResSite = "zimbraCalResSite=zimbraCalResSite";
-        String zimbraCalResContactEmail = "zimbraCalResContactEmail=zimbraCalResContactEmail";
-        String zimbraAccountCalendarUserType = "msExchResourceSearchProperties=zimbraAccountCalendarUserType";
+        String zmailCalResBuilding = "zmailCalResBuilding=zmailCalResBuilding";
+        String zmailCalResCapacity = "zmailCalResCapacity,msExchResourceCapacity=zmailCalResCapacity";
+        String zmailCalResFloor = "zmailCalResFloor=zmailCalResFloor";
+        String zmailCalResSite = "zmailCalResSite=zmailCalResSite";
+        String zmailCalResContactEmail = "zmailCalResContactEmail=zmailCalResContactEmail";
+        String zmailAccountCalendarUserType = "msExchResourceSearchProperties=zmailAccountCalendarUserType";
         
         String[] curValues = config.getMultiAttr(attrName);
         
@@ -68,12 +68,12 @@ public class BUG_42828 extends UpgradeOp {
             replaceIfNeeded(attrs, attrName, curValue, oldMailForwardingAddress, newMailForwardingAddress);
         }
 
-        addValue(attrs, attrName, zimbraCalResBuilding);
-        addValue(attrs, attrName, zimbraCalResCapacity);
-        addValue(attrs, attrName, zimbraCalResFloor);
-        addValue(attrs, attrName, zimbraCalResSite);
-        addValue(attrs, attrName, zimbraCalResContactEmail);
-        addValue(attrs, attrName, zimbraAccountCalendarUserType);
+        addValue(attrs, attrName, zmailCalResBuilding);
+        addValue(attrs, attrName, zmailCalResCapacity);
+        addValue(attrs, attrName, zmailCalResFloor);
+        addValue(attrs, attrName, zmailCalResSite);
+        addValue(attrs, attrName, zmailCalResContactEmail);
+        addValue(attrs, attrName, zmailAccountCalendarUserType);
         
         if (attrs.size() > 0) {
             printer.println("Modifying " + attrName + " on " + config.getLabel());
@@ -81,16 +81,16 @@ public class BUG_42828 extends UpgradeOp {
         }
     }
 
-    private void upgrade_zimbraContactHiddenAttributes(Entry entry, String entryName) throws ServiceException {
+    private void upgrade_zmailContactHiddenAttributes(Entry entry, String entryName) throws ServiceException {
         
-        String attrName = Provisioning.A_zimbraContactHiddenAttributes;
+        String attrName = Provisioning.A_zmailContactHiddenAttributes;
         
         printer.println();
         printer.println("Checking " + entryName + " for " + attrName);
         
         String curValue = entry.getAttr(attrName);
         
-        // remove zimbraCalResType,zimbraCalResLocationDisplayName,zimbraCalResCapacity,zimbraCalResContactEmail 
+        // remove zmailCalResType,zmailCalResLocationDisplayName,zmailCalResCapacity,zmailCalResContactEmail 
         // add member
         String newHiddenAttrs = "";
         if (curValue != null) {
@@ -98,11 +98,11 @@ public class BUG_42828 extends UpgradeOp {
             boolean seenMember = false;
             boolean first = true;
             for (String hiddenAttr : curHiddenAttrs) {
-                if (!Provisioning.A_zimbraCalResType.equalsIgnoreCase(hiddenAttr) &&
-                    !Provisioning.A_zimbraCalResLocationDisplayName.equalsIgnoreCase(hiddenAttr) &&
-                    !Provisioning.A_zimbraCalResCapacity.equalsIgnoreCase(hiddenAttr) &&
-                    !Provisioning.A_zimbraCalResContactEmail.equalsIgnoreCase(hiddenAttr) &&
-                    !Provisioning.A_zimbraAccountCalendarUserType.equalsIgnoreCase(hiddenAttr)) {
+                if (!Provisioning.A_zmailCalResType.equalsIgnoreCase(hiddenAttr) &&
+                    !Provisioning.A_zmailCalResLocationDisplayName.equalsIgnoreCase(hiddenAttr) &&
+                    !Provisioning.A_zmailCalResCapacity.equalsIgnoreCase(hiddenAttr) &&
+                    !Provisioning.A_zmailCalResContactEmail.equalsIgnoreCase(hiddenAttr) &&
+                    !Provisioning.A_zmailAccountCalendarUserType.equalsIgnoreCase(hiddenAttr)) {
                     if (!first)
                         newHiddenAttrs += ",";
                     else
@@ -123,10 +123,10 @@ public class BUG_42828 extends UpgradeOp {
             }
         }
         if (newHiddenAttrs.length() == 0)
-            newHiddenAttrs = "dn,zimbraAccountCalendarUserType,vcardUID,vcardURL,vcardXProps" + ContactConstants.A_member;
+            newHiddenAttrs = "dn,zmailAccountCalendarUserType,vcardUID,vcardURL,vcardXProps" + ContactConstants.A_member;
         
         Map<String, Object> attrs = new HashMap<String, Object>();
-        attrs.put(Provisioning.A_zimbraContactHiddenAttributes, newHiddenAttrs);
+        attrs.put(Provisioning.A_zmailContactHiddenAttributes, newHiddenAttrs);
         
         if (attrs.size() > 0) {
             printer.println("Modifying " + attrName + " on " + entryName + " from " + curValue + " to " + newHiddenAttrs);
@@ -134,14 +134,14 @@ public class BUG_42828 extends UpgradeOp {
         }
     }
     
-    private void upgrade_zimbraContactHiddenAttributes() throws ServiceException {
+    private void upgrade_zmailContactHiddenAttributes() throws ServiceException {
         Config config = prov.getConfig();
-        upgrade_zimbraContactHiddenAttributes(config, config.getLabel());
+        upgrade_zmailContactHiddenAttributes(config, config.getLabel());
         
         List<Server> servers = prov.getAllServers();
         
         for (Server server : servers) {
-            upgrade_zimbraContactHiddenAttributes(server, "server " + server.getLabel());
+            upgrade_zmailContactHiddenAttributes(server, "server " + server.getLabel());
         }
     }
     

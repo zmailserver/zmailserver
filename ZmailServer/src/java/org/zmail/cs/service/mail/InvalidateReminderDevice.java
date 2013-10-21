@@ -14,19 +14,19 @@
  * 
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.service.mail;
+package org.zmail.cs.service.mail;
 
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.common.soap.Element;
-import com.zimbra.common.soap.MailConstants;
-import com.zimbra.cs.account.Account;
-import com.zimbra.cs.account.Provisioning;
-import com.zimbra.soap.ZimbraSoapContext;
+import org.zmail.common.service.ServiceException;
+import org.zmail.common.soap.Element;
+import org.zmail.common.soap.MailConstants;
+import org.zmail.cs.account.Account;
+import org.zmail.cs.account.Provisioning;
+import org.zmail.soap.ZmailSoapContext;
 
 import java.util.Map;
 
 /**
- * Unsets the zimbraCalendarReminderDeviceEmail account attr
+ * Unsets the zmailCalendarReminderDeviceEmail account attr
  */
 public class InvalidateReminderDevice extends MailDocumentHandler {
 
@@ -34,7 +34,7 @@ public class InvalidateReminderDevice extends MailDocumentHandler {
     public Element handle(Element request, Map<String, Object> context)
     throws ServiceException {
         String emailAddr = request.getAttribute(MailConstants.A_ADDRESS);
-        ZimbraSoapContext zsc = getZimbraSoapContext(context);
+        ZmailSoapContext zsc = getZmailSoapContext(context);
         Account account = getRequestedAccount(zsc);
         String configuredAddr = account.getCalendarReminderDeviceEmail();
         if (emailAddr.equals(configuredAddr))
@@ -42,7 +42,7 @@ public class InvalidateReminderDevice extends MailDocumentHandler {
         else
             throw ServiceException.INVALID_REQUEST("Email address'" +
                     emailAddr + "' is not same as the " +
-                    Provisioning.A_zimbraCalendarReminderDeviceEmail +
+                    Provisioning.A_zmailCalendarReminderDeviceEmail +
                     " attr value '" + configuredAddr + "'", null);
         return zsc.createElement(
                 MailConstants.INVALIDATE_REMINDER_DEVICE_RESPONSE);

@@ -12,7 +12,7 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.util;
+package org.zmail.cs.util;
 
 import java.io.File;
 import java.io.IOException;
@@ -49,23 +49,23 @@ import org.apache.commons.cli.Option;
 import org.apache.commons.cli.HelpFormatter;
 import org.apache.commons.cli.ParseException;
 
-import com.zimbra.common.account.Key;
-import com.zimbra.common.account.Key.ServerBy;
-import com.zimbra.common.localconfig.LC;
-import com.zimbra.common.util.DateUtil;
-import com.zimbra.common.util.Log;
-import com.zimbra.common.util.LogFactory;
-import com.zimbra.common.util.CliUtil;
-import com.zimbra.common.util.StringUtil;
-import com.zimbra.common.service.ServiceException;
+import org.zmail.common.account.Key;
+import org.zmail.common.account.Key.ServerBy;
+import org.zmail.common.localconfig.LC;
+import org.zmail.common.util.DateUtil;
+import org.zmail.common.util.Log;
+import org.zmail.common.util.LogFactory;
+import org.zmail.common.util.CliUtil;
+import org.zmail.common.util.StringUtil;
+import org.zmail.common.service.ServiceException;
 
-import com.zimbra.cs.account.Provisioning;
-import com.zimbra.cs.account.ldap.LdapProv;
-import com.zimbra.cs.account.NamedEntry;
-import com.zimbra.cs.account.Server;
-import com.zimbra.cs.account.Entry;
-import com.zimbra.cs.extension.ExtensionDispatcherServlet;
-import com.zimbra.cs.util.BuildInfo;
+import org.zmail.cs.account.Provisioning;
+import org.zmail.cs.account.ldap.LdapProv;
+import org.zmail.cs.account.NamedEntry;
+import org.zmail.cs.account.Server;
+import org.zmail.cs.account.Entry;
+import org.zmail.cs.extension.ExtensionDispatcherServlet;
+import org.zmail.cs.util.BuildInfo;
 
 enum ProxyConfOverride {
     NONE,
@@ -316,8 +316,8 @@ abstract class WebEnablerVar extends ProxyConfVar {
                 ProxyConfValueType.ENABLER, ProxyConfOverride.CUSTOM, description);
     }
 
-    static String getZimbraReverseProxyMailMode() {
-        return serverSource.getAttr(Provisioning.A_zimbraReverseProxyMailMode, "both");
+    static String getZmailReverseProxyMailMode() {
+        return serverSource.getAttr(Provisioning.A_zmailReverseProxyMailMode, "both");
     }
 }
 
@@ -326,12 +326,12 @@ class HttpEnablerVar extends WebEnablerVar {
     public HttpEnablerVar() {
         super("web.http.enabled", true, 
                 "Indicates whether HTTP Proxy will accept connections on HTTP " +
-                "(true unless zimbraReverseProxyMailMode is 'https')");
+                "(true unless zmailReverseProxyMailMode is 'https')");
     }
     
     @Override
     public void update() {
-        String mailmode = getZimbraReverseProxyMailMode();
+        String mailmode = getZmailReverseProxyMailMode();
         if ("https".equalsIgnoreCase(mailmode)) {
              mValue = false;
         } else {
@@ -344,11 +344,11 @@ class HttpsEnablerVar extends WebEnablerVar {
     public HttpsEnablerVar() {
         super("web.https.enabled", true, 
                 "Indicates whether HTTP Proxy will accept connections on HTTPS " +
-                "(true unless zimbraReverseProxyMailMode is 'http')");
+                "(true unless zmailReverseProxyMailMode is 'http')");
     }
     @Override
     public void update() {
-        String mailmode = getZimbraReverseProxyMailMode();
+        String mailmode = getZmailReverseProxyMailMode();
         if ("http".equalsIgnoreCase(mailmode)) {
             mValue = false;
         } else {
@@ -373,10 +373,10 @@ abstract class IPModeEnablerVar extends ProxyConfVar {
         IPV6_ONLY
     }
     
-    static IPMode getZimbraIPMode()
+    static IPMode getZmailIPMode()
     {
         if (currentIPMode == IPMode.UNKNOWN) {
-            String res = ProxyConfVar.serverSource.getAttr(Provisioning.A_zimbraIPMode, "both");
+            String res = ProxyConfVar.serverSource.getAttr(Provisioning.A_zmailIPMode, "both");
             if (res.equalsIgnoreCase("both")) {
                 currentIPMode = IPMode.BOTH;
             } else if (res.equalsIgnoreCase("ipv4")) {
@@ -398,7 +398,7 @@ class IPBothEnablerVar extends IPModeEnablerVar {
     
     @Override
     public void update() {
-        IPMode ipmode = getZimbraIPMode();
+        IPMode ipmode = getZmailIPMode();
         mValue=(ipmode == IPMode.BOTH)?true:false;    
     }
 }
@@ -411,7 +411,7 @@ class IPv4OnlyEnablerVar extends IPModeEnablerVar {
     
     @Override
     public void update() {
-        IPMode ipmode = getZimbraIPMode();
+        IPMode ipmode = getZmailIPMode();
         mValue=(ipmode == IPMode.IPV4_ONLY)?true:false;    
     }
 }
@@ -424,7 +424,7 @@ class IPv6OnlyEnablerVar extends IPModeEnablerVar {
     
     @Override
     public void update() {
-        IPMode ipmode = getZimbraIPMode();
+        IPMode ipmode = getZmailIPMode();
         mValue=(ipmode == IPMode.IPV6_ONLY)?true:false;    
     }
 }
@@ -432,16 +432,16 @@ class IPv6OnlyEnablerVar extends IPModeEnablerVar {
 class Pop3GreetingVar extends ProxyConfVar {
 
     public Pop3GreetingVar() {
-        super("mail.pop3.greeting", "zimbraReverseProxyPop3ExposeVersionOnBanner", "",
+        super("mail.pop3.greeting", "zmailReverseProxyPop3ExposeVersionOnBanner", "",
                 ProxyConfValueType.STRING, ProxyConfOverride.CONFIG, 
                 "Proxy IMAP banner message (contains build version if " +
-                "zimbraReverseProxyImapExposeVersionOnBanner is true)");
+                "zmailReverseProxyImapExposeVersionOnBanner is true)");
     }
     
     @Override
     public void update() {
-        if (serverSource.getBooleanAttr("zimbraReverseProxyPop3ExposeVersionOnBanner", false)) {
-            mValue = "+OK " + "Zimbra " + BuildInfo.VERSION + " POP3 ready";
+        if (serverSource.getBooleanAttr("zmailReverseProxyPop3ExposeVersionOnBanner", false)) {
+            mValue = "+OK " + "Zmail " + BuildInfo.VERSION + " POP3 ready";
         } else {
             mValue = "";
         }
@@ -451,16 +451,16 @@ class Pop3GreetingVar extends ProxyConfVar {
 class ImapGreetingVar extends ProxyConfVar {
 
     public ImapGreetingVar() {
-        super("mail.imap.greeting", "zimbraReverseProxyImapExposeVersionOnBanner", "",
+        super("mail.imap.greeting", "zmailReverseProxyImapExposeVersionOnBanner", "",
                 ProxyConfValueType.STRING, ProxyConfOverride.CONFIG, 
                 "Proxy IMAP banner message (contains build version if " +
-                "zimbraReverseProxyImapExposeVersionOnBanner is true)");
+                "zmailReverseProxyImapExposeVersionOnBanner is true)");
     }
     
     @Override
     public void update() {
-        if (serverSource.getBooleanAttr("zimbraReverseProxyImapExposeVersionOnBanner",false)) {
-            mValue = "* OK " + "Zimbra " + BuildInfo.VERSION + " IMAP4 ready";
+        if (serverSource.getBooleanAttr("zmailReverseProxyImapExposeVersionOnBanner",false)) {
+            mValue = "* OK " + "Zmail " + BuildInfo.VERSION + " IMAP4 ready";
         } else {
             mValue = "";
         }
@@ -505,9 +505,9 @@ class MemcacheServersVar extends ProxyConfVar {
         List<Server> mcs = mProv.getAllServers(Provisioning.SERVICE_MEMCACHED);
         for (Server mc : mcs) {
             String serverName = mc.getAttr(
-                    Provisioning.A_zimbraServiceHostname, "");
+                    Provisioning.A_zmailServiceHostname, "");
             int serverPort = mc.getIntAttr(
-                    Provisioning.A_zimbraMemcachedBindPort, 11211);
+                    Provisioning.A_zmailMemcachedBindPort, 11211);
             InetAddress ip = ProxyConfUtil.getLookupTargetIPbyIPMode(serverName);
             
             Formatter f = new Formatter();
@@ -553,8 +553,8 @@ class LookupHandlersVar extends ProxyConfVar {
         List<Server> allServers = mProv.getAllServers();
         int REVERSE_PROXY_PORT = 7072;
         for (Server s: allServers) {
-            String sn = s.getAttr(Provisioning.A_zimbraServiceHostname,"");
-            boolean isTarget = s.getBooleanAttr(Provisioning.A_zimbraReverseProxyLookupTarget, false);
+            String sn = s.getAttr(Provisioning.A_zmailServiceHostname,"");
+            boolean isTarget = s.getBooleanAttr(Provisioning.A_zmailReverseProxyLookupTarget, false);
             if (isTarget) {
             	InetAddress ip = ProxyConfUtil.getLookupTargetIPbyIPMode(sn);
 				
@@ -583,7 +583,7 @@ class RouteHandlersVar extends LookupHandlersVar {
     public RouteHandlersVar() {
         super("web.:routehandlers",
               "List of web route lookup handlers (i.e. servers " +
-              "for which zimbraReverseProxyLookupTarget is true)");
+              "for which zmailReverseProxyLookupTarget is true)");
     }
     
     @Override
@@ -609,7 +609,7 @@ class AuthHttpHandlersVar extends LookupHandlersVar {
     public AuthHttpHandlersVar() {
         super("mail.:auth_http",
               "List of mail route lookup handlers (i.e. servers " +
-              "for which zimbraReverseProxyLookupTarget is true)");
+              "for which zmailReverseProxyLookupTarget is true)");
     }
     
     @Override
@@ -647,7 +647,7 @@ abstract class ServersVar extends ProxyConfVar {
         ArrayList<String> directives = new ArrayList<String>();
         String portName = configSource.getAttr(mPortAttrName, "");
 
-        String[] upstreams = serverSource.getMultiAttr("zimbraReverseProxyUpstreamServers");
+        String[] upstreams = serverSource.getMultiAttr("zmailReverseProxyUpstreamServers");
         if (upstreams.length > 0) {
             for (String serverName: upstreams) {
                 Server server = mProv.getServerByName(serverName);
@@ -662,7 +662,7 @@ abstract class ServersVar extends ProxyConfVar {
     
             for (Server server: servers) {
                String serverName = server.getAttr(
-                        Provisioning.A_zimbraServiceHostname, "");
+                        Provisioning.A_zmailServiceHostname, "");
                 if (isValidUpstream(server, serverName)) {
                     directives.add(generateServerDirective(server, serverName, portName));
                     mLog.info("Added server to HTTP upstream: " + serverName);
@@ -675,12 +675,12 @@ abstract class ServersVar extends ProxyConfVar {
     
     boolean isValidUpstream(Server server, String serverName) {
         boolean isTarget = server.getBooleanAttr(
-                Provisioning.A_zimbraReverseProxyLookupTarget, false);
+                Provisioning.A_zmailReverseProxyLookupTarget, false);
         if(!isTarget) {
             return false;
         }
         
-        String mode = server.getAttr(Provisioning.A_zimbraMailMode, "");
+        String mode = server.getAttr(Provisioning.A_zmailMailMode, "");
         if (mode.equalsIgnoreCase(Provisioning.MailMode.http.toString())
                 || mode.equalsIgnoreCase(Provisioning.MailMode.mixed
                         .toString())
@@ -702,8 +702,8 @@ abstract class ServersVar extends ProxyConfVar {
     String generateServerDirective(Server server, String serverName, String portName) {
         int serverPort = server.getIntAttr(portName, 0);
         int timeout = server.getIntAttr(
-                Provisioning.A_zimbraMailProxyReconnectTimeout, 60);
-        int maxFails = server.getIntAttr("zimbraMailProxyMaxFails", 1);
+                Provisioning.A_zmailMailProxyReconnectTimeout, 60);
+        int maxFails = server.getIntAttr("zmailMailProxyMaxFails", 1);
         if (maxFails != 1) {
             return String.format("%s:%d fail_timeout=%ds max_fails=%d", serverName, serverPort,
                     timeout, maxFails);
@@ -733,9 +733,9 @@ abstract class ServersVar extends ProxyConfVar {
 class WebUpstreamServersVar extends ServersVar {
     
     public WebUpstreamServersVar() {
-        super("web.upstream.:servers", Provisioning.A_zimbraReverseProxyHttpPortAttribute,
+        super("web.upstream.:servers", Provisioning.A_zmailReverseProxyHttpPortAttribute,
                 "List of upstream HTTP servers used by Web Proxy (i.e. servers " +
-                "for which zimbraReverseProxyLookupTarget is true, and whose " +
+                "for which zmailReverseProxyLookupTarget is true, and whose " +
                 "mail mode is http|mixed|both)");
     }
 }
@@ -743,9 +743,9 @@ class WebUpstreamServersVar extends ServersVar {
 class WebSSLUpstreamServersVar extends ServersVar {
     
     public WebSSLUpstreamServersVar() {
-        super("web.ssl.upstream.:servers", Provisioning.A_zimbraReverseProxyHttpSSLPortAttribute,
+        super("web.ssl.upstream.:servers", Provisioning.A_zmailReverseProxyHttpSSLPortAttribute,
                 "List of upstream HTTPS servers used by Web Proxy (i.e. servers " +
-                "for which zimbraReverseProxyLookupTarget is true, and whose " +
+                "for which zmailReverseProxyLookupTarget is true, and whose " +
                 "mail mode is https|mixed|both)");
     }
 }
@@ -753,9 +753,9 @@ class WebSSLUpstreamServersVar extends ServersVar {
 class WebAdminUpstreamServersVar extends ServersVar {
     
     public WebAdminUpstreamServersVar() {
-        super("web.admin.upstream.:servers", Provisioning.A_zimbraReverseProxyAdminPortAttribute,
+        super("web.admin.upstream.:servers", Provisioning.A_zmailReverseProxyAdminPortAttribute,
                 "List of upstream admin console servers used by Web Proxy (i.e. servers " +
-                "for which zimbraReverseProxyLookupTarget is true");
+                "for which zmailReverseProxyLookupTarget is true");
     }
 }
 
@@ -783,7 +783,7 @@ class ImapCapaVar extends ProxyConfVar {
 
         ArrayList<String> capabilities = new ArrayList<String>();
         String[] capabilityNames = 
-            serverSource.getMultiAttr("zimbraReverseProxyImapEnabledCapability");
+            serverSource.getMultiAttr("zmailReverseProxyImapEnabledCapability");
         for (String c:capabilityNames)
         {
             capabilities.add(c);
@@ -832,7 +832,7 @@ class Pop3CapaVar extends ProxyConfVar {
 
         ArrayList<String> capabilities = new ArrayList<String>();
         String[] capabilityNames = serverSource
-                .getMultiAttr("zimbraReverseProxyPop3EnabledCapability");
+                .getMultiAttr("zmailReverseProxyPop3EnabledCapability");
         for (String c : capabilityNames) {
             capabilities.add(c);
         }
@@ -861,12 +861,12 @@ class Pop3CapaVar extends ProxyConfVar {
 class ZMLookupHandlerVar extends ProxyConfVar{
     public ZMLookupHandlerVar() {
         super("zmlookup.:handlers",
-              "zimbraReverseProxyLookupTarget",
+              "zmailReverseProxyLookupTarget",
               new ArrayList<String>(),
               ProxyConfValueType.CUSTOM,
               ProxyConfOverride.CUSTOM,
               "List of nginx lookup handlers (i.e. servers for which" +
-              " zimbraReverseProxyLookupTarget is true)");
+              " zmailReverseProxyLookupTarget is true)");
     }
     
     @Override
@@ -874,12 +874,12 @@ class ZMLookupHandlerVar extends ProxyConfVar{
         ArrayList<String> servers = new ArrayList<String>();
         int REVERSE_PROXY_PORT = 7072;
         
-        String[] handlerNames = serverSource.getMultiAttr("zimbraReverseProxyAvailableLookupTargets");
+        String[] handlerNames = serverSource.getMultiAttr("zmailReverseProxyAvailableLookupTargets");
         if (handlerNames.length > 0) {
             for (String handlerName: handlerNames) {
                 Server s = mProv.getServerByName(handlerName);
-                String sn = s.getAttr(Provisioning.A_zimbraServiceHostname, "");
-                boolean isTarget = s.getBooleanAttr(Provisioning.A_zimbraReverseProxyLookupTarget, false);
+                String sn = s.getAttr(Provisioning.A_zmailServiceHostname, "");
+                boolean isTarget = s.getBooleanAttr(Provisioning.A_zmailReverseProxyLookupTarget, false);
                 if (isTarget) {
                 	InetAddress ip = ProxyConfUtil.getLookupTargetIPbyIPMode(sn);
                     Formatter f = new Formatter();
@@ -897,8 +897,8 @@ class ZMLookupHandlerVar extends ProxyConfVar{
            
             for (Server s : allServers)
             {
-                String sn = s.getAttr(Provisioning.A_zimbraServiceHostname, "");
-                boolean isTarget = s.getBooleanAttr(Provisioning.A_zimbraReverseProxyLookupTarget, false);
+                String sn = s.getAttr(Provisioning.A_zmailServiceHostname, "");
+                boolean isTarget = s.getBooleanAttr(Provisioning.A_zmailReverseProxyLookupTarget, false);
                 if (isTarget) {
                 	InetAddress ip = ProxyConfUtil.getLookupTargetIPbyIPMode(sn);
             		Formatter f = new Formatter();
@@ -947,7 +947,7 @@ class ZMSSOCertAuthDefaultEnablerVar extends ProxyConfVar {
     @Override
     public void update() throws ServiceException {
         String certMode = 
-            serverSource.getAttr(Provisioning.A_zimbraReverseProxyClientCertMode, "off");
+            serverSource.getAttr(Provisioning.A_zmailReverseProxyClientCertMode, "off");
        if (certMode.equals("on") || certMode.equals("optional")) {
            mValue = true;
        } else {
@@ -960,7 +960,7 @@ class ZMSSOCertAuthDefaultEnablerVar extends ProxyConfVar {
 class ClientCertAuthDefaultCAVar extends ProxyConfVar {
     public ClientCertAuthDefaultCAVar() {
         super("ssl.clientcertca.default",
-              "zimbraReverseProxyClientCertCA", 
+              "zmailReverseProxyClientCertCA", 
               ProxyConfGen.getDefaultClientCertCaPath(), 
               ProxyConfValueType.STRING, 
               ProxyConfOverride.CUSTOM, 
@@ -977,7 +977,7 @@ class ClientCertAuthDefaultCAVar extends ProxyConfVar {
 class SSORedirectEnablerVar extends ProxyConfVar {
     public SSORedirectEnablerVar() {
         super("web.sso.redirect.enabled.default",
-              "zimbraWebClientLoginURL", 
+              "zmailWebClientLoginURL", 
               false, 
               ProxyConfValueType.ENABLER, 
               ProxyConfOverride.CUSTOM, 
@@ -999,7 +999,7 @@ class SSORedirectEnablerVar extends ProxyConfVar {
 class ZMSSOEnablerVar extends ProxyConfVar {
     public ZMSSOEnablerVar() {
         super("web.sso.enabled",
-              "zimbraReverseProxyClientCertMode", 
+              "zmailReverseProxyClientCertMode", 
               false, 
               ProxyConfValueType.ENABLER, 
               ProxyConfOverride.CUSTOM, 
@@ -1019,7 +1019,7 @@ class ZMSSOEnablerVar extends ProxyConfVar {
 class ZMSSODefaultEnablerVar extends ProxyConfVar {
     public ZMSSODefaultEnablerVar() {
         super("web.sso.enabled",
-              "zimbraReverseProxyClientCertMode", 
+              "zmailReverseProxyClientCertMode", 
               false, 
               ProxyConfValueType.ENABLER, 
               ProxyConfOverride.CUSTOM, 
@@ -1042,7 +1042,7 @@ class ErrorPagesVar extends ProxyConfVar {
     
     public ErrorPagesVar() {
         super("web.:errorPages",
-              "zimbraReverseProxyErrorHandlerURL", 
+              "zmailReverseProxyErrorHandlerURL", 
               "", 
               ProxyConfValueType.STRING, 
               ProxyConfOverride.SERVER, 
@@ -1130,7 +1130,7 @@ class TimeInSecVarWrapper extends ProxyConfVar {
  */
 class WebProxyUpstreamTargetVar extends ProxyConfVar {
     public WebProxyUpstreamTargetVar() {
-        super("web.upstream.schema", "zimbraReverseProxySSLToUpstreamEnabled", false, ProxyConfValueType.BOOLEAN,
+        super("web.upstream.schema", "zmailReverseProxySSLToUpstreamEnabled", false, ProxyConfValueType.BOOLEAN,
                 ProxyConfOverride.SERVER, "The target of proxy_pass for web proxy");
     }
     
@@ -1194,7 +1194,7 @@ public class ProxyConfGen
     private static Log mLog = LogFactory.getLog (ProxyConfGen.class);
     private static Options mOptions = new Options();
     private static boolean mDryRun = false;
-    private static String mWorkingDir = "/opt/zimbra";
+    private static String mWorkingDir = "/opt/zmail";
     private static String mTemplateDir = mWorkingDir + "/conf/nginx/templates";
     private static String mConfDir = mWorkingDir + "/conf";
     private static String mIncDir = "nginx/includes";
@@ -1217,9 +1217,9 @@ public class ProxyConfGen
     private static Map<String, String> mVars = new HashMap<String, String>();
     static List<DomainAttrItem> mDomainReverseProxyAttrs;
     
-    static final String ZIMBRA_UPSTREAM_NAME = "zimbra";
-    static final String ZIMBRA_SSL_UPSTREAM_NAME = "zimbra_ssl";
-    static final String ZIMBRA_ADMIN_CONSOLE_UPSTREAM_NAME = "zimbra_admin";
+    static final String ZIMBRA_UPSTREAM_NAME = "zmail";
+    static final String ZIMBRA_SSL_UPSTREAM_NAME = "zmail_ssl";
+    static final String ZIMBRA_ADMIN_CONSOLE_UPSTREAM_NAME = "zmail_admin";
      
 
     /** the pattern for custom header cmd, such as "!{explode domain} */
@@ -1230,7 +1230,7 @@ public class ProxyConfGen
         mOptions.addOption("h", "help", false, "show this usage text");
         mOptions.addOption("v", "verbose", false, "be verbose");
 
-        mOptions.addOption("w", "workdir", true, "Proxy Working Directory (defaults to /opt/zimbra)");
+        mOptions.addOption("w", "workdir", true, "Proxy Working Directory (defaults to /opt/zmail)");
         mOptions.addOption("t", "templatedir", true, "Proxy Template Directory (defaults to $workdir/conf/nginx/templates)");
         mOptions.addOption("n", "dry-run", false, "Do not write any configuration, just show which files would be written");
         mOptions.addOption("d", "defaults", false, "Print default variable map");
@@ -1290,13 +1290,13 @@ public class ProxyConfGen
                 "The method can work only when LDAP is available", null);
 
         final Set<String> attrsNeeded = new HashSet<String>();
-        attrsNeeded.add(Provisioning.A_zimbraVirtualHostname);
-        attrsNeeded.add(Provisioning.A_zimbraVirtualIPAddress);
-        attrsNeeded.add(Provisioning.A_zimbraSSLCertificate);
-        attrsNeeded.add(Provisioning.A_zimbraSSLPrivateKey);
-        attrsNeeded.add(Provisioning.A_zimbraReverseProxyClientCertMode);
-        attrsNeeded.add(Provisioning.A_zimbraReverseProxyClientCertCA);
-        attrsNeeded.add(Provisioning.A_zimbraWebClientLoginURL);
+        attrsNeeded.add(Provisioning.A_zmailVirtualHostname);
+        attrsNeeded.add(Provisioning.A_zmailVirtualIPAddress);
+        attrsNeeded.add(Provisioning.A_zmailSSLCertificate);
+        attrsNeeded.add(Provisioning.A_zmailSSLPrivateKey);
+        attrsNeeded.add(Provisioning.A_zmailReverseProxyClientCertMode);
+        attrsNeeded.add(Provisioning.A_zmailReverseProxyClientCertCA);
+        attrsNeeded.add(Provisioning.A_zmailWebClientLoginURL);
 
         final List<DomainAttrItem> result = new ArrayList<DomainAttrItem>();
 
@@ -1305,19 +1305,19 @@ public class ProxyConfGen
         NamedEntry.Visitor visitor = new NamedEntry.Visitor() {
             public void visit(NamedEntry entry) throws ServiceException {
                 String domainName = entry
-                    .getAttr(Provisioning.A_zimbraDomainName);
+                    .getAttr(Provisioning.A_zmailDomainName);
                 String[] virtualHostnames = entry
-                    .getMultiAttr(Provisioning.A_zimbraVirtualHostname);
+                    .getMultiAttr(Provisioning.A_zmailVirtualHostname);
                 String[] virtualIPAddresses = entry
-                    .getMultiAttr(Provisioning.A_zimbraVirtualIPAddress);
+                    .getMultiAttr(Provisioning.A_zmailVirtualIPAddress);
                 String certificate = entry
-                    .getAttr(Provisioning.A_zimbraSSLCertificate);
+                    .getAttr(Provisioning.A_zmailSSLCertificate);
                 String privateKey = entry
-                    .getAttr(Provisioning.A_zimbraSSLPrivateKey);
+                    .getAttr(Provisioning.A_zmailSSLPrivateKey);
                 String clientCertMode = entry
-                    .getAttr(Provisioning.A_zimbraReverseProxyClientCertMode);
+                    .getAttr(Provisioning.A_zmailReverseProxyClientCertMode);
                 String clientCertCA = entry
-                    .getAttr(Provisioning.A_zimbraReverseProxyClientCertCA);
+                    .getAttr(Provisioning.A_zmailReverseProxyClientCertCA);
 
                 // no need to check whether clientCertMode or clientCertCA == null,
 
@@ -1332,8 +1332,8 @@ public class ProxyConfGen
                 if (virtualIPAddresses.length > 0) {
                     if (virtualIPAddresses.length != virtualHostnames.length) {
                         result.add(new DomainAttrExceptionItem(
-                                new ProxyConfException("The configurations of zimbraVirtualHostname and " +
-                                                       "zimbraVirtualIPAddress are mismatched", null)));
+                                new ProxyConfException("The configurations of zmailVirtualHostname and " +
+                                                       "zmailVirtualIPAddress are mismatched", null)));
                         return;
                     }
                     lookupVIP = false;
@@ -1344,7 +1344,7 @@ public class ProxyConfGen
                 int i = 0;
 
                 for( ; i < virtualHostnames.length; i++) {
-                    //bug 66892, only lookup IP when zimbraVirtualIPAddress is unset
+                    //bug 66892, only lookup IP when zmailVirtualIPAddress is unset
                     String vip = null;
                     if (lookupVIP) {
                         vip = null;
@@ -1375,7 +1375,7 @@ public class ProxyConfGen
     private static String loadAllClientCertCA() {
         // to avoid redundancy CA if some domains share the same CA
         HashSet<String> caSet = new HashSet<String>(); 
-        String globalCA = ProxyConfVar.serverSource.getAttr(Provisioning.A_zimbraReverseProxyClientCertCA, "");
+        String globalCA = ProxyConfVar.serverSource.getAttr(Provisioning.A_zmailReverseProxyClientCertCA, "");
         if (!ProxyConfUtil.isEmptyString(globalCA)) {
             caSet.add(globalCA);
         }
@@ -1591,8 +1591,8 @@ public class ProxyConfGen
      * The args indicate the required attrs to generate a server block
      * , which now supports:
      * <ul>
-     * <li>vhn: zimbraVirtualHostname must not be empty</li>
-     * <li>sso: zimbraClientCertMode must not be empty or "off"</li>
+     * <li>vhn: zmailVirtualHostname must not be empty</li>
+     * <li>sso: zmailClientCertMode must not be empty or "off"</li>
      * </ul>
      * @author Jiankuan
      * @throws ProxyConfException 
@@ -1673,19 +1673,19 @@ public class ProxyConfGen
             throw new ProxyConfException("virtual host name \"" + item.virtualHostname + "\" is not resolvable", e);
         }
         
-        if (IPModeEnablerVar.getZimbraIPMode() != IPModeEnablerVar.IPMode.BOTH) {
-            if (IPModeEnablerVar.getZimbraIPMode() == IPModeEnablerVar.IPMode.IPV4_ONLY &&
+        if (IPModeEnablerVar.getZmailIPMode() != IPModeEnablerVar.IPMode.BOTH) {
+            if (IPModeEnablerVar.getZmailIPMode() == IPModeEnablerVar.IPMode.IPV4_ONLY &&
                     vip instanceof Inet6Address) {
                 String msg = vip.getHostAddress() +
-                        " is an IPv6 address but zimbraIPMode is 'ipv4'";
+                        " is an IPv6 address but zmailIPMode is 'ipv4'";
                 mLog.error(msg);
                 throw new ProxyConfException(msg);
             }
 
-            if (IPModeEnablerVar.getZimbraIPMode() == IPModeEnablerVar.IPMode.IPV6_ONLY &&
+            if (IPModeEnablerVar.getZmailIPMode() == IPModeEnablerVar.IPMode.IPV6_ONLY &&
                     vip instanceof Inet4Address) {
                 String msg = vip.getHostAddress() +
-                        " is an IPv4 address but zimbraIPMode is 'ipv6'";
+                        " is an IPv4 address but zmailIPMode is 'ipv6'";
                 mLog.error(msg);
                 throw new ProxyConfException(msg);
             }
@@ -1822,104 +1822,104 @@ public class ProxyConfGen
         mConfVars.put("core.ipboth.enabled", new IPBothEnablerVar());
         mConfVars.put("ssl.crt.default", new ProxyConfVar("ssl.crt.default", null, mDefaultSSLCrt, ProxyConfValueType.STRING, ProxyConfOverride.NONE, "default nginx certificate file path"));
         mConfVars.put("ssl.key.default", new ProxyConfVar("ssl.key.default", null, mDefaultSSLKey, ProxyConfValueType.STRING, ProxyConfOverride.NONE, "default nginx private key file path"));
-        mConfVars.put("ssl.clientcertmode.default", new ProxyConfVar("ssl.clientcertmode.default", "zimbraReverseProxyClientCertMode", "off", ProxyConfValueType.STRING, ProxyConfOverride.SERVER,"enable authentication via X.509 Client Certificate in nginx proxy (https only)"));
+        mConfVars.put("ssl.clientcertmode.default", new ProxyConfVar("ssl.clientcertmode.default", "zmailReverseProxyClientCertMode", "off", ProxyConfValueType.STRING, ProxyConfOverride.SERVER,"enable authentication via X.509 Client Certificate in nginx proxy (https only)"));
         mConfVars.put("ssl.clientcertca.default", new ClientCertAuthDefaultCAVar());
-        mConfVars.put("ssl.clientcertdepth.default", new ProxyConfVar("ssl.clientcertdepth.default", "zimbraReverseProxyClientCertDepth", new Integer(10), ProxyConfValueType.INTEGER, ProxyConfOverride.NONE,"indicate how depth the verification will load the ca chain. This is useful when client crt is signed by multiple intermediate ca"));
+        mConfVars.put("ssl.clientcertdepth.default", new ProxyConfVar("ssl.clientcertdepth.default", "zmailReverseProxyClientCertDepth", new Integer(10), ProxyConfValueType.INTEGER, ProxyConfOverride.NONE,"indicate how depth the verification will load the ca chain. This is useful when client crt is signed by multiple intermediate ca"));
         mConfVars.put("main.user", new ProxyConfVar("main.user", null, ZIMBRA_UPSTREAM_NAME, ProxyConfValueType.STRING, ProxyConfOverride.NONE, "The user as which the worker processes will run"));
         mConfVars.put("main.group", new ProxyConfVar("main.group", null, ZIMBRA_UPSTREAM_NAME, ProxyConfValueType.STRING, ProxyConfOverride.NONE, "The group as which the worker processes will run"));
-        mConfVars.put("main.workers", new ProxyConfVar("main.workers", "zimbraReverseProxyWorkerProcesses", new Integer(4), ProxyConfValueType.INTEGER, ProxyConfOverride.SERVER, "Number of worker processes"));
+        mConfVars.put("main.workers", new ProxyConfVar("main.workers", "zmailReverseProxyWorkerProcesses", new Integer(4), ProxyConfValueType.INTEGER, ProxyConfOverride.SERVER, "Number of worker processes"));
         mConfVars.put("main.pidfile", new ProxyConfVar("main.pidfile", null, mWorkingDir + "/log/nginx.pid", ProxyConfValueType.STRING, ProxyConfOverride.NONE, "PID file path (relative to ${core.workdir})"));
         mConfVars.put("main.logfile", new ProxyConfVar("main.logfile", null, mWorkingDir + "/log/nginx.log", ProxyConfValueType.STRING, ProxyConfOverride.NONE, "Log file path (relative to ${core.workdir})"));
-        mConfVars.put("main.loglevel", new ProxyConfVar("main.loglevel", "zimbraReverseProxyLogLevel", "info", ProxyConfValueType.STRING, ProxyConfOverride.SERVER, "Log level - can be debug|info|notice|warn|error|crit"));
-        mConfVars.put("main.connections", new ProxyConfVar("main.connections", "zimbraReverseProxyWorkerConnections", new Integer(10240), ProxyConfValueType.INTEGER, ProxyConfOverride.SERVER, "Maximum number of simultaneous connections per worker process"));
-        mConfVars.put("main.krb5keytab", new ProxyConfVar("main.krb5keytab", "krb5_keytab", "/opt/zimbra/conf/krb5.keytab", ProxyConfValueType.STRING, ProxyConfOverride.LOCALCONFIG, "Path to kerberos keytab file used for GSSAPI authentication"));
+        mConfVars.put("main.loglevel", new ProxyConfVar("main.loglevel", "zmailReverseProxyLogLevel", "info", ProxyConfValueType.STRING, ProxyConfOverride.SERVER, "Log level - can be debug|info|notice|warn|error|crit"));
+        mConfVars.put("main.connections", new ProxyConfVar("main.connections", "zmailReverseProxyWorkerConnections", new Integer(10240), ProxyConfValueType.INTEGER, ProxyConfOverride.SERVER, "Maximum number of simultaneous connections per worker process"));
+        mConfVars.put("main.krb5keytab", new ProxyConfVar("main.krb5keytab", "krb5_keytab", "/opt/zmail/conf/krb5.keytab", ProxyConfValueType.STRING, ProxyConfOverride.LOCALCONFIG, "Path to kerberos keytab file used for GSSAPI authentication"));
         mConfVars.put("memcache.:servers", new MemcacheServersVar());
-        mConfVars.put("memcache.timeout", new ProxyConfVar("memcache.timeout", "zimbraReverseProxyCacheFetchTimeout", new Long(3000), ProxyConfValueType.TIME, ProxyConfOverride.CONFIG, "Time (ms) given to a cache-fetch operation to complete"));
-        mConfVars.put("memcache.reconnect", new ProxyConfVar("memcache.reconnect", "zimbraReverseProxyCacheReconnectInterval", new Long(60000), ProxyConfValueType.TIME, ProxyConfOverride.CONFIG, "Time (ms) after which NGINX will attempt to re-establish a broken connection to a memcache server"));
-        mConfVars.put("memcache.ttl", new ProxyConfVar("memcache.ttl", "zimbraReverseProxyCacheEntryTTL", new Long(3600000), ProxyConfValueType.TIME, ProxyConfOverride.CONFIG, "Time interval (ms) for which cached entries remain in memcache"));
-        mConfVars.put("mail.ctimeout", new ProxyConfVar("mail.ctimeout", "zimbraReverseProxyConnectTimeout", new Long(120000), ProxyConfValueType.TIME, ProxyConfOverride.SERVER, "Time interval (ms) after which a POP/IMAP proxy connection to a remote host will give up"));
+        mConfVars.put("memcache.timeout", new ProxyConfVar("memcache.timeout", "zmailReverseProxyCacheFetchTimeout", new Long(3000), ProxyConfValueType.TIME, ProxyConfOverride.CONFIG, "Time (ms) given to a cache-fetch operation to complete"));
+        mConfVars.put("memcache.reconnect", new ProxyConfVar("memcache.reconnect", "zmailReverseProxyCacheReconnectInterval", new Long(60000), ProxyConfValueType.TIME, ProxyConfOverride.CONFIG, "Time (ms) after which NGINX will attempt to re-establish a broken connection to a memcache server"));
+        mConfVars.put("memcache.ttl", new ProxyConfVar("memcache.ttl", "zmailReverseProxyCacheEntryTTL", new Long(3600000), ProxyConfValueType.TIME, ProxyConfOverride.CONFIG, "Time interval (ms) for which cached entries remain in memcache"));
+        mConfVars.put("mail.ctimeout", new ProxyConfVar("mail.ctimeout", "zmailReverseProxyConnectTimeout", new Long(120000), ProxyConfValueType.TIME, ProxyConfOverride.SERVER, "Time interval (ms) after which a POP/IMAP proxy connection to a remote host will give up"));
         mConfVars.put("mail.pop3.timeout", new ProxyConfVar("mail.pop3.timeout", "pop3_max_idle_time", 60, ProxyConfValueType.INTEGER, ProxyConfOverride.LOCALCONFIG, "pop3 network timeout before authentication"));
         mConfVars.put("mail.pop3.proxytimeout", new ProxyConfVar("mail.pop3.proxytimeout", "pop3_max_idle_time", 60, ProxyConfValueType.INTEGER, ProxyConfOverride.LOCALCONFIG, "pop3 network timeout after authentication"));
         mConfVars.put("mail.imap.timeout", new ProxyConfVar("mail.imap.timeout", "imap_max_idle_time", 60, ProxyConfValueType.INTEGER, ProxyConfOverride.LOCALCONFIG, "imap network timeout before authentication"));
         mConfVars.put("mail.imap.proxytimeout", new TimeoutVar("mail.imap.proxytimeout", "imap_authenticated_max_idle_time", 1800, ProxyConfOverride.LOCALCONFIG, 300, "imap network timeout after authentication"));
-        mConfVars.put("mail.passerrors", new ProxyConfVar("mail.passerrors", "zimbraReverseProxyPassErrors", true, ProxyConfValueType.BOOLEAN, ProxyConfOverride.SERVER, "Indicates whether mail proxy will pass any protocol specific errors from the upstream server back to the downstream client"));
-        mConfVars.put("mail.auth_http_timeout", new ProxyConfVar("mail.auth_http_timeout", "zimbraReverseProxyRouteLookupTimeout", new Long(15000), ProxyConfValueType.TIME, ProxyConfOverride.SERVER,"Time interval (ms) given to mail route lookup handler to respond to route lookup request (after this time elapses, Proxy fails over to next handler, or fails the request if there are no more lookup handlers)"));
-        mConfVars.put("mail.authwait", new ProxyConfVar("mail.authwait", "zimbraReverseProxyAuthWaitInterval", new Long(10000), ProxyConfValueType.TIME, ProxyConfOverride.CONFIG, "Time delay (ms) after which an incorrect POP/IMAP login attempt will be rejected"));
+        mConfVars.put("mail.passerrors", new ProxyConfVar("mail.passerrors", "zmailReverseProxyPassErrors", true, ProxyConfValueType.BOOLEAN, ProxyConfOverride.SERVER, "Indicates whether mail proxy will pass any protocol specific errors from the upstream server back to the downstream client"));
+        mConfVars.put("mail.auth_http_timeout", new ProxyConfVar("mail.auth_http_timeout", "zmailReverseProxyRouteLookupTimeout", new Long(15000), ProxyConfValueType.TIME, ProxyConfOverride.SERVER,"Time interval (ms) given to mail route lookup handler to respond to route lookup request (after this time elapses, Proxy fails over to next handler, or fails the request if there are no more lookup handlers)"));
+        mConfVars.put("mail.authwait", new ProxyConfVar("mail.authwait", "zmailReverseProxyAuthWaitInterval", new Long(10000), ProxyConfValueType.TIME, ProxyConfOverride.CONFIG, "Time delay (ms) after which an incorrect POP/IMAP login attempt will be rejected"));
         mConfVars.put("mail.pop3capa", new Pop3CapaVar());
         mConfVars.put("mail.imapcapa", new ImapCapaVar());
-        mConfVars.put("mail.imapid", new ProxyConfVar("mail.imapid", null, "\"NAME\" \"Zimbra\" \"VERSION\" \"" + BuildInfo.VERSION + "\" \"RELEASE\" \"" + BuildInfo.RELEASE + "\"", ProxyConfValueType.STRING, ProxyConfOverride.CONFIG, "NGINX response to IMAP ID command"));
-        mConfVars.put("mail.defaultrealm", new ProxyConfVar("mail.defaultrealm", "zimbraReverseProxyDefaultRealm", "", ProxyConfValueType.STRING, ProxyConfOverride.SERVER, "Default SASL realm used in case Kerberos principal does not contain realm information"));
+        mConfVars.put("mail.imapid", new ProxyConfVar("mail.imapid", null, "\"NAME\" \"Zmail\" \"VERSION\" \"" + BuildInfo.VERSION + "\" \"RELEASE\" \"" + BuildInfo.RELEASE + "\"", ProxyConfValueType.STRING, ProxyConfOverride.CONFIG, "NGINX response to IMAP ID command"));
+        mConfVars.put("mail.defaultrealm", new ProxyConfVar("mail.defaultrealm", "zmailReverseProxyDefaultRealm", "", ProxyConfValueType.STRING, ProxyConfOverride.SERVER, "Default SASL realm used in case Kerberos principal does not contain realm information"));
         mConfVars.put("mail.sasl_host_from_ip", new SaslHostFromIPVar());
         mConfVars.put("mail.saslapp", new ProxyConfVar("mail.saslapp", null, "nginx", ProxyConfValueType.STRING, ProxyConfOverride.CONFIG, "Application name used by NGINX to initialize SASL authentication"));
-        mConfVars.put("mail.ipmax", new ProxyConfVar("mail.ipmax", "zimbraReverseProxyIPLoginLimit", new Integer(0), ProxyConfValueType.INTEGER, ProxyConfOverride.CONFIG,"IP Login Limit (Throttle) - 0 means infinity"));
-        mConfVars.put("mail.ipttl", new ProxyConfVar("mail.ipttl", "zimbraReverseProxyIPLoginLimitTime", new Long(3600000), ProxyConfValueType.TIME, ProxyConfOverride.CONFIG,"Time interval (ms) after which IP Login Counter is reset"));
-        mConfVars.put("mail.iprej", new ProxyConfVar("mail.iprej", "zimbraReverseProxyIpThrottleMsg", "Login rejected from this IP", ProxyConfValueType.STRING, ProxyConfOverride.CONFIG,"Rejection message for IP throttle"));
-        mConfVars.put("mail.usermax", new ProxyConfVar("mail.usermax", "zimbraReverseProxyUserLoginLimit", new Integer(0), ProxyConfValueType.INTEGER, ProxyConfOverride.CONFIG,"User Login Limit (Throttle) - 0 means infinity"));
-        mConfVars.put("mail.userttl", new ProxyConfVar("mail.userttl", "zimbraReverseProxyUserLoginLimitTime", new Long(3600000), ProxyConfValueType.TIME, ProxyConfOverride.CONFIG,"Time interval (ms) after which User Login Counter is reset"));
-        mConfVars.put("mail.userrej", new ProxyConfVar("mail.userrej", "zimbraReverseProxyUserThrottleMsg", "Login rejected for this user", ProxyConfValueType.STRING, ProxyConfOverride.CONFIG,"Rejection message for User throttle"));
-        mConfVars.put("mail.upstream.pop3xoip", new ProxyConfVar("mail.upstream.pop3xoip", "zimbraReverseProxySendPop3Xoip", true, ProxyConfValueType.BOOLEAN, ProxyConfOverride.CONFIG,"Whether NGINX issues the POP3 XOIP command to the upstream server prior to logging in (audit purpose)"));
-        mConfVars.put("mail.upstream.imapid", new ProxyConfVar("mail.upstream.imapid", "zimbraReverseProxySendImapId", true, ProxyConfValueType.BOOLEAN, ProxyConfOverride.CONFIG,"Whether NGINX issues the IMAP ID command to the upstream server prior to logging in (audit purpose)"));
+        mConfVars.put("mail.ipmax", new ProxyConfVar("mail.ipmax", "zmailReverseProxyIPLoginLimit", new Integer(0), ProxyConfValueType.INTEGER, ProxyConfOverride.CONFIG,"IP Login Limit (Throttle) - 0 means infinity"));
+        mConfVars.put("mail.ipttl", new ProxyConfVar("mail.ipttl", "zmailReverseProxyIPLoginLimitTime", new Long(3600000), ProxyConfValueType.TIME, ProxyConfOverride.CONFIG,"Time interval (ms) after which IP Login Counter is reset"));
+        mConfVars.put("mail.iprej", new ProxyConfVar("mail.iprej", "zmailReverseProxyIpThrottleMsg", "Login rejected from this IP", ProxyConfValueType.STRING, ProxyConfOverride.CONFIG,"Rejection message for IP throttle"));
+        mConfVars.put("mail.usermax", new ProxyConfVar("mail.usermax", "zmailReverseProxyUserLoginLimit", new Integer(0), ProxyConfValueType.INTEGER, ProxyConfOverride.CONFIG,"User Login Limit (Throttle) - 0 means infinity"));
+        mConfVars.put("mail.userttl", new ProxyConfVar("mail.userttl", "zmailReverseProxyUserLoginLimitTime", new Long(3600000), ProxyConfValueType.TIME, ProxyConfOverride.CONFIG,"Time interval (ms) after which User Login Counter is reset"));
+        mConfVars.put("mail.userrej", new ProxyConfVar("mail.userrej", "zmailReverseProxyUserThrottleMsg", "Login rejected for this user", ProxyConfValueType.STRING, ProxyConfOverride.CONFIG,"Rejection message for User throttle"));
+        mConfVars.put("mail.upstream.pop3xoip", new ProxyConfVar("mail.upstream.pop3xoip", "zmailReverseProxySendPop3Xoip", true, ProxyConfValueType.BOOLEAN, ProxyConfOverride.CONFIG,"Whether NGINX issues the POP3 XOIP command to the upstream server prior to logging in (audit purpose)"));
+        mConfVars.put("mail.upstream.imapid", new ProxyConfVar("mail.upstream.imapid", "zmailReverseProxySendImapId", true, ProxyConfValueType.BOOLEAN, ProxyConfOverride.CONFIG,"Whether NGINX issues the IMAP ID command to the upstream server prior to logging in (audit purpose)"));
         mConfVars.put("mail.ssl.preferserverciphers", new ProxyConfVar("mail.ssl.preferserverciphers", null, true, ProxyConfValueType.BOOLEAN, ProxyConfOverride.CONFIG,"Requires protocols SSLv3 and TLSv1 server ciphers be preferred over the client's ciphers"));
-        mConfVars.put("mail.ssl.ciphers", new ProxyConfVar("mail.ssl.ciphers", "zimbraReverseProxySSLCiphers", "RC4:HIGH:!aNULL:!MD5:!kEDH:!AD:!SSLv2", ProxyConfValueType.STRING, ProxyConfOverride.CONFIG,"Permitted ciphers for mail proxy"));
-        mConfVars.put("mail.imap.authplain.enabled", new ProxyConfVar("mail.imap.authplain.enabled", "zimbraReverseProxyImapSaslPlainEnabled", true, ProxyConfValueType.ENABLER, ProxyConfOverride.CONFIG,"Whether SASL PLAIN is enabled for IMAP"));
-        mConfVars.put("mail.imap.authgssapi.enabled", new ProxyConfVar("mail.imap.authgssapi.enabled", "zimbraReverseProxyImapSaslGssapiEnabled", false, ProxyConfValueType.ENABLER, ProxyConfOverride.SERVER,"Whether SASL GSSAPI is enabled for IMAP"));
-        mConfVars.put("mail.pop3.authplain.enabled", new ProxyConfVar("mail.pop3.authplain.enabled", "zimbraReverseProxyPop3SaslPlainEnabled", true, ProxyConfValueType.ENABLER, ProxyConfOverride.SERVER,"Whether SASL PLAIN is enabled for POP3"));
-        mConfVars.put("mail.pop3.authgssapi.enabled", new ProxyConfVar("mail.pop3.authgssapi.enabled", "zimbraReverseProxyPop3SaslGssapiEnabled", false, ProxyConfValueType.ENABLER, ProxyConfOverride.SERVER,"Whether SASL GSSAPI is enabled for POP3"));
+        mConfVars.put("mail.ssl.ciphers", new ProxyConfVar("mail.ssl.ciphers", "zmailReverseProxySSLCiphers", "RC4:HIGH:!aNULL:!MD5:!kEDH:!AD:!SSLv2", ProxyConfValueType.STRING, ProxyConfOverride.CONFIG,"Permitted ciphers for mail proxy"));
+        mConfVars.put("mail.imap.authplain.enabled", new ProxyConfVar("mail.imap.authplain.enabled", "zmailReverseProxyImapSaslPlainEnabled", true, ProxyConfValueType.ENABLER, ProxyConfOverride.CONFIG,"Whether SASL PLAIN is enabled for IMAP"));
+        mConfVars.put("mail.imap.authgssapi.enabled", new ProxyConfVar("mail.imap.authgssapi.enabled", "zmailReverseProxyImapSaslGssapiEnabled", false, ProxyConfValueType.ENABLER, ProxyConfOverride.SERVER,"Whether SASL GSSAPI is enabled for IMAP"));
+        mConfVars.put("mail.pop3.authplain.enabled", new ProxyConfVar("mail.pop3.authplain.enabled", "zmailReverseProxyPop3SaslPlainEnabled", true, ProxyConfValueType.ENABLER, ProxyConfOverride.SERVER,"Whether SASL PLAIN is enabled for POP3"));
+        mConfVars.put("mail.pop3.authgssapi.enabled", new ProxyConfVar("mail.pop3.authgssapi.enabled", "zmailReverseProxyPop3SaslGssapiEnabled", false, ProxyConfValueType.ENABLER, ProxyConfOverride.SERVER,"Whether SASL GSSAPI is enabled for POP3"));
         mConfVars.put("mail.imap.literalauth", new ProxyConfVar("mail.imap.literalauth", null, true, ProxyConfValueType.BOOLEAN, ProxyConfOverride.CONFIG,"Whether NGINX uses literal strings for user name/password when logging in to upstream IMAP server - if false, NGINX uses quoted strings"));
-        mConfVars.put("mail.imap.port", new ProxyConfVar("mail.imap.port", Provisioning.A_zimbraImapProxyBindPort, new Integer(143), ProxyConfValueType.INTEGER, ProxyConfOverride.SERVER,"Mail Proxy IMAP Port"));
-        mConfVars.put("mail.imap.tls", new ProxyConfVar("mail.imap.tls", "zimbraReverseProxyImapStartTlsMode", "only", ProxyConfValueType.STRING, ProxyConfOverride.SERVER,"TLS support for IMAP - can be on|off|only - on indicates TLS support present, off indicates TLS support absent, only indicates TLS is enforced on unsecure channel"));
-        mConfVars.put("mail.imaps.port", new ProxyConfVar("mail.imaps.port", Provisioning.A_zimbraImapSSLProxyBindPort, new Integer(993), ProxyConfValueType.INTEGER, ProxyConfOverride.SERVER,"Mail Proxy IMAPS Port"));
-        mConfVars.put("mail.pop3.port", new ProxyConfVar("mail.pop3.port", Provisioning.A_zimbraPop3ProxyBindPort, new Integer(110), ProxyConfValueType.INTEGER, ProxyConfOverride.SERVER,"Mail Proxy POP3 Port"));
-        mConfVars.put("mail.pop3.tls", new ProxyConfVar("mail.pop3.tls", "zimbraReverseProxyPop3StartTlsMode", "only", ProxyConfValueType.STRING, ProxyConfOverride.SERVER,"TLS support for POP3 - can be on|off|only - on indicates TLS support present, off indicates TLS support absent, only indicates TLS is enforced on unsecure channel"));
-        mConfVars.put("mail.pop3s.port", new ProxyConfVar("mail.pop3s.port", Provisioning.A_zimbraPop3SSLProxyBindPort, new Integer(995), ProxyConfValueType.INTEGER, ProxyConfOverride.SERVER,"Mail Proxy POP3S Port"));
+        mConfVars.put("mail.imap.port", new ProxyConfVar("mail.imap.port", Provisioning.A_zmailImapProxyBindPort, new Integer(143), ProxyConfValueType.INTEGER, ProxyConfOverride.SERVER,"Mail Proxy IMAP Port"));
+        mConfVars.put("mail.imap.tls", new ProxyConfVar("mail.imap.tls", "zmailReverseProxyImapStartTlsMode", "only", ProxyConfValueType.STRING, ProxyConfOverride.SERVER,"TLS support for IMAP - can be on|off|only - on indicates TLS support present, off indicates TLS support absent, only indicates TLS is enforced on unsecure channel"));
+        mConfVars.put("mail.imaps.port", new ProxyConfVar("mail.imaps.port", Provisioning.A_zmailImapSSLProxyBindPort, new Integer(993), ProxyConfValueType.INTEGER, ProxyConfOverride.SERVER,"Mail Proxy IMAPS Port"));
+        mConfVars.put("mail.pop3.port", new ProxyConfVar("mail.pop3.port", Provisioning.A_zmailPop3ProxyBindPort, new Integer(110), ProxyConfValueType.INTEGER, ProxyConfOverride.SERVER,"Mail Proxy POP3 Port"));
+        mConfVars.put("mail.pop3.tls", new ProxyConfVar("mail.pop3.tls", "zmailReverseProxyPop3StartTlsMode", "only", ProxyConfValueType.STRING, ProxyConfOverride.SERVER,"TLS support for POP3 - can be on|off|only - on indicates TLS support present, off indicates TLS support absent, only indicates TLS is enforced on unsecure channel"));
+        mConfVars.put("mail.pop3s.port", new ProxyConfVar("mail.pop3s.port", Provisioning.A_zmailPop3SSLProxyBindPort, new Integer(995), ProxyConfValueType.INTEGER, ProxyConfOverride.SERVER,"Mail Proxy POP3S Port"));
         mConfVars.put("mail.imap.greeting", new ImapGreetingVar());
         mConfVars.put("mail.pop3.greeting", new Pop3GreetingVar());
-        mConfVars.put("mail.enabled", new ProxyConfVar("mail.enabled", "zimbraReverseProxyMailEnabled", true, ProxyConfValueType.ENABLER, ProxyConfOverride.SERVER,"Indicates whether Mail Proxy is enabled"));
-        mConfVars.put("mail.proxy.ssl", new ProxyConfVar("mail.proxy.ssl", "zimbraReverseProxySSLToUpstreamEnabled", false, ProxyConfValueType.BOOLEAN, ProxyConfOverride.SERVER, "Indicates whether using SSL to connect to upstream mail server"));
+        mConfVars.put("mail.enabled", new ProxyConfVar("mail.enabled", "zmailReverseProxyMailEnabled", true, ProxyConfValueType.ENABLER, ProxyConfOverride.SERVER,"Indicates whether Mail Proxy is enabled"));
+        mConfVars.put("mail.proxy.ssl", new ProxyConfVar("mail.proxy.ssl", "zmailReverseProxySSLToUpstreamEnabled", false, ProxyConfValueType.BOOLEAN, ProxyConfOverride.SERVER, "Indicates whether using SSL to connect to upstream mail server"));
         mConfVars.put("web.logfile", new ProxyConfVar("web.logfile", null, mWorkingDir + "/log/nginx.access.log", ProxyConfValueType.STRING, ProxyConfOverride.NONE, "Access log file path (relative to ${core.workdir})"));
-        mConfVars.put("web.mailmode", new ProxyConfVar("web.mailmode", Provisioning.A_zimbraReverseProxyMailMode, "both", ProxyConfValueType.STRING, ProxyConfOverride.SERVER,"Reverse Proxy Mail Mode - can be http|https|both|redirect|mixed"));
-        mConfVars.put("web.server_name.default", new ProxyConfVar("web.server_name.default", "zimbra_server_hostname", "localhost", ProxyConfValueType.STRING, ProxyConfOverride.LOCALCONFIG, "The server name for default server config"));
+        mConfVars.put("web.mailmode", new ProxyConfVar("web.mailmode", Provisioning.A_zmailReverseProxyMailMode, "both", ProxyConfValueType.STRING, ProxyConfOverride.SERVER,"Reverse Proxy Mail Mode - can be http|https|both|redirect|mixed"));
+        mConfVars.put("web.server_name.default", new ProxyConfVar("web.server_name.default", "zmail_server_hostname", "localhost", ProxyConfValueType.STRING, ProxyConfOverride.LOCALCONFIG, "The server name for default server config"));
         mConfVars.put("web.upstream.name", new ProxyConfVar("web.upstream.name", null, ZIMBRA_UPSTREAM_NAME, ProxyConfValueType.STRING, ProxyConfOverride.CONFIG,"Symbolic name for HTTP upstream cluster"));
         mConfVars.put("web.ssl.upstream.name", new ProxyConfVar("web.ssl.upstream.name", null, ZIMBRA_SSL_UPSTREAM_NAME, ProxyConfValueType.STRING, ProxyConfOverride.CONFIG,"Symbolic name for HTTPS upstream cluster"));
         mConfVars.put("web.upstream.:servers", new WebUpstreamServersVar());
         mConfVars.put("web.server_names.max_size", new ProxyConfVar("web.server_names.max_size", "proxy_server_names_hash_max_size", DEFAULT_SERVERS_NAME_HASH_MAX_SIZE, ProxyConfValueType.INTEGER, ProxyConfOverride.LOCALCONFIG, "the server names hash max size, needed to be increased if too many virtual host names are added"));
         mConfVars.put("web.server_names.bucket_size", new ProxyConfVar("web.server_names.bucket_size", "proxy_server_names_hash_bucket_size", DEFAULT_SERVERS_NAME_HASH_BUCKET_SIZE, ProxyConfValueType.INTEGER, ProxyConfOverride.LOCALCONFIG, "the server names hash bucket size, needed to be increased if too many virtual host names are added"));
         mConfVars.put("web.ssl.upstream.:servers", new WebSSLUpstreamServersVar());
-        mConfVars.put("web.uploadmax", new ProxyConfVar("web.uploadmax", "zimbraFileUploadMaxSize", new Long(10485760), ProxyConfValueType.LONG, ProxyConfOverride.SERVER,"Maximum accepted client request body size (indicated by Content-Length) - if content length exceeds this limit, then request fails with HTTP 413"));
+        mConfVars.put("web.uploadmax", new ProxyConfVar("web.uploadmax", "zmailFileUploadMaxSize", new Long(10485760), ProxyConfValueType.LONG, ProxyConfOverride.SERVER,"Maximum accepted client request body size (indicated by Content-Length) - if content length exceeds this limit, then request fails with HTTP 413"));
         mConfVars.put("web.:error_pages", new ErrorPagesVar());
-        mConfVars.put("web.http.port", new ProxyConfVar("web.http.port", Provisioning.A_zimbraMailProxyPort, new Integer(0), ProxyConfValueType.INTEGER, ProxyConfOverride.SERVER,"Web Proxy HTTP Port"));
-        mConfVars.put("web.http.maxbody", new ProxyConfVar("web.http.maxbody", "zimbraFileUploadMaxSize", new Long(10485760), ProxyConfValueType.LONG, ProxyConfOverride.SERVER,"Maximum accepted client request body size (indicated by Content-Length) - if content length exceeds this limit, then request fails with HTTP 413"));
-        mConfVars.put("web.https.port", new ProxyConfVar("web.https.port", Provisioning.A_zimbraMailSSLProxyPort, new Integer(0), ProxyConfValueType.INTEGER, ProxyConfOverride.SERVER,"Web Proxy HTTPS Port"));
-        mConfVars.put("web.https.maxbody", new ProxyConfVar("web.https.maxbody", "zimbraFileUploadMaxSize", new Long(10485760), ProxyConfValueType.LONG, ProxyConfOverride.SERVER,"Maximum accepted client request body size (indicated by Content-Length) - if content length exceeds this limit, then request fails with HTTP 413"));
+        mConfVars.put("web.http.port", new ProxyConfVar("web.http.port", Provisioning.A_zmailMailProxyPort, new Integer(0), ProxyConfValueType.INTEGER, ProxyConfOverride.SERVER,"Web Proxy HTTP Port"));
+        mConfVars.put("web.http.maxbody", new ProxyConfVar("web.http.maxbody", "zmailFileUploadMaxSize", new Long(10485760), ProxyConfValueType.LONG, ProxyConfOverride.SERVER,"Maximum accepted client request body size (indicated by Content-Length) - if content length exceeds this limit, then request fails with HTTP 413"));
+        mConfVars.put("web.https.port", new ProxyConfVar("web.https.port", Provisioning.A_zmailMailSSLProxyPort, new Integer(0), ProxyConfValueType.INTEGER, ProxyConfOverride.SERVER,"Web Proxy HTTPS Port"));
+        mConfVars.put("web.https.maxbody", new ProxyConfVar("web.https.maxbody", "zmailFileUploadMaxSize", new Long(10485760), ProxyConfValueType.LONG, ProxyConfOverride.SERVER,"Maximum accepted client request body size (indicated by Content-Length) - if content length exceeds this limit, then request fails with HTTP 413"));
         mConfVars.put("web.ssl.preferserverciphers", new ProxyConfVar("web.ssl.preferserverciphers", null, true, ProxyConfValueType.BOOLEAN, ProxyConfOverride.CONFIG,"Requires protocols SSLv3 and TLSv1 server ciphers be preferred over the client's ciphers"));
-        mConfVars.put("web.ssl.ciphers", new ProxyConfVar("web.ssl.ciphers", "zimbraReverseProxySSLCiphers", "!SSLv2:!MD5:HIGH", ProxyConfValueType.STRING, ProxyConfOverride.CONFIG, "Permitted ciphers for mail proxy"));
-        mConfVars.put("web.http.uport", new ProxyConfVar("web.http.uport", Provisioning.A_zimbraMailPort, new Integer(80), ProxyConfValueType.INTEGER, ProxyConfOverride.SERVER,"Web upstream server port"));
-        mConfVars.put("web.upstream.connect.timeout", new ProxyConfVar("web.upstream.connect.timeout", "zimbraReverseProxyUpstreamConnectTimeout", new Integer(25), ProxyConfValueType.INTEGER, ProxyConfOverride.SERVER, "upstream connect timeout"));
-        mConfVars.put("web.upstream.read.timeout", new TimeInSecVarWrapper(new ProxyConfVar("web.upstream.read.timeout", "zimbraReverseProxyUpstreamReadTimeout", new Long(60), ProxyConfValueType.TIME, ProxyConfOverride.SERVER, "upstream read timeout")));
-        mConfVars.put("web.upstream.send.timeout", new TimeInSecVarWrapper(new ProxyConfVar("web.upstream.send.timeout", "zimbraReverseProxyUpstreamSendTimeout", new Long(60), ProxyConfValueType.TIME, ProxyConfOverride.SERVER, "upstream send timeout")));
-        mConfVars.put("web.upstream.polling.timeout", new TimeInSecVarWrapper(new ProxyConfVar("web.upstream.polling.timeout", "zimbraReverseProxyUpstreamPollingTimeout", new Long(3600), ProxyConfValueType.TIME, ProxyConfOverride.SERVER, "the response timeout for Microsoft Active Sync polling")));
-        mConfVars.put("web.enabled", new ProxyConfVar("web.enabled", "zimbraReverseProxyHttpEnabled", false, ProxyConfValueType.ENABLER, ProxyConfOverride.SERVER, "Indicates whether HTTP proxying is enabled"));
+        mConfVars.put("web.ssl.ciphers", new ProxyConfVar("web.ssl.ciphers", "zmailReverseProxySSLCiphers", "!SSLv2:!MD5:HIGH", ProxyConfValueType.STRING, ProxyConfOverride.CONFIG, "Permitted ciphers for mail proxy"));
+        mConfVars.put("web.http.uport", new ProxyConfVar("web.http.uport", Provisioning.A_zmailMailPort, new Integer(80), ProxyConfValueType.INTEGER, ProxyConfOverride.SERVER,"Web upstream server port"));
+        mConfVars.put("web.upstream.connect.timeout", new ProxyConfVar("web.upstream.connect.timeout", "zmailReverseProxyUpstreamConnectTimeout", new Integer(25), ProxyConfValueType.INTEGER, ProxyConfOverride.SERVER, "upstream connect timeout"));
+        mConfVars.put("web.upstream.read.timeout", new TimeInSecVarWrapper(new ProxyConfVar("web.upstream.read.timeout", "zmailReverseProxyUpstreamReadTimeout", new Long(60), ProxyConfValueType.TIME, ProxyConfOverride.SERVER, "upstream read timeout")));
+        mConfVars.put("web.upstream.send.timeout", new TimeInSecVarWrapper(new ProxyConfVar("web.upstream.send.timeout", "zmailReverseProxyUpstreamSendTimeout", new Long(60), ProxyConfValueType.TIME, ProxyConfOverride.SERVER, "upstream send timeout")));
+        mConfVars.put("web.upstream.polling.timeout", new TimeInSecVarWrapper(new ProxyConfVar("web.upstream.polling.timeout", "zmailReverseProxyUpstreamPollingTimeout", new Long(3600), ProxyConfValueType.TIME, ProxyConfOverride.SERVER, "the response timeout for Microsoft Active Sync polling")));
+        mConfVars.put("web.enabled", new ProxyConfVar("web.enabled", "zmailReverseProxyHttpEnabled", false, ProxyConfValueType.ENABLER, ProxyConfOverride.SERVER, "Indicates whether HTTP proxying is enabled"));
         mConfVars.put("web.http.enabled", new HttpEnablerVar());
         mConfVars.put("web.https.enabled", new HttpsEnablerVar());
         mConfVars.put("web.upstream.target", new WebProxyUpstreamTargetVar());
         mConfVars.put("zmlookup.:handlers", new ZMLookupHandlerVar());
-        mConfVars.put("zmlookup.timeout", new ProxyConfVar("zmlookup.timeout", "zimbraReverseProxyRouteLookupTimeout", new Long(15000), ProxyConfValueType.TIME, ProxyConfOverride.SERVER, "Time interval (ms) given to lookup handler to respond to route lookup request (after this time elapses, Proxy fails over to next handler, or fails the request if there are no more lookup handlers)"));
-        mConfVars.put("zmlookup.retryinterval", new ProxyConfVar("zmlookup.retryinterval", "zimbraReverseProxyRouteLookupTimeoutCache", new Long(60000), ProxyConfValueType.TIME, ProxyConfOverride.SERVER,"Time interval (ms) given to lookup handler to cache a failed response to route a previous lookup request (after this time elapses, Proxy retries this host)"));
+        mConfVars.put("zmlookup.timeout", new ProxyConfVar("zmlookup.timeout", "zmailReverseProxyRouteLookupTimeout", new Long(15000), ProxyConfValueType.TIME, ProxyConfOverride.SERVER, "Time interval (ms) given to lookup handler to respond to route lookup request (after this time elapses, Proxy fails over to next handler, or fails the request if there are no more lookup handlers)"));
+        mConfVars.put("zmlookup.retryinterval", new ProxyConfVar("zmlookup.retryinterval", "zmailReverseProxyRouteLookupTimeoutCache", new Long(60000), ProxyConfValueType.TIME, ProxyConfOverride.SERVER,"Time interval (ms) given to lookup handler to cache a failed response to route a previous lookup request (after this time elapses, Proxy retries this host)"));
         mConfVars.put("zmlookup.dpasswd", new ProxyConfVar("zmlookup.dpasswd", "ldap_nginx_password", "zmnginx", ProxyConfValueType.STRING, ProxyConfOverride.LOCALCONFIG, "Password for master credentials used by NGINX to log in to upstream for GSSAPI authentication"));
         mConfVars.put("zmlookup.caching", new ProxyConfVar("zmlookup.caching", null, true, ProxyConfValueType.BOOLEAN, ProxyConfOverride.NONE, "Whether to turn on nginx lookup caching"));
         mConfVars.put("zmlookup.unqual", new ProxyConfVar("zmlookup.unqual", null, false, ProxyConfValueType.BOOLEAN, ProxyConfOverride.NONE, "Deprecated - always set to false"));
-        mConfVars.put("zmprefix.url", new ProxyConfVar("zmprefix.url", "zimbraMailURL", "/", ProxyConfValueType.STRING, ProxyConfOverride.CONFIG, "http URL prefix for where the zimbra app resides on upstream server"));
-        mConfVars.put("web.sso.certauth.port", new ProxyConfVar("web.sso.certauth.port", Provisioning.A_zimbraMailSSLProxyClientCertPort, new Integer(0), ProxyConfValueType.INTEGER, ProxyConfOverride.SERVER,"reverse proxy client cert auth port"));
+        mConfVars.put("zmprefix.url", new ProxyConfVar("zmprefix.url", "zmailMailURL", "/", ProxyConfValueType.STRING, ProxyConfOverride.CONFIG, "http URL prefix for where the zmail app resides on upstream server"));
+        mConfVars.put("web.sso.certauth.port", new ProxyConfVar("web.sso.certauth.port", Provisioning.A_zmailMailSSLProxyClientCertPort, new Integer(0), ProxyConfValueType.INTEGER, ProxyConfOverride.SERVER,"reverse proxy client cert auth port"));
         mConfVars.put("web.sso.certauth.default.enabled", new ZMSSOCertAuthDefaultEnablerVar());
         mConfVars.put("web.sso.enabled", new ZMSSOEnablerVar());
         mConfVars.put("web.sso.default.enabled", new ZMSSODefaultEnablerVar());
-        mConfVars.put("web.admin.default.enabled", new ProxyConfVar("web.amdin.default.enabled", "zimbraReverseProxyAdminEnabled", new Boolean(false), ProxyConfValueType.ENABLER, ProxyConfOverride.SERVER, "Inidicate whether admin console proxy is enabled"));
-        mConfVars.put("web.admin.port", new ProxyConfVar("web.admin.port", "zimbraAdminProxyPort", new Integer(9071), ProxyConfValueType.INTEGER, ProxyConfOverride.SERVER, "Admin console proxy port"));
-        mConfVars.put("web.admin.uport", new ProxyConfVar("web.admin.uport", "zimbraAdminPort", new Integer(7071), ProxyConfValueType.INTEGER, ProxyConfOverride.SERVER, "Admin console upstream port"));
+        mConfVars.put("web.admin.default.enabled", new ProxyConfVar("web.amdin.default.enabled", "zmailReverseProxyAdminEnabled", new Boolean(false), ProxyConfValueType.ENABLER, ProxyConfOverride.SERVER, "Inidicate whether admin console proxy is enabled"));
+        mConfVars.put("web.admin.port", new ProxyConfVar("web.admin.port", "zmailAdminProxyPort", new Integer(9071), ProxyConfValueType.INTEGER, ProxyConfOverride.SERVER, "Admin console proxy port"));
+        mConfVars.put("web.admin.uport", new ProxyConfVar("web.admin.uport", "zmailAdminPort", new Integer(7071), ProxyConfValueType.INTEGER, ProxyConfOverride.SERVER, "Admin console upstream port"));
         mConfVars.put("web.admin.upstream.name", new ProxyConfVar("web.admin.upstream.name", null, ZIMBRA_ADMIN_CONSOLE_UPSTREAM_NAME, ProxyConfValueType.STRING, ProxyConfOverride.CONFIG, "Symbolic name for admin console upstream cluster"));
         mConfVars.put("web.admin.upstream.:servers", new WebAdminUpstreamServersVar());
-        mConfVars.put("web.upstream.noop.timeout", new TimeoutVar("web.upstream.noop.timeout", "zimbra_noop_max_timeout", 1200, ProxyConfOverride.LOCALCONFIG, 20, "the response timeout for NoOpRequest"));
-        mConfVars.put("web.upstream.waitset.timeout", new TimeoutVar("web.upstream.waitset.timeout", "zimbra_waitset_max_request_timeout", 1200, ProxyConfOverride.LOCALCONFIG, 20, "the response timeout for WaitSetRequest"));
+        mConfVars.put("web.upstream.noop.timeout", new TimeoutVar("web.upstream.noop.timeout", "zmail_noop_max_timeout", 1200, ProxyConfOverride.LOCALCONFIG, 20, "the response timeout for NoOpRequest"));
+        mConfVars.put("web.upstream.waitset.timeout", new TimeoutVar("web.upstream.waitset.timeout", "zmail_waitset_max_request_timeout", 1200, ProxyConfOverride.LOCALCONFIG, 20, "the response timeout for WaitSetRequest"));
     }
 
     /* update the default variable map from the active configuration */
@@ -2076,7 +2076,7 @@ public class ProxyConfGen
             }
         }
 
-        mGenConfPerVhn = ProxyConfVar.serverSource.getBooleanAttr("zimbraReverseProxyGenConfigPerVirtualHostname", false);
+        mGenConfPerVhn = ProxyConfVar.serverSource.getBooleanAttr("zmailReverseProxyGenConfigPerVirtualHostname", false);
 
         try {
         /* upgrade the variable map from the config in force */
@@ -2247,7 +2247,7 @@ public class ProxyConfGen
      */
     static boolean isClientCertVerifyEnabled() {
         String globalMode = ProxyConfVar.serverSource.getAttr(
-                Provisioning.A_zimbraReverseProxyClientCertMode, "off");
+                Provisioning.A_zmailReverseProxyClientCertMode, "off");
         
         if (globalMode.equals("on") ||
             globalMode.equals("optional")) {
@@ -2310,7 +2310,7 @@ class ProxyConfUtil{
             throw new ProxyConfException("the lookup target " + hostname
                     + " can't be resolved");
         }
-        IPModeEnablerVar.IPMode mode = IPModeEnablerVar.getZimbraIPMode();
+        IPModeEnablerVar.IPMode mode = IPModeEnablerVar.getZmailIPMode();
 
         if (mode == IPModeEnablerVar.IPMode.IPV4_ONLY) {
             for (InetAddress ip : ips) {
@@ -2319,7 +2319,7 @@ class ProxyConfUtil{
                 }
             }
             throw new ProxyConfException(
-                    "Can't find valid lookup target IPv4 address when zimbra IP mode is IPv4 only");
+                    "Can't find valid lookup target IPv4 address when zmail IP mode is IPv4 only");
         } else if (mode == IPModeEnablerVar.IPMode.IPV6_ONLY) {
             for (InetAddress ip : ips) {
                 if (ip instanceof Inet6Address) {
@@ -2327,7 +2327,7 @@ class ProxyConfUtil{
                 }
             }
             throw new ProxyConfException(
-                    "Can't find valid lookup target IPv6 address when zimbra IP mode is IPv6 only");
+                    "Can't find valid lookup target IPv6 address when zmail IP mode is IPv6 only");
         } else {
             for (InetAddress ip : ips) {
                 if (ip instanceof Inet4Address) {

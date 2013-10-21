@@ -2,7 +2,7 @@ dn: olcDatabase={-1}frontend
 objectClass: olcDatabaseConfig
 objectClass: olcFrontendConfig
 olcDatabase: {-1}frontend
-olcAccess: {0}to *  by dn.children="cn=admins,cn=zimbra" write  by * +0 break
+olcAccess: {0}to *  by dn.children="cn=admins,cn=zmail" write  by * +0 break
 olcAccess: {1}to dn.base=""  by * read
 olcAccess: {2}to dn.base="cn=subschema"  by * read
 olcLastMod: TRUE

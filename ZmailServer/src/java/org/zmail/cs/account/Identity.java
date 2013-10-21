@@ -13,15 +13,15 @@
  * ***** END LICENSE BLOCK *****
  */
 
-package com.zimbra.cs.account;
+package org.zmail.cs.account;
 
 import java.io.UnsupportedEncodingException;
 import java.util.Map;
 
 import javax.mail.internet.InternetAddress;
 
-import com.zimbra.common.mime.MimeConstants;
-import com.zimbra.common.mime.shim.JavaMailInternetAddress;
+import org.zmail.common.mime.MimeConstants;
+import org.zmail.common.mime.shim.JavaMailInternetAddress;
 
 /**
  * @author schemers
@@ -44,14 +44,14 @@ public class Identity extends AccountProperty implements Comparable {
      */
     public void setId(String id) {
         mId = id;
-        getRawAttrs().put(Provisioning.A_zimbraPrefIdentityId, id);
+        getRawAttrs().put(Provisioning.A_zmailPrefIdentityId, id);
     }
 
     public InternetAddress getFriendlyEmailAddress() {
-        String personalPart = getAttr(Provisioning.A_zimbraPrefFromDisplay);
+        String personalPart = getAttr(Provisioning.A_zmailPrefFromDisplay);
         if (personalPart == null || personalPart.trim().equals(""))
             personalPart = null;
-        String address = getAttr(Provisioning.A_zimbraPrefFromDisplay);
+        String address = getAttr(Provisioning.A_zmailPrefFromDisplay);
 
         try {
             return new JavaMailInternetAddress(address, personalPart, MimeConstants.P_CHARSET_UTF8);

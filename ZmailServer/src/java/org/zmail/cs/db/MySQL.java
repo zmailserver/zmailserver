@@ -12,7 +12,7 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.db;
+package org.zmail.cs.db;
 
 import java.io.BufferedWriter;
 import java.io.File;
@@ -32,10 +32,10 @@ import org.apache.commons.cli.Options;
 
 import com.google.common.base.Joiner;
 import com.mysql.jdbc.MysqlErrorNumbers;
-import com.zimbra.common.localconfig.LC;
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.common.util.ZimbraLog;
-import com.zimbra.cs.db.DbPool.DbConnection;
+import org.zmail.common.localconfig.LC;
+import org.zmail.common.service.ServiceException;
+import org.zmail.common.util.ZmailLog;
+import org.zmail.cs.db.DbPool.DbConnection;
 
 public class MySQL extends Db {
 
@@ -142,7 +142,7 @@ public class MySQL extends Db {
             mDriverClassName = "com.mysql.jdbc.Driver";
             mPoolSize = 100;
             mRootUrl = "jdbc:mysql://address=(protocol=tcp)(host=" + LC.mysql_bind_address.value() + ")(port=" + LC.mysql_port.value() + ")/";
-            mConnectionUrl = mRootUrl + "zimbra";
+            mConnectionUrl = mRootUrl + "zmail";
             mLoggerUrl = null;
             mSupportsStatsCallback = true;
             mDatabaseProperties = getMySQLProperties();
@@ -153,10 +153,10 @@ public class MySQL extends Db {
                 try {
                     mPoolSize = Integer.parseInt(maxActive);
                 } catch (NumberFormatException nfe) {
-                    ZimbraLog.system.warn("exception parsing 'maxActive' pref; defaulting pool size to " + mPoolSize, nfe);
+                    ZmailLog.system.warn("exception parsing 'maxActive' pref; defaulting pool size to " + mPoolSize, nfe);
                 }
             }
-            ZimbraLog.misc.debug("Setting connection pool size to " + mPoolSize);
+            ZmailLog.misc.debug("Setting connection pool size to " + mPoolSize);
         }
 
         private static Properties getMySQLProperties() {
@@ -177,21 +177,21 @@ public class MySQL extends Db {
             // props.put("maxReconnects", "3"");    // max number of reconnects to attempt
 
             // Set/override MySQL Connector/J connection properties from localconfig.
-            // Localconfig keys with "zimbra_mysql_connector_" prefix are used.
-            final String prefix = "zimbra_mysql_connector_";
+            // Localconfig keys with "zmail_mysql_connector_" prefix are used.
+            final String prefix = "zmail_mysql_connector_";
             for (String key : LC.getAllKeys()) {
                 if (!key.startsWith(prefix))
                     continue;
                 String prop = key.substring(prefix.length());
                 if (prop.length() > 0 && !prop.equalsIgnoreCase("logger")) {
                     props.put(prop, LC.get(key));
-                    ZimbraLog.system.info("Setting mysql connector property: " + prop + "=" + LC.get(key));
+                    ZmailLog.system.info("Setting mysql connector property: " + prop + "=" + LC.get(key));
                 }
             }
 
-            // These properties cannot be set with "zimbra_mysql_connector_" keys.
-            props.put("user", LC.zimbra_mysql_user.value());
-            props.put("password", LC.zimbra_mysql_password.value());
+            // These properties cannot be set with "zmail_mysql_connector_" keys.
+            props.put("user", LC.zmail_mysql_user.value());
+            props.put("password", LC.zmail_mysql_password.value());
 
             return props;
         }
@@ -202,7 +202,7 @@ public class MySQL extends Db {
         return "MySQL";
     }
 
-    private final String sTableName = "zimbra.flush_enforcer";
+    private final String sTableName = "zmail.flush_enforcer";
     private final String sCreateTable =
         "CREATE TABLE IF NOT EXISTS " + sTableName + " (dummy_column INTEGER) ENGINE = InnoDB";
     private final String sDropTable = "DROP TABLE IF EXISTS " + sTableName;
@@ -232,10 +232,10 @@ public class MySQL extends Db {
             }
         } catch (SQLException e) {
             // If there's an error, let's just log it but not bubble up the exception.
-            ZimbraLog.dbconn.warn("ignoring error while forcing mysql to flush innodb log to disk", e);
+            ZmailLog.dbconn.warn("ignoring error while forcing mysql to flush innodb log to disk", e);
         } catch (ServiceException e) {
             // If there's an error, let's just log it but not bubble up the exception.
-            ZimbraLog.dbconn.warn("ignoring error while forcing mysql to flush innodb log to disk", e);
+            ZmailLog.dbconn.warn("ignoring error while forcing mysql to flush innodb log to disk", e);
         } finally {
             if (!success) {
                 // There was an error.
@@ -260,10 +260,10 @@ public class MySQL extends Db {
         outFile.delete();
 
         try {
-            String redoVer = com.zimbra.cs.redolog.Version.latest().toString();
+            String redoVer = org.zmail.cs.redolog.Version.latest().toString();
             String outStr = "-- AUTO-GENERATED .SQL FILE - Generated by the MySQL versions tool\n" +
-                    "USE zimbra;\n" +
-                    "INSERT INTO zimbra.config(name, value, description) VALUES\n" +
+                    "USE zmail;\n" +
+                    "INSERT INTO zmail.config(name, value, description) VALUES\n" +
                     "\t('db.version', '" + Versions.DB_VERSION + "', 'db schema version'),\n" +
                     "\t('index.version', '" + Versions.INDEX_VERSION + "', 'index version'),\n" +
                     "\t('redolog.version', '" + redoVer + "', 'redolog version')\n" +

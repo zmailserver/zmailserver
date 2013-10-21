@@ -12,7 +12,7 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.service.account;
+package org.zmail.cs.service.account;
 
 import java.util.ArrayList;
 import java.util.EnumSet;
@@ -24,42 +24,42 @@ import java.util.Set;
 
 import com.google.common.base.Splitter;
 import com.google.common.collect.Sets;
-import com.zimbra.common.account.Key;
-import com.zimbra.common.account.Key.AccountBy;
-import com.zimbra.common.account.ProvisioningConstants;
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.common.soap.AccountConstants;
-import com.zimbra.common.soap.Element;
-import com.zimbra.common.util.ZimbraLog;
-import com.zimbra.cs.account.Account;
-import com.zimbra.cs.account.AttributeClass;
-import com.zimbra.cs.account.AttributeFlag;
-import com.zimbra.cs.account.AttributeManager;
-import com.zimbra.cs.account.AuthToken;
-import com.zimbra.cs.account.AuthTokenException;
-import com.zimbra.cs.account.Config;
-import com.zimbra.cs.account.Cos;
-import com.zimbra.cs.account.DataSource;
-import com.zimbra.cs.account.Domain;
-import com.zimbra.cs.account.Identity;
-import com.zimbra.cs.account.Provisioning;
-import com.zimbra.cs.account.Server;
-import com.zimbra.cs.account.Signature;
-import com.zimbra.cs.account.Zimlet;
-import com.zimbra.cs.account.accesscontrol.Right;
-import com.zimbra.cs.account.accesscontrol.RightManager;
-import com.zimbra.cs.mailbox.Mailbox;
-import com.zimbra.cs.service.UserServlet;
-import com.zimbra.cs.service.admin.AdminAccessControl;
-import com.zimbra.cs.session.Session;
-import com.zimbra.cs.session.SoapSession;
-import com.zimbra.cs.util.BuildInfo;
-import com.zimbra.cs.zimlet.ZimletPresence;
-import com.zimbra.cs.zimlet.ZimletUserProperties;
-import com.zimbra.cs.zimlet.ZimletUtil;
-import com.zimbra.soap.SoapEngine;
-import com.zimbra.soap.ZimbraSoapContext;
-import com.zimbra.soap.account.type.Prop;
+import org.zmail.common.account.Key;
+import org.zmail.common.account.Key.AccountBy;
+import org.zmail.common.account.ProvisioningConstants;
+import org.zmail.common.service.ServiceException;
+import org.zmail.common.soap.AccountConstants;
+import org.zmail.common.soap.Element;
+import org.zmail.common.util.ZmailLog;
+import org.zmail.cs.account.Account;
+import org.zmail.cs.account.AttributeClass;
+import org.zmail.cs.account.AttributeFlag;
+import org.zmail.cs.account.AttributeManager;
+import org.zmail.cs.account.AuthToken;
+import org.zmail.cs.account.AuthTokenException;
+import org.zmail.cs.account.Config;
+import org.zmail.cs.account.Cos;
+import org.zmail.cs.account.DataSource;
+import org.zmail.cs.account.Domain;
+import org.zmail.cs.account.Identity;
+import org.zmail.cs.account.Provisioning;
+import org.zmail.cs.account.Server;
+import org.zmail.cs.account.Signature;
+import org.zmail.cs.account.Zimlet;
+import org.zmail.cs.account.accesscontrol.Right;
+import org.zmail.cs.account.accesscontrol.RightManager;
+import org.zmail.cs.mailbox.Mailbox;
+import org.zmail.cs.service.UserServlet;
+import org.zmail.cs.service.admin.AdminAccessControl;
+import org.zmail.cs.session.Session;
+import org.zmail.cs.session.SoapSession;
+import org.zmail.cs.util.BuildInfo;
+import org.zmail.cs.zimlet.ZimletPresence;
+import org.zmail.cs.zimlet.ZimletUserProperties;
+import org.zmail.cs.zimlet.ZimletUtil;
+import org.zmail.soap.SoapEngine;
+import org.zmail.soap.ZmailSoapContext;
+import org.zmail.soap.account.type.Prop;
 
 /**
  * @since May 26, 2004
@@ -68,7 +68,7 @@ import com.zimbra.soap.account.type.Prop;
 public class GetInfo extends AccountDocumentHandler  {
 
     public interface GetInfoExt {
-        public void handle(ZimbraSoapContext zsc, Element getInfoResponse);
+        public void handle(ZmailSoapContext zsc, Element getInfoResponse);
     }
 
     private static ArrayList<GetInfoExt> extensions = new ArrayList<GetInfoExt>();
@@ -93,7 +93,7 @@ public class GetInfo extends AccountDocumentHandler  {
 
     @Override
     public Element handle(Element request, Map<String, Object> context) throws ServiceException {
-        ZimbraSoapContext zsc = getZimbraSoapContext(context);
+        ZmailSoapContext zsc = getZmailSoapContext(context);
         Account account = getRequestedAccount(zsc);
 
         if (!canAccessAccount(zsc, account)) {
@@ -131,7 +131,7 @@ public class GetInfo extends AccountDocumentHandler  {
             response.addAttribute(AccountConstants.E_CRUMB, zsc.getAuthToken().getCrumb(), Element.Disposition.CONTENT);
         } catch (AuthTokenException e) {
             // shouldn't happen
-            ZimbraLog.account.warn("can't generate crumb", e);
+            ZmailLog.account.warn("can't generate crumb", e);
         }
         long lifetime = zsc.getAuthToken().getExpires() - System.currentTimeMillis();
         response.addAttribute(AccountConstants.E_LIFETIME, lifetime, Element.Disposition.CONTENT);
@@ -271,9 +271,9 @@ public class GetInfo extends AccountDocumentHandler  {
 
         for (String key : attrList) {
             Object value = null;
-            if (Provisioning.A_zimbraLocale.equals(key)) {
+            if (Provisioning.A_zmailLocale.equals(key)) {
                 value = locale;
-            } else if (Provisioning.A_zimbraAttachmentsBlocked.equals(key)) {
+            } else if (Provisioning.A_zmailAttachmentsBlocked.equals(key)) {
                 // leave this a special case for now, until we have enough incidences to make it a pattern
                 value = config.isAttachmentsBlocked() || acct.isAttachmentsBlocked() ?
                         ProvisioningConstants.TRUE : ProvisioningConstants.FALSE;
@@ -318,7 +318,7 @@ public class GetInfo extends AccountDocumentHandler  {
             // load the zimlets in the dev directory and list them
             ZimletUtil.listDevZimlets(response);
         } catch (ServiceException se) {
-            ZimbraLog.account.error("can't get zimlets", se);
+            ZmailLog.account.error("can't get zimlets", se);
         }
     }
 
@@ -339,7 +339,7 @@ public class GetInfo extends AccountDocumentHandler  {
                 ToXML.encodeIdentity(response, i);
             }
         } catch (ServiceException e) {
-            ZimbraLog.account.error("can't get identities", e);
+            ZmailLog.account.error("can't get identities", e);
         }
     }
 
@@ -350,7 +350,7 @@ public class GetInfo extends AccountDocumentHandler  {
                 ToXML.encodeSignature(response, s);
             }
         } catch (ServiceException e) {
-            ZimbraLog.account.error("can't get signatures", e);
+            ZmailLog.account.error("can't get signatures", e);
         }
     }
 
@@ -359,17 +359,17 @@ public class GetInfo extends AccountDocumentHandler  {
             List<DataSource> dataSources = Provisioning.getInstance().getAllDataSources(acct);
             for (DataSource ds : dataSources) {
                 if (!ds.isInternal()) {
-                    com.zimbra.cs.service.mail.ToXML.encodeDataSource(response, ds);
+                    org.zmail.cs.service.mail.ToXML.encodeDataSource(response, ds);
                 }
             }
         } catch (ServiceException e) {
-            ZimbraLog.mailbox.error("Unable to get data sources", e);
+            ZmailLog.mailbox.error("Unable to get data sources", e);
         }
     }
 
     protected void doChildAccounts(Element response, Account acct, AuthToken authToken) throws ServiceException {
-        String[] childAccounts = acct.getMultiAttr(Provisioning.A_zimbraChildAccount);
-        String[] visibleChildAccounts = acct.getMultiAttr(Provisioning.A_zimbraPrefChildVisibleAccount);
+        String[] childAccounts = acct.getMultiAttr(Provisioning.A_zmailChildAccount);
+        String[] visibleChildAccounts = acct.getMultiAttr(Provisioning.A_zmailPrefChildVisibleAccount);
 
         if (childAccounts.length == 0 && visibleChildAccounts.length == 0) {
             return;

@@ -13,7 +13,7 @@
  * ***** END LICENSE BLOCK *****
  */
 
-package com.zimbra.cs.mailbox.calendar;
+package org.zmail.cs.mailbox.calendar;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -22,21 +22,21 @@ import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 
-import com.zimbra.common.calendar.Attach;
-import com.zimbra.common.calendar.Geo;
-import com.zimbra.common.calendar.ICalTimeZone;
-import com.zimbra.common.calendar.TZIDMapper;
-import com.zimbra.common.calendar.TimeZoneMap;
-import com.zimbra.common.calendar.WellKnownTimeZones;
-import com.zimbra.common.calendar.ZCalendar.ICalTok;
-import com.zimbra.common.calendar.ZCalendar.ZParameter;
-import com.zimbra.common.calendar.ZCalendar.ZProperty;
-import com.zimbra.common.localconfig.DebugConfig;
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.common.util.ZimbraLog;
-import com.zimbra.cs.account.Account;
-import com.zimbra.cs.account.Provisioning;
-import com.zimbra.cs.mailbox.Metadata;
+import org.zmail.common.calendar.Attach;
+import org.zmail.common.calendar.Geo;
+import org.zmail.common.calendar.ICalTimeZone;
+import org.zmail.common.calendar.TZIDMapper;
+import org.zmail.common.calendar.TimeZoneMap;
+import org.zmail.common.calendar.WellKnownTimeZones;
+import org.zmail.common.calendar.ZCalendar.ICalTok;
+import org.zmail.common.calendar.ZCalendar.ZParameter;
+import org.zmail.common.calendar.ZCalendar.ZProperty;
+import org.zmail.common.localconfig.DebugConfig;
+import org.zmail.common.service.ServiceException;
+import org.zmail.common.util.ZmailLog;
+import org.zmail.cs.account.Account;
+import org.zmail.cs.account.Provisioning;
+import org.zmail.cs.mailbox.Metadata;
 
 public class Util {
 
@@ -153,7 +153,7 @@ public class Util {
      * Returns the time zone for the given account.
      */
     public static ICalTimeZone getAccountTimeZone(Account account) {
-        String tzid = account.getAttr(Provisioning.A_zimbraPrefTimeZoneId);
+        String tzid = account.getAttr(Provisioning.A_zmailPrefTimeZoneId);
         tzid = TZIDMapper.canonicalize(tzid);
         ICalTimeZone timeZone = WellKnownTimeZones.getTimeZoneById(tzid);
         if (timeZone == null) {
@@ -192,7 +192,7 @@ public class Util {
                 if (tz != null) {
                     return tz;
                 } else if (!hasDef) {
-                    ZimbraLog.calendar.debug("Unknown time zone \"" + tzid + "\" in metadata; using UTC instead");
+                    ZmailLog.calendar.debug("Unknown time zone \"" + tzid + "\" in metadata; using UTC instead");
                     return ICalTimeZone.getUTC().cloneWithNewTZID(tzid);
                 }
             }

@@ -13,28 +13,28 @@
  * ***** END LICENSE BLOCK *****
  */
 
-package com.zimbra.cs.service.account;
+package org.zmail.cs.service.account;
 
 import java.util.Map;
 
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.common.soap.AccountConstants;
-import com.zimbra.common.soap.Element;
-import com.zimbra.common.util.ZimbraLog;
-import com.zimbra.cs.account.AccessManager;
-import com.zimbra.cs.account.Account;
-import com.zimbra.cs.account.Group;
-import com.zimbra.cs.account.Provisioning;
-import com.zimbra.cs.account.ldap.entry.LdapDistributionList;
-import com.zimbra.cs.account.ldap.entry.LdapDynamicGroup;
-import com.zimbra.soap.ZimbraSoapContext;
+import org.zmail.common.service.ServiceException;
+import org.zmail.common.soap.AccountConstants;
+import org.zmail.common.soap.Element;
+import org.zmail.common.util.ZmailLog;
+import org.zmail.cs.account.AccessManager;
+import org.zmail.cs.account.Account;
+import org.zmail.cs.account.Group;
+import org.zmail.cs.account.Provisioning;
+import org.zmail.cs.account.ldap.entry.LdapDistributionList;
+import org.zmail.cs.account.ldap.entry.LdapDynamicGroup;
+import org.zmail.soap.ZmailSoapContext;
 
 public class CreateDistributionList extends AccountDocumentHandler {
 
     public Element handle(Element request, Map<String, Object> context)
             throws ServiceException {
 
-        ZimbraSoapContext zsc = getZimbraSoapContext(context);
+        ZmailSoapContext zsc = getZmailSoapContext(context);
         Provisioning prov = Provisioning.getInstance();
         Account acct = getAuthenticatedAccount(zsc);
 
@@ -53,7 +53,7 @@ public class CreateDistributionList extends AccountDocumentHandler {
         Account creator = getAuthenticatedAccount(zsc);
         Group group = prov.createDelegatedGroup(name, attrs, dynamic, creator);
 
-        ZimbraLog.security.info(ZimbraLog.encodeAttrs(
+        ZmailLog.security.info(ZmailLog.encodeAttrs(
                  new String[] { "cmd", "CreateDistributionList", "name", name }, attrs));
 
         Element response = zsc.createElement(AccountConstants.CREATE_DISTRIBUTION_LIST_RESPONSE);

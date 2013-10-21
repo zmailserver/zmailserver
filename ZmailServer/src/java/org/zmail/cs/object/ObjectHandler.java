@@ -16,23 +16,23 @@
 /*
  * Created on Apr 30, 2004
  */
-package com.zimbra.cs.object;
+package org.zmail.cs.object;
 
 
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
-import com.zimbra.common.util.Log;
-import com.zimbra.common.util.LogFactory;
+import org.zmail.common.util.Log;
+import org.zmail.common.util.LogFactory;
 
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.cs.account.Provisioning;
-import com.zimbra.cs.account.Zimlet;
-import com.zimbra.cs.zimlet.ZimletConfig;
-import com.zimbra.cs.zimlet.ZimletException;
-import com.zimbra.cs.zimlet.ZimletHandler;
-import com.zimbra.cs.zimlet.ZimletUtil;
+import org.zmail.common.service.ServiceException;
+import org.zmail.cs.account.Provisioning;
+import org.zmail.cs.account.Zimlet;
+import org.zmail.cs.zimlet.ZimletConfig;
+import org.zmail.cs.zimlet.ZimletException;
+import org.zmail.cs.zimlet.ZimletHandler;
+import org.zmail.cs.zimlet.ZimletUtil;
 
 /**
  * @author schemers

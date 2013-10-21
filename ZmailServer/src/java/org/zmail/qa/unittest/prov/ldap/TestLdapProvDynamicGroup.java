@@ -12,7 +12,7 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.qa.unittest.prov.ldap;
+package org.zmail.qa.unittest.prov.ldap;
 
 import static org.junit.Assert.*;
 
@@ -27,24 +27,24 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 
 import com.google.common.collect.Sets;
-import com.zimbra.common.account.Key.*;
-import com.zimbra.common.account.ProvisioningConstants;
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.cs.account.Account;
-import com.zimbra.cs.account.Domain;
-import com.zimbra.cs.account.DynamicGroup;
-import com.zimbra.cs.account.Group;
-import com.zimbra.cs.account.GuestAccount;
-import com.zimbra.cs.account.Provisioning;
-import com.zimbra.cs.account.Server;
-import com.zimbra.cs.account.Provisioning.GroupMemberEmailAddrs;
-import com.zimbra.cs.account.Provisioning.GroupMembership;
-import com.zimbra.cs.account.Provisioning.MemberOf;
-import com.zimbra.cs.account.ldap.entry.LdapAccount;
-import com.zimbra.cs.account.ldap.entry.LdapDynamicGroup;
-import com.zimbra.cs.gal.GalGroupMembers;
-import com.zimbra.qa.unittest.TestUtil;
-import com.zimbra.qa.unittest.prov.Verify;
+import org.zmail.common.account.Key.*;
+import org.zmail.common.account.ProvisioningConstants;
+import org.zmail.common.service.ServiceException;
+import org.zmail.cs.account.Account;
+import org.zmail.cs.account.Domain;
+import org.zmail.cs.account.DynamicGroup;
+import org.zmail.cs.account.Group;
+import org.zmail.cs.account.GuestAccount;
+import org.zmail.cs.account.Provisioning;
+import org.zmail.cs.account.Server;
+import org.zmail.cs.account.Provisioning.GroupMemberEmailAddrs;
+import org.zmail.cs.account.Provisioning.GroupMembership;
+import org.zmail.cs.account.Provisioning.MemberOf;
+import org.zmail.cs.account.ldap.entry.LdapAccount;
+import org.zmail.cs.account.ldap.entry.LdapDynamicGroup;
+import org.zmail.cs.gal.GalGroupMembers;
+import org.zmail.qa.unittest.TestUtil;
+import org.zmail.qa.unittest.prov.Verify;
 
 public class TestLdapProvDynamicGroup extends LdapTest {
     private static LdapProvTestUtil provUtil;
@@ -104,14 +104,14 @@ public class TestLdapProvDynamicGroup extends LdapTest {
         // add a member
         prov.addGroupMembers(group, new String[]{acct.getName()});
 
-        assertTrue(acct.getMultiAttrSet(Provisioning.A_zimbraMemberOf).contains(group.getId()));
+        assertTrue(acct.getMultiAttrSet(Provisioning.A_zmailMemberOf).contains(group.getId()));
 
         // delete the group
         deleteDynamicGroup(group);
 
         // reget the acct
         acct = prov.get(AccountBy.id, acct.getId());
-        assertFalse(acct.getMultiAttrSet(Provisioning.A_zimbraMemberOf).contains(group.getId()));
+        assertFalse(acct.getMultiAttrSet(Provisioning.A_zmailMemberOf).contains(group.getId()));
     }
 
     /*
@@ -136,19 +136,19 @@ public class TestLdapProvDynamicGroup extends LdapTest {
 
     /*
      * ================================================
-     * Testing zimbraIsACLGroup and memeberURL settings
+     * Testing zmailIsACLGroup and memeberURL settings
      * ================================================
      */
 
     /*
-     * On create: if memeberURL is specified, zimbraIsACLGroup must also be specified
+     * On create: if memeberURL is specified, zmailIsACLGroup must also be specified
      * an set to FALSE.
      */
     @Test
-    public void zimbraIsACLGroup_and_memeberURL_1() throws Exception {
+    public void zmailIsACLGroup_and_memeberURL_1() throws Exception {
         Map<String, Object> attrs = new HashMap<String, Object>();
         attrs.put(Provisioning.A_memberURL, "blah");
-        attrs.put(Provisioning.A_zimbraIsACLGroup, ProvisioningConstants.FALSE);
+        attrs.put(Provisioning.A_zmailIsACLGroup, ProvisioningConstants.FALSE);
         DynamicGroup group = createDynamicGroup(genGroupNameLocalPart(seq), attrs);
         assertEquals(false, group.isIsACLGroup());
 
@@ -165,7 +165,7 @@ public class TestLdapProvDynamicGroup extends LdapTest {
         errCode = null;
         attrs = new HashMap<String, Object>();
         attrs.put(Provisioning.A_memberURL, "blah");
-        attrs.put(Provisioning.A_zimbraIsACLGroup, ProvisioningConstants.TRUE);
+        attrs.put(Provisioning.A_zmailIsACLGroup, ProvisioningConstants.TRUE);
         try {
             createDynamicGroup(genGroupNameLocalPart(seq), attrs);
         } catch (ServiceException e) {
@@ -175,20 +175,20 @@ public class TestLdapProvDynamicGroup extends LdapTest {
     }
 
     /*
-     * On create: if memeberURL is not specified, zimbraIsACLGroup must be either not
+     * On create: if memeberURL is not specified, zmailIsACLGroup must be either not
      * specified, or set to TRUE.
      */
     @Test
-    public void zimbraIsACLGroup_and_memeberURL_2() throws Exception {
+    public void zmailIsACLGroup_and_memeberURL_2() throws Exception {
         Map<String, Object> attrs = new HashMap<String, Object>();
 
-        attrs.put(Provisioning.A_zimbraIsACLGroup, ProvisioningConstants.TRUE);
+        attrs.put(Provisioning.A_zmailIsACLGroup, ProvisioningConstants.TRUE);
         DynamicGroup group = createDynamicGroup(genGroupNameLocalPart(seq), attrs);
         assertEquals(true, group.isIsACLGroup());
 
         String errCode = null;
         attrs = new HashMap<String, Object>();
-        attrs.put(Provisioning.A_zimbraIsACLGroup, ProvisioningConstants.FALSE);
+        attrs.put(Provisioning.A_zmailIsACLGroup, ProvisioningConstants.FALSE);
         try {
             createDynamicGroup(genGroupNameLocalPart(seq), attrs);
         } catch (ServiceException e) {
@@ -198,18 +198,18 @@ public class TestLdapProvDynamicGroup extends LdapTest {
     }
 
     /*
-     * On modify: zimbraIsACLGroup is not mutable, regardless whetyher memberURL
+     * On modify: zmailIsACLGroup is not mutable, regardless whetyher memberURL
      * is specified.
      */
     @Test
-    public void zimbraIsACLGroup_and_memeberURL_3() throws Exception {
+    public void zmailIsACLGroup_and_memeberURL_3() throws Exception {
         DynamicGroup group = createDynamicGroup(genGroupNameLocalPart());
         Map<String, Object> attrs;
 
         String errCode = null;
         try {
             attrs = new HashMap<String, Object>();
-            attrs.put(Provisioning.A_zimbraIsACLGroup, ProvisioningConstants.TRUE);
+            attrs.put(Provisioning.A_zmailIsACLGroup, ProvisioningConstants.TRUE);
             prov.modifyAttrs(group, attrs, true);
         } catch (ServiceException e) {
             errCode = e.getCode();
@@ -219,7 +219,7 @@ public class TestLdapProvDynamicGroup extends LdapTest {
         errCode = null;
         try {
             attrs = new HashMap<String, Object>();
-            attrs.put(Provisioning.A_zimbraIsACLGroup, ProvisioningConstants.TRUE);
+            attrs.put(Provisioning.A_zmailIsACLGroup, ProvisioningConstants.TRUE);
             attrs.put(Provisioning.A_memberURL, "blah");
             prov.modifyAttrs(group, attrs, true);
         } catch (ServiceException e) {
@@ -229,10 +229,10 @@ public class TestLdapProvDynamicGroup extends LdapTest {
     }
 
     /*
-     * On modify: memeberURL cannot be modified if zimbraIsACLGroup is TRUE.
+     * On modify: memeberURL cannot be modified if zmailIsACLGroup is TRUE.
      */
     @Test
-    public void zimbraIsACLGroup_and_memeberURL_4() throws Exception {
+    public void zmailIsACLGroup_and_memeberURL_4() throws Exception {
         DynamicGroup group = createDynamicGroup(genGroupNameLocalPart());
         Map<String, Object> attrs;
 
@@ -248,13 +248,13 @@ public class TestLdapProvDynamicGroup extends LdapTest {
     }
 
     /*
-     * On modify: memeberURL can be modified if zimbraIsACLGroup is FALSE.
+     * On modify: memeberURL can be modified if zmailIsACLGroup is FALSE.
      */
     @Test
-    public void zimbraIsACLGroup_and_memeberURL_5() throws Exception {
+    public void zmailIsACLGroup_and_memeberURL_5() throws Exception {
         Map<String, Object> attrs = new HashMap<String, Object>();
         attrs.put(Provisioning.A_memberURL, "foo");
-        attrs.put(Provisioning.A_zimbraIsACLGroup, ProvisioningConstants.FALSE);
+        attrs.put(Provisioning.A_zmailIsACLGroup, ProvisioningConstants.FALSE);
         DynamicGroup group = createDynamicGroup(genGroupNameLocalPart(seq), attrs);
         assertEquals(false, group.isIsACLGroup());
 

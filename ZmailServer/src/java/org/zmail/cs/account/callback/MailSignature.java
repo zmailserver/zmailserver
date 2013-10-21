@@ -13,24 +13,24 @@
  * ***** END LICENSE BLOCK *****
  */
 
-package com.zimbra.cs.account.callback;
+package org.zmail.cs.account.callback;
 
 import java.util.Map;
 
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.common.util.ZimbraLog;
-import com.zimbra.cs.account.Account;
-import com.zimbra.cs.account.Identity;
-import com.zimbra.cs.account.AttributeCallback;
-import com.zimbra.cs.account.Entry;
-import com.zimbra.cs.account.Provisioning;
-import com.zimbra.cs.account.Signature;
-import com.zimbra.cs.account.callback.CallbackContext.DataKey;
+import org.zmail.common.service.ServiceException;
+import org.zmail.common.util.ZmailLog;
+import org.zmail.cs.account.Account;
+import org.zmail.cs.account.Identity;
+import org.zmail.cs.account.AttributeCallback;
+import org.zmail.cs.account.Entry;
+import org.zmail.cs.account.Provisioning;
+import org.zmail.cs.account.Signature;
+import org.zmail.cs.account.callback.CallbackContext.DataKey;
  
 public class MailSignature extends AttributeCallback {
 
     /**
-     * check to make sure zimbraPrefMailSignature is shorter than the limit
+     * check to make sure zmailPrefMailSignature is shorter than the limit
      */
     @Override
     public void preModify(CallbackContext context, String attrName, Object value,
@@ -53,19 +53,19 @@ public class MailSignature extends AttributeCallback {
             try {
                 maxLen = Integer.parseInt(maxInContext);
             } catch (NumberFormatException e) {
-                ZimbraLog.account.warn("encountered invalid " + 
+                ZmailLog.account.warn("encountered invalid " + 
                         DataKey.MAX_SIGNATURE_LEN.name() + ": " + maxInContext);
             }
         }
 
         if (maxLen == -1) {
-            String maxInAttrsToModify = (String) attrsToModify.get(Provisioning.A_zimbraMailSignatureMaxLength);
+            String maxInAttrsToModify = (String) attrsToModify.get(Provisioning.A_zmailMailSignatureMaxLength);
             if (maxInAttrsToModify != null) {
                 try {
                     maxLen = Integer.parseInt(maxInAttrsToModify);
                 } catch (NumberFormatException e) {
-                    ZimbraLog.account.warn("encountered invalid " + 
-                            Provisioning.A_zimbraMailSignatureMaxLength + ": " +
+                    ZmailLog.account.warn("encountered invalid " + 
+                            Provisioning.A_zmailMailSignatureMaxLength + ": " +
                             maxInAttrsToModify);
                 }
             }
@@ -93,7 +93,7 @@ public class MailSignature extends AttributeCallback {
         // 0 means unlimited
         if (maxLen != 0 && ((String)value).length() > maxLen) {
             throw ServiceException.INVALID_REQUEST(
-                    Provisioning.A_zimbraPrefMailSignature + 
+                    Provisioning.A_zmailPrefMailSignature + 
                     " is longer than the limited value " + maxLen, null);
         }
     }

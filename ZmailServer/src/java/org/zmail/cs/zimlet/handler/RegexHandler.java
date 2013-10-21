@@ -19,17 +19,17 @@
  * TODO To change the template for this generated file go to
  * Window - Preferences - Java - Code Generation - Code and Comments
  */
-package com.zimbra.cs.zimlet.handler;
+package org.zmail.cs.zimlet.handler;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import com.zimbra.cs.zimlet.ZimletConf;
-import com.zimbra.cs.zimlet.ZimletConfig;
-import com.zimbra.cs.zimlet.ZimletException;
-import com.zimbra.cs.zimlet.ZimletHandler;
+import org.zmail.cs.zimlet.ZimletConf;
+import org.zmail.cs.zimlet.ZimletConfig;
+import org.zmail.cs.zimlet.ZimletException;
+import org.zmail.cs.zimlet.ZimletHandler;
 
 /**
  * @author schemers

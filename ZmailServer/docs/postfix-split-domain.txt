@@ -3,9 +3,9 @@ Split Domain Setup
 ------------------
 
 We are often asked how to configure Zimbra Collaboration Suite so that
-some accounts are moved/migrated to Zimbra but other accounts continue
+some accounts are moved/migrated to Zmail but other accounts continue
 to live on existing mail system.  This is possible IF your mail system
-offers some of the mail routing features that the Zimbra offers.
+offers some of the mail routing features that the Zmail offers.
 
 Consider this example:
 
@@ -21,11 +21,11 @@ Consider this example:
    - Users "foo@example.com" and "bar@example.com" existed in the old
      system.
 
-   - You have installed Zimbra on the host "zimbra.example.com" and
+   - You have installed Zmail on the host "zmail.example.com" and
      created the domain "example.com" on it also.
 
    - You have migrated the mailbox of the user "foo@example.com" to
-     the Zimbra system, using one of our migration tools documented
+     the Zmail system, using one of our migration tools documented
      elsewhere.
 
 Some issues to consider as a result of such splitting your domain:
@@ -40,9 +40,9 @@ Some issues to consider as a result of such splitting your domain:
    - The end user "foo@example.com" will need to be educated and
      user's desktop software might need some minor configuration
      changes.  For user uses IMAP, s/he must be told to change IMAP
-     server setting to where Zimbra is installed.  If s/he uses
-     Outlook/MAPI, Zimbra MAPI plugin should be deployed.  If using
-     webmail, the address of the new Zimbra Web Client address needs
+     server setting to where Zmail is installed.  If s/he uses
+     Outlook/MAPI, Zmail MAPI plugin should be deployed.  If using
+     webmail, the address of the new Zmail Web Client address needs
      to be communicated to the user.
 
    - If "foo@example.com" is using a mail client that has outgoing
@@ -52,7 +52,7 @@ Some issues to consider as a result of such splitting your domain:
      decision you will make below), user may foo@example.com or may
      not require changing their outgoing SMTP setting.
 
-   - You will have to pick either the Zimbra system or your existing
+   - You will have to pick either the Zmail system or your existing
      system to be the "authoritative" system for your domain.  Let's
      call the authoritative system the master, and the other one the
      slave.  The master MTA must be aware of all accounts on the
@@ -68,34 +68,34 @@ Some issues to consider as a result of such splitting your domain:
 
    - For ease of administration you should keep any GAL on only one of
      these systems - avoids duplication.  However this requires one
-     these systems be able to proxy to the other for GAL (Zimbra can
-     use a non-Zimbra LDAP server).  If proxy is not possible some
+     these systems be able to proxy to the other for GAL (Zmail can
+     use a non-Zmail LDAP server).  If proxy is not possible some
      sync method needs to be written.
      
-   - Zimbra is also able to authenticate users on a remote LDAP
+   - Zmail is also able to authenticate users on a remote LDAP
      server, in case you have a portal or user page backed by LDAP
-     where passwords are changed.  Note that, out of the box, Zimbra
-     user's password will live in the Zimbra system.  If passwords
+     where passwords are changed.  Note that, out of the box, Zmail
+     user's password will live in the Zmail system.  If passwords
      live remotely, it is possible the old system can continue to SMTP
-     authenticate users who live on the Zimbra system.  If that is the
-     case, then a Zimbra user with SMTP AUTH can continue to use the
+     authenticate users who live on the Zmail system.  If that is the
+     case, then a Zmail user with SMTP AUTH can continue to use the
      old system's MTA as their MTA, assuming it is visible on the
      network.
 
 Please read the following discussion of how to provision and configure
-Zimbra as either a master or as a slave.
+Zmail as either a master or as a slave.
 
-If you decide to use Zimbra as the master system, then you should also
-carefully read the section on how Zimbra is configured as the slave -
+If you decide to use Zmail as the master system, then you should also
+carefully read the section on how Zmail is configured as the slave -
 this will show you what functionality is required of your existing
 mail system so it can be a slave.  Vice versa if you are going to use
-Zimbra as the slave system.
+Zmail as the slave system.
 
 --------------------------------
-Configuring Zimbra as the Master
+Configuring Zmail as the Master
 --------------------------------
 
-Create corresponding accounts on the Zimbra system for all the
+Create corresponding accounts on the Zmail system for all the
 accounts that will live on the slave system.  Note that
 bar@example.com is not migrating, and lives on the slave.
 
@@ -104,24 +104,24 @@ bar@example.com is not migrating, and lives on the slave.
 Configure mail routing for this account so email flows to the slave
 system for this account:
 
-    $ zmprov ma bar@example.com zimbraMailTransport smtp:mail.example.com
+    $ zmprov ma bar@example.org zmailMailTransport smtp:mail.example.com
 
 Note that we are not using any catch all (akin to "luser_relay")
 tricks here.  Master needs to be authoritative, and if it forwards
 unknown accounts, then we would have a mail loop.
 
-(Note to Zimbra: TBD: do we need to set any other attributes to make
-this forwarding account on the Zimbra side more of a dummy?  Instead
+(Note to Zmail: TBD: do we need to set any other attributes to make
+this forwarding account on the Zmail side more of a dummy?  Instead
 of random password, it would better to have login disabled, but
-zimbraMailStatus still has to read enabled.)
+zmailMailStatus still has to read enabled.)
 
-Change your MX record so mail from the cloud flows into the Zimbra MTA
+Change your MX record so mail from the cloud flows into the Zmail MTA
 first.  (This is the last step!  You will bounce mail if you make this
 change before configuring the entire system and testing that mail flow
 is working as desired.)
 
 -------------------------------
-Configuring Zimbra as the Slave
+Configuring Zmail as the Slave
 -------------------------------
 
 The slave system needs to accept mail for accounts that live on the
@@ -130,24 +130,24 @@ the master.
 
 You can accomplish this piece of mail routing by saying:
 
-    $ zmprov md example.com zimbraMailCatchAllAddress @zimbra.com
-    $ zmprov md example.com zimbraMailCatchAllForwardingAddress @zimbra.com
-    $ zmprov md example.com zimbraMailTransport smtp:mail.example.com
+    $ zmprov md example.org zmailMailCatchAllAddress @zmail.com
+    $ zmprov md example.org zmailMailCatchAllForwardingAddress @zmail.com
+    $ zmprov md example.org zmailMailTransport smtp:mail.example.com
 
-The first two commands (in combination) tell Zimbra postfix to accept
-all addresses in the @zimbra.com domain as valid addresses.
+The first two commands (in combination) tell Zmail postfix to accept
+all addresses in the @zmail.com domain as valid addresses.
 
 The third command establishes default mail routing for the domain.
 
-We also highly recommend that, in a slave Zimbra system, you turn off
+We also highly recommend that, in a slave Zmail system, you turn off
 DNS lookups and internet wide message routing from the slave host and
 route all mail through the master.  You can accomplish this by:
 
-    $ zmprov mcf zimbraMtaRelayHost mail.example.com
-    $ zmprov mcf zimbraMtaDnsLookupsEnabled FALSE
+    $ zmprov mcf zmailMtaRelayHost mail.example.com
+    $ zmprov mcf zmailMtaDnsLookupsEnabled FALSE
 
 Make sure to configure mail.example.com to accept mail relayed by
-zimbra.example.com.
+zmail.example.com.
 
 All these commands require that after running the whole set of them,
 you do:
@@ -159,22 +159,22 @@ you do:
 Examples of Mail Flow
 ---------------------
 
-- Zimbra is master, mail sent from the internet, account lives on
+- Zmail is master, mail sent from the internet, account lives on
   slave.
 
     internet -> 
-    zimbra.example.com postfix server ->
+    zmail.example.com postfix server ->
     account transport says to use smtp:mail.example.com ->
     mail.example.com existing infrastructure MTA ->
     mail.example.com existing infrastructure mail store
 
-- Zimbra is slave and mail sent from foo@example.com (zimbra) ->
-  bar@example.com (old system).  Assume foo is using Zimbra AJAX
+- Zmail is slave and mail sent from foo@example.com (zmail) ->
+  bar@example.com (old system).  Assume foo is using Zmail AJAX
   client.
 
     foo's web browser ->
-    zimbra.example.com tomcat server ->
-    zimbra.example.com postfix server ->
+    zmail.example.com tomcat server ->
+    zmail.example.com postfix server ->
     account not local, finds domain transport setting ->
     mail.example.com existing infrastructure MTA ->
     mail.example.com existing infrastructure mail store

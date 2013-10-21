@@ -12,7 +12,7 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.store.triton;
+package org.zmail.cs.store.triton;
 
 import java.io.ByteArrayInputStream;
 import java.util.Random;
@@ -21,18 +21,18 @@ import org.junit.Assert;
 import org.junit.Ignore;
 import org.junit.Test;
 
-import com.zimbra.cs.account.MockProvisioning;
-import com.zimbra.cs.mailbox.Mailbox;
-import com.zimbra.cs.mailbox.MailboxManager;
-import com.zimbra.cs.store.AbstractStoreManagerTest;
-import com.zimbra.cs.store.Blob;
-import com.zimbra.cs.store.MailboxBlob;
-import com.zimbra.cs.store.StagedBlob;
-import com.zimbra.cs.store.StoreManager;
-import com.zimbra.cs.store.StoreManager.StoreFeature;
-import com.zimbra.cs.store.external.ContentAddressableStoreManager;
-import com.zimbra.cs.store.triton.TritonBlobStoreManager.HashType;
-import com.zimbra.qa.unittest.TestUtil;
+import org.zmail.cs.account.MockProvisioning;
+import org.zmail.cs.mailbox.Mailbox;
+import org.zmail.cs.mailbox.MailboxManager;
+import org.zmail.cs.store.AbstractStoreManagerTest;
+import org.zmail.cs.store.Blob;
+import org.zmail.cs.store.MailboxBlob;
+import org.zmail.cs.store.StagedBlob;
+import org.zmail.cs.store.StoreManager;
+import org.zmail.cs.store.StoreManager.StoreFeature;
+import org.zmail.cs.store.external.ContentAddressableStoreManager;
+import org.zmail.cs.store.triton.TritonBlobStoreManager.HashType;
+import org.zmail.qa.unittest.TestUtil;
 
 @Ignore("requires Triton server")
 public class TritonBlobStoreManagerTest extends AbstractStoreManagerTest {

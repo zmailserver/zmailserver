@@ -14,34 +14,34 @@
  * 
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.qa.unittest;
+package org.zmail.qa.unittest;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import com.zimbra.common.net.SocketFactories;
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.cs.account.Account;
-import com.zimbra.cs.account.AuthToken;
-import com.zimbra.cs.account.CalendarResource;
-import com.zimbra.cs.account.Cos;
-import com.zimbra.cs.account.DistributionList;
-import com.zimbra.cs.account.Domain;
-import com.zimbra.cs.account.DynamicGroup;
-import com.zimbra.cs.account.Group;
-import com.zimbra.cs.account.GuestAccount;
-import com.zimbra.cs.account.NamedEntry;
-import com.zimbra.cs.account.Provisioning;
-import com.zimbra.common.account.Key;
-import com.zimbra.common.account.Key.AccountBy;
-import com.zimbra.common.account.ProvisioningConstants;
-import com.zimbra.cs.account.Provisioning.CacheEntry;
-import com.zimbra.cs.account.Server;
-import com.zimbra.cs.account.Zimlet;
-import com.zimbra.qa.unittest.prov.ldap.ACLTestUtil;
-import com.zimbra.soap.admin.type.CacheEntryType;
+import org.zmail.common.net.SocketFactories;
+import org.zmail.common.service.ServiceException;
+import org.zmail.cs.account.Account;
+import org.zmail.cs.account.AuthToken;
+import org.zmail.cs.account.CalendarResource;
+import org.zmail.cs.account.Cos;
+import org.zmail.cs.account.DistributionList;
+import org.zmail.cs.account.Domain;
+import org.zmail.cs.account.DynamicGroup;
+import org.zmail.cs.account.Group;
+import org.zmail.cs.account.GuestAccount;
+import org.zmail.cs.account.NamedEntry;
+import org.zmail.cs.account.Provisioning;
+import org.zmail.common.account.Key;
+import org.zmail.common.account.Key.AccountBy;
+import org.zmail.common.account.ProvisioningConstants;
+import org.zmail.cs.account.Provisioning.CacheEntry;
+import org.zmail.cs.account.Server;
+import org.zmail.cs.account.Zimlet;
+import org.zmail.qa.unittest.prov.ldap.ACLTestUtil;
+import org.zmail.soap.admin.type.CacheEntryType;
 
 public abstract class TestProv extends TestLdap {
 
@@ -170,7 +170,7 @@ public abstract class TestProv extends TestLdap {
     
     protected Account createDelegatedAdminAccount(String localpart, Domain domain) throws Exception {
         Map<String, Object> attrs = new HashMap<String, Object>();
-        attrs.put(Provisioning.A_zimbraIsDelegatedAdminAccount, ProvisioningConstants.TRUE);
+        attrs.put(Provisioning.A_zmailIsDelegatedAdminAccount, ProvisioningConstants.TRUE);
         return createAccount(localpart, domain, attrs);
     }
     
@@ -195,7 +195,7 @@ public abstract class TestProv extends TestLdap {
     protected CalendarResource createCalendarResource(String localpart, Domain domain) throws Exception {
         Map<String, Object> attrs = new HashMap<String, Object>();
         attrs.put(Provisioning.A_displayName, localpart);
-        attrs.put(Provisioning.A_zimbraCalResType, "Equipment");
+        attrs.put(Provisioning.A_zmailCalResType, "Equipment");
         
         String email = localpart + "@" + domain.getName();
         CalendarResource cr = mProv.createCalendarResource(email, PASSWORD, attrs);
@@ -236,7 +236,7 @@ public abstract class TestProv extends TestLdap {
     protected DistributionList createAdminDistributionList(String localpart, Domain domain) 
     throws Exception {
         Map<String, Object> attrs = new HashMap<String, Object>();
-        attrs.put(Provisioning.A_zimbraIsAdminGroup, ProvisioningConstants.TRUE);
+        attrs.put(Provisioning.A_zmailIsAdminGroup, ProvisioningConstants.TRUE);
         return createDistributionList(localpart, domain, attrs);
     }
     
@@ -268,7 +268,7 @@ public abstract class TestProv extends TestLdap {
     
     protected DynamicGroup createAdminDynamicGroup(String localpart, Domain domain) throws Exception {
         Map<String, Object> attrs = new HashMap<String, Object>();
-        attrs.put(Provisioning.A_zimbraIsAdminGroup, ProvisioningConstants.TRUE);
+        attrs.put(Provisioning.A_zmailIsAdminGroup, ProvisioningConstants.TRUE);
         return createDynamicGroup(localpart, domain, attrs);
     }
     
@@ -291,7 +291,7 @@ public abstract class TestProv extends TestLdap {
     
     protected Zimlet createZimlet() throws Exception {
         Map<String, Object> attrs = new HashMap<String, Object>();
-        attrs.put(Provisioning.A_zimbraZimletVersion, "1.0");
+        attrs.put(Provisioning.A_zmailZimletVersion, "1.0");
         Zimlet zimlet = mProv.createZimlet(genZimletName(), attrs);
         mCreatedEntries.add(zimlet);
         return zimlet;

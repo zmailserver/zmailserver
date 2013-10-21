@@ -12,7 +12,7 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.datasource;
+package org.zmail.cs.datasource;
 
 import java.io.IOException;
 import java.util.Date;
@@ -24,35 +24,35 @@ import java.util.regex.Pattern;
 import javax.mail.MessagingException;
 import javax.security.auth.login.LoginException;
 
-import com.zimbra.common.localconfig.LC;
-import com.zimbra.common.net.SocketFactories;
-import com.zimbra.common.service.RemoteServiceException;
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.common.util.Log;
-import com.zimbra.common.util.ZimbraLog;
-import com.zimbra.cs.account.DataSource;
-import com.zimbra.cs.filter.RuleManager;
-import com.zimbra.cs.mailbox.DeliveryContext;
-import com.zimbra.cs.mailbox.Flag;
-import com.zimbra.cs.mailbox.MailServiceException;
-import com.zimbra.cs.mailbox.Message;
-import com.zimbra.cs.mailclient.CommandFailedException;
-import com.zimbra.cs.mailclient.MailConfig;
-import com.zimbra.cs.mailclient.ParseException;
-import com.zimbra.cs.mailclient.pop3.ContentInputStream;
-import com.zimbra.cs.mailclient.pop3.Pop3Capabilities;
-import com.zimbra.cs.mailclient.pop3.Pop3Config;
-import com.zimbra.cs.mailclient.pop3.Pop3Connection;
-import com.zimbra.cs.mime.ParsedMessage;
-import com.zimbra.soap.type.DataSource.ConnectionType;
+import org.zmail.common.localconfig.LC;
+import org.zmail.common.net.SocketFactories;
+import org.zmail.common.service.RemoteServiceException;
+import org.zmail.common.service.ServiceException;
+import org.zmail.common.util.Log;
+import org.zmail.common.util.ZmailLog;
+import org.zmail.cs.account.DataSource;
+import org.zmail.cs.filter.RuleManager;
+import org.zmail.cs.mailbox.DeliveryContext;
+import org.zmail.cs.mailbox.Flag;
+import org.zmail.cs.mailbox.MailServiceException;
+import org.zmail.cs.mailbox.Message;
+import org.zmail.cs.mailclient.CommandFailedException;
+import org.zmail.cs.mailclient.MailConfig;
+import org.zmail.cs.mailclient.ParseException;
+import org.zmail.cs.mailclient.pop3.ContentInputStream;
+import org.zmail.cs.mailclient.pop3.Pop3Capabilities;
+import org.zmail.cs.mailclient.pop3.Pop3Config;
+import org.zmail.cs.mailclient.pop3.Pop3Connection;
+import org.zmail.cs.mime.ParsedMessage;
+import org.zmail.soap.type.DataSource.ConnectionType;
 
 public class Pop3Sync extends MailItemImport {
     private final Pop3Connection connection;
     private final boolean indexAttachments;
 
-    private static final Log LOG = ZimbraLog.datasource;
+    private static final Log LOG = ZmailLog.datasource;
 
-    // Zimbra UID format is: item_id "." blob_digest
+    // Zmail UID format is: item_id "." blob_digest
     private static final Pattern PATTERN_ZIMBRA_UID =
         Pattern.compile("(\\d+)\\.([^\\.]+)");
 
@@ -69,7 +69,7 @@ public class Pop3Sync extends MailItemImport {
         config.setAuthenticationId(ds.getUsername());
         config.setSecurity(getSecurity(ds.getConnectionType()));
         if (ds.isDebugTraceEnabled()) {
-            config.setLogger(SyncUtil.getTraceLogger(ZimbraLog.pop_client, ds.getId()));
+            config.setLogger(SyncUtil.getTraceLogger(ZmailLog.pop_client, ds.getId()));
         }
         config.setSocketFactory(SocketFactories.defaultSocketFactory());
         config.setSSLSocketFactory(SocketFactories.defaultSSLSocketFactory());
@@ -307,10 +307,10 @@ public class Pop3Sync extends MailItemImport {
         throws ServiceException {
         Matcher matcher = PATTERN_ZIMBRA_UID.matcher(uid);
         if (!matcher.matches()) {
-            return false; // Not a Zimbra UID
+            return false; // Not a Zmail UID
         }
         // See if this UID comes from the specified mailbox. Popping from
-        // another Zimbra mailbox is ok.
+        // another Zmail mailbox is ok.
         int itemId;
         try {
             itemId = Integer.parseInt(matcher.group(1));

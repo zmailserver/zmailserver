@@ -19,7 +19,7 @@
  * TODO To change the template for this generated file go to
  * Window - Preferences - Java - Code Generation - Code and Comments
  */
-package com.zimbra.cs.redolog.util;
+package org.zmail.cs.redolog.util;
 
 import java.io.File;
 import java.io.IOException;
@@ -40,13 +40,13 @@ import org.apache.commons.cli.HelpFormatter;
 import org.apache.commons.cli.Options;
 import org.apache.commons.cli.ParseException;
 
-import com.zimbra.common.util.ByteUtil;
-import com.zimbra.common.util.CliUtil;
-import com.zimbra.cs.redolog.RolloverManager;
-import com.zimbra.cs.redolog.logger.FileHeader;
-import com.zimbra.cs.redolog.logger.FileLogReader;
-import com.zimbra.cs.redolog.op.RedoableOp;
-import com.zimbra.cs.redolog.op.StoreIncomingBlob;
+import org.zmail.common.util.ByteUtil;
+import org.zmail.common.util.CliUtil;
+import org.zmail.cs.redolog.RolloverManager;
+import org.zmail.cs.redolog.logger.FileHeader;
+import org.zmail.cs.redolog.logger.FileLogReader;
+import org.zmail.cs.redolog.op.RedoableOp;
+import org.zmail.cs.redolog.op.StoreIncomingBlob;
 
 /**
  * @author jhahm

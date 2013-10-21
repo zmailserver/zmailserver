@@ -12,15 +12,15 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.account.accesscontrol;
+package org.zmail.cs.account.accesscontrol;
 
 import java.util.HashSet;
 import java.util.Set;
 
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.common.util.SetUtil;
-import com.zimbra.cs.account.AttributeClass;
-import com.zimbra.cs.account.AttributeManager;
+import org.zmail.common.service.ServiceException;
+import org.zmail.common.util.SetUtil;
+import org.zmail.cs.account.AttributeClass;
+import org.zmail.cs.account.AttributeManager;
 
 public class AttrRight extends AdminRight {
 

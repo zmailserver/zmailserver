@@ -12,7 +12,7 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.mime;
+package org.zmail.cs.mime;
 
 import java.util.Collections;
 import java.util.HashMap;
@@ -22,8 +22,8 @@ import org.junit.Assert;
 import org.junit.Test;
 
 import com.google.common.base.Strings;
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.cs.mailbox.MailServiceException;
+import org.zmail.common.service.ServiceException;
+import org.zmail.cs.mailbox.MailServiceException;
 
 /**
  * Unit test for {@link ParsedContact}.

@@ -12,7 +12,7 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.mailbox;
+package org.zmail.cs.mailbox;
 
 import static org.junit.Assert.assertEquals;
 
@@ -31,21 +31,21 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 
 import com.google.common.collect.Sets;
-import com.zimbra.common.account.Key;
-import com.zimbra.common.account.ZAttrProvisioning.MailThreadingAlgorithm;
-import com.zimbra.common.localconfig.LC;
-import com.zimbra.common.mime.InternetAddress;
-import com.zimbra.common.util.ArrayUtil;
-import com.zimbra.cs.account.Account;
-import com.zimbra.cs.account.MockProvisioning;
-import com.zimbra.cs.account.Provisioning;
-import com.zimbra.cs.index.BrowseTerm;
-import com.zimbra.cs.mailbox.util.TypedIdList;
-import com.zimbra.cs.mime.ParsedMessage;
-import com.zimbra.cs.session.PendingModifications;
-import com.zimbra.cs.session.PendingModifications.ModificationKey;
-import com.zimbra.cs.store.MockStoreManager;
-import com.zimbra.cs.store.StoreManager;
+import org.zmail.common.account.Key;
+import org.zmail.common.account.ZAttrProvisioning.MailThreadingAlgorithm;
+import org.zmail.common.localconfig.LC;
+import org.zmail.common.mime.InternetAddress;
+import org.zmail.common.util.ArrayUtil;
+import org.zmail.cs.account.Account;
+import org.zmail.cs.account.MockProvisioning;
+import org.zmail.cs.account.Provisioning;
+import org.zmail.cs.index.BrowseTerm;
+import org.zmail.cs.mailbox.util.TypedIdList;
+import org.zmail.cs.mime.ParsedMessage;
+import org.zmail.cs.session.PendingModifications;
+import org.zmail.cs.session.PendingModifications.ModificationKey;
+import org.zmail.cs.store.MockStoreManager;
+import org.zmail.cs.store.StoreManager;
 
 /**
  * Unit test for {@link Mailbox}.
@@ -58,7 +58,7 @@ public final class MailboxTest {
     public static void init() throws Exception {
         MailboxTestUtil.initServer();
         Provisioning prov = Provisioning.getInstance();
-        prov.createAccount("test@zimbra.com", "secret", new HashMap<String, Object>());
+        prov.createAccount("test@zmail.com", "secret", new HashMap<String, Object>());
     }
 
     @Before
@@ -73,24 +73,24 @@ public final class MailboxTest {
         Mailbox mbox = MailboxManager.getInstance().getMailboxByAccountId(MockProvisioning.DEFAULT_ACCOUNT_ID);
 
         DeliveryOptions dopt = new DeliveryOptions().setFolderId(Mailbox.ID_FOLDER_INBOX);
-        mbox.addMessage(null, new ParsedMessage("From: test1-1@sub1.zimbra.com".getBytes(), false), dopt, null);
-        mbox.addMessage(null, new ParsedMessage("From: test1-2@sub1.zimbra.com".getBytes(), false), dopt, null);
-        mbox.addMessage(null, new ParsedMessage("From: test1-3@sub1.zimbra.com".getBytes(), false), dopt, null);
-        mbox.addMessage(null, new ParsedMessage("From: test1-4@sub1.zimbra.com".getBytes(), false), dopt, null);
-        mbox.addMessage(null, new ParsedMessage("From: test2-1@sub2.zimbra.com".getBytes(), false), dopt, null);
-        mbox.addMessage(null, new ParsedMessage("From: test2-2@sub2.zimbra.com".getBytes(), false), dopt, null);
-        mbox.addMessage(null, new ParsedMessage("From: test2-3@sub2.zimbra.com".getBytes(), false), dopt, null);
-        mbox.addMessage(null, new ParsedMessage("From: test3-1@sub3.zimbra.com".getBytes(), false), dopt, null);
-        mbox.addMessage(null, new ParsedMessage("From: test3-2@sub3.zimbra.com".getBytes(), false), dopt, null);
-        mbox.addMessage(null, new ParsedMessage("From: test4-1@sub4.zimbra.com".getBytes(), false), dopt, null);
+        mbox.addMessage(null, new ParsedMessage("From: test1-1@sub1.zmail.com".getBytes(), false), dopt, null);
+        mbox.addMessage(null, new ParsedMessage("From: test1-2@sub1.zmail.com".getBytes(), false), dopt, null);
+        mbox.addMessage(null, new ParsedMessage("From: test1-3@sub1.zmail.com".getBytes(), false), dopt, null);
+        mbox.addMessage(null, new ParsedMessage("From: test1-4@sub1.zmail.com".getBytes(), false), dopt, null);
+        mbox.addMessage(null, new ParsedMessage("From: test2-1@sub2.zmail.com".getBytes(), false), dopt, null);
+        mbox.addMessage(null, new ParsedMessage("From: test2-2@sub2.zmail.com".getBytes(), false), dopt, null);
+        mbox.addMessage(null, new ParsedMessage("From: test2-3@sub2.zmail.com".getBytes(), false), dopt, null);
+        mbox.addMessage(null, new ParsedMessage("From: test3-1@sub3.zmail.com".getBytes(), false), dopt, null);
+        mbox.addMessage(null, new ParsedMessage("From: test3-2@sub3.zmail.com".getBytes(), false), dopt, null);
+        mbox.addMessage(null, new ParsedMessage("From: test4-1@sub4.zmail.com".getBytes(), false), dopt, null);
         mbox.index.indexDeferredItems();
 
         List<BrowseTerm> terms = mbox.browse(null, Mailbox.BrowseBy.domains, null, 100);
         Assert.assertEquals(4, terms.size());
-        Assert.assertEquals("sub1.zimbra.com", terms.get(0).getText());
-        Assert.assertEquals("sub2.zimbra.com", terms.get(1).getText());
-        Assert.assertEquals("sub3.zimbra.com", terms.get(2).getText());
-        Assert.assertEquals("sub4.zimbra.com", terms.get(3).getText());
+        Assert.assertEquals("sub1.zmail.com", terms.get(0).getText());
+        Assert.assertEquals("sub2.zmail.com", terms.get(1).getText());
+        Assert.assertEquals("sub3.zmail.com", terms.get(2).getText());
+        Assert.assertEquals("sub4.zmail.com", terms.get(3).getText());
         Assert.assertEquals(8, terms.get(0).getFreq());
         Assert.assertEquals(6, terms.get(1).getFreq());
         Assert.assertEquals(4, terms.get(2).getFreq());
@@ -99,7 +99,7 @@ public final class MailboxTest {
 
     @Test
     public void threadDraft() throws Exception {
-        Account acct = Provisioning.getInstance().getAccount("test@zimbra.com");
+        Account acct = Provisioning.getInstance().getAccount("test@zmail.com");
         acct.setMailThreadingAlgorithm(MailThreadingAlgorithm.subject);
 
         Mailbox mbox = MailboxManager.getInstance().getMailboxByAccount(acct);
@@ -147,7 +147,7 @@ public final class MailboxTest {
 
     @Test
     public void trimTombstones() throws Exception {
-        Account acct = Provisioning.getInstance().getAccount("test@zimbra.com");
+        Account acct = Provisioning.getInstance().getAccount("test@zmail.com");
         Mailbox mbox = MailboxManager.getInstance().getMailboxByAccount(acct);
 
         // add a message
@@ -199,7 +199,7 @@ public final class MailboxTest {
 
     @Test
     public void notifications() throws Exception {
-        Account acct = Provisioning.getInstance().getAccount("test@zimbra.com");
+        Account acct = Provisioning.getInstance().getAccount("test@zmail.com");
         Mailbox mbox = MailboxManager.getInstance().getMailboxByAccount(acct);
 
         MockListener ml = new MockListener();
@@ -264,7 +264,7 @@ public final class MailboxTest {
 
     @Test
     public void dumpster() throws Exception {
-        Account acct = Provisioning.getInstance().getAccount("test@zimbra.com");
+        Account acct = Provisioning.getInstance().getAccount("test@zmail.com");
         acct.setDumpsterEnabled(true);
 
         Mailbox mbox = MailboxManager.getInstance().getMailboxByAccount(acct);
@@ -442,13 +442,13 @@ public final class MailboxTest {
         Provisioning prov = Provisioning.getInstance();
         Account acct1 = Provisioning.getInstance().get(Key.AccountBy.id, MockProvisioning.DEFAULT_ACCOUNT_ID);
         Map<String, Object> attrs = new HashMap<String, Object>();
-        attrs.put(Provisioning.A_zimbraContactMaxNumEntries, Integer.toString(2));
+        attrs.put(Provisioning.A_zmailContactMaxNumEntries, Integer.toString(2));
         prov.modifyAttrs(acct1, attrs);
         List<Contact> contactList = mbox.createAutoContact(null, addrs);
         assertEquals(2, contactList.size());
 
 
-        attrs.put(Provisioning.A_zimbraContactMaxNumEntries, Integer.toString(10));
+        attrs.put(Provisioning.A_zmailContactMaxNumEntries, Integer.toString(10));
         prov.modifyAttrs(acct1, attrs);
         addrs = new ArrayList<InternetAddress>();
         addrs.add(new InternetAddress("user2@email.com"));

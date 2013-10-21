@@ -13,7 +13,7 @@
  * ***** END LICENSE BLOCK *****
  */
 
-package com.zimbra.cs.rmgmt;
+package org.zmail.cs.rmgmt;
 
 public class RemoteCommands {
     public static final String ZMQSTAT_ALL = "zmqstat all";
@@ -24,7 +24,7 @@ public class RemoteCommands {
     
     public static final String COLLECT_CONFIG_FILES = "zmcollectconfigfiles";
     
-    public static final String COLLECT_LDAP_ZIMBRA = "zmcollectldapzimbra";
+    public static final String COLLECT_LDAP_ZIMBRA = "zmcollectldapzmail";
     
     public static final String ZM_SERVER_IPS = "zmserverips";
     

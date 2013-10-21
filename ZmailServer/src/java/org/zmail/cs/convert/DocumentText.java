@@ -17,7 +17,7 @@
  * Created on Feb 14, 2005
  *
  */
-package com.zimbra.cs.convert;
+package org.zmail.cs.convert;
 
 import java.io.UnsupportedEncodingException;
 import java.nio.charset.Charset;

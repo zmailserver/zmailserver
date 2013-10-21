@@ -14,33 +14,33 @@
  * 
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.service;
+package org.zmail.cs.service;
 
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
 import com.google.common.base.Strings;
-import com.zimbra.common.auth.ZAuthToken;
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.common.soap.AccountConstants;
-import com.zimbra.common.soap.Element;
-import com.zimbra.common.util.StringUtil;
-import com.zimbra.cs.account.Account;
-import com.zimbra.cs.account.AuthToken;
-import com.zimbra.cs.account.AuthTokenException;
-import com.zimbra.cs.account.ZimbraAuthToken;
+import org.zmail.common.auth.ZAuthToken;
+import org.zmail.common.service.ServiceException;
+import org.zmail.common.soap.AccountConstants;
+import org.zmail.common.soap.Element;
+import org.zmail.common.util.StringUtil;
+import org.zmail.cs.account.Account;
+import org.zmail.cs.account.AuthToken;
+import org.zmail.cs.account.AuthTokenException;
+import org.zmail.cs.account.ZmailAuthToken;
 
 /**
  * @author pshao
  */
-public class ZimbraOAuthProvider extends ZimbraAuthProvider {
+public class ZmailOAuthProvider extends ZmailAuthProvider {
     
     public static final String ZIMBRA_OAUTH_PROVIDER = "oauth";
     
     public static final String OAUTH_ACCESS_TOKEN = "access_token";
 
-    protected ZimbraOAuthProvider() {
+    protected ZmailOAuthProvider() {
         super(ZIMBRA_OAUTH_PROVIDER);
     }
 

@@ -1,7 +1,7 @@
 dn: olcDatabase={1}monitor
 objectClass: olcDatabaseConfig
 olcDatabase: {1}monitor
-olcAccess: {0}to dn.children="cn=monitor"  by dn.children="cn=admins,cn=zimbra
+olcAccess: {0}to dn.children="cn=monitor"  by dn.children="cn=admins,cn=zmail
  " read
 olcLastMod: TRUE
 olcMaxDerefDepth: 15

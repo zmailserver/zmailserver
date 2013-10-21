@@ -13,24 +13,24 @@
  * ***** END LICENSE BLOCK *****
  */
 
-package com.zimbra.cs.service.mail;
+package org.zmail.cs.service.mail;
 
 import java.util.Iterator;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
-import com.zimbra.soap.SoapServlet;
+import org.zmail.soap.SoapServlet;
 
-import com.zimbra.common.account.Key;
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.common.soap.MailConstants;
-import com.zimbra.common.soap.Element;
-import com.zimbra.cs.account.Account;
-import com.zimbra.cs.account.Provisioning;
-import com.zimbra.cs.fb.FreeBusyQuery;
-import com.zimbra.cs.mailbox.Mailbox;
-import com.zimbra.soap.ZimbraSoapContext;
+import org.zmail.common.account.Key;
+import org.zmail.common.service.ServiceException;
+import org.zmail.common.soap.MailConstants;
+import org.zmail.common.soap.Element;
+import org.zmail.cs.account.Account;
+import org.zmail.cs.account.Provisioning;
+import org.zmail.cs.fb.FreeBusyQuery;
+import org.zmail.cs.mailbox.Mailbox;
+import org.zmail.soap.ZmailSoapContext;
 
 public class GetFreeBusy extends MailDocumentHandler {
 
@@ -65,7 +65,7 @@ public class GetFreeBusy extends MailDocumentHandler {
     }
 
     public Element handle(Element request, Map<String, Object> context) throws ServiceException {
-        ZimbraSoapContext zc = getZimbraSoapContext(context);
+        ZmailSoapContext zc = getZmailSoapContext(context);
         
         long rangeStart = request.getAttributeLong(MailConstants.A_CAL_START_TIME);
         long rangeEnd = request.getAttributeLong(MailConstants.A_CAL_END_TIME);
@@ -74,8 +74,8 @@ public class GetFreeBusy extends MailDocumentHandler {
         Element response = getResponseElement(zc);
         
         // MailConstants.A_UID should be deprecated at some point, bug 21776, comment #14
-        String uidParam = request.getAttribute(MailConstants.A_UID, null);    // comma-separated list of account emails or zimbraId GUIDs that *must* match UUID format
-        String idParam = request.getAttribute(MailConstants.A_ID, null);    // comma-separated list of account zimbraId GUIDs
+        String uidParam = request.getAttribute(MailConstants.A_UID, null);    // comma-separated list of account emails or zmailId GUIDs that *must* match UUID format
+        String idParam = request.getAttribute(MailConstants.A_ID, null);    // comma-separated list of account zmailId GUIDs
         String nameParam = request.getAttribute(MailConstants.A_NAME, null); // comma-separated list of account emails
         String exApptUid = request.getAttribute(MailConstants.A_APPT_FREEBUSY_EXCLUDE_UID, null);
 

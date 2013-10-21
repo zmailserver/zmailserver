@@ -12,7 +12,7 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.store.triton;
+package org.zmail.cs.store.triton;
 
 import java.io.IOException;
 import java.security.MessageDigest;
@@ -23,15 +23,15 @@ import org.apache.commons.httpclient.HttpClient;
 import org.apache.commons.httpclient.HttpStatus;
 import org.apache.commons.httpclient.methods.HeadMethod;
 
-import com.zimbra.common.httpclient.HttpClientUtil;
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.common.util.ZimbraHttpConnectionManager;
-import com.zimbra.common.util.ZimbraLog;
-import com.zimbra.cs.store.Blob;
-import com.zimbra.cs.store.BlobBuilder;
-import com.zimbra.cs.store.external.ExternalResumableIncomingBlob;
-import com.zimbra.cs.store.external.ExternalResumableOutputStream;
-import com.zimbra.cs.store.triton.TritonBlobStoreManager.HashType;
+import org.zmail.common.httpclient.HttpClientUtil;
+import org.zmail.common.service.ServiceException;
+import org.zmail.common.util.ZmailHttpConnectionManager;
+import org.zmail.common.util.ZmailLog;
+import org.zmail.cs.store.Blob;
+import org.zmail.cs.store.BlobBuilder;
+import org.zmail.cs.store.external.ExternalResumableIncomingBlob;
+import org.zmail.cs.store.external.ExternalResumableOutputStream;
+import org.zmail.cs.store.triton.TritonBlobStoreManager.HashType;
 
 /**
  * IncomingBlob implementation which streams data directly to Triton using TritonIncomingOutputStream
@@ -76,9 +76,9 @@ public class TritonIncomingBlob extends ExternalResumableIncomingBlob {
     @Override
     protected long getRemoteSize() throws IOException {
         outStream.flush();
-        HttpClient client = ZimbraHttpConnectionManager.getInternalHttpConnMgr().newHttpClient();
+        HttpClient client = ZmailHttpConnectionManager.getInternalHttpConnMgr().newHttpClient();
         HeadMethod head = new HeadMethod(baseUrl + uploadUrl);
-        ZimbraLog.store.info("heading %s", head.getURI());
+        ZmailLog.store.info("heading %s", head.getURI());
         try {
             head.addRequestHeader(TritonHeaders.SERVER_TOKEN, serverToken.getToken());
             int statusCode = HttpClientUtil.executeMethod(client, head);
@@ -92,7 +92,7 @@ public class TritonIncomingBlob extends ExternalResumableIncomingBlob {
                 }
                 return remoteSize;
             } else {
-                ZimbraLog.store.error("failed with code %d response: %s", statusCode, head.getResponseBodyAsString());
+                ZmailLog.store.error("failed with code %d response: %s", statusCode, head.getResponseBodyAsString());
                 throw new IOException("unable to head blob "+statusCode + ":" + head.getStatusText(), null);
             }
         } finally {

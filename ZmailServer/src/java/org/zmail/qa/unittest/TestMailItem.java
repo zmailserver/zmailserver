@@ -13,24 +13,24 @@
  * ***** END LICENSE BLOCK *****
  */
 
-package com.zimbra.qa.unittest;
+package org.zmail.qa.unittest;
 
 import java.io.ByteArrayInputStream;
 import java.util.List;
 
 import junit.framework.TestCase;
 
-import com.zimbra.common.util.ByteUtil;
-import com.zimbra.common.util.ZimbraLog;
-import com.zimbra.cs.account.Account;
-import com.zimbra.cs.db.DbMailItem;
-import com.zimbra.cs.db.DbResults;
-import com.zimbra.cs.db.DbUtil;
-import com.zimbra.cs.mailbox.Folder;
-import com.zimbra.cs.mailbox.MailItem;
-import com.zimbra.cs.mailbox.Mailbox;
-import com.zimbra.cs.mailbox.MailboxManager;
-import com.zimbra.cs.service.formatter.HeadersOnlyInputStream;
+import org.zmail.common.util.ByteUtil;
+import org.zmail.common.util.ZmailLog;
+import org.zmail.cs.account.Account;
+import org.zmail.cs.db.DbMailItem;
+import org.zmail.cs.db.DbResults;
+import org.zmail.cs.db.DbUtil;
+import org.zmail.cs.mailbox.Folder;
+import org.zmail.cs.mailbox.MailItem;
+import org.zmail.cs.mailbox.Mailbox;
+import org.zmail.cs.mailbox.MailboxManager;
+import org.zmail.cs.service.formatter.HeadersOnlyInputStream;
 
 public class TestMailItem extends TestCase {
 
@@ -64,7 +64,7 @@ public class TestMailItem extends TestCase {
             // is an empty string.
             // int count = results.getInt("item_count");
             int count = results.getInt(3);
-            ZimbraLog.test.debug(
+            ZmailLog.test.debug(
                 "Confirming that folder " + folderId + " has " + count + " items of type " + type);
             Folder folder = mbox.getFolderById(null, folderId);
             assertNotNull("Folder not found", folder);

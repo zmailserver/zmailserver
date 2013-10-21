@@ -13,7 +13,7 @@
  * ***** END LICENSE BLOCK *****
  */
 
-package com.zimbra.cs.server;
+package org.zmail.cs.server;
 
 import java.io.FileInputStream;
 import java.io.IOException;
@@ -49,17 +49,17 @@ import org.apache.mina.filter.executor.ExecutorFilter;
 import org.apache.mina.filter.ssl.SslFilter;
 import org.apache.mina.transport.socket.nio.NioProcessor;
 import org.apache.mina.transport.socket.nio.NioSession;
-import org.apache.mina.transport.socket.nio.ZimbraSocketAcceptor;
+import org.apache.mina.transport.socket.nio.ZmailSocketAcceptor;
 
 import com.google.common.collect.ArrayListMultimap;
 import com.google.common.collect.Multimap;
 import com.google.common.util.concurrent.ThreadFactoryBuilder;
-import com.zimbra.common.localconfig.LC;
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.common.util.Log;
-import com.zimbra.common.util.NetUtil;
-import com.zimbra.common.util.ZimbraLog;
-import com.zimbra.cs.util.Zimbra;
+import org.zmail.common.localconfig.LC;
+import org.zmail.common.service.ServiceException;
+import org.zmail.common.util.Log;
+import org.zmail.common.util.NetUtil;
+import org.zmail.common.util.ZmailLog;
+import org.zmail.cs.util.Zmail;
 
 /**
  * Base class for MINA-based IMAP/POP3/LMTP servers. Handles creation of new NIO request and connection handler
@@ -69,7 +69,7 @@ public abstract class NioServer implements Server {
     private static final Multimap<Class<? extends NioServer>, IoFilter> FILTERS = ArrayListMultimap.create();
     protected static final ProtocolEncoder DEFAULT_ENCODER = new DefaultEncoder();
     protected final ExecutorFilter executorFilter;
-    protected final ZimbraSocketAcceptor acceptor;
+    protected final ZmailSocketAcceptor acceptor;
     protected final ServerConfig config;
 
     private static SSLContext sslContext;
@@ -95,7 +95,7 @@ public abstract class NioServer implements Server {
             try {
                 sslContext = initSSLContext();
             } catch (Exception e) {
-                Zimbra.halt("exception initializing SSL context", e);
+                Zmail.halt("exception initializing SSL context", e);
             }
         }
         return sslContext;
@@ -115,11 +115,11 @@ public abstract class NioServer implements Server {
     }
 
     /**
-     * Our cipher config attribute zimbraSSLExcludeCipherSuites specifies a list of ciphers that should be
+     * Our cipher config attribute zmailSSLExcludeCipherSuites specifies a list of ciphers that should be
      * disabled instead of enabled.  This is because we want the same attribute to control all SSL protocols
      * running on mailbox servers.  For https, Jetty configuration only supports an excluded list.
-     * Therefore we adapted the same scheme for zimbraSSLExcludeCipherSuites, which is written to jetty.xml
-     * by config rewrite, and will be used for protocols (imaps/pop3s) handled by Zimbra code.
+     * Therefore we adapted the same scheme for zmailSSLExcludeCipherSuites, which is written to jetty.xml
+     * by config rewrite, and will be used for protocols (imaps/pop3s) handled by Zmail code.
      *
      * For MINA based servers/handlers, NioTcpServer uses SSLFilter for SSL communication.  SSLFilter wraps
      * an SSLEngine that actually does all the work.  SSLFilter.setEnabledCipherSuites() sets the list of
@@ -163,7 +163,7 @@ public abstract class NioServer implements Server {
                     mSslEnabledCipherSuites = new String[0];
 
             } catch (Exception e) {
-                Zimbra.halt("exception initializing SSL enabled ciphers", e);
+                Zmail.halt("exception initializing SSL enabled ciphers", e);
             }
         }
         return mSslEnabledCipherSuites;
@@ -186,7 +186,7 @@ public abstract class NioServer implements Server {
      */
     protected NioServer(ServerConfig config) throws ServiceException {
         this.config = config;
-        acceptor = new ZimbraSocketAcceptor(config.getServerSocketChannel(), IO_PROCESSOR_POOL);
+        acceptor = new ZmailSocketAcceptor(config.getServerSocketChannel(), IO_PROCESSOR_POOL);
         executorFilter = new ExecutorFilter(1, config.getMaxThreads(),
                 config.getThreadKeepAliveTime(), TimeUnit.SECONDS,
                 new ThreadFactoryBuilder().setNameFormat(getName() + "-%d").build(), IoEventType.EXCEPTION_CAUGHT,
@@ -230,7 +230,7 @@ public abstract class NioServer implements Server {
         try {
             acceptor.bind();
         } catch (Throwable e) {
-            Zimbra.halt(getName() + " failed to start", e);
+            Zmail.halt(getName() + " failed to start", e);
         }
         getLog().info("Starting %s on %s", getName(), acceptor.getLocalAddress());
     }
@@ -293,7 +293,7 @@ public abstract class NioServer implements Server {
     protected void registerMBean(String type) {
         MBeanServer mbs = ManagementFactory.getPlatformMBeanServer();
         try {
-            mbs.registerMBean(new NioServerStats(this), new ObjectName("ZimbraCollaborationSuite:type=" + type));
+            mbs.registerMBean(new NioServerStats(this), new ObjectName("ZmailCollaborationSuite:type=" + type));
         } catch (Exception e) {
             getLog().warn("Unable to register NioServerStats mbean", e);
         }
@@ -326,7 +326,7 @@ public abstract class NioServer implements Server {
     protected int getNumThreads() {
         Executor ex = executorFilter.getExecutor();
         if (!(ex instanceof ThreadPoolExecutor)) {
-            ZimbraLog.perf.debug("Unexpected Executor type %s.  NioServer.getNumThreads() returning 0.",
+            ZmailLog.perf.debug("Unexpected Executor type %s.  NioServer.getNumThreads() returning 0.",
                 ex.getClass().getName());
             return 0;
         }

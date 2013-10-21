@@ -12,7 +12,7 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.dav.resource;
+package org.zmail.cs.dav.resource;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -27,28 +27,28 @@ import org.dom4j.Element;
 import org.dom4j.QName;
 
 import com.google.common.io.Closeables;
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.common.util.HttpUtil;
-import com.zimbra.common.util.ZimbraLog;
-import com.zimbra.cs.account.Account;
-import com.zimbra.cs.account.Provisioning;
-import com.zimbra.cs.dav.DavContext;
-import com.zimbra.cs.dav.DavElements;
-import com.zimbra.cs.dav.DavException;
-import com.zimbra.cs.dav.DavProtocol;
-import com.zimbra.cs.dav.caldav.Range.TimeRange;
-import com.zimbra.cs.dav.property.CalDavProperty;
-import com.zimbra.cs.dav.service.DavServlet;
-import com.zimbra.cs.index.MessageHit;
-import com.zimbra.cs.index.SortBy;
-import com.zimbra.cs.index.ZimbraHit;
-import com.zimbra.cs.index.ZimbraQueryResults;
-import com.zimbra.cs.mailbox.Flag;
-import com.zimbra.cs.mailbox.Folder;
-import com.zimbra.cs.mailbox.MailItem;
-import com.zimbra.cs.mailbox.Mailbox;
-import com.zimbra.cs.mailbox.Message;
-import com.zimbra.cs.mailbox.Mountpoint;
+import org.zmail.common.service.ServiceException;
+import org.zmail.common.util.HttpUtil;
+import org.zmail.common.util.ZmailLog;
+import org.zmail.cs.account.Account;
+import org.zmail.cs.account.Provisioning;
+import org.zmail.cs.dav.DavContext;
+import org.zmail.cs.dav.DavElements;
+import org.zmail.cs.dav.DavException;
+import org.zmail.cs.dav.DavProtocol;
+import org.zmail.cs.dav.caldav.Range.TimeRange;
+import org.zmail.cs.dav.property.CalDavProperty;
+import org.zmail.cs.dav.service.DavServlet;
+import org.zmail.cs.index.MessageHit;
+import org.zmail.cs.index.SortBy;
+import org.zmail.cs.index.ZmailHit;
+import org.zmail.cs.index.ZmailQueryResults;
+import org.zmail.cs.mailbox.Flag;
+import org.zmail.cs.mailbox.Folder;
+import org.zmail.cs.mailbox.MailItem;
+import org.zmail.cs.mailbox.Mailbox;
+import org.zmail.cs.mailbox.Message;
+import org.zmail.cs.mailbox.Mountpoint;
 
 public class ScheduleInbox extends CalendarCollection {
     public ScheduleInbox(DavContext ctxt, Folder f) throws DavException, ServiceException {
@@ -63,7 +63,7 @@ public class ScheduleInbox extends CalendarCollection {
         try {
             return getAppointmentsByUids(ctxt, null);
         } catch (ServiceException se) {
-            ZimbraLog.dav.error("can't get schedule messages in folder "+getId(), se);
+            ZmailLog.dav.error("can't get schedule messages in folder "+getId(), se);
             return Collections.emptyList();
         }
     }
@@ -83,11 +83,11 @@ public class ScheduleInbox extends CalendarCollection {
         }
         String query = "is:invite is:unread inid:" + getId() + " after:\"-1month\" ";
         Mailbox mbox = getMailbox(ctxt);
-        ZimbraQueryResults zqr = null;
+        ZmailQueryResults zqr = null;
         try {
             zqr = mbox.index.search(ctxt.getOperationContext(), query, SEARCH_TYPES, SortBy.DATE_ASC, 100);
             while (zqr.hasNext()) {
-                ZimbraHit hit = zqr.getNext();
+                ZmailHit hit = zqr.getNext();
                 if (hit instanceof MessageHit) {
                     Message msg = ((MessageHit)hit).getMessage();
                     if (target == null && msg.getCalendarIntendedFor() != null) {
@@ -129,7 +129,7 @@ public class ScheduleInbox extends CalendarCollection {
                 }
             }
         } catch (Exception e) {
-            ZimbraLog.dav.error("can't search: uri="+getUri(), e);
+            ZmailLog.dav.error("can't search: uri="+getUri(), e);
         } finally {
             Closeables.closeQuietly(zqr);
         }
@@ -185,12 +185,12 @@ public class ScheduleInbox extends CalendarCollection {
             }
             if ((f.getFlagBitmask() & Flag.BITMASK_EXCLUDE_FREEBUSY) == 0)
                 continue;
-            ZimbraLog.dav.debug("clearing EXCLUDE_FREEBUSY for "+path);
+            ZmailLog.dav.debug("clearing EXCLUDE_FREEBUSY for "+path);
             mbox.alterTag(ctxt.getOperationContext(), f.getId(), MailItem.Type.FOLDER, Flag.FlagInfo.EXCLUDE_FREEBUSY, false, null);
         }
         if (!folders.isEmpty()) {
             for (Folder f : folders.values()) {
-                ZimbraLog.dav.debug("setting EXCLUDE_FREEBUSY for "+f.getPath());
+                ZmailLog.dav.debug("setting EXCLUDE_FREEBUSY for "+f.getPath());
                 mbox.alterTag(ctxt.getOperationContext(), f.getId(), MailItem.Type.FOLDER, Flag.FlagInfo.EXCLUDE_FREEBUSY, true, null);
             }
         }

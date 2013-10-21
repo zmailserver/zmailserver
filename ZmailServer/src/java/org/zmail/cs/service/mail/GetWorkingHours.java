@@ -13,27 +13,27 @@
  * ***** END LICENSE BLOCK *****
  */
 
-package com.zimbra.cs.service.mail;
+package org.zmail.cs.service.mail;
 
 import java.util.Iterator;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.common.soap.Element;
-import com.zimbra.common.soap.MailConstants;
-import com.zimbra.cs.account.Account;
-import com.zimbra.cs.account.Provisioning;
-import com.zimbra.common.account.Key.AccountBy;
-import com.zimbra.cs.fb.FreeBusy;
-import com.zimbra.cs.fb.WorkingHours;
-import com.zimbra.soap.ZimbraSoapContext;
+import org.zmail.common.service.ServiceException;
+import org.zmail.common.soap.Element;
+import org.zmail.common.soap.MailConstants;
+import org.zmail.cs.account.Account;
+import org.zmail.cs.account.Provisioning;
+import org.zmail.common.account.Key.AccountBy;
+import org.zmail.cs.fb.FreeBusy;
+import org.zmail.cs.fb.WorkingHours;
+import org.zmail.soap.ZmailSoapContext;
 
 public class GetWorkingHours extends GetFreeBusy {
 
     @Override
     public Element handle(Element request, Map<String, Object> context) throws ServiceException {
-        ZimbraSoapContext zsc = getZimbraSoapContext(context);
+        ZmailSoapContext zsc = getZmailSoapContext(context);
         Account authAcct = getAuthenticatedAccount(zsc);
         boolean asAdmin = zsc.isUsingAdminPrivileges();
         
@@ -41,11 +41,11 @@ public class GetWorkingHours extends GetFreeBusy {
         long rangeEnd = request.getAttributeLong(MailConstants.A_CAL_END_TIME);
         validateRange(rangeStart, rangeEnd);
         
-        String idParam = request.getAttribute(MailConstants.A_ID, null);    // comma-separated list of account zimbraId GUIDs
+        String idParam = request.getAttribute(MailConstants.A_ID, null);    // comma-separated list of account zmailId GUIDs
         String nameParam = request.getAttribute(MailConstants.A_NAME, null); // comma-separated list of account emails
 
         Provisioning prov = Provisioning.getInstance();
-        Map<String /* zimbraId or name */, String /* zimbraId */> idMap = new LinkedHashMap<String, String>();  // preserve iteration order
+        Map<String /* zmailId or name */, String /* zmailId */> idMap = new LinkedHashMap<String, String>();  // preserve iteration order
         if (idParam != null) {
             String[] idStrs = idParam.split(",");
             for (String idStr : idStrs) {

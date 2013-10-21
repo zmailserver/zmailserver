@@ -12,7 +12,7 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.qa.unittest.prov;
+package org.zmail.qa.unittest.prov;
 
 import java.io.File;
 import java.io.IOException;
@@ -24,12 +24,12 @@ import java.util.Random;
 
 import org.junit.Assert;
 
-import com.zimbra.common.util.ByteUtil;
-import com.zimbra.common.util.FileUtil;
+import org.zmail.common.util.ByteUtil;
+import org.zmail.common.util.FileUtil;
 
 public class BinaryLdapData {
 
-    public static final String DATA_PATH = "/opt/zimbra/unittest/ldap/binaryContent/";
+    public static final String DATA_PATH = "/opt/zmail/unittest/ldap/binaryContent/";
     
     public static class Content {
         private String string;
@@ -105,7 +105,7 @@ public class BinaryLdapData {
             GEN_CERT_CMD.add("-keypass");
             GEN_CERT_CMD.add("test123");
             GEN_CERT_CMD.add("-dname");
-            GEN_CERT_CMD.add("CN= " + cn + ", OU=zimbra, O=VMWare, L=Palo Alto, S=California, C=US");
+            GEN_CERT_CMD.add("CN= " + cn + ", OU=zmail, O=VMWare, L=Palo Alto, S=California, C=US");
             
             StringBuilder GEN_CERT_CMD_STR = new StringBuilder();
             for (String str : GEN_CERT_CMD) {
@@ -173,7 +173,7 @@ public class BinaryLdapData {
             // delete the temp directory and all files under it
             FileUtil.deleteDir(dir);
             
-            // content = getContentByFileName("/Users/pshao/p4/main/ZimbraServer/data/unittest/ldap/binaryContent/user1_primary.DER.crt");
+            // content = getContentByFileName("/Users/pshao/p4/main/ZmailServer/data/unittest/ldap/binaryContent/user1_primary.DER.crt");
             return content;
         }
         

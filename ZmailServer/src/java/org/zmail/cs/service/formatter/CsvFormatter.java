@@ -12,7 +12,7 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.service.formatter;
+package org.zmail.cs.service.formatter;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -35,20 +35,20 @@ import org.eclipse.jetty.server.AbstractHttpConnection;
 import com.google.common.base.Charsets;
 import com.ibm.icu.text.CharsetDetector;
 import com.ibm.icu.text.CharsetMatch;
-import com.zimbra.common.localconfig.LC;
-import com.zimbra.common.mime.MimeConstants;
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.common.util.HttpUtil;
-import com.zimbra.common.util.ZimbraLog;
-import com.zimbra.cs.mailbox.Folder;
-import com.zimbra.cs.mailbox.MailItem;
-import com.zimbra.cs.mailbox.MailServiceException;
-import com.zimbra.cs.service.UserServlet;
-import com.zimbra.cs.service.UserServletContext;
-import com.zimbra.cs.service.UserServletException;
-import com.zimbra.cs.service.formatter.FormatterFactory.FormatType;
-import com.zimbra.cs.service.mail.ImportContacts;
-import com.zimbra.cs.service.util.ItemId;
+import org.zmail.common.localconfig.LC;
+import org.zmail.common.mime.MimeConstants;
+import org.zmail.common.service.ServiceException;
+import org.zmail.common.util.HttpUtil;
+import org.zmail.common.util.ZmailLog;
+import org.zmail.cs.mailbox.Folder;
+import org.zmail.cs.mailbox.MailItem;
+import org.zmail.cs.mailbox.MailServiceException;
+import org.zmail.cs.service.UserServlet;
+import org.zmail.cs.service.UserServletContext;
+import org.zmail.cs.service.UserServletException;
+import org.zmail.cs.service.formatter.FormatterFactory.FormatType;
+import org.zmail.cs.service.mail.ImportContacts;
+import org.zmail.cs.service.util.ItemId;
 
 public class CsvFormatter extends Formatter {
 
@@ -156,7 +156,7 @@ public class CsvFormatter extends Formatter {
 
             ImportContacts.ImportCsvContacts(context.opContext, context.targetMailbox, iidFolder, contacts);
         } catch (ContactCSV.ParseException e) {
-            ZimbraLog.misc.debug("ContactCSV - ParseException thrown", e);
+            ZmailLog.misc.debug("ContactCSV - ParseException thrown", e);
             throw new UserServletException(HttpServletResponse.SC_BAD_REQUEST,
                     "Could not parse csv file - Reason : " + e.getMessage());
         } finally {
@@ -182,7 +182,7 @@ public class CsvFormatter extends Formatter {
      * @throws IOException
      */
     private void disableJettyTimeout() throws IOException {
-        if (LC.zimbra_csv_formatter_disable_timeout.booleanValue()) {
+        if (LC.zmail_csv_formatter_disable_timeout.booleanValue()) {
             EndPoint endPoint = AbstractHttpConnection.getCurrentConnection().getEndPoint();
             if (endPoint instanceof SelectChannelEndPoint) {
                 SelectChannelEndPoint scEndPoint = (SelectChannelEndPoint) endPoint;

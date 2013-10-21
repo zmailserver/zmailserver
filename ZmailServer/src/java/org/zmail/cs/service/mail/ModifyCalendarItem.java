@@ -13,7 +13,7 @@
  * ***** END LICENSE BLOCK *****
  */
 
-package com.zimbra.cs.service.mail;
+package org.zmail.cs.service.mail;
 
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -27,22 +27,22 @@ import javax.mail.MessagingException;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.common.soap.Element;
-import com.zimbra.common.soap.MailConstants;
-import com.zimbra.common.util.ZimbraLog;
-import com.zimbra.cs.account.Account;
-import com.zimbra.cs.mailbox.CalendarItem;
-import com.zimbra.cs.mailbox.Folder;
-import com.zimbra.cs.mailbox.MailServiceException;
-import com.zimbra.cs.mailbox.Mailbox;
-import com.zimbra.cs.mailbox.OperationContext;
-import com.zimbra.cs.mailbox.calendar.Invite;
-import com.zimbra.cs.mailbox.calendar.InviteChanges;
-import com.zimbra.cs.mailbox.calendar.ZAttendee;
-import com.zimbra.cs.service.util.ItemId;
-import com.zimbra.cs.service.util.ItemIdFormatter;
-import com.zimbra.soap.ZimbraSoapContext;
+import org.zmail.common.service.ServiceException;
+import org.zmail.common.soap.Element;
+import org.zmail.common.soap.MailConstants;
+import org.zmail.common.util.ZmailLog;
+import org.zmail.cs.account.Account;
+import org.zmail.cs.mailbox.CalendarItem;
+import org.zmail.cs.mailbox.Folder;
+import org.zmail.cs.mailbox.MailServiceException;
+import org.zmail.cs.mailbox.Mailbox;
+import org.zmail.cs.mailbox.OperationContext;
+import org.zmail.cs.mailbox.calendar.Invite;
+import org.zmail.cs.mailbox.calendar.InviteChanges;
+import org.zmail.cs.mailbox.calendar.ZAttendee;
+import org.zmail.cs.service.util.ItemId;
+import org.zmail.cs.service.util.ItemIdFormatter;
+import org.zmail.soap.ZmailSoapContext;
 
 
 public class ModifyCalendarItem extends CalendarRequest {
@@ -65,7 +65,7 @@ public class ModifyCalendarItem extends CalendarRequest {
         public List<ZAttendee> getAttendeesCanceled() { return mAttendeesCanceled; }
 
         @Override
-        public ParseMimeMessage.InviteParserResult parseInviteElement(ZimbraSoapContext lc, OperationContext octxt,
+        public ParseMimeMessage.InviteParserResult parseInviteElement(ZmailSoapContext lc, OperationContext octxt,
                 Account account, Element inviteElem) throws ServiceException {
             ParseMimeMessage.InviteParserResult toRet = CalendarUtils.parseInviteForModify(account, getItemType(),
                     inviteElem, mInv, mSeriesInv, mAttendeesAdded, mAttendeesCanceled, !mInv.hasRecurId());
@@ -75,7 +75,7 @@ public class ModifyCalendarItem extends CalendarRequest {
 
     @Override
     public Element handle(Element request, Map<String, Object> context) throws ServiceException {
-        ZimbraSoapContext zsc = getZimbraSoapContext(context);
+        ZmailSoapContext zsc = getZmailSoapContext(context);
         Account acct = getRequestedAccount(zsc);
         Mailbox mbox = getRequestedMailbox(zsc);
         OperationContext octxt = getOperationContext(zsc, context);
@@ -162,7 +162,7 @@ public class ModifyCalendarItem extends CalendarRequest {
     }
 
     private Element modifyCalendarItem(
-            ZimbraSoapContext zsc, OperationContext octxt, Element request,
+            ZmailSoapContext zsc, OperationContext octxt, Element request,
             Account acct, Mailbox mbox, int folderId,
             CalendarItem calItem, Invite inv, Invite seriesInv, Element response, boolean isInterMboxMove,
             MailSendQueue sendQueue)
@@ -176,11 +176,11 @@ public class ModifyCalendarItem extends CalendarRequest {
         dat.mDontNotifyAttendees = isInterMboxMove;
 
         if (!dat.mInvite.hasRecurId())
-            ZimbraLog.calendar.info("<ModifyCalendarItem> id=%d, folderId=%d, subject=\"%s\", UID=%s",
+            ZmailLog.calendar.info("<ModifyCalendarItem> id=%d, folderId=%d, subject=\"%s\", UID=%s",
                     calItem.getId(), folderId, dat.mInvite.isPublic() ? dat.mInvite.getName() : "(private)",
                     dat.mInvite.getUid());
         else
-            ZimbraLog.calendar.info("<ModifyCalendarItem> id=%d, folderId=%d, subject=\"%s\", UID=%s, recurId=%s",
+            ZmailLog.calendar.info("<ModifyCalendarItem> id=%d, folderId=%d, subject=\"%s\", UID=%s, recurId=%s",
                     calItem.getId(), folderId, dat.mInvite.isPublic() ? dat.mInvite.getName() : "(private)",
                     dat.mInvite.getUid(), dat.mInvite.getRecurId().getDtZ());
 

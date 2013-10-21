@@ -12,7 +12,7 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.qa.unittest;
+package org.zmail.qa.unittest;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -28,21 +28,21 @@ import java.util.Map;
 
 import junit.framework.TestCase;
 
-import com.zimbra.common.auth.ZAuthToken;
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.common.soap.AccountConstants;
-import com.zimbra.common.soap.AdminConstants;
-import com.zimbra.common.soap.Element;
-import com.zimbra.common.soap.SoapFaultException;
-import com.zimbra.common.soap.SoapHttpTransport;
-import com.zimbra.common.util.ZimbraLog;
-import com.zimbra.cs.account.Provisioning;
-import com.zimbra.cs.account.Server;
-import com.zimbra.common.account.Key.AccountBy;
-import com.zimbra.cs.ldap.LdapConstants;
-import com.zimbra.client.ZAuthResult;
-import com.zimbra.client.ZFolder;
-import com.zimbra.client.ZMailbox;
+import org.zmail.common.auth.ZAuthToken;
+import org.zmail.common.service.ServiceException;
+import org.zmail.common.soap.AccountConstants;
+import org.zmail.common.soap.AdminConstants;
+import org.zmail.common.soap.Element;
+import org.zmail.common.soap.SoapFaultException;
+import org.zmail.common.soap.SoapHttpTransport;
+import org.zmail.common.util.ZmailLog;
+import org.zmail.cs.account.Provisioning;
+import org.zmail.cs.account.Server;
+import org.zmail.common.account.Key.AccountBy;
+import org.zmail.cs.ldap.LdapConstants;
+import org.zmail.client.ZAuthResult;
+import org.zmail.client.ZFolder;
+import org.zmail.client.ZMailbox;
 
 public class TestSoap
 extends TestCase {
@@ -57,8 +57,8 @@ extends TestCase {
     public void setUp()
     throws Exception {
         Server server = Provisioning.getInstance().getLocalServer();
-        mOriginalSoapRequestMaxSize = server.getAttr(Provisioning.A_zimbraSoapRequestMaxSize, "");
-        mOriginalSoapExposeVersion = server.getAttr(Provisioning.A_zimbraSoapExposeVersion, "");
+        mOriginalSoapRequestMaxSize = server.getAttr(Provisioning.A_zmailSoapRequestMaxSize, "");
+        mOriginalSoapExposeVersion = server.getAttr(Provisioning.A_zmailSoapExposeVersion, "");
         cleanUp();
     }
     
@@ -78,7 +78,7 @@ extends TestCase {
             TestUtil.sendMessage(mbox, USER_NAME, NAME_PREFIX + " 2", messageBody.toString());
             fail("SOAP request should not have succeeded.");
         } catch (SoapFaultException e) {
-            assertTrue("Unexpected error: " + e.toString(), e.toString().contains("bytes set for zimbraSoapRequestMaxSize"));
+            assertTrue("Unexpected error: " + e.toString(), e.toString().contains("bytes set for zmailSoapRequestMaxSize"));
         }
     }
 
@@ -91,12 +91,12 @@ extends TestCase {
         Element request = Element.create(transport.getRequestProtocol(), AccountConstants.GET_VERSION_INFO_REQUEST);
         
         // Test with version exposed
-        TestUtil.setServerAttr(Provisioning.A_zimbraSoapExposeVersion, LdapConstants.LDAP_TRUE);
+        TestUtil.setServerAttr(Provisioning.A_zmailSoapExposeVersion, LdapConstants.LDAP_TRUE);
         Element response = transport.invoke(request);
         validateSoapVersionResponse(response);
         
         // Test with version not exposed
-        TestUtil.setServerAttr(Provisioning.A_zimbraSoapExposeVersion, LdapConstants.LDAP_FALSE);
+        TestUtil.setServerAttr(Provisioning.A_zmailSoapExposeVersion, LdapConstants.LDAP_FALSE);
         request = Element.create(transport.getRequestProtocol(), AccountConstants.GET_VERSION_INFO_REQUEST);
         try {
             response = transport.invoke(request);
@@ -153,11 +153,11 @@ extends TestCase {
     private ZMailbox runAuthTest(ZMailbox.Options options)
     throws Exception {
         List<String> attrNames = Arrays.asList(
-            Provisioning.A_zimbraFeatureImportExportFolderEnabled,
-            Provisioning.A_zimbraFeatureOutOfOfficeReplyEnabled);
+            Provisioning.A_zmailFeatureImportExportFolderEnabled,
+            Provisioning.A_zmailFeatureOutOfOfficeReplyEnabled);
         List<String> prefNames = Arrays.asList(
-            Provisioning.A_zimbraPrefComposeFormat,
-            Provisioning.A_zimbraPrefAutoSaveDraftInterval);
+            Provisioning.A_zmailPrefComposeFormat,
+            Provisioning.A_zmailPrefAutoSaveDraftInterval);
         
         options.setAttrs(attrNames);
         options.setPrefs(prefNames);
@@ -228,12 +228,12 @@ extends TestCase {
         StringBuilder req = new StringBuilder();
         req.append("<soap:Envelope xmlns:soap=\"http://www.w3.org/2003/05/soap-envelope\">\n")
             .append("<soap:Header>\n")
-            .append("<context xmlns=\"urn:zimbra\">\n")
+            .append("<context xmlns=\"urn:zmail\">\n")
             .append("<format xmlns=\"\" type=\"js\"/>\n")
             .append("</context>\n")
             .append("</soap:Header>\n")
             .append("<soap:Body>\n")
-            .append("<NoOpRequest session=<> xmlns=\"urn:zimbraMail\"/>\n") // invalid XML in this line
+            .append("<NoOpRequest session=<> xmlns=\"urn:zmailMail\"/>\n") // invalid XML in this line
             .append("</soap:Body>\n")
             .append("</soap:Envelope>\n");
         String responseString = doLowLevelRequest(new URL(TestUtil.getSoapUrl() + "/WibbleRequest"), req.toString());
@@ -245,12 +245,12 @@ extends TestCase {
         StringBuilder req = new StringBuilder();
         req.append("<soap:Envelope xmlns:soap=\"http://www.w3.org/2003/05/soap-envelope\">\n")
             .append("<soap:Header>\n")
-            .append("<context xmlns=\"urn:zimbra\">\n")
+            .append("<context xmlns=\"urn:zmail\">\n")
             .append("<format xmlns=\"\" type=\"xml\"/>\n")   // Only diff from previous
             .append("</context>\n")
             .append("</soap:Header>\n")
             .append("<soap:Body>\n")
-            .append("<NoOpRequest session=<> xmlns=\"urn:zimbraMail\"/>\n") // invalid XML in this line
+            .append("<NoOpRequest session=<> xmlns=\"urn:zmailMail\"/>\n") // invalid XML in this line
             .append("</soap:Body>\n")
             .append("</soap:Envelope>\n");
         String responseString = doLowLevelRequest(new URL(TestUtil.getSoapUrl() + "/WibbleRequest"), req.toString());
@@ -275,8 +275,8 @@ extends TestCase {
     @Override
     public void tearDown()
     throws Exception {
-        TestUtil.setServerAttr(Provisioning.A_zimbraSoapRequestMaxSize, mOriginalSoapRequestMaxSize);
-        TestUtil.setServerAttr(Provisioning.A_zimbraSoapExposeVersion, mOriginalSoapExposeVersion);
+        TestUtil.setServerAttr(Provisioning.A_zmailSoapRequestMaxSize, mOriginalSoapRequestMaxSize);
+        TestUtil.setServerAttr(Provisioning.A_zmailSoapExposeVersion, mOriginalSoapExposeVersion);
         cleanUp();
     }
     
@@ -287,7 +287,7 @@ extends TestCase {
     
     private void setSoapRequestMaxSize(int numBytes)
     throws Exception {
-        TestUtil.setServerAttr(Provisioning.A_zimbraSoapRequestMaxSize, Integer.toString(numBytes));
+        TestUtil.setServerAttr(Provisioning.A_zmailSoapRequestMaxSize, Integer.toString(numBytes));
     }
     
     public static void main(String[] args)

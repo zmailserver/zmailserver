@@ -12,7 +12,7 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.extension;
+package org.zmail.cs.extension;
 
 import java.io.File;
 import java.net.URL;
@@ -21,7 +21,7 @@ import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
-import com.zimbra.common.localconfig.LC;
+import org.zmail.common.localconfig.LC;
 
 /**
  * Unit test for {@link ExtensionUtil}.
@@ -34,13 +34,13 @@ public class ExtensionUtilTest {
     @BeforeClass
     public static void init() throws Exception {
         classpath = new File("build/test-classes").toURI().toURL();
-        LC.zimbra_extension_common_directory.setDefault(null);
-        LC.zimbra_extension_directory.setDefault(null);
+        LC.zmail_extension_common_directory.setDefault(null);
+        LC.zmail_extension_directory.setDefault(null);
     }
 
     @Test
     public void simple() throws Exception {
-        ExtensionUtil.addClassLoader(new ZimbraExtensionClassLoader(classpath,
+        ExtensionUtil.addClassLoader(new ZmailExtensionClassLoader(classpath,
                 SimpleExtension.class.getName()));
         ExtensionUtil.initAll();
         SimpleExtension ext =
@@ -52,7 +52,7 @@ public class ExtensionUtilTest {
 
     @Test
     public void resign() throws Exception {
-        ExtensionUtil.addClassLoader(new ZimbraExtensionClassLoader(classpath,
+        ExtensionUtil.addClassLoader(new ZmailExtensionClassLoader(classpath,
                 ResignExtension.class.getName()));
         ExtensionUtil.initAll();
         Assert.assertNull(ExtensionUtil.getExtension("resign"));

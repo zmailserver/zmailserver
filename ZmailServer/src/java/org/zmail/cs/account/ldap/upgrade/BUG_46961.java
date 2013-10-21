@@ -12,14 +12,14 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.account.ldap.upgrade;
+package org.zmail.cs.account.ldap.upgrade;
 
 import java.util.HashMap;
 import java.util.Map;
 
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.cs.account.Config;
-import com.zimbra.cs.account.Provisioning;
+import org.zmail.common.service.ServiceException;
+import org.zmail.cs.account.Config;
+import org.zmail.cs.account.Provisioning;
 
 public class BUG_46961 extends UpgradeOp {
 
@@ -30,15 +30,15 @@ public class BUG_46961 extends UpgradeOp {
         String oldValue = "displayName,cn=fullName";
         String newValue = "displayName,cn=fullName,fullName2,fullName3,fullName4,fullName5,fullName6,fullName7,fullName8,fullName9,fullName10";
         
-        String[] curValues = config.getMultiAttr(Provisioning.A_zimbraGalLdapAttrMap);
+        String[] curValues = config.getMultiAttr(Provisioning.A_zmailGalLdapAttrMap);
          
         for (String value : curValues) {
             if (value.equalsIgnoreCase(oldValue)) {
                 Map<String, Object> attr = new HashMap<String, Object>();
-                attr.put("-" + Provisioning.A_zimbraGalLdapAttrMap, oldValue);
-                attr.put("+" + Provisioning.A_zimbraGalLdapAttrMap, newValue);
+                attr.put("-" + Provisioning.A_zmailGalLdapAttrMap, oldValue);
+                attr.put("+" + Provisioning.A_zmailGalLdapAttrMap, newValue);
                 
-                printer.println("Modifying " + Provisioning.A_zimbraGalLdapAttrMap + " on global config:");
+                printer.println("Modifying " + Provisioning.A_zmailGalLdapAttrMap + " on global config:");
                 printer.println("    removing value: " + oldValue);
                 printer.println("    adding value: " + newValue);
                 prov.modifyAttrs(config, attr);

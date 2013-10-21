@@ -12,13 +12,13 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.extension;
+package org.zmail.cs.extension;
 
 /**
- * Optional interface for Zimbra Extensions -- if ZimbraExtension instance inherits from this
+ * Optional interface for Zmail Extensions -- if ZmailExtension instance inherits from this
  * interface, it will be called during boot
  */
-public interface ZimbraExtensionPostInit {
+public interface ZmailExtensionPostInit {
     /**
      * Called at the end of the server boot process, after all server subsystems
      * are up and running.

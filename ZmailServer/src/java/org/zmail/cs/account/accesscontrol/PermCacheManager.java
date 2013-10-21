@@ -13,18 +13,18 @@
  * ***** END LICENSE BLOCK *****
  */
 
-package com.zimbra.cs.account.accesscontrol;
+package org.zmail.cs.account.accesscontrol;
 
-import com.zimbra.common.localconfig.LC;
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.common.stats.Counter;
-import com.zimbra.common.util.Constants;
-import com.zimbra.common.util.LruMap;
-import com.zimbra.common.util.MapUtil;
-import com.zimbra.common.util.ZimbraLog;
-import com.zimbra.cs.account.Entry;
-import com.zimbra.cs.account.NamedEntry;
-import com.zimbra.cs.account.accesscontrol.PermissionCache.CachedPermission;
+import org.zmail.common.localconfig.LC;
+import org.zmail.common.service.ServiceException;
+import org.zmail.common.stats.Counter;
+import org.zmail.common.util.Constants;
+import org.zmail.common.util.LruMap;
+import org.zmail.common.util.MapUtil;
+import org.zmail.common.util.ZmailLog;
+import org.zmail.cs.account.Entry;
+import org.zmail.cs.account.NamedEntry;
+import org.zmail.cs.account.accesscontrol.PermissionCache.CachedPermission;
 
 class PermCacheManager {
 
@@ -114,7 +114,7 @@ class PermCacheManager {
         try {
             invalidateAll = TargetType.canBeInheritedFrom(target);
         } catch (ServiceException e) {
-            ZimbraLog.acl.debug("unable to determine if all permission cache should be invalidated, " + 
+            ZmailLog.acl.debug("unable to determine if all permission cache should be invalidated, " + 
                     "invalidating permission cache on all entries", e);
         }
         
@@ -187,7 +187,7 @@ class PermCacheManager {
             Map.Entry<String, PermCache> entry = iEntries.next();
             String key = entry.getKey();
             PermCache permCache = entry.getValue();
-            ZimbraLog.acl.debug("perm cache target: " + key);
+            ZmailLog.acl.debug("perm cache target: " + key);
         }
         System.out.println();
     }

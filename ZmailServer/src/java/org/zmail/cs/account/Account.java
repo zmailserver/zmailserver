@@ -13,18 +13,18 @@
  * ***** END LICENSE BLOCK *****
  */
 
-package com.zimbra.cs.account;
+package org.zmail.cs.account;
 
 import com.google.common.base.Strings;
 import com.google.common.collect.Sets;
-import com.zimbra.common.account.Key;
-import com.zimbra.soap.admin.type.DataSourceType;
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.common.util.ZimbraLog;
-import com.zimbra.cs.account.Provisioning.GroupMembership;
-import com.zimbra.cs.account.Provisioning.SetPasswordResult;
-import com.zimbra.cs.account.auth.AuthContext;
-import com.zimbra.cs.account.names.NameUtil;
+import org.zmail.common.account.Key;
+import org.zmail.soap.admin.type.DataSourceType;
+import org.zmail.common.service.ServiceException;
+import org.zmail.common.util.ZmailLog;
+import org.zmail.cs.account.Provisioning.GroupMembership;
+import org.zmail.cs.account.Provisioning.SetPasswordResult;
+import org.zmail.cs.account.auth.AuthContext;
+import org.zmail.cs.account.names.NameUtil;
 
 import java.util.Collections;
 import java.util.List;
@@ -86,16 +86,16 @@ public class Account extends ZAttrAccount implements GroupedEntry, AliasedEntry 
     }
 
     /**
-     * @param zimbraId the zimbraId of the dl we are checking for
+     * @param zmailId the zmailId of the dl we are checking for
      * @return true if this account (or one of the dl it belongs to) is a member of the specified dl.
      * @throws ServiceException on error
      */
-    public boolean inDistributionList(String zimbraId) throws ServiceException {
-        return getProvisioning().inDistributionList(this, zimbraId);
+    public boolean inDistributionList(String zmailId) throws ServiceException {
+        return getProvisioning().inDistributionList(this, zmailId);
     }
 
     /**
-     * @return set of all the zimbraId's of lists this account belongs to, including any list in other list.
+     * @return set of all the zmailId's of lists this account belongs to, including any list in other list.
      * @throws ServiceException on error
      */
     public Set<String> getDistributionLists() throws ServiceException {
@@ -233,11 +233,11 @@ public class Account extends ZAttrAccount implements GroupedEntry, AliasedEntry 
         if (server == null)
             return true;
 
-        return !server.mailTransportMatches(getAttr(Provisioning.A_zimbraMailTransport));
+        return !server.mailTransportMatches(getAttr(Provisioning.A_zmailMailTransport));
     }
 
     public Server getServer() throws ServiceException {
-        String serverName = getAttr(Provisioning.A_zimbraMailHost);
+        String serverName = getAttr(Provisioning.A_zmailMailHost);
         return (serverName == null ? null : getProvisioning().get(Key.ServerBy.name, serverName));
     }
 
@@ -256,10 +256,10 @@ public class Account extends ZAttrAccount implements GroupedEntry, AliasedEntry 
     public String getAccountStatus(Provisioning prov) {
 
         String domainStatus = null;
-        String accountStatus = getAttr(Provisioning.A_zimbraAccountStatus);
+        String accountStatus = getAttr(Provisioning.A_zmailAccountStatus);
 
-        boolean isAdmin = getBooleanAttr(Provisioning.A_zimbraIsAdminAccount, false);
-        boolean isDomainAdmin = getBooleanAttr(Provisioning.A_zimbraIsDomainAdminAccount, false);
+        boolean isAdmin = getBooleanAttr(Provisioning.A_zmailIsAdminAccount, false);
+        boolean isDomainAdmin = getBooleanAttr(Provisioning.A_zmailIsDomainAdminAccount, false);
         isAdmin = (isAdmin && !isDomainAdmin);
         if (isAdmin)
             return accountStatus;
@@ -272,7 +272,7 @@ public class Account extends ZAttrAccount implements GroupedEntry, AliasedEntry 
                     domainStatus = domain.getDomainStatusAsString();
                 }
             } catch (ServiceException e) {
-                ZimbraLog.account.warn("unable to get domain for account " + getName(), e);
+                ZmailLog.account.warn("unable to get domain for account " + getName(), e);
                 return accountStatus;
             }
         }
@@ -303,7 +303,7 @@ public class Account extends ZAttrAccount implements GroupedEntry, AliasedEntry 
     // needed when when cal resource is loaded as an account and we need to know if
     // it actually is a cal resource.
     public boolean isCalendarResource() {
-        return getAttr(Provisioning.A_zimbraCalResType) != null;
+        return getAttr(Provisioning.A_zmailCalResType) != null;
     }
 
     /**
@@ -324,17 +324,17 @@ public class Account extends ZAttrAccount implements GroupedEntry, AliasedEntry 
         if (acctValue == authTokenValue)
             return true;
 
-        ZimbraLog.account.debug("checkAuthTokenValidityValue: validity value on account = " + acctValue +
+        ZmailLog.account.debug("checkAuthTokenValidityValue: validity value on account = " + acctValue +
                 ", validity value on auth token = " + authTokenValue);
 
         if (acctValue < authTokenValue) {
             /* bug 46287
              *
              * If the validity value in the auth token is higher(i.e. newer) than the
-             * zimbraAuthTokenValidityValue on the account, the password had probably
+             * zmailAuthTokenValidityValue on the account, the password had probably
              * changed on another server.   (Note: ChangePassword does *not* get proxied
              * to the home server, so even if this is the home server of the account, our
-             * zimbraAuthTokenValidityValue on the account can be behind.)
+             * zmailAuthTokenValidityValue on the account can be behind.)
              *
              * If this is the case, we reload the account from LDAP replica.
              * Note: for this reload, we reload from replica just like a regular caching reload.
@@ -348,46 +348,46 @@ public class Account extends ZAttrAccount implements GroupedEntry, AliasedEntry 
              * high as the one in this auth token.
              *
              * e.g. - req 1
-             *        - account.zimbraAuthTokenValidityValue is 1
+             *        - account.zmailAuthTokenValidityValue is 1
              *        - autoToken.ValidityValue is 3
              *        - we have not reloaded, so go ahead reload the account
-             *        - after the reload account.zimbraAuthTokenValidityValue is still not 3 (e.g is 1 or 2)
-             *          (should not happen, but people can modify LDAP data outside zimbra or
+             *        - after the reload account.zmailAuthTokenValidityValue is still not 3 (e.g is 1 or 2)
+             *          (should not happen, but people can modify LDAP data outside zmail or
              *           there could be a slow replica, etc)
              *
              *        - record that we have reloaded for validity value 3
              *        - reject the auth token
              *
              *      - req 2
-             *        - account.zimbraAuthTokenValidityValue is still 1
+             *        - account.zmailAuthTokenValidityValue is still 1
              *        - autoToken.ValidityValue is 3
              *        - we do *not* reload again this time, since we already tried.
              *        - reject the auth token
              *
              *      - req 3
-             *        - account.zimbraAuthTokenValidityValue is still 1
+             *        - account.zmailAuthTokenValidityValue is still 1
              *        - autoToken.ValidityValue is 4
              *        - the highest validity value we've tried reloading for is 3, so do
              *          the reload again.
-             *        - reloaded account.zimbraAuthTokenValidityValue is 4
+             *        - reloaded account.zmailAuthTokenValidityValue is 4
              *        - remember that we have reloaded for validity value 4
              *        - accept the auth token
              */
             Integer highestReloadedFor = (Integer)getCachedData(EntryCacheDataKey.ACCOUNT_VALIDITY_VALUE_HIGHEST_RELOAD.getKeyName());
             boolean willReload = (highestReloadedFor == null) || (highestReloadedFor < authTokenValue);
 
-            ZimbraLog.account.debug("checkAuthTokenValidityValue: highest validity value reloaded for = " + highestReloadedFor +
+            ZmailLog.account.debug("checkAuthTokenValidityValue: highest validity value reloaded for = " + highestReloadedFor +
                     ", will reload = " + willReload);
 
             if (willReload) {
-                ZimbraLog.account.debug("checkAuthTokenValidityValue: reloading account " + getName() + " for validity value " + authTokenValue);
+                ZmailLog.account.debug("checkAuthTokenValidityValue: reloading account " + getName() + " for validity value " + authTokenValue);
                 getProvisioning().reload(this, false); // reload from replica
                 setCachedData(EntryCacheDataKey.ACCOUNT_VALIDITY_VALUE_HIGHEST_RELOAD.getKeyName(),
                     Integer.valueOf(authTokenValue));
 
                 // validate the value again
                 acctValue = getAuthTokenValidityValue();
-                ZimbraLog.account.debug("checkAuthTokenValidityValue: validity value on account after reload = " + acctValue);
+                ZmailLog.account.debug("checkAuthTokenValidityValue: validity value on account after reload = " + acctValue);
                 return (acctValue == authTokenValue);
             }
         }
@@ -444,7 +444,7 @@ public class Account extends ZAttrAccount implements GroupedEntry, AliasedEntry 
         if (getName().equals(addr)) {
             return true;
         } else {
-            Set<String> aliases = getMultiAttrSet(Provisioning.A_zimbraMailAlias);
+            Set<String> aliases = getMultiAttrSet(Provisioning.A_zmailMailAlias);
             return aliases.contains(addr);
         }
     }
@@ -453,12 +453,12 @@ public class Account extends ZAttrAccount implements GroupedEntry, AliasedEntry 
     public Set<String> getAllAddrsSet() {
         Set<String> addrs = Sets.newHashSet();
         addrs.add(getName());
-        addrs.addAll(getMultiAttrSet(Provisioning.A_zimbraMailAlias));
+        addrs.addAll(getMultiAttrSet(Provisioning.A_zmailMailAlias));
         return Collections.unmodifiableSet(addrs);
     }
 
     public UCService getUCService() throws ServiceException {
-        String ucServiceId = getAttr(Provisioning.A_zimbraUCServiceId);
+        String ucServiceId = getAttr(Provisioning.A_zmailUCServiceId);
         return (ucServiceId == null ? null : getProvisioning().get(Key.UCServiceBy.id, ucServiceId));
     }
 
@@ -470,7 +470,7 @@ public class Account extends ZAttrAccount implements GroupedEntry, AliasedEntry 
                 NameUtil.EmailAddress emailAddr = new NameUtil.EmailAddress(getName());
                 ucUsername = emailAddr.getLocalPart();
             } catch (ServiceException e) {
-                ZimbraLog.account.warn("ignoring exception while getting localpart of primary email address", e);
+                ZmailLog.account.warn("ignoring exception while getting localpart of primary email address", e);
             }
         }
         return ucUsername;

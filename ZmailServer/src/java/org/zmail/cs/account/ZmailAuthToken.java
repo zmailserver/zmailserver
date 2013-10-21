@@ -12,25 +12,25 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.account;
+package org.zmail.cs.account;
 
 import com.google.common.base.Objects;
-import com.zimbra.common.auth.ZAuthToken;
-import com.zimbra.common.localconfig.LC;
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.common.soap.AccountConstants;
-import com.zimbra.common.soap.AdminConstants;
-import com.zimbra.common.soap.Element;
-import com.zimbra.common.util.BlobMetaData;
-import com.zimbra.common.util.BlobMetaDataEncodingException;
-import com.zimbra.common.util.Log;
-import com.zimbra.common.util.LogFactory;
-import com.zimbra.common.util.ZimbraCookie;
-import com.zimbra.common.account.Key.AccountBy;
-import com.zimbra.cs.account.auth.AuthMechanism.AuthMech;
+import org.zmail.common.auth.ZAuthToken;
+import org.zmail.common.localconfig.LC;
+import org.zmail.common.service.ServiceException;
+import org.zmail.common.soap.AccountConstants;
+import org.zmail.common.soap.AdminConstants;
+import org.zmail.common.soap.Element;
+import org.zmail.common.util.BlobMetaData;
+import org.zmail.common.util.BlobMetaDataEncodingException;
+import org.zmail.common.util.Log;
+import org.zmail.common.util.LogFactory;
+import org.zmail.common.util.ZmailCookie;
+import org.zmail.common.account.Key.AccountBy;
+import org.zmail.cs.account.auth.AuthMechanism.AuthMech;
 import org.apache.commons.codec.DecoderException;
 import org.apache.commons.codec.binary.Hex;
-import com.zimbra.common.util.MapUtil;
+import org.zmail.common.util.MapUtil;
 import org.apache.commons.httpclient.HttpClient;
 import org.apache.commons.httpclient.HttpMethod;
 import org.apache.commons.httpclient.HttpState;
@@ -47,7 +47,7 @@ import java.util.Map;
  * @since May 30, 2004
  * @author schemers
  */
-public class ZimbraAuthToken extends AuthToken implements Cloneable {
+public class ZmailAuthToken extends AuthToken implements Cloneable {
     private static final String C_ID  = "id";
     // original admin id
     private static final String C_AID  = "aid";
@@ -56,14 +56,14 @@ public class ZimbraAuthToken extends AuthToken implements Cloneable {
     private static final String C_DOMAIN = "domain";
     private static final String C_DLGADMIN = "dlgadmin";
     private static final String C_TYPE = "type";
-    private static final String C_TYPE_ZIMBRA_USER = "zimbra";
+    private static final String C_TYPE_ZIMBRA_USER = "zmail";
     private static final String C_TYPE_EXTERNAL_USER = "external";
     private static final String C_EXTERNAL_USER_EMAIL = "email";
     private static final String C_DIGEST = "digest";
     private static final String C_VALIDITY_VALUE  = "vv";
     private static final String C_AUTH_MECH = "am";
 
-    private static final Map<String, ZimbraAuthToken> CACHE = MapUtil.newLruMap(LC.zimbra_authtoken_cache_size.intValue());
+    private static final Map<String, ZmailAuthToken> CACHE = MapUtil.newLruMap(LC.zmail_authtoken_cache_size.intValue());
     private static final Log LOG = LogFactory.getLog(AuthToken.class);
 
     private String accountId;
@@ -77,7 +77,7 @@ public class ZimbraAuthToken extends AuthToken implements Cloneable {
     private String type;
     private String externalUserEmail;
     private String digest;
-    private String accessKey; // just a dummy placeholder for now until accesskey auth is implemented in ZimbraAuthToken
+    private String accessKey; // just a dummy placeholder for now until accesskey auth is implemented in ZmailAuthToken
     private String proxyAuthToken;
     private AuthMech authMech;
 
@@ -107,9 +107,9 @@ public class ZimbraAuthToken extends AuthToken implements Cloneable {
      * authToken before using it.
      */
     public synchronized static AuthToken getAuthToken(String encoded) throws AuthTokenException {
-        ZimbraAuthToken at = CACHE.get(encoded);
+        ZmailAuthToken at = CACHE.get(encoded);
         if (at == null) {
-            at = new ZimbraAuthToken(encoded);
+            at = new ZmailAuthToken(encoded);
             if (!at.isExpired()) {
                 CACHE.put(encoded, at);
             }
@@ -122,7 +122,7 @@ public class ZimbraAuthToken extends AuthToken implements Cloneable {
         return at;
     }
 
-    protected ZimbraAuthToken() {
+    protected ZmailAuthToken() {
     }
 
     public static Map<?, ?> getInfo(String encoded) throws AuthTokenException {
@@ -144,7 +144,7 @@ public class ZimbraAuthToken extends AuthToken implements Cloneable {
         }
     }
 
-    protected ZimbraAuthToken(String encoded) throws AuthTokenException {
+    protected ZmailAuthToken(String encoded) throws AuthTokenException {
         try {
             this.encoded = encoded;
             int pos = encoded.indexOf('_');
@@ -202,19 +202,19 @@ public class ZimbraAuthToken extends AuthToken implements Cloneable {
         }
     }
 
-    public ZimbraAuthToken(Account acct) {
+    public ZmailAuthToken(Account acct) {
         this(acct, false, null);
     }
 
-    public ZimbraAuthToken(Account acct, boolean isAdmin, AuthMech authMech) {
+    public ZmailAuthToken(Account acct, boolean isAdmin, AuthMech authMech) {
         this(acct, 0, isAdmin, null, authMech);
         long lifetime = isAdmin || isDomainAdmin || isDelegatedAdmin ?
-                    acct.getTimeInterval(Provisioning.A_zimbraAdminAuthTokenLifetime, DEFAULT_AUTH_LIFETIME * 1000) :
-                    acct.getTimeInterval(Provisioning.A_zimbraAuthTokenLifetime, DEFAULT_AUTH_LIFETIME * 1000);
+                    acct.getTimeInterval(Provisioning.A_zmailAdminAuthTokenLifetime, DEFAULT_AUTH_LIFETIME * 1000) :
+                    acct.getTimeInterval(Provisioning.A_zmailAuthTokenLifetime, DEFAULT_AUTH_LIFETIME * 1000);
         expires = System.currentTimeMillis() + lifetime;
     }
 
-    public ZimbraAuthToken(Account acct, long expires) {
+    public ZmailAuthToken(Account acct, long expires) {
         this(acct, expires, false, null, null);
     }
 
@@ -225,15 +225,15 @@ public class ZimbraAuthToken extends AuthToken implements Cloneable {
      * @param adminAcct the admin account accessing acct's information, if this token was created by an admin. mainly used
      *        for auditing.
      */
-    public ZimbraAuthToken(Account acct, long expires, boolean isAdmin, Account adminAcct, 
+    public ZmailAuthToken(Account acct, long expires, boolean isAdmin, Account adminAcct, 
             AuthMech authMech) {
         accountId = acct.getId();
         adminAccountId = adminAcct != null ? adminAcct.getId() : null;
         validityValue = acct.getAuthTokenValidityValue();
         this.expires = expires;
-        this.isAdmin = isAdmin && "TRUE".equals(acct.getAttr(Provisioning.A_zimbraIsAdminAccount));
-        isDomainAdmin = isAdmin && "TRUE".equals(acct.getAttr(Provisioning.A_zimbraIsDomainAdminAccount));
-        isDelegatedAdmin = isAdmin && "TRUE".equals(acct.getAttr(Provisioning.A_zimbraIsDelegatedAdminAccount));
+        this.isAdmin = isAdmin && "TRUE".equals(acct.getAttr(Provisioning.A_zmailIsAdminAccount));
+        isDomainAdmin = isAdmin && "TRUE".equals(acct.getAttr(Provisioning.A_zmailIsDomainAdminAccount));
+        isDelegatedAdmin = isAdmin && "TRUE".equals(acct.getAttr(Provisioning.A_zmailIsDelegatedAdminAccount));
         this.authMech = authMech;
         encoded = null;
         if (acct instanceof GuestAccount) {
@@ -247,7 +247,7 @@ public class ZimbraAuthToken extends AuthToken implements Cloneable {
         }
     }
 
-    public ZimbraAuthToken(String acctId, String externalEmail, String pass, String digest, long expires) {
+    public ZmailAuthToken(String acctId, String externalEmail, String pass, String digest, long expires) {
         accountId = acctId;
         this.expires = expires;
         externalUserEmail = externalEmail == null ? "public" : externalEmail;
@@ -296,7 +296,7 @@ public class ZimbraAuthToken extends AuthToken implements Cloneable {
     }
 
     @Override
-    public boolean isZimbraUser() {
+    public boolean isZmailUser() {
         return type == null || type.compareTo(C_TYPE_ZIMBRA_USER) == 0;
     }
 
@@ -407,7 +407,7 @@ public class ZimbraAuthToken extends AuthToken implements Cloneable {
         client.setState(state);
 
         state.addCookie(new org.apache.commons.httpclient.Cookie(cookieDomain, 
-                ZimbraCookie.authTokenCookieName(isAdminReq), origAuthData, "/", null, false));
+                ZmailCookie.authTokenCookieName(isAdminReq), origAuthData, "/", null, false));
         client.getParams().setCookiePolicy(CookiePolicy.BROWSER_COMPATIBILITY);
     }
 
@@ -415,7 +415,7 @@ public class ZimbraAuthToken extends AuthToken implements Cloneable {
     public void encode(HttpState state, boolean isAdminReq, String cookieDomain) throws ServiceException {
         String origAuthData = getOrigAuthData();
         state.addCookie(new org.apache.commons.httpclient.Cookie(cookieDomain, 
-                ZimbraCookie.authTokenCookieName(isAdminReq), origAuthData, "/", null, false));
+                ZmailCookie.authTokenCookieName(isAdminReq), origAuthData, "/", null, false));
     }
 
     @Override
@@ -432,9 +432,9 @@ public class ZimbraAuthToken extends AuthToken implements Cloneable {
             maxAge = Integer.valueOf(-1);
         }
         
-        ZimbraCookie.addHttpOnlyCookie(resp, 
-                ZimbraCookie.authTokenCookieName(isAdminReq), origAuthData, 
-                ZimbraCookie.PATH_ROOT, maxAge, secureCookie);
+        ZmailCookie.addHttpOnlyCookie(resp, 
+                ZmailCookie.authTokenCookieName(isAdminReq), origAuthData, 
+                ZmailCookie.PATH_ROOT, maxAge, secureCookie);
     }
 
     @Override
@@ -497,12 +497,12 @@ public class ZimbraAuthToken extends AuthToken implements Cloneable {
     }
 
     public static void main(String args[]) throws ServiceException, AuthTokenException {
-        Account a = Provisioning.getInstance().get(AccountBy.name, "user1@example.zimbra.com");
-        ZimbraAuthToken at = new ZimbraAuthToken(a);
+        Account a = Provisioning.getInstance().get(AccountBy.name, "user1@example.zmail.com");
+        ZmailAuthToken at = new ZmailAuthToken(a);
         long start = System.currentTimeMillis();
         String encoded = at.getEncoded();
         for (int i = 0; i < 1000; i++) {
-            new ZimbraAuthToken(encoded);
+            new ZmailAuthToken(encoded);
         }
         long finish = System.currentTimeMillis();
         System.out.println(finish-start);

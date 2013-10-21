@@ -13,28 +13,28 @@
  * ***** END LICENSE BLOCK *****
  */
 
-package com.zimbra.cs.client.soap;
+package org.zmail.cs.client.soap;
 
-import com.zimbra.cs.client.*;
+import org.zmail.cs.client.*;
 
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.HashMap;
 
-import com.zimbra.common.util.Log;
-import com.zimbra.common.util.LogFactory;
+import org.zmail.common.util.Log;
+import org.zmail.common.util.LogFactory;
 import org.dom4j.Element;
 
-import com.zimbra.common.auth.ZAuthToken;
-import com.zimbra.common.soap.DomUtil;
-import com.zimbra.common.soap.SoapFaultException;
-import com.zimbra.common.soap.SoapHttpTransport;
-import com.zimbra.common.soap.SoapParseException;
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.common.util.StringUtil;
-import com.zimbra.common.soap.MailConstants;
-import com.zimbra.common.soap.AdminConstants;
+import org.zmail.common.auth.ZAuthToken;
+import org.zmail.common.soap.DomUtil;
+import org.zmail.common.soap.SoapFaultException;
+import org.zmail.common.soap.SoapHttpTransport;
+import org.zmail.common.soap.SoapParseException;
+import org.zmail.common.service.ServiceException;
+import org.zmail.common.util.StringUtil;
+import org.zmail.common.soap.MailConstants;
+import org.zmail.common.soap.AdminConstants;
 
 public abstract class LmcSoapRequest {
 
@@ -133,7 +133,7 @@ public abstract class LmcSoapRequest {
             if (sDumpXML) {
                 sLog.info("Request:" + DomUtil.toString(requestXML, true));
             }
-            com.zimbra.common.soap.Element requestElt = com.zimbra.common.soap.Element.convertDOM(requestXML);
+            org.zmail.common.soap.Element requestElt = org.zmail.common.soap.Element.convertDOM(requestXML);
             //System.out.println("Sending over request " + DomUtil.toString(requestXML, true));
             Element responseXML;
             if (mRequestedAccountId == null)

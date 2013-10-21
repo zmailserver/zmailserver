@@ -12,21 +12,21 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.db;
+package org.zmail.cs.db;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.common.util.StringUtil;
-import com.zimbra.common.util.ZimbraLog;
-import com.zimbra.cs.account.DataSource;
-import com.zimbra.cs.datasource.DataSourceManager;
-import com.zimbra.cs.datasource.imap.ImapFolder;
-import com.zimbra.cs.datasource.imap.ImapFolderCollection;
-import com.zimbra.cs.db.DbPool.DbConnection;
-import com.zimbra.cs.mailbox.Mailbox;
+import org.zmail.common.service.ServiceException;
+import org.zmail.common.util.StringUtil;
+import org.zmail.common.util.ZmailLog;
+import org.zmail.cs.account.DataSource;
+import org.zmail.cs.datasource.DataSourceManager;
+import org.zmail.cs.datasource.imap.ImapFolder;
+import org.zmail.cs.datasource.imap.ImapFolderCollection;
+import org.zmail.cs.db.DbPool.DbConnection;
+import org.zmail.cs.mailbox.Mailbox;
 
 public class DbImapFolder {
 
@@ -106,7 +106,7 @@ public class DbImapFolder {
             DbPool.quietClose(conn);
         }
 
-        ZimbraLog.datasource.debug("Found %d folders for %s", imapFolders.size(), ds);
+        ZmailLog.datasource.debug("Found %d folders for %s", imapFolders.size(), ds);
         return imapFolders;
     }
 
@@ -118,7 +118,7 @@ public class DbImapFolder {
         try {
             conn = DbPool.getConnection(mbox);
 
-            ZimbraLog.datasource.debug(
+            ZmailLog.datasource.debug(
                 "createImapFolder: itemId = %d, localPath = %s, remotePath = %s, uidValidity = %d",
             itemId, localPath, remotePath, uidValidity);
             stmt = conn.prepareStatement(
@@ -185,7 +185,7 @@ public class DbImapFolder {
      */
     public static void deleteImapData(Mailbox mbox, String dataSourceId)
     throws ServiceException {
-        ZimbraLog.datasource.info("Deleting IMAP data for DataSource %s", dataSourceId);
+        ZmailLog.datasource.info("Deleting IMAP data for DataSource %s", dataSourceId);
 
         if (StringUtil.isNullOrEmpty(dataSourceId))
             return;
@@ -218,7 +218,7 @@ public class DbImapFolder {
      */
     public static void deleteImapFolder(Mailbox mbox, DataSource ds, ImapFolder folder)
     throws ServiceException {
-        ZimbraLog.datasource.info("Deleting IMAP data for %s in %s", folder, ds);
+        ZmailLog.datasource.info("Deleting IMAP data for %s in %s", folder, ds);
 
         DbConnection conn = null;
         PreparedStatement stmt = null;

@@ -12,11 +12,11 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.mailbox;
+package org.zmail.cs.mailbox;
 
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.cs.mime.ParsedMessage;
-import com.zimbra.cs.store.StagedBlob;
+import org.zmail.common.service.ServiceException;
+import org.zmail.cs.mime.ParsedMessage;
+import org.zmail.cs.store.StagedBlob;
 
 public class Chat extends Message {
 

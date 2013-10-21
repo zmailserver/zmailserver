@@ -18,9 +18,9 @@
  *
  * Window - Preferences - Java - Code Style - Code Templates
  */
-package com.zimbra.cs.account;
+package org.zmail.cs.account;
 
-import com.zimbra.common.service.ServiceException;
+import org.zmail.common.service.ServiceException;
 
 import java.util.HashMap;
 import java.util.Map;

@@ -13,7 +13,7 @@
  * ***** END LICENSE BLOCK *****
  */
 
-package com.zimbra.cs.service.mail;
+package org.zmail.cs.service.mail;
 
 import java.io.File;
 import java.io.FileOutputStream;
@@ -33,43 +33,43 @@ import javax.mail.SendFailedException;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 
-import com.zimbra.common.calendar.ParsedDateTime;
-import com.zimbra.common.calendar.ZCalendar.ICalTok;
-import com.zimbra.common.calendar.ZCalendar.ZComponent;
-import com.zimbra.common.calendar.ZCalendar.ZProperty;
-import com.zimbra.common.calendar.ZCalendar.ZVCalendar;
-import com.zimbra.common.mime.MimeConstants;
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.common.soap.Element;
-import com.zimbra.common.soap.MailConstants;
-import com.zimbra.common.util.ByteUtil;
-import com.zimbra.common.util.L10nUtil;
-import com.zimbra.common.util.L10nUtil.MsgKey;
-import com.zimbra.common.util.MailUtil;
-import com.zimbra.common.util.ZimbraLog;
-import com.zimbra.common.zmime.ZSharedFileInputStream;
-import com.zimbra.cs.account.Account;
-import com.zimbra.cs.account.Provisioning;
-import com.zimbra.cs.mailbox.CalendarItem;
-import com.zimbra.cs.mailbox.MailItem;
-import com.zimbra.cs.mailbox.MailSender;
-import com.zimbra.cs.mailbox.MailServiceException;
-import com.zimbra.cs.mailbox.Mailbox;
-import com.zimbra.cs.mailbox.Mailbox.AddInviteData;
-import com.zimbra.cs.mailbox.OperationContext;
-import com.zimbra.cs.mailbox.calendar.CalendarMailSender;
-import com.zimbra.cs.mailbox.calendar.Invite;
-import com.zimbra.cs.mailbox.calendar.RecurId;
-import com.zimbra.cs.mailbox.calendar.ZAttendee;
-import com.zimbra.cs.mime.MPartInfo;
-import com.zimbra.cs.mime.Mime;
-import com.zimbra.cs.mime.Mime.FixedMimeMessage;
-import com.zimbra.cs.mime.ParsedMessage;
-import com.zimbra.cs.service.util.ItemId;
-import com.zimbra.cs.service.util.ItemIdFormatter;
-import com.zimbra.cs.util.AccountUtil;
-import com.zimbra.cs.util.JMSession;
-import com.zimbra.soap.ZimbraSoapContext;
+import org.zmail.common.calendar.ParsedDateTime;
+import org.zmail.common.calendar.ZCalendar.ICalTok;
+import org.zmail.common.calendar.ZCalendar.ZComponent;
+import org.zmail.common.calendar.ZCalendar.ZProperty;
+import org.zmail.common.calendar.ZCalendar.ZVCalendar;
+import org.zmail.common.mime.MimeConstants;
+import org.zmail.common.service.ServiceException;
+import org.zmail.common.soap.Element;
+import org.zmail.common.soap.MailConstants;
+import org.zmail.common.util.ByteUtil;
+import org.zmail.common.util.L10nUtil;
+import org.zmail.common.util.L10nUtil.MsgKey;
+import org.zmail.common.util.MailUtil;
+import org.zmail.common.util.ZmailLog;
+import org.zmail.common.zmime.ZSharedFileInputStream;
+import org.zmail.cs.account.Account;
+import org.zmail.cs.account.Provisioning;
+import org.zmail.cs.mailbox.CalendarItem;
+import org.zmail.cs.mailbox.MailItem;
+import org.zmail.cs.mailbox.MailSender;
+import org.zmail.cs.mailbox.MailServiceException;
+import org.zmail.cs.mailbox.Mailbox;
+import org.zmail.cs.mailbox.Mailbox.AddInviteData;
+import org.zmail.cs.mailbox.OperationContext;
+import org.zmail.cs.mailbox.calendar.CalendarMailSender;
+import org.zmail.cs.mailbox.calendar.Invite;
+import org.zmail.cs.mailbox.calendar.RecurId;
+import org.zmail.cs.mailbox.calendar.ZAttendee;
+import org.zmail.cs.mime.MPartInfo;
+import org.zmail.cs.mime.Mime;
+import org.zmail.cs.mime.Mime.FixedMimeMessage;
+import org.zmail.cs.mime.ParsedMessage;
+import org.zmail.cs.service.util.ItemId;
+import org.zmail.cs.service.util.ItemIdFormatter;
+import org.zmail.cs.util.AccountUtil;
+import org.zmail.cs.util.JMSession;
+import org.zmail.soap.ZmailSoapContext;
 
 public abstract class CalendarRequest extends MailDocumentHandler {
 
@@ -109,7 +109,7 @@ public abstract class CalendarRequest extends MailDocumentHandler {
      * @return
      * @throws ServiceException
      */
-    protected static CalSendData handleMsgElement(ZimbraSoapContext zsc, OperationContext octxt, Element msgElem,
+    protected static CalSendData handleMsgElement(ZmailSoapContext zsc, OperationContext octxt, Element msgElem,
                                                   Account acct, Mailbox mbox, ParseMimeMessage.InviteParser inviteParser)
     throws ServiceException {
         CalSendData csd = new CalSendData();
@@ -200,7 +200,7 @@ public abstract class CalendarRequest extends MailDocumentHandler {
     }
 
     protected static Element sendCalendarMessage(
-        ZimbraSoapContext zsc,
+        ZmailSoapContext zsc,
         OperationContext octxt,
         int apptFolderId,
         Account acct,
@@ -213,7 +213,7 @@ public abstract class CalendarRequest extends MailDocumentHandler {
     }
 
     protected static Element sendCalendarMessage(
-            ZimbraSoapContext zsc,
+            ZmailSoapContext zsc,
             OperationContext octxt,
             int apptFolderId,
             Account acct,
@@ -246,7 +246,7 @@ public abstract class CalendarRequest extends MailDocumentHandler {
      * @throws ServiceException
      */
     protected static Element sendCalendarCancelMessage(
-        ZimbraSoapContext zsc,
+        ZmailSoapContext zsc,
         OperationContext octxt,
         int apptFolderId,
         Account acct,
@@ -274,7 +274,7 @@ public abstract class CalendarRequest extends MailDocumentHandler {
      * @throws ServiceException
      */
     private static Element sendCalendarMessageInternal(
-        ZimbraSoapContext zsc,
+        ZmailSoapContext zsc,
         OperationContext octxt,
         int apptFolderId,
         Account acct,
@@ -286,7 +286,7 @@ public abstract class CalendarRequest extends MailDocumentHandler {
         MailSendQueue sendQueue)
     throws ServiceException {
         boolean onBehalfOf = isOnBehalfOfRequest(zsc);
-        boolean notifyOwner = onBehalfOf && acct.getBooleanAttr(Provisioning.A_zimbraPrefCalendarNotifyDelegatedChanges, false);
+        boolean notifyOwner = onBehalfOf && acct.getBooleanAttr(Provisioning.A_zmailPrefCalendarNotifyDelegatedChanges, false);
         if (notifyOwner) {
             try {
                 InternetAddress addr = AccountUtil.getFriendlyEmailAddress(acct);
@@ -434,7 +434,7 @@ public abstract class CalendarRequest extends MailDocumentHandler {
         return echoElem;
     }
 
-    protected static void sendOrganizerChangeMessage(ZimbraSoapContext zsc, OperationContext octxt,
+    protected static void sendOrganizerChangeMessage(ZmailSoapContext zsc, OperationContext octxt,
             CalendarItem calItem, Account acct, Mailbox mbox, MailSendQueue sendQueue) {
         try {
             Account authAccount = getAuthenticatedAccount(zsc);
@@ -452,7 +452,7 @@ public abstract class CalendarRequest extends MailDocumentHandler {
                 }
             }
         } catch (ServiceException e) {
-            ZimbraLog.calendar.warn("Ignoring error while sending organizer change message", e);
+            ZmailLog.calendar.warn("Ignoring error while sending organizer change message", e);
         }
     }
 
@@ -493,7 +493,7 @@ public abstract class CalendarRequest extends MailDocumentHandler {
     // added attendees are notified if notifyAllAttendees is false.  If it is true all attendees
     // for each invite are notified.  (Some invites may have more attendees than others.)
     protected static void notifyCalendarItem(
-            ZimbraSoapContext zsc, OperationContext octxt, Account acct, Mailbox mbox, CalendarItem calItem,
+            ZmailSoapContext zsc, OperationContext octxt, Account acct, Mailbox mbox, CalendarItem calItem,
             boolean notifyAllAttendees, List<ZAttendee> addedAttendees, boolean ignorePastExceptions, MailSendQueue sendQueue)
     throws ServiceException {
         boolean onBehalfOf = isOnBehalfOfRequest(zsc);
@@ -664,7 +664,7 @@ public abstract class CalendarRequest extends MailDocumentHandler {
         }
     }
 
-    protected static void notifyRemovedAttendees(ZimbraSoapContext zsc, OperationContext octxt, Account acct,
+    protected static void notifyRemovedAttendees(ZmailSoapContext zsc, OperationContext octxt, Account acct,
             Mailbox mbox, CalendarItem calItem, Invite invToCancel, List<ZAttendee> removedAttendees,
             MailSendQueue sendQueue)
     throws ServiceException {
@@ -678,11 +678,11 @@ public abstract class CalendarRequest extends MailDocumentHandler {
 
         String text = L10nUtil.getMessage(MsgKey.calendarCancelRemovedFromAttendeeList, locale);
 
-        if (ZimbraLog.calendar.isDebugEnabled()) {
+        if (ZmailLog.calendar.isDebugEnabled()) {
             StringBuilder sb = new StringBuilder("Sending cancellation message for \"");
             sb.append(invToCancel.getName()).append("\" to ");
             sb.append(getAttendeesAddressList(removedAttendees));
-            ZimbraLog.calendar.debug(sb.toString());
+            ZmailLog.calendar.debug(sb.toString());
         }
 
         List<Address> rcpts = CalendarMailSender.toListFromAttendees(removedAttendees);
@@ -700,7 +700,7 @@ public abstract class CalendarRequest extends MailDocumentHandler {
             sendCalendarCancelMessage(zsc, octxt, calItem.getFolderId(), acct, mbox, dat, false, sendQueue);
         } catch (ServiceException ex) {
             String to = getAttendeesAddressList(removedAttendees);
-            ZimbraLog.calendar.debug(
+            ZmailLog.calendar.debug(
                     "Could not inform attendees (" + to + ") that they were removed from meeting " +
                     invToCancel.toString() + " b/c of exception: " + ex.toString());
         }
@@ -714,7 +714,7 @@ public abstract class CalendarRequest extends MailDocumentHandler {
      * @return
      * @throws ServiceException
      */
-    public static boolean isOnBehalfOfRequest(ZimbraSoapContext zsc) throws ServiceException {
+    public static boolean isOnBehalfOfRequest(ZmailSoapContext zsc) throws ServiceException {
         if (!zsc.isDelegatedRequest())
             return false;
         return !AccountUtil.isZDesktopLocalAccount(zsc.getAuthtokenAccountId());
@@ -760,7 +760,7 @@ public abstract class CalendarRequest extends MailDocumentHandler {
                     try {
                         entry.send();
                     } catch (ServiceException e) {
-                        ZimbraLog.calendar.warn("ignoring error while sending calendar email", e);
+                        ZmailLog.calendar.warn("ignoring error while sending calendar email", e);
                     }
                 }
             }

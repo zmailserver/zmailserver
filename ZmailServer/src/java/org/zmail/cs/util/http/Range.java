@@ -12,7 +12,7 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.util.http;
+package org.zmail.cs.util.http;
 
 import java.util.LinkedList;
 import java.util.List;
@@ -21,7 +21,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.eclipse.jetty.http.HttpException;
 
-import com.zimbra.common.util.Pair;
+import org.zmail.common.util.Pair;
 
 /**
  * Helps with parsing and manipulating HTTP Range headers.

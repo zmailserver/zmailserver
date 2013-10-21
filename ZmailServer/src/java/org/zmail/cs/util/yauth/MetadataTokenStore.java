@@ -12,15 +12,15 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.util.yauth;
+package org.zmail.cs.util.yauth;
 
-import com.zimbra.cs.mailbox.Mailbox;
-import com.zimbra.cs.mailbox.Metadata;
-import com.zimbra.cs.mailbox.MetadataList;
-import com.zimbra.cs.mailbox.OperationContext;
-import com.zimbra.common.util.Log;
-import com.zimbra.common.util.ZimbraLog;
-import com.zimbra.common.service.ServiceException;
+import org.zmail.cs.mailbox.Mailbox;
+import org.zmail.cs.mailbox.Metadata;
+import org.zmail.cs.mailbox.MetadataList;
+import org.zmail.cs.mailbox.OperationContext;
+import org.zmail.common.util.Log;
+import org.zmail.common.util.ZmailLog;
+import org.zmail.common.service.ServiceException;
 
 import java.util.Map;
 import java.util.HashMap;
@@ -30,7 +30,7 @@ public class MetadataTokenStore extends TokenStore {
     private final Mailbox mbox;
     private final Map<String, String> tokens;
 
-    private static final Log LOG = ZimbraLog.datasource;
+    private static final Log LOG = ZmailLog.datasource;
 
     private static final String YAUTH_KEY = "YAUTH";
     private static final String VERSION_KEY = "VERSION";

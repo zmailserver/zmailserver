@@ -13,7 +13,7 @@
  * ***** END LICENSE BLOCK *****
  */
 
-package com.zimbra.zmtnef2xml;
+package org.zmail.zmtnef2xml;
 import net.freeutils.tnef.GUID;
 
 /**

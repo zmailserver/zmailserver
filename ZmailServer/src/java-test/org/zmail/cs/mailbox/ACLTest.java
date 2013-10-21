@@ -12,7 +12,7 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.mailbox;
+package org.zmail.cs.mailbox;
 
 import java.util.HashMap;
 
@@ -21,10 +21,10 @@ import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
-import com.zimbra.common.account.Key;
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.cs.account.Account;
-import com.zimbra.cs.account.Provisioning;
+import org.zmail.common.account.Key;
+import org.zmail.common.service.ServiceException;
+import org.zmail.cs.account.Account;
+import org.zmail.cs.account.Provisioning;
 
 public class ACLTest {
 
@@ -33,11 +33,11 @@ public class ACLTest {
         MailboxTestUtil.initServer();
         Provisioning prov = Provisioning.getInstance();
         HashMap<String,Object> attrs = new HashMap<String,Object>();
-        attrs.put(Provisioning.A_zimbraId, "17dd075e-2b47-44e6-8cb8-7fdfa18c1a9f");
-        prov.createAccount("owner@zimbra.com", "secret", attrs);
+        attrs.put(Provisioning.A_zmailId, "17dd075e-2b47-44e6-8cb8-7fdfa18c1a9f");
+        prov.createAccount("owner@zmail.com", "secret", attrs);
         attrs = new HashMap<String,Object>();
-        attrs.put(Provisioning.A_zimbraId, "a4e41fbe-9c3e-4ab5-8b34-c42f17e251cd");
-        prov.createAccount("principal@zimbra.com", "secret", attrs);
+        attrs.put(Provisioning.A_zmailId, "a4e41fbe-9c3e-4ab5-8b34-c42f17e251cd");
+        prov.createAccount("principal@zmail.com", "secret", attrs);
     }
 
     @Before
@@ -47,8 +47,8 @@ public class ACLTest {
 
     @Test
     public void testRegrant() throws Exception {
-        Account owner = Provisioning.getInstance().get(Key.AccountBy.name, "owner@zimbra.com");
-        Account grantee = Provisioning.getInstance().get(Key.AccountBy.name, "principal@zimbra.com");
+        Account owner = Provisioning.getInstance().get(Key.AccountBy.name, "owner@zmail.com");
+        Account grantee = Provisioning.getInstance().get(Key.AccountBy.name, "principal@zmail.com");
         Mailbox mbox = MailboxManager.getInstance().getMailboxByAccount(owner);
 
         Folder folder = mbox.createFolder(null, "shared", new Folder.FolderOptions().setDefaultView(MailItem.Type.DOCUMENT));
@@ -66,8 +66,8 @@ public class ACLTest {
 
     @Test
     public void testRegrantDifferentPermission() throws Exception {
-        Account owner = Provisioning.getInstance().get(Key.AccountBy.name, "owner@zimbra.com");
-        Account grantee = Provisioning.getInstance().get(Key.AccountBy.name, "principal@zimbra.com");
+        Account owner = Provisioning.getInstance().get(Key.AccountBy.name, "owner@zmail.com");
+        Account grantee = Provisioning.getInstance().get(Key.AccountBy.name, "principal@zmail.com");
         Mailbox mbox = MailboxManager.getInstance().getMailboxByAccount(owner);
 
         Folder folder = mbox.createFolder(null, "shared", new Folder.FolderOptions().setDefaultView(MailItem.Type.DOCUMENT));

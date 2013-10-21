@@ -12,33 +12,33 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.account.callback;
+package org.zmail.cs.account.callback;
 
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.cs.account.Account;
-import com.zimbra.cs.account.AccountServiceException;
-import com.zimbra.cs.account.AttributeCallback;
-import com.zimbra.cs.account.Entry;
+import org.zmail.common.service.ServiceException;
+import org.zmail.cs.account.Account;
+import org.zmail.cs.account.AccountServiceException;
+import org.zmail.cs.account.AttributeCallback;
+import org.zmail.cs.account.Entry;
 
 /**
- * {@link AttributeCallback} for {@code zimbraPrefMailTrustedSenderList}.
+ * {@link AttributeCallback} for {@code zmailPrefMailTrustedSenderList}.
  * <p>
  * This callback only intercepts pre-modify.
  * <ul>
  *  <li>Throw {@link AccountServiceException#TOO_MANY_TRUSTED_SENDERS} if the
- *  number of {@code zimbraPrefMailTrustedSenderList} entries is exceeding
- *  {@code zimbraMailTrustedSenderListMaxNumEntries} by the modify attempt.
+ *  number of {@code zmailPrefMailTrustedSenderList} entries is exceeding
+ *  {@code zmailMailTrustedSenderListMaxNumEntries} by the modify attempt.
  *  <li>Copy CoS values if the modify attempt is newly creating
- *  {@code zimbraPrefMailTrustedSenderList} entries at the account level.
+ *  {@code zmailPrefMailTrustedSenderList} entries at the account level.
  * </ul>
- * {@code zimbraPrefMailTrustedSenderList} is included in the {@code prefs}
+ * {@code zmailPrefMailTrustedSenderList} is included in the {@code prefs}
  * section of {@code GetInfoResponse}, so that client can cache all values upon
  * login. Having it in the {@code prefs} section might not be optimal because
- * the lengthy {@code name="zimbraPrefMailTrustedSenderList"} is repeated many
+ * the lengthy {@code name="zmailPrefMailTrustedSenderList"} is repeated many
  * times. If we find it a real performance hit, we should move it to a separate
  * section in {@code GetInfoResponse}. As a drawback, we have to provide a
  * separate SOAP API for modify because {@code ModifyPrefsRequest} can only

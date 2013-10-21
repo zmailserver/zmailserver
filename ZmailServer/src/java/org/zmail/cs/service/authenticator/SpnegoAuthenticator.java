@@ -13,7 +13,7 @@
  * ***** END LICENSE BLOCK *****
  */
 
-package com.zimbra.cs.service.authenticator;
+package org.zmail.cs.service.authenticator;
 
 import java.io.IOException;
 import java.security.Principal;
@@ -32,16 +32,16 @@ import org.eclipse.jetty.security.SpnegoUserIdentity;
 import org.eclipse.jetty.security.SpnegoUserPrincipal;
 import org.eclipse.jetty.security.UserAuthentication;
 
-import com.zimbra.common.account.Key.AccountBy;
-import com.zimbra.common.account.ZAttrProvisioning.AutoProvAuthMech;
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.common.util.ZimbraLog;
-import com.zimbra.cs.account.Account;
-import com.zimbra.cs.account.Domain;
-import com.zimbra.cs.account.GuestAccount;
-import com.zimbra.cs.account.Provisioning;
-import com.zimbra.cs.account.AccountServiceException.AuthFailedServiceException;
-import com.zimbra.cs.account.krb5.Krb5Principal;
+import org.zmail.common.account.Key.AccountBy;
+import org.zmail.common.account.ZAttrProvisioning.AutoProvAuthMech;
+import org.zmail.common.service.ServiceException;
+import org.zmail.common.util.ZmailLog;
+import org.zmail.cs.account.Account;
+import org.zmail.cs.account.Domain;
+import org.zmail.cs.account.GuestAccount;
+import org.zmail.cs.account.Provisioning;
+import org.zmail.cs.account.AccountServiceException.AuthFailedServiceException;
+import org.zmail.cs.account.krb5.Krb5Principal;
 
 public class SpnegoAuthenticator extends SSOAuthenticator {
 
@@ -58,7 +58,7 @@ public class SpnegoAuthenticator extends SSOAuthenticator {
     }
     
     @Override
-    public ZimbraPrincipal authenticate() throws ServiceException {
+    public ZmailPrincipal authenticate() throws ServiceException {
         Request request = (req instanceof Request) ? (Request)req : null;
         
         if (request == null) {
@@ -67,8 +67,8 @@ public class SpnegoAuthenticator extends SSOAuthenticator {
         return getPrincipal(request);
     }
     
-    private ZimbraPrincipal getPrincipal(Request request) throws ServiceException {
-    	ZimbraPrincipal principal = null;
+    private ZmailPrincipal getPrincipal(Request request) throws ServiceException {
+    	ZmailPrincipal principal = null;
         
         try {
             principal = authenticate(spnegoUserRealm, request, resp);
@@ -110,7 +110,7 @@ public class SpnegoAuthenticator extends SSOAuthenticator {
      * 
      * =========================================================
      */
-    private ZimbraPrincipal authenticate(LoginService realm, Request request, HttpServletResponse response) 
+    private ZmailPrincipal authenticate(LoginService realm, Request request, HttpServletResponse response) 
     throws ServiceException, IOException {
         Principal user = null;
         String header = request.getHeader(HttpHeaders.AUTHORIZATION);
@@ -137,25 +137,25 @@ public class SpnegoAuthenticator extends SSOAuthenticator {
             user = identity.getUserPrincipal();
             
             if (user != null) {
-                ZimbraLog.account.debug("SpengoAuthenticator: obtained principal: " + user.getName());
+                ZmailLog.account.debug("SpengoAuthenticator: obtained principal: " + user.getName());
                 
                 Account acct = getAccountByPrincipal(user);
-                ZimbraPrincipal zimbraPrincipal = new ZimbraPrincipal(user.getName(), acct);
+                ZmailPrincipal zmailPrincipal = new ZmailPrincipal(user.getName(), acct);
                 String clientName = ((SpnegoUserPrincipal)user).getName();
                 String role = clientName.substring(clientName.indexOf('@') + 1);                
-                SpnegoUserIdentity spnegoUserIdentity = new SpnegoUserIdentity(identity.getSubject(), zimbraPrincipal, Arrays.asList(role));     
+                SpnegoUserIdentity spnegoUserIdentity = new SpnegoUserIdentity(identity.getSubject(), zmailPrincipal, Arrays.asList(role));     
                 Authentication authentication = new UserAuthentication(getAuthType(), spnegoUserIdentity);
                 request.setAuthentication(authentication);
                 response.addHeader(HttpHeaders.WWW_AUTHENTICATE, HttpHeaders.NEGOTIATE + " " + ((SpnegoUserPrincipal)user).getToken());                
                 
-                return zimbraPrincipal;
+                return zmailPrincipal;
             }
             else {
                 /*
                  * no user was returned from the authentication which means something failed
                  * so process error logic
                  */
-                ZimbraLog.account.debug("SpengoAuthenticator: no user found, authentication failed");
+                ZmailLog.account.debug("SpengoAuthenticator: no user found, authentication failed");
                 throw AuthFailedServiceException.AUTH_FAILED("SpengoAuthenticator: no user found, authentication failed", (Throwable)null);
             }
         } else {
@@ -168,7 +168,7 @@ public class SpnegoAuthenticator extends SSOAuthenticator {
     }
     
     public void sendChallenge(LoginService realm, Request request, HttpServletResponse response) throws IOException {
-        ZimbraLog.account.debug("SpengoAuthenticator: sending challenge");
+        ZmailLog.account.debug("SpengoAuthenticator: sending challenge");
         response.setHeader(HttpHeaders.WWW_AUTHENTICATE, HttpHeaders.NEGOTIATE);
         response.sendError(HttpServletResponse.SC_UNAUTHORIZED);
     }
@@ -178,14 +178,14 @@ public class SpnegoAuthenticator extends SSOAuthenticator {
         String name;
         String token;
         
-        private static ZimbraPrincipal getMockPrincipal() throws IOException {
+        private static ZmailPrincipal getMockPrincipal() throws IOException {
             Principal principal = new MockSpnegoUser("spnego@SPNEGO.LOCAL", "blah");
-            ZimbraPrincipal zimbraPrincipal = null;
+            ZmailPrincipal zmailPrincipal = null;
 			try {
-				zimbraPrincipal = new ZimbraPrincipal(principal.getName(), GuestAccount.ANONYMOUS_ACCT);
+				zmailPrincipal = new ZmailPrincipal(principal.getName(), GuestAccount.ANONYMOUS_ACCT);
 			} catch (ServiceException e) {
 			}
-            return zimbraPrincipal;
+            return zmailPrincipal;
         }
         
         MockSpnegoUser(String name, String token) {

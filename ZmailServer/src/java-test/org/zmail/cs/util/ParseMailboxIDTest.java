@@ -12,7 +12,7 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.util;
+package org.zmail.cs.util;
 
 import java.util.HashMap;
 
@@ -21,10 +21,10 @@ import junit.framework.Assert;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.cs.account.MockProvisioning;
-import com.zimbra.cs.account.Provisioning;
-import com.zimbra.cs.service.util.ParseMailboxID;
+import org.zmail.common.service.ServiceException;
+import org.zmail.cs.account.MockProvisioning;
+import org.zmail.cs.account.Provisioning;
+import org.zmail.cs.service.util.ParseMailboxID;
 
 /**
  * Unit test for {@link ParseMailboxID}.
@@ -36,7 +36,7 @@ public class ParseMailboxIDTest {
     @BeforeClass
     public static void init() throws Exception {
         MockProvisioning prov = new MockProvisioning();
-        prov.createAccount("test@zimbra.com", "secret", new HashMap<String, Object>());
+        prov.createAccount("test@zmail.com", "secret", new HashMap<String, Object>());
         Provisioning.setInstance(prov);
     }
 
@@ -53,13 +53,13 @@ public class ParseMailboxIDTest {
 
     @Test
     public void parseEmail() throws Exception {
-        ParseMailboxID id = ParseMailboxID.parse("test@zimbra.com");
+        ParseMailboxID id = ParseMailboxID.parse("test@zmail.com");
         Assert.assertTrue(id.isLocal());
         Assert.assertEquals("localhost", id.getServer());
         Assert.assertEquals(0, id.getMailboxId());
         Assert.assertFalse(id.isAllMailboxIds());
         Assert.assertFalse(id.isAllServers());
-        Assert.assertEquals(Provisioning.getInstance().getAccountByName("test@zimbra.com"), id.getAccount());
+        Assert.assertEquals(Provisioning.getInstance().getAccountByName("test@zmail.com"), id.getAccount());
     }
 
     @Test
@@ -70,7 +70,7 @@ public class ParseMailboxIDTest {
         Assert.assertEquals(0, id.getMailboxId());
         Assert.assertFalse(id.isAllMailboxIds());
         Assert.assertFalse(id.isAllServers());
-        Assert.assertEquals(Provisioning.getInstance().getAccountByName("test@zimbra.com"), id.getAccount());
+        Assert.assertEquals(Provisioning.getInstance().getAccountByName("test@zmail.com"), id.getAccount());
     }
 
     @Test

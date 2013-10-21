@@ -2,7 +2,7 @@ HOWTO set up a multiserver dev environment v0.2 by tim
 ========================================================
 
 These instructions have been automated!  Try the script:
-    ZimbraServer/src/perl/dev_multiserver_init.pl
+    ZmailServer/src/perl/dev_multiserver_init.pl
 
 
 These instructions will allow you to get two dev installs running
@@ -14,7 +14,7 @@ sharing, etc.
 PREREQUISITES:
 ===================
 - two computers (or two virtual machines) each running a dev install.
-  See ZimbraServer/docs/INSTALL-xxx.txt
+  See ZmailServer/docs/INSTALL-xxx.txt
   
 - each computer must be able to see the other by domain name (create
   an /etc/hosts entry if necessary)
@@ -48,15 +48,15 @@ INSTRUCTIONS:
 
 6) Set up the new server account
    % zmprov -l cs <secondarys_hostname>
-   % zmprov -l ms <secondarys_hostname> zimbraServiceInstalled mailbox zimbraServiceEnabled mailbox
-   % zmprov -l ms <secondarys_hostname> zimbraMailMode http zimbraMailPort 7070 zimbraSmtpHostname <primarys_hostname>
+   % zmprov -l ms <secondarys_hostname> zmailServiceInstalled mailbox zmailServiceEnabled mailbox
+   % zmprov -l ms <secondarys_hostname> zmailMailMode http zmailMailPort 7070 zmailSmtpHostname <primarys_hostname>
 
 7) Add the new server account to the pool of mail servers.  This is necessary so you can create mailboxes on either server.
-   % zmprov -l gs <primarys_hostname> zimbraid
-        [outputs primary server's zimbraId]
-   % zmprov -l gs <secondarys_hostname> zimbraid
-        [outputs secondary server's zimbraId]
-   % zmprov -l mc default zimbraMailHostPool <zimbraid_from_primary> zimbraMailHostPool <zimbraid_from_secondary>
+   % zmprov -l gs <primarys_hostname> zmailid
+        [outputs primary server's zmailId]
+   % zmprov -l gs <secondarys_hostname> zmailid
+        [outputs secondary server's zmailId]
+   % zmprov -l mc default zmailMailHostPool <zmailid_from_primary> zmailMailHostPool <zmailid_from_secondary>
 
 8) Start jetty:
    [primary]% jetty start
@@ -66,19 +66,19 @@ INSTRUCTIONS:
    This is necessary to make some parts of the admin console work, and
    probably in other places too.
 
-   [primary]% zmlocalconfig -e zimbra_user=$USER
-   [primary]% /opt/zimbra/bin/zmsshkeygen
-   [primary]% cat /opt/zimbra/.ssh/authorized_keys >> $HOME/.ssh/authorized_keys 
+   [primary]% zmlocalconfig -e zmail_user=$USER
+   [primary]% /opt/zmail/bin/zmsshkeygen
+   [primary]% cat /opt/zmail/.ssh/authorized_keys >> $HOME/.ssh/authorized_keys 
 
-   [secondary]% zmlocalconfig -e zimbra_user=$USER
-   [secondary]% /opt/zimbra/bin/zmsshkeygen
-   [secondary]% cat /opt/zimbra/.ssh/authorized_keys >> $HOME/.ssh/authorized_keys 
+   [secondary]% zmlocalconfig -e zmail_user=$USER
+   [secondary]% /opt/zmail/bin/zmsshkeygen
+   [secondary]% cat /opt/zmail/.ssh/authorized_keys >> $HOME/.ssh/authorized_keys 
 
-   [primary]% /opt/zimbra/bin/zmupdateauthkeys   
-   [secondary]% /opt/zimbra/bin/zmupdateauthkeys   
+   [primary]% /opt/zmail/bin/zmupdateauthkeys   
+   [secondary]% /opt/zmail/bin/zmupdateauthkeys   
  
-   % zmprov ms <primarys_hostname> zimbraRemoteManagementUser $USER  
-   % zmprov ms <secondarys_hostname> zimbraRemoteManagementUser $USER     
+   % zmprov ms <primarys_hostname> zmailRemoteManagementUser $USER  
+   % zmprov ms <secondarys_hostname> zmailRemoteManagementUser $USER     
 
 10) Create Mailboxes on the new server: Use the admin client. (or
     whatever means you want) and create some new users on your second

@@ -14,7 +14,7 @@
  * 
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.service;
+package org.zmail.cs.service;
 
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
@@ -44,30 +44,30 @@ import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 import org.xml.sax.InputSource;
 
-import com.zimbra.common.account.Key.AccountBy;
-import com.zimbra.common.localconfig.LC;
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.common.util.ByteUtil;
-import com.zimbra.common.util.Log;
-import com.zimbra.common.util.LogFactory;
-import com.zimbra.common.util.ZimbraLog;
-import com.zimbra.cs.account.Account;
-import com.zimbra.cs.account.Domain;
-import com.zimbra.cs.account.Provisioning;
-import com.zimbra.cs.account.Server;
-import com.zimbra.cs.account.auth.AuthContext;
-import com.zimbra.cs.httpclient.URLUtil;
-import com.zimbra.cs.servlet.ZimbraServlet;
-import com.zimbra.cs.util.AccountUtil;
+import org.zmail.common.account.Key.AccountBy;
+import org.zmail.common.localconfig.LC;
+import org.zmail.common.service.ServiceException;
+import org.zmail.common.util.ByteUtil;
+import org.zmail.common.util.Log;
+import org.zmail.common.util.LogFactory;
+import org.zmail.common.util.ZmailLog;
+import org.zmail.cs.account.Account;
+import org.zmail.cs.account.Domain;
+import org.zmail.cs.account.Provisioning;
+import org.zmail.cs.account.Server;
+import org.zmail.cs.account.auth.AuthContext;
+import org.zmail.cs.httpclient.URLUtil;
+import org.zmail.cs.servlet.ZmailServlet;
+import org.zmail.cs.util.AccountUtil;
 
-public class AutoDiscoverServlet extends ZimbraServlet {
+public class AutoDiscoverServlet extends ZmailServlet {
 
     private static final long serialVersionUID = 1921058393177879727L;
     private static final Log log = LogFactory.getLog(AutoDiscoverServlet.class);
 
     private static final String BASIC_AUTH_HEADER = "Authorization";
     private static final String WWW_AUTHENTICATE_HEADER = "WWW-Authenticate";
-    private static final String WWW_AUTHENTICATE_VALUE = "BASIC realm=\"Zimbra\"";
+    private static final String WWW_AUTHENTICATE_VALUE = "BASIC realm=\"Zmail\"";
     private static final String NTLM = "NTLM";
     private static final String NEGOTIATE = "Negotiate";
 
@@ -95,7 +95,7 @@ public class AutoDiscoverServlet extends ZimbraServlet {
         Server server = prov.getServer(acct);
         Domain domain = prov.getDomain(acct);
 
-        if (LC.zimbra_activesync_autodiscover_use_service_url.booleanValue()) {
+        if (LC.zmail_activesync_autodiscover_use_service_url.booleanValue()) {
             return URLUtil.getServiceURL(server, AutoDiscoverServlet.MS_ACTIVESYNC_PATH, true);
         }
 
@@ -120,7 +120,7 @@ public class AutoDiscoverServlet extends ZimbraServlet {
                     return;
                 }
             } else {
-                resp.sendRedirect(LC.zimbra_activesync_autodiscover_url.value());
+                resp.sendRedirect(LC.zmail_activesync_autodiscover_url.value());
             }
         }
     }
@@ -145,7 +145,7 @@ public class AutoDiscoverServlet extends ZimbraServlet {
     //
     @Override
     public void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        ZimbraLog.clearContext();
+        ZmailLog.clearContext();
         addRemoteIpToLoggingContext(req);
 
         log.info("Handling autodiscover request...");
@@ -318,7 +318,7 @@ public class AutoDiscoverServlet extends ZimbraServlet {
         try {
             Provisioning prov = Provisioning.getInstance();
             if (user.indexOf('@') == -1) {
-                String defaultDomain = prov.getConfig().getAttr(Provisioning.A_zimbraDefaultDomainName, null);
+                String defaultDomain = prov.getConfig().getAttr(Provisioning.A_zmailDefaultDomainName, null);
                 if (defaultDomain == null) {
                     log.warn("Ldap access error; user=" + user);
                     sendError(resp, HttpServletResponse.SC_INTERNAL_SERVER_ERROR, "ldap access error");
@@ -337,8 +337,8 @@ public class AutoDiscoverServlet extends ZimbraServlet {
 
             try {
                 Map<String, Object> authCtxt = new HashMap<String, Object>();
-                authCtxt.put(AuthContext.AC_ORIGINATING_CLIENT_IP, ZimbraServlet.getOrigIp(req));
-                authCtxt.put(AuthContext.AC_REMOTE_IP, ZimbraServlet.getClientIp(req));
+                authCtxt.put(AuthContext.AC_ORIGINATING_CLIENT_IP, ZmailServlet.getOrigIp(req));
+                authCtxt.put(AuthContext.AC_REMOTE_IP, ZmailServlet.getClientIp(req));
                 authCtxt.put(AuthContext.AC_ACCOUNT_NAME_PASSEDIN, userPassedIn);
                 authCtxt.put(AuthContext.AC_USER_AGENT, req.getHeader("User-Agent"));
                 prov.authAccount(account, pass, AuthContext.Protocol.zsync, authCtxt);
@@ -349,9 +349,9 @@ public class AutoDiscoverServlet extends ZimbraServlet {
                 return null;
             }
 
-            if (!account.getBooleanAttr(Provisioning.A_zimbraFeatureMobileSyncEnabled, false)) {
-                log.info("User account not enabled for ZimbraSync; user=" + user);
-                sendError(resp, HttpServletResponse.SC_FORBIDDEN, "Account not enabled for ZimbraSync");
+            if (!account.getBooleanAttr(Provisioning.A_zmailFeatureMobileSyncEnabled, false)) {
+                log.info("User account not enabled for ZmailSync; user=" + user);
+                sendError(resp, HttpServletResponse.SC_FORBIDDEN, "Account not enabled for ZmailSync");
                 return null;
             }
 

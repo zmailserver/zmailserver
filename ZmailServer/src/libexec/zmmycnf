@@ -14,7 +14,7 @@
 # ***** END LICENSE BLOCK *****
 # 
 
-source /opt/zimbra/bin/zmshutil || exit 1
+source /opt/zmail/bin/zmshutil || exit 1
 zmsetvars -f
 
 #
@@ -44,7 +44,7 @@ memKB=$(zmsysmemkb)
 #
 # Tell the JDBC driver how many mysql active connections to use.
 #
-${zimbra_home}/bin/zmlocalconfig -e zimbra_mysql_connector_maxActive=100
+${zmail_home}/bin/zmlocalconfig -e zmail_mysql_connector_maxActive=100
 
 #
 # Write config to stdout
@@ -59,12 +59,12 @@ socket         = ${mysql_socket}
 pid-file       = ${mysql_pidfile}
 bind-address   = ${mysql_bind_address}
 port           = ${mysql_port}
-user           = ${zimbra_mysql_user}
-tmpdir         = ${zimbra_tmp_directory}
+user           = ${zmail_mysql_user}
+tmpdir         = ${zmail_tmp_directory}
 
 external-locking
 slow_query_log = 1
-slow_query_log_file = ${zimbra_log_directory}/myslow.log
+slow_query_log_file = ${zmail_log_directory}/myslow.log
 
 long-query-time  = 1
 log-queries-not-using-indexes
@@ -96,7 +96,7 @@ max_allowed_packet             = 16777216
 
 [mysqld_safe]
 
-err-log      = ${zimbra_log_directory}/mysqld.log
+err-log      = ${zmail_log_directory}/mysqld.log
 pid-file     = ${mysql_pidfile}
 
 

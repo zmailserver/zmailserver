@@ -12,9 +12,9 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.store;
+package org.zmail.cs.store;
 
-import com.zimbra.cs.mailbox.Mailbox;
+import org.zmail.cs.mailbox.Mailbox;
 
 /** This class represents blob data that has been "staged" to a place
  *  appropriate for the <code>Mailbox</code> it is in the process of

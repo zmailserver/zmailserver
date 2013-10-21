@@ -16,7 +16,7 @@
 /*
  * Created on 2004. 7. 21.
  */
-package com.zimbra.cs.redolog.op;
+package org.zmail.cs.redolog.op;
 
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
@@ -33,18 +33,18 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 
-import com.zimbra.common.util.Log;
-import com.zimbra.common.util.LogFactory;
+import org.zmail.common.util.Log;
+import org.zmail.common.util.LogFactory;
 
-import com.zimbra.cs.mailbox.MailboxOperation;
-import com.zimbra.cs.mailbox.OperationContext;
-import com.zimbra.cs.redolog.RedoCommitCallback;
-import com.zimbra.cs.redolog.RedoLogInput;
-import com.zimbra.cs.redolog.RedoLogManager;
-import com.zimbra.cs.redolog.RedoLogOutput;
-import com.zimbra.cs.redolog.RedoLogProvider;
-import com.zimbra.cs.redolog.TransactionId;
-import com.zimbra.cs.redolog.Version;
+import org.zmail.cs.mailbox.MailboxOperation;
+import org.zmail.cs.mailbox.OperationContext;
+import org.zmail.cs.redolog.RedoCommitCallback;
+import org.zmail.cs.redolog.RedoLogInput;
+import org.zmail.cs.redolog.RedoLogManager;
+import org.zmail.cs.redolog.RedoLogOutput;
+import org.zmail.cs.redolog.RedoLogProvider;
+import org.zmail.cs.redolog.TransactionId;
+import org.zmail.cs.redolog.Version;
 
 public abstract class RedoableOp {
 

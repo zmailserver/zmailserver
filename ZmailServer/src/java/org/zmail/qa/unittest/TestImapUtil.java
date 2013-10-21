@@ -12,14 +12,14 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.qa.unittest;
+package org.zmail.qa.unittest;
 
-import com.zimbra.cs.datasource.imap.ImapUtil;
+import org.zmail.cs.datasource.imap.ImapUtil;
 import junit.framework.TestCase;
-import com.zimbra.cs.mailclient.imap.ListData;
-import com.zimbra.cs.mailclient.imap.ImapInputStream;
-import com.zimbra.cs.mailclient.imap.ImapConfig;
-import com.zimbra.cs.mailclient.util.Ascii;
+import org.zmail.cs.mailclient.imap.ListData;
+import org.zmail.cs.mailclient.imap.ImapInputStream;
+import org.zmail.cs.mailclient.imap.ImapConfig;
+import org.zmail.cs.mailclient.util.Ascii;
 
 import java.util.List;
 import java.util.ArrayList;

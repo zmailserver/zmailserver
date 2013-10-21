@@ -12,11 +12,11 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.imap;
+package org.zmail.cs.imap;
 
-import com.zimbra.common.io.TcpServerInputStream;
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.common.util.ZimbraLog;
+import org.zmail.common.io.TcpServerInputStream;
+import org.zmail.common.service.ServiceException;
+import org.zmail.common.util.ZmailLog;
 
 import java.io.IOException;
 
@@ -53,7 +53,7 @@ final class TcpImapRequest extends ImapRequest {
                     } 
                 } 
             } catch (ServiceException se) {
-                ZimbraLog.imap.warn("unable to check zimbraMtaMaxMessageSize", se);
+                ZmailLog.imap.warn("unable to check zmailMtaMaxMessageSize", se);
             }
         } 
         if (isMaxRequestSizeExceeded() || size > maxLiteralSize) {
@@ -89,7 +89,7 @@ final class TcpImapRequest extends ImapRequest {
             }
         }
 
-        ZimbraLog.imap.trace("C: %s", logline);
+        ZmailLog.imap.trace("C: %s", logline);
 
         // if the line ends in a LITERAL+ non-blocking literal, keep reading
         if (line.endsWith("+}") && extensionEnabled("LITERAL+")) {
@@ -139,8 +139,8 @@ final class TcpImapRequest extends ImapRequest {
             if (read == -1)
                 throw new ImapTerminatedException();
             // TODO How to log literal data now...
-            if (!unlogged && ZimbraLog.imap.isTraceEnabled()) {
-                ZimbraLog.imap.trace("C: {%s}", read);
+            if (!unlogged && ZmailLog.imap.isTraceEnabled()) {
+                ZmailLog.imap.trace("C: {%s}", read);
             }
             literalCounter -= read;
         }

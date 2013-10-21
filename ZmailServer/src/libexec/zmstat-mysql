@@ -17,10 +17,10 @@
 use strict;
 use Carp ();
 use Getopt::Long;
-use lib "/opt/zimbra/zimbramon/lib";
-use Zimbra::Mon::Zmstat;
-use Zimbra::Mon::Logger;
-use Zimbra::DB::DB;
+use lib "/opt/zmail/zmailmon/lib";
+use Zmail::Mon::Zmstat;
+use Zmail::Mon::Logger;
+use Zmail::DB::DB;
 
 zmstatInit();
 
@@ -29,7 +29,7 @@ my @statNames;
 
 sub getHeading() {
     @statNames = ();
-    my @status = Zimbra::DB::DB::runSql("SHOW GLOBAL STATUS", 0);
+    my @status = Zmail::DB::DB::runSql("SHOW GLOBAL STATUS", 0);
     my $heading = 'timestamp';
     foreach my $row (@status) {
         my ($name, $value) = split("\t", $row);
@@ -42,7 +42,7 @@ sub getHeading() {
 sub getValues($) {
     my $tstamp = shift;
     my %stat;
-    my @status = Zimbra::DB::DB::runSql("SHOW GLOBAL STATUS", 0);
+    my @status = Zmail::DB::DB::runSql("SHOW GLOBAL STATUS", 0);
     foreach my $row (@status) {
         my ($name, $value) = split("\t", $row);
         $stat{$name} = $value;
@@ -61,7 +61,7 @@ sub usage() {
 Usage: zmstat-mysql [options]
 Monitor MySQL status variables
 -i, --interval: output a line every N seconds
--l, --log:      log file (default is /opt/zimbra/zmstat/mysql.csv)
+-l, --log:      log file (default is /opt/zmail/zmstat/mysql.csv)
 -c, --console:  output to stdout
 
 If logging to a file, rotation occurs when HUP signal is sent or when
@@ -133,7 +133,7 @@ while (1) {
     eval {
     	my $values = getValues($tstamp);
         $LOGFH->print("$values\n");
-        Zimbra::Mon::Logger::LogStats( "info", "zmstat mysql.csv: ${HEADING}:: $values"); 
+        Zmail::Mon::Logger::LogStats( "info", "zmstat mysql.csv: ${HEADING}:: $values"); 
         $LOGFH->flush();
     };
     if ($@) {

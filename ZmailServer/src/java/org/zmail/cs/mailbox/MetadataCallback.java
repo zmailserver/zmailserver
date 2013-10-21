@@ -12,17 +12,17 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.mailbox;
+package org.zmail.cs.mailbox;
 
 import java.util.List;
 import java.util.Set;
 import java.util.concurrent.CopyOnWriteArrayList;
 import java.util.concurrent.CopyOnWriteArraySet;
 
-import com.zimbra.common.util.ZimbraLog;
-import com.zimbra.cs.mailbox.MailItem.CustomMetadata;
-import com.zimbra.cs.mailbox.MailItem.CustomMetadata.CustomMetadataList;
-import com.zimbra.cs.mime.ParsedMessage;
+import org.zmail.common.util.ZmailLog;
+import org.zmail.cs.mailbox.MailItem.CustomMetadata;
+import org.zmail.cs.mailbox.MailItem.CustomMetadata.CustomMetadataList;
+import org.zmail.cs.mime.ParsedMessage;
 
 public abstract class MetadataCallback {
     private static Set<String> sCallbackKeys = new CopyOnWriteArraySet<String>();
@@ -32,11 +32,11 @@ public abstract class MetadataCallback {
      *  message is added to a user mailbox and when an item is serialized.  */
     public synchronized static void addCallback(MetadataCallback callback) {
         if (callback == null) {
-            ZimbraLog.mailbox.error("", new IllegalStateException("MetadataCallback cannot be null"));
+            ZmailLog.mailbox.error("", new IllegalStateException("MetadataCallback cannot be null"));
         } else if (sCallbackKeys.contains(callback.getMetadataSectionKey())) {
-            ZimbraLog.mailbox.error("", new IllegalStateException("second MetadataCallback for key " + callback.getMetadataSectionKey()));
+            ZmailLog.mailbox.error("", new IllegalStateException("second MetadataCallback for key " + callback.getMetadataSectionKey()));
         } else {
-            ZimbraLog.mailbox.info("Adding metadata callback: %s", callback.getClass().getName());
+            ZmailLog.mailbox.info("Adding metadata callback: %s", callback.getClass().getName());
             sCallbacks.add(callback);
             sCallbackKeys.add(callback.getMetadataSectionKey());
         }

@@ -12,24 +12,24 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.account;
+package org.zmail.cs.account;
 
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.common.util.ZimbraLog;
-import com.zimbra.cs.index.SortBy;
-import com.zimbra.cs.ldap.ZLdapFilterFactory;
-import com.zimbra.cs.mailbox.ACL;
-import com.zimbra.cs.mailbox.Folder;
-import com.zimbra.cs.mailbox.Mailbox;
-import com.zimbra.cs.mailbox.MailboxManager;
-import com.zimbra.cs.mailbox.Mountpoint;
+import org.zmail.common.service.ServiceException;
+import org.zmail.common.util.ZmailLog;
+import org.zmail.cs.index.SortBy;
+import org.zmail.cs.ldap.ZLdapFilterFactory;
+import org.zmail.cs.mailbox.ACL;
+import org.zmail.cs.mailbox.Folder;
+import org.zmail.cs.mailbox.Mailbox;
+import org.zmail.cs.mailbox.MailboxManager;
+import org.zmail.cs.mailbox.Mountpoint;
 
 import java.util.Date;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.TimerTask;
 
-import static com.zimbra.common.account.ZAttrProvisioning.AccountStatus;
+import static org.zmail.common.account.ZAttrProvisioning.AccountStatus;
 
 /**
  * This task:
@@ -40,7 +40,7 @@ public class ExternalAccountManagerTask extends TimerTask {
 
     @Override
     public void run() {
-        ZimbraLog.misc.info("Starting external virtual account status manager task");
+        ZmailLog.misc.info("Starting external virtual account status manager task");
 
         Provisioning prov = Provisioning.getInstance();
         SearchAccountsOptions searchOpts = new SearchAccountsOptions();
@@ -53,7 +53,7 @@ public class ExternalAccountManagerTask extends TimerTask {
                 Account account = (Account) ne;
                 Mailbox mbox = MailboxManager.getInstance().getMailboxByAccount(account);
                 if (mbox == null) {
-                    ZimbraLog.misc.error(
+                    ZmailLog.misc.error(
                             "Mailbox for external virtual account %s is unexpectedly null", account.getId());
                     continue;
                 }
@@ -81,9 +81,9 @@ public class ExternalAccountManagerTask extends TimerTask {
                 }
             }
         } catch (ServiceException e) {
-            ZimbraLog.misc.warn("Error during external virtual account status manager task run", e);
+            ZmailLog.misc.warn("Error during external virtual account status manager task run", e);
         }
-        ZimbraLog.misc.info("Finished external virtual account status manager task");
+        ZmailLog.misc.info("Finished external virtual account status manager task");
     }
 
     private static void disableOrDeleteAccount(Provisioning prov, Account account, Mailbox mbox)

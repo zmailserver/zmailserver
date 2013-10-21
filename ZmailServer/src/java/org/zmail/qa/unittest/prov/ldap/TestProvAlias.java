@@ -13,7 +13,7 @@
  * ***** END LICENSE BLOCK *****
  */
 
-package com.zimbra.qa.unittest.prov.ldap;
+package org.zmail.qa.unittest.prov.ldap;
 
 import java.util.HashMap;
 import java.util.List;
@@ -23,27 +23,27 @@ import java.util.Set;
 import org.junit.*;
 import static org.junit.Assert.*;
 
-import com.zimbra.common.account.Key;
-import com.zimbra.common.account.Key.AccountBy;
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.cs.account.Account;
-import com.zimbra.cs.account.AccountServiceException;
-import com.zimbra.cs.account.Config;
-import com.zimbra.cs.account.DistributionList;
-import com.zimbra.cs.account.Domain;
-import com.zimbra.cs.account.Entry;
-import com.zimbra.cs.account.NamedEntry;
-import com.zimbra.cs.account.Provisioning;
-import com.zimbra.cs.account.SearchDirectoryOptions;
-import com.zimbra.cs.account.Provisioning.CacheEntry;
-import com.zimbra.cs.account.auth.AuthContext;
-import com.zimbra.cs.account.ldap.LdapProv;
-import com.zimbra.cs.account.ldap.entry.LdapEntry;
-import com.zimbra.cs.ldap.LdapUsage;
-import com.zimbra.cs.ldap.LdapUtil;
-import com.zimbra.cs.ldap.ZLdapFilterFactory.FilterId;
-import com.zimbra.qa.QA.Bug;
-import com.zimbra.soap.admin.type.CacheEntryType;
+import org.zmail.common.account.Key;
+import org.zmail.common.account.Key.AccountBy;
+import org.zmail.common.service.ServiceException;
+import org.zmail.cs.account.Account;
+import org.zmail.cs.account.AccountServiceException;
+import org.zmail.cs.account.Config;
+import org.zmail.cs.account.DistributionList;
+import org.zmail.cs.account.Domain;
+import org.zmail.cs.account.Entry;
+import org.zmail.cs.account.NamedEntry;
+import org.zmail.cs.account.Provisioning;
+import org.zmail.cs.account.SearchDirectoryOptions;
+import org.zmail.cs.account.Provisioning.CacheEntry;
+import org.zmail.cs.account.auth.AuthContext;
+import org.zmail.cs.account.ldap.LdapProv;
+import org.zmail.cs.account.ldap.entry.LdapEntry;
+import org.zmail.cs.ldap.LdapUsage;
+import org.zmail.cs.ldap.LdapUtil;
+import org.zmail.cs.ldap.ZLdapFilterFactory.FilterId;
+import org.zmail.qa.QA.Bug;
+import org.zmail.soap.admin.type.CacheEntryType;
 
 public class TestProvAlias extends LdapTest {
     private static String PASSWORD = "test123";
@@ -64,7 +64,7 @@ public class TestProvAlias extends LdapTest {
         prov = provUtil.getProv();
         
         Config config = prov.getConfig();
-        origDefaultDomainName = config.getAttr(Provisioning.A_zimbraDefaultDomainName);
+        origDefaultDomainName = config.getAttr(Provisioning.A_zmailDefaultDomainName);
         
         initTest();
     }
@@ -73,7 +73,7 @@ public class TestProvAlias extends LdapTest {
     public static void cleanup() throws Exception {
         Config config = prov.getConfig();
         Map<String, Object> attrs = new HashMap<String, Object>();
-        attrs.put(Provisioning.A_zimbraDefaultDomainName, origDefaultDomainName);
+        attrs.put(Provisioning.A_zmailDefaultDomainName, origDefaultDomainName);
         prov.modifyAttrs(config, attrs);
         
         Cleanup.deleteAll(baseDomainName());
@@ -95,13 +95,13 @@ public class TestProvAlias extends LdapTest {
         Map<String, Object> attrs = new HashMap<String, Object>();
         
         // create the local domain
-        attrs.put(Provisioning.A_zimbraDomainType, Provisioning.DomainType.local.name());
+        attrs.put(Provisioning.A_zmailDomainType, Provisioning.DomainType.local.name());
         Domain localDomain = provUtil.createDomain(LOCAL_DOMAIN_NAME, attrs);
         
         // create the alias domain
         attrs.clear();
-        attrs.put(Provisioning.A_zimbraDomainType, Provisioning.DomainType.alias.name());
-        attrs.put(Provisioning.A_zimbraDomainAliasTargetId, localDomain.getId());
+        attrs.put(Provisioning.A_zmailDomainType, Provisioning.DomainType.alias.name());
+        attrs.put(Provisioning.A_zmailDomainAliasTargetId, localDomain.getId());
         Domain aliasDomain = provUtil.createDomain(ALIAS_DOMAIN_NAME, attrs);
     }
     
@@ -185,7 +185,7 @@ public class TestProvAlias extends LdapTest {
     /*
         Case 3:
             Alias1@aliasdomain.com points at account1@localdomain.com.  (there is no alias1@localdomain.com alias)
-            Global config zimbra default domain is set to localdomain.com.
+            Global config zmail default domain is set to localdomain.com.
             Auth is attempted with "alias1".  Does it work?  NO
             
     */
@@ -200,9 +200,9 @@ public class TestProvAlias extends LdapTest {
         String aliasName = getEmail(aliasLocalPart, ALIAS_DOMAIN_NAME, testName);
         
         Config config = prov.getConfig();
-        String origDefaltDomainName = config.getAttr(Provisioning.A_zimbraDefaultDomainName);
+        String origDefaltDomainName = config.getAttr(Provisioning.A_zmailDefaultDomainName);
         Map<String, Object> attrs = new HashMap<String, Object>();
-        attrs.put(Provisioning.A_zimbraDefaultDomainName, LOCAL_DOMAIN_NAME);
+        attrs.put(Provisioning.A_zmailDefaultDomainName, LOCAL_DOMAIN_NAME);
         prov.modifyAttrs(config, attrs);
         
         Account acct = prov.createAccount(acctName, PASSWORD, null);
@@ -214,7 +214,7 @@ public class TestProvAlias extends LdapTest {
         
         // put the orig back
         attrs.clear();
-        attrs.put(Provisioning.A_zimbraDefaultDomainName, "");
+        attrs.put(Provisioning.A_zmailDefaultDomainName, "");
         prov.modifyAttrs(config, attrs);
     }
     
@@ -222,7 +222,7 @@ public class TestProvAlias extends LdapTest {
     /*
      * test removing alias
      * 
-     * 1. remove alias from mail and zimbraMailAlias attributes of the entry
+     * 1. remove alias from mail and zmailMailAlias attributes of the entry
      * 2. remove alias from all distribution lists
      * 3. delete the alias entry 
      * 
@@ -256,7 +256,7 @@ public class TestProvAlias extends LdapTest {
         String domainName = "EE-AE-aliasPointToEntry" + "." + BASE_DOMAIN_NAME;
         domainName = domainName.toLowerCase();
         Map<String, Object> attrs = new HashMap<String, Object>();
-        attrs.put(Provisioning.A_zimbraDomainType, Provisioning.DomainType.local.name());
+        attrs.put(Provisioning.A_zmailDomainType, Provisioning.DomainType.local.name());
         Domain domain  = prov.createDomain(domainName, attrs);
         
         // create the account
@@ -288,16 +288,16 @@ public class TestProvAlias extends LdapTest {
 
         Set<String> values;
         
-        // ensure the alias is removed from the account's mail/zimbraMailAlias attrs
+        // ensure the alias is removed from the account's mail/zmailMailAlias attrs
         values = acct.getMultiAttrSet(Provisioning.A_mail);
         assertFalse(values.contains(aliasName));
-        values = acct.getMultiAttrSet(Provisioning.A_zimbraMailAlias);
+        values = acct.getMultiAttrSet(Provisioning.A_zmailMailAlias);
         assertFalse(values.contains(aliasName));
         
         // ensure the alias is removed from all the DLs
-        values = dl1.getMultiAttrSet(Provisioning.A_zimbraMailForwardingAddress);
+        values = dl1.getMultiAttrSet(Provisioning.A_zmailMailForwardingAddress);
         assertFalse(values.contains(aliasName));
-        values = dl2.getMultiAttrSet(Provisioning.A_zimbraMailForwardingAddress);
+        values = dl2.getMultiAttrSet(Provisioning.A_zmailMailForwardingAddress);
         assertFalse(values.contains(aliasName));
         
         // ensure the alias entry is removed
@@ -316,7 +316,7 @@ public class TestProvAlias extends LdapTest {
         String domainName = "EE-AE-aliasPointToOtherEntry" + "." + BASE_DOMAIN_NAME;
         domainName = domainName.toLowerCase();
         Map<String, Object> attrs = new HashMap<String, Object>();
-        attrs.put(Provisioning.A_zimbraDomainType, Provisioning.DomainType.local.name());
+        attrs.put(Provisioning.A_zmailDomainType, Provisioning.DomainType.local.name());
         Domain domain  = prov.createDomain(domainName, attrs);
         
         // create the account the alias points to
@@ -342,7 +342,7 @@ public class TestProvAlias extends LdapTest {
         String otherAcctName = getEmail("acct-other", domainName);
         Account otherAcct = prov.createAccount(otherAcctName, PASSWORD, new HashMap<String, Object>());
         
-        // and hack the other account to also contain the alias in it's mail/zimbraMailAlias attrs
+        // and hack the other account to also contain the alias in it's mail/zmailMailAlias attrs
         // the hacked attrs should be removed after the removeAlais call
         {
             Map<String, Object> attributes = new HashMap<String, Object>();
@@ -350,7 +350,7 @@ public class TestProvAlias extends LdapTest {
             // can no long do this, we now have an unique constraint on mail
             // attributes.put(Provisioning.A_mail, aliasName);
             
-            attributes.put(Provisioning.A_zimbraMailAlias, aliasName);
+            attributes.put(Provisioning.A_zmailMailAlias, aliasName);
             LdapEntry ldapAccount = (LdapEntry)otherAcct;
             ((LdapProv) prov).getHelper().modifyEntry(ldapAccount.getDN(), attributes, 
                     (Entry)ldapAccount, LdapUsage.UNITTEST);
@@ -360,7 +360,7 @@ public class TestProvAlias extends LdapTest {
             Set<String> values;
             // values = otherAcct.getMultiAttrSet(Provisioning.A_mail);
             // assertTrue(values.contains(aliasName));
-            values = otherAcct.getMultiAttrSet(Provisioning.A_zimbraMailAlias);
+            values = otherAcct.getMultiAttrSet(Provisioning.A_zmailMailAlias);
             assertTrue(values.contains(aliasName));
             
         }
@@ -387,19 +387,19 @@ public class TestProvAlias extends LdapTest {
         // ensure the alias is still on the account
         values = acct.getMultiAttrSet(Provisioning.A_mail);
         assertTrue(values.contains(aliasName));
-        values = acct.getMultiAttrSet(Provisioning.A_zimbraMailAlias);
+        values = acct.getMultiAttrSet(Provisioning.A_zmailMailAlias);
         assertTrue(values.contains(aliasName));
         
         // ensure the hacked in attrs are removed from the other account
         values = otherAcct.getMultiAttrSet(Provisioning.A_mail);
         assertFalse(values.contains(aliasName));
-        values = otherAcct.getMultiAttrSet(Provisioning.A_zimbraMailAlias);
+        values = otherAcct.getMultiAttrSet(Provisioning.A_zmailMailAlias);
         assertFalse(values.contains(aliasName));
         
         // ensure the alias is *not* removed from any the DLs
-        values = dl1.getMultiAttrSet(Provisioning.A_zimbraMailForwardingAddress);
+        values = dl1.getMultiAttrSet(Provisioning.A_zmailMailForwardingAddress);
         assertTrue(values.contains(aliasName));
-        values = dl2.getMultiAttrSet(Provisioning.A_zimbraMailForwardingAddress);
+        values = dl2.getMultiAttrSet(Provisioning.A_zmailMailForwardingAddress);
         assertTrue(values.contains(aliasName));
         
         // ensure the alias entry is *not* removed
@@ -419,7 +419,7 @@ public class TestProvAlias extends LdapTest {
         String domainName = "EE-AE-aliasPointToNonExistEntry" + "." + BASE_DOMAIN_NAME;
         domainName = domainName.toLowerCase();
         Map<String, Object> attrs = new HashMap<String, Object>();
-        attrs.put(Provisioning.A_zimbraDomainType, Provisioning.DomainType.local.name());
+        attrs.put(Provisioning.A_zmailDomainType, Provisioning.DomainType.local.name());
         Domain domain  = prov.createDomain(domainName, attrs);
         
         // create the account
@@ -444,7 +444,7 @@ public class TestProvAlias extends LdapTest {
         // now, hack it so the alias points to a non-existing entry
         {
             Map<String, Object> attributes = new HashMap<String, Object>();
-            attributes.put(Provisioning.A_zimbraAliasTargetId, LdapUtil.generateUUID());
+            attributes.put(Provisioning.A_zmailAliasTargetId, LdapUtil.generateUUID());
             
             List<NamedEntry> aliases = searchAliasesInDomain(domain);
             assertEquals(aliases.size(), 1);
@@ -472,16 +472,16 @@ public class TestProvAlias extends LdapTest {
 
         Set<String> values;
         
-        // ensure the alias is removed from the account's mail/zimbraMailAlias attrs
+        // ensure the alias is removed from the account's mail/zmailMailAlias attrs
         values = acct.getMultiAttrSet(Provisioning.A_mail);
         assertFalse(values.contains(aliasName));
-        values = acct.getMultiAttrSet(Provisioning.A_zimbraMailAlias);
+        values = acct.getMultiAttrSet(Provisioning.A_zmailMailAlias);
         assertFalse(values.contains(aliasName));
         
         // ensure the alias is removed from all the DLs
-        values = dl1.getMultiAttrSet(Provisioning.A_zimbraMailForwardingAddress);
+        values = dl1.getMultiAttrSet(Provisioning.A_zmailMailForwardingAddress);
         assertFalse(values.contains(aliasName));
-        values = dl2.getMultiAttrSet(Provisioning.A_zimbraMailForwardingAddress);
+        values = dl2.getMultiAttrSet(Provisioning.A_zmailMailForwardingAddress);
         assertFalse(values.contains(aliasName));
         
         // ensure the alias entry is removed
@@ -500,7 +500,7 @@ public class TestProvAlias extends LdapTest {
         String domainName = "EE-AN" + "." + BASE_DOMAIN_NAME;
         domainName = domainName.toLowerCase();
         Map<String, Object> attrs = new HashMap<String, Object>();
-        attrs.put(Provisioning.A_zimbraDomainType, Provisioning.DomainType.local.name());
+        attrs.put(Provisioning.A_zmailDomainType, Provisioning.DomainType.local.name());
         Domain domain  = prov.createDomain(domainName, attrs);
         
         // create the account
@@ -550,16 +550,16 @@ public class TestProvAlias extends LdapTest {
 
         Set<String> values;
         
-        // ensure the alias is removed from the account's mail/zimbraMailAlias attrs
+        // ensure the alias is removed from the account's mail/zmailMailAlias attrs
         values = acct.getMultiAttrSet(Provisioning.A_mail);
         assertFalse(values.contains(aliasName));
-        values = acct.getMultiAttrSet(Provisioning.A_zimbraMailAlias);
+        values = acct.getMultiAttrSet(Provisioning.A_zmailMailAlias);
         assertFalse(values.contains(aliasName));
         
         // ensure the alias is removed from all the DLs
-        values = dl1.getMultiAttrSet(Provisioning.A_zimbraMailForwardingAddress);
+        values = dl1.getMultiAttrSet(Provisioning.A_zmailMailForwardingAddress);
         assertFalse(values.contains(aliasName));
-        values = dl2.getMultiAttrSet(Provisioning.A_zimbraMailForwardingAddress);
+        values = dl2.getMultiAttrSet(Provisioning.A_zmailMailForwardingAddress);
         assertFalse(values.contains(aliasName));
         
         // ensure the alias entry is removed (should have been removed when we hacked to unbind it)
@@ -578,7 +578,7 @@ public class TestProvAlias extends LdapTest {
         String domainName = "EN-AE-aliasPointToOtherEntry" + "." + BASE_DOMAIN_NAME;
         domainName = domainName.toLowerCase();
         Map<String, Object> attrs = new HashMap<String, Object>();
-        attrs.put(Provisioning.A_zimbraDomainType, Provisioning.DomainType.local.name());
+        attrs.put(Provisioning.A_zmailDomainType, Provisioning.DomainType.local.name());
         Domain domain  = prov.createDomain(domainName, attrs);
         
         // create the account the alias points to
@@ -618,13 +618,13 @@ public class TestProvAlias extends LdapTest {
         // ensure the alias is still on the account
         values = acct.getMultiAttrSet(Provisioning.A_mail);
         assertTrue(values.contains(aliasName));
-        values = acct.getMultiAttrSet(Provisioning.A_zimbraMailAlias);
+        values = acct.getMultiAttrSet(Provisioning.A_zmailMailAlias);
         assertTrue(values.contains(aliasName));
         
         // ensure the alias is *not* removed from any the DLs
-        values = dl1.getMultiAttrSet(Provisioning.A_zimbraMailForwardingAddress);
+        values = dl1.getMultiAttrSet(Provisioning.A_zmailMailForwardingAddress);
         assertTrue(values.contains(aliasName));
-        values = dl2.getMultiAttrSet(Provisioning.A_zimbraMailForwardingAddress);
+        values = dl2.getMultiAttrSet(Provisioning.A_zmailMailForwardingAddress);
         assertTrue(values.contains(aliasName));
         
         // ensure the alias entry is *not* removed
@@ -644,7 +644,7 @@ public class TestProvAlias extends LdapTest {
         String domainName = "EN-AE-aliasPointToNonExistEntry" + "." + BASE_DOMAIN_NAME;
         domainName = domainName.toLowerCase();
         Map<String, Object> attrs = new HashMap<String, Object>();
-        attrs.put(Provisioning.A_zimbraDomainType, Provisioning.DomainType.local.name());
+        attrs.put(Provisioning.A_zmailDomainType, Provisioning.DomainType.local.name());
         Domain domain  = prov.createDomain(domainName, attrs);
         
         // create the account
@@ -669,7 +669,7 @@ public class TestProvAlias extends LdapTest {
         // now, hack it so the alias points to a non-existing entry
         {
             Map<String, Object> attributes = new HashMap<String, Object>();
-            attributes.put(Provisioning.A_zimbraAliasTargetId, LdapUtil.generateUUID());
+            attributes.put(Provisioning.A_zmailAliasTargetId, LdapUtil.generateUUID());
             
             List<NamedEntry> aliases = searchAliasesInDomain(domain);
             assertEquals(aliases.size(), 1);
@@ -692,18 +692,18 @@ public class TestProvAlias extends LdapTest {
 
         Set<String> values;
         
-        // ensure the alias is still on the account's mail/zimbraMailAlias attrs
+        // ensure the alias is still on the account's mail/zmailMailAlias attrs
         // because there is no ref to this account so there is no way to remove them
         // (note, to remove them, A - aliasPointToNonExistEntry is the test for this)
         values = acct.getMultiAttrSet(Provisioning.A_mail);
         assertTrue(values.contains(aliasName));
-        values = acct.getMultiAttrSet(Provisioning.A_zimbraMailAlias);
+        values = acct.getMultiAttrSet(Provisioning.A_zmailMailAlias);
         assertTrue(values.contains(aliasName));
         
         // ensure the alias is removed from all the DLs
-        values = dl1.getMultiAttrSet(Provisioning.A_zimbraMailForwardingAddress);
+        values = dl1.getMultiAttrSet(Provisioning.A_zmailMailForwardingAddress);
         assertFalse(values.contains(aliasName));
-        values = dl2.getMultiAttrSet(Provisioning.A_zimbraMailForwardingAddress);
+        values = dl2.getMultiAttrSet(Provisioning.A_zmailMailForwardingAddress);
         assertFalse(values.contains(aliasName));
         
         // ensure the alias entry is removed
@@ -722,7 +722,7 @@ public class TestProvAlias extends LdapTest {
         String domainName = "EN-AN" + "." + BASE_DOMAIN_NAME;
         domainName = domainName.toLowerCase();
         Map<String, Object> attrs = new HashMap<String, Object>();
-        attrs.put(Provisioning.A_zimbraDomainType, Provisioning.DomainType.local.name());
+        attrs.put(Provisioning.A_zmailDomainType, Provisioning.DomainType.local.name());
         Domain domain  = prov.createDomain(domainName, attrs);
         
         // create the account
@@ -766,16 +766,16 @@ public class TestProvAlias extends LdapTest {
 
         Set<String> values;
         
-        // ensure the alias is still on the account's mail/zimbraMailAlias attrs
+        // ensure the alias is still on the account's mail/zmailMailAlias attrs
         values = acct.getMultiAttrSet(Provisioning.A_mail);
         assertTrue(values.contains(aliasName));
-        values = acct.getMultiAttrSet(Provisioning.A_zimbraMailAlias);
+        values = acct.getMultiAttrSet(Provisioning.A_zmailMailAlias);
         assertTrue(values.contains(aliasName));
         
         // ensure the alias is removed from all the DLs
-        values = dl1.getMultiAttrSet(Provisioning.A_zimbraMailForwardingAddress);
+        values = dl1.getMultiAttrSet(Provisioning.A_zmailMailForwardingAddress);
         assertFalse(values.contains(aliasName));
-        values = dl2.getMultiAttrSet(Provisioning.A_zimbraMailForwardingAddress);
+        values = dl2.getMultiAttrSet(Provisioning.A_zmailMailForwardingAddress);
         assertFalse(values.contains(aliasName));
         
         // ensure the alias entry is removed (should have been removed when we hacked to unbind it)
@@ -791,7 +791,7 @@ public class TestProvAlias extends LdapTest {
         String domainName = underscoreToHyphen(testName) + "." + BASE_DOMAIN_NAME;
         domainName = domainName.toLowerCase();
         Map<String, Object> attrs = new HashMap<String, Object>();
-        attrs.put(Provisioning.A_zimbraDomainType, Provisioning.DomainType.local.name());
+        attrs.put(Provisioning.A_zmailDomainType, Provisioning.DomainType.local.name());
         Domain domain  = prov.createDomain(domainName, attrs);
         
         // create the account
@@ -854,7 +854,7 @@ public class TestProvAlias extends LdapTest {
         String domainName = underscoreToHyphen(testName) + "." + BASE_DOMAIN_NAME;
         domainName = domainName.toLowerCase();
         Map<String, Object> attrs = new HashMap<String, Object>();
-        attrs.put(Provisioning.A_zimbraDomainType, Provisioning.DomainType.local.name());
+        attrs.put(Provisioning.A_zmailDomainType, Provisioning.DomainType.local.name());
         Domain domain  = prov.createDomain(domainName, attrs);
         
         // create the account
@@ -865,10 +865,10 @@ public class TestProvAlias extends LdapTest {
         String aliasName = getEmail("alias-1", domainName);
         prov.addAlias(acct, aliasName);
         
-        // remember the zimbraId of the alias entry
+        // remember the zmailId of the alias entry
         List<NamedEntry> aliases = searchAliasesInDomain(domain);
         assertEquals(aliases.size(), 1);
-        String origZimbraIdOfAlias = aliases.get(0).getId();
+        String origZmailIdOfAlias = aliases.get(0).getId();
         
         // create 2 DLs
         String dl1Name = getEmail("dl-1", domainName);
@@ -903,19 +903,19 @@ public class TestProvAlias extends LdapTest {
         // ensure the alias is added to the other account
         values = acct.getMultiAttrSet(Provisioning.A_mail);
         assertTrue(values.contains(aliasName));
-        values = acct.getMultiAttrSet(Provisioning.A_zimbraMailAlias);
+        values = acct.getMultiAttrSet(Provisioning.A_zmailMailAlias);
         assertTrue(values.contains(aliasName));
         
         // ensure the alias is removed from all the DLs
-        values = dl1.getMultiAttrSet(Provisioning.A_zimbraMailForwardingAddress);
+        values = dl1.getMultiAttrSet(Provisioning.A_zmailMailForwardingAddress);
         assertFalse(values.contains(aliasName));
-        values = dl2.getMultiAttrSet(Provisioning.A_zimbraMailForwardingAddress);
+        values = dl2.getMultiAttrSet(Provisioning.A_zmailMailForwardingAddress);
         assertFalse(values.contains(aliasName));
         
-        // ensure the alias entry is is recreated (by verifing that it's got a diff zimbraId)
+        // ensure the alias entry is is recreated (by verifing that it's got a diff zmailId)
         aliases = searchAliasesInDomain(domain);
         assertEquals(aliases.size(), 1);
-        assertFalse(aliases.get(0).getId().equals(origZimbraIdOfAlias));
+        assertFalse(aliases.get(0).getId().equals(origZmailIdOfAlias));
     }
     
     @Test
@@ -926,7 +926,7 @@ public class TestProvAlias extends LdapTest {
         String domainName = underscoreToHyphen(testName) + "." + BASE_DOMAIN_NAME;
         domainName = domainName.toLowerCase();
         Map<String, Object> attrs = new HashMap<String, Object>();
-        attrs.put(Provisioning.A_zimbraDomainType, Provisioning.DomainType.local.name());
+        attrs.put(Provisioning.A_zmailDomainType, Provisioning.DomainType.local.name());
         Domain domain  = prov.createDomain(domainName, attrs);
         
         // create the account
@@ -967,7 +967,7 @@ public class TestProvAlias extends LdapTest {
         String domainName = underscoreToHyphen(testName) + "." + BASE_DOMAIN_NAME;
         domainName = domainName.toLowerCase();
         Map<String, Object> attrs = new HashMap<String, Object>();
-        attrs.put(Provisioning.A_zimbraDomainType, Provisioning.DomainType.local.name());
+        attrs.put(Provisioning.A_zmailDomainType, Provisioning.DomainType.local.name());
         Domain domain  = prov.createDomain(domainName, attrs);
         
         // create the account
@@ -1020,11 +1020,11 @@ javax.naming.NameAlreadyBoundException: [LDAP: error code 68 - Entry Already Exi
         at com.sun.jndi.toolkit.ctx.ComponentContext.p_rename(ComponentContext.java:693)
         at com.sun.jndi.toolkit.ctx.PartialCompositeContext.rename(PartialCompositeContext.java:251)
         at javax.naming.InitialContext.rename(InitialContext.java:389)
-        at com.zimbra.cs.account.ldap.ZimbraLdapContext.renameEntry(ZimbraLdapContext.java:756)
-        at com.zimbra.cs.account.ldap.LdapProvisioning.moveAliases(LdapProvisioning.java:5398)
-        at com.zimbra.cs.account.ldap.LdapProvisioning.renameAccount(LdapProvisioning.java:2297)
-        at com.zimbra.cs.account.ProvUtil.execute(ProvUtil.java:934)
-        at com.zimbra.cs.account.ProvUtil.main(ProvUtil.java:2810)
+        at org.zmail.cs.account.ldap.ZmailLdapContext.renameEntry(ZmailLdapContext.java:756)
+        at org.zmail.cs.account.ldap.LdapProvisioning.moveAliases(LdapProvisioning.java:5398)
+        at org.zmail.cs.account.ldap.LdapProvisioning.renameAccount(LdapProvisioning.java:2297)
+        at org.zmail.cs.account.ProvUtil.execute(ProvUtil.java:934)
+        at org.zmail.cs.account.ProvUtil.main(ProvUtil.java:2810)
         
         This only happens if 
         - domain for the account is also changed for the renameAccount
@@ -1034,7 +1034,7 @@ javax.naming.NameAlreadyBoundException: [LDAP: error code 68 - Entry Already Exi
         This is because when we do validation to see if there is any clash with new alias names, 
         the account has not been renamed yet, therefore it is not caught.
         
-        After the fix, it should throw ACCOUNT_EXISTS (com.zimbra.cs.account.AccountServiceException: email address already exists: phoebe@other.com)
+        After the fix, it should throw ACCOUNT_EXISTS (org.zmail.cs.account.AccountServiceException: email address already exists: phoebe@other.com)
         i.e. the renameAccount should not be allowed
       */
     @Test

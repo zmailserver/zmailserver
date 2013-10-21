@@ -12,7 +12,7 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.dav.service.method;
+package org.zmail.cs.dav.service.method;
 
 import javax.servlet.http.HttpServletResponse;
 
@@ -20,15 +20,15 @@ import java.util.ArrayList;
 
 import org.dom4j.Element;
 
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.common.util.ZimbraLog;
-import com.zimbra.cs.dav.DavContext;
-import com.zimbra.cs.dav.DavContext.RequestProp;
-import com.zimbra.cs.dav.DavElements;
-import com.zimbra.cs.dav.DavException;
-import com.zimbra.cs.dav.resource.CalendarCollection;
-import com.zimbra.cs.dav.resource.DavResource;
-import com.zimbra.cs.dav.service.DavResponse;
+import org.zmail.common.service.ServiceException;
+import org.zmail.common.util.ZmailLog;
+import org.zmail.cs.dav.DavContext;
+import org.zmail.cs.dav.DavContext.RequestProp;
+import org.zmail.cs.dav.DavElements;
+import org.zmail.cs.dav.DavException;
+import org.zmail.cs.dav.resource.CalendarCollection;
+import org.zmail.cs.dav.resource.DavResource;
+import org.zmail.cs.dav.service.DavResponse;
 
 /*
  * draft-dusseault-caldav section 9.10
@@ -55,12 +55,12 @@ public class CalendarMultiget extends Report {
 			throw new DavException("requested resource is not a calendar collection", HttpServletResponse.SC_BAD_REQUEST, null);
 		CalendarCollection calResource = (CalendarCollection) reqResource;
 		long now = System.currentTimeMillis();
-		ZimbraLog.dav.debug("GetRequestedResource: "+(now - ts)+"ms");
+		ZmailLog.dav.debug("GetRequestedResource: "+(now - ts)+"ms");
 		RequestProp reqProp = ctxt.getRequestProp();
 		for (DavResource rs : calResource.getAppointmentsByUids(ctxt, hrefs))
 			resp.addResource(ctxt, rs, reqProp, false);
 		ts = now;
 		now = System.currentTimeMillis();
-		ZimbraLog.dav.debug("multiget: "+(now - ts)+"ms");
+		ZmailLog.dav.debug("multiget: "+(now - ts)+"ms");
 	}
 }

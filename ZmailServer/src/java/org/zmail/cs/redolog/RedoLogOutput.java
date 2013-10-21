@@ -12,7 +12,7 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.redolog;
+package org.zmail.cs.redolog;
 
 import java.io.DataOutput;
 import java.io.DataOutputStream;
@@ -20,7 +20,7 @@ import java.io.IOException;
 import java.io.OutputStream;
 import java.io.RandomAccessFile;
 
-import com.zimbra.common.util.ByteUtil;
+import org.zmail.common.util.ByteUtil;
 
 /**
  * This class is equivalent to java.io.DataOutputStream except that writeUTF()

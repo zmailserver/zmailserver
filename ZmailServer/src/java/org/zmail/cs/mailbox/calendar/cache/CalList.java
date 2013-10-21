@@ -13,7 +13,7 @@
  * ***** END LICENSE BLOCK *****
  */
 
-package com.zimbra.cs.mailbox.calendar.cache;
+package org.zmail.cs.mailbox.calendar.cache;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -21,9 +21,9 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.cs.mailbox.Metadata;
-import com.zimbra.cs.mailbox.MetadataList;
+import org.zmail.common.service.ServiceException;
+import org.zmail.cs.mailbox.Metadata;
+import org.zmail.cs.mailbox.MetadataList;
 
 // mainly for CalDAV but could be useful for other protocols
 // list of calendar folders (or mountpoints) in an account

@@ -12,7 +12,7 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.store;
+package org.zmail.cs.store;
 
 import java.io.ByteArrayInputStream;
 import java.io.File;
@@ -28,10 +28,10 @@ import java.util.Map;
 import org.apache.commons.io.output.ByteArrayOutputStream;
 
 import com.google.common.io.ByteStreams;
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.common.util.FileUtil;
-import com.zimbra.common.util.ZimbraLog;
-import com.zimbra.cs.mailbox.Mailbox;
+import org.zmail.common.service.ServiceException;
+import org.zmail.common.util.FileUtil;
+import org.zmail.common.util.ZmailLog;
+import org.zmail.cs.mailbox.Mailbox;
 
 /**
  * Mock implementation of {@link StoreManager}.
@@ -134,7 +134,7 @@ public final class MockStoreManager extends StoreManager {
         if (blob instanceof MockLocalBlob) {
             File file = blob.getFile();
             if (file != null) {
-                ZimbraLog.store.debug("Deleting %s.", file.getPath());
+                ZmailLog.store.debug("Deleting %s.", file.getPath());
                 BlobInputStream.getFileDescriptorCache().remove(file.getPath()); // Prevent stale cache read.
                 boolean deleted = file.delete();
                 if (deleted) {

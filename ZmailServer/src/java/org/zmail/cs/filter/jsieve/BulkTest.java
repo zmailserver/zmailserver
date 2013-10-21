@@ -12,7 +12,7 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.filter.jsieve;
+package org.zmail.cs.filter.jsieve;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -26,11 +26,11 @@ import org.apache.jsieve.tests.AbstractTest;
 
 import com.google.common.base.Splitter;
 import com.google.common.collect.ImmutableSet;
-import com.zimbra.common.mime.InternetAddress;
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.common.util.ZimbraLog;
-import com.zimbra.cs.filter.ZimbraMailAdapter;
-import com.zimbra.cs.util.AccountUtil;
+import org.zmail.common.mime.InternetAddress;
+import org.zmail.common.service.ServiceException;
+import org.zmail.common.util.ZmailLog;
+import org.zmail.cs.filter.ZmailMailAdapter;
+import org.zmail.cs.util.AccountUtil;
 
 /**
  * SIEVE test whether or not the message is a bulk mail (legitimate mass marketing mail).
@@ -44,14 +44,14 @@ public final class BulkTest extends AbstractTest {
     private static final String PRECEDENCE = "PRECEDENCE";
     private static final String X_PROOFPOINT_SPAM_DETAILS = "X-PROOFPOINT-SPAM-DETAILS";
     private static final String AUTO_SUBMITTED = "Auto-Submitted";
-    private static final String ZIMBRA_OOO_AUTO_REPLY = "auto-replied (zimbra; vacation)";
+    private static final String ZIMBRA_OOO_AUTO_REPLY = "auto-replied (zmail; vacation)";
 
     @Override
     protected boolean executeBasic(MailAdapter mail, Arguments args, SieveContext ctx) throws SieveException {
-        if (!(mail instanceof ZimbraMailAdapter)) {
+        if (!(mail instanceof ZmailMailAdapter)) {
             return false;
         }
-        ZimbraMailAdapter adapter = (ZimbraMailAdapter) mail;
+        ZmailMailAdapter adapter = (ZmailMailAdapter) mail;
         for (String name : adapter.getHeaderNames()) {
             name = name.toUpperCase(); // compare in all upper-case
             if (HEADERS.contains(name)) { // test common bulk headers
@@ -70,19 +70,19 @@ public final class BulkTest extends AbstractTest {
                         }
                     }
                 } catch (ServiceException e) {
-                    ZimbraLog.filter.error("Failed to lookup my addresses", e);
+                    ZmailLog.filter.error("Failed to lookup my addresses", e);
                 }
             } else if (PRECEDENCE.equals(name)) { // test "Precedence: bulk"
                 for (String precedence : adapter.getHeader(PRECEDENCE)) {
                     if ("bulk".equalsIgnoreCase(precedence)) {
-                        boolean zimbraOOONotif = false;
+                        boolean zmailOOONotif = false;
                         for (String autoSubmitted : mail.getHeader(AUTO_SUBMITTED)) {
                             if (ZIMBRA_OOO_AUTO_REPLY.equals(autoSubmitted)) {
-                                zimbraOOONotif = true;
+                                zmailOOONotif = true;
                                 break;
                             }
                         }
-                        if (!zimbraOOONotif) {
+                        if (!zmailOOONotif) {
                             return true;
                         }
                     }

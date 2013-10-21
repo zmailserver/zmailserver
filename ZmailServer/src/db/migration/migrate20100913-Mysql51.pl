@@ -15,8 +15,8 @@
 # 
 
 use strict;
-use lib "/opt/zimbra/libexec/scripts";
-use lib "/opt/zimbra/zimbramon/lib";
+use lib "/opt/zmail/libexec/scripts";
+use lib "/opt/zmail/zmailmon/lib";
 use Migrate;
 use Getopt::Long;
 my $concurrent = 10;
@@ -40,9 +40,9 @@ foreach my $group (@groups) {
   }
 }
 foreach my $table (qw(volume current_volumes mailbox deleted_account mailbox_metadata out_of_office config table_maintenance scheduled_task mobile_devices )) {
-  print "Adding zimbra.$table to be optimized\n";
-  #push(@sql, "OPTIMIZE TABLE zimbra.$table;");
-  push(@sql, "ALTER TABLE zimbra.$table ENGINE=InnoDB;");
+  print "Adding zmail.$table to be optimized\n";
+  #push(@sql, "OPTIMIZE TABLE zmail.$table;");
+  push(@sql, "ALTER TABLE zmail.$table ENGINE=InnoDB;");
 }
 my $start = time();
 Migrate::runSqlParallel($concurrent, @sql);

@@ -17,9 +17,9 @@
 source `dirname $0`/../bin/zmshutil || exit 1
 
 zmsetvars \
-	zimbra_home \
-	zimbra_server_hostname \
-	zimbra_tmp_directory
+	zmail_home \
+	zmail_server_hostname \
+	zmail_tmp_directory
 
 getPubKey() {
 	server=$1
@@ -49,7 +49,7 @@ replacePubKey() {
 	authkeys=`cat ${tempkeysfile}.new`
 
 	authkeys="${authkeys}
-command=\"/opt/zimbra/libexec/zmrcd\" ${key}"
+command=\"/opt/zmail/libexec/zmrcd\" ${key}"
 	
 	/bin/rm -f ${tempkeysfile} ${tempkeysfile}.new
 }
@@ -57,21 +57,21 @@ command=\"/opt/zimbra/libexec/zmrcd\" ${key}"
 updateAllServers() {
   for s in ${servers}; do
     echo "Updating authkeys on remote server $s"
-    echo "HOST:$s zmupdateauthkeys" | /opt/zimbra/libexec/zmrc $s
+    echo "HOST:$s zmupdateauthkeys" | /opt/zmail/libexec/zmrc $s
   done
 }
 
 # Get all the public keys from ldap, and replace them in 
-# /opt/zimbra/.ssh/authorized_keys
+# /opt/zmail/.ssh/authorized_keys
 
-keyattr="zimbraSshPublicKey"
+keyattr="zmailSshPublicKey"
 
-zmprov="/opt/zimbra/bin/zmprov -m -l"
+zmprov="/opt/zmail/bin/zmprov -m -l"
 
-authkeysfile="${zimbra_home}/.ssh/authorized_keys"
+authkeysfile="${zmail_home}/.ssh/authorized_keys"
 
-if [ ! -d ${zimbra_tmp_directory} ]; then
-  mkdir -p ${zimbra_tmp_directory} > /dev/null 2>&1
+if [ ! -d ${zmail_tmp_directory} ]; then
+  mkdir -p ${zmail_tmp_directory} > /dev/null 2>&1
 fi
 
 tempkeysfile=`mktemp -t auth_keys.XXXXXX 2> /dev/null` || (echo "Failed to create tmpfile" && exit 1)

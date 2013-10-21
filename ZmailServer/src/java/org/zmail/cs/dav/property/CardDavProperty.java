@@ -12,18 +12,18 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.dav.property;
+package org.zmail.cs.dav.property;
 
 import java.util.ArrayList;
 
 import org.dom4j.Element;
 import org.dom4j.QName;
 
-import com.zimbra.common.util.ZimbraLog;
-import com.zimbra.cs.dav.DavContext;
-import com.zimbra.cs.dav.DavElements;
-import com.zimbra.cs.dav.resource.AddressObject;
-import com.zimbra.cs.dav.service.DavServlet;
+import org.zmail.common.util.ZmailLog;
+import org.zmail.cs.dav.DavContext;
+import org.zmail.cs.dav.DavElements;
+import org.zmail.cs.dav.resource.AddressObject;
+import org.zmail.cs.dav.service.DavServlet;
 
 public class CardDavProperty extends ResourceProperty {
 
@@ -68,7 +68,7 @@ public class CardDavProperty extends ResourceProperty {
             try {
                 abd.setText(contact.toVCard(ctxt, props));
             } catch (Exception e) {
-                ZimbraLog.dav.warn("can't get vcard content", e);
+                ZmailLog.dav.warn("can't get vcard content", e);
             }
             return abd;
         }

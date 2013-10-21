@@ -13,7 +13,7 @@
  * ***** END LICENSE BLOCK *****
  */
 
-package com.zimbra.cs.account;
+package org.zmail.cs.account;
 
 import java.io.UnsupportedEncodingException;
 import java.security.GeneralSecurityException;
@@ -29,18 +29,18 @@ import javax.crypto.Cipher;
 import javax.crypto.spec.SecretKeySpec;
 
 import com.google.common.base.Objects;
-import com.zimbra.common.util.EmailUtil;
-import com.zimbra.cs.mailbox.Folder;
-import com.zimbra.cs.mailbox.Mailbox;
+import org.zmail.common.util.EmailUtil;
+import org.zmail.cs.mailbox.Folder;
+import org.zmail.cs.mailbox.Mailbox;
 import org.apache.commons.codec.binary.Base64;
 
-import com.zimbra.soap.admin.type.DataSourceType;
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.common.util.Constants;
-import com.zimbra.common.util.StringUtil;
-import com.zimbra.common.util.ZimbraLog;
-import com.zimbra.cs.datasource.DataSourceManager;
-import com.zimbra.soap.type.DataSource.ConnectionType;
+import org.zmail.soap.admin.type.DataSourceType;
+import org.zmail.common.service.ServiceException;
+import org.zmail.common.util.Constants;
+import org.zmail.common.util.StringUtil;
+import org.zmail.common.util.ZmailLog;
+import org.zmail.cs.datasource.DataSourceManager;
+import org.zmail.soap.type.DataSource.ConnectionType;
 
 /**
  * @author schemers
@@ -108,11 +108,11 @@ public class DataSource extends AccountProperty {
         return DataSourceManager.isManaged(this);
     }
 
-    public boolean isEnabled() { return getBooleanAttr(Provisioning.A_zimbraDataSourceEnabled, false); }
+    public boolean isEnabled() { return getBooleanAttr(Provisioning.A_zmailDataSourceEnabled, false); }
 
     public ConnectionType getConnectionType() {
         // First check for data source attribute
-        String value = getAttr(Provisioning.A_zimbraDataSourceConnectionType);
+        String value = getAttr(Provisioning.A_zmailDataSourceConnectionType);
         if (value == null) {
             // If data source attribute not found, use global setting
             try {
@@ -125,7 +125,7 @@ public class DataSource extends AccountProperty {
             try {
                 return ConnectionType.valueOf(value);
             } catch (IllegalArgumentException e) {
-                ZimbraLog.mailbox.warn("Illegal connection type: " + value);
+                ZmailLog.mailbox.warn("Illegal connection type: " + value);
             }
         }
         return ConnectionType.cleartext;
@@ -135,18 +135,18 @@ public class DataSource extends AccountProperty {
         return getConnectionType() == ConnectionType.ssl;
     }
 
-    public int getFolderId() { return getIntAttr(Provisioning.A_zimbraDataSourceFolderId, -1); }
+    public int getFolderId() { return getIntAttr(Provisioning.A_zmailDataSourceFolderId, -1); }
 
-    public String getHost() { return getAttr(Provisioning.A_zimbraDataSourceHost); }
+    public String getHost() { return getAttr(Provisioning.A_zmailDataSourceHost); }
 
-    public String getUsername() { return getAttr(Provisioning.A_zimbraDataSourceUsername); }
+    public String getUsername() { return getAttr(Provisioning.A_zmailDataSourceUsername); }
 
-    public String getAuthId() { return getAttr(Provisioning.A_zimbraDataSourceAuthorizationId); }
+    public String getAuthId() { return getAttr(Provisioning.A_zmailDataSourceAuthorizationId); }
 
-    public String getAuthMechanism() { return getAttr(Provisioning.A_zimbraDataSourceAuthMechanism); }
+    public String getAuthMechanism() { return getAttr(Provisioning.A_zmailDataSourceAuthMechanism); }
 
     public String getDomain() {
-        String domain = getAttr(Provisioning.A_zimbraDataSourceDomain, null);
+        String domain = getAttr(Provisioning.A_zmailDataSourceDomain, null);
         if (domain == null) {
             domain = EmailUtil.getValidDomainPart(getEmailAddress());
         }
@@ -154,43 +154,43 @@ public class DataSource extends AccountProperty {
     }
 
     public Integer getPort() {
-        if (getAttr(Provisioning.A_zimbraDataSourcePort) == null) {
+        if (getAttr(Provisioning.A_zmailDataSourcePort) == null) {
             return null;
         }
-        return getIntAttr(Provisioning.A_zimbraDataSourcePort, -1);
+        return getIntAttr(Provisioning.A_zmailDataSourcePort, -1);
     }
 
     public String getDecryptedPassword() throws ServiceException {
-        String data = getAttr(Provisioning.A_zimbraDataSourcePassword);
+        String data = getAttr(Provisioning.A_zmailDataSourcePassword);
         return data == null ? null : decryptData(getId(), data);
     }
 
     public Integer getConnectTimeout(int defaultValue) {
-        return getIntAttr(Provisioning.A_zimbraDataSourceConnectTimeout, defaultValue);
+        return getIntAttr(Provisioning.A_zmailDataSourceConnectTimeout, defaultValue);
     }
 
     public int getReadTimeout(int defaultValue) {
-        return getIntAttr(Provisioning.A_zimbraDataSourceReadTimeout, defaultValue);
+        return getIntAttr(Provisioning.A_zmailDataSourceReadTimeout, defaultValue);
     }
 
     public int getMaxTraceSize() {
-        return getIntAttr(Provisioning.A_zimbraDataSourceMaxTraceSize, 64);
+        return getIntAttr(Provisioning.A_zmailDataSourceMaxTraceSize, 64);
     }
 
     /**
-     * Returns the polling interval in milliseconds.  If <tt>zimbraDataSourcePollingInterval</tt>
+     * Returns the polling interval in milliseconds.  If <tt>zmailDataSourcePollingInterval</tt>
      * is not specified on the data source, uses the value set for the account.  If not
      * set on either the data source or account, returns <tt>0</tt>.
      */
     public long getPollingInterval() throws ServiceException {
         long interval;
-        String val = getAttr(Provisioning.A_zimbraDataSourcePollingInterval);
+        String val = getAttr(Provisioning.A_zmailDataSourcePollingInterval);
         Provisioning prov = Provisioning.getInstance();
         Account account = getAccount();
 
         // Get interval from data source or account.
         if (val != null) {
-            interval = getTimeInterval(Provisioning.A_zimbraDataSourcePollingInterval, 0);
+            interval = getTimeInterval(Provisioning.A_zmailDataSourcePollingInterval, 0);
         } else {
             migratePollingIntervalIfNecessary(prov, account);
             switch(getType()) {
@@ -225,7 +225,7 @@ public class DataSource extends AccountProperty {
             return 0;
         }
 
-        // Don't allow anyone to poll more frequently than zimbraDataSourceMinPollingInterval
+        // Don't allow anyone to poll more frequently than zmailDataSourceMinPollingInterval
         // or 10 seconds, whichever is greater.
         long min = account.getDataSourceMinPollingInterval();
         long safeguard = 10 * Constants.MILLIS_PER_SECOND;
@@ -240,32 +240,32 @@ public class DataSource extends AccountProperty {
     }
 
     /**
-     * Migrates the old <tt>zimbraDataSourcePollingInterval</tt> on account to
-     * <tt>zimbraDataSourcePop3PollingInterval</tt> and <tt>zimbraDataSourceImapPollingInterval</tt>.
+     * Migrates the old <tt>zmailDataSourcePollingInterval</tt> on account to
+     * <tt>zmailDataSourcePop3PollingInterval</tt> and <tt>zmailDataSourceImapPollingInterval</tt>.
      * Runs only once per account.  This code can be removed after 6.0.
      */
     private void migratePollingIntervalIfNecessary(Provisioning prov, Account account)
     throws ServiceException {
         // Migrate Account value.
-        String oldInterval = account.getAttr(Provisioning.A_zimbraDataSourcePollingInterval, false);
+        String oldInterval = account.getAttr(Provisioning.A_zmailDataSourcePollingInterval, false);
         if (!StringUtil.isNullOrEmpty(oldInterval)) {
-            ZimbraLog.datasource.info("Migrating account POP3 and IMAP polling intervals to %s.", oldInterval);
+            ZmailLog.datasource.info("Migrating account POP3 and IMAP polling intervals to %s.", oldInterval);
             Map<String, Object> attrs = new HashMap<String, Object>();
-            attrs.put(Provisioning.A_zimbraDataSourcePollingInterval, "");
-            attrs.put(Provisioning.A_zimbraDataSourcePop3PollingInterval, oldInterval);
-            attrs.put(Provisioning.A_zimbraDataSourceImapPollingInterval, oldInterval);
+            attrs.put(Provisioning.A_zmailDataSourcePollingInterval, "");
+            attrs.put(Provisioning.A_zmailDataSourcePop3PollingInterval, oldInterval);
+            attrs.put(Provisioning.A_zmailDataSourceImapPollingInterval, oldInterval);
             prov.modifyAttrs(account, attrs, true, false); // Don't run callback so we don't trigger database code.
         }
 
         // Migrate Cos value.
         Cos cos = account.getCOS();
-        oldInterval = cos.getAttr(Provisioning.A_zimbraDataSourcePollingInterval, false);
+        oldInterval = cos.getAttr(Provisioning.A_zmailDataSourcePollingInterval, false);
         if (!StringUtil.isNullOrEmpty(oldInterval)) {
-            ZimbraLog.datasource.info("Migrating COS POP3 and IMAP polling intervals to %s.", oldInterval);
+            ZmailLog.datasource.info("Migrating COS POP3 and IMAP polling intervals to %s.", oldInterval);
             Map<String, Object> attrs = new HashMap<String, Object>();
-            attrs.put(Provisioning.A_zimbraDataSourcePollingInterval, "");
-            attrs.put(Provisioning.A_zimbraDataSourcePop3PollingInterval, oldInterval);
-            attrs.put(Provisioning.A_zimbraDataSourceImapPollingInterval, oldInterval);
+            attrs.put(Provisioning.A_zmailDataSourcePollingInterval, "");
+            attrs.put(Provisioning.A_zmailDataSourcePop3PollingInterval, oldInterval);
+            attrs.put(Provisioning.A_zmailDataSourceImapPollingInterval, oldInterval);
             prov.modifyAttrs(cos, attrs, true, false);  // Don't run callback so we don't trigger database code.
         }
     }
@@ -284,35 +284,35 @@ public class DataSource extends AccountProperty {
      * server feature was implemented.
      */
     public boolean leaveOnServer() {
-        return getBooleanAttr(Provisioning.A_zimbraDataSourceLeaveOnServer, true);
+        return getBooleanAttr(Provisioning.A_zmailDataSourceLeaveOnServer, true);
     }
 
     public String getEmailAddress() {
-        return getAttr(Provisioning.A_zimbraDataSourceEmailAddress);
+        return getAttr(Provisioning.A_zmailDataSourceEmailAddress);
     }
 
     public boolean useAddressForForwardReply() {
-        return getBooleanAttr(Provisioning.A_zimbraDataSourceUseAddressForForwardReply, false);
+        return getBooleanAttr(Provisioning.A_zmailDataSourceUseAddressForForwardReply, false);
     }
 
     public String getDefaultSignature() {
-        return getAttr(Provisioning.A_zimbraPrefDefaultSignatureId);
+        return getAttr(Provisioning.A_zmailPrefDefaultSignatureId);
     }
 
     public String getForwardReplySignature() {
-        return getAttr(Provisioning.A_zimbraPrefForwardReplySignatureId);
+        return getAttr(Provisioning.A_zmailPrefForwardReplySignatureId);
     }
 
     public String getFromDisplay() {
-        return getAttr(Provisioning.A_zimbraPrefFromDisplay);
+        return getAttr(Provisioning.A_zmailPrefFromDisplay);
     }
 
     public String getReplyToAddress() {
-        return getAttr(Provisioning.A_zimbraPrefReplyToAddress);
+        return getAttr(Provisioning.A_zmailPrefReplyToAddress);
     }
 
     public String getReplyToDisplay() {
-        return getAttr(Provisioning.A_zimbraPrefReplyToDisplay);
+        return getAttr(Provisioning.A_zmailPrefReplyToDisplay);
     }
 
     boolean isRequestScopeDebugTraceOn = false;
@@ -321,15 +321,15 @@ public class DataSource extends AccountProperty {
     }
 
     public boolean isImportOnly() {
-        return getBooleanAttr(Provisioning.A_zimbraDataSourceImportOnly, false);
+        return getBooleanAttr(Provisioning.A_zmailDataSourceImportOnly, false);
     }
 
     public boolean isInternal() {
-        return getBooleanAttr(Provisioning.A_zimbraDataSourceIsInternal, false);
+        return getBooleanAttr(Provisioning.A_zmailDataSourceIsInternal, false);
     }
 
     public boolean isDebugTraceEnabled() {
-        return isRequestScopeDebugTraceOn || getBooleanAttr(Provisioning.A_zimbraDataSourceEnableTrace, false);
+        return isRequestScopeDebugTraceOn || getBooleanAttr(Provisioning.A_zmailDataSourceEnableTrace, false);
     }
 
     //IMAP datasources can override these

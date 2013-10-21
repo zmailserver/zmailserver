@@ -13,24 +13,24 @@
  * ***** END LICENSE BLOCK *****
  */
 
-package com.zimbra.cs.service.mail;
+package org.zmail.cs.service.mail;
 
 import com.google.common.io.Closeables;
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.common.soap.Element;
-import com.zimbra.common.soap.MailConstants;
-import com.zimbra.common.util.StringUtil;
-import com.zimbra.common.util.ZimbraLog;
-import com.zimbra.cs.account.Account;
-import com.zimbra.cs.filter.RuleManager;
-import com.zimbra.cs.index.SortBy;
-import com.zimbra.cs.index.ZimbraHit;
-import com.zimbra.cs.index.ZimbraQueryResults;
-import com.zimbra.cs.mailbox.MailItem;
-import com.zimbra.cs.mailbox.MailServiceException.NoSuchItemException;
-import com.zimbra.cs.mailbox.Mailbox;
-import com.zimbra.cs.mailbox.OperationContext;
-import com.zimbra.soap.ZimbraSoapContext;
+import org.zmail.common.service.ServiceException;
+import org.zmail.common.soap.Element;
+import org.zmail.common.soap.MailConstants;
+import org.zmail.common.util.StringUtil;
+import org.zmail.common.util.ZmailLog;
+import org.zmail.cs.account.Account;
+import org.zmail.cs.filter.RuleManager;
+import org.zmail.cs.index.SortBy;
+import org.zmail.cs.index.ZmailHit;
+import org.zmail.cs.index.ZmailQueryResults;
+import org.zmail.cs.mailbox.MailItem;
+import org.zmail.cs.mailbox.MailServiceException.NoSuchItemException;
+import org.zmail.cs.mailbox.Mailbox;
+import org.zmail.cs.mailbox.OperationContext;
+import org.zmail.soap.ZmailSoapContext;
 import org.apache.jsieve.parser.generated.Node;
 import org.apache.jsieve.parser.generated.ParseException;
 import org.dom4j.QName;
@@ -45,7 +45,7 @@ public class ApplyFilterRules extends MailDocumentHandler {
 
     @Override
     public Element handle(Element request, Map<String, Object> context) throws ServiceException {
-        ZimbraSoapContext zsc = getZimbraSoapContext(context);
+        ZmailSoapContext zsc = getZmailSoapContext(context);
         Account account = getRequestedAccount(zsc);
 
         if (!canAccessAccount(zsc, account))
@@ -76,7 +76,7 @@ public class ApplyFilterRules extends MailDocumentHandler {
             buf.append(singleRule).append("\n");
         }
         String partialScript = buf.toString();
-        ZimbraLog.filter.debug("Applying partial script to existing messages: %s", partialScript);
+        ZmailLog.filter.debug("Applying partial script to existing messages: %s", partialScript);
         Node node = null;
         try {
             node = RuleManager.parse(partialScript);
@@ -104,12 +104,12 @@ public class ApplyFilterRules extends MailDocumentHandler {
                 messageIds.add(Integer.valueOf(id));
             }
         } else if (query != null) {
-            ZimbraQueryResults results = null;
+            ZmailQueryResults results = null;
             try {
                 results = mbox.index.search(octxt, query,
                         EnumSet.of(MailItem.Type.MESSAGE), SortBy.NONE, Integer.MAX_VALUE);
                 while (results.hasNext()) {
-                    ZimbraHit hit = results.getNext();
+                    ZmailHit hit = results.getNext();
                     messageIds.add(hit.getItemId());
                 }
             } catch (Exception e) {
@@ -130,7 +130,7 @@ public class ApplyFilterRules extends MailDocumentHandler {
                 " messages, which exceeded the limit of " + max, null);
         }
 
-        ZimbraLog.filter.info("Applying filter rules to %s existing messages.", messageIds.size());
+        ZmailLog.filter.info("Applying filter rules to %s existing messages.", messageIds.size());
         long sleepInterval = account.getFilterSleepInterval();
 
         // Apply filter rules.
@@ -150,9 +150,9 @@ public class ApplyFilterRules extends MailDocumentHandler {
                 }
             } catch (NoSuchItemException e) {
                 // Message was deleted since the search was done (bug 41609).
-                ZimbraLog.filter.info("Skipping message %d: %s.", id, e.toString());
+                ZmailLog.filter.info("Skipping message %d: %s.", id, e.toString());
             } catch (ServiceException e) {
-                ZimbraLog.filter.warn("Unable to filter message %d.", id, e);
+                ZmailLog.filter.warn("Unable to filter message %d.", id, e);
             }
         }
 

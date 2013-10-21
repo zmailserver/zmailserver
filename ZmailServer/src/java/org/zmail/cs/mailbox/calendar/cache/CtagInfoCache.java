@@ -13,7 +13,7 @@
  * ***** END LICENSE BLOCK *****
  */
 
-package com.zimbra.cs.mailbox.calendar.cache;
+package org.zmail.cs.mailbox.calendar.cache;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -23,40 +23,40 @@ import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Set;
 
-import com.zimbra.common.auth.ZAuthToken;
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.common.util.ZimbraLog;
-import com.zimbra.common.util.memcached.MemcachedMap;
-import com.zimbra.common.util.memcached.MemcachedSerializer;
-import com.zimbra.common.util.memcached.ZimbraMemcachedClient;
-import com.zimbra.cs.account.Account;
-import com.zimbra.cs.account.Provisioning;
-import com.zimbra.common.account.Key;
-import com.zimbra.common.account.Key.AccountBy;
-import com.zimbra.cs.index.SortBy;
-import com.zimbra.cs.mailbox.Folder;
-import com.zimbra.cs.mailbox.MailItem;
-import com.zimbra.cs.mailbox.MailItem.Type;
-import com.zimbra.cs.mailbox.Mailbox;
-import com.zimbra.cs.mailbox.MailboxManager;
-import com.zimbra.cs.mailbox.Message;
-import com.zimbra.cs.mailbox.Metadata;
-import com.zimbra.cs.memcached.MemcachedConnector;
-import com.zimbra.cs.service.AuthProvider;
-import com.zimbra.cs.service.util.ItemId;
-import com.zimbra.cs.session.PendingModifications;
-import com.zimbra.cs.session.PendingModifications.Change;
-import com.zimbra.cs.session.PendingModifications.ModificationKey;
-import com.zimbra.cs.util.AccountUtil;
-import com.zimbra.client.ZFolder;
-import com.zimbra.client.ZMailbox;
+import org.zmail.common.auth.ZAuthToken;
+import org.zmail.common.service.ServiceException;
+import org.zmail.common.util.ZmailLog;
+import org.zmail.common.util.memcached.MemcachedMap;
+import org.zmail.common.util.memcached.MemcachedSerializer;
+import org.zmail.common.util.memcached.ZmailMemcachedClient;
+import org.zmail.cs.account.Account;
+import org.zmail.cs.account.Provisioning;
+import org.zmail.common.account.Key;
+import org.zmail.common.account.Key.AccountBy;
+import org.zmail.cs.index.SortBy;
+import org.zmail.cs.mailbox.Folder;
+import org.zmail.cs.mailbox.MailItem;
+import org.zmail.cs.mailbox.MailItem.Type;
+import org.zmail.cs.mailbox.Mailbox;
+import org.zmail.cs.mailbox.MailboxManager;
+import org.zmail.cs.mailbox.Message;
+import org.zmail.cs.mailbox.Metadata;
+import org.zmail.cs.memcached.MemcachedConnector;
+import org.zmail.cs.service.AuthProvider;
+import org.zmail.cs.service.util.ItemId;
+import org.zmail.cs.session.PendingModifications;
+import org.zmail.cs.session.PendingModifications.Change;
+import org.zmail.cs.session.PendingModifications.ModificationKey;
+import org.zmail.cs.util.AccountUtil;
+import org.zmail.client.ZFolder;
+import org.zmail.client.ZMailbox;
 
 public class CtagInfoCache {
 
     private MemcachedMap<CalendarKey, CtagInfo> mMemcachedLookup;
 
     CtagInfoCache() {
-        ZimbraMemcachedClient memcachedClient = MemcachedConnector.getClient();
+        ZmailMemcachedClient memcachedClient = MemcachedConnector.getClient();
         CtagInfoSerializer serializer = new CtagInfoSerializer();
         mMemcachedLookup = new MemcachedMap<CalendarKey, CtagInfo>(memcachedClient, serializer);
     }
@@ -117,7 +117,7 @@ public class CtagInfoCache {
                         needToPut = true;
                     }
                 } else {
-                    ZimbraLog.calendar.warn("Mounpoint target %s:%d not found during cache lookup",
+                    ZmailLog.calendar.warn("Mounpoint target %s:%d not found during cache lookup",
                             keyTarget.getAccountId(), keyTarget.getFolderId());
                 }
             }
@@ -185,7 +185,7 @@ public class CtagInfoCache {
         Provisioning prov = Provisioning.getInstance();
         Account acct = prov.get(AccountBy.id, accountId);
         if (acct == null) {
-            ZimbraLog.calendar.warn("Invalid account %s during cache lookup", accountId);
+            ZmailLog.calendar.warn("Invalid account %s during cache lookup", accountId);
             return null;
         }
         if (Provisioning.onLocalServer(acct)) {
@@ -194,7 +194,7 @@ public class CtagInfoCache {
             if (folder != null)
                 calInfo = new CtagInfo(folder);
             else
-                ZimbraLog.calendar.warn("Invalid folder %d in account %s during cache lookup", folderId, accountId);
+                ZmailLog.calendar.warn("Invalid folder %d in account %s during cache lookup", folderId, accountId);
         } else {
             ZAuthToken zat = AuthProvider.getAdminAuthToken().toZAuthToken();
             ZMailbox.Options zoptions = new ZMailbox.Options(zat, AccountUtil.getSoapUri(acct));
@@ -207,7 +207,7 @@ public class CtagInfoCache {
             if (zfolder != null)
                 calInfo = new CtagInfo(zfolder);
             else
-                ZimbraLog.calendar.warn("Invalid folder %d in account %s during cache lookup", folderId, accountId);
+                ZmailLog.calendar.warn("Invalid folder %d in account %s during cache lookup", folderId, accountId);
         }
         return calInfo;
     }
@@ -280,7 +280,7 @@ public class CtagInfoCache {
         try {
             mMemcachedLookup.removeMulti(keysToInvalidate);
         } catch (ServiceException e) {
-            ZimbraLog.calendar.warn("Unable to notify ctag info cache.  Some cached data may become stale.", e);
+            ZmailLog.calendar.warn("Unable to notify ctag info cache.  Some cached data may become stale.", e);
         }
     }
 }

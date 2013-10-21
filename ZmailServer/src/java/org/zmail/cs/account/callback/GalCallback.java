@@ -14,18 +14,18 @@
  * 
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.account.callback;
+package org.zmail.cs.account.callback;
 
 import java.util.Date;
 import java.util.Map;
 
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.common.util.StringUtil;
-import com.zimbra.common.util.ZimbraLog;
-import com.zimbra.cs.account.AttributeCallback;
-import com.zimbra.cs.account.Domain;
-import com.zimbra.cs.account.Entry;
-import com.zimbra.cs.account.Provisioning;
+import org.zmail.common.service.ServiceException;
+import org.zmail.common.util.StringUtil;
+import org.zmail.common.util.ZmailLog;
+import org.zmail.cs.account.AttributeCallback;
+import org.zmail.cs.account.Domain;
+import org.zmail.cs.account.Entry;
+import org.zmail.cs.account.Provisioning;
 
 public class GalCallback extends AttributeCallback {
     
@@ -42,12 +42,12 @@ public class GalCallback extends AttributeCallback {
         }
         SingleValueMod mod = singleValueMod(attrsToModify, attrName);
         newValue = mod.value();
-        if (attrName.equals("zimbraGalLdapFilter")) {
+        if (attrName.equals("zmailGalLdapFilter")) {
             if (mod.unsetting())
                 return;
             if ("ad".equalsIgnoreCase(newValue)) {
-                attrsToModify.put(Provisioning.A_zimbraGalLdapGroupHandlerClass, 
-                        com.zimbra.cs.account.grouphandler.ADGroupHandler.class.getCanonicalName());
+                attrsToModify.put(Provisioning.A_zmailGalLdapGroupHandlerClass, 
+                        org.zmail.cs.account.grouphandler.ADGroupHandler.class.getCanonicalName());
             }
         }
     }
@@ -60,7 +60,7 @@ public class GalCallback extends AttributeCallback {
                     ((Domain) entry).setGalDefinitionLastModifiedTime(new Date());
                 }
             } catch (ServiceException e) {
-                ZimbraLog.misc.warn("Unable to set zimbraGalDefinitionLastModifiedTime " + e);
+                ZmailLog.misc.warn("Unable to set zmailGalDefinitionLastModifiedTime " + e);
             }
         }
     }

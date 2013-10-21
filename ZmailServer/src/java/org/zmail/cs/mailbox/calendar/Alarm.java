@@ -12,7 +12,7 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.mailbox.calendar;
+package org.zmail.cs.mailbox.calendar;
 
 import java.text.ParseException;
 import java.util.ArrayList;
@@ -21,26 +21,26 @@ import java.util.List;
 
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Lists;
-import com.zimbra.common.calendar.Attach;
-import com.zimbra.common.calendar.ParsedDateTime;
-import com.zimbra.common.calendar.ParsedDuration;
-import com.zimbra.common.calendar.ZCalendar.ICalTok;
-import com.zimbra.common.calendar.ZCalendar.ZComponent;
-import com.zimbra.common.calendar.ZCalendar.ZParameter;
-import com.zimbra.common.calendar.ZCalendar.ZProperty;
-import com.zimbra.common.localconfig.DebugConfig;
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.common.soap.Element;
-import com.zimbra.common.soap.MailConstants;
-import com.zimbra.common.util.ZimbraLog;
-import com.zimbra.cs.mailbox.Metadata;
-import com.zimbra.cs.service.mail.CalendarUtils;
-import com.zimbra.cs.service.mail.ToXML;
-import com.zimbra.soap.mail.type.AlarmInfo;
-import com.zimbra.soap.mail.type.AlarmTriggerInfo;
-import com.zimbra.soap.mail.type.CalendarAttach;
-import com.zimbra.soap.mail.type.DateAttr;
-import com.zimbra.soap.mail.type.DurationInfo;
+import org.zmail.common.calendar.Attach;
+import org.zmail.common.calendar.ParsedDateTime;
+import org.zmail.common.calendar.ParsedDuration;
+import org.zmail.common.calendar.ZCalendar.ICalTok;
+import org.zmail.common.calendar.ZCalendar.ZComponent;
+import org.zmail.common.calendar.ZCalendar.ZParameter;
+import org.zmail.common.calendar.ZCalendar.ZProperty;
+import org.zmail.common.localconfig.DebugConfig;
+import org.zmail.common.service.ServiceException;
+import org.zmail.common.soap.Element;
+import org.zmail.common.soap.MailConstants;
+import org.zmail.common.util.ZmailLog;
+import org.zmail.cs.mailbox.Metadata;
+import org.zmail.cs.service.mail.CalendarUtils;
+import org.zmail.cs.service.mail.ToXML;
+import org.zmail.soap.mail.type.AlarmInfo;
+import org.zmail.soap.mail.type.AlarmTriggerInfo;
+import org.zmail.soap.mail.type.CalendarAttach;
+import org.zmail.soap.mail.type.DateAttr;
+import org.zmail.soap.mail.type.DurationInfo;
 
 /**
  * iCalendar VALARM component
@@ -343,7 +343,7 @@ public class Alarm {
 
     public static boolean actionAllowed(Action action) {
         if (Action.PROCEDURE.equals(action) && !DebugConfig.calendarAllowProcedureAlarms) {
-            ZimbraLog.calendar.warn("Action " + action.toString() + " is not allowed; ignoring alarm");
+            ZmailLog.calendar.warn("Action " + action.toString() + " is not allowed; ignoring alarm");
             return false;
         } else {
             return true;
@@ -800,7 +800,7 @@ public class Alarm {
                 if (metaAttendee != null)
                     attendees.add(new ZAttendee(metaAttendee));
             } catch (ServiceException e) {
-                ZimbraLog.calendar.warn("Problem decoding attendee " + i + " in ALARM ");
+                ZmailLog.calendar.warn("Problem decoding attendee " + i + " in ALARM ");
             }
         }
 

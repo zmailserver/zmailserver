@@ -12,7 +12,7 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.volume;
+package org.zmail.cs.volume;
 
 import java.io.IOException;
 
@@ -23,24 +23,24 @@ import org.apache.commons.cli.Options;
 import org.apache.commons.cli.ParseException;
 
 import com.google.common.base.Strings;
-import com.zimbra.common.auth.ZAuthToken;
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.common.soap.SoapFaultException;
-import com.zimbra.common.soap.SoapTransport;
-import com.zimbra.common.util.CliUtil;
-import com.zimbra.cs.util.BuildInfo;
-import com.zimbra.cs.util.SoapCLI;
-import com.zimbra.soap.JaxbUtil;
-import com.zimbra.soap.admin.message.CreateVolumeRequest;
-import com.zimbra.soap.admin.message.CreateVolumeResponse;
-import com.zimbra.soap.admin.message.DeleteVolumeRequest;
-import com.zimbra.soap.admin.message.GetAllVolumesRequest;
-import com.zimbra.soap.admin.message.GetAllVolumesResponse;
-import com.zimbra.soap.admin.message.GetVolumeRequest;
-import com.zimbra.soap.admin.message.GetVolumeResponse;
-import com.zimbra.soap.admin.message.ModifyVolumeRequest;
-import com.zimbra.soap.admin.message.SetCurrentVolumeRequest;
-import com.zimbra.soap.admin.type.VolumeInfo;
+import org.zmail.common.auth.ZAuthToken;
+import org.zmail.common.service.ServiceException;
+import org.zmail.common.soap.SoapFaultException;
+import org.zmail.common.soap.SoapTransport;
+import org.zmail.common.util.CliUtil;
+import org.zmail.cs.util.BuildInfo;
+import org.zmail.cs.util.SoapCLI;
+import org.zmail.soap.JaxbUtil;
+import org.zmail.soap.admin.message.CreateVolumeRequest;
+import org.zmail.soap.admin.message.CreateVolumeResponse;
+import org.zmail.soap.admin.message.DeleteVolumeRequest;
+import org.zmail.soap.admin.message.GetAllVolumesRequest;
+import org.zmail.soap.admin.message.GetAllVolumesResponse;
+import org.zmail.soap.admin.message.GetVolumeRequest;
+import org.zmail.soap.admin.message.GetVolumeResponse;
+import org.zmail.soap.admin.message.ModifyVolumeRequest;
+import org.zmail.soap.admin.message.SetCurrentVolumeRequest;
+import org.zmail.soap.admin.type.VolumeInfo;
 
 public final class VolumeCLI extends SoapCLI {
 

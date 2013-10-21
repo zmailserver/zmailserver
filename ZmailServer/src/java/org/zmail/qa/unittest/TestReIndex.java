@@ -13,22 +13,22 @@
  * ***** END LICENSE BLOCK *****
  */
 
-package com.zimbra.qa.unittest;
+package org.zmail.qa.unittest;
 
 import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
-import com.zimbra.cs.account.Account;
-import com.zimbra.cs.account.soap.SoapProvisioning;
-import com.zimbra.cs.account.soap.SoapProvisioning.ReIndexInfo;
+import org.zmail.cs.account.Account;
+import org.zmail.cs.account.soap.SoapProvisioning;
+import org.zmail.cs.account.soap.SoapProvisioning.ReIndexInfo;
 
 /**
  * Unit test for ReIndex admin operation.
  * <p>
- * This test requires a Zimbra dev server instance.
+ * This test requires a Zmail dev server instance.
  *
- * TODO: Add this class to {@link ZimbraSuite} once it supports JUnit 4
+ * TODO: Add this class to {@link ZmailSuite} once it supports JUnit 4
  * annotations.
  *
  * @author ysasaki

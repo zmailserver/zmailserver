@@ -12,7 +12,7 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.store.http;
+package org.zmail.cs.store.http;
 
 import java.io.File;
 
@@ -23,16 +23,16 @@ import org.junit.Before;
 import org.junit.Test;
 
 import com.google.common.io.Files;
-import com.zimbra.common.localconfig.LC;
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.common.util.FileUtil;
-import com.zimbra.cs.account.MockProvisioning;
-import com.zimbra.cs.mailbox.Mailbox;
-import com.zimbra.cs.mailbox.MailboxManager;
-import com.zimbra.cs.mailbox.MailboxTest;
-import com.zimbra.cs.mailbox.MailboxTestUtil;
-import com.zimbra.cs.store.AbstractStoreManagerTest;
-import com.zimbra.cs.store.StoreManager;
+import org.zmail.common.localconfig.LC;
+import org.zmail.common.service.ServiceException;
+import org.zmail.common.util.FileUtil;
+import org.zmail.cs.account.MockProvisioning;
+import org.zmail.cs.mailbox.Mailbox;
+import org.zmail.cs.mailbox.MailboxManager;
+import org.zmail.cs.mailbox.MailboxTest;
+import org.zmail.cs.mailbox.MailboxTestUtil;
+import org.zmail.cs.store.AbstractStoreManagerTest;
+import org.zmail.cs.store.StoreManager;
 
 public class HttpStoreManagerTest extends AbstractStoreManagerTest {
 
@@ -76,7 +76,7 @@ public class HttpStoreManagerTest extends AbstractStoreManagerTest {
     public void setUpHttp() throws Exception {
         MockHttpStore.startup();
         tmpDir = Files.createTempDir();
-        LC.zimbra_tmp_directory.setDefault(tmpDir.getPath());
+        LC.zmail_tmp_directory.setDefault(tmpDir.getPath());
         MailboxTestUtil.clearData();
     }
 

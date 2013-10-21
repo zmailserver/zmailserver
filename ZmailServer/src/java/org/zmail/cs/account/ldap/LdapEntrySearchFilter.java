@@ -13,22 +13,22 @@
  * ***** END LICENSE BLOCK *****
  */
 
-package com.zimbra.cs.account.ldap;
+package org.zmail.cs.account.ldap;
 
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.common.util.ZimbraLog;
-import com.zimbra.cs.account.AttributeClass;
-import com.zimbra.cs.account.AttributeManager;
-import com.zimbra.cs.account.AttributeManager.IDNType;
-import com.zimbra.cs.account.EntrySearchFilter;
-import com.zimbra.cs.account.IDNUtil;
-import com.zimbra.cs.account.Provisioning;
-import com.zimbra.cs.account.EntrySearchFilter.Multi;
-import com.zimbra.cs.account.EntrySearchFilter.Operator;
-import com.zimbra.cs.account.EntrySearchFilter.Single;
-import com.zimbra.cs.account.EntrySearchFilter.Term;
-import com.zimbra.cs.account.EntrySearchFilter.Visitor;
-import com.zimbra.cs.ldap.ZLdapFilterFactory;
+import org.zmail.common.service.ServiceException;
+import org.zmail.common.util.ZmailLog;
+import org.zmail.cs.account.AttributeClass;
+import org.zmail.cs.account.AttributeManager;
+import org.zmail.cs.account.AttributeManager.IDNType;
+import org.zmail.cs.account.EntrySearchFilter;
+import org.zmail.cs.account.IDNUtil;
+import org.zmail.cs.account.Provisioning;
+import org.zmail.cs.account.EntrySearchFilter.Multi;
+import org.zmail.cs.account.EntrySearchFilter.Operator;
+import org.zmail.cs.account.EntrySearchFilter.Single;
+import org.zmail.cs.account.EntrySearchFilter.Term;
+import org.zmail.cs.account.EntrySearchFilter.Visitor;
+import org.zmail.cs.ldap.ZLdapFilterFactory;
 
 /*
  * Traverse a EntrySearchFilter.Term tree and convert it to LDAP query
@@ -161,7 +161,7 @@ public class LdapEntrySearchFilter {
             try {
                 attrMgr = AttributeManager.getInstance();
             } catch (ServiceException e) {
-                ZimbraLog.account.warn("failed to get AttributeManager instance", e);
+                ZmailLog.account.warn("failed to get AttributeManager instance", e);
             }
             
             IDNType idnType = AttributeManager.idnType(attrMgr, term.getLhs());
@@ -177,11 +177,11 @@ public class LdapEntrySearchFilter {
      * of the unicode.   For non-IDN attributes, assertion values are just passed through. 
      * 
      * e.g.
-     * (zimbraMailDeliveryAddress=*@test.\u4e2d\u6587.com) will be converted to
-     * (zimbraMailDeliveryAddress=*@test.xn--fiq228c.com)
-     * because zimbraMailDeliveryAddress is an IDN attribute.
+     * (zmailMailDeliveryAddress=*@test.\u4e2d\u6587.com) will be converted to
+     * (zmailMailDeliveryAddress=*@test.xn--fiq228c.com)
+     * because zmailMailDeliveryAddress is an IDN attribute.
      * 
-     * (zimbraDomainName=*\u4e2d\u6587*) will remain the same because zimbraDomainName 
+     * (zmailDomainName=*\u4e2d\u6587*) will remain the same because zmailDomainName 
      * is not an IDN attribute.
      *   
      * @param filterStr a RFC 2254 filter (assertion values must be already RFC 2254 escaped)
@@ -194,9 +194,9 @@ public class LdapEntrySearchFilter {
             Term term = LdapFilterParser.parse(filterStr); 
             EntrySearchFilter filter = new EntrySearchFilter(term);
             asciiQuery = toLdapIDNFilter(filter);
-            ZimbraLog.account.debug("original query=[" + filterStr + "], converted ascii query=[" + asciiQuery + "]");
+            ZmailLog.account.debug("original query=[" + filterStr + "], converted ascii query=[" + asciiQuery + "]");
         } catch (ServiceException e) {
-            ZimbraLog.account.warn("unable to convert query to ascii, using original query: " + filterStr, e);
+            ZmailLog.account.warn("unable to convert query to ascii, using original query: " + filterStr, e);
             asciiQuery = filterStr;
         }
         

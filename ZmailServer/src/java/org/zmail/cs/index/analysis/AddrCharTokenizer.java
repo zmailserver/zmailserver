@@ -12,13 +12,13 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.index.analysis;
+package org.zmail.cs.index.analysis;
 
 import java.io.Reader;
 
 import org.apache.lucene.analysis.CharTokenizer;
 
-import com.zimbra.cs.index.LuceneIndex;
+import org.zmail.cs.index.LuceneIndex;
 
 /**
  * Tokenizer for email addresses.

@@ -7,7 +7,7 @@ creating the mailbox account and populating GAL attributes.
 
 Assumption
   - An external authentication mechanism (i.e. preauth or SSO) has been 
-    configured on the zimbra domain.
+    configured on the zmail domain.
   - User A exists in the external source directory for auto provisioning
 
 
@@ -15,10 +15,10 @@ Assumption
 2. Auto Provisioning modes
 ==========================
 (1) LAZY mode
-Zimbra provisions the mailbox for User A on first login.
+Zmail provisions the mailbox for User A on first login.
 
 (2) EAGER mode
-Zimbra provisions the mailbox for User A automatically in a background thread.
+Zmail provisions the mailbox for User A automatically in a background thread.
 
 (3) MANUAL mode
 Helpdesk Person searches the external source directory for accounts to be auto provisioned,
@@ -26,7 +26,7 @@ then select the account(s) to auto provision.
 
 In all three modes, account information (account name, first name, last name, etc) is 
 populated based on attribute mapping configuration from the external source directory to 
-Zimbra directory.
+Zmail directory.
 
 Multiple modes can co-exist.
 
@@ -38,39 +38,39 @@ Multiple modes can co-exist.
 All auto provisioning are on domain level.
 
 ------------------------------
-zimbraAutoProvMode
+zmailAutoProvMode
   type="enum" value="EAGER,LAZY,MANUAL" cardinality="multi" optionalIn="domain"
   Exposed in admin console: YES
   Description:
     Auto provision modes enabled.  Multiple modes can be enabled on a domain.
     
     EAGER: A server maintenance thread automatically polls the configured external auto provision 
-           LDAP source at a configured interval for entries due to be auto provisioned in Zimbra, 
-           and then auto creates the accounts in Zimbra directory. 
+           LDAP source at a configured interval for entries due to be auto provisioned in Zmail, 
+           and then auto creates the accounts in Zmail directory. 
     
-    LAZY: auto creates the Zimbra account when user first login via one of the external auth 
+    LAZY: auto creates the Zmail account when user first login via one of the external auth 
           mechanisms enabled for auto provisioning.  Auth mechanisms enabled for auto provisioning 
-          are configured in zimbraAutoProvAuthMech.
+          are configured in zmailAutoProvAuthMech.
           
     MANUAL: admin to search from the configured external auto provision LDAP source and select an  
-            entry from the search result to create the corresponding Zimbra account for the 
+            entry from the search result to create the corresponding Zmail account for the 
             external entry.
             
-    In all cases, localpart of the Zimbra account is mapped from an attribute on the external entry 
-    based on zimbraAutoProvAccountNameMap.  The Zimbra account is populated with attributes mapped 
-    from the external entry based on zimbraAutoProvAttrMap.
+    In all cases, localpart of the Zmail account is mapped from an attribute on the external entry 
+    based on zmailAutoProvAccountNameMap.  The Zmail account is populated with attributes mapped 
+    from the external entry based on zmailAutoProvAttrMap.
 
 
 examples:
 - enable auto provision in EAGER mode
-$ zmprov md test.com zimbraAutoProvMode EAGER
+$ zmprov md test.org zmailAutoProvMode EAGER
 
 - enable auto provision in LAZY and MANUAL mode
-$ zmprov md test.com +zimbraAutoProvMode LAZY +zimbraAutoProvMode MANUAL
+$ zmprov md test.com +zmailAutoProvMode LAZY +zmailAutoProvMode MANUAL
 
 
 ------------------------------
-zimbraAutoProvAuthMech
+zmailAutoProvAuthMech
   type="enum" value="LDAP,PREAUTH,KRB5,SPNEGO" cardinality="multi" optionalIn="domain"
   Exposed in admin console: YES
   Description:
@@ -80,22 +80,22 @@ zimbraAutoProvAuthMech
     
     Auth mechanisms enabled for auto provision in LAZY mode.  When a user authenticates via one of 
     the external auth mechanisms enabled in this attribute, and when the user account does not yet 
-    exist in Zimbra directory, an account entry will be automatically created in Zimbra directory.
+    exist in Zmail directory, an account entry will be automatically created in Zmail directory.
 
 
 examples:
 - enable LAZY auto provision for users login via preauth
-$ zmprov md test.com zimbraAutoProvAuthMech PREAUTH
+$ zmprov md test.org zmailAutoProvAuthMech PREAUTH
 
 - enable LAZY auto provision for users login via external ldap(including ad) auth
-$ zmprov md test.com zimbraAutoProvAuthMech LDAP
+$ zmprov md test.org zmailAutoProvAuthMech LDAP
 
 - enable LAZY auto provision for users login via preauth or kerberos auth
-$ zmprov md test.com +zimbraAutoProvAuthMech PREAUTH +zimbraAutoProvAuthMech KRB5
+$ zmprov md test.com +zmailAutoProvAuthMech PREAUTH +zmailAutoProvAuthMech KRB5
 
 
 ------------------------------
-zimbraAutoProvLdapURL
+zmailAutoProvLdapURL
   type="string" max="256" cardinality="single" optionalIn="domain"
   Exposed in admin console: YES
   Description:
@@ -107,11 +107,11 @@ zimbraAutoProvLdapURL
 
 
 examples:
-$ zmprov md test.com zimbraAutoProvLdapURL "ldap://autoprov.source.com:389"
+$ zmprov md test.org zmailAutoProvLdapURL "ldap://autoprov.source.com:389"
 
 
 ------------------------------
-zimbraAutoProvLdapStartTlsEnabled
+zmailAutoProvLdapStartTlsEnabled
   type="boolean" cardinality="single" optionalIn="domain"
   Exposed in admin console: YES
   Description:
@@ -125,26 +125,26 @@ zimbraAutoProvLdapStartTlsEnabled
 
 
 examples:
-$ zmprov md test.com zimbraAutoProvLdapStartTlsEnabled TRUE
+$ zmprov md test.org zmailAutoProvLdapStartTlsEnabled TRUE
 
 
 ------------------------------
-zimbraAutoProvLdapAdminBindDn
+zmailAutoProvLdapAdminBindDn
   type="string" max="256" cardinality="single" optionalIn="domain"
   Exposed in admin console: YES
   Description:
      EAGER mode: required
-      LAZY mode: required (if using zimbraAutoProvLdapSearchFilter) 
+      LAZY mode: required (if using zmailAutoProvLdapSearchFilter) 
     MANUAL mode: required
     
     LDAP search bind DN for auto provision.
 
 examples:
-$ zmprov md test.com zimbraAutoProvLdapAdminBindDn "cn=admin,dc=autoprov,dc=company,dc=com"
+$ zmprov md test.org zmailAutoProvLdapAdminBindDn "cn=admin,dc=autoprov,dc=company,dc=com"
 
 
 ------------------------------
-zimbraAutoProvLdapAdminBindPassword
+zmailAutoProvLdapAdminBindPassword
   type="string" max="256" cardinality="single" optionalIn="domain"
   Exposed in admin console: YES
   Description:
@@ -156,38 +156,38 @@ zimbraAutoProvLdapAdminBindPassword
 
 
 examples:
-$ zmprov md test.com zimbraAutoProvLdapAdminBindPassword secret
+$ zmprov md test.org zmailAutoProvLdapAdminBindPassword secret
 
 
 ------------------------------
-zimbraAutoProvLdapSearchBase
+zmailAutoProvLdapSearchBase
   type="string" max="256" cardinality="single" optionalIn="domain"
   Exposed in admin console: YES
   Description:
      EAGER mode: required
-      LAZY mode: required (if using zimbraAutoProvLdapSearchFilter), 
+      LAZY mode: required (if using zmailAutoProvLdapSearchFilter), 
     MANUAL mode: required
     
-    LDAP search base for auto provision, used in conjunction with zimbraAutoProvLdapSearchFilter.  
+    LDAP search base for auto provision, used in conjunction with zmailAutoProvLdapSearchFilter.  
     If not set, LDAP root DSE will be used.
 
 
 examples:
-$ zmprov md test.com zimbraAutoProvLdapSearchBase "dc=autoprov,dc=company,dc=com"
+$ zmprov md test.org zmailAutoProvLdapSearchBase "dc=autoprov,dc=company,dc=com"
 
 
 ------------------------------
-zimbraAutoProvLdapSearchFilter
+zmailAutoProvLdapSearchFilter
   type="string" max="256" cardinality="single" optionalIn="domain"
   Exposed in admin console: YES
   Description:
      EAGER mode: required
-      LAZY mode: optional (if not using zimbraAutoProvLdapBindDn) 
-    MANUAL mode: optional (if not using zimbraAutoProvLdapBindDn)  
+      LAZY mode: optional (if not using zmailAutoProvLdapBindDn) 
+    MANUAL mode: optional (if not using zmailAutoProvLdapBindDn)  
     
     LDAP search filter template for account auto provisioning.
-    For LAZY and MANUAL modes, either zimbraAutoProvLdapSearchFilter or zimbraAutoProvLdapBindDn 
-    has to be set.  If both are set, zimbraAutoProvLdapSearchFilter will take precedence.
+    For LAZY and MANUAL modes, either zmailAutoProvLdapSearchFilter or zmailAutoProvLdapBindDn 
+    has to be set.  If both are set, zmailAutoProvLdapSearchFilter will take precedence.
     
     Supported place holders: 
     %n = username with @ (or without, if no @ was specified) 
@@ -197,21 +197,21 @@ zimbraAutoProvLdapSearchFilter
     
     
 examples:
-$ zmprov md test.com zimbraAutoProvLdapSearchFilter "(uid=%u)"
+$ zmprov md test.org zmailAutoProvLdapSearchFilter "(uid=%u)"
 
 
 ------------------------------
-zimbraAutoProvLdapBindDn
+zmailAutoProvLdapBindDn
   type="string" max="256" cardinality="single" optionalIn="domain"
   Exposed in admin console: YES
   Description:
      EAGER mode: required
-      LAZY mode: optional (if not using zimbraAutoProvLdapSearchFilters) 
-    MANUAL mode: optional (if not using zimbraAutoProvLdapSearchFilters) 
+      LAZY mode: optional (if not using zmailAutoProvLdapSearchFilters) 
+    MANUAL mode: optional (if not using zmailAutoProvLdapSearchFilters) 
     
     LDAP external DN template for account auto provisioning.
-    For LAZY and MANUAL modes, either zimbraAutoProvLdapSearchFilter or zimbraAutoProvLdapBindDn 
-    has to be set.  If both are set, zimbraAutoProvLdapSearchFilter will take precedence.
+    For LAZY and MANUAL modes, either zmailAutoProvLdapSearchFilter or zmailAutoProvLdapBindDn 
+    has to be set.  If both are set, zmailAutoProvLdapSearchFilter will take precedence.
     
     Supported place holders: 
     %n = username with @ (or without, if no @ was specified) 
@@ -221,11 +221,11 @@ zimbraAutoProvLdapBindDn
     
 
 examples:
-$ zmprov md test.com zimbraAutoProvLdapBindDn "uid=%u,ou=people,%D"
+$ zmprov md test.org zmailAutoProvLdapBindDn "uid=%u,ou=people,%D"
 
 
 ------------------------------
-zimbraAutoProvAccountNameMap
+zmailAutoProvAccountNameMap
   type="string" max="256" cardinality="single" optionalIn="domain"
   Exposed in admin console: YES
   Description:
@@ -235,15 +235,15 @@ zimbraAutoProvAccountNameMap
     
     Attribute name in the external directory that contains localpart of the account name.
     If not specified, localpart of the account name is the principal user used to authenticated to 
-    Zimbra.
+    Zmail.
 
 examples:
-- use the uid value on the external entry for localpart of the account name to be provisioned in Zimbra 
-$ zmprov md test.com zimbraAutoProvAccountNameMap uid
+- use the uid value on the external entry for localpart of the account name to be provisioned in Zmail 
+$ zmprov md test.org zmailAutoProvAccountNameMap uid
 
 
 ------------------------------
-zimbraAutoProvAttrMap
+zmailAutoProvAttrMap
   type="string" max="256" cardinality="multi" optionalIn="domain"
   Exposed in admin console: YES
   Description:
@@ -251,26 +251,26 @@ zimbraAutoProvAttrMap
       LAZY mode: optional 
     MANUAL mode: optional  
   
-    Attribute map for mapping attribute values from the external entry to Zimbra account attributes.
-    Values are in the format of {external attribute}={zimbra attribute}.
+    Attribute map for mapping attribute values from the external entry to Zmail account attributes.
+    Values are in the format of {external attribute}={zmail attribute}.
     If not set, no attributes from the external directory will be populated in Zimrba directory.
     
     Invalid mapping configuration will cause the account creation to fail.
     Examples of bad mapping:
         - invalid external attribute name.
-        - invalid Zimbra attribute name.
-        - external attribute has multiple values but the zimbra attribute is single-valued.
-        - syntax violation.  e.g. Value on the external attribute is a String but the Zimbra 
+        - invalid Zmail attribute name.
+        - external attribute has multiple values but the zmail attribute is single-valued.
+        - syntax violation.  e.g. Value on the external attribute is a String but the Zmail 
           attribute is declared an integer.
 
 examples:
-- map "sn" value on the external entry to "displayName" on the Zimbra account, and map "description" 
-  value on the external entry to "description" on the Zimbra account.
-$ zmprov md test.com +zimbraAutoProvAttrMap sn=displayName +zimbraAutoProvAttrMap description=description
+- map "sn" value on the external entry to "displayName" on the Zmail account, and map "description" 
+  value on the external entry to "description" on the Zmail account.
+$ zmprov md test.com +zmailAutoProvAttrMap sn=displayName +zmailAutoProvAttrMap description=description
 
 
 ------------------------------
-zimbraAutoProvNotificationFromAddress
+zmailAutoProvNotificationFromAddress
   type="string" max="256" cardinality="single" optionalIn="domain"
   Exposed in admin console: YES
   Description:
@@ -282,11 +282,11 @@ zimbraAutoProvNotificationFromAddress
     If not set, no notification email will sent to the newly created account.
 
 examples:
-$ zmprov md test.com zimbraAutoProvNotificationFromAddress prov-admin@test.com
+$ zmprov md test.org zmailAutoProvNotificationFromAddress prov-admin@test.com
 
 
 ------------------------------
-zimbraAutoProvListenerClass
+zmailAutoProvListenerClass
   type="string" max="1024" cardinality="single" optionalIn="domain"
   Exposed in admin console: NO
   Description:
@@ -295,17 +295,17 @@ zimbraAutoProvListenerClass
     MANUAL mode: optional 
     
     Class name of auto provision listener.  The class must implement the 
-    com.zimbra.cs.account.Account.AutoProvisionListener interface.
-    The singleton listener instance is invoked after each account is auto created in Zimbra.  
+    org.zmail.cs.account.Account.AutoProvisionListener interface.
+    The singleton listener instance is invoked after each account is auto created in Zmail.  
     Listener can be plugged in as a server externsion to handle tasks like updating the account auto 
     provision status in the external LDAP directory.
 
 examples:
-$ zmprov md test.com zimbraAutoProvListenerClass com.company.PostAutoProvision
+$ zmprov md test.org zmailAutoProvListenerClass com.company.PostAutoProvision
 
 
 ------------------------------
-zimbraAutoProvBatchSize
+zmailAutoProvBatchSize
   type="integer" cardinality="single" optionalIn="domain,globalConfig"
   Exposed in admin console: YES
   Description:
@@ -316,15 +316,15 @@ zimbraAutoProvBatchSize
     Max number of accounts to process in each interval for EAGER auto provision.
 
 examples:
-$ zmprov md test.com zimbraAutoProvBatchSize 20
+$ zmprov md test.org zmailAutoProvBatchSize 20
 
 
 ------------------------------
-zimbraAutoProvLastPolledTimestamp
+zmailAutoProvLastPolledTimestamp
   type="gentime" cardinality="single" optionalIn="domain"
   Exposed in admin console: YES
   Description:
-     EAGER mode: for Zimbra internal use only - do not change it.
+     EAGER mode: for Zmail internal use only - do not change it.
       LAZY mode: N/A
     MANUAL mode: N/A 
     
@@ -333,15 +333,15 @@ zimbraAutoProvLastPolledTimestamp
     later than the timestamp recorded from the previous iteration.
 
 examples:
-- for Zimbra internal use only - do not change it.
+- for Zmail internal use only - do not change it.
 
 
 ------------------------------
-zimbraAutoProvLock
+zmailAutoProvLock
   type="string" cardinality="single" optionalIn="domain"
   Exposed in admin console: NO
   Description:
-     EAGER mode: for Zimbra internal use only - do not change it.
+     EAGER mode: for Zmail internal use only - do not change it.
       LAZY mode: N/A
     MANUAL mode: N/A 
     
@@ -351,11 +351,11 @@ zimbraAutoProvLock
 
 
 examples:
-- for Zimbra internal use only - do not change it.
+- for Zmail internal use only - do not change it.
 
 
 ------------------------------
-zimbraAutoProvScheduledDomains
+zmailAutoProvScheduledDomains
   type="string" cardinality="multi" optionalIn="server"
   Exposed in admin console: YES
   Description:
@@ -364,15 +364,15 @@ zimbraAutoProvScheduledDomains
     MANUAL mode: N/A 
     
     Domain scheduled for eager auto provision on this server.  Scheduled domains must have EAGER 
-    mode enabled in zimbraAutoProvMode.  Multiple domains can be scheduled on a server for EAGER 
+    mode enabled in zmailAutoProvMode.  Multiple domains can be scheduled on a server for EAGER 
     auto provision.  Also, a domain can be scheduled on multiple servers for EAGER auto provision.
 
 examples:
 - scehdule domain1.com amd domain2.com for EAGER auto provision on server server.com
-$ zmprov ms server.com +zimbraAutoProvScheduledDomains domain1.com +zimbraAutoProvScheduledDomains domain2.com 
+$ zmprov ms server.com +zmailAutoProvScheduledDomains domain1.com +zmailAutoProvScheduledDomains domain2.com 
 
 ------------------------------
-zimbraAutoProvPollingInterval
+zmailAutoProvPollingInterval
   type="duration" cardinality="single" optionalIn="server,globalConfig"
   Exposed in admin console: YES
   Description:
@@ -382,11 +382,11 @@ zimbraAutoProvPollingInterval
     
     Interval between successive polling and provisioning accounts in EAGER mode.  
     The actual interval may take longer since it can be affected by two other factors: 
-    zimbraAutoProvBatchSize and number of domains configured in zimbraAutoProvScheduledDomains.  
+    zmailAutoProvBatchSize and number of domains configured in zmailAutoProvScheduledDomains.  
     At each interval, the auto provision thread iterates through all domains in 
-    zimbraAutoProvScheduledDomains and auto creates up to domain.zimbraAutoProvBatchSize accounts.  
-    If that process takes longer than zimbraAutoProvPollingInterval then the next iteration will 
-    start immediately instead of waiting for zimbraAutoProvPollingInterval amount of time.
+    zmailAutoProvScheduledDomains and auto creates up to domain.zmailAutoProvBatchSize accounts.  
+    If that process takes longer than zmailAutoProvPollingInterval then the next iteration will 
+    start immediately instead of waiting for zmailAutoProvPollingInterval amount of time.
     
     If set to 0 when server starts up, the auto provision thread will not start.
     If changed from a non-0 value to 0 while server is running, the auto provision thread will be shutdown.
@@ -394,7 +394,7 @@ zimbraAutoProvPollingInterval
 
 examples:
 - set polling interval for EAGER auto provision to 15 minutes
-$ zmprov ms server.com zimbraAutoProvPollingInterval 15m
+$ zmprov ms server.org zmailAutoProvPollingInterval 15m
 
 
 

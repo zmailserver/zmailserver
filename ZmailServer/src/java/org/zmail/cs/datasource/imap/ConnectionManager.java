@@ -12,34 +12,34 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.datasource.imap;
+package org.zmail.cs.datasource.imap;
 
-import com.zimbra.common.localconfig.LC;
-import com.zimbra.common.net.SocketFactories;
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.common.util.Log;
-import com.zimbra.common.util.ZimbraLog;
-import com.zimbra.cs.account.DataSource;
-import com.zimbra.cs.account.Provisioning;
-import com.zimbra.cs.datasource.MessageContent;
-import com.zimbra.cs.datasource.SyncUtil;
-import com.zimbra.cs.mailclient.CommandFailedException;
-import com.zimbra.cs.mailclient.MailConfig;
-import com.zimbra.cs.mailclient.MailConfig.Security;
-import com.zimbra.cs.mailclient.auth.Authenticator;
-import com.zimbra.cs.mailclient.auth.AuthenticatorFactory;
-import com.zimbra.cs.mailclient.imap.CAtom;
-import com.zimbra.cs.mailclient.imap.DataHandler;
-import com.zimbra.cs.mailclient.imap.IDInfo;
-import com.zimbra.cs.mailclient.imap.ImapCapabilities;
-import com.zimbra.cs.mailclient.imap.ImapConfig;
-import com.zimbra.cs.mailclient.imap.ImapConnection;
-import com.zimbra.cs.mailclient.imap.ImapData;
-import com.zimbra.cs.mailclient.imap.ImapResponse;
-import com.zimbra.cs.mailclient.imap.ResponseHandler;
-import com.zimbra.cs.util.BuildInfo;
-import com.zimbra.cs.util.Zimbra;
-import com.zimbra.soap.type.DataSource.ConnectionType;
+import org.zmail.common.localconfig.LC;
+import org.zmail.common.net.SocketFactories;
+import org.zmail.common.service.ServiceException;
+import org.zmail.common.util.Log;
+import org.zmail.common.util.ZmailLog;
+import org.zmail.cs.account.DataSource;
+import org.zmail.cs.account.Provisioning;
+import org.zmail.cs.datasource.MessageContent;
+import org.zmail.cs.datasource.SyncUtil;
+import org.zmail.cs.mailclient.CommandFailedException;
+import org.zmail.cs.mailclient.MailConfig;
+import org.zmail.cs.mailclient.MailConfig.Security;
+import org.zmail.cs.mailclient.auth.Authenticator;
+import org.zmail.cs.mailclient.auth.AuthenticatorFactory;
+import org.zmail.cs.mailclient.imap.CAtom;
+import org.zmail.cs.mailclient.imap.DataHandler;
+import org.zmail.cs.mailclient.imap.IDInfo;
+import org.zmail.cs.mailclient.imap.ImapCapabilities;
+import org.zmail.cs.mailclient.imap.ImapConfig;
+import org.zmail.cs.mailclient.imap.ImapConnection;
+import org.zmail.cs.mailclient.imap.ImapData;
+import org.zmail.cs.mailclient.imap.ImapResponse;
+import org.zmail.cs.mailclient.imap.ResponseHandler;
+import org.zmail.cs.util.BuildInfo;
+import org.zmail.cs.util.Zmail;
+import org.zmail.soap.type.DataSource.ConnectionType;
 
 import javax.security.auth.login.LoginException;
 import java.io.IOException;
@@ -58,7 +58,7 @@ final class ConnectionManager {
 
     private static final int IDLE_READ_TIMEOUT = 30 * 60; // 30 minutes
 
-    private static final Log LOG = ZimbraLog.datasource;
+    private static final Log LOG = ZmailLog.datasource;
 
     public static ConnectionManager getInstance() {
         return INSTANCE;
@@ -180,7 +180,7 @@ final class ConnectionManager {
                 clientId.put(IDInfo.NAME, IDInfo.DATASOURCE_IMAP_CLIENT_NAME);
                 clientId.put(IDInfo.VERSION, BuildInfo.VERSION);
                 IDInfo id = ic.id(clientId);
-                if ("Zimbra".equalsIgnoreCase(id.get(IDInfo.NAME))) {
+                if ("Zmail".equalsIgnoreCase(id.get(IDInfo.NAME))) {
                     String user = id.get("user");
                     String server = id.get("server");
                     return user != null && user.equals(ds.getAccount().getName()) &&
@@ -202,7 +202,7 @@ final class ConnectionManager {
             try {
                 return MessageContent.read(data.getInputStream(), data.getSize());
             } catch (OutOfMemoryError e) {
-                Zimbra.halt("Out of memory", e);
+                Zmail.halt("Out of memory", e);
                 return null;
             }
         }
@@ -223,7 +223,7 @@ final class ConnectionManager {
         config.setUseLiteralPlus(false);
         // Enable support for trace output
         if (ds.isDebugTraceEnabled()) {
-            config.setLogger(SyncUtil.getTraceLogger(ZimbraLog.imap_client, ds.getId()));
+            config.setLogger(SyncUtil.getTraceLogger(ZmailLog.imap_client, ds.getId()));
         }
         config.setSocketFactory(SocketFactories.defaultSocketFactory());
         config.setSSLSocketFactory(SocketFactories.defaultSSLSocketFactory());

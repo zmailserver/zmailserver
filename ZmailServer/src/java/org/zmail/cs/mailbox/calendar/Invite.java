@@ -13,7 +13,7 @@
  * ***** END LICENSE BLOCK *****
  */
 
-package com.zimbra.cs.mailbox.calendar;
+package org.zmail.cs.mailbox.calendar;
 
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
@@ -33,41 +33,41 @@ import javax.mail.internet.MimeMessage;
 import javax.mail.internet.MimeMultipart;
 
 import com.google.common.collect.Lists;
-import com.zimbra.common.account.Key.AccountBy;
-import com.zimbra.common.calendar.Geo;
-import com.zimbra.common.calendar.ICalTimeZone;
-import com.zimbra.common.calendar.ParsedDateTime;
-import com.zimbra.common.calendar.ParsedDuration;
-import com.zimbra.common.calendar.TimeZoneMap;
-import com.zimbra.common.calendar.ZCalendar.ICalTok;
-import com.zimbra.common.calendar.ZCalendar.ZCalendarBuilder;
-import com.zimbra.common.calendar.ZCalendar.ZComponent;
-import com.zimbra.common.calendar.ZCalendar.ZParameter;
-import com.zimbra.common.calendar.ZCalendar.ZProperty;
-import com.zimbra.common.calendar.ZCalendar.ZVCalendar;
-import com.zimbra.common.localconfig.DebugConfig;
-import com.zimbra.common.localconfig.LC;
-import com.zimbra.common.mime.MimeConstants;
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.common.util.ByteUtil;
-import com.zimbra.common.util.Log;
-import com.zimbra.common.util.LogFactory;
-import com.zimbra.common.util.ZimbraLog;
-import com.zimbra.cs.account.Account;
-import com.zimbra.cs.account.Identity;
-import com.zimbra.cs.account.Provisioning;
-import com.zimbra.cs.index.Fragment;
-import com.zimbra.cs.mailbox.CalendarItem;
-import com.zimbra.cs.mailbox.CalendarItem.Instance;
-import com.zimbra.cs.mailbox.MailItem;
-import com.zimbra.cs.mailbox.Mailbox;
-import com.zimbra.cs.mailbox.MailboxManager;
-import com.zimbra.cs.mailbox.Metadata;
-import com.zimbra.cs.mailbox.calendar.Alarm.Action;
-import com.zimbra.cs.mailbox.calendar.Alarm.TriggerRelated;
-import com.zimbra.cs.mailbox.calendar.Alarm.TriggerType;
-import com.zimbra.cs.mailbox.calendar.Recurrence.IRecurrence;
-import com.zimbra.cs.util.AccountUtil.AccountAddressMatcher;
+import org.zmail.common.account.Key.AccountBy;
+import org.zmail.common.calendar.Geo;
+import org.zmail.common.calendar.ICalTimeZone;
+import org.zmail.common.calendar.ParsedDateTime;
+import org.zmail.common.calendar.ParsedDuration;
+import org.zmail.common.calendar.TimeZoneMap;
+import org.zmail.common.calendar.ZCalendar.ICalTok;
+import org.zmail.common.calendar.ZCalendar.ZCalendarBuilder;
+import org.zmail.common.calendar.ZCalendar.ZComponent;
+import org.zmail.common.calendar.ZCalendar.ZParameter;
+import org.zmail.common.calendar.ZCalendar.ZProperty;
+import org.zmail.common.calendar.ZCalendar.ZVCalendar;
+import org.zmail.common.localconfig.DebugConfig;
+import org.zmail.common.localconfig.LC;
+import org.zmail.common.mime.MimeConstants;
+import org.zmail.common.service.ServiceException;
+import org.zmail.common.util.ByteUtil;
+import org.zmail.common.util.Log;
+import org.zmail.common.util.LogFactory;
+import org.zmail.common.util.ZmailLog;
+import org.zmail.cs.account.Account;
+import org.zmail.cs.account.Identity;
+import org.zmail.cs.account.Provisioning;
+import org.zmail.cs.index.Fragment;
+import org.zmail.cs.mailbox.CalendarItem;
+import org.zmail.cs.mailbox.CalendarItem.Instance;
+import org.zmail.cs.mailbox.MailItem;
+import org.zmail.cs.mailbox.Mailbox;
+import org.zmail.cs.mailbox.MailboxManager;
+import org.zmail.cs.mailbox.Metadata;
+import org.zmail.cs.mailbox.calendar.Alarm.Action;
+import org.zmail.cs.mailbox.calendar.Alarm.TriggerRelated;
+import org.zmail.cs.mailbox.calendar.Alarm.TriggerType;
+import org.zmail.cs.mailbox.calendar.Recurrence.IRecurrence;
+import org.zmail.cs.util.AccountUtil.AccountAddressMatcher;
 
 /**
  * Invite
@@ -570,7 +570,7 @@ public class Invite {
                 if (metaAttendee != null)
                     attendees.add(new ZAttendee(metaAttendee));
             } catch (ServiceException e) {
-                ZimbraLog.calendar.warn("Problem decoding attendee " + i + " for calendar item "
+                ZmailLog.calendar.warn("Problem decoding attendee " + i + " for calendar item "
                         + calItem!=null ? Integer.toString(calItem.getId()) : "(null)"
                         + " invite "+mailItemId+"-" + componentNum);
             }
@@ -656,7 +656,7 @@ public class Invite {
                         invite.addAlarm(alarm);
                 }
             } catch (ServiceException e) {
-                ZimbraLog.calendar.warn("Problem decoding alarm " + i + " for calendar item "
+                ZmailLog.calendar.warn("Problem decoding alarm " + i + " for calendar item "
                         + calItem!=null ? Integer.toString(calItem.getId()) : "(null)"
                         + " invite "+mailItemId+"-" + componentNum, e);
             }
@@ -843,7 +843,7 @@ public class Invite {
                         }
                     }
                 } catch (javax.mail.internet.ParseException e) {
-                    ZimbraLog.calendar.warn("Invalid Content-Type found: \"" + ctStr + "\"; skipping part", e);
+                    ZmailLog.calendar.warn("Invalid Content-Type found: \"" + ctStr + "\"; skipping part", e);
                 }
             }
         } catch (IOException e) {
@@ -1335,7 +1335,7 @@ public class Invite {
             String addr = getOrganizer().getAddress();
             boolean isOrg = acctMatcher.matches(addr);
             if (!isOrg && acct != null) {
-                // bug 41638: Let's also check if address matches zimbraPrefFromAddress.
+                // bug 41638: Let's also check if address matches zmailPrefFromAddress.
                 String prefFromAddr = acct.getPrefFromAddress();
                 if (prefFromAddr != null && prefFromAddr.equalsIgnoreCase(addr))
                     isOrg = true;
@@ -1365,14 +1365,14 @@ public class Invite {
         if (identityId != null) {
             identity = acct.getIdentityById(identityId);
             if (identity == null) {
-                ZimbraLog.calendar.warn("No such identity " + identityId + " for account " + acct.getName());
+                ZmailLog.calendar.warn("No such identity " + identityId + " for account " + acct.getName());
                 identity = acct.getDefaultIdentity();
             }
         } else {
             identity = acct.getDefaultIdentity();
         }
 
-        String identityEmail = identity.getAttr(Provisioning.A_zimbraPrefFromAddress);
+        String identityEmail = identity.getAttr(Provisioning.A_zmailPrefFromAddress);
         ZAttendee acctMatch = null;
         List<ZAttendee> attendees = getAttendees();
         AccountAddressMatcher acctMatcher = new AccountAddressMatcher(acct);
@@ -1534,7 +1534,7 @@ public class Invite {
                     account = Provisioning.getInstance().get(AccountBy.name, address);
                 } catch (ServiceException e) {
                     if (ServiceException.INVALID_REQUEST.equals(e.getCode()))
-                        ZimbraLog.calendar.warn("Ignoring invalid organizer address: " + address);
+                        ZmailLog.calendar.warn("Ignoring invalid organizer address: " + address);
                     else
                         throw e;
                 }
@@ -2067,13 +2067,13 @@ public class Invite {
                 if (newInv != null)
                     logIcsParseImportError(newInv, e);
                 else
-                    ZimbraLog.calendar.warn("Skipping error during ics parse/import", e);
+                    ZmailLog.calendar.warn("Skipping error during ics parse/import", e);
             } catch (RuntimeException e) {
                 if (!continueOnError) throw e;
                 if (newInv != null)
                     logIcsParseImportError(newInv, e);
                 else
-                    ZimbraLog.calendar.warn("Skipping error during ics parse/import", e);
+                    ZmailLog.calendar.warn("Skipping error during ics parse/import", e);
             }
         }
     }
@@ -2084,7 +2084,7 @@ public class Invite {
         int seq = inv.getSeqNo();
         String dtStart = inv.getStartTime() != null ? inv.getStartTime().toString() : null;
         String summary = inv.getName();
-        ZimbraLog.calendar.warn(
+        ZmailLog.calendar.warn(
                 "Skipping error during ics parse/import: UID:" + uid +
                 (recurrenceId != null ? ", RECURRENCE-ID:" + recurrenceId : "") +
                 ", SEQUENCE:" + seq +
@@ -2537,7 +2537,7 @@ public class Invite {
             if (throwException)
                 throw ServiceException.INVALID_REQUEST("missing UID; subject=" + mName, null);
             else
-                ZimbraLog.calendar.warn("UID missing; subject=" + mName);
+                ZmailLog.calendar.warn("UID missing; subject=" + mName);
         }
         mUid = fixupIfOutlookUid(mUid);
 
@@ -2573,7 +2573,7 @@ public class Invite {
                 // organizer means current user is the organizer.  If attendees were kept, these clients will
                 // send cancel notice to the attendees when appointment is deleted.  The attendees will get
                 // confused because the cancel notice came from someone other than the organizer.
-                ZimbraLog.calendar.warn(
+                ZmailLog.calendar.warn(
                         "ORGANIZER missing; clearing ATTENDEEs to avoid confusing clients; UID=" + mUid + ", subject=" + mName);
                 clearAttendees();
             }
@@ -2588,14 +2588,14 @@ public class Invite {
             if (throwException) {
                 throw ServiceException.INVALID_REQUEST("recurrence used without DTSTART; UID=" + mUid + ", subject=" + mName, null);
             } else {
-                ZimbraLog.calendar.warn("recurrence used without DTSTART; removing recurrence; UID=" + mUid + ", subject=" + mName);
+                ZmailLog.calendar.warn("recurrence used without DTSTART; removing recurrence; UID=" + mUid + ", subject=" + mName);
                 mRecurrence = null;
             }
         }
 
         // Don't allow using different time zones in DTSTART and DTEND for a recurrence. (prevents future problems)
         if (isRecurrence() && mStart != null && mEnd != null &&  !mStart.getTimeZone().equals(mEnd.getTimeZone())) {
-            ZimbraLog.calendar.warn(
+            ZmailLog.calendar.warn(
                     "recurrence uses different time zones in DTSTART and DTEND; forcing DTEND to DTSTART time zone; UID=" +
                     mUid + ", subject=" + mName);
             mEnd.toTimeZone(mStart.getTimeZone());
@@ -2622,7 +2622,7 @@ public class Invite {
     public static void setDefaultAlarm(Invite inv, Account acct) throws ServiceException {
         inv.clearAlarms();
         int prefNonAllDayMinutesBefore = (int) acct.getLongAttr(
-                Provisioning.A_zimbraPrefCalendarApptReminderWarningTime, 0);
+                Provisioning.A_zmailPrefCalendarApptReminderWarningTime, 0);
         int hoursBefore = 0;
         int minutesBefore = 0;
         if (!inv.isAllDayEvent()) {

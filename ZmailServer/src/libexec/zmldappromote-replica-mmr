@@ -14,28 +14,28 @@
 # ***** END LICENSE BLOCK *****
 # 
 use strict;
-use lib '/opt/zimbra/zimbramon/lib';
+use lib '/opt/zmail/zmailmon/lib';
 use Net::LDAP;
 use XML::Simple;
 use Getopt::Long;
 use File::Copy qw/ cp /;
 use File::Path;
 
-if ( ! -d "/opt/zimbra/openldap/etc" ) {
+if ( ! -d "/opt/zmail/openldap/etc" ) {
   print "ERROR: openldap does not appear to be installed - exiting\n";
   exit(1);
 }
 
 my $id = getpwuid($<);
 chomp $id;
-if ($id ne "zimbra") {
-    print STDERR "Error: must be run as zimbra user\n";
+if ($id ne "zmail") {
+    print STDERR "Error: must be run as zmail user\n";
     exit (1);
 }
 my ($help,$sid);
 $sid=0;
 
-my $zmlocalconfig="/opt/zimbra/bin/zmlocalconfig";
+my $zmlocalconfig="/opt/zmail/bin/zmlocalconfig";
 
 my $opts_good = GetOptions(
         'h|help' => \$help,
@@ -54,25 +54,25 @@ if ($sid <=0) {
    usage(0);
 }
 
-my $localxml = XMLin("/opt/zimbra/conf/localconfig.xml");
+my $localxml = XMLin("/opt/zmail/conf/localconfig.xml");
 my $ldap_root_password = $localxml->{key}->{ldap_root_password}->{value};
 chomp($ldap_root_password);
 my $ldap_is_master = $localxml->{key}->{ldap_is_master}->{value};
 chomp($ldap_is_master);
-my $zimbra_home = $localxml->{key}->{zimbra_home}->{value};
+my $zmail_home = $localxml->{key}->{zmail_home}->{value};
 my $ldap_replication_password = $localxml->{key}->{ldap_replication_password}->{value};
 my $ldap_starttls_supported = $localxml->{key}->{ldap_starttls_supported}->{value};
-my $zimbra_require_interprocess_security = $localxml->{key}->{zimbra_require_interprocess_security}->{value};
+my $zmail_require_interprocess_security = $localxml->{key}->{zmail_require_interprocess_security}->{value};
 
-if ($zimbra_home eq "") {
-   $zimbra_home = "/opt/zimbra";
+if ($zmail_home eq "") {
+   $zmail_home = "/opt/zmail";
 }
 
 if(lc($ldap_is_master) eq "true") {
   print "Cannot run on a master.\n";
   exit(1);
 } else {
-  my $ldap = Net::LDAP->new('ldapi://%2fopt%2fzimbra%2fopenldap%2fvar%2frun%2fldapi/') or die "$@";
+  my $ldap = Net::LDAP->new('ldapi://%2fopt%2fzmail%2fopenldap%2fvar%2frun%2fldapi/') or die "$@";
   my $mesg = $ldap->bind("cn=config", password=>"$ldap_root_password");
   $mesg->code && die "Bind: ". $mesg->error . "\n"; 
 
@@ -108,15 +108,15 @@ if(lc($ldap_is_master) eq "true") {
     exit(1);
   }
   # Create accesslog db, add syncprov overlay, etc.
-  File::Path::mkpath("${zimbra_home}/data/ldap/accesslog/db");
+  File::Path::mkpath("${zmail_home}/data/ldap/accesslog/db");
   $mesg=$ldap->add(
     $bdn,
     attr => [
       objectClass=>["olcDatabaseConfig","olcMdbConfig"],
       olcDatabase=>"{2}mdb",
-      olcDbDirectory=>"${zimbra_home}/data/ldap/accesslog/db",
+      olcDbDirectory=>"${zmail_home}/data/ldap/accesslog/db",
       olcSuffix=>"cn=accesslog",
-      olcAccess=>'{0}to dn.subtree="cn=accesslog"  by dn.exact="uid=zimbra,cn=admins,cn=zimbra" read  by dn.exact="cn=config" read  by dn.exact="uid=zmreplica,cn=admins,cn=zimbra" read',
+      olcAccess=>'{0}to dn.subtree="cn=accesslog"  by dn.exact="uid=zmail,cn=admins,cn=zmail" read  by dn.exact="cn=config" read  by dn.exact="uid=zmreplica,cn=admins,cn=zmail" read',
       olcLastMod=>"TRUE",
       olcMaxDerefDepth=>"15",
       olcReadOnly=>"FALSE",

@@ -13,14 +13,14 @@
  * ***** END LICENSE BLOCK *****
  */
 
-package com.zimbra.cs.server;
+package org.zmail.cs.server;
 
 import com.google.common.base.Preconditions;
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.common.util.Log;
-import com.zimbra.common.util.ZimbraLog;
-import com.zimbra.cs.account.Provisioning;
-import com.zimbra.cs.util.Zimbra;
+import org.zmail.common.service.ServiceException;
+import org.zmail.common.util.Log;
+import org.zmail.common.util.ZmailLog;
+import org.zmail.cs.account.Provisioning;
+import org.zmail.cs.util.Zmail;
 
 import javax.net.ssl.HandshakeCompletedEvent;
 import javax.net.ssl.HandshakeCompletedListener;
@@ -114,7 +114,7 @@ public abstract class ProtocolHandler implements Runnable {
         handlerThread = Thread.currentThread();
         server.addActiveHandler(this);
 
-        ZimbraLog.clearContext();
+        ZmailLog.clearContext();
 
         try {
             connection.setSoTimeout(server.getConfigMaxIdleMilliSeconds()); // must be set before any traffic
@@ -132,21 +132,21 @@ public abstract class ProtocolHandler implements Runnable {
                 log.info("Connection refused for client %s", remoteAddress);
             }
         } catch (SocketTimeoutException e) {
-            ZimbraLog.addIpToContext(remoteAddress);
+            ZmailLog.addIpToContext(remoteAddress);
             log.debug("Idle timeout", e);
             notifyIdleConnection();
         } catch (AssertionError e) { // should not halt the server
             log.error("This should not happen. Please file a bug.", e);
         } catch (OutOfMemoryError e) {
-            Zimbra.halt("out of memory", e);
+            Zmail.halt("out of memory", e);
         } catch (Error e) {
-            Zimbra.halt("Fatal error occurred while handling connection", e);
+            Zmail.halt("Fatal error occurred while handling connection", e);
         } catch (Throwable e) {
-            ZimbraLog.addIpToContext(remoteAddress);
+            ZmailLog.addIpToContext(remoteAddress);
             log.error("Exception occurred while handling connection", e);
         } finally {
             dropConnection();
-            ZimbraLog.addIpToContext(remoteAddress);
+            ZmailLog.addIpToContext(remoteAddress);
             try {
                 connection.close();
             } catch (IOException e) {
@@ -156,11 +156,11 @@ public abstract class ProtocolHandler implements Runnable {
                     log.info("I/O error while closing connection: %s", e.toString());
                 }
             } finally {
-                ZimbraLog.clearContext();
+                ZmailLog.clearContext();
             }
         }
 
-        ZimbraLog.clearContext();
+        ZmailLog.clearContext();
         server.removeActiveHandler(this);
         handlerThread = null;
         log.info("Handler exiting normally");
@@ -188,7 +188,7 @@ public abstract class ProtocolHandler implements Runnable {
                 cont = processCommand();
                 setIdle(true);
             } catch (IOException e) {
-                ZimbraLog.addIpToContext(connection.getInetAddress().getHostAddress());
+                ZmailLog.addIpToContext(connection.getInetAddress().getHostAddress());
                 if (isSocketError(e)) {
                     cont = false;
                     if (getShuttingDown()) {

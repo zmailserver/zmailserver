@@ -13,7 +13,7 @@
  * ***** END LICENSE BLOCK *****
  */
 
-package com.zimbra.qa.unittest;
+package org.zmail.qa.unittest;
 
 import java.lang.reflect.Method;
 import java.lang.reflect.InvocationTargetException;
@@ -25,27 +25,27 @@ import java.util.Map;
 import org.junit.*;
 import static org.junit.Assert.*;
 
-import com.zimbra.common.auth.ZAuthToken;
-import com.zimbra.common.lmtp.LmtpProtocolException;
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.common.soap.AccountConstants;
-import com.zimbra.common.soap.AdminConstants;
-import com.zimbra.common.soap.Element;
-import com.zimbra.common.soap.Element.XMLElement;
-import com.zimbra.common.util.CliUtil;
-import com.zimbra.common.util.DateUtil;
-import com.zimbra.cs.account.Account;
-import com.zimbra.cs.account.AccountServiceException;
-import com.zimbra.cs.account.Domain;
-import com.zimbra.cs.account.Provisioning;
-import com.zimbra.common.account.Key;
-import com.zimbra.common.account.Key.AccountBy;
-import com.zimbra.common.account.Key.DomainBy;
-import com.zimbra.common.account.ProvisioningConstants;
-import com.zimbra.cs.account.Signature;
-import com.zimbra.cs.account.auth.AuthContext;
-import com.zimbra.cs.account.soap.SoapProvisioning;
-import com.zimbra.cs.account.soap.SoapProvisioning.DelegateAuthResponse;
+import org.zmail.common.auth.ZAuthToken;
+import org.zmail.common.lmtp.LmtpProtocolException;
+import org.zmail.common.service.ServiceException;
+import org.zmail.common.soap.AccountConstants;
+import org.zmail.common.soap.AdminConstants;
+import org.zmail.common.soap.Element;
+import org.zmail.common.soap.Element.XMLElement;
+import org.zmail.common.util.CliUtil;
+import org.zmail.common.util.DateUtil;
+import org.zmail.cs.account.Account;
+import org.zmail.cs.account.AccountServiceException;
+import org.zmail.cs.account.Domain;
+import org.zmail.cs.account.Provisioning;
+import org.zmail.common.account.Key;
+import org.zmail.common.account.Key.AccountBy;
+import org.zmail.common.account.Key.DomainBy;
+import org.zmail.common.account.ProvisioningConstants;
+import org.zmail.cs.account.Signature;
+import org.zmail.cs.account.auth.AuthContext;
+import org.zmail.cs.account.soap.SoapProvisioning;
+import org.zmail.cs.account.soap.SoapProvisioning.DelegateAuthResponse;
 
 public class TestProvDomainStatus {
     private Provisioning mProv;
@@ -115,7 +115,7 @@ public class TestProvDomainStatus {
     
     private static enum DomainStatus {
         // must match ldap value
-        EMPTY, // pseudo value for testing, meaning no value in zimbraDomainStatus
+        EMPTY, // pseudo value for testing, meaning no value in zmailDomainStatus
         active,
         locked,
         maintenance,
@@ -153,7 +153,7 @@ public class TestProvDomainStatus {
         mSoapProvAdmin.soapSetURI(TestUtil.getAdminSoapUrl());
         // mSoapProvAdmin.soapSetURI("https://phoebe.local:7071/service/admin/soap/");
         // mSoapProvAdmin.soapSetURI("https://localhost:7071/service/admin/soap/");
-        mSoapProvAdmin.soapZimbraAdminAuthenticate();
+        mSoapProvAdmin.soapZmailAdminAuthenticate();
         
         mProv = mSoapProvAdmin;
         
@@ -191,9 +191,9 @@ public class TestProvDomainStatus {
         Map<String, Object> acctAttrs = new HashMap<String, Object>();
         
         if (at == AccountType.ACCT_DOMAIN_ADMIN)
-            acctAttrs.put(Provisioning.A_zimbraIsDomainAdminAccount, ProvisioningConstants.TRUE);
+            acctAttrs.put(Provisioning.A_zmailIsDomainAdminAccount, ProvisioningConstants.TRUE);
         else if (at == AccountType.ACCT_GLOBAL_ADMIN)
-            acctAttrs.put(Provisioning.A_zimbraIsAdminAccount, ProvisioningConstants.TRUE);
+            acctAttrs.put(Provisioning.A_zmailIsAdminAccount, ProvisioningConstants.TRUE);
             
         Account acct = mProv.createAccount(accountEmail, PASSWORD, acctAttrs);
         assertNotNull(acct);
@@ -222,14 +222,14 @@ public class TestProvDomainStatus {
     private void lockoutAccount(Account acct, boolean set) throws Exception {
         Map<String, Object> attrs = new HashMap<String, Object>();
         if (set) {
-            attrs.put(Provisioning.A_zimbraPasswordLockoutMaxFailures, "1");
-            attrs.put(Provisioning.A_zimbraPasswordLockoutEnabled, ProvisioningConstants.TRUE);
-            attrs.put(Provisioning.A_zimbraPasswordLockoutLockedTime, DateUtil.toGeneralizedTime(new Date()));
+            attrs.put(Provisioning.A_zmailPasswordLockoutMaxFailures, "1");
+            attrs.put(Provisioning.A_zmailPasswordLockoutEnabled, ProvisioningConstants.TRUE);
+            attrs.put(Provisioning.A_zmailPasswordLockoutLockedTime, DateUtil.toGeneralizedTime(new Date()));
             mProv.modifyAttrs(acct, attrs);
         } else {
-            attrs.put(Provisioning.A_zimbraPasswordLockoutMaxFailures, "");
-            attrs.put("-" + Provisioning.A_zimbraPasswordLockoutEnabled, ProvisioningConstants.TRUE);
-            attrs.put(Provisioning.A_zimbraPasswordLockoutLockedTime, "");
+            attrs.put(Provisioning.A_zmailPasswordLockoutMaxFailures, "");
+            attrs.put("-" + Provisioning.A_zmailPasswordLockoutEnabled, ProvisioningConstants.TRUE);
+            attrs.put(Provisioning.A_zmailPasswordLockoutLockedTime, "");
             mProv.modifyAttrs(acct, attrs);
         }
     }
@@ -317,12 +317,12 @@ public class TestProvDomainStatus {
             String domainStatus = ds.name();
             if (ds == DomainStatus.EMPTY) {
                 Map attrs = new HashMap<String, String>();
-                attrs.put(Provisioning.A_zimbraDomainStatus, "");
+                attrs.put(Provisioning.A_zmailDomainStatus, "");
                 mProv.modifyAttrs(domain, attrs);
                 domainStatus = DomainStatus.active.name();
             } else {
                 Map attrs = new HashMap<String, String>();
-                attrs.put(Provisioning.A_zimbraDomainStatus, domainStatus);
+                attrs.put(Provisioning.A_zmailDomainStatus, domainStatus);
                 mProv.modifyAttrs(domain, attrs);
             }
             
@@ -423,7 +423,7 @@ public class TestProvDomainStatus {
         public void MODIFY_PREFS_REQUEST() throws Exception {
             XMLElement req = new XMLElement(AccountConstants.MODIFY_PREFS_REQUEST);
             Element p = req.addElement(AccountConstants.E_PREF);
-            p.addAttribute(AccountConstants.A_NAME, Provisioning.A_zimbraPrefSkin);
+            p.addAttribute(AccountConstants.A_NAME, Provisioning.A_zmailPrefSkin);
             p.setText("sand");
             mCtx.mSoapClient.invoke(req);
         }
@@ -465,7 +465,7 @@ public class TestProvDomainStatus {
             XMLElement req = new XMLElement(AccountConstants.SEARCH_CALENDAR_RESOURCES_REQUEST);
             Element sf = req.addElement(AccountConstants.E_ENTRY_SEARCH_FILTER);
             Element cond = sf.addElement(AccountConstants.E_ENTRY_SEARCH_FILTER_SINGLECOND);
-            cond.addAttribute(AccountConstants.A_ENTRY_SEARCH_FILTER_ATTR, Provisioning.A_zimbraCalResType);
+            cond.addAttribute(AccountConstants.A_ENTRY_SEARCH_FILTER_ATTR, Provisioning.A_zmailCalResType);
             cond.addAttribute(AccountConstants.A_ENTRY_SEARCH_FILTER_OP, "eq");
             cond.addAttribute(AccountConstants.A_ENTRY_SEARCH_FILTER_VALUE, "Equipment");
             mCtx.mSoapClient.invoke(req);
@@ -591,7 +591,7 @@ public class TestProvDomainStatus {
             Element eId = req.addElement(AccountConstants.E_ID);
             eId.setText(mCtx.mTargetAcct.getId());
             Element eA = req.addElement(AccountConstants.E_A);
-            eA.addAttribute(AccountConstants.A_N, Provisioning.A_zimbraAttachmentsBlocked);
+            eA.addAttribute(AccountConstants.A_N, Provisioning.A_zmailAttachmentsBlocked);
             mCtx.mSoapClient.invoke(req);
         }
         
@@ -1034,7 +1034,7 @@ public class TestProvDomainStatus {
         String domainId = domain.getId();
         
         Map attrs = new HashMap<String, String>();
-        attrs.put(Provisioning.A_zimbraDomainStatus, DomainStatus.active.name());
+        attrs.put(Provisioning.A_zmailDomainStatus, DomainStatus.active.name());
         mProv.modifyAttrs(domain, attrs);
                 
         // auth to user, domain admin and global admin before we suspend the domain
@@ -1054,14 +1054,14 @@ public class TestProvDomainStatus {
         SoapClient clientGlobalAdmin = SoapClient.newInstance(globalAdmin, AccountType.ACCT_GLOBAL_ADMIN);
         
         attrs.clear();
-        attrs.put(Provisioning.A_zimbraDomainStatus, DomainStatus.suspended.name());
+        attrs.put(Provisioning.A_zmailDomainStatus, DomainStatus.suspended.name());
         mProv.modifyAttrs(domain, attrs);
         SoapCommands.run(new SoapTestContext(clientUser, AccountType.ACCT_USER, user, true, DOMAIN_NAME, domainId, testersSuspendedUser, TEST_ID));
         SoapCommands.run(new SoapTestContext(clientDomainAdmin, AccountType.ACCT_DOMAIN_ADMIN, user, true, DOMAIN_NAME, domainId, testersSuspendedDomainAdmin, TEST_ID));
         SoapCommands.run(new SoapTestContext(clientGlobalAdmin, AccountType.ACCT_GLOBAL_ADMIN, user, true, DOMAIN_NAME, domainId, testersSuspendedGlobalAdmin, TEST_ID));
         
         attrs.clear();
-        attrs.put(Provisioning.A_zimbraDomainStatus, DomainStatus.active.name());
+        attrs.put(Provisioning.A_zmailDomainStatus, DomainStatus.active.name());
         mProv.modifyAttrs(domain, attrs);
         SoapCommands.run(new SoapTestContext(clientUser, AccountType.ACCT_USER, user, false, DOMAIN_NAME, domainId, testersActiveUser, TEST_ID));
         SoapCommands.run(new SoapTestContext(clientDomainAdmin, AccountType.ACCT_DOMAIN_ADMIN, user, false, DOMAIN_NAME, domainId, testersActiveDomainAdmin, TEST_ID));
@@ -1094,5 +1094,5 @@ public class TestProvDomainStatus {
 }
 
 // TODO
-// - ModifyDomain with zimbraDomainStatus
+// - ModifyDomain with zmailDomainStatus
 // - DeleteDomain while is suspended status

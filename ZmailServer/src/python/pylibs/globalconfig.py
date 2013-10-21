@@ -40,59 +40,59 @@ class GlobalConfig(config.Config):
 
 		self.config = dict([(e.getKey(), e.getValue()) for e in sorted(c.output, key=lambda x: x.getKey())])
 
-		if self["zimbraMtaBlockedExtensionWarnRecipient"] == "TRUE" and self["zimbraAmavisQuarantineAccount"] is not None:
-			self["zimbraQuarantineBannedItems"] = 'TRUE'
+		if self["zmailMtaBlockedExtensionWarnRecipient"] == "TRUE" and self["zmailAmavisQuarantineAccount"] is not None:
+			self["zmailQuarantineBannedItems"] = 'TRUE'
 		else:
-			self["zimbraQuarantineBannedItems"] = 'FALSE'
+			self["zmailQuarantineBannedItems"] = 'FALSE'
 
-		if self["zimbraSSLExcludeCipherSuites"] is not None:
-			v = self["zimbraSSLExcludeCipherSuites"]
+		if self["zmailSSLExcludeCipherSuites"] is not None:
+			v = self["zmailSSLExcludeCipherSuites"]
 			v = str(v)
-			self["zimbraSSLExcludeCipherSuites"] = ' '.join(sorted(v.split(), key=str.lower))
-			self["zimbraSSLExcludeCipherSuitesXML"] = '\n'.join([''.join(('<Item>',val,'</Item>')) for val in self["zimbraSSLExcludeCipherSuites"].split()])
+			self["zmailSSLExcludeCipherSuites"] = ' '.join(sorted(v.split(), key=str.lower))
+			self["zmailSSLExcludeCipherSuitesXML"] = '\n'.join([''.join(('<Item>',val,'</Item>')) for val in self["zmailSSLExcludeCipherSuites"].split()])
 
-		if self["zimbraMtaRestriction"] is not None:
+		if self["zmailMtaRestriction"] is not None:
 			# Remove all the reject_rbl_client lines from MTA restriction and put the values in RBLs
-			q = re.sub(r'reject_rbl_client\s+\S+\s+','',self["zimbraMtaRestriction"])
-			p = re.findall(r'reject_rbl_client\s+(\S+)',self["zimbraMtaRestriction"])
-			self["zimbraMtaRestriction"] = q
-			self["zimbraMtaRestrictionRBLs"] = ' '.join(p)
+			q = re.sub(r'reject_rbl_client\s+\S+\s+','',self["zmailMtaRestriction"])
+			p = re.findall(r'reject_rbl_client\s+(\S+)',self["zmailMtaRestriction"])
+			self["zmailMtaRestriction"] = q
+			self["zmailMtaRestrictionRBLs"] = ' '.join(p)
 			# Remove all the reject_rhsbl_client lines from MTA restriction and put the values in RBLs
-			q = re.sub(r'reject_rhsbl_client\s+\S+\s+','',self["zimbraMtaRestriction"])
-			p = re.findall(r'reject_rhsbl_client\s+(\S+)',self["zimbraMtaRestriction"])
-			self["zimbraMtaRestriction"] = q
-			self["zimbraMtaRestrictionRHSBLCs"] = ' '.join(p)
+			q = re.sub(r'reject_rhsbl_client\s+\S+\s+','',self["zmailMtaRestriction"])
+			p = re.findall(r'reject_rhsbl_client\s+(\S+)',self["zmailMtaRestriction"])
+			self["zmailMtaRestriction"] = q
+			self["zmailMtaRestrictionRHSBLCs"] = ' '.join(p)
 			# Remove all the reject_rhsbl_sender lines from MTA restriction and put the values in RBLs
-			q = re.sub(r'reject_rhsbl_sender\s+\S+\s+','',self["zimbraMtaRestriction"])
-			p = re.findall(r'reject_rhsbl_sender\s+(\S+)',self["zimbraMtaRestriction"])
-			self["zimbraMtaRestriction"] = q
-			self["zimbraMtaRestrictionRHSBLSs"] = ' '.join(p)
+			q = re.sub(r'reject_rhsbl_sender\s+\S+\s+','',self["zmailMtaRestriction"])
+			p = re.findall(r'reject_rhsbl_sender\s+(\S+)',self["zmailMtaRestriction"])
+			self["zmailMtaRestriction"] = q
+			self["zmailMtaRestrictionRHSBLSs"] = ' '.join(p)
 			# Remove all the reject_rhsbl_reverse_client lines from MTA restriction and put the values in RBLs
-			q = re.sub(r'reject_rhsbl_reverse_client\s+\S+\s+','',self["zimbraMtaRestriction"])
-			p = re.findall(r'reject_rhsbl_reverse_client\s+(\S+)',self["zimbraMtaRestriction"])
-			self["zimbraMtaRestriction"] = q
-			self["zimbraMtaRestrictionRHSBLRCs"] = ' '.join(p)
+			q = re.sub(r'reject_rhsbl_reverse_client\s+\S+\s+','',self["zmailMtaRestriction"])
+			p = re.findall(r'reject_rhsbl_reverse_client\s+(\S+)',self["zmailMtaRestriction"])
+			self["zmailMtaRestriction"] = q
+			self["zmailMtaRestrictionRHSBLRCs"] = ' '.join(p)
 
-		if self["zimbraIPMode"] is not None:
-			self["zimbraIPv4BindAddress"] = "127.0.0.1"
-			v = self["zimbraIPMode"]
+		if self["zmailIPMode"] is not None:
+			self["zmailIPv4BindAddress"] = "127.0.0.1"
+			v = self["zmailIPMode"]
 			v = str(v)
 			v = v.lower()
 			if v == "ipv4":
-				self["zimbraLocalBindAddress"] = "127.0.0.1"
-				self["zimbraPostconfProtocol"] = "ipv4"
-				self["zimbraAmavisListenSockets"] = "'10024','10026','10032'"
-				self["zimbraInetMode"] = "inet"
+				self["zmailLocalBindAddress"] = "127.0.0.1"
+				self["zmailPostconfProtocol"] = "ipv4"
+				self["zmailAmavisListenSockets"] = "'10024','10026','10032'"
+				self["zmailInetMode"] = "inet"
 			if v == "ipv6":
-				self["zimbraLocalBindAddress"] = "::1"
-				self["zimbraPostconfProtocol"] = "ipv6"
-				self["zimbraAmavisListenSockets"] = "'[::1]:10024','[::1]:10026','[::1]:10032'"
-				self["zimbraInetMode"] = "inet6"
+				self["zmailLocalBindAddress"] = "::1"
+				self["zmailPostconfProtocol"] = "ipv6"
+				self["zmailAmavisListenSockets"] = "'[::1]:10024','[::1]:10026','[::1]:10032'"
+				self["zmailInetMode"] = "inet6"
 			if v == "both":
-				self["zimbraLocalBindAddress"] = "::1"
-				self["zimbraPostconfProtocol"] = "all"
-				self["zimbraAmavisListenSockets"] = "'10024','10026','10032','[::1]:10024','[::1]:10026','[::1]:10032'"
-				self["zimbraInetMode"] = "inet6"
+				self["zmailLocalBindAddress"] = "::1"
+				self["zmailPostconfProtocol"] = "all"
+				self["zmailAmavisListenSockets"] = "'10024','10026','10032','[::1]:10024','[::1]:10026','[::1]:10032'"
+				self["zmailInetMode"] = "inet6"
 
 		dt = time.clock()-t1
 		Log.logMsg(5,"globalconfig loaded in %.2f seconds" % dt)

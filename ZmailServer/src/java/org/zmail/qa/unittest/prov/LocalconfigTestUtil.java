@@ -12,13 +12,13 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.qa.unittest.prov;
+package org.zmail.qa.unittest.prov;
 
 import static org.junit.Assert.assertEquals;
 
 import java.io.IOException;
 
-import com.zimbra.common.localconfig.KnownKey;
+import org.zmail.common.localconfig.KnownKey;
 
 public class LocalconfigTestUtil {
     
@@ -27,7 +27,7 @@ public class LocalconfigTestUtil {
         
         Process process = null;
         try {
-            String command = "/opt/zimbra/bin/zmlocalconfig -e " + keyName + "=" + value;
+            String command = "/opt/zmail/bin/zmlocalconfig -e " + keyName + "=" + value;
             System.out.println(command);
             process = Runtime.getRuntime().exec(command);
         } catch (IOException e) {

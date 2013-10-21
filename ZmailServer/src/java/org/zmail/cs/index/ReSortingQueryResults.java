@@ -12,7 +12,7 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.index;
+package org.zmail.cs.index;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -20,23 +20,23 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 
-import com.zimbra.common.localconfig.DebugConfig;
-import com.zimbra.common.service.ServiceException;
+import org.zmail.common.localconfig.DebugConfig;
+import org.zmail.common.service.ServiceException;
 
 /**
  * QueryResults wrapper that implements Re-Sorting. It does this by caching **ALL** hits and then sorting them. It is
  * used for the Task sorts as well as specially localized language sorts
  */
-public final class ReSortingQueryResults implements ZimbraQueryResults {
+public final class ReSortingQueryResults implements ZmailQueryResults {
     private static final int MAX_BUFFERED_HITS = 10000;
 
-    private final ZimbraQueryResults results;
+    private final ZmailQueryResults results;
     private final SortBy sort;
-    private List<ZimbraHit> mHitBuffer = null;
+    private List<ZmailHit> mHitBuffer = null;
     private int iterOffset = 0;
     private final SearchParams params;
 
-    public ReSortingQueryResults(ZimbraQueryResults results, SortBy sort, SearchParams params) {
+    public ReSortingQueryResults(ZmailQueryResults results, SortBy sort, SearchParams params) {
         this.results = results;
         this.sort = sort;
         this.params = params;
@@ -53,9 +53,9 @@ public final class ReSortingQueryResults implements ZimbraQueryResults {
     }
 
     @Override
-    public ZimbraHit getNext() throws ServiceException {
+    public ZmailHit getNext() throws ServiceException {
         if (hasNext()) {
-            ZimbraHit toRet = peekNext();
+            ZmailHit toRet = peekNext();
             iterOffset++;
             return toRet;
         } else {
@@ -79,8 +79,8 @@ public final class ReSortingQueryResults implements ZimbraQueryResults {
     }
 
     @Override
-    public ZimbraHit peekNext() throws ServiceException {
-        List<ZimbraHit> buffer = getHitBuffer();
+    public ZmailHit peekNext() throws ServiceException {
+        List<ZmailHit> buffer = getHitBuffer();
         if (hasNext()) {
             return buffer.get(iterOffset);
         } else {
@@ -94,8 +94,8 @@ public final class ReSortingQueryResults implements ZimbraQueryResults {
     }
 
     @Override
-    public ZimbraHit skipToHit(int hitNo) throws ServiceException {
-        List<ZimbraHit> buffer = getHitBuffer();
+    public ZmailHit skipToHit(int hitNo) throws ServiceException {
+        List<ZmailHit> buffer = getHitBuffer();
         if (hitNo >= buffer.size()) {
             iterOffset = buffer.size();
         } else {
@@ -109,7 +109,7 @@ public final class ReSortingQueryResults implements ZimbraQueryResults {
         return results.isPreSorted();
     }
 
-    private List<ZimbraHit> getHitBuffer() throws ServiceException {
+    private List<ZmailHit> getHitBuffer() throws ServiceException {
         if (mHitBuffer == null) {
             bufferAllHits();
         }
@@ -132,56 +132,56 @@ public final class ReSortingQueryResults implements ZimbraQueryResults {
 
     private void bufferAllHits() throws ServiceException {
         assert(mHitBuffer == null);
-        mHitBuffer = new ArrayList<ZimbraHit>();
+        mHitBuffer = new ArrayList<ZmailHit>();
 
         // get the proper comparator
-        Comparator<ZimbraHit> comp;
+        Comparator<ZmailHit> comp;
         switch (sort) {
             default:
             case TASK_DUE_ASC:
-                comp = new Comparator<ZimbraHit>() {
+                comp = new Comparator<ZmailHit>() {
                     @Override
-                    public int compare(ZimbraHit lhs, ZimbraHit rhs) {
+                    public int compare(ZmailHit lhs, ZmailHit rhs) {
                         return TaskHit.compareByDueDate(true, lhs, rhs);
                     }
                 };
                 break;
             case TASK_DUE_DESC:
-                comp = new Comparator<ZimbraHit>() {
+                comp = new Comparator<ZmailHit>() {
                     @Override
-                    public int compare(ZimbraHit lhs, ZimbraHit rhs) {
+                    public int compare(ZmailHit lhs, ZmailHit rhs) {
                         return TaskHit.compareByDueDate(false, lhs, rhs);
                     }
                 };
                 break;
             case TASK_STATUS_ASC:
-                comp = new Comparator<ZimbraHit>() {
+                comp = new Comparator<ZmailHit>() {
                     @Override
-                    public int compare(ZimbraHit lhs, ZimbraHit rhs) {
+                    public int compare(ZmailHit lhs, ZmailHit rhs) {
                         return TaskHit.compareByStatus(true, lhs, rhs);
                     }
                 };
                 break;
             case TASK_STATUS_DESC:
-                comp = new Comparator<ZimbraHit>() {
+                comp = new Comparator<ZmailHit>() {
                     @Override
-                    public int compare(ZimbraHit lhs, ZimbraHit rhs) {
+                    public int compare(ZmailHit lhs, ZmailHit rhs) {
                         return TaskHit.compareByStatus(false, lhs, rhs);
                     }
                 };
                 break;
             case TASK_PERCENT_COMPLETE_ASC:
-                comp = new Comparator<ZimbraHit>() {
+                comp = new Comparator<ZmailHit>() {
                     @Override
-                    public int compare(ZimbraHit lhs, ZimbraHit rhs) {
+                    public int compare(ZmailHit lhs, ZmailHit rhs) {
                         return TaskHit.compareByCompletionPercent(true, lhs, rhs);
                     }
                 };
                 break;
             case TASK_PERCENT_COMPLETE_DESC:
-                comp = new Comparator<ZimbraHit>() {
+                comp = new Comparator<ZmailHit>() {
                     @Override
-                    public int compare(ZimbraHit lhs, ZimbraHit rhs) {
+                    public int compare(ZmailHit lhs, ZmailHit rhs) {
                         return TaskHit.compareByCompletionPercent(false, lhs, rhs);
                     }
                 };
@@ -200,7 +200,7 @@ public final class ReSortingQueryResults implements ZimbraQueryResults {
                 maxIfPresorted = maxIfPresorted + 1 + params.getOffset();
             }
         }
-        ZimbraHit cur;
+        ZmailHit cur;
         while ((cur = results.getNext()) != null) {
 
             if (isTaskSort()) {
@@ -223,12 +223,12 @@ public final class ReSortingQueryResults implements ZimbraQueryResults {
 
             // handle cursor filtering
             if (params != null && params.getCursor() != null) {
-                ZimbraHit firstHit = null;
+                ZmailHit firstHit = null;
                 if (params.getCursor().getSortValue() != null) {
                     firstHit = new ResultsPager.CursorHit(results, params.getCursor().getSortValue(),
                             params.getCursor().getItemId().getId());
                 }
-                ZimbraHit endHit = null;
+                ZmailHit endHit = null;
                 if (params.getCursor().getEndSortValue() != null) {
                     endHit = new ResultsPager.CursorHit(results, params.getCursor().getEndSortValue(), 0);
                 }

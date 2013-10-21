@@ -13,7 +13,7 @@
  * ***** END LICENSE BLOCK *****
  */
 
-package com.zimbra.cs.db;
+package org.zmail.cs.db;
 
 import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
@@ -44,7 +44,7 @@ import com.google.common.base.Joiner;
  * All API's that reference row and column indexes are 1-based, to match the behavior
  * of the JDBC <code>ResultSet</code> class.
  *
- * @see com.zimbra.cs.db.DbUtil
+ * @see org.zmail.cs.db.DbUtil
  *
  * @author bburtin
  */

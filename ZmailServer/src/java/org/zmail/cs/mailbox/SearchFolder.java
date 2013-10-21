@@ -12,17 +12,17 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.mailbox;
+package org.zmail.cs.mailbox;
 
 import com.google.common.base.Objects;
-import com.zimbra.cs.account.Provisioning;
-import com.zimbra.cs.db.DbMailItem;
-import com.zimbra.cs.mailbox.MailItem.CustomMetadata.CustomMetadataList;
-import com.zimbra.cs.session.PendingModifications.Change;
-import com.zimbra.common.mailbox.Color;
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.common.util.StringUtil;
-import com.zimbra.common.util.ZimbraLog;
+import org.zmail.cs.account.Provisioning;
+import org.zmail.cs.db.DbMailItem;
+import org.zmail.cs.mailbox.MailItem.CustomMetadata.CustomMetadataList;
+import org.zmail.cs.session.PendingModifications.Change;
+import org.zmail.common.mailbox.Color;
+import org.zmail.common.service.ServiceException;
+import org.zmail.common.util.StringUtil;
+import org.zmail.common.util.ZmailLog;
 
 /**
  * @since Aug 23, 2004
@@ -63,10 +63,10 @@ public final class SearchFolder extends Folder {
 
     /** Returns whether this search folder is visible through the IMAP
      *  interface.  At present, this is completely controlled by the COS
-     *  attribute <code>zimbraPrefImapSearchFoldersEnabled</code>. */
+     *  attribute <code>zmailPrefImapSearchFoldersEnabled</code>. */
     public boolean isImapVisible() {
         try {
-            return mMailbox.getAccount().getBooleanAttr(Provisioning.A_zimbraPrefImapSearchFoldersEnabled, true);
+            return mMailbox.getAccount().getBooleanAttr(Provisioning.A_zmailPrefImapSearchFoldersEnabled, true);
         } catch (ServiceException e) {
             return true;
         }
@@ -140,7 +140,7 @@ public final class SearchFolder extends Folder {
         data.setSubject(name);
         data.metadata = encodeMetadata(color, 1, 1, custom, query, types, sort);
         data.contentChanged(mbox);
-        ZimbraLog.mailop.info("Adding SearchFolder %s: id=%d, parentId=%d, parentName=%s.",
+        ZmailLog.mailop.info("Adding SearchFolder %s: id=%d, parentId=%d, parentName=%s.",
                 name, data.id, parent.getId(), parent.getName());
         new DbMailItem(mbox).create(data);
 

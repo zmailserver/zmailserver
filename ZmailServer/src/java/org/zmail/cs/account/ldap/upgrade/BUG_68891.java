@@ -12,28 +12,28 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.account.ldap.upgrade;
+package org.zmail.cs.account.ldap.upgrade;
 
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
 
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.common.util.StringUtil;
-import com.zimbra.cs.account.Entry;
-import com.zimbra.cs.account.Provisioning;
-import com.zimbra.cs.account.Entry.EntryType;
-import com.zimbra.cs.ldap.LdapClient;
-import com.zimbra.cs.ldap.LdapServerType;
-import com.zimbra.cs.ldap.LdapUsage;
-import com.zimbra.cs.ldap.ZLdapContext;
+import org.zmail.common.service.ServiceException;
+import org.zmail.common.util.StringUtil;
+import org.zmail.cs.account.Entry;
+import org.zmail.cs.account.Provisioning;
+import org.zmail.cs.account.Entry.EntryType;
+import org.zmail.cs.ldap.LdapClient;
+import org.zmail.cs.ldap.LdapServerType;
+import org.zmail.cs.ldap.LdapUsage;
+import org.zmail.cs.ldap.ZLdapContext;
 
 public class BUG_68891 extends UpgradeOp {
-    private static final String ATTR_NAME = Provisioning.A_zimbraGalLdapAttrMap;
+    private static final String ATTR_NAME = Provisioning.A_zmailGalLdapAttrMap;
     private static final String[] VALUES = {
-        "zimbraDistributionListSubscriptionPolicy=zimbraDistributionListSubscriptionPolicy",
-        "zimbraDistributionListUnsubscriptionPolicy=zimbraDistributionListUnsubscriptionPolicy"
+        "zmailDistributionListSubscriptionPolicy=zmailDistributionListSubscriptionPolicy",
+        "zmailDistributionListUnsubscriptionPolicy=zmailDistributionListUnsubscriptionPolicy"
     };
 
     @Override

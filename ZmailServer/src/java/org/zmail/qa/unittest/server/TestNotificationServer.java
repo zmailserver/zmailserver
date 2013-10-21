@@ -12,7 +12,7 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.qa.unittest.server;
+package org.zmail.qa.unittest.server;
 
 import java.util.HashMap;
 import java.util.List;
@@ -20,17 +20,17 @@ import java.util.Map;
 
 import junit.framework.TestCase;
 
-import com.zimbra.client.ZMailbox;
-import com.zimbra.client.ZMessage;
-import com.zimbra.common.account.ProvisioningConstants;
-import com.zimbra.cs.account.Account;
-import com.zimbra.cs.account.Provisioning;
-import com.zimbra.cs.db.DbOutOfOffice;
-import com.zimbra.cs.db.DbPool;
-import com.zimbra.cs.db.DbPool.DbConnection;
-import com.zimbra.cs.ldap.LdapUtil;
-import com.zimbra.cs.mailbox.Mailbox;
-import com.zimbra.qa.unittest.TestUtil;
+import org.zmail.client.ZMailbox;
+import org.zmail.client.ZMessage;
+import org.zmail.common.account.ProvisioningConstants;
+import org.zmail.cs.account.Account;
+import org.zmail.cs.account.Provisioning;
+import org.zmail.cs.db.DbOutOfOffice;
+import org.zmail.cs.db.DbPool;
+import org.zmail.cs.db.DbPool.DbConnection;
+import org.zmail.cs.ldap.LdapUtil;
+import org.zmail.cs.mailbox.Mailbox;
+import org.zmail.qa.unittest.TestUtil;
 
 /**
  * These tests cause a change in state to the out_of_office table.  This data needs to
@@ -65,17 +65,17 @@ extends TestCase {
         cleanUp();
 
         Account account = TestUtil.getAccount(RECIPIENT_NAME);
-        originalReplyEnabled = account.getBooleanAttr(Provisioning.A_zimbraPrefOutOfOfficeReplyEnabled, false);
-        originalReply = account.getAttr(Provisioning.A_zimbraPrefOutOfOfficeReply, "");
-        originalNotificationEnabled = account.getBooleanAttr(Provisioning.A_zimbraPrefNewMailNotificationEnabled, false);
-        originalNotificationAddress = account.getAttr(Provisioning.A_zimbraPrefNewMailNotificationAddress, "");
-        originalNotificationSubject = account.getAttr(Provisioning.A_zimbraNewMailNotificationSubject, "");
-        originalNotificationBody = account.getAttr(Provisioning.A_zimbraNewMailNotificationBody, "");
-        originalInterceptAddresses = account.getMultiAttr(Provisioning.A_zimbraInterceptAddress);
-        originalInterceptSendHeadersOnly = account.getAttr(Provisioning.A_zimbraInterceptSendHeadersOnly, "");
-        originalSaveToSent = account.getAttr(Provisioning.A_zimbraPrefSaveToSent, "");
-        originalMailForwardingAddress = account.getAttr(Provisioning.A_zimbraPrefMailForwardingAddress, "");
-        originalLocalDeliveryDisabled = account.getBooleanAttr(Provisioning.A_zimbraPrefMailLocalDeliveryDisabled, false);
+        originalReplyEnabled = account.getBooleanAttr(Provisioning.A_zmailPrefOutOfOfficeReplyEnabled, false);
+        originalReply = account.getAttr(Provisioning.A_zmailPrefOutOfOfficeReply, "");
+        originalNotificationEnabled = account.getBooleanAttr(Provisioning.A_zmailPrefNewMailNotificationEnabled, false);
+        originalNotificationAddress = account.getAttr(Provisioning.A_zmailPrefNewMailNotificationAddress, "");
+        originalNotificationSubject = account.getAttr(Provisioning.A_zmailNewMailNotificationSubject, "");
+        originalNotificationBody = account.getAttr(Provisioning.A_zmailNewMailNotificationBody, "");
+        originalInterceptAddresses = account.getMultiAttr(Provisioning.A_zmailInterceptAddress);
+        originalInterceptSendHeadersOnly = account.getAttr(Provisioning.A_zmailInterceptSendHeadersOnly, "");
+        originalSaveToSent = account.getAttr(Provisioning.A_zmailPrefSaveToSent, "");
+        originalMailForwardingAddress = account.getAttr(Provisioning.A_zmailPrefMailForwardingAddress, "");
+        originalLocalDeliveryDisabled = account.getBooleanAttr(Provisioning.A_zmailPrefMailLocalDeliveryDisabled, false);
     }
 
     /**
@@ -100,12 +100,12 @@ extends TestCase {
         // Turn on auto-reply and notification
         Account account = TestUtil.getAccount(RECIPIENT_NAME);
         Map<String, Object> attrs = new HashMap<String, Object>();
-        attrs.put(Provisioning.A_zimbraPrefOutOfOfficeReplyEnabled, ProvisioningConstants.TRUE);
-        attrs.put(Provisioning.A_zimbraPrefOutOfOfficeReply, OUT_OF_OFFICE_BODY);
-        attrs.put(Provisioning.A_zimbraPrefNewMailNotificationEnabled, ProvisioningConstants.TRUE);
-        attrs.put(Provisioning.A_zimbraPrefNewMailNotificationAddress, TestUtil.getAddress(SENDER_NAME));
-        attrs.put(Provisioning.A_zimbraNewMailNotificationSubject, NEW_MAIL_SUBJECT);
-        attrs.put(Provisioning.A_zimbraNewMailNotificationBody, NEW_MAIL_BODY);
+        attrs.put(Provisioning.A_zmailPrefOutOfOfficeReplyEnabled, ProvisioningConstants.TRUE);
+        attrs.put(Provisioning.A_zmailPrefOutOfOfficeReply, OUT_OF_OFFICE_BODY);
+        attrs.put(Provisioning.A_zmailPrefNewMailNotificationEnabled, ProvisioningConstants.TRUE);
+        attrs.put(Provisioning.A_zmailPrefNewMailNotificationAddress, TestUtil.getAddress(SENDER_NAME));
+        attrs.put(Provisioning.A_zmailNewMailNotificationSubject, NEW_MAIL_SUBJECT);
+        attrs.put(Provisioning.A_zmailNewMailNotificationBody, NEW_MAIL_BODY);
         Provisioning.getInstance().modifyAttrs(account, attrs);
 
         ZMailbox senderMbox = TestUtil.getZMailbox(SENDER_NAME);
@@ -147,10 +147,10 @@ extends TestCase {
 
         Account account = TestUtil.getAccount(RECIPIENT_NAME);
         Map<String, Object> attrs = new HashMap<String, Object>();
-        attrs.put(Provisioning.A_zimbraPrefOutOfOfficeReplyEnabled, ProvisioningConstants.TRUE);
-        attrs.put(Provisioning.A_zimbraPrefOutOfOfficeReply, "I am OOO");
-        attrs.put(Provisioning.A_zimbraPrefMailForwardingAddress, "abc@xyz.com");
-        attrs.put(Provisioning.A_zimbraPrefMailLocalDeliveryDisabled, ProvisioningConstants.TRUE);
+        attrs.put(Provisioning.A_zmailPrefOutOfOfficeReplyEnabled, ProvisioningConstants.TRUE);
+        attrs.put(Provisioning.A_zmailPrefOutOfOfficeReply, "I am OOO");
+        attrs.put(Provisioning.A_zmailPrefMailForwardingAddress, "abc@xyz.com");
+        attrs.put(Provisioning.A_zmailPrefMailLocalDeliveryDisabled, ProvisioningConstants.TRUE);
         Provisioning.getInstance().modifyAttrs(account, attrs);
 
         ZMailbox senderMbox = TestUtil.getZMailbox(SENDER_NAME);
@@ -176,23 +176,23 @@ extends TestCase {
         Account account = TestUtil.getAccount(RECIPIENT_NAME);
 
         Map<String, Object> attrs = new HashMap<String, Object>();
-        attrs.put(Provisioning.A_zimbraPrefOutOfOfficeReplyEnabled,
+        attrs.put(Provisioning.A_zmailPrefOutOfOfficeReplyEnabled,
             LdapUtil.getLdapBooleanString(originalReplyEnabled));
-        attrs.put(Provisioning.A_zimbraPrefOutOfOfficeReply, originalReply);
-        attrs.put(Provisioning.A_zimbraPrefNewMailNotificationEnabled,
+        attrs.put(Provisioning.A_zmailPrefOutOfOfficeReply, originalReply);
+        attrs.put(Provisioning.A_zmailPrefNewMailNotificationEnabled,
             LdapUtil.getLdapBooleanString(originalNotificationEnabled));
-        attrs.put(Provisioning.A_zimbraPrefNewMailNotificationAddress, originalNotificationAddress);
-        attrs.put(Provisioning.A_zimbraNewMailNotificationSubject, originalNotificationSubject);
-        attrs.put(Provisioning.A_zimbraNewMailNotificationBody, originalNotificationBody);
+        attrs.put(Provisioning.A_zmailPrefNewMailNotificationAddress, originalNotificationAddress);
+        attrs.put(Provisioning.A_zmailNewMailNotificationSubject, originalNotificationSubject);
+        attrs.put(Provisioning.A_zmailNewMailNotificationBody, originalNotificationBody);
         if (originalInterceptAddresses != null && originalInterceptAddresses.length == 0) {
-            attrs.put(Provisioning.A_zimbraInterceptAddress, "");
+            attrs.put(Provisioning.A_zmailInterceptAddress, "");
         } else {
-            attrs.put(Provisioning.A_zimbraInterceptAddress, originalInterceptAddresses);
+            attrs.put(Provisioning.A_zmailInterceptAddress, originalInterceptAddresses);
         }
-        attrs.put(Provisioning.A_zimbraInterceptSendHeadersOnly, originalInterceptSendHeadersOnly);
-        attrs.put(Provisioning.A_zimbraPrefSaveToSent, originalSaveToSent);
-        attrs.put(Provisioning.A_zimbraPrefMailForwardingAddress, originalMailForwardingAddress);
-        attrs.put(Provisioning.A_zimbraPrefMailLocalDeliveryDisabled,
+        attrs.put(Provisioning.A_zmailInterceptSendHeadersOnly, originalInterceptSendHeadersOnly);
+        attrs.put(Provisioning.A_zmailPrefSaveToSent, originalSaveToSent);
+        attrs.put(Provisioning.A_zmailPrefMailForwardingAddress, originalMailForwardingAddress);
+        attrs.put(Provisioning.A_zmailPrefMailLocalDeliveryDisabled,
                 LdapUtil.getLdapBooleanString(originalLocalDeliveryDisabled));
         Provisioning.getInstance().modifyAttrs(account, attrs);
 

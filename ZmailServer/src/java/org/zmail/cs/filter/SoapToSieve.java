@@ -12,7 +12,7 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.filter;
+package org.zmail.cs.filter;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -24,14 +24,14 @@ import java.util.TreeMap;
 import com.google.common.base.Joiner;
 import com.google.common.base.Objects;
 import com.google.common.base.Strings;
-import com.zimbra.common.filter.Sieve;
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.common.util.StringUtil;
-import com.zimbra.common.util.ZimbraLog;
-import com.zimbra.soap.mail.type.FilterAction;
-import com.zimbra.soap.mail.type.FilterRule;
-import com.zimbra.soap.mail.type.FilterTest;
-import com.zimbra.soap.mail.type.FilterTests;
+import org.zmail.common.filter.Sieve;
+import org.zmail.common.service.ServiceException;
+import org.zmail.common.util.StringUtil;
+import org.zmail.common.util.ZmailLog;
+import org.zmail.soap.mail.type.FilterAction;
+import org.zmail.soap.mail.type.FilterRule;
+import org.zmail.soap.mail.type.FilterTest;
+import org.zmail.soap.mail.type.FilterTests;
 
 public final class SoapToSieve {
 
@@ -208,7 +208,7 @@ public final class SoapToSieve {
         } else if (test instanceof FilterTest.TrueTest) {
             snippet = "true";
         } else {
-            ZimbraLog.soap.debug("Ignoring unexpected test: %s", test);
+            ZmailLog.soap.debug("Ignoring unexpected test: %s", test);
         }
 
         if (snippet != null && test.isNegative()) {
@@ -364,7 +364,7 @@ public final class SoapToSieve {
         } else if (action instanceof FilterAction.StopAction) {
             return "stop";
         } else {
-            ZimbraLog.soap.debug("Ignoring unexpected action: %s", action);
+            ZmailLog.soap.debug("Ignoring unexpected action: %s", action);
         }
         return null;
     }

@@ -13,15 +13,15 @@
  * ***** END LICENSE BLOCK *****
  */
 
-package com.zimbra.cs.index;
+package org.zmail.cs.index;
 
 import java.io.IOException;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.cs.mailbox.MailItem;
+import org.zmail.common.service.ServiceException;
+import org.zmail.cs.mailbox.MailItem;
 
 /**
  * A set of {@link UngroupedQueryResults} which groups by Message.
@@ -29,9 +29,9 @@ import com.zimbra.cs.mailbox.MailItem;
  * @author tim
  * @author ysasaki
  */
-final class MsgQueryResults extends ZimbraQueryResultsImpl {
-    private final ZimbraQueryResults results;
-    private ZimbraHit nextHit = null;
+final class MsgQueryResults extends ZmailQueryResultsImpl {
+    private final ZmailQueryResults results;
+    private ZmailHit nextHit = null;
 
     /**
      * Cache of local Message IDs we've seen this iteration -- used so
@@ -40,7 +40,7 @@ final class MsgQueryResults extends ZimbraQueryResultsImpl {
      */
     private final Set<Integer> mSeenMsgs = new HashSet<Integer>();
 
-    MsgQueryResults(ZimbraQueryResults topLevelQueryOperation, Set<MailItem.Type> types,
+    MsgQueryResults(ZmailQueryResults topLevelQueryOperation, Set<MailItem.Type> types,
             SortBy sort, SearchParams.Fetch fetch) {
         super(types, sort, fetch);
         results = topLevelQueryOperation;
@@ -58,9 +58,9 @@ final class MsgQueryResults extends ZimbraQueryResultsImpl {
      *
      * @return next hit
      */
-    private ZimbraHit internalGetNextHit() throws ServiceException {
+    private ZmailHit internalGetNextHit() throws ServiceException {
         while (results.hasNext()) {
-            ZimbraHit hit = results.getNext();
+            ZmailHit hit = results.getNext();
 
             MessageHit msgHit;
             if (hit instanceof MessageHit) {
@@ -79,7 +79,7 @@ final class MsgQueryResults extends ZimbraQueryResultsImpl {
             if (mSeenMsgs.add(iid)) { // skip if we've seen this Message before
                 // Iterate fwd a bit to see if we can pick up more message parts
                 while (results.hasNext()) {
-                    ZimbraHit next = results.peekNext();
+                    ZmailHit next = results.peekNext();
                     if (next.isLocal() && iid == next.getItemId()) {
                         results.getNext(); // move iterator fwd
                         if (next instanceof MessagePartHit) {
@@ -109,16 +109,16 @@ final class MsgQueryResults extends ZimbraQueryResultsImpl {
     }
 
     @Override
-    public ZimbraHit getNext() throws ServiceException {
+    public ZmailHit getNext() throws ServiceException {
         bufferNextHit();
-        ZimbraHit toRet = nextHit;
+        ZmailHit toRet = nextHit;
         assert(nextHit == null || (!(nextHit instanceof MessagePartHit) && !(nextHit instanceof ConversationHit)));
         nextHit = null;
         return toRet;
     }
 
     @Override
-    public ZimbraHit peekNext() throws ServiceException {
+    public ZmailHit peekNext() throws ServiceException {
         bufferNextHit();
         assert(nextHit == null || (!(nextHit instanceof MessagePartHit) && !(nextHit instanceof ConversationHit)));
         return nextHit;
@@ -130,7 +130,7 @@ final class MsgQueryResults extends ZimbraQueryResultsImpl {
     }
 
     @Override
-    public ZimbraHit skipToHit(int hitNo) throws ServiceException {
+    public ZmailHit skipToHit(int hitNo) throws ServiceException {
         if (hitNo > 0) {
             results.skipToHit(hitNo-1);
         } else {

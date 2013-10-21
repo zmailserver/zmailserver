@@ -12,12 +12,12 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.index.query;
+package org.zmail.cs.index.query;
 
 import java.util.Map;
 
 import com.google.common.collect.ImmutableMap;
-import com.zimbra.cs.index.LuceneFields;
+import org.zmail.cs.index.LuceneFields;
 
 /**
  * Query by special objects.

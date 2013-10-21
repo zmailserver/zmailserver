@@ -12,7 +12,7 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.gal;
+package org.zmail.cs.gal;
 
 import java.io.IOException;
 import java.util.HashSet;
@@ -21,50 +21,50 @@ import java.util.List;
 
 import com.google.common.base.Strings;
 import com.google.common.io.Closeables;
-import com.zimbra.common.account.ZAttrProvisioning.GalMode;
-import com.zimbra.common.localconfig.LC;
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.common.soap.Element;
-import com.zimbra.common.soap.AccountConstants;
-import com.zimbra.common.soap.MailConstants;
-import com.zimbra.common.soap.SoapFaultException;
-import com.zimbra.common.soap.SoapHttpTransport;
-import com.zimbra.common.soap.SoapProtocol;
-import com.zimbra.common.util.Pair;
-import com.zimbra.common.util.ZimbraLog;
-import com.zimbra.cs.account.AccessManager;
-import com.zimbra.cs.account.Account;
-import com.zimbra.cs.account.AuthToken;
-import com.zimbra.cs.account.DataSource;
-import com.zimbra.cs.account.Domain;
-import com.zimbra.cs.account.Group;
-import com.zimbra.cs.account.Provisioning;
-import com.zimbra.common.account.Key;
-import com.zimbra.common.account.Key.AccountBy;
-import com.zimbra.soap.admin.type.DataSourceType;
-import com.zimbra.cs.account.gal.GalOp;
-import com.zimbra.cs.account.accesscontrol.Rights.User;
-import com.zimbra.cs.db.DbDataSource;
-import com.zimbra.cs.db.DbDataSource.DataSourceItem;
-import com.zimbra.cs.gal.GalSearchConfig.GalType;
-import com.zimbra.cs.httpclient.URLUtil;
-import com.zimbra.cs.index.ContactHit;
-import com.zimbra.cs.index.ResultsPager;
-import com.zimbra.cs.index.SearchParams;
-import com.zimbra.cs.index.ZimbraHit;
-import com.zimbra.cs.index.ZimbraQueryResults;
-import com.zimbra.cs.ldap.LdapUtil;
-import com.zimbra.cs.mailbox.Contact;
-import com.zimbra.cs.mailbox.MailItem;
-import com.zimbra.cs.mailbox.MailServiceException;
-import com.zimbra.cs.mailbox.Mailbox;
-import com.zimbra.cs.mailbox.MailboxManager;
-import com.zimbra.cs.mailbox.OperationContext;
-import com.zimbra.cs.mailbox.util.TypedIdList;
-import com.zimbra.cs.service.AuthProvider;
-import com.zimbra.cs.service.util.ItemId;
-import com.zimbra.soap.ZimbraSoapContext;
-import com.zimbra.soap.type.GalSearchType;
+import org.zmail.common.account.ZAttrProvisioning.GalMode;
+import org.zmail.common.localconfig.LC;
+import org.zmail.common.service.ServiceException;
+import org.zmail.common.soap.Element;
+import org.zmail.common.soap.AccountConstants;
+import org.zmail.common.soap.MailConstants;
+import org.zmail.common.soap.SoapFaultException;
+import org.zmail.common.soap.SoapHttpTransport;
+import org.zmail.common.soap.SoapProtocol;
+import org.zmail.common.util.Pair;
+import org.zmail.common.util.ZmailLog;
+import org.zmail.cs.account.AccessManager;
+import org.zmail.cs.account.Account;
+import org.zmail.cs.account.AuthToken;
+import org.zmail.cs.account.DataSource;
+import org.zmail.cs.account.Domain;
+import org.zmail.cs.account.Group;
+import org.zmail.cs.account.Provisioning;
+import org.zmail.common.account.Key;
+import org.zmail.common.account.Key.AccountBy;
+import org.zmail.soap.admin.type.DataSourceType;
+import org.zmail.cs.account.gal.GalOp;
+import org.zmail.cs.account.accesscontrol.Rights.User;
+import org.zmail.cs.db.DbDataSource;
+import org.zmail.cs.db.DbDataSource.DataSourceItem;
+import org.zmail.cs.gal.GalSearchConfig.GalType;
+import org.zmail.cs.httpclient.URLUtil;
+import org.zmail.cs.index.ContactHit;
+import org.zmail.cs.index.ResultsPager;
+import org.zmail.cs.index.SearchParams;
+import org.zmail.cs.index.ZmailHit;
+import org.zmail.cs.index.ZmailQueryResults;
+import org.zmail.cs.ldap.LdapUtil;
+import org.zmail.cs.mailbox.Contact;
+import org.zmail.cs.mailbox.MailItem;
+import org.zmail.cs.mailbox.MailServiceException;
+import org.zmail.cs.mailbox.Mailbox;
+import org.zmail.cs.mailbox.MailboxManager;
+import org.zmail.cs.mailbox.OperationContext;
+import org.zmail.cs.mailbox.util.TypedIdList;
+import org.zmail.cs.service.AuthProvider;
+import org.zmail.cs.service.util.ItemId;
+import org.zmail.soap.ZmailSoapContext;
+import org.zmail.soap.type.GalSearchType;
 
 public class GalSearchControl {
     private GalSearchParams mParams;
@@ -91,8 +91,8 @@ public class GalSearchControl {
                 throw ServiceException.PERM_DENIED("unable to get account for GAL feature checking");
         }
 
-        if (!acct.getBooleanAttr(Provisioning.A_zimbraFeatureGalEnabled, false))
-            throw ServiceException.PERM_DENIED("GAL feature (" + Provisioning.A_zimbraFeatureGalEnabled + ") is not enabled");
+        if (!acct.getBooleanAttr(Provisioning.A_zmailFeatureGalEnabled, false))
+            throw ServiceException.PERM_DENIED("GAL feature (" + Provisioning.A_zmailFeatureGalEnabled + ") is not enabled");
 
         if (extraFeatAttr != null) {
             if (!acct.getBooleanAttr(extraFeatAttr, false))
@@ -102,7 +102,7 @@ public class GalSearchControl {
 
     public void autocomplete() throws ServiceException {
 
-        checkFeatureEnabled(Provisioning.A_zimbraFeatureGalAutoCompleteEnabled);
+        checkFeatureEnabled(Provisioning.A_zmailFeatureGalAutoCompleteEnabled);
 
         mParams.setOp(GalOp.autocomplete);
 
@@ -165,7 +165,7 @@ public class GalSearchControl {
 
     public void sync() throws ServiceException {
 
-        checkFeatureEnabled(Provisioning.A_zimbraFeatureGalSyncEnabled);
+        checkFeatureEnabled(Provisioning.A_zmailFeatureGalSyncEnabled);
 
         String id = Thread.currentThread().getName() + " / " + mParams.getUserInfo();
         int capacity = mParams.getDomain().getGalSyncMaxConcurrentClients();
@@ -233,7 +233,7 @@ public class GalSearchControl {
     }
 
     private void logCurrentSyncClients() {
-        if (!ZimbraLog.galconcurrency.isDebugEnabled())
+        if (!ZmailLog.galconcurrency.isDebugEnabled())
             return;
         StringBuilder buf = new StringBuilder();
         buf.append("limit reached, turning away ").append(mParams.getUserInfo());
@@ -243,7 +243,7 @@ public class GalSearchControl {
                 buf.append(" [").append(id).append("]");
             }
         }
-        ZimbraLog.galconcurrency.debug(buf.toString());
+        ZmailLog.galconcurrency.debug(buf.toString());
     }
     
     private Account getGalSyncAccountForSync() throws GalAccountNotConfiguredException, ServiceException {
@@ -297,11 +297,11 @@ public class GalSearchControl {
             if (ds.getType() != DataSourceType.gal)
                 continue;
             // check if there was any successful import from gal
-            if (ds.getAttr(Provisioning.A_zimbraGalLastSuccessfulSyncTimestamp, null) == null)
+            if (ds.getAttr(Provisioning.A_zmailGalLastSuccessfulSyncTimestamp, null) == null)
                 return false;
-            if (ds.getAttr(Provisioning.A_zimbraGalStatus).compareTo("enabled") != 0)
+            if (ds.getAttr(Provisioning.A_zmailGalStatus).compareTo("enabled") != 0)
                 return false;
-            if (ds.getAttr(Provisioning.A_zimbraDataSourceEnabled).compareTo("TRUE") != 0)
+            if (ds.getAttr(Provisioning.A_zmailDataSourceEnabled).compareTo("TRUE") != 0)
                 return false;
         }
         return true;
@@ -326,7 +326,7 @@ public class GalSearchControl {
         if (queryCallback != null) {
             String extraQuery = queryCallback.getMailboxSearchQuery();
             if (extraQuery != null) {
-                ZimbraLog.gal.debug("extra search query: " + extraQuery);
+                ZmailLog.gal.debug("extra search query: " + extraQuery);
                 searchQuery.append(" (").append(extraQuery).append(") AND");
             }
         }
@@ -336,10 +336,10 @@ public class GalSearchControl {
         for (DataSource ds : galAcct.getAllDataSources()) {
             if (ds.getType() != DataSourceType.gal)
                 continue;
-            String galType = ds.getAttr(Provisioning.A_zimbraGalType);
-            if (galMode == GalMode.ldap && galType.compareTo("zimbra") == 0)
+            String galType = ds.getAttr(Provisioning.A_zmailGalType);
+            if (galMode == GalMode.ldap && galType.compareTo("zmail") == 0)
                 continue;
-            if (galMode == GalMode.zimbra && galType.compareTo("ldap") == 0)
+            if (galMode == GalMode.zmail && galType.compareTo("ldap") == 0)
                 continue;
             if (first) searchQuery.append("("); else searchQuery.append(" OR");
             first = false;
@@ -349,18 +349,18 @@ public class GalSearchControl {
             searchQuery.append(")");
         switch (type) {
         case resource:
-            searchQuery.append(" AND #zimbraAccountCalendarUserType:RESOURCE");
+            searchQuery.append(" AND #zmailAccountCalendarUserType:RESOURCE");
             break;
         case group:
             searchQuery.append(" AND #type:group");
             break;
         case account:
-            searchQuery.append(" AND !(#zimbraAccountCalendarUserType:RESOURCE)");
+            searchQuery.append(" AND !(#zmailAccountCalendarUserType:RESOURCE)");
             break;
         case all:
             break;
         }
-        ZimbraLog.gal.debug("query: %s", searchQuery);
+        ZmailLog.gal.debug("query: %s", searchQuery);
         mParams.parseSearchParams(mParams.getRequest(), searchQuery.toString());
     }
 
@@ -372,17 +372,17 @@ public class GalSearchControl {
             searchQuery.append(query.replace("\"", "\\\"")); // escape quotes
             searchQuery.append("\" AND");
         }
-        searchQuery.append(" #zimbraAccountCalendarUserType:RESOURCE");
+        searchQuery.append(" #zmailAccountCalendarUserType:RESOURCE");
         for (DataSource ds : galAcct.getAllDataSources()) {
             if (ds.getType() != DataSourceType.gal)
                 continue;
-            String galType = ds.getAttr(Provisioning.A_zimbraGalType);
+            String galType = ds.getAttr(Provisioning.A_zmailGalType);
             if (galType.compareTo("ldap") == 0)
                 continue;
             searchQuery.append(" AND (");
             searchQuery.append(" inid:").append(ds.getFolderId());
             searchQuery.append(")");
-            ZimbraLog.gal.debug("query: "+searchQuery.toString());
+            ZmailLog.gal.debug("query: "+searchQuery.toString());
             mParams.parseSearchParams(mParams.getRequest(), searchQuery.toString());
             return true;
         }
@@ -391,7 +391,7 @@ public class GalSearchControl {
 
     private void accountSearch(Account galAcct) throws ServiceException, GalAccountNotConfiguredException {
         if (!galAcct.getAccountStatus().isActive()) {
-            ZimbraLog.gal.info("GalSync account "+galAcct.getId()+" is in "+galAcct.getAccountStatus().name());
+            ZmailLog.gal.info("GalSync account "+galAcct.getId()+" is in "+galAcct.getAccountStatus().name());
             throw new GalAccountNotConfiguredException();
         }
         if (Provisioning.onLocalServer(galAcct)) {
@@ -408,7 +408,7 @@ public class GalSearchControl {
                 if (!proxyGalAccountSearch(galAcct))
                     throw new GalAccountNotConfiguredException();
             } catch (IOException e) {
-                ZimbraLog.gal.warn("remote search on GalSync account failed for " + galAcct.getName(), e);
+                ZmailLog.gal.warn("remote search on GalSync account failed for " + galAcct.getName(), e);
                 // let the request fallback to ldap based search
                 throw new GalAccountNotConfiguredException();
             }
@@ -417,7 +417,7 @@ public class GalSearchControl {
 
     private void accountSync(Account galAcct) throws ServiceException, GalAccountNotConfiguredException {
         if (!galAcct.getAccountStatus().isActive()) {
-            ZimbraLog.gal.info("GalSync account "+galAcct.getId()+" is in "+galAcct.getAccountStatus().name());
+            ZmailLog.gal.info("GalSync account "+galAcct.getId()+" is in "+galAcct.getAccountStatus().name());
             throw new GalAccountNotConfiguredException();
         }
         if (Provisioning.onLocalServer(galAcct)) {
@@ -427,7 +427,7 @@ public class GalSearchControl {
                 if (!proxyGalAccountSearch(galAcct))
                     throw new GalAccountNotConfiguredException();
             } catch (IOException e) {
-                ZimbraLog.gal.warn("remote sync on GalSync account failed for " + galAcct.getName(), e);
+                ZmailLog.gal.warn("remote sync on GalSync account failed for " + galAcct.getName(), e);
                 // remote server may be down, return the same sync token so that client can try again.
                 mParams.getResultCallback().setNewToken(mParams.getGalSyncToken());
             }
@@ -435,7 +435,7 @@ public class GalSearchControl {
     }
 
     private boolean doLocalGalAccountSearch(Account galAcct) {
-        ZimbraQueryResults zqr = null;
+        ZmailQueryResults zqr = null;
         try {
             Mailbox mbox = MailboxManager.getInstance().getMailboxByAccount(galAcct);
             SearchParams searchParams = mParams.getSearchParams();
@@ -444,7 +444,7 @@ public class GalSearchControl {
             GalSearchResultCallback callback = mParams.getResultCallback();
             int num = 0;
             while (pager.hasNext()) {
-                ZimbraHit hit = pager.getNextHit();
+                ZmailHit hit = pager.getNextHit();
                 if (hit instanceof ContactHit) {
                     Element contactElem = callback.handleContact(((ContactHit)hit).getContact());
                     if (contactElem != null)
@@ -458,7 +458,7 @@ public class GalSearchControl {
             callback.setQueryOffset(searchParams.getOffset());
             callback.setHasMoreResult(pager.hasNext());
         } catch (Exception e) {
-            ZimbraLog.gal.warn("search on GalSync account failed for %s", galAcct.getId(), e);
+            ZmailLog.gal.warn("search on GalSync account failed for %s", galAcct.getId(), e);
             return false;
         } finally {
             Closeables.closeQuietly(zqr);
@@ -483,7 +483,7 @@ public class GalSearchControl {
             for (DataSource ds : galAcct.getAllDataSources()) {
                 if (ds.getType() != DataSourceType.gal)
                     continue;
-                String galType = ds.getAttr(Provisioning.A_zimbraGalType);
+                String galType = ds.getAttr(Provisioning.A_zmailGalType);
                 if (galType.compareTo("ldap") == 0)
                     continue;
                 int fid = ds.getFolderId();
@@ -501,13 +501,13 @@ public class GalSearchControl {
                     MailItem item = mbox.getItemById(octxt, itemId, MailItem.Type.CONTACT);
                     if (item instanceof Contact) {
                         Contact c = (Contact)item;
-                        String accountType = c.get("zimbraAccountCalendarUserType");
+                        String accountType = c.get("zmailAccountCalendarUserType");
                         if (accountType != null && accountType.equals("RESOURCE"))
                             callback.handleContact(c);
                     }
                     count++;
                     if (count % 100 == 0)
-                        ZimbraLog.gal.debug("processing resources #"+count);
+                        ZmailLog.gal.debug("processing resources #"+count);
                 }
                 break;
             }
@@ -517,10 +517,10 @@ public class GalSearchControl {
         for (DataSource ds : galAcct.getAllDataSources()) {
             if (ds.getType() != DataSourceType.gal)
                 continue;
-            String galType = ds.getAttr(Provisioning.A_zimbraGalType);
-            if (galMode == GalMode.ldap && galType.compareTo("zimbra") == 0)
+            String galType = ds.getAttr(Provisioning.A_zmailGalType);
+            if (galMode == GalMode.ldap && galType.compareTo("zmail") == 0)
                 continue;
-            if (galMode == GalMode.zimbra && galType.compareTo("ldap") == 0)
+            if (galMode == GalMode.zmail && galType.compareTo("ldap") == 0)
                 continue;
             int fid = ds.getFolderId();
             DataSourceItem folderMapping = DbDataSource.getMapping(ds, fid);
@@ -536,7 +536,7 @@ public class GalSearchControl {
                 deleted = mbox.getTombstones(changeId).getAllIds();
             } catch (MailServiceException e) {
                 if (MailServiceException.MUST_RESYNC == e.getCode()) {
-                    ZimbraLog.gal.warn("sync token too old, deleted items will not be handled", e);
+                    ZmailLog.gal.warn("sync token too old, deleted items will not be handled", e);
                 } else {
                     throw e;
                 }
@@ -553,7 +553,7 @@ public class GalSearchControl {
                 callback.handleContact((Contact)item);
             count++;
             if (count % 100 == 0)
-                ZimbraLog.gal.debug("processing #"+count);
+                ZmailLog.gal.debug("processing #"+count);
         }
 
         if (deleted != null) {
@@ -562,7 +562,7 @@ public class GalSearchControl {
             }
         }
         GalSyncToken newToken = new GalSyncToken(syncToken, galAcct.getId(), mbox.getLastChangeID());
-        ZimbraLog.gal.debug("computing new sync token for "+galAcct.getId()+": "+newToken);
+        ZmailLog.gal.debug("computing new sync token for "+galAcct.getId()+": "+newToken);
         callback.setNewToken(newToken);
         callback.setHasMoreResult(false);
     }
@@ -575,7 +575,7 @@ public class GalSearchControl {
             AuthToken auth = mParams.getAuthToken();
             transport.setAuthToken((auth == null) ? AuthProvider.getAdminAuthToken().toZAuthToken() : auth.toZAuthToken());
 
-            ZimbraSoapContext zsc = mParams.getSoapContext();
+            ZmailSoapContext zsc = mParams.getSoapContext();
             if (zsc != null) {
                 transport.setResponseProtocol(zsc.getResponseProtocol());
 
@@ -613,7 +613,7 @@ public class GalSearchControl {
             String newTokenStr = resp.getAttribute(MailConstants.A_TOKEN, null);
             if (newTokenStr != null) {
                 GalSyncToken newToken = new GalSyncToken(newTokenStr);
-                ZimbraLog.gal.debug("computing new sync token for proxied account "+galSyncAcct.getId()+": "+newToken);
+                ZmailLog.gal.debug("computing new sync token for proxied account "+galSyncAcct.getId()+": "+newToken);
                 callback.setNewToken(newToken);
             }
             boolean hasMore =  resp.getAttributeBool(MailConstants.A_QUERY_MORE, false);
@@ -633,7 +633,7 @@ public class GalSearchControl {
                 // return true so we do *not* fallback to do the ldap search.
                 return true;
             } else {
-                ZimbraLog.gal.warn("remote search on GalSync account failed for " + galSyncAcct.getName(), e);
+                ZmailLog.gal.warn("remote search on GalSync account failed for " + galSyncAcct.getName(), e);
                 return false;
             }
         }
@@ -649,7 +649,7 @@ public class GalSearchControl {
 
         if (needResources()) {
             mParams.setType(GalSearchType.resource);
-            mParams.createSearchConfig(GalType.zimbra);
+            mParams.createSearchConfig(GalType.zmail);
             try {
                 prov.searchGal(mParams);
             } catch (Exception e) {
@@ -685,8 +685,8 @@ public class GalSearchControl {
         }
         GalType type = GalType.ldap;
         if (galMode != GalMode.ldap) {
-            // do zimbra gal search
-            type = GalType.zimbra;
+            // do zmail gal search
+            type = GalType.zmail;
         }
         mParams.createSearchConfig(type);
         try {
@@ -720,7 +720,7 @@ public class GalSearchControl {
 
 
     // bug 46608
-    // do zimbra resources search if galMode == ldap
+    // do zmail resources search if galMode == ldap
     private boolean needResources() throws ServiceException {
         Domain domain = mParams.getDomain();
         return (domain.getGalMode() == GalMode.ldap &&
@@ -748,10 +748,10 @@ public class GalSearchControl {
         // if (!authedAcct.)
         //     return false;
 
-        // check permission if is is a Zimbra DL
+        // check permission if is is a Zmail DL
         Provisioning prov = Provisioning.getInstance();
 
-        if (prov.isDistributionList(groupName)) {  // quick check to see if this is a zimbra group
+        if (prov.isDistributionList(groupName)) {  // quick check to see if this is a zmail group
 
             try {
                 // get the dl object for ACL checking
@@ -760,7 +760,7 @@ public class GalSearchControl {
                 // the DL might have been deleted since the last GAL sync account sync, throw.
                 // or should we just let the request through?
                 if (group == null) {
-                    ZimbraLog.gal.warn("unable to find group " + groupName 
+                    ZmailLog.gal.warn("unable to find group " + groupName 
                             + "(" + groupId + ") for permission checking");
                     return false;
                 }
@@ -770,7 +770,7 @@ public class GalSearchControl {
                 }
                 
             } catch (ServiceException e) {
-                ZimbraLog.gal.warn("unable to check permission for gal group expansion: " + groupName);
+                ZmailLog.gal.warn("unable to check permission for gal group expansion: " + groupName);
                 return false;
             }
         }

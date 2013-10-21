@@ -16,20 +16,20 @@
 ulimit -n 32768
 ulimit -c unlimited
 ulimit -v unlimited
-export LD_PRELOAD=/opt/zimbra/tcmalloc/lib/libtcmalloc_minimal.so
+export LD_PRELOAD=/opt/zmail/tcmalloc/lib/libtcmalloc_minimal.so
 
 umask 027
-source /opt/zimbra/bin/zmshutil || exit 1
+source /opt/zmail/bin/zmshutil || exit 1
 zmsetvars \
-	zimbra_home 
+	zmail_home 
 
-if [ ! -x /opt/zimbra/openldap/sbin/slapadd ]; then
+if [ ! -x /opt/zmail/openldap/sbin/slapadd ]; then
 	exit 0
 fi
 
 u=`id -un`
-if [ $u != ${zimbra_user} ]; then
-    echo "Error: must be run as ${zimbra_user} user"
+if [ $u != ${zmail_user} ]; then
+    echo "Error: must be run as ${zmail_user} user"
     exit 1
 fi
 
@@ -55,13 +55,13 @@ else
 fi
 
 if [ x$CONFIG = "xyes" ]; then
-	${zimbra_home}/openldap/sbin/slapadd -q -F ${zimbra_home}/data/ldap/config -n 0 -l $SRC
+	${zmail_home}/openldap/sbin/slapadd -q -F ${zmail_home}/data/ldap/config -n 0 -l $SRC
 	RETVAL=$?
 elif [ x$ALOG = "xyes" ]; then
-	${zimbra_home}/openldap/sbin/slapadd -q -F ${zimbra_home}/data/ldap/config -b "cn=accesslog" -l $SRC
+	${zmail_home}/openldap/sbin/slapadd -q -F ${zmail_home}/data/ldap/config -b "cn=accesslog" -l $SRC
 	RETVAL=$?
 else
-	${zimbra_home}/openldap/sbin/slapadd -w -q -F ${zimbra_home}/data/ldap/config -b "" -l $SRC
+	${zmail_home}/openldap/sbin/slapadd -w -q -F ${zmail_home}/data/ldap/config -b "" -l $SRC
 	RETVAL=$?
 fi
 

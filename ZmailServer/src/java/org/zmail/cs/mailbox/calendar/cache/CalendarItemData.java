@@ -13,16 +13,16 @@
  * ***** END LICENSE BLOCK *****
  */
 
-package com.zimbra.cs.mailbox.calendar.cache;
+package org.zmail.cs.mailbox.calendar.cache;
 
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.cs.db.DbTag;
-import com.zimbra.cs.mailbox.MailItem;
-import com.zimbra.cs.mailbox.Metadata;
+import org.zmail.common.service.ServiceException;
+import org.zmail.cs.db.DbTag;
+import org.zmail.cs.mailbox.MailItem;
+import org.zmail.cs.mailbox.Metadata;
 
 // an appointment/task and expanded instances over a time range
 public class CalendarItemData {

@@ -12,25 +12,25 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.service.formatter;
+package org.zmail.cs.service.formatter;
 
 import java.io.IOException;
 import java.util.Collection;
 import java.util.Date;
 import java.util.Iterator;
 
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.common.soap.Element;
-import com.zimbra.common.util.Constants;
-import com.zimbra.common.util.DateUtil;
-import com.zimbra.cs.mailbox.CalendarItem;
-import com.zimbra.cs.mailbox.MailItem;
-import com.zimbra.cs.mailbox.Message;
-import com.zimbra.cs.mailbox.CalendarItem.Instance;
-import com.zimbra.cs.mailbox.calendar.Invite;
-import com.zimbra.cs.mailbox.calendar.InviteInfo;
-import com.zimbra.cs.service.UserServletContext;
-import com.zimbra.cs.service.formatter.FormatterFactory.FormatType;
+import org.zmail.common.service.ServiceException;
+import org.zmail.common.soap.Element;
+import org.zmail.common.util.Constants;
+import org.zmail.common.util.DateUtil;
+import org.zmail.cs.mailbox.CalendarItem;
+import org.zmail.cs.mailbox.MailItem;
+import org.zmail.cs.mailbox.Message;
+import org.zmail.cs.mailbox.CalendarItem.Instance;
+import org.zmail.cs.mailbox.calendar.Invite;
+import org.zmail.cs.mailbox.calendar.InviteInfo;
+import org.zmail.cs.service.UserServletContext;
+import org.zmail.cs.service.formatter.FormatterFactory.FormatType;
 
 public class AtomFormatter extends Formatter {
     @Override
@@ -50,8 +50,8 @@ public class AtomFormatter extends Formatter {
 
             feed.addAttribute("xmlns", "http://www.w3.org/2005/Atom");
 
-            feed.addElement("title").setText("Zimbra " + context.itemPath);
-            feed.addElement("generator").setText("Zimbra Atom Feed Servlet");
+            feed.addElement("title").setText("Zmail " + context.itemPath);
+            feed.addElement("generator").setText("Zmail Atom Feed Servlet");
             feed.addElement("id").setText(context.req.getRequestURL().toString());
             feed.addElement("updated").setText(DateUtil.toISO8601(new Date(context.targetMailbox.getLastChangeDate())));
 

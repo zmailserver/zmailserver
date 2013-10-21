@@ -12,7 +12,7 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.session;
+package org.zmail.cs.session;
 
 import java.io.BufferedWriter;
 import java.io.IOException;
@@ -31,17 +31,17 @@ import org.apache.commons.cli.Options;
 import org.apache.commons.cli.ParseException;
 import org.apache.commons.cli.PosixParser;
 
-import com.zimbra.common.auth.ZAuthToken;
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.common.soap.AdminConstants;
-import com.zimbra.common.soap.Element;
-import com.zimbra.common.soap.MailConstants;
-import com.zimbra.common.soap.SoapFaultException;
-import com.zimbra.common.soap.SoapHttpTransport;
-import com.zimbra.common.soap.Element.XMLElement;
-import com.zimbra.common.soap.SoapTransport.DebugListener;
-import com.zimbra.common.util.CliUtil;
-import com.zimbra.common.zclient.ZClientException;
+import org.zmail.common.auth.ZAuthToken;
+import org.zmail.common.service.ServiceException;
+import org.zmail.common.soap.AdminConstants;
+import org.zmail.common.soap.Element;
+import org.zmail.common.soap.MailConstants;
+import org.zmail.common.soap.SoapFaultException;
+import org.zmail.common.soap.SoapHttpTransport;
+import org.zmail.common.soap.Element.XMLElement;
+import org.zmail.common.soap.SoapTransport.DebugListener;
+import org.zmail.common.util.CliUtil;
+import org.zmail.common.zclient.ZClientException;
 
 /**
  * Test utility for verifying the state of a running wait set
@@ -144,7 +144,7 @@ public class WaitSetValidator implements DebugListener {
     }
     
     protected boolean validateSessionStatus(WaitSetSession wss) throws ServiceException {
-        XMLElement req = new com.zimbra.common.soap.Element.XMLElement(MailConstants.SYNC_REQUEST);
+        XMLElement req = new org.zmail.common.soap.Element.XMLElement(MailConstants.SYNC_REQUEST);
         req.addAttribute("token", wss.token);
         Element syncResponse = invokeOnTargetAccount(req, wss.accountId);
         String newToken = syncResponse.getAttribute("token");

@@ -13,14 +13,14 @@
  * ***** END LICENSE BLOCK *****
  */
 
-package com.zimbra.cs.mime;
+package org.zmail.cs.mime;
 
 import java.io.File;
 import java.io.IOException;
 
 import javax.mail.internet.MimeMessage;
 
-import com.zimbra.cs.store.Blob;
+import org.zmail.cs.store.Blob;
 
 public class ParsedMessageOptions {
 

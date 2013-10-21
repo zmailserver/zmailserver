@@ -12,7 +12,7 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.qa.unittest.prov.soap;
+package org.zmail.qa.unittest.prov.soap;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
@@ -22,29 +22,29 @@ import org.junit.AfterClass;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.common.soap.SoapTransport;
-import com.zimbra.cs.account.Account;
-import com.zimbra.cs.account.Domain;
-import com.zimbra.cs.account.Provisioning;
-import com.zimbra.qa.unittest.TestUtil;
-import com.zimbra.soap.account.message.AuthRequest;
-import com.zimbra.soap.account.message.AutoCompleteGalRequest;
-import com.zimbra.soap.account.message.ChangePasswordRequest;
-import com.zimbra.soap.account.message.CreateIdentityRequest;
-import com.zimbra.soap.account.message.CreateSignatureRequest;
-import com.zimbra.soap.account.type.Identity;
-import com.zimbra.soap.account.type.Signature;
-import com.zimbra.soap.mail.message.CreateDataSourceRequest;
-import com.zimbra.soap.mail.message.CreateDataSourceResponse;
-import com.zimbra.soap.mail.message.CreateFolderRequest;
-import com.zimbra.soap.mail.message.CreateFolderResponse;
-import com.zimbra.soap.mail.message.DeleteDataSourceRequest;
-import com.zimbra.soap.mail.type.MailPop3DataSource;
-import com.zimbra.soap.mail.type.MdsConnectionType;
-import com.zimbra.soap.mail.type.NewFolderSpec;
-import com.zimbra.soap.mail.type.Pop3DataSourceNameOrId;
-import com.zimbra.soap.type.AccountSelector;
+import org.zmail.common.service.ServiceException;
+import org.zmail.common.soap.SoapTransport;
+import org.zmail.cs.account.Account;
+import org.zmail.cs.account.Domain;
+import org.zmail.cs.account.Provisioning;
+import org.zmail.qa.unittest.TestUtil;
+import org.zmail.soap.account.message.AuthRequest;
+import org.zmail.soap.account.message.AutoCompleteGalRequest;
+import org.zmail.soap.account.message.ChangePasswordRequest;
+import org.zmail.soap.account.message.CreateIdentityRequest;
+import org.zmail.soap.account.message.CreateSignatureRequest;
+import org.zmail.soap.account.type.Identity;
+import org.zmail.soap.account.type.Signature;
+import org.zmail.soap.mail.message.CreateDataSourceRequest;
+import org.zmail.soap.mail.message.CreateDataSourceResponse;
+import org.zmail.soap.mail.message.CreateFolderRequest;
+import org.zmail.soap.mail.message.CreateFolderResponse;
+import org.zmail.soap.mail.message.DeleteDataSourceRequest;
+import org.zmail.soap.mail.type.MailPop3DataSource;
+import org.zmail.soap.mail.type.MdsConnectionType;
+import org.zmail.soap.mail.type.NewFolderSpec;
+import org.zmail.soap.mail.type.Pop3DataSourceNameOrId;
+import org.zmail.soap.type.AccountSelector;
 
 public class TestAccess extends SoapTest {
     private static final String PASSWORD = "test123";
@@ -127,7 +127,7 @@ public class TestAccess extends SoapTest {
     @Test
     public void Auth() throws Exception {
         AccountSelector acct =
-            new AccountSelector(com.zimbra.soap.type.AccountBy.name, OTHER_ACCT_NAME);
+            new AccountSelector(org.zmail.soap.type.AccountBy.name, OTHER_ACCT_NAME);
         AuthRequest req = new AuthRequest(acct, PASSWORD);
 
         accessTest(Perm.PERM_AUTH_TOKEN_IGNORED, req);
@@ -135,14 +135,14 @@ public class TestAccess extends SoapTest {
 
     @Test
     public void AutoCompleteGal() throws Exception {
-        AutoCompleteGalRequest req = AutoCompleteGalRequest.createForName("zimbra");
+        AutoCompleteGalRequest req = AutoCompleteGalRequest.createForName("zmail");
         accessTest(Perm.PERM_SELF_ONLY, req);
     }
 
     @Test
     public void ChangePassword() throws Exception {
         AccountSelector acct =
-            new AccountSelector(com.zimbra.soap.type.AccountBy.name, ACCT_NAME);
+            new AccountSelector(org.zmail.soap.type.AccountBy.name, ACCT_NAME);
         ChangePasswordRequest req = new ChangePasswordRequest(acct, PASSWORD, PASSWORD);
         accessTest(Perm.PERM_AUTH_TOKEN_IGNORED, req);
 
@@ -354,7 +354,7 @@ public class TestAccess extends SoapTest {
     private void ModifyPrefs(Role role, Perm perm) throws Exception {
         XMLElement req = new XMLElement(AccountConstants.MODIFY_PREFS_REQUEST);
         Element p = req.addElement(AccountConstants.E_PREF);
-        p.addAttribute(AccountConstants.A_NAME, Provisioning.A_zimbraPrefSkin);
+        p.addAttribute(AccountConstants.A_NAME, Provisioning.A_zmailPrefSkin);
         p.setText("beach");
         accessTest(role, perm, req);
     }
@@ -378,7 +378,7 @@ public class TestAccess extends SoapTest {
         XMLElement req = new XMLElement(AccountConstants.SEARCH_CALENDAR_RESOURCES_REQUEST);
         Element sf = req.addElement(AccountConstants.E_ENTRY_SEARCH_FILTER);
         Element cond = sf.addElement(AccountConstants.E_ENTRY_SEARCH_FILTER_SINGLECOND);
-        cond.addAttribute(AccountConstants.A_ENTRY_SEARCH_FILTER_ATTR, Provisioning.A_zimbraCalResType);
+        cond.addAttribute(AccountConstants.A_ENTRY_SEARCH_FILTER_ATTR, Provisioning.A_zmailCalResType);
         cond.addAttribute(AccountConstants.A_ENTRY_SEARCH_FILTER_OP, "eq");
         cond.addAttribute(AccountConstants.A_ENTRY_SEARCH_FILTER_VALUE, "Equipment");
         accessTest(role, perm, req);

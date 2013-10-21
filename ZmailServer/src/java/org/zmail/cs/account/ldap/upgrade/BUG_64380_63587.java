@@ -12,7 +12,7 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.account.ldap.upgrade;
+package org.zmail.cs.account.ldap.upgrade;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -21,39 +21,39 @@ import java.util.Map;
 import java.util.Set;
 
 import com.google.common.collect.Lists;
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.common.util.Pair;
-import com.zimbra.common.util.StringUtil;
-import com.zimbra.cs.account.Entry;
-import com.zimbra.cs.account.Provisioning;
-import com.zimbra.cs.account.Entry.EntryType;
-import com.zimbra.cs.ldap.LdapClient;
-import com.zimbra.cs.ldap.LdapServerType;
-import com.zimbra.cs.ldap.LdapUsage;
-import com.zimbra.cs.ldap.ZLdapContext;
+import org.zmail.common.service.ServiceException;
+import org.zmail.common.util.Pair;
+import org.zmail.common.util.StringUtil;
+import org.zmail.cs.account.Entry;
+import org.zmail.cs.account.Provisioning;
+import org.zmail.cs.account.Entry.EntryType;
+import org.zmail.cs.ldap.LdapClient;
+import org.zmail.cs.ldap.LdapServerType;
+import org.zmail.cs.ldap.LdapUsage;
+import org.zmail.cs.ldap.ZLdapContext;
 
 public class BUG_64380_63587 extends UpgradeOp {
     
-    private static final String ATTR_NAME = Provisioning.A_zimbraGalLdapFilterDef;
+    private static final String ATTR_NAME = Provisioning.A_zmailGalLdapFilterDef;
     
     private static List<Pair> VALUES = Lists.newArrayList(
-            new Pair("zimbraSync:(&(|(displayName=*)(cn=*)(sn=*)(gn=*)(mail=*)(zimbraMailDeliveryAddress=*)(zimbraMailAlias=*))(|(objectclass=zimbraAccount)(objectclass=zimbraDistributionList))(!(zimbraHideInGal=TRUE))(!(zimbraIsSystemResource=TRUE)))",
-                     "zimbraSync:(&(|(objectclass=zimbraAccount)(objectclass=zimbraDistributionList))(!(&(objectclass=zimbraCalendarResource)(!(zimbraAccountStatus=active))))(!(zimbraHideInGal=TRUE))(!(zimbraIsSystemResource=TRUE)))"), 
+            new Pair("zmailSync:(&(|(displayName=*)(cn=*)(sn=*)(gn=*)(mail=*)(zmailMailDeliveryAddress=*)(zmailMailAlias=*))(|(objectclass=zmailAccount)(objectclass=zmailDistributionList))(!(zmailHideInGal=TRUE))(!(zmailIsSystemResource=TRUE)))",
+                     "zmailSync:(&(|(objectclass=zmailAccount)(objectclass=zmailDistributionList))(!(&(objectclass=zmailCalendarResource)(!(zmailAccountStatus=active))))(!(zmailHideInGal=TRUE))(!(zmailIsSystemResource=TRUE)))"), 
             
-            new Pair("zimbraAccountSync:(&(|(displayName=*%s*)(cn=*%s*)(sn=*%s*)(gn=*%s*)(zimbraPhoneticFirstName=*%s*)(zimbraPhoneticLastName=*%s*)(mail=*%s*)(zimbraMailDeliveryAddress=*%s*)(zimbraMailAlias=*%s*))(|(objectclass=zimbraAccount)(objectclass=zimbraDistributionList))(!(objectclass=zimbraCalendarResource)))",
-                     "zimbraAccountSync:(&(|(objectclass=zimbraAccount)(objectclass=zimbraDistributionList))(!(objectclass=zimbraCalendarResource)))"),
+            new Pair("zmailAccountSync:(&(|(displayName=*%s*)(cn=*%s*)(sn=*%s*)(gn=*%s*)(zmailPhoneticFirstName=*%s*)(zmailPhoneticLastName=*%s*)(mail=*%s*)(zmailMailDeliveryAddress=*%s*)(zmailMailAlias=*%s*))(|(objectclass=zmailAccount)(objectclass=zmailDistributionList))(!(objectclass=zmailCalendarResource)))",
+                     "zmailAccountSync:(&(|(objectclass=zmailAccount)(objectclass=zmailDistributionList))(!(objectclass=zmailCalendarResource)))"),
             
-            new Pair("zimbraResourceSync:(&(|(displayName=*%s*)(cn=*%s*)(sn=*%s*)(gn=*%s*)(mail=*%s*)(zimbraMailDeliveryAddress=*%s*)(zimbraMailAlias=*%s*))(objectclass=zimbraCalendarResource))",
-                     "zimbraResourceSync:(&(objectclass=zimbraCalendarResource)(zimbraAccountStatus=active))"),
+            new Pair("zmailResourceSync:(&(|(displayName=*%s*)(cn=*%s*)(sn=*%s*)(gn=*%s*)(mail=*%s*)(zmailMailDeliveryAddress=*%s*)(zmailMailAlias=*%s*))(objectclass=zmailCalendarResource))",
+                     "zmailResourceSync:(&(objectclass=zmailCalendarResource)(zmailAccountStatus=active))"),
             
-            new Pair("zimbraGroupSync:(&(|(displayName=*%s*)(cn=*%s*)(sn=*%s*)(gn=*%s*)(mail=*%s*)(zimbraMailDeliveryAddress=*%s*)(zimbraMailAlias=*%s*))(objectclass=zimbraDistributionList))",
-                     "zimbraGroupSync:(objectclass=zimbraDistributionList)"),
+            new Pair("zmailGroupSync:(&(|(displayName=*%s*)(cn=*%s*)(sn=*%s*)(gn=*%s*)(mail=*%s*)(zmailMailDeliveryAddress=*%s*)(zmailMailAlias=*%s*))(objectclass=zmailDistributionList))",
+                     "zmailGroupSync:(objectclass=zmailDistributionList)"),
                      
-            new Pair("zimbraResources:(&(|(displayName=*%s*)(cn=*%s*)(sn=*%s*)(gn=*%s*)(mail=*%s*)(zimbraMailDeliveryAddress=*%s*)(zimbraMailAlias=*%s*))(objectclass=zimbraCalendarResource))",
-                     "zimbraResources:(&(|(displayName=*%s*)(cn=*%s*)(sn=*%s*)(gn=*%s*)(mail=*%s*)(zimbraMailDeliveryAddress=*%s*)(zimbraMailAlias=*%s*))(objectclass=zimbraCalendarResource)(zimbraAccountStatus=active))"),
+            new Pair("zmailResources:(&(|(displayName=*%s*)(cn=*%s*)(sn=*%s*)(gn=*%s*)(mail=*%s*)(zmailMailDeliveryAddress=*%s*)(zmailMailAlias=*%s*))(objectclass=zmailCalendarResource))",
+                     "zmailResources:(&(|(displayName=*%s*)(cn=*%s*)(sn=*%s*)(gn=*%s*)(mail=*%s*)(zmailMailDeliveryAddress=*%s*)(zmailMailAlias=*%s*))(objectclass=zmailCalendarResource)(zmailAccountStatus=active))"),
             
-            new Pair("zimbraResourceAutoComplete:(&(|(displayName=%s*)(cn=%s*)(sn=%s*)(gn=%s*)(mail=%s*)(zimbraMailDeliveryAddress=%s*)(zimbraMailAlias=%s*))(objectclass=zimbraCalendarResource))",
-                     "zimbraResourceAutoComplete:(&(|(displayName=%s*)(cn=%s*)(sn=%s*)(gn=%s*)(mail=%s*)(zimbraMailDeliveryAddress=%s*)(zimbraMailAlias=%s*))(objectclass=zimbraCalendarResource)(zimbraAccountStatus=active))")
+            new Pair("zmailResourceAutoComplete:(&(|(displayName=%s*)(cn=%s*)(sn=%s*)(gn=%s*)(mail=%s*)(zmailMailDeliveryAddress=%s*)(zmailMailAlias=%s*))(objectclass=zmailCalendarResource))",
+                     "zmailResourceAutoComplete:(&(|(displayName=%s*)(cn=%s*)(sn=%s*)(gn=%s*)(mail=%s*)(zmailMailDeliveryAddress=%s*)(zmailMailAlias=%s*))(objectclass=zmailCalendarResource)(zmailAccountStatus=active))")
 
             );
 
@@ -83,8 +83,8 @@ public class BUG_64380_63587 extends UpgradeOp {
                 new EntryType[] {EntryType.GLOBALCONFIG},
                 oldValues.toString(), 
                 newValues.toString(), 
-                String.format("Upgrade zimbraSync, zimbraAccountSync, zimbraResourceSync, " +
-                        "and zimbraGroupSync GAL filters on %s on global config from " + 
+                String.format("Upgrade zmailSync, zmailAccountSync, zmailResourceSync, " +
+                        "and zmailGroupSync GAL filters on %s on global config from " + 
                         "matched old values to the corresponding new value.  " +
                 		"This upgrade step covers bug 64380 and 63587.", 
                         ATTR_NAME));
@@ -104,8 +104,8 @@ public class BUG_64380_63587 extends UpgradeOp {
             String oldValue = valuePair.getFirst();
             String newValue = valuePair.getSecond();
             if (curValues.contains(oldValue)) {
-                StringUtil.addToMultiMap(attrs, "-" + Provisioning.A_zimbraGalLdapFilterDef, oldValue);
-                StringUtil.addToMultiMap(attrs, "+" + Provisioning.A_zimbraGalLdapFilterDef, newValue);
+                StringUtil.addToMultiMap(attrs, "-" + Provisioning.A_zmailGalLdapFilterDef, oldValue);
+                StringUtil.addToMultiMap(attrs, "+" + Provisioning.A_zmailGalLdapFilterDef, newValue);
             }
         }
         modifyAttrs(entry, attrs);

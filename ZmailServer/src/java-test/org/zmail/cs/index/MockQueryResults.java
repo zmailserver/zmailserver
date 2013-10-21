@@ -13,23 +13,23 @@
  * ***** END LICENSE BLOCK *****
  */
 
-package com.zimbra.cs.index;
+package org.zmail.cs.index;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.cs.mailbox.MailItem;
+import org.zmail.common.service.ServiceException;
+import org.zmail.cs.mailbox.MailItem;
 
 /**
- * Mock implementation of {@link ZimbraQueryResults} for testing.
+ * Mock implementation of {@link ZmailQueryResults} for testing.
  *
  * @author ysasaki
  */
-public final class MockQueryResults extends ZimbraQueryResultsImpl {
+public final class MockQueryResults extends ZmailQueryResultsImpl {
 
-    private List<ZimbraHit> hits = new ArrayList<ZimbraHit>();
+    private List<ZmailHit> hits = new ArrayList<ZmailHit>();
     private int next = 0;
     private final List<QueryInfo> queryInfo = new ArrayList<QueryInfo>();
 
@@ -37,7 +37,7 @@ public final class MockQueryResults extends ZimbraQueryResultsImpl {
         super(types, sort, SearchParams.Fetch.NORMAL);
     }
 
-    public void add(ZimbraHit hit) {
+    public void add(ZmailHit hit) {
         hits.add(hit);
     }
 
@@ -52,17 +52,17 @@ public final class MockQueryResults extends ZimbraQueryResultsImpl {
     }
 
     @Override
-    public ZimbraHit getNext() {
+    public ZmailHit getNext() {
         return hits.get(next++);
     }
 
     @Override
-    public ZimbraHit peekNext() {
+    public ZmailHit peekNext() {
         return hits.get(next);
     }
 
     @Override
-    public ZimbraHit skipToHit(int hitNo) throws ServiceException {
+    public ZmailHit skipToHit(int hitNo) throws ServiceException {
         next = hitNo;
         return getNext();
     }

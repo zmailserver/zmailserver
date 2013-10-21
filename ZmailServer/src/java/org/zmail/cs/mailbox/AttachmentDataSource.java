@@ -12,7 +12,7 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.mailbox;
+package org.zmail.cs.mailbox;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -23,9 +23,9 @@ import javax.mail.MessagingException;
 import javax.mail.internet.MimeMessage;
 import javax.mail.internet.MimePart;
 
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.common.util.ZimbraLog;
-import com.zimbra.cs.mime.Mime;
+import org.zmail.common.service.ServiceException;
+import org.zmail.common.util.ZmailLog;
+import org.zmail.cs.mime.Mime;
 
 public class AttachmentDataSource implements DataSource {
 
@@ -52,7 +52,7 @@ public class AttachmentDataSource implements DataSource {
                 contentType = mp.getContentType();
             }
         } catch (Exception e) {
-            ZimbraLog.mailbox.error("Unable to determine content type for contact %d.", mContact.getId(), e);
+            ZmailLog.mailbox.error("Unable to determine content type for contact %d.", mContact.getId(), e);
         }
         return contentType;
     }
@@ -68,7 +68,7 @@ public class AttachmentDataSource implements DataSource {
         }
         
         if (mp == null) {
-            ZimbraLog.mailbox.warn("Unable to find part %s for contact %d.", mPartName, mContact.getId());
+            ZmailLog.mailbox.warn("Unable to find part %s for contact %d.", mPartName, mContact.getId());
         }
         return mp;
     }
@@ -77,7 +77,7 @@ public class AttachmentDataSource implements DataSource {
         try {
             return getMimePart().getInputStream();
         } catch (Exception e) {
-            ZimbraLog.mailbox.error("Unable to get stream to part %s for contact %d.", mPartName, mContact.getId());
+            ZmailLog.mailbox.error("Unable to get stream to part %s for contact %d.", mPartName, mContact.getId());
             throw new IOException(e.toString());
         }
     }
@@ -91,7 +91,7 @@ public class AttachmentDataSource implements DataSource {
                 name = mp.getFileName();
             }
         } catch (Exception e) {
-            ZimbraLog.mailbox.error("Unable to determine the filename for contact %d, part %s.", mContact.getId(), mPartName, e);
+            ZmailLog.mailbox.error("Unable to determine the filename for contact %d, part %s.", mContact.getId(), mPartName, e);
         }
         return name;
     }

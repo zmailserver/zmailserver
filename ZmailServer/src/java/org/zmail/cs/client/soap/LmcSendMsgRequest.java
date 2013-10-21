@@ -13,7 +13,7 @@
  * ***** END LICENSE BLOCK *****
  */
 
-package com.zimbra.cs.client.soap;
+package org.zmail.cs.client.soap;
 
 import java.io.File;
 import java.io.IOException;
@@ -29,13 +29,13 @@ import org.apache.commons.httpclient.methods.multipart.*;
 import org.dom4j.Element;
 import org.dom4j.DocumentHelper;
 
-import com.zimbra.common.auth.ZAuthToken;
-import com.zimbra.common.httpclient.HttpClientUtil;
-import com.zimbra.common.soap.DomUtil;
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.common.soap.MailConstants;
-import com.zimbra.common.util.ZimbraHttpConnectionManager;
-import com.zimbra.cs.client.*;
+import org.zmail.common.auth.ZAuthToken;
+import org.zmail.common.httpclient.HttpClientUtil;
+import org.zmail.common.soap.DomUtil;
+import org.zmail.common.service.ServiceException;
+import org.zmail.common.soap.MailConstants;
+import org.zmail.common.util.ZmailHttpConnectionManager;
+import org.zmail.cs.client.*;
 
 public class LmcSendMsgRequest extends LmcSoapRequest {
 
@@ -84,7 +84,7 @@ public class LmcSendMsgRequest extends LmcSoapRequest {
     public String postAttachment(String uploadURL,
                                  LmcSession session,
                                  File f,
-                                 String domain,  // cookie domain e.g. ".example.zimbra.com"
+                                 String domain,  // cookie domain e.g. ".example.zmail.com"
                                  int msTimeout)
         throws LmcSoapClientException, IOException
     {
@@ -94,7 +94,7 @@ public class LmcSendMsgRequest extends LmcSoapRequest {
         if (session == null)
             System.err.println(System.currentTimeMillis() + " " + Thread.currentThread() + " LmcSendMsgRequest.postAttachment session=null");
         
-        HttpClient client = ZimbraHttpConnectionManager.getInternalHttpConnMgr().newHttpClient();
+        HttpClient client = ZmailHttpConnectionManager.getInternalHttpConnMgr().newHttpClient();
         PostMethod post = new PostMethod(uploadURL);
         ZAuthToken zat = session.getAuthToken();
         Map<String, String> cookieMap = zat.cookieMap(false);

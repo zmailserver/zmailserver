@@ -14,12 +14,12 @@
  * 
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.mailbox.alerts;
+package org.zmail.cs.mailbox.alerts;
 
-import com.zimbra.common.util.ScheduledTaskCallback;
-import com.zimbra.common.util.ZimbraLog;
-import com.zimbra.cs.mailbox.CalendarItem;
-import com.zimbra.cs.mailbox.ScheduledTaskResult;
+import org.zmail.common.util.ScheduledTaskCallback;
+import org.zmail.common.util.ZmailLog;
+import org.zmail.cs.mailbox.CalendarItem;
+import org.zmail.cs.mailbox.ScheduledTaskResult;
 
 import java.util.concurrent.Callable;
 
@@ -32,7 +32,7 @@ public class CalItemReminderTaskCallback implements ScheduledTaskCallback<Schedu
         if (lastResult == null)
             return;
         if (task instanceof CalItemReminderTaskBase) {
-            ZimbraLog.scheduler.debug("afterTaskRun() for %s", task);
+            ZmailLog.scheduler.debug("afterTaskRun() for %s", task);
             CalItemReminderService.scheduleNextReminders((CalendarItem) lastResult,
                     task instanceof CalItemEmailReminderTask, task instanceof CalItemSmsReminderTask);
         }

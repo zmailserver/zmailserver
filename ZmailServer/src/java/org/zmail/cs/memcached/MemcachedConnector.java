@@ -13,24 +13,24 @@
  * ***** END LICENSE BLOCK *****
  */
 
-package com.zimbra.cs.memcached;
+package org.zmail.cs.memcached;
 
 import net.spy.memcached.HashAlgorithm;
 
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.common.util.memcached.ZimbraMemcachedClient;
-import com.zimbra.cs.account.Provisioning;
-import com.zimbra.cs.account.Server;
+import org.zmail.common.service.ServiceException;
+import org.zmail.common.util.memcached.ZmailMemcachedClient;
+import org.zmail.cs.account.Provisioning;
+import org.zmail.cs.account.Server;
 
 public class MemcachedConnector {
 
-    private static ZimbraMemcachedClient sTheClient = new ZimbraMemcachedClient();
+    private static ZmailMemcachedClient sTheClient = new ZmailMemcachedClient();
 
     /**
      * Returns the one and only memcached client object.
      * @return
      */
-    public static ZimbraMemcachedClient getClient() {
+    public static ZmailMemcachedClient getClient() {
         return sTheClient;
     }
 
@@ -57,11 +57,11 @@ public class MemcachedConnector {
      */
     public static void reloadConfig() throws ServiceException {
         Server server = Provisioning.getInstance().getLocalServer();
-        String[] serverList = server.getMultiAttr(Provisioning.A_zimbraMemcachedClientServerList);
-        boolean useBinaryProtocol = server.getBooleanAttr(Provisioning.A_zimbraMemcachedClientBinaryProtocolEnabled, false);
-        String hashAlgorithm = server.getAttr(Provisioning.A_zimbraMemcachedClientHashAlgorithm, HashAlgorithm.KETAMA_HASH.toString());
-        int expirySeconds = (int) server.getLongAttr(Provisioning.A_zimbraMemcachedClientExpirySeconds, 86400);
-        long timeoutMillis = server.getLongAttr(Provisioning.A_zimbraMemcachedClientTimeoutMillis, 10000);
+        String[] serverList = server.getMultiAttr(Provisioning.A_zmailMemcachedClientServerList);
+        boolean useBinaryProtocol = server.getBooleanAttr(Provisioning.A_zmailMemcachedClientBinaryProtocolEnabled, false);
+        String hashAlgorithm = server.getAttr(Provisioning.A_zmailMemcachedClientHashAlgorithm, HashAlgorithm.KETAMA_HASH.toString());
+        int expirySeconds = (int) server.getLongAttr(Provisioning.A_zmailMemcachedClientExpirySeconds, 86400);
+        long timeoutMillis = server.getLongAttr(Provisioning.A_zmailMemcachedClientTimeoutMillis, 10000);
         sTheClient.connect(serverList, useBinaryProtocol, hashAlgorithm, expirySeconds, timeoutMillis);
     }
 

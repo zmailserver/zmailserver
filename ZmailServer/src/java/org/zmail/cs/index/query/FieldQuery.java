@@ -12,7 +12,7 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.index.query;
+package org.zmail.cs.index.query;
 
 import java.util.regex.Pattern;
 
@@ -21,12 +21,12 @@ import org.apache.lucene.search.TermQuery;
 import org.apache.lucene.search.TermRangeQuery;
 import org.apache.lucene.util.NumericUtils;
 
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.cs.index.LuceneFields;
-import com.zimbra.cs.index.LuceneQueryOperation;
-import com.zimbra.cs.index.QueryOperation;
-import com.zimbra.cs.index.analysis.FieldTokenStream;
-import com.zimbra.cs.mailbox.Mailbox;
+import org.zmail.common.service.ServiceException;
+import org.zmail.cs.index.LuceneFields;
+import org.zmail.cs.index.LuceneQueryOperation;
+import org.zmail.cs.index.QueryOperation;
+import org.zmail.cs.index.analysis.FieldTokenStream;
+import org.zmail.cs.mailbox.Mailbox;
 
 /**
  * Structured field query.

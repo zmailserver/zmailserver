@@ -12,12 +12,12 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.account.ldap.upgrade;
+package org.zmail.cs.account.ldap.upgrade;
 
 import java.io.PrintStream;
 import java.io.PrintWriter;
 
-import com.zimbra.cs.account.Entry;
+import org.zmail.cs.account.Entry;
 
 class LdapUpgradePrinter {
 

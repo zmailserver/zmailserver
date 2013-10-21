@@ -14,19 +14,19 @@
  * 
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.account.accesscontrol;
+package org.zmail.cs.account.accesscontrol;
 
 import java.util.Collections;
 import java.util.List;
 import java.util.Set;
 import java.util.HashSet;
 
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.common.service.ServiceException.Argument;
-import com.zimbra.common.service.ServiceException.InternalArgument;
-import com.zimbra.cs.account.Account;
-import com.zimbra.cs.account.Entry;
-import com.zimbra.cs.account.Provisioning;
+import org.zmail.common.service.ServiceException;
+import org.zmail.common.service.ServiceException.Argument;
+import org.zmail.common.service.ServiceException.InternalArgument;
+import org.zmail.cs.account.Account;
+import org.zmail.cs.account.Entry;
+import org.zmail.cs.account.Provisioning;
 
 public class HardRules {
 
@@ -34,7 +34,7 @@ public class HardRules {
     
     static {
         Set<String> forbiddenAttr = new HashSet<String>();
-        forbiddenAttr.add(Provisioning.A_zimbraIsAdminAccount.toLowerCase());
+        forbiddenAttr.add(Provisioning.A_zmailIsAdminAccount.toLowerCase());
         
         ALWAYS_FORBIDDEN_ATTRS = Collections.unmodifiableSet(forbiddenAttr);
     }

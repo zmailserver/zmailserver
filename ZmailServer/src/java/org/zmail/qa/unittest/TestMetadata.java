@@ -12,11 +12,11 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.qa.unittest;
+package org.zmail.qa.unittest;
 
-import com.zimbra.common.util.ZimbraLog;
-import com.zimbra.cs.mailbox.Mailbox;
-import com.zimbra.cs.mailbox.Metadata;
+import org.zmail.common.util.ZmailLog;
+import org.zmail.cs.mailbox.Mailbox;
+import org.zmail.cs.mailbox.Metadata;
 
 import junit.framework.TestCase;
 
@@ -37,7 +37,7 @@ extends TestCase {
      */
     public void testMetadata()
     throws Exception {
-        ZimbraLog.test.info("Starting testMetadata");
+        ZmailLog.test.info("Starting testMetadata");
         
         Mailbox mbox = TestUtil.getMailbox(USER_NAME);
         assertNull(mbox.getConfig(null, METADATA_SECTION));

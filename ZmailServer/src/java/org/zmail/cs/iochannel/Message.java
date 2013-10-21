@@ -12,7 +12,7 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.iochannel;
+package org.zmail.cs.iochannel;
 
 import java.io.IOException;
 import java.nio.ByteBuffer;
@@ -20,8 +20,8 @@ import java.nio.CharBuffer;
 import java.nio.charset.Charset;
 import java.util.HashMap;
 
-import com.zimbra.common.util.Log;
-import com.zimbra.common.util.LogFactory;
+import org.zmail.common.util.Log;
+import org.zmail.common.util.LogFactory;
 
 /**
  * Each Message contains payload and recipient.  MessageChannel framework locates

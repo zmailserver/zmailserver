@@ -13,7 +13,7 @@
  * ***** END LICENSE BLOCK *****
  */
 
-package com.zimbra.cs.mailbox;
+package org.zmail.cs.mailbox;
 
 import java.util.HashMap;
 import java.util.List;
@@ -22,12 +22,12 @@ import java.util.SortedMap;
 import java.util.TreeMap;
 
 import com.google.common.base.Strings;
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.common.soap.Element;
-import com.zimbra.common.util.BEncoding;
-import com.zimbra.common.util.BEncoding.BEncodingException;
-import com.zimbra.common.util.BlobMetaData;
-import com.zimbra.common.util.BlobMetaDataEncodingException;
+import org.zmail.common.service.ServiceException;
+import org.zmail.common.soap.Element;
+import org.zmail.common.util.BEncoding;
+import org.zmail.common.util.BEncoding.BEncodingException;
+import org.zmail.common.util.BlobMetaData;
+import org.zmail.common.util.BlobMetaDataEncodingException;
 
 public final class Metadata {
 

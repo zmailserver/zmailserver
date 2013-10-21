@@ -13,7 +13,7 @@
  * ***** END LICENSE BLOCK *****
  */
 
-package com.zimbra.cs.imap;
+package org.zmail.cs.imap;
 
 public class ImapThrottledException extends ImapException {
     private static final long serialVersionUID = 2431054742961917965L;

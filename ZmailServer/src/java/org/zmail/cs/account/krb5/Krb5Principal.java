@@ -13,16 +13,16 @@
  * ***** END LICENSE BLOCK *****
  */
 
-package com.zimbra.cs.account.krb5;
+package org.zmail.cs.account.krb5;
 
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.common.util.EmailUtil;
-import com.zimbra.cs.account.Account;
-import com.zimbra.cs.account.Domain;
-import com.zimbra.cs.account.Provisioning;
-import com.zimbra.common.account.Key;
-import com.zimbra.common.account.Key.AccountBy;
-import com.zimbra.common.account.Key.DomainBy;
+import org.zmail.common.service.ServiceException;
+import org.zmail.common.util.EmailUtil;
+import org.zmail.cs.account.Account;
+import org.zmail.cs.account.Domain;
+import org.zmail.cs.account.Provisioning;
+import org.zmail.common.account.Key;
+import org.zmail.common.account.Key.AccountBy;
+import org.zmail.common.account.Key.DomainBy;
 
 public class Krb5Principal {
     
@@ -42,7 +42,7 @@ public class Krb5Principal {
          
          /*
           * if that fails, we need to grab the Kerberos realm from the principal and then look for a domain with
-          * zimbraAuthKerberos5Realm set to that realm. If we find that domain, then we take the Kerberos principal 
+          * zmailAuthKerberos5Realm set to that realm. If we find that domain, then we take the Kerberos principal 
           * name before the domain, then look up an account in that domain with the same name.
           * 
           * If that all fails, we just return null.
@@ -83,7 +83,7 @@ public class Krb5Principal {
      
      public static String getKrb5Principal(Domain domain, Account acct) {
          String principal = null;
-         String fps[] = acct.getMultiAttr(Provisioning.A_zimbraForeignPrincipal);
+         String fps[] = acct.getMultiAttr(Provisioning.A_zmailForeignPrincipal);
          if (fps != null && fps.length > 0) {
              for (String fp : fps) {
                  if (fp.startsWith(Provisioning.FP_PREFIX_KERBEROS5)) {
@@ -96,7 +96,7 @@ public class Krb5Principal {
              }
          }
          if (principal == null) {
-             String realm = domain.getAttr(Provisioning.A_zimbraAuthKerberos5Realm);
+             String realm = domain.getAttr(Provisioning.A_zmailAuthKerberos5Realm);
              if (realm != null) {
                  String[] parts = EmailUtil.getLocalPartAndDomain(acct.getName());
                  if (parts != null)

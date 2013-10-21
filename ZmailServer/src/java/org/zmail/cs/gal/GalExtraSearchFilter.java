@@ -12,26 +12,26 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.gal;
+package org.zmail.cs.gal;
 
 import java.util.Iterator;
 import java.util.Set;
 import java.util.Stack;
 
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.common.soap.AccountConstants;
-import com.zimbra.common.soap.Element;
-import com.zimbra.common.util.StringUtil;
-import com.zimbra.cs.account.EntrySearchFilter;
-import com.zimbra.cs.account.GalContact;
-import com.zimbra.cs.account.EntrySearchFilter.AndOr;
-import com.zimbra.cs.account.EntrySearchFilter.Multi;
-import com.zimbra.cs.account.EntrySearchFilter.Operator;
-import com.zimbra.cs.account.EntrySearchFilter.Single;
-import com.zimbra.cs.account.EntrySearchFilter.Term;
-import com.zimbra.cs.account.EntrySearchFilter.Visitor;
-import com.zimbra.cs.account.ldap.LdapEntrySearchFilter.LdapQueryVisitor;
-import com.zimbra.cs.mailbox.Contact;
+import org.zmail.common.service.ServiceException;
+import org.zmail.common.soap.AccountConstants;
+import org.zmail.common.soap.Element;
+import org.zmail.common.util.StringUtil;
+import org.zmail.cs.account.EntrySearchFilter;
+import org.zmail.cs.account.GalContact;
+import org.zmail.cs.account.EntrySearchFilter.AndOr;
+import org.zmail.cs.account.EntrySearchFilter.Multi;
+import org.zmail.cs.account.EntrySearchFilter.Operator;
+import org.zmail.cs.account.EntrySearchFilter.Single;
+import org.zmail.cs.account.EntrySearchFilter.Term;
+import org.zmail.cs.account.EntrySearchFilter.Visitor;
+import org.zmail.cs.account.ldap.LdapEntrySearchFilter.LdapQueryVisitor;
+import org.zmail.cs.mailbox.Contact;
 
 public class GalExtraSearchFilter {
 
@@ -100,7 +100,7 @@ public class GalExtraSearchFilter {
             return (StringUtil.isNullOrEmpty(query) ? null : query);
         }
         
-        public abstract String getZimbraLdapSearchQuery();
+        public abstract String getZmailLdapSearchQuery();
     }
 
     private static class MailboxQueryVisitor implements Visitor {

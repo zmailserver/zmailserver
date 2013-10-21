@@ -12,57 +12,57 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.qa.unittest;
+package org.zmail.qa.unittest;
 
 import com.google.common.base.Strings;
 
-import com.zimbra.common.filter.Sieve;
-import com.zimbra.common.mime.MimeConstants;
-import com.zimbra.common.mime.MimeMessage;
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.common.soap.SoapFaultException;
-import com.zimbra.common.util.ByteUtil;
-import com.zimbra.common.util.Constants;
-import com.zimbra.common.util.StringUtil;
-import com.zimbra.cs.account.Account;
-import com.zimbra.cs.account.Config;
-import com.zimbra.cs.account.Provisioning;
-import com.zimbra.cs.account.Server;
-import com.zimbra.cs.filter.FilterUtil;
-import com.zimbra.cs.filter.RuleManager;
-import com.zimbra.cs.filter.RuleRewriter;
-import com.zimbra.cs.filter.SieveToSoap;
-import com.zimbra.cs.filter.SoapToSieve;
-import com.zimbra.cs.ldap.LdapConstants;
-import com.zimbra.cs.mailbox.Mailbox;
-import com.zimbra.cs.mailbox.calendar.Util;
-import com.zimbra.client.ZEmailAddress;
-import com.zimbra.client.ZFilterAction;
-import com.zimbra.client.ZFilterAction.MarkOp;
-import com.zimbra.client.ZFilterAction.ZDiscardAction;
-import com.zimbra.client.ZFilterAction.ZFileIntoAction;
-import com.zimbra.client.ZFilterAction.ZKeepAction;
-import com.zimbra.client.ZFilterAction.ZMarkAction;
-import com.zimbra.client.ZFilterAction.ZRedirectAction;
-import com.zimbra.client.ZFilterAction.ZTagAction;
-import com.zimbra.client.ZFilterCondition;
-import com.zimbra.client.ZFilterCondition.BodyOp;
-import com.zimbra.client.ZFilterCondition.DateOp;
-import com.zimbra.client.ZFilterCondition.HeaderOp;
-import com.zimbra.client.ZFilterCondition.SimpleOp;
-import com.zimbra.client.ZFilterCondition.ZAttachmentExistsCondition;
-import com.zimbra.client.ZFilterCondition.ZBodyCondition;
-import com.zimbra.client.ZFilterCondition.ZDateCondition;
-import com.zimbra.client.ZFilterCondition.ZHeaderCondition;
-import com.zimbra.client.ZFilterCondition.ZInviteCondition;
-import com.zimbra.client.ZFilterCondition.ZMimeHeaderCondition;
-import com.zimbra.client.ZFilterRule;
-import com.zimbra.client.ZFilterRules;
-import com.zimbra.client.ZFolder;
-import com.zimbra.client.ZMailbox;
-import com.zimbra.client.ZMessage;
-import com.zimbra.client.ZItem.Flag;
-import com.zimbra.client.ZTag;
+import org.zmail.common.filter.Sieve;
+import org.zmail.common.mime.MimeConstants;
+import org.zmail.common.mime.MimeMessage;
+import org.zmail.common.service.ServiceException;
+import org.zmail.common.soap.SoapFaultException;
+import org.zmail.common.util.ByteUtil;
+import org.zmail.common.util.Constants;
+import org.zmail.common.util.StringUtil;
+import org.zmail.cs.account.Account;
+import org.zmail.cs.account.Config;
+import org.zmail.cs.account.Provisioning;
+import org.zmail.cs.account.Server;
+import org.zmail.cs.filter.FilterUtil;
+import org.zmail.cs.filter.RuleManager;
+import org.zmail.cs.filter.RuleRewriter;
+import org.zmail.cs.filter.SieveToSoap;
+import org.zmail.cs.filter.SoapToSieve;
+import org.zmail.cs.ldap.LdapConstants;
+import org.zmail.cs.mailbox.Mailbox;
+import org.zmail.cs.mailbox.calendar.Util;
+import org.zmail.client.ZEmailAddress;
+import org.zmail.client.ZFilterAction;
+import org.zmail.client.ZFilterAction.MarkOp;
+import org.zmail.client.ZFilterAction.ZDiscardAction;
+import org.zmail.client.ZFilterAction.ZFileIntoAction;
+import org.zmail.client.ZFilterAction.ZKeepAction;
+import org.zmail.client.ZFilterAction.ZMarkAction;
+import org.zmail.client.ZFilterAction.ZRedirectAction;
+import org.zmail.client.ZFilterAction.ZTagAction;
+import org.zmail.client.ZFilterCondition;
+import org.zmail.client.ZFilterCondition.BodyOp;
+import org.zmail.client.ZFilterCondition.DateOp;
+import org.zmail.client.ZFilterCondition.HeaderOp;
+import org.zmail.client.ZFilterCondition.SimpleOp;
+import org.zmail.client.ZFilterCondition.ZAttachmentExistsCondition;
+import org.zmail.client.ZFilterCondition.ZBodyCondition;
+import org.zmail.client.ZFilterCondition.ZDateCondition;
+import org.zmail.client.ZFilterCondition.ZHeaderCondition;
+import org.zmail.client.ZFilterCondition.ZInviteCondition;
+import org.zmail.client.ZFilterCondition.ZMimeHeaderCondition;
+import org.zmail.client.ZFilterRule;
+import org.zmail.client.ZFilterRules;
+import org.zmail.client.ZFolder;
+import org.zmail.client.ZMailbox;
+import org.zmail.client.ZMessage;
+import org.zmail.client.ZItem.Flag;
+import org.zmail.client.ZTag;
 import junit.framework.TestCase;
 import org.apache.jsieve.parser.generated.Node;
 import org.apache.jsieve.parser.generated.ParseException;
@@ -126,9 +126,9 @@ public final class TestFilter extends TestCase {
         saveOutgoingRules(mMbox, getTestOutgoingRules());
 
         Account account = TestUtil.getAccount(USER_NAME);
-        mOriginalSpamApplyUserFilters = account.getAttr(Provisioning.A_zimbraSpamApplyUserFilters);
+        mOriginalSpamApplyUserFilters = account.getAttr(Provisioning.A_zmailSpamApplyUserFilters);
         mOriginalSmtpPort = Provisioning.getInstance().getLocalServer().getSmtpPortAsString();
-        mOriginalSetEnvelopeSender = TestUtil.getServerAttr(Provisioning.A_zimbraMailRedirectSetEnvelopeSender);
+        mOriginalSetEnvelopeSender = TestUtil.getServerAttr(Provisioning.A_zmailMailRedirectSetEnvelopeSender);
     }
 
     /**
@@ -299,8 +299,8 @@ public final class TestFilter extends TestCase {
         String[] recipients = new String[] { sender };
         String message = TestUtil.getTestMessage(NAME_PREFIX + " testSpam", USER_NAME, USER_NAME, null);
         Config config = Provisioning.getInstance().getConfig();
-        message = config.getAttr(Provisioning.A_zimbraSpamHeader) + ": " +
-            config.getAttr(Provisioning.A_zimbraSpamHeaderValue) + "\r\n" + message;
+        message = config.getAttr(Provisioning.A_zmailSpamHeader) + ": " +
+            config.getAttr(Provisioning.A_zmailSpamHeaderValue) + "\r\n" + message;
 
         // Make sure spam message doesn't already exist
         assertEquals(0, TestUtil.search(mbox, "in:junk subject:testSpam").size());
@@ -321,13 +321,13 @@ public final class TestFilter extends TestCase {
         saveIncomingRules(mMbox, rules);
 
         // Set "apply user rules" attribute to TRUE and make sure the message gets filed into folder1
-        TestUtil.setAccountAttr(USER_NAME, Provisioning.A_zimbraSpamApplyUserFilters, LdapConstants.LDAP_TRUE);
+        TestUtil.setAccountAttr(USER_NAME, Provisioning.A_zmailSpamApplyUserFilters, LdapConstants.LDAP_TRUE);
         TestUtil.addMessageLmtp(recipients, sender, message);
         msg = TestUtil.waitForMessage(mbox, "in:" + FOLDER1_PATH + " subject:testSpam");
         mbox.deleteMessage(msg.getId());
 
         // Set "apply user rules" attribute to FALSE and make sure the message gets filed into junk
-        TestUtil.setAccountAttr(USER_NAME, Provisioning.A_zimbraSpamApplyUserFilters, LdapConstants.LDAP_FALSE);
+        TestUtil.setAccountAttr(USER_NAME, Provisioning.A_zmailSpamApplyUserFilters, LdapConstants.LDAP_FALSE);
         TestUtil.addMessageLmtp(recipients, sender, message);
         TestUtil.waitForMessage(mbox, "in:junk subject:testSpam");
     }
@@ -422,7 +422,7 @@ public final class TestFilter extends TestCase {
     public void testConversion()
     throws Exception {
         // Load script.
-        String scriptPath = "/opt/zimbra/unittest/test.sieve";
+        String scriptPath = "/opt/zmail/unittest/test.sieve";
         String script = new String(ByteUtil.getContent(new File(scriptPath)));
         assertNotNull(script);
         assertTrue(script.length() > 0);
@@ -1226,7 +1226,7 @@ public final class TestFilter extends TestCase {
         // Add a message and test the flagged state.
         String address = TestUtil.getAddress(USER_NAME);
         String msgContent = new String(
-            ByteUtil.getContent(new File("/opt/zimbra/unittest/TestFilter-testBodyContains.msg")));
+            ByteUtil.getContent(new File("/opt/zmail/unittest/TestFilter-testBodyContains.msg")));
         TestUtil.addMessageLmtp(new String[] { address }, address, msgContent);
         ZMessage msg = TestUtil.getMessage(mMbox, "in:inbox subject:testBodyContains");
         assertEquals("Unexpected message flag state", contains, msg.isFlagged());
@@ -1277,14 +1277,14 @@ public final class TestFilter extends TestCase {
         String address = TestUtil.getAddress(USER_NAME);
         // TestFilter-testSpecialCharInBody.msg's body contains base64 encoded content (containing "Andr\u00e9")
         String msgContent = new String(
-            ByteUtil.getContent(new File("/opt/zimbra/unittest/TestFilter-testSpecialCharInBody.msg")));
+            ByteUtil.getContent(new File("/opt/zmail/unittest/TestFilter-testSpecialCharInBody.msg")));
         TestUtil.addMessageLmtp(new String[] { address }, address, msgContent);
         ZMessage msg = TestUtil.getMessage(mMbox, "in:inbox subject:testSpecialCharInBody");
         assertTrue("Unexpected message flag state", msg.isFlagged());
     }
 
     /**
-     * Tests the redirect filter action and confirms that the X-ZimbraForwarded
+     * Tests the redirect filter action and confirms that the X-ZmailForwarded
      * header is set on the redirected message.
      */
     public void testRedirect()
@@ -1311,7 +1311,7 @@ public final class TestFilter extends TestCase {
         List<ZMessage> messages = TestUtil.search(mMbox, "subject:\"" + subject + "\"");
         assertEquals(0, messages.size());
 
-        // Confirm that user2 received it, and make sure X-ZimbraForwarded is set.
+        // Confirm that user2 received it, and make sure X-ZmailForwarded is set.
         ZMailbox remoteMbox = TestUtil.getZMailbox(REMOTE_USER_NAME);
         ZMessage msg = TestUtil.waitForMessage(remoteMbox, "in:inbox subject:\"" + subject + "\"");
         byte[] content = TestUtil.getContent(remoteMbox, msg.getId()).getBytes();
@@ -1320,7 +1320,7 @@ public final class TestFilter extends TestCase {
         assertEquals(user1.getName(), mimeMsg.getHeader(FilterUtil.HEADER_FORWARDED));
         assertEquals(from, mimeMsg.getHeader("From"));
 
-        // Check zimbraMailRedirectSetEnvelopeSender=FALSE.
+        // Check zmailMailRedirectSetEnvelopeSender=FALSE.
         int port = 6025;
         DummySmtpServer smtp = startSmtpServer(port);
         Server server = Provisioning.getInstance().getLocalServer();
@@ -1330,7 +1330,7 @@ public final class TestFilter extends TestCase {
         TestUtil.addMessageLmtp(subject, USER_NAME, from);
         assertEquals(from, smtp.getMailFrom());
 
-        // Check zimbraMailRedirectSetEnvelopeSender=TRUE.
+        // Check zmailMailRedirectSetEnvelopeSender=TRUE.
         smtp = startSmtpServer(port);
         server.setMailRedirectSetEnvelopeSender(true);
         subject = NAME_PREFIX + " testRedirect 2";
@@ -1502,7 +1502,7 @@ public final class TestFilter extends TestCase {
      */
     public void testPositiveAndNegative()
     throws Exception {
-        String script = new String(ByteUtil.getContent(new File("/opt/zimbra/unittest/bug46007.sieve")));
+        String script = new String(ByteUtil.getContent(new File("/opt/zmail/unittest/bug46007.sieve")));
         String normalized = normalize(script); // Convert to XML and back again.
         assertEquals(normalizeWhiteSpace(script), normalizeWhiteSpace(normalized));
     }
@@ -1529,9 +1529,9 @@ public final class TestFilter extends TestCase {
     protected void tearDown() throws Exception {
         mMbox.saveIncomingFilterRules(mOriginalIncomingRules);
         mMbox.saveOutgoingFilterRules(mOriginalOutgoingRules);
-        TestUtil.setAccountAttr(USER_NAME, Provisioning.A_zimbraSpamApplyUserFilters, mOriginalSpamApplyUserFilters);
-        TestUtil.setServerAttr(Provisioning.A_zimbraSmtpPort, mOriginalSmtpPort);
-        TestUtil.setServerAttr(Provisioning.A_zimbraMailRedirectSetEnvelopeSender, mOriginalSetEnvelopeSender);
+        TestUtil.setAccountAttr(USER_NAME, Provisioning.A_zmailSpamApplyUserFilters, mOriginalSpamApplyUserFilters);
+        TestUtil.setServerAttr(Provisioning.A_zmailSmtpPort, mOriginalSmtpPort);
+        TestUtil.setServerAttr(Provisioning.A_zmailMailRedirectSetEnvelopeSender, mOriginalSetEnvelopeSender);
         cleanUp();
     }
 

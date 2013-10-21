@@ -13,7 +13,7 @@
  * ***** END LICENSE BLOCK *****
  */
 
-package com.zimbra.cs.mailbox;
+package org.zmail.cs.mailbox;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -26,22 +26,22 @@ import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.cs.account.Account;
-import com.zimbra.cs.account.Provisioning;
-import com.zimbra.cs.db.Db;
-import com.zimbra.cs.db.DbPool;
-import com.zimbra.cs.db.DbPool.DbConnection;
-import com.zimbra.cs.db.HSQLDB;
-import com.zimbra.cs.mailbox.Mailbox.MailboxData;
-import com.zimbra.cs.mime.ParsedMessage;
-import com.zimbra.cs.redolog.op.RedoableOp;
+import org.zmail.common.service.ServiceException;
+import org.zmail.cs.account.Account;
+import org.zmail.cs.account.Provisioning;
+import org.zmail.cs.db.Db;
+import org.zmail.cs.db.DbPool;
+import org.zmail.cs.db.DbPool.DbConnection;
+import org.zmail.cs.db.HSQLDB;
+import org.zmail.cs.mailbox.Mailbox.MailboxData;
+import org.zmail.cs.mime.ParsedMessage;
+import org.zmail.cs.redolog.op.RedoableOp;
 
 public class DesktopMailboxTest {
 
     @BeforeClass
     public static void init() throws Exception {
-        MailboxTestUtil.initServer(); //TODO: allow paths to be specified so we can run tests outside of ZimbraServer
+        MailboxTestUtil.initServer(); //TODO: allow paths to be specified so we can run tests outside of ZmailServer
         MailboxManager.setInstance(new MailboxManager() {
             @Override
             protected Mailbox instantiateMailbox(MailboxData data) {
@@ -53,7 +53,7 @@ public class DesktopMailboxTest {
                     }
                 };
             }
-            //TODO: eventually move this into ZimbraOffline and implement all of the provisioning needed for real DesktopMailbox
+            //TODO: eventually move this into ZmailOffline and implement all of the provisioning needed for real DesktopMailbox
 //                try {
 //                    return new DesktopMailbox(data) {
 //                    };
@@ -63,7 +63,7 @@ public class DesktopMailboxTest {
         });
 
         Provisioning prov = Provisioning.getInstance();
-        prov.createAccount("test@zimbra.com", "secret", new HashMap<String, Object>());
+        prov.createAccount("test@zmail.com", "secret", new HashMap<String, Object>());
     }
 
     @Before
@@ -95,7 +95,7 @@ public class DesktopMailboxTest {
 
     @Test
     public void nestedTxn() throws Exception {
-        Account acct = Provisioning.getInstance().getAccount("test@zimbra.com");
+        Account acct = Provisioning.getInstance().getAccount("test@zmail.com");
         Mailbox mbox = MailboxManager.getInstance().getMailboxByAccount(acct);
         HSQLDB db = (HSQLDB) Db.getInstance();
         db.useMVCC(mbox);
@@ -106,7 +106,7 @@ public class DesktopMailboxTest {
             OperationContext octx = new OperationContext(acct);
             mbox.beginTransaction("outer", octx);
             mbox.beginTransaction("inner1", octx);
-            mbox.addMessage(octx, new ParsedMessage("From: test1-1@sub1.zimbra.com".getBytes(), false), dopt, null);
+            mbox.addMessage(octx, new ParsedMessage("From: test1-1@sub1.zmail.com".getBytes(), false), dopt, null);
 
             //nothing committed yet
             Assert.assertEquals(0, countInboxMessages(mbox));
@@ -116,7 +116,7 @@ public class DesktopMailboxTest {
             Assert.assertEquals(0, countInboxMessages(mbox));
 
             mbox.beginTransaction("inner2", null);
-            mbox.addMessage(null, new ParsedMessage("From: test1-2@sub1.zimbra.com".getBytes(), false), dopt, null);
+            mbox.addMessage(null, new ParsedMessage("From: test1-2@sub1.zmail.com".getBytes(), false), dopt, null);
 
             //nothing committed yet
             Assert.assertEquals(0, countInboxMessages(mbox));

@@ -12,9 +12,9 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.index;
+package org.zmail.cs.index;
 
-import com.zimbra.common.soap.Element;
+import org.zmail.common.soap.Element;
 
 public final class WildcardExpansionQueryInfo implements QueryInfo {
 

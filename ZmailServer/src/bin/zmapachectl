@@ -14,7 +14,7 @@
 # ***** END LICENSE BLOCK *****
 # 
 
-BASE=/opt/zimbra
+BASE=/opt/zmail
 APACHECTL=$BASE/httpd/bin/apachectl
 CONF=$BASE/conf/httpd.conf
 PIDFILE=$BASE/log/httpd.pid

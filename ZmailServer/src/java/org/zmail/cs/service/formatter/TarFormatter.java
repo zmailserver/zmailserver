@@ -12,19 +12,19 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.service.formatter;
+package org.zmail.cs.service.formatter;
 
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.common.util.tar.TarEntry;
-import com.zimbra.common.util.tar.TarInputStream;
-import com.zimbra.common.util.tar.TarOutputStream;
-import com.zimbra.cs.service.UserServletContext;
-import com.zimbra.cs.service.UserServletException;
-import com.zimbra.cs.service.formatter.FormatterFactory.FormatType;
+import org.zmail.common.service.ServiceException;
+import org.zmail.common.util.tar.TarEntry;
+import org.zmail.common.util.tar.TarInputStream;
+import org.zmail.common.util.tar.TarOutputStream;
+import org.zmail.cs.service.UserServletContext;
+import org.zmail.cs.service.UserServletException;
+import org.zmail.cs.service.formatter.FormatterFactory.FormatType;
 
 public class TarFormatter extends ArchiveFormatter {
     public class TarArchiveInputStream implements ArchiveInputStream {

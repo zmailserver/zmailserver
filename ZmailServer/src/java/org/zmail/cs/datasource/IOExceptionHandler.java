@@ -12,13 +12,13 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.datasource;
+package org.zmail.cs.datasource;
 
-import com.zimbra.common.localconfig.LC;
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.common.util.ZimbraLog;
-import com.zimbra.cs.extension.ExtensionUtil;
-import com.zimbra.cs.mailbox.Mailbox;
+import org.zmail.common.localconfig.LC;
+import org.zmail.common.service.ServiceException;
+import org.zmail.common.util.ZmailLog;
+import org.zmail.cs.extension.ExtensionUtil;
+import org.zmail.cs.mailbox.Mailbox;
 
 /**
  * IOException handler
@@ -41,7 +41,7 @@ public class IOExceptionHandler {
                         instance = (IOExceptionHandler) ExtensionUtil.findClass(className).newInstance();
                     }
                 } catch (Exception e) {
-                    ZimbraLog.account.error("could not instantiate IOExceptionHandler child class '" + className + "'; defaulting to IOExceptionHandler", e);
+                    ZmailLog.account.error("could not instantiate IOExceptionHandler child class '" + className + "'; defaulting to IOExceptionHandler", e);
                 }
             }
             if (instance == null)

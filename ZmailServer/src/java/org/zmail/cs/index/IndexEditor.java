@@ -13,7 +13,7 @@
  * ***** END LICENSE BLOCK *****
  */
 
-package com.zimbra.cs.index;
+package org.zmail.cs.index;
 
 import java.io.BufferedOutputStream;
 import java.io.BufferedReader;
@@ -41,20 +41,20 @@ import org.apache.lucene.document.Document;
 import org.apache.lucene.document.Field;
 
 import com.google.common.io.Closeables;
-import com.zimbra.cs.account.Account;
-import com.zimbra.cs.account.Provisioning;
-import com.zimbra.common.account.Key.AccountBy;
-import com.zimbra.cs.mailbox.MailItem;
-import com.zimbra.cs.mailbox.MailServiceException;
-import com.zimbra.cs.mailbox.Mailbox;
-import com.zimbra.cs.mailbox.MailboxIndex;
-import com.zimbra.cs.mailbox.MailboxManager;
-import com.zimbra.cs.server.ProtocolHandler;
-import com.zimbra.cs.server.TcpServer;
-import com.zimbra.common.io.TcpServerInputStream;
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.common.soap.SoapProtocol;
-import com.zimbra.common.util.*;
+import org.zmail.cs.account.Account;
+import org.zmail.cs.account.Provisioning;
+import org.zmail.common.account.Key.AccountBy;
+import org.zmail.cs.mailbox.MailItem;
+import org.zmail.cs.mailbox.MailServiceException;
+import org.zmail.cs.mailbox.Mailbox;
+import org.zmail.cs.mailbox.MailboxIndex;
+import org.zmail.cs.mailbox.MailboxManager;
+import org.zmail.cs.server.ProtocolHandler;
+import org.zmail.cs.server.TcpServer;
+import org.zmail.common.io.TcpServerInputStream;
+import org.zmail.common.service.ServiceException;
+import org.zmail.common.soap.SoapProtocol;
+import org.zmail.common.util.*;
 
 /**
  * @since Jul 20, 2004
@@ -85,7 +85,7 @@ public final class IndexEditor {
         try {
             mmgr = MailboxManager.getInstance();
         } catch (ServiceException e) {
-            ZimbraLog.index.error("could not retrieve mailbox manager; aborting reindex", e);
+            ZmailLog.index.error("could not retrieve mailbox manager; aborting reindex", e);
             return;
         }
         int ids[] = mmgr.getMailboxIds();
@@ -110,7 +110,7 @@ public final class IndexEditor {
     }
 
     public interface QueryRunner {
-        ZimbraQueryResults runQuery(String qstr, Set<MailItem.Type> types, SortBy sortBy)
+        ZmailQueryResults runQuery(String qstr, Set<MailItem.Type> types, SortBy sortBy)
             throws IOException, MailServiceException, ServiceException;
     }
 
@@ -122,7 +122,7 @@ public final class IndexEditor {
         }
 
         @Override
-        public ZimbraQueryResults runQuery(String qstr, Set<MailItem.Type> types, SortBy sortBy)
+        public ZmailQueryResults runQuery(String qstr, Set<MailItem.Type> types, SortBy sortBy)
                 throws IOException, MailServiceException, ServiceException {
             Mailbox mbox = MailboxManager.getInstance().getMailboxById(mMailboxId);
             SearchParams params = new SearchParams();
@@ -133,7 +133,7 @@ public final class IndexEditor {
             params.setLimit(100);
             params.setPrefetch(true);
             params.setFetchMode(SearchParams.Fetch.NORMAL);
-            ZimbraQuery zq = new ZimbraQuery(null, SoapProtocol.Soap12, mbox, params);
+            ZmailQuery zq = new ZmailQuery(null, SoapProtocol.Soap12, mbox, params);
             return zq.execute();
         }
     }
@@ -162,14 +162,14 @@ public final class IndexEditor {
                 types = EnumSet.noneOf(MailItem.Type.class);
                 break;
             }
-            ZimbraQueryResults res = runner.runQuery(qstr, types, sortOrder);
+            ZmailQueryResults res = runner.runQuery(qstr, types, sortOrder);
             try {
                 long endTime = System.currentTimeMillis();
                 int HITS_PER_PAGE = 20;
                 int totalShown = 0;
 
                 res.resetIterator();
-                ZimbraHit hit = res.getNext();
+                ZmailHit hit = res.getNext();
                 while (hit != null) {
                     for (int i = 0; (hit != null) && (i < HITS_PER_PAGE); i++) {
                         displayHit(hit, groupBy);
@@ -191,7 +191,7 @@ public final class IndexEditor {
         }
     }
 
-    public void displayHit(ZimbraHit hit, int groupBy) {
+    public void displayHit(ZmailHit hit, int groupBy) {
         outputStream.print("HIT: ");
         if (groupBy == SEARCH_RETURN_CONVERSATIONS) {
             ConversationHit ch = (ConversationHit) hit;

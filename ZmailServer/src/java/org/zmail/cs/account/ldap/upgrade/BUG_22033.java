@@ -12,23 +12,23 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.account.ldap.upgrade;
+package org.zmail.cs.account.ldap.upgrade;
 
 import org.apache.commons.cli.CommandLine;
 import org.apache.commons.cli.HelpFormatter;
 
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.cs.account.Provisioning;
-import com.zimbra.cs.account.ldap.LdapDIT;
-import com.zimbra.cs.ldap.IAttributes;
-import com.zimbra.cs.ldap.LdapClient;
-import com.zimbra.cs.ldap.LdapServerType;
-import com.zimbra.cs.ldap.LdapUsage;
-import com.zimbra.cs.ldap.SearchLdapOptions;
-import com.zimbra.cs.ldap.ZAttributes;
-import com.zimbra.cs.ldap.ZLdapContext;
-import com.zimbra.cs.ldap.ZMutableEntry;
-import com.zimbra.cs.ldap.ZSearchScope;
+import org.zmail.common.service.ServiceException;
+import org.zmail.cs.account.Provisioning;
+import org.zmail.cs.account.ldap.LdapDIT;
+import org.zmail.cs.ldap.IAttributes;
+import org.zmail.cs.ldap.LdapClient;
+import org.zmail.cs.ldap.LdapServerType;
+import org.zmail.cs.ldap.LdapUsage;
+import org.zmail.cs.ldap.SearchLdapOptions;
+import org.zmail.cs.ldap.ZAttributes;
+import org.zmail.cs.ldap.ZLdapContext;
+import org.zmail.cs.ldap.ZMutableEntry;
+import org.zmail.cs.ldap.ZSearchScope;
 
 public class BUG_22033 extends UpgradeOp {
 
@@ -115,7 +115,7 @@ public class BUG_22033 extends UpgradeOp {
             String createTime = ldapAttrs.getAttrString("createTimestamp");
             
             ZMutableEntry entry = LdapClient.createMutableEntry();
-            entry.setAttr(Provisioning.A_zimbraCreateTimestamp, createTime);
+            entry.setAttr(Provisioning.A_zmailCreateTimestamp, createTime);
             upgradeOp.replaceAttrs(modZlc, dn, entry);
             
             numModified++;
@@ -132,27 +132,27 @@ public class BUG_22033 extends UpgradeOp {
         String base;
         String query;
         String returnAttrs[] = new String[] {Provisioning.A_objectClass,
-                                             Provisioning.A_zimbraCreateTimestamp,
+                                             Provisioning.A_zmailCreateTimestamp,
                                              "createTimestamp"};
         
         if (mType == null) {
             printer.println("Checking all objects\n");
             
-            base = dit.zimbraBaseDN();
+            base = dit.zmailBaseDN();
             query = "(|" +
-                     "(objectclass=zimbraAccount)" +
-                     "(objectclass=zimbraAlias)" +
-                     "(objectclass=zimbraCalendarResource)" +
-                     "(objectclass=zimbraGlobalConfig)" +
-                     "(objectclass=zimbraCOS)" +
-                     "(objectclass=zimbraDataSource)" +
-                     "(objectclass=zimbraDistributionList)" +
-                     "(objectclass=zimbraDomain)" +
-                     "(objectclass=zimbraIdentity)" +
-                     "(objectclass=zimbraServer)" +
-                     "(objectclass=zimbraSignature)" +
-                     "(objectclass=zimbraXMPPComponent)" +
-                     "(objectclass=zimbraZimletEntry)" +
+                     "(objectclass=zmailAccount)" +
+                     "(objectclass=zmailAlias)" +
+                     "(objectclass=zmailCalendarResource)" +
+                     "(objectclass=zmailGlobalConfig)" +
+                     "(objectclass=zmailCOS)" +
+                     "(objectclass=zmailDataSource)" +
+                     "(objectclass=zmailDistributionList)" +
+                     "(objectclass=zmailDomain)" +
+                     "(objectclass=zmailIdentity)" +
+                     "(objectclass=zmailServer)" +
+                     "(objectclass=zmailSignature)" +
+                     "(objectclass=zmailXMPPComponent)" +
+                     "(objectclass=zmailZimletEntry)" +
                      ")";
         } else {
             printer.println("Checking " + mType.name() + " objects...\n");
@@ -160,62 +160,62 @@ public class BUG_22033 extends UpgradeOp {
             switch (mType) {
             case account:
                 base = dit.mailBranchBaseDN();
-                query = "(&(objectclass=zimbraAccount)(!(objectclass=zimbraCalendarResource)))";
+                query = "(&(objectclass=zmailAccount)(!(objectclass=zmailCalendarResource)))";
                 break;
             case alias:
                 base = dit.mailBranchBaseDN();
-                query = "(objectclass=zimbraAlias)";
+                query = "(objectclass=zmailAlias)";
                 break;
             case calendarresource:
                 base = dit.mailBranchBaseDN();
-                query = "(objectclass=zimbraCalendarResource)";
+                query = "(objectclass=zmailCalendarResource)";
                 break;
             case config:
                 base = dit.configDN();
-                query = "(objectclass=zimbraGlobalConfig)";
+                query = "(objectclass=zmailGlobalConfig)";
                 break;
             case cos:
                 base = dit.cosBaseDN();
-                query = "(objectclass=zimbraCOS)";
+                query = "(objectclass=zmailCOS)";
                 break;
             case datasource:
                 base = dit.mailBranchBaseDN();
-                query = "(objectclass=zimbraDataSource)";
+                query = "(objectclass=zmailDataSource)";
                 break;
             case distributionlist:
                 base = dit.mailBranchBaseDN();
-                query = "(objectclass=zimbraDistributionList)";
+                query = "(objectclass=zmailDistributionList)";
                 break;
             case domain:
                 base = dit.domainBaseDN();
-                query = "(objectclass=zimbraDomain)";
+                query = "(objectclass=zmailDomain)";
                 break;
             case identity:
                 base = dit.mailBranchBaseDN();
-                query = "(objectclass=zimbraIdentity)";
+                query = "(objectclass=zmailIdentity)";
                 break;
             case server:
                 base = dit.serverBaseDN();
-                query = "(objectclass=zimbraServer)";
+                query = "(objectclass=zmailServer)";
                 break;
             case signature:
                 base = dit.mailBranchBaseDN();
-                query = "(objectclass=zimbraSignature)";
+                query = "(objectclass=zmailSignature)";
                 break;
             case xmppcomponent:
                 base = dit.xmppcomponentBaseDN();
-                query = "(objectclass=zimbraXMPPComponent)";
+                query = "(objectclass=zmailXMPPComponent)";
                 break;
             case zimlet:
                 base = dit.zimletBaseDN();
-                query = "(objectclass=zimbraZimletEntry)";
+                query = "(objectclass=zmailZimletEntry)";
                 break;
             default:
                 throw ServiceException.FAILURE("", null);    
             }
         }
         
-        query = "(&" + "(!(zimbraCreateTimestamp=*))" + query + ")";
+        query = "(&" + "(!(zmailCreateTimestamp=*))" + query + ")";
         
         ZLdapContext zlc = null; 
         ZLdapContext modZlc = null;

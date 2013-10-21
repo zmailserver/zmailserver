@@ -12,7 +12,7 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.service.mail;
+package org.zmail.cs.service.mail;
 
 import java.util.ArrayList;
 import java.util.EnumSet;
@@ -20,19 +20,19 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.common.soap.Element;
-import com.zimbra.common.soap.MailConstants;
-import com.zimbra.common.util.Pair;
-import com.zimbra.common.util.ZimbraLog;
-import com.zimbra.cs.mailbox.MailItem;
-import com.zimbra.cs.mailbox.Mailbox;
-import com.zimbra.cs.mailbox.MailboxManager;
-import com.zimbra.cs.session.WaitSetAccount;
-import com.zimbra.cs.session.WaitSetError;
-import com.zimbra.cs.session.WaitSetMgr;
-import com.zimbra.soap.DocumentHandler;
-import com.zimbra.soap.ZimbraSoapContext;
+import org.zmail.common.service.ServiceException;
+import org.zmail.common.soap.Element;
+import org.zmail.common.soap.MailConstants;
+import org.zmail.common.util.Pair;
+import org.zmail.common.util.ZmailLog;
+import org.zmail.cs.mailbox.MailItem;
+import org.zmail.cs.mailbox.Mailbox;
+import org.zmail.cs.mailbox.MailboxManager;
+import org.zmail.cs.session.WaitSetAccount;
+import org.zmail.cs.session.WaitSetError;
+import org.zmail.cs.session.WaitSetMgr;
+import org.zmail.soap.DocumentHandler;
+import org.zmail.soap.ZmailSoapContext;
 
 /**
  *
@@ -56,13 +56,13 @@ public class CreateWaitSet extends MailDocumentHandler {
 
     @Override
     public Element handle(Element request, Map<String, Object> context) throws ServiceException {
-        ZimbraSoapContext zsc = getZimbraSoapContext(context);
+        ZmailSoapContext zsc = getZmailSoapContext(context);
         Element response = zsc.createElement(MailConstants.CREATE_WAIT_SET_RESPONSE);
         return staticHandle(this, request, context, response);
     }
 
     static public Element staticHandle(DocumentHandler handler, Element request, Map<String, Object> context, Element response) throws ServiceException {
-        ZimbraSoapContext zsc = getZimbraSoapContext(context);
+        ZmailSoapContext zsc = getZmailSoapContext(context);
 
         String defInterestStr = request.getAttribute(MailConstants.A_DEFTYPES);
         Set<MailItem.Type> defaultInterests = WaitSetRequest.parseInterestStr(defInterestStr,
@@ -85,7 +85,7 @@ public class CreateWaitSet extends MailDocumentHandler {
                 Mailbox mbox = MailboxManager.getInstance().getMailboxByAccountId(acct.getAccountId(), fetchMode);
                 referencedMailboxes.add(mbox);
             } catch (ServiceException e) {
-                ZimbraLog.session.debug("Caught exception preloading mailbox for waitset", e);
+                ZmailLog.session.debug("Caught exception preloading mailbox for waitset", e);
             }
         }
 

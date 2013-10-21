@@ -12,7 +12,7 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.filter.jsieve;
+package org.zmail.cs.filter.jsieve;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -28,10 +28,10 @@ import org.apache.jsieve.exception.SieveException;
 import org.apache.jsieve.mail.MailAdapter;
 import org.apache.jsieve.tests.AbstractTest;
 
-import com.zimbra.common.mime.InternetAddress;
-import com.zimbra.common.util.ZimbraLog;
-import com.zimbra.cs.filter.ZimbraMailAdapter;
-import com.zimbra.cs.mailbox.Mailbox;
+import org.zmail.common.mime.InternetAddress;
+import org.zmail.common.util.ZmailLog;
+import org.zmail.cs.filter.ZmailMailAdapter;
+import org.zmail.cs.mailbox.Mailbox;
 
 /**
  * SIEVE test that returns true if the email address in the specified header exists in the address book.
@@ -72,10 +72,10 @@ public final class AddressBookTest extends AbstractTest {
     @Override
     protected boolean executeBasic(MailAdapter mail, Arguments arguments, SieveContext context) throws SieveException {
         assert(headers != null);
-        if (!(mail instanceof ZimbraMailAdapter)) {
+        if (!(mail instanceof ZmailMailAdapter)) {
             return false;
         }
-        Mailbox mbox = ((ZimbraMailAdapter) mail).getMailbox();
+        Mailbox mbox = ((ZmailMailAdapter) mail).getMailbox();
         List<InternetAddress> addrs = new ArrayList<InternetAddress>();
         for (String header : headers) {
             for (String value : mail.getHeader(header)) {
@@ -85,7 +85,7 @@ public final class AddressBookTest extends AbstractTest {
         try {
             return mbox.index.existsInContacts(addrs);
         } catch (IOException e) {
-            ZimbraLog.filter.error("Failed to lookup contacts", e);
+            ZmailLog.filter.error("Failed to lookup contacts", e);
         }
         return false;
     }

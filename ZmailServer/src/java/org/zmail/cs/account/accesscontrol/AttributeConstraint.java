@@ -12,7 +12,7 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.account.accesscontrol;
+package org.zmail.cs.account.accesscontrol;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -22,21 +22,21 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-import com.zimbra.common.account.Key;
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.common.soap.AdminConstants;
-import com.zimbra.common.soap.Element;
-import com.zimbra.common.util.DateUtil;
-import com.zimbra.common.util.ZimbraLog;
-import com.zimbra.cs.account.Account;
-import com.zimbra.cs.account.AttributeManager;
-import com.zimbra.cs.account.AttributeType;
-import com.zimbra.cs.account.Cos;
-import com.zimbra.cs.account.Domain;
-import com.zimbra.cs.account.Entry;
-import com.zimbra.cs.account.Provisioning;
-import com.zimbra.cs.account.Server;
-import com.zimbra.soap.admin.type.ConstraintInfo;
+import org.zmail.common.account.Key;
+import org.zmail.common.service.ServiceException;
+import org.zmail.common.soap.AdminConstants;
+import org.zmail.common.soap.Element;
+import org.zmail.common.util.DateUtil;
+import org.zmail.common.util.ZmailLog;
+import org.zmail.cs.account.Account;
+import org.zmail.cs.account.AttributeManager;
+import org.zmail.cs.account.AttributeType;
+import org.zmail.cs.account.Cos;
+import org.zmail.cs.account.Domain;
+import org.zmail.cs.account.Entry;
+import org.zmail.cs.account.Provisioning;
+import org.zmail.cs.account.Server;
+import org.zmail.soap.admin.type.ConstraintInfo;
 
 public class AttributeConstraint {
     private static final String CONSTRAINT_CACHE_KEY = "CONSTRAINT_CACHE";
@@ -510,9 +510,9 @@ public class AttributeConstraint {
         Map<String, AttributeConstraint> constraints = (Map<String, AttributeConstraint>)constraintEntry.getCachedData(CONSTRAINT_CACHE_KEY);
         if (constraints == null) {
             //
-            // if there is no zimbraConstraint, we get an empty Set from getMultiAttrSet
+            // if there is no zmailConstraint, we get an empty Set from getMultiAttrSet
             // and we will cache and return an empty set of AttributeConstraint.  
-            // This is good because we do not want to repeatedly read LDAP if zimbraConstraint
+            // This is good because we do not want to repeatedly read LDAP if zmailConstraint
             // is not set
             //
             constraints = loadConstraints(constraintEntry);
@@ -525,7 +525,7 @@ public class AttributeConstraint {
     private static Map<String, AttributeConstraint> loadConstraints(Entry constraintEntry) throws ServiceException {
         Map<String, AttributeConstraint> constraints = new HashMap<String, AttributeConstraint>();
 
-        Set<String> cstrnts = constraintEntry.getMultiAttrSet(Provisioning.A_zimbraConstraint);
+        Set<String> cstrnts = constraintEntry.getMultiAttrSet(Provisioning.A_zmailConstraint);
         
         AttributeManager am = AttributeManager.getInstance();
         for (String c : cstrnts) {
@@ -568,21 +568,21 @@ public class AttributeConstraint {
         // update LDAP
         Map<String, Object> newAttrValues = new HashMap<String, Object>();
         if (curConstraints.size() == 0)
-            newAttrValues.put(Provisioning.A_zimbraConstraint, null);
+            newAttrValues.put(Provisioning.A_zmailConstraint, null);
         else {
             List<String> newValues = new ArrayList<String>();
             for (AttributeConstraint at : curConstraints.values()) {
                 newValues.add(at.toString());
             }
             
-            newAttrValues.put(Provisioning.A_zimbraConstraint, newValues.toArray(new String[newValues.size()]));
+            newAttrValues.put(Provisioning.A_zmailConstraint, newValues.toArray(new String[newValues.size()]));
         }
         Provisioning.getInstance().modifyAttrs(constraintEntry, newAttrValues);
     }
     
     private static boolean ignoreConstraint(String attrName) {
-        return (Provisioning.A_zimbraCOSId.equals(attrName) ||
-                Provisioning.A_zimbraDomainDefaultCOSId.equals(attrName));
+        return (Provisioning.A_zmailCOSId.equals(attrName) ||
+                Provisioning.A_zmailDomainDefaultCOSId.equals(attrName));
     }
 
     static boolean violateConstraint(Map<String, AttributeConstraint> constraints, String attrName, Object value) throws ServiceException {
@@ -591,7 +591,7 @@ public class AttributeConstraint {
             return false;
         
         if (ignoreConstraint(attrName)) {
-            ZimbraLog.acl.warn("Constraint for " + attrName + " is not suported and is ignored.");
+            ZmailLog.acl.warn("Constraint for " + attrName + " is not suported and is ignored.");
             return false;
         }
         
@@ -636,10 +636,10 @@ public class AttributeConstraint {
         Provisioning prov = Provisioning.getInstance();
         AttributeManager am = AttributeManager.getInstance();
         
-        AttributeConstraint.fromString(am, "zimbraPasswordMinLength:min=6");
-        AttributeConstraint.fromString(am, "zimbraPasswordMaxLength:min=64");
-        AttributeConstraint.fromString(am, "zimbraPasswordMinLength:min=6:max=64:values=1,2,3");
-        AttributeConstraint.fromString(am, "zimbraFeatureMailEnabled:values=FALSE,TRUE");
+        AttributeConstraint.fromString(am, "zmailPasswordMinLength:min=6");
+        AttributeConstraint.fromString(am, "zmailPasswordMaxLength:min=64");
+        AttributeConstraint.fromString(am, "zmailPasswordMinLength:min=6:max=64:values=1,2,3");
+        AttributeConstraint.fromString(am, "zmailFeatureMailEnabled:values=FALSE,TRUE");
         
         Account acct = prov.get(Key.AccountBy.name, "user1@phoebe.mac");
         Cos cos = prov.getCOS(acct);
@@ -648,72 +648,72 @@ public class AttributeConstraint {
         Map<String, Object> cosConstraints = new HashMap<String,Object>();
         
         // integer
-        cos.addConstraint("zimbraPasswordMinLength:min=6:max=10:values=8,9", cosConstraints);
+        cos.addConstraint("zmailPasswordMinLength:min=6:max=10:values=8,9", cosConstraints);
         
         // long
         long longMax = Long.MAX_VALUE;
         long longMaxMinusOne = longMax - 1;
-        cos.addConstraint("zimbraMailQuota:max="+longMaxMinusOne, cosConstraints);
+        cos.addConstraint("zmailMailQuota:max="+longMaxMinusOne, cosConstraints);
         
         // duration
-        cos.addConstraint("zimbraPasswordLockoutDuration:min=5h:max=1d", cosConstraints);
+        cos.addConstraint("zmailPasswordLockoutDuration:min=5h:max=1d", cosConstraints);
         
         // gentime
-        cos.addConstraint("zimbraPrefPop3DownloadSince:min=20060315023000Z", cosConstraints);
+        cos.addConstraint("zmailPrefPop3DownloadSince:min=20060315023000Z", cosConstraints);
         
         // string
-        cos.addConstraint("zimbraPrefGroupMailBy:values=conversation", cosConstraints);
+        cos.addConstraint("zmailPrefGroupMailBy:values=conversation", cosConstraints);
         
         // bad constraint, invalid min constraint
-        cos.addConstraint("zimbraCalendarMaxRevisions:min=zz:max=10", cosConstraints);
+        cos.addConstraint("zmailCalendarMaxRevisions:min=zz:max=10", cosConstraints);
         
         // multi-value
-        cos.addConstraint("zimbraZimletAvailableZimlets:values=A,B,C", cosConstraints);
+        cos.addConstraint("zmailZimletAvailableZimlets:values=A,B,C", cosConstraints);
         
         
         prov.modifyAttrs(cos, cosConstraints);
         
         Map<String, AttributeConstraint> constraints = getConstraint(cos);
         // integer
-        test(constraints, "zimbraPasswordMinLength", "5", true);
-        test(constraints, "zimbraPasswordMinLength", "6", true);
-        test(constraints, "zimbraPasswordMinLength", "7", true);
-        test(constraints, "zimbraPasswordMinLength", "8", false);
-        test(constraints, "zimbraPasswordMinLength", "9", false);
-        test(constraints, "zimbraPasswordMinLength", "10", true);
-        test(constraints, "zimbraPasswordMinLength", "11", true);
+        test(constraints, "zmailPasswordMinLength", "5", true);
+        test(constraints, "zmailPasswordMinLength", "6", true);
+        test(constraints, "zmailPasswordMinLength", "7", true);
+        test(constraints, "zmailPasswordMinLength", "8", false);
+        test(constraints, "zmailPasswordMinLength", "9", false);
+        test(constraints, "zmailPasswordMinLength", "10", true);
+        test(constraints, "zmailPasswordMinLength", "11", true);
         
         // long 
-        test(constraints, "zimbraMailQuota", "" + longMaxMinusOne, false);
-        test(constraints, "zimbraMailQuota", "" + longMax, true);
+        test(constraints, "zmailMailQuota", "" + longMaxMinusOne, false);
+        test(constraints, "zmailMailQuota", "" + longMax, true);
         
         // duration
-        test(constraints, "zimbraPasswordLockoutDuration", "3h", true);
-        test(constraints, "zimbraPasswordLockoutDuration", "25h", true);
-        test(constraints, "zimbraPasswordLockoutDuration", "30m", true);
-        test(constraints, "zimbraPasswordLockoutDuration", "5h", false);
-        test(constraints, "zimbraPasswordLockoutDuration", "600m", false);
-        test(constraints, "zimbraPasswordLockoutDuration", "24h", false);
+        test(constraints, "zmailPasswordLockoutDuration", "3h", true);
+        test(constraints, "zmailPasswordLockoutDuration", "25h", true);
+        test(constraints, "zmailPasswordLockoutDuration", "30m", true);
+        test(constraints, "zmailPasswordLockoutDuration", "5h", false);
+        test(constraints, "zmailPasswordLockoutDuration", "600m", false);
+        test(constraints, "zmailPasswordLockoutDuration", "24h", false);
         
         // gentime 
-        test(constraints, "zimbraPrefPop3DownloadSince", "20050315023000Z", true);
-        test(constraints, "zimbraPrefPop3DownloadSince", "20060315023000Z", false);
-        test(constraints, "zimbraPrefPop3DownloadSince", "20060315023001Z", false);
+        test(constraints, "zmailPrefPop3DownloadSince", "20050315023000Z", true);
+        test(constraints, "zmailPrefPop3DownloadSince", "20060315023000Z", false);
+        test(constraints, "zmailPrefPop3DownloadSince", "20060315023001Z", false);
         
         // string, enum, ...
-        test(constraints, "zimbraPrefGroupMailBy", "message", true);
-        test(constraints, "zimbraPrefGroupMailBy", "conversation", false);
+        test(constraints, "zmailPrefGroupMailBy", "message", true);
+        test(constraints, "zmailPrefGroupMailBy", "conversation", false);
         
         // bad constraint
-        test(constraints, "zimbraCalendarMaxRevisions", "1", false);
-        test(constraints, "zimbraCalendarMaxRevisions", "10", false);
-        test(constraints, "zimbraCalendarMaxRevisions", "11", true);
+        test(constraints, "zmailCalendarMaxRevisions", "1", false);
+        test(constraints, "zmailCalendarMaxRevisions", "10", false);
+        test(constraints, "zmailCalendarMaxRevisions", "11", true);
         
         // multi-value
-        test(constraints, "zimbraZimletAvailableZimlets", new String[]{"A","B"}, false);
-        test(constraints, "zimbraZimletAvailableZimlets", new String[]{"A","X"}, true);
+        test(constraints, "zmailZimletAvailableZimlets", new String[]{"A","B"}, false);
+        test(constraints, "zmailZimletAvailableZimlets", new String[]{"A","X"}, true);
         
-        test(constraints, "zimbraPasswordMaxLength", "100", false); // no constraint
+        test(constraints, "zmailPasswordMaxLength", "100", false); // no constraint
     }
 
 }

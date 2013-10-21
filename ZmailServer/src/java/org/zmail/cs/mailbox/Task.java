@@ -13,15 +13,15 @@
  * ***** END LICENSE BLOCK *****
  */
 
-package com.zimbra.cs.mailbox;
+package org.zmail.cs.mailbox;
 
 import javax.mail.internet.MimeMessage;
 
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.cs.account.Account;
-import com.zimbra.cs.mailbox.calendar.Invite;
-import com.zimbra.cs.redolog.op.CreateCalendarItemPlayer;
-import com.zimbra.cs.redolog.op.CreateCalendarItemRecorder;
+import org.zmail.common.service.ServiceException;
+import org.zmail.cs.account.Account;
+import org.zmail.cs.mailbox.calendar.Invite;
+import org.zmail.cs.redolog.op.CreateCalendarItemPlayer;
+import org.zmail.cs.redolog.op.CreateCalendarItemRecorder;
 
 public class Task extends CalendarItem {
     public Task(Mailbox mbox, UnderlyingData data) throws ServiceException {

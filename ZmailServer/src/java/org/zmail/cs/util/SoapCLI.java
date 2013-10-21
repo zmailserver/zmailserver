@@ -12,7 +12,7 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.util;
+package org.zmail.cs.util;
 
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -34,17 +34,17 @@ import org.apache.commons.cli.OptionGroup;
 import org.apache.commons.cli.Options;
 import org.apache.commons.cli.ParseException;
 
-import com.zimbra.common.auth.ZAuthToken;
-import com.zimbra.common.localconfig.LC;
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.common.soap.AdminConstants;
-import com.zimbra.common.soap.Element;
-import com.zimbra.common.soap.SoapFaultException;
-import com.zimbra.common.soap.SoapHttpTransport;
-import com.zimbra.common.soap.SoapTransport;
-import com.zimbra.common.util.StringUtil;
-import com.zimbra.cs.account.Provisioning;
-import com.zimbra.cs.client.LmcSession;
+import org.zmail.common.auth.ZAuthToken;
+import org.zmail.common.localconfig.LC;
+import org.zmail.common.service.ServiceException;
+import org.zmail.common.soap.AdminConstants;
+import org.zmail.common.soap.Element;
+import org.zmail.common.soap.SoapFaultException;
+import org.zmail.common.soap.SoapHttpTransport;
+import org.zmail.common.soap.SoapTransport;
+import org.zmail.common.util.StringUtil;
+import org.zmail.cs.account.Provisioning;
+import org.zmail.cs.client.LmcSession;
 
 /**
  * For command line interface utilities that are SOAP clients and need to authenticate with
@@ -106,19 +106,19 @@ public abstract class SoapCLI {
 
     protected SoapCLI(boolean disableTargetServerOption) throws ServiceException {
         // get admin username from local config
-        mUser = LC.zimbra_ldap_user.value();
+        mUser = LC.zmail_ldap_user.value();
         // get password from localconfig
-        mPassword = LC.zimbra_ldap_password.value();
+        mPassword = LC.zmail_ldap_password.value();
         // host can be specified
         mHost = "localhost";
         // get admin port number from provisioning
-        com.zimbra.cs.account.Config conf = null;
+        org.zmail.cs.account.Config conf = null;
         try {
 	        conf = Provisioning.getInstance().getConfig();
         } catch (ServiceException e) {
         	throw ServiceException.FAILURE("Unable to connect to LDAP directory", e);
         }
-        mPort = conf.getIntAttr(Provisioning.A_zimbraAdminPort, 0);
+        mPort = conf.getIntAttr(Provisioning.A_zmailAdminPort, 0);
         if (mPort == 0)
             throw ServiceException.FAILURE("Unable to get admin port number from provisioning", null);
         mOptions = new Options();
@@ -196,7 +196,7 @@ public abstract class SoapCLI {
     /**
      * Authenticates using the username and password from the local config.
      * @throws IOException
-     * @throws com.zimbra.common.soap.SoapFaultException
+     * @throws org.zmail.common.soap.SoapFaultException
      * @throws ServiceException
      */
     protected LmcSession auth() throws SoapFaultException, IOException, ServiceException {
@@ -224,7 +224,7 @@ public abstract class SoapCLI {
     /**
      * Authenticates using the provided ZAuthToken
      * @throws IOException
-     * @throws com.zimbra.common.soap.SoapFaultException
+     * @throws org.zmail.common.soap.SoapFaultException
      * @throws ServiceException
      */
     protected LmcSession auth(ZAuthToken zAuthToken) throws SoapFaultException, IOException, ServiceException {

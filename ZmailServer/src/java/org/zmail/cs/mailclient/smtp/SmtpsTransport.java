@@ -12,14 +12,14 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.mailclient.smtp;
+package org.zmail.cs.mailclient.smtp;
 
 import javax.mail.Provider;
 import javax.mail.Session;
 import javax.mail.Transport;
 import javax.mail.URLName;
 
-import com.zimbra.cs.util.BuildInfo;
+import org.zmail.cs.util.BuildInfo;
 
 /**
  * A custom SMTPS (SMTP over SSL) {@link Transport} implementation using
@@ -32,7 +32,7 @@ public final class SmtpsTransport extends SmtpTransport {
 
     public static final Provider PROVIDER = new Provider(
             Provider.Type.TRANSPORT, "smtps", SmtpsTransport.class.getName(),
-            "Zimbra", BuildInfo.VERSION);
+            "Zmail", BuildInfo.VERSION);
 
     public SmtpsTransport(Session session, URLName urlname) {
         super(session, urlname, true);

@@ -17,7 +17,7 @@
  * Created on Jan 20, 2005
  *
  */
-package com.zimbra.cs.convert;
+package org.zmail.cs.convert;
 
 import java.io.File;
 import java.io.InputStream;

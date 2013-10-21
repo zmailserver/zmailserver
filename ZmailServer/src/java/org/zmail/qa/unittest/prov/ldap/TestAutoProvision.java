@@ -12,7 +12,7 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.qa.unittest.prov.ldap;
+package org.zmail.qa.unittest.prov.ldap;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
@@ -29,24 +29,24 @@ import org.junit.AfterClass;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
-import com.zimbra.common.account.ZAttrProvisioning.AutoProvAuthMech;
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.cs.account.Account;
-import com.zimbra.cs.account.AccountServiceException;
-import com.zimbra.cs.account.AutoProvisionThread;
-import com.zimbra.cs.account.Config;
-import com.zimbra.cs.account.Domain;
-import com.zimbra.cs.account.Provisioning;
-import com.zimbra.cs.account.Provisioning.DirectoryEntryVisitor;
-import com.zimbra.cs.account.Provisioning.EagerAutoProvisionScheduler;
-import com.zimbra.cs.account.auth.AuthContext;
-import com.zimbra.cs.account.auth.AuthMechanism.AuthMech;
-import com.zimbra.cs.account.ldap.AutoProvisionListener;
-import com.zimbra.cs.account.ldap.LdapProv;
-import com.zimbra.cs.ldap.LdapUtil;
-import com.zimbra.qa.unittest.TestUtil;
-import com.zimbra.qa.unittest.prov.AutoProvisionTestUtil;
-import com.zimbra.soap.type.AutoProvPrincipalBy;
+import org.zmail.common.account.ZAttrProvisioning.AutoProvAuthMech;
+import org.zmail.common.service.ServiceException;
+import org.zmail.cs.account.Account;
+import org.zmail.cs.account.AccountServiceException;
+import org.zmail.cs.account.AutoProvisionThread;
+import org.zmail.cs.account.Config;
+import org.zmail.cs.account.Domain;
+import org.zmail.cs.account.Provisioning;
+import org.zmail.cs.account.Provisioning.DirectoryEntryVisitor;
+import org.zmail.cs.account.Provisioning.EagerAutoProvisionScheduler;
+import org.zmail.cs.account.auth.AuthContext;
+import org.zmail.cs.account.auth.AuthMechanism.AuthMech;
+import org.zmail.cs.account.ldap.AutoProvisionListener;
+import org.zmail.cs.account.ldap.LdapProv;
+import org.zmail.cs.ldap.LdapUtil;
+import org.zmail.qa.unittest.TestUtil;
+import org.zmail.qa.unittest.prov.AutoProvisionTestUtil;
+import org.zmail.soap.type.AutoProvPrincipalBy;
 
 public class TestAutoProvision extends LdapTest {
     private static LdapProvTestUtil provUtil;
@@ -67,13 +67,13 @@ public class TestAutoProvision extends LdapTest {
         Cleanup.deleteAll(baseDomainName());
     }
 
-    private String getZimbraDomainName(String testName) {
+    private String getZmailDomainName(String testName) {
         return testName + "." + baseDomainName();
     }
 
-    private Domain createZimbraDomain(String testName, Map<String, Object> zimbraDomainAttrs)
+    private Domain createZmailDomain(String testName, Map<String, Object> zmailDomainAttrs)
             throws Exception {
-        return provUtil.createDomain(getZimbraDomainName(testName), zimbraDomainAttrs);
+        return provUtil.createDomain(getZmailDomainName(testName), zmailDomainAttrs);
     }
 
     private String createExternalAcctEntry(String localPart) throws Exception {
@@ -113,13 +113,13 @@ public class TestAutoProvision extends LdapTest {
         String extAcctLocalPart = testName;
         String extAcctName = createExternalAcctEntry(extAcctLocalPart);
 
-        Map<String, Object> zimbraDomainAttrs = AutoProvisionTestUtil.commonZimbraDomainAttrs();
-        // uid=bydntemplate,ou=people,dc=external,dc=com,dc=zimbra,dc=qa,dc=unittest,dc=testldapprovautoprovision
-        zimbraDomainAttrs.put(Provisioning.A_zimbraAutoProvLdapBindDn, "uid=%u,ou=people," + extDomainDn);
-        Domain zimbraDomain = createZimbraDomain(testName, zimbraDomainAttrs);
+        Map<String, Object> zmailDomainAttrs = AutoProvisionTestUtil.commonZmailDomainAttrs();
+        // uid=bydntemplate,ou=people,dc=external,dc=com,dc=zmail,dc=qa,dc=unittest,dc=testldapprovautoprovision
+        zmailDomainAttrs.put(Provisioning.A_zmailAutoProvLdapBindDn, "uid=%u,ou=people," + extDomainDn);
+        Domain zmailDomain = createZmailDomain(testName, zmailDomainAttrs);
 
         String loginName = extAcctLocalPart;
-        Account acct = prov.autoProvAccountLazy(zimbraDomain, loginName, null, AutoProvAuthMech.LDAP);
+        Account acct = prov.autoProvAccountLazy(zmailDomain, loginName, null, AutoProvAuthMech.LDAP);
         AutoProvisionTestUtil.verifyAcctAutoProvisioned(acct);
     }
 
@@ -130,13 +130,13 @@ public class TestAutoProvision extends LdapTest {
         String extAcctLocalPart = testName;
         String extAcctName = createExternalAcctEntry(extAcctLocalPart);
 
-        Map<String, Object> zimbraDomainAttrs = AutoProvisionTestUtil.commonZimbraDomainAttrs();
-        zimbraDomainAttrs.put(Provisioning.A_zimbraAutoProvLdapSearchBase, extDomainDn);
-        zimbraDomainAttrs.put(Provisioning.A_zimbraAutoProvLdapSearchFilter, "(uid=%u)");
-        Domain zimbraDomain = createZimbraDomain(testName, zimbraDomainAttrs);
+        Map<String, Object> zmailDomainAttrs = AutoProvisionTestUtil.commonZmailDomainAttrs();
+        zmailDomainAttrs.put(Provisioning.A_zmailAutoProvLdapSearchBase, extDomainDn);
+        zmailDomainAttrs.put(Provisioning.A_zmailAutoProvLdapSearchFilter, "(uid=%u)");
+        Domain zmailDomain = createZmailDomain(testName, zmailDomainAttrs);
 
         String loginName = extAcctLocalPart;
-        Account acct = prov.autoProvAccountLazy(zimbraDomain, loginName, null, AutoProvAuthMech.LDAP);
+        Account acct = prov.autoProvAccountLazy(zmailDomain, loginName, null, AutoProvAuthMech.LDAP);
         AutoProvisionTestUtil.verifyAcctAutoProvisioned(acct);
     }
 
@@ -171,17 +171,17 @@ public class TestAutoProvision extends LdapTest {
         String extAcctLocalPart = testName;
         String extAcctName = createExternalAcctEntry(extAcctLocalPart);
 
-        Map<String, Object> zimbraDomainAttrs = AutoProvisionTestUtil.commonZimbraDomainAttrs();
-        zimbraDomainAttrs.put(Provisioning.A_zimbraAutoProvLdapSearchBase, extDomainDn);
-        zimbraDomainAttrs.put(Provisioning.A_zimbraAutoProvLdapSearchFilter, "(uid=%u)");
+        Map<String, Object> zmailDomainAttrs = AutoProvisionTestUtil.commonZmailDomainAttrs();
+        zmailDomainAttrs.put(Provisioning.A_zmailAutoProvLdapSearchBase, extDomainDn);
+        zmailDomainAttrs.put(Provisioning.A_zmailAutoProvLdapSearchFilter, "(uid=%u)");
 
-        // com.zimbra.qa.unittest.ldap.TestAutoProvision$TestListener
+        // org.zmail.qa.unittest.ldap.TestAutoProvision$TestListener
         String className = TestListener.class.getName();
-        zimbraDomainAttrs.put(Provisioning.A_zimbraAutoProvListenerClass, className);
-        Domain zimbraDomain = createZimbraDomain(testName, zimbraDomainAttrs);
+        zmailDomainAttrs.put(Provisioning.A_zmailAutoProvListenerClass, className);
+        Domain zmailDomain = createZmailDomain(testName, zmailDomainAttrs);
 
         String loginName = extAcctLocalPart;
-        Account acct = prov.autoProvAccountLazy(zimbraDomain, loginName, null, AutoProvAuthMech.LDAP);
+        Account acct = prov.autoProvAccountLazy(zmailDomain, loginName, null, AutoProvAuthMech.LDAP);
         AutoProvisionTestUtil.verifyAcctAutoProvisioned(acct);
 
         TestListener listener = TestListener.getInstance();
@@ -195,20 +195,20 @@ public class TestAutoProvision extends LdapTest {
         String testName = getTestName();
 
         String extAcctLocalPart = testName;
-        String zimbraAcctLocalpart = "myzimbraname";
+        String zmailAcctLocalpart = "myzmailname";
         Map<String, Object> acctAttrs = new HashMap<String, Object>();
-        acctAttrs.put(Provisioning.A_description, zimbraAcctLocalpart); // going to be the local part of the zimrba account name
+        acctAttrs.put(Provisioning.A_description, zmailAcctLocalpart); // going to be the local part of the zimrba account name
         String extAcctName = createExternalAcctEntry(extAcctLocalPart, acctAttrs);
 
-        Map<String, Object> zimbraDomainAttrs = AutoProvisionTestUtil.commonZimbraDomainAttrs();
-        zimbraDomainAttrs.put(Provisioning.A_zimbraAutoProvLdapSearchBase, extDomainDn);
-        zimbraDomainAttrs.put(Provisioning.A_zimbraAutoProvLdapSearchFilter, "(uid=%u)");
-        zimbraDomainAttrs.put(Provisioning.A_zimbraAutoProvAccountNameMap, Provisioning.A_description);
-        Domain zimbraDomain = createZimbraDomain(testName, zimbraDomainAttrs);
+        Map<String, Object> zmailDomainAttrs = AutoProvisionTestUtil.commonZmailDomainAttrs();
+        zmailDomainAttrs.put(Provisioning.A_zmailAutoProvLdapSearchBase, extDomainDn);
+        zmailDomainAttrs.put(Provisioning.A_zmailAutoProvLdapSearchFilter, "(uid=%u)");
+        zmailDomainAttrs.put(Provisioning.A_zmailAutoProvAccountNameMap, Provisioning.A_description);
+        Domain zmailDomain = createZmailDomain(testName, zmailDomainAttrs);
 
         String loginName = extAcctLocalPart;
-        Account acct = prov.autoProvAccountLazy(zimbraDomain, loginName, null, AutoProvAuthMech.LDAP);
-        AutoProvisionTestUtil.verifyAcctAutoProvisioned(acct, zimbraAcctLocalpart + "@" + zimbraDomain.getName());
+        Account acct = prov.autoProvAccountLazy(zmailDomain, loginName, null, AutoProvAuthMech.LDAP);
+        AutoProvisionTestUtil.verifyAcctAutoProvisioned(acct, zmailAcctLocalpart + "@" + zmailDomain.getName());
     }
 
     @Test
@@ -218,12 +218,12 @@ public class TestAutoProvision extends LdapTest {
         String extAcctLocalPart = testName;
         String extAcctName = createExternalAcctEntry(extAcctLocalPart);
 
-        Map<String, Object> zimbraDomainAttrs = AutoProvisionTestUtil.commonZimbraDomainAttrs();
-        zimbraDomainAttrs.put(Provisioning.A_zimbraAutoProvLdapBindDn, "uid=%u,ou=people," + extDomainDn);
-        Domain zimbraDomain = createZimbraDomain(testName, zimbraDomainAttrs);
+        Map<String, Object> zmailDomainAttrs = AutoProvisionTestUtil.commonZmailDomainAttrs();
+        zmailDomainAttrs.put(Provisioning.A_zmailAutoProvLdapBindDn, "uid=%u,ou=people," + extDomainDn);
+        Domain zmailDomain = createZmailDomain(testName, zmailDomainAttrs);
 
         String loginName = extAcctLocalPart;
-        Account acct = prov.autoProvAccountLazy(zimbraDomain, loginName, null, AutoProvAuthMech.PREAUTH);
+        Account acct = prov.autoProvAccountLazy(zmailDomain, loginName, null, AutoProvAuthMech.PREAUTH);
         assertNull(acct);
     }
 
@@ -235,23 +235,23 @@ public class TestAutoProvision extends LdapTest {
         String extAcctLocalPart = testName;
         String extAcctName = createExternalAcctEntry(extAcctLocalPart, externalPassword, null);
 
-        Map<String, Object> zimbraDomainAttrs = AutoProvisionTestUtil.commonZimbraDomainAttrs();
+        Map<String, Object> zmailDomainAttrs = AutoProvisionTestUtil.commonZmailDomainAttrs();
         // setup auto prov
-        zimbraDomainAttrs.put(Provisioning.A_zimbraAutoProvLdapSearchBase, extDomainDn);
-        zimbraDomainAttrs.put(Provisioning.A_zimbraAutoProvLdapSearchFilter, "(uid=%u)");
+        zmailDomainAttrs.put(Provisioning.A_zmailAutoProvLdapSearchBase, extDomainDn);
+        zmailDomainAttrs.put(Provisioning.A_zmailAutoProvLdapSearchFilter, "(uid=%u)");
         // setup external LDAP auth
-        zimbraDomainAttrs.put(Provisioning.A_zimbraAuthMech, AuthMech.ldap.name());
-        zimbraDomainAttrs.put(Provisioning.A_zimbraAuthLdapURL, "ldap://localhost:389");
-        zimbraDomainAttrs.put(Provisioning.A_zimbraAuthLdapBindDn, "uid=%u,ou=people," + extDomainDn);
-        Domain zimbraDomain = createZimbraDomain(testName, zimbraDomainAttrs);
+        zmailDomainAttrs.put(Provisioning.A_zmailAuthMech, AuthMech.ldap.name());
+        zmailDomainAttrs.put(Provisioning.A_zmailAuthLdapURL, "ldap://localhost:389");
+        zmailDomainAttrs.put(Provisioning.A_zmailAuthLdapBindDn, "uid=%u,ou=people," + extDomainDn);
+        Domain zmailDomain = createZmailDomain(testName, zmailDomainAttrs);
 
         // try auto provisioning with bad password
         String loginName = extAcctLocalPart;
-        Account acct = prov.autoProvAccountLazy(zimbraDomain, loginName, externalPassword + "bad", null);
+        Account acct = prov.autoProvAccountLazy(zmailDomain, loginName, externalPassword + "bad", null);
         assertNull(acct);
 
         // try again with correct password
-        acct = prov.autoProvAccountLazy(zimbraDomain, loginName, externalPassword, null);
+        acct = prov.autoProvAccountLazy(zmailDomain, loginName, externalPassword, null);
         AutoProvisionTestUtil.verifyAcctAutoProvisioned(acct);
     }
 
@@ -268,15 +268,15 @@ public class TestAutoProvision extends LdapTest {
         String extAcctLocalPart = testName;
         String extAcctName = createExternalAcctEntry(extAcctLocalPart, externalPassword, null);
 
-        Map<String, Object> zimbraDomainAttrs = AutoProvisionTestUtil.commonZimbraDomainAttrs();
+        Map<String, Object> zmailDomainAttrs = AutoProvisionTestUtil.commonZmailDomainAttrs();
         // setup auto prov
-        zimbraDomainAttrs.put(Provisioning.A_zimbraAutoProvLdapSearchBase, extDomainDn);
-        zimbraDomainAttrs.put(Provisioning.A_zimbraAutoProvLdapSearchFilter, "(uid=%u)");
-        Domain zimbraDomain = createZimbraDomain(testName, zimbraDomainAttrs);
+        zmailDomainAttrs.put(Provisioning.A_zmailAutoProvLdapSearchBase, extDomainDn);
+        zmailDomainAttrs.put(Provisioning.A_zmailAutoProvLdapSearchFilter, "(uid=%u)");
+        Domain zmailDomain = createZmailDomain(testName, zmailDomainAttrs);
 
         String principal = extAcctLocalPart;
         String password = "test123";
-        Account acct = prov.autoProvAccountManual(zimbraDomain, AutoProvPrincipalBy.name,
+        Account acct = prov.autoProvAccountManual(zmailDomain, AutoProvPrincipalBy.name,
                 principal, password);
         AutoProvisionTestUtil.verifyAcctAutoProvisioned(acct);
 
@@ -299,23 +299,23 @@ public class TestAutoProvision extends LdapTest {
         String testName = getTestName();
 
         String extAcctLocalPart = testName;
-        String zimbraAcctLocalpart = "myzimbraname";
+        String zmailAcctLocalpart = "myzmailname";
         Map<String, Object> acctAttrs = new HashMap<String, Object>();
-        acctAttrs.put(Provisioning.A_description, zimbraAcctLocalpart); // going to be the local part of the zimrba account name
+        acctAttrs.put(Provisioning.A_description, zmailAcctLocalpart); // going to be the local part of the zimrba account name
         String extAcctName = createExternalAcctEntry(extAcctLocalPart, acctAttrs);
 
-        Map<String, Object> zimbraDomainAttrs = AutoProvisionTestUtil.commonZimbraDomainAttrs();
+        Map<String, Object> zmailDomainAttrs = AutoProvisionTestUtil.commonZmailDomainAttrs();
         // setup auto prov
-        zimbraDomainAttrs.put(Provisioning.A_zimbraAutoProvLdapSearchBase, extDomainDn);
-        zimbraDomainAttrs.put(Provisioning.A_zimbraAutoProvLdapSearchFilter, "(uid=%u)");
-        zimbraDomainAttrs.put(Provisioning.A_zimbraAutoProvAccountNameMap, Provisioning.A_description);
-        Domain zimbraDomain = createZimbraDomain(testName, zimbraDomainAttrs);
+        zmailDomainAttrs.put(Provisioning.A_zmailAutoProvLdapSearchBase, extDomainDn);
+        zmailDomainAttrs.put(Provisioning.A_zmailAutoProvLdapSearchFilter, "(uid=%u)");
+        zmailDomainAttrs.put(Provisioning.A_zmailAutoProvAccountNameMap, Provisioning.A_description);
+        Domain zmailDomain = createZmailDomain(testName, zmailDomainAttrs);
 
         String principal = externalEntryDN(extAcctLocalPart);
         String password = null;
-        Account acct = prov.autoProvAccountManual(zimbraDomain, AutoProvPrincipalBy.dn,
+        Account acct = prov.autoProvAccountManual(zmailDomain, AutoProvPrincipalBy.dn,
                 principal, password);
-        AutoProvisionTestUtil.verifyAcctAutoProvisioned(acct, zimbraAcctLocalpart + "@" + zimbraDomain.getName());
+        AutoProvisionTestUtil.verifyAcctAutoProvisioned(acct, zmailAcctLocalpart + "@" + zmailDomain.getName());
     }
 
     @Test
@@ -330,11 +330,11 @@ public class TestAutoProvision extends LdapTest {
         createExternalAcctEntry(extAcctLocalPart2, externalPassword, null);
         createExternalAcctEntry(extAcctLocalPart3, externalPassword, null);
 
-        Map<String, Object> zimbraDomainAttrs = AutoProvisionTestUtil.commonZimbraDomainAttrs();
+        Map<String, Object> zmailDomainAttrs = AutoProvisionTestUtil.commonZmailDomainAttrs();
         // setup auto prov
-        zimbraDomainAttrs.put(Provisioning.A_zimbraAutoProvLdapSearchBase, extDomainDn);
-        zimbraDomainAttrs.put(Provisioning.A_zimbraAutoProvLdapSearchFilter, "(uid=%u)");
-        Domain zimbraDomain = createZimbraDomain(testName, zimbraDomainAttrs);
+        zmailDomainAttrs.put(Provisioning.A_zmailAutoProvLdapSearchBase, extDomainDn);
+        zmailDomainAttrs.put(Provisioning.A_zmailAutoProvLdapSearchFilter, "(uid=%u)");
+        Domain zmailDomain = createZmailDomain(testName, zmailDomainAttrs);
 
         final Set<String> entriesFound = new HashSet<String>();
         DirectoryEntryVisitor visitor = new DirectoryEntryVisitor() {
@@ -344,7 +344,7 @@ public class TestAutoProvision extends LdapTest {
             }
         };
 
-        prov.searchAutoProvDirectory(zimbraDomain, null, extAcctLocalPart2,
+        prov.searchAutoProvDirectory(zmailDomain, null, extAcctLocalPart2,
                 null, 0, visitor);
 
         assertEquals(1, entriesFound.size());
@@ -363,11 +363,11 @@ public class TestAutoProvision extends LdapTest {
         createExternalAcctEntry(extAcctLocalPart2, externalPassword, null);
         createExternalAcctEntry(extAcctLocalPart3, externalPassword, null);
 
-        Map<String, Object> zimbraDomainAttrs = AutoProvisionTestUtil.commonZimbraDomainAttrs();
+        Map<String, Object> zmailDomainAttrs = AutoProvisionTestUtil.commonZmailDomainAttrs();
         // setup auto prov - no need
-        // zimbraDomainAttrs.put(Provisioning.A_zimbraAutoProvLdapSearchBase, extDomainDn);
-        // zimbraDomainAttrs.put(Provisioning.A_zimbraAutoProvLdapSearchFilter, "(uid=%u)");
-        Domain zimbraDomain = createZimbraDomain(testName, zimbraDomainAttrs);
+        // zmailDomainAttrs.put(Provisioning.A_zmailAutoProvLdapSearchBase, extDomainDn);
+        // zmailDomainAttrs.put(Provisioning.A_zmailAutoProvLdapSearchFilter, "(uid=%u)");
+        Domain zmailDomain = createZmailDomain(testName, zmailDomainAttrs);
 
         final Set<String> entriesFound = new HashSet<String>();
         DirectoryEntryVisitor visitor = new DirectoryEntryVisitor() {
@@ -377,7 +377,7 @@ public class TestAutoProvision extends LdapTest {
             }
         };
 
-        prov.searchAutoProvDirectory(zimbraDomain,
+        prov.searchAutoProvDirectory(zmailDomain,
                 String.format("(mail=%s*)", testName),
                 null, null, 0, visitor);
 
@@ -399,12 +399,12 @@ public class TestAutoProvision extends LdapTest {
         createExternalAcctEntry(extAcctLocalPart2, externalPassword, null);
         createExternalAcctEntry(extAcctLocalPart3, externalPassword, null);
 
-        Map<String, Object> zimbraDomainAttrs = AutoProvisionTestUtil.commonZimbraDomainAttrs();
+        Map<String, Object> zmailDomainAttrs = AutoProvisionTestUtil.commonZmailDomainAttrs();
         // setup auto prov
-        zimbraDomainAttrs.put(Provisioning.A_zimbraAutoProvLdapSearchBase, extDomainDn);
-        zimbraDomainAttrs.put(Provisioning.A_zimbraAutoProvLdapSearchFilter,
+        zmailDomainAttrs.put(Provisioning.A_zmailAutoProvLdapSearchBase, extDomainDn);
+        zmailDomainAttrs.put(Provisioning.A_zmailAutoProvLdapSearchFilter,
                 "(&(uid=%u)(mail=searchAutoProvDirectoryByConfiguredSearchFilter*))");
-        Domain zimbraDomain = createZimbraDomain(testName, zimbraDomainAttrs);
+        Domain zmailDomain = createZmailDomain(testName, zmailDomainAttrs);
 
         final Set<String> entriesFound = new HashSet<String>();
         DirectoryEntryVisitor visitor = new DirectoryEntryVisitor() {
@@ -414,7 +414,7 @@ public class TestAutoProvision extends LdapTest {
             }
         };
 
-        prov.searchAutoProvDirectory(zimbraDomain, null, null,
+        prov.searchAutoProvDirectory(zmailDomain, null, null,
                 null, 0, visitor);
 
         assertEquals(3, entriesFound.size());
@@ -445,24 +445,24 @@ public class TestAutoProvision extends LdapTest {
         createExternalAcctEntry(extAcctLocalPart4, externalPassword, null);
         createExternalAcctEntry(extAcctLocalPart5, externalPassword, null);
 
-        Map<String, Object> zimbraDomainAttrs = AutoProvisionTestUtil.commonZimbraDomainAttrs();
+        Map<String, Object> zmailDomainAttrs = AutoProvisionTestUtil.commonZmailDomainAttrs();
         // setup auto prov
-        zimbraDomainAttrs.put(Provisioning.A_zimbraAutoProvLdapSearchBase, extDomainDn);
-        zimbraDomainAttrs
-                .put(Provisioning.A_zimbraAutoProvLdapSearchFilter,
+        zmailDomainAttrs.put(Provisioning.A_zmailAutoProvLdapSearchBase, extDomainDn);
+        zmailDomainAttrs
+                .put(Provisioning.A_zmailAutoProvLdapSearchFilter,
                         "(&(uid=%u)(mail=eagerMode*)" + AutoProvisionTestUtil.MarkEntryProvisionedListener.NOT_PROVED_FILTER + ")");
-        zimbraDomainAttrs.put(Provisioning.A_zimbraAutoProvAccountNameMap, Provisioning.A_uid);
+        zmailDomainAttrs.put(Provisioning.A_zmailAutoProvAccountNameMap, Provisioning.A_uid);
 
         // set batch size to a smaller number then num account matching the filter, 
         // so we hit the TOO_MANY_SEARCH_RESULTS (bug 66605)
         int batchSize = totalAccts - 1;
-        zimbraDomainAttrs.put(Provisioning.A_zimbraAutoProvBatchSize, Integer.valueOf(batchSize).toString());
-        zimbraDomainAttrs.put(Provisioning.A_zimbraAutoProvListenerClass,
+        zmailDomainAttrs.put(Provisioning.A_zmailAutoProvBatchSize, Integer.valueOf(batchSize).toString());
+        zmailDomainAttrs.put(Provisioning.A_zmailAutoProvListenerClass,
                 AutoProvisionTestUtil.MarkEntryProvisionedListener.class.getName());
-        Domain zimbraDomain = createZimbraDomain(testName, zimbraDomainAttrs);
+        Domain zmailDomain = createZmailDomain(testName, zmailDomainAttrs);
 
         // schedule the domain on local server
-        prov.getLocalServer().addAutoProvScheduledDomains(zimbraDomain.getName());
+        prov.getLocalServer().addAutoProvScheduledDomains(zmailDomain.getName());
 
         EagerAutoProvisionScheduler scheduler = new EagerAutoProvisionScheduler() {
             @Override
@@ -473,23 +473,23 @@ public class TestAutoProvision extends LdapTest {
 
         prov.autoProvAccountEager(scheduler);
 
-        List<Account> zimbraAccts = prov.getAllAccounts(zimbraDomain);
-        assertEquals(batchSize, zimbraAccts.size());
+        List<Account> zmailAccts = prov.getAllAccounts(zmailDomain);
+        assertEquals(batchSize, zmailAccts.size());
 
         // do it again, this time the 5th account should be provisioned
         prov.autoProvAccountEager(scheduler);
-        zimbraAccts = prov.getAllAccounts(zimbraDomain);
-        assertEquals(totalAccts, zimbraAccts.size());
+        zmailAccts = prov.getAllAccounts(zmailDomain);
+        assertEquals(totalAccts, zmailAccts.size());
 
         Set<String> acctNames = new HashSet<String>();
-        for (Account acct : zimbraAccts) {
+        for (Account acct : zmailAccts) {
             acctNames.add(acct.getName());
         }
 
-        assertTrue(acctNames.contains(TestUtil.getAddress(extAcctLocalPart1, zimbraDomain.getName()).toLowerCase()));
-        assertTrue(acctNames.contains(TestUtil.getAddress(extAcctLocalPart3, zimbraDomain.getName()).toLowerCase()));
-        assertTrue(acctNames.contains(TestUtil.getAddress(extAcctLocalPart4, zimbraDomain.getName()).toLowerCase()));
-        assertTrue(acctNames.contains(TestUtil.getAddress(extAcctLocalPart5, zimbraDomain.getName()).toLowerCase()));
+        assertTrue(acctNames.contains(TestUtil.getAddress(extAcctLocalPart1, zmailDomain.getName()).toLowerCase()));
+        assertTrue(acctNames.contains(TestUtil.getAddress(extAcctLocalPart3, zmailDomain.getName()).toLowerCase()));
+        assertTrue(acctNames.contains(TestUtil.getAddress(extAcctLocalPart4, zmailDomain.getName()).toLowerCase()));
+        assertTrue(acctNames.contains(TestUtil.getAddress(extAcctLocalPart5, zmailDomain.getName()).toLowerCase()));
 
         // clear scheduled domains on the local server
         prov.getLocalServer().unsetAutoProvScheduledDomains();
@@ -524,37 +524,37 @@ public class TestAutoProvision extends LdapTest {
         createExternalAcctEntry(extAcctLocalPart4, externalPassword, null);
         createExternalAcctEntry(extAcctLocalPart5, externalPassword, null);
 
-        Map<String, Object> zimbraDomainAttrs = AutoProvisionTestUtil.commonZimbraDomainAttrs();
+        Map<String, Object> zmailDomainAttrs = AutoProvisionTestUtil.commonZmailDomainAttrs();
         // setup auto prov
-        zimbraDomainAttrs.put(Provisioning.A_zimbraAutoProvLdapSearchBase, extDomainDn);
-        zimbraDomainAttrs
-                .put(Provisioning.A_zimbraAutoProvLdapSearchFilter,
+        zmailDomainAttrs.put(Provisioning.A_zmailAutoProvLdapSearchBase, extDomainDn);
+        zmailDomainAttrs
+                .put(Provisioning.A_zmailAutoProvLdapSearchFilter,
                         "(&(uid=%u)(mail=eagerMode*)" + AutoProvisionTestUtil.MarkEntryProvisionedListener.NOT_PROVED_FILTER + ")");
-        zimbraDomainAttrs.put(Provisioning.A_zimbraAutoProvAccountNameMap, Provisioning.A_uid);
-        zimbraDomainAttrs.put(Provisioning.A_zimbraAutoProvBatchSize, "" + batchSize);
-        zimbraDomainAttrs.put(Provisioning.A_zimbraAutoProvListenerClass,
+        zmailDomainAttrs.put(Provisioning.A_zmailAutoProvAccountNameMap, Provisioning.A_uid);
+        zmailDomainAttrs.put(Provisioning.A_zmailAutoProvBatchSize, "" + batchSize);
+        zmailDomainAttrs.put(Provisioning.A_zmailAutoProvListenerClass,
                 AutoProvisionTestUtil.MarkEntryProvisionedListener.class.getName());
-        Domain zimbraDomain = createZimbraDomain(testName, zimbraDomainAttrs);
+        Domain zmailDomain = createZmailDomain(testName, zmailDomainAttrs);
 
         // schedule the domain on local server
-        prov.getLocalServer().addAutoProvScheduledDomains(zimbraDomain.getName());
+        prov.getLocalServer().addAutoProvScheduledDomains(zmailDomain.getName());
 
         new MockAutoProvisionThread().start();
 
         Thread.sleep(10000); //wait for eager thread to finish
 
-        List<Account> zimbraAccts = prov.getAllAccounts(zimbraDomain);
-        assertEquals(totalAccts, zimbraAccts.size());
+        List<Account> zmailAccts = prov.getAllAccounts(zmailDomain);
+        assertEquals(totalAccts, zmailAccts.size());
 
         Set<String> acctNames = new HashSet<String>();
-        for (Account acct : zimbraAccts) {
+        for (Account acct : zmailAccts) {
             acctNames.add(acct.getName());
         }
 
-        assertTrue(acctNames.contains(TestUtil.getAddress(extAcctLocalPart1, zimbraDomain.getName()).toLowerCase()));
-        assertTrue(acctNames.contains(TestUtil.getAddress(extAcctLocalPart3, zimbraDomain.getName()).toLowerCase()));
-        assertTrue(acctNames.contains(TestUtil.getAddress(extAcctLocalPart4, zimbraDomain.getName()).toLowerCase()));
-        assertTrue(acctNames.contains(TestUtil.getAddress(extAcctLocalPart5, zimbraDomain.getName()).toLowerCase()));
+        assertTrue(acctNames.contains(TestUtil.getAddress(extAcctLocalPart1, zmailDomain.getName()).toLowerCase()));
+        assertTrue(acctNames.contains(TestUtil.getAddress(extAcctLocalPart3, zmailDomain.getName()).toLowerCase()));
+        assertTrue(acctNames.contains(TestUtil.getAddress(extAcctLocalPart4, zmailDomain.getName()).toLowerCase()));
+        assertTrue(acctNames.contains(TestUtil.getAddress(extAcctLocalPart5, zmailDomain.getName()).toLowerCase()));
 
         // clear scheduled domains on the local server
         prov.getLocalServer().unsetAutoProvScheduledDomains();

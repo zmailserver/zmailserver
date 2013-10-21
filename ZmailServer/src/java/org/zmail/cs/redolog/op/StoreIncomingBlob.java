@@ -19,7 +19,7 @@
  * TODO To change the template for this generated file go to
  * Window - Preferences - Java - Code Style - Code Templates
  */
-package com.zimbra.cs.redolog.op;
+package org.zmail.cs.redolog.op;
 
 import java.io.File;
 import java.io.IOException;
@@ -31,11 +31,11 @@ import java.util.Map;
 
 import javax.activation.DataSource;
 
-import com.zimbra.cs.mailbox.MailboxOperation;
-import com.zimbra.cs.redolog.RedoLogInput;
-import com.zimbra.cs.redolog.RedoLogOutput;
-import com.zimbra.cs.store.Blob;
-import com.zimbra.cs.store.StoreManager;
+import org.zmail.cs.mailbox.MailboxOperation;
+import org.zmail.cs.redolog.RedoLogInput;
+import org.zmail.cs.redolog.RedoLogOutput;
+import org.zmail.cs.store.Blob;
+import org.zmail.cs.store.StoreManager;
 
 public class StoreIncomingBlob extends RedoableOp {
 

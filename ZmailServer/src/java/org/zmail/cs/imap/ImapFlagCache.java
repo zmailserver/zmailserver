@@ -12,7 +12,7 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.imap;
+package org.zmail.cs.imap;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -21,12 +21,12 @@ import java.util.List;
 import java.util.Map;
 
 import com.google.common.collect.Maps;
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.common.util.ArrayUtil;
-import com.zimbra.cs.mailbox.Flag;
-import com.zimbra.cs.mailbox.Mailbox;
-import com.zimbra.cs.mailbox.OperationContext;
-import com.zimbra.cs.mailbox.Tag;
+import org.zmail.common.service.ServiceException;
+import org.zmail.common.util.ArrayUtil;
+import org.zmail.cs.mailbox.Flag;
+import org.zmail.cs.mailbox.Mailbox;
+import org.zmail.cs.mailbox.OperationContext;
+import org.zmail.cs.mailbox.Tag;
 
 public class ImapFlagCache implements Iterable<ImapFlagCache.ImapFlag>, java.io.Serializable {
     private static final long serialVersionUID = -8938341239505513246L;
@@ -154,7 +154,7 @@ public class ImapFlagCache implements Iterable<ImapFlagCache.ImapFlag>, java.io.
         return mImapNames.get(name.toUpperCase());
     }
 
-    ImapFlag getByZimbraName(String name) {
+    ImapFlag getByZmailName(String name) {
         return mNames.get(name.toUpperCase());
     }
 

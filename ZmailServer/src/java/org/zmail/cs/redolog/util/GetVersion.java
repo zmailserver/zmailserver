@@ -13,9 +13,9 @@
  * ***** END LICENSE BLOCK *****
  */
 
-package com.zimbra.cs.redolog.util;
+package org.zmail.cs.redolog.util;
 
-import com.zimbra.cs.redolog.Version;
+import org.zmail.cs.redolog.Version;
 
 /**
  * Print the current redolog version to stdout.  Used by upgrade script.

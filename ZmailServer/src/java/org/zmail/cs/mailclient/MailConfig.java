@@ -12,12 +12,12 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.mailclient;
+package org.zmail.cs.mailclient;
 
 import com.google.common.base.Preconditions;
-import com.zimbra.common.util.Log;
-import com.zimbra.cs.mailclient.auth.AuthenticatorFactory;
-import com.zimbra.cs.mailclient.util.Config;
+import org.zmail.common.util.Log;
+import org.zmail.cs.mailclient.auth.AuthenticatorFactory;
+import org.zmail.cs.mailclient.util.Config;
 
 import javax.net.SocketFactory;
 import javax.net.ssl.SSLSocketFactory;

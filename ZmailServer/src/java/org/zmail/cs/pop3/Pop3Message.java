@@ -12,9 +12,9 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.pop3;
+package org.zmail.cs.pop3;
 
-import com.zimbra.cs.mailbox.Message;
+import org.zmail.cs.mailbox.Message;
 
 /**
  * one for each message in the mailbox

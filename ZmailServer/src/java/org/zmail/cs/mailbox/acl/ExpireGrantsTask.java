@@ -14,27 +14,27 @@
  * 
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.mailbox.acl;
+package org.zmail.cs.mailbox.acl;
 
 import com.google.common.collect.Sets;
-import com.zimbra.client.ZMailbox;
-import com.zimbra.common.account.Key;
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.cs.account.Account;
-import com.zimbra.cs.account.GuestAccount;
-import com.zimbra.cs.account.Provisioning;
-import com.zimbra.cs.mailbox.ACL;
-import com.zimbra.cs.mailbox.MailItem;
-import com.zimbra.cs.mailbox.MailServiceException;
-import com.zimbra.cs.mailbox.Mailbox;
-import com.zimbra.cs.mailbox.MailboxManager;
-import com.zimbra.cs.mailbox.ScheduledTask;
-import com.zimbra.cs.mailbox.ScheduledTaskManager;
-import com.zimbra.cs.service.AuthProvider;
-import com.zimbra.cs.util.AccountUtil;
-import com.zimbra.soap.mail.message.SendShareNotificationRequest;
-import com.zimbra.soap.mail.type.EmailAddrInfo;
-import com.zimbra.soap.type.Id;
+import org.zmail.client.ZMailbox;
+import org.zmail.common.account.Key;
+import org.zmail.common.service.ServiceException;
+import org.zmail.cs.account.Account;
+import org.zmail.cs.account.GuestAccount;
+import org.zmail.cs.account.Provisioning;
+import org.zmail.cs.mailbox.ACL;
+import org.zmail.cs.mailbox.MailItem;
+import org.zmail.cs.mailbox.MailServiceException;
+import org.zmail.cs.mailbox.Mailbox;
+import org.zmail.cs.mailbox.MailboxManager;
+import org.zmail.cs.mailbox.ScheduledTask;
+import org.zmail.cs.mailbox.ScheduledTaskManager;
+import org.zmail.cs.service.AuthProvider;
+import org.zmail.cs.util.AccountUtil;
+import org.zmail.soap.mail.message.SendShareNotificationRequest;
+import org.zmail.soap.mail.type.EmailAddrInfo;
+import org.zmail.soap.type.Id;
 
 import java.util.List;
 

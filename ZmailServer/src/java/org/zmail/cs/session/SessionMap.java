@@ -12,7 +12,7 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.session;
+package org.zmail.cs.session;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -29,7 +29,7 @@ import java.util.concurrent.Executors;
 
 import com.google.common.annotations.VisibleForTesting;
 import com.google.common.util.concurrent.ThreadFactoryBuilder;
-import com.zimbra.common.util.ZimbraLog;
+import org.zmail.common.util.ZmailLog;
 
 /**
  * Complex data structure used by the {@link SessionCache} for tracking active sessions. It supports three basic things:
@@ -170,7 +170,7 @@ final class SessionMap {
                 int prevSize = acctMap.size();
                 final Session removed = remove(accountId, leastRecentId);
                 if (removed != null) {
-                    ZimbraLog.session.info("Too many %s sessions, closing %s", session.getType(), removed);
+                    ZmailLog.session.info("Too many %s sessions, closing %s", session.getType(), removed);
                     // clean up the sessions asynchronously outside of the synchronized block or the mailbox lock
                     SWEEPER.submit(new Runnable() {
                         @Override
@@ -185,7 +185,7 @@ final class SessionMap {
 
                 assert(acctMap == null || acctMap.size() < prevSize);
                 if (acctMap.size() > maxSessionsPerAcct || acctMap.size() >= prevSize) {
-                    ZimbraLog.session.warn("Problem in SessionMap.putAndPrune(%d): accountId: %s session: %s  maxPerAcct: %d prevSize: %d finishSize: %d leastRecentTime: %d leastRecentId: %s removed: %s",
+                    ZmailLog.session.warn("Problem in SessionMap.putAndPrune(%d): accountId: %s session: %s  maxPerAcct: %d prevSize: %d finishSize: %d leastRecentTime: %d leastRecentId: %s removed: %s",
                             iterations, accountId, sessionId, maxSessionsPerAcct, prevSize, acctMap.size(), leastRecent, leastRecentId, removed);
                     StringBuilder sb = new StringBuilder("SessionMap for account ");
                     sb.append(accountId).append(" contains: ");
@@ -193,7 +193,7 @@ final class SessionMap {
                         sb.append("(").append(entry.getKey()).append(",").append(entry.getValue().toString());
                         sb.append(" time=").append(entry.getValue().getLastAccessTime()).append(") ");
                     }
-                    ZimbraLog.session.warn(sb.toString());
+                    ZmailLog.session.warn(sb.toString());
                 }
             }
         }

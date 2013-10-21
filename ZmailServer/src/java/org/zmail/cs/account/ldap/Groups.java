@@ -12,21 +12,21 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.account.ldap;
+package org.zmail.cs.account.ldap;
 
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.common.util.ZimbraLog;
-import com.zimbra.cs.account.Group;
-import com.zimbra.cs.account.Provisioning;
-import com.zimbra.cs.account.ldap.LdapProv;
-import com.zimbra.cs.ldap.IAttributes;
-import com.zimbra.cs.ldap.ZLdapFilterFactory;
-import com.zimbra.cs.ldap.SearchLdapOptions.SearchLdapVisitor;
+import org.zmail.common.service.ServiceException;
+import org.zmail.common.util.ZmailLog;
+import org.zmail.cs.account.Group;
+import org.zmail.cs.account.Provisioning;
+import org.zmail.cs.account.ldap.LdapProv;
+import org.zmail.cs.ldap.IAttributes;
+import org.zmail.cs.ldap.ZLdapFilterFactory;
+import org.zmail.cs.ldap.SearchLdapOptions.SearchLdapVisitor;
 
 
 public class Groups {
@@ -68,7 +68,7 @@ public class Groups {
                 // all is well, swap in the result Set and cache it
                 mAllDLs = Collections.synchronizedSet(visitor.getResult());
             } catch (ServiceException e) {
-                ZimbraLog.account.error("unable to get all DLs", e);
+                ZmailLog.account.error("unable to get all DLs", e);
             }
         }
         return mAllDLs;
@@ -116,9 +116,9 @@ public class Groups {
             isGroup = getAllDLs().contains(addr.toLowerCase());
         } catch (ServiceException e) {
             // log and ignore
-            ZimbraLog.account.warn("unable to determine if address " + addr + " is a DL", e);
+            ZmailLog.account.warn("unable to determine if address " + addr + " is a DL", e);
         }
-        ZimbraLog.account.debug("address " + addr + " isGroup=" + isGroup);
+        ZmailLog.account.debug("address " + addr + " isGroup=" + isGroup);
         return isGroup;
     }
 }

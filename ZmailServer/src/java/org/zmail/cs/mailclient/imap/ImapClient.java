@@ -12,9 +12,9 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.mailclient.imap;
+package org.zmail.cs.mailclient.imap;
 
-import com.zimbra.cs.mailclient.MailClient;
+import org.zmail.cs.mailclient.MailClient;
 
 import javax.security.auth.login.LoginException;
 import java.io.PrintStream;

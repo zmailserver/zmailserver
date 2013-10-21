@@ -13,7 +13,7 @@
  * ***** END LICENSE BLOCK *****
  */
 
-package com.zimbra.cs.security.sasl;
+package org.zmail.cs.security.sasl;
 
 import javax.security.sasl.SaslClient;
 import javax.security.sasl.SaslServer;

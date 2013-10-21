@@ -14,12 +14,12 @@ Spits out a "text/calendar" file, consististing of appointments in the calendar.
 
 to test (on a system with curl installed):
 
-curl -L -u user1:test123 http://localhost:7070/zimbra/user/user1/calendar
+curl -L -u user1:test123 http://localhost:7070/zmail/user/user1/calendar
 
 Should look something like:
 
 BEGIN:VCALENDAR
-PRODID:Zimbra-Calendar-Provider
+PRODID:Zmail-Calendar-Provider
 VERSION:2.0
 METHOD:PUBLISH
 BEGIN:VEVENT
@@ -31,7 +31,7 @@ UID:040000008200E00074C5B7101A82E00800000000F0BC424F5761C5010000000000000
  000100000002C10E79C9140CF41B7E18816DF121033
 ATTENDEE;ROLE=REQ-PARTICIPANT;PARTSTAT=NEEDS-ACTION;RSVP=TRUE;CN="tim@cur
  ple.com":MAILTO:tim@curple.com
-ORGANIZER;CN="Tom":MAILTO:tom@example.zimbra.com
+ORGANIZER;CN="Tom":MAILTO:tom@example.zmail.com
 LOCATION:Loc
 DTEND;TZID="GMT -0800 (Standard) / GMT -0700 (Daylight)":20050523T050000
  
@@ -73,24 +73,24 @@ Spits out a "application/rss+xml" file, consisting of an RSS feed of email messa
 
 For example. Assuming there are two unread messages in the inbox:
 
-curl -L -u user1:test123 http://localhost:7070/zimbra/user/user1/inbox.rss?query=is:unread
+curl -L -u user1:test123 http://localhost:7070/zmail/user/user1/inbox.rss?query=is:unread
 
 <?xml version="1.0"?>
 <rss version="2.0">
   <channel>
-    <title>Zimbra Mail: user1@slapshot.example.zimbra.com</title>
-    <generator>Zimbra Systems RSS Feed Servlet</generator>
+    <title>Zmail Mail: user1@slapshot.example.zmail.com</title>
+    <generator>Zmail Systems RSS Feed Servlet</generator>
     <description>is:unread in:inbox</description>
     <item>
       <title>Decline: New Appointment</title>
       <description>No, I won't attend.</description>
-      <author>Demo User One &lt;user1@slapshot.example.zimbra.com></author>
+      <author>Demo User One &lt;user1@slapshot.example.zmail.com></author>
       <pubDate>Thu, 4 Aug 2005 11:48:31 -0700</pubDate>
     </item>
     <item>
       <title>Accept: New Appointment</title>
       <description>Yes, I will attend.</description>
-      <author>Demo User One &lt;user1@slapshot.example.zimbra.com></author>
+      <author>Demo User One &lt;user1@slapshot.example.zmail.com></author>
       <pubDate>Thu, 4 Aug 2005 11:47:37 -0700</pubDate>
     </item>
   </channel>

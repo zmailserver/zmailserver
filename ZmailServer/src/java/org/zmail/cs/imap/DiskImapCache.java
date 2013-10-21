@@ -12,7 +12,7 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.imap;
+package org.zmail.cs.imap;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -23,8 +23,8 @@ import java.io.ObjectOutputStream;
 import java.util.Arrays;
 import java.util.Comparator;
 
-import com.zimbra.common.localconfig.LC;
-import com.zimbra.common.util.ByteUtil;
+import org.zmail.common.localconfig.LC;
+import org.zmail.common.util.ByteUtil;
 
 /**
  * IMAP cache using local disk.
@@ -36,7 +36,7 @@ final class DiskImapCache implements ImapSessionManager.Cache {
 
     private static final String CACHE_DATA_SUBDIR =
             "data" + File.separator + "mailboxd" + File.separator + "imap" + File.separator + "cache";
-    private static final File CACHE_DIR = new File(LC.zimbra_home.value(), CACHE_DATA_SUBDIR);
+    private static final File CACHE_DIR = new File(LC.zmail_home.value(), CACHE_DATA_SUBDIR);
     private static final String IMAP_CACHEFILE_SUFFIX = ".i4c";
 
     DiskImapCache() {

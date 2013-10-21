@@ -12,9 +12,9 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.ldap;
+package org.zmail.cs.ldap;
 
-import com.zimbra.cs.ldap.ZLdapFilterFactory.FilterId;
+import org.zmail.cs.ldap.ZLdapFilterFactory.FilterId;
 
 public abstract class ZLdapFilter extends ZLdapElement {
     

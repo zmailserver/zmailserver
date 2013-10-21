@@ -12,7 +12,7 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.dav;
+package org.zmail.cs.dav;
 
 import java.io.IOException;
 import java.io.OutputStream;

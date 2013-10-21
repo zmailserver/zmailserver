@@ -12,12 +12,12 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.account.ldap.entry;
+package org.zmail.cs.account.ldap.entry;
 
-import com.zimbra.cs.account.Provisioning;
-import com.zimbra.cs.account.UCService;
-import com.zimbra.cs.ldap.LdapException;
-import com.zimbra.cs.ldap.ZAttributes;
+import org.zmail.cs.account.Provisioning;
+import org.zmail.cs.account.UCService;
+import org.zmail.cs.ldap.LdapException;
+import org.zmail.cs.ldap.ZAttributes;
 
 /**
  * @author pshao
@@ -28,7 +28,7 @@ public class LdapUCService extends UCService implements LdapEntry {
 
     public LdapUCService(String dn, ZAttributes attrs, Provisioning prov) throws LdapException {
         super(attrs.getAttrString(Provisioning.A_cn), 
-                attrs.getAttrString(Provisioning.A_zimbraId), 
+                attrs.getAttrString(Provisioning.A_zmailId), 
                 attrs.getAttrs(), prov);
         mDn = dn;
     }

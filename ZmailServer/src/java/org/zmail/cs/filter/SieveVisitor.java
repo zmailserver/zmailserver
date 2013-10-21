@@ -12,13 +12,13 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.filter;
+package org.zmail.cs.filter;
 
 import com.google.common.collect.ImmutableSet;
-import com.zimbra.common.filter.Sieve;
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.common.util.ZimbraLog;
-import com.zimbra.soap.mail.type.FilterTest;
+import org.zmail.common.filter.Sieve;
+import org.zmail.common.service.ServiceException;
+import org.zmail.common.util.ZmailLog;
+import org.zmail.soap.mail.type.FilterTest;
 import org.apache.jsieve.TagArgument;
 import org.apache.jsieve.parser.SieveNode;
 import org.apache.jsieve.parser.generated.ASTcommand;
@@ -484,7 +484,7 @@ public abstract class SieveVisitor {
                 accept(node, props);
                 visitTrueTest(node, VisitPhase.end, props);
             } else {
-                ZimbraLog.filter.debug("Ignoring unrecognized test type '%s'.", nodeName);
+                ZmailLog.filter.debug("Ignoring unrecognized test type '%s'.", nodeName);
                 accept(node, props);
             }
 

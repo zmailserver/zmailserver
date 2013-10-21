@@ -12,7 +12,7 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.account.ldap.upgrade;
+package org.zmail.cs.account.ldap.upgrade;
 
 import java.util.HashMap;
 import java.util.HashSet;
@@ -20,54 +20,54 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.common.util.StringUtil;
-import com.zimbra.cs.account.Config;
-import com.zimbra.cs.account.Cos;
-import com.zimbra.cs.account.Domain;
-import com.zimbra.cs.account.Entry;
-import com.zimbra.cs.account.Provisioning;
-import com.zimbra.cs.account.Entry.EntryType;
-import com.zimbra.cs.ldap.LdapClient;
-import com.zimbra.cs.ldap.LdapServerType;
-import com.zimbra.cs.ldap.LdapUsage;
-import com.zimbra.cs.ldap.ZLdapContext;
+import org.zmail.common.service.ServiceException;
+import org.zmail.common.util.StringUtil;
+import org.zmail.cs.account.Config;
+import org.zmail.cs.account.Cos;
+import org.zmail.cs.account.Domain;
+import org.zmail.cs.account.Entry;
+import org.zmail.cs.account.Provisioning;
+import org.zmail.cs.account.Entry.EntryType;
+import org.zmail.cs.ldap.LdapClient;
+import org.zmail.cs.ldap.LdapServerType;
+import org.zmail.cs.ldap.LdapUsage;
+import org.zmail.cs.ldap.ZLdapContext;
 
 public class BUG_76427 extends UpgradeOp {
 
     public static Set<String> standardZimlets = new HashSet<String>();
 
     static {
-        standardZimlets.add("com_zimbra_adminversioncheck");
-        standardZimlets.add("com_zimbra_archive");
-        standardZimlets.add("com_zimbra_attachcontacts");
-        standardZimlets.add("com_zimbra_attachmail");
-        standardZimlets.add("com_zimbra_backuprestore");
-        standardZimlets.add("com_zimbra_bulkprovision");
-        standardZimlets.add("com_zimbra_cert_manager");
-        standardZimlets.add("com_zimbra_click2call_cisco");
-        standardZimlets.add("com_zimbra_click2call_mitel");
-        standardZimlets.add("com_zimbra_clientuploader");
-        standardZimlets.add("com_zimbra_convertd");
-        standardZimlets.add("com_zimbra_date");
-        standardZimlets.add("com_zimbra_delegatedadmin");
-        standardZimlets.add("com_zimbra_email");
-        standardZimlets.add("com_zimbra_hsm");
-        standardZimlets.add("com_zimbra_license");
-        standardZimlets.add("com_zimbra_mobilesync");
-        standardZimlets.add("com_zimbra_phone");
-        standardZimlets.add("com_zimbra_proxy_config");
-        standardZimlets.add("com_zimbra_smime");
-        standardZimlets.add("com_zimbra_smime_cert_admin");
-        standardZimlets.add("com_zimbra_srchhighlighter");
-        standardZimlets.add("com_zimbra_tooltip");
-        standardZimlets.add("com_zimbra_ucconfig");
-        standardZimlets.add("com_zimbra_url");
-        standardZimlets.add("com_zimbra_viewmail");
-        standardZimlets.add("com_zimbra_voiceprefs");
-        standardZimlets.add("com_zimbra_webex");
-        standardZimlets.add("com_zimbra_xmbxsearch");
-        standardZimlets.add("com_zimbra_ymemoticons");
+        standardZimlets.add("org_zmail_adminversioncheck");
+        standardZimlets.add("org_zmail_archive");
+        standardZimlets.add("org_zmail_attachcontacts");
+        standardZimlets.add("org_zmail_attachmail");
+        standardZimlets.add("org_zmail_backuprestore");
+        standardZimlets.add("org_zmail_bulkprovision");
+        standardZimlets.add("org_zmail_cert_manager");
+        standardZimlets.add("org_zmail_click2call_cisco");
+        standardZimlets.add("org_zmail_click2call_mitel");
+        standardZimlets.add("org_zmail_clientuploader");
+        standardZimlets.add("org_zmail_convertd");
+        standardZimlets.add("org_zmail_date");
+        standardZimlets.add("org_zmail_delegatedadmin");
+        standardZimlets.add("org_zmail_email");
+        standardZimlets.add("org_zmail_hsm");
+        standardZimlets.add("org_zmail_license");
+        standardZimlets.add("org_zmail_mobilesync");
+        standardZimlets.add("org_zmail_phone");
+        standardZimlets.add("org_zmail_proxy_config");
+        standardZimlets.add("org_zmail_smime");
+        standardZimlets.add("org_zmail_smime_cert_admin");
+        standardZimlets.add("org_zmail_srchhighlighter");
+        standardZimlets.add("org_zmail_tooltip");
+        standardZimlets.add("org_zmail_ucconfig");
+        standardZimlets.add("org_zmail_url");
+        standardZimlets.add("org_zmail_viewmail");
+        standardZimlets.add("org_zmail_voiceprefs");
+        standardZimlets.add("org_zmail_webex");
+        standardZimlets.add("org_zmail_xmbxsearch");
+        standardZimlets.add("org_zmail_ymemoticons");
     }
 
     @Override
@@ -134,14 +134,14 @@ public class BUG_76427 extends UpgradeOp {
 
     private void doGlobalConfig(ZLdapContext zlc) throws ServiceException {
         Config config = prov.getConfig();
-        doEntry(zlc, config, "global config", Provisioning.A_zimbraZimletDomainAvailableZimlets);
+        doEntry(zlc, config, "global config", Provisioning.A_zmailZimletDomainAvailableZimlets);
     }
 
     private void doAllDomain(ZLdapContext zlc) throws ServiceException {
         List<Domain> domains = prov.getAllDomains();
         for (Domain domain : domains) {
             String name = "domain " + domain.getName();
-            doEntry(zlc, domain, name, Provisioning.A_zimbraZimletDomainAvailableZimlets);
+            doEntry(zlc, domain, name, Provisioning.A_zmailZimletDomainAvailableZimlets);
         }
     }
 
@@ -149,14 +149,14 @@ public class BUG_76427 extends UpgradeOp {
         List<Cos> coses = prov.getAllCos();
         for (Cos cos : coses) {
             String name = "cos " + cos.getName();
-            doEntry(zlc, cos, name, Provisioning.A_zimbraZimletAvailableZimlets);
+            doEntry(zlc, cos, name, Provisioning.A_zmailZimletAvailableZimlets);
         }
     }
 
     @Override
     Description getDescription() {
         return new Description(this,
-                new String[] {Provisioning.A_zimbraZimletAvailableZimlets, Provisioning.A_zimbraZimletDomainAvailableZimlets},
+                new String[] {Provisioning.A_zmailZimletAvailableZimlets, Provisioning.A_zmailZimletDomainAvailableZimlets},
                 new EntryType[] {EntryType.DOMAIN, EntryType.COS},
                 "[Current Zimlets]",
                 standardZimlets.toString(),

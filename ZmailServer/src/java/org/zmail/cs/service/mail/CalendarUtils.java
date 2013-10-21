@@ -13,7 +13,7 @@
  * ***** END LICENSE BLOCK *****
  */
 
-package com.zimbra.cs.service.mail;
+package org.zmail.cs.service.mail;
 
 import java.text.ParseException;
 import java.util.ArrayList;
@@ -24,59 +24,59 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Set;
 
-import com.zimbra.common.account.Key;
-import com.zimbra.common.account.Key.AccountBy;
-import com.zimbra.common.calendar.CalendarUtil;
-import com.zimbra.common.calendar.Geo;
-import com.zimbra.common.calendar.ICalTimeZone;
-import com.zimbra.common.calendar.ZCalendar;
-import com.zimbra.common.calendar.ICalTimeZone.SimpleOnset;
-import com.zimbra.common.calendar.ParsedDateTime;
-import com.zimbra.common.calendar.ParsedDuration;
-import com.zimbra.common.calendar.TZIDMapper;
-import com.zimbra.common.localconfig.LC;
-import com.zimbra.common.calendar.TimeZoneMap;
-import com.zimbra.common.calendar.WellKnownTimeZones;
-import com.zimbra.common.calendar.ZCalendar.ICalTok;
-import com.zimbra.common.calendar.ZCalendar.ZCalendarBuilder;
-import com.zimbra.common.calendar.ZCalendar.ZParameter;
-import com.zimbra.common.calendar.ZCalendar.ZProperty;
-import com.zimbra.common.calendar.ZCalendar.ZVCalendar;
-import com.zimbra.common.localconfig.DebugConfig;
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.common.soap.Element;
-import com.zimbra.common.soap.MailConstants;
-import com.zimbra.common.util.L10nUtil;
-import com.zimbra.common.util.L10nUtil.MsgKey;
-import com.zimbra.common.util.ZimbraLog;
-import com.zimbra.cs.account.Account;
-import com.zimbra.cs.account.DistributionList;
-import com.zimbra.cs.account.Provisioning;
-import com.zimbra.cs.gal.GalGroup;
-import com.zimbra.cs.gal.GalGroupMembers;
-import com.zimbra.cs.index.SortBy;
-import com.zimbra.cs.ldap.LdapUtil;
-import com.zimbra.cs.mailbox.CalendarItem;
-import com.zimbra.cs.mailbox.CalendarItem.ReplyInfo;
-import com.zimbra.cs.mailbox.Folder;
-import com.zimbra.cs.mailbox.MailItem;
-import com.zimbra.cs.mailbox.Mailbox;
-import com.zimbra.cs.mailbox.MailboxManager;
-import com.zimbra.cs.mailbox.calendar.Alarm;
-import com.zimbra.cs.mailbox.calendar.CalendarMailSender;
-import com.zimbra.cs.mailbox.calendar.IcalXmlStrMap;
-import com.zimbra.cs.mailbox.calendar.Invite;
-import com.zimbra.cs.mailbox.calendar.Period;
-import com.zimbra.cs.mailbox.calendar.RdateExdate;
-import com.zimbra.cs.mailbox.calendar.RecurId;
-import com.zimbra.cs.mailbox.calendar.Recurrence;
-import com.zimbra.cs.mailbox.calendar.Recurrence.IRecurrence;
-import com.zimbra.cs.mailbox.calendar.Util;
-import com.zimbra.cs.mailbox.calendar.ZAttendee;
-import com.zimbra.cs.mailbox.calendar.ZOrganizer;
-import com.zimbra.cs.mailbox.calendar.ZRecur;
-import com.zimbra.cs.mailbox.util.TypedIdList;
-import com.zimbra.cs.util.AccountUtil.AccountAddressMatcher;
+import org.zmail.common.account.Key;
+import org.zmail.common.account.Key.AccountBy;
+import org.zmail.common.calendar.CalendarUtil;
+import org.zmail.common.calendar.Geo;
+import org.zmail.common.calendar.ICalTimeZone;
+import org.zmail.common.calendar.ZCalendar;
+import org.zmail.common.calendar.ICalTimeZone.SimpleOnset;
+import org.zmail.common.calendar.ParsedDateTime;
+import org.zmail.common.calendar.ParsedDuration;
+import org.zmail.common.calendar.TZIDMapper;
+import org.zmail.common.localconfig.LC;
+import org.zmail.common.calendar.TimeZoneMap;
+import org.zmail.common.calendar.WellKnownTimeZones;
+import org.zmail.common.calendar.ZCalendar.ICalTok;
+import org.zmail.common.calendar.ZCalendar.ZCalendarBuilder;
+import org.zmail.common.calendar.ZCalendar.ZParameter;
+import org.zmail.common.calendar.ZCalendar.ZProperty;
+import org.zmail.common.calendar.ZCalendar.ZVCalendar;
+import org.zmail.common.localconfig.DebugConfig;
+import org.zmail.common.service.ServiceException;
+import org.zmail.common.soap.Element;
+import org.zmail.common.soap.MailConstants;
+import org.zmail.common.util.L10nUtil;
+import org.zmail.common.util.L10nUtil.MsgKey;
+import org.zmail.common.util.ZmailLog;
+import org.zmail.cs.account.Account;
+import org.zmail.cs.account.DistributionList;
+import org.zmail.cs.account.Provisioning;
+import org.zmail.cs.gal.GalGroup;
+import org.zmail.cs.gal.GalGroupMembers;
+import org.zmail.cs.index.SortBy;
+import org.zmail.cs.ldap.LdapUtil;
+import org.zmail.cs.mailbox.CalendarItem;
+import org.zmail.cs.mailbox.CalendarItem.ReplyInfo;
+import org.zmail.cs.mailbox.Folder;
+import org.zmail.cs.mailbox.MailItem;
+import org.zmail.cs.mailbox.Mailbox;
+import org.zmail.cs.mailbox.MailboxManager;
+import org.zmail.cs.mailbox.calendar.Alarm;
+import org.zmail.cs.mailbox.calendar.CalendarMailSender;
+import org.zmail.cs.mailbox.calendar.IcalXmlStrMap;
+import org.zmail.cs.mailbox.calendar.Invite;
+import org.zmail.cs.mailbox.calendar.Period;
+import org.zmail.cs.mailbox.calendar.RdateExdate;
+import org.zmail.cs.mailbox.calendar.RecurId;
+import org.zmail.cs.mailbox.calendar.Recurrence;
+import org.zmail.cs.mailbox.calendar.Recurrence.IRecurrence;
+import org.zmail.cs.mailbox.calendar.Util;
+import org.zmail.cs.mailbox.calendar.ZAttendee;
+import org.zmail.cs.mailbox.calendar.ZOrganizer;
+import org.zmail.cs.mailbox.calendar.ZRecur;
+import org.zmail.cs.mailbox.util.TypedIdList;
+import org.zmail.cs.util.AccountUtil.AccountAddressMatcher;
 
 public class CalendarUtils {
     /**
@@ -1530,10 +1530,10 @@ public class CalendarUtils {
             
             if (!idlist.isEmpty()) {
                 if (type == MailItem.Type.APPOINTMENT)
-                    ZimbraLog.calendar.info("Migrating " + idlist.size() + " Appointment(s) from '" + 
+                    ZmailLog.calendar.info("Migrating " + idlist.size() + " Appointment(s) from '" + 
                             folder.getName() + "' to 'Calendar' folder for mailbox " + mbox.getId());
                 else 
-                    ZimbraLog.calendar.info("Migrating " + idlist.size() + " Task(s) from '" + 
+                    ZmailLog.calendar.info("Migrating " + idlist.size() + " Task(s) from '" + 
                             folder.getName() + "' to 'Tasks' folder for mailbox " + mbox.getId());
                 
                 int[] items = new int[idlist.size()];

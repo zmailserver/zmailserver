@@ -13,7 +13,7 @@
  * ***** END LICENSE BLOCK *****
  */
 
-package com.zimbra.cs.client.soap;
+package org.zmail.cs.client.soap;
 
 import java.util.HashMap;
 import java.util.Iterator;
@@ -21,8 +21,8 @@ import java.util.Iterator;
 import org.dom4j.Element;
 import org.dom4j.DocumentHelper;
 
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.common.soap.AccountConstants;
+import org.zmail.common.service.ServiceException;
+import org.zmail.common.soap.AccountConstants;
 
 
 public class LmcGetInfoRequest extends LmcSoapRequest {

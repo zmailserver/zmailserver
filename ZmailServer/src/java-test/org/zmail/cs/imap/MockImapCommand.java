@@ -13,10 +13,10 @@
  * ***** END LICENSE BLOCK *****
  */
 
-package com.zimbra.cs.imap;
+package org.zmail.cs.imap;
 
-import com.zimbra.common.util.StringUtil;
-import com.zimbra.cs.imap.ImapCommand;
+import org.zmail.common.util.StringUtil;
+import org.zmail.cs.imap.ImapCommand;
 
 public class MockImapCommand extends ImapCommand {
 

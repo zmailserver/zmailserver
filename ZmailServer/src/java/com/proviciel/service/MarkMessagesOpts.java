@@ -17,7 +17,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.json.JSONException;
 
-import com.zimbra.cs.mailbox.Flag;
+import org.zmail.cs.mailbox.Flag;
 
 
 public class MarkMessagesOpts {

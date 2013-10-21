@@ -24,10 +24,10 @@ use Getopt::Long;
 use XmlElement;
 use XmlDoc;
 use Soap;
-use ZimbraSoapTest;
+use ZmailSoapTest;
 
-my $ACCTNS = "urn:zimbraAdmin";
-my $MAILNS = "urn:zimbraAdmin";
+my $ACCTNS = "urn:zmailAdmin";
+my $MAILNS = "urn:zmailAdmin";
 
 # If you're using ActivePerl, you'll need to go and install the Crypt::SSLeay
 # module for htps: to work...
@@ -53,7 +53,7 @@ if (!defined($user)) {
   die "USAGE: $0 -u USER -m MAILBOXID -a ACTION [-pw PASSWD] [-h HOST] [-t TYPES] [-ids IDS]";
 }
 
-my $z = ZimbraSoapTest->new($user, $host, $pw);
+my $z = ZmailSoapTest->new($user, $host, $pw);
 $z->doAdminAuth();
 
 my %args = ( 'action' => $action );

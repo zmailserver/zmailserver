@@ -12,7 +12,7 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.dav.resource;
+package org.zmail.cs.dav.resource;
 
 import java.io.UnsupportedEncodingException;
 import java.net.URLDecoder;
@@ -22,36 +22,36 @@ import java.util.StringTokenizer;
 
 import javax.servlet.http.HttpServletResponse;
 
-import com.zimbra.common.util.MapUtil;
+import org.zmail.common.util.MapUtil;
 
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.common.util.Constants;
-import com.zimbra.common.util.HttpUtil;
-import com.zimbra.common.util.Pair;
-import com.zimbra.common.util.ZimbraLog;
-import com.zimbra.cs.account.Account;
-import com.zimbra.cs.account.Domain;
-import com.zimbra.cs.account.Provisioning;
-import com.zimbra.common.account.Key;
-import com.zimbra.common.account.Key.AccountBy;
-import com.zimbra.cs.account.Server;
-import com.zimbra.cs.dav.DavContext;
-import com.zimbra.cs.dav.DavException;
-import com.zimbra.cs.dav.property.Acl;
-import com.zimbra.cs.dav.service.DavServlet;
-import com.zimbra.cs.mailbox.ACL;
-import com.zimbra.cs.mailbox.CalendarItem;
-import com.zimbra.cs.mailbox.Contact;
-import com.zimbra.cs.mailbox.Document;
-import com.zimbra.cs.mailbox.Folder;
-import com.zimbra.cs.mailbox.MailItem;
-import com.zimbra.cs.mailbox.MailServiceException;
-import com.zimbra.cs.mailbox.Mailbox;
-import com.zimbra.cs.mailbox.OperationContext;
-import com.zimbra.cs.mailbox.MailboxManager;
-import com.zimbra.cs.mailbox.Message;
-import com.zimbra.cs.mailbox.Mountpoint;
-import com.zimbra.cs.mailbox.calendar.Invite;
+import org.zmail.common.service.ServiceException;
+import org.zmail.common.util.Constants;
+import org.zmail.common.util.HttpUtil;
+import org.zmail.common.util.Pair;
+import org.zmail.common.util.ZmailLog;
+import org.zmail.cs.account.Account;
+import org.zmail.cs.account.Domain;
+import org.zmail.cs.account.Provisioning;
+import org.zmail.common.account.Key;
+import org.zmail.common.account.Key.AccountBy;
+import org.zmail.cs.account.Server;
+import org.zmail.cs.dav.DavContext;
+import org.zmail.cs.dav.DavException;
+import org.zmail.cs.dav.property.Acl;
+import org.zmail.cs.dav.service.DavServlet;
+import org.zmail.cs.mailbox.ACL;
+import org.zmail.cs.mailbox.CalendarItem;
+import org.zmail.cs.mailbox.Contact;
+import org.zmail.cs.mailbox.Document;
+import org.zmail.cs.mailbox.Folder;
+import org.zmail.cs.mailbox.MailItem;
+import org.zmail.cs.mailbox.MailServiceException;
+import org.zmail.cs.mailbox.Mailbox;
+import org.zmail.cs.mailbox.OperationContext;
+import org.zmail.cs.mailbox.MailboxManager;
+import org.zmail.cs.mailbox.Message;
+import org.zmail.cs.mailbox.Mountpoint;
+import org.zmail.cs.mailbox.calendar.Invite;
 
 /**
  * UrlNamespace provides a mapping from a URL to a DavResource.
@@ -124,7 +124,7 @@ public class UrlNamespace {
     }
 
     public static DavResource getPrincipalAtUrl(DavContext ctxt, String url) throws DavException {
-        ZimbraLog.dav.debug("getPrincipalAtUrl");
+        ZmailLog.dav.debug("getPrincipalAtUrl");
         String name = ctxt.getAuthAccount().getName();
         if (url != null) {
             int index = url.indexOf(PRINCIPALS_PATH);
@@ -138,7 +138,7 @@ public class UrlNamespace {
             name = url.substring(index);
             if (name.indexOf('/') > 0)
                 name = name.substring(0, name.indexOf('/'));
-            ZimbraLog.dav.debug("name: "+name);
+            ZmailLog.dav.debug("name: "+name);
         } else {
             url = "/";
         }
@@ -163,7 +163,7 @@ public class UrlNamespace {
 
     /* Returns DavResource in the user's mailbox at the specified path. */
     public static DavResource getResourceAt(DavContext ctxt, String user, String path) throws DavException {
-        ZimbraLog.dav.debug("getResource at "+user+" "+path);
+        ZmailLog.dav.debug("getResource at "+user+" "+path);
         if (path == null)
             throw new DavException("invalid uri", HttpServletResponse.SC_NOT_FOUND, null);
 
@@ -202,12 +202,12 @@ public class UrlNamespace {
                         try {
                             rss.addAll(getFolders(ctxt, user));
                         } catch (ServiceException e) {
-                            ZimbraLog.dav.warn("can't get folders for "+user, e);
+                            ZmailLog.dav.warn("can't get folders for "+user, e);
                         }
                     }
                     return rss;
                 } else {
-                    ZimbraLog.dav.warn("can't get mail item resource for "+user+", "+path, se);
+                    ZmailLog.dav.warn("can't get mail item resource for "+user+", "+path, se);
                 }
             }
         }
@@ -279,7 +279,7 @@ public class UrlNamespace {
             if (mine != null && theirs != null)
                 return mine.getId().equals(theirs.getId());
         } catch (Exception e) {
-            ZimbraLog.dav.warn("can't get domain or server for %s %s", thisOne.getId(), thatOne.getId(), e);
+            ZmailLog.dav.warn("can't get domain or server for %s %s", thisOne.getId(), thatOne.getId(), e);
         }
         return true;
     }
@@ -289,7 +289,7 @@ public class UrlNamespace {
             try {
                 url = getAbsoluteUrl(targetAccount, url);
             } catch (ServiceException se) {
-                ZimbraLog.dav.warn("can't generate absolute url for "+targetAccount.getName(), se);
+                ZmailLog.dav.warn("can't generate absolute url for "+targetAccount.getName(), se);
             }
         }
         return url;
@@ -533,13 +533,13 @@ public class UrlNamespace {
             }
         } catch (ServiceException e) {
             resource = null;
-            ZimbraLog.dav.info("cannot create DavResource", e);
+            ZmailLog.dav.info("cannot create DavResource", e);
         }
         return resource;
     }
 
     private static MailItemResource getCalendarCollection(DavContext ctxt, Folder f) throws ServiceException, DavException {
-        String[] homeSets = Provisioning.getInstance().getConfig().getMultiAttr(Provisioning.A_zimbraCalendarCalDavAlternateCalendarHomeSet);
+        String[] homeSets = Provisioning.getInstance().getConfig().getMultiAttr(Provisioning.A_zmailCalendarCalDavAlternateCalendarHomeSet);
         // if alternate homeSet is set then default Calendar and Tasks folders
         // are no longer being used to store appointments and tasks.
         if (homeSets.length > 0 && (f.getId() == Mailbox.ID_FOLDER_CALENDAR || f.getId() == Mailbox.ID_FOLDER_TASKS)) {
@@ -573,21 +573,21 @@ public class UrlNamespace {
         // /attachments/by-type/
         // /attachments/by-type/image/
         // /attachments/by-sender/
-        // /attachments/by-sender/zimbra.com/
+        // /attachments/by-sender/zmail.com/
 
         //
         // return SearchWrapper
         //
         // /attachments/by-date/today/
         // /attachments/by-type/image/last-month/
-        // /attachments/by-sender/zimbra.com/last-week/
+        // /attachments/by-sender/zmail.com/last-week/
 
         //
         // return AttachmentWrapper
         //
         // /attachments/by-date/today/image.gif
         // /attachments/by-type/image/last-month/image.gif
-        // /attachments/by-sender/zimbra.com/last-week/image.gif
+        // /attachments/by-sender/zmail.com/last-week/image.gif
 
         switch (numTokens) {
         case 1:

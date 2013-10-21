@@ -12,16 +12,16 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.gal;
+package org.zmail.cs.gal;
 
-import com.zimbra.common.localconfig.LC;
-import com.zimbra.common.soap.Element;
-import com.zimbra.common.soap.MailConstants;
-import com.zimbra.common.util.ZimbraLog;
-import com.zimbra.cs.account.Account;
-import com.zimbra.cs.account.Provisioning;
-import com.zimbra.cs.extension.ExtensionUtil;
-import com.zimbra.cs.gal.GalGroup.GroupInfo;
+import org.zmail.common.localconfig.LC;
+import org.zmail.common.soap.Element;
+import org.zmail.common.soap.MailConstants;
+import org.zmail.common.util.ZmailLog;
+import org.zmail.cs.account.Account;
+import org.zmail.cs.account.Provisioning;
+import org.zmail.cs.extension.ExtensionUtil;
+import org.zmail.cs.gal.GalGroup.GroupInfo;
 
 public class GalGroupInfoProvider {
 
@@ -36,7 +36,7 @@ public class GalGroupInfoProvider {
 
     private static GalGroupInfoProvider makeInstance() {
         GalGroupInfoProvider provider = null;
-        String className = LC.zimbra_class_galgroupinfoprovider.value();
+        String className = LC.zmail_class_galgroupinfoprovider.value();
         if (className != null && !className.equals("")) {
             try {
                 try {
@@ -46,7 +46,7 @@ public class GalGroupInfoProvider {
                     provider = (GalGroupInfoProvider) ExtensionUtil.findClass(className).newInstance();
                 }
             } catch (Exception e) {
-                ZimbraLog.account.error("could not instantiate GalGroupInfoProvider interface of class '" + className + "'; defaulting to GalGroupInfoProvider", e);
+                ZmailLog.account.error("could not instantiate GalGroupInfoProvider interface of class '" + className + "'; defaulting to GalGroupInfoProvider", e);
             }
         }
         if (provider == null)

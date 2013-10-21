@@ -54,10 +54,10 @@ http://en.wikipedia.org/wiki/Internationalized_domain_name
 
 
 ================================
-2. IDN Support in Zimbra Server
+2. IDN Support in Zmail Server
 ================================
 
-http://bugzilla.zimbra.com/show_bug.cgi?id=14225
+http://bugzilla.zmail.com/show_bug.cgi?id=14225
 
 2.1 Support for ToASCII and ToUnicode Conversions
         Adapted third party GNU IDN Java lib (http://www.gnu.org/software/libidn) for the two
@@ -96,17 +96,17 @@ http://bugzilla.zimbra.com/show_bug.cgi?id=14225
         2. SOAP Response
            (A) name attribute and element in all SOAP responses are always returned in unicode(in utf8 encoding)
                    e.g. 
-                   (a) <GetDomainResponse xmlns="urn:zimbraAdmin">
+                   (a) <GetDomainResponse xmlns="urn:zmailAdmin">
                            <domain id="..." name="my.中文.cn">
                             ...
                        </GetDomainResponse>
                         
-                   (b) <GetAccountResponse xmlns="urn:zimbraAdmin">
+                   (b) <GetAccountResponse xmlns="urn:zmailAdmin">
                            <account id="..." name="user1@my.中文.cn">
                            ...
                        </GetAccountResponse>  
                     
-                   (c) <GetInfoResponse xmlns="urn:zimbraAccount">
+                   (c) <GetInfoResponse xmlns="urn:zmailAccount">
                            <id>...</id>
                            <name>user1@my.中文.cn</name>
                            ...
@@ -115,41 +115,41 @@ http://bugzilla.zimbra.com/show_bug.cgi?id=14225
            (B) attributes containing IDN domain names or email addresses are always returned in unicode(in utf8 encoding)
                    Server will convert the values from ACE to unicode and return unicode values in SOAP responses for 
                    attributes that are either:
-                       - of type email or emailp, (declared in zimbra-attrs.xml) or
-                       - has idn flag (in zimbra-attrs.xml)
+                       - of type email or emailp, (declared in zmail-attrs.xml) or
+                       - has idn flag (in zmail-attrs.xml)
    
                    e.g.
-                   (a) <GetDomainResponse xmlns="urn:zimbraAdmin">
+                   (a) <GetDomainResponse xmlns="urn:zmailAdmin">
                            <domain id="0eef5297-b212-4990-aad0-79e30825bf83" name="my.中文.cn">
                                <a n="o">my.xn--fiq228c.cn domain</a>                    <=== not an idn flagged or email attribute
                                <a n="objectClass">dcObject</a>
                                <a n="objectClass">organization</a>
-                               <a n="objectClass">zimbraDomain</a>
-                               <a n="zimbraDomainName">my.中文.cn</a>                    <=== an idn flagged attribute, stored LDAP value is my.xn--fiq228c.cn
-                               <a n="zimbraId">0eef5297-b212-4990-aad0-79e30825bf83</a>
-                               <a n="zimbraDomainType">local</a>
+                               <a n="objectClass">zmailDomain</a>
+                               <a n="zmailDomainName">my.中文.cn</a>                    <=== an idn flagged attribute, stored LDAP value is my.xn--fiq228c.cn
+                               <a n="zmailId">0eef5297-b212-4990-aad0-79e30825bf83</a>
+                               <a n="zmailDomainType">local</a>
                                <a n="dc">my</a>
-                               <a n="zimbraMailStatus">enabled</a>
-                               <a n="zimbraDomainStatus">active</a>
+                               <a n="zmailMailStatus">enabled</a>
+                               <a n="zmailDomainStatus">active</a>
                            </domain>
                        </GetDomainResponse>
                    
-                   (b) <GetAccountResponse xmlns="urn:zimbraAdmin">
+                   (b) <GetAccountResponse xmlns="urn:zmailAdmin">
                            <account id="a019a48a-87d1-4ae7-a97b-2a1411da0616" name="user1@my.中文.cn">
-                               <a n="zimbraPrefGalAutoCompleteEnabled">FALSE</a>
+                               <a n="zmailPrefGalAutoCompleteEnabled">FALSE</a>
                                ...
                                <a n="mail">user1@my.中文.cn</a>                              <=== an email attribute, stored LDAP value is user1@my.xn--fiq228c.cn
                                <a n="mail">alias-of-user1@my.中文.cn</a>                     <=== an email attribute, stored LDAP value is alias-of-user1@my.xn--fiq228c.cn
-                               <a n="zimbraPrefOutOfOfficeDirectAddress">ooo@yahoo.com</a>  <=== an email attribute, stored LDAP value is ooo@yahoo.com
+                               <a n="zmailPrefOutOfOfficeDirectAddress">ooo@yahoo.com</a>  <=== an email attribute, stored LDAP value is ooo@yahoo.com
                            </account>
                        </GetAccountResponse>
                        
-                   (c) <GetConfigResponse xmlns="urn:zimbraAdmin">
-                           <a n="zimbraDefaultDomainName">mydomain.local</a>            <=== an idn flagged attribute, stored LDAP value is mydomain.local
+                   (c) <GetConfigResponse xmlns="urn:zmailAdmin">
+                           <a n="zmailDefaultDomainName">mydomain.local</a>            <=== an idn flagged attribute, stored LDAP value is mydomain.local
                        </GetConfigResponse>
                    
-                   (d) <GetConfigResponse xmlns="urn:zimbraAdmin">
-                           <a n="zimbraDefaultDomainName">my.中文.cn</a>                 <=== an idn flagged attribute, stored LDAP value is my.xn--fiq228c.cn
+                   (d) <GetConfigResponse xmlns="urn:zmailAdmin">
+                           <a n="zmailDefaultDomainName">my.中文.cn</a>                 <=== an idn flagged attribute, stored LDAP value is my.xn--fiq228c.cn
                        </GetConfigResponse>
 
 
@@ -164,7 +164,7 @@ http://bugzilla.zimbra.com/show_bug.cgi?id=14225
                and routed.
               
                    e.g. 
-                   (a) <SendMsgRequest xmlns="urn:zimbraMail" suid="...">
+                   (a) <SendMsgRequest xmlns="urn:zmailMail" suid="...">
                            <m idnt="...">
                                <e t="t" a="user2@my.中文.cn/>
                                <e t="f" a="user1@my.中文.cn"/>
@@ -185,7 +185,7 @@ http://bugzilla.zimbra.com/show_bug.cgi?id=14225
                it encodes the SOAP response.
                
                    e.g.
-                   (a) <SearchResponse xmlns="urn:zimbraMail" more="0" sortBy="dateDesc" offset="0">
+                   (a) <SearchResponse xmlns="urn:zmailMail" more="0" sortBy="dateDesc" offset="0">
                            <c d="1191365996000" sf="1191365996000" f="su" id="259" score="1.0" n="2">
                                <su>A subject</su>
                                <fr>good day</fr>
@@ -212,10 +212,10 @@ http://bugzilla.zimbra.com/show_bug.cgi?id=14225
     
     For example, for domain my.中文.cn
         - examples of good queries:
-              (zimbraDomainName=*中文*)
+              (zmailDomainName=*中文*)
     
         - examples of bad queries:
-              (zimbraDomainName=*文*)
+              (zmailDomainName=*文*)
               
     
 2.6 Address Book Lookup and Display
@@ -248,7 +248,7 @@ In Web client and admin console
               as when they are entered.  See 2.6.
 
 3.1 Web Client
-    http://bugzilla.zimbra.com/show_bug.cgi?id=20428
+    http://bugzilla.zmail.com/show_bug.cgi?id=20428
 
 3.2 Admin Console
 

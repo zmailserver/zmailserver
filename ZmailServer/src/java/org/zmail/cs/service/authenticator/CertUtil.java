@@ -12,7 +12,7 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.service.authenticator;
+package org.zmail.cs.service.authenticator;
 
 import java.io.FileInputStream;
 import java.io.IOException;
@@ -57,10 +57,10 @@ import org.bouncycastle.asn1.x509.GeneralName;
 import org.bouncycastle.asn1.x509.GeneralNames;
 import org.bouncycastle.asn1.x509.X509Extension;
 
-import com.zimbra.common.util.ZimbraLog;
-import com.zimbra.cs.service.authenticator.ClientCertPrincipalMap.CertField;
-import com.zimbra.cs.service.authenticator.ClientCertPrincipalMap.KnownCertField;
-import com.zimbra.cs.service.authenticator.ClientCertPrincipalMap.SubjectCertField;
+import org.zmail.common.util.ZmailLog;
+import org.zmail.cs.service.authenticator.ClientCertPrincipalMap.CertField;
+import org.zmail.cs.service.authenticator.ClientCertPrincipalMap.KnownCertField;
+import org.zmail.cs.service.authenticator.ClientCertPrincipalMap.SubjectCertField;
 
 public class CertUtil {
     static final String LOG_PREFIX = ClientCertAuthenticator.LOG_PREFIX;
@@ -148,7 +148,7 @@ public class CertUtil {
         try {
             generalNames = cert.getSubjectAlternativeNames();
         } catch (CertificateParsingException e) {
-            ZimbraLog.account.warn(LOG_PREFIX + "unable to get subject alternative names", e);
+            ZmailLog.account.warn(LOG_PREFIX + "unable to get subject alternative names", e);
         }
     
         if (generalNames == null) {
@@ -179,7 +179,7 @@ public class CertUtil {
                 }
             }
         } catch (IOException e) {
-            ZimbraLog.account.warn(LOG_PREFIX + "unable to process ASN.1 data", e);
+            ZmailLog.account.warn(LOG_PREFIX + "unable to process ASN.1 data", e);
         }
         
         return null;
@@ -190,7 +190,7 @@ public class CertUtil {
         try {
             generalNames = cert.getSubjectAlternativeNames();
         } catch (CertificateParsingException e) {
-            ZimbraLog.account.warn(LOG_PREFIX + "unable to get subject alternative names", e);
+            ZmailLog.account.warn(LOG_PREFIX + "unable to get subject alternative names", e);
         }
     
         if (generalNames == null) {
@@ -236,7 +236,7 @@ public class CertUtil {
                             DERIA5String str = DERIA5String.getInstance(encoded);
                             return str.getString();
                         } catch (IOException e) {
-                            ZimbraLog.account.warn(LOG_PREFIX + "unable to decode " + type, e);
+                            ZmailLog.account.warn(LOG_PREFIX + "unable to decode " + type, e);
                         }
                         
                     } else {
@@ -245,7 +245,7 @@ public class CertUtil {
                 }
             }
         } catch (InvalidNameException e) {
-            ZimbraLog.account.warn(LOG_PREFIX + "Invalid subject dn value" + subjectDN, e);
+            ZmailLog.account.warn(LOG_PREFIX + "Invalid subject dn value" + subjectDN, e);
         }
         
         return null;
@@ -506,7 +506,7 @@ public class CertUtil {
     }
     
     /*
-     *  zmjava com.zimbra.cs.service.authenticator.CertUtil [options]
+     *  zmjava org.zmail.cs.service.authenticator.CertUtil [options]
      */
     public static void main(String[] args) {
         

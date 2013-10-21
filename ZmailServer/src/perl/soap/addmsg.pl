@@ -28,8 +28,8 @@ use XmlElement;
 use XmlDoc;
 use Soap;
 
-my $ACCTNS = "urn:zimbraAccount";
-my $MAILNS = "urn:zimbraMail";
+my $ACCTNS = "urn:zmailAccount";
+my $MAILNS = "urn:zmailMail";
 
 my $url = "http://localhost:7070/service/soap/";
 
@@ -48,7 +48,7 @@ my $authToken = $authResponse->find_child('authToken')->content;
 
 print "authToken($authToken)\n";
 
-my $context = $SOAP->zimbraContext($authToken);
+my $context = $SOAP->zmailContext($authToken);
 
 #
 # <AddMsgRequest>
@@ -94,9 +94,9 @@ $d->start('inv', undef, { 'type' => "event",
                       });
 
     $d->add('dur', undef, { 'h' => "1"});
-    $d->add('or', undef, { 'd' => "user1", 'a' => "user1\@timbre.example.zimbra.com" } );
+    $d->add('or', undef, { 'd' => "user1", 'a' => "user1\@timbre.example.zmail.com" } );
     $d->add('at', undef, { 'd' => "user2",
-                           'a' => "user2\@timbre.example.zimbra.com",
+                           'a' => "user2\@timbre.example.zmail.com",
                            'role' => "REQ",
                            'ptst' => "NE",
                        });

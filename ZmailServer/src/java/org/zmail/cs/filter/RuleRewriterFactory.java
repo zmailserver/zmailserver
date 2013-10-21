@@ -12,18 +12,18 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.filter;
+package org.zmail.cs.filter;
 
 import java.util.List;
 
 import org.apache.jsieve.parser.generated.Node;
 
-import com.zimbra.common.localconfig.LC;
-import com.zimbra.common.soap.Element;
-import com.zimbra.common.soap.Element.ElementFactory;
-import com.zimbra.common.util.ZimbraLog;
-import com.zimbra.cs.account.Account;
-import com.zimbra.cs.mailbox.Mailbox;
+import org.zmail.common.localconfig.LC;
+import org.zmail.common.soap.Element;
+import org.zmail.common.soap.Element.ElementFactory;
+import org.zmail.common.util.ZmailLog;
+import org.zmail.cs.account.Account;
+import org.zmail.cs.mailbox.Mailbox;
 
 class RuleRewriterFactory {
 	
@@ -31,12 +31,12 @@ class RuleRewriterFactory {
 	
     synchronized static RuleRewriterFactory getInstance() {
 		if (instance == null) {
-	        String className = LC.zimbra_class_rulerewriterfactory.value();
+	        String className = LC.zmail_class_rulerewriterfactory.value();
 	        if (className != null && !className.equals("")) {
 	            try {
 	                instance = (RuleRewriterFactory) Class.forName(className).newInstance();
 	            } catch (Exception e) {
-	                ZimbraLog.filter.error("could not instantiate RuleRewriterFactory interface of class '" + className + "'; defaulting to RuleRewriterFactory", e);
+	                ZmailLog.filter.error("could not instantiate RuleRewriterFactory interface of class '" + className + "'; defaulting to RuleRewriterFactory", e);
 	            }
 	        }
 	        if (instance == null)

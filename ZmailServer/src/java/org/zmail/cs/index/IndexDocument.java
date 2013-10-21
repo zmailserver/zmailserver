@@ -12,16 +12,16 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.index;
+package org.zmail.cs.index;
 
 import org.apache.lucene.document.DateTools;
 import org.apache.lucene.document.Document;
 import org.apache.lucene.document.Field;
 
 import com.google.common.base.Strings;
-import com.zimbra.cs.index.analysis.FieldTokenStream;
-import com.zimbra.cs.index.analysis.MimeTypeTokenStream;
-import com.zimbra.cs.index.analysis.RFC822AddressTokenStream;
+import org.zmail.cs.index.analysis.FieldTokenStream;
+import org.zmail.cs.index.analysis.MimeTypeTokenStream;
+import org.zmail.cs.index.analysis.RFC822AddressTokenStream;
 
 /**
  * Helper for Lucene {@link Document}.

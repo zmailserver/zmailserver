@@ -12,20 +12,20 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.dav.service.method;
+package org.zmail.cs.dav.service.method;
 
 import java.io.IOException;
 
 import javax.servlet.http.HttpServletResponse;
 
-import com.zimbra.cs.dav.DavContext;
-import com.zimbra.cs.dav.DavException;
-import com.zimbra.cs.dav.DavProtocol;
-import com.zimbra.cs.dav.resource.Collection;
-import com.zimbra.cs.dav.resource.DavResource;
-import com.zimbra.cs.dav.resource.UrlNamespace;
-import com.zimbra.cs.dav.service.DavMethod;
-import com.zimbra.cs.servlet.ETagHeaderFilter;
+import org.zmail.cs.dav.DavContext;
+import org.zmail.cs.dav.DavException;
+import org.zmail.cs.dav.DavProtocol;
+import org.zmail.cs.dav.resource.Collection;
+import org.zmail.cs.dav.resource.DavResource;
+import org.zmail.cs.dav.resource.UrlNamespace;
+import org.zmail.cs.dav.service.DavMethod;
+import org.zmail.cs.servlet.ETagHeaderFilter;
 
 public class Put extends DavMethod {
     public static final String PUT = "PUT";

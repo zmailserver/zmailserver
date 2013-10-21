@@ -13,7 +13,7 @@
  * ***** END LICENSE BLOCK *****
  */
 
-package com.zimbra.qa.unittest;
+package org.zmail.qa.unittest;
 
 import static org.junit.Assert.assertTrue;
 
@@ -28,17 +28,17 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
-import com.zimbra.client.ZMailbox;
-import com.zimbra.common.localconfig.LC;
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.common.util.Log;
-import com.zimbra.cs.mailclient.CommandFailedException;
-import com.zimbra.cs.mailclient.imap.CAtom;
-import com.zimbra.cs.mailclient.imap.Flags;
-import com.zimbra.cs.mailclient.imap.ImapConfig;
-import com.zimbra.cs.mailclient.imap.ImapConnection;
-import com.zimbra.cs.mailclient.imap.Literal;
-import com.zimbra.cs.mailclient.imap.MailboxName;
+import org.zmail.client.ZMailbox;
+import org.zmail.common.localconfig.LC;
+import org.zmail.common.service.ServiceException;
+import org.zmail.common.util.Log;
+import org.zmail.cs.mailclient.CommandFailedException;
+import org.zmail.cs.mailclient.imap.CAtom;
+import org.zmail.cs.mailclient.imap.Flags;
+import org.zmail.cs.mailclient.imap.ImapConfig;
+import org.zmail.cs.mailclient.imap.ImapConnection;
+import org.zmail.cs.mailclient.imap.Literal;
+import org.zmail.cs.mailclient.imap.MailboxName;
 
 /**
  * IMAP server tests.
@@ -354,8 +354,8 @@ public class TestImapThrottle {
     }
 
     private static String simpleMessage(String text) {
-        return "Return-Path: dac@zimbra.com\r\n" + "Date: Fri, 27 Feb 2004 15:24:43 -0800 (PST)\r\n"
-                + "From: dac <dac@zimbra.com>\r\n" + "To: bozo <bozo@foo.com>\r\n" + "Subject: Foo foo\r\n\r\n" + text
+        return "Return-Path: dac@zmail.com\r\n" + "Date: Fri, 27 Feb 2004 15:24:43 -0800 (PST)\r\n"
+                + "From: dac <dac@zmail.com>\r\n" + "To: bozo <bozo@foo.com>\r\n" + "Subject: Foo foo\r\n\r\n" + text
                 + "\r\n";
     }
 

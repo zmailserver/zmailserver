@@ -15,13 +15,13 @@
 # 
 use strict;
 use warnings;
-use lib qw(/opt/zimbra/zimbramon/lib /opt/zimbra/zimbramon/rrdtool/lib/perl);
+use lib qw(/opt/zmail/zmailmon/lib /opt/zmail/zmailmon/rrdtool/lib/perl);
 use DBI;
-use Zimbra::Mon::Zmstat;
+use Zmail::Mon::Zmstat;
 use Getopt::Std;
 
-Zimbra::Mon::Zmstat::getLocalConfig();
-my $logger_directory     = $Zimbra::Mon::Zmstat::LC{'logger_data_directory'};
+Zmail::Mon::Zmstat::getLocalConfig();
+my $logger_directory     = $Zmail::Mon::Zmstat::LC{'logger_data_directory'};
 my $logger_rrd_directory = "$logger_directory/rrds";
 
 sub list_hosts($) {
@@ -32,10 +32,10 @@ sub list_hosts($) {
     my $ref = $sth->fetchall_hashref('dns_hostname');
     my ($host, $zmhost);
     format STDOUT_TOP =
-Zimbra Logger Service Hostname Map
+Zmail Logger Service Hostname Map
 
 ---------------------    --------------------- 
-DNS Hostname             Zimbra Hostname
+DNS Hostname             Zmail Hostname
 ---------------------    ---------------------
 .
     format STDOUT =

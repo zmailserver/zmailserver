@@ -13,7 +13,7 @@
 # basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
 # ***** END LICENSE BLOCK *****
 # 
-source /opt/zimbra/bin/zmshutil || exit 1
-zmsetvars -f zimbra_home
+source /opt/zmail/bin/zmshutil || exit 1
+zmsetvars -f zmail_home
 
-exec ${zimbra_home}/bin/zmjava com.zimbra.soap.SoapCommandUtil "$@"
+exec ${zmail_home}/bin/zmjava org.zmail.soap.SoapCommandUtil "$@"

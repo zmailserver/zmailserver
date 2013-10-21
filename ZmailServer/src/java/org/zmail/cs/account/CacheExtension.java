@@ -12,14 +12,14 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.account;
+package org.zmail.cs.account;
 
 import java.util.HashMap;
 import java.util.Map;
 
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.common.util.ZimbraLog;
-import com.zimbra.soap.admin.type.CacheEntryType;
+import org.zmail.common.service.ServiceException;
+import org.zmail.common.util.ZmailLog;
+import org.zmail.soap.admin.type.CacheEntryType;
 
 public abstract class CacheExtension {
 
@@ -28,7 +28,7 @@ public abstract class CacheExtension {
     /*
      * Register a cache type that can be flushed by the zmprov fc <cache> command.
      * 
-     * It should be invoked from the init() method of ZimbraExtension.
+     * It should be invoked from the init() method of ZmailExtension.
      */
     public synchronized static void register(String cacheType, CacheExtension handler) {
         
@@ -38,7 +38,7 @@ public abstract class CacheExtension {
             //  make sure the cache is not already registered
             CacheExtension obj = mHandlers.get(cacheType);
             if (obj != null) {
-                ZimbraLog.account.warn("cache type " + cacheType + " is already registered, " +
+                ZmailLog.account.warn("cache type " + cacheType + " is already registered, " +
                                        "registering of " + obj.getClass().getCanonicalName() + " is ignored");
                 return;
             }    
@@ -51,7 +51,7 @@ public abstract class CacheExtension {
                 // this is good
             }
             if (cet != null) {
-                ZimbraLog.account.warn("cache type " + cacheType + " is one of the internal cache type, " +
+                ZmailLog.account.warn("cache type " + cacheType + " is one of the internal cache type, " +
                         "registering of " + obj.getClass().getCanonicalName() + " is ignored");
                 return;
             }

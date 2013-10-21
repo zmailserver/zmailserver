@@ -18,19 +18,19 @@
  *
  * Window - Preferences - Java - Code Style - Code Templates
  */
-package com.zimbra.cs.account;
+package org.zmail.cs.account;
 
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import com.zimbra.common.account.ZAttrProvisioning.DomainStatus;
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.common.util.StringUtil;
-import com.zimbra.common.util.ZimbraLog;
-import com.zimbra.cs.account.Provisioning.GalMode;
-import com.zimbra.cs.account.Provisioning.SearchGalResult;
-import com.zimbra.soap.type.GalSearchType;
+import org.zmail.common.account.ZAttrProvisioning.DomainStatus;
+import org.zmail.common.service.ServiceException;
+import org.zmail.common.util.StringUtil;
+import org.zmail.common.util.ZmailLog;
+import org.zmail.cs.account.Provisioning.GalMode;
+import org.zmail.cs.account.Provisioning.SearchGalResult;
+import org.zmail.soap.type.GalSearchType;
 
 /**
  * @author schemers
@@ -60,7 +60,7 @@ public class Domain extends ZAttrDomain {
         getProvisioning().modifyAttrs(this, attrs);
     }
 
-    public void deleteDomain(String zimbraId) throws ServiceException {
+    public void deleteDomain(String zmailId) throws ServiceException {
         getProvisioning().deleteDomain(getId());
     }
     
@@ -119,7 +119,7 @@ public class Domain extends ZAttrDomain {
         boolean suspended = status != null && status.isSuspended();
 
         if (suspended)
-            ZimbraLog.account.warn("domain " + mName + " is " + Provisioning.DOMAIN_STATUS_SUSPENDED);
+            ZmailLog.account.warn("domain " + mName + " is " + Provisioning.DOMAIN_STATUS_SUSPENDED);
         return suspended;
     }
     
@@ -128,12 +128,12 @@ public class Domain extends ZAttrDomain {
         boolean shutdown = status != null && status.isShutdown();
         
         if (shutdown)
-            ZimbraLog.account.warn("domain " + mName + " is " + Provisioning.DOMAIN_STATUS_SHUTDOWN);
+            ZmailLog.account.warn("domain " + mName + " is " + Provisioning.DOMAIN_STATUS_SHUTDOWN);
         return shutdown;
     }
     
     public boolean beingRenamed() {
-        String renameInfo = getAttr(Provisioning.A_zimbraDomainRenameInfo);
+        String renameInfo = getAttr(Provisioning.A_zmailDomainRenameInfo);
         return (!StringUtil.isNullOrEmpty(renameInfo));
     }
     

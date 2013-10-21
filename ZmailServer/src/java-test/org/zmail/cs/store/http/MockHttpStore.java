@@ -12,7 +12,7 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.store.http;
+package org.zmail.cs.store.http;
 
 import java.io.BufferedInputStream;
 import java.io.IOException;
@@ -27,7 +27,7 @@ import javax.mail.MessagingException;
 import javax.mail.internet.InternetHeaders;
 
 import com.google.common.collect.Maps;
-import com.zimbra.common.util.ByteUtil;
+import org.zmail.common.util.ByteUtil;
 
 public class MockHttpStore {
     static final int PORT = 7678;

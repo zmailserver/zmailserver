@@ -40,8 +40,8 @@ if (defined($ARGV[1]) && $ARGV[1] ne "") {
     die "USAGE: sendInviteReply USER INVITE-MESSAGE-ID";
 }
 
-my $ACCTNS = "urn:zimbraAccount";
-my $MAILNS = "urn:zimbraMail";
+my $ACCTNS = "urn:zmailAccount";
+my $MAILNS = "urn:zmailMail";
 
 my $url = "http://localhost:7070/service/soap/";
 
@@ -62,7 +62,7 @@ print "authToken($authToken)\n";
 my $sessionId = $authResponse->find_child('sessionId')->content;
 print "sessionId = $sessionId\n";
 
-my $context = $SOAP->zimbraContext($authToken, $sessionId);
+my $context = $SOAP->zmailContext($authToken, $sessionId);
 
 my $contextStr = $context->to_string("pretty");
 print("Context = $contextStr\n");
@@ -83,7 +83,7 @@ $d->start('m', undef, { 'l' => "/INBOX" }, undef);
 
 $d->add('e', undef,
         {
-            'a' => "user1\@timbre.example.zimbra.com",
+            'a' => "user1\@timbre.example.zmail.com",
             't' => "t"
             } );
 

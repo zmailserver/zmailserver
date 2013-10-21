@@ -14,7 +14,7 @@
  * 
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.datasource.imap;
+package org.zmail.cs.datasource.imap;
 
 import java.lang.reflect.Method;
 import java.util.ArrayList;
@@ -24,7 +24,7 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
-import com.zimbra.cs.mailclient.imap.ListData;
+import org.zmail.cs.mailclient.imap.ListData;
 
 public class ImapUtilTest {
 

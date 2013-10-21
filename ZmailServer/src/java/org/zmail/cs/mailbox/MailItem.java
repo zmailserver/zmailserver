@@ -12,7 +12,7 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.mailbox;
+package org.zmail.cs.mailbox;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -39,32 +39,32 @@ import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.ImmutableSet;
 import com.google.common.collect.Maps;
 import com.google.common.collect.Sets;
-import com.zimbra.common.mailbox.Color;
-import com.zimbra.common.mailbox.ContactConstants;
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.common.util.ByteUtil;
-import com.zimbra.common.util.EmailUtil;
-import com.zimbra.common.util.Pair;
-import com.zimbra.common.util.StringUtil;
-import com.zimbra.common.util.SystemUtil;
-import com.zimbra.common.util.ZimbraLog;
-import com.zimbra.cs.account.Account;
-import com.zimbra.cs.account.GuestAccount;
-import com.zimbra.cs.account.Provisioning;
-import com.zimbra.cs.db.DbMailItem;
-import com.zimbra.cs.db.DbPendingAclPush;
-import com.zimbra.cs.db.DbTag;
-import com.zimbra.cs.index.IndexDocument;
-import com.zimbra.cs.index.SortBy;
-import com.zimbra.cs.mailbox.MailItem.CustomMetadata.CustomMetadataList;
-import com.zimbra.cs.mailbox.util.TypedIdList;
-import com.zimbra.cs.session.PendingModifications;
-import com.zimbra.cs.session.PendingModifications.Change;
-import com.zimbra.cs.session.Session;
-import com.zimbra.cs.store.MailboxBlob;
-import com.zimbra.cs.store.StagedBlob;
-import com.zimbra.cs.store.StoreManager;
-import com.zimbra.cs.volume.Volume;
+import org.zmail.common.mailbox.Color;
+import org.zmail.common.mailbox.ContactConstants;
+import org.zmail.common.service.ServiceException;
+import org.zmail.common.util.ByteUtil;
+import org.zmail.common.util.EmailUtil;
+import org.zmail.common.util.Pair;
+import org.zmail.common.util.StringUtil;
+import org.zmail.common.util.SystemUtil;
+import org.zmail.common.util.ZmailLog;
+import org.zmail.cs.account.Account;
+import org.zmail.cs.account.GuestAccount;
+import org.zmail.cs.account.Provisioning;
+import org.zmail.cs.db.DbMailItem;
+import org.zmail.cs.db.DbPendingAclPush;
+import org.zmail.cs.db.DbTag;
+import org.zmail.cs.index.IndexDocument;
+import org.zmail.cs.index.SortBy;
+import org.zmail.cs.mailbox.MailItem.CustomMetadata.CustomMetadataList;
+import org.zmail.cs.mailbox.util.TypedIdList;
+import org.zmail.cs.session.PendingModifications;
+import org.zmail.cs.session.PendingModifications.Change;
+import org.zmail.cs.session.Session;
+import org.zmail.cs.store.MailboxBlob;
+import org.zmail.cs.store.StagedBlob;
+import org.zmail.cs.store.StoreManager;
+import org.zmail.cs.volume.Volume;
 
 /**
  * @since Aug 12, 2004
@@ -588,7 +588,7 @@ public abstract class MailItem implements Comparable<MailItem>, ScheduledTaskRes
             if (sentFolder == -1) {
                 sentFolder = Mailbox.ID_FOLDER_SENT;
                 try {
-                    String sent = mailbox.getAccount().getAttr(Provisioning.A_zimbraPrefSentMailFolder, null);
+                    String sent = mailbox.getAccount().getAttr(Provisioning.A_zmailPrefSentMailFolder, null);
                     if (sent != null) {
                         sentFolder = mailbox.getFolderByPath(null, sent).getId();
                     }
@@ -964,7 +964,7 @@ public abstract class MailItem implements Comparable<MailItem>, ScheduledTaskRes
         return mExtendedData.listSections();
     }
 
-    /** Returns the requested set of non-Zimbra-standard metadata values in
+    /** Returns the requested set of non-Zmail-standard metadata values in
      *  the requested {@code section}.  If no set of custom metadata is
      *  associated with the {@code section}, returns <tt>null</tt>.
      * @see #setCustomData(CustomMetadata) */
@@ -977,7 +977,7 @@ public abstract class MailItem implements Comparable<MailItem>, ScheduledTaskRes
 
     private static final int TOTAL_METADATA_LIMIT = 10000;
 
-    /** Updates the requested set of non-Zimbra-standard metadata values in
+    /** Updates the requested set of non-Zmail-standard metadata values in
      *  the requested section.  If the provided set of {@code custom}
      *  metdata contains no metadata key/value pairs, the section is deleted.
      * @see #getCustomData(String) */
@@ -1760,7 +1760,7 @@ public abstract class MailItem implements Comparable<MailItem>, ScheduledTaskRes
         try {
             markBlobForDeletion(getBlob());
         } catch (ServiceException e) {
-            ZimbraLog.mailbox.warn("error queuing blob for deletion for id: " + mId + ", change: " + mData.modContent, e);
+            ZmailLog.mailbox.warn("error queuing blob for deletion for id: " + mId + ", change: " + mData.modContent, e);
         }
     }
 
@@ -1876,8 +1876,8 @@ public abstract class MailItem implements Comparable<MailItem>, ScheduledTaskRes
             throw ServiceException.PERM_DENIED("you do not have the necessary permissions on the item");
         }
 
-        if (ZimbraLog.mailop.isDebugEnabled()) {
-            ZimbraLog.mailop.debug("Setting date of %s to %d.", getMailopContext(this), date);
+        if (ZmailLog.mailop.isDebugEnabled()) {
+            ZmailLog.mailop.debug("Setting date of %s to %d.", getMailopContext(this), date);
         }
         markItemModified(Change.DATE);
         mData.date = (int) (date / 1000L);
@@ -1892,8 +1892,8 @@ public abstract class MailItem implements Comparable<MailItem>, ScheduledTaskRes
         if (mData.imapId == imapId)
             return;
 
-        if (ZimbraLog.mailop.isDebugEnabled()) {
-            ZimbraLog.mailop.debug("Setting imapId of %s to %d.", getMailopContext(this), imapId);
+        if (ZmailLog.mailop.isDebugEnabled()) {
+            ZmailLog.mailop.debug("Setting imapId of %s to %d.", getMailopContext(this), imapId);
         }
         markItemModified(Change.IMAP_UID);
         mData.imapId = imapId;
@@ -2011,7 +2011,7 @@ public abstract class MailItem implements Comparable<MailItem>, ScheduledTaskRes
                     maxVer = Math.max(maxVer, rev.getVersion());
 
                 if (mVersion <= maxVer) {
-                    ZimbraLog.mailop.info("Item's current version is not greater than highest revision; " +
+                    ZmailLog.mailop.info("Item's current version is not greater than highest revision; " +
                                           "adjusting to " + (maxVer + 1) + " (was " + mVersion + ")");
                     mVersion = maxVer + 1;
                 }
@@ -2025,7 +2025,7 @@ public abstract class MailItem implements Comparable<MailItem>, ScheduledTaskRes
             mMailbox.updateSize(mData.size, isQuotaCheckRequired());
             folder.updateSize(0, 0, mData.size);
 
-            ZimbraLog.mailop.debug("saving revision %d for %s", mVersion, getMailopContext(this));
+            ZmailLog.mailop.debug("saving revision %d for %s", mVersion, getMailopContext(this));
 
             DbMailItem.snapshotRevision(this, mVersion);
             if (!isTagged(Flag.FlagInfo.VERSIONED)) {
@@ -2103,7 +2103,7 @@ public abstract class MailItem implements Comparable<MailItem>, ScheduledTaskRes
                     info.blobDigests.add(revision.getDigest());
                     info.size += revision.getSize();
                 } catch (Exception e) {
-                    ZimbraLog.mailbox.error("missing blob for id: " + revision.getId() + ", revision: " + revision.getVersion());
+                    ZmailLog.mailbox.error("missing blob for id: " + revision.getId() + ", revision: " + revision.getVersion());
                 }
             }
         }
@@ -2166,7 +2166,7 @@ public abstract class MailItem implements Comparable<MailItem>, ScheduledTaskRes
      *  mutable metadata.  Updates mailbox and folder sizes appropriately.
      *
      * @param data  The (optional) extra item data for indexing (e.g.
-     *              a Message's {@link com.zimbra.cs.index.ParsedMessage}. */
+     *              a Message's {@link org.zmail.cs.index.ParsedMessage}. */
     void reanalyze(Object data, long newSize) throws ServiceException {
         throw ServiceException.FAILURE("reanalysis of " + getType() + "s not supported", null);
     }
@@ -2267,8 +2267,8 @@ public abstract class MailItem implements Comparable<MailItem>, ScheduledTaskRes
             }
         }
 
-        if (ZimbraLog.mailop.isDebugEnabled()) {
-            ZimbraLog.mailop.debug("Setting %s for %s.", getMailopContext(tag), getMailopContext(this));
+        if (ZmailLog.mailop.isDebugEnabled()) {
+            ZmailLog.mailop.debug("Setting %s for %s.", getMailopContext(tag), getMailopContext(this));
         }
         // alter our tags in the DB
 //        DbTag.alterTag(this, tag, add);
@@ -2374,7 +2374,7 @@ public abstract class MailItem implements Comparable<MailItem>, ScheduledTaskRes
             try {
                 mMailbox.getTagByName(name).updateUnread(delta, deletedDelta);
             } catch (MailServiceException.NoSuchItemException nsie) {
-                ZimbraLog.mailbox.warn("item %d has nonexistent tag %s", mId, name);
+                ZmailLog.mailbox.warn("item %d has nonexistent tag %s", mId, name);
                 continue;
             }
         }
@@ -2396,7 +2396,7 @@ public abstract class MailItem implements Comparable<MailItem>, ScheduledTaskRes
             try {
                 mMailbox.getTagByName(name).updateSize(countDelta, deletedDelta);
             } catch (MailServiceException.NoSuchItemException nsie) {
-                ZimbraLog.mailbox.warn("item %d has nonexistent tag %s", mId, name);
+                ZmailLog.mailbox.warn("item %d has nonexistent tag %s", mId, name);
                 continue;
             }
         }
@@ -2501,8 +2501,8 @@ public abstract class MailItem implements Comparable<MailItem>, ScheduledTaskRes
 
         if (shareIndex && !isTagged(Flag.FlagInfo.COPIED)) {
             alterSystemFlag(mMailbox.getFlagById(Flag.ID_COPIED), true);
-            if (ZimbraLog.mailop.isDebugEnabled()) {
-                ZimbraLog.mailop.debug("setting copied flag for %s", getMailopContext(this));
+            if (ZmailLog.mailop.isDebugEnabled()) {
+                ZmailLog.mailop.debug("setting copied flag for %s", getMailopContext(this));
             }
         }
         StoreManager sm = StoreManager.getInstance();
@@ -2526,7 +2526,7 @@ public abstract class MailItem implements Comparable<MailItem>, ScheduledTaskRes
         data.metadata = encodeMetadata().toString();
         data.contentChanged(mMailbox);
 
-        ZimbraLog.mailop.info("Copying %s: copyId=%d, folderId=%d, folderName=%s, parentId=%d.",
+        ZmailLog.mailop.info("Copying %s: copyId=%d, folderId=%d, folderName=%s, parentId=%d.",
                               getMailopContext(this), copyId, folder.getId(), folder.getName(), data.parentId);
         DbMailItem.copy(this, copyId, copyUuid, folder, data.indexId, data.parentId, data.locator, data.metadata, inDumpster);
         if (this instanceof CalendarItem)
@@ -2629,7 +2629,7 @@ public abstract class MailItem implements Comparable<MailItem>, ScheduledTaskRes
         data.indexId = shareIndex ? getIndexId() : IndexStatus.DEFERRED.id();
         data.contentChanged(mMailbox);
 
-        ZimbraLog.mailop.info("Performing IMAP copy of %s: copyId=%d, folderId=%d, folderName=%s, parentId=%d.",
+        ZmailLog.mailop.info("Performing IMAP copy of %s: copyId=%d, folderId=%d, folderName=%s, parentId=%d.",
             getMailopContext(this), copyId, target.getId(), target.getName(), data.parentId);
         DbMailItem.icopy(this, data, shareIndex);
 
@@ -2791,8 +2791,8 @@ public abstract class MailItem implements Comparable<MailItem>, ScheduledTaskRes
                 }
             } catch (MailServiceException.NoSuchItemException nsie) { }
 
-            if (ZimbraLog.mailop.isDebugEnabled()) {
-                ZimbraLog.mailop.debug("renaming " + getMailopContext(this) + " to " + name);
+            if (ZmailLog.mailop.isDebugEnabled()) {
+                ZmailLog.mailop.debug("renaming " + getMailopContext(this) + " to " + name);
             }
 
             // XXX: note that we don't update mData.folderId here, as we need the subsequent
@@ -2876,7 +2876,7 @@ public abstract class MailItem implements Comparable<MailItem>, ScheduledTaskRes
             mMailbox.index.add(this);
         }
 
-        ZimbraLog.mailop.info("moving " + getMailopContext(this) + " to " + getMailopContext(target));
+        ZmailLog.mailop.info("moving " + getMailopContext(this) + " to " + getMailopContext(target));
         DbMailItem.setFolder(this, target);
         folderChanged(target, 0);
         return true;
@@ -2964,7 +2964,7 @@ public abstract class MailItem implements Comparable<MailItem>, ScheduledTaskRes
          *  {@link DbMailItem#resolveSharedIndex}. */
         public Set<Integer> sharedIndex;
 
-        /** The {@link com.zimbra.cs.store.Blob}s for all items being deleted that have content
+        /** The {@link org.zmail.cs.store.Blob}s for all items being deleted that have content
          *  persisted in the store. */
         public List<MailboxBlob> blobs = new ArrayList<MailboxBlob>(1);
 
@@ -3107,12 +3107,12 @@ public abstract class MailItem implements Comparable<MailItem>, ScheduledTaskRes
         }
 
         // Log mailop statements if necessary
-        if (ZimbraLog.mailop.isInfoEnabled()) {
+        if (ZmailLog.mailop.isInfoEnabled()) {
             if (item != null) {
                 if (item instanceof VirtualConversation) {
-                    ZimbraLog.mailop.info("Deleting Message (id=%d).", ((VirtualConversation) item).getMessageId());
+                    ZmailLog.mailop.info("Deleting Message (id=%d).", ((VirtualConversation) item).getMessageId());
                 } else {
-                    ZimbraLog.mailop.info("Deleting %s.", getMailopContext(item));
+                    ZmailLog.mailop.info("Deleting %s.", getMailopContext(item));
                 }
             }
 
@@ -3126,13 +3126,13 @@ public abstract class MailItem implements Comparable<MailItem>, ScheduledTaskRes
                 }
                 if (idSet.size() >= 200) {
                     // More than 200 items.
-                    ZimbraLog.mailop.info("Deleting items: %s.", StringUtil.join(",", idSet));
+                    ZmailLog.mailop.info("Deleting items: %s.", StringUtil.join(",", idSet));
                     idSet.clear();
                 }
             }
             if (idSet.size() > 0) {
                 // Less than 200 items or remainder.
-                ZimbraLog.mailop.info("Deleting items: %s.", StringUtil.join(",", idSet));
+                ZmailLog.mailop.info("Deleting items: %s.", StringUtil.join(",", idSet));
             }
         }
 
@@ -3195,7 +3195,7 @@ public abstract class MailItem implements Comparable<MailItem>, ScheduledTaskRes
     }
 
     static String getMailopContext(MailItem item) {
-        if (item == null || !ZimbraLog.mailop.isInfoEnabled()) {
+        if (item == null || !ZmailLog.mailop.isInfoEnabled()) {
             return "<undefined>";
         } else if (item instanceof Folder || item instanceof Tag || item instanceof WikiItem) {
             return String.format("%s %s (id=%d)", item.getClass().getSimpleName(), item.getName(), item.getId());
@@ -3261,7 +3261,7 @@ public abstract class MailItem implements Comparable<MailItem>, ScheduledTaskRes
                 try {
                     info.blobs.add(revision.getBlob());
                 } catch (Exception e) {
-                    ZimbraLog.mailbox.error("missing blob for id: " + mId + ", change: " + revision.getSavedSequence());
+                    ZmailLog.mailbox.error("missing blob for id: " + mId + ", change: " + revision.getSavedSequence());
                 }
             }
         }
@@ -3349,7 +3349,7 @@ public abstract class MailItem implements Comparable<MailItem>, ScheduledTaskRes
         try {
             decodeMetadata(new Metadata(metadata));
         } catch (ServiceException e) {
-            ZimbraLog.mailbox.error("Failed to parse metadata id=%d,type=%s", mId, getType(), e);
+            ZmailLog.mailbox.error("Failed to parse metadata id=%d,type=%s", mId, getType(), e);
             throw e;
         }
     }
@@ -3386,7 +3386,7 @@ public abstract class MailItem implements Comparable<MailItem>, ScheduledTaskRes
                 }
             } catch (ServiceException se) {
                 //map may exist in old attr for a short time between bug 60048 and bug 68928
-                ZimbraLog.mailbox.warn("Metadata.FN_RIGHTS exists, but is not list. Should never see this outside CF/DF!");
+                ZmailLog.mailbox.warn("Metadata.FN_RIGHTS exists, but is not list. Should never see this outside CF/DF!");
                 acl = makeACLFromMap(Metadata.FN_RIGHTS, meta);
             }
         }
@@ -3414,8 +3414,8 @@ public abstract class MailItem implements Comparable<MailItem>, ScheduledTaskRes
 
     protected void saveMetadata(String metadata) throws ServiceException {
         metadataChanged();
-        if (ZimbraLog.mailop.isDebugEnabled()) {
-            ZimbraLog.mailop.debug("saving metadata for " + getMailopContext(this));
+        if (ZmailLog.mailop.isDebugEnabled()) {
+            ZmailLog.mailop.debug("saving metadata for " + getMailopContext(this));
         }
         DbMailItem.saveMetadata(this, metadata);
     }
@@ -3435,8 +3435,8 @@ public abstract class MailItem implements Comparable<MailItem>, ScheduledTaskRes
     protected void saveData(DbMailItem data, Metadata metadata) throws ServiceException {
         assert(metadata != null);
         metadataChanged();
-        if (ZimbraLog.mailop.isDebugEnabled()) {
-            ZimbraLog.mailop.debug("saving data for %s", getMailopContext(this));
+        if (ZmailLog.mailop.isDebugEnabled()) {
+            ZmailLog.mailop.debug("saving data for %s", getMailopContext(this));
         }
         data.update(this, metadata);
     }
@@ -3599,7 +3599,7 @@ public abstract class MailItem implements Comparable<MailItem>, ScheduledTaskRes
      *  to the database.
      *
      *
-     * @param zimbraId  The zimbraId of the entry being granted rights.
+     * @param zmailId  The zmailId of the entry being granted rights.
      * @param type      The type of principal the grantee's ID refers to.
      * @param rights    A bitmask of the rights being granted.
      * @param expiry    Time when grant expires. Value of 0 means grant never expires.
@@ -3608,19 +3608,19 @@ public abstract class MailItem implements Comparable<MailItem>, ScheduledTaskRes
      *    <li><tt>service.FAILURE</tt> - if there's a database failure
      *    <li><tt>service.PERM_DENIED</tt> - if you don't have sufficient
      *        permissions</ul> */
-    ACL.Grant grantAccess(String zimbraId, byte type, short rights, String args, long expiry) throws ServiceException {
+    ACL.Grant grantAccess(String zmailId, byte type, short rights, String args, long expiry) throws ServiceException {
         Account account = getAccount();
         if (type == ACL.GRANTEE_PUBLIC && !account.isPublicSharingEnabled()) {
             throw ServiceException.PERM_DENIED("public sharing not allowed");
         }
         if (type == ACL.GRANTEE_GUEST &&
-                (!account.isExternalSharingEnabled() || !isAllowedExternalDomain(zimbraId))) {
+                (!account.isExternalSharingEnabled() || !isAllowedExternalDomain(zmailId))) {
             throw ServiceException.PERM_DENIED("external sharing not allowed");
         }
         if (!canAccess(ACL.RIGHT_ADMIN)) {
             throw ServiceException.PERM_DENIED("you do not have admin rights to item " + getPath());
         }
-        if (type == ACL.GRANTEE_USER && zimbraId.equalsIgnoreCase(getMailbox().getAccountId())) {
+        if (type == ACL.GRANTEE_USER && zmailId.equalsIgnoreCase(getMailbox().getAccountId())) {
             throw ServiceException.PERM_DENIED("cannot grant access to the owner of the item");
         }
         // if there's an ACL on the item, the item does not inherit from its parent
@@ -3634,7 +3634,7 @@ public abstract class MailItem implements Comparable<MailItem>, ScheduledTaskRes
             this.rights = new ACL(intShareLifetime == 0 ? 0 : now + intShareLifetime,
                     extShareLifetime == 0 ? 0 : now + extShareLifetime);
         }
-        ACL.Grant grant = this.rights.grantAccess(zimbraId, type, rights, args, expiry);
+        ACL.Grant grant = this.rights.grantAccess(zmailId, type, rights, args, expiry);
         saveMetadata();
 
         queueForAclPush();
@@ -3659,28 +3659,28 @@ public abstract class MailItem implements Comparable<MailItem>, ScheduledTaskRes
     /** Removes the set of rights granted to the specified (id, type) pair
      *  and updates the database accordingly.
      *
-     * @param zimbraId  The zimbraId of the entry being revoked rights.
+     * @param zmailId  The zmailId of the entry being revoked rights.
      * @perms {@link ACL#RIGHT_ADMIN} on the item
      * @throws ServiceException The following error codes are possible:<ul>
      *    <li><tt>service.FAILURE</tt> - if there's a database failure
      *    <li><tt>service.PERM_DENIED</tt> - if you don't have sufficient
      *        permissions</ul> */
-    void revokeAccess(String zimbraId) throws ServiceException {
+    void revokeAccess(String zmailId) throws ServiceException {
         if (!canAccess(ACL.RIGHT_ADMIN)) {
             throw ServiceException.PERM_DENIED("you do not have admin rights to item " + getPath());
         }
-        if (zimbraId.equalsIgnoreCase(getMailbox().getAccountId())) {
+        if (zmailId.equalsIgnoreCase(getMailbox().getAccountId())) {
             throw ServiceException.PERM_DENIED("cannot revoke access from the owner of the item");
         }
         ACL acl = getEffectiveACL();
-        if (acl == null || !acl.revokeAccess(zimbraId)) {
+        if (acl == null || !acl.revokeAccess(zmailId)) {
             return;
         }
         // if there's an ACL on the item, the item does not inherit from its parent
         alterTag(mMailbox.getFlagById(Flag.ID_NO_INHERIT), true);
 
         markItemModified(Change.ACL);
-        rights.revokeAccess(zimbraId);
+        rights.revokeAccess(zmailId);
         if (rights.isEmpty()) {
             rights = null;
         }

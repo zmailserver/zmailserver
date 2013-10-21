@@ -13,25 +13,25 @@
  * ***** END LICENSE BLOCK *****
  */
 
-package com.zimbra.cs.service.mail;
+package org.zmail.cs.service.mail;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.common.soap.MailConstants;
-import com.zimbra.common.soap.Element;
-import com.zimbra.cs.mailbox.Contact;
-import com.zimbra.cs.mailbox.MailServiceException;
-import com.zimbra.cs.mailbox.Mailbox;
-import com.zimbra.cs.mailbox.OperationContext;
-import com.zimbra.cs.service.formatter.ContactCSV;
-import com.zimbra.cs.service.util.ItemId;
-import com.zimbra.soap.JaxbUtil;
-import com.zimbra.soap.ZimbraSoapContext;
-import com.zimbra.soap.mail.message.ExportContactsRequest;
-import com.zimbra.soap.mail.message.ExportContactsResponse;
+import org.zmail.common.service.ServiceException;
+import org.zmail.common.soap.MailConstants;
+import org.zmail.common.soap.Element;
+import org.zmail.cs.mailbox.Contact;
+import org.zmail.cs.mailbox.MailServiceException;
+import org.zmail.cs.mailbox.Mailbox;
+import org.zmail.cs.mailbox.OperationContext;
+import org.zmail.cs.service.formatter.ContactCSV;
+import org.zmail.cs.service.util.ItemId;
+import org.zmail.soap.JaxbUtil;
+import org.zmail.soap.ZmailSoapContext;
+import org.zmail.soap.mail.message.ExportContactsRequest;
+import org.zmail.soap.mail.message.ExportContactsResponse;
 
 /**
  * @author schemers
@@ -54,7 +54,7 @@ public final class ExportContacts extends MailDocumentHandler  {
     @Override
     public Element handle(Element request, Map<String, Object> context)
     throws ServiceException {
-        ZimbraSoapContext zsc = getZimbraSoapContext(context);
+        ZmailSoapContext zsc = getZmailSoapContext(context);
         Mailbox mbox = getRequestedMailbox(zsc);
         OperationContext octxt = getOperationContext(zsc, context);
 

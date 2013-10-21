@@ -12,7 +12,7 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.account.auth;
+package org.zmail.cs.account.auth;
 
 import java.io.UnsupportedEncodingException;
 import java.security.MessageDigest;
@@ -21,7 +21,7 @@ import java.security.SecureRandom;
 
 import org.apache.commons.codec.binary.Base64;
 
-import com.zimbra.cs.ldap.unboundid.InMemoryLdapServer;
+import org.zmail.cs.ldap.unboundid.InMemoryLdapServer;
 
 public class PasswordUtil {
     

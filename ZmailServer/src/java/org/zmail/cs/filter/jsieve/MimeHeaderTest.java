@@ -13,7 +13,7 @@
  * ***** END LICENSE BLOCK *****
  */
 
-package com.zimbra.cs.filter.jsieve;
+package org.zmail.cs.filter.jsieve;
 
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -25,7 +25,7 @@ import org.apache.jsieve.exception.SieveException;
 import org.apache.jsieve.mail.MailAdapter;
 import org.apache.jsieve.tests.Header;
 
-import com.zimbra.cs.filter.ZimbraMailAdapter;
+import org.zmail.cs.filter.ZmailMailAdapter;
 
 /**
  * Acts just like the original header test, but tests the headers
@@ -38,10 +38,10 @@ public class MimeHeaderTest extends Header {
     protected boolean match(MailAdapter mail, String comparator,
                             String matchType, List headerNames, List keys, SieveContext context)
     throws SieveException {
-        if (!(mail instanceof ZimbraMailAdapter)) {
+        if (!(mail instanceof ZmailMailAdapter)) {
             return false;
         }
-        ZimbraMailAdapter zma = (ZimbraMailAdapter) mail;
+        ZmailMailAdapter zma = (ZmailMailAdapter) mail;
         // Iterate over the header names looking for a match
         boolean isMatched = false;
         Iterator<String> headerNamesIter = headerNames.iterator();

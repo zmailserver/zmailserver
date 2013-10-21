@@ -12,7 +12,7 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.service.mail;
+package org.zmail.cs.service.mail;
 
 import java.util.ArrayList;
 import java.util.EnumSet;
@@ -28,28 +28,28 @@ import org.eclipse.jetty.continuation.ContinuationSupport;
 
 import com.google.common.base.Joiner;
 import com.google.common.base.Splitter;
-import com.zimbra.common.account.Key.AccountBy;
-import com.zimbra.common.localconfig.LC;
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.common.soap.Element;
-import com.zimbra.common.soap.MailConstants;
-import com.zimbra.common.util.Constants;
-import com.zimbra.common.util.StringUtil;
-import com.zimbra.common.util.ZimbraLog;
-import com.zimbra.cs.account.Account;
-import com.zimbra.cs.account.Provisioning;
-import com.zimbra.cs.mailbox.MailItem;
-import com.zimbra.cs.mailbox.Mailbox;
-import com.zimbra.cs.mailbox.MailboxManager;
-import com.zimbra.cs.service.admin.AdminServiceException;
-import com.zimbra.cs.service.util.SyncToken;
-import com.zimbra.cs.session.IWaitSet;
-import com.zimbra.cs.session.WaitSetAccount;
-import com.zimbra.cs.session.WaitSetCallback;
-import com.zimbra.cs.session.WaitSetError;
-import com.zimbra.cs.session.WaitSetMgr;
-import com.zimbra.soap.SoapServlet;
-import com.zimbra.soap.ZimbraSoapContext;
+import org.zmail.common.account.Key.AccountBy;
+import org.zmail.common.localconfig.LC;
+import org.zmail.common.service.ServiceException;
+import org.zmail.common.soap.Element;
+import org.zmail.common.soap.MailConstants;
+import org.zmail.common.util.Constants;
+import org.zmail.common.util.StringUtil;
+import org.zmail.common.util.ZmailLog;
+import org.zmail.cs.account.Account;
+import org.zmail.cs.account.Provisioning;
+import org.zmail.cs.mailbox.MailItem;
+import org.zmail.cs.mailbox.Mailbox;
+import org.zmail.cs.mailbox.MailboxManager;
+import org.zmail.cs.service.admin.AdminServiceException;
+import org.zmail.cs.service.util.SyncToken;
+import org.zmail.cs.session.IWaitSet;
+import org.zmail.cs.session.WaitSetAccount;
+import org.zmail.cs.session.WaitSetCallback;
+import org.zmail.cs.session.WaitSetError;
+import org.zmail.cs.session.WaitSetMgr;
+import org.zmail.soap.SoapServlet;
+import org.zmail.soap.ZmailSoapContext;
 
 /**
  *
@@ -66,16 +66,16 @@ public class WaitSetRequest extends MailDocumentHandler {
     private static final long NODATA_SLEEP_TIME_MILLIS;
 
     static {
-        DEFAULT_TIMEOUT = LC.zimbra_waitset_default_request_timeout.longValueWithinRange(1, Constants.SECONDS_PER_DAY);
-        MIN_TIMEOUT = LC.zimbra_waitset_min_request_timeout.longValueWithinRange(1, Constants.SECONDS_PER_DAY);
-        MAX_TIMEOUT = LC.zimbra_waitset_max_request_timeout.longValueWithinRange(1, Constants.SECONDS_PER_DAY);
+        DEFAULT_TIMEOUT = LC.zmail_waitset_default_request_timeout.longValueWithinRange(1, Constants.SECONDS_PER_DAY);
+        MIN_TIMEOUT = LC.zmail_waitset_min_request_timeout.longValueWithinRange(1, Constants.SECONDS_PER_DAY);
+        MAX_TIMEOUT = LC.zmail_waitset_max_request_timeout.longValueWithinRange(1, Constants.SECONDS_PER_DAY);
 
-        DEFAULT_ADMIN_TIMEOUT = LC.zimbra_admin_waitset_default_request_timeout.longValueWithinRange(1, Constants.SECONDS_PER_DAY);
-        MIN_ADMIN_TIMEOUT = LC.zimbra_admin_waitset_min_request_timeout.longValueWithinRange(1, Constants.SECONDS_PER_DAY);
-        MAX_ADMIN_TIMEOUT = LC.zimbra_admin_waitset_max_request_timeout.longValueWithinRange(1, Constants.SECONDS_PER_DAY);
+        DEFAULT_ADMIN_TIMEOUT = LC.zmail_admin_waitset_default_request_timeout.longValueWithinRange(1, Constants.SECONDS_PER_DAY);
+        MIN_ADMIN_TIMEOUT = LC.zmail_admin_waitset_min_request_timeout.longValueWithinRange(1, Constants.SECONDS_PER_DAY);
+        MAX_ADMIN_TIMEOUT = LC.zmail_admin_waitset_max_request_timeout.longValueWithinRange(1, Constants.SECONDS_PER_DAY);
 
-        INITIAL_SLEEP_TIME_MILLIS = LC.zimbra_waitset_initial_sleep_time.longValueWithinRange(1, 5 * Constants.SECONDS_PER_MINUTE * 1000);
-        NODATA_SLEEP_TIME_MILLIS = LC.zimbra_waitset_nodata_sleep_time.longValueWithinRange(1, 5 * Constants.SECONDS_PER_MINUTE * 1000);
+        INITIAL_SLEEP_TIME_MILLIS = LC.zmail_waitset_initial_sleep_time.longValueWithinRange(1, 5 * Constants.SECONDS_PER_MINUTE * 1000);
+        NODATA_SLEEP_TIME_MILLIS = LC.zmail_waitset_nodata_sleep_time.longValueWithinRange(1, 5 * Constants.SECONDS_PER_MINUTE * 1000);
     }
 
     public static long getTimeoutMillis(Element request, boolean isAdminRequest) throws ServiceException {
@@ -98,7 +98,7 @@ public class WaitSetRequest extends MailDocumentHandler {
     
     @Override
     public void preProxy(Element request, Map<String, Object> context) throws ServiceException {
-        ZimbraSoapContext zsc = getZimbraSoapContext(context);
+        ZmailSoapContext zsc = getZmailSoapContext(context);
         boolean adminAllowed = zsc.getAuthToken().isAdmin();
         setProxyTimeout(getTimeoutMillis(request, adminAllowed) + 10 * Constants.MILLIS_PER_SECOND);
         super.preProxy(request, context);
@@ -144,18 +144,18 @@ public class WaitSetRequest extends MailDocumentHandler {
     private static final String VARS_ATTR_NAME = WaitSetRequest.class.getName()+".vars";
 
     /* (non-Javadoc)
-     * @see com.zimbra.soap.DocumentHandler#handle(com.zimbra.common.soap.Element, java.util.Map)
+     * @see org.zmail.soap.DocumentHandler#handle(org.zmail.common.soap.Element, java.util.Map)
      */
     @Override
     public Element handle(Element request, Map<String, Object> context) throws ServiceException {
-        ZimbraSoapContext zsc = getZimbraSoapContext(context);
+        ZmailSoapContext zsc = getZmailSoapContext(context);
         boolean adminAllowed = zsc.getAuthToken().isAdmin();
         Element response = zsc.createElement(MailConstants.WAIT_SET_RESPONSE);
         return staticHandle(request, context, response, adminAllowed);
     }
 
     public static Element staticHandle(Element request, Map<String, Object> context, Element response, boolean adminAllowed) throws ServiceException {
-        ZimbraSoapContext zsc = getZimbraSoapContext(context);
+        ZmailSoapContext zsc = getZmailSoapContext(context);
         HttpServletRequest servletRequest = (HttpServletRequest) context.get(SoapServlet.SERVLET_REQUEST);
 
         String waitSetId = request.getAttribute(MailConstants.A_WAITSET_ID);
@@ -202,7 +202,7 @@ public class WaitSetRequest extends MailDocumentHandler {
                     Mailbox mbox = MailboxManager.getInstance().getMailboxByAccountId(acct.getAccountId(), MailboxManager.FetchMode.AUTOCREATE);
                     referencedMailboxes.add(mbox);
                 } catch (ServiceException e) {
-                    ZimbraLog.session.debug("Caught exception preloading mailbox for waitset", e);
+                    ZmailLog.session.debug("Caught exception preloading mailbox for waitset", e);
                 }
             }
             for (WaitSetAccount acct : update) {
@@ -210,7 +210,7 @@ public class WaitSetRequest extends MailDocumentHandler {
                     Mailbox mbox = MailboxManager.getInstance().getMailboxByAccountId(acct.getAccountId(), MailboxManager.FetchMode.AUTOCREATE);
                     referencedMailboxes.add(mbox);
                 } catch (ServiceException e) {
-                    ZimbraLog.session.debug("Caught exception preloading mailbox for waitset", e);
+                    ZmailLog.session.debug("Caught exception preloading mailbox for waitset", e);
                 }
             }
             // END workaround for 27480
@@ -242,8 +242,8 @@ public class WaitSetRequest extends MailDocumentHandler {
                 synchronized (cb) {
                     if (!cb.completed) { // don't wait if it completed right away
                         long timeout = getTimeoutMillis(request, adminAllowed);
-                        if (ZimbraLog.soap.isTraceEnabled())
-                            ZimbraLog.soap.trace("Suspending <WaitSetRequest> for %dms", timeout);
+                        if (ZmailLog.soap.isTraceEnabled())
+                            ZmailLog.soap.trace("Suspending <WaitSetRequest> for %dms", timeout);
                         continuation.setTimeout(timeout);
                         continuation.suspend();
                         continuation.undispatch();
@@ -281,7 +281,7 @@ public class WaitSetRequest extends MailDocumentHandler {
     /**
      * @param allowedAccountIds NULL means "all allowed" (admin)
      */
-    static List<WaitSetAccount> parseAddUpdateAccounts(ZimbraSoapContext zsc, Element elt, Set<MailItem.Type> defaultInterest)
+    static List<WaitSetAccount> parseAddUpdateAccounts(ZmailSoapContext zsc, Element elt, Set<MailItem.Type> defaultInterest)
     throws ServiceException {
         List<WaitSetAccount> toRet = new ArrayList<WaitSetAccount>();
         if (elt != null) {
@@ -313,7 +313,7 @@ public class WaitSetRequest extends MailDocumentHandler {
         return toRet;
     }
 
-    static List<String> parseRemoveAccounts(ZimbraSoapContext zsc, Element elt) throws ServiceException {
+    static List<String> parseRemoveAccounts(ZmailSoapContext zsc, Element elt) throws ServiceException {
         List<String> remove = new ArrayList<String>();
         if (elt != null) {
             for (Iterator<Element> iter = elt.elementIterator(MailConstants.E_A); iter.hasNext();) {
@@ -329,14 +329,14 @@ public class WaitSetRequest extends MailDocumentHandler {
     public static class Callback implements WaitSetCallback {
         @Override
         public void dataReady(IWaitSet ws, String seqNo, boolean canceled, List<WaitSetError> inErrors, String[] signalledAccounts) {
-            boolean trace = ZimbraLog.session.isTraceEnabled();
+            boolean trace = ZmailLog.session.isTraceEnabled();
             if (trace) {
                 String accts = signalledAccounts != null ? "[" + StringUtil.join(", ", signalledAccounts) + "]" : "<null>";
-                ZimbraLog.session.trace("WaitSetRequest.Callback.dataReady: ws=" + ws.getWaitSetId() + ", seq=" + seqNo +
+                ZmailLog.session.trace("WaitSetRequest.Callback.dataReady: ws=" + ws.getWaitSetId() + ", seq=" + seqNo +
                         (canceled ? ", CANCEL" : "") + ", accounts=" + accts);
             }
             synchronized(this) {
-                ZimbraLog.session.debug("WaitSet: Called WaitSetCallback.dataReady()!");
+                ZmailLog.session.debug("WaitSet: Called WaitSetCallback.dataReady()!");
                 if (inErrors != null && inErrors.size() > 0)
                     errors.addAll(inErrors);
                 this.waitSet = ws;
@@ -345,14 +345,14 @@ public class WaitSetRequest extends MailDocumentHandler {
                 this.seqNo = seqNo;
                 this.completed = true;
                 if (continuation != null) {
-                    if (trace) ZimbraLog.session.trace("WaitSetRequest.Callback.dataReady 1");
+                    if (trace) ZmailLog.session.trace("WaitSetRequest.Callback.dataReady 1");
                     if (continuation.isSuspended()) {
                         continuation.resume();
                     }
-                    if (trace) ZimbraLog.session.trace("WaitSetRequest.Callback.dataReady 2");
+                    if (trace) ZmailLog.session.trace("WaitSetRequest.Callback.dataReady 2");
                 }
             }
-            if (trace) ZimbraLog.session.trace("WaitSetRequest.Callback.dataReady done");
+            if (trace) ZmailLog.session.trace("WaitSetRequest.Callback.dataReady done");
         }
 
         public boolean completed = false;

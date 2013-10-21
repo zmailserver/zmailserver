@@ -12,11 +12,11 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.qa.unittest.prov.soap;
+package org.zmail.qa.unittest.prov.soap;
 
-import com.zimbra.cs.account.soap.SoapProvisioning;
-import com.zimbra.cs.ldap.unboundid.InMemoryLdapServer;
-import com.zimbra.soap.admin.type.CacheEntryType;
+import org.zmail.cs.account.soap.SoapProvisioning;
+import org.zmail.cs.ldap.unboundid.InMemoryLdapServer;
+import org.zmail.soap.admin.type.CacheEntryType;
 
 public class Cleanup {
     static void deleteAll(String... domainNames) throws Exception {
@@ -25,7 +25,7 @@ public class Cleanup {
             return;
         }
         
-        com.zimbra.qa.unittest.prov.ldap.Cleanup.deleteAll(domainNames);
+        org.zmail.qa.unittest.prov.ldap.Cleanup.deleteAll(domainNames);
         
         SoapProvisioning prov = SoapProvisioning.getAdminInstance();
         prov.flushCache(

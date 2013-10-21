@@ -56,17 +56,17 @@ administrators full access to everything on the system.
 
 But we still need to be able to grant rights to other principals.  We'll
 be able to derive the Account of the caller from their auth token, so the
-easiest grantees for a set of rights will be zimbraIds fetchable from the
+easiest grantees for a set of rights will be zmailIds fetchable from the
 Account object, as that can be done using Account attribute comparisons
 with no further trips to LDAP.  Fortunately, that gives us a pretty rich
 set of possible grantees right off the bat:
 
-        user   - compare grantee ID with Account's zimbraId
-        group  - compare grantee ID with Account's zimbraMemberOf values
+        user   - compare grantee ID with Account's zmailId
+        group  - compare grantee ID with Account's zmailMemberOf values
         domain - compare grantee ID with ID of Account's derived domain
-        COS    - compare grantee ID with Account's zimbraCOSId
-        all    - the caller needs to present a valid Zimbra credential
-        guest  - the caller needs to present a non-Zimbra email address
+        COS    - compare grantee ID with Account's zmailCOSId
+        all    - the caller needs to present a valid Zmail credential
+        guest  - the caller needs to present a non-Zmail email address
                  and password
         key    - the caller needs to present an access key
         pub    - always succeeds

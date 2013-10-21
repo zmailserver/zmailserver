@@ -12,7 +12,7 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.service.mail;
+package org.zmail.cs.service.mail;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -21,21 +21,21 @@ import java.util.Map;
 import javax.mail.Address;
 import javax.mail.MessagingException;
 
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.common.soap.MailConstants;
-import com.zimbra.common.soap.Element;
-import com.zimbra.common.util.ZimbraLog;
-import com.zimbra.cs.account.Account;
-import com.zimbra.cs.mailbox.CalendarItem;
-import com.zimbra.cs.mailbox.Folder;
-import com.zimbra.cs.mailbox.MailServiceException;
-import com.zimbra.cs.mailbox.Mailbox;
-import com.zimbra.cs.mailbox.OperationContext;
-import com.zimbra.cs.mailbox.calendar.Invite;
-import com.zimbra.cs.mailbox.calendar.ZAttendee;
-import com.zimbra.cs.service.util.ItemId;
-import com.zimbra.cs.service.util.ItemIdFormatter;
-import com.zimbra.soap.ZimbraSoapContext;
+import org.zmail.common.service.ServiceException;
+import org.zmail.common.soap.MailConstants;
+import org.zmail.common.soap.Element;
+import org.zmail.common.util.ZmailLog;
+import org.zmail.cs.account.Account;
+import org.zmail.cs.mailbox.CalendarItem;
+import org.zmail.cs.mailbox.Folder;
+import org.zmail.cs.mailbox.MailServiceException;
+import org.zmail.cs.mailbox.Mailbox;
+import org.zmail.cs.mailbox.OperationContext;
+import org.zmail.cs.mailbox.calendar.Invite;
+import org.zmail.cs.mailbox.calendar.ZAttendee;
+import org.zmail.cs.service.util.ItemId;
+import org.zmail.cs.service.util.ItemIdFormatter;
+import org.zmail.soap.ZmailSoapContext;
 
 
 public class CreateCalendarItemException extends CalendarRequest {
@@ -52,7 +52,7 @@ public class CreateCalendarItemException extends CalendarRequest {
         }
 
         @Override
-        public ParseMimeMessage.InviteParserResult parseInviteElement(ZimbraSoapContext zsc, OperationContext octxt,
+        public ParseMimeMessage.InviteParserResult parseInviteElement(ZmailSoapContext zsc, OperationContext octxt,
                 Account account, Element inviteElem) throws ServiceException {
             ParseMimeMessage.InviteParserResult toRet = CalendarUtils.parseInviteForCreateException(
                     account, getItemType(), inviteElem, (mDefaultInvite.getTimeZoneMap() != null ) ? 
@@ -72,7 +72,7 @@ public class CreateCalendarItemException extends CalendarRequest {
 
     @Override
     public Element handle(Element request, Map<String, Object> context) throws ServiceException {
-        ZimbraSoapContext zsc = getZimbraSoapContext(context);
+        ZmailSoapContext zsc = getZmailSoapContext(context);
         Account acct = getRequestedAccount(zsc);
         Mailbox mbox = getRequestedMailbox(zsc);
         OperationContext octxt = getOperationContext(zsc, context);
@@ -147,11 +147,11 @@ public class CreateCalendarItemException extends CalendarRequest {
 
             // trace logging
             if (!dat.mInvite.hasRecurId())
-                ZimbraLog.calendar.info("<CreateCalendarItemException> id=%d, folderId=%d, subject=\"%s\", UID=%s",
+                ZmailLog.calendar.info("<CreateCalendarItemException> id=%d, folderId=%d, subject=\"%s\", UID=%s",
                         iid.getId(), folderId, dat.mInvite.isPublic() ? dat.mInvite.getName() : "(private)",
                         dat.mInvite.getUid());
             else
-                ZimbraLog.calendar.info("<CreateCalendarItemException> id=%d, folderId=%d, subject=\"%s\", UID=%s, recurId=%s",
+                ZmailLog.calendar.info("<CreateCalendarItemException> id=%d, folderId=%d, subject=\"%s\", UID=%s, recurId=%s",
                         iid.getId(), folderId, dat.mInvite.isPublic() ? dat.mInvite.getName() : "(private)",
                         dat.mInvite.getUid(), dat.mInvite.getRecurId().getDtZ());
 

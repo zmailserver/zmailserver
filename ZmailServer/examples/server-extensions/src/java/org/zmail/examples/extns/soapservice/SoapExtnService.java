@@ -12,10 +12,10 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.examples.extns.soapservice;
+package org.zmail.examples.extns.soapservice;
 
-import com.zimbra.soap.DocumentDispatcher;
-import com.zimbra.soap.DocumentService;
+import org.zmail.soap.DocumentDispatcher;
+import org.zmail.soap.DocumentService;
 
 /**
  * Registers <code>HelloWorld</code> handler with SOAP document dispatcher.

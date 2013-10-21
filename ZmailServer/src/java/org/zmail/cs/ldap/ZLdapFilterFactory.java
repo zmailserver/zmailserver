@@ -12,16 +12,16 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.ldap;
+package org.zmail.cs.ldap;
 
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.List;
 
 import com.google.common.collect.Lists;
-import com.zimbra.common.util.CsvWriter;
-import com.zimbra.cs.account.Provisioning;
-import com.zimbra.cs.ldap.unboundid.UBIDLdapFilterFactory;
+import org.zmail.common.util.CsvWriter;
+import org.zmail.cs.account.Provisioning;
+import org.zmail.cs.ldap.unboundid.UBIDLdapFilterFactory;
 
 /**
  * @author pshao
@@ -144,23 +144,23 @@ public abstract class ZLdapFilterFactory extends ZLdapElement {
         // =====================================
         //
         ACCOUNT_BY_SSL_CLENT_CERT_PRINCIPAL_MAP(SINGLETON.allAccounts() + " AND " +
-                "filter in " + Provisioning.A_zimbraMailSSLClientCertPrincipalMap),
+                "filter in " + Provisioning.A_zmailMailSSLClientCertPrincipalMap),
         ADMIN_SEARCH("Admin search"),
         AUTO_PROVISION_ADMIN_SEARCH("Admin entered filter"),
-        AUTO_PROVISION_SEARCH("Filter in " + Provisioning.A_zimbraAutoProvLdapSearchFilter),
+        AUTO_PROVISION_SEARCH("Filter in " + Provisioning.A_zmailAutoProvLdapSearchFilter),
         AUTO_PROVISION_SEARCH_CREATED_LATERTHAN("Filter in " +
-                Provisioning.A_zimbraAutoProvLdapSearchFilter + " AND " +
+                Provisioning.A_zmailAutoProvLdapSearchFilter + " AND " +
                 SINGLETON.createdLaterOrEqual("{GENERALIZED_TIME}")),
-        EXTERNAL_GROUP("Filter in " + Provisioning.A_zimbraExternalGroupLdapSearchFilter),
+        EXTERNAL_GROUP("Filter in " + Provisioning.A_zmailExternalGroupLdapSearchFilter),
         GAL_SEARCH("GAL search"),
-        LDAP_AUTHENTICATE("Filter in " + Provisioning.A_zimbraAuthLdapSearchFilter),
+        LDAP_AUTHENTICATE("Filter in " + Provisioning.A_zmailAuthLdapSearchFilter),
         NGINX_GET_DOMAIN_BY_SERVER_IP("Filter in "),
         NGINX_GET_PORT_BY_MAILHOST("Filter in "),
-        NGINX_GET_MAILHOST("Filter in " + Provisioning.A_zimbraReverseProxyMailHostQuery),
+        NGINX_GET_MAILHOST("Filter in " + Provisioning.A_zmailReverseProxyMailHostQuery),
         RENAME_DOMAIN("Search entries during RenameDomain"),
         SEARCH_ALIAS_TARGET("Search alias target entry"),
         SEARCH_GRANTEE("Search grantee for revoking orphan grants"),
-        SMIME_LOOKUP("Filter in " + Provisioning.A_zimbraSMIMELdapFilter),
+        SMIME_LOOKUP("Filter in " + Provisioning.A_zmailSMIMELdapFilter),
 
         UNITTEST("UNITTEST"),
         LDAP_UPGRADE("LDAP_UPGRADE"),

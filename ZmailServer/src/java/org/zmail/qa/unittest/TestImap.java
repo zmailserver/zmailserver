@@ -13,7 +13,7 @@
  * ***** END LICENSE BLOCK *****
  */
 
-package com.zimbra.qa.unittest;
+package org.zmail.qa.unittest;
 
 import static org.junit.Assert.assertArrayEquals;
 import static org.junit.Assert.assertEquals;
@@ -38,28 +38,28 @@ import org.junit.Test;
 import org.junit.runner.JUnitCore;
 import org.junit.runner.Request;
 
-import com.zimbra.client.ZFolder;
-import com.zimbra.client.ZMailbox;
-import com.zimbra.client.ZTag;
-import com.zimbra.client.ZTag.Color;
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.common.util.Log;
-import com.zimbra.cs.mailbox.Mailbox;
-import com.zimbra.cs.mailclient.CommandFailedException;
-import com.zimbra.cs.mailclient.imap.AppendMessage;
-import com.zimbra.cs.mailclient.imap.AppendResult;
-import com.zimbra.cs.mailclient.imap.Body;
-import com.zimbra.cs.mailclient.imap.CAtom;
-import com.zimbra.cs.mailclient.imap.Flags;
-import com.zimbra.cs.mailclient.imap.ImapConfig;
-import com.zimbra.cs.mailclient.imap.ImapConnection;
-import com.zimbra.cs.mailclient.imap.ImapRequest;
-import com.zimbra.cs.mailclient.imap.ImapResponse;
-import com.zimbra.cs.mailclient.imap.Literal;
-import com.zimbra.cs.mailclient.imap.MailboxInfo;
-import com.zimbra.cs.mailclient.imap.MailboxName;
-import com.zimbra.cs.mailclient.imap.MessageData;
-import com.zimbra.cs.mailclient.imap.ResponseHandler;
+import org.zmail.client.ZFolder;
+import org.zmail.client.ZMailbox;
+import org.zmail.client.ZTag;
+import org.zmail.client.ZTag.Color;
+import org.zmail.common.service.ServiceException;
+import org.zmail.common.util.Log;
+import org.zmail.cs.mailbox.Mailbox;
+import org.zmail.cs.mailclient.CommandFailedException;
+import org.zmail.cs.mailclient.imap.AppendMessage;
+import org.zmail.cs.mailclient.imap.AppendResult;
+import org.zmail.cs.mailclient.imap.Body;
+import org.zmail.cs.mailclient.imap.CAtom;
+import org.zmail.cs.mailclient.imap.Flags;
+import org.zmail.cs.mailclient.imap.ImapConfig;
+import org.zmail.cs.mailclient.imap.ImapConnection;
+import org.zmail.cs.mailclient.imap.ImapRequest;
+import org.zmail.cs.mailclient.imap.ImapResponse;
+import org.zmail.cs.mailclient.imap.Literal;
+import org.zmail.cs.mailclient.imap.MailboxInfo;
+import org.zmail.cs.mailclient.imap.MailboxName;
+import org.zmail.cs.mailclient.imap.MessageData;
+import org.zmail.cs.mailclient.imap.ResponseHandler;
 
 /**
  * IMAP server tests.
@@ -549,9 +549,9 @@ public class TestImap {
     }
 
     private static String simpleMessage(String text) {
-        return "Return-Path: dac@zimbra.com\r\n" +
+        return "Return-Path: dac@zmail.com\r\n" +
             "Date: Fri, 27 Feb 2004 15:24:43 -0800 (PST)\r\n" +
-            "From: dac <dac@zimbra.com>\r\n" +
+            "From: dac <dac@zmail.com>\r\n" +
             "To: bozo <bozo@foo.com>\r\n" +
             "Subject: Foo foo\r\n\r\n" + text + "\r\n";
     }

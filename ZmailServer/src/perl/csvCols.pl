@@ -27,7 +27,7 @@ if (@ARGV < 1) {
   columns.
 
   Passing "-z" puts this in "zmstats" mode, a special-case mode for
-  Zimbra stats CSV data that knows how to find the *most recent* column
+  Zmail stats CSV data that knows how to find the *most recent* column
   name set from a CSV file that has many colnames rows in it.
 
   Calling this script with no arguments will list the available columns.

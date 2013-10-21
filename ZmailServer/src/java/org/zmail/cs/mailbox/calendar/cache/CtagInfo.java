@@ -13,16 +13,16 @@
  * ***** END LICENSE BLOCK *****
  */
 
-package com.zimbra.cs.mailbox.calendar.cache;
+package org.zmail.cs.mailbox.calendar.cache;
 
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.cs.mailbox.Folder;
-import com.zimbra.cs.mailbox.Mailbox;
-import com.zimbra.cs.mailbox.Metadata;
-import com.zimbra.cs.mailbox.Mountpoint;
-import com.zimbra.cs.service.util.ItemId;
-import com.zimbra.client.ZFolder;
-import com.zimbra.client.ZMountpoint;
+import org.zmail.common.service.ServiceException;
+import org.zmail.cs.mailbox.Folder;
+import org.zmail.cs.mailbox.Mailbox;
+import org.zmail.cs.mailbox.Metadata;
+import org.zmail.cs.mailbox.Mountpoint;
+import org.zmail.cs.service.util.ItemId;
+import org.zmail.client.ZFolder;
+import org.zmail.client.ZMountpoint;
 
 // for CalDAV
 // tracks last modified "time" of a calendar folder

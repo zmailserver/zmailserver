@@ -17,7 +17,7 @@
  * Created on Nov 2, 2004
  *
  */
-package com.zimbra.cs.filter.jsieve;
+package org.zmail.cs.filter.jsieve;
 
 import org.apache.jsieve.mail.Action;
 

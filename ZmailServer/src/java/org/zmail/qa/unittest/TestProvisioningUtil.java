@@ -13,7 +13,7 @@
  * ***** END LICENSE BLOCK *****
  */
 
-package com.zimbra.qa.unittest;
+package org.zmail.qa.unittest;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -24,16 +24,16 @@ import java.util.Set;
 import junit.framework.AssertionFailedError;
 import junit.framework.TestCase;
 
-import com.zimbra.common.auth.ZAuthToken;
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.common.soap.AccountConstants;
-import com.zimbra.common.soap.AdminConstants;
-import com.zimbra.common.soap.Element;
-import com.zimbra.common.soap.Element.XMLElement;
-import com.zimbra.cs.account.NamedEntry;
-import com.zimbra.cs.account.Provisioning;
-import com.zimbra.cs.account.ldap.LdapProv;
-import com.zimbra.cs.account.soap.SoapProvisioning;
+import org.zmail.common.auth.ZAuthToken;
+import org.zmail.common.service.ServiceException;
+import org.zmail.common.soap.AccountConstants;
+import org.zmail.common.soap.AdminConstants;
+import org.zmail.common.soap.Element;
+import org.zmail.common.soap.Element.XMLElement;
+import org.zmail.cs.account.NamedEntry;
+import org.zmail.cs.account.Provisioning;
+import org.zmail.cs.account.ldap.LdapProv;
+import org.zmail.cs.account.soap.SoapProvisioning;
 
 
 public class TestProvisioningUtil extends TestCase {
@@ -172,7 +172,7 @@ public class TestProvisioningUtil extends TestCase {
         SoapProvisioning sp = new SoapProvisioning();
         sp.soapSetTransportTimeout(0); // use infinite timeout
         sp.soapSetURI("https://localhost:7071" + AdminConstants.ADMIN_SERVICE_URI);
-        sp.soapZimbraAdminAuthenticate();
+        sp.soapZmailAdminAuthenticate();
         return sp;
     }
     

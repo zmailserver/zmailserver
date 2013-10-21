@@ -13,7 +13,7 @@
  * ***** END LICENSE BLOCK *****
  */
 
-package com.zimbra.cs.account;
+package org.zmail.cs.account;
 
 import java.util.Map;
 
@@ -32,66 +32,66 @@ public class CalendarResource extends ZAttrCalendarResource {
     }
 
     public String getResourceType() {
-        return getAttr(Provisioning.A_zimbraCalResType, "Location");
+        return getAttr(Provisioning.A_zmailCalResType, "Location");
     }
 
     public boolean autoAcceptDecline() {
         return getBooleanAttr(
-                Provisioning.A_zimbraCalResAutoAcceptDecline, true);
+                Provisioning.A_zmailCalResAutoAcceptDecline, true);
     }
 
     public boolean autoDeclineIfBusy() {
         return getBooleanAttr(
-                Provisioning.A_zimbraCalResAutoDeclineIfBusy, true);
+                Provisioning.A_zmailCalResAutoDeclineIfBusy, true);
     }
 
     public boolean autoDeclineRecurring() {
         return getBooleanAttr(
-                Provisioning.A_zimbraCalResAutoDeclineRecurring, false);
+                Provisioning.A_zmailCalResAutoDeclineRecurring, false);
     }
 
     public int getMaxNumConflictsAllowed() {
-        return getIntAttr(Provisioning.A_zimbraCalResMaxNumConflictsAllowed, 0);
+        return getIntAttr(Provisioning.A_zmailCalResMaxNumConflictsAllowed, 0);
     }
 
     public int getMaxPercentConflictsAllowed() {
-        return getIntAttr(Provisioning.A_zimbraCalResMaxPercentConflictsAllowed, 0);
+        return getIntAttr(Provisioning.A_zmailCalResMaxPercentConflictsAllowed, 0);
     }
 
     public String getLocationDisplayName() {
-        return getAttr(Provisioning.A_zimbraCalResLocationDisplayName);
+        return getAttr(Provisioning.A_zmailCalResLocationDisplayName);
     }
 
     public String getSite() {
-        return getAttr(Provisioning.A_zimbraCalResSite);
+        return getAttr(Provisioning.A_zmailCalResSite);
     }
 
     public String getBuilding() {
-        return getAttr(Provisioning.A_zimbraCalResBuilding);
+        return getAttr(Provisioning.A_zmailCalResBuilding);
     }
 
     public String getFloor() {
-        return getAttr(Provisioning.A_zimbraCalResFloor);
+        return getAttr(Provisioning.A_zmailCalResFloor);
     }
 
     public String getRoom() {
-        return getAttr(Provisioning.A_zimbraCalResRoom);
+        return getAttr(Provisioning.A_zmailCalResRoom);
     }
 
     public int getCapacity() {
-        return getIntAttr(Provisioning.A_zimbraCalResCapacity, 0);
+        return getIntAttr(Provisioning.A_zmailCalResCapacity, 0);
     }
 
     public String getContactName() {
-        return getAttr(Provisioning.A_zimbraCalResContactName);
+        return getAttr(Provisioning.A_zmailCalResContactName);
     }
 
     public String getContactEmail(){
-        return getAttr(Provisioning.A_zimbraCalResContactEmail);
+        return getAttr(Provisioning.A_zmailCalResContactEmail);
     }
 
     public String getContactPhone(){
-        return getAttr(Provisioning.A_zimbraCalResContactPhone);
+        return getAttr(Provisioning.A_zmailCalResContactPhone);
     }    
     
 }

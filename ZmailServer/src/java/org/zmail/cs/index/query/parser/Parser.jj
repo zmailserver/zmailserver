@@ -19,7 +19,7 @@ options {    JDK_VERSION = "1.6";    STATIC = false;
     ERROR_REPORTING = true;
                         
     SUPPORT_CLASS_VISIBILITY_PUBLIC = false;
-}PARSER_BEGIN(Parser)package com.zimbra.cs.index.query.parser;
+}PARSER_BEGIN(Parser)package org.zmail.cs.index.query.parser;
 
 final class Parser/*@bgen(jjtree)*/implements ParserTreeConstants/*@egen*/ {/*@bgen(jjtree)*/
   protected JJTParserState jjtree = new JJTParserState();

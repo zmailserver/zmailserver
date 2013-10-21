@@ -12,18 +12,18 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.ldap;
+package org.zmail.cs.ldap;
 
 import com.google.common.collect.Lists;
-import com.zimbra.common.localconfig.LC;
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.common.util.ZimbraLog;
-import com.zimbra.cs.ldap.LdapServerConfig.ExternalLdapConfig;
-import com.zimbra.cs.ldap.LdapServerConfig.GenericLdapConfig;
-import com.zimbra.cs.ldap.ZSearchScope.ZSearchScopeFactory;
-import com.zimbra.cs.ldap.unboundid.InMemoryLdapServer;
-import com.zimbra.cs.ldap.unboundid.UBIDLdapClient;
-import com.zimbra.cs.util.Zimbra;
+import org.zmail.common.localconfig.LC;
+import org.zmail.common.service.ServiceException;
+import org.zmail.common.util.ZmailLog;
+import org.zmail.cs.ldap.LdapServerConfig.ExternalLdapConfig;
+import org.zmail.cs.ldap.LdapServerConfig.GenericLdapConfig;
+import org.zmail.cs.ldap.ZSearchScope.ZSearchScopeFactory;
+import org.zmail.cs.ldap.unboundid.InMemoryLdapServer;
+import org.zmail.cs.ldap.unboundid.UBIDLdapClient;
+import org.zmail.cs.util.Zmail;
 
 /**
  * @author pshao
@@ -42,16 +42,16 @@ public abstract class LdapClient {
                             new InMemoryLdapServer.ServerConfig(
                             Lists.newArrayList(LdapConstants.ATTR_dc + "=" + InMemoryLdapServer.UNITTEST_BASE_DOMAIN_SEGMENT)));
                 } catch (Exception e) {
-                    ZimbraLog.system.error("could not start InMemoryLdapServer", e);
+                    ZmailLog.system.error("could not start InMemoryLdapServer", e);
                 }
             }
             
-            String className = LC.zimbra_class_ldap_client.value();
+            String className = LC.zmail_class_ldap_client.value();
             if (className != null && !className.equals("")) {
                 try {
                     ldapClient = (LdapClient) Class.forName(className).newInstance();
                 } catch (Exception e) {
-                    ZimbraLog.system.error("could not instantiate LDAP client '" + className + 
+                    ZmailLog.system.error("could not instantiate LDAP client '" + className + 
                             "'; defaulting to JNDI LDAP SDK", e);
                 }
             }
@@ -62,7 +62,7 @@ public abstract class LdapClient {
             try {
                 ldapClient.init(ALWAYS_USE_MASTER);
             } catch (LdapException e) {
-                Zimbra.halt("failed to initialize LDAP client", e);
+                Zmail.halt("failed to initialize LDAP client", e);
             }
         }
         return ldapClient;
@@ -93,16 +93,16 @@ public abstract class LdapClient {
     }
     
     public static ZLdapContext toZLdapContext(
-            com.zimbra.cs.account.Provisioning prov, ILdapContext ldapContext) {
+            org.zmail.cs.account.Provisioning prov, ILdapContext ldapContext) {
         
         if (!(getInstance() instanceof UBIDLdapClient)) {
-            Zimbra.halt("LdapClient instance is not UBIDLdapClient", 
+            Zmail.halt("LdapClient instance is not UBIDLdapClient", 
                     ServiceException.FAILURE("internal error, wrong ldap context instance", null));
         }
         
         // just a safety check, this should really not happen at this point
         if (ldapContext != null && !(ldapContext instanceof ZLdapContext)) {
-            Zimbra.halt("ILdapContext instance is not ZLdapContext", 
+            Zmail.halt("ILdapContext instance is not ZLdapContext", 
                     ServiceException.FAILURE("internal error, wrong ldap context instance", null));
         }
         
@@ -138,7 +138,7 @@ public abstract class LdapClient {
      * For zmconfigd only.  
      * 
      * zmconfigd uses ldapi connection with root LDAP bind DN/password to bind to 
-     * Zimbra OpenLdap, whereas LdapClient.getContext() methods use LC keys for 
+     * Zmail OpenLdap, whereas LdapClient.getContext() methods use LC keys for 
      * the URL/bind DN/password.
      * 
      * Changing LC keys in  zmconfigd is not an option, because it also uses 
@@ -185,7 +185,7 @@ public abstract class LdapClient {
     }
     
     /**
-     * LDAP authenticate to the Zimbra LDAP server.
+     * LDAP authenticate to the Zmail LDAP server.
      * Used when stored password is not SSHA.
      * 
      * @param principal
@@ -193,9 +193,9 @@ public abstract class LdapClient {
      * @param note
      * @throws ServiceException
      */
-    public static void zimbraLdapAuthenticate(String bindDN, String password) 
+    public static void zmailLdapAuthenticate(String bindDN, String password) 
     throws ServiceException {
-        getInstance().zimbraLdapAuthenticateImpl(bindDN, password);
+        getInstance().zmailLdapAuthenticateImpl(bindDN, password);
     }
     
     /*
@@ -239,6 +239,6 @@ public abstract class LdapClient {
             boolean wantStartTLS, String bindDN, String password, String note) 
     throws ServiceException;
     
-    protected abstract void zimbraLdapAuthenticateImpl(String bindDN, String password) 
+    protected abstract void zmailLdapAuthenticateImpl(String bindDN, String password) 
     throws ServiceException;
 }

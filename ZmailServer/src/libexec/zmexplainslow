@@ -19,21 +19,21 @@ use Getopt::Long;
 use English;
 
 # Options
-my $user = "zimbra";
-my $password = "zimbra";
-my $database = "zimbra";
+my $user = "zmail";
+my $password = "zmail";
+my $database = "zmail";
 my $mySqlCommand = "mysql";
 my $verbose = 0;
 my $usage = 0;
-my $logDir = "/opt/zimbra/log";
+my $logDir = "/opt/zmail/log";
 my $ignore;
 
-if (-f "/opt/zimbra/bin/zmlocalconfig") {
-    $password = `zmlocalconfig -s -m nokey zimbra_mysql_password`;
+if (-f "/opt/zmail/bin/zmlocalconfig") {
+    $password = `zmlocalconfig -s -m nokey zmail_mysql_password`;
     chomp $password;
-    $user = `zmlocalconfig -m nokey zimbra_mysql_user`;
+    $user = `zmlocalconfig -m nokey zmail_mysql_user`;
     chomp $user;
-    $logDir = `zmlocalconfig -x -m nokey zimbra_log_directory`;
+    $logDir = `zmlocalconfig -x -m nokey zmail_log_directory`;
     chomp $logDir;
 }
 
@@ -147,9 +147,9 @@ $logDir/slowQueries.csv.
   -h, --help           Displays this usage message
   -i, --ignore=regexp  Ignore any SELECT statements that match the
                        specified regular expression
-  -u, --user=name      MySQL user name (default: "zimbra")
-  -p, --password=name  MySQL password (default: "zimbra")
-  -d, --database=name  MySQL database (default: "zimbra")
+  -u, --user=name      MySQL user name (default: "zmail")
+  -p, --password=name  MySQL password (default: "zmail")
+  -d, --database=name  MySQL database (default: "zmail")
   -m, --mysql=command  MySQL client command name (default: "mysql")
 USAGE_EOF
 }

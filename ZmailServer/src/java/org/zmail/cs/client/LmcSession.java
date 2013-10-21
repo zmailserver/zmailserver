@@ -13,9 +13,9 @@
  * ***** END LICENSE BLOCK *****
  */
 
-package com.zimbra.cs.client;
+package org.zmail.cs.client;
 
-import com.zimbra.common.auth.ZAuthToken;
+import org.zmail.common.auth.ZAuthToken;
 
 /**
  * Encapsulate the notion of a session, including auth token, session ID, and

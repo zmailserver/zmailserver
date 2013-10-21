@@ -13,28 +13,28 @@
  * ***** END LICENSE BLOCK *****
  */
 
-package com.zimbra.cs.service.mail;
+package org.zmail.cs.service.mail;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.OutputStreamWriter;
 import java.util.Map;
 
-import com.zimbra.cs.account.Account;
-import com.zimbra.cs.mailbox.CalendarItem;
-import com.zimbra.cs.mailbox.MailServiceException;
-import com.zimbra.cs.mailbox.Mailbox;
-import com.zimbra.cs.mailbox.OperationContext;
-import com.zimbra.cs.mailbox.calendar.Invite;
-import com.zimbra.cs.service.util.ItemId;
-import com.zimbra.cs.service.util.ItemIdFormatter;
-import com.zimbra.common.calendar.ZCalendar.ZVCalendar;
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.common.util.HttpUtil;
-import com.zimbra.common.util.HttpUtil.Browser;
-import com.zimbra.common.soap.MailConstants;
-import com.zimbra.common.soap.Element;
-import com.zimbra.soap.ZimbraSoapContext;
+import org.zmail.cs.account.Account;
+import org.zmail.cs.mailbox.CalendarItem;
+import org.zmail.cs.mailbox.MailServiceException;
+import org.zmail.cs.mailbox.Mailbox;
+import org.zmail.cs.mailbox.OperationContext;
+import org.zmail.cs.mailbox.calendar.Invite;
+import org.zmail.cs.service.util.ItemId;
+import org.zmail.cs.service.util.ItemIdFormatter;
+import org.zmail.common.calendar.ZCalendar.ZVCalendar;
+import org.zmail.common.service.ServiceException;
+import org.zmail.common.util.HttpUtil;
+import org.zmail.common.util.HttpUtil.Browser;
+import org.zmail.common.soap.MailConstants;
+import org.zmail.common.soap.Element;
+import org.zmail.soap.ZmailSoapContext;
 
 
 public class GetICal extends MailDocumentHandler {
@@ -43,10 +43,10 @@ public class GetICal extends MailDocumentHandler {
     protected String[] getProxiedIdPath(Element request)     { return TARGET_OBJ_PATH; }
 
     /* (non-Javadoc)
-     * @see com.zimbra.soap.DocumentHandler#handle(org.dom4j.Element, java.util.Map)
+     * @see org.zmail.soap.DocumentHandler#handle(org.dom4j.Element, java.util.Map)
      */
     public Element handle(Element request, Map<String, Object> context) throws ServiceException {
-        ZimbraSoapContext zsc = getZimbraSoapContext(context);
+        ZmailSoapContext zsc = getZmailSoapContext(context);
         Account authAccount = getAuthenticatedAccount(zsc);
         Mailbox mbx = getRequestedMailbox(zsc);
         OperationContext octxt = getOperationContext(zsc, context);

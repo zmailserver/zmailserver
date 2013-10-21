@@ -12,14 +12,14 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.account.ldap.upgrade;
+package org.zmail.cs.account.ldap.upgrade;
 
 import java.util.HashMap;
 import java.util.Map;
 
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.cs.account.Config;
-import com.zimbra.cs.account.Provisioning;
+import org.zmail.common.service.ServiceException;
+import org.zmail.cs.account.Config;
+import org.zmail.cs.account.Provisioning;
 
 public class BUG_14531 extends UpgradeOp {
 
@@ -28,12 +28,12 @@ public class BUG_14531 extends UpgradeOp {
         Config config = prov.getConfig();
         
         String value = 
-            "zimbraSync:(&(|(displayName=*)(cn=*)(sn=*)(gn=*)(mail=*)(zimbraMailDeliveryAddress=*)(zimbraMailAlias=*))(|(objectclass=zimbraAccount)(objectclass=zimbraDistributionList))(!(zimbraHideInGal=TRUE))(!(zimbraIsSystemResource=TRUE)))";
+            "zmailSync:(&(|(displayName=*)(cn=*)(sn=*)(gn=*)(mail=*)(zmailMailDeliveryAddress=*)(zmailMailAlias=*))(|(objectclass=zmailAccount)(objectclass=zmailDistributionList))(!(zmailHideInGal=TRUE))(!(zmailIsSystemResource=TRUE)))";
         
         Map<String, Object> attr = new HashMap<String, Object>();
-        attr.put("+" + Provisioning.A_zimbraGalLdapFilterDef, value);
+        attr.put("+" + Provisioning.A_zmailGalLdapFilterDef, value);
         
-        printer.println("Adding zimbraSync filter to global config " + Provisioning.A_zimbraGalLdapFilterDef);
+        printer.println("Adding zmailSync filter to global config " + Provisioning.A_zmailGalLdapFilterDef);
         prov.modifyAttrs(config, attr);
     }
 }

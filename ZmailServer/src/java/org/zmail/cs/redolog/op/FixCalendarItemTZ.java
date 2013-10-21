@@ -13,23 +13,23 @@
  * ***** END LICENSE BLOCK *****
  */
 
-package com.zimbra.cs.redolog.op;
+package org.zmail.cs.redolog.op;
 
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Map.Entry;
 
-import com.zimbra.common.calendar.ICalTimeZone;
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.cs.mailbox.Mailbox;
-import com.zimbra.cs.mailbox.MailboxManager;
-import com.zimbra.cs.mailbox.MailboxOperation;
-import com.zimbra.cs.mailbox.Metadata;
-import com.zimbra.cs.mailbox.calendar.Util;
-import com.zimbra.cs.mailbox.calendar.tzfixup.TimeZoneFixupRules;
-import com.zimbra.cs.redolog.RedoLogInput;
-import com.zimbra.cs.redolog.RedoLogOutput;
+import org.zmail.common.calendar.ICalTimeZone;
+import org.zmail.common.service.ServiceException;
+import org.zmail.cs.mailbox.Mailbox;
+import org.zmail.cs.mailbox.MailboxManager;
+import org.zmail.cs.mailbox.MailboxOperation;
+import org.zmail.cs.mailbox.Metadata;
+import org.zmail.cs.mailbox.calendar.Util;
+import org.zmail.cs.mailbox.calendar.tzfixup.TimeZoneFixupRules;
+import org.zmail.cs.redolog.RedoLogInput;
+import org.zmail.cs.redolog.RedoLogOutput;
 
 public class FixCalendarItemTZ extends RedoableOp {
 

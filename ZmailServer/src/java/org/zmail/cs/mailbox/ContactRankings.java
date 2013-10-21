@@ -12,7 +12,7 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.mailbox;
+package org.zmail.cs.mailbox;
 
 import java.util.Collection;
 import java.util.Collections;
@@ -25,13 +25,13 @@ import java.util.TreeSet;
 import javax.mail.Address;
 import javax.mail.internet.InternetAddress;
 
-import com.zimbra.common.account.Key;
-import com.zimbra.common.localconfig.LC;
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.common.util.Constants;
-import com.zimbra.common.util.ZimbraLog;
-import com.zimbra.cs.account.Provisioning;
-import com.zimbra.cs.mailbox.ContactAutoComplete.ContactEntry;
+import org.zmail.common.account.Key;
+import org.zmail.common.localconfig.LC;
+import org.zmail.common.service.ServiceException;
+import org.zmail.common.util.Constants;
+import org.zmail.common.util.ZmailLog;
+import org.zmail.cs.account.Provisioning;
+import org.zmail.cs.mailbox.ContactAutoComplete.ContactEntry;
 
 public class ContactRankings {
     private static final String CONFIG_KEY_CONTACT_RANKINGS = "CONTACT_RANKINGS";
@@ -47,7 +47,7 @@ public class ContactRankings {
         mAccountId = accountId;
         mEntryMap = new TreeMap<String,TreeSet<ContactEntry>>();
         mEntries = new HashMap<String,ContactEntry>();
-        mTableSize = Provisioning.getInstance().get(Key.AccountBy.id, mAccountId).getIntAttr(Provisioning.A_zimbraContactRankingTableSize, 40);
+        mTableSize = Provisioning.getInstance().get(Key.AccountBy.id, mAccountId).getIntAttr(Provisioning.A_zmailContactRankingTableSize, 40);
         if (!LC.contact_ranking_enabled.booleanValue())
             return;
         readFromDatabase();
@@ -209,14 +209,14 @@ public class ContactRankings {
         mEntries.remove(entry.mEmail.toLowerCase());
     }
     private void dump(String action) {
-        if (ZimbraLog.gal.isDebugEnabled()) {
+        if (ZmailLog.gal.isDebugEnabled()) {
             StringBuilder buf = new StringBuilder(action + " contact rankings");
             buf.append("\n");
             for (ContactEntry entry : getSortedSet()) {
                 entry.toString(buf);
                 buf.append("\n");
             }
-            ZimbraLog.gal.debug(buf.toString());
+            ZmailLog.gal.debug(buf.toString());
         }
     }
 }

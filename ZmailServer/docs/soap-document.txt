@@ -13,8 +13,8 @@
 //
 // General Document sync strategy
 //
-// Zimbra Documents are server side file storage.  It is possible to
-// set up a sync client between Zimbra and another type of file storage
+// Zmail Documents are server side file storage.  It is possible to
+// set up a sync client between Zmail and another type of file storage
 // mechanism, such as cloud or files on a disk.  The sync client should
 // use the sync protocol desribed in sync.txt.  For Document sync, the 
 // following approach can be made.
@@ -92,7 +92,7 @@ that the document is a note.
 //
 // REQUEST:
 //
-//<SaveDocumentRequest xmlns:ns0="urn:zimbraMail">
+//<SaveDocumentRequest xmlns:ns0="urn:zmailMail">
 //  <doc>
 //    <upload id="18baa043-394f-42ae-be8a-110b279cb696:cc2f2fdf-7957-4412-aa83-6433662ce5d0"/>
 //  </doc>
@@ -100,7 +100,7 @@ that the document is a note.
 //
 // RESPONSE:
 //
-//<SaveDocumentResponse xmlns:ns0="urn:zimbraMail">
+//<SaveDocumentResponse xmlns:ns0="urn:zmailMail">
 //  <doc ver="1" id="574" name="PICT0370.JPG"/>
 //</SaveDocumentResponse>
 //
@@ -109,7 +109,7 @@ that the document is a note.
 //
 // REQUEST:
 //
-//<SaveDocumentRequest xmlns:ns0="urn:zimbraMail">
+//<SaveDocumentRequest xmlns:ns0="urn:zmailMail">
 //  <doc ver="1" id="574" desc="rev 2.0">
 //    <upload id="18baa043-394f-42ae-be8a-110b279cb696:fcb572ce-2a81-4ad3-b55b-cb998c47b416"/>
 //  </doc>
@@ -117,7 +117,7 @@ that the document is a note.
 //
 // RESPONSE:
 //
-//<SaveDocumentResponse xmlns:ns0="urn:zimbraMail">
+//<SaveDocumentResponse xmlns:ns0="urn:zmailMail">
 //  <doc ver="2" id="574" name="PICT0370.JPG"/>
 //</SaveDocumentResponse>
 //
@@ -181,13 +181,13 @@ Documents that have multiple revisions have the flag "/", which indicates that t
 // 
 // REQUEST:
 // -------------
-// <DiffDocumentRequest xmlns:ns0="urn:zimbraMail">
+// <DiffDocumentRequest xmlns:ns0="urn:zmailMail">
 //   <doc v1="3" v2="4" id="641"/>
 // </DiffDocumentRequest>
 // 
 // RESPONSE:
 // --------------
-// <DiffDocumentResponse xmlns:ns0="urn:zimbraMail">
+// <DiffDocumentResponse xmlns:ns0="urn:zmailMail">
 //   <chunk disp="common">line 1&lt;br&gt;
 // line 2&lt;br&gt;</chunk>
 //   <chunk disp="first">line 3&lt;br&gt;</chunk>

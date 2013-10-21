@@ -13,7 +13,7 @@
  * ***** END LICENSE BLOCK *****
  */
 
-package com.zimbra.cs.account.callback;
+package org.zmail.cs.account.callback;
 
 import java.net.MalformedURLException;
 import java.net.URL;
@@ -23,57 +23,57 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.common.util.ZimbraLog;
-import com.zimbra.cs.account.AttributeCallback;
-import com.zimbra.cs.account.Entry;
-import com.zimbra.cs.account.Provisioning;
-import com.zimbra.cs.httpclient.URLUtil;
+import org.zmail.common.service.ServiceException;
+import org.zmail.common.util.ZmailLog;
+import org.zmail.cs.account.AttributeCallback;
+import org.zmail.cs.account.Entry;
+import org.zmail.cs.account.Provisioning;
+import org.zmail.cs.httpclient.URLUtil;
 
 public class MtaAuthHost extends AttributeCallback {
 
     /**
-     * check to make sure zimbraMtaAuthHost points to a valid server zimbraServiceHostname
+     * check to make sure zmailMtaAuthHost points to a valid server zmailServiceHostname
      */
     @Override
     public void preModify(CallbackContext context, String attrName, Object value,
             Map attrsToModify, Entry entry) 
     throws ServiceException {
 
-        MultiValueMod mod = multiValueMod(attrsToModify, Provisioning.A_zimbraMtaAuthHost);
+        MultiValueMod mod = multiValueMod(attrsToModify, Provisioning.A_zmailMtaAuthHost);
         Set<String> values = mod.valuesSet();
         
         if (mod.adding()) {
-            // Add zimbraMtaAuthURL for each auth host being added
+            // Add zmailMtaAuthURL for each auth host being added
             List<String> urlsToAdd = new ArrayList<String>();
             for (String authHost : values) {
                 String authUrl = URLUtil.getMtaAuthURL(authHost);
                 urlsToAdd.add(authUrl);
             }
             if (urlsToAdd.size() > 0) {
-                attrsToModify.put("+" + Provisioning.A_zimbraMtaAuthURL, 
+                attrsToModify.put("+" + Provisioning.A_zmailMtaAuthURL, 
                         urlsToAdd.toArray(new String[urlsToAdd.size()]));
             }
             
         } else if (mod.replacing()) {
-            // Replace zimbraMtaAuthURL for each auth host being replaced
+            // Replace zmailMtaAuthURL for each auth host being replaced
             List<String> urls = new ArrayList<String>();
             for (String authHost : values) {
                 String authUrl = URLUtil.getMtaAuthURL(authHost);
                 urls.add(authUrl);
             }
             if (urls.size() > 0) {
-                attrsToModify.put(Provisioning.A_zimbraMtaAuthURL, 
+                attrsToModify.put(Provisioning.A_zmailMtaAuthURL, 
                         urls.toArray(new String[urls.size()]));
             }
             
         } else if (mod.removing()) {
-            // Remove zimbraMtaAuthURL for each auth host being removed,
+            // Remove zmailMtaAuthURL for each auth host being removed,
             // if the auth host server to be remove no longer exists, just catch the Exception and 
             // remove the corresponding auth url if there is one
             
             if (!context.isCreate() && entry != null) {
-                Set<String> curUrls = entry.getMultiAttrSet(Provisioning.A_zimbraMtaAuthURL);
+                Set<String> curUrls = entry.getMultiAttrSet(Provisioning.A_zmailMtaAuthURL);
                 List<String> urlsToRemove = new ArrayList<String>();
                 
                 for (String authHost : values) {
@@ -88,7 +88,7 @@ public class MtaAuthHost extends AttributeCallback {
                                 URL url = new URL(curUrl);
                                 String urlHost = url.getHost();
                                 // just compare the urlHost with the string of the host
-                                // we are removing, there is no way to get the A_zimbraServiceHostname
+                                // we are removing, there is no way to get the A_zmailServiceHostname
                                 // of the server because the server no longer exists
                                 if (authHost.equals(urlHost))
                                     urlsToRemove.add(curUrl);
@@ -100,14 +100,14 @@ public class MtaAuthHost extends AttributeCallback {
                     }
                 }
                 if (urlsToRemove.size() > 0) {
-                    attrsToModify.put("-" + Provisioning.A_zimbraMtaAuthURL, 
+                    attrsToModify.put("-" + Provisioning.A_zmailMtaAuthURL, 
                             urlsToRemove.toArray(new String[urlsToRemove.size()]));
                 }
             }
 
         } else if (mod.deleting()) {
-            // delete all the zimbraMtaAuthURL values 
-            attrsToModify.put(Provisioning.A_zimbraMtaAuthURL, null);
+            // delete all the zmailMtaAuthURL values 
+            attrsToModify.put(Provisioning.A_zmailMtaAuthURL, null);
         }
 
     }

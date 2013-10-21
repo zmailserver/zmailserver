@@ -12,7 +12,7 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.imap;
+package org.zmail.cs.imap;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -24,26 +24,26 @@ import java.util.TreeMap;
 import java.util.concurrent.ConcurrentHashMap;
 
 import com.google.common.base.Function;
-import com.zimbra.common.localconfig.DebugConfig;
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.common.soap.Element;
-import com.zimbra.common.util.ArrayUtil;
-import com.zimbra.common.util.ZimbraLog;
-import com.zimbra.cs.imap.ImapFolder.DirtyMessage;
-import com.zimbra.cs.imap.ImapHandler.ImapExtension;
-import com.zimbra.cs.imap.ImapMessage.ImapMessageSet;
-import com.zimbra.cs.mailbox.Contact;
-import com.zimbra.cs.mailbox.Flag;
-import com.zimbra.cs.mailbox.Folder;
-import com.zimbra.cs.mailbox.MailItem;
-import com.zimbra.cs.mailbox.MailServiceException;
-import com.zimbra.cs.mailbox.Mailbox;
-import com.zimbra.cs.mailbox.Message;
-import com.zimbra.cs.mailbox.Tag;
-import com.zimbra.cs.session.PendingModifications;
-import com.zimbra.cs.session.PendingModifications.Change;
-import com.zimbra.cs.session.PendingModifications.ModificationKey;
-import com.zimbra.cs.session.Session;
+import org.zmail.common.localconfig.DebugConfig;
+import org.zmail.common.service.ServiceException;
+import org.zmail.common.soap.Element;
+import org.zmail.common.util.ArrayUtil;
+import org.zmail.common.util.ZmailLog;
+import org.zmail.cs.imap.ImapFolder.DirtyMessage;
+import org.zmail.cs.imap.ImapHandler.ImapExtension;
+import org.zmail.cs.imap.ImapMessage.ImapMessageSet;
+import org.zmail.cs.mailbox.Contact;
+import org.zmail.cs.mailbox.Flag;
+import org.zmail.cs.mailbox.Folder;
+import org.zmail.cs.mailbox.MailItem;
+import org.zmail.cs.mailbox.MailServiceException;
+import org.zmail.cs.mailbox.Mailbox;
+import org.zmail.cs.mailbox.Message;
+import org.zmail.cs.mailbox.Tag;
+import org.zmail.cs.session.PendingModifications;
+import org.zmail.cs.session.PendingModifications.Change;
+import org.zmail.cs.session.PendingModifications.ModificationKey;
+import org.zmail.cs.session.Session;
 
 public class ImapSession extends Session {
     private static final ImapSessionManager MANAGER = ImapSessionManager.getInstance();
@@ -211,7 +211,7 @@ public class ImapSession extends Session {
         } catch (MailServiceException.NoSuchItemException nsie) {
             // don't log if the session expires because the folder was deleted out from under it
         } catch (Exception e) {
-            ZimbraLog.session.warn("exception recording unloaded session's RECENT limit", e);
+            ZmailLog.session.warn("exception recording unloaded session's RECENT limit", e);
         }
     }
 
@@ -263,7 +263,7 @@ public class ImapSession extends Session {
     protected void cleanup() {
         ImapHandler i4handler = handler;
         if (i4handler != null) {
-            ZimbraLog.imap.debug("dropping connection because Session is closing");
+            ZmailLog.imap.debug("dropping connection because Session is closing");
             i4handler.close();
         }
     }
@@ -317,14 +317,14 @@ public class ImapSession extends Session {
                     PagedFolderData paged = (PagedFolderData) mFolder;
                     if (paged.getCacheKey() == null || !paged.getCacheKey().equals(MANAGER.cacheKey(this, active))) {
                         //currently cached to wrong cache need to move it so it doesn't get expired or LRU'd
-                        ZimbraLog.imap.trace("relocating cached item to %s already unloaded but cache key mismatched", (active ? "active" : "inactive"));
+                        ZmailLog.imap.trace("relocating cached item to %s already unloaded but cache key mismatched", (active ? "active" : "inactive"));
                         ImapFolder folder = null;
                         try {
                             folder = reload();
                             if (folder != null) {
                                 mFolder = new PagedFolderData(serialize(active), folder);
                             } else {
-                                ZimbraLog.imap.debug("folder not found while reloading for relocate. probably already evicted");
+                                ZmailLog.imap.debug("folder not found while reloading for relocate. probably already evicted");
                             }
                         } catch (ImapSessionClosedException e) {
                             throw ServiceException.FAILURE("Session closed while relocating paged item", e);
@@ -353,14 +353,14 @@ public class ImapSession extends Session {
                     ImapFolder i4folder = MANAGER.deserialize(paged.getCacheKey());
                     if (i4folder == null) { // cache miss
                         if (ImapSessionManager.isActiveKey(paged.getCacheKey())) {
-                            ZimbraLog.imap.debug("cache miss in active cache with key %s",paged.getCacheKey());
+                            ZmailLog.imap.debug("cache miss in active cache with key %s",paged.getCacheKey());
                         }
                         return null;
                     }
                     try {
                         paged.restore(i4folder);
                     } catch (ServiceException e) {
-                        ZimbraLog.imap.warn("Failed to restore folder %s", paged.getCacheKey(), e);
+                        ZmailLog.imap.warn("Failed to restore folder %s", paged.getCacheKey(), e);
                         return null;
                     }
                     // need to switch target before replay (yes, this is inelegant)
@@ -388,7 +388,7 @@ public class ImapSession extends Session {
 
     ImapFolder handleRenumberError(String key) {
         resetRenumber();
-        ZimbraLog.imap.warn("could not replay due to too many renumbers");
+        ZmailLog.imap.warn("could not replay due to too many renumbers");
         MANAGER.safeRemoveCache(key);
         return null;
     }
@@ -458,10 +458,10 @@ public class ImapSession extends Session {
         } catch (IOException e) {
             // ImapHandler.dropConnection clears our mHandler and calls SessionCache.clearSession,
             //   which calls Session.doCleanup, which calls Mailbox.removeListener
-            if (ZimbraLog.imap.isDebugEnabled()) { // with stack trace
-                ZimbraLog.imap.debug("Failed to notify, closing %s", this, e);
+            if (ZmailLog.imap.isDebugEnabled()) { // with stack trace
+                ZmailLog.imap.debug("Failed to notify, closing %s", this, e);
             } else { // without stack trace
-                ZimbraLog.imap.info("Failed to notify (%s), closing %s", e.toString(), this);
+                ZmailLog.imap.info("Failed to notify (%s), closing %s", e.toString(), this);
             }
             if (i4handler != null) {
                 i4handler.close();

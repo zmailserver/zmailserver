@@ -12,13 +12,13 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.account.ldap.upgrade;
+package org.zmail.cs.account.ldap.upgrade;
 
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.common.util.Pair;
-import com.zimbra.common.util.StringUtil;
-import com.zimbra.cs.account.Config;
-import com.zimbra.cs.account.Provisioning;
+import org.zmail.common.service.ServiceException;
+import org.zmail.common.util.Pair;
+import org.zmail.common.util.StringUtil;
+import org.zmail.cs.account.Config;
+import org.zmail.cs.account.Provisioning;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -28,11 +28,11 @@ public class BUG_11562 extends UpgradeOp {
 
     @Override
     void doUpgrade() throws ServiceException {
-        upgradeZimbraGalLdapFilterDef();
+        upgradeZmailGalLdapFilterDef();
     }
 
     @SuppressWarnings("unchecked")
-    private void upgradeZimbraGalLdapFilterDef() throws ServiceException {
+    private void upgradeZmailGalLdapFilterDef() throws ServiceException {
         Config config = prov.getConfig();
 
         Pair[] values = {
@@ -45,7 +45,7 @@ public class BUG_11562 extends UpgradeOp {
                         "adAutoComplete:(&(|(displayName=%s*)(cn=%s*)(sn=%s*)(givenName=%s*)(mail=%s*))(!(msExchHideFromAddressLists=TRUE))(|(&(objectCategory=person)(objectClass=user)(!(homeMDB=*))(!(msExchHomeServerName=*)))(&(objectCategory=person)(objectClass=user)(|(homeMDB=*)(msExchHomeServerName=*)))(&(objectCategory=person)(objectClass=contact))(objectCategory=group)(objectCategory=publicFolder)(objectCategory=msExchDynamicDistributionList)))"),
         };
 
-        Set<String> curValues = config.getMultiAttrSet(Provisioning.A_zimbraGalLdapFilterDef);
+        Set<String> curValues = config.getMultiAttrSet(Provisioning.A_zmailGalLdapFilterDef);
 
         Map<String, Object> attrs = new HashMap<String, Object>();
         for (Pair<String, String> change : values) {
@@ -53,8 +53,8 @@ public class BUG_11562 extends UpgradeOp {
             String newValue = change.getSecond();
 
             if (curValues.contains(oldValue)) {
-                StringUtil.addToMultiMap(attrs, "-" + Provisioning.A_zimbraGalLdapFilterDef, oldValue);
-                StringUtil.addToMultiMap(attrs, "+" + Provisioning.A_zimbraGalLdapFilterDef, newValue);
+                StringUtil.addToMultiMap(attrs, "-" + Provisioning.A_zmailGalLdapFilterDef, oldValue);
+                StringUtil.addToMultiMap(attrs, "+" + Provisioning.A_zmailGalLdapFilterDef, newValue);
             }
         }
 

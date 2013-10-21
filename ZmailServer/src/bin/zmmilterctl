@@ -16,21 +16,21 @@
 
 source `dirname $0`/zmshutil || exit 1
 zmsetvars \
-    zimbra_home \
-    zimbra_log_directory
+    zmail_home \
+    zmail_log_directory
 
-libjars=${zimbra_home}/lib/jars
-configfile=${zimbra_home}/conf/localconfig.xml
-pidfile=${zimbra_log_directory}/milter.pid
+libjars=${zmail_home}/lib/jars
+configfile=${zmail_home}/conf/localconfig.xml
+pidfile=${zmail_log_directory}/milter.pid
 pid=""
-java="${zimbra_home}/bin/zmjava"
+java="${zmail_home}/bin/zmjava"
 
 case "`uname`" in
 CYGWIN*) PATHSEP=";";;
 *) PATHSEP=":";;
 esac
 
-CP=${zimbra_home}/conf
+CP=${zmail_home}/conf
 
 java_version=$(${java} -version 2>&1 | grep "java version" | sed -e 's/"//g' | awk '{print $NF}' | awk -F_ '{print $1}')
 if [ x"$java_version" = "x1.6.0" ]; then
@@ -39,8 +39,8 @@ else
   java_options=""
 fi
 
-runcmd="${java} ${java_options} -Dzimbra.home=\"${zimbra_home}\" -Dzimbra.config=\"${configfile}\" -cp \"$CP\" \
-   com.zimbra.cs.milter.MilterServer"
+runcmd="${java} ${java_options} -Dzmail.home=\"${zmail_home}\" -Dzmail.config=\"${configfile}\" -cp \"$CP\" \
+   org.zmail.cs.milter.MilterServer"
 
 getpid()
 {
@@ -84,7 +84,7 @@ case "$1" in
       exit 0
     fi
 
-    nohup sh -c "exec ${runcmd} 2>&1" > ${zimbra_home}/log/milter.out 2>&1 &
+    nohup sh -c "exec ${runcmd} 2>&1" > ${zmail_home}/log/milter.out 2>&1 &
 
     pid=$!
     if [ "x$pid" != 'x' ]; then

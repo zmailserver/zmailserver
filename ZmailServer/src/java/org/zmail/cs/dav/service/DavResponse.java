@@ -12,7 +12,7 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.dav.service;
+package org.zmail.cs.dav.service;
 
 import java.io.IOException;
 import java.io.OutputStream;
@@ -28,14 +28,14 @@ import org.dom4j.DocumentHelper;
 import org.dom4j.Element;
 import org.dom4j.QName;
 
-import com.zimbra.common.util.ZimbraLog;
-import com.zimbra.cs.dav.DavContext;
-import com.zimbra.cs.dav.DavElements;
-import com.zimbra.cs.dav.DavException;
-import com.zimbra.cs.dav.DavProtocol;
-import com.zimbra.cs.dav.DomUtil;
-import com.zimbra.cs.dav.property.ResourceProperty;
-import com.zimbra.cs.dav.resource.DavResource;
+import org.zmail.common.util.ZmailLog;
+import org.zmail.cs.dav.DavContext;
+import org.zmail.cs.dav.DavElements;
+import org.zmail.cs.dav.DavException;
+import org.zmail.cs.dav.DavProtocol;
+import org.zmail.cs.dav.DomUtil;
+import org.zmail.cs.dav.property.ResourceProperty;
+import org.zmail.cs.dav.resource.DavResource;
 
 /**
  * Abstraction for DAV response message.
@@ -193,8 +193,8 @@ public class DavResponse {
 	
 	/* Writes response XML Document to OutputStream. */
 	public void writeTo(OutputStream out) throws IOException {
-		if (ZimbraLog.dav.isDebugEnabled())
-			ZimbraLog.dav.debug("RESPONSE:\n"+new String(DomUtil.getBytes(mResponse), "UTF-8"));
+		if (ZmailLog.dav.isDebugEnabled())
+			ZmailLog.dav.debug("RESPONSE:\n"+new String(DomUtil.getBytes(mResponse), "UTF-8"));
 		DomUtil.writeDocumentToStream(mResponse, out);
 	}
 

@@ -19,7 +19,7 @@
  * TODO To change the template for this generated file go to
  * Window - Preferences - Java - Code Generation - Code and Comments
  */
-package com.zimbra.cs.mime;
+package org.zmail.cs.mime;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -27,8 +27,8 @@ import java.io.OutputStream;
 
 import javax.activation.DataSource;
 
-import com.zimbra.cs.store.Blob;
-import com.zimbra.cs.store.StoreManager;
+import org.zmail.cs.store.Blob;
+import org.zmail.cs.store.StoreManager;
 
 public class BlobDataSource implements DataSource {
 

@@ -12,7 +12,7 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.mailbox.acl;
+package org.zmail.cs.mailbox.acl;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -23,18 +23,18 @@ import java.util.Set;
 import java.util.TimerTask;
 
 import com.google.common.collect.Multimap;
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.common.util.ZimbraLog;
-import com.zimbra.cs.account.Account;
-import com.zimbra.cs.account.ShareInfoData;
-import com.zimbra.cs.db.DbPendingAclPush;
-import com.zimbra.cs.mailbox.ACL;
-import com.zimbra.cs.mailbox.Folder;
-import com.zimbra.cs.mailbox.MailItem;
-import com.zimbra.cs.mailbox.MailServiceException;
-import com.zimbra.cs.mailbox.Mailbox;
-import com.zimbra.cs.mailbox.MailboxManager;
-import com.zimbra.cs.util.ZimbraApplication;
+import org.zmail.common.service.ServiceException;
+import org.zmail.common.util.ZmailLog;
+import org.zmail.cs.account.Account;
+import org.zmail.cs.account.ShareInfoData;
+import org.zmail.cs.db.DbPendingAclPush;
+import org.zmail.cs.mailbox.ACL;
+import org.zmail.cs.mailbox.Folder;
+import org.zmail.cs.mailbox.MailItem;
+import org.zmail.cs.mailbox.MailServiceException;
+import org.zmail.cs.mailbox.Mailbox;
+import org.zmail.cs.mailbox.MailboxManager;
+import org.zmail.cs.util.ZmailApplication;
 
 /**
  * This task publishes shared item updates to LDAP to enable centralized discovery of shares, e.g.
@@ -45,7 +45,7 @@ public class AclPushTask extends TimerTask {
     private static boolean supported;
 
     static {
-         supported = ZimbraApplication.getInstance().supports(AclPushTask.class);
+         supported = ZmailApplication.getInstance().supports(AclPushTask.class);
     }
 
     @Override
@@ -56,7 +56,7 @@ public class AclPushTask extends TimerTask {
     public static synchronized void doWork() {
         if (!supported)
             return;
-        ZimbraLog.misc.debug("Starting pending ACL push");
+        ZmailLog.misc.debug("Starting pending ACL push");
         try {
             Date now = new Date();
             Multimap<Integer, Integer> mboxIdToItemIds = DbPendingAclPush.getEntries(now);
@@ -66,7 +66,7 @@ public class AclPushTask extends TimerTask {
                 try {
                     mbox = MailboxManager.getInstance().getMailboxById(mboxId);
                 } catch (ServiceException e) {
-                    ZimbraLog.misc.info("Exception occurred while getting mailbox for id %s during ACL push", mboxId, e);
+                    ZmailLog.misc.info("Exception occurred while getting mailbox for id %s during ACL push", mboxId, e);
                     continue;
                 }
                 Collection<Integer> itemIds = mboxIdToItemIds.get(mboxId);
@@ -122,8 +122,8 @@ public class AclPushTask extends TimerTask {
 
             DbPendingAclPush.deleteEntries(now);
         } catch (Throwable t) {  //don't let exceptions kill the timer
-            ZimbraLog.misc.warn("Error during ACL push task", t);
+            ZmailLog.misc.warn("Error during ACL push task", t);
         }
-        ZimbraLog.misc.debug("Finished pending ACL push");
+        ZmailLog.misc.debug("Finished pending ACL push");
     }
 }

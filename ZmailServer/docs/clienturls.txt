@@ -12,7 +12,7 @@ AjxDebug.DBG1 = 1; // minimal debugging
 AjxDebug.DBG2 = 2; // moderate debugging
 AjxDebug.DBG3 = 3; // anything goes
 
- http://server/zimbra/?debug=1
+ http://server/zmail/?debug=1
 
 ----------------------------------------
 
@@ -27,7 +27,7 @@ AjxDebug.DBG3 = 3; // anything goes
     steel
 	...
 
- http://server/zimbra/?skin=beach
+ http://server/zmail/?skin=beach
  
 ----------------------------------------
 
@@ -41,7 +41,7 @@ AjxDebug.DBG3 = 3; // anything goes
     options
 
 
- http://server/zimbra/?app=calendar
+ http://server/zmail/?app=calendar
  
 ----------------------------------------    
 
@@ -49,7 +49,7 @@ AjxDebug.DBG3 = 3; // anything goes
  
   start with (n)o (s)plash (s)creen
 
-  http://server/zimbra/?nss=1
+  http://server/zmail/?nss=1
  
 ----------------------------------------
     
@@ -61,7 +61,7 @@ AjxDebug.DBG3 = 3; // anything goes
   
      &to={...}&subject={...}&body={...}
 
-  http://server/zimbra/?view=compose&to=a@b.com&subject=hello%20world&body=test
+  http://server/zmail/?view=compose&to=a@b.com&subject=hello%20world&body=test
 
 
 
@@ -69,7 +69,7 @@ AjxDebug.DBG3 = 3; // anything goes
 
      &date=YYYYMMDD
 
-  http://server/zimbra/?app=calendar&view=workWeek&date=20030313
+  http://server/zmail/?app=calendar&view=workWeek&date=20030313
 
  Note: the "app=calendar" part is required for this work.
 
@@ -82,13 +82,13 @@ AjxDebug.DBG3 = 3; // anything goes
    either localhost or an IP address. You can use redirect=0 to disable that redirect, or redirect=1 to force
    a redirect in the localhost/IP case.
    
-For example, assumming zimbraMailHost is server1.company.com, connecting to:
+For example, assumming zmailMailHost is server1.company.com, connecting to:
   
-  http://localhost/zimbra/?redirect=1
+  http://localhost/zmail/?redirect=1
   
 will cause the client to redirect to server1.company.com, and connecting to:
   
-  http://mail.company.com/zimbra/?redirect=0
+  http://mail.company.org/zmail/?redirect=0
   
   will tell it not to redirect (this assumes mail.company.com is a CNAME/VIP for server1.company.com).
   

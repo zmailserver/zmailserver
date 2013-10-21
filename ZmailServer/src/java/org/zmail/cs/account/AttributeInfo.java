@@ -13,7 +13,7 @@
  * ***** END LICENSE BLOCK *****
  */
 
-package com.zimbra.cs.account;
+package org.zmail.cs.account;
 
 import java.util.HashSet;
 import java.util.List;
@@ -24,14 +24,14 @@ import java.util.regex.Pattern;
 import javax.mail.internet.AddressException;
 import javax.mail.internet.InternetAddress;
 
-import com.zimbra.common.localconfig.DebugConfig;
-import com.zimbra.common.mime.shim.JavaMailInternetAddress;
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.common.util.ByteUtil;
-import com.zimbra.common.util.DateUtil;
-import com.zimbra.common.util.StringUtil;
-import com.zimbra.common.util.Version;
-import com.zimbra.common.util.ZimbraLog;
+import org.zmail.common.localconfig.DebugConfig;
+import org.zmail.common.mime.shim.JavaMailInternetAddress;
+import org.zmail.common.service.ServiceException;
+import org.zmail.common.util.ByteUtil;
+import org.zmail.common.util.DateUtil;
+import org.zmail.common.util.StringUtil;
+import org.zmail.common.util.Version;
+import org.zmail.common.util.ZmailLog;
 
 public class AttributeInfo {
 
@@ -132,7 +132,7 @@ public class AttributeInfo {
             try {
                 return Long.parseLong(value);
             } catch (NumberFormatException e) {
-                ZimbraLog.misc.warn("Invalid value '%s' for property %s of attribute %s.  Defaulting to %d.",
+                ZmailLog.misc.warn("Invalid value '%s' for property %s of attribute %s.  Defaulting to %d.",
                         value, propName, attrName, defaultValue);
                 return defaultValue;
             }
@@ -185,7 +185,7 @@ public class AttributeInfo {
             if (!StringUtil.isNullOrEmpty(min)) {
                 Integer i = parseInt(min);
                 if (i == null) {
-                    ZimbraLog.misc.warn("Invalid value '%s' for property %s of attribute %s.  Defaulting to %d.",
+                    ZmailLog.misc.warn("Invalid value '%s' for property %s of attribute %s.  Defaulting to %d.",
                         min, AttributeManager.A_MIN, attrName, mMin);
                 } else {
                     mMin = i;
@@ -194,7 +194,7 @@ public class AttributeInfo {
             if (!StringUtil.isNullOrEmpty(max)) {
                 Integer i = parseInt(max);
                 if (i == null) {
-                    ZimbraLog.misc.warn("Invalid value '%s' for property %s of attribute %s.  Defaulting to %d.",
+                    ZmailLog.misc.warn("Invalid value '%s' for property %s of attribute %s.  Defaulting to %d.",
                         max, AttributeManager.A_MAX, attrName, mMax);
                 } else {
                     mMax = i;
@@ -208,7 +208,7 @@ public class AttributeInfo {
             if (!StringUtil.isNullOrEmpty(min)) {
                 Long l = parseLong(min);
                 if (l == null) {
-                    ZimbraLog.misc.warn("Invalid value '%s' for property %s of attribute %s.  Defaulting to %d.",
+                    ZmailLog.misc.warn("Invalid value '%s' for property %s of attribute %s.  Defaulting to %d.",
                         min, AttributeManager.A_MIN, attrName, mMin);
                 } else {
                     mMin = l;
@@ -217,7 +217,7 @@ public class AttributeInfo {
             if (!StringUtil.isNullOrEmpty(max)) {
                 Long l = parseLong(max);
                 if (l == null) {
-                    ZimbraLog.misc.warn("Invalid value '%s' for property %s of attribute %s.  Defaulting to %d.",
+                    ZmailLog.misc.warn("Invalid value '%s' for property %s of attribute %s.  Defaulting to %d.",
                         max, AttributeManager.A_MAX, attrName, mMax);
                 } else {
                     mMax = l;
@@ -244,7 +244,7 @@ public class AttributeInfo {
                 mMin = DateUtil.getTimeInterval(min, -1);
                 if (mMin < 0) {
                     mMin = 0;
-                    ZimbraLog.misc.warn("Invalid value '%s' for property %s of attribute %s.  Defaulting to 0.",
+                    ZmailLog.misc.warn("Invalid value '%s' for property %s of attribute %s.  Defaulting to 0.",
                         min, AttributeManager.A_MIN, attrName);
                 } else {
                     mMinDuration = min;
@@ -254,7 +254,7 @@ public class AttributeInfo {
                 mMax = DateUtil.getTimeInterval(max, -1);
                 if (mMax < 0) {
                     mMax = Long.MAX_VALUE;
-                    ZimbraLog.misc.warn("Invalid value '%s' for property %s of attribute %s.  Defaulting to %d.",
+                    ZmailLog.misc.warn("Invalid value '%s' for property %s of attribute %s.  Defaulting to %d.",
                         max, AttributeManager.A_MAX, attrName, mMax);
                 } else {
                     mMaxDuration = max;
@@ -408,7 +408,7 @@ public class AttributeInfo {
             else
                 throw AccountServiceException.INVALID_ATTR_VALUE(mName+" must match the regex: "+mValue, null);
         default:
-            ZimbraLog.misc.warn("unknown type("+mType+") for attribute: "+value);
+            ZmailLog.misc.warn("unknown type("+mType+") for attribute: "+value);
             return;
         }
     }

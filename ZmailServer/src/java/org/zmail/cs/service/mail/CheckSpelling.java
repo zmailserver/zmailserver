@@ -13,7 +13,7 @@
  * ***** END LICENSE BLOCK *****
  */
 
-package com.zimbra.cs.service.mail;
+package org.zmail.cs.service.mail;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -25,27 +25,27 @@ import java.util.Map;
 import org.apache.commons.httpclient.HttpClient;
 import org.apache.commons.httpclient.methods.PostMethod;
 
-import com.zimbra.common.httpclient.HttpClientUtil;
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.common.soap.Element;
-import com.zimbra.common.soap.MailConstants;
-import com.zimbra.common.util.ArrayUtil;
-import com.zimbra.common.util.ListUtil;
-import com.zimbra.common.util.Log;
-import com.zimbra.common.util.StringUtil;
-import com.zimbra.common.util.ZimbraHttpConnectionManager;
-import com.zimbra.common.util.ZimbraLog;
-import com.zimbra.cs.account.Account;
-import com.zimbra.cs.account.Provisioning;
-import com.zimbra.cs.account.Server;
-import com.zimbra.soap.ZimbraSoapContext;
+import org.zmail.common.httpclient.HttpClientUtil;
+import org.zmail.common.service.ServiceException;
+import org.zmail.common.soap.Element;
+import org.zmail.common.soap.MailConstants;
+import org.zmail.common.util.ArrayUtil;
+import org.zmail.common.util.ListUtil;
+import org.zmail.common.util.Log;
+import org.zmail.common.util.StringUtil;
+import org.zmail.common.util.ZmailHttpConnectionManager;
+import org.zmail.common.util.ZmailLog;
+import org.zmail.cs.account.Account;
+import org.zmail.cs.account.Provisioning;
+import org.zmail.cs.account.Server;
+import org.zmail.soap.ZmailSoapContext;
 
 /**
  * @author bburtin
  */
 public class CheckSpelling extends MailDocumentHandler {
 
-    private Log log = ZimbraLog.misc;
+    private Log log = ZmailLog.misc;
 
     private class ServerResponse {
         int statusCode;
@@ -55,15 +55,15 @@ public class CheckSpelling extends MailDocumentHandler {
     @Override
     public Element handle(Element request, Map<String, Object> context)
     throws ServiceException {
-        ZimbraSoapContext zc = getZimbraSoapContext(context);
+        ZmailSoapContext zc = getZmailSoapContext(context);
         Element response = zc.createElement(MailConstants.CHECK_SPELLING_RESPONSE);
 
         // Make sure a spell check server is specified
         Provisioning prov = Provisioning.getInstance();
         Server localServer = prov.getLocalServer();
-        String[] urls = localServer.getMultiAttr(Provisioning.A_zimbraSpellCheckURL);
+        String[] urls = localServer.getMultiAttr(Provisioning.A_zmailSpellCheckURL);
         if (ArrayUtil.isEmpty(urls)) {
-            log.warn("Unable to check spelling.  No value specified for %s", Provisioning.A_zimbraSpellCheckURL);
+            log.warn("Unable to check spelling.  No value specified for %s", Provisioning.A_zmailSpellCheckURL);
             return unavailable(response);
         }
 
@@ -76,7 +76,7 @@ public class CheckSpelling extends MailDocumentHandler {
         }
 
         // Get the dictionary name from either (1) the request,
-        // (2) zimbraPrefSpellDictionary or (3) the account's locale.
+        // (2) zmailPrefSpellDictionary or (3) the account's locale.
         String dictionary = request.getAttribute(MailConstants.A_DICTIONARY, null);
         Account account = getRequestedAccount(zc);
         if (dictionary == null) {
@@ -112,7 +112,7 @@ public class CheckSpelling extends MailDocumentHandler {
                     break; // Successful request.  No need to check the other servers.
                 }
             } catch (IOException ex) {
-                ZimbraLog.mailbox.warn("An error occurred while contacting " + url, ex);
+                ZmailLog.mailbox.warn("An error occurred while contacting " + url, ex);
             }
         }
 
@@ -189,7 +189,7 @@ public class CheckSpelling extends MailDocumentHandler {
         if (ignoreAllCaps) {
             post.addParameter("ignoreAllCaps", "on");
         }
-        HttpClient http = ZimbraHttpConnectionManager.getExternalHttpConnMgr().newHttpClient();
+        HttpClient http = ZmailHttpConnectionManager.getExternalHttpConnMgr().newHttpClient();
         ServerResponse response = new ServerResponse();
         try {
             response.statusCode = HttpClientUtil.executeMethod(http, post);

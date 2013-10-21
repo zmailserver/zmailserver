@@ -12,11 +12,11 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.ldap;
+package org.zmail.cs.ldap;
 
-import com.zimbra.common.util.ZimbraLog;
-import com.zimbra.cs.account.Entry;
-import com.zimbra.cs.account.gal.GalOp;
+import org.zmail.common.util.ZmailLog;
+import org.zmail.cs.account.Entry;
+import org.zmail.cs.account.gal.GalOp;
 
 /**
  * @author pshao
@@ -150,7 +150,7 @@ public enum LdapUsage {
 
     public static LdapUsage fromGalOp(GalOp galOp) {
         if (galOp == null) {
-            ZimbraLog.ldap.warn("unknown GAL op");
+            ZmailLog.ldap.warn("unknown GAL op");
             return LdapUsage.GAL;  // really an error
         }
         switch (galOp) {
@@ -161,14 +161,14 @@ public enum LdapUsage {
             case sync:
                 return GAL_SYNC;
             default:
-                ZimbraLog.ldap.warn("unknown GAL op");
+                ZmailLog.ldap.warn("unknown GAL op");
                 return GAL;
         }
     }
 
     public static LdapUsage fromGalOpLegacy(GalOp galOp) {
         if (galOp == null) {
-            ZimbraLog.ldap.warn("unknown GAL op");
+            ZmailLog.ldap.warn("unknown GAL op");
             return LdapUsage.GAL_LEGACY;  // really an error
         }
         switch (galOp) {
@@ -179,7 +179,7 @@ public enum LdapUsage {
             case sync:
                 return GAL_LEGACY_SYNC;
             default:
-                ZimbraLog.ldap.warn("unknown GAL op");
+                ZmailLog.ldap.warn("unknown GAL op");
                 return GAL_LEGACY;
         }
     }

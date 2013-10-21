@@ -13,15 +13,15 @@
  * ***** END LICENSE BLOCK *****
  */
 
-package com.zimbra.qa.unittest;
+package org.zmail.qa.unittest;
 
 import junit.framework.TestCase;
 
 import com.google.common.base.Strings;
-import com.zimbra.common.util.ZimbraLog;
-import com.zimbra.client.ZFolder;
-import com.zimbra.client.ZMailbox;
-import com.zimbra.cs.account.Provisioning;
+import org.zmail.common.util.ZmailLog;
+import org.zmail.client.ZFolder;
+import org.zmail.client.ZMailbox;
+import org.zmail.cs.account.Provisioning;
 
 public class TestFolders extends TestCase
 {
@@ -34,13 +34,13 @@ public class TestFolders extends TestCase
     protected void setUp()
     throws Exception {
         cleanUp();
-        mOriginalEmptyFolderBatchSize = TestUtil.getServerAttr(Provisioning.A_zimbraMailEmptyFolderBatchSize);
+        mOriginalEmptyFolderBatchSize = TestUtil.getServerAttr(Provisioning.A_zmailMailEmptyFolderBatchSize);
     }
 
 
     public void testEmptyLargeFolder()
     throws Exception {
-        TestUtil.setServerAttr(Provisioning.A_zimbraMailEmptyFolderBatchSize, Integer.toString(3));
+        TestUtil.setServerAttr(Provisioning.A_zmailMailEmptyFolderBatchSize, Integer.toString(3));
 
         // Create folders.
         String parentPath = "/" + NAME_PREFIX + "-parent";
@@ -104,11 +104,11 @@ public class TestFolders extends TestCase
             totalTime+=elapsed;
             if (elapsed > maxTime) {
                 maxTime = elapsed;
-                ZimbraLog.mailbox.info("FOLDER TIME new max time %dms at index %d",maxTime, i);
+                ZmailLog.mailbox.info("FOLDER TIME new max time %dms at index %d",maxTime, i);
             }
             if (i > 0 && (i % 100 == 0 || i == max-1)) {
                 avgTime = (totalTime*1.0)/(i*1.0);
-                ZimbraLog.mailbox.info("FOLDER TIME average after %d = %dms", i, Math.round(avgTime));
+                ZmailLog.mailbox.info("FOLDER TIME average after %d = %dms", i, Math.round(avgTime));
             }
         }
     }
@@ -126,7 +126,7 @@ public class TestFolders extends TestCase
     @Override
     protected void tearDown() throws Exception {
         cleanUp();
-        TestUtil.setServerAttr(Provisioning.A_zimbraMailEmptyFolderBatchSize, mOriginalEmptyFolderBatchSize);
+        TestUtil.setServerAttr(Provisioning.A_zmailMailEmptyFolderBatchSize, mOriginalEmptyFolderBatchSize);
     }
 
     public static void main(String[] args)

@@ -13,7 +13,7 @@
  * ***** END LICENSE BLOCK *****
  */
 
-package com.zimbra.qa.unittest;
+package org.zmail.qa.unittest;
 
 import java.io.BufferedReader;
 import java.io.ByteArrayInputStream;
@@ -40,89 +40,89 @@ import junit.framework.Assert;
 import org.junit.runner.JUnitCore;
 
 import com.google.common.io.Closeables;
-import com.zimbra.client.ZContact;
-import com.zimbra.client.ZDataSource;
-import com.zimbra.client.ZDateTime;
-import com.zimbra.client.ZDocument;
-import com.zimbra.client.ZEmailAddress;
-import com.zimbra.client.ZFilterRule;
-import com.zimbra.client.ZFolder;
-import com.zimbra.client.ZGetInfoResult;
-import com.zimbra.client.ZGetMessageParams;
-import com.zimbra.client.ZGrant.GranteeType;
-import com.zimbra.client.ZIdentity;
-import com.zimbra.client.ZInvite;
-import com.zimbra.client.ZInvite.ZAttendee;
-import com.zimbra.client.ZInvite.ZClass;
-import com.zimbra.client.ZInvite.ZComponent;
-import com.zimbra.client.ZInvite.ZOrganizer;
-import com.zimbra.client.ZInvite.ZParticipantStatus;
-import com.zimbra.client.ZInvite.ZRole;
-import com.zimbra.client.ZInvite.ZStatus;
-import com.zimbra.client.ZInvite.ZTransparency;
-import com.zimbra.client.ZMailbox;
-import com.zimbra.client.ZMailbox.ContactSortBy;
-import com.zimbra.client.ZMailbox.OwnerBy;
-import com.zimbra.client.ZMailbox.SharedItemBy;
-import com.zimbra.client.ZMailbox.ZAppointmentResult;
-import com.zimbra.client.ZMailbox.ZImportStatus;
-import com.zimbra.client.ZMailbox.ZOutgoingMessage;
-import com.zimbra.client.ZMailbox.ZOutgoingMessage.AttachedMessagePart;
-import com.zimbra.client.ZMailbox.ZOutgoingMessage.MessagePart;
-import com.zimbra.client.ZMessage;
-import com.zimbra.client.ZMessage.ZMimePart;
-import com.zimbra.client.ZMountpoint;
-import com.zimbra.client.ZSearchHit;
-import com.zimbra.client.ZSearchParams;
-import com.zimbra.client.ZTag;
-import com.zimbra.common.account.Key;
-import com.zimbra.common.account.Key.AccountBy;
-import com.zimbra.common.auth.ZAuthToken;
-import com.zimbra.common.lmtp.LmtpClient;
-import com.zimbra.common.localconfig.LC;
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.common.soap.AccountConstants;
-import com.zimbra.common.soap.AdminConstants;
-import com.zimbra.common.soap.Element;
-import com.zimbra.common.soap.Element.Attribute;
-import com.zimbra.common.soap.Element.XMLElement;
-import com.zimbra.common.soap.SoapFaultException;
-import com.zimbra.common.soap.SoapHttpTransport;
-import com.zimbra.common.soap.SoapTransport;
-import com.zimbra.common.util.ByteUtil;
-import com.zimbra.common.util.CliUtil;
-import com.zimbra.common.util.StringUtil;
-import com.zimbra.common.util.ZimbraLog;
-import com.zimbra.common.zmime.ZMimeMessage;
-import com.zimbra.cs.account.Account;
-import com.zimbra.cs.account.Config;
-import com.zimbra.cs.account.DataSource;
-import com.zimbra.cs.account.Domain;
-import com.zimbra.cs.account.Provisioning;
-import com.zimbra.cs.account.Server;
-import com.zimbra.cs.account.soap.SoapProvisioning;
-import com.zimbra.cs.client.LmcSession;
-import com.zimbra.cs.client.soap.LmcAdminAuthRequest;
-import com.zimbra.cs.client.soap.LmcAdminAuthResponse;
-import com.zimbra.cs.client.soap.LmcAuthRequest;
-import com.zimbra.cs.client.soap.LmcAuthResponse;
-import com.zimbra.cs.client.soap.LmcSoapClientException;
-import com.zimbra.cs.index.SortBy;
-import com.zimbra.cs.index.ZimbraHit;
-import com.zimbra.cs.index.ZimbraQueryResults;
-import com.zimbra.cs.mailbox.DeliveryOptions;
-import com.zimbra.cs.mailbox.Flag;
-import com.zimbra.cs.mailbox.Folder;
-import com.zimbra.cs.mailbox.MailItem;
-import com.zimbra.cs.mailbox.MailServiceException;
-import com.zimbra.cs.mailbox.Mailbox;
-import com.zimbra.cs.mailbox.Message;
-import com.zimbra.cs.mailbox.OperationContext;
-import com.zimbra.cs.mime.ParsedMessage;
-import com.zimbra.cs.store.StoreManager;
-import com.zimbra.cs.store.file.FileBlobStore;
-import com.zimbra.cs.util.BuildInfo;
-import com.zimbra.cs.util.JMSession;
+import org.zmail.client.ZContact;
+import org.zmail.client.ZDataSource;
+import org.zmail.client.ZDateTime;
+import org.zmail.client.ZDocument;
+import org.zmail.client.ZEmailAddress;
+import org.zmail.client.ZFilterRule;
+import org.zmail.client.ZFolder;
+import org.zmail.client.ZGetInfoResult;
+import org.zmail.client.ZGetMessageParams;
+import org.zmail.client.ZGrant.GranteeType;
+import org.zmail.client.ZIdentity;
+import org.zmail.client.ZInvite;
+import org.zmail.client.ZInvite.ZAttendee;
+import org.zmail.client.ZInvite.ZClass;
+import org.zmail.client.ZInvite.ZComponent;
+import org.zmail.client.ZInvite.ZOrganizer;
+import org.zmail.client.ZInvite.ZParticipantStatus;
+import org.zmail.client.ZInvite.ZRole;
+import org.zmail.client.ZInvite.ZStatus;
+import org.zmail.client.ZInvite.ZTransparency;
+import org.zmail.client.ZMailbox;
+import org.zmail.client.ZMailbox.ContactSortBy;
+import org.zmail.client.ZMailbox.OwnerBy;
+import org.zmail.client.ZMailbox.SharedItemBy;
+import org.zmail.client.ZMailbox.ZAppointmentResult;
+import org.zmail.client.ZMailbox.ZImportStatus;
+import org.zmail.client.ZMailbox.ZOutgoingMessage;
+import org.zmail.client.ZMailbox.ZOutgoingMessage.AttachedMessagePart;
+import org.zmail.client.ZMailbox.ZOutgoingMessage.MessagePart;
+import org.zmail.client.ZMessage;
+import org.zmail.client.ZMessage.ZMimePart;
+import org.zmail.client.ZMountpoint;
+import org.zmail.client.ZSearchHit;
+import org.zmail.client.ZSearchParams;
+import org.zmail.client.ZTag;
+import org.zmail.common.account.Key;
+import org.zmail.common.account.Key.AccountBy;
+import org.zmail.common.auth.ZAuthToken;
+import org.zmail.common.lmtp.LmtpClient;
+import org.zmail.common.localconfig.LC;
+import org.zmail.common.service.ServiceException;
+import org.zmail.common.soap.AccountConstants;
+import org.zmail.common.soap.AdminConstants;
+import org.zmail.common.soap.Element;
+import org.zmail.common.soap.Element.Attribute;
+import org.zmail.common.soap.Element.XMLElement;
+import org.zmail.common.soap.SoapFaultException;
+import org.zmail.common.soap.SoapHttpTransport;
+import org.zmail.common.soap.SoapTransport;
+import org.zmail.common.util.ByteUtil;
+import org.zmail.common.util.CliUtil;
+import org.zmail.common.util.StringUtil;
+import org.zmail.common.util.ZmailLog;
+import org.zmail.common.zmime.ZMimeMessage;
+import org.zmail.cs.account.Account;
+import org.zmail.cs.account.Config;
+import org.zmail.cs.account.DataSource;
+import org.zmail.cs.account.Domain;
+import org.zmail.cs.account.Provisioning;
+import org.zmail.cs.account.Server;
+import org.zmail.cs.account.soap.SoapProvisioning;
+import org.zmail.cs.client.LmcSession;
+import org.zmail.cs.client.soap.LmcAdminAuthRequest;
+import org.zmail.cs.client.soap.LmcAdminAuthResponse;
+import org.zmail.cs.client.soap.LmcAuthRequest;
+import org.zmail.cs.client.soap.LmcAuthResponse;
+import org.zmail.cs.client.soap.LmcSoapClientException;
+import org.zmail.cs.index.SortBy;
+import org.zmail.cs.index.ZmailHit;
+import org.zmail.cs.index.ZmailQueryResults;
+import org.zmail.cs.mailbox.DeliveryOptions;
+import org.zmail.cs.mailbox.Flag;
+import org.zmail.cs.mailbox.Folder;
+import org.zmail.cs.mailbox.MailItem;
+import org.zmail.cs.mailbox.MailServiceException;
+import org.zmail.cs.mailbox.Mailbox;
+import org.zmail.cs.mailbox.Message;
+import org.zmail.cs.mailbox.OperationContext;
+import org.zmail.cs.mime.ParsedMessage;
+import org.zmail.cs.store.StoreManager;
+import org.zmail.cs.store.file.FileBlobStore;
+import org.zmail.cs.util.BuildInfo;
+import org.zmail.cs.util.JMSession;
 
 /**
  * @author bburtin
@@ -165,7 +165,7 @@ extends Assert {
         try {
             return getBaseUrl() + AccountConstants.USER_SERVICE_URI;
         } catch (ServiceException e) {
-            ZimbraLog.test.error("Unable to determine SOAP URL", e);
+            ZmailLog.test.error("Unable to determine SOAP URL", e);
         }
         return null;
     }
@@ -174,11 +174,11 @@ extends Assert {
     throws ServiceException {
         String scheme;
         int port;
-        port = Provisioning.getInstance().getLocalServer().getIntAttr(Provisioning.A_zimbraMailPort, 0);
+        port = Provisioning.getInstance().getLocalServer().getIntAttr(Provisioning.A_zmailMailPort, 0);
         if (port > 0) {
             scheme = "http";
         } else {
-            port = Provisioning.getInstance().getLocalServer().getIntAttr(Provisioning.A_zimbraMailSSLPort, 0);
+            port = Provisioning.getInstance().getLocalServer().getIntAttr(Provisioning.A_zmailMailSSLPort, 0);
             scheme = "https";
         }
         return scheme + "://localhost:" + port;
@@ -187,10 +187,10 @@ extends Assert {
     public static String getAdminSoapUrl() {
         int port;
         try {
-            port = Provisioning.getInstance().getLocalServer().getIntAttr(Provisioning.A_zimbraAdminPort, 0);
+            port = Provisioning.getInstance().getLocalServer().getIntAttr(Provisioning.A_zmailAdminPort, 0);
         } catch (ServiceException e) {
-            ZimbraLog.test.error("Unable to get admin SOAP port", e);
-            port = LC.zimbra_admin_service_port.intValue();
+            ZmailLog.test.error("Unable to get admin SOAP port", e);
+            port = LC.zmail_admin_service_port.intValue();
         }
         return "https://localhost:" + port + AdminConstants.ADMIN_SERVICE_URI;
     }
@@ -210,8 +210,8 @@ extends Assert {
     {
         // Authenticate
         LmcAdminAuthRequest auth = new LmcAdminAuthRequest();
-        auth.setUsername(LC.zimbra_ldap_user.value());
-        auth.setPassword(LC.zimbra_ldap_password.value());
+        auth.setUsername(LC.zmail_ldap_user.value());
+        auth.setPassword(LC.zmail_ldap_password.value());
         LmcAdminAuthResponse authResp = (LmcAdminAuthResponse) auth.invoke(getAdminSoapUrl());
         return authResp.getSession();
     }
@@ -266,7 +266,7 @@ extends Assert {
             recipWithDomain[i] = addDomainIfNecessary(recipients[i]);
         }
         Provisioning prov = Provisioning.getInstance();
-        LmtpClient lmtp = new LmtpClient("localhost", prov.getLocalServer().getIntAttr(Provisioning.A_zimbraLmtpBindPort, 7025));
+        LmtpClient lmtp = new LmtpClient("localhost", prov.getLocalServer().getIntAttr(Provisioning.A_zmailLmtpBindPort, 7025));
         byte[] data = message.getBytes();
         String senderAddress = "";
         if (!StringUtil.isNullOrEmpty(sender)) {
@@ -354,9 +354,9 @@ extends Assert {
      */
     public static List<Integer> search(Mailbox mbox, String query, Set<MailItem.Type> types) throws ServiceException {
         List<Integer> ids = new ArrayList<Integer>();
-        ZimbraQueryResults r = mbox.index.search(new OperationContext(mbox), query, types, SortBy.DATE_DESC, 100);
+        ZmailQueryResults r = mbox.index.search(new OperationContext(mbox), query, types, SortBy.DATE_DESC, 100);
         while (r.hasNext()) {
-            ZimbraHit hit = r.getNext();
+            ZmailHit hit = r.getNext();
             ids.add(new Integer(hit.getItemId()));
         }
         Closeables.closeQuietly(r);
@@ -557,7 +557,7 @@ extends Assert {
         if (!sIsCliInitialized) {
             CliUtil.toolSetup();
             Provisioning.setInstance(newSoapProvisioning());
-            SoapTransport.setDefaultUserAgent("Zimbra Unit Tests", BuildInfo.VERSION);
+            SoapTransport.setDefaultUserAgent("Zmail Unit Tests", BuildInfo.VERSION);
             sIsCliInitialized = true;
         }
     }
@@ -566,14 +566,14 @@ extends Assert {
     throws ServiceException {
         SoapProvisioning sp = new SoapProvisioning();
         sp.soapSetURI("https://localhost:7071" + AdminConstants.ADMIN_SERVICE_URI);
-        sp.soapZimbraAdminAuthenticate();
+        sp.soapZmailAdminAuthenticate();
         return sp;
     }
 
     public static void runTest(Class<?> testClass) {
         JUnitCore junit = new JUnitCore();
         junit.addListener(new TestLogger());
-        ZimbraLog.test.info("Starting unit test %s.", testClass.getName());
+        ZmailLog.test.info("Starting unit test %s.", testClass.getName());
         junit.run(testClass);
     }
 
@@ -861,7 +861,7 @@ extends Assert {
     }
 
     /**
-     * Returns an authenticated transport for the <tt>zimbra</tt> account.
+     * Returns an authenticated transport for the <tt>zmail</tt> account.
      */
     public static SoapTransport getAdminSoapTransport()
     throws SoapFaultException, IOException, ServiceException {
@@ -869,8 +869,8 @@ extends Assert {
 
         // Create auth element
         Element auth = new XMLElement(AdminConstants.AUTH_REQUEST);
-        auth.addElement(AdminConstants.E_NAME).setText(LC.zimbra_ldap_user.value());
-        auth.addElement(AdminConstants.E_PASSWORD).setText(LC.zimbra_ldap_password.value());
+        auth.addElement(AdminConstants.E_NAME).setText(LC.zmail_ldap_user.value());
+        auth.addElement(AdminConstants.E_PASSWORD).setText(LC.zmail_ldap_password.value());
 
         // Authenticate and get auth token
         Element response = transport.invoke(auth);

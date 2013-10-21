@@ -12,7 +12,7 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.session;
+package org.zmail.cs.session;
 
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -20,11 +20,11 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-import com.zimbra.common.soap.AdminConstants;
-import com.zimbra.common.soap.Element;
-import com.zimbra.common.util.ZimbraLog;
-import com.zimbra.cs.mailbox.MailItem;
-import com.zimbra.cs.service.mail.WaitSetRequest;
+import org.zmail.common.soap.AdminConstants;
+import org.zmail.common.soap.Element;
+import org.zmail.common.util.ZmailLog;
+import org.zmail.cs.mailbox.MailItem;
+import org.zmail.cs.service.mail.WaitSetRequest;
 
 /**
  * The base class defines shared functions, as well as any APIs which should be
@@ -88,14 +88,14 @@ public abstract class WaitSetBase implements IWaitSet {
     }
 
     protected synchronized void trySendData() {
-        boolean trace = ZimbraLog.session.isTraceEnabled();
-        if (trace) ZimbraLog.session.trace("WaitSetBase.trySendData 1");
+        boolean trace = ZmailLog.session.isTraceEnabled();
+        if (trace) ZmailLog.session.trace("WaitSetBase.trySendData 1");
 
         if (mCb == null) {
             return;
         }
 
-        if (trace) ZimbraLog.session.trace("WaitSetBase.trySendData 2");
+        if (trace) ZmailLog.session.trace("WaitSetBase.trySendData 2");
         boolean cbIsCurrent = cbSeqIsCurrent();
 
         if (cbIsCurrent) {
@@ -122,13 +122,13 @@ public abstract class WaitSetBase implements IWaitSet {
                         (!cbIsCurrent && (mSentSignalledSessions.size() > 0 || mSentErrors.size() > 0))) {
             // if sent empty, then just swap sent,current instead of copying
             if (mSentSignalledSessions.size() == 0) {
-                if (trace) ZimbraLog.session.trace("WaitSetBase.trySendData 3a");
+                if (trace) ZmailLog.session.trace("WaitSetBase.trySendData 3a");
                 // SWAP mSent,mCurrent!
                 HashSet<String> temp = mCurrentSignalledSessions;
                 mCurrentSignalledSessions = mSentSignalledSessions;
                 mSentSignalledSessions = temp;
             } else {
-                if (trace) ZimbraLog.session.trace("WaitSetBase.trySendData 3b");
+                if (trace) ZmailLog.session.trace("WaitSetBase.trySendData 3b");
                 assert(!cbIsCurrent);
                 mSentSignalledSessions.addAll(mCurrentSignalledSessions);
                 mCurrentSignalledSessions.clear();
@@ -147,12 +147,12 @@ public abstract class WaitSetBase implements IWaitSet {
                 toRet[i++] = accountId;
             }
 
-            if (trace) ZimbraLog.session.trace("WaitSetBase.trySendData 4");
+            if (trace) ZmailLog.session.trace("WaitSetBase.trySendData 4");
             mCb.dataReady(this, toNextSeqNo(), false, mSentErrors, toRet);
             mCb = null;
             mLastAccessedTime = System.currentTimeMillis();
         }
-        if (trace) ZimbraLog.session.trace("WaitSetBase.trySendData done");
+        if (trace) ZmailLog.session.trace("WaitSetBase.trySendData done");
     }
 
     @Override

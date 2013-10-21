@@ -13,28 +13,28 @@
  * ***** END LICENSE BLOCK *****
  */
 
-package com.zimbra.cs.account.callback;
+package org.zmail.cs.account.callback;
 
 import java.util.List;
 import java.util.Map;
 
-import com.zimbra.common.account.Key;
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.cs.account.AttributeCallback;
-import com.zimbra.cs.account.Entry;
-import com.zimbra.cs.account.Provisioning;
+import org.zmail.common.account.Key;
+import org.zmail.common.service.ServiceException;
+import org.zmail.cs.account.AttributeCallback;
+import org.zmail.cs.account.Entry;
+import org.zmail.cs.account.Provisioning;
 
 public class MailHostPool extends AttributeCallback {
 
     /**
-     * check to make sure zimbraMailHostPool points to a valid server id
+     * check to make sure zmailMailHostPool points to a valid server id
      */
     @Override
     public void preModify(CallbackContext context, String attrName, Object value,
             Map attrsToModify, Entry entry) 
     throws ServiceException {
         
-        MultiValueMod mod = multiValueMod(attrsToModify, Provisioning.A_zimbraMailHostPool);
+        MultiValueMod mod = multiValueMod(attrsToModify, Provisioning.A_zmailMailHostPool);
         
         if (mod.adding() || mod.replacing()) {
             Provisioning prov = Provisioning.getInstance();
@@ -43,7 +43,7 @@ public class MailHostPool extends AttributeCallback {
                 if (host == null || host.equals("")) continue;
                 if (prov.get(Key.ServerBy.id, host) == null) {
                     throw ServiceException.INVALID_REQUEST(
-                            "specified " + Provisioning.A_zimbraMailHostPool +
+                            "specified " + Provisioning.A_zmailMailHostPool +
                             " does not correspond to a valid server: "+host, null);
                 }
             }

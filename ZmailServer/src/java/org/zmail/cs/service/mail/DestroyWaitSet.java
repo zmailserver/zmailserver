@@ -12,15 +12,15 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.service.mail;
+package org.zmail.cs.service.mail;
 
 import java.util.Map;
 
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.common.soap.Element;
-import com.zimbra.common.soap.MailConstants;
-import com.zimbra.cs.session.WaitSetMgr;
-import com.zimbra.soap.ZimbraSoapContext;
+import org.zmail.common.service.ServiceException;
+import org.zmail.common.soap.Element;
+import org.zmail.common.soap.MailConstants;
+import org.zmail.cs.session.WaitSetMgr;
+import org.zmail.soap.ZmailSoapContext;
 
 /*
   *************************************
@@ -39,18 +39,18 @@ import com.zimbra.soap.ZimbraSoapContext;
 public class DestroyWaitSet extends MailDocumentHandler {
 
     /* (non-Javadoc)
-     * @see com.zimbra.soap.DocumentHandler#handle(com.zimbra.common.soap.Element, java.util.Map)
+     * @see org.zmail.soap.DocumentHandler#handle(org.zmail.common.soap.Element, java.util.Map)
      */
     
     @Override
     public Element handle(Element request, Map<String, Object> context) throws ServiceException {
-        ZimbraSoapContext zsc = getZimbraSoapContext(context);
+        ZmailSoapContext zsc = getZmailSoapContext(context);
         Element response = zsc.createElement(MailConstants.DESTROY_WAIT_SET_RESPONSE);
         return staticHandle(request, context, response);
     }
     
     static public Element staticHandle(Element request, Map<String, Object> context, Element response) throws ServiceException {
-        ZimbraSoapContext zsc = getZimbraSoapContext(context);
+        ZmailSoapContext zsc = getZmailSoapContext(context);
         String waitSetId = request.getAttribute(MailConstants.A_WAITSET_ID);
         WaitSetMgr.destroy(zsc, zsc.getRequestedAccountId(), waitSetId);
         

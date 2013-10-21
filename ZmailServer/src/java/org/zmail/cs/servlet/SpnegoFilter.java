@@ -13,7 +13,7 @@
  * ***** END LICENSE BLOCK *****
  */
 
-package com.zimbra.cs.servlet;
+package org.zmail.cs.servlet;
 
 import java.io.IOException;
 import java.net.URI;
@@ -33,12 +33,12 @@ import org.eclipse.jetty.security.SpnegoLoginService;
 import org.eclipse.jetty.security.LoginService;
 import org.eclipse.jetty.servlet.ServletContextHandler;
 
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.common.util.ZimbraLog;
-import com.zimbra.cs.account.AccountServiceException.AuthFailedServiceException;
-import com.zimbra.cs.service.authenticator.SSOAuthenticator;
-import com.zimbra.cs.service.authenticator.SpnegoAuthenticator;
-import com.zimbra.cs.service.authenticator.SSOAuthenticator.SSOAuthenticatorServiceException;
+import org.zmail.common.service.ServiceException;
+import org.zmail.common.util.ZmailLog;
+import org.zmail.cs.account.AccountServiceException.AuthFailedServiceException;
+import org.zmail.cs.service.authenticator.SSOAuthenticator;
+import org.zmail.cs.service.authenticator.SpnegoAuthenticator;
+import org.zmail.cs.service.authenticator.SSOAuthenticator.SSOAuthenticatorServiceException;
 
 public class SpnegoFilter implements Filter {
     private static final String PARAM_PASS_THRU_ON_FAILURE_URI = "passThruOnFailureUri";
@@ -83,16 +83,16 @@ public class SpnegoFilter implements Filter {
             }  
             chain.doFilter(req, resp);
         } catch (ServiceException e) {
-            ZimbraServlet.addRemoteIpToLoggingContext(hreq);
-            ZimbraServlet.addUAToLoggingContext(hreq);
+            ZmailServlet.addRemoteIpToLoggingContext(hreq);
+            ZmailServlet.addUAToLoggingContext(hreq);
             if (e instanceof AuthFailedServiceException) {
                 AuthFailedServiceException afe = (AuthFailedServiceException)e;
-                ZimbraLog.account.info("spnego auth failed: " + afe.getMessage() + afe.getReason(", %s"));
+                ZmailLog.account.info("spnego auth failed: " + afe.getMessage() + afe.getReason(", %s"));
             } else {
-                ZimbraLog.account.info("spnego auth failed: " + e.getMessage());
+                ZmailLog.account.info("spnego auth failed: " + e.getMessage());
             }
-            ZimbraLog.account.debug("spnego auth failed", e);
-            ZimbraLog.clearContext();
+            ZmailLog.account.debug("spnego auth failed", e);
+            ZmailLog.clearContext();
             
             if (passThruOnAuthFailure(hreq)) {
                 chain.doFilter(req, resp);
@@ -132,7 +132,7 @@ public class SpnegoFilter implements Filter {
             ServletContextHandler contextHandler = (ServletContextHandler) sContext.getContextHandler();
             LoginService realm = contextHandler.getSecurityHandler().getLoginService();
             if (realm != null && realm instanceof SpnegoLoginService) {
-                ZimbraLog.account.debug("Found spnego user realm: [" + realm.getName() + "]");
+                ZmailLog.account.debug("Found spnego user realm: [" + realm.getName() + "]");
                 return (SpnegoLoginService)realm;
             }
         }

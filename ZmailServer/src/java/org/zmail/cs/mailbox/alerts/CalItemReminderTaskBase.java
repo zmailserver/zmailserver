@@ -14,15 +14,15 @@
  * 
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.mailbox.alerts;
+package org.zmail.cs.mailbox.alerts;
 
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.common.util.ZimbraLog;
-import com.zimbra.cs.mailbox.CalendarItem;
-import com.zimbra.cs.mailbox.Mailbox;
-import com.zimbra.cs.mailbox.MailboxManager;
-import com.zimbra.cs.mailbox.ScheduledTask;
-import com.zimbra.cs.mailbox.calendar.Invite;
+import org.zmail.common.service.ServiceException;
+import org.zmail.common.util.ZmailLog;
+import org.zmail.cs.mailbox.CalendarItem;
+import org.zmail.cs.mailbox.Mailbox;
+import org.zmail.cs.mailbox.MailboxManager;
+import org.zmail.cs.mailbox.ScheduledTask;
+import org.zmail.cs.mailbox.calendar.Invite;
 
 /**
  */
@@ -40,11 +40,11 @@ public abstract class CalItemReminderTaskBase extends ScheduledTask {
      * @throws Exception if unable to compute a result
      */
     public CalendarItem call() throws Exception {
-        if (ZimbraLog.scheduler.isDebugEnabled())
-            ZimbraLog.scheduler.debug("Running task %s", this);
+        if (ZmailLog.scheduler.isDebugEnabled())
+            ZmailLog.scheduler.debug("Running task %s", this);
         Mailbox mbox = MailboxManager.getInstance().getMailboxById(getMailboxId());
         if (mbox == null) {
-            ZimbraLog.scheduler.error("Mailbox with id %s does not exist", getMailboxId());
+            ZmailLog.scheduler.error("Mailbox with id %s does not exist", getMailboxId());
             return null;
         }
         Integer calItemId = new Integer(getProperty(CAL_ITEM_ID_PROP_NAME));
@@ -52,18 +52,18 @@ public abstract class CalItemReminderTaskBase extends ScheduledTask {
         try {
             calItem = mbox.getCalendarItemById(null, calItemId);
         } catch (ServiceException e) {
-            ZimbraLog.scheduler.warn("Calendar item with id %s does not exist", calItemId);
+            ZmailLog.scheduler.warn("Calendar item with id %s does not exist", calItemId);
             return null;
         }
         if (calItem.inTrash()) {
-            ZimbraLog.scheduler.debug("Calendar item with id %s is in Trash", calItemId);
+            ZmailLog.scheduler.debug("Calendar item with id %s is in Trash", calItemId);
             return null;
         }
         Integer invId = new Integer(getProperty(INV_ID_PROP_NAME));
         Integer compNum = new Integer(getProperty(COMP_NUM_PROP_NAME));
         Invite invite = calItem.getInvite(invId, compNum);
         if (invite == null) {
-            ZimbraLog.scheduler.warn("Invite with id %s and comp num %s does not exist", invId, compNum);
+            ZmailLog.scheduler.warn("Invite with id %s and comp num %s does not exist", invId, compNum);
             return null;
         }
         sendReminder(calItem, invite);

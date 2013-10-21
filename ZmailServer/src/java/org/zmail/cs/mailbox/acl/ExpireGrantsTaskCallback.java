@@ -14,12 +14,12 @@
  * 
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.mailbox.acl;
+package org.zmail.cs.mailbox.acl;
 
-import com.zimbra.common.util.ScheduledTaskCallback;
-import com.zimbra.common.util.ZimbraLog;
-import com.zimbra.cs.mailbox.MailItem;
-import com.zimbra.cs.mailbox.ScheduledTaskResult;
+import org.zmail.common.util.ScheduledTaskCallback;
+import org.zmail.common.util.ZmailLog;
+import org.zmail.cs.mailbox.MailItem;
+import org.zmail.cs.mailbox.ScheduledTaskResult;
 
 import java.util.concurrent.Callable;
 
@@ -34,7 +34,7 @@ public class ExpireGrantsTaskCallback implements ScheduledTaskCallback<Scheduled
             return;
         }
         if (task instanceof ExpireGrantsTask) {
-            ZimbraLog.scheduler.debug("afterTaskRun() for %s", task);
+            ZmailLog.scheduler.debug("afterTaskRun() for %s", task);
             ShareExpirationListener.scheduleExpireAccessOpIfReq((MailItem) lastResult);
         }
     }

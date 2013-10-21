@@ -12,19 +12,19 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.session;
+package org.zmail.cs.session;
 
 import java.util.Set;
 
 import com.google.common.base.Objects;
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.common.util.ZimbraLog;
-import com.zimbra.cs.account.AccountServiceException;
-import com.zimbra.cs.mailbox.MailItem;
-import com.zimbra.cs.mailbox.MailServiceException;
-import com.zimbra.cs.mailbox.Mailbox;
-import com.zimbra.cs.mailbox.MailboxManager;
-import com.zimbra.cs.service.util.SyncToken;
+import org.zmail.common.service.ServiceException;
+import org.zmail.common.util.ZmailLog;
+import org.zmail.cs.account.AccountServiceException;
+import org.zmail.cs.mailbox.MailItem;
+import org.zmail.cs.mailbox.MailServiceException;
+import org.zmail.cs.mailbox.Mailbox;
+import org.zmail.cs.mailbox.MailboxManager;
+import org.zmail.cs.service.util.SyncToken;
 
 /**
  * Simple struct used to define the parameters of an account during an add or update
@@ -44,7 +44,7 @@ public class WaitSetAccount {
                 if (mbox != null)
                     return (WaitSetSession)mbox.getListener(sessionId);
             } catch (ServiceException e) {
-                ZimbraLog.session.info("Caught exception fetching mailbox in WaitSetAccount.getSession()", e);
+                ZmailLog.session.info("Caught exception fetching mailbox in WaitSetAccount.getSession()", e);
             }
         }
         return null;
@@ -77,14 +77,14 @@ public class WaitSetAccount {
             if (e.getCode().equals(MailServiceException.MAINTENANCE)) {
                 //wsa.ref = null; // will get re-set when mailboxAvailable() is called
                 //wsa.setRef(null);
-                ZimbraLog.session.debug("Maintenance mode trying to initialize WaitSetSession for accountId "+accountId);
+                ZmailLog.session.debug("Maintenance mode trying to initialize WaitSetSession for accountId "+accountId);
             } else {
-                ZimbraLog.session.warn("Error initializing WaitSetSession for accountId "+accountId+" -- MailServiceException", e);
+                ZmailLog.session.warn("Error initializing WaitSetSession for accountId "+accountId+" -- MailServiceException", e);
                 return new WaitSetError(accountId, WaitSetError.Type.ERROR_LOADING_MAILBOX);
             }
         } catch (ServiceException e) {
             sessionId = null;
-            ZimbraLog.session.warn("Error initializing WaitSetSession for accountId "+accountId+" -- ServiceException", e);
+            ZmailLog.session.warn("Error initializing WaitSetSession for accountId "+accountId+" -- ServiceException", e);
             if (e.getCode() == AccountServiceException.NO_SUCH_ACCOUNT) {
                 return new WaitSetError(accountId, WaitSetError.Type.NO_SUCH_ACCOUNT);
             } else if (e.getCode() == ServiceException.WRONG_HOST) {

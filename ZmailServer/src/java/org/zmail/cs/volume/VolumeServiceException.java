@@ -13,9 +13,9 @@
  * ***** END LICENSE BLOCK *****
  */
 
-package com.zimbra.cs.volume;
+package org.zmail.cs.volume;
 
-import com.zimbra.common.service.ServiceException;
+import org.zmail.common.service.ServiceException;
 
 public final class VolumeServiceException extends ServiceException {
     private static final long serialVersionUID = -3596326510079311719L;

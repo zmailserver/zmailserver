@@ -9,22 +9,22 @@
 
 <rights>
 
-<include file="zimbra-rights.xml"/>
+<include file="zmail-rights.xml"/>
 
 <!-- 
 ========================================================
       domain admin modifiable attrs, the template 
       if filled by:
       
-      ZimbraServer> ant generate-domainadmin-rights-xml
+      ZmailServer> ant generate-domainadmin-rights-xml
 ========================================================
 -->
 
 <right name="setDomainAdminAccountAndCalendarResourceAttrs" type="setAttrs" targetType="account,calresource">
   <desc>account and calendar resource attrs modifiable by domain admins for domain based access manager</desc>
   <attrs>
-    <a n="zimbraCOSId"/>
-    <a n="zimbraIsDelegatedAdminAccount"/>
+    <a n="zmailCOSId"/>
+    <a n="zmailIsDelegatedAdminAccount"/>
 ${ACCOUNT_AND_CALENDAR_RESOURCE_ATTRS}
   </attrs>
 </right>
@@ -47,7 +47,7 @@ ${DISTRIBUTION_LIST_ATTRS}
 <right name="setDomainAdminDomainAttrs" type="setAttrs" targetType="domain">
   <desc>domain attrs modifiable by domain admins for domain based access manager</desc>
   <attrs>
-    <a n="zimbraDomainDefaultCOSId"/> 
+    <a n="zmailDomainDefaultCOSId"/> 
 ${DOMAIN_ATTRS}
   </attrs>
 </right>

@@ -12,13 +12,13 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.mailclient.imap;
+package org.zmail.cs.mailclient.imap;
 
 import junit.framework.Assert;
 
 import org.junit.Test;
 
-import com.zimbra.cs.mailclient.ParseException;
+import org.zmail.cs.mailclient.ParseException;
 
 public class MailboxNameTest {
 

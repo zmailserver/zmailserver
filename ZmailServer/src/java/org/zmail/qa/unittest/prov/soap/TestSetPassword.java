@@ -12,7 +12,7 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.qa.unittest.prov.soap;
+package org.zmail.qa.unittest.prov.soap;
 
 import java.util.Map;
 
@@ -22,21 +22,21 @@ import org.junit.Test;
 import static org.junit.Assert.*;
 
 import com.google.common.collect.Maps;
-import com.zimbra.common.account.Key.GranteeBy;
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.common.soap.SoapTransport;
-import com.zimbra.cs.account.Account;
-import com.zimbra.cs.account.AccountServiceException;
-import com.zimbra.cs.account.CalendarResource;
-import com.zimbra.cs.account.Domain;
-import com.zimbra.cs.account.Provisioning;
-import com.zimbra.cs.account.accesscontrol.GranteeType;
-import com.zimbra.cs.account.accesscontrol.Right;
-import com.zimbra.cs.account.accesscontrol.TargetType;
-import com.zimbra.cs.account.accesscontrol.Rights.User;
-import com.zimbra.soap.admin.message.SetPasswordRequest;
-import com.zimbra.soap.admin.message.SetPasswordResponse;
-import com.zimbra.soap.type.TargetBy;
+import org.zmail.common.account.Key.GranteeBy;
+import org.zmail.common.service.ServiceException;
+import org.zmail.common.soap.SoapTransport;
+import org.zmail.cs.account.Account;
+import org.zmail.cs.account.AccountServiceException;
+import org.zmail.cs.account.CalendarResource;
+import org.zmail.cs.account.Domain;
+import org.zmail.cs.account.Provisioning;
+import org.zmail.cs.account.accesscontrol.GranteeType;
+import org.zmail.cs.account.accesscontrol.Right;
+import org.zmail.cs.account.accesscontrol.TargetType;
+import org.zmail.cs.account.accesscontrol.Rights.User;
+import org.zmail.soap.admin.message.SetPasswordRequest;
+import org.zmail.soap.admin.message.SetPasswordResponse;
+import org.zmail.soap.type.TargetBy;
 
 public class TestSetPassword extends SoapTest {
     private static SoapProvTestUtil provUtil;
@@ -61,7 +61,7 @@ public class TestSetPassword extends SoapTest {
     
     private static void setPasswordPolicy(Account acct) throws Exception {
         Map<String, Object> attrs = Maps.newHashMap();
-        attrs.put(Provisioning.A_zimbraPasswordMinLength, "" + MIN_PASSSWORD_LEN);
+        attrs.put(Provisioning.A_zmailPasswordMinLength, "" + MIN_PASSSWORD_LEN);
         prov.modifyAttrs(acct, attrs);
     }
     

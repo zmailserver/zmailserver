@@ -12,7 +12,7 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.index.query;
+package org.zmail.cs.index.query;
 
 import java.text.ParseException;
 import java.util.Calendar;
@@ -25,8 +25,8 @@ import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
-import com.zimbra.cs.account.MockProvisioning;
-import com.zimbra.cs.account.Provisioning;
+import org.zmail.cs.account.MockProvisioning;
+import org.zmail.cs.account.Provisioning;
 
 /**
  * Unit test for {@link DateQuery}.
@@ -38,7 +38,7 @@ public final class DateQueryTest {
     @BeforeClass
     public static void init() throws Exception {
         MockProvisioning prov = new MockProvisioning();
-        prov.createAccount("zero@zimbra.com", "secret", new HashMap<String, Object>());
+        prov.createAccount("zero@zmail.com", "secret", new HashMap<String, Object>());
         Provisioning.setInstance(prov);
     }
 

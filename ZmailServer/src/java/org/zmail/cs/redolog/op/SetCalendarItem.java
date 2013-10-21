@@ -12,7 +12,7 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.redolog.op;
+package org.zmail.cs.redolog.op;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -23,24 +23,24 @@ import javax.mail.MessagingException;
 import javax.mail.internet.MimeMessage;
 import javax.mail.util.SharedByteArrayInputStream;
 
-import com.zimbra.common.calendar.ICalTimeZone;
-import com.zimbra.common.calendar.TimeZoneMap;
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.cs.mailbox.CalendarItem.ReplyInfo;
-import com.zimbra.cs.mailbox.Mailbox;
-import com.zimbra.cs.mailbox.MailboxManager;
-import com.zimbra.cs.mailbox.MailboxOperation;
-import com.zimbra.cs.mailbox.Metadata;
-import com.zimbra.cs.mailbox.OperationContext;
-import com.zimbra.cs.mailbox.calendar.IcalXmlStrMap;
-import com.zimbra.cs.mailbox.calendar.Invite;
-import com.zimbra.cs.mailbox.calendar.Util;
-import com.zimbra.cs.mailbox.util.TagUtil;
-import com.zimbra.cs.mime.Mime;
-import com.zimbra.cs.mime.ParsedMessage;
-import com.zimbra.cs.redolog.RedoLogInput;
-import com.zimbra.cs.redolog.RedoLogOutput;
-import com.zimbra.cs.util.JMSession;
+import org.zmail.common.calendar.ICalTimeZone;
+import org.zmail.common.calendar.TimeZoneMap;
+import org.zmail.common.service.ServiceException;
+import org.zmail.cs.mailbox.CalendarItem.ReplyInfo;
+import org.zmail.cs.mailbox.Mailbox;
+import org.zmail.cs.mailbox.MailboxManager;
+import org.zmail.cs.mailbox.MailboxOperation;
+import org.zmail.cs.mailbox.Metadata;
+import org.zmail.cs.mailbox.OperationContext;
+import org.zmail.cs.mailbox.calendar.IcalXmlStrMap;
+import org.zmail.cs.mailbox.calendar.Invite;
+import org.zmail.cs.mailbox.calendar.Util;
+import org.zmail.cs.mailbox.util.TagUtil;
+import org.zmail.cs.mime.Mime;
+import org.zmail.cs.mime.ParsedMessage;
+import org.zmail.cs.redolog.RedoLogInput;
+import org.zmail.cs.redolog.RedoLogOutput;
+import org.zmail.cs.util.JMSession;
 
 /**
  * @since 9/26/2005

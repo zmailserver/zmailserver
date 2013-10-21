@@ -47,7 +47,7 @@ Note: Steps and examples used below are mainly for QA and dev environment.
 ----------------
 
 (A) Create a private key
-$ /opt/zimbra/openssl/bin/openssl genrsa -out ca.key 2048
+$ /opt/zmail/openssl/bin/openssl genrsa -out ca.key 2048
 Generating RSA private key, 2048 bit long modulus
 ....+++
 ...............................+++
@@ -55,7 +55,7 @@ e is 65537 (0x10001)
 
 
 (B) Create a certificate request
-$ /opt/zimbra/openssl/bin/openssl req -new -key ca.key -out ca.csr
+$ /opt/zmail/openssl/bin/openssl req -new -key ca.key -out ca.csr
 You are about to be asked to enter information that will be incorporated
 into your certificate request.
 What you are about to enter is what is called a Distinguished Name or a DN.
@@ -67,7 +67,7 @@ Country Name (2 letter code) [AU]:US
 State or Province Name (full name) [Some-State]:California
 Locality Name (eg, city) []:Palo Alto
 Organization Name (eg, company) [Internet Widgits Pty Ltd]:VMWare
-Organizational Unit Name (eg, section) []:Zimbra
+Organizational Unit Name (eg, section) []:Zmail
 Common Name (eg, YOUR name) []:MyCA
 Email Address []:
 
@@ -78,14 +78,14 @@ An optional company name []:
 
 
 (C) Create and sign(self-sign) a certificate from the certificate request
-$ /opt/zimbra/openssl/bin/openssl x509 -extfile /opt/zimbra/openssl/ssl/openssl.cnf -extensions v3_ca -req -days 365 -in ca.csr -out ca.crt -signkey ca.key
+$ /opt/zmail/openssl/bin/openssl x509 -extfile /opt/zmail/openssl/ssl/openssl.cnf -extensions v3_ca -req -days 365 -in ca.csr -out ca.crt -signkey ca.key
 Signature ok
-subject=/C=US/ST=California/L=Palo Alto/O=VMWare/OU=Zimbra/CN=MyCA
+subject=/C=US/ST=California/L=Palo Alto/O=VMWare/OU=Zmail/CN=MyCA
 Getting Private key
 
 
 (D) Verify that X509v3 extensions are present in the CA cert.
-/opt/zimbra/openssl/bin/openssl x509 -in ca.crt -noout -text
+/opt/zmail/openssl/bin/openssl x509 -in ca.crt -noout -text
 
 Version: 3 (0x2)
 ...
@@ -104,7 +104,7 @@ Version: 3 (0x2)
 ----------------
 
 (A) Create a private key
-$ /opt/zimbra/openssl/bin/openssl genrsa -out user1.key 2048
+$ /opt/zmail/openssl/bin/openssl genrsa -out user1.key 2048
 Generating RSA private key, 2048 bit long modulus
 ........................................................................................................+++
 ....+++
@@ -112,9 +112,9 @@ e is 65537 (0x10001)
 
 
 (B) Create a certificate request
-Note: the most important information is the Email Address.  It must be the email address of the Zimbra user.
+Note: the most important information is the Email Address.  It must be the email address of the Zmail user.
 
-$ /opt/zimbra/openssl/bin/openssl req -new -key user1.key -out user1.csr
+$ /opt/zmail/openssl/bin/openssl req -new -key user1.key -out user1.csr
 You are about to be asked to enter information that will be incorporated
 into your certificate request.
 What you are about to enter is what is called a Distinguished Name or a DN.
@@ -137,10 +137,10 @@ An optional company name []:
 
 
 (C) Sign the user certificate request using the CA created in 1 and create the user certificate
-$ /opt/zimbra/openssl/bin/openssl ca -in user1.csr -cert ca.crt -keyfile ca.key -out user1.crt -policy policy_anything
+$ /opt/zmail/openssl/bin/openssl ca -in user1.csr -cert ca.crt -keyfile ca.key -out user1.crt -policy policy_anything
 
 If you see:
-Using configuration from /opt/zimbra/openssl-1.0.0d/ssl/openssl.cnf
+Using configuration from /opt/zmail/openssl-1.0.0d/ssl/openssl.cnf
 I am unable to access the ./demoCA/newcerts directory
 ./demoCA/newcerts: No such file or directory
 
@@ -156,8 +156,8 @@ $ touch index.txt (create an empty index.txt file)
 $ cd ..  (so we are back in our temporary directory)
 
 Now issue the command to sign the user certificate again.
-$ /opt/zimbra/openssl/bin/openssl ca -in user1.csr -cert ca.crt -keyfile ca.key -out user1.crt -policy policy_anything
-Using configuration from /opt/zimbra/openssl-1.0.0d/ssl/openssl.cnf
+$ /opt/zmail/openssl/bin/openssl ca -in user1.csr -cert ca.crt -keyfile ca.key -out user1.crt -policy policy_anything
+Using configuration from /opt/zmail/openssl-1.0.0d/ssl/openssl.cnf
 Check that the request matches the signature
 Signature ok
 Certificate Details:
@@ -181,7 +181,7 @@ Certificate Details:
             X509v3 Subject Key Identifier: 
                 57:A8:C2:64:51:7C:C1:3C:5E:01:31:CA:6E:85:A1:11:C2:2D:48:5B
             X509v3 Authority Key Identifier: 
-                DirName:/C=US/ST=California/L=Palo Alto/O=VMWare/OU=Zimbra/CN=MyCA
+                DirName:/C=US/ST=California/L=Palo Alto/O=VMWare/OU=Zmail/CN=MyCA
                 serial:C2:8A:A1:C3:86:E6:A9:58
 
 Certificate is to be certified until Mar 14 05:48:15 2012 GMT (365 days)
@@ -204,7 +204,7 @@ Consequently, we’ll need to export the user certificate to file formats that can
 Firefox and Internet Explorer 6.0 support the PKCS#12 certificate format. 
 Use the following command to convert the user certificate to this format.
 
-$ /opt/zimbra/openssl/bin/openssl pkcs12 -export -clcerts -in user1.crt -inkey user1.key -out user1.p12
+$ /opt/zmail/openssl/bin/openssl pkcs12 -export -clcerts -in user1.crt -inkey user1.key -out user1.p12
 Enter Export Password:
 Verifying - Enter Export Password:
  
@@ -227,7 +227,7 @@ Copy the user1.p12 file to a location where you can access it from your web brow
 
 This can be done by either of the following two ways.
 
-(A) /opt/zimbra/bin/zmcertmgr addcacert <certfile>
+(A) /opt/zmail/bin/zmcertmgr addcacert <certfile>
     addcacert appends an otherwise untrusted ssl certificate to the cacerts file. 
     This is the preferred way.
     
@@ -258,18 +258,18 @@ $ keytool -list -keystore `zmlocalconfig -x -m nokey mailboxd_truststore` -v -al
 For dev env on mac, to test providing CA certs from the trust manager, uncomment:
   <Set name="Truststore">/System/Library/Frameworks/JavaVM.framework/Versions/CurrentJDK/Home/lib/security/cacerts</Set>
   <Set name="TrustPassword">changeit</Set>
-on the ssl-clientcert SslSelectChannelConnector in /opt/zimbra/jetty/etc/jetty.xml.
+on the ssl-clientcert SslSelectChannelConnector in /opt/zmail/jetty/etc/jetty.xml.
 
 [========== End For dev env only ==========]
 
 
 (B) In dev environment, if zmcertmgr is not available, you can use keytool to 
-    import the CA cert to /opt/zimbra/jetty/etc/keystore.
+    import the CA cert to /opt/zmail/jetty/etc/keystore.
 
-$ keytool -import -keystore /opt/zimbra/jetty/etc/keystore -alias myca -file ca.crt
+$ keytool -import -keystore /opt/zmail/jetty/etc/keystore -alias myca -file ca.crt
 Enter keystore password:  
-Owner: CN=MyCA, OU=Zimbra, O=VMWare, L=Palo Alto, ST=California, C=US
-Issuer: CN=MyCA, OU=Zimbra, O=VMWare, L=Palo Alto, ST=California, C=US
+Owner: CN=MyCA, OU=Zmail, O=VMWare, L=Palo Alto, ST=California, C=US
+Issuer: CN=MyCA, OU=Zmail, O=VMWare, L=Palo Alto, ST=California, C=US
 Serial number: c28aa1c386e6a958
 Valid from: Mon Mar 14 22:17:43 PDT 2011 until: Tue Mar 13 22:17:43 PDT 2012
 Certificate fingerprints:
@@ -283,7 +283,7 @@ Certificate was added to keystore
 
 
 To verify that the CA is added:
-$ keytool -list -keystore /opt/zimbra/jetty/etc/keystore -v -alias myca
+$ keytool -list -keystore /opt/zmail/jetty/etc/keystore -v -alias myca
 
 Other related info:
 - Key store:
@@ -294,19 +294,19 @@ Other related info:
         
 
 ----------------
-5. Configure Zimbra server to request client certificate
+5. Configure Zmail server to request client certificate
 ----------------
-(A) Make sure zimbraMailMode on server is *not* http
-$ zmprov gs {server} zimbraMailMode
+(A) Make sure zmailMailMode on server is *not* http
+$ zmprov gs {server} zmailMailMode
 
-It is OK as long as zimbraMailMode is not "http".
+It is OK as long as zmailMailMode is not "http".
 
 
 (B) Configure SSL port for client certificate 
 
 Client certificate authentication happens during SSL handshake and is 
-a configuration on the SSL connector(port).  The regular SSL(zimbraMailSSLPort) 
-and admin(zimbraAdminPort) port should *not* be configured to request 
+a configuration on the SSL connector(port).  The regular SSL(zmailMailSSLPort) 
+and admin(zmailAdminPort) port should *not* be configured to request 
 client certificate, because SSL mutual authentication will interfere with 
 other authentication options on the same port.
 
@@ -314,44 +314,44 @@ SSL mutual authentication must be configured on its own port (e.g. 9443).
 
 To configure the SSL mutual authentication port:
 
-$ zmprov ms {server} zimbraMailSSLClientCertPort {port}
+$ zmprov ms {server} zmailMailSSLClientCertPort {port}
 
 
 (C) Two modes are supported for client certificate: 
 WantClientAuth and NeedClientAuth.
     
-Do a "zmprov desc -a zimbraMailSSLClientCertMode" for description 
+Do a "zmprov desc -a zmailMailSSLClientCertMode" for description 
 of this attribute and difference between the two modes.
 
 To configure the client certification mode:
     
-$ zmprov ms {server} zimbraMailSSLClientCertMode WantClientAuth
+$ zmprov ms {server} zmailMailSSLClientCertMode WantClientAuth
 or
-$ zmprov ms {server} zimbraMailSSLClientCertMode NeedClientAuth
+$ zmprov ms {server} zmailMailSSLClientCertMode NeedClientAuth
    
    
 (D) Configure Principal map on domain
 Domain is resolved by virtual host, set virtual host for a domain:
-$ zmprov md {domain} +zimbraVirtualHostname {server}
+$ zmprov md {domain} +zmailVirtualHostname {server}
 
 Configure principal mapping on the domain:
-$ zmprov md {domain} zimbraMailSSLClientCertPrincipalMap {mappings}
+$ zmprov md {domain} zmailMailSSLClientCertPrincipalMap {mappings}
 
-    Map from a certificate field to a Zimbra account key that can uniquely identify a Zimbra account for client certificate authentication.
-    Value is a comma-separated  list of mapping rules, each mapping maps a certificate field to a Zimbra account key.
+    Map from a certificate field to a Zmail account key that can uniquely identify a Zmail account for client certificate authentication.
+    Value is a comma-separated  list of mapping rules, each mapping maps a certificate field to a Zmail account key.
     Each is attempted in sequence untill a unique account can be resolved.  
     
     e.g. a value can be: 
-         SUBJECTALTNAME_OTHERNAME_UPN=zimbraForeignPrincipal,(uid=%{SUBJECT_CN})
+         SUBJECTALTNAME_OTHERNAME_UPN=zmailForeignPrincipal,(uid=%{SUBJECT_CN})
     
     value:
         comma-separated mapping-rule
     
     mapping-rule:
-        {cert-field-to-zimbra-key-map} | {LDAP-filter}
+        {cert-field-to-zmail-key-map} | {LDAP-filter}
         
-    cert-field-to-zimbra-key-map:     
-        {certificate-field}={Zimbra-account-key}
+    cert-field-to-zmail-key-map:     
+        {certificate-field}={Zmail-account-key}
     
     certificate-field:
         SUBJECT_{an RDN attr, e.g. CN}: a RND in DN of Subject
@@ -359,49 +359,49 @@ $ zmprov md {domain} zimbraMailSSLClientCertPrincipalMap {mappings}
         SUBJECTALTNAME_OTHERNAME_UPN: UPN(aka Principal Name) in otherName in subjectAltName extension 
         SUBJECTALTNAME_RFC822NAME:    rfc822Name in subjectAltName extension 
     
-    Zimbra-account-key:
+    Zmail-account-key:
         name:                   primary name or any of the aliases of an account
-        zimbraId:               zimbraId of an account
-        zimbraForeignPrincipal: zimbraForeignPrincipal of an account.  
-                                The matching value on the zimbraForeignPrincipal must be prefixed with "cert {supported-certificate-filed}:"
+        zmailId:               zmailId of an account
+        zmailForeignPrincipal: zmailForeignPrincipal of an account.  
+                                The matching value on the zmailForeignPrincipal must be prefixed with "cert {supported-certificate-filed}:"
                                 e.g. cert SUBJECTALTNAME_OTHERNAME_UPN:123456@mydomain
                                 
     LDAP-filter: An LDAP filter template with placeholders to be substituted by certificate field values.  
-                 (objectClass=zimbraAccount) is internally ANDed with the supplied filter. 
+                 (objectClass=zmailAccount) is internally ANDed with the supplied filter. 
                  e.g. (|(uid=%{SUBJECT_CN})(mail=%{SUBJECTALTNAME_RFC822NAME}))
                  
     Note: it is recommended not to use LDAP-filter rule, as it will trigger an LDAP search for each cert auth request.
-          LDAP-filter is disabled by default.  To enable it globally, set zimbraMailSSLClientCertPrincipalMapLdapFilterEnabled 
+          LDAP-filter is disabled by default.  To enable it globally, set zmailMailSSLClientCertPrincipalMapLdapFilterEnabled 
           on global config to TRUE.  If LDAP-filter is not enabled, all client certificate authentication will fail on domains 
           configured with LDAP-filter.
                             
     Examples of valid mapping:
-        SUBJECT_CN=zimbraForeignPrincipal
-        SUBJECT_CN=zimbraId
+        SUBJECT_CN=zmailForeignPrincipal
+        SUBJECT_CN=zmailId
         SUBJECT_CN=name
-        SUBJECT_DN=zimbraForeignPrincipal
+        SUBJECT_DN=zmailForeignPrincipal
         SUBJECT_EMAILADDRESS=name
         SUBJECTALTNAME_OTHERNAME_UPN=name
-        SUBJECTALTNAME_OTHERNAME_UPN=zimbraForeignPrincipal
+        SUBJECTALTNAME_OTHERNAME_UPN=zmailForeignPrincipal
         
     Examples of valid value for the attribute:
-        - map SUBJECTALTNAME_OTHERNAME_UPN to zimbraForeignPrincipal
-        SUBJECTALTNAME_OTHERNAME_UPN=zimbraForeignPrincipal 
+        - map SUBJECTALTNAME_OTHERNAME_UPN to zmailForeignPrincipal
+        SUBJECTALTNAME_OTHERNAME_UPN=zmailForeignPrincipal 
         
         - map SUBJECT_EMAILADDRESS to a primary or alias email address of an account, 
-          if no match, map SUBJECTALTNAME_OTHERNAME_UPN to zimbraForeignPrincipal
-        SUBJECT_EMAILADDRESS=name,SUBJECTALTNAME_OTHERNAME_UPN=zimbraForeignPrincipal   
+          if no match, map SUBJECTALTNAME_OTHERNAME_UPN to zmailForeignPrincipal
+        SUBJECT_EMAILADDRESS=name,SUBJECTALTNAME_OTHERNAME_UPN=zmailForeignPrincipal   
         
-        In the above examples, zimbrasForeignPrincipal for the account must be set to:
-        zmprov ma user1@test.com zimbrasForeignPrincipal 'cert SUBJECTALTNAME_OTHERNAME_UPN:123456@mydomain'
+        In the above examples, zmailsForeignPrincipal for the account must be set to:
+        zmprov ma user1@test.org zmailsForeignPrincipal 'cert SUBJECTALTNAME_OTHERNAME_UPN:123456@mydomain'
         
-        - map SUBJECT_CN to zimbraId,
+        - map SUBJECT_CN to zmailId,
           if no match, do LDAP search to find the entry that has mail equals to SUBJECT_EMAILADDRESS in the certificate.
-        SUBJECT_CN=zimbraId,(mail=%SUBJECT_CN)
+        SUBJECT_CN=zmailId,(mail=%SUBJECT_CN)
       
       
-To enable LDAP-filter in zimbraMailSSLClientCertPrincipalMap, do          
-$ zmprov mcf zimbraMailSSLClientCertPrincipalMapLdapFilterEnabled TRUE
+To enable LDAP-filter in zmailMailSSLClientCertPrincipalMap, do          
+$ zmprov mcf zmailMailSSLClientCertPrincipalMapLdapFilterEnabled TRUE
 
 ----------------
 6. Restart mailbox server
@@ -412,7 +412,7 @@ zmmailboxdctl restart
 ==============
 III. Testing
 ==============
-SSL mutual authentication is supported for Zimbra WEB Client(ZWC) and admin console.
+SSL mutual authentication is supported for Zmail WEB Client(ZWC) and admin console.
 You can use either one of the following two ways for testing.
 
 (1) Browse directly to the certauth servlet
@@ -422,10 +422,10 @@ You can use either one of the following two ways for testing.
 Request URL
 -----------
 ZWC:
-    https://{server}:{zimbraMailSSLClientCertPort}/certauth
+    https://{server}:{zmailMailSSLClientCertPort}/certauth
 
 Admin console:
-    https://{server}:{zimbraMailSSLClientCertPort}/certauth/admin
+    https://{server}:{zmailMailSSLClientCertPort}/certauth/admin
     
     
 --------------
@@ -434,32 +434,32 @@ Login Behavior
 There are 4 possible scenarios:
 
 1. If a good client certificate is presented, user will be redirected to the 
-   requested webapp with a Zimbra auth token.  The webapp will adapt the Zimbra 
+   requested webapp with a Zmail auth token.  The webapp will adapt the Zmail 
    auth token and let user in.
   
 2. If client failed to present a client certificate (e.g. there is no matching 
    client certificate in the browser, or user choose to not sent a client certificate)
-       - if zimbraMailSSLClientCertMode is WantClientAuth:
-             User will be redirected to the requested webapp, without a Zimbra auth token.
+       - if zmailMailSSLClientCertMode is WantClientAuth:
+             User will be redirected to the requested webapp, without a Zmail auth token.
              The webapp will show the regular username/password screen so user can login with 
-             his username/password if he has a Zimbra password.
+             his username/password if he has a Zmail password.
         
-       - if zimbraMailSSLClientCertMode is NeedClientAuth:
+       - if zmailMailSSLClientCertMode is NeedClientAuth:
             User will get a SSL handshake error (connection reset by peer).
               
 3. If client sends a bad client certificate and server cannot authenticate the client 
    certificate by the CA chain, user will get a SSL handshake error (connection reset by peer) 
-   regardless of the zimbraMailSSLClientCertMode.  
+   regardless of the zmailMailSSLClientCertMode.  
   
 4. If the client certificate can be authenticated by the CA chain, but the user 
-   cannot be authorized by Zimbra (e.g. no such user or zimbraAccountStatus 
+   cannot be authorized by Zmail (e.g. no such user or zmailAccountStatus 
    of the user is not active):
-       - if zimbraMailSSLClientCertMode is WantClientAuth:
-             User will be redirected to the requested webapp, without a Zimbra auth token.
+       - if zmailMailSSLClientCertMode is WantClientAuth:
+             User will be redirected to the requested webapp, without a Zmail auth token.
              The webapp will show the regular username/password screen so user can login with 
-             his username/password if he has a Zimbra password.
+             his username/password if he has a Zmail password.
       
-       - if zimbraMailSSLClientCertMode is NeedClientAuth:   
+       - if zmailMailSSLClientCertMode is NeedClientAuth:   
              User will get a http 403 FORBIDDEN error.
   
 
@@ -468,7 +468,7 @@ Logout Behavior
 ---------------
 When the "logout" button is clicked, user will be redirect to the regular entry 
 page of the webapp, which is usually the username/password screen.  User can login as 
-another user using Zimbra username/password.  
+another user using Zmail username/password.  
 
 
 (2) Configure virtual host and login/logout redirect URL on domain, and browse to the 
@@ -478,41 +478,41 @@ another user using Zimbra username/password.
 Setup and Request URL
 ---------------------
 ZWC:
-    zmprov md {domain} +zimbraVirtualHostname {server}
-    zmprov md {domain} zimbraWebClientLoginURL 'https://{server}:{zimbraMailSSLClientCertPort}/certauth'
-    zmprov md {domain} zimbraWebClientLogoutURL '../?sso=1'
+    zmprov md {domain} +zmailVirtualHostname {server}
+    zmprov md {domain} zmailWebClientLoginURL 'https://{server}:{zmailMailSSLClientCertPort}/certauth'
+    zmprov md {domain} zmailWebClientLogoutURL '../?sso=1'
 
     browse to: 
-    http://{server}:{zimbraMailPort}
+    http://{server}:{zmailMailPort}
     or
-    https://{server}:{zimbraMailSSLPort}
+    https://{server}:{zmailMailSSLPort}
 
 
 Admin console:
-    zmprov md {domain} +zimbraVirtualHostname {server}
-    zmprov md {domain} zimbraAdminConsoleLoginURL 'https://{server}:{zimbraMailSSLClientCertPort}/certauth/admin'
-    zmprov md {domain} zimbraAdminConsoleLogoutURL '../?sso=1'
+    zmprov md {domain} +zmailVirtualHostname {server}
+    zmprov md {domain} zmailAdminConsoleLoginURL 'https://{server}:{zmailMailSSLClientCertPort}/certauth/admin'
+    zmprov md {domain} zmailAdminConsoleLogoutURL '../?sso=1'
     
     browse to: 
-    https://{server}:{zimbraAdminPort}
+    https://{server}:{zmailAdminPort}
     
     Note: This is not yet fully supported for admin console.
     
     Known bug (bug 58163): 
       1. Admin console does not support the "?ignoreLoginURL=1" query.  
-         If zimbraMailSSLClientCertMode is WantClientAuth and user choose not 
+         If zmailMailSSLClientCertMode is WantClientAuth and user choose not 
          to send a client certificate (or there isn't one), we redirect to 
-         the admin console entry page.  But if zimbraAdminConsoleLoginURL is 
+         the admin console entry page.  But if zmailAdminConsoleLoginURL is 
          set to the certauth URL, it will get into a redirect loop.
          
-      2. Admin console does not support "?sso=1" for zimbraAdminConsoleLogoutURL.
+      2. Admin console does not support "?sso=1" for zmailAdminConsoleLogoutURL.
          Logout will get into a redirect loop.
 
 
-Notes on zimbraVirtualHostname:
-  You can add virtual host names on domain that are different from the actual Zimbra server name and 
+Notes on zmailVirtualHostname:
+  You can add virtual host names on domain that are different from the actual Zmail server name and 
   browse to the virtual hostname.
-  e.g. zmprov md {domain} +zimbraVirtualHostname virtual1.company.com +zimbraVirtualHostname virtual2.company.com
+  e.g. zmprov md {domain} +zmailVirtualHostname virtual1.company.com +zmailVirtualHostname virtual2.company.com
 
 
 --------------
@@ -532,7 +532,7 @@ is not accepted by the server for any reason.
 Logout Behavior
 ---------------
 When the "logout" button is clicked, user will be redirect to the page set on the 
-zimbraXXXLogoutURL.  The way we set it (i.e.  /?sso=1), the webapp will display a 
+zmailXXXLogoutURL.  The way we set it (i.e.  /?sso=1), the webapp will display a 
 page with a "Launch" button.  When "Launch" is clicked, user will be let into the 
 webapp again using the client certificate.
 
@@ -569,7 +569,7 @@ SSL mutual authentication flow
 - Now the handshake and the "authentication" of user is complete.  
   ZCS will do the "authorization" by looking up the user in ZCS's directory.
   Currently ZCS uses the EMAILADDRESS field of the subject in the client certificate 
-  as the only lookup key.  If the value of EMAILADDRESS matches a Zimbra user's 
+  as the only lookup key.  If the value of EMAILADDRESS matches a Zmail user's 
   primary email address or one of the aliases and the account is in a state good for 
   logging in, the user will be let in.
 
@@ -632,12 +632,12 @@ ca.crt before saving).
 
 for dev environment:
 
-keytool -import -keystore /opt/zimbra/jetty/etc/keystore -alias myca -file ca.crt
+keytool -import -keystore /opt/zmail/jetty/etc/keystore -alias myca -file ca.crt
 
 see section (Import CA certificate) for reference on how to do it in production environment
 
 - create CACert account for testing, go to http://cacert.org and click on 'Join', fill up 
-form and provide your zimbra email address, in my case it's eugene@zimbra.com. 
+form and provide your zmail email address, in my case it's eugene@zmail.com. 
 
 - use credentials created in previous step to login to your account. Go to http://cacert.org
 and click on 'Password login'
@@ -683,12 +683,12 @@ If certificate is revoked, the output will contain:
 
 - make sure that server doesn't run in 'http' mode. use 
 
-zmprov ms <your servername> zimbraMailMode both (or https) to change mailmode
+zmprov ms <your servername> zmailMailMode both (or https) to change mailmode
 
 - modify log4j.properties to add tracing info pertinent to OCSP/Two way authentication. 
 Add the following line to your existing log4j.properties:
 
-log4j.logger.zimbra.account=DEBUG
+log4j.logger.zmail.account=DEBUG
 
 Please note that this step is arbitrary and needed only if you need to see trace 
 of what is going on during OCSP validation
@@ -696,7 +696,7 @@ of what is going on during OCSP validation
 - restart server for above changes to take effect
 
 - in ZCS (or Octopus) admin console provision new account with email address which was supplied 
-to create account on CACert. In my case it is 'eugene@zimbra.com'. This account is necessary for two 
+to create account on CACert. In my case it is 'eugene@zmail.com'. This account is necessary for two 
 way authentication mechanism to be able to map certificate to ZCS (or Octopus) account.
 
 ============
@@ -712,7 +712,7 @@ verify certificate's content and hit <ok>.
 CACert's OCSP responder
 
 - Since certificate is valid, server automatically authenticates into the account associated
- with client certificate (in my case it is eugene@zimbra.com) without necessity to provide 
+ with client certificate (in my case it is eugene@zmail.com) without necessity to provide 
 username/password credentials
 
 - Now let's revoke client certificate, go to http://cacert.org -> login to previously created

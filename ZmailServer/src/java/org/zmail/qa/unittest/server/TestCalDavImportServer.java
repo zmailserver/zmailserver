@@ -12,7 +12,7 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.qa.unittest.server;
+package org.zmail.qa.unittest.server;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -20,18 +20,18 @@ import java.util.Map;
 import junit.framework.Assert;
 import junit.framework.TestCase;
 
-import com.zimbra.common.account.Key;
-import com.zimbra.common.account.ProvisioningConstants;
-import com.zimbra.cs.account.Account;
-import com.zimbra.cs.account.DataSource;
-import com.zimbra.cs.account.Provisioning;
-import com.zimbra.cs.datasource.CalDavDataImport;
-import com.zimbra.cs.mailbox.Folder;
-import com.zimbra.cs.mailbox.MailItem;
-import com.zimbra.cs.mailbox.Mailbox;
-import com.zimbra.cs.mailbox.MailboxManager;
-import com.zimbra.qa.unittest.TestUtil;
-import com.zimbra.soap.admin.type.DataSourceType;
+import org.zmail.common.account.Key;
+import org.zmail.common.account.ProvisioningConstants;
+import org.zmail.cs.account.Account;
+import org.zmail.cs.account.DataSource;
+import org.zmail.cs.account.Provisioning;
+import org.zmail.cs.datasource.CalDavDataImport;
+import org.zmail.cs.mailbox.Folder;
+import org.zmail.cs.mailbox.MailItem;
+import org.zmail.cs.mailbox.Mailbox;
+import org.zmail.cs.mailbox.MailboxManager;
+import org.zmail.qa.unittest.TestUtil;
+import org.zmail.soap.admin.type.DataSourceType;
 
 public class TestCalDavImportServer extends TestCase {
     private static final String NAME_PREFIX = TestCalDavImportServer.class.getSimpleName();
@@ -73,16 +73,16 @@ public class TestCalDavImportServer extends TestCase {
 
     private void createDataSource() throws Exception {
         Provisioning prov = Provisioning.getInstance();
-        int port = Integer.parseInt(TestUtil.getServerAttr(Provisioning.A_zimbraMailSSLPort));
+        int port = Integer.parseInt(TestUtil.getServerAttr(Provisioning.A_zmailMailSSLPort));
         Map<String, Object> attrs = new HashMap<String, Object>();
-        attrs.put(Provisioning.A_zimbraDataSourceEnabled, ProvisioningConstants.TRUE);
-        attrs.put(Provisioning.A_zimbraDataSourceHost, TestUtil.getServerAttr(Provisioning.A_zimbraServiceHostname));
-        attrs.put(Provisioning.A_zimbraDataSourcePort, Integer.toString(port));
-        attrs.put(Provisioning.A_zimbraDataSourceUsername, USER_NAME);
-        attrs.put(Provisioning.A_zimbraDataSourcePassword, "test123");
-        attrs.put(Provisioning.A_zimbraDataSourceFolderId, Integer.toString(rootFolder.getId()));
-        attrs.put(Provisioning.A_zimbraDataSourceConnectionType, "ssl");
-        attrs.put(Provisioning.A_zimbraDataSourceAttribute, "p:/principals/users/_USERNAME_");
+        attrs.put(Provisioning.A_zmailDataSourceEnabled, ProvisioningConstants.TRUE);
+        attrs.put(Provisioning.A_zmailDataSourceHost, TestUtil.getServerAttr(Provisioning.A_zmailServiceHostname));
+        attrs.put(Provisioning.A_zmailDataSourcePort, Integer.toString(port));
+        attrs.put(Provisioning.A_zmailDataSourceUsername, USER_NAME);
+        attrs.put(Provisioning.A_zmailDataSourcePassword, "test123");
+        attrs.put(Provisioning.A_zmailDataSourceFolderId, Integer.toString(rootFolder.getId()));
+        attrs.put(Provisioning.A_zmailDataSourceConnectionType, "ssl");
+        attrs.put(Provisioning.A_zmailDataSourceAttribute, "p:/principals/users/_USERNAME_");
         prov.createDataSource(account, DataSourceType.caldav, DATA_SOURCE_NAME, attrs);
     }
 

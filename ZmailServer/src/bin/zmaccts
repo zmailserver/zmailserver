@@ -47,19 +47,19 @@ use Symbol qw(gensym);
 use Time::Local qw(timegm);
 
 use constant {
-    ZMLOCALCONFIG => "/opt/zimbra/bin/zmlocalconfig",
+    ZMLOCALCONFIG => "/opt/zmail/bin/zmlocalconfig",
     LDAP_TIMEOUT  => 60,
     LDAP_PAGESIZE => 1000,
     ZACCT_FILTER =>
-      "(&(objectclass=zimbraAccount)(!(objectclass=zimbraCalendarResource)))",
+      "(&(objectclass=zmailAccount)(!(objectclass=zmailCalendarResource)))",
     ZACCT_ATTRS => [
-        qw(zimbraMailDeliveryAddress zimbraAccountStatus createTimestamp zimbraLastLogonTimestamp)
+        qw(zmailMailDeliveryAddress zmailAccountStatus createTimestamp zmailLastLogonTimestamp)
     ],
 };
 
 my $Prog = basename($0);
 my $conf = zmlocalconfig(
-    qw(zimbra_ldap_password zimbra_ldap_userdn ldap_url ldap_starttls_supported)
+    qw(zmail_ldap_password zmail_ldap_userdn ldap_url ldap_starttls_supported)
 );
 
 {    # support a help option
@@ -88,8 +88,8 @@ if ( $ldap_url !~ /^ldaps:/ and $conf->{ldap_starttls_supported} ) {
       or fatal("start_tls to '$ldap_url' failed: $@");
 }
 
-my $mesg = $ldap->bind( $conf->{zimbra_ldap_userdn},
-    password => $conf->{zimbra_ldap_password} )
+my $mesg = $ldap->bind( $conf->{zmail_ldap_userdn},
+    password => $conf->{zmail_ldap_password} )
   or fatal("bind failed\n");
 fatal( "failed to bind to server: ", emesg($mesg) )
   if $mesg->code;
@@ -155,9 +155,9 @@ foreach my $domainName ( sort keys %$domains ) {
     foreach my $account ( sort keys %$accounts ) {
         my $entry   = $accounts->{$account};
         my $name    = "$account\@$domainName";
-        my $status  = $entry->{'zimbraAccountStatus'};
+        my $status  = $entry->{'zmailAccountStatus'};
         my $created = $entry->{'createTimestamp'};
-        my $logon   = $entry->{'zimbraLastLogonTimestamp'} || 'never';
+        my $logon   = $entry->{'zmailLastLogonTimestamp'} || 'never';
 
         if ( $created =~ /(\d{4})(\d{2})(\d{2})(\d{2})(\d{2})(\d{2})Z/ ) {
             my $time = timegm( $6, $5, $4, $3, $2 - 1, $1 );
@@ -220,8 +220,8 @@ foreach my $domainName ( sort keys %$domains ) {
                 $acct{$attr} = $val;
             }
 
-            # ignore entries without the zimbraMailDeliveryAddress attribute
-            my $zmda = delete $acct{zimbraMailDeliveryAddress};
+            # ignore entries without the zmailMailDeliveryAddress attribute
+            my $zmda = delete $acct{zmailMailDeliveryAddress};
             return unless ($zmda);
 
             my ( $local, $domain ) = split( /@/, $zmda, 2 );
@@ -230,7 +230,7 @@ foreach my $domainName ( sort keys %$domains ) {
 
             my $dd = $data->{$domain};
             $dd->{stats}->{total}++;
-            $dd->{stats}->{ $acct{zimbraAccountStatus} }++;
+            $dd->{stats}->{ $acct{zmailAccountStatus} }++;
             $dd->{accounts}->{$local} = \%acct;
 
             $mesg->pop_entry;    # conserve memory

@@ -34,45 +34,45 @@ zmmsgtrace [options] [<mail-syslog-file>...]
     --man                         display the entire man page
 
   Where:
-    <mail-syslog-file> defaults to "/var/log/zimbra.log"
+    <mail-syslog-file> defaults to "/var/log/zmail.log"
 
   Files ending in '.gz', '.bz' or '.bz2' will be read using gzip or
   bunzip2.
 
 =head1 EXAMPLE
 
-Show a trace of all messages in '/var/log/zimbra.log':
+Show a trace of all messages in '/var/log/zmail.log':
 
   $ zmmsgtrace
 
-Show a trace of all messages in '/var/log/zimbra.log' by sender
+Show a trace of all messages in '/var/log/zmail.log' by sender
 matching the word 'phil':
 
   $ zmmsgtrace -s phil
 
 Show a trace of messages sent by 'phil.pearl' between '20110217' and
-'20110221' in '/var/log/zimbra.log.1.gz' and '/var/log/zimbra.log':
+'20110221' in '/var/log/zmail.log.1.gz' and '/var/log/zmail.log':
 
   # note: a '.' (period) in a regex matches any character
   $ cd /var/log
-  $ zmmsgtrace zimbra.log.1.gz zimbra.log \
+  $ zmmsgtrace zmail.log.1.gz zmail.log \
       -sender 'phil\.pearl' -srchost localhost -time 20110217,20110221
 
 Find any email sent by an email address starting with 'p' to anyone at
-'usc.edu' in all files matching /var/log/zimbra*:
+'usc.edu' in all files matching /var/log/zmail*:
 
   # note: this regex can match more than desired!
-  $ zmmsgtrace -s '^p' -r '@usc.edu' /var/log/zimbra*
+  $ zmmsgtrace -s '^p' -r '@usc.edu' /var/log/zmail*
 
   # this regex is more specific - recipient ending in "@usc.edu"
-  $ zmmsgtrace -s '^p' -r '@usc\.edu$' /var/log/zimbra*
+  $ zmmsgtrace -s '^p' -r '@usc\.edu$' /var/log/zmail*
 
 =head1 DESCRIPTION
 
 This utility, zmmsgtrace, is intended to act as a replacement for the
 original zmmsgtrace utility that was removed from ZCS distribution
 starting with ZCS 6.  This utility relies on a (centralized sys)log
-host that hold mail log (aka zimbra.log) files which contain log
+host that hold mail log (aka zmail.log) files which contain log
 entries for amavis and postfix for the ZCS platform.
 
 This utility reads a lot of data into memory so beware of running this
@@ -96,7 +96,7 @@ zmmsgtrace utility.  Some additional details may be found in:
 
 =item ZCS bug# 41078: zmmsgtrace replacement
 
-L<https://bugzilla.zimbra.com/show_bug.cgi?id=41078>
+L<https://bugzilla.zmail.com/show_bug.cgi?id=41078>
 
 =back
 
@@ -129,7 +129,7 @@ use Pod::Usage qw(pod2usage);
 use Time::localtime qw(localtime);
 
 my $DEBUG   = 0;                       # GLOBAL set by process_options()
-my $LOGFILE = "/var/log/zimbra.log";
+my $LOGFILE = "/var/log/zmail.log";
 my $VERSION = "1.05";
 my $Prog    = basename($0);
 
@@ -243,7 +243,7 @@ sub process_options {
         }
     }
 
-    # default: zimbra log file
+    # default: zmail log file
     $opt{_files} = [ ( @ARGV ? @ARGV : ($LOGFILE) ) ];
 
     pod2usage(

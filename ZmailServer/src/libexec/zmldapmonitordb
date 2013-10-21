@@ -1,6 +1,6 @@
 #!/usr/bin/perl
 use strict;
-use lib qw (/opt/zimbra/zimbramon/lib);
+use lib qw (/opt/zmail/zmailmon/lib);
 use XML::Simple;
 use Getopt::Long;
 use Filesys::Df;
@@ -8,15 +8,15 @@ use POSIX;
 use Mail::Mailer;
 use Net::LDAP;
 
-if ( ! -d "/opt/zimbra/openldap/etc" ) {
+if ( ! -d "/opt/zmail/openldap/etc" ) {
   print "ERROR: openldap does not appear to be installed - exiting\n";
   exit(1);
 }
 
 my $id = getpwuid($<);
 chomp $id;
-if ($id ne "zimbra") {
-    print STDERR "Error: must be run as zimbra user\n";
+if ($id ne "zmail") {
+    print STDERR "Error: must be run as zmail user\n";
     exit (1);
 }
 
@@ -34,7 +34,7 @@ if ($help) {
   usage(0);
 }
 
-my $localxml = XMLin("/opt/zimbra/conf/localconfig.xml");
+my $localxml = XMLin("/opt/zmail/conf/localconfig.xml");
 
 my $ldap_monitor_mdb = $localxml->{key}->{ldap_monitor_mdb}->{value};
 my $ldap_monitor_alert_only = $localxml->{key}->{ldap_monitor_alert_only}->{value};
@@ -44,8 +44,8 @@ my $ldap_monitor_growth = $localxml->{key}->{ldap_monitor_growth}->{value};
 my $ldap_db_maxsize = $localxml->{key}->{ldap_db_maxsize}->{value};
 my $ldap_accesslog_maxsize = $localxml->{key}->{ldap_accesslog_maxsize}->{value};
 my $ldap_is_master = $localxml->{key}->{ldap_is_master}->{value};
-my $zimbra_home = $localxml->{key}->{zimbra_home}->{value};
-my $server = $localxml->{key}->{zimbra_server_hostname}->{value};
+my $zmail_home = $localxml->{key}->{zmail_home}->{value};
+my $server = $localxml->{key}->{zmail_server_hostname}->{value};
 my $report=[];
 
 chomp($ldap_monitor_mdb);
@@ -56,7 +56,7 @@ chomp($ldap_monitor_growth);
 chomp($ldap_db_maxsize);
 chomp($ldap_accesslog_maxsize);
 chomp($ldap_is_master);
-chomp($zimbra_home);
+chomp($zmail_home);
 
 if ($ldap_monitor_mdb eq "") {
   $ldap_monitor_mdb = "true";
@@ -74,8 +74,8 @@ if ($ldap_monitor_mdb ne "true") {
   exit 0;
 }
 
-if ($zimbra_home eq "") {
-   $zimbra_home = "/opt/zimbra";
+if ($zmail_home eq "") {
+   $zmail_home = "/opt/zmail";
 }
 
 if ($ldap_db_maxsize eq "") {
@@ -122,23 +122,23 @@ if ($ldap_monitor_growth > 1) {
   $ldap_monitor_growth/=100;
 }
 
-my $zmlocalconfig="${zimbra_home}/bin/zmlocalconfig";
-my $db="${zimbra_home}/data/ldap/mdb/db/data.mdb";
-my $adb="${zimbra_home}/data/ldap/accesslog/db/data.mdb";
+my $zmlocalconfig="${zmail_home}/bin/zmlocalconfig";
+my $db="${zmail_home}/data/ldap/mdb/db/data.mdb";
+my $adb="${zmail_home}/data/ldap/accesslog/db/data.mdb";
 my $blocksize=(stat $db)[11]/8;
 my $mdb_used=(stat $db)[12];
 $mdb_used*=$blocksize;
 
 my $alog_used=0;
 my $is_master=0;
-if ($ldap_is_master && -f "${zimbra_home}/data/ldap/accesslog/db/data.mdb") {
+if ($ldap_is_master && -f "${zmail_home}/data/ldap/accesslog/db/data.mdb") {
   $is_master=1;
   $blocksize=(stat $adb)[11]/8;
   $alog_used=(stat $adb)[12];
   $alog_used*=$blocksize;
 }
 
-my $partUsage=df("/opt/zimbra/data/ldap/mdb/db");
+my $partUsage=df("/opt/zmail/data/ldap/mdb/db");
 my $totalspace = $partUsage->{blocks}*1024;
 my $freespace = $partUsage->{bfree}*1024;
 my $usedspace = $partUsage->{used}*1024;
@@ -338,7 +338,7 @@ sub getLdapServerConfigValue {
     my $attrib = shift;
 
     return (undef) unless ($attrib);
-    open( CONF, "/opt/zimbra/bin/zmprov -l gs $server '$attrib' |" )
+    open( CONF, "/opt/zmail/bin/zmprov -l gs $server '$attrib' |" )
       or die("Open server config failed: $!");
 
     my ( $key, $val );
@@ -356,7 +356,7 @@ sub getLdapGlobalConfigValue {
 
     return (undef) unless ($attrib);
 
-    open( CONF, "/opt/zimbra/bin/zmprov -l gcf '$attrib' |" )
+    open( CONF, "/opt/zmail/bin/zmprov -l gcf '$attrib' |" )
       or die("Open global config failed: $!");
 
     my ( $key, $val );
@@ -371,13 +371,13 @@ sub getLdapGlobalConfigValue {
 sub sendEmailReport {
   my $subject = shift;
   my $msg = shift;
-  my $localxml = XMLin("/opt/zimbra/conf/localconfig.xml");
+  my $localxml = XMLin("/opt/zmail/conf/localconfig.xml");
 
   my $from_address= $localxml->{key}->{smtp_source}->{value};
   my $to_address = $localxml->{key}->{smtp_destination}->{value};
 
-  my $smtphost = getLdapConfigValue("zimbraSmtpHostname") || "localhost";
-  my $smtpport = getLdapConfigValue("zimbraSmtpPort") || "25";
+  my $smtphost = getLdapConfigValue("zmailSmtpHostname") || "localhost";
+  my $smtpport = getLdapConfigValue("zmailSmtpPort") || "25";
 
   return if (scalar @$msg == 0);
   print "Sending ldap MDB error report to $to_address via $smtphost\n" if $debug;

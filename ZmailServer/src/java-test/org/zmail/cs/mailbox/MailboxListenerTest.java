@@ -12,7 +12,7 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.mailbox;
+package org.zmail.cs.mailbox;
 
 import java.io.ByteArrayInputStream;
 import java.util.HashMap;
@@ -23,11 +23,11 @@ import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
-import com.zimbra.cs.account.Account;
-import com.zimbra.cs.account.MockProvisioning;
-import com.zimbra.cs.account.Provisioning;
-import com.zimbra.cs.session.PendingModifications.Change;
-import com.zimbra.cs.session.PendingModifications.ModificationKey;
+import org.zmail.cs.account.Account;
+import org.zmail.cs.account.MockProvisioning;
+import org.zmail.cs.account.Provisioning;
+import org.zmail.cs.session.PendingModifications.Change;
+import org.zmail.cs.session.PendingModifications.ModificationKey;
 
 public final class MailboxListenerTest {
 
@@ -37,7 +37,7 @@ public final class MailboxListenerTest {
     public static void init() throws Exception {
         MailboxTestUtil.initServer();
         Provisioning prov = Provisioning.getInstance();
-        prov.createAccount("test@zimbra.com", "secret", new HashMap<String, Object>());
+        prov.createAccount("test@zmail.com", "secret", new HashMap<String, Object>());
     }
 
     @Before
@@ -52,7 +52,7 @@ public final class MailboxListenerTest {
         OperationContext octxt = new OperationContext(acct);
         Mailbox mbox = MailboxManager.getInstance().getMailboxByAccount(acct);
         MailboxListener.register(new TestListener());
-        mbox.createDocument(octxt, Mailbox.ID_FOLDER_BRIEFCASE, "test", "text/plain", "test@zimbra.com",
+        mbox.createDocument(octxt, Mailbox.ID_FOLDER_BRIEFCASE, "test", "text/plain", "test@zmail.com",
                 "hello", new ByteArrayInputStream("hello world".getBytes("UTF-8")));
     }
 

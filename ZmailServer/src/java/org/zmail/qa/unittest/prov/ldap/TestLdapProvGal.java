@@ -12,7 +12,7 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.qa.unittest.prov.ldap;
+package org.zmail.qa.unittest.prov.ldap;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -20,19 +20,19 @@ import java.util.Map;
 import org.junit.*;
 import static org.junit.Assert.*;
 
-import com.zimbra.common.account.ZAttrProvisioning;
-import com.zimbra.common.localconfig.LC;
-import com.zimbra.common.mailbox.ContactConstants;
-import com.zimbra.cs.account.Account;
-import com.zimbra.cs.account.Domain;
-import com.zimbra.cs.account.GalContact;
-import com.zimbra.cs.account.Provisioning;
-import com.zimbra.cs.account.Provisioning.SearchGalResult;
-import com.zimbra.cs.account.gal.GalOp;
-import com.zimbra.cs.gal.GalSearchConfig;
-import com.zimbra.cs.gal.GalSearchParams;
-import com.zimbra.qa.unittest.prov.Names;
-import com.zimbra.soap.type.GalSearchType;
+import org.zmail.common.account.ZAttrProvisioning;
+import org.zmail.common.localconfig.LC;
+import org.zmail.common.mailbox.ContactConstants;
+import org.zmail.cs.account.Account;
+import org.zmail.cs.account.Domain;
+import org.zmail.cs.account.GalContact;
+import org.zmail.cs.account.Provisioning;
+import org.zmail.cs.account.Provisioning.SearchGalResult;
+import org.zmail.cs.account.gal.GalOp;
+import org.zmail.cs.gal.GalSearchConfig;
+import org.zmail.cs.gal.GalSearchParams;
+import org.zmail.qa.unittest.prov.Names;
+import org.zmail.soap.type.GalSearchType;
 
 public class TestLdapProvGal extends LdapTest {
     private static LdapProvTestUtil provUtil;
@@ -69,12 +69,12 @@ public class TestLdapProvGal extends LdapTest {
         Account acct = createAccount(ACCT_NAME_LOCALPART);
         
         Map<String, Object> attrs = new HashMap<String, Object>();
-        attrs.put(Provisioning.A_zimbraGalMode, Provisioning.GalMode.ldap.name());
-        attrs.put(Provisioning.A_zimbraGalLdapURL, "ldap://" + LC.zimbra_server_hostname.value() + ":389");
-        attrs.put(Provisioning.A_zimbraGalLdapFilter, "(mail=*%s*)");
+        attrs.put(Provisioning.A_zmailGalMode, Provisioning.GalMode.ldap.name());
+        attrs.put(Provisioning.A_zmailGalLdapURL, "ldap://" + LC.zmail_server_hostname.value() + ":389");
+        attrs.put(Provisioning.A_zmailGalLdapFilter, "(mail=*%s*)");
         
-        attrs.put(Provisioning.A_zimbraGalLdapBindDn, "cn=config");
-        attrs.put(Provisioning.A_zimbraGalLdapBindPassword, "zimbra");
+        attrs.put(Provisioning.A_zmailGalLdapBindDn, "cn=config");
+        attrs.put(Provisioning.A_zmailGalLdapBindPassword, "zmail");
         
         String query = "checkGalConfig";
         int limit = 0;
@@ -110,7 +110,7 @@ public class TestLdapProvGal extends LdapTest {
         
         params.setOp(GalOp.search);
         params.setType(type);
-        params.createSearchConfig(GalSearchConfig.GalType.zimbra);
+        params.createSearchConfig(GalSearchConfig.GalType.zmail);
         params.setQuery(query);
         params.setLimit(SIZE_LIMIT);
         params.setGalResult(result);
@@ -130,16 +130,16 @@ public class TestLdapProvGal extends LdapTest {
         String DOMAIN_NAME = genDomainSegmentName() + "." + baseDomainName();
         
         Map<String, Object> domainAttrs = new HashMap<String, Object>();
-        domainAttrs.put(Provisioning.A_zimbraGalMode, ZAttrProvisioning.GalMode.ldap.name());
+        domainAttrs.put(Provisioning.A_zmailGalMode, ZAttrProvisioning.GalMode.ldap.name());
         
         // replace XXX to real VMware AD credentials before checking in.
         // NEVER check in the crdentials
-        domainAttrs.put(Provisioning.A_zimbraGalLdapURL, "ldap://XXX.vmware.com:3268");  
-        domainAttrs.put(Provisioning.A_zimbraGalLdapBindDn, "XXX@vmware.com");
-        domainAttrs.put(Provisioning.A_zimbraGalLdapBindPassword, "XXX");
+        domainAttrs.put(Provisioning.A_zmailGalLdapURL, "ldap://XXX.vmware.com:3268");  
+        domainAttrs.put(Provisioning.A_zmailGalLdapBindDn, "XXX@vmware.com");
+        domainAttrs.put(Provisioning.A_zmailGalLdapBindPassword, "XXX");
         
-        domainAttrs.put(Provisioning.A_zimbraGalLdapFilter, "ad");
-        domainAttrs.put(Provisioning.A_zimbraGalLdapGroupHandlerClass, "com.zimbra.cs.gal.ADGalGroupHandler");
+        domainAttrs.put(Provisioning.A_zmailGalLdapFilter, "ad");
+        domainAttrs.put(Provisioning.A_zmailGalLdapGroupHandlerClass, "org.zmail.cs.gal.ADGalGroupHandler");
         Domain galDomain = provUtil.createDomain(DOMAIN_NAME, domainAttrs);
         
         String ACCT_NAME_LOCALPART = Names.makeAccountNameLocalPart("searchGalADGroupMember");

@@ -12,17 +12,17 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.mime;
+package org.zmail.cs.mime;
 
 import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
-import com.zimbra.cs.account.MockProvisioning;
-import com.zimbra.cs.account.Provisioning;
-import com.zimbra.cs.mime.handler.TextEnrichedHandler;
-import com.zimbra.cs.mime.handler.TextHtmlHandler;
-import com.zimbra.cs.mime.handler.UnknownTypeHandler;
+import org.zmail.cs.account.MockProvisioning;
+import org.zmail.cs.account.Provisioning;
+import org.zmail.cs.mime.handler.TextEnrichedHandler;
+import org.zmail.cs.mime.handler.TextHtmlHandler;
+import org.zmail.cs.mime.handler.UnknownTypeHandler;
 
 /**
  * Unit test for {@link MimeHandlerManager}.
@@ -55,7 +55,7 @@ public class MimeHandlerManagerTest {
         mime = new MockMimeTypeInfo();
         mime.setMimeTypes("not/exist");
         mime.setFileExtensions("NotExist");
-        mime.setHandlerClass("com.zimbra.cs.mime.handler.NotExist");
+        mime.setHandlerClass("org.zmail.cs.mime.handler.NotExist");
         prov.addMimeType("not/exist", mime);
 
         Provisioning.setInstance(prov);

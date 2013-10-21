@@ -1,23 +1,23 @@
 0. If this is the first time you setup your dev env, follow steps in
-   INSTALL*.txt to setup /opt/zimbra with mysql, ldap, etc.
+   INSTALL*.txt to setup /opt/zmail with mysql, ldap, etc.
 
-1. You can run "ant reset-all" target of ZimbraServer project to build
-   and start up the dev webapps including serivce/zimbra/zimbraAdmin.
+1. You can run "ant reset-all" target of ZmailServer project to build
+   and start up the dev webapps including serivce/zmail/zmailAdmin.
 
 2. On Windows if you want to install jetty as a Windows service and
    start/stop it that way, skip to 3.  For those who don't want to mess
    with Windows services, use ant targets "start-jetty" and "stop-jetty"
-   of ZimbraServer project to start/stop.
+   of ZmailServer project to start/stop.
 
 3. On Windows if you really want to install jetty as a Windows service
    you can use the Java Service Wrapper.  The files are checked in
-   under ZimbraServer\tools\jetty; if you'd prefer to download them
+   under ZmailServer\tools\jetty; if you'd prefer to download them
    yourself you can Yahoo! search for wrapper-windows-x86-32-3.2.3.zip
-   and unzip it.  Copy wrapper.exe to C:\opt\zimbra\bin, wrapper.jar and
-   wrapper.dll to C:\opt\zimbra\lib, and wrapper.conf to
-   C:\opt\zimbra\jetty\etc.  Now run:
+   and unzip it.  Copy wrapper.exe to C:\opt\zmail\bin, wrapper.jar and
+   wrapper.dll to C:\opt\zmail\lib, and wrapper.conf to
+   C:\opt\zmail\jetty\etc.  Now run:
 
-     wrapper.exe -i C:\opt\zimbra\jetty\etc\wrapper.conf 
+     wrapper.exe -i C:\opt\zmail\jetty\etc\wrapper.conf 
 
    to install jetty as a Windows Service.  Make sure the 'C' in 'C:' is
    in upper case because wrapper.exe surprisingly is sensitive to it.
@@ -55,7 +55,7 @@ I. Conventional Debugging
 
 2. In Eclipse select Run/Debug... and right click on Java Application
    to "New" a configuration.  Call it anything you want, such as
-   "jetty".  Choose the ZimbraServer as the debug project. Set the main
+   "jetty".  Choose the ZmailServer as the debug project. Set the main
    class to org.eclipse.jetty.start.Main.
 
 3. Switch to the Arguments tab and set
@@ -64,14 +64,14 @@ I. Conventional Debugging
    --ini OPTIONS=Server,jsp,jmx,resources,websocket,ext,jta,plus,rewrite etc/jetty.xml
    
    and VM arguments to
-   "-DSTART=/opt/zimbra/jetty/etc/start.config -DSTOP.PORT=7867
-   -DSTOP.KEY=stop -Dzimbra.config=/opt/zimbra/conf/localconfig.xml
-   -Djava.library.path=/opt/zimbra/lib".  Then choose "Other" under
-   working directory and set it to /opt/zimbra/jetty.
+   "-DSTART=/opt/zmail/jetty/etc/start.config -DSTOP.PORT=7867
+   -DSTOP.KEY=stop -Dzmail.config=/opt/zmail/conf/localconfig.xml
+   -Djava.library.path=/opt/zmail/lib".  Then choose "Other" under
+   working directory and set it to /opt/zmail/jetty.
 
-4. Swtich to the Classpath tab and add /opt/zimbra/jetty/start.jar to
-   User Entries. Also add all the jar files of /opt/zimbra/jetty/lib/
-   and /opt/zimbra/jetty/lib/jsp/
+4. Swtich to the Classpath tab and add /opt/zmail/jetty/start.jar to
+   User Entries. Also add all the jar files of /opt/zmail/jetty/lib/
+   and /opt/zmail/jetty/lib/jsp/
 
 5. Switch to the Source tab and add all the java projects in your
    workspace that you care about to debug.
@@ -82,7 +82,7 @@ I. Conventional Debugging
 
 8. To stop jetty you can do this on command line "java
    -DSTOP.PORT=7867 -DSTOP.KEY=stop -jar start.jar --stop".  Or you
-   could run the "stop-jetty-java" target under ZimbraServer.  You
+   could run the "stop-jetty-java" target under ZmailServer.  You
    probably don't want to press the Stop button in Eclipse debugger as
    that wouldn't do a proper shutdown.
 
@@ -94,7 +94,7 @@ jetty-ant plugin.  Basically you run jetty as an ant task.  We use
 Eclipse remote debugging with jetty-ant plugin.
 
 To use jetty-ant, first you need to setup a shell for service webapp.
-Go to ZimbraServer directory and run
+Go to ZmailServer directory and run
 ant -buildfile jetty-ant.xml jetty.webinf
 
 You'll only need to do this once unless either you clean the build directory
@@ -104,11 +104,11 @@ To launch jetty, run the following:
 ant -buildfile jetty-ant.xml jetty.run
 
 Note that due to a jetty-ant-plugin bug you need to set this env var:
-ANT_OPTS="-Djava.library.path=~/zimbra/zdesktop/lib"
+ANT_OPTS="-Djava.library.path=~/zmail/zdesktop/lib"
 
 To debug, run the jetty.run target with ANT_OPTS like this:
 
-ANT_OPTS="-Xdebug -Xnoagent -Djava.compiler=NONE -Djava.library.path=/opt/zimbra/lib -Xrunjdwp:transport=dt_socket,address=4000,server=y,suspend=y" ant -buildfile jetty-ant.xml jetty.run
+ANT_OPTS="-Xdebug -Xnoagent -Djava.compiler=NONE -Djava.library.path=/opt/zmail/lib -Xrunjdwp:transport=dt_socket,address=4000,server=y,suspend=y" ant -buildfile jetty-ant.xml jetty.run
 
 This will start jetty-ant plugin but blocks on listening on port 4000.
 

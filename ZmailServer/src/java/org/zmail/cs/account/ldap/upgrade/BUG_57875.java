@@ -12,26 +12,26 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.account.ldap.upgrade;
+package org.zmail.cs.account.ldap.upgrade;
 
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.cs.account.Provisioning;
-import com.zimbra.cs.account.Entry.EntryType;
-import com.zimbra.cs.ldap.IAttributes;
-import com.zimbra.cs.ldap.LdapClient;
-import com.zimbra.cs.ldap.LdapServerType;
-import com.zimbra.cs.ldap.LdapUsage;
-import com.zimbra.cs.ldap.SearchLdapOptions;
-import com.zimbra.cs.ldap.ZAttributes;
-import com.zimbra.cs.ldap.ZLdapContext;
-import com.zimbra.cs.ldap.ZLdapFilterFactory;
-import com.zimbra.cs.ldap.ZMutableEntry;
+import org.zmail.common.service.ServiceException;
+import org.zmail.cs.account.Provisioning;
+import org.zmail.cs.account.Entry.EntryType;
+import org.zmail.cs.ldap.IAttributes;
+import org.zmail.cs.ldap.LdapClient;
+import org.zmail.cs.ldap.LdapServerType;
+import org.zmail.cs.ldap.LdapUsage;
+import org.zmail.cs.ldap.SearchLdapOptions;
+import org.zmail.cs.ldap.ZAttributes;
+import org.zmail.cs.ldap.ZLdapContext;
+import org.zmail.cs.ldap.ZLdapFilterFactory;
+import org.zmail.cs.ldap.ZMutableEntry;
 
 public class BUG_57875 extends UpgradeOp {
     
-    private static final String ATTR_NAME = Provisioning.A_zimbraGalLdapGroupHandlerClass;
-    private static final String OLD_VALUE = "com.zimbra.cs.gal.ADGalGroupHandler";
-    private static final String NEW_VALUE = "com.zimbra.cs.account.grouphandler.ADGroupHandler";
+    private static final String ATTR_NAME = Provisioning.A_zmailGalLdapGroupHandlerClass;
+    private static final String OLD_VALUE = "org.zmail.cs.gal.ADGalGroupHandler";
+    private static final String NEW_VALUE = "org.zmail.cs.account.grouphandler.ADGroupHandler";
     
     @Override
     void doUpgrade() throws ServiceException {

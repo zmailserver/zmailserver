@@ -13,16 +13,16 @@
  * ***** END LICENSE BLOCK *****
  */
 
-package com.zimbra.cs.security.sasl;
+package org.zmail.cs.security.sasl;
 
-import com.zimbra.common.account.Key;
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.common.util.Log;
-import com.zimbra.common.util.ZimbraLog;
-import com.zimbra.cs.account.AccessManager;
-import com.zimbra.cs.account.Account;
-import com.zimbra.cs.account.Provisioning;
-import com.zimbra.cs.account.auth.AuthContext;
+import org.zmail.common.account.Key;
+import org.zmail.common.service.ServiceException;
+import org.zmail.common.util.Log;
+import org.zmail.common.util.ZmailLog;
+import org.zmail.cs.account.AccessManager;
+import org.zmail.cs.account.Account;
+import org.zmail.cs.account.Provisioning;
+import org.zmail.cs.account.auth.AuthContext;
 
 import java.net.InetAddress;
 import java.util.Collection;
@@ -57,10 +57,10 @@ public abstract class Authenticator {
                 return new GssAuthenticator(authUser);
             }
         });
-        registerMechanism(ZimbraAuthenticator.MECHANISM, new AuthenticatorFactory() {
+        registerMechanism(ZmailAuthenticator.MECHANISM, new AuthenticatorFactory() {
             @Override
             public Authenticator getAuthenticator(AuthenticatorUser authUser) {
-                return new ZimbraAuthenticator(authUser);
+                return new ZmailAuthenticator(authUser);
             }
         });
     }
@@ -192,13 +192,13 @@ public abstract class Authenticator {
             }
         }
         if (userAcct == null) {
-            ZimbraLog.account.info("authorization failed for " + username + " (account not found)", username);
+            ZmailLog.account.info("authorization failed for " + username + " (account not found)", username);
             return null;
         }
 
         // check whether the authenticated user is able to access the target
         if (!authAccount.getId().equals(userAcct.getId()) && !AccessManager.getInstance().canAccessAccount(authAccount, userAcct, asAdmin)) {
-            ZimbraLog.account.warn("authorization failed for " + username + " (authenticated user " + authAccount.getName() + " has insufficient rights)");
+            ZmailLog.account.warn("authorization failed for " + username + " (authenticated user " + authAccount.getName() + " has insufficient rights)");
             return null;
         }
         return userAcct;

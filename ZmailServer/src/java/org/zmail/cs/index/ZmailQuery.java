@@ -13,7 +13,7 @@
  * ***** END LICENSE BLOCK *****
  */
 
-package com.zimbra.cs.index;
+package org.zmail.cs.index;
 
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -26,22 +26,22 @@ import org.apache.lucene.search.TermQuery;
 
 import com.google.common.base.Joiner;
 import com.google.common.io.Closeables;
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.common.soap.SoapProtocol;
-import com.zimbra.common.util.ZimbraLog;
-import com.zimbra.cs.account.AccessManager;
-import com.zimbra.cs.account.Account;
-import com.zimbra.cs.index.query.ConjQuery;
-import com.zimbra.cs.index.query.Query;
-import com.zimbra.cs.index.query.SubQuery;
-import com.zimbra.cs.index.query.parser.QueryParser;
-import com.zimbra.cs.mailbox.CalendarItem;
-import com.zimbra.cs.mailbox.Folder;
-import com.zimbra.cs.mailbox.MailItem;
-import com.zimbra.cs.mailbox.MailServiceException.NoSuchItemException;
-import com.zimbra.cs.mailbox.Mailbox;
-import com.zimbra.cs.mailbox.Mountpoint;
-import com.zimbra.cs.mailbox.OperationContext;
+import org.zmail.common.service.ServiceException;
+import org.zmail.common.soap.SoapProtocol;
+import org.zmail.common.util.ZmailLog;
+import org.zmail.cs.account.AccessManager;
+import org.zmail.cs.account.Account;
+import org.zmail.cs.index.query.ConjQuery;
+import org.zmail.cs.index.query.Query;
+import org.zmail.cs.index.query.SubQuery;
+import org.zmail.cs.index.query.parser.QueryParser;
+import org.zmail.cs.mailbox.CalendarItem;
+import org.zmail.cs.mailbox.Folder;
+import org.zmail.cs.mailbox.MailItem;
+import org.zmail.cs.mailbox.MailServiceException.NoSuchItemException;
+import org.zmail.cs.mailbox.Mailbox;
+import org.zmail.cs.mailbox.Mountpoint;
+import org.zmail.cs.mailbox.OperationContext;
 
 /**
  * Executes a search query.
@@ -57,14 +57,14 @@ import com.zimbra.cs.mailbox.OperationContext;
  *   <li>Generate a {@link QueryOperation} (which is usually a tree of {@link QueryOperation} objects) from the
  *   {@link ParseTree}, then optimize them {@link QueryOperation}s in preparation to run the query.
  *  </ol>
- *  <li>{@link #execute()} - Begin the search, get the {@link ZimbraQueryResults} iterator.
+ *  <li>{@link #execute()} - Begin the search, get the {@link ZmailQueryResults} iterator.
  * </ol>
  * TODO: move ParseTree classes out of this class
  *
  * @author tim
  * @author ysasaki
  */
-public final class ZimbraQuery {
+public final class ZmailQuery {
 
     private final List<Query> clauses;
     private QueryOperation operation;
@@ -335,7 +335,7 @@ public final class ZimbraQuery {
     /**
      * Parse the query string.
      */
-    public ZimbraQuery(OperationContext octxt, SoapProtocol proto, Mailbox mbox, SearchParams params)
+    public ZmailQuery(OperationContext octxt, SoapProtocol proto, Mailbox mbox, SearchParams params)
             throws ServiceException {
         this.octxt = octxt;
         this.protocol = proto;
@@ -363,7 +363,7 @@ public final class ZimbraQuery {
             throw ServiceException.PARSE_ERROR("PARSER_ERROR", e);
         }
 
-        ZimbraLog.search.debug("%s,types=%s,sort=%s", this, params.getTypes(), params.getSortBy());
+        ZmailLog.search.debug("%s,types=%s,sort=%s", this, params.getTypes(), params.getSortBy());
 
         // Build a parse tree and push all the "NOT's" down to the bottom level.
         // This is because we cannot invert result sets.
@@ -391,7 +391,7 @@ public final class ZimbraQuery {
             }
             // Supplement sortValue
             if (cursor.getSortValue() == null) {
-                ZimbraLog.search.debug("Supplementing sortValue sort=%s,id=%s", params.getSortBy(), cursor.getItemId());
+                ZmailLog.search.debug("Supplementing sortValue sort=%s,id=%s", params.getSortBy(), cursor.getItemId());
                 try {
                     MailItem item = mailbox.getItemById(null, cursor.getItemId().getId(), MailItem.Type.UNKNOWN);
                     switch (params.getSortBy().getKey()) {
@@ -440,15 +440,15 @@ public final class ZimbraQuery {
         // Convert list of Queries into list of QueryOperations, then optimize them.
         // this generates all of the query operations
         operation = parseTree.compile(mailbox);
-        ZimbraLog.search.debug("OP=%s", operation);
+        ZmailLog.search.debug("OP=%s", operation);
 
         // expand the is:local and is:remote parts into in:(LIST)'s
         operation = operation.expandLocalRemotePart(mailbox);
-        ZimbraLog.search.debug("AFTEREXP=%s", operation);
+        ZmailLog.search.debug("AFTEREXP=%s", operation);
 
         // optimize the query down
         operation = operation.optimize(mailbox);
-        ZimbraLog.search.debug("OPTIMIZED=%s", operation);
+        ZmailLog.search.debug("OPTIMIZED=%s", operation);
         if (operation == null || operation instanceof NoTermQueryOperation) {
             operation = new NoResultsQueryOperation();
             return;
@@ -539,14 +539,14 @@ public final class ZimbraQuery {
                 try {
                     ((RemoteQueryOperation) remoteOp).setup(protocol, octxt.getAuthToken(), params);
                 } catch (Exception e) {
-                    ZimbraLog.search.info("Ignoring %s during RemoteQuery generation for %s", e, remoteOps);
+                    ZmailLog.search.info("Ignoring %s during RemoteQuery generation for %s", e, remoteOps);
                 }
             }
         }
 
         // For the LOCAL parts of the query, do permission checks, do trash/spam exclusion
         if (!localOps.operations.isEmpty()) {
-            ZimbraLog.search.debug("LOCAL_IN=%s", localOps);
+            ZmailLog.search.debug("LOCAL_IN=%s", localOps);
 
             Account authAcct = octxt != null ? octxt.getAuthenticatedUser() : mailbox.getAccount();
 
@@ -600,7 +600,7 @@ public final class ZimbraQuery {
                     }
                 }
                 localOps.operations.addAll(toAdd);
-                ZimbraLog.search.debug("LOCAL_AFTER_TRASH/SPAM/DUMPSTER=%s", localOps);
+                ZmailLog.search.debug("LOCAL_AFTER_TRASH/SPAM/DUMPSTER=%s", localOps);
             }
 
             // Check to see if we need to filter out private appointment data
@@ -650,10 +650,10 @@ public final class ZimbraQuery {
 
             localOps = handleLocalPermissionChecks(localOps, visibleFolders, allowPrivateAccess);
 
-            ZimbraLog.search.debug("LOCAL_AFTER_PERM_CHECKS=%s", localOps);
+            ZmailLog.search.debug("LOCAL_AFTER_PERM_CHECKS=%s", localOps);
 
             if (!hasFolderRightPrivateSet.isEmpty()) {
-                ZimbraLog.search.debug("CLONED_LOCAL_BEFORE_PERM=%s", clonedLocal);
+                ZmailLog.search.debug("CLONED_LOCAL_BEFORE_PERM=%s", clonedLocal);
 
                 // now we're going to setup the clonedLocal tree
                 // to run with private access ALLOWED, over the set of folders
@@ -661,20 +661,20 @@ public final class ZimbraQuery {
                 // folder list, so we are
                 clonedLocal = handleLocalPermissionChecks(clonedLocal, hasFolderRightPrivateSet, true);
 
-                ZimbraLog.search.debug("CLONED_LOCAL_AFTER_PERM=%s", clonedLocal);
+                ZmailLog.search.debug("CLONED_LOCAL_AFTER_PERM=%s", clonedLocal);
 
                 // clonedLocal should only have the single INTERSECT in it
                 assert(clonedLocal.operations.size() == 1);
 
                 QueryOperation optimizedClonedLocal = clonedLocal.optimize(mailbox);
-                ZimbraLog.search.debug("CLONED_LOCAL_AFTER_OPTIMIZE=%s", optimizedClonedLocal);
+                ZmailLog.search.debug("CLONED_LOCAL_AFTER_OPTIMIZE=%s", optimizedClonedLocal);
 
                 UnionQueryOperation withPrivateExcluded = localOps;
                 localOps = new UnionQueryOperation();
                 localOps.add(withPrivateExcluded);
                 localOps.add(optimizedClonedLocal);
 
-                ZimbraLog.search.debug("LOCAL_WITH_CLONED=%s", localOps);
+                ZmailLog.search.debug("LOCAL_WITH_CLONED=%s", localOps);
 
                 //
                 // we should end up with:
@@ -695,10 +695,10 @@ public final class ZimbraQuery {
         UnionQueryOperation union = new UnionQueryOperation();
         union.add(localOps);
         union.add(remoteOps);
-        ZimbraLog.search.debug("BEFORE_FINAL_OPT=%s", union);
+        ZmailLog.search.debug("BEFORE_FINAL_OPT=%s", union);
         operation = union.optimize(mailbox);
 
-        ZimbraLog.search.debug("COMPILED=%s", operation);
+        ZmailLog.search.debug("COMPILED=%s", operation);
     }
 
     public SearchParams getParams() {
@@ -708,19 +708,19 @@ public final class ZimbraQuery {
     /**
      * Runs the search and gets an open result set.
      *
-     * WARNING: You **MUST** call {@link ZimbraQueryResults#close()} when you are done with them!
+     * WARNING: You **MUST** call {@link ZmailQueryResults#close()} when you are done with them!
      */
-    public ZimbraQueryResults execute() throws ServiceException {
+    public ZmailQueryResults execute() throws ServiceException {
         compile();
 
         Set<QueryTarget> targets = operation.getQueryTargets();
         assert(operation instanceof UnionQueryOperation || QueryTarget.getExplicitTargetCount(targets) <= 1);
         assert(targets.size() >1 || !QueryTarget.hasExternalTarget(targets) || operation instanceof RemoteQueryOperation);
 
-        ZimbraLog.search.debug("OPERATION: %s", operation);
+        ZmailLog.search.debug("OPERATION: %s", operation);
 
         int chunkSize = (int) Math.min((long) params.getOffset() + (long) params.getLimit(), 1000L);
-        ZimbraQueryResults results = null;
+        ZmailQueryResults results = null;
         try {
             results = operation.run(mailbox, params, chunkSize);
             if (((!params.getIncludeTagDeleted() || !params.getIncludeTagMuted()) && params.getFetchMode() != SearchParams.Fetch.IDS)
@@ -790,7 +790,7 @@ public final class ZimbraQuery {
                 if (visibleFolders != null) {
                     if (visibleFolders.isEmpty()) {
                         union.operations.remove(i);
-                        ZimbraLog.search.debug("Query changed to NULL_QUERY_OPERATION, no visible folders");
+                        ZmailLog.search.debug("Query changed to NULL_QUERY_OPERATION, no visible folders");
                         union.operations.add(i, new NoResultsQueryOperation());
                     } else {
                         union.operations.remove(i);

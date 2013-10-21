@@ -13,7 +13,7 @@
  * ***** END LICENSE BLOCK *****
  */
 
-package com.zimbra.cs.script;
+package org.zmail.cs.script;
 
 public class ProvisioningOptions {
 

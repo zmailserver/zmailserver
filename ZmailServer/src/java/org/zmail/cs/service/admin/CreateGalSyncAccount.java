@@ -12,7 +12,7 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.service.admin;
+package org.zmail.cs.service.admin;
 
 import java.util.Arrays;
 import java.util.Collections;
@@ -22,34 +22,34 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.common.soap.AdminConstants;
-import com.zimbra.common.soap.Element;
-import com.zimbra.common.util.StringUtil;
-import com.zimbra.common.util.ZimbraLog;
-import com.zimbra.cs.account.Account;
-import com.zimbra.cs.account.AccountServiceException;
-import com.zimbra.cs.account.DataSource;
-import com.zimbra.cs.account.Domain;
-import com.zimbra.cs.account.Provisioning;
-import com.zimbra.cs.account.Server;
-import com.zimbra.cs.account.accesscontrol.AdminRight;
-import com.zimbra.cs.account.accesscontrol.Rights.Admin;
-import com.zimbra.cs.account.accesscontrol.TargetType;
-import com.zimbra.cs.ldap.LdapConstants;
-import com.zimbra.cs.mailbox.ACL;
-import com.zimbra.cs.mailbox.Folder;
-import com.zimbra.cs.mailbox.MailItem;
-import com.zimbra.cs.mailbox.MailServiceException;
-import com.zimbra.cs.mailbox.Mailbox;
-import com.zimbra.cs.mailbox.MailboxManager;
-import com.zimbra.soap.JaxbUtil;
-import com.zimbra.soap.ZimbraSoapContext;
-import com.zimbra.soap.admin.message.CreateGalSyncAccountRequest;
-import com.zimbra.soap.admin.type.DataSourceType;
-import com.zimbra.soap.admin.type.GalMode;
-import com.zimbra.soap.type.AccountBy;
-import com.zimbra.soap.type.AccountSelector;
+import org.zmail.common.service.ServiceException;
+import org.zmail.common.soap.AdminConstants;
+import org.zmail.common.soap.Element;
+import org.zmail.common.util.StringUtil;
+import org.zmail.common.util.ZmailLog;
+import org.zmail.cs.account.Account;
+import org.zmail.cs.account.AccountServiceException;
+import org.zmail.cs.account.DataSource;
+import org.zmail.cs.account.Domain;
+import org.zmail.cs.account.Provisioning;
+import org.zmail.cs.account.Server;
+import org.zmail.cs.account.accesscontrol.AdminRight;
+import org.zmail.cs.account.accesscontrol.Rights.Admin;
+import org.zmail.cs.account.accesscontrol.TargetType;
+import org.zmail.cs.ldap.LdapConstants;
+import org.zmail.cs.mailbox.ACL;
+import org.zmail.cs.mailbox.Folder;
+import org.zmail.cs.mailbox.MailItem;
+import org.zmail.cs.mailbox.MailServiceException;
+import org.zmail.cs.mailbox.Mailbox;
+import org.zmail.cs.mailbox.MailboxManager;
+import org.zmail.soap.JaxbUtil;
+import org.zmail.soap.ZmailSoapContext;
+import org.zmail.soap.admin.message.CreateGalSyncAccountRequest;
+import org.zmail.soap.admin.type.DataSourceType;
+import org.zmail.soap.admin.type.GalMode;
+import org.zmail.soap.type.AccountBy;
+import org.zmail.soap.type.AccountSelector;
 
 public class CreateGalSyncAccount extends AdminDocumentHandler {
 
@@ -61,7 +61,7 @@ public class CreateGalSyncAccount extends AdminDocumentHandler {
     @Override
     public Element handle(Element request, Map<String, Object> context) throws ServiceException {
 
-        ZimbraSoapContext zsc = getZimbraSoapContext(context);
+        ZmailSoapContext zsc = getZmailSoapContext(context);
         Provisioning prov = Provisioning.getInstance();
 
         CreateGalSyncAccountRequest cgaRequest = JaxbUtil.elementToJaxb(request);
@@ -88,7 +88,7 @@ public class CreateGalSyncAccount extends AdminDocumentHandler {
         try {
             account = prov.get(acctBy.toKeyDomainBy(), acctValue, zsc.getAuthToken());
         } catch (ServiceException se) {
-            ZimbraLog.gal.warn("error checking GalSyncAccount", se);
+            ZmailLog.gal.warn("error checking GalSyncAccount", se);
         }
 
         // create the system account if not already exists.
@@ -104,11 +104,11 @@ public class CreateGalSyncAccount extends AdminDocumentHandler {
             // XXX revisit
             checkDomainRightByEmail(zsc, acctValue, Admin.R_createAccount);
             Map<String,Object> accountAttrs = new HashMap<String,Object>();
-            StringUtil.addToMultiMap(accountAttrs, Provisioning.A_zimbraIsSystemResource, LdapConstants.LDAP_TRUE);
-            StringUtil.addToMultiMap(accountAttrs, Provisioning.A_zimbraIsSystemAccount, LdapConstants.LDAP_TRUE);
-            StringUtil.addToMultiMap(accountAttrs, Provisioning.A_zimbraHideInGal, LdapConstants.LDAP_TRUE);
-            StringUtil.addToMultiMap(accountAttrs, Provisioning.A_zimbraContactMaxNumEntries, "0");
-            StringUtil.addToMultiMap(accountAttrs, Provisioning.A_zimbraMailHost, mailHost);
+            StringUtil.addToMultiMap(accountAttrs, Provisioning.A_zmailIsSystemResource, LdapConstants.LDAP_TRUE);
+            StringUtil.addToMultiMap(accountAttrs, Provisioning.A_zmailIsSystemAccount, LdapConstants.LDAP_TRUE);
+            StringUtil.addToMultiMap(accountAttrs, Provisioning.A_zmailHideInGal, LdapConstants.LDAP_TRUE);
+            StringUtil.addToMultiMap(accountAttrs, Provisioning.A_zmailContactMaxNumEntries, "0");
+            StringUtil.addToMultiMap(accountAttrs, Provisioning.A_zmailMailHost, mailHost);
             checkSetAttrsOnCreate(zsc, TargetType.account, acctValue, accountAttrs);
             account = prov.createAccount(acctValue, password, accountAttrs);
         }
@@ -125,7 +125,7 @@ public class CreateGalSyncAccount extends AdminDocumentHandler {
         return response;
     }
 
-    static void addDataSource(Element request, ZimbraSoapContext zsc, Account account,
+    static void addDataSource(Element request, ZmailSoapContext zsc, Account account,
             Domain domain, String folder, String name, GalMode type)  throws ServiceException {
         String acctName = account.getName();
         String acctId = account.getId();
@@ -165,21 +165,21 @@ public class CreateGalSyncAccount extends AdminDocumentHandler {
         // create datasource
         Map<String,Object> attrs = AdminService.getAttrs(request, true);
         try {
-            attrs.put(Provisioning.A_zimbraGalType, type.name());
-            attrs.put(Provisioning.A_zimbraDataSourceFolderId, "" + folderId);
-            if (!attrs.containsKey(Provisioning.A_zimbraDataSourceEnabled)) {
-                attrs.put(Provisioning.A_zimbraDataSourceEnabled, LdapConstants.LDAP_TRUE);
+            attrs.put(Provisioning.A_zmailGalType, type.name());
+            attrs.put(Provisioning.A_zmailDataSourceFolderId, "" + folderId);
+            if (!attrs.containsKey(Provisioning.A_zmailDataSourceEnabled)) {
+                attrs.put(Provisioning.A_zmailDataSourceEnabled, LdapConstants.LDAP_TRUE);
             }
-            if (!attrs.containsKey(Provisioning.A_zimbraGalStatus)) {
-                attrs.put(Provisioning.A_zimbraGalStatus, "enabled");
+            if (!attrs.containsKey(Provisioning.A_zmailGalStatus)) {
+                attrs.put(Provisioning.A_zmailGalStatus, "enabled");
             }
             Provisioning.getInstance().createDataSource(account, DataSourceType.gal, name, attrs);
         } catch (ServiceException e) {
-            ZimbraLog.gal.error("error creating datasource for GalSyncAccount", e);
+            ZmailLog.gal.error("error creating datasource for GalSyncAccount", e);
             throw e;
         }
 
-        ZimbraLog.security.info(ZimbraLog.encodeAttrs(new String[] {"cmd", "CreateGalSyncAccount", "name", acctName} ));
+        ZmailLog.security.info(ZmailLog.encodeAttrs(new String[] {"cmd", "CreateGalSyncAccount", "name", acctName} ));
     }
 
     private static final Set<String> emptySet = Collections.emptySet();

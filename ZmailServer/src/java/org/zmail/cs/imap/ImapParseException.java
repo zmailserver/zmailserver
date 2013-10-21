@@ -13,7 +13,7 @@
  * ***** END LICENSE BLOCK *****
  */
 
-package com.zimbra.cs.imap;
+package org.zmail.cs.imap;
 
 class ImapParseException extends ImapException {
     private static final long serialVersionUID = 4675342317380797673L;

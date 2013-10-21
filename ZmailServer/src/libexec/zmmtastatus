@@ -25,9 +25,9 @@ if ($> != 0) {
   exit 1;
 }
 
-my $zimbra_home = getLocalConfig("zimbra_home");
+my $zmail_home = getLocalConfig("zmail_home");
 # Exit if software-only node.
-exit(1) unless (-f "${zimbra_home}/conf/localconfig.xml");
+exit(1) unless (-f "${zmail_home}/conf/localconfig.xml");
 
 my %options = ();
 unless ( getopts( 'dhv', \%options ) ) { usage(); }
@@ -37,7 +37,7 @@ my $verbose = $options{v} ? 1 : 0;
 $verbose = 1 if $debug;
 
 
-my $pidFile="${zimbra_home}/data/postfix/spool/pid/master.pid";
+my $pidFile="${zmail_home}/data/postfix/spool/pid/master.pid";
 
 exit (mtaIsRunning() ? 0 : 1);
 
@@ -65,7 +65,7 @@ sub getLocalConfig {
   if (defined ($ENV{zmsetvars})) {
     return $ENV{$key};
   }
-  open CONF, "/opt/zimbra/bin/zmlocalconfig -x -s -q -m shell |" or die "Can't open local config: $!";
+  open CONF, "/opt/zmail/bin/zmlocalconfig -x -s -q -m shell |" or die "Can't open local config: $!";
   my @conf = <CONF>;
   close CONF;
 

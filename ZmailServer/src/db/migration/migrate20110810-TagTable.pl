@@ -55,7 +55,7 @@ CREATE TABLE IF NOT EXISTS $group.tag (
 
    PRIMARY KEY (mailbox_id, id),
    UNIQUE INDEX i_tag_name (mailbox_id, name),
-   CONSTRAINT fk_tag_mailbox_id FOREIGN KEY (mailbox_id) REFERENCES zimbra.mailbox(id)
+   CONSTRAINT fk_tag_mailbox_id FOREIGN KEY (mailbox_id) REFERENCES zmail.mailbox(id)
 ) ENGINE = InnoDB;
 _EOF_
     push(@sql,$sql);

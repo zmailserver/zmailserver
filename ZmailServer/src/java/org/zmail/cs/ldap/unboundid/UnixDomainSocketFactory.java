@@ -12,7 +12,7 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.ldap.unboundid;
+package org.zmail.cs.ldap.unboundid;
 
 import java.io.File;
 import java.io.IOException;
@@ -30,7 +30,7 @@ import javax.net.SocketFactory;
 import org.newsclub.net.unix.AFUNIXSocket;
 import org.newsclub.net.unix.AFUNIXSocketAddress;
 
-import com.zimbra.common.localconfig.LC;
+import org.zmail.common.localconfig.LC;
 
 public class UnixDomainSocketFactory extends SocketFactory {
 
@@ -62,7 +62,7 @@ public class UnixDomainSocketFactory extends SocketFactory {
     
     
     private static class UnixDomainSocket extends Socket {
-        // "/opt/zimbra/openldap-2.4.28.5z/var/run/ldapi";
+        // "/opt/zmail/openldap-2.4.28.5z/var/run/ldapi";
         private static final String LDAPI_SOCKET_FILE = LC.ldap_ldapi_socket_file.value(); 
         
         // wrap, instead of extends AFUNIXSocket because AFUNIXSocket does not have

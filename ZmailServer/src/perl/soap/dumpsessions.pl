@@ -26,7 +26,7 @@ use Getopt::Long;
 use XmlElement;
 use XmlDoc;
 use Soap;
-use ZimbraSoapTest;
+use ZmailSoapTest;
 
 my ($includeSessions, $groupByAccount);
 #standard options
@@ -43,7 +43,7 @@ if (!defined($user)) {
     die "USAGE: $0 -u USER [-p PASSWD] [-h HOST] [-l] [-a]\n\t-l = list sessions\n\t-g group sessions by accountId";
 }
 
-my $z = ZimbraSoapTest->new($user, $host, $pw);
+my $z = ZmailSoapTest->new($user, $host, $pw);
 $z->doAdminAuth();
 
 my %args;

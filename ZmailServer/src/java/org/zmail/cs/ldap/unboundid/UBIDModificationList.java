@@ -12,7 +12,7 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.ldap.unboundid;
+package org.zmail.cs.ldap.unboundid;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -22,10 +22,10 @@ import com.unboundid.asn1.ASN1OctetString;
 import com.unboundid.ldap.sdk.Modification;
 import com.unboundid.ldap.sdk.ModificationType;
 
-import com.zimbra.common.util.StringUtil;
-import com.zimbra.cs.account.Entry;
-import com.zimbra.cs.ldap.LdapUtil;
-import com.zimbra.cs.ldap.ZModificationList;
+import org.zmail.common.util.StringUtil;
+import org.zmail.cs.account.Entry;
+import org.zmail.cs.ldap.LdapUtil;
+import org.zmail.cs.ldap.ZModificationList;
 
 public class UBIDModificationList extends ZModificationList {
 

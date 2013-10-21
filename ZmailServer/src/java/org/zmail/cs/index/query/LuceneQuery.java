@@ -12,16 +12,16 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.index.query;
+package org.zmail.cs.index.query;
 
 import java.util.Map;
 
 import org.apache.lucene.index.Term;
 import org.apache.lucene.search.TermQuery;
 
-import com.zimbra.cs.index.LuceneQueryOperation;
-import com.zimbra.cs.index.QueryOperation;
-import com.zimbra.cs.mailbox.Mailbox;
+import org.zmail.cs.index.LuceneQueryOperation;
+import org.zmail.cs.index.QueryOperation;
+import org.zmail.cs.mailbox.Mailbox;
 
 /**
  * Query by Lucene field.

@@ -12,9 +12,9 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.lmtpserver;
+package org.zmail.cs.lmtpserver;
 
-import com.zimbra.cs.server.Server;
+import org.zmail.cs.server.Server;
 
 public interface LmtpServer extends Server {
     public LmtpConfig getConfig();

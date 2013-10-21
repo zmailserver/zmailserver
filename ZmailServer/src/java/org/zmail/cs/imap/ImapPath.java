@@ -12,37 +12,37 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.imap;
+package org.zmail.cs.imap;
 
 import java.nio.ByteBuffer;
 import java.nio.charset.Charset;
 
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.common.util.Pair;
-import com.zimbra.common.util.ZimbraLog;
-import com.zimbra.cs.account.Account;
-import com.zimbra.cs.account.AccountServiceException;
-import com.zimbra.cs.account.AuthTokenException;
-import com.zimbra.cs.account.Provisioning;
-import com.zimbra.common.account.Key.AccountBy;
-import com.zimbra.cs.mailbox.ACL;
-import com.zimbra.cs.mailbox.Flag;
-import com.zimbra.cs.mailbox.Folder;
-import com.zimbra.cs.mailbox.MailItem;
-import com.zimbra.cs.mailbox.MailServiceException;
-import com.zimbra.cs.mailbox.MailServiceException.NoSuchItemException;
-import com.zimbra.cs.mailbox.Mailbox;
-import com.zimbra.cs.mailbox.MailboxManager;
-import com.zimbra.cs.mailbox.Mountpoint;
-import com.zimbra.cs.mailbox.OperationContext;
-import com.zimbra.cs.mailbox.SearchFolder;
-import com.zimbra.cs.service.AuthProvider;
-import com.zimbra.cs.service.util.ItemId;
-import com.zimbra.cs.util.AccountUtil;
-import com.zimbra.client.ZFolder;
-import com.zimbra.client.ZMailbox;
-import com.zimbra.client.ZMountpoint;
-import com.zimbra.client.ZSearchFolder;
+import org.zmail.common.service.ServiceException;
+import org.zmail.common.util.Pair;
+import org.zmail.common.util.ZmailLog;
+import org.zmail.cs.account.Account;
+import org.zmail.cs.account.AccountServiceException;
+import org.zmail.cs.account.AuthTokenException;
+import org.zmail.cs.account.Provisioning;
+import org.zmail.common.account.Key.AccountBy;
+import org.zmail.cs.mailbox.ACL;
+import org.zmail.cs.mailbox.Flag;
+import org.zmail.cs.mailbox.Folder;
+import org.zmail.cs.mailbox.MailItem;
+import org.zmail.cs.mailbox.MailServiceException;
+import org.zmail.cs.mailbox.MailServiceException.NoSuchItemException;
+import org.zmail.cs.mailbox.Mailbox;
+import org.zmail.cs.mailbox.MailboxManager;
+import org.zmail.cs.mailbox.Mountpoint;
+import org.zmail.cs.mailbox.OperationContext;
+import org.zmail.cs.mailbox.SearchFolder;
+import org.zmail.cs.service.AuthProvider;
+import org.zmail.cs.service.util.ItemId;
+import org.zmail.cs.util.AccountUtil;
+import org.zmail.client.ZFolder;
+import org.zmail.client.ZMailbox;
+import org.zmail.client.ZMountpoint;
+import org.zmail.client.ZSearchFolder;
 
 public class ImapPath implements Comparable<ImapPath> {
     enum Scope { UNPARSED, NAME, CONTENT, REFERENCE };
@@ -52,7 +52,7 @@ public class ImapPath implements Comparable<ImapPath> {
             try {
                 FOLDER_ENCODING_CHARSET = Charset.forName("imap-utf-7");
             } catch (Exception e) {
-                ZimbraLog.imap.error("could not load imap-utf-7 charset (perhaps zimbra-charset.jar is not in the jetty endorsed directory)", e);
+                ZmailLog.imap.error("could not load imap-utf-7 charset (perhaps zmail-charset.jar is not in the jetty endorsed directory)", e);
                 FOLDER_ENCODING_CHARSET = Charset.forName("utf-8");
             }
         }
@@ -68,7 +68,7 @@ public class ImapPath implements Comparable<ImapPath> {
     private transient Object mFolder;
     private transient ImapPath mReferent;
 
-    /** Takes a user-supplied IMAP mailbox path and converts it to a Zimbra
+    /** Takes a user-supplied IMAP mailbox path and converts it to a Zmail
      *  folder pathname.  Applies all special, hack-specific folder mappings.
      *  Does <b>not</b> do IMAP-UTF-7 decoding; this is assumed to have been
      *  already done by the appropriate method in {@link ImapRequest}.
@@ -110,10 +110,10 @@ public class ImapPath implements Comparable<ImapPath> {
         }
     }
 
-    ImapPath(String owner, String zimbraPath, ImapCredentials creds) {
+    ImapPath(String owner, String zmailPath, ImapCredentials creds) {
         mCredentials = creds;
         mOwner = owner == null ? null : owner.toLowerCase();
-        mPath = zimbraPath.startsWith("/") ? zimbraPath.substring(1) : zimbraPath;
+        mPath = zmailPath.startsWith("/") ? zmailPath.substring(1) : zmailPath;
     }
 
     ImapPath(ImapPath other) {
@@ -331,11 +331,11 @@ public class ImapPath implements Comparable<ImapPath> {
         if (mFolder == null) {
             Object mboxobj = getOwnerMailbox();
             if (mboxobj instanceof Mailbox) {
-                Folder folder = ((Mailbox) mboxobj).getFolderByPath(getContext(), asZimbraPath());
+                Folder folder = ((Mailbox) mboxobj).getFolderByPath(getContext(), asZmailPath());
                 mFolder = folder;
                 mItemId = new ItemId(folder);
             } else if (mboxobj instanceof ZMailbox) {
-                ZFolder zfolder = ((ZMailbox) mboxobj).getFolderByPath(asZimbraPath());
+                ZFolder zfolder = ((ZMailbox) mboxobj).getFolderByPath(asZmailPath());
                 mFolder = zfolder;
                 if (zfolder == null) {
                     throw MailServiceException.NO_SUCH_FOLDER(asImapPath());
@@ -391,7 +391,7 @@ public class ImapPath implements Comparable<ImapPath> {
         if (mboxobj instanceof Mailbox) {
             try {
                 if (mFolder == null) {
-                    Pair<Folder,String> resolved = ((Mailbox) mboxobj).getFolderByPathLongestMatch(getContext(), Mailbox.ID_FOLDER_USER_ROOT, asZimbraPath());
+                    Pair<Folder,String> resolved = ((Mailbox) mboxobj).getFolderByPathLongestMatch(getContext(), Mailbox.ID_FOLDER_USER_ROOT, asZmailPath());
                     subpathRemote = resolved.getSecond();
 
                     boolean isMountpoint = resolved.getFirst() instanceof Mountpoint;
@@ -415,7 +415,7 @@ public class ImapPath implements Comparable<ImapPath> {
             String accountId = mCredentials == null ? null : mCredentials.getAccountId();
             if (mFolder == null) {
                 ZMailbox zmbx = (ZMailbox) mboxobj;
-                String path = asZimbraPath();
+                String path = asZmailPath();
                 try {
                     for (int index = path.length(); index != -1; index = path.lastIndexOf('/', index - 1)) {
                         ZFolder zfolder = zmbx.getFolderByPath(path.substring(0, index));
@@ -708,7 +708,7 @@ public class ImapPath implements Comparable<ImapPath> {
     }
 
 
-    String asZimbraPath() {
+    String asZmailPath() {
         return mPath;
     }
 

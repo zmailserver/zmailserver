@@ -17,9 +17,9 @@ use strict;
 use vars qw($PROCFS @STATLIST $LOGFILE $CONSOLE $interval $LOGFH
             $ROTATE_NOW $ROTATE_DEFER $date $HAS_IO_ACCT);
 use Getopt::Long;
-use lib "/opt/zimbra/zimbramon/lib";
-use Zimbra::Mon::Zmstat;
-use Zimbra::Mon::Logger;
+use lib "/opt/zmail/zmailmon/lib";
+use Zmail::Mon::Zmstat;
+use Zmail::Mon::Logger;
 use Data::Dumper;
 
 # Initial version will support forked process monitoring.  I/O accounting
@@ -100,7 +100,7 @@ sub collect_stats($$$) {
 
 sub get_nginx_pid {
     my $pid = 0;
-    if (open(PID, "</opt/zimbra/log/nginx.pid")) {
+    if (open(PID, "</opt/zmail/log/nginx.pid")) {
         chomp($pid = <PID>);
         close(PID);
     } else {
@@ -192,7 +192,7 @@ sub main() {
             }
             my $values = join(', ', @printstats);
             $LOGFH->print("$values\n");
-            Zimbra::Mon::Logger::LogStats( "info", "zmstat nginx.csv: ${HEADING}:: $values"); 
+            Zmail::Mon::Logger::LogStats( "info", "zmstat nginx.csv: ${HEADING}:: $values"); 
             $LOGFH->flush();
             $ROTATE_DEFER = 0;
             if ($ROTATE_NOW) {
@@ -211,7 +211,7 @@ sub usage {
 Usage: zmstat-nginx [options]
 Monitor nginx cpu and I/O statistics
 -i, --interval: output a line every N seconds
--l, --log:      log file (default is /opt/zimbra/zmstat/nginx.csv)
+-l, --log:      log file (default is /opt/zmail/zmstat/nginx.csv)
 -c, --console:  output to stdout
 
 If logging to a file, rotation occurs when a HUP signal is sent or when

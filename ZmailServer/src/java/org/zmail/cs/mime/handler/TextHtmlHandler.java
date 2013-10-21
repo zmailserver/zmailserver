@@ -13,7 +13,7 @@
  * ***** END LICENSE BLOCK *****
  */
 
-package com.zimbra.cs.mime.handler;
+package org.zmail.cs.mime.handler;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -23,13 +23,13 @@ import javax.activation.DataSource;
 
 import org.apache.lucene.document.Document;
 
-import com.zimbra.common.util.ByteUtil;
-import com.zimbra.common.util.HtmlTextExtractor;
-import com.zimbra.cs.convert.AttachmentInfo;
-import com.zimbra.cs.mime.Mime;
-import com.zimbra.cs.mime.MimeHandler;
-import com.zimbra.cs.mime.MimeHandlerException;
-import com.zimbra.cs.mime.MimeHandlerManager;
+import org.zmail.common.util.ByteUtil;
+import org.zmail.common.util.HtmlTextExtractor;
+import org.zmail.cs.convert.AttachmentInfo;
+import org.zmail.cs.mime.Mime;
+import org.zmail.cs.mime.MimeHandler;
+import org.zmail.cs.mime.MimeHandlerException;
+import org.zmail.cs.mime.MimeHandlerManager;
 
 /**
  * @author schemers

@@ -12,7 +12,7 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.service.formatter;
+package org.zmail.cs.service.formatter;
 
 import java.io.IOException;
 import java.util.EnumSet;
@@ -20,15 +20,15 @@ import java.util.Set;
 
 import javax.servlet.ServletException;
 
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.cs.mailbox.MailItem;
-import com.zimbra.cs.service.UserServletContext;
-import com.zimbra.cs.service.UserServletException;
-import com.zimbra.cs.service.formatter.FormatterFactory.FormatType;
+import org.zmail.common.service.ServiceException;
+import org.zmail.cs.mailbox.MailItem;
+import org.zmail.cs.service.UserServletContext;
+import org.zmail.cs.service.UserServletException;
+import org.zmail.cs.service.formatter.FormatterFactory.FormatType;
 
 public class FreeBusyFormatter extends Formatter {
 
-    private static final String ATTR_FREEBUSY = "zimbra_freebusy";
+    private static final String ATTR_FREEBUSY = "zmail_freebusy";
 
     @Override
     public FormatType getType() {

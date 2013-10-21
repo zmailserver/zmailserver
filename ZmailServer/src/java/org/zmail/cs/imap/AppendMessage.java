@@ -12,7 +12,7 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.imap;
+package org.zmail.cs.imap;
 
 import java.io.BufferedInputStream;
 import java.io.IOException;
@@ -31,25 +31,25 @@ import javax.mail.internet.MailDateFormat;
 
 import com.google.common.annotations.VisibleForTesting;
 import com.google.common.collect.Sets;
-import com.zimbra.client.ZFolder;
-import com.zimbra.client.ZMailbox;
-import com.zimbra.common.mime.shim.JavaMailInternetAddress;
-import com.zimbra.common.mime.shim.JavaMailInternetHeaders;
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.common.util.ByteUtil;
-import com.zimbra.common.util.ZimbraLog;
-import com.zimbra.cs.mailbox.DeliveryOptions;
-import com.zimbra.cs.mailbox.Flag;
-import com.zimbra.cs.mailbox.Folder;
-import com.zimbra.cs.mailbox.Mailbox;
-import com.zimbra.cs.mailbox.Message;
-import com.zimbra.cs.mailbox.Tag;
-import com.zimbra.cs.mime.ParsedMessage;
-import com.zimbra.cs.service.util.ItemId;
-import com.zimbra.cs.store.Blob;
-import com.zimbra.cs.store.BlobBuilder;
-import com.zimbra.cs.store.StoreManager;
-import com.zimbra.cs.util.AccountUtil;
+import org.zmail.client.ZFolder;
+import org.zmail.client.ZMailbox;
+import org.zmail.common.mime.shim.JavaMailInternetAddress;
+import org.zmail.common.mime.shim.JavaMailInternetHeaders;
+import org.zmail.common.service.ServiceException;
+import org.zmail.common.util.ByteUtil;
+import org.zmail.common.util.ZmailLog;
+import org.zmail.cs.mailbox.DeliveryOptions;
+import org.zmail.cs.mailbox.Flag;
+import org.zmail.cs.mailbox.Folder;
+import org.zmail.cs.mailbox.Mailbox;
+import org.zmail.cs.mailbox.Message;
+import org.zmail.cs.mailbox.Tag;
+import org.zmail.cs.mime.ParsedMessage;
+import org.zmail.cs.service.util.ItemId;
+import org.zmail.cs.store.Blob;
+import org.zmail.cs.store.BlobBuilder;
+import org.zmail.cs.store.StoreManager;
+import org.zmail.cs.util.AccountUtil;
 
 /**
  * Encapsulates append message data for an APPEND request.
@@ -282,7 +282,7 @@ final class AppendMessage {
         // server uses UNIX time, so range-check specified date (is there a better place for this?)
         // FIXME: Why is this different from INTERNALDATE range check?
         if (date != null && date.getTime() > Integer.MAX_VALUE * 1000L) {
-            ZimbraLog.imap.info("APPEND failed: date out of range");
+            ZmailLog.imap.info("APPEND failed: date out of range");
             throw ServiceException.FAILURE("APPEND failed (date out of range)", null);
         }
     }

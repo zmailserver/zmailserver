@@ -12,13 +12,13 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.account.ldap.entry;
+package org.zmail.cs.account.ldap.entry;
 
-import com.zimbra.cs.account.Account;
-import com.zimbra.cs.account.Identity;
-import com.zimbra.cs.account.Provisioning;
-import com.zimbra.cs.ldap.LdapException;
-import com.zimbra.cs.ldap.ZAttributes;
+import org.zmail.cs.account.Account;
+import org.zmail.cs.account.Identity;
+import org.zmail.cs.account.Provisioning;
+import org.zmail.cs.ldap.LdapException;
+import org.zmail.cs.ldap.ZAttributes;
 
 /**
  * 
@@ -30,8 +30,8 @@ public class LdapIdentity extends Identity implements LdapEntry {
     private String mDn;
 
     public LdapIdentity(Account acct, String dn, ZAttributes attrs, Provisioning prov) throws LdapException {
-        super(acct, attrs.getAttrString(Provisioning.A_zimbraPrefIdentityName),
-                attrs.getAttrString(Provisioning.A_zimbraPrefIdentityId),
+        super(acct, attrs.getAttrString(Provisioning.A_zmailPrefIdentityName),
+                attrs.getAttrString(Provisioning.A_zmailPrefIdentityId),
                 attrs.getAttrs(), prov);
         mDn = dn;
     }

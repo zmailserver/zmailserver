@@ -17,7 +17,7 @@
  * Created on Apr 11, 2005
  *
  */
-package com.zimbra.cs.filter;
+package org.zmail.cs.filter;
 
 import java.util.ArrayList;
 import java.util.Collections;

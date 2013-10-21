@@ -12,7 +12,7 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.account.ldap;
+package org.zmail.cs.account.ldap;
 
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
@@ -38,42 +38,42 @@ import javax.mail.internet.MimeBodyPart;
 import javax.mail.internet.MimeMultipart;
 
 import com.sun.mail.smtp.SMTPMessage;
-import com.zimbra.common.account.ZAttrProvisioning.AutoProvMode;
-import com.zimbra.common.mime.MimeConstants;
-import com.zimbra.common.mime.shim.JavaMailInternetAddress;
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.common.util.StringUtil;
-import com.zimbra.common.util.ZimbraLog;
-import com.zimbra.common.zmime.ZMimeBodyPart;
-import com.zimbra.common.zmime.ZMimeMultipart;
-import com.zimbra.cs.account.Account;
-import com.zimbra.cs.account.AccountServiceException;
-import com.zimbra.cs.account.AttributeClass;
-import com.zimbra.cs.account.AttributeManager;
-import com.zimbra.cs.account.Domain;
-import com.zimbra.cs.account.EntryCacheDataKey;
-import com.zimbra.cs.account.Provisioning;
-import com.zimbra.cs.account.Provisioning.DirectoryEntryVisitor;
-import com.zimbra.cs.account.names.NameUtil.EmailAddress;
-import com.zimbra.cs.extension.ExtensionUtil;
-import com.zimbra.cs.ldap.IAttributes;
-import com.zimbra.cs.ldap.LdapClient;
-import com.zimbra.cs.ldap.LdapConstants;
-import com.zimbra.cs.ldap.LdapException.LdapSizeLimitExceededException;
-import com.zimbra.cs.ldap.LdapServerConfig.ExternalLdapConfig;
-import com.zimbra.cs.ldap.LdapUsage;
-import com.zimbra.cs.ldap.LdapUtil;
-import com.zimbra.cs.ldap.SearchLdapOptions;
-import com.zimbra.cs.ldap.SearchLdapOptions.SearchLdapVisitor;
-import com.zimbra.cs.ldap.SearchLdapOptions.StopIteratingException;
-import com.zimbra.cs.ldap.ZAttributes;
-import com.zimbra.cs.ldap.ZLdapContext;
-import com.zimbra.cs.ldap.ZLdapFilter;
-import com.zimbra.cs.ldap.ZLdapFilterFactory;
-import com.zimbra.cs.ldap.ZLdapFilterFactory.FilterId;
-import com.zimbra.cs.ldap.ZSearchResultEntry;
-import com.zimbra.cs.ldap.ZSearchScope;
-import com.zimbra.cs.util.JMSession;
+import org.zmail.common.account.ZAttrProvisioning.AutoProvMode;
+import org.zmail.common.mime.MimeConstants;
+import org.zmail.common.mime.shim.JavaMailInternetAddress;
+import org.zmail.common.service.ServiceException;
+import org.zmail.common.util.StringUtil;
+import org.zmail.common.util.ZmailLog;
+import org.zmail.common.zmime.ZMimeBodyPart;
+import org.zmail.common.zmime.ZMimeMultipart;
+import org.zmail.cs.account.Account;
+import org.zmail.cs.account.AccountServiceException;
+import org.zmail.cs.account.AttributeClass;
+import org.zmail.cs.account.AttributeManager;
+import org.zmail.cs.account.Domain;
+import org.zmail.cs.account.EntryCacheDataKey;
+import org.zmail.cs.account.Provisioning;
+import org.zmail.cs.account.Provisioning.DirectoryEntryVisitor;
+import org.zmail.cs.account.names.NameUtil.EmailAddress;
+import org.zmail.cs.extension.ExtensionUtil;
+import org.zmail.cs.ldap.IAttributes;
+import org.zmail.cs.ldap.LdapClient;
+import org.zmail.cs.ldap.LdapConstants;
+import org.zmail.cs.ldap.LdapException.LdapSizeLimitExceededException;
+import org.zmail.cs.ldap.LdapServerConfig.ExternalLdapConfig;
+import org.zmail.cs.ldap.LdapUsage;
+import org.zmail.cs.ldap.LdapUtil;
+import org.zmail.cs.ldap.SearchLdapOptions;
+import org.zmail.cs.ldap.SearchLdapOptions.SearchLdapVisitor;
+import org.zmail.cs.ldap.SearchLdapOptions.StopIteratingException;
+import org.zmail.cs.ldap.ZAttributes;
+import org.zmail.cs.ldap.ZLdapContext;
+import org.zmail.cs.ldap.ZLdapFilter;
+import org.zmail.cs.ldap.ZLdapFilterFactory;
+import org.zmail.cs.ldap.ZLdapFilterFactory.FilterId;
+import org.zmail.cs.ldap.ZSearchResultEntry;
+import org.zmail.cs.ldap.ZSearchScope;
+import org.zmail.cs.util.JMSession;
 
 public abstract class AutoProvision {
 
@@ -87,33 +87,33 @@ public abstract class AutoProvision {
 
     abstract Account handle() throws ServiceException;
 
-    protected Account createAccount(String acctZimbraName, ExternalEntry externalEntry,
+    protected Account createAccount(String acctZmailName, ExternalEntry externalEntry,
             String password, AutoProvMode mode)
     throws ServiceException {
         ZAttributes externalAttrs = externalEntry.getAttrs();
 
-        Map<String, Object> zimbraAttrs = mapAttrs(externalAttrs);
+        Map<String, Object> zmailAttrs = mapAttrs(externalAttrs);
 
         /*
         // TODO: should we do this?
-        String zimbraPassword = RandomPassword.generate();
-        zimbraAttrs.put(Provisioning.A_zimbraPasswordMustChange, Provisioning.TRUE);
+        String zmailPassword = RandomPassword.generate();
+        zmailAttrs.put(Provisioning.A_zmailPasswordMustChange, Provisioning.TRUE);
         */
 
         // if password is provided, use it
-        String zimbraPassword = null;
+        String zmailPassword = null;
         if (password != null) {
-            zimbraPassword = password;
-            zimbraAttrs.remove(Provisioning.A_userPassword);
+            zmailPassword = password;
+            zmailAttrs.remove(Provisioning.A_userPassword);
         }
 
         Account acct = null;
 
         try {
-            acct = prov.createAccount(acctZimbraName, zimbraPassword, zimbraAttrs);
+            acct = prov.createAccount(acctZmailName, zmailPassword, zmailAttrs);
         } catch (ServiceException e) {
             if (AccountServiceException.ACCOUNT_EXISTS.equals(e.getCode())) {
-                ZimbraLog.autoprov.debug("account %s already exists", acctZimbraName);
+                ZmailLog.autoprov.debug("account %s already exists", acctZmailName);
                 // the account already exists, that's fine, just return null
                 switch (mode) {
                     case EAGER:
@@ -128,18 +128,18 @@ public abstract class AutoProvision {
             }
         }
 
-        ZimbraLog.autoprov.info("auto provisioned account: " + acctZimbraName);
+        ZmailLog.autoprov.info("auto provisioned account: " + acctZmailName);
 
-        ZimbraLog.security.info(ZimbraLog.encodeAttrs(
+        ZmailLog.security.info(ZmailLog.encodeAttrs(
                 new String[] {"cmd", "auto provision Account",
-                        "name", acct.getName(), "id", acct.getId()}, zimbraAttrs));
+                        "name", acct.getName(), "id", acct.getId()}, zmailAttrs));
 
         // send notification email
         try {
-            sendNotifMessage(acct, zimbraPassword);
+            sendNotifMessage(acct, zmailPassword);
         } catch (ServiceException e) {
             // exception during sending notif email should not fail this method
-            ZimbraLog.autoprov.warn("unable to send auto provision notification email", e);
+            ZmailLog.autoprov.warn("unable to send auto provision notification email", e);
         }
 
         // invoke post create listener if configured
@@ -150,12 +150,12 @@ public abstract class AutoProvision {
             } else {
                 //eager mode should configure Listener
                 if (mode == AutoProvMode.EAGER) {
-                    ZimbraLog.autoprov.warn("EAGER mode should configure " + Provisioning.A_zimbraAutoProvListenerClass);
+                    ZmailLog.autoprov.warn("EAGER mode should configure " + Provisioning.A_zmailAutoProvListenerClass);
                 }
             }
         } catch (ServiceException e) {
             // exception during the post create listener should not fail this method
-            ZimbraLog.autoprov.warn("encountered error in post auto provision listener", e);
+            ZmailLog.autoprov.warn("encountered error in post auto provision listener", e);
         }
 
         return acct;
@@ -192,19 +192,19 @@ public abstract class AutoProvision {
                 String[] parts = rule.split(DELIMITER);
                 if (parts.length != 2) {
                     throw ServiceException.FAILURE("invalid value in " +
-                            Provisioning.A_zimbraAutoProvAttrMap + ": " + rule, null);
+                            Provisioning.A_zmailAutoProvAttrMap + ": " + rule, null);
                 }
 
                 String externalAttr = parts[0];
-                String zimbraAttr = parts[1];
+                String zmailAttr = parts[1];
 
-                if (!validAccountAttrs.contains(zimbraAttr)) {
+                if (!validAccountAttrs.contains(zmailAttr)) {
                     throw ServiceException.FAILURE("invalid value in " +
-                            Provisioning.A_zimbraAutoProvAttrMap + ": " + rule +
-                            ", not a valid zimbra attribute ", null);
+                            Provisioning.A_zmailAutoProvAttrMap + ": " + rule +
+                            ", not a valid zmail attribute ", null);
                 }
 
-                attrMap.put(externalAttr, zimbraAttr);
+                attrMap.put(externalAttr, zmailAttr);
             }
 
             Set<String> attrs = new HashSet<String>();
@@ -225,21 +225,21 @@ public abstract class AutoProvision {
                                 asSubclass(AutoProvisionListener.class).newInstance();
                     }
                 } catch (ClassNotFoundException e) {
-                    ZimbraLog.autoprov.warn(
+                    ZmailLog.autoprov.warn(
                             "unable to find auto provision listener class " + className, e);
                 } catch (InstantiationException e) {
-                    ZimbraLog.autoprov.warn(
+                    ZmailLog.autoprov.warn(
                             "unable to instantiate auto provision listener object of class "
                             + className, e);
                 } catch (IllegalAccessException e) {
-                    ZimbraLog.autoprov.warn(
+                    ZmailLog.autoprov.warn(
                             "unable to instantiate auto provision listener object of class "
                             + className, e);
                 }
             }
         }
 
-        private String getZimbraAttrName(String externalAttrName) {
+        private String getZmailAttrName(String externalAttrName) {
             return attrMap.get(externalAttrName);
         }
 
@@ -257,7 +257,7 @@ public abstract class AutoProvision {
     }
 
     /**
-     * map external name to zimbra name for the account to be created in Zimbra.
+     * map external name to zmail name for the account to be created in Zmail.
      *
      * @param externalAttrs
      * @return
@@ -278,7 +278,7 @@ public abstract class AutoProvision {
             if (loginName == null) {
                 throw ServiceException.FAILURE(
                         "AutoProvision: unable to map acount name, must configure " +
-                        Provisioning.A_zimbraAutoProvAccountNameMap, null);
+                        Provisioning.A_zmailAutoProvAccountNameMap, null);
             }
             EmailAddress emailAddr = new EmailAddress(loginName, false);
             localpart = emailAddr.getLocalPart();
@@ -293,25 +293,25 @@ public abstract class AutoProvision {
         AutoProvisionCachedInfo attrMap = AutoProvisionCachedInfo.getInfo(domain);
 
         Map<String, Object> extAttrs = externalAttrs.getAttrs();
-        Map<String, Object> zimbraAttrs = new HashMap<String, Object>();
+        Map<String, Object> zmailAttrs = new HashMap<String, Object>();
 
         for (Map.Entry<String, Object> extAttr : extAttrs.entrySet()) {
             String extAttrName = extAttr.getKey();
             Object attrValue = extAttr.getValue();
 
-            String zimbraAttrName = attrMap.getZimbraAttrName(extAttrName);
-            if (zimbraAttrName != null) {
+            String zmailAttrName = attrMap.getZmailAttrName(extAttrName);
+            if (zmailAttrName != null) {
                 if (attrValue instanceof String) {
-                    StringUtil.addToMultiMap(zimbraAttrs, zimbraAttrName, (String) attrValue);
+                    StringUtil.addToMultiMap(zmailAttrs, zmailAttrName, (String) attrValue);
                 } else if (attrValue instanceof String[]) {
                     for (String value : (String[]) attrValue) {
-                        StringUtil.addToMultiMap(zimbraAttrs, zimbraAttrName, value);
+                        StringUtil.addToMultiMap(zmailAttrs, zmailAttrName, value);
                     }
                 }
             }
         }
 
-        return zimbraAttrs;
+        return zmailAttrs;
     }
 
     protected ZAttributes getExternalAttrsByDn(String dn) throws ServiceException {
@@ -376,7 +376,7 @@ public abstract class AutoProvision {
                     searchBase = LdapConstants.DN_ROOT_DSE;
                 }
                 String searchFilter = LdapUtil.computeDn(loginName, searchFilterTemplate);
-                ZimbraLog.autoprov.debug("AutoProvision: computed search filter" + searchFilter);
+                ZmailLog.autoprov.debug("AutoProvision: computed search filter" + searchFilter);
                 ZSearchResultEntry entry = prov.getHelper().searchForEntry(
                         searchBase, ZLdapFilterFactory.getInstance().fromFilterString(
                                 FilterId.AUTO_PROVISION_SEARCH, searchFilter),
@@ -391,7 +391,7 @@ public abstract class AutoProvision {
             if (bindDNTemplate != null) {
                 // get attrs by external DN template
                 String dn = LdapUtil.computeDn(loginName, bindDNTemplate);
-                ZimbraLog.autoprov.debug("AutoProvision: computed external DN" + dn);
+                ZmailLog.autoprov.debug("AutoProvision: computed external DN" + dn);
                 return new ExternalEntry(dn, prov.getHelper().getAttributes(zlc, dn, attrs));
             }
 
@@ -399,8 +399,8 @@ public abstract class AutoProvision {
             LdapClient.closeContext(zlc);
         }
 
-        throw ServiceException.FAILURE("One of " + Provisioning.A_zimbraAutoProvLdapBindDn +
-                " or " + Provisioning.A_zimbraAutoProvLdapSearchFilter + " must be set", null);
+        throw ServiceException.FAILURE("One of " + Provisioning.A_zmailAutoProvLdapBindDn +
+                " or " + Provisioning.A_zmailAutoProvLdapSearchFilter + " must be set", null);
     }
 
     private String fillTemplate(Account acct, String template) {
@@ -436,8 +436,8 @@ public abstract class AutoProvision {
                 addr = new JavaMailInternetAddress(from);
             } catch (AddressException e) {
                 // log and try the next one
-                ZimbraLog.autoprov.warn("invalid address in " +
-                        Provisioning.A_zimbraAutoProvNotificationFromAddress, e);
+                ZmailLog.autoprov.warn("invalid address in " +
+                        Provisioning.A_zmailAutoProvNotificationFromAddress, e);
             }
 
             Address fromAddr = addr;
@@ -492,11 +492,11 @@ public abstract class AutoProvision {
             StringBuilder rcptAddr = new StringBuilder();
             for (Address a : rcpts)
                 rcptAddr.append(a.toString());
-            ZimbraLog.autoprov.info("auto provision notification sent rcpt='" +
+            ZmailLog.autoprov.info("auto provision notification sent rcpt='" +
                     rcptAddr + "' Message-ID=" + out.getMessageID());
 
         } catch (MessagingException e) {
-            ZimbraLog.autoprov.warn("send auto provision notification failed rcpt='" + toAddr +"'", e);
+            ZmailLog.autoprov.warn("send auto provision notification failed rcpt='" + toAddr +"'", e);
         }
     }
 
@@ -576,12 +576,12 @@ public abstract class AutoProvision {
      * Search the external auto provision LDAP source
      *
      * Only one of filter or name can be provided.
-     * - if name is provided, the search filter will be zimbraAutoProvLdapSearchFilter
+     * - if name is provided, the search filter will be zmailAutoProvLdapSearchFilter
      *   with place holders filled with the name.
      *
      * - if filter is provided, the provided filter will be the search filter.
      *
-     * - if neither is provided, the search filter will be zimbraAutoProvLdapSearchFilter
+     * - if neither is provided, the search filter will be zmailAutoProvLdapSearchFilter
      *   with place holders filled with "*".   If createTimestampLaterThan
      *   is provided, the search filter will be ANDed with (createTimestamp >= {timestamp})
      *
@@ -623,7 +623,7 @@ public abstract class AutoProvision {
 
         if (url == null) {
             throw ServiceException.FAILURE(
-                    String.format("missing %s on domain %s", Provisioning.A_zimbraAutoProvLdapURL, domain.getName()), null);
+                    String.format("missing %s on domain %s", Provisioning.A_zmailAutoProvLdapURL, domain.getName()), null);
         }
         if (searchBase == null) {
             searchBase = LdapConstants.DN_ROOT_DSE;
@@ -672,7 +672,7 @@ public abstract class AutoProvision {
             hitSizeLimitExceededException = true;
             if (wantPartialResult) {
                 // log at debug level
-                ZimbraLog.autoprov.debug(
+                ZmailLog.autoprov.debug(
                         String.format("searchAutoProvDirectory encountered LdapSizeLimitExceededException: " +
                         "base=%s, filter=%s", searchBase, zFilter == null ? "" : zFilter.toFilterString()),
                         e);

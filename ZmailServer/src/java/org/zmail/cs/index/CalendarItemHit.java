@@ -13,23 +13,23 @@
  * ***** END LICENSE BLOCK *****
  */
 
-package com.zimbra.cs.index;
+package org.zmail.cs.index;
 
 import com.google.common.base.Objects;
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.cs.mailbox.CalendarItem;
-import com.zimbra.cs.mailbox.MailItem;
-import com.zimbra.cs.mailbox.Mailbox;
+import org.zmail.common.service.ServiceException;
+import org.zmail.cs.mailbox.CalendarItem;
+import org.zmail.cs.mailbox.MailItem;
+import org.zmail.cs.mailbox.Mailbox;
 
 /**
  * @since Feb 15, 2005
  */
-public class CalendarItemHit extends ZimbraHit {
+public class CalendarItemHit extends ZmailHit {
 
     protected int id;
     protected CalendarItem item;
 
-    CalendarItemHit(ZimbraQueryResultsImpl results, Mailbox mbx, int id, CalendarItem cal, Object sortValue) {
+    CalendarItemHit(ZmailQueryResultsImpl results, Mailbox mbx, int id, CalendarItem cal, Object sortValue) {
         super(results, mbx, sortValue);
         this.id = id;
         item = cal;

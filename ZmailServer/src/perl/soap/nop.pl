@@ -21,7 +21,7 @@ use LWP::UserAgent;
 use Getopt::Long;
 use XmlDoc;
 use Soap;
-use ZimbraSoapTest;
+use ZmailSoapTest;
 
 #standard options
 my ($sessionId, $authToken, $notSeq, $user, $pw, $host, $help, $verbose);  #standard
@@ -57,7 +57,7 @@ if (defined($notSeq)) {
   $soapargs{'NOTSEQ'} = $notSeq;
 }
 
-my $z = ZimbraSoapTest->new($user, $host, $pw, \%soapargs);
+my $z = ZmailSoapTest->new($user, $host, $pw, \%soapargs);
 $z->verbose(3);
 
 if (defined($sessionId) && defined($authToken)) {

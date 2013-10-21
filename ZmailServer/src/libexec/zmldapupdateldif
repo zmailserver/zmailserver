@@ -15,8 +15,8 @@
 # 
 
 use strict;
-use lib "/opt/zimbra/zimbramon/lib";
-use Zimbra::Util::Common;
+use lib "/opt/zmail/zmailmon/lib";
+use Zmail::Util::Common;
 use File::Grep qw (fgrep);
 use File::Path;
 use Net::LDAP;
@@ -25,30 +25,30 @@ use Net::LDAP::Entry;
 use Crypt::SaltedHash;
 use MIME::Base64;
 
-my $source_config_dir = "/opt/zimbra/openldap/etc/openldap";
-my $config_dir = "/opt/zimbra/conf";
-my $ldap_config_dir="/opt/zimbra/data/ldap/config/cn\=config";
+my $source_config_dir = "/opt/zmail/openldap/etc/openldap";
+my $config_dir = "/opt/zmail/conf";
+my $ldap_config_dir="/opt/zmail/data/ldap/config/cn\=config";
 
-my $zimbra_home=getLocalConfig("zimbra_home");
-my $zimbra_user=getLocalConfig("zimbra_user");
-my $zimbra_ldap_userdn = getLocalConfig("zimbra_ldap_userdn");
-my $zimbra_ldap_password = getLocalConfig("zimbra_ldap_password");
+my $zmail_home=getLocalConfig("zmail_home");
+my $zmail_user=getLocalConfig("zmail_user");
+my $zmail_ldap_userdn = getLocalConfig("zmail_ldap_userdn");
+my $zmail_ldap_password = getLocalConfig("zmail_ldap_password");
 my $ldap_root_password = getLocalConfig("ldap_root_password");
 my $ldap_master_url = getLocalConfig("ldap_master_url");
 my $ldap_is_master = getLocalConfig("ldap_is_master");
 my $ldap_starttls_supported = getLocalConfig("ldap_starttls_supported");
-my $zimbra_tmp_directory = getLocalConfig("zimbra_tmp_directory");
+my $zmail_tmp_directory = getLocalConfig("zmail_tmp_directory");
 
 if (lc($ldap_is_master) ne "true" ) {
   exit 0;
 }
 
-$zimbra_home = "/opt/zimbra" if ($zimbra_home eq "");
-if (!-d $zimbra_tmp_directory) {
-  File::Path::mkpath("$zimbra_tmp_directory");
+$zmail_home = "/opt/zmail" if ($zmail_home eq "");
+if (!-d $zmail_tmp_directory) {
+  File::Path::mkpath("$zmail_tmp_directory");
 }
 
-my $rc=`${zimbra_home}/bin/ldap start`;
+my $rc=`${zmail_home}/bin/ldap start`;
 
 my @masters=split(/ /, $ldap_master_url);
 my $master_ref=\@masters;
@@ -60,7 +60,7 @@ if ($ldap_master_url !~ /^ldaps/i) {
   if ($ldap_starttls_supported) {
     $mesg = $ldap->start_tls(
          verify => 'none',
-         capath => "${zimbra_home}/conf/ca",
+         capath => "${zmail_home}/conf/ca",
          ) or die "start_tls: $@";
     $mesg->code && die "TLS: " . $mesg->error . "\n";
   }
@@ -68,7 +68,7 @@ if ($ldap_master_url !~ /^ldaps/i) {
 
 $mesg = $ldap->bind("cn=config", password=>"$ldap_root_password");
 
-my $infile = "$config_dir/zimbra.ldif";
+my $infile = "$config_dir/zmail.ldif";
 my $ldifin = Net::LDAP::LDIF->new("$infile", "r", onerror => 'undef' );
 while ( not $ldifin->eof() ) {
     my $entry = $ldifin->read_entry();
@@ -81,7 +81,7 @@ while ( not $ldifin->eof() ) {
     }
 }
 
-$infile = "$source_config_dir/zimbra_globalconfig.ldif";
+$infile = "$source_config_dir/zmail_globalconfig.ldif";
 $ldifin = Net::LDAP::LDIF->new("$infile", "r", onerror => 'undef' );
 while ( not $ldifin->eof() ) {
     my $entry = $ldifin->read_entry();
@@ -94,7 +94,7 @@ while ( not $ldifin->eof() ) {
     }
 }
 
-$infile = "$source_config_dir/zimbra_defaultcos.ldif";
+$infile = "$source_config_dir/zmail_defaultcos.ldif";
 $ldifin = Net::LDAP::LDIF->new("$infile", "r", onerror => 'undef' );
 while ( not $ldifin->eof() ) {
     my $entry = $ldifin->read_entry();
@@ -107,7 +107,7 @@ while ( not $ldifin->eof() ) {
     }
 }
 
-$infile = "$source_config_dir/zimbra_defaultexternalcos.ldif";
+$infile = "$source_config_dir/zmail_defaultexternalcos.ldif";
 $ldifin = Net::LDAP::LDIF->new("$infile", "r", onerror => 'undef' );
 while ( not $ldifin->eof() ) {
     my $entry = $ldifin->read_entry();
@@ -120,10 +120,10 @@ while ( not $ldifin->eof() ) {
     }
 }
 
-if (-f "/opt/zimbra/conf/ldap/zimbra_mimehandlers.ldif") {
-  $infile = "/opt/zimbra/conf/ldap/zimbra_mimehandlers.ldif";
+if (-f "/opt/zmail/conf/ldap/zmail_mimehandlers.ldif") {
+  $infile = "/opt/zmail/conf/ldap/zmail_mimehandlers.ldif";
 } else {
-  $infile = "$source_config_dir/zimbra_mimehandlers.ldif";
+  $infile = "$source_config_dir/zmail_mimehandlers.ldif";
 }
 $ldifin = Net::LDAP::LDIF->new("$infile", "r", onerror => 'undef' );
 while ( not $ldifin->eof() ) {
@@ -137,12 +137,12 @@ while ( not $ldifin->eof() ) {
     }
 }
 
-if ( -d "/opt/zimbra/lib/conf/" ) {
-    opendir(DIR, "/opt/zimbra/lib/conf") || die "can't opendir /opt/zimbra/lib/conf: $!";
+if ( -d "/opt/zmail/lib/conf/" ) {
+    opendir(DIR, "/opt/zmail/lib/conf") || die "can't opendir /opt/zmail/lib/conf: $!";
     while (my $file = readdir(DIR)) {
-       next unless (-f "/opt/zimbra/lib/conf/$file");
+       next unless (-f "/opt/zmail/lib/conf/$file");
        next unless ( $file =~ m/ldif$/);
-       $infile = "/opt/zimbra/lib/conf/$file";
+       $infile = "/opt/zmail/lib/conf/$file";
        $ldifin = Net::LDAP::LDIF->new("$infile", "r", onerror => 'undef' );
        while ( not $ldifin->eof() ) {
             my $entry = $ldifin->read_entry();
@@ -176,7 +176,7 @@ sub getLocalConfig {
   return $main::loaded{lc}{$key}
     if (exists $main::loaded{lc}{$key});
 
-  my $val = `/opt/zimbra/bin/zmlocalconfig -x -s -m nokey ${key} 2> /dev/null`;
+  my $val = `/opt/zmail/bin/zmlocalconfig -x -s -m nokey ${key} 2> /dev/null`;
   chomp $val;
   $main::loaded{lc}{$key} = $val;
   return $val;

@@ -16,11 +16,11 @@
 /*
  * Created on 2005. 4. 4.
  */
-package com.zimbra.cs.redolog.op;
+package org.zmail.cs.redolog.op;
 
-import com.zimbra.cs.mailbox.MailboxOperation;
-import com.zimbra.cs.redolog.RedoLogInput;
-import com.zimbra.cs.redolog.RedoLogOutput;
+import org.zmail.cs.mailbox.MailboxOperation;
+import org.zmail.cs.redolog.RedoLogInput;
+import org.zmail.cs.redolog.RedoLogOutput;
 
 public class DeleteMailbox extends RedoableOp {
 
@@ -34,13 +34,13 @@ public class DeleteMailbox extends RedoableOp {
     }
 
     /* (non-Javadoc)
-     * @see com.zimbra.cs.redolog.op.RedoableOp#redo()
+     * @see org.zmail.cs.redolog.op.RedoableOp#redo()
      */
     @Override public void redo() throws Exception {
     }
 
     /* (non-Javadoc)
-     * @see com.zimbra.cs.redolog.op.RedoableOp#getPrintableData()
+     * @see org.zmail.cs.redolog.op.RedoableOp#getPrintableData()
      */
     @Override protected String getPrintableData() {
         // no members to print
@@ -48,14 +48,14 @@ public class DeleteMailbox extends RedoableOp {
     }
 
     /* (non-Javadoc)
-     * @see com.zimbra.cs.redolog.op.RedoableOp#serializeData(java.io.RedoLogOutput)
+     * @see org.zmail.cs.redolog.op.RedoableOp#serializeData(java.io.RedoLogOutput)
      */
     @Override protected void serializeData(RedoLogOutput out) {
         // no members to serialize
     }
 
     /* (non-Javadoc)
-     * @see com.zimbra.cs.redolog.op.RedoableOp#deserializeData(java.io.RedoLogInput)
+     * @see org.zmail.cs.redolog.op.RedoableOp#deserializeData(java.io.RedoLogInput)
      */
     @Override protected void deserializeData(RedoLogInput in) {
         // no members to deserialize

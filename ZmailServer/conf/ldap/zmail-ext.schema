@@ -1,1 +1,1 @@
-include "/opt/zimbra/lib/conf/zimbra-hsm.schema"
+include "/opt/zmail/lib/conf/zmail-hsm.schema"

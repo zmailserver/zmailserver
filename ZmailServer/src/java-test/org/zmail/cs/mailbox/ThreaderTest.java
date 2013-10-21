@@ -12,7 +12,7 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.mailbox;
+package org.zmail.cs.mailbox;
 
 import java.util.Arrays;
 import java.util.Collections;
@@ -27,21 +27,21 @@ import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
-import com.zimbra.common.account.ZAttrProvisioning.MailThreadingAlgorithm;
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.cs.account.Account;
-import com.zimbra.cs.account.MockProvisioning;
-import com.zimbra.cs.account.Provisioning;
-import com.zimbra.cs.mailbox.Threader.ThreadIndex;
-import com.zimbra.cs.mime.Mime;
-import com.zimbra.cs.mime.ParsedMessage;
-import com.zimbra.cs.util.JMSession;
+import org.zmail.common.account.ZAttrProvisioning.MailThreadingAlgorithm;
+import org.zmail.common.service.ServiceException;
+import org.zmail.cs.account.Account;
+import org.zmail.cs.account.MockProvisioning;
+import org.zmail.cs.account.Provisioning;
+import org.zmail.cs.mailbox.Threader.ThreadIndex;
+import org.zmail.cs.mime.Mime;
+import org.zmail.cs.mime.ParsedMessage;
+import org.zmail.cs.util.JMSession;
 
 public final class ThreaderTest {
     @BeforeClass
     public static void init() throws Exception {
         MailboxTestUtil.initServer();
-        Provisioning.getInstance().createAccount("test@zimbra.com", "secret", new HashMap<String, Object>());
+        Provisioning.getInstance().createAccount("test@zmail.com", "secret", new HashMap<String, Object>());
     }
 
     @Before
@@ -62,7 +62,7 @@ public final class ThreaderTest {
     private static final String FIFTH_MESSAGE_ID = "<kjsdfg.45wy.setrhye.g@sdkf.example.com>";
 
     private Account getAccount() throws Exception {
-        return Provisioning.getInstance().getAccount("test@zimbra.com");
+        return Provisioning.getInstance().getAccount("test@zmail.com");
     }
 
     public static ParsedMessage getRootMessage() throws Exception {

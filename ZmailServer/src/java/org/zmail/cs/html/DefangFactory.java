@@ -12,9 +12,9 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.html;
+package org.zmail.cs.html;
 
-import com.zimbra.common.mime.MimeConstants;
+import org.zmail.common.mime.MimeConstants;
 
 /**
  * This factory is used to determine the proper defanger based on content type for

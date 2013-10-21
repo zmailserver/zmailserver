@@ -14,7 +14,7 @@
  * 
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.octosync.store;
+package org.zmail.cs.octosync.store;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -25,16 +25,16 @@ import java.util.TimerTask;
 import java.util.TreeMap;
 import java.util.UUID;
 
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.common.util.Constants;
-import com.zimbra.common.util.Log;
-import com.zimbra.common.util.LogFactory;
-import com.zimbra.cs.store.Blob;
-import com.zimbra.cs.store.IncomingBlob;
-import com.zimbra.cs.store.StoreManager;
-import com.zimbra.cs.store.StoreManager.StoreFeature;
-import com.zimbra.cs.store.external.SisStore;
-import com.zimbra.cs.util.Zimbra;
+import org.zmail.common.service.ServiceException;
+import org.zmail.common.util.Constants;
+import org.zmail.common.util.Log;
+import org.zmail.common.util.LogFactory;
+import org.zmail.cs.store.Blob;
+import org.zmail.cs.store.IncomingBlob;
+import org.zmail.cs.store.StoreManager;
+import org.zmail.cs.store.StoreManager.StoreFeature;
+import org.zmail.cs.store.external.SisStore;
+import org.zmail.cs.util.Zmail;
 
 /**
  * Implementation of a temporary BlobStore. Temporary means that blobs that
@@ -153,7 +153,7 @@ public class StoreManagerBasedTempBlobStore extends BlobStore
         this.incomingExpiration = incomingExpiration;
         this.storedExpiration = storedExpiration;
         this.storedCached = storedCached;
-        Zimbra.sTimer.schedule(new ReaperTask(), REAPER_INTERVAL_MSEC, REAPER_INTERVAL_MSEC);
+        Zmail.sTimer.schedule(new ReaperTask(), REAPER_INTERVAL_MSEC, REAPER_INTERVAL_MSEC);
     }
 
     // BlobStore API

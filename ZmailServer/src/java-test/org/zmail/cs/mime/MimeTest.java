@@ -12,7 +12,7 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.mime;
+package org.zmail.cs.mime;
 
 import java.io.IOException;
 import java.io.Reader;
@@ -28,8 +28,8 @@ import org.junit.Assert;
 import org.junit.Test;
 
 import com.google.common.collect.Sets;
-import com.zimbra.cs.mime.Mime.FixedMimeMessage;
-import com.zimbra.cs.util.JMSession;
+import org.zmail.cs.mime.Mime.FixedMimeMessage;
+import org.zmail.cs.util.JMSession;
 
 /**
  * Unit test for {@link Mime}.
@@ -47,10 +47,10 @@ public class MimeTest {
 
     @Test
     public void getTextReader() throws Exception {
-        Reader reader = Mime.getTextReader(getClass().getResourceAsStream("zimbra-shift-jis.txt"), "text/plain", null);
+        Reader reader = Mime.getTextReader(getClass().getResourceAsStream("zmail-shift-jis.txt"), "text/plain", null);
         String result = IOUtils.toString(reader);
         Assert.assertTrue(result
-                        .startsWith("Zimbra Collaboration Suite\uff08ZCS\uff09\u306f\u3001Zimbra, Inc. "
+                        .startsWith("Zmail Collaboration Suite\uff08ZCS\uff09\u306f\u3001Zmail, Inc. "
                                         + "\u304c\u958b\u767a\u3057\u305f\u30b3\u30e9\u30dc\u30ec\u30fc\u30b7\u30e7\u30f3\u30bd\u30d5\u30c8"
                                         + "\u30a6\u30a7\u30a2\u88fd\u54c1\u3002"));
         Assert.assertTrue(result.endsWith("\u65e5\u672c\u3067\u306f\u4f4f\u53cb\u5546\u4e8b\u304c\u7dcf\u8ca9\u58f2"
@@ -70,7 +70,7 @@ public class MimeTest {
 
     @Test
     public void parseAddressHeader() throws Exception {
-        InternetAddress[] addrs = Mime.parseAddressHeader("\" <test@zimbra.com>");
+        InternetAddress[] addrs = Mime.parseAddressHeader("\" <test@zmail.com>");
         Assert.assertEquals(1, addrs.length);
         // Only verify an exception is not thrown. The new parser and the old
         // parser don't get the same result.

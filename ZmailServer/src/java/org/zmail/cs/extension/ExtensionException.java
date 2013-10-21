@@ -13,13 +13,13 @@
  * ***** END LICENSE BLOCK *****
  */
 
-package com.zimbra.cs.extension;
+package org.zmail.cs.extension;
 
 /**
- * This exception is thrown by Zimbra extension classes when they notify
- * an extension specific error to Zimbra extension framework.
+ * This exception is thrown by Zmail extension classes when they notify
+ * an extension specific error to Zmail extension framework.
  * <p>
- * For example, {@link ZimbraExtension#init()} may throw this exception when it
+ * For example, {@link ZmailExtension#init()} may throw this exception when it
  * failed its initialization and wants to unregister the extension from the
  * framework.
  *

@@ -12,14 +12,14 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.account.callback;
+package org.zmail.cs.account.callback;
 
 import java.util.Map;
 
-import com.zimbra.cs.account.Entry;
-import com.zimbra.cs.account.AttributeCallback;
-import com.zimbra.cs.zimlet.ZimletPresence;
-import com.zimbra.cs.zimlet.ZimletPresence.Presence;
+import org.zmail.cs.account.Entry;
+import org.zmail.cs.account.AttributeCallback;
+import org.zmail.cs.zimlet.ZimletPresence;
+import org.zmail.cs.zimlet.ZimletPresence.Presence;
 
 public class AvailableZimlets extends AttributeCallback {
     
@@ -71,30 +71,30 @@ public class AvailableZimlets extends AttributeCallback {
     }
     
     /*
-     * To remove a zimlet from zimbraZimletAvailableZimlets/zimbraZimletDomainAvailableZimlets, 
+     * To remove a zimlet from zmailZimletAvailableZimlets/zmailZimletDomainAvailableZimlets, 
      * the zimlet can be identified by either the {zimlet-name} or matching {prefix}{zimlet-name}.
      * This callback will take care of identifying the zimlet with either way.
      * 
      * e.g. if the current values contain: !foo
      *      to remove it, both of the following will work: 
-     *          zmprov mc <cos> -zimbraZimletAvailableZimlets foo
-     *          zmprov mc <cos> -zimbraZimletAvailableZimlets !foo
+     *          zmprov mc <cos> -zmailZimletAvailableZimlets foo
+     *          zmprov mc <cos> -zmailZimletAvailableZimlets !foo
      *      
      *      but sending in a not-matching prefix will not work:
-     *          zmprov mc <cos> -zimbraZimletAvailableZimlets +foo
+     *          zmprov mc <cos> -zmailZimletAvailableZimlets +foo
      *      it will be a noop and no error/warn wilkl be thrown 
      *      (just like the regular modify behavior)
      *      
-     * To add a zimlet to zimbraZimletAvailableZimlets/zimbraZimletDomainAvailableZimlets, 
+     * To add a zimlet to zmailZimletAvailableZimlets/zmailZimletDomainAvailableZimlets, 
      * admin can just pass in the desired {prerix}{zimlet-name} without having to remove the 
      * current {a-diff-prerix}{zimlet-name} if it exists.  This callback will take care of cleaning 
      * up the current value.
      *  
      * e.g. if the current values contain: +bar
      *      to change it to -bar, just send:
-     *          zmprov mc <cos> +zimbraZimletAvailableZimlets -bar
+     *          zmprov mc <cos> +zmailZimletAvailableZimlets -bar
      *      (or, of course you can send:
-     *          zmprov mc <cos> -zimbraZimletAvailableZimlets +bar +zimbraZimletAvailableZimlets -bar
+     *          zmprov mc <cos> -zmailZimletAvailableZimlets +bar +zmailZimletAvailableZimlets -bar
      *       but that is not necessary)       
      */
     private ZimletPresence doDeletingAdding(Entry entry, String attrName, Object deleting, Object adding) {

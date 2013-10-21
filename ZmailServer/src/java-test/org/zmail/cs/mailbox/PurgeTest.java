@@ -13,7 +13,7 @@
  * ***** END LICENSE BLOCK *****
  */
 
-package com.zimbra.cs.mailbox;
+package org.zmail.cs.mailbox;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
@@ -30,18 +30,18 @@ import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
-import com.zimbra.common.account.Key.AccountBy;
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.common.util.Constants;
-import com.zimbra.cs.account.Account;
-import com.zimbra.cs.account.Config;
-import com.zimbra.cs.account.Cos;
-import com.zimbra.cs.account.MockProvisioning;
-import com.zimbra.cs.account.Provisioning;
-import com.zimbra.cs.mailbox.MailServiceException.NoSuchItemException;
-import com.zimbra.qa.unittest.TestUtil;
-import com.zimbra.soap.mail.type.Policy;
-import com.zimbra.soap.mail.type.RetentionPolicy;
+import org.zmail.common.account.Key.AccountBy;
+import org.zmail.common.service.ServiceException;
+import org.zmail.common.util.Constants;
+import org.zmail.cs.account.Account;
+import org.zmail.cs.account.Config;
+import org.zmail.cs.account.Cos;
+import org.zmail.cs.account.MockProvisioning;
+import org.zmail.cs.account.Provisioning;
+import org.zmail.cs.mailbox.MailServiceException.NoSuchItemException;
+import org.zmail.qa.unittest.TestUtil;
+import org.zmail.soap.mail.type.Policy;
+import org.zmail.soap.mail.type.RetentionPolicy;
 
 public class PurgeTest {
 
@@ -55,7 +55,7 @@ public class PurgeTest {
         MailboxTestUtil.clearData();
         Provisioning prov = Provisioning.getInstance();
         prov.deleteAccount(MockProvisioning.DEFAULT_ACCOUNT_ID);
-        prov.createAccount("test@zimbra.com", "secret", new HashMap<String, Object>());
+        prov.createAccount("test@zmail.com", "secret", new HashMap<String, Object>());
         Config config = Provisioning.getInstance().getConfig();
         RetentionPolicyManager mgr = RetentionPolicyManager.getInstance();
         RetentionPolicy rp = mgr.getSystemRetentionPolicy(config);
@@ -299,13 +299,13 @@ public class PurgeTest {
             System.currentTimeMillis() - (35 * Constants.MILLIS_PER_HOUR));
 
         // Run purge and verify results
-        TestUtil.setServerAttr(Provisioning.A_zimbraMailPurgeBatchSize, Integer.toString(1));
+        TestUtil.setServerAttr(Provisioning.A_zmailMailPurgeBatchSize, Integer.toString(1));
         assertFalse(mbox.purgeMessages(null));
         assertFalse("purged was kept", messageExists(purged.getId()));
         assertTrue("kept was purged", messageExists(kept.getId()));
 
         // Run purge again and make sure that the second message was purged.
-        TestUtil.setServerAttr(Provisioning.A_zimbraMailPurgeBatchSize, Integer.toString(2));
+        TestUtil.setServerAttr(Provisioning.A_zmailMailPurgeBatchSize, Integer.toString(2));
         assertTrue(mbox.purgeMessages(null));
         assertFalse("second message was not purged", messageExists(kept.getId()));
     }
@@ -414,7 +414,7 @@ public class PurgeTest {
 
     /**
      * Confirms that messages are purged from trash based on the value of
-     * <tt>zimbraMailPurgeUseChangeDateForSpam<tt>.  See bug 19702 for more details.
+     * <tt>zmailMailPurgeUseChangeDateForSpam<tt>.  See bug 19702 for more details.
      */
     @Test
     public void testSpamChangeDate()
@@ -444,7 +444,7 @@ public class PurgeTest {
 
     /**
      * Confirms that messages are purged from trash based on the value of
-     * <tt>zimbraMailPurgeUseChangeDateForTrash<tt>.  See bug 19702 for more details.
+     * <tt>zmailMailPurgeUseChangeDateForTrash<tt>.  See bug 19702 for more details.
      */
     @Test
     public void testTrashChangeDate()

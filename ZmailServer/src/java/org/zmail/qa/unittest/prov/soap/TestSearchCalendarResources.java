@@ -12,7 +12,7 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.qa.unittest.prov.soap;
+package org.zmail.qa.unittest.prov.soap;
 
 import static org.junit.Assert.*;
 
@@ -26,26 +26,26 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 
 import com.google.common.collect.Maps;
-import com.zimbra.common.account.ZAttrProvisioning.CalResType;
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.common.soap.AccountConstants;
-import com.zimbra.common.soap.AdminConstants;
-import com.zimbra.common.soap.Element;
-import com.zimbra.common.soap.MailConstants;
-import com.zimbra.common.soap.SoapTransport;
-import com.zimbra.cs.account.CalendarResource;
-import com.zimbra.cs.account.Domain;
-import com.zimbra.cs.account.Provisioning;
-import com.zimbra.cs.account.EntrySearchFilter.Operator;
-import com.zimbra.cs.account.soap.SoapProvisioning;
-import com.zimbra.qa.QA.Bug;
-import com.zimbra.qa.unittest.TestUtil;
-import com.zimbra.soap.account.message.SearchCalendarResourcesRequest;
-import com.zimbra.soap.account.message.SearchCalendarResourcesResponse;
-import com.zimbra.soap.account.type.CalendarResourceInfo;
-import com.zimbra.soap.account.type.EntrySearchFilterInfo;
-import com.zimbra.soap.account.type.EntrySearchFilterMultiCond;
-import com.zimbra.soap.account.type.EntrySearchFilterSingleCond;
+import org.zmail.common.account.ZAttrProvisioning.CalResType;
+import org.zmail.common.service.ServiceException;
+import org.zmail.common.soap.AccountConstants;
+import org.zmail.common.soap.AdminConstants;
+import org.zmail.common.soap.Element;
+import org.zmail.common.soap.MailConstants;
+import org.zmail.common.soap.SoapTransport;
+import org.zmail.cs.account.CalendarResource;
+import org.zmail.cs.account.Domain;
+import org.zmail.cs.account.Provisioning;
+import org.zmail.cs.account.EntrySearchFilter.Operator;
+import org.zmail.cs.account.soap.SoapProvisioning;
+import org.zmail.qa.QA.Bug;
+import org.zmail.qa.unittest.TestUtil;
+import org.zmail.soap.account.message.SearchCalendarResourcesRequest;
+import org.zmail.soap.account.message.SearchCalendarResourcesResponse;
+import org.zmail.soap.account.type.CalendarResourceInfo;
+import org.zmail.soap.account.type.EntrySearchFilterInfo;
+import org.zmail.soap.account.type.EntrySearchFilterMultiCond;
+import org.zmail.soap.account.type.EntrySearchFilterSingleCond;
 
 public class TestSearchCalendarResources extends SoapTest {
 
@@ -97,9 +97,9 @@ public class TestSearchCalendarResources extends SoapTest {
     throws Exception {
         Map<String, Object> attrs = Maps.newHashMap();
         attrs.put(Provisioning.A_displayName, displayName);
-        attrs.put(Provisioning.A_zimbraCalResType, type.name());
-        attrs.put(Provisioning.A_zimbraCalResCapacity, String.valueOf(capacity));
-        attrs.put(Provisioning.A_zimbraCalResSite, site);
+        attrs.put(Provisioning.A_zmailCalResType, type.name());
+        attrs.put(Provisioning.A_zmailCalResCapacity, String.valueOf(capacity));
+        attrs.put(Provisioning.A_zmailCalResSite, site);
         
         provUtil.createCalendarResource(localPart, domain, attrs);
     }
@@ -185,17 +185,17 @@ public class TestSearchCalendarResources extends SoapTest {
         Element eConds = eSearchFilter.addElement(AccountConstants.E_ENTRY_SEARCH_FILTER_MULTICOND);
         
         Element eCondResType = eConds.addElement(AccountConstants.E_ENTRY_SEARCH_FILTER_SINGLECOND);
-        eCondResType.addAttribute(AccountConstants.A_ENTRY_SEARCH_FILTER_ATTR, "zimbraCalResType");
+        eCondResType.addAttribute(AccountConstants.A_ENTRY_SEARCH_FILTER_ATTR, "zmailCalResType");
         eCondResType.addAttribute(AccountConstants.A_ENTRY_SEARCH_FILTER_OP, Operator.eq.name());
         eCondResType.addAttribute(AccountConstants.A_ENTRY_SEARCH_FILTER_VALUE, "Location");
         
         Element eCondResCapacity = eConds.addElement(AccountConstants.E_ENTRY_SEARCH_FILTER_SINGLECOND);
-        eCondResCapacity.addAttribute(AccountConstants.A_ENTRY_SEARCH_FILTER_ATTR, "zimbraCalResCapacity");
+        eCondResCapacity.addAttribute(AccountConstants.A_ENTRY_SEARCH_FILTER_ATTR, "zmailCalResCapacity");
         eCondResCapacity.addAttribute(AccountConstants.A_ENTRY_SEARCH_FILTER_OP, Operator.ge.name());
         eCondResCapacity.addAttribute(AccountConstants.A_ENTRY_SEARCH_FILTER_VALUE, "15");
         
         Element eCondResSite = eConds.addElement(AccountConstants.E_ENTRY_SEARCH_FILTER_SINGLECOND);
-        eCondResSite.addAttribute(AccountConstants.A_ENTRY_SEARCH_FILTER_ATTR, "zimbraCalResSite");
+        eCondResSite.addAttribute(AccountConstants.A_ENTRY_SEARCH_FILTER_ATTR, "zmailCalResSite");
         eCondResSite.addAttribute(AccountConstants.A_ENTRY_SEARCH_FILTER_OP, Operator.has.name());
         eCondResSite.addAttribute(AccountConstants.A_ENTRY_SEARCH_FILTER_VALUE, SITE_WORD_1);
         
@@ -284,33 +284,33 @@ public class TestSearchCalendarResources extends SoapTest {
     public void reservedChar() throws Exception {
         Map<String, Object> attrs = Maps.newHashMap();
         attrs.put(Provisioning.A_displayName, "name()");
-        attrs.put(Provisioning.A_zimbraCalResType, Provisioning.CalResType.Location.name());
-        attrs.put(Provisioning.A_zimbraCalResSite, "Site()");
-        attrs.put(Provisioning.A_zimbraCalResCapacity, "10");
-        attrs.put(Provisioning.A_zimbraCalResBuilding, "Building()");
-        attrs.put(Provisioning.A_zimbraNotes, "Notes()");
-        attrs.put(Provisioning.A_zimbraCalResFloor, "()");
+        attrs.put(Provisioning.A_zmailCalResType, Provisioning.CalResType.Location.name());
+        attrs.put(Provisioning.A_zmailCalResSite, "Site()");
+        attrs.put(Provisioning.A_zmailCalResCapacity, "10");
+        attrs.put(Provisioning.A_zmailCalResBuilding, "Building()");
+        attrs.put(Provisioning.A_zmailNotes, "Notes()");
+        attrs.put(Provisioning.A_zmailCalResFloor, "()");
         CalendarResource cr = provUtil.createCalendarResource("reservedChar", domain, attrs);
         String crName = cr.getName();
         
         /*
-        <SearchCalendarResourcesRequest xmlns="urn:zimbraAccount" 
-            attrs="fullName,email,zimbraCalResLocationDisplayName,zimbraCalResContactEmail,notes,zimbraCalResType">
+        <SearchCalendarResourcesRequest xmlns="urn:zmailAccount" 
+            attrs="fullName,email,zmailCalResLocationDisplayName,zmailCalResContactEmail,notes,zmailCalResType">
             <name>()</name>
             <searchFilter>
                 <conds>
-                  <cond op="eq" value="Location" attr="zimbraCalResType"/>
-                  <cond op="has" value="()" attr="zimbraCalResSite"/>
-                  <cond op="ge" value="9" attr="zimbraCalResCapacity"/>
-                  <cond op="has" value="()" attr="zimbraCalResBuilding"/>
-                  <cond op="has" value="()" attr="zimbraNotes"/>
-                  <cond op="eq" value="()" attr="zimbraCalResFloor"/>
+                  <cond op="eq" value="Location" attr="zmailCalResType"/>
+                  <cond op="has" value="()" attr="zmailCalResSite"/>
+                  <cond op="ge" value="9" attr="zmailCalResCapacity"/>
+                  <cond op="has" value="()" attr="zmailCalResBuilding"/>
+                  <cond op="has" value="()" attr="zmailNotes"/>
+                  <cond op="eq" value="()" attr="zmailCalResFloor"/>
                 </conds>
             </searchFilter>
         </SearchCalendarResourcesRequest>
         
         Expected filer:
-        filter="(&(&(&(|(displayName=*\28\29*)(cn=*\28\29*)(sn=*\28\29*)(givenName=*\28\29*)(mail=*\28\29*)(zimbraMailDeliveryAddress=*\28\29*)(zimbraMailAlias=*\28\29*))(objectClass=zimbraCalendarResource)(zimbraAccountStatus=active))(!(zimbraHideInGal=TRUE))(!(zimbraIsSystemResource=TRUE)))(&(zimbraCalResType=location)(zimbraCalResSite=*\28\29*)(zimbraCalResCapacity>=9)(zimbraCalResBuilding=*\28\29*)(zimbraNotes=*\28\29*)(zimbraCalResFloor=\28\29)))"
+        filter="(&(&(&(|(displayName=*\28\29*)(cn=*\28\29*)(sn=*\28\29*)(givenName=*\28\29*)(mail=*\28\29*)(zmailMailDeliveryAddress=*\28\29*)(zmailMailAlias=*\28\29*))(objectClass=zmailCalendarResource)(zmailAccountStatus=active))(!(zmailHideInGal=TRUE))(!(zmailIsSystemResource=TRUE)))(&(zmailCalResType=location)(zmailCalResSite=*\28\29*)(zmailCalResCapacity>=9)(zmailCalResBuilding=*\28\29*)(zmailNotes=*\28\29*)(zmailCalResFloor=\28\29)))"
         */
         
         SoapTransport transport = authUser("user1@phoebe.mbp");
@@ -320,37 +320,37 @@ public class TestSearchCalendarResources extends SoapTest {
         EntrySearchFilterSingleCond cond;
         
         cond = new EntrySearchFilterSingleCond();
-        cond.setAttr(Provisioning.A_zimbraCalResType);
+        cond.setAttr(Provisioning.A_zmailCalResType);
         cond.setOp("eq");
         cond.setValue("Location");
         conds.addCondition(cond);
         
         cond = new EntrySearchFilterSingleCond();
-        cond.setAttr(Provisioning.A_zimbraCalResSite);
+        cond.setAttr(Provisioning.A_zmailCalResSite);
         cond.setOp("has");
         cond.setValue("()");
         conds.addCondition(cond);
         
         cond = new EntrySearchFilterSingleCond();
-        cond.setAttr(Provisioning.A_zimbraCalResCapacity);
+        cond.setAttr(Provisioning.A_zmailCalResCapacity);
         cond.setOp("ge");
         cond.setValue("9");
         conds.addCondition(cond);
         
         cond = new EntrySearchFilterSingleCond();
-        cond.setAttr(Provisioning.A_zimbraCalResBuilding);
+        cond.setAttr(Provisioning.A_zmailCalResBuilding);
         cond.setOp("has");
         cond.setValue("()");
         conds.addCondition(cond);
         
         cond = new EntrySearchFilterSingleCond();
-        cond.setAttr(Provisioning.A_zimbraNotes);
+        cond.setAttr(Provisioning.A_zmailNotes);
         cond.setOp("has");
         cond.setValue("()");
         conds.addCondition(cond);
         
         cond = new EntrySearchFilterSingleCond();
-        cond.setAttr(Provisioning.A_zimbraCalResFloor);
+        cond.setAttr(Provisioning.A_zmailCalResFloor);
         cond.setOp("eq");
         cond.setValue("()");
         conds.addCondition(cond);
@@ -369,14 +369,14 @@ public class TestSearchCalendarResources extends SoapTest {
     public void chineseChar() throws Exception {
         Map<String, Object> attrs = Maps.newHashMap();
         attrs.put(Provisioning.A_displayName, "\u4e2d\u6587");
-        attrs.put(Provisioning.A_zimbraCalResType, Provisioning.CalResType.Location.name());
-        attrs.put(Provisioning.A_zimbraCalResSite, "\u4e2d\u6587");
+        attrs.put(Provisioning.A_zmailCalResType, Provisioning.CalResType.Location.name());
+        attrs.put(Provisioning.A_zmailCalResSite, "\u4e2d\u6587");
         CalendarResource cr = provUtil.createCalendarResource("chineseChar", domain, attrs);
         String crName = cr.getName();
         
         /*
          * 
-         filter="(&(&(&(|(displayName=*\E4\B8\AD\E6\96\87*)(cn=*\E4\B8\AD\E6\96\87*)(sn=*\E4\B8\AD\E6\96\87*)(givenName=*\E4\B8\AD\E6\96\87*)(?mail=*\E4\B8\AD\E6\96\87*)(?zimbraMailDeliveryAddress=*\E4\B8\AD\E6\96\87*)(?zimbraMailAlias=*\E4\B8\AD\E6\96\87*))(objectClass=zimbraCalendarResource)(zimbraAccountStatus=active))(!(zimbraHideInGal=TRUE))(!(zimbraIsSystemResource=TRUE)))(&(zimbraCalResType=location)(zimbraCalResSite=*\E4\B8\AD\E6\96\87*)))"
+         filter="(&(&(&(|(displayName=*\E4\B8\AD\E6\96\87*)(cn=*\E4\B8\AD\E6\96\87*)(sn=*\E4\B8\AD\E6\96\87*)(givenName=*\E4\B8\AD\E6\96\87*)(?mail=*\E4\B8\AD\E6\96\87*)(?zmailMailDeliveryAddress=*\E4\B8\AD\E6\96\87*)(?zmailMailAlias=*\E4\B8\AD\E6\96\87*))(objectClass=zmailCalendarResource)(zmailAccountStatus=active))(!(zmailHideInGal=TRUE))(!(zmailIsSystemResource=TRUE)))(&(zmailCalResType=location)(zmailCalResSite=*\E4\B8\AD\E6\96\87*)))"
          */
         SoapTransport transport = authUser("user1@phoebe.mbp");
         
@@ -385,13 +385,13 @@ public class TestSearchCalendarResources extends SoapTest {
         EntrySearchFilterSingleCond cond;
         
         cond = new EntrySearchFilterSingleCond();
-        cond.setAttr(Provisioning.A_zimbraCalResType);
+        cond.setAttr(Provisioning.A_zmailCalResType);
         cond.setOp("eq");
         cond.setValue("Location");
         conds.addCondition(cond);
         
         cond = new EntrySearchFilterSingleCond();
-        cond.setAttr(Provisioning.A_zimbraCalResSite);
+        cond.setAttr(Provisioning.A_zmailCalResSite);
         cond.setOp("has");
         cond.setValue("\u4e2d\u6587");
         conds.addCondition(cond);

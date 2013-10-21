@@ -16,12 +16,12 @@
 /*
  * Created on 2005. 6. 21.
  */
-package com.zimbra.cs.mailbox;
+package org.zmail.cs.mailbox;
 
 import java.util.List;
 
-import com.zimbra.cs.store.Blob;
-import com.zimbra.cs.store.MailboxBlob;
+import org.zmail.cs.store.Blob;
+import org.zmail.cs.store.MailboxBlob;
 
 /**
  * Class that facilitates blob file sharing when delivering a message to

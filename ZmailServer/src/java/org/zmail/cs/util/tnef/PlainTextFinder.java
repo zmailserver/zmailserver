@@ -13,7 +13,7 @@
  * ***** END LICENSE BLOCK *****
  */
 
-package com.zimbra.cs.util.tnef;
+package org.zmail.cs.util.tnef;
 
 import java.io.IOException;
 
@@ -25,9 +25,9 @@ import javax.mail.internet.MimeMessage;
 import javax.mail.internet.MimeMultipart;
 import javax.mail.internet.MimePart;
 
-import com.zimbra.cs.mime.MimeVisitor;
-import com.zimbra.common.mime.MimeConstants;
-import com.zimbra.common.util.ByteUtil;
+import org.zmail.cs.mime.MimeVisitor;
+import org.zmail.common.mime.MimeConstants;
+import org.zmail.common.util.ByteUtil;
 
 // for finding the first text/plain part of a MimeMessage
 public class PlainTextFinder extends MimeVisitor {

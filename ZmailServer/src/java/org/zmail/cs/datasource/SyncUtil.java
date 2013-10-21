@@ -12,18 +12,18 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.datasource;
+package org.zmail.cs.datasource;
 
-import com.zimbra.cs.mailclient.imap.Flags;
-import com.zimbra.cs.mailclient.imap.CAtom;
-import com.zimbra.cs.mailbox.Flag;
-import com.zimbra.cs.mailbox.Message;
-import com.zimbra.cs.mailbox.Mailbox;
-import com.zimbra.cs.mailbox.MailItem;
-import com.zimbra.cs.mailbox.OperationContext;
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.common.util.Log;
-import com.zimbra.common.util.LogFactory;
+import org.zmail.cs.mailclient.imap.Flags;
+import org.zmail.cs.mailclient.imap.CAtom;
+import org.zmail.cs.mailbox.Flag;
+import org.zmail.cs.mailbox.Message;
+import org.zmail.cs.mailbox.Mailbox;
+import org.zmail.cs.mailbox.MailItem;
+import org.zmail.cs.mailbox.OperationContext;
+import org.zmail.common.service.ServiceException;
+import org.zmail.common.util.Log;
+import org.zmail.common.util.LogFactory;
 
 import javax.mail.internet.MimeMessage;
 import javax.mail.MessagingException;
@@ -32,7 +32,7 @@ import java.util.Date;
 public final class SyncUtil {
     private static final Flags EMPTY_FLAGS = new Flags();
 
-    // Excludes non-IMAP related Zimbra flags
+    // Excludes non-IMAP related Zmail flags
     private static int IMAP_FLAGS_BITMASK =
          Flag.BITMASK_REPLIED | Flag.BITMASK_DELETED |
          Flag.BITMASK_DRAFT | Flag.BITMASK_FLAGGED | Flag.BITMASK_UNREAD;
@@ -40,7 +40,7 @@ public final class SyncUtil {
     private SyncUtil() {
     }
 
-    public static int imapToZimbraFlags(Flags flags) {
+    public static int imapToZmailFlags(Flags flags) {
         int zflags = 0;
         if (flags.isAnswered()) zflags |= Flag.BITMASK_REPLIED;
         if (flags.isDeleted())  zflags |= Flag.BITMASK_DELETED;
@@ -50,7 +50,7 @@ public final class SyncUtil {
         return zflags;
     }
 
-    public static Flags zimbraToImapFlags(int zflags) {
+    public static Flags zmailToImapFlags(int zflags) {
         return getFlagsToAdd(EMPTY_FLAGS, zflags);
     }
 

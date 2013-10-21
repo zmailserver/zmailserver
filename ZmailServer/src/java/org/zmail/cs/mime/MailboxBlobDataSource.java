@@ -19,7 +19,7 @@
  * TODO To change the template for this generated file go to
  * Window - Preferences - Java - Code Generation - Code and Comments
  */
-package com.zimbra.cs.mime;
+package org.zmail.cs.mime;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -27,10 +27,10 @@ import java.io.OutputStream;
 
 import javax.activation.DataSource;
 
-import com.zimbra.cs.store.MailboxBlob;
-import com.zimbra.cs.store.StoreManager;
+import org.zmail.cs.store.MailboxBlob;
+import org.zmail.cs.store.StoreManager;
 
-// TODO: Consolidate this class with com.zimbra.cs.store.MailboxBlobDataSource.
+// TODO: Consolidate this class with org.zmail.cs.store.MailboxBlobDataSource.
 // Not doing it now to minimize impact on 6.0.x. 
 public class MailboxBlobDataSource implements DataSource {
 

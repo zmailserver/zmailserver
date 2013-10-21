@@ -12,7 +12,7 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.filter;
+package org.zmail.cs.filter;
 
 import java.util.Collection;
 import java.util.List;
@@ -20,11 +20,11 @@ import java.util.List;
 import javax.mail.MessagingException;
 import javax.mail.internet.MimeMessage;
 
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.cs.filter.jsieve.ActionFlag;
-import com.zimbra.cs.mailbox.Message;
-import com.zimbra.cs.mime.ParsedMessage;
-import com.zimbra.cs.service.util.ItemId;
+import org.zmail.common.service.ServiceException;
+import org.zmail.cs.filter.jsieve.ActionFlag;
+import org.zmail.cs.mailbox.Message;
+import org.zmail.cs.mime.ParsedMessage;
+import org.zmail.cs.service.util.ItemId;
 
 /**
  * Interface implemented by classes that handle filter rule actions.

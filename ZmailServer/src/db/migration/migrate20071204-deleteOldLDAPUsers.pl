@@ -17,7 +17,7 @@ use strict;
 use Net::LDAPapi;
 
 my ($binddn,$bindpwd,$host,$junk,$result,@localconfig,$ismaster);
-@localconfig=`/opt/zimbra/bin/zmlocalconfig -s ldap_master_url zimbra_ldap_userdn zimbra_ldap_password ldap_is_master`;
+@localconfig=`/opt/zmail/bin/zmlocalconfig -s ldap_master_url zmail_ldap_userdn zmail_ldap_password ldap_is_master`;
 $host=$localconfig[0];
 ($junk,$host) = split /= /, $host, 2;
 chomp $host;
@@ -48,9 +48,9 @@ if ($host !~ /^ldaps/i) {
 
 $status = $ld->bind_s($binddn,$bindpwd);
 
-$status = $ld->delete_s("uid=zimbrareplication,cn=admins,cn=zimbra");
-$status = $ld->delete_s("uid=zmpostfix,cn=admins,cn=zimbra");
-$status = $ld->delete_s("uid=zmamavis,cn=admins,cn=zimbra");
+$status = $ld->delete_s("uid=zmailreplication,cn=admins,cn=zmail");
+$status = $ld->delete_s("uid=zmpostfix,cn=admins,cn=zmail");
+$status = $ld->delete_s("uid=zmamavis,cn=admins,cn=zmail");
 
 $ld->unbind();
 

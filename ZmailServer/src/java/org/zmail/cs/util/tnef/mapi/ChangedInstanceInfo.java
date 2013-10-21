@@ -14,15 +14,15 @@
  * 
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.util.tnef.mapi;
+package org.zmail.cs.util.tnef.mapi;
 
 import java.io.IOException;
 import java.util.EnumSet;
 
-import com.zimbra.common.util.Log;
-import com.zimbra.common.util.ZimbraLog;
-import com.zimbra.cs.util.tnef.IcalUtil;
-import com.zimbra.cs.util.tnef.TNEFtoIcalendarServiceException;
+import org.zmail.common.util.Log;
+import org.zmail.common.util.ZmailLog;
+import org.zmail.cs.util.tnef.IcalUtil;
+import org.zmail.cs.util.tnef.TNEFtoIcalendarServiceException;
 
 import net.fortuna.ical4j.model.DateTime;
 import net.freeutils.tnef.RawInputStream;
@@ -30,7 +30,7 @@ import net.freeutils.tnef.TNEFUtils;
 
 public class ChangedInstanceInfo {
 
-    static Log sLog = ZimbraLog.tnef;
+    static Log sLog = ZmailLog.tnef;
 
     private String oemCodePage;
     private int exceptionNum;

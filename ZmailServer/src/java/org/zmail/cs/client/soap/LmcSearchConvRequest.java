@@ -13,12 +13,12 @@
  * ***** END LICENSE BLOCK *****
  */
 
-package com.zimbra.cs.client.soap;
+package org.zmail.cs.client.soap;
 
 import org.dom4j.Element;
 
-import com.zimbra.common.soap.DomUtil;
-import com.zimbra.common.soap.MailConstants;
+import org.zmail.common.soap.DomUtil;
+import org.zmail.common.soap.MailConstants;
 
 public class LmcSearchConvRequest extends LmcSearchRequest {
 

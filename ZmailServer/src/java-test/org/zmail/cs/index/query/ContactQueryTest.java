@@ -12,7 +12,7 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.index.query;
+package org.zmail.cs.index.query;
 
 import java.util.EnumSet;
 import java.util.HashMap;
@@ -23,18 +23,18 @@ import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
-import com.zimbra.common.mailbox.ContactConstants;
-import com.zimbra.cs.account.MockProvisioning;
-import com.zimbra.cs.account.Provisioning;
-import com.zimbra.cs.index.SortBy;
-import com.zimbra.cs.index.ZimbraQueryResults;
-import com.zimbra.cs.mailbox.Contact;
-import com.zimbra.cs.mailbox.MailItem;
-import com.zimbra.cs.mailbox.Mailbox;
-import com.zimbra.cs.mailbox.MailboxManager;
-import com.zimbra.cs.mailbox.MailboxTestUtil;
-import com.zimbra.cs.mailbox.OperationContext;
-import com.zimbra.cs.mime.ParsedContact;
+import org.zmail.common.mailbox.ContactConstants;
+import org.zmail.cs.account.MockProvisioning;
+import org.zmail.cs.account.Provisioning;
+import org.zmail.cs.index.SortBy;
+import org.zmail.cs.index.ZmailQueryResults;
+import org.zmail.cs.mailbox.Contact;
+import org.zmail.cs.mailbox.MailItem;
+import org.zmail.cs.mailbox.Mailbox;
+import org.zmail.cs.mailbox.MailboxManager;
+import org.zmail.cs.mailbox.MailboxTestUtil;
+import org.zmail.cs.mailbox.OperationContext;
+import org.zmail.cs.mime.ParsedContact;
 
 /**
  * Unit test for {@link ContactQuery}.
@@ -47,7 +47,7 @@ public final class ContactQueryTest {
     public static void init() throws Exception {
         MailboxTestUtil.initServer();
         Provisioning prov = Provisioning.getInstance();
-        prov.createAccount("test@zimbra.com", "secret", new HashMap<String, Object>());
+        prov.createAccount("test@zmail.com", "secret", new HashMap<String, Object>());
     }
 
     @Before
@@ -67,14 +67,14 @@ public final class ContactQueryTest {
         Map<String, Object> fields = new HashMap<String, Object>();
         fields.put(ContactConstants.A_firstName, "Michael");
         fields.put(ContactConstants.A_lastName, "Smith");
-        fields.put(ContactConstants.A_email, "michael.smith@zimbra.com");
+        fields.put(ContactConstants.A_email, "michael.smith@zmail.com");
         mbox.createContact(null, new ParsedContact(fields), Mailbox.ID_FOLDER_CONTACTS, null);
         fields.put(ContactConstants.A_firstName, "Jonathan");
         fields.put(ContactConstants.A_lastName, "Smith");
-        fields.put(ContactConstants.A_email, "jonathan.smith@zimbra.com");
+        fields.put(ContactConstants.A_email, "jonathan.smith@zmail.com");
         Contact contact = mbox.createContact(null, new ParsedContact(fields), Mailbox.ID_FOLDER_CONTACTS, null);
 
-        ZimbraQueryResults results = mbox.index.search(new OperationContext(mbox), "contact:\"Jon Smith\"",
+        ZmailQueryResults results = mbox.index.search(new OperationContext(mbox), "contact:\"Jon Smith\"",
                 EnumSet.of(MailItem.Type.CONTACT), SortBy.NONE, 100);
         Assert.assertTrue(results.hasNext());
         Assert.assertEquals(contact.getId(), results.getNext().getItemId());
@@ -88,10 +88,10 @@ public final class ContactQueryTest {
         Map<String, Object> fields = new HashMap<String, Object>();
         fields.put(ContactConstants.A_firstName, "First*");
         fields.put(ContactConstants.A_lastName, "Las*t");
-        fields.put(ContactConstants.A_email, "first.last@zimbra.com");
+        fields.put(ContactConstants.A_email, "first.last@zmail.com");
         Contact contact = mbox.createContact(null, new ParsedContact(fields), Mailbox.ID_FOLDER_CONTACTS, null);
 
-        ZimbraQueryResults results = mbox.index.search(new OperationContext(mbox), "contact:\"First\"",
+        ZmailQueryResults results = mbox.index.search(new OperationContext(mbox), "contact:\"First\"",
                 EnumSet.of(MailItem.Type.CONTACT), SortBy.NONE, 100);
         Assert.assertTrue(results.hasNext());
         Assert.assertEquals(contact.getId(), results.getNext().getItemId());

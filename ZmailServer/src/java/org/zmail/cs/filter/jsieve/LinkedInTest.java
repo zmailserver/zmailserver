@@ -12,7 +12,7 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.filter.jsieve;
+package org.zmail.cs.filter.jsieve;
 
 import java.util.Set;
 
@@ -24,8 +24,8 @@ import org.apache.jsieve.tests.AbstractTest;
 
 import com.google.common.base.Strings;
 import com.google.common.collect.ImmutableSet;
-import com.zimbra.cs.filter.ZimbraMailAdapter;
-import com.zimbra.cs.mime.ParsedAddress;
+import org.zmail.cs.filter.ZmailMailAdapter;
+import org.zmail.cs.mime.ParsedAddress;
 
 /**
  * SIEVE test for LinkedIn notifications.
@@ -43,10 +43,10 @@ public final class LinkedInTest extends AbstractTest {
 
     @Override
     protected boolean executeBasic(MailAdapter mail, Arguments args, SieveContext ctx) throws SieveException {
-        if (!(mail instanceof ZimbraMailAdapter)) {
+        if (!(mail instanceof ZmailMailAdapter)) {
             return false;
         }
-        ZimbraMailAdapter adapter = (ZimbraMailAdapter) mail;
+        ZmailMailAdapter adapter = (ZmailMailAdapter) mail;
 
         ParsedAddress sender = adapter.getParsedMessage().getParsedSender();
         if (!Strings.isNullOrEmpty(sender.emailPart) && ADDRESSES.contains(sender.emailPart.toLowerCase())) {

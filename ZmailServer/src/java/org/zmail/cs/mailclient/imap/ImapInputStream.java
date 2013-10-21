@@ -12,16 +12,16 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.mailclient.imap;
+package org.zmail.cs.mailclient.imap;
 
-import com.zimbra.common.util.Log;
-import com.zimbra.common.util.ZimbraLog;
-import com.zimbra.cs.mailclient.util.Io;
-import com.zimbra.cs.mailclient.util.Ascii;
-import com.zimbra.cs.mailclient.util.LimitInputStream;
-import com.zimbra.cs.mailclient.ParseException;
-import com.zimbra.cs.mailclient.MailInputStream;
-import com.zimbra.cs.mailclient.MailException;
+import org.zmail.common.util.Log;
+import org.zmail.common.util.ZmailLog;
+import org.zmail.cs.mailclient.util.Io;
+import org.zmail.cs.mailclient.util.Ascii;
+import org.zmail.cs.mailclient.util.LimitInputStream;
+import org.zmail.cs.mailclient.ParseException;
+import org.zmail.cs.mailclient.MailInputStream;
+import org.zmail.cs.mailclient.MailException;
 
 import java.io.ByteArrayOutputStream;
 import java.io.InputStream;
@@ -327,7 +327,7 @@ public final class ImapInputStream extends MailInputStream {
             skipChar('\n');
         } catch (ParseException pe) {
             //parse exception; read until the end of line so we can get meaningful debug
-            ZimbraLog.imap_client.error("ParseException reading EOL", pe);
+            ZmailLog.imap_client.error("ParseException reading EOL", pe);
             //do nothing, just advancing to EOL. If we never find a \n then stream is prematurely closed or server is noncompliant
             while (readChar() != '\n') {
             }

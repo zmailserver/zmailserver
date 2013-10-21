@@ -1,5 +1,5 @@
 -----------------------------
- urn:zimbraAdmin
+ urn:zmailAdmin
 -----------------------------
 
 Attributes for all commands can have multiple values:
@@ -13,7 +13,7 @@ Note that name1 appears twice.
 When updating multiple attributes, you need to specify all the old values at the same time you specify new ones.
 
 ----------------------------
- <AuthRequest xmlns="urn:zimbraAdmin" [persistAuthTokenCookie="1"]>
+ <AuthRequest xmlns="urn:zmailAdmin" [persistAuthTokenCookie="1"]>
    [<name>...</name>]
    [<account by="name|id|foreignPrincipal">...</account>]
    <password>...</password>
@@ -37,7 +37,7 @@ Note: Only works with admin/domain-admin accounts
 Access: domain admin sufficient
 
 ----------------------------
- <DelegateAuthRequest xmlns="urn:zimbraAdmin" [duration="{duration}"]>
+ <DelegateAuthRequest xmlns="urn:zmailAdmin" [duration="{duration}"]>
    <account by="id|name">...</account>
  </DelegateAuthRequest>
 
@@ -49,7 +49,7 @@ Access: domain admin sufficient
 Used to request a new auth token that is valid for the specified account. The id of the auth token will be the id of the target account,
 and the requesting admin's id will be stored in the auth token for auditing purposes.
 
-{duration} = lifetime in seconds of the newly-created authtoken. defaults to 1 hour. Can't be longer then zimbraAuthTokenLifetime.
+{duration} = lifetime in seconds of the newly-created authtoken. defaults to 1 hour. Can't be longer then zmailAuthTokenLifetime.
 
 ----------------------------
 
@@ -71,7 +71,7 @@ Notes:
 
   name must include domain (uid@name), and domain specified in name must exist
 
-  default value for zimbraAccountStatus is "active"
+  default value for zmailAccountStatus is "active"
 
 Access: domain admin sufficient
 
@@ -120,8 +120,8 @@ Access: domain admin sufficient
 
   {attrs} = account attrs. Currently only two attrs are returned:
 
-      zimbraId       - the unique UUID of the zimbra account
-      zimbraMailHost - the server on which this user's mail resides
+      zmailId       - the unique UUID of the zmail account
+      zmailMailHost - the server on which this user's mail resides
 
   {acct-soap-url} = URL to talk to for soap service for this account. i.e:
 
@@ -145,7 +145,7 @@ Access: domain admin sufficient
 
 <GetAccountMembershipResponse>
     <dl name="{name}" id="{id}"  via="{via-dl-name}">
-      <a n="zimbraIsAdminGroup">...</a>+
+      <a n="zmailIsAdminGroup">...</a>+
     </dl>+
 </GetAccountMembershipResponse>
 
@@ -168,7 +168,7 @@ Access: domain admin sufficient
 -----------------------------
 
 <ModifyAccountRequest>
-  <id>{value-of-zimbraId}</id>
+  <id>{value-of-zmailId}</id>
   <a n="...">...</a>+
 </ModifyAccountRequest>
 
@@ -189,7 +189,7 @@ Access: domain admin sufficient. limited set of attributes that can be updated b
 -----------------------------
 
 <RenameAccountRequest>
-  <id>{value-of-zimbraId}</id>
+  <id>{value-of-zmailId}</id>
   <newName>{new-account-name}</newName>
 </RenameAccountRequest>
 
@@ -206,7 +206,7 @@ Access: domain admin sufficient
 -----------------------------
 
 <DeleteAccountRequest>
-  <id>{value-of-zimbraId}</id>
+  <id>{value-of-zmailId}</id>
 </DeleteAccountRequest>
 
 <DeleteAccountResponse/>
@@ -222,7 +222,7 @@ Access: domain admin sufficient
 -----------------------------
 
 <SetPasswordRequest>
-  <id>{value-of-zimbraId}</id>
+  <id>{value-of-zmailId}</id>
   <newPassword>...</newPassword>
 </SetPasswordRequest>
 
@@ -240,7 +240,7 @@ Access: domain admin sufficient
 -----------------------------
 
 <CheckPasswordStrengthRequest>
-  <id>{value-of-zimbraId}</id>
+  <id>{value-of-zmailId}</id>
   <password>...</password>
 </CheckPasswordStrengthRequest>
 
@@ -253,7 +253,7 @@ Access: domain admin sufficient
 -----------------------------
 
 <AddAccountAliasRequest>
-  <id>{value-of-zimbraId}</id>
+  <id>{value-of-zmailId}</id>
   <alias>...</alias>
 </AddAccountAliasRequest>
 
@@ -266,7 +266,7 @@ Access: domain admin sufficient
 -----------------------------
 
 <RemoveAccountAliasRequest>
-  <id>{value-of-zimbraId}</id>
+  <id>{value-of-zmailId}</id>
   <alias>...</alias>
 </RemoveAccountAliasRequest>
 
@@ -282,7 +282,7 @@ Access: domain admin sufficient
 
 <ResetAllLoggersResponse/>
 
-Removes all account loggers and reloads /opt/zimbra/conf/log4j.properties.
+Removes all account loggers and reloads /opt/zmail/conf/log4j.properties.
 
 -----------------------------
 NOTE: SearchAccountsRequest is deprecated. See SearchDirectoryRequest.
@@ -314,7 +314,7 @@ SearchAccountsRequest
              requesting attrs that aren't inherited from COS
   applyConfig - whether or not (0/1) to apply the global config attrs to domain. specify 0 if only
                requesting attrs that aren't inherited from global config
-  attrs - comma-seperated list of attrs to return ("displayName", "zimbraId", "zimbraAccountStatus")
+  attrs - comma-seperated list of attrs to return ("displayName", "zmailId", "zmailAccountStatus")
   sortBy - name of attribute to sort on. default is the account name.
   sortAscending - whether to sort in ascending order (0/1), 1 is default
     more-flag = true if more accounts left to return
@@ -324,7 +324,7 @@ SearchAccountsRequest
             (default is accounts)
 
 SearchAccountsResponse
-  isExternal: whether the account's zimbraMailTranport points to the designated protocol(lmtp) and server(home server of the account).
+  isExternal: whether the account's zmailMailTranport points to the designated protocol(lmtp) and server(home server of the account).
 
 Access: domain admin sufficient (a domain admin can't specify "domains" as a type)
 
@@ -421,7 +421,7 @@ SearchDirectoryRequest
   domain - the domain name to limit the search to (do not use if searching for domains)
   applyCos - whether or not (0/1) to apply the COS policy to account. specify 0 if only
              requesting attrs that aren't inherited from COS
-  attrs - comma-seperated list of attrs to return ("displayName", "zimbraId", "zimbraAccountStatus")
+  attrs - comma-seperated list of attrs to return ("displayName", "zmailId", "zmailAccountStatus")
   sortBy - name of attribute to sort on. default is the account name.
   sortAscending - whether to sort in ascending order (0/1), 1 is default
     more-flag = true if more accounts left to return
@@ -431,7 +431,7 @@ SearchDirectoryRequest
             (default is accounts)
 
 SearchDirectoryResponse
-  isExternal: whether the account's zimbraMailTranport points to the designated protocol(lmtp) and server(home server of the account).
+  isExternal: whether the account's zmailMailTranport points to the designated protocol(lmtp) and server(home server of the account).
 
 Access: domain admin sufficient (though a domain admin can't specify "domains" as a type)
 
@@ -469,7 +469,7 @@ When sorting by "quotaLimit", 0 is treated as the highest value possible.
 Computes the aggregate quota usage for all domains in the system.
 The request handler issues GetAggregateQuotaUsageOnServerRequest to all mailbox servers and computes the aggregate
 quota used by each domain.
-The request handler updates the zimbraAggregateQuotaLastUsage domain attribute and sends out warning messages for each
+The request handler updates the zmailAggregateQuotaLastUsage domain attribute and sends out warning messages for each
 domain having quota usage greater than a defined percentage threshold.
 
 <ComputeAggregateQuotaUsageRequest/>
@@ -548,7 +548,7 @@ Notes:
   extra attrs:
 
   description
-  zimbraNotes
+  zmailNotes
 
 -----------------------------
 
@@ -610,7 +610,7 @@ If the domain doesn't exist, this call returns an empty body:
 -----------------------------
 
 <ModifyDomainRequest>
-  <id>{value-of-zimbraId}</id>
+  <id>{value-of-zmailId}</id>
   <a n="...">...</a>+
 </ModifyDomainRequest>
 
@@ -627,7 +627,7 @@ Notes:
 -----------------------------
 
 <DeleteDomainRequest>
-  <id>{value-of-zimbraId}</id>
+  <id>{value-of-zmailId}</id>
 </DeleteDomainRequest>
 
 <DeleteDomainResponse/>
@@ -649,7 +649,7 @@ Notes:
   extra attrs:
 
   description
-  zimbraNotes
+  zmailNotes
 
 -----------------------------
 <CopyCosRequest>
@@ -692,7 +692,7 @@ Notes:
 -----------------------------
 
 <ModifyCosRequest>
-  <id>{value-of-zimbraId}</id>
+  <id>{value-of-zmailId}</id>
   <a n="...">...</a>+
 </ModifyCosRequest>
 
@@ -709,7 +709,7 @@ Notes:
 -----------------------------
 
 <RenameCosRequest>
-  <id>{value-of-zimbraId}</id>
+  <id>{value-of-zmailId}</id>
   <newName>{new-cos-name}</newName>
 </RenameCosRequest>
 
@@ -722,7 +722,7 @@ Notes:
 -----------------------------
 
 <DeleteCosRequest>
-  <id>{value-of-zimbraId}</id>
+  <id>{value-of-zmailId}</id>
 </DeleteCosRequest>
 
 <DeleteCosResponse/>
@@ -748,7 +748,7 @@ Notes:
   extra attrs:
 
   description
-  zimbraNotes
+  zmailNotes
 
 -----------------------------
 
@@ -764,7 +764,7 @@ Notes:
 
 {apply-config} = 0|1 (1 is default)
 
-by "serviceHostname" will return the server that has zimbraServiceHostname set to the specified value.
+by "serviceHostname" will return the server that has zmailServiceHostname set to the specified value.
 
  if {apply-config} is 1, then certain unset attrs on a server will get their value from the global config.
 
@@ -789,7 +789,7 @@ spell).
 -----------------------------
 
 <ModifyServerRequest>
-  <id>{value-of-zimbraId}</id>
+  <id>{value-of-zmailId}</id>
   <a n="...">...</a>+
 </ModifyServerRequest>
 
@@ -806,7 +806,7 @@ Note: an empty attribute value removes the specified attr
 -----------------------------
 
 <DeleteServerRequest>
-  <id>{value-of-zimbraId}</id>
+  <id>{value-of-zmailId}</id>
 </DeleteServerRequest>
 
 <DeleteServerResponse/>
@@ -1103,30 +1103,30 @@ checked.
 ------------------------------------------------------------
 
 <CheckGalConfigRequest>
-  <a n='zimbraGalMode'>ldap</a>
+  <a n='zmailGalMode'>ldap</a>
 
-  <a n='zimbraGalLdapURL'>...</a>
-  <a n='zimbraGalLdapSearchBase'>...</a>
-  <a n='zimbraGalLdapFilter'>...</a>
-  <a n='zimbraGalLdapAuthMech'>...</a>
-  <a n='zimbraGalLdapBindDn'>...</a>*
-  <a n='zimbraGalLdapBindPassword'>...</a>*
-  <a n='zimbraGalLdapKerberos5Principal'>...</a>*
-  <a n='zimbraGalLdapKerberos5Keytab'>...</a>*
+  <a n='zmailGalLdapURL'>...</a>
+  <a n='zmailGalLdapSearchBase'>...</a>
+  <a n='zmailGalLdapFilter'>...</a>
+  <a n='zmailGalLdapAuthMech'>...</a>
+  <a n='zmailGalLdapBindDn'>...</a>*
+  <a n='zmailGalLdapBindPassword'>...</a>*
+  <a n='zmailGalLdapKerberos5Principal'>...</a>*
+  <a n='zmailGalLdapKerberos5Keytab'>...</a>*
 
-  <a n='zimbraGalSyncLdapURL'>...</a>
-  <a n='zimbraGalSyncLdapSearchBase'>...</a>
-  <a n='zimbraGalSyncLdapFilter'>...</a>
-  <a n='zimbraGalSyncLdapAuthMech'>...</a>
-  <a n='zimbraGalSyncLdapBindDn'>...</a>*
-  <a n='zimbraGalSyncLdapBindPassword'>...</a>*
-  <a n='zimbraGalSyncLdapKerberos5Principal'>...</a>*
-  <a n='zimbraGalSyncLdapKerberos5Keytab'>...</a>*
+  <a n='zmailGalSyncLdapURL'>...</a>
+  <a n='zmailGalSyncLdapSearchBase'>...</a>
+  <a n='zmailGalSyncLdapFilter'>...</a>
+  <a n='zmailGalSyncLdapAuthMech'>...</a>
+  <a n='zmailGalSyncLdapBindDn'>...</a>*
+  <a n='zmailGalSyncLdapBindPassword'>...</a>*
+  <a n='zmailGalSyncLdapKerberos5Principal'>...</a>*
+  <a n='zmailGalSyncLdapKerberos5Keytab'>...</a>*
 
-  <a n='zimbraGalAutoCompleteLdapFilter'>...</a>
+  <a n='zmailGalAutoCompleteLdapFilter'>...</a>
 
-  <a n='zimbraGalTokenizeAutoCompleteKey'>...</a>
-  <a n='zimbraGalTokenizeSearchKey'>...</a>
+  <a n='zmailGalTokenizeAutoCompleteKey'>...</a>
+  <a n='zmailGalTokenizeSearchKey'>...</a>
 
   <query limit="...">...</query>*
   <action>{GAL-action}</action>*
@@ -1139,7 +1139,7 @@ checked.
 </CheckGalConfigResponse>
 
 notes:
- - zimbraGalMode must be set to ldap, even if you eventually want to set it to "both".
+ - zmailGalMode must be set to ldap, even if you eventually want to set it to "both".
  - <action> is optional.  GAL-action can be autocomplete|search|sync.  Default is search.
  - <query> is ignored if <action> is "sync".
  - AuthMech can be none|simple|kerberos5.
@@ -1147,19 +1147,19 @@ notes:
       - Default is none if not both BindDn/BindPassword are provided.
  - BindDn/BindPassword are required if AuthMech is "simple".
  - Kerberos5Principal/Kerberos5Keytab are required only if AuthMech is "kerberos5".
- - zimbraGalSyncLdapXXX attributes are for GAL sync.  They are ignored if <action> is not sync.
-   For GAL sync, if a zimbraGalSyncLdapXXX attribute is not set, server will fallback to the corresponding zimbraGalLdapXXX attribute.
+ - zmailGalSyncLdapXXX attributes are for GAL sync.  They are ignored if <action> is not sync.
+   For GAL sync, if a zmailGalSyncLdapXXX attribute is not set, server will fallback to the corresponding zmailGalLdapXXX attribute.
 
 ------------------------------------------------------------
 
 <CheckAuthConfigRequest>
-  <a n='zimbraAuthMech'>ldap</a>
-  <a n='zimbraAuthLdapURL'>...</a>
-  <a n='zimbraAuthLdapBindDn'>...</a>
-  <a n='zimbraAuthLdapSearchFilter'>...</a>
-  <a n='zimbraAuthLdapSearchBase'>...</a>
-  <a n='zimbraAuthLdapSearchBindDn'>...</a>
-  <a n='zimbraAuthLdapSearchBindPassword'>...</a>
+  <a n='zmailAuthMech'>ldap</a>
+  <a n='zmailAuthLdapURL'>...</a>
+  <a n='zmailAuthLdapBindDn'>...</a>
+  <a n='zmailAuthLdapSearchFilter'>...</a>
+  <a n='zmailAuthLdapSearchBase'>...</a>
+  <a n='zmailAuthLdapSearchBindDn'>...</a>
+  <a n='zmailAuthLdapSearchBindPassword'>...</a>
   <name>...</name>
   <password>...</password>
 </CheckAuthConfigRequest>
@@ -1171,13 +1171,13 @@ notes:
 </CheckAuthConfigResponse>
 
 notes:
-  - zimbraAuthMech must be set to ldap/ad. There is no reason to check zimbra.
-  - zimbraAuthLdapURL must be set
-  - either zimbraAuthLdapBindDn or zimbraAuthLdapSearchFilter must be set
+  - zmailAuthMech must be set to ldap/ad. There is no reason to check zmail.
+  - zmailAuthLdapURL must be set
+  - either zmailAuthLdapBindDn or zmailAuthLdapSearchFilter must be set
 
-  The following are optional, and only looked at if zimbraAuthLdapSearchFilter is set:
-     - zimbraAuthLdapSearchBase is optional and defaults to ""
-     - zimbraAuthLdapSearchBind{Dn,Password} are both optional
+  The following are optional, and only looked at if zmailAuthLdapSearchFilter is set:
+     - zmailAuthLdapSearchBase is optional and defaults to ""
+     - zmailAuthLdapSearchBind{Dn,Password} are both optional
 
 -----------------------------------
 
@@ -1198,7 +1198,7 @@ Notes:
         2 = secondary message volume
         10 = index volume
   name: name or description of volume
-  rootPath: absolute path to root of volume, e.g. /opt/zimbra/store
+  rootPath: absolute path to root of volume, e.g. /opt/zmail/store
   compressBlobs: boolean value that specifies whether blobs in this
     volume are compressed
   compressionThreshold: long value that specifies the maximum uncompressed
@@ -1345,7 +1345,7 @@ Notes:
 
   extra attrs:
       description
-      zimbraNotes
+      zmailNotes
 
 Access: domain admin sufficient
 
@@ -1400,7 +1400,7 @@ Access: domain admin sufficient
 -----------------------------
 
 <AddDistributionListMemberRequest>
-  <id>{value-of-zimbraId}</id>
+  <id>{value-of-zmailId}</id>
   <dlm>{member}</dlm>+
 </AddDistributionListMemberRequest>
 
@@ -1415,7 +1415,7 @@ being a no-op because all <dlm> addrs are already members.
 -----------------------------
 
 <RemoveDistributionListMemberRequest>
-  <id>{value-of-zimbraId}</id>
+  <id>{value-of-zmailId}</id>
   <dlm>{member}</dlm>+
 </RemoveDistributionListMemberRequest>
 
@@ -1430,7 +1430,7 @@ modification to the list.
 -----------------------------
 
 <ModifyDistributionListRequest>
-  <id>{value-of-zimbraId}</id>
+  <id>{value-of-zmailId}</id>
   <a n="...">...</a>+
 </ModifyDistributionListRequest>
 
@@ -1450,7 +1450,7 @@ Access: domain admin sufficient
 -----------------------------
 
 <DeleteDistributionListRequest>
-  <id>{value-of-zimbraId}</id>
+  <id>{value-of-zmailId}</id>
 </DeleteDistributionListRequest>
 
 <DeleteDistributionListResponse/>
@@ -1460,7 +1460,7 @@ Access: domain admin sufficient
 -----------------------------
 
 <AddDistributionListAliasRequest>
-  <id>{value-of-zimbraId}</id>
+  <id>{value-of-zmailId}</id>
   <alias>...</alias>
 </AddAliasRequest>
 
@@ -1471,7 +1471,7 @@ Access: domain admin sufficient
 -----------------------------
 
 <RemoveDistributionListAliasRequest>
-  <id>{value-of-zimbraId}</id>
+  <id>{value-of-zmailId}</id>
   <alias>...</alias>
 </RemoveDistributionListAliasRequest>
 
@@ -1482,7 +1482,7 @@ Access: domain admin sufficient
 -----------------------------
 
 <RenameDistributionListRequest>
-  <id>{value-of-zimbraId}</id>
+  <id>{value-of-zmailId}</id>
   <newName>{new-DL-name}</newName>
 </RenameDistributionListRequest>
 
@@ -1755,7 +1755,7 @@ Access: domain admin sufficient
 -----------------------------
 
 <DeleteCalendarResourceRequest>
-  <id>{value-of-zimbraId}</id>
+  <id>{value-of-zmailId}</id>
 </DeleteCalendarResourceRequest>
 
 <DeleteCalendarResourceResponse/>
@@ -1767,7 +1767,7 @@ Access: domain admin sufficient
 -----------------------------
 
 <ModifyCalendarResourceRequest>
-  <id>{value-of-zimbraId}</id>
+  <id>{value-of-zmailId}</id>
   <a n="...">...</a>+
 </ModifyCalendarResourceRequest>
 
@@ -1788,7 +1788,7 @@ Access: domain admin sufficient. limited set of attributes that can be updated b
 -----------------------------
 
 <RenameCalendarResourceRequest>
-  <id>{value-of-zimbraId}</id>
+  <id>{value-of-zmailId}</id>
   <newName>{new-resource-name}</newName>
 </RenameCalendarResourceRequest>
 
@@ -1859,7 +1859,7 @@ SearchCalendarResourcesRequest
   domain - the domain name to limit the search to
   applyCos - whether or not (0/1) to apply the COS policy to calendar resource. specify 0 if only
              requesting attrs that aren't inherited from COS
-  attrs - comma-seperated list of attrs to return ("displayName", "zimbraId", "zimbraAccountStatus")
+  attrs - comma-seperated list of attrs to return ("displayName", "zmailId", "zmailAccountStatus")
   sortBy - name of attribute to sort on. default is the calendar resource name.
   sortAscending - whether to sort in ascending order (0/1), 1 is default
     more-flag = true if more calendar resources left to return
@@ -2028,8 +2028,8 @@ If the optional element domain is present, it will create the domain
 level wiki account used for public wiki folder for the domain.
 
 If the optional element account is present, the value will be used to
-create the account, and then sets either zimbraNotebookDefaultAccount
-or zimbraNotebookDomainAccount LDAP attribute.
+create the account, and then sets either zmailNotebookDefaultAccount
+or zmailNotebookDomainAccount LDAP attribute.
 
 <InitNotebookRequest>
   [<template dest="{template-folder}">{template-dir}</template>]
@@ -2045,13 +2045,13 @@ or zimbraNotebookDomainAccount LDAP attribute.
 <CreateDataSourceRequest/>
   <id>{account-id}</id>
   <dataSource type="pop3" name="{data-source-name}">
-   <a n="zimbraDataSourceName">My POP3 Account</a>
-   <a n="zimbraDataSourceIsEnabled">TRUE</a>
-   <a n="zimbraDataSourceHost">pop.myisp.com</a>
-   <a n="zimbraDataSourcePort">110</a>
-   <a n="zimbraDataSourceUsername">mylogin</a>
-   <a n="zimbraDataSourcePassword">mypassword</a>
-   <a n="zimbraDataSourceFolderId">{folder-id}</a>
+   <a n="zmailDataSourceName">My POP3 Account</a>
+   <a n="zmailDataSourceIsEnabled">TRUE</a>
+   <a n="zmailDataSourceHost">pop.myisp.com</a>
+   <a n="zmailDataSourcePort">110</a>
+   <a n="zmailDataSourceUsername">mylogin</a>
+   <a n="zmailDataSourcePassword">mypassword</a>
+   <a n="zmailDataSourceFolderId">{folder-id}</a>
   </dataSource>
 </CreateDataSourceRequest>
 
@@ -2099,7 +2099,7 @@ every attribute value is returned except password.
 <ModifyDataSourceResponse/>
 
 Changes attributes of the given data source.  Only the attributes specified in the request
-are modified. To change the name, specify "zimbraDataSourceName" as an attribute.
+are modified. To change the name, specify "zmailDataSourceName" as an attribute.
 
    note: this request is by default proxied to the account's home server
 
@@ -2137,7 +2137,7 @@ daylight savings time rules in various timezones.
 
 ---------------------------
 
-The WaitSet APIs are now in the urn:zimbraMail namespace, and are documented
+The WaitSet APIs are now in the urn:zmailMail namespace, and are documented
 in soap-waitset.txt
 
 ***See soap-waitset.txt for WaitSet API documentation***
@@ -2292,7 +2292,7 @@ in soap-waitset.txt
     <cos id="{cos-id}" name="cos-name">{account-count}</cos>+
 </CountAccountResponse>
 
-    Note, it doesn't include any account with zimbraIsSystemResource=TRUE,
+    Note, it doesn't include any account with zmailIsSystemResource=TRUE,
     nor does it include any calendar resources.
 
 
@@ -2340,7 +2340,7 @@ Note: For account/alias/dl, if a <domain> is specified, only entries on the
 
 ---------------------------------------------------------------------------
 # Get server's network interfaces. Returns IP  addresses and net masks
-# This call will use zmrcd to call /opt/zimbra/libexec/zmserverips
+# This call will use zmrcd to call /opt/zmail/libexec/zmserverips
 
 <GetServerNIfsRequest [type="{ipv4|ipv6|both}"]>
  <server by="id|name|serviceHostname">...</server>
@@ -2360,7 +2360,7 @@ Note: For account/alias/dl, if a <domain> is specified, only entries on the
 <GetAllFreeBusyProvidersRequest/>
 
 <GetAllFreeBusyProvidersResponse>
-  [<provider name="{provider-name}" propagate="{1|0}" queue="{location-of-the-queue}" prefix="{prefix-used-in-zimbraForeignPrincipal}" start="{seconds-since-epoch of free/busy cache start time}" end="{seconds-since-epoch of free/busy cache end time}"/>]+
+  [<provider name="{provider-name}" propagate="{1|0}" queue="{location-of-the-queue}" prefix="{prefix-used-in-zmailForeignPrincipal}" start="{seconds-since-epoch of free/busy cache start time}" end="{seconds-since-epoch of free/busy cache end time}"/>]+
 </GetAllFreeBusyProvidersResponse>
 
 ---------------------------------------------------------------------------
@@ -2432,7 +2432,7 @@ java.util.Locale.getAvailableLocales(), sorted by display name (name attribute).
 
 ----------------------------------------
 
-<PurgeAccountCalendarCacheRequest id="{value-of-zimbraId}"/>
+<PurgeAccountCalendarCacheRequest id="{value-of-zmailId}"/>
 
 <PurgeAccountCalendarCacheRequest/>
 
@@ -2470,7 +2470,7 @@ returns all shares owned by user1@test.com that are shared with dl@test.com.
 
 ----------------------------
 
-<CreateGalSyncAccountRequest name="{identifier}" domain="{domain-name}" type="zimbra|ldap" server="{server}" [folder="{contact-folder-name}"] >
+<CreateGalSyncAccountRequest name="{identifier}" domain="{domain-name}" type="zmail|ldap" server="{server}" [folder="{contact-folder-name}"] >
   <account by="id|name">...</account>
   <a n="attr-name">...</a>+
 </CreateGalSyncAccountRequest>
@@ -2490,9 +2490,9 @@ Notes:
   - server is a required parameter and specifies the mailhost on which this account resides.  
 
 
-example for creating gal sync account for Zimbra LDAP server.
+example for creating gal sync account for Zmail LDAP server.
 
-    <CreateGalSyncAccountRequest name="zimbra" domain="mydomain.com" type="zimbra" server="mailhost.mydomain.com">
+    <CreateGalSyncAccountRequest name="zmail" domain="mydomain.com" type="zmail" server="mailhost.mydomain.com">
       <account by="name">gal@mydomain.com</account>
     </CreateGalSyncAccountRequest>
 
@@ -2500,23 +2500,23 @@ example for creating domain gal sync account.
 
     <CreateGalSyncAccountRequest name="mydomain" domain="mydomain.com" type="ldap" server="mailhost.mydomain.com">
       <account by="name">gal@mydomain.com</account>
-      <a n="zimbraGalSyncLdapURL">ldap://ldap.mydomain.com</a>
-      <a n="zimbraGalSyncLdapStartTlsEnabled">TRUE</a>
-      <a n="zimbraGalSyncLdapSearchBase">cn=users</a>
-      <a n="zimbraGalSyncLdapAuthMech">simple</a>
-      <a n="zimbraGalSyncLdapBindDn">uid=admin,cn=users</a>
-      <a n="zimbraGalSyncLdapBindPassword">password</a>
-      <a n="zimbraGalSyncLdapFilter">(&amp;(mail=*)(objectClass=user))</a>
-      <a n="zimbraGalLdapAttrMap">whenChanged,modifyTimeStamp=modifyTimeStamp</a>
-      <a n="zimbraGalLdapAttrMap">whenCreated,createTimeStamp=createTimeStamp</a>
-      <a n="zimbraGalLdapAttrMap">zimbraMailDeliveryAddress,zimbraMailAlias,mail=email,email2,email3,email4,email5,email6,email7,email8,email9,email10,email11,email12,email13,email14,email15,email16</a>
+      <a n="zmailGalSyncLdapURL">ldap://ldap.mydomain.com</a>
+      <a n="zmailGalSyncLdapStartTlsEnabled">TRUE</a>
+      <a n="zmailGalSyncLdapSearchBase">cn=users</a>
+      <a n="zmailGalSyncLdapAuthMech">simple</a>
+      <a n="zmailGalSyncLdapBindDn">uid=admin,cn=users</a>
+      <a n="zmailGalSyncLdapBindPassword">password</a>
+      <a n="zmailGalSyncLdapFilter">(&amp;(mail=*)(objectClass=user))</a>
+      <a n="zmailGalLdapAttrMap">whenChanged,modifyTimeStamp=modifyTimeStamp</a>
+      <a n="zmailGalLdapAttrMap">whenCreated,createTimeStamp=createTimeStamp</a>
+      <a n="zmailGalLdapAttrMap">zmailMailDeliveryAddress,zmailMailAlias,mail=email,email2,email3,email4,email5,email6,email7,email8,email9,email10,email11,email12,email13,email14,email15,email16</a>
     </CreateGalSyncAccountRequest>
 
 Access: domain admin sufficient
 
 ----------------------------
 
-<AddGalSyncDataSourceRequest name="{identifier}" domain="{domain-name}" type="zimbra|ldap" [folder="{contact-folder-name}"] >
+<AddGalSyncDataSourceRequest name="{identifier}" domain="{domain-name}" type="zmail|ldap" [folder="{contact-folder-name}"] >
   <account by="id|name">...</account>
   <a n="attr-name">...</a>+
 </AddGalSyncDataSourceRequest>
@@ -2564,7 +2564,7 @@ Notes:
 
 <DeleteGalSyncAccountResponse/>
 
-Remove its zimbraGalAccountId from the domain, then deletes the account.
+Remove its zmailGalAccountId from the domain, then deletes the account.
 
 ----------------------------
 
@@ -2593,7 +2593,7 @@ Returns the memcached client configuration on a mailbox server.
 ----------------------------
 
 <MigrateAccountRequest>
-  <migrate action="bug72174|bug78254|wiki|contactGroup" id="{zimbraId-of-account}"/>
+  <migrate action="bug72174|bug78254|wiki|contactGroup" id="{zmailId-of-account}"/>
 </MigrateAccountRequest>
 
 <MigrateAccountResponse/>
@@ -2668,7 +2668,7 @@ Notes:
 
   limit    - the number of accounts to return per page (0 is default and means all)
   offset   - the starting offset (0, 25, etc)
-  domain   - the Zimbra domain name
+  domain   - the Zmail domain name
   keyAttr  - name of attribute for the key.  Value of the key attribute will appear in the 
              <key> element in the response.  It is recommended to pick a key attribute that 
              is single-valued and can unique identify an entry in the external auto provision 
@@ -2690,7 +2690,7 @@ Notes:
 
 Under normal situations, the EAGER auto provisioning task(thread) should be started/stopped 
 automatically by the server when appropriate.  The task should be running when 
-zimbraAutoProvPollingInterval is not 0 and zimbraAutoProvScheduledDomains is not empty.  
+zmailAutoProvPollingInterval is not 0 and zmailAutoProvScheduledDomains is not empty.  
 The task should be stopped otherwise.
  
 This API is to manually force start/stop or query status of the EAGER auto provisioning task. 
@@ -2718,7 +2718,7 @@ See soap.txt for more details about the <retentionPolicy> element structure.
 </GetSystemRetentionPolicyRequest>
 
 <GetSystemRetentionPolicyResponse>
-  <retentionPolicy xmlns="urn:zimbraMail">
+  <retentionPolicy xmlns="urn:zmailMail">
     <keep>
       <policy id="{id}" name="{name}" type="system" lifetime="{duration}"/>*
     </keep>
@@ -2732,31 +2732,31 @@ See soap.txt for more details about the <retentionPolicy> element structure.
 <CreateSystemRetentionPolicyRequest>
   [<cos by="id|name">...</cos>]
   <keep>
-    <policy name="{name}" lifetime="{duration}" xmlns="urn:zimbraMail"/>
+    <policy name="{name}" lifetime="{duration}" xmlns="urn:zmailMail"/>
   </keep> |
   <purge>
-    <policy name="{name}" lifetime="{duration}" xmlns="urn:zimbraMail"/>
+    <policy name="{name}" lifetime="{duration}" xmlns="urn:zmailMail"/>
   </purge>
 </CreateSystemRetentionPolicyRequest>
 
 <CreateSystemRetentionPolicyResponse>
-  <policy id="{id}" name="{name}" type="system" lifetime="{duration}" xmlns="urn:zimbraMail"/>
+  <policy id="{id}" name="{name}" type="system" lifetime="{duration}" xmlns="urn:zmailMail"/>
 </CreateSystemRetentionPolicyResponse>
 
 
 <ModifySystemRetentionPolicyRequest>
   [<cos by="id|name">...</cos>]
-  <policy id="{id}" [name="{name}"] [lifetime="{duration}"] xmlns="urn:zimbraMail"/>
+  <policy id="{id}" [name="{name}"] [lifetime="{duration}"] xmlns="urn:zmailMail"/>
 </ModifySystemRetentionPolicyRequest>
 
 <ModifySystemRetentionPolicyResponse>
-  <policy id="{id}" type="system" name="{name}" lifetime="{interval"} xmlns="urn:zimbraMail"/>
+  <policy id="{id}" type="system" name="{name}" lifetime="{interval"} xmlns="urn:zmailMail"/>
 </ModifySystemRetentionPolicyResponse>
 
 
 <DeleteSystemRetentionPolicyRequest>
   [<cos by="id|name">...</cos>]
-  <policy id="{id}" xmlns="urn:zimbraMail"/>
+  <policy id="{id}" xmlns="urn:zmailMail"/>
 </DeleteSystemRetentionPolicyRequest>
 
 <DeleteSystemRetentionPolicyResponse/>
@@ -2810,7 +2810,7 @@ If "cos" element is specified the opeartion create/modify/get/delete gets applie
 -----------------------------
 
 <ModifyUCServiceRequest>
-  <id>{value-of-zimbraId}</id>
+  <id>{value-of-zmailId}</id>
   <a n="...">...</a>+
 </ModifyUCServiceRequest>
 
@@ -2823,7 +2823,7 @@ If "cos" element is specified the opeartion create/modify/get/delete gets applie
 -----------------------------
 
 <DeleteUCServiceRequest>
-  <id>{value-of-zimbraId}</id>
+  <id>{value-of-zmailId}</id>
 </DeleteUCServiceRequest>
 
 <DeleteUCServiceResponse/>
@@ -2831,7 +2831,7 @@ If "cos" element is specified the opeartion create/modify/get/delete gets applie
 ----------------------------
 
 <RenameUCServiceRequest>
-  <id>{value-of-zimbraId}</id>
+  <id>{value-of-zmailId}</id>
   <newName>{new-name}</newName>
 </RenameUCServiceRequest>
 

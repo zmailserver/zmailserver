@@ -11,7 +11,7 @@
 /* basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.service.mail;
+package org.zmail.cs.service.mail;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -22,26 +22,26 @@ import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
-import com.zimbra.common.calendar.TimeZoneMap;
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.common.soap.Element;
-import com.zimbra.common.soap.MailConstants;
-import com.zimbra.cs.account.Account;
-import com.zimbra.cs.fb.FreeBusy;
-import com.zimbra.cs.fb.FreeBusyQuery;
-import com.zimbra.cs.fb.FreeBusy.Interval;
-import com.zimbra.cs.mailbox.Mailbox;
-import com.zimbra.cs.mailbox.CalendarItem.Instance;
-import com.zimbra.cs.mailbox.calendar.IcalXmlStrMap;
-import com.zimbra.cs.mailbox.calendar.Util;
-import com.zimbra.soap.SoapServlet;
-import com.zimbra.soap.ZimbraSoapContext;
+import org.zmail.common.calendar.TimeZoneMap;
+import org.zmail.common.service.ServiceException;
+import org.zmail.common.soap.Element;
+import org.zmail.common.soap.MailConstants;
+import org.zmail.cs.account.Account;
+import org.zmail.cs.fb.FreeBusy;
+import org.zmail.cs.fb.FreeBusyQuery;
+import org.zmail.cs.fb.FreeBusy.Interval;
+import org.zmail.cs.mailbox.Mailbox;
+import org.zmail.cs.mailbox.CalendarItem.Instance;
+import org.zmail.cs.mailbox.calendar.IcalXmlStrMap;
+import org.zmail.cs.mailbox.calendar.Util;
+import org.zmail.soap.SoapServlet;
+import org.zmail.soap.ZmailSoapContext;
 
 public class CheckRecurConflicts extends ExpandRecur {
 
     @Override
     public Element handle(Element request, Map<String, Object> context) throws ServiceException {
-        ZimbraSoapContext zsc = getZimbraSoapContext(context);
+        ZmailSoapContext zsc = getZmailSoapContext(context);
         Account authAcct = getAuthenticatedAccount(zsc);
         Element response = getResponseElement(zsc);
 

@@ -12,7 +12,7 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.service.formatter;
+package org.zmail.cs.service.formatter;
 
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -30,24 +30,24 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletResponse;
 
 import com.google.common.io.Closeables;
-import com.zimbra.common.mime.MimeConstants;
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.common.soap.SoapProtocol;
-import com.zimbra.common.util.ZimbraLog;
-import com.zimbra.cs.account.Account;
-import com.zimbra.cs.account.Provisioning;
-import com.zimbra.cs.convert.ConversionUnsupportedException;
-import com.zimbra.cs.index.SortBy;
-import com.zimbra.cs.index.ZimbraHit;
-import com.zimbra.cs.index.ZimbraQueryResults;
-import com.zimbra.cs.mailbox.Folder;
-import com.zimbra.cs.mailbox.MailItem;
-import com.zimbra.cs.mailbox.MailServiceException;
-import com.zimbra.cs.mailbox.Mailbox;
-import com.zimbra.cs.mailbox.MailServiceException.NoSuchItemException;
-import com.zimbra.cs.service.UserServletContext;
-import com.zimbra.cs.service.UserServletException;
-import com.zimbra.cs.service.formatter.FormatterFactory.FormatType;
+import org.zmail.common.mime.MimeConstants;
+import org.zmail.common.service.ServiceException;
+import org.zmail.common.soap.SoapProtocol;
+import org.zmail.common.util.ZmailLog;
+import org.zmail.cs.account.Account;
+import org.zmail.cs.account.Provisioning;
+import org.zmail.cs.convert.ConversionUnsupportedException;
+import org.zmail.cs.index.SortBy;
+import org.zmail.cs.index.ZmailHit;
+import org.zmail.cs.index.ZmailQueryResults;
+import org.zmail.cs.mailbox.Folder;
+import org.zmail.cs.mailbox.MailItem;
+import org.zmail.cs.mailbox.MailServiceException;
+import org.zmail.cs.mailbox.Mailbox;
+import org.zmail.cs.mailbox.MailServiceException.NoSuchItemException;
+import org.zmail.cs.service.UserServletContext;
+import org.zmail.cs.service.UserServletException;
+import org.zmail.cs.service.formatter.FormatterFactory.FormatType;
 
 public abstract class Formatter {
 
@@ -195,7 +195,7 @@ public abstract class Formatter {
                     throw MailServiceException.INVALID_TYPE(e.getMessage());
                 }
             }
-            ZimbraQueryResults results = context.targetMailbox.index.search(context.opContext, query, types,
+            ZmailQueryResults results = context.targetMailbox.index.search(context.opContext, query, types,
                     SortBy.DATE_DESC, context.getOffset() + context.getLimit());
             return new QueryResultIterator(results);
         } else if (context.target instanceof Folder) {
@@ -234,9 +234,9 @@ public abstract class Formatter {
     }
 
     protected static class QueryResultIterator implements Iterator<MailItem> {
-        private ZimbraQueryResults results;
+        private ZmailQueryResults results;
 
-        QueryResultIterator(ZimbraQueryResults results) {
+        QueryResultIterator(ZmailQueryResults results) {
             this.results = results;
         }
 
@@ -248,7 +248,7 @@ public abstract class Formatter {
             try {
                 return results.hasNext();
             } catch (ServiceException e) {
-                ZimbraLog.misc.warn("caught exception", e);
+                ZmailLog.misc.warn("caught exception", e);
                 return false;
             }
         }
@@ -259,12 +259,12 @@ public abstract class Formatter {
                 return null;
             }
             try {
-                ZimbraHit hit = results.getNext();
+                ZmailHit hit = results.getNext();
                 if (hit != null) {
                     return hit.getMailItem();
                 }
             } catch (ServiceException e) {
-                ZimbraLog.misc.warn("caught exception", e);
+                ZmailLog.misc.warn("caught exception", e);
             }
             return null;
         }
@@ -339,13 +339,13 @@ public abstract class Formatter {
             try {
                 out = updateClient(context, false);
             } catch (IllegalStateException ise) {
-                ZimbraLog.misc.warn("format output has already been written.");
+                ZmailLog.misc.warn("format output has already been written.");
                 return;
             }
             if (exception == null && (w == null || w.isEmpty())) {
                 out.println("<body></body>\n</html>");
             } else {
-                ZimbraLog.misc.warn(getType() + " formatter exception",
+                ZmailLog.misc.warn(getType() + " formatter exception",
                     exception);
                 out.println("<body>\n<pre>");
                 if (exception != null)
@@ -360,9 +360,9 @@ public abstract class Formatter {
             String result;
             if (exception != null) {
                 if (exception instanceof ConversionUnsupportedException) {
-                    ZimbraLog.misc.warn(getType() + " formatter exception, " + exception.getMessage());
+                    ZmailLog.misc.warn(getType() + " formatter exception, " + exception.getMessage());
                 } else {
-                    ZimbraLog.misc.warn(getType() + " formatter exception", exception);
+                    ZmailLog.misc.warn(getType() + " formatter exception", exception);
                 }
                 result = "fail";
             } else if (w == null || w.size() == 0) {
@@ -376,7 +376,7 @@ public abstract class Formatter {
             try {
                 out = updateClient(context, false);
             } catch (IllegalStateException ise) {
-                ZimbraLog.misc.warn("format output has already been written.");
+                ZmailLog.misc.warn("format output has already been written.");
                 return;
             }
             // mark done no matter what happens next

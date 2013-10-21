@@ -12,7 +12,7 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.filter.jsieve;
+package org.zmail.cs.filter.jsieve;
 
 import java.util.Map;
 
@@ -27,15 +27,15 @@ import com.google.common.collect.ImmutableMap;
 public final class ActionFlag implements Action {
 
     private static final Map<String, ActionFlag> FLAGS = ImmutableMap.<String, ActionFlag>builder()
-            .put("read", new ActionFlag(com.zimbra.cs.mailbox.Flag.FlagInfo.UNREAD, false, "read"))
-            .put("unread", new ActionFlag(com.zimbra.cs.mailbox.Flag.FlagInfo.UNREAD, true, "unread"))
-            .put("flagged", new ActionFlag(com.zimbra.cs.mailbox.Flag.FlagInfo.FLAGGED, true, "flagged"))
-            .put("unflagged", new ActionFlag(com.zimbra.cs.mailbox.Flag.FlagInfo.FLAGGED, false, "unflagged"))
-            .put("priority", new ActionFlag(com.zimbra.cs.mailbox.Flag.FlagInfo.PRIORITY, true, "priority"))
-            .put("unpriority", new ActionFlag(com.zimbra.cs.mailbox.Flag.FlagInfo.PRIORITY, false, "priority"))
+            .put("read", new ActionFlag(org.zmail.cs.mailbox.Flag.FlagInfo.UNREAD, false, "read"))
+            .put("unread", new ActionFlag(org.zmail.cs.mailbox.Flag.FlagInfo.UNREAD, true, "unread"))
+            .put("flagged", new ActionFlag(org.zmail.cs.mailbox.Flag.FlagInfo.FLAGGED, true, "flagged"))
+            .put("unflagged", new ActionFlag(org.zmail.cs.mailbox.Flag.FlagInfo.FLAGGED, false, "unflagged"))
+            .put("priority", new ActionFlag(org.zmail.cs.mailbox.Flag.FlagInfo.PRIORITY, true, "priority"))
+            .put("unpriority", new ActionFlag(org.zmail.cs.mailbox.Flag.FlagInfo.PRIORITY, false, "priority"))
             .build();
 
-    private final com.zimbra.cs.mailbox.Flag.FlagInfo flag;
+    private final org.zmail.cs.mailbox.Flag.FlagInfo flag;
     private final boolean set;
     private final String name;
 
@@ -43,13 +43,13 @@ public final class ActionFlag implements Action {
         return FLAGS.get(name);
     }
 
-    private ActionFlag(com.zimbra.cs.mailbox.Flag.FlagInfo flag, boolean set, String name) {
+    private ActionFlag(org.zmail.cs.mailbox.Flag.FlagInfo flag, boolean set, String name) {
         this.flag = flag;
         this.set = set;
         this.name = name;
     }
 
-    public com.zimbra.cs.mailbox.Flag.FlagInfo getFlag() {
+    public org.zmail.cs.mailbox.Flag.FlagInfo getFlag() {
         return flag;
     }
 

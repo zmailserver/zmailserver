@@ -12,7 +12,7 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.zimlet;
+package org.zmail.cs.zimlet;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
@@ -26,8 +26,8 @@ import java.util.Set;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.zimbra.cs.account.AuthTokenException;
-import com.zimbra.cs.service.AuthProvider;
+import org.zmail.cs.account.AuthTokenException;
+import org.zmail.cs.service.AuthProvider;
 import org.apache.commons.httpclient.Header;
 import org.apache.commons.httpclient.HttpClient;
 import org.apache.commons.httpclient.HttpException;
@@ -41,29 +41,29 @@ import org.apache.commons.httpclient.methods.GetMethod;
 import org.apache.commons.httpclient.methods.PostMethod;
 import org.apache.commons.httpclient.methods.PutMethod;
 
-import com.zimbra.common.httpclient.HttpClientUtil;
-import com.zimbra.common.mime.ContentDisposition;
-import com.zimbra.common.mime.ContentType;
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.common.util.ByteUtil;
-import com.zimbra.common.util.ZimbraHttpConnectionManager;
-import com.zimbra.common.util.ZimbraLog;
-import com.zimbra.cs.account.Account;
-import com.zimbra.cs.account.AuthToken;
-import com.zimbra.cs.account.Cos;
-import com.zimbra.cs.account.Provisioning;
-import com.zimbra.common.account.Key.AccountBy;
-import com.zimbra.cs.httpclient.HttpProxyUtil;
-import com.zimbra.cs.mailbox.MailServiceException;
-import com.zimbra.cs.service.FileUploadServlet;
-import com.zimbra.cs.service.FileUploadServlet.Upload;
-import com.zimbra.cs.servlet.ZimbraServlet;
-import com.zimbra.common.localconfig.LC;
+import org.zmail.common.httpclient.HttpClientUtil;
+import org.zmail.common.mime.ContentDisposition;
+import org.zmail.common.mime.ContentType;
+import org.zmail.common.service.ServiceException;
+import org.zmail.common.util.ByteUtil;
+import org.zmail.common.util.ZmailHttpConnectionManager;
+import org.zmail.common.util.ZmailLog;
+import org.zmail.cs.account.Account;
+import org.zmail.cs.account.AuthToken;
+import org.zmail.cs.account.Cos;
+import org.zmail.cs.account.Provisioning;
+import org.zmail.common.account.Key.AccountBy;
+import org.zmail.cs.httpclient.HttpProxyUtil;
+import org.zmail.cs.mailbox.MailServiceException;
+import org.zmail.cs.service.FileUploadServlet;
+import org.zmail.cs.service.FileUploadServlet.Upload;
+import org.zmail.cs.servlet.ZmailServlet;
+import org.zmail.common.localconfig.LC;
 /**
  * @author jylee
  */
 @SuppressWarnings("serial")
-public class ProxyServlet extends ZimbraServlet {
+public class ProxyServlet extends ZmailServlet {
 
     private static final String TARGET_PARAM = "target";
 
@@ -83,21 +83,21 @@ public class ProxyServlet extends ZimbraServlet {
 
         Cos cos = prov.getCOS(acct);
 
-        Set<String> allowedDomains = cos.getMultiAttrSet(Provisioning.A_zimbraProxyAllowedDomains);
+        Set<String> allowedDomains = cos.getMultiAttrSet(Provisioning.A_zmailProxyAllowedDomains);
 
-        ZimbraLog.zimlet.debug("get allowedDomains result: "+allowedDomains);
+        ZmailLog.zimlet.debug("get allowedDomains result: "+allowedDomains);
         
         return allowedDomains;
     }
     
     private boolean checkPermissionOnTarget(URL target, AuthToken auth) {
         String host = target.getHost().toLowerCase();
-        ZimbraLog.zimlet.debug("checking allowedDomains permission on target host: "+host);
+        ZmailLog.zimlet.debug("checking allowedDomains permission on target host: "+host);
         Set<String> domains;
         try {
             domains = getAllowedDomains(auth);
         } catch (ServiceException se) {
-            ZimbraLog.zimlet.info("error getting allowedDomains: "+se.getMessage());
+            ZmailLog.zimlet.info("error getting allowedDomains: "+se.getMessage());
             return false;
         }
         for (String domain : domains) {
@@ -175,13 +175,13 @@ public class ProxyServlet extends ZimbraServlet {
     }
 
     protected boolean isAdminRequest(HttpServletRequest req) {
-        return req.getServerPort() == LC.zimbra_admin_service_port.intValue();
+        return req.getServerPort() == LC.zmail_admin_service_port.intValue();
     }
     
     private static final String DEFAULT_CTYPE = "text/xml";
 
     private void doProxy(HttpServletRequest req, HttpServletResponse resp) throws IOException {
-        ZimbraLog.clearContext();
+        ZmailLog.clearContext();
         boolean isAdmin = isAdminRequest(req);
         AuthToken authToken = isAdmin ?
                 getAdminAuthTokenFromCookie(req, resp, true) : getAuthTokenFromCookie(req, resp, true);
@@ -232,7 +232,7 @@ public class ProxyServlet extends ZimbraServlet {
 
         HttpMethod method = null;
         try {
-            HttpClient client = ZimbraHttpConnectionManager.getExternalHttpConnMgr().newHttpClient();
+            HttpClient client = ZmailHttpConnectionManager.getExternalHttpConnMgr().newHttpClient();
             HttpProxyUtil.configureProxy(client);
             String reqMethod = req.getMethod();
             if (reqMethod.equalsIgnoreCase("GET")) {
@@ -250,7 +250,7 @@ public class ProxyServlet extends ZimbraServlet {
             } else if (reqMethod.equalsIgnoreCase("DELETE")) {
                 method = new DeleteMethod(target);
             } else {
-                ZimbraLog.zimlet.info("unsupported request method: " + reqMethod);
+                ZmailLog.zimlet.info("unsupported request method: " + reqMethod);
                 resp.sendError(HttpServletResponse.SC_METHOD_NOT_ALLOWED);
                 return;
             }
@@ -262,7 +262,7 @@ public class ProxyServlet extends ZimbraServlet {
             pass = req.getParameter(PASS_PARAM);
             if (auth != null && user != null && pass != null) {
                 if (!auth.equals(AUTH_BASIC)) {
-                    ZimbraLog.zimlet.info("unsupported auth type: " + auth);
+                    ZmailLog.zimlet.info("unsupported auth type: " + auth);
                     resp.sendError(HttpServletResponse.SC_BAD_REQUEST);
                     return;
                 }
@@ -275,9 +275,9 @@ public class ProxyServlet extends ZimbraServlet {
             Enumeration headers = req.getHeaderNames();
             while (headers.hasMoreElements()) {
                 String hdr = (String) headers.nextElement();
-            	ZimbraLog.zimlet.debug("incoming: " + hdr + ": " + req.getHeader(hdr));
+            	ZmailLog.zimlet.debug("incoming: " + hdr + ": " + req.getHeader(hdr));
                 if (canProxyHeader(hdr)) {
-                	ZimbraLog.zimlet.debug("outgoing: " + hdr + ": " + req.getHeader(hdr));
+                	ZmailLog.zimlet.debug("outgoing: " + hdr + ": " + req.getHeader(hdr));
                 	if (hdr.equalsIgnoreCase("x-host"))
                 		method.getParams().setVirtualHost(req.getHeader(hdr));
                 	else
@@ -288,7 +288,7 @@ public class ProxyServlet extends ZimbraServlet {
             try {
                 HttpClientUtil.executeMethod(client, method);
             } catch (HttpException ex) {
-                ZimbraLog.zimlet.info("exception while proxying " + target, ex);
+                ZmailLog.zimlet.info("exception while proxying " + target, ex);
                 resp.sendError(HttpServletResponse.SC_NOT_FOUND);
                 return;
             }

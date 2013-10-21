@@ -12,29 +12,29 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.service.account;
+package org.zmail.cs.service.account;
 
 import java.util.HashMap;
 import java.util.Map;
 
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.common.soap.AccountConstants;
-import com.zimbra.common.soap.Element;
-import com.zimbra.common.util.StringUtil;
-import com.zimbra.cs.account.Account;
-import com.zimbra.cs.account.Provisioning;
-import com.zimbra.cs.account.Zimlet;
-import com.zimbra.cs.zimlet.ZimletPresence;
-import com.zimbra.cs.zimlet.ZimletPresence.Presence;
-import com.zimbra.cs.zimlet.ZimletUtil;
-import com.zimbra.soap.ZimbraSoapContext;
+import org.zmail.common.service.ServiceException;
+import org.zmail.common.soap.AccountConstants;
+import org.zmail.common.soap.Element;
+import org.zmail.common.util.StringUtil;
+import org.zmail.cs.account.Account;
+import org.zmail.cs.account.Provisioning;
+import org.zmail.cs.account.Zimlet;
+import org.zmail.cs.zimlet.ZimletPresence;
+import org.zmail.cs.zimlet.ZimletPresence.Presence;
+import org.zmail.cs.zimlet.ZimletUtil;
+import org.zmail.soap.ZmailSoapContext;
 
 public class ModifyZimletPrefs extends AccountDocumentHandler {
 
     @Override
     public Element handle(Element request, Map<String, Object> context)
             throws ServiceException {
-        ZimbraSoapContext zsc = getZimbraSoapContext(context);
+        ZmailSoapContext zsc = getZmailSoapContext(context);
         Account account = getRequestedAccount(zsc);
 
         if (!canModifyOptions(zsc, account))
@@ -44,10 +44,10 @@ public class ModifyZimletPrefs extends AccountDocumentHandler {
         
         ZimletPresence availZimlets = ZimletUtil.getAvailableZimlets(account);
         
-        String addEnabled = "+" + Provisioning.A_zimbraPrefZimlets;
-        String delEnabled = "-" + Provisioning.A_zimbraPrefZimlets;
-        String addDisabled = "+" + Provisioning.A_zimbraPrefDisabledZimlets;
-        String delDisabled = "-" + Provisioning.A_zimbraPrefDisabledZimlets;
+        String addEnabled = "+" + Provisioning.A_zmailPrefZimlets;
+        String delEnabled = "-" + Provisioning.A_zmailPrefZimlets;
+        String addDisabled = "+" + Provisioning.A_zmailPrefDisabledZimlets;
+        String delDisabled = "-" + Provisioning.A_zmailPrefDisabledZimlets;
 
         for (Element eZimlet : request.listElements(AccountConstants.E_ZIMLET)) {
             String zimletName = eZimlet.getAttribute(AccountConstants.A_NAME);

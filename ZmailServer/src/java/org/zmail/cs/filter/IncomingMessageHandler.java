@@ -12,24 +12,24 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.filter;
+package org.zmail.cs.filter;
 
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.common.util.ZimbraLog;
-import com.zimbra.cs.filter.jsieve.ActionFlag;
-import com.zimbra.cs.mailbox.DeliveryContext;
-import com.zimbra.cs.mailbox.DeliveryOptions;
-import com.zimbra.cs.mailbox.Flag;
-import com.zimbra.cs.mailbox.Folder;
-import com.zimbra.cs.mailbox.MailItem;
-import com.zimbra.cs.mailbox.MailServiceException.NoSuchItemException;
-import com.zimbra.cs.mailbox.Mailbox;
-import com.zimbra.cs.mailbox.Message;
-import com.zimbra.cs.mailbox.OperationContext;
-import com.zimbra.cs.mime.ParsedMessage;
-import com.zimbra.cs.service.util.ItemId;
-import com.zimbra.cs.service.util.SpamHandler;
-import com.zimbra.cs.service.util.SpamHandler.SpamReport;
+import org.zmail.common.service.ServiceException;
+import org.zmail.common.util.ZmailLog;
+import org.zmail.cs.filter.jsieve.ActionFlag;
+import org.zmail.cs.mailbox.DeliveryContext;
+import org.zmail.cs.mailbox.DeliveryOptions;
+import org.zmail.cs.mailbox.Flag;
+import org.zmail.cs.mailbox.Folder;
+import org.zmail.cs.mailbox.MailItem;
+import org.zmail.cs.mailbox.MailServiceException.NoSuchItemException;
+import org.zmail.cs.mailbox.Mailbox;
+import org.zmail.cs.mailbox.Message;
+import org.zmail.cs.mailbox.OperationContext;
+import org.zmail.cs.mime.ParsedMessage;
+import org.zmail.cs.service.util.ItemId;
+import org.zmail.cs.service.util.SpamHandler;
+import org.zmail.cs.service.util.SpamHandler.SpamReport;
 
 import javax.mail.MessagingException;
 import javax.mail.internet.MimeMessage;
@@ -107,10 +107,10 @@ public final class IncomingMessageHandler implements FilterHandler {
                 SpamHandler.getInstance().handle(octxt, mailbox, id.getId(), MailItem.Type.MESSAGE, report);
             }
         } catch (NoSuchItemException e) {
-            ZimbraLog.filter.debug("Unable to do spam training for message %s because folder path %s does not exist.",
+            ZmailLog.filter.debug("Unable to do spam training for message %s because folder path %s does not exist.",
                 id, folderPath);
         } catch (ServiceException e) {
-            ZimbraLog.filter.warn("Unable to do spam training for message %s.", id, e);
+            ZmailLog.filter.warn("Unable to do spam training for message %s.", id, e);
         }
 
         return id;

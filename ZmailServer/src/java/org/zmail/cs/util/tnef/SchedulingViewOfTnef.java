@@ -13,21 +13,21 @@
  * ***** END LICENSE BLOCK *****
  */
 
-package com.zimbra.cs.util.tnef;
+package org.zmail.cs.util.tnef;
 
 import java.io.IOException;
 import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.zimbra.cs.util.tnef.mapi.GlobalObjectId;
-import com.zimbra.cs.util.tnef.mapi.MapiPropertyId;
-import com.zimbra.cs.util.tnef.mapi.MeetingTypeFlag;
-import com.zimbra.cs.util.tnef.mapi.RecurrenceDefinition;
-import com.zimbra.cs.util.tnef.mapi.TZRule;
-import com.zimbra.cs.util.tnef.mapi.TaskMode;
-import com.zimbra.cs.util.tnef.mapi.TaskStatus;
-import com.zimbra.cs.util.tnef.mapi.TimeZoneDefinition;
+import org.zmail.cs.util.tnef.mapi.GlobalObjectId;
+import org.zmail.cs.util.tnef.mapi.MapiPropertyId;
+import org.zmail.cs.util.tnef.mapi.MeetingTypeFlag;
+import org.zmail.cs.util.tnef.mapi.RecurrenceDefinition;
+import org.zmail.cs.util.tnef.mapi.TZRule;
+import org.zmail.cs.util.tnef.mapi.TaskMode;
+import org.zmail.cs.util.tnef.mapi.TaskStatus;
+import org.zmail.cs.util.tnef.mapi.TimeZoneDefinition;
 
 import net.fortuna.ical4j.model.DateTime;
 import net.fortuna.ical4j.model.property.Clazz;
@@ -41,23 +41,23 @@ import net.freeutils.tnef.RawInputStream;
 import net.freeutils.tnef.TNEFInputStream;
 import net.freeutils.tnef.TNEFUtils;
 
-import com.zimbra.common.util.Log;
-import com.zimbra.common.util.ZimbraLog;
-import com.zimbra.cs.util.tnef.mapi.AppointmentStateFlags;
-import com.zimbra.cs.util.tnef.mapi.BusyStatus;
+import org.zmail.common.util.Log;
+import org.zmail.common.util.ZmailLog;
+import org.zmail.cs.util.tnef.mapi.AppointmentStateFlags;
+import org.zmail.cs.util.tnef.mapi.BusyStatus;
 import java.util.EnumSet;
 /**
  * The <code>SchedulingViewOfTnef</code> class encapsulates the Scheduling related
  * aspects of a TNEF file.
  *
  * A cut down version of net.freeutils.tnef.Message which ignores attributes
- * and attachments which are not regarded as important for Zimbra scheduling.
+ * and attachments which are not regarded as important for Zmail scheduling.
  *
  * @author Gren Elliot
  */
 public class SchedulingViewOfTnef extends Message {
 
-    static Log sLog = ZimbraLog.tnef;
+    static Log sLog = ZmailLog.tnef;
 
     private String messageClass;
     private GlobalObjectId globalObjectId;

@@ -13,7 +13,7 @@
  * ***** END LICENSE BLOCK *****
  */
 
-package com.zimbra.cs.account.soap;
+package org.zmail.cs.account.soap;
 
 import java.io.IOException;
 import java.net.URI;
@@ -30,121 +30,121 @@ import java.util.TreeMap;
 import java.util.Map.Entry;
 
 import com.google.common.collect.Lists;
-import com.zimbra.common.account.Key;
-import com.zimbra.common.account.Key.AccountBy;
-import com.zimbra.common.account.Key.CalendarResourceBy;
-import com.zimbra.common.account.Key.CosBy;
-import com.zimbra.common.account.Key.DataSourceBy;
-import com.zimbra.common.account.Key.DistributionListBy;
-import com.zimbra.common.account.Key.DomainBy;
-import com.zimbra.common.account.Key.GranteeBy;
-import com.zimbra.common.account.Key.IdentityBy;
-import com.zimbra.common.account.Key.ServerBy;
-import com.zimbra.common.account.Key.ShareLocatorBy;
-import com.zimbra.common.account.Key.SignatureBy;
-import com.zimbra.common.account.Key.UCServiceBy;
-import com.zimbra.common.account.Key.XMPPComponentBy;
-import com.zimbra.common.auth.ZAuthToken;
-import com.zimbra.common.localconfig.LC;
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.common.soap.AccountConstants;
-import com.zimbra.common.soap.AdminConstants;
-import com.zimbra.common.soap.Element;
-import com.zimbra.common.soap.MailConstants;
-import com.zimbra.common.soap.SoapFaultException;
-import com.zimbra.common.soap.SoapHttpTransport;
-import com.zimbra.common.soap.SoapTransport;
-import com.zimbra.common.soap.Element.XMLElement;
-import com.zimbra.common.soap.SoapHttpTransport.HttpDebugListener;
-import com.zimbra.common.soap.SoapTransport.DebugListener;
-import com.zimbra.common.util.AccountLogger;
-import com.zimbra.common.util.StringUtil;
-import com.zimbra.common.util.Log.Level;
-import com.zimbra.common.zclient.ZClientException;
-import com.zimbra.cs.account.AccessManager;
-import com.zimbra.cs.account.Account;
-import com.zimbra.cs.account.AccountServiceException;
-import com.zimbra.cs.account.CalendarResource;
-import com.zimbra.cs.account.Config;
-import com.zimbra.cs.account.Cos;
-import com.zimbra.cs.account.DataSource;
-import com.zimbra.cs.account.DistributionList;
-import com.zimbra.cs.account.Domain;
-import com.zimbra.cs.account.GalContact;
-import com.zimbra.cs.account.GlobalGrant;
-import com.zimbra.cs.account.Group;
-import com.zimbra.cs.account.Identity;
-import com.zimbra.cs.account.NamedEntry;
-import com.zimbra.cs.account.Provisioning;
-import com.zimbra.cs.account.SearchDirectoryOptions;
-import com.zimbra.cs.account.Server;
-import com.zimbra.cs.account.ShareInfoData;
-import com.zimbra.cs.account.ShareLocator;
-import com.zimbra.cs.account.Signature;
-import com.zimbra.cs.account.UCService;
-import com.zimbra.cs.account.XMPPComponent;
-import com.zimbra.cs.account.Zimlet;
-import com.zimbra.cs.account.NamedEntry.Visitor;
-import com.zimbra.cs.account.SearchDirectoryOptions.SortOpt;
-import com.zimbra.cs.account.accesscontrol.Right;
-import com.zimbra.cs.account.accesscontrol.RightCommand;
-import com.zimbra.cs.account.accesscontrol.RightModifier;
-import com.zimbra.cs.account.accesscontrol.ViaGrantImpl;
-import com.zimbra.cs.account.auth.AuthContext;
-import com.zimbra.cs.httpclient.URLUtil;
-import com.zimbra.cs.mime.MimeTypeInfo;
-import com.zimbra.soap.JaxbUtil;
-import com.zimbra.soap.account.message.ChangePasswordRequest;
-import com.zimbra.soap.account.message.CreateIdentityRequest;
-import com.zimbra.soap.account.message.CreateIdentityResponse;
-import com.zimbra.soap.account.message.DeleteIdentityRequest;
-import com.zimbra.soap.account.message.GetIdentitiesRequest;
-import com.zimbra.soap.account.message.GetIdentitiesResponse;
-import com.zimbra.soap.account.message.ModifyIdentityRequest;
-import com.zimbra.soap.account.type.NameId;
-import com.zimbra.soap.admin.message.*;
-import com.zimbra.soap.admin.message.AutoProvTaskControlRequest.Action;
-import com.zimbra.soap.admin.type.AccountInfo;
-import com.zimbra.soap.admin.type.AccountLoggerInfo;
-import com.zimbra.soap.admin.type.AccountQuotaInfo;
-import com.zimbra.soap.admin.type.AdminObjectInterface;
-import com.zimbra.soap.admin.type.AliasInfo;
-import com.zimbra.soap.admin.type.Attr;
-import com.zimbra.soap.admin.type.CacheEntrySelector;
-import com.zimbra.soap.admin.type.CacheEntryType;
-import com.zimbra.soap.admin.type.CacheSelector;
-import com.zimbra.soap.admin.type.CalendarResourceInfo;
-import com.zimbra.soap.admin.type.CalendarResourceSelector;
-import com.zimbra.soap.admin.type.CmdRightsInfo;
-import com.zimbra.soap.admin.type.CosCountInfo;
-import com.zimbra.soap.admin.type.CosInfo;
-import com.zimbra.soap.admin.type.CosSelector;
-import com.zimbra.soap.admin.type.CountObjectsType;
-import com.zimbra.soap.admin.type.DLInfo;
-import com.zimbra.soap.admin.type.DataSourceType;
-import com.zimbra.soap.admin.type.DistributionListInfo;
-import com.zimbra.soap.admin.type.DistributionListMembershipInfo;
-import com.zimbra.soap.admin.type.DistributionListSelector;
-import com.zimbra.soap.admin.type.DomainInfo;
-import com.zimbra.soap.admin.type.DomainSelector;
-import com.zimbra.soap.admin.type.EffectiveRightsTargetSelector;
-import com.zimbra.soap.admin.type.GranteeSelector;
-import com.zimbra.soap.admin.type.LoggerInfo;
-import com.zimbra.soap.admin.type.MailboxByAccountIdSelector;
-import com.zimbra.soap.admin.type.MailboxWithMailboxId;
-import com.zimbra.soap.admin.type.PackageRightsInfo;
-import com.zimbra.soap.admin.type.PackageSelector;
-import com.zimbra.soap.admin.type.ReindexMailboxInfo;
-import com.zimbra.soap.admin.type.ReindexProgressInfo;
-import com.zimbra.soap.admin.type.RightInfo;
-import com.zimbra.soap.admin.type.ServerInfo;
-import com.zimbra.soap.admin.type.ServerSelector;
-import com.zimbra.soap.admin.type.UCServiceInfo;
-import com.zimbra.soap.admin.type.UCServiceSelector;
-import com.zimbra.soap.type.AccountSelector;
-import com.zimbra.soap.type.GalSearchType;
-import com.zimbra.soap.type.GranteeType;
-import com.zimbra.soap.type.TargetBy;
+import org.zmail.common.account.Key;
+import org.zmail.common.account.Key.AccountBy;
+import org.zmail.common.account.Key.CalendarResourceBy;
+import org.zmail.common.account.Key.CosBy;
+import org.zmail.common.account.Key.DataSourceBy;
+import org.zmail.common.account.Key.DistributionListBy;
+import org.zmail.common.account.Key.DomainBy;
+import org.zmail.common.account.Key.GranteeBy;
+import org.zmail.common.account.Key.IdentityBy;
+import org.zmail.common.account.Key.ServerBy;
+import org.zmail.common.account.Key.ShareLocatorBy;
+import org.zmail.common.account.Key.SignatureBy;
+import org.zmail.common.account.Key.UCServiceBy;
+import org.zmail.common.account.Key.XMPPComponentBy;
+import org.zmail.common.auth.ZAuthToken;
+import org.zmail.common.localconfig.LC;
+import org.zmail.common.service.ServiceException;
+import org.zmail.common.soap.AccountConstants;
+import org.zmail.common.soap.AdminConstants;
+import org.zmail.common.soap.Element;
+import org.zmail.common.soap.MailConstants;
+import org.zmail.common.soap.SoapFaultException;
+import org.zmail.common.soap.SoapHttpTransport;
+import org.zmail.common.soap.SoapTransport;
+import org.zmail.common.soap.Element.XMLElement;
+import org.zmail.common.soap.SoapHttpTransport.HttpDebugListener;
+import org.zmail.common.soap.SoapTransport.DebugListener;
+import org.zmail.common.util.AccountLogger;
+import org.zmail.common.util.StringUtil;
+import org.zmail.common.util.Log.Level;
+import org.zmail.common.zclient.ZClientException;
+import org.zmail.cs.account.AccessManager;
+import org.zmail.cs.account.Account;
+import org.zmail.cs.account.AccountServiceException;
+import org.zmail.cs.account.CalendarResource;
+import org.zmail.cs.account.Config;
+import org.zmail.cs.account.Cos;
+import org.zmail.cs.account.DataSource;
+import org.zmail.cs.account.DistributionList;
+import org.zmail.cs.account.Domain;
+import org.zmail.cs.account.GalContact;
+import org.zmail.cs.account.GlobalGrant;
+import org.zmail.cs.account.Group;
+import org.zmail.cs.account.Identity;
+import org.zmail.cs.account.NamedEntry;
+import org.zmail.cs.account.Provisioning;
+import org.zmail.cs.account.SearchDirectoryOptions;
+import org.zmail.cs.account.Server;
+import org.zmail.cs.account.ShareInfoData;
+import org.zmail.cs.account.ShareLocator;
+import org.zmail.cs.account.Signature;
+import org.zmail.cs.account.UCService;
+import org.zmail.cs.account.XMPPComponent;
+import org.zmail.cs.account.Zimlet;
+import org.zmail.cs.account.NamedEntry.Visitor;
+import org.zmail.cs.account.SearchDirectoryOptions.SortOpt;
+import org.zmail.cs.account.accesscontrol.Right;
+import org.zmail.cs.account.accesscontrol.RightCommand;
+import org.zmail.cs.account.accesscontrol.RightModifier;
+import org.zmail.cs.account.accesscontrol.ViaGrantImpl;
+import org.zmail.cs.account.auth.AuthContext;
+import org.zmail.cs.httpclient.URLUtil;
+import org.zmail.cs.mime.MimeTypeInfo;
+import org.zmail.soap.JaxbUtil;
+import org.zmail.soap.account.message.ChangePasswordRequest;
+import org.zmail.soap.account.message.CreateIdentityRequest;
+import org.zmail.soap.account.message.CreateIdentityResponse;
+import org.zmail.soap.account.message.DeleteIdentityRequest;
+import org.zmail.soap.account.message.GetIdentitiesRequest;
+import org.zmail.soap.account.message.GetIdentitiesResponse;
+import org.zmail.soap.account.message.ModifyIdentityRequest;
+import org.zmail.soap.account.type.NameId;
+import org.zmail.soap.admin.message.*;
+import org.zmail.soap.admin.message.AutoProvTaskControlRequest.Action;
+import org.zmail.soap.admin.type.AccountInfo;
+import org.zmail.soap.admin.type.AccountLoggerInfo;
+import org.zmail.soap.admin.type.AccountQuotaInfo;
+import org.zmail.soap.admin.type.AdminObjectInterface;
+import org.zmail.soap.admin.type.AliasInfo;
+import org.zmail.soap.admin.type.Attr;
+import org.zmail.soap.admin.type.CacheEntrySelector;
+import org.zmail.soap.admin.type.CacheEntryType;
+import org.zmail.soap.admin.type.CacheSelector;
+import org.zmail.soap.admin.type.CalendarResourceInfo;
+import org.zmail.soap.admin.type.CalendarResourceSelector;
+import org.zmail.soap.admin.type.CmdRightsInfo;
+import org.zmail.soap.admin.type.CosCountInfo;
+import org.zmail.soap.admin.type.CosInfo;
+import org.zmail.soap.admin.type.CosSelector;
+import org.zmail.soap.admin.type.CountObjectsType;
+import org.zmail.soap.admin.type.DLInfo;
+import org.zmail.soap.admin.type.DataSourceType;
+import org.zmail.soap.admin.type.DistributionListInfo;
+import org.zmail.soap.admin.type.DistributionListMembershipInfo;
+import org.zmail.soap.admin.type.DistributionListSelector;
+import org.zmail.soap.admin.type.DomainInfo;
+import org.zmail.soap.admin.type.DomainSelector;
+import org.zmail.soap.admin.type.EffectiveRightsTargetSelector;
+import org.zmail.soap.admin.type.GranteeSelector;
+import org.zmail.soap.admin.type.LoggerInfo;
+import org.zmail.soap.admin.type.MailboxByAccountIdSelector;
+import org.zmail.soap.admin.type.MailboxWithMailboxId;
+import org.zmail.soap.admin.type.PackageRightsInfo;
+import org.zmail.soap.admin.type.PackageSelector;
+import org.zmail.soap.admin.type.ReindexMailboxInfo;
+import org.zmail.soap.admin.type.ReindexProgressInfo;
+import org.zmail.soap.admin.type.RightInfo;
+import org.zmail.soap.admin.type.ServerInfo;
+import org.zmail.soap.admin.type.ServerSelector;
+import org.zmail.soap.admin.type.UCServiceInfo;
+import org.zmail.soap.admin.type.UCServiceSelector;
+import org.zmail.soap.type.AccountSelector;
+import org.zmail.soap.type.GalSearchType;
+import org.zmail.soap.type.GranteeType;
+import org.zmail.soap.type.TargetBy;
 
 public class SoapProvisioning extends Provisioning {
 
@@ -244,7 +244,7 @@ public class SoapProvisioning extends Provisioning {
         soapSetURI(options.getUri());
 
         if (options.getLocalConfigAuth()) {
-            soapZimbraAdminAuthenticate();
+            soapZmailAdminAuthenticate();
         } else if (mAuthToken != null) {
             soapAdminAuthenticate(mAuthToken);
         } else if (options.getAccount() != null && options.getPassword() != null) {
@@ -300,15 +300,15 @@ public class SoapProvisioning extends Provisioning {
     }
 
     public static String getLocalConfigURI() {
-        String server = LC.zimbra_zmprov_default_soap_server.value();
-        int port = LC.zimbra_admin_service_port.intValue();
-        return LC.zimbra_admin_service_scheme.value()+server+":"+port+ AdminConstants.ADMIN_SERVICE_URI;
+        String server = LC.zmail_zmprov_default_soap_server.value();
+        int port = LC.zmail_admin_service_port.intValue();
+        return LC.zmail_admin_service_scheme.value()+server+":"+port+ AdminConstants.ADMIN_SERVICE_URI;
     }
 
     /**
      * Construct and return a SoapProvisioning instance using values from localconfig:
-     * zimbra_zmprov_default_soap_server, zimbra_admin_service_port, zimbra_admin_service_scheme
-     * and calling soapZimbraAdminAuthenticate.
+     * zmail_zmprov_default_soap_server, zmail_admin_service_port, zmail_admin_service_scheme
+     * and calling soapZmailAdminAuthenticate.
      * @return new SoapProvisionig instance
      *
      * @throws ServiceException
@@ -412,14 +412,14 @@ public class SoapProvisioning extends Provisioning {
 
 
     /**
-     * auth as zimbra admin (over SOAP) using password from localconfig. Can only be called after
+     * auth as zmail admin (over SOAP) using password from localconfig. Can only be called after
      * setting the URI with setUI.
      *
      * @throws ServiceException
      * @throws IOException
      */
-    public void soapZimbraAdminAuthenticate() throws ServiceException {
-        soapAdminAuthenticate(LC.zimbra_ldap_user.value(), LC.zimbra_ldap_password.value());
+    public void soapZmailAdminAuthenticate() throws ServiceException {
+        soapAdminAuthenticate(LC.zmail_ldap_user.value(), LC.zmail_ldap_password.value());
     }
 
     private String serverName() {
@@ -602,8 +602,8 @@ public class SoapProvisioning extends Provisioning {
     @Override
     public void changePassword(Account acct, String currentPassword,
             String newPassword) throws ServiceException {
-        com.zimbra.soap.type.AccountSelector jaxbAcct =
-            new com.zimbra.soap.type.AccountSelector(com.zimbra.soap.type.AccountBy.name, acct.getName());
+        org.zmail.soap.type.AccountSelector jaxbAcct =
+            new org.zmail.soap.type.AccountSelector(org.zmail.soap.type.AccountBy.name, acct.getName());
         invokeJaxb(new ChangePasswordRequest(jaxbAcct, currentPassword, newPassword));
     }
 
@@ -705,38 +705,38 @@ public class SoapProvisioning extends Provisioning {
     }
 
     @Override
-    public void deleteAccount(String zimbraId) throws ServiceException {
-        invokeJaxb( new DeleteAccountRequest(zimbraId));
+    public void deleteAccount(String zmailId) throws ServiceException {
+        invokeJaxb( new DeleteAccountRequest(zmailId));
     }
 
     @Override
-    public void deleteCalendarResource(String zimbraId) throws ServiceException {
-        invokeJaxb( new DeleteCalendarResourceRequest(zimbraId));
+    public void deleteCalendarResource(String zmailId) throws ServiceException {
+        invokeJaxb( new DeleteCalendarResourceRequest(zmailId));
     }
 
     @Override
-    public void deleteCos(String zimbraId) throws ServiceException {
-        invokeJaxb( new DeleteCosRequest(zimbraId));
+    public void deleteCos(String zmailId) throws ServiceException {
+        invokeJaxb( new DeleteCosRequest(zmailId));
     }
 
     @Override
-    public void deleteDistributionList(String zimbraId) throws ServiceException {
-        invokeJaxb(new DeleteDistributionListRequest(zimbraId));
+    public void deleteDistributionList(String zmailId) throws ServiceException {
+        invokeJaxb(new DeleteDistributionListRequest(zmailId));
     }
 
     @Override
-    public void deleteGroup(String zimbraId) throws ServiceException {
-        invokeJaxb(new DeleteDistributionListRequest(zimbraId));
+    public void deleteGroup(String zmailId) throws ServiceException {
+        invokeJaxb(new DeleteDistributionListRequest(zmailId));
     }
 
     @Override
-    public void deleteDomain(String zimbraId) throws ServiceException {
-        invokeJaxb( new DeleteDomainRequest(zimbraId));
+    public void deleteDomain(String zmailId) throws ServiceException {
+        invokeJaxb( new DeleteDomainRequest(zmailId));
     }
 
     @Override
-    public void deleteServer(String zimbraId) throws ServiceException {
-        invokeJaxb( new DeleteServerRequest(zimbraId));
+    public void deleteServer(String zmailId) throws ServiceException {
+        invokeJaxb( new DeleteServerRequest(zmailId));
     }
 
     /**
@@ -1033,7 +1033,7 @@ public class SoapProvisioning extends Provisioning {
 
     public MailboxInfo getMailbox(Account acct) throws ServiceException {
         Server server = getServer(acct);
-        String serviceHost = server.getAttr(A_zimbraServiceHostname);
+        String serviceHost = server.getAttr(A_zmailServiceHostname);
         MailboxByAccountIdSelector mbox =
                 new MailboxByAccountIdSelector(acct.getId());
         GetMailboxResponse resp = invokeJaxb(new GetMailboxRequest(mbox), serviceHost);
@@ -1105,7 +1105,7 @@ public class SoapProvisioning extends Provisioning {
         }
         ReIndexRequest req = new ReIndexRequest(action, mbox);
         ReIndexResponse resp = this.invokeJaxb(req,
-                server.getAttr(A_zimbraServiceHostname));
+                server.getAttr(A_zmailServiceHostname));
         ReIndexInfo.Progress progress = null;
         ReindexProgressInfo progInfo = resp.getProgress();
         if (progInfo != null) {
@@ -1121,7 +1121,7 @@ public class SoapProvisioning extends Provisioning {
         Server server = getServer(acct);
         CompactIndexRequest req = new CompactIndexRequest(action, new MailboxByAccountIdSelector(acct.getId()));
         CompactIndexResponse resp = this.invokeJaxb(req,
-                server.getAttr(A_zimbraServiceHostname));
+                server.getAttr(A_zmailServiceHostname));
         return resp.getStatus();
     }
 
@@ -1148,7 +1148,7 @@ public class SoapProvisioning extends Provisioning {
         Server server = getServer(acct);
         GetIndexStatsRequest req = new GetIndexStatsRequest(new MailboxByAccountIdSelector(acct.getId()));
         GetIndexStatsResponse resp = this.invokeJaxb(req,
-                server.getAttr(A_zimbraServiceHostname));
+                server.getAttr(A_zmailServiceHostname));
         return new IndexStatsInfo(resp.getStats().getMaxDocs(), resp.getStats().getNumDeletedDocs());
     }
 
@@ -1166,7 +1166,7 @@ public class SoapProvisioning extends Provisioning {
         VerifyIndexRequest req = new VerifyIndexRequest(
                 new MailboxByAccountIdSelector(account.getId()));
         VerifyIndexResponse resp = invokeJaxb(req,
-                getServer(account).getAttr(A_zimbraServiceHostname));
+                getServer(account).getAttr(A_zmailServiceHostname));
         return new VerifyIndexResult(resp.isStatus(), resp.getMessage());
     }
 
@@ -1315,9 +1315,9 @@ public class SoapProvisioning extends Provisioning {
 
     @Override
     public Server getLocalServer() throws ServiceException {
-        String hostname = LC.zimbra_server_hostname.value();
+        String hostname = LC.zmail_server_hostname.value();
         if (hostname == null)
-            throw ServiceException.FAILURE("zimbra_server_hostname not specified in localconfig.xml", null);
+            throw ServiceException.FAILURE("zmail_server_hostname not specified in localconfig.xml", null);
         Server local = get(ServerBy.name, hostname);
         if (local == null)
             throw ServiceException.FAILURE("Could not find an LDAP entry for server '" + hostname + "'", null);
@@ -1389,7 +1389,7 @@ public class SoapProvisioning extends Provisioning {
     public void modifyAccountStatus(Account acct, String newStatus)
             throws ServiceException {
         HashMap<String, String> attrs = new HashMap<String,String>();
-        attrs.put(Provisioning.A_zimbraAccountStatus, newStatus);
+        attrs.put(Provisioning.A_zmailAccountStatus, newStatus);
         modifyAttrs(acct, attrs);
     }
 
@@ -1443,39 +1443,39 @@ public class SoapProvisioning extends Provisioning {
     }
 
     @Override
-    public void renameAccount(String zimbraId, String newName)
+    public void renameAccount(String zmailId, String newName)
             throws ServiceException {
-        invokeJaxb(new RenameAccountRequest(zimbraId, newName));
+        invokeJaxb(new RenameAccountRequest(zmailId, newName));
     }
 
     @Override
-    public void renameCalendarResource(String zimbraId, String newName)
+    public void renameCalendarResource(String zmailId, String newName)
             throws ServiceException {
-        invokeJaxb(new RenameCalendarResourceRequest(zimbraId, newName));
+        invokeJaxb(new RenameCalendarResourceRequest(zmailId, newName));
     }
 
     @Override
-    public void renameCos(String zimbraId, String newName)
+    public void renameCos(String zmailId, String newName)
             throws ServiceException {
-        invokeJaxb(new RenameCosRequest(zimbraId, newName));
+        invokeJaxb(new RenameCosRequest(zmailId, newName));
     }
 
     @Override
-    public void renameDistributionList(String zimbraId, String newName)
+    public void renameDistributionList(String zmailId, String newName)
             throws ServiceException {
-        invokeJaxb(new RenameDistributionListRequest(zimbraId, newName));
+        invokeJaxb(new RenameDistributionListRequest(zmailId, newName));
     }
 
     @Override
-    public void renameGroup(String zimbraId, String newName)
+    public void renameGroup(String zmailId, String newName)
             throws ServiceException {
-        invokeJaxb(new RenameDistributionListRequest(zimbraId, newName));
+        invokeJaxb(new RenameDistributionListRequest(zmailId, newName));
     }
 
     @Override
     public void setCOS(Account acct, Cos cos) throws ServiceException {
         HashMap<String, String> attrs = new HashMap<String, String>();
-        attrs.put(Provisioning.A_zimbraCOSId, cos.getId());
+        attrs.put(Provisioning.A_zmailCOSId, cos.getId());
         modifyAttrs(acct, attrs);
     }
 
@@ -1496,7 +1496,7 @@ public class SoapProvisioning extends Provisioning {
     }
 
     @Override
-    public void modifyAttrs(com.zimbra.cs.account.Entry e,
+    public void modifyAttrs(org.zmail.cs.account.Entry e,
                             Map<String, ? extends Object> attrs,
                             boolean checkImmutable)
     throws ServiceException {
@@ -1505,7 +1505,7 @@ public class SoapProvisioning extends Provisioning {
     }
 
     @Override
-    public void modifyAttrs(com.zimbra.cs.account.Entry e,
+    public void modifyAttrs(org.zmail.cs.account.Entry e,
                             Map<String, ? extends Object> attrs,
                             boolean checkImmutable,
                             boolean allowCallback)
@@ -1515,7 +1515,7 @@ public class SoapProvisioning extends Provisioning {
     }
 
     @Override
-    public void reload(com.zimbra.cs.account.Entry e) throws ServiceException {
+    public void reload(org.zmail.cs.account.Entry e) throws ServiceException {
         SoapEntry se = (SoapEntry) e;
         se.reload(this);
     }
@@ -1625,8 +1625,8 @@ public class SoapProvisioning extends Provisioning {
 
 
     @Override
-    public boolean inDistributionList(Account acct, String zimbraId) throws ServiceException {
-        return getDistributionLists(acct).contains(zimbraId);
+    public boolean inDistributionList(Account acct, String zmailId) throws ServiceException {
+        return getDistributionLists(acct).contains(zmailId);
     }
 
     @Override
@@ -1909,8 +1909,8 @@ public class SoapProvisioning extends Provisioning {
     public Identity createIdentity(Account account, String identityName,
             Map<String, Object> attrs)
     throws ServiceException {
-        com.zimbra.soap.account.type.Identity id =
-                new com.zimbra.soap.account.type.Identity(identityName, null);
+        org.zmail.soap.account.type.Identity id =
+                new org.zmail.soap.account.type.Identity(identityName, null);
         id.setAttrs(attrs);
         CreateIdentityRequest request = new CreateIdentityRequest(id);
         CreateIdentityResponse response =
@@ -1940,7 +1940,7 @@ public class SoapProvisioning extends Provisioning {
         GetIdentitiesResponse response =
             invokeJaxbOnTargetAccount(new GetIdentitiesRequest(),
                     account.getId());
-        for (com.zimbra.soap.account.type.Identity identity :
+        for (org.zmail.soap.account.type.Identity identity :
             response.getIdentities()) {
             result.add(new SoapIdentity(account, identity, this));
         }
@@ -1951,8 +1951,8 @@ public class SoapProvisioning extends Provisioning {
     public void modifyIdentity(Account account, String identityName,
             Map<String, Object> attrs)
     throws ServiceException {
-        com.zimbra.soap.account.type.Identity id =
-                new com.zimbra.soap.account.type.Identity(identityName, null);
+        org.zmail.soap.account.type.Identity id =
+                new org.zmail.soap.account.type.Identity(identityName, null);
         id.setAttrs(attrs);
         ModifyIdentityRequest request = new ModifyIdentityRequest(id);
         invokeJaxbOnTargetAccount(request, account.getId());
@@ -1960,8 +1960,8 @@ public class SoapProvisioning extends Provisioning {
 
     @Override
     public Signature createSignature(Account account, String signatureName, Map<String, Object> attrs) throws ServiceException {
-        if (attrs.get(Provisioning.A_zimbraSignatureName) != null)
-            throw ZClientException.CLIENT_ERROR("invalid attr: "+Provisioning.A_zimbraSignatureName, null);
+        if (attrs.get(Provisioning.A_zmailSignatureName) != null)
+            throw ZClientException.CLIENT_ERROR("invalid attr: "+Provisioning.A_zmailSignatureName, null);
 
         XMLElement req = new XMLElement(AccountConstants.CREATE_SIGNATURE_REQUEST);
         Element signature = req.addElement(AccountConstants.E_SIGNATURE);
@@ -1978,8 +1978,8 @@ public class SoapProvisioning extends Provisioning {
 
     @Override
     public void modifySignature(Account account, String signatureId, Map<String, Object> attrs) throws ServiceException {
-        if (attrs.get(Provisioning.A_zimbraSignatureId) != null)
-            throw ZClientException.CLIENT_ERROR("invalid attr: "+Provisioning.A_zimbraSignatureId, null);
+        if (attrs.get(Provisioning.A_zmailSignatureId) != null)
+            throw ZClientException.CLIENT_ERROR("invalid attr: "+Provisioning.A_zmailSignatureId, null);
 
         XMLElement req = new XMLElement(AccountConstants.MODIFY_SIGNATURE_REQUEST);
         Element signature = req.addElement(AccountConstants.E_SIGNATURE);
@@ -2180,7 +2180,7 @@ public class SoapProvisioning extends Provisioning {
 
     public MailboxWithMailboxId purgeMessages(Account account) throws ServiceException {
         Server server = account.getServer();
-        String serviceHost = server.getAttr(A_zimbraServiceHostname);
+        String serviceHost = server.getAttr(A_zmailServiceHostname);
         PurgeMessagesResponse resp = invokeJaxb(new PurgeMessagesRequest(account.getId()), serviceHost);
         if (resp.getMailboxes().isEmpty())
             return null;
@@ -2346,7 +2346,7 @@ public class SoapProvisioning extends Provisioning {
         }
         EffectiveRightsTargetSelector targetSel =
             new EffectiveRightsTargetSelector(
-                    com.zimbra.soap.type.TargetType.fromString(targetType), targetBy, target);
+                    org.zmail.soap.type.TargetType.fromString(targetType), targetBy, target);
         GetEffectiveRightsResponse resp =
             invokeJaxb(new GetEffectiveRightsRequest(targetSel, granteeSel,
                     expandSetAttrs, expandGetAttrs));
@@ -2509,7 +2509,7 @@ public class SoapProvisioning extends Provisioning {
     throws ServiceException {
         GetShareInfoResponse rsp = invokeJaxb(
                 new GetShareInfoRequest(getSelector(ownerAcct)));
-        for (com.zimbra.soap.type.ShareInfo sInfo : rsp.getShareInfos()) {
+        for (org.zmail.soap.type.ShareInfo sInfo : rsp.getShareInfos()) {
             ShareInfoData sid = ShareInfoData.fromJaxbShareInfo(sInfo);
             visitor.visit(sid);
         }
@@ -2633,8 +2633,8 @@ public class SoapProvisioning extends Provisioning {
     }
 
     @Override
-    public void deleteUCService(String zimbraId) throws ServiceException {
-        invokeJaxb(new DeleteUCServiceRequest(zimbraId));
+    public void deleteUCService(String zmailId) throws ServiceException {
+        invokeJaxb(new DeleteUCServiceRequest(zmailId));
     }
 
     @Override
@@ -2664,11 +2664,11 @@ public class SoapProvisioning extends Provisioning {
     }
 
     @Override
-    public String updatePresenceSessionId(String zimbraId, String username, String password)
+    public String updatePresenceSessionId(String zmailId, String username, String password)
     throws ServiceException {
 
         UCServiceSelector sel =
-            new UCServiceSelector(SoapProvisioning.toJaxb(Key.UCServiceBy.id), zimbraId);
+            new UCServiceSelector(SoapProvisioning.toJaxb(Key.UCServiceBy.id), zmailId);
 
         UpdatePresenceSessionIdRequest req = new UpdatePresenceSessionIdRequest(
                 sel, username, password);
@@ -2677,8 +2677,8 @@ public class SoapProvisioning extends Provisioning {
     }
 
     @Override
-    public void renameUCService(String zimbraId, String newName) throws ServiceException {
-        invokeJaxb(new RenameUCServiceRequest(zimbraId, newName));
+    public void renameUCService(String zmailId, String newName) throws ServiceException {
+        invokeJaxb(new RenameUCServiceRequest(zmailId, newName));
     }
 
     @Override
@@ -2720,9 +2720,9 @@ public class SoapProvisioning extends Provisioning {
     }
 
     /* Convert to equivalent JAXB object */
-    private static com.zimbra.soap.type.AccountBy toJaxb(AccountBy provAccountBy)
+    private static org.zmail.soap.type.AccountBy toJaxb(AccountBy provAccountBy)
     throws ServiceException {
-        return com.zimbra.soap.type.AccountBy.fromString(provAccountBy.toString());
+        return org.zmail.soap.type.AccountBy.fromString(provAccountBy.toString());
     }
 
     /* Convert to equivalent JAXB object */

@@ -13,25 +13,25 @@
  * ***** END LICENSE BLOCK *****
  */
 
-package com.zimbra.cs.pop3;
+package org.zmail.cs.pop3;
 
-import com.zimbra.common.localconfig.LC;
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.common.util.ByteUtil;
-import com.zimbra.common.util.Constants;
-import com.zimbra.common.util.ZimbraLog;
-import com.zimbra.cs.account.Account;
-import com.zimbra.cs.account.AccountServiceException;
-import com.zimbra.cs.account.Provisioning;
-import com.zimbra.common.account.Key.AccountBy;
-import com.zimbra.cs.account.auth.AuthContext;
-import com.zimbra.cs.mailbox.MailboxManager;
-import com.zimbra.cs.mailbox.Message;
-import com.zimbra.cs.security.sasl.Authenticator;
-import com.zimbra.cs.security.sasl.AuthenticatorUser;
-import com.zimbra.cs.security.sasl.PlainAuthenticator;
-import com.zimbra.cs.server.ServerThrottle;
-import com.zimbra.cs.stats.ZimbraPerf;
+import org.zmail.common.localconfig.LC;
+import org.zmail.common.service.ServiceException;
+import org.zmail.common.util.ByteUtil;
+import org.zmail.common.util.Constants;
+import org.zmail.common.util.ZmailLog;
+import org.zmail.cs.account.Account;
+import org.zmail.cs.account.AccountServiceException;
+import org.zmail.cs.account.Provisioning;
+import org.zmail.common.account.Key.AccountBy;
+import org.zmail.cs.account.auth.AuthContext;
+import org.zmail.cs.mailbox.MailboxManager;
+import org.zmail.cs.mailbox.Message;
+import org.zmail.cs.security.sasl.Authenticator;
+import org.zmail.cs.security.sasl.AuthenticatorUser;
+import org.zmail.cs.security.sasl.PlainAuthenticator;
+import org.zmail.cs.server.ServerThrottle;
+import org.zmail.cs.stats.ZmailPerf;
 import org.apache.commons.codec.binary.Base64;
 
 import java.io.IOException;
@@ -104,11 +104,11 @@ abstract class Pop3Handler {
 
     boolean startConnection(InetAddress remoteAddr) throws IOException {
         // Set the logging context for anything logged before the first command.
-        ZimbraLog.clearContext();
+        ZmailLog.clearContext();
         clientAddress = remoteAddr.getHostAddress();
-        ZimbraLog.addIpToContext(clientAddress);
+        ZmailLog.addIpToContext(clientAddress);
 
-        ZimbraLog.pop.info("connected");
+        ZmailLog.pop.info("connected");
         if (!config.isServiceEnabled()) {
             return false;
         }
@@ -119,10 +119,10 @@ abstract class Pop3Handler {
     }
 
     public void setLoggingContext() {
-        ZimbraLog.clearContext();
-        ZimbraLog.addAccountNameToContext(accountName);
-        ZimbraLog.addIpToContext(clientAddress);
-        ZimbraLog.addOrigIpToContext(origRemoteAddress);
+        ZmailLog.clearContext();
+        ZmailLog.addAccountNameToContext(accountName);
+        ZmailLog.addIpToContext(clientAddress);
+        ZmailLog.addOrigIpToContext(origRemoteAddress);
     }
 
     boolean processCommand(String line) throws IOException {
@@ -140,19 +140,19 @@ abstract class Pop3Handler {
 
             // Track stats if the command completed successfully
             if (startTime > 0) {
-                ZimbraPerf.STOPWATCH_POP.stop(startTime);
+                ZmailPerf.STOPWATCH_POP.stop(startTime);
                 if (command != null) {
-                    ZimbraPerf.POP_TRACKER.addStat(command.toUpperCase(), startTime);
+                    ZmailPerf.POP_TRACKER.addStat(command.toUpperCase(), startTime);
                 }
             }
             errorCount = 0;
             return result;
         } catch (Pop3CmdException e) {
-            ZimbraLog.pop.debug(e.getMessage(), e);
+            ZmailLog.pop.debug(e.getMessage(), e);
             errorCount++;
             int errorLimit = LC.pop3_max_consecutive_error.intValue();
             if (errorLimit > 0 && errorCount >= errorLimit) {
-                ZimbraLog.pop.warn("dropping connection due to too many errors");
+                ZmailLog.pop.warn("dropping connection due to too many errors");
                 sendERR(e.getResponse() +" : Dropping connection due to too many bad commands");
                 dropConnection = true;
             } else {
@@ -161,7 +161,7 @@ abstract class Pop3Handler {
             return !dropConnection;
         } catch (ServiceException e) {
             sendERR(Pop3CmdException.getResponse(e.getMessage()));
-            ZimbraLog.pop.debug(e.getMessage(), e);
+            ZmailLog.pop.debug(e.getMessage(), e);
             return !dropConnection;
         }
     }
@@ -173,15 +173,15 @@ abstract class Pop3Handler {
 
         if (command == null) {
             dropConnection = true;
-            ZimbraLog.pop.info("disconnected without quit");
+            ZmailLog.pop.info("disconnected without quit");
             return false;
         }
 
-        if (ZimbraLog.pop.isTraceEnabled()) {
+        if (ZmailLog.pop.isTraceEnabled()) {
             if ("PASS ".regionMatches(true, 0, command, 0, 5)) {
-                ZimbraLog.pop.trace("C: PASS ****");
+                ZmailLog.pop.trace("C: PASS ****");
             } else {
-                ZimbraLog.pop.trace("C: %s", command);
+                ZmailLog.pop.trace("C: %s", command);
             }
         }
 
@@ -208,22 +208,22 @@ abstract class Pop3Handler {
                 if (acct == null || !acct.getAccountStatus(prov).equals(Provisioning.ACCOUNT_STATUS_ACTIVE))
                     return false;
             } catch (ServiceException e) {
-                ZimbraLog.pop.warn("ServiceException checking account status",e);
+                ZmailLog.pop.warn("ServiceException checking account status",e);
                 return false;
             }
             if (throttle.isAccountThrottled(accountId)) {
-                ZimbraLog.pop.warn("throttling POP3 connection for account %s due to too many requests", accountId);
+                ZmailLog.pop.warn("throttling POP3 connection for account %s due to too many requests", accountId);
                 dropConnection = true;
                 return false;
             }
         }
 
         if (throttle.isIpThrottled(origRemoteAddress)) {
-            ZimbraLog.pop.warn("throttling POP3 connection for original remote IP %s", origRemoteAddress);
+            ZmailLog.pop.warn("throttling POP3 connection for original remote IP %s", origRemoteAddress);
             dropConnection = true;
             return false;
         } else if (throttle.isIpThrottled(clientAddress)) {
-            ZimbraLog.pop.warn("throttling POP3 connection for remote IP %s", clientAddress);
+            ZmailLog.pop.warn("throttling POP3 connection for remote IP %s", clientAddress);
             dropConnection = true;
             return false;
         }
@@ -422,7 +422,7 @@ abstract class Pop3Handler {
         } else {
             sendOK(config.getGoodbye());
         }
-        ZimbraLog.pop.info("quit from client");
+        ZmailLog.pop.info("quit from client");
     }
 
     private void doNOOP() throws IOException {
@@ -552,19 +552,19 @@ abstract class Pop3Handler {
             if (acct == null) {
                 throw new Pop3CmdException("LOGIN failed");
             }
-            if (!acct.getBooleanAttr(Provisioning.A_zimbraPop3Enabled, false)) {
+            if (!acct.getBooleanAttr(Provisioning.A_zmailPop3Enabled, false)) {
                 throw new Pop3CmdException("pop access not enabled for account");
             }
             accountId = acct.getId();
             accountName = acct.getName();
 
-            ZimbraLog.addAccountNameToContext(accountName);
-            ZimbraLog.pop.info("user %s authenticated, mechanism=%s %s",
+            ZmailLog.addAccountNameToContext(accountName);
+            ZmailLog.pop.info("user %s authenticated, mechanism=%s %s",
                     accountName, mechanism, startedTLS ? "[TLS]" : "");
 
             mailbox = new Pop3Mailbox(MailboxManager.getInstance().getMailboxByAccount(acct), acct, query);
             state = STATE_TRANSACTION;
-            expire = (int) (acct.getTimeInterval(Provisioning.A_zimbraMailMessageLifetime, 0) / Constants.MILLIS_PER_DAY);
+            expire = (int) (acct.getTimeInterval(Provisioning.A_zmailMailMessageLifetime, 0) / Constants.MILLIS_PER_DAY);
             if (expire > 0 && expire < MIN_EXPIRE_DAYS) {
                 expire = MIN_EXPIRE_DAYS;
             }
@@ -741,7 +741,7 @@ abstract class Pop3Handler {
         }
         sendLine("XOIP", false);
         // TODO: VERSION INFO
-        sendLine("IMPLEMENTATION ZimbraInc", false);
+        sendLine("IMPLEMENTATION ZmailInc", false);
         sendLine(TERMINATOR, true);
     }
 
@@ -752,13 +752,13 @@ abstract class Pop3Handler {
         String curOrigRemoteIp = getOrigRemoteIpAddr();
         if (curOrigRemoteIp == null) {
             setOrigRemoteIpAddr(origIp);
-            ZimbraLog.addOrigIpToContext(origIp);
-            ZimbraLog.pop.info("POP3 client identified as: %s", origIp);
+            ZmailLog.addOrigIpToContext(origIp);
+            ZmailLog.pop.info("POP3 client identified as: %s", origIp);
         } else {
             if (curOrigRemoteIp.equals(origIp)) {
-                ZimbraLog.pop.warn("POP3 XOIP is allowed only once per session, command ignored");
+                ZmailLog.pop.warn("POP3 XOIP is allowed only once per session, command ignored");
             } else {
-                ZimbraLog.pop.error("POP3 XOIP is allowed only once per session, received different IP: %s, command ignored",
+                ZmailLog.pop.error("POP3 XOIP is allowed only once per session, received different IP: %s, command ignored",
                         origIp);
             }
         }

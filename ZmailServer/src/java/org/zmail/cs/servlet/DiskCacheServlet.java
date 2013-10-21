@@ -12,7 +12,7 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.servlet;
+package org.zmail.cs.servlet;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -37,17 +37,17 @@ import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
 import javax.servlet.http.HttpServletResponse;
 
-import com.zimbra.common.localconfig.LC;
-import com.zimbra.common.util.ByteUtil;
-import com.zimbra.common.util.LruMap;
-import com.zimbra.common.util.ZimbraLog;
-import com.zimbra.cs.service.admin.FlushCache;
+import org.zmail.common.localconfig.LC;
+import org.zmail.common.util.ByteUtil;
+import org.zmail.common.util.LruMap;
+import org.zmail.common.util.ZmailLog;
+import org.zmail.cs.service.admin.FlushCache;
 
 /**
  * Base class for servlets that cache resources to disk.
  */
 @SuppressWarnings("deprecation")
-public abstract class DiskCacheServlet extends ZimbraServlet {
+public abstract class DiskCacheServlet extends ZmailServlet {
     private Map<String,File> cache;
     private String cacheDirName;
     private File cacheDir;
@@ -84,8 +84,8 @@ public abstract class DiskCacheServlet extends ZimbraServlet {
     protected boolean flushCache(ServletRequest req) {
         Boolean flushCache = (Boolean)req.getAttribute(FlushCache.FLUSH_CACHE);
         if (flushCache != null && flushCache.booleanValue()) {
-            if (ZimbraLog.misc.isDebugEnabled()) {
-                ZimbraLog.misc.debug("flushing "+getClass().getName()+" cache");
+            if (ZmailLog.misc.isDebugEnabled()) {
+                ZmailLog.misc.debug("flushing "+getClass().getName()+" cache");
             }
             boolean deleteFiles = true; // TODO: Should we skip the delete?
             clearCache(deleteFiles);
@@ -172,7 +172,7 @@ public abstract class DiskCacheServlet extends ZimbraServlet {
 
     @SuppressWarnings({ "serial" })
     protected void createCache() {
-        cacheSize = LC.zimbra_disk_cache_servlet_size.intValue();
+        cacheSize = LC.zmail_disk_cache_servlet_size.intValue();
         String value = getServletConfig().getInitParameter(P_CACHE_SIZE);
         if (value != null) {
             try {
@@ -199,7 +199,7 @@ public abstract class DiskCacheServlet extends ZimbraServlet {
             subDirName = subDirName.replace('/', File.separatorChar);
             cacheDir = new File(getTempDir(), subDirName);
             if (cacheDir.exists()) {
-                if (LC.zimbra_disk_cache_servlet_flush.booleanValue()) {
+                if (LC.zmail_disk_cache_servlet_flush.booleanValue()) {
                     Date date = new Date(cacheDir.lastModified());
                     String timestamp = new SimpleDateFormat("yyyy-MM-dd-HHmmss").format(date);
                     File parentDir = cacheDir.getParentFile();
@@ -267,7 +267,7 @@ public abstract class DiskCacheServlet extends ZimbraServlet {
                 webappDirname).replace('/', File.separatorChar).trim();
             tempDir = new File(cacheDirname);
         } else {
-            tempDir = new File(LC.zimbra_tmp_directory.value() + "/diskcache");
+            tempDir = new File(LC.zmail_tmp_directory.value() + "/diskcache");
         }
         tempDir.mkdirs();
         return tempDir;

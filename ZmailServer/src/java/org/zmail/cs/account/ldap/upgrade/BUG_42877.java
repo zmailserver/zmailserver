@@ -12,14 +12,14 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.account.ldap.upgrade;
+package org.zmail.cs.account.ldap.upgrade;
 
 import java.util.HashMap;
 import java.util.Map;
 
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.cs.account.Config;
-import com.zimbra.cs.account.Provisioning;
+import org.zmail.common.service.ServiceException;
+import org.zmail.cs.account.Config;
+import org.zmail.cs.account.Provisioning;
 
 public class BUG_42877 extends UpgradeOp {
 
@@ -36,9 +36,9 @@ public class BUG_42877 extends UpgradeOp {
         };
          
         Map<String, Object> attr = new HashMap<String, Object>();
-        attr.put("+" + Provisioning.A_zimbraGalLdapAttrMap, values);
+        attr.put("+" + Provisioning.A_zmailGalLdapAttrMap, values);
 
-        printer.println("Adding workFax, homePhone, mobilePhone, pager attr maps to global config " + Provisioning.A_zimbraGalLdapAttrMap);
+        printer.println("Adding workFax, homePhone, mobilePhone, pager attr maps to global config " + Provisioning.A_zmailGalLdapAttrMap);
         prov.modifyAttrs(config, attr);
     }
 

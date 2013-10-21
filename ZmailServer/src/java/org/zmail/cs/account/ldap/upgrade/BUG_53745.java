@@ -12,24 +12,24 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.account.ldap.upgrade;
+package org.zmail.cs.account.ldap.upgrade;
 
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.cs.account.Provisioning;
-import com.zimbra.cs.ldap.IAttributes;
-import com.zimbra.cs.ldap.LdapClient;
-import com.zimbra.cs.ldap.LdapServerType;
-import com.zimbra.cs.ldap.LdapUsage;
-import com.zimbra.cs.ldap.SearchLdapOptions;
-import com.zimbra.cs.ldap.ZLdapContext;
-import com.zimbra.cs.ldap.ZLdapFilterFactory;
-import com.zimbra.cs.ldap.ZMutableEntry;
-import com.zimbra.cs.ldap.SearchLdapOptions.SearchLdapVisitor;
+import org.zmail.common.service.ServiceException;
+import org.zmail.cs.account.Provisioning;
+import org.zmail.cs.ldap.IAttributes;
+import org.zmail.cs.ldap.LdapClient;
+import org.zmail.cs.ldap.LdapServerType;
+import org.zmail.cs.ldap.LdapUsage;
+import org.zmail.cs.ldap.SearchLdapOptions;
+import org.zmail.cs.ldap.ZLdapContext;
+import org.zmail.cs.ldap.ZLdapFilterFactory;
+import org.zmail.cs.ldap.ZMutableEntry;
+import org.zmail.cs.ldap.SearchLdapOptions.SearchLdapVisitor;
 
 public class BUG_53745 extends UpgradeOp {
-    private static String ATTR_IMPORTEXPORT = Provisioning.A_zimbraFeatureImportExportFolderEnabled;
-    private static String ATTR_IMPORT = Provisioning.A_zimbraFeatureImportFolderEnabled;
-    private static String ATTR_EXPORT = Provisioning.A_zimbraFeatureExportFolderEnabled;
+    private static String ATTR_IMPORTEXPORT = Provisioning.A_zmailFeatureImportExportFolderEnabled;
+    private static String ATTR_IMPORT = Provisioning.A_zmailFeatureImportFolderEnabled;
+    private static String ATTR_EXPORT = Provisioning.A_zmailFeatureExportFolderEnabled;
     
     @Override
     void doUpgrade() throws ServiceException {

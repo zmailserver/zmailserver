@@ -12,7 +12,7 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.qa.unittest;
+package org.zmail.qa.unittest;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -31,72 +31,72 @@ import org.junit.runner.Result;
 import org.junit.runner.notification.Failure;
 
 import com.google.common.collect.Lists;
-import com.zimbra.common.localconfig.DebugConfig;
-import com.zimbra.common.localconfig.KnownKey;
-import com.zimbra.common.localconfig.LC;
-import com.zimbra.common.util.CliUtil;
-import com.zimbra.common.util.Constants;
-import com.zimbra.common.util.ZimbraLog;
-import com.zimbra.common.util.Log;
-import com.zimbra.cs.account.Provisioning;
-import com.zimbra.cs.account.accesscontrol.RightManager;
-import com.zimbra.cs.account.ldap.LdapDIT;
-import com.zimbra.cs.account.ldap.LdapProv;
-import com.zimbra.cs.ldap.LdapClient;
-import com.zimbra.cs.ldap.LdapConstants;
-import com.zimbra.cs.ldap.LdapServerType;
-import com.zimbra.cs.ldap.LdapUsage;
-import com.zimbra.cs.ldap.ZLdapContext;
-import com.zimbra.cs.ldap.ZLdapFilter;
-import com.zimbra.cs.ldap.ZLdapFilterFactory;
-import com.zimbra.cs.ldap.ZSearchControls;
-import com.zimbra.cs.ldap.ZSearchResultEntry;
-import com.zimbra.cs.ldap.ZSearchResultEnumeration;
-import com.zimbra.cs.ldap.ZSearchScope;
-import com.zimbra.cs.ldap.unboundid.InMemoryLdapServer;
-import com.zimbra.qa.unittest.prov.ldap.TestAccountLockout;
-import com.zimbra.qa.unittest.prov.ldap.TestAutoProvision;
-import com.zimbra.qa.unittest.prov.ldap.TestLdapBinary;
-import com.zimbra.qa.unittest.prov.ldap.TestLdapConnection;
-import com.zimbra.qa.unittest.prov.ldap.TestLdapHelper;
-import com.zimbra.qa.unittest.prov.ldap.TestLdapProvAccount;
-import com.zimbra.qa.unittest.prov.ldap.TestLdapProvAlias;
-import com.zimbra.qa.unittest.prov.ldap.TestLdapProvAttrCallback;
-import com.zimbra.qa.unittest.prov.ldap.TestLdapProvCos;
-import com.zimbra.qa.unittest.prov.ldap.TestLdapProvDIT;
-import com.zimbra.qa.unittest.prov.ldap.TestLdapProvDataSource;
-import com.zimbra.qa.unittest.prov.ldap.TestLdapProvDistributionList;
-import com.zimbra.qa.unittest.prov.ldap.TestLdapProvDomain;
-import com.zimbra.qa.unittest.prov.ldap.TestLdapProvDynamicGroup;
-import com.zimbra.qa.unittest.prov.ldap.TestLdapProvEntry;
-import com.zimbra.qa.unittest.prov.ldap.TestLdapProvExternalLdapAuth;
-import com.zimbra.qa.unittest.prov.ldap.TestLdapProvGal;
-import com.zimbra.qa.unittest.prov.ldap.TestLdapProvGlobalConfig;
-import com.zimbra.qa.unittest.prov.ldap.TestLdapProvGlobalGrant;
-import com.zimbra.qa.unittest.prov.ldap.TestLdapProvIdentity;
-import com.zimbra.qa.unittest.prov.ldap.TestLdapProvMimeType;
-import com.zimbra.qa.unittest.prov.ldap.TestLdapProvMisc;
-import com.zimbra.qa.unittest.prov.ldap.TestLdapProvModifyAttrs;
-import com.zimbra.qa.unittest.prov.ldap.TestLdapProvRenameDomain;
-import com.zimbra.qa.unittest.prov.ldap.TestLdapProvSearchDirectory;
-import com.zimbra.qa.unittest.prov.ldap.TestLdapProvServer;
-import com.zimbra.qa.unittest.prov.ldap.TestLdapProvSignature;
-import com.zimbra.qa.unittest.prov.ldap.TestLdapProvXMPPComponent;
-import com.zimbra.qa.unittest.prov.ldap.TestLdapProvZimlet;
-import com.zimbra.qa.unittest.prov.ldap.TestLdapUpgrade;
-import com.zimbra.qa.unittest.prov.ldap.TestLdapUtil;
-import com.zimbra.qa.unittest.prov.ldap.TestLdapZLdapContext;
-import com.zimbra.qa.unittest.prov.ldap.TestLdapZLdapFilter;
-import com.zimbra.qa.unittest.prov.ldap.TestLdapZMutableEntry;
-import com.zimbra.qa.unittest.prov.ldap.TestProvAlias;
-import com.zimbra.qa.unittest.prov.ldap.TestProvAttr;
-import com.zimbra.qa.unittest.prov.ldap.TestProvCallbackAvailableZimlets;
-import com.zimbra.qa.unittest.prov.ldap.TestProvIDN;
-import com.zimbra.qa.unittest.prov.ldap.TestProvValidator;
-import com.zimbra.qa.unittest.prov.ldap.TestProvZimbraId;
-import com.zimbra.qa.unittest.prov.soap.TestACLUserRights;
-import com.zimbra.qa.unittest.prov.soap.TestDelegatedDL;
-import com.zimbra.qa.unittest.prov.soap.TestSearchGal;
+import org.zmail.common.localconfig.DebugConfig;
+import org.zmail.common.localconfig.KnownKey;
+import org.zmail.common.localconfig.LC;
+import org.zmail.common.util.CliUtil;
+import org.zmail.common.util.Constants;
+import org.zmail.common.util.ZmailLog;
+import org.zmail.common.util.Log;
+import org.zmail.cs.account.Provisioning;
+import org.zmail.cs.account.accesscontrol.RightManager;
+import org.zmail.cs.account.ldap.LdapDIT;
+import org.zmail.cs.account.ldap.LdapProv;
+import org.zmail.cs.ldap.LdapClient;
+import org.zmail.cs.ldap.LdapConstants;
+import org.zmail.cs.ldap.LdapServerType;
+import org.zmail.cs.ldap.LdapUsage;
+import org.zmail.cs.ldap.ZLdapContext;
+import org.zmail.cs.ldap.ZLdapFilter;
+import org.zmail.cs.ldap.ZLdapFilterFactory;
+import org.zmail.cs.ldap.ZSearchControls;
+import org.zmail.cs.ldap.ZSearchResultEntry;
+import org.zmail.cs.ldap.ZSearchResultEnumeration;
+import org.zmail.cs.ldap.ZSearchScope;
+import org.zmail.cs.ldap.unboundid.InMemoryLdapServer;
+import org.zmail.qa.unittest.prov.ldap.TestAccountLockout;
+import org.zmail.qa.unittest.prov.ldap.TestAutoProvision;
+import org.zmail.qa.unittest.prov.ldap.TestLdapBinary;
+import org.zmail.qa.unittest.prov.ldap.TestLdapConnection;
+import org.zmail.qa.unittest.prov.ldap.TestLdapHelper;
+import org.zmail.qa.unittest.prov.ldap.TestLdapProvAccount;
+import org.zmail.qa.unittest.prov.ldap.TestLdapProvAlias;
+import org.zmail.qa.unittest.prov.ldap.TestLdapProvAttrCallback;
+import org.zmail.qa.unittest.prov.ldap.TestLdapProvCos;
+import org.zmail.qa.unittest.prov.ldap.TestLdapProvDIT;
+import org.zmail.qa.unittest.prov.ldap.TestLdapProvDataSource;
+import org.zmail.qa.unittest.prov.ldap.TestLdapProvDistributionList;
+import org.zmail.qa.unittest.prov.ldap.TestLdapProvDomain;
+import org.zmail.qa.unittest.prov.ldap.TestLdapProvDynamicGroup;
+import org.zmail.qa.unittest.prov.ldap.TestLdapProvEntry;
+import org.zmail.qa.unittest.prov.ldap.TestLdapProvExternalLdapAuth;
+import org.zmail.qa.unittest.prov.ldap.TestLdapProvGal;
+import org.zmail.qa.unittest.prov.ldap.TestLdapProvGlobalConfig;
+import org.zmail.qa.unittest.prov.ldap.TestLdapProvGlobalGrant;
+import org.zmail.qa.unittest.prov.ldap.TestLdapProvIdentity;
+import org.zmail.qa.unittest.prov.ldap.TestLdapProvMimeType;
+import org.zmail.qa.unittest.prov.ldap.TestLdapProvMisc;
+import org.zmail.qa.unittest.prov.ldap.TestLdapProvModifyAttrs;
+import org.zmail.qa.unittest.prov.ldap.TestLdapProvRenameDomain;
+import org.zmail.qa.unittest.prov.ldap.TestLdapProvSearchDirectory;
+import org.zmail.qa.unittest.prov.ldap.TestLdapProvServer;
+import org.zmail.qa.unittest.prov.ldap.TestLdapProvSignature;
+import org.zmail.qa.unittest.prov.ldap.TestLdapProvXMPPComponent;
+import org.zmail.qa.unittest.prov.ldap.TestLdapProvZimlet;
+import org.zmail.qa.unittest.prov.ldap.TestLdapUpgrade;
+import org.zmail.qa.unittest.prov.ldap.TestLdapUtil;
+import org.zmail.qa.unittest.prov.ldap.TestLdapZLdapContext;
+import org.zmail.qa.unittest.prov.ldap.TestLdapZLdapFilter;
+import org.zmail.qa.unittest.prov.ldap.TestLdapZMutableEntry;
+import org.zmail.qa.unittest.prov.ldap.TestProvAlias;
+import org.zmail.qa.unittest.prov.ldap.TestProvAttr;
+import org.zmail.qa.unittest.prov.ldap.TestProvCallbackAvailableZimlets;
+import org.zmail.qa.unittest.prov.ldap.TestProvIDN;
+import org.zmail.qa.unittest.prov.ldap.TestProvValidator;
+import org.zmail.qa.unittest.prov.ldap.TestProvZmailId;
+import org.zmail.qa.unittest.prov.soap.TestACLUserRights;
+import org.zmail.qa.unittest.prov.soap.TestDelegatedDL;
+import org.zmail.qa.unittest.prov.soap.TestSearchGal;
 
 public class TestLdap {
     private static final String TEST_LDAP_BASE_DOMAIN = InMemoryLdapServer.UNITTEST_BASE_DOMAIN_SEGMENT; // "testldap";
@@ -124,7 +124,7 @@ public class TestLdap {
     static void modifyLocalConfig(String key, String value) throws Exception {
         Process process = null;
         try {
-            String command = "/opt/zimbra/bin/zmlocalconfig -e " + key + "=" + value;
+            String command = "/opt/zmail/bin/zmlocalconfig -e " + key + "=" + value;
             System.out.println(command);
             process = Runtime.getRuntime().exec(command);
         } catch (IOException e) {
@@ -144,7 +144,7 @@ public class TestLdap {
     }
 
     enum TestConfig {
-        UBID(com.zimbra.cs.ldap.unboundid.UBIDLdapClient.class, com.zimbra.cs.account.ldap.LdapProvisioning.class);
+        UBID(org.zmail.cs.ldap.unboundid.UBIDLdapClient.class, org.zmail.cs.account.ldap.LdapProvisioning.class);
         
         static private TestConfig currentTestConfig = null;
         
@@ -167,12 +167,12 @@ public class TestLdap {
             // assert(TestConfig.UBID == config);
 
             if (config.ldapClientClass != null) {
-                modifyLocalConfig(LC.zimbra_class_ldap_client.key(), config.ldapClientClass.getCanonicalName());
+                modifyLocalConfig(LC.zmail_class_ldap_client.key(), config.ldapClientClass.getCanonicalName());
             } else {
                 // remove the key
-                modifyLocalConfig(LC.zimbra_class_ldap_client.key(), "");
+                modifyLocalConfig(LC.zmail_class_ldap_client.key(), "");
             }
-            modifyLocalConfig(LC.zimbra_class_provisioning.key(), config.ldapProvClass.getCanonicalName());
+            modifyLocalConfig(LC.zmail_class_provisioning.key(), config.ldapProvClass.getCanonicalName());
             LC.reload();
         }
         
@@ -487,7 +487,7 @@ public class TestLdap {
         classes.add(TestProvCallbackAvailableZimlets.class);
         classes.add(TestProvIDN.class);
         classes.add(TestProvValidator.class);
-        classes.add(TestProvZimbraId.class);
+        classes.add(TestProvZmailId.class);
         classes.add(TestSearchGal.class);
         
         /*
@@ -549,11 +549,11 @@ public class TestLdap {
         perJVMInited = true;
         
         CliUtil.toolSetup(Log.Level.error.name());
-        ZimbraLog.test.setLevel(Log.Level.info);
-        ZimbraLog.autoprov.setLevel(Log.Level.debug);
-        // ZimbraLog.account.setLevel(Log.Level.debug);
-        // ZimbraLog.ldap.setLevel(Log.Level.debug);
-        // ZimbraLog.soap.setLevel(Log.Level.trace);
+        ZmailLog.test.setLevel(Log.Level.info);
+        ZmailLog.autoprov.setLevel(Log.Level.debug);
+        // ZmailLog.account.setLevel(Log.Level.debug);
+        // ZmailLog.ldap.setLevel(Log.Level.debug);
+        // ZmailLog.soap.setLevel(Log.Level.trace);
 
         /*
         if (useInMemoryLdapServerProperty == null) {
@@ -569,7 +569,7 @@ public class TestLdap {
         assert(DebugConfig.useInMemoryLdapServer == useInMemoryLdapServer);
         useInMemoryLdapServer = InMemoryLdapServer.isOn();
         
-        ZimbraLog.test.info("useInMemoryLdapServer = " + useInMemoryLdapServer);
+        ZmailLog.test.info("useInMemoryLdapServer = " + useInMemoryLdapServer);
         
         if (useInMemoryLdapServer) {
             try {
@@ -595,7 +595,7 @@ public class TestLdap {
                 fail();
             }
         }
-        ZimbraLog.test.info("useInMemoryLdapServer = " + InMemoryLdapServer.isOn());
+        ZmailLog.test.info("useInMemoryLdapServer = " + InMemoryLdapServer.isOn());
         
         RightManager.getInstance(true);
         TestConfig.useConfig(testConfig);
@@ -624,12 +624,12 @@ public class TestLdap {
     }
     
     /*
-     * zmjava -ea com.zimbra.qa.unittest.TestLdap > ~/temp/out.txt
+     * zmjava -ea org.zmail.qa.unittest.TestLdap > ~/temp/out.txt
      * 
-     * cp -f /Users/pshao/p4/main/ZimbraServer/data/unittest/ldap/attrs-unittest.xml /Users/pshao/p4/main/ZimbraServer/conf/attrs
+     * cp -f /Users/pshao/p4/main/ZmailServer/data/unittest/ldap/attrs-unittest.xml /Users/pshao/p4/main/ZmailServer/conf/attrs
      * ant refresh-ldap-schema
      * 
-     * cp -f /Users/pshao/p4/main/ZimbraServer/data/unittest/ldap/rights-unittest.xml /opt/zimbra/conf/rights
+     * cp -f /Users/pshao/p4/main/ZmailServer/data/unittest/ldap/rights-unittest.xml /opt/zmail/conf/rights
      * 
      */
     public static void main(String[] args) throws Exception {

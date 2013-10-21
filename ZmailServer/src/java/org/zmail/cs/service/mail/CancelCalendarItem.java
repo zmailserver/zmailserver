@@ -13,7 +13,7 @@
  * ***** END LICENSE BLOCK *****
  */
 
-package com.zimbra.cs.service.mail;
+package org.zmail.cs.service.mail;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -24,28 +24,28 @@ import javax.mail.Address;
 import javax.mail.MessagingException;
 import javax.mail.internet.MimeBodyPart;
 
-import com.zimbra.common.calendar.ICalTimeZone;
-import com.zimbra.common.calendar.TimeZoneMap;
-import com.zimbra.common.calendar.ZCalendar.ICalTok;
-import com.zimbra.common.calendar.ZCalendar.ZVCalendar;
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.common.soap.Element;
-import com.zimbra.common.soap.MailConstants;
-import com.zimbra.common.util.L10nUtil;
-import com.zimbra.common.util.L10nUtil.MsgKey;
-import com.zimbra.common.util.ZimbraLog;
-import com.zimbra.cs.account.Account;
-import com.zimbra.cs.mailbox.CalendarItem;
-import com.zimbra.cs.mailbox.MailSender;
-import com.zimbra.cs.mailbox.MailServiceException;
-import com.zimbra.cs.mailbox.Mailbox;
-import com.zimbra.cs.mailbox.OperationContext;
-import com.zimbra.cs.mailbox.calendar.CalendarMailSender;
-import com.zimbra.cs.mailbox.calendar.Invite;
-import com.zimbra.cs.mailbox.calendar.RecurId;
-import com.zimbra.cs.mailbox.calendar.ZAttendee;
-import com.zimbra.cs.service.util.ItemId;
-import com.zimbra.soap.ZimbraSoapContext;
+import org.zmail.common.calendar.ICalTimeZone;
+import org.zmail.common.calendar.TimeZoneMap;
+import org.zmail.common.calendar.ZCalendar.ICalTok;
+import org.zmail.common.calendar.ZCalendar.ZVCalendar;
+import org.zmail.common.service.ServiceException;
+import org.zmail.common.soap.Element;
+import org.zmail.common.soap.MailConstants;
+import org.zmail.common.util.L10nUtil;
+import org.zmail.common.util.L10nUtil.MsgKey;
+import org.zmail.common.util.ZmailLog;
+import org.zmail.cs.account.Account;
+import org.zmail.cs.mailbox.CalendarItem;
+import org.zmail.cs.mailbox.MailSender;
+import org.zmail.cs.mailbox.MailServiceException;
+import org.zmail.cs.mailbox.Mailbox;
+import org.zmail.cs.mailbox.OperationContext;
+import org.zmail.cs.mailbox.calendar.CalendarMailSender;
+import org.zmail.cs.mailbox.calendar.Invite;
+import org.zmail.cs.mailbox.calendar.RecurId;
+import org.zmail.cs.mailbox.calendar.ZAttendee;
+import org.zmail.cs.service.util.ItemId;
+import org.zmail.soap.ZmailSoapContext;
 
 public class CancelCalendarItem extends CalendarRequest {
 
@@ -63,7 +63,7 @@ public class CancelCalendarItem extends CalendarRequest {
 
     @Override
     public Element handle(Element request, Map<String, Object> context) throws ServiceException {
-        ZimbraSoapContext zsc = getZimbraSoapContext(context);
+        ZmailSoapContext zsc = getZmailSoapContext(context);
         Account acct = getRequestedAccount(zsc);
         Mailbox mbox = getRequestedMailbox(zsc);
         OperationContext octxt = getOperationContext(zsc, context);
@@ -99,7 +99,7 @@ public class CancelCalendarItem extends CalendarRequest {
                 RecurId recurId = CalendarUtils.parseRecurId(recurElt, tzmap);
 
                 // trace logging
-                ZimbraLog.calendar.info("<CancelCalendarItem> id=%d, folderId=%d, subject=\"%s\", UID=%s, recurId=%s",
+                ZmailLog.calendar.info("<CancelCalendarItem> id=%d, folderId=%d, subject=\"%s\", UID=%s, recurId=%s",
                         calItem.getId(), calItem.getFolderId(), inv.isPublic() ? inv.getName() : "(private)",
                         calItem.getUid(), recurId.getDtZ());
 
@@ -109,7 +109,7 @@ public class CancelCalendarItem extends CalendarRequest {
                 // if recur is not set, then we're canceling the entire calendar item...
 
                 // trace logging
-                ZimbraLog.calendar.info("<CancelCalendarItem> id=%d, folderId=%d, subject=\"%s\", UID=%s",
+                ZmailLog.calendar.info("<CancelCalendarItem> id=%d, folderId=%d, subject=\"%s\", UID=%s",
                         calItem.getId(), calItem.getFolderId(), inv.isPublic() ? inv.getName() : "(private)",
                         calItem.getUid());
 
@@ -158,7 +158,7 @@ public class CancelCalendarItem extends CalendarRequest {
         return response;
     }
 
-    void cancelInstance(ZimbraSoapContext zsc, OperationContext octxt, Element msgElem, Account acct, Mailbox mbox,
+    void cancelInstance(ZmailSoapContext zsc, OperationContext octxt, Element msgElem, Account acct, Mailbox mbox,
             CalendarItem calItem, Invite inv, RecurId recurId, List<ZAttendee> toNotify, MailSendQueue sendQueue)
     throws ServiceException {
         boolean onBehalfOf = isOnBehalfOfRequest(zsc);
@@ -200,7 +200,7 @@ public class CancelCalendarItem extends CalendarRequest {
         sendCalendarCancelMessage(zsc, octxt, calItem.getFolderId(), acct, mbox, dat, true, sendQueue);
     }
 
-    protected void cancelInvite(ZimbraSoapContext zsc, OperationContext octxt, Element msgElem, Account acct, Mailbox mbox,
+    protected void cancelInvite(ZmailSoapContext zsc, OperationContext octxt, Element msgElem, Account acct, Mailbox mbox,
             CalendarItem calItem, Invite inv, MailSendQueue sendQueue)
     throws ServiceException {
         boolean onBehalfOf = isOnBehalfOfRequest(zsc);

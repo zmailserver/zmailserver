@@ -12,7 +12,7 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.service.mail;
+package org.zmail.cs.service.mail;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -26,46 +26,46 @@ import javax.mail.MessagingException;
 import javax.mail.internet.MimePart;
 import javax.mail.internet.MimePartDataSource;
 
-import com.zimbra.common.mailbox.ContactConstants;
-import com.zimbra.common.mime.ContentType;
-import com.zimbra.common.mime.MimeConstants;
-import com.zimbra.common.mime.MimeDetect;
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.common.soap.MailConstants;
-import com.zimbra.common.soap.Element;
-import com.zimbra.common.util.ByteUtil;
-import com.zimbra.common.util.Pair;
-import com.zimbra.common.util.StringUtil;
-import com.zimbra.common.util.Version;
-import com.zimbra.common.util.ZimbraLog;
-import com.zimbra.cs.account.Provisioning;
-import com.zimbra.cs.mailbox.Contact;
-import com.zimbra.cs.mailbox.ContactGroup;
-import com.zimbra.cs.mailbox.Document;
-import com.zimbra.cs.mailbox.DocumentDataSource;
-import com.zimbra.cs.mailbox.MailItem;
-import com.zimbra.cs.mailbox.MailServiceException;
-import com.zimbra.cs.mailbox.Mailbox;
-import com.zimbra.cs.mailbox.MailboxManager;
-import com.zimbra.cs.mailbox.Message;
-import com.zimbra.cs.mailbox.MessageDataSource;
-import com.zimbra.cs.mailbox.OperationContext;
-import com.zimbra.cs.mailbox.Contact.Attachment;
-import com.zimbra.cs.mailbox.ContactGroup.Member;
-import com.zimbra.cs.mailbox.util.TagUtil;
-import com.zimbra.cs.mime.Mime;
-import com.zimbra.cs.mime.ParsedContact;
-import com.zimbra.cs.mime.ParsedContact.FieldDelta;
-import com.zimbra.cs.service.FileUploadServlet;
-import com.zimbra.cs.service.UploadDataSource;
-import com.zimbra.cs.service.UserServlet;
-import com.zimbra.cs.service.util.ItemId;
-import com.zimbra.cs.service.util.ItemIdFormatter;
-import com.zimbra.cs.service.FileUploadServlet.Upload;
-import com.zimbra.cs.service.formatter.VCard;
-import com.zimbra.soap.DocumentHandler;
-import com.zimbra.soap.ZimbraSoapContext;
-import com.zimbra.soap.mail.type.ModifyGroupMemberOperation;
+import org.zmail.common.mailbox.ContactConstants;
+import org.zmail.common.mime.ContentType;
+import org.zmail.common.mime.MimeConstants;
+import org.zmail.common.mime.MimeDetect;
+import org.zmail.common.service.ServiceException;
+import org.zmail.common.soap.MailConstants;
+import org.zmail.common.soap.Element;
+import org.zmail.common.util.ByteUtil;
+import org.zmail.common.util.Pair;
+import org.zmail.common.util.StringUtil;
+import org.zmail.common.util.Version;
+import org.zmail.common.util.ZmailLog;
+import org.zmail.cs.account.Provisioning;
+import org.zmail.cs.mailbox.Contact;
+import org.zmail.cs.mailbox.ContactGroup;
+import org.zmail.cs.mailbox.Document;
+import org.zmail.cs.mailbox.DocumentDataSource;
+import org.zmail.cs.mailbox.MailItem;
+import org.zmail.cs.mailbox.MailServiceException;
+import org.zmail.cs.mailbox.Mailbox;
+import org.zmail.cs.mailbox.MailboxManager;
+import org.zmail.cs.mailbox.Message;
+import org.zmail.cs.mailbox.MessageDataSource;
+import org.zmail.cs.mailbox.OperationContext;
+import org.zmail.cs.mailbox.Contact.Attachment;
+import org.zmail.cs.mailbox.ContactGroup.Member;
+import org.zmail.cs.mailbox.util.TagUtil;
+import org.zmail.cs.mime.Mime;
+import org.zmail.cs.mime.ParsedContact;
+import org.zmail.cs.mime.ParsedContact.FieldDelta;
+import org.zmail.cs.service.FileUploadServlet;
+import org.zmail.cs.service.UploadDataSource;
+import org.zmail.cs.service.UserServlet;
+import org.zmail.cs.service.util.ItemId;
+import org.zmail.cs.service.util.ItemIdFormatter;
+import org.zmail.cs.service.FileUploadServlet.Upload;
+import org.zmail.cs.service.formatter.VCard;
+import org.zmail.soap.DocumentHandler;
+import org.zmail.soap.ZmailSoapContext;
+import org.zmail.soap.mail.type.ModifyGroupMemberOperation;
 
 /**
  * @author schemers
@@ -82,7 +82,7 @@ public class CreateContact extends MailDocumentHandler  {
 
     @Override
     public Element handle(Element request, Map<String, Object> context) throws ServiceException {
-        ZimbraSoapContext zsc = getZimbraSoapContext(context);
+        ZmailSoapContext zsc = getZmailSoapContext(context);
         Mailbox mbox = getRequestedMailbox(zsc);
         OperationContext octxt = getOperationContext(zsc, context);
         ItemIdFormatter ifmt = new ItemIdFormatter(zsc);
@@ -125,7 +125,7 @@ public class CreateContact extends MailDocumentHandler  {
         return response;
     }
 
-    static Pair<Map<String,Object>, List<Attachment>> parseContact(Element cn, ZimbraSoapContext zsc, OperationContext octxt) throws ServiceException {
+    static Pair<Map<String,Object>, List<Attachment>> parseContact(Element cn, ZmailSoapContext zsc, OperationContext octxt) throws ServiceException {
         return parseContact(cn, zsc, octxt, null);
     }
 
@@ -133,7 +133,7 @@ public class CreateContact extends MailDocumentHandler  {
      * for CreateContact and ModifyContact replace mode
      */
     static Pair<Map<String,Object>, List<Attachment>> parseContact(
-            Element cn, ZimbraSoapContext zsc, OperationContext octxt, Contact existing)
+            Element cn, ZmailSoapContext zsc, OperationContext octxt, Contact existing)
     throws ServiceException {
         Map<String, Object> fields = new HashMap<String, Object>();
         List<Attachment> attachments = new ArrayList<Attachment>();
@@ -209,7 +209,7 @@ public class CreateContact extends MailDocumentHandler  {
     }
 
     static ParsedContact parseContactMergeMode(
-            Element cn, ZimbraSoapContext zsc, OperationContext octxt, Contact existing)
+            Element cn, ZmailSoapContext zsc, OperationContext octxt, Contact existing)
     throws ServiceException {
         ParsedContact.FieldDeltaList deltaList = new ParsedContact.FieldDeltaList();
         List<Attachment> attachments = new ArrayList<Attachment>();
@@ -267,7 +267,7 @@ public class CreateContact extends MailDocumentHandler  {
         return new ParsedContact(existing).modify(deltaList, attachments, discardExistingMembers);
     }
 
-    private static Attachment parseAttachment(Element elt, String name, ZimbraSoapContext zsc, OperationContext octxt, Contact existing) throws ServiceException {
+    private static Attachment parseAttachment(Element elt, String name, ZmailSoapContext zsc, OperationContext octxt, Contact existing) throws ServiceException {
         // check for uploaded attachment
         String attachId = elt.getAttribute(MailConstants.A_ATTACHMENT_ID, null);
         if (attachId != null) {
@@ -332,7 +332,7 @@ public class CreateContact extends MailDocumentHandler  {
         return null;
     }
 
-    private static List<ParsedContact> parseAttachedVCard(ZimbraSoapContext zsc, OperationContext octxt, Mailbox mbox, Element vcard)
+    private static List<ParsedContact> parseAttachedVCard(ZmailSoapContext zsc, OperationContext octxt, Mailbox mbox, Element vcard)
     throws ServiceException {
         String text = null;
         String messageId = vcard.getAttribute(MailConstants.A_MESSAGE_ID, null);
@@ -354,7 +354,7 @@ public class CreateContact extends MailDocumentHandler  {
             ItemId iid = new ItemId(messageId, zsc);
             String part = vcard.getAttribute(MailConstants.A_PART);
             String[] acceptableTypes = new String[] { MimeConstants.CT_TEXT_PLAIN, MimeConstants.CT_TEXT_VCARD, MimeConstants.CT_TEXT_VCARD_LEGACY, MimeConstants.CT_TEXT_VCARD_LEGACY2 };
-            String charsetWanted = mbox.getAccount().getAttr(Provisioning.A_zimbraPrefMailDefaultCharset, null);
+            String charsetWanted = mbox.getAccount().getAttr(Provisioning.A_zmailPrefMailDefaultCharset, null);
             text = fetchItemPart(zsc, octxt, mbox, iid, part, acceptableTypes, charsetWanted);
         }
 
@@ -383,7 +383,7 @@ public class CreateContact extends MailDocumentHandler  {
         return toRet;
     }
 
-    static String fetchItemPart(ZimbraSoapContext zsc, OperationContext octxt, Mailbox mbox,
+    static String fetchItemPart(ZmailSoapContext zsc, OperationContext octxt, Mailbox mbox,
                                 ItemId iid, String part,
                                 String[] acceptableMimeTypes, String charsetWanted)
     throws ServiceException {
@@ -434,17 +434,17 @@ public class CreateContact extends MailDocumentHandler  {
         return text;
     }
 
-    static boolean needToMigrateDlist(ZimbraSoapContext zsc) throws ServiceException {
+    static boolean needToMigrateDlist(ZmailSoapContext zsc) throws ServiceException {
         String ua = zsc.getUserAgent();
         //bug 73326, backward compatible for migrating contact group. 
         //This is only for the *old* migration client, the *new* migration client will eventually use new API.
-        if ("Zimbra Systems Client".equals(ua)) {
+        if ("Zmail Systems Client".equals(ua)) {
             return true;
         } else {
-            Pair<String, Version> connectorVersion = DocumentHandler.zimbraConnectorClientVersion(zsc);
+            Pair<String, Version> connectorVersion = DocumentHandler.zmailConnectorClientVersion(zsc);
             if (connectorVersion != null) {
-                // ZimbraMigration need to migrate DL before 9.0.0
-                if ("ZimbraMigration".equals(connectorVersion.getFirst())) {
+                // ZmailMigration need to migrate DL before 9.0.0
+                if ("ZmailMigration".equals(connectorVersion.getFirst())) {
                     Version newContactGroupAPISupported = new Version("9.0.0");
                     if (connectorVersion.getSecond().compareTo(newContactGroupAPISupported) < 0) {
                         return true;
@@ -481,7 +481,7 @@ public class CreateContact extends MailDocumentHandler  {
                 fields.put(ContactConstants.A_groupMember, contactGroup.encode());
                 fields.remove(ContactConstants.A_dlist);
             } catch (Exception e) {
-                ZimbraLog.contact.info("skipped migrating contact group, dlist=[%s]", dlist, e);
+                ZmailLog.contact.info("skipped migrating contact group, dlist=[%s]", dlist, e);
             }
         }
     }

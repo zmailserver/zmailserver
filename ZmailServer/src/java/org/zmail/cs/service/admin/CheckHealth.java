@@ -16,20 +16,20 @@
 /*
  * Created on 2005. 1. 26.
  */
-package com.zimbra.cs.service.admin;
+package org.zmail.cs.service.admin;
 
 import java.util.List;
 import java.util.Map;
 
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.common.soap.Element;
-import com.zimbra.cs.account.Provisioning;
-import com.zimbra.cs.account.Server;
-import com.zimbra.cs.account.accesscontrol.AdminRight;
-import com.zimbra.cs.account.accesscontrol.Rights.Admin;
-import com.zimbra.cs.db.DbStatus;
-import com.zimbra.soap.ZimbraSoapContext;
-import com.zimbra.soap.admin.message.CheckHealthResponse;
+import org.zmail.common.service.ServiceException;
+import org.zmail.common.soap.Element;
+import org.zmail.cs.account.Provisioning;
+import org.zmail.cs.account.Server;
+import org.zmail.cs.account.accesscontrol.AdminRight;
+import org.zmail.cs.account.accesscontrol.Rights.Admin;
+import org.zmail.cs.db.DbStatus;
+import org.zmail.soap.ZmailSoapContext;
+import org.zmail.soap.admin.message.CheckHealthResponse;
 
 /**
  * @author jhahm
@@ -37,10 +37,10 @@ import com.zimbra.soap.admin.message.CheckHealthResponse;
 public class CheckHealth extends AdminDocumentHandler {
 
     /* (non-Javadoc)
-     * @see com.zimbra.soap.DocumentHandler#handle(org.dom4j.Element, java.util.Map)
+     * @see org.zmail.soap.DocumentHandler#handle(org.dom4j.Element, java.util.Map)
      */
     public Element handle(Element request, Map<String, Object> context) throws ServiceException {
-        ZimbraSoapContext lc = getZimbraSoapContext(context);
+        ZmailSoapContext lc = getZmailSoapContext(context);
 
         if (needsAdminAuth(context)) {
             Server localServer = Provisioning.getInstance().getLocalServer();

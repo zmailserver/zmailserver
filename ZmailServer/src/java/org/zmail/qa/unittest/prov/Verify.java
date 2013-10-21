@@ -12,7 +12,7 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.qa.unittest.prov;
+package org.zmail.qa.unittest.prov;
 
 import static org.junit.Assert.*;
 
@@ -25,7 +25,7 @@ import java.util.Set;
 
 import com.google.common.collect.Lists;
 import com.google.common.collect.Sets;
-import com.zimbra.cs.account.NamedEntry;
+import org.zmail.cs.account.NamedEntry;
 
 public class Verify {
 

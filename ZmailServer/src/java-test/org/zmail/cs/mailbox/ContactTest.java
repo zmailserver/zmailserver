@@ -12,7 +12,7 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.mailbox;
+package org.zmail.cs.mailbox;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -33,20 +33,20 @@ import com.google.common.base.Strings;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
-import com.zimbra.common.mailbox.ContactConstants;
-import com.zimbra.common.mime.InternetAddress;
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.cs.account.MockProvisioning;
-import com.zimbra.cs.account.Provisioning;
-import com.zimbra.cs.db.DbMailItem;
-import com.zimbra.cs.db.DbPool;
-import com.zimbra.cs.db.DbPool.DbConnection;
-import com.zimbra.cs.db.DbResults;
-import com.zimbra.cs.db.DbUtil;
-import com.zimbra.cs.mailbox.Contact.Attachment;
-import com.zimbra.cs.mime.Mime;
-import com.zimbra.cs.mime.ParsedContact;
-import com.zimbra.cs.util.JMSession;
+import org.zmail.common.mailbox.ContactConstants;
+import org.zmail.common.mime.InternetAddress;
+import org.zmail.common.service.ServiceException;
+import org.zmail.cs.account.MockProvisioning;
+import org.zmail.cs.account.Provisioning;
+import org.zmail.cs.db.DbMailItem;
+import org.zmail.cs.db.DbPool;
+import org.zmail.cs.db.DbPool.DbConnection;
+import org.zmail.cs.db.DbResults;
+import org.zmail.cs.db.DbUtil;
+import org.zmail.cs.mailbox.Contact.Attachment;
+import org.zmail.cs.mime.Mime;
+import org.zmail.cs.mime.ParsedContact;
+import org.zmail.cs.util.JMSession;
 
 /**
  * Unit test for {@link Contact}.
@@ -59,7 +59,7 @@ public final class ContactTest {
     public static void init() throws Exception {
         MailboxTestUtil.initServer();
         Provisioning prov = Provisioning.getInstance();
-        prov.createAccount("test@zimbra.com", "secret", new HashMap<String, Object>());
+        prov.createAccount("test@zmail.com", "secret", new HashMap<String, Object>());
     }
 
     @Before
@@ -120,30 +120,30 @@ public final class ContactTest {
     public void existsInContacts() throws Exception {
         Mailbox mbox = MailboxManager.getInstance().getMailboxByAccountId(MockProvisioning.DEFAULT_ACCOUNT_ID);
         mbox.createContact(null, new ParsedContact(Collections.singletonMap(
-                ContactConstants.A_email, "test1@zimbra.com")), Mailbox.ID_FOLDER_CONTACTS, null);
+                ContactConstants.A_email, "test1@zmail.com")), Mailbox.ID_FOLDER_CONTACTS, null);
         MailboxTestUtil.index(mbox);
 
         Assert.assertTrue(mbox.index.existsInContacts(ImmutableList.of(
-                new InternetAddress("Test <test1@zimbra.com>"), new InternetAddress("Test <test2@zimbra.com>"))));
+                new InternetAddress("Test <test1@zmail.com>"), new InternetAddress("Test <test2@zmail.com>"))));
         Assert.assertFalse(mbox.index.existsInContacts(ImmutableList.of(
-                new InternetAddress("Test <test2@zimbra.com>"), new InternetAddress("Test <test3@zimbra.com>"))));
+                new InternetAddress("Test <test2@zmail.com>"), new InternetAddress("Test <test3@zmail.com>"))));
     }
 
     @Test
     public void createAutoContact() throws Exception {
         Mailbox mbox = MailboxManager.getInstance().getMailboxByAccountId(MockProvisioning.DEFAULT_ACCOUNT_ID);
         List<Contact> contacts = mbox.createAutoContact(null, ImmutableList.of(
-                new InternetAddress("Test 1", "TEST1@zimbra.com"), new InternetAddress("Test 2", "TEST2@zimbra.com")));
+                new InternetAddress("Test 1", "TEST1@zmail.com"), new InternetAddress("Test 2", "TEST2@zmail.com")));
 
         Assert.assertEquals(2, contacts.size());
         Assert.assertEquals("1, Test", contacts.get(0).getFileAsString());
-        Assert.assertEquals("TEST1@zimbra.com", contacts.get(0).getFields().get(ContactConstants.A_email));
+        Assert.assertEquals("TEST1@zmail.com", contacts.get(0).getFields().get(ContactConstants.A_email));
         Assert.assertEquals("2, Test", contacts.get(1).getFileAsString());
-        Assert.assertEquals("TEST2@zimbra.com", contacts.get(1).getFields().get(ContactConstants.A_email));
+        Assert.assertEquals("TEST2@zmail.com", contacts.get(1).getFields().get(ContactConstants.A_email));
 
         Collection<javax.mail.Address> newAddrs = mbox.newContactAddrs(ImmutableList.of(
-                (javax.mail.Address)new javax.mail.internet.InternetAddress("test1@zimbra.com", "Test 1"),
-                (javax.mail.Address)new javax.mail.internet.InternetAddress("test2@zimbra.com", "Test 2")));
+                (javax.mail.Address)new javax.mail.internet.InternetAddress("test1@zmail.com", "Test 1"),
+                (javax.mail.Address)new javax.mail.internet.InternetAddress("test2@zmail.com", "Test 2")));
 
         Assert.assertEquals(0, newAddrs.size());
     }

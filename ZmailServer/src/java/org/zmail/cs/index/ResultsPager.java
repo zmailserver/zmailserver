@@ -12,7 +12,7 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.index;
+package org.zmail.cs.index;
 
 import java.util.ArrayList;
 import java.util.Comparator;
@@ -20,9 +20,9 @@ import java.util.LinkedList;
 import java.util.List;
 
 import com.google.common.base.Objects;
-import com.zimbra.common.localconfig.DebugConfig;
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.cs.mailbox.MailItem;
+import org.zmail.common.localconfig.DebugConfig;
+import org.zmail.common.service.ServiceException;
+import org.zmail.cs.mailbox.MailItem;
 
 /**
  * Helper class -- deals with finding the "first result" to be returned, which
@@ -31,7 +31,7 @@ import com.zimbra.cs.mailbox.MailItem;
  * (see bug 2937)
  */
 public final class ResultsPager {
-    private ZimbraQueryResults results;
+    private ZmailQueryResults results;
     private boolean fixedOffset;
     // in cases where ReSortingQueryResults is simulating the cursor for us, we need to skip
     // the passed-in cursor AND offset....otherwise pages will be skipped b/c we will end up
@@ -39,13 +39,13 @@ public final class ResultsPager {
     // change the requested offset in SearchParams because that would cause the offset returned
     // in <SearchResponse> to be incorrect.
     private boolean ignoreOffsetHack = false;
-    private List<ZimbraHit> bufferedHits;
+    private List<ZmailHit> bufferedHits;
     private SearchParams params;
     private boolean forward = true;
-    private Comparator<ZimbraHit> comparator;
+    private Comparator<ZmailHit> comparator;
     private long offset = -1;
 
-    public static ResultsPager create(ZimbraQueryResults results, SearchParams params) throws ServiceException {
+    public static ResultsPager create(ZmailQueryResults results, SearchParams params) throws ServiceException {
         // must use results.getSortBy() because the results might have ignored our sortBy
         // request and used something else...
         params.setSortBy(results.getSortBy());
@@ -81,7 +81,7 @@ public final class ResultsPager {
     /**
      * @param params if OFFSET-MODE, requires SortBy, offset, limit to be set, otherwise requires cursor to be set
      */
-    private ResultsPager(ZimbraQueryResults results, SearchParams params, boolean useCursor, boolean skipOffset)
+    private ResultsPager(ZmailQueryResults results, SearchParams params, boolean useCursor, boolean skipOffset)
             throws ServiceException {
         this.results = results;
         this.params = params;
@@ -116,8 +116,8 @@ public final class ResultsPager {
             }
         } else {
             if (forward) {
-                bufferedHits = new ArrayList<ZimbraHit>(1);
-                ZimbraHit current = forwardFindFirst();
+                bufferedHits = new ArrayList<ZmailHit>(1);
+                ZmailHit current = forwardFindFirst();
                 if (current != null)
                     bufferedHits.add(current);
             } else {
@@ -138,7 +138,7 @@ public final class ResultsPager {
         }
     }
 
-    public ZimbraHit getNextHit() throws ServiceException {
+    public ZmailHit getNextHit() throws ServiceException {
         if (bufferedHits != null && !bufferedHits.isEmpty()) {
             return bufferedHits.remove(0);
         } else {
@@ -146,11 +146,11 @@ public final class ResultsPager {
         }
     }
 
-    private ZimbraHit forwardFindFirst() throws ServiceException {
+    private ZmailHit forwardFindFirst() throws ServiceException {
         offset = -1;
-        ZimbraHit prevHit = getPrevCursorHit();
+        ZmailHit prevHit = getPrevCursorHit();
         results.resetIterator();
-        ZimbraHit hit = results.getNext();
+        ZmailHit hit = results.getNext();
         while (hit != null) {
             offset++;
 
@@ -204,14 +204,14 @@ public final class ResultsPager {
     /**
      * Returns a list (in reverse order) of all hits between start and current-cursor position.
      */
-    private List<ZimbraHit> backward() throws ServiceException {
-        List<ZimbraHit> result = new LinkedList<ZimbraHit>();
+    private List<ZmailHit> backward() throws ServiceException {
+        List<ZmailHit> result = new LinkedList<ZmailHit>();
         offset = -1;
         results.resetIterator();
-        ZimbraHit hit = results.getNext();
-        ZimbraHit prevHit = getPrevCursorHit();
+        ZmailHit hit = results.getNext();
+        ZmailHit prevHit = getPrevCursorHit();
 
-        ZimbraHit dummyEndHit = null;
+        ZmailHit dummyEndHit = null;
         if (params.getCursor().getEndSortValue() != null) {
             dummyEndHit = getEndCursorHit();
         }
@@ -238,21 +238,21 @@ public final class ResultsPager {
     /**
      * Returns a dummy hit which is immediately before the first hit we want to return.
      */
-    private ZimbraHit getPrevCursorHit() {
+    private ZmailHit getPrevCursorHit() {
         return new CursorHit(results, params.getCursor().getSortValue(), params.getCursor().getItemId().getId());
     }
 
     /**
      * Returns a dummy hit which is immediately after the last hit we want to return.
      */
-    private ZimbraHit getEndCursorHit() {
+    private ZmailHit getEndCursorHit() {
         return new CursorHit(results, params.getCursor().getEndSortValue(), 0);
     }
 
-    static final class CursorHit extends ZimbraHit {
+    static final class CursorHit extends ZmailHit {
         private final int idCursor;
 
-        CursorHit(ZimbraQueryResults results, String sortValue, int id) {
+        CursorHit(ZmailQueryResults results, String sortValue, int id) {
             super(results, null, sortValue);
             idCursor = id;
         }

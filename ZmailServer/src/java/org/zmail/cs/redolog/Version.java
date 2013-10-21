@@ -17,7 +17,7 @@
  * Created on 2004. 8. 4.
  *
  */
-package com.zimbra.cs.redolog;
+package org.zmail.cs.redolog;
 
 import java.io.IOException;
 

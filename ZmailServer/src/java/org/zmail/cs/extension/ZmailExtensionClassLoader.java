@@ -12,7 +12,7 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.extension;
+package org.zmail.cs.extension;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -26,14 +26,14 @@ import java.util.jar.Attributes;
 import java.util.jar.JarFile;
 import java.util.jar.Manifest;
 
-import com.zimbra.common.util.ZimbraLog;
+import org.zmail.common.util.ZmailLog;
 
 /**
  * Loads an extension.
  */
-public class ZimbraExtensionClassLoader extends URLClassLoader {
+public class ZmailExtensionClassLoader extends URLClassLoader {
 
-    public static final String ZIMBRA_EXTENSION_CLASS = "Zimbra-Extension-Class";
+    public static final String ZIMBRA_EXTENSION_CLASS = "Zmail-Extension-Class";
 
     private List<String> mExtensionClassNames = new ArrayList<String>();
 
@@ -41,7 +41,7 @@ public class ZimbraExtensionClassLoader extends URLClassLoader {
      * Load classes from all jar files or directories in the directory
      * 'dir'.
      */
-    public ZimbraExtensionClassLoader(URL[] urls, ClassLoader parent) {
+    public ZmailExtensionClassLoader(URL[] urls, ClassLoader parent) {
         super(urls, parent);
         findExtensions();
     }
@@ -53,9 +53,9 @@ public class ZimbraExtensionClassLoader extends URLClassLoader {
      * @param clazz extension class name
      * @param parent parent class loader
      */
-    ZimbraExtensionClassLoader(URL url, String clazz) {
+    ZmailExtensionClassLoader(URL url, String clazz) {
         super(new URL[]{url},
-                ZimbraExtensionClassLoader.class.getClassLoader());
+                ZmailExtensionClassLoader.class.getClassLoader());
         mExtensionClassNames.add(clazz);
     }
 
@@ -99,13 +99,13 @@ public class ZimbraExtensionClassLoader extends URLClassLoader {
                 try {
                     man = new Manifest(new FileInputStream(manifestFile));
                 } catch (IOException ioe) {
-                    if (ZimbraLog.extensions.isDebugEnabled()) {
-                        ZimbraLog.extensions.debug("exception looking for manifest in directory: " + file, ioe);
+                    if (ZmailLog.extensions.isDebugEnabled()) {
+                        ZmailLog.extensions.debug("exception looking for manifest in directory: " + file, ioe);
                     }
                 }
                 if (man == null) {
-                    if (ZimbraLog.extensions.isDebugEnabled()) {
-                        ZimbraLog.extensions.debug("no manifest for directory: " + file);
+                    if (ZmailLog.extensions.isDebugEnabled()) {
+                        ZmailLog.extensions.debug("no manifest for directory: " + file);
                     }
                     return null;
                 }
@@ -116,35 +116,35 @@ public class ZimbraExtensionClassLoader extends URLClassLoader {
                 jarFile = new JarFile(file);
                 man = jarFile.getManifest();
             } catch (IOException ioe) {
-                if (ZimbraLog.extensions.isDebugEnabled()) {
-                    ZimbraLog.extensions.debug("exception looking for manifest in jar file: " + file, ioe);
+                if (ZmailLog.extensions.isDebugEnabled()) {
+                    ZmailLog.extensions.debug("exception looking for manifest in jar file: " + file, ioe);
                 }
             }
             if (man == null) {
-                if (ZimbraLog.extensions.isDebugEnabled()) {
-                    ZimbraLog.extensions.debug("no manifest for jar file: " + file);
+                if (ZmailLog.extensions.isDebugEnabled()) {
+                    ZmailLog.extensions.debug("no manifest for jar file: " + file);
                 }
                 return null;
             }
         } else {
-            ZimbraLog.extensions.warn("entry in extension load path is not file or directory: " + file);
+            ZmailLog.extensions.warn("entry in extension load path is not file or directory: " + file);
             return null;
         }
 
         Attributes attrs = man.getMainAttributes();
-        if (ZimbraLog.extensions.isDebugEnabled()) {
+        if (ZmailLog.extensions.isDebugEnabled()) {
             for (Object key : attrs.keySet()) {
                 Attributes.Name name = (Attributes.Name) key;
-                ZimbraLog.extensions.debug("Manifest attribute=" + name + " value=" + attrs.getValue(name));
+                ZmailLog.extensions.debug("Manifest attribute=" + name + " value=" + attrs.getValue(name));
             }
         }
         String classname = (String) attrs.getValue(ZIMBRA_EXTENSION_CLASS);
         if (classname == null) {
-            if (ZimbraLog.extensions.isDebugEnabled()) {
-                ZimbraLog.extensions.debug("no extension class found in manifest of: " + file);
+            if (ZmailLog.extensions.isDebugEnabled()) {
+                ZmailLog.extensions.debug("no extension class found in manifest of: " + file);
             }
         } else {
-            ZimbraLog.extensions.info("extension " + classname + " found in " + file);
+            ZmailLog.extensions.info("extension " + classname + " found in " + file);
         }
         return classname;
     }

@@ -12,17 +12,17 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.db;
+package org.zmail.cs.db;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-import com.zimbra.common.util.Log;
-import com.zimbra.common.util.LogFactory;
+import org.zmail.common.util.Log;
+import org.zmail.common.util.LogFactory;
 
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.cs.db.DbPool.DbConnection;
+import org.zmail.common.service.ServiceException;
+import org.zmail.cs.db.DbPool.DbConnection;
 
 /**
  * @since 2005. 1. 26.

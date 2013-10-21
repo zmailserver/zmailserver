@@ -12,14 +12,14 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.account;
+package org.zmail.cs.account;
 
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.common.soap.AccountConstants;
-import com.zimbra.common.soap.Element;
-import com.zimbra.common.soap.MailConstants;
-import com.zimbra.cs.mailbox.ACL;
-import com.zimbra.cs.mailbox.MailItem;
+import org.zmail.common.service.ServiceException;
+import org.zmail.common.soap.AccountConstants;
+import org.zmail.common.soap.Element;
+import org.zmail.common.soap.MailConstants;
+import org.zmail.cs.mailbox.ACL;
+import org.zmail.cs.mailbox.MailItem;
 
 public class ShareInfoData {
     // owner
@@ -257,7 +257,7 @@ public class ShareInfoData {
 
 
     public static ShareInfoData fromJaxbShareInfo(
-            com.zimbra.soap.type.ShareInfo sInfo)
+            org.zmail.soap.type.ShareInfo sInfo)
     throws ServiceException {
         ShareInfoData sid = new ShareInfoData();
 

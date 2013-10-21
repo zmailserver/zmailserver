@@ -12,7 +12,7 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.filter.jsieve;
+package org.zmail.cs.filter.jsieve;
 
 import java.util.Iterator;
 import java.util.Set;
@@ -27,9 +27,9 @@ import org.apache.jsieve.mail.MailAdapter;
 import org.apache.jsieve.tests.AbstractTest;
 
 import com.google.common.collect.ImmutableSet;
-import com.zimbra.cs.filter.FilterUtil;
-import com.zimbra.cs.filter.ZimbraMailAdapter;
-import com.zimbra.cs.mailbox.Message;
+import org.zmail.cs.filter.FilterUtil;
+import org.zmail.cs.filter.ZmailMailAdapter;
+import org.zmail.cs.mailbox.Message;
 
 /**
  * SIEVE test whether or not the message is flagged either by a SIEVE rule that was examined before the current SIEVE
@@ -78,10 +78,10 @@ public final class FlaggedTest extends AbstractTest {
     @Override
     protected boolean executeBasic(MailAdapter mail, Arguments args, SieveContext ctx) throws SieveException {
         assert(flags != null);
-        if (!(mail instanceof ZimbraMailAdapter)) {
+        if (!(mail instanceof ZmailMailAdapter)) {
             return false;
         }
-        ZimbraMailAdapter adapter = (ZimbraMailAdapter) mail;
+        ZmailMailAdapter adapter = (ZmailMailAdapter) mail;
 
         // check actions already taken by a previous filter
         for (Action action : adapter.getActions()) {

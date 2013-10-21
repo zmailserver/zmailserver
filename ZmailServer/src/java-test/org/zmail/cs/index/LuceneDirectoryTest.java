@@ -13,7 +13,7 @@
  * ***** END LICENSE BLOCK *****
  */
 
-package com.zimbra.cs.index;
+package org.zmail.cs.index;
 
 import java.io.File;
 import java.io.FileOutputStream;
@@ -25,8 +25,8 @@ import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
-import com.zimbra.common.localconfig.LC;
-import com.zimbra.cs.stats.ZimbraPerf;
+import org.zmail.common.localconfig.LC;
+import org.zmail.cs.stats.ZmailPerf;
 
 /**
  * Unit test for {@link LuceneDirectory}.
@@ -43,7 +43,7 @@ public final class LuceneDirectoryTest {
             tmpDir.mkdirs();
         }
         // make sure index perf counters are enabled.
-        LC.zimbra_index_disable_perf_counters.setDefault(false);
+        LC.zmail_index_disable_perf_counters.setDefault(false);
     }
 
     @Test
@@ -52,27 +52,27 @@ public final class LuceneDirectoryTest {
         out.write(new byte[] { 0, 1, 2, 3, 4 });
         out.close();
 
-        long count = ZimbraPerf.COUNTER_IDX_BYTES_READ.getCount();
-        long total = ZimbraPerf.COUNTER_IDX_BYTES_READ.getTotal();
+        long count = ZmailPerf.COUNTER_IDX_BYTES_READ.getCount();
+        long total = ZmailPerf.COUNTER_IDX_BYTES_READ.getTotal();
         LuceneDirectory dir = LuceneDirectory.open(tmpDir);
         IndexInput in = dir.openInput("read");
         in.readBytes(new byte[5], 0, 5);
         in.close();
-        Assert.assertEquals(1, ZimbraPerf.COUNTER_IDX_BYTES_READ.getCount() - count);
-        Assert.assertEquals(5, ZimbraPerf.COUNTER_IDX_BYTES_READ.getTotal() - total);
+        Assert.assertEquals(1, ZmailPerf.COUNTER_IDX_BYTES_READ.getCount() - count);
+        Assert.assertEquals(5, ZmailPerf.COUNTER_IDX_BYTES_READ.getTotal() - total);
     }
 
     @Test
     public void write() throws IOException {
-        long count = ZimbraPerf.COUNTER_IDX_BYTES_WRITTEN.getCount();
-        long total = ZimbraPerf.COUNTER_IDX_BYTES_WRITTEN.getTotal();
+        long count = ZmailPerf.COUNTER_IDX_BYTES_WRITTEN.getCount();
+        long total = ZmailPerf.COUNTER_IDX_BYTES_WRITTEN.getTotal();
         LuceneDirectory dir = LuceneDirectory.open(new File("/tmp"));
         IndexOutput out = dir.createOutput("write");
         out.writeBytes(new byte[] { 0, 1, 2 }, 3);
         out.close();
 
-        Assert.assertEquals(1, ZimbraPerf.COUNTER_IDX_BYTES_WRITTEN.getCount() - count);
-        Assert.assertEquals(3, ZimbraPerf.COUNTER_IDX_BYTES_WRITTEN.getTotal() - total);
+        Assert.assertEquals(1, ZmailPerf.COUNTER_IDX_BYTES_WRITTEN.getCount() - count);
+        Assert.assertEquals(3, ZmailPerf.COUNTER_IDX_BYTES_WRITTEN.getTotal() - total);
     }
 
 }

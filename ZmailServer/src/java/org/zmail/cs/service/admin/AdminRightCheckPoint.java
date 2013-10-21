@@ -12,11 +12,11 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.service.admin;
+package org.zmail.cs.service.admin;
 
 import java.util.List;
 
-import com.zimbra.cs.account.accesscontrol.AdminRight;
+import org.zmail.cs.account.accesscontrol.AdminRight;
 
 public interface AdminRightCheckPoint {
 

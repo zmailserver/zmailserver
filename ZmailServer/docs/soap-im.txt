@@ -451,7 +451,7 @@ IM NOTIFICATIONS
 // In soap header block (see soap.txt):
 //
   [<soap:Header>
-     <context xmlns="urn:zimbra">
+     <context xmlns="urn:zmail">
        ...
        <notify>
           [<deleted.../>]

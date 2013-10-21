@@ -12,23 +12,23 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.dav.caldav;
+package org.zmail.cs.dav.caldav;
 
 import java.util.GregorianCalendar;
 import java.util.TimeZone;
 
 import org.dom4j.Element;
 
-import com.zimbra.common.account.Key;
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.common.util.ZimbraLog;
-import com.zimbra.cs.account.Account;
-import com.zimbra.cs.account.Provisioning;
-import com.zimbra.cs.dav.DavElements;
-import com.zimbra.cs.mailbox.CalendarItem;
-import com.zimbra.cs.mailbox.Mailbox;
-import com.zimbra.cs.mailbox.MailboxManager;
-import com.zimbra.cs.mailbox.OperationContext;
+import org.zmail.common.account.Key;
+import org.zmail.common.service.ServiceException;
+import org.zmail.common.util.ZmailLog;
+import org.zmail.cs.account.Account;
+import org.zmail.cs.account.Provisioning;
+import org.zmail.cs.dav.DavElements;
+import org.zmail.cs.mailbox.CalendarItem;
+import org.zmail.cs.mailbox.Mailbox;
+import org.zmail.cs.mailbox.MailboxManager;
+import org.zmail.cs.mailbox.OperationContext;
 
 /**
  * draft-dusseault-caldav section 9.9.
@@ -42,8 +42,8 @@ public abstract class Range {
         try {
             Account acct = Provisioning.getInstance().get(Key.AccountBy.name, name);
             if (acct != null) {
-                mStart = acct.getTimeInterval(Provisioning.A_zimbraCalendarCalDavSyncStart, 0);
-                mEnd = acct.getTimeInterval(Provisioning.A_zimbraCalendarCalDavSyncEnd, 0);
+                mStart = acct.getTimeInterval(Provisioning.A_zmailCalendarCalDavSyncStart, 0);
+                mEnd = acct.getTimeInterval(Provisioning.A_zmailCalendarCalDavSyncEnd, 0);
             }
         } catch (ServiceException se) {
         }
@@ -140,7 +140,7 @@ public abstract class Range {
                     }
                 }
             } catch (ServiceException se) {
-                ZimbraLog.dav.warn("error getting calendar item "+itemId+" from mailbox "+mboxId, se);
+                ZmailLog.dav.warn("error getting calendar item "+itemId+" from mailbox "+mboxId, se);
             }
             return false;
         }

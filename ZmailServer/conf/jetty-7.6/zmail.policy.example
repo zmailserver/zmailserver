@@ -33,24 +33,24 @@ grant {
   permission java.io.FilePermission "/System/Library/Frameworks/JavaVM.framework/-", "read";
   permission java.io.FilePermission "/Users/-", "read";
     
-//Zimbra internals
-  permission java.io.FilePermission "${zimbra.home}/conf/-", "read";
-  permission java.io.FilePermission "${zimbra.home}/-", "read";
+//Zmail internals
+  permission java.io.FilePermission "${zmail.home}/conf/-", "read";
+  permission java.io.FilePermission "${zmail.home}/-", "read";
   permission java.io.FilePermission "im/-", "read"; //IM module in HELIX
 
-//Zimbra data
-  permission java.io.FilePermission "${zimbra.home}/log", "read,write,delete";
-  permission java.io.FilePermission "${zimbra.home}/log/-", "read,write,delete";
-  permission java.io.FilePermission "${zimbra.home}/zmstat", "read, write, delete";
-  permission java.io.FilePermission "${zimbra.home}/zmstat/-", "read, write, delete";
-  permission java.io.FilePermission "${zimbra.home}/store", "read, write, delete";
-  permission java.io.FilePermission "${zimbra.home}/store/-", "read, write, delete";
-  permission java.io.FilePermission "${zimbra.home}/index", "read, write, delete";
-  permission java.io.FilePermission "${zimbra.home}/index/-", "read, write, delete";
-  permission java.io.FilePermission "${zimbra.home}/data", "read, write, delete";
-  permission java.io.FilePermission "${zimbra.home}/data/-", "read, write, delete";
-  permission java.io.FilePermission "${zimbra.home}/redolog", "read, write, delete";
-  permission java.io.FilePermission "${zimbra.home}/redolog/-", "read, write, delete";
-  permission java.io.FilePermission "${zimbra.home}/zimlets-deployed/-", "read, write, delete";
+//Zmail data
+  permission java.io.FilePermission "${zmail.home}/log", "read,write,delete";
+  permission java.io.FilePermission "${zmail.home}/log/-", "read,write,delete";
+  permission java.io.FilePermission "${zmail.home}/zmstat", "read, write, delete";
+  permission java.io.FilePermission "${zmail.home}/zmstat/-", "read, write, delete";
+  permission java.io.FilePermission "${zmail.home}/store", "read, write, delete";
+  permission java.io.FilePermission "${zmail.home}/store/-", "read, write, delete";
+  permission java.io.FilePermission "${zmail.home}/index", "read, write, delete";
+  permission java.io.FilePermission "${zmail.home}/index/-", "read, write, delete";
+  permission java.io.FilePermission "${zmail.home}/data", "read, write, delete";
+  permission java.io.FilePermission "${zmail.home}/data/-", "read, write, delete";
+  permission java.io.FilePermission "${zmail.home}/redolog", "read, write, delete";
+  permission java.io.FilePermission "${zmail.home}/redolog/-", "read, write, delete";
+  permission java.io.FilePermission "${zmail.home}/zimlets-deployed/-", "read, write, delete";
 
 };

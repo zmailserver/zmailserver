@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="ISO-8859-1"?>
 <!--
-  Copyright (C) 2004, 2005, 2006, 2007, 2008, 2009, 2010 Zimbra, Inc.
+  Copyright (C) 2004, 2005, 2006, 2007, 2008, 2009, 2010 Zmail, Inc.
 -->
 
 <!DOCTYPE web-app
@@ -9,21 +9,21 @@
 
 <web-app>
 
-  <display-name>Zimbra Service</display-name>
+  <display-name>Zmail Service</display-name>
   <description>SOAP Service</description>
 
   <filter>
     <filter-name>DoSFilter</filter-name>
-    <filter-class>com.zimbra.cs.servlet.DoSFilter</filter-class>
+    <filter-class>org.zmail.cs.servlet.DoSFilter</filter-class>
 
     <init-param>
      <param-name>delayMs</param-name>
-     <param-value>%%zimbraHttpDosFilterDelayMillis%%</param-value>
+     <param-value>%%zmailHttpDosFilterDelayMillis%%</param-value>
     </init-param>
 
     <init-param>
      <param-name>maxRequestsPerSec</param-name>
-     <param-value>%%zimbraHttpDosFilterMaxRequestsPerSec%%</param-value>
+     <param-value>%%zmailHttpDosFilterMaxRequestsPerSec%%</param-value>
     </init-param>
 
     <init-param>
@@ -44,18 +44,18 @@
   </filter-mapping>
 
   <filter>
-    <filter-name>ZimbraQoSFilter</filter-name>
-    <filter-class>com.zimbra.cs.servlet.ZimbraQoSFilter</filter-class>
+    <filter-name>ZmailQoSFilter</filter-name>
+    <filter-class>org.zmail.cs.servlet.ZmailQoSFilter</filter-class>
   </filter>
 
   <filter-mapping>
-    <filter-name>ZimbraQoSFilter</filter-name>
+    <filter-name>ZmailQoSFilter</filter-name>
     <url-pattern>/*</url-pattern>
   </filter-mapping>
 
   <filter>
     <filter-name>ThrottlingFilter</filter-name>
-    <filter-class>com.zimbra.cs.servlet.ThrottlingFilter</filter-class>
+    <filter-class>org.zmail.cs.servlet.ThrottlingFilter</filter-class>
   </filter>
   <filter-mapping>
     <filter-name>ThrottlingFilter</filter-name>
@@ -64,7 +64,7 @@
 
   <filter>
     <filter-name>ETagHeaderFilter</filter-name>
-    <filter-class>com.zimbra.cs.servlet.ETagHeaderFilter</filter-class>
+    <filter-class>org.zmail.cs.servlet.ETagHeaderFilter</filter-class>
   </filter>
   <filter-mapping>
     <filter-name>ETagHeaderFilter</filter-name>
@@ -73,7 +73,7 @@
 
   <filter>
     <filter-name>SpnegoFilter</filter-name>
-    <filter-class>com.zimbra.cs.servlet.SpnegoFilter</filter-class>
+    <filter-class>org.zmail.cs.servlet.SpnegoFilter</filter-class>
 
     <init-param>
       <param-name>passThruOnFailureUri</param-name>
@@ -124,7 +124,7 @@
 
   <filter>
     <filter-name>SetHeaderFilter</filter-name>
-    <filter-class>com.zimbra.cs.servlet.SetHeaderFilter</filter-class>
+    <filter-class>org.zmail.cs.servlet.SetHeaderFilter</filter-class>
   </filter>
   <filter-mapping>
     <filter-name>SetHeaderFilter</filter-name>
@@ -133,10 +133,10 @@
 
   <filter>
     <filter-name>ZimletFilter</filter-name>
-    <filter-class>com.zimbra.cs.zimlet.ZimletFilter</filter-class>
+    <filter-class>org.zmail.cs.zimlet.ZimletFilter</filter-class>
     <init-param>
       <param-name>allowed.ports</param-name>
-      <param-value>%%zimbraMailPort%%, %%zimbraMailSSLPort%%, %%zimbraAdminPort%%, 7070, 7443, 7071</param-value>
+      <param-value>%%zmailMailPort%%, %%zmailMailSSLPort%%, %%zmailAdminPort%%, 7070, 7443, 7071</param-value>
     </init-param>
   </filter>
   <filter-mapping>
@@ -146,7 +146,7 @@
 
   <filter>
     <filter-name>Base64Filter</filter-name>
-    <filter-class>com.zimbra.common.filters.Base64Filter</filter-class>
+    <filter-class>org.zmail.common.filters.Base64Filter</filter-class>
   </filter>
   <filter-mapping>
     <filter-name>Base64Filter</filter-name>
@@ -159,7 +159,7 @@
 
   <filter>
     <filter-name>RequestStringFilter</filter-name>
-    <filter-class>com.zimbra.cs.servlet.RequestStringFilter</filter-class>
+    <filter-class>org.zmail.cs.servlet.RequestStringFilter</filter-class>
   </filter>
   <filter-mapping>
     <filter-name>RequestStringFilter</filter-name>
@@ -168,77 +168,77 @@
 
   <servlet>
     <servlet-name>FirstServlet</servlet-name>
-    <servlet-class>com.zimbra.cs.servlet.FirstServlet</servlet-class>
+    <servlet-class>org.zmail.cs.servlet.FirstServlet</servlet-class>
     <load-on-startup>1</load-on-startup>
   </servlet>
 
   <servlet>
     <servlet-name>ExtensionDispatcherServlet</servlet-name>
-    <servlet-class>com.zimbra.cs.extension.ExtensionDispatcherServlet</servlet-class>
+    <servlet-class>org.zmail.cs.extension.ExtensionDispatcherServlet</servlet-class>
     <load-on-startup>2</load-on-startup>
     <init-param>
       <param-name>allowed.ports</param-name>
-      <param-value>%%zimbraMailPort%%, %%zimbraMailSSLPort%%, %%zimbraAdminPort%%, 7070, 7071, 7072, 7443</param-value>
+      <param-value>%%zmailMailPort%%, %%zmailMailSSLPort%%, %%zmailAdminPort%%, 7070, 7071, 7072, 7443</param-value>
     </init-param>
   </servlet>
 
   <servlet>
     <servlet-name>SoapServlet</servlet-name>
-    <servlet-class>com.zimbra.soap.SoapServlet</servlet-class>
+    <servlet-class>org.zmail.soap.SoapServlet</servlet-class>
     <init-param>
       <param-name>allowed.ports</param-name>
-      <param-value>%%zimbraMailPort%%, %%zimbraMailSSLPort%%, 7070, 7443</param-value>
+      <param-value>%%zmailMailPort%%, %%zmailMailSSLPort%%, 7070, 7443</param-value>
     </init-param>
     <!-- User command handlers only -->
     <init-param>
       <param-name>engine.handler.0</param-name>
-      <param-value>com.zimbra.cs.service.account.AccountService</param-value>
+      <param-value>org.zmail.cs.service.account.AccountService</param-value>
     </init-param>
     <init-param>
       <param-name>engine.handler.1</param-name>
-      <param-value>com.zimbra.cs.service.mail.MailService</param-value>
+      <param-value>org.zmail.cs.service.mail.MailService</param-value>
     </init-param>
     <load-on-startup>2</load-on-startup>
   </servlet>
 
   <servlet>
     <servlet-name>AdminServlet</servlet-name>
-    <servlet-class>com.zimbra.soap.SoapServlet</servlet-class>
+    <servlet-class>org.zmail.soap.SoapServlet</servlet-class>
     <init-param>
       <param-name>allowed.ports</param-name>
-      <param-value>%%zimbraAdminPort%%, 7071</param-value>
+      <param-value>%%zmailAdminPort%%, 7071</param-value>
     </init-param>
     <!-- Admin servlet allows both admin and user commands -->
     <init-param>
       <param-name>engine.handler.0</param-name>
-      <param-value>com.zimbra.cs.service.admin.AdminService</param-value>
+      <param-value>org.zmail.cs.service.admin.AdminService</param-value>
     </init-param>
     <init-param>
       <param-name>engine.handler.1</param-name>
-      <param-value>com.zimbra.cs.service.account.AccountService</param-value>
+      <param-value>org.zmail.cs.service.account.AccountService</param-value>
     </init-param>
     <init-param>
       <param-name>engine.handler.2</param-name>
-      <param-value>com.zimbra.cs.service.mail.MailService</param-value>
+      <param-value>org.zmail.cs.service.mail.MailService</param-value>
     </init-param>
     <load-on-startup>3</load-on-startup>
   </servlet>
 
   <servlet>
     <servlet-name>WsdlServlet</servlet-name>
-    <servlet-class>com.zimbra.soap.WsdlServlet</servlet-class>
+    <servlet-class>org.zmail.soap.WsdlServlet</servlet-class>
     <init-param>
       <param-name>allowed.ports</param-name>
-      <param-value>%%zimbraMailPort%%, %%zimbraMailSSLPort%%, %%zimbraAdminPort%%, 7070, 7443, 7071</param-value>
+      <param-value>%%zmailMailPort%%, %%zmailMailSSLPort%%, %%zmailAdminPort%%, 7070, 7443, 7071</param-value>
     </init-param>
   </servlet>
 
   <servlet>
     <servlet-name>ContentServlet</servlet-name>
-    <servlet-class>com.zimbra.cs.service.ContentServlet</servlet-class>
+    <servlet-class>org.zmail.cs.service.ContentServlet</servlet-class>
     <init-param>
       <param-name>allowed.ports</param-name>
-      <param-value>%%zimbraMailPort%%, %%zimbraMailSSLPort%%, %%zimbraAdminPort%%, 7070, 7443, 7071</param-value>
+      <param-value>%%zmailMailPort%%, %%zmailMailSSLPort%%, %%zmailAdminPort%%, 7070, 7443, 7071</param-value>
     </init-param>
     <init-param>
       <param-name>errorpage.attachment.blocked</param-name>
@@ -249,10 +249,10 @@
 
   <servlet>
     <servlet-name>UserServlet</servlet-name>
-    <servlet-class>com.zimbra.cs.service.UserServlet</servlet-class>
+    <servlet-class>org.zmail.cs.service.UserServlet</servlet-class>
     <init-param>
       <param-name>allowed.ports</param-name>
-      <param-value>%%zimbraMailPort%%, %%zimbraMailSSLPort%%, %%zimbraAdminPort%%, 7070, 7443, 7071</param-value>
+      <param-value>%%zmailMailPort%%, %%zmailMailSSLPort%%, %%zmailAdminPort%%, 7070, 7443, 7071</param-value>
     </init-param>
     <init-param>
       <param-name>errorpage.attachment.blocked</param-name>
@@ -263,31 +263,31 @@
 
   <servlet>
     <servlet-name>PreAuthServlet</servlet-name>
-    <servlet-class>com.zimbra.cs.service.PreAuthServlet</servlet-class>
+    <servlet-class>org.zmail.cs.service.PreAuthServlet</servlet-class>
     <init-param>
       <param-name>allowed.ports</param-name>
-      <param-value>%%zimbraMailPort%%, %%zimbraMailSSLPort%%, %%zimbraAdminPort%%, 7070, 7443, 7071</param-value>
+      <param-value>%%zmailMailPort%%, %%zmailMailSSLPort%%, %%zmailAdminPort%%, 7070, 7443, 7071</param-value>
     </init-param>
     <load-on-startup>5</load-on-startup>
   </servlet>
 
   <servlet>
     <servlet-name>ExternalUserProvServlet</servlet-name>
-    <servlet-class>com.zimbra.cs.service.ExternalUserProvServlet</servlet-class>
+    <servlet-class>org.zmail.cs.service.ExternalUserProvServlet</servlet-class>
     <init-param>
       <param-name>allowed.ports</param-name>
-      <param-value>%%zimbraMailPort%%, %%zimbraMailSSLPort%%, %%zimbraAdminPort%%, 7070, 7443, 7071</param-value>
+      <param-value>%%zmailMailPort%%, %%zmailMailSSLPort%%, %%zmailAdminPort%%, 7070, 7443, 7071</param-value>
     </init-param>
     <load-on-startup>5</load-on-startup>
   </servlet>
 
-  <!-- HTTPSCLIENTCERTBEGIN %%uncomment VAR:zimbraMailSSLClientCertPort,-->,0%%
+  <!-- HTTPSCLIENTCERTBEGIN %%uncomment VAR:zmailMailSSLClientCertPort,-->,0%%
   <servlet>
     <servlet-name>CertAuthServlet</servlet-name>
-    <servlet-class>com.zimbra.cs.service.CertAuthServlet</servlet-class>
+    <servlet-class>org.zmail.cs.service.CertAuthServlet</servlet-class>
     <init-param>
       <param-name>allowed.ports</param-name>
-      <param-value>%%zimbraMailSSLClientCertPort%%, 9443</param-value>
+      <param-value>%%zmailMailSSLClientCertPort%%, 9443</param-value>
     </init-param>
     <init-param>
       <param-name>errorpage.forbidden</param-name>
@@ -295,111 +295,111 @@
     </init-param>
     <load-on-startup>5</load-on-startup>
   </servlet>
-  %%uncomment VAR:zimbraMailSSLClientCertPort,<!--,0%% HTTPSCLIENTCERTEND -->
+  %%uncomment VAR:zmailMailSSLClientCertPort,<!--,0%% HTTPSCLIENTCERTEND -->
 
   <servlet>
     <servlet-name>SpnegoAuthServlet</servlet-name>
-    <servlet-class>com.zimbra.cs.service.SpnegoAuthServlet</servlet-class>
+    <servlet-class>org.zmail.cs.service.SpnegoAuthServlet</servlet-class>
     <init-param>
       <param-name>allowed.ports</param-name>
-      <param-value>%%zimbraMailPort%%, %%zimbraMailSSLPort%%, %%zimbraAdminPort%%, 7070, 7443, 7071</param-value>
+      <param-value>%%zmailMailPort%%, %%zmailMailSSLPort%%, %%zmailAdminPort%%, 7070, 7443, 7071</param-value>
     </init-param>
     <load-on-startup>5</load-on-startup>
   </servlet>
 
   <servlet>
     <servlet-name>PublicICalServlet</servlet-name>
-    <servlet-class>com.zimbra.cs.service.PublicICalServlet</servlet-class>
+    <servlet-class>org.zmail.cs.service.PublicICalServlet</servlet-class>
     <init-param>
       <param-name>allowed.ports</param-name>
-      <param-value>%%zimbraMailPort%%, %%zimbraMailSSLPort%%, %%zimbraAdminPort%%, 7070, 7443, 7071</param-value>
+      <param-value>%%zmailMailPort%%, %%zmailMailSSLPort%%, %%zmailAdminPort%%, 7070, 7443, 7071</param-value>
     </init-param>
     <load-on-startup>5</load-on-startup>
   </servlet>
 
   <servlet>
     <servlet-name>FileUploadServlet</servlet-name>
-    <servlet-class>com.zimbra.cs.service.FileUploadServlet</servlet-class>
+    <servlet-class>org.zmail.cs.service.FileUploadServlet</servlet-class>
     <init-param>
       <param-name>allowed.ports</param-name>
-      <param-value>%%zimbraMailPort%%, %%zimbraMailSSLPort%%, %%zimbraAdminPort%%, 7070, 7443, 7071</param-value>
+      <param-value>%%zmailMailPort%%, %%zmailMailSSLPort%%, %%zmailAdminPort%%, 7070, 7443, 7071</param-value>
     </init-param>
     <load-on-startup>6</load-on-startup>
   </servlet>
 
   <servlet>
     <servlet-name>StatsImageServlet</servlet-name>
-    <servlet-class>com.zimbra.cs.service.admin.StatsImageServlet</servlet-class>
+    <servlet-class>org.zmail.cs.service.admin.StatsImageServlet</servlet-class>
     <init-param>
       <param-name>allowed.ports</param-name>
-      <param-value>%%zimbraAdminPort%%, 7071</param-value>
+      <param-value>%%zmailAdminPort%%, 7071</param-value>
     </init-param>
     <load-on-startup>7</load-on-startup>
   </servlet>
 
   <servlet>
     <servlet-name>ProxyServlet</servlet-name>
-    <servlet-class>com.zimbra.cs.zimlet.ProxyServlet</servlet-class>
+    <servlet-class>org.zmail.cs.zimlet.ProxyServlet</servlet-class>
     <init-param>
       <param-name>allowed.ports</param-name>
-      <param-value>%%zimbraMailPort%%, %%zimbraMailSSLPort%%, 7070</param-value>
+      <param-value>%%zmailMailPort%%, %%zmailMailSSLPort%%, 7070</param-value>
     </init-param>
     <load-on-startup>8</load-on-startup>
   </servlet>
 
   <servlet>
     <servlet-name>DavServlet</servlet-name>
-    <servlet-class>com.zimbra.cs.dav.service.DavServlet</servlet-class>
+    <servlet-class>org.zmail.cs.dav.service.DavServlet</servlet-class>
     <init-param>
       <param-name>allowed.ports</param-name>
-      <param-value>%%zimbraMailPort%%, %%zimbraMailSSLPort%%, 7070</param-value>
+      <param-value>%%zmailMailPort%%, %%zmailMailSSLPort%%, 7070</param-value>
     </init-param>
     <load-on-startup>9</load-on-startup>
   </servlet>
 
   <servlet>
     <servlet-name>DavWellKnownServlet</servlet-name>
-    <servlet-class>com.zimbra.cs.dav.service.DavWellKnownServlet</servlet-class>
+    <servlet-class>org.zmail.cs.dav.service.DavWellKnownServlet</servlet-class>
     <init-param>
       <param-name>allowed.ports</param-name>
-      <param-value>%%zimbraMailPort%%, %%zimbraMailSSLPort%%, 7070</param-value>
+      <param-value>%%zmailMailPort%%, %%zmailMailSSLPort%%, 7070</param-value>
     </init-param>
     <load-on-startup>9</load-on-startup>
   </servlet>
 
   <servlet>
-    <servlet-name>CollectLDAPConfigZimbra</servlet-name>
-    <servlet-class>com.zimbra.cs.service.admin.CollectLDAPConfigZimbra</servlet-class>
+    <servlet-name>CollectLDAPConfigZmail</servlet-name>
+    <servlet-class>org.zmail.cs.service.admin.CollectLDAPConfigZmail</servlet-class>
     <init-param>
       <param-name>allowed.ports</param-name>
-      <param-value>%%zimbraAdminPort%%, 7071</param-value>
+      <param-value>%%zmailAdminPort%%, 7071</param-value>
     </init-param>
   </servlet>
 
    <servlet>
     <servlet-name>AdminFileDownload</servlet-name>
-    <servlet-class>com.zimbra.cs.service.admin.AdminFileDownload</servlet-class>
+    <servlet-class>org.zmail.cs.service.admin.AdminFileDownload</servlet-class>
     <init-param>
       <param-name>allowed.ports</param-name>
-      <param-value>%%zimbraAdminPort%%, 7071</param-value>
+      <param-value>%%zmailAdminPort%%, 7071</param-value>
     </init-param>
   </servlet>
 
   <servlet>
     <servlet-name>CollectConfigFiles</servlet-name>
-    <servlet-class>com.zimbra.cs.service.admin.CollectConfigFiles</servlet-class>
+    <servlet-class>org.zmail.cs.service.admin.CollectConfigFiles</servlet-class>
     <init-param>
       <param-name>allowed.ports</param-name>
-      <param-value>%%zimbraAdminPort%%, 7071</param-value>
+      <param-value>%%zmailAdminPort%%, 7071</param-value>
     </init-param>
   </servlet>
 
   <servlet>
     <servlet-name>ZimletResources</servlet-name>
-    <servlet-class>com.zimbra.cs.zimlet.ZimletResources</servlet-class>
+    <servlet-class>org.zmail.cs.zimlet.ZimletResources</servlet-class>
     <init-param>
       <param-name>allowed.ports</param-name>
-      <param-value>%%zimbraMailPort%%, %%zimbraMailSSLPort%%, %%zimbraAdminPort%%, 7070, 7443, 7071</param-value>
+      <param-value>%%zmailMailPort%%, %%zmailMailSSLPort%%, %%zmailAdminPort%%, 7070, 7443, 7071</param-value>
     </init-param>
   <!--
   <init-param>
@@ -424,16 +424,16 @@
 
   <servlet>
     <servlet-name>RobotsServlet</servlet-name>
-    <servlet-class>com.zimbra.cs.servlet.RobotsServlet</servlet-class>
+    <servlet-class>org.zmail.cs.servlet.RobotsServlet</servlet-class>
     <load-on-startup>11</load-on-startup>
   </servlet>
 
   <servlet>
     <servlet-name>AutoDiscoverServlet</servlet-name>
-    <servlet-class>com.zimbra.cs.service.AutoDiscoverServlet</servlet-class>
+    <servlet-class>org.zmail.cs.service.AutoDiscoverServlet</servlet-class>
     <init-param>
       <param-name>allowed.ports</param-name>
-      <param-value>%%zimbraMailPort%%, %%zimbraMailSSLPort%%, %%zimbraAdminPort%%, 7070, 7443</param-value>
+      <param-value>%%zmailMailPort%%, %%zmailMailSSLPort%%, %%zmailAdminPort%%, 7070, 7443</param-value>
     </init-param>
     <load-on-startup>12</load-on-startup>
   </servlet>
@@ -493,7 +493,7 @@
     <url-pattern>/extuserprov/*</url-pattern>
   </servlet-mapping>
 
-  <!-- HTTPSCLIENTCERTBEGIN %%uncomment VAR:zimbraMailSSLClientCertPort,-->,0%%
+  <!-- HTTPSCLIENTCERTBEGIN %%uncomment VAR:zmailMailSSLClientCertPort,-->,0%%
   <servlet-mapping>
     <servlet-name>CertAuthServlet</servlet-name>
     <url-pattern>/certauth/*</url-pattern>
@@ -503,7 +503,7 @@
     <servlet-name>CertAuthServlet</servlet-name>
     <url-pattern>/certauth</url-pattern>
   </servlet-mapping>
-  %%uncomment VAR:zimbraMailSSLClientCertPort,<!--,0%% HTTPSCLIENTCERTEND -->
+  %%uncomment VAR:zmailMailSSLClientCertPort,<!--,0%% HTTPSCLIENTCERTEND -->
 
   <servlet-mapping>
     <servlet-name>SpnegoAuthServlet</servlet-name>
@@ -531,7 +531,7 @@
   </servlet-mapping>
 
   <servlet-mapping>
-    <servlet-name>CollectLDAPConfigZimbra</servlet-name>
+    <servlet-name>CollectLDAPConfigZmail</servlet-name>
     <url-pattern>/collectldapconfig/*</url-pattern>
   </servlet-mapping>
 
@@ -633,7 +633,7 @@
     <url-pattern>/0/files/*</url-pattern>
   </servlet-mapping>
 
-  <!-- HTTPSBEGIN %%comment VAR:zimbraMailMode,-->,https,redirect%%
+  <!-- HTTPSBEGIN %%comment VAR:zmailMailMode,-->,https,redirect%%
      <security-constraint>
         <web-resource-collection>
         <web-resource-name>force https</web-resource-name>
@@ -679,5 +679,5 @@
             <transport-guarantee>CONFIDENTIAL</transport-guarantee>
         </user-data-constraint>
     </security-constraint>
-  %%comment VAR:zimbraMailMode,<!--,https,redirect%% HTTPSEND -->
+  %%comment VAR:zmailMailMode,<!--,https,redirect%% HTTPSEND -->
 </web-app>

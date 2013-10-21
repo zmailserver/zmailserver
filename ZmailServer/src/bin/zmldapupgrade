@@ -13,7 +13,7 @@
 # basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
 # ***** END LICENSE BLOCK *****
 # 
-source /opt/zimbra/bin/zmshutil || exit 1
-zmsetvars -f zimbra_home
+source /opt/zmail/bin/zmshutil || exit 1
+zmsetvars -f zmail_home
 
-exec `dirname $0`/zmjava com.zimbra.cs.account.ldap.upgrade.LdapUpgrade "$@"
+exec `dirname $0`/zmjava org.zmail.cs.account.ldap.upgrade.LdapUpgrade "$@"

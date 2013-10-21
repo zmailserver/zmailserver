@@ -12,7 +12,7 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.mime;
+package org.zmail.cs.mime;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -83,8 +83,8 @@ public final class ParsedAddressTest {
         //    .runAddressTest("MRS JENNIFER PETERS <jenniferpeters2000@example.com>");
         new Helper("mis-quoted address").first("ymskjetuiuod@example.ru")
             .runAddressTest("\" <ymskjetuiuod@example.ru>");
-        new Helper("oddball quoting").first("PROFECO@dogfood.zimbra.com")
-            .runAddressTest("\":PROFECO\"@dogfood.zimbra.com: <buzon@example.mx>");
+        new Helper("oddball quoting").first("PROFECO@dogfood.zmail.com")
+            .runAddressTest("\":PROFECO\"@dogfood.zmail.com: <buzon@example.mx>");
         new Helper("inlined slash as delimiter").first("\u6E1B\u80A5")
             .runAddressTest("\"=?BIG5?B?tO6qzi+rT7C3pOiqa7Ddp9o=?=\" <whyslim4@example.com>");
         new Helper("embedded quoted 2047").first("Francisco").last("Gon\u00E7alves")
@@ -183,10 +183,10 @@ public final class ParsedAddressTest {
     @Test
     public void getSortString() {
         List<ParsedAddress> addrs = new ArrayList<ParsedAddress>();
-        addrs.add(new ParsedAddress("user1 <user1@zimbra.com>"));
-        addrs.add(new ParsedAddress("user2@zimbra.com"));
-        addrs.add(new ParsedAddress("user3 <user3@zimbra.com>"));
-        Assert.assertEquals("user1, user2@zimbra.com, user3", ParsedAddress.getSortString(addrs));
+        addrs.add(new ParsedAddress("user1 <user1@zmail.com>"));
+        addrs.add(new ParsedAddress("user2@zmail.com"));
+        addrs.add(new ParsedAddress("user3 <user3@zmail.com>"));
+        Assert.assertEquals("user1, user2@zmail.com, user3", ParsedAddress.getSortString(addrs));
     }
 
     private void runNameSuite(String first, String last) {

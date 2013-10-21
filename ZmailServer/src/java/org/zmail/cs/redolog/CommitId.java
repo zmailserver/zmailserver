@@ -13,10 +13,10 @@
  * ***** END LICENSE BLOCK *****
  */
 
-package com.zimbra.cs.redolog;
+package org.zmail.cs.redolog;
 
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.cs.redolog.op.CommitTxn;
+import org.zmail.common.service.ServiceException;
+import org.zmail.cs.redolog.op.CommitTxn;
 
 /**
  * CommitId consists of redolog sequence number and TransactionId of a

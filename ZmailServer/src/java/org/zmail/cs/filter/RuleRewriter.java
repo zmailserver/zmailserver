@@ -12,7 +12,7 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.filter;
+package org.zmail.cs.filter;
 
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -31,22 +31,22 @@ import org.apache.jsieve.parser.generated.ASTstring_list;
 import org.apache.jsieve.parser.generated.ASTtest;
 import org.apache.jsieve.parser.generated.Node;
 
-import com.zimbra.client.ZFolder;
-import com.zimbra.client.ZMailbox;
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.common.soap.Element;
-import com.zimbra.common.soap.Element.ElementFactory;
-import com.zimbra.common.soap.MailConstants;
-import com.zimbra.common.util.Pair;
-import com.zimbra.common.util.StringUtil;
-import com.zimbra.common.util.ZimbraLog;
-import com.zimbra.cs.mailbox.Folder;
-import com.zimbra.cs.mailbox.MailItem;
-import com.zimbra.cs.mailbox.MailServiceException;
-import com.zimbra.cs.mailbox.Mailbox;
-import com.zimbra.cs.mailbox.Mountpoint;
-import com.zimbra.cs.mailbox.Tag;
-import com.zimbra.cs.service.util.ItemId;
+import org.zmail.client.ZFolder;
+import org.zmail.client.ZMailbox;
+import org.zmail.common.service.ServiceException;
+import org.zmail.common.soap.Element;
+import org.zmail.common.soap.Element.ElementFactory;
+import org.zmail.common.soap.MailConstants;
+import org.zmail.common.util.Pair;
+import org.zmail.common.util.StringUtil;
+import org.zmail.common.util.ZmailLog;
+import org.zmail.cs.mailbox.Folder;
+import org.zmail.cs.mailbox.MailItem;
+import org.zmail.cs.mailbox.MailServiceException;
+import org.zmail.cs.mailbox.Mailbox;
+import org.zmail.cs.mailbox.Mountpoint;
+import org.zmail.cs.mailbox.Tag;
+import org.zmail.cs.service.util.ItemId;
 
 /**
  * Rewrites a parsed Sieve tree to XML or vice versa.
@@ -490,7 +490,7 @@ public class RuleRewriter {
                 } catch (MailServiceException.NoSuchItemException e) {
                     // create tag
                     mMailbox.createTag(null, argVal, Tag.DEFAULT_COLOR);
-                    ZimbraLog.filter.info("Created tag " + argVal + " referenced in rule \"" + ruleName + "\"");
+                    ZmailLog.filter.info("Created tag " + argVal + " referenced in rule \"" + ruleName + "\"");
                 }
             }
             sb.append(" \"").append(argVal).append("\"");
@@ -511,7 +511,7 @@ public class RuleRewriter {
         if (folder instanceof Mountpoint && remotePath != null) {
             // Create remote folder path
             Mountpoint mountpoint = (Mountpoint) folder;
-            ZimbraLog.filter.info("Creating folder %s in remote folder %s for rule %s.",
+            ZmailLog.filter.info("Creating folder %s in remote folder %s for rule %s.",
                 remotePath, folder.getPath(), ruleName);
             ZMailbox remoteMbox = FilterUtil.getRemoteZMailbox(mMailbox, (Mountpoint) folder);
             ItemId id = mountpoint.getTarget();
@@ -534,7 +534,7 @@ public class RuleRewriter {
             }
         } else if (remotePath != null) {
             // Create local folder path
-            ZimbraLog.filter.info("Creating folder %s for rule %s.", path, ruleName);
+            ZmailLog.filter.info("Creating folder %s for rule %s.", path, ruleName);
             mMailbox.createFolder(null, path, new Folder.FolderOptions().setDefaultView(MailItem.Type.MESSAGE));
         }
     }

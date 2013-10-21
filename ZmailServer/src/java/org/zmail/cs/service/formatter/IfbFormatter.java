@@ -12,7 +12,7 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.service.formatter;
+package org.zmail.cs.service.formatter;
 
 import java.io.IOException;
 import java.util.EnumSet;
@@ -20,20 +20,20 @@ import java.util.Set;
 
 import javax.servlet.http.HttpServletResponse;
 
-import com.zimbra.common.localconfig.LC;
-import com.zimbra.common.mime.MimeConstants;
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.common.util.Constants;
-import com.zimbra.cs.account.IDNUtil;
-import com.zimbra.cs.account.Provisioning;
-import com.zimbra.cs.fb.FreeBusy;
-import com.zimbra.cs.mailbox.Appointment;
-import com.zimbra.cs.mailbox.CalendarItem;
-import com.zimbra.cs.mailbox.MailItem;
-import com.zimbra.cs.service.UserServlet;
-import com.zimbra.cs.service.UserServletContext;
-import com.zimbra.cs.service.UserServletException;
-import com.zimbra.cs.service.formatter.FormatterFactory.FormatType;
+import org.zmail.common.localconfig.LC;
+import org.zmail.common.mime.MimeConstants;
+import org.zmail.common.service.ServiceException;
+import org.zmail.common.util.Constants;
+import org.zmail.cs.account.IDNUtil;
+import org.zmail.cs.account.Provisioning;
+import org.zmail.cs.fb.FreeBusy;
+import org.zmail.cs.mailbox.Appointment;
+import org.zmail.cs.mailbox.CalendarItem;
+import org.zmail.cs.mailbox.MailItem;
+import org.zmail.cs.service.UserServlet;
+import org.zmail.cs.service.UserServletContext;
+import org.zmail.cs.service.UserServletException;
+import org.zmail.cs.service.formatter.FormatterFactory.FormatType;
 
 public class IfbFormatter extends Formatter {
 
@@ -117,7 +117,7 @@ public class IfbFormatter extends Formatter {
         String domain = null;
         if (index == -1) {
             // domain is already in ASCII name
-            domain = Provisioning.getInstance().getConfig().getAttr(Provisioning.A_zimbraDefaultDomainName, null);
+            domain = Provisioning.getInstance().getConfig().getAttr(Provisioning.A_zmailDefaultDomainName, null);
             if (domain != null)
                 emailAddress = emailAddress + "@" + domain;
         } else

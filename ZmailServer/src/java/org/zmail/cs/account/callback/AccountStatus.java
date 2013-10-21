@@ -13,20 +13,20 @@
  * ***** END LICENSE BLOCK *****
  */
 
-package com.zimbra.cs.account.callback;
+package org.zmail.cs.account.callback;
 
 import java.util.Map;
 import java.util.Set;
 
-import com.zimbra.common.account.Key;
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.common.util.ZimbraLog;
-import com.zimbra.cs.account.Account;
-import com.zimbra.cs.account.AccountServiceException;
-import com.zimbra.cs.account.AttributeCallback;
-import com.zimbra.cs.account.DistributionList;
-import com.zimbra.cs.account.Entry;
-import com.zimbra.cs.account.Provisioning;
+import org.zmail.common.account.Key;
+import org.zmail.common.service.ServiceException;
+import org.zmail.common.util.ZmailLog;
+import org.zmail.cs.account.Account;
+import org.zmail.cs.account.AccountServiceException;
+import org.zmail.cs.account.AttributeCallback;
+import org.zmail.cs.account.DistributionList;
+import org.zmail.cs.account.Entry;
+import org.zmail.cs.account.Provisioning;
 
 public class AccountStatus extends AttributeCallback {
 
@@ -44,22 +44,22 @@ public class AccountStatus extends AttributeCallback {
 
         SingleValueMod mod = singleValueMod(attrName, value);
         if (mod.unsetting())
-            throw ServiceException.INVALID_REQUEST(Provisioning.A_zimbraAccountStatus+" is a required attribute", null);
+            throw ServiceException.INVALID_REQUEST(Provisioning.A_zmailAccountStatus+" is a required attribute", null);
         else
             status = mod.value();
 
         if (status.equals(Provisioning.ACCOUNT_STATUS_CLOSED) || status.equals(Provisioning.ACCOUNT_STATUS_PENDING)) {
-            attrsToModify.put(Provisioning.A_zimbraMailStatus, Provisioning.MAIL_STATUS_DISABLED);
-        } else if (attrsToModify.get(Provisioning.A_zimbraMailStatus) == null) {
-            // the request is not also changing zimbraMailStatus, set = zimbraMailStatus to enabled
-            attrsToModify.put(Provisioning.A_zimbraMailStatus, Provisioning.MAIL_STATUS_ENABLED);
+            attrsToModify.put(Provisioning.A_zmailMailStatus, Provisioning.MAIL_STATUS_DISABLED);
+        } else if (attrsToModify.get(Provisioning.A_zmailMailStatus) == null) {
+            // the request is not also changing zmailMailStatus, set = zmailMailStatus to enabled
+            attrsToModify.put(Provisioning.A_zmailMailStatus, Provisioning.MAIL_STATUS_ENABLED);
         }
 
         if ((entry instanceof Account) && (status.equals(Provisioning.ACCOUNT_STATUS_ACTIVE))) {
-            if (entry.getAttr(Provisioning.A_zimbraPasswordLockoutFailureTime, null) != null)
-                attrsToModify.put(Provisioning.A_zimbraPasswordLockoutFailureTime, "");
-            if (entry.getAttr(Provisioning.A_zimbraPasswordLockoutLockedTime, null) != null)
-                attrsToModify.put(Provisioning.A_zimbraPasswordLockoutLockedTime, "");
+            if (entry.getAttr(Provisioning.A_zmailPasswordLockoutFailureTime, null) != null)
+                attrsToModify.put(Provisioning.A_zmailPasswordLockoutFailureTime, "");
+            if (entry.getAttr(Provisioning.A_zmailPasswordLockoutLockedTime, null) != null)
+                attrsToModify.put(Provisioning.A_zmailPasswordLockoutLockedTime, "");
         }
     }
 
@@ -76,7 +76,7 @@ public class AccountStatus extends AttributeCallback {
                     handleAccountStatusClosed((Account)entry);
                 } catch (ServiceException se) {
                     // all exceptions are already swallowed by LdapProvisioning, just to be safe here.
-                    ZimbraLog.account.warn("unable to remove account address and aliases from all DLs for closed account", se);
+                    ZmailLog.account.warn("unable to remove account address and aliases from all DLs for closed account", se);
                     return;
                 }
             }
@@ -88,7 +88,7 @@ public class AccountStatus extends AttributeCallback {
         String status = account.getAccountStatus(prov);
 
         if (status.equals(Provisioning.ACCOUNT_STATUS_CLOSED)) {
-            ZimbraLog.misc.info("removing account address and all its aliases from all distribution lists");
+            ZmailLog.misc.info("removing account address and all its aliases from all distribution lists");
 
             String[] addrToRemove = new String[] {account.getName()};
 
@@ -101,7 +101,7 @@ public class AccountStatus extends AttributeCallback {
                         prov.removeMembers(dl, addrToRemove);
                     } catch (ServiceException se) {
                         if (AccountServiceException.NO_SUCH_MEMBER.equals(se.getCode())) {
-                            ZimbraLog.misc.debug("Member not found in dlist; skipping", se);
+                            ZmailLog.misc.debug("Member not found in dlist; skipping", se);
                         } else {
                             throw se;
                         }

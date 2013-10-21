@@ -13,17 +13,17 @@
  * ***** END LICENSE BLOCK *****
  */
 
-package com.zimbra.cs.redolog.op;
+package org.zmail.cs.redolog.op;
 
 import java.io.IOException;
 
 import com.google.common.base.Objects;
-import com.zimbra.cs.mailbox.MailboxOperation;
-import com.zimbra.cs.redolog.RedoLogInput;
-import com.zimbra.cs.redolog.RedoLogOutput;
-import com.zimbra.cs.volume.Volume;
-import com.zimbra.cs.volume.VolumeManager;
-import com.zimbra.cs.volume.VolumeServiceException;
+import org.zmail.cs.mailbox.MailboxOperation;
+import org.zmail.cs.redolog.RedoLogInput;
+import org.zmail.cs.redolog.RedoLogOutput;
+import org.zmail.cs.volume.Volume;
+import org.zmail.cs.volume.VolumeManager;
+import org.zmail.cs.volume.VolumeServiceException;
 
 public final class CreateVolume extends RedoableOp {
 

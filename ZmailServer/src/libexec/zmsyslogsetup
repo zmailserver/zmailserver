@@ -13,8 +13,8 @@
 # basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
 # ***** END LICENSE BLOCK *****
 use strict;
-use lib '/opt/zimbra/zimbramon/lib';
-use Zimbra::Util::Common;
+use lib '/opt/zmail/zmailmon/lib';
+use Zmail::Util::Common;
 
 use File::Path;
 use File::Copy qw/ cp mv /;
@@ -30,29 +30,29 @@ if ( $id ne "root" ) {
   exit 1;
 }
 
-my $platform=`/opt/zimbra/libexec/get_plat_tag.sh`;
+my $platform=`/opt/zmail/libexec/get_plat_tag.sh`;
 chomp($platform);
 
-my $zimbra_tmp_directory=getLocalConfig("zimbra_tmp_directory");
+my $zmail_tmp_directory=getLocalConfig("zmail_tmp_directory");
 
-my ($uid,$gid) = (getpwnam('zimbra'))[2,3];
-if ( !-d $zimbra_tmp_directory ) {
-  File::Path::mkpath("$zimbra_tmp_directory");
-  chown $uid, $gid, $zimbra_tmp_directory;
+my ($uid,$gid) = (getpwnam('zmail'))[2,3];
+if ( !-d $zmail_tmp_directory ) {
+  File::Path::mkpath("$zmail_tmp_directory");
+  chown $uid, $gid, $zmail_tmp_directory;
 }
 
-my $logfile = "-/var/log/zimbra.log";
-my $statsfile = "-/var/log/zimbra-stats.log";
+my $logfile = "-/var/log/zmail.log";
+my $statsfile = "-/var/log/zmail-stats.log";
 my $LOCALHOST ||= (gethostbyname(Sys::Hostname::hostname))[0];
 
 if ( $platform =~ /MACOSX/ ) {
-  $logfile="/var/log/zimbra.log";
-  $statsfile="/var/log/zimbra-stats.log";
+  $logfile="/var/log/zmail.log";
+  $statsfile="/var/log/zmail-stats.log";
 }
 
 my $junk;
 my $TYPE;
-my $LOGHOST=`su - zimbra -c '/opt/zimbra/bin/zmprov -m -l gacf zimbraLogHostname'`;
+my $LOGHOST=`su - zmail -c '/opt/zmail/bin/zmprov -m -l gacf zmailLogHostname'`;
 
 if ( $LOGHOST eq "" ) {
   $TYPE="local";
@@ -98,7 +98,7 @@ sub updateSyslogNG {
   }
 
   # create a safe temp file and make sure we have enough space to fill it
-  my (undef, $tmpfile) = tempfile("syslog-ng.conf.XXXX", DIR=>"$zimbra_tmp_directory",  OPEN=>0);
+  my (undef, $tmpfile) = tempfile("syslog-ng.conf.XXXX", DIR=>"$zmail_tmp_directory",  OPEN=>0);
   cp($syslogconf, $tmpfile);
   if ( -s $tmpfile ) {
     print "updateSyslogNG: Updating $syslogconf...";
@@ -112,15 +112,15 @@ sub updateSyslogNG {
 
   my $flocal=0;
   while (<SYSFH>) {
-    if ($_ !~ /zimbra/ || $_ =~ /not filter\(zimbra/) {
+    if ($_ !~ /zmail/ || $_ =~ /not filter\(zmail/) {
       if( $platform =~ "SLES" || $platform eq "SuSEES10" ) {
         if ($flocal) {
           $flocal=0;
           if ($_ =~ /, local7\); };/) {
             $_ =~ s/, local7\); };/, local7) and not/;
             print TMPFH $_;
-            print TMPFH "                               filter(f_iptables) and not filter(zimbra_local0) and not filter(zimbra_local1)\n";
-            print TMPFH "                               and not filter(zimbra_auth) and not filter(zimbra_mail); };\n";
+            print TMPFH "                               filter(f_iptables) and not filter(zmail_local0) and not filter(zmail_local1)\n";
+            print TMPFH "                               and not filter(zmail_auth) and not filter(zmail_mail); };\n";
             next;
           }
         }
@@ -131,8 +131,8 @@ sub updateSyslogNG {
           if ($_ =~ /not filter\(f_iptables\); };/) {
             $_ =~ s/filter\(f_iptables\); };/filter\(f_iptables) and/;
             print TMPFH $_;
-            print TMPFH "                               not filter(zimbra_local0) and not filter(zimbra_local1) and not\n";
-            print TMPFH "                               filter(zimbra_auth) and not filter(zimbra_mail); };\n";
+            print TMPFH "                               not filter(zmail_local0) and not filter(zmail_local1) and not\n";
+            print TMPFH "                               filter(zmail_auth) and not filter(zmail_mail); };\n";
             next;
           }
         }
@@ -141,35 +141,35 @@ sub updateSyslogNG {
     }
   }
   close(SYSFH);
-  my $zsrc = "zimbra_src";
+  my $zsrc = "zmail_src";
   if ( $platform eq "SLES11_64" || $platform eq "SLES11" || $platform eq "SuSEES10" || $platform eq "SLES10_64" ) {
     #use native src on SLES11_64
     $zsrc="src";
   } elsif ( $platform eq "RHEL5" || $platform eq "RHEL5_64" || $platform eq "CentOS5" || $platform eq "CentOS5_64") {
     $zsrc="s_sys";
   } else {
-    print TMPFH "source zimbra_src {  unix-stream(\"/dev/log\" keep-alive(yes) max-connections(128)); }; # zimbra\n";
+    print TMPFH "source zmail_src {  unix-stream(\"/dev/log\" keep-alive(yes) max-connections(128)); }; # zmail\n";
   }
-  print TMPFH "filter zimbra_local0 { facility(local0); }; # zimbra\n";
-  print TMPFH "filter zimbra_local1 { facility(local1); }; # zimbra\n";
-  print TMPFH "filter zimbra_auth { facility(auth); }; # zimbra\n";
-  print TMPFH "filter zimbra_mail { facility(mail); }; # zimbra\n";
+  print TMPFH "filter zmail_local0 { facility(local0); }; # zmail\n";
+  print TMPFH "filter zmail_local1 { facility(local1); }; # zmail\n";
+  print TMPFH "filter zmail_auth { facility(auth); }; # zmail\n";
+  print TMPFH "filter zmail_mail { facility(mail); }; # zmail\n";
   if ( $TYPE eq "local" ) {
-    print TMPFH "destination zimbra_mail { file(\"/var/log/zimbra.log\" owner(\"zimbra\")); }; # zimbra\n";
-    print TMPFH "destination zimbra_local1 { file(\"/var/log/zimbra-stats.log\" owner(\"zimbra\")); }; # zimbra\n";
-    print TMPFH "destination zimbra_local0 { file(\"/var/log/zimbra.log\" owner(\"zimbra\")); }; # zimbra\n";
-    print TMPFH "destination zimbra_auth { file(\"/var/log/zimbra.log\" owner(\"zimbra\")); }; # zimbra\n";
+    print TMPFH "destination zmail_mail { file(\"/var/log/zmail.log\" owner(\"zmail\")); }; # zmail\n";
+    print TMPFH "destination zmail_local1 { file(\"/var/log/zmail-stats.log\" owner(\"zmail\")); }; # zmail\n";
+    print TMPFH "destination zmail_local0 { file(\"/var/log/zmail.log\" owner(\"zmail\")); }; # zmail\n";
+    print TMPFH "destination zmail_auth { file(\"/var/log/zmail.log\" owner(\"zmail\")); }; # zmail\n";
   } else {
     my $remoteIp=inet_ntoa(scalar(gethostbyname($LOGHOST)));
-    print TMPFH "destination zimbra_mail { udp(\"$remoteIp\" port(514) ); }; # zimbra\n";
-    print TMPFH "destination zimbra_local1 { udp(\"$remoteIp\" port(514) ); }; # zimbra\n";
-    print TMPFH "destination zimbra_local0 { udp(\"$remoteIp\" port(514) ); }; # zimbra\n";
-    print TMPFH "destination zimbra_auth { udp(\"$remoteIp\" port(514) ); }; # zimbra\n";
+    print TMPFH "destination zmail_mail { udp(\"$remoteIp\" port(514) ); }; # zmail\n";
+    print TMPFH "destination zmail_local1 { udp(\"$remoteIp\" port(514) ); }; # zmail\n";
+    print TMPFH "destination zmail_local0 { udp(\"$remoteIp\" port(514) ); }; # zmail\n";
+    print TMPFH "destination zmail_auth { udp(\"$remoteIp\" port(514) ); }; # zmail\n";
   }
-  print TMPFH "log { source($zsrc); filter(zimbra_mail); destination(zimbra_mail); }; # zimbra\n";
-  print TMPFH "log { source($zsrc); filter(zimbra_local0); destination(zimbra_local0); }; # zimbra\n";
-  print TMPFH "log { source($zsrc); filter(zimbra_local1); destination(zimbra_local1); }; # zimbra\n";
-  print TMPFH "log { source($zsrc); filter(zimbra_auth); destination(zimbra_auth); }; # zimbra\n";
+  print TMPFH "log { source($zsrc); filter(zmail_mail); destination(zmail_mail); }; # zmail\n";
+  print TMPFH "log { source($zsrc); filter(zmail_local0); destination(zmail_local0); }; # zmail\n";
+  print TMPFH "log { source($zsrc); filter(zmail_local1); destination(zmail_local1); }; # zmail\n";
+  print TMPFH "log { source($zsrc); filter(zmail_auth); destination(zmail_auth); }; # zmail\n";
 
   close(TMPFH);
 
@@ -191,27 +191,27 @@ sub updateSyslogNG {
     }
   };
   mv($tmpfile, $syslogconf);
-  if ( -f "/etc/logrotate.d/zimbra" ) {
+  if ( -f "/etc/logrotate.d/zmail" ) {
     local $^I="~";
-    local @ARGV="/etc/logrotate.d/zimbra";
+    local @ARGV="/etc/logrotate.d/zmail";
     while (<>) {
       s/syslogd/syslog-ng/;
-      s/USER/zimbra/;
-      s/GROUP/zimbra/;
+      s/USER/zmail/;
+      s/GROUP/zmail/;
       print;
     }
   }
-  if ( !-f "/var/log/zimbra.log") {
-    open(my $tlog, ">/var/log/zimbra.log");
+  if ( !-f "/var/log/zmail.log") {
+    open(my $tlog, ">/var/log/zmail.log");
   }
-  if ( !-f "/var/log/zimbra-stats.log") {
-    open(my $tlog, ">/var/log/zimbra-stats.log");
+  if ( !-f "/var/log/zmail-stats.log") {
+    open(my $tlog, ">/var/log/zmail-stats.log");
   }
-  chown $uid,$gid,"/var/log/zimbra.log";
-  chown $uid,$gid,"/var/log/zimbra-stats.log";
-  chmod 0644, "/var/log/zimbra.log", "/var/log/zimbra-stats.log";
-  if ( -f "/etc/logrotate.d/zimbra~" ){
-    unlink("/etc/logrotate.d/zimbra~" );
+  chown $uid,$gid,"/var/log/zmail.log";
+  chown $uid,$gid,"/var/log/zmail-stats.log";
+  chmod 0644, "/var/log/zmail.log", "/var/log/zmail-stats.log";
+  if ( -f "/etc/logrotate.d/zmail~" ){
+    unlink("/etc/logrotate.d/zmail~" );
   }
   print "done.\n"
 }
@@ -231,7 +231,7 @@ sub updateSyslog {
   }
 
   # create a safe temp file and make sure we have enough space to fill it
-  my (undef, $tmpfile) = tempfile("syslog.conf.XXXX", DIR=>"$zimbra_tmp_directory",  OPEN=>0);
+  my (undef, $tmpfile) = tempfile("syslog.conf.XXXX", DIR=>"$zmail_tmp_directory",  OPEN=>0);
   cp($syslogconf,$tmpfile);
   if ( -s $tmpfile ) {
     print "updateSyslog: Updating $syslogconf...";
@@ -251,7 +251,7 @@ sub updateSyslog {
       if ( $_ =~ /^auth\.\* / ) {
         next;
       }
-      if ( $_ =~ /^mail.*($LOGHOST|zimbra)/ ) {
+      if ( $_ =~ /^mail.*($LOGHOST|zmail)/ ) {
         next;
       }
       s/;local0.none//g;
@@ -291,30 +291,30 @@ sub updateSyslog {
 
   cp($tmpfile,$syslogconf);
 
-  if ( !-f "/var/log/zimbra.log") {
-    open(my $tlog, ">/var/log/zimbra.log");
+  if ( !-f "/var/log/zmail.log") {
+    open(my $tlog, ">/var/log/zmail.log");
   }
-  if ( !-f "/var/log/zimbra-stats.log") {
-    open(my $tlog, ">/var/log/zimbra-stats.log");
+  if ( !-f "/var/log/zmail-stats.log") {
+    open(my $tlog, ">/var/log/zmail-stats.log");
   }
-  chown $uid,$gid,"/var/log/zimbra.log";
-  chown $uid,$gid,"/var/log/zimbra-stats.log";
-  chmod 0644,"/var/log/zimbra.log","/var/log/zimbra-stats.log";
+  chown $uid,$gid,"/var/log/zmail.log";
+  chown $uid,$gid,"/var/log/zmail-stats.log";
+  chmod 0644,"/var/log/zmail.log","/var/log/zmail-stats.log";
 
-  if ( -f "/etc/logrotate.d/zimbra" ) {
+  if ( -f "/etc/logrotate.d/zmail" ) {
     local $^I="~";
-    local @ARGV=("/etc/logrotate.d/zimbra");
+    local @ARGV=("/etc/logrotate.d/zmail");
     while (<>) {
       if ( $rsyslog == 1 ) {
         s/syslogd\*.pid/rsyslogd.pid/g;
       }
-      s/USER/zimbra/;
-      s/GROUP/zimbra/;
+      s/USER/zmail/;
+      s/GROUP/zmail/;
       print;
     }
   }
-  if ( -f "/etc/logrotate.d/zimbra~" ){
-    unlink("/etc/logrotate.d/zimbra~" );
+  if ( -f "/etc/logrotate.d/zmail~" ){
+    unlink("/etc/logrotate.d/zmail~" );
   }
   print "done.\n";
 }
@@ -329,7 +329,7 @@ sub updateRsyslogd {
   }
 
   # create a safe temp file and make sure we have enough space to fill it
-  my (undef, $tmpfile) = tempfile("syslog.conf.XXXX", DIR=>"$zimbra_tmp_directory",  OPEN=>0);
+  my (undef, $tmpfile) = tempfile("syslog.conf.XXXX", DIR=>"$zmail_tmp_directory",  OPEN=>0);
   cp($conf,$tmpfile);
   if ( -s $tmpfile ) {
     print "updateRsyslogd: Updating $conf...";
@@ -363,10 +363,10 @@ sub updateRsyslogd {
   close (TMPFH);
   cp($tmpfile,$conf);
 
-  if (-f "/etc/rsyslog.d/60-zimbra.conf") {
-    unlink("/etc/rsyslog.d/60-zimbra.conf");
+  if (-f "/etc/rsyslog.d/60-zmail.conf") {
+    unlink("/etc/rsyslog.d/60-zmail.conf");
   }
-  open(ZFH, ">/etc/rsyslog.d/60-zimbra.conf");
+  open(ZFH, ">/etc/rsyslog.d/60-zmail.conf");
   if ( $TYPE eq "remote" ) {
     print ZFH "local0.*                @".$LOGHOST."\n";
     print ZFH "local1.*                @".$LOGHOST."\n";
@@ -383,41 +383,41 @@ sub updateRsyslogd {
   close(ZFH);
 
 
-  if ( !-f "/var/log/zimbra.log") {
-    open(my $tlog, ">/var/log/zimbra.log");
+  if ( !-f "/var/log/zmail.log") {
+    open(my $tlog, ">/var/log/zmail.log");
   }
-  if ( !-f "/var/log/zimbra-stats.log") {
-    open(my $tlog, ">/var/log/zimbra-stats.log");
+  if ( !-f "/var/log/zmail-stats.log") {
+    open(my $tlog, ">/var/log/zmail-stats.log");
   }
   if ($platform eq "UBUNTU10_64" || $platform eq "UBUNTU12_64") {
     my $junk;
     ($junk, $junk, $uid, $junk) = getpwnam("syslog");
     $gid = getgrnam("adm");
-    chown $uid,$gid,"/var/log/zimbra.log";
-    chown $uid,$gid,"/var/log/zimbra-stats.log";
+    chown $uid,$gid,"/var/log/zmail.log";
+    chown $uid,$gid,"/var/log/zmail-stats.log";
   } else {
-    chown $uid,$gid,"/var/log/zimbra.log";
-    chown $uid,$gid,"/var/log/zimbra-stats.log";
+    chown $uid,$gid,"/var/log/zmail.log";
+    chown $uid,$gid,"/var/log/zmail-stats.log";
   }
-  chmod 0644,"/var/log/zimbra.log","/var/log/zimbra-stats.log";
+  chmod 0644,"/var/log/zmail.log","/var/log/zmail-stats.log";
 
-  if ( -f "/etc/logrotate.d/zimbra" ) {
+  if ( -f "/etc/logrotate.d/zmail" ) {
     local $^I="~";
-    local @ARGV=("/etc/logrotate.d/zimbra");
+    local @ARGV=("/etc/logrotate.d/zmail");
     while (<>) {
       s/kill\s+\-HUP\s+.+syslog\*\.pid.+\/dev\/null/\/usr\/sbin\/service rsyslog restart >\/dev\/null/g;
       if ($platform eq "UBUNTU10_64" || $platform eq "UBUNTU12_64") {
         s/USER/syslog/;
         s/GROUP/adm/;
       } else {
-        s/USER/zimbra/;
-        s/GROUP/zimbra/;
+        s/USER/zmail/;
+        s/GROUP/zmail/;
       }
       print;
     }
   }
-  if ( -f "/etc/logrotate.d/zimbra~" ){
-    unlink("/etc/logrotate.d/zimbra~" );
+  if ( -f "/etc/logrotate.d/zmail~" ){
+    unlink("/etc/logrotate.d/zmail~" );
   }
   print "done.\n";
 }
@@ -479,7 +479,7 @@ sub getLocalConfig {
   return $main::loaded{lc}{$key}
     if (exists $main::loaded{lc}{$key});
 
-  my $val = `/opt/zimbra/bin/zmlocalconfig -x -s -m nokey ${key} 2> /dev/null`;
+  my $val = `/opt/zmail/bin/zmlocalconfig -x -s -m nokey ${key} 2> /dev/null`;
   chomp $val;
   $main::loaded{lc}{$key} = $val;
   return $val;

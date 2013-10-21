@@ -12,7 +12,7 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.qa.unittest;
+package org.zmail.qa.unittest;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -21,22 +21,22 @@ import java.util.Map;
 import junit.framework.TestCase;
 import junit.framework.TestSuite;
 
-import com.zimbra.common.account.Key;
-import com.zimbra.common.auth.ZAuthToken;
-import com.zimbra.soap.admin.type.DataSourceType;
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.common.soap.AccountConstants;
-import com.zimbra.common.soap.AdminConstants;
-import com.zimbra.common.soap.Element;
-import com.zimbra.common.soap.Element.XMLElement;
-import com.zimbra.common.soap.MailConstants;
-import com.zimbra.cs.account.Account;
-import com.zimbra.cs.account.DataSource;
-import com.zimbra.cs.account.Domain;
-import com.zimbra.cs.account.Identity;
-import com.zimbra.cs.account.Provisioning;
-import com.zimbra.cs.account.Signature;
-import com.zimbra.cs.account.soap.SoapProvisioning;
+import org.zmail.common.account.Key;
+import org.zmail.common.auth.ZAuthToken;
+import org.zmail.soap.admin.type.DataSourceType;
+import org.zmail.common.service.ServiceException;
+import org.zmail.common.soap.AccountConstants;
+import org.zmail.common.soap.AdminConstants;
+import org.zmail.common.soap.Element;
+import org.zmail.common.soap.Element.XMLElement;
+import org.zmail.common.soap.MailConstants;
+import org.zmail.cs.account.Account;
+import org.zmail.cs.account.DataSource;
+import org.zmail.cs.account.Domain;
+import org.zmail.cs.account.Identity;
+import org.zmail.cs.account.Provisioning;
+import org.zmail.cs.account.Signature;
+import org.zmail.cs.account.soap.SoapProvisioning;
 
 public class TestAccess extends TestCase {
     private String TEST_ID;
@@ -145,14 +145,14 @@ public class TestAccess extends TestCase {
             DataSource dataSource = null;
             try {
                 Map<String, Object> attrs = new HashMap<String, Object>();
-                attrs.put(Provisioning.A_zimbraDataSourceEnabled, "TRUE");
-                attrs.put(Provisioning.A_zimbraDataSourceConnectionType, "ssl");
-                attrs.put(Provisioning.A_zimbraDataSourceFolderId, ta.createFolderAndReturnFolderId(role, perm));
-                attrs.put(Provisioning.A_zimbraDataSourceHost, "pop3.google.com");
-                attrs.put(Provisioning.A_zimbraDataSourcePassword, "my-pop3-password");
-                attrs.put(Provisioning.A_zimbraDataSourcePort, "8888");
-                attrs.put(Provisioning.A_zimbraDataSourceUsername, "my-pop3-name");
-                attrs.put(Provisioning.A_zimbraDataSourceLeaveOnServer, "TRUE");
+                attrs.put(Provisioning.A_zmailDataSourceEnabled, "TRUE");
+                attrs.put(Provisioning.A_zmailDataSourceConnectionType, "ssl");
+                attrs.put(Provisioning.A_zmailDataSourceFolderId, ta.createFolderAndReturnFolderId(role, perm));
+                attrs.put(Provisioning.A_zmailDataSourceHost, "pop3.google.com");
+                attrs.put(Provisioning.A_zmailDataSourcePassword, "my-pop3-password");
+                attrs.put(Provisioning.A_zmailDataSourcePort, "8888");
+                attrs.put(Provisioning.A_zmailDataSourceUsername, "my-pop3-name");
+                attrs.put(Provisioning.A_zmailDataSourceLeaveOnServer, "TRUE");
                 dataSource = createDataSource(get(Key.AccountBy.name, acctName), 
                                               DataSourceType.pop3, dataSourceName, attrs);
             } catch (ServiceException e) {
@@ -388,7 +388,7 @@ public class TestAccess extends TestCase {
     public void ModifyPrefs(Role role, Perm perm) throws Exception {
         XMLElement req = new XMLElement(AccountConstants.MODIFY_PREFS_REQUEST);
         Element p = req.addElement(AccountConstants.E_PREF);
-        p.addAttribute(AccountConstants.A_NAME, Provisioning.A_zimbraPrefSkin);
+        p.addAttribute(AccountConstants.A_NAME, Provisioning.A_zmailPrefSkin);
         p.setText("beach");
         accessTest(role, perm, req);
     }
@@ -412,7 +412,7 @@ public class TestAccess extends TestCase {
         XMLElement req = new XMLElement(AccountConstants.SEARCH_CALENDAR_RESOURCES_REQUEST);
         Element sf = req.addElement(AccountConstants.E_ENTRY_SEARCH_FILTER);
         Element cond = sf.addElement(AccountConstants.E_ENTRY_SEARCH_FILTER_SINGLECOND);
-        cond.addAttribute(AccountConstants.A_ENTRY_SEARCH_FILTER_ATTR, Provisioning.A_zimbraCalResType);
+        cond.addAttribute(AccountConstants.A_ENTRY_SEARCH_FILTER_ATTR, Provisioning.A_zmailCalResType);
         cond.addAttribute(AccountConstants.A_ENTRY_SEARCH_FILTER_OP, "eq");
         cond.addAttribute(AccountConstants.A_ENTRY_SEARCH_FILTER_VALUE, "Equipment");
         accessTest(role, perm, req);

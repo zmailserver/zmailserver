@@ -12,23 +12,23 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.service.admin;
+package org.zmail.cs.service.admin;
 
 import java.util.List;
 import java.util.Map;
 
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.common.soap.AdminConstants;
-import com.zimbra.common.soap.Element;
-import com.zimbra.common.util.Log;
-import com.zimbra.common.util.LogFactory;
-import com.zimbra.common.util.ZimbraLog;
-import com.zimbra.cs.account.Account;
-import com.zimbra.cs.account.Provisioning;
-import com.zimbra.cs.account.Server;
-import com.zimbra.cs.account.accesscontrol.AdminRight;
-import com.zimbra.cs.account.accesscontrol.Rights.Admin;
-import com.zimbra.soap.ZimbraSoapContext;
+import org.zmail.common.service.ServiceException;
+import org.zmail.common.soap.AdminConstants;
+import org.zmail.common.soap.Element;
+import org.zmail.common.util.Log;
+import org.zmail.common.util.LogFactory;
+import org.zmail.common.util.ZmailLog;
+import org.zmail.cs.account.Account;
+import org.zmail.cs.account.Provisioning;
+import org.zmail.cs.account.Server;
+import org.zmail.cs.account.accesscontrol.AdminRight;
+import org.zmail.cs.account.accesscontrol.Rights.Admin;
+import org.zmail.soap.ZmailSoapContext;
 
 /**
  * Removes a custom logger from the given account.
@@ -40,7 +40,7 @@ public class RemoveAccountLogger extends AdminDocumentHandler {
     @Override
     public Element handle(Element request, Map<String, Object> context)
     throws ServiceException {
-        ZimbraSoapContext zsc = getZimbraSoapContext(context);
+        ZmailSoapContext zsc = getZmailSoapContext(context);
         
         Server localServer = Provisioning.getInstance().getLocalServer();
         checkRight(zsc, context, localServer, Admin.R_manageAccountLogger);
@@ -72,13 +72,13 @@ public class RemoveAccountLogger extends AdminDocumentHandler {
                 if (accountName != null) {
                     boolean removed = log.removeAccountLogger(accountName);
                     if (removed) {
-                        ZimbraLog.misc.info("Removed logger for account %s from category %s.",
+                        ZmailLog.misc.info("Removed logger for account %s from category %s.",
                             accountName, log.getCategory());
                     }
                 } else {
                     int count = log.removeAccountLoggers();
                     if (count > 0) {
-                        ZimbraLog.misc.info("Removed %d custom loggers from category %s.",
+                        ZmailLog.misc.info("Removed %d custom loggers from category %s.",
                             count, log.getCategory());
                     }
                 }

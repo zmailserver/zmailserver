@@ -12,7 +12,7 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.dav.resource;
+package org.zmail.cs.dav.resource;
 
 import java.io.ByteArrayInputStream;
 import java.io.CharArrayWriter;
@@ -23,37 +23,37 @@ import java.util.Iterator;
 
 import javax.servlet.http.HttpServletResponse;
 
-import com.zimbra.common.calendar.ICalTimeZone;
-import com.zimbra.common.calendar.ParsedDateTime;
-import com.zimbra.common.calendar.TimeZoneMap;
-import com.zimbra.common.calendar.ZCalendar;
-import com.zimbra.common.calendar.ZCalendar.ZComponent;
-import com.zimbra.common.localconfig.LC;
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.common.util.HttpUtil;
-import com.zimbra.common.util.ZimbraLog;
-import com.zimbra.common.mime.MimeConstants;
-import com.zimbra.cs.account.Account;
-import com.zimbra.cs.dav.DavContext;
-import com.zimbra.cs.dav.DavElements;
-import com.zimbra.cs.dav.DavException;
-import com.zimbra.cs.dav.caldav.Filter;
-import com.zimbra.cs.dav.caldav.Range.ExpandRange;
-import com.zimbra.cs.dav.caldav.Range.TimeRange;
-import com.zimbra.cs.dav.property.CalDavProperty;
-import com.zimbra.cs.mailbox.CalendarItem;
-import com.zimbra.cs.mailbox.Flag;
-import com.zimbra.cs.mailbox.Folder;
-import com.zimbra.cs.mailbox.MailItem;
-import com.zimbra.cs.mailbox.MailServiceException;
-import com.zimbra.cs.mailbox.Mailbox;
-import com.zimbra.cs.mailbox.OperationContext;
-import com.zimbra.cs.mailbox.Message;
-import com.zimbra.cs.mailbox.calendar.IcalXmlStrMap;
-import com.zimbra.cs.mailbox.calendar.Invite;
-import com.zimbra.cs.mailbox.calendar.InviteInfo;
-import com.zimbra.cs.mailbox.calendar.RecurId;
-import com.zimbra.cs.mailbox.calendar.ZAttendee;
+import org.zmail.common.calendar.ICalTimeZone;
+import org.zmail.common.calendar.ParsedDateTime;
+import org.zmail.common.calendar.TimeZoneMap;
+import org.zmail.common.calendar.ZCalendar;
+import org.zmail.common.calendar.ZCalendar.ZComponent;
+import org.zmail.common.localconfig.LC;
+import org.zmail.common.service.ServiceException;
+import org.zmail.common.util.HttpUtil;
+import org.zmail.common.util.ZmailLog;
+import org.zmail.common.mime.MimeConstants;
+import org.zmail.cs.account.Account;
+import org.zmail.cs.dav.DavContext;
+import org.zmail.cs.dav.DavElements;
+import org.zmail.cs.dav.DavException;
+import org.zmail.cs.dav.caldav.Filter;
+import org.zmail.cs.dav.caldav.Range.ExpandRange;
+import org.zmail.cs.dav.caldav.Range.TimeRange;
+import org.zmail.cs.dav.property.CalDavProperty;
+import org.zmail.cs.mailbox.CalendarItem;
+import org.zmail.cs.mailbox.Flag;
+import org.zmail.cs.mailbox.Folder;
+import org.zmail.cs.mailbox.MailItem;
+import org.zmail.cs.mailbox.MailServiceException;
+import org.zmail.cs.mailbox.Mailbox;
+import org.zmail.cs.mailbox.OperationContext;
+import org.zmail.cs.mailbox.Message;
+import org.zmail.cs.mailbox.calendar.IcalXmlStrMap;
+import org.zmail.cs.mailbox.calendar.Invite;
+import org.zmail.cs.mailbox.calendar.InviteInfo;
+import org.zmail.cs.mailbox.calendar.RecurId;
+import org.zmail.cs.mailbox.calendar.ZAttendee;
 
 /**
  * CalendarObject is a single instance of iCalendar (RFC 2445) object, such as
@@ -147,7 +147,7 @@ public interface CalendarObject {
                 wr = new CharArrayWriter();
                 wr.append("BEGIN:VCALENDAR\r\n");
                 wr.append("VERSION:").append(ZCalendar.sIcalVersion).append("\r\n");
-                wr.append("PRODID:").append(ZCalendar.sZimbraProdID).append("\r\n");
+                wr.append("PRODID:").append(ZCalendar.sZmailProdID).append("\r\n");
                 wr.append("METHOD:").append(mInvite.getMethod()).append("\r\n");
                 Account acct = ctxt.getAuthAccount();
                 boolean allowPrivateAccess = false;
@@ -158,7 +158,7 @@ public interface CalendarObject {
                     allowPrivateAccess = CalendarItem.allowPrivateAccess(
                             folder, ctxt.getAuthAccount(), octxt.isUsingAdminPrivileges());
                 } catch (ServiceException se) {
-                    ZimbraLog.dav.warn("cannot determine private access status", se);
+                    ZmailLog.dav.warn("cannot determine private access status", se);
                 }
                 boolean delegated = !acct.getId().equalsIgnoreCase(mOwnerId);
                 Invite fixedInv = getFixedUpCopy(ctxt, mInvite, acct, delegated, true);
@@ -169,7 +169,7 @@ public interface CalendarObject {
                 wr.flush();
                 return wr.toString();
             } catch (ServiceException se) {
-                ZimbraLog.dav.warn("cannot convert to iCalendar", se);
+                ZmailLog.dav.warn("cannot convert to iCalendar", se);
                 return "";
             } finally {
                 if (wr != null)
@@ -236,7 +236,7 @@ public interface CalendarObject {
             return mEtag;
         }
         @Override public String getVcalendar(DavContext ctxt, Filter filter) throws IOException, DavException {
-            ZimbraLog.dav.debug("constructing full resource");
+            ZmailLog.dav.debug("constructing full resource");
             return getFullResource(ctxt).getVcalendar(ctxt, filter);
         }
         @Override public InputStream getContent(DavContext ctxt) throws IOException, DavException {
@@ -329,7 +329,7 @@ public interface CalendarObject {
                     if (filter.match(vcomp))
                         return true;
                 } catch (ServiceException se) {
-                    ZimbraLog.dav.warn("cannot convert to ICalendar", se);
+                    ZmailLog.dav.warn("cannot convert to ICalendar", se);
                     continue;
                 }
             }
@@ -347,7 +347,7 @@ public interface CalendarObject {
                 wr = new CharArrayWriter();
                 wr.append("BEGIN:VCALENDAR\r\n");
                 wr.append("VERSION:").append(ZCalendar.sIcalVersion).append("\r\n");
-                wr.append("PRODID:").append(ZCalendar.sZimbraProdID).append("\r\n");
+                wr.append("PRODID:").append(ZCalendar.sZmailProdID).append("\r\n");
                 Iterator<ICalTimeZone> iter = mTzmap.tzIterator();
                 while (iter.hasNext()) {
                     ICalTimeZone tz = iter.next();
@@ -362,7 +362,7 @@ public interface CalendarObject {
                     allowPrivateAccess = CalendarItem.allowPrivateAccess(
                             folder, ctxt.getAuthAccount(), octxt.isUsingAdminPrivileges());
                 } catch (ServiceException se) {
-                    ZimbraLog.dav.warn("cannot determine private access status", se);
+                    ZmailLog.dav.warn("cannot determine private access status", se);
                 }
                 boolean delegated = !acct.getId().equalsIgnoreCase(mOwnerId);
                 if (!LC.calendar_apple_ical_compatible_canceled_instances.booleanValue()) {
@@ -390,7 +390,7 @@ public interface CalendarObject {
                 wr.flush();
                 return wr.toString();
             } catch (ServiceException se) {
-                ZimbraLog.dav.warn("cannot convert to iCalendar", se);
+                ZmailLog.dav.warn("cannot convert to iCalendar", se);
                 return "";
             } finally {
                 if (wr != null)
@@ -446,7 +446,7 @@ public interface CalendarObject {
                 }
                 mInvites = inviteList.toArray(new Invite[0]);
             } catch (ServiceException se) {
-                ZimbraLog.dav.warn("error getting calendar item " + mUid + " from mailbox " + mMailboxId, se);
+                ZmailLog.dav.warn("error getting calendar item " + mUid + " from mailbox " + mMailboxId, se);
             }
             
         }

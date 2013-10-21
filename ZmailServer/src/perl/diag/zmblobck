@@ -20,12 +20,12 @@
 # It finds all blobs which are present in the database but missing in fs.
 # It does not find blobs in fs and missing from database.
 
-use lib "$ENV{ZIMBRA_HOME}/zimbramon/lib";
+use lib "$ENV{ZIMBRA_HOME}/zmailmon/lib";
 
 use strict;
 use Getopt::Std;
 use DBI;
-use Zimbra::Failover::Db;
+use Zmail::Failover::Db;
 
 my %MAILBOX;
 
@@ -211,7 +211,7 @@ getopts("m:l:", \%opts) or usage();
 my $mboxId = $opts{m};
 my $outfile = $opts{l} || './~blobck.out';
 
-my $db = Zimbra::Failover::Db->connect();
+my $db = Zmail::Failover::Db->connect();
 loadMailboxes($db, $mboxId);
 
 foreach $mboxId (keys %MAILBOX) {

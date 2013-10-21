@@ -13,7 +13,7 @@
  * ***** END LICENSE BLOCK *****
  */
 
-package com.zimbra.cs.mime;
+package org.zmail.cs.mime;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -33,20 +33,20 @@ import net.freeutils.tnef.TNEFInputStream;
 import net.freeutils.tnef.TNEFUtils;
 import net.freeutils.tnef.mime.TNEFMime;
 
-import com.zimbra.common.calendar.ZCalendar;
-import com.zimbra.common.calendar.ZCalendar.ICalTok;
-import com.zimbra.common.calendar.ZCalendar.ZVCalendar;
-import com.zimbra.common.localconfig.DebugConfig;
-import com.zimbra.common.mime.ContentType;
-import com.zimbra.common.mime.MimeConstants;
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.common.util.ByteUtil;
-import com.zimbra.common.util.ZimbraLog;
-import com.zimbra.common.zmime.ZMimeBodyPart;
-import com.zimbra.common.zmime.ZMimeMultipart;
-import com.zimbra.cs.util.JMSession;
-import com.zimbra.cs.util.tnef.DefaultTnefToICalendar;
-import com.zimbra.cs.util.tnef.TnefToICalendar;
+import org.zmail.common.calendar.ZCalendar;
+import org.zmail.common.calendar.ZCalendar.ICalTok;
+import org.zmail.common.calendar.ZCalendar.ZVCalendar;
+import org.zmail.common.localconfig.DebugConfig;
+import org.zmail.common.mime.ContentType;
+import org.zmail.common.mime.MimeConstants;
+import org.zmail.common.service.ServiceException;
+import org.zmail.common.util.ByteUtil;
+import org.zmail.common.util.ZmailLog;
+import org.zmail.common.zmime.ZMimeBodyPart;
+import org.zmail.common.zmime.ZMimeMultipart;
+import org.zmail.cs.util.JMSession;
+import org.zmail.cs.util.tnef.DefaultTnefToICalendar;
+import org.zmail.cs.util.tnef.TnefToICalendar;
 
 /**
  * Converts each TNEF MimeBodyPart to a multipart/alternative that contains
@@ -100,7 +100,7 @@ public class TnefConverter extends MimeVisitor {
             if (mCallback != null && !mCallback.onModification())
                 return false;
         } catch (MessagingException e) {
-            ZimbraLog.extensions.warn("exception while checking message for TNEF content; skipping part");
+            ZmailLog.extensions.warn("exception while checking message for TNEF content; skipping part");
             return false;
         }
 
@@ -120,10 +120,10 @@ public class TnefConverter extends MimeVisitor {
             // add the TNEF to the expanded multipart
             multi.addBodyPart(tnefPart, 0);
         } catch (MessagingException e) {
-            ZimbraLog.extensions.warn("exception while decoding TNEF message content; skipping part", e);
+            ZmailLog.extensions.warn("exception while decoding TNEF message content; skipping part", e);
             return false;
         } catch (IOException e) {
-            ZimbraLog.extensions.warn("exception while decoding TNEF message content; skipping part", e);
+            ZmailLog.extensions.warn("exception while decoding TNEF message content; skipping part", e);
             return false;
         }
 
@@ -165,7 +165,7 @@ public class TnefConverter extends MimeVisitor {
             if (mCallback != null && !mCallback.onModification())
                 return false;
         } catch (MessagingException e) {
-            ZimbraLog.extensions.warn("exception while traversing multipart; skipping", e);
+            ZmailLog.extensions.warn("exception while traversing multipart; skipping", e);
             return false;
         }
 
@@ -179,7 +179,7 @@ public class TnefConverter extends MimeVisitor {
                     try {
                         multi = expandTNEF((MimeBodyPart) bp);
                     } catch (Exception e) {
-                        ZimbraLog.extensions.warn("exception while decoding TNEF; skipping part", e);
+                        ZmailLog.extensions.warn("exception while decoding TNEF; skipping part", e);
                         continue;
                     }
                     if (multi == null)
@@ -189,7 +189,7 @@ public class TnefConverter extends MimeVisitor {
                 }
             }
         } catch (MessagingException e) {
-            ZimbraLog.extensions.warn("exception while traversing multipart; skipping", e);
+            ZmailLog.extensions.warn("exception while traversing multipart; skipping", e);
             return false;
         }
 
@@ -228,9 +228,9 @@ public class TnefConverter extends MimeVisitor {
         // XXX bburtin: nasty hack.  Don't handle OOME since JTNEF can allocate a huge byte
         // array when the TNEF file is malformed.  See bug 42649.
         // } catch (OutOfMemoryError e) {
-        //    Zimbra.halt("Ran out of memory while expanding TNEF attachment", e);
+        //    Zmail.halt("Ran out of memory while expanding TNEF attachment", e);
         } catch (Throwable t) {
-            ZimbraLog.extensions.warn("Conversion failed.  TNEF attachment will not be expanded.", t);
+            ZmailLog.extensions.warn("Conversion failed.  TNEF attachment will not be expanded.", t);
             return null;
         } finally {
             ByteUtil.closeStream(is);
@@ -280,7 +280,7 @@ public class TnefConverter extends MimeVisitor {
                 throw new MessagingException("TNEF to iCalendar conversion failure: " + e.getMessage(), e);
             } catch (Throwable t) {
                 //don't allow TNEF errors to crash server
-                ZimbraLog.extensions.warn("Failed to convert TNEF to iCal",t);
+                ZmailLog.extensions.warn("Failed to convert TNEF to iCal",t);
                 throw new MessagingException("TNEF to iCalendar conversion failure");
             }
         }

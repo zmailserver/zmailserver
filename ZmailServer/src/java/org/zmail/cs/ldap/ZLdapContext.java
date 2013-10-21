@@ -12,10 +12,10 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.ldap;
+package org.zmail.cs.ldap;
 
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.cs.ldap.LdapException.LdapEntryAlreadyExistException;
+import org.zmail.common.service.ServiceException;
+import org.zmail.cs.ldap.LdapException.LdapEntryAlreadyExistException;
 
 public abstract class ZLdapContext extends ZLdapElement implements ILdapContext {
     protected LdapUsage usage;

@@ -13,7 +13,7 @@
  * ***** END LICENSE BLOCK *****
  */
 
-package com.zimbra.cs.service;
+package org.zmail.cs.service;
 
 import java.io.IOException;
 import java.security.Principal;
@@ -22,19 +22,19 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.common.util.ZimbraLog;
-import com.zimbra.cs.account.AuthToken;
-import com.zimbra.cs.account.AccountServiceException.AuthFailedServiceException;
-import com.zimbra.cs.account.Provisioning;
-import com.zimbra.cs.account.auth.AuthContext;
-import com.zimbra.cs.service.authenticator.SSOAuthenticator.ZimbraPrincipal;
+import org.zmail.common.service.ServiceException;
+import org.zmail.common.util.ZmailLog;
+import org.zmail.cs.account.AuthToken;
+import org.zmail.cs.account.AccountServiceException.AuthFailedServiceException;
+import org.zmail.cs.account.Provisioning;
+import org.zmail.cs.account.auth.AuthContext;
+import org.zmail.cs.service.authenticator.SSOAuthenticator.ZmailPrincipal;
 
 public class SpnegoAuthServlet extends SSOServlet {
 
     @Override
     public void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        ZimbraLog.clearContext();
+        ZmailLog.clearContext();
         addRemoteIpToLoggingContext(req);
         addUAToLoggingContext(req);
         
@@ -51,27 +51,27 @@ public class SpnegoAuthServlet extends SSOServlet {
                 throw AuthFailedServiceException.AUTH_FAILED("no principal");
             }
             
-            if (!(principal instanceof ZimbraPrincipal)) {
-                throw AuthFailedServiceException.AUTH_FAILED(principal.getName(), "not ZimbraPrincipal", (Throwable)null);
+            if (!(principal instanceof ZmailPrincipal)) {
+                throw AuthFailedServiceException.AUTH_FAILED(principal.getName(), "not ZmailPrincipal", (Throwable)null);
             }
             
-            ZimbraPrincipal zimbraPrincipal = (ZimbraPrincipal)principal;   
-            AuthToken authToken = authorize(req, AuthContext.Protocol.spnego, zimbraPrincipal, isAdminRequest);
+            ZmailPrincipal zmailPrincipal = (ZmailPrincipal)principal;   
+            AuthToken authToken = authorize(req, AuthContext.Protocol.spnego, zmailPrincipal, isAdminRequest);
                 
             if (isFromZCO) {
                 setAuthTokenCookieAndReturn(req, resp, authToken);
             } else {
-                setAuthTokenCookieAndRedirect(req, resp, zimbraPrincipal.getAccount(), authToken);
+                setAuthTokenCookieAndRedirect(req, resp, zmailPrincipal.getAccount(), authToken);
             }
             
         } catch (ServiceException e) {
             if (e instanceof AuthFailedServiceException) {
                 AuthFailedServiceException afe = (AuthFailedServiceException)e;
-                ZimbraLog.account.info("spnego auth failed: " + afe.getMessage() + afe.getReason(", %s"));
+                ZmailLog.account.info("spnego auth failed: " + afe.getMessage() + afe.getReason(", %s"));
             } else {
-                ZimbraLog.account.info("spnego auth failed: " + e.getMessage());
+                ZmailLog.account.info("spnego auth failed: " + e.getMessage());
             }
-            ZimbraLog.account.debug("spnego auth failed", e);
+            ZmailLog.account.debug("spnego auth failed", e);
             
             if (isFromZCO) {
                 resp.sendError(HttpServletResponse.SC_FORBIDDEN, e.getMessage());
@@ -80,7 +80,7 @@ public class SpnegoAuthServlet extends SSOServlet {
                     redirectToErrorPage(req, resp, isAdminRequest, 
                             Provisioning.getInstance().getConfig().getSpnegoAuthErrorURL());
                 } catch (ServiceException se) {
-                    ZimbraLog.account.info("failed to redirect to error page: " + se.getMessage());
+                    ZmailLog.account.info("failed to redirect to error page: " + se.getMessage());
                     resp.sendError(HttpServletResponse.SC_FORBIDDEN, e.getMessage());
                 }
             }

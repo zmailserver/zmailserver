@@ -12,14 +12,14 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.account.ldap.upgrade;
+package org.zmail.cs.account.ldap.upgrade;
 
 import java.util.HashMap;
 import java.util.Map;
 
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.cs.account.Config;
-import com.zimbra.cs.account.Provisioning;
+import org.zmail.common.service.ServiceException;
+import org.zmail.cs.account.Config;
+import org.zmail.cs.account.Provisioning;
 
 public class BUG_41000 extends UpgradeOp {
 
@@ -29,14 +29,14 @@ public class BUG_41000 extends UpgradeOp {
         
         String[] value = 
         {
-         "zimbraAutoComplete:(&(|(displayName=%s*)(cn=%s*)(sn=%s*)(gn=%s*)(mail=%s*)(zimbraMailDeliveryAddress=%s*)(zimbraMailAlias=%s*))(|(objectclass=zimbraAccount)(objectclass=zimbraDistributionList)))",
-         "zimbraSearch:(&(|(displayName=*%s*)(cn=*%s*)(sn=*%s*)(gn=*%s*)(mail=*%s*)(zimbraMailDeliveryAddress=*%s*)(zimbraMailAlias=*%s*))(|(objectclass=zimbraAccount)(objectclass=zimbraDistributionList)))"
+         "zmailAutoComplete:(&(|(displayName=%s*)(cn=%s*)(sn=%s*)(gn=%s*)(mail=%s*)(zmailMailDeliveryAddress=%s*)(zmailMailAlias=%s*))(|(objectclass=zmailAccount)(objectclass=zmailDistributionList)))",
+         "zmailSearch:(&(|(displayName=*%s*)(cn=*%s*)(sn=*%s*)(gn=*%s*)(mail=*%s*)(zmailMailDeliveryAddress=*%s*)(zmailMailAlias=*%s*))(|(objectclass=zmailAccount)(objectclass=zmailDistributionList)))"
         };
          
         Map<String, Object> attr = new HashMap<String, Object>();
-        attr.put("+" + Provisioning.A_zimbraGalLdapFilterDef, value);
+        attr.put("+" + Provisioning.A_zmailGalLdapFilterDef, value);
         
-        printer.println("Adding zimbraAutoComplete and zimbraSearch filters to global config " + Provisioning.A_zimbraGalLdapFilterDef);
+        printer.println("Adding zmailAutoComplete and zmailSearch filters to global config " + Provisioning.A_zmailGalLdapFilterDef);
         prov.modifyAttrs(config, attr);
     }
     

@@ -14,7 +14,7 @@
 # ***** END LICENSE BLOCK *****
 # 
 # look for the entitlement data from the ZCS license
-license=/opt/zimbra/conf/ZCSLicense.xml
+license=/opt/zmail/conf/ZCSLicense.xml
 if ! [ -f "$license" ]; then
     echo "error: unable to read license information" > /dev/stderr
     exit 1
@@ -25,13 +25,13 @@ key=$(cat $license | grep LicenseId | awk -F= '{print $NF}' | awk -F\" '{print $
 server=$(basename $0)
 case $server in
   products.rpath.com)
-    class=zimbra-zcs
+    class=zmail-zcs
     ;;
   conary.rpath.com)
-    class=zimbra-zcs
+    class=zmail-zcs
     ;;
-  zimbra.liquidsys.com)
-    class=zimbra-zcs
+  zmail.liquidsys.com)
+    class=zmail-zcs
     ;;
   *)
     echo "error: script was called as $0. it should only be called via a symlink that matches the server name"

@@ -14,7 +14,7 @@
  * 
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.mailbox;
+package org.zmail.cs.mailbox;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -31,26 +31,26 @@ import java.util.regex.Pattern;
 import com.google.common.base.Strings;
 import com.google.common.collect.TreeMultimap;
 
-import com.zimbra.common.account.Key.AccountBy;
-import com.zimbra.common.mailbox.ContactConstants;
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.common.soap.Element;
-import com.zimbra.common.soap.MailConstants;
-import com.zimbra.common.soap.SoapHttpTransport;
-import com.zimbra.common.soap.SoapProtocol;
-import com.zimbra.common.util.StringUtil;
-import com.zimbra.common.util.ZimbraLog;
-import com.zimbra.cs.account.Account;
-import com.zimbra.cs.account.AuthToken;
-import com.zimbra.cs.account.GalContact;
-import com.zimbra.cs.account.Provisioning;
-import com.zimbra.cs.gal.GalSearchControl;
-import com.zimbra.cs.gal.GalSearchParams;
-import com.zimbra.cs.gal.GalSearchResultCallback;
-import com.zimbra.cs.httpclient.URLUtil;
-import com.zimbra.cs.mime.ParsedContact;
-import com.zimbra.cs.service.util.ItemId;
-import com.zimbra.soap.type.GalSearchType;
+import org.zmail.common.account.Key.AccountBy;
+import org.zmail.common.mailbox.ContactConstants;
+import org.zmail.common.service.ServiceException;
+import org.zmail.common.soap.Element;
+import org.zmail.common.soap.MailConstants;
+import org.zmail.common.soap.SoapHttpTransport;
+import org.zmail.common.soap.SoapProtocol;
+import org.zmail.common.util.StringUtil;
+import org.zmail.common.util.ZmailLog;
+import org.zmail.cs.account.Account;
+import org.zmail.cs.account.AuthToken;
+import org.zmail.cs.account.GalContact;
+import org.zmail.cs.account.Provisioning;
+import org.zmail.cs.gal.GalSearchControl;
+import org.zmail.cs.gal.GalSearchParams;
+import org.zmail.cs.gal.GalSearchResultCallback;
+import org.zmail.cs.httpclient.URLUtil;
+import org.zmail.cs.mime.ParsedContact;
+import org.zmail.cs.service.util.ItemId;
+import org.zmail.soap.type.GalSearchType;
 
 public class ContactGroup {
     
@@ -169,7 +169,7 @@ public class ContactGroup {
         removeAllMembers();
         MigrateContactGroup.migrate(this, dlist);
 
-        ZimbraLog.contact.info("in-place migrated contact group from dlist: dlist=[%s], groupMember before migrate=[%s], groupMember after migrate=[%s]", 
+        ZmailLog.contact.info("in-place migrated contact group from dlist: dlist=[%s], groupMember before migrate=[%s], groupMember after migrate=[%s]", 
                 dlist, before, dump());
     }
     
@@ -191,8 +191,8 @@ public class ContactGroup {
                 sb.append(addr);
             }
             
-            if (ZimbraLog.contact.isDebugEnabled()) {
-                ZimbraLog.contact.debug("returned contact group as dlist: dlist=[%s], groupMember=[%s]", 
+            if (ZmailLog.contact.isDebugEnabled()) {
+                ZmailLog.contact.debug("returned contact group as dlist: dlist=[%s], groupMember=[%s]", 
                         sb.toString(), dump());
             }
             
@@ -229,7 +229,7 @@ public class ContactGroup {
                 String key = member.getDerefedKey();
                 derefedMembers.put(key, member);
             } else {
-                ZimbraLog.contact.debug("contact group member cannot be derefed: " + member.getValue());
+                ZmailLog.contact.debug("contact group member cannot be derefed: " + member.getValue());
                 derefedMembers.put(member.getValue(), member);
             }
         }
@@ -293,7 +293,7 @@ public class ContactGroup {
             return contactGroup;
             
         } catch (ServiceException e) {
-            ZimbraLog.contact.warn("unabale to decode contact group", e);
+            ZmailLog.contact.warn("unabale to decode contact group", e);
             throw e;
         }
         
@@ -497,7 +497,7 @@ public class ContactGroup {
                     deref(mbox, octxt, proxyProtocol);
                 } catch (ServiceException e) {
                     // log and continue
-                    ZimbraLog.contact.warn("unable to deref contact group member: " + value, e);
+                    ZmailLog.contact.warn("unable to deref contact group member: " + value, e);
                 }
             }
         }
@@ -605,7 +605,7 @@ public class ContactGroup {
             String ownerAcctId = itemId.getAccountId();
             Account ownerAcct = Provisioning.getInstance().get(AccountBy.id, ownerAcctId);
             if (ownerAcct == null) {
-                ZimbraLog.contact.debug("no such account for contact group member: " + itemId.toString());
+                ZmailLog.contact.debug("no such account for contact group member: " + itemId.toString());
                 return;
             }
             
@@ -647,7 +647,7 @@ public class ContactGroup {
             try {
                 response = transport.invokeWithoutSession(request);
             } catch (IOException e) {
-                ZimbraLog.contact.debug("unable to fetch remote member ", e);
+                ZmailLog.contact.debug("unable to fetch remote member ", e);
                 throw ServiceException.PROXY_ERROR("unable to fetch remote member " + contactId.toString(), serverUrl);
             }
             Element eGotContact = response.getOptionalElement(MailConstants.E_CONTACT);
@@ -850,11 +850,11 @@ public class ContactGroup {
          * dlist is a String of comma-seperated email address with optional display part.
          * There could be comma in the display part.
          * e.g
-         * "Ballard, Martha" <martha34@aol.com>, "Davidson, Ross" <rossd@example.zimbra.com>, user1@test.com
+         * "Ballard, Martha" <martha34@aol.com>, "Davidson, Ross" <rossd@example.zmail.com>, user1@test.com
          * 
          * This should be split to:
          * "Ballard, Martha" <martha34@aol.com>
-         * "Davidson, Ross" <rossd@example.zimbra.com>
+         * "Davidson, Ross" <rossd@example.zmail.com>
          * user1@test.com
          */
         private static final Pattern PATTERN = Pattern.compile("(([\\s]*)(\"[^\"]*\")*[^,]*[,]*)");
@@ -874,7 +874,7 @@ public class ContactGroup {
                     migrate(contact);
                 } catch (Exception e) {
                     if (contact.isGroup()) {
-                        ZimbraLog.contact.info("skipped migrating contact group %d", contact.getId(), e);
+                        ZmailLog.contact.info("skipped migrating contact group %d", contact.getId(), e);
                     }
                 }
             }
@@ -887,7 +887,7 @@ public class ContactGroup {
 
             String dlist = contact.get(ContactConstants.A_dlist);
             if (Strings.isNullOrEmpty(dlist)) {
-                ZimbraLog.contact.info("skipped migrating contact group %d as dlist is empty", contact.getId());
+                ZmailLog.contact.info("skipped migrating contact group %d as dlist is empty", contact.getId());
                 return;
             }
 
@@ -902,15 +902,15 @@ public class ContactGroup {
 
                 // remove dlist.  
                 // TODO: should we do this? or should we keep dlist and hide it
-                // using zimbraContactHiddenAttributes? 
+                // using zmailContactHiddenAttributes? 
                 pc.modifyField(ContactConstants.A_dlist, null);
 
                 mbox.modifyContact(octxt, contact.getId(), pc);
 
-                ZimbraLog.contact.info("migrated contact group %s: dlist=[%s], groupMember=[%s]",
+                ZmailLog.contact.info("migrated contact group %s: dlist=[%s], groupMember=[%s]",
                         contact.getId(), dlist, contactGroup.dump());
             } else {
-                ZimbraLog.contact.info("aborted migrating contact group %d: dlist=[%s]", contact.getId(), dlist);
+                ZmailLog.contact.info("aborted migrating contact group %d: dlist=[%s]", contact.getId(), dlist);
             }
         }
 
@@ -929,7 +929,7 @@ public class ContactGroup {
                         try {
                             contactGroup.addMember(Member.Type.INLINE, addr);
                         } catch (ServiceException e) {
-                            ZimbraLog.contact.info("skipped contact group member %s", addr);
+                            ZmailLog.contact.info("skipped contact group member %s", addr);
                         }
                     }
                 }

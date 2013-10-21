@@ -14,14 +14,14 @@
  * 
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.service.mail;
+package org.zmail.cs.service.mail;
 
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.common.soap.Element;
-import com.zimbra.common.soap.MailConstants;
-import com.zimbra.common.util.ZimbraLog;
-import com.zimbra.cs.account.Account;
-import com.zimbra.soap.ZimbraSoapContext;
+import org.zmail.common.service.ServiceException;
+import org.zmail.common.soap.Element;
+import org.zmail.common.soap.MailConstants;
+import org.zmail.common.util.ZmailLog;
+import org.zmail.cs.account.Account;
+import org.zmail.soap.ZmailSoapContext;
 
 import java.util.Map;
 
@@ -31,7 +31,7 @@ import java.util.Map;
 public class VerifyCode extends MailDocumentHandler {
 
     public Element handle(Element request, Map<String, Object> context) throws ServiceException {
-        ZimbraSoapContext zsc = getZimbraSoapContext(context);
+        ZmailSoapContext zsc = getZmailSoapContext(context);
         String emailAddr = request.getAttribute(MailConstants.A_ADDRESS);
         boolean success = false;
         if (SendVerificationCode.emailToCodeMap.containsKey(emailAddr)) {
@@ -42,10 +42,10 @@ public class VerifyCode extends MailDocumentHandler {
                 success = true;
                 SendVerificationCode.emailToCodeMap.remove(emailAddr);
             } else {
-                ZimbraLog.misc.debug("Invalid verification code");
+                ZmailLog.misc.debug("Invalid verification code");
             }
         } else {
-            ZimbraLog.misc.debug("Verification code for %s has either not been generated or has expired", emailAddr);
+            ZmailLog.misc.debug("Verification code for %s has either not been generated or has expired", emailAddr);
         }
         return zsc.createElement(MailConstants.VERIFY_CODE_RESPONSE).addAttribute(MailConstants.A_VERIFICATION_SUCCESS, success ? "1" : "0");
     }

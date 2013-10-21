@@ -36,7 +36,7 @@ sub createEmailedContactFolder($) {
     my $timestamp = time();
     my $sql = <<EOF_RENAME_EMAILED_CONTACT_FOLDER;
     
-UPDATE mailbox$mailboxId.mail_item mi, zimbra.mailbox mbx
+UPDATE mailbox$mailboxId.mail_item mi, zmail.mailbox mbx
 SET subject = "Emailed Contacts_1",
     mod_metadata = change_checkpoint + 100,
     mod_content = change_checkpoint + 100,
@@ -54,7 +54,7 @@ VALUES
   ("Emailed Contacts", 13, 1, 1, 1, 1, 1, "d1:ai1e1:vi9e2:vti6ee", $timestamp, $timestamp)
 ON DUPLICATE KEY UPDATE id = 13;
 
-UPDATE mailbox$mailboxId.mail_item mi, zimbra.mailbox mbx
+UPDATE mailbox$mailboxId.mail_item mi, zmail.mailbox mbx
 SET mod_metadata = change_checkpoint + 100,
     mod_content = change_checkpoint + 100,
     change_checkpoint = change_checkpoint + 200

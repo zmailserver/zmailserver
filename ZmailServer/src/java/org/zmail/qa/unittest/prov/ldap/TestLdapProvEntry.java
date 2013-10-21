@@ -12,7 +12,7 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.qa.unittest.prov.ldap;
+package org.zmail.qa.unittest.prov.ldap;
 
 import java.util.Arrays;
 import java.util.Collection;
@@ -26,21 +26,21 @@ import java.util.Set;
 import org.junit.*;
 import static org.junit.Assert.*;
 
-import com.zimbra.common.account.Key;
-import com.zimbra.common.account.ZAttrProvisioning;
-import com.zimbra.common.util.Constants;
-import com.zimbra.cs.account.Account;
-import com.zimbra.cs.account.AttributeClass;
-import com.zimbra.cs.account.Cos;
-import com.zimbra.cs.account.Domain;
-import com.zimbra.cs.account.EntryCacheDataKey;
-import com.zimbra.cs.account.Provisioning;
-import com.zimbra.cs.account.Server;
-import com.zimbra.cs.account.ldap.LdapObjectClass;
-import com.zimbra.cs.ldap.LdapConstants;
-import com.zimbra.cs.ldap.unboundid.InMemoryLdapServer;
-import com.zimbra.qa.unittest.TestUtil;
-import com.zimbra.qa.unittest.prov.BinaryLdapData;
+import org.zmail.common.account.Key;
+import org.zmail.common.account.ZAttrProvisioning;
+import org.zmail.common.util.Constants;
+import org.zmail.cs.account.Account;
+import org.zmail.cs.account.AttributeClass;
+import org.zmail.cs.account.Cos;
+import org.zmail.cs.account.Domain;
+import org.zmail.cs.account.EntryCacheDataKey;
+import org.zmail.cs.account.Provisioning;
+import org.zmail.cs.account.Server;
+import org.zmail.cs.account.ldap.LdapObjectClass;
+import org.zmail.cs.ldap.LdapConstants;
+import org.zmail.cs.ldap.unboundid.InMemoryLdapServer;
+import org.zmail.qa.unittest.TestUtil;
+import org.zmail.qa.unittest.prov.BinaryLdapData;
 
 public class TestLdapProvEntry extends LdapTest {
     private static final String DOMAIN_NAME = "\u4e2d\u6587" + "." + baseDomainName();  // an IDN domain name
@@ -87,15 +87,15 @@ public class TestLdapProvEntry extends LdapTest {
              * organizationalPerson
              * person
              * top
-             * zimbraAccount
-             * zimbraMailRecipient
+             * zmailAccount
+             * zmailMailRecipient
              * amavisAccount
              */
             assertEquals(7, values.size());
         } else {
             /*
              * inetOrgPerson
-             * zimbraAccount
+             * zmailAccount
              * amavisAccount
              */
             assertEquals(3, values.size());
@@ -109,8 +109,8 @@ public class TestLdapProvEntry extends LdapTest {
     
     @Test
     public void getAttrDefault() throws Exception {
-        String ATTRNAME_NO_DEFAULT = Provisioning.A_zimbraId;
-        String ATTRNAME_HAS_DEFAULT = Provisioning.A_zimbraFeatureContactsEnabled;
+        String ATTRNAME_NO_DEFAULT = Provisioning.A_zmailId;
+        String ATTRNAME_HAS_DEFAULT = Provisioning.A_zmailFeatureContactsEnabled;
         
         assertNull(entry.getAttrDefault(ATTRNAME_NO_DEFAULT));
         assertEquals(cos.getAttr(ATTRNAME_HAS_DEFAULT), entry.getAttrDefault(ATTRNAME_HAS_DEFAULT));
@@ -118,18 +118,18 @@ public class TestLdapProvEntry extends LdapTest {
     
     @Test
     public void getAttr() throws Exception {
-        assertEquals(account.getId(), entry.getAttr(Provisioning.A_zimbraId));
+        assertEquals(account.getId(), entry.getAttr(Provisioning.A_zmailId));
         assertEquals(account.getName(), entry.getAttr(Provisioning.A_mail));
-        assertEquals(account.getName(), entry.getAttr(Provisioning.A_zimbraMailDeliveryAddress));
+        assertEquals(account.getName(), entry.getAttr(Provisioning.A_zmailMailDeliveryAddress));
         assertEquals(ACCTNAME_LOCAL_PART, entry.getAttr(Provisioning.A_uid));
-        assertEquals(server.getName(), entry.getAttr(Provisioning.A_zimbraMailHost));
-        assertEquals(ZAttrProvisioning.AccountStatus.active.name(), entry.getAttr(Provisioning.A_zimbraAccountStatus));
-        assertEquals(ZAttrProvisioning.MailStatus.enabled.name(), entry.getAttr(Provisioning.A_zimbraMailStatus));
+        assertEquals(server.getName(), entry.getAttr(Provisioning.A_zmailMailHost));
+        assertEquals(ZAttrProvisioning.AccountStatus.active.name(), entry.getAttr(Provisioning.A_zmailAccountStatus));
+        assertEquals(ZAttrProvisioning.MailStatus.enabled.name(), entry.getAttr(Provisioning.A_zmailMailStatus));
     }
     
     @Test
     public void getAttrWithWithoutDefaults() throws Exception {
-        String ATTR = Provisioning.A_zimbraFeatureMailEnabled;
+        String ATTR = Provisioning.A_zmailFeatureMailEnabled;
         
         // apply defaults
         String value = entry.getAttr(ATTR, true);
@@ -142,7 +142,7 @@ public class TestLdapProvEntry extends LdapTest {
     
     @Test
     public void getAttrWithProvidedDefaultValue() throws Exception {
-        String ATTR = Provisioning.A_zimbraACE;
+        String ATTR = Provisioning.A_zmailACE;
         String DEFAULT_VALUE_PROVIDED = "blah";
         
         // make sure there is no value on the entry or inherited
@@ -166,14 +166,14 @@ public class TestLdapProvEntry extends LdapTest {
         assertTrue(values.contains(AttributeClass.account.getOCName()));
         assertTrue(values.contains("amavisAccount"));
         
-        value = attrs.get(Provisioning.A_zimbraId);
+        value = attrs.get(Provisioning.A_zmailId);
         assertTrue(value instanceof String);
         assertEquals(entry.getId(), (String) value);
     }
     
     @Test
     public void getAttrsWithWithoutDefaults() throws Exception {
-        String ATTR = Provisioning.A_zimbraFeatureMailEnabled;
+        String ATTR = Provisioning.A_zmailFeatureMailEnabled;
         
         // apply defaults
         Map<String, Object> attrs = entry.getAttrs(true);
@@ -191,7 +191,7 @@ public class TestLdapProvEntry extends LdapTest {
     public void getUnicodeAttrs() throws Exception {
         Map<String, Object> attrs = entry.getUnicodeAttrs();
         
-        Object value = attrs.get(Provisioning.A_zimbraMailDeliveryAddress);
+        Object value = attrs.get(Provisioning.A_zmailMailDeliveryAddress);
         assertTrue(value instanceof String);
         String parts[] = ((String) value).split("@");
         assertEquals(ACCTNAME_LOCAL_PART, parts[0]);
@@ -210,7 +210,7 @@ public class TestLdapProvEntry extends LdapTest {
     
     @Test
     public void getBooleanAttr()  throws Exception {
-        String ATTR = Provisioning.A_zimbraFeatureMailEnabled;
+        String ATTR = Provisioning.A_zmailFeatureMailEnabled;
         
         boolean value = entry.getBooleanAttr(ATTR, false);
         assertTrue(value);  // becasue cos already has a value, default provided here will not be effective
@@ -224,7 +224,7 @@ public class TestLdapProvEntry extends LdapTest {
     
     @Test
     public void getGeneralizedTimeAttr() throws Exception {
-        String ATTR = Provisioning.A_zimbraCreateTimestamp;
+        String ATTR = Provisioning.A_zmailCreateTimestamp;
         
         Date now = new Date();
         Date value = entry.getGeneralizedTimeAttr(ATTR, null);
@@ -235,7 +235,7 @@ public class TestLdapProvEntry extends LdapTest {
     
     @Test
     public void getIntAttr() throws Exception {
-        String ATTR = Provisioning.A_zimbraContactAutoCompleteMaxResults;
+        String ATTR = Provisioning.A_zmailContactAutoCompleteMaxResults;
         
         int value = entry.getIntAttr(ATTR, 0);
         assertEquals(20, value);
@@ -275,14 +275,14 @@ public class TestLdapProvEntry extends LdapTest {
     
     @Test
     public void getUnicodeMultiAttr() throws Exception {
-        String[] value = entry.getUnicodeMultiAttr(Provisioning.A_zimbraMailDeliveryAddress);
+        String[] value = entry.getUnicodeMultiAttr(Provisioning.A_zmailMailDeliveryAddress);
         assertEquals(1, value.length);
         assertEquals(TestUtil.getAddress(ACCTNAME_LOCAL_PART, DOMAIN_NAME), value[0]);
     }
     
     @Test
     public void getMultiAttrWithWithoutDefaults() throws Exception {
-        String ATTR = Provisioning.A_zimbraFeatureMailEnabled;
+        String ATTR = Provisioning.A_zmailFeatureMailEnabled;
         
         // apply defaults
         String[] value = entry.getMultiAttr(ATTR, true);
@@ -321,7 +321,7 @@ public class TestLdapProvEntry extends LdapTest {
     
     @Test 
     public void getTimeInterval() throws Exception {
-        String ATTR = Provisioning.A_zimbraMailTrashLifetime;
+        String ATTR = Provisioning.A_zmailMailTrashLifetime;
         long value = entry.getTimeInterval(ATTR, 0);
         long expected = 30 * Constants.MILLIS_PER_DAY;
         assertEquals(expected, value);
@@ -329,7 +329,7 @@ public class TestLdapProvEntry extends LdapTest {
     
     @Test 
     public void getTimeIntervalSecs() throws Exception {
-        String ATTR = Provisioning.A_zimbraMailTrashLifetime;
+        String ATTR = Provisioning.A_zmailMailTrashLifetime;
         long value = entry.getTimeIntervalSecs(ATTR, 0);
         long expected = 30 * Constants.SECONDS_PER_DAY;
         assertEquals(expected, value);

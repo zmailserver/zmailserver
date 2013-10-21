@@ -12,7 +12,7 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.util.yauth;
+package org.zmail.cs.util.yauth;
 
 import java.io.IOException;
 import java.util.HashMap;
@@ -21,7 +21,7 @@ import org.apache.commons.httpclient.HttpClient;
 import org.apache.commons.httpclient.HttpException;
 import org.apache.commons.httpclient.methods.GetMethod;
 
-import com.zimbra.common.httpclient.HttpClientUtil;
+import org.zmail.common.httpclient.HttpClientUtil;
 
 /**
  * An implementation of the v1 Yahoo Token Auth API.  This is mostly deprecated, but still used by ymsgr among others

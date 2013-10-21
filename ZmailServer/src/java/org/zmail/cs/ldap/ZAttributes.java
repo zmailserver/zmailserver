@@ -12,14 +12,14 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.ldap;
+package org.zmail.cs.ldap;
 
 import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-import com.zimbra.cs.account.AttributeManager;
+import org.zmail.cs.account.AttributeManager;
 
 public abstract class ZAttributes extends ZLdapElement implements IAttributes {
     
@@ -114,7 +114,7 @@ public abstract class ZAttributes extends ZLdapElement implements IAttributes {
     
     /**
      * extraBinaryAttrs: if not null, attrs in the set are treated as binary attrs, in addition to 
-     * those marked binary in Zimbra's AttributeManager.
+     * those marked binary in Zmail's AttributeManager.
      */
     public abstract Map<String, Object> getAttrs(Set<String> extraBinaryAttrs) throws LdapException;
     

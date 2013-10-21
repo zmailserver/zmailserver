@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <projectDescription>
-	<name>ZimbraServer</name>
+	<name>ZmailServer</name>
 	<comment></comment>
 	<projects>
-		<project>ZimbraCommon</project>
+		<project>ZmailCommon</project>
 	</projects>
 	<buildSpec>
 		<buildCommand>

@@ -12,13 +12,13 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.qa.unittest.prov.ldap;
+package org.zmail.qa.unittest.prov.ldap;
 
 import org.junit.*;
 import static org.junit.Assert.*;
 
-import com.zimbra.cs.account.Domain;
-import com.zimbra.cs.account.ldap.LdapProv;
+import org.zmail.cs.account.Domain;
+import org.zmail.cs.account.ldap.LdapProv;
 
 public class TestLdapProvDIT extends LdapTest {
     private static LdapProvTestUtil provUtil;

@@ -13,11 +13,11 @@
  * ***** END LICENSE BLOCK *****
  */
 
-package com.zimbra.cs.imap;
+package org.zmail.cs.imap;
 
 import java.util.List;
 
-import com.zimbra.cs.imap.AppendMessage.Part;
+import org.zmail.cs.imap.AppendMessage.Part;
 
 public class AppendCommand extends ImapCommand {
     private ImapPath path;

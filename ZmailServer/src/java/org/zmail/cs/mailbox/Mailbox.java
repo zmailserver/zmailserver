@@ -12,7 +12,7 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.mailbox;
+package org.zmail.cs.mailbox;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -46,190 +46,190 @@ import com.google.common.base.Objects;
 import com.google.common.base.Preconditions;
 import com.google.common.base.Strings;
 import com.google.common.collect.ImmutableSet;
-import com.zimbra.client.ZFolder;
-import com.zimbra.client.ZMailbox;
-import com.zimbra.client.ZMailbox.Options;
-import com.zimbra.common.account.Key;
-import com.zimbra.common.account.Key.AccountBy;
-import com.zimbra.common.auth.ZAuthToken;
-import com.zimbra.common.calendar.ICalTimeZone;
-import com.zimbra.common.calendar.ParsedDateTime;
-import com.zimbra.common.calendar.TimeZoneMap;
-import com.zimbra.common.calendar.ZCalendar;
-import com.zimbra.common.calendar.ZCalendar.ICalTok;
-import com.zimbra.common.calendar.ZCalendar.ZComponent;
-import com.zimbra.common.calendar.ZCalendar.ZProperty;
-import com.zimbra.common.calendar.ZCalendar.ZVCalendar;
-import com.zimbra.common.localconfig.DebugConfig;
-import com.zimbra.common.localconfig.LC;
-import com.zimbra.common.mailbox.Color;
-import com.zimbra.common.mime.InternetAddress;
-import com.zimbra.common.mime.Rfc822ValidationInputStream;
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.common.soap.SoapProtocol;
-import com.zimbra.common.util.ArrayUtil;
-import com.zimbra.common.util.BufferStream;
-import com.zimbra.common.util.ByteUtil;
-import com.zimbra.common.util.Constants;
-import com.zimbra.common.util.CopyInputStream;
-import com.zimbra.common.util.DateUtil;
-import com.zimbra.common.util.MapUtil;
-import com.zimbra.common.util.Pair;
-import com.zimbra.common.util.SetUtil;
-import com.zimbra.common.util.StringUtil;
-import com.zimbra.common.util.UUIDUtil;
-import com.zimbra.common.util.ZimbraLog;
-import com.zimbra.cs.account.AccessManager;
-import com.zimbra.cs.account.Account;
-import com.zimbra.cs.account.AccountServiceException;
-import com.zimbra.cs.account.AuthToken;
-import com.zimbra.cs.account.DataSource;
-import com.zimbra.cs.account.Domain;
-import com.zimbra.cs.account.Provisioning;
-import com.zimbra.cs.account.ShareLocator;
-import com.zimbra.cs.datasource.DataSourceManager;
-import com.zimbra.cs.db.DbMailItem;
-import com.zimbra.cs.db.DbMailItem.QueryParams;
-import com.zimbra.cs.db.DbMailItem.SearchOpts;
-import com.zimbra.cs.db.DbMailbox;
-import com.zimbra.cs.db.DbPool;
-import com.zimbra.cs.db.DbPool.DbConnection;
-import com.zimbra.cs.db.DbTag;
-import com.zimbra.cs.db.DbVolumeBlobs;
-import com.zimbra.cs.fb.FreeBusy;
-import com.zimbra.cs.fb.FreeBusyQuery;
-import com.zimbra.cs.fb.LocalFreeBusyProvider;
-import com.zimbra.cs.imap.ImapMessage;
-import com.zimbra.cs.index.BrowseTerm;
-import com.zimbra.cs.index.DomainBrowseTerm;
-import com.zimbra.cs.index.IndexDocument;
-import com.zimbra.cs.index.LuceneFields;
-import com.zimbra.cs.index.SearchParams;
-import com.zimbra.cs.index.SortBy;
-import com.zimbra.cs.index.ZimbraQuery;
-import com.zimbra.cs.ldap.LdapConstants;
-import com.zimbra.cs.mailbox.CalendarItem.AlarmData;
-import com.zimbra.cs.mailbox.CalendarItem.Callback;
-import com.zimbra.cs.mailbox.CalendarItem.ReplyInfo;
-import com.zimbra.cs.mailbox.FoldersTagsCache.FoldersTags;
-import com.zimbra.cs.mailbox.MailItem.CustomMetadata;
-import com.zimbra.cs.mailbox.MailItem.PendingDelete;
-import com.zimbra.cs.mailbox.MailItem.TargetConstraint;
-import com.zimbra.cs.mailbox.MailServiceException.NoSuchItemException;
-import com.zimbra.cs.mailbox.MailboxListener.ChangeNotification;
-import com.zimbra.cs.mailbox.Note.Rectangle;
-import com.zimbra.cs.mailbox.Tag.NormalizedTags;
-import com.zimbra.cs.mailbox.calendar.CalendarMailSender;
-import com.zimbra.cs.mailbox.calendar.IcalXmlStrMap;
-import com.zimbra.cs.mailbox.calendar.Invite;
-import com.zimbra.cs.mailbox.calendar.RecurId;
-import com.zimbra.cs.mailbox.calendar.Util;
-import com.zimbra.cs.mailbox.calendar.ZOrganizer;
-import com.zimbra.cs.mailbox.calendar.cache.CalSummaryCache.CalendarDataResult;
-import com.zimbra.cs.mailbox.calendar.cache.CalendarCacheManager;
-import com.zimbra.cs.mailbox.calendar.tzfixup.TimeZoneFixupRules;
-import com.zimbra.cs.mailbox.util.TypedIdList;
-import com.zimbra.cs.mime.Mime;
-import com.zimbra.cs.mime.ParsedAddress;
-import com.zimbra.cs.mime.ParsedContact;
-import com.zimbra.cs.mime.ParsedDocument;
-import com.zimbra.cs.mime.ParsedMessage;
-import com.zimbra.cs.mime.ParsedMessage.CalendarPartInfo;
-import com.zimbra.cs.mime.ParsedMessageDataSource;
-import com.zimbra.cs.mime.ParsedMessageOptions;
-import com.zimbra.cs.pop3.Pop3Message;
-import com.zimbra.cs.redolog.op.AddDocumentRevision;
-import com.zimbra.cs.redolog.op.AlterItemTag;
-import com.zimbra.cs.redolog.op.ColorItem;
-import com.zimbra.cs.redolog.op.CopyItem;
-import com.zimbra.cs.redolog.op.CreateCalendarItemPlayer;
-import com.zimbra.cs.redolog.op.CreateCalendarItemRecorder;
-import com.zimbra.cs.redolog.op.CreateChat;
-import com.zimbra.cs.redolog.op.CreateComment;
-import com.zimbra.cs.redolog.op.CreateContact;
-import com.zimbra.cs.redolog.op.CreateFolder;
-import com.zimbra.cs.redolog.op.CreateFolderPath;
-import com.zimbra.cs.redolog.op.CreateInvite;
-import com.zimbra.cs.redolog.op.CreateLink;
-import com.zimbra.cs.redolog.op.CreateMailbox;
-import com.zimbra.cs.redolog.op.CreateMessage;
-import com.zimbra.cs.redolog.op.CreateMountpoint;
-import com.zimbra.cs.redolog.op.CreateNote;
-import com.zimbra.cs.redolog.op.CreateSavedSearch;
-import com.zimbra.cs.redolog.op.CreateTag;
-import com.zimbra.cs.redolog.op.DateItem;
-import com.zimbra.cs.redolog.op.DeleteItem;
-import com.zimbra.cs.redolog.op.DeleteItemFromDumpster;
-import com.zimbra.cs.redolog.op.DeleteMailbox;
-import com.zimbra.cs.redolog.op.DismissCalendarItemAlarm;
-import com.zimbra.cs.redolog.op.EditNote;
-import com.zimbra.cs.redolog.op.EnableSharedReminder;
-import com.zimbra.cs.redolog.op.FixCalendarItemEndTime;
-import com.zimbra.cs.redolog.op.FixCalendarItemPriority;
-import com.zimbra.cs.redolog.op.FixCalendarItemTZ;
-import com.zimbra.cs.redolog.op.GrantAccess;
-import com.zimbra.cs.redolog.op.ICalReply;
-import com.zimbra.cs.redolog.op.ImapCopyItem;
-import com.zimbra.cs.redolog.op.LockItem;
-import com.zimbra.cs.redolog.op.ModifyContact;
-import com.zimbra.cs.redolog.op.ModifyInvitePartStat;
-import com.zimbra.cs.redolog.op.ModifySavedSearch;
-import com.zimbra.cs.redolog.op.MoveItem;
-import com.zimbra.cs.redolog.op.PurgeImapDeleted;
-import com.zimbra.cs.redolog.op.PurgeOldMessages;
-import com.zimbra.cs.redolog.op.PurgeRevision;
-import com.zimbra.cs.redolog.op.RecoverItem;
-import com.zimbra.cs.redolog.op.RedoableOp;
-import com.zimbra.cs.redolog.op.RefreshMountpoint;
-import com.zimbra.cs.redolog.op.RenameItem;
-import com.zimbra.cs.redolog.op.RenameItemPath;
-import com.zimbra.cs.redolog.op.RenameMailbox;
-import com.zimbra.cs.redolog.op.RepositionNote;
-import com.zimbra.cs.redolog.op.RevokeAccess;
-import com.zimbra.cs.redolog.op.SaveChat;
-import com.zimbra.cs.redolog.op.SaveDocument;
-import com.zimbra.cs.redolog.op.SaveDraft;
-import com.zimbra.cs.redolog.op.SetActiveSyncDisabled;
-import com.zimbra.cs.redolog.op.SetCalendarItem;
-import com.zimbra.cs.redolog.op.SetConfig;
-import com.zimbra.cs.redolog.op.SetCustomData;
-import com.zimbra.cs.redolog.op.SetFolderDefaultView;
-import com.zimbra.cs.redolog.op.SetFolderUrl;
-import com.zimbra.cs.redolog.op.SetImapUid;
-import com.zimbra.cs.redolog.op.SetItemTags;
-import com.zimbra.cs.redolog.op.SetPermissions;
-import com.zimbra.cs.redolog.op.SetRetentionPolicy;
-import com.zimbra.cs.redolog.op.SetSubscriptionData;
-import com.zimbra.cs.redolog.op.SnoozeCalendarItemAlarm;
-import com.zimbra.cs.redolog.op.StoreIncomingBlob;
-import com.zimbra.cs.redolog.op.TrackImap;
-import com.zimbra.cs.redolog.op.TrackSync;
-import com.zimbra.cs.redolog.op.UnlockItem;
-import com.zimbra.cs.service.AuthProvider;
-import com.zimbra.cs.service.FeedManager;
-import com.zimbra.cs.service.util.ItemId;
-import com.zimbra.cs.service.util.SpamHandler;
-import com.zimbra.cs.service.util.SpamHandler.SpamReport;
-import com.zimbra.cs.session.AllAccountsRedoCommitCallback;
-import com.zimbra.cs.session.PendingModifications;
-import com.zimbra.cs.session.PendingModifications.Change;
-import com.zimbra.cs.session.Session;
-import com.zimbra.cs.session.SessionCache;
-import com.zimbra.cs.session.SoapSession;
-import com.zimbra.cs.stats.ZimbraPerf;
-import com.zimbra.cs.store.Blob;
-import com.zimbra.cs.store.MailboxBlob;
-import com.zimbra.cs.store.MailboxBlobDataSource;
-import com.zimbra.cs.store.StagedBlob;
-import com.zimbra.cs.store.StoreManager;
-import com.zimbra.cs.store.StoreManager.StoreFeature;
-import com.zimbra.cs.util.AccountUtil;
-import com.zimbra.cs.util.AccountUtil.AccountAddressMatcher;
-import com.zimbra.cs.util.SpoolingCache;
-import com.zimbra.cs.util.Zimbra;
-import com.zimbra.soap.admin.type.DataSourceType;
-import com.zimbra.soap.mail.type.Policy;
-import com.zimbra.soap.mail.type.RetentionPolicy;
+import org.zmail.client.ZFolder;
+import org.zmail.client.ZMailbox;
+import org.zmail.client.ZMailbox.Options;
+import org.zmail.common.account.Key;
+import org.zmail.common.account.Key.AccountBy;
+import org.zmail.common.auth.ZAuthToken;
+import org.zmail.common.calendar.ICalTimeZone;
+import org.zmail.common.calendar.ParsedDateTime;
+import org.zmail.common.calendar.TimeZoneMap;
+import org.zmail.common.calendar.ZCalendar;
+import org.zmail.common.calendar.ZCalendar.ICalTok;
+import org.zmail.common.calendar.ZCalendar.ZComponent;
+import org.zmail.common.calendar.ZCalendar.ZProperty;
+import org.zmail.common.calendar.ZCalendar.ZVCalendar;
+import org.zmail.common.localconfig.DebugConfig;
+import org.zmail.common.localconfig.LC;
+import org.zmail.common.mailbox.Color;
+import org.zmail.common.mime.InternetAddress;
+import org.zmail.common.mime.Rfc822ValidationInputStream;
+import org.zmail.common.service.ServiceException;
+import org.zmail.common.soap.SoapProtocol;
+import org.zmail.common.util.ArrayUtil;
+import org.zmail.common.util.BufferStream;
+import org.zmail.common.util.ByteUtil;
+import org.zmail.common.util.Constants;
+import org.zmail.common.util.CopyInputStream;
+import org.zmail.common.util.DateUtil;
+import org.zmail.common.util.MapUtil;
+import org.zmail.common.util.Pair;
+import org.zmail.common.util.SetUtil;
+import org.zmail.common.util.StringUtil;
+import org.zmail.common.util.UUIDUtil;
+import org.zmail.common.util.ZmailLog;
+import org.zmail.cs.account.AccessManager;
+import org.zmail.cs.account.Account;
+import org.zmail.cs.account.AccountServiceException;
+import org.zmail.cs.account.AuthToken;
+import org.zmail.cs.account.DataSource;
+import org.zmail.cs.account.Domain;
+import org.zmail.cs.account.Provisioning;
+import org.zmail.cs.account.ShareLocator;
+import org.zmail.cs.datasource.DataSourceManager;
+import org.zmail.cs.db.DbMailItem;
+import org.zmail.cs.db.DbMailItem.QueryParams;
+import org.zmail.cs.db.DbMailItem.SearchOpts;
+import org.zmail.cs.db.DbMailbox;
+import org.zmail.cs.db.DbPool;
+import org.zmail.cs.db.DbPool.DbConnection;
+import org.zmail.cs.db.DbTag;
+import org.zmail.cs.db.DbVolumeBlobs;
+import org.zmail.cs.fb.FreeBusy;
+import org.zmail.cs.fb.FreeBusyQuery;
+import org.zmail.cs.fb.LocalFreeBusyProvider;
+import org.zmail.cs.imap.ImapMessage;
+import org.zmail.cs.index.BrowseTerm;
+import org.zmail.cs.index.DomainBrowseTerm;
+import org.zmail.cs.index.IndexDocument;
+import org.zmail.cs.index.LuceneFields;
+import org.zmail.cs.index.SearchParams;
+import org.zmail.cs.index.SortBy;
+import org.zmail.cs.index.ZmailQuery;
+import org.zmail.cs.ldap.LdapConstants;
+import org.zmail.cs.mailbox.CalendarItem.AlarmData;
+import org.zmail.cs.mailbox.CalendarItem.Callback;
+import org.zmail.cs.mailbox.CalendarItem.ReplyInfo;
+import org.zmail.cs.mailbox.FoldersTagsCache.FoldersTags;
+import org.zmail.cs.mailbox.MailItem.CustomMetadata;
+import org.zmail.cs.mailbox.MailItem.PendingDelete;
+import org.zmail.cs.mailbox.MailItem.TargetConstraint;
+import org.zmail.cs.mailbox.MailServiceException.NoSuchItemException;
+import org.zmail.cs.mailbox.MailboxListener.ChangeNotification;
+import org.zmail.cs.mailbox.Note.Rectangle;
+import org.zmail.cs.mailbox.Tag.NormalizedTags;
+import org.zmail.cs.mailbox.calendar.CalendarMailSender;
+import org.zmail.cs.mailbox.calendar.IcalXmlStrMap;
+import org.zmail.cs.mailbox.calendar.Invite;
+import org.zmail.cs.mailbox.calendar.RecurId;
+import org.zmail.cs.mailbox.calendar.Util;
+import org.zmail.cs.mailbox.calendar.ZOrganizer;
+import org.zmail.cs.mailbox.calendar.cache.CalSummaryCache.CalendarDataResult;
+import org.zmail.cs.mailbox.calendar.cache.CalendarCacheManager;
+import org.zmail.cs.mailbox.calendar.tzfixup.TimeZoneFixupRules;
+import org.zmail.cs.mailbox.util.TypedIdList;
+import org.zmail.cs.mime.Mime;
+import org.zmail.cs.mime.ParsedAddress;
+import org.zmail.cs.mime.ParsedContact;
+import org.zmail.cs.mime.ParsedDocument;
+import org.zmail.cs.mime.ParsedMessage;
+import org.zmail.cs.mime.ParsedMessage.CalendarPartInfo;
+import org.zmail.cs.mime.ParsedMessageDataSource;
+import org.zmail.cs.mime.ParsedMessageOptions;
+import org.zmail.cs.pop3.Pop3Message;
+import org.zmail.cs.redolog.op.AddDocumentRevision;
+import org.zmail.cs.redolog.op.AlterItemTag;
+import org.zmail.cs.redolog.op.ColorItem;
+import org.zmail.cs.redolog.op.CopyItem;
+import org.zmail.cs.redolog.op.CreateCalendarItemPlayer;
+import org.zmail.cs.redolog.op.CreateCalendarItemRecorder;
+import org.zmail.cs.redolog.op.CreateChat;
+import org.zmail.cs.redolog.op.CreateComment;
+import org.zmail.cs.redolog.op.CreateContact;
+import org.zmail.cs.redolog.op.CreateFolder;
+import org.zmail.cs.redolog.op.CreateFolderPath;
+import org.zmail.cs.redolog.op.CreateInvite;
+import org.zmail.cs.redolog.op.CreateLink;
+import org.zmail.cs.redolog.op.CreateMailbox;
+import org.zmail.cs.redolog.op.CreateMessage;
+import org.zmail.cs.redolog.op.CreateMountpoint;
+import org.zmail.cs.redolog.op.CreateNote;
+import org.zmail.cs.redolog.op.CreateSavedSearch;
+import org.zmail.cs.redolog.op.CreateTag;
+import org.zmail.cs.redolog.op.DateItem;
+import org.zmail.cs.redolog.op.DeleteItem;
+import org.zmail.cs.redolog.op.DeleteItemFromDumpster;
+import org.zmail.cs.redolog.op.DeleteMailbox;
+import org.zmail.cs.redolog.op.DismissCalendarItemAlarm;
+import org.zmail.cs.redolog.op.EditNote;
+import org.zmail.cs.redolog.op.EnableSharedReminder;
+import org.zmail.cs.redolog.op.FixCalendarItemEndTime;
+import org.zmail.cs.redolog.op.FixCalendarItemPriority;
+import org.zmail.cs.redolog.op.FixCalendarItemTZ;
+import org.zmail.cs.redolog.op.GrantAccess;
+import org.zmail.cs.redolog.op.ICalReply;
+import org.zmail.cs.redolog.op.ImapCopyItem;
+import org.zmail.cs.redolog.op.LockItem;
+import org.zmail.cs.redolog.op.ModifyContact;
+import org.zmail.cs.redolog.op.ModifyInvitePartStat;
+import org.zmail.cs.redolog.op.ModifySavedSearch;
+import org.zmail.cs.redolog.op.MoveItem;
+import org.zmail.cs.redolog.op.PurgeImapDeleted;
+import org.zmail.cs.redolog.op.PurgeOldMessages;
+import org.zmail.cs.redolog.op.PurgeRevision;
+import org.zmail.cs.redolog.op.RecoverItem;
+import org.zmail.cs.redolog.op.RedoableOp;
+import org.zmail.cs.redolog.op.RefreshMountpoint;
+import org.zmail.cs.redolog.op.RenameItem;
+import org.zmail.cs.redolog.op.RenameItemPath;
+import org.zmail.cs.redolog.op.RenameMailbox;
+import org.zmail.cs.redolog.op.RepositionNote;
+import org.zmail.cs.redolog.op.RevokeAccess;
+import org.zmail.cs.redolog.op.SaveChat;
+import org.zmail.cs.redolog.op.SaveDocument;
+import org.zmail.cs.redolog.op.SaveDraft;
+import org.zmail.cs.redolog.op.SetActiveSyncDisabled;
+import org.zmail.cs.redolog.op.SetCalendarItem;
+import org.zmail.cs.redolog.op.SetConfig;
+import org.zmail.cs.redolog.op.SetCustomData;
+import org.zmail.cs.redolog.op.SetFolderDefaultView;
+import org.zmail.cs.redolog.op.SetFolderUrl;
+import org.zmail.cs.redolog.op.SetImapUid;
+import org.zmail.cs.redolog.op.SetItemTags;
+import org.zmail.cs.redolog.op.SetPermissions;
+import org.zmail.cs.redolog.op.SetRetentionPolicy;
+import org.zmail.cs.redolog.op.SetSubscriptionData;
+import org.zmail.cs.redolog.op.SnoozeCalendarItemAlarm;
+import org.zmail.cs.redolog.op.StoreIncomingBlob;
+import org.zmail.cs.redolog.op.TrackImap;
+import org.zmail.cs.redolog.op.TrackSync;
+import org.zmail.cs.redolog.op.UnlockItem;
+import org.zmail.cs.service.AuthProvider;
+import org.zmail.cs.service.FeedManager;
+import org.zmail.cs.service.util.ItemId;
+import org.zmail.cs.service.util.SpamHandler;
+import org.zmail.cs.service.util.SpamHandler.SpamReport;
+import org.zmail.cs.session.AllAccountsRedoCommitCallback;
+import org.zmail.cs.session.PendingModifications;
+import org.zmail.cs.session.PendingModifications.Change;
+import org.zmail.cs.session.Session;
+import org.zmail.cs.session.SessionCache;
+import org.zmail.cs.session.SoapSession;
+import org.zmail.cs.stats.ZmailPerf;
+import org.zmail.cs.store.Blob;
+import org.zmail.cs.store.MailboxBlob;
+import org.zmail.cs.store.MailboxBlobDataSource;
+import org.zmail.cs.store.StagedBlob;
+import org.zmail.cs.store.StoreManager;
+import org.zmail.cs.store.StoreManager.StoreFeature;
+import org.zmail.cs.util.AccountUtil;
+import org.zmail.cs.util.AccountUtil.AccountAddressMatcher;
+import org.zmail.cs.util.SpoolingCache;
+import org.zmail.cs.util.Zmail;
+import org.zmail.soap.admin.type.DataSourceType;
+import org.zmail.soap.mail.type.Policy;
+import org.zmail.soap.mail.type.RetentionPolicy;
 
 /**
  * @since Jun 13, 2004
@@ -372,19 +372,19 @@ public class Mailbox {
             if (depth++ == 0) {
                 octxt = ctxt;
                 recorder = op;
-                ZimbraLog.mailbox.debug("beginning operation: %s", caller);
+                ZmailLog.mailbox.debug("beginning operation: %s", caller);
             } else {
-                ZimbraLog.mailbox.debug("  increasing stack depth to %d (%s)", depth, caller);
+                ZmailLog.mailbox.debug("  increasing stack depth to %d (%s)", depth, caller);
             }
         }
 
         boolean endChange() {
-            if (ZimbraLog.mailbox.isDebugEnabled()) {
+            if (ZmailLog.mailbox.isDebugEnabled()) {
                 if (depth <= 1) {
-                    ZimbraLog.mailbox.debug("ending operation %s",
+                    ZmailLog.mailbox.debug("ending operation %s",
                             recorder == null ? "" : recorder.getClass().getSimpleName());
                 } else {
-                    ZimbraLog.mailbox.debug("  decreasing stack depth to %d", depth - 1);
+                    ZmailLog.mailbox.debug("  decreasing stack depth to %d", depth - 1);
                 }
             }
             return (--depth == 0);
@@ -397,7 +397,7 @@ public class Mailbox {
         DbConnection getConnection() throws ServiceException {
             if (conn == null) {
                 conn = DbPool.getConnection(Mailbox.this);
-                ZimbraLog.mailbox.debug("  fetching new DB connection");
+                ZmailLog.mailbox.debug("  fetching new DB connection");
             }
             return conn;
         }
@@ -456,7 +456,7 @@ public class Mailbox {
             this.dirty.clear();
             this.otherDirtyStuff.clear();
 
-            ZimbraLog.mailbox.debug("clearing change");
+            ZmailLog.mailbox.debug("clearing change");
         }
     }
 
@@ -579,9 +579,9 @@ public class Mailbox {
     public final MailboxLock lock = new MailboxLock();
 
     // TODO: figure out correct caching strategy
-    private static final int MAX_ITEM_CACHE_WITH_LISTENERS    = LC.zimbra_mailbox_active_cache.intValue();
-    private static final int MAX_ITEM_CACHE_WITHOUT_LISTENERS = LC.zimbra_mailbox_inactive_cache.intValue();
-    private static final int MAX_ITEM_CACHE_FOR_GALSYNC_MAILBOX = LC.zimbra_mailbox_galsync_cache.intValue();
+    private static final int MAX_ITEM_CACHE_WITH_LISTENERS    = LC.zmail_mailbox_active_cache.intValue();
+    private static final int MAX_ITEM_CACHE_WITHOUT_LISTENERS = LC.zmail_mailbox_inactive_cache.intValue();
+    private static final int MAX_ITEM_CACHE_FOR_GALSYNC_MAILBOX = LC.zmail_mailbox_galsync_cache.intValue();
     private static final int MAX_MSGID_CACHE = 10;
 
     private final int           mId;
@@ -662,46 +662,46 @@ public class Mailbox {
 
             if (!mData.version.atLeast(MailboxVersion.CURRENT)) { // check for mailbox upgrade
                 if (!mData.version.atLeast(1, 2)) {
-                    ZimbraLog.mailbox.info("Upgrade mailbox from %s to 1.2", getVersion());
+                    ZmailLog.mailbox.info("Upgrade mailbox from %s to 1.2", getVersion());
                     index.upgradeMailboxTo1_2();
                 }
 
                 // same prescription for both the 1.2 -> 1.3 and 1.3 -> 1.4 migrations
                 if (!mData.version.atLeast(1, 4)) {
-                    ZimbraLog.mailbox.info("Upgrade mailbox from %s to 1.4", getVersion());
+                    ZmailLog.mailbox.info("Upgrade mailbox from %s to 1.4", getVersion());
                     recalculateFolderAndTagCounts();
                     updateVersion(new MailboxVersion((short) 1, (short) 4));
                 }
 
                 if (!mData.version.atLeast(1, 5)) {
-                    ZimbraLog.mailbox.info("Upgrade mailbox from %s to 1.5", getVersion());
+                    ZmailLog.mailbox.info("Upgrade mailbox from %s to 1.5", getVersion());
                     index.indexAllDeferredFlagItems();
                 }
 
                 // bug 41893: revert folder colors back to mapped value
                 if (!mData.version.atLeast(1, 7)) {
-                    ZimbraLog.mailbox.info("Upgrade mailbox from %s to 1.7", getVersion());
+                    ZmailLog.mailbox.info("Upgrade mailbox from %s to 1.7", getVersion());
                     MailboxUpgrade.upgradeTo1_7(this);
                     updateVersion(new MailboxVersion((short) 1, (short) 7));
                 }
 
                 // bug 41850: revert tag colors back to mapped value
                 if (!mData.version.atLeast(1, 8)) {
-                    ZimbraLog.mailbox.info("Upgrade mailbox from %s to 1.8", getVersion());
+                    ZmailLog.mailbox.info("Upgrade mailbox from %s to 1.8", getVersion());
                     MailboxUpgrade.upgradeTo1_8(this);
                     updateVersion(new MailboxVersion((short) 1, (short) 8));
                 }
 
                 // bug 20620: track \Deleted counts separately
                 if (!mData.version.atLeast(1, 9)) {
-                    ZimbraLog.mailbox.info("Upgrade mailbox from %s to 1.9", getVersion());
+                    ZmailLog.mailbox.info("Upgrade mailbox from %s to 1.9", getVersion());
                     purgeImapDeleted(null);
                     updateVersion(new MailboxVersion((short) 1, (short) 9));
                 }
 
                 // bug 39647: wiki to document migration
                 if (!mData.version.atLeast(1, 10)) {
-                    ZimbraLog.mailbox.info("Upgrade mailbox from %s to 1.10", getVersion());
+                    ZmailLog.mailbox.info("Upgrade mailbox from %s to 1.10", getVersion());
                     // update the version first so that the same mailbox
                     // don't have to go through the migration again
                     // if it was called to open() during the migration.
@@ -710,42 +710,42 @@ public class Mailbox {
                 }
 
                 if (!mData.version.atLeast(2, 0)) {
-                    ZimbraLog.mailbox.info("Upgrade mailbox from %s to 2.0", getVersion());
+                    ZmailLog.mailbox.info("Upgrade mailbox from %s to 2.0", getVersion());
                     MailboxUpgrade.upgradeTo2_0(this);
                     updateVersion(new MailboxVersion((short) 2, (short) 0));
                 }
 
                 // TAG and TAGGED_ITEM migration
                 if (!mData.version.atLeast(2, 1)) {
-                    ZimbraLog.mailbox.info("Upgrade mailbox from %s to 2.1", getVersion());
+                    ZmailLog.mailbox.info("Upgrade mailbox from %s to 2.1", getVersion());
                     MailboxUpgrade.upgradeTo2_1(this);
                     updateVersion(new MailboxVersion((short) 2, (short) 1));
                 }
 
                 // mailbox version in ZIMBRA.MAILBOX table
                 if (!mData.version.atLeast(2, 2)) {
-                    ZimbraLog.mailbox.info("Upgrade mailbox from %s to 2.2", getVersion());
+                    ZmailLog.mailbox.info("Upgrade mailbox from %s to 2.2", getVersion());
                     // writing the new version itself performs the upgrade!
                     updateVersion(new MailboxVersion((short) 2, (short) 2));
                 }
 
                 // PRIORITY flag
                 if (!mData.version.atLeast(2, 3)) {
-                    ZimbraLog.mailbox.info("Upgrade mailbox from %s to 2.3", getVersion());
+                    ZmailLog.mailbox.info("Upgrade mailbox from %s to 2.3", getVersion());
                     MailboxUpgrade.upgradeTo2_3(this);
                     updateVersion(new MailboxVersion((short) 2, (short) 3));
                 }
 
                 // POST flag
                 if (!mData.version.atLeast(2, 4)) {
-                    ZimbraLog.mailbox.info("Upgrade mailbox from %s to 2.4", getVersion());
+                    ZmailLog.mailbox.info("Upgrade mailbox from %s to 2.4", getVersion());
                     MailboxUpgrade.upgradeTo2_4(this);
                     updateVersion(new MailboxVersion((short) 2, (short) 4));
                 }
 
                 // UUID column
                 if (!mData.version.atLeast(2, 5)) {
-                    ZimbraLog.mailbox.info("Upgrade mailbox from %s to 2.5", getVersion());
+                    ZmailLog.mailbox.info("Upgrade mailbox from %s to 2.5", getVersion());
                     MailboxUpgrade.upgradeTo2_5(this);
                     updateVersion(new MailboxVersion((short) 2, (short) 5));
                 }
@@ -754,7 +754,7 @@ public class Mailbox {
 
                 // MUTED flag
                 if (!mData.version.atLeast(2, 7)) {
-                    ZimbraLog.mailbox.info("Upgrade mailbox from %s to 2.7", getVersion());
+                    ZmailLog.mailbox.info("Upgrade mailbox from %s to 2.7", getVersion());
                     MailboxUpgrade.upgradeTo2_7(this);
                     updateVersion(new MailboxVersion((short) 2, (short) 7));
                 }
@@ -794,7 +794,7 @@ public class Mailbox {
         String accountId = getAccountId();
         Account acct = Provisioning.getInstance().get(AccountBy.id, accountId);
         if (acct == null) {
-            ZimbraLog.mailbox.warn("no account found in directory for mailbox %d (was expecting %s)", mId, accountId);
+            ZmailLog.mailbox.warn("no account found in directory for mailbox %d (was expecting %s)", mId, accountId);
             throw AccountServiceException.NO_SUCH_ACCOUNT(accountId);
         }
         return acct;
@@ -887,7 +887,7 @@ public class Mailbox {
         } finally {
             lock.release();
         }
-        ZimbraLog.mailbox.debug("adding listener: %s", session);
+        ZmailLog.mailbox.debug("adding listener: %s", session);
     }
 
     /** Removes a {@link Session} from the set of listeners notified on
@@ -897,8 +897,8 @@ public class Mailbox {
     public void removeListener(Session session) {
         mListeners.remove(session);
 
-        if (ZimbraLog.mailbox.isDebugEnabled())
-            ZimbraLog.mailbox.debug("clearing listener: " + session);
+        if (ZmailLog.mailbox.isDebugEnabled())
+            ZmailLog.mailbox.debug("clearing listener: " + session);
     }
 
     /** Cleans up and disconnects all {@link Session}s listening for
@@ -906,7 +906,7 @@ public class Mailbox {
      *
      * @see SessionCache#clearSession(Session) */
     private void purgeListeners() {
-        ZimbraLog.mailbox.debug("purging listeners");
+        ZmailLog.mailbox.debug("purging listeners");
 
         for (Session session : mListeners) {
             SessionCache.clearSession(session);
@@ -1266,7 +1266,7 @@ public class Mailbox {
 
     /** Updates the count of contacts currently in the mailbox.  The
      *  administrator can place a limit on a user's contact count by setting
-     *  the <tt>zimbraContactMaxNumEntries</tt> COS attribute.  Contacts
+     *  the <tt>zmailContactMaxNumEntries</tt> COS attribute.  Contacts
      *  in the Trash still count against this quota.
      *
      * @param delta  The change in contact count, negative to decrease.
@@ -1304,7 +1304,7 @@ public class Mailbox {
         try {
             itemSnapshot = item.snapshotItem();
         } catch (ServiceException e) {
-            ZimbraLog.mailbox.warn("could not snapshot to-be-deleted item", e);
+            ZmailLog.mailbox.warn("could not snapshot to-be-deleted item", e);
         }
         if (itemSnapshot == null) {
             markItemDeleted(item.getType(), item.getId());
@@ -1334,7 +1334,7 @@ public class Mailbox {
      *
      * @param item    The modified item.
      * @param reason  The bitmask describing the modified item properties.
-     * @see com.zimbra.cs.session.PendingModifications.Change */
+     * @see org.zmail.cs.session.PendingModifications.Change */
     void markItemModified(MailItem item, int reason) throws ServiceException {
         if (item.inDumpster()) {
             throw MailServiceException.IMMUTABLE_OBJECT(item.getId());
@@ -1423,10 +1423,10 @@ public class Mailbox {
         try {
             if (maintenance != null) {
                 maintenance.startInnerMaintenance();
-                ZimbraLog.mailbox.info("already in maintenance, nesting access for mailboxId %d", getId());
+                ZmailLog.mailbox.info("already in maintenance, nesting access for mailboxId %d", getId());
                 return maintenance;
             }
-            ZimbraLog.mailbox.info("Putting mailbox %d under maintenance.", getId());
+            ZmailLog.mailbox.info("Putting mailbox %d under maintenance.", getId());
 
             purgeListeners();
             index.evict();
@@ -1450,16 +1450,16 @@ public class Mailbox {
             throw ServiceException.FAILURE("mainbox not in maintenance mode", null);
 
         if (success) {
-            ZimbraLog.mailbox.info("Ending maintenance on mailbox %d.", getId());
+            ZmailLog.mailbox.info("Ending maintenance on mailbox %d.", getId());
             if (maintenance.endInnerMaintenance()) {
-                ZimbraLog.mailbox.info("decreasing depth for mailboxId %d", getId());
+                ZmailLog.mailbox.info("decreasing depth for mailboxId %d", getId());
                 return false;
             } else {
                 maintenance = null;
                 return true;
             }
         } else {
-            ZimbraLog.mailbox.info("Ending maintenance and marking mailbox %d as unavailable.", getId());
+            ZmailLog.mailbox.info("Ending maintenance and marking mailbox %d as unavailable.", getId());
             maintenance.markUnavailable();
             return true;
         }
@@ -1518,7 +1518,7 @@ public class Mailbox {
         if (cache == null) {
             cache = new ItemCache();
             mItemCache = new SoftReference<ItemCache>(cache);
-            ZimbraLog.cache.debug("created a new MailItem cache for mailbox " + getId());
+            ZmailLog.cache.debug("created a new MailItem cache for mailbox " + getId());
         }
         currentChange.itemCache = cache;
 
@@ -1572,7 +1572,7 @@ public class Mailbox {
                 return new Metadata(config);
             } catch (ServiceException e) {
                 success = false;
-                ZimbraLog.mailbox.warn("could not decode config metadata for section:" + section);
+                ZmailLog.mailbox.warn("could not decode config metadata for section:" + section);
                 return null;
             }
         } finally {
@@ -1648,7 +1648,7 @@ public class Mailbox {
             getItemCache().put(item);
         }
 
-        ZimbraLog.cache.debug("cached %s %d in mailbox %d", item.getType(), item.getId(), getId());
+        ZmailLog.cache.debug("cached %s %d in mailbox %d", item.getType(), item.getId(), getId());
     }
 
     protected void uncache(MailItem item) throws ServiceException {
@@ -1669,7 +1669,7 @@ public class Mailbox {
             MessageCache.purge(item);
         }
 
-        ZimbraLog.cache.debug("uncached %s %d in mailbox %d", item.getType(), item.getId(), getId());
+        ZmailLog.cache.debug("uncached %s %d in mailbox %d", item.getType(), item.getId(), getId());
 
         uncacheChildren(item);
     }
@@ -1683,8 +1683,8 @@ public class Mailbox {
      * @param itemId  The id of the item to uncache */
     void uncacheItem(Integer itemId) throws ServiceException {
         MailItem item = getItemCache().remove(itemId);
-        if (ZimbraLog.cache.isDebugEnabled())
-            ZimbraLog.cache.debug("uncached item " + itemId + " in mailbox " + getId());
+        if (ZmailLog.cache.isDebugEnabled())
+            ZmailLog.cache.debug("uncached item " + itemId + " in mailbox " + getId());
         if (item != null) {
             MessageCache.purge(item);
             uncacheChildren(item);
@@ -1755,7 +1755,7 @@ public class Mailbox {
             lock.release();
         }
 
-        ZimbraLog.cache.debug("purged type=%s", type);
+        ZmailLog.cache.debug("purged type=%s", type);
     }
 
     public static final Set<Integer> REIFIED_FLAGS = ImmutableSet.of(
@@ -1866,7 +1866,7 @@ public class Mailbox {
 
         if (mFolderCache != null && mTagCache != null && !initial)
             return;
-        ZimbraLog.cache.info("initializing folder and tag caches for mailbox %d", getId());
+        ZmailLog.cache.info("initializing folder and tag caches for mailbox %d", getId());
 
         try {
             DbMailItem.FolderTagMap folderData = new DbMailItem.FolderTagMap();
@@ -1903,11 +1903,11 @@ public class Mailbox {
             if (stats != null) {
                 if (mData.size != stats.size) {
                     currentChange.dirty.recordModified(this, Change.SIZE);
-                    ZimbraLog.mailbox.debug("setting mailbox size to %d (was %d) for mailbox %d", stats.size, mData.size, mId);
+                    ZmailLog.mailbox.debug("setting mailbox size to %d (was %d) for mailbox %d", stats.size, mData.size, mId);
                     mData.size = stats.size;
                 }
                 if (mData.contacts != stats.contacts) {
-                    ZimbraLog.mailbox.debug("setting contact count to %d (was %d) for mailbox %d", stats.contacts, mData.contacts, mId);
+                    ZmailLog.mailbox.debug("setting contact count to %d (was %d) for mailbox %d", stats.contacts, mData.contacts, mId);
                     mData.contacts = stats.contacts;
                 }
                 DbMailbox.updateMailboxStats(this);
@@ -2072,14 +2072,14 @@ public class Mailbox {
                     try {
                         index.deleteIndex();
                     } catch (IOException iox) {
-                        ZimbraLog.store.warn("Unable to delete index data", iox);
+                        ZmailLog.store.warn("Unable to delete index data", iox);
                     }
 
                     if (deleteStore) {
                         try {
                             sm.deleteStore(this, blobs);
                         } catch (IOException iox) {
-                            ZimbraLog.store.warn("Unable to delete message data", iox);
+                            ZmailLog.store.warn("Unable to delete message data", iox);
                         }
                     }
                 }
@@ -2257,7 +2257,7 @@ public class Mailbox {
     /**
      * This API uses the credentials in authedAcct/asAdmin parameters.
      *
-     * @see #getEffectivePermissions(OperationContext, int, com.zimbra.cs.mailbox.MailItem.Type)
+     * @see #getEffectivePermissions(OperationContext, int, org.zmail.cs.mailbox.MailItem.Type)
      */
     public short getEffectivePermissions(Account authedAcct, boolean asAdmin, int itemId, MailItem.Type type)
             throws ServiceException {
@@ -2391,7 +2391,7 @@ public class Mailbox {
                 if (item instanceof Folder && folders != null) {
                     Folder folder = folders.get(item.getId());
                     if (folder == null) {
-                        ZimbraLog.mailbox.warn("folder missing from snapshotted folder set: %d", item.getId());
+                        ZmailLog.mailbox.warn("folder missing from snapshotted folder set: %d", item.getId());
                         folder = (Folder) item;
                     }
                     snapshot.recordCreated(folder);
@@ -2421,7 +2421,7 @@ public class Mailbox {
                 if (item instanceof Folder && folders != null) {
                     Folder folder = folders.get(item.getId());
                     if (folder == null) {
-                        ZimbraLog.mailbox.warn("folder missing from snapshotted folder set: %d", item.getId());
+                        ZmailLog.mailbox.warn("folder missing from snapshotted folder set: %d", item.getId());
                         folder = (Folder) item;
                     }
                     snapshot.recordModified(folder, chg.why, (MailItem) chg.preModifyObj);
@@ -4093,7 +4093,7 @@ public class Mailbox {
                             calItems.add(calItem);
                     }
                 } catch (ServiceException e) {
-                    ZimbraLog.calendar.warn("Error while retrieving calendar item " + data.id + " in mailbox " + mId + "; skipping item", e);
+                    ZmailLog.calendar.warn("Error while retrieving calendar item " + data.id + " in mailbox " + mId + "; skipping item", e);
                 }
             }
             success = true;
@@ -4139,7 +4139,7 @@ public class Mailbox {
             }
 
             ZProperty prop;
-            prop = new ZProperty(ICalTok.PRODID, ZCalendar.sZimbraProdID);
+            prop = new ZProperty(ICalTok.PRODID, ZCalendar.sZmailProdID);
             prop.toICalendar(writer, needAppleICalHacks);
             prop = new ZProperty(ICalTok.VERSION, ZCalendar.sIcalVersion);
             prop.toICalendar(writer, needAppleICalHacks);
@@ -4176,7 +4176,7 @@ public class Mailbox {
                                 useOutlookCompatMode, appleICalExdateHack);
                     } catch (ServiceException e) {
                         if (ignoreErrors) {
-                            ZimbraLog.calendar.warn("Error retrieving iCalendar data for item " +
+                            ZmailLog.calendar.warn("Error retrieving iCalendar data for item " +
                                                     calItem.getId() + ": " + e.getMessage(), e);
                         } else {
                             throw e;
@@ -4281,7 +4281,7 @@ public class Mailbox {
 
         // okay, lets run the search through the query parser -- this has the side-effect of
         // re-writing the query in a format that is OK to proxy to the other server
-        ZimbraQuery zq = new ZimbraQuery(octxt, SoapProtocol.Soap12, this, params);
+        ZmailQuery zq = new ZmailQuery(octxt, SoapProtocol.Soap12, this, params);
         return zq.toQueryString();
     }
 
@@ -4554,7 +4554,7 @@ public class Mailbox {
             if (!scidList.isEmpty()) {
                 Invite invLog = scidList.get(0).invite;
                 String idStr = calItem != null ? Integer.toString(calItem.getId()) : "(new)";
-                ZimbraLog.calendar.info("setCalendarItem: id=%s, folderId=%d, subject=\"%s\", UID=%s",
+                ZmailLog.calendar.info("setCalendarItem: id=%s, folderId=%d, subject=\"%s\", UID=%s",
                         idStr, folderId, (invLog != null && invLog.isPublic() ? invLog.getName() : "(private)"),
                         invLog.getUid());
             }
@@ -4585,7 +4585,7 @@ public class Mailbox {
                         } catch (MailServiceException e) {
                             if (e.getCode() == MailServiceException.ALREADY_EXISTS) {
                                 //bug 49106 - did not find the appointment above in getCalendarItemByUid(), but the mail_item exists
-                                ZimbraLog.calendar.error("failed to create calendar item; already exists. cause: " +
+                                ZmailLog.calendar.error("failed to create calendar item; already exists. cause: " +
                                         (scidList.isEmpty() ? "no items in uid list." :
                                             "uid not found in appointment: " + scidList.get(0).invite.getUid() +
                                         " or bad mail_item type"));
@@ -4645,7 +4645,7 @@ public class Mailbox {
             throws ServiceException {
         int numFixedCalItems = 0;
         int numFixedTZs = 0;
-        ZimbraLog.calendar.info("Started: timezone fixup in calendar of mailbox " + getId());
+        ZmailLog.calendar.info("Started: timezone fixup in calendar of mailbox " + getId());
         List<List<MailItem>> lists = new ArrayList<List<MailItem>>(2);
         lists.add(getItemList(octxt, MailItem.Type.APPOINTMENT));
         lists.add(getItemList(octxt, MailItem.Type.TASK));
@@ -4665,12 +4665,12 @@ public class Mailbox {
                         numFixedCalItems++;
                     }
                 } catch (ServiceException e) {
-                    ZimbraLog.calendar.error("Error fixing calendar item " + calItem.getId() + " in mailbox " +
+                    ZmailLog.calendar.error("Error fixing calendar item " + calItem.getId() + " in mailbox " +
                             getId() + ": " + e.getMessage(), e);
                 }
             }
         }
-        ZimbraLog.calendar.info("Finished: timezone fixup in calendar of mailbox " + getId() + "; fixed " +
+        ZmailLog.calendar.info("Finished: timezone fixup in calendar of mailbox " + getId() + "; fixed " +
                 numFixedTZs + " timezone entries in " + numFixedCalItems + " calendar items");
         return numFixedCalItems;
     }
@@ -4692,7 +4692,7 @@ public class Mailbox {
             Map<String, ICalTimeZone> replaced = new HashMap<String, ICalTimeZone>();
             int numFixed = fixupRules.fixCalendarItem(calItem, replaced);
             if (numFixed > 0) {
-                ZimbraLog.calendar.info("Fixed " + numFixed + " timezone entries in calendar item " + calItem.getId());
+                ZmailLog.calendar.info("Fixed " + numFixed + " timezone entries in calendar item " + calItem.getId());
                 redoRecorder.setReplacementMap(replaced);
                 markItemModified(calItem, Change.CONTENT | Change.INVITE);
                 calItem.snapshotRevision();
@@ -4718,7 +4718,7 @@ public class Mailbox {
 
     public int fixAllCalendarItemEndTime(OperationContext octxt) throws ServiceException {
         int numFixed = 0;
-        ZimbraLog.calendar.info("Started: end time fixup in calendar of mailbox " + getId());
+        ZmailLog.calendar.info("Started: end time fixup in calendar of mailbox " + getId());
         @SuppressWarnings("unchecked")
         List<MailItem>[] lists = new List[2];
         lists[0] = getItemList(octxt, MailItem.Type.APPOINTMENT);
@@ -4732,13 +4732,13 @@ public class Mailbox {
                 try {
                     numFixed += fixCalendarItemEndTime(octxt, calItem);
                 } catch (ServiceException e) {
-                    ZimbraLog.calendar.error(
+                    ZmailLog.calendar.error(
                             "Error fixing calendar item " + calItem.getId() +
                             " in mailbox " + getId() + ": " + e.getMessage(), e);
                 }
             }
         }
-        ZimbraLog.calendar.info(
+        ZmailLog.calendar.info(
                 "Finished: end time fixup in calendar of mailbox " +
                 getId() + "; fixed " + numFixed + " entries");
         return numFixed;
@@ -4751,7 +4751,7 @@ public class Mailbox {
             beginTransaction("fixupCalendarItemEndTime", octxt, redoRecorder);
             int numFixed = calItem.fixRecurrenceEndTime();
             if (numFixed > 0) {
-                ZimbraLog.calendar.info("Fixed calendar item " + calItem.getId());
+                ZmailLog.calendar.info("Fixed calendar item " + calItem.getId());
                 calItem.snapshotRevision();
                 calItem.saveMetadata();
                 success = true;
@@ -4764,7 +4764,7 @@ public class Mailbox {
 
     public int fixAllCalendarItemPriority(OperationContext octxt) throws ServiceException {
         int numFixed = 0;
-        ZimbraLog.calendar.info("Started: priority fixup in calendar of mailbox " + getId());
+        ZmailLog.calendar.info("Started: priority fixup in calendar of mailbox " + getId());
         @SuppressWarnings("unchecked")
         List<MailItem>[] lists = new List[2];
         lists[0] = getItemList(octxt, MailItem.Type.APPOINTMENT);
@@ -4778,13 +4778,13 @@ public class Mailbox {
                 try {
                     numFixed += fixCalendarItemPriority(octxt, calItem);
                 } catch (ServiceException e) {
-                    ZimbraLog.calendar.error(
+                    ZmailLog.calendar.error(
                             "Error fixing calendar item " + calItem.getId() +
                             " in mailbox " + getId() + ": " + e.getMessage(), e);
                 }
             }
         }
-        ZimbraLog.calendar.info(
+        ZmailLog.calendar.info(
                 "Finished: priority fixup in calendar of mailbox " +
                 getId() + "; fixed " + numFixed + " entries");
         return numFixed;
@@ -4811,7 +4811,7 @@ public class Mailbox {
             }
             int numFixed = 0;
             if (flags != calItem.mData.getFlags()) {
-                ZimbraLog.calendar.info("Fixed calendar item " + calItem.getId());
+                ZmailLog.calendar.info("Fixed calendar item " + calItem.getId());
                 markItemModified(calItem, Change.INVITE);
                 calItem.mData.setFlags(flags);
                 calItem.snapshotRevision();
@@ -4967,7 +4967,7 @@ public class Mailbox {
                     calItems.put(calItem.getUid(), calItem);
                     uidList.remove(calItem.getUid());
                 } catch (ServiceException e) {
-                    ZimbraLog.calendar.warn("Error while retrieving calendar item %d; skipping item", data.id, e);
+                    ZmailLog.calendar.warn("Error while retrieving calendar item %d; skipping item", data.id, e);
                 }
             }
             success = true;
@@ -5008,7 +5008,7 @@ public class Mailbox {
             }
         } catch (Exception e) {
             if (!(e instanceof MailServiceException.NoSuchItemException)) {
-                ZimbraLog.mailbox.warn("ignoring error while checking conversation: %d", parentID, e);
+                ZmailLog.mailbox.warn("ignoring error while checking conversation: %d", parentID, e);
             }
         }
         return ID_AUTO_INCREMENT;
@@ -5027,7 +5027,7 @@ public class Mailbox {
             String uid = inv.getUid();
             CalendarItem calItem = getCalendarItemByUid(octxt, uid);
             if (calItem == null) {
-                ZimbraLog.calendar.warn("Unknown calendar item UID %s", uid);
+                ZmailLog.calendar.warn("Unknown calendar item UID %s", uid);
                 return;
             }
             calItem.snapshotRevision();
@@ -5070,7 +5070,7 @@ public class Mailbox {
                 ZOrganizer org = inv.getOrganizer();
                 orgAddress = org.getAddress();
             } else {
-                ZimbraLog.calendar.warn("No ORGANIZER found in REPLY.  Assuming current mailbox.");
+                ZmailLog.calendar.warn("No ORGANIZER found in REPLY.  Assuming current mailbox.");
                 orgAddress = getAccount().getName();
             }
             if (acctMatcher.matches(orgAddress)) {
@@ -5090,7 +5090,7 @@ public class Mailbox {
                                 if (seriesDtStart != null) {
                                     ParsedDateTime fixedDt = seriesDtStart.cloneWithNewDate(rid.getDt());
                                     RecurId fixedRid = new RecurId(fixedDt, rid.getRange());
-                                    ZimbraLog.calendar.debug("Fixed up invalid RECURRENCE-ID with zero time; before=[%s], after=[%s]",
+                                    ZmailLog.calendar.debug("Fixed up invalid RECURRENCE-ID with zero time; before=[%s], after=[%s]",
                                             rid, fixedRid);
                                     inv.setRecurId(fixedRid);
                                 }
@@ -5103,7 +5103,7 @@ public class Mailbox {
                 Account orgAccount = inv.getOrganizerAccount();
                 // Unknown organizer
                 if (orgAccount == null) {
-                    ZimbraLog.calendar.warn("Unknown organizer " + orgAddress + " in REPLY");
+                    ZmailLog.calendar.warn("Unknown organizer " + orgAddress + " in REPLY");
                     continue;
                 }
                 if (Provisioning.onLocalServer(orgAccount)) {
@@ -5115,7 +5115,7 @@ public class Mailbox {
                     // Organizer's mailbox is on a remote server.
                     String uri = AccountUtil.getSoapUri(orgAccount);
                     if (uri == null) {
-                        ZimbraLog.calendar.warn("Unable to determine URI for organizer account %s", orgAddress);
+                        ZmailLog.calendar.warn("Unable to determine URI for organizer account %s", orgAddress);
                         continue;
                     }
                     try {
@@ -5160,8 +5160,8 @@ public class Mailbox {
             ParsedMessage pm = null;
 
             Rfc822ValidationInputStream validator = null;
-            if (LC.zimbra_lmtp_validate_messages.booleanValue()) {
-                validator = new Rfc822ValidationInputStream(cs, LC.zimbra_lmtp_max_line_length.longValue());
+            if (LC.zmail_lmtp_validate_messages.booleanValue()) {
+                validator = new Rfc822ValidationInputStream(cs, LC.zmail_lmtp_max_line_length.longValue());
                 in = validator;
             }
 
@@ -5202,7 +5202,7 @@ public class Mailbox {
     throws IOException, ServiceException {
 
         // and then actually add the message
-        long start = ZimbraPerf.STOPWATCH_MBOX_ADD_MSG.start();
+        long start = ZmailPerf.STOPWATCH_MBOX_ADD_MSG.start();
 
         // We process calendar replies here, where no transaction has yet
         // been started on the current mailbox.  This is because some replies
@@ -5228,7 +5228,7 @@ public class Mailbox {
                     }
                 }
             } catch (Exception e) {
-                ZimbraLog.calendar.warn("Error during calendar processing.  Continuing with message add", e);
+                ZmailLog.calendar.warn("Error during calendar processing.  Continuing with message add", e);
             }
         }
 
@@ -5268,7 +5268,7 @@ public class Mailbox {
             }
         } finally {
             lock.release();
-            ZimbraPerf.STOPWATCH_MBOX_ADD_MSG.stop(start);
+            ZmailPerf.STOPWATCH_MBOX_ADD_MSG.stop(start);
         }
     }
 
@@ -5308,7 +5308,7 @@ public class Mailbox {
             CalendarPartInfo cpi = pm.getCalendarPartInfo();
             if (cpi == null || !CalendarItem.isAcceptableInvite(getAccount(), cpi)) {
                 if (dedupe(pm.getMimeMessage())) {
-                    ZimbraLog.mailbox.info("not delivering message with Message-ID %s because it is a duplicate of sent message %d",
+                    ZmailLog.mailbox.info("not delivering message with Message-ID %s because it is a duplicate of sent message %d",
                             msgidHeader, sentMsgID);
                     return null;
                 }
@@ -5316,7 +5316,7 @@ public class Mailbox {
             // if we're not dropping the new message, see if it goes in the same conversation as the old sent message
             if (conversationId == ID_AUTO_INCREMENT) {
                 conversationId = getConversationIdFromReferent(pm.getMimeMessage(), sentMsgID.intValue());
-                ZimbraLog.mailbox.debug("duplicate detected but not deduped (%s); will try to slot into conversation %d",
+                ZmailLog.mailbox.debug("duplicate detected but not deduped (%s); will try to slot into conversation %d",
                         msgidHeader, conversationId);
             }
         }
@@ -5413,7 +5413,7 @@ public class Mailbox {
                     try {
                         mergeConvs.add(getConversationById(mergeId));
                     } catch (NoSuchItemException nsie) {
-                        ZimbraLog.mailbox.debug("could not find merge conversation %d", mergeId);
+                        ZmailLog.mailbox.debug("could not find merge conversation %d", mergeId);
                     }
                 }
             }
@@ -5427,10 +5427,10 @@ public class Mailbox {
                         // fetch the requested conversation
                         //   (we'll ensure that it's receiving new mail after the new message is added to it)
                         conv = getConversationById(conversationId);
-                        ZimbraLog.mailbox.debug("fetched explicitly-specified conversation %d", conv.getId());
+                        ZmailLog.mailbox.debug("fetched explicitly-specified conversation %d", conv.getId());
                     } catch (NoSuchItemException nsie) {
                         if (!isRedo) {
-                            ZimbraLog.mailbox.debug("could not find explicitly-specified conversation %d", conversationId);
+                            ZmailLog.mailbox.debug("could not find explicitly-specified conversation %d", conversationId);
                             conversationId = ID_AUTO_INCREMENT;
                         }
                     }
@@ -5454,7 +5454,7 @@ public class Mailbox {
             //         and if the message is also an invite, deal with the calendar item
             Conversation convTarget = conv instanceof VirtualConversation ? null : conv;
             if (convTarget != null) {
-                ZimbraLog.mailbox.debug("  placing message in existing conversation %d", convTarget.getId());
+                ZmailLog.mailbox.debug("  placing message in existing conversation %d", convTarget.getId());
             }
 
             CalendarPartInfo cpi = pm.getCalendarPartInfo();
@@ -5470,7 +5470,7 @@ public class Mailbox {
             if (threader.isEnabled() && convTarget == null) {
                 if (conv == null && conversationId == ID_AUTO_INCREMENT) {
                     conv = VirtualConversation.create(this, msg);
-                    ZimbraLog.mailbox.debug("placed message %d in vconv %d", msg.getId(), conv.getId());
+                    ZmailLog.mailbox.debug("placed message %d in vconv %d", msg.getId(), conv.getId());
                     redoRecorder.setConvFirstMsgId(-1);
                 } else {
                     Message[] contents = null;
@@ -5511,7 +5511,7 @@ public class Mailbox {
                     redoRecorder.setConvFirstMsgId(vconv != null ? vconv.getMessageId() : -1);
                     conv = createConversation(conversationId, contents);
                     if (vconv != null) {
-                        ZimbraLog.mailbox.debug("removed vconv %d", vconv.getId());
+                        ZmailLog.mailbox.debug("removed vconv %d", vconv.getId());
                         vconv.removeChild(vconv.getMessage());
                     }
                     // if we're threading by references and promoting a virtual conversation to a real one,
@@ -5533,7 +5533,7 @@ public class Mailbox {
             if (conv != null && mergeConvs != null) {
                 redoRecorder.setMergedConversations(mergeConvs);
                 for (Conversation smaller : mergeConvs) {
-                    ZimbraLog.mailbox.info("merging conversation %d for references threading", smaller.getId());
+                    ZmailLog.mailbox.info("merging conversation %d for references threading", smaller.getId());
                     conv.merge(smaller);
                 }
             }
@@ -5579,7 +5579,7 @@ public class Mailbox {
             try {
                 Notification.getInstance().interceptIfNecessary(this, pm.getMimeMessage(), "add message", folder);
             } catch (ServiceException e) {
-                ZimbraLog.mailbox.error("unable to send legal intercept message", e);
+                ZmailLog.mailbox.error("unable to send legal intercept message", e);
             }
         } finally {
             if (storeRedoRecorder != null) {
@@ -5647,12 +5647,12 @@ public class Mailbox {
     Conversation createConversation(int convId, Message... contents) throws ServiceException {
         int id = Math.max(convId, ID_AUTO_INCREMENT);
         Conversation conv = Conversation.create(this, getNextItemId(id), contents);
-        if (ZimbraLog.mailbox.isDebugEnabled()) {
+        if (ZmailLog.mailbox.isDebugEnabled()) {
             StringBuilder sb = new StringBuilder();
             for (int i = 0; i < contents.length; i++) {
                 sb.append(i == 0 ? "" : ",").append(contents[i].getId());
             }
-            ZimbraLog.mailbox.debug("  created conv " + conv.getId() + " holding msg(s): " + sb);
+            ZmailLog.mailbox.debug("  created conv " + conv.getId() + " holding msg(s): " + sb);
         }
         return conv;
     }
@@ -5666,7 +5666,7 @@ public class Mailbox {
      *
      * @param autoSendTime time at which the draft needs to be auto-sent. Note that this method does not schedule
      *                     the task for auto-sending the draft. It just persists this time for tracking purposes.
-     * @see com.zimbra.cs.service.mail.SaveDraft#handle(com.zimbra.common.soap.Element, java.util.Map)
+     * @see org.zmail.cs.service.mail.SaveDraft#handle(org.zmail.common.soap.Element, java.util.Map)
      */
     public Message saveDraft(OperationContext octxt, ParsedMessage pm, int id, String origId, String replyType,
             String identityId, String accountId, long autoSendTime)
@@ -5746,7 +5746,7 @@ public class Mailbox {
             try {
                 Notification.getInstance().interceptIfNecessary(this, pm.getMimeMessage(), "save draft", msg.getFolder());
             } catch (ServiceException e) {
-                ZimbraLog.mailbox.error("Unable to send lawful intercept message.", e);
+                ZmailLog.mailbox.error("Unable to send lawful intercept message.", e);
             }
 
             return msg;
@@ -6247,11 +6247,11 @@ public class Mailbox {
                     }
                     SpamHandler.getInstance().handle(octxt, this, candidate.getId(), candidate.getType(), report);
                 } catch (Exception e) {
-                    ZimbraLog.mailop.info("could not train spam filter: " + MailItem.getMailopContext(candidate), e);
+                    ZmailLog.mailop.info("could not train spam filter: " + MailItem.getMailopContext(candidate), e);
                 }
             }
         } catch (ServiceException e) {
-            ZimbraLog.mailop.info("could not train spam filter: " + MailItem.getMailopContext(item), e);
+            ZmailLog.mailop.info("could not train spam filter: " + MailItem.getMailopContext(item), e);
         }
 
         return item;
@@ -6619,7 +6619,7 @@ public class Mailbox {
             try {
                 item = getItemById(id, MailItem.Type.UNKNOWN, true);
             } catch (MailServiceException.NoSuchItemException e) {
-                ZimbraLog.mailbox.info("ignoring NO_SUCH_ITEM exception during dumpster delete; item id=" + id);
+                ZmailLog.mailbox.info("ignoring NO_SUCH_ITEM exception during dumpster delete; item id=" + id);
                 continue;
             }
             item.delete();
@@ -6652,7 +6652,7 @@ public class Mailbox {
 
         int numDeleted = 0;
         int batchSize = Provisioning.getInstance().getLocalServer().getMailEmptyFolderBatchSize();
-        ZimbraLog.mailbox.info("Emptying dumpster with batchSize=" + batchSize);
+        ZmailLog.mailbox.info("Emptying dumpster with batchSize=" + batchSize);
         QueryParams params = new QueryParams();
         // +1 to catch items put into dumpster in the same second
         params.setChangeDateBefore((int) (System.currentTimeMillis() / 1000 + 1)).setRowLimit(batchSize);
@@ -6941,17 +6941,17 @@ public class Mailbox {
         }
         List<Contact> result = new ArrayList<Contact>(addrs.size());
         for (InternetAddress addr : addrs) {
-            ZimbraLog.mailbox.debug("Auto-adding new contact addr=%s", addr);
+            ZmailLog.mailbox.debug("Auto-adding new contact addr=%s", addr);
             try {
                 result.add(createContact(octxt, new ParsedContact(new ParsedAddress(addr).getAttributes()),
                         Mailbox.ID_FOLDER_AUTO_CONTACTS, null));
             } catch (ServiceException e) {
                 if (e.getCode().equals(MailServiceException.TOO_MANY_CONTACTS)) {
-                    ZimbraLog.mailbox.warn("Aborting contact addition, " +
+                    ZmailLog.mailbox.warn("Aborting contact addition, " +
                     		"Failed to auto-add contact addr=%s", addr, e);
                     return result;
                 }
-                ZimbraLog.mailbox.warn("Failed to auto-add contact addr=%s", addr, e);
+                ZmailLog.mailbox.warn("Failed to auto-add contact addr=%s", addr, e);
             }
         }
         return result;
@@ -6968,7 +6968,7 @@ public class Mailbox {
             return Collections.emptySet();
         }
         if (lock.isLocked()) { //TODO can't search while holding the mailbox lock
-            ZimbraLog.mailbox.warn("Unable to auto-add contact while holding Mailbox lock");
+            ZmailLog.mailbox.warn("Unable to auto-add contact while holding Mailbox lock");
             return Collections.emptySet();
         }
         Set<Address> newAddrs = new HashSet<Address>();
@@ -6976,7 +6976,7 @@ public class Mailbox {
             if (addr instanceof javax.mail.internet.InternetAddress) {
                 javax.mail.internet.InternetAddress iaddr = (javax.mail.internet.InternetAddress) addr;
                 if (!Strings.isNullOrEmpty(iaddr.getAddress()) &&
-                        !index.existsInContacts(Collections.singleton(new com.zimbra.common.mime.InternetAddress(
+                        !index.existsInContacts(Collections.singleton(new org.zmail.common.mime.InternetAddress(
                                 iaddr.getPersonal(), iaddr.getAddress())))) {
                     newAddrs.add(addr);
                 }
@@ -7324,8 +7324,8 @@ public class Mailbox {
             // URL is not null or empty.  Create data source if necessary.
             if (ds == null) {
                 Map<String, Object> attrs = new HashMap<String, Object>();
-                attrs.put(Provisioning.A_zimbraDataSourceEnabled, LdapConstants.LDAP_TRUE);
-                attrs.put(Provisioning.A_zimbraDataSourceFolderId, Integer.toString(folder.getId()));
+                attrs.put(Provisioning.A_zmailDataSourceEnabled, LdapConstants.LDAP_TRUE);
+                attrs.put(Provisioning.A_zmailDataSourceFolderId, Integer.toString(folder.getId()));
 
                 DataSourceType type;
                 String name;
@@ -7341,7 +7341,7 @@ public class Mailbox {
                 DataSourceManager.updateSchedule(account, ds);
             }
         } catch (ServiceException e) {
-            ZimbraLog.mailbox.warn("Unable to update data source for folder %s.", folder.getPath(), e);
+            ZmailLog.mailbox.warn("Unable to update data source for folder %s.", folder.getPath(), e);
         }
     }
 
@@ -7467,7 +7467,7 @@ public class Mailbox {
                             addInvite(octxtNoConflicts, inv, folder.getId(), true, addRevision);
                         }
                     } catch (ServiceException e) {
-                        ZimbraLog.calendar.warn("Skipping bad iCalendar object during import: uid=" + inv.getUid(), e);
+                        ZmailLog.calendar.warn("Skipping bad iCalendar object during import: uid=" + inv.getUid(), e);
                     }
                 } else if (obj instanceof ParsedMessage) {
                     DeliveryOptions dopt = new DeliveryOptions().setFolderId(folder).setNoICal(true).setFlags(Flag.BITMASK_UNREAD);
@@ -7489,7 +7489,7 @@ public class Mailbox {
             try {
                 setSubscriptionData(octxt, folder.getId(), lastModDate, sdata.getMostRecentGuid());
             } catch (Exception e) {
-                ZimbraLog.mailbox.warn("could not update feed metadata", e);
+                ZmailLog.mailbox.warn("could not update feed metadata", e);
             }
         }
 
@@ -7539,7 +7539,7 @@ public class Mailbox {
     public void emptyFolder(OperationContext octxt, int folderId, boolean removeSubfolders)
     throws ServiceException {
         int batchSize = Provisioning.getInstance().getLocalServer().getMailEmptyFolderBatchSize();
-        ZimbraLog.mailbox.debug("Emptying folder %s, removeSubfolders=%b, batchSize=%d",
+        ZmailLog.mailbox.debug("Emptying folder %s, removeSubfolders=%b, batchSize=%d",
             folderId, removeSubfolders, batchSize);
 
         List<Integer> folderIds = new ArrayList<Integer>();
@@ -7572,10 +7572,10 @@ public class Mailbox {
             } else {
                 long sleepMillis = LC.empty_folder_batch_sleep_ms.longValue();
                 try {
-                    ZimbraLog.mailbox.debug("emptyLargeFolder() sleeping for %dms", sleepMillis);
+                    ZmailLog.mailbox.debug("emptyLargeFolder() sleeping for %dms", sleepMillis);
                     Thread.sleep(sleepMillis);
                 } catch (InterruptedException e) {
-                    ZimbraLog.mailbox.warn("Sleep was interrupted", e);
+                    ZmailLog.mailbox.warn("Sleep was interrupted", e);
                 }
             }
 
@@ -7770,13 +7770,13 @@ public class Mailbox {
     public boolean purgeMessages(OperationContext octxt) throws ServiceException {
         Account acct = getAccount();
         int maxItemsPerFolder = Provisioning.getInstance().getLocalServer().getMailPurgeBatchSize();
-        if (ZimbraLog.purge.isDebugEnabled()) {
-            ZimbraLog.purge.debug("System retention policy: Trash=%s, Junk=%s, All messages=%s, Dumpster=%s",
+        if (ZmailLog.purge.isDebugEnabled()) {
+            ZmailLog.purge.debug("System retention policy: Trash=%s, Junk=%s, All messages=%s, Dumpster=%s",
                 acct.getMailTrashLifetimeAsString(),
                 acct.getMailSpamLifetimeAsString(),
                 acct.getMailMessageLifetimeAsString(),
                 acct.getMailDumpsterLifetimeAsString());
-            ZimbraLog.purge.debug("User-specified retention policy: Inbox read=%s, Inbox unread=%s, Sent=%s, Junk=%s, Trash=%s, Versions=%s, VersionsEnabled=%s" ,
+            ZmailLog.purge.debug("User-specified retention policy: Inbox read=%s, Inbox unread=%s, Sent=%s, Junk=%s, Trash=%s, Versions=%s, VersionsEnabled=%s" ,
                 acct.getPrefInboxReadLifetimeAsString(),
                 acct.getPrefInboxUnreadLifetimeAsString(),
                 acct.getPrefSentLifetimeAsString(),
@@ -7807,16 +7807,16 @@ public class Mailbox {
         if (globalTimeout <= 0 && trashTimeout <= 0 && spamTimeout <= 0 &&
             userInboxReadTimeout <= 0 && userInboxReadTimeout <= 0 &&
             userInboxUnreadTimeout <= 0 && userSentTimeout <= 0 && systemDumpsterTimeoutMillis <= 0 && ( !userFileVersioningEnabled || userFileVersionLifeTime<=0 )) {
-            ZimbraLog.purge.debug("Retention policy does not require purge.");
+            ZmailLog.purge.debug("Retention policy does not require purge.");
             return true;
         }
 
-        ZimbraLog.purge.info("Purging messages.");
+        ZmailLog.purge.info("Purging messages.");
 
         // sanity-check the really dangerous value...
         if (globalTimeout > 0 && globalTimeout < Constants.MILLIS_PER_MONTH) {
             // this min is also used by POP3 EXPIRE command. update Pop3Handler.MIN_EPXIRE_DAYS if it changes.
-            ZimbraLog.purge.warn("global message timeout < 1 month; defaulting to 31 days");
+            ZmailLog.purge.warn("global message timeout < 1 month; defaulting to 31 days");
             globalTimeout = Constants.MILLIS_PER_MONTH;
         }
 
@@ -7836,45 +7836,45 @@ public class Mailbox {
 
             if (globalTimeout > 0) {
                 int numPurged = Folder.purgeMessages(this, null, getOperationTimestampMillis() - globalTimeout, null, false, false, maxItemsPerFolder);
-                ZimbraLog.purge.debug("Purged %d messages from All Folders", numPurged);
+                ZmailLog.purge.debug("Purged %d messages from All Folders", numPurged);
                 purgedAll = updatePurgedAll(purgedAll, numPurged, maxItemsPerFolder);
             }
             if (trashTimeout > 0) {
-                boolean useChangeDate = acct.getBooleanAttr(Provisioning.A_zimbraMailPurgeUseChangeDateForTrash, true);
+                boolean useChangeDate = acct.getBooleanAttr(Provisioning.A_zmailMailPurgeUseChangeDateForTrash, true);
                 int numPurged = Folder.purgeMessages(this, trash, getOperationTimestampMillis() - trashTimeout, null, useChangeDate, true, maxItemsPerFolder);
-                ZimbraLog.purge.debug("Purged %d messages from Trash", numPurged);
+                ZmailLog.purge.debug("Purged %d messages from Trash", numPurged);
                 purgedAll = updatePurgedAll(purgedAll, numPurged, maxItemsPerFolder);
             }
             if (spamTimeout > 0) {
                 boolean useChangeDate = acct.isMailPurgeUseChangeDateForSpam();
                 int numPurged = Folder.purgeMessages(this, spam, getOperationTimestampMillis() - spamTimeout, null, useChangeDate, false, maxItemsPerFolder);
                 purgedAll = updatePurgedAll(purgedAll, numPurged, maxItemsPerFolder);
-                ZimbraLog.purge.debug("Purged %d messages from Spam", numPurged);
+                ZmailLog.purge.debug("Purged %d messages from Spam", numPurged);
             }
             if (userInboxReadTimeout > 0) {
                 int numPurged = Folder.purgeMessages(this, inbox, getOperationTimestampMillis() - userInboxReadTimeout, false, false, false, maxItemsPerFolder);
                 purgedAll = updatePurgedAll(purgedAll, numPurged, maxItemsPerFolder);
-                ZimbraLog.purge.debug("Purged %d read messages from Inbox", numPurged);
+                ZmailLog.purge.debug("Purged %d read messages from Inbox", numPurged);
             }
             if (userInboxUnreadTimeout > 0) {
                 int numPurged = Folder.purgeMessages(this, inbox, getOperationTimestampMillis() - userInboxUnreadTimeout, true, false, false, maxItemsPerFolder);
                 purgedAll = updatePurgedAll(purgedAll, numPurged, maxItemsPerFolder);
-                ZimbraLog.purge.debug("Purged %d unread messages from Inbox", numPurged);
+                ZmailLog.purge.debug("Purged %d unread messages from Inbox", numPurged);
             }
             if (userSentTimeout > 0) {
                 int numPurged = Folder.purgeMessages(this, sent, getOperationTimestampMillis() - userSentTimeout, null, false, false, maxItemsPerFolder);
                 purgedAll = updatePurgedAll(purgedAll, numPurged, maxItemsPerFolder);
-                ZimbraLog.purge.debug("Purged %d messages from Sent", numPurged);
+                ZmailLog.purge.debug("Purged %d messages from Sent", numPurged);
             }
             if (systemDumpsterTimeoutMillis > 0) {
                 int numPurged = purgeDumpster(getOperationTimestampMillis() - systemDumpsterTimeoutMillis, maxItemsPerFolder);
-                ZimbraLog.purge.debug("Purged %d messages from Dumpster", numPurged);
+                ZmailLog.purge.debug("Purged %d messages from Dumpster", numPurged);
                 purgedAll = updatePurgedAll(purgedAll, numPurged, maxItemsPerFolder);
             }
 
             if (userFileVersioningEnabled && userFileVersionLifeTime > 0) {
                 int numPurged = MailItem.purgeRevisions(this, getOperationTimestampMillis() - userFileVersionLifeTime);
-                ZimbraLog.purge.debug("Purged %d revisions", numPurged);
+                ZmailLog.purge.debug("Purged %d revisions", numPurged);
             }
             // Process any folders that have retention policy set.
             for (Folder folder : getFolderList(octxt, SortBy.NONE)) {
@@ -7885,7 +7885,7 @@ public class Mailbox {
                     try {
                         folderLifetime = DateUtil.getTimeInterval(policy.getLifetime());
                     } catch (ServiceException e) {
-                        ZimbraLog.purge.error("Invalid purge lifetime set for folder %s.", folder.getPath(), e);
+                        ZmailLog.purge.error("Invalid purge lifetime set for folder %s.", folder.getPath(), e);
                         continue;
                     }
 
@@ -7903,7 +7903,7 @@ public class Mailbox {
                     try {
                         tagLifetime = DateUtil.getTimeInterval(policy.getLifetime());
                     } catch (ServiceException e) {
-                        ZimbraLog.purge.error("Invalid purge lifetime set for tag %s.", tag.getName(), e);
+                        ZmailLog.purge.error("Invalid purge lifetime set for tag %s.", tag.getName(), e);
                         continue;
                     }
 
@@ -7941,7 +7941,7 @@ public class Mailbox {
                 DbMailbox.updateLastPurgeAt(this, System.currentTimeMillis());
 
             success = true;
-            ZimbraLog.purge.debug("purgedAll=%b", purgedAll);
+            ZmailLog.purge.debug("purgedAll=%b", purgedAll);
             return purgedAll;
         } finally {
             endTransaction(success);
@@ -8060,7 +8060,7 @@ public class Mailbox {
 
             success = true;
             long elapsed = System.currentTimeMillis() - start;
-            ZimbraLog.mailbox.debug("createDocument elapsed=" + elapsed);
+            ZmailLog.mailbox.debug("createDocument elapsed=" + elapsed);
             return doc;
         } catch (IOException ioe) {
             throw ServiceException.FAILURE("error writing document blob", ioe);
@@ -8263,7 +8263,7 @@ public class Mailbox {
             DbMailbox.optimize(conn, this, level);
             DbPool.quietClose(conn);
         } catch (Exception e) {
-            ZimbraLog.mailbox.warn("db optimize failed for mailbox " + getId() + ": " + e);
+            ZmailLog.mailbox.warn("db optimize failed for mailbox " + getId() + ": " + e);
         } finally {
             lock.release();
         }
@@ -8308,8 +8308,8 @@ public class Mailbox {
             assert(mSharedDelivCoord.mNumDelivs >= 0);
             if (mSharedDelivCoord.mSharedDeliveryAllowed) {
                 mSharedDelivCoord.mNumDelivs++;
-                if (ZimbraLog.mailbox.isDebugEnabled()) {
-                    ZimbraLog.mailbox.debug("# of shared deliv incr to " + mSharedDelivCoord.mNumDelivs +
+                if (ZmailLog.mailbox.isDebugEnabled()) {
+                    ZmailLog.mailbox.debug("# of shared deliv incr to " + mSharedDelivCoord.mNumDelivs +
                                 " for mailbox " + getId());
                 }
                 return true;
@@ -8322,13 +8322,13 @@ public class Mailbox {
     }
 
     /**
-     * @see com.zimbra.cs.mailbox.Mailbox#beginSharedDelivery()
+     * @see org.zmail.cs.mailbox.Mailbox#beginSharedDelivery()
      */
     public void endSharedDelivery() {
         synchronized (mSharedDelivCoord) {
             mSharedDelivCoord.mNumDelivs--;
-            if (ZimbraLog.mailbox.isDebugEnabled()) {
-                ZimbraLog.mailbox.debug("# of shared deliv decr to " + mSharedDelivCoord.mNumDelivs +
+            if (ZmailLog.mailbox.isDebugEnabled()) {
+                ZmailLog.mailbox.debug("# of shared deliv decr to " + mSharedDelivCoord.mNumDelivs +
                             " for mailbox " + getId());
             }
             assert(mSharedDelivCoord.mNumDelivs >= 0);
@@ -8370,7 +8370,7 @@ public class Mailbox {
             while (mSharedDelivCoord.mNumDelivs > 0) {
                 try {
                     mSharedDelivCoord.wait(3000);
-                    ZimbraLog.misc.info("wake up from wait for completion of shared delivery; mailbox=" + getId() +
+                    ZmailLog.misc.info("wake up from wait for completion of shared delivery; mailbox=" + getId() +
                                 " # of shared deliv=" + mSharedDelivCoord.mNumDelivs);
                 } catch (InterruptedException e) {}
             }
@@ -8426,7 +8426,7 @@ public class Mailbox {
     public void endTransaction(boolean success) throws ServiceException {
         assert !Thread.holdsLock(this) : "Use MailboxLock";
         if (!lock.isLocked()) {
-            ZimbraLog.mailbox.warn("transaction canceled because of lock failure");
+            ZmailLog.mailbox.warn("transaction canceled because of lock failure");
             return;
         }
         PendingDelete deletes = null; // blob and index to delete
@@ -8434,7 +8434,7 @@ public class Mailbox {
         try {
             if (!currentChange.isActive()) {
                 // would like to throw here, but it might cover another exception...
-                ZimbraLog.mailbox.warn("cannot end a transaction when not inside a transaction", new Exception());
+                ZmailLog.mailbox.warn("cannot end a transaction when not inside a transaction", new Exception());
                 return;
             }
             if (!currentChange.endChange()) {
@@ -8492,7 +8492,7 @@ public class Mailbox {
                         // not.  Force the server to abort.  Next restart will
                         // redo the operation to ensure the change is made and
                         // committed.  (bug 2121)
-                        Zimbra.halt("Unable to commit database transaction.  Forcing server to abort.", t);
+                        Zmail.halt("Unable to commit database transaction.  Forcing server to abort.", t);
                     }
                 }
                 dbCommitSuccess = true;
@@ -8629,7 +8629,7 @@ public class Mailbox {
 
         if (currentChange.isMailboxRowDirty(mData)) {
             if (currentChange.recent != MailboxChange.NO_CHANGE) {
-                ZimbraLog.mailbox.debug("setting recent count to %d", currentChange.recent);
+                ZmailLog.mailbox.debug("setting recent count to %d", currentChange.recent);
             }
             DbMailbox.updateMailboxStats(this);
         }
@@ -8742,17 +8742,17 @@ public class Mailbox {
                     // try to get a copy of the changeset that *isn't* live
                     dirty = snapshotModifications(dirty);
                 } catch (ServiceException e) {
-                    ZimbraLog.mailbox.warn("error copying notifications; will notify with live set", e);
+                    ZmailLog.mailbox.warn("error copying notifications; will notify with live set", e);
                 }
                 try {
                     notification = new ChangeNotification(
                             getAccount(), dirty, change.octxt, mData.lastChangeId, change.getOperation(), change.timestamp);
                 } catch (ServiceException e) {
-                    ZimbraLog.mailbox.warn("error getting account for the mailbox", e);
+                    ZmailLog.mailbox.warn("error getting account for the mailbox", e);
                 }
             }
         } catch (RuntimeException e) {
-            ZimbraLog.mailbox.error("ignoring error during cache commit", e);
+            ZmailLog.mailbox.error("ignoring error during cache commit", e);
         } finally {
             // keep our MailItem cache at a reasonable size
             trimItemCache();
@@ -8765,7 +8765,7 @@ public class Mailbox {
                 try {
                     session.notifyPendingChanges(notification.mods, notification.lastChangeId, source);
                 } catch (RuntimeException e) {
-                    ZimbraLog.mailbox.error("ignoring error during notification", e);
+                    ZmailLog.mailbox.error("ignoring error during notification", e);
                 }
             }
 
@@ -8808,7 +8808,7 @@ public class Mailbox {
             }
             return deletes;
         } catch (RuntimeException e) {
-            ZimbraLog.mailbox.error("ignoring error during cache rollback", e);
+            ZmailLog.mailbox.error("ignoring error during cache rollback", e);
             return null;
         } finally {
             // keep our MailItem cache at a reasonable size
@@ -8852,7 +8852,7 @@ public class Mailbox {
                 }
             }
         } catch (RuntimeException e) {
-            ZimbraLog.mailbox.error("ignoring error during item cache trim", e);
+            ZmailLog.mailbox.error("ignoring error during item cache trim", e);
         }
     }
 
@@ -8864,15 +8864,15 @@ public class Mailbox {
     private void logCacheActivity(Object key, MailItem.Type type, MailItem item) {
         // The global item cache counter always gets updated
         if (!isCachedType(type)) {
-            ZimbraPerf.COUNTER_MBOX_ITEM_CACHE.increment(item == null ? 0 : 100);
+            ZmailPerf.COUNTER_MBOX_ITEM_CACHE.increment(item == null ? 0 : 100);
         }
 
         // the per-access log only gets updated when cache or perf debug logging is on
-        if (!ZimbraLog.cache.isDebugEnabled())
+        if (!ZmailLog.cache.isDebugEnabled())
             return;
 
         if (item == null) {
-            ZimbraLog.cache.debug("Cache miss for item " + key + " in mailbox " + getId());
+            ZmailLog.cache.debug("Cache miss for item " + key + " in mailbox " + getId());
             return;
         }
 
@@ -8880,7 +8880,7 @@ public class Mailbox {
         // keep these in memory, so cache hits are not interesting.
         if (isCachedType(type))
             return;
-        ZimbraLog.cache.debug("Cache hit for %s %d in mailbox %d", type, key, getId());
+        ZmailLog.cache.debug("Cache hit for %s %d in mailbox %d", type, key, getId());
     }
 
     public MailItem lock(OperationContext octxt, int itemId, MailItem.Type type, String accountId)
@@ -9008,9 +9008,9 @@ public class Mailbox {
         MigrateToDocuments migrate = new MigrateToDocuments();
         try {
             migrate.handleMailbox(this);
-            ZimbraLog.mailbox.info("wiki folder migration finished");
+            ZmailLog.mailbox.info("wiki folder migration finished");
         } catch (Exception e) {
-            ZimbraLog.mailbox.warn("wiki folder migration failed for "+getAccount().getName(), e);
+            ZmailLog.mailbox.warn("wiki folder migration failed for "+getAccount().getName(), e);
         }
     }
 

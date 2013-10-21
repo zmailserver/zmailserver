@@ -16,7 +16,7 @@
 /*
  * Created on Nov 28, 2004
  */
-package com.zimbra.cs.session;
+package org.zmail.cs.session;
 
 import java.util.EnumSet;
 import java.util.HashMap;
@@ -25,12 +25,12 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.common.util.Pair;
-import com.zimbra.common.util.ZimbraLog;
-import com.zimbra.cs.mailbox.MailItem;
-import com.zimbra.cs.mailbox.Mailbox;
-import com.zimbra.cs.mailbox.util.TypedIdList;
+import org.zmail.common.service.ServiceException;
+import org.zmail.common.util.Pair;
+import org.zmail.common.util.ZmailLog;
+import org.zmail.cs.mailbox.MailItem;
+import org.zmail.cs.mailbox.Mailbox;
+import org.zmail.cs.mailbox.util.TypedIdList;
 
 public final class PendingModifications {
     public static final class Change {
@@ -307,7 +307,7 @@ public final class PendingModifications {
             try {
                 return ((MailItem) item).snapshotItem();
             } catch (ServiceException e) {
-                ZimbraLog.mailbox.warn("Error in taking item snapshot", e);
+                ZmailLog.mailbox.warn("Error in taking item snapshot", e);
             }
         }
         return null;

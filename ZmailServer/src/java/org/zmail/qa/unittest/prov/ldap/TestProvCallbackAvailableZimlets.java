@@ -12,7 +12,7 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.qa.unittest.prov.ldap;
+package org.zmail.qa.unittest.prov.ldap;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -21,10 +21,10 @@ import java.util.Set;
 import org.junit.*;
 import static org.junit.Assert.*;
 
-import com.zimbra.common.account.Key;
-import com.zimbra.common.util.StringUtil;
-import com.zimbra.cs.account.Cos;
-import com.zimbra.cs.account.Provisioning;
+import org.zmail.common.account.Key;
+import org.zmail.common.util.StringUtil;
+import org.zmail.cs.account.Cos;
+import org.zmail.cs.account.Provisioning;
 
 public class TestProvCallbackAvailableZimlets extends LdapTest {
     
@@ -39,18 +39,18 @@ public class TestProvCallbackAvailableZimlets extends LdapTest {
         
         Map<String, Object> attrs = new HashMap<String, Object>(); 
         
-        StringUtil.addToMultiMap(attrs, Provisioning.A_zimbraZimletAvailableZimlets, "foo");
-        StringUtil.addToMultiMap(attrs, Provisioning.A_zimbraZimletAvailableZimlets, "-foo");
-        StringUtil.addToMultiMap(attrs, Provisioning.A_zimbraZimletAvailableZimlets, "+foo");
-        StringUtil.addToMultiMap(attrs, Provisioning.A_zimbraZimletAvailableZimlets, "!foo");
-        StringUtil.addToMultiMap(attrs, Provisioning.A_zimbraZimletAvailableZimlets, "bar");
-        StringUtil.addToMultiMap(attrs, Provisioning.A_zimbraZimletAvailableZimlets, "-bar");
-        StringUtil.addToMultiMap(attrs, Provisioning.A_zimbraZimletAvailableZimlets, "+bar");
-        StringUtil.addToMultiMap(attrs, Provisioning.A_zimbraZimletAvailableZimlets, "!bar");
+        StringUtil.addToMultiMap(attrs, Provisioning.A_zmailZimletAvailableZimlets, "foo");
+        StringUtil.addToMultiMap(attrs, Provisioning.A_zmailZimletAvailableZimlets, "-foo");
+        StringUtil.addToMultiMap(attrs, Provisioning.A_zmailZimletAvailableZimlets, "+foo");
+        StringUtil.addToMultiMap(attrs, Provisioning.A_zmailZimletAvailableZimlets, "!foo");
+        StringUtil.addToMultiMap(attrs, Provisioning.A_zmailZimletAvailableZimlets, "bar");
+        StringUtil.addToMultiMap(attrs, Provisioning.A_zmailZimletAvailableZimlets, "-bar");
+        StringUtil.addToMultiMap(attrs, Provisioning.A_zmailZimletAvailableZimlets, "+bar");
+        StringUtil.addToMultiMap(attrs, Provisioning.A_zmailZimletAvailableZimlets, "!bar");
         
         Cos cos = prov.createCos(COS_NAME, attrs);
         
-        Set<String> getAttrs = cos.getMultiAttrSet(Provisioning.A_zimbraZimletAvailableZimlets);
+        Set<String> getAttrs = cos.getMultiAttrSet(Provisioning.A_zmailZimletAvailableZimlets);
         
         // only one of the values for each zimlet should exist
         assertEquals(2, getAttrs.size());
@@ -75,14 +75,14 @@ public class TestProvCallbackAvailableZimlets extends LdapTest {
         
         Map<String, Object> attrs = new HashMap<String, Object>(); 
         
-        StringUtil.addToMultiMap(attrs, Provisioning.A_zimbraZimletAvailableZimlets, "foo");
-        StringUtil.addToMultiMap(attrs, Provisioning.A_zimbraZimletAvailableZimlets, "+bar");
-        StringUtil.addToMultiMap(attrs, Provisioning.A_zimbraZimletAvailableZimlets, "!bar");
-        StringUtil.addToMultiMap(attrs, Provisioning.A_zimbraZimletAvailableZimlets, "foobar");
+        StringUtil.addToMultiMap(attrs, Provisioning.A_zmailZimletAvailableZimlets, "foo");
+        StringUtil.addToMultiMap(attrs, Provisioning.A_zmailZimletAvailableZimlets, "+bar");
+        StringUtil.addToMultiMap(attrs, Provisioning.A_zmailZimletAvailableZimlets, "!bar");
+        StringUtil.addToMultiMap(attrs, Provisioning.A_zmailZimletAvailableZimlets, "foobar");
         
         prov.modifyAttrs(cos, attrs);
         
-        Set<String> getAttrs = cos.getMultiAttrSet(Provisioning.A_zimbraZimletAvailableZimlets);
+        Set<String> getAttrs = cos.getMultiAttrSet(Provisioning.A_zmailZimletAvailableZimlets);
         assertEquals(3, getAttrs.size());
         
         assertTrue(getAttrs.contains("+foo"));    // foo got turned into +foo in the callback
@@ -100,12 +100,12 @@ public class TestProvCallbackAvailableZimlets extends LdapTest {
         Map<String, Object> attrs = new HashMap<String, Object>(); 
         
         // setup current values
-        StringUtil.addToMultiMap(attrs, Provisioning.A_zimbraZimletAvailableZimlets, "foo");
-        StringUtil.addToMultiMap(attrs, Provisioning.A_zimbraZimletAvailableZimlets, "-bar");
-        StringUtil.addToMultiMap(attrs, Provisioning.A_zimbraZimletAvailableZimlets, "!foobar");
+        StringUtil.addToMultiMap(attrs, Provisioning.A_zmailZimletAvailableZimlets, "foo");
+        StringUtil.addToMultiMap(attrs, Provisioning.A_zmailZimletAvailableZimlets, "-bar");
+        StringUtil.addToMultiMap(attrs, Provisioning.A_zmailZimletAvailableZimlets, "!foobar");
         
         prov.modifyAttrs(cos, attrs);
-        Set<String> getAttrs = cos.getMultiAttrSet(Provisioning.A_zimbraZimletAvailableZimlets);
+        Set<String> getAttrs = cos.getMultiAttrSet(Provisioning.A_zmailZimletAvailableZimlets);
         
         assertEquals(3, getAttrs.size());
         assertTrue(getAttrs.contains("+foo") &&
@@ -116,9 +116,9 @@ public class TestProvCallbackAvailableZimlets extends LdapTest {
         // matching prefix: delete +foo
         //
         attrs.clear();
-        StringUtil.addToMultiMap(attrs, "-" + Provisioning.A_zimbraZimletAvailableZimlets, "+foo");
+        StringUtil.addToMultiMap(attrs, "-" + Provisioning.A_zmailZimletAvailableZimlets, "+foo");
         prov.modifyAttrs(cos, attrs);
-        getAttrs = cos.getMultiAttrSet(Provisioning.A_zimbraZimletAvailableZimlets);
+        getAttrs = cos.getMultiAttrSet(Provisioning.A_zmailZimletAvailableZimlets);
         
         assertEquals(2, getAttrs.size());
         assertTrue(getAttrs.contains("-bar") &&
@@ -128,9 +128,9 @@ public class TestProvCallbackAvailableZimlets extends LdapTest {
         // no prefix: delete bar
         //
         attrs.clear();
-        StringUtil.addToMultiMap(attrs, "-" + Provisioning.A_zimbraZimletAvailableZimlets, "bar");
+        StringUtil.addToMultiMap(attrs, "-" + Provisioning.A_zmailZimletAvailableZimlets, "bar");
         prov.modifyAttrs(cos, attrs);
-        getAttrs = cos.getMultiAttrSet(Provisioning.A_zimbraZimletAvailableZimlets);
+        getAttrs = cos.getMultiAttrSet(Provisioning.A_zmailZimletAvailableZimlets);
         
         assertEquals(1, getAttrs.size());
         assertTrue(getAttrs.contains("!foobar"));
@@ -139,9 +139,9 @@ public class TestProvCallbackAvailableZimlets extends LdapTest {
         // not matching prefix: delete -foobar => should be a noop
         //
         attrs.clear();
-        StringUtil.addToMultiMap(attrs, "-" + Provisioning.A_zimbraZimletAvailableZimlets, "-foobar");
+        StringUtil.addToMultiMap(attrs, "-" + Provisioning.A_zmailZimletAvailableZimlets, "-foobar");
         prov.modifyAttrs(cos, attrs);
-        getAttrs = cos.getMultiAttrSet(Provisioning.A_zimbraZimletAvailableZimlets);
+        getAttrs = cos.getMultiAttrSet(Provisioning.A_zmailZimletAvailableZimlets);
         
         assertEquals(1, getAttrs.size());
         assertTrue(getAttrs.contains("!foobar"));
@@ -155,12 +155,12 @@ public class TestProvCallbackAvailableZimlets extends LdapTest {
         Map<String, Object> attrs = new HashMap<String, Object>(); 
         
         // setup current values
-        StringUtil.addToMultiMap(attrs, Provisioning.A_zimbraZimletAvailableZimlets, "foo");
-        StringUtil.addToMultiMap(attrs, Provisioning.A_zimbraZimletAvailableZimlets, "-bar");
-        StringUtil.addToMultiMap(attrs, Provisioning.A_zimbraZimletAvailableZimlets, "!foobar");
+        StringUtil.addToMultiMap(attrs, Provisioning.A_zmailZimletAvailableZimlets, "foo");
+        StringUtil.addToMultiMap(attrs, Provisioning.A_zmailZimletAvailableZimlets, "-bar");
+        StringUtil.addToMultiMap(attrs, Provisioning.A_zmailZimletAvailableZimlets, "!foobar");
         
         prov.modifyAttrs(cos, attrs);
-        Set<String> getAttrs = cos.getMultiAttrSet(Provisioning.A_zimbraZimletAvailableZimlets);
+        Set<String> getAttrs = cos.getMultiAttrSet(Provisioning.A_zmailZimletAvailableZimlets);
         
         assertEquals(3, getAttrs.size());
         assertTrue(getAttrs.contains("+foo") &&
@@ -171,9 +171,9 @@ public class TestProvCallbackAvailableZimlets extends LdapTest {
         // add a value not in current values
         //
         attrs.clear();
-        StringUtil.addToMultiMap(attrs, "+" + Provisioning.A_zimbraZimletAvailableZimlets, "white");
+        StringUtil.addToMultiMap(attrs, "+" + Provisioning.A_zmailZimletAvailableZimlets, "white");
         prov.modifyAttrs(cos, attrs);
-        getAttrs = cos.getMultiAttrSet(Provisioning.A_zimbraZimletAvailableZimlets);
+        getAttrs = cos.getMultiAttrSet(Provisioning.A_zmailZimletAvailableZimlets);
         
         assertEquals(4, getAttrs.size());
         assertTrue(getAttrs.contains("+foo") &&
@@ -186,9 +186,9 @@ public class TestProvCallbackAvailableZimlets extends LdapTest {
         // should override the current prefix
         //
         attrs.clear();
-        StringUtil.addToMultiMap(attrs, "+" + Provisioning.A_zimbraZimletAvailableZimlets, "-foo");
+        StringUtil.addToMultiMap(attrs, "+" + Provisioning.A_zmailZimletAvailableZimlets, "-foo");
         prov.modifyAttrs(cos, attrs);
-        getAttrs = cos.getMultiAttrSet(Provisioning.A_zimbraZimletAvailableZimlets);
+        getAttrs = cos.getMultiAttrSet(Provisioning.A_zmailZimletAvailableZimlets);
         
         assertEquals(4, getAttrs.size());
         assertTrue(getAttrs.contains("-foo") &&
@@ -200,10 +200,10 @@ public class TestProvCallbackAvailableZimlets extends LdapTest {
         // do something goofy
         //
         attrs.clear();
-        StringUtil.addToMultiMap(attrs, "+" + Provisioning.A_zimbraZimletAvailableZimlets, "!foo");
-        StringUtil.addToMultiMap(attrs, "+" + Provisioning.A_zimbraZimletAvailableZimlets, "+foo");
+        StringUtil.addToMultiMap(attrs, "+" + Provisioning.A_zmailZimletAvailableZimlets, "!foo");
+        StringUtil.addToMultiMap(attrs, "+" + Provisioning.A_zmailZimletAvailableZimlets, "+foo");
         prov.modifyAttrs(cos, attrs);
-        getAttrs = cos.getMultiAttrSet(Provisioning.A_zimbraZimletAvailableZimlets);
+        getAttrs = cos.getMultiAttrSet(Provisioning.A_zmailZimletAvailableZimlets);
         
         assertEquals(4, getAttrs.size());
         assertTrue((getAttrs.contains("!foo") || getAttrs.contains("+foo"))&&
@@ -220,12 +220,12 @@ public class TestProvCallbackAvailableZimlets extends LdapTest {
         Map<String, Object> attrs = new HashMap<String, Object>(); 
         
         // setup current values
-        StringUtil.addToMultiMap(attrs, Provisioning.A_zimbraZimletAvailableZimlets, "foo");
-        StringUtil.addToMultiMap(attrs, Provisioning.A_zimbraZimletAvailableZimlets, "-bar");
-        StringUtil.addToMultiMap(attrs, Provisioning.A_zimbraZimletAvailableZimlets, "!foobar");
+        StringUtil.addToMultiMap(attrs, Provisioning.A_zmailZimletAvailableZimlets, "foo");
+        StringUtil.addToMultiMap(attrs, Provisioning.A_zmailZimletAvailableZimlets, "-bar");
+        StringUtil.addToMultiMap(attrs, Provisioning.A_zmailZimletAvailableZimlets, "!foobar");
         
         prov.modifyAttrs(cos, attrs);
-        Set<String> getAttrs = cos.getMultiAttrSet(Provisioning.A_zimbraZimletAvailableZimlets);
+        Set<String> getAttrs = cos.getMultiAttrSet(Provisioning.A_zmailZimletAvailableZimlets);
         
         assertEquals(3, getAttrs.size());
         assertTrue(getAttrs.contains("+foo") &&
@@ -236,12 +236,12 @@ public class TestProvCallbackAvailableZimlets extends LdapTest {
         // delete should be applied before add
         //
         attrs.clear();
-        StringUtil.addToMultiMap(attrs, "+" + Provisioning.A_zimbraZimletAvailableZimlets, "!foo");
-        StringUtil.addToMultiMap(attrs, "+" + Provisioning.A_zimbraZimletAvailableZimlets, "+bar");
-        StringUtil.addToMultiMap(attrs, "-" + Provisioning.A_zimbraZimletAvailableZimlets, "bar");
+        StringUtil.addToMultiMap(attrs, "+" + Provisioning.A_zmailZimletAvailableZimlets, "!foo");
+        StringUtil.addToMultiMap(attrs, "+" + Provisioning.A_zmailZimletAvailableZimlets, "+bar");
+        StringUtil.addToMultiMap(attrs, "-" + Provisioning.A_zmailZimletAvailableZimlets, "bar");
         
         prov.modifyAttrs(cos, attrs);
-        getAttrs = cos.getMultiAttrSet(Provisioning.A_zimbraZimletAvailableZimlets);
+        getAttrs = cos.getMultiAttrSet(Provisioning.A_zmailZimletAvailableZimlets);
         
         assertEquals(3, getAttrs.size());
         assertTrue(getAttrs.contains("!foo") &&

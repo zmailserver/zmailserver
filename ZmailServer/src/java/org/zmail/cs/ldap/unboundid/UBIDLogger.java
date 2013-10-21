@@ -12,26 +12,26 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.ldap.unboundid;
+package org.zmail.cs.ldap.unboundid;
 
 import com.unboundid.ldap.sdk.DN;
 import com.unboundid.ldap.sdk.LDAPConnection;
 import com.unboundid.ldap.sdk.LDAPConnectionPool;
-import com.zimbra.common.util.Log;
-import com.zimbra.common.util.ZimbraLog;
-import com.zimbra.cs.ldap.LdapOp;
-import com.zimbra.cs.ldap.LdapUsage;
-import com.zimbra.cs.ldap.ZModificationList;
-import com.zimbra.cs.ldap.ZMutableEntry;
-import com.zimbra.cs.ldap.LdapServerConfig.ExternalLdapConfig;
-import com.zimbra.cs.ldap.ZLdapElement.StringLdapElementDebugListener;
+import org.zmail.common.util.Log;
+import org.zmail.common.util.ZmailLog;
+import org.zmail.cs.ldap.LdapOp;
+import org.zmail.cs.ldap.LdapUsage;
+import org.zmail.cs.ldap.ZModificationList;
+import org.zmail.cs.ldap.ZMutableEntry;
+import org.zmail.cs.ldap.LdapServerConfig.ExternalLdapConfig;
+import org.zmail.cs.ldap.ZLdapElement.StringLdapElementDebugListener;
 
 /**
  * @author pshao
  */
 public class UBIDLogger {
     
-    private static Log debugLogger = ZimbraLog.ldap;
+    private static Log debugLogger = ZmailLog.ldap;
     
     static class Timer {
         private long startTime;

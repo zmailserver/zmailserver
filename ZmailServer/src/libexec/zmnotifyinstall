@@ -16,23 +16,23 @@
 
 use strict;
 
-use lib "/opt/zimbra/zimbramon/lib";
-use Zimbra::Util::Common;
+use lib "/opt/zmail/zmailmon/lib";
+use Zmail::Util::Common;
 
 use LWP::UserAgent;
 
-my $baseDir = "/opt/zimbra";
+my $baseDir = "/opt/zmail";
 
 my $version = $ARGV[0];
 my $email = $ARGV[1];
 
-my $URL = "http://www.zimbra.com/cgi-bin/notify.cgi?VER=$version&MAIL=$email";
+my $URL = "http://www.zmail.com/cgi-bin/notify.cgi?VER=$version&MAIL=$email";
 
-print "Notifying Zimbra of installation via $URL\n\n";
+print "Notifying Zmail of installation via $URL\n\n";
 
 # Create a user agent object
 my $ua = LWP::UserAgent->new;
-$ua->agent("ZimbraInstaller/0.1 ");
+$ua->agent("ZmailInstaller/0.1 ");
 
 # Create a request
 my $req = HTTP::Request->new(GET => "$URL");

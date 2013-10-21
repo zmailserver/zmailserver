@@ -14,23 +14,23 @@
  * 
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.qa.unittest.prov.ldap;
+package org.zmail.qa.unittest.prov.ldap;
 
-import com.zimbra.common.localconfig.LC;
-import com.zimbra.cs.ldap.LdapClient;
-import com.zimbra.cs.ldap.LdapUsage;
-import com.zimbra.cs.ldap.ZAttributes;
-import com.zimbra.cs.ldap.ZLdapContext;
-import com.zimbra.cs.ldap.ZLdapFilter;
-import com.zimbra.cs.ldap.ZLdapFilterFactory;
-import com.zimbra.cs.ldap.ZMutableEntry;
-import com.zimbra.cs.ldap.ZSearchControls;
-import com.zimbra.cs.ldap.ZSearchResultEntry;
-import com.zimbra.cs.ldap.ZSearchResultEnumeration;
-import com.zimbra.cs.ldap.ZSearchScope;
-import com.zimbra.cs.ldap.LdapException.LdapSizeLimitExceededException;
-import com.zimbra.cs.ldap.LdapServerConfig.GenericLdapConfig;
-import com.zimbra.cs.ldap.ZLdapFilterFactory.FilterId;
+import org.zmail.common.localconfig.LC;
+import org.zmail.cs.ldap.LdapClient;
+import org.zmail.cs.ldap.LdapUsage;
+import org.zmail.cs.ldap.ZAttributes;
+import org.zmail.cs.ldap.ZLdapContext;
+import org.zmail.cs.ldap.ZLdapFilter;
+import org.zmail.cs.ldap.ZLdapFilterFactory;
+import org.zmail.cs.ldap.ZMutableEntry;
+import org.zmail.cs.ldap.ZSearchControls;
+import org.zmail.cs.ldap.ZSearchResultEntry;
+import org.zmail.cs.ldap.ZSearchResultEnumeration;
+import org.zmail.cs.ldap.ZSearchScope;
+import org.zmail.cs.ldap.LdapException.LdapSizeLimitExceededException;
+import org.zmail.cs.ldap.LdapServerConfig.GenericLdapConfig;
+import org.zmail.cs.ldap.ZLdapFilterFactory.FilterId;
 
 public class LdapExample {
     
@@ -52,15 +52,15 @@ public class LdapExample {
             zlc = LdapClient.getContext(ldapConfig, LdapUsage.SEARCH);
             
             /*
-             * get attributes zimbraId, cn and description on DN "cn=default,cn=cos,cn=zimbra"
+             * get attributes zmailId, cn and description on DN "cn=default,cn=cos,cn=zmail"
              */
-            ZAttributes attrs = zlc.getAttributes("cn=default,cn=cos,cn=zimbra", new String[]{"zimbraId", "cn", "description"});
-            String zimbraId = attrs.getAttrString("zimbraId");
+            ZAttributes attrs = zlc.getAttributes("cn=default,cn=cos,cn=zmail", new String[]{"zmailId", "cn", "description"});
+            String zmailId = attrs.getAttrString("zmailId");
                         
             /*
-             * get all attributes on DN "cn=default,cn=cos,cn=zimbra"
+             * get all attributes on DN "cn=default,cn=cos,cn=zmail"
              */
-            ZAttributes allAttrs = zlc.getAttributes("cn=default,cn=cos,cn=zimbra", null);
+            ZAttributes allAttrs = zlc.getAttributes("cn=default,cn=cos,cn=zmail", null);
             
         } finally {
             // Note: this is important!! 
@@ -69,8 +69,8 @@ public class LdapExample {
     }
     
     public void search() throws Exception {
-        String base = "cn=servers,cn=zimbra";
-        String filter = "(objectClass=zimbraServer)";
+        String base = "cn=servers,cn=zmail";
+        String filter = "(objectClass=zmailServer)";
         String returnAttrs[] = new String[]{"objectClass", "cn"};
         
         ZLdapFilter zFilter = ZLdapFilterFactory.getInstance().fromFilterString(FilterId.ZMCONFIGD, filter);
@@ -126,14 +126,14 @@ public class LdapExample {
             entry.setDN(dn);
             
             entry.addAttr("objectClass", "inetOrgPerson");
-            entry.addAttr("objectClass", "zimbraAccount");
+            entry.addAttr("objectClass", "zmailAccount");
             entry.addAttr("objectClass", "amavisAccount");
 
             entry.setAttr("uid", "user1");
             entry.setAttr("cn", "user1");
             entry.setAttr("sn", "lastname");
-            entry.setAttr("zimbraAccountStatus", "active");
-            entry.setAttr("zimbraId", "ba6198a3-bb49-4425-94b0-d4e9354e87b5");
+            entry.setAttr("zmailAccountStatus", "active");
+            entry.setAttr("zmailId", "ba6198a3-bb49-4425-94b0-d4e9354e87b5");
             entry.addAttr("mail", "user1@trest.com");
             entry.addAttr("mail", "user-one@test.com");
             
@@ -160,7 +160,7 @@ public class LdapExample {
     }
     
     public void modifyEntry() throws Exception {
-        String dn = "cn=config,cn=zimbra";
+        String dn = "cn=config,cn=zmail";
         GenericLdapConfig ldapConfig = getLdapConfig();
         
         ZLdapContext zlc = null;

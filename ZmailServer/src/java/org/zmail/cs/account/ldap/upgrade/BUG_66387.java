@@ -12,7 +12,7 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.account.ldap.upgrade;
+package org.zmail.cs.account.ldap.upgrade;
 
 import java.util.HashMap;
 import java.util.HashSet;
@@ -20,28 +20,28 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-import com.zimbra.common.account.Key.AccountBy;
-import com.zimbra.common.account.Key.DistributionListBy;
-import com.zimbra.common.account.Key.DomainBy;
-import com.zimbra.common.account.Key.GranteeBy;
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.common.util.EmailUtil;
-import com.zimbra.common.util.StringUtil;
-import com.zimbra.cs.account.AccessManager;
-import com.zimbra.cs.account.Account;
-import com.zimbra.cs.account.Domain;
-import com.zimbra.cs.account.Group;
-import com.zimbra.cs.account.NamedEntry;
-import com.zimbra.cs.account.Provisioning;
-import com.zimbra.cs.account.SearchDirectoryOptions;
-import com.zimbra.cs.account.Entry.EntryType;
-import com.zimbra.cs.account.SearchDirectoryOptions.MakeObjectOpt;
-import com.zimbra.cs.account.SearchDirectoryOptions.SortOpt;
-import com.zimbra.cs.account.accesscontrol.GranteeType;
-import com.zimbra.cs.account.accesscontrol.TargetType;
-import com.zimbra.cs.account.accesscontrol.generated.RightConsts;
-import com.zimbra.cs.ldap.ZLdapFilterFactory.FilterId;
-import com.zimbra.soap.type.TargetBy;
+import org.zmail.common.account.Key.AccountBy;
+import org.zmail.common.account.Key.DistributionListBy;
+import org.zmail.common.account.Key.DomainBy;
+import org.zmail.common.account.Key.GranteeBy;
+import org.zmail.common.service.ServiceException;
+import org.zmail.common.util.EmailUtil;
+import org.zmail.common.util.StringUtil;
+import org.zmail.cs.account.AccessManager;
+import org.zmail.cs.account.Account;
+import org.zmail.cs.account.Domain;
+import org.zmail.cs.account.Group;
+import org.zmail.cs.account.NamedEntry;
+import org.zmail.cs.account.Provisioning;
+import org.zmail.cs.account.SearchDirectoryOptions;
+import org.zmail.cs.account.Entry.EntryType;
+import org.zmail.cs.account.SearchDirectoryOptions.MakeObjectOpt;
+import org.zmail.cs.account.SearchDirectoryOptions.SortOpt;
+import org.zmail.cs.account.accesscontrol.GranteeType;
+import org.zmail.cs.account.accesscontrol.TargetType;
+import org.zmail.cs.account.accesscontrol.generated.RightConsts;
+import org.zmail.cs.ldap.ZLdapFilterFactory.FilterId;
+import org.zmail.soap.type.TargetBy;
 
 public class BUG_66387 extends UpgradeOp {
 
@@ -56,32 +56,32 @@ public class BUG_66387 extends UpgradeOp {
     Description getDescription() {
         return new Description(
                 this, 
-                new String[] {Provisioning.A_zimbraAllowFromAddress, Provisioning.A_zimbraPrefAllowAddressForDelegatedSender}, 
+                new String[] {Provisioning.A_zmailAllowFromAddress, Provisioning.A_zmailPrefAllowAddressForDelegatedSender}, 
                 new EntryType[] {EntryType.ACCOUNT, EntryType.DISTRIBUTIONLIST},
                 "see notes",
                 "see notes",
-                "Any internal account or distribution list address listed in " + Provisioning.A_zimbraAllowFromAddress +
+                "Any internal account or distribution list address listed in " + Provisioning.A_zmailAllowFromAddress +
                 " attribute is converted to a grant of sendAs (for account) or sendAsDistList (for DL) right from the named " +
-                "account or DL.  The address is added to the " + Provisioning.A_zimbraPrefAllowAddressForDelegatedSender +
+                "account or DL.  The address is added to the " + Provisioning.A_zmailPrefAllowAddressForDelegatedSender +
                 " attribute of the granting account/DL.");
     }
 
     @Override
     void doUpgrade() throws ServiceException {
         searchAndFixAccounts();
-        printer.println("Number of accounts using " + Provisioning.A_zimbraAllowFromAddress + ": " + numInspected);
+        printer.println("Number of accounts using " + Provisioning.A_zmailAllowFromAddress + ": " + numInspected);
         printer.println("Number of accounts migrated: " + numFixed);
         printer.println("Migration completed");
     }
 
     private int searchAndFixAccounts() throws ServiceException {
-        String[] attrsToGet = new String[] { Provisioning.A_zimbraAllowFromAddress };
+        String[] attrsToGet = new String[] { Provisioning.A_zmailAllowFromAddress };
         SearchDirectoryOptions searchOpts = new SearchDirectoryOptions(attrsToGet);
         searchOpts.setTypes(SearchDirectoryOptions.ObjectType.accounts, SearchDirectoryOptions.ObjectType.resources);
         searchOpts.setSortOpt(SortOpt.SORT_ASCENDING);
-        searchOpts.setSortAttr(Provisioning.A_zimbraMailDeliveryAddress);
+        searchOpts.setSortAttr(Provisioning.A_zmailMailDeliveryAddress);
         searchOpts.setMakeObjectOpt(MakeObjectOpt.NO_DEFAULTS);
-        searchOpts.setFilterString(FilterId.LDAP_UPGRADE, "(" + Provisioning.A_zimbraAllowFromAddress + "=*)");
+        searchOpts.setFilterString(FilterId.LDAP_UPGRADE, "(" + Provisioning.A_zmailAllowFromAddress + "=*)");
 
         List<NamedEntry> accounts = prov.searchDirectory(searchOpts);
         for (int i = 0; i < accounts.size(); ++i) {
@@ -130,10 +130,10 @@ public class BUG_66387 extends UpgradeOp {
             Map<String, Object> attrsMap = new HashMap<String, Object>();
             if (!remainingAddrs.isEmpty()) {
                 String[] remaining = remainingAddrs.toArray(new String[0]);
-                attrsMap.put(Provisioning.A_zimbraAllowFromAddress, remaining);
+                attrsMap.put(Provisioning.A_zmailAllowFromAddress, remaining);
                 printer.println("  New value = " + StringUtil.join(", ", remaining));
             } else {
-                attrsMap.put(Provisioning.A_zimbraAllowFromAddress, "");
+                attrsMap.put(Provisioning.A_zmailAllowFromAddress, "");
                 printer.println("  New value = <unset>");
             }
             prov.modifyAttrs(account, attrsMap, false, false);
@@ -174,8 +174,8 @@ public class BUG_66387 extends UpgradeOp {
                 GranteeType.GT_USER.getCode(), GranteeBy.name, grantee.getName(), null, right, null);
         printer.println("    - " + grantorTypeLabel + " " + grantor.getName() + " granting " + right + " right to " + grantee.getName());
 
-        // Add address to grantor's zimbraPrefAllowAddressForDelegatedSender if it's a new value.
-        String[] currAddrs = grantor.getMultiAttr(Provisioning.A_zimbraPrefAllowAddressForDelegatedSender);
+        // Add address to grantor's zmailPrefAllowAddressForDelegatedSender if it's a new value.
+        String[] currAddrs = grantor.getMultiAttr(Provisioning.A_zmailPrefAllowAddressForDelegatedSender);
         Set<String> addrsLowercase = new HashSet<String>();
         for (String a : currAddrs) {
             addrsLowercase.add(a.toLowerCase());
@@ -190,9 +190,9 @@ public class BUG_66387 extends UpgradeOp {
         }
         if (add) {
             Map<String,Object> attrs = new HashMap<String,Object>();
-            StringUtil.addToMultiMap(attrs, "+" + Provisioning.A_zimbraPrefAllowAddressForDelegatedSender, address);
+            StringUtil.addToMultiMap(attrs, "+" + Provisioning.A_zmailPrefAllowAddressForDelegatedSender, address);
             prov.modifyAttrs(grantor, attrs);
-            printer.println("    - address " + address + " added to " + Provisioning.A_zimbraPrefAllowAddressForDelegatedSender +
+            printer.println("    - address " + address + " added to " + Provisioning.A_zmailPrefAllowAddressForDelegatedSender +
                     " attribute of " + grantorTypeLabel + " " + grantor.getName());
         }
     }

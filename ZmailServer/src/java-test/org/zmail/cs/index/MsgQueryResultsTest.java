@@ -12,19 +12,19 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.index;
+package org.zmail.cs.index;
 
 import java.util.EnumSet;
 
 import org.junit.Assert;
 import org.junit.Test;
 
-import com.zimbra.common.soap.Element;
-import com.zimbra.common.soap.Element.XMLElement;
-import com.zimbra.common.soap.MailConstants;
-import com.zimbra.common.soap.SoapProtocol;
-import com.zimbra.cs.mailbox.MailItem;
-import com.zimbra.cs.service.util.ItemId;
+import org.zmail.common.soap.Element;
+import org.zmail.common.soap.Element.XMLElement;
+import org.zmail.common.soap.MailConstants;
+import org.zmail.common.soap.SoapProtocol;
+import org.zmail.cs.mailbox.MailItem;
+import org.zmail.cs.service.util.ItemId;
 
 /**
  * Unit test for {@link MsgQueryResults}.
@@ -56,7 +56,7 @@ public final class MsgQueryResultsTest {
 
         MsgQueryResults result = new MsgQueryResults(top, null, SortBy.NONE, SearchParams.Fetch.NORMAL);
 
-        ZimbraHit hit = result.getNext();
+        ZmailHit hit = result.getNext();
         Assert.assertEquals(hit.getClass(), MessageHit.class);
         Assert.assertEquals(hit.getItemId(), 1000);
 
@@ -94,7 +94,7 @@ public final class MsgQueryResultsTest {
 
         MsgQueryResults result = new MsgQueryResults(top, null, SortBy.NONE, SearchParams.Fetch.NORMAL);
 
-        ZimbraHit hit = result.getNext();
+        ZmailHit hit = result.getNext();
         Assert.assertEquals(hit.getClass(), MessageHit.class);
         Assert.assertEquals(hit.getItemId(), 1000);
 

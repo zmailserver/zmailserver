@@ -14,7 +14,7 @@
  * 
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.mailbox.alerts;
+package org.zmail.cs.mailbox.alerts;
 
 import java.text.DateFormat;
 import java.util.Date;
@@ -25,23 +25,23 @@ import javax.mail.internet.MimeBodyPart;
 import javax.mail.internet.MimeMessage;
 import javax.mail.internet.MimeMultipart;
 
-import com.zimbra.common.mime.MimeConstants;
-import com.zimbra.common.mime.shim.JavaMailInternetAddress;
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.common.util.L10nUtil;
-import com.zimbra.common.util.ZimbraLog;
-import com.zimbra.common.zmime.ZMimeBodyPart;
-import com.zimbra.common.zmime.ZMimeMultipart;
-import com.zimbra.cs.account.Account;
-import com.zimbra.cs.account.Provisioning;
-import com.zimbra.cs.mailbox.CalendarItem;
-import com.zimbra.cs.mailbox.MailItem;
-import com.zimbra.cs.mailbox.MailSender;
-import com.zimbra.cs.mailbox.calendar.Invite;
-import com.zimbra.cs.mailbox.calendar.Util;
-import com.zimbra.cs.mailbox.calendar.ZOrganizer;
-import com.zimbra.cs.mime.Mime;
-import com.zimbra.cs.util.JMSession;
+import org.zmail.common.mime.MimeConstants;
+import org.zmail.common.mime.shim.JavaMailInternetAddress;
+import org.zmail.common.service.ServiceException;
+import org.zmail.common.util.L10nUtil;
+import org.zmail.common.util.ZmailLog;
+import org.zmail.common.zmime.ZMimeBodyPart;
+import org.zmail.common.zmime.ZMimeMultipart;
+import org.zmail.cs.account.Account;
+import org.zmail.cs.account.Provisioning;
+import org.zmail.cs.mailbox.CalendarItem;
+import org.zmail.cs.mailbox.MailItem;
+import org.zmail.cs.mailbox.MailSender;
+import org.zmail.cs.mailbox.calendar.Invite;
+import org.zmail.cs.mailbox.calendar.Util;
+import org.zmail.cs.mailbox.calendar.ZOrganizer;
+import org.zmail.cs.mime.Mime;
+import org.zmail.cs.util.JMSession;
 
 /**
  */
@@ -65,9 +65,9 @@ public class CalItemEmailReminderTask extends CalItemReminderTaskBase {
 
         MimeMessage mm = new Mime.FixedMimeMessage(JMSession.getSmtpSession(account));
 
-        String to = account.getAttr(Provisioning.A_zimbraPrefCalendarReminderEmail);
+        String to = account.getAttr(Provisioning.A_zmailPrefCalendarReminderEmail);
         if (to == null) {
-            ZimbraLog.scheduler.info("Unable to send calendar reminder email since %s is not set", Provisioning.A_zimbraPrefCalendarReminderEmail);
+            ZmailLog.scheduler.info("Unable to send calendar reminder email since %s is not set", Provisioning.A_zmailPrefCalendarReminderEmail);
             return;
         }
         mm.setRecipient(javax.mail.Message.RecipientType.TO, new JavaMailInternetAddress(to));

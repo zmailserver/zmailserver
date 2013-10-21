@@ -13,20 +13,20 @@
  * ***** END LICENSE BLOCK *****
  */
 
-package com.zimbra.cs.account.soap;
+package org.zmail.cs.account.soap;
 
 import java.util.Map;
 
-import com.zimbra.common.account.Key;
-import com.zimbra.common.account.Key.CalendarResourceBy;
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.common.soap.AdminConstants;
-import com.zimbra.cs.account.CalendarResource;
-import com.zimbra.cs.account.Provisioning;
-import com.zimbra.common.soap.Element;
-import com.zimbra.common.soap.Element.XMLElement;
-import com.zimbra.soap.admin.type.Attr;
-import com.zimbra.soap.admin.type.CalendarResourceInfo;
+import org.zmail.common.account.Key;
+import org.zmail.common.account.Key.CalendarResourceBy;
+import org.zmail.common.service.ServiceException;
+import org.zmail.common.soap.AdminConstants;
+import org.zmail.cs.account.CalendarResource;
+import org.zmail.cs.account.Provisioning;
+import org.zmail.common.soap.Element;
+import org.zmail.common.soap.Element.XMLElement;
+import org.zmail.soap.admin.type.Attr;
+import org.zmail.soap.admin.type.CalendarResourceInfo;
 
 class SoapCalendarResource extends CalendarResource implements SoapEntry {
 

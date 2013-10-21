@@ -16,7 +16,7 @@
 /*
  * Created on Jun 17, 2004
  */
-package com.zimbra.cs.service.admin;
+package org.zmail.cs.service.admin;
 
 import java.util.Iterator;
 import java.util.List;
@@ -24,21 +24,21 @@ import java.util.Map;
 
 import org.dom4j.QName;
 
-import com.zimbra.common.account.Key;
-import com.zimbra.common.account.Key.DomainBy;
-import com.zimbra.common.account.Key.ServerBy;
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.common.soap.AdminConstants;
-import com.zimbra.common.soap.Element;
-import com.zimbra.cs.account.Account;
-import com.zimbra.cs.account.AccountServiceException;
-import com.zimbra.cs.account.Domain;
-import com.zimbra.cs.account.NamedEntry;
-import com.zimbra.cs.account.Provisioning;
-import com.zimbra.cs.account.accesscontrol.AdminRight;
-import com.zimbra.cs.account.accesscontrol.Rights.Admin;
-import com.zimbra.cs.account.Server;
-import com.zimbra.soap.ZimbraSoapContext;
+import org.zmail.common.account.Key;
+import org.zmail.common.account.Key.DomainBy;
+import org.zmail.common.account.Key.ServerBy;
+import org.zmail.common.service.ServiceException;
+import org.zmail.common.soap.AdminConstants;
+import org.zmail.common.soap.Element;
+import org.zmail.cs.account.Account;
+import org.zmail.cs.account.AccountServiceException;
+import org.zmail.cs.account.Domain;
+import org.zmail.cs.account.NamedEntry;
+import org.zmail.cs.account.Provisioning;
+import org.zmail.cs.account.accesscontrol.AdminRight;
+import org.zmail.cs.account.accesscontrol.Rights.Admin;
+import org.zmail.cs.account.Server;
+import org.zmail.soap.ZmailSoapContext;
 
 /**
  * @author schemers
@@ -57,7 +57,7 @@ public class GetAllAccounts extends AdminDocumentHandler {
     
 	public Element handle(Element request, Map<String, Object> context) throws ServiceException {
 	    
-        ZimbraSoapContext zsc = getZimbraSoapContext(context);
+        ZmailSoapContext zsc = getZmailSoapContext(context);
 	    Provisioning prov = Provisioning.getInstance();
 	    
         Element response = null;
@@ -123,26 +123,26 @@ public class GetAllAccounts extends AdminDocumentHandler {
     }
 
     protected static class AccountVisitor implements NamedEntry.Visitor {
-        ZimbraSoapContext mZsc;
+        ZmailSoapContext mZsc;
         AdminDocumentHandler mHandler;
         Element mParent;
         AdminAccessControl mAAC;
         
-        AccountVisitor(ZimbraSoapContext zsc, AdminDocumentHandler handler, Element parent) throws ServiceException {
+        AccountVisitor(ZmailSoapContext zsc, AdminDocumentHandler handler, Element parent) throws ServiceException {
             mZsc = zsc;
             mHandler = handler;
             mParent = parent;
             mAAC = AdminAccessControl.getAdminAccessControl(zsc);
         }
         
-        public void visit(com.zimbra.cs.account.NamedEntry entry) throws ServiceException {
+        public void visit(org.zmail.cs.account.NamedEntry entry) throws ServiceException {
             if (mAAC.hasRightsToList(entry, Admin.R_listAccount, null)) {
                 ToXML.encodeAccount(mParent, (Account)entry, true, null, mAAC.getAttrRightChecker(entry)); 
             }
         }
     }
     
-    protected void doDomain(ZimbraSoapContext zsc, final Element e, Domain d, Server s) throws ServiceException {
+    protected void doDomain(ZmailSoapContext zsc, final Element e, Domain d, Server s) throws ServiceException {
         AccountVisitor visitor = new AccountVisitor(zsc, this, e);
         Provisioning.getInstance().getAllAccounts(d, s, visitor);
     }

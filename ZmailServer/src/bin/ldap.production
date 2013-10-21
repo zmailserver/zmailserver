@@ -15,11 +15,11 @@
 # 
 
 PID=""
-PIDFILE="/opt/zimbra/openldap/var/run/slapd.pid"
+PIDFILE="/opt/zmail/openldap/var/run/slapd.pid"
 
-mkdir -p "/opt/zimbra/openldap/var/run/"
+mkdir -p "/opt/zmail/openldap/var/run/"
 
-source /opt/zimbra/bin/zmshutil || exit 1
+source /opt/zmail/bin/zmshutil || exit 1
 zmsetvars \
   ldap_is_master \
   ldap_url \
@@ -61,9 +61,9 @@ checkListening()
 {
   SEARCHTIMEOUT=30 #timelimit for ldapsearch
   if [ x"$ldap_common_require_tls" = "x0" ]; then
-    /opt/zimbra/openldap/bin/ldapsearch -x -l $SEARCHTIMEOUT -b "" -s base -H ldapi:/// >/dev/null 2>&1
+    /opt/zmail/openldap/bin/ldapsearch -x -l $SEARCHTIMEOUT -b "" -s base -H ldapi:/// >/dev/null 2>&1
   else
-    /opt/zimbra/openldap/bin/ldapsearch -ZZ -x -l $SEARCHTIMEOUT -b "" -s base -H ldapi:/// >/dev/null 2>&1
+    /opt/zmail/openldap/bin/ldapsearch -ZZ -x -l $SEARCHTIMEOUT -b "" -s base -H ldapi:/// >/dev/null 2>&1
   fi
   if [ $? -ne 0 ]; then
     LISTENING=0
@@ -75,8 +75,8 @@ checkListening()
 
 doDebugStart() {
   TIMEOUT=60 # timelimit for command
-	sudo /opt/zimbra/libexec/zmslapd -l LOCAL0 -u zimbra -h "${bind_url} ldapi:///" \
-			-F /opt/zimbra/data/ldap/config -d 1 2>&1 | egrep "failed|error" &
+	sudo /opt/zmail/libexec/zmslapd -l LOCAL0 -u zmail -h "${bind_url} ldapi:///" \
+			-F /opt/zmail/data/ldap/config -d 1 2>&1 | egrep "failed|error" &
   cmd_pid=$!
   sleep $TIMEOUT | (
     read nothing # wait on sleep to finish
@@ -99,14 +99,14 @@ start()
     if [ x"$bind_url" = "x" ]; then
 		  bind_url=$(echo ${ldap_url} | awk '{print $1}')
     fi
-	sudo /opt/zimbra/libexec/zmslapd -l LOCAL0 \
-      -u zimbra -h "${bind_url} ldapi:///" -F /opt/zimbra/data/ldap/config
+	sudo /opt/zmail/libexec/zmslapd -l LOCAL0 \
+      -u zmail -h "${bind_url} ldapi:///" -F /opt/zmail/data/ldap/config
     sleep 5
     for ((i =0; i < 6; i++)); do
       checkrunning
       if [ $RUNNING = 0 ]; then
-	    sudo /opt/zimbra/libexec/zmslapd -l LOCAL0 \
-          -u zimbra -h "${bind_url} ldapi:///" -F /opt/zimbra/data/ldap/config
+	    sudo /opt/zmail/libexec/zmslapd -l LOCAL0 \
+          -u zmail -h "${bind_url} ldapi:///" -F /opt/zmail/data/ldap/config
       else 
         break
       fi

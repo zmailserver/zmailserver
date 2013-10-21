@@ -12,7 +12,7 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.session;
+package org.zmail.cs.session;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -24,17 +24,17 @@ import java.util.Map;
 import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
 
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.common.soap.AdminConstants;
-import com.zimbra.common.soap.Element;
-import com.zimbra.common.util.Pair;
-import com.zimbra.common.util.ZimbraLog;
-import com.zimbra.cs.mailbox.MailItem;
-import com.zimbra.cs.mailbox.Mailbox;
-import com.zimbra.cs.mailbox.MailboxManager;
-import com.zimbra.cs.redolog.CommitId;
-import com.zimbra.cs.redolog.RedoLogManager;
-import com.zimbra.cs.redolog.RedoLogProvider;
+import org.zmail.common.service.ServiceException;
+import org.zmail.common.soap.AdminConstants;
+import org.zmail.common.soap.Element;
+import org.zmail.common.util.Pair;
+import org.zmail.common.util.ZmailLog;
+import org.zmail.cs.mailbox.MailItem;
+import org.zmail.cs.mailbox.Mailbox;
+import org.zmail.cs.mailbox.MailboxManager;
+import org.zmail.cs.redolog.CommitId;
+import org.zmail.cs.redolog.RedoLogManager;
+import org.zmail.cs.redolog.RedoLogProvider;
 
 /**
  * An implementation of IWaitSet that listens across all accounts on the server
@@ -103,8 +103,8 @@ public final class AllAccountsWaitSet extends WaitSetBase {
         // add us to the global set of AllAccounts waitsets, update the global interest mask
         synchronized(sAllAccountsWaitSets) {
             sAllAccountsWaitSets.put(this, "");
-            if (ZimbraLog.session.isDebugEnabled()) {
-                ZimbraLog.session.debug("added: sAllAccountsWaitSets.size() = " + sAllAccountsWaitSets.size());
+            if (ZmailLog.session.isDebugEnabled()) {
+                ZmailLog.session.debug("added: sAllAccountsWaitSets.size() = " + sAllAccountsWaitSets.size());
             }
 
             // update the static interest mask
@@ -185,7 +185,7 @@ public final class AllAccountsWaitSet extends WaitSetBase {
                     }
                 }
             } catch (ServiceException e) {
-                ZimbraLog.session.warn("AllAccountsWaitSet skipping notification of mailbox id %d because we could not fetch it",
+                ZmailLog.session.warn("AllAccountsWaitSet skipping notification of mailbox id %d because we could not fetch it",
                     id, e);
             }
         }
@@ -233,8 +233,8 @@ public final class AllAccountsWaitSet extends WaitSetBase {
     Map<String, WaitSetAccount> destroy() {
         synchronized(sAllAccountsWaitSets) {
             sAllAccountsWaitSets.remove(this);
-            if (ZimbraLog.session.isDebugEnabled()) {
-                ZimbraLog.session.debug("removed: sAllAccountsWaitSets.size() = " + sAllAccountsWaitSets.size());
+            if (ZmailLog.session.isDebugEnabled()) {
+                ZmailLog.session.debug("removed: sAllAccountsWaitSets.size() = " + sAllAccountsWaitSets.size());
             }
 
             // update the static interest mask

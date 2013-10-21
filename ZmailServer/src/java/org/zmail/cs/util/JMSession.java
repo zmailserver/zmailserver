@@ -13,7 +13,7 @@
  * ***** END LICENSE BLOCK *****
  */
 
-package com.zimbra.cs.util;
+package org.zmail.cs.util;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -27,19 +27,19 @@ import javax.mail.NoSuchProviderException;
 import javax.mail.PasswordAuthentication;
 import javax.mail.Session;
 
-import com.zimbra.common.account.ZAttrProvisioning.ShareNotificationMtaConnectionType;
-import com.zimbra.common.localconfig.LC;
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.common.util.Constants;
-import com.zimbra.common.util.StringUtil;
-import com.zimbra.common.util.TimeoutMap;
-import com.zimbra.common.util.ZimbraLog;
-import com.zimbra.cs.account.Account;
-import com.zimbra.cs.account.Domain;
-import com.zimbra.cs.account.Provisioning;
-import com.zimbra.cs.account.Server;
-import com.zimbra.cs.mailclient.smtp.SmtpTransport;
-import com.zimbra.cs.mailclient.smtp.SmtpsTransport;
+import org.zmail.common.account.ZAttrProvisioning.ShareNotificationMtaConnectionType;
+import org.zmail.common.localconfig.LC;
+import org.zmail.common.service.ServiceException;
+import org.zmail.common.util.Constants;
+import org.zmail.common.util.StringUtil;
+import org.zmail.common.util.TimeoutMap;
+import org.zmail.common.util.ZmailLog;
+import org.zmail.cs.account.Account;
+import org.zmail.cs.account.Domain;
+import org.zmail.cs.account.Provisioning;
+import org.zmail.cs.account.Server;
+import org.zmail.cs.mailclient.smtp.SmtpTransport;
+import org.zmail.cs.mailclient.smtp.SmtpsTransport;
 
 /**
  * Factory for JavaMail {@link Session}.
@@ -105,7 +105,7 @@ public final class JMSession {
             try {
                 domain = Provisioning.getInstance().getDomain(account);
             } catch (ServiceException e) {
-                ZimbraLog.smtp.warn("Unable to look up domain for account %s.", account.getName(), e);
+                ZmailLog.smtp.warn("Unable to look up domain for account %s.", account.getName(), e);
             }
         }
 
@@ -175,7 +175,7 @@ public final class JMSession {
             String account = server.getShareNotificationMtaAuthAccount();
             String password = server.getShareNotificationMtaAuthPassword();
             if (account == null || password == null) {
-                ZimbraLog.smtp.warn(Provisioning.A_zimbraShareNotificationMtaAuthRequired + " is enabled but account or password is unset");
+                ZmailLog.smtp.warn(Provisioning.A_zmailShareNotificationMtaAuthRequired + " is enabled but account or password is unset");
             } else {
                 props.setProperty("mail.smtp.auth", "" + useSmtpAuth);
                 props.setProperty("mail.smtp.sasl.enable", "" + useSmtpAuth);
@@ -224,17 +224,17 @@ public final class JMSession {
         }
         Properties props = new Properties(sSession.getProperties());
         props.setProperty("mail.smtp.host", smtpHost);
-        props.setProperty("mail.smtp.port", getValue(server, domain, Provisioning.A_zimbraSmtpPort));
-        props.setProperty("mail.smtp.localhost", LC.zimbra_server_hostname.value());
+        props.setProperty("mail.smtp.port", getValue(server, domain, Provisioning.A_zmailSmtpPort));
+        props.setProperty("mail.smtp.localhost", LC.zmail_server_hostname.value());
 
         // Get timeout value in seconds from LDAP, convert to millis, and set on the session.
-        String sTimeout = getValue(server, domain, Provisioning.A_zimbraSmtpTimeout);
+        String sTimeout = getValue(server, domain, Provisioning.A_zmailSmtpTimeout);
         long timeout = (sTimeout == null ? 60 : Long.parseLong(sTimeout));
         sTimeout = Long.toString(timeout * Constants.MILLIS_PER_SECOND);
         props.setProperty("mail.smtp.connectiontimeout", sTimeout);
         props.setProperty("mail.smtp.timeout", sTimeout);
 
-        Boolean sendPartial = Boolean.parseBoolean(getValue(server, domain, Provisioning.A_zimbraSmtpSendPartial));
+        Boolean sendPartial = Boolean.parseBoolean(getValue(server, domain, Provisioning.A_zmailSmtpSendPartial));
         props.setProperty(SMTP_SEND_PARTIAL_PROPERTY, sendPartial.toString());
         props.setProperty(SMTPS_SEND_PARTIAL_PROPERTY, sendPartial.toString());
 
@@ -268,12 +268,12 @@ public final class JMSession {
         Collections.synchronizedMap(new TimeoutMap<String, Object>(LC.smtp_host_retry_millis.intValue()));
 
     public static void resetSmtpHosts() {
-        ZimbraLog.smtp.debug("Resetting bad SMTP hosts.");
+        ZmailLog.smtp.debug("Resetting bad SMTP hosts.");
         sBadSmtpHosts.clear();
     }
 
     /**
-     * Returns a random value specified for <tt>zimbraSmtpHostname</tt> on the
+     * Returns a random value specified for <tt>zmailSmtpHostname</tt> on the
      * server or domain, or <tt>null</tt> if the host name cannot be determined.
      *
      * @param server the server
@@ -320,7 +320,7 @@ public final class JMSession {
         if (hostName == null) {
             return;
         }
-        ZimbraLog.smtp.info(
+        ZmailLog.smtp.info(
             "Disallowing connections to %s for %d milliseconds.", hostName, LC.smtp_host_retry_millis.intValue());
         sBadSmtpHosts.put(hostName.toLowerCase(), null);
     }
@@ -328,7 +328,7 @@ public final class JMSession {
     private static final String[] NO_HOSTS = new String[0];
 
     /**
-     * Returns the value of <tt>zimbraSmtpHostname</tt>.  If the value
+     * Returns the value of <tt>zmailSmtpHostname</tt>.  If the value
      * is not set on the domain, returns the value for the local server.
      *
      * @param domain, or <tt>null</tt> to use the local server

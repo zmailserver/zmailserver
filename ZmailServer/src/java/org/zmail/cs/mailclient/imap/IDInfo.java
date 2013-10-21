@@ -12,7 +12,7 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.mailclient.imap;
+package org.zmail.cs.mailclient.imap;
 
 import java.util.Map;
 import java.util.List;
@@ -40,7 +40,7 @@ public final class IDInfo {
     public static final String X_VIA = "X-VIA";
 
     //value constant(s)
-    public static String DATASOURCE_IMAP_CLIENT_NAME = "ZimbraImapDataSource";
+    public static String DATASOURCE_IMAP_CLIENT_NAME = "ZmailImapDataSource";
 
     private final Map<String, String> fields = new TreeMap<String, String>(String.CASE_INSENSITIVE_ORDER);
 

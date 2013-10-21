@@ -12,20 +12,20 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.account.ldap;
+package org.zmail.cs.account.ldap;
 
 import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.common.util.ZimbraLog;
-import com.zimbra.cs.account.AttributeManager;
-import com.zimbra.cs.account.AttributeManager.IDNType;
-import com.zimbra.cs.account.AttributeType;
-import com.zimbra.cs.account.IDNUtil;
-import com.zimbra.cs.mailbox.Contact;
-import com.zimbra.cs.ldap.IAttributes;
+import org.zmail.common.service.ServiceException;
+import org.zmail.common.util.ZmailLog;
+import org.zmail.cs.account.AttributeManager;
+import org.zmail.cs.account.AttributeManager.IDNType;
+import org.zmail.cs.account.AttributeType;
+import org.zmail.cs.account.IDNUtil;
+import org.zmail.cs.mailbox.Contact;
+import org.zmail.cs.ldap.IAttributes;
 
 /*
  * maps LDAP attrs into contact attrs. 
@@ -51,7 +51,7 @@ class LdapGalMapRule {
             String type = matcher.group(1);
             AttributeType attrType = AttributeType.getType(type);
             if (attrType == null) {
-                ZimbraLog.gal.warn("Unrecognized type in attr map: " + type + ", type is ignore for rule " + rule);
+                ZmailLog.gal.warn("Unrecognized type in attr map: " + type + ", type is ignore for rule " + rule);
             } else {
                 if (AttributeManager.isBinaryType(attrType)) {
                     mIsBinary = true;

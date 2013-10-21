@@ -13,23 +13,23 @@
  * ***** END LICENSE BLOCK *****
  */
 
-package com.zimbra.cs.index;
+package org.zmail.cs.index;
 
 import com.google.common.base.Objects;
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.cs.mailbox.Note;
-import com.zimbra.cs.mailbox.Mailbox;
-import com.zimbra.cs.mailbox.MailItem;
+import org.zmail.common.service.ServiceException;
+import org.zmail.cs.mailbox.Note;
+import org.zmail.cs.mailbox.Mailbox;
+import org.zmail.cs.mailbox.MailItem;
 
 /**
  * @since Nov 9, 2004
  * @author tim
  */
-public final class NoteHit extends ZimbraHit {
+public final class NoteHit extends ZmailHit {
     private Note note ;
     private final int itemId;
 
-    NoteHit(ZimbraQueryResultsImpl results, Mailbox mbx, int id, Note note, Object sortValue) {
+    NoteHit(ZmailQueryResultsImpl results, Mailbox mbx, int id, Note note, Object sortValue) {
         super(results, mbx, sortValue);
         itemId = id;
         this.note = note;

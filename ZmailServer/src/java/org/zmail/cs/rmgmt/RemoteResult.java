@@ -13,7 +13,7 @@
  * ***** END LICENSE BLOCK *****
  */
 
-package com.zimbra.cs.rmgmt;
+package org.zmail.cs.rmgmt;
 
 public class RemoteResult {
     byte[] mStdout;

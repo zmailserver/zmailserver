@@ -12,7 +12,7 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.dav.resource;
+package org.zmail.cs.dav.resource;
 
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
@@ -37,21 +37,21 @@ import org.dom4j.QName;
 import org.dom4j.io.OutputFormat;
 import org.dom4j.io.XMLWriter;
 
-import com.zimbra.common.account.Key;
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.common.util.DateUtil;
-import com.zimbra.common.util.HttpUtil;
-import com.zimbra.common.util.ZimbraLog;
-import com.zimbra.cs.account.Account;
-import com.zimbra.cs.account.Provisioning;
-import com.zimbra.cs.dav.DavContext;
-import com.zimbra.cs.dav.DavElements;
-import com.zimbra.cs.dav.DavException;
-import com.zimbra.cs.dav.DavProtocol;
-import com.zimbra.cs.dav.DavContext.RequestProp;
-import com.zimbra.cs.dav.DavProtocol.Compliance;
-import com.zimbra.cs.dav.property.Acl;
-import com.zimbra.cs.dav.property.ResourceProperty;
+import org.zmail.common.account.Key;
+import org.zmail.common.service.ServiceException;
+import org.zmail.common.util.DateUtil;
+import org.zmail.common.util.HttpUtil;
+import org.zmail.common.util.ZmailLog;
+import org.zmail.cs.account.Account;
+import org.zmail.cs.account.Provisioning;
+import org.zmail.cs.dav.DavContext;
+import org.zmail.cs.dav.DavElements;
+import org.zmail.cs.dav.DavException;
+import org.zmail.cs.dav.DavProtocol;
+import org.zmail.cs.dav.DavContext.RequestProp;
+import org.zmail.cs.dav.DavProtocol.Compliance;
+import org.zmail.cs.dav.property.Acl;
+import org.zmail.cs.dav.property.ResourceProperty;
 
 /**
  * DavResource is an object identified by a URL in the hierarchy of HTTP URL
@@ -106,7 +106,7 @@ public abstract class DavResource {
 		try {
 			href.setStringValue(UrlNamespace.getResourceUrl(this));
 		} catch (Exception e) {
-			ZimbraLog.dav.error("can't generate href", e);
+			ZmailLog.dav.error("can't generate href", e);
 		}
 		addProperty(href);
 		if (hasEtag())

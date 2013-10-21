@@ -12,14 +12,14 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.ldap.unboundid;
+package org.zmail.cs.ldap.unboundid;
 
 import com.unboundid.asn1.ASN1OctetString;
 import com.unboundid.ldap.sdk.Attribute;
 import com.unboundid.ldap.sdk.schema.Schema;
 
-import com.zimbra.common.util.ByteUtil;
-import com.zimbra.cs.ldap.LdapUtil;
+import org.zmail.common.util.ByteUtil;
+import org.zmail.cs.ldap.LdapUtil;
 
 public class UBIDUtil {
     

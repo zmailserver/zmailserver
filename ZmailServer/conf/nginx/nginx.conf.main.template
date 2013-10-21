@@ -1,4 +1,4 @@
-# change UID/GID to zimbra/zimbra upon startup
+# change UID/GID to zmail/zmail upon startup
 # 
 user ${main.user} ${main.group};
 
@@ -17,11 +17,11 @@ events {
     # number of simultaneous connections that each worker process can 
     # handle simultaneously
     # note that this number should not exceed the hard limit of the 
-    # RLIMIT_NOFILE resource limit that is set for the zimbra user, because
+    # RLIMIT_NOFILE resource limit that is set for the zmail user, because
     # RLIMIT_NOFILE defines the maximum number of open file descriptors that
     # a process running as a user can have - by default, limits.conf on a 
-    # zimbra system will ensure that the zimbra user has more than 10k file
-    # descriptors allowed for a zimbra process
+    # zmail system will ensure that the zmail user has more than 10k file
+    # descriptors allowed for a zmail process
 
     # (note) also see worker_rlimit_nofile at 
     # http://wiki.codemongers.com/NginxMainModule#worker_rlimit_nofile

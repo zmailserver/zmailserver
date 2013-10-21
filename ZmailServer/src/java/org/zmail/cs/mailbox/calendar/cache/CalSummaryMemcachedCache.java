@@ -13,7 +13,7 @@
  * ***** END LICENSE BLOCK *****
  */
 
-package com.zimbra.cs.mailbox.calendar.cache;
+package org.zmail.cs.mailbox.calendar.cache;
 
 import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
@@ -22,27 +22,27 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.common.util.ZimbraLog;
-import com.zimbra.common.util.memcached.BigByteArrayMemcachedMap;
-import com.zimbra.common.util.memcached.ByteArraySerializer;
-import com.zimbra.common.util.memcached.ZimbraMemcachedClient;
-import com.zimbra.cs.index.SortBy;
-import com.zimbra.cs.mailbox.Folder;
-import com.zimbra.cs.mailbox.MailItem;
-import com.zimbra.cs.mailbox.Mailbox;
-import com.zimbra.cs.mailbox.Metadata;
-import com.zimbra.cs.memcached.MemcachedConnector;
-import com.zimbra.cs.session.PendingModifications;
-import com.zimbra.cs.session.PendingModifications.Change;
-import com.zimbra.cs.session.PendingModifications.ModificationKey;
+import org.zmail.common.service.ServiceException;
+import org.zmail.common.util.ZmailLog;
+import org.zmail.common.util.memcached.BigByteArrayMemcachedMap;
+import org.zmail.common.util.memcached.ByteArraySerializer;
+import org.zmail.common.util.memcached.ZmailMemcachedClient;
+import org.zmail.cs.index.SortBy;
+import org.zmail.cs.mailbox.Folder;
+import org.zmail.cs.mailbox.MailItem;
+import org.zmail.cs.mailbox.Mailbox;
+import org.zmail.cs.mailbox.Metadata;
+import org.zmail.cs.memcached.MemcachedConnector;
+import org.zmail.cs.session.PendingModifications;
+import org.zmail.cs.session.PendingModifications.Change;
+import org.zmail.cs.session.PendingModifications.ModificationKey;
 
 public class CalSummaryMemcachedCache {
 
     private BigByteArrayMemcachedMap<CalSummaryKey, CalendarData> mMemcachedLookup;
 
     CalSummaryMemcachedCache() {
-        ZimbraMemcachedClient memcachedClient = MemcachedConnector.getClient();
+        ZmailMemcachedClient memcachedClient = MemcachedConnector.getClient();
         CalSummarySerializer serializer = new CalSummarySerializer();
         mMemcachedLookup = new BigByteArrayMemcachedMap<CalSummaryKey, CalendarData>(memcachedClient, serializer);
     }
@@ -55,7 +55,7 @@ public class CalSummaryMemcachedCache {
             try {
                 return value.encodeMetadata().toString().getBytes("utf-8");
             } catch (UnsupportedEncodingException e) {
-                ZimbraLog.calendar.warn("Unable to serialize data for calendar summary cache", e);
+                ZmailLog.calendar.warn("Unable to serialize data for calendar summary cache", e);
                 return null;
             }
         }
@@ -67,7 +67,7 @@ public class CalSummaryMemcachedCache {
                 try {
                     encoded = new String(bytes, "utf-8");
                 } catch (UnsupportedEncodingException e) {
-                    ZimbraLog.calendar.warn("Unable to deserialize data for calendar summary cache", e);
+                    ZmailLog.calendar.warn("Unable to deserialize data for calendar summary cache", e);
                     return null;
                 }
                 Metadata meta = new Metadata(encoded);
@@ -135,7 +135,7 @@ public class CalSummaryMemcachedCache {
         try {
             mMemcachedLookup.removeMulti(keysToInvalidate);
         } catch (ServiceException e) {
-            ZimbraLog.calendar.warn("Unable to notify ctag info cache.  Some cached data may become stale.", e);
+            ZmailLog.calendar.warn("Unable to notify ctag info cache.  Some cached data may become stale.", e);
         }
     }
 }

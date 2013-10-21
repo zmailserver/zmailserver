@@ -12,17 +12,17 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.service.admin;
+package org.zmail.cs.service.admin;
 
 import java.util.Map;
 
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.common.soap.Element;
-import com.zimbra.cs.account.AccountServiceException;
-import com.zimbra.cs.account.Group;
-import com.zimbra.cs.account.Provisioning;
-import com.zimbra.cs.account.Server;
-import com.zimbra.soap.ZimbraSoapContext;
+import org.zmail.common.service.ServiceException;
+import org.zmail.common.soap.Element;
+import org.zmail.cs.account.AccountServiceException;
+import org.zmail.cs.account.Group;
+import org.zmail.cs.account.Provisioning;
+import org.zmail.cs.account.Server;
+import org.zmail.soap.ZmailSoapContext;
 
 public abstract class DistributionListDocumentHandler extends AdminDocumentHandler {
 
@@ -47,7 +47,7 @@ public abstract class DistributionListDocumentHandler extends AdminDocumentHandl
     protected Element proxyIfNecessary(Element request, Map<String, Object> context) 
     throws ServiceException {
         // if we've explicitly been told to execute here, don't proxy
-        ZimbraSoapContext zsc = getZimbraSoapContext(context);
+        ZmailSoapContext zsc = getZmailSoapContext(context);
         if (zsc.getProxyTarget() != null) {
             return null;
         }
@@ -61,7 +61,7 @@ public abstract class DistributionListDocumentHandler extends AdminDocumentHandl
                 if (server == null) {
                     throw ServiceException.PROXY_ERROR(
                             AccountServiceException.NO_SUCH_SERVER(
-                            group.getAttr(Provisioning.A_zimbraMailHost)), "");
+                            group.getAttr(Provisioning.A_zmailMailHost)), "");
                 }
                 return proxyRequest(request, context, server);
             }

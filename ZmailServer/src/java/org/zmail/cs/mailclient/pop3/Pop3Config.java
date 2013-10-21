@@ -12,11 +12,11 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.mailclient.pop3;
+package org.zmail.cs.mailclient.pop3;
 
-import com.zimbra.common.util.ZimbraLog;
-import com.zimbra.cs.mailclient.MailConfig;
-import com.zimbra.cs.mailclient.util.Config;
+import org.zmail.common.util.ZmailLog;
+import org.zmail.cs.mailclient.MailConfig;
+import org.zmail.cs.mailclient.util.Config;
 
 import java.util.Properties;
 import java.io.File;
@@ -53,7 +53,7 @@ public class Pop3Config extends MailConfig {
      * Creates a new {@link Pop3Config}.
      */
     public Pop3Config() {
-        super(ZimbraLog.pop_client);
+        super(ZmailLog.pop_client);
     }
 
     /**
@@ -62,8 +62,8 @@ public class Pop3Config extends MailConfig {
      * @param host the server host name
      */
     public Pop3Config(String host) {
-        super(ZimbraLog.pop_client, host);
-        setLogger(ZimbraLog.pop_client);
+        super(ZmailLog.pop_client, host);
+        setLogger(ZmailLog.pop_client);
     }
 
     /**

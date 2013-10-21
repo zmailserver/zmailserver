@@ -12,7 +12,7 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.dav.resource;
+package org.zmail.cs.dav.resource;
 
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
@@ -32,42 +32,42 @@ import org.dom4j.QName;
 import org.dom4j.io.OutputFormat;
 import org.dom4j.io.XMLWriter;
 
-import com.zimbra.common.mailbox.Color;
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.common.service.ServiceException.Argument;
-import com.zimbra.common.soap.SoapFaultException;
-import com.zimbra.common.soap.SoapProtocol;
-import com.zimbra.common.util.ZimbraLog;
-import com.zimbra.cs.account.Account;
-import com.zimbra.cs.account.AuthToken;
-import com.zimbra.cs.account.Provisioning;
-import com.zimbra.common.account.Key;
-import com.zimbra.common.account.Key.AccountBy;
-import com.zimbra.cs.dav.DavContext;
-import com.zimbra.cs.dav.DavElements;
-import com.zimbra.cs.dav.DavException;
-import com.zimbra.cs.dav.DavProtocol;
-import com.zimbra.cs.dav.DavProtocol.Compliance;
-import com.zimbra.cs.dav.property.Acl;
-import com.zimbra.cs.dav.property.ResourceProperty;
-import com.zimbra.cs.dav.property.Acl.Ace;
-import com.zimbra.cs.dav.property.CalDavProperty.CalComponent;
-import com.zimbra.cs.dav.service.DavServlet;
-import com.zimbra.cs.mailbox.ACL;
-import com.zimbra.cs.mailbox.Contact;
-import com.zimbra.cs.mailbox.Folder;
-import com.zimbra.cs.mailbox.MailItem;
-import com.zimbra.cs.mailbox.MailItem.Type;
-import com.zimbra.cs.mailbox.MailServiceException;
-import com.zimbra.cs.mailbox.Mailbox;
-import com.zimbra.cs.mailbox.MailboxManager;
-import com.zimbra.cs.mailbox.Metadata;
-import com.zimbra.cs.service.AuthProvider;
-import com.zimbra.cs.service.formatter.VCard;
-import com.zimbra.cs.service.mail.ItemActionHelper;
-import com.zimbra.cs.service.util.ItemId;
-import com.zimbra.cs.util.AccountUtil;
-import com.zimbra.client.ZMailbox;
+import org.zmail.common.mailbox.Color;
+import org.zmail.common.service.ServiceException;
+import org.zmail.common.service.ServiceException.Argument;
+import org.zmail.common.soap.SoapFaultException;
+import org.zmail.common.soap.SoapProtocol;
+import org.zmail.common.util.ZmailLog;
+import org.zmail.cs.account.Account;
+import org.zmail.cs.account.AuthToken;
+import org.zmail.cs.account.Provisioning;
+import org.zmail.common.account.Key;
+import org.zmail.common.account.Key.AccountBy;
+import org.zmail.cs.dav.DavContext;
+import org.zmail.cs.dav.DavElements;
+import org.zmail.cs.dav.DavException;
+import org.zmail.cs.dav.DavProtocol;
+import org.zmail.cs.dav.DavProtocol.Compliance;
+import org.zmail.cs.dav.property.Acl;
+import org.zmail.cs.dav.property.ResourceProperty;
+import org.zmail.cs.dav.property.Acl.Ace;
+import org.zmail.cs.dav.property.CalDavProperty.CalComponent;
+import org.zmail.cs.dav.service.DavServlet;
+import org.zmail.cs.mailbox.ACL;
+import org.zmail.cs.mailbox.Contact;
+import org.zmail.cs.mailbox.Folder;
+import org.zmail.cs.mailbox.MailItem;
+import org.zmail.cs.mailbox.MailItem.Type;
+import org.zmail.cs.mailbox.MailServiceException;
+import org.zmail.cs.mailbox.Mailbox;
+import org.zmail.cs.mailbox.MailboxManager;
+import org.zmail.cs.mailbox.Metadata;
+import org.zmail.cs.service.AuthProvider;
+import org.zmail.cs.service.formatter.VCard;
+import org.zmail.cs.service.mail.ItemActionHelper;
+import org.zmail.cs.service.util.ItemId;
+import org.zmail.cs.util.AccountUtil;
+import org.zmail.client.ZMailbox;
 
 /**
  * Abstraction of DavResource that maps to MailItem in the mailbox.
@@ -129,7 +129,7 @@ public abstract class MailItemResource extends DavResource {
         try {
             mDeadProps = getDeadProps(ctxt, item);
         } catch (Exception e) {
-            ZimbraLog.dav.warn("can't get dead properties for MailItem id="+mId, e);
+            ZmailLog.dav.warn("can't get dead properties for MailItem id="+mId, e);
         }
         setProperty(DavElements.P_GETETAG, mEtag);
         if (mModifiedDate > 0)
@@ -382,7 +382,7 @@ public abstract class MailItemResource extends DavResource {
         if (configVal.length() == 0)
             return props;
         ByteArrayInputStream in = new ByteArrayInputStream(configVal.getBytes("UTF-8"));
-        org.dom4j.Document doc = com.zimbra.common.soap.Element.getSAXReader().read(in);
+        org.dom4j.Document doc = org.zmail.common.soap.Element.getSAXReader().read(in);
         Element e = doc.getRootElement();
         if (e == null)
             return props;
@@ -538,7 +538,7 @@ public abstract class MailItemResource extends DavResource {
         ACL acl = new ACL();
         for (Ace ace : aceList) {
             if (ace.getRights() > 0)
-                acl.grantAccess(ace.getZimbraId(), ace.getGranteeType(), ace.getRights(), null);
+                acl.grantAccess(ace.getZmailId(), ace.getGranteeType(), ace.getRights(), null);
         }    
         Mailbox mbox = getMailbox(ctxt);
         mbox.setPermissions(ctxt.getOperationContext(), getId(), acl);

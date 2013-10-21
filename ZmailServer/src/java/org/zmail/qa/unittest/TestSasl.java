@@ -13,11 +13,11 @@
  * ***** END LICENSE BLOCK *****
  */
 
-package com.zimbra.qa.unittest;
+package org.zmail.qa.unittest;
 
-import com.zimbra.cs.security.sasl.SaslInputBuffer;
-import com.zimbra.cs.security.sasl.SaslOutputBuffer;
-import com.zimbra.cs.security.sasl.SaslSecurityLayer;
+import org.zmail.cs.security.sasl.SaslInputBuffer;
+import org.zmail.cs.security.sasl.SaslOutputBuffer;
+import org.zmail.cs.security.sasl.SaslSecurityLayer;
 import junit.framework.TestCase;
 
 import javax.security.sasl.SaslException;
@@ -73,7 +73,7 @@ public class TestSasl extends TestCase {
         String host = "localhost";
         String principle = "imap@" + host;
         LoginContext lc = Krb5Login.withKeyTab(
-            "imap/localhost", "/opt/zimbra/conf/krb5.keytab");
+            "imap/localhost", "/opt/zmail/conf/krb5.keytab");
         lc.login();
         GSSManager mgr = GSSManager.getInstance();
         Oid krb5Oid = new Oid("1.2.840.113554.1.2.2");
@@ -88,7 +88,7 @@ public class TestSasl extends TestCase {
     public void testKeytab() throws Exception {
         System.setProperty("sun.security.krb5.debug", "true");
         System.setProperty("sun.security.jgss.debug", "true");
-        Krb5Keytab keytab = new Krb5Keytab("/opt/zimbra/conf/krb5.keytab");
+        Krb5Keytab keytab = new Krb5Keytab("/opt/zmail/conf/krb5.keytab");
         KerberosPrincipal kp = new KerberosPrincipal("imap/localhost");
         List<KerberosKey> keys = keytab.getKeys(kp);
         System.out.println("len = " + keys.size());

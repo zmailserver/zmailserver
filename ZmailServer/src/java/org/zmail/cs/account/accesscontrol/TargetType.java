@@ -12,7 +12,7 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.account.accesscontrol;
+package org.zmail.cs.account.accesscontrol;
 
 import java.util.Arrays;
 import java.util.Collections;
@@ -22,54 +22,54 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.common.util.SetUtil;
+import org.zmail.common.service.ServiceException;
+import org.zmail.common.util.SetUtil;
 
-import com.zimbra.cs.account.Account;
-import com.zimbra.cs.account.AccountServiceException;
-import com.zimbra.cs.account.AttributeClass;
-import com.zimbra.cs.account.AttributeManager;
-import com.zimbra.cs.account.CalendarResource;
-import com.zimbra.cs.account.Config;
-import com.zimbra.cs.account.Cos;
-import com.zimbra.cs.account.DistributionList;
-import com.zimbra.cs.account.Domain;
-import com.zimbra.cs.account.DynamicGroup;
-import com.zimbra.cs.account.Entry;
-import com.zimbra.cs.account.GlobalGrant;
-import com.zimbra.cs.account.NamedEntry;
-import com.zimbra.cs.account.Provisioning;
-import com.zimbra.cs.account.UCService;
-import com.zimbra.common.account.Key;
-import com.zimbra.common.account.Key.AccountBy;
-import com.zimbra.cs.account.ldap.LdapDIT;
-import com.zimbra.cs.account.ldap.LdapProv;
-import com.zimbra.cs.account.Server;
-import com.zimbra.cs.account.XMPPComponent;
-import com.zimbra.cs.account.Zimlet;
-import com.zimbra.soap.type.TargetBy;
+import org.zmail.cs.account.Account;
+import org.zmail.cs.account.AccountServiceException;
+import org.zmail.cs.account.AttributeClass;
+import org.zmail.cs.account.AttributeManager;
+import org.zmail.cs.account.CalendarResource;
+import org.zmail.cs.account.Config;
+import org.zmail.cs.account.Cos;
+import org.zmail.cs.account.DistributionList;
+import org.zmail.cs.account.Domain;
+import org.zmail.cs.account.DynamicGroup;
+import org.zmail.cs.account.Entry;
+import org.zmail.cs.account.GlobalGrant;
+import org.zmail.cs.account.NamedEntry;
+import org.zmail.cs.account.Provisioning;
+import org.zmail.cs.account.UCService;
+import org.zmail.common.account.Key;
+import org.zmail.common.account.Key.AccountBy;
+import org.zmail.cs.account.ldap.LdapDIT;
+import org.zmail.cs.account.ldap.LdapProv;
+import org.zmail.cs.account.Server;
+import org.zmail.cs.account.XMPPComponent;
+import org.zmail.cs.account.Zimlet;
+import org.zmail.soap.type.TargetBy;
 
 /**
  * @author pshao
  */
 public enum TargetType {
-    account(true,       true,    AttributeClass.account,          com.zimbra.soap.type.TargetType.account,       "Account"),
-    calresource(true,   true,    AttributeClass.calendarResource, com.zimbra.soap.type.TargetType.calresource,   "CalendarResource"),
-    cos(true,           false,   AttributeClass.cos,              com.zimbra.soap.type.TargetType.cos,           "Cos"),
-    dl(true,            true,    AttributeClass.distributionList, com.zimbra.soap.type.TargetType.dl,            "DistributionList"), // static group
-    group(true,         true,    AttributeClass.group,            com.zimbra.soap.type.TargetType.group,         "DynamicGroup"),     // dynamic group
-    domain(true,        false,   AttributeClass.domain,           com.zimbra.soap.type.TargetType.domain,        "Domain"),
-    server(true,        false,   AttributeClass.server,           com.zimbra.soap.type.TargetType.server,        "Server"),
-    ucservice(true,     false,   AttributeClass.ucService,        com.zimbra.soap.type.TargetType.ucservice,     "UCService"),
-    xmppcomponent(true, false,   AttributeClass.xmppComponent,    com.zimbra.soap.type.TargetType.xmppcomponent, "XMPPComponent"),
-    zimlet(true,        false,   AttributeClass.zimletEntry,      com.zimbra.soap.type.TargetType.zimlet,        "Zimlet"),
-    config(false,       false,   AttributeClass.globalConfig,     com.zimbra.soap.type.TargetType.config,        "GlobalConfig"),
-    global(false,       false,   AttributeClass.aclTarget,        com.zimbra.soap.type.TargetType.global,        "GlobalGrant");
+    account(true,       true,    AttributeClass.account,          org.zmail.soap.type.TargetType.account,       "Account"),
+    calresource(true,   true,    AttributeClass.calendarResource, org.zmail.soap.type.TargetType.calresource,   "CalendarResource"),
+    cos(true,           false,   AttributeClass.cos,              org.zmail.soap.type.TargetType.cos,           "Cos"),
+    dl(true,            true,    AttributeClass.distributionList, org.zmail.soap.type.TargetType.dl,            "DistributionList"), // static group
+    group(true,         true,    AttributeClass.group,            org.zmail.soap.type.TargetType.group,         "DynamicGroup"),     // dynamic group
+    domain(true,        false,   AttributeClass.domain,           org.zmail.soap.type.TargetType.domain,        "Domain"),
+    server(true,        false,   AttributeClass.server,           org.zmail.soap.type.TargetType.server,        "Server"),
+    ucservice(true,     false,   AttributeClass.ucService,        org.zmail.soap.type.TargetType.ucservice,     "UCService"),
+    xmppcomponent(true, false,   AttributeClass.xmppComponent,    org.zmail.soap.type.TargetType.xmppcomponent, "XMPPComponent"),
+    zimlet(true,        false,   AttributeClass.zimletEntry,      org.zmail.soap.type.TargetType.zimlet,        "Zimlet"),
+    config(false,       false,   AttributeClass.globalConfig,     org.zmail.soap.type.TargetType.config,        "GlobalConfig"),
+    global(false,       false,   AttributeClass.aclTarget,        org.zmail.soap.type.TargetType.global,        "GlobalGrant");
 
     private boolean mNeedsTargetIdentity;
     private boolean mIsDomained;
     private AttributeClass mAttrClass;
-    private com.zimbra.soap.type.TargetType jaxbTargetType;
+    private org.zmail.soap.type.TargetType jaxbTargetType;
     private String mPrettyName;
 
     //
@@ -98,7 +98,7 @@ public enum TargetType {
 
     TargetType(boolean NeedsTargetIdentity, boolean isDomained,
             AttributeClass attrClass,
-            com.zimbra.soap.type.TargetType jaxbTargetType,
+            org.zmail.soap.type.TargetType jaxbTargetType,
             String prettyName) {
         mNeedsTargetIdentity = NeedsTargetIdentity;
         mIsDomained = isDomained;
@@ -108,11 +108,11 @@ public enum TargetType {
     }
 
     /* return equivalent JAXB enum */
-    public com.zimbra.soap.type.TargetType toJaxb() {
+    public org.zmail.soap.type.TargetType toJaxb() {
         return jaxbTargetType;
     }
 
-    public static TargetType fromJaxb(com.zimbra.soap.type.TargetType jaxbTT) {
+    public static TargetType fromJaxb(org.zmail.soap.type.TargetType jaxbTT) {
         for (TargetType tt :TargetType.values()) {
             if (tt.toJaxb() == jaxbTT) {
                 return tt;
@@ -622,8 +622,8 @@ public enum TargetType {
 
         Map<String, Set<String>> result = new HashMap<String, Set<String>>();
 
-        // if zimbra default DIT and both mail branch and config branch are needed, merge the two
-        if (LdapDIT.isZimbraDefault(dit)) {
+        // if zmail default DIT and both mail branch and config branch are needed, merge the two
+        if (LdapDIT.isZmailDefault(dit)) {
             if (leastCommonBaseInMailBranch != null && leastCommonBaseInConfigBranch != null) {
                 // merge the two
                 String commonBase = getCommonBase(leastCommonBaseInMailBranch,

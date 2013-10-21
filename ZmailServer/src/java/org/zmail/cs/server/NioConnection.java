@@ -12,7 +12,7 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.server;
+package org.zmail.cs.server;
 
 import java.io.OutputStream;
 import java.net.InetSocketAddress;
@@ -22,7 +22,7 @@ import javax.security.sasl.SaslServer;
 import org.apache.mina.core.session.IoSession;
 import org.apache.mina.filter.ssl.SslFilter;
 
-import com.zimbra.cs.security.sasl.SaslFilter;
+import org.zmail.cs.security.sasl.SaslFilter;
 
 public final class NioConnection {
     private final NioServer server;

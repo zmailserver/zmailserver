@@ -14,7 +14,7 @@
  * 
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.qa.unittest.prov.ldap;
+package org.zmail.qa.unittest.prov.ldap;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -23,21 +23,21 @@ import org.junit.*;
 import static org.junit.Assert.*;
 
 import com.google.common.collect.Maps;
-import com.zimbra.common.account.ProvisioningConstants;
-import com.zimbra.common.localconfig.LC;
-import com.zimbra.cs.account.Account;
-import com.zimbra.cs.account.AccountServiceException;
-import com.zimbra.cs.account.Domain;
-import com.zimbra.cs.account.Provisioning;
-import com.zimbra.cs.account.auth.AuthContext;
-import com.zimbra.cs.account.auth.AuthMechanism.AuthMech;
-import com.zimbra.cs.account.ldap.Check;
-import com.zimbra.cs.account.ldap.LdapProv;
-import com.zimbra.cs.ldap.LdapConnType;
-import com.zimbra.cs.ldap.LdapConstants;
-import com.zimbra.cs.ldap.unboundid.InMemoryLdapServer;
-import com.zimbra.qa.unittest.prov.Names;
-import com.zimbra.qa.unittest.prov.ProvTest;
+import org.zmail.common.account.ProvisioningConstants;
+import org.zmail.common.localconfig.LC;
+import org.zmail.cs.account.Account;
+import org.zmail.cs.account.AccountServiceException;
+import org.zmail.cs.account.Domain;
+import org.zmail.cs.account.Provisioning;
+import org.zmail.cs.account.auth.AuthContext;
+import org.zmail.cs.account.auth.AuthMechanism.AuthMech;
+import org.zmail.cs.account.ldap.Check;
+import org.zmail.cs.account.ldap.LdapProv;
+import org.zmail.cs.ldap.LdapConnType;
+import org.zmail.cs.ldap.LdapConstants;
+import org.zmail.cs.ldap.unboundid.InMemoryLdapServer;
+import org.zmail.qa.unittest.prov.Names;
+import org.zmail.qa.unittest.prov.ProvTest;
 
 
 public class TestLdapProvExternalLdapAuth extends LdapTest {
@@ -68,7 +68,7 @@ public class TestLdapProvExternalLdapAuth extends LdapTest {
     }
     
     private String getAccountDN(Account acct) throws Exception {
-        return ((com.zimbra.cs.account.ldap.entry.LdapAccount) acct).getDN();
+        return ((org.zmail.cs.account.ldap.entry.LdapAccount) acct).getDN();
     }
     
     private String getLdapURL() {
@@ -76,9 +76,9 @@ public class TestLdapProvExternalLdapAuth extends LdapTest {
             fail(); // unsupported
             return null;
         } else if (LdapConnType.LDAPS == testConnType) {
-            return "ldaps://" + LC.zimbra_server_hostname.value() + ":636";
+            return "ldaps://" + LC.zmail_server_hostname.value() + ":636";
         } else {
-            return "ldap://" + LC.zimbra_server_hostname.value() + ":389";
+            return "ldap://" + LC.zmail_server_hostname.value() + ":389";
         }
     }
     
@@ -98,30 +98,30 @@ public class TestLdapProvExternalLdapAuth extends LdapTest {
         String PASSWORD = "test123";
         
         Map<String, Object> attrs = new HashMap<String, Object>();
-        attrs.put(Provisioning.A_zimbraAuthMech, AuthMech.ldap.name());
-        attrs.put(Provisioning.A_zimbraAuthLdapURL, getLdapURL());
-        attrs.put(Provisioning.A_zimbraAuthLdapSearchBindPassword, LC.zimbra_ldap_password.value());
-        attrs.put(Provisioning.A_zimbraAuthLdapSearchBindDn, LC.zimbra_ldap_userdn.value());
+        attrs.put(Provisioning.A_zmailAuthMech, AuthMech.ldap.name());
+        attrs.put(Provisioning.A_zmailAuthLdapURL, getLdapURL());
+        attrs.put(Provisioning.A_zmailAuthLdapSearchBindPassword, LC.zmail_ldap_password.value());
+        attrs.put(Provisioning.A_zmailAuthLdapSearchBindDn, LC.zmail_ldap_userdn.value());
         
         Provisioning.Result result;
         String expectedComputedSearchFilter;
         
         // %n = username with @ (or without, if no @ was specified)
-        attrs.put(Provisioning.A_zimbraAuthLdapSearchFilter, "(zimbraMailDeliveryAddress=%n)");
+        attrs.put(Provisioning.A_zmailAuthLdapSearchFilter, "(zmailMailDeliveryAddress=%n)");
         result = prov.checkAuthConfig(attrs, acct.getName(), PASSWORD);
         assertEquals(Check.STATUS_OK, result.getCode());
-        expectedComputedSearchFilter = "(zimbraMailDeliveryAddress=" + acct.getName() + ")";
+        expectedComputedSearchFilter = "(zmailMailDeliveryAddress=" + acct.getName() + ")";
         assertEquals(expectedComputedSearchFilter, result.getComputedDn());
         
         // %u = username with @ removed
-        attrs.put(Provisioning.A_zimbraAuthLdapSearchFilter, "(uid=%u)");
+        attrs.put(Provisioning.A_zmailAuthLdapSearchFilter, "(uid=%u)");
         result = prov.checkAuthConfig(attrs, acct.getName(), PASSWORD);
         assertEquals(Check.STATUS_OK, result.getCode());
         expectedComputedSearchFilter = "(uid=" + ACCT_NAME_LOCALPART + ")";
         assertEquals(expectedComputedSearchFilter.toLowerCase(), result.getComputedDn().toLowerCase());
         
         // %d = domain as foo.com
-        attrs.put(Provisioning.A_zimbraAuthLdapSearchFilter, "(mail=%u@%d)");
+        attrs.put(Provisioning.A_zmailAuthLdapSearchFilter, "(mail=%u@%d)");
         result = prov.checkAuthConfig(attrs, acct.getName(), PASSWORD);
         assertEquals(Check.STATUS_OK, result.getCode());
         expectedComputedSearchFilter = "(mail=" + acct.getName() + ")";
@@ -129,7 +129,7 @@ public class TestLdapProvExternalLdapAuth extends LdapTest {
         
         // %D = domain as dc=foo,dc=com
         /* Nope: this is not valid, cannot search by DN
-        attrs.put(Provisioning.A_zimbraAuthLdapSearchFilter, "(dn=%u,ou=people,%D)");
+        attrs.put(Provisioning.A_zmailAuthLdapSearchFilter, "(dn=%u,ou=people,%D)");
         result = prov.checkAuthConfig(attrs, acct.getName(), PASSWORD);
         assertEquals(Check.STATUS_OK, result.getCode());
         expectedComputedSearchFilter = "(dn=" + ACCT_DN + ")";
@@ -149,18 +149,18 @@ public class TestLdapProvExternalLdapAuth extends LdapTest {
         String PASSWORD = "test123";
         
         Map<String, Object> attrs = new HashMap<String, Object>();
-        attrs.put(Provisioning.A_zimbraAuthMech, AuthMech.ldap.name());
-        attrs.put(Provisioning.A_zimbraAuthLdapURL, getLdapURL());
-        attrs.put(Provisioning.A_zimbraAuthLdapSearchBindPassword, LC.zimbra_ldap_password.value());
-        attrs.put(Provisioning.A_zimbraAuthLdapSearchBindDn, LC.zimbra_ldap_userdn.value());
+        attrs.put(Provisioning.A_zmailAuthMech, AuthMech.ldap.name());
+        attrs.put(Provisioning.A_zmailAuthLdapURL, getLdapURL());
+        attrs.put(Provisioning.A_zmailAuthLdapSearchBindPassword, LC.zmail_ldap_password.value());
+        attrs.put(Provisioning.A_zmailAuthLdapSearchBindDn, LC.zmail_ldap_userdn.value());
         
         Provisioning.Result result;
         
         // %D = domain as dc=foo,dc=com
-        attrs.put(Provisioning.A_zimbraAuthLdapBindDn, "uid=%u,ou=people,%D");
+        attrs.put(Provisioning.A_zmailAuthLdapBindDn, "uid=%u,ou=people,%D");
         result = prov.checkAuthConfig(attrs, acct.getName(), PASSWORD);
         assertEquals(Check.STATUS_OK, result.getCode());
-        // expectedComputedSearchFilter = "(zimbraMailDeliveryAddress=" + acct.getName() + ")";
+        // expectedComputedSearchFilter = "(zmailMailDeliveryAddress=" + acct.getName() + ")";
         assertEquals(ACCT_DN, result.getComputedDn());
         
         provUtil.deleteAccount(acct);
@@ -180,11 +180,11 @@ public class TestLdapProvExternalLdapAuth extends LdapTest {
         try {
             SKIP_FOR_INMEM_LDAP_SERVER(SkipTestReason.EXTERNAL_AUTH_STATUS_UNKNOWN_HOST);
             
-            attrs.put(Provisioning.A_zimbraAuthMech, AuthMech.ldap.name());
-            attrs.put(Provisioning.A_zimbraAuthLdapURL, "ldap://" + "bogus" + ":389");
-            attrs.put(Provisioning.A_zimbraAuthLdapSearchBindPassword, LC.zimbra_ldap_password.value());
-            attrs.put(Provisioning.A_zimbraAuthLdapSearchBindDn, LC.zimbra_ldap_userdn.value());
-            attrs.put(Provisioning.A_zimbraAuthLdapSearchFilter, "(zimbraMailDeliveryAddress=%n)");
+            attrs.put(Provisioning.A_zmailAuthMech, AuthMech.ldap.name());
+            attrs.put(Provisioning.A_zmailAuthLdapURL, "ldap://" + "bogus" + ":389");
+            attrs.put(Provisioning.A_zmailAuthLdapSearchBindPassword, LC.zmail_ldap_password.value());
+            attrs.put(Provisioning.A_zmailAuthLdapSearchBindDn, LC.zmail_ldap_userdn.value());
+            attrs.put(Provisioning.A_zmailAuthLdapSearchFilter, "(zmailMailDeliveryAddress=%n)");
             result = prov.checkAuthConfig(attrs, acct.getName(), PASSWORD);
             assertEquals(Check.STATUS_UNKNOWN_HOST, result.getCode());
         } catch (ProvTest.SkippedForInMemLdapServerException e) {
@@ -194,11 +194,11 @@ public class TestLdapProvExternalLdapAuth extends LdapTest {
             SKIP_FOR_INMEM_LDAP_SERVER(SkipTestReason.EXTERNAL_AUTH_STATUS_CONNECTION_REFUSED);
             
             attrs.clear();
-            attrs.put(Provisioning.A_zimbraAuthMech, AuthMech.ldap.name());
-            attrs.put(Provisioning.A_zimbraAuthLdapURL, "ldap://" + LC.zimbra_server_hostname.value() + ":38900");
-            attrs.put(Provisioning.A_zimbraAuthLdapSearchBindPassword, LC.zimbra_ldap_password.value());
-            attrs.put(Provisioning.A_zimbraAuthLdapSearchBindDn, LC.zimbra_ldap_userdn.value());
-            attrs.put(Provisioning.A_zimbraAuthLdapSearchFilter, "(zimbraMailDeliveryAddress=%n)");
+            attrs.put(Provisioning.A_zmailAuthMech, AuthMech.ldap.name());
+            attrs.put(Provisioning.A_zmailAuthLdapURL, "ldap://" + LC.zmail_server_hostname.value() + ":38900");
+            attrs.put(Provisioning.A_zmailAuthLdapSearchBindPassword, LC.zmail_ldap_password.value());
+            attrs.put(Provisioning.A_zmailAuthLdapSearchBindDn, LC.zmail_ldap_userdn.value());
+            attrs.put(Provisioning.A_zmailAuthLdapSearchFilter, "(zmailMailDeliveryAddress=%n)");
             result = prov.checkAuthConfig(attrs, acct.getName(), PASSWORD);
             assertEquals(Check.STATUS_CONNECTION_REFUSED, result.getCode());
         } catch (ProvTest.SkippedForInMemLdapServerException e) {
@@ -208,12 +208,12 @@ public class TestLdapProvExternalLdapAuth extends LdapTest {
             SKIP_FOR_INMEM_LDAP_SERVER(SkipTestReason.EXTERNAL_AUTH_STATUS_COMMUNICATION_FAILURE);
             
             attrs.clear();
-            attrs.put(Provisioning.A_zimbraAuthMech, AuthMech.ldap.name());
-            attrs.put(Provisioning.A_zimbraAuthLdapURL, getLdapURL());
-            attrs.put(Provisioning.A_zimbraAuthLdapStartTlsEnabled, LdapConstants.LDAP_TRUE);
-            attrs.put(Provisioning.A_zimbraAuthLdapSearchBindPassword, LC.zimbra_ldap_password.value());
-            attrs.put(Provisioning.A_zimbraAuthLdapSearchBindDn, LC.zimbra_ldap_userdn.value());
-            attrs.put(Provisioning.A_zimbraAuthLdapSearchFilter, "(zimbraMailDeliveryAddress=%n)");
+            attrs.put(Provisioning.A_zmailAuthMech, AuthMech.ldap.name());
+            attrs.put(Provisioning.A_zmailAuthLdapURL, getLdapURL());
+            attrs.put(Provisioning.A_zmailAuthLdapStartTlsEnabled, LdapConstants.LDAP_TRUE);
+            attrs.put(Provisioning.A_zmailAuthLdapSearchBindPassword, LC.zmail_ldap_password.value());
+            attrs.put(Provisioning.A_zmailAuthLdapSearchBindDn, LC.zmail_ldap_userdn.value());
+            attrs.put(Provisioning.A_zmailAuthLdapSearchFilter, "(zmailMailDeliveryAddress=%n)");
             result = prov.checkAuthConfig(attrs, acct.getName(), PASSWORD);
             // assertEquals(Check.STATUS_SSL_HANDSHAKE_FAILURE, result.getCode());  // if TLS is enabled in sladp.conf
             assertEquals(Check.STATUS_COMMUNICATION_FAILURE, result.getCode());     // if TLS is not enabled in sladp.conf
@@ -223,22 +223,22 @@ public class TestLdapProvExternalLdapAuth extends LdapTest {
         try {
             SKIP_FOR_INMEM_LDAP_SERVER(SkipTestReason.EXTERNAL_AUTH_STATUS_AUTH_FAILED);
             attrs.clear();
-            attrs.put(Provisioning.A_zimbraAuthMech, AuthMech.ldap.name());
-            attrs.put(Provisioning.A_zimbraAuthLdapURL, getLdapURL());
-            attrs.put(Provisioning.A_zimbraAuthLdapSearchBindPassword, "bogus");
-            attrs.put(Provisioning.A_zimbraAuthLdapSearchBindDn, LC.zimbra_ldap_userdn.value());
-            attrs.put(Provisioning.A_zimbraAuthLdapSearchFilter, "(zimbraMailDeliveryAddress=%n)");
+            attrs.put(Provisioning.A_zmailAuthMech, AuthMech.ldap.name());
+            attrs.put(Provisioning.A_zmailAuthLdapURL, getLdapURL());
+            attrs.put(Provisioning.A_zmailAuthLdapSearchBindPassword, "bogus");
+            attrs.put(Provisioning.A_zmailAuthLdapSearchBindDn, LC.zmail_ldap_userdn.value());
+            attrs.put(Provisioning.A_zmailAuthLdapSearchFilter, "(zmailMailDeliveryAddress=%n)");
             result = prov.checkAuthConfig(attrs, acct.getName(), PASSWORD);
             assertEquals(Check.STATUS_AUTH_FAILED, result.getCode());
         } catch (ProvTest.SkippedForInMemLdapServerException e) {
         }
         
         attrs.clear();
-        attrs.put(Provisioning.A_zimbraAuthMech, AuthMech.ldap.name());
-        attrs.put(Provisioning.A_zimbraAuthLdapURL, getLdapURL());
-        attrs.put(Provisioning.A_zimbraAuthLdapSearchBindPassword, LC.zimbra_ldap_password.value());
-        attrs.put(Provisioning.A_zimbraAuthLdapSearchBindDn, LC.zimbra_ldap_userdn.value());
-        attrs.put(Provisioning.A_zimbraAuthLdapSearchFilter, "(zimbraMailDeliveryAddress=%n)");
+        attrs.put(Provisioning.A_zmailAuthMech, AuthMech.ldap.name());
+        attrs.put(Provisioning.A_zmailAuthLdapURL, getLdapURL());
+        attrs.put(Provisioning.A_zmailAuthLdapSearchBindPassword, LC.zmail_ldap_password.value());
+        attrs.put(Provisioning.A_zmailAuthLdapSearchBindDn, LC.zmail_ldap_userdn.value());
+        attrs.put(Provisioning.A_zmailAuthLdapSearchFilter, "(zmailMailDeliveryAddress=%n)");
         result = prov.checkAuthConfig(attrs, acct.getName(), "bogus");
         assertEquals(Check.STATUS_AUTH_FAILED, result.getCode());
         
@@ -246,21 +246,21 @@ public class TestLdapProvExternalLdapAuth extends LdapTest {
         // STATUS_AUTH_NOT_SUPPORTED
         
         attrs.clear();
-        attrs.put(Provisioning.A_zimbraAuthMech, AuthMech.ldap.name());
-        attrs.put(Provisioning.A_zimbraAuthLdapURL, getLdapURL());
-        attrs.put(Provisioning.A_zimbraAuthLdapSearchBindPassword, LC.zimbra_ldap_password.value());
-        attrs.put(Provisioning.A_zimbraAuthLdapSearchBindDn, LC.zimbra_ldap_userdn.value());
-        attrs.put(Provisioning.A_zimbraAuthLdapSearchBase, "dc=bogus");
-        attrs.put(Provisioning.A_zimbraAuthLdapSearchFilter, "(zimbraMailDeliveryAddress=%n)");
+        attrs.put(Provisioning.A_zmailAuthMech, AuthMech.ldap.name());
+        attrs.put(Provisioning.A_zmailAuthLdapURL, getLdapURL());
+        attrs.put(Provisioning.A_zmailAuthLdapSearchBindPassword, LC.zmail_ldap_password.value());
+        attrs.put(Provisioning.A_zmailAuthLdapSearchBindDn, LC.zmail_ldap_userdn.value());
+        attrs.put(Provisioning.A_zmailAuthLdapSearchBase, "dc=bogus");
+        attrs.put(Provisioning.A_zmailAuthLdapSearchFilter, "(zmailMailDeliveryAddress=%n)");
         result = prov.checkAuthConfig(attrs, acct.getName(), PASSWORD);
         assertEquals(Check.STATUS_NAME_NOT_FOUND, result.getCode());
         
         attrs.clear();
-        attrs.put(Provisioning.A_zimbraAuthMech, AuthMech.ldap.name());
-        attrs.put(Provisioning.A_zimbraAuthLdapURL, getLdapURL());
-        attrs.put(Provisioning.A_zimbraAuthLdapSearchBindPassword, LC.zimbra_ldap_password.value());
-        attrs.put(Provisioning.A_zimbraAuthLdapSearchBindDn, LC.zimbra_ldap_userdn.value());
-        attrs.put(Provisioning.A_zimbraAuthLdapSearchFilter, "(zimbraMailDeliveryAddress=%n"); // missing the closing paren
+        attrs.put(Provisioning.A_zmailAuthMech, AuthMech.ldap.name());
+        attrs.put(Provisioning.A_zmailAuthLdapURL, getLdapURL());
+        attrs.put(Provisioning.A_zmailAuthLdapSearchBindPassword, LC.zmail_ldap_password.value());
+        attrs.put(Provisioning.A_zmailAuthLdapSearchBindDn, LC.zmail_ldap_userdn.value());
+        attrs.put(Provisioning.A_zmailAuthLdapSearchFilter, "(zmailMailDeliveryAddress=%n"); // missing the closing paren
         result = prov.checkAuthConfig(attrs, acct.getName(), PASSWORD);
         assertEquals(Check.STATUS_INVALID_SEARCH_FILTER, result.getCode());
         
@@ -276,9 +276,9 @@ public class TestLdapProvExternalLdapAuth extends LdapTest {
         
         String authMech = AuthMech.ldap.name();
         Map<String, Object> domainAttrs = new HashMap<String, Object>();
-        domainAttrs.put(Provisioning.A_zimbraAuthMech, authMech);
-        domainAttrs.put(Provisioning.A_zimbraAuthLdapURL, getLdapURL());
-        domainAttrs.put(Provisioning.A_zimbraAuthLdapStartTlsEnabled, getWantStartTLS());
+        domainAttrs.put(Provisioning.A_zmailAuthMech, authMech);
+        domainAttrs.put(Provisioning.A_zmailAuthLdapURL, getLdapURL());
+        domainAttrs.put(Provisioning.A_zmailAuthLdapStartTlsEnabled, getWantStartTLS());
         
         Domain domain = provUtil.createDomain(DOMAIN_NAME, domainAttrs);
         
@@ -288,7 +288,7 @@ public class TestLdapProvExternalLdapAuth extends LdapTest {
         String ACCT_DN = getAccountDN(acct);
         
         Map<String, Object> acctAttrs = new HashMap<String, Object>();
-        acctAttrs.put(Provisioning.A_zimbraAuthLdapExternalDn, ACCT_DN);
+        acctAttrs.put(Provisioning.A_zmailAuthLdapExternalDn, ACCT_DN);
         ldapProv.modifyAttrs(acct, acctAttrs);
         
         prov.authAccount(acct, "test123", AuthContext.Protocol.test);
@@ -305,12 +305,12 @@ public class TestLdapProvExternalLdapAuth extends LdapTest {
         
         String authMech = AuthMech.ldap.name();
         Map<String, Object> domainAttrs = new HashMap<String, Object>();
-        domainAttrs.put(Provisioning.A_zimbraAuthMech, authMech);
-        domainAttrs.put(Provisioning.A_zimbraAuthLdapURL, getLdapURL());
-        domainAttrs.put(Provisioning.A_zimbraAuthLdapStartTlsEnabled, getWantStartTLS());
-        domainAttrs.put(Provisioning.A_zimbraAuthLdapSearchBindPassword, LC.zimbra_ldap_password.value());
-        domainAttrs.put(Provisioning.A_zimbraAuthLdapSearchBindDn, LC.zimbra_ldap_userdn.value());
-        domainAttrs.put(Provisioning.A_zimbraAuthLdapSearchFilter, "(zimbraMailDeliveryAddress=%n)");
+        domainAttrs.put(Provisioning.A_zmailAuthMech, authMech);
+        domainAttrs.put(Provisioning.A_zmailAuthLdapURL, getLdapURL());
+        domainAttrs.put(Provisioning.A_zmailAuthLdapStartTlsEnabled, getWantStartTLS());
+        domainAttrs.put(Provisioning.A_zmailAuthLdapSearchBindPassword, LC.zmail_ldap_password.value());
+        domainAttrs.put(Provisioning.A_zmailAuthLdapSearchBindDn, LC.zmail_ldap_userdn.value());
+        domainAttrs.put(Provisioning.A_zmailAuthLdapSearchFilter, "(zmailMailDeliveryAddress=%n)");
 
         Domain domain = provUtil.createDomain(DOMAIN_NAME, domainAttrs);
         
@@ -331,12 +331,12 @@ public class TestLdapProvExternalLdapAuth extends LdapTest {
         
         String authMech = AuthMech.ldap.name();
         Map<String, Object> domainAttrs = new HashMap<String, Object>();
-        domainAttrs.put(Provisioning.A_zimbraAuthMech, authMech);
-        domainAttrs.put(Provisioning.A_zimbraAuthLdapURL, getLdapURL());
-        domainAttrs.put(Provisioning.A_zimbraAuthLdapStartTlsEnabled, getWantStartTLS());
-        domainAttrs.put(Provisioning.A_zimbraAuthLdapSearchBindPassword, LC.zimbra_ldap_password.value());
-        domainAttrs.put(Provisioning.A_zimbraAuthLdapSearchBindDn, LC.zimbra_ldap_userdn.value());
-        domainAttrs.put(Provisioning.A_zimbraAuthLdapBindDn, "uid=%u,ou=people,%D");
+        domainAttrs.put(Provisioning.A_zmailAuthMech, authMech);
+        domainAttrs.put(Provisioning.A_zmailAuthLdapURL, getLdapURL());
+        domainAttrs.put(Provisioning.A_zmailAuthLdapStartTlsEnabled, getWantStartTLS());
+        domainAttrs.put(Provisioning.A_zmailAuthLdapSearchBindPassword, LC.zmail_ldap_password.value());
+        domainAttrs.put(Provisioning.A_zmailAuthLdapSearchBindDn, LC.zmail_ldap_userdn.value());
+        domainAttrs.put(Provisioning.A_zmailAuthLdapBindDn, "uid=%u,ou=people,%D");
         
         Domain domain = provUtil.createDomain(DOMAIN_NAME, domainAttrs);
         
@@ -352,7 +352,7 @@ public class TestLdapProvExternalLdapAuth extends LdapTest {
     }
     
     @Test
-    public void zimbraAuthNonSSHA() throws Exception {
+    public void zmailAuthNonSSHA() throws Exception {
         String ACCT_NAME_LOCALPART = Names.makeAccountNameLocalPart(genAcctNameLocalPart());
         Account acct = createAccount(ACCT_NAME_LOCALPART);
         

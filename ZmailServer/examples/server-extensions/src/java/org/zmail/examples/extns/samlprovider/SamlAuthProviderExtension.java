@@ -12,19 +12,19 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.examples.extns.samlprovider;
+package org.zmail.examples.extns.samlprovider;
 
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.cs.extension.ExtensionDispatcherServlet;
-import com.zimbra.cs.extension.ZimbraExtension;
-import com.zimbra.cs.service.AuthProvider;
+import org.zmail.common.service.ServiceException;
+import org.zmail.cs.extension.ExtensionDispatcherServlet;
+import org.zmail.cs.extension.ZmailExtension;
+import org.zmail.cs.service.AuthProvider;
 
 /**
  * This extension registers a custom SAML auth provider.
  * 
  * @author vmahajan
  */
-public class SamlAuthProviderExtension implements ZimbraExtension {
+public class SamlAuthProviderExtension implements ZmailExtension {
 
     /**
      * Defines a name for the extension. It must be an identifier.
@@ -38,7 +38,7 @@ public class SamlAuthProviderExtension implements ZimbraExtension {
     /**
      * Initializes the extension. Called when the extension is loaded.
      *
-     * @throws com.zimbra.common.service.ServiceException
+     * @throws org.zmail.common.service.ServiceException
      *
      */
     public void init() throws ServiceException {

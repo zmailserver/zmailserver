@@ -12,15 +12,15 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.store.file;
+package org.zmail.cs.store.file;
 
 import java.io.IOException;
 
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.common.util.ZimbraLog;
-import com.zimbra.cs.store.Blob;
-import com.zimbra.cs.store.BlobBuilder;
-import com.zimbra.cs.volume.VolumeManager;
+import org.zmail.common.service.ServiceException;
+import org.zmail.common.util.ZmailLog;
+import org.zmail.cs.store.Blob;
+import org.zmail.cs.store.BlobBuilder;
+import org.zmail.cs.volume.VolumeManager;
 
 public final class VolumeBlobBuilder extends BlobBuilder {
 
@@ -50,7 +50,7 @@ public final class VolumeBlobBuilder extends BlobBuilder {
         try {
             return (int) VolumeManager.getInstance().getVolume(getVolumeId()).getCompressionThreshold();
         } catch (ServiceException e) {
-            ZimbraLog.store.error("Unable to determine volume compression threshold", e);
+            ZmailLog.store.error("Unable to determine volume compression threshold", e);
         }
         return 0;
     }

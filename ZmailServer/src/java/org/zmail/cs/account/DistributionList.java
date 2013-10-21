@@ -13,16 +13,16 @@
  * ***** END LICENSE BLOCK *****
  */
 
-package com.zimbra.cs.account;
+package org.zmail.cs.account;
 
-import com.zimbra.common.service.ServiceException;
+import org.zmail.common.service.ServiceException;
 
 import java.util.Map;
 import java.util.Set;
 
 public abstract class DistributionList extends ZAttrDistributionList implements GroupedEntry {
 
-    protected static final String MEMBER_ATTR = Provisioning.A_zimbraMailForwardingAddress;
+    protected static final String MEMBER_ATTR = Provisioning.A_zmailMailForwardingAddress;
 
     public DistributionList(String name, String id, Map<String, Object> attrs, Provisioning prov) {
         super(name, id, attrs, prov);
@@ -83,7 +83,7 @@ public abstract class DistributionList extends ZAttrDistributionList implements 
 
     @Override
     public String[] getAliases() throws ServiceException {
-        return getMultiAttr(Provisioning.A_zimbraMailAlias);
+        return getMultiAttr(Provisioning.A_zmailMailAlias);
     }
 
     @Override

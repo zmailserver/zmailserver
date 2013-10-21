@@ -14,7 +14,7 @@
  * 
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.octosync;
+package org.zmail.cs.octosync;
 
 import org.apache.commons.codec.binary.Hex;
 

@@ -12,7 +12,7 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.iochannel;
+package org.zmail.cs.iochannel;
 
 import java.io.IOException;
 import java.nio.ByteBuffer;
@@ -20,24 +20,24 @@ import java.util.Collection;
 
 import org.dom4j.DocumentException;
 
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.common.soap.Element;
-import com.zimbra.common.soap.Element.JSONElement;
-import com.zimbra.common.soap.Element.XMLElement;
-import com.zimbra.common.soap.HeaderConstants;
-import com.zimbra.common.soap.SoapProtocol;
-import com.zimbra.common.soap.ZimbraNamespace;
-import com.zimbra.cs.session.Session;
-import com.zimbra.cs.session.SessionCache;
-import com.zimbra.cs.session.SoapSession;
-import com.zimbra.cs.session.SoapSession.RemoteNotifications;
-import com.zimbra.soap.ZimbraSoapContext;
+import org.zmail.common.service.ServiceException;
+import org.zmail.common.soap.Element;
+import org.zmail.common.soap.Element.JSONElement;
+import org.zmail.common.soap.Element.XMLElement;
+import org.zmail.common.soap.HeaderConstants;
+import org.zmail.common.soap.SoapProtocol;
+import org.zmail.common.soap.ZmailNamespace;
+import org.zmail.cs.session.Session;
+import org.zmail.cs.session.SessionCache;
+import org.zmail.cs.session.SoapSession;
+import org.zmail.cs.session.SoapSession.RemoteNotifications;
+import org.zmail.soap.ZmailSoapContext;
 
 public class CrossServerNotification extends Message {
 
     public static final String AppId = "xsn";
 
-    public static CrossServerNotification create(SoapSession session, ZimbraSoapContext zsc) throws MessageChannelException {
+    public static CrossServerNotification create(SoapSession session, ZmailSoapContext zsc) throws MessageChannelException {
         Element soapElement;
         try {
             soapElement = Element.create(SoapProtocol.Soap12, "base");
@@ -45,7 +45,7 @@ public class CrossServerNotification extends Message {
             throw MessageChannelException.CannotCreate("element");
         }
         session.putNotifications(soapElement, zsc, 0);
-        Element notifyElement = soapElement.getOptionalElement(ZimbraNamespace.E_NOTIFY);
+        Element notifyElement = soapElement.getOptionalElement(ZmailNamespace.E_NOTIFY);
         if (notifyElement == null) {
             throw MessageChannelException.CannotCreate("no notification");
         }

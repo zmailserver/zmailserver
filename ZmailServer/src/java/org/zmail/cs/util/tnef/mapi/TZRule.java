@@ -13,7 +13,7 @@
  * ***** END LICENSE BLOCK *****
  */
 
-package com.zimbra.cs.util.tnef.mapi;
+package org.zmail.cs.util.tnef.mapi;
 
 import java.text.ParseException;
 import java.util.Date;
@@ -21,8 +21,8 @@ import java.util.TimeZone;
 import java.io.IOException;
 import java.util.GregorianCalendar;
 
-import com.zimbra.common.util.Log;
-import com.zimbra.common.util.ZimbraLog;
+import org.zmail.common.util.Log;
+import org.zmail.common.util.ZmailLog;
 
 import net.fortuna.ical4j.model.DateTime;
 import net.fortuna.ical4j.model.UtcOffset;
@@ -32,7 +32,7 @@ import net.freeutils.tnef.RawInputStream;
 
 public class TZRule {
 
-    static Log sLog = ZimbraLog.tnef;
+    static Log sLog = ZmailLog.tnef;
 
     private boolean isEffectiveRule;
     private boolean isAssociatedWithRecurrence;
@@ -161,7 +161,7 @@ public class TZRule {
             return null;
         }
         // If getYear() is non-zero, rule only applies to this year
-        // Zimbra only supports timezones with 1 yearly standard/daylight
+        // Zmail only supports timezones with 1 yearly standard/daylight
         // rule or just a standard rule.  This probably maps to the best
         // behavior in this situation.
         StringBuffer rrule = new StringBuffer("FREQ=YEARLY;BYDAY=");
@@ -405,7 +405,7 @@ public class TZRule {
      *       works well across many calendar client apps.
      *   Note: Some examples seen are similar to this but include the hour of the transition.
      *         Suspect that is useful - so including it.
-     *   Zimbra replaces our timezones with closest matchin known ones, so not worth trying
+     *   Zmail replaces our timezones with closest matchin known ones, so not worth trying
      *   to improve this to see if can choose an accurate start date/time in 1601.
      *
      * @param hr

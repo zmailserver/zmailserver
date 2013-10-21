@@ -13,7 +13,7 @@
  * ***** END LICENSE BLOCK *****
  */
 
-package com.zimbra.qa.unittest;
+package org.zmail.qa.unittest;
 
 import java.io.BufferedInputStream;
 import java.io.BufferedReader;
@@ -26,8 +26,8 @@ import java.io.InputStreamReader;
 import java.util.Arrays;
 import java.util.zip.GZIPInputStream;
 
-import com.zimbra.common.util.ByteUtil;
-import com.zimbra.common.util.FileUtil;
+import org.zmail.common.util.ByteUtil;
+import org.zmail.common.util.FileUtil;
 
 import junit.framework.TestCase;
 

@@ -12,7 +12,7 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.mailbox.calendar.cache;
+package org.zmail.cs.mailbox.calendar.cache;
 
 import java.util.HashMap;
 import java.util.HashSet;
@@ -20,29 +20,29 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.common.util.ZimbraLog;
-import com.zimbra.common.util.memcached.MemcachedMap;
-import com.zimbra.common.util.memcached.MemcachedSerializer;
-import com.zimbra.common.util.memcached.ZimbraMemcachedClient;
-import com.zimbra.cs.index.SortBy;
-import com.zimbra.cs.mailbox.Folder;
-import com.zimbra.cs.mailbox.MailItem;
-import com.zimbra.cs.mailbox.Mailbox;
-import com.zimbra.cs.mailbox.MailboxManager;
-import com.zimbra.cs.mailbox.Message;
-import com.zimbra.cs.mailbox.Metadata;
-import com.zimbra.cs.memcached.MemcachedConnector;
-import com.zimbra.cs.session.PendingModifications;
-import com.zimbra.cs.session.PendingModifications.Change;
-import com.zimbra.cs.session.PendingModifications.ModificationKey;
+import org.zmail.common.service.ServiceException;
+import org.zmail.common.util.ZmailLog;
+import org.zmail.common.util.memcached.MemcachedMap;
+import org.zmail.common.util.memcached.MemcachedSerializer;
+import org.zmail.common.util.memcached.ZmailMemcachedClient;
+import org.zmail.cs.index.SortBy;
+import org.zmail.cs.mailbox.Folder;
+import org.zmail.cs.mailbox.MailItem;
+import org.zmail.cs.mailbox.Mailbox;
+import org.zmail.cs.mailbox.MailboxManager;
+import org.zmail.cs.mailbox.Message;
+import org.zmail.cs.mailbox.Metadata;
+import org.zmail.cs.memcached.MemcachedConnector;
+import org.zmail.cs.session.PendingModifications;
+import org.zmail.cs.session.PendingModifications.Change;
+import org.zmail.cs.session.PendingModifications.ModificationKey;
 
 public class CalListCache {
 
     private MemcachedMap<AccountKey, CalList> mMemcachedLookup;
 
     CalListCache() {
-        ZimbraMemcachedClient memcachedClient = MemcachedConnector.getClient();
+        ZmailMemcachedClient memcachedClient = MemcachedConnector.getClient();
         CalListSerializer serializer = new CalListSerializer();
         mMemcachedLookup = new MemcachedMap<AccountKey, CalList>(memcachedClient, serializer);
     }
@@ -69,7 +69,7 @@ public class CalListCache {
         // Not currently in the cache.  Get it the hard way.
         Mailbox mbox = MailboxManager.getInstance().getMailboxByAccountId(key.getAccountId());
         if (mbox == null) {
-            ZimbraLog.calendar.warn("Invalid account %s during cache lookup", key.getAccountId());
+            ZmailLog.calendar.warn("Invalid account %s during cache lookup", key.getAccountId());
             return null;
         }
         List<Folder> calFolders = mbox.getCalendarFolders(null, SortBy.NONE);
@@ -215,7 +215,7 @@ public class CalListCache {
                 }
             }
         } catch (ServiceException e) {
-            ZimbraLog.calendar.warn("Unable to notify calendar list cache.  Some cached data may become stale.", e);
+            ZmailLog.calendar.warn("Unable to notify calendar list cache.  Some cached data may become stale.", e);
         }
     }
 }

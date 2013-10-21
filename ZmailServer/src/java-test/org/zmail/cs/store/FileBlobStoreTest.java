@@ -12,11 +12,11 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.store;
+package org.zmail.cs.store;
 
 import org.junit.BeforeClass;
 
-import com.zimbra.cs.store.file.FileBlobStore;
+import org.zmail.cs.store.file.FileBlobStore;
 
 public class FileBlobStoreTest extends AbstractStoreManagerTest {
 
@@ -24,7 +24,7 @@ public class FileBlobStoreTest extends AbstractStoreManagerTest {
     public static void disableNative() {
         //don't fail test even if native libraries not installed
         //this makes it easier to run unit tests from command line
-        System.setProperty("zimbra.native.required", "false");
+        System.setProperty("zmail.native.required", "false");
     }
 
     @Override

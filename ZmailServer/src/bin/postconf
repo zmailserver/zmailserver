@@ -19,7 +19,7 @@ progdir=`dirname $0`
 source `dirname $0`/zmshutil || exit 1
 
 zmsetvars \
-	zimbra_home \
-	zimbra_server_hostname 
+	zmail_home \
+	zmail_server_hostname 
 
-sudo ${zimbra_home}/postfix/sbin/postconf "$@"
+sudo ${zmail_home}/postfix/sbin/postconf "$@"

@@ -15,8 +15,8 @@
 # 
 
 use strict;
-use lib "/opt/zimbra/zimbramon/lib";
-use Zimbra::Mon::Logger;
+use lib "/opt/zmail/zmailmon/lib";
+use Zmail::Mon::Logger;
 
 use FileHandle;
 use IPC::Open3;
@@ -28,7 +28,7 @@ my %options = ();
 my $report = [];
 my $dbCheck = '';
 my $status = 0;
-my $zimbra_home = "/opt/zimbra";
+my $zmail_home = "/opt/zmail";
 unless ( GetOptions ("mailReport" => \$options{m},
                      "repair"     => \$options{r},
                      "verbose"    => \$options{v},
@@ -75,9 +75,9 @@ sub usage {
 
 sub checkDbs() {
   my $mysql_root_passwd = getLocalConfig("mysql_root_password");
-  my $mysql_socket = getLocalConfig("mysql_socket") || "${zimbra_home}/db/mysql.sock";
-  my $mysql_mycnf = getLocalConfig("mysql_mycnf") || "${zimbra_home}/conf/my.cnf";
-  my $cmd = "${zimbra_home}/mysql/bin/mysqlcheck";
+  my $mysql_socket = getLocalConfig("mysql_socket") || "${zmail_home}/db/mysql.sock";
+  my $mysql_mycnf = getLocalConfig("mysql_mycnf") || "${zmail_home}/conf/my.cnf";
+  my $cmd = "${zmail_home}/mysql/bin/mysqlcheck";
   $cmd .= " --defaults-file=${mysql_mycnf}";
   $cmd .= " -S ${mysql_socket}";
   $cmd .= " -A -C";
@@ -110,7 +110,7 @@ sub getLocalConfig {
 		return $ENV{$key};
 	}
 	open CONF, 
-		"${zimbra_home}/bin/zmlocalconfig -s -q -m shell |" or die "Can't open local config: $!";
+		"${zmail_home}/bin/zmlocalconfig -s -q -m shell |" or die "Can't open local config: $!";
 	my @conf = <CONF>;
 	close CONF;
 
@@ -133,9 +133,9 @@ sub sendEmailReport {
 
   my $from_address = getLocalConfig("smtp_source");
   my $to_address = getLocalConfig("smtp_destination");
-  my $server = getLocalConfig("zimbra_server_hostname");
-  my $smtphost = getLdapConfigValue("zimbraSmtpHostname") || "localhost";
-  my $smtpport= getLdapConfigValue("zimbraSmtpPort") || "25";
+  my $server = getLocalConfig("zmail_server_hostname");
+  my $smtphost = getLdapConfigValue("zmailSmtpHostname") || "localhost";
+  my $smtpport= getLdapConfigValue("zmailSmtpPort") || "25";
   my $subject =  "Database Integrity check report for $server";
   return if (scalar @$msg == 0);
   print "Sending daily report to $to_address via $smtphost\n" if $debug;
@@ -166,7 +166,7 @@ sub logError {
   if ($options{m} && !$options{d}) {
     my $dt = `date "+%Y-%m-%d %H:%M:%S"`;
     chomp($dt);
-    Zimbra::Mon::Logger::Log("err", "$dt, zmdailyreport: $msg");
+    Zmail::Mon::Logger::Log("err", "$dt, zmdailyreport: $msg");
   } else {
     print STDERR $msg;
   }
@@ -188,9 +188,9 @@ sub getLdapServerConfigValue {
     my $attrib = shift;
 
     return (undef) unless ($attrib);
-    my $server = getLocalConfig("zimbra_server_hostname");
+    my $server = getLocalConfig("zmail_server_hostname");
     # could consider redirecting STDERR to /dev/null
-    open( CONF, "/opt/zimbra/bin/zmprov -l gs $server '$attrib' |" )
+    open( CONF, "/opt/zmail/bin/zmprov -l gs $server '$attrib' |" )
       or die("Open global config failed: $!");
 
     my ( $key, $val );
@@ -210,7 +210,7 @@ sub getLdapGlobalConfigValue {
   $rfh = new FileHandle;
   $wfh = new FileHandle;
   $efh = new FileHandle;
-  $cmd = "/opt/zimbra/bin/zmprov -l gcf $attrib";
+  $cmd = "/opt/zmail/bin/zmprov -l gcf $attrib";
   my $pid = open3($wfh,$rfh,$efh, $cmd);
   unless(defined($pid)) {
     return undef;

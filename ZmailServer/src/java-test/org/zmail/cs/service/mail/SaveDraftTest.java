@@ -12,7 +12,7 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.service.mail;
+package org.zmail.cs.service.mail;
 
 import javax.mail.internet.MimeMessage;
 
@@ -22,19 +22,19 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 
 import com.google.common.collect.Maps;
-import com.zimbra.common.soap.Element;
-import com.zimbra.common.soap.MailConstants;
-import com.zimbra.cs.account.Account;
-import com.zimbra.cs.account.Provisioning;
-import com.zimbra.cs.mailbox.MailItem;
-import com.zimbra.cs.mailbox.Mailbox;
-import com.zimbra.cs.mailbox.MailboxTestUtil;
-import com.zimbra.cs.mailbox.Message;
-import com.zimbra.cs.mailbox.OperationContext;
-import com.zimbra.cs.mime.ParsedMessage;
-import com.zimbra.cs.service.util.ItemIdFormatter;
-import com.zimbra.cs.util.JMSession;
-import com.zimbra.soap.ZimbraSoapContext;
+import org.zmail.common.soap.Element;
+import org.zmail.common.soap.MailConstants;
+import org.zmail.cs.account.Account;
+import org.zmail.cs.account.Provisioning;
+import org.zmail.cs.mailbox.MailItem;
+import org.zmail.cs.mailbox.Mailbox;
+import org.zmail.cs.mailbox.MailboxTestUtil;
+import org.zmail.cs.mailbox.Message;
+import org.zmail.cs.mailbox.OperationContext;
+import org.zmail.cs.mime.ParsedMessage;
+import org.zmail.cs.service.util.ItemIdFormatter;
+import org.zmail.cs.util.JMSession;
+import org.zmail.soap.ZmailSoapContext;
 
 public class SaveDraftTest {
 
@@ -43,7 +43,7 @@ public class SaveDraftTest {
         MailboxTestUtil.initServer();
         Provisioning prov = Provisioning.getInstance();
 
-        prov.createAccount("test@zimbra.com", "secret", Maps.<String, Object>newHashMap());
+        prov.createAccount("test@zmail.com", "secret", Maps.<String, Object>newHashMap());
     }
 
     @Before
@@ -60,13 +60,13 @@ public class SaveDraftTest {
     }
 
     // string lengths should be greater than both MessageCache.MESSAGE_CACHE_DISK_STREAMING_THRESHOLD
-    //   and LC.zimbra_blob_input_stream_buffer_size_kb * 1024
+    //   and LC.zmail_blob_input_stream_buffer_size_kb * 1024
     static final String ORIGINAL_CONTENT = nCopiesOf('a', 8192);
     static final String MODIFIED_CONTENT = nCopiesOf('b', 8192);
 
     @Test
     public void deleteRace() throws Exception {
-        Account acct = Provisioning.getInstance().getAccountByName("test@zimbra.com");
+        Account acct = Provisioning.getInstance().getAccountByName("test@zmail.com");
 
         // create a draft via SOAP
         Element request = new Element.JSONElement(MailConstants.SAVE_DRAFT_REQUEST);
@@ -75,7 +75,7 @@ public class SaveDraftTest {
 
         Element response = new SaveDraft() {
             @Override
-            protected Element generateResponse(ZimbraSoapContext zsc, ItemIdFormatter ifmt, OperationContext octxt, Mailbox mbox, Message msg) {
+            protected Element generateResponse(ZmailSoapContext zsc, ItemIdFormatter ifmt, OperationContext octxt, Mailbox mbox, Message msg) {
                 // trigger the failure case by deleting the draft before it's serialized out
                 try {
                     mbox.delete(null, msg.getId(), MailItem.Type.MESSAGE);
@@ -92,7 +92,7 @@ public class SaveDraftTest {
 
     @Test
     public void updateRace() throws Exception {
-        Account acct = Provisioning.getInstance().getAccountByName("test@zimbra.com");
+        Account acct = Provisioning.getInstance().getAccountByName("test@zmail.com");
 
         // create a draft via SOAP
         Element request = new Element.JSONElement(MailConstants.SAVE_DRAFT_REQUEST);
@@ -101,7 +101,7 @@ public class SaveDraftTest {
 
         Element response = new SaveDraft() {
             @Override
-            protected Element generateResponse(ZimbraSoapContext zsc, ItemIdFormatter ifmt, OperationContext octxt, Mailbox mbox, Message msg) {
+            protected Element generateResponse(ZmailSoapContext zsc, ItemIdFormatter ifmt, OperationContext octxt, Mailbox mbox, Message msg) {
                 // trigger the failure case by re-saving the draft before it's serialized out
                 try {
                     msg = (Message) msg.snapshotItem();

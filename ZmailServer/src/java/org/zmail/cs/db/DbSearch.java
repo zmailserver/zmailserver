@@ -12,7 +12,7 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.db;
+package org.zmail.cs.db;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -28,22 +28,22 @@ import java.util.Set;
 
 import com.google.common.base.Objects;
 import com.google.common.base.Strings;
-import com.zimbra.common.localconfig.DebugConfig;
-import com.zimbra.common.localconfig.LC;
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.common.util.ListUtil;
-import com.zimbra.common.util.StringUtil;
-import com.zimbra.common.util.ZimbraLog;
-import com.zimbra.cs.db.DbPool.DbConnection;
-import com.zimbra.cs.imap.ImapMessage;
-import com.zimbra.cs.index.DbSearchConstraints;
-import com.zimbra.cs.index.SortBy;
-import com.zimbra.cs.mailbox.Flag;
-import com.zimbra.cs.mailbox.Folder;
-import com.zimbra.cs.mailbox.MailItem;
-import com.zimbra.cs.mailbox.Mailbox;
-import com.zimbra.cs.mailbox.Tag;
-import com.zimbra.cs.mailbox.Flag.FlagInfo;
+import org.zmail.common.localconfig.DebugConfig;
+import org.zmail.common.localconfig.LC;
+import org.zmail.common.service.ServiceException;
+import org.zmail.common.util.ListUtil;
+import org.zmail.common.util.StringUtil;
+import org.zmail.common.util.ZmailLog;
+import org.zmail.cs.db.DbPool.DbConnection;
+import org.zmail.cs.imap.ImapMessage;
+import org.zmail.cs.index.DbSearchConstraints;
+import org.zmail.cs.index.SortBy;
+import org.zmail.cs.mailbox.Flag;
+import org.zmail.cs.mailbox.Folder;
+import org.zmail.cs.mailbox.MailItem;
+import org.zmail.cs.mailbox.Mailbox;
+import org.zmail.cs.mailbox.Tag;
+import org.zmail.cs.mailbox.Flag.FlagInfo;
 
 /**
  * Search related DAO.
@@ -464,7 +464,7 @@ public final class DbSearch {
                 return searchInternal(conn, node, sort, offset, limit, fetch);
             } catch (SQLException e) {
                 if (Db.errorMatches(e, Db.Error.TOO_MANY_SQL_PARAMS)) {
-                    ZimbraLog.sqltrace.debug("Too many SQL params: %s", node, e); // fall back to splitting OR clauses
+                    ZmailLog.sqltrace.debug("Too many SQL params: %s", node, e); // fall back to splitting OR clauses
                 } else {
                     throw ServiceException.FAILURE("Failed to search", e);
                 }

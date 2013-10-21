@@ -13,16 +13,16 @@
  * ***** END LICENSE BLOCK *****
  */
 
-package com.zimbra.qa.unittest;
+package org.zmail.qa.unittest;
 import java.util.List;
 import java.util.Map;
 
 import junit.framework.TestCase;
 
-import com.zimbra.common.util.AccountLogger;
-import com.zimbra.common.util.Log.Level;
-import com.zimbra.cs.account.Account;
-import com.zimbra.cs.account.soap.SoapProvisioning;
+import org.zmail.common.util.AccountLogger;
+import org.zmail.common.util.Log.Level;
+import org.zmail.cs.account.Account;
+import org.zmail.cs.account.soap.SoapProvisioning;
 
 public class TestLog
 extends TestCase {
@@ -41,38 +41,38 @@ extends TestCase {
         Account user4 = TestUtil.getAccount("user4");
 
         // Add loggers.
-        List<AccountLogger> loggers = prov.addAccountLogger(user1, "zimbra.filter", "debug", null);
-        assertLoggerExists(loggers, user1, "zimbra.filter", Level.debug);
-        loggers = prov.addAccountLogger(user2, "zimbra.backup", "info", null);
-        assertLoggerExists(loggers, user2, "zimbra.backup", Level.info);
-        loggers = prov.addAccountLogger(user3, "zimbra.sync", "warn", null);
-        assertLoggerExists(loggers, user3, "zimbra.sync", Level.warn);
-        loggers = prov.addAccountLogger(user3, "zimbra.lmtp", "warn", null);
-        assertLoggerExists(loggers, user3, "zimbra.lmtp", Level.warn);
+        List<AccountLogger> loggers = prov.addAccountLogger(user1, "zmail.filter", "debug", null);
+        assertLoggerExists(loggers, user1, "zmail.filter", Level.debug);
+        loggers = prov.addAccountLogger(user2, "zmail.backup", "info", null);
+        assertLoggerExists(loggers, user2, "zmail.backup", Level.info);
+        loggers = prov.addAccountLogger(user3, "zmail.sync", "warn", null);
+        assertLoggerExists(loggers, user3, "zmail.sync", Level.warn);
+        loggers = prov.addAccountLogger(user3, "zmail.lmtp", "warn", null);
+        assertLoggerExists(loggers, user3, "zmail.lmtp", Level.warn);
         assertEquals(1, loggers.size());
-        loggers = prov.addAccountLogger(user4, "zimbra.lmtp", "error", null);
-        assertLoggerExists(loggers, user4, "zimbra.lmtp", Level.error);
+        loggers = prov.addAccountLogger(user4, "zmail.lmtp", "error", null);
+        assertLoggerExists(loggers, user4, "zmail.lmtp", Level.error);
         
         // Verify <GetAccountLoggersRequest>.
         loggers = prov.getAccountLoggers(user1, null);
         assertEquals(1, loggers.size());
-        assertLoggerExists(loggers, user1, "zimbra.filter", Level.debug);
+        assertLoggerExists(loggers, user1, "zmail.filter", Level.debug);
         
         loggers = prov.getAccountLoggers(user2, null);
         assertEquals(1, loggers.size());
-        assertLoggerExists(loggers, user2, "zimbra.backup", Level.info);
+        assertLoggerExists(loggers, user2, "zmail.backup", Level.info);
         
         loggers = prov.getAccountLoggers(user3, null);
         assertEquals(2, loggers.size());
-        assertLoggerExists(loggers, user3, "zimbra.sync", Level.warn);
-        assertLoggerExists(loggers, user3, "zimbra.lmtp", Level.warn);
+        assertLoggerExists(loggers, user3, "zmail.sync", Level.warn);
+        assertLoggerExists(loggers, user3, "zmail.lmtp", Level.warn);
         
         loggers = prov.getAccountLoggers(user4, null);
         assertEquals(1, loggers.size());
-        assertLoggerExists(loggers, user4, "zimbra.lmtp", Level.error);
+        assertLoggerExists(loggers, user4, "zmail.lmtp", Level.error);
         
         // Remove loggers for everyone except user3.
-        prov.removeAccountLoggers(user1, "zimbra.filter", null);
+        prov.removeAccountLoggers(user1, "zmail.filter", null);
         prov.removeAccountLoggers(user2, null, null);
         prov.removeAccountLoggers(user4, null, null);
         
@@ -81,8 +81,8 @@ extends TestCase {
         assertEquals(1, map.size());
         loggers = map.get(user3.getName());
         assertEquals(2, loggers.size());
-        assertLoggerExists(loggers, user3, "zimbra.sync", Level.warn);
-        assertLoggerExists(loggers, user3, "zimbra.lmtp", Level.warn);
+        assertLoggerExists(loggers, user3, "zmail.sync", Level.warn);
+        assertLoggerExists(loggers, user3, "zmail.lmtp", Level.warn);
     }
     
     /**
@@ -97,10 +97,10 @@ extends TestCase {
         List<AccountLogger> loggers = prov.addAccountLogger(account, "all", "debug", null);
         assertTrue(loggers.size() > 1);
         
-        // Make sure the zimbra.soap category was affected.
-        assertLoggerExists(loggers, account, "zimbra.soap", Level.debug);
+        // Make sure the zmail.soap category was affected.
+        assertLoggerExists(loggers, account, "zmail.soap", Level.debug);
         loggers = prov.getAccountLoggers(account, null);
-        assertLoggerExists(loggers, account, "zimbra.soap", Level.debug);
+        assertLoggerExists(loggers, account, "zmail.soap", Level.debug);
     }
     
     /**
@@ -112,10 +112,10 @@ extends TestCase {
         Account user1 = TestUtil.getAccount("user1");
         Account user2 = TestUtil.getAccount("user2");
         
-        prov.addAccountLogger(user1, "zimbra.soap", "debug", null);
-        prov.addAccountLogger(user1, "zimbra.sync", "debug", null);
-        prov.addAccountLogger(user2, "zimbra.soap", "debug", null);
-        prov.addAccountLogger(user2, "zimbra.sync", "debug", null);
+        prov.addAccountLogger(user1, "zmail.soap", "debug", null);
+        prov.addAccountLogger(user1, "zmail.sync", "debug", null);
+        prov.addAccountLogger(user2, "zmail.soap", "debug", null);
+        prov.addAccountLogger(user2, "zmail.sync", "debug", null);
         
         // Test removing loggers with no category specified.
         List<AccountLogger> loggers = prov.getAccountLoggers(user1, null);

@@ -12,25 +12,25 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.server;
+package org.zmail.cs.server;
 
-import com.zimbra.common.localconfig.LC;
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.cs.account.Provisioning;
-import com.zimbra.cs.imap.ImapConfig;
-import com.zimbra.cs.imap.ImapServer;
-import com.zimbra.cs.imap.NioImapServer;
-import com.zimbra.cs.imap.TcpImapServer;
-import com.zimbra.cs.lmtpserver.LmtpConfig;
-import com.zimbra.cs.lmtpserver.LmtpServer;
-import com.zimbra.cs.lmtpserver.TcpLmtpServer;
-import com.zimbra.cs.milter.MilterConfig;
-import com.zimbra.cs.milter.MilterServer;
-import com.zimbra.cs.pop3.NioPop3Server;
-import com.zimbra.cs.pop3.Pop3Config;
-import com.zimbra.cs.pop3.Pop3Server;
-import com.zimbra.cs.pop3.TcpPop3Server;
-import com.zimbra.cs.util.ZimbraApplication;
+import org.zmail.common.localconfig.LC;
+import org.zmail.common.service.ServiceException;
+import org.zmail.cs.account.Provisioning;
+import org.zmail.cs.imap.ImapConfig;
+import org.zmail.cs.imap.ImapServer;
+import org.zmail.cs.imap.NioImapServer;
+import org.zmail.cs.imap.TcpImapServer;
+import org.zmail.cs.lmtpserver.LmtpConfig;
+import org.zmail.cs.lmtpserver.LmtpServer;
+import org.zmail.cs.lmtpserver.TcpLmtpServer;
+import org.zmail.cs.milter.MilterConfig;
+import org.zmail.cs.milter.MilterServer;
+import org.zmail.cs.pop3.NioPop3Server;
+import org.zmail.cs.pop3.Pop3Config;
+import org.zmail.cs.pop3.Pop3Server;
+import org.zmail.cs.pop3.TcpPop3Server;
+import org.zmail.cs.util.ZmailApplication;
 
 public final class ServerManager {
     private LmtpServer lmtpServer;
@@ -43,30 +43,30 @@ public final class ServerManager {
     private static final ServerManager INSTANCE = new ServerManager();
 
     // For debugging...
-    private static final boolean NIO_ENABLED = Boolean.getBoolean("ZimbraNioEnabled");
+    private static final boolean NIO_ENABLED = Boolean.getBoolean("ZmailNioEnabled");
 
     public static ServerManager getInstance() {
         return INSTANCE;
     }
 
     public void startServers() throws ServiceException {
-        ZimbraApplication app = ZimbraApplication.getInstance();
+        ZmailApplication app = ZmailApplication.getInstance();
         if (app.supports(LmtpServer.class)) {
             startLmtpServer();
         }
         if (app.supports(Pop3Server.class)) {
-            if (isEnabled(Provisioning.A_zimbraPop3ServerEnabled)) {
+            if (isEnabled(Provisioning.A_zmailPop3ServerEnabled)) {
                 pop3Server = startPop3Server(false);
             }
-            if (isEnabled(Provisioning.A_zimbraPop3SSLServerEnabled)) {
+            if (isEnabled(Provisioning.A_zmailPop3SSLServerEnabled)) {
                 pop3SSLServer = startPop3Server(true);
             }
         }
         if (app.supports(ImapServer.class)) {
-            if (isEnabled(Provisioning.A_zimbraImapServerEnabled)) {
+            if (isEnabled(Provisioning.A_zmailImapServerEnabled)) {
                 imapServer = startImapServer(false);
             }
-            if (isEnabled(Provisioning.A_zimbraImapSSLServerEnabled)) {
+            if (isEnabled(Provisioning.A_zmailImapSSLServerEnabled)) {
                 imapSSLServer = startImapServer(true);
             }
         }

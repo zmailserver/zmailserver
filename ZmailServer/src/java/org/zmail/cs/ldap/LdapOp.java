@@ -17,7 +17,7 @@
 /**
  * 
  */
-package com.zimbra.cs.ldap;
+package org.zmail.cs.ldap;
 
 public enum LdapOp {
     GET_CONN("get a connection from a connection pool"),  

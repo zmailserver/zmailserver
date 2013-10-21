@@ -12,7 +12,7 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.fb;
+package org.zmail.cs.fb;
 
 import java.util.Collection;
 import java.util.ArrayList;
@@ -20,20 +20,20 @@ import java.util.HashMap;
 
 import javax.servlet.http.HttpServletRequest;
 
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.common.soap.Element;
-import com.zimbra.common.util.ZimbraLog;
-import com.zimbra.cs.account.Account;
-import com.zimbra.cs.account.GuestAccount;
-import com.zimbra.cs.account.Provisioning;
-import com.zimbra.common.account.Key.AccountBy;
-import com.zimbra.cs.mailbox.Appointment;
-import com.zimbra.cs.mailbox.CalendarItem;
-import com.zimbra.cs.mailbox.Mailbox;
-import com.zimbra.cs.mailbox.MailboxManager;
-import com.zimbra.cs.mailbox.OperationContext;
-import com.zimbra.cs.service.mail.ToXML;
-import com.zimbra.soap.ZimbraSoapContext;
+import org.zmail.common.service.ServiceException;
+import org.zmail.common.soap.Element;
+import org.zmail.common.util.ZmailLog;
+import org.zmail.cs.account.Account;
+import org.zmail.cs.account.GuestAccount;
+import org.zmail.cs.account.Provisioning;
+import org.zmail.common.account.Key.AccountBy;
+import org.zmail.cs.mailbox.Appointment;
+import org.zmail.cs.mailbox.CalendarItem;
+import org.zmail.cs.mailbox.Mailbox;
+import org.zmail.cs.mailbox.MailboxManager;
+import org.zmail.cs.mailbox.OperationContext;
+import org.zmail.cs.service.mail.ToXML;
+import org.zmail.soap.ZmailSoapContext;
 
 public class FreeBusyQuery {
     public static final int CALENDAR_FOLDER_ALL = -1;
@@ -48,9 +48,9 @@ public class FreeBusyQuery {
 	
 	// needed for proxying to another mailbox server
 	private HttpServletRequest mReq;
-	private ZimbraSoapContext mCtxt;
+	private ZmailSoapContext mCtxt;
 	
-	public FreeBusyQuery(HttpServletRequest httpReq, ZimbraSoapContext zsc, Account requestor, long start, long end, String exApptUid) {
+	public FreeBusyQuery(HttpServletRequest httpReq, ZmailSoapContext zsc, Account requestor, long start, long end, String exApptUid) {
 		this(httpReq, requestor, start, end, exApptUid);
 		mCtxt = zsc;
 	}
@@ -115,7 +115,7 @@ public class FreeBusyQuery {
     		Account acct = mTargets.get(id);
     		try {
     		    if (acct == null || acct.isAccountExternal() ||
-    		        acct.getBooleanAttr(Provisioning.A_zimbraFreebusyLocalMailboxNotActive, false)) {
+    		        acct.getBooleanAttr(Provisioning.A_zmailFreebusyLocalMailboxNotActive, false)) {
     		        external.add(id);
     		        continue;
     		    }
@@ -141,7 +141,7 @@ public class FreeBusyQuery {
         			remote.addFreeBusyRequest(mRequestor, acct, id, mStart, mEnd, folder);
         		}
     		} catch (ServiceException e) {
-                ZimbraLog.fb.error("cannot get free/busy for "+id, e);
+                ZmailLog.fb.error("cannot get free/busy for "+id, e);
     		}
     	}
     }

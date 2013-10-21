@@ -12,7 +12,7 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.mailclient.imap;
+package org.zmail.cs.mailclient.imap;
 
 import java.io.DataInputStream;
 import java.io.File;
@@ -23,7 +23,7 @@ import java.io.UnsupportedEncodingException;
 
 import javax.mail.util.SharedByteArrayInputStream;
 
-import com.zimbra.common.zmime.ZSharedFileInputStream;
+import org.zmail.common.zmime.ZSharedFileInputStream;
 
 /**
  * IMAP literal data type.

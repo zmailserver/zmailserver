@@ -12,33 +12,33 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.account.ldap.upgrade;
+package org.zmail.cs.account.ldap.upgrade;
 
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 
-import com.zimbra.common.account.Key.AccountBy;
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.cs.account.Account;
-import com.zimbra.cs.account.Provisioning;
-import com.zimbra.cs.account.Entry.EntryType;
-import com.zimbra.cs.account.ldap.LdapDIT;
-import com.zimbra.cs.ldap.IAttributes;
-import com.zimbra.cs.ldap.LdapClient;
-import com.zimbra.cs.ldap.LdapConstants;
-import com.zimbra.cs.ldap.LdapServerType;
-import com.zimbra.cs.ldap.LdapUsage;
-import com.zimbra.cs.ldap.SearchLdapOptions;
-import com.zimbra.cs.ldap.ZLdapContext;
-import com.zimbra.cs.ldap.ZSearchScope;
-import com.zimbra.cs.ldap.SearchLdapOptions.SearchLdapVisitor;
-import com.zimbra.cs.ldap.SearchLdapOptions.StopIteratingException;
+import org.zmail.common.account.Key.AccountBy;
+import org.zmail.common.service.ServiceException;
+import org.zmail.cs.account.Account;
+import org.zmail.cs.account.Provisioning;
+import org.zmail.cs.account.Entry.EntryType;
+import org.zmail.cs.account.ldap.LdapDIT;
+import org.zmail.cs.ldap.IAttributes;
+import org.zmail.cs.ldap.LdapClient;
+import org.zmail.cs.ldap.LdapConstants;
+import org.zmail.cs.ldap.LdapServerType;
+import org.zmail.cs.ldap.LdapUsage;
+import org.zmail.cs.ldap.SearchLdapOptions;
+import org.zmail.cs.ldap.ZLdapContext;
+import org.zmail.cs.ldap.ZSearchScope;
+import org.zmail.cs.ldap.SearchLdapOptions.SearchLdapVisitor;
+import org.zmail.cs.ldap.SearchLdapOptions.StopIteratingException;
 
 public class BUG_57866 extends UpgradeOp {
 
-    private static final String ATTR_NAME = Provisioning.A_zimbraIsSystemAccount;
+    private static final String ATTR_NAME = Provisioning.A_zmailIsSystemAccount;
     private static final String VALUE = LdapConstants.LDAP_TRUE;
     
     @Override
@@ -141,10 +141,10 @@ public class BUG_57866 extends UpgradeOp {
         
         // domain wiki accounts
         LdapDIT dit = prov.getDIT();
-        String returnAttrs[] = new String[] {Provisioning.A_zimbraNotebookAccount};
+        String returnAttrs[] = new String[] {Provisioning.A_zmailNotebookAccount};
         
         String base = dit.mailBranchBaseDN();
-        String query = "(&(objectclass=zimbraDomain)(zimbraNotebookAccount=*))";
+        String query = "(&(objectclass=zmailDomain)(zmailNotebookAccount=*))";
         
         final Set<String> wikiAcctNames = new HashSet<String>();
         SearchLdapVisitor visitor = new SearchLdapVisitor(false) {
@@ -154,7 +154,7 @@ public class BUG_57866 extends UpgradeOp {
                 
                 try {
                     String acctName;
-                    acctName = ldapAttrs.getAttrString(Provisioning.A_zimbraNotebookAccount);
+                    acctName = ldapAttrs.getAttrString(Provisioning.A_zmailNotebookAccount);
                     if (acctName != null) {
                         wikiAcctNames.add(acctName);
                     }
@@ -179,10 +179,10 @@ public class BUG_57866 extends UpgradeOp {
     
     private void upgradeGalSyncAccounts(ZLdapContext zlc) throws ServiceException {
         LdapDIT dit = prov.getDIT();
-        String returnAttrs[] = new String[] {Provisioning.A_zimbraGalAccountId};
+        String returnAttrs[] = new String[] {Provisioning.A_zmailGalAccountId};
         
         String base = dit.mailBranchBaseDN();
-        String query = "(&(objectclass=zimbraDomain)(zimbraGalAccountId=*))";
+        String query = "(&(objectclass=zmailDomain)(zmailGalAccountId=*))";
         
         final Set<String> galAcctIds = new HashSet<String>();
         SearchLdapVisitor visitor = new SearchLdapVisitor(false) {
@@ -192,7 +192,7 @@ public class BUG_57866 extends UpgradeOp {
                 
                 try {
                     String acctId;
-                    acctId = ldapAttrs.getAttrString(Provisioning.A_zimbraGalAccountId);
+                    acctId = ldapAttrs.getAttrString(Provisioning.A_zmailGalAccountId);
                     if (acctId != null) {
                         galAcctIds.add(acctId);
                     }

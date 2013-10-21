@@ -14,7 +14,7 @@
  * 
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.qa;
+package org.zmail.qa;
 
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;

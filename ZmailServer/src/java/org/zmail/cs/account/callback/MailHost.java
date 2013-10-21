@@ -13,23 +13,23 @@
  * ***** END LICENSE BLOCK *****
  */
 
-package com.zimbra.cs.account.callback;
+package org.zmail.cs.account.callback;
 
 import java.util.Map;
 
-import com.zimbra.common.account.Key;
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.common.util.StringUtil;
-import com.zimbra.cs.account.AttributeCallback;
-import com.zimbra.cs.account.Entry;
-import com.zimbra.cs.account.Provisioning;
-import com.zimbra.cs.account.Server;
-import com.zimbra.cs.util.Config;
+import org.zmail.common.account.Key;
+import org.zmail.common.service.ServiceException;
+import org.zmail.common.util.StringUtil;
+import org.zmail.cs.account.AttributeCallback;
+import org.zmail.cs.account.Entry;
+import org.zmail.cs.account.Provisioning;
+import org.zmail.cs.account.Server;
+import org.zmail.cs.util.Config;
 
 public class MailHost extends AttributeCallback {
 
     /**
-     * check to make sure zimbraMailHost points to a valid server zimbraServiceHostname
+     * check to make sure zmailMailHost points to a valid server zmailServiceHostname
      */
     @Override
     public void preModify(CallbackContext context, String attrName, Object value,
@@ -37,18 +37,18 @@ public class MailHost extends AttributeCallback {
     throws ServiceException {
         
         if (StringUtil.isNullOrEmpty((String)value) || 
-            attrsToModify.get("-" + Provisioning.A_zimbraMailHost) != null)
+            attrsToModify.get("-" + Provisioning.A_zmailMailHost) != null)
             return; // unsetting
         
         String mailHost = (String)value;
-        String mailTransport = (String)attrsToModify.get(Provisioning.A_zimbraMailTransport);
+        String mailTransport = (String)attrsToModify.get(Provisioning.A_zmailMailTransport);
         
         /*
-         * never allow setting both zimbraMailHost and zimbraMailTransport in the same request
+         * never allow setting both zmailMailHost and zmailMailTransport in the same request
          */
         if (!StringUtil.isNullOrEmpty(mailHost) && !StringUtil.isNullOrEmpty(mailTransport))
             throw ServiceException.INVALID_REQUEST("setting both " + 
-                    Provisioning.A_zimbraMailHost + " and " +  Provisioning.A_zimbraMailTransport + 
+                    Provisioning.A_zmailMailHost + " and " +  Provisioning.A_zmailMailTransport + 
                     " in the same request is not allowed", null);
         
         Provisioning prov = Provisioning.getInstance();
@@ -56,11 +56,11 @@ public class MailHost extends AttributeCallback {
         Server server = prov.get(Key.ServerBy.serviceHostname, mailHost);
         if (server == null)
             throw ServiceException.INVALID_REQUEST("specified " + 
-                    Provisioning.A_zimbraMailHost + 
+                    Provisioning.A_zmailMailHost + 
                     " does not correspond to a valid server service hostname: "+mailHost, null);
         else {
             if (!server.hasMailboxService()) {
-                throw ServiceException.INVALID_REQUEST("specified " + Provisioning.A_zimbraMailHost + 
+                throw ServiceException.INVALID_REQUEST("specified " + Provisioning.A_zmailMailHost + 
                         " does not correspond to a valid server with the mailbox service enabled: " 
                         + mailHost, null);    
             }
@@ -68,23 +68,23 @@ public class MailHost extends AttributeCallback {
             /*
              * bug 18419
              * 
-             * If zimbraMailHost is modified, see if applying lmtp rule to old 
-             * zimbraMailHost value would result in old zimbraMailTransport - 
-             * if it would, then replace both zimbraMailHost and set new zimbraMailTransport.  
+             * If zmailMailHost is modified, see if applying lmtp rule to old 
+             * zmailMailHost value would result in old zmailMailTransport - 
+             * if it would, then replace both zmailMailHost and set new zmailMailTransport.  
              * Otherwise error.
              */
             if (entry != null && !context.isCreate()) {
         	
-                String oldMailHost = entry.getAttr(Provisioning.A_zimbraMailHost);
+                String oldMailHost = entry.getAttr(Provisioning.A_zmailMailHost);
                 if (oldMailHost != null) {
                     Server oldServer = prov.get(Key.ServerBy.serviceHostname, oldMailHost);
                     if (oldServer != null) {
-                	    String curMailTransport = entry.getAttr(Provisioning.A_zimbraMailTransport);
+                	    String curMailTransport = entry.getAttr(Provisioning.A_zmailMailTransport);
                 	    if (!oldServer.mailTransportMatches(curMailTransport)) {
                             throw ServiceException.INVALID_REQUEST(
-                                    "current value of zimbraMailHost does not match zimbraMailTransport" +
-                                    ", computed mail transport from current zimbraMailHost=" + 
-                                    mailTransport(oldServer) + ", current zimbraMailTransport=" + 
+                                    "current value of zmailMailHost does not match zmailMailTransport" +
+                                    ", computed mail transport from current zmailMailHost=" + 
+                                    mailTransport(oldServer) + ", current zmailMailTransport=" + 
                                     curMailTransport, 
                         	        null);
                 	    }
@@ -96,13 +96,13 @@ public class MailHost extends AttributeCallback {
             
             // also update mail transport to match the new mail host
             String newMailTransport = mailTransport(server);
-            attrsToModify.put(Provisioning.A_zimbraMailTransport, newMailTransport);
+            attrsToModify.put(Provisioning.A_zmailMailTransport, newMailTransport);
         }
     }
     
     private static String mailTransport(Server server) {
-        String serviceName = server.getAttr(Provisioning.A_zimbraServiceHostname, null);
-        int lmtpPort = server.getIntAttr(Provisioning.A_zimbraLmtpBindPort, Config.D_LMTP_BIND_PORT);
+        String serviceName = server.getAttr(Provisioning.A_zmailServiceHostname, null);
+        int lmtpPort = server.getIntAttr(Provisioning.A_zmailLmtpBindPort, Config.D_LMTP_BIND_PORT);
         String transport = "lmtp:" + serviceName + ":" + lmtpPort;
         return transport;
     }

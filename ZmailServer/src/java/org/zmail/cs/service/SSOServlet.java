@@ -13,7 +13,7 @@
  * ***** END LICENSE BLOCK *****
  */
 
-package com.zimbra.cs.service;
+package org.zmail.cs.service;
 
 import java.io.IOException;
 import java.net.MalformedURLException;
@@ -25,49 +25,49 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.common.util.ZimbraLog;
-import com.zimbra.cs.account.AccessManager;
-import com.zimbra.cs.account.Account;
-import com.zimbra.cs.account.AuthToken;
-import com.zimbra.cs.account.Provisioning;
-import com.zimbra.cs.account.Server;
-import com.zimbra.cs.account.auth.AuthContext;
-import com.zimbra.cs.httpclient.URLUtil;
-import com.zimbra.cs.service.authenticator.SSOAuthenticator.ZimbraPrincipal;
-import com.zimbra.cs.servlet.ZimbraServlet;
+import org.zmail.common.service.ServiceException;
+import org.zmail.common.util.ZmailLog;
+import org.zmail.cs.account.AccessManager;
+import org.zmail.cs.account.Account;
+import org.zmail.cs.account.AuthToken;
+import org.zmail.cs.account.Provisioning;
+import org.zmail.cs.account.Server;
+import org.zmail.cs.account.auth.AuthContext;
+import org.zmail.cs.httpclient.URLUtil;
+import org.zmail.cs.service.authenticator.SSOAuthenticator.ZmailPrincipal;
+import org.zmail.cs.servlet.ZmailServlet;
 
-public abstract class SSOServlet extends ZimbraServlet {
+public abstract class SSOServlet extends ZmailServlet {
     private final static String IGNORE_LOGIN_URL = "?ignoreLoginURL=1";
     
     protected abstract boolean redirectToRelativeURL();
     
     public void init() throws ServletException {
         String name = getServletName();
-        ZimbraLog.account.info("Servlet " + name + " starting up");
+        ZmailLog.account.info("Servlet " + name + " starting up");
         super.init();
     }
 
     public void destroy() {
         String name = getServletName();
-        ZimbraLog.account.info("Servlet " + name + " shutting down");
+        ZmailLog.account.info("Servlet " + name + " shutting down");
         super.destroy();
     }
     
     protected AuthToken authorize(HttpServletRequest req, AuthContext.Protocol proto, 
-            ZimbraPrincipal principal, boolean isAdminRequest) 
+            ZmailPrincipal principal, boolean isAdminRequest) 
     throws ServiceException {
         
         Map<String, Object> authCtxt = new HashMap<String, Object>();
-        authCtxt.put(AuthContext.AC_ORIGINATING_CLIENT_IP, ZimbraServlet.getOrigIp(req));
-        authCtxt.put(AuthContext.AC_REMOTE_IP, ZimbraServlet.getClientIp(req));
+        authCtxt.put(AuthContext.AC_ORIGINATING_CLIENT_IP, ZmailServlet.getOrigIp(req));
+        authCtxt.put(AuthContext.AC_REMOTE_IP, ZmailServlet.getClientIp(req));
         authCtxt.put(AuthContext.AC_ACCOUNT_NAME_PASSEDIN, principal.getName());
         authCtxt.put(AuthContext.AC_USER_AGENT, req.getHeader("User-Agent"));
         
         Provisioning prov = Provisioning.getInstance();
         Account acct = principal.getAccount();
         
-        ZimbraLog.addAccountNameToContext(acct.getName());
+        ZmailLog.addAccountNameToContext(acct.getName());
         
         prov.ssoAuthAccount(acct, proto, authCtxt); 
         
@@ -80,7 +80,7 @@ public abstract class SSOServlet extends ZimbraServlet {
         AuthToken authToken = AuthProvider.getAuthToken(acct, isAdminRequest);
         
         /*
-        ZimbraLog.security.info(ZimbraLog.encodeAttrs(
+        ZmailLog.security.info(ZmailLog.encodeAttrs(
                 new String[] {"cmd", authType, "account", acct.getName(), "admin", isAdminRequest+""}));
         */
         
@@ -93,7 +93,7 @@ public abstract class SSOServlet extends ZimbraServlet {
     }
     
     protected boolean isFromZCO(HttpServletRequest req) throws ServiceException {
-        final String UA_ZCO = "Zimbra-ZCO";
+        final String UA_ZCO = "Zmail-ZCO";
         String userAgent = req.getHeader("User-Agent");
         return userAgent.contains(UA_ZCO);
     }
@@ -169,11 +169,11 @@ public abstract class SSOServlet extends ZimbraServlet {
             }
         }
         
-        ZimbraLog.account.debug("SSOServlet - redirecting (with auth token) to: " + redirectUrl);
+        ZmailLog.account.debug("SSOServlet - redirecting (with auth token) to: " + redirectUrl);
         resp.sendRedirect(redirectUrl);
     }
     
-    // Redirect to the specified error page without Zimbra auth token cookie.
+    // Redirect to the specified error page without Zmail auth token cookie.
     // The default error page is the webapp's regular entry page where user can
     // enter his username/password.
     protected void redirectToErrorPage(HttpServletRequest req, HttpServletResponse resp, 
@@ -192,7 +192,7 @@ public abstract class SSOServlet extends ZimbraServlet {
             redirectUrl = errorUrl;
         }
         
-        ZimbraLog.account.debug("SSOServlet - redirecting to: " + redirectUrl);
+        ZmailLog.account.debug("SSOServlet - redirecting to: " + redirectUrl);
         resp.sendRedirect(redirectUrl);
     }
     

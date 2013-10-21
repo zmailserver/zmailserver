@@ -12,7 +12,7 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.account;
+package org.zmail.cs.account;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -24,26 +24,26 @@ import java.util.Set;
 import java.util.UUID;
 
 import com.google.common.collect.Maps;
-import com.zimbra.common.account.Key;
-import com.zimbra.common.account.Key.AccountBy;
-import com.zimbra.common.account.Key.ShareLocatorBy;
-import com.zimbra.common.account.Key.UCServiceBy;
-import com.zimbra.common.account.ProvisioningConstants;
-import com.zimbra.common.mime.MimeConstants;
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.cs.account.NamedEntry.Visitor;
-import com.zimbra.cs.account.auth.AuthContext;
-import com.zimbra.cs.account.auth.AuthContext.Protocol;
-import com.zimbra.cs.mime.MimeTypeInfo;
-import com.zimbra.cs.mime.MockMimeTypeInfo;
-import com.zimbra.cs.mime.handler.MessageRFC822Handler;
-import com.zimbra.cs.mime.handler.TextCalendarHandler;
-import com.zimbra.cs.mime.handler.TextHtmlHandler;
-import com.zimbra.cs.mime.handler.TextPlainHandler;
-import com.zimbra.cs.mime.handler.UnknownTypeHandler;
-import com.zimbra.cs.redolog.MockRedoLogProvider;
-import com.zimbra.soap.admin.type.CacheEntryType;
-import com.zimbra.soap.admin.type.DataSourceType;
+import org.zmail.common.account.Key;
+import org.zmail.common.account.Key.AccountBy;
+import org.zmail.common.account.Key.ShareLocatorBy;
+import org.zmail.common.account.Key.UCServiceBy;
+import org.zmail.common.account.ProvisioningConstants;
+import org.zmail.common.mime.MimeConstants;
+import org.zmail.common.service.ServiceException;
+import org.zmail.cs.account.NamedEntry.Visitor;
+import org.zmail.cs.account.auth.AuthContext;
+import org.zmail.cs.account.auth.AuthContext.Protocol;
+import org.zmail.cs.mime.MimeTypeInfo;
+import org.zmail.cs.mime.MockMimeTypeInfo;
+import org.zmail.cs.mime.handler.MessageRFC822Handler;
+import org.zmail.cs.mime.handler.TextCalendarHandler;
+import org.zmail.cs.mime.handler.TextHtmlHandler;
+import org.zmail.cs.mime.handler.TextPlainHandler;
+import org.zmail.cs.mime.handler.UnknownTypeHandler;
+import org.zmail.cs.redolog.MockRedoLogProvider;
+import org.zmail.soap.admin.type.CacheEntryType;
+import org.zmail.soap.admin.type.DataSourceType;
 
 /**
  * Mock implementation of {@link Provisioning} for testing.
@@ -68,11 +68,11 @@ public final class MockProvisioning extends Provisioning {
 
     public MockProvisioning() {
         Map<String, Object> attrs = new HashMap<String, Object>();
-        attrs.put(A_zimbraServiceHostname, "localhost");
-        attrs.put(A_zimbraRedoLogProvider, MockRedoLogProvider.class.getName());
-        attrs.put(A_zimbraId, UUID.randomUUID().toString());
-        attrs.put(A_zimbraMailMode, MailMode.http.toString());
-        attrs.put(A_zimbraSmtpPort, "7025");
+        attrs.put(A_zmailServiceHostname, "localhost");
+        attrs.put(A_zmailRedoLogProvider, MockRedoLogProvider.class.getName());
+        attrs.put(A_zmailId, UUID.randomUUID().toString());
+        attrs.put(A_zmailMailMode, MailMode.http.toString());
+        attrs.put(A_zmailSmtpPort, "7025");
         localhost = new Server("localhost", "localhost", attrs, Collections.<String, Object>emptyMap(), this);
 
         initializeMimeHandlers();
@@ -81,19 +81,19 @@ public final class MockProvisioning extends Provisioning {
     @Override
     public Account createAccount(String email, String password, Map<String, Object> attrs) throws ServiceException {
         validate(ProvisioningValidator.CREATE_ACCOUNT, email, null, attrs);
-        if (!attrs.containsKey(A_zimbraId)) {
-            attrs.put(A_zimbraId, DEFAULT_ACCOUNT_ID);
+        if (!attrs.containsKey(A_zmailId)) {
+            attrs.put(A_zmailId, DEFAULT_ACCOUNT_ID);
         }
-        if (!attrs.containsKey(A_zimbraMailHost)) {
-            attrs.put(A_zimbraMailHost, "localhost");
+        if (!attrs.containsKey(A_zmailMailHost)) {
+            attrs.put(A_zmailMailHost, "localhost");
         }
-        if (!attrs.containsKey(A_zimbraAccountStatus)) {
-            attrs.put(A_zimbraAccountStatus, ACCOUNT_STATUS_ACTIVE);
+        if (!attrs.containsKey(A_zmailAccountStatus)) {
+            attrs.put(A_zmailAccountStatus, ACCOUNT_STATUS_ACTIVE);
         }
-        if (!attrs.containsKey(A_zimbraDumpsterEnabled)) {
-            attrs.put(A_zimbraDumpsterEnabled, TRUE);
+        if (!attrs.containsKey(A_zmailDumpsterEnabled)) {
+            attrs.put(A_zmailDumpsterEnabled, TRUE);
         }
-        attrs.put(A_zimbraBatchedIndexingSize, Integer.MAX_VALUE); // suppress indexing
+        attrs.put(A_zmailBatchedIndexingSize, Integer.MAX_VALUE); // suppress indexing
         Account account = new Account(email, email, attrs, null, this);
         try {
             name2account.put(email, account);
@@ -218,7 +218,7 @@ public final class MockProvisioning extends Provisioning {
     }
 
     @Override
-    public boolean inDistributionList(Account acct, String zimbraId) {
+    public boolean inDistributionList(Account acct, String zmailId) {
         throw new UnsupportedOperationException();
     }
 
@@ -262,15 +262,15 @@ public final class MockProvisioning extends Provisioning {
     }
 
     @Override
-    public void deleteAccount(String zimbraId) {
-        Account account = id2account.remove(zimbraId);
+    public void deleteAccount(String zmailId) {
+        Account account = id2account.remove(zmailId);
         if (account != null) {
             name2account.remove(account.getName());
         }
     }
 
     @Override
-    public void renameAccount(String zimbraId, String newName) {
+    public void renameAccount(String zmailId, String newName) {
         throw new UnsupportedOperationException();
     }
 
@@ -342,12 +342,12 @@ public final class MockProvisioning extends Provisioning {
             throw AccountServiceException.DOMAIN_EXISTS(name);
         }
 
-        String id = (String) attrs.get(A_zimbraId);
+        String id = (String) attrs.get(A_zmailId);
         if (id == null) {
-            attrs.put(A_zimbraId, id = UUID.randomUUID().toString());
+            attrs.put(A_zmailId, id = UUID.randomUUID().toString());
         }
-        if (!attrs.containsKey(A_zimbraSmtpHostname)) {
-            attrs.put(A_zimbraSmtpHostname, "localhost");
+        if (!attrs.containsKey(A_zmailSmtpHostname)) {
+            attrs.put(A_zmailSmtpHostname, "localhost");
         }
 
         Domain domain = new Domain(name, id, attrs, null, this);
@@ -379,8 +379,8 @@ public final class MockProvisioning extends Provisioning {
     }
 
     @Override
-    public void deleteDomain(String zimbraId) {
-        id2domain.remove(zimbraId);
+    public void deleteDomain(String zmailId) {
+        id2domain.remove(zmailId);
     }
 
     @Override
@@ -390,9 +390,9 @@ public final class MockProvisioning extends Provisioning {
             throw AccountServiceException.COS_EXISTS(name);
         }
 
-        String id = (String) attrs.get(A_zimbraId);
+        String id = (String) attrs.get(A_zmailId);
         if (id == null) {
-            attrs.put(A_zimbraId, id = UUID.randomUUID().toString());
+            attrs.put(A_zmailId, id = UUID.randomUUID().toString());
         }
 
         Cos cos = new Cos(name, id, attrs, this);
@@ -406,7 +406,7 @@ public final class MockProvisioning extends Provisioning {
     }
 
     @Override
-    public void renameCos(String zimbraId, String newName) {
+    public void renameCos(String zmailId, String newName) {
         throw new UnsupportedOperationException();
     }
 
@@ -434,7 +434,7 @@ public final class MockProvisioning extends Provisioning {
     }
 
     @Override
-    public void deleteCos(String zimbraId) {
+    public void deleteCos(String zmailId) {
         throw new UnsupportedOperationException();
     }
 
@@ -466,7 +466,7 @@ public final class MockProvisioning extends Provisioning {
     }
 
     @Override
-    public void deleteServer(String zimbraId) {
+    public void deleteServer(String zmailId) {
         throw new UnsupportedOperationException();
     }
 
@@ -481,7 +481,7 @@ public final class MockProvisioning extends Provisioning {
     }
 
     @Override
-    public void deleteDistributionList(String zimbraId) {
+    public void deleteDistributionList(String zmailId) {
         throw new UnsupportedOperationException();
     }
 
@@ -496,7 +496,7 @@ public final class MockProvisioning extends Provisioning {
     }
 
     @Override
-    public void renameDistributionList(String zimbraId, String newName) {
+    public void renameDistributionList(String zmailId, String newName) {
         throw new UnsupportedOperationException();
     }
 
@@ -526,12 +526,12 @@ public final class MockProvisioning extends Provisioning {
     }
 
     @Override
-    public void deleteCalendarResource(String zimbraId) {
+    public void deleteCalendarResource(String zmailId) {
         throw new UnsupportedOperationException();
     }
 
     @Override
-    public void renameCalendarResource(String zimbraId, String newName) {
+    public void renameCalendarResource(String zmailId, String newName) {
         throw new UnsupportedOperationException();
     }
 
@@ -588,8 +588,8 @@ public final class MockProvisioning extends Provisioning {
     @Override
     public Identity getDefaultIdentity(Account account) {
         Map<String, Object> attrs = new HashMap<String, Object>();
-        attrs.put(A_zimbraPrefIdentityName, ProvisioningConstants.DEFAULT_IDENTITY_NAME);
-        attrs.put(A_zimbraPrefIdentityId, account.getId());
+        attrs.put(A_zmailPrefIdentityName, ProvisioningConstants.DEFAULT_IDENTITY_NAME);
+        attrs.put(A_zmailPrefIdentityId, account.getId());
         return new Identity(account, ProvisioningConstants.DEFAULT_IDENTITY_NAME, account.getId(), attrs, this);
     }
 
@@ -741,7 +741,7 @@ public final class MockProvisioning extends Provisioning {
     }
 
     @Override
-    public void deleteUCService(String zimbraId) throws ServiceException {
+    public void deleteUCService(String zmailId) throws ServiceException {
         throw new UnsupportedOperationException();
     }
 
@@ -756,7 +756,7 @@ public final class MockProvisioning extends Provisioning {
     }
 
     @Override
-    public void renameUCService(String zimbraId, String newName) throws ServiceException {
+    public void renameUCService(String zmailId, String newName) throws ServiceException {
         throw new UnsupportedOperationException();
     }
 

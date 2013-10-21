@@ -16,7 +16,7 @@
 /*
  * Created on Apr 1, 2004
  */
-package com.zimbra.cs.mime.handler;
+package org.zmail.cs.mime.handler;
 
 import java.io.InputStream;
 
@@ -25,11 +25,11 @@ import javax.mail.internet.InternetHeaders;
 
 import org.apache.lucene.document.Document;
 
-import com.zimbra.common.util.ByteUtil;
-import com.zimbra.cs.convert.AttachmentInfo;
-import com.zimbra.cs.mime.MimeHandler;
-import com.zimbra.cs.mime.MimeHandlerException;
-import com.zimbra.cs.mime.MimeHandlerManager;
+import org.zmail.common.util.ByteUtil;
+import org.zmail.cs.convert.AttachmentInfo;
+import org.zmail.cs.mime.MimeHandler;
+import org.zmail.cs.mime.MimeHandlerException;
+import org.zmail.cs.mime.MimeHandlerManager;
 
 /**
  * @author schemers

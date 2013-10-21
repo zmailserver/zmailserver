@@ -1,7 +1,7 @@
-zimbraSync device selfcare management
+zmailSync device selfcare management
 -------------------------------------
 
-Non-admin in the 'zimbraSync' Namespace:
+Non-admin in the 'zmailSync' Namespace:
 ----------------------------------------
 <GetDeviceStatusRequest>
 <GetDeviceStatusResponse>
@@ -24,9 +24,9 @@ Non-admin in the 'zimbraSync' Namespace:
 
 List all registered devices and their status
 
-<GetDeviceStatusRequest xmlns="urn:zimbraSync"/>
+<GetDeviceStatusRequest xmlns="urn:zmailSync"/>
  
-<GetDeviceStatusResponse xmlns="urn:zimbraSync">
+<GetDeviceStatusResponse xmlns="urn:zmailSync">
   [<device id="{device_id}" type="{device_type}" protocol="{protocol_version}" [ua="{user_agent}"] [model="{model}"] [imei="{imei}"] [friendly_name="{friendly_name}"] [os="{os}"] [os_language="{os_language}"] [phone_number="{phone_number}"]>
     <provisionable>{provisionable}</provisionable>
     <status>{status}</status>
@@ -63,7 +63,7 @@ last_used_date - date when the device was last used (the date is stored in serve
 
 Remove a device from registered list.  This will not cause a reset of sync data, but will cause a reset of policies on the next sync.
 
-<RemoveDeviceRequest xmlns="urn:zimbraSync">
+<RemoveDeviceRequest xmlns="urn:zmailSync">
   <device id="{device_id}" />
 </RemoveDeviceRequest>
          
@@ -76,7 +76,7 @@ Remove a device from registered list.  This will not cause a reset of sync data,
 
 Suspend a device from further sync actions.
 
-<SuspendDeviceRequest xmlns="urn:zimbraSync">
+<SuspendDeviceRequest xmlns="urn:zmailSync">
   <device id="{device_id}" />
 </SuspendDeviceRequest>
          
@@ -99,7 +99,7 @@ Suspend a device from further sync actions.
 
 Resume sync with a device if currently suspended.  This will cause a policy reset, but will not reset sync data.
 
-<ResumeDeviceRequest xmlns="urn:zimbraSync">
+<ResumeDeviceRequest xmlns="urn:zmailSync">
   <device id="{device_id}" />
 </ResumeDeviceRequest>
          
@@ -123,7 +123,7 @@ Resume sync with a device if currently suspended.  This will cause a policy rese
 
 Request a device (e.g. a lost device) be wiped of all its data on the next sync.
 
-<RemoteWipeRequest xmlns="urn:zimbraSync">
+<RemoteWipeRequest xmlns="urn:zmailSync">
   <device id="{device_id}" />
 </RemoteWipeRequest>
          
@@ -136,7 +136,7 @@ Request a device (e.g. a lost device) be wiped of all its data on the next sync.
 
 Cancel a pending Remote Wipe request.  Remote Wipe can't be canceled once the device confirms the wipe.
 
-<CancelPendingRemoteWipeRequest xmlns="urn:zimbraSync">
+<CancelPendingRemoteWipeRequest xmlns="urn:zmailSync">
   <device id="{device_id}" />
 </CancelPendingRemoteWipeRequest>
 
@@ -144,7 +144,7 @@ Cancel a pending Remote Wipe request.  Remote Wipe can't be canceled once the de
 
 
 
-zimbra sync specific admin SOAP messages:
+zmail sync specific admin SOAP messages:
 -----------------------------------------
 <GetDevicesCountRequest>
 <GetDevicesCountResponse>
@@ -170,7 +170,7 @@ zimbra sync specific admin SOAP messages:
 
 Get the registered devices count on the server.
 
-<GetDevicesCountRequest xmlns="urn:zimbraAdmin"/>
+<GetDevicesCountRequest xmlns="urn:zmailAdmin"/>
          
 <GetDevicesCountResponse>
   <count>1023</count>
@@ -183,7 +183,7 @@ Get the registered devices count on the server.
 
 Get the mobile devices count on the server since last used date.
 
-<GetDevicesCountSinceLastUsedRequest xmlns="urn:zimbraAdmin">
+<GetDevicesCountSinceLastUsedRequest xmlns="urn:zmailAdmin">
   <lastUsedDate date="{yyyy-MM-dd}" />
 </GetDevicesCountSinceLastUsedRequest>
 
@@ -198,7 +198,7 @@ Get the mobile devices count on the server since last used date.
 
 Get the mobile devices count on the server used today.
 
-<GetDevicesCountUsedTodayRequest xmlns="urn:zimbraAdmin"/>
+<GetDevicesCountUsedTodayRequest xmlns="urn:zmailAdmin"/>
 
 <GetDevicesCountUsedTodayResponse>
   <count>1023</count>
@@ -211,12 +211,12 @@ Get the mobile devices count on the server used today.
 
 Request a device (e.g. a lost device) be wiped of all its data on the next sync.
 
-<RemoteWipeRequest xmlns="urn:zimbraAdmin">
+<RemoteWipeRequest xmlns="urn:zmailAdmin">
   <account by="id|name">...</account>
   [<device id="{device_id}" />]
 </RemoteWipeRequest>
          
-<RemoteWipeResponse xmlns="urn:zimbraAdmin">
+<RemoteWipeResponse xmlns="urn:zmailAdmin">
   [<device id="{device_id}" type="{device_type}" protocol="{protocol_version}" [ua="{user_agent}"] [model="{model}"] [imei="{imei}"] [friendly_name="{friendly_name}"] [os="{os}"] [os_language="{os_language}"] [phone_number="{phone_number}"]>
     <provisionable>{provisionable}</provisionable>
     <status>{status}</status>
@@ -235,7 +235,7 @@ Request a device (e.g. a lost device) be wiped of all its data on the next sync.
 
 Cancel a pending Remote Wipe request.  Remote Wipe can't be canceled once the device confirms the wipe.
 
-<CancelPendingRemoteWipeRequest xmlns="urn:zimbraAdmin">
+<CancelPendingRemoteWipeRequest xmlns="urn:zmailAdmin">
   <account by="id|name">...</account>
   [<device id="{device_id}" />]
 </CancelPendingRemoteWipeRequest>
@@ -258,12 +258,12 @@ Cancel a pending Remote Wipe request.  Remote Wipe can't be canceled once the de
 
 get the requested device's status
 
-<GetDeviceStatusRequest xmlns="urn:zimbraAdmin"/>
+<GetDeviceStatusRequest xmlns="urn:zmailAdmin"/>
   <account by="id|name">...</account>
   [<device id="{device_id}" />]
 </GetDeviceStatusRequest>
 
-<GetDeviceStatusResponse xmlns="urn:zimbraAdmin">
+<GetDeviceStatusResponse xmlns="urn:zmailAdmin">
   [<device id="{device_id}" type="{device_type}" protocol="{protocol_version}" [ua="{user_agent}"] [model="{model}"] [imei="{imei}"] [friendly_name="{friendly_name}"] [os="{os}"] [os_language="{os_language}"] [phone_number="{phone_number}"]>
     <provisionable>{provisionable}</provisionable>
     <status>{status}</status>
@@ -300,7 +300,7 @@ last_used_date - date when the device was last used (the date is stored in serve
 
 Remove a device or remove all devices attached to an account. This will not cause a reset of sync data, but will cause a reset of policies on the next sync.
 
-<RemoveDeviceRequest xmlns="urn:zimbraAdmin">
+<RemoveDeviceRequest xmlns="urn:zmailAdmin">
   <account by="id|name">...</account>
   [<device id="{device_id}" />]
 </RemoveDeviceRequest>
@@ -313,7 +313,7 @@ Remove a device or remove all devices attached to an account. This will not caus
 
 Suspend a device or all devices attached to an account from further sync actions.
 
-<SuspendDeviceRequest xmlns="urn:zimbraAdmin">
+<SuspendDeviceRequest xmlns="urn:zmailAdmin">
   <account by="id|name">...</account>
   [<device id="{device_id}" />]
 </SuspendDeviceRequest>
@@ -337,7 +337,7 @@ Suspend a device or all devices attached to an account from further sync actions
 
 Resume sync with a device or all devices attached to an account if currently suspended.  This will cause a policy reset, but will not reset sync data.
 
-<ResumeDeviceRequest xmlns="urn:zimbraAdmin">
+<ResumeDeviceRequest xmlns="urn:zmailAdmin">
   <account by="id|name">...</account>
   [<device id="{device_id}" />]
 </ResumeDeviceRequest>

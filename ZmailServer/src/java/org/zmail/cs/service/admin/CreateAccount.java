@@ -16,22 +16,22 @@
 /*
  * Created on Jun 17, 2004
  */
-package com.zimbra.cs.service.admin;
+package org.zmail.cs.service.admin;
 
-import com.zimbra.common.account.Key;
-import com.zimbra.common.account.Key.CosBy;
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.common.soap.AdminConstants;
-import com.zimbra.common.soap.Element;
-import com.zimbra.common.util.ZimbraLog;
-import com.zimbra.cs.account.Account;
-import com.zimbra.cs.account.AccountServiceException;
-import com.zimbra.cs.account.Cos;
-import com.zimbra.cs.account.Provisioning;
-import com.zimbra.cs.account.accesscontrol.Rights.Admin;
-import com.zimbra.cs.account.accesscontrol.AdminRight;
-import com.zimbra.cs.account.accesscontrol.TargetType;
-import com.zimbra.soap.ZimbraSoapContext;
+import org.zmail.common.account.Key;
+import org.zmail.common.account.Key.CosBy;
+import org.zmail.common.service.ServiceException;
+import org.zmail.common.soap.AdminConstants;
+import org.zmail.common.soap.Element;
+import org.zmail.common.util.ZmailLog;
+import org.zmail.cs.account.Account;
+import org.zmail.cs.account.AccountServiceException;
+import org.zmail.cs.account.Cos;
+import org.zmail.cs.account.Provisioning;
+import org.zmail.cs.account.accesscontrol.Rights.Admin;
+import org.zmail.cs.account.accesscontrol.AdminRight;
+import org.zmail.cs.account.accesscontrol.TargetType;
+import org.zmail.soap.ZmailSoapContext;
 
 import java.util.List;
 import java.util.Map;
@@ -51,7 +51,7 @@ public class CreateAccount extends AdminDocumentHandler {
     
 	public Element handle(Element request, Map<String, Object> context) throws ServiceException {
 
-        ZimbraSoapContext zsc = getZimbraSoapContext(context);
+        ZmailSoapContext zsc = getZmailSoapContext(context);
 	    Provisioning prov = Provisioning.getInstance();
 
 	    String name = request.getAttribute(AdminConstants.E_NAME).toLowerCase();
@@ -64,7 +64,7 @@ public class CreateAccount extends AdminDocumentHandler {
         
 	    Account account = prov.createAccount(name, password, attrs);
 
-        ZimbraLog.security.info(ZimbraLog.encodeAttrs(
+        ZmailLog.security.info(ZmailLog.encodeAttrs(
                 new String[] {"cmd", "CreateAccount","name", name}, attrs));         
 
 	    Element response = zsc.createElement(AdminConstants.CREATE_ACCOUNT_RESPONSE);
@@ -74,8 +74,8 @@ public class CreateAccount extends AdminDocumentHandler {
 	    return response;
 	}
 	
-	private void checkCos(ZimbraSoapContext zsc, Map<String, Object> attrs) throws ServiceException {
-        String cosId = ModifyAccount.getStringAttrNewValue(Provisioning.A_zimbraCOSId, attrs);
+	private void checkCos(ZmailSoapContext zsc, Map<String, Object> attrs) throws ServiceException {
+        String cosId = ModifyAccount.getStringAttrNewValue(Provisioning.A_zmailCOSId, attrs);
         if (cosId == null)
             return;  // not setting it
         
@@ -99,8 +99,8 @@ public class CreateAccount extends AdminDocumentHandler {
         notes.add(String.format(AdminRightCheckPoint.Notes.MODIFY_ENTRY, 
                 Admin.R_modifyAccount.getName(), "account"));
         
-        notes.add("Notes on " + Provisioning.A_zimbraCOSId + ": " +
-                "If setting " + Provisioning.A_zimbraCOSId + ", needs the " + Admin.R_assignCos.getName() + 
+        notes.add("Notes on " + Provisioning.A_zmailCOSId + ": " +
+                "If setting " + Provisioning.A_zmailCOSId + ", needs the " + Admin.R_assignCos.getName() + 
                 " right on the cos.");
     }
 }

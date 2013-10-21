@@ -14,10 +14,10 @@ mkdir ../snmp
 get net-snmp-5.1.2.tar.gz
 tar xzf net-snmp-5.1.2.tar.gz
 cd net-snmp-5.1.2
-./configure --prefix=/opt/zimbra/snmp-5.1.2
+./configure --prefix=/opt/zmail/snmp-5.1.2
 make
 make install
-cd /opt/zimbra
+cd /opt/zmail
 tar czf snmp-5.1.2.tar.gz snmp-5.1.2
 mv snmp-5.1.2.tar.gz CVSROOT/ThirdParty/snmp
 
@@ -98,9 +98,9 @@ tar czf Thirdparty/java/jdk1.5.0_05.tgz <install_dir>
 # As root (everything in thirdparty should be done as 
 # root, including the make)
 
-add /opt/zimbra/mysql/lib to /etc/ld.so.conf
+add /opt/zmail/mysql/lib to /etc/ld.so.conf
 ldconfig
-export LD_LIBRARY_PATH=/opt/zimbra/mysql/lib:${LD_LIBRARY_PATH}
+export LD_LIBRARY_PATH=/opt/zmail/mysql/lib:${LD_LIBRARY_PATH}
 make allclean all
 
 # From main/Thirdparty/Perl (as root)
@@ -119,7 +119,7 @@ download swatch-3.1.1.tar.gz
 make clean
 make
 
-# From main/ZimbraBuild (as any user)
+# From main/ZmailBuild (as any user)
 make allclean all
 
-packages are in ZimbraBuild/i368 (or ppc, if Mac)
+packages are in ZmailBuild/i368 (or ppc, if Mac)

@@ -12,7 +12,7 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.extension;
+package org.zmail.cs.extension;
 
 import java.io.File;
 import java.net.MalformedURLException;
@@ -24,13 +24,13 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
-import com.zimbra.common.localconfig.LC;
-import com.zimbra.common.util.ZimbraLog;
-import com.zimbra.cs.redolog.op.RedoableOp;
+import org.zmail.common.localconfig.LC;
+import org.zmail.common.util.ZmailLog;
+import org.zmail.cs.redolog.op.RedoableOp;
 
 public class ExtensionUtil {
 
-    private static List<ZimbraExtensionClassLoader> sClassLoaders = new ArrayList<ZimbraExtensionClassLoader>();
+    private static List<ZmailExtensionClassLoader> sClassLoaders = new ArrayList<ZmailExtensionClassLoader>();
 
     public static URL[] dirListToURLs(File dir) {
         File[] files = dir.listFiles();
@@ -43,11 +43,11 @@ public class ExtensionUtil {
                 URI uri = files[i].toURI();
                 URL url = uri.toURL();
                 urls.add(url);
-                if (ZimbraLog.extensions.isDebugEnabled()) {
-                    ZimbraLog.extensions.debug("adding url: " + url);
+                if (ZmailLog.extensions.isDebugEnabled()) {
+                    ZmailLog.extensions.debug("adding url: " + url);
                 }
             } catch (MalformedURLException mue) {
-                ZimbraLog.extensions.warn("ExtensionsUtil: exception creating url for " + files[i], mue);
+                ZmailLog.extensions.warn("ExtensionsUtil: exception creating url for " + files[i], mue);
             }
         }
         return urls.toArray(new URL[0]);
@@ -56,7 +56,7 @@ public class ExtensionUtil {
     private static ClassLoader sExtParentClassLoader;
 
     static {
-        File extCommonDir = new File(LC.zimbra_extension_common_directory.value());
+        File extCommonDir = new File(LC.zmail_extension_common_directory.value());
         URL[] extCommonURLs = dirListToURLs(extCommonDir);
         if (extCommonURLs == null) {
             // No ext-common libraries are present.
@@ -67,18 +67,18 @@ public class ExtensionUtil {
         loadAll();
     }
 
-    static synchronized void addClassLoader(ZimbraExtensionClassLoader zcl) {
+    static synchronized void addClassLoader(ZmailExtensionClassLoader zcl) {
         sClassLoaders.add(zcl);
     }
 
     private static synchronized void loadAll() {
-        if (LC.zimbra_extension_directory.value() == null) {
-            ZimbraLog.extensions.info(LC.zimbra_extension_directory.key() +
+        if (LC.zmail_extension_directory.value() == null) {
+            ZmailLog.extensions.info(LC.zmail_extension_directory.key() +
                     " is null, no extensions loaded");
             return;
         }
-        File extDir = new File(LC.zimbra_extension_directory.value());
-        ZimbraLog.extensions.info("Loading extensions from " + extDir.getPath());
+        File extDir = new File(LC.zmail_extension_directory.value());
+        ZmailLog.extensions.info("Loading extensions from " + extDir.getPath());
 
         File[] extDirs = extDir.listFiles();
         if (extDirs == null) {
@@ -86,14 +86,14 @@ public class ExtensionUtil {
         }
         for (File dir : extDirs) {
             if (!dir.isDirectory()) {
-                ZimbraLog.extensions.warn("ignored non-directory in extensions directory: " + dir);
+                ZmailLog.extensions.warn("ignored non-directory in extensions directory: " + dir);
                 continue;
             }
 
-            ZimbraExtensionClassLoader zcl = new ZimbraExtensionClassLoader(
+            ZmailExtensionClassLoader zcl = new ZmailExtensionClassLoader(
                     dirListToURLs(dir), sExtParentClassLoader);
             if (!zcl.hasExtensions()) {
-                ZimbraLog.extensions.warn("no " + ZimbraExtensionClassLoader.ZIMBRA_EXTENSION_CLASS + " found, ignored: " + dir);
+                ZmailLog.extensions.warn("no " + ZmailExtensionClassLoader.ZIMBRA_EXTENSION_CLASS + " found, ignored: " + dir);
                 continue;
             }
 
@@ -101,40 +101,40 @@ public class ExtensionUtil {
         }
     }
 
-    private static Map<String, ZimbraExtension> sInitializedExtensions = new LinkedHashMap<String, ZimbraExtension>();
+    private static Map<String, ZmailExtension> sInitializedExtensions = new LinkedHashMap<String, ZmailExtension>();
 
     public static synchronized void initAll() {
-        ZimbraLog.extensions.info("Initializing extensions");
-        for (ZimbraExtensionClassLoader zcl : sClassLoaders) {
+        ZmailLog.extensions.info("Initializing extensions");
+        for (ZmailExtensionClassLoader zcl : sClassLoaders) {
             for (String name : zcl.getExtensionClassNames()) {
                 try {
                     Class<?> clazz = zcl.loadClass(name);
-                    ZimbraExtension ext = (ZimbraExtension) clazz.newInstance();
+                    ZmailExtension ext = (ZmailExtension) clazz.newInstance();
                     try {
                         ext.init();
                         RedoableOp.registerClassLoader(ext.getClass().getClassLoader());
                         String extName = ext.getName();
-                        ZimbraLog.extensions.info("Initialized extension " +
+                        ZmailLog.extensions.info("Initialized extension " +
                                 extName + ": " + name + "@" + zcl);
                         sInitializedExtensions.put(extName, ext);
                     } catch (ExtensionException e) {
-                        ZimbraLog.extensions.info(
+                        ZmailLog.extensions.info(
                                 "Disabled '" + ext.getName() + "' " +
                                 e.getMessage());
                         ext.destroy();
                         RedoableOp.deregisterClassLoader(
                                 ext.getClass().getClassLoader());
                     } catch (Exception e) {
-                        ZimbraLog.extensions.warn("exception in " + name + ".init()", e);
+                        ZmailLog.extensions.warn("exception in " + name + ".init()", e);
                         RedoableOp.deregisterClassLoader(
                                 ext.getClass().getClassLoader());
                     }
                 } catch (InstantiationException e) {
-                    ZimbraLog.extensions.warn("exception occurred initializing extension " + name, e);
+                    ZmailLog.extensions.warn("exception occurred initializing extension " + name, e);
                 } catch (IllegalAccessException e) {
-                    ZimbraLog.extensions.warn("exception occurred initializing extension " + name, e);
+                    ZmailLog.extensions.warn("exception occurred initializing extension " + name, e);
                 } catch (ClassNotFoundException e) {
-                    ZimbraLog.extensions.warn("exception occurred initializing extension " + name, e);
+                    ZmailLog.extensions.warn("exception occurred initializing extension " + name, e);
                 }
 
             }
@@ -142,27 +142,27 @@ public class ExtensionUtil {
     }
 
     public static synchronized void postInitAll() {
-        ZimbraLog.extensions.info("Post-Initializing extensions");
+        ZmailLog.extensions.info("Post-Initializing extensions");
 
         for (Object o : sInitializedExtensions.values()) {
-            if (o instanceof ZimbraExtensionPostInit) {
-                ((ZimbraExtensionPostInit)o).postInit();
+            if (o instanceof ZmailExtensionPostInit) {
+                ((ZmailExtensionPostInit)o).postInit();
             }
         }
     }
 
 
     public static synchronized void destroyAll() {
-        ZimbraLog.extensions.info("Destroying extensions");
+        ZmailLog.extensions.info("Destroying extensions");
         List<String> extNames = new ArrayList<String>(sInitializedExtensions.keySet());
         for (String extName : extNames) {
-            ZimbraExtension ext = getExtension(extName);
+            ZmailExtension ext = getExtension(extName);
             try {
                 RedoableOp.deregisterClassLoader(ext.getClass().getClassLoader());
                 ext.destroy();
-                ZimbraLog.extensions.info("Destroyed extension " + extName + ": " + ext.getClass().getName() + "@" + ext.getClass().getClassLoader());
+                ZmailLog.extensions.info("Destroyed extension " + extName + ": " + ext.getClass().getName() + "@" + ext.getClass().getClassLoader());
             } catch (Exception e) {
-                ZimbraLog.extensions.warn("exception in " + ext.getClass().getName() + ".destroy()", e);
+                ZmailLog.extensions.warn("exception in " + ext.getClass().getName() + ".destroy()", e);
             }
         }
         sInitializedExtensions.clear();
@@ -172,7 +172,7 @@ public class ExtensionUtil {
         if (extensionName == null) {
             return Class.forName(className);
         }
-        ZimbraExtension ext = sInitializedExtensions.get(extensionName);
+        ZmailExtension ext = sInitializedExtensions.get(extensionName);
         if (ext == null) {
             throw new ClassNotFoundException("extension " + extensionName + " not found");
         }
@@ -193,7 +193,7 @@ public class ExtensionUtil {
         } catch (ClassNotFoundException e) {
             // ignore and look through extensions
         }
-        for (ZimbraExtensionClassLoader zcl : sClassLoaders) {
+        for (ZmailExtensionClassLoader zcl : sClassLoaders) {
             try {
                 return zcl.loadClass(name);
             } catch (ClassNotFoundException e) {
@@ -204,7 +204,7 @@ public class ExtensionUtil {
     }
 
 
-    public static synchronized ZimbraExtension getExtension(String name) {
-        return (ZimbraExtension) sInitializedExtensions.get(name);
+    public static synchronized ZmailExtension getExtension(String name) {
+        return (ZmailExtension) sInitializedExtensions.get(name);
     }
 }

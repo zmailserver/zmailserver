@@ -15,13 +15,13 @@
 #
 
 use strict;
-use Zimbra::Mon::Zmstat;
+use Zmail::Mon::Zmstat;
 
 zmstatInit();
 
 my $isLinux = isLinux();
 my $isMac = isMac();
-my $ZIMBRA_HOME = getZimbraHome();
+my $ZIMBRA_HOME = getZmailHome();
 
 my $mtaqstatCsv = 'mtaqueue.csv';
 my $cpustatCsv = 'cpu.csv';
@@ -152,10 +152,10 @@ sub getDiskInfo() {
 }
 
 sub getHostAndProcsInfo() {
-    $ZIMBRA_HOSTNAME = getZimbraServerHostname();
+    $ZIMBRA_HOSTNAME = getZmailServerHostname();
 
     my $svc;
-    my @enabledServices = `zmprov -l gs $ZIMBRA_HOSTNAME | grep zimbraServiceEnabled`;
+    my @enabledServices = `zmprov -l gs $ZIMBRA_HOSTNAME | grep zmailServiceEnabled`;
     foreach $svc (@enabledServices) {
         if ($svc =~ /mailbox/) {
             push(@ENABLED_PROCS, 'mailbox');

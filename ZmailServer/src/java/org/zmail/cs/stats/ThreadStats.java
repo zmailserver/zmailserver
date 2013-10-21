@@ -12,7 +12,7 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.stats;
+package org.zmail.cs.stats;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -20,11 +20,11 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.common.stats.StatsDumperDataSource;
-import com.zimbra.common.util.StringUtil;
-import com.zimbra.common.util.ZimbraLog;
-import com.zimbra.cs.account.Provisioning;
+import org.zmail.common.service.ServiceException;
+import org.zmail.common.stats.StatsDumperDataSource;
+import org.zmail.common.util.StringUtil;
+import org.zmail.common.util.ZmailLog;
+import org.zmail.cs.account.Provisioning;
 
 /**
  * Returns thread count statistics.  Threads whose names start with
@@ -113,7 +113,7 @@ implements StatsDumperDataSource
         try {
             return Provisioning.getInstance().getLocalServer().getStatThreadNamePrefix();
         } catch (ServiceException e) {
-            ZimbraLog.perf.warn("Unable to determine thread name prefixes.", e);
+            ZmailLog.perf.warn("Unable to determine thread name prefixes.", e);
             return new String[0];
         }
     }

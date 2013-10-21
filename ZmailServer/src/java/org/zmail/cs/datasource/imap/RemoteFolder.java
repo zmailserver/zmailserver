@@ -12,22 +12,22 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.datasource.imap;
+package org.zmail.cs.datasource.imap;
 
-import com.zimbra.common.util.Log;
-import com.zimbra.common.util.ZimbraLog;
-import com.zimbra.cs.mailclient.CommandFailedException;
-import com.zimbra.cs.mailclient.imap.CAtom;
-import com.zimbra.cs.mailclient.imap.CopyResult;
-import com.zimbra.cs.mailclient.imap.FetchResponseHandler;
-import com.zimbra.cs.mailclient.imap.Flags;
-import com.zimbra.cs.mailclient.imap.ImapConnection;
-import com.zimbra.cs.mailclient.imap.ImapData;
-import com.zimbra.cs.mailclient.imap.ImapRequest;
-import com.zimbra.cs.mailclient.imap.MailboxInfo;
-import com.zimbra.cs.mailclient.imap.MailboxName;
-import com.zimbra.cs.mailclient.imap.MessageData;
-import com.zimbra.cs.mailclient.imap.ResponseText;
+import org.zmail.common.util.Log;
+import org.zmail.common.util.ZmailLog;
+import org.zmail.cs.mailclient.CommandFailedException;
+import org.zmail.cs.mailclient.imap.CAtom;
+import org.zmail.cs.mailclient.imap.CopyResult;
+import org.zmail.cs.mailclient.imap.FetchResponseHandler;
+import org.zmail.cs.mailclient.imap.Flags;
+import org.zmail.cs.mailclient.imap.ImapConnection;
+import org.zmail.cs.mailclient.imap.ImapData;
+import org.zmail.cs.mailclient.imap.ImapRequest;
+import org.zmail.cs.mailclient.imap.MailboxInfo;
+import org.zmail.cs.mailclient.imap.MailboxName;
+import org.zmail.cs.mailclient.imap.MessageData;
+import org.zmail.cs.mailclient.imap.ResponseText;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -40,7 +40,7 @@ final class RemoteFolder {
     private String path;
     private int deleted;
 
-    private static final Log LOG = ZimbraLog.datasource;
+    private static final Log LOG = ZmailLog.datasource;
 
     RemoteFolder(ImapConnection connection, String path) {
         this.connection = connection;

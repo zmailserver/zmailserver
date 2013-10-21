@@ -13,7 +13,7 @@
  * ***** END LICENSE BLOCK *****
  */
 
-package com.zimbra.qa.unittest;
+package org.zmail.qa.unittest;
 
 import java.io.ByteArrayInputStream;
 import java.io.File;
@@ -31,19 +31,19 @@ import java.util.Set;
 
 import junit.framework.TestCase;
 
-import com.zimbra.common.mime.Rfc822ValidationInputStream;
-import com.zimbra.common.util.ByteUtil;
-import com.zimbra.common.util.FileSegmentDataSource;
-import com.zimbra.common.util.FileUtil;
-import com.zimbra.common.util.ListUtil;
-import com.zimbra.common.util.Log;
-import com.zimbra.common.util.LruMap;
-import com.zimbra.common.util.StringUtil;
-import com.zimbra.common.util.SystemUtil;
-import com.zimbra.common.util.TimeoutMap;
-import com.zimbra.common.util.TruncatingWriter;
-import com.zimbra.common.util.ValueCounter;
-import com.zimbra.common.util.ZimbraLog;
+import org.zmail.common.mime.Rfc822ValidationInputStream;
+import org.zmail.common.util.ByteUtil;
+import org.zmail.common.util.FileSegmentDataSource;
+import org.zmail.common.util.FileUtil;
+import org.zmail.common.util.ListUtil;
+import org.zmail.common.util.Log;
+import org.zmail.common.util.LruMap;
+import org.zmail.common.util.StringUtil;
+import org.zmail.common.util.SystemUtil;
+import org.zmail.common.util.TimeoutMap;
+import org.zmail.common.util.TruncatingWriter;
+import org.zmail.common.util.ValueCounter;
+import org.zmail.common.util.ZmailLog;
 
 /**
  * @author bburtin
@@ -83,7 +83,7 @@ public class TestUtilCode extends TestCase
 
     public void testTimeoutMap()
     throws Exception {
-        ZimbraLog.test.debug("testTimeoutMap()");
+        ZmailLog.test.debug("testTimeoutMap()");
         TimeoutMap<Integer, Integer> map = new TimeoutMap<Integer, Integer>(500);
 
         // Add values 1-99, which should all time out.  Test both the put()
@@ -155,7 +155,7 @@ public class TestUtilCode extends TestCase
                 assertEquals(context, list.get(j), listOfLists.get(listNum).get(index));
             }
             
-            ZimbraLog.test.debug(String.format("Split a list of %d items into %d lists", list.size(), listOfLists.size()));
+            ZmailLog.test.debug(String.format("Split a list of %d items into %d lists", list.size(), listOfLists.size()));
             assertTrue("Lists don't match: " + StringUtil.join(",", list), compareLists(list, listOfLists));
         }
     }
@@ -227,14 +227,14 @@ public class TestUtilCode extends TestCase
     }
     
     /**
-     * Makes sure that {@link ZimbraLog#addAccountNameToContext} can be called
+     * Makes sure that {@link ZmailLog#addAccountNameToContext} can be called
      * with a <tt>null</tt> value.  See bug 26997 for details.
      */
     public void testAccountLoggerNullAccountName()
     throws Exception {
-        ZimbraLog.addAccountNameToContext(null);
-        ZimbraLog.test.addAccountLogger(TestUtil.getAddress("user1"), Log.Level.info);
-        ZimbraLog.test.debug("Testing addAccountNameToContext(null).");
+        ZmailLog.addAccountNameToContext(null);
+        ZmailLog.test.addAccountLogger(TestUtil.getAddress("user1"), Log.Level.info);
+        ZmailLog.test.debug("Testing addAccountNameToContext(null).");
     }
     
     public void testAccountLoggerMultipleAccountNames()
@@ -242,9 +242,9 @@ public class TestUtilCode extends TestCase
         String address1 = TestUtil.getAddress("user1");
         String address2 = TestUtil.getAddress("user2");
         
-        ZimbraLog.addAccountNameToContext(address1);
-        ZimbraLog.addAccountNameToContext(address2);
-        Set<String> names = ZimbraLog.getAccountNamesFromContext();
+        ZmailLog.addAccountNameToContext(address1);
+        ZmailLog.addAccountNameToContext(address2);
+        Set<String> names = ZmailLog.getAccountNamesFromContext();
         assertEquals(1, names.size());
         assertTrue(names.contains(address2));
     }
@@ -442,7 +442,7 @@ public class TestUtilCode extends TestCase
     
     private void cleanUp()
     throws Exception {
-        ZimbraLog.test.removeAccountLogger(TestUtil.getAddress("user1"));
+        ZmailLog.test.removeAccountLogger(TestUtil.getAddress("user1"));
     }
 
     public static void main(String[] args)

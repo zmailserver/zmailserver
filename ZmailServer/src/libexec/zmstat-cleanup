@@ -23,7 +23,7 @@ zmsetvars() {
         fi
     fi
     
-    zmlocalconfig="/opt/zimbra/bin/zmlocalconfig"
+    zmlocalconfig="/opt/zmail/bin/zmlocalconfig"
     if [ ! -x "${zmlocalconfig}" ]; then 
         echo Error: can not find zmlocalconfig program
         exit 1

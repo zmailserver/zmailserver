@@ -35,7 +35,7 @@ unless ( GetOptions("verbose" => \$verbose,
 usage() if $help;
 
 my $report = [];
-my $cmd = "sudo /opt/zimbra/bin/zmcertmgr checkcrtexpiration -days $days";
+my $cmd = "sudo /opt/zmail/bin/zmcertmgr checkcrtexpiration -days $days";
 unless (open(CERTMGR, "$cmd|")) {
   logError("Unabled to execute zmcertmgr: $!");
   exit -1;
@@ -56,7 +56,7 @@ sub getLocalConfig {
     return $ENV{$key};
   }
   open CONF,
-    "/opt/zimbra/bin/zmlocalconfig -q -m shell |" or die "Can't open local config: $!";
+    "/opt/zmail/bin/zmlocalconfig -q -m shell |" or die "Can't open local config: $!";
   my @conf = <CONF>;
   close CONF;
 
@@ -78,13 +78,13 @@ sub sendEmailReport {
   my $subject =  "ZCS: SSL Certificates approaching expiration!";
   my $from_address = getLocalConfig("smtp_source");
   my $to_address = ($mailto ? $mailto : getLocalConfig("smtp_destination"));
-  my $smtphost = getLdapConfigValue("zimbraSmtpHostname") || "localhost";
-  my $smtpport = getLdapConfigValue("zimbraSmtpPort") || 25;
-  my $zimbra_server_hostname = getLocalConfig("zimbra_server_hostname");
+  my $smtphost = getLdapConfigValue("zmailSmtpHostname") || "localhost";
+  my $smtpport = getLdapConfigValue("zmailSmtpPort") || 25;
+  my $zmail_server_hostname = getLocalConfig("zmail_server_hostname");
   push(@$msg, "\n\nThe Administration Console and CLI Certificate Tools guide provides\n");
   push(@$msg, "instructions on how to replace you self-signed or commercial certificate.\n");
-  push(@$msg, "http://wiki.zimbra.com/index.php?title=Administration_Console_and_CLI_Certificate_Tools\n");
-  push(@$msg, "\n\nSSL Certificate expiration checked with $0 on $zimbra_server_hostname.\n");
+  push(@$msg, "http://wiki.zmail.com/index.php?title=Administration_Console_and_CLI_Certificate_Tools\n");
+  push(@$msg, "\n\nSSL Certificate expiration checked with $0 on $zmail_server_hostname.\n");
     
   print "Sending report to $to_address via $smtphost\n" if $debug;
   eval {
@@ -117,11 +117,11 @@ sub getLdapServerConfigValue {
   my $attrib = shift;
   my ($val,$err);
   my ($rfh,$wfh,$efh,$cmd,$rc);
-  my $server = getLocalConfig("zimbra_server_hostname");
+  my $server = getLocalConfig("zmail_server_hostname");
   $rfh = new FileHandle;
   $wfh = new FileHandle;
   $efh = new FileHandle;
-  $cmd = "/opt/zimbra/bin/zmprov -l gs $server $attrib";
+  $cmd = "/opt/zmail/bin/zmprov -l gs $server $attrib";
   my $pid = open3($wfh,$rfh,$efh, $cmd);
   unless(defined($pid)) {
     return undef;
@@ -150,7 +150,7 @@ sub getLdapGlobalConfigValue {
   $rfh = new FileHandle;
   $wfh = new FileHandle;
   $efh = new FileHandle;
-  $cmd = "/opt/zimbra/bin/zmprov -l gcf $attrib";
+  $cmd = "/opt/zmail/bin/zmprov -l gcf $attrib";
   my $pid = open3($wfh,$rfh,$efh, $cmd);
   unless(defined($pid)) {
     return undef;

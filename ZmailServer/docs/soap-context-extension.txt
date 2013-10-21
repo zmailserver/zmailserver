@@ -1,10 +1,10 @@
 Context extension allows adding extended information to the soap context header.  Server applications may choose to add extensions to any soap response.  Client should take advantage of extensions it understands while ignore ones it doesn't.  In addition, client should not expect a particular extension present in every response.
 
-Each extension should be a direct child element of <context> soap header and may have a namespace different from "urn:zimbra".  For example, the following shows two extensions, extention1 and extension2, present in the FooResponse context header: 
+Each extension should be a direct child element of <context> soap header and may have a namespace different from "urn:zmail".  For example, the following shows two extensions, extention1 and extension2, present in the FooResponse context header: 
 
 <soap:Envelope xmlns:soap="http://www.w3.org/2003/05/soap-envelope">
   <soap:Header>
-     <context xmlns="urn:zimbra">
+     <context xmlns="urn:zmail">
        <sessionId id="{session-id}"/> 
        <change token="{change-id}"/>
        <refresh>...</refresh>
@@ -24,7 +24,7 @@ zdsync extension
 
 This extension is used by zdesktop to carry sync status information in soap responses so that web client can properly inform user of mailbox sync status.  It is only present when server is running as zdesktop backend.  zdsync usually is added to every single soap response.  It has the following structure:
 
-<zdsync xmlns="urn:zimbraOffline">
+<zdsync xmlns="urn:zmailOffline">
   [(<account name="{NAME}" id="{ID}" status="{STATUS}" lastsync="{LASTSYNC}" unread="{INBOX_UNREAD_COUNT}">
     [<error [message="{MESSAGE}"]>
       [<exception>{EXCEPTION}</exception>]

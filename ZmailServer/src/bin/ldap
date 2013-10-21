@@ -15,9 +15,9 @@
 # 
 
 PID=""
-PIDFILE="/opt/zimbra/openldap/var/run/slapd.pid"
+PIDFILE="/opt/zmail/openldap/var/run/slapd.pid"
 
-mkdir -p "/opt/zimbra/openldap/var/run/"
+mkdir -p "/opt/zmail/openldap/var/run/"
 
 getpid()
 {
@@ -48,11 +48,11 @@ start()
 	if [ $RUNNING = 0 ]; then
 		# Run db_recover on startup, in case of power failure.
 		# Not necessary with OpenLDAP 2.3+
-		#if [ -x /opt/zimbra/sleepycat/bin/db_recover ]; then
-		#	/opt/zimbra/sleepycat/bin/db_recover -h /opt/zimbra/openldap/var/openldap-data -v
+		#if [ -x /opt/zmail/sleepycat/bin/db_recover ]; then
+		#	/opt/zmail/sleepycat/bin/db_recover -h /opt/zmail/openldap/var/openldap-data -v
 		#fi
-		sudo /opt/zimbra/libexec/zmslapd -l LOCAL0 -u `whoami` -h "ldap://:389/" \
-			-f /opt/zimbra/conf/slapd.conf
+		sudo /opt/zmail/libexec/zmslapd -l LOCAL0 -u `whoami` -h "ldap://:389/" \
+			-f /opt/zmail/conf/slapd.conf
 		sleep 2
 		getpid
 		echo "Started slapd: pid $PID"

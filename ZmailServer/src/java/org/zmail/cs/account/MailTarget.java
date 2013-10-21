@@ -12,14 +12,14 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.account;
+package org.zmail.cs.account;
 
 import java.util.Map;
 
-import com.zimbra.common.account.Key;
-import com.zimbra.common.account.Key.DomainBy;
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.common.util.ZimbraLog;
+import org.zmail.common.account.Key;
+import org.zmail.common.account.Key.DomainBy;
+import org.zmail.common.service.ServiceException;
+import org.zmail.common.util.ZmailLog;
 
 public abstract class MailTarget extends NamedEntry {
     
@@ -67,7 +67,7 @@ public abstract class MailTarget extends NamedEntry {
                 if (domain != null)
                     domainId = domain.getId();
             } catch (ServiceException e) {
-                ZimbraLog.account.warn("unable to get domain id for domain " + getDomainName() , e);
+                ZmailLog.account.warn("unable to get domain id for domain " + getDomainName() , e);
             }
             
             if (domainId == null)

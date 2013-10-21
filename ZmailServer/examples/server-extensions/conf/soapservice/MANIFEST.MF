@@ -1,2 +1,2 @@
-Zimbra-Extension-Class: com.zimbra.examples.extns.soapservice.SoapServiceExtension
+Zmail-Extension-Class: org.zmail.examples.extns.soapservice.SoapServiceExtension
 

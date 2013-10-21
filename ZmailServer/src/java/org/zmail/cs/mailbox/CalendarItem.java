@@ -13,7 +13,7 @@
  * ***** END LICENSE BLOCK *****
  */
 
-package com.zimbra.cs.mailbox;
+package org.zmail.cs.mailbox;
 
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
@@ -42,65 +42,65 @@ import javax.mail.internet.MimeMultipart;
 import javax.mail.util.SharedByteArrayInputStream;
 
 import com.google.common.base.Strings;
-import com.zimbra.common.account.Key.AccountBy;
-import com.zimbra.common.calendar.ICalTimeZone;
-import com.zimbra.common.calendar.ParsedDateTime;
-import com.zimbra.common.calendar.ParsedDuration;
-import com.zimbra.common.calendar.TimeZoneMap;
-import com.zimbra.common.calendar.ZCalendar.ICalTok;
-import com.zimbra.common.calendar.ZCalendar.ZProperty;
-import com.zimbra.common.calendar.ZCalendar.ZVCalendar;
-import com.zimbra.common.localconfig.DebugConfig;
-import com.zimbra.common.mailbox.Color;
-import com.zimbra.common.mime.MimeConstants;
-import com.zimbra.common.mime.shim.JavaMailInternetAddress;
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.common.util.ByteUtil;
-import com.zimbra.common.util.Log;
-import com.zimbra.common.util.LogFactory;
-import com.zimbra.common.util.Pair;
-import com.zimbra.common.util.ZimbraLog;
-import com.zimbra.common.zmime.ZMimeBodyPart;
-import com.zimbra.common.zmime.ZMimeMultipart;
-import com.zimbra.cs.account.Account;
-import com.zimbra.cs.account.CalendarResource;
-import com.zimbra.cs.account.Provisioning;
-import com.zimbra.cs.db.DbMailItem;
-import com.zimbra.cs.index.IndexDocument;
-import com.zimbra.cs.index.LuceneFields;
-import com.zimbra.cs.index.analysis.FieldTokenStream;
-import com.zimbra.cs.index.analysis.RFC822AddressTokenStream;
-import com.zimbra.cs.mailbox.MailItem.CustomMetadata.CustomMetadataList;
-import com.zimbra.cs.mailbox.Mailbox.SetCalendarItemData;
-import com.zimbra.cs.mailbox.calendar.Alarm;
-import com.zimbra.cs.mailbox.calendar.Alarm.Action;
-import com.zimbra.cs.mailbox.calendar.CalendarMailSender;
-import com.zimbra.cs.mailbox.calendar.IcalXmlStrMap;
-import com.zimbra.cs.mailbox.calendar.Invite;
-import com.zimbra.cs.mailbox.calendar.InviteChanges;
-import com.zimbra.cs.mailbox.calendar.InviteInfo;
-import com.zimbra.cs.mailbox.calendar.RecurId;
-import com.zimbra.cs.mailbox.calendar.Recurrence;
-import com.zimbra.cs.mailbox.calendar.Recurrence.IRecurrence;
-import com.zimbra.cs.mailbox.calendar.Recurrence.RecurrenceRule;
-import com.zimbra.cs.mailbox.calendar.Recurrence.SimpleRepeatingRule;
-import com.zimbra.cs.mailbox.calendar.Util;
-import com.zimbra.cs.mailbox.calendar.ZAttendee;
-import com.zimbra.cs.mailbox.calendar.ZOrganizer;
-import com.zimbra.cs.mailbox.calendar.ZRecur;
-import com.zimbra.cs.mailbox.calendar.ZRecur.Frequency;
-import com.zimbra.cs.mime.Mime;
-import com.zimbra.cs.mime.ParsedAddress;
-import com.zimbra.cs.mime.Mime.FixedMimeMessage;
-import com.zimbra.cs.mime.ParsedMessage;
-import com.zimbra.cs.mime.ParsedMessage.CalendarPartInfo;
-import com.zimbra.cs.service.mail.CalendarUtils;
-import com.zimbra.cs.session.PendingModifications.Change;
-import com.zimbra.cs.store.MailboxBlob;
-import com.zimbra.cs.store.StagedBlob;
-import com.zimbra.cs.store.StoreManager;
-import com.zimbra.cs.util.AccountUtil.AccountAddressMatcher;
-import com.zimbra.cs.util.JMSession;
+import org.zmail.common.account.Key.AccountBy;
+import org.zmail.common.calendar.ICalTimeZone;
+import org.zmail.common.calendar.ParsedDateTime;
+import org.zmail.common.calendar.ParsedDuration;
+import org.zmail.common.calendar.TimeZoneMap;
+import org.zmail.common.calendar.ZCalendar.ICalTok;
+import org.zmail.common.calendar.ZCalendar.ZProperty;
+import org.zmail.common.calendar.ZCalendar.ZVCalendar;
+import org.zmail.common.localconfig.DebugConfig;
+import org.zmail.common.mailbox.Color;
+import org.zmail.common.mime.MimeConstants;
+import org.zmail.common.mime.shim.JavaMailInternetAddress;
+import org.zmail.common.service.ServiceException;
+import org.zmail.common.util.ByteUtil;
+import org.zmail.common.util.Log;
+import org.zmail.common.util.LogFactory;
+import org.zmail.common.util.Pair;
+import org.zmail.common.util.ZmailLog;
+import org.zmail.common.zmime.ZMimeBodyPart;
+import org.zmail.common.zmime.ZMimeMultipart;
+import org.zmail.cs.account.Account;
+import org.zmail.cs.account.CalendarResource;
+import org.zmail.cs.account.Provisioning;
+import org.zmail.cs.db.DbMailItem;
+import org.zmail.cs.index.IndexDocument;
+import org.zmail.cs.index.LuceneFields;
+import org.zmail.cs.index.analysis.FieldTokenStream;
+import org.zmail.cs.index.analysis.RFC822AddressTokenStream;
+import org.zmail.cs.mailbox.MailItem.CustomMetadata.CustomMetadataList;
+import org.zmail.cs.mailbox.Mailbox.SetCalendarItemData;
+import org.zmail.cs.mailbox.calendar.Alarm;
+import org.zmail.cs.mailbox.calendar.Alarm.Action;
+import org.zmail.cs.mailbox.calendar.CalendarMailSender;
+import org.zmail.cs.mailbox.calendar.IcalXmlStrMap;
+import org.zmail.cs.mailbox.calendar.Invite;
+import org.zmail.cs.mailbox.calendar.InviteChanges;
+import org.zmail.cs.mailbox.calendar.InviteInfo;
+import org.zmail.cs.mailbox.calendar.RecurId;
+import org.zmail.cs.mailbox.calendar.Recurrence;
+import org.zmail.cs.mailbox.calendar.Recurrence.IRecurrence;
+import org.zmail.cs.mailbox.calendar.Recurrence.RecurrenceRule;
+import org.zmail.cs.mailbox.calendar.Recurrence.SimpleRepeatingRule;
+import org.zmail.cs.mailbox.calendar.Util;
+import org.zmail.cs.mailbox.calendar.ZAttendee;
+import org.zmail.cs.mailbox.calendar.ZOrganizer;
+import org.zmail.cs.mailbox.calendar.ZRecur;
+import org.zmail.cs.mailbox.calendar.ZRecur.Frequency;
+import org.zmail.cs.mime.Mime;
+import org.zmail.cs.mime.ParsedAddress;
+import org.zmail.cs.mime.Mime.FixedMimeMessage;
+import org.zmail.cs.mime.ParsedMessage;
+import org.zmail.cs.mime.ParsedMessage.CalendarPartInfo;
+import org.zmail.cs.service.mail.CalendarUtils;
+import org.zmail.cs.session.PendingModifications.Change;
+import org.zmail.cs.store.MailboxBlob;
+import org.zmail.cs.store.StagedBlob;
+import org.zmail.cs.store.StoreManager;
+import org.zmail.cs.util.AccountUtil.AccountAddressMatcher;
+import org.zmail.cs.util.JMSession;
 
 /**
  * An APPOINTMENT consists of one or more INVITES in the same series -- ie that
@@ -327,8 +327,8 @@ public abstract class CalendarItem extends MailItem {
             try {
                 s.append(inv.getDescription()).append(' ');
             } catch (ServiceException ex) {
-                if (ZimbraLog.index.isDebugEnabled()) {
-                    ZimbraLog.index.debug("Caught exception fetching description while indexing CalendarItem "+this.getId()+" skipping", ex);
+                if (ZmailLog.index.isDebugEnabled()) {
+                    ZmailLog.index.debug("Caught exception fetching description while indexing CalendarItem "+this.getId()+" skipping", ex);
                 }
             }
 
@@ -362,8 +362,8 @@ public abstract class CalendarItem extends MailItem {
                 try {
                     mm = inv.getMimeMessage();
                 } catch(ServiceException e) {
-                    if (ZimbraLog.index.isDebugEnabled()) {
-                        ZimbraLog.index.debug("Caught MessagingException for Invite "+inv.toString()+" while fetching MM during indexing of CalendarItem "+this.getId()+" skipping Invite", e);
+                    if (ZmailLog.index.isDebugEnabled()) {
+                        ZmailLog.index.debug("Caught MessagingException for Invite "+inv.toString()+" while fetching MM during indexing of CalendarItem "+this.getId()+" skipping Invite", e);
                     }
                 }
             }
@@ -385,8 +385,8 @@ public abstract class CalendarItem extends MailItem {
 
                     docList = pm.getLuceneDocuments();
                 } catch(ServiceException e) {
-                    if (ZimbraLog.index.isDebugEnabled()) {
-                        ZimbraLog.index.debug("Caught MessagingException for Invite "+inv.toString()+" while indexing CalendarItem "+this.getId()+" skipping Invite", e);
+                    if (ZmailLog.index.isDebugEnabled()) {
+                        ZmailLog.index.debug("Caught MessagingException for Invite "+inv.toString()+" while indexing CalendarItem "+this.getId()+" skipping Invite", e);
                     }
                 }
             }
@@ -492,7 +492,7 @@ public abstract class CalendarItem extends MailItem {
         data.id = id;
         data.type = type.toByte();
         data.folderId = folder.getId();
-        if (!folder.inSpam() || mbox.getAccount().getBooleanAttr(Provisioning.A_zimbraJunkMessagesIndexingEnabled, false)) {
+        if (!folder.inSpam() || mbox.getAccount().getBooleanAttr(Provisioning.A_zmailJunkMessagesIndexingEnabled, false)) {
             data.indexId = IndexStatus.DEFERRED.id();
         }
         data.imapId = id;
@@ -505,13 +505,13 @@ public abstract class CalendarItem extends MailItem {
         data.contentChanged(mbox, false);
 
         if (!firstInvite.hasRecurId()) {
-            ZimbraLog.calendar.info(
+            ZmailLog.calendar.info(
                     "Adding CalendarItem: id=%d, Message-ID=\"%s\", folderId=%d, subject=\"%s\", UID=%s",
                     data.id, pm != null ? pm.getMessageID() : "(none)", folder.getId(),
                     firstInvite.isPublic() ? firstInvite.getName() : "(private)",
                     firstInvite.getUid());
         } else {
-            ZimbraLog.calendar.info(
+            ZmailLog.calendar.info(
                     "Adding CalendarItem: id=%d, Message-ID=\"%s\", folderId=%d, subject=\"%s\", UID=%s, recurId=%s",
                     data.id, pm != null ? pm.getMessageID() : "(none)", folder.getId(),
                     firstInvite.isPublic() ? firstInvite.getName() : "(private)",
@@ -525,7 +525,7 @@ public abstract class CalendarItem extends MailItem {
         if (defInvite != null) {
             Collection<Instance> instances = item.expandInstances(0, Long.MAX_VALUE, false);
             if (instances.isEmpty()) {
-                ZimbraLog.calendar.info("CalendarItem has effectively zero instances: id=%d, folderId=%d, subject=\"%s\", UID=%s ",
+                ZmailLog.calendar.info("CalendarItem has effectively zero instances: id=%d, folderId=%d, subject=\"%s\", UID=%s ",
                         data.id, folder.getId(), firstInvite.isPublic() ? firstInvite.getName() : "(private)", firstInvite.getUid());
                 item.delete();
                 throw ServiceException.FORBIDDEN("Recurring series has effectively zero instances");
@@ -708,8 +708,8 @@ public abstract class CalendarItem extends MailItem {
         }
 
         if (timesChanged) {
-            if (ZimbraLog.calendar.isDebugEnabled()) {
-                ZimbraLog.calendar.debug("Updating recurrence for %s.  nextAlarm=%d.",
+            if (ZmailLog.calendar.isDebugEnabled()) {
+                ZmailLog.calendar.debug("Updating recurrence for %s.  nextAlarm=%d.",
                     getMailopContext(this), nextAlarm);
             }
             DbMailItem.updateInCalendarItemTable(this);
@@ -868,9 +868,9 @@ public abstract class CalendarItem extends MailItem {
         if (mRecurrence != null) {
             long startTime = System.currentTimeMillis();
             instances = Recurrence.expandInstances(mRecurrence, getId(), start, endAdjusted);
-            if (ZimbraLog.calendar.isDebugEnabled()) {
+            if (ZmailLog.calendar.isDebugEnabled()) {
                 long elapsed = System.currentTimeMillis() - startTime;
-                ZimbraLog.calendar.debug(
+                ZmailLog.calendar.debug(
                         "RECURRENCE EXPANSION for appt/task " + getId() +
                         ": start=" + start + ", end=" + end +
                         "; took " + elapsed + "ms");
@@ -1308,7 +1308,7 @@ public abstract class CalendarItem extends MailItem {
                 first = cur;
         }
         if (first == null)
-            ZimbraLog.calendar.error(
+            ZmailLog.calendar.error(
                     "Invalid state: appointment/task " + getId() + " in mailbox " + getMailbox().getId() + " has no default invite; " +
                     (mInvites != null ? ("invite count = " + mInvites.size()) : "null invite list"));
         return first;
@@ -1406,7 +1406,7 @@ public abstract class CalendarItem extends MailItem {
         }
 
         if (!method.equals(ICalTok.DECLINECOUNTER.toString()))
-            ZimbraLog.calendar.warn("Unsupported METHOD " + method);
+            ZmailLog.calendar.warn("Unsupported METHOD " + method);
         return false;
     }
 
@@ -1470,12 +1470,12 @@ public abstract class CalendarItem extends MailItem {
     throws ServiceException {
         // trace logging
         if (!newInvite.hasRecurId())
-            ZimbraLog.calendar.info(
+            ZmailLog.calendar.info(
                     "Modifying CalendarItem: id=%d, folderId=%d, method=%s, subject=\"%s\", UID=%s",
                     mId, getFolderId(), newInvite.getMethod(),
                     newInvite.isPublic() ? newInvite.getName() : "(private)", mUid);
         else
-            ZimbraLog.calendar.info(
+            ZmailLog.calendar.info(
                     "Modifying CalendarItem: id=%d, folderId=%d, method=%s, subject=\"%s\", UID=%s, recurId=%s",
                     mId, getFolderId(), newInvite.getMethod(),
                     newInvite.isPublic() ? newInvite.getName() : "(private)", mUid, newInvite.getRecurId().getDtZ());
@@ -1547,7 +1547,7 @@ public abstract class CalendarItem extends MailItem {
                 }
             }
             if (outdated) {
-                ZimbraLog.calendar.info("Ignoring outdated cancel request");
+                ZmailLog.calendar.info("Ignoring outdated cancel request");
                 return false;
             }
             if (cancelAll) {
@@ -1758,7 +1758,7 @@ public abstract class CalendarItem extends MailItem {
                     }
                 } else if (recur != null) {
                     // This shouldn't happen.
-                    ZimbraLog.calendar.warn("Expected RecurrenceRule object, but got " + recur.getClass().getName());
+                    ZmailLog.calendar.warn("Expected RecurrenceRule object, but got " + recur.getClass().getName());
                 }
             }
         }
@@ -2044,11 +2044,11 @@ public abstract class CalendarItem extends MailItem {
 
         if (!hasSurvivingRequests) {
             if (!isCancel)
-                ZimbraLog.calendar.warn(
+                ZmailLog.calendar.warn(
                         "Invalid state: deleting calendar item " + getId() +
                         " in mailbox " + getMailboxId() + " while processing a non-cancel request");
             else
-                ZimbraLog.calendar.warn(
+                ZmailLog.calendar.warn(
                         "Invalid state: deleting calendar item " + getId() +
                         " in mailbox " + getMailboxId() + " because it has no invite after applying cancel invite");
             delete();  // delete this appointment/task from the table,
@@ -2061,7 +2061,7 @@ public abstract class CalendarItem extends MailItem {
             if (modifiedCalItem) {
                 if (!batch && !updateRecurrence(nextAlarm)) {
                     // no default invite!  This appointment/task no longer valid
-                    ZimbraLog.calendar.warn(
+                    ZmailLog.calendar.warn(
                             "Invalid state: deleting calendar item " + getId() +
                             " in mailbox " + getMailboxId() + " because it has no invite");
                     delete();
@@ -2126,7 +2126,7 @@ public abstract class CalendarItem extends MailItem {
                     if (defInvite != null) {
                         Collection<Instance> instances = expandInstances(0, Long.MAX_VALUE, false);
                         if (instances.isEmpty())  {
-                            ZimbraLog.calendar.warn("Deleting calendar item " + getId() +
+                            ZmailLog.calendar.warn("Deleting calendar item " + getId() +
                                     " in mailbox " + getMailboxId() + " because it has no invite after applying request/cancel invite");
                             delete();
                             return true;
@@ -2275,7 +2275,7 @@ public abstract class CalendarItem extends MailItem {
             String newOrg = newOrganizer != null ? newOrganizer.getAddress() : null;
             boolean wasOrganizer = originalInvite.isOrganizer();
             boolean isOrganizer = newInvite.isOrganizer();
-            ZimbraLog.calendar.info("Changed organizer: old=" + origOrg + ", new=" + newOrg +
+            ZmailLog.calendar.info("Changed organizer: old=" + origOrg + ", new=" + newOrg +
                                     ", wasOrg=" + wasOrganizer + ", isOrg=" + isOrganizer +
                                     ", UID=\"" + newInvite.getUid() + "\", invId=" + newInvite.getMailItemId());
         }
@@ -2337,7 +2337,7 @@ public abstract class CalendarItem extends MailItem {
                 StagedBlob sblob = sm.stage(is, mMailbox);
                 return setContent(sblob, pm);
             } else {
-                ZimbraLog.calendar.warn(
+                ZmailLog.calendar.warn(
                         "Invalid state: updating blob with null data for calendar item " + getId() +
                         " in mailbox " + getMailboxId());
                 return setContent(null, pm);
@@ -2440,7 +2440,7 @@ public abstract class CalendarItem extends MailItem {
                 try {
                     mm = getMimeMessage();
                 } catch (ServiceException e) {
-                    ZimbraLog.calendar.warn("Error reading blob for calendar item " + getId() +
+                    ZmailLog.calendar.warn("Error reading blob for calendar item " + getId() +
                                             " in mailbox " + getMailboxId(), e);
                 }
             }
@@ -3141,12 +3141,12 @@ public abstract class CalendarItem extends MailItem {
         if (att1 != null) {
             String ptst = IcalXmlStrMap.sPartStatMap.toIcal(att1.getPartStat());
             if (!reply.hasRecurId())
-                ZimbraLog.calendar.info(
+                ZmailLog.calendar.info(
                         "Processing CalendarItem reply: attendee=%s, partstat=%s, id=%d, folderId=%d, subject=\"%s\", UID=%s",
                         att1.getAddress(), ptst, mId, getFolderId(),
                         reply.isPublic() ? reply.getName() : "(private)", mUid);
             else
-                ZimbraLog.calendar.info(
+                ZmailLog.calendar.info(
                         "Processing CalendarItem reply: attendee=%s, partstat=%s, id=%d, folderId=%d, subject=\"%s\", UID=%s, recurId=%s",
                         att1.getAddress(), ptst, mId, getFolderId(),
                         reply.isPublic() ? reply.getName() : "(private)", mUid, reply.getRecurId().getDtZ());
@@ -3244,7 +3244,7 @@ public abstract class CalendarItem extends MailItem {
                 cal.addComponent(inv.newToVComponent(useOutlookCompatMode, allowPrivateAccess));
             } catch (ServiceException e) {
                 if (ignoreErrors) {
-                    ZimbraLog.calendar.warn(
+                    ZmailLog.calendar.warn(
                             "Error retrieving iCalendar data for item " +
                             inv.getMailItemId() + ": " + e.getMessage(), e);
                 } else
@@ -3441,8 +3441,8 @@ public abstract class CalendarItem extends MailItem {
             long newNextAlarm = mAlarmData.getNextAtBase();
             if (newNextAlarm > 0 && newNextAlarm < mStartTime)
                 mStartTime = newNextAlarm;
-            if (ZimbraLog.calendar.isDebugEnabled()) {
-                ZimbraLog.calendar.debug("Setting next alarm for %s to %d.",
+            if (ZmailLog.calendar.isDebugEnabled()) {
+                ZmailLog.calendar.debug("Setting next alarm for %s to %d.",
                     getMailopContext(this), nextAlarm);
             }
             DbMailItem.updateInCalendarItemTable(this);
@@ -3894,7 +3894,7 @@ public abstract class CalendarItem extends MailItem {
             sbj = defInv.isPublic() ? defInv.getName() : "(private)";
         else
             sbj = "(none)";
-        ZimbraLog.calendar.info(
+        ZmailLog.calendar.info(
                 "Moving CalendarItem: id=%d, src=%s, dest=%s, subject=\"%s\", UID=%s",
                 mId, getMailopContext(getFolder()), getMailopContext(target), sbj, mUid);
         if (!isPublic()) {
@@ -3918,7 +3918,7 @@ public abstract class CalendarItem extends MailItem {
             sbj = defInv.isPublic() ? defInv.getName() : "(private)";
         else
             sbj = "(none)";
-        ZimbraLog.calendar.info(
+        ZmailLog.calendar.info(
                 "Deleting CalendarItem: id=%d, folderId=%d, subject=\"%s\", UID=%s",
                 mId, getFolderId(), sbj, mUid);
         if (!isPublic() && !canAccess(ACL.RIGHT_PRIVATE))
@@ -4059,14 +4059,14 @@ public abstract class CalendarItem extends MailItem {
 
     public static boolean isAcceptableInvite(Account acct, CalendarPartInfo cpi) {
         if (cpi.wasForwarded &&
-            !acct.getBooleanAttr(Provisioning.A_zimbraPrefCalendarAllowForwardedInvite, true))
+            !acct.getBooleanAttr(Provisioning.A_zmailPrefCalendarAllowForwardedInvite, true))
             return false;
         return true;
     }
 
     @Override
     int getMaxRevisions() throws ServiceException {
-        return getAccount().getIntAttr(Provisioning.A_zimbraCalendarMaxRevisions, 1);
+        return getAccount().getIntAttr(Provisioning.A_zmailCalendarMaxRevisions, 1);
     }
 
     public void snapshotRevision() throws ServiceException {

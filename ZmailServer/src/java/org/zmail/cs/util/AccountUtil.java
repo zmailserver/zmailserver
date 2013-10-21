@@ -13,7 +13,7 @@
  * ***** END LICENSE BLOCK *****
  */
 
-package com.zimbra.cs.util;
+package org.zmail.cs.util;
 
 import java.io.UnsupportedEncodingException;
 import java.util.HashSet;
@@ -25,29 +25,29 @@ import javax.mail.MessagingException;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 
-import com.zimbra.common.account.Key;
-import com.zimbra.common.account.Key.DomainBy;
-import com.zimbra.common.localconfig.LC;
-import com.zimbra.common.mime.MimeConstants;
-import com.zimbra.common.mime.shim.JavaMailInternetAddress;
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.common.soap.AccountConstants;
-import com.zimbra.common.util.EmailUtil;
-import com.zimbra.common.util.StringUtil;
-import com.zimbra.common.util.SystemUtil;
-import com.zimbra.common.util.ZimbraLog;
-import com.zimbra.cs.account.AccessManager;
-import com.zimbra.cs.account.Account;
-import com.zimbra.cs.account.AuthToken;
-import com.zimbra.cs.account.DataSource;
-import com.zimbra.cs.account.Domain;
-import com.zimbra.cs.account.NamedEntry;
-import com.zimbra.cs.account.Provisioning;
-import com.zimbra.cs.account.Server;
-import com.zimbra.cs.mailbox.MailItem;
-import com.zimbra.cs.mailbox.MailServiceException;
-import com.zimbra.cs.mailbox.Mailbox;
-import com.zimbra.soap.admin.type.DataSourceType;
+import org.zmail.common.account.Key;
+import org.zmail.common.account.Key.DomainBy;
+import org.zmail.common.localconfig.LC;
+import org.zmail.common.mime.MimeConstants;
+import org.zmail.common.mime.shim.JavaMailInternetAddress;
+import org.zmail.common.service.ServiceException;
+import org.zmail.common.soap.AccountConstants;
+import org.zmail.common.util.EmailUtil;
+import org.zmail.common.util.StringUtil;
+import org.zmail.common.util.SystemUtil;
+import org.zmail.common.util.ZmailLog;
+import org.zmail.cs.account.AccessManager;
+import org.zmail.cs.account.Account;
+import org.zmail.cs.account.AuthToken;
+import org.zmail.cs.account.DataSource;
+import org.zmail.cs.account.Domain;
+import org.zmail.cs.account.NamedEntry;
+import org.zmail.cs.account.Provisioning;
+import org.zmail.cs.account.Server;
+import org.zmail.cs.mailbox.MailItem;
+import org.zmail.cs.mailbox.MailServiceException;
+import org.zmail.cs.mailbox.Mailbox;
+import org.zmail.soap.admin.type.DataSourceType;
 
 public class AccountUtil {
 
@@ -60,11 +60,11 @@ public class AccountUtil {
      * @throws ServiceException
      */
     public static long getEffectiveQuota(Account acct) throws ServiceException {
-        long acctQuota = acct.getLongAttr(Provisioning.A_zimbraMailQuota, 0);
+        long acctQuota = acct.getLongAttr(Provisioning.A_zmailMailQuota, 0);
         Domain domain = Provisioning.getInstance().getDomain(acct);
         long domainQuota = 0;
         if (domain != null) {
-            domainQuota = domain.getLongAttr(Provisioning.A_zimbraMailDomainQuota, 0);
+            domainQuota = domain.getLongAttr(Provisioning.A_zmailMailDomainQuota, 0);
         }
         if (acctQuota == 0) {
             return domainQuota;
@@ -77,7 +77,7 @@ public class AccountUtil {
 
     public static boolean isOverAggregateQuota(Domain domain) {
         long quota = domain.getDomainAggregateQuota();
-        return quota != 0 && domain.getLongAttr(Provisioning.A_zimbraAggregateQuotaLastUsage, 0) > quota;
+        return quota != 0 && domain.getLongAttr(Provisioning.A_zmailAggregateQuotaLastUsage, 0) > quota;
     }
 
     public static boolean isSendAllowedOverAggregateQuota(Domain domain) {
@@ -119,7 +119,7 @@ public class AccountUtil {
         try {
             address = getCanonicalAddress(acct);
         } catch (ServiceException se) {
-            ZimbraLog.misc.warn("unexpected exception canonicalizing address, will use account name", se);
+            ZmailLog.misc.warn("unexpected exception canonicalizing address, will use account name", se);
             address = acct.getName();
         }
 
@@ -152,7 +152,7 @@ public class AccountUtil {
         try {
             return new JavaMailInternetAddress(address, personal, MimeConstants.P_CHARSET_UTF8);
         } catch (UnsupportedEncodingException e) {
-            ZimbraLog.system.error("Unable to encode address %s <%s>", personal, address);
+            ZmailLog.system.error("Unable to encode address %s <%s>", personal, address);
             InternetAddress ia = new JavaMailInternetAddress();
             ia.setAddress(address);
             return ia;
@@ -161,7 +161,7 @@ public class AccountUtil {
 
     /**
      * Returns the <tt>Reply-To</tt> address used for an outgoing message from the given
-     * account, based on user preferences, or <tt>null</tt> if <tt>zimbraPrefReplyToEnabled</tt>
+     * account, based on user preferences, or <tt>null</tt> if <tt>zmailPrefReplyToEnabled</tt>
      * is <tt>FALSE</tt>.
      */
     public static InternetAddress getReplyToAddress(Account acct) {
@@ -179,7 +179,7 @@ public class AccountUtil {
         try {
             return new JavaMailInternetAddress(address, personal, MimeConstants.P_CHARSET_UTF8);
         } catch (UnsupportedEncodingException e) {
-            ZimbraLog.system.error("Unable to encode address %s <%s>", personal, address);
+            ZmailLog.system.error("Unable to encode address %s <%s>", personal, address);
             InternetAddress ia = new JavaMailInternetAddress();
             ia.setAddress(address);
             return ia;
@@ -221,7 +221,7 @@ public class AccountUtil {
      */
     public static String getCanonicalAddress(Account account) throws ServiceException {
         // If account has a canonical address, let's use that.
-        String ca = account.getAttr(Provisioning.A_zimbraMailCanonicalAddress);
+        String ca = account.getAttr(Provisioning.A_zmailMailCanonicalAddress);
 
         // But we still have to canonicalize domain names, so do that with account address
         if (ca == null)
@@ -235,7 +235,7 @@ public class AccountUtil {
         if (domain == null)
             return ca;
 
-        String domainCatchAll = domain.getAttr(Provisioning.A_zimbraMailCatchAllCanonicalAddress);
+        String domainCatchAll = domain.getAttr(Provisioning.A_zmailMailCatchAllCanonicalAddress);
         if (domainCatchAll != null)
             return parts[0] + domainCatchAll;
 
@@ -275,7 +275,7 @@ public class AccountUtil {
         for (String addr : accountAliases)
             addrs.add(addr.toLowerCase());
 
-        String[] allowedFromAddrs = acct.getMultiAttr(Provisioning.A_zimbraAllowFromAddress);
+        String[] allowedFromAddrs = acct.getMultiAttr(Provisioning.A_zmailAllowFromAddress);
         for (String addr : allowedFromAddrs)
             addrs.add(addr.toLowerCase());
 
@@ -360,7 +360,7 @@ public class AccountUtil {
         /**
          * 
          * @param account
-         * @param internalOnly only match internal addresses, i.e. ignore zimbraAllowFromAddress values
+         * @param internalOnly only match internal addresses, i.e. ignore zmailAllowFromAddress values
          * @param matchSendAs match sendAs/sendAsDistList addresses granted
          * @throws ServiceException
          */
@@ -386,7 +386,7 @@ public class AccountUtil {
                 }
             }
             if (!internalOnly) {
-                String[] addrs = account.getMultiAttr(Provisioning.A_zimbraAllowFromAddress);
+                String[] addrs = account.getMultiAttr(Provisioning.A_zmailAllowFromAddress);
                 if (addrs != null) {
                     for (String addr : addrs) {
                         if (!StringUtil.isNullOrEmpty(addr)) {
@@ -416,7 +416,7 @@ public class AccountUtil {
                         match = matches(addrByDomainAlias, false);  // Assume domain aliases are never chained.
                     }
                 } catch (ServiceException e) {
-                    ZimbraLog.account.warn("unable to get addr by alias domain" + e);
+                    ZmailLog.account.warn("unable to get addr by alias domain" + e);
                 }
             }
             if (!match && matchSendAs) {
@@ -441,12 +441,12 @@ public class AccountUtil {
         try {
             Server server = Provisioning.getInstance().getServer(account);
             if (server == null) {
-                ZimbraLog.account.warn("no server associated with acccount " + account.getName());
+                ZmailLog.account.warn("no server associated with acccount " + account.getName());
                 return null;
             }
             return getBaseUri(server);
         } catch (ServiceException e) {
-            ZimbraLog.account.warn("error fetching SOAP URI for account " + account.getName(), e);
+            ZmailLog.account.warn("error fetching SOAP URI for account " + account.getName(), e);
             return null;
         }
     }
@@ -455,17 +455,17 @@ public class AccountUtil {
         if (server == null)
             return null;
 
-        String host = server.getAttr(Provisioning.A_zimbraServiceHostname);
-        String mode = server.getAttr(Provisioning.A_zimbraMailMode, "http");
-        int port = server.getIntAttr(Provisioning.A_zimbraMailPort, 0);
+        String host = server.getAttr(Provisioning.A_zmailServiceHostname);
+        String mode = server.getAttr(Provisioning.A_zmailMailMode, "http");
+        int port = server.getIntAttr(Provisioning.A_zmailMailPort, 0);
         if (port > 0 && !mode.equalsIgnoreCase("https") && !mode.equalsIgnoreCase("redirect")) {
             return "http://" + host + ':' + port;
         } else if (!mode.equalsIgnoreCase("http")) {
-            port = server.getIntAttr(Provisioning.A_zimbraMailSSLPort, 0);
+            port = server.getIntAttr(Provisioning.A_zmailMailSSLPort, 0);
             if (port > 0)
                 return "https://" + host + ':' + port;
         }
-        ZimbraLog.account.warn("no service port available on host " + host);
+        ZmailLog.account.warn("no service port available on host " + host);
         return null;
     }
 
@@ -507,12 +507,12 @@ public class AccountUtil {
         try {
             acct = prov.get(Key.AccountBy.id, id, authToken);
         } catch (ServiceException se) {
-            ZimbraLog.misc.warn("unable to lookup account for log, id: " + id, se);
+            ZmailLog.misc.warn("unable to lookup account for log, id: " + id, se);
         }
         if (acct == null) {
-            ZimbraLog.addToContext(idOnlyKey, id);
+            ZmailLog.addToContext(idOnlyKey, id);
         } else {
-            ZimbraLog.addToContext(nameKey, acct.getName());
+            ZmailLog.addToContext(nameKey, acct.getName());
         }
     }
     
@@ -535,7 +535,7 @@ public class AccountUtil {
                 }
             }
         } catch (ServiceException e) {
-            ZimbraLog.misc.warn("unable to lookup domain for account, id: " + account.getId());
+            ZmailLog.misc.warn("unable to lookup domain for account, id: " + account.getId());
         }
         return isGalSync;
     }
@@ -551,7 +551,7 @@ public class AccountUtil {
     }
 
     public static String[] getAllowedSendAddresses(NamedEntry grantor) {
-        String[] addrs = grantor.getMultiAttr(Provisioning.A_zimbraPrefAllowAddressForDelegatedSender);
+        String[] addrs = grantor.getMultiAttr(Provisioning.A_zmailPrefAllowAddressForDelegatedSender);
         if (addrs.length == 0) {
             addrs = new String[] { grantor.getName() };
         }

@@ -16,26 +16,26 @@
 /*
  * Created on Feb 22, 2005
  */
-package com.zimbra.cs.service.mail;
+package org.zmail.cs.service.mail;
 
 import java.util.Map;
 
 import javax.mail.Address;
 import javax.mail.MessagingException;
 
-import com.zimbra.common.util.ZimbraLog;
+import org.zmail.common.util.ZmailLog;
 
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.common.soap.MailConstants;
-import com.zimbra.common.soap.Element;
-import com.zimbra.cs.account.Account;
-import com.zimbra.cs.mailbox.Folder;
-import com.zimbra.cs.mailbox.MailServiceException;
-import com.zimbra.cs.mailbox.Mailbox;
-import com.zimbra.cs.mailbox.OperationContext;
-import com.zimbra.cs.service.util.ItemId;
-import com.zimbra.cs.service.util.ItemIdFormatter;
-import com.zimbra.soap.ZimbraSoapContext;
+import org.zmail.common.service.ServiceException;
+import org.zmail.common.soap.MailConstants;
+import org.zmail.common.soap.Element;
+import org.zmail.cs.account.Account;
+import org.zmail.cs.mailbox.Folder;
+import org.zmail.cs.mailbox.MailServiceException;
+import org.zmail.cs.mailbox.Mailbox;
+import org.zmail.cs.mailbox.OperationContext;
+import org.zmail.cs.service.util.ItemId;
+import org.zmail.cs.service.util.ItemIdFormatter;
+import org.zmail.soap.ZmailSoapContext;
 
 /**
  * @author tim
@@ -50,14 +50,14 @@ public class CreateCalendarItem extends CalendarRequest {
 
     // very simple: generate a new UID and send a REQUEST
     protected class CreateCalendarItemInviteParser extends ParseMimeMessage.InviteParser { 
-        public ParseMimeMessage.InviteParserResult parseInviteElement(ZimbraSoapContext lc, OperationContext octxt, Account account, Element inviteElem) throws ServiceException 
+        public ParseMimeMessage.InviteParserResult parseInviteElement(ZmailSoapContext lc, OperationContext octxt, Account account, Element inviteElem) throws ServiceException 
         {
             return CalendarUtils.parseInviteForCreate(account, getItemType(), inviteElem, null, null, false, CalendarUtils.RECUR_ALLOWED);
         }
     };
 
     public Element handle(Element request, Map<String, Object> context) throws ServiceException {
-        ZimbraSoapContext zsc = getZimbraSoapContext(context);
+        ZmailSoapContext zsc = getZmailSoapContext(context);
         Account acct = getRequestedAccount(zsc);
         Mailbox mbox = getRequestedMailbox(zsc);
         OperationContext octxt = getOperationContext(zsc, context);
@@ -80,11 +80,11 @@ public class CreateCalendarItem extends CalendarRequest {
 
         // trace logging
         if (!dat.mInvite.hasRecurId())
-            ZimbraLog.calendar.info("<CreateCalendarItem> folderId=%d, subject=\"%s\", UID=%s",
+            ZmailLog.calendar.info("<CreateCalendarItem> folderId=%d, subject=\"%s\", UID=%s",
                     iidFolder.getId(), dat.mInvite.isPublic() ? dat.mInvite.getName() : "(private)",
                     dat.mInvite.getUid());
         else
-            ZimbraLog.calendar.info("<CreateCalendarItem> folderId=%d, subject=\"%s\", UID=%s, recurId=%s",
+            ZmailLog.calendar.info("<CreateCalendarItem> folderId=%d, subject=\"%s\", UID=%s, recurId=%s",
                     iidFolder.getId(), dat.mInvite.isPublic() ? dat.mInvite.getName() : "(private)",
                     dat.mInvite.getUid(), dat.mInvite.getRecurId().getDtZ());
 

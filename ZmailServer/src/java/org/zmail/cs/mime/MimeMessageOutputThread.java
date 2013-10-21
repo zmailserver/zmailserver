@@ -12,7 +12,7 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.mime;
+package org.zmail.cs.mime;
 
 import java.io.IOException;
 import java.io.PipedOutputStream;
@@ -20,8 +20,8 @@ import java.io.PipedOutputStream;
 import javax.mail.MessagingException;
 import javax.mail.internet.MimeMessage;
 
-import com.zimbra.common.util.ByteUtil;
-import com.zimbra.common.util.ZimbraLog;
+import org.zmail.common.util.ByteUtil;
+import org.zmail.common.util.ZmailLog;
 
 /**
  * Thread that writes the content of a <tt>MimeMessage</tt> to a
@@ -49,11 +49,11 @@ public class MimeMessageOutputThread implements Runnable {
         try {
             mMsg.writeTo(mOut);
         } catch (IOException e) {
-            ZimbraLog.misc.warn("Unable to write MimeMessage to output stream.", e);
+            ZmailLog.misc.warn("Unable to write MimeMessage to output stream.", e);
         } catch (MessagingException e) {
-            ZimbraLog.misc.warn("Unable to write MimeMessage to output stream.", e);
+            ZmailLog.misc.warn("Unable to write MimeMessage to output stream.", e);
         } catch (Throwable t) {
-            ZimbraLog.misc.warn("Unable to write MimeMessage to output stream.", t);
+            ZmailLog.misc.warn("Unable to write MimeMessage to output stream.", t);
         } finally {
             ByteUtil.closeStream(mOut);
         }

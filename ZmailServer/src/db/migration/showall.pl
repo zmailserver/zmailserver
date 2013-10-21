@@ -14,7 +14,7 @@
 # ***** END LICENSE BLOCK *****
 # 
 
-# Prints the output of SHOW CREATE TABLE for all zimbra databases
+# Prints the output of SHOW CREATE TABLE for all zmail databases
 
 use strict;
 use Migrate;
@@ -22,7 +22,7 @@ use Migrate;
 my @databases = Migrate::runSql("SHOW DATABASES;", 0);
 foreach my $database (@databases) {
     $database = lc($database);
-    if ($database eq "zimbra" || $database =~ /^mailbox[0-9]+$/) {
+    if ($database eq "zmail" || $database =~ /^mailbox[0-9]+$/) {
 	print("Database $database:\n");
 	my @tables = Migrate::runSql("SHOW TABLES FROM $database;", 0);
 	foreach my $table (@tables) {

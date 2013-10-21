@@ -12,7 +12,7 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.redolog.op;
+package org.zmail.cs.redolog.op;
 
 import java.io.File;
 import java.io.IOException;
@@ -22,9 +22,9 @@ import javax.activation.DataSource;
 import javax.activation.FileDataSource;
 import javax.mail.util.ByteArrayDataSource;
 
-import com.zimbra.common.util.ByteUtil;
-import com.zimbra.common.util.FileSegmentDataSource;
-import com.zimbra.common.mime.MimeConstants;
+import org.zmail.common.util.ByteUtil;
+import org.zmail.common.util.FileSegmentDataSource;
+import org.zmail.common.mime.MimeConstants;
 
 class RedoableOpData {
     private int mLength;

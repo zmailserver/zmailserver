@@ -12,25 +12,25 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.account.ldap;
+package org.zmail.cs.account.ldap;
 
 import java.io.PrintWriter;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.cs.account.Account;
-import com.zimbra.cs.account.Domain;
-import com.zimbra.cs.account.Entry;
-import com.zimbra.cs.account.Provisioning;
-import com.zimbra.cs.account.auth.AuthMechanism.AuthMech;
-import com.zimbra.cs.account.ldap.LdapHelper;
-import com.zimbra.cs.ldap.LdapClient;
-import com.zimbra.cs.ldap.SearchLdapOptions;
-import com.zimbra.cs.ldap.ZLdapFilter;
-import com.zimbra.cs.ldap.LdapTODO.*;
-import com.zimbra.cs.mime.MimeTypeInfo;
+import org.zmail.common.service.ServiceException;
+import org.zmail.cs.account.Account;
+import org.zmail.cs.account.Domain;
+import org.zmail.cs.account.Entry;
+import org.zmail.cs.account.Provisioning;
+import org.zmail.cs.account.auth.AuthMechanism.AuthMech;
+import org.zmail.cs.account.ldap.LdapHelper;
+import org.zmail.cs.ldap.LdapClient;
+import org.zmail.cs.ldap.SearchLdapOptions;
+import org.zmail.cs.ldap.ZLdapFilter;
+import org.zmail.cs.ldap.LdapTODO.*;
+import org.zmail.cs.mime.MimeTypeInfo;
 
 /**
  * 
@@ -117,10 +117,10 @@ public abstract class LdapProv extends Provisioning {
     throws ServiceException;
     
     /**
-     * Authenticate to Zimbra LDAP server with bind DN and password.
+     * Authenticate to Zmail LDAP server with bind DN and password.
      * Used when stored password is not SSHA.
      */
-    public abstract void zimbraLdapAuthenticate(Account acct, String password, 
+    public abstract void zmailLdapAuthenticate(Account acct, String password, 
             Map<String, Object> authCtxt)
     throws ServiceException;
     

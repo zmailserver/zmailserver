@@ -12,54 +12,54 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.service.account;
+package org.zmail.cs.service.account;
 
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-import com.zimbra.common.account.Key;
-import com.zimbra.common.account.Key.AccountBy;
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.common.soap.AccountConstants;
-import com.zimbra.common.soap.Element;
-import com.zimbra.cs.account.Account;
-import com.zimbra.cs.account.AccountServiceException;
-import com.zimbra.cs.account.DistributionList;
-import com.zimbra.cs.account.Group;
-import com.zimbra.cs.account.GuestAccount;
-import com.zimbra.cs.account.NamedEntry;
-import com.zimbra.cs.account.Provisioning;
-import com.zimbra.cs.account.accesscontrol.ACLUtil;
-import com.zimbra.cs.account.accesscontrol.GranteeType;
-import com.zimbra.cs.account.accesscontrol.Right;
-import com.zimbra.cs.account.accesscontrol.RightManager;
-import com.zimbra.cs.account.accesscontrol.RightModifier;
-import com.zimbra.cs.account.accesscontrol.ZimbraACE;
-import com.zimbra.soap.ZimbraSoapContext;
+import org.zmail.common.account.Key;
+import org.zmail.common.account.Key.AccountBy;
+import org.zmail.common.service.ServiceException;
+import org.zmail.common.soap.AccountConstants;
+import org.zmail.common.soap.Element;
+import org.zmail.cs.account.Account;
+import org.zmail.cs.account.AccountServiceException;
+import org.zmail.cs.account.DistributionList;
+import org.zmail.cs.account.Group;
+import org.zmail.cs.account.GuestAccount;
+import org.zmail.cs.account.NamedEntry;
+import org.zmail.cs.account.Provisioning;
+import org.zmail.cs.account.accesscontrol.ACLUtil;
+import org.zmail.cs.account.accesscontrol.GranteeType;
+import org.zmail.cs.account.accesscontrol.Right;
+import org.zmail.cs.account.accesscontrol.RightManager;
+import org.zmail.cs.account.accesscontrol.RightModifier;
+import org.zmail.cs.account.accesscontrol.ZmailACE;
+import org.zmail.soap.ZmailSoapContext;
 
 public class GrantRights extends AccountDocumentHandler {
     
     @Override
     public Element handle(Element request, Map<String, Object> context) throws ServiceException {
-        ZimbraSoapContext zsc = getZimbraSoapContext(context);
+        ZmailSoapContext zsc = getZmailSoapContext(context);
         Account account = getRequestedAccount(zsc);
 
         if (!canAccessAccount(zsc, account)) {
             throw ServiceException.PERM_DENIED("can not access account");
         }
         
-        Set<ZimbraACE> aces = new HashSet<ZimbraACE>();
+        Set<ZmailACE> aces = new HashSet<ZmailACE>();
         for (Element eACE : request.listElements(AccountConstants.E_ACE)) {
-            ZimbraACE ace = handleACE(eACE, zsc, true);
+            ZmailACE ace = handleACE(eACE, zsc, true);
             aces.add(ace);
         }
 
-        List<ZimbraACE> granted = ACLUtil.grantRight(Provisioning.getInstance(), account, aces);
+        List<ZmailACE> granted = ACLUtil.grantRight(Provisioning.getInstance(), account, aces);
         Element response = zsc.createElement(AccountConstants.GRANT_RIGHTS_RESPONSE);
         if (aces != null) {
-            for (ZimbraACE ace : granted) {
+            for (ZmailACE ace : granted) {
                 ToXML.encodeACE(response, ace);
             }
         }
@@ -74,7 +74,7 @@ public class GrantRights extends AccountDocumentHandler {
      * @return
      * @throws ServiceException
      */
-    static ZimbraACE handleACE(Element eACE, ZimbraSoapContext zsc, boolean granting) 
+    static ZmailACE handleACE(Element eACE, ZmailSoapContext zsc, boolean granting) 
     throws ServiceException {
         /*
          * Interface and parameter checking style was modeled after FolderAction, 
@@ -118,7 +118,7 @@ public class GrantRights extends AccountDocumentHandler {
             secret = eACE.getAttribute(AccountConstants.A_ACCESSKEY, null);
          
         } else if (zid != null) {
-            nentry = lookupGranteeByZimbraId(zid, gtype, granting);
+            nentry = lookupGranteeByZmailId(zid, gtype, granting);
         } else {
             nentry = lookupGranteeByName(eACE.getAttribute(AccountConstants.A_DISPLAY), gtype, zsc);
             zid = nentry.getId();
@@ -136,7 +136,7 @@ public class GrantRights extends AccountDocumentHandler {
         RightModifier rightModifier = null;
         if (deny)
             rightModifier = RightModifier.RM_DENY;
-        return new ZimbraACE(zid, gtype, right, rightModifier, secret);
+        return new ZmailACE(zid, gtype, right, rightModifier, secret);
 
     }
 
@@ -152,7 +152,7 @@ public class GrantRights extends AccountDocumentHandler {
     }
 
     private static NamedEntry lookupGranteeByName(String name, GranteeType type, 
-            ZimbraSoapContext zsc) 
+            ZmailSoapContext zsc) 
     throws ServiceException {
         if (type == GranteeType.GT_AUTHUSER || 
             type == GranteeType.GT_PUBLIC || 
@@ -199,7 +199,7 @@ public class GrantRights extends AccountDocumentHandler {
         }
     }
 
-    private static NamedEntry lookupGranteeByZimbraId(String zid, GranteeType type, boolean granting) 
+    private static NamedEntry lookupGranteeByZmailId(String zid, GranteeType type, boolean granting) 
     throws ServiceException {
         Provisioning prov = Provisioning.getInstance();
         NamedEntry nentry = null;

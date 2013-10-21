@@ -14,21 +14,21 @@
  * 
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.mailbox.alerts;
+package org.zmail.cs.mailbox.alerts;
 
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.common.util.ZimbraLog;
-import com.zimbra.cs.account.Account;
-import com.zimbra.cs.mailbox.CalendarItem;
-import com.zimbra.cs.mailbox.MailItem;
-import com.zimbra.cs.mailbox.Mailbox;
-import com.zimbra.cs.mailbox.MailboxListener;
-import com.zimbra.cs.mailbox.MailboxManager;
-import com.zimbra.cs.mailbox.ScheduledTaskManager;
-import com.zimbra.cs.mailbox.calendar.Alarm;
-import com.zimbra.cs.mailbox.calendar.ZAttendee;
-import com.zimbra.cs.session.PendingModifications.Change;
-import com.zimbra.cs.session.PendingModifications.ModificationKey;
+import org.zmail.common.service.ServiceException;
+import org.zmail.common.util.ZmailLog;
+import org.zmail.cs.account.Account;
+import org.zmail.cs.mailbox.CalendarItem;
+import org.zmail.cs.mailbox.MailItem;
+import org.zmail.cs.mailbox.Mailbox;
+import org.zmail.cs.mailbox.MailboxListener;
+import org.zmail.cs.mailbox.MailboxManager;
+import org.zmail.cs.mailbox.ScheduledTaskManager;
+import org.zmail.cs.mailbox.calendar.Alarm;
+import org.zmail.cs.mailbox.calendar.ZAttendee;
+import org.zmail.cs.session.PendingModifications.Change;
+import org.zmail.cs.session.PendingModifications.ModificationKey;
 
 import java.util.Date;
 import java.util.EnumSet;
@@ -48,7 +48,7 @@ public class CalItemReminderService extends MailboxListener {
             for (Map.Entry<ModificationKey, MailItem> entry : notification.mods.created.entrySet()) {
                 MailItem item = entry.getValue();
                 if (item instanceof CalendarItem) {
-                    ZimbraLog.scheduler.debug("Handling creation of calendar item (id=%s,mailboxId=%s)",
+                    ZmailLog.scheduler.debug("Handling creation of calendar item (id=%s,mailboxId=%s)",
                             item.getId(), item.getMailboxId());
                     scheduleNextReminders((CalendarItem) item, true, true);
                 }
@@ -59,7 +59,7 @@ public class CalItemReminderService extends MailboxListener {
                 Change change = entry.getValue();
                 if (change.what instanceof CalendarItem) {
                     CalendarItem calItem = (CalendarItem) change.what;
-                    ZimbraLog.scheduler.debug("Handling modification of calendar item (id=%s,mailboxId=%s)",
+                    ZmailLog.scheduler.debug("Handling modification of calendar item (id=%s,mailboxId=%s)",
                             calItem.getId(), calItem.getMailboxId());
                     boolean calItemCanceled = false;
                     try {
@@ -67,7 +67,7 @@ public class CalItemReminderService extends MailboxListener {
                             calItemCanceled = true;
                         }
                     } catch (ServiceException e) {
-                        ZimbraLog.scheduler.error("Error in fetching calendar item's folder", e);
+                        ZmailLog.scheduler.error("Error in fetching calendar item's folder", e);
                     }
                     // cancel any existing reminders and schedule new ones if cal item not canceled
                     if (cancelExistingReminders(calItem) && !calItemCanceled)
@@ -84,7 +84,7 @@ public class CalItemReminderService extends MailboxListener {
                         mbox = MailboxManager.getInstance().getMailboxByAccount(
                                 account, MailboxManager.FetchMode.DO_NOT_AUTOCREATE);
                     } catch (ServiceException e) {
-                        ZimbraLog.scheduler.error("Error looking up the mailbox of account %s", account.getId(), e);
+                        ZmailLog.scheduler.error("Error looking up the mailbox of account %s", account.getId(), e);
                     }
                     if (mbox != null) {
                         cancelExistingReminders(entry.getKey().getItemId(), mbox.getId());
@@ -122,7 +122,7 @@ public class CalItemReminderService extends MailboxListener {
                                         mailboxId,
                                         false);
         } catch (ServiceException e) {
-            ZimbraLog.scheduler.warn("Canceling reminder tasks failed", e);
+            ZmailLog.scheduler.warn("Canceling reminder tasks failed", e);
             return false;
         }
         return true;
@@ -165,7 +165,7 @@ public class CalItemReminderService extends MailboxListener {
                 scheduleReminder(new CalItemSmsReminderTask(), calItem, alarmData);
             }
         } catch (ServiceException e) {
-            ZimbraLog.scheduler.error("Error in scheduling reminder task", e);
+            ZmailLog.scheduler.error("Error in scheduling reminder task", e);
         }
     }
 

@@ -12,7 +12,7 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.gal;
+package org.zmail.cs.gal;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -23,23 +23,23 @@ import java.util.List;
 import java.util.Set;
 
 import com.google.common.collect.Sets;
-import com.zimbra.common.mailbox.ContactConstants;
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.common.soap.AccountConstants;
-import com.zimbra.common.soap.Element;
-import com.zimbra.common.soap.MailConstants;
-import com.zimbra.common.util.ZimbraLog;
-import com.zimbra.cs.account.Account;
-import com.zimbra.cs.account.GalContact;
-import com.zimbra.cs.account.Group;
-import com.zimbra.cs.account.Provisioning;
-import com.zimbra.cs.account.Provisioning.SearchGalResult;
-import com.zimbra.cs.account.gal.GalOp;
-import com.zimbra.cs.mailbox.Contact;
-import com.zimbra.cs.service.mail.ToXML;
-import com.zimbra.cs.service.util.ItemId;
-import com.zimbra.cs.service.util.ItemIdFormatter;
-import com.zimbra.soap.account.type.MemberOfSelector;
+import org.zmail.common.mailbox.ContactConstants;
+import org.zmail.common.service.ServiceException;
+import org.zmail.common.soap.AccountConstants;
+import org.zmail.common.soap.Element;
+import org.zmail.common.soap.MailConstants;
+import org.zmail.common.util.ZmailLog;
+import org.zmail.cs.account.Account;
+import org.zmail.cs.account.GalContact;
+import org.zmail.cs.account.Group;
+import org.zmail.cs.account.Provisioning;
+import org.zmail.cs.account.Provisioning.SearchGalResult;
+import org.zmail.cs.account.gal.GalOp;
+import org.zmail.cs.mailbox.Contact;
+import org.zmail.cs.service.mail.ToXML;
+import org.zmail.cs.service.util.ItemId;
+import org.zmail.cs.service.util.ItemIdFormatter;
+import org.zmail.soap.account.type.MemberOfSelector;
 
 public class GalSearchResultCallback implements GalContact.Visitor {
     private Element mResponse;
@@ -74,7 +74,7 @@ public class GalSearchResultCallback implements GalContact.Visitor {
     	try {
     	    mAuthAcct = params.getAuthAccount();
         } catch (ServiceException e) {
-            ZimbraLog.gal.warn("unable to get authed account", e);
+            ZmailLog.gal.warn("unable to get authed account", e);
         }
         mNeedCanExpand = params.getNeedCanExpand();
         mNeedIsOwner = params.getNeedIsOwner();
@@ -106,7 +106,7 @@ public class GalSearchResultCallback implements GalContact.Visitor {
     	    eContact = ToXML.encodeContact(mResponse, mFormatter, null, c, true, c.getAllFields().keySet());
     	} else if (mNeedSMIMECerts) {
     		// this is the case only when proxying SearcgGalRequest for the call from 
-    	    // GetSMIMEPublicCerts (in ZimbraNetwork)
+    	    // GetSMIMEPublicCerts (in ZmailNetwork)
     	    Set<String> fieldSet = new HashSet<String>(c.getFields().keySet());
     		fieldSet.addAll(Contact.getSMIMECertFields());
     	    eContact = ToXML.encodeContact(mResponse, mFormatter, null, c, true, fieldSet);
@@ -119,21 +119,21 @@ public class GalSearchResultCallback implements GalContact.Visitor {
     	eContact.addAttribute(AccountConstants.A_REF, c.get(ContactConstants.A_dn));
     	
     	if (c.isGroup()) {
-    	    String zimbraId = c.get(ContactConstants.A_zimbraId);
+    	    String zmailId = c.get(ContactConstants.A_zmailId);
     	        
         	if (mNeedCanExpand) {
         	    boolean canExpand = GalSearchControl.canExpandGalGroup(
-        	            c.get(ContactConstants.A_email), zimbraId, mAuthAcct);
+        	            c.get(ContactConstants.A_email), zmailId, mAuthAcct);
                 eContact.addAttribute(AccountConstants.A_EXP, canExpand);
         	}
         	
         	if (mNeedIsOwner) {
-        	    boolean isOwner = isOwner(zimbraId);
+        	    boolean isOwner = isOwner(zmailId);
         	    eContact.addAttribute(AccountConstants.A_IS_OWNER, isOwner);
         	}
         	
         	if (MemberOfSelector.none != mNeedIsMember) {
-        	    boolean isMember = isMember(zimbraId);
+        	    boolean isMember = isMember(zmailId);
                 eContact.addAttribute(AccountConstants.A_IS_MEMBER, isMember);
         	}
     	}
@@ -146,21 +146,21 @@ public class GalSearchResultCallback implements GalContact.Visitor {
 		eGalContact.addAttribute(AccountConstants.A_REF, c.getId());
 		
 		if (c.isGroup()) {
-		    String zimbraId = c.getSingleAttr(ContactConstants.A_zimbraId);
+		    String zmailId = c.getSingleAttr(ContactConstants.A_zmailId);
 		        
     		if (mNeedCanExpand) {
     		    boolean canExpand = GalSearchControl.canExpandGalGroup(
-    		            c.getSingleAttr(ContactConstants.A_email), zimbraId, mAuthAcct);
+    		            c.getSingleAttr(ContactConstants.A_email), zmailId, mAuthAcct);
     		    eGalContact.addAttribute(AccountConstants.A_EXP, canExpand);
     		}
     		
             if (mNeedIsOwner) {
-                boolean isOwner = isOwner(zimbraId);
+                boolean isOwner = isOwner(zmailId);
                 eGalContact.addAttribute(AccountConstants.A_IS_OWNER, isOwner);
             }
             
             if (MemberOfSelector.none != mNeedIsMember) {
-                boolean isMember = isMember(zimbraId);
+                boolean isMember = isMember(zmailId);
                 eGalContact.addAttribute(AccountConstants.A_IS_MEMBER, isMember);
             }
 		}
@@ -233,8 +233,8 @@ public class GalSearchResultCallback implements GalContact.Visitor {
         mResponse.addAttribute(MailConstants.A_GAL_DEFINITION_LAST_MODIFIED, timestamp);
     }
     
-    private boolean isOwner(String groupZimbraId) throws ServiceException {
-        if (mAuthAcct == null || groupZimbraId == null) {
+    private boolean isOwner(String groupZmailId) throws ServiceException {
+        if (mAuthAcct == null || groupZmailId == null) {
             return false;
         }
         
@@ -242,11 +242,11 @@ public class GalSearchResultCallback implements GalContact.Visitor {
             mOwnerOfGroupsIds = Group.GroupOwner.getOwnedGroupsIds(mAuthAcct);
         }
         
-        return mOwnerOfGroupsIds.contains(groupZimbraId);
+        return mOwnerOfGroupsIds.contains(groupZmailId);
     }
     
-    private boolean isMember(String groupZimbraId) throws ServiceException {
-        if (mAuthAcct == null || groupZimbraId == null) {
+    private boolean isMember(String groupZmailId) throws ServiceException {
+        if (mAuthAcct == null || groupZmailId == null) {
             return false;
         }
         
@@ -254,7 +254,7 @@ public class GalSearchResultCallback implements GalContact.Visitor {
             mMemberOfGroupsIds = Provisioning.getInstance().getGroups(mAuthAcct);
         }
         
-        return mMemberOfGroupsIds.contains(groupZimbraId);
+        return mMemberOfGroupsIds.contains(groupZmailId);
     }
     
     public static abstract class PassThruGalSearchResultCallback extends GalSearchResultCallback {

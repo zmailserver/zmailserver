@@ -12,21 +12,21 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.store;
+package org.zmail.cs.store;
 
 import java.io.IOException;
 import java.io.InputStream;
 
-import com.zimbra.common.localconfig.LC;
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.common.util.ZimbraLog;
-import com.zimbra.cs.account.Provisioning;
-import com.zimbra.cs.account.Server;
-import com.zimbra.cs.extension.ExtensionUtil;
-import com.zimbra.cs.mailbox.MailItem;
-import com.zimbra.cs.mailbox.Mailbox;
-import com.zimbra.cs.store.file.FileBlobStore;
-import com.zimbra.cs.util.Zimbra;
+import org.zmail.common.localconfig.LC;
+import org.zmail.common.service.ServiceException;
+import org.zmail.common.util.ZmailLog;
+import org.zmail.cs.account.Provisioning;
+import org.zmail.cs.account.Server;
+import org.zmail.cs.extension.ExtensionUtil;
+import org.zmail.cs.mailbox.MailItem;
+import org.zmail.cs.mailbox.Mailbox;
+import org.zmail.cs.store.file.FileBlobStore;
+import org.zmail.cs.util.Zmail;
 
 public abstract class StoreManager {
 
@@ -39,7 +39,7 @@ public abstract class StoreManager {
                     return sInstance;
                 }
 
-                String className = LC.zimbra_class_store.value();
+                String className = LC.zmail_class_store.value();
                 try {
                     if (className != null && !className.equals("")) {
                         try {
@@ -51,7 +51,7 @@ public abstract class StoreManager {
                         sInstance = new FileBlobStore();
                     }
                 } catch (Throwable t) {
-                    Zimbra.halt("unable to initialize blob store", t);
+                    Zmail.halt("unable to initialize blob store", t);
                 }
             }
         }
@@ -62,7 +62,7 @@ public abstract class StoreManager {
      * Used for unit testing.
      */
     public static void setInstance(StoreManager instance) {
-        ZimbraLog.store.info("Setting StoreManager to " + instance.getClass().getName());
+        ZmailLog.store.info("Setting StoreManager to " + instance.getClass().getName());
         sInstance = instance;
     }
 
@@ -262,7 +262,7 @@ public abstract class StoreManager {
         try {
             return delete(blob);
         } catch (IOException ioe) {
-            ZimbraLog.store.warn("could not delete blob " + blob.getPath());
+            ZmailLog.store.warn("could not delete blob " + blob.getPath());
             return false;
         }
     }
@@ -290,7 +290,7 @@ public abstract class StoreManager {
         try {
             return delete(staged);
         } catch (IOException ioe) {
-            ZimbraLog.store.warn("could not delete staged blob " + staged);
+            ZmailLog.store.warn("could not delete staged blob " + staged);
             return false;
         }
     }
@@ -318,7 +318,7 @@ public abstract class StoreManager {
         try {
             return delete(mblob);
         } catch (IOException ioe) {
-            ZimbraLog.store.warn("could not delete blob " + mblob);
+            ZmailLog.store.warn("could not delete blob " + mblob);
             return false;
         }
     }

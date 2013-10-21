@@ -13,7 +13,7 @@
  * ***** END LICENSE BLOCK *****
  */
 
-package com.zimbra.cs.filter.jsieve;
+package org.zmail.cs.filter.jsieve;
 
 import java.util.List;
 import java.util.Set;
@@ -26,12 +26,12 @@ import org.apache.jsieve.exception.SieveException;
 import org.apache.jsieve.mail.MailAdapter;
 import org.apache.jsieve.tests.AbstractTest;
 
-import com.zimbra.common.calendar.ZCalendar.ICalTok;
-import com.zimbra.common.util.ListUtil;
-import com.zimbra.common.util.StringUtil;
-import com.zimbra.cs.filter.ZimbraMailAdapter;
-import com.zimbra.cs.mime.ParsedMessage;
-import com.zimbra.cs.mime.ParsedMessage.CalendarPartInfo;
+import org.zmail.common.calendar.ZCalendar.ICalTok;
+import org.zmail.common.util.ListUtil;
+import org.zmail.common.util.StringUtil;
+import org.zmail.cs.filter.ZmailMailAdapter;
+import org.zmail.cs.mime.ParsedMessage;
+import org.zmail.cs.mime.ParsedMessage.CalendarPartInfo;
 
 public class InviteTest extends AbstractTest {
 
@@ -116,9 +116,9 @@ public class InviteTest extends AbstractTest {
      * Returns <tt>true</tt> if the message has a calendar part.
      */
     protected boolean executeBasic(MailAdapter mail, Arguments arguments, SieveContext context) {
-        if (!(mail instanceof ZimbraMailAdapter))
+        if (!(mail instanceof ZmailMailAdapter))
             return false;
-        ParsedMessage pm = ((ZimbraMailAdapter) mail).getParsedMessage();
+        ParsedMessage pm = ((ZmailMailAdapter) mail).getParsedMessage();
         if (pm == null) {
             return false;
         }

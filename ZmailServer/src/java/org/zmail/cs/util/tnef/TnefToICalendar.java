@@ -13,13 +13,13 @@
  * ***** END LICENSE BLOCK *****
  */
 
-package com.zimbra.cs.util.tnef;
+package org.zmail.cs.util.tnef;
 
 import java.io.InputStream;
 
 import javax.mail.internet.MimeMessage;
 
-import com.zimbra.common.service.ServiceException;
+import org.zmail.common.service.ServiceException;
 
 import net.fortuna.ical4j.data.ContentHandler;
 

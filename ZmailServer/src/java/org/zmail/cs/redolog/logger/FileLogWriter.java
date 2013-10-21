@@ -19,7 +19,7 @@
  * TODO To change the template for this generated file go to
  * Window - Preferences - Java - Code Generation - Code and Comments
  */
-package com.zimbra.cs.redolog.logger;
+package org.zmail.cs.redolog.logger;
 
 import java.io.File;
 import java.io.IOException;
@@ -30,20 +30,20 @@ import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.Set;
 
-import com.zimbra.common.util.Constants;
-import com.zimbra.common.util.ZimbraLog;
+import org.zmail.common.util.Constants;
+import org.zmail.common.util.ZmailLog;
 
-import com.zimbra.common.localconfig.DebugConfig;
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.cs.account.Provisioning;
-import com.zimbra.cs.redolog.CommitId;
-import com.zimbra.cs.redolog.RedoCommitCallback;
-import com.zimbra.cs.redolog.RedoConfig;
-import com.zimbra.cs.redolog.RedoLogManager;
-import com.zimbra.cs.redolog.RolloverManager;
-import com.zimbra.cs.redolog.op.CommitTxn;
-import com.zimbra.cs.redolog.op.RedoableOp;
-import com.zimbra.cs.util.Zimbra;
+import org.zmail.common.localconfig.DebugConfig;
+import org.zmail.common.service.ServiceException;
+import org.zmail.cs.account.Provisioning;
+import org.zmail.cs.redolog.CommitId;
+import org.zmail.cs.redolog.RedoCommitCallback;
+import org.zmail.cs.redolog.RedoConfig;
+import org.zmail.cs.redolog.RedoLogManager;
+import org.zmail.cs.redolog.RolloverManager;
+import org.zmail.cs.redolog.op.CommitTxn;
+import org.zmail.cs.redolog.op.RedoableOp;
+import org.zmail.cs.util.Zmail;
 
 /**
  * @author jhahm
@@ -58,7 +58,7 @@ public class FileLogWriter implements LogWriter {
         try {
             sServerId = Provisioning.getInstance().getLocalServer().getId();
         } catch (ServiceException e) {
-            ZimbraLog.redolog.error("Unable to get local server ID", e);
+            ZmailLog.redolog.error("Unable to get local server ID", e);
             sServerId = "unknown";
         }
     }
@@ -120,7 +120,7 @@ public class FileLogWriter implements LogWriter {
     }
 
     /* (non-Javadoc)
-     * @see com.zimbra.cs.redolog.LogWriter#getSize()
+     * @see org.zmail.cs.redolog.LogWriter#getSize()
      */
     @Override public long getSize() {
         synchronized (mLock) {
@@ -129,7 +129,7 @@ public class FileLogWriter implements LogWriter {
     }
 
     /* (non-Javadoc)
-     * @see com.zimbra.cs.redolog.logger.LogWriter#getCreateTime()
+     * @see org.zmail.cs.redolog.logger.LogWriter#getCreateTime()
      */
     @Override public long getCreateTime() {
         synchronized (mLock) {
@@ -138,7 +138,7 @@ public class FileLogWriter implements LogWriter {
     }
 
     /* (non-Javadoc)
-     * @see com.zimbra.cs.redolog.logger.LogWriter#getLastLogTime()
+     * @see org.zmail.cs.redolog.logger.LogWriter#getLastLogTime()
      */
     @Override public long getLastLogTime() {
         synchronized (mLock) {
@@ -147,42 +147,42 @@ public class FileLogWriter implements LogWriter {
     }
 
     /* (non-Javadoc)
-     * @see com.zimbra.cs.redolog.logger.LogWriter#isEmpty()
+     * @see org.zmail.cs.redolog.logger.LogWriter#isEmpty()
      */
     @Override public boolean isEmpty() throws IOException {
         return getSize() <= FileHeader.HEADER_LEN;
     }
 
     /* (non-Javadoc)
-     * @see com.zimbra.cs.redolog.logger.LogWriter#exists()
+     * @see org.zmail.cs.redolog.logger.LogWriter#exists()
      */
     @Override public boolean exists() {
         return mFile.exists();
     }
 
     /* (non-Javadoc)
-     * @see com.zimbra.cs.redolog.LogWriter#getAbsolutePath()
+     * @see org.zmail.cs.redolog.LogWriter#getAbsolutePath()
      */
     @Override public String getAbsolutePath() {
         return mFile.getAbsolutePath();
     }
 
     /* (non-Javadoc)
-     * @see com.zimbra.cs.redolog.LogWriter#renameTo()
+     * @see org.zmail.cs.redolog.LogWriter#renameTo()
      */
     @Override public boolean renameTo(File dest) {
         return mFile.renameTo(dest);
     }
 
     /* (non-Javadoc)
-     * @see com.zimbra.cs.redolog.logger.LogWriter#delete()
+     * @see org.zmail.cs.redolog.logger.LogWriter#delete()
      */
     @Override public boolean delete() {
         return mFile.delete();
     }
 
     /* (non-Javadoc)
-     * @see com.zimbra.cs.redolog.LogWriter#open()
+     * @see org.zmail.cs.redolog.LogWriter#open()
      */
     @Override public synchronized void open() throws IOException {
         synchronized (mLock) {
@@ -220,7 +220,7 @@ public class FileLogWriter implements LogWriter {
     }
 
     /* (non-Javadoc)
-     * @see com.zimbra.cs.redolog.LogWriter#close()
+     * @see org.zmail.cs.redolog.LogWriter#close()
      */
     @Override public synchronized void close() throws IOException {
         stopFsyncThread();
@@ -241,8 +241,8 @@ public class FileLogWriter implements LogWriter {
         }
 
         // Write some stats, so we can see how many times we were able to avoid calling fsync.
-        if (!mNoStat && mLogCount > 0 && ZimbraLog.redolog.isDebugEnabled())
-            ZimbraLog.redolog.debug("Logged: " + mLogCount + " items, " + mFsyncCount + " fsyncs");
+        if (!mNoStat && mLogCount > 0 && ZmailLog.redolog.isDebugEnabled())
+            ZmailLog.redolog.debug("Logged: " + mLogCount + " items, " + mFsyncCount + " fsyncs");
     }
 
     /**
@@ -333,7 +333,7 @@ public class FileLogWriter implements LogWriter {
                         mFsyncCond.wait(10000);
                     }
                 } catch (InterruptedException e) {
-                    ZimbraLog.redolog.info("Thread interrupted during fsync");
+                    ZmailLog.redolog.info("Thread interrupted during fsync");
                 }
                 synchronized (mLock) {
                     // timed out, so fsync in this thread
@@ -500,11 +500,11 @@ public class FileLogWriter implements LogWriter {
             super("FileLogWriter.FsyncThread-"+System.currentTimeMillis());
             // Sanity check the sleep interval.
             if (fsyncIntervalMS < MIN_SLEEP_MILLIS) {
-                ZimbraLog.redolog.warn("Invalid fsync thread sleep interval %dms; using %dms instead",
+                ZmailLog.redolog.warn("Invalid fsync thread sleep interval %dms; using %dms instead",
                         fsyncIntervalMS, MIN_SLEEP_MILLIS);
                 mSleepMS = MIN_SLEEP_MILLIS;
             } else if (fsyncIntervalMS > MAX_SLEEP_MILLIS) {
-                ZimbraLog.redolog.warn("Fsync thread sleep interval %ms is too long; using %dms instead",
+                ZmailLog.redolog.warn("Fsync thread sleep interval %ms is too long; using %dms instead",
                         fsyncIntervalMS, MAX_SLEEP_MILLIS);
                 mSleepMS = MAX_SLEEP_MILLIS;
             } else {
@@ -516,29 +516,29 @@ public class FileLogWriter implements LogWriter {
 
         @Override public void run() {
             boolean running = true;
-        	ZimbraLog.redolog.info("Starting fsync thread with interval %d", mSleepMS);
+        	ZmailLog.redolog.info("Starting fsync thread with interval %d", mSleepMS);
             while (running) {
                 // Sleep between fsyncs.
                 try {
-                	ZimbraLog.redolog.trace("Sleeping for %s", mSleepMS);
+                	ZmailLog.redolog.trace("Sleeping for %s", mSleepMS);
                     Thread.sleep(mSleepMS);
-                	ZimbraLog.redolog.trace("Slept for %s running? %s", mSleepMS, mRunning);
+                	ZmailLog.redolog.trace("Slept for %s running? %s", mSleepMS, mRunning);
                 } catch (InterruptedException e) {
-                    ZimbraLog.redolog.warn("Sync thread interrupted", e);
+                    ZmailLog.redolog.warn("Sync thread interrupted", e);
                 }
 
                 try {
                     fsync();    // do the sync
                 } catch (IOException e) {
                     String message = "Error while fsyncing " + mFile.getAbsolutePath() + "; Aborting.";
-                    Zimbra.halt(message, e);
+                    Zmail.halt(message, e);
                 }
 
                 synchronized (mFsyncLock) {
                     running = mRunning;
                 }
             }
-            ZimbraLog.redolog.info("fsync thread exiting");
+            ZmailLog.redolog.info("fsync thread exiting");
         }
 
         // Stop the fsync thread.  Wait until the thread really stops.
@@ -548,16 +548,16 @@ public class FileLogWriter implements LogWriter {
             }
             try {
             	while (isAlive()) {
-            		if (ZimbraLog.redolog.isTraceEnabled()) {
-            			ZimbraLog.redolog.trace("waiting for %s to finish. running? %s", getName(), mRunning);
+            		if (ZmailLog.redolog.isTraceEnabled()) {
+            			ZmailLog.redolog.trace("waiting for %s to finish. running? %s", getName(), mRunning);
             		} else {
-            			ZimbraLog.redolog.info("waiting for %s to finish.", getName());
+            			ZmailLog.redolog.info("waiting for %s to finish.", getName());
             		}
             		join(Constants.MILLIS_PER_MINUTE);
             	}
-            	ZimbraLog.redolog.info("%s finished", getName());
+            	ZmailLog.redolog.info("%s finished", getName());
             } catch (InterruptedException e) {
-                ZimbraLog.redolog.warn("InterruptedException while stopping FsyncThread", e);
+                ZmailLog.redolog.warn("InterruptedException while stopping FsyncThread", e);
             }
         }
     }
@@ -620,9 +620,9 @@ public class FileLogWriter implements LogWriter {
                 try {
                     cb.callback(notif.getCommitId());
                 } catch (OutOfMemoryError e) {
-                    Zimbra.halt("out of memory", e);
+                    Zmail.halt("out of memory", e);
                 } catch (Throwable t) {
-                    ZimbraLog.misc.error("Error while making commit callback", t);
+                    ZmailLog.misc.error("Error while making commit callback", t);
                 }
             }
         }

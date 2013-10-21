@@ -13,7 +13,7 @@
  * ***** END LICENSE BLOCK *****
  */
 
-package com.zimbra.cs.service.util;
+package org.zmail.cs.service.util;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -33,27 +33,27 @@ import com.google.common.base.Objects;
 import com.google.common.base.Strings;
 import com.google.common.collect.Lists;
 import com.sun.mail.smtp.SMTPMessage;
-import com.zimbra.common.localconfig.LC;
-import com.zimbra.common.mime.MimeConstants;
-import com.zimbra.common.mime.shim.JavaMailInternetAddress;
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.common.util.Log;
-import com.zimbra.common.util.LogFactory;
-import com.zimbra.common.util.ZimbraLog;
-import com.zimbra.common.zmime.ZMimeBodyPart;
-import com.zimbra.common.zmime.ZMimeMultipart;
-import com.zimbra.cs.account.Config;
-import com.zimbra.cs.account.Provisioning;
-import com.zimbra.cs.mailbox.MailItem;
-import com.zimbra.cs.mailbox.MailSender;
-import com.zimbra.cs.mailbox.Mailbox;
-import com.zimbra.cs.mailbox.MailboxManager;
-import com.zimbra.cs.mailbox.Message;
-import com.zimbra.cs.mailbox.OperationContext;
-import com.zimbra.cs.mime.MailboxBlobDataSource;
-import com.zimbra.cs.mime.Mime;
-import com.zimbra.cs.store.MailboxBlob;
-import com.zimbra.cs.util.JMSession;
+import org.zmail.common.localconfig.LC;
+import org.zmail.common.mime.MimeConstants;
+import org.zmail.common.mime.shim.JavaMailInternetAddress;
+import org.zmail.common.service.ServiceException;
+import org.zmail.common.util.Log;
+import org.zmail.common.util.LogFactory;
+import org.zmail.common.util.ZmailLog;
+import org.zmail.common.zmime.ZMimeBodyPart;
+import org.zmail.common.zmime.ZMimeMultipart;
+import org.zmail.cs.account.Config;
+import org.zmail.cs.account.Provisioning;
+import org.zmail.cs.mailbox.MailItem;
+import org.zmail.cs.mailbox.MailSender;
+import org.zmail.cs.mailbox.Mailbox;
+import org.zmail.cs.mailbox.MailboxManager;
+import org.zmail.cs.mailbox.Message;
+import org.zmail.cs.mailbox.OperationContext;
+import org.zmail.cs.mime.MailboxBlobDataSource;
+import org.zmail.cs.mime.Mime;
+import org.zmail.cs.store.MailboxBlob;
+import org.zmail.cs.util.JMSession;
 
 public class SpamHandler {
 
@@ -92,7 +92,7 @@ public class SpamHandler {
         MimeMultipart mmp = new ZMimeMultipart("mixed");
 
         MimeBodyPart infoPart = new ZMimeBodyPart();
-        infoPart.setHeader("Content-Description", "Zimbra spam classification report");
+        infoPart.setHeader("Content-Description", "Zmail spam classification report");
         String body = String.format(
             "Classified-By: %s\r\n" +
             "Classified-As: %s\r\n" +
@@ -123,10 +123,10 @@ public class SpamHandler {
 
         out.setRecipient(javax.mail.Message.RecipientType.TO, sr.reportRecipient);
         out.setEnvelopeFrom(config.getSpamReportEnvelopeFrom());
-        out.setSubject("zimbra-spam-report: " + sr.accountName + ": " + isSpamString);
+        out.setSubject("zmail-spam-report: " + sr.accountName + ": " + isSpamString);
         Transport.send(out);
 
-        ZimbraLog.misc.info("Sent " + sr);
+        ZmailLog.misc.info("Sent " + sr);
     }
 
     public static final class SpamReport {
@@ -188,7 +188,7 @@ public class SpamHandler {
         }
     }
 
-    private static final int spamReportQueueSize = LC.zimbra_spam_report_queue_size.intValue();
+    private static final int spamReportQueueSize = LC.zmail_spam_report_queue_size.intValue();
 
     private final Object spamReportQueueLock = new Object();
 
@@ -202,7 +202,7 @@ public class SpamHandler {
                     try {
                         spamReportQueueLock.wait();
                     } catch (InterruptedException ie) {
-                        ZimbraLog.misc.warn("SpamHandler interrupted", ie);
+                        ZmailLog.misc.warn("SpamHandler interrupted", ie);
                     }
                 }
                 workQueue = spamReportQueue;
@@ -210,14 +210,14 @@ public class SpamHandler {
             }
 
             if (workQueue == null) {
-                if (ZimbraLog.misc.isDebugEnabled()) ZimbraLog.misc.debug("SpamHandler nothing to drain");
+                if (ZmailLog.misc.isDebugEnabled()) ZmailLog.misc.debug("SpamHandler nothing to drain");
             } else {
                 for (SpamReport sr : workQueue) {
                     try {
                         sendReport(sr);
                     } catch (Exception e) {
                         /* We don't care what errors occurred, we continue to try and send future reports */
-                        ZimbraLog.misc.warn("exception occurred sending spam report " + sr, e);
+                        ZmailLog.misc.warn("exception occurred sending spam report " + sr, e);
                     }
                 }
             }
@@ -228,11 +228,11 @@ public class SpamHandler {
         synchronized (spamReportQueueLock) {
             for (SpamReport report : reports) {
                 if (spamReportQueue.size() > spamReportQueueSize) {
-                    ZimbraLog.misc.warn("SpamHandler queue size " + spamReportQueue.size() + " too large, ignored " + report);
+                    ZmailLog.misc.warn("SpamHandler queue size " + spamReportQueue.size() + " too large, ignored " + report);
                     continue;
                 }
                 spamReportQueue.add(report);
-                ZimbraLog.misc.debug("SpamHandler enqueued %s", report);
+                ZmailLog.misc.debug("SpamHandler enqueued %s", report);
             }
             spamReportQueueLock.notify();
         }
@@ -282,7 +282,7 @@ public class SpamHandler {
             }
             break;
         default:
-            ZimbraLog.misc.warn("SpamHandler called on unhandled item type=" + type +
+            ZmailLog.misc.warn("SpamHandler called on unhandled item type=" + type +
                     " account=" + report.accountName + " id=" + itemId);
             return;
         }
@@ -291,7 +291,7 @@ public class SpamHandler {
     }
 
     /**
-     * Stores the last known value of <tt>zimbraSpamHeaderValue</tt>.  Used
+     * Stores the last known value of <tt>zmailSpamHeaderValue</tt>.  Used
      * for determining whether {@link #spamPattern} needs to be recompiled.
      */
     private static String spamHeaderValue;
@@ -302,7 +302,7 @@ public class SpamHandler {
     private static Pattern spamPattern;
 
     /**
-     * Stores the last known value of <tt>zimbraSpamWhitelistHeaderValue</tt>.  Used
+     * Stores the last known value of <tt>zmailSpamWhitelistHeaderValue</tt>.  Used
      * for determining whether {@link #whitelistPattern} needs to be recompiled.
      */
     private static String whitelistHeaderValue;
@@ -313,11 +313,11 @@ public class SpamHandler {
     private static Pattern whitelistPattern;
 
     /**
-     * Returns <tt>false</tt> if the value of the header named <tt>zimbraSpamWhitelistHeader</tt>
-     * matches the pattern specified by <tt>zimbraSpamWhitelistHeaderValue</tt>.
+     * Returns <tt>false</tt> if the value of the header named <tt>zmailSpamWhitelistHeader</tt>
+     * matches the pattern specified by <tt>zmailSpamWhitelistHeaderValue</tt>.
      *
-     * If <tt>zimbraSpamWhitelistHeader</tt> does not match, returns <tt>true</tt> if the value of the
-     * header named <tt>zimbraSpamHeader</tt> matches the pattern specified by <tt>zimbraSpamHeaderValue</tt>.
+     * If <tt>zmailSpamWhitelistHeader</tt> does not match, returns <tt>true</tt> if the value of the
+     * header named <tt>zmailSpamHeader</tt> matches the pattern specified by <tt>zmailSpamHeaderValue</tt>.
      */
     public static boolean isSpam(MimeMessage msg) {
         try {
@@ -370,7 +370,7 @@ public class SpamHandler {
                 }
             }
         } catch (Exception e) {
-            ZimbraLog.mailbox.warn("Unable to determine whether the message is spam.", e);
+            ZmailLog.mailbox.warn("Unable to determine whether the message is spam.", e);
         }
         return false;
     }

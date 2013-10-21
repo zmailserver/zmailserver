@@ -14,7 +14,7 @@
  * 
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.service.formatter;
+package org.zmail.cs.service.formatter;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -24,34 +24,34 @@ import java.io.SequenceInputStream;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletResponse;
 
-import com.zimbra.common.localconfig.LC;
-import com.zimbra.common.mime.MimeConstants;
-import com.zimbra.common.mime.MimeDetect;
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.common.util.ByteUtil;
-import com.zimbra.common.util.HttpUtil;
-import com.zimbra.common.util.Log;
-import com.zimbra.common.util.LogFactory;
-import com.zimbra.cs.mailbox.Document;
-import com.zimbra.cs.mailbox.Folder;
-import com.zimbra.cs.mailbox.MailItem;
-import com.zimbra.cs.mailbox.MailServiceException;
-import com.zimbra.cs.mailbox.MailServiceException.NoSuchItemException;
-import com.zimbra.cs.mailbox.Mailbox;
-import com.zimbra.cs.mime.ParsedDocument;
-import com.zimbra.cs.octosync.PatchException;
-import com.zimbra.cs.octosync.PatchInputStream;
-import com.zimbra.cs.octosync.store.BlobStore;
-import com.zimbra.cs.octosync.store.PatchStore;
-import com.zimbra.cs.octosync.store.PatchStore.StoredPatch;
-import com.zimbra.cs.octosync.store.StoreManagerBasedTempBlobStore;
-import com.zimbra.cs.service.UserServlet;
-import com.zimbra.cs.service.UserServletContext;
-import com.zimbra.cs.service.UserServletException;
-import com.zimbra.cs.service.formatter.FormatterFactory.FormatType;
-import com.zimbra.cs.service.mail.UploadScanner;
-import com.zimbra.cs.store.Blob;
-import com.zimbra.cs.store.StoreManager;
+import org.zmail.common.localconfig.LC;
+import org.zmail.common.mime.MimeConstants;
+import org.zmail.common.mime.MimeDetect;
+import org.zmail.common.service.ServiceException;
+import org.zmail.common.util.ByteUtil;
+import org.zmail.common.util.HttpUtil;
+import org.zmail.common.util.Log;
+import org.zmail.common.util.LogFactory;
+import org.zmail.cs.mailbox.Document;
+import org.zmail.cs.mailbox.Folder;
+import org.zmail.cs.mailbox.MailItem;
+import org.zmail.cs.mailbox.MailServiceException;
+import org.zmail.cs.mailbox.MailServiceException.NoSuchItemException;
+import org.zmail.cs.mailbox.Mailbox;
+import org.zmail.cs.mime.ParsedDocument;
+import org.zmail.cs.octosync.PatchException;
+import org.zmail.cs.octosync.PatchInputStream;
+import org.zmail.cs.octosync.store.BlobStore;
+import org.zmail.cs.octosync.store.PatchStore;
+import org.zmail.cs.octosync.store.PatchStore.StoredPatch;
+import org.zmail.cs.octosync.store.StoreManagerBasedTempBlobStore;
+import org.zmail.cs.service.UserServlet;
+import org.zmail.cs.service.UserServletContext;
+import org.zmail.cs.service.UserServletException;
+import org.zmail.cs.service.formatter.FormatterFactory.FormatType;
+import org.zmail.cs.service.mail.UploadScanner;
+import org.zmail.cs.store.Blob;
+import org.zmail.cs.store.StoreManager;
 
 /**
  * Formatter for octopus patches
@@ -161,7 +161,7 @@ public class OctopusPatchFormatter extends Formatter
                     contentType,
                     System.currentTimeMillis(),
                     creator,
-                    context.req.getHeader("X-Zimbra-Description"),
+                    context.req.getHeader("X-Zmail-Description"),
                     true);
 
             log.debug("Parsed document created " + filename);
@@ -185,7 +185,7 @@ public class OctopusPatchFormatter extends Formatter
 
             patchStore.acceptPatch(ip, item.getId(), item.getVersion());
 
-            NativeFormatter.sendZimbraHeaders(context, context.resp, item);
+            NativeFormatter.sendZmailHeaders(context, context.resp, item);
 
         } catch (PatchException e) {
             log.error("Patch upload failed: " + e);
@@ -222,7 +222,7 @@ public class OctopusPatchFormatter extends Formatter
                     (version == -1 ? ", latest version" : (", version: " + version)));
         }
 
-        NativeFormatter.sendZimbraHeaders(context, context.resp, context.target);
+        NativeFormatter.sendZmailHeaders(context, context.resp, context.target);
 
         HttpUtil.Browser browser = HttpUtil.guessBrowser(context.req);
         if (browser == HttpUtil.Browser.IE) {

@@ -13,20 +13,20 @@
  * ***** END LICENSE BLOCK *****
  */
 
-package com.zimbra.cs.filter;
+package org.zmail.cs.filter;
 
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.common.util.ZimbraLog;
-import com.zimbra.cs.account.Account;
-import com.zimbra.cs.account.Provisioning;
-import com.zimbra.cs.mailbox.DeliveryContext;
-import com.zimbra.cs.mailbox.Mailbox;
-import com.zimbra.cs.mailbox.Message;
-import com.zimbra.cs.mailbox.OperationContext;
-import com.zimbra.cs.mime.ParsedMessage;
-import com.zimbra.cs.service.util.ItemId;
-import com.zimbra.cs.service.util.SpamHandler;
-import com.zimbra.soap.mail.type.FilterRule;
+import org.zmail.common.service.ServiceException;
+import org.zmail.common.util.ZmailLog;
+import org.zmail.cs.account.Account;
+import org.zmail.cs.account.Provisioning;
+import org.zmail.cs.mailbox.DeliveryContext;
+import org.zmail.cs.mailbox.Mailbox;
+import org.zmail.cs.mailbox.Message;
+import org.zmail.cs.mailbox.OperationContext;
+import org.zmail.cs.mime.ParsedMessage;
+import org.zmail.cs.service.util.ItemId;
+import org.zmail.cs.service.util.SpamHandler;
+import org.zmail.soap.mail.type.FilterRule;
 
 import org.apache.jsieve.ConfigurationManager;
 import org.apache.jsieve.SieveFactory;
@@ -73,38 +73,38 @@ public final class RuleManager {
         try {
             mgr = new ConfigurationManager();
         } catch (SieveException e) {
-            ZimbraLog.filter.error("Unable to initialize mail filtering extensions.", e);
+            ZmailLog.filter.error("Unable to initialize mail filtering extensions.", e);
             return null;
         }
 
         Map<String, String> commandMap = mgr.getCommandMap();
-        commandMap.put("disabled_if", com.zimbra.cs.filter.jsieve.DisabledIf.class.getName());
-        commandMap.put("tag", com.zimbra.cs.filter.jsieve.Tag.class.getName());
-        commandMap.put("flag", com.zimbra.cs.filter.jsieve.Flag.class.getName());
-        commandMap.put("reply", com.zimbra.cs.filter.jsieve.Reply.class.getName());
-        commandMap.put("notify", com.zimbra.cs.filter.jsieve.Notify.class.getName());
-        commandMap.put("discard", com.zimbra.cs.filter.jsieve.Discard.class.getName());
+        commandMap.put("disabled_if", org.zmail.cs.filter.jsieve.DisabledIf.class.getName());
+        commandMap.put("tag", org.zmail.cs.filter.jsieve.Tag.class.getName());
+        commandMap.put("flag", org.zmail.cs.filter.jsieve.Flag.class.getName());
+        commandMap.put("reply", org.zmail.cs.filter.jsieve.Reply.class.getName());
+        commandMap.put("notify", org.zmail.cs.filter.jsieve.Notify.class.getName());
+        commandMap.put("discard", org.zmail.cs.filter.jsieve.Discard.class.getName());
 
         Map<String, String> testMap = mgr.getTestMap();
-        testMap.put("date", com.zimbra.cs.filter.jsieve.DateTest.class.getName());
-        testMap.put("body", com.zimbra.cs.filter.jsieve.BodyTest.class.getName());
-        testMap.put("attachment", com.zimbra.cs.filter.jsieve.AttachmentTest.class.getName());
-        testMap.put("addressbook", com.zimbra.cs.filter.jsieve.AddressBookTest.class.getName());
-        testMap.put("contact_ranking", com.zimbra.cs.filter.jsieve.ContactRankingTest.class.getName());
-        testMap.put("me", com.zimbra.cs.filter.jsieve.MeTest.class.getName());
-        testMap.put("invite", com.zimbra.cs.filter.jsieve.InviteTest.class.getName());
-        testMap.put("mime_header", com.zimbra.cs.filter.jsieve.MimeHeaderTest.class.getName());
-        testMap.put("current_time", com.zimbra.cs.filter.jsieve.CurrentTimeTest.class.getName());
-        testMap.put("current_day_of_week", com.zimbra.cs.filter.jsieve.CurrentDayOfWeekTest.class.getName());
-        testMap.put("conversation", com.zimbra.cs.filter.jsieve.ConversationTest.class.getName());
-        testMap.put("facebook", com.zimbra.cs.filter.jsieve.FacebookTest.class.getName());
-        testMap.put("linkedin", com.zimbra.cs.filter.jsieve.LinkedInTest.class.getName());
-        testMap.put("socialcast", com.zimbra.cs.filter.jsieve.SocialcastTest.class.getName());
-        testMap.put("twitter", com.zimbra.cs.filter.jsieve.TwitterTest.class.getName());
-        testMap.put("list", com.zimbra.cs.filter.jsieve.ListTest.class.getName());
-        testMap.put("bulk", com.zimbra.cs.filter.jsieve.BulkTest.class.getName());
-        testMap.put("importance", com.zimbra.cs.filter.jsieve.ImportanceTest.class.getName());
-        testMap.put("flagged", com.zimbra.cs.filter.jsieve.FlaggedTest.class.getName());
+        testMap.put("date", org.zmail.cs.filter.jsieve.DateTest.class.getName());
+        testMap.put("body", org.zmail.cs.filter.jsieve.BodyTest.class.getName());
+        testMap.put("attachment", org.zmail.cs.filter.jsieve.AttachmentTest.class.getName());
+        testMap.put("addressbook", org.zmail.cs.filter.jsieve.AddressBookTest.class.getName());
+        testMap.put("contact_ranking", org.zmail.cs.filter.jsieve.ContactRankingTest.class.getName());
+        testMap.put("me", org.zmail.cs.filter.jsieve.MeTest.class.getName());
+        testMap.put("invite", org.zmail.cs.filter.jsieve.InviteTest.class.getName());
+        testMap.put("mime_header", org.zmail.cs.filter.jsieve.MimeHeaderTest.class.getName());
+        testMap.put("current_time", org.zmail.cs.filter.jsieve.CurrentTimeTest.class.getName());
+        testMap.put("current_day_of_week", org.zmail.cs.filter.jsieve.CurrentDayOfWeekTest.class.getName());
+        testMap.put("conversation", org.zmail.cs.filter.jsieve.ConversationTest.class.getName());
+        testMap.put("facebook", org.zmail.cs.filter.jsieve.FacebookTest.class.getName());
+        testMap.put("linkedin", org.zmail.cs.filter.jsieve.LinkedInTest.class.getName());
+        testMap.put("socialcast", org.zmail.cs.filter.jsieve.SocialcastTest.class.getName());
+        testMap.put("twitter", org.zmail.cs.filter.jsieve.TwitterTest.class.getName());
+        testMap.put("list", org.zmail.cs.filter.jsieve.ListTest.class.getName());
+        testMap.put("bulk", org.zmail.cs.filter.jsieve.BulkTest.class.getName());
+        testMap.put("importance", org.zmail.cs.filter.jsieve.ImportanceTest.class.getName());
+        testMap.put("flagged", org.zmail.cs.filter.jsieve.FlaggedTest.class.getName());
         return mgr.build();
     }
 
@@ -125,7 +125,7 @@ public final class RuleManager {
     private static void setRules(Account account, String script, String sieveScriptAttrName, String rulesCacheKey)
             throws ServiceException {
         String accountId = account.getId();
-        ZimbraLog.filter.debug("Setting filter rules for account %s:\n%s", accountId, script);
+        ZmailLog.filter.debug("Setting filter rules for account %s:\n%s", accountId, script);
         if (script == null) {
             script = "";
         }
@@ -139,13 +139,13 @@ public final class RuleManager {
             Provisioning.getInstance().modifyAttrs(account, attrs);
             account.setCachedData(rulesCacheKey, node);
         } catch (ParseException e) {
-            ZimbraLog.filter.error("Unable to parse script:\n" + script);
+            ZmailLog.filter.error("Unable to parse script:\n" + script);
             throw ServiceException.PARSE_ERROR("parsing Sieve script", e);
         } catch (TokenMgrError e) {
-            ZimbraLog.filter.error("Unable to parse script:\n" + script);
+            ZmailLog.filter.error("Unable to parse script:\n" + script);
             throw ServiceException.PARSE_ERROR("parsing Sieve script", e);
         } catch (SieveException e) {
-            ZimbraLog.filter.error("Unable to evaluate script:\n" + script);
+            ZmailLog.filter.error("Unable to evaluate script:\n" + script);
             throw ServiceException.PARSE_ERROR("evaluating Sieve script", e);
         }
     }
@@ -164,14 +164,14 @@ public final class RuleManager {
      * Returns the incoming filter rules Sieve script for the given account.
      */
     public static String getIncomingRules(Account account) {
-        return getRules(account, Provisioning.A_zimbraMailSieveScript);
+        return getRules(account, Provisioning.A_zmailMailSieveScript);
     }
 
     /**
      * Returns the outgoing filter rules Sieve script for the given account.
      */
     public static String getOutgoingRules(Account account) {
-        return getRules(account, Provisioning.A_zimbraMailOutgoingSieveScript);
+        return getRules(account, Provisioning.A_zmailMailOutgoingSieveScript);
     }
 
     private static String getRules(Account account, String sieveScriptAttrName) {
@@ -181,7 +181,7 @@ public final class RuleManager {
     /**
      * Returns the parsed filter rules for the given account.  If no cached
      * copy of the parsed rules exists, parses the script returned by
-     * {@link #getRules(com.zimbra.cs.account.Account, String)} and caches the result on the <tt>Account</tt>.
+     * {@link #getRules(org.zmail.cs.account.Account, String)} and caches the result on the <tt>Account</tt>.
      *
      * @see Account#setCachedData(String, Object)
      * @throws ParseException if there was an error while parsing the Sieve script
@@ -206,7 +206,7 @@ public final class RuleManager {
      * @param account the user account
      */
     public static List<FilterRule> getIncomingRulesAsXML(Account account) throws ServiceException {
-        return getRulesAsXML(account, Provisioning.A_zimbraMailSieveScript, FILTER_RULES_CACHE_KEY);
+        return getRulesAsXML(account, Provisioning.A_zmailMailSieveScript, FILTER_RULES_CACHE_KEY);
     }
 
     /**
@@ -215,7 +215,7 @@ public final class RuleManager {
      * @param account the user account
      */
     public static List<FilterRule> getOutgoingRulesAsXML(Account account) throws ServiceException {
-        return getRulesAsXML(account, Provisioning.A_zimbraMailOutgoingSieveScript, OUTGOING_FILTER_RULES_CACHE_KEY);
+        return getRulesAsXML(account, Provisioning.A_zmailMailOutgoingSieveScript, OUTGOING_FILTER_RULES_CACHE_KEY);
     }
 
     private static List<FilterRule> getRulesAsXML(Account account, String sieveScriptAttrName,
@@ -252,7 +252,7 @@ public final class RuleManager {
                     }
                 }
             } catch (IOException e) {
-                ZimbraLog.filter.warn("Unable to determine filter rule names.", e);
+                ZmailLog.filter.warn("Unable to determine filter rule names.", e);
             }
         }
         return names;
@@ -290,7 +290,7 @@ public final class RuleManager {
                 }
             }
         } catch (IOException e) {
-            ZimbraLog.filter.warn("Unable to get rule %s from script:\n%s.", ruleName, script, e);
+            ZmailLog.filter.warn("Unable to get rule %s from script:\n%s.", ruleName, script, e);
         }
 
         if (buf.length() > 0) {
@@ -301,11 +301,11 @@ public final class RuleManager {
     }
 
     public static void setIncomingXMLRules(Account account, List<FilterRule> rules) throws ServiceException {
-        setXMLRules(account, rules, Provisioning.A_zimbraMailSieveScript, FILTER_RULES_CACHE_KEY);
+        setXMLRules(account, rules, Provisioning.A_zmailMailSieveScript, FILTER_RULES_CACHE_KEY);
     }
 
     public static void setOutgoingXMLRules(Account account, List<FilterRule> rules) throws ServiceException {
-        setXMLRules(account, rules, Provisioning.A_zimbraMailOutgoingSieveScript, OUTGOING_FILTER_RULES_CACHE_KEY);
+        setXMLRules(account, rules, Provisioning.A_zmailMailOutgoingSieveScript, OUTGOING_FILTER_RULES_CACHE_KEY);
     }
 
     private static void setXMLRules(Account account,List<FilterRule> rules, String sieveScriptAttrName,
@@ -338,12 +338,12 @@ public final class RuleManager {
         List<ItemId> addedMessageIds = null;
         IncomingMessageHandler handler = new IncomingMessageHandler(
             octxt, sharedDeliveryCtxt, mailbox, recipient, pm, size, incomingFolderId, noICal);
-        ZimbraMailAdapter mailAdapter = new ZimbraMailAdapter(mailbox, handler);
+        ZmailMailAdapter mailAdapter = new ZmailMailAdapter(mailbox, handler);
         mailAdapter.setAllowFilterToMountpoint(allowFilterToMountpoint);
 
         try {
             Account account = mailbox.getAccount();
-            Node node = getRulesNode(account, Provisioning.A_zimbraMailSieveScript, FILTER_RULES_CACHE_KEY);
+            Node node = getRulesNode(account, Provisioning.A_zmailMailSieveScript, FILTER_RULES_CACHE_KEY);
 
             // Determine whether to apply rules
             boolean applyRules = true;
@@ -351,7 +351,7 @@ public final class RuleManager {
                 applyRules = false;
             }
             if (SpamHandler.isSpam(handler.getMimeMessage()) &&
-                    !account.getBooleanAttr(Provisioning.A_zimbraSpamApplyUserFilters, false)) {
+                    !account.getBooleanAttr(Provisioning.A_zmailSpamApplyUserFilters, false)) {
                 // Don't apply user filters to spam by default
                 applyRules = false;
             }
@@ -362,12 +362,12 @@ public final class RuleManager {
                 addedMessageIds = mailAdapter.getAddedMessageIds();
             }
         } catch (Exception e) {
-            ZimbraLog.filter.warn("An error occurred while processing filter rules. Filing message to %s.",
+            ZmailLog.filter.warn("An error occurred while processing filter rules. Filing message to %s.",
                 handler.getDefaultFolderPath(), e);
         } catch (TokenMgrError e) {
             // Workaround for bug 19576.  Certain parse errors can cause JavaCC to throw an Error
             // instead of an Exception.  Woo.
-            ZimbraLog.filter.warn("An error occurred while processing filter rules. Filing message to %s.",
+            ZmailLog.filter.warn("An error occurred while processing filter rules. Filing message to %s.",
                 handler.getDefaultFolderPath(), e);
         }
         if (addedMessageIds == null) {
@@ -387,20 +387,20 @@ public final class RuleManager {
         List<ItemId> addedMessageIds = null;
         OutgoingMessageHandler handler = new OutgoingMessageHandler(
             mailbox, pm, sentFolderId, noICal, flags, tags, convId, octxt);
-        ZimbraMailAdapter mailAdapter = new ZimbraMailAdapter(mailbox, handler);
+        ZmailMailAdapter mailAdapter = new ZmailMailAdapter(mailbox, handler);
         try {
             Account account = mailbox.getAccount();
-            Node node = getRulesNode(account, Provisioning.A_zimbraMailOutgoingSieveScript, OUTGOING_FILTER_RULES_CACHE_KEY);
+            Node node = getRulesNode(account, Provisioning.A_zmailMailOutgoingSieveScript, OUTGOING_FILTER_RULES_CACHE_KEY);
             if (node != null) {
                 SIEVE_FACTORY.evaluate(mailAdapter, node);
                 // multiple fileinto may result in multiple copies of the messages in different folders
                 addedMessageIds = mailAdapter.getAddedMessageIds();
             }
         } catch (Exception e) {
-            ZimbraLog.filter.warn("An error occurred while processing filter rules. Filing message to %s.",
+            ZmailLog.filter.warn("An error occurred while processing filter rules. Filing message to %s.",
                 handler.getDefaultFolderPath(), e);
         } catch (TokenMgrError e) {
-            ZimbraLog.filter.warn("An error occurred while processing filter rules. Filing message to %s.",
+            ZmailLog.filter.warn("An error occurred while processing filter rules. Filing message to %s.",
                 handler.getDefaultFolderPath(), e);
         }
         if (addedMessageIds == null) {
@@ -416,7 +416,7 @@ public final class RuleManager {
     throws ServiceException {
         Message msg = mbox.getMessageById(octxt, messageId);
         ExistingMessageHandler handler = new ExistingMessageHandler(octxt, mbox, messageId, (int) msg.getSize());
-        ZimbraMailAdapter mailAdapter = new ZimbraMailAdapter(mbox, handler);
+        ZmailMailAdapter mailAdapter = new ZmailMailAdapter(mbox, handler);
 
         try {
             SIEVE_FACTORY.evaluate(mailAdapter, node);
@@ -446,8 +446,8 @@ public final class RuleManager {
      */
     public static void folderRenamed(Account account, String originalPath, String newPath)
     throws ServiceException {
-        folderRenamed(account, originalPath, newPath, Provisioning.A_zimbraMailSieveScript, FILTER_RULES_CACHE_KEY);
-        folderRenamed(account, originalPath, newPath, Provisioning.A_zimbraMailOutgoingSieveScript, OUTGOING_FILTER_RULES_CACHE_KEY);
+        folderRenamed(account, originalPath, newPath, Provisioning.A_zmailMailSieveScript, FILTER_RULES_CACHE_KEY);
+        folderRenamed(account, originalPath, newPath, Provisioning.A_zmailMailOutgoingSieveScript, OUTGOING_FILTER_RULES_CACHE_KEY);
     }
 
     private static void folderRenamed(Account account, String originalPath, String newPath, String sieveScriptAttrName, String rulesCacheKey)
@@ -458,7 +458,7 @@ public final class RuleManager {
             try {
                 node = parse(script);
             } catch (ParseException e) {
-                ZimbraLog.filter.warn("Unable to update filter rules with new folder path '%s'.", e);
+                ZmailLog.filter.warn("Unable to update filter rules with new folder path '%s'.", e);
                 return;
             }
             FolderRenamer renamer = new FolderRenamer(originalPath, newPath);
@@ -474,9 +474,9 @@ public final class RuleManager {
                 SoapToSieve soapToSieve = new SoapToSieve(sieveToSoap.toFilterRules());
                 String newScript = soapToSieve.getSieveScript();
                 setRules(account, newScript, sieveScriptAttrName, rulesCacheKey);
-                ZimbraLog.filter.info("Updated %s due to folder move or rename from %s to %s.",
+                ZmailLog.filter.info("Updated %s due to folder move or rename from %s to %s.",
                     sieveScriptAttrName, originalPath, newPath);
-                ZimbraLog.filter.debug("Old rules:\n%s, new rules:\n%s", script, newScript);
+                ZmailLog.filter.debug("Old rules:\n%s, new rules:\n%s", script, newScript);
             }
         }
     }
@@ -486,8 +486,8 @@ public final class RuleManager {
      */
     public static void folderDeleted(Account account, String originalPath)
     throws ServiceException {
-        folderDeleted(account, originalPath, Provisioning.A_zimbraMailSieveScript, FILTER_RULES_CACHE_KEY);
-        folderDeleted(account, originalPath, Provisioning.A_zimbraMailOutgoingSieveScript, OUTGOING_FILTER_RULES_CACHE_KEY);
+        folderDeleted(account, originalPath, Provisioning.A_zmailMailSieveScript, FILTER_RULES_CACHE_KEY);
+        folderDeleted(account, originalPath, Provisioning.A_zmailMailOutgoingSieveScript, OUTGOING_FILTER_RULES_CACHE_KEY);
     }
 
     private static void folderDeleted(Account account, String originalPath, String sieveScriptAttrName, String rulesCacheKey)
@@ -498,7 +498,7 @@ public final class RuleManager {
             try {
                 node = parse(script);
             } catch (ParseException e) {
-                ZimbraLog.filter.warn("Unable to update filter rules after folder '%s' was deleted.", originalPath, e);
+                ZmailLog.filter.warn("Unable to update filter rules after folder '%s' was deleted.", originalPath, e);
                 return;
             }
             FolderDeleted deleted = new FolderDeleted(originalPath);
@@ -515,8 +515,8 @@ public final class RuleManager {
                 SoapToSieve soapToSieve = new SoapToSieve(sieveToSoap.toFilterRules());
                 String newScript = soapToSieve.getSieveScript();
                 setRules(account, newScript, sieveScriptAttrName, rulesCacheKey);
-                ZimbraLog.filter.info("Updated %s filter rules after folder %s was deleted.", sieveScriptAttrName, originalPath);
-                ZimbraLog.filter.debug("Old rules:\n%s, new rules:\n%s", script, newScript);
+                ZmailLog.filter.info("Updated %s filter rules after folder %s was deleted.", sieveScriptAttrName, originalPath);
+                ZmailLog.filter.debug("Old rules:\n%s, new rules:\n%s", script, newScript);
             }
         }
     }
@@ -527,8 +527,8 @@ public final class RuleManager {
      */
     public static void tagRenamed(Account account, String originalName, String newName)
     throws ServiceException {
-        tagRenamed(account, originalName, newName, Provisioning.A_zimbraMailSieveScript, FILTER_RULES_CACHE_KEY);
-        tagRenamed(account, originalName, newName, Provisioning.A_zimbraMailOutgoingSieveScript, OUTGOING_FILTER_RULES_CACHE_KEY);
+        tagRenamed(account, originalName, newName, Provisioning.A_zmailMailSieveScript, FILTER_RULES_CACHE_KEY);
+        tagRenamed(account, originalName, newName, Provisioning.A_zmailMailOutgoingSieveScript, OUTGOING_FILTER_RULES_CACHE_KEY);
     }
 
     private static void tagRenamed(Account account, String originalName, String newName, String sieveScriptAttrName, String rulesCacheKey)
@@ -538,17 +538,17 @@ public final class RuleManager {
             String newRules = rules.replace("tag \"" + originalName + "\"", "tag \"" + newName + "\"");
             if (!newRules.equals(rules)) {
                 setRules(account, newRules, sieveScriptAttrName, rulesCacheKey);
-                ZimbraLog.filter.info("Updated %s due to tag rename from %s to %s.",
+                ZmailLog.filter.info("Updated %s due to tag rename from %s to %s.",
                     sieveScriptAttrName, originalName, newName);
-                ZimbraLog.filter.debug("Old rules:\n%s, new rules:\n%s", rules, newRules);
+                ZmailLog.filter.debug("Old rules:\n%s, new rules:\n%s", rules, newRules);
             }
         }
     }
 
     public static void tagDeleted(Account account, String tagName)
     throws ServiceException {
-        tagDeleted(account, tagName, Provisioning.A_zimbraMailSieveScript, FILTER_RULES_CACHE_KEY);
-        tagDeleted(account, tagName, Provisioning.A_zimbraMailOutgoingSieveScript, OUTGOING_FILTER_RULES_CACHE_KEY);
+        tagDeleted(account, tagName, Provisioning.A_zmailMailSieveScript, FILTER_RULES_CACHE_KEY);
+        tagDeleted(account, tagName, Provisioning.A_zmailMailOutgoingSieveScript, OUTGOING_FILTER_RULES_CACHE_KEY);
     }
 
     private static void tagDeleted(Account account, String tagName, String sieveScriptAttrName, String rulesCacheKey)
@@ -559,7 +559,7 @@ public final class RuleManager {
             try {
                 node = parse(script);
             } catch (ParseException e) {
-                ZimbraLog.filter.warn("Unable to update %s after tag '%s' was deleted.", sieveScriptAttrName, tagName, e);
+                ZmailLog.filter.warn("Unable to update %s after tag '%s' was deleted.", sieveScriptAttrName, tagName, e);
                 return;
             }
             TagDeleted deleted = new TagDeleted(tagName);
@@ -576,8 +576,8 @@ public final class RuleManager {
                 SoapToSieve soapToSieve = new SoapToSieve(sieveToSoap.toFilterRules());
                 String newScript = soapToSieve.getSieveScript();
                 setRules(account, newScript, sieveScriptAttrName, rulesCacheKey);
-                ZimbraLog.filter.info("Updated %s after tag %s was deleted.", sieveScriptAttrName, tagName);
-                ZimbraLog.filter.debug("Old rules:\n%s, new rules:\n%s", script, newScript);
+                ZmailLog.filter.info("Updated %s after tag %s was deleted.", sieveScriptAttrName, tagName);
+                ZmailLog.filter.debug("Old rules:\n%s, new rules:\n%s", script, newScript);
             }
         }
     }

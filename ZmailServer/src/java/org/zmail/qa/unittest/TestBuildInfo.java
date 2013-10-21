@@ -12,12 +12,12 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.qa.unittest;
+package org.zmail.qa.unittest;
 
 import org.junit.*;
 import static org.junit.Assert.*;
 
-import com.zimbra.cs.account.AttributeManager;
+import org.zmail.cs.account.AttributeManager;
 
 
 public class TestBuildInfo  {
@@ -26,14 +26,14 @@ public class TestBuildInfo  {
     public void testInVersion() throws Exception {
         AttributeManager am = AttributeManager.getInstance();
 
-        assertTrue(am.inVersion("zimbraId", "0"));
-        assertTrue(am.inVersion("zimbraId", "5.0.10"));
+        assertTrue(am.inVersion("zmailId", "0"));
+        assertTrue(am.inVersion("zmailId", "5.0.10"));
 
-        assertFalse(am.inVersion("zimbraZimletDomainAvailableZimlets", "5.0.9"));
-        assertTrue(am.inVersion("zimbraZimletDomainAvailableZimlets", "5.0.10"));
-        assertTrue(am.inVersion("zimbraZimletDomainAvailableZimlets", "5.0.11"));
-        assertTrue(am.inVersion("zimbraZimletDomainAvailableZimlets", "5.5"));
-        assertTrue(am.inVersion("zimbraZimletDomainAvailableZimlets", "6"));
+        assertFalse(am.inVersion("zmailZimletDomainAvailableZimlets", "5.0.9"));
+        assertTrue(am.inVersion("zmailZimletDomainAvailableZimlets", "5.0.10"));
+        assertTrue(am.inVersion("zmailZimletDomainAvailableZimlets", "5.0.11"));
+        assertTrue(am.inVersion("zmailZimletDomainAvailableZimlets", "5.5"));
+        assertTrue(am.inVersion("zmailZimletDomainAvailableZimlets", "6"));
     }
 
 }

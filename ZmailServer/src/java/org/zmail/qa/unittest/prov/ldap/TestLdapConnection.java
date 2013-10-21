@@ -12,7 +12,7 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.qa.unittest.prov.ldap;
+package org.zmail.qa.unittest.prov.ldap;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
@@ -29,22 +29,22 @@ import org.junit.Test;
 
 import com.google.common.collect.Lists;
 import com.unboundid.ldap.sdk.LDAPConnectionPool;
-import com.zimbra.common.localconfig.KnownKey;
-import com.zimbra.common.localconfig.LC;
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.cs.ldap.LdapClient;
-import com.zimbra.cs.ldap.LdapConstants;
-import com.zimbra.cs.ldap.LdapUsage;
-import com.zimbra.cs.ldap.LdapServerConfig.ExternalLdapConfig;
-import com.zimbra.cs.ldap.unboundid.LdapConnectionPool;
-import com.zimbra.cs.ldap.unboundid.UBIDLdapContext;
-import com.zimbra.qa.unittest.prov.LocalconfigTestUtil;
+import org.zmail.common.localconfig.KnownKey;
+import org.zmail.common.localconfig.LC;
+import org.zmail.common.service.ServiceException;
+import org.zmail.cs.ldap.LdapClient;
+import org.zmail.cs.ldap.LdapConstants;
+import org.zmail.cs.ldap.LdapUsage;
+import org.zmail.cs.ldap.LdapServerConfig.ExternalLdapConfig;
+import org.zmail.cs.ldap.unboundid.LdapConnectionPool;
+import org.zmail.cs.ldap.unboundid.UBIDLdapContext;
+import org.zmail.qa.unittest.prov.LocalconfigTestUtil;
 
 public class TestLdapConnection extends LdapTest {
     
     private static final boolean START_TLS_ENABLED = false;
-    private static final String BIND_DN = LC.zimbra_ldap_userdn.value();
-    private static final String BIND_PASSWORD = LC.zimbra_ldap_password.value();
+    private static final String BIND_DN = LC.zmail_ldap_userdn.value();
+    private static final String BIND_PASSWORD = LC.zmail_ldap_password.value();
     
     // use a different ldap url for each test so they don't get the same connection pool
     private static String LDAP_URL_ON_CHECKOUT;
@@ -54,7 +54,7 @@ public class TestLdapConnection extends LdapTest {
     @BeforeClass
     public static void init() throws Exception {
         LDAP_URL_ON_CHECKOUT = "ldap://" + InetAddress.getLocalHost().getHostName() + ":389";
-        LDAP_URL_AFTER_EXCEPTION = "ldap://" + LC.zimbra_server_hostname.value() + ":389";
+        LDAP_URL_AFTER_EXCEPTION = "ldap://" + LC.zmail_server_hostname.value() + ":389";
         LDAP_URL_BACKGROUND = "ldap://" + "localhost" + ":389";
     }
     
@@ -72,7 +72,7 @@ public class TestLdapConnection extends LdapTest {
     
     private void stopLdap() throws Exception {
         List<String> STOP_LDAP_CMD = new ArrayList<String>();
-        STOP_LDAP_CMD.add("/opt/zimbra/bin/ldap");
+        STOP_LDAP_CMD.add("/opt/zmail/bin/ldap");
         STOP_LDAP_CMD.add("stop");
           
         // System.out.println(STOP_LDAP_CMD.toString());
@@ -87,7 +87,7 @@ public class TestLdapConnection extends LdapTest {
     
     private void startLdap() throws Exception {
         List<String> STOP_LDAP_CMD = new ArrayList<String>();
-        STOP_LDAP_CMD.add("/opt/zimbra/bin/ldap");
+        STOP_LDAP_CMD.add("/opt/zmail/bin/ldap");
         STOP_LDAP_CMD.add("start");
             
         // System.out.println(STOP_LDAP_CMD.toString());

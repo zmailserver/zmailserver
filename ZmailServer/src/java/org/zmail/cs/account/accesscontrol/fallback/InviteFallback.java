@@ -12,18 +12,18 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.account.accesscontrol.fallback;
+package org.zmail.cs.account.accesscontrol.fallback;
 
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.cs.account.Account;
-import com.zimbra.cs.account.Entry;
-import com.zimbra.cs.account.accesscontrol.CheckRightFallback;
-import com.zimbra.cs.account.Provisioning;
-import com.zimbra.cs.mailbox.ACL;
-import com.zimbra.cs.mailbox.acl.FolderACL;
-import com.zimbra.cs.mailbox.Mailbox;
-import com.zimbra.cs.mailbox.OperationContext;
-import com.zimbra.cs.util.Zimbra;
+import org.zmail.common.service.ServiceException;
+import org.zmail.cs.account.Account;
+import org.zmail.cs.account.Entry;
+import org.zmail.cs.account.accesscontrol.CheckRightFallback;
+import org.zmail.cs.account.Provisioning;
+import org.zmail.cs.mailbox.ACL;
+import org.zmail.cs.mailbox.acl.FolderACL;
+import org.zmail.cs.mailbox.Mailbox;
+import org.zmail.cs.mailbox.OperationContext;
+import org.zmail.cs.util.Zmail;
 
 public class InviteFallback extends CheckRightFallback {
     
@@ -34,7 +34,7 @@ public class InviteFallback extends CheckRightFallback {
     //
     protected Boolean doCheckRight(Account authedAcct, Entry target, boolean asAdmin) throws ServiceException {
         // Don't do anything unless running inside the server
-        if (!Zimbra.started())
+        if (!Zmail.started())
             return null;
         
         if (!(target instanceof Account))

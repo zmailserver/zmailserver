@@ -13,9 +13,9 @@
  * ***** END LICENSE BLOCK *****
  */
 
-package com.zimbra.cs.client.soap;
+package org.zmail.cs.client.soap;
 
-import com.zimbra.cs.client.soap.LmcSoapResponse;
+import org.zmail.cs.client.soap.LmcSoapResponse;
 
 public class LmcContactActionResponse extends LmcSoapResponse {
 

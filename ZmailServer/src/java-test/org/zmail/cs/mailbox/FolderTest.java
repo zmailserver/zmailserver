@@ -12,7 +12,7 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.mailbox;
+package org.zmail.cs.mailbox;
 
 import java.util.HashMap;
 import java.util.List;
@@ -22,20 +22,20 @@ import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.common.util.Constants;
-import com.zimbra.common.util.UUIDUtil;
-import com.zimbra.common.util.ZimbraLog;
-import com.zimbra.cs.account.Account;
-import com.zimbra.cs.account.MockProvisioning;
-import com.zimbra.cs.account.Provisioning;
-import com.zimbra.cs.db.DbMailItem;
-import com.zimbra.cs.db.DbResults;
-import com.zimbra.cs.db.DbUtil;
-import com.zimbra.cs.mailbox.MailItem.CustomMetadata;
-import com.zimbra.cs.mailbox.MailServiceException.NoSuchItemException;
-import com.zimbra.cs.mime.ParsedMessage;
-import com.zimbra.qa.unittest.TestUtil;
+import org.zmail.common.service.ServiceException;
+import org.zmail.common.util.Constants;
+import org.zmail.common.util.UUIDUtil;
+import org.zmail.common.util.ZmailLog;
+import org.zmail.cs.account.Account;
+import org.zmail.cs.account.MockProvisioning;
+import org.zmail.cs.account.Provisioning;
+import org.zmail.cs.db.DbMailItem;
+import org.zmail.cs.db.DbResults;
+import org.zmail.cs.db.DbUtil;
+import org.zmail.cs.mailbox.MailItem.CustomMetadata;
+import org.zmail.cs.mailbox.MailServiceException.NoSuchItemException;
+import org.zmail.cs.mime.ParsedMessage;
+import org.zmail.qa.unittest.TestUtil;
 
 /**
  * Unit test for {@link Folder}.
@@ -46,7 +46,7 @@ public final class FolderTest {
     public static void init() throws Exception {
         MailboxTestUtil.initServer();
         Provisioning prov = Provisioning.getInstance();
-        prov.createAccount("test@zimbra.com", "secret", new HashMap<String, Object>());
+        prov.createAccount("test@zmail.com", "secret", new HashMap<String, Object>());
     }
 
     @Before
@@ -62,7 +62,7 @@ public final class FolderTest {
 
     @Test
     public void imapMODSEQ() throws Exception {
-        Account acct = Provisioning.getInstance().getAccountByName("test@zimbra.com");
+        Account acct = Provisioning.getInstance().getAccountByName("test@zmail.com");
         Mailbox mbox = MailboxManager.getInstance().getMailboxByAccount(acct);
 
         // initial state: empty folder
@@ -351,11 +351,11 @@ public final class FolderTest {
 
         // Create three messages and move two of them into a new folder.
         Message m1 = TestUtil.addMessage(mbox, name);
-        ZimbraLog.test.debug("Created message 1, id=" + m1.getId());
+        ZmailLog.test.debug("Created message 1, id=" + m1.getId());
         Message m2 = TestUtil.addMessage(mbox, "RE: " + name);
-        ZimbraLog.test.debug("Created message 2, id=" + m2.getId());
+        ZmailLog.test.debug("Created message 2, id=" + m2.getId());
         Message m3 = TestUtil.addMessage(mbox, "RE: " + name);
-        ZimbraLog.test.debug("Created message 3, id=" + m3.getId());
+        ZmailLog.test.debug("Created message 3, id=" + m3.getId());
 
         Folder f = mbox.createFolder(null, name, Mailbox.ID_FOLDER_INBOX, new Folder.FolderOptions());
         mbox.move(null, m1.getId(), m1.getType(), f.getId());

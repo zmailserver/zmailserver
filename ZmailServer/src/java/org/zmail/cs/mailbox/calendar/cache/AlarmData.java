@@ -13,11 +13,11 @@
  * ***** END LICENSE BLOCK *****
  */
 
-package com.zimbra.cs.mailbox.calendar.cache;
+package org.zmail.cs.mailbox.calendar.cache;
 
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.cs.mailbox.Metadata;
-import com.zimbra.cs.mailbox.calendar.Alarm;
+import org.zmail.common.service.ServiceException;
+import org.zmail.cs.mailbox.Metadata;
+import org.zmail.cs.mailbox.calendar.Alarm;
 
 public class AlarmData {
     private long mNextAt = Long.MAX_VALUE;

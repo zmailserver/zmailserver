@@ -1,7 +1,7 @@
 /*
  * ***** BEGIN LICENSE BLOCK *****
  * Zimbra Collaboration Suite Server
- * Copyright (C) 2010, 2011 Zimbra, Inc.
+ * Copyright (C) 2010, 2011 Zmail, Inc.
  *
  * The contents of this file are subject to the Zimbra Public License
  * Version 1.3 ("License"); you may not use this file except in
@@ -34,7 +34,7 @@ import org.apache.mina.transport.socket.SocketSessionConfig;
 import org.apache.mina.transport.socket.nio.NioProcessor;
 
 /**
- * Zimbra patched version of {@code NioSocketAcceptor}.
+ * Zmail patched version of {@code NioSocketAcceptor}.
  * <p>
  * The original {@code NioSocketAcceptor} does not accept a pre-bound server socket when starting a new listener. This
  * is necessary in order for us to pre-bind server socket channel to privileged port as {@code root} using Jetty's
@@ -47,31 +47,31 @@ import org.apache.mina.transport.socket.nio.NioProcessor;
  *
  * @author ysasaki
  */
-public final class ZimbraSocketAcceptor extends AbstractPollingIoAcceptor<NioSession, ServerSocketChannel>
+public final class ZmailSocketAcceptor extends AbstractPollingIoAcceptor<NioSession, ServerSocketChannel>
         implements SocketAcceptor {
 
     private volatile Selector selector;
     private final ServerSocketChannel channel;
 
-    public ZimbraSocketAcceptor(ServerSocketChannel channel) {
+    public ZmailSocketAcceptor(ServerSocketChannel channel) {
         super(new DefaultSocketSessionConfig(), NioProcessor.class);
         ((DefaultSocketSessionConfig) getSessionConfig()).init(this);
         this.channel = channel;
     }
 
-    public ZimbraSocketAcceptor(ServerSocketChannel channel, int processorCount) {
+    public ZmailSocketAcceptor(ServerSocketChannel channel, int processorCount) {
         super(new DefaultSocketSessionConfig(), NioProcessor.class, processorCount);
         ((DefaultSocketSessionConfig) getSessionConfig()).init(this);
         this.channel = channel;
     }
 
-    public ZimbraSocketAcceptor(ServerSocketChannel channel, IoProcessor<NioSession> processor) {
+    public ZmailSocketAcceptor(ServerSocketChannel channel, IoProcessor<NioSession> processor) {
         super(new DefaultSocketSessionConfig(), processor);
         ((DefaultSocketSessionConfig) getSessionConfig()).init(this);
         this.channel = channel;
     }
 
-    public ZimbraSocketAcceptor(ServerSocketChannel channel, Executor executor, IoProcessor<NioSession> processor) {
+    public ZmailSocketAcceptor(ServerSocketChannel channel, Executor executor, IoProcessor<NioSession> processor) {
         super(new DefaultSocketSessionConfig(), executor, processor);
         ((DefaultSocketSessionConfig) getSessionConfig()).init(this);
         this.channel = channel;

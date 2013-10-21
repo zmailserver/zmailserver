@@ -13,47 +13,47 @@
  * ***** END LICENSE BLOCK *****
  */
 
-package com.zimbra.qa.unittest;
+package org.zmail.qa.unittest;
 
 import com.google.common.collect.Maps;
-import com.zimbra.common.account.Key;
-import com.zimbra.common.account.Key.AccountBy;
-import com.zimbra.common.util.ZimbraLog;
-import com.zimbra.cs.account.Account;
-import com.zimbra.cs.account.CalendarResource;
-import com.zimbra.cs.account.Config;
-import com.zimbra.cs.account.Cos;
-import com.zimbra.cs.account.DistributionList;
-import com.zimbra.cs.account.Domain;
-import com.zimbra.cs.account.Identity;
-import com.zimbra.cs.account.Provisioning;
-import com.zimbra.cs.account.Provisioning.CountAccountResult;
-import com.zimbra.cs.account.Provisioning.RightsDoc;
-import com.zimbra.cs.account.Server;
-import com.zimbra.cs.account.accesscontrol.Right;
-import com.zimbra.cs.account.accesscontrol.RightClass;
-import com.zimbra.cs.account.accesscontrol.RightCommand.AllEffectiveRights;
-import com.zimbra.cs.account.accesscontrol.RightCommand.EffectiveRights;
-import com.zimbra.cs.account.auth.AuthContext;
-import com.zimbra.cs.account.soap.SoapAccountInfo;
-import com.zimbra.cs.account.soap.SoapProvisioning;
-import com.zimbra.cs.account.soap.SoapProvisioning.MailboxInfo;
-import com.zimbra.cs.account.soap.SoapProvisioning.QuotaUsage;
-import com.zimbra.cs.account.soap.SoapProvisioning.ReIndexInfo;
-import com.zimbra.cs.account.soap.SoapProvisioning.VerifyIndexResult;
-import com.zimbra.soap.admin.message.GetLicenseInfoRequest;
-import com.zimbra.soap.admin.message.GetLicenseInfoResponse;
-import com.zimbra.soap.admin.message.GetServerNIfsRequest;
-import com.zimbra.soap.admin.message.GetServerNIfsResponse;
-import com.zimbra.soap.admin.message.GetVersionInfoRequest;
-import com.zimbra.soap.admin.message.GetVersionInfoResponse;
-import com.zimbra.soap.admin.type.CacheEntryType;
-import com.zimbra.soap.admin.type.LicenseExpirationInfo;
-import com.zimbra.soap.admin.type.NetworkInformation;
-import com.zimbra.soap.admin.type.ServerSelector;
-import com.zimbra.soap.admin.type.VersionInfo;
+import org.zmail.common.account.Key;
+import org.zmail.common.account.Key.AccountBy;
+import org.zmail.common.util.ZmailLog;
+import org.zmail.cs.account.Account;
+import org.zmail.cs.account.CalendarResource;
+import org.zmail.cs.account.Config;
+import org.zmail.cs.account.Cos;
+import org.zmail.cs.account.DistributionList;
+import org.zmail.cs.account.Domain;
+import org.zmail.cs.account.Identity;
+import org.zmail.cs.account.Provisioning;
+import org.zmail.cs.account.Provisioning.CountAccountResult;
+import org.zmail.cs.account.Provisioning.RightsDoc;
+import org.zmail.cs.account.Server;
+import org.zmail.cs.account.accesscontrol.Right;
+import org.zmail.cs.account.accesscontrol.RightClass;
+import org.zmail.cs.account.accesscontrol.RightCommand.AllEffectiveRights;
+import org.zmail.cs.account.accesscontrol.RightCommand.EffectiveRights;
+import org.zmail.cs.account.auth.AuthContext;
+import org.zmail.cs.account.soap.SoapAccountInfo;
+import org.zmail.cs.account.soap.SoapProvisioning;
+import org.zmail.cs.account.soap.SoapProvisioning.MailboxInfo;
+import org.zmail.cs.account.soap.SoapProvisioning.QuotaUsage;
+import org.zmail.cs.account.soap.SoapProvisioning.ReIndexInfo;
+import org.zmail.cs.account.soap.SoapProvisioning.VerifyIndexResult;
+import org.zmail.soap.admin.message.GetLicenseInfoRequest;
+import org.zmail.soap.admin.message.GetLicenseInfoResponse;
+import org.zmail.soap.admin.message.GetServerNIfsRequest;
+import org.zmail.soap.admin.message.GetServerNIfsResponse;
+import org.zmail.soap.admin.message.GetVersionInfoRequest;
+import org.zmail.soap.admin.message.GetVersionInfoResponse;
+import org.zmail.soap.admin.type.CacheEntryType;
+import org.zmail.soap.admin.type.LicenseExpirationInfo;
+import org.zmail.soap.admin.type.NetworkInformation;
+import org.zmail.soap.admin.type.ServerSelector;
+import org.zmail.soap.admin.type.VersionInfo;
 import junit.framework.TestCase;
-import com.zimbra.soap.type.TargetBy;
+import org.zmail.soap.type.TargetBy;
 
 import java.util.List;
 import java.util.Map;
@@ -92,7 +92,7 @@ public class TestJaxbProvisioning extends TestCase {
     }
 
     public void oneTimeTearDown() {
-        ZimbraLog.test.info("in TestJaxbProvisioning oneTimeTearDown");
+        ZmailLog.test.info("in TestJaxbProvisioning oneTimeTearDown");
     }
 
     @Override
@@ -103,7 +103,7 @@ public class TestJaxbProvisioning extends TestCase {
 
     @Override
     public void tearDown() throws Exception {
-        ZimbraLog.test.debug("in TestJaxbProvisioning tearDown");
+        ZmailLog.test.debug("in TestJaxbProvisioning tearDown");
         if (prov == null)
             prov = TestUtil.newSoapProvisioning();
         TestUtil.deleteAccount(testAcctEmail);
@@ -124,61 +124,61 @@ public class TestJaxbProvisioning extends TestCase {
 
     public void deleteDomainIfExists(String name) {
         try {
-            ZimbraLog.test.debug(
+            ZmailLog.test.debug(
                     "Deleting domain " + name);
             Domain res = prov.get(Key.DomainBy.name, name);
             if (res != null)
                 prov.deleteDomain(res.getId());
         } catch (Exception ex) {
-            ZimbraLog.test.error("Problem deleting domain " + name, ex);
+            ZmailLog.test.error("Problem deleting domain " + name, ex);
         }
     }
 
     public void deleteServerIfExists(String name) {
         try {
-            ZimbraLog.test.debug(
+            ZmailLog.test.debug(
                     "Deleting server " + name);
             Server res = prov.get(Key.ServerBy.name, name);
             if (res != null)
                 prov.deleteServer(res.getId());
         } catch (Exception ex) {
-            ZimbraLog.test.error("Problem deleting server " + name, ex);
+            ZmailLog.test.error("Problem deleting server " + name, ex);
         }
     }
 
     public void deleteCalendarResourceIfExists(String name) {
         try {
-            ZimbraLog.test.debug(
+            ZmailLog.test.debug(
                     "Deleting CalendarResource " + name);
             CalendarResource res = prov.get(Key.CalendarResourceBy.name, name);
             if (res != null)
                 prov.deleteDomain(res.getId());
         } catch (Exception ex) {
-            ZimbraLog.test.error("Problem deleting Calendar Resource " +
+            ZmailLog.test.error("Problem deleting Calendar Resource " +
                     name, ex);
         }
     }
 
     public void deleteDlIfExists(String name) {
         try {
-            ZimbraLog.test.debug(
+            ZmailLog.test.debug(
                     "Deleting DL " + name);
             DistributionList res = prov.get(Key.DistributionListBy.name, name);
             if (res != null)
                 prov.deleteDistributionList(res.getId());
         } catch (Exception ex) {
-            ZimbraLog.test.error("Problem deleting Distribution List " + name, ex);
+            ZmailLog.test.error("Problem deleting Distribution List " + name, ex);
         }
     }
 
     public void deleteCosIfExists(String name) {
         try {
-            ZimbraLog.test.debug("Deleting COS " + name);
+            ZmailLog.test.debug("Deleting COS " + name);
             Cos res = prov.get(Key.CosBy.name, name);
             if (res != null)
                 prov.deleteCos(res.getId());
         } catch (Exception ex) {
-            ZimbraLog.test.error("Problem deleting Cos " + name, ex);
+            ZmailLog.test.error("Problem deleting Cos " + name, ex);
         }
     }
 
@@ -186,13 +186,13 @@ public class TestJaxbProvisioning extends TestCase {
     throws Exception {
         Domain dom = prov.get(Key.DomainBy.name, name);
         if (dom == null) {
-            ZimbraLog.test.debug("ensureDomainExists didn't exist - creating new domain=" + name);
+            ZmailLog.test.debug("ensureDomainExists didn't exist - creating new domain=" + name);
             dom = prov.createDomain(name, null);
         }
         if (dom == null) {
-            ZimbraLog.test.debug("ensureDomainExists returning null!!!");
+            ZmailLog.test.debug("ensureDomainExists returning null!!!");
         } else {
-            ZimbraLog.test.debug("ensureDomainExists Returning=" + dom.getName() + " Id=" + dom.getId());
+            ZmailLog.test.debug("ensureDomainExists Returning=" + dom.getName() + " Id=" + dom.getId());
         }
         return dom;
     }
@@ -205,9 +205,9 @@ public class TestJaxbProvisioning extends TestCase {
         if (acct == null)
             acct = TestUtil.createAccount(name);
         if (acct == null) {
-            ZimbraLog.test.debug("ensureAccountExists returning null!!!");
+            ZmailLog.test.debug("ensureAccountExists returning null!!!");
         } else {
-            ZimbraLog.test.debug("ensureAccountExists Returning Account=" + acct.getName() + " Id=" + acct.getId());
+            ZmailLog.test.debug("ensureAccountExists Returning Account=" + acct.getName() + " Id=" + acct.getId());
         }
         return acct;
     }
@@ -216,13 +216,13 @@ public class TestJaxbProvisioning extends TestCase {
     throws Exception {
         Account acct = ensureAccountExists(name);
         if (acct == null) {
-            ZimbraLog.test.debug("ensureMailboxExists returning null!!!");
+            ZmailLog.test.debug("ensureMailboxExists returning null!!!");
         } else {
             // The act of getting a mailbox is sufficient to create it if the associated account exists.
             // Note that prov.getAccount() USED TO implicitly created a mailbox even though it was not really
             // supposed to and this routine used to rely on that.
             MailboxInfo mboxInfo = prov.getMailbox(acct);
-            ZimbraLog.test.debug("ensureMailboxExists Returning Mailbox=" + mboxInfo.getMailboxId() +
+            ZmailLog.test.debug("ensureMailboxExists Returning Mailbox=" + mboxInfo.getMailboxId() +
                     " Account=" + acct.getName() + " Id=" + acct.getId());
         }
         return acct;
@@ -249,15 +249,15 @@ public class TestJaxbProvisioning extends TestCase {
     }
 
     public void testConfig() throws Exception {
-        ZimbraLog.test.debug("Starting testConfig");
+        ZmailLog.test.debug("Starting testConfig");
         Config cfg = prov.getConfig();
         assertNotNull("Config" , cfg);
-        cfg = prov.getConfig("zimbra_user");
+        cfg = prov.getConfig("zmail_user");
         assertNotNull("Config" , cfg);
     }
 
     public void testServer() throws Exception {
-        ZimbraLog.test.debug("Starting testServer");
+        ZmailLog.test.debug("Starting testServer");
         Domain dom = ensureDomainExists(testServer);
         assertNotNull("Domain for " + testAcctDomainName, dom);
         Server svr = prov.createServer(testServer, null);
@@ -271,7 +271,7 @@ public class TestJaxbProvisioning extends TestCase {
    }
 
     public void testAccount() throws Exception {
-        ZimbraLog.test.debug("Starting testAccount");
+        ZmailLog.test.debug("Starting testAccount");
         Domain dom = ensureDomainExists(testAcctDomainName);
         assertNotNull("Domain for " + testAcctDomainName, dom);
         Account acct = prov.createAccount(testAcctEmail,
@@ -314,7 +314,7 @@ public class TestJaxbProvisioning extends TestCase {
    }
 
     public void testMailbox() throws Exception {
-        ZimbraLog.test.debug("Starting testMailbox");
+        ZmailLog.test.debug("Starting testMailbox");
         Domain dom = ensureDomainExists(testAcctDomainName);
         assertNotNull("Domain for " + testAcctDomainName, dom);
         Account acct = prov.createAccount(testAcctEmail,
@@ -327,7 +327,7 @@ public class TestJaxbProvisioning extends TestCase {
    }
 
     public void testCos() throws Exception {
-        ZimbraLog.test.debug("Starting testCos");
+        ZmailLog.test.debug("Starting testCos");
         Domain dom = ensureDomainExists(testCosDomain);
         assertNotNull("Domain for " + testCosDomain, dom);
         Cos cos = prov.createCos(testCos, null);
@@ -344,7 +344,7 @@ public class TestJaxbProvisioning extends TestCase {
    }
 
     public void testDistributionList() throws Exception {
-        ZimbraLog.test.debug("Starting testDistributionList");
+        ZmailLog.test.debug("Starting testDistributionList");
         Domain dom = ensureDomainExists(testDlDomain);
         assertNotNull("Domain for " + testDlDomain, dom);
         deleteDlIfExists(testDl);
@@ -390,15 +390,15 @@ public class TestJaxbProvisioning extends TestCase {
    }
 
     public void testCalendarResource() throws Exception {
-        ZimbraLog.test.debug("Starting testCalendarResource");
+        ZmailLog.test.debug("Starting testCalendarResource");
         deleteCalendarResourceIfExists(testCalRes);
         deleteDomainIfExists(testCalResDomain);
         Domain dom = prov.createDomain(testCalResDomain, null);
         assertNotNull("Domain for " + testAcctDomainName, dom);
         Map<String, Object> attrs = Maps.newHashMap();
         attrs.put("displayName", testCalResDisplayName);
-        attrs.put ("zimbraCalResType", "Location");
-        attrs.put("zimbraCalResLocationDisplayName", "Harare");
+        attrs.put ("zmailCalResType", "Location");
+        attrs.put("zmailCalResLocationDisplayName", "Harare");
         CalendarResource calRes = prov.createCalendarResource(
                 testCalRes, TestUtil.DEFAULT_PASSWORD, attrs);
         assertNotNull("CalendarResource on create", calRes);
@@ -412,7 +412,7 @@ public class TestJaxbProvisioning extends TestCase {
     }
 
     public void testQuotaUsage() throws Exception {
-        ZimbraLog.test.debug("Starting testQuotaUsage");
+        ZmailLog.test.debug("Starting testQuotaUsage");
         List <QuotaUsage> quotaUsages = prov.getQuotaUsage(
                 Provisioning.getInstance().getLocalServer().getName());
         assertNotNull("QuotaUsage List", quotaUsages);
@@ -422,10 +422,10 @@ public class TestJaxbProvisioning extends TestCase {
 
     // Disabled - getting :
     // SoapFaultException: system failure: server
-    //    gren-elliots-macbook-pro.local zimbraRemoteManagementPrivateKeyPath
-    //    (/opt/zimbra/.ssh/zimbra_identity) does not exist
+    //    gren-elliots-macbook-pro.local zmailRemoteManagementPrivateKeyPath
+    //    (/opt/zmail/.ssh/zmail_identity) does not exist
     public void DISABLED_testGetServerNIfs() throws Exception {
-        ZimbraLog.test.debug("Starting testGetServerNIfs");
+        ZmailLog.test.debug("Starting testGetServerNIfs");
         Server svr = Provisioning.getInstance().getLocalServer();
         GetServerNIfsRequest req = new GetServerNIfsRequest(
                 null, ServerSelector.fromId(svr.getId()));
@@ -436,7 +436,7 @@ public class TestJaxbProvisioning extends TestCase {
     }
 
     public void testLicenseInfo() throws Exception {
-        ZimbraLog.test.debug("Starting testLicenseInfo");
+        ZmailLog.test.debug("Starting testLicenseInfo");
         GetLicenseInfoRequest req = new GetLicenseInfoRequest();
         GetLicenseInfoResponse resp = prov.invokeJaxb(req);
         assertNotNull("GetLicensInfoResponse", resp);
@@ -446,7 +446,7 @@ public class TestJaxbProvisioning extends TestCase {
     }
 
     public void testVersionInfo() throws Exception {
-        ZimbraLog.test.debug("Starting testVersionInfo");
+        ZmailLog.test.debug("Starting testVersionInfo");
         GetVersionInfoRequest req = new GetVersionInfoRequest();
         GetVersionInfoResponse resp = prov.invokeJaxb(req);
         assertNotNull("GetLicensInfoResponse", resp);
@@ -465,7 +465,7 @@ public class TestJaxbProvisioning extends TestCase {
     }
 
     public void testIndex() throws Exception {
-        ZimbraLog.test.debug("Starting testIndex");
+        ZmailLog.test.debug("Starting testIndex");
         Account acct = ensureMailboxExists(testAcctEmail);
         ReIndexInfo info = prov.reIndex(acct, "start", null, null);
         assertNotNull("ReIndexInfo", info);
@@ -478,20 +478,20 @@ public class TestJaxbProvisioning extends TestCase {
     }
 
     public void testMboxCounts() throws Exception {
-        ZimbraLog.test.debug("Starting testMboxCounts");
+        ZmailLog.test.debug("Starting testMboxCounts");
         Account acct = ensureMailboxExists(testAcctEmail);
         long quotaUsed = prov.recalculateMailboxCounts(acct);
         assertTrue("quota used=" + quotaUsed + " should be >= =", quotaUsed >= 0);
     }
 
     public void testFlushCache() throws Exception {
-        ZimbraLog.test.debug("Starting testFlushCache");
+        ZmailLog.test.debug("Starting testFlushCache");
         ensureDomainExists(testAcctDomainName);
         prov.flushCache(CacheEntryType.domain, null);
     }
 
     public void testGetAllRights() throws Exception {
-        ZimbraLog.test.debug("Starting testGetAllRights");
+        ZmailLog.test.debug("Starting testGetAllRights");
         List<Right> rights = prov.getAllRights("account" /* targetType */,
                 true /* expandAllAttrs */, "USER" /* rightClass */);
         assertNotNull("getAllRight returned list", rights);
@@ -500,14 +500,14 @@ public class TestJaxbProvisioning extends TestCase {
     }
 
     public void testGetAllEffectiveRights() throws Exception {
-        ZimbraLog.test.debug("Starting testGetAllEffectiveRights");
+        ZmailLog.test.debug("Starting testGetAllEffectiveRights");
         AllEffectiveRights aer = prov.getAllEffectiveRights(null, null, null,
                 false /* expandSetAttrs */, true /* expandGetAttrs */);
         assertNotNull("AllEffectiveRights", aer);
     }
 
     public void testGetEffectiveRights() throws Exception {
-        ZimbraLog.test.debug("Starting testGetEffectiveRights");
+        ZmailLog.test.debug("Starting testGetEffectiveRights");
         EffectiveRights er = prov.getEffectiveRights("account" /* targetType */,
                 TargetBy.name /* targetBy */, "admin" /* target */,
                 Key.GranteeBy.name /* granteeBy */, "admin" /* grantee */,
@@ -516,11 +516,11 @@ public class TestJaxbProvisioning extends TestCase {
     }
 
     public void testGetRightsDoc() throws Exception {
-        ZimbraLog.test.debug("Starting testGetRightsDoc");
+        ZmailLog.test.debug("Starting testGetRightsDoc");
         Map<String, List<RightsDoc>> map = prov.getRightsDoc(null);
         assertTrue("Map size=" + map.size() +
                 " should be >= 1", map.size() >= 1);
-        String[] pkgs = { "com.zimbra.cs.service.admin" };
+        String[] pkgs = { "org.zmail.cs.service.admin" };
         map = prov.getRightsDoc(pkgs);
         assertEquals("Map for specified set of pkgs", 1, map.size());
         boolean seenTstRight = false;
@@ -539,7 +539,7 @@ public class TestJaxbProvisioning extends TestCase {
     }
 
     public void testGetRight() throws Exception {
-        ZimbraLog.test.debug("Starting testGetRight");
+        ZmailLog.test.debug("Starting testGetRight");
         Right right = prov.getRight("adminConsoleAccountRights", true);
         assertNotNull("Right", right);
         RightClass rightClass = right.getRightClass();
@@ -548,17 +548,17 @@ public class TestJaxbProvisioning extends TestCase {
     }
 
     public void testHealth() throws Exception {
-        ZimbraLog.test.debug("Starting testHealth");
+        ZmailLog.test.debug("Starting testHealth");
         assertTrue(prov.healthCheck());
     }
 
     public void testIdentities() throws Exception {
-        ZimbraLog.test.debug("Starting testIdentities");
+        ZmailLog.test.debug("Starting testIdentities");
         Account acct = ensureAccountExists(testAcctEmail);
         List<Identity> identities = prov.getAllIdentities(acct);
         assertEquals("Number of identities for new acct", 1, identities.size());
         Map<String, Object> attrs = Maps.newHashMap();
-        attrs.put("zimbraPrefFromAddress", testAcctIdentity);
+        attrs.put("zmailPrefFromAddress", testAcctIdentity);
         Identity newId = prov.createIdentity(acct, "altIdentity", attrs);
         assertNotNull("New identity", newId);
         identities = prov.getAllIdentities(acct);

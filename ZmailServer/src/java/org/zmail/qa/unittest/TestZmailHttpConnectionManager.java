@@ -12,7 +12,7 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.qa.unittest;
+package org.zmail.qa.unittest;
 
 /*
  * for SimpleHttpServer
@@ -33,20 +33,20 @@ import org.apache.commons.httpclient.methods.GetMethod;
 import org.apache.commons.httpclient.methods.InputStreamRequestEntity;
 import org.apache.commons.httpclient.methods.PostMethod;
 
-import com.zimbra.common.account.Key;
-import com.zimbra.common.account.Key.DomainBy;
-import com.zimbra.common.httpclient.HttpClientUtil;
-import com.zimbra.common.localconfig.LC;
-import com.zimbra.common.mime.MimeConstants;
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.common.soap.AdminConstants;
-import com.zimbra.common.util.ByteUtil;
-import com.zimbra.common.util.CliUtil;
-import com.zimbra.common.util.Constants;
-import com.zimbra.common.util.ZimbraHttpConnectionManager;
-import com.zimbra.cs.account.soap.SoapProvisioning;
+import org.zmail.common.account.Key;
+import org.zmail.common.account.Key.DomainBy;
+import org.zmail.common.httpclient.HttpClientUtil;
+import org.zmail.common.localconfig.LC;
+import org.zmail.common.mime.MimeConstants;
+import org.zmail.common.service.ServiceException;
+import org.zmail.common.soap.AdminConstants;
+import org.zmail.common.util.ByteUtil;
+import org.zmail.common.util.CliUtil;
+import org.zmail.common.util.Constants;
+import org.zmail.common.util.ZmailHttpConnectionManager;
+import org.zmail.cs.account.soap.SoapProvisioning;
 
-public class TestZimbraHttpConnectionManager {
+public class TestZmailHttpConnectionManager {
     
     @BeforeClass
     public static void init() throws Exception {
@@ -143,7 +143,7 @@ public class TestZimbraHttpConnectionManager {
         
         // create an array of URIs to perform GETs on
         String[] urisToGet = {
-            "http://localhost:7070/zimbra/public/empty.html",
+            "http://localhost:7070/zmail/public/empty.html",
             "http://localhost:7071/service/admin/soap",
             /*
             "http://hc.apache.org:80/",
@@ -153,7 +153,7 @@ public class TestZimbraHttpConnectionManager {
             */
         };
         
-        ZimbraHttpConnectionManager connMgr = ZimbraHttpConnectionManager.getExternalHttpConnMgr();
+        ZmailHttpConnectionManager connMgr = ZmailHttpConnectionManager.getExternalHttpConnMgr();
         
         // create a thread for each URI
         TestGetThread[] threads = new TestGetThread[urisToGet.length];
@@ -163,7 +163,7 @@ public class TestZimbraHttpConnectionManager {
             threads[i] = new TestGetThread(connMgr.newHttpClient(), get, i + 1);
         }
         
-        ZimbraHttpConnectionManager.startReaperThread(); // comment out to reproduce the CLOSE_WAIT
+        ZmailHttpConnectionManager.startReaperThread(); // comment out to reproduce the CLOSE_WAIT
         
         // start the threads
         for (int j = 0; j < threads.length; j++) {
@@ -175,12 +175,12 @@ public class TestZimbraHttpConnectionManager {
          * 
          * not sure how to automate this:
          * 
-         * if ZimbraHttpConnectionManager.startReaperThread() was run:
+         * if ZmailHttpConnectionManager.startReaperThread() was run:
          * after httpclient_connmgr_idle_reaper_sleep_interval,
          * netstat | grep CLOSE_WAIT | grep apache
          * should print nothing
          * 
-         * if ZimbraHttpConnectionManager.startReaperThread() is *not* running:
+         * if ZmailHttpConnectionManager.startReaperThread() is *not* running:
          * netstat | grep CLOSE_WAIT | grep apache
          * will show:
          * tcp4       0      0  goodbyewhen-lm.c.62910 eos.apache.org.http    CLOSE_WAIT
@@ -532,7 +532,7 @@ public class TestZimbraHttpConnectionManager {
     public void testSoTimeoutViaHttpMethod() throws Exception {
         
         int serverPort = 7778;
-        String resourceToGet = "/opt/zimbra/unittest/rights-unittest.xml";
+        String resourceToGet = "/opt/zmail/unittest/rights-unittest.xml";
         long delayInServer = 10000;  // delay 10 seconds in server
         int soTimeout = 3000;  // 3 seconds
         
@@ -542,8 +542,8 @@ public class TestZimbraHttpConnectionManager {
         // start a http server for testing
         SimpleHttpServer.start(serverPort);
         
-        // HttpClient httpClient = ZimbraHttpConnectionManager.getExternalHttpConnMgr().newHttpClient();
-        HttpClient httpClient = ZimbraHttpConnectionManager.getInternalHttpConnMgr().newHttpClient();
+        // HttpClient httpClient = ZmailHttpConnectionManager.getExternalHttpConnMgr().newHttpClient();
+        HttpClient httpClient = ZmailHttpConnectionManager.getInternalHttpConnMgr().newHttpClient();
         
         GetMethod method = new GetMethod(uri);
         
@@ -583,7 +583,7 @@ public class TestZimbraHttpConnectionManager {
     public void testSoTimeoutViaConnMgrParam() throws Exception {
         
         int serverPort = 7778;
-        String resourceToGet = "/opt/zimbra/unittest/rights-unittest.xml";
+        String resourceToGet = "/opt/zmail/unittest/rights-unittest.xml";
         long delayInServer = 10000;  // delay 10 seconds in server
         int soTimeout = 3000;  // 3 seconds
         
@@ -593,7 +593,7 @@ public class TestZimbraHttpConnectionManager {
         // start a http server for testing
         SimpleHttpServer.start(serverPort);
         
-        HttpClient httpClient = ZimbraHttpConnectionManager.getExternalHttpConnMgr().newHttpClient();
+        HttpClient httpClient = ZmailHttpConnectionManager.getExternalHttpConnMgr().newHttpClient();
         
         GetMethod method = new GetMethod(uri);
         
@@ -625,7 +625,7 @@ public class TestZimbraHttpConnectionManager {
     public void testSoTimeoutViaHttpPostMethod() throws Exception {
         
         int serverPort = 7778;
-        String resourceToPost = "/opt/zimbra/unittest/rights-unittest.xml";
+        String resourceToPost = "/opt/zmail/unittest/rights-unittest.xml";
         long delayInServer = 100000;  // delay 10 seconds in server
         int soTimeout = 60000; // 3000;  // 3 seconds, 0 for infinite wait
             
@@ -636,7 +636,7 @@ public class TestZimbraHttpConnectionManager {
         SimpleHttpServer.start(serverPort);
 
         // post the exported content to the target server
-        HttpClient httpClient = ZimbraHttpConnectionManager.getInternalHttpConnMgr().newHttpClient();
+        HttpClient httpClient = ZmailHttpConnectionManager.getInternalHttpConnMgr().newHttpClient();
         PostMethod method = new PostMethod(uri);
         method.getParams().setSoTimeout(soTimeout); // infinite wait because it can take a long time to import a large mailbox
         
@@ -682,14 +682,14 @@ public class TestZimbraHttpConnectionManager {
     public void testHttpClientConnectionManagerTimeout() throws Exception {
         
         int serverPort = 7778;
-        String path = "/Users/pshao/p4/main/ZimbraServer/src/java/com/zimbra/qa/unittest/TestZimbraHttpConnectionManager.java";  // this file
+        String path = "/Users/pshao/p4/main/ZmailServer/src/java/org/zmail/qa/unittest/TestZmailHttpConnectionManager.java";  // this file
         long delayInServer = 10000;
         String qp = "?" + SimpleHttpServer.DelayWhen.GET_BEFORE_FETCHING_RESOURCE.name() + "=" + delayInServer;
         
         // start a server for testing
         SimpleHttpServer.start(serverPort);
         
-        ZimbraHttpConnectionManager connMgr = ZimbraHttpConnectionManager.getExternalHttpConnMgr();
+        ZmailHttpConnectionManager connMgr = ZmailHttpConnectionManager.getExternalHttpConnMgr();
         
         // first thread
         GetMethod method1 = new GetMethod("http://localhost:" + serverPort + path + qp);
@@ -713,9 +713,9 @@ public class TestZimbraHttpConnectionManager {
     private static void runSoapProv(String msg) {
         System.out.println(msg);
         SoapProvisioning sp = new SoapProvisioning();
-        String uri = LC.zimbra_admin_service_scheme.value() + 
-                     LC.zimbra_zmprov_default_soap_server.value() + ":" +
-                     LC.zimbra_admin_service_port.intValue() + 
+        String uri = LC.zmail_admin_service_scheme.value() + 
+                     LC.zmail_zmprov_default_soap_server.value() + ":" +
+                     LC.zmail_admin_service_port.intValue() + 
                      AdminConstants.ADMIN_SERVICE_URI;
         sp.soapSetURI(uri);
         try {
@@ -805,13 +805,13 @@ public class TestZimbraHttpConnectionManager {
     // @Test
     public void testAuthenticationPreemptive() throws Exception {
 
-        ZimbraHttpConnectionManager.startReaperThread();
+        ZmailHttpConnectionManager.startReaperThread();
         
         for (int i = 0; i < 10; i++) {
             // runTest(new HttpClient(), "PLAIN"+i, true);
-            runTest(ZimbraHttpConnectionManager.getExternalHttpConnMgr().newHttpClient(), "EXT-authPreemp"+i, true);
-            runTest(ZimbraHttpConnectionManager.getExternalHttpConnMgr().newHttpClient(), "EXT"+i, false);
-            runTest(ZimbraHttpConnectionManager.getInternalHttpConnMgr().getDefaultHttpClient(), "INT"+i, false);
+            runTest(ZmailHttpConnectionManager.getExternalHttpConnMgr().newHttpClient(), "EXT-authPreemp"+i, true);
+            runTest(ZmailHttpConnectionManager.getExternalHttpConnMgr().newHttpClient(), "EXT"+i, false);
+            runTest(ZmailHttpConnectionManager.getInternalHttpConnMgr().getDefaultHttpClient(), "INT"+i, false);
         }
     }
 
@@ -820,7 +820,7 @@ public class TestZimbraHttpConnectionManager {
         
         String uri = "http://phoebe.mbp:7070/service/soap/AuthRequest";
         
-        HttpClient httpClient = ZimbraHttpConnectionManager.getInternalHttpConnMgr().newHttpClient();
+        HttpClient httpClient = ZmailHttpConnectionManager.getInternalHttpConnMgr().newHttpClient();
         
         GetMethod method = new GetMethod(uri);
         

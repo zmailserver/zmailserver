@@ -12,7 +12,7 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.account.ldap;
+package org.zmail.cs.account.ldap;
 
 // use LinkedHashSet to preserve the order and uniqueness of entries,
 // not that order/uniqueness matters to LDAP server, just cleaner this way
@@ -20,9 +20,9 @@ import java.util.HashSet;
 import java.util.LinkedHashSet;
 import java.util.Set;
 
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.cs.account.AttributeClass;
-import com.zimbra.cs.account.Provisioning;
+import org.zmail.common.service.ServiceException;
+import org.zmail.cs.account.AttributeClass;
+import org.zmail.cs.account.Provisioning;
 
 /**
  * @author pshao
@@ -51,14 +51,14 @@ public class LdapObjectClass {
     }
 
     public static Set<String> getAccountObjectClasses(Provisioning prov,
-            boolean zimbraDefaultOnly) throws ServiceException {
+            boolean zmailDefaultOnly) throws ServiceException {
         Set<String> ocs = new LinkedHashSet<String>();
 
         ocs.add(ZIMBRA_DEFAULT_PERSON_OC);
-        ocs.add(AttributeClass.OC_zimbraAccount);
+        ocs.add(AttributeClass.OC_zmailAccount);
 
-        if (!zimbraDefaultOnly)
-            addExtraObjectClasses(ocs, prov, Provisioning.A_zimbraAccountExtraObjectClass);
+        if (!zmailDefaultOnly)
+            addExtraObjectClasses(ocs, prov, Provisioning.A_zmailAccountExtraObjectClass);
         return ocs;
     }
 
@@ -71,9 +71,9 @@ public class LdapObjectClass {
     throws ServiceException {
         Set<String> ocs = new LinkedHashSet<String>();
 
-        ocs.add(AttributeClass.OC_zimbraCalendarResource);
+        ocs.add(AttributeClass.OC_zmailCalendarResource);
 
-        addExtraObjectClasses(ocs, prov, Provisioning.A_zimbraCalendarResourceExtraObjectClass);
+        addExtraObjectClasses(ocs, prov, Provisioning.A_zmailCalendarResourceExtraObjectClass);
         return ocs;
     }
 
@@ -81,9 +81,9 @@ public class LdapObjectClass {
     throws ServiceException {
         Set<String> ocs = new LinkedHashSet<String>();
 
-        ocs.add(AttributeClass.OC_zimbraCOS);
+        ocs.add(AttributeClass.OC_zmailCOS);
 
-        addExtraObjectClasses(ocs, prov, Provisioning.A_zimbraCosExtraObjectClass);
+        addExtraObjectClasses(ocs, prov, Provisioning.A_zmailCosExtraObjectClass);
         return ocs;
     }
 
@@ -93,17 +93,17 @@ public class LdapObjectClass {
 
         ocs.add("dcObject");
         ocs.add("organization");
-        ocs.add(AttributeClass.OC_zimbraDomain);
+        ocs.add(AttributeClass.OC_zmailDomain);
 
-        addExtraObjectClasses(ocs, prov, Provisioning.A_zimbraDomainExtraObjectClass);
+        addExtraObjectClasses(ocs, prov, Provisioning.A_zmailDomainExtraObjectClass);
         return ocs;
     }
 
     public static Set<String> getDistributionListObjectClasses(Provisioning prov)
     throws ServiceException {
         Set<String> ocs = new LinkedHashSet<String>();
-        ocs.add(AttributeClass.OC_zimbraDistributionList);
-        ocs.add(AttributeClass.OC_zimbraMailRecipient);
+        ocs.add(AttributeClass.OC_zmailDistributionList);
+        ocs.add(AttributeClass.OC_zmailMailRecipient);
         return ocs;
     }
 
@@ -113,8 +113,8 @@ public class LdapObjectClass {
 
         ocs.add("groupOfURLs");
         ocs.add("dgIdentityAux");
-        ocs.add(AttributeClass.OC_zimbraGroup);
-        // ocs.add(AttributeClass.OC_zimbraMailRecipient);  // should we?
+        ocs.add(AttributeClass.OC_zmailGroup);
+        // ocs.add(AttributeClass.OC_zmailMailRecipient);  // should we?
 
         return ocs;
     }
@@ -125,7 +125,7 @@ public class LdapObjectClass {
 
         ocs.add("groupOfURLs");
         ocs.add("dgIdentityAux");
-        ocs.add(AttributeClass.OC_zimbraGroupDynamicUnit);
+        ocs.add(AttributeClass.OC_zmailGroupDynamicUnit);
 
         return ocs;
     }
@@ -134,7 +134,7 @@ public class LdapObjectClass {
     throws ServiceException {
         Set<String> ocs = new LinkedHashSet<String>();
 
-        ocs.add(AttributeClass.OC_zimbraGroupStaticUnit);
+        ocs.add(AttributeClass.OC_zmailGroupStaticUnit);
 
         return ocs;
     }
@@ -143,23 +143,23 @@ public class LdapObjectClass {
     throws ServiceException {
         Set<String> ocs = new LinkedHashSet<String>();
 
-        ocs.add(AttributeClass.OC_zimbraServer);
+        ocs.add(AttributeClass.OC_zmailServer);
 
-        addExtraObjectClasses(ocs, prov, Provisioning.A_zimbraServerExtraObjectClass);
+        addExtraObjectClasses(ocs, prov, Provisioning.A_zmailServerExtraObjectClass);
         return ocs;
     }
 
     public static Set<String> getUCServiceObjectClasses(Provisioning prov)
     throws ServiceException {
         Set<String> ocs = new LinkedHashSet<String>();
-        ocs.add(AttributeClass.OC_zimbraUCService);
+        ocs.add(AttributeClass.OC_zmailUCService);
         return ocs;
     }
 
     public static Set<String> getShareLocatorObjectClasses(Provisioning prov)
     throws ServiceException {
         Set<String> ocs = new LinkedHashSet<String>();
-        ocs.add(AttributeClass.OC_zimbraShareLocator);
+        ocs.add(AttributeClass.OC_zmailShareLocator);
         return ocs;
     }
 

@@ -12,7 +12,7 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.qa.unittest.prov.ldap;
+package org.zmail.qa.unittest.prov.ldap;
 
 import java.util.HashMap;
 import java.util.HashSet;
@@ -23,32 +23,32 @@ import org.junit.*;
 
 import static org.junit.Assert.*;
 
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.cs.account.Account;
-import com.zimbra.cs.account.Domain;
-import com.zimbra.cs.account.Group;
-import com.zimbra.cs.account.Provisioning;
-import com.zimbra.cs.account.ldap.LdapDIT;
-import com.zimbra.cs.account.ldap.LdapHelper;
-import com.zimbra.cs.account.ldap.LdapProv;
-import com.zimbra.cs.account.ldap.entry.LdapDomain;
-import com.zimbra.cs.account.ldap.entry.LdapEntry;
-import com.zimbra.cs.ldap.LdapException.LdapEntryNotFoundException;
-import com.zimbra.cs.ldap.LdapException.LdapMultipleEntriesMatchedException;
-import com.zimbra.cs.ldap.LdapException.LdapSizeLimitExceededException;
-import com.zimbra.cs.ldap.ZLdapFilterFactory.FilterId;
-import com.zimbra.cs.ldap.LdapClient;
-import com.zimbra.cs.ldap.LdapConstants;
-import com.zimbra.cs.ldap.LdapServerType;
-import com.zimbra.cs.ldap.LdapUsage;
-import com.zimbra.cs.ldap.ZAttributes;
-import com.zimbra.cs.ldap.ZLdapContext;
-import com.zimbra.cs.ldap.ZLdapFilter;
-import com.zimbra.cs.ldap.ZLdapFilterFactory;
-import com.zimbra.cs.ldap.ZSearchControls;
-import com.zimbra.cs.ldap.ZSearchResultEntry;
-import com.zimbra.cs.ldap.ZSearchResultEnumeration;
-import com.zimbra.cs.ldap.ZSearchScope;
+import org.zmail.common.service.ServiceException;
+import org.zmail.cs.account.Account;
+import org.zmail.cs.account.Domain;
+import org.zmail.cs.account.Group;
+import org.zmail.cs.account.Provisioning;
+import org.zmail.cs.account.ldap.LdapDIT;
+import org.zmail.cs.account.ldap.LdapHelper;
+import org.zmail.cs.account.ldap.LdapProv;
+import org.zmail.cs.account.ldap.entry.LdapDomain;
+import org.zmail.cs.account.ldap.entry.LdapEntry;
+import org.zmail.cs.ldap.LdapException.LdapEntryNotFoundException;
+import org.zmail.cs.ldap.LdapException.LdapMultipleEntriesMatchedException;
+import org.zmail.cs.ldap.LdapException.LdapSizeLimitExceededException;
+import org.zmail.cs.ldap.ZLdapFilterFactory.FilterId;
+import org.zmail.cs.ldap.LdapClient;
+import org.zmail.cs.ldap.LdapConstants;
+import org.zmail.cs.ldap.LdapServerType;
+import org.zmail.cs.ldap.LdapUsage;
+import org.zmail.cs.ldap.ZAttributes;
+import org.zmail.cs.ldap.ZLdapContext;
+import org.zmail.cs.ldap.ZLdapFilter;
+import org.zmail.cs.ldap.ZLdapFilterFactory;
+import org.zmail.cs.ldap.ZSearchControls;
+import org.zmail.cs.ldap.ZSearchResultEntry;
+import org.zmail.cs.ldap.ZSearchResultEnumeration;
+import org.zmail.cs.ldap.ZSearchScope;
 
 public class TestLdapHelper extends LdapTest {
     private static LdapProvTestUtil provUtil;
@@ -80,7 +80,7 @@ public class TestLdapHelper extends LdapTest {
         ZSearchResultEntry sr = ldapHelper.searchForEntry(
                 base, filter, null, false);
         assertNotNull(sr);
-        assertEquals("cn=config,cn=zimbra", sr.getDN());
+        assertEquals("cn=config,cn=zmail", sr.getDN());
     }
     
     @Test
@@ -235,7 +235,7 @@ public class TestLdapHelper extends LdapTest {
     public void testAndModifyAttributes() throws Exception {
         ZLdapFilter filter = filterFactory.domainLockedForEagerAutoProvision();
         Map<String, Object> attrs = new HashMap<String, Object>();
-        attrs.put(Provisioning.A_zimbraAutoProvLock, "blah");
+        attrs.put(Provisioning.A_zmailAutoProvLock, "blah");
         
         ZLdapContext zlc = null;
         try {

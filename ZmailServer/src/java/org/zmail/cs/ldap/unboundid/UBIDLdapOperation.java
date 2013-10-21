@@ -12,7 +12,7 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.ldap.unboundid;
+package org.zmail.cs.ldap.unboundid;
 
 import java.util.List;
 
@@ -29,18 +29,18 @@ import com.unboundid.ldap.sdk.SearchRequest;
 import com.unboundid.ldap.sdk.SearchResult;
 import com.unboundid.ldap.sdk.SearchResultEntry;
 import com.unboundid.ldap.sdk.schema.Schema;
-import com.zimbra.common.util.Log;
-import com.zimbra.common.util.ZimbraLog;
-import com.zimbra.cs.ldap.LdapOp;
-import com.zimbra.cs.ldap.LdapUsage;
-import com.zimbra.cs.ldap.ZLdapFilter;
-import com.zimbra.cs.ldap.LdapServerConfig.ExternalLdapConfig;
-import com.zimbra.cs.stats.ZimbraPerf;
+import org.zmail.common.util.Log;
+import org.zmail.common.util.ZmailLog;
+import org.zmail.cs.ldap.LdapOp;
+import org.zmail.cs.ldap.LdapUsage;
+import org.zmail.cs.ldap.ZLdapFilter;
+import org.zmail.cs.ldap.LdapServerConfig.ExternalLdapConfig;
+import org.zmail.cs.stats.ZmailPerf;
 
 abstract class UBIDLdapOperation {
     private static final boolean STATS_ENABLED = true;
 
-    private static Log debugLogger = ZimbraLog.ldap;
+    private static Log debugLogger = ZmailLog.ldap;
 
     static final GetConnection GET_CONNECTION = new GetConnection();
     static final CreateEntry CREATE_ENTRY = new CreateEntry();
@@ -59,7 +59,7 @@ abstract class UBIDLdapOperation {
 
     protected void searchStat(long startTime, String statString) {
         if (STATS_ENABLED) {
-            ZimbraPerf.LDAP_TRACKER.addStat(statString, startTime);
+            ZmailPerf.LDAP_TRACKER.addStat(statString, startTime);
         }
     }
 
@@ -69,7 +69,7 @@ abstract class UBIDLdapOperation {
 
     private void stat(long startTime, String op) {
         if (STATS_ENABLED) {
-            ZimbraPerf.LDAP_TRACKER.addStat(op, startTime);
+            ZmailPerf.LDAP_TRACKER.addStat(op, startTime);
         }
     }
 

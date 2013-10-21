@@ -12,7 +12,7 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.index;
+package org.zmail.cs.index;
 
 import java.util.Collections;
 import java.util.EnumSet;
@@ -25,37 +25,37 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 
 import com.google.common.io.Closeables;
-import com.zimbra.common.mailbox.ContactConstants;
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.common.soap.SoapProtocol;
-import com.zimbra.cs.account.MockProvisioning;
-import com.zimbra.cs.account.Provisioning;
-import com.zimbra.cs.db.DbPool;
-import com.zimbra.cs.db.DbPool.DbConnection;
-import com.zimbra.cs.db.DbUtil;
-import com.zimbra.cs.mailbox.Contact;
-import com.zimbra.cs.mailbox.DeliveryOptions;
-import com.zimbra.cs.mailbox.MailItem;
-import com.zimbra.cs.mailbox.Mailbox;
-import com.zimbra.cs.mailbox.MailboxManager;
-import com.zimbra.cs.mailbox.MailboxTestUtil;
-import com.zimbra.cs.mailbox.Message;
-import com.zimbra.cs.mailbox.OperationContext;
-import com.zimbra.cs.mime.ParsedContact;
-import com.zimbra.cs.mime.ParsedMessage;
+import org.zmail.common.mailbox.ContactConstants;
+import org.zmail.common.service.ServiceException;
+import org.zmail.common.soap.SoapProtocol;
+import org.zmail.cs.account.MockProvisioning;
+import org.zmail.cs.account.Provisioning;
+import org.zmail.cs.db.DbPool;
+import org.zmail.cs.db.DbPool.DbConnection;
+import org.zmail.cs.db.DbUtil;
+import org.zmail.cs.mailbox.Contact;
+import org.zmail.cs.mailbox.DeliveryOptions;
+import org.zmail.cs.mailbox.MailItem;
+import org.zmail.cs.mailbox.Mailbox;
+import org.zmail.cs.mailbox.MailboxManager;
+import org.zmail.cs.mailbox.MailboxTestUtil;
+import org.zmail.cs.mailbox.Message;
+import org.zmail.cs.mailbox.OperationContext;
+import org.zmail.cs.mime.ParsedContact;
+import org.zmail.cs.mime.ParsedMessage;
 
 /**
- * Unit test for {@link ZimbraQuery}.
+ * Unit test for {@link ZmailQuery}.
  *
  * @author ysasaki
  */
-public final class ZimbraQueryTest {
+public final class ZmailQueryTest {
 
     @BeforeClass
     public static void init() throws Exception {
         MailboxTestUtil.initServer();
         Provisioning prov = Provisioning.getInstance();
-        prov.createAccount("test@zimbra.com", "secret", new HashMap<String, Object>());
+        prov.createAccount("test@zmail.com", "secret", new HashMap<String, Object>());
     }
 
     @Before
@@ -72,7 +72,7 @@ public final class ZimbraQueryTest {
 
         params.setSortBy(SortBy.RCPT_ASC);
         try {
-            new ZimbraQuery(new OperationContext(mbox), SoapProtocol.Soap12, mbox, params);
+            new ZmailQuery(new OperationContext(mbox), SoapProtocol.Soap12, mbox, params);
             Assert.fail();
         } catch (ServiceException e) {
             Assert.assertEquals(ServiceException.INVALID_REQUEST, e.getCode());
@@ -80,21 +80,21 @@ public final class ZimbraQueryTest {
 
         params.setSortBy(SortBy.ATTACHMENT_ASC);
         try {
-            new ZimbraQuery(new OperationContext(mbox), SoapProtocol.Soap12, mbox, params);
+            new ZmailQuery(new OperationContext(mbox), SoapProtocol.Soap12, mbox, params);
         } catch (ServiceException e) {
             Assert.fail("Sorting by whether has attachments should be supported");
         }
 
         params.setSortBy(SortBy.FLAG_ASC);
         try {
-            new ZimbraQuery(new OperationContext(mbox), SoapProtocol.Soap12, mbox, params);
+            new ZmailQuery(new OperationContext(mbox), SoapProtocol.Soap12, mbox, params);
         } catch (ServiceException e) {
             Assert.fail("Sorting by flagged should be supported");
         }
 
         params.setSortBy(SortBy.PRIORITY_ASC);
         try {
-            new ZimbraQuery(new OperationContext(mbox), SoapProtocol.Soap12, mbox, params);
+            new ZmailQuery(new OperationContext(mbox), SoapProtocol.Soap12, mbox, params);
         } catch (ServiceException e) {
             Assert.fail("Sorting by priority should be supported");
         }
@@ -107,19 +107,19 @@ public final class ZimbraQueryTest {
         SearchParams params = new SearchParams();
         params.setSortBy(SortBy.NONE);
         params.setQueryString("in:inbox content:test");
-        ZimbraQuery query = new ZimbraQuery(new OperationContext(mbox), SoapProtocol.Soap12, mbox, params);
+        ZmailQuery query = new ZmailQuery(new OperationContext(mbox), SoapProtocol.Soap12, mbox, params);
         Assert.assertEquals("Q(IN:$FOLDER)Q(&&)Q(l.content:$TEXT)", query.toSanitizedtring());
 
         params.setQueryString("in:inbox");
-        query = new ZimbraQuery(new OperationContext(mbox), SoapProtocol.Soap12, mbox, params);
+        query = new ZmailQuery(new OperationContext(mbox), SoapProtocol.Soap12, mbox, params);
         Assert.assertEquals("Q(IN:$FOLDER)", query.toSanitizedtring());
 
         params.setQueryString("conv:\"-554\" (underid:1 AND NOT underid:3 AND NOT underid:4)");
-        query = new ZimbraQuery(new OperationContext(mbox), SoapProtocol.Soap12, mbox, params);
+        query = new ZmailQuery(new OperationContext(mbox), SoapProtocol.Soap12, mbox, params);
         Assert.assertEquals("Q(ITEMID,$TEXT)Q(&&)Q(Q(UNDER:ANY_FOLDER)Q(&&)-Q(UNDER:$FOLDER)Q(&&)-Q(UNDER:$FOLDER))", query.toSanitizedtring());
 
         params.setQueryString("inid:15");
-        query = new ZimbraQuery(new OperationContext(mbox), SoapProtocol.Soap12, mbox, params);
+        query = new ZmailQuery(new OperationContext(mbox), SoapProtocol.Soap12, mbox, params);
         Assert.assertEquals("Q(IN:$FOLDER)", query.toSanitizedtring());
     }
 
@@ -128,7 +128,7 @@ public final class ZimbraQueryTest {
         Mailbox mbox = MailboxManager.getInstance().getMailboxByAccountId(MockProvisioning.DEFAULT_ACCOUNT_ID);
 
         Map<String, Object> fields = new HashMap<String, Object>();
-        fields.put(ContactConstants.A_email, "test1@zimbra.com");
+        fields.put(ContactConstants.A_email, "test1@zmail.com");
         Contact contact = mbox.createContact(null, new ParsedContact(fields), Mailbox.ID_FOLDER_CONTACTS, null);
         MailboxTestUtil.index(mbox);
 
@@ -138,8 +138,8 @@ public final class ZimbraQueryTest {
         params.setTypes(EnumSet.of(MailItem.Type.CONTACT));
         params.setFetchMode(SearchParams.Fetch.IDS);
 
-        ZimbraQuery query = new ZimbraQuery(new OperationContext(mbox), SoapProtocol.Soap12, mbox, params);
-        ZimbraQueryResults result = query.execute();
+        ZmailQuery query = new ZmailQuery(new OperationContext(mbox), SoapProtocol.Soap12, mbox, params);
+        ZmailQueryResults result = query.execute();
         Assert.assertTrue(result.hasNext());
         Assert.assertEquals(contact.getId(), result.getNext().getItemId());
         Closeables.closeQuietly(result);
@@ -157,7 +157,7 @@ public final class ZimbraQueryTest {
         params.setCalItemExpandStart(1000);
         params.setCalItemExpandEnd(2000);
 
-        ZimbraQuery query = new ZimbraQuery(new OperationContext(mbox), SoapProtocol.Soap12, mbox, params);
+        ZmailQuery query = new ZmailQuery(new OperationContext(mbox), SoapProtocol.Soap12, mbox, params);
         // CalItemExpand range shouldn't be expanded yet
         Assert.assertEquals("ZQ: Q(l.content:test)", query.toString());
         // The order of HashSet iteration may be different on different platforms.
@@ -199,9 +199,9 @@ public final class ZimbraQueryTest {
         params.setTypes(EnumSet.of(MailItem.Type.MESSAGE));
         params.setFetchMode(SearchParams.Fetch.IDS);
 
-        ZimbraQuery query = new ZimbraQuery(new OperationContext(mbox), SoapProtocol.Soap12, mbox, params);
+        ZmailQuery query = new ZmailQuery(new OperationContext(mbox), SoapProtocol.Soap12, mbox, params);
         Assert.assertEquals("ZQ: Q(DATE:MDATE,197001010050-196912312359)", query.toString());
-        ZimbraQueryResults result = query.execute();
+        ZmailQueryResults result = query.execute();
         Assert.assertEquals(104, result.getNext().getItemId());
         Assert.assertEquals(105, result.getNext().getItemId());
         Assert.assertEquals(null, result.getNext());
@@ -213,11 +213,11 @@ public final class ZimbraQueryTest {
         Mailbox mbox = MailboxManager.getInstance().getMailboxByAccountId(MockProvisioning.DEFAULT_ACCOUNT_ID);
 
         Contact contact = mbox.createContact(null, new ParsedContact(Collections.singletonMap(
-                ContactConstants.A_email, "test1@zimbra.com")), Mailbox.ID_FOLDER_CONTACTS, null);
+                ContactConstants.A_email, "test1@zmail.com")), Mailbox.ID_FOLDER_CONTACTS, null);
         MailboxTestUtil.index(mbox);
 
         mbox.createContact(null, new ParsedContact(Collections.singletonMap(
-                ContactConstants.A_email, "test2@zimbra.com")), Mailbox.ID_FOLDER_CONTACTS, null);
+                ContactConstants.A_email, "test2@zmail.com")), Mailbox.ID_FOLDER_CONTACTS, null);
 
         SearchParams params = new SearchParams();
         params.setQueryString("test");
@@ -225,8 +225,8 @@ public final class ZimbraQueryTest {
         params.setTypes(EnumSet.of(MailItem.Type.CONTACT));
         params.setQuick(true);
 
-        ZimbraQuery query = new ZimbraQuery(new OperationContext(mbox), SoapProtocol.Soap12, mbox, params);
-        ZimbraQueryResults result = query.execute();
+        ZmailQuery query = new ZmailQuery(new OperationContext(mbox), SoapProtocol.Soap12, mbox, params);
+        ZmailQueryResults result = query.execute();
         Assert.assertTrue(result.hasNext());
         Assert.assertEquals(contact.getId(), result.getNext().getItemId());
         Assert.assertFalse(result.hasNext());
@@ -247,8 +247,8 @@ public final class ZimbraQueryTest {
         params.setTypes(EnumSet.of(MailItem.Type.MESSAGE));
         params.setQuick(true);
 
-        ZimbraQuery query = new ZimbraQuery(new OperationContext(mbox), SoapProtocol.Soap12, mbox, params);
-        ZimbraQueryResults result = query.execute();
+        ZmailQuery query = new ZmailQuery(new OperationContext(mbox), SoapProtocol.Soap12, mbox, params);
+        ZmailQueryResults result = query.execute();
         Assert.assertEquals(msg.getId(), result.getNext().getItemId());
         Closeables.closeQuietly(result);
     }
@@ -263,7 +263,7 @@ public final class ZimbraQueryTest {
         params.setTypes(EnumSet.of(MailItem.Type.MESSAGE));
         params.setInDumpster(true);
 
-        ZimbraQuery query = new ZimbraQuery(new OperationContext(mbox), SoapProtocol.Soap12, mbox, params);
+        ZmailQuery query = new ZmailQuery(new OperationContext(mbox), SoapProtocol.Soap12, mbox, params);
         Assert.assertTrue(query.toQueryString(),
                 query.toQueryString().matches("\\(\\(content:test\\) AND MDATE:\\(>\\d+\\) \\)"));
     }

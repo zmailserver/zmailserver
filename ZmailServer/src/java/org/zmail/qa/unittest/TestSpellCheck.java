@@ -13,7 +13,7 @@
  * ***** END LICENSE BLOCK *****
  */
 
-package com.zimbra.qa.unittest;
+package org.zmail.qa.unittest;
 
 import java.util.Arrays;
 import java.util.HashMap;
@@ -24,15 +24,15 @@ import java.util.Set;
 
 import junit.framework.TestCase;
 
-import com.zimbra.common.soap.Element;
-import com.zimbra.common.soap.MailConstants;
-import com.zimbra.common.util.ZimbraLog;
-import com.zimbra.cs.account.Account;
-import com.zimbra.cs.account.Provisioning;
-import com.zimbra.cs.account.Server;
-import com.zimbra.client.ZMailbox;
-import com.zimbra.soap.mail.message.CheckSpellingResponse;
-import com.zimbra.soap.mail.type.Misspelling;
+import org.zmail.common.soap.Element;
+import org.zmail.common.soap.MailConstants;
+import org.zmail.common.util.ZmailLog;
+import org.zmail.cs.account.Account;
+import org.zmail.cs.account.Provisioning;
+import org.zmail.cs.account.Server;
+import org.zmail.client.ZMailbox;
+import org.zmail.soap.mail.message.CheckSpellingResponse;
+import org.zmail.soap.mail.type.Misspelling;
 
 /**
  * @author bburtin
@@ -65,13 +65,13 @@ public class TestSpellCheck extends TestCase {
         originalAccountIgnoreWords = account.getPrefSpellIgnoreWord();
         originalDomainIgnoreWords = prov.getDomain(account).getPrefSpellIgnoreWord();
         originalCosIgnoreWords = prov.getCOS(account).getPrefSpellIgnoreWord();
-        originalIgnoreAllCaps = account.getAttr(Provisioning.A_zimbraPrefSpellIgnoreAllCaps);
+        originalIgnoreAllCaps = account.getAttr(Provisioning.A_zmailPrefSpellIgnoreAllCaps);
         
         ZMailbox mbox = TestUtil.getZMailbox(USER_NAME);
         CheckSpellingResponse result = mbox.checkSpelling("test");
         available = result.isAvailable();
         if (!available) {
-            ZimbraLog.test.info("Spell checking service is not available.  Skipping tests.");
+            ZmailLog.test.info("Spell checking service is not available.  Skipping tests.");
         }
     }
     
@@ -103,7 +103,7 @@ public class TestSpellCheck extends TestCase {
         assertTrue("cotnact", hasSuggestion(result, "cotnact", "contact"));
         assertTrue("whizing", hasSuggestion(result, "whizing", "whizzing"));
         assertTrue("nevr", hasSuggestion(result, "nevr", "never"));
-        ZimbraLog.test.debug("Successfully tested spell checking");
+        ZmailLog.test.debug("Successfully tested spell checking");
     }
     
     /**
@@ -140,7 +140,7 @@ public class TestSpellCheck extends TestCase {
     
     /**
      * Confirms that <tt>GetSpellDictionaries</tt> returns the current list of
-     * dictionaries from <tt>zimbraSpellAvailableDictionary</tt>.
+     * dictionaries from <tt>zmailSpellAvailableDictionary</tt>.
      */
     public void testGetDictionaries()
     throws Exception {
@@ -259,7 +259,7 @@ public class TestSpellCheck extends TestCase {
         account.setPrefSpellIgnoreWord(originalAccountIgnoreWords);
         prov.getDomain(account).setPrefSpellIgnoreWord(originalDomainIgnoreWords);
         prov.getCOS(account).setPrefSpellIgnoreWord(originalCosIgnoreWords);
-        TestUtil.setAccountAttr(USER_NAME, Provisioning.A_zimbraPrefSpellIgnoreAllCaps, originalIgnoreAllCaps);
+        TestUtil.setAccountAttr(USER_NAME, Provisioning.A_zmailPrefSpellIgnoreAllCaps, originalIgnoreAllCaps);
     }
 
     public static void main(String[] args)

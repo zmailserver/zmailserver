@@ -12,7 +12,7 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.index;
+package org.zmail.cs.index;
 
 import java.io.IOException;
 import java.util.Collections;
@@ -20,15 +20,15 @@ import java.util.List;
 import java.util.Set;
 
 import com.google.common.io.Closeables;
-import com.zimbra.cs.account.Account;
-import com.zimbra.cs.account.AccountServiceException;
-import com.zimbra.cs.account.AuthToken;
-import com.zimbra.cs.account.Provisioning;
-import com.zimbra.cs.account.Server;
-import com.zimbra.common.account.Key.AccountBy;
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.common.util.ZimbraLog;
-import com.zimbra.common.soap.SoapProtocol;
+import org.zmail.cs.account.Account;
+import org.zmail.cs.account.AccountServiceException;
+import org.zmail.cs.account.AuthToken;
+import org.zmail.cs.account.Provisioning;
+import org.zmail.cs.account.Server;
+import org.zmail.common.account.Key.AccountBy;
+import org.zmail.common.service.ServiceException;
+import org.zmail.common.util.ZmailLog;
+import org.zmail.common.soap.SoapProtocol;
 
 /**
  * A wrapper around a remote search (a search on data in another account).
@@ -87,8 +87,8 @@ final class RemoteQueryOperation extends FilterQueryOperation {
 
         Server remoteServer = prov.getServer(acct);
 
-        if (ZimbraLog.search.isDebugEnabled()) {
-            ZimbraLog.search.debug("RemoteQuery=\"%s\" target=%s server=%s",
+        if (ZmailLog.search.isDebugEnabled()) {
+            ZmailLog.search.debug("RemoteQuery=\"%s\" target=%s server=%s",
                     operation.toQueryString(), queryTarget, remoteServer.getName());
         }
 
@@ -105,12 +105,12 @@ final class RemoteQueryOperation extends FilterQueryOperation {
     }
 
     @Override
-    public ZimbraHit getNext() throws ServiceException {
+    public ZmailHit getNext() throws ServiceException {
         return results != null ? results.getNext() : null;
     }
 
     @Override
-    public ZimbraHit peekNext() throws ServiceException {
+    public ZmailHit peekNext() throws ServiceException {
         return results != null ? results.peekNext() : null;
     }
 

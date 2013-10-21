@@ -13,15 +13,15 @@
  * ***** END LICENSE BLOCK *****
  */
 
-package com.zimbra.cs.imap;
+package org.zmail.cs.imap;
 
 import java.util.Map;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.locks.ReentrantLock;
 
-import com.zimbra.common.util.Constants;
-import com.zimbra.common.util.MapUtil;
-import com.zimbra.common.util.ZimbraLog;
+import org.zmail.common.util.Constants;
+import org.zmail.common.util.MapUtil;
+import org.zmail.common.util.ZmailLog;
 
 public class ImapCommandThrottle {
     private ImapCommand lastCommand = null;
@@ -51,13 +51,13 @@ public class ImapCommandThrottle {
             return false;
         } else if (command.throttle(lastCommand)) {
             // commands can implement their own throttle mechanism
-            ZimbraLog.imap.debug("throttled by command");
+            ZmailLog.imap.debug("throttled by command");
             return true;
         } else if (isCommandRepeated(command)) {
             repeats++;
             lastCommand = command;
             if (repeats > repeatLimit) {
-                ZimbraLog.imap.debug("throttled by repeat");
+                ZmailLog.imap.debug("throttled by repeat");
                 return true;
             } else {
                 return false;

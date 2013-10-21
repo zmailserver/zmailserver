@@ -14,16 +14,16 @@ http://www.perforce.com/perforce/doc.current/manuals/p4guide/01_install.html#107
 
 4. $ vi ~/.bash_profile
 
-  export P4PORT=perforce-zimbra.eng.vmware.com:1666
+  export P4PORT=perforce-zmail.eng.vmware.com:1666
   export P4USER={your p4 username}
   export P4CONFIG=.p4config
   export P4HOST=localhost
   export P4EDITOR=/usr/bin/vi
-  export PATH=$PATH:/opt/zimbra/bin
+  export PATH=$PATH:/opt/zmail/bin
   export ZIMBRA_HOSTNAME={your computer name}.local
 
 5. $ source ~/.bash_profile
-6. $ mkdir -p /opt/zimbra
+6. $ mkdir -p /opt/zmail
 7. $ mkdir ~/p4 
    $ mkdir ~/p4/main
    $ cd ~/p4/main
@@ -34,17 +34,17 @@ http://www.perforce.com/perforce/doc.current/manuals/p4guide/01_install.html#107
 10. $ p4 client
 
   View:
-	//depot/zimbra/main/... //{workspace}/...
-	-//depot/zimbra/main/ThirdParty/... //{workspace}/ThirdParty/...
-	-//depot/zimbra/main/ThirdPartyBuilds/... //{workspace}/ThirdPartyBuilds/...
-	-//depot/zimbra/main/ZimbraAppliance/... //{workspace}/ZimbraAppliance/...
-	-//depot/zimbra/main/ZimbraDocs/... //{workspace}/ZimbraDocs/...
-	-//depot/zimbra/main/Prototypes/... //{workspace}/Prototypes/...
-	-//depot/zimbra/main/Support/... //{workspace}/Support/...
-	-//depot/zimbra/main/Gallery/... //{workspace}/Gallery/...
-	-//depot/zimbra/main/ZimbraSupportPortal/... //{workspace}/ZimbraSupportPortal/...
-	-//depot/zimbra/main/ZimbraQA/data/... //{workspace}/ZimbraQA/data/...
-	-//depot/zimbra/main/ZimbraPerf/data/... //{workspace}/ZimbraPerf/data/...
+	//depot/zmail/main/... //{workspace}/...
+	-//depot/zmail/main/ThirdParty/... //{workspace}/ThirdParty/...
+	-//depot/zmail/main/ThirdPartyBuilds/... //{workspace}/ThirdPartyBuilds/...
+	-//depot/zmail/main/ZmailAppliance/... //{workspace}/ZmailAppliance/...
+	-//depot/zmail/main/ZmailDocs/... //{workspace}/ZmailDocs/...
+	-//depot/zmail/main/Prototypes/... //{workspace}/Prototypes/...
+	-//depot/zmail/main/Support/... //{workspace}/Support/...
+	-//depot/zmail/main/Gallery/... //{workspace}/Gallery/...
+	-//depot/zmail/main/ZmailSupportPortal/... //{workspace}/ZmailSupportPortal/...
+	-//depot/zmail/main/ZmailQA/data/... //{workspace}/ZmailQA/data/...
+	-//depot/zmail/main/ZmailPerf/data/... //{workspace}/ZmailPerf/data/...
 
 
    That view may have a lot more than you need, so you may want to consider explicitly listing
@@ -58,27 +58,27 @@ http://www.perforce.com/perforce/doc.current/manuals/p4guide/01_install.html#107
 
   Grab the DMG version and install the two packages (MySQL and the startup item).
 
-13. $ sudo ln -s /usr/local/mysql /opt/zimbra/mysql  (RHEL command, sudo ln -s /usr/local/mysql /usr)
-14. $ sudo vi /opt/zimbra/mysql/data/my.cnf (RHEL command, sudo vi /var/lib/mysql)
+13. $ sudo ln -s /usr/local/mysql /opt/zmail/mysql  (RHEL command, sudo ln -s /usr/local/mysql /usr)
+14. $ sudo vi /opt/zmail/mysql/data/my.cnf (RHEL command, sudo vi /var/lib/mysql)
 
   [mysqld]
   port = 7306
 
-15. $ sudo -b /opt/zimbra/mysql/bin/mysqld_safe --user=mysql
+15. $ sudo -b /opt/zmail/mysql/bin/mysqld_safe --user=mysql
   * With MySQLStartupItem package installed, mysqld will start automatically on reboot.
-  * MySQL log file can be found at: /opt/zimbra/mysql/data/{server-name}.err
+  * MySQL log file can be found at: /opt/zmail/mysql/data/{server-name}.err
   * May need to press Enter to return to the prompt
 
-16. $ /opt/zimbra/mysql/bin/mysqladmin -u root password zimbra
+16. $ /opt/zmail/mysql/bin/mysqladmin -u root password zmail
 
 
 17. $ sudo visudo
 
-  {username} ALL=NOPASSWD:/opt/zimbra/libexec/zmslapd
+  {username} ALL=NOPASSWD:/opt/zmail/libexec/zmslapd
 
   * {username} is your local username and be sure to insert a [TAB] between {username} and "ALL".
 
-19. $ cd ~/p4/main/ZimbraServer
+19. $ cd ~/p4/main/ZmailServer
 20. Install the JDK 1.7 from Oracle if not already present on your system.
 21. $ ant reset-all
 
@@ -89,26 +89,26 @@ http://www.perforce.com/perforce/doc.current/manuals/p4guide/01_install.html#107
 
    build-init              Creates directories required for compiling
    clean                   Deletes classes from build directories
-   clean-opt-zimbra        Deletes deployed jars, classes, and zimlets
+   clean-opt-zmail        Deletes deployed jars, classes, and zimlets
    dev-dist                Initializes build/dist
-   dir-init                Creates directories in /opt/zimbra
-   init-opt-zimbra         Copies build/dist to /opt/zimbra
+   dir-init                Creates directories in /opt/zmail
+   init-opt-zmail         Copies build/dist to /opt/zmail
    reset-all               Reset the world plus jetty and OpenLDAP
    reset-jetty             Resets jetty
    reset-open-ldap         Resets OpenLDAP
    reset-the-world         Reset the world
-   reset-the-world-stage1  Cleans deployed files, compiles, and initializes /opt/zimbra.
+   reset-the-world-stage1  Cleans deployed files, compiles, and initializes /opt/zmail.
    reset-the-world-stage2  Run when web server is running.
-   service-deploy          Not just war file deployment, but a /opt/zimbra refresh as well!
+   service-deploy          Not just war file deployment, but a /opt/zmail refresh as well!
    stop-webserver          Stops Jetty.  If Jetty is not installed, does nothing.
    test                    Run unit tests
   Default target: jar
 
-22. open http://localhost:7070/zimbra
+22. open http://localhost:7070/zmail
 
   Username: user1 / Password: test123
 
- * Admin console - https://localhost:7071/zimbraAdmin
+ * Admin console - https://localhost:7071/zmailAdmin
 
   Username: admin / Password: test123
 
@@ -117,7 +117,7 @@ CONFIGURE JDK FOR ZIMBRA COMMAND LINE TOOLS
 ================================================================================
 
 Command-line tools like zmprov, zmmailbox, zmsoap, etc., depend on the JDK to be
-in /opt/zimbra/java.
+in /opt/zmail/java.
 
 Find the location of your JDK 1.7 install. This varies on different Mac OS X versions. 
 For example on Mountain Lion (10.8.x) install the Oracle 1.7.0u21 JDK is placed in:  
@@ -126,12 +126,12 @@ For example on Mountain Lion (10.8.x) install the Oracle 1.7.0u21 JDK is placed 
 
 The exact path will vary by release and may be changed by Oracle or Apple at any time
 
-1. $ cd /opt/zimbra
+1. $ cd /opt/zmail
 2. $ sudo ln -s /Library/Java/JavaVirtualMachines/jdk1.7.0_21.jdk/Contents/Home/ java
-3. $ zmlocalconfig -e zimbra_java_home=/opt/zimbra/java
+3. $ zmlocalconfig -e zmail_java_home=/opt/zmail/java
 
 For RHEL:
 
-1. $ cd /opt/zimbra
+1. $ cd /opt/zmail
 2. $ sudo ln -s /usr/java/latest/ java
 

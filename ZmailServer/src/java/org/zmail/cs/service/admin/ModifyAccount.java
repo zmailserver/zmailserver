@@ -16,30 +16,30 @@
 /*
  * Created on Jun 17, 2004
  */
-package com.zimbra.cs.service.admin;
+package org.zmail.cs.service.admin;
 
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.common.util.ZimbraLog;
-import com.zimbra.common.soap.AdminConstants;
-import com.zimbra.cs.account.Account;
-import com.zimbra.cs.account.AccountServiceException;
-import com.zimbra.cs.account.Cos;
-import com.zimbra.cs.account.Domain;
-import com.zimbra.cs.account.Provisioning;
-import com.zimbra.cs.account.Server;
-import com.zimbra.common.account.Key;
-import com.zimbra.common.account.Key.AccountBy;
-import com.zimbra.common.account.Key.CacheEntryBy;
-import com.zimbra.cs.account.Provisioning.CacheEntry;
-import com.zimbra.cs.account.accesscontrol.AdminRight;
-import com.zimbra.cs.account.accesscontrol.Rights.Admin;
-import com.zimbra.cs.account.soap.SoapProvisioning;
-import com.zimbra.cs.httpclient.URLUtil;
-import com.zimbra.cs.session.AdminSession;
-import com.zimbra.cs.session.Session;
-import com.zimbra.common.soap.Element;
-import com.zimbra.soap.ZimbraSoapContext;
-import com.zimbra.soap.admin.type.CacheEntryType;
+import org.zmail.common.service.ServiceException;
+import org.zmail.common.util.ZmailLog;
+import org.zmail.common.soap.AdminConstants;
+import org.zmail.cs.account.Account;
+import org.zmail.cs.account.AccountServiceException;
+import org.zmail.cs.account.Cos;
+import org.zmail.cs.account.Domain;
+import org.zmail.cs.account.Provisioning;
+import org.zmail.cs.account.Server;
+import org.zmail.common.account.Key;
+import org.zmail.common.account.Key.AccountBy;
+import org.zmail.common.account.Key.CacheEntryBy;
+import org.zmail.cs.account.Provisioning.CacheEntry;
+import org.zmail.cs.account.accesscontrol.AdminRight;
+import org.zmail.cs.account.accesscontrol.Rights.Admin;
+import org.zmail.cs.account.soap.SoapProvisioning;
+import org.zmail.cs.httpclient.URLUtil;
+import org.zmail.cs.session.AdminSession;
+import org.zmail.cs.session.Session;
+import org.zmail.common.soap.Element;
+import org.zmail.soap.ZmailSoapContext;
+import org.zmail.soap.admin.type.CacheEntryType;
 
 import java.util.List;
 import java.util.Map;
@@ -60,7 +60,7 @@ public class ModifyAccount extends AdminDocumentHandler {
     }
 
 	public Element handle(Element request, Map<String, Object> context) throws ServiceException {
-        ZimbraSoapContext zsc = getZimbraSoapContext(context);
+        ZmailSoapContext zsc = getZmailSoapContext(context);
 	    Provisioning prov = Provisioning.getInstance();
 
 	    String id = request.getAttribute(AdminConstants.E_ID);
@@ -73,7 +73,7 @@ public class ModifyAccount extends AdminDocumentHandler {
         checkAccountRight(zsc, account, attrs);
 
         // check to see if quota is being changed
-        long curQuota = account.getLongAttr(Provisioning.A_zimbraMailQuota, 0);
+        long curQuota = account.getLongAttr(Provisioning.A_zmailMailQuota, 0);
         
         /*
         // Note: isDomainAdminOnly *always* returns false for pure ACL based AccessManager 
@@ -86,14 +86,14 @@ public class ModifyAccount extends AdminDocumentHandler {
         /*
          * for bug 42896, the above is no longer true.
          * 
-         * For quota, we have to support the per admin limitation zimbraDomainAdminMaxMailQuota, 
+         * For quota, we have to support the per admin limitation zmailDomainAdminMaxMailQuota, 
          * until we come up with a framework to support constraints on a per admin basis.
          * 
-         * for now, always call checkQuota, which will check zimbraDomainAdminMaxMailQuota.
+         * for now, always call checkQuota, which will check zmailDomainAdminMaxMailQuota.
          * 
          * If the access manager, and if we have come here, it has already passed the constraint
          * checking, in the checkAccountRight call.   If it had violated any constraint, it would 
-         * have errored out.  i.e. for zimbraMailQuota, both zimbraConstraint and zimbraDomainAdminMaxMailQuota 
+         * have errored out.  i.e. for zmailMailQuota, both zmailConstraint and zmailDomainAdminMaxMailQuota 
          * are enforced.
          */
         checkQuota(zsc, account, attrs);
@@ -104,17 +104,17 @@ public class ModifyAccount extends AdminDocumentHandler {
         // pass in true to checkImmutable
         prov.modifyAttrs(account, attrs, true);
         
-        // get account again, in the case when zimbraCOSId or zimbraForeignPrincipal
+        // get account again, in the case when zmailCOSId or zmailForeignPrincipal
         // is changed, the cache object(he one we are holding on to) would'd been 
         // flushed out from cache.  Get the account again to get the fresh one.
         account = prov.get(AccountBy.id, id, zsc.getAuthToken());
 
-        ZimbraLog.security.info(ZimbraLog.encodeAttrs(
+        ZmailLog.security.info(ZmailLog.encodeAttrs(
                 new String[] {"cmd", "ModifyAccount","name", account.getName()}, attrs));
         
         checkNewServer(zsc, context, account);
         
-        long newQuota = account.getLongAttr(Provisioning.A_zimbraMailQuota, 0);
+        long newQuota = account.getLongAttr(Provisioning.A_zmailMailQuota, 0);
         if (newQuota != curQuota) {
             // clear the quota cache
             AdminSession session = (AdminSession) getSession(zsc, Session.Type.ADMIN);
@@ -140,8 +140,8 @@ public class ModifyAccount extends AdminDocumentHandler {
         return (String) object;
 	}
 
-    private void checkQuota(ZimbraSoapContext zsc, Account account, Map<String, Object> attrs) throws ServiceException {
-        String quotaAttr = getStringAttrNewValue(Provisioning.A_zimbraMailQuota, attrs);
+    private void checkQuota(ZmailSoapContext zsc, Account account, Map<String, Object> attrs) throws ServiceException {
+        String quotaAttr = getStringAttrNewValue(Provisioning.A_zmailMailQuota, attrs);
         if (quotaAttr == null)
             return;  // not changing it
 
@@ -149,7 +149,7 @@ public class ModifyAccount extends AdminDocumentHandler {
 
         if (quotaAttr.equals("")) {
             // they are unsetting it, so check the COS
-            quota = Provisioning.getInstance().getCOS(account).getIntAttr(Provisioning.A_zimbraMailQuota, 0);
+            quota = Provisioning.getInstance().getCOS(account).getIntAttr(Provisioning.A_zmailMailQuota, 0);
         } else {
             try {
                 quota = Long.parseLong(quotaAttr);
@@ -160,11 +160,11 @@ public class ModifyAccount extends AdminDocumentHandler {
 
         if (!canModifyMailQuota(zsc,  account, quota))
             throw ServiceException.PERM_DENIED("can not modify mail quota, domain admin can only modify quota if " +
-            		"zimbraDomainAdminMaxMailQuota is set to 0 or set to a certain value and quota is less than that value.");
+            		"zmailDomainAdminMaxMailQuota is set to 0 or set to a certain value and quota is less than that value.");
     }
 
-    private void checkCos(ZimbraSoapContext zsc, Account account, Map<String, Object> attrs) throws ServiceException {
-        String newCosId = getStringAttrNewValue(Provisioning.A_zimbraCOSId, attrs);
+    private void checkCos(ZmailSoapContext zsc, Account account, Map<String, Object> attrs) throws ServiceException {
+        String newCosId = getStringAttrNewValue(Provisioning.A_zmailCOSId, attrs);
         if (newCosId == null) {
             return;  // not changing it
         }
@@ -201,7 +201,7 @@ public class ModifyAccount extends AdminDocumentHandler {
      * account is on server A (this server)
      * 
      * on server B: 
-     *     zmprov ma {account} zimbraMailHost B
+     *     zmprov ma {account} zmailMailHost B
      *     (the ma is proxied to server A;
      *      and on server B, the account still appears to be on A)
      *               
@@ -209,25 +209,25 @@ public class ModifyAccount extends AdminDocumentHandler {
      *     ERROR: service.TOO_MANY_HOPS
      *     Until the account is expired from cache on server B.          
      */
-    private void checkNewServer(ZimbraSoapContext zsc, Map<String, Object> context, Account acct) {
+    private void checkNewServer(ZmailSoapContext zsc, Map<String, Object> context, Account acct) {
         Server newServer = null;
         try {
             if (!Provisioning.onLocalServer(acct)) {
                 newServer = Provisioning.getInstance().getServer(acct);
                 
-                // in the case when zimbraMailHost is being removed, newServer will be null
+                // in the case when zmailMailHost is being removed, newServer will be null
                 if (newServer != null) {
                     SoapProvisioning soapProv = new SoapProvisioning();
                     String adminUrl = URLUtil.getAdminURL(newServer, AdminConstants.ADMIN_SERVICE_URI, true);
                     soapProv.soapSetURI(adminUrl);
-                    soapProv.soapZimbraAdminAuthenticate();
+                    soapProv.soapZmailAdminAuthenticate();
                     soapProv.flushCache(CacheEntryType.account, 
                             new CacheEntry[]{new CacheEntry(CacheEntryBy.id, acct.getId())});
                 }
             }
         } catch (ServiceException e) {
             // ignore any error and continue
-            ZimbraLog.mailbox.warn("cannot flush account cache on server " + (newServer==null?"":newServer.getName()) + " for " + acct.getName(), e);
+            ZmailLog.mailbox.warn("cannot flush account cache on server " + (newServer==null?"":newServer.getName()) + " for " + acct.getName(), e);
         }
     }
     
@@ -238,10 +238,10 @@ public class ModifyAccount extends AdminDocumentHandler {
         notes.add(String.format(AdminRightCheckPoint.Notes.MODIFY_ENTRY, 
                 Admin.R_modifyAccount.getName(), "account") + "\n");
         
-        notes.add("Notes on " + Provisioning.A_zimbraCOSId + ": " +
-                "If setting " + Provisioning.A_zimbraCOSId + ", needs the " + Admin.R_assignCos.getName() + 
+        notes.add("Notes on " + Provisioning.A_zmailCOSId + ": " +
+                "If setting " + Provisioning.A_zmailCOSId + ", needs the " + Admin.R_assignCos.getName() + 
                 " right on the cos." + 
-                "If removing " + Provisioning.A_zimbraCOSId + ", needs the " + Admin.R_assignCos.getName() + 
-                " right on the domain default cos. (in domain attribute " + Provisioning.A_zimbraDomainDefaultCOSId +").");
+                "If removing " + Provisioning.A_zmailCOSId + ", needs the " + Admin.R_assignCos.getName() + 
+                " right on the domain default cos. (in domain attribute " + Provisioning.A_zmailDomainDefaultCOSId +").");
     }
 }

@@ -12,13 +12,13 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.mailbox;
+package org.zmail.cs.mailbox;
 
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.common.util.ZimbraLog;
-import com.zimbra.cs.db.DbMailItem;
-import com.zimbra.cs.mailbox.Mailbox;
-import com.zimbra.cs.mime.ParsedDocument;
+import org.zmail.common.service.ServiceException;
+import org.zmail.common.util.ZmailLog;
+import org.zmail.cs.db.DbMailItem;
+import org.zmail.cs.mailbox.Mailbox;
+import org.zmail.cs.mime.ParsedDocument;
 
 public final class WikiItem extends Document {
 
@@ -39,7 +39,7 @@ public final class WikiItem extends Document {
 
         Mailbox mbox = folder.getMailbox();
         data.contentChanged(mbox);
-        ZimbraLog.mailop.info("Adding WikiItem %s: id=%d, folderId=%d, folderName=%s.",
+        ZmailLog.mailop.info("Adding WikiItem %s: id=%d, folderId=%d, folderName=%s.",
             wikiword, data.id, folder.getId(), folder.getName());
         new DbMailItem(mbox).create(data);
 

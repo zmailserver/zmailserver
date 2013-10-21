@@ -15,13 +15,13 @@
 /**
  * 
  */
-package com.zimbra.cs.store;
+package org.zmail.cs.store;
 
 import java.io.File;
 import java.io.IOException;
 import java.io.RandomAccessFile;
 
-import com.zimbra.cs.stats.ZimbraPerf;
+import org.zmail.cs.stats.ZmailPerf;
 
 /**
  * Synchronized container for a <tt>RandomAccessFile</tt> object.  Used by multiple
@@ -82,11 +82,11 @@ public class SharedFile {
         mPos += numRead;
         
         if (seeked) {
-            ZimbraPerf.COUNTER_BLOB_INPUT_STREAM_SEEK_RATE.increment(100);
+            ZmailPerf.COUNTER_BLOB_INPUT_STREAM_SEEK_RATE.increment(100);
         } else {
-            ZimbraPerf.COUNTER_BLOB_INPUT_STREAM_SEEK_RATE.increment(0);
+            ZmailPerf.COUNTER_BLOB_INPUT_STREAM_SEEK_RATE.increment(0);
         }
-        ZimbraPerf.COUNTER_BLOB_INPUT_STREAM_READ.increment();
+        ZmailPerf.COUNTER_BLOB_INPUT_STREAM_READ.increment();
         return numRead;
     }
     

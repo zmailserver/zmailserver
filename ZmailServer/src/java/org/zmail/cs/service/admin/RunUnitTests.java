@@ -13,20 +13,20 @@
  * ***** END LICENSE BLOCK *****
  */
 
-package com.zimbra.cs.service.admin;
+package org.zmail.cs.service.admin;
 
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.common.soap.AdminConstants;
-import com.zimbra.common.soap.Element;
-import com.zimbra.cs.account.accesscontrol.AdminRight;
-import com.zimbra.qa.unittest.TestResults;
-import com.zimbra.qa.unittest.ZimbraSuite;
-import com.zimbra.soap.ZimbraSoapContext;
+import org.zmail.common.service.ServiceException;
+import org.zmail.common.soap.AdminConstants;
+import org.zmail.common.soap.Element;
+import org.zmail.cs.account.accesscontrol.AdminRight;
+import org.zmail.qa.unittest.TestResults;
+import org.zmail.qa.unittest.ZmailSuite;
+import org.zmail.soap.ZmailSoapContext;
 
 /**
  * @author bburtin
@@ -40,7 +40,7 @@ public class RunUnitTests extends AdminDocumentHandler {
             throw ServiceException.FAILURE("JUnit is not installed.  Unable to run unit tests.", e);
         }
         
-        ZimbraSoapContext lc = getZimbraSoapContext(context);
+        ZmailSoapContext lc = getZmailSoapContext(context);
         Element response = lc.createElement(AdminConstants.RUN_UNIT_TESTS_RESPONSE);
         
         List<String> testNames = null;
@@ -53,9 +53,9 @@ public class RunUnitTests extends AdminDocumentHandler {
         
         TestResults results;          
         if (testNames == null) 
-            results = ZimbraSuite.runTestSuite();
+            results = ZmailSuite.runTestSuite();
         else 
-            results = ZimbraSuite.runUserTests(testNames);
+            results = ZmailSuite.runUserTests(testNames);
             
         Element resultsElement = response.addElement("results");
         

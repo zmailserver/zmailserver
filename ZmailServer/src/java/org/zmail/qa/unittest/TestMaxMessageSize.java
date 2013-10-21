@@ -12,7 +12,7 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.qa.unittest;
+package org.zmail.qa.unittest;
 
 import java.io.ByteArrayInputStream;
 import java.io.InputStream;
@@ -23,17 +23,17 @@ import java.util.Map;
 
 import junit.framework.TestCase;
 
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.common.soap.SoapFaultException;
-import com.zimbra.common.zclient.ZClientException;
-import com.zimbra.cs.account.Config;
-import com.zimbra.cs.account.Provisioning;
-import com.zimbra.cs.mailbox.MailServiceException;
-import com.zimbra.client.ZEmailAddress;
-import com.zimbra.client.ZMailbox;
-import com.zimbra.client.ZMailbox.ZOutgoingMessage;
-import com.zimbra.client.ZMailbox.ZOutgoingMessage.AttachedMessagePart;
-import com.zimbra.client.ZMessage;
+import org.zmail.common.service.ServiceException;
+import org.zmail.common.soap.SoapFaultException;
+import org.zmail.common.zclient.ZClientException;
+import org.zmail.cs.account.Config;
+import org.zmail.cs.account.Provisioning;
+import org.zmail.cs.mailbox.MailServiceException;
+import org.zmail.client.ZEmailAddress;
+import org.zmail.client.ZMailbox;
+import org.zmail.client.ZMailbox.ZOutgoingMessage;
+import org.zmail.client.ZMailbox.ZOutgoingMessage.AttachedMessagePart;
+import org.zmail.client.ZMessage;
 
 public class TestMaxMessageSize
 extends TestCase {
@@ -50,8 +50,8 @@ extends TestCase {
         cleanUp();
         
         Provisioning prov = Provisioning.getInstance();
-        mOrigMaxMessageSize = prov.getConfig().getAttr(Provisioning.A_zimbraMtaMaxMessageSize, null);
-        mOrigFileUploadMaxSize = prov.getLocalServer().getAttr(Provisioning.A_zimbraFileUploadMaxSize, null); 
+        mOrigMaxMessageSize = prov.getConfig().getAttr(Provisioning.A_zmailMtaMaxMessageSize, null);
+        mOrigFileUploadMaxSize = prov.getLocalServer().getAttr(Provisioning.A_zmailFileUploadMaxSize, null); 
     }
     
     public void testMaxMessageSizeBelowThreshold()
@@ -148,9 +148,9 @@ extends TestCase {
     public void testUploadMaxSize()
     throws Exception {
         /*
-         * bug 27610, default file upload size for messages is now limited by zimbraMtaMaxMessageSize
+         * bug 27610, default file upload size for messages is now limited by zmailMtaMaxMessageSize
          */
-        // TestUtil.setServerAttr(Provisioning.A_zimbraFileUploadMaxSize, "900");
+        // TestUtil.setServerAttr(Provisioning.A_zmailFileUploadMaxSize, "900");
         setMaxMessageSize(900); 
         
         // Upload an attachment that exceeds the max size
@@ -168,7 +168,7 @@ extends TestCase {
     private void validateMessageTooBigFault(SoapFaultException e)
     throws Exception {
         Provisioning prov = Provisioning.getInstance();
-        long maxSize = prov.getConfig().getLongAttr(Provisioning.A_zimbraMtaMaxMessageSize, -1);
+        long maxSize = prov.getConfig().getLongAttr(Provisioning.A_zmailMtaMaxMessageSize, -1);
         assertTrue("Unexpected error: " + e.getMessage(),
             e.getMessage().matches("Message of size \\d+ exceeded allowed size"));
         assertEquals(MailServiceException.MESSAGE_TOO_BIG, e.getCode());
@@ -178,8 +178,8 @@ extends TestCase {
     public void tearDown()
     throws Exception {
         cleanUp();
-        TestUtil.setServerAttr(Provisioning.A_zimbraFileUploadMaxSize, mOrigFileUploadMaxSize);
-        TestUtil.setConfigAttr(Provisioning.A_zimbraMtaMaxMessageSize, mOrigMaxMessageSize);
+        TestUtil.setServerAttr(Provisioning.A_zmailFileUploadMaxSize, mOrigFileUploadMaxSize);
+        TestUtil.setConfigAttr(Provisioning.A_zmailMtaMaxMessageSize, mOrigMaxMessageSize);
     }
     
     private void setMaxMessageSize(long numBytes)
@@ -187,7 +187,7 @@ extends TestCase {
         Provisioning prov = Provisioning.getInstance();
         Config config = prov.getConfig();
         Map<String, Object> attrs = new HashMap<String, Object>();
-        attrs.put(Provisioning.A_zimbraMtaMaxMessageSize, Long.toString(numBytes));
+        attrs.put(Provisioning.A_zmailMtaMaxMessageSize, Long.toString(numBytes));
         prov.modifyAttrs(config, attrs);
     }
     

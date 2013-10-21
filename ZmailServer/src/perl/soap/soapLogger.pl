@@ -21,10 +21,10 @@ use LWP::UserAgent;
 use Getopt::Long;
 use XmlDoc;
 use Soap;
-use ZimbraSoapTest;
+use ZmailSoapTest;
 
-my $ACCTNS = "urn:zimbraAdmin";
-my $MAILNS = "urn:zimbraAdmin";
+my $ACCTNS = "urn:zmailAdmin";
+my $MAILNS = "urn:zmailAdmin";
 
 # If you're using ActivePerl, you'll need to go and install the Crypt::SSLeay
 # module for htps: to work...
@@ -56,7 +56,7 @@ END_OF_USAGE
     die $usage;
 }
 
-my $z = ZimbraSoapTest->new($user, $host, $pw);
+my $z = ZmailSoapTest->new($user, $host, $pw);
 $z->doAdminAuth();
 
 my $d = new XmlDoc;

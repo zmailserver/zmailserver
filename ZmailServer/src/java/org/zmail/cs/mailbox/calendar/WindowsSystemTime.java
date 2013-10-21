@@ -13,12 +13,12 @@
  * ***** END LICENSE BLOCK *****
  */
 
-package com.zimbra.cs.mailbox.calendar;
+package org.zmail.cs.mailbox.calendar;
 
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 
-import com.zimbra.common.calendar.ICalTimeZone.SimpleOnset;
+import org.zmail.common.calendar.ICalTimeZone.SimpleOnset;
 
 /**
  * Java representation of Windows SYSTEMTIME structure in Winbase.h

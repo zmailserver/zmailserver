@@ -12,7 +12,7 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.mailbox;
+package org.zmail.cs.mailbox;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -22,16 +22,16 @@ import java.util.Set;
 import com.google.common.base.CharMatcher;
 import com.google.common.base.Objects;
 import com.google.common.collect.Sets;
-import com.zimbra.common.mailbox.Color;
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.common.util.ArrayUtil;
-import com.zimbra.common.util.StringUtil;
-import com.zimbra.common.util.ZimbraLog;
-import com.zimbra.cs.db.DbMailItem;
-import com.zimbra.cs.db.DbTag;
-import com.zimbra.cs.mailbox.MailServiceException.NoSuchItemException;
-import com.zimbra.cs.session.PendingModifications.Change;
-import com.zimbra.soap.mail.type.RetentionPolicy;
+import org.zmail.common.mailbox.Color;
+import org.zmail.common.service.ServiceException;
+import org.zmail.common.util.ArrayUtil;
+import org.zmail.common.util.StringUtil;
+import org.zmail.common.util.ZmailLog;
+import org.zmail.cs.db.DbMailItem;
+import org.zmail.cs.db.DbTag;
+import org.zmail.cs.mailbox.MailServiceException.NoSuchItemException;
+import org.zmail.cs.session.PendingModifications.Change;
+import org.zmail.soap.mail.type.RetentionPolicy;
 
 /**
  * @since Jul 12, 2004
@@ -213,7 +213,7 @@ public class Tag extends MailItem {
         data.setSubject(name);
         data.metadata = encodeMetadata(color, 1, 1, null, listed);
         data.contentChanged(mbox);
-        ZimbraLog.mailop.info("Adding Tag %s: id=%d.", name, data.id);
+        ZmailLog.mailop.info("Adding Tag %s: id=%d.", name, data.id);
         DbTag.createTag(mbox, data, color, listed);
 
         Tag tag = new Tag(mbox, data);
@@ -311,8 +311,8 @@ public class Tag extends MailItem {
             throw ServiceException.PERM_DENIED("you do not have the required rights on the item");
         }
 
-        if (ZimbraLog.mailop.isDebugEnabled()) {
-            ZimbraLog.mailop.debug("renaming " + getMailopContext(this) + " to " + newName);
+        if (ZmailLog.mailop.isDebugEnabled()) {
+            ZmailLog.mailop.debug("renaming " + getMailopContext(this) + " to " + newName);
         }
 
         // actually rename the tag
@@ -328,7 +328,7 @@ public class Tag extends MailItem {
 
     @Override
     void purgeCache(PendingDelete info, boolean purgeItem) throws ServiceException {
-        ZimbraLog.mailop.debug("Removing %s from all items.", getMailopContext(this));
+        ZmailLog.mailop.debug("Removing %s from all items.", getMailopContext(this));
         // remove the tag from all items in the database
         DbTag.deleteTag(this);
         // any folder that contains items might have seen some of its contents change
@@ -354,7 +354,7 @@ public class Tag extends MailItem {
     /** Persists the tag's current unread count to the database. */
     protected void saveTagCounts() throws ServiceException {
         DbTag.persistCounts(this);
-        ZimbraLog.mailbox.debug("\"%s\": updating tag counts (s%d/u%d)", getName(), (int) mData.size, mData.unreadCount);
+        ZmailLog.mailbox.debug("\"%s\": updating tag counts (s%d/u%d)", getName(), (int) mData.size, mData.unreadCount);
     }
 
     @Override

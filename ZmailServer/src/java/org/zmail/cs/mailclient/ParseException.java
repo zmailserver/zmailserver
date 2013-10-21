@@ -12,7 +12,7 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.mailclient;
+package org.zmail.cs.mailclient;
 
 /**
  * Indicates that a parsing error occurred while reading a mail protocol

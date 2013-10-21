@@ -13,35 +13,35 @@
  * ***** END LICENSE BLOCK *****
  */
 
-package com.zimbra.cs.service.admin;
+package org.zmail.cs.service.admin;
 
 import java.util.List;
 import java.util.Map;
 
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.common.soap.Element;
-import com.zimbra.cs.account.Provisioning;
-import com.zimbra.cs.account.accesscontrol.AdminRight;
-import com.zimbra.cs.account.accesscontrol.Rights.Admin;
-import com.zimbra.cs.volume.Volume;
-import com.zimbra.cs.volume.VolumeManager;
-import com.zimbra.cs.volume.VolumeServiceException;
-import com.zimbra.soap.JaxbUtil;
-import com.zimbra.soap.ZimbraSoapContext;
-import com.zimbra.soap.admin.message.CreateVolumeRequest;
-import com.zimbra.soap.admin.message.CreateVolumeResponse;
-import com.zimbra.soap.admin.type.VolumeInfo;
+import org.zmail.common.service.ServiceException;
+import org.zmail.common.soap.Element;
+import org.zmail.cs.account.Provisioning;
+import org.zmail.cs.account.accesscontrol.AdminRight;
+import org.zmail.cs.account.accesscontrol.Rights.Admin;
+import org.zmail.cs.volume.Volume;
+import org.zmail.cs.volume.VolumeManager;
+import org.zmail.cs.volume.VolumeServiceException;
+import org.zmail.soap.JaxbUtil;
+import org.zmail.soap.ZmailSoapContext;
+import org.zmail.soap.admin.message.CreateVolumeRequest;
+import org.zmail.soap.admin.message.CreateVolumeResponse;
+import org.zmail.soap.admin.type.VolumeInfo;
 
 public final class CreateVolume extends AdminDocumentHandler {
 
     @Override
     public Element handle(Element req, Map<String, Object> ctx) throws ServiceException {
-        ZimbraSoapContext zsc = getZimbraSoapContext(ctx);
+        ZmailSoapContext zsc = getZmailSoapContext(ctx);
         return zsc.jaxbToElement(handle((CreateVolumeRequest) JaxbUtil.elementToJaxb(req), ctx));
     }
 
     private CreateVolumeResponse handle(CreateVolumeRequest req, Map<String, Object> ctx) throws ServiceException {
-        ZimbraSoapContext zsc = getZimbraSoapContext(ctx);
+        ZmailSoapContext zsc = getZmailSoapContext(ctx);
         checkRight(zsc, ctx, Provisioning.getInstance().getLocalServer(), Admin.R_manageVolume);
 
         Volume vol = VolumeManager.getInstance().create(toVolume(req.getVolume()));

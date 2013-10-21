@@ -13,20 +13,20 @@
  * ***** END LICENSE BLOCK *****
  */
 
-package com.zimbra.qa.unittest;
+package org.zmail.qa.unittest;
 
 import java.util.List;
 
-import com.zimbra.common.soap.SoapFaultException;
-import com.zimbra.cs.account.Account;
-import com.zimbra.cs.account.AccountServiceException.AuthFailedServiceException;
-import com.zimbra.common.account.Key.AccountBy;
-import com.zimbra.client.ZFeatures;
-import com.zimbra.client.ZGetInfoResult;
-import com.zimbra.client.ZMailbox;
-import com.zimbra.client.ZPrefs;
-import com.zimbra.client.ZSignature;
-import com.zimbra.client.ZMailbox.Options;
+import org.zmail.common.soap.SoapFaultException;
+import org.zmail.cs.account.Account;
+import org.zmail.cs.account.AccountServiceException.AuthFailedServiceException;
+import org.zmail.common.account.Key.AccountBy;
+import org.zmail.client.ZFeatures;
+import org.zmail.client.ZGetInfoResult;
+import org.zmail.client.ZMailbox;
+import org.zmail.client.ZPrefs;
+import org.zmail.client.ZSignature;
+import org.zmail.client.ZMailbox.Options;
 
 import junit.framework.TestCase;
 

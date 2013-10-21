@@ -13,7 +13,7 @@
  * ***** END LICENSE BLOCK *****
  */
 
-package com.zimbra.cs.store.external;
+package org.zmail.cs.store.external;
 
 import java.io.File;
 import java.io.FileFilter;
@@ -26,10 +26,10 @@ import java.util.List;
 import org.apache.commons.io.filefilter.FileFileFilter;
 
 import com.google.common.annotations.VisibleForTesting;
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.common.util.FileUtil;
-import com.zimbra.common.util.ZimbraLog;
-import com.zimbra.cs.mailbox.Mailbox;
+import org.zmail.common.service.ServiceException;
+import org.zmail.common.util.FileUtil;
+import org.zmail.common.util.ZmailLog;
+import org.zmail.cs.mailbox.Mailbox;
 
 /**
  * Example implementation of ExternalStoreManager which writes to a flat directory structure
@@ -43,7 +43,7 @@ public class SimpleStoreManager extends ExternalStoreManager {
     @Override
     public void startup() throws IOException, ServiceException {
         super.startup();
-        ZimbraLog.store.info("Using SimpleStoreManager. If you are seeing this in production you have done something WRONG!");
+        ZmailLog.store.info("Using SimpleStoreManager. If you are seeing this in production you have done something WRONG!");
         FileUtil.mkdirs(new File(directory));
     }
 
@@ -60,7 +60,7 @@ public class SimpleStoreManager extends ExternalStoreManager {
     private File getNewFile(Mailbox mbox) throws IOException {
         String baseName = dirName(mbox);
         FileUtil.mkdirs(new File(baseName));
-        baseName += "/zimbrablob";
+        baseName += "/zmailblob";
         String name = baseName;
         synchronized (this) {
             int count = 1;
@@ -70,7 +70,7 @@ public class SimpleStoreManager extends ExternalStoreManager {
                 file = new File(name+".msg");
             }
             if (file.createNewFile()) {
-                ZimbraLog.store.debug("writing to new file %s",file.getName());
+                ZmailLog.store.debug("writing to new file %s",file.getName());
                 return file;
             } else {
                 throw new IOException("unable to create new file");

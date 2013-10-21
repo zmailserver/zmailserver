@@ -13,32 +13,32 @@
  * ***** END LICENSE BLOCK *****
  */
 
-package com.zimbra.cs.service.admin;
+package org.zmail.cs.service.admin;
 
 import java.util.List;
 import java.util.Map;
 
-import com.zimbra.common.account.Key;
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.common.soap.Element;
-import com.zimbra.cs.account.AccountServiceException;
-import com.zimbra.cs.account.Entry;
-import com.zimbra.cs.account.Provisioning;
-import com.zimbra.cs.account.accesscontrol.AdminRight;
-import com.zimbra.cs.mailbox.RetentionPolicyManager;
-import com.zimbra.soap.JaxbUtil;
-import com.zimbra.soap.ZimbraSoapContext;
-import com.zimbra.soap.admin.message.DeleteSystemRetentionPolicyRequest;
-import com.zimbra.soap.admin.message.DeleteSystemRetentionPolicyResponse;
-import com.zimbra.soap.admin.type.CosSelector;
-import com.zimbra.soap.mail.message.GetSystemRetentionPolicyRequest;
-import com.zimbra.soap.mail.type.Policy;
+import org.zmail.common.account.Key;
+import org.zmail.common.service.ServiceException;
+import org.zmail.common.soap.Element;
+import org.zmail.cs.account.AccountServiceException;
+import org.zmail.cs.account.Entry;
+import org.zmail.cs.account.Provisioning;
+import org.zmail.cs.account.accesscontrol.AdminRight;
+import org.zmail.cs.mailbox.RetentionPolicyManager;
+import org.zmail.soap.JaxbUtil;
+import org.zmail.soap.ZmailSoapContext;
+import org.zmail.soap.admin.message.DeleteSystemRetentionPolicyRequest;
+import org.zmail.soap.admin.message.DeleteSystemRetentionPolicyResponse;
+import org.zmail.soap.admin.type.CosSelector;
+import org.zmail.soap.mail.message.GetSystemRetentionPolicyRequest;
+import org.zmail.soap.mail.type.Policy;
 
 public class DeleteSystemRetentionPolicy extends AdminDocumentHandler {
 
     @Override
     public Element handle(Element request, Map<String, Object> context) throws ServiceException {
-        ZimbraSoapContext zsc = getZimbraSoapContext(context);
+        ZmailSoapContext zsc = getZmailSoapContext(context);
         
         DeleteSystemRetentionPolicyRequest req = JaxbUtil.elementToJaxb(request);
         Provisioning prov = Provisioning.getInstance();

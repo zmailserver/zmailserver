@@ -16,8 +16,8 @@
 use strict;
 use Getopt::Std;
 
-my $pid_file = '/opt/zimbra/log/zmmailboxd_java.pid';
-my $log_file = '/opt/zimbra/log/zmmailboxd.out';
+my $pid_file = '/opt/zmail/log/zmmailboxd_java.pid';
+my $log_file = '/opt/zmail/log/zmmailboxd.out';
 my $outhandle = \*STDOUT;
 my $timeout = 30;
 my $pid;
@@ -106,8 +106,8 @@ print $outhandle "$msg";
 my $printing = 0;
 my $done = 0;
 
-#if ( -x "/opt/zimbra/java/bin/jstack" ) {
-  #$tail = open(TAIL, "/opt/zimbra/java/bin/jstack $pid|") || die "jstack: $!";
+#if ( -x "/opt/zmail/java/bin/jstack" ) {
+  #$tail = open(TAIL, "/opt/zmail/java/bin/jstack $pid|") || die "jstack: $!";
 #} else {
   $tail = open(TAIL, "tail -F $log_file |") || die "$log_file: unable to tail: $!";
   if (!fork()) {

@@ -12,14 +12,14 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.util;
+package org.zmail.cs.util;
 
 import java.io.File;
 
-import com.zimbra.common.localconfig.LC;
-import com.zimbra.common.util.Constants;
-import com.zimbra.common.util.ZimbraLog;
-import com.zimbra.cs.memcached.MemcachedConnector;
+import org.zmail.common.localconfig.LC;
+import org.zmail.common.util.Constants;
+import org.zmail.common.util.ZmailLog;
+import org.zmail.cs.memcached.MemcachedConnector;
 
 import net.sf.ehcache.CacheManager;
 import net.sf.ehcache.config.CacheConfiguration;
@@ -45,11 +45,11 @@ public final class EhcacheManager {
     private EhcacheManager() {
         Configuration conf = new Configuration();
         DiskStoreConfiguration disk = new DiskStoreConfiguration();
-        disk.setPath(LC.zimbra_home.value() + File.separator + "data" + File.separator + "mailboxd");
+        disk.setPath(LC.zmail_home.value() + File.separator + "data" + File.separator + "mailboxd");
         conf.addDiskStore(disk);
         conf.addCache(createImapActiveSessionCache());
         if (MemcachedConnector.isConnected()) {
-            ZimbraLog.imap.info("Using Memcached for inactive session cache");
+            ZmailLog.imap.info("Using Memcached for inactive session cache");
         } else {
             conf.addCache(createImapInactiveSessionCache());
         }

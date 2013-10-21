@@ -12,7 +12,7 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.mime.handler;
+package org.zmail.cs.mime.handler;
 
 import java.io.IOException;
 
@@ -20,10 +20,10 @@ import javax.activation.DataSource;
 
 import org.apache.lucene.document.Document;
 
-import com.zimbra.cs.convert.AttachmentInfo;
-import com.zimbra.cs.convert.ConversionException;
-import com.zimbra.cs.mime.MimeHandler;
-import com.zimbra.cs.mime.MimeHandlerException;
+import org.zmail.cs.convert.AttachmentInfo;
+import org.zmail.cs.convert.ConversionException;
+import org.zmail.cs.mime.MimeHandler;
+import org.zmail.cs.mime.MimeHandlerException;
 /**
  * A mime handler that does nothing. Unlike the unknown type handler
  * this won't throw any exceptions for calling the wrong method.

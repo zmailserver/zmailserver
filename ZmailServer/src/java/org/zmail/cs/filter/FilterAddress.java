@@ -13,11 +13,11 @@
  * ***** END LICENSE BLOCK *****
  */
 
-package com.zimbra.cs.filter;
+package org.zmail.cs.filter;
 
 import org.apache.jsieve.mail.MailAdapter.Address;
 
-import com.zimbra.common.util.EmailUtil;
+import org.zmail.common.util.EmailUtil;
 
 /**
  * Used for returning an email address to the jSieve

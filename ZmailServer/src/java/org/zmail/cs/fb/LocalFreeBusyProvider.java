@@ -12,32 +12,32 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.fb;
+package org.zmail.cs.fb;
 
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
-import com.zimbra.common.localconfig.LC;
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.cs.account.AccessManager;
-import com.zimbra.cs.account.Account;
-import com.zimbra.cs.account.accesscontrol.Rights.User;
-import com.zimbra.cs.fb.FreeBusy.FBInstance;
-import com.zimbra.cs.fb.FreeBusy.Interval;
-import com.zimbra.cs.fb.FreeBusy.IntervalList;
-import com.zimbra.cs.mailbox.Appointment;
-import com.zimbra.cs.mailbox.CalendarItem;
-import com.zimbra.cs.mailbox.Flag;
-import com.zimbra.cs.mailbox.Folder;
-import com.zimbra.cs.mailbox.MailItem;
-import com.zimbra.cs.mailbox.Mailbox;
-import com.zimbra.cs.mailbox.MailboxManager;
-import com.zimbra.cs.mailbox.calendar.IcalXmlStrMap;
-import com.zimbra.cs.mailbox.calendar.cache.CalendarItemData;
-import com.zimbra.cs.mailbox.calendar.cache.FullInstanceData;
-import com.zimbra.cs.mailbox.calendar.cache.InstanceData;
-import com.zimbra.cs.mailbox.calendar.cache.CalSummaryCache.CalendarDataResult;
+import org.zmail.common.localconfig.LC;
+import org.zmail.common.service.ServiceException;
+import org.zmail.cs.account.AccessManager;
+import org.zmail.cs.account.Account;
+import org.zmail.cs.account.accesscontrol.Rights.User;
+import org.zmail.cs.fb.FreeBusy.FBInstance;
+import org.zmail.cs.fb.FreeBusy.Interval;
+import org.zmail.cs.fb.FreeBusy.IntervalList;
+import org.zmail.cs.mailbox.Appointment;
+import org.zmail.cs.mailbox.CalendarItem;
+import org.zmail.cs.mailbox.Flag;
+import org.zmail.cs.mailbox.Folder;
+import org.zmail.cs.mailbox.MailItem;
+import org.zmail.cs.mailbox.Mailbox;
+import org.zmail.cs.mailbox.MailboxManager;
+import org.zmail.cs.mailbox.calendar.IcalXmlStrMap;
+import org.zmail.cs.mailbox.calendar.cache.CalendarItemData;
+import org.zmail.cs.mailbox.calendar.cache.FullInstanceData;
+import org.zmail.cs.mailbox.calendar.cache.InstanceData;
+import org.zmail.cs.mailbox.calendar.cache.CalSummaryCache.CalendarDataResult;
 
 public class LocalFreeBusyProvider {
 

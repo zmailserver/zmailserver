@@ -12,7 +12,7 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.qa.unittest.prov;
+package org.zmail.qa.unittest.prov;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
@@ -22,18 +22,18 @@ import java.util.HashMap;
 import java.util.Map;
 
 import com.google.common.collect.Maps;
-import com.zimbra.common.account.ZAttrProvisioning.AutoProvAuthMech;
-import com.zimbra.common.account.ZAttrProvisioning.AutoProvMode;
-import com.zimbra.common.util.StringUtil;
-import com.zimbra.cs.account.Account;
-import com.zimbra.cs.account.Domain;
-import com.zimbra.cs.account.Provisioning;
-import com.zimbra.cs.account.ldap.AutoProvisionListener;
-import com.zimbra.cs.ldap.LdapClient;
-import com.zimbra.cs.ldap.LdapServerType;
-import com.zimbra.cs.ldap.LdapUsage;
-import com.zimbra.cs.ldap.ZLdapContext;
-import com.zimbra.cs.ldap.ZMutableEntry;
+import org.zmail.common.account.ZAttrProvisioning.AutoProvAuthMech;
+import org.zmail.common.account.ZAttrProvisioning.AutoProvMode;
+import org.zmail.common.util.StringUtil;
+import org.zmail.cs.account.Account;
+import org.zmail.cs.account.Domain;
+import org.zmail.cs.account.Provisioning;
+import org.zmail.cs.account.ldap.AutoProvisionListener;
+import org.zmail.cs.ldap.LdapClient;
+import org.zmail.cs.ldap.LdapServerType;
+import org.zmail.cs.ldap.LdapUsage;
+import org.zmail.cs.ldap.ZLdapContext;
+import org.zmail.cs.ldap.ZMutableEntry;
 
 public class AutoProvisionTestUtil {
 
@@ -42,7 +42,7 @@ public class AutoProvisionTestUtil {
      *
      */
     public static class MarkEntryProvisionedListener implements AutoProvisionListener {
-        private static final String PROVED_INDICATOR_ATTR = Provisioning.A_zimbraNotes;
+        private static final String PROVED_INDICATOR_ATTR = Provisioning.A_zmailNotes;
         private static final String PROVED_NOTE = "PROVISIONED IN ZIMBRA";
         public static final String NOT_PROVED_FILTER = "(!(" + PROVED_INDICATOR_ATTR + "=" + PROVED_NOTE + "))";
         
@@ -73,22 +73,22 @@ public class AutoProvisionTestUtil {
         }
     }
 
-    public static Map<String, Object> commonZimbraDomainAttrs() {
-        Map<String, Object> zimbraDomainAttrs = new HashMap<String, Object>();
+    public static Map<String, Object> commonZmailDomainAttrs() {
+        Map<String, Object> zmailDomainAttrs = new HashMap<String, Object>();
         
-        StringUtil.addToMultiMap(zimbraDomainAttrs, Provisioning.A_zimbraAutoProvAuthMech, AutoProvAuthMech.LDAP.name());
-        StringUtil.addToMultiMap(zimbraDomainAttrs, Provisioning.A_zimbraAutoProvMode, AutoProvMode.LAZY.name());
-        StringUtil.addToMultiMap(zimbraDomainAttrs, Provisioning.A_zimbraAutoProvMode, AutoProvMode.MANUAL.name());
-        StringUtil.addToMultiMap(zimbraDomainAttrs, Provisioning.A_zimbraAutoProvMode, AutoProvMode.EAGER.name());
+        StringUtil.addToMultiMap(zmailDomainAttrs, Provisioning.A_zmailAutoProvAuthMech, AutoProvAuthMech.LDAP.name());
+        StringUtil.addToMultiMap(zmailDomainAttrs, Provisioning.A_zmailAutoProvMode, AutoProvMode.LAZY.name());
+        StringUtil.addToMultiMap(zmailDomainAttrs, Provisioning.A_zmailAutoProvMode, AutoProvMode.MANUAL.name());
+        StringUtil.addToMultiMap(zmailDomainAttrs, Provisioning.A_zmailAutoProvMode, AutoProvMode.EAGER.name());
         
-        zimbraDomainAttrs.put(Provisioning.A_zimbraAutoProvLdapURL, "ldap://localhost:389");
-        zimbraDomainAttrs.put(Provisioning.A_zimbraAutoProvLdapAdminBindDn, "cn=config");
-        zimbraDomainAttrs.put(Provisioning.A_zimbraAutoProvLdapAdminBindPassword, "zimbra");
+        zmailDomainAttrs.put(Provisioning.A_zmailAutoProvLdapURL, "ldap://localhost:389");
+        zmailDomainAttrs.put(Provisioning.A_zmailAutoProvLdapAdminBindDn, "cn=config");
+        zmailDomainAttrs.put(Provisioning.A_zmailAutoProvLdapAdminBindPassword, "zmail");
     
-        StringUtil.addToMultiMap(zimbraDomainAttrs, Provisioning.A_zimbraAutoProvAttrMap, "sn=displayName");
-        StringUtil.addToMultiMap(zimbraDomainAttrs, Provisioning.A_zimbraAutoProvAttrMap, "displayName=sn");
+        StringUtil.addToMultiMap(zmailDomainAttrs, Provisioning.A_zmailAutoProvAttrMap, "sn=displayName");
+        StringUtil.addToMultiMap(zmailDomainAttrs, Provisioning.A_zmailAutoProvAttrMap, "displayName=sn");
                 
-        return zimbraDomainAttrs;
+        return zmailDomainAttrs;
     }
 
     public static void verifyAcctAutoProvisioned(Account acct) throws Exception {

@@ -12,7 +12,7 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.util.yauth;
+package org.zmail.cs.util.yauth;
 
 public interface Auth {
     String getAppId();

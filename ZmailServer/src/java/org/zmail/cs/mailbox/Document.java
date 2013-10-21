@@ -12,7 +12,7 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.mailbox;
+package org.zmail.cs.mailbox;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -20,19 +20,19 @@ import java.util.List;
 
 import com.google.common.base.Objects;
 import com.google.common.base.Strings;
-import com.zimbra.cs.account.Account;
-import com.zimbra.cs.account.Provisioning;
-import com.zimbra.cs.db.DbMailItem;
-import com.zimbra.cs.index.IndexDocument;
-import com.zimbra.cs.mailbox.MailItem.CustomMetadata.CustomMetadataList;
-import com.zimbra.cs.mime.ParsedDocument;
-import com.zimbra.cs.session.PendingModifications.Change;
-import com.zimbra.cs.store.MailboxBlob;
-import com.zimbra.cs.store.StagedBlob;
-import com.zimbra.common.mailbox.Color;
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.common.util.ZimbraLog;
-import com.zimbra.common.localconfig.LC;
+import org.zmail.cs.account.Account;
+import org.zmail.cs.account.Provisioning;
+import org.zmail.cs.db.DbMailItem;
+import org.zmail.cs.index.IndexDocument;
+import org.zmail.cs.mailbox.MailItem.CustomMetadata.CustomMetadataList;
+import org.zmail.cs.mime.ParsedDocument;
+import org.zmail.cs.session.PendingModifications.Change;
+import org.zmail.cs.store.MailboxBlob;
+import org.zmail.cs.store.StagedBlob;
+import org.zmail.common.mailbox.Color;
+import org.zmail.common.service.ServiceException;
+import org.zmail.common.util.ZmailLog;
+import org.zmail.common.localconfig.LC;
 /**
  * @since Aug 23, 2004
  */
@@ -109,7 +109,7 @@ public class Document extends MailItem {
 
     @Override
     int getMaxRevisions() throws ServiceException {
-        return getAccount().getIntAttr(Provisioning.A_zimbraNotebookMaxRevisions, 0);
+        return getAccount().getIntAttr(Provisioning.A_zmailNotebookMaxRevisions, 0);
     }
 
     @Override
@@ -117,7 +117,7 @@ public class Document extends MailItem {
         try {
             MailboxBlob mblob = getBlob();
             if (mblob == null) {
-                ZimbraLog.index.warn("Unable to fetch blob for Document id=%d,ver=%d,vol=%s",
+                ZmailLog.index.warn("Unable to fetch blob for Document id=%d,ver=%d,vol=%s",
                         mId, mVersion, getLocator());
                 throw new MailItem.TemporaryIndexingException();
             }
@@ -139,10 +139,10 @@ public class Document extends MailItem {
                 return new ArrayList<IndexDocument>(0);
             }
         } catch (IOException e) {
-            ZimbraLog.index.warn("Error generating index data for Wiki Document "+getId()+". Item will not be indexed", e);
+            ZmailLog.index.warn("Error generating index data for Wiki Document "+getId()+". Item will not be indexed", e);
             return new ArrayList<IndexDocument>(0);
         } catch (ServiceException e) {
-            ZimbraLog.index.warn("Error generating index data for Wiki Document "+getId()+". Item will not be indexed", e);
+            ZmailLog.index.warn("Error generating index data for Wiki Document "+getId()+". Item will not be indexed", e);
             return new ArrayList<IndexDocument>(0);
         }
     }
@@ -213,7 +213,7 @@ public class Document extends MailItem {
         data.id = id;
         data.type = type.toByte();
         data.folderId = folder.getId();
-        if (!folder.inSpam() || mbox.getAccount().getBooleanAttr(Provisioning.A_zimbraJunkMessagesIndexingEnabled, false)) {
+        if (!folder.inSpam() || mbox.getAccount().getBooleanAttr(Provisioning.A_zmailJunkMessagesIndexingEnabled, false)) {
             data.indexId = IndexStatus.DEFERRED.id();
         }
         data.imapId = id;
@@ -236,7 +236,7 @@ public class Document extends MailItem {
         UnderlyingData data = prepareCreate(Type.DOCUMENT, id, uuid, folder, filename, type, pd, null, custom, flags);
         data.contentChanged(mbox);
 
-        ZimbraLog.mailop.info("Adding Document %s: id=%d, folderId=%d, folderName=%s",
+        ZmailLog.mailop.info("Adding Document %s: id=%d, folderId=%d, folderName=%s",
                 filename, data.id, folder.getId(), folder.getName());
         new DbMailItem(mbox).create(data);
 

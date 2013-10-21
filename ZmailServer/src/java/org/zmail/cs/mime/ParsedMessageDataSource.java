@@ -13,9 +13,9 @@
  * ***** END LICENSE BLOCK *****
  */
 
-package com.zimbra.cs.mime;
+package org.zmail.cs.mime;
 
-import com.zimbra.common.mime.MimeConstants;
+import org.zmail.common.mime.MimeConstants;
 
 import java.io.IOException;
 import java.io.InputStream;

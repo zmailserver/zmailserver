@@ -12,7 +12,7 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.store;
+package org.zmail.cs.store;
 
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
@@ -22,9 +22,9 @@ import java.io.ObjectOutputStream;
 import org.junit.Assert;
 import org.junit.Test;
 
-import com.zimbra.cs.account.MockProvisioning;
-import com.zimbra.cs.mailbox.Mailbox;
-import com.zimbra.cs.store.MailboxBlob.MailboxBlobInfo;
+import org.zmail.cs.account.MockProvisioning;
+import org.zmail.cs.mailbox.Mailbox;
+import org.zmail.cs.store.MailboxBlob.MailboxBlobInfo;
 
 public class MailboxBlobTest {
     @Test

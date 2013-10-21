@@ -16,7 +16,7 @@
 /*
  * Created on May 26, 2004
  */
-package com.zimbra.cs.service.admin;
+package org.zmail.cs.service.admin;
 
 import java.util.HashMap;
 import java.util.List;
@@ -25,37 +25,37 @@ import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.zimbra.cs.account.Account;
-import com.zimbra.cs.account.AccountServiceException.AuthFailedServiceException;
-import com.zimbra.cs.account.AuthToken;
-import com.zimbra.cs.account.AuthTokenException;
-import com.zimbra.cs.account.Domain;
-import com.zimbra.cs.account.Provisioning;
-import com.zimbra.common.account.Key;
-import com.zimbra.common.account.Key.AccountBy;
-import com.zimbra.common.account.Key.DomainBy;
-import com.zimbra.cs.account.ZimbraAuthToken;
-import com.zimbra.cs.account.accesscontrol.AdminRight;
-import com.zimbra.cs.account.auth.AuthContext;
-import com.zimbra.cs.account.auth.AuthMechanism.AuthMech;
-import com.zimbra.cs.session.Session;
-import com.zimbra.cs.service.AuthProvider;
-import com.zimbra.cs.util.AccountUtil;
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.common.util.ZimbraCookie;
-import com.zimbra.common.util.ZimbraLog;
-import com.zimbra.common.soap.AccountConstants;
-import com.zimbra.common.soap.AdminConstants;
-import com.zimbra.common.soap.Element;
-import com.zimbra.soap.SoapEngine;
-import com.zimbra.soap.SoapServlet;
-import com.zimbra.soap.ZimbraSoapContext;
+import org.zmail.cs.account.Account;
+import org.zmail.cs.account.AccountServiceException.AuthFailedServiceException;
+import org.zmail.cs.account.AuthToken;
+import org.zmail.cs.account.AuthTokenException;
+import org.zmail.cs.account.Domain;
+import org.zmail.cs.account.Provisioning;
+import org.zmail.common.account.Key;
+import org.zmail.common.account.Key.AccountBy;
+import org.zmail.common.account.Key.DomainBy;
+import org.zmail.cs.account.ZmailAuthToken;
+import org.zmail.cs.account.accesscontrol.AdminRight;
+import org.zmail.cs.account.auth.AuthContext;
+import org.zmail.cs.account.auth.AuthMechanism.AuthMech;
+import org.zmail.cs.session.Session;
+import org.zmail.cs.service.AuthProvider;
+import org.zmail.cs.util.AccountUtil;
+import org.zmail.common.service.ServiceException;
+import org.zmail.common.util.ZmailCookie;
+import org.zmail.common.util.ZmailLog;
+import org.zmail.common.soap.AccountConstants;
+import org.zmail.common.soap.AdminConstants;
+import org.zmail.common.soap.Element;
+import org.zmail.soap.SoapEngine;
+import org.zmail.soap.SoapServlet;
+import org.zmail.soap.ZmailSoapContext;
 
 public class Auth extends AdminDocumentHandler {
 
     @Override
     public Element handle(Element request, Map<String, Object> context) throws ServiceException {
-        ZimbraSoapContext zsc = getZimbraSoapContext(context);
+        ZmailSoapContext zsc = getZmailSoapContext(context);
         AuthToken at = null;
         Account acct = null;
 
@@ -63,13 +63,13 @@ public class Auth extends AdminDocumentHandler {
 
         Element authTokenEl = request.getOptionalElement(AdminConstants.E_AUTH_TOKEN);
         if (authTokenEl != null) {
-            // authtoken admin auth is only supported by Yahoo auth provider, not the default Zimbra auth provider
+            // authtoken admin auth is only supported by Yahoo auth provider, not the default Zmail auth provider
             try {
                 at = AuthProvider.getAuthToken(request, new HashMap<String, Object>());
                 if (at == null)
                     throw ServiceException.AUTH_EXPIRED();
 
-                com.zimbra.cs.service.account.Auth.addAccountToLogContextByAuthToken(prov, at);
+                org.zmail.cs.service.account.Auth.addAccountToLogContextByAuthToken(prov, at);
 
                 if (at.isExpired())
                     throw ServiceException.AUTH_EXPIRED();
@@ -120,7 +120,7 @@ public class Auth extends AdminDocumentHandler {
             try {
 
                 if (by == AccountBy.name && value.indexOf("@") == -1) {
-                    // first try to get by adminName, which resolves the account under cn=admins,cn=zimbra
+                    // first try to get by adminName, which resolves the account under cn=admins,cn=zmail
                     // and does not need a domain 
                     acct = prov.get(AccountBy.adminName, value, zsc.getAuthToken());
 
@@ -140,9 +140,9 @@ public class Auth extends AdminDocumentHandler {
                 if (acct == null)
                     throw AuthFailedServiceException.AUTH_FAILED(value, valuePassedIn, "account not found");
 
-                AccountUtil.addAccountToLogContext(prov, acct.getId(), ZimbraLog.C_NAME, ZimbraLog.C_ID, null);
+                AccountUtil.addAccountToLogContext(prov, acct.getId(), ZmailLog.C_NAME, ZmailLog.C_ID, null);
 
-                ZimbraLog.security.info(ZimbraLog.encodeAttrs(
+                ZmailLog.security.info(ZmailLog.encodeAttrs(
                         new String[] {"cmd", "AdminAuth","account", value})); 
 
                 Map<String, Object> authCtxt = new HashMap<String, Object>();
@@ -157,7 +157,7 @@ public class Auth extends AdminDocumentHandler {
                 at = AuthProvider.getAuthToken(acct, true, authedByMech);
 
             } catch (ServiceException se) {
-                ZimbraLog.security.warn(ZimbraLog.encodeAttrs(
+                ZmailLog.security.warn(ZmailLog.encodeAttrs(
                         new String[] {"cmd", "AdminAuth","account", value, "error", se.getMessage()}));    
                 throw se;
             }
@@ -176,7 +176,7 @@ public class Auth extends AdminDocumentHandler {
                 if ("ADMIN_AUTH_KEY".equals(name) &&
                         "1210713456+dDedin1lO8d1_j8Kl.vl".equals(value)) {
                     Account acct = Provisioning.getInstance().get(AccountBy.name, "admin@phoebe.mac");
-                    return new ZimbraAuthToken(acct, true, null);
+                    return new ZmailAuthToken(acct, true, null);
                 }
             }
         }
@@ -184,15 +184,15 @@ public class Auth extends AdminDocumentHandler {
     }
 
     private void checkAdmin(Account acct) throws ServiceException {
-        boolean isDomainAdmin = acct.getBooleanAttr(Provisioning.A_zimbraIsDomainAdminAccount, false);
-        boolean isAdmin= acct.getBooleanAttr(Provisioning.A_zimbraIsAdminAccount, false);            
-        boolean isDelegatedAdmin= acct.getBooleanAttr(Provisioning.A_zimbraIsDelegatedAdminAccount, false);            
+        boolean isDomainAdmin = acct.getBooleanAttr(Provisioning.A_zmailIsDomainAdminAccount, false);
+        boolean isAdmin= acct.getBooleanAttr(Provisioning.A_zmailIsAdminAccount, false);            
+        boolean isDelegatedAdmin= acct.getBooleanAttr(Provisioning.A_zmailIsDelegatedAdminAccount, false);            
         boolean ok = (isDomainAdmin || isAdmin || isDelegatedAdmin);
         if (!ok) 
             throw ServiceException.PERM_DENIED("not an admin account");
     }
 
-    private Element doResponse(Element request, AuthToken at, ZimbraSoapContext zsc, 
+    private Element doResponse(Element request, AuthToken at, ZmailSoapContext zsc, 
             Map<String, Object> context, Account acct) throws ServiceException {
         Element response = zsc.createElement(AdminConstants.AUTH_RESPONSE);
         at.encodeAuthResp(response, true);
@@ -204,13 +204,13 @@ public class Auth extends AdminDocumentHandler {
         HttpServletRequest httpReq = (HttpServletRequest)context.get(SoapServlet.SERVLET_REQUEST);
         HttpServletResponse httpResp = (HttpServletResponse)context.get(SoapServlet.SERVLET_RESPONSE);
         boolean rememberMe = request.getAttributeBool(AdminConstants.A_PERSIST_AUTH_TOKEN_COOKIE, false);
-        at.encode(httpResp, true, ZimbraCookie.secureCookie(httpReq), rememberMe);
+        at.encode(httpResp, true, ZmailCookie.secureCookie(httpReq), rememberMe);
         
         response.addAttribute(AdminConstants.E_LIFETIME, at.getExpires() - System.currentTimeMillis(), Element.Disposition.CONTENT);
 
         Session session = updateAuthenticatedAccount(zsc, at, context, true);
         if (session != null) {
-            ZimbraSoapContext.encodeSession(response, session.getSessionId(), session.getSessionType());
+            ZmailSoapContext.encodeSession(response, session.getSessionId(), session.getSessionType());
         }
         return response;
     }

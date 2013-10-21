@@ -12,19 +12,19 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.service.admin;
+package org.zmail.cs.service.admin;
 
 import java.util.Map;
 
-import com.zimbra.common.account.Key.AccountBy;
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.common.soap.AccountConstants;
-import com.zimbra.common.soap.Element;
-import com.zimbra.cs.account.Account;
-import com.zimbra.cs.account.Provisioning;
-import com.zimbra.cs.account.Server;
-import com.zimbra.cs.service.AuthProvider;
-import com.zimbra.soap.ZimbraSoapContext;
+import org.zmail.common.account.Key.AccountBy;
+import org.zmail.common.service.ServiceException;
+import org.zmail.common.soap.AccountConstants;
+import org.zmail.common.soap.Element;
+import org.zmail.cs.account.Account;
+import org.zmail.cs.account.Provisioning;
+import org.zmail.cs.account.Server;
+import org.zmail.cs.service.AuthProvider;
+import org.zmail.soap.ZmailSoapContext;
 
 public abstract class AdminGalDocumentHandler extends AdminDocumentHandler {
     private static final String[] TARGET_ACCOUNT_PATH = new String[] { AccountConstants.A_GAL_ACCOUNT_ID };
@@ -37,7 +37,7 @@ public abstract class AdminGalDocumentHandler extends AdminDocumentHandler {
     protected Element proxyIfNecessary(Element request, Map<String, Object> context) 
     throws ServiceException {
         try {
-            ZimbraSoapContext zsc = getZimbraSoapContext(context);
+            ZmailSoapContext zsc = getZmailSoapContext(context);
             
             Provisioning prov = Provisioning.getInstance();
             
@@ -49,7 +49,7 @@ public abstract class AdminGalDocumentHandler extends AdminDocumentHandler {
                 if (acct != null) {
                     if (!Provisioning.onLocalServer(acct)) {
                         /*
-                         * bug 69805, see comments in com.zimbra.cs.service.account.GalDocumentHandler
+                         * bug 69805, see comments in org.zmail.cs.service.account.GalDocumentHandler
                          */
                         boolean proxied = request.getAttributeBool(AccountConstants.A_GAL_ACCOUNT_PROXIED, false);
                         if (proxied) {

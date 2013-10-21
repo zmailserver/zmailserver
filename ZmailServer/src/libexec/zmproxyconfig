@@ -17,8 +17,8 @@
 # This script enables and disables proxy, and sets the default values for each case
 
 use strict;
-use lib "/opt/zimbra/zimbramon/lib";
-use Zimbra::Util::Common;
+use lib "/opt/zmail/zmailmon/lib";
+use Zmail::Util::Common;
 use Getopt::Std;
 use IPC::Open3;
 use FileHandle;
@@ -28,8 +28,8 @@ my $enabledMailProxy;
 my ($i1, $i2, $i3, $i4, $p1, $p2, $p3, $p4, $w1, $w2, $w3, $w4, $n1, $n2);
 
 my %packageServiceMap = (
-  mailbox   => "zimbra-store",
-  proxy => "zimbra-proxy",
+  mailbox   => "zmail-store",
+  proxy => "zmail-proxy",
 );
 
 my $ImapEnabled="7143:143:7993:993";
@@ -49,14 +49,14 @@ our %loaded = ();
 
 getopts('a:defhH:i:mop:rstwx:cCn:uU',\%options) or die "Unable to set options\n";
 
-our $ZMPROV = "/opt/zimbra/bin/zmprov -l 1>/dev/null";
-our $platform = `/opt/zimbra/libexec/get_plat_tag.sh`;
+our $ZMPROV = "/opt/zmail/bin/zmprov -l 1>/dev/null";
+our $platform = `/opt/zmail/libexec/get_plat_tag.sh`;
 chomp ($platform);
 
 my $id = getpwuid($<);
 chomp $id;
-if ($id ne "zimbra") {
-    print STDERR "Error: must be run as zimbra user\n";
+if ($id ne "zmail") {
+    print STDERR "Error: must be run as zmail user\n";
     exit (1);
 }
 
@@ -150,12 +150,12 @@ if ($options{u} && $options{U}) {
 }
 
 my $hostname = $options{H};
-my $zimbra_server_hostname=getLocalConfig("zimbra_server_hostname");
+my $zmail_server_hostname=getLocalConfig("zmail_server_hostname");
 
 #check SSL to Upstream setting
 if (!$options{u} || !$options{U}) {
-	my @res = `/opt/zimbra/bin/zmprov -l gs $hostname zimbraReverseProxySSLToUpstreamEnabled\n`;
-    if ($res[1] =~ /zimbraReverseProxySSLToUpstreamEnabled:\ (.+)/) {
+	my @res = `/opt/zmail/bin/zmprov -l gs $hostname zmailReverseProxySSLToUpstreamEnabled\n`;
+    if ($res[1] =~ /zmailReverseProxySSLToUpstreamEnabled:\ (.+)/) {
         $SSLToUp = $1;
 	}
 }
@@ -184,12 +184,12 @@ if ($#ARGV != -1) {
 
 }
 
-if ((lc($hostname) ne lc($zimbra_server_hostname)) && !$options{r}) {
+if ((lc($hostname) ne lc($zmail_server_hostname)) && !$options{r}) {
    print "Must use -r option to modify a remote host.\n";
    exit 1;
 }
 
-if (!isInstalled("zimbra-store") && !isInstalled("zimbra-proxy")) {
+if (!isInstalled("zmail-store") && !isInstalled("zmail-proxy")) {
     print STDERR "Error: The store or proxy package must be installed.\n";
     exit {1};
 }
@@ -198,28 +198,28 @@ if (!isInstalled("zimbra-store") && !isInstalled("zimbra-proxy")) {
 open(ZMPROV, "|$ZMPROV");
 
 if ($options{f}) {
-  my $zimbraReverseProxyMailHostQuery =
-        "\(\|\(zimbraMailDeliveryAddress=\${USER}\)\(zimbraMailAlias=\${USER}\)\(zimbraId=\${USER}\)\)";
-  my $zimbraReverseProxyDomainNameQuery =
-        '\(\&\(zimbraVirtualIPAddress=\${IPADDR}\)\(objectClass=zimbraDomain\)\)';
-  my $zimbraReverseProxyPortQuery =
-        '\(\&\(zimbraServiceHostname=\${MAILHOST}\)\(objectClass=zimbraServer\)\)';
+  my $zmailReverseProxyMailHostQuery =
+        "\(\|\(zmailMailDeliveryAddress=\${USER}\)\(zmailMailAlias=\${USER}\)\(zmailId=\${USER}\)\)";
+  my $zmailReverseProxyDomainNameQuery =
+        '\(\&\(zmailVirtualIPAddress=\${IPADDR}\)\(objectClass=zmailDomain\)\)';
+  my $zmailReverseProxyPortQuery =
+        '\(\&\(zmailServiceHostname=\${MAILHOST}\)\(objectClass=zmailServer\)\)';
   
-  print ZMPROV "mcf zimbraReverseProxyDomainNameQuery $zimbraReverseProxyDomainNameQuery\n";
-  print ZMPROV "mcf zimbraReverseProxyMailHostQuery $zimbraReverseProxyMailHostQuery\n";
-  print ZMPROV "mcf zimbraReverseProxyPortQuery $zimbraReverseProxyPortQuery\n";
-  print ZMPROV "mcf zimbraMemcachedBindPort 11211\n";
-  print ZMPROV "mcf zimbraReverseProxyMailHostAttribute zimbraMailHost\n";
-  print ZMPROV "mcf zimbraReverseProxyPop3PortAttribute zimbraPop3BindPort\n";
-  print ZMPROV "mcf zimbraReverseProxyPop3SSLPortAttribute zimbraPop3SSLBindPort\n";
-  print ZMPROV "mcf zimbraReverseProxyImapPortAttribute zimbraImapBindPort\n";
-  print ZMPROV "mcf zimbraReverseProxyImapSSLPortAttribute zimbraImapSSLBindPort\n";
-  print ZMPROV "mcf zimbraReverseProxyDomainNameAttribute zimbraDomainName\n";
-  print ZMPROV "mcf zimbraReverseProxyAuthWaitInterval 10s\n";
-  print ZMPROV "mcf zimbraReverseProxyIPLoginLimit 0\n";
-  print ZMPROV "mcf zimbraReverseProxyIPLoginLimitTime 3600\n";
-  print ZMPROV "mcf zimbraReverseProxyUserLoginLimit 0\n";
-  print ZMPROV "mcf zimbraReverseProxyUserLoginLimitTime 3600\n";
+  print ZMPROV "mcf zmailReverseProxyDomainNameQuery $zmailReverseProxyDomainNameQuery\n";
+  print ZMPROV "mcf zmailReverseProxyMailHostQuery $zmailReverseProxyMailHostQuery\n";
+  print ZMPROV "mcf zmailReverseProxyPortQuery $zmailReverseProxyPortQuery\n";
+  print ZMPROV "mcf zmailMemcachedBindPort 11211\n";
+  print ZMPROV "mcf zmailReverseProxyMailHostAttribute zmailMailHost\n";
+  print ZMPROV "mcf zmailReverseProxyPop3PortAttribute zmailPop3BindPort\n";
+  print ZMPROV "mcf zmailReverseProxyPop3SSLPortAttribute zmailPop3SSLBindPort\n";
+  print ZMPROV "mcf zmailReverseProxyImapPortAttribute zmailImapBindPort\n";
+  print ZMPROV "mcf zmailReverseProxyImapSSLPortAttribute zmailImapSSLBindPort\n";
+  print ZMPROV "mcf zmailReverseProxyDomainNameAttribute zmailDomainName\n";
+  print ZMPROV "mcf zmailReverseProxyAuthWaitInterval 10s\n";
+  print ZMPROV "mcf zmailReverseProxyIPLoginLimit 0\n";
+  print ZMPROV "mcf zmailReverseProxyIPLoginLimitTime 3600\n";
+  print ZMPROV "mcf zmailReverseProxyUserLoginLimit 0\n";
+  print ZMPROV "mcf zmailReverseProxyUserLoginLimitTime 3600\n";
 }
 
 if ($options{e}) {
@@ -245,146 +245,146 @@ if ($options{e}) {
   ($w1,$w2,$w3,$w4) = split /:/, $WebEnabled, 4;
   ($n1,$n2) = split /:/, $AdminEnabled, 2;
 
-  if (isInstalled("zimbra-store") && isInstalled("zimbra-proxy")) {
+  if (isInstalled("zmail-store") && isInstalled("zmail-proxy")) {
             if ($options{m}) {
                print ZMPROV "ms $hostname ".
-                 "zimbraImapBindPort $i1 ".
-                 "zimbraImapProxyBindPort $i2 ".
-                 "zimbraImapSSLBindPort $i3 ".
-                 "zimbraImapSSLProxyBindPort $i4 ".
-                 "zimbraPop3BindPort $p1 ".
-                 "zimbraPop3ProxyBindPort $p2 ".
-                 "zimbraPop3SSLBindPort $p3 ".
-                 "zimbraPop3SSLProxyBindPort $p4 ".
-                 "zimbraImapCleartextLoginEnabled TRUE ".
-                 "zimbraPop3CleartextLoginEnabled TRUE ".
-                 "zimbraReverseProxyLookupTarget TRUE ".
-                 "zimbraReverseProxyMailEnabled TRUE\n";
+                 "zmailImapBindPort $i1 ".
+                 "zmailImapProxyBindPort $i2 ".
+                 "zmailImapSSLBindPort $i3 ".
+                 "zmailImapSSLProxyBindPort $i4 ".
+                 "zmailPop3BindPort $p1 ".
+                 "zmailPop3ProxyBindPort $p2 ".
+                 "zmailPop3SSLBindPort $p3 ".
+                 "zmailPop3SSLProxyBindPort $p4 ".
+                 "zmailImapCleartextLoginEnabled TRUE ".
+                 "zmailPop3CleartextLoginEnabled TRUE ".
+                 "zmailReverseProxyLookupTarget TRUE ".
+                 "zmailReverseProxyMailEnabled TRUE\n";
             }
             if ($options{w}) {
                ($proxyMailMode, $storeMailMode) = getMailMode($SSLToUp);
                chomp($proxyMailMode);
                print ZMPROV "ms $hostname ".
-               "zimbraMailReferMode reverse-proxied ".
-               "zimbraMailPort $w1 ".
-               "zimbraMailProxyPort $w2 ".
-               "zimbraMailSSLPort $w3 ".
-               "zimbraMailSSLProxyPort $w4 ".
-               "zimbraMailMode $storeMailMode ".
-               "zimbraReverseProxyMailMode $proxyMailMode ".
-               "zimbraReverseProxyLookupTarget TRUE ".
-               "zimbraReverseProxyHttpEnabled TRUE\n";
+               "zmailMailReferMode reverse-proxied ".
+               "zmailMailPort $w1 ".
+               "zmailMailProxyPort $w2 ".
+               "zmailMailSSLPort $w3 ".
+               "zmailMailSSLProxyPort $w4 ".
+               "zmailMailMode $storeMailMode ".
+               "zmailReverseProxyMailMode $proxyMailMode ".
+               "zmailReverseProxyLookupTarget TRUE ".
+               "zmailReverseProxyHttpEnabled TRUE\n";
 
                if ($SSLToUp ne "REMAIN") {
-                   print ZMPROV "ms $hostname zimbraReverseProxySSLToUpstreamEnabled $SSLToUp\n"
+                   print ZMPROV "ms $hostname zmailReverseProxySSLToUpstreamEnabled $SSLToUp\n"
                }
 
                if ($options{C}) {
                    print ZMPROV "ms $hostname ".
-                   "zimbraReverseProxyAdminEnabled TRUE ".
-                   "zimbraAdminPort $n1 ".
-                   "zimbraAdminProxyPort $n2\n";
+                   "zmailReverseProxyAdminEnabled TRUE ".
+                   "zmailAdminPort $n1 ".
+                   "zmailAdminProxyPort $n2\n";
                }
                if ($options{c}) {
                    print ZMPROV "ms $hostname ".
-                   "zimbraReverseProxyAdminEnabled FALSE ".
-                   "zimbraAdminPort $n1 ".
-                   "zimbraAdminProxyPort $n2\n";
+                   "zmailReverseProxyAdminEnabled FALSE ".
+                   "zmailAdminPort $n1 ".
+                   "zmailAdminProxyPort $n2\n";
                }
             }
-            if (!isEnabled("zimbra-proxy")) {
+            if (!isEnabled("zmail-proxy")) {
                  print ZMPROV "ms $hostname ".
-                      "+zimbraServiceEnabled proxy\n";
+                      "+zmailServiceEnabled proxy\n";
             }
   } else {
-       if (isEnabled("zimbra-store") || (isInstalled("zimbra-store") && $options{o})) {
+       if (isEnabled("zmail-store") || (isInstalled("zmail-store") && $options{o})) {
             if ($options{m}) {
                print ZMPROV "ms $hostname ".
-                 "zimbraImapBindPort $i1 ".
-                 "zimbraImapProxyBindPort $i2 ".
-                 "zimbraImapSSLBindPort $i3 ".
-                 "zimbraImapSSLProxyBindPort $i4 ".
-                 "zimbraPop3BindPort $p1 ".
-                 "zimbraPop3ProxyBindPort $p2 ".
-                 "zimbraPop3SSLBindPort $p3 ".
-                 "zimbraPop3SSLProxyBindPort $p4 ".
-                 "zimbraImapCleartextLoginEnabled TRUE ".
-                 "zimbraReverseProxyLookupTarget TRUE ".
-                 "zimbraPop3CleartextLoginEnabled TRUE\n";
+                 "zmailImapBindPort $i1 ".
+                 "zmailImapProxyBindPort $i2 ".
+                 "zmailImapSSLBindPort $i3 ".
+                 "zmailImapSSLProxyBindPort $i4 ".
+                 "zmailPop3BindPort $p1 ".
+                 "zmailPop3ProxyBindPort $p2 ".
+                 "zmailPop3SSLBindPort $p3 ".
+                 "zmailPop3SSLProxyBindPort $p4 ".
+                 "zmailImapCleartextLoginEnabled TRUE ".
+                 "zmailReverseProxyLookupTarget TRUE ".
+                 "zmailPop3CleartextLoginEnabled TRUE\n";
             }
             if ($options{w}) {
                ($proxyMailMode, $storeMailMode) = getMailMode($SSLToUp);
                print ZMPROV "ms $hostname ".
-               "zimbraMailReferMode reverse-proxied ".
-               "zimbraMailPort $w1 ".
-               "zimbraMailProxyPort $w2 ".
-               "zimbraMailSSLPort $w3 ".
-               "zimbraMailSSLProxyPort $w4 ".
-               "zimbraReverseProxyLookupTarget TRUE ".
-               "zimbraMailMode $storeMailMode\n";
+               "zmailMailReferMode reverse-proxied ".
+               "zmailMailPort $w1 ".
+               "zmailMailProxyPort $w2 ".
+               "zmailMailSSLPort $w3 ".
+               "zmailMailSSLProxyPort $w4 ".
+               "zmailReverseProxyLookupTarget TRUE ".
+               "zmailMailMode $storeMailMode\n";
 
                if ($SSLToUp ne "REMAIN") {
-                   print ZMPROV "ms $hostname zimbraReverseProxySSLToUpstreamEnabled $SSLToUp\n"
+                   print ZMPROV "ms $hostname zmailReverseProxySSLToUpstreamEnabled $SSLToUp\n"
                }
 
                if ($options{C}) {
                    print ZMPROV "ms $hostname ".
-                   "zimbraReverseProxyAdminEnabled TRUE ".
-                   "zimbraAdminPort $n1 ".
-                   "zimbraAdminProxyPort $n2\n";
+                   "zmailReverseProxyAdminEnabled TRUE ".
+                   "zmailAdminPort $n1 ".
+                   "zmailAdminProxyPort $n2\n";
                }
                if ($options{c}) {
                    print ZMPROV "ms $hostname ".
-                   "zimbraReverseProxyAdminEnabled FALSE ".
-                   "zimbraAdminPort $n2 ".
-                   "zimbraAdminProxyPort $n2\n";
+                   "zmailReverseProxyAdminEnabled FALSE ".
+                   "zmailAdminPort $n2 ".
+                   "zmailAdminProxyPort $n2\n";
                }
             }
        }
-       if (isInstalled("zimbra-proxy")) {
+       if (isInstalled("zmail-proxy")) {
             if ($options{m}) {
                 print ZMPROV "ms $hostname ".
-                 "zimbraImapBindPort $i1 ".
-                 "zimbraImapProxyBindPort $i2 ".
-                 "zimbraImapSSLBindPort $i3 ".
-                 "zimbraImapSSLProxyBindPort $i4 ".
-                 "zimbraPop3BindPort $p1 ".
-                 "zimbraPop3ProxyBindPort $p2 ".
-                 "zimbraPop3SSLBindPort $p3 ".
-                 "zimbraPop3SSLProxyBindPort $p4 ".
-                 "zimbraReverseProxyMailEnabled TRUE\n";
+                 "zmailImapBindPort $i1 ".
+                 "zmailImapProxyBindPort $i2 ".
+                 "zmailImapSSLBindPort $i3 ".
+                 "zmailImapSSLProxyBindPort $i4 ".
+                 "zmailPop3BindPort $p1 ".
+                 "zmailPop3ProxyBindPort $p2 ".
+                 "zmailPop3SSLBindPort $p3 ".
+                 "zmailPop3SSLProxyBindPort $p4 ".
+                 "zmailReverseProxyMailEnabled TRUE\n";
      	   }
             if ($options{w}) {
                 ($proxyMailMode, $storeMailMode) = getMailMode($SSLToUp);
                 chomp($proxyMailMode);
                 print ZMPROV "ms $hostname ".
-                 "zimbraMailPort $w1 ".
-                 "zimbraMailProxyPort $w2 ".
-                 "zimbraMailSSLPort $w3 ".
-                 "zimbraMailSSLProxyPort $w4 ".
-                 "zimbraReverseProxyMailMode $proxyMailMode ".
-                 "zimbraReverseProxyHttpEnabled TRUE\n";
+                 "zmailMailPort $w1 ".
+                 "zmailMailProxyPort $w2 ".
+                 "zmailMailSSLPort $w3 ".
+                 "zmailMailSSLProxyPort $w4 ".
+                 "zmailReverseProxyMailMode $proxyMailMode ".
+                 "zmailReverseProxyHttpEnabled TRUE\n";
 
                 if ($SSLToUp ne "REMAIN") {
-                    print ZMPROV "ms $hostname zimbraReverseProxySSLToUpstreamEnabled $SSLToUp\n"
+                    print ZMPROV "ms $hostname zmailReverseProxySSLToUpstreamEnabled $SSLToUp\n"
                 }
 
                if ($options{C}) {
                    print ZMPROV "ms $hostname ".
-                   "zimbraReverseProxyAdminEnabled TRUE ".
-                   "zimbraAdminPort $n1 ".
-                   "zimbraAdminProxyPort $n2\n";
+                   "zmailReverseProxyAdminEnabled TRUE ".
+                   "zmailAdminPort $n1 ".
+                   "zmailAdminProxyPort $n2\n";
                }
                if ($options{c}) {
                    print ZMPROV "ms $hostname ".
-                   "zimbraReverseProxyAdminEnabled FALSE ".
-                   "zimbraAdminPort $n1 ".
-                   "zimbraAdminProxyPort $n2\n";
+                   "zmailReverseProxyAdminEnabled FALSE ".
+                   "zmailAdminPort $n1 ".
+                   "zmailAdminProxyPort $n2\n";
                }
             }
-            if (!isEnabled("zimbra-proxy")) {
+            if (!isEnabled("zmail-proxy")) {
                  print ZMPROV "ms $hostname ".
-                      "+zimbraServiceEnabled proxy\n";
+                      "+zmailServiceEnabled proxy\n";
             }
        }
   }
@@ -410,22 +410,22 @@ if ($options{d}) {
   ($p1,$p2,$p3,$p4) = split /:/, $PopDisabled, 4;
   ($w1,$w2,$w3,$w4) = split /:/, $WebDisabled, 4;
   ($n1,$n2) = split /:/, $AdminDisabled, 2;
-  if (isInstalled("zimbra-store") && isInstalled("zimbra-proxy")) {
+  if (isInstalled("zmail-store") && isInstalled("zmail-proxy")) {
        if ($options{m}) {
           print ZMPROV "ms $hostname ".
-            "zimbraImapBindPort $i1 ".
-            "zimbraImapProxyBindPort $i2 ".
-            "zimbraImapSSLBindPort $i3 ".
-            "zimbraImapSSLProxyBindPort $i4 ".
-            "zimbraPop3BindPort $p1 ".
-            "zimbraPop3ProxyBindPort $p2 ".
-            "zimbraPop3SSLBindPort $p3 ".
-            "zimbraPop3SSLProxyBindPort $p4 ".
-            "zimbraReverseProxyMailEnabled FALSE\n";
+            "zmailImapBindPort $i1 ".
+            "zmailImapProxyBindPort $i2 ".
+            "zmailImapSSLBindPort $i3 ".
+            "zmailImapSSLProxyBindPort $i4 ".
+            "zmailPop3BindPort $p1 ".
+            "zmailPop3ProxyBindPort $p2 ".
+            "zmailPop3SSLBindPort $p3 ".
+            "zmailPop3SSLProxyBindPort $p4 ".
+            "zmailReverseProxyMailEnabled FALSE\n";
           if ($options{s}) {
             print ZMPROV "ms $hostname ".
-              "zimbraImapCleartextLoginEnabled FALSE ".
-              "zimbraPop3CleartextLoginEnabled FALSE\n";
+              "zmailImapCleartextLoginEnabled FALSE ".
+              "zmailPop3CleartextLoginEnabled FALSE\n";
           }
        }
        if ($options{w}) {
@@ -434,47 +434,47 @@ if ($options{d}) {
             }
             chomp ($storeMailMode);
             print ZMPROV "ms $hostname ".
-            "zimbraMailReferMode wronghost ".
-            "zimbraMailPort $w1 ".
-            "zimbraMailProxyPort $w2 ".
-            "zimbraMailSSLPort $w3 ".
-            "zimbraMailSSLProxyPort $w4 ".
-            "zimbraMailMode $storeMailMode ".
-            "zimbraReverseProxyMailMode $storeMailMode ".
-            "zimbraReverseProxyHttpEnabled FALSE\n";
+            "zmailMailReferMode wronghost ".
+            "zmailMailPort $w1 ".
+            "zmailMailProxyPort $w2 ".
+            "zmailMailSSLPort $w3 ".
+            "zmailMailSSLProxyPort $w4 ".
+            "zmailMailMode $storeMailMode ".
+            "zmailReverseProxyMailMode $storeMailMode ".
+            "zmailReverseProxyHttpEnabled FALSE\n";
 
             #once web proxy is disabled, admin console proxy will be disabled for sure
             print ZMPROV "ms $hostname ".
-                "zimbraReverseProxyAdminEnabled FALSE ".
-                "zimbraAdminPort $n1 ".
-                "zimbraAdminProxyPort $n2\n";
+                "zmailReverseProxyAdminEnabled FALSE ".
+                "zmailAdminPort $n1 ".
+                "zmailAdminProxyPort $n2\n";
        }
-       $enabledHTTPProxy = getLdapServerValue("zimbraReverseProxyHttpEnabled");
-       $enabledMailProxy = getLdapServerValue("zimbraReverseProxyMailEnabled");
-       if ($enabledHTTPProxy eq "FALSE" && $enabledMailProxy eq "FALSE" && isEnabled("zimbra-proxy")) {
+       $enabledHTTPProxy = getLdapServerValue("zmailReverseProxyHttpEnabled");
+       $enabledMailProxy = getLdapServerValue("zmailReverseProxyMailEnabled");
+       if ($enabledHTTPProxy eq "FALSE" && $enabledMailProxy eq "FALSE" && isEnabled("zmail-proxy")) {
             print ZMPROV "ms $hostname ".
-               "-zimbraServiceEnabled proxy\n";
+               "-zmailServiceEnabled proxy\n";
        }
        if ($enabledHTTPProxy eq "FALSE" && $enabledMailProxy eq "FALSE") {
             print ZMPROV "ms $hostname ".
-               "zimbraReverseProxyLookupTarget FALSE\n";
+               "zmailReverseProxyLookupTarget FALSE\n";
        }
   } else {
-       if (isEnabled("zimbra-store") || (isInstalled("zimbra-store") && $options{o})) {
+       if (isEnabled("zmail-store") || (isInstalled("zmail-store") && $options{o})) {
             if ($options{m}) {
                print ZMPROV "ms $hostname ".
-                 "zimbraImapBindPort $i1 ".
-                 "zimbraImapProxyBindPort $i2 ".
-                 "zimbraImapSSLBindPort $i3 ".
-                 "zimbraImapSSLProxyBindPort $i4 ".
-                 "zimbraPop3BindPort $p1 ".
-                 "zimbraPop3ProxyBindPort $p2 ".
-                 "zimbraPop3SSLBindPort $p3 ".
-                 "zimbraPop3SSLProxyBindPort $p4\n";
+                 "zmailImapBindPort $i1 ".
+                 "zmailImapProxyBindPort $i2 ".
+                 "zmailImapSSLBindPort $i3 ".
+                 "zmailImapSSLProxyBindPort $i4 ".
+                 "zmailPop3BindPort $p1 ".
+                 "zmailPop3ProxyBindPort $p2 ".
+                 "zmailPop3SSLBindPort $p3 ".
+                 "zmailPop3SSLProxyBindPort $p4\n";
                if ($options{s}) {
                  print ZMPROV "ms $hostname ".
-                   "zimbraImapCleartextLoginEnabled FALSE ".
-                   "zimbraPop3CleartextLoginEnabled FALSE\n";
+                   "zmailImapCleartextLoginEnabled FALSE ".
+                   "zmailPop3CleartextLoginEnabled FALSE\n";
                }
             }
             if ($options{w}) {
@@ -483,36 +483,36 @@ if ($options{d}) {
      		  }
      		  chomp ($storeMailMode);
                   print ZMPROV "ms $hostname ".
-                      "zimbraMailReferMode wronghost ".
-                      "zimbraMailPort $w1 ".
-                      "zimbraMailProxyPort $w2 ".
-                      "zimbraMailSSLPort $w3 ".
-                      "zimbraMailSSLProxyPort $w4 ".
-                      "zimbraMailMode $storeMailMode\n";
+                      "zmailMailReferMode wronghost ".
+                      "zmailMailPort $w1 ".
+                      "zmailMailProxyPort $w2 ".
+                      "zmailMailSSLPort $w3 ".
+                      "zmailMailSSLProxyPort $w4 ".
+                      "zmailMailMode $storeMailMode\n";
 
                   #once web proxy is disabled, admin console proxy will be disabled for sure
                   print ZMPROV "ms $hostname ".
-                  "zimbraReverseProxyAdminEnabled FALSE ".
-                  "zimbraAdminPort $n1 ".
-                  "zimbraAdminProxyPort $n2\n";
+                  "zmailReverseProxyAdminEnabled FALSE ".
+                  "zmailAdminPort $n1 ".
+                  "zmailAdminProxyPort $n2\n";
            }
            if ($options{t}) {
                 print ZMPROV "ms $hostname ".
-               "zimbraReverseProxyLookupTarget FALSE\n";
+               "zmailReverseProxyLookupTarget FALSE\n";
            }
        }
-       if (isInstalled("zimbra-proxy")) {
+       if (isInstalled("zmail-proxy")) {
             if ($options{m}) {
                  print ZMPROV "ms $hostname ".
-                 "zimbraImapBindPort $i1 ".
-                 "zimbraImapProxyBindPort $i2 ".
-                 "zimbraImapSSLBindPort $i3 ".
-                 "zimbraImapSSLProxyBindPort $i4 ".
-                 "zimbraPop3BindPort $p1 ".
-                 "zimbraPop3ProxyBindPort $p2 ".
-                 "zimbraPop3SSLBindPort $p3 ".
-                 "zimbraPop3SSLProxyBindPort $p4 ".
-                 "zimbraReverseProxyMailEnabled FALSE\n";
+                 "zmailImapBindPort $i1 ".
+                 "zmailImapProxyBindPort $i2 ".
+                 "zmailImapSSLBindPort $i3 ".
+                 "zmailImapSSLProxyBindPort $i4 ".
+                 "zmailPop3BindPort $p1 ".
+                 "zmailPop3ProxyBindPort $p2 ".
+                 "zmailPop3SSLBindPort $p3 ".
+                 "zmailPop3SSLProxyBindPort $p4 ".
+                 "zmailReverseProxyMailEnabled FALSE\n";
      	   }
      	   if ($options{w}) {
                  if ($options{x}) {
@@ -520,24 +520,24 @@ if ($options{d}) {
                  }
                  chomp($proxyMailMode);
                  print ZMPROV "ms $hostname ".
-                 "zimbraMailPort $w1 ".
-                 "zimbraMailProxyPort $w2 ".
-                 "zimbraMailSSLPort $w3 ".
-                 "zimbraMailSSLProxyPort $w4 ".
-                 "zimbraReverseProxyMailMode $proxyMailMode ".
-                 "zimbraReverseProxyHttpEnabled FALSE\n";
+                 "zmailMailPort $w1 ".
+                 "zmailMailProxyPort $w2 ".
+                 "zmailMailSSLPort $w3 ".
+                 "zmailMailSSLProxyPort $w4 ".
+                 "zmailReverseProxyMailMode $proxyMailMode ".
+                 "zmailReverseProxyHttpEnabled FALSE\n";
 
                  #once web proxy is disabled, admin console proxy will be disabled for sure
                  print ZMPROV "ms $hostname ".
-                   "zimbraReverseProxyAdminEnabled FALSE ".
-                   "zimbraAdminPort $n1 ".
-                   "zimbraAdminProxyPort $n2\n";
+                   "zmailReverseProxyAdminEnabled FALSE ".
+                   "zmailAdminPort $n1 ".
+                   "zmailAdminProxyPort $n2\n";
             }
-            $enabledHTTPProxy = getLdapServerValue("zimbraReverseProxyHttpEnabled");
-            $enabledMailProxy = getLdapServerValue("zimbraReverseProxyMailEnabled");
-            if ($enabledHTTPProxy eq "FALSE" && $enabledMailProxy eq "FALSE" && isEnabled("zimbra-proxy")) {
+            $enabledHTTPProxy = getLdapServerValue("zmailReverseProxyHttpEnabled");
+            $enabledMailProxy = getLdapServerValue("zmailReverseProxyMailEnabled");
+            if ($enabledHTTPProxy eq "FALSE" && $enabledMailProxy eq "FALSE" && isEnabled("zmail-proxy")) {
                  print ZMPROV "ms $hostname ".
-                    "-zimbraServiceEnabled proxy\n";
+                    "-zmailServiceEnabled proxy\n";
             }
        }
   }
@@ -569,7 +569,7 @@ sub usage() {
   print "\t-x: the proxy mail mode when enable proxy, or the store mail mode when disable proxy (Both default: http).\n";
   print "\t-u: disable SSL connection from proxy to mail store.\n";
   print "\t-U: enable SSL connection from proxy to mail store.\n";
-  print "hostname is the value of the zimbra_server_hostname LC key for the server being modified.\n";
+  print "hostname is the value of the zmail_server_hostname LC key for the server being modified.\n";
   print "Required options are -f by itself, or -f with -d or -e.\n";
   print "Note that -d or -e require one or both of -m and -w.\n";
   print "Note that -i or -p require -m.\n";
@@ -627,10 +627,10 @@ sub getLdapServerValue {
 sub isEnabled {
 	my $package=shift;
 	my $found=0;
-	open(ZMPROVE, "$ZMPROV gs $hostname zimbraServiceEnabled|");
+	open(ZMPROVE, "$ZMPROV gs $hostname zmailServiceEnabled|");
 	while (<ZMPROVE>) {
 		chomp;
-		if (/zimbraServiceEnabled:\s(.*)/) {
+		if (/zmailServiceEnabled:\s(.*)/) {
 			my $service = $1;
 			if ($packageServiceMap{$service} eq $package) {
 				$found = 1;
@@ -648,10 +648,10 @@ sub isInstalled {
 
   my $good = 0;
   if ($options{r}) {
-	open(ZMPROVI, "$ZMPROV gs $hostname zimbraServiceInstalled|");
+	open(ZMPROVI, "$ZMPROV gs $hostname zmailServiceInstalled|");
 	while (<ZMPROVI>) {
 		chomp;
-		if (/zimbraServiceInstalled:\s(.*)/) {
+		if (/zmailServiceInstalled:\s(.*)/) {
 			my $service = $1;
 			if ($packageServiceMap{$service} eq $pkg) {
 				$good = 1;
@@ -693,7 +693,7 @@ sub getLocalConfig {
   return $main::loaded{lc}{$key}
     if (exists $main::loaded{lc}{$key});
 
-  my $val = `/opt/zimbra/bin/zmlocalconfig -x -s -m nokey ${key} 2> /dev/null`;
+  my $val = `/opt/zmail/bin/zmlocalconfig -x -s -m nokey ${key} 2> /dev/null`;
   chomp $val;
   $main::loaded{lc}{$key} = $val;
   return $val;
@@ -706,11 +706,11 @@ sub getLocalConfig {
 sub getMailMode {
 
     my $sslToUpEnabled = shift;
-    my @res = `/opt/zimbra/bin/zmprov -l gs $hostname zimbraMailMode\n`;
+    my @res = `/opt/zmail/bin/zmprov -l gs $hostname zmailMailMode\n`;
     my $mailMode = "http";
     my $proxyMailMode = "http";
 
-    if ($res[1] =~ /zimbraMailMode:\ (.+)/) {
+    if ($res[1] =~ /zmailMailMode:\ (.+)/) {
         $mailMode = $1; #original store mail mode
     }
 

@@ -12,7 +12,7 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.zimlet;
+package org.zmail.cs.zimlet;
 
 import java.io.File;
 import java.net.InetAddress;
@@ -21,9 +21,9 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
 
-import com.zimbra.common.util.ZimbraLog;
-import com.zimbra.common.soap.Element;
-import com.zimbra.common.soap.ZimletConstants;
+import org.zmail.common.util.ZmailLog;
+import org.zmail.common.soap.Element;
+import org.zmail.common.soap.ZimletConstants;
 
 /**
  * 
@@ -67,7 +67,7 @@ public class ZimletConfig extends ZimletMeta implements ZimletConf {
 				elem.detach();
 			}
 		} else {
-			ZimbraLog.zimlet.warn("unrecognized config element "+elem.getName());
+			ZmailLog.zimlet.warn("unrecognized config element "+elem.getName());
 		}
 	}
 	

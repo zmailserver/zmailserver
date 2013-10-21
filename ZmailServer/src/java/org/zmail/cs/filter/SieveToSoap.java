@@ -12,16 +12,16 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.filter;
+package org.zmail.cs.filter;
 
 import com.google.common.base.Joiner;
 import com.google.common.base.Strings;
 import com.google.common.collect.Lists;
-import com.zimbra.common.filter.Sieve;
-import com.zimbra.soap.mail.type.FilterAction;
-import com.zimbra.soap.mail.type.FilterRule;
-import com.zimbra.soap.mail.type.FilterTest;
-import com.zimbra.soap.mail.type.FilterTests;
+import org.zmail.common.filter.Sieve;
+import org.zmail.soap.mail.type.FilterAction;
+import org.zmail.soap.mail.type.FilterRule;
+import org.zmail.soap.mail.type.FilterTest;
+import org.zmail.soap.mail.type.FilterTests;
 
 import org.apache.jsieve.parser.generated.Node;
 

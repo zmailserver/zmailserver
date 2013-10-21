@@ -12,7 +12,7 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.db;
+package org.zmail.cs.db;
 
 import java.util.HashMap;
 import java.util.List;
@@ -23,16 +23,16 @@ import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
-import com.zimbra.cs.account.MockProvisioning;
-import com.zimbra.cs.account.Provisioning;
-import com.zimbra.cs.db.DbPool.DbConnection;
-import com.zimbra.cs.index.DbSearchConstraints;
-import com.zimbra.cs.index.SortBy;
-import com.zimbra.cs.mailbox.Flag;
-import com.zimbra.cs.mailbox.MailItem;
-import com.zimbra.cs.mailbox.Mailbox;
-import com.zimbra.cs.mailbox.MailboxManager;
-import com.zimbra.cs.mailbox.MailboxTestUtil;
+import org.zmail.cs.account.MockProvisioning;
+import org.zmail.cs.account.Provisioning;
+import org.zmail.cs.db.DbPool.DbConnection;
+import org.zmail.cs.index.DbSearchConstraints;
+import org.zmail.cs.index.SortBy;
+import org.zmail.cs.mailbox.Flag;
+import org.zmail.cs.mailbox.MailItem;
+import org.zmail.cs.mailbox.Mailbox;
+import org.zmail.cs.mailbox.MailboxManager;
+import org.zmail.cs.mailbox.MailboxTestUtil;
 
 /**
  * Unit test for {@link DbSearch}.
@@ -45,7 +45,7 @@ public final class DbSearchTest {
     public static void init() throws Exception {
         MailboxTestUtil.initServer();
         Provisioning prov = Provisioning.getInstance();
-        prov.createAccount("test@zimbra.com", "secret", new HashMap<String, Object>());
+        prov.createAccount("test@zmail.com", "secret", new HashMap<String, Object>());
     }
 
     private DbConnection conn = null;
@@ -368,7 +368,7 @@ public final class DbSearchTest {
     public void caseInsensitiveSort() throws Exception {
         DbUtil.executeUpdate(conn, "INSERT INTO mboxgroup1.mail_item " +
                 "(mailbox_id, id, type, flags, date, size, tags, mod_metadata, mod_content, sender) " +
-                "VALUES(?, ?, ?, 0, 0, 0, 0, 0, 0, ?)", mbox.getId(), 101, MailItem.Type.CONTACT.toByte(), "Zimbra");
+                "VALUES(?, ?, ?, 0, 0, 0, 0, 0, 0, ?)", mbox.getId(), 101, MailItem.Type.CONTACT.toByte(), "Zmail");
         DbUtil.executeUpdate(conn, "INSERT INTO mboxgroup1.mail_item " +
                 "(mailbox_id, id, type, flags, date, size, tags, mod_metadata, mod_content, sender) " +
                 "VALUES(?, ?, ?, 0, 0, 0, 0, 0, 0, ?)", mbox.getId(), 102, MailItem.Type.CONTACT.toByte(), "AAA");

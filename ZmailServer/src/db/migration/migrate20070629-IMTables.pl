@@ -31,7 +31,7 @@ Migrate::verifySchemaVersion(40);
 #
 my $sql = <<_SQL_;
 
-USE zimbra;
+USE zmail;
 
 CREATE TABLE IF NOT EXISTS jiveUserProp (
                            username           VARCHAR(200)     NOT NULL,

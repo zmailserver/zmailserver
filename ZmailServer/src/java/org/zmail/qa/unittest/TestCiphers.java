@@ -12,7 +12,7 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.qa.unittest;
+package org.zmail.qa.unittest;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
@@ -24,11 +24,11 @@ import java.util.Map;
 import javax.net.ssl.SSLSocketFactory;
 import javax.net.ssl.SSLSocket;
 
-import com.zimbra.common.net.SocketFactories;
+import org.zmail.common.net.SocketFactories;
 import junit.framework.TestCase;
 
-import com.zimbra.cs.account.Provisioning;
-import com.zimbra.cs.account.Server;
+import org.zmail.cs.account.Provisioning;
+import org.zmail.cs.account.Server;
 
 
 public class TestCiphers
@@ -57,15 +57,15 @@ To enable nio, add the following in localconfig.xml
   
     */
     
-    private static final boolean zimbraSSLExcludeCipherSuites_configured = true;
+    private static final boolean zmailSSLExcludeCipherSuites_configured = true;
     
     /*
 
 configure excluded ciphers, need to restart server
-zmprov mcf +zimbraSSLExcludeCipherSuites SSL_RSA_WITH_DES_CBC_SHA +zimbraSSLExcludeCipherSuites SSL_DHE_RSA_WITH_DES_CBC_SHA +zimbraSSLExcludeCipherSuites SSL_DHE_DSS_WITH_DES_CBC_SHA +zimbraSSLExcludeCipherSuites SSL_RSA_EXPORT_WITH_RC4_40_MD5 +zimbraSSLExcludeCipherSuites SSL_RSA_EXPORT_WITH_DES40_CBC_SHA +zimbraSSLExcludeCipherSuites SSL_DHE_RSA_EXPORT_WITH_DES40_CBC_SHA +zimbraSSLExcludeCipherSuites SSL_DHE_DSS_EXPORT_WITH_DES40_CBC_SHA    
+zmprov mcf +zmailSSLExcludeCipherSuites SSL_RSA_WITH_DES_CBC_SHA +zmailSSLExcludeCipherSuites SSL_DHE_RSA_WITH_DES_CBC_SHA +zmailSSLExcludeCipherSuites SSL_DHE_DSS_WITH_DES_CBC_SHA +zmailSSLExcludeCipherSuites SSL_RSA_EXPORT_WITH_RC4_40_MD5 +zmailSSLExcludeCipherSuites SSL_RSA_EXPORT_WITH_DES40_CBC_SHA +zmailSSLExcludeCipherSuites SSL_DHE_RSA_EXPORT_WITH_DES40_CBC_SHA +zmailSSLExcludeCipherSuites SSL_DHE_DSS_EXPORT_WITH_DES40_CBC_SHA    
        
 clear all excluded ciphers, need to restart server
-zmprov mcf zimbraSSLExcludeCipherSuites ""
+zmprov mcf zmailSSLExcludeCipherSuites ""
 
     */
     
@@ -85,7 +85,7 @@ zmprov mcf zimbraSSLExcludeCipherSuites ""
     private static final String POP3_XOIP = "XOIP 100.99.98.97" + CRLF;
     private static final String POP3_XOIP_RESPONSE = "\\+OK";
     
-    private static final String IMAP_CONNECT_RESPONSE = "\\* OK .* Zimbra IMAP4rev1 service ready";
+    private static final String IMAP_CONNECT_RESPONSE = "\\* OK .* Zmail IMAP4rev1 service ready";
     private static final String IMAP_LOGIN = "1 LOGIN user1 test123" + CRLF;
     private static final String IMAP_LOGIN_RESPONSE = "1 OK.*LOGIN completed";
     private static final String IMAP_CLEARTEXT_FAILED_RESPONSE = "1 NO cleartext logins disabled";
@@ -102,12 +102,12 @@ zmprov mcf zimbraSSLExcludeCipherSuites ""
     private static final String SOAP_ENV =
 	    "<soap:Envelope xmlns:soap=\"http://www.w3.org/2003/05/soap-envelope\">" +
 	    "  <soap:Header>" +
-	    "    <context xmlns=\"urn:zimbra\">" +
+	    "    <context xmlns=\"urn:zmail\">" +
 	    "      <session></session>" +
 	    "    </context>" +
 	    "  </soap:Header>" +
 	    "  <soap:Body>" +
-	    "    <PingRequest xmlns=\"urn:zimbraAdmin\"></PingRequest>" +
+	    "    <PingRequest xmlns=\"urn:zmailAdmin\"></PingRequest>" +
 	    "  </soap:Body>" +
 	    "</soap:Envelope>";
     
@@ -144,12 +144,12 @@ zmprov mcf zimbraSSLExcludeCipherSuites ""
         SocketFactories.registerProtocols(true);
         Provisioning prov = Provisioning.getInstance();
         Server server = prov.getLocalServer();
-        mPop3CleartextPort = server.getIntAttr(Provisioning.A_zimbraPop3BindPort, 7110);
-        mPop3SslPort = server.getIntAttr(Provisioning.A_zimbraPop3SSLBindPort, 7995);
-        mImapCleartextPort = server.getIntAttr(Provisioning.A_zimbraImapBindPort, 7143);
-        mImapSslPort = server.getIntAttr(Provisioning.A_zimbraImapSSLBindPort, 7995);
-        mHttpCleartextPort = server.getIntAttr(Provisioning.A_zimbraMailPort, 7070);
-        mHttpSslPort = server.getIntAttr(Provisioning.A_zimbraAdminPort, 7071); // use zimbraAdminPort for testing because zimbraMailSSL Port may not be enabled 
+        mPop3CleartextPort = server.getIntAttr(Provisioning.A_zmailPop3BindPort, 7110);
+        mPop3SslPort = server.getIntAttr(Provisioning.A_zmailPop3SSLBindPort, 7995);
+        mImapCleartextPort = server.getIntAttr(Provisioning.A_zmailImapBindPort, 7143);
+        mImapSslPort = server.getIntAttr(Provisioning.A_zmailImapSSLBindPort, 7995);
+        mHttpCleartextPort = server.getIntAttr(Provisioning.A_zmailMailPort, 7070);
+        mHttpSslPort = server.getIntAttr(Provisioning.A_zmailAdminPort, 7071); // use zmailAdminPort for testing because zmailMailSSL Port may not be enabled 
     }
     
     private void setEnabledCipherSuites(Socket socket) {
@@ -176,9 +176,9 @@ zmprov mcf zimbraSSLExcludeCipherSuites ""
             send(socket, POP3_USER, POP3_USER_RESPONSE);
             send(socket, POP3_PASS, POP3_PASS_RESPONSE);
             send(socket, POP3_QUIT, POP3_QUIT_RESPONSE);
-            good = !zimbraSSLExcludeCipherSuites_configured || !useExcludedCipher;
+            good = !zmailSSLExcludeCipherSuites_configured || !useExcludedCipher;
         } catch (javax.net.ssl.SSLHandshakeException e) {
-            good = zimbraSSLExcludeCipherSuites_configured && useExcludedCipher;
+            good = zmailSSLExcludeCipherSuites_configured && useExcludedCipher;
         } finally {
             socket.close();
         }
@@ -196,9 +196,9 @@ zmprov mcf zimbraSSLExcludeCipherSuites ""
             send(socket, POP3_USER, POP3_USER_RESPONSE);
             send(socket, POP3_PASS, POP3_PASS_RESPONSE);
             send(socket, POP3_QUIT, POP3_QUIT_RESPONSE);
-            good = !zimbraSSLExcludeCipherSuites_configured || !useExcludedCipher;
+            good = !zmailSSLExcludeCipherSuites_configured || !useExcludedCipher;
         } catch (javax.net.ssl.SSLHandshakeException e) {
-            good = zimbraSSLExcludeCipherSuites_configured && useExcludedCipher;
+            good = zmailSSLExcludeCipherSuites_configured && useExcludedCipher;
         } finally {
             socket.close();
         }
@@ -223,9 +223,9 @@ zmprov mcf zimbraSSLExcludeCipherSuites ""
             send(socket, IMAP_LOGIN, IMAP_LOGIN_RESPONSE);
             send(socket, IMAP_LOGOUT, IMAP_LOGOUT_RESPONSE1);
             send(socket, null, IMAP_LOGOUT_RESPONSE2);
-            good = !zimbraSSLExcludeCipherSuites_configured || !useExcludedCipher;
+            good = !zmailSSLExcludeCipherSuites_configured || !useExcludedCipher;
         } catch (javax.net.ssl.SSLHandshakeException e) {
-            good = zimbraSSLExcludeCipherSuites_configured && useExcludedCipher;
+            good = zmailSSLExcludeCipherSuites_configured && useExcludedCipher;
         } finally {
             socket.close();
         }
@@ -244,9 +244,9 @@ zmprov mcf zimbraSSLExcludeCipherSuites ""
             send(socket, IMAP_LOGIN, IMAP_LOGIN_RESPONSE);
             send(socket, IMAP_LOGOUT, IMAP_LOGOUT_RESPONSE1);
             send(socket, null, IMAP_LOGOUT_RESPONSE2);
-            good = !zimbraSSLExcludeCipherSuites_configured || !useExcludedCipher;
+            good = !zmailSSLExcludeCipherSuites_configured || !useExcludedCipher;
         } catch (javax.net.ssl.SSLHandshakeException e) {
-            good = zimbraSSLExcludeCipherSuites_configured && useExcludedCipher;
+            good = zmailSSLExcludeCipherSuites_configured && useExcludedCipher;
         } finally {
             socket.close();
         }
@@ -259,7 +259,7 @@ zmprov mcf zimbraSSLExcludeCipherSuites ""
         send(socket, HTTP_SOAP_PING, HTTP_SOAP_PING_RESPONSE_CLEARTEXT);
 	
         // Test SSL
-        // for http, don't take into account if zimbraSSLExcludeCipherSuites_configured 
+        // for http, don't take into account if zmailSSLExcludeCipherSuites_configured 
         // unless using config rewrite for jetty.xml, which usually is not done in dev env.
         // 
         boolean good = false;

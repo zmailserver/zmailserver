@@ -13,17 +13,17 @@
  * ***** END LICENSE BLOCK *****
  */
 
-package com.zimbra.cs.account;
+package org.zmail.cs.account;
 
-import com.zimbra.common.localconfig.LC;
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.common.util.SetUtil;
-import com.zimbra.common.util.Version;
-import com.zimbra.common.util.ZimbraLog;
-import com.zimbra.cs.account.callback.CallbackContext;
-import com.zimbra.cs.account.callback.IDNCallback;
-import com.zimbra.cs.account.ldap.LdapProv;
-import com.zimbra.cs.extension.ExtensionUtil;
+import org.zmail.common.localconfig.LC;
+import org.zmail.common.service.ServiceException;
+import org.zmail.common.util.SetUtil;
+import org.zmail.common.util.Version;
+import org.zmail.common.util.ZmailLog;
+import org.zmail.cs.account.callback.CallbackContext;
+import org.zmail.cs.account.callback.IDNCallback;
+import org.zmail.cs.account.ldap.LdapProv;
+import org.zmail.cs.extension.ExtensionUtil;
 import org.dom4j.Attribute;
 import org.dom4j.Document;
 import org.dom4j.DocumentException;
@@ -80,7 +80,7 @@ public class AttributeManager {
 
     private static AttributeManager mInstance;
 
-    // contains attrs defined in one of the zimbra .xml files (currently zimbra attrs and some of the amavis attrs)
+    // contains attrs defined in one of the zmail .xml files (currently zmail attrs and some of the amavis attrs)
     // these attrs have AttributeInfo
     //
     // Note: does *not* contains attrs defined in the extensions(attrs in OCs specified in global config ***ExtraObjectClass)
@@ -107,7 +107,7 @@ public class AttributeManager {
 
     private static Map<Integer,String> mOCGroupMap = new HashMap<Integer,String>();
     
-    // attrs declared as type="binary" in zimbra-attrs.xml 
+    // attrs declared as type="binary" in zmail-attrs.xml 
     private static Set<String> mBinaryAttrs = new HashSet<String>();
     
     // attrs that require ";binary" appended explicitly when transferred.
@@ -138,7 +138,7 @@ public class AttributeManager {
            ## OpenLDAP note: ";binary" transfer should NOT be used as syntax is binary
      *
      * 
-     * zimbraPrefMailSMIMECertificate  Zimbra(deprecated)   multi         yes                     1.3.6.1.4.1.1466.115.121.1.40   no          yes
+     * zmailPrefMailSMIMECertificate  Zmail(deprecated)   multi         yes                     1.3.6.1.4.1.1466.115.121.1.40   no          yes
      * 
      */
 
@@ -149,7 +149,7 @@ public class AttributeManager {
         try {
             return AttributeManager.getInstance();
         } catch (ServiceException e) {
-            ZimbraLog.account.warn("could not get AttributeManager instance", e);
+            ZmailLog.account.warn("could not get AttributeManager instance", e);
             return null;
         }
     }
@@ -159,8 +159,8 @@ public class AttributeManager {
             if (mInstance != null) {
                 return mInstance;
             }
-            String dir = LC.zimbra_attrs_directory.value();
-            String className = LC.zimbra_class_attrmanager.value();
+            String dir = LC.zmail_attrs_directory.value();
+            String className = LC.zmail_class_attrmanager.value();
             if (className != null && !className.equals("")) {
                 try {
                     try {
@@ -170,7 +170,7 @@ public class AttributeManager {
                         mInstance = (AttributeManager) ExtensionUtil.findClass(className).getDeclaredConstructor(String.class).newInstance(dir);
                     }
                 } catch (Exception e) {
-                    ZimbraLog.account.debug("could not instantiate AttributeManager interface of class '" + className + "'; defaulting to AttributeManager");
+                    ZmailLog.account.debug("could not instantiate AttributeManager interface of class '" + className + "'; defaulting to AttributeManager");
                 }
             }
             if (mInstance == null) {
@@ -200,11 +200,11 @@ public class AttributeManager {
         File[] files = fdir.listFiles();
         for (File file : files) {
             if (!file.getPath().endsWith(".xml")) {
-                ZimbraLog.misc.warn("while loading attrs, ignoring not .xml file: " + file);
+                ZmailLog.misc.warn("while loading attrs, ignoring not .xml file: " + file);
                 continue;
             }
             if (!file.isFile()) {
-                ZimbraLog.misc.warn("while loading attrs, ignored non-file: " + file);
+                ZmailLog.misc.warn("while loading attrs, ignored non-file: " + file);
             }
             try {
                 SAXReader reader = new SAXReader();
@@ -215,7 +215,7 @@ public class AttributeManager {
                 else if (root.getName().equals(E_OBJECTCLASSES))
                     loadObjectClasses(file);
                 else
-                    ZimbraLog.misc.warn("while loading attrs, ignored unknown file: " + file);
+                    ZmailLog.misc.warn("while loading attrs, ignored unknown file: " + file);
 
             } catch (DocumentException de) {
                 throw ServiceException.FAILURE("error loading attrs file: " + file, de);
@@ -292,7 +292,7 @@ public class AttributeManager {
             }
         }
         if (groupId == 2) {
-            error(null, file, A_GROUP_ID + " is not valid (used by ZimbraObjectClass)");
+            error(null, file, A_GROUP_ID + " is not valid (used by ZmailObjectClass)");
         } else if (groupId > 0) {
             if (mGroupMap.containsKey(groupId)) {
                 error(null, file, "duplicate group id: " + groupId);
@@ -666,7 +666,7 @@ public class AttributeManager {
             }
         }
         if (groupId == 1) {
-            error(null, file, A_GROUP_ID + " is not valid (used by ZimbraAttrType)");
+            error(null, file, A_GROUP_ID + " is not valid (used by ZmailAttrType)");
         } else if (groupId > 0) {
             if (mOCGroupMap.containsKey(groupId)) {
                 error(null, file, "duplicate group id: " + groupId);
@@ -1123,7 +1123,7 @@ public class AttributeManager {
                 if (info.isImmutable())
                     immutable.add(attr);
             } else {
-                ZimbraLog.misc.warn("getImmutableAttrsInClass: no attribute info for: " + attr);
+                ZmailLog.misc.warn("getImmutableAttrsInClass: no attribute info for: " + attr);
             }
         }
         return immutable;
@@ -1140,11 +1140,11 @@ public class AttributeManager {
         if (clazz == null)
             return null;
         if (clazz.indexOf('.') == -1)
-            clazz = "com.zimbra.cs.account.callback." + clazz;
+            clazz = "org.zmail.cs.account.callback." + clazz;
         try {
             cb = (AttributeCallback) Class.forName(clazz).newInstance();
         } catch (Exception e) {
-            ZimbraLog.misc.warn("loadCallback caught exception", e);
+            ZmailLog.misc.warn("loadCallback caught exception", e);
         }
         return cb;
     }
@@ -1169,7 +1169,7 @@ public class AttributeManager {
             AttributeInfo info = mAttrs.get(name.toLowerCase());
             if (info != null) {
                 if (info.isDeprecated()) {
-                    ZimbraLog.misc.warn("Attempt to modify a deprecated attribute: " + name);
+                    ZmailLog.misc.warn("Attempt to modify a deprecated attribute: " + name);
                 }
                 
                 // IDN unicode to ACE conversion needs to happen before checkValue or else
@@ -1183,7 +1183,7 @@ public class AttributeManager {
                     info.getCallback().preModify(context, name, value, attrs, entry);
                 }
             } else {
-                ZimbraLog.misc.warn("checkValue: no attribute info for: "+name);
+                ZmailLog.misc.warn("checkValue: no attribute info for: "+name);
             }
         }
     }
@@ -1207,7 +1207,7 @@ public class AttributeManager {
                         info.getCallback().postModify(context, name, entry);
                     } catch (Exception e) {
                         // need to swallow all exceptions as postModify shouldn't throw any...
-                        ZimbraLog.account.warn("postModify caught exception: "+e.getMessage(), e);
+                        ZmailLog.account.warn("postModify caught exception: "+e.getMessage(), e);
                     }
                 }
             }
@@ -1229,7 +1229,7 @@ public class AttributeManager {
                 theInstance.getLdapSchemaExtensionAttrs(prov);
                 theInstance.computeClassToAllAttrsMap();  // recompute the ClassToAllAttrsMap
             } catch (ServiceException e) {
-                ZimbraLog.account.warn("unable to load LDAP schema extensions", e);
+                ZmailLog.account.warn("unable to load LDAP schema extensions", e);
             }
         }
     }
@@ -1240,11 +1240,11 @@ public class AttributeManager {
 
         mLdapSchemaExtensionInited = true;
 
-        getExtraObjectClassAttrs(prov, AttributeClass.account, Provisioning.A_zimbraAccountExtraObjectClass);
-        getExtraObjectClassAttrs(prov, AttributeClass.calendarResource, Provisioning.A_zimbraCalendarResourceExtraObjectClass);
-        getExtraObjectClassAttrs(prov, AttributeClass.cos, Provisioning.A_zimbraCosExtraObjectClass);
-        getExtraObjectClassAttrs(prov, AttributeClass.domain, Provisioning.A_zimbraDomainExtraObjectClass);
-        getExtraObjectClassAttrs(prov, AttributeClass.server, Provisioning.A_zimbraServerExtraObjectClass);
+        getExtraObjectClassAttrs(prov, AttributeClass.account, Provisioning.A_zmailAccountExtraObjectClass);
+        getExtraObjectClassAttrs(prov, AttributeClass.calendarResource, Provisioning.A_zmailCalendarResourceExtraObjectClass);
+        getExtraObjectClassAttrs(prov, AttributeClass.cos, Provisioning.A_zmailCosExtraObjectClass);
+        getExtraObjectClassAttrs(prov, AttributeClass.domain, Provisioning.A_zmailDomainExtraObjectClass);
+        getExtraObjectClassAttrs(prov, AttributeClass.server, Provisioning.A_zmailServerExtraObjectClass);
     }
 
     private void getExtraObjectClassAttrs(LdapProv prov, AttributeClass attrClass, String extraObjectClassAttr) 

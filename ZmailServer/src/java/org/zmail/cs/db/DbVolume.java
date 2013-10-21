@@ -12,7 +12,7 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.db;
+package org.zmail.cs.db;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -21,13 +21,13 @@ import java.sql.Types;
 import java.util.HashMap;
 import java.util.Map;
 
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.cs.db.DbPool.DbConnection;
-import com.zimbra.cs.mailbox.MailServiceException;
-import com.zimbra.cs.mailbox.Metadata;
-import com.zimbra.cs.volume.Volume;
-import com.zimbra.cs.volume.Volume.VolumeMetadata;
-import com.zimbra.cs.volume.VolumeServiceException;
+import org.zmail.common.service.ServiceException;
+import org.zmail.cs.db.DbPool.DbConnection;
+import org.zmail.cs.mailbox.MailServiceException;
+import org.zmail.cs.mailbox.Metadata;
+import org.zmail.cs.volume.Volume;
+import org.zmail.cs.volume.Volume.VolumeMetadata;
+import org.zmail.cs.volume.VolumeServiceException;
 
 /**
  * volume table and current_volumes table.

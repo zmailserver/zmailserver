@@ -13,7 +13,7 @@
  * ***** END LICENSE BLOCK *****
  */
 
-package com.zimbra.cs.index;
+package org.zmail.cs.index;
 
 import java.util.Collection;
 import java.util.Iterator;
@@ -21,10 +21,10 @@ import java.util.LinkedHashMap;
 import java.util.Map;
 
 import com.google.common.base.Objects;
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.cs.mailbox.Conversation;
-import com.zimbra.cs.mailbox.Mailbox;
-import com.zimbra.cs.mailbox.MailItem;
+import org.zmail.common.service.ServiceException;
+import org.zmail.cs.mailbox.Conversation;
+import org.zmail.cs.mailbox.Mailbox;
+import org.zmail.cs.mailbox.MailItem;
 
 /**
  * Indirect {@link Conversation} result. Efficient Read-access to a {@link Conversation} object returned from a query.
@@ -35,13 +35,13 @@ import com.zimbra.cs.mailbox.MailItem;
  * @since Oct 15, 2004
  * @author tim
  */
-public final class ConversationHit extends ZimbraHit {
+public final class ConversationHit extends ZmailHit {
 
     private final int conversationId;
     private Conversation conversation;
     private Map<Long, MessageHit> messageHits = new LinkedHashMap<Long, MessageHit>();
 
-    ConversationHit(ZimbraQueryResultsImpl results, Mailbox mbx, int convId, Object sortKey) {
+    ConversationHit(ZmailQueryResultsImpl results, Mailbox mbx, int convId, Object sortKey) {
         super(results, mbx, sortKey);
         conversationId = convId;
     }

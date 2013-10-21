@@ -18,7 +18,7 @@ my $desthost=$ARGV[0];
 
 shift;
 
-my $keyfile="/opt/zimbra/.ssh/zimbra_identity";
+my $keyfile="/opt/zmail/.ssh/zmail_identity";
 
 if ($desthost eq "") {
 	print "Usage: $0 <hostname>\n";
@@ -26,9 +26,9 @@ if ($desthost eq "") {
 }
 
 if ($#ARGV >= 0) {
-	$cmd = "echo @ARGV | ssh -T -i ${keyfile} -o StrictHostKeyChecking=no zimbra\@${desthost}";
+	$cmd = "echo @ARGV | ssh -T -i ${keyfile} -o StrictHostKeyChecking=no zmail\@${desthost}";
 } else {
-	$cmd = "ssh -T -i ${keyfile} -o StrictHostKeyChecking=no zimbra\@${desthost}";
+	$cmd = "ssh -T -i ${keyfile} -o StrictHostKeyChecking=no zmail\@${desthost}";
 }
 
 open P, "$cmd |";

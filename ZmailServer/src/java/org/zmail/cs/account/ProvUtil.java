@@ -13,7 +13,7 @@
  * ***** END LICENSE BLOCK *****
  */
 
-package com.zimbra.cs.account;
+package org.zmail.cs.account;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
@@ -59,73 +59,73 @@ import com.google.common.base.Charsets;
 import com.google.common.collect.HashMultiset;
 import com.google.common.collect.Multiset;
 import com.google.common.collect.Sets;
-import com.zimbra.common.account.Key;
-import com.zimbra.common.account.Key.AccountBy;
-import com.zimbra.common.auth.ZAuthToken;
-import com.zimbra.common.localconfig.LC;
-import com.zimbra.common.net.SocketFactories;
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.common.soap.AdminConstants;
-import com.zimbra.common.soap.Element;
-import com.zimbra.common.soap.SoapTransport;
-import com.zimbra.common.soap.SoapHttpTransport.HttpDebugListener;
-import com.zimbra.common.util.AccountLogger;
-import com.zimbra.common.util.ByteUtil;
-import com.zimbra.common.util.CliUtil;
-import com.zimbra.common.util.DateUtil;
-import com.zimbra.common.util.FileUtil;
-import com.zimbra.common.util.Pair;
-import com.zimbra.common.util.SetUtil;
-import com.zimbra.common.util.StringUtil;
-import com.zimbra.common.util.Version;
-import com.zimbra.common.util.ZimbraLog;
-import com.zimbra.common.zclient.ZClientException;
-import com.zimbra.cs.account.Provisioning.CacheEntry;
-import com.zimbra.cs.account.Provisioning.CountAccountResult;
-import com.zimbra.cs.account.Provisioning.MailMode;
-import com.zimbra.cs.account.Provisioning.PublishedShareInfoVisitor;
-import com.zimbra.cs.account.Provisioning.RightsDoc;
-import com.zimbra.cs.account.Provisioning.SearchGalResult;
-import com.zimbra.cs.account.Provisioning.SetPasswordResult;
-import com.zimbra.cs.account.SearchAccountsOptions.IncludeType;
-import com.zimbra.cs.account.SearchDirectoryOptions.MakeObjectOpt;
-import com.zimbra.cs.account.SearchDirectoryOptions.ObjectType;
-import com.zimbra.cs.account.SearchDirectoryOptions.SortOpt;
-import com.zimbra.cs.account.accesscontrol.AdminRight;
-import com.zimbra.cs.account.accesscontrol.AttrRight;
-import com.zimbra.cs.account.accesscontrol.ComboRight;
-import com.zimbra.cs.account.accesscontrol.GranteeType;
-import com.zimbra.cs.account.accesscontrol.Help;
-import com.zimbra.cs.account.accesscontrol.Right;
-import com.zimbra.cs.account.accesscontrol.RightClass;
-import com.zimbra.cs.account.accesscontrol.RightCommand;
-import com.zimbra.cs.account.accesscontrol.RightManager;
-import com.zimbra.cs.account.accesscontrol.RightModifier;
-import com.zimbra.cs.account.accesscontrol.TargetType;
-import com.zimbra.cs.account.accesscontrol.Right.RightType;
-import com.zimbra.cs.account.ldap.LdapEntrySearchFilter;
-import com.zimbra.cs.account.ldap.LdapProv;
-import com.zimbra.cs.account.soap.SoapProvisioning;
-import com.zimbra.cs.account.soap.SoapProvisioning.IndexStatsInfo;
-import com.zimbra.cs.account.soap.SoapProvisioning.MailboxInfo;
-import com.zimbra.cs.account.soap.SoapProvisioning.MemcachedClientConfig;
-import com.zimbra.cs.account.soap.SoapProvisioning.QuotaUsage;
-import com.zimbra.cs.account.soap.SoapProvisioning.ReIndexBy;
-import com.zimbra.cs.account.soap.SoapProvisioning.ReIndexInfo;
-import com.zimbra.cs.extension.ExtensionDispatcherServlet;
-import com.zimbra.cs.fb.FbCli;
-import com.zimbra.cs.httpclient.URLUtil;
-import com.zimbra.cs.ldap.LdapClient;
-import com.zimbra.cs.ldap.ZLdapFilterFactory;
-import com.zimbra.cs.ldap.ZLdapFilterFactory.FilterId;
-import com.zimbra.cs.util.BuildInfo;
-import com.zimbra.cs.util.SoapCLI;
-import com.zimbra.cs.zclient.ZMailboxUtil;
-import com.zimbra.soap.admin.type.CacheEntryType;
-import com.zimbra.soap.admin.type.CountObjectsType;
-import com.zimbra.soap.admin.type.DataSourceType;
-import com.zimbra.soap.type.GalSearchType;
-import com.zimbra.soap.type.TargetBy;
+import org.zmail.common.account.Key;
+import org.zmail.common.account.Key.AccountBy;
+import org.zmail.common.auth.ZAuthToken;
+import org.zmail.common.localconfig.LC;
+import org.zmail.common.net.SocketFactories;
+import org.zmail.common.service.ServiceException;
+import org.zmail.common.soap.AdminConstants;
+import org.zmail.common.soap.Element;
+import org.zmail.common.soap.SoapTransport;
+import org.zmail.common.soap.SoapHttpTransport.HttpDebugListener;
+import org.zmail.common.util.AccountLogger;
+import org.zmail.common.util.ByteUtil;
+import org.zmail.common.util.CliUtil;
+import org.zmail.common.util.DateUtil;
+import org.zmail.common.util.FileUtil;
+import org.zmail.common.util.Pair;
+import org.zmail.common.util.SetUtil;
+import org.zmail.common.util.StringUtil;
+import org.zmail.common.util.Version;
+import org.zmail.common.util.ZmailLog;
+import org.zmail.common.zclient.ZClientException;
+import org.zmail.cs.account.Provisioning.CacheEntry;
+import org.zmail.cs.account.Provisioning.CountAccountResult;
+import org.zmail.cs.account.Provisioning.MailMode;
+import org.zmail.cs.account.Provisioning.PublishedShareInfoVisitor;
+import org.zmail.cs.account.Provisioning.RightsDoc;
+import org.zmail.cs.account.Provisioning.SearchGalResult;
+import org.zmail.cs.account.Provisioning.SetPasswordResult;
+import org.zmail.cs.account.SearchAccountsOptions.IncludeType;
+import org.zmail.cs.account.SearchDirectoryOptions.MakeObjectOpt;
+import org.zmail.cs.account.SearchDirectoryOptions.ObjectType;
+import org.zmail.cs.account.SearchDirectoryOptions.SortOpt;
+import org.zmail.cs.account.accesscontrol.AdminRight;
+import org.zmail.cs.account.accesscontrol.AttrRight;
+import org.zmail.cs.account.accesscontrol.ComboRight;
+import org.zmail.cs.account.accesscontrol.GranteeType;
+import org.zmail.cs.account.accesscontrol.Help;
+import org.zmail.cs.account.accesscontrol.Right;
+import org.zmail.cs.account.accesscontrol.RightClass;
+import org.zmail.cs.account.accesscontrol.RightCommand;
+import org.zmail.cs.account.accesscontrol.RightManager;
+import org.zmail.cs.account.accesscontrol.RightModifier;
+import org.zmail.cs.account.accesscontrol.TargetType;
+import org.zmail.cs.account.accesscontrol.Right.RightType;
+import org.zmail.cs.account.ldap.LdapEntrySearchFilter;
+import org.zmail.cs.account.ldap.LdapProv;
+import org.zmail.cs.account.soap.SoapProvisioning;
+import org.zmail.cs.account.soap.SoapProvisioning.IndexStatsInfo;
+import org.zmail.cs.account.soap.SoapProvisioning.MailboxInfo;
+import org.zmail.cs.account.soap.SoapProvisioning.MemcachedClientConfig;
+import org.zmail.cs.account.soap.SoapProvisioning.QuotaUsage;
+import org.zmail.cs.account.soap.SoapProvisioning.ReIndexBy;
+import org.zmail.cs.account.soap.SoapProvisioning.ReIndexInfo;
+import org.zmail.cs.extension.ExtensionDispatcherServlet;
+import org.zmail.cs.fb.FbCli;
+import org.zmail.cs.httpclient.URLUtil;
+import org.zmail.cs.ldap.LdapClient;
+import org.zmail.cs.ldap.ZLdapFilterFactory;
+import org.zmail.cs.ldap.ZLdapFilterFactory.FilterId;
+import org.zmail.cs.util.BuildInfo;
+import org.zmail.cs.util.SoapCLI;
+import org.zmail.cs.zclient.ZMailboxUtil;
+import org.zmail.soap.admin.type.CacheEntryType;
+import org.zmail.soap.admin.type.CountObjectsType;
+import org.zmail.soap.admin.type.DataSourceType;
+import org.zmail.soap.type.GalSearchType;
+import org.zmail.soap.type.TargetBy;
 
 /**
  * @author schemers
@@ -149,13 +149,13 @@ public class ProvUtil implements HttpDebugListener {
     private boolean interactiveMode = false;
     private boolean verboseMode = false;
     private SoapDebugLevel debugLevel = SoapDebugLevel.none;
-    private boolean useLdap = LC.zimbra_zmprov_default_to_ldap.booleanValue();
+    private boolean useLdap = LC.zmail_zmprov_default_to_ldap.booleanValue();
     private boolean useLdapMaster = false;
     private String account = null;
     private String password = null;
     private ZAuthToken authToken = null;
-    private String serverHostname = LC.zimbra_zmprov_default_soap_server.value();
-    private int serverPort = LC.zimbra_admin_service_port.intValue();
+    private String serverHostname = LC.zmail_zmprov_default_soap_server.value();
+    private int serverPort = LC.zmail_admin_service_port.intValue();
     private Command command;
     private Map<String, Command> commandIndex;
     private Provisioning prov;
@@ -264,7 +264,7 @@ public class ProvUtil implements HttpDebugListener {
         console.println("  -a/--account  {name}                  account name to auth as");
         console.println("  -p/--password {pass}                  password for account");
         console.println("  -P/--passfile {file}                  read password from file");
-        console.println("  -z/--zadmin                           use zimbra admin name/password from localconfig for admin/password");
+        console.println("  -z/--zadmin                           use zmail admin name/password from localconfig for admin/password");
         console.println("  -y/--authtoken {authtoken}            " + SoapCLI.OPT_AUTHTOKEN.getDescription());
         console.println("  -Y/--authtokenfile {authtoken file}   " + SoapCLI.OPT_AUTHTOKENFILE.getDescription());
         console.println("  -v/--verbose                          verbose mode (dumps full exception stack trace)");
@@ -351,12 +351,12 @@ public class ProvUtil implements HttpDebugListener {
                 try {
                     Map<String, AdminRight> allAdminRights = RightManager.getInstance().getAllAdminRights();
                     // print non-combo rights first
-                    for (com.zimbra.cs.account.accesscontrol.Right r : allAdminRights.values()) {
+                    for (org.zmail.cs.account.accesscontrol.Right r : allAdminRights.values()) {
                         if (RightType.combo != r.getRightType())
                         console.println("        " + r.getName() + " (" + r.getRightType().toString() + ")");
                     }
                     // then combo rights
-                    for (com.zimbra.cs.account.accesscontrol.Right r : allAdminRights.values()) {
+                    for (org.zmail.cs.account.accesscontrol.Right r : allAdminRights.values()) {
                         if (RightType.combo == r.getRightType())
                             console.println("        " + r.getName() + " (" + r.getRightType().toString() + ")");
                     }
@@ -414,17 +414,17 @@ public class ProvUtil implements HttpDebugListener {
         static void helpLOG() {
             console.println("    Log categories:");
             int maxNameLength = 0;
-            for (String name : ZimbraLog.CATEGORY_DESCRIPTIONS.keySet()) {
+            for (String name : ZmailLog.CATEGORY_DESCRIPTIONS.keySet()) {
                 if (name.length() > maxNameLength) {
                     maxNameLength = name.length();
                 }
             }
-            for (String name : ZimbraLog.CATEGORY_DESCRIPTIONS.keySet()) {
+            for (String name : ZmailLog.CATEGORY_DESCRIPTIONS.keySet()) {
                 console.print("        " + name);
                 for (int i = 0; i < (maxNameLength - name.length()); i++) {
                     console.print(" ");
                 }
-                console.format(" - %s\n", ZimbraLog.CATEGORY_DESCRIPTIONS.get(name));
+                console.format(" - %s\n", ZmailLog.CATEGORY_DESCRIPTIONS.get(name));
             }
         }
     }
@@ -482,7 +482,7 @@ public class ProvUtil implements HttpDebugListener {
         CREATE_BULK_ACCOUNTS("createBulkAccounts", "cabulk", "{domain} {namemask} {number of accounts to create}", Category.MISC, 3, 3),
         CREATE_CALENDAR_RESOURCE("createCalendarResource",  "ccr", "{name@domain} {password} [attr1 value1 [attr2 value2...]]", Category.CALENDAR, 2, Integer.MAX_VALUE),
         CREATE_COS("createCos", "cc", "{name} [attr1 value1 [attr2 value2...]]", Category.COS, 1, Integer.MAX_VALUE),
-        CREATE_DATA_SOURCE("createDataSource", "cds", "{name@domain} {ds-type} {ds-name} zimbraDataSourceEnabled {TRUE|FALSE} zimbraDataSourceFolderId {folder-id} [attr1 value1 [attr2 value2...]]", Category.ACCOUNT, 3, Integer.MAX_VALUE),
+        CREATE_DATA_SOURCE("createDataSource", "cds", "{name@domain} {ds-type} {ds-name} zmailDataSourceEnabled {TRUE|FALSE} zmailDataSourceFolderId {folder-id} [attr1 value1 [attr2 value2...]]", Category.ACCOUNT, 3, Integer.MAX_VALUE),
         CREATE_DISTRIBUTION_LIST("createDistributionList", "cdl", "{list@domain}", Category.LIST, 1, Integer.MAX_VALUE),
         CREATE_DYNAMIC_DISTRIBUTION_LIST("createDynamicDistributionList", "cddl", "{list@domain}", Category.LIST, 1, Integer.MAX_VALUE),
         CREATE_DISTRIBUTION_LISTS_BULK("createDistributionListsBulk", "cdlbulk"),
@@ -745,7 +745,7 @@ public class ProvUtil implements HttpDebugListener {
             prov = Provisioning.getInstance();
         } else {
             SoapProvisioning sp = new SoapProvisioning();
-            sp.soapSetURI(LC.zimbra_admin_service_scheme.value() + serverHostname +
+            sp.soapSetURI(LC.zmail_admin_service_scheme.value() + serverHostname +
                     ":" + serverPort + AdminConstants.ADMIN_SERVICE_URI);
             if (debugLevel != SoapDebugLevel.none) {
                 sp.soapSetHttpTransportDebugListener(this);
@@ -755,7 +755,7 @@ public class ProvUtil implements HttpDebugListener {
             } else if (authToken != null) {
                 sp.soapAdminAuthenticate(authToken);
             } else {
-                sp.soapZimbraAdminAuthenticate();
+                sp.soapZmailAdminAuthenticate();
             }
             prov = sp;
         }
@@ -1285,7 +1285,7 @@ public class ProvUtil implements HttpDebugListener {
                 // HACK FOR NOW
                 SoapProvisioning sp = new SoapProvisioning();
                 sp.soapSetURI("https://localhost:" + serverPort + AdminConstants.ADMIN_SERVICE_URI);
-                sp.soapZimbraAdminAuthenticate();
+                sp.soapZmailAdminAuthenticate();
                 prov = sp;
                 break;
             case LDAP:
@@ -1521,7 +1521,7 @@ public class ProvUtil implements HttpDebugListener {
         if (alo.args.length == 2) {
             // Hack: determine if it's an account or category, based on the name.
             String arg = alo.args[1];
-            if (arg.startsWith("zimbra.") || arg.startsWith("com.zimbra")) {
+            if (arg.startsWith("zmail.") || arg.startsWith("org.zmail")) {
                 category = arg;
             } else {
                 acct = lookupAccount(alo.args[1]);
@@ -1571,8 +1571,8 @@ public class ProvUtil implements HttpDebugListener {
         if (!local.isLocal()) {
             throw ServiceException.INVALID_REQUEST("target domain must be a local domain", null);
         }
-        attrs.put(Provisioning.A_zimbraDomainType, Provisioning.DomainType.alias.name());
-        attrs.put(Provisioning.A_zimbraDomainAliasTargetId, local.getId());
+        attrs.put(Provisioning.A_zmailDomainType, Provisioning.DomainType.alias.name());
+        attrs.put(Provisioning.A_zmailDomainAliasTargetId, local.getId());
         return prov.createDomain(aliasDomain, attrs);
     }
 
@@ -1825,7 +1825,7 @@ public class ProvUtil implements HttpDebugListener {
     throws ServiceException {
         NamedEntry.Visitor visitor = new NamedEntry.Visitor() {
             @Override
-            public void visit(com.zimbra.cs.account.NamedEntry entry) throws ServiceException {
+            public void visit(org.zmail.cs.account.NamedEntry entry) throws ServiceException {
                 if (verbose) {
                     dumpAccount((Account) entry, applyDefault, attrNames);
                 } else {
@@ -2427,14 +2427,14 @@ public class ProvUtil implements HttpDebugListener {
             }
         } else {
             packages = new String[] {
-                    "com.zimbra.cs.service.admin",
-                    "com.zimbra.bp",
-                    "com.zimbra.cert",
-                    "com.zimbra.cs.network",
-                    "com.zimbra.cs.network.license.service",
-                    "com.zimbra.cs.service.backup",
-                    "com.zimbra.cs.service.hsm",
-                    "com.zimbra.xmbxsearch"
+                    "org.zmail.cs.service.admin",
+                    "org.zmail.bp",
+                    "org.zmail.cert",
+                    "org.zmail.cs.network",
+                    "org.zmail.cs.network.license.service",
+                    "org.zmail.cs.service.backup",
+                    "org.zmail.cs.service.hsm",
+                    "org.zmail.xmbxsearch"
             };
         }
 
@@ -2798,7 +2798,7 @@ public class ProvUtil implements HttpDebugListener {
             final boolean verbose, final boolean applyDefault) throws ServiceException {
         NamedEntry.Visitor visitor = new NamedEntry.Visitor() {
             @Override
-            public void visit(com.zimbra.cs.account.NamedEntry entry)
+            public void visit(org.zmail.cs.account.NamedEntry entry)
             throws ServiceException {
                 if (verbose) {
                     dumpCalendarResource((CalendarResource) entry, applyDefault, null);
@@ -3273,9 +3273,9 @@ public class ProvUtil implements HttpDebugListener {
      * {LC.zmprov_tmp_directory}/{attr-name}[_{index-if-multi-valued}]{timestamp}
      *
      * e.g.
-     * /opt/zimbra/data/tmp/zmprov/zimbraFoo_20110202161621
-     * /opt/zimbra/data/tmp/zmprov/zimbraBar_0_20110202161507
-     * /opt/zimbra/data/tmp/zmprov/zimbraBar_1_20110202161507
+     * /opt/zmail/data/tmp/zmprov/zmailFoo_20110202161621
+     * /opt/zmail/data/tmp/zmprov/zmailBar_0_20110202161507
+     * /opt/zmail/data/tmp/zmprov/zmailBar_1_20110202161507
      */
     private void outputBinaryAttrToFile(String attrName, Integer idx, byte[] value, String timestamp)
             throws ServiceException {
@@ -3350,7 +3350,7 @@ public class ProvUtil implements HttpDebugListener {
 
     public static void main(String args[]) throws IOException, ServiceException {
         CliUtil.setCliSoapHttpTransportTimeout();
-        ZimbraLog.toolSetupLog4jConsole("INFO", true, false); // send all logs to stderr
+        ZmailLog.toolSetupLog4jConsole("INFO", true, false); // send all logs to stderr
         SocketFactories.registerProtocols();
 
         SoapTransport.setDefaultUserAgent("zmprov", BuildInfo.VERSION);
@@ -3367,7 +3367,7 @@ public class ProvUtil implements HttpDebugListener {
         options.addOption("a", "account", true, "account name (not used with --ldap)");
         options.addOption("p", "password", true, "password for account");
         options.addOption("P", "passfile", true, "filename with password in it");
-        options.addOption("z", "zadmin", false, "use zimbra admin name/password from localconfig for account/password");
+        options.addOption("z", "zadmin", false, "use zmail admin name/password from localconfig for account/password");
         options.addOption("v", "verbose", false, "verbose mode");
         options.addOption("d", "debug", false, "debug mode (SOAP request and response payload)");
         options.addOption("D", "debughigh", false, "debug mode (SOAP req/resp payload and http headers)");
@@ -3403,7 +3403,7 @@ public class ProvUtil implements HttpDebugListener {
 
         if (cl.hasOption('L')) {
             if (cl.hasOption('l')) {
-                ZimbraLog.toolSetupLog4j("INFO", cl.getOptionValue('L'));
+                ZmailLog.toolSetupLog4j("INFO", cl.getOptionValue('L'));
             } else {
                 printError("error: cannot specify -L when -l is not specified");
                 System.exit(2);
@@ -3411,8 +3411,8 @@ public class ProvUtil implements HttpDebugListener {
         }
 
         if (cl.hasOption('z')) {
-            pu.setAccount(LC.zimbra_ldap_user.value());
-            pu.setPassword(LC.zimbra_ldap_password.value());
+            pu.setAccount(LC.zmail_ldap_user.value());
+            pu.setPassword(LC.zmail_ldap_password.value());
         }
 
         if (cl.hasOption(SoapCLI.O_AUTHTOKEN) && cl.hasOption(SoapCLI.O_AUTHTOKENFILE)) {
@@ -3477,7 +3477,7 @@ public class ProvUtil implements HttpDebugListener {
                 } else {
                     if (LC.command_line_editing_enabled.booleanValue()) {
                         try {
-                            CliUtil.enableCommandLineEditing(LC.zimbra_home.value() + "/.zmprov_history");
+                            CliUtil.enableCommandLineEditing(LC.zmail_home.value() + "/.zmprov_history");
                         } catch (IOException e) {
                             errConsole.println("Command line editing will be disabled: " + e);
                             if (pu.verboseMode) {
@@ -3755,10 +3755,10 @@ public class ProvUtil implements HttpDebugListener {
         console.println("    print attribute name of all attributes that are on global config only" + "\n");
         */
 
-        console.println("zmprov desc -a zimbraId");
-        console.println("    print attribute name, description, and all properties of attribute zimbraId\n");
+        console.println("zmprov desc -a zmailId");
+        console.println("    print attribute name, description, and all properties of attribute zmailId\n");
 
-        console.println("zmprov desc account -a zimbraId");
+        console.println("zmprov desc account -a zmailId");
         console.println("    error: can only specify either an entry type or a specific attribute\n");
 
         usage();
@@ -3984,14 +3984,14 @@ public class ProvUtil implements HttpDebugListener {
         }
 
         Domain domain = lookupDomain(key);
-        String curPreAuthKey = domain.getAttr(Provisioning.A_zimbraPreAuthKey);
+        String curPreAuthKey = domain.getAttr(Provisioning.A_zmailPreAuthKey);
         if (curPreAuthKey != null && !force) {
             throw ServiceException.INVALID_REQUEST("pre auth key exists for domain " + key +
                     ", use command -f option to force overwriting the existing key", null);
         }
         String preAuthKey = PreAuthKey.generateRandomPreAuthKey();
         HashMap<String,String> attrs = new HashMap<String,String>();
-        attrs.put(Provisioning.A_zimbraPreAuthKey, preAuthKey);
+        attrs.put(Provisioning.A_zmailPreAuthKey, preAuthKey);
         prov.modifyAttrs(domain, attrs);
         console.printf("preAuthKey: %s\n", preAuthKey);
         if (curPreAuthKey != null) {
@@ -4002,7 +4002,7 @@ public class ProvUtil implements HttpDebugListener {
     private void doGenerateDomainPreAuth(String[] args) throws ServiceException {
         String key = args[1];
         Domain domain = lookupDomain(key);
-        String preAuthKey = domain.getAttr(Provisioning.A_zimbraPreAuthKey, null);
+        String preAuthKey = domain.getAttr(Provisioning.A_zmailPreAuthKey, null);
         if (preAuthKey == null) {
             throw ServiceException.INVALID_REQUEST("domain not configured for preauth", null);
         }
@@ -4028,7 +4028,7 @@ public class ProvUtil implements HttpDebugListener {
     private void doGetAllMtaAuthURLs() throws ServiceException {
         List<Server> servers = prov.getAllServers();
         for (Server server : servers ) {
-            boolean isTarget = server.getBooleanAttr(Provisioning.A_zimbraMtaAuthTarget, false);
+            boolean isTarget = server.getBooleanAttr(Provisioning.A_zmailMtaAuthTarget, false);
             if (isTarget) {
                 console.print(URLUtil.getAdminURL(server) + " ");
             }
@@ -4045,9 +4045,9 @@ public class ProvUtil implements HttpDebugListener {
 
         List<Server> servers = prov.getAllServers();
         for (Server server : servers) {
-            boolean isTarget = server.getBooleanAttr(Provisioning.A_zimbraReverseProxyLookupTarget, false);
+            boolean isTarget = server.getBooleanAttr(Provisioning.A_zmailReverseProxyLookupTarget, false);
             if (isTarget) {
-                String serviceName = server.getAttr(Provisioning.A_zimbraServiceHostname, "");
+                String serviceName = server.getAttr(Provisioning.A_zmailServiceHostname, "");
                 console.print(REVERSE_PROXY_PROTO + serviceName + ":" + REVERSE_PROXY_PORT + REVERSE_PROXY_PATH + " ");
             }
         }
@@ -4058,13 +4058,13 @@ public class ProvUtil implements HttpDebugListener {
         List<Server> servers = prov.getAllServers();
         boolean atLeastOne = false;
         for (Server server : servers) {
-            boolean isTarget = server.getBooleanAttr(Provisioning.A_zimbraReverseProxyLookupTarget, false);
+            boolean isTarget = server.getBooleanAttr(Provisioning.A_zmailReverseProxyLookupTarget, false);
             if (!isTarget) {
                 continue;
             }
 
             // (For now) assume HTTP can be load balanced to...
-            String mode = server.getAttr(Provisioning.A_zimbraMailMode, null);
+            String mode = server.getAttr(Provisioning.A_zmailMailMode, null);
             if (mode == null) {
                 continue;
             }
@@ -4076,12 +4076,12 @@ public class ProvUtil implements HttpDebugListener {
 
             int backendPort;
             if (isPlain) {
-                backendPort = server.getIntAttr(Provisioning.A_zimbraMailPort, 0);
+                backendPort = server.getIntAttr(Provisioning.A_zmailMailPort, 0);
             } else {
-                backendPort = server.getIntAttr(Provisioning.A_zimbraMailSSLPort, 0);
+                backendPort = server.getIntAttr(Provisioning.A_zmailMailSSLPort, 0);
             }
 
-            String serviceName = server.getAttr(Provisioning.A_zimbraServiceHostname, "");
+            String serviceName = server.getAttr(Provisioning.A_zmailServiceHostname, "");
             console.println("    server " + serviceName + ":" + backendPort + ";");
             atLeastOne = true;
         }
@@ -4097,11 +4097,11 @@ public class ProvUtil implements HttpDebugListener {
         NamedEntry.Visitor visitor = new NamedEntry.Visitor() {
             @Override
             public void visit(NamedEntry entry) throws ServiceException {
-                if (entry.getAttr(Provisioning.A_zimbraVirtualHostname) != null &&
-                        entry.getAttr(Provisioning.A_zimbraSSLPrivateKey) != null &&
-                        entry.getAttr(Provisioning.A_zimbraSSLCertificate) != null) {
+                if (entry.getAttr(Provisioning.A_zmailVirtualHostname) != null &&
+                        entry.getAttr(Provisioning.A_zmailSSLPrivateKey) != null &&
+                        entry.getAttr(Provisioning.A_zmailSSLCertificate) != null) {
                         StringBuilder virtualHosts = new StringBuilder();
-                    for (String vh : entry.getMultiAttr(Provisioning.A_zimbraVirtualHostname)) {
+                    for (String vh : entry.getMultiAttr(Provisioning.A_zmailVirtualHostname)) {
                         virtualHosts.append(vh + " ");
                     }
                     console.println(entry.getName() + " " + virtualHosts);
@@ -4110,17 +4110,17 @@ public class ProvUtil implements HttpDebugListener {
         };
 
         prov.getAllDomains(visitor, new String[] {
-                Provisioning.A_zimbraVirtualHostname,
-                Provisioning.A_zimbraSSLPrivateKey,
-                Provisioning.A_zimbraSSLCertificate
+                Provisioning.A_zmailVirtualHostname,
+                Provisioning.A_zmailSSLPrivateKey,
+                Provisioning.A_zmailSSLCertificate
         });
     }
 
     private void doGetAllMemcachedServers() throws ServiceException {
         List<Server> servers = prov.getAllServers(Provisioning.SERVICE_MEMCACHED);
         for (Server server : servers ) {
-            console.print(server.getAttr(Provisioning.A_zimbraServiceHostname, "") + ":" +
-                    server.getAttr(Provisioning.A_zimbraMemcachedBindPort, "") + " ");
+            console.print(server.getAttr(Provisioning.A_zmailServiceHostname, "") + ":" +
+                    server.getAttr(Provisioning.A_zmailMemcachedBindPort, "") + " ");
         }
         console.println();
     }
@@ -4132,8 +4132,8 @@ public class ProvUtil implements HttpDebugListener {
             // Get all mailbox servers.
             List<Server> servers = prov.getAllServers(Provisioning.SERVICE_MAILBOX);
             for (Server svr : servers) {
-                String host = svr.getAttr(Provisioning.A_zimbraServiceHostname);
-                int port = (int) svr.getLongAttr(Provisioning.A_zimbraAdminPort, serverPort);
+                String host = svr.getAttr(Provisioning.A_zmailServiceHostname);
+                int port = (int) svr.getLongAttr(Provisioning.A_zmailAdminPort, serverPort);
                 Pair<String, Integer> entry = new Pair<String, Integer>(host, port);
                 entries.add(entry);
             }
@@ -4149,7 +4149,7 @@ public class ProvUtil implements HttpDebugListener {
                         throw AccountServiceException.NO_SUCH_SERVER(arg);
                     }
                     // TODO: Verify svr has mailbox service enabled.
-                    int port = (int) svr.getLongAttr(Provisioning.A_zimbraAdminPort, serverPort);
+                    int port = (int) svr.getLongAttr(Provisioning.A_zmailAdminPort, serverPort);
                     entries.add(new Pair<String, Integer>(arg, port));
                 }
             }
@@ -4169,7 +4169,7 @@ public class ProvUtil implements HttpDebugListener {
             boolean success = false;
             try {
                 SoapProvisioning sp = new SoapProvisioning();
-                sp.soapSetURI(LC.zimbra_admin_service_scheme.value() + hostname + ":" + port + AdminConstants.ADMIN_SERVICE_URI);
+                sp.soapSetURI(LC.zmail_admin_service_scheme.value() + hostname + ":" + port + AdminConstants.ADMIN_SERVICE_URI);
                 if (debugLevel != SoapDebugLevel.none) {
                     sp.soapSetHttpTransportDebugListener(this);
                 }
@@ -4178,7 +4178,7 @@ public class ProvUtil implements HttpDebugListener {
                 } else if (authToken != null) {
                     sp.soapAdminAuthenticate(authToken);
                 } else {
-                    sp.soapZimbraAdminAuthenticate();
+                    sp.soapZmailAdminAuthenticate();
                 }
                 sp.reloadMemcachedClientConfig();
                 success = true;
@@ -4213,7 +4213,7 @@ public class ProvUtil implements HttpDebugListener {
             int port = server.getSecond();
             try {
                 SoapProvisioning sp = new SoapProvisioning();
-                sp.soapSetURI(LC.zimbra_admin_service_scheme.value() + hostname + ":" + port + AdminConstants.ADMIN_SERVICE_URI);
+                sp.soapSetURI(LC.zmail_admin_service_scheme.value() + hostname + ":" + port + AdminConstants.ADMIN_SERVICE_URI);
                 if (debugLevel != SoapDebugLevel.none) {
                     sp.soapSetHttpTransportDebugListener(this);
                 }
@@ -4222,7 +4222,7 @@ public class ProvUtil implements HttpDebugListener {
                 } else if (authToken != null) {
                     sp.soapAdminAuthenticate(authToken);
                 } else {
-                    sp.soapZimbraAdminAuthenticate();
+                    sp.soapZmailAdminAuthenticate();
                 }
                 MemcachedClientConfig config = sp.getMemcachedClientConfig();
                 String serverList = config.serverList != null ? config.serverList : "none";
@@ -4296,9 +4296,9 @@ public class ProvUtil implements HttpDebugListener {
         //5 = category
         //6 = type
         Map<String,Object> map = getMapAndCheck(args, 7, true);
-        map.put(Provisioning.A_zimbraXMPPComponentClassName, args[4]);
-        map.put(Provisioning.A_zimbraXMPPComponentCategory, args[5]);
-        map.put(Provisioning.A_zimbraXMPPComponentType, args[6]);
+        map.put(Provisioning.A_zmailXMPPComponentClassName, args[4]);
+        map.put(Provisioning.A_zmailXMPPComponentCategory, args[5]);
+        map.put(Provisioning.A_zmailXMPPComponentType, args[6]);
         Domain d = lookupDomain(args[2]);
         String routableName = args[1]+"."+d.getName();
         console.println(prov.createXMPPComponent(routableName, lookupDomain(args[2]), lookupServer(args[3]), map));

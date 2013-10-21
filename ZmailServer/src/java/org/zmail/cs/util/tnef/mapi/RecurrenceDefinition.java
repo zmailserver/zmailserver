@@ -13,13 +13,13 @@
  * ***** END LICENSE BLOCK *****
  */
 
-package com.zimbra.cs.util.tnef.mapi;
+package org.zmail.cs.util.tnef.mapi;
 
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.common.util.Log;
-import com.zimbra.common.util.ZimbraLog;
-import com.zimbra.cs.util.tnef.IcalUtil;
-import com.zimbra.cs.util.tnef.TNEFtoIcalendarServiceException;
+import org.zmail.common.service.ServiceException;
+import org.zmail.common.util.Log;
+import org.zmail.common.util.ZmailLog;
+import org.zmail.cs.util.tnef.IcalUtil;
+import org.zmail.cs.util.tnef.TNEFtoIcalendarServiceException;
 
 import java.io.IOException;
 import java.text.DateFormat;
@@ -52,7 +52,7 @@ import net.freeutils.tnef.TNEFUtils;
 
 public class RecurrenceDefinition {
 
-    static Log sLog = ZimbraLog.tnef;
+    static Log sLog = ZmailLog.tnef;
 
     public static enum RecurrenceFrequency {
         DAILY (0x200A), WEEKLY (0x200B), MONTHLY (0x200C), YEARLY (0x200D);

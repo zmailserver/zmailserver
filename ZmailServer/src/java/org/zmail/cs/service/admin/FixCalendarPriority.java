@@ -12,34 +12,34 @@
  * ***** END LICENSE BLOCK *****
  */
 
-package com.zimbra.cs.service.admin;
+package org.zmail.cs.service.admin;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.common.soap.AdminConstants;
-import com.zimbra.common.soap.Element;
-import com.zimbra.common.util.ZimbraLog;
-import com.zimbra.cs.account.Account;
-import com.zimbra.cs.account.NamedEntry;
-import com.zimbra.cs.account.Provisioning;
-import com.zimbra.cs.account.SearchAccountsOptions;
-import com.zimbra.cs.account.Server;
-import com.zimbra.common.account.Key.AccountBy;
-import com.zimbra.cs.account.SearchDirectoryOptions.SortOpt;
-import com.zimbra.cs.account.accesscontrol.AdminRight;
-import com.zimbra.cs.mailbox.Mailbox;
-import com.zimbra.cs.mailbox.MailboxManager;
-import com.zimbra.soap.ZimbraSoapContext;
+import org.zmail.common.service.ServiceException;
+import org.zmail.common.soap.AdminConstants;
+import org.zmail.common.soap.Element;
+import org.zmail.common.util.ZmailLog;
+import org.zmail.cs.account.Account;
+import org.zmail.cs.account.NamedEntry;
+import org.zmail.cs.account.Provisioning;
+import org.zmail.cs.account.SearchAccountsOptions;
+import org.zmail.cs.account.Server;
+import org.zmail.common.account.Key.AccountBy;
+import org.zmail.cs.account.SearchDirectoryOptions.SortOpt;
+import org.zmail.cs.account.accesscontrol.AdminRight;
+import org.zmail.cs.mailbox.Mailbox;
+import org.zmail.cs.mailbox.MailboxManager;
+import org.zmail.soap.ZmailSoapContext;
 
 public class FixCalendarPriority extends AdminDocumentHandler {
 
     public static final String ALL = "all";
 
     public Element handle(Element request, Map<String, Object> context) throws ServiceException {
-        ZimbraSoapContext zsc = getZimbraSoapContext(context);
+        ZmailSoapContext zsc = getZmailSoapContext(context);
 
         // what to check for this SOAP?
         // allow only system admin for now
@@ -83,15 +83,15 @@ public class FixCalendarPriority extends AdminDocumentHandler {
     private static List<NamedEntry> getAccountsOnServer() throws ServiceException {
         Provisioning prov = Provisioning.getInstance();
         Server server = prov.getLocalServer();
-        String serverName = server.getAttr(Provisioning.A_zimbraServiceHostname);
+        String serverName = server.getAttr(Provisioning.A_zmailServiceHostname);
         
         SearchAccountsOptions searchOpts = 
-            new SearchAccountsOptions(new String[] { Provisioning.A_zimbraId });
+            new SearchAccountsOptions(new String[] { Provisioning.A_zmailId });
         searchOpts.setSortOpt(SortOpt.SORT_DESCENDING);
         
         List<NamedEntry> accts = prov.searchAccountsOnServer(server, searchOpts);
 
-        ZimbraLog.calendar.info("Found " + accts.size() + " accounts on server " + serverName);
+        ZmailLog.calendar.info("Found " + accts.size() + " accounts on server " + serverName);
         return accts;
     }
 
@@ -110,7 +110,7 @@ public class FixCalendarPriority extends AdminDocumentHandler {
                 try {
                     accts.add(Provisioning.getInstance().get(AccountBy.name, name));
                 } catch (ServiceException e) {
-                    ZimbraLog.calendar.error(
+                    ZmailLog.calendar.error(
                             "Error looking up account " + name + ": " + e.getMessage(), e);
                 }
             }
@@ -125,18 +125,18 @@ public class FixCalendarPriority extends AdminDocumentHandler {
             try {
                 numFixedAppts += mbox.fixAllCalendarItemPriority(null);
             } catch (ServiceException e) {
-                ZimbraLog.calendar.error(
+                ZmailLog.calendar.error(
                         "Error fixing calendar item priority in mailbox " + mbox.getId() +
                         ": " + e.getMessage(), e);
             }
             numFixedAccts++;
             if (numFixedAccts % every == 0) {
-                ZimbraLog.calendar.info(
+                ZmailLog.calendar.info(
                         "Progress: fixed calendar item priority in " + numFixedAccts + "/" +
                         numAccts + " accounts");
             }
         }
-        ZimbraLog.calendar.info(
+        ZmailLog.calendar.info(
                 "Fixed priority in total " + numFixedAppts + " calendar items in " + numFixedAccts + " accounts");
     }
 
@@ -152,7 +152,7 @@ public class FixCalendarPriority extends AdminDocumentHandler {
             try {
                 fixAccounts(mAcctNames);
             } catch (ServiceException e) {
-                ZimbraLog.calendar.error(
+                ZmailLog.calendar.error(
                         "Error while fixing up calendar priority: " + e.getMessage(), e);
             }
         }

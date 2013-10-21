@@ -12,7 +12,7 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.service.formatter;
+package org.zmail.cs.service.formatter;
 
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
@@ -30,25 +30,25 @@ import javax.mail.internet.MimePart;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.zimbra.common.mime.MimeConstants;
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.common.util.ByteUtil;
-import com.zimbra.common.util.HttpUtil;
-import com.zimbra.common.util.Pair;
-import com.zimbra.cs.mailbox.CalendarItem;
-import com.zimbra.cs.mailbox.DeliveryOptions;
-import com.zimbra.cs.mailbox.Folder;
-import com.zimbra.cs.mailbox.MailItem;
-import com.zimbra.cs.mailbox.Mailbox;
-import com.zimbra.cs.mailbox.Message;
-import com.zimbra.cs.mailbox.calendar.CalendarMailSender;
-import com.zimbra.cs.mailbox.calendar.Invite;
-import com.zimbra.cs.mailbox.util.TagUtil;
-import com.zimbra.cs.mime.Mime;
-import com.zimbra.cs.mime.ParsedMessage;
-import com.zimbra.cs.service.UserServletContext;
-import com.zimbra.cs.service.UserServletException;
-import com.zimbra.cs.service.formatter.FormatterFactory.FormatType;
+import org.zmail.common.mime.MimeConstants;
+import org.zmail.common.service.ServiceException;
+import org.zmail.common.util.ByteUtil;
+import org.zmail.common.util.HttpUtil;
+import org.zmail.common.util.Pair;
+import org.zmail.cs.mailbox.CalendarItem;
+import org.zmail.cs.mailbox.DeliveryOptions;
+import org.zmail.cs.mailbox.Folder;
+import org.zmail.cs.mailbox.MailItem;
+import org.zmail.cs.mailbox.Mailbox;
+import org.zmail.cs.mailbox.Message;
+import org.zmail.cs.mailbox.calendar.CalendarMailSender;
+import org.zmail.cs.mailbox.calendar.Invite;
+import org.zmail.cs.mailbox.util.TagUtil;
+import org.zmail.cs.mime.Mime;
+import org.zmail.cs.mime.ParsedMessage;
+import org.zmail.cs.service.UserServletContext;
+import org.zmail.cs.service.UserServletException;
+import org.zmail.cs.service.formatter.FormatterFactory.FormatType;
 
 public class SyncFormatter extends Formatter {
 
@@ -68,42 +68,42 @@ public class SyncFormatter extends Formatter {
     /**
      * add to content as well as http headers for now (unless told not to)...
      */
-    private static List<Pair<String, String>> getXZimbraHeaders(MailItem item) {
+    private static List<Pair<String, String>> getXZmailHeaders(MailItem item) {
         List<Pair<String, String>> hdrs = new ArrayList<Pair<String, String>>();
-        hdrs.add(new Pair<String, String>("X-Zimbra-ItemId", item.getId() + ""));
-        hdrs.add(new Pair<String, String>("X-Zimbra-FolderId", item.getFolderId() + ""));
-        hdrs.add(new Pair<String, String>("X-Zimbra-Tags", TagUtil.getTagIdString(item)));
-        hdrs.add(new Pair<String, String>("X-Zimbra-Tag-Names", TagUtil.encodeTags(item.getTags())));
-        hdrs.add(new Pair<String, String>("X-Zimbra-Flags", item.getFlagString()));
-        hdrs.add(new Pair<String, String>("X-Zimbra-Received", item.getDate() + ""));
-        hdrs.add(new Pair<String, String>("X-Zimbra-Modified", item.getChangeDate() + ""));
-        hdrs.add(new Pair<String, String>("X-Zimbra-Change", item.getModifiedSequence() + ""));
-        hdrs.add(new Pair<String, String>("X-Zimbra-Revision", item.getSavedSequence() + ""));
+        hdrs.add(new Pair<String, String>("X-Zmail-ItemId", item.getId() + ""));
+        hdrs.add(new Pair<String, String>("X-Zmail-FolderId", item.getFolderId() + ""));
+        hdrs.add(new Pair<String, String>("X-Zmail-Tags", TagUtil.getTagIdString(item)));
+        hdrs.add(new Pair<String, String>("X-Zmail-Tag-Names", TagUtil.encodeTags(item.getTags())));
+        hdrs.add(new Pair<String, String>("X-Zmail-Flags", item.getFlagString()));
+        hdrs.add(new Pair<String, String>("X-Zmail-Received", item.getDate() + ""));
+        hdrs.add(new Pair<String, String>("X-Zmail-Modified", item.getChangeDate() + ""));
+        hdrs.add(new Pair<String, String>("X-Zmail-Change", item.getModifiedSequence() + ""));
+        hdrs.add(new Pair<String, String>("X-Zmail-Revision", item.getSavedSequence() + ""));
         if (item instanceof Message)
-            hdrs.add(new Pair<String, String>("X-Zimbra-Conv", ((Message) item).getConversationId() + ""));
+            hdrs.add(new Pair<String, String>("X-Zmail-Conv", ((Message) item).getConversationId() + ""));
         return hdrs;
     }
 
-    private static byte[] getXZimbraHeadersBytes(List<Pair<String, String>> hdrs) {
+    private static byte[] getXZmailHeadersBytes(List<Pair<String, String>> hdrs) {
         StringBuilder sb = new StringBuilder();
         for (Pair<String, String> pair : hdrs)
             sb.append(pair.getFirst()).append(": ").append(pair.getSecond()).append("\r\n");
         return sb.toString().getBytes();
     }
 
-    public static byte[] getXZimbraHeadersBytes(MailItem item) {
-        return getXZimbraHeadersBytes(getXZimbraHeaders(item));
+    public static byte[] getXZmailHeadersBytes(MailItem item) {
+        return getXZmailHeadersBytes(getXZmailHeaders(item));
     }
 
-    private static void addXZimbraHeaders(UserServletContext context, MailItem item, long size) throws IOException {
-        List<Pair<String, String>> hdrs = getXZimbraHeaders(item);
+    private static void addXZmailHeaders(UserServletContext context, MailItem item, long size) throws IOException {
+        List<Pair<String, String>> hdrs = getXZmailHeaders(item);
         for (Pair<String, String> pair : hdrs)
             context.resp.addHeader(pair.getFirst(), pair.getSecond());
 
-        // inline X-Zimbra headers with response body if nohdr parameter is not present
+        // inline X-Zmail headers with response body if nohdr parameter is not present
         // also explicitly set the Content-Length header, as it's only done implicitly for short payloads
         if (context.params.get(QP_NOHDR) == null) {
-            byte[] inline = getXZimbraHeadersBytes(hdrs);
+            byte[] inline = getXZmailHeadersBytes(hdrs);
             if (size > 0)
                 context.resp.setContentLength(inline.length + (int) size);
             context.resp.getOutputStream().write(inline);
@@ -139,7 +139,7 @@ public class SyncFormatter extends Formatter {
         if (context.itemId.hasSubpart()) {
             Pair<MimeMessage,Integer> calItemMsgData = calItem.getSubpartMessageData(context.itemId.getSubpartId());
             if (calItemMsgData != null) {
-                addXZimbraHeaders(context, calItem, -1);
+                addXZmailHeaders(context, calItem, -1);
                 calItemMsgData.getFirst().writeTo(context.resp.getOutputStream());
             } else {
                 // Backward compatibility for pre-5.0.16 ZCO/ZCB: Build a MIME message on the fly.
@@ -156,14 +156,14 @@ public class SyncFormatter extends Formatter {
                         ByteArrayOutputStream baos = new ByteArrayOutputStream(sizeHint);
                         mm.writeTo(baos);
                         byte[] bytes = baos.toByteArray();
-                        addXZimbraHeaders(context, calItem, bytes.length);
+                        addXZmailHeaders(context, calItem, bytes.length);
                         ByteArrayInputStream bais = new ByteArrayInputStream(bytes);
                         ByteUtil.copy(bais, true, context.resp.getOutputStream(), false);
                     }
                 }
             }
         } else {
-            addXZimbraHeaders(context, calItem, -1);
+            addXZmailHeaders(context, calItem, -1);
             InputStream is = calItem.getRawMessage();
             if (is != null)
                 ByteUtil.copy(is, true, context.resp.getOutputStream(), false);
@@ -180,7 +180,7 @@ public class SyncFormatter extends Formatter {
             is = new ByteArrayInputStream(headers);
             size = headers.length;
         }
-        addXZimbraHeaders(context, msg, size);
+        addXZmailHeaders(context, msg, size);
         ByteUtil.copy(is, true, context.resp.getOutputStream(), false);
     }
 

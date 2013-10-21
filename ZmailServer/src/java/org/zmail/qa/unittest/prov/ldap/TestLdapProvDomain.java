@@ -12,7 +12,7 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.qa.unittest.prov.ldap;
+package org.zmail.qa.unittest.prov.ldap;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -24,29 +24,29 @@ import java.util.Set;
 import org.junit.*;
 import static org.junit.Assert.*;
 
-import com.zimbra.common.account.Key;
-import com.zimbra.common.account.ZAttrProvisioning;
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.cs.account.Account;
-import com.zimbra.cs.account.AccountServiceException;
-import com.zimbra.cs.account.Domain;
-import com.zimbra.cs.account.IDNUtil;
-import com.zimbra.cs.account.NamedEntry;
-import com.zimbra.cs.account.Provisioning;
-import com.zimbra.cs.account.ldap.LdapHelper;
-import com.zimbra.cs.account.ldap.LdapProv;
-import com.zimbra.cs.ldap.IAttributes;
-import com.zimbra.cs.ldap.LdapClient;
-import com.zimbra.cs.ldap.LdapConstants;
-import com.zimbra.cs.ldap.LdapUsage;
-import com.zimbra.cs.ldap.ZLdapContext;
-import com.zimbra.cs.ldap.SearchLdapOptions;
-import com.zimbra.cs.ldap.ZLdapFilterFactory;
-import com.zimbra.cs.ldap.ZSearchScope;
-import com.zimbra.cs.ldap.ZLdapFilterFactory.FilterId;
-import com.zimbra.qa.unittest.TestUtil;
-import com.zimbra.qa.unittest.prov.Names;
-import com.zimbra.soap.admin.type.CacheEntryType;
+import org.zmail.common.account.Key;
+import org.zmail.common.account.ZAttrProvisioning;
+import org.zmail.common.service.ServiceException;
+import org.zmail.cs.account.Account;
+import org.zmail.cs.account.AccountServiceException;
+import org.zmail.cs.account.Domain;
+import org.zmail.cs.account.IDNUtil;
+import org.zmail.cs.account.NamedEntry;
+import org.zmail.cs.account.Provisioning;
+import org.zmail.cs.account.ldap.LdapHelper;
+import org.zmail.cs.account.ldap.LdapProv;
+import org.zmail.cs.ldap.IAttributes;
+import org.zmail.cs.ldap.LdapClient;
+import org.zmail.cs.ldap.LdapConstants;
+import org.zmail.cs.ldap.LdapUsage;
+import org.zmail.cs.ldap.ZLdapContext;
+import org.zmail.cs.ldap.SearchLdapOptions;
+import org.zmail.cs.ldap.ZLdapFilterFactory;
+import org.zmail.cs.ldap.ZSearchScope;
+import org.zmail.cs.ldap.ZLdapFilterFactory.FilterId;
+import org.zmail.qa.unittest.TestUtil;
+import org.zmail.qa.unittest.prov.Names;
+import org.zmail.soap.admin.type.CacheEntryType;
 
 public class TestLdapProvDomain extends LdapTest {
     private static LdapProvTestUtil provUtil;
@@ -108,12 +108,12 @@ public class TestLdapProvDomain extends LdapTest {
         // another verification
         //
         LdapHelper ldapHelper = ((LdapProv) prov).getHelper();
-        final List<String /* zimbraId */> domainIds = new ArrayList<String>();
+        final List<String /* zmailId */> domainIds = new ArrayList<String>();
         SearchLdapOptions.SearchLdapVisitor visitor = new SearchLdapOptions.SearchLdapVisitor() {
             @Override
             public void visit(String dn, Map<String, Object> attrs, IAttributes ldapAttrs) {
                 try {
-                    domainIds.add(ldapAttrs.getAttrString(Provisioning.A_zimbraId));
+                    domainIds.add(ldapAttrs.getAttrString(Provisioning.A_zmailId));
                 } catch (ServiceException e) {
                     fail();
                 }
@@ -121,8 +121,8 @@ public class TestLdapProvDomain extends LdapTest {
         };
         
         SearchLdapOptions searchOpts = new SearchLdapOptions(LdapConstants.DN_ROOT_DSE, 
-                ZLdapFilterFactory.getInstance().fromFilterString(FilterId.UNITTEST, "(objectclass=zimbraDomain)"), 
-                new String[]{Provisioning.A_zimbraId}, 
+                ZLdapFilterFactory.getInstance().fromFilterString(FilterId.UNITTEST, "(objectclass=zmailDomain)"), 
+                new String[]{Provisioning.A_zmailId}, 
                 SearchLdapOptions.SIZE_UNLIMITED, null, ZSearchScope.SEARCH_SCOPE_SUBTREE, 
                 visitor);
         
@@ -246,7 +246,7 @@ public class TestLdapProvDomain extends LdapTest {
             }
         };
         
-        prov.getAllDomains(visitor, new String[]{Provisioning.A_zimbraId});
+        prov.getAllDomains(visitor, new String[]{Provisioning.A_zmailId});
         
         verifyAllDomains(allDomains);
     }
@@ -265,8 +265,8 @@ public class TestLdapProvDomain extends LdapTest {
         targetDomain = createDomain(TARGET_DOMAIN_NAME);
         
         Map<String, Object> attrs = new HashMap<String, Object>();
-        attrs.put(Provisioning.A_zimbraDomainType, ZAttrProvisioning.DomainType.alias.name());
-        attrs.put(Provisioning.A_zimbraDomainAliasTargetId, targetDomain.getId());
+        attrs.put(Provisioning.A_zmailDomainType, ZAttrProvisioning.DomainType.alias.name());
+        attrs.put(Provisioning.A_zmailDomainAliasTargetId, targetDomain.getId());
         aliasDomain = createDomain(ALIAS_DOMAIN_NAME, attrs);
         
         String realEmail = prov.getEmailAddrByDomainAlias(TestUtil.getAddress(USER_LOCAL_PART, ALIAS_DOMAIN_NAME));
@@ -291,9 +291,9 @@ public class TestLdapProvDomain extends LdapTest {
         String FOREIGN_NAME = "foreignname";
         
         Map<String, Object> attrs = new HashMap<String, Object>();
-        attrs.put(Provisioning.A_zimbraVirtualHostname, VIRTUAL_HOSTNAME);
-        attrs.put(Provisioning.A_zimbraAuthKerberos5Realm, KRB5_REALM);
-        attrs.put(Provisioning.A_zimbraForeignName, FOREIGN_NAME);
+        attrs.put(Provisioning.A_zmailVirtualHostname, VIRTUAL_HOSTNAME);
+        attrs.put(Provisioning.A_zmailAuthKerberos5Realm, KRB5_REALM);
+        attrs.put(Provisioning.A_zmailForeignName, FOREIGN_NAME);
         
         Domain domain = createDomain(DOMAIN_NAME, attrs);
         

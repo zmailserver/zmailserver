@@ -12,7 +12,7 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.mailbox;
+package org.zmail.cs.mailbox;
 
 import java.util.Collections;
 import java.util.EnumSet;
@@ -20,17 +20,17 @@ import java.util.HashSet;
 import java.util.Set;
 
 import com.google.common.annotations.VisibleForTesting;
-import com.zimbra.common.localconfig.DebugConfig;
-import com.zimbra.cs.account.Account;
-import com.zimbra.cs.datasource.DataSourceListener;
-import com.zimbra.cs.fb.FreeBusyProvider;
-import com.zimbra.cs.filter.FilterListener;
-import com.zimbra.cs.mailbox.MailItem.Type;
-import com.zimbra.cs.mailbox.acl.AclPushListener;
-import com.zimbra.cs.mailbox.acl.ShareExpirationListener;
-import com.zimbra.cs.mailbox.alerts.CalItemReminderService;
-import com.zimbra.cs.session.PendingModifications;
-import com.zimbra.cs.util.ZimbraApplication;
+import org.zmail.common.localconfig.DebugConfig;
+import org.zmail.cs.account.Account;
+import org.zmail.cs.datasource.DataSourceListener;
+import org.zmail.cs.fb.FreeBusyProvider;
+import org.zmail.cs.filter.FilterListener;
+import org.zmail.cs.mailbox.MailItem.Type;
+import org.zmail.cs.mailbox.acl.AclPushListener;
+import org.zmail.cs.mailbox.acl.ShareExpirationListener;
+import org.zmail.cs.mailbox.alerts.CalItemReminderService;
+import org.zmail.cs.session.PendingModifications;
+import org.zmail.cs.util.ZmailApplication;
 
 
 public abstract class MailboxListener {
@@ -85,7 +85,7 @@ public abstract class MailboxListener {
 
     static void reset() {
         sListeners.clear();
-        ZimbraApplication application = ZimbraApplication.getInstance();
+        ZmailApplication application = ZmailApplication.getInstance();
         if (application.supports(CalItemReminderService.class) && !DebugConfig.disableCalendarReminderEmail) {
             register(new CalItemReminderService());
         }

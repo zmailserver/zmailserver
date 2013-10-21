@@ -12,7 +12,7 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.zimlet;
+package org.zmail.cs.zimlet;
 
 import java.io.ByteArrayInputStream;
 import java.io.File;
@@ -32,8 +32,8 @@ import java.util.jar.Manifest;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipFile;
 
-import com.zimbra.common.util.ByteUtil;
-import com.zimbra.common.util.TemplateCompiler;
+import org.zmail.common.util.ByteUtil;
+import org.zmail.common.util.TemplateCompiler;
 
 /**
  * Represents Zimlet distribution file.

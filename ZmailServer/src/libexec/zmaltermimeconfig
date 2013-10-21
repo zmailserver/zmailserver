@@ -14,7 +14,7 @@
 # ***** END LICENSE BLOCK *****
 # 
 use strict;
-use lib qw(/opt/zimbra/zimbramon/lib /opt/zimbra/libexec/scripts);
+use lib qw(/opt/zmail/zmailmon/lib /opt/zmail/libexec/scripts);
 use Net::DNS;
 use Socket;
 use Net::LDAP;
@@ -23,9 +23,9 @@ use Getopt::Long;
 my (%c,%loaded,%saved,$rc);
 my ($help, $verbose, $force);
 
-my (undef, undef,$uid,$gid) = getpwnam('zimbra');
+my (undef, undef,$uid,$gid) = getpwnam('zmail');
 if ($> ne $uid) {
-  print "Must be run as user zimbra.\n";
+  print "Must be run as user zmail.\n";
   &usage
 }
 
@@ -40,13 +40,13 @@ if (!$opts_good) {
 
 &usage if ($help);
 
-$c{zmlocalconfig}="/opt/zimbra/bin/zmlocalconfig";
-$c{zimbra_home} = getLocalConfig("zimbra_home");
-$c{zmprov}="$c{zimbra_home}/bin/zmprov -l --";
+$c{zmlocalconfig}="/opt/zmail/bin/zmlocalconfig";
+$c{zmail_home} = getLocalConfig("zmail_home");
+$c{zmprov}="$c{zmail_home}/bin/zmprov -l --";
 
 # ***** Main *****
-my $ldappass = `$c{zmlocalconfig} -s -m nokey zimbra_ldap_password`;
-my $ldapdn  = `$c{zmlocalconfig} -s -m nokey zimbra_ldap_userdn`;
+my $ldappass = `$c{zmlocalconfig} -s -m nokey zmail_ldap_password`;
+my $ldapdn  = `$c{zmlocalconfig} -s -m nokey zmail_ldap_userdn`;
 my $ldapurl  = `$c{zmlocalconfig} -s -m nokey ldap_url`;
 chop($ldappass);
 chop($ldapdn);
@@ -56,25 +56,25 @@ my $ldap = Net::LDAP->new( $ldapurl ) or die "Error connecting to LDAP server: $
 my $mesg = $ldap->bind( $ldapdn, password => $ldappass );
 $mesg->code && die "Error binding to LDAP server: $mesg->error";
 
-my $ldapquery = "(objectClass=zimbraGlobalConfig)";
+my $ldapquery = "(objectClass=zmailGlobalConfig)";
 $mesg = $ldap->search(
                   base => '',
                   filter => $ldapquery,
                   attrs => [
-                      'zimbraDomainMandatoryMailSignatureEnabled',
-                      'zimbraDomainMandatoryMailSignatureText',
-                      'zimbraDomainMandatoryMailSignatureHTML'
+                      'zmailDomainMandatoryMailSignatureEnabled',
+                      'zmailDomainMandatoryMailSignatureText',
+                      'zmailDomainMandatoryMailSignatureHTML'
                   ]
               );
 my $i = 0;
-my $enabled = $mesg->entry($i)->get_value('zimbraDomainMandatoryMailSignatureEnabled');
-print "Getting global config zimbraDomainMandatoryMailSignatureEnabled=$enabled\n";
+my $enabled = $mesg->entry($i)->get_value('zmailDomainMandatoryMailSignatureEnabled');
+print "Getting global config zmailDomainMandatoryMailSignatureEnabled=$enabled\n";
 
 if (lc($enabled) eq "true") {
-  my $text = $mesg->entry($i)->get_value('zimbraDomainMandatoryMailSignatureText');
-  my $html = $mesg->entry($i)->get_value('zimbraDomainMandatoryMailSignatureHTML');
-  writeFile("$c{zimbra_home}/data/altermime/global-default.txt", "$text");
-  writeFile("$c{zimbra_home}/data/altermime/global-default.html", "$html");
+  my $text = $mesg->entry($i)->get_value('zmailDomainMandatoryMailSignatureText');
+  my $html = $mesg->entry($i)->get_value('zmailDomainMandatoryMailSignatureHTML');
+  writeFile("$c{zmail_home}/data/altermime/global-default.txt", "$text");
+  writeFile("$c{zmail_home}/data/altermime/global-default.html", "$html");
 }
 
 exit 0;

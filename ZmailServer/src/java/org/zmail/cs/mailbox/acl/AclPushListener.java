@@ -12,13 +12,13 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.mailbox.acl;
+package org.zmail.cs.mailbox.acl;
 
-import com.zimbra.cs.mailbox.Folder;
-import com.zimbra.cs.mailbox.MailItem;
-import com.zimbra.cs.mailbox.MailboxListener;
-import com.zimbra.cs.session.PendingModifications.Change;
-import com.zimbra.cs.util.Zimbra;
+import org.zmail.cs.mailbox.Folder;
+import org.zmail.cs.mailbox.MailItem;
+import org.zmail.cs.mailbox.MailboxListener;
+import org.zmail.cs.session.PendingModifications.Change;
+import org.zmail.cs.util.Zmail;
 
 import java.util.Collections;
 import java.util.Set;
@@ -74,7 +74,7 @@ public class AclPushListener extends MailboxListener {
         }
         if (runAclPushTask) {
             // run in separate thread to avoid ldap communication inside mailbox lock
-            Zimbra.sTimer.schedule(new AclPushTask(), 0);
+            Zmail.sTimer.schedule(new AclPushTask(), 0);
         }
     }
 }

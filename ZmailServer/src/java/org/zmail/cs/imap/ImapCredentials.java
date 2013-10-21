@@ -16,21 +16,21 @@
 /*
  * Created on Apr 30, 2005
  */
-package com.zimbra.cs.imap;
+package org.zmail.cs.imap;
 
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.Set;
 
-import com.zimbra.common.account.Key;
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.cs.account.Account;
-import com.zimbra.cs.account.Provisioning;
-import com.zimbra.cs.mailbox.Mailbox;
-import com.zimbra.cs.mailbox.MailboxManager;
-import com.zimbra.cs.mailbox.Metadata;
-import com.zimbra.cs.mailbox.MetadataList;
-import com.zimbra.cs.mailbox.OperationContext;
+import org.zmail.common.account.Key;
+import org.zmail.common.service.ServiceException;
+import org.zmail.cs.account.Account;
+import org.zmail.cs.account.Provisioning;
+import org.zmail.cs.mailbox.Mailbox;
+import org.zmail.cs.mailbox.MailboxManager;
+import org.zmail.cs.mailbox.Metadata;
+import org.zmail.cs.mailbox.MetadataList;
+import org.zmail.cs.mailbox.OperationContext;
 
 class ImapCredentials implements java.io.Serializable {
     private static final long serialVersionUID = -3323076274740054770L;

@@ -29,13 +29,13 @@ sub recreateMucTables() {
   Migrate::logSql("Recreating IM MUC tables.");
   
   my $sql = <<SQL_EOF;
-use zimbra;
-DROP TABLE IF EXISTS zimbra.jiveVersion;
-DROP TABLE IF EXISTS zimbra.mucRoom;
-DROP TABLE IF EXISTS zimbra.mucRoomProp;
-DROP TABLE IF EXISTS zimbra.mucAffiliation;
-DROP TABLE IF EXISTS zimbra.mucMember;
-DROP TABLE IF EXISTS zimbra.mucConversationLog;
+use zmail;
+DROP TABLE IF EXISTS zmail.jiveVersion;
+DROP TABLE IF EXISTS zmail.mucRoom;
+DROP TABLE IF EXISTS zmail.mucRoomProp;
+DROP TABLE IF EXISTS zmail.mucAffiliation;
+DROP TABLE IF EXISTS zmail.mucMember;
+DROP TABLE IF EXISTS zmail.mucConversationLog;
 
 CREATE TABLE mucRoom (
   service             VARCHAR(255)  NOT NULL,

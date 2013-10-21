@@ -13,7 +13,7 @@
  * ***** END LICENSE BLOCK *****
  */
 
-package com.zimbra.cs.mailbox.calendar;
+package org.zmail.cs.mailbox.calendar;
 
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -22,25 +22,25 @@ import java.util.Set;
 
 import net.fortuna.ical4j.data.ParserException;
 
-import com.zimbra.common.calendar.ICalTimeZone;
-import com.zimbra.common.calendar.TZIDMapper;
-import com.zimbra.common.calendar.TimeZoneMap;
-import com.zimbra.common.calendar.WellKnownTimeZones;
-import com.zimbra.common.calendar.ZCalendar;
-import com.zimbra.common.calendar.ZCalendar.ICalTok;
-import com.zimbra.common.calendar.ZCalendar.ZComponent;
-import com.zimbra.common.calendar.ZCalendar.ZICalendarParseHandler;
-import com.zimbra.common.calendar.ZCalendar.ZParameter;
-import com.zimbra.common.calendar.ZCalendar.ZProperty;
-import com.zimbra.common.calendar.ZCalendar.ZVCalendar;
-import com.zimbra.common.localconfig.DebugConfig;
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.common.util.ZimbraLog;
-import com.zimbra.cs.account.Account;
-import com.zimbra.cs.ldap.LdapUtil;
-import com.zimbra.cs.mailbox.Folder;
-import com.zimbra.cs.mailbox.OperationContext;
-import com.zimbra.cs.mailbox.calendar.Invite.InviteVisitor;
+import org.zmail.common.calendar.ICalTimeZone;
+import org.zmail.common.calendar.TZIDMapper;
+import org.zmail.common.calendar.TimeZoneMap;
+import org.zmail.common.calendar.WellKnownTimeZones;
+import org.zmail.common.calendar.ZCalendar;
+import org.zmail.common.calendar.ZCalendar.ICalTok;
+import org.zmail.common.calendar.ZCalendar.ZComponent;
+import org.zmail.common.calendar.ZCalendar.ZICalendarParseHandler;
+import org.zmail.common.calendar.ZCalendar.ZParameter;
+import org.zmail.common.calendar.ZCalendar.ZProperty;
+import org.zmail.common.calendar.ZCalendar.ZVCalendar;
+import org.zmail.common.localconfig.DebugConfig;
+import org.zmail.common.service.ServiceException;
+import org.zmail.common.util.ZmailLog;
+import org.zmail.cs.account.Account;
+import org.zmail.cs.ldap.LdapUtil;
+import org.zmail.cs.mailbox.Folder;
+import org.zmail.cs.mailbox.OperationContext;
+import org.zmail.cs.mailbox.calendar.Invite.InviteVisitor;
 
 // ical4j parse handler that adds VEVENT/VTODOs as they are parsed
 // This is memory efficient compared to the default parse handler which builds a list of parsed objects
@@ -167,7 +167,7 @@ public class IcsImportParseHandler implements ZICalendarParseHandler {
             if (ICalTok.TZID.equals(param.getToken()) && mCurProperty.getToken() != null)
                 mTZIDsSeen.add(value);
         } else {
-            ZimbraLog.calendar.debug("ERROR: got parameter " + name + "," + value + " outside of Property");
+            ZmailLog.calendar.debug("ERROR: got parameter " + name + "," + value + " outside of Property");
         }
     }
 
@@ -229,11 +229,11 @@ public class IcsImportParseHandler implements ZICalendarParseHandler {
             // and add the invite to the calendar!
             try {
                 mFolder.getMailbox().addInvite(mCtxt, inv, mFolder.getId(), mPreserveExistingAlarms, addRevision);
-                if (ZimbraLog.calendar.isDebugEnabled()) {
+                if (ZmailLog.calendar.isDebugEnabled()) {
                     if (inv.isEvent())
-                        ZimbraLog.calendar.debug("Appointment imported: UID=" + inv.getUid());
+                        ZmailLog.calendar.debug("Appointment imported: UID=" + inv.getUid());
                     else if (inv.isTodo())
-                        ZimbraLog.calendar.debug("Task imported: UID=" + inv.getUid());
+                        ZmailLog.calendar.debug("Task imported: UID=" + inv.getUid());
                 }
             } catch (ServiceException se) {
                 if (se.getCode().equals(ServiceException.FORBIDDEN)) {

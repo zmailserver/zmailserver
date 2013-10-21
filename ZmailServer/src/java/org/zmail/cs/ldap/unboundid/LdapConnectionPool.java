@@ -12,7 +12,7 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.ldap.unboundid;
+package org.zmail.cs.ldap.unboundid;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -32,21 +32,21 @@ import com.unboundid.ldap.sdk.ServerSet;
 import com.unboundid.ldap.sdk.SimpleBindRequest;
 import com.unboundid.ldap.sdk.StartTLSPostConnectProcessor;
 
-import com.zimbra.common.localconfig.DebugConfig;
-import com.zimbra.common.localconfig.LC;
-import com.zimbra.cs.ldap.LdapServerConfig;
-import com.zimbra.cs.ldap.LdapServerConfig.ExternalLdapConfig;
-import com.zimbra.cs.ldap.LdapConnType;
-import com.zimbra.cs.ldap.LdapException;
-import com.zimbra.cs.ldap.LdapTODO.TODO;
+import org.zmail.common.localconfig.DebugConfig;
+import org.zmail.common.localconfig.LC;
+import org.zmail.cs.ldap.LdapServerConfig;
+import org.zmail.cs.ldap.LdapServerConfig.ExternalLdapConfig;
+import org.zmail.cs.ldap.LdapConnType;
+import org.zmail.cs.ldap.LdapException;
+import org.zmail.cs.ldap.LdapTODO.TODO;
 
 public class LdapConnectionPool {
     
     //
     // Known connection pool names
     //
-    public static final String CP_ZIMBRA_REPLICA = "ZimbraReplica";
-    public static final String CP_ZIMBRA_MASTER = "ZimbraMaster";
+    public static final String CP_ZIMBRA_REPLICA = "ZmailReplica";
+    public static final String CP_ZIMBRA_MASTER = "ZmailMaster";
     
     // for unittest and dump stats
     private static final Map<String, LDAPConnectionPool> connPools = 

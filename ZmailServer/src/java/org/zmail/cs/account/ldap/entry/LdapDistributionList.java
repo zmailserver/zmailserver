@@ -12,18 +12,18 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.account.ldap.entry;
+package org.zmail.cs.account.ldap.entry;
 
 import java.util.Set;
 
-import com.zimbra.common.account.Key.DistributionListBy;
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.cs.account.DistributionList;
-import com.zimbra.cs.account.Group;
-import com.zimbra.cs.account.Provisioning;
-import com.zimbra.cs.account.ldap.LdapProvisioning;
-import com.zimbra.cs.ldap.LdapException;
-import com.zimbra.cs.ldap.ZAttributes;
+import org.zmail.common.account.Key.DistributionListBy;
+import org.zmail.common.service.ServiceException;
+import org.zmail.cs.account.DistributionList;
+import org.zmail.cs.account.Group;
+import org.zmail.cs.account.Provisioning;
+import org.zmail.cs.account.ldap.LdapProvisioning;
+import org.zmail.cs.ldap.LdapException;
+import org.zmail.cs.ldap.ZAttributes;
 
 /**
  * @author pshao
@@ -34,7 +34,7 @@ public class LdapDistributionList extends DistributionList implements LdapEntry 
 
     public LdapDistributionList(String dn, String email, ZAttributes attrs,
             boolean isBasic, Provisioning prov) throws LdapException {
-        super(email, attrs.getAttrString(Provisioning.A_zimbraId),
+        super(email, attrs.getAttrString(Provisioning.A_zmailId),
                 attrs.getAttrs(), prov);
         mDn = dn;
         mIsBasic = isBasic;

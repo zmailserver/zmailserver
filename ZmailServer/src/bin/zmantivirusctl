@@ -14,43 +14,43 @@
 # ***** END LICENSE BLOCK *****
 # 
 
-BASE=/opt/zimbra
+BASE=/opt/zmail
 SCRIPTS="zmamavisdctl zmclamdctl zmfreshclamctl"
 
-if [ ! -L "/opt/zimbra/amavisd" ]; then
+if [ ! -L "/opt/zmail/amavisd" ]; then
   exit 0
 fi
 
-source /opt/zimbra/.bashrc
+source /opt/zmail/.bashrc
 
 case "$1" in 
 	start)
 		if [ x$2 = "x" ]; then
-			/opt/zimbra/libexec/configrewrite antivirus
+			/opt/zmail/libexec/configrewrite antivirus
 		fi
 		for i in $SCRIPTS; do
-			/opt/zimbra/bin/$i start norewrite
+			/opt/zmail/bin/$i start norewrite
 		done
 	;;
 	stop)
 		for i in $SCRIPTS; do
 			if [ $i = "zmclamdctl" ]; then
-				/opt/zimbra/bin/$i stop
+				/opt/zmail/bin/$i stop
 			fi
 			if [ $i = "zmfreshclamctl" ]; then
-				/opt/zimbra/bin/$i stop
+				/opt/zmail/bin/$i stop
 			fi
 		done
 	;;
 	reload|restart)
 		for i in $SCRIPTS; do
-			/opt/zimbra/bin/$i $1
+			/opt/zmail/bin/$i $1
 		done
 	;;
 	status)
 		STATUS=0
 		for i in $SCRIPTS; do
-			/opt/zimbra/bin/$i status > /dev/null 2>&1
+			/opt/zmail/bin/$i status > /dev/null 2>&1
 			R=$?
 			if [ $R -ne "0" ]; then
 				echo "$i is not running"

@@ -12,16 +12,16 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.account.names;
+package org.zmail.cs.account.names;
 
 import javax.mail.internet.AddressException;
 import javax.mail.internet.InternetAddress;
 
 import com.google.common.base.Strings;
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.common.util.EmailUtil;
-import com.zimbra.cs.account.Config;
-import com.zimbra.cs.account.Provisioning;
+import org.zmail.common.service.ServiceException;
+import org.zmail.common.util.EmailUtil;
+import org.zmail.cs.account.Config;
+import org.zmail.cs.account.Provisioning;
 
 public class NameUtil {
     private static final int MAX_DOMAIN_NAME_LEN = 255; // bug 15919, (RFC 1035)
@@ -87,11 +87,11 @@ public class NameUtil {
         }
 
         Config config = Provisioning.getInstance().getConfig();
-        boolean allowNonLDH = config.getBooleanAttr(Provisioning.A_zimbraAllowNonLDHCharsInDomain, true);
+        boolean allowNonLDH = config.getBooleanAttr(Provisioning.A_zmailAllowNonLDHCharsInDomain, true);
         if (!allowNonLDH && containsNonLDH(domain))
             throw ServiceException.INVALID_REQUEST("invalid domain name " + domain +
                     ": " + " containing non-LDH characters and " +
-                    Provisioning.A_zimbraAllowNonLDHCharsInDomain + " is false", null);
+                    Provisioning.A_zmailAllowNonLDHCharsInDomain + " is false", null);
     }
 
 

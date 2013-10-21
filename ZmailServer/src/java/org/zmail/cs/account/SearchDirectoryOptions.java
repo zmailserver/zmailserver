@@ -17,16 +17,16 @@
 /**
  * 
  */
-package com.zimbra.cs.account;
+package org.zmail.cs.account;
 
 import java.util.Arrays;
 import java.util.Set;
 
 import com.google.common.base.Splitter;
 import com.google.common.collect.Sets;
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.cs.ldap.ZLdapFilter;
-import com.zimbra.cs.ldap.ZLdapFilterFactory.FilterId;
+import org.zmail.common.service.ServiceException;
+import org.zmail.cs.ldap.ZLdapFilter;
+import org.zmail.cs.ldap.ZLdapFilterFactory.FilterId;
 
 public class SearchDirectoryOptions {
     public static final int ALL_RESULTS = 0;

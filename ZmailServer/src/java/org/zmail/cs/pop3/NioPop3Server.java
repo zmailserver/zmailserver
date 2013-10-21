@@ -13,7 +13,7 @@
  * ***** END LICENSE BLOCK *****
  */
 
-package com.zimbra.cs.pop3;
+package org.zmail.cs.pop3;
 
 import java.util.HashSet;
 import java.util.Map;
@@ -28,16 +28,16 @@ import org.apache.mina.filter.codec.textline.TextLineDecoder;
 
 import com.google.common.base.Charsets;
 import com.google.common.collect.ImmutableMap;
-import com.zimbra.common.localconfig.LC;
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.common.stats.RealtimeStatsCallback;
-import com.zimbra.cs.account.Provisioning;
-import com.zimbra.cs.account.Server;
-import com.zimbra.cs.server.NioConnection;
-import com.zimbra.cs.server.NioHandler;
-import com.zimbra.cs.server.NioServer;
-import com.zimbra.cs.server.ServerThrottle;
-import com.zimbra.cs.stats.ZimbraPerf;
+import org.zmail.common.localconfig.LC;
+import org.zmail.common.service.ServiceException;
+import org.zmail.common.stats.RealtimeStatsCallback;
+import org.zmail.cs.account.Provisioning;
+import org.zmail.cs.account.Server;
+import org.zmail.cs.server.NioConnection;
+import org.zmail.cs.server.NioHandler;
+import org.zmail.cs.server.NioServer;
+import org.zmail.cs.server.ServerThrottle;
+import org.zmail.cs.stats.ZmailPerf;
 
 public final class NioPop3Server extends NioServer implements Pop3Server, RealtimeStatsCallback {
     private static final ProtocolDecoder DECODER = new TextLineDecoder(Charsets.ISO_8859_1, LineDelimiter.AUTO);
@@ -45,7 +45,7 @@ public final class NioPop3Server extends NioServer implements Pop3Server, Realti
     public NioPop3Server(Pop3Config config) throws ServiceException {
         super(config);
         registerMBean(getName());
-        ZimbraPerf.addStatsCallback(this);
+        ZmailPerf.addStatsCallback(this);
         Set<String> safeHosts = new HashSet<String>();
         for (Server server : Provisioning.getInstance().getAllServers()) {
             safeHosts.add(server.getServiceHostname());
@@ -88,8 +88,8 @@ public final class NioPop3Server extends NioServer implements Pop3Server, Realti
 
     @Override
     public Map<String, Object> getStatData() {
-        String connStatName = getConfig().isSslEnabled() ? ZimbraPerf.RTS_POP_SSL_CONN : ZimbraPerf.RTS_POP_CONN;
-        String threadStatName = getConfig().isSslEnabled() ? ZimbraPerf.RTS_POP_SSL_THREADS : ZimbraPerf.RTS_POP_THREADS;
+        String connStatName = getConfig().isSslEnabled() ? ZmailPerf.RTS_POP_SSL_CONN : ZmailPerf.RTS_POP_CONN;
+        String threadStatName = getConfig().isSslEnabled() ? ZmailPerf.RTS_POP_SSL_THREADS : ZmailPerf.RTS_POP_THREADS;
         return ImmutableMap.of(connStatName, (Object) getNumConnections(), threadStatName, getNumThreads());
     }
 }

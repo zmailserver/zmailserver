@@ -13,7 +13,7 @@
  * ***** END LICENSE BLOCK *****
  */
 
-package com.zimbra.cs.util;
+package org.zmail.cs.util;
 
 import java.io.BufferedOutputStream;
 import java.io.File;
@@ -47,29 +47,29 @@ import org.apache.commons.httpclient.HttpStatus;
 import org.apache.commons.httpclient.methods.GetMethod;
 import org.apache.commons.httpclient.protocol.Protocol;
 
-import com.zimbra.common.account.Key.AccountBy;
-import com.zimbra.common.httpclient.HttpClientUtil;
-import com.zimbra.common.localconfig.LC;
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.common.soap.AccountConstants;
-import com.zimbra.common.soap.AdminConstants;
-import com.zimbra.common.soap.Element;
-import com.zimbra.common.soap.MailConstants;
-import com.zimbra.common.soap.SoapFaultException;
-import com.zimbra.common.soap.SoapHttpTransport;
-import com.zimbra.common.util.BufferStream;
-import com.zimbra.common.util.ByteUtil;
-import com.zimbra.common.util.CliUtil;
-import com.zimbra.common.util.Log;
-import com.zimbra.common.util.LogFactory;
-import com.zimbra.common.util.ZimbraCookie;
-import com.zimbra.common.zmime.ZMimeMessage;
-import com.zimbra.common.zmime.ZSharedFileInputStream;
-import com.zimbra.cs.account.Account;
-import com.zimbra.cs.account.Config;
-import com.zimbra.cs.account.Provisioning;
-import com.zimbra.cs.account.Server;
-import com.zimbra.cs.service.mail.ItemAction;
+import org.zmail.common.account.Key.AccountBy;
+import org.zmail.common.httpclient.HttpClientUtil;
+import org.zmail.common.localconfig.LC;
+import org.zmail.common.service.ServiceException;
+import org.zmail.common.soap.AccountConstants;
+import org.zmail.common.soap.AdminConstants;
+import org.zmail.common.soap.Element;
+import org.zmail.common.soap.MailConstants;
+import org.zmail.common.soap.SoapFaultException;
+import org.zmail.common.soap.SoapHttpTransport;
+import org.zmail.common.util.BufferStream;
+import org.zmail.common.util.ByteUtil;
+import org.zmail.common.util.CliUtil;
+import org.zmail.common.util.Log;
+import org.zmail.common.util.LogFactory;
+import org.zmail.common.util.ZmailCookie;
+import org.zmail.common.zmime.ZMimeMessage;
+import org.zmail.common.zmime.ZSharedFileInputStream;
+import org.zmail.cs.account.Account;
+import org.zmail.cs.account.Config;
+import org.zmail.cs.account.Provisioning;
+import org.zmail.cs.account.Server;
+import org.zmail.cs.service.mail.ItemAction;
 
 public class SpamExtract {
 
@@ -85,8 +85,8 @@ public class SpamExtract {
         mOptions.addOption("d", "delete", false, "delete extracted messages (default is to keep)");
         mOptions.addOption("o", "outdir", true, "directory to store extracted messages");
 
-        mOptions.addOption("a", "admin", true, "admin user name for auth (default is zimbra_ldap_userdn)");
-        mOptions.addOption("p", "password", true, "admin password for auth (default is zimbra_ldap_password)");
+        mOptions.addOption("a", "admin", true, "admin user name for auth (default is zmail_ldap_userdn)");
+        mOptions.addOption("p", "password", true, "admin password for auth (default is zmail_ldap_password)");
         mOptions.addOption("u", "url", true, "admin SOAP service url (default is target mailbox's server's admin service port)");
 
         mOptions.addOption("q", "query", true, "search query whose results should be extracted (default is in:inbox)");
@@ -104,7 +104,7 @@ public class SpamExtract {
         HelpFormatter formatter = new HelpFormatter();
         formatter.printHelp("zmspamextract [options] ",
             "where [options] are one of:", mOptions,
-            "SpamExtract retrieve messages that may have been marked as spam or not spam in the Zimbra Web Client.");
+            "SpamExtract retrieve messages that may have been marked as spam or not spam in the Zmail Web Client.");
         System.exit((errmsg == null) ? 0 : 1);
     }
 
@@ -157,14 +157,14 @@ public class SpamExtract {
         if (cl.hasOption('a')) {
             optAdminUser = cl.getOptionValue('a');
         } else {
-            optAdminUser = LC.zimbra_ldap_user.value();
+            optAdminUser = LC.zmail_ldap_user.value();
         }
 
         String optAdminPassword;
         if (cl.hasOption('p')) {
             optAdminPassword = cl.getOptionValue('p');
         } else {
-            optAdminPassword = LC.zimbra_ldap_password.value();
+            optAdminPassword = LC.zmail_ldap_password.value();
         }
 
         String optQuery = "in:inbox";
@@ -204,7 +204,7 @@ public class SpamExtract {
         HttpState state = new HttpState();
         GetMethod gm = new GetMethod();
         gm.setFollowRedirects(true);
-        Cookie authCookie = new Cookie(restURL.getHost(), ZimbraCookie.COOKIE_ZM_AUTH_TOKEN, authToken, "/", -1, false);
+        Cookie authCookie = new Cookie(restURL.getHost(), ZmailCookie.COOKIE_ZM_AUTH_TOKEN, authToken, "/", -1, false);
         state.addCookie(authCookie);
         hc.setState(state);
         hc.getHostConfiguration().setHost(restURL.getHost(), restURL.getPort(), Protocol.getProtocol(restURL.getProtocol()));
@@ -396,29 +396,29 @@ public class SpamExtract {
     }
 
     public static URL getServerURL(Server server, boolean admin) throws ServiceException {
-        String host = server.getAttr(Provisioning.A_zimbraServiceHostname);
+        String host = server.getAttr(Provisioning.A_zmailServiceHostname);
         if (host == null) {
-            throw ServiceException.FAILURE("invalid " + Provisioning.A_zimbraServiceHostname + " in server " + server.getName(), null);
+            throw ServiceException.FAILURE("invalid " + Provisioning.A_zmailServiceHostname + " in server " + server.getName(), null);
         }
 
         String protocol = "http";
-        String portAttr = Provisioning.A_zimbraMailPort;
+        String portAttr = Provisioning.A_zmailMailPort;
 
         if (admin) {
             protocol = "https";
-            portAttr = Provisioning.A_zimbraAdminPort;
+            portAttr = Provisioning.A_zmailAdminPort;
         } else {
-            String mode = server.getAttr(Provisioning.A_zimbraMailMode);
+            String mode = server.getAttr(Provisioning.A_zmailMailMode);
             if (mode == null) {
-                throw ServiceException.FAILURE("null " + Provisioning.A_zimbraMailMode + " in server " + server.getName(), null);
+                throw ServiceException.FAILURE("null " + Provisioning.A_zmailMailMode + " in server " + server.getName(), null);
             }
             if (mode.equalsIgnoreCase("https")) {
                 protocol = "https";
-                portAttr = Provisioning.A_zimbraMailSSLPort;
+                portAttr = Provisioning.A_zmailMailSSLPort;
             }
             if (mode.equalsIgnoreCase("redirect")) {
                 protocol = "https";
-                portAttr = Provisioning.A_zimbraMailSSLPort;
+                portAttr = Provisioning.A_zmailMailSSLPort;
             }
         }
 
@@ -498,7 +498,7 @@ public class SpamExtract {
                 mLog.error("only one of s, n or m options can be specified");
                 return null;
             }
-            name = conf.getAttr(Provisioning.A_zimbraSpamIsSpamAccount);
+            name = conf.getAttr(Provisioning.A_zmailSpamIsSpamAccount);
             if (name == null || name.length() == 0) {
                 mLog.error("no account configured for spam");
                 return null;
@@ -508,7 +508,7 @@ public class SpamExtract {
                 mLog.error("only one of s, n, or m options can be specified");
                 return null;
             }
-            name = conf.getAttr(Provisioning.A_zimbraSpamIsNotSpamAccount);
+            name = conf.getAttr(Provisioning.A_zmailSpamIsNotSpamAccount);
             if (name == null || name.length() == 0) {
                 mLog.error("no account configured for ham");
                 return null;

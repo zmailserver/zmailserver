@@ -12,7 +12,7 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.mailbox;
+package org.zmail.cs.mailbox;
 
 import java.util.Collections;
 import java.util.HashMap;
@@ -20,11 +20,11 @@ import java.util.Map;
 import java.util.Set;
 import java.util.TimerTask;
 
-import com.zimbra.common.util.ZimbraLog;
-import com.zimbra.cs.account.Provisioning;
-import com.zimbra.cs.account.ShareLocator;
-import com.zimbra.cs.session.PendingModifications.Change;
-import com.zimbra.cs.util.Zimbra;
+import org.zmail.common.util.ZmailLog;
+import org.zmail.cs.account.Provisioning;
+import org.zmail.cs.account.ShareLocator;
+import org.zmail.cs.session.PendingModifications.Change;
+import org.zmail.cs.util.Zmail;
 
 public class ShareStartStopListener extends MailboxListener {
 
@@ -103,16 +103,16 @@ public class ShareStartStopListener extends MailboxListener {
                         if (!me.equalsIgnoreCase(shloc.getShareOwnerAccountId())) {
                             // Change owner to this account.
                             Map<String, Object> attrs = new HashMap<String, Object>();
-                            attrs.put(Provisioning.A_zimbraShareOwnerAccountId, me);
+                            attrs.put(Provisioning.A_zmailShareOwnerAccountId, me);
                             prov.modifyAttrs(shloc, attrs);
                         }
                     }
                 } catch (Throwable t) {  //don't let exceptions kill the timer
-                    ZimbraLog.share.warn("error while processing share start notification", t);
+                    ZmailLog.share.warn("error while processing share start notification", t);
                 }
             }
         };
-        Zimbra.sTimer.schedule(t, 0);  // run in separate thread to avoid ldap communication inside mailbox lock
+        Zmail.sTimer.schedule(t, 0);  // run in separate thread to avoid ldap communication inside mailbox lock
     }
 
     // Remove the share locator entry for this folder.
@@ -134,10 +134,10 @@ public class ShareStartStopListener extends MailboxListener {
                         }
                     }
                 } catch (Throwable t) {  //don't let exceptions kill the timer
-                    ZimbraLog.share.warn("error while processing share stop notification", t);
+                    ZmailLog.share.warn("error while processing share stop notification", t);
                 }
             }
         };
-        Zimbra.sTimer.schedule(t, 0);  // run in separate thread to avoid ldap communication inside mailbox lock
+        Zmail.sTimer.schedule(t, 0);  // run in separate thread to avoid ldap communication inside mailbox lock
     }
 }

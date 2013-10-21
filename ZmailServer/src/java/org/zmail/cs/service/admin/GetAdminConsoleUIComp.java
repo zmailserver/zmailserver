@@ -12,28 +12,28 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.service.admin;
+package org.zmail.cs.service.admin;
 
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.common.soap.AdminConstants;
-import com.zimbra.common.soap.Element;
-import com.zimbra.cs.account.Account;
-import com.zimbra.cs.account.AccountServiceException;
-import com.zimbra.cs.account.DistributionList;
-import com.zimbra.cs.account.NamedEntry;
-import com.zimbra.cs.account.Provisioning;
-import com.zimbra.common.account.Key;
-import com.zimbra.common.account.Key.AccountBy;
-import com.zimbra.common.account.Key.DistributionListBy;
-import com.zimbra.cs.account.Provisioning.GroupMembership;
-import com.zimbra.cs.account.accesscontrol.AdminRight;
-import com.zimbra.cs.account.accesscontrol.Rights.Admin;
-import com.zimbra.soap.ZimbraSoapContext;
+import org.zmail.common.service.ServiceException;
+import org.zmail.common.soap.AdminConstants;
+import org.zmail.common.soap.Element;
+import org.zmail.cs.account.Account;
+import org.zmail.cs.account.AccountServiceException;
+import org.zmail.cs.account.DistributionList;
+import org.zmail.cs.account.NamedEntry;
+import org.zmail.cs.account.Provisioning;
+import org.zmail.common.account.Key;
+import org.zmail.common.account.Key.AccountBy;
+import org.zmail.common.account.Key.DistributionListBy;
+import org.zmail.cs.account.Provisioning.GroupMembership;
+import org.zmail.cs.account.accesscontrol.AdminRight;
+import org.zmail.cs.account.accesscontrol.Rights.Admin;
+import org.zmail.soap.ZmailSoapContext;
 
 public class GetAdminConsoleUIComp extends AdminDocumentHandler {
     
@@ -42,7 +42,7 @@ public class GetAdminConsoleUIComp extends AdminDocumentHandler {
     }
     
     public Element handle(Element request, Map<String, Object> context) throws ServiceException {
-        ZimbraSoapContext zsc = getZimbraSoapContext(context);
+        ZmailSoapContext zsc = getZmailSoapContext(context);
         Provisioning prov = Provisioning.getInstance();
         
         Element resp = zsc.createElement(AdminConstants.GET_ADMIN_CONSOLE_UI_COMP_RESPONSE);
@@ -99,7 +99,7 @@ public class GetAdminConsoleUIComp extends AdminDocumentHandler {
     }
     
     private void addValues(NamedEntry entry, Element resp, Set<String> added, boolean inherited) {
-        Set<String> values = entry.getMultiAttrSet(Provisioning.A_zimbraAdminConsoleUIComponents);
+        Set<String> values = entry.getMultiAttrSet(Provisioning.A_zmailAdminConsoleUIComponents);
         for (String value: values) {
             if (!added.contains(value)) {
                 resp.addElement(AdminConstants.E_A).setText(value).addAttribute(AdminConstants.A_INHERITED, inherited);
@@ -119,7 +119,7 @@ public class GetAdminConsoleUIComp extends AdminDocumentHandler {
         notes.add("If a dl is specified, need the " + Admin.R_viewDistributionListAdminUI.getName() +
                 " right.");
         notes.add("Note, this call does not check for the get attr right for " + 
-                Provisioning.A_zimbraAdminConsoleUIComponents + " attribute on the account/dl, nor " +
+                Provisioning.A_zmailAdminConsoleUIComponents + " attribute on the account/dl, nor " +
                 "on the admin groups they belong.  It simply checks the " + Admin.R_viewAccountAdminUI.getName() +
                 " or " + Admin.R_viewDistributionListAdminUI.getName() + " right.");
     }

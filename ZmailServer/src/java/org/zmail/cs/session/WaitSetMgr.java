@@ -12,7 +12,7 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.session;
+package org.zmail.cs.session;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -22,22 +22,22 @@ import java.util.Map;
 import java.util.Set;
 import java.util.TimerTask;
 
-import com.zimbra.common.account.Key;
-import com.zimbra.common.localconfig.LC;
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.common.util.Pair;
-import com.zimbra.common.util.ZimbraLog;
-import com.zimbra.cs.account.AccessManager;
-import com.zimbra.cs.account.Account;
-import com.zimbra.cs.account.Provisioning;
-import com.zimbra.cs.account.accesscontrol.AdminRight;
-import com.zimbra.cs.ldap.LdapUtil;
-import com.zimbra.cs.mailbox.MailItem;
-import com.zimbra.cs.mailbox.MailServiceException;
-import com.zimbra.cs.mailbox.MailboxManager;
-import com.zimbra.cs.service.admin.AdminDocumentHandler;
-import com.zimbra.soap.ZimbraSoapContext;
-import com.zimbra.cs.util.Zimbra;
+import org.zmail.common.account.Key;
+import org.zmail.common.localconfig.LC;
+import org.zmail.common.service.ServiceException;
+import org.zmail.common.util.Pair;
+import org.zmail.common.util.ZmailLog;
+import org.zmail.cs.account.AccessManager;
+import org.zmail.cs.account.Account;
+import org.zmail.cs.account.Provisioning;
+import org.zmail.cs.account.accesscontrol.AdminRight;
+import org.zmail.cs.ldap.LdapUtil;
+import org.zmail.cs.mailbox.MailItem;
+import org.zmail.cs.mailbox.MailServiceException;
+import org.zmail.cs.mailbox.MailboxManager;
+import org.zmail.cs.service.admin.AdminDocumentHandler;
+import org.zmail.soap.ZmailSoapContext;
+import org.zmail.cs.util.Zmail;
 
 /**
  *
@@ -45,18 +45,18 @@ import com.zimbra.cs.util.Zimbra;
 public class WaitSetMgr {
     public static final String ALL_ACCOUNTS_ID_PREFIX = "AllWaitSet-";
 
-    private static final int MAX_WAITSETS_PER_NONADMIN_ACCOUNT = LC.zimbra_waitset_max_per_account.intValueWithinRange(1,Integer.MAX_VALUE);
+    private static final int MAX_WAITSETS_PER_NONADMIN_ACCOUNT = LC.zmail_waitset_max_per_account.intValueWithinRange(1,Integer.MAX_VALUE);
     private static final TimerTask sSweeper = new TimerTask() {
         @Override
         public void run() {
             try {
                 WaitSetMgr.sweep();
             } catch (OutOfMemoryError e) {
-                Zimbra.halt("out of memory", e);
+                Zmail.halt("out of memory", e);
             } catch (Throwable e) {
                 if (e instanceof OutOfMemoryError)
-                    Zimbra.halt("Caught out of memory error", e);
-                ZimbraLog.session.warn("Caught exception in WaitSetMgr timer", e);
+                    Zmail.halt("Caught out of memory error", e);
+                ZmailLog.session.warn("Caught exception in WaitSetMgr timer", e);
             }
         }
     };
@@ -150,12 +150,12 @@ public class WaitSetMgr {
     /**
      * Destroy the referenced WaitSet.
      *
-     * @param zsc ZimbraSoapContext or permission checking.  If null, permission checking is skipped
+     * @param zsc ZmailSoapContext or permission checking.  If null, permission checking is skipped
      * @param requestingAcctId
      * @param id
      * @throws ServiceException
      */
-    public static void destroy(ZimbraSoapContext zsc, String requestingAcctId, String id) throws ServiceException {
+    public static void destroy(ZmailSoapContext zsc, String requestingAcctId, String id) throws ServiceException {
         synchronized(sWaitSets) {
             WaitSetBase ws = lookupInternal(id);
             if (ws == null) {
@@ -248,7 +248,7 @@ public class WaitSetMgr {
 
 
     public static void startup() {
-        Zimbra.sTimer.schedule(sSweeper, WAITSET_SWEEP_DELAY, WAITSET_SWEEP_DELAY);
+        Zmail.sTimer.schedule(sSweeper, WAITSET_SWEEP_DELAY, WAITSET_SWEEP_DELAY);
     }
 
     public static List<IWaitSet> getAll() {
@@ -324,11 +324,11 @@ public class WaitSetMgr {
             }
         }
         if (removed > 0) {
-            ZimbraLog.session.info("WaitSet sweeper timing out %d WaitSets due to inactivity", removed);
+            ZmailLog.session.info("WaitSet sweeper timing out %d WaitSets due to inactivity", removed);
         }
 
         if (activeSets > 0) {
-            ZimbraLog.session.info("WaitSet sweeper: %d active WaitSets (%d accounts) - %d sets with blocked callbacks",
+            ZmailLog.session.info("WaitSet sweeper: %d active WaitSets (%d accounts) - %d sets with blocked callbacks",
                 activeSets, activeSessions, withCallback);
         }
     }
@@ -337,7 +337,7 @@ public class WaitSetMgr {
      * ensure that the authenticated account is allowed to create/destroy/access a waitset on
      * all accounts
      */
-    public static void checkRightForAllAccounts(ZimbraSoapContext zsc) throws ServiceException {
+    public static void checkRightForAllAccounts(ZmailSoapContext zsc) throws ServiceException {
         AdminDocumentHandler.checkRight(zsc, null, AdminRight.PR_SYSTEM_ADMIN_ONLY);
     }
 
@@ -345,7 +345,7 @@ public class WaitSetMgr {
      * ensure that the authenticated account must be able to access the additionally specified
      * account in order to add/delete it to/from a waitset
      */
-    public static void checkRightForAdditionalAccount(String acctId, ZimbraSoapContext zsc)
+    public static void checkRightForAdditionalAccount(String acctId, ZmailSoapContext zsc)
     throws ServiceException {
         Account acct = Provisioning.getInstance().get(Key.AccountBy.id, acctId);
         if (acct == null)

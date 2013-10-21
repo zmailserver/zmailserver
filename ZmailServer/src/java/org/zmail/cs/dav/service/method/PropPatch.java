@@ -12,7 +12,7 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.dav.service.method;
+package org.zmail.cs.dav.service.method;
 
 import java.io.IOException;
 import java.util.HashSet;
@@ -23,15 +23,15 @@ import org.dom4j.Document;
 import org.dom4j.Element;
 import org.dom4j.QName;
 
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.cs.dav.DavContext;
-import com.zimbra.cs.dav.DavContext.RequestProp;
-import com.zimbra.cs.dav.DavElements;
-import com.zimbra.cs.dav.DavException;
-import com.zimbra.cs.dav.property.ResourceProperty;
-import com.zimbra.cs.dav.resource.DavResource;
-import com.zimbra.cs.dav.service.DavMethod;
-import com.zimbra.cs.dav.service.DavResponse;
+import org.zmail.common.service.ServiceException;
+import org.zmail.cs.dav.DavContext;
+import org.zmail.cs.dav.DavContext.RequestProp;
+import org.zmail.cs.dav.DavElements;
+import org.zmail.cs.dav.DavException;
+import org.zmail.cs.dav.property.ResourceProperty;
+import org.zmail.cs.dav.resource.DavResource;
+import org.zmail.cs.dav.service.DavMethod;
+import org.zmail.cs.dav.service.DavResponse;
 
 public class PropPatch extends DavMethod {
 	public static final String PROPPATCH  = "PROPPATCH";

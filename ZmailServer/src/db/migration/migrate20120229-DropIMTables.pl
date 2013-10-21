@@ -24,7 +24,7 @@ Migrate::verifySchemaVersion(88);
 #
 my $sql = <<_SQL_;
 
-USE zimbra;
+USE zmail;
 
 DROP TABLE IF EXISTS jiveUserProp;
 

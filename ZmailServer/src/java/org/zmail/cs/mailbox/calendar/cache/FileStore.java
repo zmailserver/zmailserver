@@ -13,7 +13,7 @@
  * ***** END LICENSE BLOCK *****
  */
 
-package com.zimbra.cs.mailbox.calendar.cache;
+package org.zmail.cs.mailbox.calendar.cache;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -23,11 +23,11 @@ import java.io.IOException;
 import java.io.OutputStreamWriter;
 import java.io.Writer;
 
-import com.zimbra.common.localconfig.LC;
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.common.util.FileUtil;
-import com.zimbra.common.util.ZimbraLog;
-import com.zimbra.cs.mailbox.Metadata;
+import org.zmail.common.localconfig.LC;
+import org.zmail.common.service.ServiceException;
+import org.zmail.common.util.FileUtil;
+import org.zmail.common.util.ZmailLog;
+import org.zmail.cs.mailbox.Metadata;
 
 public class FileStore {
     private static final String FILE_EXT = ".dat";
@@ -97,13 +97,13 @@ public class FileStore {
 
         Metadata meta = new Metadata(encoded);
         if (!meta.containsKey(FN_VERSION)) {
-            ZimbraLog.calendar.warn("Cache file missing version field: path=" + file.getAbsolutePath());
+            ZmailLog.calendar.warn("Cache file missing version field: path=" + file.getAbsolutePath());
             return null;
         }
         int ver = (int) meta.getLong(FN_VERSION);
         if (ver < CURRENT_VERSION) {
-            if (ZimbraLog.calendar.isDebugEnabled())
-                ZimbraLog.calendar.debug(
+            if (ZmailLog.calendar.isDebugEnabled())
+                ZmailLog.calendar.debug(
                         "Cached data's version is too old: cached=" + ver + ", expected=" + CURRENT_VERSION +
                         ", path=" + file.getAbsolutePath());
             return null;
@@ -111,7 +111,7 @@ public class FileStore {
 
         int modSeqSaved = (int) meta.getLong(FN_MODSEQ);
         if (modSeqSaved > modSeq) {
-            ZimbraLog.calendar.warn(
+            ZmailLog.calendar.warn(
                     "Ignoring cached data in the future: saved modseq=" + modSeqSaved + ", needed modseq=" + modSeq +
                     ", path=" + file.getAbsolutePath());
             return null;
@@ -119,7 +119,7 @@ public class FileStore {
 
         Metadata metaCalData = meta.getMap(FN_CALDATA, true);
         if (metaCalData == null) {
-            ZimbraLog.calendar.warn("Cache file missing actual data: path=" + file.getAbsolutePath());
+            ZmailLog.calendar.warn("Cache file missing actual data: path=" + file.getAbsolutePath());
             return null;
         }
 
@@ -152,7 +152,7 @@ public class FileStore {
             try {
                 long length = file.length();
                 if (length > MAX_CACHE_FILE_LEN) {
-                    ZimbraLog.calendar.warn("Cache file too big: %d bytes (%d max): path=%s",
+                    ZmailLog.calendar.warn("Cache file too big: %d bytes (%d max): path=%s",
                             length, MAX_CACHE_FILE_LEN, file.getAbsolutePath());
                     return null;
                 }
@@ -184,7 +184,7 @@ public class FileStore {
         try {
             FileUtil.deleteDir(dir);
         } catch (IOException e) {
-            ZimbraLog.calendar.warn("Unable to delete calendar cache for mailbox " + mboxId, e);
+            ZmailLog.calendar.warn("Unable to delete calendar cache for mailbox " + mboxId, e);
         }
     }
 }

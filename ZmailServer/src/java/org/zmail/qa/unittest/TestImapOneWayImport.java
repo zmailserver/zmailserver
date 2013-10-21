@@ -12,7 +12,7 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.qa.unittest;
+package org.zmail.qa.unittest;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -21,18 +21,18 @@ import java.util.Map;
 
 import junit.framework.TestCase;
 
-import com.zimbra.common.account.ProvisioningConstants;
-import com.zimbra.common.localconfig.LC;
-import com.zimbra.common.util.StringUtil;
-import com.zimbra.common.util.ZimbraLog;
-import com.zimbra.cs.account.Provisioning;
-import com.zimbra.cs.mailbox.Mailbox;
-import com.zimbra.client.ZDataSource;
-import com.zimbra.client.ZFolder;
-import com.zimbra.client.ZImapDataSource;
-import com.zimbra.client.ZMailbox;
-import com.zimbra.client.ZMessage;
-import com.zimbra.soap.type.DataSource.ConnectionType;
+import org.zmail.common.account.ProvisioningConstants;
+import org.zmail.common.localconfig.LC;
+import org.zmail.common.util.StringUtil;
+import org.zmail.common.util.ZmailLog;
+import org.zmail.cs.account.Provisioning;
+import org.zmail.cs.mailbox.Mailbox;
+import org.zmail.client.ZDataSource;
+import org.zmail.client.ZFolder;
+import org.zmail.client.ZImapDataSource;
+import org.zmail.client.ZMailbox;
+import org.zmail.client.ZMessage;
+import org.zmail.soap.type.DataSource.ConnectionType;
 
 public class TestImapOneWayImport extends TestCase {
     private static final String REMOTE_USER_NAME = "testimapimportremote";
@@ -81,7 +81,7 @@ public class TestImapOneWayImport extends TestCase {
         }
 
         // Create data source
-        int port = Integer.parseInt(TestUtil.getServerAttr(Provisioning.A_zimbraImapBindPort));
+        int port = Integer.parseInt(TestUtil.getServerAttr(Provisioning.A_zmailImapBindPort));
         mDataSource = new ZImapDataSource(NAME_PREFIX, true, "localhost",
             port, REMOTE_USER_NAME, TestUtil.DEFAULT_PASSWORD, folder.getId(), ConnectionType.cleartext, true);
 
@@ -94,9 +94,9 @@ public class TestImapOneWayImport extends TestCase {
         }
         assertNotNull(mDataSource);
         // Turn on cleartext login
-        mOriginalCleartextValue = TestUtil.getServerAttr(Provisioning.A_zimbraImapCleartextLoginEnabled);
+        mOriginalCleartextValue = TestUtil.getServerAttr(Provisioning.A_zmailImapCleartextLoginEnabled);
         TestUtil.setServerAttr(
-            Provisioning.A_zimbraImapCleartextLoginEnabled, ProvisioningConstants.TRUE);
+            Provisioning.A_zmailImapCleartextLoginEnabled, ProvisioningConstants.TRUE);
 
         // Turn off STARTTLS support so that unit tests don't bomb on Linux
         // (see bug 33683).
@@ -108,7 +108,7 @@ public class TestImapOneWayImport extends TestCase {
             List<ZMessage> msgs;
             ZMessage msg;
             // Remote: add 1 message
-            ZimbraLog.test.info("Testing adding message to remote inbox.");
+            ZmailLog.test.info("Testing adding message to remote inbox.");
             String remoteQuery = "in:inbox msg1";
             TestUtil.addMessage(mRemoteMbox, NAME_PREFIX + " msg1", Integer.toString(Mailbox.ID_FOLDER_INBOX), "u");
             checkMsgCount(mRemoteMbox, remoteQuery, 1);
@@ -129,7 +129,7 @@ public class TestImapOneWayImport extends TestCase {
 
 
             // Remote: flag message
-            ZimbraLog.test.info("Testing flag.");
+            ZmailLog.test.info("Testing flag.");
             msgs = TestUtil.search(mRemoteMbox, remoteQuery);
             assertEquals("Message count in remote inbox", 1, msgs.size());
             msg = msgs.get(0);
@@ -157,7 +157,7 @@ public class TestImapOneWayImport extends TestCase {
 
 
             // Remote: move to trash
-            ZimbraLog.test.info("Testing remote move to trash.");
+            ZmailLog.test.info("Testing remote move to trash.");
             mRemoteMbox.trashMessage(remoteId);
             checkMsgCount(mRemoteMbox, "in:trash", 1);
             checkMsgCount(mLocalMbox, "in:trash", 0);
@@ -167,7 +167,7 @@ public class TestImapOneWayImport extends TestCase {
 
 
             // Create folders on both sides
-            ZimbraLog.test.info("Testing folder creation.");
+            ZmailLog.test.info("Testing folder creation.");
             TestUtil.createFolder(mRemoteMbox, REMOTE_PATH_F1);
             TestUtil.createFolder(mRemoteMbox, REMOTE_PATH_F2);
             TestUtil.createFolder(mLocalMbox, LOCAL_PATH_F3);
@@ -183,7 +183,7 @@ public class TestImapOneWayImport extends TestCase {
             assertNull("Remote folder " + REMOTE_PATH_F4, mRemoteMbox.getFolderByPath(REMOTE_PATH_F4));
 
             // Test UIDVALIDITY change
-            ZimbraLog.test.info("Testing UIDVALIDITY change.");
+            ZmailLog.test.info("Testing UIDVALIDITY change.");
             ZFolder localFolder1 = mLocalMbox.getFolderByPath(LOCAL_PATH_F1);
             ZFolder remoteFolder1 = mRemoteMbox.getFolderByPath(REMOTE_PATH_F1);
 
@@ -206,7 +206,7 @@ public class TestImapOneWayImport extends TestCase {
             assertFalse("Message id did not change: " + originalId, originalId.equals(msgs.get(0).getId()));
 
             // Add remote folder, add message to remote folder and delete local folder at the same time
-            ZimbraLog.test.info("Testing simultaneous message add and folder delete 1.");
+            ZmailLog.test.info("Testing simultaneous message add and folder delete 1.");
             ZFolder remoteFolder2 = mRemoteMbox.getFolderByPath(REMOTE_PATH_F2);
             TestUtil.addMessage(mRemoteMbox, NAME_PREFIX + " msg3", remoteFolder2.getId());
             ZFolder localFolder3 = mLocalMbox.getFolderByPath(LOCAL_PATH_F3);
@@ -221,7 +221,7 @@ public class TestImapOneWayImport extends TestCase {
 
 
             // Add message to a local folder and delete the same folder in remote mailbox
-            ZimbraLog.test.info("Testing simultaneous message add and folder delete 2.");
+            ZmailLog.test.info("Testing simultaneous message add and folder delete 2.");
             ZFolder localFolder = mLocalMbox.getFolderByPath(LOCAL_PATH_F2);
             TestUtil.addMessage(mLocalMbox, NAME_PREFIX + " msg4", localFolder.getId());
             remoteFolder1 = mRemoteMbox.getFolderByPath(REMOTE_PATH_F1);
@@ -240,7 +240,7 @@ public class TestImapOneWayImport extends TestCase {
             checkMsgCount(mRemoteMbox, "msg4", 0);
 
             // Add message to local inbox
-            ZimbraLog.test.info("Testing sync from local to remote.");
+            ZmailLog.test.info("Testing sync from local to remote.");
             checkMsgCount(mLocalMbox, "in:" + LOCAL_PATH_INBOX, 0);
             ZFolder localInbox = mLocalMbox.getFolderByPath(LOCAL_PATH_INBOX);
             TestUtil.addMessage(mLocalMbox, NAME_PREFIX + " msg5", localInbox.getId());
@@ -346,7 +346,7 @@ public class TestImapOneWayImport extends TestCase {
         public void tearDown() throws Exception {
             cleanUp();
             TestUtil.setServerAttr(
-                Provisioning.A_zimbraImapCleartextLoginEnabled, mOriginalCleartextValue);
+                Provisioning.A_zmailImapCleartextLoginEnabled, mOriginalCleartextValue);
             LC.javamail_imap_enable_starttls.setDefault(Boolean.toString(mOriginalEnableStarttls));
         }
 

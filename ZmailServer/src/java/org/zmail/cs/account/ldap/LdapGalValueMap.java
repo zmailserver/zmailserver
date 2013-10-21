@@ -14,12 +14,12 @@
  * 
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.account.ldap;
+package org.zmail.cs.account.ldap;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import com.zimbra.common.util.ZimbraLog;
+import org.zmail.common.util.ZmailLog;
 
 public class LdapGalValueMap {
     private String mFieldName;
@@ -39,9 +39,9 @@ public class LdapGalValueMap {
             mFieldName = matcher.group(1);
             mRegex = Pattern.compile(matcher.group(2));
             mReplacement  = matcher.group(3);
-            ZimbraLog.gal.debug("Gal value map: field=" + mFieldName + ", regex=" + mRegex + ", replacement=" + mReplacement);
+            ZmailLog.gal.debug("Gal value map: field=" + mFieldName + ", regex=" + mRegex + ", replacement=" + mReplacement);
         } else {
-            ZimbraLog.gal.warn("unable to parse gal attr value map: " + valueMap);
+            ZmailLog.gal.warn("unable to parse gal attr value map: " + valueMap);
         }
     }
     
@@ -75,7 +75,7 @@ public class LdapGalValueMap {
     }
 
     public static void main(String[] ags) {
-        LdapGalValueMap valueMap = new LdapGalValueMap("zimbraCalResType: [R|r]oom Location");
+        LdapGalValueMap valueMap = new LdapGalValueMap("zmailCalResType: [R|r]oom Location");
         
         Object newVal = valueMap.apply("Room");
         System.out.println((String)newVal);
@@ -84,7 +84,7 @@ public class LdapGalValueMap {
         for (String v : (String[])newVal)
             System.out.println(v);
         
-        valueMap = new LdapGalValueMap("zimbraAccountCalendarUserType: Room|Equipment RESOURCE");
+        valueMap = new LdapGalValueMap("zmailAccountCalendarUserType: Room|Equipment RESOURCE");
         newVal = valueMap.apply("Equipment");
         System.out.println((String)newVal);
     }

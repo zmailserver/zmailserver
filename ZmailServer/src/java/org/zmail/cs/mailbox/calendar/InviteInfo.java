@@ -16,13 +16,13 @@
 /**
  * 
  */
-package com.zimbra.cs.mailbox.calendar;
+package org.zmail.cs.mailbox.calendar;
 
-import com.zimbra.common.calendar.TimeZoneMap;
-import com.zimbra.common.calendar.ZCalendar.ICalTok;
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.common.util.StringUtil;
-import com.zimbra.cs.mailbox.Metadata;
+import org.zmail.common.calendar.TimeZoneMap;
+import org.zmail.common.calendar.ZCalendar.ICalTok;
+import org.zmail.common.service.ServiceException;
+import org.zmail.common.util.StringUtil;
+import org.zmail.cs.mailbox.Metadata;
 
 public class InviteInfo implements Comparable<InviteInfo>, Cloneable {
     private int mMsgId; // ID of the MESSAGE which this invite was originally encoded in 

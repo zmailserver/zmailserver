@@ -14,13 +14,13 @@
  * 
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.account.cache;
+package org.zmail.cs.account.cache;
 
 import java.util.List;
 
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.cs.account.Provisioning;
-import com.zimbra.cs.mime.MimeTypeInfo;
+import org.zmail.common.service.ServiceException;
+import org.zmail.cs.account.Provisioning;
+import org.zmail.cs.mime.MimeTypeInfo;
 
 public interface IMimeTypeCache {
     public void flushCache(Provisioning prov) throws ServiceException;

@@ -12,16 +12,16 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.iochannel;
+package org.zmail.cs.iochannel;
 
 import java.util.Collection;
 import java.util.HashSet;
 
 import com.google.common.collect.ImmutableSet;
-import com.zimbra.common.iochannel.Config;
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.cs.account.Provisioning;
-import com.zimbra.cs.account.Server;
+import org.zmail.common.iochannel.Config;
+import org.zmail.common.service.ServiceException;
+import org.zmail.cs.account.Provisioning;
+import org.zmail.cs.account.Server;
 
 public class ZcsConfig extends Config {
 

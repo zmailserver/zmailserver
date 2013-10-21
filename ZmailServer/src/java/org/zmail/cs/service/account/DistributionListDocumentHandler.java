@@ -12,7 +12,7 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.service.account;
+package org.zmail.cs.service.account;
 
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
@@ -33,26 +33,26 @@ import javax.mail.internet.MimeMultipart;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 import com.sun.mail.smtp.SMTPMessage;
-import com.zimbra.common.account.Key;
-import com.zimbra.common.account.Key.AccountBy;
-import com.zimbra.common.account.Key.CacheEntryBy;
-import com.zimbra.common.account.Key.ServerBy;
-import com.zimbra.common.mime.MimeConstants;
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.common.soap.AccountConstants;
-import com.zimbra.common.soap.AdminConstants;
-import com.zimbra.common.soap.Element;
-import com.zimbra.common.util.ZimbraLog;
-import com.zimbra.cs.account.Account;
-import com.zimbra.cs.account.AccountServiceException;
-import com.zimbra.cs.account.Group;
-import com.zimbra.cs.account.Provisioning;
-import com.zimbra.cs.account.Server;
-import com.zimbra.cs.account.Provisioning.CacheEntry;
-import com.zimbra.cs.account.soap.SoapProvisioning;
-import com.zimbra.cs.httpclient.URLUtil;
-import com.zimbra.soap.account.type.DistributionListSubscribeOp;
-import com.zimbra.soap.admin.type.CacheEntryType;
+import org.zmail.common.account.Key;
+import org.zmail.common.account.Key.AccountBy;
+import org.zmail.common.account.Key.CacheEntryBy;
+import org.zmail.common.account.Key.ServerBy;
+import org.zmail.common.mime.MimeConstants;
+import org.zmail.common.service.ServiceException;
+import org.zmail.common.soap.AccountConstants;
+import org.zmail.common.soap.AdminConstants;
+import org.zmail.common.soap.Element;
+import org.zmail.common.util.ZmailLog;
+import org.zmail.cs.account.Account;
+import org.zmail.cs.account.AccountServiceException;
+import org.zmail.cs.account.Group;
+import org.zmail.cs.account.Provisioning;
+import org.zmail.cs.account.Server;
+import org.zmail.cs.account.Provisioning.CacheEntry;
+import org.zmail.cs.account.soap.SoapProvisioning;
+import org.zmail.cs.httpclient.URLUtil;
+import org.zmail.soap.account.type.DistributionListSubscribeOp;
+import org.zmail.soap.admin.type.CacheEntryType;
 
 /**
  * @author pshao
@@ -70,7 +70,7 @@ public abstract class DistributionListDocumentHandler extends AccountDocumentHan
                 if (server == null) {
                     throw ServiceException.PROXY_ERROR(
                             AccountServiceException.NO_SUCH_SERVER(
-                            group.getAttr(Provisioning.A_zimbraMailHost)), "");
+                            group.getAttr(Provisioning.A_zmailMailHost)), "");
                 }
                 return proxyRequest(request, context, server);
             } else {
@@ -176,7 +176,7 @@ public abstract class DistributionListDocumentHandler extends AccountDocumentHan
 
             } catch (ServiceException e) {
                 // log and continue
-                ZimbraLog.account.warn("unable to flush account cache", e);
+                ZmailLog.account.warn("unable to flush account cache", e);
             }
         }
 
@@ -189,7 +189,7 @@ public abstract class DistributionListDocumentHandler extends AccountDocumentHan
             prov.flushCache(CacheEntryType.account, localAccts.toArray(new CacheEntry[localAccts.size()]));
         } catch (ServiceException e) {
             // log and continue
-            ZimbraLog.account.warn("unable to flush account cache on local server", e);
+            ZmailLog.account.warn("unable to flush account cache on local server", e);
         }
         */
 
@@ -207,11 +207,11 @@ public abstract class DistributionListDocumentHandler extends AccountDocumentHan
                 Server server = prov.get(ServerBy.name, serverName);
                 adminUrl = URLUtil.getAdminURL(server, AdminConstants.ADMIN_SERVICE_URI, true);
                 soapProv.soapSetURI(adminUrl);
-                soapProv.soapZimbraAdminAuthenticate();
+                soapProv.soapZmailAdminAuthenticate();
                 soapProv.flushCache(CacheEntryType.account, accts.toArray(new CacheEntry[accts.size()]));
 
             } catch (ServiceException e) {
-                ZimbraLog.account.warn("unable to flush account cache on remote server: " + serverName, e);
+                ZmailLog.account.warn("unable to flush account cache on remote server: " + serverName, e);
             }
         }
     }
@@ -266,7 +266,7 @@ public abstract class DistributionListDocumentHandler extends AccountDocumentHan
             for (Address a : rcpts) {
                 rcptAddr.append(a.toString() + ", ");
             }
-            ZimbraLog.account.info(logTTxt + ": rcpt='" + rcptAddr +
+            ZmailLog.account.info(logTTxt + ": rcpt='" + rcptAddr +
                     "' Message-ID=" + out.getMessageID());
         }
 

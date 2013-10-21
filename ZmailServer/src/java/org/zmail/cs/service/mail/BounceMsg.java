@@ -12,7 +12,7 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.service.mail;
+package org.zmail.cs.service.mail;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -29,33 +29,33 @@ import javax.mail.internet.MimeMessage;
 import com.google.common.base.Joiner;
 import com.google.common.base.Strings;
 import com.google.common.collect.Maps;
-import com.zimbra.common.mime.MimeConstants;
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.common.soap.Element;
-import com.zimbra.common.soap.MailConstants;
-import com.zimbra.common.util.ArrayUtil;
-import com.zimbra.common.util.DateUtil;
-import com.zimbra.common.util.Pair;
-import com.zimbra.common.zmime.ZMimeMessage;
-import com.zimbra.cs.account.Account;
-import com.zimbra.cs.mailbox.MailSender;
-import com.zimbra.cs.mailbox.Mailbox;
-import com.zimbra.cs.mailbox.MailboxManager;
-import com.zimbra.cs.mailbox.OperationContext;
-import com.zimbra.cs.mime.Mime;
-import com.zimbra.cs.service.FileUploadServlet;
-import com.zimbra.cs.service.FileUploadServlet.Upload;
-import com.zimbra.cs.service.UserServlet;
-import com.zimbra.cs.service.mail.ParseMimeMessage.MessageAddresses;
-import com.zimbra.cs.service.mail.ToXML.EmailType;
-import com.zimbra.cs.service.util.ItemId;
-import com.zimbra.cs.util.JMSession;
-import com.zimbra.soap.ZimbraSoapContext;
+import org.zmail.common.mime.MimeConstants;
+import org.zmail.common.service.ServiceException;
+import org.zmail.common.soap.Element;
+import org.zmail.common.soap.MailConstants;
+import org.zmail.common.util.ArrayUtil;
+import org.zmail.common.util.DateUtil;
+import org.zmail.common.util.Pair;
+import org.zmail.common.zmime.ZMimeMessage;
+import org.zmail.cs.account.Account;
+import org.zmail.cs.mailbox.MailSender;
+import org.zmail.cs.mailbox.Mailbox;
+import org.zmail.cs.mailbox.MailboxManager;
+import org.zmail.cs.mailbox.OperationContext;
+import org.zmail.cs.mime.Mime;
+import org.zmail.cs.service.FileUploadServlet;
+import org.zmail.cs.service.FileUploadServlet.Upload;
+import org.zmail.cs.service.UserServlet;
+import org.zmail.cs.service.mail.ParseMimeMessage.MessageAddresses;
+import org.zmail.cs.service.mail.ToXML.EmailType;
+import org.zmail.cs.service.util.ItemId;
+import org.zmail.cs.util.JMSession;
+import org.zmail.soap.ZmailSoapContext;
 
 public final class BounceMsg extends MailDocumentHandler {
     @Override
     public Element handle(Element request, Map<String, Object> context) throws ServiceException {
-        ZimbraSoapContext zsc = getZimbraSoapContext(context);
+        ZmailSoapContext zsc = getZmailSoapContext(context);
         Account acct = getRequestedAccount(zsc);
         Mailbox mbox = getRequestedMailbox(zsc);
         OperationContext octxt = getOperationContext(zsc, context);
@@ -104,7 +104,7 @@ public final class BounceMsg extends MailDocumentHandler {
      *  {@code From} and {@code Sender} are treated in normal mail send.
      *  Updates the {@link MailSender}'s envelope with the sender and recipient
      *  {@code Resent-*} addresses. */
-    MailSender addResentHeaders(Element msgElem, ZMimeMessage mm, ZimbraSoapContext zsc, OperationContext octxt,
+    MailSender addResentHeaders(Element msgElem, ZMimeMessage mm, ZmailSoapContext zsc, OperationContext octxt,
             Account acct, MailSender msender) throws MessagingException, ServiceException {
         MessageAddresses maddrs = getResentAddressees(msgElem, acct, msender);
 

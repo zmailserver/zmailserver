@@ -13,16 +13,16 @@
  * ***** END LICENSE BLOCK *****
  */
 
-package com.zimbra.cs.util;
+package org.zmail.cs.util;
 
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
 
-import com.zimbra.common.localconfig.LC;
-import com.zimbra.common.util.ByteUtil;
-import com.zimbra.cs.db.Versions;
+import org.zmail.common.localconfig.LC;
+import org.zmail.common.util.ByteUtil;
+import org.zmail.cs.db.Versions;
 
 public final class BuildInfo {
 
@@ -51,7 +51,7 @@ public final class BuildInfo {
         String platform = getPlatform();
         String buildnum = "buildnum";
         try {
-            Class<?> clz = Class.forName("com.zimbra.cs.util.BuildInfoGenerated");
+            Class<?> clz = Class.forName("org.zmail.cs.util.BuildInfoGenerated");
             version = (String) clz.getField("VERSION").get(null);
             type = (String) clz.getField("TYPE").get(null);
             release = (String) clz.getField("RELEASE").get(null);
@@ -84,12 +84,12 @@ public final class BuildInfo {
     }
 
     /**
-     * Returns the first line in {@code /opt/zimbra/.platform}, or {@code unknown}
+     * Returns the first line in {@code /opt/zmail/.platform}, or {@code unknown}
      * if the platform cannot be determined.
      */
     private static String getPlatform() {
         String platform = "unknown";
-        File platformFile = new File(LC.zimbra_home.value(), ".platform");
+        File platformFile = new File(LC.zmail_home.value(), ".platform");
         if (platformFile.exists()) {
             BufferedReader reader = null;
             try {

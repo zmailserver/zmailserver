@@ -14,7 +14,7 @@
  * 
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.qa.unittest;
+package org.zmail.qa.unittest;
 
 import java.util.HashMap;
 import java.util.HashSet;
@@ -27,29 +27,29 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 import junit.framework.TestCase;
 
-import com.zimbra.common.util.CliUtil;
-import com.zimbra.common.util.ZimbraLog;
-import com.zimbra.cs.account.Account;
-import com.zimbra.cs.account.DistributionList;
-import com.zimbra.cs.account.Domain;
-import com.zimbra.cs.account.Provisioning;
-import com.zimbra.common.account.Key;
-import com.zimbra.common.account.Key.AccountBy;
-import com.zimbra.common.account.ZAttrProvisioning.GalMode;
-import com.zimbra.cs.gal.GalGroupMembers;
-import com.zimbra.cs.ldap.LdapUtil;
-import com.zimbra.qa.unittest.prov.soap.GalTestUtil;
+import org.zmail.common.util.CliUtil;
+import org.zmail.common.util.ZmailLog;
+import org.zmail.cs.account.Account;
+import org.zmail.cs.account.DistributionList;
+import org.zmail.cs.account.Domain;
+import org.zmail.cs.account.Provisioning;
+import org.zmail.common.account.Key;
+import org.zmail.common.account.Key.AccountBy;
+import org.zmail.common.account.ZAttrProvisioning.GalMode;
+import org.zmail.cs.gal.GalGroupMembers;
+import org.zmail.cs.ldap.LdapUtil;
+import org.zmail.qa.unittest.prov.soap.GalTestUtil;
 
 /*
  * To run this test:
- * zmsoap -v -z RunUnitTestsRequest/test=com.zimbra.qa.unittest.TestGalGroupMembers
+ * zmsoap -v -z RunUnitTestsRequest/test=org.zmail.qa.unittest.TestGalGroupMembers
  *
  */
 
 public class TestGalGroupMembers extends TestCase {
     
-    private static final String ZIMBRA_DOMAIN = "zimbra.galgrouptest";
-    private static final String ZIMBRA_GROUP = "zimbra-group";
+    private static final String ZIMBRA_DOMAIN = "zmail.galgrouptest";
+    private static final String ZIMBRA_GROUP = "zmail-group";
     
     private static final String EXTERNAL_DOMAIN = "external.galgrouptest";
     private static final String EXTERNAL_GROUP = "external-group";
@@ -57,7 +57,7 @@ public class TestGalGroupMembers extends TestCase {
     private static final String USER = "user";
         
     //////////////
-    // TODO: remove once ZimbraSuite supports JUnit 4 annotations.
+    // TODO: remove once ZmailSuite supports JUnit 4 annotations.
     private static boolean initialized = false;
     private static boolean allDone = false;
     
@@ -76,31 +76,31 @@ public class TestGalGroupMembers extends TestCase {
     }
     //////////////
     
-    enum ZimbraGroupMembers {
+    enum ZmailGroupMembers {
         ZIMBRA_GROUP_MEMBER_ACCOUNT_1(true),
         ZIMBRA_GROUP_MEMBER_ACCOUNT_2(true),
         NON_ZIMBRA_ADDR_1(false),
         NON_ZIMBRA_ADDR_2(false);
         
-        private boolean isZimbraAccount;
+        private boolean isZmailAccount;
         
-        private ZimbraGroupMembers(boolean isZimbraAccount) {
-            this.isZimbraAccount = isZimbraAccount;
+        private ZmailGroupMembers(boolean isZmailAccount) {
+            this.isZmailAccount = isZmailAccount;
         }
         
-        private boolean isZimbraAccount() {
-            return isZimbraAccount;
+        private boolean isZmailAccount() {
+            return isZmailAccount;
         }
         
         private String getAddress() {
             String localPart = toString().toLowerCase();
-            return isZimbraAccount ? TestUtil.getAddress(localPart, ZIMBRA_DOMAIN) :
+            return isZmailAccount ? TestUtil.getAddress(localPart, ZIMBRA_DOMAIN) :
                 TestUtil.getAddress(localPart, "somedomain.com");
         }
         
         static String[] getAllMembersAsArray() {
-            String[] members = new String[ZimbraGroupMembers.values().length];
-            for (ZimbraGroupMembers member : ZimbraGroupMembers.values()) {
+            String[] members = new String[ZmailGroupMembers.values().length];
+            for (ZmailGroupMembers member : ZmailGroupMembers.values()) {
                 members[member.ordinal()] = member.getAddress();
             }
             
@@ -108,9 +108,9 @@ public class TestGalGroupMembers extends TestCase {
         }
         
         static void assertEquals(Set<String> addrs) {
-            Assert.assertEquals(ZimbraGroupMembers.values().length, addrs.size());
+            Assert.assertEquals(ZmailGroupMembers.values().length, addrs.size());
             
-            for (ZimbraGroupMembers member : ZimbraGroupMembers.values()) {
+            for (ZmailGroupMembers member : ZmailGroupMembers.values()) {
                 Assert.assertTrue(addrs.contains(member.getAddress()));
                 
                 // verify that addrs should do case-insensitive comparison
@@ -153,12 +153,12 @@ public class TestGalGroupMembers extends TestCase {
         }
     }
     
-    private static void setupZimbraDomain() throws Exception {
+    private static void setupZmailDomain() throws Exception {
         Provisioning prov = Provisioning.getInstance();
         
-        // create the zimbra domain
+        // create the zmail domain
         if (prov.get(Key.DomainBy.name, ZIMBRA_DOMAIN) == null) {
-            ZimbraLog.test.info("Creating domain " + ZIMBRA_DOMAIN);
+            ZmailLog.test.info("Creating domain " + ZIMBRA_DOMAIN);
             Domain domain = prov.createDomain(ZIMBRA_DOMAIN, new HashMap<String, Object>());
             
             // configure external GAL
@@ -166,10 +166,10 @@ public class TestGalGroupMembers extends TestCase {
             domain.setGalMode(GalMode.both, attrs);
             domain.addGalLdapURL("ldap://localhost:389", attrs);
             domain.setGalLdapBindDn("cn=config", attrs);
-            domain.setGalLdapBindPassword("zimbra");
+            domain.setGalLdapBindPassword("zmail");
             domain.setGalLdapSearchBase(LdapUtil.domainToDN(EXTERNAL_DOMAIN));
-            domain.setGalAutoCompleteLdapFilter("zimbraAccountAutoComplete");
-            domain.setGalLdapFilter("zimbraAccounts");
+            domain.setGalAutoCompleteLdapFilter("zmailAccountAutoComplete");
+            domain.setGalLdapFilter("zmailAccounts");
             
             prov.modifyAttrs(domain, attrs);
         }
@@ -180,9 +180,9 @@ public class TestGalGroupMembers extends TestCase {
             prov.createAccount(userAddr, "test123", null);
         }
         
-        // create accounts in the zimbra domain
-        for (ZimbraGroupMembers member : ZimbraGroupMembers.values()) {
-            if (member.isZimbraAccount()) {
+        // create accounts in the zmail domain
+        for (ZmailGroupMembers member : ZmailGroupMembers.values()) {
+            if (member.isZmailAccount()) {
                 String addr = member.getAddress();
                 if (prov.get(AccountBy.name, addr) == null) {
                     prov.createAccount(addr, "test123", null);
@@ -190,17 +190,17 @@ public class TestGalGroupMembers extends TestCase {
             }
         }
         
-        // create zimbra group and add members
+        // create zmail group and add members
         String groupAddr = TestUtil.getAddress(ZIMBRA_GROUP, ZIMBRA_DOMAIN);
         DistributionList group = prov.get(Key.DistributionListBy.name, groupAddr);
         if (group == null) {
             group = prov.createDistributionList(groupAddr, new HashMap<String, Object>());
-            prov.addMembers(group, ZimbraGroupMembers.getAllMembersAsArray());
+            prov.addMembers(group, ZmailGroupMembers.getAllMembersAsArray());
         }
         
     }
     
-    private static void cleanupZimbraDomain() throws Exception {
+    private static void cleanupZmailDomain() throws Exception {
         Provisioning prov = Provisioning.getInstance();
         
         GalTestUtil.disableGalSyncAccount(prov, ZIMBRA_DOMAIN);
@@ -212,8 +212,8 @@ public class TestGalGroupMembers extends TestCase {
             prov.deleteAccount(userAcct.getId());
         }
         
-        for (ZimbraGroupMembers member : ZimbraGroupMembers.values()) {
-            if (member.isZimbraAccount()) {
+        for (ZmailGroupMembers member : ZmailGroupMembers.values()) {
+            if (member.isZmailAccount()) {
                 String addr = member.getAddress();
                 Account acct = prov.get(AccountBy.name, addr);
                 if (acct != null) {
@@ -230,7 +230,7 @@ public class TestGalGroupMembers extends TestCase {
         
         Domain domain = prov.get(Key.DomainBy.name, ZIMBRA_DOMAIN);
         if (domain != null) {
-            ZimbraLog.test.info("Deleting domain " + ZIMBRA_DOMAIN);
+            ZmailLog.test.info("Deleting domain " + ZIMBRA_DOMAIN);
             prov.deleteDomain(domain.getId());
         }
         
@@ -241,7 +241,7 @@ public class TestGalGroupMembers extends TestCase {
         
         // create a domain to simulate entries in external GAL
         if (prov.get(Key.DomainBy.name, EXTERNAL_DOMAIN) == null) {
-            ZimbraLog.test.info("Creating domain " + EXTERNAL_DOMAIN);
+            ZmailLog.test.info("Creating domain " + EXTERNAL_DOMAIN);
             prov.createDomain(EXTERNAL_DOMAIN, new HashMap<String, Object>());
         }
         
@@ -265,7 +265,7 @@ public class TestGalGroupMembers extends TestCase {
         
         Domain domain = prov.get(Key.DomainBy.name, EXTERNAL_DOMAIN);
         if (domain != null) {
-            ZimbraLog.test.info("Deleting domain " + EXTERNAL_DOMAIN);
+            ZmailLog.test.info("Deleting domain " + EXTERNAL_DOMAIN);
             prov.deleteDomain(domain.getId());
         }
     }
@@ -275,13 +275,13 @@ public class TestGalGroupMembers extends TestCase {
         // TestUtil.cliSetup();
         // CliUtil.toolSetup();
         
-        setupZimbraDomain();
+        setupZmailDomain();
         setupExternalDomain();
     }
     
     @AfterClass
     public static void cleanup() throws Exception {
-        cleanupZimbraDomain();
+        cleanupZmailDomain();
         cleanupExternalDomain();
     }
     
@@ -289,8 +289,8 @@ public class TestGalGroupMembers extends TestCase {
         String userAddr = TestUtil.getAddress(USER, ZIMBRA_DOMAIN);
         Account acct = Provisioning.getInstance().get(AccountBy.name, userAddr);
         
-        Set<String> zimbraGroupMembers = GalGroupMembers.getGroupMembers(TestUtil.getAddress(ZIMBRA_GROUP, ZIMBRA_DOMAIN), acct);
-        ZimbraGroupMembers.assertEquals(zimbraGroupMembers);
+        Set<String> zmailGroupMembers = GalGroupMembers.getGroupMembers(TestUtil.getAddress(ZIMBRA_GROUP, ZIMBRA_DOMAIN), acct);
+        ZmailGroupMembers.assertEquals(zmailGroupMembers);
         
         Set<String> externalGroupMembers = GalGroupMembers.getGroupMembers(TestUtil.getAddress(EXTERNAL_GROUP, EXTERNAL_DOMAIN), acct);
         ExternalGroupMembers.assertEquals(externalGroupMembers);
@@ -308,7 +308,7 @@ public class TestGalGroupMembers extends TestCase {
         doTest();
     }
     
-    // TODO: remove once ZimbraSuite supports JUnit 4 annotations. 
+    // TODO: remove once ZmailSuite supports JUnit 4 annotations. 
     @Test
     public void testLast() throws Exception {
         allDone = true;

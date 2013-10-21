@@ -12,31 +12,31 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.account.accesscontrol;
+package org.zmail.cs.account.accesscontrol;
 
 import java.util.HashMap;
 import java.util.Map;
 
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.cs.account.AccountServiceException;
-import com.zimbra.cs.account.NamedEntry;
-import com.zimbra.cs.account.Provisioning;
-import com.zimbra.cs.account.accesscontrol.ZimbraACE.ExternalGroupInfo;
-import com.zimbra.common.account.Key;
-import com.zimbra.common.account.Key.AccountBy;
-import com.zimbra.common.account.Key.DomainBy;
+import org.zmail.common.service.ServiceException;
+import org.zmail.cs.account.AccountServiceException;
+import org.zmail.cs.account.NamedEntry;
+import org.zmail.cs.account.Provisioning;
+import org.zmail.cs.account.accesscontrol.ZmailACE.ExternalGroupInfo;
+import org.zmail.common.account.Key;
+import org.zmail.common.account.Key.AccountBy;
+import org.zmail.common.account.Key.DomainBy;
 
 public enum GranteeType {
 
-    // Need to keep JAXB class com.zimbra.soap.type.GranteeType in sync with this class
-    GT_USER("usr",      com.zimbra.soap.type.GranteeType.usr, (short)(GranteeFlag.F_ADMIN | GranteeFlag.F_INDIVIDUAL | GranteeFlag.F_IS_ZIMBRA_ENTRY)),
-    GT_GROUP("grp",     com.zimbra.soap.type.GranteeType.grp, (short)(GranteeFlag.F_ADMIN | GranteeFlag.F_GROUP      | GranteeFlag.F_IS_ZIMBRA_ENTRY)),
-    GT_EXT_GROUP("egp", com.zimbra.soap.type.GranteeType.egp, (short)(GranteeFlag.F_ADMIN | GranteeFlag.F_GROUP)),
-    GT_AUTHUSER("all",  com.zimbra.soap.type.GranteeType.all, (short)(                      GranteeFlag.F_AUTHUSER)),
-    GT_DOMAIN("dom",    com.zimbra.soap.type.GranteeType.dom, (short)(GranteeFlag.F_ADMIN | GranteeFlag.F_DOMAIN     | GranteeFlag.F_IS_ZIMBRA_ENTRY)),  // only for the admin crossDomainAdmin right and user rights
-    GT_GUEST("gst",     com.zimbra.soap.type.GranteeType.gst, (short)(                      GranteeFlag.F_INDIVIDUAL                                  | GranteeFlag.F_HAS_SECRET)),
-    GT_KEY("key",       com.zimbra.soap.type.GranteeType.key, (short)(                      GranteeFlag.F_INDIVIDUAL                                  | GranteeFlag.F_HAS_SECRET)),
-    GT_PUBLIC("pub",    com.zimbra.soap.type.GranteeType.pub, (short)(                      GranteeFlag.F_PUBLIC)),
+    // Need to keep JAXB class org.zmail.soap.type.GranteeType in sync with this class
+    GT_USER("usr",      org.zmail.soap.type.GranteeType.usr, (short)(GranteeFlag.F_ADMIN | GranteeFlag.F_INDIVIDUAL | GranteeFlag.F_IS_ZIMBRA_ENTRY)),
+    GT_GROUP("grp",     org.zmail.soap.type.GranteeType.grp, (short)(GranteeFlag.F_ADMIN | GranteeFlag.F_GROUP      | GranteeFlag.F_IS_ZIMBRA_ENTRY)),
+    GT_EXT_GROUP("egp", org.zmail.soap.type.GranteeType.egp, (short)(GranteeFlag.F_ADMIN | GranteeFlag.F_GROUP)),
+    GT_AUTHUSER("all",  org.zmail.soap.type.GranteeType.all, (short)(                      GranteeFlag.F_AUTHUSER)),
+    GT_DOMAIN("dom",    org.zmail.soap.type.GranteeType.dom, (short)(GranteeFlag.F_ADMIN | GranteeFlag.F_DOMAIN     | GranteeFlag.F_IS_ZIMBRA_ENTRY)),  // only for the admin crossDomainAdmin right and user rights
+    GT_GUEST("gst",     org.zmail.soap.type.GranteeType.gst, (short)(                      GranteeFlag.F_INDIVIDUAL                                  | GranteeFlag.F_HAS_SECRET)),
+    GT_KEY("key",       org.zmail.soap.type.GranteeType.key, (short)(                      GranteeFlag.F_INDIVIDUAL                                  | GranteeFlag.F_HAS_SECRET)),
+    GT_PUBLIC("pub",    org.zmail.soap.type.GranteeType.pub, (short)(                      GranteeFlag.F_PUBLIC)),
 
     /*
      * pseudo grantee type that can be specified in granting requests.
@@ -49,7 +49,7 @@ public enum GranteeType {
      *
      * This grantee type will never be persisted in ACL.
      */
-    GT_EMAIL("email", com.zimbra.soap.type.GranteeType.email, (short)0);
+    GT_EMAIL("email", org.zmail.soap.type.GranteeType.email, (short)0);
 
 
     private static class GT {
@@ -58,9 +58,9 @@ public enum GranteeType {
 
     private String mCode;
     private short mFlags;
-    private com.zimbra.soap.type.GranteeType jaxbGranteeType;
+    private org.zmail.soap.type.GranteeType jaxbGranteeType;
 
-    GranteeType(String code, com.zimbra.soap.type.GranteeType jaxbGT, short flags) {
+    GranteeType(String code, org.zmail.soap.type.GranteeType jaxbGT, short flags) {
         mCode = code;
         GT.sCodeMap.put(code, this);
         mFlags = flags;
@@ -95,11 +95,11 @@ public enum GranteeType {
     }
 
     /* return equivalent JAXB enum */
-    public com.zimbra.soap.type.GranteeType toJaxb() {
+    public org.zmail.soap.type.GranteeType toJaxb() {
         return jaxbGranteeType;
     }
 
-    public static GranteeType fromJaxb(com.zimbra.soap.type.GranteeType jaxbGT) {
+    public static GranteeType fromJaxb(org.zmail.soap.type.GranteeType jaxbGT) {
         for (GranteeType gt :GranteeType.values()) {
             if (gt.toJaxb() == jaxbGT) {
                 return gt;
@@ -134,7 +134,7 @@ public enum GranteeType {
         return hasFlags(GranteeFlag.F_HAS_SECRET);
     }
 
-    public boolean isZimbraEntry() {
+    public boolean isZmailEntry() {
         return hasFlags(GranteeFlag.F_IS_ZIMBRA_ENTRY);
     }
 

@@ -48,7 +48,7 @@ CREATE TABLE IF NOT EXISTS $group.revision (
 
    PRIMARY KEY (mailbox_id, item_id, version),
 
-   CONSTRAINT fk_revision_mailbox_id FOREIGN KEY (mailbox_id) REFERENCES zimbra.mailbox(id),
+   CONSTRAINT fk_revision_mailbox_id FOREIGN KEY (mailbox_id) REFERENCES zmail.mailbox(id),
    CONSTRAINT fk_revision_item_id FOREIGN KEY (mailbox_id, item_id) REFERENCES $group.mail_item(mailbox_id, id) ON DELETE CASCADE
 ) ENGINE = InnoDB;
 CREATE_TABLE_EOF

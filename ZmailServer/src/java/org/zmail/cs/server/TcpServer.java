@@ -13,7 +13,7 @@
  * ***** END LICENSE BLOCK *****
  */
 
-package com.zimbra.cs.server;
+package org.zmail.cs.server;
 
 import java.io.IOException;
 import java.io.OutputStream;
@@ -29,13 +29,13 @@ import java.util.concurrent.SynchronousQueue;
 import java.util.concurrent.ThreadPoolExecutor;
 import java.util.concurrent.TimeUnit;
 
-import com.zimbra.common.localconfig.LC;
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.common.util.Log;
-import com.zimbra.common.util.LogFactory;
-import com.zimbra.cs.account.Provisioning;
-import com.zimbra.cs.server.Server;
-import com.zimbra.cs.server.ServerConfig;
+import org.zmail.common.localconfig.LC;
+import org.zmail.common.service.ServiceException;
+import org.zmail.common.util.Log;
+import org.zmail.common.util.LogFactory;
+import org.zmail.cs.account.Provisioning;
+import org.zmail.cs.server.Server;
+import org.zmail.cs.server.ServerConfig;
 
 /**
  * Base class for TCP servers using thread per connection model.
@@ -262,7 +262,7 @@ public abstract class TcpServer implements Runnable, Server {
     protected Set<String> getThrottleSafeHosts() throws ServiceException {
 
         Set<String> safeHosts = new HashSet<String>();
-        for (com.zimbra.cs.account.Server server : Provisioning.getInstance().getAllServers()) {
+        for (org.zmail.cs.account.Server server : Provisioning.getInstance().getAllServers()) {
             safeHosts.add(server.getServiceHostname());
         }
         for (String ignoredHost : config.getIgnoredHosts()) {

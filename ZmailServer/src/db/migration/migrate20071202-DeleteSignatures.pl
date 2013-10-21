@@ -14,13 +14,13 @@
 # ***** END LICENSE BLOCK *****
 # 
 use strict;
-use lib "/opt/zimbra/zimbramon/lib";
-use Zimbra::Util::Common;
+use lib "/opt/zmail/zmailmon/lib";
+use Zmail::Util::Common;
 use Data::UUID;
 use Net::LDAPapi;
 
 my ($binddn,$bindpwd,$host,$junk,$result,@localconfig,$ismaster);
-@localconfig=`/opt/zimbra/bin/zmlocalconfig -s ldap_master_url zimbra_ldap_userdn zimbra_ldap_password ldap_is_master`;
+@localconfig=`/opt/zmail/bin/zmlocalconfig -s ldap_master_url zmail_ldap_userdn zmail_ldap_password ldap_is_master`;
 
 $host=$localconfig[0];
 ($junk,$host) = split /= /, $host, 2;
@@ -43,16 +43,16 @@ if ($ismaster ne "true") {
 }
 
 print "Updating old Identity classes";
-my @attrs = ("zimbraPrefBccAddress", "zimbraPrefForwardIncludeOriginalText", "zimbraPrefForwardReplyFormat", "zimbraPrefForwardReplyPrefixChar", "zimbraPrefMailSignature",
-			"zimbraPrefMailSignatureEnabled", "zimbraPrefMailSignatureStyle", "zimbraPrefReplyIncludeOriginalText", "zimbraPrefSaveToSent", "zimbraPrefSentMailFolder",
-			"zimbraPrefUseDefaultIdentitySettings");
+my @attrs = ("zmailPrefBccAddress", "zmailPrefForwardIncludeOriginalText", "zmailPrefForwardReplyFormat", "zmailPrefForwardReplyPrefixChar", "zmailPrefMailSignature",
+			"zmailPrefMailSignatureEnabled", "zmailPrefMailSignatureStyle", "zmailPrefReplyIncludeOriginalText", "zmailPrefSaveToSent", "zmailPrefSentMailFolder",
+			"zmailPrefUseDefaultIdentitySettings");
 my $ld = Net::LDAPapi->new(-url=>"$host");
 my $status;
 if ($host !~ /^ldaps/i) {
   $status=$ld->start_tls_s();
 }
 $status = $ld->bind_s($binddn,$bindpwd);
-$status = $ld->search_s("",LDAP_SCOPE_SUBTREE,"objectClass=zimbraIdentity",\@attrs,0,$result);
+$status = $ld->search_s("",LDAP_SCOPE_SUBTREE,"objectClass=zmailIdentity",\@attrs,0,$result);
 
 my ($ent,$dn,$attr);
 

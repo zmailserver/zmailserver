@@ -12,7 +12,7 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.db;
+package org.zmail.cs.db;
 
 import java.lang.reflect.Constructor;
 import java.sql.Connection;
@@ -22,37 +22,37 @@ import java.util.Properties;
 import org.apache.commons.dbcp.ConnectionFactory;
 import org.apache.commons.dbcp.DriverManagerConnectionFactory;
 
-import com.zimbra.common.localconfig.LC;
-import com.zimbra.common.util.ZimbraLog;
-import com.zimbra.cs.db.DbPool.PoolConfig;
+import org.zmail.common.localconfig.LC;
+import org.zmail.common.util.ZmailLog;
+import org.zmail.cs.db.DbPool.PoolConfig;
 
 /**
  * Default ConnectionFactory implementation
  *
  */
-public class ZimbraConnectionFactory extends DriverManagerConnectionFactory {
+public class ZmailConnectionFactory extends DriverManagerConnectionFactory {
 
     private static ConnectionFactory sConnFactory = null;
     public static ConnectionFactory getConnectionFactory(PoolConfig pconfig) {
         if (sConnFactory == null) {
-            String className = LC.zimbra_class_dbconnfactory.value();
+            String className = LC.zmail_class_dbconnfactory.value();
             if (className != null && !className.equals("")) {
                 try {
-                    ZimbraLog.dbconn.debug("instantiating DB connection factory class "+className);
+                    ZmailLog.dbconn.debug("instantiating DB connection factory class "+className);
                     Class clazz = Class.forName(className);
                     Constructor constructor = clazz.getDeclaredConstructor(String.class, Properties.class);
                     sConnFactory = (ConnectionFactory) constructor.newInstance(pconfig.mConnectionUrl, pconfig.mDatabaseProperties);
                 } catch (Exception e) {
-                    ZimbraLog.system.error("could not instantiate database connection pool '" + className + "'; defaulting to ZimbraConnectionFactory", e);
+                    ZmailLog.system.error("could not instantiate database connection pool '" + className + "'; defaulting to ZmailConnectionFactory", e);
                 }
             }
             if (sConnFactory == null)
-                sConnFactory = new ZimbraConnectionFactory(pconfig.mConnectionUrl, pconfig.mDatabaseProperties);
+                sConnFactory = new ZmailConnectionFactory(pconfig.mConnectionUrl, pconfig.mDatabaseProperties);
         }
         return sConnFactory;
     }
 
-    ZimbraConnectionFactory(String connectUri, Properties props) {
+    ZmailConnectionFactory(String connectUri, Properties props) {
         super(connectUri, props);
     }
 

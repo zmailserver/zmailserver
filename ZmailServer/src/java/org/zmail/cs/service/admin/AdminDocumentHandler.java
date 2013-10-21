@@ -12,41 +12,41 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.service.admin;
+package org.zmail.cs.service.admin;
 
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.cs.account.AccessManager;
-import com.zimbra.cs.account.Account;
-import com.zimbra.cs.account.AttributeClass;
-import com.zimbra.cs.account.AttributeManager;
-import com.zimbra.cs.account.AuthToken;
-import com.zimbra.cs.account.CalendarResource;
-import com.zimbra.cs.account.Cos;
-import com.zimbra.cs.account.DistributionList;
-import com.zimbra.cs.account.Domain;
-import com.zimbra.cs.account.DynamicGroup;
-import com.zimbra.cs.account.Entry;
-import com.zimbra.cs.account.NamedEntry;
-import com.zimbra.cs.account.Provisioning;
-import com.zimbra.cs.account.Server;
-import com.zimbra.common.account.Key;
-import com.zimbra.common.account.Key.AccountBy;
-import com.zimbra.common.account.Key.CalendarResourceBy;
-import com.zimbra.common.account.Key.ServerBy;
-import com.zimbra.cs.account.accesscontrol.AdminRight;
-import com.zimbra.cs.account.accesscontrol.TargetType;
-import com.zimbra.cs.account.accesscontrol.Rights.Admin;
-import com.zimbra.cs.account.names.NameUtil;
-import com.zimbra.cs.session.Session;
-import com.zimbra.soap.DocumentHandler;
-import com.zimbra.common.soap.AdminConstants;
-import com.zimbra.common.soap.Element;
-import com.zimbra.soap.ZimbraSoapContext;
+import org.zmail.common.service.ServiceException;
+import org.zmail.cs.account.AccessManager;
+import org.zmail.cs.account.Account;
+import org.zmail.cs.account.AttributeClass;
+import org.zmail.cs.account.AttributeManager;
+import org.zmail.cs.account.AuthToken;
+import org.zmail.cs.account.CalendarResource;
+import org.zmail.cs.account.Cos;
+import org.zmail.cs.account.DistributionList;
+import org.zmail.cs.account.Domain;
+import org.zmail.cs.account.DynamicGroup;
+import org.zmail.cs.account.Entry;
+import org.zmail.cs.account.NamedEntry;
+import org.zmail.cs.account.Provisioning;
+import org.zmail.cs.account.Server;
+import org.zmail.common.account.Key;
+import org.zmail.common.account.Key.AccountBy;
+import org.zmail.common.account.Key.CalendarResourceBy;
+import org.zmail.common.account.Key.ServerBy;
+import org.zmail.cs.account.accesscontrol.AdminRight;
+import org.zmail.cs.account.accesscontrol.TargetType;
+import org.zmail.cs.account.accesscontrol.Rights.Admin;
+import org.zmail.cs.account.names.NameUtil;
+import org.zmail.cs.session.Session;
+import org.zmail.soap.DocumentHandler;
+import org.zmail.common.soap.AdminConstants;
+import org.zmail.common.soap.Element;
+import org.zmail.soap.ZmailSoapContext;
 
 /**
  * @since Oct 4, 2004
@@ -104,7 +104,7 @@ public abstract class AdminDocumentHandler extends DocumentHandler implements Ad
     @Override
     protected Element proxyIfNecessary(Element request, Map<String, Object> context) throws ServiceException {
         // if we've explicitly been told to execute here, don't proxy
-        ZimbraSoapContext zsc = getZimbraSoapContext(context);
+        ZmailSoapContext zsc = getZmailSoapContext(context);
         if (zsc.getProxyTarget() != null)
             return null;
 
@@ -210,36 +210,36 @@ public abstract class AdminDocumentHandler extends DocumentHandler implements Ad
         return validAttrs;
     }
 
-    public boolean isDomainAdminOnly(ZimbraSoapContext zsc) {
+    public boolean isDomainAdminOnly(ZmailSoapContext zsc) {
         return AccessManager.getInstance().isDomainAdminOnly(zsc.getAuthToken());
     }
 
-    public Domain getAuthTokenAccountDomain(ZimbraSoapContext zsc) throws ServiceException {
+    public Domain getAuthTokenAccountDomain(ZmailSoapContext zsc) throws ServiceException {
         return AccessManager.getInstance().getDomain(zsc.getAuthToken());
     }
 
-    protected boolean canAccessDomain(ZimbraSoapContext zsc, String domainName) throws ServiceException {
+    protected boolean canAccessDomain(ZmailSoapContext zsc, String domainName) throws ServiceException {
         return AccessManager.getInstance().canAccessDomain(zsc.getAuthToken(), domainName);
     }
 
-    protected boolean canAccessDomain(ZimbraSoapContext zsc, Domain domain) throws ServiceException {
+    protected boolean canAccessDomain(ZmailSoapContext zsc, Domain domain) throws ServiceException {
         return canAccessDomain(zsc, domain.getName());
     }
 
-    protected boolean canModifyMailQuota(ZimbraSoapContext zsc, Account target, long mailQuota) throws ServiceException {
+    protected boolean canModifyMailQuota(ZmailSoapContext zsc, Account target, long mailQuota) throws ServiceException {
         return AccessManager.getInstance().canModifyMailQuota(zsc.getAuthToken(), target, mailQuota);
     }
 
 
 
     /*
-     * TODO:  can't be private yet, still called from ZimbraAdminExt and ZimbraCustomerServices/hosted
+     * TODO:  can't be private yet, still called from ZmailAdminExt and ZmailCustomerServices/hosted
      *        Need to fix those callsite to call one of the check*** methods.
      *
      *        after that, move this method and related methods to AdminAccessControl and
      *        only call this method from there.
      */
-    public boolean canAccessEmail(ZimbraSoapContext zsc, String email) throws ServiceException {
+    public boolean canAccessEmail(ZmailSoapContext zsc, String email) throws ServiceException {
         return canAccessDomain(zsc, NameUtil.EmailAddress.getDomainNameFromEmail(email));
     }
 
@@ -259,7 +259,7 @@ public abstract class AdminDocumentHandler extends DocumentHandler implements Ad
      * @param attrs
      * @throws ServiceException
      */
-    public void checkModifyAttrs(ZimbraSoapContext zsc, AttributeClass attrClass, Map<String, Object> attrs) throws ServiceException {
+    public void checkModifyAttrs(ZmailSoapContext zsc, AttributeClass attrClass, Map<String, Object> attrs) throws ServiceException {
         AdminAccessControl.getAdminAccessControl(zsc).checkModifyAttrs(attrClass, attrs);
     }
 
@@ -267,17 +267,17 @@ public abstract class AdminDocumentHandler extends DocumentHandler implements Ad
      * This has to be called *after* the *can create* check.
      * For domain based AccessManager, all attrs are allowed if the admin can create.
      */
-    protected void checkSetAttrsOnCreate(ZimbraSoapContext zsc, TargetType targetType, String entryName, Map<String, Object> attrs)
+    protected void checkSetAttrsOnCreate(ZmailSoapContext zsc, TargetType targetType, String entryName, Map<String, Object> attrs)
         throws ServiceException {
         AdminAccessControl.getAdminAccessControl(zsc).checkSetAttrsOnCreate(targetType, entryName, attrs);
     }
 
-    protected boolean hasRightsToList(ZimbraSoapContext zsc, NamedEntry target,
+    protected boolean hasRightsToList(ZmailSoapContext zsc, NamedEntry target,
             AdminRight listRight, Object getAttrRight) throws ServiceException {
         return AdminAccessControl.getAdminAccessControl(zsc).hasRightsToList(target, listRight, getAttrRight);
     }
 
-    protected boolean hasRightsToListCos(ZimbraSoapContext zsc, Cos target,
+    protected boolean hasRightsToListCos(ZmailSoapContext zsc, Cos target,
             AdminRight listRight, Object getAttrRight) throws ServiceException {
         return AdminAccessControl.getAdminAccessControl(zsc).hasRightsToListCos(target, listRight, getAttrRight);
     }
@@ -292,7 +292,7 @@ public abstract class AdminDocumentHandler extends DocumentHandler implements Ad
      * here.  But we sanity check again, just in case.
      * -------------------
      */
-    protected AdminAccessControl checkRight(ZimbraSoapContext zsc,
+    protected AdminAccessControl checkRight(ZmailSoapContext zsc,
         Map<String, Object> context, Entry target, Object needed) throws ServiceException {
         AccessManager am = AccessManager.getInstance();
 
@@ -343,7 +343,7 @@ public abstract class AdminDocumentHandler extends DocumentHandler implements Ad
      * @param needed
      * @throws ServiceException
      */
-    public static AdminAccessControl checkRight(ZimbraSoapContext zsc, Entry target, Object needed) throws ServiceException {
+    public static AdminAccessControl checkRight(ZmailSoapContext zsc, Entry target, Object needed) throws ServiceException {
         AdminAccessControl aac = AdminAccessControl.getAdminAccessControl(zsc);
         aac.checkRight(target, needed);
         return aac;
@@ -354,7 +354,7 @@ public abstract class AdminDocumentHandler extends DocumentHandler implements Ad
      * cos right
      * -------------
      */
-    protected AdminAccessControl checkCosRight(ZimbraSoapContext zsc, Cos cos, Object needed) throws ServiceException {
+    protected AdminAccessControl checkCosRight(ZmailSoapContext zsc, Cos cos, Object needed) throws ServiceException {
         AdminAccessControl aac = AdminAccessControl.getAdminAccessControl(zsc);
         aac.checkCosRight(cos, needed);
         return aac;
@@ -365,7 +365,7 @@ public abstract class AdminDocumentHandler extends DocumentHandler implements Ad
      * account right
      * -------------
      */
-    protected AdminAccessControl checkAccountRight(ZimbraSoapContext zsc, Account account, Object needed) throws ServiceException {
+    protected AdminAccessControl checkAccountRight(ZmailSoapContext zsc, Account account, Object needed) throws ServiceException {
         AdminAccessControl aac = AdminAccessControl.getAdminAccessControl(zsc);
         aac.checkAccountRight(this, account, needed);
         return aac;
@@ -376,7 +376,7 @@ public abstract class AdminDocumentHandler extends DocumentHandler implements Ad
      * calendar resource right
      * -----------------------
      */
-    protected AdminAccessControl checkCalendarResourceRight(ZimbraSoapContext zsc, CalendarResource cr, Object needed) throws ServiceException {
+    protected AdminAccessControl checkCalendarResourceRight(ZmailSoapContext zsc, CalendarResource cr, Object needed) throws ServiceException {
         AdminAccessControl aac = AdminAccessControl.getAdminAccessControl(zsc);
         aac.checkCalendarResourceRight(this, cr, needed);
         return aac;
@@ -385,7 +385,7 @@ public abstract class AdminDocumentHandler extends DocumentHandler implements Ad
     /*
      * convenient method for checking the admin login as right
      */
-    protected AdminAccessControl checkAdminLoginAsRight(ZimbraSoapContext zsc, Provisioning prov, Account account) throws ServiceException {
+    protected AdminAccessControl checkAdminLoginAsRight(ZmailSoapContext zsc, Provisioning prov, Account account) throws ServiceException {
         if (account.isCalendarResource()) {
             // need a CalendarResource instance for RightChecker
             CalendarResource resource = prov.get(Key.CalendarResourceBy.id, account.getId());
@@ -399,7 +399,7 @@ public abstract class AdminDocumentHandler extends DocumentHandler implements Ad
      * DL right
      * --------
      */
-    protected AdminAccessControl checkDistributionListRight(ZimbraSoapContext zsc, 
+    protected AdminAccessControl checkDistributionListRight(ZmailSoapContext zsc, 
             DistributionList dl, Object needed) throws ServiceException {
         AdminAccessControl aac = AdminAccessControl.getAdminAccessControl(zsc);
         aac.checkDistributionListRight(this, dl, needed);
@@ -412,7 +412,7 @@ public abstract class AdminDocumentHandler extends DocumentHandler implements Ad
      * Dynamic group right
      * --------
      */
-    protected AdminAccessControl checkDynamicGroupRight(ZimbraSoapContext zsc, 
+    protected AdminAccessControl checkDynamicGroupRight(ZmailSoapContext zsc, 
             DynamicGroup group, Object needed) throws ServiceException {
         AdminAccessControl aac = AdminAccessControl.getAdminAccessControl(zsc);
         aac.checkDynamicGroupRight(this, group, needed);
@@ -430,7 +430,7 @@ public abstract class AdminDocumentHandler extends DocumentHandler implements Ad
      *
      * Note: this method *do* check domain status.
      */
-    protected AdminAccessControl checkDomainRightByEmail(ZimbraSoapContext zsc, String email, AdminRight needed) throws ServiceException {
+    protected AdminAccessControl checkDomainRightByEmail(ZmailSoapContext zsc, String email, AdminRight needed) throws ServiceException {
         AdminAccessControl aac = AdminAccessControl.getAdminAccessControl(zsc);
         aac.checkDomainRightByEmail(this, email, needed);
         return aac;
@@ -439,7 +439,7 @@ public abstract class AdminDocumentHandler extends DocumentHandler implements Ad
     /**
      * Note: this method do *not* check domain status.
      */
-    protected AdminAccessControl checkDomainRight(ZimbraSoapContext zsc, String domainName, Object needed) throws ServiceException {
+    protected AdminAccessControl checkDomainRight(ZmailSoapContext zsc, String domainName, Object needed) throws ServiceException {
         AdminAccessControl aac = AdminAccessControl.getAdminAccessControl(zsc);
         aac.checkDomainRight(this, domainName, needed);
         return aac;
@@ -448,7 +448,7 @@ public abstract class AdminDocumentHandler extends DocumentHandler implements Ad
     /**
      * Note: this method do *not* check domain status.
      */
-    protected AdminAccessControl checkDomainRight(ZimbraSoapContext zsc, Domain domain, Object needed) throws ServiceException {
+    protected AdminAccessControl checkDomainRight(ZmailSoapContext zsc, Domain domain, Object needed) throws ServiceException {
         AdminAccessControl aac = AdminAccessControl.getAdminAccessControl(zsc);
         aac.checkDomainRight(this, domain, needed);
         return aac;

@@ -12,11 +12,11 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.store.file;
+package org.zmail.cs.store.file;
 
 import java.io.Serializable;
 
-import com.zimbra.znative.IO.FileInfo;
+import org.zmail.znative.IO.FileInfo;
 
 public class BlobReference implements Serializable {
 

@@ -12,7 +12,7 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.db;
+package org.zmail.cs.db;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -20,18 +20,18 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.zimbra.common.localconfig.DebugConfig;
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.common.util.ZimbraLog;
-import com.zimbra.common.util.Pair;
-import com.zimbra.cs.account.DataSource;
-import com.zimbra.cs.datasource.imap.ImapFolder;
-import com.zimbra.cs.datasource.imap.ImapMessage;
-import com.zimbra.cs.datasource.imap.ImapMessageCollection;
-import com.zimbra.cs.db.DbPool.DbConnection;
-import com.zimbra.cs.mailbox.Flag;
-import com.zimbra.cs.mailbox.MailItem;
-import com.zimbra.cs.mailbox.Mailbox;
+import org.zmail.common.localconfig.DebugConfig;
+import org.zmail.common.service.ServiceException;
+import org.zmail.common.util.ZmailLog;
+import org.zmail.common.util.Pair;
+import org.zmail.cs.account.DataSource;
+import org.zmail.cs.datasource.imap.ImapFolder;
+import org.zmail.cs.datasource.imap.ImapMessage;
+import org.zmail.cs.datasource.imap.ImapMessageCollection;
+import org.zmail.cs.db.DbPool.DbConnection;
+import org.zmail.cs.mailbox.Flag;
+import org.zmail.cs.mailbox.MailItem;
+import org.zmail.cs.mailbox.Mailbox;
 
 public class DbImapMessage {
 
@@ -43,7 +43,7 @@ public class DbImapMessage {
     public static void storeImapMessage(Mailbox mbox, int localFolderId, long remoteUid, int localItemId, int flags)
     throws ServiceException {
 
-        ZimbraLog.datasource.debug(
+        ZmailLog.datasource.debug(
                 "Storing IMAP message tracker: mboxId=%d, localFolderId=%d, remoteUid=%d, localItemId=%d flags=%s",
                 mbox.getId(), localFolderId, remoteUid, localItemId, Flag.toString(flags));
 
@@ -75,7 +75,7 @@ public class DbImapMessage {
     public static void setUid(Mailbox mbox, int itemId, long uid)
     throws ServiceException {
 
-        ZimbraLog.datasource.debug(
+        ZmailLog.datasource.debug(
             "Updating IMAP message tracker uid: mboxId=%d, localItemId=%d remoteUid=%x",
             mbox.getId(), itemId, uid);
 
@@ -111,7 +111,7 @@ public class DbImapMessage {
 
     private static long getMinMaxUid(Mailbox mbox, int folderId, String minmax)
     throws ServiceException {
-        ZimbraLog.datasource.debug(
+        ZmailLog.datasource.debug(
             "Getting %s IMAP uid: mboxId=%d, folderId=%d", minmax, mbox.getId(), folderId);
 
         DbConnection conn = null;
@@ -135,7 +135,7 @@ public class DbImapMessage {
 
     public static void setFlags(Mailbox mbox, int itemId, int flags) throws ServiceException {
 
-        ZimbraLog.datasource.debug("Updating IMAP message tracker flags: mboxId=%d, localItemId=%d flags=%s",
+        ZmailLog.datasource.debug("Updating IMAP message tracker flags: mboxId=%d, localItemId=%d flags=%s",
                 mbox.getId(), itemId, Flag.toString(flags));
 
         DbConnection conn = null;
@@ -166,7 +166,7 @@ public class DbImapMessage {
     public static void deleteImapMessage(Mailbox mbox, int localFolderId, int localItemId)
     throws ServiceException {
 
-        ZimbraLog.datasource.debug(
+        ZmailLog.datasource.debug(
             "Deleting IMAP message tracker: mboxId=%d, localFolderId=%d, msgId=%d",
             mbox.getId(), localFolderId, localItemId);
 
@@ -198,7 +198,7 @@ public class DbImapMessage {
     public static void deleteImapMessages(Mailbox mbox, int localFolderId)
     throws ServiceException {
 
-        ZimbraLog.datasource.debug(
+        ZmailLog.datasource.debug(
             "Deleting all IMAP message trackers: mboxId=%d, localFolderId=%d", mbox.getId(), localFolderId);
 
         DbConnection conn = null;
@@ -227,7 +227,7 @@ public class DbImapMessage {
     public static int getLocalMessageId(Mailbox mbox, int localFolderId, long remoteUid)
     throws ServiceException {
 
-        ZimbraLog.datasource.debug(
+        ZmailLog.datasource.debug(
             "Getting local message id for tracked message: mboxId=%d, localFolderId=%d, remoteUid=%d",
             mbox.getId(), localFolderId, remoteUid);
 
@@ -377,7 +377,7 @@ public class DbImapMessage {
             DbPool.quietClose(conn);
         }
 
-        ZimbraLog.datasource.debug("Found %d tracked IMAP messages for %s",
+        ZmailLog.datasource.debug("Found %d tracked IMAP messages for %s",
             imapMessages.size(), imapFolder.getRemoteId());
         return imapMessages;
     }

@@ -12,23 +12,23 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.service.admin;
+package org.zmail.cs.service.admin;
 
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.common.soap.AdminConstants;
-import com.zimbra.common.soap.Element;
-import com.zimbra.common.util.ZimbraLog;
-import com.zimbra.cs.account.Account;
-import com.zimbra.cs.account.Provisioning;
-import com.zimbra.cs.account.accesscontrol.AdminRight;
-import com.zimbra.cs.account.accesscontrol.Rights.Admin;
-import com.zimbra.cs.service.admin.GetAdminSavedSearches;
-import com.zimbra.soap.ZimbraSoapContext;
+import org.zmail.common.service.ServiceException;
+import org.zmail.common.soap.AdminConstants;
+import org.zmail.common.soap.Element;
+import org.zmail.common.util.ZmailLog;
+import org.zmail.cs.account.Account;
+import org.zmail.cs.account.Provisioning;
+import org.zmail.cs.account.accesscontrol.AdminRight;
+import org.zmail.cs.account.accesscontrol.Rights.Admin;
+import org.zmail.cs.service.admin.GetAdminSavedSearches;
+import org.zmail.soap.ZmailSoapContext;
 
 public class ModifyAdminSavedSearches extends AdminDocumentHandler {
     
@@ -40,7 +40,7 @@ public class ModifyAdminSavedSearches extends AdminDocumentHandler {
     }
     
     public Element handle(Element request, Map<String, Object> context) throws ServiceException {
-        ZimbraSoapContext zsc = getZimbraSoapContext(context);
+        ZmailSoapContext zsc = getZmailSoapContext(context);
         Account acct = getRequestedAccount(zsc);
         
         checkAccountRight(zsc, acct, Admin.R_setAdminSavedSearch);
@@ -57,7 +57,7 @@ public class ModifyAdminSavedSearches extends AdminDocumentHandler {
             if (name != null && name.length() != 0)
                 searches.put(name, query);
             else
-                ZimbraLog.account.warn("ModifyAdminSavedSearches: empty search name ignored");
+                ZmailLog.account.warn("ModifyAdminSavedSearches: empty search name ignored");
         }
 
         handle(acct, response, searches);
@@ -65,7 +65,7 @@ public class ModifyAdminSavedSearches extends AdminDocumentHandler {
     }
     
     public void handle(Account acct, Element response, HashMap<String, String> modSearches) throws ServiceException {
-        String[] searches = acct.getMultiAttr(Provisioning.A_zimbraAdminSavedSearches);
+        String[] searches = acct.getMultiAttr(Provisioning.A_zmailAdminSavedSearches);
         Map<String, GetAdminSavedSearches.AdminSearch> curSearches = new HashMap<String, GetAdminSavedSearches.AdminSearch>();
         for (int i = 0; i < searches.length; i++) {
             GetAdminSavedSearches.AdminSearch as = GetAdminSavedSearches.AdminSearch.parse(searches[i]);
@@ -99,7 +99,7 @@ public class ModifyAdminSavedSearches extends AdminDocumentHandler {
             
         Provisioning prov = Provisioning.getInstance();
         Map<String,String[]> modmap = new HashMap<String,String[]>();
-        modmap.put(Provisioning.A_zimbraAdminSavedSearches, mods);
+        modmap.put(Provisioning.A_zmailAdminSavedSearches, mods);
         prov.modifyAttrs(acct, modmap);
     }
     

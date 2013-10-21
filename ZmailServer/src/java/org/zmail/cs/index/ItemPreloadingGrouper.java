@@ -13,12 +13,12 @@
  * ***** END LICENSE BLOCK *****
  */
 
-package com.zimbra.cs.index;
+package org.zmail.cs.index;
 
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.cs.mailbox.Mailbox;
-import com.zimbra.cs.mailbox.OperationContext;
-import com.zimbra.cs.mailbox.MailItem;
+import org.zmail.common.service.ServiceException;
+import org.zmail.cs.mailbox.Mailbox;
+import org.zmail.cs.mailbox.OperationContext;
+import org.zmail.cs.mailbox.MailItem;
 import java.util.*;
 
 /**
@@ -35,7 +35,7 @@ final class ItemPreloadingGrouper extends BufferingResultsGrouper {
     private final boolean inDumpster;
     private final OperationContext opContext;
 
-    ItemPreloadingGrouper(ZimbraQueryResults results, int chunkSize, Mailbox mbox, boolean inDumpster) {
+    ItemPreloadingGrouper(ZmailQueryResults results, int chunkSize, Mailbox mbox, boolean inDumpster) {
         super(results);
         assert(chunkSize > 0);
         this.chunkSize = chunkSize;
@@ -53,18 +53,18 @@ final class ItemPreloadingGrouper extends BufferingResultsGrouper {
             return false;
         }
 
-        ArrayList<ZimbraHit>toLoad = new ArrayList<ZimbraHit>();
+        ArrayList<ZmailHit>toLoad = new ArrayList<ZmailHit>();
 
         // FIXME: only preloading for the first mailbox right now
         // ...if this were a cross-mailbox-search, we'd be more efficient
         // if we broke things up into a hash of one load-list-per-mailbox and
         // then did preloading there...but for now we won't worry about it
-        ZimbraHit firstHit = hits.peekNext();
+        ZmailHit firstHit = hits.peekNext();
         Mailbox mbx = firstHit.getMailbox();
 
         int numLoaded = 0;
         do {
-            ZimbraHit nextHit = hits.getNext();
+            ZmailHit nextHit = hits.getNext();
             bufferedHit.add(nextHit);
 
             if (nextHit.getMailbox() == mbx && mbx != null) {
@@ -79,11 +79,11 @@ final class ItemPreloadingGrouper extends BufferingResultsGrouper {
         return true;
     }
 
-    private void preload(Mailbox mbox, List<ZimbraHit> hits) throws ServiceException {
+    private void preload(Mailbox mbox, List<ZmailHit> hits) throws ServiceException {
         int unloadedIds[] = new int[hits.size()];
         int numToLoad = 0;
         for (int i = 0; i < hits.size(); i++) {
-            ZimbraHit cur = hits.get(i);
+            ZmailHit cur = hits.get(i);
             if (!cur.itemIsLoaded()) {
                 numToLoad++;
                 unloadedIds[i] = cur.getItemId();

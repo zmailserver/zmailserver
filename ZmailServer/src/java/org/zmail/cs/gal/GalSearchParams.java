@@ -12,32 +12,32 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.gal;
+package org.zmail.cs.gal;
 
 import java.util.EnumSet;
 
 import org.dom4j.QName;
 
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.common.soap.AccountConstants;
-import com.zimbra.common.soap.Element;
-import com.zimbra.common.soap.MailConstants;
-import com.zimbra.common.soap.SoapProtocol;
-import com.zimbra.cs.account.Account;
-import com.zimbra.cs.account.AuthToken;
-import com.zimbra.cs.account.DataSource;
-import com.zimbra.cs.account.Domain;
-import com.zimbra.cs.account.Provisioning;
-import com.zimbra.common.account.Key.AccountBy;
-import com.zimbra.cs.account.Provisioning.SearchGalResult;
-import com.zimbra.cs.account.gal.GalOp;
-import com.zimbra.cs.account.gal.GalUtil;
-import com.zimbra.cs.index.SearchParams;
-import com.zimbra.cs.index.SortBy;
-import com.zimbra.cs.mailbox.MailItem;
-import com.zimbra.soap.ZimbraSoapContext;
-import com.zimbra.soap.account.type.MemberOfSelector;
-import com.zimbra.soap.type.GalSearchType;
+import org.zmail.common.service.ServiceException;
+import org.zmail.common.soap.AccountConstants;
+import org.zmail.common.soap.Element;
+import org.zmail.common.soap.MailConstants;
+import org.zmail.common.soap.SoapProtocol;
+import org.zmail.cs.account.Account;
+import org.zmail.cs.account.AuthToken;
+import org.zmail.cs.account.DataSource;
+import org.zmail.cs.account.Domain;
+import org.zmail.cs.account.Provisioning;
+import org.zmail.common.account.Key.AccountBy;
+import org.zmail.cs.account.Provisioning.SearchGalResult;
+import org.zmail.cs.account.gal.GalOp;
+import org.zmail.cs.account.gal.GalUtil;
+import org.zmail.cs.index.SearchParams;
+import org.zmail.cs.index.SortBy;
+import org.zmail.cs.mailbox.MailItem;
+import org.zmail.soap.ZmailSoapContext;
+import org.zmail.soap.account.type.MemberOfSelector;
+import org.zmail.soap.type.GalSearchType;
 
 public class GalSearchParams {
     private GalSearchConfig mConfig;
@@ -49,7 +49,7 @@ public class GalSearchParams {
     private String mSearchEntryByDn;  // if not null, search the entry by a DN instead of using query
     private GalSyncToken mSyncToken;
     private SearchGalResult mResult;
-    private ZimbraSoapContext mSoapContext;
+    private ZmailSoapContext mSoapContext;
 
     private Account mAccount;
     private String mUserAgent;
@@ -76,12 +76,12 @@ public class GalSearchParams {
         mResponse = AccountConstants.SEARCH_GAL_RESPONSE;
     }
 
-    public GalSearchParams(Account account, ZimbraSoapContext ctxt) {
+    public GalSearchParams(Account account, ZmailSoapContext ctxt) {
         this(account);
         mSoapContext = ctxt;
     }
 
-    public GalSearchParams(Domain domain, ZimbraSoapContext ctxt) {
+    public GalSearchParams(Domain domain, ZmailSoapContext ctxt) {
         mDomain = domain;
         mSoapContext = ctxt;
     }
@@ -160,7 +160,7 @@ public class GalSearchParams {
         throw ServiceException.FAILURE("Unable to get domain", null);
     }
 
-    public ZimbraSoapContext getSoapContext() {
+    public ZmailSoapContext getSoapContext() {
         return mSoapContext;
     }
 
@@ -326,8 +326,8 @@ public class GalSearchParams {
         String token = (mSyncToken != null) ? mSyncToken.getLdapTimestamp(mConfig.mTimestampFormat) : null;
 
         String extraQuery = null;
-        if (GalSearchConfig.GalType.zimbra == mConfig.getGalType() && mExtraQueryCallback != null) {
-            extraQuery = mExtraQueryCallback.getZimbraLdapSearchQuery();
+        if (GalSearchConfig.GalType.zmail == mConfig.getGalType() && mExtraQueryCallback != null) {
+            extraQuery = mExtraQueryCallback.getZmailLdapSearchQuery();
         }
         return GalUtil.expandFilter(mConfig.getTokenizeKey(), mConfig.getFilter(), mQuery, token, extraQuery);
     }

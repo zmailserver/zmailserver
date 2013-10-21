@@ -12,32 +12,32 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.qa.unittest.prov.soap;
+package org.zmail.qa.unittest.prov.soap;
 
 import java.io.IOException;
 
 import org.junit.BeforeClass;
 
-import com.zimbra.common.localconfig.KnownKey;
-import com.zimbra.common.localconfig.LC;
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.common.soap.Element;
-import com.zimbra.common.soap.SoapHttpTransport;
-import com.zimbra.common.soap.SoapProtocol;
-import com.zimbra.common.soap.SoapTransport;
-import com.zimbra.common.soap.Element.XMLElement;
-import com.zimbra.common.soap.SoapHttpTransport.HttpDebugListener;
-import com.zimbra.common.util.CliUtil;
-import com.zimbra.cs.account.accesscontrol.RightManager;
-import com.zimbra.cs.ldap.unboundid.InMemoryLdapServer;
-import com.zimbra.qa.unittest.TestUtil;
-import com.zimbra.qa.unittest.prov.LocalconfigTestUtil;
-import com.zimbra.qa.unittest.prov.ProvTest;
-import com.zimbra.soap.JaxbUtil;
-import com.zimbra.soap.account.message.AuthRequest;
-import com.zimbra.soap.account.message.AuthResponse;
-import com.zimbra.soap.admin.message.ReloadLocalConfigRequest;
-import com.zimbra.soap.admin.message.ReloadLocalConfigResponse;
+import org.zmail.common.localconfig.KnownKey;
+import org.zmail.common.localconfig.LC;
+import org.zmail.common.service.ServiceException;
+import org.zmail.common.soap.Element;
+import org.zmail.common.soap.SoapHttpTransport;
+import org.zmail.common.soap.SoapProtocol;
+import org.zmail.common.soap.SoapTransport;
+import org.zmail.common.soap.Element.XMLElement;
+import org.zmail.common.soap.SoapHttpTransport.HttpDebugListener;
+import org.zmail.common.util.CliUtil;
+import org.zmail.cs.account.accesscontrol.RightManager;
+import org.zmail.cs.ldap.unboundid.InMemoryLdapServer;
+import org.zmail.qa.unittest.TestUtil;
+import org.zmail.qa.unittest.prov.LocalconfigTestUtil;
+import org.zmail.qa.unittest.prov.ProvTest;
+import org.zmail.soap.JaxbUtil;
+import org.zmail.soap.account.message.AuthRequest;
+import org.zmail.soap.account.message.AuthResponse;
+import org.zmail.soap.admin.message.ReloadLocalConfigRequest;
+import org.zmail.soap.admin.message.ReloadLocalConfigResponse;
 
 public class SoapTest extends ProvTest {
     private static boolean JSON = false;
@@ -67,8 +67,8 @@ public class SoapTest extends ProvTest {
     }
     
     static SoapTransport authUser(String acctName, String password) throws Exception {
-        com.zimbra.soap.type.AccountSelector acct = 
-            new com.zimbra.soap.type.AccountSelector(com.zimbra.soap.type.AccountBy.name, acctName);
+        org.zmail.soap.type.AccountSelector acct = 
+            new org.zmail.soap.type.AccountSelector(org.zmail.soap.type.AccountBy.name, acctName);
         
         SoapHttpTransport transport = new SoapHttpTransport(TestUtil.getSoapUrl());
         transport.setHttpDebugListener(soapDebugListener);
@@ -87,14 +87,14 @@ public class SoapTest extends ProvTest {
         SoapHttpTransport transport = new SoapHttpTransport(TestUtil.getAdminSoapUrl());
         transport.setHttpDebugListener(soapDebugListener);
         
-        com.zimbra.soap.admin.message.AuthRequest req = new com.zimbra.soap.admin.message.AuthRequest(acctName, password);
-        com.zimbra.soap.admin.message.AuthResponse resp = invokeJaxb(transport, req);
+        org.zmail.soap.admin.message.AuthRequest req = new org.zmail.soap.admin.message.AuthRequest(acctName, password);
+        org.zmail.soap.admin.message.AuthResponse resp = invokeJaxb(transport, req);
         transport.setAuthToken(resp.getAuthToken());
         return transport;
     }
     
-    static SoapTransport authZimbraAdmin() throws Exception {
-        return authAdmin(LC.zimbra_ldap_user.value(), LC.zimbra_ldap_password.value());
+    static SoapTransport authZmailAdmin() throws Exception {
+        return authAdmin(LC.zmail_ldap_user.value(), LC.zmail_ldap_password.value());
     }
     
     static void modifyLocalconfigAndReload(SoapTransport transport, KnownKey key, String value) 

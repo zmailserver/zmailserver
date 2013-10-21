@@ -12,16 +12,16 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.extension;
+package org.zmail.cs.extension;
 
-import com.zimbra.cs.extension.ZimbraExtension;
+import org.zmail.cs.extension.ZmailExtension;
 
 /**
  * Simple extension for testing.
  *
  * @author ysasaki
  */
-public class SimpleExtension implements ZimbraExtension {
+public class SimpleExtension implements ZmailExtension {
     private boolean initialized = false;
     private boolean destroyed = false;
 

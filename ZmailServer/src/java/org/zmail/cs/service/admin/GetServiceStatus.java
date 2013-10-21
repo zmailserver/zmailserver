@@ -16,7 +16,7 @@
 /*
  * Created on Jun 17, 2004
  */
-package com.zimbra.cs.service.admin;
+package org.zmail.cs.service.admin;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -30,42 +30,42 @@ import java.util.Map;
 import java.util.TimeZone;
 
 import com.google.common.collect.Sets;
-import com.zimbra.common.account.Key;
-import com.zimbra.common.localconfig.LC;
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.common.soap.Element;
-import com.zimbra.common.soap.SoapFaultException;
-import com.zimbra.common.util.CsvReader;
-import com.zimbra.common.util.ZimbraLog;
-import com.zimbra.cs.account.Provisioning;
-import com.zimbra.cs.account.Server;
-import com.zimbra.cs.account.accesscontrol.AdminRight;
-import com.zimbra.cs.account.accesscontrol.Rights.Admin;
-import com.zimbra.soap.ZimbraSoapContext;
-import com.zimbra.soap.admin.message.GetServiceStatusResponse;
-import com.zimbra.soap.admin.type.ServiceStatus;
-import com.zimbra.soap.admin.type.TimeZoneInfo;
-import com.zimbra.soap.type.ZeroOrOne;
+import org.zmail.common.account.Key;
+import org.zmail.common.localconfig.LC;
+import org.zmail.common.service.ServiceException;
+import org.zmail.common.soap.Element;
+import org.zmail.common.soap.SoapFaultException;
+import org.zmail.common.util.CsvReader;
+import org.zmail.common.util.ZmailLog;
+import org.zmail.cs.account.Provisioning;
+import org.zmail.cs.account.Server;
+import org.zmail.cs.account.accesscontrol.AdminRight;
+import org.zmail.cs.account.accesscontrol.Rights.Admin;
+import org.zmail.soap.ZmailSoapContext;
+import org.zmail.soap.admin.message.GetServiceStatusResponse;
+import org.zmail.soap.admin.type.ServiceStatus;
+import org.zmail.soap.admin.type.TimeZoneInfo;
+import org.zmail.soap.type.ZeroOrOne;
 
 /**
  * @author schemers
  */
 public class GetServiceStatus extends AdminDocumentHandler {
-    private final static String ZMRRDFETCH = LC.zimbra_home.value() + "/libexec/zmrrdfetch";
+    private final static String ZMRRDFETCH = LC.zmail_home.value() + "/libexec/zmrrdfetch";
     private final static String ZMSTATUSLOG_CSV = "zmstatuslog";
 
     public Element handle(Element request, Map<String, Object> context)
     throws SoapFaultException, ServiceException {
-        ZimbraSoapContext zsc = getZimbraSoapContext(context);
+        ZmailSoapContext zsc = getZmailSoapContext(context);
 
         // this command can only execute on the monitor host, so proxy if necessary
         Provisioning prov = Provisioning.getInstance();
-        String monitorHost = prov.getConfig().getAttr(Provisioning.A_zimbraLogHostname);
+        String monitorHost = prov.getConfig().getAttr(Provisioning.A_zmailLogHostname);
         if (monitorHost == null || monitorHost.trim().equals(""))
-            throw ServiceException.FAILURE("zimbraLogHostname is not configured", null);
+            throw ServiceException.FAILURE("zmailLogHostname is not configured", null);
         Server monitorServer = prov.get(Key.ServerBy.name, monitorHost);
         if (monitorServer == null)
-            throw ServiceException.FAILURE("could not find zimbraLogHostname server: " +
+            throw ServiceException.FAILURE("could not find zmailLogHostname server: " +
                     monitorServer, null);
         if (!prov.getLocalServer().getId().equalsIgnoreCase(monitorServer.getId()))
             return proxyRequest(request, context, monitorServer);
@@ -79,7 +79,7 @@ public class GetServiceStatus extends AdminDocumentHandler {
         
         boolean loggerEnabled = false;
         Server local = prov.getLocalServer();
-        String[] services = local.getMultiAttr(Provisioning.A_zimbraServiceEnabled);
+        String[] services = local.getMultiAttr(Provisioning.A_zmailServiceEnabled);
         if (services != null) {
             for (int i = 0; i < services.length && !loggerEnabled; i++) {
                 loggerEnabled = "logger".equals(services[i]);
@@ -89,7 +89,7 @@ public class GetServiceStatus extends AdminDocumentHandler {
             HashSet<ServiceStatus> serviceStatus = Sets.newHashSet();
             List<Server> servers = prov.getAllServers();
             for (Server s : servers) {
-                String[] srvs = s.getMultiAttr(Provisioning.A_zimbraServiceEnabled);
+                String[] srvs = s.getMultiAttr(Provisioning.A_zmailServiceEnabled);
                 for (String service : srvs) {
                     serviceStatus.add(
                             ServiceStatus.fromServerServiceTimeStatus(
@@ -130,7 +130,7 @@ public class GetServiceStatus extends AdminDocumentHandler {
                 }
                 for (ServiceStatus stat : serviceStatus) {
                     if (!checkRights(zsc, stat.getServer())) {
-                        ZimbraLog.misc.info("skipping server " + stat.getServer() +
+                        ZmailLog.misc.info("skipping server " + stat.getServer() +
                                 ", has not right to get service status");
                         continue;
                     }
@@ -148,7 +148,7 @@ public class GetServiceStatus extends AdminDocumentHandler {
         return zsc.jaxbToElement(resp);
     }
 
-    private boolean checkRights(ZimbraSoapContext zsc, String serverName) throws ServiceException {
+    private boolean checkRights(ZmailSoapContext zsc, String serverName) throws ServiceException {
         try {
             Server server = Provisioning.getInstance().get(Key.ServerBy.name, serverName);
             checkRight(zsc, server, Admin.R_getServiceStatus);

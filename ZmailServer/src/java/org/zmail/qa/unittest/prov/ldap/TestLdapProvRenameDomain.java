@@ -12,7 +12,7 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.qa.unittest.prov.ldap;
+package org.zmail.qa.unittest.prov.ldap;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -31,33 +31,33 @@ import org.junit.*;
 import static org.junit.Assert.*;
 
 import com.google.common.collect.Sets;
-import com.zimbra.common.account.Key;
-import com.zimbra.qa.unittest.prov.Names;
-import com.zimbra.qa.unittest.prov.Verify;
-import com.zimbra.soap.admin.type.CacheEntryType;
-import com.zimbra.soap.admin.type.DataSourceType;
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.common.util.ZimbraLog;
-import com.zimbra.cs.account.Account;
-import com.zimbra.cs.account.Alias;
-import com.zimbra.cs.account.DataSource;
-import com.zimbra.cs.account.DistributionList;
-import com.zimbra.cs.account.Domain;
-import com.zimbra.cs.account.DynamicGroup;
-import com.zimbra.cs.account.Group;
-import com.zimbra.cs.account.IDNUtil;
-import com.zimbra.cs.account.Identity;
-import com.zimbra.cs.account.MailTarget;
-import com.zimbra.cs.account.NamedEntry;
-import com.zimbra.cs.account.Provisioning;
-import com.zimbra.cs.account.SearchDirectoryOptions;
-import com.zimbra.cs.account.Server;
-import com.zimbra.cs.account.Signature;
-import com.zimbra.cs.account.XMPPComponent;
-import com.zimbra.cs.account.ldap.LdapProv;
-import com.zimbra.cs.account.ldap.LdapProvisioning;
-import com.zimbra.cs.ldap.LdapUtil;
-import com.zimbra.cs.ldap.ZLdapFilterFactory.FilterId;
+import org.zmail.common.account.Key;
+import org.zmail.qa.unittest.prov.Names;
+import org.zmail.qa.unittest.prov.Verify;
+import org.zmail.soap.admin.type.CacheEntryType;
+import org.zmail.soap.admin.type.DataSourceType;
+import org.zmail.common.service.ServiceException;
+import org.zmail.common.util.ZmailLog;
+import org.zmail.cs.account.Account;
+import org.zmail.cs.account.Alias;
+import org.zmail.cs.account.DataSource;
+import org.zmail.cs.account.DistributionList;
+import org.zmail.cs.account.Domain;
+import org.zmail.cs.account.DynamicGroup;
+import org.zmail.cs.account.Group;
+import org.zmail.cs.account.IDNUtil;
+import org.zmail.cs.account.Identity;
+import org.zmail.cs.account.MailTarget;
+import org.zmail.cs.account.NamedEntry;
+import org.zmail.cs.account.Provisioning;
+import org.zmail.cs.account.SearchDirectoryOptions;
+import org.zmail.cs.account.Server;
+import org.zmail.cs.account.Signature;
+import org.zmail.cs.account.XMPPComponent;
+import org.zmail.cs.account.ldap.LdapProv;
+import org.zmail.cs.account.ldap.LdapProvisioning;
+import org.zmail.cs.ldap.LdapUtil;
+import org.zmail.cs.ldap.ZLdapFilterFactory.FilterId;
 
 public class TestLdapProvRenameDomain extends LdapTest {
     private static LdapProv ldapProv;
@@ -118,12 +118,12 @@ public class TestLdapProvRenameDomain extends LdapTest {
     static {
         sAttrsToVerify = new HashSet<String>();
         
-        sAttrsToVerify.add(Provisioning.A_zimbraMailCanonicalAddress);
-        sAttrsToVerify.add(Provisioning.A_zimbraMailForwardingAddress);
-        sAttrsToVerify.add(Provisioning.A_zimbraMailCatchAllAddress);
-        sAttrsToVerify.add(Provisioning.A_zimbraMailCatchAllCanonicalAddress);
-        sAttrsToVerify.add(Provisioning.A_zimbraMailCatchAllForwardingAddress);
-        sAttrsToVerify.add(Provisioning.A_zimbraPrefAllowAddressForDelegatedSender);
+        sAttrsToVerify.add(Provisioning.A_zmailMailCanonicalAddress);
+        sAttrsToVerify.add(Provisioning.A_zmailMailForwardingAddress);
+        sAttrsToVerify.add(Provisioning.A_zmailMailCatchAllAddress);
+        sAttrsToVerify.add(Provisioning.A_zmailMailCatchAllCanonicalAddress);
+        sAttrsToVerify.add(Provisioning.A_zmailMailCatchAllForwardingAddress);
+        sAttrsToVerify.add(Provisioning.A_zmailPrefAllowAddressForDelegatedSender);
     }
     
     int NUM_OBJS(int objType) throws Exception {
@@ -174,8 +174,8 @@ public class TestLdapProvRenameDomain extends LdapTest {
     
     @BeforeClass
     public static void init() throws Exception {
-        // ZimbraLog.toolSetupLog4j("INFO", "/Users/pshao/p4/main/ZimbraServer/conf/log4j.properties.cli");
-        ZimbraLog.toolSetupLog4j("INFO", "/opt/zimbra/conf/log4j.properties");
+        // ZmailLog.toolSetupLog4j("INFO", "/Users/pshao/p4/main/ZmailServer/conf/log4j.properties.cli");
+        ZmailLog.toolSetupLog4j("INFO", "/opt/zmail/conf/log4j.properties");
         
         TEST_ID = genTestId();
         
@@ -407,7 +407,7 @@ public class TestLdapProvRenameDomain extends LdapTest {
         
         for (int i = 0; i < NUM_SIGNATURES; i++) {
             Map<String, Object> attrs = new HashMap<String, Object>();
-            attrs.put(Provisioning.A_zimbraPrefMailSignature, SIGNATURE_CONTENT(acct, i));
+            attrs.put(Provisioning.A_zmailPrefMailSignature, SIGNATURE_CONTENT(acct, i));
             Signature entry = prov.createSignature(acct, SIGNATURE_NAME(acct, i), attrs);
             sigIds[i] = entry.getId();
         }
@@ -418,14 +418,14 @@ public class TestLdapProvRenameDomain extends LdapTest {
     private void createIdentities(Account acct, String[] sigIds) throws Exception {
         for (int i = 0; i < NUM_IDENTITIES; i++) {
             Map<String, Object> attrs = new HashMap<String, Object>();
-            attrs.put(Provisioning.A_zimbraPrefDefaultSignatureId, LdapUtil.generateUUID());  // just some random id, not used anywhere
-            attrs.put(Provisioning.A_zimbraPrefFromAddress, "micky.mouse@zimbra,com");
-            attrs.put(Provisioning.A_zimbraPrefFromDisplay, "Micky Mouse");
-            attrs.put(Provisioning.A_zimbraPrefReplyToEnabled, "TRUE");
-            attrs.put(Provisioning.A_zimbraPrefReplyToAddress, "goofy@yahoo.com");
-            attrs.put(Provisioning.A_zimbraPrefReplyToDisplay, "Micky");
+            attrs.put(Provisioning.A_zmailPrefDefaultSignatureId, LdapUtil.generateUUID());  // just some random id, not used anywhere
+            attrs.put(Provisioning.A_zmailPrefFromAddress, "micky.mouse@zmail,com");
+            attrs.put(Provisioning.A_zmailPrefFromDisplay, "Micky Mouse");
+            attrs.put(Provisioning.A_zmailPrefReplyToEnabled, "TRUE");
+            attrs.put(Provisioning.A_zmailPrefReplyToAddress, "goofy@yahoo.com");
+            attrs.put(Provisioning.A_zmailPrefReplyToDisplay, "Micky");
             if (i < NUM_SIGNATURES)
-                attrs.put(Provisioning.A_zimbraPrefDefaultSignatureId, sigIds[i]);
+                attrs.put(Provisioning.A_zmailPrefDefaultSignatureId, sigIds[i]);
             Identity entry = prov.createIdentity(acct, IDENTITY_NAME(acct, i), attrs);
         }
     }
@@ -433,21 +433,21 @@ public class TestLdapProvRenameDomain extends LdapTest {
     private void createDataSources(Account acct, String[] sigIds) throws Exception {
         for (int i = 0; i < NUM_DATASOURCES; i++) {
             Map<String, Object> attrs = new HashMap<String, Object>();
-            attrs.put(Provisioning.A_zimbraDataSourceEnabled, "TRUE");
-            attrs.put(Provisioning.A_zimbraDataSourceConnectionType, "ssl");
-            attrs.put(Provisioning.A_zimbraDataSourceFolderId, "inbox");
-            attrs.put(Provisioning.A_zimbraDataSourceHost, "pop.google.com");
-            attrs.put(Provisioning.A_zimbraDataSourceLeaveOnServer, "TRUE");
-            attrs.put(Provisioning.A_zimbraDataSourcePassword, PASSWORD);
-            attrs.put(Provisioning.A_zimbraDataSourcePort, "9999");
-            attrs.put(Provisioning.A_zimbraDataSourceUsername, "mickymouse");
-            attrs.put(Provisioning.A_zimbraDataSourceEmailAddress, "micky@google.com");
-            attrs.put(Provisioning.A_zimbraPrefDefaultSignatureId, LdapUtil.generateUUID()); // just some random id, not used anywhere
-            attrs.put(Provisioning.A_zimbraPrefFromDisplay, "Micky Mouse");
-            attrs.put(Provisioning.A_zimbraPrefReplyToAddress, "goofy@yahoo.com");
-            attrs.put(Provisioning.A_zimbraPrefReplyToDisplay, "Micky");
+            attrs.put(Provisioning.A_zmailDataSourceEnabled, "TRUE");
+            attrs.put(Provisioning.A_zmailDataSourceConnectionType, "ssl");
+            attrs.put(Provisioning.A_zmailDataSourceFolderId, "inbox");
+            attrs.put(Provisioning.A_zmailDataSourceHost, "pop.google.com");
+            attrs.put(Provisioning.A_zmailDataSourceLeaveOnServer, "TRUE");
+            attrs.put(Provisioning.A_zmailDataSourcePassword, PASSWORD);
+            attrs.put(Provisioning.A_zmailDataSourcePort, "9999");
+            attrs.put(Provisioning.A_zmailDataSourceUsername, "mickymouse");
+            attrs.put(Provisioning.A_zmailDataSourceEmailAddress, "micky@google.com");
+            attrs.put(Provisioning.A_zmailPrefDefaultSignatureId, LdapUtil.generateUUID()); // just some random id, not used anywhere
+            attrs.put(Provisioning.A_zmailPrefFromDisplay, "Micky Mouse");
+            attrs.put(Provisioning.A_zmailPrefReplyToAddress, "goofy@yahoo.com");
+            attrs.put(Provisioning.A_zmailPrefReplyToDisplay, "Micky");
             if (i < NUM_SIGNATURES)
-                attrs.put(Provisioning.A_zimbraPrefDefaultSignatureId, sigIds[i]);
+                attrs.put(Provisioning.A_zmailPrefDefaultSignatureId, sigIds[i]);
             DataSource entry = prov.createDataSource(acct, DataSourceType.pop3, DATASOURCE_NAME(acct, i), attrs);
         }
     }
@@ -461,11 +461,11 @@ public class TestLdapProvRenameDomain extends LdapTest {
          */
         String domainName = domainIDNName.uName();
         
-        if (Provisioning.A_zimbraMailCatchAllAddress.equals(attrName) ||
-            Provisioning.A_zimbraMailCatchAllCanonicalAddress.equals(attrName) ||
-            Provisioning.A_zimbraMailCatchAllForwardingAddress.equals(attrName)) {
+        if (Provisioning.A_zmailMailCatchAllAddress.equals(attrName) ||
+            Provisioning.A_zmailMailCatchAllCanonicalAddress.equals(attrName) ||
+            Provisioning.A_zmailMailCatchAllForwardingAddress.equals(attrName)) {
             return "@" + domainName;
-        } else if (Provisioning.A_zimbraPrefAllowAddressForDelegatedSender.equals(attrName)) {
+        } else if (Provisioning.A_zmailPrefAllowAddressForDelegatedSender.equals(attrName)) {
             return entryName;
         } else {
             return attrName + "@" + domainName;
@@ -476,13 +476,13 @@ public class TestLdapProvRenameDomain extends LdapTest {
         Map<String, Object> acctAttrs = new HashMap<String, Object>();
         
         /*
-        acctAttrs.put(Provisioning.A_zimbraMailCanonicalAddress, "canonical-address" + "@" + domainName.uName());
-        // acctAttrs.put(Provisioning.A_zimbraMailDeliveryAddress, "delivery-address" + "@" + domainName.uName());
-        acctAttrs.put(Provisioning.A_zimbraMailForwardingAddress, "forwarding-address" + "@" + domainName.uName());
+        acctAttrs.put(Provisioning.A_zmailMailCanonicalAddress, "canonical-address" + "@" + domainName.uName());
+        // acctAttrs.put(Provisioning.A_zmailMailDeliveryAddress, "delivery-address" + "@" + domainName.uName());
+        acctAttrs.put(Provisioning.A_zmailMailForwardingAddress, "forwarding-address" + "@" + domainName.uName());
         
-        acctAttrs.put(Provisioning.A_zimbraMailCatchAllAddress, "" + "@" + domainName.uName());
-        acctAttrs.put(Provisioning.A_zimbraMailCatchAllCanonicalAddress, "" + "@" + domainName.uName());
-        acctAttrs.put(Provisioning.A_zimbraMailCatchAllForwardingAddress, "" + "@" + domainName.uName());
+        acctAttrs.put(Provisioning.A_zmailMailCatchAllAddress, "" + "@" + domainName.uName());
+        acctAttrs.put(Provisioning.A_zmailMailCatchAllCanonicalAddress, "" + "@" + domainName.uName());
+        acctAttrs.put(Provisioning.A_zmailMailCatchAllForwardingAddress, "" + "@" + domainName.uName());
         */
         
         for (String attr : sAttrsToVerify) {
@@ -499,9 +499,9 @@ public class TestLdapProvRenameDomain extends LdapTest {
         String routableName = XMPPCOMPONENT_NAME(xmppIndex, domain.getName());
         
         Map<String, Object> xmppAttrs = new HashMap<String, Object>();
-        xmppAttrs.put(Provisioning.A_zimbraXMPPComponentClassName, "myclass");
-        xmppAttrs.put(Provisioning.A_zimbraXMPPComponentCategory, "mycategory");
-        xmppAttrs.put(Provisioning.A_zimbraXMPPComponentType, "mytype");
+        xmppAttrs.put(Provisioning.A_zmailXMPPComponentClassName, "myclass");
+        xmppAttrs.put(Provisioning.A_zmailXMPPComponentCategory, "mycategory");
+        xmppAttrs.put(Provisioning.A_zmailXMPPComponentType, "mytype");
         
         XMPPComponent xmpp = prov.createXMPPComponent(routableName, domain, server, xmppAttrs);
         return xmpp;
@@ -733,9 +733,9 @@ public class TestLdapProvRenameDomain extends LdapTest {
         Domain domain = prov.get(Key.DomainBy.name, domainName);
         assertTrue(domain != null);
         
-        String domainStatus = domain.getAttr(Provisioning.A_zimbraDomainStatus);
+        String domainStatus = domain.getAttr(Provisioning.A_zmailDomainStatus);
         assertEquals("active", domainStatus);
-        String mailStatus = domain.getAttr(Provisioning.A_zimbraMailStatus);
+        String mailStatus = domain.getAttr(Provisioning.A_zmailMailStatus);
         assertEquals("enabled", mailStatus);
     }
     
@@ -771,13 +771,13 @@ public class TestLdapProvRenameDomain extends LdapTest {
         
         oldAttrs.remove(Provisioning.A_dc);
         oldAttrs.remove(Provisioning.A_o);
-        oldAttrs.remove(Provisioning.A_zimbraDomainName);
-        oldAttrs.remove(Provisioning.A_zimbraCreateTimestamp);
+        oldAttrs.remove(Provisioning.A_zmailDomainName);
+        oldAttrs.remove(Provisioning.A_zmailCreateTimestamp);
 
         newAttrs.remove(Provisioning.A_dc);
         newAttrs.remove(Provisioning.A_o);
-        newAttrs.remove(Provisioning.A_zimbraDomainName);
-        newAttrs.remove(Provisioning.A_zimbraCreateTimestamp);
+        newAttrs.remove(Provisioning.A_zmailDomainName);
+        newAttrs.remove(Provisioning.A_zmailCreateTimestamp);
         
         for (Map.Entry<String, Object> oldAttr : oldAttrs.entrySet()) {
             String oldKey = oldAttr.getKey();
@@ -1096,7 +1096,7 @@ public class TestLdapProvRenameDomain extends LdapTest {
         assertNotNull(xmpp);
         
         String domainId = newDomain.getId();
-        String xmppDomainId = xmpp.getAttr(Provisioning.A_zimbraDomainId);
+        String xmppDomainId = xmpp.getAttr(Provisioning.A_zmailDomainId);
         assertEquals(domainId, xmppDomainId);
     }
     

@@ -12,7 +12,7 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.service;
+package org.zmail.cs.service;
 
 import java.net.URL;
 import java.util.HashMap;
@@ -22,14 +22,14 @@ import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
-import com.zimbra.common.localconfig.LC;
-import com.zimbra.common.mime.HeaderUtils.ByteBuilder;
-import com.zimbra.common.util.ByteUtil;
-import com.zimbra.common.util.CharsetUtil;
-import com.zimbra.cs.account.Account;
-import com.zimbra.cs.account.MockProvisioning;
-import com.zimbra.cs.account.Provisioning;
-import com.zimbra.cs.service.FileUploadServlet.Upload;
+import org.zmail.common.localconfig.LC;
+import org.zmail.common.mime.HeaderUtils.ByteBuilder;
+import org.zmail.common.util.ByteUtil;
+import org.zmail.common.util.CharsetUtil;
+import org.zmail.cs.account.Account;
+import org.zmail.cs.account.MockProvisioning;
+import org.zmail.cs.account.Provisioning;
+import org.zmail.cs.service.FileUploadServlet.Upload;
 
 public class FileUploadServletTest {
     private static FileUploadServlet servlet;
@@ -40,12 +40,12 @@ public class FileUploadServletTest {
     public static void init() throws Exception {
         MockProvisioning prov = new MockProvisioning();
         HashMap<String,Object> attrs = new HashMap<String,Object>();
-        attrs.put(Provisioning.A_zimbraId, accountId);
-        attrs.put(Provisioning.A_zimbraMailHost, "localhost");
-        testAccount = prov.createAccount("test@zimbra.com", "secret", attrs);
+        attrs.put(Provisioning.A_zmailId, accountId);
+        attrs.put(Provisioning.A_zmailMailHost, "localhost");
+        testAccount = prov.createAccount("test@zmail.com", "secret", attrs);
         Provisioning.setInstance(prov);
 
-        LC.zimbra_tmp_directory.setDefault("build/test");
+        LC.zmail_tmp_directory.setDefault("build/test");
 
         servlet = new FileUploadServlet();
     }

@@ -12,7 +12,7 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.util;
+package org.zmail.cs.util;
 
 import java.io.IOException;
 import java.util.HashMap;
@@ -24,20 +24,20 @@ import org.apache.commons.cli.GnuParser;
 import org.apache.commons.cli.Options;
 import org.apache.commons.cli.ParseException;
 
-import com.zimbra.common.auth.ZAuthToken;
-import com.zimbra.common.localconfig.LC;
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.common.soap.AccountConstants;
-import com.zimbra.common.soap.AdminConstants;
-import com.zimbra.common.soap.Element;
-import com.zimbra.common.soap.SoapHttpTransport;
-import com.zimbra.common.soap.Element.XMLElement;
-import com.zimbra.common.util.CliUtil;
-import com.zimbra.cs.account.Account;
-import com.zimbra.cs.account.AccountServiceException;
-import com.zimbra.cs.account.Provisioning;
-import com.zimbra.common.account.Key.AccountBy;
-import com.zimbra.cs.httpclient.URLUtil;
+import org.zmail.common.auth.ZAuthToken;
+import org.zmail.common.localconfig.LC;
+import org.zmail.common.service.ServiceException;
+import org.zmail.common.soap.AccountConstants;
+import org.zmail.common.soap.AdminConstants;
+import org.zmail.common.soap.Element;
+import org.zmail.common.soap.SoapHttpTransport;
+import org.zmail.common.soap.Element.XMLElement;
+import org.zmail.common.util.CliUtil;
+import org.zmail.cs.account.Account;
+import org.zmail.cs.account.AccountServiceException;
+import org.zmail.cs.account.Provisioning;
+import org.zmail.common.account.Key.AccountBy;
+import org.zmail.cs.httpclient.URLUtil;
 
 public class GalSyncAccountUtil {
 	private static final int CREATE_ACCOUNT = 10;
@@ -58,8 +58,8 @@ public class GalSyncAccountUtil {
 
 	private static void usage() {
 		System.out.println("zmgsautil: {command}");
-		System.out.println("\tcreateAccount -a {account-name} -n {datasource-name} --domain {domain-name} -t zimbra|ldap -s {server} [-f {folder-name}] [-p {polling-interval}]");
-		System.out.println("\taddDataSource -a {account-name} -n {datasource-name} --domain {domain-name} -t zimbra|ldap [-f {folder-name}] [-p {polling-interval}]");
+		System.out.println("\tcreateAccount -a {account-name} -n {datasource-name} --domain {domain-name} -t zmail|ldap -s {server} [-f {folder-name}] [-p {polling-interval}]");
+		System.out.println("\taddDataSource -a {account-name} -n {datasource-name} --domain {domain-name} -t zmail|ldap [-f {folder-name}] [-p {polling-interval}]");
 		System.out.println("\tdeleteAccount [-a {account-name} | -i {account-id}]");
 		System.out.println("\ttrickleSync [-a {account-name} | -i {account-id}] [-d {datasource-id}] [-n {datasource-name}]");
 		System.out.println("\tfullSync [-a {account-name} | -i {account-id}] [-d {datasource-id}] [-n {datasource-name}]");
@@ -96,10 +96,10 @@ public class GalSyncAccountUtil {
 	private SoapHttpTransport mTransport;
 
 	private GalSyncAccountUtil() {
-        String server = LC.zimbra_zmprov_default_soap_server.value();
+        String server = LC.zmail_zmprov_default_soap_server.value();
         mAdminURL = URLUtil.getAdminURL(server);
-        mUsername = LC.zimbra_ldap_user.value();
-        mPassword = LC.zimbra_ldap_password.value();
+        mUsername = LC.zmail_ldap_user.value();
+        mPassword = LC.zmail_ldap_password.value();
 	}
 
 	private void checkArgs() throws ServiceException {
@@ -164,7 +164,7 @@ public class GalSyncAccountUtil {
     		acct.addAttribute(AdminConstants.A_BY, AccountBy.name.name());
     		acct.setText(accountName);
     		if (pollingInterval != null)
-    			req.addElement(AdminConstants.E_A).addAttribute(AdminConstants.A_N, Provisioning.A_zimbraDataSourcePollingInterval).setText(pollingInterval);
+    			req.addElement(AdminConstants.E_A).addAttribute(AdminConstants.A_N, Provisioning.A_zmailDataSourcePollingInterval).setText(pollingInterval);
 
     		return mTransport.invokeWithoutSession(req);
         } finally {
@@ -188,7 +188,7 @@ public class GalSyncAccountUtil {
 	        acct.addAttribute(AdminConstants.A_BY, AccountBy.name.name());
 	        acct.setText(accountName);
 	        if (pollingInterval != null)
-	            req.addElement(AdminConstants.E_A).addAttribute(AdminConstants.A_N, Provisioning.A_zimbraDataSourcePollingInterval).setText(pollingInterval);
+	            req.addElement(AdminConstants.E_A).addAttribute(AdminConstants.A_N, Provisioning.A_zmailDataSourcePollingInterval).setText(pollingInterval);
 
 	        return mTransport.invokeWithoutSession(req);
 	    } finally {
@@ -307,7 +307,7 @@ public class GalSyncAccountUtil {
 				String folderName = cl.getOptionValue('f');
 				String pollingInterval = cl.getOptionValue('p');
 				String mailHost = cl.getOptionValue('s');
-				if (acctName == null || mailHost == null || dsName == null || type == null || type.compareTo("zimbra") != 0 && type.compareTo("ldap") != 0)
+				if (acctName == null || mailHost == null || dsName == null || type == null || type.compareTo("zmail") != 0 && type.compareTo("ldap") != 0)
 					usage();
 				for (Element account : cli.createGalSyncAccount(acctName, dsName, domain, type, folderName, pollingInterval, mailHost).listElements(AdminConstants.A_ACCOUNT))
 					System.out.println(account.getAttribute(AdminConstants.A_NAME)+"\t"+account.getAttribute(AdminConstants.A_ID));
@@ -319,7 +319,7 @@ public class GalSyncAccountUtil {
 	            type = cl.getOptionValue('t');
 	            folderName = cl.getOptionValue('f');
 	            pollingInterval = cl.getOptionValue('p');
-	            if (acctName == null || dsName == null || type == null || type.compareTo("zimbra") != 0 && type.compareTo("ldap") != 0)
+	            if (acctName == null || dsName == null || type == null || type.compareTo("zmail") != 0 && type.compareTo("ldap") != 0)
 	                usage();
 	            for (Element account : cli.addGalSyncDataSource(acctName, dsName, domain, type, folderName, pollingInterval).listElements(AdminConstants.A_ACCOUNT))
 	                System.out.println(account.getAttribute(AdminConstants.A_NAME)+"\t"+account.getAttribute(AdminConstants.A_ID));

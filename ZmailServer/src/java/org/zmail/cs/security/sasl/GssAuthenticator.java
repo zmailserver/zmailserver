@@ -13,16 +13,16 @@
  * ***** END LICENSE BLOCK *****
  */
 
-package com.zimbra.cs.security.sasl;
+package org.zmail.cs.security.sasl;
 
-import com.zimbra.cs.account.Account;
-import com.zimbra.cs.account.Provisioning;
-import com.zimbra.cs.account.auth.AuthContext;
-import com.zimbra.cs.security.kerberos.Krb5Keytab;
-import com.zimbra.common.account.Key;
-import com.zimbra.common.localconfig.LC;
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.common.util.ZimbraLog;
+import org.zmail.cs.account.Account;
+import org.zmail.cs.account.Provisioning;
+import org.zmail.cs.account.auth.AuthContext;
+import org.zmail.cs.security.kerberos.Krb5Keytab;
+import org.zmail.common.account.Key;
+import org.zmail.common.localconfig.LC;
+import org.zmail.common.service.ServiceException;
+import org.zmail.common.util.ZmailLog;
 
 import javax.security.sasl.SaslServer;
 import javax.security.sasl.Sasl;
@@ -56,7 +56,7 @@ public class GssAuthenticator extends Authenticator {
     private static final int MAX_RECEIVE_SIZE = 4096;
     private static final int MAX_SEND_SIZE = 4096;
 
-    public static final String KRB5_DEBUG_ENABLED_PROP = "ZimbraKrb5DebugEnabled";
+    public static final String KRB5_DEBUG_ENABLED_PROP = "ZmailKrb5DebugEnabled";
 
     private static final boolean DEBUG =
         LC.krb5_debug_enabled.booleanValue() || Boolean.getBoolean(KRB5_DEBUG_ENABLED_PROP);
@@ -64,7 +64,7 @@ public class GssAuthenticator extends Authenticator {
     public static final String MECHANISM = "GSSAPI";
 
     // TODO Remove this debugging option for final release
-    private static final Boolean GSS_ENABLED = Boolean.getBoolean("ZimbraGssEnabled");
+    private static final Boolean GSS_ENABLED = Boolean.getBoolean("ZmailGssEnabled");
 
     // SASL properties to enable encryption
     private static final Map<String, String> ENCRYPTION_PROPS = new HashMap<String, String>();
@@ -92,9 +92,9 @@ public class GssAuthenticator extends Authenticator {
         // check whether this server requires encryption for GSSAPI
         try {
             return mAuthUser.isSSLEnabled() ||
-                   !Provisioning.getInstance().getLocalServer().getBooleanAttr(Provisioning.A_zimbraSaslGssapiRequiresTls, false);
+                   !Provisioning.getInstance().getLocalServer().getBooleanAttr(Provisioning.A_zmailSaslGssapiRequiresTls, false);
         } catch (ServiceException e) {
-            ZimbraLog.security.warn("could not determine whether TLS encryption is required for GSSAPI auth; defaulting to FALSE", e);
+            ZmailLog.security.warn("could not determine whether TLS encryption is required for GSSAPI auth; defaulting to FALSE", e);
             return false;
         }
     }
@@ -112,10 +112,10 @@ public class GssAuthenticator extends Authenticator {
         if (LC.krb5_service_principal_from_interface_address.booleanValue()) {
             String localSocketHostname = localAddress.getCanonicalHostName().toLowerCase();
             if (localSocketHostname.length() == 0 || Character.isDigit(localSocketHostname.charAt(0)))
-                localSocketHostname = LC.zimbra_server_hostname.value();
+                localSocketHostname = LC.zmail_server_hostname.value();
             host = localSocketHostname;
         } else {
-            host = LC.zimbra_server_hostname.value();
+            host = LC.zmail_server_hostname.value();
         }
 
         KerberosPrincipal kp = new KerberosPrincipal(getProtocol() + '/' + host);
@@ -219,7 +219,7 @@ public class GssAuthenticator extends Authenticator {
         Provisioning prov = Provisioning.getInstance();
         Account authAccount = prov.get(Key.AccountBy.krb5Principal, principal);
         if (authAccount == null) {
-            ZimbraLog.account.warn("authentication failed (no account associated with Kerberos principal " + principal + ')');
+            ZmailLog.account.warn("authentication failed (no account associated with Kerberos principal " + principal + ')');
             return null;
         }
 

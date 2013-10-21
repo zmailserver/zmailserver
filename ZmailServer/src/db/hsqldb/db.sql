@@ -15,9 +15,9 @@
 
 -- HSQLDB is for unit test. The scheme should be logically identical with MySQL except no index is needed for unit test.
 
-CREATE SCHEMA zimbra;
-SET SCHEMA zimbra;
-SET INITIAL SCHEMA zimbra;
+CREATE SCHEMA zmail;
+SET SCHEMA zmail;
+SET INITIAL SCHEMA zmail;
 
 CREATE TABLE volume (
    id                     IDENTITY,

@@ -13,7 +13,7 @@
  * ***** END LICENSE BLOCK *****
  */
 
-package com.zimbra.cs.mime;
+package org.zmail.cs.mime;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;
@@ -50,41 +50,41 @@ import com.google.common.annotations.VisibleForTesting;
 import com.google.common.base.Strings;
 import com.google.common.collect.ImmutableSet;
 import com.google.common.collect.Sets;
-import com.zimbra.common.calendar.ZCalendar.ICalTok;
-import com.zimbra.common.calendar.ZCalendar.ZCalendarBuilder;
-import com.zimbra.common.calendar.ZCalendar.ZVCalendar;
-import com.zimbra.common.localconfig.DebugConfig;
-import com.zimbra.common.localconfig.LC;
-import com.zimbra.common.mime.ContentType;
-import com.zimbra.common.mime.MimeConstants;
-import com.zimbra.common.mime.shim.JavaMailInternetAddress;
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.common.util.ByteUtil;
-import com.zimbra.common.util.EmailUtil;
-import com.zimbra.common.util.FileUtil;
-import com.zimbra.common.util.L10nUtil;
-import com.zimbra.common.util.Log;
-import com.zimbra.common.util.LogFactory;
-import com.zimbra.common.util.Pair;
-import com.zimbra.common.util.StringUtil;
-import com.zimbra.common.util.ZimbraLog;
-import com.zimbra.common.zmime.ZMimeMessage;
-import com.zimbra.cs.convert.ConversionException;
-import com.zimbra.cs.db.DbMailItem;
-import com.zimbra.cs.index.Fragment;
-import com.zimbra.cs.index.IndexDocument;
-import com.zimbra.cs.index.LuceneFields;
-import com.zimbra.cs.index.ZimbraAnalyzer;
-import com.zimbra.cs.index.analysis.FieldTokenStream;
-import com.zimbra.cs.index.analysis.MimeTypeTokenStream;
-import com.zimbra.cs.index.analysis.RFC822AddressTokenStream;
-import com.zimbra.cs.mailbox.Flag;
-import com.zimbra.cs.mailbox.Mailbox;
-import com.zimbra.cs.mailbox.Threader;
-import com.zimbra.cs.object.ObjectHandlerException;
-import com.zimbra.cs.store.Blob;
-import com.zimbra.cs.store.BlobInputStream;
-import com.zimbra.cs.util.JMSession;
+import org.zmail.common.calendar.ZCalendar.ICalTok;
+import org.zmail.common.calendar.ZCalendar.ZCalendarBuilder;
+import org.zmail.common.calendar.ZCalendar.ZVCalendar;
+import org.zmail.common.localconfig.DebugConfig;
+import org.zmail.common.localconfig.LC;
+import org.zmail.common.mime.ContentType;
+import org.zmail.common.mime.MimeConstants;
+import org.zmail.common.mime.shim.JavaMailInternetAddress;
+import org.zmail.common.service.ServiceException;
+import org.zmail.common.util.ByteUtil;
+import org.zmail.common.util.EmailUtil;
+import org.zmail.common.util.FileUtil;
+import org.zmail.common.util.L10nUtil;
+import org.zmail.common.util.Log;
+import org.zmail.common.util.LogFactory;
+import org.zmail.common.util.Pair;
+import org.zmail.common.util.StringUtil;
+import org.zmail.common.util.ZmailLog;
+import org.zmail.common.zmime.ZMimeMessage;
+import org.zmail.cs.convert.ConversionException;
+import org.zmail.cs.db.DbMailItem;
+import org.zmail.cs.index.Fragment;
+import org.zmail.cs.index.IndexDocument;
+import org.zmail.cs.index.LuceneFields;
+import org.zmail.cs.index.ZmailAnalyzer;
+import org.zmail.cs.index.analysis.FieldTokenStream;
+import org.zmail.cs.index.analysis.MimeTypeTokenStream;
+import org.zmail.cs.index.analysis.RFC822AddressTokenStream;
+import org.zmail.cs.mailbox.Flag;
+import org.zmail.cs.mailbox.Mailbox;
+import org.zmail.cs.mailbox.Threader;
+import org.zmail.cs.object.ObjectHandlerException;
+import org.zmail.cs.store.Blob;
+import org.zmail.cs.store.BlobInputStream;
+import org.zmail.cs.util.JMSession;
 
 /**
  * Instantiates a JavaMail {@link MimeMessage} from a <tt>byte[]</tt> or
@@ -144,7 +144,7 @@ public final class ParsedMessage {
     private final Map<Mailbox, Threader> threaders = new HashMap<Mailbox, Threader>();
 
     public ParsedMessage(MimeMessage msg, boolean indexAttachments) throws ServiceException {
-        this(msg, getZimbraDateHeader(msg), indexAttachments);
+        this(msg, getZmailDateHeader(msg), indexAttachments);
     }
 
     public ParsedMessage(MimeMessage msg, long receivedDate, boolean indexAttachments) throws ServiceException {
@@ -287,7 +287,7 @@ public final class ParsedMessage {
 
         // must set received-date before Lucene document is initialized
         if (receivedDate == null) {
-            receivedDate = getZimbraDateHeader(mimeMessage);
+            receivedDate = getZmailDateHeader(mimeMessage);
         }
         setReceivedDate(receivedDate);
     }
@@ -326,7 +326,7 @@ public final class ParsedMessage {
             hasAttachments = Mime.hasAttachment(messageParts);
             hasTextCalendarPart = Mime.hasTextCalenndar(messageParts);
         } catch (Exception e) {
-            ZimbraLog.index.warn("exception while parsing message; message will not be indexed", e);
+            ZmailLog.index.warn("exception while parsing message; message will not be indexed", e);
             messageParts = new ArrayList<MPartInfo>();
         }
         return this;
@@ -351,7 +351,7 @@ public final class ParsedMessage {
             } catch (MessagingException e) {
                 throw e;
             } catch (Exception e) {
-                ZimbraLog.misc.warn("exception ignored running mutator; skipping", e);
+                ZmailLog.misc.warn("exception ignored running mutator; skipping", e);
             }
         }
     }
@@ -694,11 +694,11 @@ public final class ParsedMessage {
      */
     public List<ParsedAddress> getParsedRecipients() {
         if (parsedRecipients == null) {
-            List<com.zimbra.common.mime.InternetAddress> addrs = com.zimbra.common.mime.InternetAddress.parseHeader(
+            List<org.zmail.common.mime.InternetAddress> addrs = org.zmail.common.mime.InternetAddress.parseHeader(
                     getRecipients());
             if (addrs != null) {
                 parsedRecipients = new ArrayList<ParsedAddress>(addrs.size());
-                for (com.zimbra.common.mime.InternetAddress addr : addrs) {
+                for (org.zmail.common.mime.InternetAddress addr : addrs) {
                     parsedRecipients.add(new ParsedAddress(addr).parse());
                 }
             } else {
@@ -864,26 +864,26 @@ public final class ParsedMessage {
         return receivedDate;
     }
 
-    private static long getZimbraDateHeader(MimeMessage mm) {
-        String zimbraHeader = null;
+    private static long getZmailDateHeader(MimeMessage mm) {
+        String zmailHeader = null;
         try {
-            zimbraHeader = mm.getHeader("X-Zimbra-Received", null);
-            if (zimbraHeader == null || zimbraHeader.trim().isEmpty()) {
+            zmailHeader = mm.getHeader("X-Zmail-Received", null);
+            if (zmailHeader == null || zmailHeader.trim().isEmpty()) {
                 return -1;
             }
         } catch (MessagingException mex) {
             return -1;
         }
 
-        Date zimbraDate = null;
+        Date zmailDate = null;
         synchronized (FORMAT) {
             try {
-                zimbraDate = FORMAT.parse(zimbraHeader);
+                zmailDate = FORMAT.parse(zmailHeader);
             } catch (ParseException e) {
                 return -1;
             }
         }
-        return (zimbraDate == null ? -1 : zimbraDate.getTime());
+        return (zmailDate == null ? -1 : zmailDate.getTime());
     }
 
     public List<IndexDocument> getLuceneDocuments() {
@@ -996,7 +996,7 @@ public final class ParsedMessage {
 
         // bug 33461: add filenames to our CONTENT field
         for (String fn : filenames) {
-            appendToContent(contentPrepend, ZimbraAnalyzer.getAllTokensConcatenated(LuceneFields.L_FILENAME, fn));
+            appendToContent(contentPrepend, ZmailAnalyzer.getAllTokensConcatenated(LuceneFields.L_FILENAME, fn));
             appendToContent(contentPrepend, fn); // also add the non-tokenized form, so full-filename searches match
         }
 
@@ -1006,7 +1006,7 @@ public final class ParsedMessage {
         try {
             MimeHandler.getObjects(text, doc);
         } catch (ObjectHandlerException e) {
-            ZimbraLog.index.warn("Unable to recognize searchable objects in message: msgid=%s,subject=%s",
+            ZmailLog.index.warn("Unable to recognize searchable objects in message: msgid=%s,subject=%s",
                     getMessageID(), getSubject(), e);
         }
 
@@ -1145,7 +1145,7 @@ public final class ParsedMessage {
             // make sure we've got the text/calendar handler installed
             if (!ignoreCalendar && calendarPartInfo == null && ctype.equals(MimeConstants.CT_TEXT_CALENDAR)) {
                 if (handler.isIndexingEnabled()) {
-                    ZimbraLog.index.warn("TextCalendarHandler not correctly installed");
+                    ZmailLog.index.warn("TextCalendarHandler not correctly installed");
                 }
                 InputStream is = null;
                 try {
@@ -1159,7 +1159,7 @@ public final class ParsedMessage {
                         setCalendarPartInfo(mpi, cal);
                     }
                 } catch (IOException ioe) {
-                    ZimbraLog.index.warn("error reading text/calendar mime part", ioe);
+                    ZmailLog.index.warn("error reading text/calendar mime part", ioe);
                 } finally {
                     ByteUtil.closeStream(is);
                 }

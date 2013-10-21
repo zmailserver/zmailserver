@@ -14,7 +14,7 @@
  * 
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.qa.unittest.prov.ldap;
+package org.zmail.qa.unittest.prov.ldap;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -27,24 +27,24 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 
 import com.google.common.collect.Lists;
-import com.zimbra.common.account.Key;
-import com.zimbra.common.account.Key.DistributionListBy;
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.cs.account.Account;
-import com.zimbra.cs.account.DistributionList;
-import com.zimbra.cs.account.Domain;
-import com.zimbra.cs.account.accesscontrol.CollectAllEffectiveRights;
-import com.zimbra.cs.account.accesscontrol.GranteeType;
-import com.zimbra.cs.account.accesscontrol.Right;
-import com.zimbra.cs.account.accesscontrol.RightCommand;
-import com.zimbra.cs.account.accesscontrol.RightModifier;
-import com.zimbra.cs.account.accesscontrol.TargetType;
-import com.zimbra.cs.account.accesscontrol.CollectAllEffectiveRights.AllGroupMembers;
-import com.zimbra.cs.account.accesscontrol.CollectAllEffectiveRights.GroupShape;
-import com.zimbra.cs.account.accesscontrol.Rights.Admin;
-import com.zimbra.cs.account.ldap.LdapProv;
-import com.zimbra.qa.unittest.prov.Verify;
-import com.zimbra.soap.type.TargetBy;
+import org.zmail.common.account.Key;
+import org.zmail.common.account.Key.DistributionListBy;
+import org.zmail.common.service.ServiceException;
+import org.zmail.cs.account.Account;
+import org.zmail.cs.account.DistributionList;
+import org.zmail.cs.account.Domain;
+import org.zmail.cs.account.accesscontrol.CollectAllEffectiveRights;
+import org.zmail.cs.account.accesscontrol.GranteeType;
+import org.zmail.cs.account.accesscontrol.Right;
+import org.zmail.cs.account.accesscontrol.RightCommand;
+import org.zmail.cs.account.accesscontrol.RightModifier;
+import org.zmail.cs.account.accesscontrol.TargetType;
+import org.zmail.cs.account.accesscontrol.CollectAllEffectiveRights.AllGroupMembers;
+import org.zmail.cs.account.accesscontrol.CollectAllEffectiveRights.GroupShape;
+import org.zmail.cs.account.accesscontrol.Rights.Admin;
+import org.zmail.cs.account.ldap.LdapProv;
+import org.zmail.qa.unittest.prov.Verify;
+import org.zmail.soap.type.TargetBy;
 
 public class TestACLAllEffRights extends LdapTest {
     private static LdapProvTestUtil provUtil;
@@ -333,8 +333,8 @@ public class TestACLAllEffRights extends LdapTest {
     zmprov cdl subdl@test.com
     zmprov cdl subsubdl@test.com
     
-    zmprov ca da1@test.com test123 zimbraIsDelegatedAdminAccount TRUE
-    zmprov ca da2@test.com test123 zimbraIsDelegatedAdminAccount TRUE
+    zmprov ca da1@test.com test123 zmailIsDelegatedAdminAccount TRUE
+    zmprov ca da2@test.com test123 zmailIsDelegatedAdminAccount TRUE
     
     zmprov ca a_dl@test.com test123
     zmprov ca a_subdl@test.com test123

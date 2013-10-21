@@ -40,7 +40,7 @@ CREATE TABLE $group.imap_folder (
    remote_path        VARCHAR(1000) NOT NULL,
 
    PRIMARY KEY (mailbox_id, item_id),
-   CONSTRAINT fk_imap_folder_mailbox_id FOREIGN KEY (mailbox_id) REFERENCES zimbra.mailbox(id) ON DELETE CASCADE
+   CONSTRAINT fk_imap_folder_mailbox_id FOREIGN KEY (mailbox_id) REFERENCES zmail.mailbox(id) ON DELETE CASCADE
 ) ENGINE = InnoDB;
 
 CREATE TABLE $group.imap_message (
@@ -51,7 +51,7 @@ CREATE TABLE $group.imap_message (
 
    PRIMARY KEY (mailbox_id, item_id),
    CONSTRAINT fk_imap_message_mailbox_id FOREIGN KEY (mailbox_id)
-      REFERENCES zimbra.mailbox(id) ON DELETE CASCADE,
+      REFERENCES zmail.mailbox(id) ON DELETE CASCADE,
    CONSTRAINT fk_imap_message_imap_folder_id FOREIGN KEY (mailbox_id, imap_folder_id)
       REFERENCES $group.imap_folder(mailbox_id, item_id) ON DELETE CASCADE
 ) ENGINE = InnoDB;

@@ -12,7 +12,7 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.index.analysis;
+package org.zmail.cs.index.analysis;
 
 import java.io.IOException;
 import java.util.Collection;
@@ -23,7 +23,7 @@ import java.util.List;
 import org.apache.lucene.analysis.TokenStream;
 import org.apache.lucene.analysis.tokenattributes.CharTermAttribute;
 
-import com.zimbra.cs.index.LuceneFields;
+import org.zmail.cs.index.LuceneFields;
 
 /**
  * {@code image/jpeg} becomes {@code image/jpeg} and {@code image}

@@ -13,7 +13,7 @@
  * ***** END LICENSE BLOCK *****
  */
 
-package com.zimbra.cs.lmtpserver.utils;
+package org.zmail.cs.lmtpserver.utils;
 
 import java.io.BufferedInputStream;
 import java.io.File;
@@ -35,14 +35,14 @@ import org.apache.commons.cli.OptionBuilder;
 import org.apache.commons.cli.Options;
 import org.apache.commons.cli.ParseException;
 
-import com.zimbra.common.lmtp.LmtpClient;
-import com.zimbra.common.lmtp.LmtpClient.Protocol;
-import com.zimbra.common.util.ByteUtil;
-import com.zimbra.common.util.CliUtil;
-import com.zimbra.common.util.EmailUtil;
-import com.zimbra.common.util.FileUtil;
-import com.zimbra.common.util.Log;
-import com.zimbra.common.util.LogFactory;
+import org.zmail.common.lmtp.LmtpClient;
+import org.zmail.common.lmtp.LmtpClient.Protocol;
+import org.zmail.common.util.ByteUtil;
+import org.zmail.common.util.CliUtil;
+import org.zmail.common.util.EmailUtil;
+import org.zmail.common.util.FileUtil;
+import org.zmail.common.util.Log;
+import org.zmail.common.util.LogFactory;
 
 @SuppressWarnings("static-access")
 public class LmtpInject {

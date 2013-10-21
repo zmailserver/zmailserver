@@ -15,7 +15,7 @@
 # 
 
 my @tokens = (0,1,2,3,4,5,6,7,8,9);
-my $datadir = "/Users/jylee/ws/main/ZimbraServer/data/wiki/loadtest/";
+my $datadir = "/Users/jylee/ws/main/ZmailServer/data/wiki/loadtest/";
 
 my $buf;
 

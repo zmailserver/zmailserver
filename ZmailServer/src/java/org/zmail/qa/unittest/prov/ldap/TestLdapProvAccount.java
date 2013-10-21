@@ -12,7 +12,7 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.qa.unittest.prov.ldap;
+package org.zmail.qa.unittest.prov.ldap;
 
 import java.util.HashMap;
 import java.util.HashSet;
@@ -24,25 +24,25 @@ import org.junit.*;
 import static org.junit.Assert.*;
 
 import com.google.common.collect.Maps;
-import com.zimbra.common.localconfig.LC;
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.common.util.StringUtil;
-import com.zimbra.cs.account.Account;
-import com.zimbra.cs.account.AccountServiceException;
-import com.zimbra.cs.account.CalendarResource;
-import com.zimbra.cs.account.Cos;
-import com.zimbra.cs.account.DataSource;
-import com.zimbra.cs.account.Domain;
-import com.zimbra.cs.account.Provisioning;
-import com.zimbra.cs.account.Server;
-import com.zimbra.common.account.Key;
-import com.zimbra.common.account.Key.AccountBy;
-import com.zimbra.common.account.Key.CalendarResourceBy;
-import com.zimbra.qa.unittest.TestUtil;
-import com.zimbra.qa.unittest.prov.Names;
-import com.zimbra.soap.admin.type.CacheEntryType;
-import com.zimbra.soap.admin.type.DataSourceType;
-import com.zimbra.cs.ldap.LdapConstants;
+import org.zmail.common.localconfig.LC;
+import org.zmail.common.service.ServiceException;
+import org.zmail.common.util.StringUtil;
+import org.zmail.cs.account.Account;
+import org.zmail.cs.account.AccountServiceException;
+import org.zmail.cs.account.CalendarResource;
+import org.zmail.cs.account.Cos;
+import org.zmail.cs.account.DataSource;
+import org.zmail.cs.account.Domain;
+import org.zmail.cs.account.Provisioning;
+import org.zmail.cs.account.Server;
+import org.zmail.common.account.Key;
+import org.zmail.common.account.Key.AccountBy;
+import org.zmail.common.account.Key.CalendarResourceBy;
+import org.zmail.qa.unittest.TestUtil;
+import org.zmail.qa.unittest.prov.Names;
+import org.zmail.soap.admin.type.CacheEntryType;
+import org.zmail.soap.admin.type.DataSourceType;
+import org.zmail.cs.ldap.LdapConstants;
 
 public class TestLdapProvAccount extends LdapTest {
     private static LdapProvTestUtil provUtil;
@@ -143,11 +143,11 @@ public class TestLdapProvAccount extends LdapTest {
     
     private DataSource createDataSource(Account acct, String dataSourceName) throws Exception {
         Map<String, Object> attrs = new HashMap<String, Object>();
-        attrs.put(Provisioning.A_zimbraDataSourceEnabled, LdapConstants.LDAP_TRUE);
-        attrs.put(Provisioning.A_zimbraDataSourceFolderId, "123");
-        attrs.put(Provisioning.A_zimbraDataSourceConnectionType, "ssl");
-        attrs.put(Provisioning.A_zimbraDataSourceHost, "zimbra.com");
-        attrs.put(Provisioning.A_zimbraDataSourcePort, "9999");
+        attrs.put(Provisioning.A_zmailDataSourceEnabled, LdapConstants.LDAP_TRUE);
+        attrs.put(Provisioning.A_zmailDataSourceFolderId, "123");
+        attrs.put(Provisioning.A_zmailDataSourceConnectionType, "ssl");
+        attrs.put(Provisioning.A_zmailDataSourceHost, "zmail.com");
+        attrs.put(Provisioning.A_zmailDataSourcePort, "9999");
         DataSource ds = prov.createDataSource(acct, DataSourceType.pop3, dataSourceName, attrs);
         return ds;
     }
@@ -185,11 +185,11 @@ public class TestLdapProvAccount extends LdapTest {
         String KRB5_PRINCIPAL = "krb5Principal";
         String KRB5_PRINCIPAL_ATTR_VALUE = Provisioning.FP_PREFIX_KERBEROS5 + KRB5_PRINCIPAL;
         Map<String, Object> attrs = new HashMap<String, Object>();
-        StringUtil.addToMultiMap(attrs, Provisioning.A_zimbraForeignPrincipal, FOREIGN_PRINCIPAL);
-        StringUtil.addToMultiMap(attrs, Provisioning.A_zimbraForeignPrincipal, KRB5_PRINCIPAL_ATTR_VALUE);
+        StringUtil.addToMultiMap(attrs, Provisioning.A_zmailForeignPrincipal, FOREIGN_PRINCIPAL);
+        StringUtil.addToMultiMap(attrs, Provisioning.A_zmailForeignPrincipal, KRB5_PRINCIPAL_ATTR_VALUE);
         Account acct = createAccount(ACCT_NAME, attrs);
         
-        getAccountByAdminName(LC.zimbra_ldap_user.value());
+        getAccountByAdminName(LC.zmail_ldap_user.value());
         getAccountByAppAdminName("zmnginx");
         getAccountById(acct.getId());
         getAccountByName(acct.getName());
@@ -205,9 +205,9 @@ public class TestLdapProvAccount extends LdapTest {
         String ADMIN_ACCT_NAME_2 = genAcctNameLocalPart("2");
         
         Map<String, Object> acct1Attrs1 = new HashMap<String, Object>();
-        acct1Attrs1.put(Provisioning.A_zimbraIsAdminAccount, LdapConstants.LDAP_TRUE);
+        acct1Attrs1.put(Provisioning.A_zmailIsAdminAccount, LdapConstants.LDAP_TRUE);
         Map<String, Object> acct1Attrs2 = new HashMap<String, Object>();
-        acct1Attrs2.put(Provisioning.A_zimbraIsDelegatedAdminAccount, LdapConstants.LDAP_TRUE);
+        acct1Attrs2.put(Provisioning.A_zmailIsDelegatedAdminAccount, LdapConstants.LDAP_TRUE);
         
         Account adminAcct1 = createAccount(ADMIN_ACCT_NAME_1, acct1Attrs1);
         Account adminAcct2 = createAccount(ADMIN_ACCT_NAME_2, acct1Attrs2);
@@ -260,9 +260,9 @@ public class TestLdapProvAccount extends LdapTest {
         String DATA_SOURCE_ID_2 = ds2.getId();
         String DATA_SOURCE_ID_3 = ds3.getId();
         
-        // set zimbraPrefAllowAddressForDelegatedSender
+        // set zmailPrefAllowAddressForDelegatedSender
         Map<String, Object> attrs = Maps.newHashMap();
-        attrs.put(Provisioning.A_zimbraPrefAllowAddressForDelegatedSender, acct.getName());
+        attrs.put(Provisioning.A_zmailPrefAllowAddressForDelegatedSender, acct.getName());
         prov.modifyAttrs(acct, attrs);
         
         prov.renameAccount(acctId, ACCT_NEW_NAME);
@@ -279,8 +279,8 @@ public class TestLdapProvAccount extends LdapTest {
         assertEquals(DATA_SOURCE_ID_2, prov.get(renamedAcct, Key.DataSourceBy.name, DATA_SOURCE_NAME_2).getId());
         assertEquals(DATA_SOURCE_ID_3, prov.get(renamedAcct, Key.DataSourceBy.name, DATA_SOURCE_NAME_3).getId());
         
-        // make sure zimbraPrefAllowAddressForDelegatedSender is updated
-        Set<String> addrsForDelegatedSender = renamedAcct.getMultiAttrSet(Provisioning.A_zimbraPrefAllowAddressForDelegatedSender);
+        // make sure zmailPrefAllowAddressForDelegatedSender is updated
+        Set<String> addrsForDelegatedSender = renamedAcct.getMultiAttrSet(Provisioning.A_zmailPrefAllowAddressForDelegatedSender);
         assertEquals(1, addrsForDelegatedSender.size());
         assertTrue(addrsForDelegatedSender.contains(ACCT_NEW_NAME));
         
@@ -327,9 +327,9 @@ public class TestLdapProvAccount extends LdapTest {
         prov.addAlias(acct, ALIAS_NAME_1);
         prov.addAlias(acct, ALIAS_NAME_2);
         
-        // set zimbraPrefAllowAddressForDelegatedSender
+        // set zmailPrefAllowAddressForDelegatedSender
         Map<String, Object> attrs = Maps.newHashMap();
-        attrs.put(Provisioning.A_zimbraPrefAllowAddressForDelegatedSender, 
+        attrs.put(Provisioning.A_zmailPrefAllowAddressForDelegatedSender, 
                 new String[]{acct.getName(), ALIAS_NAME_1, ALIAS_NAME_2});
         prov.modifyAttrs(acct, attrs);
         
@@ -351,14 +351,14 @@ public class TestLdapProvAccount extends LdapTest {
         assertEquals(acctId, acctByAlias1.getId());
         Account acctByAlias2 = prov.get(AccountBy.name, ALIAS_NEW_NAME_2);
         assertEquals(acctId, acctByAlias2.getId());
-        Set<String> aliases = renamedAcct.getMultiAttrSet(Provisioning.A_zimbraMailAlias);
+        Set<String> aliases = renamedAcct.getMultiAttrSet(Provisioning.A_zmailMailAlias);
         assertEquals(2, aliases.size());
         assertTrue(aliases.contains(ALIAS_NEW_NAME_1));
         assertTrue(aliases.contains(ALIAS_NEW_NAME_2));
         
-        // make sure zimbraPrefAllowAddressForDelegatedSender is updated
+        // make sure zmailPrefAllowAddressForDelegatedSender is updated
         Set<String> addrsForDelegatedSender = 
-            renamedAcct.getMultiAttrSet(Provisioning.A_zimbraPrefAllowAddressForDelegatedSender);
+            renamedAcct.getMultiAttrSet(Provisioning.A_zmailPrefAllowAddressForDelegatedSender);
         assertEquals(3, addrsForDelegatedSender.size());
         assertTrue(addrsForDelegatedSender.contains(ACCT_NEW_NAME));
         assertTrue(addrsForDelegatedSender.contains(ALIAS_NEW_NAME_1));
@@ -396,24 +396,24 @@ public class TestLdapProvAccount extends LdapTest {
     @Test
     public void mailHost() throws Exception {
         Map<String, Object> server1Attrs = Maps.newHashMap();
-        server1Attrs.put(Provisioning.A_zimbraServiceEnabled, Provisioning.SERVICE_MAILBOX);
+        server1Attrs.put(Provisioning.A_zmailServiceEnabled, Provisioning.SERVICE_MAILBOX);
         Server server1 = createServer(genServerName("1"), server1Attrs);
         
         Map<String, Object> server2Attrs = Maps.newHashMap();
-        server2Attrs.put(Provisioning.A_zimbraServiceEnabled, Provisioning.SERVICE_MAILBOX);
+        server2Attrs.put(Provisioning.A_zmailServiceEnabled, Provisioning.SERVICE_MAILBOX);
         Server server2 = createServer(genServerName("2"), server2Attrs);
         
         Server server3 = createServer(genServerName("3"));
         
         // specifies a mail host
         Map<String, Object> acct1Attrs = Maps.newHashMap();
-        acct1Attrs.put(Provisioning.A_zimbraMailHost, server1.getName());
+        acct1Attrs.put(Provisioning.A_zmailMailHost, server1.getName());
         Account acct1 = createAccount(genAcctNameLocalPart("1"), acct1Attrs);
         assertEquals(server1.getId(), prov.getServer(acct1).getId());
         
         // specifies a mail host without mailbox server
         Map<String, Object> acct2Attrs = Maps.newHashMap();
-        acct2Attrs.put(Provisioning.A_zimbraMailHost, server3.getName());
+        acct2Attrs.put(Provisioning.A_zmailMailHost, server3.getName());
         boolean caughtException = false;
         try {
             Account acct2 = createAccount(genAcctNameLocalPart("2"), acct2Attrs);
@@ -426,20 +426,20 @@ public class TestLdapProvAccount extends LdapTest {
         
         // use a server pool in cos
         Map<String, Object> cos1Attrs = Maps.newHashMap();
-        cos1Attrs.put(Provisioning.A_zimbraMailHostPool, server2.getId());
+        cos1Attrs.put(Provisioning.A_zmailMailHostPool, server2.getId());
         Cos cos1 = createCos(genCosName("1"), cos1Attrs);
         Map<String, Object> acct3Attrs = Maps.newHashMap();
-        acct3Attrs.put(Provisioning.A_zimbraCOSId, cos1.getId());
+        acct3Attrs.put(Provisioning.A_zmailCOSId, cos1.getId());
         Account acct3 = createAccount(genAcctNameLocalPart("3"), acct3Attrs);
         assertEquals(server2.getId(), prov.getServer(acct3).getId());
         
         // use a server pool in cos, but the server pool does not contain a 
         // server with mailbox server, should fallback to the local server
         Map<String, Object> cos2Attrs = Maps.newHashMap();
-        cos2Attrs.put(Provisioning.A_zimbraMailHostPool, server3.getId());
+        cos2Attrs.put(Provisioning.A_zmailMailHostPool, server3.getId());
         Cos cos2 = createCos(genCosName("3"), cos2Attrs);
         Map<String, Object> acct4Attrs = Maps.newHashMap();
-        acct4Attrs.put(Provisioning.A_zimbraCOSId, cos2.getId());
+        acct4Attrs.put(Provisioning.A_zmailCOSId, cos2.getId());
         Account acct4 = createAccount(genAcctNameLocalPart("4"), acct4Attrs);
         assertEquals(prov.getLocalServer().getId(), prov.getServer(acct4).getId());
         

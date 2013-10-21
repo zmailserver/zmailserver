@@ -12,25 +12,25 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.mime;
+package org.zmail.cs.mime;
 
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.Collections;
 import java.util.List;
 
-import com.zimbra.common.localconfig.LC;
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.common.util.StringUtil;
-import com.zimbra.common.util.ZimbraLog;
-import com.zimbra.cs.convert.ConversionException;
-import com.zimbra.cs.index.Fragment;
-import com.zimbra.cs.index.IndexDocument;
-import com.zimbra.cs.index.LuceneFields;
-import com.zimbra.cs.index.ZimbraAnalyzer;
-import com.zimbra.cs.index.analysis.RFC822AddressTokenStream;
-import com.zimbra.cs.store.Blob;
-import com.zimbra.cs.store.StoreManager;
+import org.zmail.common.localconfig.LC;
+import org.zmail.common.service.ServiceException;
+import org.zmail.common.util.StringUtil;
+import org.zmail.common.util.ZmailLog;
+import org.zmail.cs.convert.ConversionException;
+import org.zmail.cs.index.Fragment;
+import org.zmail.cs.index.IndexDocument;
+import org.zmail.cs.index.LuceneFields;
+import org.zmail.cs.index.ZmailAnalyzer;
+import org.zmail.cs.index.analysis.RFC822AddressTokenStream;
+import org.zmail.cs.store.Blob;
+import org.zmail.cs.store.StoreManager;
 
 /**
  * @since Feb 15, 2006
@@ -104,10 +104,10 @@ public final class ParsedDocument {
                 textContent = handler.getContent();
             } catch (MimeHandlerException e) {
                 if (ConversionException.isTemporaryCauseOf(e)) {
-                    ZimbraLog.doc.warn("Temporary failure extracting from the document.  (is convertd down?)", e);
+                    ZmailLog.doc.warn("Temporary failure extracting from the document.  (is convertd down?)", e);
                     temporaryAnalysisFailure = true;
                 } else {
-                    ZimbraLog.index.warn("Failure indexing wiki document "+ filename + ".  Item will be partially indexed", e);
+                    ZmailLog.index.warn("Failure indexing wiki document "+ filename + ".  Item will be partially indexed", e);
                 }
             }
             fragment = Fragment.getFragment(textContent, Fragment.Source.NOTEBOOK);
@@ -121,7 +121,7 @@ public final class ParsedDocument {
 
             StringBuilder content = new StringBuilder();
             appendToContent(content, filename);
-            appendToContent(content, ZimbraAnalyzer.getAllTokensConcatenated(LuceneFields.L_FILENAME, filename));
+            appendToContent(content, ZmailAnalyzer.getAllTokensConcatenated(LuceneFields.L_FILENAME, filename));
             appendToContent(content, textContent);
             appendToContent(content, description);
 
@@ -129,16 +129,16 @@ public final class ParsedDocument {
             document.addFrom(new RFC822AddressTokenStream(creator));
             document.addFilename(filename);
             long elapsed = System.currentTimeMillis() - start;
-            ZimbraLog.doc.debug("ParsedDocument performExtraction elapsed=" + elapsed);
+            ZmailLog.doc.debug("ParsedDocument performExtraction elapsed=" + elapsed);
         } catch (MimeHandlerException mhe) {
             if (ConversionException.isTemporaryCauseOf(mhe)) {
-                ZimbraLog.doc.warn("Temporary failure extracting from the document.  (is convertd down?)", mhe);
+                ZmailLog.doc.warn("Temporary failure extracting from the document.  (is convertd down?)", mhe);
                 temporaryAnalysisFailure = true;
             } else {
-                ZimbraLog.doc.error("cannot create ParsedDocument", mhe);
+                ZmailLog.doc.error("cannot create ParsedDocument", mhe);
             }
         } catch (Exception e) {
-            ZimbraLog.index.warn("Failure indexing wiki document " + filename + ".  Item will be partially indexed", e);
+            ZmailLog.index.warn("Failure indexing wiki document " + filename + ".  Item will be partially indexed", e);
         } finally {
             parsed = true;
         }
@@ -158,7 +158,7 @@ public final class ParsedDocument {
         this.version = version;
         // should be indexed so we can add search constraints on the index version
         if (document == null) {
-            ZimbraLog.doc.warn("Can't index document version.  (is convertd down?)");
+            ZmailLog.doc.warn("Can't index document version.  (is convertd down?)");
         } else {
             document.addVersion(version);
         }

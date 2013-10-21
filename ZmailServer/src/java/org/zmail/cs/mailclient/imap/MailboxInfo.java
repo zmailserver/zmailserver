@@ -12,10 +12,10 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.mailclient.imap;
+package org.zmail.cs.mailclient.imap;
 
 import com.google.common.base.Objects;
-import com.zimbra.common.util.ZimbraLog;
+import org.zmail.common.util.ZmailLog;
 
 import java.io.IOException;
 
@@ -99,7 +99,7 @@ public final class MailboxInfo implements ResponseHandler {
                 unseen = is.readNumber();
                 break;
             default:
-                ZimbraLog.imap_client.debug("Ignoring invalid STATUS response attribute: %s", attr);
+                ZmailLog.imap_client.debug("Ignoring invalid STATUS response attribute: %s", attr);
             }
             is.skipSpaces();
         }

@@ -13,10 +13,10 @@
  * ***** END LICENSE BLOCK *****
  */
 
-package com.zimbra.cs.store.external;
+package org.zmail.cs.store.external;
 
-import com.zimbra.cs.store.Blob;
-import com.zimbra.cs.store.BlobBuilder;
+import org.zmail.cs.store.Blob;
+import org.zmail.cs.store.BlobBuilder;
 
 /**
  * Wrapper around BlobBuilder for package visibility

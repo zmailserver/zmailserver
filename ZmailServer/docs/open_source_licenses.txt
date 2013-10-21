@@ -216,10 +216,10 @@ SECTION 1: BSD-STYLE, MIT-STYLE, OR SIMILAR STYLE LICENSES
    >>> autoit-3.0
    >>> bdb-5.2.36
    >>> bouncycastle-1.46
-   >>> bouncycastle-zimbra-20110708
+   >>> bouncycastle-zmail-20110708
    >>> chunkin-nginx-module-0.23rc2
    >>> curl-7.30.0
-   >>> cyrus-sasl-zimbra-2.1.26
+   >>> cyrus-sasl-zmail-2.1.26
    >>> dom4j-1.5.2
    >>> freetype-2.4.9
    >>> ganymed-ssh2-build210-none
@@ -245,11 +245,11 @@ SECTION 1: BSD-STYLE, MIT-STYLE, OR SIMILAR STYLE LICENSES
    >>> libevent-2.0.16
    >>> libmemcached-1.0.6
    >>> libpng-1.5.10
-   >>> libxml2-2.7.8-zimbra
+   >>> libxml2-2.7.8-zmail
    >>> md5.js-2.1
    >>> memcached-1.4.10
    >>> net-snmp-5.7.2
-   >>> nginx-1.2-zimbra
+   >>> nginx-1.2-zmail
    >>> nist-sip-1.2
    >>> nviennot-nginx-tcp-keepalive-4d7186d
    >>> opendkim-2.8.0
@@ -533,7 +533,7 @@ SECTION 9: GNU General Public License, V3.0
 SECTION 10: GNU Lesser General Public License, V2.1
 
    >>> aspell-0.60.6.1
-   >>> firefox-nss-4.0.1-zimbra
+   >>> firefox-nss-4.0.1-zmail
    >>> jcommon-1.0.16
    >>> jfreechart-1.0.14
    >>> jna-3.4.0
@@ -566,7 +566,7 @@ SECTION 13: IBM Public License, V1.0
 
 SECTION 14: Microsoft Limited Public License
 
-   >>> msdn-signing-code-zimbra-20120125
+   >>> msdn-signing-code-zmail-20120125
 
 
 
@@ -8359,7 +8359,7 @@ The above copyright notice and this permission notice shall be included in all c
 THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
 
->>> bouncycastle-zimbra-20110708
+>>> bouncycastle-zmail-20110708
 
 Copyright (c) 2000 - 2011 The Legion Of The Bouncy Castle (http://www.bouncycastle.org)
 
@@ -8507,7 +8507,7 @@ Copyright (C) 1990-2, RSA Data Security, Inc. All rights reserved.
    documentation and/or software.
 
 
->>> cyrus-sasl-zimbra-2.1.26
+>>> cyrus-sasl-zmail-2.1.26
 
 Copyright (c) 1998-2003 Carnegie Mellon University.  All rights reserved.
 
@@ -22158,7 +22158,7 @@ supporting documentation. This software is provided "as is" without
 express or implied warranty.
 
 
->>> libxml2-2.7.8-zimbra
+>>> libxml2-2.7.8-zmail
 
 Except where otherwise noted in the source code (e.g. the files hash.c,
 list.c and the trio files, which are covered by a similar licence but
@@ -22543,7 +22543,7 @@ USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH
 DAMAGE.
 
 
->>> nginx-1.2-zimbra
+>>> nginx-1.2-zmail
 
 Copyright (C) 2002-2012 Igor Sysoev
 Copyright (C) 2011,2012 Nginx, Inc.
@@ -23608,7 +23608,7 @@ DEFINITIONS
 - "Software" refers to the JTNEF Java TNEF package.
 - "Author" and "Licensor" refers to Amichai Rothman, who is the author of the
 software, or someone explicitly assigned by him to manage the software.
-- "You", "User" and "Your" refer to Zimbra, Inc. of San Mateo, CA.
+- "You", "User" and "Your" refer to Zmail, Inc. of San Mateo, CA.
 - "Derived Work" refers to this software, or any other software derived from,
 based on, or containing this software.
 
@@ -35967,7 +35967,7 @@ LGPL license along with this library if you did not you can find it
 at http://www.gnu.org/.
 
 
->>> firefox-nss-4.0.1-zimbra
+>>> firefox-nss-4.0.1-zmail
 
 [PLEASE NOTE: VMWARE, INC. ELECTS TO USE AND DISTRIBUTE THIS COMPONENT UNDER THE TERMS OF THE LGPL 2.1. PLEASE SEE THE APPENDIX TO REVIEW THE FULL TEXT OF THE LGPL 2.1. THE ORIGINAL LICENSE TERMS ARE REPRODUCED BELOW ONLY AS A REFERENCE; HOWEVER, THE FULL TEXT OF THE MPL 1.1 HAS BEEN OMITTED.]
 
@@ -36351,7 +36351,7 @@ SUCH DAMAGE.
 Microsoft Limited Public License is applicable to the following component(s).
 
 
->>> msdn-signing-code-zimbra-20120125
+>>> msdn-signing-code-zmail-20120125
 
 License : Microsoft Limited Public License
 

@@ -12,14 +12,14 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.zimlet;
+package org.zmail.cs.zimlet;
 
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.zimbra.common.soap.Element;
-import com.zimbra.common.soap.ZimletConstants;
+import org.zmail.common.soap.Element;
+import org.zmail.common.soap.ZimletConstants;
 
 /**
  * 
@@ -28,7 +28,7 @@ import com.zimbra.common.soap.ZimletConstants;
  */
 public class ZimletDescription extends ZimletMeta {
 	
-	public static final String ZIMLET_REGEX_EXTENSION_CLASS = "com.zimbra.cs.zimlet.handler.RegexHandler";
+	public static final String ZIMLET_REGEX_EXTENSION_CLASS = "org.zmail.cs.zimlet.handler.RegexHandler";
 	
 	private List<String> mScripts;
 	private List<String> mStyleSheets;

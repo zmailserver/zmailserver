@@ -12,27 +12,27 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.service.account;
+package org.zmail.cs.service.account;
 
 import java.util.Map;
 
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.common.soap.AccountConstants;
-import com.zimbra.common.soap.Element;
-import com.zimbra.common.util.StringUtil;
-import com.zimbra.cs.account.Provisioning;
-import com.zimbra.cs.util.BuildInfo;
-import com.zimbra.soap.ZimbraSoapContext;
+import org.zmail.common.service.ServiceException;
+import org.zmail.common.soap.AccountConstants;
+import org.zmail.common.soap.Element;
+import org.zmail.common.util.StringUtil;
+import org.zmail.cs.account.Provisioning;
+import org.zmail.cs.util.BuildInfo;
+import org.zmail.soap.ZmailSoapContext;
 
 
 public class GetVersionInfo extends AccountDocumentHandler {
 
     public Element handle(Element request, Map<String, Object> context)
     throws ServiceException {
-        if (!Provisioning.getInstance().getLocalServer().getBooleanAttr(Provisioning.A_zimbraSoapExposeVersion, false)) {
+        if (!Provisioning.getInstance().getLocalServer().getBooleanAttr(Provisioning.A_zmailSoapExposeVersion, false)) {
             throw ServiceException.PERM_DENIED("Version info is not available.");
         }
-        ZimbraSoapContext lc = getZimbraSoapContext(context);
+        ZmailSoapContext lc = getZmailSoapContext(context);
 
         Element response = lc.createElement(AccountConstants.GET_VERSION_INFO_RESPONSE);
         Element infoEl = response.addElement(AccountConstants.E_VERSION_INFO_INFO);

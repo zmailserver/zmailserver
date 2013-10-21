@@ -12,7 +12,7 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.account.ldap;
+package org.zmail.cs.account.ldap;
 
 import java.util.Arrays;
 import java.util.HashMap;
@@ -22,20 +22,20 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-import com.zimbra.common.account.Key;
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.common.util.ZimbraLog;
-import com.zimbra.cs.account.Account;
-import com.zimbra.cs.account.AccountServiceException;
-import com.zimbra.cs.account.AttributeClass;
-import com.zimbra.cs.account.Cos;
-import com.zimbra.cs.account.Domain;
-import com.zimbra.cs.account.Provisioning;
-import com.zimbra.cs.ldap.IAttributes;
-import com.zimbra.cs.ldap.ZLdapFilter;
-import com.zimbra.cs.ldap.SearchLdapOptions.SearchLdapVisitor;
-import com.zimbra.cs.ldap.ZLdapFilterFactory;
-import com.zimbra.soap.admin.type.CountObjectsType;
+import org.zmail.common.account.Key;
+import org.zmail.common.service.ServiceException;
+import org.zmail.common.util.ZmailLog;
+import org.zmail.cs.account.Account;
+import org.zmail.cs.account.AccountServiceException;
+import org.zmail.cs.account.AttributeClass;
+import org.zmail.cs.account.Cos;
+import org.zmail.cs.account.Domain;
+import org.zmail.cs.account.Provisioning;
+import org.zmail.cs.ldap.IAttributes;
+import org.zmail.cs.ldap.ZLdapFilter;
+import org.zmail.cs.ldap.SearchLdapOptions.SearchLdapVisitor;
+import org.zmail.cs.ldap.ZLdapFilterFactory;
+import org.zmail.soap.admin.type.CountObjectsType;
 
 final public class Validators {
 
@@ -70,7 +70,7 @@ final public class Validators {
                 return;
 
             if (args.length > 1 && args[1] instanceof String[] &&
-                    Arrays.asList((String[]) args[1]).contains(AttributeClass.OC_zimbraCalendarResource)) {
+                    Arrays.asList((String[]) args[1]).contains(AttributeClass.OC_zmailCalendarResource)) {
                 return; // as in LicenseManager, don't want to count calendar resources
             }
 
@@ -98,7 +98,7 @@ final public class Validators {
             if (d == null)
                 return;
 
-            String limit = d.getAttr(Provisioning.A_zimbraDomainMaxAccounts);
+            String limit = d.getAttr(Provisioning.A_zmailDomainMaxAccounts);
             if (limit == null)
                 return;
 
@@ -115,9 +115,9 @@ final public class Validators {
                     if (causeMsg != null && causeMsg.contains("timeout"))
                         throw ServiceException.FAILURE("The directory may not be responding or is responding slowly.  " +
                                 "The directory may need tuning or the LDAP read timeout may need to be raised.  " +
-                                "Otherwise, removing the zimbraDomainMaxAccounts restriction will avoid this check.", e);
+                                "Otherwise, removing the zmailDomainMaxAccounts restriction will avoid this check.", e);
                     else
-                        throw ServiceException.FAILURE("Unable to count users for setting zimbraDomainMaxAccounts=" +  limit + "" +
+                        throw ServiceException.FAILURE("Unable to count users for setting zmailDomainMaxAccounts=" +  limit + "" +
                                 " in domain " + d.getName(), e);
 
                 }
@@ -136,7 +136,7 @@ final public class Validators {
         if (attrs == null)
             return false;
 
-        Object o = attrs.get(Provisioning.A_zimbraIsSystemResource);
+        Object o = attrs.get(Provisioning.A_zmailIsSystemResource);
         if (o != null && "true".equalsIgnoreCase(o.toString()))
             return true; // is system resource, do not check
 
@@ -146,7 +146,7 @@ final public class Validators {
         o = attrs.get(Provisioning.A_objectClass);
         if (o instanceof String[]) {
             Set<String> ocs = new HashSet<String>(Arrays.asList((String[])o));
-            if (ocs.contains(AttributeClass.OC_zimbraCalendarResource))
+            if (ocs.contains(AttributeClass.OC_zmailCalendarResource))
                 return true;
         }
 
@@ -157,7 +157,7 @@ final public class Validators {
         if (attrs == null) {
             return false;
         }
-        Object o = attrs.get(Provisioning.A_zimbraIsExternalVirtualAccount);
+        Object o = attrs.get(Provisioning.A_zmailIsExternalVirtualAccount);
         return o != null && "true".equalsIgnoreCase(o.toString());
     }
 
@@ -222,7 +222,7 @@ final public class Validators {
             if (domain == null)
                 return;
 
-            String defaultCosId = domain.getAttr(Provisioning.A_zimbraDomainDefaultCOSId);
+            String defaultCosId = domain.getAttr(Provisioning.A_zmailDomainDefaultCOSId);
             if (defaultCosId == null) {
                 Cos defaultCos = prov.get(Key.CosBy.name, Provisioning.DEFAULT_COS_NAME);
                 if (defaultCos != null)
@@ -230,9 +230,9 @@ final public class Validators {
             }
 
             Set<String> cosLimit = domain.getMultiAttrSet(
-                    Provisioning.A_zimbraDomainCOSMaxAccounts);
+                    Provisioning.A_zmailDomainCOSMaxAccounts);
             Set<String> featureLimit = domain.getMultiAttrSet(
-                    Provisioning.A_zimbraDomainFeatureMaxAccounts);
+                    Provisioning.A_zmailDomainFeatureMaxAccounts);
 
             if (cosLimit.size() == 0 && featureLimit.size() == 0)
                 return;
@@ -248,14 +248,14 @@ final public class Validators {
             for (Map.Entry<String,Integer> e : featureLimitMap.entrySet())
                 featureCountMap.put(e.getKey(), 0);
             
-            boolean isModifyingCosId = (attrs != null && attrs.get(Provisioning.A_zimbraCOSId) != null);
+            boolean isModifyingCosId = (attrs != null && attrs.get(Provisioning.A_zmailCOSId) != null);
             boolean isCreatingEntry = CREATE_ACCOUNT_CHECK_DOMAIN_COS_AND_FEATURE.equals(action);
             
             String desiredCosId = null;
             
             if (isModifyingCosId || isCreatingEntry) {
                 if (attrs != null) {
-                    desiredCosId = (String) attrs.get(Provisioning.A_zimbraCOSId);
+                    desiredCosId = (String) attrs.get(Provisioning.A_zmailCOSId);
                 }
                 if (desiredCosId == null) {
                     desiredCosId = defaultCosId;
@@ -291,12 +291,12 @@ final public class Validators {
                         desiredFeatures.add(feature);
                 }
             }
-            if (ZimbraLog.account.isDebugEnabled())
-                ZimbraLog.account.debug("Desired features (incl. cos): %s + %s", desiredFeatures, cosFeatures);
+            if (ZmailLog.account.isDebugEnabled())
+                ZmailLog.account.debug("Desired features (incl. cos): %s + %s", desiredFeatures, cosFeatures);
             String originalCosId = null;
             // remove all features in old cos
             if (account != null) {
-                originalCosId = account.getAttr(Provisioning.A_zimbraCOSId);
+                originalCosId = account.getAttr(Provisioning.A_zmailCOSId);
                 // be sure to fall back to default cos ID if none is set
                 // spurious counts will occur otherwise
                 if (originalCosId == null)
@@ -319,15 +319,15 @@ final public class Validators {
             }
             if ((desiredCosId != null && !desiredCosId.equals(originalCosId)
                     && cosLimitMap.containsKey(desiredCosId)) || desiredFeatures.size() > 0) {
-                if (ZimbraLog.account.isDebugEnabled()) {
-                    ZimbraLog.account.debug("COS change info [%s:%s], desired features %s",
+                if (ZmailLog.account.isDebugEnabled()) {
+                    ZmailLog.account.debug("COS change info [%s:%s], desired features %s",
                             originalCosId, desiredCosId, desiredFeatures);
                 }
                 
                 buildDomainCounts(prov, domainName, defaultCosId, cosCountMap, featureCountMap, cosFeatureMap);
                                
-                if (ZimbraLog.account.isDebugEnabled())
-                    ZimbraLog.account.debug("COS/Feature limits: %s + %s", cosLimitMap, featureLimitMap);
+                if (ZmailLog.account.isDebugEnabled())
+                    ZmailLog.account.debug("COS/Feature limits: %s + %s", cosLimitMap, featureLimitMap);
                 if (desiredCosId != null && !desiredCosId.equals(originalCosId)
                         && cosLimitMap.containsKey(desiredCosId)) {
                     if (cosCountMap.containsKey(desiredCosId)
@@ -359,11 +359,11 @@ final public class Validators {
                     cos = prov.get(Key.CosBy.id, cosId);
                 if (cos == null) {
                     if (defaultCosId != null) {
-                        ZimbraLog.account.debug("COS id %s not found, reverting to %s", cosId, defaultCosId);
+                        ZmailLog.account.debug("COS id %s not found, reverting to %s", cosId, defaultCosId);
                         return getCosFeatures(prov, cosFeatureMap, defaultCosId, null);
                     }
                     else {
-                        ZimbraLog.account.debug("COS %s not found, bailing!", cosId);
+                        ZmailLog.account.debug("COS %s not found, bailing!", cosId);
                         return null;
                     }
                 }
@@ -371,7 +371,7 @@ final public class Validators {
                 Set<String> features = new HashSet<String>();
                 for (Map.Entry<String,Object> entry : cosAttrs.entrySet()) {
                     String name = entry.getKey();
-                    if (name.toLowerCase().startsWith("zimbrafeature")
+                    if (name.toLowerCase().startsWith("zmailfeature")
                             && name.toLowerCase().endsWith("enabled")) {
                         Object value = entry.getValue();
                         if (value != null && "true".equalsIgnoreCase(value.toString()))
@@ -422,7 +422,7 @@ final public class Validators {
                 ZLdapFilter query = ZLdapFilterFactory.getInstance().allNonSystemAccounts();
                 
                 ldapProv.searchLdapOnReplica(searchBaseDN, query, null, this);
-                ZimbraLog.account.debug("COS/Feature counts: %s + %s", cosCount, featureCount);
+                ZmailLog.account.debug("COS/Feature counts: %s + %s", cosCount, featureCount);
             }
             
             @Override
@@ -430,7 +430,7 @@ final public class Validators {
                 try {
                     visitInternal(dn, attrs, ldapAttrs);
                 } catch (ServiceException e) {
-                    ZimbraLog.account.error("encountered error, entry skipped ", e);
+                    ZmailLog.account.error("encountered error, entry skipped ", e);
                 }
             }
             
@@ -439,12 +439,12 @@ final public class Validators {
                 List<String> objectclass = ldapAttrs.getMultiAttrStringAsList(
                         Provisioning.A_objectClass, IAttributes.CheckBinary.NOCHECK);
                 if (objectclass == null || objectclass.size() == 0) {
-                    ZimbraLog.account.error("DN: " + dn + ": does not have objectclass!");
+                    ZmailLog.account.error("DN: " + dn + ": does not have objectclass!");
                     return;
                 }
                 
-                if (objectclass.contains(AttributeClass.OC_zimbraAccount)) {
-                    String cosId = ldapAttrs.getAttrString(Provisioning.A_zimbraCOSId);
+                if (objectclass.contains(AttributeClass.OC_zmailAccount)) {
+                    String cosId = ldapAttrs.getAttrString(Provisioning.A_zmailCOSId);
                     if (cosId == null) {
                         cosId = defaultCos;
                     }
@@ -466,7 +466,7 @@ final public class Validators {
                             value = (String) attrValue;
                         }
                                                 
-                        if (attrName.toLowerCase().startsWith("zimbrafeature")
+                        if (attrName.toLowerCase().startsWith("zmailfeature")
                                 && attrName.toLowerCase().endsWith("enabled")
                                 && "true".equalsIgnoreCase(value))
                             acctFeatures.add(attrName);
@@ -509,9 +509,9 @@ final public class Validators {
         throws ServiceException {
             String query = LdapFilter.allNonSystemAccounts();
 
-            ZimbraLdapContext zlc = null;
+            ZmailLdapContext zlc = null;
             try {
-                zlc = new ZimbraLdapContext();
+                zlc = new ZmailLdapContext();
 
                 SearchControls searchControls =
                     new SearchControls(SearchControls.SUBTREE_SCOPE,
@@ -531,17 +531,17 @@ final public class Validators {
                             SearchResult sr = ne.nextElement();
                             String dn = sr.getNameInNamespace();
                             // skip admin accounts
-                            if (dn.endsWith("cn=zimbra")) continue;
+                            if (dn.endsWith("cn=zmail")) continue;
 
                             Attributes attrs = sr.getAttributes();
                             Attribute objectclass = attrs.get("objectclass");
                             if (objectclass == null) {
-                                ZimbraLog.account.error("DN: " + dn + ": does not have objectclass!");
+                                ZmailLog.account.error("DN: " + dn + ": does not have objectclass!");
                                 continue;
                             }
-                            if (objectclass.contains("zimbraAccount")) {
+                            if (objectclass.contains("zmailAccount")) {
                                 String cosId = defaultCos;
-                                Attribute cosIdAttr = attrs.get("zimbracosid");
+                                Attribute cosIdAttr = attrs.get("zmailcosid");
                                 if (cosIdAttr != null)
                                     cosId = (String) cosIdAttr.get();
                                 // invalid COS id will revert to default COS id, however, this counter will count
@@ -560,7 +560,7 @@ final public class Validators {
                                     String value = null;
                                     if (atValue != null)
                                         value = at.get().toString();
-                                    if (name.toLowerCase().startsWith("zimbrafeature")
+                                    if (name.toLowerCase().startsWith("zmailfeature")
                                             && name.toLowerCase().endsWith("enabled")
                                             && "true".equalsIgnoreCase(value))
                                         acctFeatures.add(name);
@@ -581,10 +581,10 @@ final public class Validators {
             } catch (IOException e) {
                 throw ServiceException.FAILURE("unable to count all the users", e);
             } finally {
-                ZimbraLdapContext.closeContext(zlc);
+                ZmailLdapContext.closeContext(zlc);
             }
-            if (ZimbraLog.account.isDebugEnabled())
-                ZimbraLog.account.debug("COS/Feature counts: %s + %s", cosCount, featureCount);
+            if (ZmailLog.account.isDebugEnabled())
+                ZmailLog.account.debug("COS/Feature counts: %s + %s", cosCount, featureCount);
         }
         */
 

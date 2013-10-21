@@ -12,7 +12,7 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.filter;
+package org.zmail.cs.filter;
 
 import java.io.IOException;
 import java.util.Collection;
@@ -21,15 +21,15 @@ import java.util.List;
 import javax.mail.MessagingException;
 import javax.mail.internet.MimeMessage;
 
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.common.util.ZimbraLog;
-import com.zimbra.cs.filter.jsieve.ActionFlag;
-import com.zimbra.cs.mailbox.DeliveryOptions;
-import com.zimbra.cs.mailbox.Mailbox;
-import com.zimbra.cs.mailbox.Message;
-import com.zimbra.cs.mailbox.OperationContext;
-import com.zimbra.cs.mime.ParsedMessage;
-import com.zimbra.cs.service.util.ItemId;
+import org.zmail.common.service.ServiceException;
+import org.zmail.common.util.ZmailLog;
+import org.zmail.cs.filter.jsieve.ActionFlag;
+import org.zmail.cs.mailbox.DeliveryOptions;
+import org.zmail.cs.mailbox.Mailbox;
+import org.zmail.cs.mailbox.Message;
+import org.zmail.cs.mailbox.OperationContext;
+import org.zmail.cs.mime.ParsedMessage;
+import org.zmail.cs.service.util.ItemId;
 
 /**
  * Mail filtering implementation for messages that are sent from a user's account.
@@ -72,7 +72,7 @@ public final class OutgoingMessageHandler implements FilterHandler {
         try {
             return parsedMessage.getMimeMessage().getSize();
         } catch (Exception e) {
-            ZimbraLog.filter.warn("Error in determining message size", e);
+            ZmailLog.filter.warn("Error in determining message size", e);
             return -1;
         }
     }
@@ -109,7 +109,7 @@ public final class OutgoingMessageHandler implements FilterHandler {
 
     @Override
     public void reply(String bodyTemplate) {
-        ZimbraLog.filter.debug("Ignoring attempt to reply to outgoing message");
+        ZmailLog.filter.debug("Ignoring attempt to reply to outgoing message");
     }
 
     @Override

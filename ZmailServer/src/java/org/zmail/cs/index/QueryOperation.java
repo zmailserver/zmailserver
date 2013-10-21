@@ -13,28 +13,28 @@
  * ***** END LICENSE BLOCK *****
  */
 
-package com.zimbra.cs.index;
+package org.zmail.cs.index;
 
 import java.util.Set;
 
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.cs.mailbox.MailItem;
-import com.zimbra.cs.mailbox.Mailbox;
+import org.zmail.common.service.ServiceException;
+import org.zmail.cs.mailbox.MailItem;
+import org.zmail.cs.mailbox.Mailbox;
 
 /**
  * A {@link QueryOperation} is a part of a Search request -- there are
  * potentially multiple query operations in a search. {@link QueryOperation}
- * return {@link ZimbraQueryResultsImpl} sets -- which can be iterated over to
- * get {@link ZimbraHit} objects.
+ * return {@link ZmailQueryResultsImpl} sets -- which can be iterated over to
+ * get {@link ZmailHit} objects.
  * <p>
  * The difference between a {@link QueryOperation} and a simple
- * {@link ZimbraQueryResultsImpl} set is that a {@link QueryOperation} knows how
+ * {@link ZmailQueryResultsImpl} set is that a {@link QueryOperation} knows how
  * to Optimize and Execute itself -- whereas a {@link QueryResult} set is just
  * a set of results and can only be iterated.
  *
  * @since Oct 15, 2004
  */
-public abstract class QueryOperation implements Cloneable, ZimbraQueryResults {
+public abstract class QueryOperation implements Cloneable, ZmailQueryResults {
     static final int MIN_CHUNK_SIZE = 26;
     static final int MAX_CHUNK_SIZE = 5000;
 
@@ -83,7 +83,7 @@ public abstract class QueryOperation implements Cloneable, ZimbraQueryResults {
      * @return search results
      * @throws ServiceException if an error occurred
      */
-    final ZimbraQueryResults run(Mailbox mbox, SearchParams params, int chunkSize) throws ServiceException {
+    final ZmailQueryResults run(Mailbox mbox, SearchParams params, int chunkSize) throws ServiceException {
         mIsToplevelQueryOp = true;
 
         chunkSize++; // one extra for checking the "more" flag at the end of the results
@@ -114,7 +114,7 @@ public abstract class QueryOperation implements Cloneable, ZimbraQueryResults {
             usePreloadingGrouper = false;
         }
 
-        ZimbraQueryResultsImpl results = null;
+        ZmailQueryResultsImpl results = null;
         switch (retType) {
             case CONVERSATION:
                 if (params.getPrefetch() && usePreloadingGrouper) {
@@ -180,7 +180,7 @@ public abstract class QueryOperation implements Cloneable, ZimbraQueryResults {
     protected abstract void begin(QueryContext ctx) throws ServiceException;
 
     @Override
-    public ZimbraHit skipToHit(int hitNo) throws ServiceException {
+    public ZmailHit skipToHit(int hitNo) throws ServiceException {
         resetIterator();
         for (int i = 0; i < hitNo; i++) {
             if (!hasNext()) {
@@ -277,7 +277,7 @@ public abstract class QueryOperation implements Cloneable, ZimbraQueryResults {
     protected abstract QueryOperation combineOps(QueryOperation other, boolean union);
 
     /**
-     * Callback for {@link com.zimbra.cs.index.QueryOperation#depthFirstRecurse(RecurseCallback)}
+     * Callback for {@link org.zmail.cs.index.QueryOperation#depthFirstRecurse(RecurseCallback)}
      */
     interface RecurseCallback {
         void recurseCallback(QueryOperation op);
@@ -293,11 +293,11 @@ public abstract class QueryOperation implements Cloneable, ZimbraQueryResults {
 
     protected static final class QueryContext {
         private final Mailbox mailbox;
-        private final ZimbraQueryResultsImpl results;
+        private final ZmailQueryResultsImpl results;
         private final SearchParams params;
         private final int chunkSize;
 
-        QueryContext(Mailbox mbox, ZimbraQueryResultsImpl results,
+        QueryContext(Mailbox mbox, ZmailQueryResultsImpl results,
                 SearchParams params, int chunkSize) {
             this.mailbox = mbox;
             this.results = results;
@@ -309,7 +309,7 @@ public abstract class QueryOperation implements Cloneable, ZimbraQueryResults {
             return mailbox;
         }
 
-        ZimbraQueryResultsImpl getResults() {
+        ZmailQueryResultsImpl getResults() {
             return results;
         }
 

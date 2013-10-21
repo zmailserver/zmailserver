@@ -14,32 +14,32 @@
 # ***** END LICENSE BLOCK *****
 # 
 
-if [ x`whoami` != xzimbra ]; then
-	echo Error: must be run as zimbra user
+if [ x`whoami` != xzmail ]; then
+	echo Error: must be run as zmail user
   exit 1
 fi
 
 source `dirname $0`/zmshutil || exit 1
 zmsetvars \
-	zimbra_home \
-	zimbra_log_directory \
+	zmail_home \
+	zmail_log_directory \
 	zmconfigd_listen_port
 
 # These variables are not set if run via cron.  Make sure they are set prior to execution
 if [ x"$JYTHONPATH" = "x" ]; then
-  JAVA_HOME=${zimbra_home}/java
-  PATH=${zimbra_home}/bin:${zimbra_home}/postfix/sbin:${zimbra_home}/openldap/bin:${zimbra_home}/snmp/bin:${zimbra_home}/bdb/bin:${zimbra_home}/openssl/bin:${JAVA_HOME}/bin:/usr/sbin:${PATH}
+  JAVA_HOME=${zmail_home}/java
+  PATH=${zmail_home}/bin:${zmail_home}/postfix/sbin:${zmail_home}/openldap/bin:${zmail_home}/snmp/bin:${zmail_home}/bdb/bin:${zmail_home}/openssl/bin:${JAVA_HOME}/bin:/usr/sbin:${PATH}
   export PATH
 
-  JYTHONPATH="${zimbra_home}/zimbramon/pylibs"
+  JYTHONPATH="${zmail_home}/zmailmon/pylibs"
   export JYTHONPATH
 fi
  
 pid=""
-pidfile="${zimbra_log_directory}/zmconfigd.pid"
+pidfile="${zmail_log_directory}/zmconfigd.pid"
 
 ctlpid=""
-ctlpidfile="${zimbra_log_directory}/zmconfigdctl.pid"
+ctlpidfile="${zmail_log_directory}/zmconfigdctl.pid"
 
 NC=`which nc 2>/dev/null`; NC=${NC:-`which netcat 2>/dev/null`}
 
@@ -109,7 +109,7 @@ startzmconfigd()
 		kill -9 ${pid}
 	fi
 	rm -rf ${pidfile}
-	${zimbra_home}/libexec/zmconfigd >> ${zimbra_log_directory}/zmconfigd.log 2>&1 &
+	${zmail_home}/libexec/zmconfigd >> ${zmail_log_directory}/zmconfigd.log 2>&1 &
 	# Bug 51682 wait for the pid file to be created, then wait 30 seconds for rewrites
 	for ((i = 0; i < 30; i++)) do
 		if [ -f ${pidfile} ]; then
@@ -144,7 +144,7 @@ daemon()
 	while :; do
 		cd /
 		sleep 60
-		startzmconfigd >> /opt/zimbra/log/zmconfigd.log 2>&1
+		startzmconfigd >> /opt/zmail/log/zmconfigd.log 2>&1
 	done
 	exit 0
 }

@@ -12,7 +12,7 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.mime.handler;
+package org.zmail.cs.mime.handler;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -23,7 +23,7 @@ import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import com.zimbra.cs.mime.Mime;
+import org.zmail.cs.mime.Mime;
 
 public class TextEnrichedHandler extends TextHtmlHandler {
 

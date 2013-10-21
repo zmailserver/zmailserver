@@ -13,20 +13,20 @@
  * ***** END LICENSE BLOCK *****
  */
 
-package com.zimbra.cs.index;
+package org.zmail.cs.index;
 
 import java.io.Closeable;
 import java.util.List;
 
-import com.zimbra.common.service.ServiceException;
+import org.zmail.common.service.ServiceException;
 
 /**
- * Interface for iterating through {@link ZimbraHit}s. This class is the thing that is returned when you do a Search.
+ * Interface for iterating through {@link ZmailHit}s. This class is the thing that is returned when you do a Search.
  *
  * @since Mar 15, 2005
  * @author tim
  */
-public interface ZimbraQueryResults extends Closeable {
+public interface ZmailQueryResults extends Closeable {
 
     /**
      * Resets the iterator to the beginning
@@ -39,13 +39,13 @@ public interface ZimbraQueryResults extends Closeable {
      * @return The next hit, advancing the iterator.
      * @throws ServiceException
      */
-    ZimbraHit getNext() throws ServiceException;
+    ZmailHit getNext() throws ServiceException;
 
     /**
      * @return The next hit without advancing the iterator.
      * @throws ServiceException
      */
-    ZimbraHit peekNext() throws ServiceException;
+    ZmailHit peekNext() throws ServiceException;
 
     /**
      * Slightly more efficient in a few cases (DB-only queries), skip to
@@ -55,7 +55,7 @@ public interface ZimbraQueryResults extends Closeable {
      * @return
      * @throws ServiceException
      */
-    ZimbraHit skipToHit(int hitNo) throws ServiceException;
+    ZmailHit skipToHit(int hitNo) throws ServiceException;
 
     /**
      * @return TRUE if there is another Hit

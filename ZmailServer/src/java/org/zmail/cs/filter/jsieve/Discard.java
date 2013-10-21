@@ -12,9 +12,9 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.filter.jsieve;
+package org.zmail.cs.filter.jsieve;
 
-import com.zimbra.cs.filter.ZimbraMailAdapter;
+import org.zmail.cs.filter.ZmailMailAdapter;
 import org.apache.jsieve.Arguments;
 import org.apache.jsieve.Block;
 import org.apache.jsieve.SieveContext;
@@ -27,9 +27,9 @@ public class Discard extends org.apache.jsieve.commands.Discard {
 
     @Override
     protected Object executeBasic(MailAdapter mail, Arguments arguments, Block block, SieveContext context) throws SieveException {
-        if (!(mail instanceof ZimbraMailAdapter))
+        if (!(mail instanceof ZmailMailAdapter))
             return null;
-        ((ZimbraMailAdapter) mail).setDiscardActionPresent();
+        ((ZmailMailAdapter) mail).setDiscardActionPresent();
         return super.executeBasic(mail, arguments, block, context);
     }
 }

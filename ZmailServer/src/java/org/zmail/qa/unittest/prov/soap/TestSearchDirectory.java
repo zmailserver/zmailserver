@@ -12,7 +12,7 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.qa.unittest.prov.soap;
+package org.zmail.qa.unittest.prov.soap;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
@@ -31,25 +31,25 @@ import org.junit.Ignore;
 import org.junit.Test;
 
 import com.google.common.collect.Lists;
-import com.zimbra.common.account.Key;
-import com.zimbra.common.account.ProvisioningConstants;
-import com.zimbra.cs.account.Account;
-import com.zimbra.cs.account.AccountServiceException;
-import com.zimbra.cs.account.DistributionList;
-import com.zimbra.cs.account.Domain;
-import com.zimbra.cs.account.NamedEntry;
-import com.zimbra.cs.account.Provisioning;
-import com.zimbra.cs.account.SearchDirectoryOptions;
-import com.zimbra.cs.account.SearchDirectoryOptions.SortOpt;
-import com.zimbra.cs.account.accesscontrol.AdminRight;
-import com.zimbra.cs.account.accesscontrol.GranteeType;
-import com.zimbra.cs.account.accesscontrol.RightModifier;
-import com.zimbra.cs.account.accesscontrol.TargetType;
-import com.zimbra.cs.account.soap.SoapProvisioning;
-import com.zimbra.cs.ldap.LdapUtil;
-import com.zimbra.qa.QA.Bug;
-import com.zimbra.qa.unittest.prov.Verify;
-import com.zimbra.soap.type.TargetBy;
+import org.zmail.common.account.Key;
+import org.zmail.common.account.ProvisioningConstants;
+import org.zmail.cs.account.Account;
+import org.zmail.cs.account.AccountServiceException;
+import org.zmail.cs.account.DistributionList;
+import org.zmail.cs.account.Domain;
+import org.zmail.cs.account.NamedEntry;
+import org.zmail.cs.account.Provisioning;
+import org.zmail.cs.account.SearchDirectoryOptions;
+import org.zmail.cs.account.SearchDirectoryOptions.SortOpt;
+import org.zmail.cs.account.accesscontrol.AdminRight;
+import org.zmail.cs.account.accesscontrol.GranteeType;
+import org.zmail.cs.account.accesscontrol.RightModifier;
+import org.zmail.cs.account.accesscontrol.TargetType;
+import org.zmail.cs.account.soap.SoapProvisioning;
+import org.zmail.cs.ldap.LdapUtil;
+import org.zmail.qa.QA.Bug;
+import org.zmail.qa.unittest.prov.Verify;
+import org.zmail.soap.type.TargetBy;
 
 public class TestSearchDirectory extends SoapTest {
 
@@ -96,11 +96,11 @@ public class TestSearchDirectory extends SoapTest {
     }
     
     private List searchDirectory(String key, boolean expectTooMany) throws Exception {
-        final String FILTER_1 = "(|(uid=*%n*)(cn=*%n*)(sn=*%n*)(gn=*%n*)(displayName=*%n*)(zimbraId=%n)(mail=*%n*)(zimbraMailAlias=*%n*)(zimbraMailDeliveryAddress=*%n*)(zimbraDomainName=*%n*))";
+        final String FILTER_1 = "(|(uid=*%n*)(cn=*%n*)(sn=*%n*)(gn=*%n*)(displayName=*%n*)(zmailId=%n)(mail=*%n*)(zmailMailAlias=*%n*)(zmailMailDeliveryAddress=*%n*)(zmailDomainName=*%n*))";
         final String[] ATTRS = new String[]{
-                "displayName", "zimbraId", "zimbraMailHost", "uid", "zimbraAccountStatus", 
-                "zimbraLastLogonTimestamp", "description", "zimbraMailStatus", 
-                "zimbraCalResType", "zimbraDomainType", "zimbraDomainName"};
+                "displayName", "zmailId", "zmailMailHost", "uid", "zmailAccountStatus", 
+                "zmailLastLogonTimestamp", "description", "zmailMailStatus", 
+                "zmailCalResType", "zmailDomainType", "zmailDomainName"};
 
         /*
         int flags = 0;
@@ -240,11 +240,11 @@ public class TestSearchDirectory extends SoapTest {
             // 3. create two admin groups, one in domain 1, one in domain 2
             //
             Map<String, Object> adminGroup1Attrs = new HashMap<String, Object>();
-            adminGroup1Attrs.put(Provisioning.A_zimbraIsAdminGroup, ProvisioningConstants.TRUE);
+            adminGroup1Attrs.put(Provisioning.A_zmailIsAdminGroup, ProvisioningConstants.TRUE);
             DistributionList adminGroup1 = prov.createDistributionList("adminGroup-1" + "@" + domain1Name, adminGroup1Attrs);
             
             Map<String, Object> adminGroup2Attrs = new HashMap<String, Object>();
-            adminGroup2Attrs.put(Provisioning.A_zimbraIsAdminGroup, ProvisioningConstants.TRUE);
+            adminGroup2Attrs.put(Provisioning.A_zmailIsAdminGroup, ProvisioningConstants.TRUE);
             DistributionList adminGroup2 = prov.createDistributionList("adminGroup-2" + "@" + domain2Name, adminGroup2Attrs);
             
             //
@@ -293,22 +293,22 @@ public class TestSearchDirectory extends SoapTest {
             SoapProvisioning prov = SoapProvTestUtil.getSoapProvisioning(adminName, adminPassword);
             
             String[] attrs = new String[]{"displayName",
-                                          "zimbraId",
-                                          "zimbraMailHost",
+                                          "zmailId",
+                                          "zmailMailHost",
                                           "uid",
-                                          "zimbraCOSId",
-                                          "zimbraAccountStatus",
-                                          "zimbraLastLogonTimestamp",
+                                          "zmailCOSId",
+                                          "zmailAccountStatus",
+                                          "zmailLastLogonTimestamp",
                                           "description",
-                                          "zimbraIsDelegatedAdminAccount",
-                                          "zimbraIsAdminAccount",
-                                          "zimbraMailStatus",
-                                          "zimbraIsAdminGroup",
-                                          "zimbraCalResType",
-                                          "zimbraDomainType",
-                                          "zimbraDomainName",
-                                          "zimbraIsDelegatedAdminAccount",
-                                          "zimbraIsAdminGroup"
+                                          "zmailIsDelegatedAdminAccount",
+                                          "zmailIsAdminAccount",
+                                          "zmailMailStatus",
+                                          "zmailIsAdminGroup",
+                                          "zmailCalResType",
+                                          "zmailDomainType",
+                                          "zmailDomainName",
+                                          "zmailIsDelegatedAdminAccount",
+                                          "zmailIsAdminGroup"
                                          };
             
             SearchDirectoryOptions options = new SearchDirectoryOptions();
@@ -438,8 +438,8 @@ public class TestSearchDirectory extends SoapTest {
             SoapProvisioning prov = SoapProvTestUtil.getSoapProvisioning(
                     testData.mAdminName, testData.mAdminPassword);
             
-            String[] attrs = new String[]{"zimbraId",
-                                          "zimbraDomainname"
+            String[] attrs = new String[]{"zmailId",
+                                          "zmailDomainname"
                                          };
             
             SearchDirectoryOptions options = new SearchDirectoryOptions();

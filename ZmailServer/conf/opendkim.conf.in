@@ -1,9 +1,9 @@
-UserID                zimbra:zimbra
+UserID                zmail:zmail
 UMask                 022
-Socket                %%zimbraInetMode%%:8465@[%%zimbraLocalBindAddress%%]
-PidFile               /opt/zimbra/log/opendkim.pid
+Socket                %%zmailInetMode%%:8465@[%%zmailLocalBindAddress%%]
+PidFile               /opt/zmail/log/opendkim.pid
 
-LDAPBindUser		uid=zmpostfix,cn=appaccts,cn=zimbra
+LDAPBindUser		uid=zmpostfix,cn=appaccts,cn=zmail
 LDAPBindPassword	@@ldap_postfix_password@@
 LDAPUseTLS		@@ldap_starttls_supported@@
 LDAPTimeout             30
@@ -46,7 +46,7 @@ SignatureTTL          0
 StrictHeaders         no
 StrictTestMode        no
 SubDomains            no
-InternalHosts         file:/opt/zimbra/conf/opendkim-localnets.conf
+InternalHosts         file:/opt/zmail/conf/opendkim-localnets.conf
 
 SendADSPReports       no
 SendReports           no
@@ -58,6 +58,6 @@ Syslog                yes
 SyslogFacility        LOCAL0
 SyslogSuccess         no
 SoftwareHeader        yes
-TemporaryDirectory    /opt/zimbra/data/tmp
+TemporaryDirectory    /opt/zmail/data/tmp
 KeepTemporaryFiles    no
 MilterDebug           0

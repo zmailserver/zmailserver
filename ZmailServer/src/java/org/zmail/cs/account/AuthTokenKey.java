@@ -19,7 +19,7 @@
  * TODO To change the template for this generated file go to
  * Window - Preferences - Java - Code Style - Code Templates
  */
-package com.zimbra.cs.account;
+package org.zmail.cs.account;
 
 import java.security.SecureRandom;
 import java.util.HashMap;
@@ -27,7 +27,7 @@ import java.util.HashMap;
 import org.apache.commons.codec.DecoderException;
 import org.apache.commons.codec.binary.Hex;
 
-import com.zimbra.common.service.ServiceException;
+import org.zmail.common.service.ServiceException;
 
 /**
  * @author schemers
@@ -131,20 +131,20 @@ public class AuthTokenKey {
         if (reload)
             prov.reload(config);
         
-        String[] keys = config.getMultiAttr(Provisioning.A_zimbraAuthTokenKey);
+        String[] keys = config.getMultiAttr(Provisioning.A_zmailAuthTokenKey);
 
         if (keys.length == 0) {
             prov.reload(config);
-            keys = config.getMultiAttr(Provisioning.A_zimbraAuthTokenKey);
+            keys = config.getMultiAttr(Provisioning.A_zmailAuthTokenKey);
         }
 
         // bootstrap. automatically create new random key
         if (keys.length == 0) {
             AuthTokenKey key = new AuthTokenKey(0, null);
             HashMap<String, String> attrs = new HashMap<String, String>();
-            attrs.put(Provisioning.A_zimbraAuthTokenKey, key.getEncoded());
+            attrs.put(Provisioning.A_zmailAuthTokenKey, key.getEncoded());
             Provisioning.getInstance().modifyAttrs(config, attrs);
-            keys = config.getMultiAttr(Provisioning.A_zimbraAuthTokenKey);
+            keys = config.getMultiAttr(Provisioning.A_zmailAuthTokenKey);
         }
 
         for (int i=0; i < keys.length; i++) {

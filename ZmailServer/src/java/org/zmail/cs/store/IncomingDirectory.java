@@ -12,7 +12,7 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.store;
+package org.zmail.cs.store;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -21,8 +21,8 @@ import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
 
-import com.zimbra.common.localconfig.LC;
-import com.zimbra.common.util.ZimbraLog;
+import org.zmail.common.localconfig.LC;
+import org.zmail.common.util.ZmailLog;
 
 public class IncomingDirectory {
     private String mPath;
@@ -78,7 +78,7 @@ public class IncomingDirectory {
         if (mSweeper != null)
             return;
 
-        long sweepMaxAgeMS = LC.zimbra_store_sweeper_max_age.intValue() * 60 * 1000;
+        long sweepMaxAgeMS = LC.zmail_store_sweeper_max_age.intValue() * 60 * 1000;
         IncomingDirectorySweeper sweeper = new IncomingDirectorySweeper(SWEEP_INTERVAL_MS, sweepMaxAgeMS);
         sweeper.start();
         mSweeper = sweeper;
@@ -130,7 +130,7 @@ public class IncomingDirectory {
         }
 
         @Override public void run() {
-            ZimbraLog.store.info(getName() + " thread starting");
+            ZmailLog.store.info(getName() + " thread starting");
 
             boolean shutdown = false;
             long startTime = System.currentTimeMillis();
@@ -191,9 +191,9 @@ public class IncomingDirectory {
                                 // Let's warn only if delete failure wasn't caused by file having been
                                 // deleted by someone else already.
                                 if (file.exists())
-                                    ZimbraLog.store.warn("Sweeper unable to delete " + file.getAbsolutePath());
-                            } else if (ZimbraLog.store.isDebugEnabled()) {
-                                ZimbraLog.store.debug("Sweeper deleted " + file.getAbsolutePath());
+                                    ZmailLog.store.warn("Sweeper unable to delete " + file.getAbsolutePath());
+                            } else if (ZmailLog.store.isDebugEnabled()) {
+                                ZmailLog.store.debug("Sweeper deleted " + file.getAbsolutePath());
                                 numDeleted++;
                             }
                         }
@@ -208,10 +208,10 @@ public class IncomingDirectory {
 
                 long elapsed = System.currentTimeMillis() - startTime;
 
-                ZimbraLog.store.debug("Incoming directory sweep deleted " + numDeleted + " files in " + elapsed + "ms");
+                ZmailLog.store.debug("Incoming directory sweep deleted " + numDeleted + " files in " + elapsed + "ms");
             }
 
-            ZimbraLog.store.info(getName() + " thread exiting");
+            ZmailLog.store.info(getName() + " thread exiting");
         }
     }
 }

@@ -14,7 +14,7 @@
  * 
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.qa.unittest;
+package org.zmail.qa.unittest;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -28,33 +28,33 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 import junit.framework.TestCase;
 
-import com.zimbra.common.util.ZimbraLog;
-import com.zimbra.cs.account.Account;
-import com.zimbra.cs.account.DistributionList;
-import com.zimbra.cs.account.Domain;
-import com.zimbra.cs.account.Provisioning;
-import com.zimbra.common.account.Key;
-import com.zimbra.common.account.Key.AccountBy;
-import com.zimbra.common.account.Key.DistributionListBy;
-import com.zimbra.common.account.Key.DomainBy;
-import com.zimbra.common.account.ZAttrProvisioning.GalMode;
-import com.zimbra.cs.ldap.LdapUtil;
-import com.zimbra.cs.mailbox.calendar.ZAttendee;
-import com.zimbra.cs.service.mail.CalendarUtils;
-import com.zimbra.qa.unittest.prov.soap.GalTestUtil;
+import org.zmail.common.util.ZmailLog;
+import org.zmail.cs.account.Account;
+import org.zmail.cs.account.DistributionList;
+import org.zmail.cs.account.Domain;
+import org.zmail.cs.account.Provisioning;
+import org.zmail.common.account.Key;
+import org.zmail.common.account.Key.AccountBy;
+import org.zmail.common.account.Key.DistributionListBy;
+import org.zmail.common.account.Key.DomainBy;
+import org.zmail.common.account.ZAttrProvisioning.GalMode;
+import org.zmail.cs.ldap.LdapUtil;
+import org.zmail.cs.mailbox.calendar.ZAttendee;
+import org.zmail.cs.service.mail.CalendarUtils;
+import org.zmail.qa.unittest.prov.soap.GalTestUtil;
 
 /*
  * To run this test:
- * zmsoap -v -z RunUnitTestsRequest/test=com.zimbra.qa.unittest.TestCalAttendeesDiff
+ * zmsoap -v -z RunUnitTestsRequest/test=org.zmail.qa.unittest.TestCalAttendeesDiff
  *
  */
 
-// do not extend TestCase once ZimbraSuite supports JUnit 4 annotations.
+// do not extend TestCase once ZmailSuite supports JUnit 4 annotations.
 // we ahve to now because this test ahs to run in the sever.
 public class TestCalAttendeesDiff extends TestCase {
 
-    private static final String ZIMBRA_DOMAIN = "zimbra.galgrouptest";
-    private static final String ZIMBRA_GROUP = TestUtil.getAddress("zimbra-group", ZIMBRA_DOMAIN);
+    private static final String ZIMBRA_DOMAIN = "zmail.galgrouptest";
+    private static final String ZIMBRA_GROUP = TestUtil.getAddress("zmail-group", ZIMBRA_DOMAIN);
 
     private static final String EXTERNAL_DOMAIN = "external.galgrouptest";
     private static final String EXTERNAL_GROUP = TestUtil.getAddress("external-group", EXTERNAL_DOMAIN);
@@ -69,7 +69,7 @@ public class TestCalAttendeesDiff extends TestCase {
     private static final String USER_R3 = TestUtil.getAddress("user-R3", ZIMBRA_DOMAIN);
 
     //////////////
-    // TODO: remove once ZimbraSuite supports JUnit 4 annotations.
+    // TODO: remove once ZmailSuite supports JUnit 4 annotations.
     private static boolean initialized = false;
     private static boolean allDone = false;
 
@@ -95,9 +95,9 @@ public class TestCalAttendeesDiff extends TestCase {
 
         Provisioning prov = Provisioning.getInstance();
         
-        // create the zimbra domain
+        // create the zmail domain
         if (prov.get(Key.DomainBy.name, ZIMBRA_DOMAIN) == null) {
-            ZimbraLog.test.info("Creating domain " + ZIMBRA_DOMAIN);
+            ZmailLog.test.info("Creating domain " + ZIMBRA_DOMAIN);
             Domain domain = prov.createDomain(ZIMBRA_DOMAIN, new HashMap<String, Object>());
             
             // configure external GAL
@@ -105,17 +105,17 @@ public class TestCalAttendeesDiff extends TestCase {
             domain.setGalMode(GalMode.both, attrs);
             domain.addGalLdapURL("ldap://localhost:389", attrs);
             domain.setGalLdapBindDn("cn=config", attrs);
-            domain.setGalLdapBindPassword("zimbra");
+            domain.setGalLdapBindPassword("zmail");
             domain.setGalLdapSearchBase(LdapUtil.domainToDN(EXTERNAL_DOMAIN));
-            domain.setGalAutoCompleteLdapFilter("zimbraAccountAutoComplete");
-            domain.setGalLdapFilter("zimbraAccounts");
+            domain.setGalAutoCompleteLdapFilter("zmailAccountAutoComplete");
+            domain.setGalLdapFilter("zmailAccounts");
             
             prov.modifyAttrs(domain, attrs);
         }
 
         // create a domain to simulate entries in external GAL
         if (prov.get(Key.DomainBy.name, EXTERNAL_DOMAIN) == null) {
-            ZimbraLog.test.info("Creating domain " + EXTERNAL_DOMAIN);
+            ZmailLog.test.info("Creating domain " + EXTERNAL_DOMAIN);
             prov.createDomain(EXTERNAL_DOMAIN, new HashMap<String, Object>());
         }
 
@@ -130,7 +130,7 @@ public class TestCalAttendeesDiff extends TestCase {
         Account acctL2 = prov.get(AccountBy.name, USER_L2);
         acctL2.addAlias(USER_L2_ALIAS);
 
-        // create zimbra group and add members
+        // create zmail group and add members
         DistributionList group = prov.get(Key.DistributionListBy.name, ZIMBRA_GROUP);
         if (group == null) {
             group = prov.createDistributionList(ZIMBRA_GROUP, new HashMap<String, Object>());
@@ -168,11 +168,11 @@ public class TestCalAttendeesDiff extends TestCase {
 
         Domain extDomain = prov.get(Key.DomainBy.name, EXTERNAL_DOMAIN);
         if (extDomain != null) {
-            ZimbraLog.test.info("Deleting domain " + EXTERNAL_DOMAIN);
+            ZmailLog.test.info("Deleting domain " + EXTERNAL_DOMAIN);
             prov.deleteDomain(extDomain.getId());
         }
 
-        // delete zimbra group and domain
+        // delete zmail group and domain
         DistributionList group = prov.get(Key.DistributionListBy.name, ZIMBRA_GROUP);
         if (group != null) {
             prov.deleteDistributionList(group.getId());
@@ -180,7 +180,7 @@ public class TestCalAttendeesDiff extends TestCase {
         
         Domain domain = prov.get(Key.DomainBy.name, ZIMBRA_DOMAIN);
         if (domain != null) {
-            ZimbraLog.test.info("Deleting domain " + ZIMBRA_DOMAIN);
+            ZmailLog.test.info("Deleting domain " + ZIMBRA_DOMAIN);
             prov.deleteDomain(domain.getId());
         }
     }
@@ -232,7 +232,7 @@ public class TestCalAttendeesDiff extends TestCase {
         return set;
     }
 
-    // TODO: remove once ZimbraSuite supports JUnit 4 annotations. 
+    // TODO: remove once ZmailSuite supports JUnit 4 annotations. 
     @Test
     public void testLast() throws Exception {
         allDone = true;

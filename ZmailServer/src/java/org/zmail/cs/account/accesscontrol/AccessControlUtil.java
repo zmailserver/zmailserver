@@ -12,15 +12,15 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.account.accesscontrol;
+package org.zmail.cs.account.accesscontrol;
 
-import com.zimbra.common.account.Key;
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.common.util.ZimbraLog;
-import com.zimbra.cs.account.Account;
-import com.zimbra.cs.account.AuthToken;
-import com.zimbra.cs.account.GuestAccount;
-import com.zimbra.cs.account.Provisioning;
+import org.zmail.common.account.Key;
+import org.zmail.common.service.ServiceException;
+import org.zmail.common.util.ZmailLog;
+import org.zmail.cs.account.Account;
+import org.zmail.cs.account.AuthToken;
+import org.zmail.cs.account.GuestAccount;
+import org.zmail.cs.account.Provisioning;
 
 public class AccessControlUtil {
     
@@ -44,7 +44,7 @@ public class AccessControlUtil {
                 if (rightNeeded.isUserRight()) {
                     granteeAcct = GuestAccount.ANONYMOUS_ACCT;
                 }
-            } else if (authToken.isZimbraUser()) {
+            } else if (authToken.isZmailUser()) {
                 granteeAcct = authToken.getAccount();
             } else {
                 if (rightNeeded.isUserRight()) {
@@ -52,7 +52,7 @@ public class AccessControlUtil {
                 }
             }
         } catch (ServiceException e) {
-            ZimbraLog.acl.warn("unable to get account from auth token, id=: " + 
+            ZmailLog.acl.warn("unable to get account from auth token, id=: " + 
                     authToken.getAccountId(), e);
         }
         
@@ -78,7 +78,7 @@ public class AccessControlUtil {
             }
             
         } catch (ServiceException e) {
-            ZimbraLog.acl.warn("unable to get account from email address: " + emailAddr, e);
+            ZmailLog.acl.warn("unable to get account from email address: " + emailAddr, e);
         }
         
         return granteeAcct;

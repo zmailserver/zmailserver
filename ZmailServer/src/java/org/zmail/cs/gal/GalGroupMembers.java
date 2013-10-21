@@ -12,7 +12,7 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.gal;
+package org.zmail.cs.gal;
 
 import java.util.Arrays;
 import java.util.Set;
@@ -21,23 +21,23 @@ import java.util.TreeSet;
 import org.json.JSONArray;
 import org.json.JSONException;
 
-import com.zimbra.common.mailbox.ContactConstants;
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.common.soap.AccountConstants;
-import com.zimbra.common.soap.AdminConstants;
-import com.zimbra.common.soap.Element;
-import com.zimbra.common.soap.SoapProtocol;
-import com.zimbra.common.util.ZimbraLog;
-import com.zimbra.cs.account.Account;
-import com.zimbra.cs.account.AccountServiceException;
-import com.zimbra.cs.account.AuthToken;
-import com.zimbra.cs.account.GalContact;
-import com.zimbra.cs.account.Group;
-import com.zimbra.cs.account.Provisioning;
-import com.zimbra.cs.mailbox.Contact;
-import com.zimbra.cs.service.AuthProvider;
-import com.zimbra.soap.type.GalSearchType;
-import com.zimbra.soap.ZimbraSoapContext;
+import org.zmail.common.mailbox.ContactConstants;
+import org.zmail.common.service.ServiceException;
+import org.zmail.common.soap.AccountConstants;
+import org.zmail.common.soap.AdminConstants;
+import org.zmail.common.soap.Element;
+import org.zmail.common.soap.SoapProtocol;
+import org.zmail.common.util.ZmailLog;
+import org.zmail.cs.account.Account;
+import org.zmail.cs.account.AccountServiceException;
+import org.zmail.cs.account.AuthToken;
+import org.zmail.cs.account.GalContact;
+import org.zmail.cs.account.Group;
+import org.zmail.cs.account.Provisioning;
+import org.zmail.cs.mailbox.Contact;
+import org.zmail.cs.service.AuthProvider;
+import org.zmail.soap.type.GalSearchType;
+import org.zmail.soap.ZmailSoapContext;
 
 public class GalGroupMembers {
 
@@ -56,7 +56,7 @@ public class GalGroupMembers {
 
         abstract public int getTotal();
 
-        abstract public String getDLZimbraId();
+        abstract public String getDLZmailId();
 
         /**
          *
@@ -84,7 +84,7 @@ public class GalGroupMembers {
                 try {
                     mMembers = Contact.getMultiValueAttrArray(members);
                 } catch (JSONException e) {
-                    ZimbraLog.account.warn("unable to get members from Contact " + mContact.getId(), e);
+                    ZmailLog.account.warn("unable to get members from Contact " + mContact.getId(), e);
                 }
             }
         }
@@ -98,8 +98,8 @@ public class GalGroupMembers {
         }
 
         @Override
-        public String getDLZimbraId() {
-            return mContact.get(ContactConstants.A_zimbraId);
+        public String getDLZmailId() {
+            return mContact.get(ContactConstants.A_zmailId);
         }
 
         @Override
@@ -113,7 +113,7 @@ public class GalGroupMembers {
                         encodeMember(resp, mMembers.getString(i));
                     }
                 } catch (JSONException e) {
-                    ZimbraLog.account.warn("unable to get members from Contact " + mContact.getId(), e);
+                    ZmailLog.account.warn("unable to get members from Contact " + mContact.getId(), e);
                 }
             }
         }
@@ -132,7 +132,7 @@ public class GalGroupMembers {
                         mMembersSet.add(mMembers.getString(i));
                     }
                 } catch (JSONException e) {
-                    ZimbraLog.account.warn("unable to get members from Contact " + mContact.getId(), e);
+                    ZmailLog.account.warn("unable to get members from Contact " + mContact.getId(), e);
                 }
             }
 
@@ -165,8 +165,8 @@ public class GalGroupMembers {
         }
 
         @Override
-        public String getDLZimbraId() {
-            return mGalContact.getSingleAttr(ContactConstants.A_zimbraId);
+        public String getDLZmailId() {
+            return mGalContact.getSingleAttr(ContactConstants.A_zmailId);
         }
 
         @Override
@@ -217,7 +217,7 @@ public class GalGroupMembers {
         }
 
         @Override
-        public String getDLZimbraId() {
+        public String getDLZmailId() {
             return group.getId();
         }
 
@@ -301,7 +301,7 @@ public class GalGroupMembers {
     }
 
 
-    public static DLMembersResult searchGal(ZimbraSoapContext zsc, Account account, String groupName, Element request)
+    public static DLMembersResult searchGal(ZmailSoapContext zsc, Account account, String groupName, Element request)
     throws ServiceException {
         GalSearchParams params = new GalSearchParams(account, zsc);
         params.setQuery(groupName);
@@ -327,11 +327,11 @@ public class GalGroupMembers {
      */
     public static Set<String> getGroupMembers(String groupName, Account account) throws ServiceException {
 
-        // create a ZimbraSoapContext and request for GAL sync account proxy (in case it has to do so)
+        // create a ZmailSoapContext and request for GAL sync account proxy (in case it has to do so)
         // use the global admin's credentials to bypass any permission check
         //
         AuthToken adminAuthToken = AuthProvider.getAdminAuthToken();
-        ZimbraSoapContext zsc = new ZimbraSoapContext(adminAuthToken, account.getId(), SoapProtocol.Soap12, SoapProtocol.Soap12);
+        ZmailSoapContext zsc = new ZmailSoapContext(adminAuthToken, account.getId(), SoapProtocol.Soap12, SoapProtocol.Soap12);
 
         Element request = Element.create(SoapProtocol.Soap12, AccountConstants.GET_DISTRIBUTION_LIST_MEMBERS_REQUEST);
         Element eDL = request.addElement(AdminConstants.E_DL).setText(groupName);

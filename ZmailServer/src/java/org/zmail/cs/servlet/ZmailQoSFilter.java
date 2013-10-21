@@ -13,7 +13,7 @@
  * ***** END LICENSE BLOCK *****
  */
 
-package com.zimbra.cs.servlet;
+package org.zmail.cs.servlet;
 
 import java.io.IOException;
 import java.util.concurrent.Semaphore;
@@ -32,11 +32,11 @@ import org.eclipse.jetty.continuation.Continuation;
 import org.eclipse.jetty.continuation.ContinuationSupport;
 
 import com.googlecode.concurrentlinkedhashmap.ConcurrentLinkedHashMap;
-import com.zimbra.common.localconfig.LC;
-import com.zimbra.common.util.ZimbraLog;
-import com.zimbra.cs.account.AuthToken;
-import com.zimbra.cs.service.AuthProvider;
-import com.zimbra.cs.servlet.util.AuthUtil;
+import org.zmail.common.localconfig.LC;
+import org.zmail.common.util.ZmailLog;
+import org.zmail.cs.account.AuthToken;
+import org.zmail.cs.service.AuthProvider;
+import org.zmail.cs.servlet.util.AuthUtil;
 
 /**
  * This Servlet {@link Filter} limits the number of concurrent HTTP requests per
@@ -49,7 +49,7 @@ import com.zimbra.cs.servlet.util.AuthUtil;
  */
 
 
-public class ZimbraQoSFilter implements Filter {
+public class ZmailQoSFilter implements Filter {
 
     final static int DEFAULT_WAIT_MS=50;
     final static long DEFAULT_SUSPEND_MS = 1000;
@@ -79,7 +79,7 @@ public class ZimbraQoSFilter implements Filter {
             } 
         } catch (Exception e) {
             // ignore
-            ZimbraLog.misc.debug("error while extracting authtoken" , e);
+            ZmailLog.misc.debug("error while extracting authtoken" , e);
         }
         return null;
     }
@@ -118,10 +118,10 @@ public class ZimbraQoSFilter implements Filter {
             } else {
                 Continuation continuation = ContinuationSupport.getContinuation(request);
                 HttpServletRequest hreq = (HttpServletRequest) request;
-                ZimbraServlet.addRemoteIpToLoggingContext(hreq);
-                ZimbraServlet.addUAToLoggingContext(hreq);
-                ZimbraLog.misc.warn("Exceeded the max requests limit. Suspending " + continuation);
-                ZimbraLog.clearContext();
+                ZmailServlet.addRemoteIpToLoggingContext(hreq);
+                ZmailServlet.addUAToLoggingContext(hreq);
+                ZmailLog.misc.warn("Exceeded the max requests limit. Suspending " + continuation);
+                ZmailLog.clearContext();
                 continuation.setTimeout(suspendMs);
                 continuation.suspend();
                 return;

@@ -13,7 +13,7 @@
  * ***** END LICENSE BLOCK *****
  */
 
-package com.zimbra.cs.mailbox;
+package org.zmail.cs.mailbox;
 
 import java.util.Collections;
 import java.util.List;
@@ -23,20 +23,20 @@ import java.util.UUID;
 import com.google.common.base.Strings;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.common.soap.Element;
-import com.zimbra.common.soap.Element.XMLElement;
-import com.zimbra.common.soap.XmlParseException;
-import com.zimbra.common.util.DateUtil;
-import com.zimbra.common.util.ZimbraLog;
-import com.zimbra.cs.account.Account;
-import com.zimbra.cs.account.Config;
-import com.zimbra.cs.account.Cos;
-import com.zimbra.cs.account.Entry;
-import com.zimbra.cs.account.Provisioning;
-import com.zimbra.soap.JaxbUtil;
-import com.zimbra.soap.mail.type.Policy;
-import com.zimbra.soap.mail.type.RetentionPolicy;
+import org.zmail.common.service.ServiceException;
+import org.zmail.common.soap.Element;
+import org.zmail.common.soap.Element.XMLElement;
+import org.zmail.common.soap.XmlParseException;
+import org.zmail.common.util.DateUtil;
+import org.zmail.common.util.ZmailLog;
+import org.zmail.cs.account.Account;
+import org.zmail.cs.account.Config;
+import org.zmail.cs.account.Cos;
+import org.zmail.cs.account.Entry;
+import org.zmail.cs.account.Provisioning;
+import org.zmail.soap.JaxbUtil;
+import org.zmail.soap.mail.type.Policy;
+import org.zmail.soap.mail.type.RetentionPolicy;
 
 public class RetentionPolicyManager {
     
@@ -76,7 +76,7 @@ public class RetentionPolicyManager {
             
                 sp = new SystemPolicy();
                 if (!Strings.isNullOrEmpty(xml)) {
-                    ZimbraLog.purge.debug("Parsing system retention policy:\n%s", xml);
+                    ZmailLog.purge.debug("Parsing system retention policy:\n%s", xml);
                     try {
                         Element el = Element.parseXML(xml);
                         RetentionPolicy rp = JaxbUtil.elementToJaxb(el, RetentionPolicy.class);

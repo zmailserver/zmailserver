@@ -12,19 +12,19 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.account.callback;
+package org.zmail.cs.account.callback;
 
 import java.util.Map;
 import java.util.Set;
 
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.common.util.ZimbraLog;
+import org.zmail.common.service.ServiceException;
+import org.zmail.common.util.ZmailLog;
 
-import com.zimbra.cs.account.Account;
-import com.zimbra.cs.account.AttributeCallback;
-import com.zimbra.cs.account.Entry;
-import com.zimbra.cs.account.Provisioning;
-import com.zimbra.cs.account.callback.CallbackContext.DataKey;
+import org.zmail.cs.account.Account;
+import org.zmail.cs.account.AttributeCallback;
+import org.zmail.cs.account.Entry;
+import org.zmail.cs.account.Provisioning;
+import org.zmail.cs.account.callback.CallbackContext.DataKey;
 
 public class WhiteBlackList extends AttributeCallback {
     
@@ -48,9 +48,9 @@ public class WhiteBlackList extends AttributeCallback {
             }
         } else {
             if (Provisioning.A_amavisWhitelistSender.equalsIgnoreCase(attrName)) {
-                max = acct.getAttr(Provisioning.A_zimbraMailWhitelistMaxNumEntries);
+                max = acct.getAttr(Provisioning.A_zmailMailWhitelistMaxNumEntries);
             } else {
-                max = acct.getAttr(Provisioning.A_zimbraMailBlacklistMaxNumEntries);
+                max = acct.getAttr(Provisioning.A_zmailMailBlacklistMaxNumEntries);
             }
         }
 
@@ -134,7 +134,7 @@ public class WhiteBlackList extends AttributeCallback {
                 if (curNum > numMax) {
                     // remove the adds from attrsToModify if there is any
                     if (add != null) {
-                        ZimbraLog.account.warn("number of values for " + attrName + 
+                        ZmailLog.account.warn("number of values for " + attrName + 
                                 " already exceeded the limit: " + numMax + 
                                 ", additional values are ignored");
                         attrsToModify.remove("+" + attrName);

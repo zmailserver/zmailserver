@@ -152,7 +152,7 @@ ADD CONSTRAINT fk_mail_item_parent_id
 ADD CONSTRAINT fk_mail_item_folder_id
     FOREIGN KEY (folder_id) REFERENCES $dbName.mail_item(id),
 ADD CONSTRAINT fk_mail_item_volume_id
-    FOREIGN KEY (volume_id) REFERENCES zimbra.volume(id);
+    FOREIGN KEY (volume_id) REFERENCES zmail.volume(id);
 
 ALTER TABLE $dbName.open_conversation
 ADD CONSTRAINT fk_open_conversation_conv_id

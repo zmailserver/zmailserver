@@ -32,7 +32,7 @@ sub sendRequest($) {
     $req = new HTTP::Request ('GET', "http://localhost:7070/home/$username/" . $url);
 
     $ua = new LWP::UserAgent;
-    $ua->credentials('localhost:7070', 'Zimbra', $username, $password);
+    $ua->credentials('localhost:7070', 'Zmail', $username, $password);
 
     $resp = $ua->request($req);
     return $resp;

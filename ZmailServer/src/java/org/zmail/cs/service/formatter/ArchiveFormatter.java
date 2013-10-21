@@ -12,7 +12,7 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.service.formatter;
+package org.zmail.cs.service.formatter;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -53,60 +53,60 @@ import org.eclipse.jetty.server.AbstractHttpConnection;
 import com.google.common.annotations.VisibleForTesting;
 import com.google.common.base.Strings;
 import com.google.common.io.Closeables;
-import com.zimbra.common.calendar.ZCalendar.ZCalendarBuilder;
-import com.zimbra.common.calendar.ZCalendar.ZICalendarParseHandler;
-import com.zimbra.common.calendar.ZCalendar.ZVCalendar;
-import com.zimbra.common.localconfig.LC;
-import com.zimbra.common.mailbox.ContactConstants;
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.common.util.BufferStream;
-import com.zimbra.common.util.ByteUtil;
-import com.zimbra.common.util.HttpUtil;
-import com.zimbra.common.util.HttpUtil.Browser;
-import com.zimbra.common.util.StringUtil;
-import com.zimbra.common.util.ZimbraLog;
-import com.zimbra.cs.index.SortBy;
-import com.zimbra.cs.index.ZimbraQueryResults;
-import com.zimbra.cs.mailbox.ACL;
-import com.zimbra.cs.mailbox.Appointment;
-import com.zimbra.cs.mailbox.CalendarItem;
-import com.zimbra.cs.mailbox.CalendarItem.Instance;
-import com.zimbra.cs.mailbox.Chat;
-import com.zimbra.cs.mailbox.Contact;
-import com.zimbra.cs.mailbox.Conversation;
-import com.zimbra.cs.mailbox.DeliveryOptions;
-import com.zimbra.cs.mailbox.Document;
-import com.zimbra.cs.mailbox.Flag;
-import com.zimbra.cs.mailbox.Folder;
-import com.zimbra.cs.mailbox.MailItem;
-import com.zimbra.cs.mailbox.MailServiceException;
-import com.zimbra.cs.mailbox.MailServiceException.NoSuchItemException;
-import com.zimbra.cs.mailbox.Mailbox;
-import com.zimbra.cs.mailbox.Mailbox.SetCalendarItemData;
-import com.zimbra.cs.mailbox.MailboxMaintenance;
-import com.zimbra.cs.mailbox.MailboxManager;
-import com.zimbra.cs.mailbox.Message;
-import com.zimbra.cs.mailbox.Message.CalendarItemInfo;
-import com.zimbra.cs.mailbox.Mountpoint;
-import com.zimbra.cs.mailbox.Note;
-import com.zimbra.cs.mailbox.OperationContext;
-import com.zimbra.cs.mailbox.SearchFolder;
-import com.zimbra.cs.mailbox.Tag;
-import com.zimbra.cs.mailbox.Task;
-import com.zimbra.cs.mailbox.WikiItem;
-import com.zimbra.cs.mailbox.calendar.IcsImportParseHandler;
-import com.zimbra.cs.mailbox.calendar.IcsImportParseHandler.ImportInviteVisitor;
-import com.zimbra.cs.mailbox.calendar.Invite;
-import com.zimbra.cs.mailbox.util.TagUtil;
-import com.zimbra.cs.mime.Mime;
-import com.zimbra.cs.mime.ParsedContact;
-import com.zimbra.cs.mime.ParsedMessage;
-import com.zimbra.cs.service.UserServlet;
-import com.zimbra.cs.service.UserServletContext;
-import com.zimbra.cs.service.UserServletException;
-import com.zimbra.cs.service.mail.ImportContacts;
-import com.zimbra.cs.service.util.ItemData;
-import com.zimbra.cs.service.util.ItemId;
+import org.zmail.common.calendar.ZCalendar.ZCalendarBuilder;
+import org.zmail.common.calendar.ZCalendar.ZICalendarParseHandler;
+import org.zmail.common.calendar.ZCalendar.ZVCalendar;
+import org.zmail.common.localconfig.LC;
+import org.zmail.common.mailbox.ContactConstants;
+import org.zmail.common.service.ServiceException;
+import org.zmail.common.util.BufferStream;
+import org.zmail.common.util.ByteUtil;
+import org.zmail.common.util.HttpUtil;
+import org.zmail.common.util.HttpUtil.Browser;
+import org.zmail.common.util.StringUtil;
+import org.zmail.common.util.ZmailLog;
+import org.zmail.cs.index.SortBy;
+import org.zmail.cs.index.ZmailQueryResults;
+import org.zmail.cs.mailbox.ACL;
+import org.zmail.cs.mailbox.Appointment;
+import org.zmail.cs.mailbox.CalendarItem;
+import org.zmail.cs.mailbox.CalendarItem.Instance;
+import org.zmail.cs.mailbox.Chat;
+import org.zmail.cs.mailbox.Contact;
+import org.zmail.cs.mailbox.Conversation;
+import org.zmail.cs.mailbox.DeliveryOptions;
+import org.zmail.cs.mailbox.Document;
+import org.zmail.cs.mailbox.Flag;
+import org.zmail.cs.mailbox.Folder;
+import org.zmail.cs.mailbox.MailItem;
+import org.zmail.cs.mailbox.MailServiceException;
+import org.zmail.cs.mailbox.MailServiceException.NoSuchItemException;
+import org.zmail.cs.mailbox.Mailbox;
+import org.zmail.cs.mailbox.Mailbox.SetCalendarItemData;
+import org.zmail.cs.mailbox.MailboxMaintenance;
+import org.zmail.cs.mailbox.MailboxManager;
+import org.zmail.cs.mailbox.Message;
+import org.zmail.cs.mailbox.Message.CalendarItemInfo;
+import org.zmail.cs.mailbox.Mountpoint;
+import org.zmail.cs.mailbox.Note;
+import org.zmail.cs.mailbox.OperationContext;
+import org.zmail.cs.mailbox.SearchFolder;
+import org.zmail.cs.mailbox.Tag;
+import org.zmail.cs.mailbox.Task;
+import org.zmail.cs.mailbox.WikiItem;
+import org.zmail.cs.mailbox.calendar.IcsImportParseHandler;
+import org.zmail.cs.mailbox.calendar.IcsImportParseHandler.ImportInviteVisitor;
+import org.zmail.cs.mailbox.calendar.Invite;
+import org.zmail.cs.mailbox.util.TagUtil;
+import org.zmail.cs.mime.Mime;
+import org.zmail.cs.mime.ParsedContact;
+import org.zmail.cs.mime.ParsedMessage;
+import org.zmail.cs.service.UserServlet;
+import org.zmail.cs.service.UserServletContext;
+import org.zmail.cs.service.UserServletException;
+import org.zmail.cs.service.mail.ImportContacts;
+import org.zmail.cs.service.util.ItemData;
+import org.zmail.cs.service.util.ItemId;
 
 public abstract class ArchiveFormatter extends Formatter {
     private final Pattern ILLEGAL_FILE_CHARS = Pattern.compile("[\\/\\:\\*\\?\\\"\\<\\>\\|\\\0]");
@@ -275,7 +275,7 @@ public abstract class ArchiveFormatter extends Formatter {
                     warn(e);
                 }
             } else {
-                ZimbraQueryResults results = null;
+                ZmailQueryResults results = null;
                 boolean saveTargetFolder = false;
 
                 if (context.target instanceof Folder) {
@@ -332,7 +332,7 @@ public abstract class ArchiveFormatter extends Formatter {
                 for (Map.Entry<Set<MailItem.Type>, String> entry : typesMap.entrySet()) {
                     results = context.targetMailbox.index.search(context.opContext,
                             entry.getValue(), entry.getKey(), SortBy.NONE,
-                            LC.zimbra_archive_formatter_search_chunk_size.intValue());
+                            LC.zmail_archive_formatter_search_chunk_size.intValue());
                     try {
                         while (results.hasNext()) {
                             if (saveTargetFolder) {
@@ -390,7 +390,7 @@ public abstract class ArchiveFormatter extends Formatter {
      * @throws IOException
      */
     private void disableJettyTimeout() throws IOException {
-        if (LC.zimbra_archive_formatter_disable_timeout.booleanValue()) {
+        if (LC.zmail_archive_formatter_disable_timeout.booleanValue()) {
             EndPoint endPoint = AbstractHttpConnection.getCurrentConnection().getEndPoint();
             if (endPoint instanceof SelectChannelEndPoint) {
                 SelectChannelEndPoint scEndPoint = (SelectChannelEndPoint) endPoint;
@@ -549,13 +549,13 @@ public abstract class ArchiveFormatter extends Formatter {
             long miSize = mi.getSize();
 
             if (miSize == 0 && mi.getDigest() != null) {
-                ZimbraLog.misc.debug("blob db size 0 for item %d", mi.getId());
+                ZmailLog.misc.debug("blob db size 0 for item %d", mi.getId());
                 return aos;
             }
             try {
                 is = mi.getContentStream();
             } catch (Exception e) {
-                ZimbraLog.misc.error("missing blob for item %d: expected %d", mi.getId(), miSize);
+                ZmailLog.misc.error("missing blob for item %d: expected %d", mi.getId(), miSize);
                 return aos;
             }
             if (aos == null) {
@@ -671,7 +671,7 @@ public abstract class ArchiveFormatter extends Formatter {
                         remain -= in;
                     }
                     if (remain != 0) {
-                        ZimbraLog.misc.error("mismatched blob size for item %d: expected %d", mi.getId(), miSize);
+                        ZmailLog.misc.error("mismatched blob size for item %d: expected %d", mi.getId(), miSize);
                         if (remain > 0) {
                             Arrays.fill(buf, (byte)' ');
                             while (remain > 0) {
@@ -948,7 +948,7 @@ public abstract class ArchiveFormatter extends Formatter {
                 s.append(' ').append(arg.name).append('=').append(arg.value);
             }
         }
-        ZimbraLog.misc.warn(s, ex);
+        ZmailLog.misc.warn(s, ex);
     }
 
     private Folder createParent(UserServletContext context, Map<Object, Folder> fmap, String path, MailItem.Type view)
@@ -1017,9 +1017,9 @@ public abstract class ArchiveFormatter extends Formatter {
 
     private void warn(Exception e) {
         if (e.getCause() == null) {
-            ZimbraLog.misc.warn("Archive Formatter warning: %s", e, e);
+            ZmailLog.misc.warn("Archive Formatter warning: %s", e, e);
         } else {
-            ZimbraLog.misc.warn("Archive Formatter warning: %s: %s", e, e.getCause().toString(), e.getCause());
+            ZmailLog.misc.warn("Archive Formatter warning: %s: %s", e, e.getCause().toString(), e.getCause());
         }
     }
 

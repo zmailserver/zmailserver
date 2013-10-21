@@ -13,7 +13,7 @@
  * ***** END LICENSE BLOCK *****
  */
 
-package com.zimbra.cs.lmtpserver;
+package org.zmail.cs.lmtpserver;
 
 import java.io.OutputStream;
 import java.io.PrintWriter;

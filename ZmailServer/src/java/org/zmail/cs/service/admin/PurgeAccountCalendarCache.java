@@ -12,27 +12,27 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.service.admin;
+package org.zmail.cs.service.admin;
 
 import java.util.List;
 import java.util.Map;
 
-import com.zimbra.cs.account.Account;
-import com.zimbra.cs.account.AccountServiceException;
-import com.zimbra.cs.account.CalendarResource;
-import com.zimbra.cs.account.Provisioning;
-import com.zimbra.common.account.Key.AccountBy;
-import com.zimbra.common.account.Key.CalendarResourceBy;
-import com.zimbra.cs.account.accesscontrol.AdminRight;
-import com.zimbra.cs.account.accesscontrol.Rights.Admin;
-import com.zimbra.cs.mailbox.Mailbox;
-import com.zimbra.cs.mailbox.MailboxManager;
-import com.zimbra.cs.mailbox.calendar.cache.CalendarCacheManager;
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.common.soap.AdminConstants;
-import com.zimbra.common.soap.Element;
-import com.zimbra.common.util.ZimbraLog;
-import com.zimbra.soap.ZimbraSoapContext;
+import org.zmail.cs.account.Account;
+import org.zmail.cs.account.AccountServiceException;
+import org.zmail.cs.account.CalendarResource;
+import org.zmail.cs.account.Provisioning;
+import org.zmail.common.account.Key.AccountBy;
+import org.zmail.common.account.Key.CalendarResourceBy;
+import org.zmail.cs.account.accesscontrol.AdminRight;
+import org.zmail.cs.account.accesscontrol.Rights.Admin;
+import org.zmail.cs.mailbox.Mailbox;
+import org.zmail.cs.mailbox.MailboxManager;
+import org.zmail.cs.mailbox.calendar.cache.CalendarCacheManager;
+import org.zmail.common.service.ServiceException;
+import org.zmail.common.soap.AdminConstants;
+import org.zmail.common.soap.Element;
+import org.zmail.common.util.ZmailLog;
+import org.zmail.soap.ZmailSoapContext;
 
 public class PurgeAccountCalendarCache extends AdminDocumentHandler {
 
@@ -47,7 +47,7 @@ public class PurgeAccountCalendarCache extends AdminDocumentHandler {
     }
 
     @Override public Element handle(Element request, Map<String, Object> context) throws ServiceException {
-        ZimbraSoapContext zsc = getZimbraSoapContext(context);
+        ZmailSoapContext zsc = getZmailSoapContext(context);
         
         // allow only system admin for now
         checkRight(zsc, context, null, AdminRight.PR_SYSTEM_ADMIN_ONLY);
@@ -60,10 +60,10 @@ public class PurgeAccountCalendarCache extends AdminDocumentHandler {
             throw AccountServiceException.NO_SUCH_ACCOUNT(id);
         
         if (!Provisioning.onLocalServer(account))
-            throw ServiceException.WRONG_HOST(account.getAttr(Provisioning.A_zimbraMailHost), null);
+            throw ServiceException.WRONG_HOST(account.getAttr(Provisioning.A_zmailMailHost), null);
 
         CalendarCacheManager calCache = CalendarCacheManager.getInstance();
-        ZimbraLog.calendar.info("Purging calendar cache for account " + account.getName());
+        ZmailLog.calendar.info("Purging calendar cache for account " + account.getName());
         Mailbox mbox = MailboxManager.getInstance().getMailboxByAccount(account, false);
         if (mbox != null)
             calCache.purgeMailbox(mbox);

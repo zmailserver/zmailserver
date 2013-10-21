@@ -12,18 +12,18 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.account.callback;
+package org.zmail.cs.account.callback;
 
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.common.util.Pair;
-import com.zimbra.cs.account.AttributeCallback;
-import com.zimbra.cs.account.Entry;
-import com.zimbra.cs.account.Provisioning;
+import org.zmail.common.service.ServiceException;
+import org.zmail.common.util.Pair;
+import org.zmail.cs.account.AttributeCallback;
+import org.zmail.cs.account.Entry;
+import org.zmail.cs.account.Provisioning;
 
 public class DomainCOSMaxAccounts extends AttributeCallback {
 
@@ -32,7 +32,7 @@ public class DomainCOSMaxAccounts extends AttributeCallback {
             Map attrsToModify, Entry entry)
     throws ServiceException {
         
-        String attr = Provisioning.A_zimbraDomainCOSMaxAccounts;
+        String attr = Provisioning.A_zmailDomainCOSMaxAccounts;
         String addAttr = "+" + attr;
         String delAttr = "-" + attr;
             

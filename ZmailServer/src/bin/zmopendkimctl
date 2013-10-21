@@ -14,27 +14,27 @@
 # ***** END LICENSE BLOCK *****
 # 
 
-if [ x`whoami` != xzimbra ]; then
-  echo Error: must be run as zimbra user
+if [ x`whoami` != xzmail ]; then
+  echo Error: must be run as zmail user
   exit 1
 fi
 
-if [ ! -L "/opt/zimbra/opendkim" ]; then
+if [ ! -L "/opt/zmail/opendkim" ]; then
   exit 0
 fi
 
 source `dirname $0`/zmshutil || exit 1
 zmsetvars \
-  zimbra_home \
-  zimbra_log_directory
+  zmail_home \
+  zmail_log_directory
 
 PID=""
-PIDFILE=${zimbra_log_directory}/opendkim.pid
-odk=${zimbra_home}/opendkim/sbin/opendkim
-config=${zimbra_home}/conf/opendkim.conf
+PIDFILE=${zmail_log_directory}/opendkim.pid
+odk=${zmail_home}/opendkim/sbin/opendkim
+config=${zmail_home}/conf/opendkim.conf
 
 rewriteconfig() {
-    /opt/zimbra/libexec/configrewrite opendkim > /dev/null 2>&1
+    /opt/zmail/libexec/configrewrite opendkim > /dev/null 2>&1
 }
 
 getpid()
@@ -68,7 +68,7 @@ start()
           if [ x$1 = "x" ]; then
             rewriteconfig
           fi
-          $odk -x $config -u zimbra
+          $odk -x $config -u zmail
           if [ $? != 0 ]; then
             echo "Failed to start opendkim: $?"
             exit 1

@@ -13,7 +13,7 @@
  * ***** END LICENSE BLOCK *****
  */
 
-package com.zimbra.qa.unittest;
+package org.zmail.qa.unittest;
 
 import java.util.HashSet;
 import java.util.List;
@@ -21,21 +21,21 @@ import java.util.Set;
 
 import junit.framework.TestCase;
 
-import com.zimbra.cs.account.Account;
-import com.zimbra.cs.db.DbPool;
-import com.zimbra.cs.db.DbPool.DbConnection;
-import com.zimbra.cs.mailbox.Conversation;
-import com.zimbra.cs.mailbox.Flag;
-import com.zimbra.cs.mailbox.MailItem;
-import com.zimbra.cs.mailbox.MailServiceException;
-import com.zimbra.cs.mailbox.Mailbox;
-import com.zimbra.cs.mailbox.MailboxManager;
-import com.zimbra.cs.mailbox.Message;
-import com.zimbra.cs.mailbox.Tag;
-import com.zimbra.cs.stats.ZimbraPerf;
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.common.util.StringUtil;
-import com.zimbra.common.util.ZimbraLog;
+import org.zmail.cs.account.Account;
+import org.zmail.cs.db.DbPool;
+import org.zmail.cs.db.DbPool.DbConnection;
+import org.zmail.cs.mailbox.Conversation;
+import org.zmail.cs.mailbox.Flag;
+import org.zmail.cs.mailbox.MailItem;
+import org.zmail.cs.mailbox.MailServiceException;
+import org.zmail.cs.mailbox.Mailbox;
+import org.zmail.cs.mailbox.MailboxManager;
+import org.zmail.cs.mailbox.Message;
+import org.zmail.cs.mailbox.Tag;
+import org.zmail.cs.stats.ZmailPerf;
+import org.zmail.common.service.ServiceException;
+import org.zmail.common.util.StringUtil;
+import org.zmail.common.util.ZmailLog;
 
 /**
  * @author bburtin
@@ -60,7 +60,7 @@ public class TestTags extends TestCase {
      */
     @Override
     protected void setUp() throws Exception {
-        ZimbraLog.test.debug("TestTags.setUp()");
+        ZmailLog.test.debug("TestTags.setUp()");
         super.setUp();
 
         mAccount = TestUtil.getAccount("user1");
@@ -88,7 +88,7 @@ public class TestTags extends TestCase {
             return;
         }
 
-        int numPrepares = ZimbraPerf.getPrepareCount();
+        int numPrepares = ZmailPerf.getPrepareCount();
 
         // Create the maximum number of tags, based on the number that already exist
         // in the mailbox
@@ -108,8 +108,8 @@ public class TestTags extends TestCase {
             refresh();
         }
 
-        numPrepares = ZimbraPerf.getPrepareCount() - numPrepares;
-        ZimbraLog.test.debug("testManyTags generated %d SQL statements.", numPrepares);
+        numPrepares = ZmailPerf.getPrepareCount() - numPrepares;
+        ZmailLog.test.debug("testManyTags generated %d SQL statements.", numPrepares);
     }
 
     public void testTagSearch()
@@ -300,7 +300,7 @@ public class TestTags extends TestCase {
 
     @Override
     protected void tearDown() throws Exception {
-        ZimbraLog.test.debug("TestTags.tearDown()");
+        ZmailLog.test.debug("TestTags.tearDown()");
 
         cleanUp();
 

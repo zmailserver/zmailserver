@@ -12,7 +12,7 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.dav.service;
+package org.zmail.cs.dav.service;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
@@ -27,12 +27,12 @@ import org.apache.commons.httpclient.methods.PostMethod;
 import org.apache.commons.httpclient.methods.RequestEntity;
 import org.dom4j.io.XMLWriter;
 
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.common.util.ByteUtil;
-import com.zimbra.common.util.ZimbraLog;
-import com.zimbra.cs.dav.DavContext;
-import com.zimbra.cs.dav.DavException;
-import com.zimbra.cs.dav.DavProtocol;
+import org.zmail.common.service.ServiceException;
+import org.zmail.common.util.ByteUtil;
+import org.zmail.common.util.ZmailLog;
+import org.zmail.cs.dav.DavContext;
+import org.zmail.cs.dav.DavException;
+import org.zmail.cs.dav.DavProtocol;
 
 /**
  * Base class for DAV methods.
@@ -82,7 +82,7 @@ public abstract class DavMethod {
 	        if (value.length() > 70) {
 	            int index = value.lastIndexOf(',', 70);
 	            if (index == -1) {
-	                ZimbraLog.dav.warn("header value is too long for %s : %s", name, value);
+	                ZmailLog.dav.warn("header value is too long for %s : %s", name, value);
 	                return;
 	            }
 	            val = value.substring(0, index);

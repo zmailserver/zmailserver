@@ -12,7 +12,7 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.service;
+package org.zmail.cs.service;
 
 import java.io.IOException;
 import java.util.Collection;
@@ -22,34 +22,34 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.zimbra.common.localconfig.LC;
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.common.soap.SoapProtocol;
-import com.zimbra.common.util.Log;
-import com.zimbra.common.util.LogFactory;
-import com.zimbra.common.util.ZimbraLog;
+import org.zmail.common.localconfig.LC;
+import org.zmail.common.service.ServiceException;
+import org.zmail.common.soap.SoapProtocol;
+import org.zmail.common.util.Log;
+import org.zmail.common.util.LogFactory;
+import org.zmail.common.util.ZmailLog;
 
-import com.zimbra.common.util.Constants;
-import com.zimbra.common.mime.MimeConstants;
-import com.zimbra.cs.account.Account;
-import com.zimbra.cs.account.AuthToken;
-import com.zimbra.cs.account.AuthTokenException;
-import com.zimbra.cs.account.GuestAccount;
-import com.zimbra.cs.account.Provisioning;
-import com.zimbra.common.account.Key.AccountBy;
-import com.zimbra.cs.fb.FreeBusy;
-import com.zimbra.cs.fb.FreeBusyQuery;
-import com.zimbra.cs.servlet.ZimbraServlet;
-import com.zimbra.soap.ZimbraSoapContext;
+import org.zmail.common.util.Constants;
+import org.zmail.common.mime.MimeConstants;
+import org.zmail.cs.account.Account;
+import org.zmail.cs.account.AuthToken;
+import org.zmail.cs.account.AuthTokenException;
+import org.zmail.cs.account.GuestAccount;
+import org.zmail.cs.account.Provisioning;
+import org.zmail.common.account.Key.AccountBy;
+import org.zmail.cs.fb.FreeBusy;
+import org.zmail.cs.fb.FreeBusyQuery;
+import org.zmail.cs.servlet.ZmailServlet;
+import org.zmail.soap.ZmailSoapContext;
 
 
-public class PublicICalServlet extends ZimbraServlet {
+public class PublicICalServlet extends ZmailServlet {
     private static final long serialVersionUID = -7350146465570984660L;
 
     private static Log sLog = LogFactory.getLog(PublicICalServlet.class);
 
     public final void doGet(HttpServletRequest req, HttpServletResponse resp) throws IOException, ServletException {
-        ZimbraLog.clearContext();
+        ZmailLog.clearContext();
         String pathInfo = req.getPathInfo();
         if (pathInfo == null) {
         	resp.sendError(HttpServletResponse.SC_BAD_REQUEST);
@@ -132,7 +132,7 @@ public class PublicICalServlet extends ZimbraServlet {
             }
         }
         Account authAccount = null;
-        ZimbraSoapContext zsc = null;
+        ZmailSoapContext zsc = null;
         if (at != null) {
             try {
                 authAccount = Provisioning.getInstance().get(AccountBy.id, at.getAccountId(), at);
@@ -140,7 +140,7 @@ public class PublicICalServlet extends ZimbraServlet {
                 sLog.warn("Auth error: " + e.getMessage(), e);
             }
             try {
-                zsc = new ZimbraSoapContext(at, targetAccountId, SoapProtocol.SoapJS, SoapProtocol.SoapJS);
+                zsc = new ZmailSoapContext(at, targetAccountId, SoapProtocol.SoapJS, SoapProtocol.SoapJS);
             } catch (ServiceException e) {
                 sLog.error("Error initializing request context", e);
                 resp.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR, "Error initializing request context");
@@ -275,7 +275,7 @@ public class PublicICalServlet extends ZimbraServlet {
 //            try {
 //                MimeMessage mm = SendInviteReply.createDefaultReply(at, oldInv, replySubject, verb, iCal);
 //                
-//                String replyTo = acct.getAttr(Provisioning.A_zimbraPrefReplyToAddress);
+//                String replyTo = acct.getAttr(Provisioning.A_zmailPrefReplyToAddress);
 //                mm.setFrom(AccountUtil.getOutgoingFromAddress(acct));
 //                mm.setSentDate(new Date());
 //                if (replyTo != null && !replyTo.trim().equals(""))

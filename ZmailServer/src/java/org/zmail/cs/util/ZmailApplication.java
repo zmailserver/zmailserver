@@ -12,43 +12,43 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.util;
+package org.zmail.cs.util;
 
 import java.util.List;
 
-import com.zimbra.common.localconfig.LC;
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.common.util.ZimbraLog;
+import org.zmail.common.localconfig.LC;
+import org.zmail.common.service.ServiceException;
+import org.zmail.common.util.ZmailLog;
 
 /**
- * Zimbra Servers enable/disable settings overridable by LC.
+ * Zmail Servers enable/disable settings overridable by LC.
  */
 
-public class ZimbraApplication {
+public class ZmailApplication {
 
-    private static ZimbraApplication sServices;
+    private static ZmailApplication sServices;
 
-    public static ZimbraApplication getInstance() {
+    public static ZmailApplication getInstance() {
         if (sServices == null) {
-            String className = LC.zimbra_class_application.value();
+            String className = LC.zmail_class_application.value();
             if (className != null && !className.equals("")) {
                 try {
-                    sServices = (ZimbraApplication)Class.forName(className)
+                    sServices = (ZmailApplication)Class.forName(className)
                         .newInstance();
                 } catch (Exception e) {
-                    ZimbraLog.misc.error(
-                        "could not instantiate ZimbraServices interface of class '"
-                            + className + "'; defaulting to ZimbraServices", e);
+                    ZmailLog.misc.error(
+                        "could not instantiate ZmailServices interface of class '"
+                            + className + "'; defaulting to ZmailServices", e);
                 }
             }
             if (sServices == null)
-                sServices = new ZimbraApplication();
+                sServices = new ZmailApplication();
         }
         return sServices;
     }
 
     public String getId() {
-        return "zimbra";
+        return "zmail";
     }
 
     public String getClientId() {
@@ -67,7 +67,7 @@ public class ZimbraApplication {
 
     public void initialize(boolean forMailboxd) {}
 
-    public void initializeZimbraDb(boolean forMailboxd) throws ServiceException {}
+    public void initializeZmailDb(boolean forMailboxd) throws ServiceException {}
 
     private boolean isShutdown;
 

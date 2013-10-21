@@ -12,9 +12,9 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.store.triton;
+package org.zmail.cs.store.triton;
 
-import com.zimbra.common.util.ZimbraLog;
+import org.zmail.common.util.ZmailLog;
 
 /**
  * String wrapper for passing upload URL between output stream instantiations
@@ -29,7 +29,7 @@ public class TritonUploadUrl {
 
     public void setUploadUrl(String uploadUrl) {
         if (isInitialized()) {
-            ZimbraLog.store.warn("TritonUploadUrl already set to %s but changing to %s", this.uploadUrl, uploadUrl);
+            ZmailLog.store.warn("TritonUploadUrl already set to %s but changing to %s", this.uploadUrl, uploadUrl);
         }
         this.uploadUrl = uploadUrl;
     }

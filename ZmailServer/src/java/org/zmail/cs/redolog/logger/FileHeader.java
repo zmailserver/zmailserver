@@ -19,7 +19,7 @@
  * TODO To change the template for this generated file go to
  * Window - Preferences - Java - Code Style - Code Templates
  */
-package com.zimbra.cs.redolog.logger;
+package org.zmail.cs.redolog.logger;
 
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
@@ -30,9 +30,9 @@ import java.text.SimpleDateFormat;
 import java.util.Arrays;
 import java.util.Date;
 
-import com.zimbra.cs.redolog.RedoLogInput;
-import com.zimbra.cs.redolog.RedoLogOutput;
-import com.zimbra.cs.redolog.Version;
+import org.zmail.cs.redolog.RedoLogInput;
+import org.zmail.cs.redolog.RedoLogOutput;
+import org.zmail.cs.redolog.Version;
 
 /**
  * @author jhahm
@@ -53,7 +53,7 @@ import com.zimbra.cs.redolog.Version;
  *                    length  - 1 byte (0 to 127)
  *                    data    - up to 127 bytes of serverId in UTF-8
  *                    padding - 0-value bytes of length = 127 - length(data)
- *                  serverId is the zimbraId LDAP attribute of the server entry
+ *                  serverId is the zmailId LDAP attribute of the server entry
  *   firstOpTstamp  4 bytes; time of first op in file
  *   lastOpTstamp   4 bytes; time of last op in file
  *   version        4 bytes; serialization version number
@@ -71,7 +71,7 @@ public class FileHeader {
     private long mFileSize;             // filesize
     private long mSeq;                  // log file sequence number
     private String mServerId;           // host on which the file was created
-                                        // zimbraId attribute from LDAP
+                                        // zmailId attribute from LDAP
     private long mFirstOpTstamp;        // time of first op in log file
     private long mLastOpTstamp;         // time of last op in log file
     private long mCreateTime;           // create time of log file

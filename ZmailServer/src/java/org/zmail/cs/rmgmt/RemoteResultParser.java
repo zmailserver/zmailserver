@@ -12,7 +12,7 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.rmgmt;
+package org.zmail.cs.rmgmt;
 
 import java.io.BufferedReader;
 import java.io.ByteArrayInputStream;
@@ -25,8 +25,8 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-import com.zimbra.common.util.ZimbraLog;
-import com.zimbra.cs.rmgmt.RemoteMailQueue.QueueAttr;
+import org.zmail.common.util.ZmailLog;
+import org.zmail.cs.rmgmt.RemoteMailQueue.QueueAttr;
 
 /** 
  * Parse a list of simple key_string=value_string\n maps from standard input.
@@ -53,9 +53,9 @@ public class RemoteResultParser {
         while ((line = in.readLine()) != null) {
             lineNumber++;
             Matcher matcher = KEY_VALUE_PATTERN.matcher(line);
-            if (ZimbraLog.rmgmt.isDebugEnabled()) ZimbraLog.rmgmt.debug("Scanning mail queues. Read line: " + line);
+            if (ZmailLog.rmgmt.isDebugEnabled()) ZmailLog.rmgmt.debug("Scanning mail queues. Read line: " + line);
             if (!matcher.find()) {
-            	if (ZimbraLog.rmgmt.isDebugEnabled()) ZimbraLog.rmgmt.debug("Scanning mail queues. Matcher did not find any mathces.");
+            	if (ZmailLog.rmgmt.isDebugEnabled()) ZmailLog.rmgmt.debug("Scanning mail queues. Matcher did not find any mathces.");
             	String id = current.get(QueueAttr.id.toString());
             	if (id == null) 
             		continue;

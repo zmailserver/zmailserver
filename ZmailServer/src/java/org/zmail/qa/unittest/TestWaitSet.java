@@ -12,21 +12,21 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.qa.unittest;
+package org.zmail.qa.unittest;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import com.zimbra.common.util.Pair;
-import com.zimbra.cs.account.Account;
-import com.zimbra.cs.mailbox.Mailbox;
-import com.zimbra.cs.service.mail.WaitSetRequest;
-import com.zimbra.cs.service.mail.WaitSetRequest.TypeEnum;
-import com.zimbra.cs.session.IWaitSet;
-import com.zimbra.cs.session.WaitSetAccount;
-import com.zimbra.cs.session.WaitSetError;
-import com.zimbra.cs.session.WaitSetMgr;
-import com.zimbra.client.ZFolder;
+import org.zmail.common.util.Pair;
+import org.zmail.cs.account.Account;
+import org.zmail.cs.mailbox.Mailbox;
+import org.zmail.cs.service.mail.WaitSetRequest;
+import org.zmail.cs.service.mail.WaitSetRequest.TypeEnum;
+import org.zmail.cs.session.IWaitSet;
+import org.zmail.cs.session.WaitSetAccount;
+import org.zmail.cs.session.WaitSetError;
+import org.zmail.cs.session.WaitSetMgr;
+import org.zmail.client.ZFolder;
 
 import junit.framework.TestCase;
 

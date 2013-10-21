@@ -12,7 +12,7 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.util;
+package org.zmail.cs.util;
 
 import java.io.File;
 import java.io.IOException;
@@ -22,15 +22,15 @@ import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
-import com.zimbra.common.localconfig.LC;
-import com.zimbra.cs.util.SpoolingCache;
+import org.zmail.common.localconfig.LC;
+import org.zmail.cs.util.SpoolingCache;
 
 public class SpoolingCacheTest {
 
     @BeforeClass
     public static void init() throws Exception {
         new File("build/test").mkdirs();
-        LC.zimbra_tmp_directory.setDefault("build/test");
+        LC.zmail_tmp_directory.setDefault("build/test");
     }
 
     @AfterClass

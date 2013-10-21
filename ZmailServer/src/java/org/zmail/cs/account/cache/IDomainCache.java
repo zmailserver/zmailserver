@@ -14,11 +14,11 @@
  * 
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.account.cache;
+package org.zmail.cs.account.cache;
 
-import com.zimbra.common.account.Key.DomainBy;
-import com.zimbra.cs.account.Domain;
-import com.zimbra.cs.account.cache.DomainCache.GetFromDomainCacheOption;
+import org.zmail.common.account.Key.DomainBy;
+import org.zmail.cs.account.Domain;
+import org.zmail.cs.account.cache.DomainCache.GetFromDomainCacheOption;
 
 public interface IDomainCache extends IEntryCache {
     public void clear();

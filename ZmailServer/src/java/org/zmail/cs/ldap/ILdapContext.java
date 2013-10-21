@@ -12,10 +12,10 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.ldap;
+package org.zmail.cs.ldap;
 
 /**
- * Bridging the legacy ZimbraLdapContext and the new ZLdapContext classes.
+ * Bridging the legacy ZmailLdapContext and the new ZLdapContext classes.
  *
  */
 public interface ILdapContext {

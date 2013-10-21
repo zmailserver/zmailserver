@@ -13,17 +13,17 @@
  * ***** END LICENSE BLOCK *****
  */
 
-package com.zimbra.qa.unittest;
+package org.zmail.qa.unittest;
 
 import java.io.File;
 
 import junit.framework.TestCase;
 
-import com.zimbra.common.localconfig.LC;
-import com.zimbra.common.util.ByteUtil;
-import com.zimbra.client.ZMailbox;
-import com.zimbra.client.ZMessage;
-import com.zimbra.client.ZMessage.ZMimePart;
+import org.zmail.common.localconfig.LC;
+import org.zmail.common.util.ByteUtil;
+import org.zmail.client.ZMailbox;
+import org.zmail.client.ZMessage;
+import org.zmail.client.ZMessage.ZMimePart;
 
 public class TestConversion extends TestCase {
 
@@ -45,7 +45,7 @@ public class TestConversion extends TestCase {
 
         // Add the TNEF message
         String msgContent = new String(ByteUtil.getContent(new File(
-            LC.zimbra_home.value() + "/unittest/tnef.msg")));
+            LC.zmail_home.value() + "/unittest/tnef.msg")));
         TestUtil.addMessageLmtp(new String[] { USER_NAME }, USER_NAME, msgContent);
 
         // Test downloading attachments.

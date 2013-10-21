@@ -12,7 +12,7 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.datasource.imap;
+package org.zmail.cs.datasource.imap;
 
 import java.io.IOException;
 import java.sql.SQLException;
@@ -26,39 +26,39 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-import com.zimbra.common.localconfig.LC;
-import com.zimbra.common.service.RemoteServiceException;
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.common.util.Log;
-import com.zimbra.common.util.ZimbraLog;
-import com.zimbra.cs.account.DataSource;
-import com.zimbra.cs.datasource.DataSourceManager;
-import com.zimbra.cs.datasource.IOExceptionHandler;
-import com.zimbra.cs.datasource.MessageContent;
-import com.zimbra.cs.datasource.SyncErrorManager;
-import com.zimbra.cs.datasource.SyncUtil;
-import com.zimbra.cs.db.Db;
-import com.zimbra.cs.db.DbDataSource.DataSourceItem;
-import com.zimbra.cs.mailbox.Flag;
-import com.zimbra.cs.mailbox.Folder;
-import com.zimbra.cs.mailbox.MailItem;
-import com.zimbra.cs.mailbox.MailServiceException;
-import com.zimbra.cs.mailbox.Mailbox;
-import com.zimbra.cs.mailbox.Message;
-import com.zimbra.cs.mailclient.CommandFailedException;
-import com.zimbra.cs.mailclient.MailException;
-import com.zimbra.cs.mailclient.imap.Body;
-import com.zimbra.cs.mailclient.imap.CopyResult;
-import com.zimbra.cs.mailclient.imap.FetchResponseHandler;
-import com.zimbra.cs.mailclient.imap.Flags;
-import com.zimbra.cs.mailclient.imap.ImapConnection;
-import com.zimbra.cs.mailclient.imap.ListData;
-import com.zimbra.cs.mailclient.imap.MailboxInfo;
-import com.zimbra.cs.mailclient.imap.MessageData;
-import com.zimbra.cs.mime.ParsedMessage;
-import com.zimbra.cs.util.Zimbra;
+import org.zmail.common.localconfig.LC;
+import org.zmail.common.service.RemoteServiceException;
+import org.zmail.common.service.ServiceException;
+import org.zmail.common.util.Log;
+import org.zmail.common.util.ZmailLog;
+import org.zmail.cs.account.DataSource;
+import org.zmail.cs.datasource.DataSourceManager;
+import org.zmail.cs.datasource.IOExceptionHandler;
+import org.zmail.cs.datasource.MessageContent;
+import org.zmail.cs.datasource.SyncErrorManager;
+import org.zmail.cs.datasource.SyncUtil;
+import org.zmail.cs.db.Db;
+import org.zmail.cs.db.DbDataSource.DataSourceItem;
+import org.zmail.cs.mailbox.Flag;
+import org.zmail.cs.mailbox.Folder;
+import org.zmail.cs.mailbox.MailItem;
+import org.zmail.cs.mailbox.MailServiceException;
+import org.zmail.cs.mailbox.Mailbox;
+import org.zmail.cs.mailbox.Message;
+import org.zmail.cs.mailclient.CommandFailedException;
+import org.zmail.cs.mailclient.MailException;
+import org.zmail.cs.mailclient.imap.Body;
+import org.zmail.cs.mailclient.imap.CopyResult;
+import org.zmail.cs.mailclient.imap.FetchResponseHandler;
+import org.zmail.cs.mailclient.imap.Flags;
+import org.zmail.cs.mailclient.imap.ImapConnection;
+import org.zmail.cs.mailclient.imap.ListData;
+import org.zmail.cs.mailclient.imap.MailboxInfo;
+import org.zmail.cs.mailclient.imap.MessageData;
+import org.zmail.cs.mime.ParsedMessage;
+import org.zmail.cs.util.Zmail;
 
-import static com.zimbra.common.util.ArrayUtil.toIntArray;
+import static org.zmail.common.util.ArrayUtil.toIntArray;
 
 class ImapFolderSync {
     private final ImapSync imapSync;
@@ -82,7 +82,7 @@ class ImapFolderSync {
     private boolean fullSync;
     private boolean localDeleted;
 
-    private static final Log LOG = ZimbraLog.datasource;
+    private static final Log LOG = ZmailLog.datasource;
 
     private static final int FETCH_SIZE = LC.data_source_fetch_size.intValue();
 
@@ -420,7 +420,7 @@ class ImapFolderSync {
                 deleteMessage(change.getTracker().getUid());
             } else if (change.isUpdated()) {
                 int flags = change.getTracker().getFlags();
-                updateFlags(change.getTracker(), SyncUtil.zimbraToImapFlags(flags));
+                updateFlags(change.getTracker(), SyncUtil.zmailToImapFlags(flags));
             } else if (change.isMoved() &&
                        change.getMessage().getFolderId() != localFolder.getId()) {
                 // Message moved to another folder
@@ -703,7 +703,7 @@ class ImapFolderSync {
         int id = msg.getItemId();
         int localFlags = msg.getItemFlags();
         int trackedFlags = msg.getFlags();
-        int remoteFlags = SyncUtil.imapToZimbraFlags(flags);
+        int remoteFlags = SyncUtil.imapToZmailFlags(flags);
         int newLocalFlags = mergeFlags(localFlags, trackedFlags, remoteFlags);
         int newRemoteFlags = SyncUtil.imapFlagsOnly(newLocalFlags);
         if (LOG.isDebugEnabled() &&
@@ -827,7 +827,7 @@ class ImapFolderSync {
                     handleFetch(md, flagsByUid);
                     clearError(uid);
                 } catch (OutOfMemoryError e) {
-                    Zimbra.halt("Out of memory", e);
+                    Zmail.halt("Out of memory", e);
                 } catch (Exception e) {
                     if (!IOExceptionHandler.getInstance().isRecoverable(mailbox, uid, "Exception syncing UID "+uid+" in folder "+remoteFolder.getPath(), e)) {
                         syncFailed("Fetch failed for uid " + uid, e);
@@ -909,7 +909,7 @@ class ImapFolderSync {
         // Parse the message data
         Date date = flagsData.getInternalDate();
         Long receivedDate = date != null ? date.getTime() : null;
-        int zflags = SyncUtil.imapToZimbraFlags(flagsData.getFlags());
+        int zflags = SyncUtil.imapToZmailFlags(flagsData.getFlags());
         int folderId = localFolder.getId();
         MessageContent mc = getContent(md);
         Message msg;

@@ -13,18 +13,18 @@
  * ***** END LICENSE BLOCK *****
  */
 
-package com.zimbra.cs.imap;
+package org.zmail.cs.imap;
 
-import com.zimbra.common.localconfig.LC;
-import com.zimbra.common.service.ServiceException;
-import static com.zimbra.cs.account.Provisioning.*;
+import org.zmail.common.localconfig.LC;
+import org.zmail.common.service.ServiceException;
+import static org.zmail.cs.account.Provisioning.*;
 
-import com.zimbra.common.util.Log;
-import com.zimbra.common.util.ZimbraLog;
-import com.zimbra.cs.account.Provisioning;
-import com.zimbra.cs.server.ServerConfig;
-import com.zimbra.cs.util.BuildInfo;
-import com.zimbra.cs.util.Config;
+import org.zmail.common.util.Log;
+import org.zmail.common.util.ZmailLog;
+import org.zmail.cs.account.Provisioning;
+import org.zmail.cs.server.ServerConfig;
+import org.zmail.cs.util.BuildInfo;
+import org.zmail.cs.util.Config;
 
 import java.util.Arrays;
 
@@ -38,24 +38,24 @@ public class ImapConfig extends ServerConfig {
 
     @Override
     public String getServerName() {
-        return getAttr(A_zimbraImapAdvertisedName, LC.zimbra_server_hostname.value());
+        return getAttr(A_zmailImapAdvertisedName, LC.zmail_server_hostname.value());
     }
 
     @Override
     public String getServerVersion() {
-        return getBooleanAttr(A_zimbraImapExposeVersionOnBanner, false) ? BuildInfo.VERSION : null;
+        return getBooleanAttr(A_zmailImapExposeVersionOnBanner, false) ? BuildInfo.VERSION : null;
     }
 
     @Override
     public String getBindAddress() {
-        return getAttr(isSslEnabled() ? A_zimbraImapSSLBindAddress : A_zimbraImapBindAddress, null);
+        return getAttr(isSslEnabled() ? A_zmailImapSSLBindAddress : A_zmailImapBindAddress, null);
     }
 
     @Override
     public int getBindPort() {
         return isSslEnabled() ?
-            getIntAttr(A_zimbraImapSSLBindPort, Config.D_IMAP_SSL_BIND_PORT) :
-            getIntAttr(A_zimbraImapBindPort, Config.D_IMAP_BIND_PORT);
+            getIntAttr(A_zmailImapSSLBindPort, Config.D_IMAP_SSL_BIND_PORT) :
+            getIntAttr(A_zmailImapBindPort, Config.D_IMAP_BIND_PORT);
     }
 
     @Override
@@ -89,17 +89,17 @@ public class ImapConfig extends ServerConfig {
 
     @Override
     public int getMaxThreads() {
-        return getIntAttr(A_zimbraImapNumThreads, super.getMaxThreads());
+        return getIntAttr(A_zmailImapNumThreads, super.getMaxThreads());
     }
 
     @Override
     public int getMaxConnections() {
-        return getIntAttr(A_zimbraImapMaxConnections, super.getMaxConnections());
+        return getIntAttr(A_zmailImapMaxConnections, super.getMaxConnections());
     }
 
     @Override
     public Log getLog() {
-        return ZimbraLog.imap;
+        return ZmailLog.imap;
     }
 
     @Override
@@ -109,7 +109,7 @@ public class ImapConfig extends ServerConfig {
 
     @Override
     public int getShutdownTimeout() {
-       return getIntAttr(A_zimbraImapShutdownGraceSeconds, super.getShutdownTimeout());
+       return getIntAttr(A_zmailImapShutdownGraceSeconds, super.getShutdownTimeout());
     }
 
     @Override
@@ -118,15 +118,15 @@ public class ImapConfig extends ServerConfig {
     }
 
     public boolean isCleartextLoginEnabled() {
-        return getBooleanAttr(A_zimbraImapCleartextLoginEnabled, false);
+        return getBooleanAttr(A_zmailImapCleartextLoginEnabled, false);
     }
 
     public boolean isSaslGssapiEnabled() {
-        return getBooleanAttr(A_zimbraImapSaslGssapiEnabled, false);
+        return getBooleanAttr(A_zmailImapSaslGssapiEnabled, false);
     }
 
     public boolean isCapabilityDisabled(String name) {
-        String key = isSslEnabled() ? A_zimbraImapSSLDisabledCapability : A_zimbraImapDisabledCapability;
+        String key = isSslEnabled() ? A_zmailImapSSLDisabledCapability : A_zmailImapDisabledCapability;
         try {
             return Arrays.asList(getLocalServer().getMultiAttr(key)).contains(name);
         } catch (ServiceException e) {
@@ -136,13 +136,13 @@ public class ImapConfig extends ServerConfig {
     }
 
     public int getMaxRequestSize() {
-        return getIntAttr(A_zimbraImapMaxRequestSize, LC.imap_max_request_size.intValue());
+        return getIntAttr(A_zmailImapMaxRequestSize, LC.imap_max_request_size.intValue());
     }
 
     /**
      * @return maximum message size where 0 means "no limit"
      */
     public long getMaxMessageSize() throws ServiceException {
-        return Provisioning.getInstance().getConfig().getLongAttr(A_zimbraMtaMaxMessageSize, DEFAULT_MAX_MESSAGE_SIZE);
+        return Provisioning.getInstance().getConfig().getLongAttr(A_zmailMtaMaxMessageSize, DEFAULT_MAX_MESSAGE_SIZE);
     }
 }

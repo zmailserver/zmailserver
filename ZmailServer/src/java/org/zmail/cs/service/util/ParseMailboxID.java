@@ -12,13 +12,13 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.service.util;
+package org.zmail.cs.service.util;
 
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.cs.account.Account;
-import com.zimbra.cs.account.AccountServiceException;
-import com.zimbra.cs.account.Provisioning;
-import com.zimbra.common.account.Key.AccountBy;
+import org.zmail.common.service.ServiceException;
+import org.zmail.cs.account.Account;
+import org.zmail.cs.account.AccountServiceException;
+import org.zmail.cs.account.Provisioning;
+import org.zmail.common.account.Key.AccountBy;
 
 /**
  * Helper class to parse out a mailbox specifier in any of the following forms:
@@ -129,7 +129,7 @@ public final class ParseMailboxID {
 
     private void init(Account account, String idStr) throws ServiceException, IllegalArgumentException {
         this.account = account;
-        hostname = account.getAttr(Provisioning.A_zimbraMailHost);
+        hostname = account.getAttr(Provisioning.A_zmailMailHost);
         initialString = (idStr==null)?account.getId():idStr;
         if (Provisioning.onLocalServer(account)) {
             isLocal = true;

@@ -12,7 +12,7 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.index;
+package org.zmail.cs.index;
 
 import java.io.File;
 import java.io.IOException;
@@ -55,15 +55,15 @@ import com.google.common.io.Closeables;
 import com.google.common.io.NullOutputStream;
 import com.googlecode.concurrentlinkedhashmap.ConcurrentLinkedHashMap;
 import com.googlecode.concurrentlinkedhashmap.EvictionListener;
-import com.zimbra.common.localconfig.LC;
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.common.util.ZimbraLog;
-import com.zimbra.cs.mailbox.Folder;
-import com.zimbra.cs.mailbox.MailItem;
-import com.zimbra.cs.mailbox.Mailbox;
-import com.zimbra.cs.mailbox.MailboxIndex;
-import com.zimbra.cs.volume.Volume;
-import com.zimbra.cs.volume.VolumeManager;
+import org.zmail.common.localconfig.LC;
+import org.zmail.common.service.ServiceException;
+import org.zmail.common.util.ZmailLog;
+import org.zmail.cs.mailbox.Folder;
+import org.zmail.cs.mailbox.MailItem;
+import org.zmail.cs.mailbox.Mailbox;
+import org.zmail.cs.mailbox.MailboxIndex;
+import org.zmail.cs.volume.Volume;
+import org.zmail.cs.volume.VolumeManager;
 
 /**
  * {@link IndexStore} implementation using Apache Lucene.
@@ -81,13 +81,13 @@ public final class LuceneIndex implements IndexStore {
     @SuppressWarnings("deprecation")
     public static final Version VERSION = Version.LUCENE_24;
 
-    private static final Semaphore READER_THROTTLE = new Semaphore(LC.zimbra_index_max_readers.intValue());
-    private static final Semaphore WRITER_THROTTLE = new Semaphore(LC.zimbra_index_max_writers.intValue());
+    private static final Semaphore READER_THROTTLE = new Semaphore(LC.zmail_index_max_readers.intValue());
+    private static final Semaphore WRITER_THROTTLE = new Semaphore(LC.zmail_index_max_writers.intValue());
 
     private static final Cache<Integer, IndexSearcherImpl> SEARCHER_CACHE =
         CacheBuilder.newBuilder()
-        .maximumSize(LC.zimbra_index_reader_cache_size.intValue())
-        .expireAfterAccess(LC.zimbra_index_reader_cache_ttl.intValue(), TimeUnit.SECONDS)
+        .maximumSize(LC.zmail_index_reader_cache_size.intValue())
+        .expireAfterAccess(LC.zmail_index_reader_cache_ttl.intValue(), TimeUnit.SECONDS)
         .removalListener(new RemovalListener<Integer, IndexSearcherImpl>() {
             @Override
             public void onRemoval(RemovalNotification<Integer, IndexSearcherImpl> notification) {
@@ -106,7 +106,7 @@ public final class LuceneIndex implements IndexStore {
     // cache lucene index of GAL sync account separately with no automatic eviction
     private static final ConcurrentMap<Integer, IndexSearcherImpl> GAL_SEARCHER_CACHE =
         new ConcurrentLinkedHashMap.Builder<Integer, IndexSearcherImpl>()
-        .maximumWeightedCapacity(LC.zimbra_galsync_index_reader_cache_size.intValue())
+        .maximumWeightedCapacity(LC.zmail_galsync_index_reader_cache_size.intValue())
         .listener(new EvictionListener<Integer, IndexSearcherImpl>() {
             @Override
             public void onEviction(Integer mboxId, IndexSearcherImpl searcher) {
@@ -218,7 +218,7 @@ public final class LuceneIndex implements IndexStore {
 
     private synchronized void doDeleteIndex() throws IOException {
         assert(writerInfo.getWriterRef() == null);
-        ZimbraLog.index.debug("Deleting index %s", luceneDirectory);
+        ZmailLog.index.debug("Deleting index %s", luceneDirectory);
         if (mailbox.isGalSyncMailbox()) {
             Closeables.closeQuietly(GAL_SEARCHER_CACHE.remove(mailbox.getId()));
         } else {
@@ -231,7 +231,7 @@ public final class LuceneIndex implements IndexStore {
         } catch (NoSuchDirectoryException ignore) {
             return;
         } catch (IOException e) {
-            ZimbraLog.index.warn("Failed to delete index: %s", luceneDirectory, e);
+            ZmailLog.index.warn("Failed to delete index: %s", luceneDirectory, e);
             return;
         }
 
@@ -272,14 +272,14 @@ public final class LuceneIndex implements IndexStore {
         IndexSearcher searcher = null;
         try {
             searcher = openSearcher();
-            searcher.search(new TermQuery(new Term(LuceneFields.L_CONTENT, "zimbra")), 1,
+            searcher.search(new TermQuery(new Term(LuceneFields.L_CONTENT, "zmail")), 1,
                     new Sort(new SortField(LuceneFields.L_SORT_DATE, SortField.STRING, true)));
         } catch (IOException e) {
-            ZimbraLog.search.warn("Failed to warm up", e);
+            ZmailLog.search.warn("Failed to warm up", e);
         } finally {
             Closeables.closeQuietly(searcher);
         }
-        ZimbraLog.search.debug("WarmUpLuceneSearcher elapsed=%d", System.currentTimeMillis() - start);
+        ZmailLog.search.debug("WarmUpLuceneSearcher elapsed=%d", System.currentTimeMillis() - start);
     }
 
     /**
@@ -296,7 +296,7 @@ public final class LuceneIndex implements IndexStore {
 
     private IndexReader openIndexReader(boolean tryRepair) throws IOException {
         try {
-            return IndexReader.open(luceneDirectory, null, true, LC.zimbra_index_lucene_term_index_divisor.intValue());
+            return IndexReader.open(luceneDirectory, null, true, LC.zmail_index_lucene_term_index_divisor.intValue());
         } catch (CorruptIndexException e) {
             if (!tryRepair) {
                 throw e;
@@ -316,14 +316,14 @@ public final class LuceneIndex implements IndexStore {
         try {
             IndexWriter writer = new IndexWriter(luceneDirectory, getWriterConfig().setOpenMode(mode)) {
                 /**
-                 * Redirect Lucene's logging to ZimbraLog.
+                 * Redirect Lucene's logging to ZmailLog.
                  */
                 @Override
                 public void message(String message) {
-                    ZimbraLog.index.debug("IW: %s", message);
+                    ZmailLog.index.debug("IW: %s", message);
                 }
             };
-            if (ZimbraLog.index.isDebugEnabled()) {
+            if (ZmailLog.index.isDebugEnabled()) {
                 // Set a dummy PrintStream, otherwise Lucene suppresses logging.
                 writer.setInfoStream(new PrintStream(new NullOutputStream()));
             }
@@ -346,17 +346,17 @@ public final class LuceneIndex implements IndexStore {
     }
 
     private synchronized <T extends Throwable> void repair(T ex) throws T {
-        ZimbraLog.index.error("Index corrupted", ex);
+        ZmailLog.index.error("Index corrupted", ex);
         LuceneIndexRepair repair = new LuceneIndexRepair(luceneDirectory);
         try {
             if (repair.repair() > 0) {
-                ZimbraLog.index.info("Index repaired, re-indexing is recommended.");
+                ZmailLog.index.info("Index repaired, re-indexing is recommended.");
             } else {
-                ZimbraLog.index.warn("Unable to repair, re-indexing is required.");
+                ZmailLog.index.warn("Unable to repair, re-indexing is required.");
                 throw ex;
             }
         } catch (IOException e) {
-            ZimbraLog.index.warn("Failed to repair, re-indexing is required.", e);
+            ZmailLog.index.warn("Failed to repair, re-indexing is required.", e);
             throw ex;
         }
     }
@@ -365,7 +365,7 @@ public final class LuceneIndex implements IndexStore {
         try {
             IndexWriter.unlock(luceneDirectory);
         } catch (IOException e) {
-            ZimbraLog.index.warn("Failed to unlock IndexWriter %s", this, e);
+            ZmailLog.index.warn("Failed to unlock IndexWriter %s", this, e);
         }
     }
 
@@ -386,10 +386,10 @@ public final class LuceneIndex implements IndexStore {
             }
         } catch (Exception e) {
             if (!(e instanceof NullPointerException))
-                ZimbraLog.search.warn(e);
+                ZmailLog.search.warn(e);
         }
         if (searcher != null) {
-            ZimbraLog.search.debug("CacheHitLuceneSearcher %s", searcher);
+            ZmailLog.search.debug("CacheHitLuceneSearcher %s", searcher);
             searcher.inc();
             return searcher;
         }
@@ -416,7 +416,7 @@ public final class LuceneIndex implements IndexStore {
             }
         }
 
-        ZimbraLog.search.debug("OpenLuceneSearcher %s,elapsed=%d", searcher, System.currentTimeMillis() - start);
+        ZmailLog.search.debug("OpenLuceneSearcher %s,elapsed=%d", searcher, System.currentTimeMillis() - start);
         searcher.inc();
         if (mailbox.isGalSyncMailbox()) {
             Closeables.closeQuietly(GAL_SEARCHER_CACHE.put(mailbox.getId(), searcher));
@@ -444,7 +444,7 @@ public final class LuceneIndex implements IndexStore {
 
         // if files is null here, we are likely running into file permission issue
         if (files == null) {
-            ZimbraLog.index.warn("Could not list files in directory %s", dir.getAbsolutePath());
+            ZmailLog.index.warn("Could not list files in directory %s", dir.getAbsolutePath());
             return false;
         }
 
@@ -500,7 +500,7 @@ public final class LuceneIndex implements IndexStore {
     private synchronized void commitWriter() throws IOException {
         assert(writerInfo.getWriterRef() != null);
 
-        ZimbraLog.index.debug("Commit IndexWriter");
+        ZmailLog.index.debug("Commit IndexWriter");
 
         MergeTask task = new MergeTask(writerInfo.getWriterRef());
 
@@ -527,7 +527,7 @@ public final class LuceneIndex implements IndexStore {
             mailbox.index.submit(task); // merge must run in background
             success = true;
         } catch (RejectedExecutionException e) {
-            ZimbraLog.index.warn("Skipping merge because all index threads are busy");
+            ZmailLog.index.warn("Skipping merge because all index threads are busy");
         } finally {
             if (!success) {
                 writerInfo.getWriterRef().dec();
@@ -543,7 +543,7 @@ public final class LuceneIndex implements IndexStore {
             return;
         }
 
-        ZimbraLog.index.debug("Close IndexWriter");
+        ZmailLog.index.debug("Close IndexWriter");
 
         try {
             writerInfo.getWriterRef().get().close(false); // ignore phantom pending merges
@@ -555,7 +555,7 @@ public final class LuceneIndex implements IndexStore {
         } catch (AssertionError e) {
             repair(e);
         } catch (IOException e) {
-            ZimbraLog.index.error("Failed to close IndexWriter", e);
+            ZmailLog.index.error("Failed to close IndexWriter", e);
         } finally {
             unlockIndexWriter();
             WRITER_THROTTLE.release();
@@ -659,7 +659,7 @@ public final class LuceneIndex implements IndexStore {
                 if (scheduler.tryLock()) {
                     writer.maybeMerge();
                 } else {
-                    ZimbraLog.index.debug("Merge is in progress by other thread");
+                    ZmailLog.index.debug("Merge is in progress by other thread");
                 }
             } catch (CorruptIndexException e) {
                 try {
@@ -674,7 +674,7 @@ public final class LuceneIndex implements IndexStore {
                 }
                 repair(e);
             } catch (IOException e) {
-                ZimbraLog.index.error("Failed to merge IndexWriter", e);
+                ZmailLog.index.error("Failed to merge IndexWriter", e);
             } finally {
                 scheduler.release();
                 ref.dec();
@@ -685,33 +685,33 @@ public final class LuceneIndex implements IndexStore {
     private IndexWriterConfig getWriterConfig() {
         IndexWriterConfig config = new IndexWriterConfig(VERSION, mailbox.index.getAnalyzer());
         config.setMergeScheduler(new MergeScheduler());
-        config.setMaxBufferedDocs(LC.zimbra_index_lucene_max_buffered_docs.intValue());
-        config.setRAMBufferSizeMB(LC.zimbra_index_lucene_ram_buffer_size_kb.intValue() / 1024.0);
-        if (LC.zimbra_index_lucene_merge_policy.booleanValue()) {
+        config.setMaxBufferedDocs(LC.zmail_index_lucene_max_buffered_docs.intValue());
+        config.setRAMBufferSizeMB(LC.zmail_index_lucene_ram_buffer_size_kb.intValue() / 1024.0);
+        if (LC.zmail_index_lucene_merge_policy.booleanValue()) {
             LogDocMergePolicy policy = new LogDocMergePolicy();
             config.setMergePolicy(policy);
-            policy.setUseCompoundFile(LC.zimbra_index_lucene_use_compound_file.booleanValue());
-            policy.setMergeFactor(LC.zimbra_index_lucene_merge_factor.intValue());
-            policy.setMinMergeDocs(LC.zimbra_index_lucene_min_merge.intValue());
-            if (LC.zimbra_index_lucene_max_merge.intValue() != Integer.MAX_VALUE) {
-                policy.setMaxMergeDocs(LC.zimbra_index_lucene_max_merge.intValue());
+            policy.setUseCompoundFile(LC.zmail_index_lucene_use_compound_file.booleanValue());
+            policy.setMergeFactor(LC.zmail_index_lucene_merge_factor.intValue());
+            policy.setMinMergeDocs(LC.zmail_index_lucene_min_merge.intValue());
+            if (LC.zmail_index_lucene_max_merge.intValue() != Integer.MAX_VALUE) {
+                policy.setMaxMergeDocs(LC.zmail_index_lucene_max_merge.intValue());
             }
         } else {
             LogByteSizeMergePolicy policy = new LogByteSizeMergePolicy();
             config.setMergePolicy(policy);
-            policy.setUseCompoundFile(LC.zimbra_index_lucene_use_compound_file.booleanValue());
-            policy.setMergeFactor(LC.zimbra_index_lucene_merge_factor.intValue());
-            policy.setMinMergeMB(LC.zimbra_index_lucene_min_merge.intValue() / 1024.0);
-            if (LC.zimbra_index_lucene_max_merge.intValue() != Integer.MAX_VALUE) {
-                policy.setMaxMergeMB(LC.zimbra_index_lucene_max_merge.intValue() / 1024.0);
+            policy.setUseCompoundFile(LC.zmail_index_lucene_use_compound_file.booleanValue());
+            policy.setMergeFactor(LC.zmail_index_lucene_merge_factor.intValue());
+            policy.setMinMergeMB(LC.zmail_index_lucene_min_merge.intValue() / 1024.0);
+            if (LC.zmail_index_lucene_max_merge.intValue() != Integer.MAX_VALUE) {
+                policy.setMaxMergeMB(LC.zmail_index_lucene_max_merge.intValue() / 1024.0);
             }
         }
         return config;
     }
 
-    public static ZimbraQueryResults search(ZimbraQuery zq) throws ServiceException {
+    public static ZmailQueryResults search(ZmailQuery zq) throws ServiceException {
         SearchParams params = zq.getParams();
-        ZimbraLog.search.debug("query: %s", params.getQueryString());
+        ZmailLog.search.debug("query: %s", params.getQueryString());
 
         // handle special-case Task-only sorts: convert them to a "normal sort"
         //     and then re-sort them at the end
@@ -754,7 +754,7 @@ public final class LuceneIndex implements IndexStore {
                 break;
         }
 
-        ZimbraQueryResults results = zq.execute();
+        ZmailQueryResults results = zq.execute();
         if (isTaskSort) {
             results = new ReSortingQueryResults(results, originalSort, null);
         }
@@ -776,7 +776,7 @@ public final class LuceneIndex implements IndexStore {
 
     public static final class Factory implements IndexStore.Factory {
         public Factory() {
-            BooleanQuery.setMaxClauseCount(LC.zimbra_index_lucene_max_terms_per_query.intValue());
+            BooleanQuery.setMaxClauseCount(LC.zmail_index_lucene_max_terms_per_query.intValue());
         }
 
         @Override
@@ -814,7 +814,7 @@ public final class LuceneIndex implements IndexStore {
                 }
             } catch (Exception e) {
                 if (!(e instanceof NullPointerException))
-                    ZimbraLog.search.warn(e);
+                    ZmailLog.search.warn(e);
             }
             if (searcher != null) {
                 IndexReader newReader = IndexReader.openIfChanged(searcher.getIndexReader(), true);
@@ -840,9 +840,9 @@ public final class LuceneIndex implements IndexStore {
             MergeScheduler scheduler = (MergeScheduler) writer.get().getConfig().getMergeScheduler();
             scheduler.lock();
             try {
-                writer.get().forceMerge(writer.get().maxDoc() / LC.zimbra_index_lucene_avg_doc_per_segment.intValue() + 1, true);
+                writer.get().forceMerge(writer.get().maxDoc() / LC.zmail_index_lucene_avg_doc_per_segment.intValue() + 1, true);
             } catch (IOException e) {
-                ZimbraLog.index.error("Failed to optimize index", e);
+                ZmailLog.index.error("Failed to optimize index", e);
             } finally {
                 scheduler.release();
             }
@@ -853,10 +853,10 @@ public final class LuceneIndex implements IndexStore {
             MergeScheduler scheduler = (MergeScheduler) writer.get().getConfig().getMergeScheduler();
             scheduler.lock();
             try {
-                ZimbraLog.index.info("Force merge deletes %d", writer.get().maxDoc() - writer.get().numDocs());
+                ZmailLog.index.info("Force merge deletes %d", writer.get().maxDoc() - writer.get().numDocs());
                 writer.get().forceMergeDeletes(true);
             } catch (IOException e) {
-                ZimbraLog.index.error("Failed to optimize index", e);
+                ZmailLog.index.error("Failed to optimize index", e);
             } finally {
                 scheduler.release();
             }
@@ -940,7 +940,7 @@ public final class LuceneIndex implements IndexStore {
             for (Integer id : ids) {
                 Term term = new Term(LuceneFields.L_MAILBOX_BLOB_ID, id.toString());
                 writer.get().deleteDocuments(term);
-                ZimbraLog.index.debug("Deleted documents id=%d", id);
+                ZmailLog.index.debug("Deleted documents id=%d", id);
             }
         }
     }
@@ -997,7 +997,7 @@ public final class LuceneIndex implements IndexStore {
         @Override
         public void close() throws IOException {
             if (count.decrementAndGet() == 0) {
-                ZimbraLog.search.debug("Close IndexSearcher");
+                ZmailLog.search.debug("Close IndexSearcher");
                 try {
                     super.close();
                 } finally {

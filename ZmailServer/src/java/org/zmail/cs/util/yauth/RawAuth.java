@@ -12,7 +12,7 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.util.yauth;
+package org.zmail.cs.util.yauth;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -26,9 +26,9 @@ import org.apache.commons.httpclient.methods.GetMethod;
 import org.apache.log4j.Logger;
 import org.apache.log4j.Level;
 
-import com.zimbra.common.httpclient.HttpClientUtil;
-import com.zimbra.common.localconfig.LC;
-import com.zimbra.common.util.Constants;
+import org.zmail.common.httpclient.HttpClientUtil;
+import org.zmail.common.localconfig.LC;
+import org.zmail.common.util.Constants;
 
 /**
  * Implementation of Yahoo "Raw Auth" aka "Token Login v2"

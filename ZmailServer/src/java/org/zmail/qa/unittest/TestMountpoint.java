@@ -13,18 +13,18 @@
  * ***** END LICENSE BLOCK *****
  */
 
-package com.zimbra.qa.unittest;
+package org.zmail.qa.unittest;
 
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-import com.zimbra.common.util.StringUtil;
-import com.zimbra.cs.mailbox.Mailbox;
-import com.zimbra.client.ZFolder;
-import com.zimbra.client.ZMailbox;
-import com.zimbra.client.ZMountpoint;
+import org.zmail.common.util.StringUtil;
+import org.zmail.cs.mailbox.Mailbox;
+import org.zmail.client.ZFolder;
+import org.zmail.client.ZMailbox;
+import org.zmail.client.ZMountpoint;
 
 import junit.framework.TestCase;
 

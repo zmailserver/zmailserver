@@ -12,25 +12,25 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.service.admin;
+package org.zmail.cs.service.admin;
 
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.common.soap.AccountConstants;
-import com.zimbra.common.soap.AdminConstants;
-import com.zimbra.common.soap.Element;
-import com.zimbra.cs.account.AccessManager;
-import com.zimbra.cs.account.Provisioning;
-import com.zimbra.cs.account.Zimlet;
-import com.zimbra.cs.account.accesscontrol.ACLAccessManager;
-import com.zimbra.cs.account.accesscontrol.AdminRight;
-import com.zimbra.cs.account.accesscontrol.Rights.Admin;
-import com.zimbra.cs.zimlet.ZimletPresence.Presence;
-import com.zimbra.cs.zimlet.ZimletUtil;
-import com.zimbra.soap.ZimbraSoapContext;
+import org.zmail.common.service.ServiceException;
+import org.zmail.common.soap.AccountConstants;
+import org.zmail.common.soap.AdminConstants;
+import org.zmail.common.soap.Element;
+import org.zmail.cs.account.AccessManager;
+import org.zmail.cs.account.Provisioning;
+import org.zmail.cs.account.Zimlet;
+import org.zmail.cs.account.accesscontrol.ACLAccessManager;
+import org.zmail.cs.account.accesscontrol.AdminRight;
+import org.zmail.cs.account.accesscontrol.Rights.Admin;
+import org.zmail.cs.zimlet.ZimletPresence.Presence;
+import org.zmail.cs.zimlet.ZimletUtil;
+import org.zmail.soap.ZmailSoapContext;
 
 public class GetAdminExtensionZimlets extends AdminDocumentHandler  {
 
@@ -39,7 +39,7 @@ public class GetAdminExtensionZimlets extends AdminDocumentHandler  {
     }
 
     public Element handle(Element request, Map<String, Object> context) throws ServiceException {
-		ZimbraSoapContext zsc = getZimbraSoapContext(context);
+		ZmailSoapContext zsc = getZmailSoapContext(context);
 		
         Element response = zsc.createElement(AdminConstants.GET_ADMIN_EXTENSION_ZIMLETS_RESPONSE);
         Element zimlets = response.addUniqueElement(AccountConstants.E_ZIMLETS);
@@ -48,7 +48,7 @@ public class GetAdminExtensionZimlets extends AdminDocumentHandler  {
         return response;
     }
 
-	private void doExtensionZimlets(ZimbraSoapContext zsc, Map<String, Object> context, Element response) throws ServiceException {
+	private void doExtensionZimlets(ZmailSoapContext zsc, Map<String, Object> context, Element response) throws ServiceException {
 		Iterator<Zimlet> zimlets = Provisioning.getInstance().listAllZimlets().iterator();
 		while (zimlets.hasNext()) {
 		    
@@ -59,7 +59,7 @@ public class GetAdminExtensionZimlets extends AdminDocumentHandler  {
 			
 			if (z.isExtension()) {
 			    boolean include = true;
-			    if ("com_zimbra_delegatedadmin".equals(z.getName()))
+			    if ("org_zmail_delegatedadmin".equals(z.getName()))
                     include = (AccessManager.getInstance() instanceof ACLAccessManager);
 			    if (include)
 				    ZimletUtil.listZimlet(response, z, -1, Presence.enabled); // admin zimlets are all enabled

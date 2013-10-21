@@ -14,27 +14,27 @@
  * 
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.service.admin;
+package org.zmail.cs.service.admin;
 
 import java.util.List;
 import java.util.Map;
 
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.common.soap.AdminConstants;
-import com.zimbra.common.soap.Element;
-import com.zimbra.common.soap.MailConstants;
-import com.zimbra.cs.account.AutoProvisionThread;
-import com.zimbra.cs.account.accesscontrol.AdminRight;
-import com.zimbra.soap.ZimbraSoapContext;
-import com.zimbra.soap.admin.message.AutoProvTaskControlRequest;
-import com.zimbra.soap.admin.message.AutoProvTaskControlResponse;
+import org.zmail.common.service.ServiceException;
+import org.zmail.common.soap.AdminConstants;
+import org.zmail.common.soap.Element;
+import org.zmail.common.soap.MailConstants;
+import org.zmail.cs.account.AutoProvisionThread;
+import org.zmail.cs.account.accesscontrol.AdminRight;
+import org.zmail.soap.ZmailSoapContext;
+import org.zmail.soap.admin.message.AutoProvTaskControlRequest;
+import org.zmail.soap.admin.message.AutoProvTaskControlResponse;
 
 public class AutoProvTaskControl extends AdminDocumentHandler {
 
     @Override
     public Element handle(Element request, Map<String, Object> context)
     throws ServiceException {
-        ZimbraSoapContext zsc = getZimbraSoapContext(context);
+        ZmailSoapContext zsc = getZmailSoapContext(context);
         checkRight(zsc, context, null, AdminRight.PR_SYSTEM_ADMIN_ONLY);
         
         AutoProvTaskControlRequest.Action action = AutoProvTaskControlRequest.Action.fromString(request.getAttribute(MailConstants.E_ACTION));

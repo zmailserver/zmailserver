@@ -19,7 +19,7 @@
  * the properties in a TNEF file
  */
 
-package com.zimbra.zmtnef2xml;
+package org.zmail.zmtnef2xml;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -885,7 +885,7 @@ public class Main {
     static int xmlIndentLevel = 0;
 
     private static void usage() {
-        // System.err.println("Usage: java com.zimbra.sxtnef2xml.Main [-t <tnef file>]");
+        // System.err.println("Usage: java org.zmail.sxtnef2xml.Main [-t <tnef file>]");
         System.err.println("Usage: java -jar sxtnef2xml.jar [-t <tnef file>] | <tnef file>...");
         System.err.println("    \"-t\" option --> Xml-like output for single TNEF file is");
         System.err.println("                      sent to System.out");

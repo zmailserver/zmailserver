@@ -13,7 +13,7 @@
  * ***** END LICENSE BLOCK *****
  */
 
-package com.zimbra.cs.service.account;
+package org.zmail.cs.service.account;
 
 import java.util.Collections;
 import java.util.List;
@@ -21,19 +21,19 @@ import java.util.Map;
 import java.util.Set;
 
 import com.google.common.collect.Sets;
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.common.soap.AccountConstants;
-import com.zimbra.common.soap.Element;
-import com.zimbra.cs.account.Account;
-import com.zimbra.cs.account.Group;
-import com.zimbra.cs.account.Provisioning;
-import com.zimbra.cs.account.Group.GroupOwner;
-import com.zimbra.cs.account.accesscontrol.ACLUtil;
-import com.zimbra.cs.account.accesscontrol.Right;
-import com.zimbra.cs.account.accesscontrol.RightManager;
-import com.zimbra.cs.account.accesscontrol.ZimbraACE;
+import org.zmail.common.service.ServiceException;
+import org.zmail.common.soap.AccountConstants;
+import org.zmail.common.soap.Element;
+import org.zmail.cs.account.Account;
+import org.zmail.cs.account.Group;
+import org.zmail.cs.account.Provisioning;
+import org.zmail.cs.account.Group.GroupOwner;
+import org.zmail.cs.account.accesscontrol.ACLUtil;
+import org.zmail.cs.account.accesscontrol.Right;
+import org.zmail.cs.account.accesscontrol.RightManager;
+import org.zmail.cs.account.accesscontrol.ZmailACE;
 
-import com.zimbra.soap.ZimbraSoapContext;
+import org.zmail.soap.ZmailSoapContext;
 
 public class GetDistributionList extends DistributionListDocumentHandler {
 
@@ -41,30 +41,30 @@ public class GetDistributionList extends DistributionListDocumentHandler {
             Provisioning.A_description,
             Provisioning.A_displayName,
             Provisioning.A_mail,
-            Provisioning.A_zimbraHideInGal,
-            Provisioning.A_zimbraIsAdminGroup,
-            Provisioning.A_zimbraLocale,
-            Provisioning.A_zimbraMailAlias,
-            Provisioning.A_zimbraMailStatus,
-            Provisioning.A_zimbraNotes,
-            Provisioning.A_zimbraPrefReplyToAddress,
-            Provisioning.A_zimbraPrefReplyToDisplay,
-            Provisioning.A_zimbraPrefReplyToEnabled,
-            Provisioning.A_zimbraDistributionListSubscriptionPolicy,
-            Provisioning.A_zimbraDistributionListUnsubscriptionPolicy);
+            Provisioning.A_zmailHideInGal,
+            Provisioning.A_zmailIsAdminGroup,
+            Provisioning.A_zmailLocale,
+            Provisioning.A_zmailMailAlias,
+            Provisioning.A_zmailMailStatus,
+            Provisioning.A_zmailNotes,
+            Provisioning.A_zmailPrefReplyToAddress,
+            Provisioning.A_zmailPrefReplyToDisplay,
+            Provisioning.A_zmailPrefReplyToEnabled,
+            Provisioning.A_zmailDistributionListSubscriptionPolicy,
+            Provisioning.A_zmailDistributionListUnsubscriptionPolicy);
 
     private static final Set<String> NON_OWNER_ATTRS = Sets.newHashSet(
             Provisioning.A_description,
             Provisioning.A_displayName,
-            Provisioning.A_zimbraHideInGal,
-            Provisioning.A_zimbraNotes,
-            Provisioning.A_zimbraDistributionListSubscriptionPolicy,
-            Provisioning.A_zimbraDistributionListUnsubscriptionPolicy);
+            Provisioning.A_zmailHideInGal,
+            Provisioning.A_zmailNotes,
+            Provisioning.A_zmailDistributionListSubscriptionPolicy,
+            Provisioning.A_zmailDistributionListUnsubscriptionPolicy);
 
     public Element handle(Element request, Map<String, Object> context)
     throws ServiceException {
 
-        ZimbraSoapContext zsc = getZimbraSoapContext(context);
+        ZmailSoapContext zsc = getZmailSoapContext(context);
         Provisioning prov = Provisioning.getInstance();
         Account acct = getAuthenticatedAccount(zsc);
 
@@ -105,7 +105,7 @@ public class GetDistributionList extends DistributionListDocumentHandler {
 
             // set encodeAttrs to false, we will be encoded attrs using addKeyValuePair,
             // which is more json friendly
-            Element eDL = com.zimbra.cs.service.admin.GetDistributionList.encodeDistributionList(
+            Element eDL = org.zmail.cs.service.admin.GetDistributionList.encodeDistributionList(
                     response, group, true, !needOwners, false, null, null);
 
             if (isMember) {
@@ -145,9 +145,9 @@ public class GetDistributionList extends DistributionListDocumentHandler {
                 Element eRight = eRights.addElement(AccountConstants.E_RIGHT);
                 eRight.addAttribute(AccountConstants.A_RIGHT, right.getName());
 
-                List<ZimbraACE> acl = ACLUtil.getACEs(group, Collections.singleton(right));
+                List<ZmailACE> acl = ACLUtil.getACEs(group, Collections.singleton(right));
                 if (acl != null) {
-                    for (ZimbraACE ace : acl) {
+                    for (ZmailACE ace : acl) {
                         Element eGrantee = eRight.addElement(AccountConstants.E_GRANTEE);
                         eGrantee.addAttribute(AccountConstants.A_TYPE, ace.getGranteeType().getCode());
                         eGrantee.addAttribute(AccountConstants.A_ID, ace.getGrantee());
@@ -169,8 +169,8 @@ public class GetDistributionList extends DistributionListDocumentHandler {
                     continue;
                 }
 
-                if (key.equals(Provisioning.A_zimbraDistributionListSubscriptionPolicy) ||
-                    key.equals(Provisioning.A_zimbraDistributionListUnsubscriptionPolicy)) {
+                if (key.equals(Provisioning.A_zmailDistributionListSubscriptionPolicy) ||
+                    key.equals(Provisioning.A_zmailDistributionListUnsubscriptionPolicy)) {
                     // subscription policies are encoded differently, using Group API that returns
                     // default policy if the policy attrs are not set.
                 } else {
@@ -187,14 +187,14 @@ public class GetDistributionList extends DistributionListDocumentHandler {
             }
         }
 
-        if (specificAttrs == null || specificAttrs.contains(Provisioning.A_zimbraDistributionListSubscriptionPolicy)) {
-            eParent.addKeyValuePair(Provisioning.A_zimbraDistributionListSubscriptionPolicy,
+        if (specificAttrs == null || specificAttrs.contains(Provisioning.A_zmailDistributionListSubscriptionPolicy)) {
+            eParent.addKeyValuePair(Provisioning.A_zmailDistributionListSubscriptionPolicy,
                     group.getSubscriptionPolicy().name(),
                     AccountConstants.E_A, AccountConstants.A_N);
         }
 
-        if (specificAttrs == null || specificAttrs.contains(Provisioning.A_zimbraDistributionListUnsubscriptionPolicy)) {
-            eParent.addKeyValuePair(Provisioning.A_zimbraDistributionListUnsubscriptionPolicy,
+        if (specificAttrs == null || specificAttrs.contains(Provisioning.A_zmailDistributionListUnsubscriptionPolicy)) {
+            eParent.addKeyValuePair(Provisioning.A_zmailDistributionListUnsubscriptionPolicy,
                     group.getUnsubscriptionPolicy().name(),
                     AccountConstants.E_A, AccountConstants.A_N);
         }

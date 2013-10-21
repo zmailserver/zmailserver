@@ -12,21 +12,21 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.account.ldap.entry;
+package org.zmail.cs.account.ldap.entry;
 
 import java.util.List;
 
-import com.zimbra.soap.admin.type.DataSourceType;
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.common.util.ZimbraLog;
-import com.zimbra.cs.account.Account;
-import com.zimbra.cs.account.AttributeClass;
-import com.zimbra.cs.account.DataSource;
-import com.zimbra.cs.account.Provisioning;
-import com.zimbra.cs.ldap.LdapException;
-import com.zimbra.cs.ldap.ZAttributes;
-import com.zimbra.cs.ldap.IAttributes.CheckBinary;
-import com.zimbra.cs.ldap.ZSearchResultEntry;
+import org.zmail.soap.admin.type.DataSourceType;
+import org.zmail.common.service.ServiceException;
+import org.zmail.common.util.ZmailLog;
+import org.zmail.cs.account.Account;
+import org.zmail.cs.account.AttributeClass;
+import org.zmail.cs.account.DataSource;
+import org.zmail.cs.account.Provisioning;
+import org.zmail.cs.ldap.LdapException;
+import org.zmail.cs.ldap.ZAttributes;
+import org.zmail.cs.ldap.IAttributes.CheckBinary;
+import org.zmail.cs.ldap.ZSearchResultEntry;
 
 /**
  * 
@@ -40,8 +40,8 @@ public class LdapDataSource extends DataSource implements LdapEntry {
 	public LdapDataSource(Account acct, String dn, ZAttributes attrs, Provisioning prov) 
 	throws LdapException, ServiceException {
 		super(acct, getObjectType(attrs),
-		        attrs.getAttrString(Provisioning.A_zimbraDataSourceName),
-		        attrs.getAttrString(Provisioning.A_zimbraDataSourceId),                
+		        attrs.getAttrString(Provisioning.A_zmailDataSourceName),
+		        attrs.getAttrString(Provisioning.A_zmailDataSourceId),                
 		        attrs.getAttrs(), 
 		        prov);
 		mDn = dn;
@@ -54,13 +54,13 @@ public class LdapDataSource extends DataSource implements LdapEntry {
     public static String getObjectClass(DataSourceType type) {
         switch (type) {
             case pop3:
-                return AttributeClass.OC_zimbraPop3DataSource;
+                return AttributeClass.OC_zmailPop3DataSource;
             case imap:
-                return AttributeClass.OC_zimbraImapDataSource;
+                return AttributeClass.OC_zmailImapDataSource;
             case rss:
-                return AttributeClass.OC_zimbraRssDataSource;
+                return AttributeClass.OC_zmailRssDataSource;
             case gal:
-                return AttributeClass.OC_zimbraGalDataSource;
+                return AttributeClass.OC_zmailGalDataSource;
             default: 
                 return null;
         }
@@ -68,21 +68,21 @@ public class LdapDataSource extends DataSource implements LdapEntry {
 
     static DataSourceType getObjectType(ZAttributes attrs) throws ServiceException {
         try {
-            String dsType = attrs.getAttrString(Provisioning.A_zimbraDataSourceType);
+            String dsType = attrs.getAttrString(Provisioning.A_zmailDataSourceType);
             if (dsType != null)
                 return DataSourceType.fromString(dsType);
         } catch (LdapException e) {
-            ZimbraLog.datasource.error("cannot get DataSource type", e);
+            ZmailLog.datasource.error("cannot get DataSource type", e);
         }
         
         List<String> attr = attrs.getMultiAttrStringAsList(Provisioning.A_objectClass, CheckBinary.NOCHECK);
-        if (attr.contains(AttributeClass.OC_zimbraPop3DataSource)) 
+        if (attr.contains(AttributeClass.OC_zmailPop3DataSource)) 
             return DataSourceType.pop3;
-        else if (attr.contains(AttributeClass.OC_zimbraImapDataSource))
+        else if (attr.contains(AttributeClass.OC_zmailImapDataSource))
             return DataSourceType.imap;
-        else if (attr.contains(AttributeClass.OC_zimbraRssDataSource))
+        else if (attr.contains(AttributeClass.OC_zmailRssDataSource))
             return DataSourceType.rss;
-        else if (attr.contains(AttributeClass.OC_zimbraGalDataSource))
+        else if (attr.contains(AttributeClass.OC_zmailGalDataSource))
             return DataSourceType.gal;
         else
             throw ServiceException.FAILURE("unable to determine data source type from object class", null);

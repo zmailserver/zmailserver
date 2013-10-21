@@ -12,30 +12,30 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.service.admin;
+package org.zmail.cs.service.admin;
 
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
-import com.zimbra.common.account.Key;
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.common.soap.AdminConstants;
-import com.zimbra.common.soap.Element;
-import com.zimbra.common.util.ZimbraLog;
-import com.zimbra.cs.account.Account;
-import com.zimbra.cs.account.Domain;
-import com.zimbra.cs.account.NamedEntry;
-import com.zimbra.cs.account.Server;
-import com.zimbra.cs.account.Provisioning;
-import com.zimbra.cs.account.accesscontrol.AdminRight;
-import com.zimbra.cs.account.accesscontrol.Rights.Admin;
-import com.zimbra.cs.fb.FreeBusyProvider;
-import com.zimbra.soap.ZimbraSoapContext;
+import org.zmail.common.account.Key;
+import org.zmail.common.service.ServiceException;
+import org.zmail.common.soap.AdminConstants;
+import org.zmail.common.soap.Element;
+import org.zmail.common.util.ZmailLog;
+import org.zmail.cs.account.Account;
+import org.zmail.cs.account.Domain;
+import org.zmail.cs.account.NamedEntry;
+import org.zmail.cs.account.Server;
+import org.zmail.cs.account.Provisioning;
+import org.zmail.cs.account.accesscontrol.AdminRight;
+import org.zmail.cs.account.accesscontrol.Rights.Admin;
+import org.zmail.cs.fb.FreeBusyProvider;
+import org.zmail.soap.ZmailSoapContext;
 
 public class PushFreeBusy extends AdminDocumentHandler {
     public Element handle(Element request, Map<String, Object> context) throws ServiceException {
-        ZimbraSoapContext zsc = getZimbraSoapContext(context);
+        ZmailSoapContext zsc = getZmailSoapContext(context);
     	Provisioning prov = Provisioning.getInstance();
         
     	Element domainElem = request.getOptionalElement(AdminConstants.E_DOMAIN);
@@ -47,11 +47,11 @@ public class PushFreeBusy extends AdminDocumentHandler {
         			continue;
         		Account acct = prov.get(Key.AccountBy.id, accountId, zsc.getAuthToken());
         		if (acct == null) {
-        			ZimbraLog.misc.warn("invalid accountId: "+accountId);
+        			ZmailLog.misc.warn("invalid accountId: "+accountId);
         			continue;
         		}
         		if (!Provisioning.onLocalServer(acct)) {
-        			ZimbraLog.misc.warn("account is not on this server: "+accountId);
+        			ZmailLog.misc.warn("account is not on this server: "+accountId);
         			continue;
         		}
                 checkAdminLoginAsRight(zsc, prov, acct);
@@ -73,11 +73,11 @@ public class PushFreeBusy extends AdminDocumentHandler {
     
     private static class PushFreeBusyVisitor implements NamedEntry.Visitor {
         
-        ZimbraSoapContext mZsc;
+        ZmailSoapContext mZsc;
         Provisioning mProv;
         AdminDocumentHandler mHandler;
         
-        PushFreeBusyVisitor(ZimbraSoapContext zsc, Provisioning prov, AdminDocumentHandler handler) {
+        PushFreeBusyVisitor(ZmailSoapContext zsc, Provisioning prov, AdminDocumentHandler handler) {
             mZsc = zsc;
             mProv = prov;
             mHandler = handler;

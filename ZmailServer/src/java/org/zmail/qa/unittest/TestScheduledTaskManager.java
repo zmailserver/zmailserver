@@ -12,20 +12,20 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.qa.unittest;
+package org.zmail.qa.unittest;
 
 import java.util.Date;
 import java.util.List;
 
 import junit.framework.TestCase;
 
-import com.zimbra.common.util.Constants;
-import com.zimbra.cs.db.DbResults;
-import com.zimbra.cs.db.DbScheduledTask;
-import com.zimbra.cs.db.DbUtil;
-import com.zimbra.cs.mailbox.Mailbox;
-import com.zimbra.cs.mailbox.ScheduledTask;
-import com.zimbra.cs.mailbox.ScheduledTaskManager;
+import org.zmail.common.util.Constants;
+import org.zmail.cs.db.DbResults;
+import org.zmail.cs.db.DbScheduledTask;
+import org.zmail.cs.db.DbUtil;
+import org.zmail.cs.mailbox.Mailbox;
+import org.zmail.cs.mailbox.ScheduledTask;
+import org.zmail.cs.mailbox.ScheduledTaskManager;
 
 public class TestScheduledTaskManager
 extends TestCase {

@@ -69,7 +69,7 @@ foreach my $id (@mailboxIds) {
 close(SQL);
 print "Executing SQL statements in $sqlfile\n";
 my $tempFile = "/tmp/migrate20060911.out.$$";
-my $rc = 0xffff & system("/opt/zimbra/bin/mysql -v -A zimbra < $sqlfile > $tempFile 2>&1");
+my $rc = 0xffff & system("/opt/zmail/bin/mysql -v -A zmail < $sqlfile > $tempFile 2>&1");
 if ($rc != 0) {
     die "mysql invocation failed, exit code = $rc: $!";
     open(OUTPUT, $tempFile);
@@ -92,7 +92,7 @@ exit(0);
 
 sub init() {
     $CREATE_DB_SQL = getMboxGroupSchemaSql();
-    my $numGroups = `zmlocalconfig -q -m nokey zimbra_mailbox_groups`;
+    my $numGroups = `zmlocalconfig -q -m nokey zmail_mailbox_groups`;
     chomp($numGroups) if (defined($numGroups));
     $numGroups += 0;  # make sure it's a number
     $numGroups = 1000 if ($numGroups == 0);
@@ -123,11 +123,11 @@ sub getGroupId($) {
 
 sub addGroupIdColumn() {
     my $sql = <<_ADD_GROUP_ID_;
-# Adding group_id column to zimbra.mailbox table
-ALTER TABLE zimbra.mailbox
+# Adding group_id column to zmail.mailbox table
+ALTER TABLE zmail.mailbox
 ADD COLUMN group_id INTEGER UNSIGNED NOT NULL AFTER id;
 
-UPDATE zimbra.mailbox SET group_id = MOD(id - 1, $NUM_GROUPS) + 1;
+UPDATE zmail.mailbox SET group_id = MOD(id - 1, $NUM_GROUPS) + 1;
 _ADD_GROUP_ID_
 
     return $sql;
@@ -288,10 +288,10 @@ CREATE TABLE IF NOT EXISTS ${DATABASE_NAME}.mail_item (
    INDEX i_flags_date (mailbox_id, flags, date),         # for flag searches
    INDEX i_volume_id (mailbox_id, volume_id),            # for the foreign key into the volume table
 
-   CONSTRAINT fk_mail_item_mailbox_id FOREIGN KEY (mailbox_id) REFERENCES zimbra.mailbox(id),
+   CONSTRAINT fk_mail_item_mailbox_id FOREIGN KEY (mailbox_id) REFERENCES zmail.mailbox(id),
    CONSTRAINT fk_mail_item_parent_id FOREIGN KEY (mailbox_id, parent_id) REFERENCES ${DATABASE_NAME}.mail_item(mailbox_id, id),
    CONSTRAINT fk_mail_item_folder_id FOREIGN KEY (mailbox_id, folder_id) REFERENCES ${DATABASE_NAME}.mail_item(mailbox_id, id),
-   CONSTRAINT fk_mail_item_volume_id FOREIGN KEY (volume_id) REFERENCES zimbra.volume(id)
+   CONSTRAINT fk_mail_item_volume_id FOREIGN KEY (volume_id) REFERENCES zmail.volume(id)
 ) ENGINE = InnoDB;
 
 CREATE TABLE IF NOT EXISTS ${DATABASE_NAME}.open_conversation (
@@ -301,7 +301,7 @@ CREATE TABLE IF NOT EXISTS ${DATABASE_NAME}.open_conversation (
 
    PRIMARY KEY (mailbox_id, hash),
    INDEX i_conv_id (mailbox_id, conv_id),
-   CONSTRAINT fk_open_conversation_mailbox_id FOREIGN KEY (mailbox_id) REFERENCES zimbra.mailbox(id),
+   CONSTRAINT fk_open_conversation_mailbox_id FOREIGN KEY (mailbox_id) REFERENCES zmail.mailbox(id),
    CONSTRAINT fk_open_conversation_conv_id FOREIGN KEY (mailbox_id, conv_id) REFERENCES ${DATABASE_NAME}.mail_item(mailbox_id, id) ON DELETE CASCADE
 ) ENGINE = InnoDB;
 
@@ -314,7 +314,7 @@ CREATE TABLE IF NOT EXISTS ${DATABASE_NAME}.appointment (
 
    PRIMARY KEY (mailbox_id, uid),
    INDEX i_item_id (mailbox_id, item_id),
-   CONSTRAINT fk_appointment_mailbox_id FOREIGN KEY (mailbox_id) REFERENCES zimbra.mailbox(id),
+   CONSTRAINT fk_appointment_mailbox_id FOREIGN KEY (mailbox_id) REFERENCES zmail.mailbox(id),
    CONSTRAINT fk_appointment_item_id FOREIGN KEY (mailbox_id, item_id) REFERENCES ${DATABASE_NAME}.mail_item(mailbox_id, id) ON DELETE CASCADE
 ) ENGINE = InnoDB;
 
@@ -325,7 +325,7 @@ CREATE TABLE IF NOT EXISTS ${DATABASE_NAME}.tombstone (
    ids         TEXT,
 
    INDEX i_sequence (mailbox_id, sequence),
-   CONSTRAINT fk_tombstone_mailbox_id FOREIGN KEY (mailbox_id) REFERENCES zimbra.mailbox(id)
+   CONSTRAINT fk_tombstone_mailbox_id FOREIGN KEY (mailbox_id) REFERENCES zmail.mailbox(id)
 ) ENGINE = InnoDB;
 _SCHEMA_SQL_
     return $sql;

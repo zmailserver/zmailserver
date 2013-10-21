@@ -63,7 +63,7 @@ EOF_SQL
   @sql = ();
   foreach my $id (@mailboxIds) {
     my $sql = <<EOF_SQL;
-UPDATE mailbox$id.mail_item mi, zimbra.mailbox mbx SET mod_metadata = change_checkpoint + 100, mod_content = change_checkpoint + 100, change_checkpoint = change_checkpoint + 200 WHERE mi.id = 12 AND mbx.id = $id;
+UPDATE mailbox$id.mail_item mi, zmail.mailbox mbx SET mod_metadata = change_checkpoint + 100, mod_content = change_checkpoint + 100, change_checkpoint = change_checkpoint + 200 WHERE mi.id = 12 AND mbx.id = $id;
 EOF_SQL
     push(@sql,$sql);
   }
@@ -75,8 +75,8 @@ EOF_SQL
 sub schema22 {
     Migrate::verifySchemaVersion(22);
     my $sql = <<ADD_TRACKING_IMAP_COLUMN_EOF;
-ALTER TABLE zimbra.mailbox MODIFY tracking_sync INTEGER UNSIGNED NOT NULL DEFAULT 0;
-ALTER TABLE zimbra.mailbox ADD COLUMN tracking_imap BOOLEAN NOT NULL DEFAULT 0 AFTER tracking_sync;
+ALTER TABLE zmail.mailbox MODIFY tracking_sync INTEGER UNSIGNED NOT NULL DEFAULT 0;
+ALTER TABLE zmail.mailbox ADD COLUMN tracking_imap BOOLEAN NOT NULL DEFAULT 0 AFTER tracking_sync;
 ADD_TRACKING_IMAP_COLUMN_EOF
     Migrate::runSql($sql);
 
@@ -110,7 +110,7 @@ sub schema23 {
   my @sql = ();
   foreach my $id (@mailboxIds) {
     my $sql = <<EOF_SQL;
-UPDATE mailbox$id.mail_item mi, zimbra.mailbox mbx SET subject = "Emailed Contacts_1", mod_metadata = change_checkpoint + 100, mod_content = change_checkpoint + 100, change_checkpoint = change_checkpoint + 200 WHERE subject = "Emailed Contacts" AND folder_id = 1 AND mi.id != 13 AND mbx.id = $id;
+UPDATE mailbox$id.mail_item mi, zmail.mailbox mbx SET subject = "Emailed Contacts_1", mod_metadata = change_checkpoint + 100, mod_content = change_checkpoint + 100, change_checkpoint = change_checkpoint + 200 WHERE subject = "Emailed Contacts" AND folder_id = 1 AND mi.id != 13 AND mbx.id = $id;
 EOF_SQL
     push(@sql,$sql);
   }
@@ -128,7 +128,7 @@ EOF_CREATE_EMAILED_CONTACT_FOLDER
   @sql = ();
   foreach my $id (@mailboxIds) {
     my $sql = <<EOF_CREATE_EMAILED_CONTACT_FOLDER;
-UPDATE mailbox$id.mail_item mi, zimbra.mailbox mbx SET mod_metadata = change_checkpoint + 100, mod_content = change_checkpoint + 100, change_checkpoint = change_checkpoint + 200 WHERE mi.id = 13 AND mbx.id = $id;
+UPDATE mailbox$id.mail_item mi, zmail.mailbox mbx SET mod_metadata = change_checkpoint + 100, mod_content = change_checkpoint + 100, change_checkpoint = change_checkpoint + 200 WHERE mi.id = 13 AND mbx.id = $id;
 EOF_CREATE_EMAILED_CONTACT_FOLDER
     push(@sql,$sql);
   }
@@ -143,7 +143,7 @@ sub schema24 {
   my @sql = ();
   foreach my $id (@mailboxIds) {
     my $sql = <<EOF_SET_CHECKED_CALENDAR_FLAG;
-UPDATE mailbox$id.mail_item mi, zimbra.mailbox mbx SET flags = flags | 2097152, mod_metadata = change_checkpoint + 100, change_checkpoint = change_checkpoint + 200 WHERE mi.id = 10 AND mbx.id = $id;
+UPDATE mailbox$id.mail_item mi, zmail.mailbox mbx SET flags = flags | 2097152, mod_metadata = change_checkpoint + 100, change_checkpoint = change_checkpoint + 200 WHERE mi.id = 10 AND mbx.id = $id;
 EOF_SET_CHECKED_CALENDAR_FLAG
     push(@sql,$sql);
   }
@@ -157,11 +157,11 @@ sub schema25 {
   Migrate::verifySchemaVersion(25);
   my $sql;
   $sql .= <<CREATE_MAILBOX_METADATA_EOF;
-CREATE TABLE zimbra.mailbox_metadata ( mailbox_id  INTEGER UNSIGNED NOT NULL, section     VARCHAR(64) NOT NULL, metadata    MEDIUMTEXT, PRIMARY KEY (mailbox_id, section), CONSTRAINT fk_metadata_mailbox_id FOREIGN KEY (mailbox_id) REFERENCES mailbox(id) ON DELETE CASCADE) ENGINE = InnoDB;
+CREATE TABLE zmail.mailbox_metadata ( mailbox_id  INTEGER UNSIGNED NOT NULL, section     VARCHAR(64) NOT NULL, metadata    MEDIUMTEXT, PRIMARY KEY (mailbox_id, section), CONSTRAINT fk_metadata_mailbox_id FOREIGN KEY (mailbox_id) REFERENCES mailbox(id) ON DELETE CASCADE) ENGINE = InnoDB;
 CREATE_MAILBOX_METADATA_EOF
 
   $sql .= <<REMOVE_CONFIG_EOF;
-ALTER TABLE zimbra.mailbox DROP COLUMN config;
+ALTER TABLE zmail.mailbox DROP COLUMN config;
 REMOVE_CONFIG_EOF
   Migrate::runSql($sql);
 
@@ -172,8 +172,8 @@ REMOVE_CONFIG_EOF
 sub schema26 {
   Migrate::verifySchemaVersion(26);
   my $sql = <<ADD_CONTACT_COUNT_COLUMN_EOF;
-ALTER TABLE zimbra.mailbox ADD COLUMN contact_count INTEGER UNSIGNED DEFAULT 0 AFTER item_id_checkpoint;
-UPDATE zimbra.mailbox SET contact_count = NULL;
+ALTER TABLE zmail.mailbox ADD COLUMN contact_count INTEGER UNSIGNED DEFAULT 0 AFTER item_id_checkpoint;
+UPDATE zmail.mailbox SET contact_count = NULL;
 ADD_CONTACT_COUNT_COLUMN_EOF
   Migrate::runSql($sql);
 

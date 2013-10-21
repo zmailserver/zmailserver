@@ -19,7 +19,7 @@
  * TODO To change the template for this generated file go to
  * Window - Preferences - Java - Code Style - Code Templates
  */
-package com.zimbra.cs.pop3;
+package org.zmail.cs.pop3;
 
 /**
  * @author schemers

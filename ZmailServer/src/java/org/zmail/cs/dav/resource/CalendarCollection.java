@@ -12,7 +12,7 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.dav.resource;
+package org.zmail.cs.dav.resource;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -33,47 +33,47 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.dom4j.QName;
 
-import com.zimbra.common.account.Key.AccountBy;
-import com.zimbra.common.calendar.ZCalendar;
-import com.zimbra.common.calendar.ZCalendar.ICalTok;
-import com.zimbra.common.calendar.ZCalendar.ZComponent;
-import com.zimbra.common.calendar.ZCalendar.ZVCalendar;
-import com.zimbra.common.mime.MimeConstants;
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.common.util.HttpUtil;
-import com.zimbra.common.util.L10nUtil;
-import com.zimbra.common.util.L10nUtil.MsgKey;
-import com.zimbra.common.util.ZimbraLog;
-import com.zimbra.cs.account.Account;
-import com.zimbra.cs.account.Provisioning;
-import com.zimbra.cs.dav.DavContext;
-import com.zimbra.cs.dav.DavElements;
-import com.zimbra.cs.dav.DavException;
-import com.zimbra.cs.dav.DavProtocol;
-import com.zimbra.cs.dav.caldav.CalDavUtils;
-import com.zimbra.cs.dav.caldav.Range.TimeRange;
-import com.zimbra.cs.dav.property.CalDavProperty;
-import com.zimbra.cs.dav.property.ResourceProperty;
-import com.zimbra.cs.dav.service.DavServlet;
-import com.zimbra.cs.dav.service.method.Delete;
-import com.zimbra.cs.dav.service.method.Get;
-import com.zimbra.cs.fb.FreeBusy;
-import com.zimbra.cs.fb.FreeBusyQuery;
-import com.zimbra.cs.mailbox.CalendarItem;
-import com.zimbra.cs.mailbox.CalendarItem.ReplyInfo;
-import com.zimbra.cs.mailbox.Folder;
-import com.zimbra.cs.mailbox.MailItem;
-import com.zimbra.cs.mailbox.Mailbox;
-import com.zimbra.cs.mailbox.Mailbox.SetCalendarItemData;
-import com.zimbra.cs.mailbox.MailboxManager;
-import com.zimbra.cs.mailbox.calendar.IcalXmlStrMap;
-import com.zimbra.cs.mailbox.calendar.Invite;
-import com.zimbra.cs.mailbox.calendar.RecurId;
-import com.zimbra.cs.mailbox.calendar.ZAttendee;
-import com.zimbra.cs.mailbox.calendar.ZOrganizer;
-import com.zimbra.cs.mailbox.calendar.cache.CtagInfo;
-import com.zimbra.cs.mime.ParsedMessage;
-import com.zimbra.cs.util.AccountUtil.AccountAddressMatcher;
+import org.zmail.common.account.Key.AccountBy;
+import org.zmail.common.calendar.ZCalendar;
+import org.zmail.common.calendar.ZCalendar.ICalTok;
+import org.zmail.common.calendar.ZCalendar.ZComponent;
+import org.zmail.common.calendar.ZCalendar.ZVCalendar;
+import org.zmail.common.mime.MimeConstants;
+import org.zmail.common.service.ServiceException;
+import org.zmail.common.util.HttpUtil;
+import org.zmail.common.util.L10nUtil;
+import org.zmail.common.util.L10nUtil.MsgKey;
+import org.zmail.common.util.ZmailLog;
+import org.zmail.cs.account.Account;
+import org.zmail.cs.account.Provisioning;
+import org.zmail.cs.dav.DavContext;
+import org.zmail.cs.dav.DavElements;
+import org.zmail.cs.dav.DavException;
+import org.zmail.cs.dav.DavProtocol;
+import org.zmail.cs.dav.caldav.CalDavUtils;
+import org.zmail.cs.dav.caldav.Range.TimeRange;
+import org.zmail.cs.dav.property.CalDavProperty;
+import org.zmail.cs.dav.property.ResourceProperty;
+import org.zmail.cs.dav.service.DavServlet;
+import org.zmail.cs.dav.service.method.Delete;
+import org.zmail.cs.dav.service.method.Get;
+import org.zmail.cs.fb.FreeBusy;
+import org.zmail.cs.fb.FreeBusyQuery;
+import org.zmail.cs.mailbox.CalendarItem;
+import org.zmail.cs.mailbox.CalendarItem.ReplyInfo;
+import org.zmail.cs.mailbox.Folder;
+import org.zmail.cs.mailbox.MailItem;
+import org.zmail.cs.mailbox.Mailbox;
+import org.zmail.cs.mailbox.Mailbox.SetCalendarItemData;
+import org.zmail.cs.mailbox.MailboxManager;
+import org.zmail.cs.mailbox.calendar.IcalXmlStrMap;
+import org.zmail.cs.mailbox.calendar.Invite;
+import org.zmail.cs.mailbox.calendar.RecurId;
+import org.zmail.cs.mailbox.calendar.ZAttendee;
+import org.zmail.cs.mailbox.calendar.ZOrganizer;
+import org.zmail.cs.mailbox.calendar.cache.CtagInfo;
+import org.zmail.cs.mime.ParsedMessage;
+import org.zmail.cs.util.AccountUtil.AccountAddressMatcher;
 
 /**
  * draft-dusseault-caldav-15 section 4.2
@@ -140,7 +140,7 @@ public class CalendarCollection extends Collection {
                 if (range == null && needCalendarData(ctxt))
                     mAppts = requestedAppts;
             } catch (ServiceException se) {
-                ZimbraLog.dav.error("can't get calendar items", se);
+                ZmailLog.dav.error("can't get calendar items", se);
                 return Collections.emptyList();
             }
         } else {
@@ -160,7 +160,7 @@ public class CalendarCollection extends Collection {
                 if (start > 0 && end > 0 && end > start)
                     uidmap.put(uid, href);
             } catch (IOException e) {
-                ZimbraLog.dav.warn("can't decode href "+href, e);
+                ZmailLog.dav.warn("can't decode href "+href, e);
             }
         }
         return uidmap;
@@ -199,7 +199,7 @@ public class CalendarCollection extends Collection {
         start = start == Long.MIN_VALUE ? -1 : start;
         end = end == Long.MAX_VALUE ? -1 : end;
         if (!needCalendarData(ctxt)) {
-            ZimbraLog.dav.debug("METADATA only");
+            ZmailLog.dav.debug("METADATA only");
             mMetadataOnly = true;
             for (CalendarItem.CalendarMetadata item : mbox.getCalendarItemMetadata(getId(), start, end)) {
                 appts.put(item.uid, new CalendarObject.LightWeightCalendarObject(getUri(), getOwner(), item));

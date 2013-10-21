@@ -42,7 +42,7 @@ CREATE TABLE IF NOT EXISTS $group.data_source_item (
    
    PRIMARY KEY (mailbox_id, item_id),
    UNIQUE INDEX i_remote_id (mailbox_id, data_source_id, remote_id),   -- for reverse lookup
-   CONSTRAINT fk_data_source_item_mailbox_id FOREIGN KEY (mailbox_id) REFERENCES zimbra.mailbox(id) ON DELETE CASCADE
+   CONSTRAINT fk_data_source_item_mailbox_id FOREIGN KEY (mailbox_id) REFERENCES zmail.mailbox(id) ON DELETE CASCADE
 ) ENGINE = InnoDB;
 CREATE_TABLE_EOF
 

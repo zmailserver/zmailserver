@@ -12,14 +12,14 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.account.ldap;
+package org.zmail.cs.account.ldap;
 
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.cs.account.EntrySearchFilter.AndOr;
-import com.zimbra.cs.account.EntrySearchFilter.Multi;
-import com.zimbra.cs.account.EntrySearchFilter.Operator;
-import com.zimbra.cs.account.EntrySearchFilter.Single;
-import com.zimbra.cs.account.EntrySearchFilter.Term;
+import org.zmail.common.service.ServiceException;
+import org.zmail.cs.account.EntrySearchFilter.AndOr;
+import org.zmail.cs.account.EntrySearchFilter.Multi;
+import org.zmail.cs.account.EntrySearchFilter.Operator;
+import org.zmail.cs.account.EntrySearchFilter.Single;
+import org.zmail.cs.account.EntrySearchFilter.Term;
 
 /*
  * parse string representation of LDAP query into EntrySearchFilter

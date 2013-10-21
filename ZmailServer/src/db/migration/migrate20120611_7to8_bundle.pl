@@ -112,7 +112,7 @@ CREATE TABLE IF NOT EXISTS $group.tag (
 
    PRIMARY KEY (mailbox_id, id),
    UNIQUE INDEX i_tag_name (mailbox_id, name),
-   CONSTRAINT fk_tag_mailbox_id FOREIGN KEY (mailbox_id) REFERENCES zimbra.mailbox(id)
+   CONSTRAINT fk_tag_mailbox_id FOREIGN KEY (mailbox_id) REFERENCES zmail.mailbox(id)
 ) ENGINE = InnoDB;
 _EOF_
     push(@sql,$sql);
@@ -163,7 +163,7 @@ sub dropIMTables() {
   Migrate::log("Dropping IM tables...");
   Migrate::logSql("Dropping IM tables");
   my $sql = <<_SQL_;
-USE zimbra;
+USE zmail;
 DROP TABLE IF EXISTS jiveUserProp;
 DROP TABLE IF EXISTS jiveGroupProp;
 DROP TABLE IF EXISTS jiveGroupUser;

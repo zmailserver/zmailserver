@@ -12,7 +12,7 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.dav.property;
+package org.zmail.cs.dav.property;
 
 import java.util.HashMap;
 import java.util.HashSet;
@@ -24,21 +24,21 @@ import javax.servlet.http.HttpServletResponse;
 import org.dom4j.Element;
 import org.dom4j.QName;
 
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.common.util.ZimbraLog;
-import com.zimbra.cs.account.Account;
-import com.zimbra.cs.account.Provisioning;
-import com.zimbra.common.account.Key;
-import com.zimbra.common.account.Key.AccountBy;
-import com.zimbra.cs.dav.DavContext;
-import com.zimbra.cs.dav.DavElements;
-import com.zimbra.cs.dav.DavException;
-import com.zimbra.cs.dav.resource.DavResource;
-import com.zimbra.cs.dav.resource.UrlNamespace;
-import com.zimbra.cs.mailbox.ACL;
-import com.zimbra.cs.mailbox.Folder;
-import com.zimbra.cs.mailbox.MailItem;
-import com.zimbra.cs.mailbox.ACL.Grant;
+import org.zmail.common.service.ServiceException;
+import org.zmail.common.util.ZmailLog;
+import org.zmail.cs.account.Account;
+import org.zmail.cs.account.Provisioning;
+import org.zmail.common.account.Key;
+import org.zmail.common.account.Key.AccountBy;
+import org.zmail.cs.dav.DavContext;
+import org.zmail.cs.dav.DavElements;
+import org.zmail.cs.dav.DavException;
+import org.zmail.cs.dav.resource.DavResource;
+import org.zmail.cs.dav.resource.UrlNamespace;
+import org.zmail.cs.mailbox.ACL;
+import org.zmail.cs.mailbox.Folder;
+import org.zmail.cs.mailbox.MailItem;
+import org.zmail.cs.mailbox.ACL.Grant;
 
 /*
  * The following are the required properties for supporting DAV access-control.
@@ -191,9 +191,9 @@ public class Acl extends ResourceProperty {
 
                 addGrantDeny(ace, g, true);
             } catch (DavException e) {
-                ZimbraLog.dav.error("can't add principal: grantee="+g.getGranteeId(), e);
+                ZmailLog.dav.error("can't add principal: grantee="+g.getGranteeId(), e);
             } catch (ServiceException e) {
-                ZimbraLog.dav.error("can't add principal: grantee="+g.getGranteeId(), e);
+                ZmailLog.dav.error("can't add principal: grantee="+g.getGranteeId(), e);
             }
         }
         return acl;
@@ -262,7 +262,7 @@ public class Acl extends ResourceProperty {
             try {
                 e.setText(UrlNamespace.getPrincipalCollectionUrl(ctxt.getAuthAccount()));
             } catch (ServiceException ex) {
-                ZimbraLog.dav.warn("can't generate principal-collection-url", ex);
+                ZmailLog.dav.warn("can't generate principal-collection-url", ex);
             }
             return pcs;
         }
@@ -347,7 +347,7 @@ public class Acl extends ResourceProperty {
                         break;
                     }
                 } catch (ServiceException e) {
-                    ZimbraLog.dav.error("can't add principal: grantee="+g.getGranteeId(), e);
+                    ZmailLog.dav.error("can't add principal: grantee="+g.getGranteeId(), e);
                 }
             }
 
@@ -384,7 +384,7 @@ public class Acl extends ResourceProperty {
             try {
                 mAccount = Provisioning.getInstance().get(AccountBy.name, rs.getOwner());
             } catch (ServiceException e) {
-                ZimbraLog.dav.warn("can't get account "+rs.getOwner(), e);
+                ZmailLog.dav.warn("can't get account "+rs.getOwner(), e);
             }
         }
 
@@ -503,14 +503,14 @@ public class Acl extends ResourceProperty {
                     Account acct = Provisioning.getInstance().get(Key.AccountBy.id, mId);
                     mPrincipalUrl = UrlNamespace.getPrincipalCollectionUrl(acct);
                 } catch (ServiceException se) {
-                    ZimbraLog.dav.warn("can't lookup account "+mId, se);
+                    ZmailLog.dav.warn("can't lookup account "+mId, se);
                 }
                 break;
             }
             return mPrincipalUrl;
         }
 
-        public String getZimbraId() {
+        public String getZmailId() {
             return mId;
         }
 

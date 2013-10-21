@@ -13,23 +13,23 @@
  * ***** END LICENSE BLOCK *****
  */
 
-package com.zimbra.cs.service.admin;
+package org.zmail.cs.service.admin;
 
 import java.util.Map;
 
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.common.soap.AdminConstants;
-import com.zimbra.common.soap.Element;
-import com.zimbra.common.util.memcached.ZimbraMemcachedClient;
-import com.zimbra.cs.memcached.MemcachedConnector;
-import com.zimbra.soap.ZimbraSoapContext;
+import org.zmail.common.service.ServiceException;
+import org.zmail.common.soap.AdminConstants;
+import org.zmail.common.soap.Element;
+import org.zmail.common.util.memcached.ZmailMemcachedClient;
+import org.zmail.cs.memcached.MemcachedConnector;
+import org.zmail.soap.ZmailSoapContext;
 
 public class GetMemcachedClientConfig extends AdminDocumentHandler {
 
     @Override public Element handle(Element request, Map<String, Object> context) throws ServiceException {
-        ZimbraSoapContext zsc = getZimbraSoapContext(context);
+        ZmailSoapContext zsc = getZmailSoapContext(context);
         Element response = zsc.createElement(AdminConstants.GET_MEMCACHED_CLIENT_CONFIG_RESPONSE);
-        ZimbraMemcachedClient zmcd = MemcachedConnector.getClient();
+        ZmailMemcachedClient zmcd = MemcachedConnector.getClient();
         if (zmcd != null) {
             response.addAttribute(AdminConstants.A_MEMCACHED_CLIENT_CONFIG_SERVER_LIST, zmcd.getServerList());
             response.addAttribute(AdminConstants.A_MEMCACHED_CLIENT_CONFIG_HASH_ALGORITHM, zmcd.getHashAlgorithm());

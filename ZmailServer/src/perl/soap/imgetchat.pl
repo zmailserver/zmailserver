@@ -41,8 +41,8 @@ if (defined $ARGV[1] && $ARGV[1] ne "") {
     exit 1;
 }
 
-my $ACCTNS = "urn:zimbraAccount";
-my $MAILNS = "urn:zimbraIM";
+my $ACCTNS = "urn:zmailAccount";
+my $MAILNS = "urn:zmailIM";
 
 my $url = "http://localhost:7070/service/soap/";
 
@@ -63,7 +63,7 @@ print "authToken($authToken)\n";
 my $sessionId = $authResponse->find_child('sessionId')->content;
 print "sessionId = $sessionId\n";
 
-my $context = $SOAP->zimbraContext($authToken, $sessionId);
+my $context = $SOAP->zmailContext($authToken, $sessionId);
 
 my $contextStr = $context->to_string("pretty");
 print("Context = $contextStr\n");

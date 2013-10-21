@@ -12,34 +12,34 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.service.account;
+package org.zmail.cs.service.account;
 
 import java.util.Map;
 import java.util.Set;
 
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.common.soap.AccountConstants;
-import com.zimbra.common.soap.Element;
-import com.zimbra.common.soap.MailConstants;
-import com.zimbra.common.util.StringUtil;
-import com.zimbra.common.util.ZimbraLog;
-import com.zimbra.cs.account.Account;
-import com.zimbra.cs.account.EntrySearchFilter;
-import com.zimbra.cs.account.Provisioning;
-import com.zimbra.cs.account.EntrySearchFilter.Multi;
-import com.zimbra.cs.account.EntrySearchFilter.Operator;
-import com.zimbra.cs.account.EntrySearchFilter.Single;
-import com.zimbra.cs.account.EntrySearchFilter.Visitor;
-import com.zimbra.cs.account.gal.GalUtil;
-import com.zimbra.cs.gal.GalExtraSearchFilter;
-import com.zimbra.cs.gal.GalSearchConfig;
-import com.zimbra.cs.gal.GalSearchControl;
-import com.zimbra.cs.gal.GalSearchParams;
-import com.zimbra.cs.gal.GalSearchQueryCallback;
-import com.zimbra.cs.gal.GalExtraSearchFilter.GalExtraQueryCallback;
-import com.zimbra.soap.ZimbraSoapContext;
-import com.zimbra.soap.account.type.MemberOfSelector;
-import com.zimbra.soap.type.GalSearchType;
+import org.zmail.common.service.ServiceException;
+import org.zmail.common.soap.AccountConstants;
+import org.zmail.common.soap.Element;
+import org.zmail.common.soap.MailConstants;
+import org.zmail.common.util.StringUtil;
+import org.zmail.common.util.ZmailLog;
+import org.zmail.cs.account.Account;
+import org.zmail.cs.account.EntrySearchFilter;
+import org.zmail.cs.account.Provisioning;
+import org.zmail.cs.account.EntrySearchFilter.Multi;
+import org.zmail.cs.account.EntrySearchFilter.Operator;
+import org.zmail.cs.account.EntrySearchFilter.Single;
+import org.zmail.cs.account.EntrySearchFilter.Visitor;
+import org.zmail.cs.account.gal.GalUtil;
+import org.zmail.cs.gal.GalExtraSearchFilter;
+import org.zmail.cs.gal.GalSearchConfig;
+import org.zmail.cs.gal.GalSearchControl;
+import org.zmail.cs.gal.GalSearchParams;
+import org.zmail.cs.gal.GalSearchQueryCallback;
+import org.zmail.cs.gal.GalExtraSearchFilter.GalExtraQueryCallback;
+import org.zmail.soap.ZmailSoapContext;
+import org.zmail.soap.account.type.MemberOfSelector;
+import org.zmail.soap.type.GalSearchType;
 
 /**
  * @since May 26, 2004
@@ -54,8 +54,8 @@ public class SearchGal extends GalDocumentHandler {
     
     @Override
     public Element handle(Element request, Map<String, Object> context) throws ServiceException {
-        ZimbraSoapContext zsc = getZimbraSoapContext(context);
-        Account account = getRequestedAccount(getZimbraSoapContext(context));
+        ZmailSoapContext zsc = getZmailSoapContext(context);
+        Account account = getRequestedAccount(getZmailSoapContext(context));
 
         if (!canAccessAccount(zsc, account))
             throw ServiceException.PERM_DENIED("can not access account");
@@ -63,7 +63,7 @@ public class SearchGal extends GalDocumentHandler {
         return searchGal(zsc, account, request);
     }
     
-    private static Element searchGal(ZimbraSoapContext zsc, Account account, Element request) throws ServiceException {
+    private static Element searchGal(ZmailSoapContext zsc, Account account, Element request) throws ServiceException {
         
         // if searhc by ref is requested, honor it
         String ref = request.getAttribute(AccountConstants.A_REF, null);
@@ -147,16 +147,16 @@ public class SearchGal extends GalDocumentHandler {
         }
         
         /*
-         * Return an extra query for Zimbra GAL LDAP search
+         * Return an extra query for Zmail GAL LDAP search
          * 
          * Each terminal term in the filter is mapped to a query in the generated LDAP query as:
-         * term.getLhs() => a named filter in globalconfig zimbraGalLdapFilterDef
+         * term.getLhs() => a named filter in globalconfig zmailGalLdapFilterDef
          * term.getRhs() => value that will replace the %s in the named filter
          * 
          * To use this method, getRhs() of each terminal term in the filter must be 
-         * a named filter in globalconfig zimbraGalLdapFilterDef.
+         * a named filter in globalconfig zmailGalLdapFilterDef.
          */
-        public String getZimbraLdapSearchQuery() {
+        public String getZmailLdapSearchQuery() {
             GenLdapQueryByNamedFilterVisitor visitor = new GenLdapQueryByNamedFilterVisitor();
             filter.traverse(visitor);
             String query = visitor.getFilter();
@@ -190,7 +190,7 @@ public class SearchGal extends GalDocumentHandler {
                     filter = GalUtil.expandFilter(null, filterDef, value, null);
                 }
             } catch (ServiceException e) { 
-                ZimbraLog.gal.warn("cannot find filter def " + namedFilter, e);
+                ZmailLog.gal.warn("cannot find filter def " + namedFilter, e);
             }
             
             if (filter == null) {

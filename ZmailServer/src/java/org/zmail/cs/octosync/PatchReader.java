@@ -13,7 +13,7 @@
  * ***** END LICENSE BLOCK *****
  */
 
-package com.zimbra.cs.octosync;
+package org.zmail.cs.octosync;
 
 import java.io.Closeable;
 import java.io.IOException;

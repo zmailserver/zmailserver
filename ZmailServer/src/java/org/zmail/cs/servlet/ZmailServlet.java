@@ -16,7 +16,7 @@
 /*
  * Created on 2005. 4. 5.
  */
-package com.zimbra.cs.servlet;
+package org.zmail.cs.servlet;
 
 import java.io.InputStream;
 import java.io.IOException;
@@ -41,41 +41,41 @@ import org.apache.commons.httpclient.methods.GetMethod;
 import org.apache.commons.httpclient.methods.InputStreamRequestEntity;
 import org.apache.commons.httpclient.methods.PostMethod;
 
-import com.zimbra.common.httpclient.HttpClientUtil;
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.common.soap.Element;
-import com.zimbra.common.soap.SoapProtocol;
-import com.zimbra.common.util.ByteUtil;
-import com.zimbra.common.util.HttpUtil;
-import com.zimbra.common.util.Log;
-import com.zimbra.common.util.LogFactory;
-import com.zimbra.common.util.RemoteIP;
-import com.zimbra.common.util.ZimbraCookie;
-import com.zimbra.common.util.ZimbraHttpConnectionManager;
-import com.zimbra.common.util.ZimbraLog;
-import com.zimbra.cs.account.Account;
-import com.zimbra.cs.account.AuthToken;
-import com.zimbra.cs.account.AuthTokenException;
-import com.zimbra.cs.account.Domain;
-import com.zimbra.cs.account.GuestAccount;
-import com.zimbra.cs.account.Provisioning;
-import com.zimbra.cs.account.Server;
-import com.zimbra.common.account.Key;
-import com.zimbra.common.account.Key.AccountBy;
-import com.zimbra.common.account.Key.DomainBy;
-import com.zimbra.cs.account.auth.AuthContext;
-import com.zimbra.cs.httpclient.URLUtil;
-import com.zimbra.cs.service.AuthProvider;
-import com.zimbra.cs.util.Zimbra;
+import org.zmail.common.httpclient.HttpClientUtil;
+import org.zmail.common.service.ServiceException;
+import org.zmail.common.soap.Element;
+import org.zmail.common.soap.SoapProtocol;
+import org.zmail.common.util.ByteUtil;
+import org.zmail.common.util.HttpUtil;
+import org.zmail.common.util.Log;
+import org.zmail.common.util.LogFactory;
+import org.zmail.common.util.RemoteIP;
+import org.zmail.common.util.ZmailCookie;
+import org.zmail.common.util.ZmailHttpConnectionManager;
+import org.zmail.common.util.ZmailLog;
+import org.zmail.cs.account.Account;
+import org.zmail.cs.account.AuthToken;
+import org.zmail.cs.account.AuthTokenException;
+import org.zmail.cs.account.Domain;
+import org.zmail.cs.account.GuestAccount;
+import org.zmail.cs.account.Provisioning;
+import org.zmail.cs.account.Server;
+import org.zmail.common.account.Key;
+import org.zmail.common.account.Key.AccountBy;
+import org.zmail.common.account.Key.DomainBy;
+import org.zmail.cs.account.auth.AuthContext;
+import org.zmail.cs.httpclient.URLUtil;
+import org.zmail.cs.service.AuthProvider;
+import org.zmail.cs.util.Zmail;
 
 /**
- * Superclass for all Zimbra servlets.  Supports port filtering and
+ * Superclass for all Zmail servlets.  Supports port filtering and
  * provides some utility methods to subclasses.
  */
-public class ZimbraServlet extends HttpServlet {
+public class ZmailServlet extends HttpServlet {
     private static final long serialVersionUID = 5025244890767551679L;
 
-    private static Log mLog = LogFactory.getLog(ZimbraServlet.class);
+    private static Log mLog = LogFactory.getLog(ZmailServlet.class);
 
     private static final String PARAM_ALLOWED_PORTS  = "allowed.ports";
 
@@ -84,7 +84,7 @@ public class ZimbraServlet extends HttpServlet {
 
     protected String getRealmHeader(String realm)  { 
         if (realm == null)
-            realm = "Zimbra";
+            realm = "Zmail";
         return "BASIC realm=\"" + realm + "\""; 
     }
     
@@ -110,12 +110,12 @@ public class ZimbraServlet extends HttpServlet {
         return getRealmHeader(realm);
     }
     
-    protected static final String ZIMBRA_FAULT_CODE_HEADER    = "X-Zimbra-Fault-Code";
-    protected static final String ZIMBRA_FAULT_MESSAGE_HEADER = "X-Zimbra-Fault-Message";
+    protected static final String ZIMBRA_FAULT_CODE_HEADER    = "X-Zmail-Fault-Code";
+    protected static final String ZIMBRA_FAULT_MESSAGE_HEADER = "X-Zmail-Fault-Message";
 
     private static final int MAX_PROXY_HOPCOUNT = 3;
 
-    private static Map<String, ZimbraServlet> sServlets = new HashMap<String, ZimbraServlet>();
+    private static Map<String, ZmailServlet> sServlets = new HashMap<String, ZmailServlet>();
 
     private int[] mAllowedPorts;
 
@@ -154,17 +154,17 @@ public class ZimbraServlet extends HttpServlet {
             synchronized (sServlets) {
                 String name = getServletName();
                 if (sServlets.containsKey(name)) {
-                    Zimbra.halt("Attempted to instantiate a second instance of " + name);
+                    Zmail.halt("Attempted to instantiate a second instance of " + name);
                 }
                 sServlets.put(getServletName(), this);
                 mLog.debug("Added " + getServletName() + " to the servlet list");
             }
         } catch (Throwable t) {
-            Zimbra.halt("Unable to initialize servlet " + getServletName() + "; halting", t);
+            Zmail.halt("Unable to initialize servlet " + getServletName() + "; halting", t);
         }
     }
     
-    public static ZimbraServlet getServlet(String name) {
+    public static ZmailServlet getServlet(String name) {
         synchronized (sServlets) {
             return sServlets.get(name);
         }
@@ -194,7 +194,7 @@ public class ZimbraServlet extends HttpServlet {
         if (!allowed) {
             SoapProtocol soapProto = SoapProtocol.Soap12;
             ServiceException e = ServiceException.FAILURE("Request not allowed on port " + request.getLocalPort(), null);
-            ZimbraLog.soap.warn(null, e);
+            ZmailLog.soap.warn(null, e);
             Element fault = SoapProtocol.Soap12.soapFault(e);
             Element envelope = SoapProtocol.Soap12.soapEnvelope(fault);
             byte[] soapBytes = envelope.toUTF8();
@@ -320,13 +320,13 @@ public class ZimbraServlet extends HttpServlet {
         }
     }
 
-    private static boolean hasZimbraAuthCookie(HttpState state) {
+    private static boolean hasZmailAuthCookie(HttpState state) {
         Cookie[] cookies = state.getCookies();
         if (cookies == null)
             return false;
         
         for (Cookie c: cookies) {
-            if (c.getName().equals(ZimbraCookie.COOKIE_ZM_AUTH_TOKEN))
+            if (c.getName().equals(ZmailCookie.COOKIE_ZM_AUTH_TOKEN))
                 return true;
         }
         return false;
@@ -337,31 +337,31 @@ public class ZimbraServlet extends HttpServlet {
         // create an HTTP client with the same cookies
         javax.servlet.http.Cookie cookies[] = req.getCookies();
         String hostname = method.getURI().getHost();
-        boolean hasZMAuth = hasZimbraAuthCookie(state);
+        boolean hasZMAuth = hasZmailAuthCookie(state);
         if (cookies != null) {
             for (int i = 0; i < cookies.length; i++) {
-                if (cookies[i].getName().equals(ZimbraCookie.COOKIE_ZM_AUTH_TOKEN) && hasZMAuth)
+                if (cookies[i].getName().equals(ZmailCookie.COOKIE_ZM_AUTH_TOKEN) && hasZMAuth)
                     continue;
                 state.addCookie(new Cookie(hostname, cookies[i].getName(), cookies[i].getValue(), "/", null, false));
             }
         }
-        HttpClient client = ZimbraHttpConnectionManager.getInternalHttpConnMgr().newHttpClient();
+        HttpClient client = ZmailHttpConnectionManager.getInternalHttpConnMgr().newHttpClient();
         if (state != null)
             client.setState(state);
 
         int hopcount = 0;
         for (Enumeration<?> enm = req.getHeaderNames(); enm.hasMoreElements(); ) {
             String hname = (String) enm.nextElement(), hlc = hname.toLowerCase();
-            if (hlc.equals("x-zimbra-hopcount"))
+            if (hlc.equals("x-zmail-hopcount"))
                 try { hopcount = Math.max(Integer.parseInt(req.getHeader(hname)), 0); } catch (NumberFormatException e) { }
             else if (hlc.startsWith("x-") || hlc.startsWith("content-") || hlc.equals("authorization"))
                 method.addRequestHeader(hname, req.getHeader(hname));
         }
         if (hopcount >= MAX_PROXY_HOPCOUNT)
             throw ServiceException.TOO_MANY_HOPS(HttpUtil.getFullRequestURL(req));
-        method.addRequestHeader("X-Zimbra-Hopcount", Integer.toString(hopcount + 1));
-        if (method.getRequestHeader("X-Zimbra-Orig-Url") == null)
-            method.addRequestHeader("X-Zimbra-Orig-Url", req.getRequestURL().toString());
+        method.addRequestHeader("X-Zmail-Hopcount", Integer.toString(hopcount + 1));
+        if (method.getRequestHeader("X-Zmail-Orig-Url") == null)
+            method.addRequestHeader("X-Zmail-Orig-Url", req.getRequestURL().toString());
         String ua = req.getHeader("User-Agent");
         if (ua != null)
             method.setRequestHeader("User-Agent", ua);
@@ -392,10 +392,10 @@ public class ZimbraServlet extends HttpServlet {
     }
 
     protected boolean isAdminRequest(HttpServletRequest req) throws ServiceException {
-        int adminPort = Provisioning.getInstance().getLocalServer().getIntAttr(Provisioning.A_zimbraAdminPort, -1);
+        int adminPort = Provisioning.getInstance().getLocalServer().getIntAttr(Provisioning.A_zmailAdminPort, -1);
         if (req.getLocalPort() == adminPort) {
             //can still be in offline server where port=adminPort
-            int mailPort = Provisioning.getInstance().getLocalServer().getIntAttr(Provisioning.A_zimbraMailPort, -1);
+            int mailPort = Provisioning.getInstance().getLocalServer().getIntAttr(Provisioning.A_zmailMailPort, -1);
             if (mailPort == adminPort) //we are in offline, so check cookie
                 return getAdminAuthTokenFromCookie(req) != null;
             else
@@ -460,8 +460,8 @@ public class ZimbraServlet extends HttpServlet {
         }
         try {
             Map<String, Object> authCtxt = new HashMap<String, Object>();
-            authCtxt.put(AuthContext.AC_ORIGINATING_CLIENT_IP, ZimbraServlet.getOrigIp(req));
-            authCtxt.put(AuthContext.AC_REMOTE_IP, ZimbraServlet.getClientIp(req));
+            authCtxt.put(AuthContext.AC_ORIGINATING_CLIENT_IP, ZmailServlet.getOrigIp(req));
+            authCtxt.put(AuthContext.AC_REMOTE_IP, ZmailServlet.getClientIp(req));
             authCtxt.put(AuthContext.AC_ACCOUNT_NAME_PASSEDIN, userPassedIn);
             authCtxt.put(AuthContext.AC_USER_AGENT, req.getHeader("User-Agent"));
             prov.authAccount(acct, pass, AuthContext.Protocol.http_basic, authCtxt);
@@ -500,10 +500,10 @@ public class ZimbraServlet extends HttpServlet {
         int servicePort = (req == null) ? -1 : req.getLocalPort();
         Provisioning prov = Provisioning.getInstance();
         Server localServer = prov.getLocalServer();
-        if (!prov.isOfflineProxyServer(server) && servicePort == localServer.getIntAttr(Provisioning.A_zimbraAdminPort, 0))
+        if (!prov.isOfflineProxyServer(server) && servicePort == localServer.getIntAttr(Provisioning.A_zmailAdminPort, 0))
             return URLUtil.getAdminURL(server, path);
         else
-            return URLUtil.getServiceURL(server, path, servicePort == localServer.getIntAttr(Provisioning.A_zimbraMailSSLPort, 0));
+            return URLUtil.getServiceURL(server, path, servicePort == localServer.getIntAttr(Provisioning.A_zmailMailSSLPort, 0));
     }
 
     protected void returnError(HttpServletResponse resp, ServiceException e) {
@@ -530,14 +530,14 @@ public class ZimbraServlet extends HttpServlet {
     public static RemoteIP.TrustedIPs getTrustedIPs() {
         try {
             Server server = Provisioning.getInstance().getLocalServer();
-            return new RemoteIP.TrustedIPs(server.getMultiAttr(Provisioning.A_zimbraMailTrustedIP));
+            return new RemoteIP.TrustedIPs(server.getMultiAttr(Provisioning.A_zmailMailTrustedIP));
         } catch (ServiceException e) {
-            ZimbraLog.misc.warn("failed to get trusted IPs, only localhost will be trusted", e);
+            ZmailLog.misc.warn("failed to get trusted IPs, only localhost will be trusted", e);
         }
         return new RemoteIP.TrustedIPs(null);
     }
     
     public static void addUAToLoggingContext(HttpServletRequest req) {
-        ZimbraLog.addUserAgentToContext(req.getHeader("User-Agent"));
+        ZmailLog.addUserAgentToContext(req.getHeader("User-Agent"));
     }
 }

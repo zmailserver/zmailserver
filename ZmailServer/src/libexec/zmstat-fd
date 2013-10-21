@@ -21,16 +21,16 @@
 
 use strict;
 use Getopt::Long;
-use lib "/opt/zimbra/zimbramon/lib";
-use Zimbra::Mon::Zmstat;
-use Zimbra::Mon::Logger;
+use lib "/opt/zmail/zmailmon/lib";
+use Zmail::Mon::Zmstat;
+use Zmail::Mon::Logger;
 use vars qw($LOGFH $CONSOLE $LOGFILE $ROTATE_NOW $ROTATE_DEFER);
 
-Zimbra::Mon::Zmstat::osCheck();
-Zimbra::Mon::Zmstat::getLocalConfig('zimbra_home', 'zimbra_user', 'zimbra_server_hostname',
+Zmail::Mon::Zmstat::osCheck();
+Zmail::Mon::Zmstat::getLocalConfig('zmail_home', 'zmail_user', 'zmail_server_hostname',
                'zmstat_log_directory', 'zmstat_interval',
                'zmstat_disk_interval');
-my $zuser = $Zimbra::Mon::Zmstat::LC{zimbra_user};
+my $zuser = $Zmail::Mon::Zmstat::LC{zmail_user};
 my ($zuid,$zgid) = (getpwnam($zuser))[2,3];
 
 if (@ARGV > 0 && $ARGV[0] eq 'stop') {
@@ -54,22 +54,22 @@ if (@ARGV > 0 && $ARGV[0] eq 'rotate') {
 }
 
 if ($< != 0) {
-    Zimbra::Mon::Zmstat::userCheck();
+    Zmail::Mon::Zmstat::userCheck();
     createPidFile('zmstat-fd.pid');
     $SIG{TERM} = sub {
-    	system("sudo /opt/zimbra/libexec/zmstat-fd stop");
+    	system("sudo /opt/zmail/libexec/zmstat-fd stop");
     };
     $SIG{INT} = sub {
-    	system("sudo /opt/zimbra/libexec/zmstat-fd stop");
+    	system("sudo /opt/zmail/libexec/zmstat-fd stop");
     };
     $SIG{HUP} = sub {
-    	system("sudo /opt/zimbra/libexec/zmstat-fd rotate");
+    	system("sudo /opt/zmail/libexec/zmstat-fd rotate");
     };
     my $args = "";
     if (@ARGV > 0) {
     	$args = " " . join(' ', @ARGV);
     }
-    system("sudo /opt/zimbra/libexec/zmstat-fd$args");
+    system("sudo /opt/zmail/libexec/zmstat-fd$args");
     exit;
 }
 
@@ -94,7 +94,7 @@ sub get_mbox_stat() {
     return scalar @ents;
 }
 
-my $MBOX_PID_FILE = '/opt/zimbra/log/zmmailboxd_java.pid';
+my $MBOX_PID_FILE = '/opt/zmail/log/zmmailboxd_java.pid';
 sub get_mboxd_pid() {
     my $pid = 0;
     if (-f $MBOX_PID_FILE) {
@@ -148,7 +148,7 @@ sub usage {
 Usage: zmstat-fd [options]
 Monitor system filedescriptor usage
 -i, --interval: output a line every N seconds
--l, --log:      log file (default is /opt/zimbra/zmstat/fd.csv)
+-l, --log:      log file (default is /opt/zmail/zmstat/fd.csv)
 -c, --console:  output to stdout
 
 If logging to a file, rotation occurs when a HUP signal is sent or when
@@ -201,7 +201,7 @@ while (1) {
     }
     $ROTATE_DEFER = 1;
     $LOGFH->print("$tstamp, $stat, $mbox_stat\n");
-    Zimbra::Mon::Logger::LogStats( "info", "zmstat fd.csv: ${HEADING}:: $tstamp, $stat, $mbox_stat"); 
+    Zmail::Mon::Logger::LogStats( "info", "zmstat fd.csv: ${HEADING}:: $tstamp, $stat, $mbox_stat"); 
     $LOGFH->flush();
     $ROTATE_DEFER = 0;
     if ($ROTATE_NOW) {

@@ -12,7 +12,7 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.index;
+package org.zmail.cs.index;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -31,19 +31,19 @@ import org.apache.lucene.index.Term;
 
 import com.google.common.collect.ImmutableSet;
 import com.google.common.io.Closeables;
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.common.util.ZimbraLog;
-import com.zimbra.cs.db.Db;
-import com.zimbra.cs.db.DbPool;
-import com.zimbra.cs.db.DbSearch;
-import com.zimbra.cs.db.DbPool.DbConnection;
-import com.zimbra.cs.mailbox.Folder;
-import com.zimbra.cs.mailbox.MailItem;
-import com.zimbra.cs.mailbox.Mailbox;
-import com.zimbra.cs.mailbox.Mountpoint;
-import com.zimbra.cs.mailbox.SearchFolder;
-import com.zimbra.cs.mailbox.Tag;
-import com.zimbra.cs.service.util.ItemId;
+import org.zmail.common.service.ServiceException;
+import org.zmail.common.util.ZmailLog;
+import org.zmail.cs.db.Db;
+import org.zmail.cs.db.DbPool;
+import org.zmail.cs.db.DbSearch;
+import org.zmail.cs.db.DbPool.DbConnection;
+import org.zmail.cs.mailbox.Folder;
+import org.zmail.cs.mailbox.MailItem;
+import org.zmail.cs.mailbox.Mailbox;
+import org.zmail.cs.mailbox.Mountpoint;
+import org.zmail.cs.mailbox.SearchFolder;
+import org.zmail.cs.mailbox.Tag;
+import org.zmail.cs.service.util.ItemId;
 
 /**
  * {@link QueryOperation} which goes to the SQL DB. It might have a "child" Lucene operation attached to it.
@@ -70,7 +70,7 @@ public class DBQueryOperation extends QueryOperation {
 
     private int dbHitCount = -1; // count of DB hits
     private List<DbSearch.Result> dbHits;
-    private List<ZimbraHit> nextHits = new ArrayList<ZimbraHit>();
+    private List<ZmailHit> nextHits = new ArrayList<ZmailHit>();
     private Iterator<DbSearch.Result> dbHitsIter;
     private boolean atStart = true; // don't re-fill buffer twice if they call hasNext() then reset() w/o actually getting next
     private int hitsPerChunk = 100;
@@ -463,12 +463,12 @@ public class DBQueryOperation extends QueryOperation {
      * mNextHits list.
      * <ol>
      *  <li>Get the list of DBSearchResults chunk-by-chunk (50 or 100 or whatever at a time)
-     *  <li>As we need them, grab the next SearchResult and build a real ZimbraHit out of them
+     *  <li>As we need them, grab the next SearchResult and build a real ZmailHit out of them
      * </ol>
      */
     @Override
-    public ZimbraHit peekNext() throws ServiceException {
-        ZimbraHit toRet = null;
+    public ZmailHit peekNext() throws ServiceException {
+        ZmailHit toRet = null;
         if (nextHits.size() > 0) {
             // already have some hits, so our job is easy!
             toRet = nextHits.get(0);
@@ -520,12 +520,12 @@ public class DBQueryOperation extends QueryOperation {
                     DbSearch.Result sr = dbHitsIter.next();
                     // Sometimes, a single search result might yield more than one Lucene document -- e.g. an RFC822
                     // message with separately-indexed MIME parts. Each of these parts will turn into a separate
-                    // ZimbraHit at this point, although they might be combined together at a higher level (via a
+                    // ZmailHit at this point, although they might be combined together at a higher level (via a
                     // HitGrouper).
                     Collection<Document> docs = luceneChunk != null ? luceneChunk.getHit(sr.getIndexId()) : null;
 
-                    if (docs == null || !ZimbraQueryResultsImpl.shouldAddDuplicateHits(sr.getType())) {
-                        ZimbraHit toAdd = context.getResults().getZimbraHit(context.getMailbox(), sr, null, fetch);
+                    if (docs == null || !ZmailQueryResultsImpl.shouldAddDuplicateHits(sr.getType())) {
+                        ZmailHit toAdd = context.getResults().getZmailHit(context.getMailbox(), sr, null, fetch);
                         if (toAdd != null) {
                             // make sure we only return each hit once
                             if (!mSeenHits.containsKey(toAdd)) {
@@ -535,7 +535,7 @@ public class DBQueryOperation extends QueryOperation {
                         }
                     } else {
                         for (Document doc : docs) {
-                            ZimbraHit toAdd = context.getResults().getZimbraHit(context.getMailbox(), sr, doc, fetch);
+                            ZmailHit toAdd = context.getResults().getZmailHit(context.getMailbox(), sr, doc, fetch);
                             if (toAdd != null) {
                                 // make sure we only return each hit once
                                 if (!mSeenHits.containsKey(toAdd)) {
@@ -564,11 +564,11 @@ public class DBQueryOperation extends QueryOperation {
      * its own Lucene document) and they will return the same AppointmentHit to us.  This is
      * the place where we collapse those hits down to single hits.
      *
-     * Note that in the case of matching multiple MessageParts, the ZimbraHit that is returned is
-     * different (since MP is an actual ZimbraHit subclass)....therefore MessageParts are NOT
+     * Note that in the case of matching multiple MessageParts, the ZmailHit that is returned is
+     * different (since MP is an actual ZmailHit subclass)....therefore MessageParts are NOT
      * coalesced at this level.  That is done at the top level grouper.
      */
-    private LRUHashMap<ZimbraHit> mSeenHits = new LRUHashMap<ZimbraHit>(2048, 100);
+    private LRUHashMap<ZmailHit> mSeenHits = new LRUHashMap<ZmailHit>(2048, 100);
 
     static final class LRUHashMap<T> extends LinkedHashMap<T, T> {
         private static final long serialVersionUID = -8616556084756995676L;
@@ -591,7 +591,7 @@ public class DBQueryOperation extends QueryOperation {
     }
 
     @Override
-    public ZimbraHit getNext() throws ServiceException {
+    public ZmailHit getNext() throws ServiceException {
         atStart = false;
         if (nextHits.size() == 0) {
             peekNext();
@@ -599,7 +599,7 @@ public class DBQueryOperation extends QueryOperation {
         if (nextHits.size() == 0) {
             return null;
         }
-        ZimbraHit toRet = nextHits.remove(0);
+        ZmailHit toRet = nextHits.remove(0);
         return toRet;
     }
 
@@ -656,7 +656,7 @@ public class DBQueryOperation extends QueryOperation {
         long start = System.currentTimeMillis();
         results.addAll(context.getMailbox().index.search(constraints, fetch, sort, offset, size,
                 context.getParams().inDumpster()));
-        ZimbraLog.search.debug("DBSearch elapsed=%d", System.currentTimeMillis() - start);
+        ZmailLog.search.debug("DBSearch elapsed=%d", System.currentTimeMillis() - start);
     }
 
     private boolean shouldExecuteDbFirst() throws ServiceException {
@@ -740,7 +740,7 @@ public class DBQueryOperation extends QueryOperation {
                                     dbHits.add(sr);
                                 }
                             } else {
-                                ZimbraLog.search.warn("Lucene returned item ID %d but wasn't in resultMap", indexId);
+                                ZmailLog.search.warn("Lucene returned item ID %d but wasn't in resultMap", indexId);
                                 throw ServiceException.FAILURE(
                                         "Inconsistent DB/Index query results: Text Index returned item ID " +
                                         indexId + " but wasn't in resultMap", null);
@@ -809,7 +809,7 @@ public class DBQueryOperation extends QueryOperation {
         assert(dbHitsIter == null || !dbHitsIter.hasNext());
 
         if (executeMode == QueryExecuteMode.NO_RESULTS) {
-            ZimbraLog.search.debug("Returned **NO DB RESULTS (no-results-query-optimization)**");
+            ZmailLog.search.debug("Returned **NO DB RESULTS (no-results-query-optimization)**");
             dbHitsIter = null;
             endOfHits = true;
         } else {
@@ -1046,7 +1046,7 @@ public class DBQueryOperation extends QueryOperation {
         DBQueryOperation result = (DBQueryOperation) super.clone();
         result.constraints = (DbSearchConstraints) constraints.clone();
         result.excludeTypes.addAll(excludeTypes);
-        result.nextHits = new ArrayList<ZimbraHit>();
+        result.nextHits = new ArrayList<ZmailHit>();
         return result;
     }
 
@@ -1136,7 +1136,7 @@ public class DBQueryOperation extends QueryOperation {
 
             if (queryTarget != QueryTarget.UNSPECIFIED && dbOther.queryTarget != QueryTarget.UNSPECIFIED) {
                 if (!queryTarget.equals(dbOther.queryTarget)) {
-                    ZimbraLog.search.debug("ANDing two DBOps with different targets -- this is a no results query!");
+                    ZmailLog.search.debug("ANDing two DBOps with different targets -- this is a no results query!");
                     return new NoResultsQueryOperation();
                 }
             }

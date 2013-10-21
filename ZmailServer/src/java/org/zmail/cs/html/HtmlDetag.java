@@ -12,7 +12,7 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.html;
+package org.zmail.cs.html;
 
 import java.io.File;
 import java.io.IOException;
@@ -33,8 +33,8 @@ import org.cyberneko.html.HTMLConfiguration;
 import org.cyberneko.html.filters.DefaultFilter;
 import org.cyberneko.html.filters.Writer;
 
-import com.zimbra.common.util.ByteUtil;
-import com.zimbra.common.util.ZimbraLog;
+import org.zmail.common.util.ByteUtil;
+import org.zmail.common.util.ZmailLog;
 
 public class HtmlDetag extends DefaultFilter {
 	
@@ -225,7 +225,7 @@ public class HtmlDetag extends DefaultFilter {
         try {
         	parser.parse(source);
         } catch (Exception x) {
-        	ZimbraLog.misc.warn("Can't detag HTML [" + html + "]");
+        	ZmailLog.misc.warn("Can't detag HTML [" + html + "]");
         }
         return out.toString(); //return whatever has been done
 	}

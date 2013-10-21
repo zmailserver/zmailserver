@@ -12,28 +12,28 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.service.account;
+package org.zmail.cs.service.account;
 
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import com.zimbra.common.account.SignatureUtil;
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.common.soap.AccountConstants;
-import com.zimbra.common.soap.Element;
-import com.zimbra.common.soap.SoapFaultException;
-import com.zimbra.common.util.StringUtil;
-import com.zimbra.cs.account.Account;
-import com.zimbra.cs.account.Signature;
-import com.zimbra.cs.account.Provisioning;
-import com.zimbra.soap.DocumentHandler;
+import org.zmail.common.account.SignatureUtil;
+import org.zmail.common.service.ServiceException;
+import org.zmail.common.soap.AccountConstants;
+import org.zmail.common.soap.Element;
+import org.zmail.common.soap.SoapFaultException;
+import org.zmail.common.util.StringUtil;
+import org.zmail.cs.account.Account;
+import org.zmail.cs.account.Signature;
+import org.zmail.cs.account.Provisioning;
+import org.zmail.soap.DocumentHandler;
 
-import com.zimbra.soap.ZimbraSoapContext;
+import org.zmail.soap.ZmailSoapContext;
 
 public class CreateSignature extends DocumentHandler {
     public Element handle(Element request, Map<String, Object> context) throws ServiceException, SoapFaultException {
-        ZimbraSoapContext zsc = getZimbraSoapContext(context);
+        ZmailSoapContext zsc = getZmailSoapContext(context);
         Account account = getRequestedAccount(zsc);
         
         if (!canModifyOptions(zsc, account))
@@ -59,11 +59,11 @@ public class CreateSignature extends DocumentHandler {
         }
         
         if (id != null)
-            attrs.put(Provisioning.A_zimbraSignatureId, id);
+            attrs.put(Provisioning.A_zmailSignatureId, id);
         
         Element eContactId = eReqSignature.getOptionalElement(AccountConstants.E_CONTACT_ID);
         if (eContactId != null)
-            attrs.put(Provisioning.A_zimbraPrefMailSignatureContactId, eContactId.getText());
+            attrs.put(Provisioning.A_zmailPrefMailSignatureContactId, eContactId.getText());
         
         Signature signature = Provisioning.getInstance().createSignature(account, name, attrs);
         

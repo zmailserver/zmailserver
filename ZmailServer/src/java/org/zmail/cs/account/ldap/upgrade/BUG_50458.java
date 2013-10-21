@@ -12,19 +12,19 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.account.ldap.upgrade;
+package org.zmail.cs.account.ldap.upgrade;
 
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.cs.account.Provisioning;
-import com.zimbra.cs.ldap.IAttributes;
-import com.zimbra.cs.ldap.LdapClient;
-import com.zimbra.cs.ldap.LdapServerType;
-import com.zimbra.cs.ldap.LdapUsage;
-import com.zimbra.cs.ldap.SearchLdapOptions;
-import com.zimbra.cs.ldap.ZAttributes;
-import com.zimbra.cs.ldap.ZLdapContext;
-import com.zimbra.cs.ldap.ZLdapFilterFactory;
-import com.zimbra.cs.ldap.ZMutableEntry;
+import org.zmail.common.service.ServiceException;
+import org.zmail.cs.account.Provisioning;
+import org.zmail.cs.ldap.IAttributes;
+import org.zmail.cs.ldap.LdapClient;
+import org.zmail.cs.ldap.LdapServerType;
+import org.zmail.cs.ldap.LdapUsage;
+import org.zmail.cs.ldap.SearchLdapOptions;
+import org.zmail.cs.ldap.ZAttributes;
+import org.zmail.cs.ldap.ZLdapContext;
+import org.zmail.cs.ldap.ZLdapFilterFactory;
+import org.zmail.cs.ldap.ZMutableEntry;
 
 public class BUG_50458 extends UpgradeOp {
 
@@ -44,7 +44,7 @@ public class BUG_50458 extends UpgradeOp {
     private void doDomain(ZLdapContext modZlc) {
         String bases[] = prov.getDIT().getSearchBases(Provisioning.SD_DOMAIN_FLAG);
         String query = "(&" + ZLdapFilterFactory.getInstance().allDomains().toFilterString() + 
-            "(" + Provisioning.A_zimbraPasswordChangeListener + "=" + VALUE_TO_REMOVE + ")"+ ")";
+            "(" + Provisioning.A_zmailPasswordChangeListener + "=" + VALUE_TO_REMOVE + ")"+ ")";
         
         upgrade(modZlc, bases, query);
     }
@@ -53,7 +53,7 @@ public class BUG_50458 extends UpgradeOp {
     private void upgrade(ZLdapContext modZlc, String bases[], String query) {
         SearchLdapOptions.SearchLdapVisitor visitor = new Bug50458Visitor(this, modZlc);
 
-        String attrs[] = new String[] {Provisioning.A_zimbraPasswordChangeListener};
+        String attrs[] = new String[] {Provisioning.A_zmailPasswordChangeListener};
         
         for (String base : bases) {
             try {
@@ -88,7 +88,7 @@ public class BUG_50458 extends UpgradeOp {
         
         public void doVisit(String dn, ZAttributes ldapAttrs) throws ServiceException {
             ZMutableEntry entry = LdapClient.createMutableEntry();
-            entry.setAttr(Provisioning.A_zimbraPasswordChangeListener, "");
+            entry.setAttr(Provisioning.A_zmailPasswordChangeListener, "");
             upgradeOp.replaceAttrs(modZlc, dn, entry);
         }
     }

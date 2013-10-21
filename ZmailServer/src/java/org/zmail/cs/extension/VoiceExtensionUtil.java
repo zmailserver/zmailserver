@@ -12,12 +12,12 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.extension;
+package org.zmail.cs.extension;
 
 import java.lang.reflect.Method;
 import java.util.Set;
 
-import com.zimbra.common.util.ZimbraLog;
+import org.zmail.common.util.ZmailLog;
 
 public class VoiceExtensionUtil {
 
@@ -32,12 +32,12 @@ public class VoiceExtensionUtil {
     public static void registerVoiceProvider(String extension, String providerName,
             String className, Set<String> applicableAttrs) {
         try {
-            Class vsClass = ExtensionUtil.findClass("com.zimbra.cs.voice.VoiceStore");
+            Class vsClass = ExtensionUtil.findClass("org.zmail.cs.voice.VoiceStore");
             Method method = vsClass.getMethod("register", String.class, String.class,
                     String.class, Set.class);
             method.invoke(vsClass, extension, providerName, className, applicableAttrs);
         } catch (Exception e) {
-            ZimbraLog.extensions.error("unable to register VoiceStore: extension=" + 
+            ZmailLog.extensions.error("unable to register VoiceStore: extension=" + 
                     extension + ", className=" + className, e);
         }
     }

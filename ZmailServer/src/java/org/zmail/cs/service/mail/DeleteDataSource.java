@@ -12,26 +12,26 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.service.mail;
+package org.zmail.cs.service.mail;
 
 import java.util.Map;
 
-import com.zimbra.common.account.Key;
-import com.zimbra.common.account.Key.DataSourceBy;
-import com.zimbra.soap.admin.type.DataSourceType;
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.common.soap.MailConstants;
-import com.zimbra.common.soap.SoapFaultException;
-import com.zimbra.cs.account.Account;
-import com.zimbra.cs.account.DataSource;
-import com.zimbra.cs.account.Provisioning;
-import com.zimbra.cs.datasource.DataSourceManager;
-import com.zimbra.cs.db.DbDataSource;
-import com.zimbra.cs.db.DbImapFolder;
-import com.zimbra.cs.db.DbPop3Message;
-import com.zimbra.cs.mailbox.Mailbox;
-import com.zimbra.common.soap.Element;
-import com.zimbra.soap.ZimbraSoapContext;
+import org.zmail.common.account.Key;
+import org.zmail.common.account.Key.DataSourceBy;
+import org.zmail.soap.admin.type.DataSourceType;
+import org.zmail.common.service.ServiceException;
+import org.zmail.common.soap.MailConstants;
+import org.zmail.common.soap.SoapFaultException;
+import org.zmail.cs.account.Account;
+import org.zmail.cs.account.DataSource;
+import org.zmail.cs.account.Provisioning;
+import org.zmail.cs.datasource.DataSourceManager;
+import org.zmail.cs.db.DbDataSource;
+import org.zmail.cs.db.DbImapFolder;
+import org.zmail.cs.db.DbPop3Message;
+import org.zmail.cs.mailbox.Mailbox;
+import org.zmail.common.soap.Element;
+import org.zmail.soap.ZmailSoapContext;
 
 
 public class DeleteDataSource extends MailDocumentHandler {
@@ -39,7 +39,7 @@ public class DeleteDataSource extends MailDocumentHandler {
     @Override
     public Element handle(Element request, Map<String, Object> context)
     throws ServiceException, SoapFaultException {
-        ZimbraSoapContext zsc = getZimbraSoapContext(context);
+        ZmailSoapContext zsc = getZmailSoapContext(context);
         Provisioning prov = Provisioning.getInstance();
         Account account = getRequestedAccount(zsc);
 

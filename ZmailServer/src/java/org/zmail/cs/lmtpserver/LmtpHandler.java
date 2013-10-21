@@ -13,7 +13,7 @@
  * ***** END LICENSE BLOCK *****
  */
 
-package com.zimbra.cs.lmtpserver;
+package org.zmail.cs.lmtpserver;
 
 import java.io.IOException;
 import java.util.Date;
@@ -22,14 +22,14 @@ import java.net.InetAddress;
 import javax.mail.internet.MailDateFormat;
 import javax.mail.internet.MimeUtility;
 
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.common.util.ByteUtil;
-import com.zimbra.common.util.StringUtil;
-import com.zimbra.common.util.ZimbraLog;
-import com.zimbra.cs.account.Provisioning;
-import com.zimbra.cs.stats.ZimbraPerf;
-import com.zimbra.cs.server.ProtocolHandler;
-import com.zimbra.cs.server.ServerThrottle;
+import org.zmail.common.service.ServiceException;
+import org.zmail.common.util.ByteUtil;
+import org.zmail.common.util.StringUtil;
+import org.zmail.common.util.ZmailLog;
+import org.zmail.cs.account.Provisioning;
+import org.zmail.cs.stats.ZmailPerf;
+import org.zmail.cs.server.ProtocolHandler;
+import org.zmail.cs.server.ServerThrottle;
 
 public abstract class LmtpHandler extends ProtocolHandler {
     // Connection specific data
@@ -55,14 +55,14 @@ public abstract class LmtpHandler extends ProtocolHandler {
         mRemoteAddress = remoteAddr.getHostAddress();
         if (StringUtil.isNullOrEmpty(mRemoteAddress)) {
             // Logging for bug 47643.
-            ZimbraLog.lmtp.info("Unable to determine client IP address.");
+            ZmailLog.lmtp.info("Unable to determine client IP address.");
         }
         mRemoteHostname = remoteAddr.getHostName();
         if (mRemoteHostname == null || mRemoteHostname.length() == 0) {
             mRemoteHostname = mRemoteAddress;
         }
-        ZimbraLog.addIpToContext(mRemoteAddress);
-        ZimbraLog.lmtp.debug("connected");
+        ZmailLog.addIpToContext(mRemoteAddress);
+        ZmailLog.lmtp.debug("connected");
         if (!config.isServiceEnabled()) {
             sendReply(LmtpReply.SERVICE_DISABLED);
             dropConnection();
@@ -84,17 +84,17 @@ public abstract class LmtpHandler extends ProtocolHandler {
     }
 
     protected boolean processCommand(String cmd) throws IOException {
-        ZimbraLog.addIpToContext(mRemoteAddress);
+        ZmailLog.addIpToContext(mRemoteAddress);
         mCurrentCommandLine = cmd;
         String arg = null;
 
         if (cmd == null) {
-            ZimbraLog.lmtp.info("disconnected without quit");
+            ZmailLog.lmtp.info("disconnected without quit");
             dropConnection();
             return false;
         }
 
-        ZimbraLog.lmtp.trace("C: %s", cmd);
+        ZmailLog.lmtp.trace("C: %s", cmd);
 
         if (!config.isServiceEnabled()) {
             sendReply(LmtpReply.SERVICE_DISABLED);
@@ -103,7 +103,7 @@ public abstract class LmtpHandler extends ProtocolHandler {
         }
         
         if (throttle.isIpThrottled(mRemoteAddress)) {
-            ZimbraLog.lmtp.warn("throttling LMTP connection for remote IP %s", mRemoteAddress);
+            ZmailLog.lmtp.warn("throttling LMTP connection for remote IP %s", mRemoteAddress);
             dropConnection();
             return false;
         }
@@ -217,9 +217,9 @@ public abstract class LmtpHandler extends ProtocolHandler {
     private void sendReply(LmtpReply reply) {
         String cl = mCurrentCommandLine != null ? mCurrentCommandLine : "<none>";
         if (!reply.success()) {
-            ZimbraLog.lmtp.info("S: %s (%s)", reply, cl);
+            ZmailLog.lmtp.info("S: %s (%s)", reply, cl);
         } else {
-            ZimbraLog.lmtp.trace("S: %s (%s)", reply, cl);
+            ZmailLog.lmtp.trace("S: %s (%s)", reply, cl);
         }
         mWriter.println(reply.toString());
         mWriter.flush();
@@ -235,7 +235,7 @@ public abstract class LmtpHandler extends ProtocolHandler {
 
     private void doQUIT() {
         sendReply(LmtpReply.BYE);
-        ZimbraLog.lmtp.debug("quit from client");
+        ZmailLog.lmtp.debug("quit from client");
         dropConnection();
     }
 
@@ -273,7 +273,7 @@ public abstract class LmtpHandler extends ProtocolHandler {
                 "250-ENHANCEDSTATUSCODES\r\n" +
                 "250-SIZE\r\n" +
                 "250 PIPELINING";
-        ZimbraLog.lmtp.trace("S: %s", resp);
+        ZmailLog.lmtp.trace("S: %s", resp);
         mWriter.println(resp);
         mWriter.flush();
         reset();
@@ -376,12 +376,12 @@ public abstract class LmtpHandler extends ProtocolHandler {
             config.getLmtpBackend().deliver(mEnvelope, in, mEnvelope.getSize());
             finishMessageData(in.getMessageSize());
         } catch (UnrecoverableLmtpException e) {
-            ZimbraLog.lmtp.error("Unrecoverable error while handling DATA command.  Dropping connection.", e);
+            ZmailLog.lmtp.error("Unrecoverable error while handling DATA command.  Dropping connection.", e);
             try {
                 ByteUtil.countBytes(in); // Drain the stream.
                 sendReply(LmtpReply.SERVICE_DISABLED);
             } catch (IOException e2) {
-                ZimbraLog.lmtp.warn("Unable to drain stream and send reply.", e2);
+                ZmailLog.lmtp.warn("Unable to drain stream and send reply.", e2);
             }
             dropConnection();
         }
@@ -389,9 +389,9 @@ public abstract class LmtpHandler extends ProtocolHandler {
 
     private void finishMessageData(long size) {
         int numRecipients = mEnvelope.getRecipients().size();
-        ZimbraPerf.COUNTER_LMTP_RCVD_MSGS.increment();
-        ZimbraPerf.COUNTER_LMTP_RCVD_BYTES.increment(size);
-        ZimbraPerf.COUNTER_LMTP_RCVD_RCPT.increment(numRecipients);
+        ZmailPerf.COUNTER_LMTP_RCVD_MSGS.increment();
+        ZmailPerf.COUNTER_LMTP_RCVD_BYTES.increment(size);
+        ZmailPerf.COUNTER_LMTP_RCVD_RCPT.increment(numRecipients);
 
         int numDelivered = 0;
         for (LmtpAddress recipient : mEnvelope.getRecipients()) {
@@ -402,8 +402,8 @@ public abstract class LmtpHandler extends ProtocolHandler {
             }
         }
 
-        ZimbraPerf.COUNTER_LMTP_DLVD_MSGS.increment(numDelivered);
-        ZimbraPerf.COUNTER_LMTP_DLVD_BYTES.increment(numDelivered * size);
+        ZmailPerf.COUNTER_LMTP_DLVD_MSGS.increment(numDelivered);
+        ZmailPerf.COUNTER_LMTP_DLVD_BYTES.increment(numDelivered * size);
 
         reset();
     }
@@ -428,7 +428,7 @@ public abstract class LmtpHandler extends ProtocolHandler {
         try {
             localHostname = Provisioning.getInstance().getLocalServer().getName();
         } catch (ServiceException e) {
-            ZimbraLog.lmtp.warn("Unable to determine local hostname", e);
+            ZmailLog.lmtp.warn("Unable to determine local hostname", e);
         }
         String timestamp = new MailDateFormat().format(new Date());
         String name = "Received: ";

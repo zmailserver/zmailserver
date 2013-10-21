@@ -13,7 +13,7 @@
  * ***** END LICENSE BLOCK *****
  */
 
-package com.zimbra.cs.servlet;
+package org.zmail.cs.servlet;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -27,12 +27,12 @@ import java.util.TimerTask;
 
 import javax.servlet.http.HttpServlet;
 
-import com.zimbra.common.net.SocketFactories;
-import com.zimbra.cs.util.Zimbra;
-import com.zimbra.common.localconfig.LC;
-import com.zimbra.znative.IO;
-import com.zimbra.znative.Process;
-import com.zimbra.znative.Util;
+import org.zmail.common.net.SocketFactories;
+import org.zmail.cs.util.Zmail;
+import org.zmail.common.localconfig.LC;
+import org.zmail.znative.IO;
+import org.zmail.znative.Process;
+import org.zmail.znative.Util;
 
 /**
  * Bind to all necessary privileged ports and then drop privilege.
@@ -43,7 +43,7 @@ public class FirstServlet extends HttpServlet {
 
     public void init() {
     	try {
-    	    System.err.println("Zimbra server process is running as uid=" + Process.getuid() + " euid=" + Process.geteuid() + " gid=" + Process.getgid() + " egid=" + Process.getegid());
+    	    System.err.println("Zmail server process is running as uid=" + Process.getuid() + " euid=" + Process.geteuid() + " gid=" + Process.getgid() + " egid=" + Process.getegid());
 
             if (Process.getuid() == 0) {
                 Util.halt("can not start server with uid of 0");
@@ -113,7 +113,7 @@ public class FirstServlet extends HttpServlet {
                     doOutputRotation(); 
                 } catch (Throwable e) {
                     if (e instanceof OutOfMemoryError)
-                        Zimbra.halt("Caught out of memory error", e);
+                        Zmail.halt("Caught out of memory error", e);
                     System.err.println("WARN: Caught exception in FirstServlet timer " + e);
                     e.printStackTrace();
                 }

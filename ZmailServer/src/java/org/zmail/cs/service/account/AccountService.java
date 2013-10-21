@@ -16,19 +16,19 @@
 /*
  * Created on May 26, 2004
  */
-package com.zimbra.cs.service.account;
+package org.zmail.cs.service.account;
 
 import java.util.HashMap;
 import java.util.Map;
 
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.common.util.StringUtil;
-import com.zimbra.common.soap.AccountConstants;
-import com.zimbra.common.soap.AdminConstants;
-import com.zimbra.soap.DocumentDispatcher;
-import com.zimbra.soap.DocumentService;
-import com.zimbra.common.soap.Element;
-import com.zimbra.common.soap.Element.KeyValuePair;
+import org.zmail.common.service.ServiceException;
+import org.zmail.common.util.StringUtil;
+import org.zmail.common.soap.AccountConstants;
+import org.zmail.common.soap.AdminConstants;
+import org.zmail.soap.DocumentDispatcher;
+import org.zmail.soap.DocumentService;
+import org.zmail.common.soap.Element;
+import org.zmail.common.soap.Element.KeyValuePair;
 
 /**
  * 

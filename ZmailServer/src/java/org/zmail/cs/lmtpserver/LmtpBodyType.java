@@ -13,7 +13,7 @@
  * ***** END LICENSE BLOCK *****
  */
 
-package com.zimbra.cs.lmtpserver;
+package org.zmail.cs.lmtpserver;
 
 /**
  * Java fluff for an enum for the 2 things in:

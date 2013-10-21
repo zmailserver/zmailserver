@@ -13,9 +13,9 @@
  * ***** END LICENSE BLOCK *****
  */
 
-package com.zimbra.cs.redolog;
+package org.zmail.cs.redolog;
 
-import com.zimbra.cs.redolog.op.RedoableOp;
+import org.zmail.cs.redolog.op.RedoableOp;
 
 public class MailboxIdConflictException extends RedoException {
     private static final long serialVersionUID = -4186818816051395390L;

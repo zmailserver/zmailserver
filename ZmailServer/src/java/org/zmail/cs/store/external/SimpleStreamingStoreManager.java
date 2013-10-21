@@ -13,17 +13,17 @@
  * ***** END LICENSE BLOCK *****
  */
 
-package com.zimbra.cs.store.external;
+package org.zmail.cs.store.external;
 
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.common.util.FileUtil;
-import com.zimbra.common.util.ZimbraLog;
-import com.zimbra.cs.store.Blob;
-import com.zimbra.cs.store.BlobBuilder;
+import org.zmail.common.service.ServiceException;
+import org.zmail.common.util.FileUtil;
+import org.zmail.common.util.ZmailLog;
+import org.zmail.cs.store.Blob;
+import org.zmail.cs.store.BlobBuilder;
 
 /**
  * Example implementation of ExternalResumableUpload which writes to a flat directory structure
@@ -43,7 +43,7 @@ public class SimpleStreamingStoreManager extends SimpleStoreManager implements E
     @Override
     public String finishUpload(ExternalUploadedBlob blob) throws IOException,
                     ServiceException {
-        ZimbraLog.store.info("finishing upload to "+blob.getUploadId());
+        ZmailLog.store.info("finishing upload to "+blob.getUploadId());
         return blob.getUploadId();
     }
 
@@ -70,7 +70,7 @@ public class SimpleStreamingStoreManager extends SimpleStoreManager implements E
                     upFile = new File(name+".upl");
                 }
                 if (upFile.createNewFile()) {
-                    ZimbraLog.store.debug("writing to new file %s",upFile.getName());
+                    ZmailLog.store.debug("writing to new file %s",upFile.getName());
                     file = upFile;
                 } else {
                     throw new IOException("unable to create new file");

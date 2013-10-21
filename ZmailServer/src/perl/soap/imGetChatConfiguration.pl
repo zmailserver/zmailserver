@@ -19,7 +19,7 @@ use Getopt::Long;
 use lib '.';
 use LWP::UserAgent;
 use Getopt::Long;
-use ZimbraSoapTest;
+use ZmailSoapTest;
 use XmlElement;
 use XmlDoc;
 use Soap;
@@ -63,7 +63,7 @@ if (!defined($user) ||
 # print "Running  'zmsoap $cmd'\n";
 # print `zmsoap -v $cmd`;
 
-my $z = ZimbraSoapTest->new($user, $host, $pw);
+my $z = ZmailSoapTest->new($user, $host, $pw);
 $z->doStdAuth();
 
 my $d = new XmlDoc;

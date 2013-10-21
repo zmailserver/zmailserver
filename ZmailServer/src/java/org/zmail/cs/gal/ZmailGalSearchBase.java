@@ -12,14 +12,14 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.gal;
+package org.zmail.cs.gal;
 
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.cs.account.Domain;
-import com.zimbra.cs.account.Provisioning;
-import com.zimbra.cs.account.gal.GalOp;
+import org.zmail.common.service.ServiceException;
+import org.zmail.cs.account.Domain;
+import org.zmail.cs.account.Provisioning;
+import org.zmail.cs.account.gal.GalOp;
 
-public class ZimbraGalSearchBase {
+public class ZmailGalSearchBase {
 
     public static enum PredefinedSearchBase {
         DOMAIN,
@@ -31,13 +31,13 @@ public class ZimbraGalSearchBase {
     throws ServiceException {
         String sb;
         if (galOp == GalOp.sync) {
-            sb = domain.getAttr(Provisioning.A_zimbraGalSyncInternalSearchBase);
+            sb = domain.getAttr(Provisioning.A_zmailGalSyncInternalSearchBase);
             if (sb == null) {
-                sb = domain.getAttr(Provisioning.A_zimbraGalInternalSearchBase, 
+                sb = domain.getAttr(Provisioning.A_zmailGalInternalSearchBase, 
                         PredefinedSearchBase.DOMAIN.name());
             }
         } else {
-            sb = domain.getAttr(Provisioning.A_zimbraGalInternalSearchBase, 
+            sb = domain.getAttr(Provisioning.A_zmailGalInternalSearchBase, 
                     PredefinedSearchBase.DOMAIN.name());
         }
         return sb;

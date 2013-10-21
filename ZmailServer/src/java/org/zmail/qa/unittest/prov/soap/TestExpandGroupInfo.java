@@ -14,7 +14,7 @@
  * 
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.qa.unittest.prov.soap;
+package org.zmail.qa.unittest.prov.soap;
 
 import static org.junit.Assert.*;
 
@@ -24,42 +24,42 @@ import org.junit.AfterClass;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
-import com.zimbra.common.calendar.ZCalendar;
-import com.zimbra.common.soap.SoapTransport;
-import com.zimbra.cs.account.Account;
-import com.zimbra.cs.account.Domain;
-import com.zimbra.cs.account.Group;
-import com.zimbra.cs.account.Provisioning;
-import com.zimbra.cs.index.SearchParams;
-import com.zimbra.cs.mailbox.MailItem;
-import com.zimbra.cs.service.mail.ToXML.EmailType;
-import com.zimbra.soap.mail.message.CreateAppointmentRequest;
-import com.zimbra.soap.mail.message.CreateAppointmentResponse;
-import com.zimbra.soap.mail.message.GetMsgRequest;
-import com.zimbra.soap.mail.message.GetMsgResponse;
-import com.zimbra.soap.mail.message.SearchConvRequest;
-import com.zimbra.soap.mail.message.SearchConvResponse;
-import com.zimbra.soap.mail.message.SearchRequest;
-import com.zimbra.soap.mail.message.SearchResponse;
-import com.zimbra.soap.mail.message.SendMsgRequest;
-import com.zimbra.soap.mail.message.SendMsgResponse;
-import com.zimbra.soap.mail.type.CalOrganizer;
-import com.zimbra.soap.mail.type.CalendarAttendee;
-import com.zimbra.soap.mail.type.CalendarAttendeeWithGroupInfo;
-import com.zimbra.soap.mail.type.DtTimeInfo;
-import com.zimbra.soap.mail.type.EmailAddrInfo;
-import com.zimbra.soap.mail.type.EmailInfo;
-import com.zimbra.soap.mail.type.InvitationInfo;
-import com.zimbra.soap.mail.type.InviteComponent;
-import com.zimbra.soap.mail.type.InviteComponentWithGroupInfo;
-import com.zimbra.soap.mail.type.InviteWithGroupInfo;
-import com.zimbra.soap.mail.type.MessageHitInfo;
-import com.zimbra.soap.mail.type.MimePartInfo;
-import com.zimbra.soap.mail.type.Msg;
-import com.zimbra.soap.mail.type.MsgSpec;
-import com.zimbra.soap.mail.type.MsgToSend;
-import com.zimbra.soap.mail.type.MsgWithGroupInfo;
-import com.zimbra.soap.type.SearchHit;
+import org.zmail.common.calendar.ZCalendar;
+import org.zmail.common.soap.SoapTransport;
+import org.zmail.cs.account.Account;
+import org.zmail.cs.account.Domain;
+import org.zmail.cs.account.Group;
+import org.zmail.cs.account.Provisioning;
+import org.zmail.cs.index.SearchParams;
+import org.zmail.cs.mailbox.MailItem;
+import org.zmail.cs.service.mail.ToXML.EmailType;
+import org.zmail.soap.mail.message.CreateAppointmentRequest;
+import org.zmail.soap.mail.message.CreateAppointmentResponse;
+import org.zmail.soap.mail.message.GetMsgRequest;
+import org.zmail.soap.mail.message.GetMsgResponse;
+import org.zmail.soap.mail.message.SearchConvRequest;
+import org.zmail.soap.mail.message.SearchConvResponse;
+import org.zmail.soap.mail.message.SearchRequest;
+import org.zmail.soap.mail.message.SearchResponse;
+import org.zmail.soap.mail.message.SendMsgRequest;
+import org.zmail.soap.mail.message.SendMsgResponse;
+import org.zmail.soap.mail.type.CalOrganizer;
+import org.zmail.soap.mail.type.CalendarAttendee;
+import org.zmail.soap.mail.type.CalendarAttendeeWithGroupInfo;
+import org.zmail.soap.mail.type.DtTimeInfo;
+import org.zmail.soap.mail.type.EmailAddrInfo;
+import org.zmail.soap.mail.type.EmailInfo;
+import org.zmail.soap.mail.type.InvitationInfo;
+import org.zmail.soap.mail.type.InviteComponent;
+import org.zmail.soap.mail.type.InviteComponentWithGroupInfo;
+import org.zmail.soap.mail.type.InviteWithGroupInfo;
+import org.zmail.soap.mail.type.MessageHitInfo;
+import org.zmail.soap.mail.type.MimePartInfo;
+import org.zmail.soap.mail.type.Msg;
+import org.zmail.soap.mail.type.MsgSpec;
+import org.zmail.soap.mail.type.MsgToSend;
+import org.zmail.soap.mail.type.MsgWithGroupInfo;
+import org.zmail.soap.type.SearchHit;
 
 public class TestExpandGroupInfo extends SoapTest {
     private static SoapProvTestUtil provUtil;
@@ -161,8 +161,8 @@ public class TestExpandGroupInfo extends SoapTest {
         /*
            <soap:Envelope xmlns:soap="http://www.w3.org/2003/05/soap-envelope">
            <soap:Header>
-               <context xmlns="urn:zimbra">
-               <userAgent xmlns="" name="ZimbraWebClient - FF10 (Mac)" version="0.0"/>
+               <context xmlns="urn:zmail">
+               <userAgent xmlns="" name="ZmailWebClient - FF10 (Mac)" version="0.0"/>
                <session xmlns="" id="14"/>
                <account xmlns="" by="name">user1@phoebe.mbp</account>
                <format xmlns="" type="js"/>
@@ -170,7 +170,7 @@ public class TestExpandGroupInfo extends SoapTest {
            </soap:Header>
 
            <soap:Body>
-           <CreateAppointmentRequest xmlns="urn:zimbraMail">
+           <CreateAppointmentRequest xmlns="urn:zmailMail">
                <m xmlns="" l="10">
                    <inv>
                        <comp status="CONF" fb="B" class="PUB" transp="O" draft="0" allDay="0" name="test" loc="">

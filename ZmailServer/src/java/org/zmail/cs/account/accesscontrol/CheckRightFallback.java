@@ -12,12 +12,12 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.account.accesscontrol;
+package org.zmail.cs.account.accesscontrol;
 
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.common.util.ZimbraLog;
-import com.zimbra.cs.account.Account;
-import com.zimbra.cs.account.Entry;
+import org.zmail.common.service.ServiceException;
+import org.zmail.common.util.ZmailLog;
+import org.zmail.cs.account.Account;
+import org.zmail.cs.account.Entry;
 
 public abstract class CheckRightFallback {
     protected Right mRight;
@@ -30,7 +30,7 @@ public abstract class CheckRightFallback {
         try {
             return doCheckRight(authedAcct, target, asAdmin);
         } catch (ServiceException e) {
-            ZimbraLog.acl.warn("caught exception in checkRight fallback" +
+            ZmailLog.acl.warn("caught exception in checkRight fallback" +
                     ", checkRight fallback for right [" + mRight.getName() +"] skipped", e);
             return null;
         }

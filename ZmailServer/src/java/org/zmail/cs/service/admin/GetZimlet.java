@@ -12,29 +12,29 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.service.admin;
+package org.zmail.cs.service.admin;
 
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.common.soap.AdminConstants;
-import com.zimbra.cs.account.AttributeClass;
-import com.zimbra.cs.account.Zimlet;
-import com.zimbra.cs.account.AccountServiceException;
-import com.zimbra.cs.account.Provisioning;
-import com.zimbra.cs.account.AccessManager.AttrRightChecker;
-import com.zimbra.cs.account.accesscontrol.AdminRight;
-import com.zimbra.cs.account.accesscontrol.Rights.Admin;
-import com.zimbra.common.soap.Element;
-import com.zimbra.soap.ZimbraSoapContext;
+import org.zmail.common.service.ServiceException;
+import org.zmail.common.soap.AdminConstants;
+import org.zmail.cs.account.AttributeClass;
+import org.zmail.cs.account.Zimlet;
+import org.zmail.cs.account.AccountServiceException;
+import org.zmail.cs.account.Provisioning;
+import org.zmail.cs.account.AccessManager.AttrRightChecker;
+import org.zmail.cs.account.accesscontrol.AdminRight;
+import org.zmail.cs.account.accesscontrol.Rights.Admin;
+import org.zmail.common.soap.Element;
+import org.zmail.soap.ZmailSoapContext;
 
 public class GetZimlet extends AdminDocumentHandler {
 
 	public Element handle(Element request, Map<String, Object> context) throws ServiceException {
 
-        ZimbraSoapContext zsc = getZimbraSoapContext(context);
+        ZmailSoapContext zsc = getZmailSoapContext(context);
         Provisioning prov = Provisioning.getInstance();
 
         Set<String> reqAttrs = getReqAttrs(request, AttributeClass.zimletEntry);
@@ -64,7 +64,7 @@ public class GetZimlet extends AdminDocumentHandler {
         Element zim = response.addElement(AdminConstants.E_ZIMLET);
         zim.addAttribute(AdminConstants.A_NAME, zimlet.getName());
         zim.addAttribute(AdminConstants.A_ID, zimlet.getId());
-        String keyword = zimlet.getAttr(Provisioning.A_zimbraZimletKeyword);
+        String keyword = zimlet.getAttr(Provisioning.A_zmailZimletKeyword);
         if (keyword != null)
             zim.addAttribute(AdminConstants.A_HAS_KEYWORD, keyword);
         Map<String,Object> attrs = zimlet.getUnicodeAttrs();

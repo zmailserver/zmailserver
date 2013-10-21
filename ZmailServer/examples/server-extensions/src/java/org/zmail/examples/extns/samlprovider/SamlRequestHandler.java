@@ -12,13 +12,13 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.examples.extns.samlprovider;
+package org.zmail.examples.extns.samlprovider;
 
-import com.zimbra.common.soap.Element;
-import com.zimbra.common.soap.SoapProtocol;
-import com.zimbra.common.util.SystemUtil;
-import com.zimbra.common.util.ZimbraLog;
-import com.zimbra.cs.extension.ExtensionHttpHandler;
+import org.zmail.common.soap.Element;
+import org.zmail.common.soap.SoapProtocol;
+import org.zmail.common.util.SystemUtil;
+import org.zmail.common.util.ZmailLog;
+import org.zmail.cs.extension.ExtensionHttpHandler;
 import org.dom4j.Namespace;
 import org.dom4j.QName;
 
@@ -37,7 +37,7 @@ import java.util.*;
  * SAML 2.0 Core Spec</a>.
  *
  * <p>
- * It reads /opt/zimbra/conf/issued-saml-assertions.xml file which stores the set of assertions
+ * It reads /opt/zmail/conf/issued-saml-assertions.xml file which stores the set of assertions
  * already issued by this SAML Authority.
  *
  * @author vmahajan
@@ -50,14 +50,14 @@ public class SamlRequestHandler extends ExtensionHttpHandler {
 
     static {
         try {
-            Element issuedAssertionsElt = Element.parseXML(new FileInputStream("/opt/zimbra/conf/issued-saml-assertions.xml"));
+            Element issuedAssertionsElt = Element.parseXML(new FileInputStream("/opt/zmail/conf/issued-saml-assertions.xml"));
             List<Element> assertionsList = issuedAssertionsElt.getPathElementList(new String[]{"Assertion"});
             for (Element assertionElt : assertionsList) {
                 samlAssertionsMap.put(assertionElt.getAttribute("ID"), assertionElt);
             }
         } catch (Exception e) {
-            ZimbraLog.extensions.error(SystemUtil.getStackTrace(e));
-            ZimbraLog.extensions.error("Exception in loading issued assertions");
+            ZmailLog.extensions.error(SystemUtil.getStackTrace(e));
+            ZmailLog.extensions.error("Exception in loading issued assertions");
         }
     }
 
@@ -114,13 +114,13 @@ public class SamlRequestHandler extends ExtensionHttpHandler {
                 }
             }
         } catch (Exception e) {
-            ZimbraLog.extensions.error(SystemUtil.getStackTrace(e));
+            ZmailLog.extensions.error(SystemUtil.getStackTrace(e));
             throw new IOException(e);
         }
 
         String respEnvStr = respEnv.toString();
-        if (ZimbraLog.extensions.isDebugEnabled())
-            ZimbraLog.extensions.debug("SAML response: " + respEnvStr);
+        if (ZmailLog.extensions.isDebugEnabled())
+            ZmailLog.extensions.debug("SAML response: " + respEnvStr);
         resp.getOutputStream().print(respEnvStr);
     }
 }

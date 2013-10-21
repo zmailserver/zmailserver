@@ -17,9 +17,9 @@ use strict;
 use vars qw($PROCFS @STATLIST $LOGFILE $CONSOLE $interval $LOGFH
             $ROTATE_NOW $ROTATE_DEFER $date $HAS_IO_ACCT);
 use Getopt::Long;
-use lib "/opt/zimbra/zimbramon/lib";
-use Zimbra::Mon::Zmstat;
-use Zimbra::Mon::Logger;
+use lib "/opt/zmail/zmailmon/lib";
+use Zmail::Mon::Zmstat;
+use Zmail::Mon::Logger;
 use Data::Dumper;
 
 # Initial version will support forked process monitoring.  I/O accounting
@@ -99,7 +99,7 @@ sub collect_stats($$$) {
 }
 
 sub get_convertd_pid {
-    open(PID, "</opt/zimbra/log/convertd.pid") || die "cannot open convertd.pid: $!";
+    open(PID, "</opt/zmail/log/convertd.pid") || die "cannot open convertd.pid: $!";
     chomp(my $pid = <PID>);
     close(PID);
     $pid;
@@ -183,7 +183,7 @@ sub main() {
             }
             my $values = join(', ', @printstats);
             $LOGFH->print("$values\n");
-            Zimbra::Mon::Logger::LogStats( "info", "zmstat convertd.csv: ${HEADING}:: $values"); 
+            Zmail::Mon::Logger::LogStats( "info", "zmstat convertd.csv: ${HEADING}:: $values"); 
             $LOGFH->flush();
             $ROTATE_DEFER = 0;
             if ($ROTATE_NOW) {
@@ -202,7 +202,7 @@ sub usage {
 Usage: zmstat-convertd [options]
 Monitor convertd cpu and I/O statistics
 -i, --interval: output a line every N seconds
--l, --log:      log file (default is /opt/zimbra/zmstat/convertd.csv)
+-l, --log:      log file (default is /opt/zmail/zmstat/convertd.csv)
 -c, --console:  output to stdout
 
 If logging to a file, rotation occurs when a HUP signal is sent or when

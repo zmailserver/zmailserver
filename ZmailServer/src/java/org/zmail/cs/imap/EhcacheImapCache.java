@@ -12,7 +12,7 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.imap;
+package org.zmail.cs.imap;
 
 import java.util.HashSet;
 import java.util.Iterator;
@@ -26,9 +26,9 @@ import net.sf.ehcache.CacheManager;
 import net.sf.ehcache.Ehcache;
 import net.sf.ehcache.Element;
 
-import com.zimbra.common.localconfig.LC;
-import com.zimbra.common.util.Constants;
-import com.zimbra.common.util.ZimbraLog;
+import org.zmail.common.localconfig.LC;
+import org.zmail.common.util.Constants;
+import org.zmail.common.util.ZmailLog;
 
 /**
  * IMAP cache using Ehcache's DiskStore.
@@ -61,7 +61,7 @@ final class EhcacheImapCache implements ImapSessionManager.Cache {
                 }
 
                 private void doRemove(String key) {
-                    ZimbraLog.imap.debug("removing expired active cache element %s", key);
+                    ZmailLog.imap.debug("removing expired active cache element %s", key);
                     ehcache.remove(key);
                     remove(key);
                 }
@@ -98,7 +98,7 @@ final class EhcacheImapCache implements ImapSessionManager.Cache {
             synchronized (activeCacheUpdateTimes) {
                 if (!ehcache.isKeyInCache(key)) {
                     ehcache.put(new Element(key, folder));
-                    ZimbraLog.imap.debug("put key %s",key);
+                    ZmailLog.imap.debug("put key %s",key);
                 }
                 long currentTime = System.currentTimeMillis();
                 activeCacheUpdateTimes.put(key, currentTime);
@@ -119,9 +119,9 @@ final class EhcacheImapCache implements ImapSessionManager.Cache {
                     el = ehcache.get(key);
                     if (el != null) {
                         activeCacheUpdateTimes.put(key, System.currentTimeMillis());
-                        ZimbraLog.imap.debug("got Element for key %s",key);
+                        ZmailLog.imap.debug("got Element for key %s",key);
                     } else {
-                        ZimbraLog.imap.debug("null get for key %s",key);
+                        ZmailLog.imap.debug("null get for key %s",key);
                     }
                 }
             } else {
@@ -129,7 +129,7 @@ final class EhcacheImapCache implements ImapSessionManager.Cache {
             }
             return el != null ? (ImapFolder) el.getValue() : null;
         } catch (CacheException ce) {
-            ZimbraLog.imap.error("IMAP cache exception - removing offending key", ce);
+            ZmailLog.imap.error("IMAP cache exception - removing offending key", ce);
             remove(key, true);
             return null;
         }
@@ -139,14 +139,14 @@ final class EhcacheImapCache implements ImapSessionManager.Cache {
         try {
             if (active) {
                 synchronized (activeCacheUpdateTimes) {
-                    ZimbraLog.imap.debug("removing key %s",key);
+                    ZmailLog.imap.debug("removing key %s",key);
                     activeCacheUpdateTimes.remove(key);
                 }
             }
             ehcache.remove(key);
         } catch (CacheException ce) {
             if (!quiet) {
-                ZimbraLog.imap.error("IMAP cache exception", ce);
+                ZmailLog.imap.error("IMAP cache exception", ce);
             }
         }
     }
@@ -163,7 +163,7 @@ final class EhcacheImapCache implements ImapSessionManager.Cache {
                 if (activeCacheUpdateTimes.containsKey(key)) {
                     activeCacheUpdateTimes.put(key, System.currentTimeMillis());
                 } else {
-                    ZimbraLog.imap.warn("active cache needed update but not found: %s",key);
+                    ZmailLog.imap.warn("active cache needed update but not found: %s",key);
                 }
             }
         } else {

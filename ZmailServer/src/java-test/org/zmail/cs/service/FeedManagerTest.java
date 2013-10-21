@@ -12,7 +12,7 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.service;
+package org.zmail.cs.service;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -28,11 +28,11 @@ import org.junit.Assert;
 import org.junit.Test;
 
 import com.google.common.base.Charsets;
-import com.zimbra.common.mime.MimeConstants;
-import com.zimbra.cs.mime.MPartInfo;
-import com.zimbra.cs.mime.ParsedMessage;
-import com.zimbra.cs.service.FeedManager.RemoteDataInfo;
-import com.zimbra.cs.service.FeedManager.SubscriptionData;
+import org.zmail.common.mime.MimeConstants;
+import org.zmail.cs.mime.MPartInfo;
+import org.zmail.cs.mime.ParsedMessage;
+import org.zmail.cs.service.FeedManager.RemoteDataInfo;
+import org.zmail.cs.service.FeedManager.SubscriptionData;
 
 public class FeedManagerTest {
     @Test

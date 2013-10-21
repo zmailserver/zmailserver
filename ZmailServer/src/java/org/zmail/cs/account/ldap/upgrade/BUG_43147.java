@@ -12,22 +12,22 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.account.ldap.upgrade;
+package org.zmail.cs.account.ldap.upgrade;
 
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.cs.account.Account;
-import com.zimbra.cs.account.Provisioning;
-import com.zimbra.cs.ldap.IAttributes;
-import com.zimbra.cs.ldap.LdapClient;
-import com.zimbra.cs.ldap.LdapServerType;
-import com.zimbra.cs.ldap.LdapUsage;
-import com.zimbra.cs.ldap.SearchLdapOptions;
-import com.zimbra.cs.ldap.ZLdapContext;
+import org.zmail.common.service.ServiceException;
+import org.zmail.cs.account.Account;
+import org.zmail.cs.account.Provisioning;
+import org.zmail.cs.ldap.IAttributes;
+import org.zmail.cs.ldap.LdapClient;
+import org.zmail.cs.ldap.LdapServerType;
+import org.zmail.cs.ldap.LdapUsage;
+import org.zmail.cs.ldap.SearchLdapOptions;
+import org.zmail.cs.ldap.ZLdapContext;
 
 public class BUG_43147 extends UpgradeOp {
 
@@ -56,9 +56,9 @@ public class BUG_43147 extends UpgradeOp {
         
         @Override
         public void visit(String dn, Map<String, Object> attrs, IAttributes ldapAttrs) {
-            upgradeOp.printer.println("Domain " + attrs.get(Provisioning.A_zimbraDomainName));
+            upgradeOp.printer.println("Domain " + attrs.get(Provisioning.A_zmailDomainName));
                 
-            Object values = attrs.get(Provisioning.A_zimbraGalAccountId);
+            Object values = attrs.get(Provisioning.A_zmailGalAccountId);
             if (values instanceof String) {
                 upgradeOp.printer.println(" GAL sync account " + (String)values);
                 galSyncAcctIds.add((String)values);
@@ -76,10 +76,10 @@ public class BUG_43147 extends UpgradeOp {
         
         Bug43147Visitor visitor = new Bug43147Visitor(this, galSyncAcctIds);
         
-        String query = "(&(objectClass=zimbraDomain)(zimbraGalAccountId=*))";
+        String query = "(&(objectClass=zmailDomain)(zmailGalAccountId=*))";
         String bases[] = prov.getDIT().getSearchBases(Provisioning.SD_DOMAIN_FLAG);
-        String attrs[] = new String[] {Provisioning.A_zimbraDomainName,
-                                       Provisioning.A_zimbraGalAccountId};
+        String attrs[] = new String[] {Provisioning.A_zmailDomainName,
+                                       Provisioning.A_zmailGalAccountId};
         
         for (String base : bases) {
             prov.searchLdapOnMaster(base, query, attrs, visitor);
@@ -90,23 +90,23 @@ public class BUG_43147 extends UpgradeOp {
     
     private void upgradeGalSyncAcct(ZLdapContext zlc, Set<String> galSyncAcctIds) throws ServiceException {
         printer.println();
-        printer.println("Upgrading zimbraContactMaxNumEntries on GAL sync accounts ...");
+        printer.println("Upgrading zmailContactMaxNumEntries on GAL sync accounts ...");
         printer.println();
         
         HashMap<String, Object> attrs = new HashMap<String, Object>();
-        attrs.put(Provisioning.A_zimbraContactMaxNumEntries, "0");
+        attrs.put(Provisioning.A_zmailContactMaxNumEntries, "0");
         
         // got all GAL sync account ids, upgrade them
         for (String id : galSyncAcctIds) {
             Account acct = prov.getAccountById(id);
             if (acct != null) {
-                // upgrade only when the gal sync account does not have zimbraContactMaxNumEntries 
+                // upgrade only when the gal sync account does not have zmailContactMaxNumEntries 
                 // set on the account entry
-                String curValue = acct.getAttr(Provisioning.A_zimbraContactMaxNumEntries, false);
+                String curValue = acct.getAttr(Provisioning.A_zmailContactMaxNumEntries, false);
                 
                 if (curValue == null) {
                     try {
-                        printer.println("Account: " + acct.getId() + "(" + acct.getName() + ") - "+ "modifying zimbraContactMaxNumEntries to 0");
+                        printer.println("Account: " + acct.getId() + "(" + acct.getName() + ") - "+ "modifying zmailContactMaxNumEntries to 0");
                         modifyAttrs(zlc, acct, attrs);
                     } catch (ServiceException e) {
                         printer.println("Caught ServiceException while modifying GAL sync account entry " + acct.getName());

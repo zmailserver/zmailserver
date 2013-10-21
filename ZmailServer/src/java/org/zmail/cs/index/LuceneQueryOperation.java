@@ -13,7 +13,7 @@
  * ***** END LICENSE BLOCK *****
  */
 
-package com.zimbra.cs.index;
+package org.zmail.cs.index;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -42,12 +42,12 @@ import com.google.common.collect.Lists;
 import com.google.common.collect.Multimap;
 import com.google.common.collect.Sets;
 import com.google.common.io.Closeables;
-import com.zimbra.common.localconfig.LC;
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.common.util.ZimbraLog;
-import com.zimbra.cs.mailbox.Folder;
-import com.zimbra.cs.mailbox.MailItem;
-import com.zimbra.cs.mailbox.Mailbox;
+import org.zmail.common.localconfig.LC;
+import org.zmail.common.service.ServiceException;
+import org.zmail.common.util.ZmailLog;
+import org.zmail.cs.mailbox.Folder;
+import org.zmail.cs.mailbox.MailItem;
+import org.zmail.cs.mailbox.Mailbox;
 
 /**
  * {@link QueryOperation} which queries Lucene.
@@ -235,7 +235,7 @@ public final class LuceneQueryOperation extends QueryOperation {
             try {
                 int freq = searcher.docFreq(term);
                 int docsCutoff = (int) (searcher.getIndexReader().numDocs() * DB_FIRST_TERM_FREQ_PERC);
-                ZimbraLog.search.debug("LuceneDocFreq freq=%d,cutoff=%d(%d%%),elapsed=%d",
+                ZmailLog.search.debug("LuceneDocFreq freq=%d,cutoff=%d(%d%%),elapsed=%d",
                         freq, docsCutoff, (int) (100 * DB_FIRST_TERM_FREQ_PERC), System.currentTimeMillis() - start);
                 if (freq > docsCutoff) {
                     return true;
@@ -256,13 +256,13 @@ public final class LuceneQueryOperation extends QueryOperation {
                 Set<Folder> targetFolders = dbOp.getTargetFolders();
                 if (targetFolders != null && targetFolders.size() > 0) {
                     long itemCount = getTotalItemCount(targetFolders);
-                    ZimbraLog.search.debug("lucene hits=%d, folders item count=%d", getTotalHitCount(), itemCount);
+                    ZmailLog.search.debug("lucene hits=%d, folders item count=%d", getTotalHitCount(), itemCount);
                     if (itemCount < getTotalHitCount())
                         return true; // run DB-FIRST
                 }
 
                 int dbHitCount = dbOp.getDbHitCount();
-                ZimbraLog.search.debug("EstimatedHits lucene=%d,db=%d", getTotalHitCount(), dbHitCount);
+                ZmailLog.search.debug("EstimatedHits lucene=%d,db=%d", getTotalHitCount(), dbHitCount);
                 if (dbHitCount < getTotalHitCount()) {
                     return true; // run DB-FIRST
                 }
@@ -326,7 +326,7 @@ public final class LuceneQueryOperation extends QueryOperation {
             try {
                 doc = searcher.doc(hits.scoreDocs[curHitNo].doc);
             } catch (Exception e) {
-                ZimbraLog.search.error("Failed to retrieve Lucene document: %d", hits.scoreDocs[curHitNo].doc, e);
+                ZmailLog.search.error("Failed to retrieve Lucene document: %d", hits.scoreDocs[curHitNo].doc, e);
                 return result;
             }
             curHitNo++;
@@ -335,11 +335,11 @@ public final class LuceneQueryOperation extends QueryOperation {
                 try {
                     result.addHit(Integer.parseInt(mbid), doc);
                 } catch (NumberFormatException e) {
-                    ZimbraLog.search.error("Invalid MAILBOX_BLOB_ID: " + mbid, e);
+                    ZmailLog.search.error("Invalid MAILBOX_BLOB_ID: " + mbid, e);
                 }
             }
         }
-        ZimbraLog.search.debug("LuceneFetchDocs n=%d,elapsed=%d", luceneLen, System.currentTimeMillis() - start);
+        ZmailLog.search.debug("LuceneFetchDocs n=%d,elapsed=%d", luceneLen, System.currentTimeMillis() - start);
         return result;
     }
 
@@ -405,10 +405,10 @@ public final class LuceneQueryOperation extends QueryOperation {
             } else {
                 hits = searcher.search(luceneQuery, filter, topDocsLen, sort);
             }
-            ZimbraLog.search.debug("LuceneSearch query=%s,n=%d,total=%d,elapsed=%d",
+            ZmailLog.search.debug("LuceneSearch query=%s,n=%d,total=%d,elapsed=%d",
                     luceneQuery, topDocsLen, hits.totalHits, System.currentTimeMillis() - start);
         } catch (IOException e) {
-            ZimbraLog.search.error("Failed to search query=%s", luceneQuery, e);
+            ZmailLog.search.error("Failed to search query=%s", luceneQuery, e);
             Closeables.closeQuietly(searcher);
             searcher = null;
             hits = null;
@@ -418,7 +418,7 @@ public final class LuceneQueryOperation extends QueryOperation {
     private Query expandLazyMultiPhraseQuery(Query query) throws IOException {
         if (query instanceof LazyMultiPhraseQuery) {
             LazyMultiPhraseQuery lazy = (LazyMultiPhraseQuery) query;
-            int max = LC.zimbra_index_wildcard_max_terms_expanded.intValue();
+            int max = LC.zmail_index_wildcard_max_terms_expanded.intValue();
             MultiPhraseQuery mquery = new MultiPhraseQuery();
             for (Term[] terms : lazy.getTermArrays()) {
                 if (terms.length != 1) {
@@ -678,7 +678,7 @@ public final class LuceneQueryOperation extends QueryOperation {
     }
 
     @Override
-    public ZimbraHit getNext() throws ServiceException {
+    public ZmailHit getNext() throws ServiceException {
         if (dbOp != null) {
             return dbOp.getNext();
         }
@@ -686,7 +686,7 @@ public final class LuceneQueryOperation extends QueryOperation {
     }
 
     @Override
-    public ZimbraHit peekNext() throws ServiceException {
+    public ZmailHit peekNext() throws ServiceException {
         if (dbOp != null) {
             return dbOp.peekNext();
         }

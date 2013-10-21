@@ -13,18 +13,18 @@
  * ***** END LICENSE BLOCK *****
  */
 
-package com.zimbra.cs.client.soap;
+package org.zmail.cs.client.soap;
 
 import java.io.IOException;
 import java.io.File;
 import java.util.*;
 
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.common.util.CliUtil;
-import com.zimbra.common.soap.SoapFaultException;
-import com.zimbra.cs.client.*;
-import com.zimbra.cs.mailbox.MailItem;
-import com.zimbra.cs.service.mail.ItemAction;
+import org.zmail.common.service.ServiceException;
+import org.zmail.common.util.CliUtil;
+import org.zmail.common.soap.SoapFaultException;
+import org.zmail.cs.client.*;
+import org.zmail.cs.mailbox.MailItem;
+import org.zmail.cs.service.mail.ItemAction;
 
 public class Tester {
 
@@ -339,8 +339,8 @@ public class Tester {
     private static void doGetDumpPrefs(LmcSession session, String serverURL)
             throws IOException, LmcSoapClientException, ServiceException, SoapFaultException {
         System.out.println("====== GET PREFS ==========");
-        String prefs[] = new String[] { "zimbraPrefMailSignatureEnabled",
-                                        "zimbraPrefSaveToSent" };
+        String prefs[] = new String[] { "zmailPrefMailSignatureEnabled",
+                                        "zmailPrefSaveToSent" };
         LmcGetPrefsRequest prefReq = new LmcGetPrefsRequest();
         prefReq.setSession(session);
         prefReq.setPrefsToGet(prefs);
@@ -354,8 +354,8 @@ public class Tester {
             throws IOException, LmcSoapClientException, ServiceException, SoapFaultException {
         System.out.println("=========== MODIFY PREFS ==========");
         HashMap prefMods = new HashMap();
-        prefMods.put("zimbraPrefMailSignatureEnabled", "TRUE");
-        prefMods.put("zimbraPrefSaveToSent", "TRUE");
+        prefMods.put("zmailPrefMailSignatureEnabled", "TRUE");
+        prefMods.put("zmailPrefSaveToSent", "TRUE");
 
         LmcModifyPrefsRequest mpReq = new LmcModifyPrefsRequest();
         mpReq.setSession(session);
@@ -394,7 +394,7 @@ public class Tester {
         Date d = new Date();
         lMsg.setSubject("AddMsg: " + d);
         lMsg.setFolder(inboxFolderID);
-        lMsg.setContent("From: kluge@example.zimbra.com\r\nTo: kluge@dogfood.example.zimbra.com\r\nSubject: AddMsg " + d + "\r\n\r\nThis is some text.");
+        lMsg.setContent("From: kluge@example.zmail.com\r\nTo: kluge@dogfood.example.zmail.com\r\nSubject: AddMsg " + d + "\r\n\r\nThis is some text.");
         LmcAddMsgRequest amr = new LmcAddMsgRequest();
         amr.setMsg(lMsg);
         amr.setSession(session);
@@ -556,8 +556,8 @@ public class Tester {
             smr.setSession(session);
 
             // add an attachment.  XXX hardcoded stuff...
-            String aid = smr.postAttachment("http://dogfood.example.zimbra.com/service/upload",
-                                            session, new File("c:/temp/ops.txt"), ".example.zimbra.com", 5000);
+            String aid = smr.postAttachment("http://dogfood.example.zmail.com/service/upload",
+                                            session, new File("c:/temp/ops.txt"), ".example.zmail.com", 5000);
             System.out.println("got back attachment id " + aid);
             lMsg.setAttachmentIDs(new String[] { aid});
             LmcSendMsgResponse smrResp = (LmcSendMsgResponse) smr.invoke(serverURL);

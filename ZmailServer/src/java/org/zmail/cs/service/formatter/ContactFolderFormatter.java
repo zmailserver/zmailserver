@@ -12,7 +12,7 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.service.formatter;
+package org.zmail.cs.service.formatter;
 
 import java.io.BufferedOutputStream;
 import java.io.IOException;
@@ -23,25 +23,25 @@ import java.util.Map;
 
 import javax.servlet.ServletException;
 
-import com.zimbra.common.mailbox.ContactConstants;
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.common.soap.MailConstants;
-import com.zimbra.common.util.ZimbraLog;
-import com.zimbra.cs.index.SortBy;
-import com.zimbra.cs.mailbox.Contact;
-import com.zimbra.cs.mailbox.ContactGroup;
-import com.zimbra.cs.mailbox.Folder;
-import com.zimbra.cs.mailbox.MailItem;
-import com.zimbra.cs.service.UserServletContext;
-import com.zimbra.cs.service.UserServletException;
-import com.zimbra.cs.service.formatter.FormatterFactory.FormatType;
-import com.zimbra.cs.service.util.ItemIdFormatter;
+import org.zmail.common.mailbox.ContactConstants;
+import org.zmail.common.service.ServiceException;
+import org.zmail.common.soap.MailConstants;
+import org.zmail.common.util.ZmailLog;
+import org.zmail.cs.index.SortBy;
+import org.zmail.cs.mailbox.Contact;
+import org.zmail.cs.mailbox.ContactGroup;
+import org.zmail.cs.mailbox.Folder;
+import org.zmail.cs.mailbox.MailItem;
+import org.zmail.cs.service.UserServletContext;
+import org.zmail.cs.service.UserServletException;
+import org.zmail.cs.service.formatter.FormatterFactory.FormatType;
+import org.zmail.cs.service.util.ItemIdFormatter;
 
 public class ContactFolderFormatter extends Formatter {
 
     private static final byte FIELD_DELIMITER   = '\u001D';  // group separator
     private static final byte CONTACT_DELIMITER = '\u001E';  // record separator
-    private static final String CONTENT_TYPE = "text/x-zimbra-delimitted-fields";
+    private static final String CONTENT_TYPE = "text/x-zmail-delimitted-fields";
     
     private enum Delimiter { Field, Contact };
 
@@ -161,7 +161,7 @@ public class ContactFolderFormatter extends Formatter {
         try {
             contactGroup = ContactGroup.init(encodedContactGroup);
         } catch (ServiceException e) {
-            ZimbraLog.contact.warn("unable to init contact group", e);
+            ZmailLog.contact.warn("unable to init contact group", e);
         }
         
         if (contactGroup == null) {

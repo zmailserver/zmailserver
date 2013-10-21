@@ -13,7 +13,7 @@
  * ***** END LICENSE BLOCK *****
  */
 
-package com.zimbra.cs.lmtpserver.utils;
+package org.zmail.cs.lmtpserver.utils;
 
 import java.util.Map;
 import java.util.Iterator;
@@ -21,7 +21,7 @@ import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.io.IOException;
 
-import com.zimbra.cs.lmtpserver.LmtpAddress;
+import org.zmail.cs.lmtpserver.LmtpAddress;
 
 public class LmtpAddressTester {
 	

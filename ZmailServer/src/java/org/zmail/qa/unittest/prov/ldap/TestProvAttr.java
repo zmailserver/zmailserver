@@ -13,7 +13,7 @@
  * ***** END LICENSE BLOCK *****
  */
 
-package com.zimbra.qa.unittest.prov.ldap;
+package org.zmail.qa.unittest.prov.ldap;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -22,16 +22,16 @@ import java.util.Set;
 import org.junit.*;
 import static org.junit.Assert.*;
 
-import com.zimbra.common.account.Key;
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.common.util.Constants;
-import com.zimbra.cs.account.Account;
-import com.zimbra.cs.account.AccountServiceException;
-import com.zimbra.cs.account.Cos;
-import com.zimbra.cs.account.Domain;
-import com.zimbra.cs.account.Entry;
-import com.zimbra.cs.account.Provisioning;
-import com.zimbra.cs.account.Server;
+import org.zmail.common.account.Key;
+import org.zmail.common.service.ServiceException;
+import org.zmail.common.util.Constants;
+import org.zmail.cs.account.Account;
+import org.zmail.cs.account.AccountServiceException;
+import org.zmail.cs.account.Cos;
+import org.zmail.cs.account.Domain;
+import org.zmail.cs.account.Entry;
+import org.zmail.cs.account.Provisioning;
+import org.zmail.cs.account.Server;
 
 public class TestProvAttr extends LdapTest {
     private static String TEST_CLASS_NAME = "test-attr";
@@ -59,7 +59,7 @@ public class TestProvAttr extends LdapTest {
         Cos cos = getCos();
         
         HashMap<String, Object> attrs = new HashMap<String, Object>();
-        attrs.put(Provisioning.A_zimbraCOSId, cos.getId());
+        attrs.put(Provisioning.A_zmailCOSId, cos.getId());
         Account acct = prov.createAccount(ACCT_EMAIL, PASSWORD, attrs);
         assertNotNull(acct);
         return acct;
@@ -171,7 +171,7 @@ public class TestProvAttr extends LdapTest {
         Account acct = getAccount();
         Map<String, Object> attrs = new HashMap<String, Object>();
         
-        String attrName = Provisioning.A_zimbraInterceptAddress;
+        String attrName = Provisioning.A_zmailInterceptAddress;
         String V = "test@example.com";
         
         String value = acct.getAttr(attrName);
@@ -217,7 +217,7 @@ public class TestProvAttr extends LdapTest {
         Account acct = getAccount();
         Map<String, Object> attrs = new HashMap<String, Object>();
         
-        String attrName = Provisioning.A_zimbraMailForwardingAddress;
+        String attrName = Provisioning.A_zmailMailForwardingAddress;
         String V1 = "test-1@example.com";
         String V2 = "test-2@example.com";
         
@@ -275,7 +275,7 @@ public class TestProvAttr extends LdapTest {
     @Test
     public void testDurationAttr() throws Exception {
         Server server = getServer();  
-        String attrName = Provisioning.A_zimbraHsmAge;
+        String attrName = Provisioning.A_zmailHsmAge;
         
         String strValue;
         long msValue;
@@ -416,7 +416,7 @@ public class TestProvAttr extends LdapTest {
     @Test
     public void testCallbackAccountStatus() throws Exception {
         Account acct = getAccount();
-        String attrName = Provisioning.A_zimbraAccountStatus;
+        String attrName = Provisioning.A_zmailAccountStatus;
         
         String value = acct.getAttr(attrName);
         assertEquals(Provisioning.ACCOUNT_STATUS_ACTIVE, value);
@@ -424,13 +424,13 @@ public class TestProvAttr extends LdapTest {
         cannotUnset(acct, attrName);       
         
         setAttr(acct, attrName, Provisioning.ACCOUNT_STATUS_CLOSED);
-        assertEquals(acct.getAttr(Provisioning.A_zimbraMailStatus), Provisioning.MAIL_STATUS_DISABLED);
+        assertEquals(acct.getAttr(Provisioning.A_zmailMailStatus), Provisioning.MAIL_STATUS_DISABLED);
     }
     
     @Test
     public void testCallbackCheckPortConflict() throws Exception {
         Server server = getServer();    
-        String attrName = Provisioning.A_zimbraLmtpBindPort;
+        String attrName = Provisioning.A_zmailLmtpBindPort;
         
         unsetTest(server, attrName);
     }
@@ -438,7 +438,7 @@ public class TestProvAttr extends LdapTest {
     @Test
     public void testCallbackDataSource() throws Exception {
         Account acct = getAccount();        
-        String attrName = Provisioning.A_zimbraDataSourcePollingInterval;
+        String attrName = Provisioning.A_zmailDataSourcePollingInterval;
         
         unsetTest(acct, attrName);
     }
@@ -454,7 +454,7 @@ public class TestProvAttr extends LdapTest {
     @Test
     public void testCallbackDomainStatus() throws Exception {
         Domain domain = getDomain();
-        String attrName = Provisioning.A_zimbraDomainStatus;
+        String attrName = Provisioning.A_zmailDomainStatus;
         
         // TODO
         // unsetTest(domain, attrName);
@@ -463,13 +463,13 @@ public class TestProvAttr extends LdapTest {
     @Test
     public void testCallbackMailSignature() throws Exception {
         Account acct = getAccount();
-        String attrName = Provisioning.A_zimbraPrefMailSignature;
+        String attrName = Provisioning.A_zmailPrefMailSignature;
         
         unsetTest(acct, attrName);
         
         // set a limit on cos
         Cos cos = getCos();
-        setAttr(cos, Provisioning.A_zimbraMailSignatureMaxLength, "10");
+        setAttr(cos, Provisioning.A_zmailMailSignatureMaxLength, "10");
         
         // cannot have signature longer than the max len
         boolean good = false;

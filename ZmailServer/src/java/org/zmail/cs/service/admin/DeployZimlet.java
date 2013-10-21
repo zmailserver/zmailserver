@@ -12,31 +12,31 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.service.admin;
+package org.zmail.cs.service.admin;
 
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import com.zimbra.common.util.MapUtil;
+import org.zmail.common.util.MapUtil;
 
-import com.zimbra.cs.account.Provisioning;
-import com.zimbra.cs.account.Server;
-import com.zimbra.cs.account.accesscontrol.AdminRight;
-import com.zimbra.cs.account.accesscontrol.Rights.Admin;
-import com.zimbra.cs.mailbox.MailServiceException;
-import com.zimbra.cs.service.FileUploadServlet;
-import com.zimbra.cs.service.FileUploadServlet.Upload;
-import com.zimbra.common.auth.ZAuthToken;
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.common.util.ZimbraLog;
-import com.zimbra.common.soap.MailConstants;
-import com.zimbra.common.soap.AdminConstants;
-import com.zimbra.common.soap.Element;
-import com.zimbra.cs.zimlet.ZimletFile;
-import com.zimbra.cs.zimlet.ZimletUtil;
-import com.zimbra.cs.zimlet.ZimletUtil.DeployListener;
-import com.zimbra.soap.ZimbraSoapContext;
+import org.zmail.cs.account.Provisioning;
+import org.zmail.cs.account.Server;
+import org.zmail.cs.account.accesscontrol.AdminRight;
+import org.zmail.cs.account.accesscontrol.Rights.Admin;
+import org.zmail.cs.mailbox.MailServiceException;
+import org.zmail.cs.service.FileUploadServlet;
+import org.zmail.cs.service.FileUploadServlet.Upload;
+import org.zmail.common.auth.ZAuthToken;
+import org.zmail.common.service.ServiceException;
+import org.zmail.common.util.ZmailLog;
+import org.zmail.common.soap.MailConstants;
+import org.zmail.common.soap.AdminConstants;
+import org.zmail.common.soap.Element;
+import org.zmail.cs.zimlet.ZimletFile;
+import org.zmail.cs.zimlet.ZimletUtil;
+import org.zmail.cs.zimlet.ZimletUtil.DeployListener;
+import org.zmail.soap.ZmailSoapContext;
 
 public class DeployZimlet extends AdminDocumentHandler {
 
@@ -62,7 +62,7 @@ public class DeployZimlet extends AdminDocumentHandler {
 			}
 			List<Server> servers = prov.getAllServers();
 			for (Server s : servers) {
-			    boolean hasMailboxService = s.getMultiAttrSet(Provisioning.A_zimbraServiceEnabled).contains("mailbox");
+			    boolean hasMailboxService = s.getMultiAttrSet(Provisioning.A_zmailServiceEnabled).contains("mailbox");
 			    if (hasMailboxService)
 			        changeStatus(s.getName(), sPENDING);
             }
@@ -113,7 +113,7 @@ public class DeployZimlet extends AdminDocumentHandler {
 				ZimletFile zf = new ZimletFile(upload.getName(), upload.getInputStream());
 				ZimletUtil.deployZimlet(zf, progress, auth, flushCache);
 			} catch (Exception e) {
-				ZimbraLog.zimlet.info("deploy", e);
+				ZmailLog.zimlet.info("deploy", e);
 				if (s != null)
 					progress.markFailed(s, e);
 			} finally {
@@ -127,7 +127,7 @@ public class DeployZimlet extends AdminDocumentHandler {
 		mProgressMap = MapUtil.newLruMap(20);
 	}
 	
-	private void deploy(ZimbraSoapContext lc, String aid, ZAuthToken auth, boolean flushCache, boolean synchronous) throws ServiceException {
+	private void deploy(ZmailSoapContext lc, String aid, ZAuthToken auth, boolean flushCache, boolean synchronous) throws ServiceException {
         Upload up = FileUploadServlet.fetchUpload(lc.getAuthtokenAccountId(), aid, lc.getAuthToken());
         if (up == null)
             throw MailServiceException.NO_SUCH_UPLOAD(aid);
@@ -141,7 +141,7 @@ public class DeployZimlet extends AdminDocumentHandler {
             try {
                 t.join(DEPLOY_TIMEOUT);
             } catch (InterruptedException e) {
-                ZimbraLog.zimlet.warn("error while deploying Zimlet", e);
+                ZmailLog.zimlet.warn("error while deploying Zimlet", e);
             }
         }
 	}
@@ -151,7 +151,7 @@ public class DeployZimlet extends AdminDocumentHandler {
 	@Override
 	public Element handle(Element request, Map<String, Object> context) throws ServiceException {
 	    
-	    ZimbraSoapContext zsc = getZimbraSoapContext(context);
+	    ZmailSoapContext zsc = getZmailSoapContext(context);
 		String action = request.getAttribute(AdminConstants.A_ACTION).toLowerCase();
 		Element content = request.getElement(MailConstants.E_CONTENT);
 		String aid = content.getAttribute(MailConstants.A_ATTACHMENT_ID, null);
@@ -167,8 +167,8 @@ public class DeployZimlet extends AdminDocumentHandler {
 		        
 			deploy(zsc, aid, zsc.getRawAuthToken(), flushCache, synchronous);
 			if(flushCache) {
-				if (ZimbraLog.misc.isDebugEnabled()) {
-					ZimbraLog.misc.debug("DeployZimlet: flushing zimlet cache");
+				if (ZmailLog.misc.isDebugEnabled()) {
+					ZmailLog.misc.debug("DeployZimlet: flushing zimlet cache");
 				}				
 				checkRight(zsc, context, Provisioning.getInstance().getLocalServer(), Admin.R_flushCache);
 				FlushCache.sendFlushRequest(context, "/service", "/zimlet/res/all.js");
@@ -182,8 +182,8 @@ public class DeployZimlet extends AdminDocumentHandler {
 			deploy(zsc, aid, null, false, synchronous);
 			
 			if(flushCache) {
-				if (ZimbraLog.misc.isDebugEnabled()) {
-					ZimbraLog.misc.debug("DeployZimlet: flushing zimlet cache");
+				if (ZmailLog.misc.isDebugEnabled()) {
+					ZmailLog.misc.debug("DeployZimlet: flushing zimlet cache");
 				}								
 				checkRight(zsc, context, localServer, Admin.R_flushCache);
 				FlushCache.sendFlushRequest(context, "/service", "/zimlet/res/all.js");

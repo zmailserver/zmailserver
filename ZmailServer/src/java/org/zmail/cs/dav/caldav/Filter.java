@@ -12,7 +12,7 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.dav.caldav;
+package org.zmail.cs.dav.caldav;
 
 import java.util.Collection;
 import java.util.HashSet;
@@ -20,10 +20,10 @@ import java.util.HashSet;
 import org.dom4j.Element;
 import org.dom4j.QName;
 
-import com.zimbra.common.calendar.ZCalendar;
-import com.zimbra.common.util.ZimbraLog;
-import com.zimbra.cs.dav.DavElements;
-import com.zimbra.cs.dav.caldav.Range.TimeRange;
+import org.zmail.common.calendar.ZCalendar;
+import org.zmail.common.util.ZmailLog;
+import org.zmail.cs.dav.DavElements;
+import org.zmail.cs.dav.caldav.Range.TimeRange;
 
 /*
  * draft-dusseault-caldav section 9.7
@@ -87,7 +87,7 @@ public abstract class Filter {
 				else if (name.equals(DavElements.E_IS_NOT_DEFINED))
 					mIsNotDefinedSet = true;
 				else
-					ZimbraLog.dav.info("unrecognized filter "+name.getNamespaceURI()+":"+name.getName());
+					ZmailLog.dav.info("unrecognized filter "+name.getNamespaceURI()+":"+name.getName());
 			}
 		}
 	}

@@ -13,12 +13,12 @@
  * ***** END LICENSE BLOCK *****
  */
 
-package com.zimbra.cs.pop3;
+package org.zmail.cs.pop3;
 
-import com.zimbra.common.io.TcpServerInputStream;
-import com.zimbra.common.util.NetUtil;
-import com.zimbra.common.util.ZimbraLog;
-import com.zimbra.cs.server.ProtocolHandler;
+import org.zmail.common.io.TcpServerInputStream;
+import org.zmail.common.util.NetUtil;
+import org.zmail.common.util.ZmailLog;
+import org.zmail.cs.server.ProtocolHandler;
 
 import javax.net.ssl.SSLSocket;
 import javax.net.ssl.SSLSocketFactory;
@@ -63,7 +63,7 @@ final class TcpPop3Handler extends ProtocolHandler {
 
     @Override
     protected void dropConnection() {
-        ZimbraLog.addIpToContext(remoteAddress);
+        ZmailLog.addIpToContext(remoteAddress);
         try {
             if (input != null) {
                 input.close();
@@ -74,13 +74,13 @@ final class TcpPop3Handler extends ProtocolHandler {
                 delegate.output = null;
             }
         } catch (IOException e) {
-            if (ZimbraLog.pop.isDebugEnabled()) {
-                ZimbraLog.pop.debug("I/O error while closing connection", e);
+            if (ZmailLog.pop.isDebugEnabled()) {
+                ZmailLog.pop.debug("I/O error while closing connection", e);
             } else {
-                ZimbraLog.pop.debug("I/O error while closing connection: " + e);
+                ZmailLog.pop.debug("I/O error while closing connection: " + e);
             }
         } finally {
-            ZimbraLog.clearContext();
+            ZmailLog.clearContext();
         }
     }
 
@@ -93,7 +93,7 @@ final class TcpPop3Handler extends ProtocolHandler {
     @Override
     protected void notifyIdleConnection() {
         // according to RFC 1939 we aren't supposed to snd a response on idle timeout
-        ZimbraLog.pop.debug("idle connection");
+        ZmailLog.pop.debug("idle connection");
     }
 
     private class HandlerDelegate extends Pop3Handler {
@@ -111,7 +111,7 @@ final class TcpPop3Handler extends ProtocolHandler {
             NetUtil.setSSLEnabledCipherSuites(sock, config.getSslExcludedCiphers());
             sock.setUseClientMode(false);
             startHandshake(sock);
-            ZimbraLog.pop.debug("suite: %s", sock.getSession().getCipherSuite());
+            ZmailLog.pop.debug("suite: %s", sock.getSession().getCipherSuite());
             input = new TcpServerInputStream(sock.getInputStream());
             output = new BufferedOutputStream(sock.getOutputStream());
         }
@@ -134,7 +134,7 @@ final class TcpPop3Handler extends ProtocolHandler {
 
         @Override
         void sendLine(String line, boolean flush) throws IOException {
-            ZimbraLog.pop.trace("S: %s", line);
+            ZmailLog.pop.trace("S: %s", line);
             output.write(line.getBytes());
             output.write(LINE_SEPARATOR);
             if (flush) {

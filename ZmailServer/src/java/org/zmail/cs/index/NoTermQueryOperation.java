@@ -13,14 +13,14 @@
  * ***** END LICENSE BLOCK *****
  */
 
-package com.zimbra.cs.index;
+package org.zmail.cs.index;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
 import com.google.common.collect.ImmutableSet;
-import com.zimbra.cs.mailbox.Mailbox;
+import org.zmail.cs.mailbox.Mailbox;
 
 /**
  * A {@link QueryOperation} which is generated when a query term evaluates to "nothing".
@@ -120,12 +120,12 @@ public final class NoTermQueryOperation extends QueryOperation {
     }
 
     @Override
-    public ZimbraHit getNext() {
+    public ZmailHit getNext() {
         return null;
     }
 
     @Override
-    public ZimbraHit peekNext() {
+    public ZmailHit peekNext() {
         return null;
     }
 

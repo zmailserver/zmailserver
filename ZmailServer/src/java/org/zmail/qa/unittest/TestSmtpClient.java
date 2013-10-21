@@ -13,7 +13,7 @@
  * ***** END LICENSE BLOCK *****
  */
 
-package com.zimbra.qa.unittest;
+package org.zmail.qa.unittest;
 
 import javax.mail.Message.RecipientType;
 import javax.mail.internet.InternetAddress;
@@ -21,15 +21,15 @@ import javax.mail.internet.MimeMessage;
 
 import junit.framework.TestCase;
 
-import com.zimbra.client.ZMailbox;
-import com.zimbra.client.ZMessage;
-import com.zimbra.client.ZMessage.ZMimePart;
-import com.zimbra.common.mime.shim.JavaMailInternetAddress;
-import com.zimbra.common.zmime.ZMimeMessage;
-import com.zimbra.cs.account.Provisioning;
-import com.zimbra.cs.mailclient.smtp.SmtpConfig;
-import com.zimbra.cs.mailclient.smtp.SmtpConnection;
-import com.zimbra.cs.util.JMSession;
+import org.zmail.client.ZMailbox;
+import org.zmail.client.ZMessage;
+import org.zmail.client.ZMessage.ZMimePart;
+import org.zmail.common.mime.shim.JavaMailInternetAddress;
+import org.zmail.common.zmime.ZMimeMessage;
+import org.zmail.cs.account.Provisioning;
+import org.zmail.cs.mailclient.smtp.SmtpConfig;
+import org.zmail.cs.mailclient.smtp.SmtpConnection;
+import org.zmail.cs.util.JMSession;
 
 public class TestSmtpClient extends TestCase {
 
@@ -41,8 +41,8 @@ public class TestSmtpClient extends TestCase {
     private final int mPort;
 
     public TestSmtpClient() throws Exception {
-        mHost = TestUtil.getServerAttr(Provisioning.A_zimbraSmtpHostname);
-        mPort = Integer.parseInt(TestUtil.getServerAttr(Provisioning.A_zimbraSmtpPort));
+        mHost = TestUtil.getServerAttr(Provisioning.A_zmailSmtpHostname);
+        mPort = Integer.parseInt(TestUtil.getServerAttr(Provisioning.A_zmailSmtpPort));
     }
 
     @Override

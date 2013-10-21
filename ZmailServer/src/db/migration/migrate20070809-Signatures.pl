@@ -14,13 +14,13 @@
 # ***** END LICENSE BLOCK *****
 # 
 use strict;
-use lib "/opt/zimbra/zimbramon/lib";
-use Zimbra::Util::Common;
+use lib "/opt/zmail/zmailmon/lib";
+use Zmail::Util::Common;
 use Data::UUID;
 use Net::LDAPapi;
 
 my ($binddn,$bindpwd,$host,$junk,$result,@localconfig,$ismaster);
-@localconfig=`/opt/zimbra/bin/zmlocalconfig -s ldap_master_url zimbra_ldap_userdn zimbra_ldap_password ldap_is_master`;
+@localconfig=`/opt/zmail/bin/zmlocalconfig -s ldap_master_url zmail_ldap_userdn zmail_ldap_password ldap_is_master`;
 
 $host=$localconfig[0];
 ($junk,$host) = split /= /, $host, 2;
@@ -42,7 +42,7 @@ if ($ismaster ne "true") {
 	exit;
 }
 
-my @attrs=("zimbraPrefMailSignature", "zimbraPrefIdentityName");
+my @attrs=("zmailPrefMailSignature", "zmailPrefIdentityName");
 
 print "Beginning identity migration";
 my $ld = Net::LDAPapi->new(-url=>"$host");
@@ -51,7 +51,7 @@ if ($host !~ /^ldaps/i) {
   $status=$ld->start_tls_s();
 }
 $status = $ld->bind_s($binddn,$bindpwd);
-$status = $ld->search_s("",LDAP_SCOPE_SUBTREE,"(&(!(zimbraSignatureID=*))(zimbraPrefMailSignature=*))",\@attrs,0,$result);
+$status = $ld->search_s("",LDAP_SCOPE_SUBTREE,"(&(!(zmailSignatureID=*))(zmailPrefMailSignature=*))",\@attrs,0,$result);
 
 my ($ent,$dn,$sigRdn,$sigContent,$rdn, $rdnValue, $ug, $sigId, $sigName, $sigDN, $baseDN);
 
@@ -67,8 +67,8 @@ for ($ent = $ld->first_entry; $ent != 0; $ent = $ld->next_entry) {
 	($rdn, $sigName) = split /=/, $rdn, 2;
 
 	#$attr = $ld->first_attribute;
-	$sigContent=($ld->get_values("zimbraPrefMailSignature"))[0];
-	$sigRdn=($ld->get_values("zimbraPrefIdentityName"))[0];
+	$sigContent=($ld->get_values("zmailPrefMailSignature"))[0];
+	$sigRdn=($ld->get_values("zmailPrefIdentityName"))[0];
 	$ug = Data::UUID->new;
 	$sigId = $ug->create_str();
 
@@ -77,27 +77,27 @@ for ($ent = $ld->first_entry; $ent != 0; $ent = $ld->next_entry) {
 	}
 	else {
 		($junk,$baseDN) = split /,/, $dn, 2;
-		$sigDN = "zimbraSignatureName=".$sigName.",".$baseDN;
+		$sigDN = "zmailSignatureName=".$sigName.",".$baseDN;
 	}
   
 	my %ldap_modifications;
 	if ($rdn eq "uid" ) {
 		%ldap_modifications = (
-			"zimbraSignatureId", "$sigId",
-			"zimbraSignatureName", "$sigRdn",
+			"zmailSignatureId", "$sigId",
+			"zmailSignatureName", "$sigRdn",
 		);
 		$ld->modify_s($sigDN,\%ldap_modifications);	
 	} else {
 		%ldap_modifications = (
-			"zimbraSignatureName", "$sigRdn",
-			"objectClass", "zimbraSignature",
-			"zimbraSignatureId", "$sigId",
-			"zimbraPrefMailSignature", "$sigContent",
+			"zmailSignatureName", "$sigRdn",
+			"objectClass", "zmailSignature",
+			"zmailSignatureId", "$sigId",
+			"zmailPrefMailSignature", "$sigContent",
 		);
 		$ld->add_s($sigDN,\%ldap_modifications);
 	}
 	%ldap_modifications = (
-		"zimbraPrefDefaultSignatureId", "$sigId",
+		"zmailPrefDefaultSignatureId", "$sigId",
 	);
 	$ld->modify_s($dn,\%ldap_modifications);
 	print ".";

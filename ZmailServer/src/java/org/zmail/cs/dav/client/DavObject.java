@@ -12,7 +12,7 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.dav.client;
+package org.zmail.cs.dav.client;
 
 import org.dom4j.Element;
 import org.dom4j.QName;
@@ -21,8 +21,8 @@ import java.util.Collection;
 import java.util.Collections;
 import java.util.HashMap;
 
-import com.zimbra.common.util.ZimbraLog;
-import com.zimbra.cs.dav.DavElements;
+import org.zmail.common.util.ZmailLog;
+import org.zmail.cs.dav.DavElements;
 
 public class DavObject {
 	
@@ -54,7 +54,7 @@ public class DavObject {
 			if (tokens.length > 2)
 				status = Integer.parseInt(tokens[1]);
 		} catch (NumberFormatException e) {
-			ZimbraLog.dav.warn("can't parse status code: "+str, e);
+			ZmailLog.dav.warn("can't parse status code: "+str, e);
 		}
 		return status;
 	}

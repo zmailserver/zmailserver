@@ -13,7 +13,7 @@
  * ***** END LICENSE BLOCK *****
  */
 
-package com.zimbra.cs.db;
+package org.zmail.cs.db;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -29,9 +29,9 @@ import java.util.Date;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.common.util.ByteUtil;
-import com.zimbra.cs.db.DbPool.DbConnection;
+import org.zmail.common.service.ServiceException;
+import org.zmail.common.util.ByteUtil;
+import org.zmail.cs.db.DbPool.DbConnection;
 
 /**
  * <code>DbUtil</code> contains some database utility methods and
@@ -41,7 +41,7 @@ import com.zimbra.cs.db.DbPool.DbConnection;
  * and allocate and deallocate database resources.<p>
  *
  * Query results are read entirely into memory and returned in the form of a
- * {@link com.zimbra.cs.db.DbResults} object.  This improves concurrency,
+ * {@link org.zmail.cs.db.DbResults} object.  This improves concurrency,
  * but potentially increases memory consumption.  Code that deals with
  * large result sets should use the JDBC API's directly.
  *

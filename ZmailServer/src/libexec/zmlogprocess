@@ -14,28 +14,28 @@
 # ***** END LICENSE BLOCK *****
 # 
 
-use lib "/opt/zimbra/zimbramon/lib";
+use lib "/opt/zmail/zmailmon/lib";
 use strict;
 use warnings;
 use DBI;
-use Zimbra::Mon::Zmstat;
-use Zimbra::Mon::Logger;
+use Zmail::Mon::Zmstat;
+use Zmail::Mon::Logger;
 use Date::Parse;
 use Fcntl qw(SEEK_SET);
 
-my $logger_directory     = $Zimbra::Mon::Zmstat::LC{'logger_data_directory'};
+my $logger_directory     = $Zmail::Mon::Zmstat::LC{'logger_data_directory'};
 my %hostmap;
 
 use vars qw($logger_directory $log_file);
 
 # Exit if software-only node.
-exit(0) unless (-f '/opt/zimbra/conf/localconfig.xml');
+exit(0) unless (-f '/opt/zmail/conf/localconfig.xml');
 
-my $zimbra_home = "/opt/zimbra";
-my $pid_file = "${zimbra_home}/log/zmlogprocess.pid";
-my $state_file = "${zimbra_home}/log/zmlogprocess.state";
+my $zmail_home = "/opt/zmail";
+my $pid_file = "${zmail_home}/log/zmlogprocess.pid";
+my $state_file = "${zmail_home}/log/zmlogprocess.state";
 $logger_directory = getLocalConfig("logger_data_directory");
-$log_file = '/var/log/zimbra.log';
+$log_file = '/var/log/zmail.log';
 
 sub gethostmap() {
     my $dbh = DBI->connect(
@@ -54,7 +54,7 @@ sub gethostmap() {
 }
 
 sub listMTA() {
-    open(MTALIST, "${zimbra_home}/bin/zmprov gas mta |") || die $!;
+    open(MTALIST, "${zmail_home}/bin/zmprov gas mta |") || die $!;
     my @mtas = <MTALIST>;
     chomp(@mtas);
     close(MTALIST);
@@ -124,7 +124,7 @@ sub getLocalConfig {
     return $ENV{$key};
   }
   open CONF, 
-    "${zimbra_home}/bin/zmlocalconfig -q -x -s -m shell |" 
+    "${zmail_home}/bin/zmlocalconfig -q -x -s -m shell |" 
     or die "Can't open local config: $!";
   my @conf = <CONF>;
   close CONF;
@@ -269,7 +269,7 @@ sub run() {
             push(@data, $hdata->{$c});
         }
         my $data = join(',', @data);
-        Zimbra::Mon::Logger::LogStats("info", "MTA: $host: ${columns}:: $data");
+        Zmail::Mon::Logger::LogStats("info", "MTA: $host: ${columns}:: $data");
     }
 
     unlink($pid_file);

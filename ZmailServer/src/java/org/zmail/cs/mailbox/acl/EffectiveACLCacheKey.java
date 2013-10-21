@@ -13,10 +13,10 @@
  * ***** END LICENSE BLOCK *****
  */
 
-package com.zimbra.cs.mailbox.acl;
+package org.zmail.cs.mailbox.acl;
 
-import com.zimbra.common.util.memcached.MemcachedKey;
-import com.zimbra.cs.memcached.MemcachedKeyPrefix;
+import org.zmail.common.util.memcached.MemcachedKey;
+import org.zmail.cs.memcached.MemcachedKeyPrefix;
 
 public class EffectiveACLCacheKey implements MemcachedKey {
     private String mAcctId;

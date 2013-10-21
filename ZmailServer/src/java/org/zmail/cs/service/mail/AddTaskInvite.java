@@ -13,7 +13,7 @@
  * ***** END LICENSE BLOCK *****
  */
 
-package com.zimbra.cs.service.mail;
+package org.zmail.cs.service.mail;
 
 public class AddTaskInvite extends AddCalendarItemInvite implements TaskRequest {
 }

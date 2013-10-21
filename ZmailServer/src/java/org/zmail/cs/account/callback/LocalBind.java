@@ -12,7 +12,7 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.account.callback;
+package org.zmail.cs.account.callback;
 
 import java.net.InetAddress;
 import java.net.UnknownHostException;
@@ -20,14 +20,14 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-import com.zimbra.common.account.ZAttrProvisioning.MailMode;
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.common.util.ZimbraLog;
-import com.zimbra.cs.account.AttributeCallback;
-import com.zimbra.cs.account.Config;
-import com.zimbra.cs.account.Entry;
-import com.zimbra.cs.account.Provisioning;
-import com.zimbra.cs.account.Server;
+import org.zmail.common.account.ZAttrProvisioning.MailMode;
+import org.zmail.common.service.ServiceException;
+import org.zmail.common.util.ZmailLog;
+import org.zmail.cs.account.AttributeCallback;
+import org.zmail.cs.account.Config;
+import org.zmail.cs.account.Entry;
+import org.zmail.cs.account.Provisioning;
+import org.zmail.cs.account.Server;
 
 public class LocalBind extends AttributeCallback {
 
@@ -39,11 +39,11 @@ public class LocalBind extends AttributeCallback {
     
     @Override
     public void postModify(CallbackContext context, String attrName, Entry entry) {
-        // Update zimbraAdminLocalBind if zimbraAdminBindAddress is changed.
+        // Update zmailAdminLocalBind if zmailAdminBindAddress is changed.
         if (entry instanceof Server) {
             Server server = (Server) entry;
-            if (attrName.equals(Provisioning.A_zimbraAdminBindAddress)) {
-                String address = server.getAttr(Provisioning.A_zimbraAdminBindAddress, true);
+            if (attrName.equals(Provisioning.A_zmailAdminBindAddress)) {
+                String address = server.getAttr(Provisioning.A_zmailAdminBindAddress, true);
                 try{
                     if ((address == null) || (address.isEmpty())) {
                         server.setAdminLocalBind(false);
@@ -61,14 +61,14 @@ public class LocalBind extends AttributeCallback {
                             server.setAdminLocalBind(true);
                     }
                 } catch (ServiceException se) {
-                    ZimbraLog.misc.warn("Unable to update zimbraAdminLocalBind " + se);
+                    ZmailLog.misc.warn("Unable to update zmailAdminLocalBind " + se);
                 }
                 return;
             }
         }
         
-        // Update zimbraMailLocalBind if zimbraMailMode or zimbraMailBindAddress or zimbraMailSSLBindAddress is changed.
-        // zimbraMailMode is also in globalConfig. Make sure to update the zimbraMailLocalBind of all the
+        // Update zmailMailLocalBind if zmailMailMode or zmailMailBindAddress or zmailMailSSLBindAddress is changed.
+        // zmailMailMode is also in globalConfig. Make sure to update the zmailMailLocalBind of all the
         // servers if this globalconfig is changed.
         
         List<Server> serverList = new ArrayList<Server>();
@@ -76,15 +76,15 @@ public class LocalBind extends AttributeCallback {
             try {
                 serverList = Provisioning.getInstance().getAllServers();
             } catch (ServiceException se) {
-                ZimbraLog.misc.warn("Unable to get server list " + se);
+                ZmailLog.misc.warn("Unable to get server list " + se);
             }
         } else if (entry instanceof Server) {
             serverList.add((Server) entry);
         } 
             
-        if (attrName.equals(Provisioning.A_zimbraMailMode) ||
-                attrName.equals(Provisioning.A_zimbraMailBindAddress) ||
-                attrName.equals(Provisioning.A_zimbraMailSSLBindAddress)) {
+        if (attrName.equals(Provisioning.A_zmailMailMode) ||
+                attrName.equals(Provisioning.A_zmailMailBindAddress) ||
+                attrName.equals(Provisioning.A_zmailMailSSLBindAddress)) {
             for (Server server : serverList) {
                 try {
                     MailMode mailMode = server.getMailMode();
@@ -92,7 +92,7 @@ public class LocalBind extends AttributeCallback {
                         mailMode = Provisioning.getInstance().getConfig().getMailMode();
                     if (mailMode == null || !mailMode.isHttps()) {
                         // http is enabled. Check if bindaddress conflicts with localhost.
-                        String address = server.getAttr(Provisioning.A_zimbraMailBindAddress, true);
+                        String address = server.getAttr(Provisioning.A_zmailMailBindAddress, true);
                         if ((address == null) || (address.isEmpty())) {
                             server.setMailLocalBind(false);
                         } else {
@@ -113,7 +113,7 @@ public class LocalBind extends AttributeCallback {
                         server.setMailLocalBind(true);
                     }
                 } catch (ServiceException e) {
-                    ZimbraLog.misc.warn("Unable to set zimbraMailLocalBind " + e);
+                    ZmailLog.misc.warn("Unable to set zmailMailLocalBind " + e);
                     continue;
                 }
             }

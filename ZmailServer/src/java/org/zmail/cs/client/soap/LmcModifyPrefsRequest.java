@@ -13,7 +13,7 @@
  * ***** END LICENSE BLOCK *****
  */
 
-package com.zimbra.cs.client.soap;
+package org.zmail.cs.client.soap;
 
 import java.util.Iterator;
 import java.util.Map;
@@ -22,8 +22,8 @@ import java.util.Set;
 import org.dom4j.DocumentHelper;
 import org.dom4j.Element;
 
-import com.zimbra.common.soap.DomUtil;
-import com.zimbra.common.soap.AccountConstants;
+import org.zmail.common.soap.DomUtil;
+import org.zmail.common.soap.AccountConstants;
 
 
 public class LmcModifyPrefsRequest extends LmcSoapRequest {

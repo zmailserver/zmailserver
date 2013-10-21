@@ -24,8 +24,8 @@
 <%@ page import="javax.crypto.SecretKey" %>
 <%@ page import="java.net.URLEncoder"%>
 <%@ page import="java.io.UnsupportedEncodingException"%>
-<%--taglib prefix="z" uri="/WEB-INF/zimbra.tld" %>
-<z:zimletconfig var="config" action="list" zimlet="com_zimbra_sforce"/>
+<%--taglib prefix="z" uri="/WEB-INF/zmail.tld" %>
+<z:zimletconfig var="config" action="list" zimlet="org_zmail_sforce"/>
 
     Map zConfig = (Map) request.getAttribute("config");
     String domain_key = (String) ((Map) zConfig.get("global")).get("preauthDomainKey");
@@ -48,7 +48,7 @@
                 "&timestamp=" + ts +
                 "&expires=0" +
                 "&preauth=" + preAuth;
-        String redirectURL = "/service/zimlet/com_zimbra_sforce/welcome.jsp?url=" + URLEncoder.encode(URLEncoder.encode(preAuthURL,"UTF-8"),"UTF-8");
+        String redirectURL = "/service/zimlet/org_zmail_sforce/welcome.jsp?url=" + URLEncoder.encode(URLEncoder.encode(preAuthURL,"UTF-8"),"UTF-8");
         return preAuthURL + "&redirectURL=" + redirectURL;
     }
 
@@ -171,7 +171,7 @@
     post.releaseConnection();
     // Allow global config to hard-code a user for testing/demo use
     // Hack hack hack
-    String redirect_user = "sample@roadshow.zimbra.com";
+    String redirect_user = "sample@roadshow.zmail.com";
     String domain_key = "3f22c69abb92ce8d0b5bd30bd4cc3acd4ecd535783490e8722f9903ced6c61ee";
     if (redirect_user != null) {
         email = redirect_user;

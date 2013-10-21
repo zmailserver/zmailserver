@@ -14,26 +14,26 @@
 #; ***** END LICENSE BLOCK *****
 # 
 
-if [ x`whoami` != xzimbra ]; then
-    echo Error: must be run as zimbra user
+if [ x`whoami` != xzmail ]; then
+    echo Error: must be run as zmail user
     exit 1
 fi
 
-zimbra_home=/opt/zimbra
-zimbra_java_home=${zimbra_home}/java
-jspc_src_dir=${zimbra_home}/mailboxd/webapps/zimbra
-jspc_build_dir=${zimbra_home}/mailboxd/work/zimbra/jsp
-jspc_class_path="${zimbra_home}/jetty/lib:${zimbra_home}/jetty/lib/jsp:${zimbra_home}/jetty/lib/ext:${zimbra_home}/jetty/lib/plus:${zimbra_home}/jetty/lib/naming:/opt/zimbra/lib/ext:${zimbra_home}/jetty/common/lib:${zimbra_home}/jetty/webapps/zimbra/WEB-INF/lib"
+zmail_home=/opt/zmail
+zmail_java_home=${zmail_home}/java
+jspc_src_dir=${zmail_home}/mailboxd/webapps/zmail
+jspc_build_dir=${zmail_home}/mailboxd/work/zmail/jsp
+jspc_class_path="${zmail_home}/jetty/lib:${zmail_home}/jetty/lib/jsp:${zmail_home}/jetty/lib/ext:${zmail_home}/jetty/lib/plus:${zmail_home}/jetty/lib/naming:/opt/zmail/lib/ext:${zmail_home}/jetty/common/lib:${zmail_home}/jetty/webapps/zmail/WEB-INF/lib"
 
-extensions="backup clamscanner network zimbra-license zimbrahsm zimbrasync"
-ext_dir="/opt/zimbra/lib/ext-common"
+extensions="backup clamscanner network zmail-license zmailhsm zmailsync"
+ext_dir="/opt/zmail/lib/ext-common"
 for i in $extensions; do
-  if [ -d "/opt/zimbra/lib/ext/$i" ]; then
+  if [ -d "/opt/zmail/lib/ext/$i" ]; then
    jspc_class_path="${jspc_class_path}:${ext_dir}/$i"
   fi
 done
 
-for i in `ls ${zimbra_home}/jetty/lib/jsp/*.jar`; do
+for i in `ls ${zmail_home}/jetty/lib/jsp/*.jar`; do
   if [ x"$class_path" = "x" ]; then
     class_path="$i"
   else 
@@ -41,17 +41,17 @@ for i in `ls ${zimbra_home}/jetty/lib/jsp/*.jar`; do
   fi
 done
 
-java_version=$(${zimbra_java_home}/bin/java -version 2>&1 | grep "java version" | sed -e 's/"//g' | awk '{print $NF}' | awk -F_ '{print $1}')
+java_version=$(${zmail_java_home}/bin/java -version 2>&1 | grep "java version" | sed -e 's/"//g' | awk '{print $NF}' | awk -F_ '{print $1}')
 if [ x"$java_version" = "x1.6.0" ]; then
-  java_options="-XX:ErrorFile=${zimbra_home}/log"
+  java_options="-XX:ErrorFile=${zmail_home}/log"
 else
   java_options=""
 fi
 
-java_cmd="${zimbra_java_home}/bin/java $java_options \
+java_cmd="${zmail_java_home}/bin/java $java_options \
   -client -Xmx256m \
-  -Dzimbra.home=${zimbra_home} \
-  -Djava.library.path=${zimbra_home}/lib \
+  -Dzmail.home=${zmail_home} \
+  -Djava.library.path=${zmail_home}/lib \
   -Djava.ext.dirs=${jspc_class_path}"
 
 if [ -d "${jspc_build_dir}" ]; then

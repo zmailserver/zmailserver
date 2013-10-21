@@ -13,13 +13,13 @@
 # basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
 # ***** END LICENSE BLOCK *****
 # 
-source /opt/zimbra/bin/zmshutil || exit 1
+source /opt/zmail/bin/zmshutil || exit 1
 zmsetvars
 
 ID=$(id -un)
-if [ x"$ID" != "xzimbra" ]; then
-  echo "$0 must be run as user zimbra."
+if [ x"$ID" != "xzmail" ]; then
+  echo "$0 must be run as user zmail."
   exit 1
 fi
 
-sudo /opt/zimbra/postfix/sbin/qshape.pl "$@"
+sudo /opt/zmail/postfix/sbin/qshape.pl "$@"

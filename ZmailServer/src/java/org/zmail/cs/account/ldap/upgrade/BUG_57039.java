@@ -12,29 +12,29 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.account.ldap.upgrade;
+package org.zmail.cs.account.ldap.upgrade;
 
 import java.util.HashMap;
 import java.util.Map;
 
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.common.util.StringUtil;
-import com.zimbra.cs.account.Config;
-import com.zimbra.cs.account.Provisioning;
+import org.zmail.common.service.ServiceException;
+import org.zmail.common.util.StringUtil;
+import org.zmail.cs.account.Config;
+import org.zmail.cs.account.Provisioning;
 
 public class BUG_57039 extends UpgradeOp {
 
     @Override
     void doUpgrade() throws ServiceException {
-        upgradeZimbraGalLdapAttrMap();
+        upgradeZmailGalLdapAttrMap();
     }
     
-    void upgradeZimbraGalLdapAttrMap() throws ServiceException {
+    void upgradeZmailGalLdapAttrMap() throws ServiceException {
         Config config = prov.getConfig();
         
-        String attrName = Provisioning.A_zimbraGalLdapAttrMap;
-        String oldValue = "zimbraCalResLocationDisplayName,displayName=zimbraCalResLocationDisplayName";
-        String newValue = "zimbraCalResLocationDisplayName=zimbraCalResLocationDisplayName";
+        String attrName = Provisioning.A_zmailGalLdapAttrMap;
+        String oldValue = "zmailCalResLocationDisplayName,displayName=zmailCalResLocationDisplayName";
+        String newValue = "zmailCalResLocationDisplayName=zmailCalResLocationDisplayName";
         
         String[] curValues = config.getMultiAttr(attrName);
          

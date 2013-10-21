@@ -12,13 +12,13 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.qa.unittest;
+package org.zmail.qa.unittest;
 
 import java.util.concurrent.Callable;
 
 import junit.framework.TestCase;
 
-import com.zimbra.common.util.TaskScheduler;
+import org.zmail.common.util.TaskScheduler;
 
 public class TestTaskScheduler
 extends TestCase

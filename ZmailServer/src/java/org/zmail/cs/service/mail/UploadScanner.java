@@ -13,7 +13,7 @@
  * ***** END LICENSE BLOCK *****
  */
 
-package com.zimbra.cs.service.mail;
+package org.zmail.cs.service.mail;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -22,9 +22,9 @@ import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
 
-import com.zimbra.common.util.ByteUtil;
-import com.zimbra.common.util.ZimbraLog;
-import com.zimbra.cs.service.FileUploadServlet.Upload;
+import org.zmail.common.util.ByteUtil;
+import org.zmail.common.util.ZmailLog;
+import org.zmail.cs.service.FileUploadServlet.Upload;
 
 public abstract class UploadScanner {
 
@@ -60,7 +60,7 @@ public abstract class UploadScanner {
         try {
             is = up.getInputStream();
         } catch (IOException ioe) {
-            ZimbraLog.misc.error("exception getting input stream for scanning", ioe);
+            ZmailLog.misc.error("exception getting input stream for scanning", ioe);
             info.append(" ").append(ioe);
             return ERROR;
         }

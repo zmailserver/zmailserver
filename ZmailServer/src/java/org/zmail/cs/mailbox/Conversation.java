@@ -12,7 +12,7 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.mailbox;
+package org.zmail.cs.mailbox;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -23,18 +23,18 @@ import java.util.Set;
 
 import com.google.common.base.Objects;
 import com.google.common.collect.Sets;
-import com.zimbra.common.mailbox.Color;
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.common.util.StringUtil;
-import com.zimbra.common.util.ZimbraLog;
-import com.zimbra.cs.account.Account;
-import com.zimbra.cs.db.DbMailItem;
-import com.zimbra.cs.db.DbTag;
-import com.zimbra.cs.index.SortBy;
-import com.zimbra.cs.mailbox.MailItem.CustomMetadata.CustomMetadataList;
-import com.zimbra.cs.mime.ParsedMessage;
-import com.zimbra.cs.session.PendingModifications.Change;
-import com.zimbra.cs.session.Session;
+import org.zmail.common.mailbox.Color;
+import org.zmail.common.service.ServiceException;
+import org.zmail.common.util.StringUtil;
+import org.zmail.common.util.ZmailLog;
+import org.zmail.cs.account.Account;
+import org.zmail.cs.db.DbMailItem;
+import org.zmail.cs.db.DbTag;
+import org.zmail.cs.index.SortBy;
+import org.zmail.cs.mailbox.MailItem.CustomMetadata.CustomMetadataList;
+import org.zmail.cs.mime.ParsedMessage;
+import org.zmail.cs.session.PendingModifications.Change;
+import org.zmail.cs.session.Session;
 
 /**
  * @since Jun 13, 2004
@@ -176,7 +176,7 @@ public class Conversation extends MailItem {
         mData.setTags(new Tag.NormalizedTags(tags));
 
         // need to rewrite the overview metadata
-        ZimbraLog.mailbox.debug("resetting metadata: cid=%d,size was=%d is=%d", mId, mData.size, mSenderList.size());
+        ZmailLog.mailbox.debug("resetting metadata: cid=%d,size was=%d is=%d", mId, mData.size, mSenderList.size());
         saveData(new DbMailItem(mMailbox));
         return mSenderList;
     }
@@ -246,12 +246,12 @@ public class Conversation extends MailItem {
     }
 
     static Conversation create(Mailbox mbox, int id, Message... msgs) throws ServiceException {
-        if (ZimbraLog.mailop.isDebugEnabled()) {
+        if (ZmailLog.mailop.isDebugEnabled()) {
             StringBuilder msgIds = new StringBuilder();
             for (int i = 0; i < msgs.length; i++) {
                 msgIds.append(i > 0 ? "," : "").append(msgs[i].getId());
             }
-            ZimbraLog.mailop.debug("Adding Conversation: id=%d, message(s): %s.", id, msgIds);
+            ZmailLog.mailop.debug("Adding Conversation: id=%d, message(s): %s.", id, msgIds);
         }
 
         assert(id != Mailbox.ID_AUTO_INCREMENT && msgs.length > 0);
@@ -444,9 +444,9 @@ public class Conversation extends MailItem {
                 throw ServiceException.PERM_DENIED("you do not have sufficient permissions");
             }
         } else {
-            if (ZimbraLog.mailop.isDebugEnabled()) {
+            if (ZmailLog.mailop.isDebugEnabled()) {
                 String operation = add ? "Setting" : "Unsetting";
-                ZimbraLog.mailop.debug("%s %s for %s.  Affected ids: %s",
+                ZmailLog.mailop.debug("%s %s for %s.  Affected ids: %s",
                     operation, getMailopContext(tag), getMailopContext(this), StringUtil.join(",", targets));
             }
             recalculateCounts(msgs);
@@ -586,12 +586,12 @@ public class Conversation extends MailItem {
             if (target.inSpam()) {
                 detach();
             }
-            if (ZimbraLog.mailop.isInfoEnabled()) {
+            if (ZmailLog.mailop.isInfoEnabled()) {
                 StringBuilder ids = new StringBuilder();
                 for (int i = 0; i < moved.size(); i++) {
                     ids.append(i > 0 ? "," : "").append(moved.get(i).getId());
                 }
-                ZimbraLog.mailop.info("Moving %s to %s.  Affected message ids: %s.",
+                ZmailLog.mailop.info("Moving %s to %s.  Affected message ids: %s.",
                     getMailopContext(this), getMailopContext(target), ids);
             }
             DbMailItem.setFolder(moved, target);
@@ -832,7 +832,7 @@ public class Conversation extends MailItem {
                     decodeMetadata(meta);
                 }
             } catch (ServiceException e) {
-                ZimbraLog.mailbox.error("Failed to parse metadata id=%d,type=%s", mId, getType(), e);
+                ZmailLog.mailbox.error("Failed to parse metadata id=%d,type=%s", mId, getType(), e);
             }
         }
     }

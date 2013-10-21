@@ -14,7 +14,7 @@
  * 
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.qa.unittest;
+package org.zmail.qa.unittest;
 
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
@@ -30,36 +30,36 @@ import org.junit.Ignore;
 import org.junit.Test;
 import static org.junit.Assert.*;
 
-import com.zimbra.common.account.Key.AccountBy;
-import com.zimbra.common.mailbox.ContactConstants;
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.common.soap.AccountConstants;
-import com.zimbra.common.soap.Element;
-import com.zimbra.common.soap.MailConstants;
-import com.zimbra.common.soap.SoapHttpTransport;
-import com.zimbra.common.util.ByteUtil;
-import com.zimbra.common.util.CliUtil;
-import com.zimbra.common.util.Log;
-import com.zimbra.common.util.ZimbraLog;
-import com.zimbra.cs.account.Account;
-import com.zimbra.cs.account.Provisioning;
-import com.zimbra.cs.account.ldap.entry.LdapAccount;
-import com.zimbra.cs.mailbox.Contact;
-import com.zimbra.cs.mailbox.ContactGroup;
-import com.zimbra.cs.mailbox.Mailbox;
-import com.zimbra.cs.mailbox.MailboxManager;
-import com.zimbra.cs.mailbox.OperationContext;
-import com.zimbra.cs.mailbox.ContactGroup.ContactRefMember;
-import com.zimbra.cs.mailbox.ContactGroup.GalRefMember;
-import com.zimbra.cs.mailbox.ContactGroup.InlineMember;
-import com.zimbra.cs.mailbox.ContactGroup.Member;
-import com.zimbra.cs.mime.ParsedContact;
-import com.zimbra.cs.util.Zimbra;
-import com.zimbra.client.ZMailbox;
+import org.zmail.common.account.Key.AccountBy;
+import org.zmail.common.mailbox.ContactConstants;
+import org.zmail.common.service.ServiceException;
+import org.zmail.common.soap.AccountConstants;
+import org.zmail.common.soap.Element;
+import org.zmail.common.soap.MailConstants;
+import org.zmail.common.soap.SoapHttpTransport;
+import org.zmail.common.util.ByteUtil;
+import org.zmail.common.util.CliUtil;
+import org.zmail.common.util.Log;
+import org.zmail.common.util.ZmailLog;
+import org.zmail.cs.account.Account;
+import org.zmail.cs.account.Provisioning;
+import org.zmail.cs.account.ldap.entry.LdapAccount;
+import org.zmail.cs.mailbox.Contact;
+import org.zmail.cs.mailbox.ContactGroup;
+import org.zmail.cs.mailbox.Mailbox;
+import org.zmail.cs.mailbox.MailboxManager;
+import org.zmail.cs.mailbox.OperationContext;
+import org.zmail.cs.mailbox.ContactGroup.ContactRefMember;
+import org.zmail.cs.mailbox.ContactGroup.GalRefMember;
+import org.zmail.cs.mailbox.ContactGroup.InlineMember;
+import org.zmail.cs.mailbox.ContactGroup.Member;
+import org.zmail.cs.mime.ParsedContact;
+import org.zmail.cs.util.Zmail;
+import org.zmail.client.ZMailbox;
 
 public class TestContactGroup {
     private static final String CONTACT_REF_VALUE = "736ae588-ae90-4427-a3de-6451e47e0857:257";
-    private static final String GAL_REF_VALUE = "uid=user1,ou=people,dc=zimbra,dc=com";
+    private static final String GAL_REF_VALUE = "uid=user1,ou=people,dc=zmail,dc=com";
     private static final String INLINE_VALUE = "user@test.com";
     
     private static class MemberData {
@@ -88,14 +88,14 @@ public class TestContactGroup {
     
     @BeforeClass
     public static void init() throws Exception {
-        Zimbra.startupCLI();
+        Zmail.startupCLI();
         CliUtil.toolSetup();
-        ZimbraLog.contact.setLevel(Log.Level.debug);
+        ZmailLog.contact.setLevel(Log.Level.debug);
         /*
-        ZimbraLog.contact.setLevel(Log.Level.debug);
-        ZimbraLog.gal.setLevel(Log.Level.debug);
-        ZimbraLog.index.setLevel(Log.Level.debug);
-        ZimbraLog.search.setLevel(Log.Level.debug);
+        ZmailLog.contact.setLevel(Log.Level.debug);
+        ZmailLog.gal.setLevel(Log.Level.debug);
+        ZmailLog.index.setLevel(Log.Level.debug);
+        ZmailLog.search.setLevel(Log.Level.debug);
         */
     }
         
@@ -301,8 +301,8 @@ public class TestContactGroup {
         Map<String, Object> fields = new HashMap<String, Object>();
         fields.put(ContactConstants.A_fileAs, ContactConstants.FA_FIRST_LAST);
         fields.put(ContactConstants.A_firstName, "test");
-        fields.put(ContactConstants.A_email, "test1@zimbra.com");
-        fields.put(ContactConstants.A_workEmail1, "test2@zimbra.com");
+        fields.put(ContactConstants.A_email, "test1@zmail.com");
+        fields.put(ContactConstants.A_workEmail1, "test2@zmail.com");
         Contact contact = mbox.createContact(octxt, new ParsedContact(fields), Mailbox.ID_FOLDER_CONTACTS, null);
         
         ContactGroup contactGroup = createContactGroup(new MemberData[] {
@@ -331,8 +331,8 @@ public class TestContactGroup {
         
         List<String> emailAddrs = contactGroup.getEmailAddresses(false, mbox, octxt, false);
         assertEquals(4, emailAddrs.size());
-        assertTrue(emailAddrs.contains("test1@zimbra.com"));
-        assertTrue(emailAddrs.contains("test2@zimbra.com"));
+        assertTrue(emailAddrs.contains("test1@zmail.com"));
+        assertTrue(emailAddrs.contains("test2@zmail.com"));
         assertTrue(emailAddrs.contains("aaa@test.com"));
         assertTrue(emailAddrs.contains("zzz@test.com"));
         
@@ -389,7 +389,7 @@ public class TestContactGroup {
                 new MemberData(Member.Type.CONTACT_REF, CONTACT_REF_VALUE),
                 new MemberData(Member.Type.GAL_REF, GAL_REF_VALUE)});
         
-        String dlist = "\"Ballard, Martha\" <martha34@aol.com>, \"Davidson, Ross\" <rossd@example.zimbra.com>, user1@test.com";
+        String dlist = "\"Ballard, Martha\" <martha34@aol.com>, \"Davidson, Ross\" <rossd@example.zmail.com>, user1@test.com";
         contactGroup.migrateFromDlist(dlist);
         
         contactGroup = reEncode(contactGroup);
@@ -403,7 +403,7 @@ public class TestContactGroup {
         
         member = members.get(1);
         assertEquals(Member.Type.INLINE, member.getType());
-        assertEquals("\"Davidson, Ross\" <rossd@example.zimbra.com>", member.getValue());
+        assertEquals("\"Davidson, Ross\" <rossd@example.zmail.com>", member.getValue());
         
         member = members.get(2);
         assertEquals(Member.Type.INLINE, member.getType());
@@ -419,8 +419,8 @@ public class TestContactGroup {
         Map<String, Object> fields = new HashMap<String, Object>();
         fields.put(ContactConstants.A_fileAs, ContactConstants.FA_FIRST_LAST);
         fields.put(ContactConstants.A_firstName, "test");
-        fields.put(ContactConstants.A_email, "test1@zimbra.com");
-        fields.put(ContactConstants.A_workEmail1, "test2@zimbra.com");
+        fields.put(ContactConstants.A_email, "test1@zmail.com");
+        fields.put(ContactConstants.A_workEmail1, "test2@zmail.com");
         Contact contact = mbox.createContact(octxt, new ParsedContact(fields), Mailbox.ID_FOLDER_CONTACTS, null);
         
         Account galMember = Provisioning.getInstance().get(AccountBy.name, TestUtil.getAddress("user2"));
@@ -443,12 +443,12 @@ public class TestContactGroup {
         String dlist = contactGroup.migrateToDlist(mbox, octxt);
         
         // should be in member order
-        assertEquals("test1@zimbra.com, test2@zimbra.com, " + galEntryEmail + ", aaa@test.com, zzz@test.com", dlist);
+        assertEquals("test1@zmail.com, test2@zmail.com, " + galEntryEmail + ", aaa@test.com, zzz@test.com", dlist);
     }
     
     @Test
     @Ignore
-    public void zimbraDelimittedFields() throws Exception {
+    public void zmailDelimittedFields() throws Exception {
         Account acct = Provisioning.getInstance().get(AccountBy.name, TestUtil.getAddress("user1"));
        
         String relativePath = "/Contacts?fmt=cf&t=2&all";

@@ -16,21 +16,21 @@
 /**
  * @author apalaniswamy
  */
-package com.zimbra.cs.db;
+package org.zmail.cs.db;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Timestamp;
 
-import com.zimbra.common.util.Log;
-import com.zimbra.common.util.LogFactory;
+import org.zmail.common.util.Log;
+import org.zmail.common.util.LogFactory;
 
-import com.zimbra.common.localconfig.DebugConfig;
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.cs.db.DbPool.DbConnection;
-import com.zimbra.cs.mailbox.Mailbox;
-import com.zimbra.cs.mailbox.MailboxManager;
+import org.zmail.common.localconfig.DebugConfig;
+import org.zmail.common.service.ServiceException;
+import org.zmail.cs.db.DbPool.DbConnection;
+import org.zmail.cs.mailbox.Mailbox;
+import org.zmail.cs.mailbox.MailboxManager;
 
 // TODO mailbox migration between servers
 // TODO backup/restore
@@ -60,7 +60,7 @@ public class DbOutOfOffice {
         PreparedStatement stmt = null;
         ResultSet rs = null;
         try {
-            stmt = conn.prepareStatement("SELECT COUNT(*) FROM " + DbMailbox.qualifyZimbraTableName(mbox, TABLE_NAME) +
+            stmt = conn.prepareStatement("SELECT COUNT(*) FROM " + DbMailbox.qualifyZmailTableName(mbox, TABLE_NAME) +
                     " WHERE " + DbMailItem.IN_THIS_MAILBOX_AND + "sent_to = ? AND sent_on > ?");
             int pos = 1;
             pos = DbMailItem.setMailboxId(stmt, mbox, pos);
@@ -116,7 +116,7 @@ public class DbOutOfOffice {
         PreparedStatement stmt = null;
         try {
             String command = Db.supports(Db.Capability.REPLACE_INTO) ? "REPLACE" : "INSERT";
-            stmt = conn.prepareStatement(command + " INTO " + DbMailbox.qualifyZimbraTableName(mbox, TABLE_NAME) +
+            stmt = conn.prepareStatement(command + " INTO " + DbMailbox.qualifyZmailTableName(mbox, TABLE_NAME) +
                     "(" + DbMailItem.MAILBOX_ID + "sent_to, sent_on)" +
                     " VALUES (" + DbMailItem.MAILBOX_ID_VALUE +" ?, ?) ");
             int pos = 1;
@@ -138,7 +138,7 @@ public class DbOutOfOffice {
                 try {
                     stmt.close();
 
-                    stmt = conn.prepareStatement("UPDATE " + DbMailbox.qualifyZimbraTableName(mbox, TABLE_NAME) +
+                    stmt = conn.prepareStatement("UPDATE " + DbMailbox.qualifyZmailTableName(mbox, TABLE_NAME) +
                             " SET sent_on = ?" +
                             " WHERE " + DbMailItem.IN_THIS_MAILBOX_AND + "sent_to = ?");
                     int pos = 1;
@@ -171,7 +171,7 @@ public class DbOutOfOffice {
         PreparedStatement stmt = null;
         ResultSet rs = null;
         try {
-            stmt = conn.prepareStatement("DELETE FROM " + DbMailbox.qualifyZimbraTableName(mbox, TABLE_NAME) +
+            stmt = conn.prepareStatement("DELETE FROM " + DbMailbox.qualifyZmailTableName(mbox, TABLE_NAME) +
                     (DebugConfig.disableMailboxGroups ? "" : " WHERE mailbox_id = ?"));
             DbMailItem.setMailboxId(stmt, mbox, 1);
             int num = stmt.executeUpdate();

@@ -12,7 +12,7 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.dav;
+package org.zmail.cs.dav;
 
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
@@ -35,33 +35,33 @@ import org.dom4j.DocumentHelper;
 import org.dom4j.Element;
 import org.dom4j.QName;
 
-import com.zimbra.client.ZFolder;
-import com.zimbra.client.ZMailbox;
-import com.zimbra.client.ZMountpoint;
-import com.zimbra.common.account.Key;
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.common.util.HttpUtil;
-import com.zimbra.common.util.Pair;
-import com.zimbra.common.util.ZimbraLog;
-import com.zimbra.cs.account.Account;
-import com.zimbra.cs.account.AuthToken;
-import com.zimbra.cs.account.Provisioning;
-import com.zimbra.cs.dav.resource.AddressObject;
-import com.zimbra.cs.dav.resource.CalendarObject;
-import com.zimbra.cs.dav.resource.Collection;
-import com.zimbra.cs.dav.resource.DavResource;
-import com.zimbra.cs.dav.resource.UrlNamespace;
-import com.zimbra.cs.dav.resource.UrlNamespace.UrlComponents;
-import com.zimbra.cs.dav.service.DavResponse;
-import com.zimbra.cs.dav.service.DavServlet;
-import com.zimbra.cs.mailbox.MailItem;
-import com.zimbra.cs.mailbox.Mailbox;
-import com.zimbra.cs.mailbox.MailboxManager;
-import com.zimbra.cs.mailbox.OperationContext;
-import com.zimbra.cs.service.AuthProvider;
-import com.zimbra.cs.service.FileUploadServlet;
-import com.zimbra.cs.service.util.ItemId;
-import com.zimbra.cs.util.AccountUtil;
+import org.zmail.client.ZFolder;
+import org.zmail.client.ZMailbox;
+import org.zmail.client.ZMountpoint;
+import org.zmail.common.account.Key;
+import org.zmail.common.service.ServiceException;
+import org.zmail.common.util.HttpUtil;
+import org.zmail.common.util.Pair;
+import org.zmail.common.util.ZmailLog;
+import org.zmail.cs.account.Account;
+import org.zmail.cs.account.AuthToken;
+import org.zmail.cs.account.Provisioning;
+import org.zmail.cs.dav.resource.AddressObject;
+import org.zmail.cs.dav.resource.CalendarObject;
+import org.zmail.cs.dav.resource.Collection;
+import org.zmail.cs.dav.resource.DavResource;
+import org.zmail.cs.dav.resource.UrlNamespace;
+import org.zmail.cs.dav.resource.UrlNamespace.UrlComponents;
+import org.zmail.cs.dav.service.DavResponse;
+import org.zmail.cs.dav.service.DavServlet;
+import org.zmail.cs.mailbox.MailItem;
+import org.zmail.cs.mailbox.Mailbox;
+import org.zmail.cs.mailbox.MailboxManager;
+import org.zmail.cs.mailbox.OperationContext;
+import org.zmail.cs.service.AuthProvider;
+import org.zmail.cs.service.FileUploadServlet;
+import org.zmail.cs.service.util.ItemId;
+import org.zmail.cs.util.AccountUtil;
 
 /**
  * 
@@ -396,7 +396,7 @@ public class DavContext {
 		if (hdr.equalsIgnoreCase("infinity"))
 			return Depth.infinity;
 		
-		ZimbraLog.dav.info("invalid depth: "+hdr);
+		ZmailLog.dav.info("invalid depth: "+hdr);
 		return Depth.zero;
 	}
 
@@ -418,7 +418,7 @@ public class DavContext {
                 name = getItem();
 			try {			 
 			    mUpload = FileUploadServlet.saveUpload(mReq.getInputStream(), name, ctype, mAuthAccount.getId(), true);
-                ZimbraLog.dav.debug("Request: requested content-type: %s, actual content-type: %s", ctype, mUpload.getContentType());
+                ZmailLog.dav.debug("Request: requested content-type: %s, actual content-type: %s", ctype, mUpload.getContentType());
 			} catch (ServiceException se) {
 				throw new DavException("can't save upload", HttpServletResponse.SC_REQUEST_ENTITY_TOO_LARGE, se);
 			}
@@ -441,7 +441,7 @@ public class DavContext {
 			return mRequestMsg;
 		try {
 			if (hasRequestMessage()) {
-				mRequestMsg = com.zimbra.common.soap.Element.getSAXReader().read(getUpload().getInputStream());
+				mRequestMsg = org.zmail.common.soap.Element.getSAXReader().read(getUpload().getInputStream());
 				return mRequestMsg;
 			}
 		} catch (DocumentException e) {
@@ -471,7 +471,7 @@ public class DavContext {
             else
                 mRequestedResource = UrlNamespace.getPrincipalAtUrl(this, mUri);
 			if (mRequestedResource != null)
-				ZimbraLog.addToContext(ZimbraLog.C_NAME, mRequestedResource.getOwner());
+				ZmailLog.addToContext(ZmailLog.C_NAME, mRequestedResource.getOwner());
 		}
 		if (mRequestedResource == null)
 		    throw new DavException("no DAV resource at "+mUri, HttpServletResponse.SC_NOT_FOUND, null);
@@ -491,7 +491,7 @@ public class DavContext {
         else {
             DavResource rs = UrlNamespace.getPrincipalAtUrl(this, mUri);
 			if (rs != null) {
-				ZimbraLog.addToContext(ZimbraLog.C_NAME, rs.getOwner());
+				ZmailLog.addToContext(ZmailLog.C_NAME, rs.getOwner());
 				rss.add(rs);
 				if (getDepth() == Depth.one)
 					rss.addAll(rs.getChildren(this));
@@ -563,7 +563,7 @@ public class DavContext {
 
     public boolean isSchedulingEnabled() {
 		try {
-			return !Provisioning.getInstance().getConfig().getBooleanAttr(Provisioning.A_zimbraCalendarCalDavDisableScheduling, false);
+			return !Provisioning.getInstance().getConfig().getBooleanAttr(Provisioning.A_zmailCalendarCalDavDisableScheduling, false);
 		} catch (ServiceException se) {
 			return false;
 		}
@@ -571,7 +571,7 @@ public class DavContext {
 	
 	public boolean isFreebusyEnabled() {
 		try {
-			return !Provisioning.getInstance().getConfig().getBooleanAttr(Provisioning.A_zimbraCalendarCalDavDisableFreebusy, false);
+			return !Provisioning.getInstance().getConfig().getBooleanAttr(Provisioning.A_zmailCalendarCalDavDisableFreebusy, false);
 		} catch (ServiceException se) {
 			return false;
 		}
@@ -679,7 +679,7 @@ public class DavContext {
         try {
             newName = URLDecoder.decode(newName, "UTF-8");
         } catch (UnsupportedEncodingException e) {
-            ZimbraLog.dav.warn("can't decode URL ", dest, e);
+            ZmailLog.dav.warn("can't decode URL ", dest, e);
         }
         if (oldName.equals(newName) == false)
             return newName;

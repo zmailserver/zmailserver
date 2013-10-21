@@ -14,31 +14,31 @@
 # ***** END LICENSE BLOCK *****
 # 
 
-if [ x`whoami` != xzimbra ]; then
-  echo Error: must be run as zimbra user
+if [ x`whoami` != xzmail ]; then
+  echo Error: must be run as zmail user
   exit 1
 fi
 
-if [ ! -L "/opt/zimbra/clamav" ]; then
+if [ ! -L "/opt/zmail/clamav" ]; then
   exit 0
 fi
 
-platform=`/opt/zimbra/libexec/get_plat_tag.sh`
+platform=`/opt/zmail/libexec/get_plat_tag.sh`
 
 source `dirname $0`/zmshutil || exit 1
 zmsetvars \
-  zimbra_home \
-  zimbra_log_directory
+  zmail_home \
+  zmail_log_directory
 
 
-pidfile=${zimbra_log_directory}/clamd.pid
+pidfile=${zmail_log_directory}/clamd.pid
 
-if [ ! -d "/opt/zimbra/data/clamav/db" ]; then
-    mkdir -p /opt/zimbra/data/clamav/db
+if [ ! -d "/opt/zmail/data/clamav/db" ]; then
+    mkdir -p /opt/zmail/data/clamav/db
 fi
 
 rewriteconfig() {
-  /opt/zimbra/libexec/configrewrite antivirus > /dev/null 2>&1
+  /opt/zmail/libexec/configrewrite antivirus > /dev/null 2>&1
 }
 
 getpid() {
@@ -82,12 +82,12 @@ pskillall() {
 case "$1" in
   'start')
 
-    if [ ! -f ${zimbra_home}/data/clamav/db/daily.cvd ]; then
+    if [ ! -f ${zmail_home}/data/clamav/db/daily.cvd ]; then
       # Start with the files we ship.
-      cp -f ${zimbra_home}/clamav/db/daily.cvd.init \
-        ${zimbra_home}/data/clamav/db/daily.cvd
-      cp -f ${zimbra_home}/clamav/db/main.cvd.init \
-        ${zimbra_home}/data/clamav/db/main.cvd
+      cp -f ${zmail_home}/clamav/db/daily.cvd.init \
+        ${zmail_home}/data/clamav/db/daily.cvd
+      cp -f ${zmail_home}/clamav/db/main.cvd.init \
+        ${zmail_home}/data/clamav/db/main.cvd
     fi
     if [ x$2 = "x" ]; then
       rewriteconfig
@@ -98,9 +98,9 @@ case "$1" in
     if [ $running = 1 ]; then
       echo "clamd is already running.";
     else
-      ${zimbra_home}/clamav/sbin/clamd \
-        --config-file=${zimbra_home}/conf/clamd.conf \
-          >> ${zimbra_log_directory}/clamd.log 2>&1 &
+      ${zmail_home}/clamav/sbin/clamd \
+        --config-file=${zmail_home}/conf/clamd.conf \
+          >> ${zmail_log_directory}/clamd.log 2>&1 &
   
       for ((i = 0; i < 12; i++)); do
         checkrunning
@@ -117,11 +117,11 @@ case "$1" in
    ;;
   
   'kill')
-    if [ -f /opt/zimbra/log/clamd.pid ]; then
-      cpid=`cat /opt/zimbra/log/clamd.pid`
+    if [ -f /opt/zmail/log/clamd.pid ]; then
+      cpid=`cat /opt/zmail/log/clamd.pid`
       kill -9 "$cpid" 2> /dev/null
     fi
-    pskillall -9 ${zimbra_home}/clamav/sbin/clamd
+    pskillall -9 ${zmail_home}/clamav/sbin/clamd
     exit 0
    ;;
 

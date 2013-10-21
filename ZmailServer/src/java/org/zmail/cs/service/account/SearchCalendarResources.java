@@ -13,34 +13,34 @@
  * ***** END LICENSE BLOCK *****
  */
 
-package com.zimbra.cs.service.account;
+package org.zmail.cs.service.account;
 
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 
-import com.zimbra.common.localconfig.LC;
-import com.zimbra.common.mailbox.ContactConstants;
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.common.soap.AccountConstants;
-import com.zimbra.common.soap.MailConstants;
-import com.zimbra.common.soap.Element;
-import com.zimbra.common.util.StringUtil;
-import com.zimbra.cs.account.Account;
-import com.zimbra.cs.account.EntrySearchFilter;
-import com.zimbra.cs.account.GalContact;
-import com.zimbra.cs.account.Provisioning;
-import com.zimbra.cs.account.ldap.LdapEntrySearchFilter.LdapQueryVisitor;
-import com.zimbra.cs.gal.GalExtraSearchFilter;
-import com.zimbra.cs.gal.GalExtraSearchFilter.FilteredGalSearchResultCallback;
-import com.zimbra.cs.gal.GalExtraSearchFilter.GalExtraQueryCallback;
-import com.zimbra.cs.gal.GalSearchControl;
-import com.zimbra.cs.gal.GalSearchParams;
-import com.zimbra.cs.gal.GalSearchQueryCallback;
-import com.zimbra.cs.mailbox.Contact;
-import com.zimbra.soap.ZimbraSoapContext;
-import com.zimbra.soap.type.GalSearchType;
+import org.zmail.common.localconfig.LC;
+import org.zmail.common.mailbox.ContactConstants;
+import org.zmail.common.service.ServiceException;
+import org.zmail.common.soap.AccountConstants;
+import org.zmail.common.soap.MailConstants;
+import org.zmail.common.soap.Element;
+import org.zmail.common.util.StringUtil;
+import org.zmail.cs.account.Account;
+import org.zmail.cs.account.EntrySearchFilter;
+import org.zmail.cs.account.GalContact;
+import org.zmail.cs.account.Provisioning;
+import org.zmail.cs.account.ldap.LdapEntrySearchFilter.LdapQueryVisitor;
+import org.zmail.cs.gal.GalExtraSearchFilter;
+import org.zmail.cs.gal.GalExtraSearchFilter.FilteredGalSearchResultCallback;
+import org.zmail.cs.gal.GalExtraSearchFilter.GalExtraQueryCallback;
+import org.zmail.cs.gal.GalSearchControl;
+import org.zmail.cs.gal.GalSearchParams;
+import org.zmail.cs.gal.GalSearchQueryCallback;
+import org.zmail.cs.mailbox.Contact;
+import org.zmail.soap.ZmailSoapContext;
+import org.zmail.soap.type.GalSearchType;
 
 public class SearchCalendarResources extends GalDocumentHandler {
 
@@ -51,8 +51,8 @@ public class SearchCalendarResources extends GalDocumentHandler {
 
     @Override
     public Element handle(Element request, Map<String, Object> context) throws ServiceException {
-        ZimbraSoapContext zsc = getZimbraSoapContext(context);
-        Account account = getRequestedAccount(getZimbraSoapContext(context));
+        ZmailSoapContext zsc = getZmailSoapContext(context);
+        Account account = getRequestedAccount(getZmailSoapContext(context));
 
         if (!canAccessAccount(zsc, account))
             throw ServiceException.PERM_DENIED("can not access account");
@@ -60,7 +60,7 @@ public class SearchCalendarResources extends GalDocumentHandler {
         return searchGal(zsc, account, request);
     }
 
-    private static Element searchGal(ZimbraSoapContext zsc, Account account, Element request) 
+    private static Element searchGal(ZmailSoapContext zsc, Account account, Element request) 
     throws ServiceException {
         
         Element name = request.getOptionalElement(AccountConstants.E_NAME);
@@ -107,7 +107,7 @@ public class SearchCalendarResources extends GalDocumentHandler {
         }
         
         /*
-         * Return an extra query for Zimbra GAL LDAP search
+         * Return an extra query for Zmail GAL LDAP search
          * 
          * Each terminal term in the filter is mapped to a term in the generated LDAP query as:
          * ({term.getLhs()} op {term.getRhs()}) 
@@ -115,7 +115,7 @@ public class SearchCalendarResources extends GalDocumentHandler {
          * To use this method, getRhs() of each terminal term in the filter must be 
          * an actual LDAP attribute name 
          */
-        public String getZimbraLdapSearchQuery() {
+        public String getZmailLdapSearchQuery() {
             LdapQueryVisitor visitor = new LdapQueryVisitor();
             filter.traverse(visitor);
             String query = visitor.getFilter();
@@ -131,7 +131,7 @@ public class SearchCalendarResources extends GalDocumentHandler {
         
         @Override
         public Element handleContact(Contact contact) throws ServiceException {
-            com.zimbra.cs.service.account.ToXML.encodeCalendarResource(getResponse(), 
+            org.zmail.cs.service.account.ToXML.encodeCalendarResource(getResponse(), 
                     mFormatter.formatItemId(contact), contact.get(ContactConstants.A_email), 
                     contact.getAllFields(), neededAttrs(), null);
             return null; // return null because we don't want the sort field (sf) attr added to each hit
@@ -140,11 +140,11 @@ public class SearchCalendarResources extends GalDocumentHandler {
         @Override
         public void handleContact(GalContact galContact) throws ServiceException {
             /*
-             * entries found in Zimbra GAL is already filtered by the extra search query
+             * entries found in Zmail GAL is already filtered by the extra search query
              * entries found in external GAL needs to be filtered for the extra criteria
              */
-            if (galContact.isZimbraGal() || matched(galContact)) {
-                com.zimbra.cs.service.account.ToXML.encodeCalendarResource(getResponse(), 
+            if (galContact.isZmailGal() || matched(galContact)) {
+                org.zmail.cs.service.account.ToXML.encodeCalendarResource(getResponse(), 
                         galContact.getId(), galContact.getSingleAttr(ContactConstants.A_email), 
                         galContact.getAttrs(), neededAttrs(), null);
             }

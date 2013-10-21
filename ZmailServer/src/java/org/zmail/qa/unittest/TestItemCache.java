@@ -13,19 +13,19 @@
  * ***** END LICENSE BLOCK *****
  */
 
-package com.zimbra.qa.unittest;
+package org.zmail.qa.unittest;
 
 import java.util.List;
 
 import junit.framework.TestCase;
 
-import com.zimbra.cs.account.Account;
-import com.zimbra.cs.mailbox.MailItem;
-import com.zimbra.cs.mailbox.Mailbox;
-import com.zimbra.cs.mailbox.MailboxManager;
-import com.zimbra.cs.mailbox.Message;
-import com.zimbra.cs.stats.ZimbraPerf;
-import com.zimbra.common.util.ZimbraLog;
+import org.zmail.cs.account.Account;
+import org.zmail.cs.mailbox.MailItem;
+import org.zmail.cs.mailbox.Mailbox;
+import org.zmail.cs.mailbox.MailboxManager;
+import org.zmail.cs.mailbox.Message;
+import org.zmail.cs.stats.ZmailPerf;
+import org.zmail.common.util.ZmailLog;
 
 /**
  * @author bburtin
@@ -36,7 +36,7 @@ public class TestItemCache extends TestCase {
 
     @Override
     protected void setUp() throws Exception {
-        ZimbraLog.test.debug("TestTags.setUp()");
+        ZmailLog.test.debug("TestTags.setUp()");
         super.setUp();
 
         mAccount = TestUtil.getAccount("user1");
@@ -47,19 +47,19 @@ public class TestItemCache extends TestCase {
      * Re-gets the same message 10 times and makes sure we don't hit the database.
      */
     public void testCacheHit() throws Exception {
-        ZimbraLog.test.debug("testCacheHit");
+        ZmailLog.test.debug("testCacheHit");
 
         List<MailItem> messages = mMbox.getItemList(null, MailItem.Type.MESSAGE);
         assertTrue("No messages found", messages.size() > 0);
         Message msg = (Message) messages.get(0);
         mMbox.getItemById(null, msg.getId(), msg.getType());
 
-        int prepareCount = ZimbraPerf.getPrepareCount();
+        int prepareCount = ZmailPerf.getPrepareCount();
         for (int i = 1; i <= 10; i++) {
             mMbox.getItemById(null, msg.getId(), msg.getType());
         }
 
-        prepareCount = ZimbraPerf.getPrepareCount() - prepareCount;
+        prepareCount = ZmailPerf.getPrepareCount() - prepareCount;
         assertEquals("Detected unexpected SQL statements.",
             0, prepareCount);
     }

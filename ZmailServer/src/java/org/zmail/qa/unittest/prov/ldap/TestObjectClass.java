@@ -12,7 +12,7 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.qa.unittest.prov.ldap;
+package org.zmail.qa.unittest.prov.ldap;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
@@ -24,9 +24,9 @@ import org.junit.AfterClass;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
-import com.zimbra.cs.account.Provisioning;
-import com.zimbra.cs.account.ldap.LdapObjectClassHierarchy;
-import com.zimbra.cs.account.ldap.LdapProv;
+import org.zmail.cs.account.Provisioning;
+import org.zmail.cs.account.ldap.LdapObjectClassHierarchy;
+import org.zmail.cs.account.ldap.LdapProv;
 
 public class TestObjectClass extends LdapTest {
     
@@ -50,7 +50,7 @@ public class TestObjectClass extends LdapTest {
         
         assertEquals("inetOrgPerson" , 
                 LdapObjectClassHierarchy.getMostSpecificOC(ldapProv, 
-                        new String[]{"zimbraAccount", "organizationalPerson", "person"}, "inetOrgPerson"));
+                        new String[]{"zmailAccount", "organizationalPerson", "person"}, "inetOrgPerson"));
         
         assertEquals("inetOrgPerson" , 
                 LdapObjectClassHierarchy.getMostSpecificOC(ldapProv, 

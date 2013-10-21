@@ -12,12 +12,12 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.qa.unittest.prov.soap;
+package org.zmail.qa.unittest.prov.soap;
 
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.common.soap.AdminConstants;
-import com.zimbra.cs.account.soap.SoapProvisioning;
-import com.zimbra.qa.unittest.prov.ProvTestUtil;
+import org.zmail.common.service.ServiceException;
+import org.zmail.common.soap.AdminConstants;
+import org.zmail.cs.account.soap.SoapProvisioning;
+import org.zmail.qa.unittest.prov.ProvTestUtil;
 
 public class SoapProvTestUtil extends ProvTestUtil {
     

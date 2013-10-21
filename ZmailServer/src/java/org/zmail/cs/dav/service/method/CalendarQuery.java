@@ -12,7 +12,7 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.dav.service.method;
+package org.zmail.cs.dav.service.method;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -22,19 +22,19 @@ import javax.servlet.http.HttpServletResponse;
 import org.dom4j.Element;
 import org.dom4j.QName;
 
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.common.util.ZimbraLog;
-import com.zimbra.cs.dav.DavContext;
-import com.zimbra.cs.dav.DavContext.RequestProp;
-import com.zimbra.cs.dav.DavElements;
-import com.zimbra.cs.dav.DavException;
-import com.zimbra.cs.dav.caldav.Range.ExpandRange;
-import com.zimbra.cs.dav.caldav.Range.TimeRange;
-import com.zimbra.cs.dav.caldav.Filter.CompFilter;
-import com.zimbra.cs.dav.resource.CalendarCollection;
-import com.zimbra.cs.dav.resource.CalendarObject;
-import com.zimbra.cs.dav.resource.DavResource;
-import com.zimbra.cs.dav.service.DavResponse;
+import org.zmail.common.service.ServiceException;
+import org.zmail.common.util.ZmailLog;
+import org.zmail.cs.dav.DavContext;
+import org.zmail.cs.dav.DavContext.RequestProp;
+import org.zmail.cs.dav.DavElements;
+import org.zmail.cs.dav.DavException;
+import org.zmail.cs.dav.caldav.Range.ExpandRange;
+import org.zmail.cs.dav.caldav.Range.TimeRange;
+import org.zmail.cs.dav.caldav.Filter.CompFilter;
+import org.zmail.cs.dav.resource.CalendarCollection;
+import org.zmail.cs.dav.resource.CalendarObject;
+import org.zmail.cs.dav.resource.DavResource;
+import org.zmail.cs.dav.service.DavResponse;
 
 /*
  * draft-dusseault-caldav section 9.5
@@ -82,7 +82,7 @@ public class CalendarQuery extends Report {
 			    calobj.expand(ctxt.expandRange);
 			resp.addResource(ctxt.davCtxt, calItem, ctxt.props, false);
 		} catch (DavException de) {
-			ZimbraLog.dav.error("can't get calendar item data", de);
+			ZmailLog.dav.error("can't get calendar item data", de);
 		}
 	}
 	

@@ -12,7 +12,7 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.account.callback;
+package org.zmail.cs.account.callback;
 
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -20,25 +20,25 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-import com.zimbra.common.localconfig.LC;
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.common.util.DateUtil;
-import com.zimbra.common.util.ZimbraLog;
-import com.zimbra.cs.account.Account;
-import com.zimbra.cs.account.AttributeCallback;
-import com.zimbra.cs.account.Cos;
-import com.zimbra.cs.account.DataSource;
-import com.zimbra.cs.account.Entry;
-import com.zimbra.cs.account.Provisioning;
-import com.zimbra.cs.account.SearchAccountsOptions;
-import com.zimbra.common.account.Key.AccountBy;
-import com.zimbra.cs.account.ldap.LdapProv;
-import com.zimbra.cs.datasource.DataSourceManager;
-import com.zimbra.cs.db.DbMailbox;
-import com.zimbra.cs.db.DbPool;
-import com.zimbra.cs.db.DbPool.DbConnection;
-import com.zimbra.cs.ldap.ZLdapFilterFactory;
-import com.zimbra.cs.util.Zimbra;
+import org.zmail.common.localconfig.LC;
+import org.zmail.common.service.ServiceException;
+import org.zmail.common.util.DateUtil;
+import org.zmail.common.util.ZmailLog;
+import org.zmail.cs.account.Account;
+import org.zmail.cs.account.AttributeCallback;
+import org.zmail.cs.account.Cos;
+import org.zmail.cs.account.DataSource;
+import org.zmail.cs.account.Entry;
+import org.zmail.cs.account.Provisioning;
+import org.zmail.cs.account.SearchAccountsOptions;
+import org.zmail.common.account.Key.AccountBy;
+import org.zmail.cs.account.ldap.LdapProv;
+import org.zmail.cs.datasource.DataSourceManager;
+import org.zmail.cs.db.DbMailbox;
+import org.zmail.cs.db.DbPool;
+import org.zmail.cs.db.DbPool.DbConnection;
+import org.zmail.cs.ldap.ZLdapFilterFactory;
+import org.zmail.cs.util.Zmail;
 
 /**
  * Validates <tt>DataSource</tt> attribute values.
@@ -48,14 +48,14 @@ public class DataSourceCallback extends AttributeCallback {
     private static final Set<String> INTERVAL_ATTRS = new HashSet<String>();
 
     static {
-        INTERVAL_ATTRS.add(Provisioning.A_zimbraDataSourcePollingInterval);
-        INTERVAL_ATTRS.add(Provisioning.A_zimbraDataSourcePop3PollingInterval);
-        INTERVAL_ATTRS.add(Provisioning.A_zimbraDataSourceImapPollingInterval);
-        INTERVAL_ATTRS.add(Provisioning.A_zimbraDataSourceLivePollingInterval);
-        INTERVAL_ATTRS.add(Provisioning.A_zimbraDataSourceRssPollingInterval);
-        INTERVAL_ATTRS.add(Provisioning.A_zimbraDataSourceCaldavPollingInterval);
-        INTERVAL_ATTRS.add(Provisioning.A_zimbraDataSourceYabPollingInterval);
-        INTERVAL_ATTRS.add(Provisioning.A_zimbraDataSourceCalendarPollingInterval);
+        INTERVAL_ATTRS.add(Provisioning.A_zmailDataSourcePollingInterval);
+        INTERVAL_ATTRS.add(Provisioning.A_zmailDataSourcePop3PollingInterval);
+        INTERVAL_ATTRS.add(Provisioning.A_zmailDataSourceImapPollingInterval);
+        INTERVAL_ATTRS.add(Provisioning.A_zmailDataSourceLivePollingInterval);
+        INTERVAL_ATTRS.add(Provisioning.A_zmailDataSourceRssPollingInterval);
+        INTERVAL_ATTRS.add(Provisioning.A_zmailDataSourceCaldavPollingInterval);
+        INTERVAL_ATTRS.add(Provisioning.A_zmailDataSourceYabPollingInterval);
+        INTERVAL_ATTRS.add(Provisioning.A_zmailDataSourceCalendarPollingInterval);
     }
 
     /**
@@ -85,7 +85,7 @@ public class DataSourceCallback extends AttributeCallback {
     @Override 
     public void postModify(CallbackContext context, String attrName, Entry entry) {
         // Don't do anything unless inside the server
-        if (!Zimbra.started() || !LC.data_source_scheduling_enabled.booleanValue()) {
+        if (!Zmail.started() || !LC.data_source_scheduling_enabled.booleanValue()) {
             return;
         }
         
@@ -94,7 +94,7 @@ public class DataSourceCallback extends AttributeCallback {
         if (context.isCreate() && (entry instanceof Cos))
             return;
 
-        if (INTERVAL_ATTRS.contains(attrName) || Provisioning.A_zimbraDataSourceEnabled.equals(attrName)) {
+        if (INTERVAL_ATTRS.contains(attrName) || Provisioning.A_zmailDataSourceEnabled.equals(attrName)) {
             // Update schedules for any affected data sources
             try {
                 if (entry instanceof DataSource) {
@@ -105,7 +105,7 @@ public class DataSourceCallback extends AttributeCallback {
                     scheduleCos((Cos) entry);
                 }
             } catch (ServiceException e) {
-                ZimbraLog.datasource.warn("Unable to update schedule for %s", entry, e);
+                ZmailLog.datasource.warn("Unable to update schedule for %s", entry, e);
             }
         } else if (entry instanceof DataSource) {
             // Reset error status on any attribute changes (bug 39050).
@@ -117,18 +117,18 @@ public class DataSourceCallback extends AttributeCallback {
     throws ServiceException {
         Account account = ds.getAccount();
         if (account == null) {
-            ZimbraLog.datasource.warn("Could not determine account for %s", ds);
+            ZmailLog.datasource.warn("Could not determine account for %s", ds);
             return;
         }
-        validateInterval(Provisioning.A_zimbraDataSourcePollingInterval,
-            newInterval, account.getAttr(Provisioning.A_zimbraDataSourceMinPollingInterval));
+        validateInterval(Provisioning.A_zmailDataSourcePollingInterval,
+            newInterval, account.getAttr(Provisioning.A_zmailDataSourceMinPollingInterval));
     }
 
     private void scheduleDataSource(DataSource ds)
     throws ServiceException {
         Account account = ds.getAccount();
         if (account == null) {
-            ZimbraLog.datasource.warn("Could not determine account for %s", ds);
+            ZmailLog.datasource.warn("Could not determine account for %s", ds);
             return;
         }
         DataSourceManager.updateSchedule(account, ds);
@@ -136,12 +136,12 @@ public class DataSourceCallback extends AttributeCallback {
 
     private void validateAccount(Account account, String attrName, String newInterval)
     throws ServiceException {
-        validateInterval(attrName, newInterval, account.getAttr(Provisioning.A_zimbraDataSourceMinPollingInterval));
+        validateInterval(attrName, newInterval, account.getAttr(Provisioning.A_zmailDataSourceMinPollingInterval));
     }
 
     private void scheduleAccount(Account account)
     throws ServiceException {
-        ZimbraLog.datasource.info("Updating schedule for all DataSources for account %s.", account.getName());
+        ZmailLog.datasource.info("Updating schedule for all DataSources for account %s.", account.getName());
         List<DataSource> dataSources = Provisioning.getInstance().getAllDataSources(account);
         for (DataSource ds : dataSources) {
             DataSourceManager.updateSchedule(account, ds);
@@ -150,7 +150,7 @@ public class DataSourceCallback extends AttributeCallback {
 
     private void validateCos(Cos cos, String attrName, String newInterval)
     throws ServiceException {
-        validateInterval(newInterval, attrName, cos.getAttr(Provisioning.A_zimbraDataSourceMinPollingInterval));
+        validateInterval(newInterval, attrName, cos.getAttr(Provisioning.A_zmailDataSourceMinPollingInterval));
     }
 
     /**
@@ -159,7 +159,7 @@ public class DataSourceCallback extends AttributeCallback {
      */
     private void scheduleCos(Cos cos)
     throws ServiceException {
-        ZimbraLog.datasource.info("Updating schedule for all DataSources for all accounts in COS %s.", cos.getName());
+        ZmailLog.datasource.info("Updating schedule for all DataSources for all accounts in COS %s.", cos.getName());
 
         List<Account> accts;
         Provisioning prov = Provisioning.getInstance();
@@ -200,7 +200,7 @@ public class DataSourceCallback extends AttributeCallback {
             try {
                 account = prov.get(AccountBy.id, accountId);
             } catch (ServiceException e) {
-                ZimbraLog.datasource.debug("Unable to look up account for id %s: %s", accountId, e.toString());
+                ZmailLog.datasource.debug("Unable to look up account for id %s: %s", accountId, e.toString());
             }
 
             if (account != null) {

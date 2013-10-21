@@ -12,7 +12,7 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.account;
+package org.zmail.cs.account;
 
 import java.util.Map;
 import java.util.Set;
@@ -28,15 +28,15 @@ public class Zimlet extends NamedEntry {
     }
     
     public boolean isEnabled() {
-        return getBooleanAttr(Provisioning.A_zimbraZimletEnabled, false);
+        return getBooleanAttr(Provisioning.A_zmailZimletEnabled, false);
     }
     
     public String getPriority() {
-        return getAttr(Provisioning.A_zimbraZimletPriority);
+        return getAttr(Provisioning.A_zmailZimletPriority);
     }
     
     public boolean isExtension() {
-        return getBooleanAttr(Provisioning.A_zimbraZimletIsExtension, false);
+        return getBooleanAttr(Provisioning.A_zmailZimletIsExtension, false);
     }
 
     public String getType() {
@@ -44,28 +44,28 @@ public class Zimlet extends NamedEntry {
     }
     
     public String getDescription() {
-        return getAttr(Provisioning.A_zimbraZimletDescription);
+        return getAttr(Provisioning.A_zmailZimletDescription);
     }
     
     public boolean isIndexingEnabled() {
-        return getBooleanAttr(Provisioning.A_zimbraZimletIndexingEnabled, false);
+        return getBooleanAttr(Provisioning.A_zmailZimletIndexingEnabled, false);
     }
     
     public String getHandlerClassName() {
-        return getAttr(Provisioning.A_zimbraZimletHandlerClass);
+        return getAttr(Provisioning.A_zmailZimletHandlerClass);
     }
     
     public String getHandlerConfig() {
-        return getAttr(Provisioning.A_zimbraZimletHandlerConfig);
+        return getAttr(Provisioning.A_zmailZimletHandlerConfig);
     }
 
     public String getServerIndexRegex() {
-        return getAttr(Provisioning.A_zimbraZimletServerIndexRegex);
+        return getAttr(Provisioning.A_zmailZimletServerIndexRegex);
     }
     
 	
 	public boolean checkTarget(String target) {
-		Set<String> lTiers = getMultiAttrSet(Provisioning.A_zimbraZimletTarget); 
+		Set<String> lTiers = getMultiAttrSet(Provisioning.A_zmailZimletTarget); 
 		return ((lTiers == null) ? false : lTiers.contains(target));
 	}
 

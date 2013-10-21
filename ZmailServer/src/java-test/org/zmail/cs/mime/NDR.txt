@@ -80,7 +80,7 @@ Message-ID: <99f8e5ee-919f-4d41-846c-7c69a85bfcf3@str1.example.com>
 Content-Type: multipart/alternative;
 	boundary="=_b64d626a-a218-43fd-a4f0-d522f0f84355"
 MIME-Version: 1.0
-X-Mailer: Zimbra 7.1.3_GA_3374 (ZimbraWebClient - IE7 (Win)/7.1.3_GA_3346)
+X-Mailer: Zmail 7.1.3_GA_3374 (ZmailWebClient - IE7 (Win)/7.1.3_GA_3346)
 
 --=_b64d626a-a218-43fd-a4f0-d522f0f84355
 Content-Type: text/plain; charset="utf-8"

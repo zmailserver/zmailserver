@@ -20,17 +20,17 @@
 # smtp_source <email address>
 # smtp_destination <email address>
 
-source "/opt/zimbra/bin/zmshutil" || exit 1
+source "/opt/zmail/bin/zmshutil" || exit 1
 zmsetvars \
-	zimbra_server_hostname \
+	zmail_server_hostname \
 	snmp_notify \
 	smtp_notify 
 
 if [ ${snmp_notify} = "1" ]; then
 	zmsetvars \
 		snmp_trap_host 
-	SOURCEFILE=/opt/zimbra/snmp/share/snmp/snmpd.conf.in
-	FILE=/opt/zimbra/conf/snmpd.conf
+	SOURCEFILE=/opt/zmail/snmp/share/snmp/snmpd.conf.in
+	FILE=/opt/zmail/conf/snmpd.conf
 	echo creating $FILE
 	cat ${SOURCEFILE} | sed -e "s/@@SNMPHOST@@/${snmp_trap_host}/g" > ${FILE}
 fi
@@ -47,7 +47,7 @@ if [ ${smtp_notify} = "1" ]; then
 	smtp_destination=`echo ${smtp_destination} | sed -e 's/@/\\\\\\\@/'`
 fi
 
-SWFILE=/opt/zimbra/conf/swatchrc
+SWFILE=/opt/zmail/conf/swatchrc
 
 echo creating $SWFILE
 cat ${SWFILE}.in | \
@@ -55,5 +55,5 @@ cat ${SWFILE}.in | \
 	-e "s/@@DOSMTPNOTIFICATIONS@@/${smtp_notify}/g" \
 	-e "s/@@ADMINEMAIL@@/${smtp_source}/g" \
 	-e "s/@@PHCEMAIL@@/${smtp_destination}/g" \
-	-e "s/@@HOSTNAME@@/${zimbra_server_hostname}/g" \
+	-e "s/@@HOSTNAME@@/${zmail_server_hostname}/g" \
 	> ${SWFILE}

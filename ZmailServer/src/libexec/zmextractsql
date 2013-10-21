@@ -24,10 +24,10 @@ use English;
 
 # Options
 my $usage = 0;
-my $logDir = "/opt/zimbra/log";
+my $logDir = "/opt/zmail/log";
 
 if ($^O !~ /MSWin/i) {
-    $logDir = `zmlocalconfig -x -m nokey zimbra_log_directory`;
+    $logDir = `zmlocalconfig -x -m nokey zmail_log_directory`;
     chomp $logDir;
 }
 

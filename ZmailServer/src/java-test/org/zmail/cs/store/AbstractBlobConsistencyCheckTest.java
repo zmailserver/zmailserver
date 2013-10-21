@@ -14,7 +14,7 @@
  * 
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.store;
+package org.zmail.cs.store;
 
 import java.io.IOException;
 import java.util.Collection;
@@ -27,25 +27,25 @@ import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.common.util.Log;
-import com.zimbra.common.util.ZimbraLog;
-import com.zimbra.cs.account.MockProvisioning;
-import com.zimbra.cs.account.Provisioning;
-import com.zimbra.cs.mailbox.DeliveryOptions;
-import com.zimbra.cs.mailbox.Mailbox;
-import com.zimbra.cs.mailbox.MailboxManager;
-import com.zimbra.cs.mailbox.MailboxTestUtil;
-import com.zimbra.cs.mailbox.Message;
-import com.zimbra.cs.mime.ParsedMessage;
-import com.zimbra.cs.store.file.BlobConsistencyChecker;
-import com.zimbra.cs.store.file.BlobConsistencyChecker.BlobInfo;
-import com.zimbra.cs.store.file.BlobConsistencyChecker.Results;
+import org.zmail.common.service.ServiceException;
+import org.zmail.common.util.Log;
+import org.zmail.common.util.ZmailLog;
+import org.zmail.cs.account.MockProvisioning;
+import org.zmail.cs.account.Provisioning;
+import org.zmail.cs.mailbox.DeliveryOptions;
+import org.zmail.cs.mailbox.Mailbox;
+import org.zmail.cs.mailbox.MailboxManager;
+import org.zmail.cs.mailbox.MailboxTestUtil;
+import org.zmail.cs.mailbox.Message;
+import org.zmail.cs.mime.ParsedMessage;
+import org.zmail.cs.store.file.BlobConsistencyChecker;
+import org.zmail.cs.store.file.BlobConsistencyChecker.BlobInfo;
+import org.zmail.cs.store.file.BlobConsistencyChecker.Results;
 
 public abstract class AbstractBlobConsistencyCheckTest {
 
     static StoreManager originalStoreManager;
-    protected final Log log = ZimbraLog.store;
+    protected final Log log = ZmailLog.store;
 
     protected abstract StoreManager getStoreManager();
     protected abstract BlobConsistencyChecker getChecker();
@@ -58,10 +58,10 @@ public abstract class AbstractBlobConsistencyCheckTest {
     public static void init() throws Exception {
         MailboxTestUtil.initServer();
         MailboxTestUtil.initProvisioning();
-        Provisioning.getInstance().createAccount("test@zimbra.com", "secret", new HashMap<String, Object>());
+        Provisioning.getInstance().createAccount("test@zmail.com", "secret", new HashMap<String, Object>());
         //don't fail test even if native libraries not installed
         //this makes it easier to run unit tests from command line
-        System.setProperty("zimbra.native.required", "false");
+        System.setProperty("zmail.native.required", "false");
     }
 
     @Before
@@ -79,7 +79,7 @@ public abstract class AbstractBlobConsistencyCheckTest {
         Mailbox mbox = MailboxManager.getInstance().getMailboxByAccountId(MockProvisioning.DEFAULT_ACCOUNT_ID);
 
         DeliveryOptions dopt = new DeliveryOptions().setFolderId(Mailbox.ID_FOLDER_INBOX);
-        mbox.addMessage(null, new ParsedMessage("From: test1-1@sub1.zimbra.com".getBytes(), false), dopt, null);
+        mbox.addMessage(null, new ParsedMessage("From: test1-1@sub1.zmail.com".getBytes(), false), dopt, null);
 
         BlobConsistencyChecker checker = getChecker();
         Results results = checker.check(getVolumeIds(), mbox.getId(), true, false);
@@ -97,7 +97,7 @@ public abstract class AbstractBlobConsistencyCheckTest {
         DeliveryOptions dopt = new DeliveryOptions().setFolderId(Mailbox.ID_FOLDER_INBOX);
         int msgs = 10;
         for (int i = 0; i < msgs; i++) {
-            mbox.addMessage(null, new ParsedMessage("From: test1-1@sub1.zimbra.com".getBytes(), false), dopt, null);
+            mbox.addMessage(null, new ParsedMessage("From: test1-1@sub1.zmail.com".getBytes(), false), dopt, null);
         }
 
         deleteAllBlobs();
@@ -134,7 +134,7 @@ public abstract class AbstractBlobConsistencyCheckTest {
         deleteAllBlobs();
 
         DeliveryOptions dopt = new DeliveryOptions().setFolderId(Mailbox.ID_FOLDER_INBOX);
-        mbox.addMessage(null, new ParsedMessage("From: test1-1@sub1.zimbra.com".getBytes(), false), dopt, null);
+        mbox.addMessage(null, new ParsedMessage("From: test1-1@sub1.zmail.com".getBytes(), false), dopt, null);
 
 
         int msgs = 10;
@@ -158,7 +158,7 @@ public abstract class AbstractBlobConsistencyCheckTest {
         Mailbox mbox = MailboxManager.getInstance().getMailboxByAccountId(MockProvisioning.DEFAULT_ACCOUNT_ID);
 
         DeliveryOptions dopt = new DeliveryOptions().setFolderId(Mailbox.ID_FOLDER_INBOX);
-        Message msg = mbox.addMessage(null, new ParsedMessage("From: test1-1@sub1.zimbra.com".getBytes(), false), dopt, null);
+        Message msg = mbox.addMessage(null, new ParsedMessage("From: test1-1@sub1.zmail.com".getBytes(), false), dopt, null);
 
         MailboxBlob blob = msg.getBlob();
         String text = "some garbage";
@@ -185,7 +185,7 @@ public abstract class AbstractBlobConsistencyCheckTest {
         DeliveryOptions dopt = new DeliveryOptions().setFolderId(Mailbox.ID_FOLDER_INBOX);
         int msgs = 10;
         for (int i = 0; i < msgs; i++) {
-            mbox.addMessage(null, new ParsedMessage("From: test1-1@sub1.zimbra.com".getBytes(), false), dopt, null);
+            mbox.addMessage(null, new ParsedMessage("From: test1-1@sub1.zmail.com".getBytes(), false), dopt, null);
         }
 
         BlobConsistencyChecker checker = getChecker();

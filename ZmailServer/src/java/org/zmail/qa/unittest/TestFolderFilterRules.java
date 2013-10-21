@@ -12,20 +12,20 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.qa.unittest;
+package org.zmail.qa.unittest;
 
 import java.util.List;
 
 import junit.framework.TestCase;
 
-import com.zimbra.common.util.StringUtil;
-import com.zimbra.cs.account.Account;
-import com.zimbra.cs.account.Provisioning;
-import com.zimbra.client.ZFilterRule;
-import com.zimbra.client.ZFilterRules;
-import com.zimbra.client.ZFolder;
-import com.zimbra.client.ZMailbox;
-import com.zimbra.client.ZMessage;
+import org.zmail.common.util.StringUtil;
+import org.zmail.cs.account.Account;
+import org.zmail.cs.account.Provisioning;
+import org.zmail.client.ZFilterRule;
+import org.zmail.client.ZFilterRules;
+import org.zmail.client.ZFolder;
+import org.zmail.client.ZMailbox;
+import org.zmail.client.ZMessage;
 
 
 public class TestFolderFilterRules
@@ -72,7 +72,7 @@ extends TestCase {
 
         // Remember original rules and set rules for this test
         mOriginalRules = mbox.getIncomingFilterRules();
-        TestUtil.setAccountAttr(USER_NAME, Provisioning.A_zimbraMailSieveScript, FILTER_RULES);
+        TestUtil.setAccountAttr(USER_NAME, Provisioning.A_zmailMailSieveScript, FILTER_RULES);
     }
     
     /**
@@ -258,7 +258,7 @@ extends TestCase {
             oldPath = oldPath.substring(1, oldPath.length());
         }
         Account account = TestUtil.getAccount(USER_NAME);
-        String script = account.getAttr(Provisioning.A_zimbraMailSieveScript);
+        String script = account.getAttr(Provisioning.A_zmailMailSieveScript);
         assertTrue("Could not find path " + oldPath + " in script: " + script, script.contains(oldPath));
         
         // Rename the folder and check the new path.
@@ -274,7 +274,7 @@ extends TestCase {
 
         // Confirm that filter rules are updated.
         account = TestUtil.getAccount(USER_NAME); // refresh
-        script = account.getAttr(Provisioning.A_zimbraMailSieveScript);
+        script = account.getAttr(Provisioning.A_zmailMailSieveScript);
         assertFalse("Found old path '" + oldPath + " in script: " + script, script.indexOf(oldPath) >= 0);
         assertTrue("Could not find new path '" + newPath + " in script: " + script, script.indexOf(newPath) >= 0);
     }
@@ -293,7 +293,7 @@ extends TestCase {
 
         // Confirm that the old path is in the script.
         Account account = TestUtil.getAccount(USER_NAME);
-        String script = account.getAttr(Provisioning.A_zimbraMailSieveScript);
+        String script = account.getAttr(Provisioning.A_zmailMailSieveScript);
         assertTrue("Could not find path " + oldPath + " in script: " + script, script.contains(oldPath));
         
         mbox.moveFolder(folderId, newParentFolderId);
@@ -305,7 +305,7 @@ extends TestCase {
 
         // Confirm that filter rules are updated
         account = TestUtil.getAccount(USER_NAME); // refresh
-        script = account.getAttr(Provisioning.A_zimbraMailSieveScript);
+        script = account.getAttr(Provisioning.A_zmailMailSieveScript);
         assertFalse("Found old path '" + oldPath + " in script: " + script, script.indexOf(oldPath) >= 0);
         assertTrue("Could not find new path '" + newPath + " in script: " + script, script.indexOf(newPath) >= 0);
     }

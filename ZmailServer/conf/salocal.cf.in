@@ -18,12 +18,12 @@ header DSPAM_HAM X-DSPAM-Result =~ /^Innocent$/
 describe DSPAM_HAM DSPAM claims it is ham
 score DSPAM_HAM -0.5
 
-%%uncomment VAR:zimbraMtaMyNetworks%%trusted_networks %%zimbraMtaMyNetworks%%
-%%uncomment VAR:zimbraMtaAntiSpamLockMethod%%lock_method %%zimbraMtaAntiSpamLockMethod%%
+%%uncomment VAR:zmailMtaMyNetworks%%trusted_networks %%zmailMtaMyNetworks%%
+%%uncomment VAR:zmailMtaAntiSpamLockMethod%%lock_method %%zmailMtaAntiSpamLockMethod%%
 
-# accept email from zimbra support and forumns
-def_whitelist_from_rcvd noreply@zimbra.com zimbra.com
-def_whitelist_from_rcvd support@zimbra.com zimbra.com
+# accept email from zmail support and forumns
+def_whitelist_from_rcvd noreply@zmail.org zmail.com
+def_whitelist_from_rcvd support@zmail.org zmail.com
 
 rewrite_header Subject *SPAM* _STARS(*)_
 bayes_auto_learn 1
@@ -32,7 +32,7 @@ bayes_min_ham_num 60
 
 
 %%uncomment LOCAL:antispam_mysql_enabled%%bayes_store_module              Mail::SpamAssassin::BayesStore::MySQL
-%%uncomment LOCAL:antispam_mysql_enabled%%bayes_sql_dsn                   DBI:mysql:zimbra_antispam:host=@@antispam_mysql_host@@:port=@@antispam_mysql_port@@
+%%uncomment LOCAL:antispam_mysql_enabled%%bayes_sql_dsn                   DBI:mysql:zmail_antispam:host=@@antispam_mysql_host@@:port=@@antispam_mysql_port@@
 %%uncomment LOCAL:antispam_mysql_enabled%%bayes_sql_username              @@antispam_mysql_user@@
 %%uncomment LOCAL:antispam_mysql_enabled%%bayes_sql_password              @@antispam_mysql_password@@
 

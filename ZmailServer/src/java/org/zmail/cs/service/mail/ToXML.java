@@ -12,7 +12,7 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.service.mail;
+package org.zmail.cs.service.mail;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -46,114 +46,114 @@ import com.google.common.base.Strings;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Sets;
 import com.google.common.io.Closeables;
-import com.zimbra.common.account.Key.AccountBy;
-import com.zimbra.common.calendar.CalendarUtil;
-import com.zimbra.common.calendar.Geo;
-import com.zimbra.common.calendar.ICalTimeZone;
-import com.zimbra.common.calendar.ICalTimeZone.SimpleOnset;
-import com.zimbra.common.calendar.ParsedDateTime;
-import com.zimbra.common.calendar.ParsedDuration;
-import com.zimbra.common.calendar.TimeZoneMap;
-import com.zimbra.common.calendar.ZCalendar.ICalTok;
-import com.zimbra.common.calendar.ZCalendar.ZParameter;
-import com.zimbra.common.calendar.ZCalendar.ZProperty;
-import com.zimbra.common.localconfig.DebugConfig;
-import com.zimbra.common.localconfig.LC;
-import com.zimbra.common.mailbox.Color;
-import com.zimbra.common.mailbox.ContactConstants;
-import com.zimbra.common.mime.ContentType;
-import com.zimbra.common.mime.MimeConstants;
-import com.zimbra.common.mime.MimeDetect;
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.common.soap.Element;
-import com.zimbra.common.soap.HeaderConstants;
-import com.zimbra.common.soap.MailConstants;
-import com.zimbra.common.util.ArrayUtil;
-import com.zimbra.common.util.ByteUtil;
-import com.zimbra.common.util.DateUtil;
-import com.zimbra.common.util.HttpUtil;
-import com.zimbra.common.util.L10nUtil;
-import com.zimbra.common.util.Log;
-import com.zimbra.common.util.LogFactory;
-import com.zimbra.common.util.Pair;
-import com.zimbra.common.util.StringUtil;
-import com.zimbra.common.util.TruncatingWriter;
-import com.zimbra.common.util.ZimbraLog;
-import com.zimbra.cs.account.AccessManager;
-import com.zimbra.cs.account.Account;
-import com.zimbra.cs.account.DataSource;
-import com.zimbra.cs.account.GalContact;
-import com.zimbra.cs.account.IDNUtil;
-import com.zimbra.cs.account.NamedEntry;
-import com.zimbra.cs.account.Provisioning;
-import com.zimbra.cs.account.Server;
-import com.zimbra.cs.account.accesscontrol.GranteeType;
-import com.zimbra.cs.account.accesscontrol.ZimbraACE;
-import com.zimbra.cs.fb.FreeBusy;
-import com.zimbra.cs.gal.GalGroup.GroupInfo;
-import com.zimbra.cs.gal.GalGroupInfoProvider;
-import com.zimbra.cs.gal.GalGroupMembers.ContactDLMembers;
-import com.zimbra.cs.html.BrowserDefang;
-import com.zimbra.cs.html.DefangFactory;
-import com.zimbra.cs.html.HtmlDefang;
-import com.zimbra.cs.httpclient.URLUtil;
-import com.zimbra.cs.index.SearchParams;
-import com.zimbra.cs.index.SearchParams.ExpandResults;
-import com.zimbra.cs.index.SortBy;
-import com.zimbra.cs.mailbox.ACL;
-import com.zimbra.cs.mailbox.Appointment;
-import com.zimbra.cs.mailbox.CalendarItem;
-import com.zimbra.cs.mailbox.CalendarItem.AlarmData;
-import com.zimbra.cs.mailbox.CalendarItem.Instance;
-import com.zimbra.cs.mailbox.Chat;
-import com.zimbra.cs.mailbox.Comment;
-import com.zimbra.cs.mailbox.Contact;
-import com.zimbra.cs.mailbox.Contact.Attachment;
-import com.zimbra.cs.mailbox.ContactGroup;
-import com.zimbra.cs.mailbox.Conversation;
-import com.zimbra.cs.mailbox.Document;
-import com.zimbra.cs.mailbox.Flag;
-import com.zimbra.cs.mailbox.Folder;
-import com.zimbra.cs.mailbox.Link;
-import com.zimbra.cs.mailbox.MailItem;
-import com.zimbra.cs.mailbox.MailItem.CustomMetadata;
-import com.zimbra.cs.mailbox.MailServiceException;
-import com.zimbra.cs.mailbox.MailServiceException.NoSuchItemException;
-import com.zimbra.cs.mailbox.Mailbox;
-import com.zimbra.cs.mailbox.Message;
-import com.zimbra.cs.mailbox.Mountpoint;
-import com.zimbra.cs.mailbox.Note;
-import com.zimbra.cs.mailbox.OperationContext;
-import com.zimbra.cs.mailbox.OperationContextData;
-import com.zimbra.cs.mailbox.RetentionPolicyManager;
-import com.zimbra.cs.mailbox.SearchFolder;
-import com.zimbra.cs.mailbox.SenderList;
-import com.zimbra.cs.mailbox.Tag;
-import com.zimbra.cs.mailbox.WikiItem;
-import com.zimbra.cs.mailbox.calendar.Alarm;
-import com.zimbra.cs.mailbox.calendar.IcalXmlStrMap;
-import com.zimbra.cs.mailbox.calendar.Invite;
-import com.zimbra.cs.mailbox.calendar.InviteChanges;
-import com.zimbra.cs.mailbox.calendar.RecurId;
-import com.zimbra.cs.mailbox.calendar.Recurrence;
-import com.zimbra.cs.mailbox.calendar.Recurrence.IRecurrence;
-import com.zimbra.cs.mailbox.calendar.ZAttendee;
-import com.zimbra.cs.mailbox.calendar.ZOrganizer;
-import com.zimbra.cs.mailbox.util.TagUtil;
-import com.zimbra.cs.mime.MPartInfo;
-import com.zimbra.cs.mime.Mime;
-import com.zimbra.cs.mime.ParsedAddress;
-import com.zimbra.cs.mime.handler.TextEnrichedHandler;
-import com.zimbra.cs.service.UserServlet;
-import com.zimbra.cs.service.util.ItemId;
-import com.zimbra.cs.service.util.ItemIdFormatter;
-import com.zimbra.cs.session.PendingModifications.Change;
-import com.zimbra.soap.admin.type.DataSourceType;
-import com.zimbra.soap.mail.type.AlarmDataInfo;
-import com.zimbra.soap.mail.type.Policy;
-import com.zimbra.soap.mail.type.RetentionPolicy;
-import com.zimbra.soap.mail.type.XParam;
-import com.zimbra.soap.mail.type.XProp;
+import org.zmail.common.account.Key.AccountBy;
+import org.zmail.common.calendar.CalendarUtil;
+import org.zmail.common.calendar.Geo;
+import org.zmail.common.calendar.ICalTimeZone;
+import org.zmail.common.calendar.ICalTimeZone.SimpleOnset;
+import org.zmail.common.calendar.ParsedDateTime;
+import org.zmail.common.calendar.ParsedDuration;
+import org.zmail.common.calendar.TimeZoneMap;
+import org.zmail.common.calendar.ZCalendar.ICalTok;
+import org.zmail.common.calendar.ZCalendar.ZParameter;
+import org.zmail.common.calendar.ZCalendar.ZProperty;
+import org.zmail.common.localconfig.DebugConfig;
+import org.zmail.common.localconfig.LC;
+import org.zmail.common.mailbox.Color;
+import org.zmail.common.mailbox.ContactConstants;
+import org.zmail.common.mime.ContentType;
+import org.zmail.common.mime.MimeConstants;
+import org.zmail.common.mime.MimeDetect;
+import org.zmail.common.service.ServiceException;
+import org.zmail.common.soap.Element;
+import org.zmail.common.soap.HeaderConstants;
+import org.zmail.common.soap.MailConstants;
+import org.zmail.common.util.ArrayUtil;
+import org.zmail.common.util.ByteUtil;
+import org.zmail.common.util.DateUtil;
+import org.zmail.common.util.HttpUtil;
+import org.zmail.common.util.L10nUtil;
+import org.zmail.common.util.Log;
+import org.zmail.common.util.LogFactory;
+import org.zmail.common.util.Pair;
+import org.zmail.common.util.StringUtil;
+import org.zmail.common.util.TruncatingWriter;
+import org.zmail.common.util.ZmailLog;
+import org.zmail.cs.account.AccessManager;
+import org.zmail.cs.account.Account;
+import org.zmail.cs.account.DataSource;
+import org.zmail.cs.account.GalContact;
+import org.zmail.cs.account.IDNUtil;
+import org.zmail.cs.account.NamedEntry;
+import org.zmail.cs.account.Provisioning;
+import org.zmail.cs.account.Server;
+import org.zmail.cs.account.accesscontrol.GranteeType;
+import org.zmail.cs.account.accesscontrol.ZmailACE;
+import org.zmail.cs.fb.FreeBusy;
+import org.zmail.cs.gal.GalGroup.GroupInfo;
+import org.zmail.cs.gal.GalGroupInfoProvider;
+import org.zmail.cs.gal.GalGroupMembers.ContactDLMembers;
+import org.zmail.cs.html.BrowserDefang;
+import org.zmail.cs.html.DefangFactory;
+import org.zmail.cs.html.HtmlDefang;
+import org.zmail.cs.httpclient.URLUtil;
+import org.zmail.cs.index.SearchParams;
+import org.zmail.cs.index.SearchParams.ExpandResults;
+import org.zmail.cs.index.SortBy;
+import org.zmail.cs.mailbox.ACL;
+import org.zmail.cs.mailbox.Appointment;
+import org.zmail.cs.mailbox.CalendarItem;
+import org.zmail.cs.mailbox.CalendarItem.AlarmData;
+import org.zmail.cs.mailbox.CalendarItem.Instance;
+import org.zmail.cs.mailbox.Chat;
+import org.zmail.cs.mailbox.Comment;
+import org.zmail.cs.mailbox.Contact;
+import org.zmail.cs.mailbox.Contact.Attachment;
+import org.zmail.cs.mailbox.ContactGroup;
+import org.zmail.cs.mailbox.Conversation;
+import org.zmail.cs.mailbox.Document;
+import org.zmail.cs.mailbox.Flag;
+import org.zmail.cs.mailbox.Folder;
+import org.zmail.cs.mailbox.Link;
+import org.zmail.cs.mailbox.MailItem;
+import org.zmail.cs.mailbox.MailItem.CustomMetadata;
+import org.zmail.cs.mailbox.MailServiceException;
+import org.zmail.cs.mailbox.MailServiceException.NoSuchItemException;
+import org.zmail.cs.mailbox.Mailbox;
+import org.zmail.cs.mailbox.Message;
+import org.zmail.cs.mailbox.Mountpoint;
+import org.zmail.cs.mailbox.Note;
+import org.zmail.cs.mailbox.OperationContext;
+import org.zmail.cs.mailbox.OperationContextData;
+import org.zmail.cs.mailbox.RetentionPolicyManager;
+import org.zmail.cs.mailbox.SearchFolder;
+import org.zmail.cs.mailbox.SenderList;
+import org.zmail.cs.mailbox.Tag;
+import org.zmail.cs.mailbox.WikiItem;
+import org.zmail.cs.mailbox.calendar.Alarm;
+import org.zmail.cs.mailbox.calendar.IcalXmlStrMap;
+import org.zmail.cs.mailbox.calendar.Invite;
+import org.zmail.cs.mailbox.calendar.InviteChanges;
+import org.zmail.cs.mailbox.calendar.RecurId;
+import org.zmail.cs.mailbox.calendar.Recurrence;
+import org.zmail.cs.mailbox.calendar.Recurrence.IRecurrence;
+import org.zmail.cs.mailbox.calendar.ZAttendee;
+import org.zmail.cs.mailbox.calendar.ZOrganizer;
+import org.zmail.cs.mailbox.util.TagUtil;
+import org.zmail.cs.mime.MPartInfo;
+import org.zmail.cs.mime.Mime;
+import org.zmail.cs.mime.ParsedAddress;
+import org.zmail.cs.mime.handler.TextEnrichedHandler;
+import org.zmail.cs.service.UserServlet;
+import org.zmail.cs.service.util.ItemId;
+import org.zmail.cs.service.util.ItemIdFormatter;
+import org.zmail.cs.session.PendingModifications.Change;
+import org.zmail.soap.admin.type.DataSourceType;
+import org.zmail.soap.mail.type.AlarmDataInfo;
+import org.zmail.soap.mail.type.Policy;
+import org.zmail.soap.mail.type.RetentionPolicy;
+import org.zmail.soap.mail.type.XParam;
+import org.zmail.soap.mail.type.XProp;
 
 /**
  * Class containing static methods for encoding various MailItem-derived objects into XML.
@@ -377,7 +377,7 @@ public final class ToXML {
                     // 3. fallback to the old way to lookup the name using the Provisioning interface,
                     //    this *may* lead to a LDAP search if the id is not in cache
                     if (name == null) {
-                        NamedEntry nentry = FolderAction.lookupGranteeByZimbraId(grant.getGranteeId(), granteeType);
+                        NamedEntry nentry = FolderAction.lookupGranteeByZmailId(grant.getGranteeId(), granteeType);
                         if (nentry != null) {
                             name = nentry.getName();
                         }
@@ -419,7 +419,7 @@ public final class ToXML {
      * Delete this method in bug 66989
      */
     // encode account ACE
-    public static Element encodeACE(Element parent, ZimbraACE ace) {
+    public static Element encodeACE(Element parent, ZmailACE ace) {
         Element eACE = parent.addElement(MailConstants.E_ACE)
                 .addAttribute(MailConstants.A_ZIMBRA_ID, ace.getGrantee())
                 .addAttribute(MailConstants.A_GRANT_TYPE, ace.getGranteeType().getCode())
@@ -531,7 +531,7 @@ public final class ToXML {
             el.addAttribute(MailConstants.A_ZIMBRA_ID, mpt.getOwnerId());
             el.addAttribute(MailConstants.A_REMOTE_ID, mpt.getRemoteId());
             el.addAttribute(MailConstants.A_REMOTE_UUID, mpt.getRemoteUuid());
-            NamedEntry nentry = FolderAction.lookupGranteeByZimbraId(mpt.getOwnerId(), ACL.GRANTEE_USER);
+            NamedEntry nentry = FolderAction.lookupGranteeByZmailId(mpt.getOwnerId(), ACL.GRANTEE_USER);
             el.addAttribute(MailConstants.A_OWNER_NAME, nentry == null ? null : nentry.getName());
             if (mpt.getDefaultView() != MailItem.Type.UNKNOWN) {
                 el.addAttribute(MailConstants.A_DEFAULT_VIEW, mpt.getDefaultView().toString());
@@ -559,7 +559,7 @@ public final class ToXML {
             return URLUtil.getServiceURL(targetServer, UserServlet.SERVLET_PATH +
                     HttpUtil.urlEscape(UserServlet.getAccountPath(targetAccount) + folderPath) , true);
         } catch (ServiceException e) {
-            ZimbraLog.soap.warn("unable to create rest url for mountpoint", e);
+            ZmailLog.soap.warn("unable to create rest url for mountpoint", e);
             return null;
         }
     }
@@ -598,9 +598,9 @@ public final class ToXML {
                 to.addAttribute(attrName, remote);
             }
         } catch (ServiceException e) {
-            ZimbraLog.session.warn("exception reading long attr from remote folder: %s", attrName, e);
+            ZmailLog.session.warn("exception reading long attr from remote folder: %s", attrName, e);
         } catch (Element.ContainerException e) {
-            ZimbraLog.session.warn("exception adding remote folder attr to serialized mountpoint: %s", attrName, e);
+            ZmailLog.session.warn("exception adding remote folder attr to serialized mountpoint: %s", attrName, e);
         }
     }
 
@@ -649,7 +649,7 @@ public final class ToXML {
             try {
                 encodeCustomMetadata(elem, item.getCustomData(section));
             } catch (ServiceException e) {
-                ZimbraLog.soap.warn("could not deserialize custom metadata; skipping (section '%s', item %s)",
+                ZmailLog.soap.warn("could not deserialize custom metadata; skipping (section '%s', item %s)",
                         section, new ItemId(item));
             }
         }
@@ -809,7 +809,7 @@ public final class ToXML {
                         }
                     }
                 } catch (ServiceException e) {
-                    ZimbraLog.contact.warn("unable to init contact group", e);
+                    ZmailLog.contact.warn("unable to init contact group", e);
                 }
             }
         } else {
@@ -1078,7 +1078,7 @@ public final class ToXML {
                     sl = mbox.getConversationSenderList(conv.getId());
                 }
             } catch (SenderList.RefreshException slre) {
-                ZimbraLog.soap.warn("out-of-order messages returned for conversation " + conv.getId());
+                ZmailLog.soap.warn("out-of-order messages returned for conversation " + conv.getId());
                 return c;
             } catch (ServiceException e) {
                 return c;
@@ -1191,7 +1191,7 @@ public final class ToXML {
                         // if a draft was re-saved and we failed because the old blob was deleted
                         //   out from under us, just fetch the new MimeMessage and try again
                         changeId = msg.getSavedSequence();
-                        ZimbraLog.soap.info("caught message content change while serializing; will retry");
+                        ZmailLog.soap.info("caught message content change while serializing; will retry");
                         continue;
                     }
                 } catch (NoSuchItemException nsie) {
@@ -1200,7 +1200,7 @@ public final class ToXML {
                 }
                 // we're kinda screwed here -- we weren't able to write the message structure and it's not clear what went wrong.
                 //   best we can do now is send back what we got and apologize.
-                ZimbraLog.soap.warn("could not serialize full message structure in response", e);
+                ZmailLog.soap.warn("could not serialize full message structure in response", e);
                 return encodeMessageAsMP(parent, ifmt, octxt, msg, part, maxSize, wantHTML, neuter, headers, serializeType, wantExpandGroupInfo, true);
             }
         }
@@ -1248,7 +1248,7 @@ public final class ToXML {
                 mm = msg.getMimeMessage();
             } catch (MailServiceException e) {
                 if (encodeMissingBlobs && MailServiceException.NO_SUCH_BLOB.equals(e.getCode())) {
-                    ZimbraLog.mailbox.error("Unable to get blob while encoding message", e);
+                    ZmailLog.mailbox.error("Unable to get blob while encoding message", e);
                     encodeEmail(m, msg.getSender(), EmailType.FROM);
                     encodeEmail(m, msg.getSender(), EmailType.SENDER);
                     if (msg.getRecipients() != null) {
@@ -1574,7 +1574,7 @@ public final class ToXML {
 
     private static String getDefaultCharset(MailItem item) throws ServiceException {
         Account acct = (item == null ? null : item.getAccount());
-        return acct == null ? null : acct.getAttr(Provisioning.A_zimbraPrefMailDefaultCharset, null);
+        return acct == null ? null : acct.getAttr(Provisioning.A_zmailPrefMailDefaultCharset, null);
     }
 
     /** Encodes an Invite stored within a calendar item object into <m> element
@@ -1991,7 +1991,7 @@ public final class ToXML {
                         Element descHtmlElem = e.addElement(MailConstants.E_CAL_DESC_HTML);
                         descHtmlElem.setText(descHtml);
                     } catch (IOException ex) {
-                        ZimbraLog.calendar.warn("Unable to defang HTML for SetAppointmentRequest", ex);
+                        ZmailLog.calendar.warn("Unable to defang HTML for SetAppointmentRequest", ex);
                     }
                 }
 
@@ -2361,7 +2361,7 @@ public final class ToXML {
         try {
             el.addAttribute(MailConstants.A_SIZE, Mime.getSize(mp));
         } catch (Exception e) { // don't put out size if we get exception
-            ZimbraLog.mailbox.warn("Unable to determine MIME part size: %s", e.getMessage());
+            ZmailLog.mailbox.warn("Unable to determine MIME part size: %s", e.getMessage());
         }
 
         // figure out attachment disposition
@@ -2476,7 +2476,7 @@ public final class ToXML {
                 maxSize = Math.min(maxSize, (int) Provisioning.getInstance().getLocalServer().getMailContentMaxSize());
             }
         } catch (ServiceException e) {
-            ZimbraLog.soap.warn("Unable to determine max content size", e);
+            ZmailLog.soap.warn("Unable to determine max content size", e);
         }
 
         boolean wasTruncated = false;
@@ -2640,10 +2640,10 @@ public final class ToXML {
                     if (a != null) {
                         el.addAttribute(MailConstants.A_LOCKOWNER_EMAIL, a.getName());
                     } else {
-                        ZimbraLog.soap.warn("lock owner not found: %s", lockOwner);
+                        ZmailLog.soap.warn("lock owner not found: %s", lockOwner);
                     }
                 } catch (ServiceException e) {
-                    ZimbraLog.soap.warn("can't lookup lock owner", e);
+                    ZmailLog.soap.warn("can't lookup lock owner", e);
                 }
                 el.addAttribute(MailConstants.A_LOCKOWNER_ID, lockOwner);
                 el.addAttribute(MailConstants.A_LOCKTIMESTAMP, doc.getLockTimestamp());
@@ -2760,12 +2760,12 @@ public final class ToXML {
         m.addAttribute(MailConstants.A_DS_REPLYTO_ADDRESS, ds.getReplyToAddress());
         m.addAttribute(MailConstants.A_DS_REPLYTO_DISPLAY, ds.getReplyToDisplay());
 
-        Date date = ds.getGeneralizedTimeAttr(Provisioning.A_zimbraDataSourceFailingSince, null);
+        Date date = ds.getGeneralizedTimeAttr(Provisioning.A_zmailDataSourceFailingSince, null);
         if (date != null) {
             m.addAttribute(MailConstants.A_DS_FAILING_SINCE, date.getTime() / 1000);
         }
 
-        String lastError = ds.getAttr(Provisioning.A_zimbraDataSourceLastError);
+        String lastError = ds.getAttr(Provisioning.A_zmailDataSourceLastError);
         if (lastError != null) {
             m.addElement(MailConstants.E_DS_LAST_ERROR).setText(lastError);
         }
@@ -3124,7 +3124,7 @@ public final class ToXML {
         if (needToOutput(fields, Change.CONTENT)) {
             el.addAttribute(MailConstants.A_ZIMBRA_ID, link.getOwnerId());
             el.addAttribute(MailConstants.A_REMOTE_ID, link.getRemoteId());
-            NamedEntry nentry = FolderAction.lookupGranteeByZimbraId(link.getOwnerId(), ACL.GRANTEE_USER);
+            NamedEntry nentry = FolderAction.lookupGranteeByZmailId(link.getOwnerId(), ACL.GRANTEE_USER);
             el.addAttribute(MailConstants.A_OWNER_NAME, nentry == null ? null : nentry.getName());
         }
         return el;

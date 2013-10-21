@@ -12,7 +12,7 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.account;
+package org.zmail.cs.account;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -20,8 +20,8 @@ import java.util.Map;
 
 import com.google.common.base.Joiner;
 import com.google.common.base.Objects;
-import com.zimbra.common.account.Key;
-import com.zimbra.common.service.ServiceException;
+import org.zmail.common.account.Key;
+import org.zmail.common.service.ServiceException;
 
 /**
  * Systemwide configuration entry for XMPP component (e.g. conference.mydomain.com) in the cloud
@@ -38,19 +38,19 @@ public class XMPPComponent extends NamedEntry implements Comparable {
     }
 
     public String getComponentCategory() {
-        return getAttr(Provisioning.A_zimbraXMPPComponentCategory);
+        return getAttr(Provisioning.A_zmailXMPPComponentCategory);
     }
 
     public String getComponentType() {
-        return getAttr(Provisioning.A_zimbraXMPPComponentType);
+        return getAttr(Provisioning.A_zmailXMPPComponentType);
     }
 
     public String getLongName() {
-        return getAttr(Provisioning.A_zimbraXMPPComponentName);
+        return getAttr(Provisioning.A_zmailXMPPComponentName);
     }
 
     public String getClassName() {
-        return getAttr(Provisioning.A_zimbraXMPPComponentClassName);
+        return getAttr(Provisioning.A_zmailXMPPComponentClassName);
     }
 
     public String getShortName() throws ServiceException {
@@ -72,7 +72,7 @@ public class XMPPComponent extends NamedEntry implements Comparable {
 
     public List<String> getComponentFeatures() {
         List<String> toRet = null;
-        String[] features = this.getMultiAttr(Provisioning.A_zimbraXMPPComponentFeatures);
+        String[] features = this.getMultiAttr(Provisioning.A_zmailXMPPComponentFeatures);
         if (features != null && features.length > 0) {
             toRet = new ArrayList<String>(features.length);
             for (String s : features)
@@ -84,14 +84,14 @@ public class XMPPComponent extends NamedEntry implements Comparable {
     }
 
     public String getDomainId() {
-        return getAttr(Provisioning.A_zimbraDomainId);
+        return getAttr(Provisioning.A_zmailDomainId);
     }
     public Domain getDomain() throws ServiceException {
         return Provisioning.getInstance().get(Key.DomainBy.id, getDomainId());
     }
 
     public String getServerId() {
-        return getAttr(Provisioning.A_zimbraServerId);
+        return getAttr(Provisioning.A_zmailServerId);
     }
     public Server getServer() throws ServiceException {
         return Provisioning.getInstance().get(Key.ServerBy.id, getServerId());

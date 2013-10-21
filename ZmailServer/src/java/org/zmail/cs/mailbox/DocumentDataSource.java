@@ -12,7 +12,7 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.mailbox;
+package org.zmail.cs.mailbox;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -20,8 +20,8 @@ import java.io.OutputStream;
 
 import javax.activation.DataSource;
 
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.common.util.ZimbraLog;
+import org.zmail.common.service.ServiceException;
+import org.zmail.common.util.ZmailLog;
 
 
 public class DocumentDataSource implements DataSource {
@@ -43,7 +43,7 @@ public class DocumentDataSource implements DataSource {
         try {
             return mDocument.getContentStream();
         } catch (ServiceException e) {
-            ZimbraLog.mailbox.error("Unable to get document content", e);
+            ZmailLog.mailbox.error("Unable to get document content", e);
             throw new IOException(e.toString());
         }
     }

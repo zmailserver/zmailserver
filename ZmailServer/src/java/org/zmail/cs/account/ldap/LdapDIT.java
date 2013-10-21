@@ -12,34 +12,34 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.account.ldap;
+package org.zmail.cs.account.ldap;
 
 import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.common.util.EmailUtil;
-import com.zimbra.cs.account.Account;
-import com.zimbra.cs.account.Alias;
-import com.zimbra.cs.account.Config;
-import com.zimbra.cs.account.Cos;
-import com.zimbra.cs.account.DataSource;
-import com.zimbra.cs.account.DistributionList;
-import com.zimbra.cs.account.Domain;
-import com.zimbra.cs.account.DynamicGroup;
-import com.zimbra.cs.account.Entry;
-import com.zimbra.cs.account.GlobalGrant;
-import com.zimbra.cs.account.Identity;
-import com.zimbra.cs.account.Provisioning;
-import com.zimbra.cs.account.Server;
-import com.zimbra.cs.account.Zimlet;
-import com.zimbra.cs.ldap.IAttributes;
-import com.zimbra.cs.ldap.LdapConstants;
-import com.zimbra.cs.ldap.LdapUtil;
-import com.zimbra.cs.ldap.ZLdapFilter;
-import com.zimbra.cs.ldap.ZLdapFilterFactory;
-import com.zimbra.cs.util.Zimbra;
+import org.zmail.common.service.ServiceException;
+import org.zmail.common.util.EmailUtil;
+import org.zmail.cs.account.Account;
+import org.zmail.cs.account.Alias;
+import org.zmail.cs.account.Config;
+import org.zmail.cs.account.Cos;
+import org.zmail.cs.account.DataSource;
+import org.zmail.cs.account.DistributionList;
+import org.zmail.cs.account.Domain;
+import org.zmail.cs.account.DynamicGroup;
+import org.zmail.cs.account.Entry;
+import org.zmail.cs.account.GlobalGrant;
+import org.zmail.cs.account.Identity;
+import org.zmail.cs.account.Provisioning;
+import org.zmail.cs.account.Server;
+import org.zmail.cs.account.Zimlet;
+import org.zmail.cs.ldap.IAttributes;
+import org.zmail.cs.ldap.LdapConstants;
+import org.zmail.cs.ldap.LdapUtil;
+import org.zmail.cs.ldap.ZLdapFilter;
+import org.zmail.cs.ldap.ZLdapFilterFactory;
+import org.zmail.cs.util.Zmail;
 
 /**
  * @author pshao
@@ -49,8 +49,8 @@ public class LdapDIT {
      * This is our default ldap DIT.  All DNs/RDNs location is hardcoded to avoid
      * mis-configuration.
      *
-     * To customize the DIT to a different layout, set the zimbra_class_provisioning
-     * localconfig key to com.zimbra.cs.account.ldap.custom.CustomLdapProvisioning,
+     * To customize the DIT to a different layout, set the zmail_class_provisioning
+     * localconfig key to org.zmail.cs.account.ldap.custom.CustomLdapProvisioning,
      * which will use the CustomLdapDIT class that can be customized by a set of
      * localconfig keys.
      *
@@ -83,7 +83,7 @@ public class LdapDIT {
      * Defaults tht can be used in subclasses but cannot be changed in subclasses.
      * If a subclass need to use different values it has to define it's own variables.
      */
-    protected final String DEFAULT_CONFIG_BASE_DN        = "cn=zimbra";
+    protected final String DEFAULT_CONFIG_BASE_DN        = "cn=zmail";
     protected final String DEFAULT_MAIL_BASE_DN          = ROOT_DN;
 
     protected final String DEFAULT_BASE_RDN_ADMIN          = "cn=admins";
@@ -221,17 +221,17 @@ public class LdapDIT {
             BASE_DN_ZIMLET == null ||
             DN_GLOBALCONFIG == null ||
             DN_GLOBALGRANT == null)
-            Zimbra.halt("Unable to initialize LDAP DIT");
+            Zmail.halt("Unable to initialize LDAP DIT");
     }
 
-    public static boolean isZimbraDefault(LdapDIT dit) {
+    public static boolean isZmailDefault(LdapDIT dit) {
         return dit.getClass() == LdapDIT.class;
     }
 
     /*
-     * Zimbra root
+     * Zmail root
      */
-    public String zimbraBaseDN() {
+    public String zmailBaseDN() {
         return BASE_DN_ZIMBRA;
     }
 
@@ -495,7 +495,7 @@ public class LdapDIT {
 
     public String filterDynamicGroupsByDomain(Domain domain, boolean includeObjectClass) {
         if (includeObjectClass)
-            return "(objectclass=zimbraGroup)";
+            return "(objectclass=zmailGroup)";
         else
             return "";
     }
@@ -518,7 +518,7 @@ public class LdapDIT {
     /*
     public String filterGroupsByDomain(Domain domain, boolean includeObjectClass) {
         if (includeObjectClass)
-            return "(|(objectclass=zimbraGroup)(objectclass=zimbraDistributionList))";
+            return "(|(objectclass=zmailGroup)(objectclass=zmailDistributionList))";
         else
             return "";
     }
@@ -680,7 +680,7 @@ public class LdapDIT {
     public SpecialAttrs handleSpecialAttrs(Map<String, Object> attrs) throws ServiceException {
         SpecialAttrs specialAttrs = new SpecialAttrs();
         if (attrs != null) {
-            specialAttrs.handleZimbraId(attrs);
+            specialAttrs.handleZmailId(attrs);
 
             // default is don't support pseudo attrs
             // if the pseudo attr is present and not handled here, a NamingExeption will be thrown
@@ -700,11 +700,11 @@ public class LdapDIT {
         else if (entry instanceof Config)
             return NAMING_RDN_ATTR_GLOBALCONFIG;
         else if (entry instanceof DataSource)
-            return Provisioning.A_zimbraDataSourceName;
+            return Provisioning.A_zmailDataSourceName;
         else if (entry instanceof Domain)
             return Provisioning.A_dc;
         else if (entry instanceof Identity)
-            return Provisioning.A_zimbraPrefIdentityName;
+            return Provisioning.A_zmailPrefIdentityName;
         else if (entry instanceof GlobalGrant)
             return NAMING_RDN_ATTR_GLOBALGRANT;
         else if (entry instanceof DynamicGroup)

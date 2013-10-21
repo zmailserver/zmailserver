@@ -12,19 +12,19 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.index;
+package org.zmail.cs.index;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
-import com.zimbra.cs.mailbox.MailItem;
+import org.zmail.cs.mailbox.MailItem;
 
 /**
  * @since Oct 22, 2004
  * @author tim
  */
-final class EmptyQueryResults extends ZimbraQueryResultsImpl {
+final class EmptyQueryResults extends ZmailQueryResultsImpl {
 
     EmptyQueryResults(Set<MailItem.Type> types, SortBy searchOrder, SearchParams.Fetch fetch) {
         super(types, searchOrder, fetch);
@@ -40,12 +40,12 @@ final class EmptyQueryResults extends ZimbraQueryResultsImpl {
     }
 
     @Override
-    public ZimbraHit getNext() {
+    public ZmailHit getNext() {
         return null;
     }
 
     @Override
-    public ZimbraHit peekNext() {
+    public ZmailHit peekNext() {
         return null;
     }
 
@@ -54,7 +54,7 @@ final class EmptyQueryResults extends ZimbraQueryResultsImpl {
     }
 
     @Override
-    public ZimbraHit skipToHit(int hitNo) {
+    public ZmailHit skipToHit(int hitNo) {
         return null;
     }
 

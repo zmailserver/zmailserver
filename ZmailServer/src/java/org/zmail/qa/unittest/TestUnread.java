@@ -13,28 +13,28 @@
  * ***** END LICENSE BLOCK *****
  */
 
-package com.zimbra.qa.unittest;
+package org.zmail.qa.unittest;
 
 import java.util.EnumSet;
 
 import junit.framework.TestCase;
 
-import com.zimbra.common.util.ZimbraLog;
-import com.zimbra.cs.account.Account;
-import com.zimbra.cs.db.DbMailItem;
-import com.zimbra.cs.db.DbResults;
-import com.zimbra.cs.db.DbUtil;
-import com.zimbra.cs.index.SortBy;
-import com.zimbra.cs.index.ZimbraQueryResults;
-import com.zimbra.cs.mailbox.Conversation;
-import com.zimbra.cs.mailbox.Flag;
-import com.zimbra.cs.mailbox.Folder;
-import com.zimbra.cs.mailbox.MailItem;
-import com.zimbra.cs.mailbox.Mailbox;
-import com.zimbra.cs.mailbox.MailboxManager;
-import com.zimbra.cs.mailbox.Message;
-import com.zimbra.cs.mailbox.OperationContext;
-import com.zimbra.cs.mailbox.Tag;
+import org.zmail.common.util.ZmailLog;
+import org.zmail.cs.account.Account;
+import org.zmail.cs.db.DbMailItem;
+import org.zmail.cs.db.DbResults;
+import org.zmail.cs.db.DbUtil;
+import org.zmail.cs.index.SortBy;
+import org.zmail.cs.index.ZmailQueryResults;
+import org.zmail.cs.mailbox.Conversation;
+import org.zmail.cs.mailbox.Flag;
+import org.zmail.cs.mailbox.Folder;
+import org.zmail.cs.mailbox.MailItem;
+import org.zmail.cs.mailbox.Mailbox;
+import org.zmail.cs.mailbox.MailboxManager;
+import org.zmail.cs.mailbox.Message;
+import org.zmail.cs.mailbox.OperationContext;
+import org.zmail.cs.mailbox.Tag;
 
 /**
  * @author bburtin
@@ -102,18 +102,18 @@ public class TestUnread extends TestCase {
 
         Message msg = TestUtil.addMessage(mMbox, TEST_NAME);
         mMessage1Id = msg.getId();
-        ZimbraLog.test.debug("Created message 1, id=" + mMessage1Id);
+        ZmailLog.test.debug("Created message 1, id=" + mMessage1Id);
 
         msg = TestUtil.addMessage(mMbox, "RE: " + TEST_NAME);
         mMessage2Id = msg.getId();
-        ZimbraLog.test.debug("Created message 2, id=" + mMessage2Id);
+        ZmailLog.test.debug("Created message 2, id=" + mMessage2Id);
 
         msg =  TestUtil.addMessage(mMbox, "RE: " + TEST_NAME);
         mMessage3Id = msg.getId();
-        ZimbraLog.test.debug("Created message 3, id=" + mMessage3Id);
+        ZmailLog.test.debug("Created message 3, id=" + mMessage3Id);
 
         mConvId = getMessage1().getConversationId();
-        ZimbraLog.test.debug("Created conversation, id=" + mConvId);
+        ZmailLog.test.debug("Created conversation, id=" + mConvId);
 
         Folder folder = mMbox.createFolder(null, FOLDER1_NAME, Mailbox.ID_FOLDER_INBOX, new Folder.FolderOptions());
         mFolder1Id = folder.getId();
@@ -140,7 +140,7 @@ public class TestUnread extends TestCase {
 
     public void testReadMessage1()
     throws Exception {
-        ZimbraLog.test.debug("testReadMessage1");
+        ZmailLog.test.debug("testReadMessage1");
         verifySetUp();
         setUnread(getMessage1(), false);
         verifyMessage1Read();
@@ -148,7 +148,7 @@ public class TestUnread extends TestCase {
 
     public void testReadMessage2()
     throws Exception {
-        ZimbraLog.test.debug("testReadMessage2");
+        ZmailLog.test.debug("testReadMessage2");
         verifySetUp();
 
         setUnread(getMessage2(), false);
@@ -168,7 +168,7 @@ public class TestUnread extends TestCase {
 
     public void testReadAllMessages()
     throws Exception {
-        ZimbraLog.test.debug("testReadAllMessages");
+        ZmailLog.test.debug("testReadAllMessages");
         verifySetUp();
 
         setUnread(getMessage1(), false);
@@ -179,14 +179,14 @@ public class TestUnread extends TestCase {
 
     public void testReadConversation()
     throws Exception {
-        ZimbraLog.test.debug("testReadConversation");
+        ZmailLog.test.debug("testReadConversation");
         setUnread(getConv(), false);
         verifyAllRead();
     }
 
     public void testReadFolder1()
     throws Exception {
-        ZimbraLog.test.debug("testReadFolder1");
+        ZmailLog.test.debug("testReadFolder1");
         verifySetUp();
         setUnread(getFolder1(), false);
         verifyMessage1Read();
@@ -194,7 +194,7 @@ public class TestUnread extends TestCase {
 
     public void testReadFolder2()
     throws Exception {
-        ZimbraLog.test.debug("testReadFolder2");
+        ZmailLog.test.debug("testReadFolder2");
         verifySetUp();
 
         setUnread(getFolder2(), false);
@@ -212,7 +212,7 @@ public class TestUnread extends TestCase {
 
     public void testReadAllFolders()
     throws Exception {
-        ZimbraLog.test.debug("testReadAllMessages");
+        ZmailLog.test.debug("testReadAllMessages");
         verifySetUp();
 
         setUnread(getFolder1(), false);
@@ -222,7 +222,7 @@ public class TestUnread extends TestCase {
 
     public void testReadTag1()
     throws Exception {
-        ZimbraLog.test.debug("testReadTag1");
+        ZmailLog.test.debug("testReadTag1");
         verifySetUp();
         setUnread(getTag1(), false);
         verifyMessage1Read();
@@ -230,7 +230,7 @@ public class TestUnread extends TestCase {
 
     public void testReadTag2()
     throws Exception {
-        ZimbraLog.test.debug("testReadTag2");
+        ZmailLog.test.debug("testReadTag2");
         verifySetUp();
 
         setUnread(getTag2(), false);
@@ -250,7 +250,7 @@ public class TestUnread extends TestCase {
 
     public void testMoveMessage()
     throws Exception {
-        ZimbraLog.test.debug("testMoveMessage");
+        ZmailLog.test.debug("testMoveMessage");
         verifySetUp();
 
         // Move M2 from F2 to F1
@@ -274,7 +274,7 @@ public class TestUnread extends TestCase {
 
     public void testMoveConversation()
     throws Exception {
-        ZimbraLog.test.debug("testMoveConversation");
+        ZmailLog.test.debug("testMoveConversation");
         verifySetUp();
 
         // Read M1 and move the whole conversation to F1
@@ -299,7 +299,7 @@ public class TestUnread extends TestCase {
 
     public void testTagMessage()
     throws Exception {
-        ZimbraLog.test.debug("testTagMessage");
+        ZmailLog.test.debug("testTagMessage");
         verifySetUp();
 
         // Add T3 to M3
@@ -317,7 +317,7 @@ public class TestUnread extends TestCase {
 
     public void testTagConversation()
     throws Exception {
-        ZimbraLog.test.debug("testTagConversation");
+        ZmailLog.test.debug("testTagConversation");
         verifySetUp();
 
         // Add T3 to C
@@ -334,7 +334,7 @@ public class TestUnread extends TestCase {
      */
     public void testMoveToTrash()
     throws Exception {
-        ZimbraLog.test.debug("testMoveToTrash");
+        ZmailLog.test.debug("testMoveToTrash");
         verifySetUp();
 
         Folder inbox = mMbox.getFolderById(null, Mailbox.ID_FOLDER_INBOX);
@@ -361,10 +361,10 @@ public class TestUnread extends TestCase {
      * Makes sure that something comes back when searching for unread items.
      */
     public void testSearch() throws Exception {
-        ZimbraLog.test.debug("testSearch");
+        ZmailLog.test.debug("testSearch");
         verifySetUp();
 
-        ZimbraQueryResults results = mMbox.index.search(new OperationContext(mMbox), "is:unread",
+        ZmailQueryResults results = mMbox.index.search(new OperationContext(mMbox), "is:unread",
                 EnumSet.of(MailItem.Type.MESSAGE), SortBy.DATE_DESC, 100);
         assertTrue("No search results found", results.hasNext());
         results.close();
@@ -372,7 +372,7 @@ public class TestUnread extends TestCase {
 
     public void testDeleteConversation()
     throws Exception {
-        ZimbraLog.test.debug("testDeleteConversation");
+        ZmailLog.test.debug("testDeleteConversation");
         verifySetUp();
 
         mMbox.delete(null, getConv().getId(), getConv().getType());
@@ -386,7 +386,7 @@ public class TestUnread extends TestCase {
 
     public void testDeleteFolder2()
     throws Exception {
-        ZimbraLog.test.debug("testDeleteFolder2");
+        ZmailLog.test.debug("testDeleteFolder2");
         verifySetUp();
 
         mMbox.delete(null, mFolder2Id, getFolder2().getType());
@@ -401,7 +401,7 @@ public class TestUnread extends TestCase {
 
     public void testDeleteFolder1()
     throws Exception {
-        ZimbraLog.test.debug("testDeleteFolder1");
+        ZmailLog.test.debug("testDeleteFolder1");
         verifySetUp();
 
         mMbox.delete(null, mFolder1Id, getFolder1().getType());

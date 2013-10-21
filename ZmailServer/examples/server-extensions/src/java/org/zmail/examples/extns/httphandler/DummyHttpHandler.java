@@ -12,9 +12,9 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.examples.extns.httphandler;
+package org.zmail.examples.extns.httphandler;
 
-import com.zimbra.cs.extension.ExtensionHttpHandler;
+import org.zmail.cs.extension.ExtensionHttpHandler;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;

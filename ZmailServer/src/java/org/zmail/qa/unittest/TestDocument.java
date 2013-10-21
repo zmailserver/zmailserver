@@ -12,7 +12,7 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.qa.unittest;
+package org.zmail.qa.unittest;
 
 import java.io.ByteArrayInputStream;
 import java.io.File;
@@ -20,19 +20,19 @@ import java.util.List;
 
 import junit.framework.TestCase;
 
-import com.zimbra.client.ZDocument;
-import com.zimbra.client.ZItem;
-import com.zimbra.client.ZMailbox;
-import com.zimbra.client.ZSearchParams;
-import com.zimbra.common.account.Key;
-import com.zimbra.cs.account.Account;
-import com.zimbra.cs.account.Provisioning;
-import com.zimbra.cs.mailbox.ACL;
-import com.zimbra.cs.mailbox.Document;
-import com.zimbra.cs.mailbox.Folder;
-import com.zimbra.cs.mailbox.MailItem;
-import com.zimbra.cs.mailbox.Mailbox;
-import com.zimbra.cs.mailbox.MailboxManager;
+import org.zmail.client.ZDocument;
+import org.zmail.client.ZItem;
+import org.zmail.client.ZMailbox;
+import org.zmail.client.ZSearchParams;
+import org.zmail.common.account.Key;
+import org.zmail.cs.account.Account;
+import org.zmail.cs.account.Provisioning;
+import org.zmail.cs.mailbox.ACL;
+import org.zmail.cs.mailbox.Document;
+import org.zmail.cs.mailbox.Folder;
+import org.zmail.cs.mailbox.MailItem;
+import org.zmail.cs.mailbox.Mailbox;
+import org.zmail.cs.mailbox.MailboxManager;
 
 public class TestDocument extends TestCase {
 

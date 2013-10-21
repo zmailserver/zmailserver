@@ -12,15 +12,15 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.db;
+package org.zmail.cs.db;
 
 import com.google.common.collect.HashMultimap;
 import com.google.common.collect.Multimap;
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.common.util.ZimbraLog;
-import com.zimbra.cs.db.DbPool.DbConnection;
-import com.zimbra.cs.mailbox.Mailbox;
-import com.zimbra.cs.util.ZimbraApplication;
+import org.zmail.common.service.ServiceException;
+import org.zmail.common.util.ZmailLog;
+import org.zmail.cs.db.DbPool.DbConnection;
+import org.zmail.cs.mailbox.Mailbox;
+import org.zmail.cs.util.ZmailApplication;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -34,7 +34,7 @@ public class DbPendingAclPush {
     private static boolean supported;
 
     static {
-         supported = ZimbraApplication.getInstance().supports(DbPendingAclPush.class);
+         supported = ZmailApplication.getInstance().supports(DbPendingAclPush.class);
     }
 
     public static void queue(Mailbox mbox, int itemId) throws ServiceException {
@@ -42,7 +42,7 @@ public class DbPendingAclPush {
             return;
         if (mbox == null)
             return;
-        ZimbraLog.mailbox.debug("Queuing for ACL push - mailbox %s item %s", mbox.getId(), itemId);
+        ZmailLog.mailbox.debug("Queuing for ACL push - mailbox %s item %s", mbox.getId(), itemId);
         DbConnection conn = mbox.getOperationConnection();
         PreparedStatement stmt = null;
         boolean supportsReplace = Db.supports(Db.Capability.REPLACE_INTO);
@@ -78,7 +78,7 @@ public class DbPendingAclPush {
         DbConnection conn = null;
         PreparedStatement stmt = null;
         ResultSet rs = null;
-        ZimbraLog.misc.debug("Getting entries recorded before %s for ACL push", uptoTime);
+        ZmailLog.misc.debug("Getting entries recorded before %s for ACL push", uptoTime);
         try {
             conn = DbPool.getConnection();
             stmt = conn.prepareStatement(
@@ -99,7 +99,7 @@ public class DbPendingAclPush {
     }
 
     public static void deleteEntries(Date uptoTime) throws ServiceException {
-        ZimbraLog.misc.debug("Deleting entries for ACL push before %s", uptoTime);
+        ZmailLog.misc.debug("Deleting entries for ACL push before %s", uptoTime);
         DbConnection conn = null;
         PreparedStatement stmt = null;
         try {

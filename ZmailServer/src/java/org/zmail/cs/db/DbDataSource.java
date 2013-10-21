@@ -12,7 +12,7 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.db;
+package org.zmail.cs.db;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -22,16 +22,16 @@ import java.util.Collection;
 import java.util.List;
 import java.util.Formatter;
 
-import com.zimbra.common.localconfig.DebugConfig;
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.common.util.ListUtil;
-import com.zimbra.common.util.ZimbraLog;
-import com.zimbra.cs.account.DataSource;
-import com.zimbra.cs.datasource.DataSourceManager;
-import com.zimbra.cs.db.DbPool.DbConnection;
-import com.zimbra.cs.mailbox.Flag;
-import com.zimbra.cs.mailbox.Mailbox;
-import com.zimbra.cs.mailbox.Metadata;
+import org.zmail.common.localconfig.DebugConfig;
+import org.zmail.common.service.ServiceException;
+import org.zmail.common.util.ListUtil;
+import org.zmail.common.util.ZmailLog;
+import org.zmail.cs.account.DataSource;
+import org.zmail.cs.datasource.DataSourceManager;
+import org.zmail.cs.db.DbPool.DbConnection;
+import org.zmail.cs.mailbox.Flag;
+import org.zmail.cs.mailbox.Mailbox;
+import org.zmail.cs.mailbox.Metadata;
 
 public class DbDataSource {
 
@@ -71,7 +71,7 @@ public class DbDataSource {
         if (item.remoteId == null)
             item.remoteId = "";
 
-        ZimbraLog.datasource.debug("Adding mapping for dataSource %s: itemId(%d), remoteId(%s)", ds.getName(), item.itemId, item.remoteId);
+        ZmailLog.datasource.debug("Adding mapping for dataSource %s: itemId(%d), remoteId(%s)", ds.getName(), item.itemId, item.remoteId);
 
         try {
             if (isBatch) {
@@ -134,7 +134,7 @@ public class DbDataSource {
     public static void updateMapping(DataSource ds, DataSourceItem item, final boolean isBatch) throws ServiceException {
         Mailbox mbox = DataSourceManager.getInstance().getMailbox(ds);
 
-        ZimbraLog.datasource.debug("Updating mapping for dataSource %s: itemId(%d), remoteId(%s)", ds.getName(), item.itemId, item.remoteId);
+        ZmailLog.datasource.debug("Updating mapping for dataSource %s: itemId(%d), remoteId(%s)", ds.getName(), item.itemId, item.remoteId);
 
         DbConnection conn = null;
         PreparedStatement stmt = null;
@@ -196,7 +196,7 @@ public class DbDataSource {
     public static void deleteMappings(DataSource ds, Collection<Integer> itemIds, boolean isBatch) throws ServiceException {
         Mailbox mbox = DataSourceManager.getInstance().getMailbox(ds);
 
-        ZimbraLog.datasource.debug("Deleting %d mappings for dataSource %s", itemIds.size(), ds.getName());
+        ZmailLog.datasource.debug("Deleting %d mappings for dataSource %s", itemIds.size(), ds.getName());
         List<List<Integer>> splitIds = ListUtil.split(itemIds, Db.getINClauseBatchSize());
         DbConnection conn = null;
         PreparedStatement stmt = null;
@@ -229,7 +229,7 @@ public class DbDataSource {
                 }
                 stmt.close();
             }
-            ZimbraLog.datasource.debug("Deleted %d mappings for %s", numRows, ds.getName());
+            ZmailLog.datasource.debug("Deleted %d mappings for %s", numRows, ds.getName());
         } catch (SQLException e) {
             throw ServiceException.FAILURE("Unable to delete mapping for dataSource " + ds.getName(), e);
         } finally {
@@ -243,7 +243,7 @@ public class DbDataSource {
     public static void deleteAllMappings(DataSource ds) throws ServiceException {
         Mailbox mbox = DataSourceManager.getInstance().getMailbox(ds);
 
-        ZimbraLog.datasource.debug("Deleting all mappings for dataSource %s", ds.getName());
+        ZmailLog.datasource.debug("Deleting all mappings for dataSource %s", ds.getName());
         DbConnection conn = null;
         PreparedStatement stmt = null;
         try {
@@ -260,7 +260,7 @@ public class DbDataSource {
             stmt.setString(i++, ds.getId());
             int numRows = stmt.executeUpdate();
             conn.commit();
-            ZimbraLog.datasource.debug("Deleted %d mappings for %s", numRows, ds.getName());
+            ZmailLog.datasource.debug("Deleted %d mappings for %s", numRows, ds.getName());
         } catch (SQLException e) {
             throw ServiceException.FAILURE("Unable to delete mapping for dataSource " + ds.getName(), e);
         } finally {
@@ -276,7 +276,7 @@ public class DbDataSource {
     public static void deleteMapping(DataSource ds, int itemId, boolean isBatch) throws ServiceException {
         Mailbox mbox = DataSourceManager.getInstance().getMailbox(ds);
 
-    	ZimbraLog.datasource.debug("Deleting mappings for dataSource %s itemId %d", ds.getName(), itemId);
+    	ZmailLog.datasource.debug("Deleting mappings for dataSource %s itemId %d", ds.getName(), itemId);
 
         DbConnection conn = null;
         PreparedStatement stmt = null;
@@ -302,7 +302,7 @@ public class DbDataSource {
             if (!isBatch) {
                 conn.commit();
             }
-            ZimbraLog.datasource.debug("Deleted %d mappings for %s", numRows, ds.getName());
+            ZmailLog.datasource.debug("Deleted %d mappings for %s", numRows, ds.getName());
         } catch (SQLException e) {
             throw ServiceException.FAILURE("Unable to delete mapping for dataSource " + ds.getName(), e);
         } finally {
@@ -322,7 +322,7 @@ public class DbDataSource {
 
         ArrayList<DataSourceItem> items = new ArrayList<DataSourceItem>();
 
-        ZimbraLog.datasource.debug("Deleting all mappings for dataSource %s in folder %d", ds.getName(), folderId);
+        ZmailLog.datasource.debug("Deleting all mappings for dataSource %s in folder %d", ds.getName(), folderId);
 
         mbox.lock.lock();
         try {
@@ -352,7 +352,7 @@ public class DbDataSource {
                     conn.commit();    
                 }
                 stmt.close();
-                ZimbraLog.datasource.debug("Deleted %d mappings for %s", numRows, ds.getName());
+                ZmailLog.datasource.debug("Deleted %d mappings for %s", numRows, ds.getName());
             } catch (SQLException e) {
                 throw ServiceException.FAILURE("Unable to delete mapping for dataSource "+ds.getName(), e);
             } finally {
@@ -377,7 +377,7 @@ public class DbDataSource {
 
         ArrayList<DataSourceItem> items = new ArrayList<DataSourceItem>();
 
-        ZimbraLog.datasource.debug("Get all mappings for %s", ds.getName());
+        ZmailLog.datasource.debug("Get all mappings for %s", ds.getName());
 
         DbConnection conn = null;
         PreparedStatement stmt = null;
@@ -419,7 +419,7 @@ public class DbDataSource {
 
         ArrayList<DataSourceItem> items = new ArrayList<DataSourceItem>();
 
-        ZimbraLog.datasource.debug("Get all mappings for %s in folder %d", ds.getName(), folderId);
+        ZmailLog.datasource.debug("Get all mappings for %s in folder %d", ds.getName(), folderId);
 
         DbConnection conn = null;
         PreparedStatement stmt = null;
@@ -465,7 +465,7 @@ public class DbDataSource {
 
         ArrayList<DataSourceItem> items = new ArrayList<DataSourceItem>();
 
-        ZimbraLog.datasource.debug("Get all mappings for %s in folder %d", ds.getName(), folderId);
+        ZmailLog.datasource.debug("Get all mappings for %s in folder %d", ds.getName(), folderId);
 
         DbConnection conn = null;
         PreparedStatement stmt = null;
@@ -565,7 +565,7 @@ public class DbDataSource {
         String remoteId = null;
         Metadata md = null;
 
-        ZimbraLog.datasource.debug("Get mapping for %s, itemId=%d", ds.getName(), itemId);
+        ZmailLog.datasource.debug("Get mapping for %s, itemId=%d", ds.getName(), itemId);
 
         DbConnection conn = null;
         PreparedStatement stmt = null;
@@ -616,7 +616,7 @@ public class DbDataSource {
         int itemId = 0;
         Metadata md = null;
 
-        ZimbraLog.datasource.debug("Get reverse mapping for %s, remoteId=%s", ds.getName(), remoteId);
+        ZmailLog.datasource.debug("Get reverse mapping for %s, remoteId=%s", ds.getName(), remoteId);
 
         DbConnection conn = null;
         PreparedStatement stmt = null;
@@ -664,7 +664,7 @@ public class DbDataSource {
         List<List<Integer>> splitIds = ListUtil.split(ids, Db.getINClauseBatchSize());
         ArrayList<DataSourceItem> items = new ArrayList<DataSourceItem>();
 
-        ZimbraLog.datasource.debug("Get mappings for %s", ds.getName());
+        ZmailLog.datasource.debug("Get mappings for %s", ds.getName());
 
         DbConnection conn = null;
         PreparedStatement stmt = null;
@@ -718,7 +718,7 @@ public class DbDataSource {
         List<List<String>> splitIds = ListUtil.split(remoteIds, Db.getINClauseBatchSize());
         ArrayList<DataSourceItem> items = new ArrayList<DataSourceItem>();
 
-        ZimbraLog.datasource.debug("Get reverse mappings for %s", ds.getName());
+        ZmailLog.datasource.debug("Get reverse mappings for %s", ds.getName());
 
         DbConnection conn = null;
         PreparedStatement stmt = null;

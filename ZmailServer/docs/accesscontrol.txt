@@ -4,7 +4,7 @@ Currently, we have "mail object" based access control mechanism in that
 ACLs are generally associated with a single object in a user's Mailbox,
 for example, a folder or a tag.  The ACLs for mail object based access 
 controls are persisted in the user's database, in the METADATA column on the 
-MAIL_ITEM row for the folder or tag.   ZimbraServer/docs/acl.txt describes 
+MAIL_ITEM row for the folder or tag.   ZmailServer/docs/acl.txt describes 
 "mail object" based access controls.
 
 In addition to the above access control scheme, it is required that we 
@@ -55,10 +55,10 @@ Like mail object based access controls:
 Rights can be granted(allowed or denied) to other principals.  
 The type of supported grantees are:
 
-        user        - a Zimbra user
-        group       - a Zimbra group(distribution list)
-        domain      - a Zimbra domain
-        all-authed  - all authed Zimbra usres
+        user        - a Zmail user
+        group       - a Zmail group(distribution list)
+        domain      - a Zmail domain
+        all-authed  - all authed Zmail usres
         key         - an external user with an access key
         public      - the public
 
@@ -113,7 +113,7 @@ e.g. - ACL has:
 
 ACL STORAGE AND SERIALIZATION FORMAT
 ====================================
-ACLs are persisted in LDAP in the multi-valued "zimbraACE" attribute on the 
+ACLs are persisted in LDAP in the multi-valued "zmailACE" attribute on the 
 target LDAP entry.  ACE stands for "access control entry", multiple ACEs makes 
 an ACL(access control list).
 
@@ -124,8 +124,8 @@ ACEs are serialized in LDAP in the following format:
         grantee: 
                 grantee type    stored 
                 -----------------------------------------------------
-                usr             zimbraId of the account
-                grp             zimbraId of the distribution list
+                usr             zmailId of the account
+                grp             zmailId of the distribution list
                 gst             {grantee email}:{password}
                 key             {grantee email (or just a name)}:{access key}
                 all             pseudo id 00000000-0000-0000-0000-000000000000
@@ -149,7 +149,7 @@ ACEs are serialized in LDAP in the following format:
          99999999-9999-9999-9999-999999999999 pub invite    
          
          
-Note: zimbraACE should NOT be directly modified via zmprov or any LDAP tools.  
+Note: zmailACE should NOT be directly modified via zmprov or any LDAP tools.  
       They should only be modified via zmmailbox commands.  See GRANTING TOOLS below.
       
       
@@ -351,19 +351,19 @@ GRANTING TOOLS
    - legitimate granting target types for user rights:
      account, calresource, dl, domain, global
      
-   - global adminS (zimbraIsAdminAccount is TRUE) can grant any user right on 
+   - global adminS (zmailIsAdminAccount is TRUE) can grant any user right on 
      targets of any of the legitimate granting types.
      e.g. - grant the invite right on a domain to public
             > zmprov grr domain test.com pub invite
           
-     e.g. - grant the viewFreeBusy right on a domain to all zimbra users in the same domain
+     e.g. - grant the viewFreeBusy right on a domain to all zmail users in the same domain
             zmprov grr domain test.com dom test.com viewFreeBusy
             
-     e.g. - grant the viewFreeBusy right on a domain to all zimbra users in another domain
+     e.g. - grant the viewFreeBusy right on a domain to all zmail users in another domain
             (all users in domain test2.com can access fb data on all users in domain test1.com)
             zmprov grr domain test1.com dom test2.com viewFreeBusy 
             
-     e.g. - grant the viewFreeBusy right on the global target to all zimbra users on the system
+     e.g. - grant the viewFreeBusy right on the global target to all zmail users on the system
             zmprov grr global all viewFreeBusy
             
      e.g. - grant negative viewFreeBusy on the global target to all users in a domain  
@@ -372,13 +372,13 @@ GRANTING TOOLS
      e.g. - grant delegable viewFreeBusy right on a domain to a delegated admin
             zmprov grr domain test.com usr admin1@example.com +viewFreeBusy     
    
-   - delegated admins (zimbraIsDelegatedAdminAccount IS true) can grant on targets 
+   - delegated admins (zmailIsDelegatedAdminAccount IS true) can grant on targets 
      on which the admin has effective "can delegate" privilege for the right.
      e.g. - auth as an delegated admin, try to grant the viewFreeBusy right on a domain 
             when the delegated admin does not have effective "can delegate" privilege for 
             the right on the domain -> will get PERM-DENIED
                 zmprov cd example.com
-                zmprov ca da@example.com test123 zimbraIsDelegatedAdminAccount TRUE
+                zmprov ca da@example.com test123 zmailIsDelegatedAdminAccount TRUE
                 zmprov cd test1.com
                 zmprov cd test2.com
                 zmprov -a da@example.com -p test123 grr domain test1.com dom test2.com viewFreeBusy

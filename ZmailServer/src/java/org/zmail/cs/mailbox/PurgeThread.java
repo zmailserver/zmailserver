@@ -12,7 +12,7 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.mailbox;
+package org.zmail.cs.mailbox;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -20,19 +20,19 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-import com.zimbra.common.localconfig.LC;
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.common.util.ZimbraLog;
-import com.zimbra.cs.account.Account;
-import com.zimbra.cs.account.Provisioning;
-import com.zimbra.cs.account.Server;
-import com.zimbra.cs.util.Config;
-import com.zimbra.cs.util.Zimbra;
+import org.zmail.common.localconfig.LC;
+import org.zmail.common.service.ServiceException;
+import org.zmail.common.util.ZmailLog;
+import org.zmail.cs.account.Account;
+import org.zmail.cs.account.Provisioning;
+import org.zmail.cs.account.Server;
+import org.zmail.cs.util.Config;
+import org.zmail.cs.util.Zmail;
 
 /**
  * Iterates all the mailboxes in the system, purges them one at a time
  * and sleeps between purges for a time interval specified by
- * {@link Provisioning#A_zimbraMailPurgeSleepInterval}.
+ * {@link Provisioning#A_zmailMailPurgeSleepInterval}.
  * 
  * @author bburtin
  */
@@ -53,24 +53,24 @@ extends Thread {
     public synchronized static void startup() {
         synchronized (THREAD_CONTROL_LOCK) {
             if (isRunning()) {
-                ZimbraLog.purge.warn("Cannot start a second purge thread while another one is running.");
+                ZmailLog.purge.warn("Cannot start a second purge thread while another one is running.");
                 return;
             }
 
             if (getSleepInterval() == 0) {
-                ZimbraLog.purge.info("Not starting purge thread because %s is 0.",
-                    Provisioning.A_zimbraMailPurgeSleepInterval);
+                ZmailLog.purge.info("Not starting purge thread because %s is 0.",
+                    Provisioning.A_zmailMailPurgeSleepInterval);
                 return;
             }
 
             // Log status
             try {
                 String displayInterval = Provisioning.getInstance().getLocalServer().getAttr(
-                    Provisioning.A_zimbraMailPurgeSleepInterval, null);
-                ZimbraLog.purge.info("Starting purge thread with sleep interval %s.", displayInterval);
+                    Provisioning.A_zmailMailPurgeSleepInterval, null);
+                ZmailLog.purge.info("Starting purge thread with sleep interval %s.", displayInterval);
             } catch (ServiceException e) {
-                ZimbraLog.purge.warn("Unable to get %s.  Aborting thread startup.",
-                    Provisioning.A_zimbraMailPurgeSleepInterval, e);
+                ZmailLog.purge.warn("Unable to get %s.  Aborting thread startup.",
+                    Provisioning.A_zmailMailPurgeSleepInterval, e);
                 return;
             }
 
@@ -103,7 +103,7 @@ extends Thread {
                 sPurgeThread.interrupt();
                 sPurgeThread = null;
             } else {
-                ZimbraLog.purge.debug("shutdown() called, but purge thread is not running.");
+                ZmailLog.purge.debug("shutdown() called, but purge thread is not running.");
             }
         }
     }
@@ -116,12 +116,12 @@ extends Thread {
         // Sleep before doing work, to give the server time to warm up.  Also limits the amount
         // of random effect when determining the next mailbox id.
         long sleepTime = LC.purge_initial_sleep_ms.longValue();
-        ZimbraLog.purge.info("Purge thread sleeping for %dms before doing work.", sleepTime);
+        ZmailLog.purge.info("Purge thread sleeping for %dms before doing work.", sleepTime);
 
         try {
             Thread.sleep(sleepTime);
         } catch (InterruptedException e) {
-            ZimbraLog.purge.info("Shutting down purge thread.");
+            ZmailLog.purge.info("Shutting down purge thread.");
             sPurgeThread = null;
             return;
         }
@@ -134,11 +134,11 @@ extends Thread {
             for (int i = 0; i < mailboxIds.size(); i++) {
                 int mailboxId = mailboxIds.get(i);
                 if (mShutdownRequested) {
-                    ZimbraLog.purge.info("Shutting down purge thread.");
+                    ZmailLog.purge.info("Shutting down purge thread.");
                     sPurgeThread = null;
                     return;
                 }
-                ZimbraLog.addMboxToContext(mailboxId);
+                ZmailLog.addMboxToContext(mailboxId);
 
                 // Purge the next mailbox
                 boolean attemptedPurge = false;
@@ -151,28 +151,28 @@ extends Thread {
                         Provisioning prov = Provisioning.getInstance();
                         if (!Provisioning.ACCOUNT_STATUS_MAINTENANCE.equals(account.getAccountStatus(prov)) &&
                                 !account.isIsExternalVirtualAccount()) { 
-                            ZimbraLog.addAccountNameToContext(account.getName());
+                            ZmailLog.addAccountNameToContext(account.getName());
                             boolean purgedAll = mbox.purgeMessages(null);
                             if (!purgedAll) {
-                                ZimbraLog.purge.info("Not all messages were purged.  Scheduling mailbox to be purged again.");
+                                ZmailLog.purge.info("Not all messages were purged.  Scheduling mailbox to be purged again.");
                                 mailboxIds.add(mailboxId);
                             }
                             Config.setInt(Config.KEY_PURGE_LAST_MAILBOX_ID, mbox.getId());
                         } else {
-                            ZimbraLog.purge.debug("Skipping mailbox %d because the account is in maintenance status or is an external virtual account.", mailboxId);
+                            ZmailLog.purge.debug("Skipping mailbox %d because the account is in maintenance status or is an external virtual account.", mailboxId);
                         }
                     } else {
-                        ZimbraLog.purge.debug("Skipping mailbox %d because it is not loaded into memory.", mailboxId);
+                        ZmailLog.purge.debug("Skipping mailbox %d because it is not loaded into memory.", mailboxId);
                     }
                 } catch (Throwable t) {
                     if (t instanceof OutOfMemoryError) {
-                        Zimbra.halt("Ran out of memory while purging mailboxes", t);
+                        Zmail.halt("Ran out of memory while purging mailboxes", t);
                     } else {
-                        ZimbraLog.purge.warn("Unable to purge mailbox %d", mailboxId, t);
+                        ZmailLog.purge.warn("Unable to purge mailbox %d", mailboxId, t);
                     }
                 }
                 
-                ZimbraLog.clearContext();
+                ZmailLog.clearContext();
                 if (attemptedPurge) {
                     // Sleep after every purge attempt.
                     sleep();
@@ -189,24 +189,24 @@ extends Thread {
                 long lastPurgeMaxDuration = Provisioning.getInstance().getLocalServer().getLastPurgeMaxDuration();
                 purgePendingMailboxes = MailboxManager.getInstance().getPurgePendingMailboxes(System.currentTimeMillis() - lastPurgeMaxDuration);
             } catch (ServiceException e) {
-                ZimbraLog.purge.warn("Unable to get purge pending mailboxes ", e);
+                ZmailLog.purge.warn("Unable to get purge pending mailboxes ", e);
             }
         }
     }
     
     /**
-     * Sleeps for the time interval specified by {@link Provisioning#A_zimbraMailPurgeSleepInterval}.
+     * Sleeps for the time interval specified by {@link Provisioning#A_zmailMailPurgeSleepInterval}.
      * If sleep is interrupted, sets {@link #mShutdownRequested} to <tt>true</tt>.
      */
     private void sleep() {
         long interval = getSleepInterval();
-        ZimbraLog.purge.debug("Sleeping for %d milliseconds.", interval);
+        ZmailLog.purge.debug("Sleeping for %d milliseconds.", interval);
         
         if (interval > 0) {
             try {
                 Thread.sleep(interval);
             } catch (InterruptedException e) {
-                ZimbraLog.purge.debug("Purge thread was interrupted.");
+                ZmailLog.purge.debug("Purge thread was interrupted.");
                 mShutdownRequested = true;
             }
         } else {
@@ -225,17 +225,17 @@ extends Thread {
     private static long sSleepInterval = 0;
     
     /**
-     * Returns the current value of {@link Provisioning#A_zimbraMailPurgeSleepInterval},
+     * Returns the current value of {@link Provisioning#A_zmailMailPurgeSleepInterval},
      * or <tt>0</tt> if it cannot be determined.
      */
     private static long getSleepInterval() {
         try {
             Provisioning prov = Provisioning.getInstance();
             Server server = prov.getLocalServer();
-            sSleepInterval = server.getTimeInterval(Provisioning.A_zimbraMailPurgeSleepInterval, 0);
+            sSleepInterval = server.getTimeInterval(Provisioning.A_zmailMailPurgeSleepInterval, 0);
         } catch (ServiceException e) {
-            ZimbraLog.purge.warn("Unable to determine value of %s.  Using previous value: %d.",
-                Provisioning.A_zimbraMailPurgeSleepInterval, sSleepInterval, e);
+            ZmailLog.purge.warn("Unable to determine value of %s.  Using previous value: %d.",
+                Provisioning.A_zmailMailPurgeSleepInterval, sSleepInterval, e);
         }
         
         return sSleepInterval;
@@ -265,7 +265,7 @@ extends Thread {
             }
             
         } catch (ServiceException e) {
-            ZimbraLog.purge.warn("Unable to get mailbox id's", e);
+            ZmailLog.purge.warn("Unable to get mailbox id's", e);
             return Collections.emptyList();
         }
         

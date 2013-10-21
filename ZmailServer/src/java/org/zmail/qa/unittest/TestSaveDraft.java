@@ -13,13 +13,13 @@
  * ***** END LICENSE BLOCK *****
  */
 
-package com.zimbra.qa.unittest;
+package org.zmail.qa.unittest;
 
-import com.zimbra.cs.mailbox.Mailbox;
-import com.zimbra.client.ZIdentity;
-import com.zimbra.client.ZMailbox;
-import com.zimbra.client.ZMailbox.ZOutgoingMessage;
-import com.zimbra.client.ZMessage;
+import org.zmail.cs.mailbox.Mailbox;
+import org.zmail.client.ZIdentity;
+import org.zmail.client.ZMailbox;
+import org.zmail.client.ZMailbox.ZOutgoingMessage;
+import org.zmail.client.ZMessage;
 
 import junit.framework.TestCase;
 

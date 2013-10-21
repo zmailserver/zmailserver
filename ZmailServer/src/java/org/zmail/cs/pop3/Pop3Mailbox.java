@@ -13,7 +13,7 @@
  * ***** END LICENSE BLOCK *****
  */
 
-package com.zimbra.cs.pop3;
+package org.zmail.cs.pop3;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -25,21 +25,21 @@ import java.util.Set;
 import com.google.common.base.Strings;
 import com.google.common.collect.ImmutableSet;
 import com.google.common.io.Closeables;
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.common.util.DateUtil;
-import com.zimbra.common.util.ZimbraLog;
-import com.zimbra.cs.account.Account;
-import com.zimbra.cs.account.Provisioning;
-import com.zimbra.cs.index.SortBy;
-import com.zimbra.cs.index.ZimbraHit;
-import com.zimbra.cs.index.ZimbraQueryResults;
-import com.zimbra.cs.index.MessageHit;
-import com.zimbra.cs.mailbox.Flag;
-import com.zimbra.cs.mailbox.MailItem;
-import com.zimbra.cs.mailbox.Mailbox;
-import com.zimbra.cs.mailbox.MailboxManager;
-import com.zimbra.cs.mailbox.Message;
-import com.zimbra.cs.mailbox.OperationContext;
+import org.zmail.common.service.ServiceException;
+import org.zmail.common.util.DateUtil;
+import org.zmail.common.util.ZmailLog;
+import org.zmail.cs.account.Account;
+import org.zmail.cs.account.Provisioning;
+import org.zmail.cs.index.SortBy;
+import org.zmail.cs.index.ZmailHit;
+import org.zmail.cs.index.ZmailQueryResults;
+import org.zmail.cs.index.MessageHit;
+import org.zmail.cs.mailbox.Flag;
+import org.zmail.cs.mailbox.MailItem;
+import org.zmail.cs.mailbox.Mailbox;
+import org.zmail.cs.mailbox.MailboxManager;
+import org.zmail.cs.mailbox.Message;
+import org.zmail.cs.mailbox.OperationContext;
 
 /**
  * @since Nov 26, 2004
@@ -69,20 +69,20 @@ final class Pop3Mailbox {
             Set<Integer> folderIds = acct.isPrefPop3IncludeSpam() ?
                     ImmutableSet.of(Mailbox.ID_FOLDER_INBOX, Mailbox.ID_FOLDER_SPAM) :
                         Collections.singleton(Mailbox.ID_FOLDER_INBOX);
-            String dateConstraint = acct.getAttr(Provisioning.A_zimbraPrefPop3DownloadSince);
+            String dateConstraint = acct.getAttr(Provisioning.A_zmailPrefPop3DownloadSince);
             Date popSince = dateConstraint == null ? null : DateUtil.parseGeneralizedTime(dateConstraint);
             messages = mbox.openPop3Folder(opContext, folderIds, popSince);
             for (Pop3Message p3m : messages) {
                 totalSize += p3m.getSize();
             }
         } else {
-            ZimbraQueryResults results = null;
+            ZmailQueryResults results = null;
             messages = new ArrayList<Pop3Message>(500);
             try {
                 results = mbox.index.search(opContext, query, POP3_TYPES, SortBy.DATE_DESC, 500);
 
                 while (results.hasNext()) {
-                    ZimbraHit hit = results.getNext();
+                    ZmailHit hit = results.getNext();
                     if (hit instanceof MessageHit) {
                         MessageHit mh = (MessageHit) hit;
                         Message msg = mh.getMessage();
@@ -99,7 +99,7 @@ final class Pop3Mailbox {
     }
 
     /**
-     * Returns the zimbra mailbox id.
+     * Returns the zmail mailbox id.
      */
     int getId() {
         return id;
@@ -225,7 +225,7 @@ final class Pop3Mailbox {
                     }
                     count++;
                 } catch (ServiceException e) {
-                    ZimbraLog.pop.warn("Failed to expunge delete", e);
+                    ZmailLog.pop.warn("Failed to expunge delete", e);
                     failed++;
                 }
                 numDeleted--;
@@ -238,7 +238,7 @@ final class Pop3Mailbox {
                             break;
                     }
                 } catch (ServiceException e) {
-                    ZimbraLog.pop.warn("Failed to update flags", e);
+                    ZmailLog.pop.warn("Failed to update flags", e);
                 }
             }
         }
@@ -247,7 +247,7 @@ final class Pop3Mailbox {
             try {
                 mbox.resetRecentMessageCount(opContext);
             } catch (ServiceException e) {
-                ZimbraLog.pop.info("error resetting mailbox recent message count", e);
+                ZmailLog.pop.info("error resetting mailbox recent message count", e);
             }
         }
         if (failed > 0) {

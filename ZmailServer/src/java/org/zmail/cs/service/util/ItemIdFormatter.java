@@ -12,12 +12,12 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.service.util;
+package org.zmail.cs.service.util;
 
-import com.zimbra.cs.account.Account;
-import com.zimbra.cs.mailbox.MailItem;
-import com.zimbra.cs.mailbox.Mailbox;
-import com.zimbra.soap.ZimbraSoapContext;
+import org.zmail.cs.account.Account;
+import org.zmail.cs.mailbox.MailItem;
+import org.zmail.cs.mailbox.Mailbox;
+import org.zmail.soap.ZmailSoapContext;
 
 public class ItemIdFormatter {
     private boolean mUnqualifiedItemIds;
@@ -36,7 +36,7 @@ public class ItemIdFormatter {
         this((String) null, (String) null, noqualify);
     }
 
-    public ItemIdFormatter(ZimbraSoapContext zsc) {
+    public ItemIdFormatter(ZmailSoapContext zsc) {
         this(zsc.getAuthtokenAccountId(), zsc.getRequestedAccountId(),
                 zsc.wantsUnqualifiedIds());
     }

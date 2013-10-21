@@ -12,7 +12,7 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.fb;
+package org.zmail.cs.fb;
 
 import org.apache.commons.codec.binary.Base64;
 import org.apache.commons.httpclient.HttpMethod;
@@ -26,14 +26,14 @@ import org.dom4j.Namespace;
 import org.dom4j.QName;
 import org.dom4j.tree.DefaultDocument;
 
-import com.zimbra.common.calendar.ICalTimeZone;
-import com.zimbra.common.localconfig.KnownKey;
-import com.zimbra.common.localconfig.LC;
-import com.zimbra.common.util.ZimbraLog;
-import com.zimbra.cs.dav.DomUtil;
-import com.zimbra.cs.fb.FreeBusy.Interval;
-import com.zimbra.cs.fb.FreeBusy.IntervalList;
-import com.zimbra.cs.mailbox.calendar.IcalXmlStrMap;
+import org.zmail.common.calendar.ICalTimeZone;
+import org.zmail.common.localconfig.KnownKey;
+import org.zmail.common.localconfig.LC;
+import org.zmail.common.util.ZmailLog;
+import org.zmail.cs.dav.DomUtil;
+import org.zmail.cs.fb.FreeBusy.Interval;
+import org.zmail.cs.fb.FreeBusy.IntervalList;
+import org.zmail.cs.mailbox.calendar.IcalXmlStrMap;
 
 import java.io.IOException;
 import java.util.Calendar;
@@ -226,7 +226,7 @@ public class ExchangeMessage {
     		    	byte[] encoded = Base64.encodeBase64(raw);
     		    	buf = new String(encoded, "UTF-8");
     			} catch (IOException e) {
-					ZimbraLog.fb.warn("error converting millis to minutes for month "+m, e);
+					ZmailLog.fb.warn("error converting millis to minutes for month "+m, e);
 					continue;
     			}
     		}
@@ -245,8 +245,8 @@ public class ExchangeMessage {
     	};
 		Document doc = createRequest(fb);
 		byte[] buf = DomUtil.getBytes(doc);
-		if (ZimbraLog.fb.isDebugEnabled())
-			ZimbraLog.fb.debug(new String(buf, "UTF-8"));
+		if (ZmailLog.fb.isDebugEnabled())
+			ZmailLog.fb.debug(new String(buf, "UTF-8"));
 		ByteArrayRequestEntity re = new ByteArrayRequestEntity(buf, "text/xml");
 		method.setRequestEntity(re);
 		return method;
@@ -265,8 +265,8 @@ public class ExchangeMessage {
     protected void encodeFb(long s, long e, LinkedList<Byte> buf) {
     	int start = millisToMinutes(s);
     	int end = start + (int)((e - s) / 60000);
-    	ZimbraLog.fb.debug("Start: %s %d", new Date(s).toGMTString(), start);
-        ZimbraLog.fb.debug("End:   %s %d", new Date(e).toGMTString(), end);
+    	ZmailLog.fb.debug("Start: %s %d", new Date(s).toGMTString(), start);
+        ZmailLog.fb.debug("End:   %s %d", new Date(e).toGMTString(), end);
     	// swap bytes and convert to little endian.  then lay out bytes
     	// two bytes each for start time, then end time
     	buf.addLast((byte)(start & 0xFF));

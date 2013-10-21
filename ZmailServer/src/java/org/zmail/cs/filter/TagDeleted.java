@@ -13,7 +13,7 @@
  * ***** END LICENSE BLOCK *****
  */
 
-package com.zimbra.cs.filter;
+package org.zmail.cs.filter;
 
 import org.apache.jsieve.parser.SieveNode;
 import org.apache.jsieve.parser.generated.Node;

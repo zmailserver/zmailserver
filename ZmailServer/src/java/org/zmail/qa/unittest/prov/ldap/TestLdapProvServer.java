@@ -12,7 +12,7 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.qa.unittest.prov.ldap;
+package org.zmail.qa.unittest.prov.ldap;
 
 import java.util.HashMap;
 import java.util.HashSet;
@@ -23,12 +23,12 @@ import java.util.Set;
 import org.junit.*;
 import static org.junit.Assert.*;
 
-import com.zimbra.common.account.Key;
-import com.zimbra.cs.account.AccountServiceException;
-import com.zimbra.cs.account.Provisioning;
-import com.zimbra.cs.account.Server;
-import com.zimbra.qa.unittest.prov.Names;
-import com.zimbra.soap.admin.type.CacheEntryType;
+import org.zmail.common.account.Key;
+import org.zmail.cs.account.AccountServiceException;
+import org.zmail.cs.account.Provisioning;
+import org.zmail.cs.account.Server;
+import org.zmail.qa.unittest.prov.Names;
+import org.zmail.soap.admin.type.CacheEntryType;
 
 public class TestLdapProvServer extends LdapTest {
     private static LdapProvTestUtil provUtil;
@@ -88,7 +88,7 @@ public class TestLdapProvServer extends LdapTest {
         String SERVER_NAME_1 = Names.makeServerName(genServerName("1"));
         
         Map<String, Object> server1Attrs = new HashMap<String, Object>();
-        server1Attrs.put(Provisioning.A_zimbraServiceEnabled, 
+        server1Attrs.put(Provisioning.A_zmailServiceEnabled, 
                 new String[]{Provisioning.SERVICE_MEMCACHED, Provisioning.SERVICE_MAILBOX});
         Server server1 = createServer(SERVER_NAME_1, server1Attrs);
         

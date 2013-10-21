@@ -19,7 +19,7 @@
  * TODO To change the template for this generated file go to
  * Window - Preferences - Java - Code Style - Code Templates
  */
-package com.zimbra.cs.client.soap;
+package org.zmail.cs.client.soap;
 
 /**
  * @author jhahm

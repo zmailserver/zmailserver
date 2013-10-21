@@ -13,7 +13,7 @@
  * ***** END LICENSE BLOCK *****
  */
 
-package com.zimbra.cs.index;
+package org.zmail.cs.index;
 
 import java.text.ParseException;
 import java.util.ArrayList;
@@ -23,16 +23,16 @@ import org.apache.lucene.document.DateTools;
 import org.apache.lucene.document.Document;
 
 import com.google.common.base.Objects;
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.cs.mailbox.Mailbox;
-import com.zimbra.cs.mailbox.MailItem;
-import com.zimbra.cs.mailbox.MailboxManager;
-import com.zimbra.cs.mailbox.Message;
-import com.zimbra.cs.mailbox.Tag;
-import com.zimbra.cs.mime.ParsedAddress;
+import org.zmail.common.service.ServiceException;
+import org.zmail.cs.mailbox.Mailbox;
+import org.zmail.cs.mailbox.MailItem;
+import org.zmail.cs.mailbox.MailboxManager;
+import org.zmail.cs.mailbox.Message;
+import org.zmail.cs.mailbox.Tag;
+import org.zmail.cs.mime.ParsedAddress;
 
-import com.zimbra.common.util.Log;
-import com.zimbra.common.util.LogFactory;
+import org.zmail.common.util.Log;
+import org.zmail.common.util.LogFactory;
 
 /**
  * Efficient Read-access to a {@link Message} returned from a query. APIs mirror
@@ -42,7 +42,7 @@ import com.zimbra.common.util.LogFactory;
  * @since Oct 15, 2004
  * @author tim
  */
-public final class MessageHit extends ZimbraHit {
+public final class MessageHit extends ZmailHit {
 
     private static final Log LOG = LogFactory.getLog(MessageHit.class);
 
@@ -53,7 +53,7 @@ public final class MessageHit extends ZimbraHit {
     private int messageId = 0;
     private ConversationHit conversationHit = null;
 
-    MessageHit(ZimbraQueryResultsImpl results, Mailbox mbx, int id, Message msg, Document doc, Object sortValue) {
+    MessageHit(ZmailQueryResultsImpl results, Mailbox mbx, int id, Message msg, Document doc, Object sortValue) {
         super(results, mbx, sortValue);
         messageId = id;
         message = msg;

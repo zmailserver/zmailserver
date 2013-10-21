@@ -13,28 +13,28 @@
  * ***** END LICENSE BLOCK *****
  */
 
-package com.zimbra.cs.index;
+package org.zmail.cs.index;
 
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.common.soap.MailConstants;
-import com.zimbra.common.soap.Element;
-import com.zimbra.cs.service.util.ItemId;
-import com.zimbra.cs.mailbox.MailItem;
+import org.zmail.common.service.ServiceException;
+import org.zmail.common.soap.MailConstants;
+import org.zmail.common.soap.Element;
+import org.zmail.cs.service.util.ItemId;
+import org.zmail.cs.mailbox.MailItem;
 
 /**
- * A {@link ZimbraHit} which is being proxied from another server: i.e. we did a SOAP request somewhere else and are now
+ * A {@link ZmailHit} which is being proxied from another server: i.e. we did a SOAP request somewhere else and are now
  * wrapping results we got from request.
  *
  * @since Mar 28, 2005
  * @author tim
  */
-public class ProxiedHit extends ZimbraHit  {
+public class ProxiedHit extends ZmailHit  {
     private int proxiedConvId = -1;
     private int proxiedMsgId = -1;
     private ItemId itemId;
     private final Element element;
 
-    public ProxiedHit(ZimbraQueryResultsImpl results, Element elt, Object sortValue) {
+    public ProxiedHit(ZmailQueryResultsImpl results, Element elt, Object sortValue) {
         super(results, null, sortValue);
         element = elt;
     }

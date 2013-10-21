@@ -12,28 +12,28 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.account.ldap.upgrade;
+package org.zmail.cs.account.ldap.upgrade;
 
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import com.zimbra.common.account.ProvisioningConstants;
-import com.zimbra.common.account.ZAttrProvisioning;
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.cs.account.AttributeClass;
-import com.zimbra.cs.account.Config;
-import com.zimbra.cs.account.Entry;
-import com.zimbra.cs.account.Provisioning;
-import com.zimbra.cs.account.Server;
-import com.zimbra.cs.ldap.LdapClient;
-import com.zimbra.cs.ldap.LdapServerType;
-import com.zimbra.cs.ldap.LdapUsage;
-import com.zimbra.cs.ldap.ZLdapContext;
+import org.zmail.common.account.ProvisioningConstants;
+import org.zmail.common.account.ZAttrProvisioning;
+import org.zmail.common.service.ServiceException;
+import org.zmail.cs.account.AttributeClass;
+import org.zmail.cs.account.Config;
+import org.zmail.cs.account.Entry;
+import org.zmail.cs.account.Provisioning;
+import org.zmail.cs.account.Server;
+import org.zmail.cs.ldap.LdapClient;
+import org.zmail.cs.ldap.LdapServerType;
+import org.zmail.cs.ldap.LdapUsage;
+import org.zmail.cs.ldap.ZLdapContext;
 
 public class BUG_33814 extends UpgradeOp {
 
-    private static final String TLSLEVEL_ENCRYPT = ZAttrProvisioning.MtaTlsSecurityLevel.may.toString(); // we don't support encryp yet, see http://bugzilla.zimbra.com/show_bug.cgi?id=33814#c12
+    private static final String TLSLEVEL_ENCRYPT = ZAttrProvisioning.MtaTlsSecurityLevel.may.toString(); // we don't support encryp yet, see http://bugzilla.zmail.com/show_bug.cgi?id=33814#c12
     private static final String TLSLEVEL_MAY     = ZAttrProvisioning.MtaTlsSecurityLevel.may.toString();
     private static final String TLSLEVEL_NONE    = ZAttrProvisioning.MtaTlsSecurityLevel.none.toString();
     
@@ -57,72 +57,72 @@ public class BUG_33814 extends UpgradeOp {
      */
     private void doMtaTlsSecurityLevelOnGlobalConfig(Entry entry, Map<String, Object> attrValues) {
         
-        String zimbraMtaAuthEnabled      = entry.getAttr(Provisioning.A_zimbraMtaAuthEnabled, false);
-        String zimbraMtaTlsAuthOnly      = entry.getAttr(Provisioning.A_zimbraMtaTlsAuthOnly, false);
+        String zmailMtaAuthEnabled      = entry.getAttr(Provisioning.A_zmailMtaAuthEnabled, false);
+        String zmailMtaTlsAuthOnly      = entry.getAttr(Provisioning.A_zmailMtaTlsAuthOnly, false);
 
         String value = null;
         
-        if (ProvisioningConstants.TRUE.equals(zimbraMtaAuthEnabled)) {
-            if (ProvisioningConstants.TRUE.equals(zimbraMtaTlsAuthOnly))
+        if (ProvisioningConstants.TRUE.equals(zmailMtaAuthEnabled)) {
+            if (ProvisioningConstants.TRUE.equals(zmailMtaTlsAuthOnly))
                 value = TLSLEVEL_ENCRYPT;
             else
                 value = TLSLEVEL_MAY;
         } else
             value = TLSLEVEL_NONE;
         
-        attrValues.put(Provisioning.A_zimbraMtaTlsSecurityLevel, value);
+        attrValues.put(Provisioning.A_zmailMtaTlsSecurityLevel, value);
     }
     
     /*
-                                           zimbraMtaTlsAuthOnly
+                                           zmailMtaTlsAuthOnly
                                             TRUE        FALSE
            ---------------------------------------------------------------
-           zimbraMtaAuthEnabled TRUE       may(see *)    may
-           zimbraMtaAuthEnabled FALSE      none          none
+           zmailMtaAuthEnabled TRUE       may(see *)    may
+           zmailMtaAuthEnabled FALSE      none          none
 
     */
     private void doMtaTlsSecurityLevelOnServer(Entry entry, Map<String, Object> attrValues) {
         
         // value on server entry
-        String zimbraMtaAuthEnabledOnServer = entry.getAttr(Provisioning.A_zimbraMtaAuthEnabled, false);
-        String zimbraMtaTlsAuthOnlyOnServer = entry.getAttr(Provisioning.A_zimbraMtaTlsAuthOnly, false);
+        String zmailMtaAuthEnabledOnServer = entry.getAttr(Provisioning.A_zmailMtaAuthEnabled, false);
+        String zmailMtaTlsAuthOnlyOnServer = entry.getAttr(Provisioning.A_zmailMtaTlsAuthOnly, false);
         
         // value on server entry, or if not set on server, value on global config 
-        String zimbraMtaAuthEnabled = entry.getAttr(Provisioning.A_zimbraMtaAuthEnabled);
-        String zimbraMtaTlsAuthOnly = entry.getAttr(Provisioning.A_zimbraMtaTlsAuthOnly);
+        String zmailMtaAuthEnabled = entry.getAttr(Provisioning.A_zmailMtaAuthEnabled);
+        String zmailMtaTlsAuthOnly = entry.getAttr(Provisioning.A_zmailMtaTlsAuthOnly);
 
         String value = null;
         
-        if (ProvisioningConstants.TRUE.equals(zimbraMtaAuthEnabledOnServer)) {
-            if (ProvisioningConstants.TRUE.equals(zimbraMtaTlsAuthOnly))
+        if (ProvisioningConstants.TRUE.equals(zmailMtaAuthEnabledOnServer)) {
+            if (ProvisioningConstants.TRUE.equals(zmailMtaTlsAuthOnly))
                 value = TLSLEVEL_ENCRYPT;
             else
                 value = TLSLEVEL_MAY;
                 
-        } else if (ProvisioningConstants.FALSE.equals(zimbraMtaAuthEnabledOnServer)) {
+        } else if (ProvisioningConstants.FALSE.equals(zmailMtaAuthEnabledOnServer)) {
             value = TLSLEVEL_NONE;
         } else {
-            // zimbraMtaAuthEnabled is not set on server
+            // zmailMtaAuthEnabled is not set on server
             
             // see what's on global config
-            if (ProvisioningConstants.TRUE.equals(zimbraMtaAuthEnabled)) {
-                if (ProvisioningConstants.TRUE.equals(zimbraMtaTlsAuthOnlyOnServer))
+            if (ProvisioningConstants.TRUE.equals(zmailMtaAuthEnabled)) {
+                if (ProvisioningConstants.TRUE.equals(zmailMtaTlsAuthOnlyOnServer))
                     value = TLSLEVEL_ENCRYPT;
-                else if (ProvisioningConstants.FALSE.equals(zimbraMtaTlsAuthOnlyOnServer))
+                else if (ProvisioningConstants.FALSE.equals(zmailMtaTlsAuthOnlyOnServer))
                     value = TLSLEVEL_MAY;
-                // else zimbraMtaTlsAuthOnly is also not set on server, do not 
-                // set zimbraMtaTlsSecurityLevel and just let it inherit from global config
+                // else zmailMtaTlsAuthOnly is also not set on server, do not 
+                // set zmailMtaTlsSecurityLevel and just let it inherit from global config
             } else {
-                // zimbraMtaAuthEnabled on global config is FALSE or is not set
-                // in this case zimbraMtaTlsSecurityLevel must be NONE on global config
-                // do not set zimbraMtaTlsSecurityLevel on server regardless what
-                // zimbraMtaTlsAuthOnly is(TRUE, FALSE, or not set), 
+                // zmailMtaAuthEnabled on global config is FALSE or is not set
+                // in this case zmailMtaTlsSecurityLevel must be NONE on global config
+                // do not set zmailMtaTlsSecurityLevel on server regardless what
+                // zmailMtaTlsAuthOnly is(TRUE, FALSE, or not set), 
                 // just let it inherit from global config, which will be NONE
             }
         }
             
         if (value != null)
-            attrValues.put(Provisioning.A_zimbraMtaTlsSecurityLevel, value);
+            attrValues.put(Provisioning.A_zmailMtaTlsSecurityLevel, value);
     }
     
     private void doEntry(ZLdapContext zlc, Entry entry, String entryName, AttributeClass klass) throws ServiceException {
@@ -137,36 +137,36 @@ public class BUG_33814 extends UpgradeOp {
             
             // old attrs
             // get value on the entry, do not pull in inherited value 
-            String zimbraMtaAuthEnabled      = entry.getAttr(Provisioning.A_zimbraMtaAuthEnabled, false);
-            String zimbraMtaTlsAuthOnly      = entry.getAttr(Provisioning.A_zimbraMtaTlsAuthOnly, false);
+            String zmailMtaAuthEnabled      = entry.getAttr(Provisioning.A_zmailMtaAuthEnabled, false);
+            String zmailMtaTlsAuthOnly      = entry.getAttr(Provisioning.A_zmailMtaTlsAuthOnly, false);
             
-            printer.println("zimbraMtaAuthEnabled: " + zimbraMtaAuthEnabled);
-            printer.println("zimbraMtaTlsAuthOnly: " + zimbraMtaTlsAuthOnly);
+            printer.println("zmailMtaAuthEnabled: " + zmailMtaAuthEnabled);
+            printer.println("zmailMtaTlsAuthOnly: " + zmailMtaTlsAuthOnly);
             printer.println();
             
             // new attrs
-            String zimbraMtaTlsSecurityLevel = entry.getAttr(Provisioning.A_zimbraMtaTlsSecurityLevel, false);
-            String zimbraMtaSaslAuthEnable   = entry.getAttr(Provisioning.A_zimbraMtaSaslAuthEnable, false);
+            String zmailMtaTlsSecurityLevel = entry.getAttr(Provisioning.A_zmailMtaTlsSecurityLevel, false);
+            String zmailMtaSaslAuthEnable   = entry.getAttr(Provisioning.A_zmailMtaSaslAuthEnable, false);
             
-            // upgrade zimbraMtaTlsSecurityLevel
+            // upgrade zmailMtaTlsSecurityLevel
             // set it only if it does not already have a value
-            if (zimbraMtaTlsSecurityLevel == null) {
+            if (zmailMtaTlsSecurityLevel == null) {
                 if (entry instanceof Server)
                     doMtaTlsSecurityLevelOnServer(entry, attrValues);
                 else
                     doMtaTlsSecurityLevelOnGlobalConfig(entry, attrValues);
             } else {
-                printer.println("Not updating zimbraMtaTlsSecurityLevel because there is already a value: " + zimbraMtaTlsSecurityLevel);
+                printer.println("Not updating zmailMtaTlsSecurityLevel because there is already a value: " + zmailMtaTlsSecurityLevel);
             }
             
-            // upgrade zimbraMtaSaslAuthEnable
+            // upgrade zmailMtaSaslAuthEnable
             // set it only if it does not already have a value
-            if (zimbraMtaSaslAuthEnable == null) {
-                if (zimbraMtaAuthEnabled != null) {
-                    attrValues.put(Provisioning.A_zimbraMtaSaslAuthEnable, zimbraMtaAuthEnabled);
+            if (zmailMtaSaslAuthEnable == null) {
+                if (zmailMtaAuthEnabled != null) {
+                    attrValues.put(Provisioning.A_zmailMtaSaslAuthEnable, zmailMtaAuthEnabled);
                 }
             } else {
-                printer.println("Not updating zimbraMtaSaslAuthEnable because there is already a value: " + zimbraMtaSaslAuthEnable);
+                printer.println("Not updating zmailMtaSaslAuthEnable because there is already a value: " + zmailMtaSaslAuthEnable);
             }
             
             if (!attrValues.isEmpty()) {

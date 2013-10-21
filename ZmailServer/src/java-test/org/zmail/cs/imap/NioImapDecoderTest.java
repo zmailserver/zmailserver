@@ -12,7 +12,7 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.imap;
+package org.zmail.cs.imap;
 
 import java.net.SocketAddress;
 import java.nio.charset.CharsetEncoder;
@@ -26,9 +26,9 @@ import org.junit.Before;
 import org.junit.Test;
 
 import com.google.common.base.Charsets;
-import com.zimbra.cs.imap.NioImapDecoder.InvalidLiteralFormatException;
-import com.zimbra.cs.imap.NioImapDecoder.TooBigLiteralException;
-import com.zimbra.cs.imap.NioImapDecoder.TooLongLineException;
+import org.zmail.cs.imap.NioImapDecoder.InvalidLiteralFormatException;
+import org.zmail.cs.imap.NioImapDecoder.TooBigLiteralException;
+import org.zmail.cs.imap.NioImapDecoder.TooLongLineException;
 
 /**
  * Unit test for {@link NioImapDecoder}.

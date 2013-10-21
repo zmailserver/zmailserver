@@ -12,12 +12,12 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.mailclient.auth;
+package org.zmail.cs.mailclient.auth;
 
-import com.zimbra.cs.security.sasl.SaslInputStream;
-import com.zimbra.cs.security.sasl.SaslOutputStream;
-import com.zimbra.cs.security.sasl.SaslSecurityLayer;
-import com.zimbra.cs.mailclient.MailConfig;
+import org.zmail.cs.security.sasl.SaslInputStream;
+import org.zmail.cs.security.sasl.SaslOutputStream;
+import org.zmail.cs.security.sasl.SaslSecurityLayer;
+import org.zmail.cs.mailclient.MailConfig;
 
 import javax.security.auth.Subject;
 import javax.security.auth.callback.Callback;

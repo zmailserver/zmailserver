@@ -13,14 +13,14 @@
  * ***** END LICENSE BLOCK *****
  */
 
-package com.zimbra.cs.store.external;
+package org.zmail.cs.store.external;
 
 import java.io.IOException;
 
-import com.zimbra.cs.mailbox.Mailbox;
-import com.zimbra.cs.store.Blob;
-import com.zimbra.cs.store.MailboxBlob;
-import com.zimbra.cs.store.StoreManager;
+import org.zmail.cs.mailbox.Mailbox;
+import org.zmail.cs.store.Blob;
+import org.zmail.cs.store.MailboxBlob;
+import org.zmail.cs.store.StoreManager;
 
 /**
  * MailboxBlob implementation which accesses ExternalStoreManager to retrieve blobs for local use

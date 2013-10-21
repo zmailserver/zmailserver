@@ -12,13 +12,13 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.qa.unittest;
+package org.zmail.qa.unittest;
 
 import junit.framework.TestCase;
 
-import com.zimbra.common.util.ZimbraLog;
-import com.zimbra.cs.db.DbPool;
-import com.zimbra.cs.db.DbPool.DbConnection;
+import org.zmail.common.util.ZmailLog;
+import org.zmail.cs.db.DbPool;
+import org.zmail.cs.db.DbPool.DbConnection;
 
 
 public class TestConnectionPool
@@ -33,7 +33,7 @@ extends TestCase {
     throws Exception {
         int initialSize = DbPool.getSize();
 
-        ZimbraLog.test.info("Initial connection pool size: %d", initialSize);
+        ZmailLog.test.info("Initial connection pool size: %d", initialSize);
 
         DbConnection conn1 = DbPool.getConnection();
         assertEquals("After first connection", initialSize + 1, DbPool.getSize());
@@ -53,6 +53,6 @@ extends TestCase {
         DbPool.quietClose(maint);
         assertEquals("After closing maintenance connection", initialSize, DbPool.getSize());
 
-        ZimbraLog.test.info("Final connection pool size: %d", DbPool.getSize());
+        ZmailLog.test.info("Final connection pool size: %d", DbPool.getSize());
     }
 }

@@ -12,7 +12,7 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.qa.unittest.prov.ldap;
+package org.zmail.qa.unittest.prov.ldap;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -21,18 +21,18 @@ import java.util.Set;
 import org.junit.*;
 
 import com.google.common.collect.Maps;
-import com.zimbra.common.account.Key;
-import com.zimbra.common.account.ProvisioningConstants;
-import com.zimbra.common.account.ZAttrProvisioning;
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.cs.account.Account;
-import com.zimbra.cs.account.DistributionList;
-import com.zimbra.cs.account.Domain;
-import com.zimbra.cs.account.DynamicGroup;
-import com.zimbra.cs.account.Provisioning;
-import com.zimbra.qa.unittest.TestUtil;
-import com.zimbra.qa.unittest.prov.Names;
-import com.zimbra.soap.admin.type.CacheEntryType;
+import org.zmail.common.account.Key;
+import org.zmail.common.account.ProvisioningConstants;
+import org.zmail.common.account.ZAttrProvisioning;
+import org.zmail.common.service.ServiceException;
+import org.zmail.cs.account.Account;
+import org.zmail.cs.account.DistributionList;
+import org.zmail.cs.account.Domain;
+import org.zmail.cs.account.DynamicGroup;
+import org.zmail.cs.account.Provisioning;
+import org.zmail.qa.unittest.TestUtil;
+import org.zmail.qa.unittest.prov.Names;
+import org.zmail.soap.admin.type.CacheEntryType;
 
 import static org.junit.Assert.*;
 
@@ -130,7 +130,7 @@ public class TestLdapProvAttrCallback extends LdapTest {
         assertTrue(allMembers.contains(ALIAS_NAME_2));
 
         Map<String, Object> attrs = new HashMap<String, Object>();
-        attrs.put(Provisioning.A_zimbraAccountStatus, ZAttrProvisioning.AccountStatus.closed.name());
+        attrs.put(Provisioning.A_zmailAccountStatus, ZAttrProvisioning.AccountStatus.closed.name());
         prov.modifyAttrs(acct, attrs);
 
         prov.flushCache(CacheEntryType.account, null);
@@ -145,30 +145,30 @@ public class TestLdapProvAttrCallback extends LdapTest {
     }
 
     private void verifyIsNotACLGroup(DynamicGroup group, String expectedMemberURL) {
-        assertEquals(ProvisioningConstants.FALSE, group.getAttr(Provisioning.A_zimbraIsACLGroup));
+        assertEquals(ProvisioningConstants.FALSE, group.getAttr(Provisioning.A_zmailIsACLGroup));
         assertEquals(expectedMemberURL, group.getAttr(Provisioning.A_memberURL));
     }
 
     @Test
-    public void zimbraIsACLGroupAndMemberURLCreate() throws Exception {
+    public void zmailIsACLGroupAndMemberURLCreate() throws Exception {
         String SOME_URL = "blah";
 
         Map<String, Object> attrs = Maps.newHashMap();
         boolean caughtException;
         DynamicGroup group;
 
-        // 1. specify memberURL and set zimbraIsACLGroup to false -> OK
+        // 1. specify memberURL and set zmailIsACLGroup to false -> OK
         attrs.clear();
-        attrs.put(Provisioning.A_zimbraIsACLGroup, ProvisioningConstants.FALSE);
+        attrs.put(Provisioning.A_zmailIsACLGroup, ProvisioningConstants.FALSE);
         attrs.put(Provisioning.A_memberURL, SOME_URL);
         group = createDynamicGroup(genGroupNameLocalPart("1"), attrs);
         verifyIsNotACLGroup(group, SOME_URL);
         deleteDynamicGroup(group);
 
-        // 2. specify memberURL and set zimbraIsACLGroup to true -> FAIL
+        // 2. specify memberURL and set zmailIsACLGroup to true -> FAIL
         caughtException = false;
         attrs.clear();
-        attrs.put(Provisioning.A_zimbraIsACLGroup, ProvisioningConstants.TRUE);
+        attrs.put(Provisioning.A_zmailIsACLGroup, ProvisioningConstants.TRUE);
         attrs.put(Provisioning.A_memberURL, SOME_URL);
         try {
             group = createDynamicGroup(genGroupNameLocalPart("2"), attrs);
@@ -182,7 +182,7 @@ public class TestLdapProvAttrCallback extends LdapTest {
         assertTrue(caughtException);
 
 
-        // 3. specify memberURL without setting zimbraIsACLGroup -> FAIL
+        // 3. specify memberURL without setting zmailIsACLGroup -> FAIL
         caughtException = false;
         attrs.clear();
         attrs.put(Provisioning.A_memberURL, SOME_URL);
@@ -199,7 +199,7 @@ public class TestLdapProvAttrCallback extends LdapTest {
     }
 
     @Test
-    public void zimbraIsACLGroupAndMemberURLModify() throws Exception {
+    public void zmailIsACLGroupAndMemberURLModify() throws Exception {
         String SOME_URL = "blah";
         String SOME_URL_2 = "blah blah";
 
@@ -225,7 +225,7 @@ public class TestLdapProvAttrCallback extends LdapTest {
 
         group = createDynamicGroup(genGroupNameLocalPart("4"));
         attrs.clear();
-        attrs.put(Provisioning.A_zimbraIsACLGroup, ProvisioningConstants.TRUE);
+        attrs.put(Provisioning.A_zmailIsACLGroup, ProvisioningConstants.TRUE);
         attrs.put(Provisioning.A_memberURL, SOME_URL);
         caughtException = false;
         try {
@@ -241,7 +241,7 @@ public class TestLdapProvAttrCallback extends LdapTest {
         deleteDynamicGroup(group);
 
         attrs.clear();
-        attrs.put(Provisioning.A_zimbraIsACLGroup, ProvisioningConstants.FALSE);
+        attrs.put(Provisioning.A_zmailIsACLGroup, ProvisioningConstants.FALSE);
         attrs.put(Provisioning.A_memberURL, SOME_URL);
         group = createDynamicGroup(genGroupNameLocalPart("8"), attrs);
         attrs.clear();
@@ -251,11 +251,11 @@ public class TestLdapProvAttrCallback extends LdapTest {
         deleteDynamicGroup(group);
 
         attrs.clear();
-        attrs.put(Provisioning.A_zimbraIsACLGroup, ProvisioningConstants.FALSE);
+        attrs.put(Provisioning.A_zmailIsACLGroup, ProvisioningConstants.FALSE);
         attrs.put(Provisioning.A_memberURL, SOME_URL);
         group = createDynamicGroup(genGroupNameLocalPart("9"), attrs);
         attrs.clear();
-        attrs.put(Provisioning.A_zimbraIsACLGroup, ProvisioningConstants.TRUE);
+        attrs.put(Provisioning.A_zmailIsACLGroup, ProvisioningConstants.TRUE);
         attrs.put(Provisioning.A_memberURL, SOME_URL);
         caughtException = false;
         try {
@@ -275,12 +275,12 @@ public class TestLdapProvAttrCallback extends LdapTest {
     public void authMech() throws Exception {
         // good mech
         Map<String, Object> attrs = Maps.newHashMap();
-        attrs.put(Provisioning.A_zimbraAuthMech, "custom");
+        attrs.put(Provisioning.A_zmailAuthMech, "custom");
         Domain testDomain = createDomain("authMech", attrs);
 
         // bad mech
         attrs.clear();
-        attrs.put(Provisioning.A_zimbraAuthMech, "bad");
+        attrs.put(Provisioning.A_zmailAuthMech, "bad");
         boolean caughtException = false;
         try {
             prov.modifyAttrs(testDomain, attrs);

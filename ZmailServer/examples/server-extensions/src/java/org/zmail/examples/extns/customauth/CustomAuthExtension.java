@@ -12,18 +12,18 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.examples.extns.customauth;
+package org.zmail.examples.extns.customauth;
 
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.cs.account.auth.ZimbraCustomAuth;
-import com.zimbra.cs.extension.ZimbraExtension;
+import org.zmail.common.service.ServiceException;
+import org.zmail.cs.account.auth.ZmailCustomAuth;
+import org.zmail.cs.extension.ZmailExtension;
 
 /**
  * This extension registers a custom authentication mechanism.
  *
  * @author vmahajan
  */
-public class CustomAuthExtension implements ZimbraExtension {
+public class CustomAuthExtension implements ZmailExtension {
     
     /**
      * Defines a name for the extension. It must be an identifier.
@@ -37,11 +37,11 @@ public class CustomAuthExtension implements ZimbraExtension {
     /**
      * Initializes the extension. Called when the extension is loaded.
      *
-     * @throws com.zimbra.common.service.ServiceException
+     * @throws org.zmail.common.service.ServiceException
      *
      */
     public void init() throws ServiceException {
-        ZimbraCustomAuth.register("simple", new SimpleAuth());
+        ZmailCustomAuth.register("simple", new SimpleAuth());
     }
 
     /**

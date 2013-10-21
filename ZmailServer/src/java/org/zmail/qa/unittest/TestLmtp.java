@@ -12,7 +12,7 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.qa.unittest;
+package org.zmail.qa.unittest;
 
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
@@ -24,25 +24,25 @@ import java.util.Map;
 
 import junit.framework.TestCase;
 
-import com.zimbra.common.lmtp.LmtpClient;
-import com.zimbra.common.localconfig.LC;
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.common.util.ByteUtil;
-import com.zimbra.common.util.ZimbraLog;
-import com.zimbra.cs.account.Account;
-import com.zimbra.cs.account.Provisioning;
-import com.zimbra.cs.ldap.LdapConstants;
-import com.zimbra.cs.lmtpserver.LmtpMessageInputStream;
-import com.zimbra.cs.mailbox.MailServiceException;
-import com.zimbra.cs.mailbox.Mailbox;
-import com.zimbra.cs.mime.handler.MessageRFC822Handler;
-import com.zimbra.client.ZEmailAddress;
-import com.zimbra.client.ZFolder;
-import com.zimbra.client.ZGetMessageParams;
-import com.zimbra.client.ZMailbox;
-import com.zimbra.client.ZMessage;
-import com.zimbra.client.ZMailbox.ZOutgoingMessage;
-import com.zimbra.client.ZMailbox.ZOutgoingMessage.MessagePart;
+import org.zmail.common.lmtp.LmtpClient;
+import org.zmail.common.localconfig.LC;
+import org.zmail.common.service.ServiceException;
+import org.zmail.common.util.ByteUtil;
+import org.zmail.common.util.ZmailLog;
+import org.zmail.cs.account.Account;
+import org.zmail.cs.account.Provisioning;
+import org.zmail.cs.ldap.LdapConstants;
+import org.zmail.cs.lmtpserver.LmtpMessageInputStream;
+import org.zmail.cs.mailbox.MailServiceException;
+import org.zmail.cs.mailbox.Mailbox;
+import org.zmail.cs.mime.handler.MessageRFC822Handler;
+import org.zmail.client.ZEmailAddress;
+import org.zmail.client.ZFolder;
+import org.zmail.client.ZGetMessageParams;
+import org.zmail.client.ZMailbox;
+import org.zmail.client.ZMessage;
+import org.zmail.client.ZMailbox.ZOutgoingMessage;
+import org.zmail.client.ZMailbox.ZOutgoingMessage.MessagePart;
 
 public class TestLmtp
 extends TestCase {
@@ -79,7 +79,7 @@ extends TestCase {
             try {
                 TestUtil.addMessageLmtp(new String[] { mRecipient }, mRecipient, mContent);
             } catch (Exception e) {
-                ZimbraLog.test.error("Unable to send message to %s.", mRecipient, e);
+                ZmailLog.test.error("Unable to send message to %s.", mRecipient, e);
             }
         }
     }
@@ -89,18 +89,18 @@ extends TestCase {
     throws Exception {
         mbox = TestUtil.getZMailbox("user1");
         account = TestUtil.getAccount("user1");
-        originalWarnInterval = account.getAttr(Provisioning.A_zimbraQuotaWarnInterval);
-        originalWarnPercent = account.getIntAttr(Provisioning.A_zimbraQuotaWarnPercent, 0);
+        originalWarnInterval = account.getAttr(Provisioning.A_zmailQuotaWarnInterval);
+        originalWarnPercent = account.getIntAttr(Provisioning.A_zmailQuotaWarnPercent, 0);
         originalServerDiskThreshold =
-            TestUtil.getServerAttr(Provisioning.A_zimbraMailDiskStreamingThreshold);
+            TestUtil.getServerAttr(Provisioning.A_zmailMailDiskStreamingThreshold);
         originalConfigDiskThreshold = TestUtil.getConfigAttr(
-            Provisioning.A_zimbraMailDiskStreamingThreshold);
-        originalQuota = TestUtil.getAccountAttr(USER_NAME, Provisioning.A_zimbraMailQuota);
+            Provisioning.A_zmailMailDiskStreamingThreshold);
+        originalQuota = TestUtil.getAccountAttr(USER_NAME, Provisioning.A_zmailMailQuota);
         originalAllowReceiveButNotSendWhenOverQuota =
-            TestUtil.getAccountAttr(USER_NAME, Provisioning.A_zimbraMailAllowReceiveButNotSendWhenOverQuota);
-        originalDedupeCacheSize = TestUtil.getConfigAttr(Provisioning.A_zimbraMessageIdDedupeCacheSize);
-        originalDedupeCacheTimeout = TestUtil.getConfigAttr(Provisioning.A_zimbraMessageIdDedupeCacheTimeout);
-        originalDedupingEnabled = TestUtil.getAccountAttr(USER_NAME, Provisioning.A_zimbraPrefMessageIdDedupingEnabled);
+            TestUtil.getAccountAttr(USER_NAME, Provisioning.A_zmailMailAllowReceiveButNotSendWhenOverQuota);
+        originalDedupeCacheSize = TestUtil.getConfigAttr(Provisioning.A_zmailMessageIdDedupeCacheSize);
+        originalDedupeCacheTimeout = TestUtil.getConfigAttr(Provisioning.A_zmailMessageIdDedupeCacheTimeout);
+        originalDedupingEnabled = TestUtil.getAccountAttr(USER_NAME, Provisioning.A_zmailPrefMessageIdDedupingEnabled);
         cleanUp();
     }
 
@@ -205,14 +205,14 @@ extends TestCase {
     private void setQuotaWarnPercent(int percent)
     throws Exception {
         Map<String, String> attrs = new HashMap<String, String>();
-        attrs.put(Provisioning.A_zimbraQuotaWarnPercent, Integer.toString(percent));
+        attrs.put(Provisioning.A_zmailQuotaWarnPercent, Integer.toString(percent));
         Provisioning.getInstance().modifyAttrs(account, attrs);
     }
 
     private void setQuotaWarnInterval(String interval)
     throws Exception {
         Map<String, String> attrs = new HashMap<String, String>();
-        attrs.put(Provisioning.A_zimbraQuotaWarnInterval, interval);
+        attrs.put(Provisioning.A_zmailQuotaWarnInterval, interval);
         Provisioning.getInstance().modifyAttrs(account, attrs);
     }
 
@@ -285,7 +285,7 @@ extends TestCase {
      */
     public void testDiskStreamingOneRecipient()
     throws Exception {
-        TestUtil.setServerAttr(Provisioning.A_zimbraMailDiskStreamingThreshold, "0");
+        TestUtil.setServerAttr(Provisioning.A_zmailMailDiskStreamingThreshold, "0");
         String recipient = TestUtil.getAddress(USER_NAME);
         TestUtil.addMessageLmtp(NAME_PREFIX + " testDiskStreamingOneRecipient", recipient, TestUtil.getAddress(USER_NAME));
         ZMailbox mbox = TestUtil.getZMailbox(USER_NAME);
@@ -297,7 +297,7 @@ extends TestCase {
      */
     public void testDiskStreamingMultipleRecipients()
     throws Exception {
-        TestUtil.setServerAttr(Provisioning.A_zimbraMailDiskStreamingThreshold, "0");
+        TestUtil.setServerAttr(Provisioning.A_zmailMailDiskStreamingThreshold, "0");
         String[] recipients = {
             TestUtil.getAddress(USER_NAME),
             TestUtil.getAddress(USER2_NAME)
@@ -324,7 +324,7 @@ extends TestCase {
      */
     public void testDiskStreamingEmptyFolder()
     throws Exception {
-        TestUtil.setServerAttr(Provisioning.A_zimbraMailDiskStreamingThreshold, "0");
+        TestUtil.setServerAttr(Provisioning.A_zmailMailDiskStreamingThreshold, "0");
         String[] recipients = {
             TestUtil.getAddress(USER_NAME),
             TestUtil.getAddress(USER2_NAME)
@@ -428,13 +428,13 @@ extends TestCase {
     }
 
     /**
-     * Confirms that delivery succeeds when <tt>zimbraMailDiskStreamingThreshold</tt>
+     * Confirms that delivery succeeds when <tt>zmailMailDiskStreamingThreshold</tt>
      * isn't set (bug 22536).
      */
     public void testMissingDiskThreshold()
     throws Exception {
-        TestUtil.setServerAttr(Provisioning.A_zimbraMailDiskStreamingThreshold, "");
-        TestUtil.setConfigAttr(Provisioning.A_zimbraMailDiskStreamingThreshold, "");
+        TestUtil.setServerAttr(Provisioning.A_zmailMailDiskStreamingThreshold, "");
+        TestUtil.setConfigAttr(Provisioning.A_zmailMailDiskStreamingThreshold, "");
         String subject = NAME_PREFIX + " testMissingDiskThreshold";
         TestUtil.addMessageLmtp(subject, USER_NAME, USER_NAME);
         ZMailbox mbox = TestUtil.getZMailbox(USER_NAME);
@@ -481,18 +481,18 @@ extends TestCase {
         String[] recipients = new String[] { USER_NAME };
 
         // Set quota to 1 byte and make sure delivery fails.
-        TestUtil.setAccountAttr(USER_NAME, Provisioning.A_zimbraMailQuota, "1");
+        TestUtil.setAccountAttr(USER_NAME, Provisioning.A_zmailMailQuota, "1");
         assertFalse("LMTP should not have succeeded", TestUtil.addMessageLmtp(recipients, USER_NAME, content));
 
         // Reset quota, retry, and make sure the delivery succeeds.
-        TestUtil.setAccountAttr(USER_NAME, Provisioning.A_zimbraMailQuota, originalQuota);
+        TestUtil.setAccountAttr(USER_NAME, Provisioning.A_zmailMailQuota, originalQuota);
         TestUtil.addMessageLmtp(recipients, USER_NAME, content);
         ZMailbox mbox = TestUtil.getZMailbox(USER_NAME);
         TestUtil.getMessage(mbox, "in:inbox subject:\"" + subject + "\"");
     }
 
     /**
-     * Verifies the behavior of {@code zimbraPrefMessageIdDedupingEnabled}.
+     * Verifies the behavior of {@code zmailPrefMessageIdDedupingEnabled}.
      */
     public void testDedupePref()
     throws Exception {
@@ -520,7 +520,7 @@ extends TestCase {
     }
 
     /**
-     * Verifies the behavior of {@code zimbraMessageIdDedupeCacheTimeout}.
+     * Verifies the behavior of {@code zmailMessageIdDedupeCacheTimeout}.
      */
     //disable due to bug 76332
     public void disableTestDedupeCacheTimeout()
@@ -537,7 +537,7 @@ extends TestCase {
         assertEquals("message should have been delivered", 1, TestUtil.search(mbox, query).size());
 
         // Set deduping cache timeout to 0.5 sec
-        TestUtil.setConfigAttr(Provisioning.A_zimbraMessageIdDedupeCacheTimeout, "500ms");
+        TestUtil.setConfigAttr(Provisioning.A_zmailMessageIdDedupeCacheTimeout, "500ms");
 
         // Redeliver same message immediately
         TestUtil.addMessageLmtp(recipients, USER_NAME, content);
@@ -553,25 +553,25 @@ extends TestCase {
 
     /**
      * Confirms that we reject messages that have a line that's longer
-     * than the limit specified by {@link LC#zimbra_lmtp_max_line_length}.
+     * than the limit specified by {@link LC#zmail_lmtp_max_line_length}.
      * Bug 42214.
      */
     public void testValidation()
     throws Exception {
         StringBuilder buf = new StringBuilder();
-        for (int i = 0; i <= LC.zimbra_lmtp_max_line_length.longValue(); i++) {
+        for (int i = 0; i <= LC.zmail_lmtp_max_line_length.longValue(); i++) {
             buf.append('x');
         }
         assertFalse(TestUtil.addMessageLmtp(new String[] { USER_NAME }, USER_NAME, buf.toString()));
     }
 
     /**
-     * Verifies send/receive behavior for {@code zimbraMailAllowReceiveButNotSendWhenOverQuota}.
+     * Verifies send/receive behavior for {@code zmailMailAllowReceiveButNotSendWhenOverQuota}.
      */
     public void testAllowReceiveButNotSendWhenOverQuota()
     throws Exception {
-        TestUtil.setAccountAttr(USER_NAME, Provisioning.A_zimbraMailAllowReceiveButNotSendWhenOverQuota, LdapConstants.LDAP_TRUE);
-        TestUtil.setAccountAttr(USER_NAME, Provisioning.A_zimbraMailQuota, "1");
+        TestUtil.setAccountAttr(USER_NAME, Provisioning.A_zmailMailAllowReceiveButNotSendWhenOverQuota, LdapConstants.LDAP_TRUE);
+        TestUtil.setAccountAttr(USER_NAME, Provisioning.A_zmailMailQuota, "1");
         String subject = NAME_PREFIX + " testAllowReceiveButNotSendWhenOverQuota";
 
         // Verify that receive is allowed.
@@ -643,8 +643,8 @@ extends TestCase {
         ZMailbox mbox = TestUtil.getZMailbox(USER_NAME);
         LmtpClient lmtpClient =
                 new LmtpClient("localhost",
-                               Provisioning.getInstance().getLocalServer().getIntAttr(Provisioning.A_zimbraLmtpBindPort, 7025));
-        lmtpClient.sendLine("LHLO " + LC.zimbra_server_hostname.value());
+                               Provisioning.getInstance().getLocalServer().getIntAttr(Provisioning.A_zmailLmtpBindPort, 7025));
+        lmtpClient.sendLine("LHLO " + LC.zmail_server_hostname.value());
         assertTrue(lmtpClient.getResponse(), lmtpClient.replyOk());
         lmtpClient.sendLine("MAIL FROM:<" + TestUtil.addDomainIfNecessary(USER_NAME) + ">");
         assertTrue(lmtpClient.getResponse(), lmtpClient.replyOk());
@@ -666,14 +666,14 @@ extends TestCase {
     throws Exception {
         setQuotaWarnPercent(originalWarnPercent);
         setQuotaWarnInterval(originalWarnInterval);
-        TestUtil.setServerAttr(Provisioning.A_zimbraMailDiskStreamingThreshold, originalServerDiskThreshold);
-        TestUtil.setConfigAttr(Provisioning.A_zimbraMailDiskStreamingThreshold, originalConfigDiskThreshold);
-        TestUtil.setAccountAttr(USER_NAME, Provisioning.A_zimbraMailQuota, originalQuota);
-        TestUtil.setAccountAttr(USER_NAME, Provisioning.A_zimbraMailAllowReceiveButNotSendWhenOverQuota,
+        TestUtil.setServerAttr(Provisioning.A_zmailMailDiskStreamingThreshold, originalServerDiskThreshold);
+        TestUtil.setConfigAttr(Provisioning.A_zmailMailDiskStreamingThreshold, originalConfigDiskThreshold);
+        TestUtil.setAccountAttr(USER_NAME, Provisioning.A_zmailMailQuota, originalQuota);
+        TestUtil.setAccountAttr(USER_NAME, Provisioning.A_zmailMailAllowReceiveButNotSendWhenOverQuota,
             originalAllowReceiveButNotSendWhenOverQuota);
-        TestUtil.setConfigAttr(Provisioning.A_zimbraMessageIdDedupeCacheSize, originalDedupeCacheSize);
-        TestUtil.setConfigAttr(Provisioning.A_zimbraMessageIdDedupeCacheTimeout, originalDedupeCacheTimeout);
-        TestUtil.setAccountAttr(USER_NAME, Provisioning.A_zimbraPrefMessageIdDedupingEnabled, originalDedupingEnabled);
+        TestUtil.setConfigAttr(Provisioning.A_zmailMessageIdDedupeCacheSize, originalDedupeCacheSize);
+        TestUtil.setConfigAttr(Provisioning.A_zmailMessageIdDedupeCacheTimeout, originalDedupeCacheTimeout);
+        TestUtil.setAccountAttr(USER_NAME, Provisioning.A_zmailPrefMessageIdDedupingEnabled, originalDedupingEnabled);
         cleanUp();
     }
 

@@ -13,9 +13,9 @@
  * ***** END LICENSE BLOCK *****
  */
 
-package com.zimbra.cs.index;
+package org.zmail.cs.index;
 
-import com.zimbra.common.soap.Element;
+import org.zmail.common.soap.Element;
 
 public abstract interface QueryInfo {
     public abstract Element toXml(Element parent);

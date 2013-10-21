@@ -13,7 +13,7 @@
  * ***** END LICENSE BLOCK *****
  */
 
-package com.zimbra.cs.zclient;
+package org.zmail.cs.zclient;
 
 import java.io.BufferedInputStream;
 import java.io.BufferedReader;
@@ -58,76 +58,76 @@ import org.apache.commons.cli.Option;
 import org.apache.commons.cli.Options;
 import org.apache.commons.cli.ParseException;
 
-import com.zimbra.client.ZAce;
-import com.zimbra.client.ZAppointmentHit;
-import com.zimbra.client.ZAutoCompleteMatch;
-import com.zimbra.client.ZContact;
-import com.zimbra.client.ZContactHit;
-import com.zimbra.client.ZConversation;
-import com.zimbra.client.ZConversation.ZMessageSummary;
-import com.zimbra.client.ZConversationHit;
-import com.zimbra.client.ZDocument;
-import com.zimbra.client.ZDocumentHit;
-import com.zimbra.client.ZEmailAddress;
-import com.zimbra.client.ZFilterRule;
-import com.zimbra.client.ZFilterRules;
-import com.zimbra.client.ZFolder;
-import com.zimbra.client.ZGetMessageParams;
-import com.zimbra.client.ZGrant;
-import com.zimbra.client.ZGrant.GranteeType;
-import com.zimbra.client.ZIdentity;
-import com.zimbra.client.ZJSONObject;
-import com.zimbra.client.ZMailbox;
-import com.zimbra.client.ZMailbox.Fetch;
-import com.zimbra.client.ZMailbox.GalEntryType;
-import com.zimbra.client.ZMailbox.OwnerBy;
-import com.zimbra.client.ZMailbox.SharedItemBy;
-import com.zimbra.client.ZMailbox.ZApptSummaryResult;
-import com.zimbra.client.ZMailbox.ZSearchGalResult;
-import com.zimbra.client.ZMessage;
-import com.zimbra.client.ZMessage.ZMimePart;
-import com.zimbra.client.ZMessageHit;
-import com.zimbra.client.ZMountpoint;
-import com.zimbra.client.ZSearchFolder;
-import com.zimbra.client.ZSearchHit;
-import com.zimbra.client.ZSearchPagerResult;
-import com.zimbra.client.ZSearchParams;
-import com.zimbra.client.ZSearchResult;
-import com.zimbra.client.ZSignature;
-import com.zimbra.client.ZTag;
-import com.zimbra.client.ZTag.Color;
-import com.zimbra.client.event.ZCreateEvent;
-import com.zimbra.client.event.ZDeleteEvent;
-import com.zimbra.client.event.ZEventHandler;
-import com.zimbra.client.event.ZModifyEvent;
-import com.zimbra.client.event.ZRefreshEvent;
-import com.zimbra.common.account.Key.AccountBy;
-import com.zimbra.common.auth.ZAuthToken;
-import com.zimbra.common.localconfig.LC;
-import com.zimbra.common.mailbox.ContactConstants;
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.common.soap.Element;
-import com.zimbra.common.soap.SoapFaultException;
-import com.zimbra.common.soap.SoapTransport;
-import com.zimbra.common.soap.SoapTransport.DebugListener;
-import com.zimbra.common.util.ByteUtil;
-import com.zimbra.common.util.CliUtil;
-import com.zimbra.common.util.Constants;
-import com.zimbra.common.util.DateUtil;
-import com.zimbra.common.util.EmailUtil;
-import com.zimbra.common.util.HttpUtil;
-import com.zimbra.common.util.StringUtil;
-import com.zimbra.common.zclient.ZClientException;
-import com.zimbra.common.zmime.ZMimeMessage;
-import com.zimbra.cs.account.GuestAccount;
-import com.zimbra.cs.account.accesscontrol.Right;
-import com.zimbra.cs.account.accesscontrol.RightManager;
-import com.zimbra.cs.account.soap.SoapAccountInfo;
-import com.zimbra.cs.account.soap.SoapProvisioning;
-import com.zimbra.cs.account.soap.SoapProvisioning.DelegateAuthResponse;
-import com.zimbra.cs.util.BuildInfo;
-import com.zimbra.cs.util.SoapCLI;
-import com.zimbra.soap.type.SearchSortBy;
+import org.zmail.client.ZAce;
+import org.zmail.client.ZAppointmentHit;
+import org.zmail.client.ZAutoCompleteMatch;
+import org.zmail.client.ZContact;
+import org.zmail.client.ZContactHit;
+import org.zmail.client.ZConversation;
+import org.zmail.client.ZConversation.ZMessageSummary;
+import org.zmail.client.ZConversationHit;
+import org.zmail.client.ZDocument;
+import org.zmail.client.ZDocumentHit;
+import org.zmail.client.ZEmailAddress;
+import org.zmail.client.ZFilterRule;
+import org.zmail.client.ZFilterRules;
+import org.zmail.client.ZFolder;
+import org.zmail.client.ZGetMessageParams;
+import org.zmail.client.ZGrant;
+import org.zmail.client.ZGrant.GranteeType;
+import org.zmail.client.ZIdentity;
+import org.zmail.client.ZJSONObject;
+import org.zmail.client.ZMailbox;
+import org.zmail.client.ZMailbox.Fetch;
+import org.zmail.client.ZMailbox.GalEntryType;
+import org.zmail.client.ZMailbox.OwnerBy;
+import org.zmail.client.ZMailbox.SharedItemBy;
+import org.zmail.client.ZMailbox.ZApptSummaryResult;
+import org.zmail.client.ZMailbox.ZSearchGalResult;
+import org.zmail.client.ZMessage;
+import org.zmail.client.ZMessage.ZMimePart;
+import org.zmail.client.ZMessageHit;
+import org.zmail.client.ZMountpoint;
+import org.zmail.client.ZSearchFolder;
+import org.zmail.client.ZSearchHit;
+import org.zmail.client.ZSearchPagerResult;
+import org.zmail.client.ZSearchParams;
+import org.zmail.client.ZSearchResult;
+import org.zmail.client.ZSignature;
+import org.zmail.client.ZTag;
+import org.zmail.client.ZTag.Color;
+import org.zmail.client.event.ZCreateEvent;
+import org.zmail.client.event.ZDeleteEvent;
+import org.zmail.client.event.ZEventHandler;
+import org.zmail.client.event.ZModifyEvent;
+import org.zmail.client.event.ZRefreshEvent;
+import org.zmail.common.account.Key.AccountBy;
+import org.zmail.common.auth.ZAuthToken;
+import org.zmail.common.localconfig.LC;
+import org.zmail.common.mailbox.ContactConstants;
+import org.zmail.common.service.ServiceException;
+import org.zmail.common.soap.Element;
+import org.zmail.common.soap.SoapFaultException;
+import org.zmail.common.soap.SoapTransport;
+import org.zmail.common.soap.SoapTransport.DebugListener;
+import org.zmail.common.util.ByteUtil;
+import org.zmail.common.util.CliUtil;
+import org.zmail.common.util.Constants;
+import org.zmail.common.util.DateUtil;
+import org.zmail.common.util.EmailUtil;
+import org.zmail.common.util.HttpUtil;
+import org.zmail.common.util.StringUtil;
+import org.zmail.common.zclient.ZClientException;
+import org.zmail.common.zmime.ZMimeMessage;
+import org.zmail.cs.account.GuestAccount;
+import org.zmail.cs.account.accesscontrol.Right;
+import org.zmail.cs.account.accesscontrol.RightManager;
+import org.zmail.cs.account.soap.SoapAccountInfo;
+import org.zmail.cs.account.soap.SoapProvisioning;
+import org.zmail.cs.account.soap.SoapProvisioning.DelegateAuthResponse;
+import org.zmail.cs.util.BuildInfo;
+import org.zmail.cs.util.SoapCLI;
+import org.zmail.soap.type.SearchSortBy;
 
 /**
  * @author schemers
@@ -143,9 +143,9 @@ public class ZMailboxUtil implements DebugListener {
     private String mPassword = null;
     private ZAuthToken mAdminAuthToken = null;
 
-    private static final String DEFAULT_ADMIN_URL = "https://"+LC.zimbra_zmprov_default_soap_server.value()+":" + LC.zimbra_admin_service_port.intValue()+"/";
-    private static final String DEFAULT_URL = "http://" + LC.zimbra_zmprov_default_soap_server.value()
-                    + (LC.zimbra_mail_service_port.intValue() == 80 ? "" : ":" + LC.zimbra_mail_service_port.intValue()) + "/";
+    private static final String DEFAULT_ADMIN_URL = "https://"+LC.zmail_zmprov_default_soap_server.value()+":" + LC.zmail_admin_service_port.intValue()+"/";
+    private static final String DEFAULT_URL = "http://" + LC.zmail_zmprov_default_soap_server.value()
+                    + (LC.zmail_mail_service_port.intValue() == 80 ? "" : ":" + LC.zmail_mail_service_port.intValue()) + "/";
 
     private String mUrl = DEFAULT_URL;
 
@@ -218,7 +218,7 @@ public class ZMailboxUtil implements DebugListener {
         stdout.println("  -f/--file                                use file as input stream");
         stdout.println("  -u/--url      http[s]://{host}[:{port}]  server hostname and optional port. must use admin port with -z/-a");
         stdout.println("  -a/--admin    {name}                     admin account name to auth as");
-        stdout.println("  -z/--zadmin                              use zimbra admin name/password from localconfig for admin/password");
+        stdout.println("  -z/--zadmin                              use zmail admin name/password from localconfig for admin/password");
         stdout.println("  -y/--authtoken {authtoken}               " + SoapCLI.OPT_AUTHTOKEN.getDescription());
         stdout.println("  -Y/--authtokenfile {authtoken file}      " + SoapCLI.OPT_AUTHTOKENFILE.getDescription());
         stdout.println("  -m/--mailbox  {name}                     mailbox to open");
@@ -1397,7 +1397,7 @@ public class ZMailboxUtil implements DebugListener {
     /*
 
 
-<CreateAppointmentRequest xmlns="urn:zimbraMail">
+<CreateAppointmentRequest xmlns="urn:zmailMail">
  <m d="1173202005230" l="10">
   <inv>
    <comp status="CONF" fb="B" transp="O" allDay="0" name="test yearly">
@@ -1425,7 +1425,7 @@ public class ZMailboxUtil implements DebugListener {
         comp.setEnd(new ZDateTime("20070309T210000", mMbox.getPrefs().getTimeZoneWindowsId()));
         comp.setOrganizer(new ZOrganizer(mMbox.getName()));
         comp.setName("test zclient API");
-        comp.setLocation("Zimbra");
+        comp.setLocation("Zmail");
         invite.getComponents().add(comp);
 
         ZAppointmentResult response = mMbox.createAppointment(ZFolder.ID_CALENDAR, null, message, invite, null);
@@ -2783,7 +2783,7 @@ public class ZMailboxUtil implements DebugListener {
         CommandLineParser parser = new GnuParser();
         Options options = new Options();
         options.addOption("a", "admin", true, "admin account name to auth as");
-        options.addOption("z", "zadmin", false, "use zimbra admin name/password from localconfig for admin/password");
+        options.addOption("z", "zadmin", false, "use zmail admin name/password from localconfig for admin/password");
         options.addOption("h", "help", false, "display usage");
         options.addOption("f", "file", true, "use file as input stream");
         options.addOption("u", "url", true, "http[s]://host[:port] of server to connect to");
@@ -2822,8 +2822,8 @@ public class ZMailboxUtil implements DebugListener {
                 isAdmin = true;
             }
             if (cl.hasOption('z')) {
-                pu.setAdminAccountName(LC.zimbra_ldap_user.value());
-                pu.setPassword(LC.zimbra_ldap_password.value());
+                pu.setAdminAccountName(LC.zmail_ldap_user.value());
+                pu.setPassword(LC.zmail_ldap_password.value());
                 pu.setUrl(DEFAULT_ADMIN_URL, true);
                 isAdmin = true;
             }
@@ -2889,7 +2889,7 @@ public class ZMailboxUtil implements DebugListener {
                 } else {
                     if (LC.command_line_editing_enabled.booleanValue()) {
                         try {
-                            CliUtil.enableCommandLineEditing(LC.zimbra_home.value() + "/.zmmailbox_history");
+                            CliUtil.enableCommandLineEditing(LC.zmail_home.value() + "/.zmmailbox_history");
                         } catch (IOException e) {
                             System.err.println("Command line editing will be disabled: " + e);
                             if (pu.mGlobalVerbose) {

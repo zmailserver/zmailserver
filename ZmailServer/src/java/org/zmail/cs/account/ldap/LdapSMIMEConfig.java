@@ -13,17 +13,17 @@
  * ***** END LICENSE BLOCK *****
  */
 
-package com.zimbra.cs.account.ldap;
+package org.zmail.cs.account.ldap;
 
 import java.lang.reflect.InvocationTargetException;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.cs.account.Account;
-import com.zimbra.cs.account.Entry;
-import com.zimbra.cs.extension.ExtensionUtil;
+import org.zmail.common.service.ServiceException;
+import org.zmail.cs.account.Account;
+import org.zmail.cs.account.Entry;
+import org.zmail.cs.extension.ExtensionUtil;
 
 public abstract class LdapSMIMEConfig {
     
@@ -32,7 +32,7 @@ public abstract class LdapSMIMEConfig {
     }
     
     public static LdapSMIMEConfig getInstance(Entry entry) throws ServiceException {
-        String className = "com.zimbra.cs.account.ldap.LdapSMIMEConfigImpl";
+        String className = "org.zmail.cs.account.ldap.LdapSMIMEConfigImpl";
         LdapSMIMEConfig instance = null;
    
         try {

@@ -12,22 +12,22 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.service.admin;
+package org.zmail.cs.service.admin;
 
 import java.util.Map;
 
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.common.soap.AdminConstants;
-import com.zimbra.common.soap.Element;
-import com.zimbra.cs.account.Account;
-import com.zimbra.cs.account.AccountServiceException;
-import com.zimbra.cs.account.DistributionList;
-import com.zimbra.cs.account.NamedEntry;
-import com.zimbra.cs.account.Provisioning;
-import com.zimbra.common.account.Key;
-import com.zimbra.common.account.Key.AccountBy;
-import com.zimbra.common.account.Key.DistributionListBy;
-import com.zimbra.soap.ZimbraSoapContext;
+import org.zmail.common.service.ServiceException;
+import org.zmail.common.soap.AdminConstants;
+import org.zmail.common.soap.Element;
+import org.zmail.cs.account.Account;
+import org.zmail.cs.account.AccountServiceException;
+import org.zmail.cs.account.DistributionList;
+import org.zmail.cs.account.NamedEntry;
+import org.zmail.cs.account.Provisioning;
+import org.zmail.common.account.Key;
+import org.zmail.common.account.Key.AccountBy;
+import org.zmail.common.account.Key.DistributionListBy;
+import org.zmail.soap.ZmailSoapContext;
 
 public abstract class ShareInfoHandler extends AdminDocumentHandler {
 
@@ -41,7 +41,7 @@ public abstract class ShareInfoHandler extends AdminDocumentHandler {
     /*
      * DL only for now
      */
-    protected NamedEntry getPublishableTargetEntry(ZimbraSoapContext zsc, Element request, Provisioning prov) throws ServiceException {
+    protected NamedEntry getPublishableTargetEntry(ZmailSoapContext zsc, Element request, Provisioning prov) throws ServiceException {
         Element eDl = request.getElement(AdminConstants.E_DL);
         
         NamedEntry entry = null;
@@ -59,7 +59,7 @@ public abstract class ShareInfoHandler extends AdminDocumentHandler {
         return entry;
     }
     
-    protected Account getOwner(ZimbraSoapContext zsc, Element eShare, Provisioning prov, boolean required) throws ServiceException {
+    protected Account getOwner(ZmailSoapContext zsc, Element eShare, Provisioning prov, boolean required) throws ServiceException {
         Element eOwner = null;
         if (required)
             eOwner = eShare.getElement(AdminConstants.E_OWNER);

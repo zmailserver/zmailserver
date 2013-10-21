@@ -12,7 +12,7 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.qa.unittest;
+package org.zmail.qa.unittest;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -21,31 +21,31 @@ import java.util.TreeSet;
 
 import junit.framework.TestCase;
 
-import com.zimbra.common.soap.Element;
-import com.zimbra.common.soap.MailConstants;
-import com.zimbra.common.soap.Element.XMLElement;
-import com.zimbra.common.soap.SoapFaultException;
-import com.zimbra.common.util.StringUtil;
-import com.zimbra.cs.account.Provisioning;
-import com.zimbra.cs.filter.RuleManager;
-import com.zimbra.cs.mailbox.Mailbox;
-import com.zimbra.client.ZFilterAction;
-import com.zimbra.client.ZFilterCondition;
-import com.zimbra.client.ZFilterRule;
-import com.zimbra.client.ZFilterRules;
-import com.zimbra.client.ZFolder;
-import com.zimbra.client.ZMailbox;
-import com.zimbra.client.ZMessage;
-import com.zimbra.client.ZTag;
-import com.zimbra.client.ZFilterAction.MarkOp;
-import com.zimbra.client.ZFilterAction.ZDiscardAction;
-import com.zimbra.client.ZFilterAction.ZFileIntoAction;
-import com.zimbra.client.ZFilterAction.ZKeepAction;
-import com.zimbra.client.ZFilterAction.ZMarkAction;
-import com.zimbra.client.ZFilterAction.ZRedirectAction;
-import com.zimbra.client.ZFilterAction.ZTagAction;
-import com.zimbra.client.ZFilterCondition.HeaderOp;
-import com.zimbra.client.ZFilterCondition.ZHeaderCondition;
+import org.zmail.common.soap.Element;
+import org.zmail.common.soap.MailConstants;
+import org.zmail.common.soap.Element.XMLElement;
+import org.zmail.common.soap.SoapFaultException;
+import org.zmail.common.util.StringUtil;
+import org.zmail.cs.account.Provisioning;
+import org.zmail.cs.filter.RuleManager;
+import org.zmail.cs.mailbox.Mailbox;
+import org.zmail.client.ZFilterAction;
+import org.zmail.client.ZFilterCondition;
+import org.zmail.client.ZFilterRule;
+import org.zmail.client.ZFilterRules;
+import org.zmail.client.ZFolder;
+import org.zmail.client.ZMailbox;
+import org.zmail.client.ZMessage;
+import org.zmail.client.ZTag;
+import org.zmail.client.ZFilterAction.MarkOp;
+import org.zmail.client.ZFilterAction.ZDiscardAction;
+import org.zmail.client.ZFilterAction.ZFileIntoAction;
+import org.zmail.client.ZFilterAction.ZKeepAction;
+import org.zmail.client.ZFilterAction.ZMarkAction;
+import org.zmail.client.ZFilterAction.ZRedirectAction;
+import org.zmail.client.ZFilterAction.ZTagAction;
+import org.zmail.client.ZFilterCondition.HeaderOp;
+import org.zmail.client.ZFilterCondition.ZHeaderCondition;
 
 public class TestFilterExisting extends TestCase {
 
@@ -79,12 +79,12 @@ public class TestFilterExisting extends TestCase {
 
         ZMailbox mbox = TestUtil.getZMailbox(USER_NAME);
         originalRules = mbox.getIncomingFilterRules();
-        originalBatchSize = TestUtil.getAccountAttr(USER_NAME, Provisioning.A_zimbraFilterBatchSize);
-        originalSleepInterval = TestUtil.getAccountAttr(USER_NAME, Provisioning.A_zimbraFilterSleepInterval);
+        originalBatchSize = TestUtil.getAccountAttr(USER_NAME, Provisioning.A_zmailFilterBatchSize);
+        originalSleepInterval = TestUtil.getAccountAttr(USER_NAME, Provisioning.A_zmailFilterSleepInterval);
         saveNewRules();
         
         // Speed up the test.
-        TestUtil.setAccountAttr(USER_NAME, Provisioning.A_zimbraFilterSleepInterval, "0");
+        TestUtil.setAccountAttr(USER_NAME, Provisioning.A_zmailFilterSleepInterval, "0");
     }
 
     /**
@@ -364,7 +364,7 @@ public class TestFilterExisting extends TestCase {
     }
 
     /**
-     * Confirms that we're enforcing {@code zimbraFilterBatchSize}.
+     * Confirms that we're enforcing {@code zmailFilterBatchSize}.
      */
     public void testBatchSize() throws Exception {
         TestUtil.getAccount(USER_NAME).setFilterBatchSize(1);
@@ -394,7 +394,7 @@ public class TestFilterExisting extends TestCase {
     }
 
     /**
-     * Confirms that {@code zimbraFilterSleepInterval slows down
+     * Confirms that {@code zmailFilterSleepInterval slows down
      * {@code ApplyFilterRules}.
      */
     public void testSleepInterval() throws Exception {
@@ -541,8 +541,8 @@ public class TestFilterExisting extends TestCase {
     protected void tearDown() throws Exception {
         ZMailbox mbox = TestUtil.getZMailbox(USER_NAME);
         mbox.saveIncomingFilterRules(originalRules);
-        TestUtil.setAccountAttr(USER_NAME, Provisioning.A_zimbraFilterBatchSize, originalBatchSize);
-        TestUtil.setAccountAttr(USER_NAME, Provisioning.A_zimbraFilterSleepInterval, originalSleepInterval);
+        TestUtil.setAccountAttr(USER_NAME, Provisioning.A_zmailFilterBatchSize, originalBatchSize);
+        TestUtil.setAccountAttr(USER_NAME, Provisioning.A_zmailFilterSleepInterval, originalSleepInterval);
         cleanUp();
     }
 

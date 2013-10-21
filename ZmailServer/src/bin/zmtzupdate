@@ -14,4 +14,4 @@
 # ***** END LICENSE BLOCK *****
 # 
 
-exec `dirname $0`/zmjava com.zimbra.cs.mailbox.calendar.FixCalendarTZUtil "$@"
+exec `dirname $0`/zmjava org.zmail.cs.mailbox.calendar.FixCalendarTZUtil "$@"

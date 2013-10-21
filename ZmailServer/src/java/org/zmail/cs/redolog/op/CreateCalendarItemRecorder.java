@@ -13,7 +13,7 @@
  * ***** END LICENSE BLOCK *****
  */
 
-package com.zimbra.cs.redolog.op;
+package org.zmail.cs.redolog.op;
 
 public interface CreateCalendarItemRecorder {
     public void setCalendarItemAttrs(int id, int folderId);

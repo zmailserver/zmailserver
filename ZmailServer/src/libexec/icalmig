@@ -13,7 +13,7 @@
 # basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
 # ***** END LICENSE BLOCK *****
 #
-#Convert Oracle Corporate Time iCal file to Zimbra adoptable format
+#Convert Oracle Corporate Time iCal file to Zmail adoptable format
 #
 use strict;
 use Cwd;
@@ -23,7 +23,7 @@ use File::Path;
 my $DEBUG = 0;
 #global constants
 my $version = "1.40";
-my $newfileext=".zimbra";
+my $newfileext=".zmail";
 my $bakfileext=".bak";
 my $invalidfileext=".invalid";
 #TZ tag to convert date-time info into TZ format
@@ -41,13 +41,13 @@ my $timezonefile;
 my $logfilepath;
 if ($DEBUG)
 {
-  $logfilepath="c:\\opt\\zimbra\\log";
-  $timezonefile="C:\\opt\\zimbra\\conf\\timezones.ics";
+  $logfilepath="c:\\opt\\zmail\\log";
+  $timezonefile="C:\\opt\\zmail\\conf\\timezones.ics";
 }
 else
 {
-  $logfilepath="/opt/zimbra/log";
-  $timezonefile="/opt/zimbra/conf/timezones.ics";
+  $logfilepath="/opt/zmail/log";
+  $timezonefile="/opt/zmail/conf/timezones.ics";
 }
 my $logfilename = "icalmig.log";
 my $logfile;
@@ -194,7 +194,7 @@ sub help
   print "       - To create YEARLY exception series
         for which no pattern can be found else standalone
         event list be created.\n\n";
-  print "-logpath <path>            (Default /opt/zimbra/log)\n";
+  print "-logpath <path>            (Default /opt/zmail/log)\n";
   print "       - Specify altrenate logfile path.\n\n";
   
   print "-delrdate    (0-OFF 1-ON ) (DEFAULT: 1)\n";

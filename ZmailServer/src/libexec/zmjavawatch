@@ -91,14 +91,14 @@ GetOptions("help" => \$ARG{HELP},
 	   "thread-dump-delay=i" => \$ARG{TWAIT},
 	   "thread-dump-file=s" => \$ARG{LOG}) || usage();
 
-my $DEFAULT_PID = `cat '/opt/zimbra/log/zmmailboxd_java.pid'`;
+my $DEFAULT_PID = `cat '/opt/zmail/log/zmmailboxd_java.pid'`;
 chomp($DEFAULT_PID);
 usage() if (defined $ARG{HELP});
 $ARG{PID} = $DEFAULT_PID if (!defined $ARG{PID});
 $ARG{DELAY} = 15 if (!defined $ARG{DELAY});
 $ARG{DELAY} = 5 if (defined $ARG{DELAY} && $ARG{DELAY} < 5);
 $ARG{COUNT} = 4 if (!defined $ARG{COUNT});
-$ARG{LOG} = '/opt/zimbra/log/zmmailboxd.out' if (!defined $ARG{LOG});
+$ARG{LOG} = '/opt/zmail/log/zmmailboxd.out' if (!defined $ARG{LOG});
 $ARG{TWAIT} = 1 if (!defined $ARG{TWAIT});
 
 print "# PID = ", $ARG{PID}, "\n";

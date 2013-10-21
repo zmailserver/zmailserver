@@ -12,31 +12,31 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.account.gal;
+package org.zmail.cs.account.gal;
 
 public class GalNamedFilter {
     /*
      * GAL autocomplete
      */
-    private static final String ZIMBRA_ACCOUNT_AUTO_COMPLETE = "zimbraAccountAutoComplete";
-    private static final String ZIMBRA_CALENDAR_RESOURCE_AUTO_COMPLETE = "zimbraResourceAutoComplete"; 
-    private static final String ZIMBRA_GROUP_AUTO_COMPLETE = "zimbraGroupAutoComplete"; 
+    private static final String ZIMBRA_ACCOUNT_AUTO_COMPLETE = "zmailAccountAutoComplete";
+    private static final String ZIMBRA_CALENDAR_RESOURCE_AUTO_COMPLETE = "zmailResourceAutoComplete"; 
+    private static final String ZIMBRA_GROUP_AUTO_COMPLETE = "zmailGroupAutoComplete"; 
     
     /*
      * GAL search
      */
-    private static final String ZIMBRA_ACCOUNTS = "zimbraAccounts";
-    private static final String ZIMBRA_CALENDAR_RESOURCES = "zimbraResources";
-    private static final String ZIMBRA_GROUPS = "zimbraGroups";
+    private static final String ZIMBRA_ACCOUNTS = "zmailAccounts";
+    private static final String ZIMBRA_CALENDAR_RESOURCES = "zmailResources";
+    private static final String ZIMBRA_GROUPS = "zmailGroups";
     
     /*
      * GAL sync
      */
-    private static final String ZIMBRA_ACCOUNT_SYNC = "zimbraAccountSync";
-    private static final String ZIMBRA_CALENDAR_RESOURCE_SYNC = "zimbraResourceSync"; 
-    private static final String ZIMBRA_GROUP_SYNC = "zimbraGroupSync"; 
+    private static final String ZIMBRA_ACCOUNT_SYNC = "zmailAccountSync";
+    private static final String ZIMBRA_CALENDAR_RESOURCE_SYNC = "zmailResourceSync"; 
+    private static final String ZIMBRA_GROUP_SYNC = "zmailGroupSync"; 
     
-    public static String getZimbraCalendarResourceFilter(GalOp galOp) {
+    public static String getZmailCalendarResourceFilter(GalOp galOp) {
         String filter = null;
         
         if (galOp == GalOp.autocomplete)
@@ -49,7 +49,7 @@ public class GalNamedFilter {
         return filter;
     }
     
-    public static String getZimbraGroupFilter(GalOp galOp) {
+    public static String getZmailGroupFilter(GalOp galOp) {
         String filter = null;
         
         if (galOp == GalOp.autocomplete)
@@ -62,7 +62,7 @@ public class GalNamedFilter {
         return filter;
     }
     
-    public static String getZimbraAcountFilter(GalOp galOp) {
+    public static String getZmailAcountFilter(GalOp galOp) {
         String filter = null;
         
         if (galOp == GalOp.autocomplete)

@@ -12,7 +12,7 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.qa.unittest.prov.ldap;
+package org.zmail.qa.unittest.prov.ldap;
 
 import java.util.HashMap;
 import java.util.HashSet;
@@ -23,13 +23,13 @@ import java.util.Set;
 import org.junit.*;
 import static org.junit.Assert.*;
 
-import com.zimbra.common.account.Key;
-import com.zimbra.cs.account.AccountServiceException;
-import com.zimbra.cs.account.Domain;
-import com.zimbra.cs.account.Provisioning;
-import com.zimbra.cs.account.Server;
-import com.zimbra.cs.account.XMPPComponent;
-import com.zimbra.qa.unittest.prov.Names;
+import org.zmail.common.account.Key;
+import org.zmail.cs.account.AccountServiceException;
+import org.zmail.cs.account.Domain;
+import org.zmail.cs.account.Provisioning;
+import org.zmail.cs.account.Server;
+import org.zmail.cs.account.XMPPComponent;
+import org.zmail.qa.unittest.prov.Names;
 
 public class TestLdapProvXMPPComponent extends LdapTest {
     private static LdapProvTestUtil provUtil;
@@ -55,9 +55,9 @@ public class TestLdapProvXMPPComponent extends LdapTest {
         assertNull(xmppCpnt);
         
         Map<String, Object> attrs = new HashMap<String, Object>();
-        attrs.put(Provisioning.A_zimbraXMPPComponentCategory, "whatever");
-        attrs.put(Provisioning.A_zimbraXMPPComponentClassName, "whatever");
-        attrs.put(Provisioning.A_zimbraXMPPComponentType, "whatever");
+        attrs.put(Provisioning.A_zmailXMPPComponentCategory, "whatever");
+        attrs.put(Provisioning.A_zmailXMPPComponentClassName, "whatever");
+        attrs.put(Provisioning.A_zmailXMPPComponentType, "whatever");
         xmppCpnt = prov.createXMPPComponent(xmppCpntName, domain, server, attrs);
         assertNotNull(xmppCpnt);
         
@@ -91,9 +91,9 @@ public class TestLdapProvXMPPComponent extends LdapTest {
         boolean caughtException = false;
         try {
             Map<String, Object> attrs = new HashMap<String, Object>();
-            attrs.put(Provisioning.A_zimbraXMPPComponentCategory, "whatever");
-            attrs.put(Provisioning.A_zimbraXMPPComponentClassName, "whatever");
-            attrs.put(Provisioning.A_zimbraXMPPComponentType, "whatever");
+            attrs.put(Provisioning.A_zmailXMPPComponentCategory, "whatever");
+            attrs.put(Provisioning.A_zmailXMPPComponentClassName, "whatever");
+            attrs.put(Provisioning.A_zmailXMPPComponentType, "whatever");
             prov.createXMPPComponent(XMPPCPNT_NAME, domain, server, attrs);
         } catch (AccountServiceException e) {
             if (AccountServiceException.IM_COMPONENT_EXISTS.equals(e.getCode())) {

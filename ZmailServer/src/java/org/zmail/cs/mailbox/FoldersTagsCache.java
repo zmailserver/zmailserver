@@ -12,7 +12,7 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.mailbox;
+package org.zmail.cs.mailbox;
 
 import java.util.ArrayList;
 import java.util.EnumSet;
@@ -22,18 +22,18 @@ import java.util.Map;
 import java.util.Set;
 import java.util.TimerTask;
 
-import com.zimbra.common.localconfig.DebugConfig;
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.common.util.Constants;
-import com.zimbra.common.util.ZimbraLog;
-import com.zimbra.common.util.memcached.MemcachedMap;
-import com.zimbra.common.util.memcached.MemcachedSerializer;
-import com.zimbra.common.util.memcached.ZimbraMemcachedClient;
-import com.zimbra.cs.memcached.MemcachedConnector;
-import com.zimbra.cs.session.PendingModifications;
-import com.zimbra.cs.session.PendingModifications.Change;
-import com.zimbra.cs.session.PendingModifications.ModificationKey;
-import com.zimbra.cs.util.Zimbra;
+import org.zmail.common.localconfig.DebugConfig;
+import org.zmail.common.service.ServiceException;
+import org.zmail.common.util.Constants;
+import org.zmail.common.util.ZmailLog;
+import org.zmail.common.util.memcached.MemcachedMap;
+import org.zmail.common.util.memcached.MemcachedSerializer;
+import org.zmail.common.util.memcached.ZmailMemcachedClient;
+import org.zmail.cs.memcached.MemcachedConnector;
+import org.zmail.cs.session.PendingModifications;
+import org.zmail.cs.session.PendingModifications.Change;
+import org.zmail.cs.session.PendingModifications.ModificationKey;
+import org.zmail.cs.util.Zmail;
 
 /**
  * Memcached-based cache of folders and tags of mailboxes.  Loading folders/tags from database is expensive,
@@ -57,12 +57,12 @@ public class FoldersTagsCache {
     public static FoldersTagsCache getInstance() { return sTheInstance; }
 
     FoldersTagsCache() {
-        ZimbraMemcachedClient memcachedClient = MemcachedConnector.getClient();
+        ZmailMemcachedClient memcachedClient = MemcachedConnector.getClient();
         FoldersTagsSerializer serializer = new FoldersTagsSerializer();
         mMemcachedLookup = new MemcachedMap<FoldersTagsCacheKey, FoldersTags>(memcachedClient, serializer, false);
         mDirtyMailboxes = new HashMap<Integer, Mailbox>(100);
         if (!DebugConfig.disableFoldersTagsCache) {
-            Zimbra.sTimer.schedule(new DirtyMailboxesTask(), SWEEP_INTERVAL_MSEC, SWEEP_INTERVAL_MSEC);
+            Zmail.sTimer.schedule(new DirtyMailboxesTask(), SWEEP_INTERVAL_MSEC, SWEEP_INTERVAL_MSEC);
         }
     }
 
@@ -103,7 +103,7 @@ public class FoldersTagsCache {
         public static FoldersTags decode(Metadata meta) throws ServiceException {
             int ver = (int) meta.getLong(FN_DATA_VERSION, 0);
             if (ver != DATA_VERSION) {
-                ZimbraLog.mailbox.info("Ignoring cached folders/tags with stale data version");
+                ZmailLog.mailbox.info("Ignoring cached folders/tags with stale data version");
                 return null;
             }
             MetadataList folders = meta.getList(FN_FOLDERS);
@@ -220,7 +220,7 @@ public class FoldersTagsCache {
                 }
             }
         } catch (ServiceException e) {
-            ZimbraLog.calendar.warn("Unable to notify folders/tags cache", e);
+            ZmailLog.calendar.warn("Unable to notify folders/tags cache", e);
         }
     }
 
@@ -236,20 +236,20 @@ public class FoldersTagsCache {
                     dirty = new ArrayList<Mailbox>(mDirtyMailboxes.values());
                     mDirtyMailboxes.clear();
                 }
-                ZimbraLog.mailbox.debug("Saving folders/tags to memcached for " + dirty.size() + " mailboxes");
+                ZmailLog.mailbox.debug("Saving folders/tags to memcached for " + dirty.size() + " mailboxes");
                 for (Mailbox mbox : dirty) {
                     try {
                         mbox.cacheFoldersTagsToMemcached();
                     } catch (Throwable e) {
                         if (e instanceof OutOfMemoryError)
-                            Zimbra.halt("Caught out of memory error", e);
-                        ZimbraLog.mailbox.warn("Caught exception in FolersTagsCache timer", e);
+                            Zmail.halt("Caught out of memory error", e);
+                        ZmailLog.mailbox.warn("Caught exception in FolersTagsCache timer", e);
                     }
                 }
             } catch (Throwable e) { //don't let exceptions kill the timer
                 if (e instanceof OutOfMemoryError)
-                    Zimbra.halt("Caught out of memory error", e);
-                ZimbraLog.mailbox.warn("Caught exception in FolersTagsCache timer", e);
+                    Zmail.halt("Caught out of memory error", e);
+                ZmailLog.mailbox.warn("Caught exception in FolersTagsCache timer", e);
             }
         }
     }

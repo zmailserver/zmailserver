@@ -12,7 +12,7 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.ldap.unboundid;
+package org.zmail.cs.ldap.unboundid;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -22,11 +22,11 @@ import com.unboundid.ldap.sdk.Attribute;
 import com.unboundid.ldap.sdk.Entry;
 import com.unboundid.ldap.sdk.SearchResultEntry;
 
-import com.zimbra.common.util.ByteUtil;
-import com.zimbra.cs.account.AttributeManager;
-import com.zimbra.cs.ldap.LdapException;
-import com.zimbra.cs.ldap.LdapUtil;
-import com.zimbra.cs.ldap.ZAttributes;
+import org.zmail.common.util.ByteUtil;
+import org.zmail.cs.account.AttributeManager;
+import org.zmail.cs.ldap.LdapException;
+import org.zmail.cs.ldap.LdapUtil;
+import org.zmail.cs.ldap.ZAttributes;
 
 public class UBIDAttributes extends ZAttributes {
 

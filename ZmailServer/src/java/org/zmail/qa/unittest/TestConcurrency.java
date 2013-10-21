@@ -12,24 +12,24 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.qa.unittest;
+package org.zmail.qa.unittest;
 
 import java.util.Iterator;
 import java.util.List;
 
 import junit.framework.TestCase;
 
-import com.zimbra.common.util.ZimbraLog;
-import com.zimbra.cs.account.Account;
-import com.zimbra.cs.client.LmcSession;
-import com.zimbra.cs.client.soap.LmcGetMsgRequest;
-import com.zimbra.cs.client.soap.LmcMsgActionRequest;
-import com.zimbra.cs.mailbox.Folder;
-import com.zimbra.cs.mailbox.MailItem;
-import com.zimbra.cs.mailbox.Mailbox;
-import com.zimbra.cs.mailbox.MailboxManager;
-import com.zimbra.cs.mailbox.Message;
-import com.zimbra.cs.mailbox.Tag;
+import org.zmail.common.util.ZmailLog;
+import org.zmail.cs.account.Account;
+import org.zmail.cs.client.LmcSession;
+import org.zmail.cs.client.soap.LmcGetMsgRequest;
+import org.zmail.cs.client.soap.LmcMsgActionRequest;
+import org.zmail.cs.mailbox.Folder;
+import org.zmail.cs.mailbox.MailItem;
+import org.zmail.cs.mailbox.Mailbox;
+import org.zmail.cs.mailbox.MailboxManager;
+import org.zmail.cs.mailbox.Message;
+import org.zmail.cs.mailbox.Tag;
 
 /**
  * Tests concurrent operations on the same mailbox.
@@ -174,7 +174,7 @@ public class TestConcurrency extends TestCase {
 
         @Override
         public void run() {
-            ZimbraLog.test.debug("Starting ReadMessagesThread");
+            ZmailLog.test.debug("Starting ReadMessagesThread");
             int numRead = 0;
 
             try {
@@ -196,10 +196,10 @@ public class TestConcurrency extends TestCase {
                     }
                 }
             } catch (Exception e) {
-                ZimbraLog.test.error("Error in ReadMessagesThread", e);
+                ZmailLog.test.error("Error in ReadMessagesThread", e);
             }
 
-            ZimbraLog.test.debug("ReadMessagesThread read " + numRead + " messages");
+            ZmailLog.test.debug("ReadMessagesThread read " + numRead + " messages");
         }
     }
 
@@ -215,7 +215,7 @@ public class TestConcurrency extends TestCase {
 
         @Override
         public void run() {
-            ZimbraLog.test.debug("Starting TagMessagesThread");
+            ZmailLog.test.debug("Starting TagMessagesThread");
             int numTagged = 0;
 
             try {
@@ -237,10 +237,10 @@ public class TestConcurrency extends TestCase {
                     }
                 }
             } catch (Exception e) {
-                ZimbraLog.test.error("Error in TagMessagesThread", e);
+                ZmailLog.test.error("Error in TagMessagesThread", e);
             }
 
-            ZimbraLog.test.debug("TagMessagesThread tagged " + numTagged + " messages");
+            ZmailLog.test.debug("TagMessagesThread tagged " + numTagged + " messages");
         }
     }
 
@@ -256,7 +256,7 @@ public class TestConcurrency extends TestCase {
 
         @Override
         public void run() {
-            ZimbraLog.test.debug("Starting MoveMessagesThread");
+            ZmailLog.test.debug("Starting MoveMessagesThread");
             int numMoved = 0;
 
             try {
@@ -276,10 +276,10 @@ public class TestConcurrency extends TestCase {
                     }
                 }
             } catch (Exception e) {
-                ZimbraLog.test.error("Error in MoveMessagesThread", e);
+                ZmailLog.test.error("Error in MoveMessagesThread", e);
             }
 
-            ZimbraLog.test.debug("MoveMessagesThread moved " + numMoved + " messages");
+            ZmailLog.test.debug("MoveMessagesThread moved " + numMoved + " messages");
         }
     }
 }

@@ -12,7 +12,7 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.qa.unittest;
+package org.zmail.qa.unittest;
 
 import java.io.IOException;
 import java.net.URI;
@@ -29,8 +29,8 @@ import org.apache.commons.httpclient.methods.multipart.MultipartRequestEntity;
 import org.apache.commons.httpclient.methods.multipart.Part;
 import org.apache.commons.httpclient.methods.multipart.StringPart;
 
-import com.zimbra.client.ZMailbox;
-import com.zimbra.common.httpclient.HttpClientUtil;
+import org.zmail.client.ZMailbox;
+import org.zmail.common.httpclient.HttpClientUtil;
 
 public class TestFileUpload
 extends TestCase {

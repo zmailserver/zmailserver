@@ -13,7 +13,7 @@
  * ***** END LICENSE BLOCK *****
  */
 
-package com.zimbra.cs.server;
+package org.zmail.cs.server;
 
 import java.net.InetAddress;
 import java.net.UnknownHostException;
@@ -27,7 +27,7 @@ import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentMap;
 
 import com.google.common.annotations.VisibleForTesting;
-import com.zimbra.common.util.ZimbraLog;
+import org.zmail.common.util.ZmailLog;
 
 public class ServerThrottle {
 
@@ -82,7 +82,7 @@ public class ServerThrottle {
 
     @VisibleForTesting
     void addIgnoredIp(String ip) {
-        ZimbraLog.net.debug("adding IP %s to throttle ignore list", ip);
+        ZmailLog.net.debug("adding IP %s to throttle ignore list", ip);
         ignoredIps.add(ip);
     }
 
@@ -95,7 +95,7 @@ public class ServerThrottle {
                 }
             }
         } catch (UnknownHostException e) {
-            ZimbraLog.net.warn("unknown host %s cannot be added to throttle ignore list." +
+            ZmailLog.net.warn("unknown host %s cannot be added to throttle ignore list." +
             		" %s requests from this host may be throttled. " +
             		"If this host is a proxy please add it to your DNS.", hostname, serverType);
         }

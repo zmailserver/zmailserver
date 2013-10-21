@@ -12,21 +12,21 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.mailbox.acl;
+package org.zmail.cs.mailbox.acl;
 
 import com.google.common.collect.ImmutableSet;
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.common.util.Constants;
-import com.zimbra.common.util.ZimbraLog;
-import com.zimbra.cs.mailbox.ACL;
-import com.zimbra.cs.mailbox.Document;
-import com.zimbra.cs.mailbox.Folder;
-import com.zimbra.cs.mailbox.MailItem;
-import com.zimbra.cs.mailbox.MailboxListener;
-import com.zimbra.cs.mailbox.MailboxOperation;
-import com.zimbra.cs.mailbox.ScheduledTask;
-import com.zimbra.cs.mailbox.ScheduledTaskManager;
-import com.zimbra.cs.session.PendingModifications.Change;
+import org.zmail.common.service.ServiceException;
+import org.zmail.common.util.Constants;
+import org.zmail.common.util.ZmailLog;
+import org.zmail.cs.mailbox.ACL;
+import org.zmail.cs.mailbox.Document;
+import org.zmail.cs.mailbox.Folder;
+import org.zmail.cs.mailbox.MailItem;
+import org.zmail.cs.mailbox.MailboxListener;
+import org.zmail.cs.mailbox.MailboxOperation;
+import org.zmail.cs.mailbox.ScheduledTask;
+import org.zmail.cs.mailbox.ScheduledTaskManager;
+import org.zmail.cs.session.PendingModifications.Change;
 
 import java.util.Date;
 import java.util.Set;
@@ -75,7 +75,7 @@ public class ShareExpirationListener extends MailboxListener {
         try {
             ExpireGrantsTask.cancel(item.getMailboxId(), item.getId());
         } catch (ServiceException e) {
-            ZimbraLog.scheduler.warn("Error in canceling existing ExpireGrantsTask for (id=%s,mailboxId=%s)", 
+            ZmailLog.scheduler.warn("Error in canceling existing ExpireGrantsTask for (id=%s,mailboxId=%s)", 
                     item.getId(), item.getMailboxId(), e);
             return;
         }
@@ -102,7 +102,7 @@ public class ShareExpirationListener extends MailboxListener {
         try {
             ScheduledTaskManager.schedule(task);
         } catch (ServiceException e) {
-            ZimbraLog.scheduler.warn("Error in scheduling task %s", task.toString(), e);
+            ZmailLog.scheduler.warn("Error in scheduling task %s", task.toString(), e);
         }
     }
 }

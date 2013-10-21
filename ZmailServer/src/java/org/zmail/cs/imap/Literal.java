@@ -12,13 +12,13 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.imap;
+package org.zmail.cs.imap;
 
-import com.zimbra.cs.store.Blob;
-import com.zimbra.cs.store.StoreManager;
-import com.zimbra.cs.store.BlobBuilder;
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.common.util.ByteUtil;
+import org.zmail.cs.store.Blob;
+import org.zmail.cs.store.StoreManager;
+import org.zmail.cs.store.BlobBuilder;
+import org.zmail.common.service.ServiceException;
+import org.zmail.common.util.ByteUtil;
 
 import java.io.InputStream;
 import java.io.ByteArrayInputStream;

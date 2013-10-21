@@ -12,12 +12,12 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.store.external;
+package org.zmail.cs.store.external;
 
 import java.io.IOException;
 
-import com.zimbra.cs.store.BlobBuilder;
-import com.zimbra.cs.store.BlobBuilderOutputStream;
+import org.zmail.cs.store.BlobBuilder;
+import org.zmail.cs.store.BlobBuilderOutputStream;
 
 /**
  * OutputStream used to write to an external store during resumable upload.

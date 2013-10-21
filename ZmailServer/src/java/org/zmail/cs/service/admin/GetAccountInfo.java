@@ -16,27 +16,27 @@
 /*
  * Created on May 26, 2004
  */
-package com.zimbra.cs.service.admin;
+package org.zmail.cs.service.admin;
 
 import java.util.List;
 import java.util.Map;
 
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.common.soap.AdminConstants;
-import com.zimbra.common.soap.Element;
-import com.zimbra.cs.account.Account;
-import com.zimbra.cs.account.AccountServiceException;
-import com.zimbra.cs.account.CalendarResource;
-import com.zimbra.cs.account.Cos;
-import com.zimbra.cs.account.Provisioning;
-import com.zimbra.cs.account.Server;
-import com.zimbra.common.account.Key;
-import com.zimbra.common.account.Key.AccountBy;
-import com.zimbra.common.account.Key.CalendarResourceBy;
-import com.zimbra.cs.account.accesscontrol.AdminRight;
-import com.zimbra.cs.account.accesscontrol.Rights.Admin;
-import com.zimbra.cs.httpclient.URLUtil;
-import com.zimbra.soap.ZimbraSoapContext;
+import org.zmail.common.service.ServiceException;
+import org.zmail.common.soap.AdminConstants;
+import org.zmail.common.soap.Element;
+import org.zmail.cs.account.Account;
+import org.zmail.cs.account.AccountServiceException;
+import org.zmail.cs.account.CalendarResource;
+import org.zmail.cs.account.Cos;
+import org.zmail.cs.account.Provisioning;
+import org.zmail.cs.account.Server;
+import org.zmail.common.account.Key;
+import org.zmail.common.account.Key.AccountBy;
+import org.zmail.common.account.Key.CalendarResourceBy;
+import org.zmail.cs.account.accesscontrol.AdminRight;
+import org.zmail.cs.account.accesscontrol.Rights.Admin;
+import org.zmail.cs.httpclient.URLUtil;
+import org.zmail.soap.ZmailSoapContext;
 
 /**
  * @author schemers
@@ -53,10 +53,10 @@ public class GetAccountInfo extends AdminDocumentHandler  {
     }
 
     /* (non-Javadoc)
-     * @see com.zimbra.soap.DocumentHandler#handle(org.dom4j.Element, java.util.Map)
+     * @see org.zmail.soap.DocumentHandler#handle(org.dom4j.Element, java.util.Map)
      */
     public Element handle(Element request, Map<String, Object> context) throws ServiceException {
-        ZimbraSoapContext zsc = getZimbraSoapContext(context);
+        ZmailSoapContext zsc = getZmailSoapContext(context);
    
         Element a = request.getElement(AdminConstants.E_ACCOUNT);
         String key = a.getAttribute(AdminConstants.A_BY);
@@ -78,8 +78,8 @@ public class GetAccountInfo extends AdminDocumentHandler  {
 
         Element response = zsc.createElement(AdminConstants.GET_ACCOUNT_INFO_RESPONSE);
         response.addElement(AdminConstants.E_NAME).setText(account.getName());
-        addAttr(response, Provisioning.A_zimbraId, account.getId());
-        addAttr(response, Provisioning.A_zimbraMailHost, account.getAttr(Provisioning.A_zimbraMailHost));
+        addAttr(response, Provisioning.A_zmailId, account.getId());
+        addAttr(response, Provisioning.A_zmailMailHost, account.getAttr(Provisioning.A_zmailMailHost));
  
         doCos(account, response);
         addUrls(response, account);
@@ -91,7 +91,7 @@ public class GetAccountInfo extends AdminDocumentHandler  {
 
         Server server = Provisioning.getInstance().getServer(account);
         if (server == null) return;
-        String hostname = server.getAttr(Provisioning.A_zimbraServiceHostname);        
+        String hostname = server.getAttr(Provisioning.A_zmailServiceHostname);        
         if (hostname == null) return;
         
         String http = URLUtil.getSoapURL(server, false);

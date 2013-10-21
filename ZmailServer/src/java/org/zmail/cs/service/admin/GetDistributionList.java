@@ -13,7 +13,7 @@
  * ***** END LICENSE BLOCK *****
  */
 
-package com.zimbra.cs.service.admin;
+package org.zmail.cs.service.admin;
 
 import java.util.Arrays;
 import java.util.Collections;
@@ -22,21 +22,21 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-import com.zimbra.common.account.Key;
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.common.soap.AdminConstants;
-import com.zimbra.common.soap.Element;
-import com.zimbra.cs.account.AccountServiceException;
-import com.zimbra.cs.account.AttributeClass;
-import com.zimbra.cs.account.DistributionList;
-import com.zimbra.cs.account.DynamicGroup;
-import com.zimbra.cs.account.Group;
-import com.zimbra.cs.account.Provisioning;
-import com.zimbra.cs.account.AccessManager.AttrRightChecker;
-import com.zimbra.cs.account.Group.GroupOwner;
-import com.zimbra.cs.account.accesscontrol.AdminRight;
-import com.zimbra.cs.account.accesscontrol.Rights.Admin;
-import com.zimbra.soap.ZimbraSoapContext;
+import org.zmail.common.account.Key;
+import org.zmail.common.service.ServiceException;
+import org.zmail.common.soap.AdminConstants;
+import org.zmail.common.soap.Element;
+import org.zmail.cs.account.AccountServiceException;
+import org.zmail.cs.account.AttributeClass;
+import org.zmail.cs.account.DistributionList;
+import org.zmail.cs.account.DynamicGroup;
+import org.zmail.cs.account.Group;
+import org.zmail.cs.account.Provisioning;
+import org.zmail.cs.account.AccessManager.AttrRightChecker;
+import org.zmail.cs.account.Group.GroupOwner;
+import org.zmail.cs.account.accesscontrol.AdminRight;
+import org.zmail.cs.account.accesscontrol.Rights.Admin;
+import org.zmail.soap.ZmailSoapContext;
 
 public class GetDistributionList extends DistributionListDocumentHandler {
     
@@ -59,7 +59,7 @@ public class GetDistributionList extends DistributionListDocumentHandler {
     public Element handle(Element request, Map<String, Object> context) 
     throws ServiceException {
 	    
-        ZimbraSoapContext zsc = getZimbraSoapContext(context);
+        ZmailSoapContext zsc = getZmailSoapContext(context);
         Provisioning prov = Provisioning.getInstance();
 	    
         int limit = (int) request.getAttributeLong(AdminConstants.A_LIMIT, 0);
@@ -95,12 +95,12 @@ public class GetDistributionList extends DistributionListDocumentHandler {
         Element response = zsc.createElement(AdminConstants.GET_DISTRIBUTION_LIST_RESPONSE);
         Element eDL = encodeDistributionList(response, group, true, false, reqAttrs, arc);
                 
-        // return member info only if the authed has right to see zimbraMailForwardingAddress
+        // return member info only if the authed has right to see zmailMailForwardingAddress
         boolean allowMembers = true;
         if (group.isDynamic()) {
             allowMembers = arc == null ? true : arc.allowAttr(Provisioning.A_member);
         } else {
-            allowMembers = arc == null ? true : arc.allowAttr(Provisioning.A_zimbraMailForwardingAddress);
+            allowMembers = arc == null ? true : arc.allowAttr(Provisioning.A_zmailMailForwardingAddress);
         }
         
         if (allowMembers) {
@@ -172,7 +172,7 @@ public class GetDistributionList extends DistributionListDocumentHandler {
                 if (group.isDynamic()) {
                     hideAttrs.add(Provisioning.A_member);
                 } else {
-                    hideAttrs.add(Provisioning.A_zimbraMailForwardingAddress);
+                    hideAttrs.add(Provisioning.A_zmailMailForwardingAddress);
                 }
             }
     

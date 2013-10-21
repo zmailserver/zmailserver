@@ -12,39 +12,39 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.account.ldap.custom;
+package org.zmail.cs.account.ldap.custom;
 
 import java.util.Map;
 
-import com.zimbra.common.localconfig.KnownKey;
-import com.zimbra.common.localconfig.LC;
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.common.util.StringUtil;
-import com.zimbra.common.util.ZimbraLog;
-import com.zimbra.cs.account.Domain;
-import com.zimbra.cs.account.Provisioning;
-import com.zimbra.cs.account.Server;
-import com.zimbra.cs.account.ldap.LdapDIT;
-import com.zimbra.cs.account.ldap.LdapProv;
-import com.zimbra.cs.account.ldap.SpecialAttrs;
-import com.zimbra.cs.ldap.IAttributes;
-import com.zimbra.cs.ldap.LdapUtil;
-import com.zimbra.cs.ldap.ZLdapFilter;
-import com.zimbra.cs.ldap.ZLdapFilterFactory;
+import org.zmail.common.localconfig.KnownKey;
+import org.zmail.common.localconfig.LC;
+import org.zmail.common.service.ServiceException;
+import org.zmail.common.util.StringUtil;
+import org.zmail.common.util.ZmailLog;
+import org.zmail.cs.account.Domain;
+import org.zmail.cs.account.Provisioning;
+import org.zmail.cs.account.Server;
+import org.zmail.cs.account.ldap.LdapDIT;
+import org.zmail.cs.account.ldap.LdapProv;
+import org.zmail.cs.account.ldap.SpecialAttrs;
+import org.zmail.cs.ldap.IAttributes;
+import org.zmail.cs.ldap.LdapUtil;
+import org.zmail.cs.ldap.ZLdapFilter;
+import org.zmail.cs.ldap.ZLdapFilterFactory;
 
 /*
  * This class and CustomerLdapProvisioning should really go under the 
  * Velodrome extension.  But there is an initializing sequence problem 
- * that the class specified in the zimbra_class_provisioning key cannot 
+ * that the class specified in the zmail_class_provisioning key cannot 
  * be in an extension.  Currently it just calls Class.forName, which does 
  * not take into account that the class could be in an extension.  
  * However even if it does and uses ExtensionUtil.loadClass 
- * (we can use {ext-name}:{class-name} format for the zimbra_class_provisioning key),
+ * (we can use {ext-name}:{class-name} format for the zmail_class_provisioning key),
  * the class still cannot be loaded because:
  * 
  * when server is starting up, Provisioning.getInstance is first called from 
  * PrivilegedServlet.init, then called from SoapServlet.init() ... -> Config.init(), 
- * but ExtensionUtil.loadAll is not called until SoapServlet.init -> Zimbra.startup(), 
+ * but ExtensionUtil.loadAll is not called until SoapServlet.init -> Zmail.startup(), 
  * which happens later.
  * 
  * For now the Velodrome Provisioning impl will have to reside in the core product.
@@ -53,7 +53,7 @@ import com.zimbra.cs.ldap.ZLdapFilterFactory;
  * as possible, it was implemented to meet the requirement from Velodrome.  It provides
  * flexibility and differs from the default DIT via localconfig keys as follows:
  * 
- * See ZimbraCustomerServices/velodrome/ZimbraServer/docs/custom-DIT.txt for detailed
+ * See ZmailCustomerServices/velodrome/ZmailServer/docs/custom-DIT.txt for detailed
  * descrittion of the functionalities of the custom DIT.
  * 
  */
@@ -80,7 +80,7 @@ public class CustomLdapDIT extends LdapDIT {
         String dn = getLC(key, defaultValue);
         
         if (!validateUnderDN(BASE_DN_CONFIG_BRANCH, dn)) {
-            ZimbraLog.account.warn("dn " + dn + " must be under " + BASE_DN_CONFIG_BRANCH + ", localconfig value " + dn + " ignored, using default value " + defaultValue);
+            ZmailLog.account.warn("dn " + dn + " must be under " + BASE_DN_CONFIG_BRANCH + ", localconfig value " + dn + " ignored, using default value " + defaultValue);
             dn = defaultValue;
         }
         
@@ -122,13 +122,13 @@ public class CustomLdapDIT extends LdapDIT {
         BASE_DN_ZIMLET        = getLCAndValidateUnderConfigBranchDN(LC.ldap_dit_base_dn_zimlet,        DEFAULT_BASE_RDN_ZIMLET        + "," + BASE_DN_CONFIG_BRANCH);
     
         BASE_DN_DOMAIN        = getLCAndValidateUnderConfigBranchDN(LC.ldap_dit_base_dn_domain, DEFAULT_BASE_RDN_DOMAIN + "," + BASE_DN_CONFIG_BRANCH);
-        BASE_DN_ZIMBRA        = computeZimbraBaseDN();
+        BASE_DN_ZIMBRA        = computeZmailBaseDN();
     }
     
     /*
      * take the common base for config branch and mail branch
      */
-    private String computeZimbraBaseDN() {
+    private String computeZmailBaseDN() {
         String[] rdns1 = BASE_DN_CONFIG_BRANCH.split(",");
         String[] rdns2 = BASE_DN_MAIL_BRANCH.split(",");
         
@@ -173,7 +173,7 @@ public class CustomLdapDIT extends LdapDIT {
     }
     
     private String defaultDomain() throws ServiceException {
-        String defaultDomain = mProv.getConfig().getAttr(Provisioning.A_zimbraDefaultDomainName, null);
+        String defaultDomain = mProv.getConfig().getAttr(Provisioning.A_zmailDefaultDomainName, null);
         if (StringUtil.isNullOrEmpty(defaultDomain))
            throw UNSUPPORTED("default domain is empty");
         
@@ -240,7 +240,7 @@ public class CustomLdapDIT extends LdapDIT {
      */
     /* 
      *  - Aliases has to be in the same domain as the target entry, and the domain has to be the default 
-     *    domain(config.zimbraDefaultDomainName).  For example, if the entry is foo@domain1.com, 
+     *    domain(config.zmailDefaultDomainName).  For example, if the entry is foo@domain1.com, 
      *    it *cannot* have foo-alias@domain2.com.  And, in order for foo@domain1.com to have alias, domain1.com 
      *    has to be the default domain.  
      *          
@@ -250,8 +250,8 @@ public class CustomLdapDIT extends LdapDIT {
      *    But in the custom DIT, aliases are always created under the same DN of the target entry,
      *    because in the custom DIT there is no co-relation between the email address and the DN. 
      *    As a workaround so we can at least have basic alias functionalities, the dnToEmail function 
-     *    always uses zimbraDefaultDomainName for the domain, which is of course still wrong and will break 
-     *    when zimbraDefaultDomainName is changed!  Until we have a real solution for that, for now aliases 
+     *    always uses zmailDefaultDomainName for the domain, which is of course still wrong and will break 
+     *    when zmailDefaultDomainName is changed!  Until we have a real solution for that, for now aliases 
      *    in the custom DIT is flakey and this is the best we can do.  Maybe we should just disallow
      *    aliases in the custom DIT?
      */
@@ -390,7 +390,7 @@ public class CustomLdapDIT extends LdapDIT {
     
     /* 
      * Too bad we can't do anything about DL and dynamic groups, because we can't tell 
-     * by mail or zimbraNailAlias which one is an alias and which one is the main email.
+     * by mail or zmailNailAlias which one is an alias and which one is the main email.
      * 
      * The one in default DIT is used for DL, that means for custom DIT the getAllDistrubutionLists 
      * function will return DLs in all domains if there are any (although the broken logic 
@@ -428,7 +428,7 @@ public class CustomLdapDIT extends LdapDIT {
         
         SpecialAttrs specialAttrs = new SpecialAttrs();
         if (attrs != null) {
-            specialAttrs.handleZimbraId(attrs);
+            specialAttrs.handleZmailId(attrs);
             specialAttrs.handleLdapBaseDn(attrs);
         }
 

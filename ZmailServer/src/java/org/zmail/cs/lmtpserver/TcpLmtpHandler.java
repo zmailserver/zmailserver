@@ -13,10 +13,10 @@
  * ***** END LICENSE BLOCK *****
  */
 
-package com.zimbra.cs.lmtpserver;
+package org.zmail.cs.lmtpserver;
 
-import com.zimbra.common.io.TcpServerInputStream;
-import com.zimbra.common.util.ZimbraLog;
+import org.zmail.common.io.TcpServerInputStream;
+import org.zmail.common.util.ZmailLog;
 
 import java.net.Socket;
 import java.io.IOException;
@@ -38,7 +38,7 @@ public class TcpLmtpHandler extends LmtpHandler {
 
     @Override
     protected synchronized void dropConnection() {
-        ZimbraLog.addIpToContext(mRemoteAddress);
+        ZmailLog.addIpToContext(mRemoteAddress);
         try {
             if (inputStream != null) {
                 inputStream.close();
@@ -49,13 +49,13 @@ public class TcpLmtpHandler extends LmtpHandler {
                 mWriter = null;
             }
         } catch (IOException e) {
-            if (ZimbraLog.lmtp.isDebugEnabled()) {
-                ZimbraLog.lmtp.info("I/O error while closing connection", e);
+            if (ZmailLog.lmtp.isDebugEnabled()) {
+                ZmailLog.lmtp.info("I/O error while closing connection", e);
             } else {
-                ZimbraLog.lmtp.info("I/O error while closing connection: " + e);
+                ZmailLog.lmtp.info("I/O error while closing connection: " + e);
             }
         } finally {
-            ZimbraLog.clearContext();
+            ZmailLog.clearContext();
         }
     }
 

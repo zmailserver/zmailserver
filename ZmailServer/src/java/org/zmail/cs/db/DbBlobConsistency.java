@@ -13,7 +13,7 @@
  * ***** END LICENSE BLOCK *****
  */
 
-package com.zimbra.cs.db;
+package org.zmail.cs.db;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -28,15 +28,15 @@ import java.util.Set;
 import com.google.common.collect.HashMultimap;
 import com.google.common.collect.Multimap;
 import com.google.common.primitives.Ints;
-import com.zimbra.common.localconfig.DebugConfig;
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.common.util.ZimbraLog;
-import com.zimbra.cs.db.DbPool.DbConnection;
-import com.zimbra.cs.mailbox.MailItem;
-import com.zimbra.cs.mailbox.Mailbox;
-import com.zimbra.cs.redolog.op.DeleteItem;
-import com.zimbra.cs.store.file.FileBlobStore;
-import com.zimbra.cs.store.file.BlobConsistencyChecker.BlobInfo;
+import org.zmail.common.localconfig.DebugConfig;
+import org.zmail.common.service.ServiceException;
+import org.zmail.common.util.ZmailLog;
+import org.zmail.cs.db.DbPool.DbConnection;
+import org.zmail.cs.mailbox.MailItem;
+import org.zmail.cs.mailbox.Mailbox;
+import org.zmail.cs.redolog.op.DeleteItem;
+import org.zmail.cs.store.file.FileBlobStore;
+import org.zmail.cs.store.file.BlobConsistencyChecker.BlobInfo;
 
 public class DbBlobConsistency {
 
@@ -292,7 +292,7 @@ public class DbBlobConsistency {
         if (!(Db.getInstance() instanceof MySQL)) {
             throw ServiceException.INVALID_REQUEST("export is only supported for MySQL", null);
         }
-        ZimbraLog.sqltrace.info("Exporting %d items in table %s to %s.", idRevs.size(), tableName, path);
+        ZmailLog.sqltrace.info("Exporting %d items in table %s to %s.", idRevs.size(), tableName, path);
 
         try {
             StringBuffer sql = new StringBuffer();

@@ -12,7 +12,7 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.mailbox;
+package org.zmail.cs.mailbox;
 
 import java.util.Date;
 import java.util.HashMap;
@@ -20,16 +20,16 @@ import java.util.Map;
 
 import javax.mail.internet.MailDateFormat;
 
-import com.zimbra.common.util.Constants;
-import com.zimbra.common.util.DateUtil;
-import com.zimbra.common.util.EmailUtil;
-import com.zimbra.common.util.StringUtil;
-import com.zimbra.common.util.ZimbraLog;
-import com.zimbra.cs.account.Account;
-import com.zimbra.cs.account.Provisioning;
-import com.zimbra.cs.lmtpserver.LmtpCallback;
-import com.zimbra.cs.mime.ParsedMessage;
-import com.zimbra.cs.util.AccountUtil;
+import org.zmail.common.util.Constants;
+import org.zmail.common.util.DateUtil;
+import org.zmail.common.util.EmailUtil;
+import org.zmail.common.util.StringUtil;
+import org.zmail.common.util.ZmailLog;
+import org.zmail.cs.account.Account;
+import org.zmail.cs.account.Provisioning;
+import org.zmail.cs.lmtpserver.LmtpCallback;
+import org.zmail.cs.mime.ParsedMessage;
+import org.zmail.cs.util.AccountUtil;
 
 /**
  * LMTP callback that sends the user a warning if he is getting
@@ -52,15 +52,15 @@ public class QuotaWarning implements LmtpCallback {
     public void afterDelivery(Account account, Mailbox mbox, String envelopeSender,
                               String recipientEmail, Message newMessage){
         try {
-            int warnPercent = account.getIntAttr(Provisioning.A_zimbraQuotaWarnPercent, 90);
+            int warnPercent = account.getIntAttr(Provisioning.A_zmailQuotaWarnPercent, 90);
             long quota = AccountUtil.getEffectiveQuota(account);
-            long warnInterval = account.getTimeInterval(Provisioning.A_zimbraQuotaWarnInterval, Constants.MILLIS_PER_DAY);
-            String template = account.getAttr(Provisioning.A_zimbraQuotaWarnMessage, null);
+            long warnInterval = account.getTimeInterval(Provisioning.A_zmailQuotaWarnInterval, Constants.MILLIS_PER_DAY);
+            String template = account.getAttr(Provisioning.A_zmailQuotaWarnMessage, null);
             
-            Date lastWarnTime = account.getGeneralizedTimeAttr(Provisioning.A_zimbraQuotaLastWarnTime, null);
+            Date lastWarnTime = account.getGeneralizedTimeAttr(Provisioning.A_zmailQuotaLastWarnTime, null);
             Date now = new Date();
             
-            ZimbraLog.lmtp.debug("Checking quota warning: mbox size=%d, quota=%d, lastWarnTime=%s, warnInterval=%d, warnPercent=%d",
+            ZmailLog.lmtp.debug("Checking quota warning: mbox size=%d, quota=%d, lastWarnTime=%s, warnInterval=%d, warnPercent=%d",
                 mbox.getSize(), quota, lastWarnTime, warnInterval, warnPercent);
             
             // Bail out if there's no quota, we haven't hit the warning threshold, or a warning
@@ -75,14 +75,14 @@ public class QuotaWarning implements LmtpCallback {
                 return;
             }
             if (template == null) {
-                ZimbraLog.lmtp.warn("%s not specified.  Unable to send quota warning message.",
-                    Provisioning.A_zimbraQuotaWarnMessage);
+                ZmailLog.lmtp.warn("%s not specified.  Unable to send quota warning message.",
+                    Provisioning.A_zmailQuotaWarnMessage);
             }
 
             // Send the quota warning
-            ZimbraLog.lmtp.info("Sending quota warning: mbox size=%d, quota=%d, lastWarnTime=%s, warnInterval=%dms, warnPercent=%d",
+            ZmailLog.lmtp.info("Sending quota warning: mbox size=%d, quota=%d, lastWarnTime=%s, warnInterval=%dms, warnPercent=%d",
                 mbox.getSize(), quota, lastWarnTime, warnInterval, warnPercent);
-            String address = account.getAttr(Provisioning.A_zimbraMailDeliveryAddress);
+            String address = account.getAttr(Provisioning.A_zmailMailDeliveryAddress);
             String domain = EmailUtil.getLocalPartAndDomain(address)[1];
 
             Map<String, Object> vars = new HashMap<String, Object>();
@@ -102,10 +102,10 @@ public class QuotaWarning implements LmtpCallback {
             
             // Update last sent date
             Map<String, String> attrs = new HashMap<String, String>();
-            attrs.put(Provisioning.A_zimbraQuotaLastWarnTime, DateUtil.toGeneralizedTime(now));
+            attrs.put(Provisioning.A_zmailQuotaLastWarnTime, DateUtil.toGeneralizedTime(now));
             Provisioning.getInstance().modifyAttrs(account, attrs);
         } catch (Exception e) {
-            ZimbraLog.lmtp.warn("Unable to send quota warning message", e);
+            ZmailLog.lmtp.warn("Unable to send quota warning message", e);
         }
     }
 

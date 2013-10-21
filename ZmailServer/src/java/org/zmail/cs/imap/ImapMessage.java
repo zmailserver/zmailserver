@@ -12,7 +12,7 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.imap;
+package org.zmail.cs.imap;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
@@ -46,24 +46,24 @@ import org.apache.commons.codec.net.BCodec;
 import org.apache.commons.codec.net.QCodec;
 
 import com.google.common.base.Objects;
-import com.zimbra.common.mime.ContentDisposition;
-import com.zimbra.common.mime.ContentType;
-import com.zimbra.common.mime.MimeCompoundHeader;
-import com.zimbra.common.mime.MimeConstants;
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.common.util.ArrayUtil;
-import com.zimbra.common.util.ByteUtil;
-import com.zimbra.common.util.Pair;
-import com.zimbra.cs.imap.ImapFlagCache.ImapFlag;
-import com.zimbra.cs.mailbox.Contact;
-import com.zimbra.cs.mailbox.Flag;
-import com.zimbra.cs.mailbox.MailItem;
-import com.zimbra.cs.mailbox.Message;
-import com.zimbra.cs.mailbox.util.TagUtil;
-import com.zimbra.cs.mime.MPartInfo;
-import com.zimbra.cs.mime.Mime;
-import com.zimbra.cs.service.formatter.VCard;
-import com.zimbra.cs.util.JMSession;
+import org.zmail.common.mime.ContentDisposition;
+import org.zmail.common.mime.ContentType;
+import org.zmail.common.mime.MimeCompoundHeader;
+import org.zmail.common.mime.MimeConstants;
+import org.zmail.common.service.ServiceException;
+import org.zmail.common.util.ArrayUtil;
+import org.zmail.common.util.ByteUtil;
+import org.zmail.common.util.Pair;
+import org.zmail.cs.imap.ImapFlagCache.ImapFlag;
+import org.zmail.cs.mailbox.Contact;
+import org.zmail.cs.mailbox.Flag;
+import org.zmail.cs.mailbox.MailItem;
+import org.zmail.cs.mailbox.Message;
+import org.zmail.cs.mailbox.util.TagUtil;
+import org.zmail.cs.mime.MPartInfo;
+import org.zmail.cs.mime.Mime;
+import org.zmail.cs.service.formatter.VCard;
+import org.zmail.cs.util.JMSession;
 
 /**
  * @since Apr 30, 2005
@@ -328,7 +328,7 @@ public class ImapMessage implements Comparable<ImapMessage>, java.io.Serializabl
         ImapFlagCache i4cache = i4folder.getTagset();
         if (!ArrayUtil.isEmpty(tags)) {
             for (String tag : tags) {
-                ImapFlag i4flag = i4cache.getByZimbraName(tag);
+                ImapFlag i4flag = i4cache.getByZmailName(tag);
                 if (i4flag != null) {
                     // make sure there's no naming conflict with a system flag like "Forwarded" or "NonJunk"
                     ImapFlag other = i4folder.getFlagByName(i4flag.mImapName);

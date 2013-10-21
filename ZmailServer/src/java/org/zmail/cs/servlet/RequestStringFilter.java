@@ -12,7 +12,7 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.servlet;
+package org.zmail.cs.servlet;
 
 import java.io.IOException;
 
@@ -25,7 +25,7 @@ import javax.servlet.ServletResponse;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.zimbra.common.util.ZimbraLog;
+import org.zmail.common.util.ZmailLog;
 
 public class RequestStringFilter implements Filter {
 
@@ -39,12 +39,12 @@ public class RequestStringFilter implements Filter {
         if (request instanceof HttpServletRequest) {
             HttpServletRequest httpReq = (HttpServletRequest) request;
             if (httpReq.getQueryString() != null && httpReq.getQueryString().matches(".*(%00|\\x00).*")) {
-                ZimbraLog.misc.warn("Rejecting request containing null character in query string");
+                ZmailLog.misc.warn("Rejecting request containing null character in query string");
                 ((HttpServletResponse)response).sendError(HttpServletResponse.SC_BAD_REQUEST);
                 return;
             }
             if (httpReq.getRequestURI() != null && httpReq.getRequestURI().matches(".*(%00|\\x00).*")) {
-                ZimbraLog.misc.warn("Rejecting request containing null character in URI");
+                ZmailLog.misc.warn("Rejecting request containing null character in URI");
                 ((HttpServletResponse)response).sendError(HttpServletResponse.SC_BAD_REQUEST);
                 return;
             }

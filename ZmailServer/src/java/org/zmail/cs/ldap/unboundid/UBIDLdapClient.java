@@ -12,23 +12,23 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.ldap.unboundid;
+package org.zmail.cs.ldap.unboundid;
 
 import java.util.Date;
 
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.cs.ldap.LdapClient;
-import com.zimbra.cs.ldap.LdapServerConfig.ExternalLdapConfig;
-import com.zimbra.cs.ldap.LdapException;
-import com.zimbra.cs.ldap.LdapServerType;
-import com.zimbra.cs.ldap.LdapConstants;
-import com.zimbra.cs.ldap.LdapUsage;
-import com.zimbra.cs.ldap.ZLdapContext;
-import com.zimbra.cs.ldap.ZLdapFilterFactory;
-import com.zimbra.cs.ldap.ZMutableEntry;
-import com.zimbra.cs.ldap.ZSearchControls;
-import com.zimbra.cs.ldap.ZSearchScope;
-import com.zimbra.cs.ldap.ZSearchScope.ZSearchScopeFactory;
+import org.zmail.common.service.ServiceException;
+import org.zmail.cs.ldap.LdapClient;
+import org.zmail.cs.ldap.LdapServerConfig.ExternalLdapConfig;
+import org.zmail.cs.ldap.LdapException;
+import org.zmail.cs.ldap.LdapServerType;
+import org.zmail.cs.ldap.LdapConstants;
+import org.zmail.cs.ldap.LdapUsage;
+import org.zmail.cs.ldap.ZLdapContext;
+import org.zmail.cs.ldap.ZLdapFilterFactory;
+import org.zmail.cs.ldap.ZMutableEntry;
+import org.zmail.cs.ldap.ZSearchControls;
+import org.zmail.cs.ldap.ZSearchScope;
+import org.zmail.cs.ldap.ZSearchScope.ZSearchScopeFactory;
 
 public class UBIDLdapClient extends LdapClient {
     @Override
@@ -124,9 +124,9 @@ public class UBIDLdapClient extends LdapClient {
     }
 
     @Override
-    protected void zimbraLdapAuthenticateImpl(String bindDN, String password) 
+    protected void zmailLdapAuthenticateImpl(String bindDN, String password) 
     throws ServiceException {
-        UBIDLdapContext.zimbraLdapAuthenticate(bindDN, password);
+        UBIDLdapContext.zmailLdapAuthenticate(bindDN, password);
     }
 
 }

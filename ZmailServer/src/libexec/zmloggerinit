@@ -15,8 +15,8 @@
 # 
 
 #
-if [ x`whoami` != "xzimbra" ]; then
-  echo "Error: must be run as user zimbra"
+if [ x`whoami` != "xzmail" ]; then
+  echo "Error: must be run as user zmail"
   exit 1
 fi
 

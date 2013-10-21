@@ -12,21 +12,21 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.account.callback;
+package org.zmail.cs.account.callback;
 
 import java.util.Map;
 
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.common.util.ZimbraLog;
-import com.zimbra.cs.account.AttributeCallback;
-import com.zimbra.cs.account.Entry;
-import com.zimbra.cs.account.Provisioning;
-import com.zimbra.cs.db.DbPool;
-import com.zimbra.cs.mailbox.MessageCache;
-import com.zimbra.cs.store.BlobInputStream;
-import com.zimbra.cs.store.StoreManager;
-import com.zimbra.cs.util.JMSession;
-import com.zimbra.cs.util.Zimbra;
+import org.zmail.common.service.ServiceException;
+import org.zmail.common.util.ZmailLog;
+import org.zmail.cs.account.AttributeCallback;
+import org.zmail.cs.account.Entry;
+import org.zmail.cs.account.Provisioning;
+import org.zmail.cs.db.DbPool;
+import org.zmail.cs.mailbox.MessageCache;
+import org.zmail.cs.store.BlobInputStream;
+import org.zmail.cs.store.StoreManager;
+import org.zmail.cs.util.JMSession;
+import org.zmail.cs.util.Zmail;
 
 /**
  * Central place for updating server attributes that we cache in memory.
@@ -37,25 +37,25 @@ public class ServerConfig extends AttributeCallback {
     public void postModify(CallbackContext context, String attrName, Entry entry) {
         
         // do not run this callback unless inside the server
-        if (!Zimbra.started())
+        if (!Zmail.started())
             return;
         
         try {
-            if (attrName.equals(Provisioning.A_zimbraMailUncompressedCacheMaxBytes) ||
-                attrName.equals(Provisioning.A_zimbraMailUncompressedCacheMaxFiles) ||
-                attrName.equals(Provisioning.A_zimbraMailFileDescriptorCacheSize)) {
+            if (attrName.equals(Provisioning.A_zmailMailUncompressedCacheMaxBytes) ||
+                attrName.equals(Provisioning.A_zmailMailUncompressedCacheMaxFiles) ||
+                attrName.equals(Provisioning.A_zmailMailFileDescriptorCacheSize)) {
                 BlobInputStream.getFileDescriptorCache().loadSettings();
-            } else if (attrName.equals(Provisioning.A_zimbraMailDiskStreamingThreshold)) {
+            } else if (attrName.equals(Provisioning.A_zmailMailDiskStreamingThreshold)) {
                 StoreManager.loadSettings();
-            } else if (attrName.equals(Provisioning.A_zimbraMessageCacheSize)) {
+            } else if (attrName.equals(Provisioning.A_zmailMessageCacheSize)) {
                 MessageCache.loadSettings();
-            } else if (attrName.equals(Provisioning.A_zimbraSmtpHostname)) {
+            } else if (attrName.equals(Provisioning.A_zmailSmtpHostname)) {
                 JMSession.resetSmtpHosts();
-            } else if (attrName.equals(Provisioning.A_zimbraDatabaseSlowSqlThreshold)) {
+            } else if (attrName.equals(Provisioning.A_zmailDatabaseSlowSqlThreshold)) {
                 DbPool.loadSettings();
             }
         } catch (ServiceException e) {
-            ZimbraLog.account.warn("Unable to update %s.", attrName, e);
+            ZmailLog.account.warn("Unable to update %s.", attrName, e);
         }
     }
 

@@ -12,7 +12,7 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.dav.property;
+package org.zmail.cs.dav.property;
 
 import java.io.CharArrayWriter;
 import java.io.IOException;
@@ -23,25 +23,25 @@ import java.util.Collections;
 import org.dom4j.Element;
 import org.dom4j.QName;
 
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.common.util.ZimbraLog;
-import com.zimbra.common.calendar.ICalTimeZone;
-import com.zimbra.common.calendar.ZCalendar;
-import com.zimbra.common.mime.MimeConstants;
-import com.zimbra.cs.account.Account;
-import com.zimbra.cs.account.Provisioning;
-import com.zimbra.cs.dav.DavContext;
-import com.zimbra.cs.dav.DavElements;
-import com.zimbra.cs.dav.DavException;
-import com.zimbra.cs.dav.property.ResourceProperty;
-import com.zimbra.cs.dav.resource.CalendarObject;
-import com.zimbra.cs.dav.resource.Principal;
-import com.zimbra.cs.dav.service.DavServlet;
-import com.zimbra.cs.mailbox.Flag;
-import com.zimbra.cs.mailbox.Folder;
-import com.zimbra.cs.mailbox.MailItem;
-import com.zimbra.cs.mailbox.Mailbox;
-import com.zimbra.cs.mailbox.calendar.Util;
+import org.zmail.common.service.ServiceException;
+import org.zmail.common.util.ZmailLog;
+import org.zmail.common.calendar.ICalTimeZone;
+import org.zmail.common.calendar.ZCalendar;
+import org.zmail.common.mime.MimeConstants;
+import org.zmail.cs.account.Account;
+import org.zmail.cs.account.Provisioning;
+import org.zmail.cs.dav.DavContext;
+import org.zmail.cs.dav.DavElements;
+import org.zmail.cs.dav.DavException;
+import org.zmail.cs.dav.property.ResourceProperty;
+import org.zmail.cs.dav.resource.CalendarObject;
+import org.zmail.cs.dav.resource.Principal;
+import org.zmail.cs.dav.service.DavServlet;
+import org.zmail.cs.mailbox.Flag;
+import org.zmail.cs.mailbox.Folder;
+import org.zmail.cs.mailbox.MailItem;
+import org.zmail.cs.mailbox.Mailbox;
+import org.zmail.cs.mailbox.calendar.Util;
 
 /**
  * CALDAV:supported-calendar-component-set - draft-dusseault-caldav section 5.2.3
@@ -174,10 +174,10 @@ public class CalDavProperty extends ResourceProperty {
                     setStringValue(rs.getVcalendar(ctxt, null));
                 } catch (IOException e) {
                     setStringValue("");
-                    ZimbraLog.dav.warn("can't get appt data", e);
+                    ZmailLog.dav.warn("can't get appt data", e);
                 } catch (DavException e) {
                     setStringValue("");
-                    ZimbraLog.dav.warn("can't get appt data", e);
+                    ZmailLog.dav.warn("can't get appt data", e);
                 }
             return super.toElement(ctxt, parent, nameOnly);
         }
@@ -188,7 +188,7 @@ public class CalDavProperty extends ResourceProperty {
             super(DavElements.E_CALENDAR_HOME_SET);
             String[] homeSets = null;
             try {
-                homeSets = Provisioning.getInstance().getConfig().getMultiAttr(Provisioning.A_zimbraCalendarCalDavAlternateCalendarHomeSet);
+                homeSets = Provisioning.getInstance().getConfig().getMultiAttr(Provisioning.A_zmailCalendarCalDavAlternateCalendarHomeSet);
             } catch (ServiceException se) {
 
             }
@@ -270,7 +270,7 @@ public class CalDavProperty extends ResourceProperty {
 
             ArrayList<Integer> parentIds = new ArrayList<Integer>();
             try {
-                String[] homeSets = Provisioning.getInstance().getConfig().getMultiAttr(Provisioning.A_zimbraCalendarCalDavAlternateCalendarHomeSet);
+                String[] homeSets = Provisioning.getInstance().getConfig().getMultiAttr(Provisioning.A_zmailCalendarCalDavAlternateCalendarHomeSet);
                 if (homeSets != null) {
                     for (Folder f : folders) {
                         String name = f.getName();
@@ -282,7 +282,7 @@ public class CalDavProperty extends ResourceProperty {
                     }
                 }
             } catch (ServiceException se) {
-                ZimbraLog.dav.warn("can't generate calendar home set", se);
+                ZmailLog.dav.warn("can't generate calendar home set", se);
             }
             for (Folder f : folders) {
                 if (f.getDefaultView() != MailItem.Type.APPOINTMENT && f.getDefaultView() != MailItem.Type.TASK) {
@@ -314,7 +314,7 @@ public class CalDavProperty extends ResourceProperty {
     private static class CalendarUserType extends CalDavProperty {
         public CalendarUserType(Principal p) {
             super(DavElements.E_CALENDAR_USER_TYPE);
-            String resType = p.getAccount().getAttr(Provisioning.A_zimbraCalResType);
+            String resType = p.getAccount().getAttr(Provisioning.A_zmailCalResType);
             if (resType == null)
                 setStringValue(INDIVIDUAL);
             else if (resType.compareTo("Equipment") == 0)

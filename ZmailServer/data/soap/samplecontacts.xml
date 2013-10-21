@@ -1,4 +1,4 @@
-<t:tests xmlns:t="urn:zimbraTestHarness">
+<t:tests xmlns:t="urn:zmailTestHarness">
 
   <t:property name="uri" value="http://localhost:7070/service/soap/"/>
 
@@ -7,7 +7,7 @@
 
   <t:test id="auth" required="true">
     <t:request>
-      <AuthRequest xmlns="urn:zimbraAccount">
+      <AuthRequest xmlns="urn:zmailAccount">
         <account by="name">${user}</account>
         <password>${password}</password>
         <!--<prefs/>-->
@@ -22,7 +22,7 @@
 
         <t:test>
             <t:request>
-            <CreateContactRequest xmlns="urn:zimbraMail">
+            <CreateContactRequest xmlns="urn:zmailMail">
             <cn>
 <a n="lastName">Abraham Linclon Birthplace National Historic Site</a>
 <a n="workCity">Hodgenville</a>
@@ -43,7 +43,7 @@
 
         <t:test>
             <t:request>
-            <CreateContactRequest xmlns="urn:zimbraMail">
+            <CreateContactRequest xmlns="urn:zmailMail">
             <cn>
 <a n="lastName">Acadia National Park</a>
 <a n="workCity">Bar Harbor</a>
@@ -64,7 +64,7 @@
 
         <t:test>
             <t:request>
-            <CreateContactRequest xmlns="urn:zimbraMail">
+            <CreateContactRequest xmlns="urn:zmailMail">
             <cn>
 <a n="lastName">Adams National Historical Park</a>
 <a n="workCity">Quincy</a>
@@ -85,7 +85,7 @@
 
         <t:test>
             <t:request>
-            <CreateContactRequest xmlns="urn:zimbraMail">
+            <CreateContactRequest xmlns="urn:zmailMail">
             <cn>
 <a n="lastName">African American Civil War Memorial </a>
 <a n="workCity">Washington</a>
@@ -105,7 +105,7 @@
 
         <t:test>
             <t:request>
-            <CreateContactRequest xmlns="urn:zimbraMail">
+            <CreateContactRequest xmlns="urn:zmailMail">
             <cn>
 <a n="lastName">Agate Fossil Beds, National Monument</a>
 <a n="workCity">Harrison</a>
@@ -125,7 +125,7 @@
 
         <t:test>
             <t:request>
-            <CreateContactRequest xmlns="urn:zimbraMail">
+            <CreateContactRequest xmlns="urn:zmailMail">
             <cn>
 <a n="lastName">Ala Kahakai, National Historic Trail</a>
 <a n="workCity">Kailua-Kona</a>
@@ -144,7 +144,7 @@
 
         <t:test>
             <t:request>
-            <CreateContactRequest xmlns="urn:zimbraMail">
+            <CreateContactRequest xmlns="urn:zmailMail">
             <cn>
 <a n="lastName">Alagnak, Wild River</a>
 <a n="workCity">King Salmon</a>
@@ -165,7 +165,7 @@ P.O. Box 7</a>
 
         <t:test>
             <t:request>
-            <CreateContactRequest xmlns="urn:zimbraMail">
+            <CreateContactRequest xmlns="urn:zmailMail">
             <cn>
 <a n="lastName">Alcatraz Island, Golden Gate National Recreation Area</a>
 <a n="workCity">San Francisco</a>
@@ -186,7 +186,7 @@ P.O. Box 7</a>
 
         <t:test>
             <t:request>
-            <CreateContactRequest xmlns="urn:zimbraMail">
+            <CreateContactRequest xmlns="urn:zmailMail">
             <cn>
 <a n="lastName">Aleutian World War II National Historic Area</a>
 <a n="workCity">Unalaska</a>
@@ -206,7 +206,7 @@ P.O. Box 7</a>
 
         <t:test>
             <t:request>
-            <CreateContactRequest xmlns="urn:zimbraMail">
+            <CreateContactRequest xmlns="urn:zmailMail">
             <cn>
 <a n="lastName">Alibates Flint Quarries, National Monument</a>
 <a n="workCity">Fritch</a>
@@ -226,7 +226,7 @@ P.O. Box 7</a>
 
         <t:test>
             <t:request>
-            <CreateContactRequest xmlns="urn:zimbraMail">
+            <CreateContactRequest xmlns="urn:zmailMail">
             <cn>
 <a n="lastName">Allegheny Portage Railroad, National Historic Site</a>
 <a n="workCity">Gallitzin</a>
@@ -247,7 +247,7 @@ P.O. Box 7</a>
 
         <t:test>
             <t:request>
-            <CreateContactRequest xmlns="urn:zimbraMail">
+            <CreateContactRequest xmlns="urn:zmailMail">
             <cn>
 <a n="lastName">American Memorial Park</a>
 <a n="workCity">Saipan</a>
@@ -267,7 +267,7 @@ P.O. Box 7</a>
 
         <t:test>
             <t:request>
-            <CreateContactRequest xmlns="urn:zimbraMail">
+            <CreateContactRequest xmlns="urn:zmailMail">
             <cn>
 <a n="lastName">Amistad, National Recreation Area</a>
 <a n="workCity">Del Rio</a>
@@ -288,7 +288,7 @@ P.O. Box 7</a>
 
         <t:test>
             <t:request>
-            <CreateContactRequest xmlns="urn:zimbraMail">
+            <CreateContactRequest xmlns="urn:zmailMail">
             <cn>
 <a n="lastName">Anacostia Park</a>
 <a n="workCity">Washington</a>
@@ -308,7 +308,7 @@ P.O. Box 7</a>
 
         <t:test>
             <t:request>
-            <CreateContactRequest xmlns="urn:zimbraMail">
+            <CreateContactRequest xmlns="urn:zmailMail">
             <cn>
 <a n="lastName">Andersonville National Historic Site</a>
 <a n="workCity">Andersonville</a>
@@ -328,7 +328,7 @@ P.O. Box 7</a>
 
         <t:test>
             <t:request>
-            <CreateContactRequest xmlns="urn:zimbraMail">
+            <CreateContactRequest xmlns="urn:zmailMail">
             <cn>
 <a n="lastName">Andrew Johnson National Historic Site</a>
 <a n="workCity">Greeneville</a>
@@ -349,7 +349,7 @@ P.O. Box 7</a>
 
         <t:test>
             <t:request>
-            <CreateContactRequest xmlns="urn:zimbraMail">
+            <CreateContactRequest xmlns="urn:zmailMail">
             <cn>
 <a n="lastName">Aniakchak National Monument &amp; Preserve</a>
 <a n="workCity">King Salmon</a>
@@ -369,7 +369,7 @@ P.O. Box 7</a>
 
         <t:test>
             <t:request>
-            <CreateContactRequest xmlns="urn:zimbraMail">
+            <CreateContactRequest xmlns="urn:zmailMail">
             <cn>
 <a n="lastName">Antietam National Battlefield</a>
 <a n="workCity">Sharpsburg</a>
@@ -390,7 +390,7 @@ P.O. Box 7</a>
 
         <t:test>
             <t:request>
-            <CreateContactRequest xmlns="urn:zimbraMail">
+            <CreateContactRequest xmlns="urn:zmailMail">
             <cn>
 <a n="lastName">Antietam National Cemetery</a>
 <a n="workCity">Sharpsburg</a>
@@ -410,7 +410,7 @@ P.O. Box 7</a>
 
         <t:test>
             <t:request>
-            <CreateContactRequest xmlns="urn:zimbraMail">
+            <CreateContactRequest xmlns="urn:zmailMail">
             <cn>
 <a n="lastName">Apostle Islands National Lakeshore</a>
 <a n="workCity">Bayfield</a>
@@ -431,7 +431,7 @@ P.O. Box 7</a>
 
         <t:test>
             <t:request>
-            <CreateContactRequest xmlns="urn:zimbraMail">
+            <CreateContactRequest xmlns="urn:zmailMail">
             <cn>
 <a n="lastName">Appalachian National Scenic Trail</a>
 <a n="workCity">Harpers Ferry</a>
@@ -452,7 +452,7 @@ P.O. Box 7</a>
 
         <t:test>
             <t:request>
-            <CreateContactRequest xmlns="urn:zimbraMail">
+            <CreateContactRequest xmlns="urn:zmailMail">
             <cn>
 <a n="lastName">Appomattox Court House National Historical Park</a>
 <a n="workCity">Appomattox</a>
@@ -473,7 +473,7 @@ P.O. Box 7</a>
 
         <t:test>
             <t:request>
-            <CreateContactRequest xmlns="urn:zimbraMail">
+            <CreateContactRequest xmlns="urn:zmailMail">
             <cn>
 <a n="lastName">Arches National Park</a>
 <a n="workCity">Moab</a>
@@ -494,7 +494,7 @@ P.O. Box 7</a>
 
         <t:test>
             <t:request>
-            <CreateContactRequest xmlns="urn:zimbraMail">
+            <CreateContactRequest xmlns="urn:zmailMail">
             <cn>
 <a n="lastName">Arkansas Post National Memorial</a>
 <a n="workCity">Gillett</a>
@@ -514,7 +514,7 @@ P.O. Box 7</a>
 
         <t:test>
             <t:request>
-            <CreateContactRequest xmlns="urn:zimbraMail">
+            <CreateContactRequest xmlns="urn:zmailMail">
             <cn>
 <a n="lastName">Arlington House</a>
 <a n="workCity">McLean</a>
@@ -535,7 +535,7 @@ P.O. Box 7</a>
 
         <t:test>
             <t:request>
-            <CreateContactRequest xmlns="urn:zimbraMail">
+            <CreateContactRequest xmlns="urn:zmailMail">
             <cn>
 <a n="lastName">Assateague Island National Seashore</a>
 <a n="workCity">Berlin</a>
@@ -555,7 +555,7 @@ P.O. Box 7</a>
 
         <t:test>
             <t:request>
-            <CreateContactRequest xmlns="urn:zimbraMail">
+            <CreateContactRequest xmlns="urn:zmailMail">
             <cn>
 <a n="lastName">Aztec Ruins National Monument</a>
 <a n="workCity">Aztec</a>
@@ -576,7 +576,7 @@ P.O. Box 7</a>
 
         <t:test>
             <t:request>
-            <CreateContactRequest xmlns="urn:zimbraMail">
+            <CreateContactRequest xmlns="urn:zmailMail">
             <cn>
 <a n="lastName">Badlands National Park</a>
 <a n="workCity">Interior</a>
@@ -596,7 +596,7 @@ P.O. Box 7</a>
 
         <t:test>
             <t:request>
-            <CreateContactRequest xmlns="urn:zimbraMail">
+            <CreateContactRequest xmlns="urn:zmailMail">
             <cn>
 <a n="lastName">Baltimore-Washington Parkway</a>
 <a n="workCity">Greenbelt</a>
@@ -616,7 +616,7 @@ P.O. Box 7</a>
 
         <t:test>
             <t:request>
-            <CreateContactRequest xmlns="urn:zimbraMail">
+            <CreateContactRequest xmlns="urn:zmailMail">
             <cn>
 <a n="lastName">Bandelier National Monument</a>
 <a n="workCity">Los Alamos</a>
@@ -637,7 +637,7 @@ P.O. Box 7</a>
 
         <t:test>
             <t:request>
-            <CreateContactRequest xmlns="urn:zimbraMail">
+            <CreateContactRequest xmlns="urn:zmailMail">
             <cn>
 <a n="lastName">Battleground National Cemetery</a>
 <a n="workCity">Washington</a>
@@ -656,7 +656,7 @@ P.O. Box 7</a>
 
         <t:test>
             <t:request>
-            <CreateContactRequest xmlns="urn:zimbraMail">
+            <CreateContactRequest xmlns="urn:zmailMail">
             <cn>
 <a n="lastName">Bent's Old Fort National Historic Site</a>
 <a n="workCity">La Junta</a>
@@ -676,7 +676,7 @@ P.O. Box 7</a>
 
         <t:test>
             <t:request>
-            <CreateContactRequest xmlns="urn:zimbraMail">
+            <CreateContactRequest xmlns="urn:zmailMail">
             <cn>
 <a n="lastName">Bering Land Bridge National Preserve</a>
 <a n="workCity">Nome</a>
@@ -697,7 +697,7 @@ P.O. Box 7</a>
 
         <t:test>
             <t:request>
-            <CreateContactRequest xmlns="urn:zimbraMail">
+            <CreateContactRequest xmlns="urn:zmailMail">
             <cn>
 <a n="lastName">Big Bend National Park</a>
 <a n="workCity">Big Bend National Park</a>
@@ -718,7 +718,7 @@ P.O. Box 7</a>
 
         <t:test>
             <t:request>
-            <CreateContactRequest xmlns="urn:zimbraMail">
+            <CreateContactRequest xmlns="urn:zmailMail">
             <cn>
 <a n="lastName">Big Cypress National Preserve</a>
 <a n="workCity">Ochopee</a>
@@ -739,7 +739,7 @@ P.O. Box 7</a>
 
         <t:test>
             <t:request>
-            <CreateContactRequest xmlns="urn:zimbraMail">
+            <CreateContactRequest xmlns="urn:zmailMail">
             <cn>
 <a n="lastName">Big Hole National Battlefield</a>
 <a n="workCity">Wisdom</a>
@@ -759,7 +759,7 @@ P.O. Box 7</a>
 
         <t:test>
             <t:request>
-            <CreateContactRequest xmlns="urn:zimbraMail">
+            <CreateContactRequest xmlns="urn:zmailMail">
             <cn>
 <a n="lastName">Big South Fork National River &amp; Recreation Area</a>
 <a n="workCity">Oneida</a>
@@ -780,7 +780,7 @@ P.O. Box 7</a>
 
         <t:test>
             <t:request>
-            <CreateContactRequest xmlns="urn:zimbraMail">
+            <CreateContactRequest xmlns="urn:zmailMail">
             <cn>
 <a n="lastName">Big Thicket National Preserve</a>
 <a n="workCity">Beaumont</a>
@@ -801,7 +801,7 @@ P.O. Box 7</a>
 
         <t:test>
             <t:request>
-            <CreateContactRequest xmlns="urn:zimbraMail">
+            <CreateContactRequest xmlns="urn:zmailMail">
             <cn>
 <a n="lastName">Bighorn Canyon National Recreation Area</a>
 <a n="workCity">Fort Smith</a>
@@ -822,7 +822,7 @@ P.O. Box 7</a>
 
         <t:test>
             <t:request>
-            <CreateContactRequest xmlns="urn:zimbraMail">
+            <CreateContactRequest xmlns="urn:zmailMail">
             <cn>
 <a n="lastName">Biscayne National Park</a>
 <a n="workCity">Homestead</a>
@@ -843,7 +843,7 @@ P.O. Box 7</a>
 
         <t:test>
             <t:request>
-            <CreateContactRequest xmlns="urn:zimbraMail">
+            <CreateContactRequest xmlns="urn:zmailMail">
             <cn>
 <a n="lastName">Black Canyon Of The Gunnison National Park</a>
 <a n="workCity">Gunnison</a>
@@ -864,7 +864,7 @@ P.O. Box 7</a>
 
         <t:test>
             <t:request>
-            <CreateContactRequest xmlns="urn:zimbraMail">
+            <CreateContactRequest xmlns="urn:zmailMail">
             <cn>
 <a n="lastName">Blackstone River Valley National Heritage Corridor</a>
 <a n="workCity">Woonsocket</a>
@@ -884,7 +884,7 @@ P.O. Box 7</a>
 
         <t:test>
             <t:request>
-            <CreateContactRequest xmlns="urn:zimbraMail">
+            <CreateContactRequest xmlns="urn:zmailMail">
             <cn>
 <a n="lastName">Blue Ridge Parkway</a>
 <a n="workCity">Asheville</a>
@@ -905,7 +905,7 @@ P.O. Box 7</a>
 
         <t:test>
             <t:request>
-            <CreateContactRequest xmlns="urn:zimbraMail">
+            <CreateContactRequest xmlns="urn:zmailMail">
             <cn>
 <a n="lastName">Bluestone National Scenic River</a>
 <a n="workCity">Glen Jean</a>
@@ -926,7 +926,7 @@ P.O. Box 7</a>
 
         <t:test>
             <t:request>
-            <CreateContactRequest xmlns="urn:zimbraMail">
+            <CreateContactRequest xmlns="urn:zmailMail">
             <cn>
 <a n="lastName">Booker T Washington National Monument</a>
 <a n="workCity">Hardy</a>
@@ -946,7 +946,7 @@ P.O. Box 7</a>
 
         <t:test>
             <t:request>
-            <CreateContactRequest xmlns="urn:zimbraMail">
+            <CreateContactRequest xmlns="urn:zmailMail">
             <cn>
 <a n="lastName">Boston National Historical Park</a>
 <a n="workCity">Boston</a>
@@ -967,7 +967,7 @@ P.O. Box 7</a>
 
         <t:test>
             <t:request>
-            <CreateContactRequest xmlns="urn:zimbraMail">
+            <CreateContactRequest xmlns="urn:zmailMail">
             <cn>
 <a n="lastName">Boston African American National Historic Site</a>
 <a n="workCity">Boston</a>
@@ -987,7 +987,7 @@ P.O. Box 7</a>
 
         <t:test>
             <t:request>
-            <CreateContactRequest xmlns="urn:zimbraMail">
+            <CreateContactRequest xmlns="urn:zmailMail">
             <cn>
 <a n="lastName">Boston Harbor Islands National Recreation Area</a>
 <a n="workCity">Boston</a>
@@ -1008,7 +1008,7 @@ P.O. Box 7</a>
 
         <t:test>
             <t:request>
-            <CreateContactRequest xmlns="urn:zimbraMail">
+            <CreateContactRequest xmlns="urn:zmailMail">
             <cn>
 <a n="lastName">Brices Cross Roads National Battlefield Site</a>
 <a n="workCity">Tupelo</a>
@@ -1029,7 +1029,7 @@ P.O. Box 7</a>
 
         <t:test>
             <t:request>
-            <CreateContactRequest xmlns="urn:zimbraMail">
+            <CreateContactRequest xmlns="urn:zmailMail">
             <cn>
 <a n="lastName">Brown V Board Of Education National Historic Site</a>
 <a n="workCity">Topeka</a>
@@ -1049,7 +1049,7 @@ P.O. Box 7</a>
 
         <t:test>
             <t:request>
-            <CreateContactRequest xmlns="urn:zimbraMail">
+            <CreateContactRequest xmlns="urn:zmailMail">
             <cn>
 <a n="lastName">Bryce Canyon National Park</a>
 <a n="workCity">Bryce Canyon</a>
@@ -1068,7 +1068,7 @@ P.O. Box 7</a>
 
         <t:test>
             <t:request>
-            <CreateContactRequest xmlns="urn:zimbraMail">
+            <CreateContactRequest xmlns="urn:zmailMail">
             <cn>
 <a n="lastName">Buck Island Reef National Monument</a>
 <a n="workCity">Christiansted, St. Croix</a>
@@ -1088,7 +1088,7 @@ P.O. Box 7</a>
 
         <t:test>
             <t:request>
-            <CreateContactRequest xmlns="urn:zimbraMail">
+            <CreateContactRequest xmlns="urn:zmailMail">
             <cn>
 <a n="lastName">Buffalo National River</a>
 <a n="workCity">Harrison</a>
@@ -1110,7 +1110,7 @@ Suite 136</a>
 
         <t:test>
             <t:request>
-            <CreateContactRequest xmlns="urn:zimbraMail">
+            <CreateContactRequest xmlns="urn:zmailMail">
             <cn>
 <a n="lastName">Cabrillo National Monument</a>
 <a n="workCity">San Diego</a>
@@ -1131,7 +1131,7 @@ Suite 136</a>
 
         <t:test>
             <t:request>
-            <CreateContactRequest xmlns="urn:zimbraMail">
+            <CreateContactRequest xmlns="urn:zmailMail">
             <cn>
 <a n="lastName">California National Historic Trail</a>
 <a n="workCity">Salt Lake City</a>
@@ -1152,7 +1152,7 @@ PO Box 45155</a>
 
         <t:test>
             <t:request>
-            <CreateContactRequest xmlns="urn:zimbraMail">
+            <CreateContactRequest xmlns="urn:zmailMail">
             <cn>
 <a n="lastName">Canaveral National Seashore</a>
 <a n="workCity">Titusville</a>
@@ -1173,7 +1173,7 @@ PO Box 45155</a>
 
         <t:test>
             <t:request>
-            <CreateContactRequest xmlns="urn:zimbraMail">
+            <CreateContactRequest xmlns="urn:zmailMail">
             <cn>
 <a n="lastName">Cane River National Heritage Area</a>
 <a n="workCity">Natchitoches</a>
@@ -1194,7 +1194,7 @@ PO Box 45155</a>
 
         <t:test>
             <t:request>
-            <CreateContactRequest xmlns="urn:zimbraMail">
+            <CreateContactRequest xmlns="urn:zmailMail">
             <cn>
 <a n="lastName">Cane River Creole National Historical Park</a>
 <a n="workCity">Natchitoches</a>
@@ -1215,7 +1215,7 @@ PO Box 45155</a>
 
         <t:test>
             <t:request>
-            <CreateContactRequest xmlns="urn:zimbraMail">
+            <CreateContactRequest xmlns="urn:zmailMail">
             <cn>
 <a n="lastName">Canyon De Chelly National Monument</a>
 <a n="workCity">Chinle</a>
@@ -1235,7 +1235,7 @@ PO Box 45155</a>
 
         <t:test>
             <t:request>
-            <CreateContactRequest xmlns="urn:zimbraMail">
+            <CreateContactRequest xmlns="urn:zmailMail">
             <cn>
 <a n="lastName">Canyonlands National Park</a>
 <a n="workCity">Moab</a>
@@ -1256,7 +1256,7 @@ PO Box 45155</a>
 
         <t:test>
             <t:request>
-            <CreateContactRequest xmlns="urn:zimbraMail">
+            <CreateContactRequest xmlns="urn:zmailMail">
             <cn>
 <a n="lastName">Cape Cod National Seashore</a>
 <a n="workCity">Wellfleet</a>
@@ -1277,7 +1277,7 @@ PO Box 45155</a>
 
         <t:test>
             <t:request>
-            <CreateContactRequest xmlns="urn:zimbraMail">
+            <CreateContactRequest xmlns="urn:zmailMail">
             <cn>
 <a n="lastName">Cape Hatteras National Seashore</a>
 <a n="workCity">Manteo</a>
@@ -1298,7 +1298,7 @@ PO Box 45155</a>
 
         <t:test>
             <t:request>
-            <CreateContactRequest xmlns="urn:zimbraMail">
+            <CreateContactRequest xmlns="urn:zmailMail">
             <cn>
 <a n="lastName">Cape Henry Memorial </a>
 <a n="workCity">Yorktown</a>
@@ -1317,7 +1317,7 @@ PO Box 45155</a>
 
         <t:test>
             <t:request>
-            <CreateContactRequest xmlns="urn:zimbraMail">
+            <CreateContactRequest xmlns="urn:zmailMail">
             <cn>
 <a n="lastName">Cape Krusenstern National Monument</a>
 <a n="workCity">Kotzebue</a>
@@ -1338,7 +1338,7 @@ PO Box 45155</a>
 
         <t:test>
             <t:request>
-            <CreateContactRequest xmlns="urn:zimbraMail">
+            <CreateContactRequest xmlns="urn:zmailMail">
             <cn>
 <a n="lastName">Cape Lookout National Seashore</a>
 <a n="workCity">Harkers Island</a>
@@ -1358,7 +1358,7 @@ PO Box 45155</a>
 
         <t:test>
             <t:request>
-            <CreateContactRequest xmlns="urn:zimbraMail">
+            <CreateContactRequest xmlns="urn:zmailMail">
             <cn>
 <a n="lastName">Capitol Hill Parks </a>
 <a n="email">NACE_Superintendent@nps.gov</a>
@@ -1373,7 +1373,7 @@ PO Box 45155</a>
 
         <t:test>
             <t:request>
-            <CreateContactRequest xmlns="urn:zimbraMail">
+            <CreateContactRequest xmlns="urn:zmailMail">
             <cn>
 <a n="lastName">Capitol Reef National Park</a>
 <a n="workCity">Torrey</a>
@@ -1393,7 +1393,7 @@ PO Box 45155</a>
 
         <t:test>
             <t:request>
-            <CreateContactRequest xmlns="urn:zimbraMail">
+            <CreateContactRequest xmlns="urn:zmailMail">
             <cn>
 <a n="lastName">Capulin Volcano National Monument</a>
 <a n="workCity">Capulin</a>
@@ -1413,7 +1413,7 @@ PO Box 45155</a>
 
         <t:test>
             <t:request>
-            <CreateContactRequest xmlns="urn:zimbraMail">
+            <CreateContactRequest xmlns="urn:zmailMail">
             <cn>
 <a n="lastName">Carl Sandburg Home National Historic Site</a>
 <a n="workCity">Flat Rock</a>
@@ -1434,7 +1434,7 @@ PO Box 45155</a>
 
         <t:test>
             <t:request>
-            <CreateContactRequest xmlns="urn:zimbraMail">
+            <CreateContactRequest xmlns="urn:zmailMail">
             <cn>
 <a n="lastName">Carlsbad Caverns National Park</a>
 <a n="workCity">Carlsbad</a>
@@ -1455,7 +1455,7 @@ PO Box 45155</a>
 
         <t:test>
             <t:request>
-            <CreateContactRequest xmlns="urn:zimbraMail">
+            <CreateContactRequest xmlns="urn:zmailMail">
             <cn>
 <a n="lastName">Casa Grande Ruins National Monument</a>
 <a n="workCity">Coolidge</a>
@@ -1475,7 +1475,7 @@ PO Box 45155</a>
 
         <t:test>
             <t:request>
-            <CreateContactRequest xmlns="urn:zimbraMail">
+            <CreateContactRequest xmlns="urn:zmailMail">
             <cn>
 <a n="lastName">Castillo De San Marcos National Monument</a>
 <a n="workCity">St. Augustine</a>
@@ -1496,7 +1496,7 @@ PO Box 45155</a>
 
         <t:test>
             <t:request>
-            <CreateContactRequest xmlns="urn:zimbraMail">
+            <CreateContactRequest xmlns="urn:zmailMail">
             <cn>
 <a n="lastName">Castle Clinton National Monument</a>
 <a n="workCity">New York</a>
@@ -1516,7 +1516,7 @@ PO Box 45155</a>
 
         <t:test>
             <t:request>
-            <CreateContactRequest xmlns="urn:zimbraMail">
+            <CreateContactRequest xmlns="urn:zmailMail">
             <cn>
 <a n="lastName">Catoctin Mountain Park</a>
 <a n="workCity">Thurmont</a>
@@ -1537,7 +1537,7 @@ PO Box 45155</a>
 
         <t:test>
             <t:request>
-            <CreateContactRequest xmlns="urn:zimbraMail">
+            <CreateContactRequest xmlns="urn:zmailMail">
             <cn>
 <a n="lastName">Cedar Breaks National Monument</a>
 <a n="workCity">Cedar City</a>
@@ -1557,7 +1557,7 @@ PO Box 45155</a>
 
         <t:test>
             <t:request>
-            <CreateContactRequest xmlns="urn:zimbraMail">
+            <CreateContactRequest xmlns="urn:zmailMail">
             <cn>
 <a n="lastName">Cedar Creek &amp; Belle Grove National Historical Park</a>
 <a n="workCity">Middletown</a>
@@ -1577,7 +1577,7 @@ PO Box 45155</a>
 
         <t:test>
             <t:request>
-            <CreateContactRequest xmlns="urn:zimbraMail">
+            <CreateContactRequest xmlns="urn:zmailMail">
             <cn>
 <a n="lastName">Central High School National Historic Site</a>
 <a n="workCity">Little Rock</a>
@@ -1598,7 +1598,7 @@ PO Box 45155</a>
 
         <t:test>
             <t:request>
-            <CreateContactRequest xmlns="urn:zimbraMail">
+            <CreateContactRequest xmlns="urn:zmailMail">
             <cn>
 <a n="lastName">Chaco Culture National Historical Park</a>
 <a n="workCity">Nageezi</a>
@@ -1618,7 +1618,7 @@ PO Box 45155</a>
 
         <t:test>
             <t:request>
-            <CreateContactRequest xmlns="urn:zimbraMail">
+            <CreateContactRequest xmlns="urn:zmailMail">
             <cn>
 <a n="lastName">Chamizal National Memorial</a>
 <a n="workCity">El Paso</a>
@@ -1636,7 +1636,7 @@ PO Box 45155</a>
 
         <t:test>
             <t:request>
-            <CreateContactRequest xmlns="urn:zimbraMail">
+            <CreateContactRequest xmlns="urn:zmailMail">
             <cn>
 <a n="lastName">Channel Islands National Park</a>
 <a n="workCity">Ventura</a>
@@ -1657,7 +1657,7 @@ PO Box 45155</a>
 
         <t:test>
             <t:request>
-            <CreateContactRequest xmlns="urn:zimbraMail">
+            <CreateContactRequest xmlns="urn:zmailMail">
             <cn>
 <a n="lastName">Charles Pinckney National Historic Site</a>
 <a n="workCity">Sullivans Island</a>
@@ -1678,7 +1678,7 @@ PO Box 45155</a>
 
         <t:test>
             <t:request>
-            <CreateContactRequest xmlns="urn:zimbraMail">
+            <CreateContactRequest xmlns="urn:zmailMail">
             <cn>
 <a n="lastName">Chattahoochee River National Recreation Area</a>
 <a n="workCity">Atlanta</a>
@@ -1698,7 +1698,7 @@ PO Box 45155</a>
 
         <t:test>
             <t:request>
-            <CreateContactRequest xmlns="urn:zimbraMail">
+            <CreateContactRequest xmlns="urn:zmailMail">
             <cn>
 <a n="lastName">Chesapeake &amp; Ohio Canal National Historical Park</a>
 <a n="workCity">Hagerstown</a>
@@ -1719,7 +1719,7 @@ PO Box 45155</a>
 
         <t:test>
             <t:request>
-            <CreateContactRequest xmlns="urn:zimbraMail">
+            <CreateContactRequest xmlns="urn:zmailMail">
             <cn>
 <a n="lastName">Chesapeake Bay Gateways Network </a>
 <a n="workCity">Annapolis</a>
@@ -1739,7 +1739,7 @@ PO Box 45155</a>
 
         <t:test>
             <t:request>
-            <CreateContactRequest xmlns="urn:zimbraMail">
+            <CreateContactRequest xmlns="urn:zmailMail">
             <cn>
 <a n="lastName">Chickamauga &amp; Chattanooga National Military Park</a>
 <a n="workCity">Fort Oglethorpe</a>
@@ -1759,7 +1759,7 @@ PO Box 45155</a>
 
         <t:test>
             <t:request>
-            <CreateContactRequest xmlns="urn:zimbraMail">
+            <CreateContactRequest xmlns="urn:zmailMail">
             <cn>
 <a n="lastName">Chickasaw National Recreation Area</a>
 <a n="workCity">Sulphur</a>
@@ -1780,7 +1780,7 @@ PO Box 45155</a>
 
         <t:test>
             <t:request>
-            <CreateContactRequest xmlns="urn:zimbraMail">
+            <CreateContactRequest xmlns="urn:zmailMail">
             <cn>
 <a n="lastName">Chimney Rock National Historic Site</a>
 <a n="workCity">Bayard</a>
@@ -1799,7 +1799,7 @@ PO Box 45155</a>
 
         <t:test>
             <t:request>
-            <CreateContactRequest xmlns="urn:zimbraMail">
+            <CreateContactRequest xmlns="urn:zmailMail">
             <cn>
 <a n="lastName">Chiricahua National Monument</a>
 <a n="workCity">Willcox</a>
@@ -1819,7 +1819,7 @@ PO Box 45155</a>
 
         <t:test>
             <t:request>
-            <CreateContactRequest xmlns="urn:zimbraMail">
+            <CreateContactRequest xmlns="urn:zmailMail">
             <cn>
 <a n="lastName">Christiansted National Historic Site</a>
 <a n="workCity">Christiansted, St. Croix</a>
@@ -1839,7 +1839,7 @@ PO Box 45155</a>
 
         <t:test>
             <t:request>
-            <CreateContactRequest xmlns="urn:zimbraMail">
+            <CreateContactRequest xmlns="urn:zmailMail">
             <cn>
 <a n="lastName">City Of Rocks National Reserve</a>
 <a n="workCity">Almo</a>
@@ -1859,7 +1859,7 @@ PO Box 45155</a>
 
         <t:test>
             <t:request>
-            <CreateContactRequest xmlns="urn:zimbraMail">
+            <CreateContactRequest xmlns="urn:zmailMail">
             <cn>
 <a n="lastName">Clara Barton National Historic Site</a>
 <a n="workCity">Glen Echo</a>
@@ -1878,7 +1878,7 @@ PO Box 45155</a>
 
         <t:test>
             <t:request>
-            <CreateContactRequest xmlns="urn:zimbraMail">
+            <CreateContactRequest xmlns="urn:zmailMail">
             <cn>
 <a n="lastName">Claude Moore Colonial Farm </a>
 <a n="workCity">McLean</a>
@@ -1898,7 +1898,7 @@ PO Box 45155</a>
 
         <t:test>
             <t:request>
-            <CreateContactRequest xmlns="urn:zimbraMail">
+            <CreateContactRequest xmlns="urn:zmailMail">
             <cn>
 <a n="lastName">Colonial National Historical Park</a>
 <a n="workCity">Yorktown</a>
@@ -1919,7 +1919,7 @@ PO Box 45155</a>
 
         <t:test>
             <t:request>
-            <CreateContactRequest xmlns="urn:zimbraMail">
+            <CreateContactRequest xmlns="urn:zmailMail">
             <cn>
 <a n="lastName">Colorado National Monument</a>
 <a n="workCity">Fruita</a>
@@ -1939,7 +1939,7 @@ PO Box 45155</a>
 
         <t:test>
             <t:request>
-            <CreateContactRequest xmlns="urn:zimbraMail">
+            <CreateContactRequest xmlns="urn:zmailMail">
             <cn>
 <a n="lastName">Congaree National Park</a>
 <a n="workCity">Hopkins</a>
@@ -1959,7 +1959,7 @@ PO Box 45155</a>
 
         <t:test>
             <t:request>
-            <CreateContactRequest xmlns="urn:zimbraMail">
+            <CreateContactRequest xmlns="urn:zmailMail">
             <cn>
 <a n="lastName">Constitution Gardens </a>
 <a n="workCity">Washington</a>
@@ -1978,7 +1978,7 @@ PO Box 45155</a>
 
         <t:test>
             <t:request>
-            <CreateContactRequest xmlns="urn:zimbraMail">
+            <CreateContactRequest xmlns="urn:zmailMail">
             <cn>
 <a n="lastName">Coronado National Memorial</a>
 <a n="workCity">Hereford</a>
@@ -1998,7 +1998,7 @@ PO Box 45155</a>
 
         <t:test>
             <t:request>
-            <CreateContactRequest xmlns="urn:zimbraMail">
+            <CreateContactRequest xmlns="urn:zmailMail">
             <cn>
 <a n="lastName">Cowpens National Battlefield</a>
 <a n="workCity">Chesnee</a>
@@ -2018,7 +2018,7 @@ PO Box 45155</a>
 
         <t:test>
             <t:request>
-            <CreateContactRequest xmlns="urn:zimbraMail">
+            <CreateContactRequest xmlns="urn:zmailMail">
             <cn>
 <a n="lastName">Crater Lake National Park</a>
 <a n="workCity">Crater Lake</a>
@@ -2038,7 +2038,7 @@ PO Box 45155</a>
 
         <t:test>
             <t:request>
-            <CreateContactRequest xmlns="urn:zimbraMail">
+            <CreateContactRequest xmlns="urn:zmailMail">
             <cn>
 <a n="lastName">Craters Of The Moon National Monument &amp; Preserve</a>
 <a n="workCity">P.O. Box 29,  Arco</a>
@@ -2059,7 +2059,7 @@ PO Box 45155</a>
 
         <t:test>
             <t:request>
-            <CreateContactRequest xmlns="urn:zimbraMail">
+            <CreateContactRequest xmlns="urn:zmailMail">
             <cn>
 <a n="lastName">Cumberland Gap National Historical Park</a>
 <a n="workCity">Middlesboro</a>
@@ -2081,7 +2081,7 @@ P.O. Box 1848 </a>
 
         <t:test>
             <t:request>
-            <CreateContactRequest xmlns="urn:zimbraMail">
+            <CreateContactRequest xmlns="urn:zmailMail">
             <cn>
 <a n="lastName">Cumberland Island National Seashore</a>
 <a n="workCity">Saint Marys</a>
@@ -2102,7 +2102,7 @@ P.O. Box 1848 </a>
 
         <t:test>
             <t:request>
-            <CreateContactRequest xmlns="urn:zimbraMail">
+            <CreateContactRequest xmlns="urn:zmailMail">
             <cn>
 <a n="lastName">Curecanti National Recreation Area</a>
 <a n="workCity">Gunnison</a>
@@ -2123,7 +2123,7 @@ P.O. Box 1848 </a>
 
         <t:test>
             <t:request>
-            <CreateContactRequest xmlns="urn:zimbraMail">
+            <CreateContactRequest xmlns="urn:zmailMail">
             <cn>
 <a n="lastName">Cuyahoga Valley National Park</a>
 <a n="workCity">Brecksville</a>
@@ -2144,7 +2144,7 @@ P.O. Box 1848 </a>
 
         <t:test>
             <t:request>
-            <CreateContactRequest xmlns="urn:zimbraMail">
+            <CreateContactRequest xmlns="urn:zmailMail">
             <cn>
 <a n="lastName">David Berger National Memorial</a>
 <a n="workCity">Cleveland Heights</a>
@@ -2162,7 +2162,7 @@ P.O. Box 1848 </a>
 
         <t:test>
             <t:request>
-            <CreateContactRequest xmlns="urn:zimbraMail">
+            <CreateContactRequest xmlns="urn:zmailMail">
             <cn>
 <a n="lastName">Dayton Aviation Heritage National Historical Park</a>
 <a n="workCity">Dayton</a>
@@ -2183,7 +2183,7 @@ P.O. Box 1848 </a>
 
         <t:test>
             <t:request>
-            <CreateContactRequest xmlns="urn:zimbraMail">
+            <CreateContactRequest xmlns="urn:zmailMail">
             <cn>
 <a n="lastName">De Soto National Memorial</a>
 <a n="workCity">Bradenton</a>
@@ -2203,7 +2203,7 @@ P.O. Box 1848 </a>
 
         <t:test>
             <t:request>
-            <CreateContactRequest xmlns="urn:zimbraMail">
+            <CreateContactRequest xmlns="urn:zmailMail">
             <cn>
 <a n="lastName">Death Valley National Park</a>
 <a n="workCity">Death Valley</a>
@@ -2224,7 +2224,7 @@ P.O. Box 1848 </a>
 
         <t:test>
             <t:request>
-            <CreateContactRequest xmlns="urn:zimbraMail">
+            <CreateContactRequest xmlns="urn:zmailMail">
             <cn>
 <a n="lastName">Delaware National Scenic River</a>
 <a n="workCity">HQ River Rd off Rt 209 Bushkill</a>
@@ -2245,7 +2245,7 @@ P.O. Box 1848 </a>
 
         <t:test>
             <t:request>
-            <CreateContactRequest xmlns="urn:zimbraMail">
+            <CreateContactRequest xmlns="urn:zmailMail">
             <cn>
 <a n="lastName">Delaware &amp; Lehigh National Heritage Corridor</a>
 <a n="workCity">Easton</a>
@@ -2265,7 +2265,7 @@ P.O. Box 1848 </a>
 
         <t:test>
             <t:request>
-            <CreateContactRequest xmlns="urn:zimbraMail">
+            <CreateContactRequest xmlns="urn:zmailMail">
             <cn>
 <a n="lastName">Delaware Water Gap National Recreation Area</a>
 <a n="workCity">Bushkill</a>
@@ -2286,7 +2286,7 @@ P.O. Box 1848 </a>
 
         <t:test>
             <t:request>
-            <CreateContactRequest xmlns="urn:zimbraMail">
+            <CreateContactRequest xmlns="urn:zmailMail">
             <cn>
 <a n="lastName">Denali National Park &amp; Preserve</a>
 <a n="workCity">Denali Park</a>
@@ -2307,7 +2307,7 @@ P.O. Box 1848 </a>
 
         <t:test>
             <t:request>
-            <CreateContactRequest xmlns="urn:zimbraMail">
+            <CreateContactRequest xmlns="urn:zmailMail">
             <cn>
 <a n="lastName">Deshler-Morris House </a>
 <a n="workCity">Philadelphia</a>
@@ -2326,7 +2326,7 @@ P.O. Box 1848 </a>
 
         <t:test>
             <t:request>
-            <CreateContactRequest xmlns="urn:zimbraMail">
+            <CreateContactRequest xmlns="urn:zmailMail">
             <cn>
 <a n="lastName">Devils Postpile National Monument</a>
 <a n="workCity">Mammoth Lakes</a>
@@ -2345,7 +2345,7 @@ P.O. Box 1848 </a>
 
         <t:test>
             <t:request>
-            <CreateContactRequest xmlns="urn:zimbraMail">
+            <CreateContactRequest xmlns="urn:zmailMail">
             <cn>
 <a n="lastName">Devils Tower National Monument</a>
 <a n="workCity">Devils Tower</a>
@@ -2365,7 +2365,7 @@ P.O. Box 1848 </a>
 
         <t:test>
             <t:request>
-            <CreateContactRequest xmlns="urn:zimbraMail">
+            <CreateContactRequest xmlns="urn:zmailMail">
             <cn>
 <a n="lastName">Dinosaur National Monument</a>
 <a n="workCity">Dinosaur</a>
@@ -2386,7 +2386,7 @@ P.O. Box 1848 </a>
 
         <t:test>
             <t:request>
-            <CreateContactRequest xmlns="urn:zimbraMail">
+            <CreateContactRequest xmlns="urn:zmailMail">
             <cn>
 <a n="lastName">Dry Tortugas National Park</a>
 <a n="workCity">Key West</a>
@@ -2406,7 +2406,7 @@ P.O. Box 1848 </a>
 
         <t:test>
             <t:request>
-            <CreateContactRequest xmlns="urn:zimbraMail">
+            <CreateContactRequest xmlns="urn:zmailMail">
             <cn>
 <a n="lastName">Ebey's Landing National Historical Reserve</a>
 <a n="workCity">Coupeville</a>
@@ -2427,7 +2427,7 @@ P.O. Box 1848 </a>
 
         <t:test>
             <t:request>
-            <CreateContactRequest xmlns="urn:zimbraMail">
+            <CreateContactRequest xmlns="urn:zmailMail">
             <cn>
 <a n="lastName">Edgar Allan Poe National Historic Site</a>
 <a n="workCity">Philadelphia</a>
@@ -2447,7 +2447,7 @@ P.O. Box 1848 </a>
 
         <t:test>
             <t:request>
-            <CreateContactRequest xmlns="urn:zimbraMail">
+            <CreateContactRequest xmlns="urn:zmailMail">
             <cn>
 <a n="lastName">Edison National Historic Site</a>
 <a n="workCity">West Orange</a>

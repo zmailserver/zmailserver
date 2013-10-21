@@ -5,7 +5,7 @@
 #
 # DSPAM Home: Specifies the base directory to be used for DSPAM storage
 #
-Home /opt/zimbra/data/dspam
+Home /opt/zmail/data/dspam
 
 #
 # StorageDriver: Specifies the storage driver backend (library) to use.
@@ -24,7 +24,7 @@ Home /opt/zimbra/data/dspam
 # this option. If you do not wish to lose all of your data, you will need to
 # migrate it to the new backend before making this change.
 #
-StorageDriver /opt/zimbra/dspam/lib/dspam/libhash_drv.so
+StorageDriver /opt/zmail/dspam/lib/dspam/libhash_drv.so
 
 #
 # Trusted Delivery Agent: Specifies the local delivery agent DSPAM should call 
@@ -115,7 +115,7 @@ OnFail error
 # able to specify delivery agent privileges or use tools.
 #
 Trust root
-Trust zimbra
+Trust zmail
 #Trust nobody
 #Trust majordomo
 
@@ -526,7 +526,7 @@ PurgeHits1I	15          # Tokens with only 1 innocent hit
 # header when tracking the source of an email. Note: you should use the address
 # of the host as appears between brackets [ ] in the Received header.
 #
-LocalMX %%zimbraLocalBindAddress%%
+LocalMX %%zmailLocalBindAddress%%
 
 #
 # Logging: Disabling logging for users will make usage graphs unavailable to

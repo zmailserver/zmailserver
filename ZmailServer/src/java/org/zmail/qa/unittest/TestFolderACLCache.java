@@ -12,20 +12,20 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.qa.unittest;
+package org.zmail.qa.unittest;
 
-import com.zimbra.common.util.CliUtil;
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.cs.account.Account;
-import com.zimbra.cs.account.GuestAccount;
-import com.zimbra.cs.account.Provisioning;
-import com.zimbra.common.account.Key.AccountBy;
-import com.zimbra.cs.mailbox.ACL;
-import com.zimbra.cs.mailbox.OperationContext;
-import com.zimbra.cs.mailbox.acl.FolderACL;
-import com.zimbra.client.ZFolder;
-import com.zimbra.client.ZGrant;
-import com.zimbra.client.ZMailbox;
+import org.zmail.common.util.CliUtil;
+import org.zmail.common.service.ServiceException;
+import org.zmail.cs.account.Account;
+import org.zmail.cs.account.GuestAccount;
+import org.zmail.cs.account.Provisioning;
+import org.zmail.common.account.Key.AccountBy;
+import org.zmail.cs.mailbox.ACL;
+import org.zmail.cs.mailbox.OperationContext;
+import org.zmail.cs.mailbox.acl.FolderACL;
+import org.zmail.client.ZFolder;
+import org.zmail.client.ZGrant;
+import org.zmail.client.ZMailbox;
 
 import junit.framework.TestCase;
 
@@ -55,8 +55,8 @@ public class TestFolderACLCache extends TestCase {
      * zmmailbox -z -m user1 mfg /inbox/sub3 public r
      * 
      * To setup memcached:
-     * zmprov mcf zimbraMemcachedClientServerList 'localhost:11211'
-     * /opt/zimbra/memcached/bin/memcached -vv       
+     * zmprov mcf zmailMemcachedClientServerList 'localhost:11211'
+     * /opt/zmail/memcached/bin/memcached -vv       
      * 
      * To test all scenarios, after reset-the-world:
      * 
@@ -74,9 +74,9 @@ public class TestFolderACLCache extends TestCase {
      *     This tests the GetEffectiveFolderPerms soap.
      * 
      * 2. Test the case when memcached is configured/running. 
-     *    zmprov mcf zimbraMemcachedClientServerList 'localhost:11211'
+     *    zmprov mcf zmailMemcachedClientServerList 'localhost:11211'
      *    (restart server)
-     *    /opt/zimbra/memcached/bin/memcached -vv
+     *    /opt/zmail/memcached/bin/memcached -vv
      *    ==> run the test
      */
     
@@ -226,8 +226,8 @@ public class TestFolderACLCache extends TestCase {
     
     public static void main(String[] args) throws ServiceException {
         
-        com.zimbra.cs.db.DbPool.startup();
-        com.zimbra.cs.memcached.MemcachedConnector.startup();
+        org.zmail.cs.db.DbPool.startup();
+        org.zmail.cs.memcached.MemcachedConnector.startup();
         
         CliUtil.toolSetup();
         TestUtil.runTest(TestFolderACLCache.class);

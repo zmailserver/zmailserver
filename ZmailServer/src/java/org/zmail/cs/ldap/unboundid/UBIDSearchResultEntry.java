@@ -12,12 +12,12 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.ldap.unboundid;
+package org.zmail.cs.ldap.unboundid;
 
 import com.unboundid.ldap.sdk.SearchResultEntry;
 
-import com.zimbra.cs.ldap.ZAttributes;
-import com.zimbra.cs.ldap.ZSearchResultEntry;
+import org.zmail.cs.ldap.ZAttributes;
+import org.zmail.cs.ldap.ZSearchResultEntry;
 
 /**
  * Represents one LDAP entry in a search result.

@@ -13,7 +13,7 @@
  * ***** END LICENSE BLOCK *****
  */
 
-package com.zimbra.cs.index;
+package org.zmail.cs.index;
 
 import java.io.Reader;
 import java.io.StringReader;
@@ -28,15 +28,15 @@ import org.apache.lucene.analysis.standard.StandardAnalyzer;
 import org.apache.lucene.analysis.tokenattributes.CharTermAttribute;
 
 import com.google.common.base.Strings;
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.cs.index.analysis.AddrCharTokenizer;
-import com.zimbra.cs.index.analysis.ContactTokenFilter;
-import com.zimbra.cs.index.analysis.FilenameTokenizer;
-import com.zimbra.cs.index.analysis.NumberTokenizer;
-import com.zimbra.cs.index.analysis.UniversalAnalyzer;
+import org.zmail.common.service.ServiceException;
+import org.zmail.cs.index.analysis.AddrCharTokenizer;
+import org.zmail.cs.index.analysis.ContactTokenFilter;
+import org.zmail.cs.index.analysis.FilenameTokenizer;
+import org.zmail.cs.index.analysis.NumberTokenizer;
+import org.zmail.cs.index.analysis.UniversalAnalyzer;
 
 /***
- * Global analyzer wrapper for Zimbra Indexer.
+ * Global analyzer wrapper for Zmail Indexer.
  * <p>
  * You DO NOT need to instantiate multiple copies of this class -- just call {@link #getInstance()} whenever you need
  * an instance of this class.
@@ -45,8 +45,8 @@ import com.zimbra.cs.index.analysis.UniversalAnalyzer;
  * @author tim
  * @author ysasaki
  */
-public final class ZimbraAnalyzer extends Analyzer {
-    private static final ZimbraAnalyzer SINGLETON = new ZimbraAnalyzer();
+public final class ZmailAnalyzer extends Analyzer {
+    private static final ZmailAnalyzer SINGLETON = new ZmailAnalyzer();
     private static final Map<String, Analyzer> ANALYZERS = new ConcurrentHashMap<String, Analyzer>();
     static {
         ANALYZERS.put("StandardAnalyzer", new ForwardingAnalyzer(new StandardAnalyzer(LuceneIndex.VERSION)));
@@ -54,7 +54,7 @@ public final class ZimbraAnalyzer extends Analyzer {
 
     private final Analyzer defaultAnalyzer = new UniversalAnalyzer();
 
-    private ZimbraAnalyzer() {
+    private ZmailAnalyzer() {
     }
 
     /***
@@ -80,9 +80,9 @@ public final class ZimbraAnalyzer extends Analyzer {
     }
 
     /**
-     * A custom Lucene Analyzer is registered with this API, usually by a Zimbra Extension.
+     * A custom Lucene Analyzer is registered with this API, usually by a Zmail Extension.
      * <p>
-     * Accounts are configured to use a particular analyzer by setting the "zimbraTextAnalyzer" key in the Account or
+     * Accounts are configured to use a particular analyzer by setting the "zmailTextAnalyzer" key in the Account or
      * COS setting.
      *
      * The custom analyzer is assumed to be a stateless single instance (although it can and probably should return a

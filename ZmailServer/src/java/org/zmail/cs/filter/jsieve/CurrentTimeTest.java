@@ -17,12 +17,12 @@
  * Created on Nov 11, 2004
  *
  */
-package com.zimbra.cs.filter.jsieve;
+package org.zmail.cs.filter.jsieve;
 
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.cs.filter.ZimbraMailAdapter;
-import com.zimbra.cs.filter.ZimbraSieveException;
-import com.zimbra.cs.mailbox.calendar.Util;
+import org.zmail.common.service.ServiceException;
+import org.zmail.cs.filter.ZmailMailAdapter;
+import org.zmail.cs.filter.ZmailSieveException;
+import org.zmail.cs.mailbox.calendar.Util;
 
 import org.apache.jsieve.Argument;
 import org.apache.jsieve.Arguments;
@@ -51,7 +51,7 @@ public class CurrentTimeTest extends AbstractTest {
     @Override
     protected boolean executeBasic(MailAdapter mail, Arguments arguments, SieveContext context)
             throws SieveException {
-        if (!(mail instanceof ZimbraMailAdapter))
+        if (!(mail instanceof ZmailMailAdapter))
             return false;
 
         ListIterator<Argument> argumentsIter = arguments.getArgumentList().listIterator();
@@ -75,9 +75,9 @@ public class CurrentTimeTest extends AbstractTest {
         DateFormat timeFormat = new SimpleDateFormat("HHmm");
         TimeZone accountTimeZone;
         try {
-            accountTimeZone = Util.getAccountTimeZone(((ZimbraMailAdapter) mail).getMailbox().getAccount());
+            accountTimeZone = Util.getAccountTimeZone(((ZmailMailAdapter) mail).getMailbox().getAccount());
         } catch (ServiceException e) {
-            throw new ZimbraSieveException(e);
+            throw new ZmailSieveException(e);
         }
         timeFormat.setTimeZone(accountTimeZone);
         Date timeArg = null;

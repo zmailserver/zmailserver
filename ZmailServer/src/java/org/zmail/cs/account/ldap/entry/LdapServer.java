@@ -12,14 +12,14 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.account.ldap.entry;
+package org.zmail.cs.account.ldap.entry;
 
 import java.util.Map;
 
-import com.zimbra.cs.account.Provisioning;
-import com.zimbra.cs.account.Server;
-import com.zimbra.cs.ldap.LdapException;
-import com.zimbra.cs.ldap.ZAttributes;
+import org.zmail.cs.account.Provisioning;
+import org.zmail.cs.account.Server;
+import org.zmail.cs.ldap.LdapException;
+import org.zmail.cs.ldap.ZAttributes;
 
 /**
  * 
@@ -32,7 +32,7 @@ public class LdapServer extends Server implements LdapEntry {
 
     public LdapServer(String dn, ZAttributes attrs, Map<String,Object> defaults, Provisioning prov) throws LdapException {
         super(attrs.getAttrString(Provisioning.A_cn), 
-                attrs.getAttrString(Provisioning.A_zimbraId), 
+                attrs.getAttrString(Provisioning.A_zmailId), 
                 attrs.getAttrs(), defaults, prov);
         mDn = dn;
     }

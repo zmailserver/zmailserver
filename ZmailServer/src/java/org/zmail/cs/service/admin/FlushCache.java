@@ -12,7 +12,7 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.service.admin;
+package org.zmail.cs.service.admin;
 
 import java.io.IOException;
 import java.util.List;
@@ -23,27 +23,27 @@ import javax.servlet.ServletContext;
 import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
 
-import com.zimbra.common.account.Key;
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.common.soap.AdminConstants;
-import com.zimbra.common.soap.Element;
-import com.zimbra.common.soap.Element.XMLElement;
-import com.zimbra.common.soap.SoapHttpTransport;
-import com.zimbra.common.util.L10nUtil;
-import com.zimbra.common.util.ZimbraLog;
-import com.zimbra.cs.account.CacheExtension;
-import com.zimbra.cs.account.Provisioning;
-import com.zimbra.cs.account.Provisioning.CacheEntry;
-import com.zimbra.cs.account.Server;
-import com.zimbra.cs.account.accesscontrol.AdminRight;
-import com.zimbra.cs.account.accesscontrol.PermissionCache;
-import com.zimbra.cs.account.accesscontrol.Rights.Admin;
-import com.zimbra.cs.gal.GalGroup;
-import com.zimbra.cs.httpclient.URLUtil;
-import com.zimbra.cs.util.SkinUtil;
-import com.zimbra.soap.SoapServlet;
-import com.zimbra.soap.ZimbraSoapContext;
-import com.zimbra.soap.admin.type.CacheEntryType;
+import org.zmail.common.account.Key;
+import org.zmail.common.service.ServiceException;
+import org.zmail.common.soap.AdminConstants;
+import org.zmail.common.soap.Element;
+import org.zmail.common.soap.Element.XMLElement;
+import org.zmail.common.soap.SoapHttpTransport;
+import org.zmail.common.util.L10nUtil;
+import org.zmail.common.util.ZmailLog;
+import org.zmail.cs.account.CacheExtension;
+import org.zmail.cs.account.Provisioning;
+import org.zmail.cs.account.Provisioning.CacheEntry;
+import org.zmail.cs.account.Server;
+import org.zmail.cs.account.accesscontrol.AdminRight;
+import org.zmail.cs.account.accesscontrol.PermissionCache;
+import org.zmail.cs.account.accesscontrol.Rights.Admin;
+import org.zmail.cs.gal.GalGroup;
+import org.zmail.cs.httpclient.URLUtil;
+import org.zmail.cs.util.SkinUtil;
+import org.zmail.soap.SoapServlet;
+import org.zmail.soap.ZmailSoapContext;
+import org.zmail.soap.admin.type.CacheEntryType;
 
 public class FlushCache extends AdminDocumentHandler {
 
@@ -59,7 +59,7 @@ public class FlushCache extends AdminDocumentHandler {
 
     @Override
     public Element handle(Element request, Map<String, Object> context) throws ServiceException {
-        ZimbraSoapContext zsc = getZimbraSoapContext(context);
+        ZmailSoapContext zsc = getZmailSoapContext(context);
 
         Server localServer = Provisioning.getInstance().getLocalServer();
         checkRight(zsc, context, localServer, Admin.R_flushCache);
@@ -114,7 +114,7 @@ public class FlushCache extends AdminDocumentHandler {
 				break;
 			case uistrings:
 				FlushCache.sendFlushRequest(context, mailURL, "/res/AjxMsg.js");
-				FlushCache.sendFlushRequest(context, "/zimbraAdmin", "/res/AjxMsg.js");
+				FlushCache.sendFlushRequest(context, "/zmailAdmin", "/res/AjxMsg.js");
 				break;
 			case skin:
 				SkinUtil.flushSkinCache();
@@ -159,23 +159,23 @@ public class FlushCache extends AdminDocumentHandler {
             String appContext, String resourceUri) {
         ServletContext containerContext = (ServletContext)context.get(SoapServlet.SERVLET_CONTEXT);
         if (containerContext == null) {
-            if (ZimbraLog.misc.isDebugEnabled()) {
-                ZimbraLog.misc.debug("flushCache: no container context");
+            if (ZmailLog.misc.isDebugEnabled()) {
+                ZmailLog.misc.debug("flushCache: no container context");
             }
             return;
         }
         ServletContext webappContext = containerContext.getContext(appContext);
         RequestDispatcher dispatcher = webappContext.getRequestDispatcher(resourceUri);
         if (dispatcher == null) {
-            if (ZimbraLog.misc.isDebugEnabled()) {
-                ZimbraLog.misc.debug("flushCache: no dispatcher for "+resourceUri);
+            if (ZmailLog.misc.isDebugEnabled()) {
+                ZmailLog.misc.debug("flushCache: no dispatcher for "+resourceUri);
             }
             return;
         }
 
         try {
-            if (ZimbraLog.misc.isDebugEnabled()) {
-                ZimbraLog.misc.debug("flushCache: sending flush request");
+            if (ZmailLog.misc.isDebugEnabled()) {
+                ZmailLog.misc.debug("flushCache: sending flush request");
             }
             ServletRequest request = (ServletRequest)context.get(SoapServlet.SERVLET_REQUEST);
             request.setAttribute(FLUSH_CACHE, Boolean.TRUE);
@@ -184,13 +184,13 @@ public class FlushCache extends AdminDocumentHandler {
         }
         catch (Throwable t) {
             // ignore error
-            if (ZimbraLog.misc.isDebugEnabled()) {
-                ZimbraLog.misc.debug("flushCache: "+t.getMessage());
+            if (ZmailLog.misc.isDebugEnabled()) {
+                ZmailLog.misc.debug("flushCache: "+t.getMessage());
             }
         }
     }
 
-    public static void flushChacheOnServer(Server server,ZimbraSoapContext zsc,String cacheType) throws ServiceException, IOException {
+    public static void flushChacheOnServer(Server server,ZmailSoapContext zsc,String cacheType) throws ServiceException, IOException {
         String adminUrl = URLUtil.getAdminURL(server, AdminConstants.ADMIN_SERVICE_URI);
         SoapHttpTransport mTransport = new SoapHttpTransport(adminUrl);
         mTransport.setAuthToken(zsc.getRawAuthToken());
@@ -199,7 +199,7 @@ public class FlushCache extends AdminDocumentHandler {
         mTransport.invoke(req);
     }
 
-    private void flushCacheOnAllServers(ZimbraSoapContext zsc, Element origReq) throws ServiceException {
+    private void flushCacheOnAllServers(ZmailSoapContext zsc, Element origReq) throws ServiceException {
 
         Provisioning prov = Provisioning.getInstance();
         String localServerId = prov.getLocalServer().getId();
@@ -209,7 +209,7 @@ public class FlushCache extends AdminDocumentHandler {
             if (localServerId.equals(server.getId()))
                 continue;
 
-            ZimbraLog.misc.debug("Flushing cache on server: " + server.getName());
+            ZmailLog.misc.debug("Flushing cache on server: " + server.getName());
 
             Element req = origReq.clone();
             Element eCache = req.getElement(AdminConstants.E_CACHE);
@@ -223,11 +223,11 @@ public class FlushCache extends AdminDocumentHandler {
                 mTransport.invoke(req);
             } catch (ServiceException e) {
                 // log and continue
-                ZimbraLog.misc.warn("Encountered exception while FlushCache on server: " + server.getName() +
+                ZmailLog.misc.warn("Encountered exception while FlushCache on server: " + server.getName() +
                         ", skip and continue with the next server", e);
             } catch (IOException e) {
                 // log and continue
-                ZimbraLog.misc.warn("Encountered exception while FlushCache on server: " + server.getName() +
+                ZmailLog.misc.warn("Encountered exception while FlushCache on server: " + server.getName() +
                         ", skip and continue with the next server", e);
             }
         }

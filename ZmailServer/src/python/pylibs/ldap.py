@@ -15,20 +15,20 @@
 
 import conf
 
-from com.zimbra.cs.ldap.LdapServerConfig import GenericLdapConfig
-from com.zimbra.cs.ldap import LdapClient
-from com.zimbra.cs.ldap import LdapUsage
-from com.zimbra.cs.ldap import ZAttributes
-from com.zimbra.cs.ldap import ZLdapContext
-from com.zimbra.cs.ldap import ZLdapFilter
-from com.zimbra.cs.ldap import ZLdapFilterFactory
-from com.zimbra.cs.ldap.ZLdapFilterFactory import FilterId
-from com.zimbra.cs.ldap import ZSearchControls
-from com.zimbra.cs.ldap import ZSearchResultEntry;
-from com.zimbra.cs.ldap import ZMutableEntry
-from com.zimbra.cs.ldap import ZSearchResultEnumeration
-from com.zimbra.cs.ldap import ZSearchScope
-from com.zimbra.cs.ldap.LdapException import LdapSizeLimitExceededException
+from org.zmail.cs.ldap.LdapServerConfig import GenericLdapConfig
+from org.zmail.cs.ldap import LdapClient
+from org.zmail.cs.ldap import LdapUsage
+from org.zmail.cs.ldap import ZAttributes
+from org.zmail.cs.ldap import ZLdapContext
+from org.zmail.cs.ldap import ZLdapFilter
+from org.zmail.cs.ldap import ZLdapFilterFactory
+from org.zmail.cs.ldap.ZLdapFilterFactory import FilterId
+from org.zmail.cs.ldap import ZSearchControls
+from org.zmail.cs.ldap import ZSearchResultEntry;
+from org.zmail.cs.ldap import ZMutableEntry
+from org.zmail.cs.ldap import ZSearchResultEnumeration
+from org.zmail.cs.ldap import ZSearchScope
+from org.zmail.cs.ldap.LdapException import LdapSizeLimitExceededException
 from logmsg import *
 
 # (Key, DN, requires_master)

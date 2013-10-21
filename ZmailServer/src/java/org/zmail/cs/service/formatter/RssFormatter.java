@@ -12,7 +12,7 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.service.formatter;
+package org.zmail.cs.service.formatter;
 
 import java.io.IOException;
 import java.text.SimpleDateFormat;
@@ -20,18 +20,18 @@ import java.util.Collection;
 import java.util.Date;
 import java.util.Iterator;
 
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.common.soap.Element;
-import com.zimbra.common.util.Constants;
-import com.zimbra.cs.mailbox.CalendarItem;
-import com.zimbra.cs.mailbox.Document;
-import com.zimbra.cs.mailbox.MailItem;
-import com.zimbra.cs.mailbox.Message;
-import com.zimbra.cs.mailbox.CalendarItem.Instance;
-import com.zimbra.cs.mailbox.calendar.Invite;
-import com.zimbra.cs.mailbox.calendar.InviteInfo;
-import com.zimbra.cs.service.UserServletContext;
-import com.zimbra.cs.service.formatter.FormatterFactory.FormatType;
+import org.zmail.common.service.ServiceException;
+import org.zmail.common.soap.Element;
+import org.zmail.common.util.Constants;
+import org.zmail.cs.mailbox.CalendarItem;
+import org.zmail.cs.mailbox.Document;
+import org.zmail.cs.mailbox.MailItem;
+import org.zmail.cs.mailbox.Message;
+import org.zmail.cs.mailbox.CalendarItem.Instance;
+import org.zmail.cs.mailbox.calendar.Invite;
+import org.zmail.cs.mailbox.calendar.InviteInfo;
+import org.zmail.cs.service.UserServletContext;
+import org.zmail.cs.service.formatter.FormatterFactory.FormatType;
 
 public class RssFormatter extends Formatter {
 
@@ -39,8 +39,8 @@ public class RssFormatter extends Formatter {
 
     @Override
     public void formatCallback(UserServletContext context) throws IOException, ServiceException {
-        //ZimbraLog.mailbox.info("start = "+new Date(context.getStartTime()));
-        //ZimbraLog.mailbox.info("end = "+new Date(context.getEndTime()));
+        //ZmailLog.mailbox.info("start = "+new Date(context.getStartTime()));
+        //ZmailLog.mailbox.info("end = "+new Date(context.getEndTime()));
         Iterator<? extends MailItem> iterator = null;
         StringBuffer sb = new StringBuffer();
         Element.XMLElement rss = new Element.XMLElement("rss");
@@ -57,10 +57,10 @@ public class RssFormatter extends Formatter {
 
             rss.addAttribute("version", "2.0");
             Element channel = rss.addElement("channel");
-            channel.addElement("title").setText("Zimbra " + context.itemPath);
-            channel.addElement("link").setText("http://www.zimbra.com");
-            channel.addElement("description").setText("Zimbra item " + context.itemPath + " in RSS format.");
-            channel.addElement("generator").setText("Zimbra RSS Feed Servlet");
+            channel.addElement("title").setText("Zmail " + context.itemPath);
+            channel.addElement("link").setText("http://www.zmail.com");
+            channel.addElement("description").setText("Zmail item " + context.itemPath + " in RSS format.");
+            channel.addElement("generator").setText("Zmail RSS Feed Servlet");
             //channel.addElement("description").setText(query);
 
 //            MailDateFormat mdf = new MailDateFormat();

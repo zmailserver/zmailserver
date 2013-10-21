@@ -12,7 +12,7 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.account.ldap;
+package org.zmail.cs.account.ldap;
 
 import java.util.Collection;
 import java.util.Collections;
@@ -21,13 +21,13 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
 
-import com.zimbra.common.account.Key;
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.common.util.ZimbraLog;
-import com.zimbra.cs.account.Account;
-import com.zimbra.cs.account.AccountServiceException;
-import com.zimbra.cs.account.Domain;
-import com.zimbra.cs.account.Provisioning;
+import org.zmail.common.account.Key;
+import org.zmail.common.service.ServiceException;
+import org.zmail.common.util.ZmailLog;
+import org.zmail.cs.account.Account;
+import org.zmail.cs.account.AccountServiceException;
+import org.zmail.cs.account.Domain;
+import org.zmail.cs.account.Provisioning;
 
 public abstract class ChangePasswordListener {
 
@@ -48,14 +48,14 @@ public abstract class ChangePasswordListener {
     
     /**
      * Register a change password listener.
-     * It should be invoked from the init() method of ZimbraExtension.
+     * It should be invoked from the init() method of ZmailExtension.
      */
     public static void register(String listenerName, ChangePasswordListener listener) {
         
         //  sanity check
         ChangePasswordListener obj = mExternalListeners.get(listenerName);
         if (obj != null) {
-            ZimbraLog.account.warn("listener name " + listenerName + " is already registered, " +
+            ZmailLog.account.warn("listener name " + listenerName + " is already registered, " +
                                    "registering of " + obj.getClass().getCanonicalName() + " is ignored");
             return;
         }    
@@ -67,7 +67,7 @@ public abstract class ChangePasswordListener {
         //  sanity check
         ChangePasswordListener obj = mInternalListeners.get(listenerEnum);
         if (obj != null) {
-            ZimbraLog.account.warn("listener " + listenerEnum + " is already registered, " +
+            ZmailLog.account.warn("listener " + listenerEnum + " is already registered, " +
                                    "registering of " + obj.getClass().getCanonicalName() + " is ignored");
             return;
         }    
@@ -80,7 +80,7 @@ public abstract class ChangePasswordListener {
         if (domain == null)
             throw AccountServiceException.NO_SUCH_DOMAIN(acct.getDomainName());
         
-        String listenerName = domain.getAttr(Provisioning.A_zimbraPasswordChangeListener);
+        String listenerName = domain.getAttr(Provisioning.A_zmailPasswordChangeListener);
         
         if (listenerName == null)
             return null;
@@ -141,7 +141,7 @@ public abstract class ChangePasswordListener {
     }
     
     /**
-     * Called before password(userPassword) and applicable(e.g. zimbraPasswordHistory, zimbraPasswordModifiedTime) 
+     * Called before password(userPassword) and applicable(e.g. zmailPasswordHistory, zmailPasswordModifiedTime) 
      * attributes are modified in LDAP.  If a ServiceException is thrown, no attributes will be modified. 
      * 
      * The attrsToModify map should not be modified, other then for adding attributes defined in 
@@ -190,14 +190,14 @@ public abstract class ChangePasswordListener {
         // setup domain for testing
         Domain domain = prov.getDomain(acct);
         Map attrs = new HashMap<String, Object>();
-        attrs.put(Provisioning.A_zimbraPasswordChangeListener, "dummy");
+        attrs.put(Provisioning.A_zmailPasswordChangeListener, "dummy");
         prov.modifyAttrs(domain, attrs);
         
         prov.changePassword(acct, "test123", "test123-new");
         
         // done testing, remove listener from the domain
         attrs.clear();
-        attrs.put(Provisioning.A_zimbraPasswordChangeListener, "");
+        attrs.put(Provisioning.A_zmailPasswordChangeListener, "");
         prov.modifyAttrs(domain, attrs);
         
         // change password back

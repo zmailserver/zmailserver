@@ -12,7 +12,7 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.db;
+package org.zmail.cs.db;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -22,11 +22,11 @@ import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import com.zimbra.common.stats.RealtimeStatsCallback;
-import com.zimbra.common.util.Log;
-import com.zimbra.common.util.LogFactory;
-import com.zimbra.common.util.ZimbraLog;
-import com.zimbra.cs.stats.ZimbraPerf;
+import org.zmail.common.stats.RealtimeStatsCallback;
+import org.zmail.common.util.Log;
+import org.zmail.common.util.LogFactory;
+import org.zmail.common.util.ZmailLog;
+import org.zmail.cs.stats.ZmailPerf;
 
 /**
  * Callback <code>Accumulator</code> that returns current values for important
@@ -41,13 +41,13 @@ class DbStats implements RealtimeStatsCallback {
         Map<String, Object> data = new HashMap<String, Object>();
 
         try {
-            data.put(ZimbraPerf.RTS_DB_POOL_SIZE, DbPool.getSize());
+            data.put(ZmailPerf.RTS_DB_POOL_SIZE, DbPool.getSize());
             
             // Parse innodb status output
             DbResults results = DbUtil.executeQuery("SHOW ENGINE INNODB STATUS");
             Integer hitRate = parseBufferPoolHitRate(results.getString("Status"));
             if (hitRate != null) {
-                data.put(ZimbraPerf.RTS_INNODB_BP_HIT_RATE, hitRate);
+                data.put(ZmailPerf.RTS_INNODB_BP_HIT_RATE, hitRate);
             }
         } catch (Exception e) {
             sLog.warn("An error occurred while getting current database stats", e);
@@ -58,14 +58,14 @@ class DbStats implements RealtimeStatsCallback {
     
     private static Integer parseBufferPoolHitRate(String innodbStatus)
     throws IOException {
-        ZimbraLog.perf.debug("InnoDB status output:\n%s", innodbStatus);
+        ZmailLog.perf.debug("InnoDB status output:\n%s", innodbStatus);
         BufferedReader r = new BufferedReader(new StringReader(innodbStatus));
         String line = null;
         while ((line = r.readLine()) != null) {
             Matcher m = PATTERN_BP_HIT_RATE.matcher(line);
             if (m.find()) {
                 String hitRate = m.group(1);
-                ZimbraLog.perf.debug("Parsed hit rate: %s", hitRate);
+                ZmailLog.perf.debug("Parsed hit rate: %s", hitRate);
                 return Integer.parseInt(hitRate);
             }
         }

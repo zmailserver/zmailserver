@@ -12,7 +12,7 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.session;
+package org.zmail.cs.session;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -21,16 +21,16 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.common.soap.Element;
-import com.zimbra.common.soap.MailConstants;
-import com.zimbra.common.util.ZimbraLog;
-import com.zimbra.cs.account.AccountServiceException;
-import com.zimbra.cs.mailbox.MailItem;
-import com.zimbra.cs.mailbox.Mailbox;
-import com.zimbra.cs.mailbox.MailboxManager;
-import com.zimbra.cs.mailbox.MailboxManager.FetchMode;
-import com.zimbra.cs.service.mail.WaitSetRequest;
+import org.zmail.common.service.ServiceException;
+import org.zmail.common.soap.Element;
+import org.zmail.common.soap.MailConstants;
+import org.zmail.common.util.ZmailLog;
+import org.zmail.cs.account.AccountServiceException;
+import org.zmail.cs.mailbox.MailItem;
+import org.zmail.cs.mailbox.Mailbox;
+import org.zmail.cs.mailbox.MailboxManager;
+import org.zmail.cs.mailbox.MailboxManager.FetchMode;
+import org.zmail.cs.service.mail.WaitSetRequest;
 
 /**
  * SomeAccountsWaitSet: an implementation of IWaitSet that works by listening over one or more Accounts
@@ -130,7 +130,7 @@ public final class SomeAccountsWaitSet extends WaitSetBase implements MailboxMan
         //
         WaitSetSession session = wsa.getSession();
         if (session != null && session.getMailbox() != mbox) {
-            ZimbraLog.session.warn("SESSION BEING LEAKED? WaitSetSession points to old version of mailbox...possibly leaking this session:", session);
+            ZmailLog.session.warn("SESSION BEING LEAKED? WaitSetSession points to old version of mailbox...possibly leaking this session:", session);
             wsa.cleanupSession();
             session = null; // re-initialize it below
         }
@@ -238,7 +238,7 @@ public final class SomeAccountsWaitSet extends WaitSetBase implements MailboxMan
         try {
             MailboxManager.getInstance().removeListener(this);
         } catch (ServiceException e) {
-            ZimbraLog.session.warn("Caught unexpected ServiceException while destroying WaitSet: "+e, e);
+            ZmailLog.session.warn("Caught unexpected ServiceException while destroying WaitSet: "+e, e);
         }
         cancelExistingCB();
         HashMap<String, WaitSetAccount> toRet = mSessions;
@@ -273,16 +273,16 @@ public final class SomeAccountsWaitSet extends WaitSetBase implements MailboxMan
      * @param session
      */
     synchronized void signalDataReady(WaitSetSession session) {
-        boolean trace = ZimbraLog.session.isTraceEnabled();
-        if (trace) ZimbraLog.session.trace("SomeAccountsWaitSet.signalDataReady 1");
+        boolean trace = ZmailLog.session.isTraceEnabled();
+        if (trace) ZmailLog.session.trace("SomeAccountsWaitSet.signalDataReady 1");
         if (mSessions.containsKey(session.getAuthenticatedAccountId())) { // ...false if waitset is shutting down...
-            if (trace) ZimbraLog.session.trace("SomeAccountsWaitSet.signalDataReady 2");
+            if (trace) ZmailLog.session.trace("SomeAccountsWaitSet.signalDataReady 2");
             if (mCurrentSignalledSessions.add(session.getAuthenticatedAccountId())) {
-                if (trace) ZimbraLog.session.trace("SomeAccountsWaitSet.signalDataReady 3");
+                if (trace) ZmailLog.session.trace("SomeAccountsWaitSet.signalDataReady 3");
                 trySendData();
             }
         }
-        if (trace) ZimbraLog.session.trace("SomeAccountsWaitSet.signalDataReady done");
+        if (trace) ZmailLog.session.trace("SomeAccountsWaitSet.signalDataReady done");
     }
 
     @Override
@@ -317,7 +317,7 @@ public final class SomeAccountsWaitSet extends WaitSetBase implements MailboxMan
                         sessionElt.addAttribute("mboxSyncTokenDiff", mboxLastChange-wsa.getLastKnownSyncToken().getChangeId());
                     }
                 } catch (Exception e) {
-                    ZimbraLog.session.warn("Caught exception from MailboxManager in SomeAccountsWaitSet.handleQuery() for accountId"+
+                    ZmailLog.session.warn("Caught exception from MailboxManager in SomeAccountsWaitSet.handleQuery() for accountId"+
                                            wsa.getAccountId(), e);
                 }
             }

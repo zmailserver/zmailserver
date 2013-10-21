@@ -16,16 +16,16 @@
 /*
  * Created on May 30, 2004
  */
-package com.zimbra.cs.account;
+package org.zmail.cs.account;
 
 import java.util.Map;
 
-import com.zimbra.common.account.Key;
-import com.zimbra.common.auth.ZAuthToken;
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.common.soap.Element;
-import com.zimbra.common.util.ByteUtil;
-import com.zimbra.cs.account.auth.AuthMechanism.AuthMech;
+import org.zmail.common.account.Key;
+import org.zmail.common.auth.ZAuthToken;
+import org.zmail.common.service.ServiceException;
+import org.zmail.common.soap.Element;
+import org.zmail.common.util.ByteUtil;
+import org.zmail.cs.account.auth.AuthMechanism.AuthMech;
 
 import org.apache.commons.httpclient.HttpClient;
 import org.apache.commons.httpclient.HttpMethod;
@@ -76,7 +76,7 @@ public abstract class AuthToken {
     
     public abstract boolean isDelegatedAdmin();
     
-    public abstract boolean isZimbraUser();
+    public abstract boolean isZmailUser();
 
     public abstract String getExternalUserEmail() ;
     
@@ -124,9 +124,9 @@ public abstract class AuthToken {
     
     /**
      * AP-TODO-4:
-     *     This API is called only from ZimbraServlet.proxyServletRequest when the first hop is http basic auth(REST basic auth and DAV).  
+     *     This API is called only from ZmailServlet.proxyServletRequest when the first hop is http basic auth(REST basic auth and DAV).  
      *     For the next hop we encode the String auth token in cookie.  For all other cases, the original cookies are copied "as is" 
-     *     to the next hop.  See ZimbraServlet.proxyServletRequest(HttpServletRequest req, HttpServletResponse resp, HttpMethod method, HttpState state)
+     *     to the next hop.  See ZmailServlet.proxyServletRequest(HttpServletRequest req, HttpServletResponse resp, HttpMethod method, HttpState state)
      *     We should clean this after AP-TODO-3 is resolved. 
      *     
      * Encode original auth info into an outgoing http request cookie.
@@ -162,16 +162,16 @@ public abstract class AuthToken {
     
     // AP-TODO-5: REMOVE AFTER CLEANUP
     public static AuthToken getAuthToken(String encoded) throws AuthTokenException {
-        return ZimbraAuthToken.getAuthToken(encoded);
+        return ZmailAuthToken.getAuthToken(encoded);
     }
     
     // AP-TODO-5: REMOVE AFTER CLEANUP
     public static AuthToken getAuthToken(String acctId, String externalEmail, String pass, String digest, long expires) {
-        return new ZimbraAuthToken(acctId, externalEmail, pass, digest, expires);
+        return new ZmailAuthToken(acctId, externalEmail, pass, digest, expires);
     }
     
     public static Map getInfo(String encoded) throws AuthTokenException {
-        return ZimbraAuthToken.getInfo(encoded);
+        return ZmailAuthToken.getInfo(encoded);
     }
 
 }

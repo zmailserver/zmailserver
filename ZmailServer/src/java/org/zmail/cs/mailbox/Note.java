@@ -12,23 +12,23 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.mailbox;
+package org.zmail.cs.mailbox;
 
 import java.util.Collections;
 import java.util.List;
 
 import com.google.common.base.Objects;
 import com.google.common.base.Strings;
-import com.zimbra.cs.account.Provisioning;
-import com.zimbra.cs.db.DbMailItem;
-import com.zimbra.cs.index.LuceneFields;
-import com.zimbra.cs.index.IndexDocument;
-import com.zimbra.cs.mailbox.MailItem.CustomMetadata.CustomMetadataList;
-import com.zimbra.cs.session.PendingModifications.Change;
-import com.zimbra.common.mailbox.Color;
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.common.util.StringUtil;
-import com.zimbra.common.util.ZimbraLog;
+import org.zmail.cs.account.Provisioning;
+import org.zmail.cs.db.DbMailItem;
+import org.zmail.cs.index.LuceneFields;
+import org.zmail.cs.index.IndexDocument;
+import org.zmail.cs.mailbox.MailItem.CustomMetadata.CustomMetadataList;
+import org.zmail.cs.session.PendingModifications.Change;
+import org.zmail.common.mailbox.Color;
+import org.zmail.common.service.ServiceException;
+import org.zmail.common.util.StringUtil;
+import org.zmail.common.util.ZmailLog;
 
 /**
  * @since Sep 7, 2004
@@ -152,14 +152,14 @@ public class Note extends MailItem {
         data.id = id;
         data.type = Type.NOTE.toByte();
         data.folderId = folder.getId();
-        if (!folder.inSpam() || mbox.getAccount().getBooleanAttr(Provisioning.A_zimbraJunkMessagesIndexingEnabled, false)) {
+        if (!folder.inSpam() || mbox.getAccount().getBooleanAttr(Provisioning.A_zmailJunkMessagesIndexingEnabled, false)) {
             data.indexId = IndexStatus.DEFERRED.id();
         }
         data.date = mbox.getOperationTimestamp();
         data.setSubject(content);
         data.metadata = encodeMetadata(color, 1, 1, custom, location);
         data.contentChanged(mbox);
-        ZimbraLog.mailop.info("Adding Note: id=%d, folderId=%d, folderName=%s.",
+        ZmailLog.mailop.info("Adding Note: id=%d, folderId=%d, folderName=%s.",
                 data.id, folder.getId(), folder.getName());
         new DbMailItem(mbox).create(data);
 

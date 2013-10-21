@@ -14,7 +14,7 @@
  * 
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.service.account;
+package org.zmail.cs.service.account;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -36,39 +36,39 @@ import javax.mail.internet.MimeMultipart;
 import com.google.common.collect.ImmutableSet;
 import com.google.common.collect.Lists;
 import com.sun.mail.smtp.SMTPMessage;
-import com.zimbra.common.account.Key;
-import com.zimbra.common.account.Key.AccountBy;
-import com.zimbra.common.account.Key.GranteeBy;
-import com.zimbra.common.mime.MimeConstants;
-import com.zimbra.common.mime.shim.JavaMailInternetAddress;
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.common.soap.AccountConstants;
-import com.zimbra.common.soap.Element;
-import com.zimbra.common.util.L10nUtil;
-import com.zimbra.common.util.L10nUtil.MsgKey;
-import com.zimbra.common.util.ZimbraLog;
-import com.zimbra.common.zmime.ZMimeBodyPart;
-import com.zimbra.common.zmime.ZMimeMultipart;
-import com.zimbra.cs.account.AccessManager;
-import com.zimbra.cs.account.Account;
-import com.zimbra.cs.account.Group;
-import com.zimbra.cs.account.Group.GroupOwner;
-import com.zimbra.cs.account.Provisioning;
-import com.zimbra.cs.account.accesscontrol.ACLUtil;
-import com.zimbra.cs.account.accesscontrol.GranteeType;
-import com.zimbra.cs.account.accesscontrol.Right;
-import com.zimbra.cs.account.accesscontrol.RightCommand;
-import com.zimbra.cs.account.accesscontrol.RightManager;
-import com.zimbra.cs.account.accesscontrol.TargetType;
-import com.zimbra.cs.account.accesscontrol.ZimbraACE;
-import com.zimbra.cs.account.accesscontrol.ZimbraACE.ExternalGroupInfo;
-import com.zimbra.cs.account.names.NameUtil.EmailAddress;
-import com.zimbra.cs.util.AccountUtil;
-import com.zimbra.cs.util.JMSession;
-import com.zimbra.soap.ZimbraSoapContext;
-import com.zimbra.soap.account.type.DistributionListAction.Operation;
-import com.zimbra.soap.account.type.DistributionListSubscribeOp;
-import com.zimbra.soap.type.TargetBy;
+import org.zmail.common.account.Key;
+import org.zmail.common.account.Key.AccountBy;
+import org.zmail.common.account.Key.GranteeBy;
+import org.zmail.common.mime.MimeConstants;
+import org.zmail.common.mime.shim.JavaMailInternetAddress;
+import org.zmail.common.service.ServiceException;
+import org.zmail.common.soap.AccountConstants;
+import org.zmail.common.soap.Element;
+import org.zmail.common.util.L10nUtil;
+import org.zmail.common.util.L10nUtil.MsgKey;
+import org.zmail.common.util.ZmailLog;
+import org.zmail.common.zmime.ZMimeBodyPart;
+import org.zmail.common.zmime.ZMimeMultipart;
+import org.zmail.cs.account.AccessManager;
+import org.zmail.cs.account.Account;
+import org.zmail.cs.account.Group;
+import org.zmail.cs.account.Group.GroupOwner;
+import org.zmail.cs.account.Provisioning;
+import org.zmail.cs.account.accesscontrol.ACLUtil;
+import org.zmail.cs.account.accesscontrol.GranteeType;
+import org.zmail.cs.account.accesscontrol.Right;
+import org.zmail.cs.account.accesscontrol.RightCommand;
+import org.zmail.cs.account.accesscontrol.RightManager;
+import org.zmail.cs.account.accesscontrol.TargetType;
+import org.zmail.cs.account.accesscontrol.ZmailACE;
+import org.zmail.cs.account.accesscontrol.ZmailACE.ExternalGroupInfo;
+import org.zmail.cs.account.names.NameUtil.EmailAddress;
+import org.zmail.cs.util.AccountUtil;
+import org.zmail.cs.util.JMSession;
+import org.zmail.soap.ZmailSoapContext;
+import org.zmail.soap.account.type.DistributionListAction.Operation;
+import org.zmail.soap.account.type.DistributionListSubscribeOp;
+import org.zmail.soap.type.TargetBy;
 
 public class DistributionListAction extends DistributionListDocumentHandler {
 
@@ -76,7 +76,7 @@ public class DistributionListAction extends DistributionListDocumentHandler {
     public Element handle(Element request, Map<String, Object> context)
     throws ServiceException {
 
-        ZimbraSoapContext zsc = getZimbraSoapContext(context);
+        ZmailSoapContext zsc = getZmailSoapContext(context);
         Provisioning prov = Provisioning.getInstance();
         Account acct = getAuthenticatedAccount(zsc);
 
@@ -203,7 +203,7 @@ public class DistributionListAction extends DistributionListDocumentHandler {
 
             prov.deleteGroup(group.getId());
 
-            ZimbraLog.security.info(ZimbraLog.encodeAttrs(
+            ZmailLog.security.info(ZmailLog.encodeAttrs(
                     new String[] {"cmd", "DistributionListAction", "op", getAction().name(),
                             "name", group.getName(), "id", group.getId()}));
         }
@@ -228,7 +228,7 @@ public class DistributionListAction extends DistributionListDocumentHandler {
                     eAction, AccountConstants.E_A, AccountConstants.A_N);
             prov.modifyAttrs(group, attrs, true);
 
-            ZimbraLog.security.info(ZimbraLog.encodeAttrs(
+            ZmailLog.security.info(ZmailLog.encodeAttrs(
                     new String[] {"cmd", "DistributionListAction", "op", getAction().name(),
                             "name", group.getName()}, attrs));
         }
@@ -277,7 +277,7 @@ public class DistributionListAction extends DistributionListDocumentHandler {
 
             prov.renameGroup(group.getId(), newName);
 
-            ZimbraLog.security.info(ZimbraLog.encodeAttrs(
+            ZmailLog.security.info(ZmailLog.encodeAttrs(
                     new String[] {"cmd", "DistributionListAction", "op", getAction().name(),
                             "name", oldName, "newName", newName}));
         }
@@ -348,7 +348,7 @@ public class DistributionListAction extends DistributionListDocumentHandler {
                     granteeType.getCode(), granteeBy, grantee, null,
                     right.getName(), null);
 
-            ZimbraLog.security.info(ZimbraLog.encodeAttrs(
+            ZmailLog.security.info(ZmailLog.encodeAttrs(
                     new String[] {"cmd", "DistributionListAction", "op", getAction().name(),
                             "name", group.getName(), "type", granteeType.getCode(),
                             "grantee", grantee}));
@@ -363,7 +363,7 @@ public class DistributionListAction extends DistributionListDocumentHandler {
                     granteeType.getCode(), granteeBy, grantee,
                     right.getName(), null);
 
-            ZimbraLog.security.info(ZimbraLog.encodeAttrs(
+            ZmailLog.security.info(ZmailLog.encodeAttrs(
                     new String[] {"cmd", "DistributionListAction", "op", getAction().name(),
                             "name", group.getName(), "type", granteeType.getCode(),
                             "grantee", grantee}));
@@ -586,9 +586,9 @@ public class DistributionListAction extends DistributionListDocumentHandler {
                 List<Grantee> grantees = entry.getValue();
 
                 // remove all current grants for the right
-                List<ZimbraACE> acl = ACLUtil.getACEs(group, Collections.singleton(right));
+                List<ZmailACE> acl = ACLUtil.getACEs(group, Collections.singleton(right));
                 if (acl != null) {
-                    for (ZimbraACE ace : acl) {
+                    for (ZmailACE ace : acl) {
                         revokeRight(right, ace.getGranteeType(),
                                 Key.GranteeBy.id, ace.getGrantee());
                     }
@@ -624,7 +624,7 @@ public class DistributionListAction extends DistributionListDocumentHandler {
             String[] members = memberList.toArray(new String[memberList.size()]);
             addGroupMembers(prov, group, members);
 
-            ZimbraLog.security.info(ZimbraLog.encodeAttrs(
+            ZmailLog.security.info(ZmailLog.encodeAttrs(
                     new String[] {"cmd", "DistributionListAction", "op", getAction().name(),
                    "name", group.getName(), "members", Arrays.deepToString(members)}));
         }
@@ -652,7 +652,7 @@ public class DistributionListAction extends DistributionListDocumentHandler {
             String[] members = memberList.toArray(new String[memberList.size()]);
             removeGroupMembers(prov, group, members);
 
-            ZimbraLog.security.info(ZimbraLog.encodeAttrs(
+            ZmailLog.security.info(ZmailLog.encodeAttrs(
                     new String[] {"cmd", "DistributionListAction", "op", getAction().name(),
                    "name", group.getName(), "members", Arrays.deepToString(members)}));
         }
@@ -679,7 +679,7 @@ public class DistributionListAction extends DistributionListDocumentHandler {
                 Address fromAddr = AccountUtil.getFriendlyEmailAddress(ownerAcct);
 
                 Address replyToAddr = fromAddr;
-                String replyTo = ownerAcct.getAttr(Provisioning.A_zimbraPrefReplyToAddress);
+                String replyTo = ownerAcct.getAttr(Provisioning.A_zmailPrefReplyToAddress);
                 if (replyTo != null) {
                     replyToAddr = new JavaMailInternetAddress(replyTo);
                 }
@@ -724,7 +724,7 @@ public class DistributionListAction extends DistributionListDocumentHandler {
                 buildContentAndSend(out, locale, "group subscription response");
 
             } catch (MessagingException e) {
-                ZimbraLog.account.warn("send share info notification failed, rcpt='" +
+                ZmailLog.account.warn("send share info notification failed, rcpt='" +
                         requestingAcct.getName() +"'", e);
             }
 
@@ -817,7 +817,7 @@ public class DistributionListAction extends DistributionListDocumentHandler {
             if (isMember) {
                 if (subsOp == DistributionListSubscribeOp.subscribe) {
                     // do nothing
-                    ZimbraLog.account.debug("AcceptSubsReqHandler: " + memberEmail +
+                    ZmailLog.account.debug("AcceptSubsReqHandler: " + memberEmail +
                             " is currently a member in list " + group.getName() +
                             ", no action taken for the subscribe request");
                 } else {
@@ -831,14 +831,14 @@ public class DistributionListAction extends DistributionListDocumentHandler {
                     processed = true;
                 } else {
                     // do nothing
-                    ZimbraLog.account.debug("AcceptSubsReqHandler: " + memberEmail +
+                    ZmailLog.account.debug("AcceptSubsReqHandler: " + memberEmail +
                             " is currently not a member in list " + group.getName() +
                             ", no action taken for the un-subscribe request");
                 }
             }
 
             if (processed) {
-                ZimbraLog.security.info(ZimbraLog.encodeAttrs(
+                ZmailLog.security.info(ZmailLog.encodeAttrs(
                         new String[] {"cmd", "DistributionListAction", "op", getAction().name(),
                        "name", group.getName(), "subsOp", subsOp.name(), "member", memberEmail}));
 
@@ -883,7 +883,7 @@ public class DistributionListAction extends DistributionListDocumentHandler {
             if (isMember) {
                 if (subsOp == DistributionListSubscribeOp.subscribe) {
                     // do nothing
-                    ZimbraLog.account.debug("RejectSubsReqHandler: " + memberEmail +
+                    ZmailLog.account.debug("RejectSubsReqHandler: " + memberEmail +
                             " is currently a member in list " + group.getName() +
                             ", no action taken for the subscribe request");
                 } else {
@@ -895,14 +895,14 @@ public class DistributionListAction extends DistributionListDocumentHandler {
                     processed = true;
                 } else {
                     // do nothing
-                    ZimbraLog.account.debug("RejectSubsReqHandler: " + memberEmail +
+                    ZmailLog.account.debug("RejectSubsReqHandler: " + memberEmail +
                             " is currently not a member in list " + group.getName() +
                             ", no action taken for the un-subscribe request");
                 }
             }
 
             if (processed) {
-                ZimbraLog.security.info(ZimbraLog.encodeAttrs(
+                ZmailLog.security.info(ZmailLog.encodeAttrs(
                         new String[] {"cmd", "DistributionListAction", "op", getAction().name(),
                        "name", group.getName(), "subsOp", subsOp.name(), "member", memberEmail}));
 

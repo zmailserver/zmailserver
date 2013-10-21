@@ -12,7 +12,7 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.imap;
+package org.zmail.cs.imap;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -22,11 +22,11 @@ import javax.mail.internet.MimeMessage;
 import org.junit.Assert;
 import org.junit.Test;
 
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.common.util.ByteUtil;
-import com.zimbra.common.util.Pair;
-import com.zimbra.common.zmime.ZMimeMessage;
-import com.zimbra.cs.util.JMSession;
+import org.zmail.common.service.ServiceException;
+import org.zmail.common.util.ByteUtil;
+import org.zmail.common.util.Pair;
+import org.zmail.common.zmime.ZMimeMessage;
+import org.zmail.cs.util.JMSession;
 
 public class ImapPartSpecifierTest {
 
@@ -61,15 +61,15 @@ public class ImapPartSpecifierTest {
 
         is = getClass().getResourceAsStream("calendar-bounce");
         mm = new ZMimeMessage(JMSession.getSession(), is);
-        checkBody(mm, "", "HEADER", "Received: from localhost (localhost.localdomain [127.0.0.1])", "Message-Id: <20061109004631.07DB1810C39@mta02.zimbra.com>");
-        checkBody(mm, "", "TEXT", "This is a MIME-encapsulated message.", "--6E4E3810C27.1163033191/mta02.zimbra.com--");
-        checkBody(mm, "1", "", "This is the Postfix program at host mta02.zimbra.com.", "c18si105209hub (in reply to RCPT TO command)");
+        checkBody(mm, "", "HEADER", "Received: from localhost (localhost.localdomain [127.0.0.1])", "Message-Id: <20061109004631.07DB1810C39@mta02.zmail.com>");
+        checkBody(mm, "", "TEXT", "This is a MIME-encapsulated message.", "--6E4E3810C27.1163033191/mta02.zmail.com--");
+        checkBody(mm, "1", "", "This is the Postfix program at host mta02.zmail.com.", "c18si105209hub (in reply to RCPT TO command)");
         checkBody(mm, "1", "MIME", "Content-Description: Notification", "Content-Type: text/plain");
-        checkBody(mm, "2", "", "Reporting-MTA: dns; mta02.zimbra.com", "said: 550 5.1.1 No such user c18si105209hub (in reply to RCPT TO command)");
+        checkBody(mm, "2", "", "Reporting-MTA: dns; mta02.zmail.com", "said: 550 5.1.1 No such user c18si105209hub (in reply to RCPT TO command)");
         checkBody(mm, "2", "MIME", "Content-Description: Delivery report", "Content-Type: message/delivery-status");
-        checkBody(mm, "3", "", "Received: from dogfood.zimbra.com (dogfood.liquidsys.com [66.92.25.198])", "------=_Part_235_901532167.1163033483782--");
+        checkBody(mm, "3", "", "Received: from dogfood.zmail.com (dogfood.liquidsys.com [66.92.25.198])", "------=_Part_235_901532167.1163033483782--");
         checkBody(mm, "3", "MIME", "Content-Description: Undelivered Message", "Content-Transfer-Encoding: 8bit");
-        checkBody(mm, "3", "HEADER", "Received: from dogfood.zimbra.com (dogfood.liquidsys.com [66.92.25.198])", "boundary=\"----=_Part_235_901532167.1163033483782\"");
+        checkBody(mm, "3", "HEADER", "Received: from dogfood.zmail.com (dogfood.liquidsys.com [66.92.25.198])", "boundary=\"----=_Part_235_901532167.1163033483782\"");
         checkBody(mm, "3", "TEXT", "------=_Part_235_901532167.1163033483782", "------=_Part_235_901532167.1163033483782--");
         checkBody(mm, "3.1", "", "The following is a new meeting request:", "Testing bounce messages.");
         checkBody(mm, "3.1", "MIME", "Content-Type: text/plain; charset=utf-8", "Content-Transfer-Encoding: 7bit");

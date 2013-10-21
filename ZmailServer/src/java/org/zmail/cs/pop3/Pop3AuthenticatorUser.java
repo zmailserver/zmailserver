@@ -13,12 +13,12 @@
  * ***** END LICENSE BLOCK *****
  */
 
-package com.zimbra.cs.pop3;
+package org.zmail.cs.pop3;
 
-import com.zimbra.common.util.Log;
-import com.zimbra.common.util.ZimbraLog;
-import com.zimbra.cs.security.sasl.Authenticator;
-import com.zimbra.cs.security.sasl.AuthenticatorUser;
+import org.zmail.common.util.Log;
+import org.zmail.common.util.ZmailLog;
+import org.zmail.cs.security.sasl.Authenticator;
+import org.zmail.cs.security.sasl.AuthenticatorUser;
 
 import java.io.IOException;
 
@@ -71,7 +71,7 @@ class Pop3AuthenticatorUser implements AuthenticatorUser {
 
     @Override
     public Log getLog() {
-        return ZimbraLog.pop;
+        return ZmailLog.pop;
     }
 
     @Override

@@ -17,20 +17,20 @@
  * Created on Nov 11, 2004
  *
  */
-package com.zimbra.cs.filter.jsieve;
+package org.zmail.cs.filter.jsieve;
 
-import com.zimbra.common.filter.Sieve;
-import com.zimbra.common.filter.Sieve.Comparator;
-import com.zimbra.common.mime.MimeConstants;
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.common.util.ByteUtil;
-import com.zimbra.common.util.HtmlTextExtractor;
-import com.zimbra.common.util.ZimbraLog;
-import com.zimbra.cs.account.Account;
-import com.zimbra.cs.filter.ZimbraMailAdapter;
-import com.zimbra.cs.mime.MPartInfo;
-import com.zimbra.cs.mime.Mime;
-import com.zimbra.cs.mime.ParsedMessage;
+import org.zmail.common.filter.Sieve;
+import org.zmail.common.filter.Sieve.Comparator;
+import org.zmail.common.mime.MimeConstants;
+import org.zmail.common.service.ServiceException;
+import org.zmail.common.util.ByteUtil;
+import org.zmail.common.util.HtmlTextExtractor;
+import org.zmail.common.util.ZmailLog;
+import org.zmail.cs.account.Account;
+import org.zmail.cs.filter.ZmailMailAdapter;
+import org.zmail.cs.mime.MPartInfo;
+import org.zmail.cs.mime.Mime;
+import org.zmail.cs.mime.ParsedMessage;
 import org.apache.jsieve.Argument;
 import org.apache.jsieve.Arguments;
 import org.apache.jsieve.SieveContext;
@@ -126,7 +126,7 @@ public class BodyTest extends AbstractTest {
         if (argumentsIter.hasNext())
             throw new SyntaxException("Found unexpected argument(s)");
 
-        return mail instanceof ZimbraMailAdapter && test(mail, caseSensitive, key);
+        return mail instanceof ZmailMailAdapter && test(mail, caseSensitive, key);
 
     }
     
@@ -136,17 +136,17 @@ public class BodyTest extends AbstractTest {
     }
 
     private boolean test(MailAdapter mail, boolean caseSensitive, String substring) {
-        ZimbraMailAdapter zimbraMail = (ZimbraMailAdapter) mail;
-        ParsedMessage pm = zimbraMail.getParsedMessage();
+        ZmailMailAdapter zmailMail = (ZmailMailAdapter) mail;
+        ParsedMessage pm = zmailMail.getParsedMessage();
         if (pm == null) {
             return false;
         }
 
         Account acct = null;
         try {
-            acct = zimbraMail.getMailbox().getAccount();
+            acct = zmailMail.getMailbox().getAccount();
         } catch (ServiceException e) {
-            ZimbraLog.filter.warn("Error in getting account", e);
+            ZmailLog.filter.warn("Error in getting account", e);
         }
         String defaultCharset = acct == null ? null : acct.getPrefMailDefaultCharset();
 
@@ -169,7 +169,7 @@ public class BodyTest extends AbstractTest {
                             return true;
                         }
                     } catch (Exception e) {
-                        ZimbraLog.filter.warn("Unable to test text body for substring '%s'", substring, e);
+                        ZmailLog.filter.warn("Unable to test text body for substring '%s'", substring, e);
                     } finally {
                         ByteUtil.closeStream(in);
                     }
@@ -186,7 +186,7 @@ public class BodyTest extends AbstractTest {
                             return true;
                         }
                     } catch (Exception e) {
-                        ZimbraLog.filter.warn("Unable to test HTML body for substring '%s'", substring, e);
+                        ZmailLog.filter.warn("Unable to test HTML body for substring '%s'", substring, e);
                     } finally {
                         ByteUtil.closeStream(in);
                     }

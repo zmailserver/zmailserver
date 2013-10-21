@@ -13,18 +13,18 @@
  * ***** END LICENSE BLOCK *****
  */
 
-package com.zimbra.cs.account;
+package org.zmail.cs.account;
 
 import com.google.common.collect.Lists;
 import com.google.common.collect.Ordering;
 import com.google.common.collect.TreeMultimap;
-import com.zimbra.common.account.ProvisioningConstants;
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.common.util.ByteUtil;
-import com.zimbra.common.util.DateUtil;
-import com.zimbra.common.util.ZimbraLog;
-import com.zimbra.client.ToZJSONObject;
-import com.zimbra.client.ZJSONObject;
+import org.zmail.common.account.ProvisioningConstants;
+import org.zmail.common.service.ServiceException;
+import org.zmail.common.util.ByteUtil;
+import org.zmail.common.util.DateUtil;
+import org.zmail.common.util.ZmailLog;
+import org.zmail.client.ToZJSONObject;
+import org.zmail.client.ZJSONObject;
 import org.json.JSONException;
 
 import java.text.CollationKey;
@@ -42,7 +42,7 @@ import java.util.Map;
 import java.util.Set;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-import com.zimbra.cs.account.AttributeManager.IDNType;
+import org.zmail.cs.account.AttributeManager.IDNType;
 
 public abstract class Entry implements ToZJSONObject {
 
@@ -111,7 +111,7 @@ public abstract class Entry implements ToZJSONObject {
         try {
             mAttrMgr = AttributeManager.getInstance();
         } catch (ServiceException se) {
-            ZimbraLog.account.warn("failed to get AttributeManager instance", se);
+            ZmailLog.account.warn("failed to get AttributeManager instance", se);
         }
     }
 

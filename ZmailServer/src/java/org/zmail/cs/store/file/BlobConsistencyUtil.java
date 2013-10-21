@@ -13,7 +13,7 @@
  * ***** END LICENSE BLOCK *****
  */
 
-package com.zimbra.cs.store.file;
+package org.zmail.cs.store.file;
 
 import java.io.File;
 import java.io.FileOutputStream;
@@ -28,17 +28,17 @@ import org.apache.commons.cli.Option;
 import org.apache.commons.cli.Options;
 import org.apache.commons.cli.ParseException;
 
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.common.soap.AdminConstants;
-import com.zimbra.common.soap.Element;
-import com.zimbra.common.soap.Element.XMLElement;
-import com.zimbra.common.util.CliUtil;
-import com.zimbra.cs.account.soap.SoapProvisioning;
-import com.zimbra.cs.db.DbPool;
-import com.zimbra.cs.store.file.BlobConsistencyChecker.BlobInfo;
-import com.zimbra.soap.admin.message.ExportAndDeleteItemsRequest;
-import com.zimbra.soap.admin.type.ExportAndDeleteMailboxSpec;
-import com.zimbra.soap.admin.type.ExportAndDeleteItemSpec;
+import org.zmail.common.service.ServiceException;
+import org.zmail.common.soap.AdminConstants;
+import org.zmail.common.soap.Element;
+import org.zmail.common.soap.Element.XMLElement;
+import org.zmail.common.util.CliUtil;
+import org.zmail.cs.account.soap.SoapProvisioning;
+import org.zmail.cs.db.DbPool;
+import org.zmail.cs.store.file.BlobConsistencyChecker.BlobInfo;
+import org.zmail.soap.admin.message.ExportAndDeleteItemsRequest;
+import org.zmail.soap.admin.type.ExportAndDeleteMailboxSpec;
+import org.zmail.soap.admin.type.ExportAndDeleteItemSpec;
 
 public class BlobConsistencyUtil {
 
@@ -190,7 +190,7 @@ public class BlobConsistencyUtil {
 
         CliUtil.toolSetup();
         SoapProvisioning prov = SoapProvisioning.getAdminInstance();
-        prov.soapZimbraAdminAuthenticate();
+        prov.soapZmailAdminAuthenticate();
         if (mailboxIds == null) {
             mailboxIds = getAllMailboxIds(prov);
         }

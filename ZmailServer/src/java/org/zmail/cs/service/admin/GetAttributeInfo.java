@@ -12,29 +12,29 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.service.admin;
+package org.zmail.cs.service.admin;
 
 import java.util.List;
 import java.util.Map;
 import java.util.TreeSet;
 
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.common.soap.AdminConstants;
-import com.zimbra.common.soap.Element;
-import com.zimbra.common.util.ZimbraLog;
-import com.zimbra.cs.account.AttributeClass;
-import com.zimbra.cs.account.AttributeInfo;
-import com.zimbra.cs.account.AttributeManager;
-import com.zimbra.cs.account.FileGenUtil;
-import com.zimbra.cs.account.accesscontrol.AdminRight;
-import com.zimbra.soap.ZimbraSoapContext;
+import org.zmail.common.service.ServiceException;
+import org.zmail.common.soap.AdminConstants;
+import org.zmail.common.soap.Element;
+import org.zmail.common.util.ZmailLog;
+import org.zmail.cs.account.AttributeClass;
+import org.zmail.cs.account.AttributeInfo;
+import org.zmail.cs.account.AttributeManager;
+import org.zmail.cs.account.FileGenUtil;
+import org.zmail.cs.account.accesscontrol.AdminRight;
+import org.zmail.soap.ZmailSoapContext;
 
 public class GetAttributeInfo extends AdminDocumentHandler {
 
     @Override
     public Element handle(Element request, Map<String, Object> context)
     throws ServiceException {
-        ZimbraSoapContext zsc = getZimbraSoapContext(context);
+        ZmailSoapContext zsc = getZmailSoapContext(context);
         
         String[] attrs = null;
         String attrsRequested = request.getAttribute(AdminConstants.A_ATTRS, null);
@@ -93,7 +93,7 @@ public class GetAttributeInfo extends AdminDocumentHandler {
         AttributeInfo attrInfo = attrMgr.getAttributeInfo(attr);
         
         if (attrInfo == null) {
-            ZimbraLog.account.info("no attribte info for " + attr);
+            ZmailLog.account.info("no attribte info for " + attr);
             return;
         }
         

@@ -12,28 +12,28 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.gal;
+package org.zmail.cs.gal;
 
 public class GalFilter {
     static final String DEFAULT_SYNC_FILTER = 
-        "(&(|(objectclass=zimbraAccount)(objectclass=zimbraDistributionList)(objectclass=zimbraGroup))(!(&(objectclass=zimbraCalendarResource)(!(zimbraAccountStatus=active)))))";
+        "(&(|(objectclass=zmailAccount)(objectclass=zmailDistributionList)(objectclass=zmailGroup))(!(&(objectclass=zmailCalendarResource)(!(zmailAccountStatus=active)))))";
 
     static enum NamedFilter {
-        zimbraAccounts,
-        zimbraResources,
-        zimbraGroups,
+        zmailAccounts,
+        zmailResources,
+        zmailGroups,
         
-        zimbraAccountAutoComplete,
-        zimbraResourceAutoComplete,
-        zimbraGroupAutoComplete,
+        zmailAccountAutoComplete,
+        zmailResourceAutoComplete,
+        zmailGroupAutoComplete,
         
-        zimbraAccountSync,
-        zimbraResourceSync,
-        zimbraGroupSync,
+        zmailAccountSync,
+        zmailResourceSync,
+        zmailGroupSync,
         
-        zimbraAutoComplete,
-        zimbraSearch,
-        zimbraSync;
+        zmailAutoComplete,
+        zmailSearch,
+        zmailSync;
     };
     
 }

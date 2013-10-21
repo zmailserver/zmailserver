@@ -19,14 +19,14 @@
  * TODO To change the template for this generated file go to
  * Window - Preferences - Java - Code Style - Code Templates
  */
-package com.zimbra.cs.client.soap;
+package org.zmail.cs.client.soap;
 
 import org.dom4j.DocumentHelper;
 import org.dom4j.Element;
 
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.common.soap.MailConstants;
-import com.zimbra.common.soap.SoapParseException;
+import org.zmail.common.service.ServiceException;
+import org.zmail.common.soap.MailConstants;
+import org.zmail.common.soap.SoapParseException;
 
 /**
  * @author jhahm
@@ -37,7 +37,7 @@ import com.zimbra.common.soap.SoapParseException;
 public class LmcNoOpRequest extends LmcSoapRequest {
 
 	/* (non-Javadoc)
-	 * @see com.zimbra.cs.client.soap.LmcSoapRequest#getRequestXML()
+	 * @see org.zmail.cs.client.soap.LmcSoapRequest#getRequestXML()
 	 */
 	protected Element getRequestXML() throws LmcSoapClientException {
         Element request = DocumentHelper.createElement(MailConstants.NO_OP_REQUEST);
@@ -45,7 +45,7 @@ public class LmcNoOpRequest extends LmcSoapRequest {
 	}
 
 	/* (non-Javadoc)
-	 * @see com.zimbra.cs.client.soap.LmcSoapRequest#parseResponseXML(org.dom4j.Element)
+	 * @see org.zmail.cs.client.soap.LmcSoapRequest#parseResponseXML(org.dom4j.Element)
 	 */
 	protected LmcSoapResponse parseResponseXML(Element responseXML)
 			throws SoapParseException, ServiceException, LmcSoapClientException {

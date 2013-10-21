@@ -13,32 +13,32 @@
  * ***** END LICENSE BLOCK *****
  */
 
-package com.zimbra.cs.service.admin;
+package org.zmail.cs.service.admin;
 
 import java.util.List;
 import java.util.Map;
 
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.common.soap.Element;
-import com.zimbra.cs.account.Provisioning;
-import com.zimbra.cs.account.accesscontrol.AdminRight;
-import com.zimbra.cs.account.accesscontrol.Rights.Admin;
-import com.zimbra.cs.volume.VolumeManager;
-import com.zimbra.soap.JaxbUtil;
-import com.zimbra.soap.ZimbraSoapContext;
-import com.zimbra.soap.admin.message.DeleteVolumeRequest;
-import com.zimbra.soap.admin.message.DeleteVolumeResponse;
+import org.zmail.common.service.ServiceException;
+import org.zmail.common.soap.Element;
+import org.zmail.cs.account.Provisioning;
+import org.zmail.cs.account.accesscontrol.AdminRight;
+import org.zmail.cs.account.accesscontrol.Rights.Admin;
+import org.zmail.cs.volume.VolumeManager;
+import org.zmail.soap.JaxbUtil;
+import org.zmail.soap.ZmailSoapContext;
+import org.zmail.soap.admin.message.DeleteVolumeRequest;
+import org.zmail.soap.admin.message.DeleteVolumeResponse;
 
 public final class DeleteVolume extends AdminDocumentHandler {
 
     @Override
     public Element handle(Element req, Map<String, Object> ctx) throws ServiceException {
-        ZimbraSoapContext zsc = getZimbraSoapContext(ctx);
+        ZmailSoapContext zsc = getZmailSoapContext(ctx);
         return zsc.jaxbToElement(handle((DeleteVolumeRequest) JaxbUtil.elementToJaxb(req), ctx));
     }
 
     private DeleteVolumeResponse handle(DeleteVolumeRequest req, Map<String, Object> ctx) throws ServiceException {
-        ZimbraSoapContext zsc = getZimbraSoapContext(ctx);
+        ZmailSoapContext zsc = getZmailSoapContext(ctx);
         checkRight(zsc, ctx, Provisioning.getInstance().getLocalServer(), Admin.R_manageVolume);
 
         VolumeManager mgr = VolumeManager.getInstance();

@@ -12,7 +12,7 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.imap;
+package org.zmail.cs.imap;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -32,23 +32,23 @@ import com.google.common.base.Function;
 import com.google.common.base.Strings;
 import com.google.common.collect.Iterators;
 import com.google.common.collect.Lists;
-import com.zimbra.client.ZFolder;
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.common.soap.Element;
-import com.zimbra.common.util.ArrayUtil;
-import com.zimbra.common.util.Pair;
-import com.zimbra.common.util.ZimbraLog;
-import com.zimbra.cs.imap.ImapFlagCache.ImapFlag;
-import com.zimbra.cs.imap.ImapMessage.ImapMessageSet;
-import com.zimbra.cs.mailbox.Flag;
-import com.zimbra.cs.mailbox.Folder;
-import com.zimbra.cs.mailbox.MailItem;
-import com.zimbra.cs.mailbox.Mailbox;
-import com.zimbra.cs.mailbox.OperationContext;
-import com.zimbra.cs.mailbox.SearchFolder;
-import com.zimbra.cs.mailbox.Tag;
-import com.zimbra.cs.session.Session;
-import com.zimbra.cs.session.PendingModifications.Change;
+import org.zmail.client.ZFolder;
+import org.zmail.common.service.ServiceException;
+import org.zmail.common.soap.Element;
+import org.zmail.common.util.ArrayUtil;
+import org.zmail.common.util.Pair;
+import org.zmail.common.util.ZmailLog;
+import org.zmail.cs.imap.ImapFlagCache.ImapFlag;
+import org.zmail.cs.imap.ImapMessage.ImapMessageSet;
+import org.zmail.cs.mailbox.Flag;
+import org.zmail.cs.mailbox.Folder;
+import org.zmail.cs.mailbox.MailItem;
+import org.zmail.cs.mailbox.Mailbox;
+import org.zmail.cs.mailbox.OperationContext;
+import org.zmail.cs.mailbox.SearchFolder;
+import org.zmail.cs.mailbox.Tag;
+import org.zmail.cs.session.Session;
+import org.zmail.cs.session.PendingModifications.Change;
 
 /**
  * @since Apr 30, 2005
@@ -167,7 +167,7 @@ public final class ImapFolder implements ImapSession.ImapFolderData, java.io.Ser
         return sdata == null ? null : sdata.credentials;
     }
 
-    /** Returns the selected folder's zimbra ID. */
+    /** Returns the selected folder's zmail ID. */
     @Override
     public int getId() {
         return folderId;
@@ -217,7 +217,7 @@ public final class ImapFolder implements ImapSession.ImapFolderData, java.io.Ser
             try {
                 types = MailItem.Type.setOf(typestr);
             } catch (IllegalArgumentException e) {
-                ZimbraLog.imap.warn("invalid item type: " + typestr, e);
+                ZmailLog.imap.warn("invalid item type: " + typestr, e);
                 return EnumSet.noneOf(MailItem.Type.class);
             }
         } else {
@@ -266,7 +266,7 @@ public final class ImapFolder implements ImapSession.ImapFolderData, java.io.Ser
         for (Iterator<ImapMessage> it = sequence.iterator(); it.hasNext();) {
             ImapMessage i4msg = it.next();
             if (i4msg.imapUid == prevUid) {
-                ZimbraLog.imap.warn("duplicate UID %d in cached folder %d", prevUid, folderId);
+                ZmailLog.imap.warn("duplicate UID %d in cached folder %d", prevUid, folderId);
                 it.remove();
             } else {
                 prevUid = i4msg.imapUid;
@@ -331,7 +331,7 @@ public final class ImapFolder implements ImapSession.ImapFolderData, java.io.Ser
         return -(low + 1);  // key not found
     }
 
-    /** Returns the ImapMessage with the given Zimbra item ID from the
+    /** Returns the ImapMessage with the given Zmail item ID from the
      *  folder's {@link #sequence} message list. */
     synchronized ImapMessage getById(int id) {
         if (id <= 0 || getSize() == 0) {
@@ -413,13 +413,13 @@ public final class ImapFolder implements ImapSession.ImapFolderData, java.io.Ser
         // update the folder information
         ImapMessage last = null;
         if (sequence.size() > 0 && (last = sequence.get(sequence.size() - 1)).imapUid > i4msg.imapUid) {
-            ZimbraLog.imap.debug("adding out of order UID. prev: %s current: %s", last, i4msg);
+            ZmailLog.imap.debug("adding out of order UID. prev: %s current: %s", last, i4msg);
             if (!insertOutOfOrder(i4msg)) {
                 return false;
             }
         } else if (last != null && last.imapUid == i4msg.imapUid) {
             //should never occur, log so we can learn more if it does
-            ZimbraLog.imap.warn("duplicate UID %s %s added to sequence", i4msg, last, new Exception());
+            ZmailLog.imap.warn("duplicate UID %s %s added to sequence", i4msg, last, new Exception());
             sequence.set(sequence.size() - 1, i4msg);
             setIndex(i4msg, sequence.size());
         } else {
@@ -445,7 +445,7 @@ public final class ImapFolder implements ImapSession.ImapFolderData, java.io.Ser
                 //this is necessary to ensure that messageIds map holds the highest UID for a given msgId
                 idx--;
             } else {
-                ZimbraLog.imap.warn("message added out of order occurs before message which is already visible to client. Must renumber %s", i4msg);
+                ZmailLog.imap.warn("message added out of order occurs before message which is already visible to client. Must renumber %s", i4msg);
                 session.incrementRenumber(i4msg);
                 if (session.isFailedRenumber(i4msg)) {
                     throw new ImapRenumberException();
@@ -467,12 +467,12 @@ public final class ImapFolder implements ImapSession.ImapFolderData, java.io.Ser
     void updateTagCache(ImapMessage i4msg) {
         if (!ArrayUtil.isEmpty(i4msg.tags)) {
             for (String tag : i4msg.tags) {
-                if (tags.getByZimbraName(tag) == null) {
+                if (tags.getByZmailName(tag) == null) {
                     try {
                         tags.cache(new ImapFlag(mailbox.getTagByName(null, tag)));
                         setTagsDirty(true);
                     } catch (ServiceException e) {
-                        ZimbraLog.imap.warn("could not fetch listed tag: %s", tag, e);
+                        ZmailLog.imap.warn("could not fetch listed tag: %s", tag, e);
                     }
                 }
             }
@@ -949,7 +949,7 @@ public final class ImapFolder implements ImapSession.ImapFolderData, java.io.Ser
         if (getSize() == 0) {
             return Collections.emptyList();
         }
-        ZimbraLog.imap.debug("  ** iterating (collapseExpunged)");
+        ZmailLog.imap.debug("  ** iterating (collapseExpunged)");
 
         boolean trimmed = false;
         int seq = 1;
@@ -957,7 +957,7 @@ public final class ImapFolder implements ImapSession.ImapFolderData, java.io.Ser
         for (ListIterator<ImapMessage> lit = sequence.listIterator(); lit.hasNext(); seq++) {
             ImapMessage i4msg = lit.next();
             if (i4msg.isExpunged()) {
-                ZimbraLog.imap.debug("  ** removing: %s", i4msg);
+                ZmailLog.imap.debug("  ** removing: %s", i4msg);
                 // uncache() removes pointers to the message from mMessageIds;
                 //   if the message appears again in sequence, it *must* be later and the
                 //   subsequent call to setIndex() will correctly update the mMessageIds mapping
@@ -1004,7 +1004,7 @@ public final class ImapFolder implements ImapSession.ImapFolderData, java.io.Ser
         ImapMessage i4msg = getById(itemId);
         if (i4msg != null) {
             markMessageExpunged(i4msg);
-            ZimbraLog.imap.debug("  ** deleted (ntfn): %d", i4msg.msgId);
+            ZmailLog.imap.debug("  ** deleted (ntfn): %d", i4msg.msgId);
         }
     }
 
@@ -1020,7 +1020,7 @@ public final class ImapFolder implements ImapSession.ImapFolderData, java.io.Ser
         if (i4msg == null) {
             added.add(item);
         }
-        ZimbraLog.imap.debug("  ** created (ntfn): %d", msgId);
+        ZmailLog.imap.debug("  ** created (ntfn): %d", msgId);
     }
 
     @Override
@@ -1041,7 +1041,7 @@ public final class ImapFolder implements ImapSession.ImapFolderData, java.io.Ser
         if (i4msg == null) {
             if (inFolder && !isVirtual()) {
                 added.add(item);
-                ZimbraLog.imap.debug("  ** moved (ntfn) {id: %d UID: %d}", item.getId(), item.getImapUid());
+                ZmailLog.imap.debug("  ** moved (ntfn) {id: %d UID: %d}", item.getId(), item.getImapUid());
             }
         } else if (!inFolder && !isVirtual()) {
             markMessageExpunged(i4msg);
@@ -1050,14 +1050,14 @@ public final class ImapFolder implements ImapSession.ImapFolderData, java.io.Ser
             if (item.getImapUid() > 0 && i4msg.imapUid > item.getImapUid()) {
                 //this update was the result of renumber which occurred in other session
                 //we need to ignore it or we end up expunging the newest copy of the message (with current UID) and replacing it with an older UID
-                ZimbraLog.imap.debug("IMAP UID changed (ntfn) {id: %d UID: %d} but sequence already contains higher UID %s", item.getId(), item.getImapUid(), i4msg);
+                ZmailLog.imap.debug("IMAP UID changed (ntfn) {id: %d UID: %d} but sequence already contains higher UID %s", item.getId(), item.getImapUid(), i4msg);
                 return;
             }
             markMessageExpunged(i4msg);
             if (!isVirtual()) {
                 added.add(item);
             }
-            ZimbraLog.imap.debug("  ** imap uid changed (ntfn) {id: %d UID: %d}", item.getId(), item.getImapUid());
+            ZmailLog.imap.debug("  ** imap uid changed (ntfn) {id: %d UID: %d}", item.getId(), item.getImapUid());
         } else if ((chg.why & (Change.TAGS | Change.FLAGS | Change.UNREAD)) != 0) {
             i4msg.setPermanentFlags(item.getFlagBitmask(), item.getTags(), changeId, this);
         }
@@ -1065,7 +1065,7 @@ public final class ImapFolder implements ImapSession.ImapFolderData, java.io.Ser
 
     @Override
     public void handleAddedMessages(int changeId, ImapSession.AddedItems added) {
-        boolean debug = ZimbraLog.imap.isDebugEnabled();
+        boolean debug = ZmailLog.imap.isDebugEnabled();
 
         added.sort();
         boolean recent = true;
@@ -1097,7 +1097,7 @@ public final class ImapFolder implements ImapSession.ImapFolderData, java.io.Ser
                 }
             }
             if (debug) {
-                ZimbraLog.imap.debug(addlog);
+                ZmailLog.imap.debug(addlog);
             }
         }
 
@@ -1112,12 +1112,12 @@ public final class ImapFolder implements ImapSession.ImapFolderData, java.io.Ser
                 }
             }
             try {
-                ZimbraLog.imap.debug("  ** moved; changing imap uid (ntfn): %s", renumber);
+                ZmailLog.imap.debug("  ** moved; changing imap uid (ntfn): %s", renumber);
                 // notification will take care of adding to mailbox
                 getMailbox().resetImapUid(null, renumber);
             } catch (ServiceException e) {
                 if (debug) {
-                    ZimbraLog.imap.debug("  ** moved; imap uid change failed; msg hidden (ntfn): %s", renumber);
+                    ZmailLog.imap.debug("  ** moved; imap uid change failed; msg hidden (ntfn): %s", renumber);
                 }
             }
         }

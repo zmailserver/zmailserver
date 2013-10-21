@@ -12,17 +12,17 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.service.admin;
+package org.zmail.cs.service.admin;
 
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 
-import com.zimbra.common.soap.AdminConstants;
-import com.zimbra.common.soap.Element;
-import com.zimbra.common.util.L10nUtil;
-import com.zimbra.cs.account.accesscontrol.AdminRight;
-import com.zimbra.soap.ZimbraSoapContext;
+import org.zmail.common.soap.AdminConstants;
+import org.zmail.common.soap.Element;
+import org.zmail.common.util.L10nUtil;
+import org.zmail.cs.account.accesscontrol.AdminRight;
+import org.zmail.soap.ZmailSoapContext;
 
 public class GetAllLocales extends AdminDocumentHandler {
     
@@ -31,12 +31,12 @@ public class GetAllLocales extends AdminDocumentHandler {
     }
     
     public Element handle(Element request, Map<String, Object> context) {
-        ZimbraSoapContext zsc = getZimbraSoapContext(context);
+        ZmailSoapContext zsc = getZmailSoapContext(context);
 
         Locale locales[] = L10nUtil.getAllLocalesSorted();
         Element response = zsc.createElement(AdminConstants.GET_ALL_LOCALES_RESPONSE);
         for (Locale locale : locales)
-            com.zimbra.cs.service.account.ToXML.encodeLocale(response, locale, Locale.US);
+            org.zmail.cs.service.account.ToXML.encodeLocale(response, locale, Locale.US);
         return response;
     }
 

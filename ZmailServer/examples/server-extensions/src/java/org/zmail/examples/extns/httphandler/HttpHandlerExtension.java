@@ -12,18 +12,18 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.examples.extns.httphandler;
+package org.zmail.examples.extns.httphandler;
 
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.cs.extension.ExtensionDispatcherServlet;
-import com.zimbra.cs.extension.ZimbraExtension;
+import org.zmail.common.service.ServiceException;
+import org.zmail.cs.extension.ExtensionDispatcherServlet;
+import org.zmail.cs.extension.ZmailExtension;
 
 /**
  * This extension registers a custom HTTP handler with <code>ExtensionDispatcherServlet<code>
  *
  * @author vmahajan
  */
-public class HttpHandlerExtension implements ZimbraExtension {
+public class HttpHandlerExtension implements ZmailExtension {
 
     /**
      * Defines a name for the extension. It must be an identifier.
@@ -37,7 +37,7 @@ public class HttpHandlerExtension implements ZimbraExtension {
     /**
      * Initializes the extension. Called when the extension is loaded.
      *
-     * @throws com.zimbra.common.service.ServiceException
+     * @throws org.zmail.common.service.ServiceException
      *
      */
     public void init() throws ServiceException {

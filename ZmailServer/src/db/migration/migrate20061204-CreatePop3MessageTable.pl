@@ -39,7 +39,7 @@ CREATE TABLE IF NOT EXISTS $group.pop3_message (
    item_id        INTEGER UNSIGNED NOT NULL,
    
    PRIMARY KEY (mailbox_id, item_id),
-   CONSTRAINT fk_pop3_message_mailbox_id FOREIGN KEY (mailbox_id) REFERENCES zimbra.mailbox(id)
+   CONSTRAINT fk_pop3_message_mailbox_id FOREIGN KEY (mailbox_id) REFERENCES zmail.mailbox(id)
 ) ENGINE = InnoDB;
 
 CREATE UNIQUE INDEX i_uid_pop3_id ON $group.pop3_message (uid, data_source_id);

@@ -13,19 +13,19 @@
  * ***** END LICENSE BLOCK *****
  */
 
-package com.zimbra.cs.account.callback;
+package org.zmail.cs.account.callback;
 
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.cs.account.AttributeCallback;
-import com.zimbra.cs.account.AttributeManager;
-import com.zimbra.cs.account.AttributeManager.IDNType;
-import com.zimbra.cs.account.Entry;
-import com.zimbra.cs.account.IDNUtil;
+import org.zmail.common.service.ServiceException;
+import org.zmail.cs.account.AttributeCallback;
+import org.zmail.cs.account.AttributeManager;
+import org.zmail.cs.account.AttributeManager.IDNType;
+import org.zmail.cs.account.Entry;
+import org.zmail.cs.account.IDNUtil;
 
 /**
  * Convert unicode address to ASCII (ACE)

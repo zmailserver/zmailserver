@@ -12,11 +12,11 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.account.accesscontrol;
+package org.zmail.cs.account.accesscontrol;
 
-import com.zimbra.common.localconfig.LC;
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.cs.account.accesscontrol.generated.AdminRights;
+import org.zmail.common.localconfig.LC;
+import org.zmail.common.service.ServiceException;
+import org.zmail.cs.account.accesscontrol.generated.AdminRights;
 
 public abstract class AdminRight extends Right {
     //
@@ -44,7 +44,7 @@ public abstract class AdminRight extends Right {
         PR_SYSTEM_ADMIN_ONLY = newAdminSystemRight("PSEUDO_SYSTEM_ADMIN_ONLY", RightType.preset);
         PR_ADMIN_PRESET_RIGHT = newAdminSystemRight("PSEUDO_ADMIN_PRESET_RIGHT", RightType.preset);
         
-        if (LC.zimbra_rights_delegated_admin_supported.booleanValue())
+        if (LC.zmail_rights_delegated_admin_supported.booleanValue())
             AdminRights.init(rm);
     }
     

@@ -12,7 +12,7 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.qa.unittest;
+package org.zmail.qa.unittest;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -20,18 +20,18 @@ import java.util.List;
 import junit.framework.Assert;
 import junit.framework.TestCase;
 
-import com.zimbra.common.util.ZimbraLog;
-import com.zimbra.cs.account.Account;
-import com.zimbra.cs.mailbox.DeliveryOptions;
-import com.zimbra.cs.mailbox.Mailbox;
-import com.zimbra.cs.mailbox.MailboxManager;
-import com.zimbra.cs.mailbox.Message;
-import com.zimbra.cs.mime.ParsedMessage;
-import com.zimbra.cs.store.file.BlobDeduper;
-import com.zimbra.cs.util.Zimbra;
-import com.zimbra.cs.volume.Volume;
-import com.zimbra.cs.volume.VolumeManager;
-import com.zimbra.znative.IO;
+import org.zmail.common.util.ZmailLog;
+import org.zmail.cs.account.Account;
+import org.zmail.cs.mailbox.DeliveryOptions;
+import org.zmail.cs.mailbox.Mailbox;
+import org.zmail.cs.mailbox.MailboxManager;
+import org.zmail.cs.mailbox.Message;
+import org.zmail.cs.mime.ParsedMessage;
+import org.zmail.cs.store.file.BlobDeduper;
+import org.zmail.cs.util.Zmail;
+import org.zmail.cs.volume.Volume;
+import org.zmail.cs.volume.VolumeManager;
+import org.zmail.znative.IO;
 
 public final class TestBlobDeduper extends TestCase {
     
@@ -60,7 +60,7 @@ public final class TestBlobDeduper extends TestCase {
         String[] paths = new String[5];
         Volume vol = VolumeManager.getInstance().getCurrentMessageVolume();
         for (int i = 0; i < 5; i++) {
-            Message msg = mbox.addMessage(null, new ParsedMessage(("From: test@zimbra.com\r\nTo: to1@zimbra.com\r\nSubject: "+ TEST_NAME).getBytes(), false), opt, null);
+            Message msg = mbox.addMessage(null, new ParsedMessage(("From: test@zmail.com\r\nTo: to1@zmail.com\r\nSubject: "+ TEST_NAME).getBytes(), false), opt, null);
             paths[i] = msg.getBlob().getLocalBlob().getFile().getPath();
         }
         // Make sure inodes are different for paths
@@ -90,9 +90,9 @@ public final class TestBlobDeduper extends TestCase {
             // Catch exceptions during cleanup, so that the original test error
             // isn't lost
             if (t instanceof OutOfMemoryError) {
-                Zimbra.halt("TestBlobDeduper ran out of memory", t);
+                Zmail.halt("TestBlobDeduper ran out of memory", t);
             }
-            ZimbraLog.test.error("", t);
+            ZmailLog.test.error("", t);
         }
     }
 

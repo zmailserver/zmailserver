@@ -13,17 +13,17 @@
  * ***** END LICENSE BLOCK *****
  */
 
-package com.zimbra.cs.stats;
+package org.zmail.cs.stats;
 
 import java.util.Map;
 
 import org.eclipse.jetty.util.thread.ThreadPool;
 
 import com.google.common.collect.Maps;
-import com.zimbra.common.jetty.JettyMonitor;
-import com.zimbra.common.stats.RealtimeStatsCallback;
-import com.zimbra.common.util.Log;
-import com.zimbra.common.util.LogFactory;
+import org.zmail.common.jetty.JettyMonitor;
+import org.zmail.common.stats.RealtimeStatsCallback;
+import org.zmail.common.util.Log;
+import org.zmail.common.util.LogFactory;
 
 /**
  * Returns stats about Jetty threads and connections.
@@ -41,8 +41,8 @@ implements RealtimeStatsCallback {
             return null;
         }
         Map<String, Object> data = Maps.newHashMap();
-        data.put(ZimbraPerf.RTS_HTTP_THREADS, pool.getThreads());
-        data.put(ZimbraPerf.RTS_HTTP_IDLE_THREADS, pool.getIdleThreads());
+        data.put(ZmailPerf.RTS_HTTP_THREADS, pool.getThreads());
+        data.put(ZmailPerf.RTS_HTTP_IDLE_THREADS, pool.getIdleThreads());
         return data;
     }
 }

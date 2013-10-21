@@ -38,11 +38,11 @@ my $report = [];
 my %mysqld;
 my $maxcnt=1;
 
-my $localxml = XMLin("/opt/zimbra/conf/localconfig.xml");
+my $localxml = XMLin("/opt/zmail/conf/localconfig.xml");
 my $table = new Proc::ProcessTable;
 foreach my $p ( @{$table->table} ) {
   my ($pid,$ppid,$pgrp,$cmdline) = ($p->pid, $p->ppid, $p->pgrp, $p->cmndline);
-  if ($p->fname eq "mysqld" && $cmdline =~ /\/opt\/zimbra\/db/) {
+  if ($p->fname eq "mysqld" && $cmdline =~ /\/opt\/zmail\/db/) {
   #if ($p->fname eq "mysqld") {
     addToReport("PID:$pid PPID:$ppid PGRP:$pgrp\nCMD:\t$cmdline\n\n")
       if ($p->fname eq "mysqld" && $debug);
@@ -70,8 +70,8 @@ sub sendEmailReport {
   my $alt_to = $localxml->{key}->{smtp_destination}->{value};
   chomp($alt_to);
   my $to_address = ($mailto ? $mailto : $alt_to);
-  my $smtphost = getLdapConfigValue("zimbraSmtpHostname") || "localhost";
-  my $smtpport = getLdapConfigValue("zimbraSmtpPort") || "25";
+  my $smtphost = getLdapConfigValue("zmailSmtpHostname") || "localhost";
+  my $smtpport = getLdapConfigValue("zmailSmtpPort") || "25";
     
   print "Sending report to $to_address via $smtphost\n" if $debug;
   eval {
@@ -104,12 +104,12 @@ sub getLdapServerConfigValue {
   my $attrib = shift;
   my ($val,$err);
   my ($rfh,$wfh,$efh,$cmd,$rc);
-  my $server = $localxml->{key}->{zimbra_server_hostname}->{value};
+  my $server = $localxml->{key}->{zmail_server_hostname}->{value};
   chomp($server);
   $rfh = new FileHandle;
   $wfh = new FileHandle;
   $efh = new FileHandle;
-  $cmd = "/opt/zimbra/bin/zmprov -l gs $server $attrib";
+  $cmd = "/opt/zmail/bin/zmprov -l gs $server $attrib";
   my $pid = open3($wfh,$rfh,$efh, $cmd);
   unless(defined($pid)) {
     return undef;
@@ -138,7 +138,7 @@ sub getLdapGlobalConfigValue {
   $rfh = new FileHandle;
   $wfh = new FileHandle;
   $efh = new FileHandle;
-  $cmd = "/opt/zimbra/bin/zmprov -l gcf $attrib";
+  $cmd = "/opt/zmail/bin/zmprov -l gcf $attrib";
   my $pid = open3($wfh,$rfh,$efh, $cmd);
   unless(defined($pid)) {
     return undef;

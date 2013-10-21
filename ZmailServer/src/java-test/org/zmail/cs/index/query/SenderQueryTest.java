@@ -12,7 +12,7 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.index.query;
+package org.zmail.cs.index.query;
 
 import org.junit.Assert;
 import org.junit.Test;
@@ -26,14 +26,14 @@ public final class SenderQueryTest {
 
     @Test
     public void comparison() throws Exception {
-        Assert.assertEquals("<DB[FROM:(>\"test@zimbra.com\") ]>",
-                SenderQuery.create(null, ">test@zimbra.com").compile(null, true).toString());
-        Assert.assertEquals("<DB[FROM:(>=\"test@zimbra.com\") ]>",
-                SenderQuery.create(null, ">=test@zimbra.com").compile(null, true).toString());
-        Assert.assertEquals("<DB[FROM:(<\"test@zimbra.com\") ]>",
-                SenderQuery.create(null, "<test@zimbra.com").compile(null, true).toString());
-        Assert.assertEquals("<DB[FROM:(<=\"test@zimbra.com\") ]>",
-                SenderQuery.create(null, "<=test@zimbra.com").compile(null, true).toString());
+        Assert.assertEquals("<DB[FROM:(>\"test@zmail.com\") ]>",
+                SenderQuery.create(null, ">test@zmail.com").compile(null, true).toString());
+        Assert.assertEquals("<DB[FROM:(>=\"test@zmail.com\") ]>",
+                SenderQuery.create(null, ">=test@zmail.com").compile(null, true).toString());
+        Assert.assertEquals("<DB[FROM:(<\"test@zmail.com\") ]>",
+                SenderQuery.create(null, "<test@zmail.com").compile(null, true).toString());
+        Assert.assertEquals("<DB[FROM:(<=\"test@zmail.com\") ]>",
+                SenderQuery.create(null, "<=test@zmail.com").compile(null, true).toString());
     }
 
 }

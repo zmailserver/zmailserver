@@ -13,17 +13,17 @@
  * ***** END LICENSE BLOCK *****
  */
 
-package com.zimbra.cs.lmtpserver;
+package org.zmail.cs.lmtpserver;
 
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.common.util.Log;
-import com.zimbra.common.util.ZimbraLog;
-import com.zimbra.cs.server.ServerConfig;
-import com.zimbra.cs.util.BuildInfo;
-import com.zimbra.common.localconfig.LC;
-import com.zimbra.cs.util.Config;
+import org.zmail.common.service.ServiceException;
+import org.zmail.common.util.Log;
+import org.zmail.common.util.ZmailLog;
+import org.zmail.cs.server.ServerConfig;
+import org.zmail.cs.util.BuildInfo;
+import org.zmail.common.localconfig.LC;
+import org.zmail.cs.util.Config;
 
-import static com.zimbra.cs.account.Provisioning.*;
+import static org.zmail.cs.account.Provisioning.*;
 
 public class LmtpConfig extends ServerConfig {
     private final LmtpBackend lmtpBackend;
@@ -39,17 +39,17 @@ public class LmtpConfig extends ServerConfig {
 
     private LmtpConfig() {
         super(PROTOCOL, false);
-        lmtpBackend = new ZimbraLmtpBackend(this);
+        lmtpBackend = new ZmailLmtpBackend(this);
     }
 
     @Override
     public String getServerName() {
-        return getAttr(A_zimbraLmtpAdvertisedName, LC.zimbra_server_hostname.value());
+        return getAttr(A_zmailLmtpAdvertisedName, LC.zmail_server_hostname.value());
     }
 
     @Override
     public String getServerVersion() {
-        return getBooleanAttr(A_zimbraLmtpExposeVersionOnBanner, false) ?
+        return getBooleanAttr(A_zmailLmtpExposeVersionOnBanner, false) ?
             BuildInfo.VERSION : null;
     }
 
@@ -60,27 +60,27 @@ public class LmtpConfig extends ServerConfig {
 
     @Override
     public int getShutdownTimeout() {
-       return getIntAttr(A_zimbraLmtpShutdownGraceSeconds, super.getShutdownTimeout());
+       return getIntAttr(A_zmailLmtpShutdownGraceSeconds, super.getShutdownTimeout());
     }
 
     @Override
     public int getMaxThreads() {
-        return getIntAttr(A_zimbraLmtpNumThreads, super.getMaxThreads());
+        return getIntAttr(A_zmailLmtpNumThreads, super.getMaxThreads());
     }
 
     @Override
     public int getBindPort() {
-        return getIntAttr(A_zimbraLmtpBindPort, Config.D_LMTP_BIND_PORT);
+        return getIntAttr(A_zmailLmtpBindPort, Config.D_LMTP_BIND_PORT);
     }
 
     @Override
     public String getBindAddress() {
-        return getAttr(A_zimbraLmtpBindAddress, null);
+        return getAttr(A_zmailLmtpBindAddress, null);
     }
 
     @Override
     public Log getLog() {
-        return ZimbraLog.lmtp;
+        return ZmailLog.lmtp;
     }
 
     @Override
@@ -90,9 +90,9 @@ public class LmtpConfig extends ServerConfig {
 
     public String getMtaRecipientDelimiter() {
         try {
-            return getGlobalConfig().getAttr(A_zimbraMtaRecipientDelimiter);
+            return getGlobalConfig().getAttr(A_zmailMtaRecipientDelimiter);
         } catch (ServiceException e) {
-            getLog().warn("Unable to get global attribute: " + A_zimbraMtaRecipientDelimiter, e);
+            getLog().warn("Unable to get global attribute: " + A_zmailMtaRecipientDelimiter, e);
             return null;
         }
     }
@@ -102,6 +102,6 @@ public class LmtpConfig extends ServerConfig {
     }
 
     public boolean isPermanentFailureWhenOverQuota() {
-        return getBooleanAttr(A_zimbraLmtpPermanentFailureWhenOverQuota, false);
+        return getBooleanAttr(A_zmailLmtpPermanentFailureWhenOverQuota, false);
     }
 }

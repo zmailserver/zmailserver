@@ -12,14 +12,14 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.imap;
+package org.zmail.cs.imap;
 
-import com.zimbra.common.localconfig.LC;
-import com.zimbra.common.util.ZimbraLog;
-import com.zimbra.cs.server.NioHandler;
-import com.zimbra.cs.server.NioOutputStream;
-import com.zimbra.cs.server.NioConnection;
-import com.zimbra.cs.stats.ZimbraPerf;
+import org.zmail.common.localconfig.LC;
+import org.zmail.common.util.ZmailLog;
+import org.zmail.cs.server.NioHandler;
+import org.zmail.cs.server.NioOutputStream;
+import org.zmail.cs.server.NioConnection;
+import org.zmail.cs.stats.ZmailPerf;
 
 import java.io.IOException;
 import java.net.InetSocketAddress;
@@ -62,7 +62,7 @@ final class NioImapHandler extends ImapHandler implements NioHandler {
                     dropConnection();
                 }
             } finally {
-                ZimbraLog.clearContext();
+                ZmailLog.clearContext();
                 if (request != null) {
                     request.cleanup();
                     request = null;
@@ -78,7 +78,7 @@ final class NioImapHandler extends ImapHandler implements NioHandler {
     public void exceptionCaught(Throwable e) throws IOException {
         try {
             if (e instanceof javax.net.ssl.SSLException) {
-                ZimbraLog.imap.error("Error detected by SSL subsystem, dropping connection:" + e);
+                ZmailLog.imap.error("Error detected by SSL subsystem, dropping connection:" + e);
                 dropConnection(false);  // Bug 79904 prevent using SSL port in plain text
             } else if (e instanceof NioImapDecoder.TooBigLiteralException) {
                 String tag;
@@ -111,7 +111,7 @@ final class NioImapHandler extends ImapHandler implements NioHandler {
         if (i4selected != null)
             i4selected.updateAccessTime();
 
-        long start = ZimbraPerf.STOPWATCH_IMAP.start();
+        long start = ZmailPerf.STOPWATCH_IMAP.start();
 
         try {
             if (!checkAccountStatus()) {
@@ -123,20 +123,20 @@ final class NioImapHandler extends ImapHandler implements NioHandler {
             try {
                 return executeRequest(req);
             } catch (ImapProxyException e) {
-                ZimbraLog.imap.debug("proxy failed", e);
+                ZmailLog.imap.debug("proxy failed", e);
                 sendNO(req.getTag(), "Shared folder temporally unavailable");
                 return false; // disconnect
             } catch (ImapParseException e) {
                 handleParseException(e);
                 return true;
             } catch (ImapException e) { // session closed
-                ZimbraLog.imap.debug("stop processing", e);
+                ZmailLog.imap.debug("stop processing", e);
                 return false;
             }
         } finally {
-            ZimbraPerf.STOPWATCH_IMAP.stop(start);
+            ZmailPerf.STOPWATCH_IMAP.stop(start);
             if (lastCommand != null) {
-                ZimbraPerf.IMAP_TRACKER.addStat(lastCommand.toUpperCase(), start);
+                ZmailPerf.IMAP_TRACKER.addStat(lastCommand.toUpperCase(), start);
             }
         }
     }
@@ -164,7 +164,7 @@ final class NioImapHandler extends ImapHandler implements NioHandler {
 
     @Override
     public void connectionIdle() {
-        ZimbraLog.imap.debug("dropping connection for inactivity");
+        ZmailLog.imap.debug("dropping connection for inactivity");
         dropConnection();
     }
 
@@ -194,7 +194,7 @@ final class NioImapHandler extends ImapHandler implements NioHandler {
     @Override
     void dropConnection(boolean sendBanner) {
         if (credentials != null && !goodbyeSent) {
-            ZimbraLog.imap.info("dropping connection for user %s (server-initiated)", credentials.getUsername());
+            ZmailLog.imap.info("dropping connection for user %s (server-initiated)", credentials.getUsername());
         }
         if (!connection.isOpen()) {
             return; // No longer connected

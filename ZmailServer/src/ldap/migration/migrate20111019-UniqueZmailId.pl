@@ -14,36 +14,36 @@
 # ***** END LICENSE BLOCK *****
 # 
 use strict;
-use lib '/opt/zimbra/zimbramon/lib';
+use lib '/opt/zmail/zmailmon/lib';
 use Net::LDAP;
 use XML::Simple;
 use Getopt::Std;
 
-if ( ! -d "/opt/zimbra/openldap/etc" ) {
+if ( ! -d "/opt/zmail/openldap/etc" ) {
   print "ERROR: openldap does not appear to be installed - exiting\n";
   exit(1);
 }
 
 my $id = getpwuid($<);
 chomp $id;
-if ($id ne "zimbra") {
-    print STDERR "Error: must be run as zimbra user\n";
+if ($id ne "zmail") {
+    print STDERR "Error: must be run as zmail user\n";
     exit (1);
 }
 
 
-my $localxml = XMLin("/opt/zimbra/conf/localconfig.xml");
+my $localxml = XMLin("/opt/zmail/conf/localconfig.xml");
 my $ldap_root_password = $localxml->{key}->{ldap_root_password}->{value};
 chomp($ldap_root_password);
 my $ldap_is_master = $localxml->{key}->{ldap_is_master}->{value};
 chomp($ldap_is_master);
-my $zimbra_home = $localxml->{key}->{zimbra_home}->{value};
+my $zmail_home = $localxml->{key}->{zmail_home}->{value};
 
-if ($zimbra_home eq "") {
-   $zimbra_home = "/opt/zimbra";
+if ($zmail_home eq "") {
+   $zmail_home = "/opt/zmail";
 }
 
-my $ldap = Net::LDAP->new('ldapi://%2fopt%2fzimbra%2fopenldap%2fvar%2frun%2fldapi/') or die "$@";
+my $ldap = Net::LDAP->new('ldapi://%2fopt%2fzmail%2fopenldap%2fvar%2frun%2fldapi/') or die "$@";
 
 my $mesg = $ldap->bind("cn=config", password=>"$ldap_root_password");
 
@@ -75,7 +75,7 @@ my $size = $mesg->count;
 if ($size > 0) {
   my $dn=$mesg->entry(0)->dn;
   $mesg = $ldap->modify( "$dn",
-                          add =>{olcUniqueURI => 'ldap:///?zimbraId?sub'},
+                          add =>{olcUniqueURI => 'ldap:///?zmailId?sub'},
                      );
   $mesg->code && warn "failed to add entry: ", $mesg->error ;
 }

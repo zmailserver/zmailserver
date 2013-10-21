@@ -13,15 +13,15 @@
  * ***** END LICENSE BLOCK *****
  */
 
-package com.zimbra.cs.pop3;
+package org.zmail.cs.pop3;
 
-import com.zimbra.common.localconfig.LC;
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.common.stats.RealtimeStatsCallback;
-import com.zimbra.cs.stats.ZimbraPerf;
-import com.zimbra.cs.server.ProtocolHandler;
-import com.zimbra.cs.server.ServerThrottle;
-import com.zimbra.cs.server.TcpServer;
+import org.zmail.common.localconfig.LC;
+import org.zmail.common.service.ServiceException;
+import org.zmail.common.stats.RealtimeStatsCallback;
+import org.zmail.cs.stats.ZmailPerf;
+import org.zmail.cs.server.ProtocolHandler;
+import org.zmail.cs.server.ServerThrottle;
+import org.zmail.cs.server.TcpServer;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -30,7 +30,7 @@ public final class TcpPop3Server extends TcpServer implements Pop3Server, Realti
 
     public TcpPop3Server(Pop3Config config) throws ServiceException {
         super(config);
-        ZimbraPerf.addStatsCallback(this);
+        ZmailPerf.addStatsCallback(this);
         ServerThrottle.configureThrottle(config.getProtocol(), LC.pop3_throttle_ip_limit.intValue(), LC.pop3_throttle_acct_limit.intValue(), getThrottleSafeHosts());
     }
 
@@ -57,11 +57,11 @@ public final class TcpPop3Server extends TcpServer implements Pop3Server, Realti
     public Map<String, Object> getStatData() {
         Map<String, Object> data = new HashMap<String, Object>();
         if (getConfig().isSslEnabled()) {
-            data.put(ZimbraPerf.RTS_POP_SSL_CONN, numActiveHandlers());
-            data.put(ZimbraPerf.RTS_POP_SSL_THREADS, numThreads());
+            data.put(ZmailPerf.RTS_POP_SSL_CONN, numActiveHandlers());
+            data.put(ZmailPerf.RTS_POP_SSL_THREADS, numThreads());
         } else {
-            data.put(ZimbraPerf.RTS_POP_CONN, numActiveHandlers());
-            data.put(ZimbraPerf.RTS_POP_THREADS, numThreads());
+            data.put(ZmailPerf.RTS_POP_CONN, numActiveHandlers());
+            data.put(ZmailPerf.RTS_POP_THREADS, numThreads());
         }
         return data;
     }

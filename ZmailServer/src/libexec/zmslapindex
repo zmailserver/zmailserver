@@ -16,20 +16,20 @@
 ulimit -n 32768
 ulimit -c unlimited
 ulimit -v unlimited
-export LD_PRELOAD=/opt/zimbra/tcmalloc/lib/libtcmalloc_minimal.so
+export LD_PRELOAD=/opt/zmail/tcmalloc/lib/libtcmalloc_minimal.so
 
 umask 027
-source /opt/zimbra/bin/zmshutil || exit 1
+source /opt/zmail/bin/zmshutil || exit 1
 zmsetvars \
-	zimbra_home 
+	zmail_home 
 
-if [ ! -x /opt/zimbra/openldap/sbin/slapindex ]; then
+if [ ! -x /opt/zmail/openldap/sbin/slapindex ]; then
 	exit 0
 fi
 
 u=`id -un`
-if [ $u != ${zimbra_user} ]; then
-    echo "Error: must be run as ${zimbra_user} user"
+if [ $u != ${zmail_user} ]; then
+    echo "Error: must be run as ${zmail_user} user"
     exit 1
 fi
 
@@ -55,13 +55,13 @@ else
 fi
 
 if [ x$CONFIG = "xyes" ]; then
-	${zimbra_home}/openldap/sbin/slapindex -q -F ${zimbra_home}/data/ldap/config -n 0 $KEY
+	${zmail_home}/openldap/sbin/slapindex -q -F ${zmail_home}/data/ldap/config -n 0 $KEY
 	RETVAL=$?
 elif [ x$ALOG = "xyes" ]; then
-	${zimbra_home}/openldap/sbin/slapindex -q -F ${zimbra_home}/data/ldap/config -b "cn=accesslog" $KEY
+	${zmail_home}/openldap/sbin/slapindex -q -F ${zmail_home}/data/ldap/config -b "cn=accesslog" $KEY
 	RETVAL=$?
 else
-	${zimbra_home}/openldap/sbin/slapindex -q -F ${zimbra_home}/data/ldap/config -b "" $KEY
+	${zmail_home}/openldap/sbin/slapindex -q -F ${zmail_home}/data/ldap/config -b "" $KEY
 	RETVAL=$?
 fi
 

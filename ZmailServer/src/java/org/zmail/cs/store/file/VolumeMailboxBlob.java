@@ -12,10 +12,10 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.store.file;
+package org.zmail.cs.store.file;
 
-import com.zimbra.cs.mailbox.Mailbox;
-import com.zimbra.cs.store.MailboxBlob;
+import org.zmail.cs.mailbox.Mailbox;
+import org.zmail.cs.store.MailboxBlob;
 
 public class VolumeMailboxBlob extends MailboxBlob {
     private final VolumeBlob blob;

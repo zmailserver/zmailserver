@@ -17,7 +17,7 @@
  * Created on Oct 26, 2005
  *
  */
-package com.zimbra.cs.extension;
+package org.zmail.cs.extension;
 
 import java.io.IOException;
 
@@ -25,7 +25,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.zimbra.common.service.ServiceException;
+import org.zmail.common.service.ServiceException;
 
 /**
  * HTTP handler for an extension. HTTP GET and POST requests are dispatched to the handler
@@ -37,7 +37,7 @@ import com.zimbra.common.service.ServiceException;
  */
 public abstract class ExtensionHttpHandler {
 
-    protected ZimbraExtension mExtension;
+    protected ZmailExtension mExtension;
     
     /**
      * The path under which the handler is registered for an extension.
@@ -85,7 +85,7 @@ public abstract class ExtensionHttpHandler {
      * @param ext the extension to which this handler belongs
      * @throws ServiceException
      */
-    public void init(ZimbraExtension ext) throws ServiceException {
+    public void init(ZmailExtension ext) throws ServiceException {
         mExtension = ext;
     }
     

@@ -12,7 +12,7 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.db;
+package org.zmail.cs.db;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -24,13 +24,13 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.common.util.ListUtil;
-import com.zimbra.common.util.StringUtil;
-import com.zimbra.common.util.ZimbraLog;
-import com.zimbra.cs.account.DataSource;
-import com.zimbra.cs.db.DbPool.DbConnection;
-import com.zimbra.cs.mailbox.Mailbox;
+import org.zmail.common.service.ServiceException;
+import org.zmail.common.util.ListUtil;
+import org.zmail.common.util.StringUtil;
+import org.zmail.common.util.ZmailLog;
+import org.zmail.cs.account.DataSource;
+import org.zmail.cs.db.DbPool.DbConnection;
+import org.zmail.cs.mailbox.Mailbox;
 
 public class DbPop3Message {
 
@@ -73,7 +73,7 @@ public class DbPop3Message {
      */
     public static void deleteUids(Mailbox mbox, String dataSourceId)
     throws ServiceException {
-        ZimbraLog.mailbox.debug("Deleting UID's for %s", dataSourceId);
+        ZmailLog.mailbox.debug("Deleting UID's for %s", dataSourceId);
 
         DbConnection conn = null;
         PreparedStatement stmt = null;
@@ -88,7 +88,7 @@ public class DbPop3Message {
             stmt.setString(pos++, dataSourceId);
             int numRows = stmt.executeUpdate();
             conn.commit();
-            ZimbraLog.mailbox.debug("Deleted %d UID's", numRows);
+            ZmailLog.mailbox.debug("Deleted %d UID's", numRows);
         } catch (SQLException e) {
             throw ServiceException.FAILURE("Unable to delete UID's", e);
         } finally {
@@ -107,7 +107,7 @@ public class DbPop3Message {
         PreparedStatement stmt = null;
         ResultSet rs = null;
 
-        ZimbraLog.mailbox.debug("get all POP mappings for %s", dataSourceId);
+        ZmailLog.mailbox.debug("get all POP mappings for %s", dataSourceId);
         try {
             conn = DbPool.getConnection(mbox);
             stmt = conn.prepareStatement(
@@ -126,7 +126,7 @@ public class DbPop3Message {
             DbPool.closeStatement(stmt);
             DbPool.quietClose(conn);
         }
-        ZimbraLog.mailbox.debug("Found %d POP mappings for %s", mappings.size(),
+        ZmailLog.mailbox.debug("Found %d POP mappings for %s", mappings.size(),
            dataSourceId);
         return mappings;
     }
@@ -138,7 +138,7 @@ public class DbPop3Message {
     public static Set<String> getMatchingUids(Mailbox mbox, DataSource ds,
                                               Collection<String> uids)
     throws ServiceException {
-        ZimbraLog.mailbox.debug("%s: looking for uids that match a set of size %d", ds, uids.size());
+        ZmailLog.mailbox.debug("%s: looking for uids that match a set of size %d", ds, uids.size());
 
         List<List<String>> splitIds = ListUtil.split(uids, Db.getINClauseBatchSize());
         Set<String> matchingUids = new HashSet<String>();
@@ -174,7 +174,7 @@ public class DbPop3Message {
             DbPool.quietClose(conn);
         }
 
-        ZimbraLog.mailbox.debug("Found %d matching UID's", matchingUids.size());
+        ZmailLog.mailbox.debug("Found %d matching UID's", matchingUids.size());
         return matchingUids;
     }
 

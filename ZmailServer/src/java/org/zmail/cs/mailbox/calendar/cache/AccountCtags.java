@@ -13,7 +13,7 @@
  * ***** END LICENSE BLOCK *****
  */
 
-package com.zimbra.cs.mailbox.calendar.cache;
+package org.zmail.cs.mailbox.calendar.cache;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -21,7 +21,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import com.zimbra.cs.mailbox.Mailbox;
+import org.zmail.cs.mailbox.Mailbox;
 
 // for CalDAV
 // AccountCtags is a convenience class that aggregates all ctag-related info for an account.

@@ -12,7 +12,7 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.qa.unittest.prov.soap;
+package org.zmail.qa.unittest.prov.soap;
 
 import static org.junit.Assert.*;
 
@@ -22,26 +22,26 @@ import org.junit.AfterClass;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
-import com.zimbra.common.mailbox.ContactConstants;
-import com.zimbra.common.soap.SoapProtocol;
-import com.zimbra.common.soap.SoapTransport;
-import com.zimbra.cs.account.Account;
-import com.zimbra.cs.account.Domain;
-import com.zimbra.cs.account.Provisioning;
-import com.zimbra.cs.mailbox.ContactGroup;
-import com.zimbra.qa.QA.Bug;
-import com.zimbra.soap.account.message.SearchGalRequest;
-import com.zimbra.soap.account.message.SearchGalResponse;
-import com.zimbra.soap.account.type.ContactInfo;
-import com.zimbra.soap.mail.message.CreateContactRequest;
-import com.zimbra.soap.mail.message.CreateContactResponse;
-import com.zimbra.soap.mail.message.GetContactsRequest;
-import com.zimbra.soap.mail.message.GetContactsResponse;
-import com.zimbra.soap.mail.type.ContactGroupMember;
-import com.zimbra.soap.mail.type.ContactSpec;
-import com.zimbra.soap.mail.type.NewContactAttr;
-import com.zimbra.soap.mail.type.NewContactGroupMember;
-import com.zimbra.soap.type.Id;
+import org.zmail.common.mailbox.ContactConstants;
+import org.zmail.common.soap.SoapProtocol;
+import org.zmail.common.soap.SoapTransport;
+import org.zmail.cs.account.Account;
+import org.zmail.cs.account.Domain;
+import org.zmail.cs.account.Provisioning;
+import org.zmail.cs.mailbox.ContactGroup;
+import org.zmail.qa.QA.Bug;
+import org.zmail.soap.account.message.SearchGalRequest;
+import org.zmail.soap.account.message.SearchGalResponse;
+import org.zmail.soap.account.type.ContactInfo;
+import org.zmail.soap.mail.message.CreateContactRequest;
+import org.zmail.soap.mail.message.CreateContactResponse;
+import org.zmail.soap.mail.message.GetContactsRequest;
+import org.zmail.soap.mail.message.GetContactsResponse;
+import org.zmail.soap.mail.type.ContactGroupMember;
+import org.zmail.soap.mail.type.ContactSpec;
+import org.zmail.soap.mail.type.NewContactAttr;
+import org.zmail.soap.mail.type.NewContactGroupMember;
+import org.zmail.soap.type.Id;
 
 public class TestContactGroup extends SoapTest {
     private static SoapProvTestUtil provUtil;
@@ -119,9 +119,9 @@ public class TestContactGroup extends SoapTest {
         getContactsReq.setDerefGroupMember(Boolean.TRUE);
         GetContactsResponse getContactsResp = invokeJaxb(transport, getContactsReq, SoapProtocol.SoapJS);
         
-        List<com.zimbra.soap.mail.type.ContactInfo> contacts = getContactsResp.getContacts();
+        List<org.zmail.soap.mail.type.ContactInfo> contacts = getContactsResp.getContacts();
         assertEquals(1, contacts.size());
-        com.zimbra.soap.mail.type.ContactInfo contact = contacts.get(0);
+        org.zmail.soap.mail.type.ContactInfo contact = contacts.get(0);
         List<ContactGroupMember> members = contact.getContactGroupMembers();
         assertEquals(1, members.size());
         

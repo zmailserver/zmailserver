@@ -12,12 +12,12 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.store.file;
+package org.zmail.cs.store.file;
 
 import java.io.IOException;
 
-import com.zimbra.cs.mailbox.Mailbox;
-import com.zimbra.cs.store.StagedBlob;
+import org.zmail.cs.mailbox.Mailbox;
+import org.zmail.cs.store.StagedBlob;
 
 public class VolumeStagedBlob extends StagedBlob {
     private VolumeBlob mLocalBlob;

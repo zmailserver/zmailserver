@@ -1,2 +1,2 @@
-Zimbra-Extension-Class: com.zimbra.examples.extns.samlprovider.SamlAuthProviderExtension
+Zmail-Extension-Class: org.zmail.examples.extns.samlprovider.SamlAuthProviderExtension
 

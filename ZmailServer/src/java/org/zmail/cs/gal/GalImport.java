@@ -12,7 +12,7 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.gal;
+package org.zmail.cs.gal;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -24,23 +24,23 @@ import java.util.Map;
 
 import org.json.JSONException;
 
-import com.zimbra.common.mailbox.ContactConstants;
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.common.util.DateUtil;
-import com.zimbra.common.util.ZimbraLog;
-import com.zimbra.cs.account.DataSource;
-import com.zimbra.cs.account.GalContact;
-import com.zimbra.cs.account.Provisioning;
-import com.zimbra.cs.account.Provisioning.SearchGalResult;
-import com.zimbra.cs.datasource.MailItemImport;
-import com.zimbra.cs.db.DbDataSource;
-import com.zimbra.cs.db.DbDataSource.DataSourceItem;
-import com.zimbra.cs.mailbox.Mailbox;
-import com.zimbra.cs.mailbox.Contact;
-import com.zimbra.cs.mailbox.MailItem;
-import com.zimbra.cs.mailbox.Metadata;
-import com.zimbra.cs.mailbox.OperationContext;
-import com.zimbra.cs.mime.ParsedContact;
+import org.zmail.common.mailbox.ContactConstants;
+import org.zmail.common.service.ServiceException;
+import org.zmail.common.util.DateUtil;
+import org.zmail.common.util.ZmailLog;
+import org.zmail.cs.account.DataSource;
+import org.zmail.cs.account.GalContact;
+import org.zmail.cs.account.Provisioning;
+import org.zmail.cs.account.Provisioning.SearchGalResult;
+import org.zmail.cs.datasource.MailItemImport;
+import org.zmail.cs.db.DbDataSource;
+import org.zmail.cs.db.DbDataSource.DataSourceItem;
+import org.zmail.cs.mailbox.Mailbox;
+import org.zmail.cs.mailbox.Contact;
+import org.zmail.cs.mailbox.MailItem;
+import org.zmail.cs.mailbox.Metadata;
+import org.zmail.cs.mailbox.OperationContext;
+import org.zmail.cs.mime.ParsedContact;
 
 public class GalImport extends MailItemImport {
 
@@ -72,8 +72,8 @@ public class GalImport extends MailItemImport {
         DataSource ds = getDataSource();
         Map<String,Object> attrs = new HashMap<String,Object>();
         String attr = success ?
-                Provisioning.A_zimbraGalLastSuccessfulSyncTimestamp :
-                Provisioning.A_zimbraGalLastFailedSyncTimestamp;
+                Provisioning.A_zmailGalLastSuccessfulSyncTimestamp :
+                Provisioning.A_zmailGalLastFailedSyncTimestamp;
         attrs.put(attr, DateUtil.toGeneralizedTime(now));
         Provisioning.getInstance().modifyDataSource(ds.getAccount(), ds.getId(), attrs);
     }
@@ -100,7 +100,7 @@ public class GalImport extends MailItemImport {
             searchGal(syncToken, result, true);
         } catch (Exception e) {
             setStatus(false);
-            ZimbraLog.gal.error("Error executing gal search", e);
+            ZmailLog.gal.error("Error executing gal search", e);
             return;
         }
 
@@ -121,7 +121,7 @@ public class GalImport extends MailItemImport {
         try {
             mbox.delete(octxt, deletedIds, MailItem.Type.CONTACT, null);
         } catch (ServiceException e) {
-            ZimbraLog.gal.warn("Ignoring error deleting gal contacts", e);
+            ZmailLog.gal.warn("Ignoring error deleting gal contacts", e);
         }
         DbDataSource.deleteMappings(getDataSource(), deleted);
         mbox.index.optimize();
@@ -129,7 +129,7 @@ public class GalImport extends MailItemImport {
     }
 
     private void searchGal(String syncToken, SearchGalResult result, boolean fetchGroupMembers) throws ServiceException {
-        ZimbraLog.gal.debug("searchGal: "+syncToken);
+        ZmailLog.gal.debug("searchGal: "+syncToken);
         DataSource ds = getDataSource();
         GalSearchParams params = new GalSearchParams(ds);
         params.setGalResult(result);
@@ -142,11 +142,11 @@ public class GalImport extends MailItemImport {
         Provisioning.getInstance().searchGal(params);
     }
     private static String[] ZIMBRA_ATTRS = {
-        "zimbraAccountCalendarUserType",
-        "zimbraCalResType",
-        "zimbraCalResLocationDisplayName",
-        "zimbraCalResCapacity",
-        "zimbraCalResContactEmail"
+        "zmailAccountCalendarUserType",
+        "zmailCalResType",
+        "zmailCalResLocationDisplayName",
+        "zmailCalResCapacity",
+        "zmailCalResContactEmail"
     };
 
     private class GalSearchVisitor implements GalContact.Visitor {
@@ -187,11 +187,11 @@ public class GalImport extends MailItemImport {
             String id = contact.getId();
             mappings.remove(id);
             attrs.put(ContactConstants.A_dn, id);
-            ZimbraLog.gal.debug("processing gal contact "+id);
+            ZmailLog.gal.debug("processing gal contact "+id);
             DataSourceItem dsItem = DbDataSource.getReverseMapping(getDataSource(), id);
             addFileAsStr(attrs);
             if (dsItem.itemId == 0) {
-                ZimbraLog.gal.debug("creating new contact "+id);
+                ZmailLog.gal.debug("creating new contact "+id);
                 dsItem.remoteId = id;
                 ParsedContact pc = new ParsedContact(attrs);
                 dsItem.itemId = mbox.createContact(octxt, pc, fid, null).getId();
@@ -203,15 +203,15 @@ public class GalImport extends MailItemImport {
                 String syncDate = mboxContact.get(MODIFY_TIMESTAMP);
                 String modifiedDate = (String) contact.getAttrs().get(MODIFY_TIMESTAMP);
                 if (!force && syncDate != null && syncDate.equals(modifiedDate)) {
-                    ZimbraLog.gal.debug("gal contact %s has not been modified", id);
+                    ZmailLog.gal.debug("gal contact %s has not been modified", id);
                     return;
                 }
                 if (!force && allFieldsMatch(attrs, mboxContact.getAllFields())) {
-                    ZimbraLog.gal.debug("no field has changed in gal contact %s", id);
+                    ZmailLog.gal.debug("no field has changed in gal contact %s", id);
                     return;
                 }
 
-                ZimbraLog.gal.debug("modifying contact "+id);
+                ZmailLog.gal.debug("modifying contact "+id);
                 ParsedContact pc = new ParsedContact(attrs);
                 mbox.modifyContact(octxt, dsItem.itemId, pc);
             }
@@ -225,7 +225,7 @@ public class GalImport extends MailItemImport {
             HashSet<String> ignoredKeys = new HashSet<String>();
             // always ignore the modified timestamp when comparing attributes.
             ignoredKeys.add(MODIFY_TIMESTAMP);
-            Collections.addAll(ignoredKeys, dataSource.getMultiAttr(Provisioning.A_zimbraGalSyncIgnoredAttributes));
+            Collections.addAll(ignoredKeys, dataSource.getMultiAttr(Provisioning.A_zmailGalSyncIgnoredAttributes));
             for (Map.Entry<String,Object> entry : ldapContact.entrySet()) {
                 String key = entry.getKey();
                 if (ignoredKeys.contains(key))

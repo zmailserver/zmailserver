@@ -13,21 +13,21 @@
  * ***** END LICENSE BLOCK *****
  */
 
-package com.zimbra.qa.unittest;
+package org.zmail.qa.unittest;
 
 import java.io.IOException;
 import java.net.Socket;
 import java.util.List;
 
 import com.google.common.collect.Lists;
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.common.util.StringUtil;
-import com.zimbra.cs.account.Provisioning;
-import com.zimbra.cs.account.Server;
-import com.zimbra.cs.account.soap.SoapProvisioning;
-import com.zimbra.cs.stats.ZimbraPerf;
-import com.zimbra.soap.admin.message.GetServerStatsRequest;
-import com.zimbra.soap.admin.message.GetServerStatsResponse;
+import org.zmail.common.service.ServiceException;
+import org.zmail.common.util.StringUtil;
+import org.zmail.cs.account.Provisioning;
+import org.zmail.cs.account.Server;
+import org.zmail.cs.account.soap.SoapProvisioning;
+import org.zmail.cs.stats.ZmailPerf;
+import org.zmail.soap.admin.message.GetServerStatsRequest;
+import org.zmail.soap.admin.message.GetServerStatsResponse;
 
 import junit.framework.TestCase;
 
@@ -49,9 +49,9 @@ extends TestCase {
     public void testThreadsAndConnections()
     throws Exception {
         Server server = Provisioning.getInstance().getLocalServer();
-        verifyThreadsAndConnections(ZimbraPerf.RTS_POP_THREADS, ZimbraPerf.RTS_POP_CONN, server.getPop3BindPort());
-        verifyThreadsAndConnections(ZimbraPerf.RTS_IMAP_THREADS, ZimbraPerf.RTS_IMAP_CONN, server.getImapBindPort());
-        verifyThreadsAndConnections(ZimbraPerf.RTS_LMTP_THREADS, ZimbraPerf.RTS_LMTP_CONN, server.getLmtpBindPort());
+        verifyThreadsAndConnections(ZmailPerf.RTS_POP_THREADS, ZmailPerf.RTS_POP_CONN, server.getPop3BindPort());
+        verifyThreadsAndConnections(ZmailPerf.RTS_IMAP_THREADS, ZmailPerf.RTS_IMAP_CONN, server.getImapBindPort());
+        verifyThreadsAndConnections(ZmailPerf.RTS_LMTP_THREADS, ZmailPerf.RTS_LMTP_CONN, server.getLmtpBindPort());
     }
     
     private void verifyThreadsAndConnections(String threadStatName, String connStatName, int port)

@@ -12,14 +12,14 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.doc;
+package org.zmail.cs.doc;
 
 import java.io.InputStream;
 import java.io.IOException;
 import java.util.Collection;
 import java.util.ArrayList;
 
-import com.zimbra.common.util.ByteUtil;
+import org.zmail.common.util.ByteUtil;
 
 /*************************************************************************
  *

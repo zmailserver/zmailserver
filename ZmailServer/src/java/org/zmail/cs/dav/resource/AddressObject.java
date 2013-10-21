@@ -12,7 +12,7 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.dav.resource;
+package org.zmail.cs.dav.resource;
 
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
@@ -29,34 +29,34 @@ import org.dom4j.Element;
 import org.json.JSONException;
 
 import com.google.common.io.Closeables;
-import com.zimbra.common.mailbox.ContactConstants;
-import com.zimbra.common.mime.MimeConstants;
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.common.util.ByteUtil;
-import com.zimbra.common.util.HttpUtil;
-import com.zimbra.common.util.ZimbraLog;
-import com.zimbra.cs.account.Account;
-import com.zimbra.cs.account.Provisioning;
-import com.zimbra.cs.dav.DavContext;
-import com.zimbra.cs.dav.DavElements;
-import com.zimbra.cs.dav.DavException;
-import com.zimbra.cs.dav.DavProtocol;
-import com.zimbra.cs.dav.property.CardDavProperty;
-import com.zimbra.cs.dav.property.ResourceProperty;
-import com.zimbra.cs.index.ContactHit;
-import com.zimbra.cs.index.SortBy;
-import com.zimbra.cs.index.ZimbraHit;
-import com.zimbra.cs.index.ZimbraQueryResults;
-import com.zimbra.cs.mailbox.Contact;
-import com.zimbra.cs.mailbox.ContactGroup;
-import com.zimbra.cs.mailbox.ContactGroup.Member;
-import com.zimbra.cs.mailbox.Folder;
-import com.zimbra.cs.mailbox.MailItem;
-import com.zimbra.cs.mailbox.Mailbox;
-import com.zimbra.cs.mailbox.MailboxManager;
-import com.zimbra.cs.service.FileUploadServlet;
-import com.zimbra.cs.service.formatter.VCard;
-import com.zimbra.cs.service.util.ItemId;
+import org.zmail.common.mailbox.ContactConstants;
+import org.zmail.common.mime.MimeConstants;
+import org.zmail.common.service.ServiceException;
+import org.zmail.common.util.ByteUtil;
+import org.zmail.common.util.HttpUtil;
+import org.zmail.common.util.ZmailLog;
+import org.zmail.cs.account.Account;
+import org.zmail.cs.account.Provisioning;
+import org.zmail.cs.dav.DavContext;
+import org.zmail.cs.dav.DavElements;
+import org.zmail.cs.dav.DavException;
+import org.zmail.cs.dav.DavProtocol;
+import org.zmail.cs.dav.property.CardDavProperty;
+import org.zmail.cs.dav.property.ResourceProperty;
+import org.zmail.cs.index.ContactHit;
+import org.zmail.cs.index.SortBy;
+import org.zmail.cs.index.ZmailHit;
+import org.zmail.cs.index.ZmailQueryResults;
+import org.zmail.cs.mailbox.Contact;
+import org.zmail.cs.mailbox.ContactGroup;
+import org.zmail.cs.mailbox.ContactGroup.Member;
+import org.zmail.cs.mailbox.Folder;
+import org.zmail.cs.mailbox.MailItem;
+import org.zmail.cs.mailbox.Mailbox;
+import org.zmail.cs.mailbox.MailboxManager;
+import org.zmail.cs.service.FileUploadServlet;
+import org.zmail.cs.service.formatter.VCard;
+import org.zmail.cs.service.util.ItemId;
 
 public class AddressObject extends MailItemResource {
 
@@ -93,7 +93,7 @@ public class AddressObject extends MailItemResource {
         try {
             return new ByteArrayInputStream(toVCard(ctxt).getBytes("UTF-8"));
         } catch (ServiceException e) {
-            ZimbraLog.dav.warn("can't get content for Contact %d", mId, e);
+            ZmailLog.dav.warn("can't get content for Contact %d", mId, e);
         }
         return null;
     }
@@ -139,7 +139,7 @@ public class AddressObject extends MailItemResource {
                             }
                         }
                     } catch (JSONException e) {
-                        ZimbraLog.dav.debug("can't parse xprop %s", memberList, e);
+                        ZmailLog.dav.debug("can't parse xprop %s", memberList, e);
                     }
                 }
 
@@ -150,7 +150,7 @@ public class AddressObject extends MailItemResource {
                 xprops.remove(XABSMEMBER);
                 vcard.fields.put(ContactConstants.A_vCardXProps, Contact.encodeXProps(xprops));
             } catch (ServiceException e) {
-                ZimbraLog.dav.debug("can't parse xprop %s", memberList, e);
+                ZmailLog.dav.debug("can't parse xprop %s", memberList, e);
             }
         }
     }
@@ -162,7 +162,7 @@ public class AddressObject extends MailItemResource {
         try {
             contactGroup = ContactGroup.init(contact.get(ContactConstants.A_groupMember));
         } catch (ServiceException e) {
-            ZimbraLog.dav.warn("can't get group members for Contact %d", contact.getId(), e);
+            ZmailLog.dav.warn("can't get group members for Contact %d", contact.getId(), e);
         }
         // get the x-props first.
         Map<String, String> xprops = contact.getXProps();
@@ -183,9 +183,9 @@ public class AddressObject extends MailItemResource {
                 }            
                 xprops.put(XABSMEMBER, Contact.encodeMultiValueAttr(memberList.toArray(new String[0])));
             } catch (JSONException e) {
-                ZimbraLog.dav.warn("can't create group members xprops for Contact %d", contact.getId(), e);
+                ZmailLog.dav.warn("can't create group members xprops for Contact %d", contact.getId(), e);
             } catch (ServiceException e) {
-                ZimbraLog.dav.warn("can't create group members xprops for Contact %d", contact.getId(), e);
+                ZmailLog.dav.warn("can't create group members xprops for Contact %d", contact.getId(), e);
             }
         }
         contact.setXProps(xprops);
@@ -232,7 +232,7 @@ public class AddressObject extends MailItemResource {
                     String ifnonematch = ctxt.getRequest().getHeader(DavProtocol.HEADER_IF_NONE_MATCH);
                     if (ifnonematch == null)
                         throw new DavException("item does not exists", HttpServletResponse.SC_CONFLICT);
-                    // Convert Apple contact group to Zimbra contact group.
+                    // Convert Apple contact group to Zmail contact group.
                     constructContactGroupFromAppleXProps(ctxt, ownerAccount, vcard, null, where.getId());
                     c = mbox.createContact(ctxt.getOperationContext(), vcard.asParsedContact(), where.mId, null);
                     res = new AddressObject(ctxt, c);
@@ -289,20 +289,20 @@ public class AddressObject extends MailItemResource {
         if (id > 0) {
             item = mbox.getContactById(ctxt.getOperationContext(), Integer.parseInt(uid.substring(index+1)));
         } else {
-            ZimbraQueryResults zqr = null;
+            ZmailQueryResults zqr = null;
             StringBuilder query = new StringBuilder();
             query.append("#").append(ContactConstants.A_vCardUID).append(":");
             // escape the double quotes in uid and surround with double quotes
             query.append("\"").append(uid.replace("\"", "\\\"")).append("\"");
             query.append(" OR ").append("#").append(ContactConstants.A_vCardURL).append(":");
             query.append("\"").append(uid.replace("\"", "\\\"")).append("\"");
-            ZimbraLog.dav.debug("query %s", query.toString());
+            ZmailLog.dav.debug("query %s", query.toString());
             try {
                 zqr = mbox.index.search(ctxt.getOperationContext(), query.toString(),
                         EnumSet.of(MailItem.Type.CONTACT), SortBy.NAME_ASC, 10);
                 // There could be multiple contacts with the same UID from different collections.
                 while (zqr.hasNext()) {
-                    ZimbraHit hit = zqr.getNext();
+                    ZmailHit hit = zqr.getNext();
                     if (hit instanceof ContactHit) {
                         item = ((ContactHit)hit).getContact();
                         if (folderId < 0)
@@ -313,7 +313,7 @@ public class AddressObject extends MailItemResource {
                     }
                 }
             } catch (Exception e) {
-                ZimbraLog.dav.error("can't search for: uid=%s", uid, e);
+                ZmailLog.dav.error("can't search for: uid=%s", uid, e);
             } finally {
                 Closeables.closeQuietly(zqr);
             }

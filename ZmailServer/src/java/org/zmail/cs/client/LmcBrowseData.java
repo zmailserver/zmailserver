@@ -14,7 +14,7 @@
  */
 
 
-package com.zimbra.cs.client;
+package org.zmail.cs.client;
 
 
 public class LmcBrowseData {

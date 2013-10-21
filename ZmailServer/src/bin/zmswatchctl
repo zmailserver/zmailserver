@@ -14,20 +14,20 @@
 # ***** END LICENSE BLOCK *****
 # 
 
-if [ x`whoami` != xzimbra ]; then
-    echo Error: must be run as zimbra user
+if [ x`whoami` != xzmail ]; then
+    echo Error: must be run as zmail user
   exit 1
 fi
 
 source `dirname $0`/zmshutil || exit 1
 zmsetvars \
-    zimbra_home \
-    zimbra_tmp_directory \
-    zimbra_log_directory
+    zmail_home \
+    zmail_tmp_directory \
+    zmail_log_directory
 
-configfile=${zimbra_home}/conf/swatchrc
-pidfile=${zimbra_log_directory}/swatch.pid
-logfile=${zimbra_log_directory}/zmswatch.out
+configfile=${zmail_home}/conf/swatchrc
+pidfile=${zmail_log_directory}/swatch.pid
+logfile=${zmail_log_directory}/zmswatch.out
 pid=""
 
 getpid()
@@ -56,10 +56,10 @@ checkrunning()
 case "$1" in 
   start)
     if [ ! -f ${configfile} ]; then
-      if [ -x ${zimbra_home}/libexec/zmsnmpit ]; then
-        ${zimbra_home}/libexec/zmsnmpinit
+      if [ -x ${zmail_home}/libexec/zmsnmpit ]; then
+        ${zmail_home}/libexec/zmsnmpinit
       else 
-        # zimbra-snmp is likely not installed if the init script doesn't exist
+        # zmail-snmp is likely not installed if the init script doesn't exist
         # this prevents errors on logrotate
         exit 0
       fi
@@ -72,13 +72,13 @@ case "$1" in
       exit 0
     fi
 
-    if [ ! -d ${zimbra_tmp_directory} ]; then
-      mkdir -p ${zimbra_tmp_directory} > /dev/null 2>&1
+    if [ ! -d ${zmail_tmp_directory} ]; then
+      mkdir -p ${zmail_tmp_directory} > /dev/null 2>&1
     fi
 
-    ${zimbra_home}/libexec/swatch --config-file=${configfile} \
+    ${zmail_home}/libexec/swatch --config-file=${configfile} \
       --use-cpan-file-tail \
-      --script-dir=${zimbra_tmp_directory} -t /var/log/zimbra.log > $logfile 2>&1 &
+      --script-dir=${zmail_tmp_directory} -t /var/log/zmail.log > $logfile 2>&1 &
     pid=$!
     if [ "x$pid" != 'x' ]; then
       if [ -f $logfile ]; then

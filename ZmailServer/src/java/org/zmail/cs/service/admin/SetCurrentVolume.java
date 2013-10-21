@@ -13,34 +13,34 @@
  * ***** END LICENSE BLOCK *****
  */
 
-package com.zimbra.cs.service.admin;
+package org.zmail.cs.service.admin;
 
 import java.util.List;
 import java.util.Map;
 
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.cs.account.Provisioning;
-import com.zimbra.cs.account.accesscontrol.AdminRight;
-import com.zimbra.cs.account.accesscontrol.Rights.Admin;
-import com.zimbra.cs.volume.Volume;
-import com.zimbra.cs.volume.VolumeManager;
-import com.zimbra.common.soap.Element;
-import com.zimbra.soap.JaxbUtil;
-import com.zimbra.soap.ZimbraSoapContext;
-import com.zimbra.soap.admin.message.SetCurrentVolumeRequest;
-import com.zimbra.soap.admin.message.SetCurrentVolumeResponse;
+import org.zmail.common.service.ServiceException;
+import org.zmail.cs.account.Provisioning;
+import org.zmail.cs.account.accesscontrol.AdminRight;
+import org.zmail.cs.account.accesscontrol.Rights.Admin;
+import org.zmail.cs.volume.Volume;
+import org.zmail.cs.volume.VolumeManager;
+import org.zmail.common.soap.Element;
+import org.zmail.soap.JaxbUtil;
+import org.zmail.soap.ZmailSoapContext;
+import org.zmail.soap.admin.message.SetCurrentVolumeRequest;
+import org.zmail.soap.admin.message.SetCurrentVolumeResponse;
 
 public final class SetCurrentVolume extends AdminDocumentHandler {
 
     @Override
     public Element handle(Element req, Map<String, Object> ctx) throws ServiceException {
-        ZimbraSoapContext zsc = getZimbraSoapContext(ctx);
+        ZmailSoapContext zsc = getZmailSoapContext(ctx);
         return zsc.jaxbToElement(handle((SetCurrentVolumeRequest) JaxbUtil.elementToJaxb(req), ctx));
     }
 
     private SetCurrentVolumeResponse handle(SetCurrentVolumeRequest req, Map<String, Object> ctx)
             throws ServiceException {
-        ZimbraSoapContext zsc = getZimbraSoapContext(ctx);
+        ZmailSoapContext zsc = getZmailSoapContext(ctx);
         checkRight(zsc, ctx, Provisioning.getInstance().getLocalServer(), Admin.R_manageVolume);
 
         short volId = req.getId() > 0 ? req.getId() : Volume.ID_NONE;

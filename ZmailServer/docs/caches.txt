@@ -14,19 +14,19 @@ requires the index's word dictionary to be loaded from disk.  An open
 Reader requires a significant amount of server memory when open, so
 increasing the cache parameters will cause the server to use more
 memory.
-   Setting LC.zimbra_index_reader_lru_size to "0" disbles this cache.
+   Setting LC.zmail_index_reader_lru_size to "0" disbles this cache.
 Disabling the cache will cause a significant performance impact when
 searching large indexes.
            
 Owner:
-   tim@zimbra.com
+   tim@zmail.com
 
 Tunable Parameters:
-   LC.zimbra_index_reader_lru_size
+   LC.zmail_index_reader_lru_size
       max # IndexReaders cached simultaneously in system.  
-   LC.zimbra_index_reader_idle_flush_time
+   LC.zmail_index_reader_idle_flush_time
       time (seconds) to hold the IndexReader open before closing it.
-   LC.zimbra_index_reader_idle_sweep_frequency
+   LC.zmail_index_reader_idle_sweep_frequency
       frequency (seconds) to sweep the cache looking for readers to
       close.
 
@@ -46,17 +46,17 @@ this cache, causing all index writes to be written through to disk
 immediately.
 
 Owner:
-   tim@zimbra.com
+   tim@zmail.com
 
 Tunable Parameters:
-   LC.zimbra_index_max_uncommitted_operations
+   LC.zmail_index_max_uncommitted_operations
       Per-Index, the maximum # uncommitted documents we store in
       memory before flushing the index to disk.  Raising this # will
       improve performance, but will raise memory pressure on the server.
-   LC.zimbra_index_lru_size
+   LC.zmail_index_lru_size
       Number of index writers the server will allow to simultaneously
       be open.  
-   LC.zimbra_index_idle_flush_time
+   LC.zmail_index_idle_flush_time
       Idle timeout (seconds) to wait before flushing an open index
       writer.
       

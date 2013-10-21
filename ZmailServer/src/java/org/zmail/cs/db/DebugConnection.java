@@ -12,13 +12,13 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.db;
+package org.zmail.cs.db;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
-import com.zimbra.common.util.ZimbraLog;
+import org.zmail.common.util.ZmailLog;
 import org.apache.commons.dbcp.DelegatingConnection;
 
 class DebugConnection extends DelegatingConnection {
@@ -38,12 +38,12 @@ class DebugConnection extends DelegatingConnection {
     }
 
     public void commit() throws SQLException {
-        ZimbraLog.sqltrace.debug("commit, conn=" + mConn.hashCode());
+        ZmailLog.sqltrace.debug("commit, conn=" + mConn.hashCode());
         mConn.commit();
     }
 
     public void rollback() throws SQLException {
-        ZimbraLog.sqltrace.debug("rollback, conn=" + mConn.hashCode());
+        ZmailLog.sqltrace.debug("rollback, conn=" + mConn.hashCode());
         mConn.rollback();
     }
 

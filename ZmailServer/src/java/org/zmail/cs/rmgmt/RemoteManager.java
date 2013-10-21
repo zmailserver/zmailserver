@@ -12,7 +12,7 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.rmgmt;
+package org.zmail.cs.rmgmt;
 
 import java.io.File;
 import java.io.IOException;
@@ -24,20 +24,20 @@ import ch.ethz.ssh2.Connection;
 import ch.ethz.ssh2.Session;
 import ch.ethz.ssh2.StreamGobbler;
 
-import com.zimbra.cs.account.Provisioning;
-import com.zimbra.cs.account.Server;
-import com.zimbra.cs.util.Zimbra;
-import com.zimbra.common.account.Key;
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.common.util.ByteUtil;
-import com.zimbra.common.util.ZimbraLog;
-import com.zimbra.common.util.CliUtil;
+import org.zmail.cs.account.Provisioning;
+import org.zmail.cs.account.Server;
+import org.zmail.cs.util.Zmail;
+import org.zmail.common.account.Key;
+import org.zmail.common.service.ServiceException;
+import org.zmail.common.util.ByteUtil;
+import org.zmail.common.util.ZmailLog;
+import org.zmail.common.util.CliUtil;
 
 public class RemoteManager {
 
     private static final int DEFAULT_REMOTE_MANAGEMENT_PORT = 22;
-    private static final String DEFAULT_REMOTE_MANAGEMENT_USER = "zimbra";
-    private static final String DEFAULT_REMOTE_MANAGEMENT_COMMAND = "/opt/zimbra/libexec/zmrcd";
+    private static final String DEFAULT_REMOTE_MANAGEMENT_USER = "zmail";
+    private static final String DEFAULT_REMOTE_MANAGEMENT_COMMAND = "/opt/zmail/libexec/zmrcd";
 
     private File mPrivateKey;
 
@@ -48,31 +48,31 @@ public class RemoteManager {
     private final String mDescription;
 
     private RemoteManager(Server remote) throws ServiceException {
-        mHost = remote.getAttr(Provisioning.A_zimbraServiceHostname, null);
+        mHost = remote.getAttr(Provisioning.A_zmailServiceHostname, null);
         if (mHost == null) throw ServiceException.FAILURE("server " + remote.getName() + " does not have a service host name", null);
 
-        mPort = remote.getIntAttr(Provisioning.A_zimbraRemoteManagementPort, DEFAULT_REMOTE_MANAGEMENT_PORT);
-        if (mPort < 0) throw ServiceException.FAILURE("server " + remote.getName() + " has invalid " + Provisioning.A_zimbraRemoteManagementPort, null);
+        mPort = remote.getIntAttr(Provisioning.A_zmailRemoteManagementPort, DEFAULT_REMOTE_MANAGEMENT_PORT);
+        if (mPort < 0) throw ServiceException.FAILURE("server " + remote.getName() + " has invalid " + Provisioning.A_zmailRemoteManagementPort, null);
 
-        mUser = remote.getAttr(Provisioning.A_zimbraRemoteManagementUser, DEFAULT_REMOTE_MANAGEMENT_USER);
-        if (mUser == null) throw ServiceException.FAILURE("server " + remote.getName() + " has no " + Provisioning.A_zimbraRemoteManagementUser, null);
+        mUser = remote.getAttr(Provisioning.A_zmailRemoteManagementUser, DEFAULT_REMOTE_MANAGEMENT_USER);
+        if (mUser == null) throw ServiceException.FAILURE("server " + remote.getName() + " has no " + Provisioning.A_zmailRemoteManagementUser, null);
 
-        mShimCommand = remote.getAttr(Provisioning.A_zimbraRemoteManagementCommand, DEFAULT_REMOTE_MANAGEMENT_COMMAND);
-        if (mShimCommand == null) throw ServiceException.FAILURE("server " + remote.getName() + " has no " + Provisioning.A_zimbraRemoteManagementCommand, null);
+        mShimCommand = remote.getAttr(Provisioning.A_zmailRemoteManagementCommand, DEFAULT_REMOTE_MANAGEMENT_COMMAND);
+        if (mShimCommand == null) throw ServiceException.FAILURE("server " + remote.getName() + " has no " + Provisioning.A_zmailRemoteManagementCommand, null);
 
         Server local = Provisioning.getInstance().getLocalServer();
         String localName = local.getName();
-        String privateKey = local.getAttr(Provisioning.A_zimbraRemoteManagementPrivateKeyPath, null);
+        String privateKey = local.getAttr(Provisioning.A_zmailRemoteManagementPrivateKeyPath, null);
         if (privateKey == null) {
-            throw ServiceException.FAILURE("server " + localName + " has no " + Provisioning.A_zimbraRemoteManagementPrivateKeyPath, null);
+            throw ServiceException.FAILURE("server " + localName + " has no " + Provisioning.A_zmailRemoteManagementPrivateKeyPath, null);
         }
 
         File key = new File(privateKey);
         if (!key.exists()) {
-            throw ServiceException.FAILURE("server " + localName + " " + Provisioning.A_zimbraRemoteManagementPrivateKeyPath + " (" + key + ") does not exist", null);
+            throw ServiceException.FAILURE("server " + localName + " " + Provisioning.A_zmailRemoteManagementPrivateKeyPath + " (" + key + ") does not exist", null);
         }
         if (!key.canRead()) {
-            throw ServiceException.FAILURE("server " + localName + " " + Provisioning.A_zimbraRemoteManagementPrivateKeyPath + " (" + key + ") is not readable", null);
+            throw ServiceException.FAILURE("server " + localName + " " + Provisioning.A_zmailRemoteManagementPrivateKeyPath + " (" + key + ") is not readable", null);
         }
         mPrivateKey = key;
 
@@ -91,18 +91,18 @@ public class RemoteManager {
         Session s = null;
         try {
             s = getSession();
-            if (ZimbraLog.rmgmt.isDebugEnabled()) ZimbraLog.rmgmt.debug("(bg) executing shim command  '" + mShimCommand + "' on " + this);
+            if (ZmailLog.rmgmt.isDebugEnabled()) ZmailLog.rmgmt.debug("(bg) executing shim command  '" + mShimCommand + "' on " + this);
             s.execCommand(mShimCommand);
             OutputStream os = s.getStdin();
             String send = "HOST:" + mHost + " " + command;
-            if (ZimbraLog.rmgmt.isDebugEnabled()) ZimbraLog.rmgmt.debug("(bg) sending mgmt command '" + send + "' on " + this);
+            if (ZmailLog.rmgmt.isDebugEnabled()) ZmailLog.rmgmt.debug("(bg) sending mgmt command '" + send + "' on " + this);
             os.write(send.getBytes());
             os.close();
             InputStream stdout = new StreamGobbler(s.getStdout());
             InputStream stderr = new StreamGobbler(s.getStderr());
             handler.read(stdout, stderr);
         } catch (OutOfMemoryError e) {
-            Zimbra.halt("out of memory", e);
+            Zmail.halt("out of memory", e);
         } catch (Throwable t) {
             handler.error(t);
         } finally {
@@ -129,11 +129,11 @@ public class RemoteManager {
         Session s = null;
         try {
             s = getSession();
-            if (ZimbraLog.rmgmt.isDebugEnabled()) ZimbraLog.rmgmt.debug("executing shim command  '" + mShimCommand + "' on " + this);
+            if (ZmailLog.rmgmt.isDebugEnabled()) ZmailLog.rmgmt.debug("executing shim command  '" + mShimCommand + "' on " + this);
             s.execCommand(mShimCommand);
             OutputStream os = s.getStdin();
             String send = "HOST:" + mHost + " " + command;
-            if (ZimbraLog.rmgmt.isDebugEnabled()) ZimbraLog.rmgmt.debug("sending mgmt command '" + send + "' on " + this);
+            if (ZmailLog.rmgmt.isDebugEnabled()) ZmailLog.rmgmt.debug("sending mgmt command '" + send + "' on " + this);
             os.write(send.getBytes());
             os.close();
 

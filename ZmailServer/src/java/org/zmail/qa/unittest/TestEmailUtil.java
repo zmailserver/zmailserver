@@ -13,7 +13,7 @@
  * ***** END LICENSE BLOCK *****
  */
 
-package com.zimbra.qa.unittest;
+package org.zmail.qa.unittest;
 
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
@@ -22,8 +22,8 @@ import javax.mail.internet.InternetAddress;
 
 import junit.framework.TestCase;
 
-import com.zimbra.common.util.EmailUtil;
-import com.zimbra.cs.mime.Mime;
+import org.zmail.common.util.EmailUtil;
+import org.zmail.cs.mime.Mime;
 
 /**
  * @author bburtin
@@ -35,10 +35,10 @@ public class TestEmailUtil extends TestCase
         assertNull(EmailUtil.getLocalPartAndDomain("foo@"));
         assertNull(EmailUtil.getLocalPartAndDomain("@foo"));
         
-        String[] parts = EmailUtil.getLocalPartAndDomain("jspiccoli@example.zimbra.com");
+        String[] parts = EmailUtil.getLocalPartAndDomain("jspiccoli@example.zmail.com");
         assertNotNull(parts);
         assertEquals("jspiccoli", parts[0]);
-        assertEquals("example.zimbra.com", parts[1]);
+        assertEquals("example.zmail.com", parts[1]);
     }
     
     /**
@@ -65,7 +65,7 @@ public class TestEmailUtil extends TestCase
      */
     public void testParseAddressHeader()
     throws Exception {
-        Mime.parseAddressHeader("(Test) <djoe@zimbra.com>,djoe@zimbra.com (Test)");
+        Mime.parseAddressHeader("(Test) <djoe@zmail.com>,djoe@zmail.com (Test)");
     }
     
     private boolean isRfc822Message(String content)

@@ -13,7 +13,7 @@
  * ***** END LICENSE BLOCK *****
  */
 
-package com.zimbra.soap;
+package org.zmail.soap;
 
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
@@ -27,41 +27,41 @@ import javax.xml.stream.XMLStreamReader;
 
 import org.eclipse.jetty.continuation.ContinuationSupport;
 
-import com.zimbra.common.localconfig.LC;
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.common.soap.Element;
-import com.zimbra.common.soap.HeaderConstants;
-import com.zimbra.common.soap.MailConstants;
-import com.zimbra.common.soap.SoapFaultException;
-import com.zimbra.common.soap.SoapParseException;
-import com.zimbra.common.soap.SoapProtocol;
-import com.zimbra.common.soap.SoapTransport;
-import com.zimbra.common.soap.XmlParseException;
-import com.zimbra.common.soap.ZimbraNamespace;
-import com.zimbra.common.util.Log;
-import com.zimbra.common.util.LogFactory;
-import com.zimbra.common.util.ZimbraLog;
-import com.zimbra.cs.account.AccessManager;
-import com.zimbra.cs.account.Account;
-import com.zimbra.cs.account.AccountServiceException;
-import com.zimbra.cs.account.AccountServiceException.AuthFailedServiceException;
-import com.zimbra.cs.account.AuthToken;
-import com.zimbra.cs.account.GuestAccount;
-import com.zimbra.cs.account.Provisioning;
-import com.zimbra.cs.mailbox.Mailbox;
-import com.zimbra.cs.mailbox.MailboxManager;
-import com.zimbra.cs.redolog.RedoLogProvider;
-import com.zimbra.cs.service.AuthProvider;
-import com.zimbra.cs.service.admin.AdminAccessControl;
-import com.zimbra.cs.service.admin.AdminDocumentHandler;
-import com.zimbra.cs.session.Session;
-import com.zimbra.cs.session.SessionCache;
-import com.zimbra.cs.session.SoapSession;
-import com.zimbra.cs.stats.ZimbraPerf;
-import com.zimbra.cs.util.AccountUtil;
-import com.zimbra.cs.util.BuildInfo;
-import com.zimbra.cs.util.Zimbra;
-import com.zimbra.soap.ZimbraSoapContext.SessionInfo;
+import org.zmail.common.localconfig.LC;
+import org.zmail.common.service.ServiceException;
+import org.zmail.common.soap.Element;
+import org.zmail.common.soap.HeaderConstants;
+import org.zmail.common.soap.MailConstants;
+import org.zmail.common.soap.SoapFaultException;
+import org.zmail.common.soap.SoapParseException;
+import org.zmail.common.soap.SoapProtocol;
+import org.zmail.common.soap.SoapTransport;
+import org.zmail.common.soap.XmlParseException;
+import org.zmail.common.soap.ZmailNamespace;
+import org.zmail.common.util.Log;
+import org.zmail.common.util.LogFactory;
+import org.zmail.common.util.ZmailLog;
+import org.zmail.cs.account.AccessManager;
+import org.zmail.cs.account.Account;
+import org.zmail.cs.account.AccountServiceException;
+import org.zmail.cs.account.AccountServiceException.AuthFailedServiceException;
+import org.zmail.cs.account.AuthToken;
+import org.zmail.cs.account.GuestAccount;
+import org.zmail.cs.account.Provisioning;
+import org.zmail.cs.mailbox.Mailbox;
+import org.zmail.cs.mailbox.MailboxManager;
+import org.zmail.cs.redolog.RedoLogProvider;
+import org.zmail.cs.service.AuthProvider;
+import org.zmail.cs.service.admin.AdminAccessControl;
+import org.zmail.cs.service.admin.AdminDocumentHandler;
+import org.zmail.cs.session.Session;
+import org.zmail.cs.session.SessionCache;
+import org.zmail.cs.session.SoapSession;
+import org.zmail.cs.stats.ZmailPerf;
+import org.zmail.cs.util.AccountUtil;
+import org.zmail.cs.util.BuildInfo;
+import org.zmail.cs.util.Zmail;
+import org.zmail.soap.ZmailSoapContext.SessionInfo;
 
 /**
  * The soap engine.
@@ -72,9 +72,9 @@ public class SoapEngine {
     // attribute used to correlate requests and responses
     public static final String A_REQUEST_CORRELATOR = "requestId";
 
-    public static final String ZIMBRA_CONTEXT = "zimbra.context";
-    public static final String ZIMBRA_ENGINE  = "zimbra.engine";
-    public static final String ZIMBRA_SESSION = "zimbra.session";
+    public static final String ZIMBRA_CONTEXT = "zmail.context";
+    public static final String ZIMBRA_ENGINE  = "zmail.engine";
+    public static final String ZIMBRA_SESSION = "zmail.session";
 
     /** context name of request IP
      *
@@ -129,10 +129,10 @@ public class SoapEngine {
     }
 
     private void logRequest(Map<String, Object> context, Element envelope) {
-        if (ZimbraLog.soap.isTraceEnabled() && !context.containsKey(SoapEngine.SOAP_REQUEST_LOGGED)) {
+        if (ZmailLog.soap.isTraceEnabled() && !context.containsKey(SoapEngine.SOAP_REQUEST_LOGGED)) {
             HttpServletRequest servletRequest = (HttpServletRequest) context.get(SoapServlet.SERVLET_REQUEST);
             boolean isResumed = !ContinuationSupport.getContinuation(servletRequest).isInitial();
-            ZimbraLog.soap.trace(!isResumed ? "C:\n%s" : "C: (resumed)\n%s", envelope.prettyPrint(true));
+            ZmailLog.soap.trace(!isResumed ? "C:\n%s" : "C: (resumed)\n%s", envelope.prettyPrint(true));
             context.put(SOAP_REQUEST_LOGGED, Boolean.TRUE);
         }
     }
@@ -141,14 +141,14 @@ public class SoapEngine {
         if (context.containsKey(SoapEngine.SOAP_REQUEST_LOGGED)) {
             return;
         }
-        if (ZimbraLog.soap.isInfoEnabled()) {
+        if (ZmailLog.soap.isInfoEnabled()) {
             HttpServletRequest servletRequest = (HttpServletRequest) context.get(SoapServlet.SERVLET_REQUEST);
             boolean isResumed = !ContinuationSupport.getContinuation(servletRequest).isInitial();
-            if (ZimbraLog.soap.isTraceEnabled()) {
-                ZimbraLog.soap.trace(!isResumed ? "C: (ParseError:%s)\n%s" : "C: (resumed) (ParseError:%s)\n%s",
+            if (ZmailLog.soap.isTraceEnabled()) {
+                ZmailLog.soap.trace(!isResumed ? "C: (ParseError:%s)\n%s" : "C: (resumed) (ParseError:%s)\n%s",
                         parseError, new String(soapMessage));
             } else if (soapMessage.length < 2000 /* limit max length to avoid filling log file */) {
-                ZimbraLog.soap.info(!isResumed ? "C: (ParseError:%s)\n%s" : "C: (resumed) (ParseError:%s)\n%s",
+                ZmailLog.soap.info(!isResumed ? "C: (ParseError:%s)\n%s" : "C: (resumed) (ParseError:%s)\n%s",
                         parseError, new String(soapMessage));
             }
             context.put(SOAP_REQUEST_LOGGED, Boolean.TRUE);
@@ -215,7 +215,7 @@ public class SoapEngine {
                 }
             }
         } catch (XMLStreamException e) {
-            ZimbraLog.soap.debug("Problem trying to determine response protocol from request XML", e);
+            ZmailLog.soap.debug("Problem trying to determine response protocol from request XML", e);
         } finally {
             if (xmlReader != null) {
                 try {
@@ -260,7 +260,7 @@ public class SoapEngine {
         /*
          * For requests(e.g. AuthRequest) that don't have account info in time when they
          * are normally added to the logging context in dispatch after zsc is established
-         * from the SOAP request header.  Thus account logging for zimbra.soap won't be
+         * from the SOAP request header.  Thus account logging for zmail.soap won't be
          * effective when the SOAP request is logged in TRACE level normally.
          *
          * For AuthRequest, we call Account.addAccountToLogContext from the handler as
@@ -293,10 +293,10 @@ public class SoapEngine {
                     ServiceException.INVALID_REQUEST("unable to determine SOAP version", null));
         }
 
-        ZimbraSoapContext zsc = null;
+        ZmailSoapContext zsc = null;
         Element ectxt = soapProto.getHeader(envelope, HeaderConstants.CONTEXT);
         try {
-            zsc = new ZimbraSoapContext(ectxt, context, soapProto);
+            zsc = new ZmailSoapContext(ectxt, context, soapProto);
         } catch (ServiceException e) {
             return soapFaultEnv(soapProto, "unable to construct SOAP context", e);
         }
@@ -306,18 +306,18 @@ public class SoapEngine {
         String proxyAuthToken = null;
         if (rid != null) {
             Provisioning prov = Provisioning.getInstance();
-            AccountUtil.addAccountToLogContext(prov, rid, ZimbraLog.C_NAME, ZimbraLog.C_ID, zsc.getAuthToken());
+            AccountUtil.addAccountToLogContext(prov, rid, ZmailLog.C_NAME, ZmailLog.C_ID, zsc.getAuthToken());
             String aid = zsc.getAuthtokenAccountId();
             if (aid != null && !rid.equals(aid)) {
-                AccountUtil.addAccountToLogContext(prov, aid, ZimbraLog.C_ANAME, ZimbraLog.C_AID, zsc.getAuthToken());
+                AccountUtil.addAccountToLogContext(prov, aid, ZmailLog.C_ANAME, ZmailLog.C_AID, zsc.getAuthToken());
             } else if (zsc.getAuthToken() != null && zsc.getAuthToken().getAdminAccountId() != null) {
-                AccountUtil.addAccountToLogContext(prov, zsc.getAuthToken().getAdminAccountId(), ZimbraLog.C_ANAME,
-                        ZimbraLog.C_AID, zsc.getAuthToken());
+                AccountUtil.addAccountToLogContext(prov, zsc.getAuthToken().getAdminAccountId(), ZmailLog.C_ANAME,
+                        ZmailLog.C_AID, zsc.getAuthToken());
             }
             try {
                 Mailbox mbox = MailboxManager.getInstance().getMailboxByAccountId(rid, false);
                 if (mbox != null) {
-                    ZimbraLog.addMboxToContext(mbox.getId());
+                    ZmailLog.addMboxToContext(mbox.getId());
                 }
             } catch (ServiceException ignore) {
             }
@@ -334,10 +334,10 @@ public class SoapEngine {
         }
 
         if (zsc.getUserAgent() != null) {
-            ZimbraLog.addUserAgentToContext(zsc.getUserAgent());
+            ZmailLog.addUserAgentToContext(zsc.getUserAgent());
         }
         if (zsc.getVia() != null) {
-            ZimbraLog.addViaToContext(zsc.getVia());
+            ZmailLog.addViaToContext(zsc.getVia());
         }
 
         logRequest(context, envelope);
@@ -355,18 +355,18 @@ public class SoapEngine {
             // if the client's told us that they've seen through notification block 50, we can drop old notifications up to that point
             acknowledgeNotifications(zsc);
 
-            if (doc.getQName().equals(ZimbraNamespace.E_BATCH_REQUEST)) {
-                boolean contOnError = doc.getAttribute(ZimbraNamespace.A_ONERROR, ZimbraNamespace.DEF_ONERROR).equals("continue");
-                responseBody = zsc.createElement(ZimbraNamespace.E_BATCH_RESPONSE);
+            if (doc.getQName().equals(ZmailNamespace.E_BATCH_REQUEST)) {
+                boolean contOnError = doc.getAttribute(ZmailNamespace.A_ONERROR, ZmailNamespace.DEF_ONERROR).equals("continue");
+                responseBody = zsc.createElement(ZmailNamespace.E_BATCH_RESPONSE);
                 if (!isResumed) {
-                    ZimbraLog.soap.info(doc.getName());
+                    ZmailLog.soap.info(doc.getName());
                 }
                 for (Element req : doc.listElements()) {
                     String id = req.getAttribute(A_REQUEST_CORRELATOR, null);
                     long start = System.currentTimeMillis();
                     Element br = dispatchRequest(req, context, zsc);
                     if (!isResumed) {
-                        ZimbraLog.soap.info("(batch) %s elapsed=%d", req.getName(), System.currentTimeMillis() - start);
+                        ZmailLog.soap.info("(batch) %s elapsed=%d", req.getName(), System.currentTimeMillis() - start);
                     }
                     if (id != null) {
                         br.addAttribute(A_REQUEST_CORRELATOR, id);
@@ -384,7 +384,7 @@ public class SoapEngine {
                 long start = System.currentTimeMillis();
                 responseBody = dispatchRequest(doc, context, zsc);
                 if (!isResumed) {
-                    ZimbraLog.soap.info("%s elapsed=%d", doc.getName(), System.currentTimeMillis() - start);
+                    ZmailLog.soap.info("%s elapsed=%d", doc.getName(), System.currentTimeMillis() - start);
                 }
                 if (id != null) {
                     responseBody.addAttribute(A_REQUEST_CORRELATOR, id);
@@ -401,10 +401,10 @@ public class SoapEngine {
                 // proxy dispatcher.  IllegalAddException will be thrown
                 // if we don't detach it first.
                 doc.detach();
-                ZimbraSoapContext zscTarget = new ZimbraSoapContext(zsc, zsc.getRequestedAccountId()).disableNotifications();
+                ZmailSoapContext zscTarget = new ZmailSoapContext(zsc, zsc.getRequestedAccountId()).disableNotifications();
                 long start = System.currentTimeMillis();
                 responseBody = zsc.getProxyTarget().dispatch(doc, zscTarget);
-                ZimbraLog.soap.info("%s proxy=%s,elapsed=%d", doc.getName(), zsc.getProxyTarget(),
+                ZmailLog.soap.info("%s proxy=%s,elapsed=%d", doc.getName(), zsc.getProxyTarget(),
                         System.currentTimeMillis() - start);
                 responseBody.detach();
             } catch (SoapFaultException e) {
@@ -416,7 +416,7 @@ public class SoapEngine {
             } catch (Throwable e) {
                 responseBody = responseProto.soapFault(ServiceException.FAILURE(e.toString(), e));
                 if (e instanceof OutOfMemoryError) {
-                    Zimbra.halt("proxy handler exception", e);
+                    Zmail.halt("proxy handler exception", e);
                 }
                 LOG.warn("proxy handler exception", e);
             }
@@ -432,7 +432,7 @@ public class SoapEngine {
     /**
      * Handles individual requests, either direct or from a batch
      */
-    Element dispatchRequest(Element request, Map<String, Object> context, ZimbraSoapContext zsc) {
+    Element dispatchRequest(Element request, Map<String, Object> context, ZmailSoapContext zsc) {
         long startTime = System.currentTimeMillis();
         SoapProtocol soapProto = zsc.getResponseProtocol();
 
@@ -458,7 +458,7 @@ public class SoapEngine {
         SoapTransport.setVia(zsc.getNextVia());
         try {
             Provisioning prov = Provisioning.getInstance();
-            if (!prov.getLocalServer().getBooleanAttr(Provisioning.A_zimbraUserServicesEnabled, true) &&
+            if (!prov.getLocalServer().getBooleanAttr(Provisioning.A_zmailUserServicesEnabled, true) &&
                     !(handler instanceof AdminDocumentHandler)) {
                 return soapFault(soapProto, "cannot dispatch request", ServiceException.TEMPORARILY_UNAVAILABLE());
             }
@@ -520,12 +520,12 @@ public class SoapEngine {
                     handler.logAuditAccess(at.getAdminAccountId(), acctId, acctId);
                 }
                 response = handler.handle(request, context);
-                ZimbraPerf.SOAP_TRACKER.addStat(getStatName(request), startTime);
+                ZmailPerf.SOAP_TRACKER.addStat(getStatName(request), startTime);
                 long duration = System.currentTimeMillis() - startTime;
-                if (LC.zimbra_slow_logging_enabled.booleanValue() && duration > LC.zimbra_slow_logging_threshold.longValue() &&
+                if (LC.zmail_slow_logging_enabled.booleanValue() && duration > LC.zmail_slow_logging_threshold.longValue() &&
                         !request.getQName().getName().equals(MailConstants.SYNC_REQUEST.getName())) {
-                    ZimbraLog.soap.warn("Slow SOAP request (start=" + startTime + "):\n" + request.prettyPrint(true));
-                    ZimbraLog.soap.warn("Slow SOAP response (time=" + duration + "):\n" + response.prettyPrint());
+                    ZmailLog.soap.warn("Slow SOAP request (start=" + startTime + "):\n" + request.prettyPrint(true));
+                    ZmailLog.soap.warn("Slow SOAP response (time=" + duration + "):\n" + response.prettyPrint());
                 }
             }
         } catch (SoapFaultException e) {
@@ -554,7 +554,7 @@ public class SoapEngine {
             // TODO: better exception stack traces during develope?
             response = soapProto.soapFault(ServiceException.FAILURE(e.toString(), e));
             if (e instanceof OutOfMemoryError) {
-                Zimbra.halt("handler exception", e);
+                Zmail.halt("handler exception", e);
             }
             LOG.warn("handler exception", e);
             // XXX: if the session was new, do we want to delete it?
@@ -590,7 +590,7 @@ public class SoapEngine {
         return dispatcher;
     }
 
-    private void acknowledgeNotifications(ZimbraSoapContext zsc) {
+    private void acknowledgeNotifications(ZmailSoapContext zsc) {
         SessionInfo sinfo = zsc.getSessionInfo();
         if (sinfo != null) {
             Session session = SessionCache.lookup(sinfo.sessionId, zsc.getAuthtokenAccountId());
@@ -611,7 +611,7 @@ public class SoapEngine {
      *
      * @return A new <tt>&lt;context></tt> {@link Element}, or <tt>null</tt>
      *         if there is no relevant information to encapsulate. */
-    private Element generateResponseHeader(ZimbraSoapContext zsc) {
+    private Element generateResponseHeader(ZmailSoapContext zsc) {
         String authAccountId = zsc.getAuthtokenAccountId();
         String requestedAccountId = zsc.getRequestedAccountId();
 
@@ -622,7 +622,7 @@ public class SoapEngine {
             Session session = sinfo == null ? null : SessionCache.lookup(sinfo.sessionId, authAccountId);
             if (session != null) {
                 // session ID is valid, so ping it back to the client:
-                ZimbraSoapContext.encodeSession(ctxt, session.getSessionId(), session.getSessionType());
+                ZmailSoapContext.encodeSession(ctxt, session.getSessionId(), session.getSessionType());
 
                 if (session instanceof SoapSession) {
                     SoapSession soap = (SoapSession) session;
@@ -631,7 +631,7 @@ public class SoapEngine {
                     }
                     // put <refresh> blocks back for any newly-created SoapSession objects
                     if (sinfo.created || soap.requiresRefresh(sinfo.sequence)) {
-                        ZimbraLog.session.debug("returning refresh block; reason=%s",
+                        ZmailLog.session.debug("returning refresh block; reason=%s",
                                 sinfo.created ? "new session" : "sequence-based");
                         soap.putRefresh(ctxt, zsc);
                     }
@@ -662,7 +662,7 @@ public class SoapEngine {
             }
             return ctxt;
         } catch (ServiceException e) {
-            ZimbraLog.session.info("ServiceException while putting soap session refresh data", e);
+            ZmailLog.session.info("ServiceException while putting soap session refresh data", e);
             return null;
         }
     }

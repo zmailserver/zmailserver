@@ -12,7 +12,7 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.dav.service.method;
+package org.zmail.cs.dav.service.method;
 
 import java.io.IOException;
 
@@ -21,14 +21,14 @@ import javax.servlet.http.HttpServletResponse;
 import org.dom4j.Document;
 import org.dom4j.Element;
 
-import com.zimbra.cs.dav.DavContext;
-import com.zimbra.cs.dav.DavElements;
-import com.zimbra.cs.dav.DavException;
-import com.zimbra.cs.dav.DavProtocol;
-import com.zimbra.cs.dav.resource.Collection;
-import com.zimbra.cs.dav.resource.UrlNamespace;
-import com.zimbra.cs.dav.service.DavMethod;
-import com.zimbra.cs.mailbox.MailItem;
+import org.zmail.cs.dav.DavContext;
+import org.zmail.cs.dav.DavElements;
+import org.zmail.cs.dav.DavException;
+import org.zmail.cs.dav.DavProtocol;
+import org.zmail.cs.dav.resource.Collection;
+import org.zmail.cs.dav.resource.UrlNamespace;
+import org.zmail.cs.dav.service.DavMethod;
+import org.zmail.cs.mailbox.MailItem;
 
 public class MkAddressbook extends DavMethod {
     public static final String MKADDRESSBOOK = "MKADDRESSBOOK";

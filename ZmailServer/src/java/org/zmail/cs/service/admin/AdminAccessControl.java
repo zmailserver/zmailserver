@@ -12,7 +12,7 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.service.admin;
+package org.zmail.cs.service.admin;
 
 import java.util.ArrayList;
 import java.util.EnumSet;
@@ -23,50 +23,50 @@ import java.util.Map;
 import java.util.Set;
 
 import com.google.common.collect.Maps;
-import com.zimbra.soap.DocumentHandler;
-import com.zimbra.soap.ZimbraSoapContext;
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.common.util.EmailUtil;
-import com.zimbra.common.util.ZimbraLog;
-import com.zimbra.cs.account.AccessManager;
-import com.zimbra.cs.account.Account;
-import com.zimbra.cs.account.AccountServiceException;
-import com.zimbra.cs.account.Alias;
-import com.zimbra.cs.account.AttributeClass;
-import com.zimbra.cs.account.AttributeManager;
-import com.zimbra.cs.account.AuthToken;
-import com.zimbra.cs.account.CalendarResource;
-import com.zimbra.cs.account.Cos;
-import com.zimbra.cs.account.DistributionList;
-import com.zimbra.cs.account.Domain;
-import com.zimbra.cs.account.DynamicGroup;
-import com.zimbra.cs.account.Entry;
-import com.zimbra.cs.account.NamedEntry;
-import com.zimbra.cs.account.Provisioning;
-import com.zimbra.cs.account.AccessManager.AttrRightChecker;
-import com.zimbra.common.account.Key;
-import com.zimbra.common.account.Key.AccountBy;
-import com.zimbra.cs.account.accesscontrol.ACLAccessManager;
-import com.zimbra.cs.account.accesscontrol.AccessControlUtil;
-import com.zimbra.cs.account.accesscontrol.AdminRight;
-import com.zimbra.cs.account.accesscontrol.AttrRight;
-import com.zimbra.cs.account.accesscontrol.GlobalAccessManager;
-import com.zimbra.cs.account.accesscontrol.GranteeType;
-import com.zimbra.cs.account.accesscontrol.HardRules;
-import com.zimbra.cs.account.accesscontrol.PseudoTarget;
-import com.zimbra.cs.account.accesscontrol.Right;
-import com.zimbra.cs.account.accesscontrol.RightCommand;
-import com.zimbra.cs.account.accesscontrol.TargetType;
-import com.zimbra.cs.account.accesscontrol.HardRules.HardRule;
-import com.zimbra.cs.account.accesscontrol.Rights.Admin;
-import com.zimbra.cs.account.names.NameUtil;
+import org.zmail.soap.DocumentHandler;
+import org.zmail.soap.ZmailSoapContext;
+import org.zmail.common.service.ServiceException;
+import org.zmail.common.util.EmailUtil;
+import org.zmail.common.util.ZmailLog;
+import org.zmail.cs.account.AccessManager;
+import org.zmail.cs.account.Account;
+import org.zmail.cs.account.AccountServiceException;
+import org.zmail.cs.account.Alias;
+import org.zmail.cs.account.AttributeClass;
+import org.zmail.cs.account.AttributeManager;
+import org.zmail.cs.account.AuthToken;
+import org.zmail.cs.account.CalendarResource;
+import org.zmail.cs.account.Cos;
+import org.zmail.cs.account.DistributionList;
+import org.zmail.cs.account.Domain;
+import org.zmail.cs.account.DynamicGroup;
+import org.zmail.cs.account.Entry;
+import org.zmail.cs.account.NamedEntry;
+import org.zmail.cs.account.Provisioning;
+import org.zmail.cs.account.AccessManager.AttrRightChecker;
+import org.zmail.common.account.Key;
+import org.zmail.common.account.Key.AccountBy;
+import org.zmail.cs.account.accesscontrol.ACLAccessManager;
+import org.zmail.cs.account.accesscontrol.AccessControlUtil;
+import org.zmail.cs.account.accesscontrol.AdminRight;
+import org.zmail.cs.account.accesscontrol.AttrRight;
+import org.zmail.cs.account.accesscontrol.GlobalAccessManager;
+import org.zmail.cs.account.accesscontrol.GranteeType;
+import org.zmail.cs.account.accesscontrol.HardRules;
+import org.zmail.cs.account.accesscontrol.PseudoTarget;
+import org.zmail.cs.account.accesscontrol.Right;
+import org.zmail.cs.account.accesscontrol.RightCommand;
+import org.zmail.cs.account.accesscontrol.TargetType;
+import org.zmail.cs.account.accesscontrol.HardRules.HardRule;
+import org.zmail.cs.account.accesscontrol.Rights.Admin;
+import org.zmail.cs.account.names.NameUtil;
 
 /**
  * This class serves as:
  * 
  * 1. Compatibility layer between legacy domain based access manager 
  *    and pure ACL based access manager.   This is so we can go back and 
- *    forth between the two, by a LC key(zimbra_class_accessmanager) change:  
+ *    forth between the two, by a LC key(zmail_class_accessmanager) change:  
  *   
  *    DomainAccessControl should be deprecated at some point.
  * 
@@ -78,7 +78,7 @@ import com.zimbra.cs.account.names.NameUtil;
  */
 public abstract class AdminAccessControl {
     protected AccessManager mAccessMgr;
-    protected ZimbraSoapContext mZsc; // for SOAP callsites only
+    protected ZmailSoapContext mZsc; // for SOAP callsites only
     protected Account mAuthedAcct;
     protected AuthToken mAuthToken;
     
@@ -92,7 +92,7 @@ public abstract class AdminAccessControl {
      * 
      * for SOAP callsites
      */
-    public static AdminAccessControl getAdminAccessControl(ZimbraSoapContext zsc) 
+    public static AdminAccessControl getAdminAccessControl(ZmailSoapContext zsc) 
     throws ServiceException {
         Account authedAcct = DocumentHandler.getAuthenticatedAccount(zsc);
         AuthToken authToken = zsc.getAuthToken();
@@ -275,7 +275,7 @@ public abstract class AdminAccessControl {
      * internal methods
      * ================
      */
-    private AdminAccessControl(AccessManager accessMgr, ZimbraSoapContext zsc, 
+    private AdminAccessControl(AccessManager accessMgr, ZmailSoapContext zsc, 
             AuthToken authToken, Account authedAcct) {
         mAccessMgr = accessMgr;
         mZsc = zsc;
@@ -283,7 +283,7 @@ public abstract class AdminAccessControl {
         mAuthedAcct = authedAcct;
     }
     
-    private static AdminAccessControl newAdminAccessControl(ZimbraSoapContext zsc, 
+    private static AdminAccessControl newAdminAccessControl(ZmailSoapContext zsc, 
             AuthToken authToken, Account authedAcct) {
         AccessManager accessMgr = AccessManager.getInstance();
         
@@ -348,7 +348,7 @@ public abstract class AdminAccessControl {
      *
      */
     private static class DomainAccessControl extends AdminAccessControl {
-        private DomainAccessControl(AccessManager accessMgr, ZimbraSoapContext zsc, 
+        private DomainAccessControl(AccessManager accessMgr, ZmailSoapContext zsc, 
                 AuthToken authToken, Account authedAcct) {
             super(accessMgr, zsc, authToken, authedAcct);
         }
@@ -529,7 +529,7 @@ public abstract class AdminAccessControl {
      *
      */
     private static class GlobalAccessControl extends AdminAccessControl {
-        private GlobalAccessControl(AccessManager accessMgr, ZimbraSoapContext zsc, 
+        private GlobalAccessControl(AccessManager accessMgr, ZmailSoapContext zsc, 
                 AuthToken authToken, Account authedAcct) {
             super(accessMgr, zsc, authToken, authedAcct);
         }
@@ -688,7 +688,7 @@ public abstract class AdminAccessControl {
      *
      */
     private static class ACLAccessControl extends AdminAccessControl {
-        private ACLAccessControl(AccessManager accessMgr, ZimbraSoapContext zsc, 
+        private ACLAccessControl(AccessManager accessMgr, ZmailSoapContext zsc, 
                 AuthToken authToken, Account authedAcct) {
             super(accessMgr, zsc, authToken, authedAcct);
         }
@@ -738,7 +738,7 @@ public abstract class AdminAccessControl {
                 // if PERM_DENIED, log and return false, do not throw, 
                 // so we can continue with the next entry
                 if (ServiceException.PERM_DENIED.equals(e.getCode())) {
-                    ZimbraLog.acl.warn(getClass().getName() + 
+                    ZmailLog.acl.warn(getClass().getName() + 
                             ": skipping entry " + target.getName() + ": " + e.getMessage());
                     return false;
                 } else {
@@ -753,7 +753,7 @@ public abstract class AdminAccessControl {
             
             if (getAttrRight instanceof Set) {
                 if (((Set)getAttrRight).isEmpty()) {
-                    ZimbraLog.acl.warn(getClass().getName() + ": skipping entry " + 
+                    ZmailLog.acl.warn(getClass().getName() + ": skipping entry " + 
                             target.getName() + ": " + "non of the requested attrs is valid on the entry");
                     return false;
                 }
@@ -765,7 +765,7 @@ public abstract class AdminAccessControl {
                 // if PERM_DENIED, log and return false, do not throw, so we 
                 // can continue with the next entry
                 if (ServiceException.PERM_DENIED.equals(e.getCode())) {
-                    ZimbraLog.acl.warn(getClass().getName() + ": skipping entry " + 
+                    ZmailLog.acl.warn(getClass().getName() + ": skipping entry " + 
                             target.getName() + ": " + e.getMessage());
                     return false;
                 } else {
@@ -1110,10 +1110,10 @@ public abstract class AdminAccessControl {
 
                     if (violatedIgnoredHardRule) {
                         // log a debug line and allow
-                        ZimbraLog.acl.debug(getClass().getName() + 
+                        ZmailLog.acl.debug(getClass().getName() + 
                                 ": not skipping entry " + target.getName() + ": " + e.getMessage());
                     } else {
-                        ZimbraLog.acl.warn(getClass().getName() + 
+                        ZmailLog.acl.warn(getClass().getName() + 
                                 ": skipping entry " + target.getName() + ": " + e.getMessage());
                         return false;
                     }
@@ -1348,7 +1348,7 @@ public abstract class AdminAccessControl {
         
         private SetAttrsRight needRight() {
             SetAttrsRight sar = new SetAttrsRight();
-            sar.addAttr(Provisioning.A_zimbraAdminSavedSearches);
+            sar.addAttr(Provisioning.A_zmailAdminSavedSearches);
             return sar;
         }      
      */

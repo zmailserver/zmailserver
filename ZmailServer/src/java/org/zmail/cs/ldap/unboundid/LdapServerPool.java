@@ -12,7 +12,7 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.ldap.unboundid;
+package org.zmail.cs.ldap.unboundid;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -25,9 +25,9 @@ import com.unboundid.ldap.sdk.LDAPURL;
 import com.unboundid.ldap.sdk.ServerSet;
 import com.unboundid.ldap.sdk.SingleServerSet;
 
-import com.zimbra.cs.ldap.LdapServerConfig;
-import com.zimbra.cs.ldap.LdapConnType;
-import com.zimbra.cs.ldap.LdapException;
+import org.zmail.cs.ldap.LdapServerConfig;
+import org.zmail.cs.ldap.LdapConnType;
+import org.zmail.cs.ldap.LdapException;
 
 /**
  * Represent a list of LDAP servers.  ZCS will attempt to establish 

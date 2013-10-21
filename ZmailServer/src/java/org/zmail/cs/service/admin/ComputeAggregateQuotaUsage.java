@@ -12,25 +12,25 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.service.admin;
+package org.zmail.cs.service.admin;
 
 import com.sun.mail.smtp.SMTPMessage;
-import com.zimbra.common.localconfig.LC;
-import com.zimbra.common.mime.shim.JavaMailInternetAddress;
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.common.soap.AdminConstants;
-import com.zimbra.common.soap.Element;
-import com.zimbra.common.soap.SoapHttpTransport;
-import com.zimbra.common.util.ArrayUtil;
-import com.zimbra.common.util.L10nUtil;
-import com.zimbra.common.util.ZimbraLog;
-import com.zimbra.cs.account.Domain;
-import com.zimbra.cs.account.Provisioning;
-import com.zimbra.cs.account.Server;
-import com.zimbra.cs.account.accesscontrol.AccessControlUtil;
-import com.zimbra.cs.httpclient.URLUtil;
-import com.zimbra.cs.util.JMSession;
-import com.zimbra.soap.ZimbraSoapContext;
+import org.zmail.common.localconfig.LC;
+import org.zmail.common.mime.shim.JavaMailInternetAddress;
+import org.zmail.common.service.ServiceException;
+import org.zmail.common.soap.AdminConstants;
+import org.zmail.common.soap.Element;
+import org.zmail.common.soap.SoapHttpTransport;
+import org.zmail.common.util.ArrayUtil;
+import org.zmail.common.util.L10nUtil;
+import org.zmail.common.util.ZmailLog;
+import org.zmail.cs.account.Domain;
+import org.zmail.cs.account.Provisioning;
+import org.zmail.cs.account.Server;
+import org.zmail.cs.account.accesscontrol.AccessControlUtil;
+import org.zmail.cs.httpclient.URLUtil;
+import org.zmail.cs.util.JMSession;
+import org.zmail.soap.ZmailSoapContext;
 
 import javax.mail.Transport;
 import java.util.Date;
@@ -48,7 +48,7 @@ import java.util.concurrent.TimeUnit;
 public class ComputeAggregateQuotaUsage extends AdminDocumentHandler {
 
     public Element handle(Element request, Map<String, Object> context) throws ServiceException {
-        final ZimbraSoapContext zsc = getZimbraSoapContext(context);
+        final ZmailSoapContext zsc = getZmailSoapContext(context);
         if (!AccessControlUtil.isGlobalAdmin(getAuthenticatedAccount(zsc))) {
             throw ServiceException.PERM_DENIED("only global admin is allowed");
         }
@@ -65,7 +65,7 @@ public class ComputeAggregateQuotaUsage extends AdminDocumentHandler {
 
                 @Override
                 public Map<String, Long> call() throws Exception {
-                    ZimbraLog.misc.debug("Invoking %s on server %s",
+                    ZmailLog.misc.debug("Invoking %s on server %s",
                             AdminConstants.E_GET_AGGR_QUOTA_USAGE_ON_SERVER_REQUEST, server.getName());
 
                     Element req = new Element.XMLElement(AdminConstants.GET_AGGR_QUOTA_USAGE_ON_SERVER_REQUEST);
@@ -159,7 +159,7 @@ public class ComputeAggregateQuotaUsage extends AdminDocumentHandler {
 
                     Transport.send(out);
                 } catch (Exception e) {
-                    ZimbraLog.misc.warn(
+                    ZmailLog.misc.warn(
                             "Error in sending aggregate quota warning msg for domain %s", domain.getName(), e);
                 }
             }

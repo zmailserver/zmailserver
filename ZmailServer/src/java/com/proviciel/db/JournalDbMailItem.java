@@ -19,14 +19,14 @@ import java.util.List;
 
 import com.google.common.collect.ImmutableList;
 import com.proviciel.db.JournalItem.Event;
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.cs.db.DbMailbox;
-import com.zimbra.cs.db.DbPool.DbConnection;
-import com.zimbra.cs.mailbox.Folder;
-import com.zimbra.cs.mailbox.MailItem;
-import com.zimbra.cs.mailbox.MailItem.Type;
-import com.zimbra.cs.mailbox.Mailbox;
-import com.zimbra.cs.mailbox.OperationContext;
+import org.zmail.common.service.ServiceException;
+import org.zmail.cs.db.DbMailbox;
+import org.zmail.cs.db.DbPool.DbConnection;
+import org.zmail.cs.mailbox.Folder;
+import org.zmail.cs.mailbox.MailItem;
+import org.zmail.cs.mailbox.MailItem.Type;
+import org.zmail.cs.mailbox.Mailbox;
+import org.zmail.cs.mailbox.OperationContext;
 
 public class JournalDbMailItem {
 	

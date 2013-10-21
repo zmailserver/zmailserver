@@ -14,7 +14,7 @@
  * 
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.account.cache;
+package org.zmail.cs.account.cache;
 
 public interface IEntryCache {
     public int getSize();

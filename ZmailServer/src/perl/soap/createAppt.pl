@@ -41,8 +41,8 @@ if (defined $ARGV[2] && $ARGV[2] ne "") {
     die "Usage createAppt APPTNAME START END";
 }
 
-my $ACCTNS = "urn:zimbraAccount";
-my $MAILNS = "urn:zimbraMail";
+my $ACCTNS = "urn:zmailAccount";
+my $MAILNS = "urn:zmailMail";
 
 my $url = "http://localhost:7070/service/soap/";
 
@@ -59,7 +59,7 @@ print "AuthResponse = ".$authResponse->to_string("pretty")."\n";
 
 my $authToken = $authResponse->find_child('authToken')->content;
 my $sessionId = $authResponse->find_child('sessionId')->content;
-my $context = $SOAP->zimbraContext($authToken, $sessionId);
+my $context = $SOAP->zmailContext($authToken, $sessionId);
 my $contextStr = $context->to_string("pretty");
 
 
@@ -70,7 +70,7 @@ my $contextStr = $context->to_string("pretty");
 my $now  = int(time());
 print("now is ".$now."\n");
 
-my $localHostname = "example.zimbra.com";
+my $localHostname = "example.zmail.com";
 
 $d = new XmlDoc;
 

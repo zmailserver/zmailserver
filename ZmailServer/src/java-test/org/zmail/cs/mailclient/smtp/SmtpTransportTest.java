@@ -12,7 +12,7 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.mailclient.smtp;
+package org.zmail.cs.mailclient.smtp;
 
 import java.io.OutputStream;
 import java.util.Properties;
@@ -33,9 +33,9 @@ import org.junit.Test;
 
 import com.google.common.base.Charsets;
 import com.sun.mail.smtp.SMTPMessage;
-import com.zimbra.common.zmime.ZMimeMessage;
-import com.zimbra.cs.util.JMSession;
-import com.zimbra.cs.util.MockTcpServer;
+import org.zmail.common.zmime.ZMimeMessage;
+import org.zmail.cs.util.JMSession;
+import org.zmail.cs.util.MockTcpServer;
 
 /**
  * Unit test for {@link SmtpTransport}.
@@ -78,15 +78,15 @@ public final class SmtpTransportTest {
         Session session = JMSession.getSession();
         Transport transport = session.getTransport("smtp");
         transport.connect("localhost", PORT, null, null);
-        String raw = "From: sender@zimbra.com\nTo: rcpt@zimbra.com\nSubject: test\n\ntest";
+        String raw = "From: sender@zmail.com\nTo: rcpt@zmail.com\nSubject: test\n\ntest";
         MimeMessage msg = new ZMimeMessage(session, new SharedByteArrayInputStream(raw.getBytes(Charsets.ISO_8859_1)));
         transport.sendMessage(msg, msg.getAllRecipients());
         transport.close();
 
         server.shutdown(1000);
         Assert.assertEquals("EHLO localhost\r\n", server.replay());
-        Assert.assertEquals("MAIL FROM:<sender@zimbra.com>\r\n", server.replay());
-        Assert.assertEquals("RCPT TO:<rcpt@zimbra.com>\r\n", server.replay());
+        Assert.assertEquals("MAIL FROM:<sender@zmail.com>\r\n", server.replay());
+        Assert.assertEquals("RCPT TO:<rcpt@zmail.com>\r\n", server.replay());
         Assert.assertEquals("DATA\r\n", server.replay());
         Assert.assertEquals("QUIT\r\n", server.replay());
         Assert.assertNull(server.replay());
@@ -118,8 +118,8 @@ public final class SmtpTransportTest {
         session.getProperties().setProperty("mail.smtp.sendpartial", "true");
         Transport transport = session.getTransport("smtp");
         transport.connect("localhost", PORT, null, null);
-        String raw = "From: sender@zimbra.com\n" +
-            "To: rcpt1@zimbra.com, rcpt2@zimbra.com, rcpt3@zimbra.com\nSubject: test\n\ntest";
+        String raw = "From: sender@zmail.com\n" +
+            "To: rcpt1@zmail.com, rcpt2@zmail.com, rcpt3@zmail.com\nSubject: test\n\ntest";
         MimeMessage msg = new ZMimeMessage(session, new SharedByteArrayInputStream(raw.getBytes(Charsets.ISO_8859_1)));
         try {
             transport.sendMessage(msg, msg.getAllRecipients());
@@ -133,10 +133,10 @@ public final class SmtpTransportTest {
 
         server.shutdown(1000);
         Assert.assertEquals("EHLO localhost\r\n", server.replay());
-        Assert.assertEquals("MAIL FROM:<sender@zimbra.com>\r\n", server.replay());
-        Assert.assertEquals("RCPT TO:<rcpt1@zimbra.com>\r\n", server.replay());
-        Assert.assertEquals("RCPT TO:<rcpt2@zimbra.com>\r\n", server.replay());
-        Assert.assertEquals("RCPT TO:<rcpt3@zimbra.com>\r\n", server.replay());
+        Assert.assertEquals("MAIL FROM:<sender@zmail.com>\r\n", server.replay());
+        Assert.assertEquals("RCPT TO:<rcpt1@zmail.com>\r\n", server.replay());
+        Assert.assertEquals("RCPT TO:<rcpt2@zmail.com>\r\n", server.replay());
+        Assert.assertEquals("RCPT TO:<rcpt3@zmail.com>\r\n", server.replay());
         Assert.assertEquals("DATA\r\n", server.replay());
         Assert.assertEquals("QUIT\r\n", server.replay());
         Assert.assertNull(server.replay());
@@ -156,7 +156,7 @@ public final class SmtpTransportTest {
         Session session = JMSession.getSession();
         Transport transport = session.getTransport("smtp");
         transport.connect("localhost", PORT, null, null);
-        String raw = "From: sender@zimbra.com\nTo: rcpt@zimbra.com\n" +
+        String raw = "From: sender@zmail.com\nTo: rcpt@zmail.com\n" +
             "Subject: test\n\ntest";
         MimeMessage msg = new ZMimeMessage(session, new SharedByteArrayInputStream(raw.getBytes(Charsets.ISO_8859_1)));
         try {
@@ -172,7 +172,7 @@ public final class SmtpTransportTest {
 
         server.shutdown(1000);
         Assert.assertEquals("EHLO localhost\r\n", server.replay());
-        Assert.assertEquals("MAIL FROM:<sender@zimbra.com>\r\n", server.replay());
+        Assert.assertEquals("MAIL FROM:<sender@zmail.com>\r\n", server.replay());
         Assert.assertEquals("QUIT\r\n", server.replay());
         Assert.assertNull(server.replay());
     }
@@ -196,18 +196,18 @@ public final class SmtpTransportTest {
             .build().start(PORT);
 
         Session session = JMSession.getSession();
-        session.getProperties().setProperty("mail.smtp.from", "from@zimbra.com");
+        session.getProperties().setProperty("mail.smtp.from", "from@zmail.com");
         Transport transport = session.getTransport("smtp");
         transport.connect("localhost", PORT, null, null);
-        String raw = "From: sender@zimbra.com\nTo: rcpt@zimbra.com\nSubject: test\n\ntest";
+        String raw = "From: sender@zmail.com\nTo: rcpt@zmail.com\nSubject: test\n\ntest";
         MimeMessage msg = new ZMimeMessage(session, new SharedByteArrayInputStream(raw.getBytes(Charsets.ISO_8859_1)));
         transport.sendMessage(msg, msg.getAllRecipients());
         transport.close();
 
         server.shutdown(1000);
         Assert.assertEquals("EHLO localhost\r\n", server.replay());
-        Assert.assertEquals("MAIL FROM:<from@zimbra.com>\r\n", server.replay());
-        Assert.assertEquals("RCPT TO:<rcpt@zimbra.com>\r\n", server.replay());
+        Assert.assertEquals("MAIL FROM:<from@zmail.com>\r\n", server.replay());
+        Assert.assertEquals("RCPT TO:<rcpt@zmail.com>\r\n", server.replay());
         Assert.assertEquals("DATA\r\n", server.replay());
         Assert.assertEquals("QUIT\r\n", server.replay());
         Assert.assertNull(server.replay());
@@ -232,10 +232,10 @@ public final class SmtpTransportTest {
             .build().start(PORT);
 
         Session session = JMSession.getSession();
-        session.getProperties().setProperty("mail.smtp.from", "from@zimbra.com");
+        session.getProperties().setProperty("mail.smtp.from", "from@zmail.com");
         Transport transport = session.getTransport("smtp");
         transport.connect("localhost", PORT, null, null);
-        String raw = "From: sender@zimbra.com\nTo: rcpt@zimbra.com\nSubject: test\n\ntest";
+        String raw = "From: sender@zmail.com\nTo: rcpt@zmail.com\nSubject: test\n\ntest";
         SMTPMessage msg = new SMTPMessage(session, new SharedByteArrayInputStream(raw.getBytes(Charsets.ISO_8859_1)));
         msg.setEnvelopeFrom("<>"); // this should override the previously set mail.smtp.from
         transport.sendMessage(msg, msg.getAllRecipients());
@@ -244,7 +244,7 @@ public final class SmtpTransportTest {
         server.shutdown(1000);
         Assert.assertEquals("EHLO localhost\r\n", server.replay());
         Assert.assertEquals("MAIL FROM:<>\r\n", server.replay());
-        Assert.assertEquals("RCPT TO:<rcpt@zimbra.com>\r\n", server.replay());
+        Assert.assertEquals("RCPT TO:<rcpt@zmail.com>\r\n", server.replay());
         Assert.assertEquals("DATA\r\n", server.replay());
         Assert.assertEquals("QUIT\r\n", server.replay());
         Assert.assertNull(server.replay());
@@ -272,15 +272,15 @@ public final class SmtpTransportTest {
         session.getProperties().setProperty("mail.smtp.from", "<>");
         Transport transport = session.getTransport("smtp");
         transport.connect("localhost", PORT, null, null);
-        String raw = "From: sender@zimbra.com\nTo: rcpt@zimbra.com\nSubject: test\n\ntest";
+        String raw = "From: sender@zmail.com\nTo: rcpt@zmail.com\nSubject: test\n\ntest";
         MimeMessage msg = new ZMimeMessage(session, new SharedByteArrayInputStream(raw.getBytes(Charsets.ISO_8859_1)));
-        transport.sendMessage(msg, new Address[] { new InternetAddress("<rcpt@zimbra.com>") });
+        transport.sendMessage(msg, new Address[] { new InternetAddress("<rcpt@zmail.com>") });
         transport.close();
 
         server.shutdown(1000);
         Assert.assertEquals("EHLO localhost\r\n", server.replay());
         Assert.assertEquals("MAIL FROM:<>\r\n", server.replay());
-        Assert.assertEquals("RCPT TO:<rcpt@zimbra.com>\r\n", server.replay());
+        Assert.assertEquals("RCPT TO:<rcpt@zmail.com>\r\n", server.replay());
         Assert.assertEquals("DATA\r\n", server.replay());
         Assert.assertEquals("QUIT\r\n", server.replay());
         Assert.assertNull(server.replay());
@@ -291,7 +291,7 @@ public final class SmtpTransportTest {
         server = MockTcpServer.scenario()
             .sendLine("220 test ready")
             .recvLine() // EHLO
-            .sendLine("250-smtp.zimbra.com")
+            .sendLine("250-smtp.zmail.com")
             .sendLine("250 AUTH LOGIN")
             .recvLine() // AUTH LOGIN
             .sendLine("334 OK")
@@ -313,8 +313,8 @@ public final class SmtpTransportTest {
 
         Session session = JMSession.getSession();
         Transport transport = session.getTransport("smtp");
-        transport.connect("localhost", PORT, "zimbra", "secret");
-        String raw = "From: sender@zimbra.com\nTo: rcpt@zimbra.com\nSubject: test\n\ntest";
+        transport.connect("localhost", PORT, "zmail", "secret");
+        String raw = "From: sender@zmail.com\nTo: rcpt@zmail.com\nSubject: test\n\ntest";
         MimeMessage msg = new ZMimeMessage(session, new SharedByteArrayInputStream(raw.getBytes(Charsets.ISO_8859_1)));
         transport.sendMessage(msg, msg.getAllRecipients());
         transport.close();
@@ -322,10 +322,10 @@ public final class SmtpTransportTest {
         server.shutdown(1000);
         Assert.assertEquals("EHLO localhost\r\n", server.replay());
         Assert.assertEquals("AUTH LOGIN\r\n", server.replay());
-        Assert.assertEquals(base64("zimbra") + "\r\n", server.replay());
+        Assert.assertEquals(base64("zmail") + "\r\n", server.replay());
         Assert.assertEquals(base64("secret") + "\r\n", server.replay());
-        Assert.assertEquals("MAIL FROM:<sender@zimbra.com>\r\n", server.replay());
-        Assert.assertEquals("RCPT TO:<rcpt@zimbra.com>\r\n", server.replay());
+        Assert.assertEquals("MAIL FROM:<sender@zmail.com>\r\n", server.replay());
+        Assert.assertEquals("RCPT TO:<rcpt@zmail.com>\r\n", server.replay());
         Assert.assertEquals("DATA\r\n", server.replay());
         Assert.assertEquals("QUIT\r\n", server.replay());
         Assert.assertNull(server.replay());
@@ -336,7 +336,7 @@ public final class SmtpTransportTest {
         server = MockTcpServer.scenario()
             .sendLine("220 test ready")
             .recvLine() // EHLO
-            .sendLine("250-smtp.zimbra.com")
+            .sendLine("250-smtp.zmail.com")
             .sendLine("250 AUTH PLAIN")
             .recvLine() // AUTH PLAIN initial-response
             .sendLine("235 Authentication successful")
@@ -354,17 +354,17 @@ public final class SmtpTransportTest {
 
         Session session = JMSession.getSession();
         Transport transport = session.getTransport("smtp");
-        transport.connect("localhost", PORT, "zimbra", "secret");
-        String raw = "From: sender@zimbra.com\nTo: rcpt@zimbra.com\nSubject: test\n\ntest";
+        transport.connect("localhost", PORT, "zmail", "secret");
+        String raw = "From: sender@zmail.com\nTo: rcpt@zmail.com\nSubject: test\n\ntest";
         MimeMessage msg = new ZMimeMessage(session, new SharedByteArrayInputStream(raw.getBytes(Charsets.ISO_8859_1)));
         transport.sendMessage(msg, msg.getAllRecipients());
         transport.close();
 
         server.shutdown(1000);
         Assert.assertEquals("EHLO localhost\r\n", server.replay());
-        Assert.assertEquals("AUTH PLAIN " + base64("\0zimbra\0secret") + "\r\n", server.replay());
-        Assert.assertEquals("MAIL FROM:<sender@zimbra.com>\r\n", server.replay());
-        Assert.assertEquals("RCPT TO:<rcpt@zimbra.com>\r\n", server.replay());
+        Assert.assertEquals("AUTH PLAIN " + base64("\0zmail\0secret") + "\r\n", server.replay());
+        Assert.assertEquals("MAIL FROM:<sender@zmail.com>\r\n", server.replay());
+        Assert.assertEquals("RCPT TO:<rcpt@zmail.com>\r\n", server.replay());
         Assert.assertEquals("DATA\r\n", server.replay());
         Assert.assertEquals("QUIT\r\n", server.replay());
         Assert.assertNull(server.replay());
@@ -381,7 +381,7 @@ public final class SmtpTransportTest {
         Session session = JMSession.getSession();
         Transport transport = session.getTransport("smtp");
         try {
-            transport.connect("localhost", PORT, "zimbra", "secret");
+            transport.connect("localhost", PORT, "zmail", "secret");
             Assert.fail();
         } catch (MessagingException e) {
             Assert.assertEquals("The server doesn't support SMTP-AUTH.", e.getMessage());
@@ -401,7 +401,7 @@ public final class SmtpTransportTest {
         Session session = JMSession.getSession();
         Transport transport = session.getTransport("smtp");
         try {
-            transport.connect("localhost", PORT, "zimbra", "secret");
+            transport.connect("localhost", PORT, "zmail", "secret");
             Assert.fail();
         } catch (MessagingException e) {
             Assert.assertEquals("No auth mechanism supported: [NTLM]", e.getMessage());
@@ -430,7 +430,7 @@ public final class SmtpTransportTest {
         session.getProperties().setProperty("mail.smtp.sendpartial", "true");
         Transport transport = session.getTransport("smtp");
         transport.connect("localhost", PORT, null, null);
-        String raw = "From: sender@zimbra.com\nTo: rcpt@zimbra.com\nSubject: test\n\ntest";
+        String raw = "From: sender@zmail.com\nTo: rcpt@zmail.com\nSubject: test\n\ntest";
         MimeMessage msg = new ZMimeMessage(session, new SharedByteArrayInputStream(raw.getBytes(Charsets.ISO_8859_1)));
         try {
             transport.sendMessage(msg, msg.getAllRecipients());
@@ -445,8 +445,8 @@ public final class SmtpTransportTest {
 
         server.shutdown(1000);
         Assert.assertEquals("EHLO localhost\r\n", server.replay());
-        Assert.assertEquals("MAIL FROM:<sender@zimbra.com>\r\n", server.replay());
-        Assert.assertEquals("RCPT TO:<rcpt@zimbra.com>\r\n", server.replay());
+        Assert.assertEquals("MAIL FROM:<sender@zmail.com>\r\n", server.replay());
+        Assert.assertEquals("RCPT TO:<rcpt@zmail.com>\r\n", server.replay());
         Assert.assertEquals("QUIT\r\n", server.replay());
         Assert.assertNull(server.replay());
     }
@@ -472,7 +472,7 @@ public final class SmtpTransportTest {
         Session session = JMSession.getSession();
         Transport transport = session.getTransport("smtp");
         transport.connect("localhost", PORT, null, null);
-        String raw = "From: sender@zimbra.com\nTo: rcpt@zimbra.com\nSubject: test\n\n" +
+        String raw = "From: sender@zmail.com\nTo: rcpt@zmail.com\nSubject: test\n\n" +
             ".\n" +
             "..\n" +
             ".\n";
@@ -482,10 +482,10 @@ public final class SmtpTransportTest {
 
         server.shutdown(1000);
         Assert.assertEquals("EHLO localhost\r\n", server.replay());
-        Assert.assertEquals("MAIL FROM:<sender@zimbra.com>\r\n", server.replay());
-        Assert.assertEquals("RCPT TO:<rcpt@zimbra.com>\r\n", server.replay());
+        Assert.assertEquals("MAIL FROM:<sender@zmail.com>\r\n", server.replay());
+        Assert.assertEquals("RCPT TO:<rcpt@zmail.com>\r\n", server.replay());
         Assert.assertEquals("DATA\r\n", server.replay());
-        Assert.assertEquals("From: sender@zimbra.com\r\nTo: rcpt@zimbra.com\r\nSubject: test\r\n\r\n" +
+        Assert.assertEquals("From: sender@zmail.com\r\nTo: rcpt@zmail.com\r\nSubject: test\r\n\r\n" +
                 "..\r\n" +
                 "...\r\n" +
                 "..\r\n" +
@@ -513,7 +513,7 @@ public final class SmtpTransportTest {
         Session session = JMSession.getSession();
         Transport transport = session.getTransport("smtp");
         transport.connect("localhost", PORT, null, null);
-        String raw = "From: sender@zimbra.com\nTo: rcpt@zimbra.com\nSubject: test\n\ntest";
+        String raw = "From: sender@zmail.com\nTo: rcpt@zmail.com\nSubject: test\n\ntest";
         MimeMessage msg = new ZMimeMessage(session, new SharedByteArrayInputStream(raw.getBytes(Charsets.ISO_8859_1)));
         try {
             transport.sendMessage(msg, msg.getAllRecipients());
@@ -528,8 +528,8 @@ public final class SmtpTransportTest {
 
         server.shutdown(1000);
         Assert.assertEquals("EHLO localhost\r\n", server.replay());
-        Assert.assertEquals("MAIL FROM:<sender@zimbra.com>\r\n", server.replay());
-        Assert.assertEquals("RCPT TO:<rcpt@zimbra.com>\r\n", server.replay());
+        Assert.assertEquals("MAIL FROM:<sender@zmail.com>\r\n", server.replay());
+        Assert.assertEquals("RCPT TO:<rcpt@zmail.com>\r\n", server.replay());
         Assert.assertEquals("DATA\r\n", server.replay());
         Assert.assertEquals("QUIT\r\n", server.replay());
         Assert.assertNull(server.replay());
@@ -553,7 +553,7 @@ public final class SmtpTransportTest {
         Session session = JMSession.getSession();
         Transport transport = session.getTransport("smtp");
         transport.connect("localhost", PORT, null, null);
-        String raw = "From: sender@zimbra.com\nTo: rcpt@zimbra.com\nSubject: test\n\ntest";
+        String raw = "From: sender@zmail.com\nTo: rcpt@zmail.com\nSubject: test\n\ntest";
         MimeMessage msg = new ZMimeMessage(session,
                 new SharedByteArrayInputStream(raw.getBytes(Charsets.ISO_8859_1))) {
             @Override
@@ -571,8 +571,8 @@ public final class SmtpTransportTest {
 
         server.shutdown(1000);
         Assert.assertEquals("EHLO localhost\r\n", server.replay());
-        Assert.assertEquals("MAIL FROM:<sender@zimbra.com>\r\n", server.replay());
-        Assert.assertEquals("RCPT TO:<rcpt@zimbra.com>\r\n", server.replay());
+        Assert.assertEquals("MAIL FROM:<sender@zmail.com>\r\n", server.replay());
+        Assert.assertEquals("RCPT TO:<rcpt@zmail.com>\r\n", server.replay());
         Assert.assertEquals("DATA\r\n", server.replay());
         Assert.assertNull(server.replay());
     }
@@ -593,7 +593,7 @@ public final class SmtpTransportTest {
         SmtpTransport transport = (SmtpTransport) session.getTransport("smtp");
         try {
             transport.connect("localhost", PORT, null, null);
-            transport.mail("sender@zimbra.com");
+            transport.mail("sender@zmail.com");
             transport.rset();
         } finally {
             transport.close();
@@ -601,7 +601,7 @@ public final class SmtpTransportTest {
 
         server.shutdown(1000);
         Assert.assertEquals("EHLO localhost\r\n", server.replay());
-        Assert.assertEquals("MAIL FROM:<sender@zimbra.com>\r\n", server.replay());
+        Assert.assertEquals("MAIL FROM:<sender@zmail.com>\r\n", server.replay());
         Assert.assertEquals("RSET\r\n", server.replay());
         Assert.assertNull(server.replay());
     }
@@ -626,15 +626,15 @@ public final class SmtpTransportTest {
         Session session = JMSession.getSession();
         Transport transport = session.getTransport("smtp");
         transport.connect("localhost", PORT, null, null);
-        String raw = "From: sender@zimbra.com\nTo: rcpt@zimbra.com\nSubject: test\n\ntest";
+        String raw = "From: sender@zmail.com\nTo: rcpt@zmail.com\nSubject: test\n\ntest";
         MimeMessage msg = new ZMimeMessage(session, new SharedByteArrayInputStream(raw.getBytes(Charsets.ISO_8859_1)));
         transport.sendMessage(msg, msg.getAllRecipients());
         transport.close();
 
         server.shutdown(1000);
         Assert.assertEquals("EHLO localhost\r\n", server.replay());
-        Assert.assertEquals("MAIL FROM:<sender@zimbra.com>\r\n", server.replay());
-        Assert.assertEquals("RCPT TO:<rcpt@zimbra.com>\r\n", server.replay());
+        Assert.assertEquals("MAIL FROM:<sender@zmail.com>\r\n", server.replay());
+        Assert.assertEquals("RCPT TO:<rcpt@zmail.com>\r\n", server.replay());
         Assert.assertEquals("DATA\r\n", server.replay());
         Assert.assertEquals("QUIT\r\n", server.replay());
         Assert.assertNull(server.replay());
@@ -662,15 +662,15 @@ public final class SmtpTransportTest {
         Session session = JMSession.getSession();
         Transport transport = session.getTransport("smtp");
         transport.connect("localhost", PORT, null, null);
-        String raw = "From: sender@zimbra.com\nTo: rcpt@zimbra.com\nSubject: test\n\ntest";
+        String raw = "From: sender@zmail.com\nTo: rcpt@zmail.com\nSubject: test\n\ntest";
         MimeMessage msg = new ZMimeMessage(session, new SharedByteArrayInputStream(raw.getBytes(Charsets.ISO_8859_1)));
         transport.sendMessage(msg, msg.getAllRecipients());
         transport.close();
 
         server.shutdown(1000);
         Assert.assertEquals("EHLO localhost\r\n", server.replay());
-        Assert.assertEquals("MAIL FROM:<sender@zimbra.com>\r\n", server.replay());
-        Assert.assertEquals("RCPT TO:<rcpt@zimbra.com>\r\n", server.replay());
+        Assert.assertEquals("MAIL FROM:<sender@zmail.com>\r\n", server.replay());
+        Assert.assertEquals("RCPT TO:<rcpt@zmail.com>\r\n", server.replay());
         Assert.assertEquals("DATA\r\n", server.replay());
         Assert.assertEquals("QUIT\r\n", server.replay());
         Assert.assertNull(server.replay());

@@ -12,7 +12,7 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.util;
+package org.zmail.cs.util;
 
 import java.lang.management.GarbageCollectorMXBean;
 import java.lang.management.ManagementFactory;
@@ -29,8 +29,8 @@ import java.util.Set;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import com.zimbra.common.stats.RealtimeStatsCallback;
-import com.zimbra.cs.stats.ZimbraPerf;
+import org.zmail.common.stats.RealtimeStatsCallback;
+import org.zmail.cs.stats.ZmailPerf;
 
 /**
  * A helper class for using java.lang.management APIs to monitor
@@ -199,7 +199,7 @@ public final class MemoryStats implements RealtimeStatsCallback {
     
     
     /**
-     * Register us with the ZimbraPerf object so that we can log memory stats periodically to the stats file
+     * Register us with the ZmailPerf object so that we can log memory stats periodically to the stats file
      */
     public static void startup() {
         sInstance = new MemoryStats();
@@ -226,33 +226,33 @@ public final class MemoryStats implements RealtimeStatsCallback {
     }
 
     private MemoryStats() {
-        ZimbraPerf.addStatsCallback(this);
+        ZmailPerf.addStatsCallback(this);
 
         // gc_NAME_count,  gc_NAME_time
         for (String gc : getGarbageCollectorNames()) {
             gc = gc.toLowerCase();
-            ZimbraPerf.addRealtimeStatName(getGCCountColName(gc), "Number of times that " + gc + " GC was invoked");
-            ZimbraPerf.addRealtimeStatName(getGCTimeColName(gc), "Time (ms) spent on " + gc + " GC");
+            ZmailPerf.addRealtimeStatName(getGCCountColName(gc), "Number of times that " + gc + " GC was invoked");
+            ZmailPerf.addRealtimeStatName(getGCTimeColName(gc), "Time (ms) spent on " + gc + " GC");
         }
-        ZimbraPerf.addRealtimeStatName(GC_MINOR_COUNT, "Number of times that minor GC was invoked");
-        ZimbraPerf.addRealtimeStatName(GC_MINOR_TIME, "Time (ms) spent on minor GC");
-        ZimbraPerf.addRealtimeStatName(GC_MAJOR_COUNT, "Number of times that major GC was invoked");
-        ZimbraPerf.addRealtimeStatName(GC_MAJOR_TIME, "Time (ms) spent on major GC");
+        ZmailPerf.addRealtimeStatName(GC_MINOR_COUNT, "Number of times that minor GC was invoked");
+        ZmailPerf.addRealtimeStatName(GC_MINOR_TIME, "Time (ms) spent on minor GC");
+        ZmailPerf.addRealtimeStatName(GC_MAJOR_COUNT, "Number of times that major GC was invoked");
+        ZmailPerf.addRealtimeStatName(GC_MAJOR_TIME, "Time (ms) spent on major GC");
 
         // mpool_NAME_used, mpool_NAME_free
         for (String pool : getHeapPoolNames()) {
             pool = pool.toLowerCase();
-            ZimbraPerf.addRealtimeStatName(getPoolUsedSizeColName(pool), "Number of bytes used in the " + pool + " memory pool");
-            ZimbraPerf.addRealtimeStatName(getPoolFreeSizeColName(pool), "Number of bytes free in the " + pool + " memory pool");
+            ZmailPerf.addRealtimeStatName(getPoolUsedSizeColName(pool), "Number of bytes used in the " + pool + " memory pool");
+            ZmailPerf.addRealtimeStatName(getPoolFreeSizeColName(pool), "Number of bytes free in the " + pool + " memory pool");
         }
         
         // heap_used, heap_free
-        ZimbraPerf.addRealtimeStatName(HEAP_USED, "Number of bytes used in the entire JVM heap");
-        ZimbraPerf.addRealtimeStatName(HEAP_FREE, "Number of bytes free in the entire JVM heap");
+        ZmailPerf.addRealtimeStatName(HEAP_USED, "Number of bytes used in the entire JVM heap");
+        ZmailPerf.addRealtimeStatName(HEAP_FREE, "Number of bytes free in the entire JVM heap");
     }
     
     /* (non-Javadoc)
-     * @see com.zimbra.common.stats.RealtimeStatsCallback#getStatData()
+     * @see org.zmail.common.stats.RealtimeStatsCallback#getStatData()
      */
     public Map<String, Object> getStatData() {
         Map<String, Object> toRet = new HashMap<String, Object>();

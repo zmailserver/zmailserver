@@ -13,32 +13,32 @@
  * ***** END LICENSE BLOCK *****
  */
 
-package com.zimbra.cs.service.admin;
+package org.zmail.cs.service.admin;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.common.soap.AdminConstants;
-import com.zimbra.common.soap.Element;
-import com.zimbra.cs.account.accesscontrol.AdminRight;
-import com.zimbra.cs.mailbox.Mailbox;
-import com.zimbra.cs.mailbox.MailboxManager;
-import com.zimbra.cs.store.StoreManager;
-import com.zimbra.cs.store.external.ExternalBlobConsistencyChecker;
-import com.zimbra.cs.store.external.ExternalStoreManager;
-import com.zimbra.cs.store.file.BlobConsistencyChecker;
-import com.zimbra.cs.store.file.FileBlobStore;
-import com.zimbra.cs.volume.Volume;
-import com.zimbra.cs.volume.VolumeManager;
-import com.zimbra.soap.ZimbraSoapContext;
+import org.zmail.common.service.ServiceException;
+import org.zmail.common.soap.AdminConstants;
+import org.zmail.common.soap.Element;
+import org.zmail.cs.account.accesscontrol.AdminRight;
+import org.zmail.cs.mailbox.Mailbox;
+import org.zmail.cs.mailbox.MailboxManager;
+import org.zmail.cs.store.StoreManager;
+import org.zmail.cs.store.external.ExternalBlobConsistencyChecker;
+import org.zmail.cs.store.external.ExternalStoreManager;
+import org.zmail.cs.store.file.BlobConsistencyChecker;
+import org.zmail.cs.store.file.FileBlobStore;
+import org.zmail.cs.volume.Volume;
+import org.zmail.cs.volume.VolumeManager;
+import org.zmail.soap.ZmailSoapContext;
 
 public final class CheckBlobConsistency extends AdminDocumentHandler {
 
     @Override
     public Element handle(Element request, Map<String, Object> context) throws ServiceException {
-        ZimbraSoapContext zsc = getZimbraSoapContext(context);
+        ZmailSoapContext zsc = getZmailSoapContext(context);
         checkRight(zsc, context, null, AdminRight.PR_SYSTEM_ADMIN_ONLY);
 
 

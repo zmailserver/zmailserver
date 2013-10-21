@@ -12,15 +12,15 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.stats;
+package org.zmail.cs.stats;
 
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 import java.util.concurrent.ConcurrentHashMap;
 
-import com.zimbra.common.stats.Counter;
-import com.zimbra.common.stats.StatsDumperDataSource;
+import org.zmail.common.stats.Counter;
+import org.zmail.common.stats.StatsDumperDataSource;
 
 
 /**

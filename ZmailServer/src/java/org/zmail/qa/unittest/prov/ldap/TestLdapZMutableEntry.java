@@ -12,7 +12,7 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.qa.unittest.prov.ldap;
+package org.zmail.qa.unittest.prov.ldap;
 
 import java.util.Arrays;
 import java.util.HashMap;
@@ -24,11 +24,11 @@ import java.util.Set;
 import org.junit.*;
 import static org.junit.Assert.*;
 
-import com.zimbra.cs.account.Provisioning;
-import com.zimbra.cs.ldap.LdapClient;
-import com.zimbra.cs.ldap.ZAttributes;
-import com.zimbra.cs.ldap.ZMutableEntry;
-import com.zimbra.qa.unittest.prov.BinaryLdapData;
+import org.zmail.cs.account.Provisioning;
+import org.zmail.cs.ldap.LdapClient;
+import org.zmail.cs.ldap.ZAttributes;
+import org.zmail.cs.ldap.ZMutableEntry;
+import org.zmail.qa.unittest.prov.BinaryLdapData;
 
 public class TestLdapZMutableEntry extends LdapTest {
 
@@ -247,7 +247,7 @@ public class TestLdapZMutableEntry extends LdapTest {
     
     @Test
     public void setDN() throws Exception {
-        String DN = "cn=zimbra";
+        String DN = "cn=zmail";
         ZMutableEntry entry = LdapClient.createMutableEntry();
         entry.setDN(DN);
         assertEquals(DN, entry.getDN());

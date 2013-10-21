@@ -1,13 +1,13 @@
 Setup Dev Environment for Cisco/Mitel Voice Extension
 ======================================================
-Step 1: User should already have a ZCS server installed and running. If not please refer to ZimbraServer/docs/INSTALL-*.txt.
+Step 1: User should already have a ZCS server installed and running. If not please refer to ZmailServer/docs/INSTALL-*.txt.
  
         Directories needed from perforce
-        1. ZimbraVoice/*
-        2. ZimbraCustomerServices/*
+        1. ZmailVoice/*
+        2. ZmailCustomerServices/*
         3. Telephony/*
-        4. ZimbraLicenseTools/*
-        5. ZimbraLicenseExtension/*
+        4. ZmailLicenseTools/*
+        5. ZmailLicenseExtension/*
 
 Step 2: To install Mitel voice extension
         $ cd ~/p4/main/Telephony/Mitel/
@@ -21,27 +21,27 @@ Step 4: Extensions can be configured both from admin UI and command line. Here i
 
         For CISCO
         ============
-        $ zmprov mcf zimbraUCProviderEnabled cisco
-        $ zmprov cucs cisco-1 zimbraUCProvider cisco  zimbraUCVoicemailURL https://ciscocuc.eng.vmware.com  zimbraUCCallControlURL https://ciscocucm.eng.vmware.com/webdialer/services/WebdialerSoapService70
-          zimbraUCPresenceURL http://ciscocups.eng.vmware.com:8082/presence-service/users
+        $ zmprov mcf zmailUCProviderEnabled cisco
+        $ zmprov cucs cisco-1 zmailUCProvider cisco  zmailUCVoicemailURL https://ciscocuc.eng.vmware.com  zmailUCCallControlURL https://ciscocucm.eng.vmware.com/webdialer/services/WebdialerSoapService70
+          zmailUCPresenceURL http://ciscocups.eng.vmware.com:8082/presence-service/users
         $ zmprov ca user1@`zmhostname` {account_password}
-        $ zmprov ma user1@`zmhostname` zimbraUCUsername voiceAccount_Username zimbraUCServiceId service-ID (skip the above step if the account is already set-up)
+        $ zmprov ma user1@`zmhostname` zmailUCUsername voiceAccount_Username zmailUCServiceId service-ID (skip the above step if the account is already set-up)
         $ zmsoap -v -z -m user1@`zmhostname` -t voice ChangeUCPasswordRequest/password=voiceAccount_password
         $ zmprov updatePresenceSessionId {UC service name or service-id} {app-username} {app-password}
 
         For Mitel
         ============
-        $ zmprov mcf zimbraUCProviderEnabled mitel
-        $ zmprov cucs mitel-1 zimbraUCProvider mitel zimbraUCUserURL https://vuca.cloudmitel.com/ucs/ws/service/ucs zimbraUCVoicemailURL https://vuca.cloudmitel.com/ucs/ws/service/NpViewService zimbraUCCallControlURL https://vuca.cloudmitel.com/ucs/ws/services/csta
+        $ zmprov mcf zmailUCProviderEnabled mitel
+        $ zmprov cucs mitel-1 zmailUCProvider mitel zmailUCUserURL https://vuca.cloudmitel.com/ucs/ws/service/ucs zmailUCVoicemailURL https://vuca.cloudmitel.com/ucs/ws/service/NpViewService zmailUCCallControlURL https://vuca.cloudmitel.com/ucs/ws/services/csta
         $ zmprov ca user1@`zmhostname` {account_password}    (skip this step if the account is already set-up)
-        $ zmprov ma user1@`zmhostname` zimbraUCUsername voiceAccount_Username zimbraUCServiceId service-ID   (service-ID is the ID generated from the previous step)
+        $ zmprov ma user1@`zmhostname` zmailUCUsername voiceAccount_Username zmailUCServiceId service-ID   (service-ID is the ID generated from the previous step)
         $ zmsoap -v -z -m user1@`zmhostname` -t voice ChangeUCPasswordRequest/password=voiceAccount_password
 
         NOTE: Mitel doesn't support presence
 
 Step 5: Voice License - We need to install voice license to enable the voice feature.
-        $ zmprov ma user1@`zmhostname` zimbraFeatureVoiceEnabled TRUE
-        $ cd ~/p4/main/ZimbraLicenseExtension
+        $ zmprov ma user1@`zmhostname` zmailFeatureVoiceEnabled TRUE
+        $ cd ~/p4/main/ZmailLicenseExtension
         $ ant deploy-dev
         $ Restart jetty
 
@@ -55,5 +55,5 @@ Step 6: If there are any proxy issues, run the below commands.
 
        2. set ssl_allow_untrusted_certs=true in zmlocalconfig
        3. Set client_use_system_proxy=true in zmlocalconfig
-       4. zmprov ms SERVERNAME zimbraHttpProxyURL proxyURL    (proxyURL is like http://proxyhost:proxyport)
+       4. zmprov ms SERVERNAME zmailHttpProxyURL proxyURL    (proxyURL is like http://proxyhost:proxyport)
        5. Restart the jetty server

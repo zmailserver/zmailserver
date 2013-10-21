@@ -13,17 +13,17 @@
  * ***** END LICENSE BLOCK *****
  */
 
-package com.zimbra.cs.mailbox.calendar;
+package org.zmail.cs.mailbox.calendar;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import com.zimbra.common.calendar.ParsedDateTime;
-import com.zimbra.common.calendar.ParsedDuration;
-import com.zimbra.common.util.StringUtil;
-import com.zimbra.cs.mailbox.calendar.Recurrence.IRecurrence;
+import org.zmail.common.calendar.ParsedDateTime;
+import org.zmail.common.calendar.ParsedDuration;
+import org.zmail.common.util.StringUtil;
+import org.zmail.cs.mailbox.calendar.Recurrence.IRecurrence;
 
 // Captures differences between two Invite objects
 public class InviteChanges {

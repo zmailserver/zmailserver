@@ -12,9 +12,9 @@ dc: com
 dn: dc=widgets,dc=com
 objectclass: dcObject
 objectclass: organization
-objectclass: zimbraDomain
-zimbraId: 0bf35e36-0d91-11d9-866e-000d93afea2a
-zimbraDomainName: widgets.com
+objectclass: zmailDomain
+zmailId: 0bf35e36-0d91-11d9-866e-000d93afea2a
+zmailDomainName: widgets.com
 o: Widgets-R-US
 description: Widgets-R-US
 dc: widgets
@@ -31,19 +31,19 @@ cn: groups
 
 dn: uid=smith,ou=people,dc=widgets,dc=com
 uid: smith
-objectclass: zimbraAccount
+objectclass: zmailAccount
 objectclass: organizationalPerson
 objectClass: inetOrgPerson
-zimbraId: 1d5710b0-0744-11d9-bcca-000d93afea2a
-zimbraAccountStatus: active
-zimbraMailStatus: enabled
-zimbraNotes: this space could be used for account notes
-zimbraMailAlias: john.smith@widgets.com
-zimbraMailHost: server1.widgets.com
-zimbraMailDeliveryAddress: smith@widgets.com
-zimbraMemberOf: 1afe5edd-0bf7-11d9-97dc-000d93afea2a
-zimbraPrefMailSignature:: Sm9obiBTbWl0aApWUCBvZiBTdHVmZgpXaWRnZXRzLkNvbQo=
-zimbraPrefMailSignatureEnabled: TRUE
+zmailId: 1d5710b0-0744-11d9-bcca-000d93afea2a
+zmailAccountStatus: active
+zmailMailStatus: enabled
+zmailNotes: this space could be used for account notes
+zmailMailAlias: john.smith@widgets.com
+zmailMailHost: server1.widgets.com
+zmailMailDeliveryAddress: smith@widgets.com
+zmailMemberOf: 1afe5edd-0bf7-11d9-97dc-000d93afea2a
+zmailPrefMailSignature:: Sm9obiBTbWl0aApWUCBvZiBTdHVmZgpXaWRnZXRzLkNvbQo=
+zmailPrefMailSignatureEnabled: TRUE
 mail: smith@widgets.com
 sn: Smith
 cn: John Smith
@@ -57,18 +57,18 @@ aliasedObjectName: uid=smith,ou=people,dc=widgets,dc=com
 
 dn: uid=lewis,ou=people,dc=widgets,dc=com
 uid: lewis
-objectclass: zimbraAccount
+objectclass: zmailAccount
 objectclass: organizationalPerson
 objectClass: inetOrgPerson
-zimbraId: 999c3580-0761-11d9-89db-000d93afea2a
-zimbraAccountStatus: active
-zimbraMailStatus: enabled
-zimbraMailDeliveryAddress: lewis@widgets.com
-zimbraMailAlias: jeff@widgets.com
-zimbraMailAlias: jeff.lewis@widgets.com
-zimbraMailForwardingAddress: lewis@tiiq.net
-zimbraMailHost: server2.widgets.com
-zimbraMemberOf: 1afe5edd-0bf7-11d9-97dc-000d93afea2a
+zmailId: 999c3580-0761-11d9-89db-000d93afea2a
+zmailAccountStatus: active
+zmailMailStatus: enabled
+zmailMailDeliveryAddress: lewis@widgets.com
+zmailMailAlias: jeff@widgets.com
+zmailMailAlias: jeff.lewis@widgets.com
+zmailMailForwardingAddress: lewis@tiiq.net
+zmailMailHost: server2.widgets.com
+zmailMemberOf: 1afe5edd-0bf7-11d9-97dc-000d93afea2a
 mail: lewis@widgets.com
 title: Smartest boy in Arkansas
 sn:Lewis
@@ -89,21 +89,21 @@ aliasedObjectName: uid=lewis,ou=people,dc=widgets,dc=com
 
 dn: uid=engineering,ou=people,dc=widgets,dc=com
 uid: engineering
-objectclass: zimbraDistributionList
+objectclass: zmailDistributionList
 objectclass: organizationalRole
-zimbraId: eccdc42d-074a-11d9-8326-000d93afea2a
-zimbraMailStatus: enabled
-zimbraMailAddress: engineering@widgets.com
-zimbraMailForwardingAddress: smith@widgets.com
-zimbraMailForwardingAddress: lewis@widgets.com
+zmailId: eccdc42d-074a-11d9-8326-000d93afea2a
+zmailMailStatus: enabled
+zmailMailAddress: engineering@widgets.com
+zmailMailForwardingAddress: smith@widgets.com
+zmailMailForwardingAddress: lewis@widgets.com
 mail: engineering@widgets.com
 cn: engineering
 description: test
 
 dn: cn=engineering,ou=groups,dc=widgets,dc=com
 cn: engineering
-objectclass: zimbraGroup
-zimbraId: 1afe5edd-0bf7-11d9-97dc-000d93afea2a
+objectclass: zmailGroup
+zmailId: 1afe5edd-0bf7-11d9-97dc-000d93afea2a
 description: Engineering Group
-zimbraMember: 999c3580-0761-11d9-89db-000d93afea2a
-zimbraMember: 1d5710b0-0744-11d9-bcca-000d93afea2a
+zmailMember: 999c3580-0761-11d9-89db-000d93afea2a
+zmailMember: 1d5710b0-0744-11d9-bcca-000d93afea2a

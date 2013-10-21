@@ -16,11 +16,11 @@
 /*
  * Created on 2005. 6. 29.
  */
-package com.zimbra.cs.redolog;
+package org.zmail.cs.redolog;
 
 import java.io.File;
 
-import com.zimbra.common.service.ServiceException;
+import org.zmail.common.service.ServiceException;
 
 /**
  * @author jhahm

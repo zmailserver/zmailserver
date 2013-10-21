@@ -12,18 +12,18 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.service.admin;
+package org.zmail.cs.service.admin;
 
 import java.util.Map;
 
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.common.soap.AdminConstants;
-import com.zimbra.common.soap.Element;
-import com.zimbra.common.util.LogFactory;
-import com.zimbra.soap.ZimbraSoapContext;
+import org.zmail.common.service.ServiceException;
+import org.zmail.common.soap.AdminConstants;
+import org.zmail.common.soap.Element;
+import org.zmail.common.util.LogFactory;
+import org.zmail.soap.ZmailSoapContext;
 
 /**
- * Removes all account loggers and reloads {@code /opt/zimbra/conf/log4j.properties}.
+ * Removes all account loggers and reloads {@code /opt/zmail/conf/log4j.properties}.
  *
  * @author ysasaki
  */
@@ -32,7 +32,7 @@ public final class ResetAllLoggers extends AdminDocumentHandler {
     @Override
     public Element handle(Element request, Map<String, Object> context) throws ServiceException {
         LogFactory.reset();
-        ZimbraSoapContext zsc = getZimbraSoapContext(context);
+        ZmailSoapContext zsc = getZmailSoapContext(context);
         Element response = zsc.createElement(AdminConstants.RESET_ALL_LOGGERS_RESPONSE);
         return response;
     }

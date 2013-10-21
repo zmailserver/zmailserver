@@ -12,27 +12,27 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.service.admin;
+package org.zmail.cs.service.admin;
 
 import java.util.List;
 import java.util.Map;
 
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.common.soap.AdminConstants;
-import com.zimbra.common.soap.Element;
-import com.zimbra.common.util.ZimbraLog;
-import com.zimbra.cs.account.Account;
-import com.zimbra.cs.account.AccountServiceException;
-import com.zimbra.cs.account.DataSource;
-import com.zimbra.cs.account.DataSource.DataImport;
-import com.zimbra.cs.account.Domain;
-import com.zimbra.cs.account.Provisioning;
-import com.zimbra.cs.account.accesscontrol.AdminRight;
-import com.zimbra.cs.datasource.DataSourceManager;
-import com.zimbra.cs.gal.GalGroup;
-import com.zimbra.cs.gal.GalImport;
-import com.zimbra.soap.ZimbraSoapContext;
-import com.zimbra.soap.admin.type.DataSourceType;
+import org.zmail.common.service.ServiceException;
+import org.zmail.common.soap.AdminConstants;
+import org.zmail.common.soap.Element;
+import org.zmail.common.util.ZmailLog;
+import org.zmail.cs.account.Account;
+import org.zmail.cs.account.AccountServiceException;
+import org.zmail.cs.account.DataSource;
+import org.zmail.cs.account.DataSource.DataImport;
+import org.zmail.cs.account.Domain;
+import org.zmail.cs.account.Provisioning;
+import org.zmail.cs.account.accesscontrol.AdminRight;
+import org.zmail.cs.datasource.DataSourceManager;
+import org.zmail.cs.gal.GalGroup;
+import org.zmail.cs.gal.GalImport;
+import org.zmail.soap.ZmailSoapContext;
+import org.zmail.soap.admin.type.DataSourceType;
 
 public final class SyncGalAccount extends AdminDocumentHandler {
 
@@ -51,10 +51,10 @@ public final class SyncGalAccount extends AdminDocumentHandler {
     @Override
     public Element handle(Element request, Map<String, Object> context) throws ServiceException {
 
-        ZimbraSoapContext zsc = getZimbraSoapContext(context);
+        ZmailSoapContext zsc = getZmailSoapContext(context);
         Provisioning prov = Provisioning.getInstance();
 
-        ZimbraLog.addToContext(ZimbraLog.C_ANAME, getAuthenticatedAccount(zsc).getName());
+        ZmailLog.addToContext(ZmailLog.C_ANAME, getAuthenticatedAccount(zsc).getName());
 
         for (Element accountEl : request.listElements(AdminConstants.E_ACCOUNT)) {
             String accountId = accountEl.getAttribute(AdminConstants.A_ID);
@@ -62,7 +62,7 @@ public final class SyncGalAccount extends AdminDocumentHandler {
             if (account == null) {
                 throw AccountServiceException.NO_SUCH_ACCOUNT(accountId);
             }
-            ZimbraLog.addToContext(ZimbraLog.C_NAME, account.getName());
+            ZmailLog.addToContext(ZmailLog.C_NAME, account.getName());
 
             for (Element dsEl : accountEl.listElements(AdminConstants.E_DATASOURCE)) {
                 String by = dsEl.getAttribute(AdminConstants.A_BY);

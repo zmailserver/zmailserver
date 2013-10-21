@@ -12,7 +12,7 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.service.formatter;
+package org.zmail.cs.service.formatter;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -20,12 +20,12 @@ import java.io.OutputStream;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipInputStream;
 
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.common.util.zip.ZipOutputStream;
-import com.zimbra.cs.service.UserServlet;
-import com.zimbra.cs.service.UserServletContext;
-import com.zimbra.cs.service.UserServletException;
-import com.zimbra.cs.service.formatter.FormatterFactory.FormatType;
+import org.zmail.common.service.ServiceException;
+import org.zmail.common.util.zip.ZipOutputStream;
+import org.zmail.cs.service.UserServlet;
+import org.zmail.cs.service.UserServletContext;
+import org.zmail.cs.service.UserServletException;
+import org.zmail.cs.service.formatter.FormatterFactory.FormatType;
 
 public class ZipFormatter extends ArchiveFormatter {
     public class ZipArchiveInputStream implements ArchiveInputStream {
@@ -65,11 +65,11 @@ public class ZipFormatter extends ArchiveFormatter {
     
     public class ZipArchiveOutputStream implements ArchiveOutputStream {
         public class ZipArchiveOutputEntry implements ArchiveOutputEntry {
-            private com.zimbra.common.util.zip.ZipEntry entry;
+            private org.zmail.common.util.zip.ZipEntry entry;
 
             public ZipArchiveOutputEntry(String path, String name, int type, long
                 date) {
-                entry = new com.zimbra.common.util.zip.ZipEntry(path);
+                entry = new org.zmail.common.util.zip.ZipEntry(path);
                 entry.setComment(name);
                 entry.setTime(date);
                 entry.setUnixMode(0660);

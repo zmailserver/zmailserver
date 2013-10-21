@@ -12,31 +12,31 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.wiki;
+package org.zmail.cs.wiki;
 
 import java.io.IOException;
 import java.util.Locale;
 import java.util.Map;
 
-import com.zimbra.common.util.MapUtil;
+import org.zmail.common.util.MapUtil;
 import org.apache.commons.httpclient.Header;
 
-import com.zimbra.cs.account.Account;
-import com.zimbra.cs.account.AuthToken;
-import com.zimbra.cs.account.Domain;
-import com.zimbra.cs.account.Provisioning;
-import com.zimbra.cs.mailbox.Document;
-import com.zimbra.cs.mailbox.Mailbox;
-import com.zimbra.cs.mailbox.MailItem;
-import com.zimbra.cs.mailbox.MailboxManager;
-import com.zimbra.cs.mailbox.OperationContext;
-import com.zimbra.cs.service.AuthProvider;
-import com.zimbra.cs.service.UserServlet;
-import com.zimbra.cs.service.util.ItemId;
-import com.zimbra.cs.service.doc.DocServiceException;
-import com.zimbra.common.account.Key;
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.common.util.Pair;
+import org.zmail.cs.account.Account;
+import org.zmail.cs.account.AuthToken;
+import org.zmail.cs.account.Domain;
+import org.zmail.cs.account.Provisioning;
+import org.zmail.cs.mailbox.Document;
+import org.zmail.cs.mailbox.Mailbox;
+import org.zmail.cs.mailbox.MailItem;
+import org.zmail.cs.mailbox.MailboxManager;
+import org.zmail.cs.mailbox.OperationContext;
+import org.zmail.cs.service.AuthProvider;
+import org.zmail.cs.service.UserServlet;
+import org.zmail.cs.service.util.ItemId;
+import org.zmail.cs.service.doc.DocServiceException;
+import org.zmail.common.account.Key;
+import org.zmail.common.service.ServiceException;
+import org.zmail.common.util.Pair;
 
 /*
  * Wikis are now obsolete but this class has been retained to aid migrating legacy data.
@@ -172,13 +172,13 @@ public abstract class WikiPage {
             if (page != null)
                 return page;
 
-            String domainWiki = domain.getAttr(Provisioning.A_zimbraNotebookAccount, null);
+            String domainWiki = domain.getAttr(Provisioning.A_zmailNotebookAccount, null);
             if (domainWiki != null)
                 page = WikiPage.findTemplatePage(ctxt, domainWiki, template);
         }
 
         if (page == null) {
-            String defaultWiki = prov.getConfig().getAttr(Provisioning.A_zimbraNotebookAccount, null);
+            String defaultWiki = prov.getConfig().getAttr(Provisioning.A_zmailNotebookAccount, null);
             if (defaultWiki != null)
                 page = WikiPage.findTemplatePage(ctxt, defaultWiki, template);
         }
@@ -198,7 +198,7 @@ public abstract class WikiPage {
 
         if (acct == null)
             throw ServiceException.FAILURE("wiki account " + wikiAccountName + " does not exist, please check " +
-                    Provisioning.A_zimbraNotebookAccount + " on the domain or global config", null);
+                    Provisioning.A_zmailNotebookAccount + " on the domain or global config", null);
 
         WikiPage page = null;
         if (Provisioning.onLocalServer(acct)) {
@@ -293,7 +293,7 @@ public abstract class WikiPage {
             Pair<Header[], byte[]> resource = UserServlet.getRemoteResource(auth.toZAuthToken(), url);
             int status = 0;
             for (Header h : resource.getFirst())
-                if (h.getName().compareTo("X-Zimbra-Http-Status") == 0)
+                if (h.getName().compareTo("X-Zmail-Http-Status") == 0)
                     status = Integer.parseInt(h.getValue());
             if (status != 200)
                 throw ServiceException.RESOURCE_UNREACHABLE("http error "+status, null);

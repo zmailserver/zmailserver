@@ -12,20 +12,20 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.account.ldap.entry;
+package org.zmail.cs.account.ldap.entry;
 
 import java.util.Map;
 
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.cs.account.Domain;
-import com.zimbra.cs.account.Provisioning;
-import com.zimbra.cs.account.ldap.LdapProv;
-import com.zimbra.cs.gal.ZimbraGalSearchBase.PredefinedSearchBase;
-import com.zimbra.cs.ldap.LdapConstants;
-import com.zimbra.cs.ldap.LdapException;
-import com.zimbra.cs.ldap.ZAttributes;
-import com.zimbra.cs.ldap.ZLdapFilter;
-import com.zimbra.cs.ldap.ZLdapFilterFactory;
+import org.zmail.common.service.ServiceException;
+import org.zmail.cs.account.Domain;
+import org.zmail.cs.account.Provisioning;
+import org.zmail.cs.account.ldap.LdapProv;
+import org.zmail.cs.gal.ZmailGalSearchBase.PredefinedSearchBase;
+import org.zmail.cs.ldap.LdapConstants;
+import org.zmail.cs.ldap.LdapException;
+import org.zmail.cs.ldap.ZAttributes;
+import org.zmail.cs.ldap.ZLdapFilter;
+import org.zmail.cs.ldap.ZLdapFilterFactory;
 
 /**
  * 
@@ -38,8 +38,8 @@ public class LdapDomain extends Domain implements LdapEntry {
     
     public LdapDomain(String dn, ZAttributes attrs, Map<String, Object> defaults, Provisioning prov) 
     throws LdapException {
-        super(attrs.getAttrString(Provisioning.A_zimbraDomainName), 
-                attrs.getAttrString(Provisioning.A_zimbraId), 
+        super(attrs.getAttrString(Provisioning.A_zmailDomainName), 
+                attrs.getAttrString(Provisioning.A_zmailId), 
                 attrs.getAttrs(), defaults, prov);
         mDn = dn;
     }

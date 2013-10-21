@@ -12,18 +12,18 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.service.admin;
+package org.zmail.cs.service.admin;
 
-import com.zimbra.common.localconfig.LC;
+import org.zmail.common.localconfig.LC;
 
-import com.zimbra.common.util.ByteUtil;
-import com.zimbra.common.util.RemoteIP;
-import com.zimbra.common.util.ZimbraLog;
-import com.zimbra.cs.account.AuthToken;
-import com.zimbra.cs.extension.ExtensionUtil;
-import com.zimbra.cs.servlet.ZimbraServlet;
-import com.zimbra.soap.SoapEngine;
-import com.zimbra.soap.ZimbraSoapContext;
+import org.zmail.common.util.ByteUtil;
+import org.zmail.common.util.RemoteIP;
+import org.zmail.common.util.ZmailLog;
+import org.zmail.cs.account.AuthToken;
+import org.zmail.cs.extension.ExtensionUtil;
+import org.zmail.cs.servlet.ZmailServlet;
+import org.zmail.soap.SoapEngine;
+import org.zmail.soap.ZmailSoapContext;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -37,8 +37,8 @@ import java.io.OutputStream;
 import java.io.InputStream;
 import java.lang.reflect.Method;
 import java.util.HashMap;
-import com.zimbra.cs.account.AuthToken;
-import com.zimbra.cs.account.AuthTokenException;
+import org.zmail.cs.account.AuthToken;
+import org.zmail.cs.account.AuthTokenException;
 
 /**
  * Created by IntelliJ IDEA.
@@ -47,7 +47,7 @@ import com.zimbra.cs.account.AuthTokenException;
  * Time: 12:17:14 PM
  * To change this template use File | Settings | File Templates.
  */
-public class AdminFileDownload  extends ZimbraServlet {
+public class AdminFileDownload  extends ZmailServlet {
 
     private static final String ACTION_GETBP_RESULTS = "getBP" ;
     private static final String ACTION_GETSR = "getSR" ; //get search results
@@ -73,7 +73,7 @@ public class AdminFileDownload  extends ZimbraServlet {
 			   return;
 		    String action = req.getParameter("action") ;
             if (action != null && action.length() > 0) {
-                ZimbraLog.webclient.debug("Receiving the file download request " + action) ;
+                ZmailLog.webclient.debug("Receiving the file download request " + action) ;
             }else{
                 return ;
             }
@@ -83,7 +83,7 @@ public class AdminFileDownload  extends ZimbraServlet {
                 filename = "bp_result.csv"  ;
 
                 if (aid == null) {
-                    ZimbraLog.webclient.error("Missing required parameter aid " ) ;
+                    ZmailLog.webclient.error("Missing required parameter aid " ) ;
                     return ;
                 } else {
                    /*
@@ -94,7 +94,7 @@ public class AdminFileDownload  extends ZimbraServlet {
                     }else {
                         filename = "bpresult_" + up.getName() ;
                     }*/
-                    ZimbraLog.webclient.debug ("Download the bulk provision status for uploaded file " + aid ) ;
+                    ZmailLog.webclient.debug ("Download the bulk provision status for uploaded file " + aid ) ;
                 }
 
                 resp.setHeader("Expires", "Tue, 24 Jan 2000 20:46:50 GMT");
@@ -131,19 +131,19 @@ public class AdminFileDownload  extends ZimbraServlet {
             	String bulkFileName = null;
             	String clientFileName = null;
             	if(pFileFormat.equalsIgnoreCase(FILE_FORMAT_BULK_CSV)) {
-            		bulkFileName = String.format("%s%s_bulk_%s_%s.csv", LC.zimbra_tmp_directory.value(),File.separator,authToken.getAccountId(),pFileId);
+            		bulkFileName = String.format("%s%s_bulk_%s_%s.csv", LC.zmail_tmp_directory.value(),File.separator,authToken.getAccountId(),pFileId);
             		clientFileName = "bulk_provision.csv";
             	} else if (pFileFormat.equalsIgnoreCase(FILE_FORMAT_BULK_XML)) {
-            		bulkFileName = String.format("%s%s_bulk_%s_%s.xml", LC.zimbra_tmp_directory.value(),File.separator,authToken.getAccountId(),pFileId);
+            		bulkFileName = String.format("%s%s_bulk_%s_%s.xml", LC.zmail_tmp_directory.value(),File.separator,authToken.getAccountId(),pFileId);
             		clientFileName = "bulk_provision.xml";
             	}  else if (pFileFormat.equalsIgnoreCase(FILE_FORMAT_MIGRATION_XML)) {
-            		bulkFileName = String.format("%s%s_migration_%s_%s.xml", LC.zimbra_tmp_directory.value(),File.separator,authToken.getAccountId(),pFileId);
+            		bulkFileName = String.format("%s%s_migration_%s_%s.xml", LC.zmail_tmp_directory.value(),File.separator,authToken.getAccountId(),pFileId);
             		clientFileName = "bulk_provision.xml";
             	}  else if (pFileFormat.equalsIgnoreCase(FILE_FORMAT_BULK_IMPORT_ERRORS)) {
-            		bulkFileName = String.format("%s%s_bulk_errors_%s_%s.csv", LC.zimbra_tmp_directory.value(),File.separator,authToken.getAccountId(),pFileId);
+            		bulkFileName = String.format("%s%s_bulk_errors_%s_%s.csv", LC.zmail_tmp_directory.value(),File.separator,authToken.getAccountId(),pFileId);
             		clientFileName = "failed_accounts.csv";
             	} else if (pFileFormat.equalsIgnoreCase(FILE_FORMAT_BULK_IMPORT_REPORT)) {
-            		bulkFileName = String.format("%s%s_bulk_report_%s_%s.csv", LC.zimbra_tmp_directory.value(),File.separator,authToken.getAccountId(),pFileId);
+            		bulkFileName = String.format("%s%s_bulk_report_%s_%s.csv", LC.zmail_tmp_directory.value(),File.separator,authToken.getAccountId(),pFileId);
             		clientFileName = "accounts_report.csv";
             	}
             	if(bulkFileName != null) {
@@ -164,19 +164,19 @@ public class AdminFileDownload  extends ZimbraServlet {
             		try {
 						ByteUtil.copy(is, true, resp.getOutputStream(), false);
 					} catch (Exception e) {
-						ZimbraLog.webclient.error(e) ;
+						ZmailLog.webclient.error(e) ;
 					}
             		try {
 						is.close();
 						File file = new File(bulkFileName);
 						file.delete();
 					} catch (Exception e) {
-						ZimbraLog.webclient.error(e) ;
+						ZmailLog.webclient.error(e) ;
 					}
             	}
             }
 		} catch (Exception e) {
-			ZimbraLog.webclient.error(e) ;
+			ZmailLog.webclient.error(e) ;
         	return;
 		}
 
@@ -192,8 +192,8 @@ public class AdminFileDownload  extends ZimbraServlet {
         InputStream in = null;
         StringBuffer sb = new StringBuffer();
         try {
-//            Class c = Class.forName("com.zimbra.bp.ZimbraBulkProvisionExt") ;  //this will throw NoClassFoundException
-            Class c = ExtensionUtil.findClass("com.zimbra.bp.BulkProvisionStatus") ;
+//            Class c = Class.forName("org.zmail.bp.ZmailBulkProvisionExt") ;  //this will throw NoClassFoundException
+            Class c = ExtensionUtil.findClass("org.zmail.bp.BulkProvisionStatus") ;
             Class [] params = new Class [2] ;
             params[0] = Class.forName("java.io.OutputStream") ;
             params[1] = Class.forName("java.lang.String") ;
@@ -203,7 +203,7 @@ public class AdminFileDownload  extends ZimbraServlet {
             paramValue[1] = aid ;
             m.invoke(c, paramValue) ;
         } catch (Exception e) {
-             ZimbraLog.webclient.error(e) ;
+             ZmailLog.webclient.error(e) ;
         } finally {
           if (in != null) in.close(  );
         }
@@ -215,13 +215,13 @@ public class AdminFileDownload  extends ZimbraServlet {
         InputStream in = null;
         StringBuffer sb = new StringBuffer();
         try {
-            Class c = ExtensionUtil.findClass("com.zimbra.bp.SearchResults") ;
+            Class c = ExtensionUtil.findClass("org.zmail.bp.SearchResults") ;
             Class [] params = new Class [5] ;
             params[0] = Class.forName("java.io.OutputStream") ;
             params[1] = Class.forName("java.lang.String") ;
             params[2] = Class.forName("java.lang.String") ;
             params[3] = Class.forName("java.lang.String") ;
-            params[4] = Class.forName("com.zimbra.cs.account.AuthToken")  ;
+            params[4] = Class.forName("org.zmail.cs.account.AuthToken")  ;
             Method m = c.getMethod("writeSearchResultOutputStream", params) ;
             Object [] paramValue = new Object [5] ;
             paramValue[0] = out ;
@@ -231,7 +231,7 @@ public class AdminFileDownload  extends ZimbraServlet {
             paramValue[4] = authToken ;
             m.invoke(c, paramValue) ;
         } catch (Exception e) {
-             ZimbraLog.webclient.error(e) ;
+             ZmailLog.webclient.error(e) ;
         } finally {
           if (in != null) in.close(  );
         }

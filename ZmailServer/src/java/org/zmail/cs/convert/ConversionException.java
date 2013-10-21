@@ -17,7 +17,7 @@
  * Created on Jan 19, 2005
  *
  */
-package com.zimbra.cs.convert;
+package org.zmail.cs.convert;
 
 /**
  * @author kchen

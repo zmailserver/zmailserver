@@ -12,9 +12,9 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.qa.unittest;
+package org.zmail.qa.unittest;
 
-import com.zimbra.cs.mailbox.ScheduledTask;
+import org.zmail.cs.mailbox.ScheduledTask;
 
 /**
  * Task used by {@link TestScheduledTaskManager}.

@@ -12,18 +12,18 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.account.ldap;
+package org.zmail.cs.account.ldap;
 
 import java.util.Set;
 
-import com.zimbra.common.account.ZAttrProvisioning.AutoProvMode;
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.common.util.ZimbraLog;
-import com.zimbra.cs.account.Account;
-import com.zimbra.cs.account.Domain;
-import com.zimbra.cs.account.Provisioning;
-import com.zimbra.cs.ldap.ZAttributes;
-import com.zimbra.soap.type.AutoProvPrincipalBy;
+import org.zmail.common.account.ZAttrProvisioning.AutoProvMode;
+import org.zmail.common.service.ServiceException;
+import org.zmail.common.util.ZmailLog;
+import org.zmail.cs.account.Account;
+import org.zmail.cs.account.Domain;
+import org.zmail.cs.account.Provisioning;
+import org.zmail.cs.ldap.ZAttributes;
+import org.zmail.soap.type.AutoProvPrincipalBy;
 
 public class AutoProvisionManual extends AutoProvision {
 
@@ -50,26 +50,26 @@ public class AutoProvisionManual extends AutoProvision {
     }
     
     private boolean autoProvisionEnabled() {
-        Set<String> modesEnabled = domain.getMultiAttrSet(Provisioning.A_zimbraAutoProvMode);
+        Set<String> modesEnabled = domain.getMultiAttrSet(Provisioning.A_zmailAutoProvMode);
         return modesEnabled.contains(AutoProvMode.MANUAL.name());
     }
     
     private Account createAccount() throws ServiceException {
-        String acctZimbraName;
+        String acctZmailName;
         ExternalEntry externalEntry;
         if (by == AutoProvPrincipalBy.dn) {
             ZAttributes externalAttrs = getExternalAttrsByDn(principal);
             externalEntry = new ExternalEntry(principal, externalAttrs);
-            acctZimbraName = mapName(externalAttrs, null);
+            acctZmailName = mapName(externalAttrs, null);
         } else if (by == AutoProvPrincipalBy.name) {
             externalEntry = getExternalAttrsByName(principal);
-            acctZimbraName = mapName(externalEntry.getAttrs(), principal);
+            acctZmailName = mapName(externalEntry.getAttrs(), principal);
         } else {
             throw ServiceException.FAILURE("unknown AutoProvPrincipalBy", null);
         }
 
-        ZimbraLog.autoprov.info("auto creating account in MANUAL mode: " + acctZimbraName);
-        return createAccount(acctZimbraName, externalEntry, password, AutoProvMode.MANUAL);
+        ZmailLog.autoprov.info("auto creating account in MANUAL mode: " + acctZmailName);
+        return createAccount(acctZmailName, externalEntry, password, AutoProvMode.MANUAL);
     }
 
 }

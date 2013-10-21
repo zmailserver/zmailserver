@@ -12,7 +12,7 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.mailbox;
+package org.zmail.cs.mailbox;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -27,54 +27,54 @@ import javax.mail.internet.MimeMessage;
 
 import com.google.common.base.Objects;
 import com.google.common.base.Strings;
-import com.zimbra.common.account.Key.AccountBy;
-import com.zimbra.common.account.ZAttrProvisioning.PrefCalendarApptVisibility;
-import com.zimbra.common.calendar.ICalTimeZone;
-import com.zimbra.common.calendar.ParsedDateTime;
-import com.zimbra.common.calendar.ZCalendar.ICalTok;
-import com.zimbra.common.calendar.ZCalendar.ZProperty;
-import com.zimbra.common.calendar.ZCalendar.ZVCalendar;
-import com.zimbra.common.localconfig.DebugConfig;
-import com.zimbra.common.mailbox.Color;
-import com.zimbra.common.mime.InternetAddress;
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.common.util.Log;
-import com.zimbra.common.util.LogFactory;
-import com.zimbra.common.util.StringUtil;
-import com.zimbra.common.util.ZimbraLog;
-import com.zimbra.common.zmime.ZMimeMessage;
-import com.zimbra.cs.account.AccessManager;
-import com.zimbra.cs.account.Account;
-import com.zimbra.cs.account.CalendarResource;
-import com.zimbra.cs.account.Provisioning;
-import com.zimbra.cs.account.accesscontrol.Rights.User;
-import com.zimbra.cs.db.DbMailItem;
-import com.zimbra.cs.index.IndexDocument;
-import com.zimbra.cs.mailbox.MailItem.CustomMetadata.CustomMetadataList;
-import com.zimbra.cs.mailbox.MailServiceException.NoSuchItemException;
-import com.zimbra.cs.mailbox.calendar.CalendarMailSender;
-import com.zimbra.cs.mailbox.calendar.IcalXmlStrMap;
-import com.zimbra.cs.mailbox.calendar.Invite;
-import com.zimbra.cs.mailbox.calendar.InviteChanges;
-import com.zimbra.cs.mailbox.calendar.RecurId;
-import com.zimbra.cs.mailbox.calendar.Util;
-import com.zimbra.cs.mailbox.calendar.ZAttendee;
-import com.zimbra.cs.mailbox.calendar.ZOrganizer;
-import com.zimbra.cs.mime.Mime;
-import com.zimbra.cs.mime.ParsedAddress;
-import com.zimbra.cs.mime.ParsedMessage;
-import com.zimbra.cs.mime.ParsedMessageOptions;
-import com.zimbra.cs.mime.TnefConverter;
-import com.zimbra.cs.mime.UUEncodeConverter;
-import com.zimbra.cs.redolog.RedoLogProvider;
-import com.zimbra.cs.redolog.op.CreateCalendarItemPlayer;
-import com.zimbra.cs.redolog.op.RedoableOp;
-import com.zimbra.cs.service.util.ItemId;
-import com.zimbra.cs.session.PendingModifications.Change;
-import com.zimbra.cs.store.MailboxBlob;
-import com.zimbra.cs.store.StagedBlob;
-import com.zimbra.cs.util.AccountUtil;
-import com.zimbra.cs.util.AccountUtil.AccountAddressMatcher;
+import org.zmail.common.account.Key.AccountBy;
+import org.zmail.common.account.ZAttrProvisioning.PrefCalendarApptVisibility;
+import org.zmail.common.calendar.ICalTimeZone;
+import org.zmail.common.calendar.ParsedDateTime;
+import org.zmail.common.calendar.ZCalendar.ICalTok;
+import org.zmail.common.calendar.ZCalendar.ZProperty;
+import org.zmail.common.calendar.ZCalendar.ZVCalendar;
+import org.zmail.common.localconfig.DebugConfig;
+import org.zmail.common.mailbox.Color;
+import org.zmail.common.mime.InternetAddress;
+import org.zmail.common.service.ServiceException;
+import org.zmail.common.util.Log;
+import org.zmail.common.util.LogFactory;
+import org.zmail.common.util.StringUtil;
+import org.zmail.common.util.ZmailLog;
+import org.zmail.common.zmime.ZMimeMessage;
+import org.zmail.cs.account.AccessManager;
+import org.zmail.cs.account.Account;
+import org.zmail.cs.account.CalendarResource;
+import org.zmail.cs.account.Provisioning;
+import org.zmail.cs.account.accesscontrol.Rights.User;
+import org.zmail.cs.db.DbMailItem;
+import org.zmail.cs.index.IndexDocument;
+import org.zmail.cs.mailbox.MailItem.CustomMetadata.CustomMetadataList;
+import org.zmail.cs.mailbox.MailServiceException.NoSuchItemException;
+import org.zmail.cs.mailbox.calendar.CalendarMailSender;
+import org.zmail.cs.mailbox.calendar.IcalXmlStrMap;
+import org.zmail.cs.mailbox.calendar.Invite;
+import org.zmail.cs.mailbox.calendar.InviteChanges;
+import org.zmail.cs.mailbox.calendar.RecurId;
+import org.zmail.cs.mailbox.calendar.Util;
+import org.zmail.cs.mailbox.calendar.ZAttendee;
+import org.zmail.cs.mailbox.calendar.ZOrganizer;
+import org.zmail.cs.mime.Mime;
+import org.zmail.cs.mime.ParsedAddress;
+import org.zmail.cs.mime.ParsedMessage;
+import org.zmail.cs.mime.ParsedMessageOptions;
+import org.zmail.cs.mime.TnefConverter;
+import org.zmail.cs.mime.UUEncodeConverter;
+import org.zmail.cs.redolog.RedoLogProvider;
+import org.zmail.cs.redolog.op.CreateCalendarItemPlayer;
+import org.zmail.cs.redolog.op.RedoableOp;
+import org.zmail.cs.service.util.ItemId;
+import org.zmail.cs.session.PendingModifications.Change;
+import org.zmail.cs.store.MailboxBlob;
+import org.zmail.cs.store.StagedBlob;
+import org.zmail.cs.util.AccountUtil;
+import org.zmail.cs.util.AccountUtil.AccountAddressMatcher;
 
 /**
  * @since Jun 13, 2004
@@ -221,7 +221,7 @@ public class Message extends MailItem {
      *  does its best to remove quoted text, etc. before calculating the
      *  fragment.
      *
-     * @see com.zimbra.cs.index.Fragment */
+     * @see org.zmail.cs.index.Fragment */
     public String getFragment() {
         return Strings.nullToEmpty(fragment);
     }
@@ -263,7 +263,7 @@ public class Message extends MailItem {
 
     @Override
     public String getSortRecipients() {
-        List<InternetAddress> iaddrs = com.zimbra.common.mime.InternetAddress.parseHeader(getRecipients());
+        List<InternetAddress> iaddrs = org.zmail.common.mime.InternetAddress.parseHeader(getRecipients());
         if (iaddrs == null || iaddrs.isEmpty()) {
             return null;
         }
@@ -311,8 +311,8 @@ public class Message extends MailItem {
      *         <code>""</code> for Messages that are not drafts or not
      *         replies/forwards.
      * @see #getDraftOrigId
-     * @see com.zimbra.cs.service.mail.SendMsg#TYPE_FORWARD
-     * @see com.zimbra.cs.service.mail.SendMsg#TYPE_REPLY */
+     * @see org.zmail.cs.service.mail.SendMsg#TYPE_FORWARD
+     * @see org.zmail.cs.service.mail.SendMsg#TYPE_REPLY */
     public String getDraftReplyType() {
         return (draftInfo == null || draftInfo.replyType == null ? "" : draftInfo.replyType);
     }
@@ -342,7 +342,7 @@ public class Message extends MailItem {
         draftInfo.accountId = accountId;
     }
 
-    /** Returns the ID of the {@link com.zimbra.cs.account.Identity} that was
+    /** Returns the ID of the {@link org.zmail.cs.account.Identity} that was
      *  used to compose this draft message.
      *
      * @return The ID of the Identity used to compose this draft message, or ""
@@ -443,11 +443,11 @@ public class Message extends MailItem {
      * @see UUEncodeConverter */
     public MimeMessage getMimeMessage(boolean runConverters) throws ServiceException {
         MimeMessage mm = MessageCache.getMimeMessage(this, runConverters);
-        if (mm instanceof ZMimeMessage && ZMimeMessage.usingZimbraParser()) {
+        if (mm instanceof ZMimeMessage && ZMimeMessage.usingZmailParser()) {
             try {
                 mm = new Mime.FixedMimeMessage(mm, mMailbox.getAccount());
             } catch (MessagingException e) {
-                ZimbraLog.mailbox.info("could not copy MimeMessage; using original", e);
+                ZmailLog.mailbox.info("could not copy MimeMessage; using original", e);
             }
         }
         return mm;
@@ -532,7 +532,7 @@ public class Message extends MailItem {
                 if (components != null) {
                     flags |= Flag.BITMASK_INVITE;
                     if (ICalTok.PUBLISH.toString().equals(methodStr) &&
-                            !acct.getBooleanAttr(Provisioning.A_zimbraPrefCalendarAllowPublishMethodInvite, false)) {
+                            !acct.getBooleanAttr(Provisioning.A_zmailPrefCalendarAllowPublishMethodInvite, false)) {
                         // If method is PUBLISH, we don't process the calendar part.  Mark it as
                         // a regular attachment instead.
                         flags |= Flag.BITMASK_ATTACHED;
@@ -540,7 +540,7 @@ public class Message extends MailItem {
                     }
                 }
             } catch (Exception e) {
-                ZimbraLog.calendar.warn("Unable to process iCalendar attachment", e);
+                ZmailLog.calendar.warn("Unable to process iCalendar attachment", e);
             }
         }
 
@@ -569,7 +569,7 @@ public class Message extends MailItem {
         data.unreadCount = unread ? 1 : 0;
         data.contentChanged(mbox);
 
-        ZimbraLog.mailop.info("Adding Message: id=%d, Message-ID=%s, parentId=%d, folderId=%d, folderName=%s.",
+        ZmailLog.mailop.info("Adding Message: id=%d, Message-ID=%s, parentId=%d, folderId=%d, folderName=%s.",
                               data.id, pm.getMessageID(), data.parentId, folder.getId(), folder.getName());
         new DbMailItem(mbox)
             .setSender(pm.getParsedSender().getSortString())
@@ -582,7 +582,7 @@ public class Message extends MailItem {
             try {
                 msg.processInvitesAfterCreate(methodStr, folder.getId(), !noICal, pm, components);
             } catch (Exception e) {
-                ZimbraLog.calendar.warn("Unable to process iCalendar attachment", e);
+                ZmailLog.calendar.warn("Unable to process iCalendar attachment", e);
             }
         }
 
@@ -620,7 +620,7 @@ public class Message extends MailItem {
                 }
             }
         } catch (MessagingException e) {
-            ZimbraLog.calendar.warn(
+            ZmailLog.calendar.warn(
                     "ignoring error while checking for " + CalendarMailSender.X_ZIMBRA_CALENDAR_INTENDED_FOR +
                     " header on incoming message", e);
         }
@@ -688,7 +688,7 @@ public class Message extends MailItem {
                         }
                     }
                     String sender = senderEmail != null ? senderEmail : "unkonwn sender";
-                    ZimbraLog.calendar.info("Calendar invite from " + sender + " to " + acct.getName() + " is not allowed");
+                    ZmailLog.calendar.info("Calendar invite from " + sender + " to " + acct.getName() + " is not allowed");
 
                     // Turn off auto-add.  We still have to run through the code below to save the invite's
                     // data in message's metadata.
@@ -758,7 +758,7 @@ public class Message extends MailItem {
                                 !seriesDtStart.hasZeroTime() && ridDt.sameTimeZone(seriesDtStart)) {
                                 ParsedDateTime fixedDt = seriesDtStart.cloneWithNewDate(ridDt);
                                 RecurId fixedRid = new RecurId(fixedDt, rid.getRange());
-                                ZimbraLog.calendar.debug("Fixed up invalid RECURRENCE-ID with zero time; before=[%s], after=[%s]",
+                                ZmailLog.calendar.debug("Fixed up invalid RECURRENCE-ID with zero time; before=[%s], after=[%s]",
                                         rid, fixedRid);
                                 inv.setRecurId(fixedRid);
                             }
@@ -792,13 +792,13 @@ public class Message extends MailItem {
                     // Is sender == recipient?  If so, clear attendees.
                     if (intendedForAddress != null) {
                         if (intendedForAddress.equalsIgnoreCase(fromEmail)) {
-                            ZimbraLog.calendar.info(
+                            ZmailLog.calendar.info(
                                     "Got malformed invite without organizer.  Clearing attendees to prevent inadvertent cancels.");
                             cur.clearAttendees();
                             dangerousSender = true;
                         }
                     } else if (acctMatcher.matches(fromEmail)) {
-                        ZimbraLog.calendar.info(
+                        ZmailLog.calendar.info(
                                 "Got malformed invite without organizer.  Clearing attendees to prevent inadvertent cancels.");
                         cur.clearAttendees();
                         dangerousSender = true;
@@ -811,7 +811,7 @@ public class Message extends MailItem {
                             if (senderEmail != null && !senderEmail.equalsIgnoreCase(fromEmail))
                                 org.setSentBy(senderEmail);
                             cur.setOrganizer(org);
-                            ZimbraLog.calendar.info(
+                            ZmailLog.calendar.info(
                                     "Got malformed invite that lists attendees without specifying an organizer.  " +
                                     "Defaulting organizer to: " + org.toString());
                         } else {
@@ -837,7 +837,7 @@ public class Message extends MailItem {
                             }
                             cur.setOrganizer(org);
                             cur.setIsOrganizer(intendedForMe);
-                            ZimbraLog.calendar.info("Got malformed reply missing organizer.  Defaulting to " + org.toString());
+                            ZmailLog.calendar.info("Got malformed reply missing organizer.  Defaulting to " + org.toString());
                         }
                     }
                 }
@@ -899,7 +899,7 @@ public class Message extends MailItem {
                             // Allow PUBLISH method as well depending on the preference.
                             if (ICalTok.REQUEST.equals(methodTok) ||
                                 (ICalTok.PUBLISH.equals(methodTok) &&
-                                 getAccount().getBooleanAttr(Provisioning.A_zimbraPrefCalendarAllowPublishMethodInvite, false))) {
+                                 getAccount().getBooleanAttr(Provisioning.A_zmailPrefCalendarAllowPublishMethodInvite, false))) {
                                 if (autoAddNew) {
                                     int flags = 0;
 //                                  int flags = Flag.BITMASK_INDEXING_DEFERRED;
@@ -930,10 +930,10 @@ public class Message extends MailItem {
                                 String orgAddress = org != null ? org.getAddress() : null;
                                 if (acctMatcher.matches(orgAddress))
                                     ignore = !acct.getBooleanAttr(
-                                            Provisioning.A_zimbraPrefCalendarAllowCancelEmailToSelf, false);
+                                            Provisioning.A_zmailPrefCalendarAllowCancelEmailToSelf, false);
                             }
                             if (ignore) {
-                                ZimbraLog.calendar.info(
+                                ZmailLog.calendar.info(
                                         "Ignoring calendar request emailed from organizer to self, " +
                                         "possibly in a mail loop involving mailing lists and/or forwards; " +
                                         "calItemId=" + calItem.getId() + ", msgId=" + getId());
@@ -1034,7 +1034,7 @@ public class Message extends MailItem {
                     // If this is an attendee-originated message (REPLY, COUNTER, etc.), we only want
                     // to forward it if the appointment was organized on-behalf-of, i.e. the appointment's
                     // ORGANIZER has SENT-BY.  Furthermore, we want to forward it to the SENT-BY user,
-                    // not the users listed in the zimbraPrefCalendarForwardInvitesTo preference.
+                    // not the users listed in the zmailPrefCalendarForwardInvitesTo preference.
                     if (firstCalItem != null) {
                         Invite invCalItem = firstCalItem.getInvite(invites.get(0).getRecurId());
                         if (invCalItem == null)
@@ -1060,7 +1060,7 @@ public class Message extends MailItem {
                     try {
                         calFolder = getMailbox().getFolderById(calItemFolderId);
                     } catch (NoSuchItemException e) {
-                        ZimbraLog.mailbox.warn("No such calendar folder (" + calItemFolderId + ") during invite auto-forwarding");
+                        ZmailLog.mailbox.warn("No such calendar folder (" + calItemFolderId + ") during invite auto-forwarding");
                     }
                     for (String fwd : forwardTo) {
                         if (fwd != null) {
@@ -1089,7 +1089,7 @@ public class Message extends MailItem {
                             }
                         }
                         if (rcptIsSender) {
-                            ZimbraLog.calendar.info("Not auto-forwarding to " + fwd + " because it is the sender of this message");
+                            ZmailLog.calendar.info("Not auto-forwarding to " + fwd + " because it is the sender of this message");
                             continue;
                         }
                         if (publicInvites) {
@@ -1265,7 +1265,7 @@ public class Message extends MailItem {
             }
             return pm.getLuceneDocuments();
         } catch (ServiceException e) {
-            ZimbraLog.index.warn("Unable to generate index data for Message %d. Item will not be indexed.", getId(), e);
+            ZmailLog.index.warn("Unable to generate index data for Message %d. Item will not be indexed.", getId(), e);
             return Collections.emptyList();
         }
     }
@@ -1460,7 +1460,7 @@ public class Message extends MailItem {
 
     /**
      * Overrides the default value of {@code true}, to handle the
-     * {@code zimbraMailAllowReceiveButNotSendWhenOverQuota} account
+     * {@code zmailMailAllowReceiveButNotSendWhenOverQuota} account
      * attribute.
      */
     @Override

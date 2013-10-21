@@ -12,12 +12,12 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.mailbox;
+package org.zmail.cs.mailbox;
 
 import java.util.Iterator;
 
 import com.google.common.base.Splitter;
-import com.zimbra.common.service.ServiceException;
+import org.zmail.common.service.ServiceException;
 
 public final class MailboxVersion {
     // These should be incremented with changes to serialization format.

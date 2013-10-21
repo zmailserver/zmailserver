@@ -13,7 +13,7 @@
  * ***** END LICENSE BLOCK *****
  */
 
-package com.zimbra.soap;
+package org.zmail.soap;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -21,22 +21,22 @@ import java.io.InputStream;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletResponse;
 
-import com.zimbra.common.mime.MimeConstants;
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.common.soap.AccountConstants;
-import com.zimbra.common.util.ByteUtil;
-import com.zimbra.common.util.LogFactory;
-import com.zimbra.common.util.ZimbraLog;
-import com.zimbra.cs.account.Provisioning;
-import com.zimbra.cs.httpclient.URLUtil;
-import com.zimbra.cs.servlet.ZimbraServlet;
-import com.zimbra.soap.util.WsdlGenerator;
-import com.zimbra.soap.util.WsdlServiceInfo;
+import org.zmail.common.mime.MimeConstants;
+import org.zmail.common.service.ServiceException;
+import org.zmail.common.soap.AccountConstants;
+import org.zmail.common.util.ByteUtil;
+import org.zmail.common.util.LogFactory;
+import org.zmail.common.util.ZmailLog;
+import org.zmail.cs.account.Provisioning;
+import org.zmail.cs.httpclient.URLUtil;
+import org.zmail.cs.servlet.ZmailServlet;
+import org.zmail.soap.util.WsdlGenerator;
+import org.zmail.soap.util.WsdlServiceInfo;
 
 /**
- * The wsdl service servlet - serves up files comprising Zimbra's WSDL definition
+ * The wsdl service servlet - serves up files comprising Zmail's WSDL definition
  */
-public class WsdlServlet extends ZimbraServlet {
+public class WsdlServlet extends ZmailServlet {
 
     /**
      * 
@@ -48,21 +48,21 @@ public class WsdlServlet extends ZimbraServlet {
         LogFactory.init();
 
         String name = getServletName();
-        ZimbraLog.soap.info("Servlet " + name + " starting up");
+        ZmailLog.soap.info("Servlet " + name + " starting up");
         super.init();
     }
 
     @Override
     public void destroy() {
         String name = getServletName();
-        ZimbraLog.soap.info("Servlet " + name + " shutting down");
+        ZmailLog.soap.info("Servlet " + name + " shutting down");
         super.destroy();
     }
 
     @Override
     protected void doGet(javax.servlet.http.HttpServletRequest req, javax.servlet.http.HttpServletResponse resp)
     throws javax.servlet.ServletException, IOException {
-        ZimbraLog.clearContext();
+        ZmailLog.clearContext();
         try {
             addRemoteIpToLoggingContext(req);
             String pathInfo = req.getPathInfo();
@@ -73,7 +73,7 @@ public class WsdlServlet extends ZimbraServlet {
             if (pathInfo.startsWith("/")) {
                 pathInfo = pathInfo.substring(1);
             }
-            ZimbraLog.soap.debug("WSDL SERVLET Received a GET pathInfo=" + pathInfo);
+            ZmailLog.soap.debug("WSDL SERVLET Received a GET pathInfo=" + pathInfo);
             if (pathInfo.matches("^[a-zA-Z]+\\.xsd$")) {
                 InputStream is = JaxbUtil.class.getResourceAsStream(pathInfo);
                 if (is == null) {
@@ -89,7 +89,7 @@ public class WsdlServlet extends ZimbraServlet {
                 }
             }
         } finally {
-            ZimbraLog.clearContext();
+            ZmailLog.clearContext();
         }
     }
     

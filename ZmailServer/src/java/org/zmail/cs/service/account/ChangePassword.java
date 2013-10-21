@@ -16,22 +16,22 @@
 /*
  * Created on Sep 3, 2004
  */
-package com.zimbra.cs.service.account;
+package org.zmail.cs.service.account;
 
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.common.soap.AccountConstants;
-import com.zimbra.common.soap.Element;
-import com.zimbra.common.util.StringUtil;
-import com.zimbra.common.util.ZimbraLog;
-import com.zimbra.cs.account.Account;
-import com.zimbra.cs.account.AccountServiceException.AuthFailedServiceException;
-import com.zimbra.cs.account.AuthToken;
-import com.zimbra.cs.account.Domain;
-import com.zimbra.cs.account.Provisioning;
-import com.zimbra.common.account.Key;
-import com.zimbra.common.account.Key.AccountBy;
-import com.zimbra.cs.service.AuthProvider;
-import com.zimbra.soap.ZimbraSoapContext;
+import org.zmail.common.service.ServiceException;
+import org.zmail.common.soap.AccountConstants;
+import org.zmail.common.soap.Element;
+import org.zmail.common.util.StringUtil;
+import org.zmail.common.util.ZmailLog;
+import org.zmail.cs.account.Account;
+import org.zmail.cs.account.AccountServiceException.AuthFailedServiceException;
+import org.zmail.cs.account.AuthToken;
+import org.zmail.cs.account.Domain;
+import org.zmail.cs.account.Provisioning;
+import org.zmail.common.account.Key;
+import org.zmail.common.account.Key.AccountBy;
+import org.zmail.cs.service.AuthProvider;
+import org.zmail.soap.ZmailSoapContext;
 
 import java.util.Map;
 
@@ -45,7 +45,7 @@ public class ChangePassword extends AccountDocumentHandler {
 	    if (!checkPasswordSecurity(context))
             throw ServiceException.INVALID_REQUEST("clear text password is not allowed", null);
 	    
-        ZimbraSoapContext zsc = getZimbraSoapContext(context);
+        ZmailSoapContext zsc = getZmailSoapContext(context);
         Provisioning prov = Provisioning.getInstance();
         
         String namePassedIn = request.getAttribute(AccountConstants.E_ACCOUNT);
@@ -73,7 +73,7 @@ public class ChangePassword extends AccountDocumentHandler {
             } catch (ServiceException e) {
                 // if something went wrong proxying the request, just execute it locally
                 if (ServiceException.PROXY_ERROR.equals(e.getCode())) {
-                    ZimbraLog.account.warn("encountered proxy error", e);
+                    ZmailLog.account.warn("encountered proxy error", e);
                 } else {
                     // but if it's a real error, it's a real error
                     throw e;

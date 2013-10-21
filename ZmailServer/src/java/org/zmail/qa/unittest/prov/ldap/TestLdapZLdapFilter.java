@@ -12,23 +12,23 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.qa.unittest.prov.ldap;
+package org.zmail.qa.unittest.prov.ldap;
 
 import java.util.List;
 
 import org.junit.*;
 
 import com.google.common.collect.Lists;
-import com.zimbra.cs.account.Provisioning;
-import com.zimbra.cs.account.Server;
-import com.zimbra.cs.account.ldap.LdapEntrySearchFilter;
-import com.zimbra.cs.ldap.LdapConstants;
-import com.zimbra.cs.ldap.LdapException;
-import com.zimbra.cs.ldap.LdapUtil;
-import com.zimbra.cs.ldap.ZLdapFilter;
-import com.zimbra.cs.ldap.ZLdapFilterFactory;
-import com.zimbra.cs.ldap.ZLdapFilterFactory.FilterId;
-import com.zimbra.qa.QA.Bug;
+import org.zmail.cs.account.Provisioning;
+import org.zmail.cs.account.Server;
+import org.zmail.cs.account.ldap.LdapEntrySearchFilter;
+import org.zmail.cs.ldap.LdapConstants;
+import org.zmail.cs.ldap.LdapException;
+import org.zmail.cs.ldap.LdapUtil;
+import org.zmail.cs.ldap.ZLdapFilter;
+import org.zmail.cs.ldap.ZLdapFilterFactory;
+import org.zmail.cs.ldap.ZLdapFilterFactory.FilterId;
+import org.zmail.qa.QA.Bug;
 
 import static org.junit.Assert.*;
 
@@ -46,13 +46,13 @@ public class TestLdapZLdapFilter extends LdapTest {
 
     private static class LegacyLdapFilter {
 
-        private static final String FILTER_ACCOUNT_OBJECTCLASS = "(objectClass=zimbraAccount)";
-        private static final String FILTER_ACCOUNT_ONLY_OBJECTCLASS = "(&(objectClass=zimbraAccount)(!(objectClass=zimbraCalendarResource)))";
-        private static final String FILTER_ALIAS_OBJECTCLASS = "(objectClass=zimbraAlias)";
-        private static final String FILTER_CALENDAR_RESOURCE_OBJECTCLASS = "(objectClass=zimbraCalendarResource)";
-        private static final String FILTER_DISTRIBUTION_LIST_OBJECTCLASS = "(objectClass=zimbraDistributionList)";
-        private static final String FILTER_DYNAMIC_GROUP_OBJECTCLASS = "(objectClass=zimbraGroup)";
-        private static final String FILTER_GROUP_OBJECTCLASS = "(|(objectClass=zimbraGroup)(objectClass=zimbraDistributionList))";
+        private static final String FILTER_ACCOUNT_OBJECTCLASS = "(objectClass=zmailAccount)";
+        private static final String FILTER_ACCOUNT_ONLY_OBJECTCLASS = "(&(objectClass=zmailAccount)(!(objectClass=zmailCalendarResource)))";
+        private static final String FILTER_ALIAS_OBJECTCLASS = "(objectClass=zmailAlias)";
+        private static final String FILTER_CALENDAR_RESOURCE_OBJECTCLASS = "(objectClass=zmailCalendarResource)";
+        private static final String FILTER_DISTRIBUTION_LIST_OBJECTCLASS = "(objectClass=zmailDistributionList)";
+        private static final String FILTER_DYNAMIC_GROUP_OBJECTCLASS = "(objectClass=zmailGroup)";
+        private static final String FILTER_GROUP_OBJECTCLASS = "(|(objectClass=zmailGroup)(objectClass=zmailDistributionList))";
 
         /*
          * operational
@@ -119,8 +119,8 @@ public class TestLdapZLdapFilter extends LdapTest {
             StringBuilder buf = new StringBuilder();
             buf.append("(|");
             for (int i=0; i < addrs.length; i++) {
-                buf.append(String.format("(%s=%s)", Provisioning.A_zimbraMailDeliveryAddress, addrs[i]));
-                buf.append(String.format("(%s=%s)", Provisioning.A_zimbraMailAlias, addrs[i]));
+                buf.append(String.format("(%s=%s)", Provisioning.A_zmailMailDeliveryAddress, addrs[i]));
+                buf.append(String.format("(%s=%s)", Provisioning.A_zmailMailAlias, addrs[i]));
             }
             buf.append(")");
 
@@ -140,34 +140,34 @@ public class TestLdapZLdapFilter extends LdapTest {
 
         public static String allAdminAccounts() {
             return "(&" + FILTER_ACCOUNT_OBJECTCLASS +
-                          "(|(zimbraIsAdminAccount=TRUE)(zimbraIsDelegatedAdminAccount=TRUE)(zimbraIsDomainAdminAccount=TRUE))" +
+                          "(|(zmailIsAdminAccount=TRUE)(zmailIsDelegatedAdminAccount=TRUE)(zmailIsDomainAdminAccount=TRUE))" +
                    ")";
         }
 
         public static String allNonSystemAccounts() {
             StringBuilder buf = new StringBuilder();
             buf.append("(&");
-            buf.append("(objectClass=zimbraAccount)(!(objectClass=zimbraCalendarResource))");
-            buf.append("(!(zimbraIsSystemResource=TRUE))");
+            buf.append("(objectClass=zmailAccount)(!(objectClass=zmailCalendarResource))");
+            buf.append("(!(zmailIsSystemResource=TRUE))");
             buf.append(")");
 
             return buf.toString();
         }
 
         public static String accountByForeignPrincipal(String foreignPrincipal) {
-            return "(&(zimbraForeignPrincipal=" + foreignPrincipal + ")" + FILTER_ACCOUNT_OBJECTCLASS + ")";
+            return "(&(zmailForeignPrincipal=" + foreignPrincipal + ")" + FILTER_ACCOUNT_OBJECTCLASS + ")";
         }
 
         public static String accountById(String id) {
-            return "(&(zimbraId=" + id + ")" + FILTER_ACCOUNT_OBJECTCLASS + ")";
+            return "(&(zmailId=" + id + ")" + FILTER_ACCOUNT_OBJECTCLASS + ")";
         }
 
         public static String accountByName(String name) {
-            return "(&(|(zimbraMailDeliveryAddress=" + name + ")(zimbraMailAlias=" + name + "))" + FILTER_ACCOUNT_OBJECTCLASS + ")";
+            return "(&(|(zmailMailDeliveryAddress=" + name + ")(zmailMailAlias=" + name + "))" + FILTER_ACCOUNT_OBJECTCLASS + ")";
         }
 
         public static String accountByMemberOf(String dynGroupId) {
-            return "(&(zimbraMemberOf=" + dynGroupId + ")" + FILTER_ACCOUNT_OBJECTCLASS + ")";
+            return "(&(zmailMemberOf=" + dynGroupId + ")" + FILTER_ACCOUNT_OBJECTCLASS + ")";
         }
 
         public static String adminAccountByRDN(String namingRdnAttr, String name) {
@@ -187,24 +187,24 @@ public class TestLdapZLdapFilter extends LdapTest {
         }
 
         public static String externalAccount() {
-            return "(" + Provisioning.A_zimbraIsExternalVirtualAccount + "=TRUE)";
+            return "(" + Provisioning.A_zmailIsExternalVirtualAccount + "=TRUE)";
         }
 
         public static String accountsByExternalGrant(String granteeEmail) {
-            return String.format("(&%s(zimbraSharedItem=granteeId:%s*))", FILTER_ACCOUNT_OBJECTCLASS, granteeEmail);
+            return String.format("(&%s(zmailSharedItem=granteeId:%s*))", FILTER_ACCOUNT_OBJECTCLASS, granteeEmail);
         }
 
         public static String accountsByGrants(List<String> granteeIds,
                 boolean includePublicShares, boolean includeAllAuthedShares) {
             StringBuilder searchQuery = new StringBuilder().append("(&" + FILTER_ACCOUNT_OBJECTCLASS + "(|");
             for (String id : granteeIds) {
-                searchQuery.append(String.format("(zimbraSharedItem=granteeId:%s*)", id));
+                searchQuery.append(String.format("(zmailSharedItem=granteeId:%s*)", id));
             }
             if (includePublicShares) {
-                searchQuery.append("(zimbraSharedItem=*granteeType:pub*)");
+                searchQuery.append("(zmailSharedItem=*granteeType:pub*)");
             }
             if (includeAllAuthedShares) {
-                searchQuery.append("(zimbraSharedItem=*granteeType:all*)");
+                searchQuery.append("(zmailSharedItem=*granteeType:all*)");
             }
             searchQuery.append("))");
 
@@ -213,17 +213,17 @@ public class TestLdapZLdapFilter extends LdapTest {
 
         public static String CMBSearchAccountsOnly() {
             return "(&" + FILTER_ACCOUNT_ONLY_OBJECTCLASS +
-                          "(|(!(" + Provisioning.A_zimbraExcludeFromCMBSearch + "=*))(" +
-                                    Provisioning.A_zimbraExcludeFromCMBSearch + "=FALSE))" +
+                          "(|(!(" + Provisioning.A_zmailExcludeFromCMBSearch + "=*))(" +
+                                    Provisioning.A_zmailExcludeFromCMBSearch + "=FALSE))" +
                    ")";
         }
 
         public static String CMBSearchAccountsOnlyWithArchive() {
             return "(&" + FILTER_ACCOUNT_ONLY_OBJECTCLASS +
                           "(&" +
-                          "(" + Provisioning.A_zimbraArchiveAccount + "=*)" +
-                          "(|(!(" + Provisioning.A_zimbraExcludeFromCMBSearch + "=*))(" +
-                          Provisioning.A_zimbraExcludeFromCMBSearch + "=FALSE))" +
+                          "(" + Provisioning.A_zmailArchiveAccount + "=*)" +
+                          "(|(!(" + Provisioning.A_zmailExcludeFromCMBSearch + "=*))(" +
+                          Provisioning.A_zmailExcludeFromCMBSearch + "=FALSE))" +
                           ")" +
                    ")";
         }
@@ -231,22 +231,22 @@ public class TestLdapZLdapFilter extends LdapTest {
         public static String CMBSearchNonSystemResourceAccountsOnly() {
             return "(&" + FILTER_ACCOUNT_ONLY_OBJECTCLASS +
                          "(&" +
-                         "(!(" + Provisioning.A_zimbraIsSystemResource + "=*))" +
-                         "(|(!(" + Provisioning.A_zimbraExcludeFromCMBSearch + "=*))(" +
-                         Provisioning.A_zimbraExcludeFromCMBSearch + "=FALSE))" +
+                         "(!(" + Provisioning.A_zmailIsSystemResource + "=*))" +
+                         "(|(!(" + Provisioning.A_zmailExcludeFromCMBSearch + "=*))(" +
+                         Provisioning.A_zmailExcludeFromCMBSearch + "=FALSE))" +
                          ")" +
                    ")";
         }
 
         public static String homedOnServer(String serverServiceHostname) {
-            return "(" + Provisioning.A_zimbraMailHost + "=" + serverServiceHostname + ")";
+            return "(" + Provisioning.A_zmailMailHost + "=" + serverServiceHostname + ")";
         }
 
         public static String accountsOnServerOnCosHasSubordinates(String serverServiceHostname, String cosId) {
             return "(&" + LegacyLdapFilter.allAccounts() +
             LegacyLdapFilter.homedOnServer(serverServiceHostname) +
             LegacyLdapFilter.hasSubordinates() +
-            "(|(!(" + Provisioning.A_zimbraCOSId + "=*))" + "(" + Provisioning.A_zimbraCOSId + "=" + cosId + ")))";
+            "(|(!(" + Provisioning.A_zmailCOSId + "=*))" + "(" + Provisioning.A_zmailCOSId + "=" + cosId + ")))";
         }
 
         /*
@@ -260,19 +260,19 @@ public class TestLdapZLdapFilter extends LdapTest {
          * calendar resource
          */
         public static String allCalendarResources() {
-            return "(objectClass=zimbraCalendarResource)";
+            return "(objectClass=zmailCalendarResource)";
         }
 
         public static String calendarResourceByForeignPrincipal(String foreignPrincipal) {
-            return "(&(zimbraForeignPrincipal=" + foreignPrincipal + ")" + FILTER_CALENDAR_RESOURCE_OBJECTCLASS + ")";
+            return "(&(zmailForeignPrincipal=" + foreignPrincipal + ")" + FILTER_CALENDAR_RESOURCE_OBJECTCLASS + ")";
         }
 
         public static String calendarResourceById(String id) {
-            return "(&(zimbraId=" + id + ")" + FILTER_CALENDAR_RESOURCE_OBJECTCLASS + ")";
+            return "(&(zmailId=" + id + ")" + FILTER_CALENDAR_RESOURCE_OBJECTCLASS + ")";
         }
 
         public static String calendarResourceByName(String name) {
-            return "(&(|(zimbraMailDeliveryAddress=" + name + ")(zimbraMailAlias=" + name + "))" + FILTER_CALENDAR_RESOURCE_OBJECTCLASS + ")";
+            return "(&(|(zmailMailDeliveryAddress=" + name + ")(zmailMailAlias=" + name + "))" + FILTER_CALENDAR_RESOURCE_OBJECTCLASS + ")";
         }
 
         public static String calendarResourcesHomedOnServer(String serverServiceHostname) {
@@ -283,45 +283,45 @@ public class TestLdapZLdapFilter extends LdapTest {
          * cos
          */
         public static String allCoses() {
-            return "(objectClass=zimbraCOS)";
+            return "(objectClass=zmailCOS)";
         }
 
         public static String cosById(String id) {
-            return "(&(zimbraId=" + id + ")(objectClass=zimbraCOS))";
+            return "(&(zmailId=" + id + ")(objectClass=zmailCOS))";
         }
 
         public static String cosesByMailHostPool(String server) {
-            return "(&(objectClass=zimbraCOS)(zimbraMailHostPool=" + server + "))";
+            return "(&(objectClass=zmailCOS)(zmailMailHostPool=" + server + "))";
         }
 
         /*
          * data source
          */
         public static String allDataSources() {
-            return "(objectClass=zimbraDataSource)";
+            return "(objectClass=zmailDataSource)";
         }
 
         public static String dataSourceById(String id) {
-            return "(&(objectClass=zimbraDataSource)(zimbraDataSourceId=" + id + "))";
+            return "(&(objectClass=zmailDataSource)(zmailDataSourceId=" + id + "))";
         }
 
         public static String dataSourceByName(String name) {
-            return "(&(objectClass=zimbraDataSource)(zimbraDataSourceName=" + name + "))";
+            return "(&(objectClass=zmailDataSource)(zmailDataSourceName=" + name + "))";
         }
 
         /*
          * distribution list
          */
         public static String allDistributionLists() {
-            return "(objectClass=zimbraDistributionList)";
+            return "(objectClass=zmailDistributionList)";
         }
 
         public static String distributionListById(String id) {
-            return "(&(zimbraId=" + id + ")" + FILTER_DISTRIBUTION_LIST_OBJECTCLASS + ")";
+            return "(&(zmailId=" + id + ")" + FILTER_DISTRIBUTION_LIST_OBJECTCLASS + ")";
         }
 
         public static String distributionListByName(String name) {
-            return "(&(zimbraMailAlias=" + name + ")" + FILTER_DISTRIBUTION_LIST_OBJECTCLASS + ")";
+            return "(&(zmailMailAlias=" + name + ")" + FILTER_DISTRIBUTION_LIST_OBJECTCLASS + ")";
         }
 
         public static String distributionListsByMemberAddrs(String[] memberAddrs) {
@@ -330,7 +330,7 @@ public class TestLdapZLdapFilter extends LdapTest {
                 sb.append("(|");
             }
             for (int i=0; i < memberAddrs.length; i++) {
-                sb.append(String.format("(%s=%s)", Provisioning.A_zimbraMailForwardingAddress, memberAddrs[i]));
+                sb.append(String.format("(%s=%s)", Provisioning.A_zmailMailForwardingAddress, memberAddrs[i]));
             }
             if (memberAddrs.length > 1) {
                 sb.append(")");
@@ -343,11 +343,11 @@ public class TestLdapZLdapFilter extends LdapTest {
          * dynamic group
          */
         public static String dynamicGroupById(String id) {
-            return "(&(zimbraId=" + id + ")" + FILTER_DYNAMIC_GROUP_OBJECTCLASS + ")";
+            return "(&(zmailId=" + id + ")" + FILTER_DYNAMIC_GROUP_OBJECTCLASS + ")";
         }
 
         public static String dynamicGroupByName(String name) {
-            return "(&(zimbraMailAlias=" + name + ")" + FILTER_DYNAMIC_GROUP_OBJECTCLASS + ")";
+            return "(&(zmailMailAlias=" + name + ")" + FILTER_DYNAMIC_GROUP_OBJECTCLASS + ")";
         }
 
 
@@ -359,11 +359,11 @@ public class TestLdapZLdapFilter extends LdapTest {
         }
 
         public static String groupById(String id) {
-            return "(&(zimbraId=" + id + ")" + FILTER_GROUP_OBJECTCLASS + ")";
+            return "(&(zmailId=" + id + ")" + FILTER_GROUP_OBJECTCLASS + ")";
         }
 
         public static String groupByName(String name) {
-            return "(&(zimbraMailAlias=" + name + ")" + FILTER_GROUP_OBJECTCLASS + ")";
+            return "(&(zmailMailAlias=" + name + ")" + FILTER_GROUP_OBJECTCLASS + ")";
         }
 
 
@@ -371,27 +371,27 @@ public class TestLdapZLdapFilter extends LdapTest {
          * domain
          */
         public static String allDomains() {
-            return "(objectClass=zimbraDomain)";
+            return "(objectClass=zmailDomain)";
         }
 
         public static String domainById(String id) {
-            return "(&(zimbraId=" + id + ")(objectClass=zimbraDomain))";
+            return "(&(zmailId=" + id + ")(objectClass=zmailDomain))";
         }
 
         public static String domainByName(String name) {
-            return "(&(zimbraDomainName=" + name + ")(objectClass=zimbraDomain))";
+            return "(&(zmailDomainName=" + name + ")(objectClass=zmailDomain))";
         }
 
         public static String domainByKrb5Realm(String krb5Realm) {
-            return "(&(zimbraAuthKerberos5Realm=" + krb5Realm + ")(objectClass=zimbraDomain))";
+            return "(&(zmailAuthKerberos5Realm=" + krb5Realm + ")(objectClass=zmailDomain))";
         }
 
         public static String domainByVirtualHostame(String virtualHostname) {
-            return "(&(zimbraVirtualHostname=" + virtualHostname + ")(objectClass=zimbraDomain))";
+            return "(&(zmailVirtualHostname=" + virtualHostname + ")(objectClass=zmailDomain))";
         }
 
         public static String domainByForeignName(String foreignName) {
-            return "(&(zimbraForeignName=" + foreignName + ")(objectClass=zimbraDomain))";
+            return "(&(zmailForeignName=" + foreignName + ")(objectClass=zmailDomain))";
         }
 
         public static String domainLabel() {
@@ -399,7 +399,7 @@ public class TestLdapZLdapFilter extends LdapTest {
         }
 
         public static String domainLockedForEagerAutoProvision() {
-            return "(!(zimbraAutoProvLock=*))";
+            return "(!(zmailAutoProvLock=*))";
         }
 
 
@@ -415,55 +415,55 @@ public class TestLdapZLdapFilter extends LdapTest {
          * identity
          */
         public static String allIdentities() {
-            return "(objectClass=zimbraIdentity)";
+            return "(objectClass=zmailIdentity)";
         }
 
         public static String identityByName(String name) {
-            return "(&(objectClass=zimbraIdentity)(zimbraPrefIdentityName=" + name + "))";
+            return "(&(objectClass=zmailIdentity)(zmailPrefIdentityName=" + name + "))";
         }
 
         /*
          * mime enrty
          */
         public static String allMimeEntries() {
-            return "(objectClass=zimbraMimeEntry)";
+            return "(objectClass=zmailMimeEntry)";
         }
 
         public static String mimeEntryByMimeType(String mimeType) {
-            return "(zimbraMimeType=" + mimeType + ")";
+            return "(zmailMimeType=" + mimeType + ")";
         }
 
         /*
          * server
          */
         public static String allServers() {
-            return "(objectClass=zimbraServer)";
+            return "(objectClass=zmailServer)";
         }
 
         public static String serverById(String id) {
-            return "(&(zimbraId=" + id + ")(objectClass=zimbraServer))";
+            return "(&(zmailId=" + id + ")(objectClass=zmailServer))";
         }
 
         public static String serverByService(String service) {
-            return "(&(objectClass=zimbraServer)(zimbraServiceEnabled=" + service + "))";
+            return "(&(objectClass=zmailServer)(zmailServiceEnabled=" + service + "))";
         }
 
         /*
          * share locator
          */
         public static String shareLocatorById(String id) {
-            return "(&(cn=" + id + ")(objectClass=zimbraShareLocator))";
+            return "(&(cn=" + id + ")(objectClass=zmailShareLocator))";
         }
 
         /*
          * signature
          */
         public static String allSignatures() {
-            return "(objectClass=zimbraSignature)";
+            return "(objectClass=zmailSignature)";
         }
 
         public static String signatureById(String id) {
-            return "(&(objectClass=zimbraSignature)(zimbraSignatureId=" + id +"))";
+            return "(&(objectClass=zmailSignature)(zmailSignatureId=" + id +"))";
         }
 
 
@@ -471,15 +471,15 @@ public class TestLdapZLdapFilter extends LdapTest {
          * XMPPComponent
          */
         public static String allXMPPComponents() {
-            return "(objectClass=zimbraXMPPComponent)";
+            return "(objectClass=zmailXMPPComponent)";
         }
 
         public static String imComponentById(String id) {
-            return "(&(objectClass=zimbraXMPPComponent)(zimbraXMPPComponentId=" + id + "))";
+            return "(&(objectClass=zmailXMPPComponent)(zmailXMPPComponentId=" + id + "))";
         }
 
         public static String xmppComponentById(String id) {
-            return "(&(zimbraId=" + id + ")(objectClass=zimbraXMPPComponent))";
+            return "(&(zmailId=" + id + ")(objectClass=zmailXMPPComponent))";
         }
 
 
@@ -487,7 +487,7 @@ public class TestLdapZLdapFilter extends LdapTest {
          * zimlet
          */
         public static String allZimlets() {
-            return "(objectClass=zimbraZimletEntry)";
+            return "(objectClass=zmailZimletEntry)";
         }
 
 
@@ -503,7 +503,7 @@ public class TestLdapZLdapFilter extends LdapTest {
          * Velodrome
          */
         private static String velodromePrimaryEmailOnDomainFilter(String domainName) {
-            return "(zimbraMailDeliveryAddress=*@" + domainName + ")";
+            return "(zmailMailDeliveryAddress=*@" + domainName + ")";
         }
 
         public static String velodromeAllAccountsByDomain(String domainName) {
@@ -933,11 +933,11 @@ public class TestLdapZLdapFilter extends LdapTest {
     @Test
     public void allNonSystemAccounts() throws Exception {
         String filter = LegacyLdapFilter.allNonSystemAccounts();
-        // (&(objectclass=zimbraAccount)(!(objectclass=zimbraCalendarResource))(!(zimbraIsSystemResource=TRUE)))
+        // (&(objectclass=zmailAccount)(!(objectclass=zmailCalendarResource))(!(zmailIsSystemResource=TRUE)))
 
         ZLdapFilter zLdapFilter = filterDactory.allNonSystemAccounts();
         String zFilter = zLdapFilter.toFilterString();
-        // (&(&(objectclass=zimbraAccount)(!(objectclass=zimbraCalendarResource)))(!(zimbraIsSystemResource=TRUE)))
+        // (&(&(objectclass=zmailAccount)(!(objectclass=zmailCalendarResource)))(!(zmailIsSystemResource=TRUE)))
 
         // assertEquals(filter, zFilter);  the diff is OK
         verifyStatString(FilterId.ALL_NON_SYSTEM_ACCOUNTS, zLdapFilter);
@@ -1033,15 +1033,15 @@ public class TestLdapZLdapFilter extends LdapTest {
         boolean includeAllAuthedShares = true;
 
         // legacy code
-        StringBuilder searchQuery = new StringBuilder().append("(&(objectClass=zimbraAccount)(|");
+        StringBuilder searchQuery = new StringBuilder().append("(&(objectClass=zmailAccount)(|");
         for (String id : GRANTEE_IDS) {
-            searchQuery.append(String.format("(zimbraSharedItem=granteeId:%s*)", id));
+            searchQuery.append(String.format("(zmailSharedItem=granteeId:%s*)", id));
         }
         if (includePublicShares) {
-            searchQuery.append("(zimbraSharedItem=*granteeType:pub*)");
+            searchQuery.append("(zmailSharedItem=*granteeType:pub*)");
         }
         if (includeAllAuthedShares) {
-            searchQuery.append("(zimbraSharedItem=*granteeType:all*)");
+            searchQuery.append("(zmailSharedItem=*granteeType:all*)");
         }
         searchQuery.append("))");
 
@@ -1060,12 +1060,12 @@ public class TestLdapZLdapFilter extends LdapTest {
         /*
         orig filter before refactoring
         String legacyFilter =
-            "(&(|(!(zimbraExcludeFromCMBSearch=*))(zimbraExcludeFromCMBSearch=FALSE))(&(objectClass=zimbraAccount)(!(objectClass=zimbraCalendarResource))))";
+            "(&(|(!(zmailExcludeFromCMBSearch=*))(zmailExcludeFromCMBSearch=FALSE))(&(objectClass=zmailAccount)(!(objectClass=zmailCalendarResource))))";
         */
 
         // moved objectClass to the front
         String legacyFilter =
-            "(&(&(objectClass=zimbraAccount)(!(objectClass=zimbraCalendarResource)))(|(!(zimbraExcludeFromCMBSearch=*))(zimbraExcludeFromCMBSearch=FALSE)))";
+            "(&(&(objectClass=zmailAccount)(!(objectClass=zmailCalendarResource)))(|(!(zmailExcludeFromCMBSearch=*))(zmailExcludeFromCMBSearch=FALSE)))";
 
         String filter = LegacyLdapFilter.CMBSearchAccountsOnly();
 
@@ -1081,12 +1081,12 @@ public class TestLdapZLdapFilter extends LdapTest {
         /*
         orig filter before refactoring
         String legacyFilter =
-            "(&(&(zimbraArchiveAccount=*)(|(!(zimbraExcludeFromCMBSearch=*))(zimbraExcludeFromCMBSearch=FALSE)))(&(objectClass=zimbraAccount)(!(objectClass=zimbraCalendarResource))))";
+            "(&(&(zmailArchiveAccount=*)(|(!(zmailExcludeFromCMBSearch=*))(zmailExcludeFromCMBSearch=FALSE)))(&(objectClass=zmailAccount)(!(objectClass=zmailCalendarResource))))";
         */
 
         // moved objectClass to the front
         String legacyFilter =
-            "(&(&(objectClass=zimbraAccount)(!(objectClass=zimbraCalendarResource)))(&(zimbraArchiveAccount=*)(|(!(zimbraExcludeFromCMBSearch=*))(zimbraExcludeFromCMBSearch=FALSE))))";
+            "(&(&(objectClass=zmailAccount)(!(objectClass=zmailCalendarResource)))(&(zmailArchiveAccount=*)(|(!(zmailExcludeFromCMBSearch=*))(zmailExcludeFromCMBSearch=FALSE))))";
 
         String filter = LegacyLdapFilter.CMBSearchAccountsOnlyWithArchive();
         assertEquals(legacyFilter, filter);
@@ -1096,7 +1096,7 @@ public class TestLdapZLdapFilter extends LdapTest {
 
         // This assertion fails because we optimized it in the new code
         // it is now:
-        // (&(&(objectClass=zimbraAccount)(!(objectClass=zimbraCalendarResource)))(zimbraArchiveAccount=*)(|(!(zimbraExcludeFromCMBSearch=*))(zimbraExcludeFromCMBSearch=FALSE)))
+        // (&(&(objectClass=zmailAccount)(!(objectClass=zmailCalendarResource)))(zmailArchiveAccount=*)(|(!(zmailExcludeFromCMBSearch=*))(zmailExcludeFromCMBSearch=FALSE)))
         // System.out.println(zLdapFilter.toFilterString());
         // assertEquals(filter, zFilter);
         // assertEquals(legacyFilter, zFilter);
@@ -1108,11 +1108,11 @@ public class TestLdapZLdapFilter extends LdapTest {
         /*
         orig filter before refactoring
         String legacyFilter =
-            "(&(&(!(zimbraIsSystemResource=*))(|(!(zimbraExcludeFromCMBSearch=*))(zimbraExcludeFromCMBSearch=FALSE)))(&(objectClass=zimbraAccount)(!(objectClass=zimbraCalendarResource))))";
+            "(&(&(!(zmailIsSystemResource=*))(|(!(zmailExcludeFromCMBSearch=*))(zmailExcludeFromCMBSearch=FALSE)))(&(objectClass=zmailAccount)(!(objectClass=zmailCalendarResource))))";
          */
 
         String legacyFilter =
-            "(&(&(objectClass=zimbraAccount)(!(objectClass=zimbraCalendarResource)))(&(!(zimbraIsSystemResource=*))(|(!(zimbraExcludeFromCMBSearch=*))(zimbraExcludeFromCMBSearch=FALSE))))";
+            "(&(&(objectClass=zmailAccount)(!(objectClass=zmailCalendarResource)))(&(!(zmailIsSystemResource=*))(|(!(zmailExcludeFromCMBSearch=*))(zmailExcludeFromCMBSearch=FALSE))))";
 
         String filter = LegacyLdapFilter.CMBSearchNonSystemResourceAccountsOnly();
         assertEquals(legacyFilter, filter);
@@ -1122,7 +1122,7 @@ public class TestLdapZLdapFilter extends LdapTest {
 
         // This assertion fails because we optimized it in the new code
         // it is now:
-        // (&(&(objectClass=zimbraAccount)(!(objectClass=zimbraCalendarResource)))(!(zimbraIsSystemResource=TRUE))(|(!(zimbraExcludeFromCMBSearch=*))(zimbraExcludeFromCMBSearch=FALSE)))
+        // (&(&(objectClass=zmailAccount)(!(objectClass=zmailCalendarResource)))(!(zmailIsSystemResource=TRUE))(|(!(zmailExcludeFromCMBSearch=*))(zmailExcludeFromCMBSearch=FALSE)))
         // System.out.println(zLdapFilter.toFilterString());
         // assertEquals(filter, zFilter);
         // assertEquals(legacyFilter, zFilter);
@@ -1506,16 +1506,16 @@ public class TestLdapZLdapFilter extends LdapTest {
 
         /*
 DEV:
-zmprov mcf -zimbraGalLdapFilterDef 'zimbraAccountSync:(&(|(displayName=*%s*)(cn=*%s*)(sn=*%s*)(gn=*%s*)(zimbraPhoneticFirstName=*%s*)(zimbraPhoneticLastName=*%s*)(mail=*%s*)(zimbraMailDeliveryAddress=*%s*)(zimbraMailAlias=*%s*))(|(objectclass=zimbraAccount)(objectclass=zimbraDistributionList))(!(objectclass=zimbraCalendarResource)))'
-zmprov mcf +zimbraGalLdapFilterDef 'zimbraAccountSync:(&(|(displayName=*%s*)(cn=*%s*)(sn=*%s*)(gn=*%s*)(zimbraPhoneticFirstName=*%s*)(zimbraPhoneticLastName=*%s*)(mail=*%s*)(zimbraMailDeliveryAddress=*%s*)(zimbraMailAlias=*%s*))(|(objectclass=zimbraAccount)(objectclass=zimbraDistributionList))(!(objectclass=zimbraCalendarResource))(!(displayName=*\28EMC\29)))'
+zmprov mcf -zmailGalLdapFilterDef 'zmailAccountSync:(&(|(displayName=*%s*)(cn=*%s*)(sn=*%s*)(gn=*%s*)(zmailPhoneticFirstName=*%s*)(zmailPhoneticLastName=*%s*)(mail=*%s*)(zmailMailDeliveryAddress=*%s*)(zmailMailAlias=*%s*))(|(objectclass=zmailAccount)(objectclass=zmailDistributionList))(!(objectclass=zmailCalendarResource)))'
+zmprov mcf +zmailGalLdapFilterDef 'zmailAccountSync:(&(|(displayName=*%s*)(cn=*%s*)(sn=*%s*)(gn=*%s*)(zmailPhoneticFirstName=*%s*)(zmailPhoneticLastName=*%s*)(mail=*%s*)(zmailMailDeliveryAddress=*%s*)(zmailMailAlias=*%s*))(|(objectclass=zmailAccount)(objectclass=zmailDistributionList))(!(objectclass=zmailCalendarResource))(!(displayName=*\28EMC\29)))'
 
 
 DF:
-zmprov mds galsync@zimbra.com VMware -zimbraGalSyncLdapFilter '(&(|(displayName=*%s*)(cn=*%s*)(sn=*%s*)(givenName=*%s*)(mail=*%s*))(!(msExchHideFromAddressLists=TRUE))(!(displayName=*EMC))(mailnickname=*)(|(&(objectCategory=person)(objectClass=user)(!(homeMDB=*))(!(msExchHomeServerName=*)))(&(objectCategory=person)(objectClass=user)(|(homeMDB=*)(msExchHomeServerName=*)))(&(objectCategory=person)(objectClass=contact))(objectCategory=group)(objectCategory=publicFolder)(objectCategory=msExchDynamicDistributionList)))'
-zmprov mds galsync@zimbra.com VMware +zimbraGalSyncLdapFilter '(&(|(displayName=*%s*)(cn=*%s*)(sn=*%s*)(givenName=*%s*)(mail=*%s*))(!(msExchHideFromAddressLists=TRUE))(!(displayName=*\28EMC\29))(mailnickname=*)(|(&(objectCategory=person)(objectClass=user)(!(homeMDB=*))(!(msExchHomeServerName=*)))(&(objectCategory=person)(objectClass=user)(|(homeMDB=*)(msExchHomeServerName=*)))(&(objectCategory=person)(objectClass=contact))(objectCategory=group)(objectCategory=publicFolder)(objectCategory=msExchDynamicDistributionList)))'
+zmprov mds galsync@zmail.com VMware -zmailGalSyncLdapFilter '(&(|(displayName=*%s*)(cn=*%s*)(sn=*%s*)(givenName=*%s*)(mail=*%s*))(!(msExchHideFromAddressLists=TRUE))(!(displayName=*EMC))(mailnickname=*)(|(&(objectCategory=person)(objectClass=user)(!(homeMDB=*))(!(msExchHomeServerName=*)))(&(objectCategory=person)(objectClass=user)(|(homeMDB=*)(msExchHomeServerName=*)))(&(objectCategory=person)(objectClass=contact))(objectCategory=group)(objectCategory=publicFolder)(objectCategory=msExchDynamicDistributionList)))'
+zmprov mds galsync@zmail.com VMware +zmailGalSyncLdapFilter '(&(|(displayName=*%s*)(cn=*%s*)(sn=*%s*)(givenName=*%s*)(mail=*%s*))(!(msExchHideFromAddressLists=TRUE))(!(displayName=*\28EMC\29))(mailnickname=*)(|(&(objectCategory=person)(objectClass=user)(!(homeMDB=*))(!(msExchHomeServerName=*)))(&(objectCategory=person)(objectClass=user)(|(homeMDB=*)(msExchHomeServerName=*)))(&(objectCategory=person)(objectClass=contact))(objectCategory=group)(objectCategory=publicFolder)(objectCategory=msExchDynamicDistributionList)))'
 
-zmprov mcf -zimbraGalLdapFilterDef 'ad:(&(|(displayName=*%s*)(cn=*%s*)(sn=*%s*)(givenName=*%s*)(mail=*%s*))(!(msExchHideFromAddressLists=TRUE))(!(displayName=*EMC))(mailnickname=*)(|(&(objectCategory=person)(objectClass=user)(!(homeMDB=*))(!(msExchHomeServerName=*)))(&(objectCategory=person)(objectClass=user)(|(homeMDB=*)(msExchHomeServerName=*)))(&(objectCategory=person)(objectClass=contact))(objectCategory=group)(objectCategory=publicFolder)(objectCategory=msExchDynamicDistributionList)))'
-zmprov mcf +zimbraGalLdapFilterDef 'ad:(&(|(displayName=*%s*)(cn=*%s*)(sn=*%s*)(givenName=*%s*)(mail=*%s*))(!(msExchHideFromAddressLists=TRUE))(!(displayName=*\28EMC\29))(mailnickname=*)(|(&(objectCategory=person)(objectClass=user)(!(homeMDB=*))(!(msExchHomeServerName=*)))(&(objectCategory=person)(objectClass=user)(|(homeMDB=*)(msExchHomeServerName=*)))(&(objectCategory=person)(objectClass=contact))(objectCategory=group)(objectCategory=publicFolder)(objectCategory=msExchDynamicDistributionList)))'
+zmprov mcf -zmailGalLdapFilterDef 'ad:(&(|(displayName=*%s*)(cn=*%s*)(sn=*%s*)(givenName=*%s*)(mail=*%s*))(!(msExchHideFromAddressLists=TRUE))(!(displayName=*EMC))(mailnickname=*)(|(&(objectCategory=person)(objectClass=user)(!(homeMDB=*))(!(msExchHomeServerName=*)))(&(objectCategory=person)(objectClass=user)(|(homeMDB=*)(msExchHomeServerName=*)))(&(objectCategory=person)(objectClass=contact))(objectCategory=group)(objectCategory=publicFolder)(objectCategory=msExchDynamicDistributionList)))'
+zmprov mcf +zmailGalLdapFilterDef 'ad:(&(|(displayName=*%s*)(cn=*%s*)(sn=*%s*)(givenName=*%s*)(mail=*%s*))(!(msExchHideFromAddressLists=TRUE))(!(displayName=*\28EMC\29))(mailnickname=*)(|(&(objectCategory=person)(objectClass=user)(!(homeMDB=*))(!(msExchHomeServerName=*)))(&(objectCategory=person)(objectClass=user)(|(homeMDB=*)(msExchHomeServerName=*)))(&(objectCategory=person)(objectClass=contact))(objectCategory=group)(objectCategory=publicFolder)(objectCategory=msExchDynamicDistributionList)))'
          */
     }
 
@@ -1614,8 +1614,8 @@ zmprov mcf +zimbraGalLdapFilterDef 'ad:(&(|(displayName=*%s*)(cn=*%s*)(sn=*%s*)(
 
     @Test
     public void toIDNFilter() throws Exception {
-        assertEquals("(!(zimbraDomainName=*\u4e2d\u6587*))",
-                LdapEntrySearchFilter.toLdapIDNFilter("(!(zimbraDomainName=*\u4e2d\u6587*))"));
+        assertEquals("(!(zmailDomainName=*\u4e2d\u6587*))",
+                LdapEntrySearchFilter.toLdapIDNFilter("(!(zmailDomainName=*\u4e2d\u6587*))"));
 
         assertEquals("(objectClass=*)",
                 LdapEntrySearchFilter.toLdapIDNFilter("(objectClass=*)"));
@@ -1633,16 +1633,16 @@ zmprov mcf +zimbraGalLdapFilterDef 'ad:(&(|(displayName=*%s*)(cn=*%s*)(sn=*%s*)(
         assertEquals("(!(objectClass=*abc*))",
                 LdapEntrySearchFilter.toLdapIDNFilter("!(objectClass=*abc*)"));
 
-        assertEquals("(|(zimbraMailDeliveryAddress=*@test.xn--fiq228c.com)(zimbraMailAlias=*@test.xn--fiq228c.com))",
-                LdapEntrySearchFilter.toLdapIDNFilter("(|(zimbraMailDeliveryAddress=*@test.\u4e2d\u6587.com)(zimbraMailAlias=*@test.\u4e2d\u6587.com))"));
+        assertEquals("(|(zmailMailDeliveryAddress=*@test.xn--fiq228c.com)(zmailMailAlias=*@test.xn--fiq228c.com))",
+                LdapEntrySearchFilter.toLdapIDNFilter("(|(zmailMailDeliveryAddress=*@test.\u4e2d\u6587.com)(zmailMailAlias=*@test.\u4e2d\u6587.com))"));
 
 
         /*
          * legacy JNDI results
          */
         /*
-        assertEquals("!(zimbraDomainName=*\u4e2d\u6587*)",
-                LdapEntrySearchFilter.toLdapIDNFilter("!(zimbraDomainName=*\u4e2d\u6587*)"));
+        assertEquals("!(zmailDomainName=*\u4e2d\u6587*)",
+                LdapEntrySearchFilter.toLdapIDNFilter("!(zmailDomainName=*\u4e2d\u6587*)"));
 
         assertEquals("(!(objectClass=*))",
                 LdapEntrySearchFilter.toLdapIDNFilter("!(objectClass=*)"));
@@ -1659,28 +1659,28 @@ zmprov mcf +zimbraGalLdapFilterDef 'ad:(&(|(displayName=*%s*)(cn=*%s*)(sn=*%s*)(
         assertEquals("(!(objectClass=*abc*))",
                 LdapEntrySearchFilter.toLdapIDNFilter("!(objectClass=*abc*)"));
 
-        assertEquals("(|(zimbraMailDeliveryAddress=*@test.xn--fiq228c.com)(zimbraMailAlias=*@test.xn--fiq228c.com))",
-                LdapEntrySearchFilter.toLdapIDNFilter("(|(zimbraMailDeliveryAddress=*@test.\u4e2d\u6587.com)(zimbraMailAlias=*@test.\u4e2d\u6587.com))"));
+        assertEquals("(|(zmailMailDeliveryAddress=*@test.xn--fiq228c.com)(zmailMailAlias=*@test.xn--fiq228c.com))",
+                LdapEntrySearchFilter.toLdapIDNFilter("(|(zmailMailDeliveryAddress=*@test.\u4e2d\u6587.com)(zmailMailAlias=*@test.\u4e2d\u6587.com))"));
         */
     }
 
     @Test
     @Bug(bug=68964)
     public void toIDNFilterTrailingDot() throws Exception {
-        assertEquals("(zimbraMailDeliveryAddress=.)",
-                LdapEntrySearchFilter.toLdapIDNFilter("(zimbraMailDeliveryAddress=.)"));
+        assertEquals("(zmailMailDeliveryAddress=.)",
+                LdapEntrySearchFilter.toLdapIDNFilter("(zmailMailDeliveryAddress=.)"));
 
-        assertEquals("(zimbraMailDeliveryAddress=...)",
-                LdapEntrySearchFilter.toLdapIDNFilter("(zimbraMailDeliveryAddress=...)"));
+        assertEquals("(zmailMailDeliveryAddress=...)",
+                LdapEntrySearchFilter.toLdapIDNFilter("(zmailMailDeliveryAddress=...)"));
 
-        assertEquals("(zimbraMailDeliveryAddress=.a.)",
-                LdapEntrySearchFilter.toLdapIDNFilter("(zimbraMailDeliveryAddress=.a.)"));
+        assertEquals("(zmailMailDeliveryAddress=.a.)",
+                LdapEntrySearchFilter.toLdapIDNFilter("(zmailMailDeliveryAddress=.a.)"));
 
-        assertEquals("(zimbraMailDeliveryAddress=a.b.)",
-                LdapEntrySearchFilter.toLdapIDNFilter("(zimbraMailDeliveryAddress=a.b.)"));
+        assertEquals("(zmailMailDeliveryAddress=a.b.)",
+                LdapEntrySearchFilter.toLdapIDNFilter("(zmailMailDeliveryAddress=a.b.)"));
 
-        assertEquals("(zimbraMailDeliveryAddress=*.*)",
-                LdapEntrySearchFilter.toLdapIDNFilter("(zimbraMailDeliveryAddress=*.*)"));
+        assertEquals("(zmailMailDeliveryAddress=*.*)",
+                LdapEntrySearchFilter.toLdapIDNFilter("(zmailMailDeliveryAddress=*.*)"));
     }
 
     @Test

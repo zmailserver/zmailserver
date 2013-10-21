@@ -12,19 +12,19 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.mailclient;
+package org.zmail.cs.mailclient;
 
-import static com.zimbra.cs.mailclient.auth.SaslAuthenticator.*;
+import static org.zmail.cs.mailclient.auth.SaslAuthenticator.*;
 
-import com.zimbra.common.util.Log;
-import com.zimbra.cs.mailclient.auth.AuthenticatorFactory;
-import com.zimbra.cs.mailclient.smtp.SmtpConfig;
-import com.zimbra.cs.mailclient.smtp.SmtpConnection;
-import com.zimbra.cs.mailclient.util.SSLUtil;
-import com.zimbra.cs.mailclient.imap.ImapConfig;
-import com.zimbra.cs.mailclient.imap.ImapConnection;
-import com.zimbra.cs.mailclient.pop3.Pop3Config;
-import com.zimbra.cs.mailclient.pop3.Pop3Connection;
+import org.zmail.common.util.Log;
+import org.zmail.cs.mailclient.auth.AuthenticatorFactory;
+import org.zmail.cs.mailclient.smtp.SmtpConfig;
+import org.zmail.cs.mailclient.smtp.SmtpConnection;
+import org.zmail.cs.mailclient.util.SSLUtil;
+import org.zmail.cs.mailclient.imap.ImapConfig;
+import org.zmail.cs.mailclient.imap.ImapConnection;
+import org.zmail.cs.mailclient.pop3.Pop3Config;
+import org.zmail.cs.mailclient.pop3.Pop3Connection;
 
 import javax.security.sasl.Sasl;
 import javax.security.auth.login.LoginException;

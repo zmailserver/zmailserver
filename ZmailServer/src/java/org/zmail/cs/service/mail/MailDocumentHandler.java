@@ -12,23 +12,23 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.service.mail;
+package org.zmail.cs.service.mail;
 
 import java.util.Map;
 
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.common.soap.MailConstants;
-import com.zimbra.cs.account.Account;
-import com.zimbra.cs.account.Provisioning;
-import com.zimbra.cs.mailbox.MailItem;
-import com.zimbra.cs.mailbox.Mailbox;
-import com.zimbra.cs.mailbox.Mountpoint;
-import com.zimbra.cs.mailbox.OperationContext;
-import com.zimbra.cs.service.util.ItemId;
-import com.zimbra.cs.service.util.ItemIdFormatter;
-import com.zimbra.soap.DocumentHandler;
-import com.zimbra.common.soap.Element;
-import com.zimbra.soap.ZimbraSoapContext;
+import org.zmail.common.service.ServiceException;
+import org.zmail.common.soap.MailConstants;
+import org.zmail.cs.account.Account;
+import org.zmail.cs.account.Provisioning;
+import org.zmail.cs.mailbox.MailItem;
+import org.zmail.cs.mailbox.Mailbox;
+import org.zmail.cs.mailbox.Mountpoint;
+import org.zmail.cs.mailbox.OperationContext;
+import org.zmail.cs.service.util.ItemId;
+import org.zmail.cs.service.util.ItemIdFormatter;
+import org.zmail.soap.DocumentHandler;
+import org.zmail.common.soap.Element;
+import org.zmail.soap.ZmailSoapContext;
 
 public abstract class MailDocumentHandler extends DocumentHandler {
 
@@ -51,7 +51,7 @@ public abstract class MailDocumentHandler extends DocumentHandler {
         String id = (xpath != null ? getXPath(request, xpath) : null);
 
         if (id != null) {
-            ZimbraSoapContext zsc = getZimbraSoapContext(context);
+            ZmailSoapContext zsc = getZmailSoapContext(context);
             OperationContext octxt = getOperationContext(zsc, context);
             ItemId iid = new ItemId(id, zsc);
 
@@ -65,7 +65,7 @@ public abstract class MailDocumentHandler extends DocumentHandler {
         return super.proxyIfNecessary(request, context);
     }
 
-    protected static ItemId getProxyTarget(ZimbraSoapContext zsc, OperationContext octxt, ItemId iid, boolean checkMountpoint) throws ServiceException {
+    protected static ItemId getProxyTarget(ZmailSoapContext zsc, OperationContext octxt, ItemId iid, boolean checkMountpoint) throws ServiceException {
         if (zsc == null || iid == null) {
             return null;
         }
@@ -85,7 +85,7 @@ public abstract class MailDocumentHandler extends DocumentHandler {
         return ((Mountpoint) item).getTarget();
     }
 
-    private void insertMountpointReferences(Element response, String[] xpath, ItemId iidMountpoint, ItemId iidLocal, ZimbraSoapContext lc) {
+    private void insertMountpointReferences(Element response, String[] xpath, ItemId iidMountpoint, ItemId iidLocal, ZmailSoapContext lc) {
         int depth = 0;
         while (depth < xpath.length && response != null) {
             response = response.getOptionalElement(xpath[depth++]);
@@ -115,7 +115,7 @@ public abstract class MailDocumentHandler extends DocumentHandler {
         Element response = proxyRequest(request, context, iidResolved.getAccountId(), mountpoint);
 
         // translate remote folder IDs back into local mountpoint IDs
-        ZimbraSoapContext zsc = getZimbraSoapContext(context);
+        ZmailSoapContext zsc = getZmailSoapContext(context);
         String[] xpathResponse = getResponseItemPath();
         if (mountpoint && xpathResponse != null)
             insertMountpointReferences(response, xpathResponse, iidRequested, iidResolved, zsc);
@@ -124,9 +124,9 @@ public abstract class MailDocumentHandler extends DocumentHandler {
 
     private Element proxyRequest(Element request, Map<String, Object> context, String acctId, boolean mountpoint)
     throws ServiceException {
-        ZimbraSoapContext zsc = getZimbraSoapContext(context);
+        ZmailSoapContext zsc = getZmailSoapContext(context);
         // new context for proxied request has a different "requested account"
-        ZimbraSoapContext zscTarget = new ZimbraSoapContext(zsc, acctId);
+        ZmailSoapContext zscTarget = new ZmailSoapContext(zsc, acctId);
         if (mountpoint) {
             zscTarget.recordMountpointTraversal();
         }

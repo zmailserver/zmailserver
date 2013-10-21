@@ -12,10 +12,10 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.util.yauth;
+package org.zmail.cs.util.yauth;
 
-import com.zimbra.cs.mailclient.auth.Authenticator;
-import com.zimbra.cs.mailclient.MailConfig;
+import org.zmail.cs.mailclient.auth.Authenticator;
+import org.zmail.cs.mailclient.MailConfig;
 
 import java.io.UnsupportedEncodingException;
 

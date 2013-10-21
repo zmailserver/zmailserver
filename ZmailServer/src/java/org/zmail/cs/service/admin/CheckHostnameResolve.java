@@ -16,20 +16,20 @@
 /*
  * Created on Jun 17, 2004
  */
-package com.zimbra.cs.service.admin;
+package org.zmail.cs.service.admin;
 
 import java.util.List;
 import java.util.Map;
 
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.cs.account.Provisioning;
-import com.zimbra.cs.account.accesscontrol.AdminRight;
-import com.zimbra.cs.account.ldap.Check;
-import com.zimbra.common.soap.Element;
-import com.zimbra.soap.JaxbUtil;
-import com.zimbra.soap.ZimbraSoapContext;
-import com.zimbra.soap.admin.message.CheckHostnameResolveRequest;
-import com.zimbra.soap.admin.message.CheckHostnameResolveResponse;
+import org.zmail.common.service.ServiceException;
+import org.zmail.cs.account.Provisioning;
+import org.zmail.cs.account.accesscontrol.AdminRight;
+import org.zmail.cs.account.ldap.Check;
+import org.zmail.common.soap.Element;
+import org.zmail.soap.JaxbUtil;
+import org.zmail.soap.ZmailSoapContext;
+import org.zmail.soap.admin.message.CheckHostnameResolveRequest;
+import org.zmail.soap.admin.message.CheckHostnameResolveResponse;
 
 /**
  * @author schemers
@@ -39,7 +39,7 @@ public class CheckHostnameResolve extends AdminDocumentHandler {
     public Element handle(Element request, Map<String, Object> context)
     throws ServiceException {
 
-        ZimbraSoapContext zsc = getZimbraSoapContext(context);
+        ZmailSoapContext zsc = getZmailSoapContext(context);
 
         CheckHostnameResolveRequest req = JaxbUtil.elementToJaxb(request);
         String host = req.getHostname().toLowerCase();

@@ -14,7 +14,7 @@
  * 
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.qa.unittest;
+package org.zmail.qa.unittest;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -23,31 +23,31 @@ import java.sql.SQLException;
 
 import junit.framework.TestCase;
 
-import com.zimbra.common.localconfig.LC;
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.common.util.Log;
-import com.zimbra.common.util.ZimbraLog;
-import com.zimbra.cs.db.AbstractRetry;
-import com.zimbra.cs.db.DbPool;
-import com.zimbra.cs.db.RetryConnectionFactory;
-import com.zimbra.cs.db.SQLite;
+import org.zmail.common.localconfig.LC;
+import org.zmail.common.service.ServiceException;
+import org.zmail.common.util.Log;
+import org.zmail.common.util.ZmailLog;
+import org.zmail.cs.db.AbstractRetry;
+import org.zmail.cs.db.DbPool;
+import org.zmail.cs.db.RetryConnectionFactory;
+import org.zmail.cs.db.SQLite;
 
 /**
  * Unit test to exercise busy handler
- * Not added to ZimbraSuite as it is specific to SQLite, and not used in normal ZCS operation
+ * Not added to ZmailSuite as it is specific to SQLite, and not used in normal ZCS operation
  *
  */
 public class TestSQLiteBusyHandler extends TestCase {
     
     public static final int timeout = 120000; //2 minutes is long enough; might not get a busy every time, but should get one most of the time
     
-    private final Log log = ZimbraLog.test;
+    private final Log log = ZmailLog.test;
     
     private static final String DB_PATH="data/unittest/sqlite/";
     public Connection createConnect() throws Exception
     {
         Class.forName("org.sqlite.JDBC");
-        RetryConnectionFactory factory = new RetryConnectionFactory("jdbc:sqlite:"+DB_PATH+"zimbra.db", null);
+        RetryConnectionFactory factory = new RetryConnectionFactory("jdbc:sqlite:"+DB_PATH+"zmail.db", null);
         return factory.createConnection();
     }
     
@@ -153,7 +153,7 @@ public class TestSQLiteBusyHandler extends TestCase {
     }
     
     
-    public void testUpdateZimbra(Connection conn) throws Exception {
+    public void testUpdateZmail(Connection conn) throws Exception {
         PreparedStatement stmt = conn.prepareStatement("update directory set entry_name='blah' where entry_id=2");
         stmt.executeUpdate();
         stmt.close();
@@ -162,22 +162,22 @@ public class TestSQLiteBusyHandler extends TestCase {
         stmt.executeUpdate();
         stmt.close();
         testEntryName("default",conn);
-        log.debug("updated: zimbra");
+        log.debug("updated: zmail");
         conn.commit();
     }
     
     
-    public void testSelectZimbra(Connection conn) throws Exception {
+    public void testSelectZmail(Connection conn) throws Exception {
         PreparedStatement ps = conn.prepareStatement("select * from directory"); 
         ResultSet rs = ps.executeQuery();
         rs.close();
         ps.close();
-        log.debug("read: zimbra");
+        log.debug("read: zmail");
     }
     
     public void integrityCheck(Connection conn, String dbname) throws Exception {
         PreparedStatement stmt = null;
-        String prefix = dbname == null || dbname.equals("zimbra") ? "" : dbname + ".";
+        String prefix = dbname == null || dbname.equals("zmail") ? "" : dbname + ".";
         stmt = conn.prepareStatement("PRAGMA " + prefix + "integrity_check");
         stmt.execute();
         ResultSet rs = stmt.getResultSet();
@@ -202,15 +202,15 @@ public class TestSQLiteBusyHandler extends TestCase {
     
     public void testNoBusy()
     {
-        LC.zimbra_class_database.setDefault(SQLite.class.getName());
+        LC.zmail_class_database.setDefault(SQLite.class.getName());
         try {
-            Thread t = new Thread("Update Zimbra") {
+            Thread t = new Thread("Update Zmail") {
                 public void run() {
                     try {
                         Connection conn1 = createConnect();
                         conn1.setAutoCommit(false);
                         while (!error && !timedOut) {
-                            testUpdateZimbra(conn1);
+                            testUpdateZmail(conn1);
                         }
                     } catch (Exception e) {
                         error = true;
@@ -263,7 +263,7 @@ public class TestSQLiteBusyHandler extends TestCase {
 //                        while (!error && !timedOut) {
 //                            integrityCheck(conn4, "test1");
 //                            integrityCheck(conn4, "test2");
-//                            integrityCheck(conn4, "zimbra");
+//                            integrityCheck(conn4, "zmail");
 //                        }
 //                    } catch (Exception e) {
 //                        error = true;

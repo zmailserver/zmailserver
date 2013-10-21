@@ -12,7 +12,7 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.qa.unittest;
+package org.zmail.qa.unittest;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -29,23 +29,23 @@ import junit.framework.TestCase;
 
 import com.google.common.base.Strings;
 import com.google.common.collect.Maps;
-import com.zimbra.client.ZFilterAction;
-import com.zimbra.client.ZFilterAction.ZFileIntoAction;
-import com.zimbra.client.ZFilterCondition;
-import com.zimbra.client.ZFilterCondition.ZHeaderCondition;
-import com.zimbra.client.ZFilterRule;
-import com.zimbra.client.ZFilterRules;
-import com.zimbra.client.ZFolder;
-import com.zimbra.client.ZMailbox;
-import com.zimbra.client.ZMessage;
-import com.zimbra.common.zmime.ZMimeMessage;
-import com.zimbra.cs.account.Account;
-import com.zimbra.cs.account.Config;
-import com.zimbra.cs.account.Provisioning;
-import com.zimbra.cs.mailbox.Mailbox;
-import com.zimbra.cs.mime.Mime;
-import com.zimbra.cs.service.util.SpamHandler;
-import com.zimbra.cs.util.JMSession;
+import org.zmail.client.ZFilterAction;
+import org.zmail.client.ZFilterAction.ZFileIntoAction;
+import org.zmail.client.ZFilterCondition;
+import org.zmail.client.ZFilterCondition.ZHeaderCondition;
+import org.zmail.client.ZFilterRule;
+import org.zmail.client.ZFilterRules;
+import org.zmail.client.ZFolder;
+import org.zmail.client.ZMailbox;
+import org.zmail.client.ZMessage;
+import org.zmail.common.zmime.ZMimeMessage;
+import org.zmail.cs.account.Account;
+import org.zmail.cs.account.Config;
+import org.zmail.cs.account.Provisioning;
+import org.zmail.cs.mailbox.Mailbox;
+import org.zmail.cs.mime.Mime;
+import org.zmail.cs.service.util.SpamHandler;
+import org.zmail.cs.util.JMSession;
 
 public class TestSpam extends TestCase {
 
@@ -117,7 +117,7 @@ public class TestSpam extends TestCase {
         TestUtil.addMessageLmtp(subject, USER_NAME, USER_NAME);
         ZMessage msg = TestUtil.getMessage(mbox, "in:" + spamFolder.getPath() + " subject:\"" + subject + "\"");
         ZMailbox spamMbox = TestUtil.getZMailbox(SPAM_NAME);
-        ZMessage reportMsg = TestUtil.waitForMessage(spamMbox, "zimbra-spam-report spam");
+        ZMessage reportMsg = TestUtil.waitForMessage(spamMbox, "zmail-spam-report spam");
         validateSpamReport(TestUtil.getContent(spamMbox, reportMsg.getId()),
             TestUtil.getAddress(USER_NAME), "spam", "filter", null, spamFolder.getPath(), null);
         spamMbox.deleteMessage(reportMsg.getId());
@@ -125,14 +125,14 @@ public class TestSpam extends TestCase {
         // Move out of spam folder.
         mbox.moveMessage(msg.getId(), Integer.toString(Mailbox.ID_FOLDER_INBOX));
         ZMailbox hamMbox = TestUtil.getZMailbox(HAM_NAME);
-        reportMsg = TestUtil.waitForMessage(hamMbox, "zimbra-spam-report ham");
+        reportMsg = TestUtil.waitForMessage(hamMbox, "zmail-spam-report ham");
         validateSpamReport(TestUtil.getContent(hamMbox, reportMsg.getId()),
             TestUtil.getAddress(USER_NAME), "ham", "move", spamFolder.getPath(), inboxFolder.getPath(), null);
         hamMbox.deleteMessage(reportMsg.getId());
 
         // Move back to spam folder.
         mbox.moveMessage(msg.getId(), Integer.toString(Mailbox.ID_FOLDER_SPAM));
-        reportMsg = TestUtil.waitForMessage(spamMbox, "zimbra-spam-report spam");
+        reportMsg = TestUtil.waitForMessage(spamMbox, "zmail-spam-report spam");
         validateSpamReport(TestUtil.getContent(spamMbox, reportMsg.getId()),
             TestUtil.getAddress(USER_NAME), "spam", "move", inboxFolder.getPath(), spamFolder.getPath(), null);
         spamMbox.deleteMessage(reportMsg.getId());
@@ -143,7 +143,7 @@ public class TestSpam extends TestCase {
         TestUtil.createMountpoint(remoteMbox, "/Inbox", mbox, mountpointPath);
         ZFolder mountpoint = mbox.getFolderByPath(mountpointPath);
         mbox.moveMessage(msg.getId(), mountpoint.getId());
-        reportMsg = TestUtil.waitForMessage(hamMbox, "zimbra-spam-report ham");
+        reportMsg = TestUtil.waitForMessage(hamMbox, "zmail-spam-report ham");
         validateSpamReport(TestUtil.getContent(hamMbox, reportMsg.getId()),
             TestUtil.getAddress(USER_NAME), "ham", "remote move", spamFolder.getPath(),
             inboxFolder.getPath(), TestUtil.getAddress(REMOTE_USER_NAME));
@@ -204,8 +204,8 @@ public class TestSpam extends TestCase {
     private void cleanUp()
     throws Exception {
         TestUtil.deleteTestData(USER_NAME, NAME_PREFIX);
-        TestUtil.deleteTestData(SPAM_NAME, "zimbra-spam-report");
-        TestUtil.deleteTestData(HAM_NAME, "zimbra-spam-report");
+        TestUtil.deleteTestData(SPAM_NAME, "zmail-spam-report");
+        TestUtil.deleteTestData(HAM_NAME, "zmail-spam-report");
         TestUtil.deleteTestData(REMOTE_USER_NAME, NAME_PREFIX);
     }
 

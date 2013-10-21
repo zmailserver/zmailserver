@@ -13,19 +13,19 @@
  * ***** END LICENSE BLOCK *****
  */
 
-package com.zimbra.cs.account.soap;
+package org.zmail.cs.account.soap;
 
 import java.util.Map;
 
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.common.soap.AdminConstants;
-import com.zimbra.cs.account.Config;
-import com.zimbra.cs.account.Provisioning;
-import com.zimbra.common.soap.Element;
-import com.zimbra.common.soap.Element.XMLElement;
-import com.zimbra.soap.admin.message.GetAllConfigResponse;
-import com.zimbra.soap.admin.message.GetConfigResponse;
-import com.zimbra.soap.admin.type.Attr;
+import org.zmail.common.service.ServiceException;
+import org.zmail.common.soap.AdminConstants;
+import org.zmail.cs.account.Config;
+import org.zmail.cs.account.Provisioning;
+import org.zmail.common.soap.Element;
+import org.zmail.common.soap.Element.XMLElement;
+import org.zmail.soap.admin.message.GetAllConfigResponse;
+import org.zmail.soap.admin.message.GetConfigResponse;
+import org.zmail.soap.admin.type.Attr;
 
 class SoapConfig extends Config implements SoapEntry {
     

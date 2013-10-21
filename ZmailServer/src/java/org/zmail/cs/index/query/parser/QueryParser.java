@@ -12,7 +12,7 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.index.query.parser;
+package org.zmail.cs.index.query.parser;
 
 import java.io.StringReader;
 import java.util.ArrayList;
@@ -32,41 +32,41 @@ import org.apache.lucene.analysis.Analyzer;
 import com.google.common.base.Objects;
 import com.google.common.base.Strings;
 import com.google.common.collect.ImmutableMap;
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.common.util.ZimbraLog;
-import com.zimbra.cs.index.LuceneFields;
-import com.zimbra.cs.index.query.AddrQuery;
-import com.zimbra.cs.index.query.AttachmentQuery;
-import com.zimbra.cs.index.query.BuiltInQuery;
-import com.zimbra.cs.index.query.ConjQuery;
-import com.zimbra.cs.index.query.ContactQuery;
-import com.zimbra.cs.index.query.ConvCountQuery;
-import com.zimbra.cs.index.query.ConvQuery;
-import com.zimbra.cs.index.query.DateQuery;
-import com.zimbra.cs.index.query.DomainQuery;
-import com.zimbra.cs.index.query.FieldQuery;
-import com.zimbra.cs.index.query.HasQuery;
-import com.zimbra.cs.index.query.InQuery;
-import com.zimbra.cs.index.query.ItemQuery;
-import com.zimbra.cs.index.query.ModseqQuery;
-import com.zimbra.cs.index.query.PriorityQuery;
-import com.zimbra.cs.index.query.Query;
-import com.zimbra.cs.index.query.AddrQuery.Address;
-import com.zimbra.cs.index.query.Query.Modifier;
-import com.zimbra.cs.index.query.SenderQuery;
-import com.zimbra.cs.index.query.SizeQuery;
-import com.zimbra.cs.index.query.SubQuery;
-import com.zimbra.cs.index.query.SubjectQuery;
-import com.zimbra.cs.index.query.TagQuery;
-import com.zimbra.cs.index.query.TextQuery;
-import com.zimbra.cs.index.query.TypeQuery;
-import static com.zimbra.cs.index.query.parser.ParserConstants.*;
-import static com.zimbra.cs.index.query.parser.ParserTreeConstants.*;
+import org.zmail.common.service.ServiceException;
+import org.zmail.common.util.ZmailLog;
+import org.zmail.cs.index.LuceneFields;
+import org.zmail.cs.index.query.AddrQuery;
+import org.zmail.cs.index.query.AttachmentQuery;
+import org.zmail.cs.index.query.BuiltInQuery;
+import org.zmail.cs.index.query.ConjQuery;
+import org.zmail.cs.index.query.ContactQuery;
+import org.zmail.cs.index.query.ConvCountQuery;
+import org.zmail.cs.index.query.ConvQuery;
+import org.zmail.cs.index.query.DateQuery;
+import org.zmail.cs.index.query.DomainQuery;
+import org.zmail.cs.index.query.FieldQuery;
+import org.zmail.cs.index.query.HasQuery;
+import org.zmail.cs.index.query.InQuery;
+import org.zmail.cs.index.query.ItemQuery;
+import org.zmail.cs.index.query.ModseqQuery;
+import org.zmail.cs.index.query.PriorityQuery;
+import org.zmail.cs.index.query.Query;
+import org.zmail.cs.index.query.AddrQuery.Address;
+import org.zmail.cs.index.query.Query.Modifier;
+import org.zmail.cs.index.query.SenderQuery;
+import org.zmail.cs.index.query.SizeQuery;
+import org.zmail.cs.index.query.SubQuery;
+import org.zmail.cs.index.query.SubjectQuery;
+import org.zmail.cs.index.query.TagQuery;
+import org.zmail.cs.index.query.TextQuery;
+import org.zmail.cs.index.query.TypeQuery;
+import static org.zmail.cs.index.query.parser.ParserConstants.*;
+import static org.zmail.cs.index.query.parser.ParserTreeConstants.*;
 
-import com.zimbra.cs.mailbox.MailItem;
-import com.zimbra.cs.mailbox.MailServiceException;
-import com.zimbra.cs.mailbox.Mailbox;
-import com.zimbra.cs.service.util.ItemId;
+import org.zmail.cs.mailbox.MailItem;
+import org.zmail.cs.mailbox.MailServiceException;
+import org.zmail.cs.mailbox.Mailbox;
+import org.zmail.cs.service.util.ItemId;
 
 /**
  * Parser for search query.
@@ -488,7 +488,7 @@ public final class QueryParser {
                     return InQuery.create(mailbox, iid, subfolderPath, (field.kind == UNDERID));
                 } catch (ServiceException e) {
                     // bug: 18623 -- dangling mountpoints create problems with 'is:remote'
-                    ZimbraLog.index.debug("Ignoring INID/UNDERID clause b/c of ServiceException", e);
+                    ZmailLog.index.debug("Ignoring INID/UNDERID clause b/c of ServiceException", e);
                     return InQuery.create(InQuery.In.NONE, false);
                 }
             }

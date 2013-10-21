@@ -12,7 +12,7 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.account.callback;
+package org.zmail.cs.account.callback;
 
 import java.util.HashMap;
 import java.util.HashSet;
@@ -22,50 +22,50 @@ import java.util.Set;
 
 import com.google.common.collect.BiMap;
 import com.google.common.collect.HashBiMap;
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.common.util.StringUtil;
-import com.zimbra.common.util.ZimbraLog;
-import com.zimbra.cs.account.AttributeCallback;
-import com.zimbra.cs.account.AttributeManager;
-import com.zimbra.cs.account.Config;
-import com.zimbra.cs.account.Entry;
-import com.zimbra.cs.account.Provisioning;
-import com.zimbra.cs.account.Server;
+import org.zmail.common.service.ServiceException;
+import org.zmail.common.util.StringUtil;
+import org.zmail.common.util.ZmailLog;
+import org.zmail.cs.account.AttributeCallback;
+import org.zmail.cs.account.AttributeManager;
+import org.zmail.cs.account.Config;
+import org.zmail.cs.account.Entry;
+import org.zmail.cs.account.Provisioning;
+import org.zmail.cs.account.Server;
 
 public class CheckPortConflict extends AttributeCallback {
 
     private static final Set<String> sPortAttrs = new HashSet<String>();
 
     static {
-        // TODO: use a flag in zimbra-attrs.xml and generate this map automatically
-        sPortAttrs.add(Provisioning.A_zimbraAdminPort);
-        sPortAttrs.add(Provisioning.A_zimbraAdminProxyPort);
+        // TODO: use a flag in zmail-attrs.xml and generate this map automatically
+        sPortAttrs.add(Provisioning.A_zmailAdminPort);
+        sPortAttrs.add(Provisioning.A_zmailAdminProxyPort);
 
-        sPortAttrs.add(Provisioning.A_zimbraImapBindPort);
-        sPortAttrs.add(Provisioning.A_zimbraImapSSLBindPort);
-        sPortAttrs.add(Provisioning.A_zimbraImapProxyBindPort);
-        sPortAttrs.add(Provisioning.A_zimbraImapSSLProxyBindPort);
+        sPortAttrs.add(Provisioning.A_zmailImapBindPort);
+        sPortAttrs.add(Provisioning.A_zmailImapSSLBindPort);
+        sPortAttrs.add(Provisioning.A_zmailImapProxyBindPort);
+        sPortAttrs.add(Provisioning.A_zmailImapSSLProxyBindPort);
 
-        sPortAttrs.add(Provisioning.A_zimbraLmtpBindPort);
+        sPortAttrs.add(Provisioning.A_zmailLmtpBindPort);
 
-        sPortAttrs.add(Provisioning.A_zimbraMailPort);
-        sPortAttrs.add(Provisioning.A_zimbraMailSSLPort);
-        sPortAttrs.add(Provisioning.A_zimbraMailSSLClientCertPort);
+        sPortAttrs.add(Provisioning.A_zmailMailPort);
+        sPortAttrs.add(Provisioning.A_zmailMailSSLPort);
+        sPortAttrs.add(Provisioning.A_zmailMailSSLClientCertPort);
 
-        sPortAttrs.add(Provisioning.A_zimbraPop3BindPort);
-        sPortAttrs.add(Provisioning.A_zimbraPop3SSLBindPort);
-        sPortAttrs.add(Provisioning.A_zimbraPop3ProxyBindPort);
-        sPortAttrs.add(Provisioning.A_zimbraPop3SSLProxyBindPort);
+        sPortAttrs.add(Provisioning.A_zmailPop3BindPort);
+        sPortAttrs.add(Provisioning.A_zmailPop3SSLBindPort);
+        sPortAttrs.add(Provisioning.A_zmailPop3ProxyBindPort);
+        sPortAttrs.add(Provisioning.A_zmailPop3SSLProxyBindPort);
 
-        sPortAttrs.add(Provisioning.A_zimbraRemoteManagementPort);
+        sPortAttrs.add(Provisioning.A_zmailRemoteManagementPort);
 
-        sPortAttrs.add(Provisioning.A_zimbraMemcachedBindPort);
+        sPortAttrs.add(Provisioning.A_zmailMemcachedBindPort);
 
-        sPortAttrs.add(Provisioning.A_zimbraMailProxyPort);
-        sPortAttrs.add(Provisioning.A_zimbraMailSSLProxyPort);
-        sPortAttrs.add(Provisioning.A_zimbraMailSSLProxyClientCertPort);
+        sPortAttrs.add(Provisioning.A_zmailMailProxyPort);
+        sPortAttrs.add(Provisioning.A_zmailMailSSLProxyPort);
+        sPortAttrs.add(Provisioning.A_zmailMailSSLProxyClientCertPort);
 
-        sPortAttrs.add(Provisioning.A_zimbraMessageChannelPort);
+        sPortAttrs.add(Provisioning.A_zmailMessageChannelPort);
     }
 
     @Override
@@ -79,7 +79,7 @@ public class CheckPortConflict extends AttributeCallback {
             return;
         }
 
-        // sanity check, zimbra-attrs.xml and the sPortAttrsToCheck map has to be in sync
+        // sanity check, zmail-attrs.xml and the sPortAttrsToCheck map has to be in sync
         if (!sPortAttrs.contains(attrName) ||
             !AttributeManager.getInstance().isServerInherited(attrName))
             assert(false);
@@ -121,7 +121,7 @@ public class CheckPortConflict extends AttributeCallback {
                     if (defValue instanceof String)
                         newValue = (String)defValue;
                     else
-                        ZimbraLog.misc.info("default value for " + attrName + " should be a single-valued attribute, invalid default value ignored");
+                        ZmailLog.misc.info("default value for " + attrName + " should be a single-valued attribute, invalid default value ignored");
                 }
             }
 

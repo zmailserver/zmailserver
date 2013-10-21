@@ -14,7 +14,7 @@
  * 
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.gal;
+package org.zmail.cs.gal;
 
 import java.util.HashMap;
 import java.util.HashSet;
@@ -22,33 +22,33 @@ import java.util.Map;
 import java.util.Set;
 
 import com.google.common.collect.ImmutableMap;
-import com.zimbra.common.account.Key;
-import com.zimbra.common.account.Key.AccountBy;
-import com.zimbra.common.localconfig.LC;
-import com.zimbra.common.mailbox.ContactConstants;
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.common.soap.AdminConstants;
-import com.zimbra.common.soap.Element;
-import com.zimbra.common.soap.MailConstants;
-import com.zimbra.common.soap.SoapProtocol;
-import com.zimbra.common.util.Constants;
-import com.zimbra.common.util.ThreadPool;
-import com.zimbra.common.util.ZimbraLog;
-import com.zimbra.cs.account.AccessManager;
-import com.zimbra.cs.account.Account;
-import com.zimbra.cs.account.AccountServiceException;
-import com.zimbra.cs.account.AuthToken;
-import com.zimbra.cs.account.Domain;
-import com.zimbra.cs.account.EntryCacheDataKey;
-import com.zimbra.cs.account.GalContact;
-import com.zimbra.cs.account.Group;
-import com.zimbra.cs.account.Provisioning;
-import com.zimbra.cs.account.Provisioning.CacheEntry;
-import com.zimbra.cs.account.accesscontrol.Rights.User;
-import com.zimbra.cs.mailbox.Contact;
-import com.zimbra.cs.service.AuthProvider;
-import com.zimbra.soap.ZimbraSoapContext;
-import com.zimbra.soap.type.GalSearchType;
+import org.zmail.common.account.Key;
+import org.zmail.common.account.Key.AccountBy;
+import org.zmail.common.localconfig.LC;
+import org.zmail.common.mailbox.ContactConstants;
+import org.zmail.common.service.ServiceException;
+import org.zmail.common.soap.AdminConstants;
+import org.zmail.common.soap.Element;
+import org.zmail.common.soap.MailConstants;
+import org.zmail.common.soap.SoapProtocol;
+import org.zmail.common.util.Constants;
+import org.zmail.common.util.ThreadPool;
+import org.zmail.common.util.ZmailLog;
+import org.zmail.cs.account.AccessManager;
+import org.zmail.cs.account.Account;
+import org.zmail.cs.account.AccountServiceException;
+import org.zmail.cs.account.AuthToken;
+import org.zmail.cs.account.Domain;
+import org.zmail.cs.account.EntryCacheDataKey;
+import org.zmail.cs.account.GalContact;
+import org.zmail.cs.account.Group;
+import org.zmail.cs.account.Provisioning;
+import org.zmail.cs.account.Provisioning.CacheEntry;
+import org.zmail.cs.account.accesscontrol.Rights.User;
+import org.zmail.cs.mailbox.Contact;
+import org.zmail.cs.service.AuthProvider;
+import org.zmail.soap.ZmailSoapContext;
+import org.zmail.soap.type.GalSearchType;
 
 
 public abstract class GalGroup {
@@ -89,8 +89,8 @@ public abstract class GalGroup {
      * setting on the domain of the requestedAcct.
      * 
      * This method uses the GAL group cache, domain (of the requestedAcct) attribute 
-     * zimbraGalGroupIndicatorEnabled must be set to TRUE for this call to return meaningful answer.   
-     * If zimbraGalGroupIndicatorEnabled is FALSE, this method always returns false.
+     * zmailGalGroupIndicatorEnabled must be set to TRUE for this call to return meaningful answer.   
+     * If zmailGalGroupIndicatorEnabled is FALSE, this method always returns false.
      * 
      * @param addr
      * @param requestedAcct
@@ -105,7 +105,7 @@ public abstract class GalGroup {
         try {
             domain = prov.getDomain(requestedAcct);
         } catch (ServiceException e) {
-            ZimbraLog.gal.warn("GalGroup - unable to get domain for account " + requestedAcct, e);
+            ZmailLog.gal.warn("GalGroup - unable to get domain for account " + requestedAcct, e);
         }
         
         if (domain == null)
@@ -159,11 +159,11 @@ public abstract class GalGroup {
 
     private static void flushCache(String domainName, DomainGalGroupCache galGroup) {
         if (galGroup == null) {
-            ZimbraLog.gal.info("GalGroup - flushCache: no cache entry for domain " + domainName);
+            ZmailLog.gal.info("GalGroup - flushCache: no cache entry for domain " + domainName);
         } else if (galGroup.isSyncing()) {
-            ZimbraLog.gal.info("GalGroup - flushCache: Still syncing GalGroup for domain " + domainName);
+            ZmailLog.gal.info("GalGroup - flushCache: Still syncing GalGroup for domain " + domainName);
         } else {
-            ZimbraLog.gal.info("GalGroup - flushCache: Flushing GalGroup for domain " + domainName);
+            ZmailLog.gal.info("GalGroup - flushCache: Flushing GalGroup for domain " + domainName);
             GalGroup.removeFromCache(domainName, "flush cache");
         }
     }
@@ -182,9 +182,9 @@ public abstract class GalGroup {
                         "for domain " + domainName;
                 if (hadWarnedDomainForCacheFull(domain)) {
                     // log at debug level so we don't flood the log
-                    ZimbraLog.gal.debug(msg);
+                    ZmailLog.gal.debug(msg);
                 } else {
-                    ZimbraLog.gal.warn(msg);
+                    ZmailLog.gal.warn(msg);
                     setHadWarnedDomainForCacheFull(domain);
                 }
                 throw new GalGroupCacheFullException();
@@ -202,7 +202,7 @@ public abstract class GalGroup {
         }
         
         if (galGroup.isSyncing()) {
-            ZimbraLog.gal.debug("GalGroup - Still syncing GalGroup for domain " + domain.getName());
+            ZmailLog.gal.debug("GalGroup - Still syncing GalGroup for domain " + domain.getName());
             return null;
         } else if (galGroup.isExpired()) { 
             GalGroup.removeFromCache(domainName, "group cache expired");
@@ -229,12 +229,12 @@ public abstract class GalGroup {
     }
     
     private static synchronized void putInCache(String domainName, DomainGalGroupCache galGroup) {
-        ZimbraLog.gal.debug("GalGroup - adding GalGroup cache for domain " + domainName);
+        ZmailLog.gal.debug("GalGroup - adding GalGroup cache for domain " + domainName);
         groups.put(domainName, galGroup);
     }
     
     private static synchronized void removeFromCache(String domainName, String reason) {
-        ZimbraLog.gal.debug("GalGroup - removing GalGroup cache for domain " + domainName + ", " + reason);
+        ZmailLog.gal.debug("GalGroup - removing GalGroup cache for domain " + domainName + ", " + reason);
         groups.remove(domainName);
     }
     
@@ -246,7 +246,7 @@ public abstract class GalGroup {
             // the DL might have been deleted since the last GAL sync account sync, throw.
             // or should we just let the request through?
             if (group == null) {
-                ZimbraLog.gal.warn("GalGroup - unable to find group " + groupName + " for permission checking");
+                ZmailLog.gal.warn("GalGroup - unable to find group " + groupName + " for permission checking");
                 return false;
             }
 
@@ -254,7 +254,7 @@ public abstract class GalGroup {
                 return false;
 
         } catch (ServiceException e) {
-            ZimbraLog.gal.warn("GalGroup - unable to check permission for gal group expansion: " + groupName);
+            ZmailLog.gal.warn("GalGroup - unable to check permission for gal group expansion: " + groupName);
             return false;
         }
         
@@ -266,8 +266,8 @@ public abstract class GalGroup {
             super(params);
         }
         
-        protected boolean isZimbraInternalGroup(String email, String zimbraId) {
-            return (zimbraId != null && prov.isDistributionList(email));
+        protected boolean isZmailInternalGroup(String email, String zmailId) {
+            return (zmailId != null && prov.isDistributionList(email));
         }
         
         protected String getSingleAttr(Object contact, String attr) {
@@ -330,22 +330,22 @@ public abstract class GalGroup {
         // no need to synchronize because it can only be called from the syncing thread
         private void addInternalGroup(String addr) {
             if (reachedMax()) {
-                ZimbraLog.gal.debug("GalGroup - NOT adding internal group: " + addr + ", limit (" + max + ") reached, domain=" + domainName);
+                ZmailLog.gal.debug("GalGroup - NOT adding internal group: " + addr + ", limit (" + max + ") reached, domain=" + domainName);
                 return;
             }
                 
-            ZimbraLog.gal.debug("GalGroup - Adding internal group: " + addr + ", domain=" + domainName);
+            ZmailLog.gal.debug("GalGroup - Adding internal group: " + addr + ", domain=" + domainName);
             internalGroups.add(addr.toLowerCase());
         }
         
         // no need to synchronize because it can only be called from the syncing thread
         private void addExternalGroup(String addr) {
             if (reachedMax()) {
-                ZimbraLog.gal.debug("GalGroup - NOT adding external group: " + addr + ", limit (" + max + ") reached, domain=" + domainName);
+                ZmailLog.gal.debug("GalGroup - NOT adding external group: " + addr + ", limit (" + max + ") reached, domain=" + domainName);
                 return;
             }
             
-            ZimbraLog.gal.debug("GalGroup - Adding external group: " + addr + ", domain=" + domainName);
+            ZmailLog.gal.debug("GalGroup - Adding external group: " + addr + ", domain=" + domainName);
             externalGroups.add(addr.toLowerCase());
         }
         
@@ -388,21 +388,21 @@ public abstract class GalGroup {
             public void run() {
                 
                 try {
-                    Account admin = Provisioning.getInstance().get(AccountBy.adminName, LC.zimbra_ldap_user.value());
-                    ZimbraLog.addAccountNameToContext(admin.getName());
+                    Account admin = Provisioning.getInstance().get(AccountBy.adminName, LC.zmail_ldap_user.value());
+                    ZmailLog.addAccountNameToContext(admin.getName());
                     adminAuthToken =  AuthProvider.getAuthToken(admin, true);
     
                     long startTime = System.currentTimeMillis();
-                    ZimbraLog.gal.info("GalGroup - Start syncing gal groups for domain " + domain.getName());
+                    ZmailLog.gal.info("GalGroup - Start syncing gal groups for domain " + domain.getName());
                 
                     sync();
                     galGroup.setDoneSyncing();
                     
                     long elapsedTime = System.currentTimeMillis() - startTime;
-                    ZimbraLog.gal.info("GalGroup - Finished syncing gal groups for domain " + domain.getName() +
+                    ZmailLog.gal.info("GalGroup - Finished syncing gal groups for domain " + domain.getName() +
                             ", elapsed time = " + elapsedTime + "msec");
                 } catch (ServiceException e) {
-                    ZimbraLog.gal.warn("GalGroup - failed to sync gal groups for domain " + domain.getName(), e);
+                    ZmailLog.gal.warn("GalGroup - failed to sync gal groups for domain " + domain.getName(), e);
                     GalGroup.removeFromCache(domain.getName(), "sync failed");
                 }
             }
@@ -419,7 +419,7 @@ public abstract class GalGroup {
                 boolean hasMore = true;
                 
                 while (hasMore && !galGroup.reachedMax()) {
-                    ZimbraSoapContext zsc = new ZimbraSoapContext(adminAuthToken, null, SoapProtocol.Soap12, SoapProtocol.Soap12);
+                    ZmailSoapContext zsc = new ZmailSoapContext(adminAuthToken, null, SoapProtocol.Soap12, SoapProtocol.Soap12);
                     GalSearchParams params = new GalSearchParams(domain, zsc);
                     
                     // create a request in case the GAL sync account search needs to be proxied,
@@ -439,7 +439,7 @@ public abstract class GalGroup {
                     params.setResultCallback(resultCallback);
                     GalSearchControl gal = new GalSearchControl(params);
                     
-                    ZimbraLog.gal.debug("GalGroup - searching GAL for groups: domain=" + domain.getName() + ", max="+ max + ", limit=" + limit + ", offset=" + offset);
+                    ZmailLog.gal.debug("GalGroup - searching GAL for groups: domain=" + domain.getName() + ", max="+ max + ", limit=" + limit + ", offset=" + offset);
                     gal.search();
                     
                     offset += limit;
@@ -473,14 +473,14 @@ public abstract class GalGroup {
                         return null;
                     
                     String email = getSingleAttr(contact, ContactConstants.A_email);
-                    String zimbraId = getSingleAttr(contact, ContactConstants.A_zimbraId);
+                    String zmailId = getSingleAttr(contact, ContactConstants.A_zmailId);
                     
                     if (email == null) {
-                        ZimbraLog.gal.info("GalGroup - handle Contact: contact " + 
+                        ZmailLog.gal.info("GalGroup - handle Contact: contact " + 
                                 contact.getFileAsString() + "(" + contact.getId() + ")" + " does not have an email address." +
                                 " Not adding to gal group cache.");
                     } else {
-                        addResult(email, zimbraId, contact);
+                        addResult(email, zmailId, contact);
                     }
                     return null;
                 }
@@ -491,14 +491,14 @@ public abstract class GalGroup {
                         return;
                     
                     String email = getSingleAttr(galContact, ContactConstants.A_email); 
-                    String zimbraId = getSingleAttr(galContact, ContactConstants.A_zimbraId);
+                    String zmailId = getSingleAttr(galContact, ContactConstants.A_zmailId);
                     
                     if (email == null) {
-                        ZimbraLog.gal.info("GalGroup - handle GalContact: contact " + 
+                        ZmailLog.gal.info("GalGroup - handle GalContact: contact " + 
                                 galContact.getId() + " does not have an email address." +
                                 " Not adding to gal group cache.");
                     } else {
-                        addResult(email, zimbraId, galContact);
+                        addResult(email, zmailId, galContact);
                     }
                 }
                 
@@ -509,19 +509,19 @@ public abstract class GalGroup {
                         return;
                     
                     String email = getSingleAttr(contact, ContactConstants.A_email); 
-                    String zimbraId = getSingleAttr(contact, ContactConstants.A_zimbraId);
+                    String zmailId = getSingleAttr(contact, ContactConstants.A_zmailId);
                     
                     if (email == null) {
-                        ZimbraLog.gal.info("GalGroup - handle Element: contact " + 
+                        ZmailLog.gal.info("GalGroup - handle Element: contact " + 
                                 e.toString() + " does not have an email address." +
                                 " Not adding to gal group cache.");
                     } else {
-                        addResult(email, zimbraId, contact);
+                        addResult(email, zmailId, contact);
                     }
                 }
     
-                private void addResult(String email, String zimbraId, Object contact) {
-                    if (isZimbraInternalGroup(email, zimbraId)) {
+                private void addResult(String email, String zmailId, Object contact) {
+                    if (isZmailInternalGroup(email, zmailId)) {
                         galGroup.addInternalGroup(email);
                         for (String extraEmailField : EXTRA_EMAIL_FIELDS) {
                             String extraEmail = getSingleAttr(contact, extraEmailField);
@@ -578,7 +578,7 @@ public abstract class GalGroup {
             try {
                 gal.search();
             } catch (ServiceException e) {
-                ZimbraLog.gal.warn("GalGroup - unable to search GAL group for addr:" + addr, e);
+                ZmailLog.gal.warn("GalGroup - unable to search GAL group for addr:" + addr, e);
             }
         }
         
@@ -606,8 +606,8 @@ public abstract class GalGroup {
                     return null;
                 
                 String email = getSingleAttr(contact, ContactConstants.A_email);
-                String zimbraId = getSingleAttr(contact, ContactConstants.A_zimbraId);
-                setResult(email, zimbraId);
+                String zmailId = getSingleAttr(contact, ContactConstants.A_zmailId);
+                setResult(email, zmailId);
                 return null;
             }
             
@@ -617,8 +617,8 @@ public abstract class GalGroup {
                     return;
                 
                 String email = getSingleAttr(galContact, ContactConstants.A_email); 
-                String zimbraId = getSingleAttr(galContact, ContactConstants.A_zimbraId);
-                setResult(email, zimbraId);
+                String zmailId = getSingleAttr(galContact, ContactConstants.A_zmailId);
+                setResult(email, zmailId);
             }
             
             @Override
@@ -628,12 +628,12 @@ public abstract class GalGroup {
                     return;
                 
                 String email = getSingleAttr(contact, ContactConstants.A_email); 
-                String zimbraId = getSingleAttr(contact, ContactConstants.A_zimbraId);
-                setResult(email, zimbraId);
+                String zmailId = getSingleAttr(contact, ContactConstants.A_zmailId);
+                setResult(email, zmailId);
             }
 
-            private void setResult(String email, String zimbraId) {
-                if (isZimbraInternalGroup(email, zimbraId))
+            private void setResult(String email, String zmailId) {
+                if (isZmailInternalGroup(email, zmailId))
                     isInternalGroup = true;
                 else
                     isExternalGroup = true;

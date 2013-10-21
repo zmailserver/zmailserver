@@ -12,9 +12,9 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.account.ldap.upgrade;
+package org.zmail.cs.account.ldap.upgrade;
 
-import com.zimbra.common.service.ServiceException;
+import org.zmail.common.service.ServiceException;
 
 public enum UpgradeTask {
 
@@ -24,7 +24,7 @@ public enum UpgradeTask {
     BUG_22033(BUG_22033.class),
     BUG_27075(BUG_27075.class), // e.g. -b 27075 5.0.12
     BUG_29978(BUG_29978.class),
-    // BUG_31284(ZimbraPrefFromDisplay.class),
+    // BUG_31284(ZmailPrefFromDisplay.class),
     BUG_31694(BUG_31694.class),
     BUG_32557(BUG_32557.class),
     BUG_32719(BUG_32719.class),

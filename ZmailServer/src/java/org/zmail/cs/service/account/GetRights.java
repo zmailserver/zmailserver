@@ -12,28 +12,28 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.service.account;
+package org.zmail.cs.service.account;
 
 import java.util.HashSet;
 import java.util.Map;
 import java.util.List;
 import java.util.Set;
 
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.common.soap.Element;
-import com.zimbra.common.soap.AccountConstants;
-import com.zimbra.cs.account.Account;
-import com.zimbra.cs.account.accesscontrol.Right;
-import com.zimbra.cs.account.accesscontrol.ACLUtil;
-import com.zimbra.cs.account.accesscontrol.RightManager;
-import com.zimbra.cs.account.accesscontrol.ZimbraACE;
-import com.zimbra.soap.ZimbraSoapContext;
+import org.zmail.common.service.ServiceException;
+import org.zmail.common.soap.Element;
+import org.zmail.common.soap.AccountConstants;
+import org.zmail.cs.account.Account;
+import org.zmail.cs.account.accesscontrol.Right;
+import org.zmail.cs.account.accesscontrol.ACLUtil;
+import org.zmail.cs.account.accesscontrol.RightManager;
+import org.zmail.cs.account.accesscontrol.ZmailACE;
+import org.zmail.soap.ZmailSoapContext;
 
 public class GetRights extends AccountDocumentHandler {
     
     @Override
     public Element handle(Element request, Map<String, Object> context) throws ServiceException {
-        ZimbraSoapContext zsc = getZimbraSoapContext(context);
+        ZmailSoapContext zsc = getZmailSoapContext(context);
         Account account = getRequestedAccount(zsc);
 
         if (!canAccessAccount(zsc, account)) {
@@ -47,10 +47,10 @@ public class GetRights extends AccountDocumentHandler {
             specificRights.add(RightManager.getInstance().getUserRight(eACE.getAttribute(AccountConstants.A_RIGHT)));
         }
         
-        List<ZimbraACE> aces = (specificRights==null)?ACLUtil.getAllACEs(account) : ACLUtil.getACEs(account, specificRights);
+        List<ZmailACE> aces = (specificRights==null)?ACLUtil.getAllACEs(account) : ACLUtil.getACEs(account, specificRights);
         Element response = zsc.createElement(AccountConstants.GET_RIGHTS_RESPONSE);
         if (aces != null) {
-            for (ZimbraACE ace : aces) {
+            for (ZmailACE ace : aces) {
                 ToXML.encodeACE(response, ace);
             }
         }

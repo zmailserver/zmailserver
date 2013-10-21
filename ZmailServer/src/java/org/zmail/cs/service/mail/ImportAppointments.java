@@ -13,26 +13,26 @@
  * ***** END LICENSE BLOCK *****
  */
 
-package com.zimbra.cs.service.mail;
+package org.zmail.cs.service.mail;
 
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.common.soap.Element;
-import com.zimbra.common.soap.MailConstants;
-import com.zimbra.common.util.StringUtil;
-import com.zimbra.common.util.ZimbraLog;
-import com.zimbra.common.calendar.ZCalendar.ZCalendarBuilder;
-import com.zimbra.common.calendar.ZCalendar.ZVCalendar;
-import com.zimbra.common.mime.MimeConstants;
-import com.zimbra.cs.ldap.LdapUtil;
-import com.zimbra.cs.mailbox.MailServiceException;
-import com.zimbra.cs.mailbox.Mailbox;
-import com.zimbra.cs.mailbox.OperationContext;
-import com.zimbra.cs.mailbox.Mailbox.AddInviteData;
-import com.zimbra.cs.mailbox.calendar.Invite;
-import com.zimbra.cs.service.FileUploadServlet;
-import com.zimbra.cs.service.FileUploadServlet.Upload;
-import com.zimbra.cs.service.util.ItemId;
-import com.zimbra.soap.ZimbraSoapContext;
+import org.zmail.common.service.ServiceException;
+import org.zmail.common.soap.Element;
+import org.zmail.common.soap.MailConstants;
+import org.zmail.common.util.StringUtil;
+import org.zmail.common.util.ZmailLog;
+import org.zmail.common.calendar.ZCalendar.ZCalendarBuilder;
+import org.zmail.common.calendar.ZCalendar.ZVCalendar;
+import org.zmail.common.mime.MimeConstants;
+import org.zmail.cs.ldap.LdapUtil;
+import org.zmail.cs.mailbox.MailServiceException;
+import org.zmail.cs.mailbox.Mailbox;
+import org.zmail.cs.mailbox.OperationContext;
+import org.zmail.cs.mailbox.Mailbox.AddInviteData;
+import org.zmail.cs.mailbox.calendar.Invite;
+import org.zmail.cs.service.FileUploadServlet;
+import org.zmail.cs.service.FileUploadServlet.Upload;
+import org.zmail.cs.service.util.ItemId;
+import org.zmail.soap.ZmailSoapContext;
 
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
@@ -66,7 +66,7 @@ public class ImportAppointments extends MailDocumentHandler  {
 
     @Override
     public Element handle(Element request, Map<String, Object> context) throws ServiceException {
-        ZimbraSoapContext zsc = getZimbraSoapContext(context);
+        ZmailSoapContext zsc = getZmailSoapContext(context);
         Mailbox mbox = getRequestedMailbox(zsc);
         OperationContext octxt = getOperationContext(zsc, context);
 
@@ -107,7 +107,7 @@ public class ImportAppointments extends MailDocumentHandler  {
             // if the "target item" is remote, we will need to proxy the request
             ItemId iidTarget = getProxyTarget(zsc, octxt, iidFolder, true);
             if (iidTarget != null) {
-                ZimbraLog.misc.info("Proxying ImportAppointments - folder=" + folder + ", acct="
+                ZmailLog.misc.info("Proxying ImportAppointments - folder=" + folder + ", acct="
                                 + iidTarget.getAccountId());
                 if (SourceSpecMethod.MSG_PART.equals(sourceSpecMethod)) {
                     /* Bug 77131 change specification method to something that will work in the proxied context */
@@ -159,7 +159,7 @@ public class ImportAppointments extends MailDocumentHandler  {
                         ids.append(aid.calItemId).append("-").append(aid.invId);
                     }
                 } catch (ServiceException e) {
-                    ZimbraLog.calendar.warn("Skipping bad iCalendar object during import: uid=" + inv.getUid(), e);
+                    ZmailLog.calendar.warn("Skipping bad iCalendar object during import: uid=" + inv.getUid(), e);
                 }
             }
             
@@ -180,7 +180,7 @@ public class ImportAppointments extends MailDocumentHandler  {
 
     }
 
-    private static InputStream parseUploadedContent(ZimbraSoapContext lc, String attachId, List<Upload> uploads)
+    private static InputStream parseUploadedContent(ZmailSoapContext lc, String attachId, List<Upload> uploads)
     throws ServiceException {
         Upload up = FileUploadServlet.fetchUpload(lc.getAuthtokenAccountId(), attachId, lc.getAuthToken());
         if (up == null)

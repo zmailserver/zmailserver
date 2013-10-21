@@ -12,7 +12,7 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.account.accesscontrol;
+package org.zmail.cs.account.accesscontrol;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -26,13 +26,13 @@ import com.google.common.collect.HashMultimap;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.Multimap;
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.cs.account.Account;
-import com.zimbra.cs.account.AttributeClass;
-import com.zimbra.cs.account.Entry;
-import com.zimbra.cs.account.Identity;
-import com.zimbra.cs.account.Provisioning;
-import com.zimbra.cs.account.accesscontrol.generated.UserRights;
+import org.zmail.common.service.ServiceException;
+import org.zmail.cs.account.Account;
+import org.zmail.cs.account.AttributeClass;
+import org.zmail.cs.account.Entry;
+import org.zmail.cs.account.Identity;
+import org.zmail.cs.account.Provisioning;
+import org.zmail.cs.account.accesscontrol.generated.UserRights;
 
 public final class ACLUtil {
     private static final String ACL_CACHE_KEY = "ENTRY.ACL_CACHE";
@@ -46,26 +46,26 @@ public final class ACLUtil {
      * @param entry the entry on which rights are granted
      * @return all ACEs granted on the entry.
      */
-    public static List<ZimbraACE> getAllACEs(Entry entry) throws ServiceException {
-        ZimbraACL acl = getACL(entry);
+    public static List<ZmailACE> getAllACEs(Entry entry) throws ServiceException {
+        ZmailACL acl = getACL(entry);
         return acl != null ? acl.getAllACEs() : null;
     }
 
-    public static Set<ZimbraACE> getAllowedNotDelegableACEs(Entry entry) 
+    public static Set<ZmailACE> getAllowedNotDelegableACEs(Entry entry) 
     throws ServiceException {
-        ZimbraACL acl = getACL(entry);
+        ZmailACL acl = getACL(entry);
         return acl != null ? acl.getAllowedNotDelegableACEs() : null;
     }
 
-    public static Set<ZimbraACE> getAllowedDelegableACEs(Entry entry) 
+    public static Set<ZmailACE> getAllowedDelegableACEs(Entry entry) 
     throws ServiceException {
-        ZimbraACL acl = getACL(entry);
+        ZmailACL acl = getACL(entry);
         return acl != null ? acl.getAllowedDelegableACEs() : null;
     }
 
-    public static Set<ZimbraACE> getDeniedACEs(Entry entry) throws 
+    public static Set<ZmailACE> getDeniedACEs(Entry entry) throws 
     ServiceException {
-        ZimbraACL acl = getACL(entry);
+        ZmailACL acl = getACL(entry);
         return acl != null ? acl.getDeniedACEs() : null;
     }
 
@@ -76,9 +76,9 @@ public final class ACLUtil {
      * @param rights rights of interest
      * @return a Set of ACEs with the specified rights granted on the entry.
      */
-    public static List<ZimbraACE> getACEs(Entry entry, Set<? extends Right> rights) 
+    public static List<ZmailACE> getACEs(Entry entry, Set<? extends Right> rights) 
     throws ServiceException {
-        ZimbraACL acl = getACL(entry);
+        ZmailACL acl = getACL(entry);
         return acl != null ? acl.getACEs(rights) : null;
     }
 
@@ -90,8 +90,8 @@ public final class ACLUtil {
         Set<SearchGrants.GrantsOnTarget> results = search.doSearch().getResults();
         Multimap<Right, Entry> map = HashMultimap.create();
         for (SearchGrants.GrantsOnTarget grants : results) {
-            ZimbraACL acl = grants.getAcl();
-            for (ZimbraACE ace : acl.getAllACEs()) {
+            ZmailACL acl = grants.getAcl();
+            for (ZmailACE ace : acl.getAllACEs()) {
                 if (ace.getGrantee().equals(grantee.getId())) {
                     map.put(ace.getRight(), grants.getTargetEntry());
                 }
@@ -111,11 +111,11 @@ public final class ACLUtil {
             String mail = grantor.getName();
             String name = Objects.firstNonNull(grantor.getDisplayName(), mail);
             Map<String, Object> attrs = ImmutableMap.<String, Object>builder()
-                .put(Provisioning.A_zimbraPrefIdentityId, grantor.getId())
-                .put(Provisioning.A_zimbraPrefIdentityName, name)
-                .put(Provisioning.A_zimbraPrefFromDisplay, name)
-                .put(Provisioning.A_zimbraPrefFromAddress, mail)
-                .put(Provisioning.A_objectClass, AttributeClass.OC_zimbraAclTarget)
+                .put(Provisioning.A_zmailPrefIdentityId, grantor.getId())
+                .put(Provisioning.A_zmailPrefIdentityName, name)
+                .put(Provisioning.A_zmailPrefFromDisplay, name)
+                .put(Provisioning.A_zmailPrefFromAddress, mail)
+                .put(Provisioning.A_objectClass, AttributeClass.OC_zmailAclTarget)
                 .build();
             result.add(new Identity(grantee, name, grantor.getId(), attrs, grantee.getProvisioning()));
         }
@@ -126,22 +126,22 @@ public final class ACLUtil {
     /**
      * Grant rights on a target entry.
      */
-    public static List<ZimbraACE> grantRight(Provisioning prov, Entry target, Set<ZimbraACE> aces)
+    public static List<ZmailACE> grantRight(Provisioning prov, Entry target, Set<ZmailACE> aces)
     throws ServiceException {
-        for (ZimbraACE ace : aces) {
-            ZimbraACE.validate(ace);
+        for (ZmailACE ace : aces) {
+            ZmailACE.validate(ace);
         }
-        ZimbraACL acl = getACL(target);
-        List<ZimbraACE> granted = null;
+        ZmailACL acl = getACL(target);
+        List<ZmailACE> granted = null;
 
         if (acl == null) {
-            acl = new ZimbraACL(aces);
+            acl = new ZmailACL(aces);
             granted = acl.getAllACEs();
         } else {
             // Make a copy so we don't interfere with others that are using the acl.
             // This instance of acl will never be used in any AccessManager code path.
             // It only lives within this method for serialization.
-            // serialize will erase the cached ZimbraACL object on the target object.
+            // serialize will erase the cached ZmailACL object on the target object.
             // The new ACL will be loaded when it is needed.
             acl = acl.clone();
             granted = acl.grantAccess(aces);
@@ -159,19 +159,19 @@ public final class ACLUtil {
      * If a right was not previously granted on the target, NO error is thrown.
      * @return a Set of grants that are actually revoked by this call
      */
-    public static List<ZimbraACE> revokeRight(Provisioning prov, Entry target, Set<ZimbraACE> aces)
+    public static List<ZmailACE> revokeRight(Provisioning prov, Entry target, Set<ZmailACE> aces)
     throws ServiceException {
-        ZimbraACL acl = getACL(target);
+        ZmailACL acl = getACL(target);
         if (acl == null) {
-            return new ArrayList<ZimbraACE>(); // return empty list
+            return new ArrayList<ZmailACE>(); // return empty list
         }
         // Make a copy so we don't interfere with others that are using the acl.
         // This instance of acl will never be used in any AccessManager code path.
         // It only lives within this method for serialization.
-        // serialize will erase the cached ZimbraACL object on the target object.
+        // serialize will erase the cached ZmailACL object on the target object.
         // The new ACL will be loaded when it is needed.
         acl = acl.clone();
-        List<ZimbraACE> revoked = acl.revokeAccess(aces);
+        List<ZmailACE> revoked = acl.revokeAccess(aces);
         serialize(prov, target, acl);
 
         PermissionCache.invalidateCache(target);
@@ -182,10 +182,10 @@ public final class ACLUtil {
     /**
      * Persists grants in LDAP
      */
-    private static void serialize(Provisioning prov, Entry entry, ZimbraACL acl)
+    private static void serialize(Provisioning prov, Entry entry, ZmailACL acl)
     throws ServiceException {
         // modifyAttrs will erase cached ACL and permission cache on the target
-        prov.modifyAttrs(entry, Collections.singletonMap(Provisioning.A_zimbraACE, acl.serialize()));
+        prov.modifyAttrs(entry, Collections.singletonMap(Provisioning.A_zmailACE, acl.serialize()));
     }
 
     /**
@@ -195,16 +195,16 @@ public final class ACLUtil {
      * @return
      * @throws ServiceException
      */
-    static ZimbraACL getACL(Entry entry) throws ServiceException {
-        ZimbraACL acl = (ZimbraACL) entry.getCachedData(ACL_CACHE_KEY);
+    static ZmailACL getACL(Entry entry) throws ServiceException {
+        ZmailACL acl = (ZmailACL) entry.getCachedData(ACL_CACHE_KEY);
         if (acl != null) {
             return acl;
         } else {
-            String[] aces = entry.getMultiAttr(Provisioning.A_zimbraACE);
+            String[] aces = entry.getMultiAttr(Provisioning.A_zmailACE);
             if (aces.length == 0) {
                 return null;
             } else {
-                acl = new ZimbraACL(aces, TargetType.getTargetType(entry), entry.getLabel());
+                acl = new ZmailACL(aces, TargetType.getTargetType(entry), entry.getLabel());
                 entry.setCachedData(ACL_CACHE_KEY, acl);
             }
         }

@@ -13,7 +13,7 @@
  * ***** END LICENSE BLOCK *****
  */
 
-package com.zimbra.cs.account;
+package org.zmail.cs.account;
 
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -110,24 +110,24 @@ public class EntrySearchFilter {
     static {
         // list all indexed attributes
         sIndexedAttrs.add(Provisioning.A_objectClass.toLowerCase());
-        sIndexedAttrs.add(Provisioning.A_zimbraForeignPrincipal.toLowerCase());
-        sIndexedAttrs.add(Provisioning.A_zimbraId.toLowerCase());
-        sIndexedAttrs.add(Provisioning.A_zimbraMailCatchAllAddress.toLowerCase());
-        sIndexedAttrs.add(Provisioning.A_zimbraMailDeliveryAddress.toLowerCase());
-        sIndexedAttrs.add(Provisioning.A_zimbraMailForwardingAddress.toLowerCase());
-        sIndexedAttrs.add(Provisioning.A_zimbraMailAlias.toLowerCase());
-        sIndexedAttrs.add(Provisioning.A_zimbraDomainName.toLowerCase());
+        sIndexedAttrs.add(Provisioning.A_zmailForeignPrincipal.toLowerCase());
+        sIndexedAttrs.add(Provisioning.A_zmailId.toLowerCase());
+        sIndexedAttrs.add(Provisioning.A_zmailMailCatchAllAddress.toLowerCase());
+        sIndexedAttrs.add(Provisioning.A_zmailMailDeliveryAddress.toLowerCase());
+        sIndexedAttrs.add(Provisioning.A_zmailMailForwardingAddress.toLowerCase());
+        sIndexedAttrs.add(Provisioning.A_zmailMailAlias.toLowerCase());
+        sIndexedAttrs.add(Provisioning.A_zmailDomainName.toLowerCase());
         sIndexedAttrs.add(Provisioning.A_uid.toLowerCase());
         sIndexedAttrs.add(Provisioning.A_mail.toLowerCase());
         sIndexedAttrs.add(Provisioning.A_cn.toLowerCase());
         sIndexedAttrs.add(Provisioning.A_sn.toLowerCase());
         sIndexedAttrs.add(Provisioning.A_gn.toLowerCase());
         sIndexedAttrs.add(Provisioning.A_displayName.toLowerCase());
-        sIndexedAttrs.add(Provisioning.A_zimbraCalResSite.toLowerCase());
-        sIndexedAttrs.add(Provisioning.A_zimbraCalResBuilding.toLowerCase());
-        sIndexedAttrs.add(Provisioning.A_zimbraCalResFloor.toLowerCase());
-        sIndexedAttrs.add(Provisioning.A_zimbraCalResRoom.toLowerCase());
-        sIndexedAttrs.add(Provisioning.A_zimbraCalResCapacity.toLowerCase());
+        sIndexedAttrs.add(Provisioning.A_zmailCalResSite.toLowerCase());
+        sIndexedAttrs.add(Provisioning.A_zmailCalResBuilding.toLowerCase());
+        sIndexedAttrs.add(Provisioning.A_zmailCalResFloor.toLowerCase());
+        sIndexedAttrs.add(Provisioning.A_zmailCalResRoom.toLowerCase());
+        sIndexedAttrs.add(Provisioning.A_zmailCalResCapacity.toLowerCase());
         //sIndexedAttrs.add(Provisioning.A_street.toLowerCase());
         //sIndexedAttrs.add(Provisioning.A_l.toLowerCase());
         //sIndexedAttrs.add(Provisioning.A_st.toLowerCase());

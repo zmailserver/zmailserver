@@ -14,4 +14,4 @@
 # ***** END LICENSE BLOCK *****
 # 
 
-exec `dirname $0`/zmjava com.zimbra.cs.store.file.BlobDeduperUtil "$@"
+exec `dirname $0`/zmjava org.zmail.cs.store.file.BlobDeduperUtil "$@"

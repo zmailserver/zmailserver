@@ -12,7 +12,7 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.mailbox;
+package org.zmail.cs.mailbox;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -37,23 +37,23 @@ import org.json.JSONObject;
 import com.google.common.base.Objects;
 import com.google.common.base.Strings;
 import com.google.common.collect.ImmutableSet;
-import com.zimbra.common.mailbox.Color;
-import com.zimbra.common.mailbox.ContactConstants;
-import com.zimbra.common.mime.MimeConstants;
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.common.util.ByteUtil;
-import com.zimbra.common.util.StringUtil;
-import com.zimbra.common.util.ZimbraLog;
-import com.zimbra.cs.account.Account;
-import com.zimbra.cs.account.EntryCacheDataKey;
-import com.zimbra.cs.account.Provisioning;
-import com.zimbra.cs.db.DbMailItem;
-import com.zimbra.cs.index.IndexDocument;
-import com.zimbra.cs.mailbox.MailItem.CustomMetadata.CustomMetadataList;
-import com.zimbra.cs.mime.ParsedContact;
-import com.zimbra.cs.session.PendingModifications.Change;
-import com.zimbra.cs.store.MailboxBlob;
-import com.zimbra.cs.store.StagedBlob;
+import org.zmail.common.mailbox.Color;
+import org.zmail.common.mailbox.ContactConstants;
+import org.zmail.common.mime.MimeConstants;
+import org.zmail.common.service.ServiceException;
+import org.zmail.common.util.ByteUtil;
+import org.zmail.common.util.StringUtil;
+import org.zmail.common.util.ZmailLog;
+import org.zmail.cs.account.Account;
+import org.zmail.cs.account.EntryCacheDataKey;
+import org.zmail.cs.account.Provisioning;
+import org.zmail.cs.db.DbMailItem;
+import org.zmail.cs.index.IndexDocument;
+import org.zmail.cs.mailbox.MailItem.CustomMetadata.CustomMetadataList;
+import org.zmail.cs.mime.ParsedContact;
+import org.zmail.cs.session.PendingModifications.Change;
+import org.zmail.cs.store.MailboxBlob;
+import org.zmail.cs.store.StagedBlob;
 
 /**
  * @since Aug 23, 2004
@@ -222,7 +222,7 @@ public class Contact extends MailItem {
 
         if (emailFields == null) {
             String[] fields = null;
-            String emailFieldsStr = acct.getAttr(Provisioning.A_zimbraContactEmailFields);
+            String emailFieldsStr = acct.getAttr(Provisioning.A_zmailContactEmailFields);
             if (emailFieldsStr != null)
                 fields = emailFieldsStr.split(",");
 
@@ -292,7 +292,7 @@ public class Contact extends MailItem {
                 }
             }
         } catch (ServiceException e) {
-            ZimbraLog.mailop.warn("can't get A_zimbraContactHiddenAttributes", e);
+            ZmailLog.mailop.warn("can't get A_zmailContactHiddenAttributes", e);
         }
         return result;
     }
@@ -598,7 +598,7 @@ public class Contact extends MailItem {
                         result.add(addr);
                     }
                 } catch (ServiceException e) {
-                    ZimbraLog.contact.warn("unable to decode contact group", e);
+                    ZmailLog.contact.warn("unable to decode contact group", e);
                 }
             }
         }
@@ -668,7 +668,7 @@ public class Contact extends MailItem {
         data.id = id;
         data.type = Type.CONTACT.toByte();
         data.folderId = folder.getId();
-        if (!folder.inSpam() || mbox.getAccount().getBooleanAttr(Provisioning.A_zimbraJunkMessagesIndexingEnabled, false)) {
+        if (!folder.inSpam() || mbox.getAccount().getBooleanAttr(Provisioning.A_zmailJunkMessagesIndexingEnabled, false)) {
             data.indexId = IndexStatus.DEFERRED.id();
         }
         data.imapId = id;
@@ -681,12 +681,12 @@ public class Contact extends MailItem {
         data.metadata = encodeMetadata(DEFAULT_COLOR_RGB, 1, 1, custom, pc.getFields(), pc.getAttachments());
         data.contentChanged(mbox);
 
-        if (ZimbraLog.mailop.isInfoEnabled()) {
+        if (ZmailLog.mailop.isInfoEnabled()) {
             String email = "null";
             if (pc.getFields() != null) {
                 email = pc.getFields().get(ContactConstants.A_email);
             }
-            ZimbraLog.mailop.info("adding contact %s: id=%d, folderId=%d, folderName=%s.",
+            ZmailLog.mailop.info("adding contact %s: id=%d, folderId=%d, folderName=%s.",
                 email, data.id, folder.getId(), folder.getName());
         }
 
@@ -702,7 +702,7 @@ public class Contact extends MailItem {
 
     @Override
     MailboxBlob setContent(StagedBlob staged, Object content) throws ServiceException, IOException {
-        ZimbraLog.mailop.info("modifying contact %s: id=%d, folderId=%d, folderName=%s.",
+        ZmailLog.mailop.info("modifying contact %s: id=%d, folderId=%d, folderName=%s.",
                     get(ContactConstants.A_email), getId(), getFolderId(), getFolder().getName());
         return super.setContent(staged, content);
     }
@@ -718,7 +718,7 @@ public class Contact extends MailItem {
             }
             return pc.getLuceneDocuments(mMailbox);
         } catch (ServiceException e) {
-            ZimbraLog.index.error("Failed to index contact id=%d", getId());
+            ZmailLog.index.error("Failed to index contact id=%d", getId());
             return Collections.emptyList();
         } finally {
             mMailbox.lock.release();
@@ -896,7 +896,7 @@ public class Contact extends MailItem {
                 xprops.put(key, xpropObj.get(key).toString());
             }
         } catch (JSONException e) {
-            ZimbraLog.mailop.debug("can't get xprop %s", xpropStr, e);
+            ZmailLog.mailop.debug("can't get xprop %s", xpropStr, e);
         }
         return xprops;
     }
@@ -910,7 +910,7 @@ public class Contact extends MailItem {
             for (String s : xprops.keySet())
                 jsonobj.put(s, xprops.get(s));
         } catch (JSONException e) {
-            ZimbraLog.mailop.debug("can't encode xprops to JSONObject", e);
+            ZmailLog.mailop.debug("can't encode xprops to JSONObject", e);
         }
         return jsonobj.toString();
     }

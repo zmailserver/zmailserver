@@ -21,7 +21,7 @@ use Time::Local;
 use POSIX qw(strftime);
 use File::Basename;
 
-use lib "/opt/zimbra/zimbramon/lib";
+use lib "/opt/zmail/zmailmon/lib";
 use Net::LDAP;
 use Net::LDAP::LDIF;
 use Net::LDAP::Entry;
@@ -49,17 +49,17 @@ if ((! getopts('dvh', \%options)) || ($options{h})) {
 
 my $id = getpwuid($<);
 chomp $id;
-if ($id ne "zimbra") {
-    print STDERR "Error: must be run as zimbra user\n";
+if ($id ne "zmail") {
+    print STDERR "Error: must be run as zmail user\n";
     exit (1);
 }
 
 $FORMAT_LINES_PER_PAGE = 100;
 $FORMAT_FORMFEED = "\n";
 
-my $ldappass = `/opt/zimbra/bin/zmlocalconfig -s -m nokey zimbra_ldap_password`;
-my $ldapdn  = `/opt/zimbra/bin/zmlocalconfig -s -m nokey zimbra_ldap_userdn`;
-my $ldapurl  = `/opt/zimbra/bin/zmlocalconfig -s -m nokey ldap_url`;
+my $ldappass = `/opt/zmail/bin/zmlocalconfig -s -m nokey zmail_ldap_password`;
+my $ldapdn  = `/opt/zmail/bin/zmlocalconfig -s -m nokey zmail_ldap_userdn`;
+my $ldapurl  = `/opt/zmail/bin/zmlocalconfig -s -m nokey ldap_url`;
 chop($ldappass);
 chop($ldapdn);
 chop($ldapurl);
@@ -73,17 +73,17 @@ $mesg->code && die "Error binding to LDAP server: $mesg->error";
 
 
 # Load COS information
-my $ldapquery = "(objectclass=zimbraCOS)";
+my $ldapquery = "(objectclass=zmailCOS)";
 
 $mesg = $ldap->search(
 					base => '',
 					filter => $ldapquery,
 					attrs => [
 						'cn',
-						'zimbraId',
+						'zmailId',
 						'description',
-						'zimbraFeatureMobileSyncEnabled',
-						'zimbraFeatureCalendarEnabled'
+						'zmailFeatureMobileSyncEnabled',
+						'zmailFeatureCalendarEnabled'
 					]
 				);
 
@@ -95,43 +95,43 @@ for ($i = 0; $i < $mesg->count ; $i++) {
 	my $entry = {};
 
 	$entry->{'cn'} = $mesg->entry($i)->get_value('cn');
-	$entry->{'zimbraId'} = $mesg->entry($i)->get_value('zimbraId');
+	$entry->{'zmailId'} = $mesg->entry($i)->get_value('zmailId');
 	$entry->{'description'} = $mesg->entry($i)->get_value('description');
-	$entry->{'zimbraFeatureMobileSyncEnabled'} = $mesg->entry($i)->get_value('zimbraFeatureMobileSyncEnabled');
-	$entry->{'zimbraFeatureCalendarEnabled'} = $mesg->entry($i)->get_value('zimbraFeatureCalendarEnabled');
+	$entry->{'zmailFeatureMobileSyncEnabled'} = $mesg->entry($i)->get_value('zmailFeatureMobileSyncEnabled');
+	$entry->{'zmailFeatureCalendarEnabled'} = $mesg->entry($i)->get_value('zmailFeatureCalendarEnabled');
 	
 	if ( $entry->{'cn'} eq 'default' ) {
-		$COSes->{$entry->{'zimbraId'}}->{'description'} = 'default';
-		$default_COS_Id = $mesg->entry($i)->get_value('zimbraId');
+		$COSes->{$entry->{'zmailId'}}->{'description'} = 'default';
+		$default_COS_Id = $mesg->entry($i)->get_value('zmailId');
 	} else {
-		if ( ! $COSes->{$entry->{'zimbraId'}} ) {
-			$COSes->{$entry->{'zimbraId'}} = { stats => {}, accounts => {}, description => '', mobileEnabled => '', calEnabled =>'' };
+		if ( ! $COSes->{$entry->{'zmailId'}} ) {
+			$COSes->{$entry->{'zmailId'}} = { stats => {}, accounts => {}, description => '', mobileEnabled => '', calEnabled =>'' };
 		}
-		$COSes->{$entry->{'zimbraId'}}->{'description'} = $entry->{'cn'};
+		$COSes->{$entry->{'zmailId'}}->{'description'} = $entry->{'cn'};
 	}
-	if ( $entry->{'zimbraFeatureMobileSyncEnabled'} ) {
-		$COSes->{$entry->{'zimbraId'}}->{'mobileEnabled'} = $entry->{'zimbraFeatureMobileSyncEnabled'};
+	if ( $entry->{'zmailFeatureMobileSyncEnabled'} ) {
+		$COSes->{$entry->{'zmailId'}}->{'mobileEnabled'} = $entry->{'zmailFeatureMobileSyncEnabled'};
 	} else {
-		$COSes->{$entry->{'zimbraId'}}->{'mobileEnabled'} = 'FALSE';
+		$COSes->{$entry->{'zmailId'}}->{'mobileEnabled'} = 'FALSE';
 	}
-	if ( $entry->{'zimbraFeatureCalendarEnabled'} ) {
-		$COSes->{$entry->{'zimbraId'}}->{'calEnabled'} = $entry->{'zimbraFeatureCalendarEnabled'};
+	if ( $entry->{'zmailFeatureCalendarEnabled'} ) {
+		$COSes->{$entry->{'zmailId'}}->{'calEnabled'} = $entry->{'zmailFeatureCalendarEnabled'};
 	} else {
-		$COSes->{$entry->{'zimbraId'}}->{'calEnabled'} = 'FALSE';
+		$COSes->{$entry->{'zmailId'}}->{'calEnabled'} = 'FALSE';
 	}
 }
 
 # Load domain information
-$ldapquery = "(objectclass=zimbraDomain)";
+$ldapquery = "(objectclass=zmailDomain)";
 
 $mesg = $ldap->search(
 					base => '',
 					filter => $ldapquery,
 						attrs => [
-							'zimbraId',
+							'zmailId',
 							'description',
-							'zimbraDomainName',
-							'zimbraDomainDefaultCOSId'
+							'zmailDomainName',
+							'zmailDomainDefaultCOSId'
 						]
 					);
 
@@ -140,74 +140,74 @@ my $domain_list = {};
 for ($i = 0 ; $i < $mesg->count ; $i++) {
 	my $entry = {};
 
-	$entry->{'zimbraId'} = $mesg->entry($i)->get_value('zimbraId');
+	$entry->{'zmailId'} = $mesg->entry($i)->get_value('zmailId');
 	$entry->{'description'} = $mesg->entry($i)->get_value('description');
-	$entry->{'zimbraDomainName'} = $mesg->entry($i)->get_value('zimbraDomainName');
-	$entry->{'zimbraDomainDefaultCOSId'} = $mesg->entry($i)->get_value('zimbraDomainDefaultCOSId');
+	$entry->{'zmailDomainName'} = $mesg->entry($i)->get_value('zmailDomainName');
+	$entry->{'zmailDomainDefaultCOSId'} = $mesg->entry($i)->get_value('zmailDomainDefaultCOSId');
 
-	if ( ! $domain_list->{$entry->{'zimbraDomainName'}} ) {
-		$domain_list->{$entry->{'zimbraDomainName'}} = { zimbraId => $entry->{'zimbraId'}, stats => {}, accounts => {}, description => '', zimbraDomainDefaultCOSId => '', mobileEnabled => '', calEnabled => '' };
+	if ( ! $domain_list->{$entry->{'zmailDomainName'}} ) {
+		$domain_list->{$entry->{'zmailDomainName'}} = { zmailId => $entry->{'zmailId'}, stats => {}, accounts => {}, description => '', zmailDomainDefaultCOSId => '', mobileEnabled => '', calEnabled => '' };
 		my $COSId;
-		if ( $entry->{'zimbraDomainDefaultCOSId'} && $COSes->{$entry->{'zimbraDomainDefaultCOSId'}} ) {
-			$COSId = $entry->{'zimbraDomainDefaultCOSId'};
+		if ( $entry->{'zmailDomainDefaultCOSId'} && $COSes->{$entry->{'zmailDomainDefaultCOSId'}} ) {
+			$COSId = $entry->{'zmailDomainDefaultCOSId'};
 		} else {
 			$COSId = $default_COS_Id;
 		}
 		if ( $COSes->{$COSId}->{'mobileEnabled'} eq 'TRUE' ) {
-			$domain_list->{$entry->{'zimbraDomainName'}}->{'mobileEnabled'} = 'TRUE';
+			$domain_list->{$entry->{'zmailDomainName'}}->{'mobileEnabled'} = 'TRUE';
 		} else {
-			$domain_list->{$entry->{'zimbraDomainName'}}->{'mobileEnabled'} = 'FALSE';
+			$domain_list->{$entry->{'zmailDomainName'}}->{'mobileEnabled'} = 'FALSE';
 		}
 		if ( $COSes->{$COSId}->{'calEnabled'} eq 'TRUE' ) {
-			$domain_list->{$entry->{'zimbraDomainName'}}->{'calEnabled'} = 'TRUE';
+			$domain_list->{$entry->{'zmailDomainName'}}->{'calEnabled'} = 'TRUE';
 		} else {
-			$domain_list->{$entry->{'zimbraDomainName'}}->{'calEnabled'} = 'FALSE';
+			$domain_list->{$entry->{'zmailDomainName'}}->{'calEnabled'} = 'FALSE';
 		}
-		$domain_list->{$entry->{'zimbraDomainName'}}->{'zimbraDomainDefaultCOSId'} = $COSId;
+		$domain_list->{$entry->{'zmailDomainName'}}->{'zmailDomainDefaultCOSId'} = $COSId;
 	}
 }
 
 
 # Load account information
 
-$ldapquery = "(&(objectclass=zimbraAccount)(!(|(objectclass=zimbraCalendarResource)(zimbraIsSystemResource=TRUE))))";
+$ldapquery = "(&(objectclass=zmailAccount)(!(|(objectclass=zmailCalendarResource)(zmailIsSystemResource=TRUE))))";
 
 $mesg = $ldap->search(
 					base => '',
 					filter => $ldapquery,
 					attrs => [
-						'zimbraMailDeliveryAddress',
+						'zmailMailDeliveryAddress',
 						'displayName',
-						'zimbraAccountStatus',
+						'zmailAccountStatus',
 						'createTimestamp',
-						'zimbraLastLogonTimestamp',
-						'zimbraCOSId',
-						'zimbraFeatureMobileSyncEnabled',
-						'zimbraFeatureCalendarEnabled'
+						'zmailLastLogonTimestamp',
+						'zmailCOSId',
+						'zmailFeatureMobileSyncEnabled',
+						'zmailFeatureCalendarEnabled'
 					]
 				);
 
 for ($i = 0 ; $i < $mesg->count ; $i++) {
 	my $entry = {};
 
-    $entry->{'zimbraMailDeliveryAddress'} = $mesg->entry($i)->get_value('zimbraMailDeliveryAddress');
+    $entry->{'zmailMailDeliveryAddress'} = $mesg->entry($i)->get_value('zmailMailDeliveryAddress');
     $entry->{'displayName'} = $mesg->entry($i)->get_value('displayName');
-    $entry->{'zimbraAccountStatus'} = $mesg->entry($i)->get_value('zimbraAccountStatus');
+    $entry->{'zmailAccountStatus'} = $mesg->entry($i)->get_value('zmailAccountStatus');
     $entry->{'createTimestamp'} = $mesg->entry($i)->get_value('createTimestamp');
-    $entry->{'zimbraLastLoginTimestamp'} = $mesg->entry($i)->get_value('zimbraLastLoginTimestamp');
-    $entry->{'zimbraCOSId'} = $mesg->entry($i)->get_value('zimbraCOSId');
-    $entry->{'zimbraFeatureMobileSyncEnabled'} = $mesg->entry($i)->get_value('zimbraFeatureMobileSyncEnabled');
-    $entry->{'zimbraFeatureCalendarEnabled'} = $mesg->entry($i)->get_value('zimbraFeatureCalendarEnabled');
+    $entry->{'zmailLastLoginTimestamp'} = $mesg->entry($i)->get_value('zmailLastLoginTimestamp');
+    $entry->{'zmailCOSId'} = $mesg->entry($i)->get_value('zmailCOSId');
+    $entry->{'zmailFeatureMobileSyncEnabled'} = $mesg->entry($i)->get_value('zmailFeatureMobileSyncEnabled');
+    $entry->{'zmailFeatureCalendarEnabled'} = $mesg->entry($i)->get_value('zmailFeatureCalendarEnabled');
 
-	if ($entry->{'zimbraMailDeliveryAddress'}) {
-		my($local, $domain) = split /@/, $entry->{'zimbraMailDeliveryAddress'};
+	if ($entry->{'zmailMailDeliveryAddress'}) {
+		my($local, $domain) = split /@/, $entry->{'zmailMailDeliveryAddress'};
 
 		# Determine appropriate COS for account
 		my $COSId = $default_COS_Id;
-		if ($entry->{'zimbraCOSId'}) {
-			$COSId = $entry->{'zimbraCOSId'};
-		} elsif ($domain_list->{$domain}->{'zimbraDomainDefaultCOSId'}) {
-			$COSId = $domain_list->{$domain}->{'zimbraDomainDefaultCOSId'};
+		if ($entry->{'zmailCOSId'}) {
+			$COSId = $entry->{'zmailCOSId'};
+		} elsif ($domain_list->{$domain}->{'zmailDomainDefaultCOSId'}) {
+			$COSId = $domain_list->{$domain}->{'zmailDomainDefaultCOSId'};
 		}
 
 		# Record COS statistics
@@ -216,7 +216,7 @@ for ($i = 0 ; $i < $mesg->count ; $i++) {
 			$cd = $COSes->{$COSId} = { stats => {}, accounts => {}, description => '(none)', mobileEnabled => '', calEnabled => ''};
 		}
 		$cd->{'stats'}->{'total'}++;
-		$cd->{'stats'}->{$entry->{'zimbraAccountStatus'}}++;
+		$cd->{'stats'}->{$entry->{'zmailAccountStatus'}}++;
 		my $account_name = "$domain\@$local";
 		$cd->{'accounts'}->{$account_name} = $entry;
 
@@ -224,44 +224,44 @@ for ($i = 0 ; $i < $mesg->count ; $i++) {
 		my $dd = $domain_list->{$domain};
 		if (!$dd) {
 			# Uh, oh!  We should NEVER get to this secton of code!
-			$dd = $domain_list->{$domain} = { zimbraId => '(unknown)', stats => {}, accounts => {}, description => '', zimbraDomainDefaultCOSId => '', mobileEnabled => '', calEnabled => '' };
+			$dd = $domain_list->{$domain} = { zmailId => '(unknown)', stats => {}, accounts => {}, description => '', zmailDomainDefaultCOSId => '', mobileEnabled => '', calEnabled => '' };
 		}
 		$dd->{'stats'}->{'total'}++;
-		$dd->{'stats'}->{$entry->{'zimbraAccountStatus'}}++;
+		$dd->{'stats'}->{$entry->{'zmailAccountStatus'}}++;
 
-		if ( $entry->{'zimbraFeatureMobileSyncEnabled'} ) {
-			if ( $entry->{'zimbraFeatureMobileSyncEnabled'} eq 'TRUE') {
-				$cd->{'accounts'}->{$account_name}->{'zimbraFeatureMobileSyncEnabled'} = 'TRUE';
-				$cd->{'stats'}->{'zimbraFeatureMobileSyncEnabled'}++;
-				$dd->{'stats'}->{'zimbraFeatureMobileSyncEnabled'}++;
+		if ( $entry->{'zmailFeatureMobileSyncEnabled'} ) {
+			if ( $entry->{'zmailFeatureMobileSyncEnabled'} eq 'TRUE') {
+				$cd->{'accounts'}->{$account_name}->{'zmailFeatureMobileSyncEnabled'} = 'TRUE';
+				$cd->{'stats'}->{'zmailFeatureMobileSyncEnabled'}++;
+				$dd->{'stats'}->{'zmailFeatureMobileSyncEnabled'}++;
 			}
 		} elsif ( $domain_list->{$domain}->{'mobileEnabled'} eq 'TRUE' ) {
-			$cd->{'accounts'}->{$account_name}->{'zimbraFeatureMobileSyncEnabled'} = 'TRUE';
-			$cd->{'stats'}->{'zimbraFeatureMobileSyncEnabled'}++;
-			$dd->{'stats'}->{'zimbraFeatureMobileSyncEnabled'}++;
+			$cd->{'accounts'}->{$account_name}->{'zmailFeatureMobileSyncEnabled'} = 'TRUE';
+			$cd->{'stats'}->{'zmailFeatureMobileSyncEnabled'}++;
+			$dd->{'stats'}->{'zmailFeatureMobileSyncEnabled'}++;
 			# Explicit COSId overrides the domain level setting
 			if ( $cd->{'mobileEnabled'} eq 'FALSE' ) {
-				$cd->{'accounts'}->{$account_name}->{'zimbraFeatureMobileSyncEnabled'} = 'FALSE';
-				$cd->{'stats'}->{'zimbraFeatureMobileSyncEnabled'}++;
-				$dd->{'stats'}->{'zimbraFeatureMobileSyncEnabled'}++;
+				$cd->{'accounts'}->{$account_name}->{'zmailFeatureMobileSyncEnabled'} = 'FALSE';
+				$cd->{'stats'}->{'zmailFeatureMobileSyncEnabled'}++;
+				$dd->{'stats'}->{'zmailFeatureMobileSyncEnabled'}++;
 			}
 		}
 
-		if ( $entry->{'zimbraFeatureCalendarEnabled'} ) {
-			if ( $entry->{'zimbraFeatureCalendarEnabled'} eq 'TRUE') {
-				$cd->{'accounts'}->{$account_name}->{'zimbraFeatureCalendarEnabled'} = 'TRUE';
-				$cd->{'stats'}->{'zimbraFeatureCalendarEnabled'}++;
-				$dd->{'stats'}->{'zimbraFeatureCalendarEnabled'}++;
+		if ( $entry->{'zmailFeatureCalendarEnabled'} ) {
+			if ( $entry->{'zmailFeatureCalendarEnabled'} eq 'TRUE') {
+				$cd->{'accounts'}->{$account_name}->{'zmailFeatureCalendarEnabled'} = 'TRUE';
+				$cd->{'stats'}->{'zmailFeatureCalendarEnabled'}++;
+				$dd->{'stats'}->{'zmailFeatureCalendarEnabled'}++;
 			}
 		} elsif ( $domain_list->{$domain}->{'calEnabled'} eq 'TRUE' ) {
-			$cd->{'accounts'}->{$account_name}->{'zimbraFeatureCalendarEnabled'} = 'TRUE';
-			$cd->{'stats'}->{'zimbraFeatureCalendarEnabled'}++;
-			$dd->{'stats'}->{'zimbraFeatureCalendarEnabled'}++;
+			$cd->{'accounts'}->{$account_name}->{'zmailFeatureCalendarEnabled'} = 'TRUE';
+			$cd->{'stats'}->{'zmailFeatureCalendarEnabled'}++;
+			$dd->{'stats'}->{'zmailFeatureCalendarEnabled'}++;
 			# Explicit COSId overrides the domain level setting
 			if ( $cd->{'calEnabled'} eq 'FALSE' ) {
-				$cd->{'accounts'}->{$account_name}->{'zimbraFeatureCalendarEnabled'} = 'FALSE';
-				$cd->{'stats'}->{'zimbraFeatureCalendarEnabled'}++;
-				$dd->{'stats'}->{'zimbraFeatureCalendarEnabled'}++;
+				$cd->{'accounts'}->{$account_name}->{'zmailFeatureCalendarEnabled'} = 'FALSE';
+				$cd->{'stats'}->{'zmailFeatureCalendarEnabled'}++;
+				$dd->{'stats'}->{'zmailFeatureCalendarEnabled'}++;
 			}
 		}
 	}
@@ -271,7 +271,7 @@ for ($i = 0 ; $i < $mesg->count ; $i++) {
 my ($COSId, $COSName);
 if ( $options{d} ) {
 
-	my ($name, $dname, $status, $created, $logon, $zimbraMobile, $calendar);
+	my ($name, $dname, $status, $created, $logon, $zmailMobile, $calendar);
 format ACCOUNT_TOP = 
 
 		       COS:  @<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<  @<<<<<<<<<<<<<<<<<<<<
@@ -283,7 +283,7 @@ $COSId, $COSName
 
 format ACCOUNT = 
 @<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<  @<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<  @<<<<<<<<<<  @<<<<<<<<<<<<<<  @<<<<<<<<<<<<<<  @<<<<<<<  @<<<<<<
-$name, $dname, $status, $created, $logon, $zimbraMobile, $calendar
+$name, $dname, $status, $created, $logon, $zmailMobile, $calendar
 .
 
 	format_name     STDOUT "ACCOUNT";
@@ -302,11 +302,11 @@ $name, $dname, $status, $created, $logon, $zimbraMobile, $calendar
 			my ($domain, $local) = split /@/, $account;
 			$name = "$local\@$domain";
 			$dname = $entry->{'displayName'} || '';
-			$status = $entry->{'zimbraAccountStatus'};
+			$status = $entry->{'zmailAccountStatus'};
 			$created = $entry->{'createTimestamp'};
-			$logon = $entry->{'zimbraLastLogonTimestamp'} || 'never';
-			$zimbraMobile = $entry->{'zimbraFeatureMobileSyncEnabled'} || '';
-			$calendar = $entry->{'zimbraFeatureCalendarEnabled'} || '';
+			$logon = $entry->{'zmailLastLogonTimestamp'} || 'never';
+			$zmailMobile = $entry->{'zmailFeatureMobileSyncEnabled'} || '';
+			$calendar = $entry->{'zmailFeatureCalendarEnabled'} || '';
 
 			if ($created =~ /(\d{4})(\d{2})(\d{2})(\d{2})(\d{2})(\d{2})Z/) {
 				my $time = timegm($6, $5, $4, $3, $2-1, $1);
@@ -389,8 +389,8 @@ if ( $options{d} ) {
 		$numPending = $stats->{'pending'} || 0;
 		$numClosed = $stats->{'closed'} || 0;
 		$numTotal = $stats->{'total'} || 0;
-		$numMobile = $stats->{'zimbraFeatureMobileSyncEnabled'} || 0;
-		$numCal = $stats->{'zimbraFeatureCalendarEnabled'} || 0;
+		$numMobile = $stats->{'zmailFeatureMobileSyncEnabled'} || 0;
+		$numCal = $stats->{'zmailFeatureCalendarEnabled'} || 0;
 		write;
 		$totActive += $numActive;
 		$totLocked += $numLocked;
@@ -465,7 +465,7 @@ if ( $options{d} ) {
 	foreach $DomainName (sort keys %$domain_list) {
 		my $dd = $domain_list->{$DomainName};
 		my $stats = $dd->{'stats'};
-		$DomainId = $dd->{'zimbraId'};
+		$DomainId = $dd->{'zmailId'};
 		$numActive = $stats->{'active'} || 0;
 		$numLockout = $stats->{'lockout'} || 0;
 		$numLocked = $stats->{'locked'} || 0;
@@ -473,8 +473,8 @@ if ( $options{d} ) {
 		$numPending = $stats->{'pending'} || 0;
 		$numClosed = $stats->{'closed'} || 0;
 		$numTotal = $stats->{'total'} || 0;
-		$numMobile = $stats->{'zimbraFeatureMobileSyncEnabled'} || 0;
-		$numCal = $stats->{'zimbraFeatureCalendarEnabled'} || 0;
+		$numMobile = $stats->{'zmailFeatureMobileSyncEnabled'} || 0;
+		$numCal = $stats->{'zmailFeatureCalendarEnabled'} || 0;
 		write;
 		$totActive += $numActive;
 		$totLockout += $numLockout;
@@ -511,7 +511,7 @@ if ( $options{d} ) {
 		my $dd = $domain_list->{$DomainName};
 		my $stats = $dd->{'stats'};
 		$totTotal += $stats->{'total'} || 0;
-		$totMobile += $stats->{'zimbraFeatureMobileSyncEnabled'} || 0;
+		$totMobile += $stats->{'zmailFeatureMobileSyncEnabled'} || 0;
 	}
 	print "\n\n";
  	print "    Calendar Month:  " . ((localtime(time))[4] + 1) . "/" . ((localtime(time))[5] + 1900) . "\n";

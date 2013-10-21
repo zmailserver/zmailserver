@@ -14,28 +14,28 @@
  * 
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.account.accesscontrol;
+package org.zmail.cs.account.accesscontrol;
 
 import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 
-import com.zimbra.common.account.Key;
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.common.util.EmailUtil;
-import com.zimbra.common.util.ZimbraLog;
-import com.zimbra.cs.account.AccessManager;
-import com.zimbra.cs.account.Account;
-import com.zimbra.cs.account.AccountServiceException;
-import com.zimbra.cs.account.AuthToken;
-import com.zimbra.cs.account.Cos;
-import com.zimbra.cs.account.Domain;
-import com.zimbra.cs.account.Entry;
-import com.zimbra.cs.account.Group;
-import com.zimbra.cs.account.Provisioning;
-import com.zimbra.cs.account.accesscontrol.RightCommand.AllEffectiveRights;
-import com.zimbra.cs.account.accesscontrol.Rights.User;
-import com.zimbra.cs.account.names.NameUtil;
+import org.zmail.common.account.Key;
+import org.zmail.common.service.ServiceException;
+import org.zmail.common.util.EmailUtil;
+import org.zmail.common.util.ZmailLog;
+import org.zmail.cs.account.AccessManager;
+import org.zmail.cs.account.Account;
+import org.zmail.cs.account.AccountServiceException;
+import org.zmail.cs.account.AuthToken;
+import org.zmail.cs.account.Cos;
+import org.zmail.cs.account.Domain;
+import org.zmail.cs.account.Entry;
+import org.zmail.cs.account.Group;
+import org.zmail.cs.account.Provisioning;
+import org.zmail.cs.account.accesscontrol.RightCommand.AllEffectiveRights;
+import org.zmail.cs.account.accesscontrol.Rights.User;
+import org.zmail.cs.account.names.NameUtil;
 
 public class GlobalAccessManager extends AccessManager implements AdminConsoleCapable {
 
@@ -46,19 +46,19 @@ public class GlobalAccessManager extends AccessManager implements AdminConsoleCa
         try {
             mAclAccessManager = new ACLAccessManager();
         } catch (ServiceException e) {
-            ZimbraLog.acl.warn("unable to instaintiate ACLAccessManager, user rights will not be honored", e);
+            ZmailLog.acl.warn("unable to instaintiate ACLAccessManager, user rights will not be honored", e);
         }
     }
     
     @Override
     public boolean isAdequateAdminAccount(Account acct) {
-        return acct.getBooleanAttr(Provisioning.A_zimbraIsAdminAccount, false);
+        return acct.getBooleanAttr(Provisioning.A_zmailIsAdminAccount, false);
     }
 
     @Override
     public boolean canAccessAccount(AuthToken at, Account target,
             boolean asAdmin) throws ServiceException {
-        if (!at.isZimbraUser())
+        if (!at.isZmailUser())
             return false;
         
         checkDomainStatus(target);
@@ -105,7 +105,7 @@ public class GlobalAccessManager extends AccessManager implements AdminConsoleCa
 
     @Override
     public boolean canAccessCos(AuthToken at, Cos cos) throws ServiceException {
-        if (!at.isZimbraUser())
+        if (!at.isZmailUser())
             return false;
         
         return isGlobalAdmin(at);
@@ -178,7 +178,7 @@ public class GlobalAccessManager extends AccessManager implements AdminConsoleCa
     @Override
     public boolean canAccessDomain(AuthToken at, String domainName)
             throws ServiceException {
-        if (!at.isZimbraUser())
+        if (!at.isZmailUser())
             return false;
         checkDomainStatus(domainName);
         
@@ -188,7 +188,7 @@ public class GlobalAccessManager extends AccessManager implements AdminConsoleCa
     @Override
     public boolean canAccessDomain(AuthToken at, Domain domain)
             throws ServiceException {
-        if (!at.isZimbraUser())
+        if (!at.isZmailUser())
             return false;
         checkDomainStatus(domain);
         

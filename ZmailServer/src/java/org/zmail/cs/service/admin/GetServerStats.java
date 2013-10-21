@@ -12,7 +12,7 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.service.admin;
+package org.zmail.cs.service.admin;
 
 import java.util.HashSet;
 import java.util.List;
@@ -20,22 +20,22 @@ import java.util.Map;
 import java.util.Set;
 import java.util.TreeMap;
 
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.common.soap.AdminConstants;
-import com.zimbra.common.soap.Element;
-import com.zimbra.common.util.StringUtil;
-import com.zimbra.cs.account.Provisioning;
-import com.zimbra.cs.account.Server;
-import com.zimbra.cs.account.accesscontrol.AdminRight;
-import com.zimbra.cs.account.accesscontrol.Rights.Admin;
-import com.zimbra.cs.stats.ZimbraPerf;
-import com.zimbra.soap.ZimbraSoapContext;
+import org.zmail.common.service.ServiceException;
+import org.zmail.common.soap.AdminConstants;
+import org.zmail.common.soap.Element;
+import org.zmail.common.util.StringUtil;
+import org.zmail.cs.account.Provisioning;
+import org.zmail.cs.account.Server;
+import org.zmail.cs.account.accesscontrol.AdminRight;
+import org.zmail.cs.account.accesscontrol.Rights.Admin;
+import org.zmail.cs.stats.ZmailPerf;
+import org.zmail.soap.ZmailSoapContext;
 
 public class GetServerStats extends AdminDocumentHandler {
 
     @Override
     public Element handle(Element request, Map<String, Object> context) throws ServiceException {
-        ZimbraSoapContext zsc = getZimbraSoapContext(context);
+        ZmailSoapContext zsc = getZmailSoapContext(context);
         
         Server localServer = Provisioning.getInstance().getLocalServer();
         checkRight(zsc, context, localServer, Admin.R_getServerStats);
@@ -48,7 +48,7 @@ public class GetServerStats extends AdminDocumentHandler {
         }
         
         // Get latest values.
-        Map<String, Object> allStats = ZimbraPerf.getStats();
+        Map<String, Object> allStats = ZmailPerf.getStats();
         Map<String, Object> returnedStats = new TreeMap<String, Object>();
         boolean returnAllStats = (requestedNames.size() == 0);
         
@@ -76,7 +76,7 @@ public class GetServerStats extends AdminDocumentHandler {
                 .addAttribute(AdminConstants.A_NAME, name)
                 .setText(stringVal);
             
-            String description = ZimbraPerf.getDescription(name);
+            String description = ZmailPerf.getDescription(name);
             if (description != null) {
                 eStat.addAttribute(AdminConstants.A_DESCRIPTION, description);
             }

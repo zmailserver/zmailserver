@@ -13,26 +13,26 @@
  * ***** END LICENSE BLOCK *****
  */
 
-package com.zimbra.cs.account;
+package org.zmail.cs.account;
 
 import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 
 import com.google.common.collect.Maps;
-import com.zimbra.common.localconfig.LC;
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.common.util.ZimbraLog;
-import com.zimbra.cs.account.Config;
-import com.zimbra.cs.account.Provisioning;
-import com.zimbra.common.account.Key;
-import com.zimbra.common.account.Key.AccountBy;
-import com.zimbra.common.account.Key.DistributionListBy;
-import com.zimbra.cs.account.accesscontrol.Right;
-import com.zimbra.cs.account.accesscontrol.TargetType;
-import com.zimbra.cs.account.accesscontrol.Rights.User;
-import com.zimbra.cs.util.AccountUtil;
-import com.zimbra.cs.util.Zimbra;
+import org.zmail.common.localconfig.LC;
+import org.zmail.common.service.ServiceException;
+import org.zmail.common.util.ZmailLog;
+import org.zmail.cs.account.Config;
+import org.zmail.cs.account.Provisioning;
+import org.zmail.common.account.Key;
+import org.zmail.common.account.Key.AccountBy;
+import org.zmail.common.account.Key.DistributionListBy;
+import org.zmail.cs.account.accesscontrol.Right;
+import org.zmail.cs.account.accesscontrol.TargetType;
+import org.zmail.cs.account.accesscontrol.Rights.User;
+import org.zmail.cs.util.AccountUtil;
+import org.zmail.cs.util.Zmail;
 
 public abstract class AccessManager {
 
@@ -41,40 +41,40 @@ public abstract class AccessManager {
     public static AccessManager getInstance() {
         if (sManager == null) {
             
-            // 1. try getting it from global config attr zimbraAdminAccessControlMech.
-            //    zimbraAdminAccessControlMech can only be set to an access manager that is 
+            // 1. try getting it from global config attr zmailAdminAccessControlMech.
+            //    zmailAdminAccessControlMech can only be set to an access manager that is 
             //    "admin console capable".  That is, it must implement the AdminConsoleCapable
             //    interface.
             try {
                 Config config = Provisioning.getInstance().getConfig();
-                String accessManager = config.getAttr(Provisioning.A_zimbraAdminAccessControlMech);
+                String accessManager = config.getAttr(Provisioning.A_zmailAdminAccessControlMech);
                 if (accessManager != null) {
                     Provisioning.AdminAccessControlMech am = Provisioning.AdminAccessControlMech.fromString(accessManager);
                     if (am == Provisioning.AdminAccessControlMech.acl)
-                        sManager = new com.zimbra.cs.account.accesscontrol.ACLAccessManager();
+                        sManager = new org.zmail.cs.account.accesscontrol.ACLAccessManager();
                     else if (am == Provisioning.AdminAccessControlMech.global)
-                        sManager = new com.zimbra.cs.account.accesscontrol.GlobalAccessManager();
+                        sManager = new org.zmail.cs.account.accesscontrol.GlobalAccessManager();
                 }
             } catch (ServiceException e) {
-                ZimbraLog.account.warn("unable to determine access manager from global config attribute " + 
-                        Provisioning.A_zimbraAdminAccessControlMech + ", fallback to use LC key " +
-                        LC.zimbra_class_accessmanager.key(), e);
+                ZmailLog.account.warn("unable to determine access manager from global config attribute " + 
+                        Provisioning.A_zmailAdminAccessControlMech + ", fallback to use LC key " +
+                        LC.zmail_class_accessmanager.key(), e);
             }
             
             //
-            // 2. if not set, fallback to localconfig key zimbra_class_accessmanager.
-            //    zimbra_class_accessmanager can be set to any class that is an
+            // 2. if not set, fallback to localconfig key zmail_class_accessmanager.
+            //    zmail_class_accessmanager can be set to any class that is an
             //    AccessManager.  No guarantee it will support the admin console.
             //    Allow this path for backward compatibility.
             //
             if (sManager == null) {
-                String className = LC.zimbra_class_accessmanager.value();
+                String className = LC.zmail_class_accessmanager.value();
                 
                 if (className != null && !className.equals("")) {
                     try {
                         sManager = (AccessManager) Class.forName(className).newInstance();
                     } catch (Exception e) {
-                        ZimbraLog.account.error("could not instantiate AccessManager interface of class '" 
+                        ZmailLog.account.error("could not instantiate AccessManager interface of class '" 
                                 + className + "'; defaulting to DomainAccessManager", e);
                     }
                 }
@@ -84,10 +84,10 @@ public abstract class AccessManager {
             // 3. if still null, default to GlobalAccessManager
             //
             if (sManager == null)
-            	sManager = new com.zimbra.cs.account.accesscontrol.GlobalAccessManager();
+            	sManager = new org.zmail.cs.account.accesscontrol.GlobalAccessManager();
             
-            if (Zimbra.started()) {
-                ZimbraLog.account.info("Initialized access manager: " + sManager.getClass().getCanonicalName());
+            if (Zmail.started()) {
+                ZmailLog.account.info("Initialized access manager: " + sManager.getClass().getCanonicalName());
             }
         }
         
@@ -151,7 +151,7 @@ public abstract class AccessManager {
      * @param targetAccount
      * @param asAdmin true if authAccount is authenticated with admin privileges
      * @return
-     * @throws com.zimbra.common.service.ServiceException
+     * @throws org.zmail.common.service.ServiceException
      */
     public boolean allowPrivateAccess(Account authAccount, Account targetAccount, boolean asAdmin)
     throws ServiceException {
@@ -193,7 +193,7 @@ public abstract class AccessManager {
      * @param target       The target account for the proposed action. */
     protected boolean isParentOf(Account credentials, Account target) {
         
-        Set<String> childAccts = credentials.getMultiAttrSet(Provisioning.A_zimbraChildAccount);
+        Set<String> childAccts = credentials.getMultiAttrSet(Provisioning.A_zmailChildAccount);
         String targetId = target.getId();
         
         if (childAccts.contains(targetId))
@@ -416,9 +416,9 @@ public abstract class AccessManager {
                 target = prov.get(AccountBy.name, targetAddress);
             }
         } else if (targetAccount != null) {
-            // If targetAddress has an external domain, it must be a zimbraAllowFromAddress of the target account.
+            // If targetAddress has an external domain, it must be a zmailAllowFromAddress of the target account.
             Set<String> addrs = new HashSet<String>();
-            String[] allowedFromAddrs = targetAccount.getMultiAttr(Provisioning.A_zimbraAllowFromAddress);
+            String[] allowedFromAddrs = targetAccount.getMultiAttr(Provisioning.A_zmailAllowFromAddress);
             for (String addr : allowedFromAddrs) {
                 addrs.add(addr.toLowerCase());
             }

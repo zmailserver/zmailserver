@@ -12,7 +12,7 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.dav.service;
+package org.zmail.cs.dav.service;
 
 import java.io.IOException;
 
@@ -20,17 +20,17 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.zimbra.common.util.ZimbraLog;
-import com.zimbra.cs.dav.DavProtocol;
-import com.zimbra.cs.servlet.ZimbraServlet;
+import org.zmail.common.util.ZmailLog;
+import org.zmail.cs.dav.DavProtocol;
+import org.zmail.cs.servlet.ZmailServlet;
 
 @SuppressWarnings("serial")
-public class DavWellKnownServlet extends ZimbraServlet {
+public class DavWellKnownServlet extends ZmailServlet {
     
     public void service(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        ZimbraLog.clearContext();
+        ZmailLog.clearContext();
         addRemoteIpToLoggingContext(req);
-        ZimbraLog.addUserAgentToContext(req.getHeader(DavProtocol.HEADER_USER_AGENT));
+        ZmailLog.addUserAgentToContext(req.getHeader(DavProtocol.HEADER_USER_AGENT));
         String path = req.getPathInfo();
         if (path.equalsIgnoreCase("/caldav") || path.equalsIgnoreCase("/carddav")) {
             resp.setStatus(HttpServletResponse.SC_MOVED_PERMANENTLY);

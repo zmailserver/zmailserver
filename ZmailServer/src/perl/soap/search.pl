@@ -21,7 +21,7 @@ use LWP::UserAgent;
 use Getopt::Long;
 use XmlDoc;
 use Soap;
-use ZimbraSoapTest;
+use ZmailSoapTest;
 
 # specific to this app
 my ($searchString, $offset, $prevId, $prevSortVal, $endSortVal, $limit, $fetch, $sortBy, $types, $convId, $tz, $locale, $field);
@@ -75,7 +75,7 @@ if (defined($adminHost)) {
   $admin = 1;
 }
 
-my $z = ZimbraSoapTest->new($user, $host, $pw, undef, $adminHost);
+my $z = ZmailSoapTest->new($user, $host, $pw, undef, $adminHost);
 if (defined($admin)) {
   $z->doAdminAuth();
 } else {

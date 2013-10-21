@@ -12,9 +12,9 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.iochannel;
+package org.zmail.cs.iochannel;
 
-import com.zimbra.common.iochannel.IOChannelException;
+import org.zmail.common.iochannel.IOChannelException;
 
 public class MessageChannelException extends IOChannelException {
 

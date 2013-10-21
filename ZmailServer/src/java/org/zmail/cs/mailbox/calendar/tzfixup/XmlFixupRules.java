@@ -13,25 +13,25 @@
  * ***** END LICENSE BLOCK *****
  */
 
-package com.zimbra.cs.mailbox.calendar.tzfixup;
+package org.zmail.cs.mailbox.calendar.tzfixup;
 
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
-import com.zimbra.common.calendar.ICalTimeZone;
-import com.zimbra.common.calendar.WellKnownTimeZones;
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.common.soap.AdminConstants;
-import com.zimbra.common.soap.Element;
-import com.zimbra.common.soap.MailConstants;
-import com.zimbra.cs.mailbox.calendar.tzfixup.TimeZoneFixupRules.Matcher;
-import com.zimbra.cs.service.mail.CalendarUtils;
+import org.zmail.common.calendar.ICalTimeZone;
+import org.zmail.common.calendar.WellKnownTimeZones;
+import org.zmail.common.service.ServiceException;
+import org.zmail.common.soap.AdminConstants;
+import org.zmail.common.soap.Element;
+import org.zmail.common.soap.MailConstants;
+import org.zmail.cs.mailbox.calendar.tzfixup.TimeZoneFixupRules.Matcher;
+import org.zmail.cs.service.mail.CalendarUtils;
 
 /*
 
 <?xml version="1.0" encoding="utf-8"?>
-<tzfixup xmlns="url:zimbraTZFixup">
+<tzfixup xmlns="url:zmailTZFixup">
   <!-- specify multiple fixupRule's -->
   <fixupRule>
     <!-- if timezone matches any of the criteria, replace with the timezone in <replace> -->
@@ -71,7 +71,7 @@ import com.zimbra.cs.service.mail.CalendarUtils;
     OR
     <!-- timezone matching any of the above criteria is replaced with this timezone -->
     <replace>
-      <!-- lookup a well-known timezone from /opt/zimbra/conf/timezones.ics file -->
+      <!-- lookup a well-known timezone from /opt/zmail/conf/timezones.ics file -->
       <wellKnownTz id="[well-known TZID]">
       OR
       <!-- full timezone definition as documented in soap-calendar.txt -->

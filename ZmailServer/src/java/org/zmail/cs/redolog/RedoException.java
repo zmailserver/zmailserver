@@ -19,9 +19,9 @@
  * TODO To change the template for this generated file go to
  * Window - Preferences - Java - Code Generation - Code and Comments
  */
-package com.zimbra.cs.redolog;
+package org.zmail.cs.redolog;
 
-import com.zimbra.cs.redolog.op.RedoableOp;
+import org.zmail.cs.redolog.op.RedoableOp;
 
 /**
  * @author jhahm

@@ -13,7 +13,7 @@
  * ***** END LICENSE BLOCK *****
  */
 
-package com.zimbra.cs.util;
+package org.zmail.cs.util;
 
 import java.io.File;
 import java.io.IOException;
@@ -22,45 +22,45 @@ import java.util.Timer;
 
 import org.apache.mina.core.buffer.IoBuffer;
 
-import com.zimbra.common.calendar.WellKnownTimeZones;
-import com.zimbra.common.lmtp.SmtpToLmtp;
-import com.zimbra.common.localconfig.LC;
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.common.soap.SoapTransport;
-import com.zimbra.common.util.ZimbraHttpConnectionManager;
-import com.zimbra.common.util.ZimbraLog;
-import com.zimbra.cs.account.AttributeManager;
-import com.zimbra.cs.account.AutoProvisionThread;
-import com.zimbra.cs.account.ExternalAccountManagerTask;
-import com.zimbra.cs.account.Provisioning;
-import com.zimbra.cs.account.Server;
-import com.zimbra.cs.account.accesscontrol.RightManager;
-import com.zimbra.cs.account.ldap.LdapProv;
-import com.zimbra.cs.db.DbPool;
-import com.zimbra.cs.db.Versions;
-import com.zimbra.cs.extension.ExtensionUtil;
-import com.zimbra.cs.iochannel.MessageChannel;
-import com.zimbra.cs.mailbox.MailboxIndex;
-import com.zimbra.cs.mailbox.MailboxManager;
-import com.zimbra.cs.mailbox.PurgeThread;
-import com.zimbra.cs.mailbox.ScheduledTaskManager;
-import com.zimbra.cs.mailbox.acl.AclPushTask;
-import com.zimbra.cs.memcached.MemcachedConnector;
-import com.zimbra.cs.redolog.RedoLogProvider;
-import com.zimbra.cs.server.ServerManager;
-import com.zimbra.cs.servlet.FirstServlet;
-import com.zimbra.cs.session.SessionCache;
-import com.zimbra.cs.session.WaitSetMgr;
-import com.zimbra.cs.stats.ZimbraPerf;
-import com.zimbra.cs.store.StoreManager;
-import com.zimbra.znative.Util;
+import org.zmail.common.calendar.WellKnownTimeZones;
+import org.zmail.common.lmtp.SmtpToLmtp;
+import org.zmail.common.localconfig.LC;
+import org.zmail.common.service.ServiceException;
+import org.zmail.common.soap.SoapTransport;
+import org.zmail.common.util.ZmailHttpConnectionManager;
+import org.zmail.common.util.ZmailLog;
+import org.zmail.cs.account.AttributeManager;
+import org.zmail.cs.account.AutoProvisionThread;
+import org.zmail.cs.account.ExternalAccountManagerTask;
+import org.zmail.cs.account.Provisioning;
+import org.zmail.cs.account.Server;
+import org.zmail.cs.account.accesscontrol.RightManager;
+import org.zmail.cs.account.ldap.LdapProv;
+import org.zmail.cs.db.DbPool;
+import org.zmail.cs.db.Versions;
+import org.zmail.cs.extension.ExtensionUtil;
+import org.zmail.cs.iochannel.MessageChannel;
+import org.zmail.cs.mailbox.MailboxIndex;
+import org.zmail.cs.mailbox.MailboxManager;
+import org.zmail.cs.mailbox.PurgeThread;
+import org.zmail.cs.mailbox.ScheduledTaskManager;
+import org.zmail.cs.mailbox.acl.AclPushTask;
+import org.zmail.cs.memcached.MemcachedConnector;
+import org.zmail.cs.redolog.RedoLogProvider;
+import org.zmail.cs.server.ServerManager;
+import org.zmail.cs.servlet.FirstServlet;
+import org.zmail.cs.session.SessionCache;
+import org.zmail.cs.session.WaitSetMgr;
+import org.zmail.cs.stats.ZmailPerf;
+import org.zmail.cs.store.StoreManager;
+import org.zmail.znative.Util;
 
 /**
  * Class that encapsulates the initialization and shutdown of services needed
  * by any process that adds mail items.  Services under control include redo
  * logging and indexing.
  */
-public final class Zimbra {
+public final class Zmail {
     private static boolean sInited = false;
     private static boolean sIsMailboxd = false;
 
@@ -80,11 +80,11 @@ public final class Zimbra {
     private static void checkForClass(String clzName, String jarName) {
         try {
             String s = Class.forName(clzName).getName();
-            ZimbraLog.misc.debug("checked for class " + s + " and found it");
+            ZmailLog.misc.debug("checked for class " + s + " and found it");
         } catch (ClassNotFoundException cnfe) {
-            ZimbraLog.misc.error(jarName + " not in your common/lib?", cnfe);
+            ZmailLog.misc.error(jarName + " not in your common/lib?", cnfe);
         } catch (UnsatisfiedLinkError ule) {
-            ZimbraLog.misc.error("error in shared library used by " + jarName + "?", ule);
+            ZmailLog.misc.error("error in shared library used by " + jarName + "?", ule);
         }
     }
 
@@ -97,39 +97,39 @@ public final class Zimbra {
     }
 
     private static void logVersionAndSysInfo() {
-        ZimbraLog.misc.info("version=" + BuildInfo.VERSION +
+        ZmailLog.misc.info("version=" + BuildInfo.VERSION +
                 " release=" + BuildInfo.RELEASE +
                 " builddate=" + BuildInfo.DATE +
                 " buildhost=" + BuildInfo.HOST);
 
-        ZimbraLog.misc.info("LANG environment is set to: " + System.getenv("LANG"));
+        ZmailLog.misc.info("LANG environment is set to: " + System.getenv("LANG"));
 
-        ZimbraLog.misc.info("System property java.home="            + getSysProperty("java.home"));
-        ZimbraLog.misc.info("System property java.runtime.version=" + getSysProperty("java.runtime.version"));
-        ZimbraLog.misc.info("System property java.version="         + getSysProperty("java.version"));
-        ZimbraLog.misc.info("System property java.vm.info="         + getSysProperty("java.vm.info"));
-        ZimbraLog.misc.info("System property java.vm.name="         + getSysProperty("java.vm.name"));
-        ZimbraLog.misc.info("System property java.vm.version="      + getSysProperty("java.vm.version"));
-        ZimbraLog.misc.info("System property os.arch="              + getSysProperty("os.arch"));
-        ZimbraLog.misc.info("System property os.name="              + getSysProperty("os.name"));
-        ZimbraLog.misc.info("System property os.version="           + getSysProperty("os.version"));
-        ZimbraLog.misc.info("System property sun.arch.data.model="  + getSysProperty("sun.arch.data.model"));
-        ZimbraLog.misc.info("System property sun.cpu.endian="       + getSysProperty("sun.cpu.endian"));
-        ZimbraLog.misc.info("System property sun.cpu.isalist="      + getSysProperty("sun.cpu.isalist"));
-        ZimbraLog.misc.info("System property sun.os.patch.level="   + getSysProperty("sun.os.patch.level"));
+        ZmailLog.misc.info("System property java.home="            + getSysProperty("java.home"));
+        ZmailLog.misc.info("System property java.runtime.version=" + getSysProperty("java.runtime.version"));
+        ZmailLog.misc.info("System property java.version="         + getSysProperty("java.version"));
+        ZmailLog.misc.info("System property java.vm.info="         + getSysProperty("java.vm.info"));
+        ZmailLog.misc.info("System property java.vm.name="         + getSysProperty("java.vm.name"));
+        ZmailLog.misc.info("System property java.vm.version="      + getSysProperty("java.vm.version"));
+        ZmailLog.misc.info("System property os.arch="              + getSysProperty("os.arch"));
+        ZmailLog.misc.info("System property os.name="              + getSysProperty("os.name"));
+        ZmailLog.misc.info("System property os.version="           + getSysProperty("os.version"));
+        ZmailLog.misc.info("System property sun.arch.data.model="  + getSysProperty("sun.arch.data.model"));
+        ZmailLog.misc.info("System property sun.cpu.endian="       + getSysProperty("sun.cpu.endian"));
+        ZmailLog.misc.info("System property sun.cpu.isalist="      + getSysProperty("sun.cpu.isalist"));
+        ZmailLog.misc.info("System property sun.os.patch.level="   + getSysProperty("sun.os.patch.level"));
     }
 
     private static void checkForClasses() {
         checkForClass("javax.activation.DataSource", "activation.jar");
         checkForClass("javax.mail.internet.MimeMessage", "javamail-1.4.3.jar");
-        checkForClass("com.zimbra.znative.IO", "zimbra-native.jar");
+        checkForClass("org.zmail.znative.IO", "zmail-native.jar");
     }
 
     public static void startup() {
         try {
             startup(true);
         } catch (ServiceException se) {
-            Zimbra.halt("Exception during startup, aborting server, please check your config", se);
+            Zmail.halt("Exception during startup, aborting server, please check your config", se);
         }
     }
 
@@ -159,15 +159,15 @@ public final class Zimbra {
 
         checkForClasses();
 
-        ZimbraApplication app = ZimbraApplication.getInstance();
+        ZmailApplication app = ZmailApplication.getInstance();
 
         DbPool.startup();
 
-        app.initializeZimbraDb(forMailboxd);
+        app.initializeZmailDb(forMailboxd);
 
 
         if (!Versions.checkVersions()) {
-            Zimbra.halt("Data version mismatch.  Reinitialize or upgrade the backend data store.");
+            Zmail.halt("Data version mismatch.  Reinitialize or upgrade the backend data store.");
         }
 
         DbPool.loadSettings();
@@ -177,7 +177,7 @@ public final class Zimbra {
             File tzFile = new File(tzFilePath);
             WellKnownTimeZones.loadFromFile(tzFile);
         } catch (Throwable t) {
-            Zimbra.halt("Unable to load timezones from " + tzFilePath, t);
+            Zmail.halt("Unable to load timezones from " + tzFilePath, t);
         }
 
         Provisioning prov = Provisioning.getInstance();
@@ -206,7 +206,7 @@ public final class Zimbra {
             Util.halt("cannot initialize RightManager", e);
         }
 
-        ZimbraHttpConnectionManager.startReaperThread();
+        ZmailHttpConnectionManager.startReaperThread();
 
         ExtensionUtil.initAll();
 
@@ -251,7 +251,7 @@ public final class Zimbra {
             if (!redoLog.isSlave()) {
                 boolean useDirectBuffers = server.isMailUseDirectBuffers();
                 IoBuffer.setUseDirectBuffer(useDirectBuffers);
-                ZimbraLog.misc.info("MINA setUseDirectBuffers(" + useDirectBuffers + ")");
+                ZmailLog.misc.info("MINA setUseDirectBuffers(" + useDirectBuffers + ")");
 
                 ServerManager.getInstance().startServers();
             }
@@ -297,13 +297,13 @@ public final class Zimbra {
                 try {
                     MessageChannel.getInstance().startup();
                 } catch (IOException e) {
-                    ZimbraLog.misc.warn("can't start notification channels", e);
+                    ZmailLog.misc.warn("can't start notification channels", e);
                 }
             }
 
             // should be last, so that other subsystems can add dynamic stats counters
-            if (app.supports(ZimbraPerf.class.getName())) {
-                ZimbraPerf.initialize();
+            if (app.supports(ZmailPerf.class.getName())) {
+                ZmailPerf.initialize();
             }
         }
 
@@ -323,7 +323,7 @@ public final class Zimbra {
             AutoProvisionThread.shutdown();
         }
 
-        ZimbraApplication app = ZimbraApplication.getInstance();
+        ZmailApplication app = ZmailApplication.getInstance();
 
         app.shutdown();
 
@@ -369,7 +369,7 @@ public final class Zimbra {
             StoreManager.getInstance().shutdown();
         }
 
-        ZimbraHttpConnectionManager.shutdownReaperThread();
+        ZmailHttpConnectionManager.shutdownReaperThread();
 
         sTimer.cancel();
 
@@ -383,7 +383,7 @@ public final class Zimbra {
         return sInited;
     }
 
-    public static Timer sTimer = new Timer("Timer-Zimbra", true);
+    public static Timer sTimer = new Timer("Timer-Zmail", true);
 
     /**
      * Logs the given message and shuts down the server.
@@ -392,7 +392,7 @@ public final class Zimbra {
      */
     public static void halt(String message) {
         try {
-            ZimbraLog.system.fatal(message);
+            ZmailLog.system.fatal(message);
         } finally {
             Runtime.getRuntime().halt(1);
         }
@@ -406,7 +406,7 @@ public final class Zimbra {
      */
     public static void halt(String message, Throwable t) {
         try {
-            ZimbraLog.system.fatal(message, t);
+            ZmailLog.system.fatal(message, t);
         } finally {
             Runtime.getRuntime().halt(1);
         }

@@ -13,40 +13,40 @@
  * ***** END LICENSE BLOCK *****
  */
 
-package com.zimbra.cs.account.auth;
+package org.zmail.cs.account.auth;
 
 import java.util.List;
 import java.util.HashMap;
 import java.util.Map;
 
-import com.zimbra.common.util.ZimbraLog;
-import com.zimbra.cs.account.Account;
-import com.zimbra.cs.account.Provisioning;
+import org.zmail.common.util.ZmailLog;
+import org.zmail.cs.account.Account;
+import org.zmail.cs.account.Provisioning;
 
-public abstract class ZimbraCustomAuth {
+public abstract class ZmailCustomAuth {
     
-    private static Map<String, ZimbraCustomAuth> mHandlers;
+    private static Map<String, ZmailCustomAuth> mHandlers;
     
     static {
         /*
          * register known custom auth 
          */
-        ZimbraCustomAuth.register("hosted", new HostedAuth());
+        ZmailCustomAuth.register("hosted", new HostedAuth());
     }
 
     /*
      * Register a custom auth handler.
-     * It should be invoked from the init() method of ZimbraExtension.
+     * It should be invoked from the init() method of ZmailExtension.
      */
-    public synchronized static void register(String handlerName, ZimbraCustomAuth handler) {
+    public synchronized static void register(String handlerName, ZmailCustomAuth handler) {
         
         if (mHandlers == null)
-            mHandlers = new HashMap<String, ZimbraCustomAuth>();
+            mHandlers = new HashMap<String, ZmailCustomAuth>();
         else {
             //  sanity check
-            ZimbraCustomAuth obj = mHandlers.get(handlerName);
+            ZmailCustomAuth obj = mHandlers.get(handlerName);
             if (obj != null) {
-                ZimbraLog.account.warn("handler name " + handlerName + " is already registered, " +
+                ZmailLog.account.warn("handler name " + handlerName + " is already registered, " +
                                        "registering of " + obj.getClass().getCanonicalName() + " is ignored");
                 return;
             }    
@@ -54,7 +54,7 @@ public abstract class ZimbraCustomAuth {
         mHandlers.put(handlerName, handler);
     }
     
-    public synchronized static ZimbraCustomAuth getHandler(String handlerName) {
+    public synchronized static ZmailCustomAuth getHandler(String handlerName) {
         if (mHandlers == null)
             return null;
         else    
@@ -71,9 +71,9 @@ public abstract class ZimbraCustomAuth {
      * @param password: Clear-text password.
      * 
      * @param context: Map containing context information.  
-     *                 A list of context data is defined in com.zimbra.cs.account.AuthContext
+     *                 A list of context data is defined in org.zmail.cs.account.AuthContext
      * 
-     * @param args: Arguments specified in the zimbraAuthMech attribute
+     * @param args: Arguments specified in the zmailAuthMech attribute
      * 
      * @return Returning from this function indicating the authentication has succeeded. 
      *  
@@ -89,7 +89,7 @@ public abstract class ZimbraCustomAuth {
      * is desired in the custom auth.   Default is false.
      * 
      * It only makes sense to return true for a custom auth if the password is stored in 
-     * the Zimbra directory.  
+     * the Zmail directory.  
      * 
      * If checkPasswordAging returns false, password aging check will be completely skipped in the framework.
      * If checkPasswordAging returns true, password aging will be executed by the framework if enabled.

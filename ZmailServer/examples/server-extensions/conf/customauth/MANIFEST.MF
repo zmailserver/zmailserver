@@ -1,2 +1,2 @@
-Zimbra-Extension-Class: com.zimbra.examples.extns.customauth.CustomAuthExtension
+Zmail-Extension-Class: org.zmail.examples.extns.customauth.CustomAuthExtension
 

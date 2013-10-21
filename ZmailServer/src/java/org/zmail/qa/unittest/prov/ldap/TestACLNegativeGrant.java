@@ -12,7 +12,7 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.qa.unittest.prov.ldap;
+package org.zmail.qa.unittest.prov.ldap;
 
 import java.util.HashMap;
 import java.util.HashSet;
@@ -23,30 +23,30 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 import static org.junit.Assert.*;
 
-import com.zimbra.common.account.Key;
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.cs.account.AccessManager;
-import com.zimbra.cs.account.Account;
-import com.zimbra.cs.account.DistributionList;
-import com.zimbra.cs.account.Domain;
-import com.zimbra.cs.account.Entry;
-import com.zimbra.cs.account.GlobalGrant;
-import com.zimbra.cs.account.Group;
-import com.zimbra.cs.account.GuestAccount;
-import com.zimbra.cs.account.NamedEntry;
-import com.zimbra.cs.account.AccessManager.ViaGrant;
-import com.zimbra.cs.account.accesscontrol.GranteeType;
-import com.zimbra.cs.account.accesscontrol.Right;
-import com.zimbra.cs.account.accesscontrol.RightCommand;
-import com.zimbra.cs.account.accesscontrol.TargetType;
-import com.zimbra.cs.account.accesscontrol.ZimbraACE;
-import com.zimbra.cs.account.accesscontrol.Rights.User;
-import com.zimbra.cs.account.ldap.LdapProv;
-import com.zimbra.cs.service.AuthProvider;
-import com.zimbra.qa.unittest.prov.ldap.ACLTestUtil.AllowOrDeny;
-import com.zimbra.qa.unittest.prov.ldap.ACLTestUtil.AsAdmin;
-import com.zimbra.qa.unittest.prov.ldap.ACLTestUtil.TestViaGrant;
-import com.zimbra.soap.type.TargetBy;
+import org.zmail.common.account.Key;
+import org.zmail.common.service.ServiceException;
+import org.zmail.cs.account.AccessManager;
+import org.zmail.cs.account.Account;
+import org.zmail.cs.account.DistributionList;
+import org.zmail.cs.account.Domain;
+import org.zmail.cs.account.Entry;
+import org.zmail.cs.account.GlobalGrant;
+import org.zmail.cs.account.Group;
+import org.zmail.cs.account.GuestAccount;
+import org.zmail.cs.account.NamedEntry;
+import org.zmail.cs.account.AccessManager.ViaGrant;
+import org.zmail.cs.account.accesscontrol.GranteeType;
+import org.zmail.cs.account.accesscontrol.Right;
+import org.zmail.cs.account.accesscontrol.RightCommand;
+import org.zmail.cs.account.accesscontrol.TargetType;
+import org.zmail.cs.account.accesscontrol.ZmailACE;
+import org.zmail.cs.account.accesscontrol.Rights.User;
+import org.zmail.cs.account.ldap.LdapProv;
+import org.zmail.cs.service.AuthProvider;
+import org.zmail.qa.unittest.prov.ldap.ACLTestUtil.AllowOrDeny;
+import org.zmail.qa.unittest.prov.ldap.ACLTestUtil.AsAdmin;
+import org.zmail.qa.unittest.prov.ldap.ACLTestUtil.TestViaGrant;
+import org.zmail.soap.type.TargetBy;
 
 public class TestACLNegativeGrant extends LdapTest {
 

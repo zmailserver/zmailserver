@@ -27,16 +27,16 @@
  *  ; [ISO 8601] complete representation basic format for a period of
  *  ; time consisting of a start and positive duration of time.
  */
-package com.zimbra.cs.mailbox.calendar;
+package org.zmail.cs.mailbox.calendar;
 
 import java.text.ParseException;
 
-import com.zimbra.common.calendar.ICalTimeZone;
-import com.zimbra.common.calendar.ParsedDateTime;
-import com.zimbra.common.calendar.ParsedDuration;
-import com.zimbra.common.calendar.TimeZoneMap;
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.cs.mailbox.Metadata;
+import org.zmail.common.calendar.ICalTimeZone;
+import org.zmail.common.calendar.ParsedDateTime;
+import org.zmail.common.calendar.ParsedDuration;
+import org.zmail.common.calendar.TimeZoneMap;
+import org.zmail.common.service.ServiceException;
+import org.zmail.cs.mailbox.Metadata;
 
 public class Period {
 

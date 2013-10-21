@@ -13,7 +13,7 @@
  * ***** END LICENSE BLOCK *****
  */
 
-package com.zimbra.qa.unittest.prov.ldap;
+package org.zmail.qa.unittest.prov.ldap;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
@@ -26,14 +26,14 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 
 import com.google.common.collect.Maps;
-import com.zimbra.cs.account.Account;
-import com.zimbra.cs.account.AccountServiceException;
-import com.zimbra.cs.account.Domain;
-import com.zimbra.cs.account.Provisioning;
-import com.zimbra.common.account.Key.AccountBy;
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.cs.account.auth.AuthContext;
-import com.zimbra.cs.ldap.LdapConstants;
+import org.zmail.cs.account.Account;
+import org.zmail.cs.account.AccountServiceException;
+import org.zmail.cs.account.Domain;
+import org.zmail.cs.account.Provisioning;
+import org.zmail.common.account.Key.AccountBy;
+import org.zmail.common.service.ServiceException;
+import org.zmail.cs.account.auth.AuthContext;
+import org.zmail.cs.ldap.LdapConstants;
 
 public class TestAccountLockout extends LdapTest {
     
@@ -73,16 +73,16 @@ public class TestAccountLockout extends LdapTest {
         Map<String, Object> attrs = Maps.newHashMap();
         
         // setup lockout config attrs
-        attrs.put(Provisioning.A_zimbraPasswordLockoutEnabled, LdapConstants.LDAP_TRUE);
-        attrs.put(Provisioning.A_zimbraPasswordLockoutDuration, LOCKOUT_DURATION_SECONDS + "s");
-        attrs.put(Provisioning.A_zimbraPasswordLockoutMaxFailures, LOCKOUT_AFTER_NUM_FAILURES+"");
-        attrs.put(Provisioning.A_zimbraPasswordLockoutFailureLifetime, "30s");
+        attrs.put(Provisioning.A_zmailPasswordLockoutEnabled, LdapConstants.LDAP_TRUE);
+        attrs.put(Provisioning.A_zmailPasswordLockoutDuration, LOCKOUT_DURATION_SECONDS + "s");
+        attrs.put(Provisioning.A_zmailPasswordLockoutMaxFailures, LOCKOUT_AFTER_NUM_FAILURES+"");
+        attrs.put(Provisioning.A_zmailPasswordLockoutFailureLifetime, "30s");
         
         // put the account in active mode, clean all lockout attrs that might have been set 
         // in previous test
-        attrs.put(Provisioning.A_zimbraAccountStatus, "active");
-        attrs.put(Provisioning.A_zimbraPasswordLockoutLockedTime, "");
-        attrs.put(Provisioning.A_zimbraPasswordLockoutFailureTime, "");
+        attrs.put(Provisioning.A_zmailAccountStatus, "active");
+        attrs.put(Provisioning.A_zmailPasswordLockoutLockedTime, "");
+        attrs.put(Provisioning.A_zmailPasswordLockoutFailureTime, "");
         
         prov.modifyAttrs(acct, attrs);
         
@@ -103,9 +103,9 @@ public class TestAccountLockout extends LdapTest {
             acct = prov.get(AccountBy.id, acctId);
             
             if (i >= LOCKOUT_AFTER_NUM_FAILURES-1) {
-                assertEquals("lockout", acct.getAttr(Provisioning.A_zimbraAccountStatus));
+                assertEquals("lockout", acct.getAttr(Provisioning.A_zmailAccountStatus));
             } else {
-                assertEquals("active", acct.getAttr(Provisioning.A_zimbraAccountStatus));
+                assertEquals("active", acct.getAttr(Provisioning.A_zmailAccountStatus));
             }
             
             // sleep two seconds

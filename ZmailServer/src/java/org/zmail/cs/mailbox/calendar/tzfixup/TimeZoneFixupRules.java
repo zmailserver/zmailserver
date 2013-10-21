@@ -13,21 +13,21 @@
  * ***** END LICENSE BLOCK *****
  */
 
-package com.zimbra.cs.mailbox.calendar.tzfixup;
+package org.zmail.cs.mailbox.calendar.tzfixup;
 
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
-import com.zimbra.common.calendar.ICalTimeZone;
-import com.zimbra.common.calendar.TimeZoneMap;
-import com.zimbra.common.calendar.ICalTimeZone.SimpleOnset;
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.common.soap.Element;
-import com.zimbra.common.util.ZimbraLog;
-import com.zimbra.cs.mailbox.CalendarItem;
-import com.zimbra.cs.mailbox.calendar.Invite;
+import org.zmail.common.calendar.ICalTimeZone;
+import org.zmail.common.calendar.TimeZoneMap;
+import org.zmail.common.calendar.ICalTimeZone.SimpleOnset;
+import org.zmail.common.service.ServiceException;
+import org.zmail.common.soap.Element;
+import org.zmail.common.util.ZmailLog;
+import org.zmail.cs.mailbox.CalendarItem;
+import org.zmail.cs.mailbox.calendar.Invite;
 
 public class TimeZoneFixupRules {
 
@@ -165,13 +165,13 @@ public class TimeZoneFixupRules {
             if (matcher.matches(oldTZ)) {
                 String oldID = oldTZ.getID();
                 if (matcher.isTouchOnly()) {
-                    ZimbraLog.calendar.info(
+                    ZmailLog.calendar.info(
                             "Touching timezone: " + oldID);
                     replaced.put(oldID, oldTZ);
                     return oldTZ;  // return self as replacement
                 } else {
                     ICalTimeZone newTZ = matcher.getReplacementTZ();
-                    ZimbraLog.calendar.info(
+                    ZmailLog.calendar.info(
                             "Found replacement timezone: old=" + oldID + ", new=" + newTZ.getID());
                     replaced.put(oldID, newTZ);
                     return newTZ.cloneWithNewTZID(oldID);

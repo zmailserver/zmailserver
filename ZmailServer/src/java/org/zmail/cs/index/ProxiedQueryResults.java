@@ -13,24 +13,24 @@
  * ***** END LICENSE BLOCK *****
  */
 
-package com.zimbra.cs.index;
+package org.zmail.cs.index;
 
 import com.google.common.base.Objects;
-import com.zimbra.common.account.Key;
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.common.soap.AdminConstants;
-import com.zimbra.common.soap.Element;
-import com.zimbra.common.soap.MailConstants;
-import com.zimbra.common.soap.SoapFaultException;
-import com.zimbra.common.soap.SoapProtocol;
-import com.zimbra.common.util.ZimbraLog;
-import com.zimbra.cs.account.AuthToken;
-import com.zimbra.cs.account.Provisioning;
-import com.zimbra.cs.account.Server;
-import com.zimbra.cs.httpclient.URLUtil;
-import com.zimbra.soap.DocumentHandler;
-import com.zimbra.soap.ProxyTarget;
-import com.zimbra.soap.ZimbraSoapContext;
+import org.zmail.common.account.Key;
+import org.zmail.common.service.ServiceException;
+import org.zmail.common.soap.AdminConstants;
+import org.zmail.common.soap.Element;
+import org.zmail.common.soap.MailConstants;
+import org.zmail.common.soap.SoapFaultException;
+import org.zmail.common.soap.SoapProtocol;
+import org.zmail.common.util.ZmailLog;
+import org.zmail.cs.account.AuthToken;
+import org.zmail.cs.account.Provisioning;
+import org.zmail.cs.account.Server;
+import org.zmail.cs.httpclient.URLUtil;
+import org.zmail.soap.DocumentHandler;
+import org.zmail.soap.ProxyTarget;
+import org.zmail.soap.ZmailSoapContext;
 
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -39,7 +39,7 @@ import java.util.List;
 /**
  * Represents the results of a query made on a remote server. This class takes
  * the ServerID and the query parameters and makes does smart chunking
- * (buffering) of the results - making SOAP requests to the remote Zimbra server
+ * (buffering) of the results - making SOAP requests to the remote Zmail server
  * as necessary.
  * <p>
  * TODO wish this could be a {@link QueryOperation} subclass instead of just a
@@ -49,7 +49,7 @@ import java.util.List;
  *
  * @since Mar 28, 2005
  */
-public final class ProxiedQueryResults extends ZimbraQueryResultsImpl {
+public final class ProxiedQueryResults extends ZmailQueryResultsImpl {
     /**
      * minimum number of hits to request each time we make a round-trip to the remote server.
      */
@@ -98,7 +98,7 @@ public final class ProxiedQueryResults extends ZimbraQueryResultsImpl {
     /**
      * A search request in the current mailbox on a different server.
      *
-     * @param encodedAuthToken (call ZimbraContext.getAuthToken().getEncoded() if necessary)
+     * @param encodedAuthToken (call ZmailContext.getAuthToken().getEncoded() if necessary)
      * @param server hostname of server
      */
     public ProxiedQueryResults(SoapProtocol respProto, AuthToken authToken, String server, SearchParams params,
@@ -151,7 +151,7 @@ public final class ProxiedQueryResults extends ZimbraQueryResultsImpl {
     }
 
     @Override
-    public ZimbraHit skipToHit(int hitNo) throws ServiceException {
+    public ZmailHit skipToHit(int hitNo) throws ServiceException {
         iterOffset = hitNo;
 
         if (iterOffset < bufferStartOffset || iterOffset > bufferEndOffset) {
@@ -180,8 +180,8 @@ public final class ProxiedQueryResults extends ZimbraQueryResultsImpl {
     }
 
     @Override
-    public ZimbraHit getNext() throws ServiceException {
-        ZimbraHit retVal = peekNext();
+    public ZmailHit getNext() throws ServiceException {
+        ZmailHit retVal = peekNext();
         if (retVal != null) {
             iterOffset++;
         }
@@ -189,7 +189,7 @@ public final class ProxiedQueryResults extends ZimbraQueryResultsImpl {
     }
 
     @Override
-    public ZimbraHit peekNext() throws ServiceException {
+    public ZmailHit peekNext() throws ServiceException {
         if (iterOffset >= bufferEndOffset) {
             if (!bufferNextHits()) {
                 return null;
@@ -217,7 +217,7 @@ public final class ProxiedQueryResults extends ZimbraQueryResultsImpl {
      * Always does a request -- caller is responsible for checking to see if this is necessary or not
      */
     private boolean bufferNextHits() throws ServiceException {
-        if (atEndOfList || searchParams.getHopCount() > ZimbraSoapContext.MAX_HOP_COUNT) {
+        if (atEndOfList || searchParams.getHopCount() > ZmailSoapContext.MAX_HOP_COUNT) {
             return false;
         }
 
@@ -270,12 +270,12 @@ public final class ProxiedQueryResults extends ZimbraQueryResultsImpl {
             proxy.setTimeouts(mTimeout);
         }
 
-        ZimbraSoapContext zscInbound = searchParams.getRequestContext();
-        ZimbraSoapContext zscProxy;
+        ZmailSoapContext zscInbound = searchParams.getRequestContext();
+        ZmailSoapContext zscProxy;
         if (zscInbound != null) {
-            zscProxy = new ZimbraSoapContext(zscInbound, targetAcctId);
+            zscProxy = new ZmailSoapContext(zscInbound, targetAcctId);
         } else {
-            zscProxy = new ZimbraSoapContext(authToken, targetAcctId,
+            zscProxy = new ZmailSoapContext(authToken, targetAcctId,
                     responseProto, responseProto, searchParams.getHopCount() + 1);
         }
 
@@ -285,13 +285,13 @@ public final class ProxiedQueryResults extends ZimbraQueryResultsImpl {
             searchResp = DocumentHandler.proxyWithNotification(
                     searchElt, proxy, zscProxy, zscInbound);
         } catch (SoapFaultException sfe) {
-            ZimbraLog.index.warn("Unable to (" + sfe + ") fetch search results from remote server " + proxy);
+            ZmailLog.index.warn("Unable to (" + sfe + ") fetch search results from remote server " + proxy);
             atEndOfList = true;
             bufferEndOffset = iterOffset;
             return false;
         } catch (ServiceException e) {
             if (ServiceException.PROXY_ERROR.equals(e.getCode())) {
-                ZimbraLog.index.warn("Unable to (" + e + ") fetch search results from remote server " + proxy);
+                ZmailLog.index.warn("Unable to (" + e + ") fetch search results from remote server " + proxy);
                 atEndOfList = true;
                 bufferEndOffset = iterOffset;
                 return false;
@@ -299,7 +299,7 @@ public final class ProxiedQueryResults extends ZimbraQueryResultsImpl {
             throw e;
         } finally {
             long elapsed = System.currentTimeMillis() - start;
-            ZimbraLog.index.debug("Remote query took " + elapsed + "ms; URL=" + proxy.toString() + "; QUERY=" + searchElt.toString());
+            ZmailLog.index.debug("Remote query took " + elapsed + "ms; URL=" + proxy.toString() + "; QUERY=" + searchElt.toString());
         }
 
         int hitOffset;

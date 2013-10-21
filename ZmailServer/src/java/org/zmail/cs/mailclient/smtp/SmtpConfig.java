@@ -12,11 +12,11 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.mailclient.smtp;
+package org.zmail.cs.mailclient.smtp;
 
 import com.google.common.base.Objects;
-import com.zimbra.common.util.ZimbraLog;
-import com.zimbra.cs.mailclient.MailConfig;
+import org.zmail.common.util.ZmailLog;
+import org.zmail.cs.mailclient.MailConfig;
 
 /**
  * SMTP client configuration.
@@ -31,18 +31,18 @@ public final class SmtpConfig extends MailConfig {
     private String dsn;
 
     public SmtpConfig(String host, int port, String domain) {
-        super(ZimbraLog.smtp, host);
+        super(ZmailLog.smtp, host);
         setPort(port);
         setDomain(domain);
     }
 
     public SmtpConfig(String host) {
-        super(ZimbraLog.smtp, host);
+        super(ZmailLog.smtp, host);
         setPort(DEFAULT_PORT);
     }
 
     public SmtpConfig() {
-        super(ZimbraLog.smtp);
+        super(ZmailLog.smtp);
     }
 
     @Override

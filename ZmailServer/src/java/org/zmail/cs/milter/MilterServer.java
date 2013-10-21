@@ -12,7 +12,7 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.milter;
+package org.zmail.cs.milter;
 
 import org.apache.mina.core.session.IoSession;
 import org.apache.mina.filter.codec.ProtocolCodecFactory;
@@ -22,17 +22,17 @@ import org.apache.mina.filter.codec.ProtocolEncoder;
 import sun.misc.Signal;
 import sun.misc.SignalHandler;
 
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.common.util.Log;
-import com.zimbra.common.util.ZimbraLog;
-import com.zimbra.cs.account.Provisioning;
-import com.zimbra.cs.account.accesscontrol.PermissionCache;
-import com.zimbra.cs.account.ldap.LdapProv;
-import com.zimbra.cs.server.NioConnection;
-import com.zimbra.cs.server.NioHandler;
-import com.zimbra.cs.server.NioServer;
-import com.zimbra.cs.server.Server;
-import com.zimbra.cs.server.ServerConfig;
+import org.zmail.common.service.ServiceException;
+import org.zmail.common.util.Log;
+import org.zmail.common.util.ZmailLog;
+import org.zmail.cs.account.Provisioning;
+import org.zmail.cs.account.accesscontrol.PermissionCache;
+import org.zmail.cs.account.ldap.LdapProv;
+import org.zmail.cs.server.NioConnection;
+import org.zmail.cs.server.NioHandler;
+import org.zmail.cs.server.NioServer;
+import org.zmail.cs.server.Server;
+import org.zmail.cs.server.ServerConfig;
 
 public final class MilterServer extends NioServer implements Server {
     private final ProtocolDecoder decoder = new NioMilterDecoder();
@@ -75,7 +75,7 @@ public final class MilterServer extends NioServer implements Server {
 
     @Override
     public Log getLog() {
-        return ZimbraLog.milter;
+        return ZmailLog.milter;
     }
 
     private static final class MilterShutdownHook extends Thread {
@@ -87,7 +87,7 @@ public final class MilterServer extends NioServer implements Server {
 
         @Override
         public void run() {
-            ZimbraLog.milter.info("Shutting down milter server");
+            ZmailLog.milter.info("Shutting down milter server");
             server.stop();
         }
     }
@@ -108,10 +108,10 @@ public final class MilterServer extends NioServer implements Server {
             MilterShutdownHook shutdownHook = new MilterShutdownHook(server);
             Runtime.getRuntime().addShutdownHook(shutdownHook);
 
-            ZimbraLog.milter.info("Starting milter server");
+            ZmailLog.milter.info("Starting milter server");
             server.start();
         } catch (ServiceException e) {
-            ZimbraLog.milter.error("Unable to start milter server", e);
+            ZmailLog.milter.error("Unable to start milter server", e);
         }
     }
 
@@ -127,10 +127,10 @@ public final class MilterServer extends NioServer implements Server {
          */
         @Override
         public void handle(Signal signal) {
-            ZimbraLog.milter.info("Received Signal: %s", signal.getName());
-            ZimbraLog.milter.info("Begin ACL cache invalidation");
+            ZmailLog.milter.info("Received Signal: %s", signal.getName());
+            ZmailLog.milter.info("Begin ACL cache invalidation");
             PermissionCache.invalidateAllCache();
-            ZimbraLog.milter.info("ACL cache successfully cleared");
+            ZmailLog.milter.info("ACL cache successfully cleared");
         }
 
         /**
@@ -142,11 +142,11 @@ public final class MilterServer extends NioServer implements Server {
                 ClearCacheSignalHandler handler = new ClearCacheSignalHandler();
                 // register it
                 Signal.handle(hup, handler);
-                ZimbraLog.milter.info("Registered signal handler: %s(%d)", hup.getName(), hup.getNumber());
+                ZmailLog.milter.info("Registered signal handler: %s(%d)", hup.getName(), hup.getNumber());
             } catch (Throwable t) {
                 // in case we're running on an os that doesn't have a HUP. Need to make sure
                 // milter will still start
-                ZimbraLog.milter.error("Unabled to register signal handler CONT/19 and script refresh will not work", t);
+                ZmailLog.milter.error("Unabled to register signal handler CONT/19 and script refresh will not work", t);
             }
         }
     }

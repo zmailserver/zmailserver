@@ -16,18 +16,18 @@
 /*
  * Created on Jul 24, 2005
  */
-package com.zimbra.cs.redolog.op;
+package org.zmail.cs.redolog.op;
 
 import java.io.IOException;
 
-import com.zimbra.common.calendar.ParsedDateTime;
-import com.zimbra.cs.mailbox.CalendarItem;
-import com.zimbra.cs.mailbox.Mailbox;
-import com.zimbra.cs.mailbox.MailboxManager;
-import com.zimbra.cs.mailbox.MailboxOperation;
-import com.zimbra.cs.mailbox.calendar.RecurId;
-import com.zimbra.cs.redolog.RedoLogInput;
-import com.zimbra.cs.redolog.RedoLogOutput;
+import org.zmail.common.calendar.ParsedDateTime;
+import org.zmail.cs.mailbox.CalendarItem;
+import org.zmail.cs.mailbox.Mailbox;
+import org.zmail.cs.mailbox.MailboxManager;
+import org.zmail.cs.mailbox.MailboxOperation;
+import org.zmail.cs.mailbox.calendar.RecurId;
+import org.zmail.cs.redolog.RedoLogInput;
+import org.zmail.cs.redolog.RedoLogOutput;
 
 public class ModifyInvitePartStat extends RedoableOp 
 {

@@ -12,7 +12,7 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.qa.unittest;
+package org.zmail.qa.unittest;
 
 import java.io.File;
 import java.io.PrintStream;
@@ -22,17 +22,17 @@ import java.util.Map;
 
 import junit.framework.TestCase;
 
-import com.zimbra.common.util.ByteUtil;
-import com.zimbra.common.util.DevNullOutputStream;
-import com.zimbra.cs.account.Account;
-import com.zimbra.cs.mailbox.MailItem;
-import com.zimbra.cs.mailbox.Mailbox;
-import com.zimbra.cs.mailbox.MailboxManager;
-import com.zimbra.cs.mailbox.Message;
-import com.zimbra.cs.redolog.RedoPlayer;
-import com.zimbra.cs.redolog.util.RedoLogVerify;
-import com.zimbra.cs.store.MailboxBlob;
-import com.zimbra.cs.store.StoreManager;
+import org.zmail.common.util.ByteUtil;
+import org.zmail.common.util.DevNullOutputStream;
+import org.zmail.cs.account.Account;
+import org.zmail.cs.mailbox.MailItem;
+import org.zmail.cs.mailbox.Mailbox;
+import org.zmail.cs.mailbox.MailboxManager;
+import org.zmail.cs.mailbox.Message;
+import org.zmail.cs.redolog.RedoPlayer;
+import org.zmail.cs.redolog.util.RedoLogVerify;
+import org.zmail.cs.store.MailboxBlob;
+import org.zmail.cs.store.StoreManager;
 
 /**
  * Tests redolog operations
@@ -92,7 +92,7 @@ extends TestCase {
     }
 
     private File getRedoLogFile() {
-        return new File("/opt/zimbra/redolog/redo.log");
+        return new File("/opt/zmail/redolog/redo.log");
     }
 
     @Override public void tearDown()

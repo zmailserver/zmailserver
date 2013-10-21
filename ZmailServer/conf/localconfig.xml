@@ -14,23 +14,23 @@
   -->
   <!-- Uncomment to enable SQL tracing.  Traces go to mailbox.log. -->
   <!--
-  <key name="zimbra_mysql_connector_profileSQL">
+  <key name="zmail_mysql_connector_profileSQL">
     <value>true</value>
   </key>
-  <key name="zimbra_mysql_connector_logSlowQueries">
+  <key name="zmail_mysql_connector_logSlowQueries">
     <value>true</value>
   </key>
-  <key name="zimbra_mysql_connector_slowQueryThresholdMillis">
+  <key name="zmail_mysql_connector_slowQueryThresholdMillis">
     <value>50</value>
   </key>
-  <key name="zimbra_mysql_connector_dumpQueriesOnException">
+  <key name="zmail_mysql_connector_dumpQueriesOnException">
     <value>true</value>
   </key>
   -->
   <!-- MySQL bug: NullPointerException is thrown if explainSlowQueries is
        enabled and a slow query is detected.  Do not use this option. -->
   <!--
-  <key name="zimbra_mysql_connector_explainSlowQueries">
+  <key name="zmail_mysql_connector_explainSlowQueries">
     <value>false</value>
   </key>
   -->
@@ -39,7 +39,7 @@
 Use the following sintax to disable individual Admin SOAP handlers. 
 This feature is used for securing admin server in hosted deployment (bug# 30510). If this key is present, any Admin SOAP handlers that are not in the white list will not be loaded.
 	<key name="admin_soap_white_list">
-		<value>{coma-saparated list of SOAP Requests to include, e.g.: urn:zimbraAdmin::RenameAccountRequest,urn:zimbraAdmin::ModifyAccountRequest}.</value>
+		<value>{coma-saparated list of SOAP Requests to include, e.g.: urn:zmailAdmin::RenameAccountRequest,urn:zmailAdmin::ModifyAccountRequest}.</value>
 	</key>
 	See admin_soap_white_list.txt for more information about this configuration key.
 -->
@@ -75,10 +75,10 @@ This feature is used for securing admin server in hosted deployment (bug# 30510)
   <key name="debug_disable_mailbox_group">
     <value>false</value>
   </key>
-  <key name="zimbra_disk_cache_servlet_flush">
+  <key name="zmail_disk_cache_servlet_flush">
     <value>false</value>
   </key>
-  <key name="zimbra_mailbox_groups">
+  <key name="zmail_mailbox_groups">
     <value>100</value>
   </key>
 </localconfig>

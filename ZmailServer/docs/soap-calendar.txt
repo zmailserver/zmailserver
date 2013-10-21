@@ -673,21 +673,21 @@ OR
 // (f)ree (b)usy busy-(t)entative busy-(u)navailable or (n)o-data elements
 //
 <GetFreeBusyRequest s="RANGE_START_MSECS_GMT" e="RANGE_END_MSECS_GMT"
-  [uid="zimbraId/email,..."]  // DEPRECATED
+  [uid="zmailId/email,..."]  // DEPRECATED
                               // comma-separated list of zimraId or email
-                              // each value can be zimbraId or email
-  [id="zimbraId,..."]         // comma-separated list of zimbraId
+                              // each value can be zmailId or email
+  [id="zmailId,..."]         // comma-separated list of zmailId
   [name="email,..."]          // comma-separated list of email
   // For accounts listed in uid/id/name above, f/b search will be done for all calendar folders.
   // To view free/busy for a single folder in a particular account, use the <usr> format below.
   [excludeUid="UID of appointment to exclude from free/busy search"]
 >
-  [<usr [id="zimbraId] [name="email"]  // either id or email must be specified
+  [<usr [id="zmailId] [name="email"]  // either id or email must be specified
        [l="folder id"]  // calendar folder id; if omitted, get f/b on all calendar folders
   />]*
 </GetFreeBusyRequest>
 <GetFreeBusyResponse>
-  <usr id="id">  // id is always account email; it is not zimbraId as the attribute name may suggest
+  <usr id="id">  // id is always account email; it is not zmailId as the attribute name may suggest
     <f s="START_MSECS_GMT" e="END_MSECS_GMT"/>*
     <b s="START_MSECS_GMT" e="END_MSECS_GMT"/>*
     <t s="START_MSECS_GMT" e="END_MSECS_GMT"/>*
@@ -708,11 +708,11 @@ OR
 // range is marked as unknown if there was an error determining the working hours, e.g. unknown user.
 //
 <GetWorkingHoursRequest s="RANGE_START_MSECS_GMT" e="RANGE_END_MSECS_GMT"
-  [id="zimbraId,..."]         // comma-separated list of zimbraId
+  [id="zmailId,..."]         // comma-separated list of zmailId
   [name="email,..."]          // comma-separated list of email
 />
 <GetWorkingHoursResponse>
-  <usr id="id">  // id is always account email; it is not zimbraId as the attribute name may suggest
+  <usr id="id">  // id is always account email; it is not zmailId as the attribute name may suggest
     <f s="START_MSECS_GMT" e="END_MSECS_GMT"/>* // working hours
     <u s="START_MSECS_GMT" e="END_MSECS_GMT"/>* // non-working hours
     <n s="START_MSECS_GMT" e="END_MSECS_GMT"/>* // could not retrieve data for that user
@@ -978,7 +978,7 @@ creation, an INVITE_OUT_OF_DATE exception will be thrown.
   [excludeUid="UID of appointment to exclude from free/busy search"]
 >
   tz/comp/except/cancel elements (same as ExpandRecurRequest content)
-  [<usr [id="zimbraId] [name="email"]  // either id or email must be specified
+  [<usr [id="zmailId] [name="email"]  // either id or email must be specified
        [l="folder id"]  // calendar folder id; if omitted, get f/b on all calendar folders
   />]*
 </CheckRecurConflictsRequest>
@@ -1354,7 +1354,7 @@ TIMEZONES:
 ----------------
 Each iCalendar object can define custom time zone names.  For our own web
 client, there is a list of well-known time zones.  These are stored in
-LDAP.  See conf/ldap/zimbra.ldif for their definition.  The time zone ID
+LDAP.  See conf/ldap/zmail.ldif for their definition.  The time zone ID
 is the cn attribute.
 
 

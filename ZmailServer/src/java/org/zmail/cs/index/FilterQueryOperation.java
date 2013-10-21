@@ -12,14 +12,14 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.index;
+package org.zmail.cs.index;
 
 import java.io.IOException;
 import java.util.List;
 import java.util.Set;
 
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.cs.mailbox.Mailbox;
+import org.zmail.common.service.ServiceException;
+import org.zmail.cs.mailbox.Mailbox;
 
 /**
  * A {@link QueryOperation} that filters results out of the result set. The base
@@ -105,8 +105,8 @@ abstract class FilterQueryOperation extends QueryOperation {
     }
 
     @Override
-    public ZimbraHit getNext() throws ServiceException {
-        ZimbraHit hit = peekNext();
+    public ZmailHit getNext() throws ServiceException {
+        ZmailHit hit = peekNext();
         if (hit != null) {
             operation.getNext(); // skip the current hit
         }
@@ -119,7 +119,7 @@ abstract class FilterQueryOperation extends QueryOperation {
     }
 
     @Override
-    public ZimbraHit peekNext() throws ServiceException {
+    public ZmailHit peekNext() throws ServiceException {
         return operation.peekNext();
     }
 

@@ -13,7 +13,7 @@
  * ***** END LICENSE BLOCK *****
  */
 
-package com.zimbra.cs.index;
+package org.zmail.cs.index;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -21,24 +21,24 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.cs.mailbox.MailItem;
-import com.zimbra.cs.mailbox.Mailbox;
+import org.zmail.common.service.ServiceException;
+import org.zmail.cs.mailbox.MailItem;
+import org.zmail.cs.mailbox.Mailbox;
 
 /**
  * A set of UngroupedQueryResults which groups by Conversation.
  *
  * @author tim
  */
-final class ConvQueryResults extends ZimbraQueryResultsImpl {
+final class ConvQueryResults extends ZmailQueryResultsImpl {
 
-    private final ZimbraQueryResults results;
-    private ZimbraHit nextHit;
+    private final ZmailQueryResults results;
+    private ZmailHit nextHit;
     private int nextHitNo = 0;
-    private List<ZimbraHit> cachedResults = new ArrayList<ZimbraHit>();
+    private List<ZmailHit> cachedResults = new ArrayList<ZmailHit>();
     private Set<Integer> seenConvIDs = new HashSet<Integer>();
 
-    ConvQueryResults(ZimbraQueryResults results, Set<MailItem.Type> types, SortBy sort, SearchParams.Fetch fetch) {
+    ConvQueryResults(ZmailQueryResults results, Set<MailItem.Type> types, SortBy sort, SearchParams.Fetch fetch) {
         super(types, sort, fetch);
         this.results = results;
     }
@@ -53,9 +53,9 @@ final class ConvQueryResults extends ZimbraQueryResultsImpl {
      *
      * Side-Effect: always advances the SubOp pointer!
      */
-    private ZimbraHit internalGetNextHit() throws ServiceException {
+    private ZmailHit internalGetNextHit() throws ServiceException {
         while (results.hasNext()) {
-            ZimbraHit opNext = results.getNext();
+            ZmailHit opNext = results.getNext();
 
             if (!isConversation(opNext)) {
                 return opNext;
@@ -81,7 +81,7 @@ final class ConvQueryResults extends ZimbraQueryResultsImpl {
                 // iterate further: try to get all the hits for this result
                 // Conversation if they happen to be right here with the first one
                 while (results.hasNext()) {
-                    ZimbraHit nextHit = results.peekNext();
+                    ZmailHit nextHit = results.peekNext();
                     if (!isConversation(nextHit)) {
                         return curHit;
                     } else {
@@ -106,7 +106,7 @@ final class ConvQueryResults extends ZimbraQueryResultsImpl {
         return null;
     }
 
-    private boolean isConversation(ZimbraHit hit) {
+    private boolean isConversation(ZmailHit hit) {
         return (hit instanceof MessageHit || hit instanceof MessagePartHit || hit instanceof ConversationHit);
     }
 
@@ -118,7 +118,7 @@ final class ConvQueryResults extends ZimbraQueryResultsImpl {
     }
 
     @Override
-    public ZimbraHit peekNext() throws ServiceException {
+    public ZmailHit peekNext() throws ServiceException {
         bufferNextHit();
         return nextHit;
     }
@@ -133,8 +133,8 @@ final class ConvQueryResults extends ZimbraQueryResultsImpl {
     }
 
     @Override
-    public ZimbraHit getNext() throws ServiceException {
-        ZimbraHit hit = null;
+    public ZmailHit getNext() throws ServiceException {
+        ZmailHit hit = null;
         if (cachedResults.size() > nextHitNo) {
             hit = cachedResults.get(nextHitNo);
         } else if (bufferNextHit()) {
@@ -154,12 +154,12 @@ final class ConvQueryResults extends ZimbraQueryResultsImpl {
     }
 
     @Override
-    public ZimbraHit skipToHit(int hitNo) throws ServiceException {
+    public ZmailHit skipToHit(int hitNo) throws ServiceException {
         if (hitNo == 0) {
             resetIterator();
             return getNext();
         } else {
-            ZimbraHit hit = null;
+            ZmailHit hit = null;
             if (hitNo < cachedResults.size()) {
                 nextHitNo = hitNo;
             } else {

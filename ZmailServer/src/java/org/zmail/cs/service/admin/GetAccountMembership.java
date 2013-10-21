@@ -16,7 +16,7 @@
 /*
  * Created on Jun 17, 2004
  */
-package com.zimbra.cs.service.admin;
+package org.zmail.cs.service.admin;
 
 import java.util.HashMap;
 import java.util.HashSet;
@@ -24,21 +24,21 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.common.soap.AccountConstants;
-import com.zimbra.common.soap.AdminConstants;
-import com.zimbra.common.soap.Element;
-import com.zimbra.common.util.ZimbraLog;
-import com.zimbra.cs.account.Account;
-import com.zimbra.cs.account.AccountServiceException;
-import com.zimbra.cs.account.DistributionList;
-import com.zimbra.cs.account.DynamicGroup;
-import com.zimbra.cs.account.Group;
-import com.zimbra.cs.account.Provisioning;
-import com.zimbra.common.account.Key.AccountBy;
-import com.zimbra.cs.account.accesscontrol.AdminRight;
-import com.zimbra.cs.account.accesscontrol.Rights.Admin;
-import com.zimbra.soap.ZimbraSoapContext;
+import org.zmail.common.service.ServiceException;
+import org.zmail.common.soap.AccountConstants;
+import org.zmail.common.soap.AdminConstants;
+import org.zmail.common.soap.Element;
+import org.zmail.common.util.ZmailLog;
+import org.zmail.cs.account.Account;
+import org.zmail.cs.account.AccountServiceException;
+import org.zmail.cs.account.DistributionList;
+import org.zmail.cs.account.DynamicGroup;
+import org.zmail.cs.account.Group;
+import org.zmail.cs.account.Provisioning;
+import org.zmail.common.account.Key.AccountBy;
+import org.zmail.cs.account.accesscontrol.AdminRight;
+import org.zmail.cs.account.accesscontrol.Rights.Admin;
+import org.zmail.soap.ZmailSoapContext;
 
 /**
  * @author schemers
@@ -54,7 +54,7 @@ public class GetAccountMembership extends AdminDocumentHandler {
 
     public Element handle(Element request, Map<String, Object> context) throws ServiceException {
 
-        ZimbraSoapContext zsc = getZimbraSoapContext(context);
+        ZmailSoapContext zsc = getZmailSoapContext(context);
         Provisioning prov = Provisioning.getInstance();
 
         Element a = request.getElement(AdminConstants.E_ACCOUNT);
@@ -89,13 +89,13 @@ public class GetAccountMembership extends AdminDocumentHandler {
                     checkDistributionListRight(zsc, (DistributionList) group, needGetAttrsRight());
                 }
                 
-                String isAdminGroup = group.getAttr(Provisioning.A_zimbraIsAdminGroup);
+                String isAdminGroup = group.getAttr(Provisioning.A_zmailIsAdminGroup);
                 if (isAdminGroup != null) {
-                    eDL.addElement(AdminConstants.E_A).addAttribute(AdminConstants.A_N, Provisioning.A_zimbraIsAdminGroup).setText(isAdminGroup);
+                    eDL.addElement(AdminConstants.E_A).addAttribute(AdminConstants.A_N, Provisioning.A_zmailIsAdminGroup).setText(isAdminGroup);
                 }
             } catch (ServiceException e) {
                 if (ServiceException.PERM_DENIED.equals(e.getCode())) {
-                    ZimbraLog.acl.warn("no permission to view " + Provisioning.A_zimbraIsAdminGroup + " of dl " + group.getName());
+                    ZmailLog.acl.warn("no permission to view " + Provisioning.A_zmailIsAdminGroup + " of dl " + group.getName());
                 }
             }
         }
@@ -104,7 +104,7 @@ public class GetAccountMembership extends AdminDocumentHandler {
     
     private Set<String> needGetAttrsRight() {
         Set<String> attrsNeeded = new HashSet<String>();
-        attrsNeeded.add(Provisioning.A_zimbraIsAdminGroup);
+        attrsNeeded.add(Provisioning.A_zmailIsAdminGroup);
         return attrsNeeded;
     }
     
@@ -112,6 +112,6 @@ public class GetAccountMembership extends AdminDocumentHandler {
     public void docRights(List<AdminRight> relatedRights, List<String> notes) {
         relatedRights.add(Admin.R_getAccountMembership);
         notes.add("If the authed admin has get attr right on  distribution list attr " + 
-                Provisioning.A_zimbraIsAdminGroup + ", it is returned in the response if set.");
+                Provisioning.A_zmailIsAdminGroup + ", it is returned in the response if set.");
     }
 }

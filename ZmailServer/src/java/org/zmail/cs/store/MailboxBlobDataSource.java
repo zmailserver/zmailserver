@@ -13,7 +13,7 @@
  * ***** END LICENSE BLOCK *****
  */
 
-package com.zimbra.cs.store;
+package org.zmail.cs.store;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -21,9 +21,9 @@ import java.io.OutputStream;
 
 import javax.activation.DataSource;
 
-import com.zimbra.common.mime.MimeConstants;
+import org.zmail.common.mime.MimeConstants;
 
-// TODO: Consolidate this class with com.zimbra.cs.mime.MailboxBlobDataSource.
+// TODO: Consolidate this class with org.zmail.cs.mime.MailboxBlobDataSource.
 // Not doing it now to minimize impact on 6.0.x. 
 public class MailboxBlobDataSource implements DataSource {
     

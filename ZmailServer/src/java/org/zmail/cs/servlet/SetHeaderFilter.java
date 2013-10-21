@@ -12,17 +12,17 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.servlet;
+package org.zmail.cs.servlet;
 
-import com.zimbra.cs.account.soap.SoapProvisioning;
-import com.zimbra.cs.account.Entry;
-import com.zimbra.common.account.ZAttrProvisioning;
-import com.zimbra.common.account.Key;
-import com.zimbra.common.localconfig.LC;
-import com.zimbra.common.soap.AdminConstants;
-import com.zimbra.common.util.ZimbraLog;
-import com.zimbra.common.util.HttpUtil;
-import com.zimbra.common.util.Log;
+import org.zmail.cs.account.soap.SoapProvisioning;
+import org.zmail.cs.account.Entry;
+import org.zmail.common.account.ZAttrProvisioning;
+import org.zmail.common.account.Key;
+import org.zmail.common.localconfig.LC;
+import org.zmail.common.soap.AdminConstants;
+import org.zmail.common.util.ZmailLog;
+import org.zmail.common.util.HttpUtil;
+import org.zmail.common.util.Log;
 
 import javax.servlet.Filter;
 import javax.servlet.FilterChain;
@@ -40,13 +40,13 @@ import java.util.regex.Matcher;
 
 /** Sets headers for request. */
 public class SetHeaderFilter implements Filter {
-    private static final Log LOG = ZimbraLog.misc;
+    private static final Log LOG = ZmailLog.misc;
     private static final KeyValue[] NO_HEADERS = {};
     private static final ConcurrentMap<String, KeyValue[]> RESPONSE_HEADERS = new ConcurrentHashMap<String, KeyValue[]>();
 
-    public static final String P_RESPONSE_HEADERS_ENABLED = "zimbraResponseHeader.enabled";
+    public static final String P_RESPONSE_HEADERS_ENABLED = "zmailResponseHeader.enabled";
     public static final Pattern RE_HEADER = Pattern.compile("^([^:]+):\\s+(.*)$");
-    public static final String UNKNOWN_HEADER_NAME = "X-Zimbra-Unknown-Header";
+    public static final String UNKNOWN_HEADER_NAME = "X-Zmail-Unknown-Header";
 
     private boolean isResponseHeadersEnabled = true;
 
@@ -77,11 +77,11 @@ public class SetHeaderFilter implements Filter {
      * @throws ServletException subclass may throw
      */
     public boolean doFilter(ServletRequest request, ServletResponse response) throws IOException, ServletException {
-        addZimbraResponseHeaders(request, response);
+        addZmailResponseHeaders(request, response);
         return true;
     }
 
-    private void addZimbraResponseHeaders(ServletRequest request, ServletResponse response) {
+    private void addZmailResponseHeaders(ServletRequest request, ServletResponse response) {
         if (!isResponseHeadersEnabled) {
             return;
         }
@@ -101,15 +101,15 @@ public class SetHeaderFilter implements Filter {
             headers = NO_HEADERS;
             try {
                 SoapProvisioning provisioning = new SoapProvisioning();
-                String soapUri = LC.zimbra_admin_service_scheme.value() + LC.zimbra_zmprov_default_soap_server.value() +
-                    ':' + LC.zimbra_admin_service_port.intValue() + AdminConstants.ADMIN_SERVICE_URI;
+                String soapUri = LC.zmail_admin_service_scheme.value() + LC.zmail_zmprov_default_soap_server.value() +
+                    ':' + LC.zmail_admin_service_port.intValue() + AdminConstants.ADMIN_SERVICE_URI;
                 provisioning.soapSetURI(soapUri);
                 Entry info = provisioning.getDomainInfo(Key.DomainBy.virtualHostname, serverName);
                 if (info == null) {
                     info = provisioning.getConfig();
                 }
                 if (info != null) {
-                    String[] values = info.getMultiAttr(ZAttrProvisioning.A_zimbraResponseHeader, true);
+                    String[] values = info.getMultiAttr(ZAttrProvisioning.A_zmailResponseHeader, true);
                     headers = new KeyValue[values.length];
                     for (int i = 0; i < values.length; i++) {
                         String value = values[i];

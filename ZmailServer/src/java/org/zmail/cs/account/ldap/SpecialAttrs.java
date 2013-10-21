@@ -12,26 +12,26 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.account.ldap;
+package org.zmail.cs.account.ldap;
 
 import java.util.Map;
 
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.cs.account.Provisioning;
-import com.zimbra.cs.ldap.LdapUtil;
+import org.zmail.common.service.ServiceException;
+import org.zmail.cs.account.Provisioning;
+import org.zmail.cs.ldap.LdapUtil;
 
 public class SpecialAttrs {
     
-    // special Zimbra attrs
-    public static final String SA_zimbraId  = Provisioning.A_zimbraId;
+    // special Zmail attrs
+    public static final String SA_zmailId  = Provisioning.A_zmailId;
     
     // pseudo attrs
     public static final String PA_ldapBase    = "ldap.baseDN";
     
-    private String mZimbraId;
+    private String mZmailId;
     private String mLdapBaseDn;
     
-    public String getZimbraId()     { return mZimbraId; }
+    public String getZmailId()     { return mZmailId; }
     public String getLdapBaseDn()   { return mLdapBaseDn; }
     
     public static String getSingleValuedAttr(Map<String, Object> attrs, String attr) throws ServiceException {
@@ -45,19 +45,19 @@ public class SpecialAttrs {
             return (String)value;
     }
     
-    public void handleZimbraId(Map<String, Object> attrs) throws ServiceException  {
-        String zimbraId = getSingleValuedAttr(attrs, SA_zimbraId);
+    public void handleZmailId(Map<String, Object> attrs) throws ServiceException  {
+        String zmailId = getSingleValuedAttr(attrs, SA_zmailId);
         
-        if (zimbraId != null) {
+        if (zmailId != null) {
             // present, validate if it is a valid uuid
             try {
-                if (!LdapUtil.isValidUUID(zimbraId))
-                throw ServiceException.INVALID_REQUEST(zimbraId + " is not a valid UUID", null);
+                if (!LdapUtil.isValidUUID(zmailId))
+                throw ServiceException.INVALID_REQUEST(zmailId + " is not a valid UUID", null);
             } catch (IllegalArgumentException e) {
-                throw ServiceException.INVALID_REQUEST(zimbraId + " is not a valid UUID", e);
+                throw ServiceException.INVALID_REQUEST(zmailId + " is not a valid UUID", e);
             }
         
-            /* check for uniqueness of the zimbraId
+            /* check for uniqueness of the zmailId
             * 
             * for now we go with GIGO (garbage in, garbage out) and not check, since there is a race condition 
             * that an entry is added after our check.
@@ -70,8 +70,8 @@ public class SpecialAttrs {
             */
         
             // remove it from the attr list
-            attrs.remove(SA_zimbraId);
-            mZimbraId = zimbraId;
+            attrs.remove(SA_zmailId);
+            mZmailId = zmailId;
         }
     }
         

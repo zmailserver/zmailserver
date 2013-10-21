@@ -12,20 +12,20 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.redolog.op;
+package org.zmail.cs.redolog.op;
 
 import java.io.IOException;
 import java.util.List;
 
-import com.zimbra.common.util.ZimbraLog;
-import com.zimbra.cs.index.IndexDocument;
-import com.zimbra.cs.mailbox.MailItem;
-import com.zimbra.cs.mailbox.MailServiceException;
-import com.zimbra.cs.mailbox.Mailbox;
-import com.zimbra.cs.mailbox.MailboxManager;
-import com.zimbra.cs.mailbox.MailboxOperation;
-import com.zimbra.cs.redolog.RedoLogInput;
-import com.zimbra.cs.redolog.RedoLogOutput;
+import org.zmail.common.util.ZmailLog;
+import org.zmail.cs.index.IndexDocument;
+import org.zmail.cs.mailbox.MailItem;
+import org.zmail.cs.mailbox.MailServiceException;
+import org.zmail.cs.mailbox.Mailbox;
+import org.zmail.cs.mailbox.MailboxManager;
+import org.zmail.cs.mailbox.MailboxOperation;
+import org.zmail.cs.redolog.RedoLogInput;
+import org.zmail.cs.redolog.RedoLogOutput;
 
 /**
  * @since 2004. 7. 21.
@@ -110,7 +110,7 @@ public class IndexItem extends RedoableOp {
             mbox.index.redoIndexItem(item, mId, docList);
         } catch (Exception e) {
             // TODO - update the item and set the item's "unindexed" flag
-            ZimbraLog.index.info("Caught exception attempting to replay IndexItem for ID "+mId+" item will not be indexed", e);
+            ZmailLog.index.info("Caught exception attempting to replay IndexItem for ID "+mId+" item will not be indexed", e);
         }
     }
 
@@ -157,8 +157,8 @@ public class IndexItem extends RedoableOp {
      * calls.
      */
     @Override public synchronized void commit() {
-        if (ZimbraLog.index.isDebugEnabled())
-            ZimbraLog.index.debug(this.toString()+" committed");
+        if (ZmailLog.index.isDebugEnabled())
+            ZmailLog.index.debug(this.toString()+" committed");
 
         // Don't check mCommitAllowed here.  It's the responsibility of
         // the caller.
@@ -194,9 +194,9 @@ public class IndexItem extends RedoableOp {
             if (mParentOp != null)
                 mParentOp.addChainedOp(this);
         } else {
-            if (ZimbraLog.index.isDebugEnabled()){
+            if (ZmailLog.index.isDebugEnabled()){
                 if (mAttachedToParent && !mCommitAllowed) {
-                    ZimbraLog.index.debug("Committing because attachToParent called twice!");
+                    ZmailLog.index.debug("Committing because attachToParent called twice!");
                 }
             }
             commit();

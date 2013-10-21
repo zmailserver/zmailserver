@@ -12,7 +12,7 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.service.admin;
+package org.zmail.cs.service.admin;
 
 import java.io.BufferedReader;
 import java.io.ByteArrayInputStream;
@@ -26,20 +26,20 @@ import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import com.zimbra.common.account.Key;
-import com.zimbra.common.account.Key.ServerBy;
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.common.soap.AdminConstants;
-import com.zimbra.common.soap.Element;
-import com.zimbra.common.util.StringUtil;
-import com.zimbra.common.util.ZimbraLog;
-import com.zimbra.cs.account.Provisioning;
-import com.zimbra.cs.account.Server;
-import com.zimbra.cs.account.accesscontrol.AdminRight;
-import com.zimbra.cs.rmgmt.RemoteCommands;
-import com.zimbra.cs.rmgmt.RemoteManager;
-import com.zimbra.cs.rmgmt.RemoteResult;
-import com.zimbra.soap.ZimbraSoapContext;
+import org.zmail.common.account.Key;
+import org.zmail.common.account.Key.ServerBy;
+import org.zmail.common.service.ServiceException;
+import org.zmail.common.soap.AdminConstants;
+import org.zmail.common.soap.Element;
+import org.zmail.common.util.StringUtil;
+import org.zmail.common.util.ZmailLog;
+import org.zmail.cs.account.Provisioning;
+import org.zmail.cs.account.Server;
+import org.zmail.cs.account.accesscontrol.AdminRight;
+import org.zmail.cs.rmgmt.RemoteCommands;
+import org.zmail.cs.rmgmt.RemoteManager;
+import org.zmail.cs.rmgmt.RemoteResult;
+import org.zmail.soap.ZmailSoapContext;
 
 /**
  * @author Greg Solovyev
@@ -54,7 +54,7 @@ public class GetServerNIFs extends AdminDocumentHandler {
 	
 	public Element handle(Element request, Map<String, Object> context)
 			throws ServiceException {
-		ZimbraSoapContext lc = getZimbraSoapContext(context);
+		ZmailSoapContext lc = getZmailSoapContext(context);
 
 		String ipAddressType = request.getAttribute(AdminConstants.A_TYPE, null);
 		boolean ipV4 = false, ipV6 = false;

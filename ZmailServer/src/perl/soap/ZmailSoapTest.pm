@@ -13,11 +13,11 @@
 # ***** END LICENSE BLOCK *****
 #
 
-# ZimbraSoapTest package
+# ZmailSoapTest package
 #
 # a bunch of not-general-purpose code to make it easy to write short
-# perl test scripts against the Zimbra server
-package ZimbraSoapTest;
+# perl test scripts against the Zmail server
+package ZmailSoapTest;
 
 use strict;
 use warnings;
@@ -113,7 +113,7 @@ sub invokeAdmin
 sub setAuthContext
 {
   my ($self, $authtoken, $sessionId, $opts) = @_;
-  $self->{CONTEXT} = $self->soap()->zimbraContext($authtoken, $sessionId, 1, $opts);
+  $self->{CONTEXT} = $self->soap()->zmailContext($authtoken, $sessionId, 1, $opts);
 }
 
 

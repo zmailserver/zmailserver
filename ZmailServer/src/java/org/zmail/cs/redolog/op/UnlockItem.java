@@ -12,12 +12,12 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.redolog.op;
+package org.zmail.cs.redolog.op;
 
-import com.zimbra.cs.mailbox.MailItem;
-import com.zimbra.cs.mailbox.MailboxManager;
-import com.zimbra.cs.mailbox.Mailbox;
-import com.zimbra.cs.mailbox.MailboxOperation;
+import org.zmail.cs.mailbox.MailItem;
+import org.zmail.cs.mailbox.MailboxManager;
+import org.zmail.cs.mailbox.Mailbox;
+import org.zmail.cs.mailbox.MailboxOperation;
 
 public class UnlockItem extends LockItem {
 

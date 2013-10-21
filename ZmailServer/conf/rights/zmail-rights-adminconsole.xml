@@ -2,8 +2,8 @@
 
 <rights>
 
-<include file="zimbra-rights.xml"/>
-<include file="zimbra-rights-roles.xml"/>
+<include file="zmail-rights.xml"/>
+<include file="zmail-rights-roles.xml"/>
 <include file="adminconsole-ui.xml"/>
 
 <!--
@@ -20,18 +20,18 @@
     <a n="initials"/>
     <a n="sn"/>
     <a n="displayName"/>
-    <a n="zimbraMailCanonicalAddress"/>
-    <a n="zimbraHideInGal"/>
-    <a n="zimbraAccountStatus"/>
-    <!-- <a n="zimbraCOSId"/> -->
-    <!-- <a n="zimbraIsAdminAccount -->
-    <a n="zimbraIsDelegatedAdminAccount"/>
+    <a n="zmailMailCanonicalAddress"/>
+    <a n="zmailHideInGal"/>
+    <a n="zmailAccountStatus"/>
+    <!-- <a n="zmailCOSId"/> -->
+    <!-- <a n="zmailIsAdminAccount -->
+    <a n="zmailIsDelegatedAdminAccount"/>
     <!-- admin groups? -->
-    <a n="zimbraDomainAdminMaxMailQuota"/>
+    <a n="zmailDomainAdminMaxMailQuota"/>
     <!-- rights to change password -->
-    <a n="zimbraPasswordMustChange"/>
+    <a n="zmailPasswordMustChange"/>
     <a n="description"/>
-    <a n="zimbraNotes"/>
+    <a n="zmailNotes"/>
   </attrs>
 </right>
 
@@ -45,19 +45,19 @@
     <a n="cn"/>
     <a n="sn"/>
     <a n="displayName"/>
-    <a n="zimbraMailCanonicalAddress"/>
-    <a n="zimbraHideInGal"/>
-    <a n="zimbraAccountStatus"/>
-    <!-- <a n="zimbraCOSId"/> -->
-    <!-- <a n="zimbraIsAdminAccount -->
-    <a n="zimbraIsDelegatedAdminAccount"/>
+    <a n="zmailMailCanonicalAddress"/>
+    <a n="zmailHideInGal"/>
+    <a n="zmailAccountStatus"/>
+    <!-- <a n="zmailCOSId"/> -->
+    <!-- <a n="zmailIsAdminAccount -->
+    <a n="zmailIsDelegatedAdminAccount"/>
     <!-- admin groups? -->
-    <a n="zimbraDomainAdminMaxMailQuota"/>
+    <a n="zmailDomainAdminMaxMailQuota"/>
     <!-- rights to change password -->
-    <a n="zimbraPasswordMustChange"/>
+    <a n="zmailPasswordMustChange"/>
     <a n="description"/>
-    <a n="zimbraNotes"/>
-    <a n="zimbraLastLogonTimestamp"/>
+    <a n="zmailNotes"/>
+    <a n="zmailLastLogonTimestamp"/>
   </attrs>
 </right>
 
@@ -145,14 +145,14 @@
   <desc> Admin Console set attr rights for Accounts Aliases Tab </desc>
   <ui name="Manage-Accounts-Account-Aliases(modify)"/>
   <attrs>
-    <a n="zimbraMailAlias"/>
+    <a n="zmailMailAlias"/>
   </attrs>
 </right>
 <right name="viewAdminConsoleAccountsAliasesTab" type="getAttrs" targetType="account">
   <desc> Admin Console view attr rights for Accounts Aliases Tab </desc>
   <ui name="Manage-Accounts-Account-Aliases(view)"/>
   <attrs>
-    <a n="zimbraMailAlias"/>
+    <a n="zmailMailAlias"/>
   </attrs>
 </right>
 <right name="adminConsoleAccountsAliasesTabRights" type="combo">
@@ -173,84 +173,84 @@
   <desc> Admin Console set attr rights for Accounts Features Tab </desc>
   <ui name="Manage-Accounts-Account-Features(modify)"/>
   <attrs>
-    <a n="zimbraImapEnabled"/>
-    <a n="zimbraImapEnabled"/>
-    <a n="zimbraPop3Enabled"/>
-    <a n="zimbraFeatureReadReceiptsEnabled"/>
-    <a n="zimbraFeatureMailEnabled"/>
-    <a n="zimbraFeatureContactsEnabled"/>
-    <a n="zimbraFeatureCalendarEnabled"/>
-    <a n="zimbraFeatureTasksEnabled"/>
-    <a n="zimbraFeatureNotebookEnabled"/>
-    <a n="zimbraFeatureBriefcasesEnabled"/>
-    <a n="zimbraFeatureIMEnabled"/>
-    <a n="zimbraFeatureOptionsEnabled"/>
-    <a n="zimbraFeatureTaggingEnabled"/>
-    <a n="zimbraFeatureSharingEnabled"/>
-    <a n="zimbraFeatureChangePasswordEnabled"/>
-    <a n="zimbraFeatureSkinChangeEnabled"/>
-    <a n="zimbraFeatureHtmlComposeEnabled"/>
-    <a n="zimbraFeatureShortcutAliasesEnabled"/>
-    <a n="zimbraFeatureGalEnabled"/>
-    <a n="zimbraFeatureGalAutoCompleteEnabled"/>
-    <a n="zimbraFeatureMailPriorityEnabled"/>
-    <a n="zimbraFeatureFlaggingEnabled"/>
-    <a n="zimbraFeatureImapDataSourceEnabled"/>
-    <a n="zimbraFeaturePop3DataSourceEnabled"/>
-    <a n="zimbraFeatureConversationsEnabled"/>
-    <a n="zimbraFeatureFiltersEnabled"/>
-    <a n="zimbraFeatureOutOfOfficeReplyEnabled"/>
-    <a n="zimbraFeatureNewMailNotificationEnabled"/>
+    <a n="zmailImapEnabled"/>
+    <a n="zmailImapEnabled"/>
+    <a n="zmailPop3Enabled"/>
+    <a n="zmailFeatureReadReceiptsEnabled"/>
+    <a n="zmailFeatureMailEnabled"/>
+    <a n="zmailFeatureContactsEnabled"/>
+    <a n="zmailFeatureCalendarEnabled"/>
+    <a n="zmailFeatureTasksEnabled"/>
+    <a n="zmailFeatureNotebookEnabled"/>
+    <a n="zmailFeatureBriefcasesEnabled"/>
+    <a n="zmailFeatureIMEnabled"/>
+    <a n="zmailFeatureOptionsEnabled"/>
+    <a n="zmailFeatureTaggingEnabled"/>
+    <a n="zmailFeatureSharingEnabled"/>
+    <a n="zmailFeatureChangePasswordEnabled"/>
+    <a n="zmailFeatureSkinChangeEnabled"/>
+    <a n="zmailFeatureHtmlComposeEnabled"/>
+    <a n="zmailFeatureShortcutAliasesEnabled"/>
+    <a n="zmailFeatureGalEnabled"/>
+    <a n="zmailFeatureGalAutoCompleteEnabled"/>
+    <a n="zmailFeatureMailPriorityEnabled"/>
+    <a n="zmailFeatureFlaggingEnabled"/>
+    <a n="zmailFeatureImapDataSourceEnabled"/>
+    <a n="zmailFeaturePop3DataSourceEnabled"/>
+    <a n="zmailFeatureConversationsEnabled"/>
+    <a n="zmailFeatureFiltersEnabled"/>
+    <a n="zmailFeatureOutOfOfficeReplyEnabled"/>
+    <a n="zmailFeatureNewMailNotificationEnabled"/>
       <!-- deprecated PollingInterval -->
-    <a n="zimbraFeatureMailPollingIntervalPreferenceEnabled"/>
-    <a n="zimbraFeatureIdentitiesEnabled"/>
-    <a n="zimbraFeatureGroupCalendarEnabled"/>
-    <a n="zimbraFeatureInstantNotify"/>
-    <a n="zimbraFeatureAdvancedSearchEnabled"/>
-    <a n="zimbraFeatureSavedSearchesEnabled"/>
-    <a n="zimbraFeatureInitialSearchPreferenceEnabled"/>
+    <a n="zmailFeatureMailPollingIntervalPreferenceEnabled"/>
+    <a n="zmailFeatureIdentitiesEnabled"/>
+    <a n="zmailFeatureGroupCalendarEnabled"/>
+    <a n="zmailFeatureInstantNotify"/>
+    <a n="zmailFeatureAdvancedSearchEnabled"/>
+    <a n="zmailFeatureSavedSearchesEnabled"/>
+    <a n="zmailFeatureInitialSearchPreferenceEnabled"/>
   </attrs>
 </right>
 <right name="viewAdminConsoleAccountsFeaturesTab" type="getAttrs" targetType="account">
   <desc> Admin Console view attr rights for Accounts Features Tab </desc>
   <ui name="Manage-Accounts-Account-Features(view)"/>
   <attrs>
-    <a n="zimbraImapEnabled"/>
-    <a n="zimbraImapEnabled"/>
-    <a n="zimbraPop3Enabled"/>
-    <a n="zimbraFeatureReadReceiptsEnabled"/>
-    <a n="zimbraFeatureMailEnabled"/>
-    <a n="zimbraFeatureContactsEnabled"/>
-    <a n="zimbraFeatureCalendarEnabled"/>
-    <a n="zimbraFeatureTasksEnabled"/>
-    <a n="zimbraFeatureNotebookEnabled"/>
-    <a n="zimbraFeatureBriefcasesEnabled"/>
-    <a n="zimbraFeatureIMEnabled"/>
-    <a n="zimbraFeatureOptionsEnabled"/>
-    <a n="zimbraFeatureTaggingEnabled"/>
-    <a n="zimbraFeatureSharingEnabled"/>
-    <a n="zimbraFeatureChangePasswordEnabled"/>
-    <a n="zimbraFeatureSkinChangeEnabled"/>
-    <a n="zimbraFeatureHtmlComposeEnabled"/>
-    <a n="zimbraFeatureShortcutAliasesEnabled"/>
-    <a n="zimbraFeatureGalEnabled"/>
-    <a n="zimbraFeatureGalAutoCompleteEnabled"/>
-    <a n="zimbraFeatureMailPriorityEnabled"/>
-    <a n="zimbraFeatureFlaggingEnabled"/>
-    <a n="zimbraFeatureImapDataSourceEnabled"/>
-    <a n="zimbraFeaturePop3DataSourceEnabled"/>
-    <a n="zimbraFeatureConversationsEnabled"/>
-    <a n="zimbraFeatureFiltersEnabled"/>
-    <a n="zimbraFeatureOutOfOfficeReplyEnabled"/>
-    <a n="zimbraFeatureNewMailNotificationEnabled"/>
+    <a n="zmailImapEnabled"/>
+    <a n="zmailImapEnabled"/>
+    <a n="zmailPop3Enabled"/>
+    <a n="zmailFeatureReadReceiptsEnabled"/>
+    <a n="zmailFeatureMailEnabled"/>
+    <a n="zmailFeatureContactsEnabled"/>
+    <a n="zmailFeatureCalendarEnabled"/>
+    <a n="zmailFeatureTasksEnabled"/>
+    <a n="zmailFeatureNotebookEnabled"/>
+    <a n="zmailFeatureBriefcasesEnabled"/>
+    <a n="zmailFeatureIMEnabled"/>
+    <a n="zmailFeatureOptionsEnabled"/>
+    <a n="zmailFeatureTaggingEnabled"/>
+    <a n="zmailFeatureSharingEnabled"/>
+    <a n="zmailFeatureChangePasswordEnabled"/>
+    <a n="zmailFeatureSkinChangeEnabled"/>
+    <a n="zmailFeatureHtmlComposeEnabled"/>
+    <a n="zmailFeatureShortcutAliasesEnabled"/>
+    <a n="zmailFeatureGalEnabled"/>
+    <a n="zmailFeatureGalAutoCompleteEnabled"/>
+    <a n="zmailFeatureMailPriorityEnabled"/>
+    <a n="zmailFeatureFlaggingEnabled"/>
+    <a n="zmailFeatureImapDataSourceEnabled"/>
+    <a n="zmailFeaturePop3DataSourceEnabled"/>
+    <a n="zmailFeatureConversationsEnabled"/>
+    <a n="zmailFeatureFiltersEnabled"/>
+    <a n="zmailFeatureOutOfOfficeReplyEnabled"/>
+    <a n="zmailFeatureNewMailNotificationEnabled"/>
       <!-- deprecated PollingInterval -->
-    <a n="zimbraFeatureMailPollingIntervalPreferenceEnabled"/>
-    <a n="zimbraFeatureIdentitiesEnabled"/>
-    <a n="zimbraFeatureGroupCalendarEnabled"/>
-    <a n="zimbraFeatureInstantNotify"/>
-    <a n="zimbraFeatureAdvancedSearchEnabled"/>
-    <a n="zimbraFeatureSavedSearchesEnabled"/>
-    <a n="zimbraFeatureInitialSearchPreferenceEnabled"/>
+    <a n="zmailFeatureMailPollingIntervalPreferenceEnabled"/>
+    <a n="zmailFeatureIdentitiesEnabled"/>
+    <a n="zmailFeatureGroupCalendarEnabled"/>
+    <a n="zmailFeatureInstantNotify"/>
+    <a n="zmailFeatureAdvancedSearchEnabled"/>
+    <a n="zmailFeatureSavedSearchesEnabled"/>
+    <a n="zmailFeatureInitialSearchPreferenceEnabled"/>
   </attrs>
 </right>
 <right name="adminConsoleAccountsFeaturesTabRights" type="combo">
@@ -267,22 +267,22 @@
   <desc> Admin Console set attr rights for Accounts Forwarding Tab </desc>
   <ui name="Manage-Accounts-Account-Forwarding(modify)"/>
   <attrs>
-    <a n="zimbraFeatureMailForwardingEnabled"/>
-    <a n="zimbraPrefMailLocalDeliveryDisabled"/>
-    <a n="zimbraMailForwardingAddress"/>
-    <a n="zimbraPrefMailForwardingAddress"/>
-    <a n="zimbraPrefCalendarForwardInvitesTo"/>
+    <a n="zmailFeatureMailForwardingEnabled"/>
+    <a n="zmailPrefMailLocalDeliveryDisabled"/>
+    <a n="zmailMailForwardingAddress"/>
+    <a n="zmailPrefMailForwardingAddress"/>
+    <a n="zmailPrefCalendarForwardInvitesTo"/>
   </attrs>
 </right>
 <right name="viewAdminConsoleAccountsForwardingTab" type="getAttrs" targetType="account">
   <desc> Admin Console view attr rights for Accounts Forwarding Tab </desc>
   <ui name="Manage-Accounts-Account-Forwarding(view)"/>
   <attrs>
-    <a n="zimbraFeatureMailForwardingEnabled"/>
-    <a n="zimbraPrefMailLocalDeliveryDisabled"/>
-    <a n="zimbraMailForwardingAddress"/>
-    <a n="zimbraPrefMailForwardingAddress"/>
-    <a n="zimbraPrefCalendarForwardInvitesTo"/>
+    <a n="zmailFeatureMailForwardingEnabled"/>
+    <a n="zmailPrefMailLocalDeliveryDisabled"/>
+    <a n="zmailMailForwardingAddress"/>
+    <a n="zmailPrefMailForwardingAddress"/>
+    <a n="zmailPrefCalendarForwardInvitesTo"/>
   </attrs>
 </right>
 <right name="adminConsoleAccountsForwardingTabRights" type="combo">
@@ -300,156 +300,156 @@
   <desc> Admin Console set attr rights for Accounts Preferences Tab </desc>
   <ui name="Manage-Accounts-Account-Preferences(modify)"/>
   <attrs>
-    <a n="zimbraPrefAppleIcalDelegationEnabled"/>
-    <a n="zimbraPrefCalendarShowPastDueReminders"/>
-    <a n="zimbraPrefCalendarToasterEnabled"/>
-    <a n="zimbraPrefCalendarAllowCancelEmailToSelf"/>
-    <a n="zimbraPrefCalendarAllowPublishMethodInvite"/>
-    <a n="zimbraPrefCalendarAllowForwardedInvite"/>
-    <a n="zimbraPrefCalendarReminderFlashTitle"/>
-    <a n="zimbraPrefCalendarNotifyDelegatedChanges"/>
-    <a n="zimbraPrefCalendarFirstDayOfWeek"/>
-    <a n="zimbraPrefCalendarInitialView"/>
-    <a n="zimbraPrefCalendarForwardInvitesTo"/>
-    <a n="zimbraPrefClientType"/>
-    <a n="zimbraPrefTimeZoneId"/>
-    <a n="zimbraAllowAnyFromAddress"/>
-    <a n="zimbraAllowFromAddress"/>
-    <a n="zimbraPrefCalendarAlwaysShowMiniCal"/>
-    <a n="zimbraPrefCalendarUseQuickAdd"/>
-    <a n="zimbraPrefSaveToSent"/>
-    <a n="zimbraPrefMailSignature"/>
-    <a n="zimbraPrefMailSignatureEnabled"/>
-    <a n="zimbraPrefSentMailFolder"/>
-    <a n="zimbraPrefGroupMailBy"/>
-    <a n="zimbraPrefIncludeSpamInSearch"/>
-    <a n="zimbraPrefIncludeTrashInSearch"/>
-    <a n="zimbraPrefMailInitialSearch"/>
-    <a n="zimbraMaxMailItemsPerPage"/>
-    <a n="zimbraPrefMailItemsPerPage"/>
-    <a n="zimbraPrefMailPollingInterval"/>
-    <a n="zimbraPrefMailFlashTitle"/>
-    <a n="zimbraPrefMailFlashIcon"/>
-    <a n="zimbraPrefMailSoundsEnabled"/>
-    <a n="zimbraMailMinPollingInterval"/>
-    <a n="zimbraPrefOutOfOfficeFromDate"/>
-    <a n="zimbraPrefOutOfOfficeUntilDate"/>
-    <a n="zimbraPrefOutOfOfficeReply"/>
-    <a n="zimbraPrefOutOfOfficeReplyEnabled"/>
-    <a n="zimbraPrefReplyToAddress"/>
-    <a n="zimbraPrefUseKeyboardShortcuts"/>
-    <a n="zimbraPrefContactsPerPage"/>
-    <a n="zimbraMemberOf"/>
-    <a n="zimbraPrefComposeInNewWindow"/>
-    <a n="zimbraPrefForwardReplyInOriginalFormat"/>
-    <a n="zimbraPrefAutoAddAddressEnabled"/>
-    <a n="zimbraPrefComposeFormat"/>
-    <a n="zimbraPrefMessageViewHtmlPreferred"/>
-    <a n="zimbraPrefNewMailNotificationAddress"/>
-    <a n="zimbraPrefNewMailNotificationEnabled"/>
-    <a n="zimbraPrefOutOfOfficeReply"/>
-    <a n="zimbraPrefShowSearchString"/>
-    <a n="zimbraPrefMailSignatureStyle"/>
-    <a n="zimbraPrefUseTimeZoneListInCalendar"/>
-    <a n="zimbraPrefImapSearchFoldersEnabled"/>
-    <a n="zimbraPrefMailForwardingAddress"/>
-    <a n="zimbraPrefMailLocalDeliveryDisabled"/>
-    <a n="zimbraPrefCalendarApptReminderWarningTime"/>
-    <a n="zimbraPrefSkin"/>
-    <a n="zimbraPrefGalAutoCompleteEnabled"/>
-    <a n="zimbraPrefWarnOnExit"/>
-    <a n="zimbraPrefShowSelectionCheckbox"/>
-    <a n="zimbraPrefHtmlEditorDefaultFontSize"/>
-    <a n="zimbraPrefHtmlEditorDefaultFontFamily"/>
-    <a n="zimbraPrefHtmlEditorDefaultFontColor"/>
-    <a n="zimbraMailSignatureMaxLength"/>
-    <a n="zimbraPrefDisplayExternalImages" />
-    <a n="zimbraPrefOutOfOfficeCacheDuration"/>
-    <a n="zimbraPrefMailDefaultCharset"/>
-    <a n="zimbraPrefLocale"/>
-    <a n="zimbraJunkMessagesIndexingEnabled"/>
-    <a n="zimbraPrefMailSendReadReceipts"/>
-    <a n="zimbraPrefReadReceiptsToAddress"/>
-    <a n="zimbraPrefAdminConsoleWarnOnExit" />
-    <a n="zimbraPrefMandatorySpellCheckEnabled"/>
+    <a n="zmailPrefAppleIcalDelegationEnabled"/>
+    <a n="zmailPrefCalendarShowPastDueReminders"/>
+    <a n="zmailPrefCalendarToasterEnabled"/>
+    <a n="zmailPrefCalendarAllowCancelEmailToSelf"/>
+    <a n="zmailPrefCalendarAllowPublishMethodInvite"/>
+    <a n="zmailPrefCalendarAllowForwardedInvite"/>
+    <a n="zmailPrefCalendarReminderFlashTitle"/>
+    <a n="zmailPrefCalendarNotifyDelegatedChanges"/>
+    <a n="zmailPrefCalendarFirstDayOfWeek"/>
+    <a n="zmailPrefCalendarInitialView"/>
+    <a n="zmailPrefCalendarForwardInvitesTo"/>
+    <a n="zmailPrefClientType"/>
+    <a n="zmailPrefTimeZoneId"/>
+    <a n="zmailAllowAnyFromAddress"/>
+    <a n="zmailAllowFromAddress"/>
+    <a n="zmailPrefCalendarAlwaysShowMiniCal"/>
+    <a n="zmailPrefCalendarUseQuickAdd"/>
+    <a n="zmailPrefSaveToSent"/>
+    <a n="zmailPrefMailSignature"/>
+    <a n="zmailPrefMailSignatureEnabled"/>
+    <a n="zmailPrefSentMailFolder"/>
+    <a n="zmailPrefGroupMailBy"/>
+    <a n="zmailPrefIncludeSpamInSearch"/>
+    <a n="zmailPrefIncludeTrashInSearch"/>
+    <a n="zmailPrefMailInitialSearch"/>
+    <a n="zmailMaxMailItemsPerPage"/>
+    <a n="zmailPrefMailItemsPerPage"/>
+    <a n="zmailPrefMailPollingInterval"/>
+    <a n="zmailPrefMailFlashTitle"/>
+    <a n="zmailPrefMailFlashIcon"/>
+    <a n="zmailPrefMailSoundsEnabled"/>
+    <a n="zmailMailMinPollingInterval"/>
+    <a n="zmailPrefOutOfOfficeFromDate"/>
+    <a n="zmailPrefOutOfOfficeUntilDate"/>
+    <a n="zmailPrefOutOfOfficeReply"/>
+    <a n="zmailPrefOutOfOfficeReplyEnabled"/>
+    <a n="zmailPrefReplyToAddress"/>
+    <a n="zmailPrefUseKeyboardShortcuts"/>
+    <a n="zmailPrefContactsPerPage"/>
+    <a n="zmailMemberOf"/>
+    <a n="zmailPrefComposeInNewWindow"/>
+    <a n="zmailPrefForwardReplyInOriginalFormat"/>
+    <a n="zmailPrefAutoAddAddressEnabled"/>
+    <a n="zmailPrefComposeFormat"/>
+    <a n="zmailPrefMessageViewHtmlPreferred"/>
+    <a n="zmailPrefNewMailNotificationAddress"/>
+    <a n="zmailPrefNewMailNotificationEnabled"/>
+    <a n="zmailPrefOutOfOfficeReply"/>
+    <a n="zmailPrefShowSearchString"/>
+    <a n="zmailPrefMailSignatureStyle"/>
+    <a n="zmailPrefUseTimeZoneListInCalendar"/>
+    <a n="zmailPrefImapSearchFoldersEnabled"/>
+    <a n="zmailPrefMailForwardingAddress"/>
+    <a n="zmailPrefMailLocalDeliveryDisabled"/>
+    <a n="zmailPrefCalendarApptReminderWarningTime"/>
+    <a n="zmailPrefSkin"/>
+    <a n="zmailPrefGalAutoCompleteEnabled"/>
+    <a n="zmailPrefWarnOnExit"/>
+    <a n="zmailPrefShowSelectionCheckbox"/>
+    <a n="zmailPrefHtmlEditorDefaultFontSize"/>
+    <a n="zmailPrefHtmlEditorDefaultFontFamily"/>
+    <a n="zmailPrefHtmlEditorDefaultFontColor"/>
+    <a n="zmailMailSignatureMaxLength"/>
+    <a n="zmailPrefDisplayExternalImages" />
+    <a n="zmailPrefOutOfOfficeCacheDuration"/>
+    <a n="zmailPrefMailDefaultCharset"/>
+    <a n="zmailPrefLocale"/>
+    <a n="zmailJunkMessagesIndexingEnabled"/>
+    <a n="zmailPrefMailSendReadReceipts"/>
+    <a n="zmailPrefReadReceiptsToAddress"/>
+    <a n="zmailPrefAdminConsoleWarnOnExit" />
+    <a n="zmailPrefMandatorySpellCheckEnabled"/>
   </attrs>
 </right>
 <right name="viewAdminConsoleAccountsPreferencesTab" type="getAttrs" targetType="account">
   <desc> Admin Console view attr rights for Accounts Preferences Tab </desc>
   <ui name="Manage-Accounts-Account-Preferences(view)"/>
   <attrs>
-    <a n="zimbraPrefAppleIcalDelegationEnabled"/>
-    <a n="zimbraPrefCalendarShowPastDueReminders"/>
-    <a n="zimbraPrefCalendarToasterEnabled"/>
-    <a n="zimbraPrefCalendarAllowCancelEmailToSelf"/>
-    <a n="zimbraPrefCalendarAllowPublishMethodInvite"/>
-    <a n="zimbraPrefCalendarAllowForwardedInvite"/>
-    <a n="zimbraPrefCalendarReminderFlashTitle"/>
-    <a n="zimbraPrefCalendarNotifyDelegatedChanges"/>
-    <a n="zimbraPrefCalendarFirstDayOfWeek"/>
-    <a n="zimbraPrefCalendarInitialView"/>
-    <a n="zimbraPrefCalendarForwardInvitesTo"/>
-    <a n="zimbraPrefClientType"/>
-    <a n="zimbraPrefTimeZoneId"/>
-    <a n="zimbraAllowAnyFromAddress"/>
-    <a n="zimbraAllowFromAddress"/>
-    <a n="zimbraPrefCalendarAlwaysShowMiniCal"/>
-    <a n="zimbraPrefCalendarUseQuickAdd"/>
-    <a n="zimbraPrefSaveToSent"/>
-    <a n="zimbraPrefMailSignature"/>
-    <a n="zimbraPrefMailSignatureEnabled"/>
-    <a n="zimbraPrefSentMailFolder"/>
-    <a n="zimbraPrefGroupMailBy"/>
-    <a n="zimbraPrefIncludeSpamInSearch"/>
-    <a n="zimbraPrefIncludeTrashInSearch"/>
-    <a n="zimbraPrefMailInitialSearch"/>
-    <a n="zimbraMaxMailItemsPerPage"/>
-    <a n="zimbraPrefMailItemsPerPage"/>
-    <a n="zimbraPrefMailPollingInterval"/>
-    <a n="zimbraPrefMailFlashTitle"/>
-    <a n="zimbraPrefMailFlashIcon"/>
-    <a n="zimbraPrefMailSoundsEnabled"/>
-    <a n="zimbraMailMinPollingInterval"/>
-    <a n="zimbraPrefOutOfOfficeFromDate"/>
-    <a n="zimbraPrefOutOfOfficeUntilDate"/>
-    <a n="zimbraPrefOutOfOfficeReply"/>
-    <a n="zimbraPrefOutOfOfficeReplyEnabled"/>
-    <a n="zimbraPrefReplyToAddress"/>
-    <a n="zimbraPrefUseKeyboardShortcuts"/>
-    <a n="zimbraPrefContactsPerPage"/>
-    <a n="zimbraMemberOf"/>
-    <a n="zimbraPrefComposeInNewWindow"/>
-    <a n="zimbraPrefForwardReplyInOriginalFormat"/>
-    <a n="zimbraPrefAutoAddAddressEnabled"/>
-    <a n="zimbraPrefComposeFormat"/>
-    <a n="zimbraPrefMessageViewHtmlPreferred"/>
-    <a n="zimbraPrefNewMailNotificationAddress"/>
-    <a n="zimbraPrefNewMailNotificationEnabled"/>
-    <a n="zimbraPrefOutOfOfficeReply"/>
-    <a n="zimbraPrefShowSearchString"/>
-    <a n="zimbraPrefMailSignatureStyle"/>
-    <a n="zimbraPrefUseTimeZoneListInCalendar"/>
-    <a n="zimbraPrefImapSearchFoldersEnabled"/>
-    <a n="zimbraPrefMailForwardingAddress"/>
-    <a n="zimbraPrefMailLocalDeliveryDisabled"/>
-    <a n="zimbraPrefCalendarApptReminderWarningTime"/>
-    <a n="zimbraPrefSkin"/>
-    <a n="zimbraPrefGalAutoCompleteEnabled"/>
-    <a n="zimbraPrefWarnOnExit"/>
-    <a n="zimbraPrefShowSelectionCheckbox"/>
-    <a n="zimbraPrefHtmlEditorDefaultFontSize"/>
-    <a n="zimbraPrefHtmlEditorDefaultFontFamily"/>
-    <a n="zimbraPrefHtmlEditorDefaultFontColor"/>
-    <a n="zimbraMailSignatureMaxLength"/>
-    <a n="zimbraPrefDisplayExternalImages" />
-    <a n="zimbraPrefOutOfOfficeCacheDuration"/>
-    <a n="zimbraPrefMailDefaultCharset"/>
-    <a n="zimbraPrefLocale"/>
-    <a n="zimbraJunkMessagesIndexingEnabled"/>
-    <a n="zimbraPrefMailSendReadReceipts"/>
-    <a n="zimbraPrefReadReceiptsToAddress"/>
-    <a n="zimbraPrefAdminConsoleWarnOnExit" />
-    <a n="zimbraPrefMandatorySpellCheckEnabled"/>
+    <a n="zmailPrefAppleIcalDelegationEnabled"/>
+    <a n="zmailPrefCalendarShowPastDueReminders"/>
+    <a n="zmailPrefCalendarToasterEnabled"/>
+    <a n="zmailPrefCalendarAllowCancelEmailToSelf"/>
+    <a n="zmailPrefCalendarAllowPublishMethodInvite"/>
+    <a n="zmailPrefCalendarAllowForwardedInvite"/>
+    <a n="zmailPrefCalendarReminderFlashTitle"/>
+    <a n="zmailPrefCalendarNotifyDelegatedChanges"/>
+    <a n="zmailPrefCalendarFirstDayOfWeek"/>
+    <a n="zmailPrefCalendarInitialView"/>
+    <a n="zmailPrefCalendarForwardInvitesTo"/>
+    <a n="zmailPrefClientType"/>
+    <a n="zmailPrefTimeZoneId"/>
+    <a n="zmailAllowAnyFromAddress"/>
+    <a n="zmailAllowFromAddress"/>
+    <a n="zmailPrefCalendarAlwaysShowMiniCal"/>
+    <a n="zmailPrefCalendarUseQuickAdd"/>
+    <a n="zmailPrefSaveToSent"/>
+    <a n="zmailPrefMailSignature"/>
+    <a n="zmailPrefMailSignatureEnabled"/>
+    <a n="zmailPrefSentMailFolder"/>
+    <a n="zmailPrefGroupMailBy"/>
+    <a n="zmailPrefIncludeSpamInSearch"/>
+    <a n="zmailPrefIncludeTrashInSearch"/>
+    <a n="zmailPrefMailInitialSearch"/>
+    <a n="zmailMaxMailItemsPerPage"/>
+    <a n="zmailPrefMailItemsPerPage"/>
+    <a n="zmailPrefMailPollingInterval"/>
+    <a n="zmailPrefMailFlashTitle"/>
+    <a n="zmailPrefMailFlashIcon"/>
+    <a n="zmailPrefMailSoundsEnabled"/>
+    <a n="zmailMailMinPollingInterval"/>
+    <a n="zmailPrefOutOfOfficeFromDate"/>
+    <a n="zmailPrefOutOfOfficeUntilDate"/>
+    <a n="zmailPrefOutOfOfficeReply"/>
+    <a n="zmailPrefOutOfOfficeReplyEnabled"/>
+    <a n="zmailPrefReplyToAddress"/>
+    <a n="zmailPrefUseKeyboardShortcuts"/>
+    <a n="zmailPrefContactsPerPage"/>
+    <a n="zmailMemberOf"/>
+    <a n="zmailPrefComposeInNewWindow"/>
+    <a n="zmailPrefForwardReplyInOriginalFormat"/>
+    <a n="zmailPrefAutoAddAddressEnabled"/>
+    <a n="zmailPrefComposeFormat"/>
+    <a n="zmailPrefMessageViewHtmlPreferred"/>
+    <a n="zmailPrefNewMailNotificationAddress"/>
+    <a n="zmailPrefNewMailNotificationEnabled"/>
+    <a n="zmailPrefOutOfOfficeReply"/>
+    <a n="zmailPrefShowSearchString"/>
+    <a n="zmailPrefMailSignatureStyle"/>
+    <a n="zmailPrefUseTimeZoneListInCalendar"/>
+    <a n="zmailPrefImapSearchFoldersEnabled"/>
+    <a n="zmailPrefMailForwardingAddress"/>
+    <a n="zmailPrefMailLocalDeliveryDisabled"/>
+    <a n="zmailPrefCalendarApptReminderWarningTime"/>
+    <a n="zmailPrefSkin"/>
+    <a n="zmailPrefGalAutoCompleteEnabled"/>
+    <a n="zmailPrefWarnOnExit"/>
+    <a n="zmailPrefShowSelectionCheckbox"/>
+    <a n="zmailPrefHtmlEditorDefaultFontSize"/>
+    <a n="zmailPrefHtmlEditorDefaultFontFamily"/>
+    <a n="zmailPrefHtmlEditorDefaultFontColor"/>
+    <a n="zmailMailSignatureMaxLength"/>
+    <a n="zmailPrefDisplayExternalImages" />
+    <a n="zmailPrefOutOfOfficeCacheDuration"/>
+    <a n="zmailPrefMailDefaultCharset"/>
+    <a n="zmailPrefLocale"/>
+    <a n="zmailJunkMessagesIndexingEnabled"/>
+    <a n="zmailPrefMailSendReadReceipts"/>
+    <a n="zmailPrefReadReceiptsToAddress"/>
+    <a n="zmailPrefAdminConsoleWarnOnExit" />
+    <a n="zmailPrefMandatorySpellCheckEnabled"/>
   </attrs>
 </right>
 <right name="adminConsoleAccountsPreferencesTabRights" type="combo">
@@ -466,14 +466,14 @@
   <desc> Admin Console set attr rights for Accounts FreeBusyInterop Tab </desc>
   <ui name="Manage-Accounts-Account-FreeBusyInterop(modify)"/>
   <attrs>
-    <a n="zimbraForeignPrincipal"/>
+    <a n="zmailForeignPrincipal"/>
   </attrs>
 </right>
 <right name="viewAdminConsoleAccountsFreeBusyInteropTab" type="getAttrs" targetType="account">
   <desc> Admin Console view attr rights for Accounts FreeBusyInterop Tab </desc>
   <ui name="Manage-Accounts-Account-FreeBusyInterop(view)"/>
   <attrs>
-    <a n="zimbraForeignPrincipal"/>
+    <a n="zmailForeignPrincipal"/>
   </attrs>
 </right>
 <right name="adminConsoleAccountsFreeBusyInteropTabRights" type="combo">
@@ -490,16 +490,16 @@
   <desc> Admin Console set attr rights for Accounts Themes Tab </desc>
   <ui name="Manage-Accounts-Account-Themes(modify)"/>
   <attrs>
-    <a n="zimbraPrefSkin"/>
-    <a n="zimbraAvailableSkin"/>
+    <a n="zmailPrefSkin"/>
+    <a n="zmailAvailableSkin"/>
   </attrs>
 </right>
 <right name="viewAdminConsoleAccountsThemesTab" type="getAttrs" targetType="account">
   <desc> Admin Console view attr rights for Accounts Themes Tab </desc>
   <ui name="Manage-Accounts-Account-Themes(view)"/>
   <attrs>
-    <a n="zimbraPrefSkin"/>
-    <a n="zimbraAvailableSkin"/>
+    <a n="zmailPrefSkin"/>
+    <a n="zmailAvailableSkin"/>
   </attrs>
 </right>
 <right name="adminConsoleAccountsThemesTabRights" type="combo">
@@ -516,14 +516,14 @@
   <desc> Admin Console set attr rights for Accounts Zimlets Tab </desc>
   <ui name="Manage-Accounts-Account-Zimlets(modify)"/>
   <attrs>
-    <a n="zimbraZimletAvailableZimlets"/>
+    <a n="zmailZimletAvailableZimlets"/>
   </attrs>
 </right>
 <right name="viewAdminConsoleAccountsZimletsTab" type="getAttrs" targetType="account">
   <desc> Admin Console view attr rights for Accounts Zimlets Tab </desc>
   <ui name="Manage-Accounts-Account-Zimlets(view)"/>
   <attrs>
-    <a n="zimbraZimletAvailableZimlets"/>
+    <a n="zmailZimletAvailableZimlets"/>
   </attrs>
 </right>
 <right name="adminConsoleAccountsZimletsTabRights" type="combo">
@@ -540,65 +540,65 @@
 <!-- <right name="setAdminConsoleAccountsAdvancedTab" type="setAttrs" targetType="account">
   <desc> Admin Console set attr rights for Accounts Advanced Tab </desc>
   <attrs>
-    <a n="zimbraAttachmentsBlocked"\>
-    <a n="zimbraMailQuota"\>
-    <a n="zimbraContactMaxNumEntries"\>
-    <a n="zimbraQuotaWarnPercent"\>
-    <a n="zimbraQuotaWarnInterval"\>
-    <a n="zimbraQuotaWarnMessage"\>
-    <a n="zimbraPasswordLocked"\>
-    <a n="zimbraPasswordMinLength"\>
-    <a n="zimbraPasswordMaxLength"\>
-    <a n="zimbraPasswordMinUpperCaseChars"\>
-    <a n="zimbraPasswordMinLowerCaseChars"\>
-    <a n="zimbraPasswordMinPunctuationChars"\>
-    <a n="zimbraPasswordMinNumericChars"\>
-    <a n="zimbraPasswordMinAge"\>
-    <a n="zimbraPasswordMaxAge"\>
-    <a n="zimbraPasswordEnforceHistory"\>
-    <a n="zimbraPasswordLockoutEnabled"\>
-    <a n="zimbraPasswordLockoutMaxFailures"\>
-    <a n="zimbraPasswordLockoutDuration"\>
-    <a n="zimbraPasswordLockoutFailureLifetime"\>
-    <a n="zimbraAdminAuthTokenLifetime"\>
-    <a n="zimbraAuthTokenLifetime"\>
-    <a n="zimbraMailIdleSessionTimeout"\>
-    <a n="zimbraMailMessageLifetime"\>
-    <a n="zimbraMailTrashLifetime"\>
-    <a n="zimbraMailSpamLifetime"\>
-    <a n="zimbraFreebusyExchangeUserOrg"\>
+    <a n="zmailAttachmentsBlocked"\>
+    <a n="zmailMailQuota"\>
+    <a n="zmailContactMaxNumEntries"\>
+    <a n="zmailQuotaWarnPercent"\>
+    <a n="zmailQuotaWarnInterval"\>
+    <a n="zmailQuotaWarnMessage"\>
+    <a n="zmailPasswordLocked"\>
+    <a n="zmailPasswordMinLength"\>
+    <a n="zmailPasswordMaxLength"\>
+    <a n="zmailPasswordMinUpperCaseChars"\>
+    <a n="zmailPasswordMinLowerCaseChars"\>
+    <a n="zmailPasswordMinPunctuationChars"\>
+    <a n="zmailPasswordMinNumericChars"\>
+    <a n="zmailPasswordMinAge"\>
+    <a n="zmailPasswordMaxAge"\>
+    <a n="zmailPasswordEnforceHistory"\>
+    <a n="zmailPasswordLockoutEnabled"\>
+    <a n="zmailPasswordLockoutMaxFailures"\>
+    <a n="zmailPasswordLockoutDuration"\>
+    <a n="zmailPasswordLockoutFailureLifetime"\>
+    <a n="zmailAdminAuthTokenLifetime"\>
+    <a n="zmailAuthTokenLifetime"\>
+    <a n="zmailMailIdleSessionTimeout"\>
+    <a n="zmailMailMessageLifetime"\>
+    <a n="zmailMailTrashLifetime"\>
+    <a n="zmailMailSpamLifetime"\>
+    <a n="zmailFreebusyExchangeUserOrg"\>
   </attrs>
 </right>
 <right name="viewAdminConsoleAccountsAdvancedTab" type="getAttrs" targetType="account">
   <desc> Admin Console view attr rights for Accounts Advanced Tab </desc>
   <attrs>
-    <a n="zimbraAttachmentsBlocked"\>
-    <a n="zimbraMailQuota"\>
-    <a n="zimbraContactMaxNumEntries"\>
-    <a n="zimbraQuotaWarnPercent"\>
-    <a n="zimbraQuotaWarnInterval"\>
-    <a n="zimbraQuotaWarnMessage"\>
-    <a n="zimbraPasswordLocked"\>
-    <a n="zimbraPasswordMinLength"\>
-    <a n="zimbraPasswordMaxLength"\>
-    <a n="zimbraPasswordMinUpperCaseChars"\>
-    <a n="zimbraPasswordMinLowerCaseChars"\>
-    <a n="zimbraPasswordMinPunctuationChars"\>
-    <a n="zimbraPasswordMinNumericChars"\>
-    <a n="zimbraPasswordMinAge"\>
-    <a n="zimbraPasswordMaxAge"\>
-    <a n="zimbraPasswordEnforceHistory"\>
-    <a n="zimbraPasswordLockoutEnabled"\>
-    <a n="zimbraPasswordLockoutMaxFailures"\>
-    <a n="zimbraPasswordLockoutDuration"\>
-    <a n="zimbraPasswordLockoutFailureLifetime"\>
-    <a n="zimbraAdminAuthTokenLifetime"\>
-    <a n="zimbraAuthTokenLifetime"\>
-    <a n="zimbraMailIdleSessionTimeout"\>
-    <a n="zimbraMailMessageLifetime"\>
-    <a n="zimbraMailTrashLifetime"\>
-    <a n="zimbraMailSpamLifetime"\>
-    <a n="zimbraFreebusyExchangeUserOrg"\>
+    <a n="zmailAttachmentsBlocked"\>
+    <a n="zmailMailQuota"\>
+    <a n="zmailContactMaxNumEntries"\>
+    <a n="zmailQuotaWarnPercent"\>
+    <a n="zmailQuotaWarnInterval"\>
+    <a n="zmailQuotaWarnMessage"\>
+    <a n="zmailPasswordLocked"\>
+    <a n="zmailPasswordMinLength"\>
+    <a n="zmailPasswordMaxLength"\>
+    <a n="zmailPasswordMinUpperCaseChars"\>
+    <a n="zmailPasswordMinLowerCaseChars"\>
+    <a n="zmailPasswordMinPunctuationChars"\>
+    <a n="zmailPasswordMinNumericChars"\>
+    <a n="zmailPasswordMinAge"\>
+    <a n="zmailPasswordMaxAge"\>
+    <a n="zmailPasswordEnforceHistory"\>
+    <a n="zmailPasswordLockoutEnabled"\>
+    <a n="zmailPasswordLockoutMaxFailures"\>
+    <a n="zmailPasswordLockoutDuration"\>
+    <a n="zmailPasswordLockoutFailureLifetime"\>
+    <a n="zmailAdminAuthTokenLifetime"\>
+    <a n="zmailAuthTokenLifetime"\>
+    <a n="zmailMailIdleSessionTimeout"\>
+    <a n="zmailMailMessageLifetime"\>
+    <a n="zmailMailTrashLifetime"\>
+    <a n="zmailMailSpamLifetime"\>
+    <a n="zmailFreebusyExchangeUserOrg"\>
   </attrs>
 </right>
 <right name="adminConsoleAccountsAdvancedTabRights" type="combo">
@@ -609,20 +609,20 @@
   </rights>
 </right> -->
 
-<!-- Admin Console Accounts Zimbra Mobile Tab -->
+<!-- Admin Console Accounts Zmail Mobile Tab -->
 <!-- Admin Console Accounts ACL Tab -->
   <right name="setAdminConsoleAccountsACLTab" type="setAttrs" targetType="account">
     <desc> Admin Console set attr rights for Account ACL Tab </desc>
     <ui name="Manage-Accounts-Account-ACL(modify)"/>
     <attrs>
-      <a n="zimbraACE"/>
+      <a n="zmailACE"/>
     </attrs>
   </right>
   <right name="viewAdminConsoleAccountsACLTab" type="getAttrs" targetType="account">
     <desc> Admin Console view attr rights for Account ACL Tab </desc>
     <ui name="Manage-Accounts-Account-ACL(view)"/>
     <attrs>
-      <a n="zimbraACE"/>
+      <a n="zmailACE"/>
     </attrs>
   </right>
   <right name="adminConsoleAccountsACLTabRights" type="combo">
@@ -655,10 +655,10 @@
     <a n="cn"/>
     <a n="displayName"/>
     <a n="description"/>
-    <a n="zimbraIsAdminGroup"/>
-    <a n="zimbraMailStatus"/>
-    <a n="zimbraMailAlias"/>
-    <a n="zimbraHideInGal"/>
+    <a n="zmailIsAdminGroup"/>
+    <a n="zmailMailStatus"/>
+    <a n="zmailMailAlias"/>
+    <a n="zmailHideInGal"/>
   </attrs>
 </right>
 <right name="viewAdminConsoleDLMembersTab" type="getAttrs" targetType="dl">
@@ -670,12 +670,12 @@
     <a n="description"/>
     <a n="mail"/>
     <a n="uid"/>
-    <a n="zimbraId"/>
-    <a n="zimbraIsAdminGroup"/>
-    <a n="zimbraMailStatus"/>
-    <a n="zimbraMailAlias"/>
-    <a n="zimbraHideInGal"/>
-    <a n="zimbraMailForwardingAddress"/>
+    <a n="zmailId"/>
+    <a n="zmailIsAdminGroup"/>
+    <a n="zmailMailStatus"/>
+    <a n="zmailMailAlias"/>
+    <a n="zmailHideInGal"/>
+    <a n="zmailMailForwardingAddress"/>
   </attrs>
 </right>
 <right name="adminConsoleDLMembersTabRights" type="combo">
@@ -699,14 +699,14 @@
   <desc> Admin Console set attr rights for DL Notes Tab </desc>
   <ui name="Manage-DistributionLists-DistributionList-Notes(modify)"/>
   <attrs>
-    <a n="zimbraNotes"/>
+    <a n="zmailNotes"/>
   </attrs>
 </right>
 <right name="viewAdminConsoleDLNotesTab" type="getAttrs" targetType="dl">
   <desc> Admin Console view attr rights for DL Notes Tab </desc>
   <ui name="Manage-DistributionLists-DistributionList-Notes(view)"/>
   <attrs>
-    <a n="zimbraNotes"/>
+    <a n="zmailNotes"/>
   </attrs>
 </right>
 <right name="adminConsoleDLNotesTabRights" type="combo">
@@ -731,14 +731,14 @@
   <desc> Admin Console set attr rights for DL Aliases Tab </desc>
   <ui name="Manage-DistributionLists-DistributionList-Aliases(modify)"/>
   <attrs>
-    <a n="zimbraMailAlias"/>
+    <a n="zmailMailAlias"/>
   </attrs>
 </right>
 <right name="viewAdminConsoleDLAliasesTab" type="getAttrs" targetType="dl">
   <desc> Admin Console view attr rights for DL Aliases Tab </desc>
   <ui name="Manage-DistributionLists-DistributionList-Aliases(view)"/>
   <attrs>
-    <a n="zimbraMailAlias"/>
+    <a n="zmailMailAlias"/>
   </attrs>
 </right>
 <right name="adminConsoleDLAliasesTabRights" type="combo">
@@ -758,15 +758,15 @@
 <right name="setAdminConsoleDLSharesTab" type="setAttrs" targetType="dl">
   <desc> Admin Console set attr rights for DL Shares Tab </desc>
   <attrs>
-    <a n="zimbraDistributionListSendShareMessageToNewMembers"/>
-    <a n="zimbraDistributionListSendShareMessageFromAddress"/>
+    <a n="zmailDistributionListSendShareMessageToNewMembers"/>
+    <a n="zmailDistributionListSendShareMessageFromAddress"/>
   </attrs>
 </right>
 <right name="viewAdminConsoleDLSharesTab" type="getAttrs" targetType="dl">
   <desc> Admin Console view attr rights for DL Shares Tab </desc>
   <attrs>
-    <a n="zimbraDistributionListSendShareMessageToNewMembers"/>
-    <a n="zimbraDistributionListSendShareMessageFromAddress"/>
+    <a n="zmailDistributionListSendShareMessageToNewMembers"/>
+    <a n="zmailDistributionListSendShareMessageFromAddress"/>
   </attrs>
 </right>
 <right name="adminConsoleDLSharesTabRights" type="combo">
@@ -781,14 +781,14 @@
     <desc> Admin Console set attr rights for DL ACL Tab </desc>
     <ui name="Manage-DistributionLists-DistributionList-ACL(modify)"/>
     <attrs>
-      <a n="zimbraACE"/>
+      <a n="zmailACE"/>
     </attrs>
   </right>
   <right name="viewAdminConsoleDLACLTab" type="getAttrs" targetType="dl">
     <desc> Admin Console view attr rights for DL ACL Tab </desc>
     <ui name="Manage-DistributionLists-DistributionList-ACL(view)"/>
     <attrs>
-      <a n="zimbraACE"/>
+      <a n="zmailACE"/>
     </attrs>
   </right>
   <right name="adminConsoleDLACLTabRights" type="combo">
@@ -813,33 +813,33 @@
   <ui name="Manage-Resources-Resource-Properties(modify)"/>
   <attrs>
     <a n="displayName"/>
-    <a n="zimbraMailStatus"/>
-    <a n="zimbraMailAlias"/>
-    <a n="zimbraHideInGal"/>
+    <a n="zmailMailStatus"/>
+    <a n="zmailMailAlias"/>
+    <a n="zmailHideInGal"/>
     <a n="description"/>
-    <a n="zimbraNotes"/>
+    <a n="zmailNotes"/>
     <a n="cn"/>
     <a n="mail"/>
     <a n="uid"/>
-    <a n="zimbraAccountStatus"/>
-    <a n="zimbraAccountCalendarUserType"/>
-    <a n="zimbraCalResType"/>
-    <a n="zimbraCalResAutoAcceptDecline"/>
-    <a n="zimbraCalResAutoDeclineIfBusy"/>
-    <a n="zimbraCalResAutoDeclineRecurring"/>
-    <a n="zimbraCalResLocationDisplayName"/>
-    <a n="zimbraCalResSite"/>
-    <a n="zimbraCalResBuilding"/>
-    <a n="zimbraCalResFloor"/>
-    <a n="zimbraCalResRoom"/>
-    <a n="zimbraCalResCapacity"/>
-    <a n="zimbraCalResContactName"/>
-    <a n="zimbraCalResContactEmail"/>
-    <a n="zimbraCalResContactPhone"/>
-    <a n="zimbraLocale"/>
-    <a n="zimbraCalResMaxNumConflictsAllowed"/>
-    <a n="zimbraCalResMaxPercentConflictsAllowed"/>
-    <a n="zimbraPrefCalendarForwardInvitesTo"/>
+    <a n="zmailAccountStatus"/>
+    <a n="zmailAccountCalendarUserType"/>
+    <a n="zmailCalResType"/>
+    <a n="zmailCalResAutoAcceptDecline"/>
+    <a n="zmailCalResAutoDeclineIfBusy"/>
+    <a n="zmailCalResAutoDeclineRecurring"/>
+    <a n="zmailCalResLocationDisplayName"/>
+    <a n="zmailCalResSite"/>
+    <a n="zmailCalResBuilding"/>
+    <a n="zmailCalResFloor"/>
+    <a n="zmailCalResRoom"/>
+    <a n="zmailCalResCapacity"/>
+    <a n="zmailCalResContactName"/>
+    <a n="zmailCalResContactEmail"/>
+    <a n="zmailCalResContactPhone"/>
+    <a n="zmailLocale"/>
+    <a n="zmailCalResMaxNumConflictsAllowed"/>
+    <a n="zmailCalResMaxPercentConflictsAllowed"/>
+    <a n="zmailPrefCalendarForwardInvitesTo"/>
   </attrs>
 </right>
 <right name="viewAdminConsoleResourcesPropertiesTab" type="getAttrs" targetType="calresource">
@@ -847,35 +847,35 @@
   <ui name="Manage-Resources-Resource-Properties(view)"/>
   <attrs>
     <a n="displayName"/>
-    <a n="zimbraId"/>
-    <a n="zimbraMailStatus"/>
-    <a n="zimbraMailAlias"/>
-    <a n="zimbraHideInGal"/>
+    <a n="zmailId"/>
+    <a n="zmailMailStatus"/>
+    <a n="zmailMailAlias"/>
+    <a n="zmailHideInGal"/>
     <a n="description"/>
-    <a n="zimbraNotes"/>
-    <a n="zimbraMailForwardingAddress"/>
+    <a n="zmailNotes"/>
+    <a n="zmailMailForwardingAddress"/>
     <a n="cn"/>
     <a n="uid"/>
-    <!-- <a n="zimbraCOSId"/> -->
-    <a n="zimbraAccountStatus"/>
-    <a n="zimbraAccountCalendarUserType"/>
-    <a n="zimbraCalResType"/>
-    <a n="zimbraCalResAutoAcceptDecline"/>
-    <a n="zimbraCalResAutoDeclineIfBusy"/>
-    <a n="zimbraCalResAutoDeclineRecurring"/>
-    <a n="zimbraCalResLocationDisplayName"/>
-    <a n="zimbraCalResSite"/>
-    <a n="zimbraCalResBuilding"/>
-    <a n="zimbraCalResFloor"/>
-    <a n="zimbraCalResRoom"/>
-    <a n="zimbraCalResCapacity"/>
-    <a n="zimbraCalResContactName"/>
-    <a n="zimbraCalResContactEmail"/>
-    <a n="zimbraCalResContactPhone"/>
-    <a n="zimbraLocale"/>
-    <a n="zimbraCreateTimestamp"/>
-    <a n="zimbraCalResMaxNumConflictsAllowed"/>
-    <a n="zimbraCalResMaxPercentConflictsAllowed"/>
+    <!-- <a n="zmailCOSId"/> -->
+    <a n="zmailAccountStatus"/>
+    <a n="zmailAccountCalendarUserType"/>
+    <a n="zmailCalResType"/>
+    <a n="zmailCalResAutoAcceptDecline"/>
+    <a n="zmailCalResAutoDeclineIfBusy"/>
+    <a n="zmailCalResAutoDeclineRecurring"/>
+    <a n="zmailCalResLocationDisplayName"/>
+    <a n="zmailCalResSite"/>
+    <a n="zmailCalResBuilding"/>
+    <a n="zmailCalResFloor"/>
+    <a n="zmailCalResRoom"/>
+    <a n="zmailCalResCapacity"/>
+    <a n="zmailCalResContactName"/>
+    <a n="zmailCalResContactEmail"/>
+    <a n="zmailCalResContactPhone"/>
+    <a n="zmailLocale"/>
+    <a n="zmailCreateTimestamp"/>
+    <a n="zmailCalResMaxNumConflictsAllowed"/>
+    <a n="zmailCalResMaxPercentConflictsAllowed"/>
   </attrs>
 </right>
 <right name="adminConsoleResourcesPropertiesTabRights" type="combo">
@@ -898,15 +898,15 @@
   <desc> Admin Console set attr rights for Resources Contact Tab </desc>
   <ui name="Manage-Resources-Resource-LocationAndContactInfo(modify)"/>
   <attrs>
-    <a n="zimbraCalResLocationDisplayName"/>
-    <a n="zimbraCalResSite"/>
-    <a n="zimbraCalResBuilding"/>
-    <a n="zimbraCalResFloor"/>
-    <a n="zimbraCalResRoom"/>
-    <a n="zimbraCalResCapacity"/>
-    <a n="zimbraCalResContactName"/>
-    <a n="zimbraCalResContactEmail"/>
-    <a n="zimbraCalResContactPhone"/>
+    <a n="zmailCalResLocationDisplayName"/>
+    <a n="zmailCalResSite"/>
+    <a n="zmailCalResBuilding"/>
+    <a n="zmailCalResFloor"/>
+    <a n="zmailCalResRoom"/>
+    <a n="zmailCalResCapacity"/>
+    <a n="zmailCalResContactName"/>
+    <a n="zmailCalResContactEmail"/>
+    <a n="zmailCalResContactPhone"/>
     <a n="telephoneNumber"/>
     <a n="company"/>
     <a n="street"/>
@@ -920,15 +920,15 @@
   <desc> Console view attr rights for Resources Contact Tab </desc>
   <ui name="Manage-Resources-Resource-LocationAndContactInfo(view)"/>
   <attrs>
-    <a n="zimbraCalResLocationDisplayName"/>
-    <a n="zimbraCalResSite"/>
-    <a n="zimbraCalResBuilding"/>
-    <a n="zimbraCalResFloor"/>
-    <a n="zimbraCalResRoom"/>
-    <a n="zimbraCalResCapacity"/>
-    <a n="zimbraCalResContactName"/>
-    <a n="zimbraCalResContactEmail"/>
-    <a n="zimbraCalResContactPhone"/>
+    <a n="zmailCalResLocationDisplayName"/>
+    <a n="zmailCalResSite"/>
+    <a n="zmailCalResBuilding"/>
+    <a n="zmailCalResFloor"/>
+    <a n="zmailCalResRoom"/>
+    <a n="zmailCalResCapacity"/>
+    <a n="zmailCalResContactName"/>
+    <a n="zmailCalResContactEmail"/>
+    <a n="zmailCalResContactPhone"/>
     <a n="telephoneNumber"/>
     <a n="company"/>
     <a n="street"/>
@@ -959,7 +959,7 @@
     <attrs>
       <a n="cn"/>
       <a n="description"/>
-      <a n="zimbraNotes"/>
+      <a n="zmailNotes"/>
     </attrs>
   </right>
   <right name="setAdminConsoleCOSInfoTab" type="setAttrs" targetType="cos">
@@ -968,7 +968,7 @@
     <attrs>
       <a n="cn"/>
       <a n="description"/>
-      <a n="zimbraNotes"/>
+      <a n="zmailNotes"/>
     </attrs>
   </right>
   <right name="adminConsoleCOSInfoTabRights" type="combo">
@@ -986,72 +986,72 @@
     <ui name="Configure-COSes-COS-Features(view)"/>
     <attrs>
       <!-- Major Features -->
-      <a n="zimbraFeatureMailEnabled"/>
-      <a n="zimbraFeatureContactsEnabled"/>
-      <a n="zimbraFeatureCalendarEnabled"/>
-      <a n="zimbraFeatureTasksEnabled"/>
-      <a n="zimbraFeatureNotebookEnabled"/>
-      <a n="zimbraFeatureBriefcasesEnabled"/>
-      <a n="zimbraFeatureIMEnabled"/>
-      <a n="zimbraFeatureOptionsEnabled"/>
+      <a n="zmailFeatureMailEnabled"/>
+      <a n="zmailFeatureContactsEnabled"/>
+      <a n="zmailFeatureCalendarEnabled"/>
+      <a n="zmailFeatureTasksEnabled"/>
+      <a n="zmailFeatureNotebookEnabled"/>
+      <a n="zmailFeatureBriefcasesEnabled"/>
+      <a n="zmailFeatureIMEnabled"/>
+      <a n="zmailFeatureOptionsEnabled"/>
       <!-- General Features -->
-      <a n="zimbraFeatureTaggingEnabled"/>
-      <a n="zimbraFeatureSharingEnabled"/>
-      <a n="zimbraFeatureChangePasswordEnabled"/>
-      <a n="zimbraFeatureSkinChangeEnabled"/>
-      <a n="zimbraFeatureHtmlComposeEnabled"/>
-      <a n="zimbraFeatureShortcutAliasesEnabled"/>
-      <a n="zimbraFeatureGalEnabled"/>
-      <a n="zimbraFeatureGalAutoCompleteEnabled"/>
+      <a n="zmailFeatureTaggingEnabled"/>
+      <a n="zmailFeatureSharingEnabled"/>
+      <a n="zmailFeatureChangePasswordEnabled"/>
+      <a n="zmailFeatureSkinChangeEnabled"/>
+      <a n="zmailFeatureHtmlComposeEnabled"/>
+      <a n="zmailFeatureShortcutAliasesEnabled"/>
+      <a n="zmailFeatureGalEnabled"/>
+      <a n="zmailFeatureGalAutoCompleteEnabled"/>
       <!-- Mail Features -->
-      <a n="zimbraFeatureMailPriorityEnabled"/>
-      <a n="zimbraFeatureFlaggingEnabled"/>
-      <a n="zimbraPop3Enabled"/>
-      <a n="zimbraImapEnabled"/>
-      <a n="zimbraFeaturePop3DataSourceEnabled"/>
-      <a n="zimbraFeatureImapDataSourceEnabled"/>
-      <a n="zimbraFeatureMailForwardingEnabled"/>
-      <a n="zimbraFeatureConversationsEnabled"/>
-      <a n="zimbraFeatureFiltersEnabled"/>
-      <a n="zimbraFeatureOutOfOfficeReplyEnabled"/>
-      <a n="zimbraFeatureNewMailNotificationEnabled"/>
+      <a n="zmailFeatureMailPriorityEnabled"/>
+      <a n="zmailFeatureFlaggingEnabled"/>
+      <a n="zmailPop3Enabled"/>
+      <a n="zmailImapEnabled"/>
+      <a n="zmailFeaturePop3DataSourceEnabled"/>
+      <a n="zmailFeatureImapDataSourceEnabled"/>
+      <a n="zmailFeatureMailForwardingEnabled"/>
+      <a n="zmailFeatureConversationsEnabled"/>
+      <a n="zmailFeatureFiltersEnabled"/>
+      <a n="zmailFeatureOutOfOfficeReplyEnabled"/>
+      <a n="zmailFeatureNewMailNotificationEnabled"/>
       <!-- deprecated PollingInterval -->
-      <a n="zimbraFeatureMailPollingIntervalPreferenceEnabled"/>
-      <a n="zimbraFeatureIdentitiesEnabled"/>
-      <a n="zimbraFeatureReadReceiptsEnabled"/>
+      <a n="zmailFeatureMailPollingIntervalPreferenceEnabled"/>
+      <a n="zmailFeatureIdentitiesEnabled"/>
+      <a n="zmailFeatureReadReceiptsEnabled"/>
       <!-- Calendar Features -->
-      <a n="zimbraFeatureGroupCalendarEnabled"/>
+      <a n="zmailFeatureGroupCalendarEnabled"/>
       <!-- IM Features -->
-      <a n="zimbraFeatureInstantNotify"/>
+      <a n="zmailFeatureInstantNotify"/>
       <!-- Search Features -->
-      <a n="zimbraFeatureAdvancedSearchEnabled"/>
-      <a n="zimbraFeatureSavedSearchesEnabled"/>
-      <a n="zimbraFeatureInitialSearchPreferenceEnabled"/>
+      <a n="zmailFeatureAdvancedSearchEnabled"/>
+      <a n="zmailFeatureSavedSearchesEnabled"/>
+      <a n="zmailFeatureInitialSearchPreferenceEnabled"/>
       <!-- Unexposed features -->
-      <!-- <a n="zimbraFeatureViewInHtmlEnabled"/>
-      <a n="zimbraFeatureMobileSyncEnabled"/>
-      <a n="zimbraFeatureVoiceEnabled"/>
-      <a n="zimbraFeaturePortalEnabled"/>
-      <a n="zimbraFeatureSignaturesEnabled"/>
-      <a n="zimbraFeatureMailUpsellEnabled"/>
-      <a n="zimbraFeatureMailUpsellURL"/>
-      <a n="zimbraFeatureContactsUpsellEnabled"/>
-      <a n="zimbraFeatureContactsUpsellURL"/>
-      <a n="zimbraFeatureCalendarUpsellEnabled"/>
-      <a n="zimbraFeatureCalendarUpsellURL"/>
-      <a n="zimbraFeatureVoiceUpsellEnabled"/>
-      <a n="zimbraFeatureVoiceUpsellURL"/>
-      <a n="zimbraFeatureZimbraAssistantEnabled"/>
-      <a n="zimbraFeatureComposeInNewWindowEnabled"/>
-      <a n="zimbraFeatureOpenMailInNewWindowEnabled"/>
-      <a n="zimbraFeatureWebSearchEnabled"/>
-      <a n="zimbraFeatureNewAddrBookEnabled"/>
-      <a n="zimbraFeatureMailForwardingInFiltersEnabled"/>
-      <a n="zimbraFeatureGalSyncEnabled"/>
-      <a n="zimbraFeatureImportExportFolderEnabled"/>
-      <a n="zimbraFeatureDiscardInFiltersEnabled"/>
-      <a n="zimbraFeatureConfirmationPageEnabled"/>
-      <a n="zimbraFeatureMobilePolicyEnabled"/> -->
+      <!-- <a n="zmailFeatureViewInHtmlEnabled"/>
+      <a n="zmailFeatureMobileSyncEnabled"/>
+      <a n="zmailFeatureVoiceEnabled"/>
+      <a n="zmailFeaturePortalEnabled"/>
+      <a n="zmailFeatureSignaturesEnabled"/>
+      <a n="zmailFeatureMailUpsellEnabled"/>
+      <a n="zmailFeatureMailUpsellURL"/>
+      <a n="zmailFeatureContactsUpsellEnabled"/>
+      <a n="zmailFeatureContactsUpsellURL"/>
+      <a n="zmailFeatureCalendarUpsellEnabled"/>
+      <a n="zmailFeatureCalendarUpsellURL"/>
+      <a n="zmailFeatureVoiceUpsellEnabled"/>
+      <a n="zmailFeatureVoiceUpsellURL"/>
+      <a n="zmailFeatureZmailAssistantEnabled"/>
+      <a n="zmailFeatureComposeInNewWindowEnabled"/>
+      <a n="zmailFeatureOpenMailInNewWindowEnabled"/>
+      <a n="zmailFeatureWebSearchEnabled"/>
+      <a n="zmailFeatureNewAddrBookEnabled"/>
+      <a n="zmailFeatureMailForwardingInFiltersEnabled"/>
+      <a n="zmailFeatureGalSyncEnabled"/>
+      <a n="zmailFeatureImportExportFolderEnabled"/>
+      <a n="zmailFeatureDiscardInFiltersEnabled"/>
+      <a n="zmailFeatureConfirmationPageEnabled"/>
+      <a n="zmailFeatureMobilePolicyEnabled"/> -->
     </attrs>
   </right>
   <right name="setAdminConsoleCOSFeaturesTab" type="setAttrs" targetType="cos">
@@ -1059,72 +1059,72 @@
     <ui name="Configure-COSes-COS-Features(modify)"/>
     <attrs>
       <!-- Major Features -->
-      <a n="zimbraFeatureMailEnabled"/>
-      <a n="zimbraFeatureContactsEnabled"/>
-      <a n="zimbraFeatureCalendarEnabled"/>
-      <a n="zimbraFeatureTasksEnabled"/>
-      <a n="zimbraFeatureNotebookEnabled"/>
-      <a n="zimbraFeatureBriefcasesEnabled"/>
-      <a n="zimbraFeatureIMEnabled"/>
-      <a n="zimbraFeatureOptionsEnabled"/>
+      <a n="zmailFeatureMailEnabled"/>
+      <a n="zmailFeatureContactsEnabled"/>
+      <a n="zmailFeatureCalendarEnabled"/>
+      <a n="zmailFeatureTasksEnabled"/>
+      <a n="zmailFeatureNotebookEnabled"/>
+      <a n="zmailFeatureBriefcasesEnabled"/>
+      <a n="zmailFeatureIMEnabled"/>
+      <a n="zmailFeatureOptionsEnabled"/>
       <!-- General Features -->
-      <a n="zimbraFeatureTaggingEnabled"/>
-      <a n="zimbraFeatureSharingEnabled"/>
-      <a n="zimbraFeatureChangePasswordEnabled"/>
-      <a n="zimbraFeatureSkinChangeEnabled"/>
-      <a n="zimbraFeatureHtmlComposeEnabled"/>
-      <a n="zimbraFeatureShortcutAliasesEnabled"/>
-      <a n="zimbraFeatureGalEnabled"/>
-      <a n="zimbraFeatureGalAutoCompleteEnabled"/>
+      <a n="zmailFeatureTaggingEnabled"/>
+      <a n="zmailFeatureSharingEnabled"/>
+      <a n="zmailFeatureChangePasswordEnabled"/>
+      <a n="zmailFeatureSkinChangeEnabled"/>
+      <a n="zmailFeatureHtmlComposeEnabled"/>
+      <a n="zmailFeatureShortcutAliasesEnabled"/>
+      <a n="zmailFeatureGalEnabled"/>
+      <a n="zmailFeatureGalAutoCompleteEnabled"/>
       <!-- Mail Features -->
-      <a n="zimbraFeatureMailPriorityEnabled"/>
-      <a n="zimbraFeatureFlaggingEnabled"/>
-      <a n="zimbraPop3Enabled"/>
-      <a n="zimbraImapEnabled"/>
-      <a n="zimbraFeaturePop3DataSourceEnabled"/>
-      <a n="zimbraFeatureImapDataSourceEnabled"/>
-      <a n="zimbraFeatureMailForwardingEnabled"/>
-      <a n="zimbraFeatureConversationsEnabled"/>
-      <a n="zimbraFeatureFiltersEnabled"/>
-      <a n="zimbraFeatureOutOfOfficeReplyEnabled"/>
-      <a n="zimbraFeatureNewMailNotificationEnabled"/>
+      <a n="zmailFeatureMailPriorityEnabled"/>
+      <a n="zmailFeatureFlaggingEnabled"/>
+      <a n="zmailPop3Enabled"/>
+      <a n="zmailImapEnabled"/>
+      <a n="zmailFeaturePop3DataSourceEnabled"/>
+      <a n="zmailFeatureImapDataSourceEnabled"/>
+      <a n="zmailFeatureMailForwardingEnabled"/>
+      <a n="zmailFeatureConversationsEnabled"/>
+      <a n="zmailFeatureFiltersEnabled"/>
+      <a n="zmailFeatureOutOfOfficeReplyEnabled"/>
+      <a n="zmailFeatureNewMailNotificationEnabled"/>
       <!-- deprecated PollingInterval -->
-      <a n="zimbraFeatureMailPollingIntervalPreferenceEnabled"/> 
-      <a n="zimbraFeatureIdentitiesEnabled"/>
-      <a n="zimbraFeatureReadReceiptsEnabled"/>
+      <a n="zmailFeatureMailPollingIntervalPreferenceEnabled"/> 
+      <a n="zmailFeatureIdentitiesEnabled"/>
+      <a n="zmailFeatureReadReceiptsEnabled"/>
       <!-- Calendar Features -->
-      <a n="zimbraFeatureGroupCalendarEnabled"/>
+      <a n="zmailFeatureGroupCalendarEnabled"/>
       <!-- IM Features -->
-      <a n="zimbraFeatureInstantNotify"/>
+      <a n="zmailFeatureInstantNotify"/>
       <!-- Search Features -->
-      <a n="zimbraFeatureAdvancedSearchEnabled"/>
-      <a n="zimbraFeatureSavedSearchesEnabled"/>
-      <a n="zimbraFeatureInitialSearchPreferenceEnabled"/>
+      <a n="zmailFeatureAdvancedSearchEnabled"/>
+      <a n="zmailFeatureSavedSearchesEnabled"/>
+      <a n="zmailFeatureInitialSearchPreferenceEnabled"/>
       <!-- Unexposed features -->
-      <!-- <a n="zimbraFeatureViewInHtmlEnabled"/>
-      <a n="zimbraFeatureMobileSyncEnabled"/>
-      <a n="zimbraFeatureVoiceEnabled"/>
-      <a n="zimbraFeaturePortalEnabled"/>
-      <a n="zimbraFeatureSignaturesEnabled"/>
-      <a n="zimbraFeatureMailUpsellEnabled"/>
-      <a n="zimbraFeatureMailUpsellURL"/>
-      <a n="zimbraFeatureContactsUpsellEnabled"/>
-      <a n="zimbraFeatureContactsUpsellURL"/>
-      <a n="zimbraFeatureCalendarUpsellEnabled"/>
-      <a n="zimbraFeatureCalendarUpsellURL"/>
-      <a n="zimbraFeatureVoiceUpsellEnabled"/>
-      <a n="zimbraFeatureVoiceUpsellURL"/>
-      <a n="zimbraFeatureZimbraAssistantEnabled"/>
-      <a n="zimbraFeatureComposeInNewWindowEnabled"/>
-      <a n="zimbraFeatureOpenMailInNewWindowEnabled"/>
-      <a n="zimbraFeatureWebSearchEnabled"/>
-      <a n="zimbraFeatureNewAddrBookEnabled"/>
-      <a n="zimbraFeatureMailForwardingInFiltersEnabled"/>
-      <a n="zimbraFeatureGalSyncEnabled"/>
-      <a n="zimbraFeatureImportExportFolderEnabled"/>
-      <a n="zimbraFeatureDiscardInFiltersEnabled"/>
-      <a n="zimbraFeatureConfirmationPageEnabled"/>
-      <a n="zimbraFeatureMobilePolicyEnabled"/> -->
+      <!-- <a n="zmailFeatureViewInHtmlEnabled"/>
+      <a n="zmailFeatureMobileSyncEnabled"/>
+      <a n="zmailFeatureVoiceEnabled"/>
+      <a n="zmailFeaturePortalEnabled"/>
+      <a n="zmailFeatureSignaturesEnabled"/>
+      <a n="zmailFeatureMailUpsellEnabled"/>
+      <a n="zmailFeatureMailUpsellURL"/>
+      <a n="zmailFeatureContactsUpsellEnabled"/>
+      <a n="zmailFeatureContactsUpsellURL"/>
+      <a n="zmailFeatureCalendarUpsellEnabled"/>
+      <a n="zmailFeatureCalendarUpsellURL"/>
+      <a n="zmailFeatureVoiceUpsellEnabled"/>
+      <a n="zmailFeatureVoiceUpsellURL"/>
+      <a n="zmailFeatureZmailAssistantEnabled"/>
+      <a n="zmailFeatureComposeInNewWindowEnabled"/>
+      <a n="zmailFeatureOpenMailInNewWindowEnabled"/>
+      <a n="zmailFeatureWebSearchEnabled"/>
+      <a n="zmailFeatureNewAddrBookEnabled"/>
+      <a n="zmailFeatureMailForwardingInFiltersEnabled"/>
+      <a n="zmailFeatureGalSyncEnabled"/>
+      <a n="zmailFeatureImportExportFolderEnabled"/>
+      <a n="zmailFeatureDiscardInFiltersEnabled"/>
+      <a n="zmailFeatureConfirmationPageEnabled"/>
+      <a n="zmailFeatureMobilePolicyEnabled"/> -->
     </attrs>
   </right>
   <right name="adminConsoleCOSFeaturesTabRights" type="combo">
@@ -1142,77 +1142,77 @@
     <ui name="Configure-COSes-COS-Preferences(view)"/>
     <attrs>
       <!-- General Options -->
-      <a n="zimbraPrefClientType"/>
-      <a n="zimbraPrefShowSearchString"/>
-      <a n="zimbraPrefMailInitialSearch"/>
-      <a n="zimbraPrefImapSearchFoldersEnabled"/>
-      <!-- <a n="zimbraPrefShortcuts"/> -->
-      <a n="zimbraPrefUseKeyboardShortcuts"/>
-      <a n="zimbraPrefWarnOnExit"/>
-      <a n="zimbraPrefShowSelectionCheckbox"/>
-      <a n="zimbraPrefIMAutoLogin"/>
-      <a n="zimbraJunkMessagesIndexingEnabled"/>
-      <a n="zimbraPrefLocale"/>
+      <a n="zmailPrefClientType"/>
+      <a n="zmailPrefShowSearchString"/>
+      <a n="zmailPrefMailInitialSearch"/>
+      <a n="zmailPrefImapSearchFoldersEnabled"/>
+      <!-- <a n="zmailPrefShortcuts"/> -->
+      <a n="zmailPrefUseKeyboardShortcuts"/>
+      <a n="zmailPrefWarnOnExit"/>
+      <a n="zmailPrefShowSelectionCheckbox"/>
+      <a n="zmailPrefIMAutoLogin"/>
+      <a n="zmailJunkMessagesIndexingEnabled"/>
+      <a n="zmailPrefLocale"/>
       <!-- Mail Options -->
-      <a n="zimbraPrefMessageViewHtmlPreferred"/>
-      <a n="zimbraPrefDisplayExternalImages"/>
-      <a n="zimbraPrefGroupMailBy"/>
-      <a n="zimbraPrefMailItemsPerPage"/>
-      <a n="zimbraPrefMailDefaultCharset"/>
+      <a n="zmailPrefMessageViewHtmlPreferred"/>
+      <a n="zmailPrefDisplayExternalImages"/>
+      <a n="zmailPrefGroupMailBy"/>
+      <a n="zmailPrefMailItemsPerPage"/>
+      <a n="zmailPrefMailDefaultCharset"/>
       <!-- deprecated PollingInterval -->
       <!-- should these be wrapped in -->
-      <!-- zimbraFeatureMailPollingIntervalPreferenceEnabled -->
-      <a n="zimbraPrefMailPollingInterval"/>
-      <a n="zimbraMailMinPollingInterval"/>
-      <a n="zimbraPrefOutOfOfficeCacheDuration"/>
-      <a n="zimbraPrefMailSendReadReceipts"/>
-      <a n="zimbraPrefSaveToSent"/>
-      <a n="zimbraAllowAnyFromAddress"/>
-      <a n="zimbraPrefComposeInNewWindow"/>
-      <a n="zimbraPrefComposeFormat"/>
-      <a n="zimbraPrefHtmlEditorDefaultFontFamily"/>
-      <a n="zimbraPrefHtmlEditorDefaultFontSize"/>
-      <a n="zimbraPrefHtmlEditorDefaultFontColor"/>
-      <a n="zimbraPrefForwardReplyInOriginalFormat"/>
-      <a n="zimbraPrefMailSignatureStyle"/> <!-- ? Deprecated? -->
-      <a n="zimbraMailSignatureMaxLength"/>
-      <!-- <a n="zimbraPrefNewMailNotificationEnabled"/> -->
-      <!-- <a n="zimbraPrefNewMailNotificationAddress"/> -->
+      <!-- zmailFeatureMailPollingIntervalPreferenceEnabled -->
+      <a n="zmailPrefMailPollingInterval"/>
+      <a n="zmailMailMinPollingInterval"/>
+      <a n="zmailPrefOutOfOfficeCacheDuration"/>
+      <a n="zmailPrefMailSendReadReceipts"/>
+      <a n="zmailPrefSaveToSent"/>
+      <a n="zmailAllowAnyFromAddress"/>
+      <a n="zmailPrefComposeInNewWindow"/>
+      <a n="zmailPrefComposeFormat"/>
+      <a n="zmailPrefHtmlEditorDefaultFontFamily"/>
+      <a n="zmailPrefHtmlEditorDefaultFontSize"/>
+      <a n="zmailPrefHtmlEditorDefaultFontColor"/>
+      <a n="zmailPrefForwardReplyInOriginalFormat"/>
+      <a n="zmailPrefMailSignatureStyle"/> <!-- ? Deprecated? -->
+      <a n="zmailMailSignatureMaxLength"/>
+      <!-- <a n="zmailPrefNewMailNotificationEnabled"/> -->
+      <!-- <a n="zmailPrefNewMailNotificationAddress"/> -->
       <!-- Address Book Options -->
-      <a n="zimbraPrefAutoAddAddressEnabled"/>
-      <a n="zimbraPrefGalAutoCompleteEnabled"/>
-      <a n="zimbraPrefContactsPerPage"/>
-      <!-- <a n="zimbraPrefContactsInitialView"/> -->
+      <a n="zmailPrefAutoAddAddressEnabled"/>
+      <a n="zmailPrefGalAutoCompleteEnabled"/>
+      <a n="zmailPrefContactsPerPage"/>
+      <!-- <a n="zmailPrefContactsInitialView"/> -->
       <!-- Calendar Options -->
-      <a n="zimbraPrefTimeZoneId"/>
-      <a n="zimbraPrefCalendarApptReminderWarningTime"/>
-      <a n="zimbraPrefCalendarAlwaysShowMiniCal"/>
-      <a n="zimbraPrefCalendarUseQuickAdd"/>
-      <a n="zimbraPrefUseTimeZoneListInCalendar"/>
-      <!-- <a n="zimbraPrefCalendarInitialView"/> -->
-      <!-- <a n="zimbraPrefCalendarFirstDayOfWeek"/> -->
-      <!-- <a n="zimbraPrefCalendarNotifyDelegatedChanges"/> -->
-      <!-- <a n="zimbraPrefCalendarInitialCheckedCalendars"/> -->
-      <!-- <a n="zimbraPrefCalendarReminderDuration1"/> -->
-      <!-- <a n="zimbraPrefCalendarReminderDuration2"/> -->
-      <!-- <a n="zimbraPrefCalendarReminderEmail"/> -->
-      <!-- <a n="zimbraPrefCalendarReminderSendEmail"/> -->
-      <!-- <a n="zimbraPrefCalendarReminderMobile"/> -->
-      <!-- <a n="zimbraPrefCalendarReminderYMessenger"/> -->
-      <!-- <a n="zimbraPrefCalendarApptVisibility"/> -->
-      <!-- <a n="zimbraPrefCalendarAutoAddInvites"/> -->
-      <!-- <a n="zimbraPrefCalendarSendInviteDeniedAutoReply"/> -->
-      <!-- <a n="zimbraPrefCalendarForwardInvitesTo"/> -->
-      <!-- <a n="zimbraPrefCalendarDayHourStart"/> -->
-      <!-- <a n="zimbraPrefCalendarDayHourEnd"/> -->
-      <!-- <a n="zimbraPrefCalendarReminderSoundsEnabled"/> -->
-      <!-- <a n="zimbraPrefCalendarReminderFlashTitle"/> -->
-      <!-- <a n="zimbraPrefCalendarAllowForwardedInvite"/> -->
-      <!-- <a n="zimbraPrefCalendarAllowPublishMethodInvite"/> -->
-      <!-- <a n="zimbraPrefCalendarAllowCancelEmailToSelf"/> -->
-      <!-- <a n="zimbraPrefCalendarToasterEnabled"/> -->
-      <!-- <a n="zimbraPrefCalendarShowPastDueReminders"/> -->
-      <!-- <a n="zimbraPrefAppleIcalDelegationEnabled"/> -->
+      <a n="zmailPrefTimeZoneId"/>
+      <a n="zmailPrefCalendarApptReminderWarningTime"/>
+      <a n="zmailPrefCalendarAlwaysShowMiniCal"/>
+      <a n="zmailPrefCalendarUseQuickAdd"/>
+      <a n="zmailPrefUseTimeZoneListInCalendar"/>
+      <!-- <a n="zmailPrefCalendarInitialView"/> -->
+      <!-- <a n="zmailPrefCalendarFirstDayOfWeek"/> -->
+      <!-- <a n="zmailPrefCalendarNotifyDelegatedChanges"/> -->
+      <!-- <a n="zmailPrefCalendarInitialCheckedCalendars"/> -->
+      <!-- <a n="zmailPrefCalendarReminderDuration1"/> -->
+      <!-- <a n="zmailPrefCalendarReminderDuration2"/> -->
+      <!-- <a n="zmailPrefCalendarReminderEmail"/> -->
+      <!-- <a n="zmailPrefCalendarReminderSendEmail"/> -->
+      <!-- <a n="zmailPrefCalendarReminderMobile"/> -->
+      <!-- <a n="zmailPrefCalendarReminderYMessenger"/> -->
+      <!-- <a n="zmailPrefCalendarApptVisibility"/> -->
+      <!-- <a n="zmailPrefCalendarAutoAddInvites"/> -->
+      <!-- <a n="zmailPrefCalendarSendInviteDeniedAutoReply"/> -->
+      <!-- <a n="zmailPrefCalendarForwardInvitesTo"/> -->
+      <!-- <a n="zmailPrefCalendarDayHourStart"/> -->
+      <!-- <a n="zmailPrefCalendarDayHourEnd"/> -->
+      <!-- <a n="zmailPrefCalendarReminderSoundsEnabled"/> -->
+      <!-- <a n="zmailPrefCalendarReminderFlashTitle"/> -->
+      <!-- <a n="zmailPrefCalendarAllowForwardedInvite"/> -->
+      <!-- <a n="zmailPrefCalendarAllowPublishMethodInvite"/> -->
+      <!-- <a n="zmailPrefCalendarAllowCancelEmailToSelf"/> -->
+      <!-- <a n="zmailPrefCalendarToasterEnabled"/> -->
+      <!-- <a n="zmailPrefCalendarShowPastDueReminders"/> -->
+      <!-- <a n="zmailPrefAppleIcalDelegationEnabled"/> -->
     </attrs>
   </right>
   <right name="setAdminConsoleCOSPreferencesTab" type="setAttrs" targetType="cos">
@@ -1220,75 +1220,75 @@
     <ui name="Configure-COSes-COS-Preferences(modify)"/>
     <attrs>
       <!-- General Options -->
-      <a n="zimbraPrefClientType"/>
-      <a n="zimbraPrefShowSearchString"/>
-      <a n="zimbraPrefMailInitialSearch"/>
-      <a n="zimbraPrefImapSearchFoldersEnabled"/>
-      <!-- <a n="zimbraPrefShortcuts"/> -->
-      <a n="zimbraPrefUseKeyboardShortcuts"/>
-      <a n="zimbraPrefWarnOnExit"/>
-      <a n="zimbraPrefShowSelectionCheckbox"/>
-      <a n="zimbraPrefIMAutoLogin"/>
-      <a n="zimbraJunkMessagesIndexingEnabled"/>
-      <a n="zimbraPrefLocale"/>
+      <a n="zmailPrefClientType"/>
+      <a n="zmailPrefShowSearchString"/>
+      <a n="zmailPrefMailInitialSearch"/>
+      <a n="zmailPrefImapSearchFoldersEnabled"/>
+      <!-- <a n="zmailPrefShortcuts"/> -->
+      <a n="zmailPrefUseKeyboardShortcuts"/>
+      <a n="zmailPrefWarnOnExit"/>
+      <a n="zmailPrefShowSelectionCheckbox"/>
+      <a n="zmailPrefIMAutoLogin"/>
+      <a n="zmailJunkMessagesIndexingEnabled"/>
+      <a n="zmailPrefLocale"/>
       <!-- Mail Options -->
-      <a n="zimbraPrefMessageViewHtmlPreferred"/>
-      <a n="zimbraPrefDisplayExternalImages"/>
-      <a n="zimbraPrefGroupMailBy"/>
-      <a n="zimbraPrefMailItemsPerPage"/>
-      <a n="zimbraPrefMailDefaultCharset"/>
-      <!-- should these be wrapped in zimbraFeatureMailPollingIntervalPreferenceEnabled -->
-      <a n="zimbraPrefMailPollingInterval"/>
-      <a n="zimbraMailMinPollingInterval"/>
-      <a n="zimbraPrefOutOfOfficeCacheDuration"/>
-      <a n="zimbraPrefMailSendReadReceipts"/>
-      <a n="zimbraPrefSaveToSent"/>
-      <a n="zimbraAllowAnyFromAddress"/>
-      <a n="zimbraPrefComposeInNewWindow"/>
-      <a n="zimbraPrefComposeFormat"/>
-      <a n="zimbraPrefHtmlEditorDefaultFontFamily"/>
-      <a n="zimbraPrefHtmlEditorDefaultFontSize"/>
-      <a n="zimbraPrefHtmlEditorDefaultFontColor"/>
-      <a n="zimbraPrefForwardReplyInOriginalFormat"/>
-      <a n="zimbraPrefMailSignatureStyle"/> <!-- ? Deprecated? -->
-      <a n="zimbraMailSignatureMaxLength"/>
-      <!-- <a n="zimbraPrefNewMailNotificationEnabled"/> -->
-      <!-- <a n="zimbraPrefNewMailNotificationAddress"/> -->
+      <a n="zmailPrefMessageViewHtmlPreferred"/>
+      <a n="zmailPrefDisplayExternalImages"/>
+      <a n="zmailPrefGroupMailBy"/>
+      <a n="zmailPrefMailItemsPerPage"/>
+      <a n="zmailPrefMailDefaultCharset"/>
+      <!-- should these be wrapped in zmailFeatureMailPollingIntervalPreferenceEnabled -->
+      <a n="zmailPrefMailPollingInterval"/>
+      <a n="zmailMailMinPollingInterval"/>
+      <a n="zmailPrefOutOfOfficeCacheDuration"/>
+      <a n="zmailPrefMailSendReadReceipts"/>
+      <a n="zmailPrefSaveToSent"/>
+      <a n="zmailAllowAnyFromAddress"/>
+      <a n="zmailPrefComposeInNewWindow"/>
+      <a n="zmailPrefComposeFormat"/>
+      <a n="zmailPrefHtmlEditorDefaultFontFamily"/>
+      <a n="zmailPrefHtmlEditorDefaultFontSize"/>
+      <a n="zmailPrefHtmlEditorDefaultFontColor"/>
+      <a n="zmailPrefForwardReplyInOriginalFormat"/>
+      <a n="zmailPrefMailSignatureStyle"/> <!-- ? Deprecated? -->
+      <a n="zmailMailSignatureMaxLength"/>
+      <!-- <a n="zmailPrefNewMailNotificationEnabled"/> -->
+      <!-- <a n="zmailPrefNewMailNotificationAddress"/> -->
       <!-- Address Book Options -->
-      <a n="zimbraPrefAutoAddAddressEnabled"/>
-      <a n="zimbraPrefGalAutoCompleteEnabled"/>
-      <a n="zimbraPrefContactsPerPage"/>
-      <!-- <a n="zimbraPrefContactsInitialView"/> -->
+      <a n="zmailPrefAutoAddAddressEnabled"/>
+      <a n="zmailPrefGalAutoCompleteEnabled"/>
+      <a n="zmailPrefContactsPerPage"/>
+      <!-- <a n="zmailPrefContactsInitialView"/> -->
       <!-- Calendar Options -->
-      <a n="zimbraPrefTimeZoneId"/>
-      <a n="zimbraPrefCalendarApptReminderWarningTime"/>
-      <a n="zimbraPrefCalendarAlwaysShowMiniCal"/>
-      <a n="zimbraPrefCalendarUseQuickAdd"/>
-      <a n="zimbraPrefUseTimeZoneListInCalendar"/>
-      <!-- <a n="zimbraPrefCalendarInitialView"/> -->
-      <!-- <a n="zimbraPrefCalendarFirstDayOfWeek"/> -->
-      <!-- <a n="zimbraPrefCalendarNotifyDelegatedChanges"/> -->
-      <!-- <a n="zimbraPrefCalendarInitialCheckedCalendars"/> -->
-      <!-- <a n="zimbraPrefCalendarReminderDuration1"/> -->
-      <!-- <a n="zimbraPrefCalendarReminderDuration2"/> -->
-      <!-- <a n="zimbraPrefCalendarReminderEmail"/> -->
-      <!-- <a n="zimbraPrefCalendarReminderSendEmail"/> -->
-      <!-- <a n="zimbraPrefCalendarReminderMobile"/> -->
-      <!-- <a n="zimbraPrefCalendarReminderYMessenger"/> -->
-      <!-- <a n="zimbraPrefCalendarApptVisibility"/> -->
-      <!-- <a n="zimbraPrefCalendarAutoAddInvites"/> -->
-      <!-- <a n="zimbraPrefCalendarSendInviteDeniedAutoReply"/> -->
-      <!-- <a n="zimbraPrefCalendarForwardInvitesTo"/> -->
-      <!-- <a n="zimbraPrefCalendarDayHourStart"/> -->
-      <!-- <a n="zimbraPrefCalendarDayHourEnd"/> -->
-      <!-- <a n="zimbraPrefCalendarReminderSoundsEnabled"/> -->
-      <!-- <a n="zimbraPrefCalendarReminderFlashTitle"/> -->
-      <!-- <a n="zimbraPrefCalendarAllowForwardedInvite"/> -->
-      <!-- <a n="zimbraPrefCalendarAllowPublishMethodInvite"/> -->
-      <!-- <a n="zimbraPrefCalendarAllowCancelEmailToSelf"/> -->
-      <!-- <a n="zimbraPrefCalendarToasterEnabled"/> -->
-      <!-- <a n="zimbraPrefCalendarShowPastDueReminders"/> -->
-      <!-- <a n="zimbraPrefAppleIcalDelegationEnabled"/> -->
+      <a n="zmailPrefTimeZoneId"/>
+      <a n="zmailPrefCalendarApptReminderWarningTime"/>
+      <a n="zmailPrefCalendarAlwaysShowMiniCal"/>
+      <a n="zmailPrefCalendarUseQuickAdd"/>
+      <a n="zmailPrefUseTimeZoneListInCalendar"/>
+      <!-- <a n="zmailPrefCalendarInitialView"/> -->
+      <!-- <a n="zmailPrefCalendarFirstDayOfWeek"/> -->
+      <!-- <a n="zmailPrefCalendarNotifyDelegatedChanges"/> -->
+      <!-- <a n="zmailPrefCalendarInitialCheckedCalendars"/> -->
+      <!-- <a n="zmailPrefCalendarReminderDuration1"/> -->
+      <!-- <a n="zmailPrefCalendarReminderDuration2"/> -->
+      <!-- <a n="zmailPrefCalendarReminderEmail"/> -->
+      <!-- <a n="zmailPrefCalendarReminderSendEmail"/> -->
+      <!-- <a n="zmailPrefCalendarReminderMobile"/> -->
+      <!-- <a n="zmailPrefCalendarReminderYMessenger"/> -->
+      <!-- <a n="zmailPrefCalendarApptVisibility"/> -->
+      <!-- <a n="zmailPrefCalendarAutoAddInvites"/> -->
+      <!-- <a n="zmailPrefCalendarSendInviteDeniedAutoReply"/> -->
+      <!-- <a n="zmailPrefCalendarForwardInvitesTo"/> -->
+      <!-- <a n="zmailPrefCalendarDayHourStart"/> -->
+      <!-- <a n="zmailPrefCalendarDayHourEnd"/> -->
+      <!-- <a n="zmailPrefCalendarReminderSoundsEnabled"/> -->
+      <!-- <a n="zmailPrefCalendarReminderFlashTitle"/> -->
+      <!-- <a n="zmailPrefCalendarAllowForwardedInvite"/> -->
+      <!-- <a n="zmailPrefCalendarAllowPublishMethodInvite"/> -->
+      <!-- <a n="zmailPrefCalendarAllowCancelEmailToSelf"/> -->
+      <!-- <a n="zmailPrefCalendarToasterEnabled"/> -->
+      <!-- <a n="zmailPrefCalendarShowPastDueReminders"/> -->
+      <!-- <a n="zmailPrefAppleIcalDelegationEnabled"/> -->
     </attrs>
   </right>
   <right name="adminConsoleCOSPreferencesTabRights" type="combo">
@@ -1304,16 +1304,16 @@
     <desc> Admin Console view attr rights for COS Themes Tab </desc>
     <ui name="Configure-COSes-COS-Themes(view)"/>
     <attrs>
-      <a n="zimbraPrefSkin"/>
-      <a n="zimbraAvailableSkin"/>
+      <a n="zmailPrefSkin"/>
+      <a n="zmailAvailableSkin"/>
     </attrs>
   </right>
   <right name="setAdminConsoleCOSThemesTab" type="setAttrs" targetType="cos">
     <desc> Admin Console set attr rights for COS Themes Tab </desc>
     <ui name="Configure-COSes-COS-Themes(modify)"/>
     <attrs>
-      <a n="zimbraPrefSkin"/>
-      <a n="zimbraAvailableSkin"/>
+      <a n="zmailPrefSkin"/>
+      <a n="zmailAvailableSkin"/>
     </attrs>
   </right>
   <right name="adminConsoleCOSThemesTabRights" type="combo">
@@ -1329,14 +1329,14 @@
     <desc> Admin Console set attr rights for COS Zimlets Tab </desc>
     <ui name="Configure-COSes-COS-Zimlets(modify)"/>
     <attrs>
-      <a n="zimbraZimletAvailableZimlets"/>
+      <a n="zmailZimletAvailableZimlets"/>
     </attrs>
   </right>
   <right name="viewAdminConsoleCOSZimletsTab" type="getAttrs" targetType="cos">
     <desc> Admin Console view attr rights for COS Zimlets Tab </desc>
     <ui name="Configure-COSes-COS-Zimlets(view)"/>
     <attrs>
-      <a n="zimbraZimletAvailableZimlets"/>
+      <a n="zmailZimletAvailableZimlets"/>
     </attrs>
   </right>
   <right name="adminConsoleCOSZimletsTabRights" type="combo">
@@ -1352,14 +1352,14 @@
     <desc> Admin Console set attr rights for COS Server Pool Tab </desc>
     <ui name="Configure-COSes-COS-ServerPool(modify)"/>
     <attrs>
-      <a n="zimbraMailHostPool"/>
+      <a n="zmailMailHostPool"/>
     </attrs>
   </right>
   <right name="viewAdminConsoleCOSServerPoolTab" type="getAttrs" targetType="cos">
     <desc> Admin Console view attr rights for COS Server Pool Tab </desc>
     <ui name="Configure-COSes-COS-ServerPool(view)"/>
     <attrs>
-      <a n="zimbraMailHostPool"/>
+      <a n="zmailMailHostPool"/>
     </attrs>
   </right>
   <right name="adminConsoleCOSServerPoolTabRights" type="combo">
@@ -1377,42 +1377,42 @@
     <ui name="Configure-COSes-COS-Advanced(modify)"/>
     <attrs>
       <!-- Attachment Settings -->
-      <a n="zimbraAttachmentsBlocked"/>
-      <a n="zimbraAttachmentsViewInHtmlOnly"/>
-      <a n="zimbraAttachmentsIndexingEnabled"/>
+      <a n="zmailAttachmentsBlocked"/>
+      <a n="zmailAttachmentsViewInHtmlOnly"/>
+      <a n="zmailAttachmentsIndexingEnabled"/>
       <!-- Quotas -->
-      <a n="zimbraMailQuota"/>
-      <a n="zimbraDomainAdminMaxMailQuota"/>
-      <a n="zimbraContactMaxNumEntries"/>
-      <a n="zimbraQuotaWarnPercent"/>
-      <a n="zimbraQuotaWarnInterval"/>
-      <a n="zimbraQuotaWarnMessage"/>
+      <a n="zmailMailQuota"/>
+      <a n="zmailDomainAdminMaxMailQuota"/>
+      <a n="zmailContactMaxNumEntries"/>
+      <a n="zmailQuotaWarnPercent"/>
+      <a n="zmailQuotaWarnInterval"/>
+      <a n="zmailQuotaWarnMessage"/>
       <!-- Password -->
-      <a n="zimbraPasswordLocked"/>
-      <a n="zimbraPasswordMinLength"/>
-      <a n="zimbraPasswordMaxLength"/>
-      <a n="zimbraPasswordMinUpperCaseChars"/>
-      <a n="zimbraPasswordMinLowerCaseChars"/>  <!-- not exposed -->
-      <a n="zimbraPasswordMinPunctuationChars"/>
-      <a n="zimbraPasswordMinNumericChars"/>
-      <a n="zimbraPasswordMinAge"/>
-      <a n="zimbraPasswordMaxAge"/>
-      <a n="zimbraPasswordEnforceHistory"/>
+      <a n="zmailPasswordLocked"/>
+      <a n="zmailPasswordMinLength"/>
+      <a n="zmailPasswordMaxLength"/>
+      <a n="zmailPasswordMinUpperCaseChars"/>
+      <a n="zmailPasswordMinLowerCaseChars"/>  <!-- not exposed -->
+      <a n="zmailPasswordMinPunctuationChars"/>
+      <a n="zmailPasswordMinNumericChars"/>
+      <a n="zmailPasswordMinAge"/>
+      <a n="zmailPasswordMaxAge"/>
+      <a n="zmailPasswordEnforceHistory"/>
       <!-- Failed Login Policy -->
-      <a n="zimbraPasswordLockoutEnabled"/>
-      <a n="zimbraPasswordLockoutMaxFailures"/>
-      <a n="zimbraPasswordLockoutDuration"/>
-      <a n="zimbraPasswordLockoutFailureLifetime"/>
+      <a n="zmailPasswordLockoutEnabled"/>
+      <a n="zmailPasswordLockoutMaxFailures"/>
+      <a n="zmailPasswordLockoutDuration"/>
+      <a n="zmailPasswordLockoutFailureLifetime"/>
       <!-- timeout Policy -->
-      <a n="zimbraAdminAuthTokenLifetime"/>
-      <a n="zimbraAuthTokenLifetime"/>
-      <a n="zimbraMailIdleSessionTimeout"/>
+      <a n="zmailAdminAuthTokenLifetime"/>
+      <a n="zmailAuthTokenLifetime"/>
+      <a n="zmailMailIdleSessionTimeout"/>
       <!-- Email Retention Policy -->
-      <a n="zimbraMailMessageLifetime"/>
-      <a n="zimbraMailTrashLifetime"/>
-      <a n="zimbraMailSpamLifetime"/>
+      <a n="zmailMailMessageLifetime"/>
+      <a n="zmailMailTrashLifetime"/>
+      <a n="zmailMailSpamLifetime"/>
       <!-- Freebusy Interop -->
-      <a n="zimbraFreebusyExchangeUserOrg"/>
+      <a n="zmailFreebusyExchangeUserOrg"/>
     </attrs>
   </right>
   <right name="viewAdminConsoleCOSAdvancedTab" type="getAttrs" targetType="cos">
@@ -1420,42 +1420,42 @@
     <ui name="Configure-COSes-COS-Advanced(view)"/>
     <attrs>
       <!-- Attachment Settings -->
-      <a n="zimbraAttachmentsBlocked"/>
-      <a n="zimbraAttachmentsViewInHtmlOnly"/>
-      <a n="zimbraAttachmentsIndexingEnabled"/>
+      <a n="zmailAttachmentsBlocked"/>
+      <a n="zmailAttachmentsViewInHtmlOnly"/>
+      <a n="zmailAttachmentsIndexingEnabled"/>
       <!-- Quotas -->
-      <a n="zimbraMailQuota"/>
-      <a n="zimbraDomainAdminMaxMailQuota"/>
-      <a n="zimbraContactMaxNumEntries"/>
-      <a n="zimbraQuotaWarnPercent"/>
-      <a n="zimbraQuotaWarnInterval"/>
-      <a n="zimbraQuotaWarnMessage"/>
+      <a n="zmailMailQuota"/>
+      <a n="zmailDomainAdminMaxMailQuota"/>
+      <a n="zmailContactMaxNumEntries"/>
+      <a n="zmailQuotaWarnPercent"/>
+      <a n="zmailQuotaWarnInterval"/>
+      <a n="zmailQuotaWarnMessage"/>
       <!-- Password -->
-      <a n="zimbraPasswordLocked"/>
-      <a n="zimbraPasswordMinLength"/>
-      <a n="zimbraPasswordMaxLength"/>
-      <a n="zimbraPasswordMinUpperCaseChars"/>
-      <a n="zimbraPasswordMinLowerCaseChars"/>  <!-- not exposed -->
-      <a n="zimbraPasswordMinPunctuationChars"/>
-      <a n="zimbraPasswordMinNumericChars"/>
-      <a n="zimbraPasswordMinAge"/>
-      <a n="zimbraPasswordMaxAge"/>
-      <a n="zimbraPasswordEnforceHistory"/>
+      <a n="zmailPasswordLocked"/>
+      <a n="zmailPasswordMinLength"/>
+      <a n="zmailPasswordMaxLength"/>
+      <a n="zmailPasswordMinUpperCaseChars"/>
+      <a n="zmailPasswordMinLowerCaseChars"/>  <!-- not exposed -->
+      <a n="zmailPasswordMinPunctuationChars"/>
+      <a n="zmailPasswordMinNumericChars"/>
+      <a n="zmailPasswordMinAge"/>
+      <a n="zmailPasswordMaxAge"/>
+      <a n="zmailPasswordEnforceHistory"/>
       <!-- Failed Login Policy -->
-      <a n="zimbraPasswordLockoutEnabled"/>
-      <a n="zimbraPasswordLockoutMaxFailures"/>
-      <a n="zimbraPasswordLockoutDuration"/>
-      <a n="zimbraPasswordLockoutFailureLifetime"/>
+      <a n="zmailPasswordLockoutEnabled"/>
+      <a n="zmailPasswordLockoutMaxFailures"/>
+      <a n="zmailPasswordLockoutDuration"/>
+      <a n="zmailPasswordLockoutFailureLifetime"/>
       <!-- timeout Policy -->
-      <a n="zimbraAdminAuthTokenLifetime"/>
-      <a n="zimbraAuthTokenLifetime"/>
-      <a n="zimbraMailIdleSessionTimeout"/>
+      <a n="zmailAdminAuthTokenLifetime"/>
+      <a n="zmailAuthTokenLifetime"/>
+      <a n="zmailMailIdleSessionTimeout"/>
       <!-- Email Retention Policy -->
-      <a n="zimbraMailMessageLifetime"/>
-      <a n="zimbraMailTrashLifetime"/>
-      <a n="zimbraMailSpamLifetime"/>
+      <a n="zmailMailMessageLifetime"/>
+      <a n="zmailMailTrashLifetime"/>
+      <a n="zmailMailSpamLifetime"/>
       <!-- Freebusy Interop -->
-      <a n="zimbraFreebusyExchangeUserOrg"/>
+      <a n="zmailFreebusyExchangeUserOrg"/>
     </attrs>
   </right>
   <right name="adminConsoleCOSAdvancedTabRights" type="combo">
@@ -1472,14 +1472,14 @@
     <desc> Admin Console set attr rights for COS ACL Tab </desc>
     <ui name="Configure-COSes-COS-ACL(modify)"/>
     <attrs>
-      <a n="zimbraACE"/>
+      <a n="zmailACE"/>
     </attrs>
   </right>
   <right name="viewAdminConsoleCOSACLTab" type="getAttrs" targetType="cos">
     <desc> Admin Console view attr rights for COS ACL Tab </desc>
     <ui name="Configure-COSes-COS-ACL(view)"/>
     <attrs>
-      <a n="zimbraACE"/>
+      <a n="zmailACE"/>
     </attrs>
   </right>
   <right name="adminConsoleCOSACLTabRights" type="combo">
@@ -1491,49 +1491,49 @@
     </rights>
   </right>
 
-  <!-- Admin Console Zimbra Mobile Tab -->
+  <!-- Admin Console Zmail Mobile Tab -->
   <right name="setAdminConsoleCOSMobileTab" type="setAttrs" targetType="cos">
     <desc> Admin Console set attr rights for COS Mobile Tab </desc>
     <ui name="Configure-COSes-COS-MobileAccess(modify)"/>
     <attrs>
-      <a n="zimbraFeatureMobileSyncEnabled"/>
-      <a n="zimbraFeatureMobilePolicyEnabled"/>
-      <a n="zimbraMobilePolicyAllowNonProvisionableDevices"/>
-      <a n="zimbraMobilePolicyAllowPartialProvisioning"/>
-      <a n="zimbraMobilePolicyRefreshInterval"/>
-      <a n="zimbraMobilePolicyDevicePasswordEnabled"/>
-      <a n="zimbraMobilePolicyMinDevicePasswordLength"/>
-      <a n="zimbraMobilePolicyAllowSimpleDevicePassword"/>
-      <a n="zimbraMobilePolicyAlphanumericDevicePasswordRequired"/>
-      <a n="zimbraMobilePolicyMinDevicePasswordComplexCharacters"/>
-      <a n="zimbraMobilePolicyDevicePasswordExpiration"/>
-      <a n="zimbraMobilePolicyDevicePasswordHistory"/>
-      <a n="zimbraMobilePolicyMaxInactivityTimeDeviceLock"/>
-      <a n="zimbraMobilePolicyMaxDevicePasswordFailedAttempts"/>
-      <a n="zimbraMobilePolicyPasswordRecoveryEnabled"/>
-      <a n="zimbraMobilePolicyDeviceEncryptionEnabled"/>
+      <a n="zmailFeatureMobileSyncEnabled"/>
+      <a n="zmailFeatureMobilePolicyEnabled"/>
+      <a n="zmailMobilePolicyAllowNonProvisionableDevices"/>
+      <a n="zmailMobilePolicyAllowPartialProvisioning"/>
+      <a n="zmailMobilePolicyRefreshInterval"/>
+      <a n="zmailMobilePolicyDevicePasswordEnabled"/>
+      <a n="zmailMobilePolicyMinDevicePasswordLength"/>
+      <a n="zmailMobilePolicyAllowSimpleDevicePassword"/>
+      <a n="zmailMobilePolicyAlphanumericDevicePasswordRequired"/>
+      <a n="zmailMobilePolicyMinDevicePasswordComplexCharacters"/>
+      <a n="zmailMobilePolicyDevicePasswordExpiration"/>
+      <a n="zmailMobilePolicyDevicePasswordHistory"/>
+      <a n="zmailMobilePolicyMaxInactivityTimeDeviceLock"/>
+      <a n="zmailMobilePolicyMaxDevicePasswordFailedAttempts"/>
+      <a n="zmailMobilePolicyPasswordRecoveryEnabled"/>
+      <a n="zmailMobilePolicyDeviceEncryptionEnabled"/>
     </attrs>
   </right>
   <right name="viewAdminConsoleCOSMobileTab" type="getAttrs" targetType="cos">
     <desc> Admin Console view attr rights for COS Mobile Tab </desc>
     <ui name="Configure-COSes-COS-MobileAccess(view)"/>
     <attrs>
-      <a n="zimbraFeatureMobileSyncEnabled"/>
-      <a n="zimbraFeatureMobilePolicyEnabled"/>
-      <a n="zimbraMobilePolicyAllowNonProvisionableDevices"/>
-      <a n="zimbraMobilePolicyAllowPartialProvisioning"/>
-      <a n="zimbraMobilePolicyRefreshInterval"/>
-      <a n="zimbraMobilePolicyDevicePasswordEnabled"/>
-      <a n="zimbraMobilePolicyMinDevicePasswordLength"/>
-      <a n="zimbraMobilePolicyAllowSimpleDevicePassword"/>
-      <a n="zimbraMobilePolicyAlphanumericDevicePasswordRequired"/>
-      <a n="zimbraMobilePolicyMinDevicePasswordComplexCharacters"/>
-      <a n="zimbraMobilePolicyDevicePasswordExpiration"/>
-      <a n="zimbraMobilePolicyDevicePasswordHistory"/>
-      <a n="zimbraMobilePolicyMaxInactivityTimeDeviceLock"/>
-      <a n="zimbraMobilePolicyMaxDevicePasswordFailedAttempts"/>
-      <a n="zimbraMobilePolicyPasswordRecoveryEnabled"/>
-      <a n="zimbraMobilePolicyDeviceEncryptionEnabled"/>
+      <a n="zmailFeatureMobileSyncEnabled"/>
+      <a n="zmailFeatureMobilePolicyEnabled"/>
+      <a n="zmailMobilePolicyAllowNonProvisionableDevices"/>
+      <a n="zmailMobilePolicyAllowPartialProvisioning"/>
+      <a n="zmailMobilePolicyRefreshInterval"/>
+      <a n="zmailMobilePolicyDevicePasswordEnabled"/>
+      <a n="zmailMobilePolicyMinDevicePasswordLength"/>
+      <a n="zmailMobilePolicyAllowSimpleDevicePassword"/>
+      <a n="zmailMobilePolicyAlphanumericDevicePasswordRequired"/>
+      <a n="zmailMobilePolicyMinDevicePasswordComplexCharacters"/>
+      <a n="zmailMobilePolicyDevicePasswordExpiration"/>
+      <a n="zmailMobilePolicyDevicePasswordHistory"/>
+      <a n="zmailMobilePolicyMaxInactivityTimeDeviceLock"/>
+      <a n="zmailMobilePolicyMaxDevicePasswordFailedAttempts"/>
+      <a n="zmailMobilePolicyPasswordRecoveryEnabled"/>
+      <a n="zmailMobilePolicyDeviceEncryptionEnabled"/>
     </attrs>
   </right>
   <right name="adminConsoleCOSMobileTabRights" type="combo">
@@ -1551,31 +1551,31 @@
     <desc> Admin Console set attr rights for Domain Info Tab </desc>
     <ui name="Configure-Domains-Domain-GeneralInfo(modify)"/>
     <attrs>
-      <a n="zimbraDomainName"/>
+      <a n="zmailDomainName"/>
       <a n="description"/>
-      <a n="zimbraDomainStatus"/>
-      <a n="zimbraPrefTimeZoneId"/>
-      <a n="zimbraPublicServiceHostname"/>
-      <a n="zimbraDNSCheckHostname"/>
-      <a n="zimbraAdminConsoleDNSCheckEnabled"/>
-      <a n="zimbraDomainDefaultCOSId"/>
-      <a n="zimbraNotes"/>
+      <a n="zmailDomainStatus"/>
+      <a n="zmailPrefTimeZoneId"/>
+      <a n="zmailPublicServiceHostname"/>
+      <a n="zmailDNSCheckHostname"/>
+      <a n="zmailAdminConsoleDNSCheckEnabled"/>
+      <a n="zmailDomainDefaultCOSId"/>
+      <a n="zmailNotes"/>
     </attrs>
   </right>
   <right name="viewAdminConsoleDomainInfoTab" type="getAttrs" targetType="domain">
     <desc> Admin Console view attr rights for Domain Info Tab </desc>
     <ui name="Configure-Domains-Domain-GeneralInfo(view)"/>
     <attrs>
-      <a n="zimbraDomainName"/>
-      <a n="zimbraDomainType"/>  
+      <a n="zmailDomainName"/>
+      <a n="zmailDomainType"/>  
       <a n="description"/>
-      <a n="zimbraDomainStatus"/>
-      <a n="zimbraPrefTimeZoneId"/>
-      <a n="zimbraPublicServiceHostname"/>
-      <a n="zimbraDNSCheckHostname"/>
-      <a n="zimbraAdminConsoleDNSCheckEnabled"/>
-      <a n="zimbraDomainDefaultCOSId"/>
-      <a n="zimbraNotes"/>
+      <a n="zmailDomainStatus"/>
+      <a n="zmailPrefTimeZoneId"/>
+      <a n="zmailPublicServiceHostname"/>
+      <a n="zmailDNSCheckHostname"/>
+      <a n="zmailAdminConsoleDNSCheckEnabled"/>
+      <a n="zmailDomainDefaultCOSId"/>
+      <a n="zmailNotes"/>
     </attrs>
   </right>
   <right name="adminConsoleDomainInfoTabRights" type="combo">
@@ -1592,16 +1592,16 @@
     <desc> Admin Console set attr rights for Domain GAL Tab </desc>
     <ui name="Configure-Domains-Domain-GAL-configure(modify)"/>
     <attrs>
-      <a n="zimbraGalMode"/>
-      <a n="zimbraGalMaxResults"/>    
+      <a n="zmailGalMode"/>
+      <a n="zmailGalMaxResults"/>    
     </attrs>
   </right>
   <right name="viewAdminConsoleDomainGALTab" type="getAttrs" targetType="domain">
     <desc> Admin Console view attr rights for Domain GAL Tab </desc>
     <ui name="Configure-Domains-Domain-GAL-configure(view)"/>
     <attrs>
-      <a n="zimbraGalMode"/>
-      <a n="zimbraGalMaxResults"/>
+      <a n="zmailGalMode"/>
+      <a n="zmailGalMaxResults"/>
     </attrs>
   </right>
   <right name="adminConsoleDomainGALTabRights" type="combo">
@@ -1618,8 +1618,8 @@
     <desc> Admin Console set attr rights for create GAL sync account </desc>
     <ui name="Configure-Domains-Domain-GAL"/>
 	<attrs>
-	  <a n="zimbraIsSystemResource"/>
-	  <a n="zimbraContactMaxNumEntries"/>
+	  <a n="zmailIsSystemResource"/>
+	  <a n="zmailContactMaxNumEntries"/>
 	</attrs>
   </right>
 
@@ -1627,19 +1627,19 @@
     <desc> Admin Console set attr rights for configure GAL </desc>
     <ui name="Configure-Domains-Domain-GAL-configure(modify)"/>
 	<attrs>
-	  <a n="zimbraGalAccountId"/>
-	  <a n="zimbraGalMode"/>
-	  <a n="zimbraGalLdapURL"/>
-	  <a n="zimbraGalLdapSearchBase"/>
-	  <a n="zimbraGalLdapBindDn"/>
-	  <a n="zimbraGalLdapBindPassword"/>
-	  <a n="zimbraGalLdapFilter"/>
-	  <a n="zimbraGalAutoCompleteLdapFilter"/>
-	  <a n="zimbraGalSyncLdapURL"/>
-	  <a n="zimbraGalSyncLdapBindPassword"/>
-	  <a n="zimbraGalSyncLdapBindDn"/>
-	  <a n="zimbraGalSyncLdapFilter"/>
-	  <a n="zimbraGalSyncLdapSearchBase"/>
+	  <a n="zmailGalAccountId"/>
+	  <a n="zmailGalMode"/>
+	  <a n="zmailGalLdapURL"/>
+	  <a n="zmailGalLdapSearchBase"/>
+	  <a n="zmailGalLdapBindDn"/>
+	  <a n="zmailGalLdapBindPassword"/>
+	  <a n="zmailGalLdapFilter"/>
+	  <a n="zmailGalAutoCompleteLdapFilter"/>
+	  <a n="zmailGalSyncLdapURL"/>
+	  <a n="zmailGalSyncLdapBindPassword"/>
+	  <a n="zmailGalSyncLdapBindDn"/>
+	  <a n="zmailGalSyncLdapFilter"/>
+	  <a n="zmailGalSyncLdapSearchBase"/>
 	</attrs>
   </right>
 
@@ -1648,14 +1648,14 @@
     <desc> Admin Console set attr rights for Domain Authentication Tab </desc>
     <ui name="Configure-Domains-Domain-Authentication(modify)"/>
     <attrs>
-      <a n="zimbraAuthMech"/>
+      <a n="zmailAuthMech"/>
     </attrs>
   </right>
   <right name="viewAdminConsoleDomainAuthenticationTab" type="getAttrs" targetType="domain">
     <desc> Admin Console view attr rights for Domain Authentication Tab </desc>
     <ui name="Configure-Domains-Domain-Authentication(view)"/>
     <attrs>
-      <a n="zimbraAuthMech"/>
+      <a n="zmailAuthMech"/>
     </attrs>
   </right>
   <right name="adminConsoleDomainAuthenticationTabRights" type="combo">
@@ -1673,14 +1673,14 @@
     <desc> Admin Console set attr rights for Domain VirtualHosts Tab </desc>
     <ui name="Configure-Domains-Domain-VirtualHosts(modify)"/>
     <attrs>
-      <a n="zimbraVirtualHostname"/>
+      <a n="zmailVirtualHostname"/>
     </attrs>
   </right>
   <right name="viewAdminConsoleDomainVirtualHostsTab" type="getAttrs" targetType="domain">
     <desc> Admin Console view attr rights for Domain VirtualHosts Tab </desc>
     <ui name="Configure-Domains-Domain-VirtualHosts(view)"/>
     <attrs>
-      <a n="zimbraVirtualHostname"/>
+      <a n="zmailVirtualHostname"/>
     </attrs>
   </right>
   <right name="adminConsoleDomainVirtualHostsTabRights" type="combo">
@@ -1696,13 +1696,13 @@
   <right name="setAdminConsoleDomainDocumentsTab" type="setAttrs" targetType="domain">
     <desc> Admin Console set attr rights for Domain Documents Tab </desc>
     <attrs>
-      <a n="zimbraNotebookAccount"/>
+      <a n="zmailNotebookAccount"/>
     </attrs>
   </right>
   <right name="viewAdminConsoleDomainDocumentsTab" type="getAttrs" targetType="domain">
     <desc> Admin Console view attr rights for Domain Documents Tab </desc>
     <attrs>
-      <a n="zimbraNotebookAccount"/>
+      <a n="zmailNotebookAccount"/>
     </attrs>
   </right>
   <right name="adminConsoleDomainDocumentsTabRights" type="combo">
@@ -1719,22 +1719,22 @@
     <desc> Admin Console set attr rights for Domain Freebusy Tab </desc>
     <ui name="Configure-Domains-Domain-FreeBusyInterop(modify)"/>
     <attrs>
-      <a n="zimbraFreebusyExchangeURL"/>
-      <a n="zimbraFreebusyExchangeAuthScheme"/>
-      <a n="zimbraFreebusyExchangeAuthUsername"/>
-      <a n="zimbraFreebusyExchangeAuthPassword"/>
-      <a n="zimbraFreebusyExchangeUserOrg"/>
+      <a n="zmailFreebusyExchangeURL"/>
+      <a n="zmailFreebusyExchangeAuthScheme"/>
+      <a n="zmailFreebusyExchangeAuthUsername"/>
+      <a n="zmailFreebusyExchangeAuthPassword"/>
+      <a n="zmailFreebusyExchangeUserOrg"/>
     </attrs>
   </right>
   <right name="viewAdminConsoleDomainFreebusyTab" type="getAttrs" targetType="domain">
     <desc> Admin Console view attr rights for Domain Freebusy Tab </desc>
     <ui name="Configure-Domains-Domain-FreeBusyInterop(view)"/>
     <attrs>
-      <a n="zimbraFreebusyExchangeURL"/>
-      <a n="zimbraFreebusyExchangeAuthScheme"/>
-      <a n="zimbraFreebusyExchangeAuthUsername"/>
-      <a n="zimbraFreebusyExchangeAuthPassword"/>
-      <a n="zimbraFreebusyExchangeUserOrg"/>
+      <a n="zmailFreebusyExchangeURL"/>
+      <a n="zmailFreebusyExchangeAuthScheme"/>
+      <a n="zmailFreebusyExchangeAuthUsername"/>
+      <a n="zmailFreebusyExchangeAuthPassword"/>
+      <a n="zmailFreebusyExchangeUserOrg"/>
     </attrs>
   </right>
   <right name="adminConsoleDomainFreebusyTabRights" type="combo">
@@ -1752,14 +1752,14 @@
     <desc> Admin Console set attr rights for Domain Zimlets Tab </desc>
     <ui name="Configure-Domains-Domain-Zimlets(modify)"/>
     <attrs>
-      <a n="zimbraZimletDomainAvailableZimlets"/>
+      <a n="zmailZimletDomainAvailableZimlets"/>
     </attrs>
   </right>
   <right name="viewAdminConsoleDomainZimletsTab" type="getAttrs" targetType="domain">
     <desc> Admin Console view attr rights for Domain Zimlets Tab </desc>
     <ui name="Configure-Domains-Domain-Zimlets(view)"/>
     <attrs>
-      <a n="zimbraZimletDomainAvailableZimlets"/>
+      <a n="zmailZimletDomainAvailableZimlets"/>
     </attrs>
   </right>
   <right name="adminConsoleDomainZimletsTabRights" type="combo">
@@ -1776,26 +1776,26 @@
     <desc> Admin Console set attr rights for Domain Themes Tab </desc>
     <ui name="Configure-Domains-Domain-Themes(modify)"/>
     <attrs>
-      <a n="zimbraSkinForegroundColor"/>
-      <a n="zimbraSkinBackgroundColor"/>
-      <a n="zimbraSkinSecondaryColor"/>
-      <a n="zimbraSkinSelectionColor"/>
-      <a n="zimbraSkinLogoURL"/>
-      <a n="zimbraSkinLogoAppBanner"/>
-      <a n="zimbraSkinLogoLoginBanner"/>
+      <a n="zmailSkinForegroundColor"/>
+      <a n="zmailSkinBackgroundColor"/>
+      <a n="zmailSkinSecondaryColor"/>
+      <a n="zmailSkinSelectionColor"/>
+      <a n="zmailSkinLogoURL"/>
+      <a n="zmailSkinLogoAppBanner"/>
+      <a n="zmailSkinLogoLoginBanner"/>
     </attrs>
   </right>
   <right name="viewAdminConsoleDomainThemesTab" type="getAttrs" targetType="domain">
     <desc> Admin Console view attr rights for Domain Themes Tab </desc>
     <ui name="Configure-Domains-Domain-Themes(view)"/>
     <attrs>
-      <a n="zimbraSkinForegroundColor"/>
-      <a n="zimbraSkinBackgroundColor"/>
-      <a n="zimbraSkinSecondaryColor"/>
-      <a n="zimbraSkinSelectionColor"/>
-      <a n="zimbraSkinLogoURL"/>
-      <a n="zimbraSkinLogoAppBanner"/>
-      <a n="zimbraSkinLogoLoginBanner"/>
+      <a n="zmailSkinForegroundColor"/>
+      <a n="zmailSkinBackgroundColor"/>
+      <a n="zmailSkinSecondaryColor"/>
+      <a n="zmailSkinSelectionColor"/>
+      <a n="zmailSkinLogoURL"/>
+      <a n="zmailSkinLogoAppBanner"/>
+      <a n="zmailSkinLogoLoginBanner"/>
     </attrs>
   </right>
   <right name="adminConsoleDomainThemesTabRights" type="combo">
@@ -1814,16 +1814,16 @@
     <desc> Admin Console set attr rights for Domain Limits Tab </desc>
     <ui name="Configure-Domains-Domain-AccountLimits(modify)"/>
     <attrs>
-      <a n="zimbraDomainMaxAccounts"/>
-      <a n="zimbraDomainCOSMaxAccounts"/>
+      <a n="zmailDomainMaxAccounts"/>
+      <a n="zmailDomainCOSMaxAccounts"/>
     </attrs>
   </right>
   <right name="viewAdminConsoleDomainLimitsTab" type="getAttrs" targetType="domain">
     <desc> Admin Console view attr rights for Domain Limits Tab </desc>
     <ui name="Configure-Domains-Domain-AccountLimits(view)"/>
     <attrs>
-      <a n="zimbraDomainMaxAccounts"/>
-      <a n="zimbraDomainCOSMaxAccounts"/>
+      <a n="zmailDomainMaxAccounts"/>
+      <a n="zmailDomainCOSMaxAccounts"/>
     </attrs>
   </right>
   <right name="adminConsoleDomainLimitsTabRights" type="combo">
@@ -1840,14 +1840,14 @@
     <desc> Admin Console set attr rights for Domain ACL Tab </desc>
     <ui name="Configure-Domains-Domain-ACL(modify)"/>
     <attrs>
-      <a n="zimbraACE"/>
+      <a n="zmailACE"/>
     </attrs>
   </right>
   <right name="viewAdminConsoleDomainACLTab" type="getAttrs" targetType="domain">
     <desc> Admin Console view attr rights for Domain ACL Tab </desc>
     <ui name="Configure-Domains-Domain-ACL(view)"/>
     <attrs>
-      <a n="zimbraACE"/>
+      <a n="zmailACE"/>
     </attrs>
   </right>
   <right name="adminConsoleDomainACLTabRights" type="combo">
@@ -1867,13 +1867,13 @@
     <attrs>
       <a n="cn"/>
       <a n="description"/>
-      <a n="zimbraServiceHostname"/>
-      <a n="zimbraLmtpAdvertisedName"/>
-      <a n="zimbraLmtpBindAddress"/>
-      <a n="zimbraScheduledTaskNumThreads"/>
-      <a n="zimbraMailPurgeSleepInterval"/>
-      <a n="zimbraReverseProxyLookupTarget"/>
-      <a n="zimbraNotes"/>
+      <a n="zmailServiceHostname"/>
+      <a n="zmailLmtpAdvertisedName"/>
+      <a n="zmailLmtpBindAddress"/>
+      <a n="zmailScheduledTaskNumThreads"/>
+      <a n="zmailMailPurgeSleepInterval"/>
+      <a n="zmailReverseProxyLookupTarget"/>
+      <a n="zmailNotes"/>
     </attrs>
   </right>
   <right name="viewAdminConsoleServerInfoTab" type="getAttrs" targetType="server">
@@ -1882,13 +1882,13 @@
     <attrs>
       <a n="cn"/>
       <a n="description"/>
-      <a n="zimbraServiceHostname"/>
-      <a n="zimbraLmtpAdvertisedName"/>
-      <a n="zimbraLmtpBindAddress"/>
-      <a n="zimbraScheduledTaskNumThreads"/>
-      <a n="zimbraMailPurgeSleepInterval"/>
-      <a n="zimbraReverseProxyLookupTarget"/>
-      <a n="zimbraNotes"/>
+      <a n="zmailServiceHostname"/>
+      <a n="zmailLmtpAdvertisedName"/>
+      <a n="zmailLmtpBindAddress"/>
+      <a n="zmailScheduledTaskNumThreads"/>
+      <a n="zmailMailPurgeSleepInterval"/>
+      <a n="zmailReverseProxyLookupTarget"/>
+      <a n="zmailNotes"/>
     </attrs>
   </right>
   <right name="adminConsoleServerInfoTabRights" type="combo">
@@ -1905,15 +1905,15 @@
     <desc> Admin Console set attr rights for Server ACL Tab </desc>
     <ui name="Configure-Servers-Server-Services(modify)"/>
     <attrs>
-      <a n="zimbraServiceEnabled"/>
+      <a n="zmailServiceEnabled"/>
     </attrs>
   </right>
   <right name="viewAdminConsoleServerServicesTab" type="getAttrs" targetType="server">
     <desc> Admin Console view attr rights for Server ACL Tab </desc>
     <ui name="Configure-Servers-Server-Services(view)"/>
     <attrs>
-      <a n="zimbraServiceEnabled"/>
-      <a n="zimbraServiceInstalled"/>
+      <a n="zmailServiceEnabled"/>
+      <a n="zmailServiceInstalled"/>
     </attrs>
   </right>
   <right name="adminConsoleServerServicesTabRights" type="combo">
@@ -1930,28 +1930,28 @@
     <desc> Admin Console set attr rights for Server ACL Tab </desc>
     <ui name="Configure-Servers-Server-MTA(modify)"/>
     <attrs>
-      <a n="zimbraMtaAuthEnabled"/>
-      <a n="zimbraMtaTlsAuthOnly"/>
-      <a n="zimbraSmtpHostname"/>
-      <!-- <a n="zimbraSmtpPort"/> -->
-      <a n="zimbraMtaRelayHost"/>
-      <a n="zimbraSmtpTimeout"/>
-      <a n="zimbraMtaMyNetworks"/>
-      <a n="zimbraMtaDnsLookupsEnabled"/>
+      <a n="zmailMtaAuthEnabled"/>
+      <a n="zmailMtaTlsAuthOnly"/>
+      <a n="zmailSmtpHostname"/>
+      <!-- <a n="zmailSmtpPort"/> -->
+      <a n="zmailMtaRelayHost"/>
+      <a n="zmailSmtpTimeout"/>
+      <a n="zmailMtaMyNetworks"/>
+      <a n="zmailMtaDnsLookupsEnabled"/>
     </attrs>
   </right>
   <right name="viewAdminConsoleServerMTATab" type="getAttrs" targetType="server">
     <desc> Admin Console view attr rights for Server ACL Tab </desc>
     <ui name="Configure-Servers-Server-MTA(view)"/>
     <attrs>
-      <a n="zimbraMtaAuthEnabled"/>
-      <a n="zimbraMtaTlsAuthOnly"/>
-      <a n="zimbraSmtpHostname"/>
-      <a n="zimbraSmtpPort"/>
-      <a n="zimbraMtaRelayHost"/>
-      <a n="zimbraSmtpTimeout"/>
-      <a n="zimbraMtaMyNetworks"/>
-      <a n="zimbraMtaDnsLookupsEnabled"/>
+      <a n="zmailMtaAuthEnabled"/>
+      <a n="zmailMtaTlsAuthOnly"/>
+      <a n="zmailSmtpHostname"/>
+      <a n="zmailSmtpPort"/>
+      <a n="zmailMtaRelayHost"/>
+      <a n="zmailSmtpTimeout"/>
+      <a n="zmailMtaMyNetworks"/>
+      <a n="zmailMtaDnsLookupsEnabled"/>
     </attrs>
   </right>
   <right name="adminConsoleServerMTATabRights" type="combo">
@@ -1968,28 +1968,28 @@
     <desc> Admin Console set attr rights for Server ACL Tab </desc>
     <ui name="Configure-Servers-Server-IMAP(modify)"/>
     <attrs>
-      <a n="zimbraImapServerEnabled"/>
-      <a n="zimbraImapSSLServerEnabled"/>
-      <a n="zimbraImapCleartextLoginEnabled"/>
-      <a n="zimbraImapNumThreads"/>
-      <a n="zimbraImapBindPort"/>
-      <a n="zimbraImapSSLBindPort"/>
-      <a n="zimbraImapProxyBindPort"/>
-      <a n="zimbraImapSSLProxyBindPort"/>
+      <a n="zmailImapServerEnabled"/>
+      <a n="zmailImapSSLServerEnabled"/>
+      <a n="zmailImapCleartextLoginEnabled"/>
+      <a n="zmailImapNumThreads"/>
+      <a n="zmailImapBindPort"/>
+      <a n="zmailImapSSLBindPort"/>
+      <a n="zmailImapProxyBindPort"/>
+      <a n="zmailImapSSLProxyBindPort"/>
     </attrs>
   </right>
   <right name="viewAdminConsoleServerIMAPTab" type="getAttrs" targetType="server">
     <desc> Admin Console view attr rights for Server ACL Tab </desc>
     <ui name="Configure-Servers-Server-IMAP(view)"/>
     <attrs>
-      <a n="zimbraImapServerEnabled"/>
-      <a n="zimbraImapSSLServerEnabled"/>
-      <a n="zimbraImapCleartextLoginEnabled"/>
-      <a n="zimbraImapNumThreads"/>
-      <a n="zimbraImapBindPort"/>
-      <a n="zimbraImapSSLBindPort"/>
-      <a n="zimbraImapProxyBindPort"/>
-      <a n="zimbraImapSSLProxyBindPort"/>
+      <a n="zmailImapServerEnabled"/>
+      <a n="zmailImapSSLServerEnabled"/>
+      <a n="zmailImapCleartextLoginEnabled"/>
+      <a n="zmailImapNumThreads"/>
+      <a n="zmailImapBindPort"/>
+      <a n="zmailImapSSLBindPort"/>
+      <a n="zmailImapProxyBindPort"/>
+      <a n="zmailImapSSLProxyBindPort"/>
     </attrs>
   </right>
   <right name="adminConsoleServerIMAPTabRights" type="combo">
@@ -2006,32 +2006,32 @@
     <desc> Admin Console set attr rights for Server ACL Tab </desc>
     <ui name="Configure-Servers-Server-POP(modify)"/>
     <attrs>
-      <a n="zimbraPop3ServerEnabled"/>
-      <a n="zimbraPop3SSLServerEnabled"/>
-      <a n="zimbraPop3CleartextLoginEnabled"/>
-      <a n="zimbraPop3NumThreads"/>
-      <a n="zimbraPop3AdvertisedName"/>
-      <a n="zimbraPop3BindAddress"/>
-      <a n="zimbraPop3BindPort"/>
-      <a n="zimbraPop3SSLServerEnabled"/>
-      <a n="zimbraPop3ProxyBindPort"/>
-      <a n="zimbraPop3SSLProxyBindPort"/>
+      <a n="zmailPop3ServerEnabled"/>
+      <a n="zmailPop3SSLServerEnabled"/>
+      <a n="zmailPop3CleartextLoginEnabled"/>
+      <a n="zmailPop3NumThreads"/>
+      <a n="zmailPop3AdvertisedName"/>
+      <a n="zmailPop3BindAddress"/>
+      <a n="zmailPop3BindPort"/>
+      <a n="zmailPop3SSLServerEnabled"/>
+      <a n="zmailPop3ProxyBindPort"/>
+      <a n="zmailPop3SSLProxyBindPort"/>
     </attrs>
   </right>
   <right name="viewAdminConsoleServerPOPTab" type="getAttrs" targetType="server">
     <desc> Admin Console view attr rights for Server ACL Tab </desc>
     <ui name="Configure-Servers-Server-POP(view)"/>
     <attrs>
-      <a n="zimbraPop3ServerEnabled"/>
-      <a n="zimbraPop3SSLServerEnabled"/>
-      <a n="zimbraPop3CleartextLoginEnabled"/>
-      <a n="zimbraPop3NumThreads"/>
-      <a n="zimbraPop3AdvertisedName"/>
-      <a n="zimbraPop3BindAddress"/>
-      <a n="zimbraPop3BindPort"/>
-      <a n="zimbraPop3SSLServerEnabled"/>
-      <a n="zimbraPop3ProxyBindPort"/>
-      <a n="zimbraPop3SSLProxyBindPort"/>
+      <a n="zmailPop3ServerEnabled"/>
+      <a n="zmailPop3SSLServerEnabled"/>
+      <a n="zmailPop3CleartextLoginEnabled"/>
+      <a n="zmailPop3NumThreads"/>
+      <a n="zmailPop3AdvertisedName"/>
+      <a n="zmailPop3BindAddress"/>
+      <a n="zmailPop3BindPort"/>
+      <a n="zmailPop3SSLServerEnabled"/>
+      <a n="zmailPop3ProxyBindPort"/>
+      <a n="zmailPop3SSLProxyBindPort"/>
     </attrs>
   </right>
   <right name="adminConsoleServerPOPTabRights" type="combo">
@@ -2048,16 +2048,16 @@
     <desc> Admin Console set attr rights for Server Volumes Tab </desc>
     <ui name="Configure-Servers-Server-Volumes(modify)"/>
     <attrs>
-      <a n="zimbraHsmPolicy"/>
-      <a n="zimbraHsmAge"/> <!-- deprecated -->
+      <a n="zmailHsmPolicy"/>
+      <a n="zmailHsmAge"/> <!-- deprecated -->
     </attrs>
   </right>
   <right name="viewAdminConsoleServerVolumesTab" type="getAttrs" targetType="server">
     <desc> Admin Console view attr rights for Server Volumes Tab </desc>
     <ui name="Configure-Servers-Server-Volumes(view)"/>
     <attrs>
-      <a n="zimbraHsmPolicy"/>
-      <a n="zimbraHsmAge"/>
+      <a n="zmailHsmPolicy"/>
+      <a n="zmailHsmAge"/>
     </attrs>
   </right>
   <right name="adminConsoleServerVolumesTabRights" type="combo">
@@ -2077,20 +2077,20 @@
     <desc> Admin Console set attr rights for Server backup/restore Tab </desc>
     <ui name="Configure-Servers-Server-BackupRestore(modify)"/>
     <attrs>
-      <a n="zimbraBackupMode"/>
-      <a n="zimbraBackupAutoGroupedInterval"/>
-      <a n="zimbraBackupAutoGroupedNumGroups"/>
-      <a n="zimbraBackupAutoGroupedThrottled"/>
+      <a n="zmailBackupMode"/>
+      <a n="zmailBackupAutoGroupedInterval"/>
+      <a n="zmailBackupAutoGroupedNumGroups"/>
+      <a n="zmailBackupAutoGroupedThrottled"/>
     </attrs>
   </right>
   <right name="viewAdminConsoleServerBackupRestoreTab" type="getAttrs" targetType="server">
     <desc> Admin Console view attr rights for Server backup/restore Tab </desc>
     <ui name="Configure-Servers-Server-BackupRestore(view)"/>
     <attrs>
-      <a n="zimbraBackupMode"/>
-      <a n="zimbraBackupAutoGroupedInterval"/>
-      <a n="zimbraBackupAutoGroupedNumGroups"/>
-      <a n="zimbraBackupAutoGroupedThrottled"/>
+      <a n="zmailBackupMode"/>
+      <a n="zmailBackupAutoGroupedInterval"/>
+      <a n="zmailBackupAutoGroupedNumGroups"/>
+      <a n="zmailBackupAutoGroupedThrottled"/>
     </attrs>
   </right>
   <right name="adminConsoleServerBackupRestoreTabRights" type="combo">
@@ -2107,14 +2107,14 @@
     <desc> Admin Console set attr rights for Server ACL Tab </desc>
     <ui name="Configure-Servers-Server-ACL(modify)"/>
     <attrs>
-      <a n="zimbraACE"/>
+      <a n="zmailACE"/>
     </attrs>
   </right>
   <right name="viewAdminConsoleServerACLTab" type="getAttrs" targetType="server">
     <desc> Admin Console view attr rights for Server ACL Tab </desc>
     <ui name="Configure-Servers-Server-ACL(view)"/>
     <attrs>
-      <a n="zimbraACE"/>
+      <a n="zmailACE"/>
     </attrs>
   </right>
   <right name="adminConsoleServerACLTabRights" type="combo">
@@ -2133,14 +2133,14 @@
     <desc> Admin Console set attr rights for Zimlet ACL Tab </desc>
     <ui name="Configure-Zimlets-Zimlet-ACL(modify)"/>
     <attrs>
-      <a n="zimbraACE"/>
+      <a n="zmailACE"/>
     </attrs>
   </right>
   <right name="viewAdminConsoleZimletACLTab" type="getAttrs" targetType="zimlet">
     <desc> Admin Console view attr rights for Zimlet ACL Tab </desc>
     <ui name="Configure-Zimlets-Zimlet-ACL(view)"/>
     <attrs>
-      <a n="zimbraACE"/>
+      <a n="zmailACE"/>
     </attrs>
   </right>
   <right name="adminConsoleZimletACLTabRights" type="combo">
@@ -2158,14 +2158,14 @@
     <desc> Admin Console set attr rights for Extensions ACL Tab </desc>
     <ui name="Configure-AdminExtensions-AdminExtension-ACL(modify)"/>
     <attrs>
-      <a n="zimbraACE"/>
+      <a n="zmailACE"/>
     </attrs>
   </right>
   <right name="viewAdminConsoleExtensionACLTab" type="getAttrs" targetType="domain">
     <desc> Admin Console view attr rights for Extensions ACL Tab </desc>
     <ui name="Configure-AdminExtensions-AdminExtension-ACL(view)"/>
     <attrs>
-      <a n="zimbraACE"/>
+      <a n="zmailACE"/>
     </attrs>
   </right>
   <right name="adminConsoleExtensionACLTabRights" type="combo">
@@ -2183,22 +2183,22 @@
     <desc> Admin Console set attr rights for Global Info Tab </desc>
     <ui name="Configure-GlobalSettings-GeneralInfo(modify)"/>
     <attrs>
-      <a n="zimbraGalMaxResults"/>
-      <a n="zimbraDefaultDomainName"/>
-      <a n="zimbraScheduledTaskNumThreads"/>
-      <a n="zimbraMailPurgeSleepInterval"/>
-      <a n="zimbraFileUploadMaxSize"/>
+      <a n="zmailGalMaxResults"/>
+      <a n="zmailDefaultDomainName"/>
+      <a n="zmailScheduledTaskNumThreads"/>
+      <a n="zmailMailPurgeSleepInterval"/>
+      <a n="zmailFileUploadMaxSize"/>
     </attrs>
   </right>
   <right name="viewAdminConsoleGlobalInfoTab" type="getAttrs" targetType="config">
     <desc> Admin Console view attr rights for Global Info Tab </desc>
     <ui name="Configure-GlobalSettings-GeneralInfo(view)"/>
     <attrs>
-      <a n="zimbraGalMaxResults"/>
-      <a n="zimbraDefaultDomainName"/>
-      <a n="zimbraScheduledTaskNumThreads"/>
-      <a n="zimbraMailPurgeSleepInterval"/>
-      <a n="zimbraFileUploadMaxSize"/>
+      <a n="zmailGalMaxResults"/>
+      <a n="zmailDefaultDomainName"/>
+      <a n="zmailScheduledTaskNumThreads"/>
+      <a n="zmailMailPurgeSleepInterval"/>
+      <a n="zmailFileUploadMaxSize"/>
     </attrs>
   </right>
   <right name="adminConsoleGlobalInfoTabRights" type="combo">
@@ -2215,18 +2215,18 @@
     <desc> Admin Console set attr rights for Global Attachments Tab </desc>
     <ui name="Configure-GlobalSettings-Attachments(modify)"/>
     <attrs>
-      <a n="zimbraAttachmentsBlocked"/>
-      <a n="zimbraMtaBlockedExtension"/>
-      <a n="zimbraMtaCommonBlockedExtension"/>
+      <a n="zmailAttachmentsBlocked"/>
+      <a n="zmailMtaBlockedExtension"/>
+      <a n="zmailMtaCommonBlockedExtension"/>
     </attrs>
   </right>
   <right name="viewAdminConsoleGlobalAttachmentsTab" type="getAttrs" targetType="config">
     <desc> Admin Console view attr rights for Global Attachments Tab </desc>
     <ui name="Configure-GlobalSettings-Attachments(view)"/>
     <attrs>
-      <a n="zimbraAttachmentsBlocked"/>
-      <a n="zimbraMtaBlockedExtension"/>
-      <a n="zimbraMtaCommonBlockedExtension"/>
+      <a n="zmailAttachmentsBlocked"/>
+      <a n="zmailMtaBlockedExtension"/>
+      <a n="zmailMtaCommonBlockedExtension"/>
     </attrs>
   </right>
   <right name="adminConsoleGlobalAttachmentsTabRights" type="combo">
@@ -2243,34 +2243,34 @@
     <desc> Admin Console set attr rights for Global MTA Tab </desc>
     <ui name="Configure-GlobalSettings-MTA(modify)"/>
     <attrs>
-      <a n="zimbraMtaAuthEnabled"/>
-      <a n="zimbraMtaTlsAuthOnly"/>
-      <a n="zimbraSmtpHostname"/>
-      <a n="zimbraSmtpPort"/>
-      <a n="zimbraMtaRelayHost"/>
-      <a n="zimbraDNSCheckHostname"/>
-      <a n="zimbraAdminConsoleDNSCheckEnabled"/>
-      <a n="zimbraMtaMaxMessageSize"/>
-      <a n="zimbraSmtpSendAddOriginatingIP"/>
-      <a n="zimbraMtaRestriction"/>
-      <a n="zimbraMtaDnsLookupsEnabled"/>
+      <a n="zmailMtaAuthEnabled"/>
+      <a n="zmailMtaTlsAuthOnly"/>
+      <a n="zmailSmtpHostname"/>
+      <a n="zmailSmtpPort"/>
+      <a n="zmailMtaRelayHost"/>
+      <a n="zmailDNSCheckHostname"/>
+      <a n="zmailAdminConsoleDNSCheckEnabled"/>
+      <a n="zmailMtaMaxMessageSize"/>
+      <a n="zmailSmtpSendAddOriginatingIP"/>
+      <a n="zmailMtaRestriction"/>
+      <a n="zmailMtaDnsLookupsEnabled"/>
     </attrs>
   </right>
   <right name="viewAdminConsoleGlobalMTATab" type="getAttrs" targetType="config">
     <desc> Admin Console view attr rights for Global MTA Tab </desc>
     <ui name="Configure-GlobalSettings-MTA(view)"/>
     <attrs>
-      <a n="zimbraMtaAuthEnabled"/>
-      <a n="zimbraMtaTlsAuthOnly"/>
-      <a n="zimbraSmtpHostname"/>
-      <a n="zimbraSmtpPort"/>
-      <a n="zimbraMtaRelayHost"/>
-      <a n="zimbraDNSCheckHostname"/>
-      <a n="zimbraAdminConsoleDNSCheckEnabled"/>
-      <a n="zimbraMtaMaxMessageSize"/>
-      <a n="zimbraSmtpSendAddOriginatingIP"/>
-      <a n="zimbraMtaRestriction"/>
-      <a n="zimbraMtaDnsLookupsEnabled"/>
+      <a n="zmailMtaAuthEnabled"/>
+      <a n="zmailMtaTlsAuthOnly"/>
+      <a n="zmailSmtpHostname"/>
+      <a n="zmailSmtpPort"/>
+      <a n="zmailMtaRelayHost"/>
+      <a n="zmailDNSCheckHostname"/>
+      <a n="zmailAdminConsoleDNSCheckEnabled"/>
+      <a n="zmailMtaMaxMessageSize"/>
+      <a n="zmailSmtpSendAddOriginatingIP"/>
+      <a n="zmailMtaRestriction"/>
+      <a n="zmailMtaDnsLookupsEnabled"/>
     </attrs>
   </right>
   <right name="adminConsoleGlobalMTATabRights" type="combo">
@@ -2287,14 +2287,14 @@
     <desc> Admin Console set attr rights for Global IMAP Tab </desc>
     <ui name="Configure-GlobalSettings-IMAP(modify)"/>
     <attrs>
-      <a n="zimbraACE"/>
+      <a n="zmailACE"/>
     </attrs>
   </right>
   <right name="viewAdminConsoleGlobalIMAPTab" type="getAttrs" targetType="config">
     <desc> Admin Console view attr rights for Global IMAP Tab </desc>
     <ui name="Configure-GlobalSettings-IMAP(view)"/>
     <attrs>
-      <a n="zimbraACE"/>
+      <a n="zmailACE"/>
     </attrs>
   </right>
   <right name="adminConsoleGlobalIMAPTabRights" type="combo">
@@ -2311,14 +2311,14 @@
     <desc> Admin Console set attr rights for Global POP Tab </desc>
     <ui name="Configure-GlobalSettings-POP(modify)"/>
     <attrs>
-      <a n="zimbraACE"/>
+      <a n="zmailACE"/>
     </attrs>
   </right>
   <right name="viewAdminConsoleGlobalPOPTab" type="getAttrs" targetType="config">
     <desc> Admin Console view attr rights for Global POP Tab </desc>
     <ui name="Configure-GlobalSettings-POP(view)"/>
     <attrs>
-      <a n="zimbraACE"/>
+      <a n="zmailACE"/>
     </attrs>
   </right>
   <right name="adminConsoleGlobalPOPTabRights" type="combo">
@@ -2335,14 +2335,14 @@
     <desc> Admin Console set attr rights for Global AS/AV Tab </desc>
     <ui name="Configure-GlobalSettings-AS/AV(modify)"/>
     <attrs>
-      <a n="zimbraACE"/>
+      <a n="zmailACE"/>
     </attrs>
   </right>
   <right name="viewAdminConsoleGlobalASAVTab" type="getAttrs" targetType="config">
     <desc> Admin Console view attr rights for Global AS/AV Tab </desc>
     <ui name="Configure-GlobalSettings-AS/AV(view)"/>
     <attrs>
-      <a n="zimbraACE"/>
+      <a n="zmailACE"/>
     </attrs>
   </right>
   <right name="adminConsoleGlobalASAVTabRights" type="combo">
@@ -2359,14 +2359,14 @@
     <desc> Admin Console view attr rights for GlobalFreebusy Tab </desc>
     <ui name="Configure-GlobalSettings-FreeBusyInterop(modify)"/>
     <attrs>
-      <a n="zimbraACE"/>
+      <a n="zmailACE"/>
     </attrs>
   </right>
   <right name="viewAdminConsoleGlobalFreebusyTab" type="getAttrs" targetType="config">
     <desc> Admin Console view attr rights for GlobalFreebusy Tab </desc>
     <ui name="Configure-GlobalSettings-FreeBusyInterop(view)"/>
     <attrs>
-      <a n="zimbraACE"/>
+      <a n="zmailACE"/>
     </attrs>
   </right>
   <right name="adminConsoleGlobalFreebusyTabRights" type="combo">
@@ -2383,14 +2383,14 @@
     <desc> Admin Console set attr rights for GlobalThemes Tab </desc>
     <ui name="Configure-GlobalSettings-Themes(modify)"/>
     <attrs>
-      <a n="zimbraACE"/>
+      <a n="zmailACE"/>
     </attrs>
   </right>
   <right name="viewAdminConsoleGlobalThemesTab" type="getAttrs" targetType="config">
     <desc> Admin Console view attr rights for GlobalThemes Tab </desc>
     <ui name="Configure-GlobalSettings-Themes(view)"/>
     <attrs>
-      <a n="zimbraACE"/>
+      <a n="zmailACE"/>
     </attrs>
   </right>
   <right name="adminConsoleGlobalThemesTabRights" type="combo">
@@ -2407,14 +2407,14 @@
     <desc> Admin Console view attr rights for GlobalBackupRestore Tab </desc>
     <ui name="Configure-GlobalSettings-BackupRestore(modify)"/>
     <attrs>
-      <a n="zimbraACE"/>
+      <a n="zmailACE"/>
     </attrs>
   </right>
   <right name="viewAdminConsoleGlobalBackupRestoreTab" type="getAttrs" targetType="config">
     <desc> Admin Console view attr rights for GlobalBackupRestore Tab </desc>
     <ui name="Configure-GlobalSettings-BackupRestore(view)"/>
     <attrs>
-      <a n="zimbraACE"/>
+      <a n="zmailACE"/>
     </attrs>
   </right>
   <right name="adminConsoleGlobalBackupRestoreTabRights" type="combo">
@@ -2431,14 +2431,14 @@
     <desc> Admin Console set attr rights for GlobalACL Tab </desc>
     <ui name="Configure-GlobalSettings-ACL(modify)"/>
     <attrs>
-      <a n="zimbraACE"/>
+      <a n="zmailACE"/>
     </attrs>
   </right>
   <right name="viewAdminConsoleGlobalACLTab" type="getAttrs" targetType="config">
     <desc> Admin Console view attr rights for GlobalACL Tab </desc>
     <ui name="Configure-GlobalSettings-ACL(view)"/>
     <attrs>
-      <a n="zimbraACE"/>
+      <a n="zmailACE"/>
     </attrs>
   </right>
   <right name="adminConsoleGlobalACLTabRights" type="combo">
@@ -2455,14 +2455,14 @@
     <desc> Admin Console view attr rights for GlobalHSM Tab </desc>
     <ui name="Configure-GlobalSettings-HSM(modify)"/>
     <attrs>
-      <a n="zimbraACE"/>
+      <a n="zmailACE"/>
     </attrs>
   </right>
   <right name="viewAdminConsoleGlobalHSMTab" type="getAttrs" targetType="config">
     <desc> Admin Console view attr rights for GlobalHSM Tab </desc>
     <ui name="Configure-GlobalSettings-HSM(view)"/>
     <attrs>
-      <a n="zimbraACE"/>
+      <a n="zmailACE"/>
     </attrs>
   </right>
   <right name="adminConsoleGlobalHSMTabRights" type="combo">
@@ -2479,14 +2479,14 @@
     <desc> Admin Console set attr rights for GlobalLicense Tab </desc>
     <ui name="Configure-GlobalSettings-License(modify)"/>
     <attrs>
-      <a n="zimbraACE"/>
+      <a n="zmailACE"/>
     </attrs>
   </right>
   <right name="viewAdminConsoleGlobalLicenseTab" type="getAttrs" targetType="config">
     <desc> Admin Console view attr rights for GlobalLicense Tab </desc>
     <ui name="Configure-GlobalSettings-License(view)"/>
     <attrs>
-      <a n="zimbraACE"/>
+      <a n="zmailACE"/>
     </attrs>
   </right>
   <right name="adminConsoleGlobalLicenseTabRights" type="combo">
@@ -2512,7 +2512,7 @@
     <desc> Admin Console view attr rights for server status Tab </desc>
     <ui name="Monitor-ServerStatus"/>
     <attrs>
-      <a n="zimbraLogHostname"/>
+      <a n="zmailLogHostname"/>
     </attrs>
 </right>
 
@@ -2535,7 +2535,7 @@
 <!-- <right type="getAttrs" name="adminConsoleDomainInfoRights" targetType="domain">
   <desc> Admin Console Domain Rights </desc>
   <attrs>
-    <a n="zimbraDomainName"/>
+    <a n="zmailDomainName"/>
   </attrs>
 </right> -->
 <!-- Admin Console Resources ACL Tab -->
@@ -2559,8 +2559,8 @@
     <r n="adminConsoleAccountsThemesTabRights"/>
     <r n="listAccount"/>
     <r n="viewAccountAdminUI"/>
-    <r n="get.account.zimbraIsSystemResource"/>
-    <r n="get.account.zimbraIsSystemAccount"/>
+    <r n="get.account.zmailIsSystemResource"/>
+    <r n="get.account.zmailIsSystemAccount"/>
   </rights>
 </right>
 
@@ -2854,17 +2854,17 @@
   <desc> Admin Console view attr rights for software updates tab </desc>
   <ui name="ToolsAndMigration-SoftwareUpdates(view)"/>
   <attrs>
-	<a n="zimbraVersionCheckLastAttempt"/>
-	<a n="zimbraVersionCheckLastSuccess"/>
-	<a n="zimbraVersionCheckLastResponse"/>
-	<a n="zimbraVersionCheckNotificationEmail"/>
-	<a n="zimbraVersionCheckSendNotifications"/>
-	<a n="zimbraVersionCheckNotificationEmailFrom"/>
-	<a n="zimbraVersionCheckNotificationSubject"/>
-	<a n="zimbraVersionCheckNotificationBody"/>
-	<a n="zimbraVersionCheckInterval"/>
-	<a n="zimbraVersionCheckServer"/>
-	<a n="zimbraVersionCheckURL"/>
+	<a n="zmailVersionCheckLastAttempt"/>
+	<a n="zmailVersionCheckLastSuccess"/>
+	<a n="zmailVersionCheckLastResponse"/>
+	<a n="zmailVersionCheckNotificationEmail"/>
+	<a n="zmailVersionCheckSendNotifications"/>
+	<a n="zmailVersionCheckNotificationEmailFrom"/>
+	<a n="zmailVersionCheckNotificationSubject"/>
+	<a n="zmailVersionCheckNotificationBody"/>
+	<a n="zmailVersionCheckInterval"/>
+	<a n="zmailVersionCheckServer"/>
+	<a n="zmailVersionCheckURL"/>
 	</attrs>
 </right>
 
@@ -2872,29 +2872,29 @@
   <desc> Admin Console view attr rights for software updates tab </desc>
   <ui name="ToolsAndMigration-SoftwareUpdates(modify)"/>
   <attrs>
-	<a n="zimbraVersionCheckLastAttempt"/>
-	<a n="zimbraVersionCheckLastSuccess"/>
-	<a n="zimbraVersionCheckLastResponse"/>
-	<a n="zimbraVersionCheckNotificationEmail"/>
-	<a n="zimbraVersionCheckSendNotifications"/>
-	<a n="zimbraVersionCheckNotificationEmailFrom"/>
-	<a n="zimbraVersionCheckNotificationSubject"/>
-	<a n="zimbraVersionCheckNotificationBody"/>
-	<a n="zimbraVersionCheckInterval"/>
-	<a n="zimbraVersionCheckServer"/>
-	<a n="zimbraVersionCheckURL"/>  </attrs>
+	<a n="zmailVersionCheckLastAttempt"/>
+	<a n="zmailVersionCheckLastSuccess"/>
+	<a n="zmailVersionCheckLastResponse"/>
+	<a n="zmailVersionCheckNotificationEmail"/>
+	<a n="zmailVersionCheckSendNotifications"/>
+	<a n="zmailVersionCheckNotificationEmailFrom"/>
+	<a n="zmailVersionCheckNotificationSubject"/>
+	<a n="zmailVersionCheckNotificationBody"/>
+	<a n="zmailVersionCheckInterval"/>
+	<a n="zmailVersionCheckServer"/>
+	<a n="zmailVersionCheckURL"/>  </attrs>
 </right>
 
 <right name="viewAdminConsoleSoftwareUpdatesServerAttrs" type="getAttrs" targetType="server">
   <desc> Admin Console view attr rights for software updates tab </desc>
   <ui name="ToolsAndMigration-SoftwareUpdates(view)"/>
   <attrs>
-    <a n="zimbraId"/>
+    <a n="zmailId"/>
     <a n="cn"/>
-    <a n="zimbraSmtpHostname"/>
-    <a n="zimbraServiceInstalled"/>
-    <a n="zimbraServiceEnabled"/>
-    <a n="zimbraServiceHostname"/>
+    <a n="zmailSmtpHostname"/>
+    <a n="zmailServiceInstalled"/>
+    <a n="zmailServiceEnabled"/>
+    <a n="zmailServiceHostname"/>
   </attrs>
 </right>
 

@@ -19,15 +19,15 @@
  * TODO To change the template for this generated file go to
  * Window - Preferences - Java - Code Style - Code Templates
  */
-package com.zimbra.cs.account.cache;
+package org.zmail.cs.account.cache;
 
 import java.util.Map;
 
-import com.zimbra.common.util.MapUtil;
+import org.zmail.common.util.MapUtil;
 
-import com.zimbra.common.stats.Counter;
-import com.zimbra.cs.account.Account;
-import com.zimbra.cs.account.Provisioning;
+import org.zmail.common.stats.Counter;
+import org.zmail.cs.account.Account;
+import org.zmail.cs.account.Provisioning;
 
 public class AccountCache implements IAccountCache {
     
@@ -79,12 +79,12 @@ public class AccountCache implements IAccountCache {
             mNameCache.remove(entry.getName());
             mIdCache.remove(entry.getId());
             
-            String aliases[] = entry.getMultiAttr(Provisioning.A_zimbraMailAlias);            
+            String aliases[] = entry.getMultiAttr(Provisioning.A_zmailMailAlias);            
             for (String alias : aliases) {
                 mAliasCache.remove(alias);
             }
             
-            String fps[] = entry.getMultiAttr(Provisioning.A_zimbraForeignPrincipal);            
+            String fps[] = entry.getMultiAttr(Provisioning.A_zmailForeignPrincipal);            
             for (String fp : fps) {
                 mForeignPrincipalCache.remove(fp);
             }
@@ -98,12 +98,12 @@ public class AccountCache implements IAccountCache {
             mNameCache.put(entry.getName(), cacheEntry);
             mIdCache.put(entry.getId(), cacheEntry);
             
-            String aliases[] = entry.getMultiAttr(Provisioning.A_zimbraMailAlias);            
+            String aliases[] = entry.getMultiAttr(Provisioning.A_zmailMailAlias);            
             for (String alias : aliases) {
                 mAliasCache.put(alias, cacheEntry); 
             }
             
-            String fps[] = entry.getMultiAttr(Provisioning.A_zimbraForeignPrincipal);            
+            String fps[] = entry.getMultiAttr(Provisioning.A_zmailForeignPrincipal);            
             for (String fp : fps) {
                 mForeignPrincipalCache.put(fp, cacheEntry); 
             }

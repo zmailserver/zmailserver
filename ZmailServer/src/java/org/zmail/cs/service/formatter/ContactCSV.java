@@ -13,7 +13,7 @@
  * ***** END LICENSE BLOCK *****
  */
 
-package com.zimbra.cs.service.formatter;
+package org.zmail.cs.service.formatter;
 
 import java.io.BufferedReader;
 import java.io.FileInputStream;
@@ -39,21 +39,21 @@ import org.dom4j.QName;
 
 import com.google.common.base.Objects;
 import com.google.common.base.Strings;
-import com.zimbra.common.calendar.ICalTimeZone;
-import com.zimbra.common.localconfig.LC;
-import com.zimbra.common.mailbox.ContactConstants;
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.common.util.Log;
-import com.zimbra.common.util.ZimbraLog;
-import com.zimbra.cs.mailbox.Contact;
-import com.zimbra.cs.mailbox.ContactGroup;
-import com.zimbra.cs.mailbox.MailItem;
-import com.zimbra.cs.mailbox.Mailbox;
-import com.zimbra.cs.mailbox.OperationContext;
+import org.zmail.common.calendar.ICalTimeZone;
+import org.zmail.common.localconfig.LC;
+import org.zmail.common.mailbox.ContactConstants;
+import org.zmail.common.service.ServiceException;
+import org.zmail.common.util.Log;
+import org.zmail.common.util.ZmailLog;
+import org.zmail.cs.mailbox.Contact;
+import org.zmail.cs.mailbox.ContactGroup;
+import org.zmail.cs.mailbox.MailItem;
+import org.zmail.cs.mailbox.Mailbox;
+import org.zmail.cs.mailbox.OperationContext;
 
 public final class ContactCSV {
 
-    private static Log LOG = ZimbraLog.misc;
+    private static Log LOG = ZmailLog.misc;
     private static final char DEFAULT_FIELD_SEPARATOR = ',';
     // Bug 32273 - Outlook prefers DOS line endings between records - although it doesn't mind either type of
     // ending for lines contained within a field.
@@ -352,8 +352,8 @@ public final class ContactCSV {
         if (field == null || value == null || value.length() == 0) {
             return;
         }
-        // If we successfully parse "value" as a date, zimbraDateValue will be set.
-        String zimbraDateValue = null;
+        // If we successfully parse "value" as a date, zmailDateValue will be set.
+        String zmailDateValue = null;
         try {
             String[] splitFields = value.split("/");
             if (splitFields.length != 3)
@@ -364,39 +364,39 @@ public final class ContactCSV {
                 dateFs[1] = Integer.parseInt(splitFields[1]);
                 dateFs[2] = Integer.parseInt(splitFields[2]);
                 // e.g. 2005/25/12
-                zimbraDateValue = populateDateFieldsIfUnambiguous(dateFs[0], dateFs[1], dateFs[2], false);
-                if (zimbraDateValue == null) {
+                zmailDateValue = populateDateFieldsIfUnambiguous(dateFs[0], dateFs[1], dateFs[2], false);
+                if (zmailDateValue == null) {
                     // e.g. 12/25/2005
-                    zimbraDateValue = populateDateFieldsIfUnambiguous(dateFs[2], dateFs[0], dateFs[1], false);
+                    zmailDateValue = populateDateFieldsIfUnambiguous(dateFs[2], dateFs[0], dateFs[1], false);
                 }
-                if (zimbraDateValue == null) {
+                if (zmailDateValue == null) {
                     // e.g. 25/12/2005
-                    zimbraDateValue = populateDateFieldsIfUnambiguous(dateFs[2], dateFs[1], dateFs[0], false);
+                    zmailDateValue = populateDateFieldsIfUnambiguous(dateFs[2], dateFs[1], dateFs[0], false);
                 }
-                if (zimbraDateValue == null) {
+                if (zmailDateValue == null) {
                     // e.g. 25/2005/12
-                    zimbraDateValue = populateDateFieldsIfUnambiguous(dateFs[1], dateFs[2], dateFs[0], false);
+                    zmailDateValue = populateDateFieldsIfUnambiguous(dateFs[1], dateFs[2], dateFs[0], false);
                 }
-                if (zimbraDateValue == null) {
+                if (zmailDateValue == null) {
                     // e.g. 2005/25/12
-                    zimbraDateValue = populateDateFieldsIfUnambiguous(dateFs[0], dateFs[2], dateFs[1], false);
+                    zmailDateValue = populateDateFieldsIfUnambiguous(dateFs[0], dateFs[2], dateFs[1], false);
                 }
-                if (zimbraDateValue == null) {
+                if (zmailDateValue == null) {
                     // e.g. 12/2005/25
-                    zimbraDateValue = populateDateFieldsIfUnambiguous(dateFs[1], dateFs[0], dateFs[2], false);
+                    zmailDateValue = populateDateFieldsIfUnambiguous(dateFs[1], dateFs[0], dateFs[2], false);
                 }
-                if ((zimbraDateValue == null) && (dateFs[0] > 31)) {
+                if ((zmailDateValue == null) && (dateFs[0] > 31)) {
                     // e.g. 2005/06/01 - realistically, no-one uses YDM, so only possibility is YMD
-                    zimbraDateValue = populateDateFieldsIfUnambiguous(dateFs[0], dateFs[1], dateFs[2], true);
+                    zmailDateValue = populateDateFieldsIfUnambiguous(dateFs[0], dateFs[1], dateFs[2], true);
                 }
-                if (zimbraDateValue == null) {
+                if (zmailDateValue == null) {
                     String dateOrder = dateOrderInfo.get(dateOrderKey);
                     if (dateOrder != null) {
                         int yNdx = dateOrder.indexOf('y');
                         int mNdx = dateOrder.indexOf('m');
                         int dNdx = dateOrder.indexOf('d');
                         if ((yNdx != -1) && (mNdx != -1) && (dNdx != -1)) {
-                            zimbraDateValue = populateDateFieldsIfUnambiguous(
+                            zmailDateValue = populateDateFieldsIfUnambiguous(
                                     dateFs[yNdx], dateFs[mNdx], dateFs[dNdx], true);
                         }
                     }
@@ -404,8 +404,8 @@ public final class ContactCSV {
             }
         } catch (NumberFormatException ioe) {
         }
-        if (zimbraDateValue != null) {
-            contact.put(field, zimbraDateValue);
+        if (zmailDateValue != null) {
+            contact.put(field, zmailDateValue);
         } else {
             // We were unable to recognise the date format for this value :-(
             if (Character.isDigit(value.charAt(0))) {
@@ -421,7 +421,7 @@ public final class ContactCSV {
      * Multi-valued fields that map to dates should be in month/day/year order
      */
     private void addMultiValueDateField(CsvColumn col, Map <String, String> fieldMap, ContactMap contact) {
-        String zimbraDateValue = null;
+        String zmailDateValue = null;
         if (col.names.size() == 3) {
             int dateFs[] = new int[3];
             int ndx = 0;
@@ -433,12 +433,12 @@ public final class ContactCSV {
                     }
                     ndx++;
                 }
-                zimbraDateValue = populateDateFieldsIfUnambiguous(dateFs[2], dateFs[0], dateFs[1], true);
+                zmailDateValue = populateDateFieldsIfUnambiguous(dateFs[2], dateFs[0], dateFs[1], true);
             } catch (NumberFormatException ioe) {
             }
         }
-        if (zimbraDateValue != null) {
-            contact.put(col.field, zimbraDateValue);
+        if (zmailDateValue != null) {
+            contact.put(col.field, zmailDateValue);
         } else {
             StringBuilder buf = new StringBuilder();
             for (String n : col.names) {
@@ -453,13 +453,13 @@ public final class ContactCSV {
             if (buf.length() == 0) {
                 return;
             }
-            zimbraDateValue = buf.toString();
+            zmailDateValue = buf.toString();
             // We were unable to recognise the date format for this value :-(
-            if (Character.isDigit(zimbraDateValue.charAt(0))) {
+            if (Character.isDigit(zmailDateValue.charAt(0))) {
                 // Avoid later corruption from trying to process as a valid date.
-                contact.put(col.field, "'" + zimbraDateValue + "'");
+                contact.put(col.field, "'" + zmailDateValue + "'");
             } else {
-                contact.put(col.field, zimbraDateValue);
+                contact.put(col.field, zmailDateValue);
             }
         }
     }
@@ -548,7 +548,7 @@ public final class ContactCSV {
         } else {
             /* Many CSV formats are output in a specific order and sometimes
              * contain duplicate field names with mappings to different
-             * Zimbra contact fields.
+             * Zmail contact fields.
              */
             Map <CsvColumn, Map <String, String>> pendMV = new HashMap <CsvColumn, Map <String, String>>();
             List<CsvColumn> unseenColumns = new ArrayList<CsvColumn>();
@@ -733,7 +733,7 @@ public final class ContactCSV {
             String order = origOrder.toLowerCase();
             if (! (order.equals("ymd") || order.equals("ydm") || order.equals("myd") ||
                     order.equals("mdy") || order.equals("dmy") || order.equals("dym")) ) {
-                LOG.debug("invalid \"order\" %s in zimbra-contact-fields.xml", origOrder);
+                LOG.debug("invalid \"order\" %s in zmail-contact-fields.xml", origOrder);
                 continue;
             }
             String format = dateFormat.attributeValue(ATTR_FORMAT);
@@ -794,7 +794,7 @@ public final class ContactCSV {
 
     private static class CsvColumn {
         String name;    // column name for this format
-        String field;   // zimbra field that it maps to
+        String field;   // zmail field that it maps to
         List<String> names;  // in case of multivalue mapping
         ColType colType;
         CsvColumn(Element col) {
@@ -940,7 +940,7 @@ public final class ContactCSV {
 
     static {
         try {
-            readMappingFile(LC.zimbra_csv_mapping_file.value());
+            readMappingFile(LC.zmail_csv_mapping_file.value());
         } catch (Exception e) {
             LOG.error("error initializing csv mapping file", e);
         }
@@ -953,7 +953,7 @@ public final class ContactCSV {
     private static void readMapping(InputStream is) throws DocumentException {
         delimiterInfo = new HashMap<String,Character>();
         dateOrderInfo = new HashMap<String,String>();
-        Element root = com.zimbra.common.soap.Element.getSAXReader().read(is).getRootElement();
+        Element root = org.zmail.common.soap.Element.getSAXReader().read(is).getRootElement();
         for (Iterator elements = root.elementIterator(); elements.hasNext(); ) {
             Element elem = (Element) elements.next();
             if (elem.getQName().equals(FIELDS)) {
@@ -970,7 +970,7 @@ public final class ContactCSV {
 
     private static CsvFormat guessFormat(List<String> keys) throws ParseException {
         if (knownFormats == null || defaultFormat == null) {
-            throw new ParseException("missing config file " + LC.zimbra_csv_mapping_file.value());
+            throw new ParseException("missing config file " + LC.zmail_csv_mapping_file.value());
         }
 
         int numMatchedFields;
@@ -1002,7 +1002,7 @@ public final class ContactCSV {
      */
     private static CsvFormat getFormat(String fmt, String locale) throws ParseException {
         if (knownFormats == null || defaultFormat == null) {
-            throw new ParseException("missing config file " + LC.zimbra_csv_mapping_file.value());
+            throw new ParseException("missing config file " + LC.zmail_csv_mapping_file.value());
         }
 
         if (locale != null) {
@@ -1195,8 +1195,8 @@ public final class ContactCSV {
     }
 
     public static void main(String args[]) throws IOException, DocumentException {
-        ZimbraLog.toolSetupLog4jConsole("INFO", true, false);
-        //String mappingFile = LC.zimbra_csv_mapping_file.value();
+        ZmailLog.toolSetupLog4jConsole("INFO", true, false);
+        //String mappingFile = LC.zmail_csv_mapping_file.value();
         if (args.length > 0) {
             knownFormats = new HashSet<CsvFormat>();
             readMappingFile(args[0]);

@@ -13,28 +13,28 @@
  * ***** END LICENSE BLOCK *****
  */
 
-package com.zimbra.cs.mailbox.calendar;
+package org.zmail.cs.mailbox.calendar;
 
 import java.util.*;
 
 import java.text.ParseException;
 
-import com.zimbra.common.calendar.ICalTimeZone;
-import com.zimbra.common.calendar.ParsedDateTime;
-import com.zimbra.common.calendar.ParsedDuration;
-import com.zimbra.common.calendar.TimeZoneMap;
-import com.zimbra.common.calendar.ZWeekDay;
-import com.zimbra.common.calendar.ZCalendar.ICalTok;
-import com.zimbra.common.localconfig.DebugConfig;
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.common.util.StringUtil;
-import com.zimbra.common.util.ZimbraLog;
-import com.zimbra.common.util.ListUtil;
-import com.zimbra.common.soap.MailConstants;
-import com.zimbra.common.soap.Element;
-import com.zimbra.cs.mailbox.CalendarItem;
-import com.zimbra.cs.mailbox.Metadata;
-import com.zimbra.cs.mailbox.CalendarItem.Instance;
+import org.zmail.common.calendar.ICalTimeZone;
+import org.zmail.common.calendar.ParsedDateTime;
+import org.zmail.common.calendar.ParsedDuration;
+import org.zmail.common.calendar.TimeZoneMap;
+import org.zmail.common.calendar.ZWeekDay;
+import org.zmail.common.calendar.ZCalendar.ICalTok;
+import org.zmail.common.localconfig.DebugConfig;
+import org.zmail.common.service.ServiceException;
+import org.zmail.common.util.StringUtil;
+import org.zmail.common.util.ZmailLog;
+import org.zmail.common.util.ListUtil;
+import org.zmail.common.soap.MailConstants;
+import org.zmail.common.soap.Element;
+import org.zmail.cs.mailbox.CalendarItem;
+import org.zmail.cs.mailbox.Metadata;
+import org.zmail.cs.mailbox.CalendarItem.Instance;
 
 
 /**
@@ -679,7 +679,7 @@ public class Recurrence
         public List<Instance> expandInstances(int calItemId, long start, long end) 
         {
             if (mDtStart == null) {
-                ZimbraLog.calendar.warn("Unable to expand a recurrence with no DTSTART");
+                ZmailLog.calendar.warn("Unable to expand a recurrence with no DTSTART");
                 return new ArrayList<Instance>();
             }
             String KEY = String.valueOf(calItemId) + '-' + start + '-' + end;
@@ -721,11 +721,11 @@ public class Recurrence
                 }
             } catch (ServiceException se) {
                 // Bugs 3172 and 3240.  Ignore recurrence rules with bad data.
-                ZimbraLog.calendar.warn("ServiceException expanding recurrence rule: " + mRecur.toString(), se);
+                ZmailLog.calendar.warn("ServiceException expanding recurrence rule: " + mRecur.toString(), se);
                 toRet = new ArrayList<Instance>();
             } catch (IllegalArgumentException iae) {
                 // Bugs 3172 and 3240.  Ignore recurrence rules with bad data.
-            	ZimbraLog.calendar.warn("Invalid recurrence rule: " + mRecur.toString(), iae);
+            	ZmailLog.calendar.warn("Invalid recurrence rule: " + mRecur.toString(), iae);
                 toRet = new ArrayList<Instance>();
             }
             // cache and return;
@@ -894,7 +894,7 @@ public class Recurrence
         public List<Instance> expandInstances(int calItemId, long start, long end)
         throws ServiceException {
             if (mDtStart == null) {
-                ZimbraLog.calendar.warn("Unable to expand a recurrence with no DTSTART");
+                ZmailLog.calendar.warn("Unable to expand a recurrence with no DTSTART");
                 return new ArrayList<Instance>(0);
             }
 

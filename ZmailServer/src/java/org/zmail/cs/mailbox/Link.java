@@ -12,14 +12,14 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.mailbox;
+package org.zmail.cs.mailbox;
 
 import com.google.common.base.Objects;
-import com.zimbra.common.mailbox.Color;
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.common.util.ZimbraLog;
-import com.zimbra.cs.db.DbMailItem;
-import com.zimbra.cs.mailbox.MailItem.CustomMetadata.CustomMetadataList;
+import org.zmail.common.mailbox.Color;
+import org.zmail.common.service.ServiceException;
+import org.zmail.common.util.ZmailLog;
+import org.zmail.cs.db.DbMailItem;
+import org.zmail.cs.mailbox.MailItem.CustomMetadata.CustomMetadataList;
 
 public class Link extends Document {
 
@@ -48,7 +48,7 @@ public class Link extends Document {
         data.setSubject(name);
         data.metadata = encodeMetadata(DEFAULT_COLOR_RGB, 1, 1, ownerId, remoteId, custom);
         data.contentChanged(mbox);
-        ZimbraLog.mailop.info("Adding Link %s: id=%d, parentId=%d, parentName=%s.",
+        ZmailLog.mailop.info("Adding Link %s: id=%d, parentId=%d, parentName=%s.",
                 name, data.id, parent.getId(), parent.getName());
         new DbMailItem(mbox).create(data);
         Link link = new Link(mbox, data);

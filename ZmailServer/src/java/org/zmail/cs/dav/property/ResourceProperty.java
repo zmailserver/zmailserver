@@ -12,7 +12,7 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.dav.property;
+package org.zmail.cs.dav.property;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -22,9 +22,9 @@ import org.dom4j.Element;
 import org.dom4j.QName;
 import org.dom4j.tree.DefaultElement;
 
-import com.zimbra.common.util.HttpUtil;
-import com.zimbra.cs.dav.DavContext;
-import com.zimbra.cs.dav.DavElements;
+import org.zmail.common.util.HttpUtil;
+import org.zmail.cs.dav.DavContext;
+import org.zmail.cs.dav.DavElements;
 
 /**
  * RFC 2518bis section 4

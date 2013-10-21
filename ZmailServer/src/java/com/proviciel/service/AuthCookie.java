@@ -16,19 +16,19 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.Cookie;
 
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.cs.account.Account;
-import com.zimbra.cs.account.AuthTokenException;
-import com.zimbra.cs.account.ZimbraAuthToken;
+import org.zmail.common.service.ServiceException;
+import org.zmail.cs.account.Account;
+import org.zmail.cs.account.AuthTokenException;
+import org.zmail.cs.account.ZmailAuthToken;
 
 public class AuthCookie {
 	
 	public static String NAME = "auth_token";
 	
 	public static String authCookie(HttpServletRequest req, HttpServletResponse resp, Account account) throws AuthTokenException, ServiceException{
-		ZimbraAuthToken token = new ZimbraAuthToken(account);
+		ZmailAuthToken token = new ZmailAuthToken(account);
 		String encoded = token.getEncoded();
-		if (ZimbraAuthToken.getAuthToken(encoded).getAccount() == null)
+		if (ZmailAuthToken.getAuthToken(encoded).getAccount() == null)
 			throw new IllegalArgumentException();
 		setCookie(req, resp, encoded);
 		return encoded;
@@ -43,7 +43,7 @@ public class AuthCookie {
 		for(Cookie cookie : cookies){
 			if (cookie.getName().equals(NAME)) {
 				String value = cookie.getValue();
-				Account account = ZimbraAuthToken.getAuthToken(value).getAccount();
+				Account account = ZmailAuthToken.getAuthToken(value).getAccount();
 				if (account == null)
 					throw new AuthTokenException("No account for token: "+value);
 				return account;

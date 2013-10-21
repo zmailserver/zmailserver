@@ -12,7 +12,7 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.qa.unittest;
+package org.zmail.qa.unittest;
 
 import java.util.List;
 import java.util.regex.Matcher;
@@ -24,17 +24,17 @@ import javax.mail.util.SharedByteArrayInputStream;
 
 import junit.framework.TestCase;
 
-import com.zimbra.common.mime.shim.JavaMailInternetAddress;
-import com.zimbra.common.service.ServiceException.Argument;
-import com.zimbra.common.zmime.ZMimeMessage;
-import com.zimbra.cs.account.Account;
-import com.zimbra.cs.account.Provisioning;
-import com.zimbra.cs.account.Server;
-import com.zimbra.cs.mailbox.MailSender;
-import com.zimbra.cs.mailbox.MailServiceException;
-import com.zimbra.cs.mailbox.Mailbox;
-import com.zimbra.cs.mime.Mime.FixedMimeMessage;
-import com.zimbra.cs.util.JMSession;
+import org.zmail.common.mime.shim.JavaMailInternetAddress;
+import org.zmail.common.service.ServiceException.Argument;
+import org.zmail.common.zmime.ZMimeMessage;
+import org.zmail.cs.account.Account;
+import org.zmail.cs.account.Provisioning;
+import org.zmail.cs.account.Server;
+import org.zmail.cs.mailbox.MailSender;
+import org.zmail.cs.mailbox.MailServiceException;
+import org.zmail.cs.mailbox.Mailbox;
+import org.zmail.cs.mime.Mime.FixedMimeMessage;
+import org.zmail.cs.util.JMSession;
 
 public class TestMailSender
 extends TestCase {
@@ -51,8 +51,8 @@ extends TestCase {
     public void setUp()
     throws Exception {
         mOriginalSmtpPort = Provisioning.getInstance().getLocalServer().getSmtpPortAsString();
-        mOriginalSmtpSendPartial = TestUtil.getServerAttr(Provisioning.A_zimbraSmtpSendPartial);
-        mOriginalAllowAnyFrom = TestUtil.getAccountAttr(SENDER_NAME, Provisioning.A_zimbraAllowAnyFromAddress);
+        mOriginalSmtpSendPartial = TestUtil.getServerAttr(Provisioning.A_zmailSmtpSendPartial);
+        mOriginalAllowAnyFrom = TestUtil.getAccountAttr(SENDER_NAME, Provisioning.A_zmailAllowAnyFromAddress);
     }
 
     public void testRejectRecipient()
@@ -232,9 +232,9 @@ extends TestCase {
     public void tearDown()
     throws Exception {
         cleanUp();
-        TestUtil.setServerAttr(Provisioning.A_zimbraSmtpPort, mOriginalSmtpPort);
-        TestUtil.setServerAttr(Provisioning.A_zimbraSmtpSendPartial, mOriginalSmtpSendPartial);
-        TestUtil.setAccountAttr(SENDER_NAME, Provisioning.A_zimbraAllowAnyFromAddress, mOriginalAllowAnyFrom);
+        TestUtil.setServerAttr(Provisioning.A_zmailSmtpPort, mOriginalSmtpPort);
+        TestUtil.setServerAttr(Provisioning.A_zmailSmtpSendPartial, mOriginalSmtpSendPartial);
+        TestUtil.setAccountAttr(SENDER_NAME, Provisioning.A_zmailAllowAnyFromAddress, mOriginalAllowAnyFrom);
     }
     private void cleanUp()
     throws Exception {

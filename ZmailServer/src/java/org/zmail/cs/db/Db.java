@@ -12,7 +12,7 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.db;
+package org.zmail.cs.db;
 
 import java.sql.Connection;
 import java.sql.SQLException;
@@ -20,11 +20,11 @@ import java.sql.Statement;
 
 import org.apache.commons.dbcp.PoolingDataSource;
 
-import com.zimbra.common.localconfig.LC;
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.common.util.ZimbraLog;
-import com.zimbra.cs.db.DbPool.DbConnection;
-import com.zimbra.cs.mailbox.Mailbox;
+import org.zmail.common.localconfig.LC;
+import org.zmail.common.service.ServiceException;
+import org.zmail.common.util.ZmailLog;
+import org.zmail.cs.db.DbPool.DbConnection;
+import org.zmail.cs.mailbox.Mailbox;
 
 /**
  * @since Apr 10, 2004
@@ -74,12 +74,12 @@ public abstract class Db {
 
     public synchronized static Db getInstance() {
         if (sDatabase == null) {
-            String className = LC.zimbra_class_database.value();
+            String className = LC.zmail_class_database.value();
             if (className != null && !className.equals("")) {
                 try {
                     sDatabase = (Db) Class.forName(className).newInstance();
                 } catch (Exception e) {
-                    ZimbraLog.system.error("could not instantiate database configuration '" + className + "'; defaulting to MySQL", e);
+                    ZmailLog.system.error("could not instantiate database configuration '" + className + "'; defaulting to MySQL", e);
                 }
             }
             if (sDatabase == null)

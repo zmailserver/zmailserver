@@ -12,7 +12,7 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.dav.client;
+package org.zmail.cs.dav.client;
 
 import java.io.IOException;
 import java.net.URL;
@@ -39,18 +39,18 @@ import org.dom4j.DocumentException;
 import org.dom4j.Element;
 import org.dom4j.QName;
 
-import com.zimbra.common.auth.ZAuthToken;
-import com.zimbra.common.httpclient.HttpClientUtil;
-import com.zimbra.common.util.Pair;
-import com.zimbra.common.util.ZimbraHttpConnectionManager;
-import com.zimbra.common.util.ZimbraLog;
-import com.zimbra.cs.dav.DavElements;
-import com.zimbra.cs.dav.DavException;
-import com.zimbra.cs.dav.DavContext.Depth;
-import com.zimbra.cs.dav.DavProtocol;
-import com.zimbra.cs.httpclient.HttpProxyUtil;
-import com.zimbra.cs.service.UserServlet.HttpInputStream;
-import com.zimbra.cs.util.BuildInfo;
+import org.zmail.common.auth.ZAuthToken;
+import org.zmail.common.httpclient.HttpClientUtil;
+import org.zmail.common.util.Pair;
+import org.zmail.common.util.ZmailHttpConnectionManager;
+import org.zmail.common.util.ZmailLog;
+import org.zmail.cs.dav.DavElements;
+import org.zmail.cs.dav.DavException;
+import org.zmail.cs.dav.DavContext.Depth;
+import org.zmail.cs.dav.DavProtocol;
+import org.zmail.cs.httpclient.HttpProxyUtil;
+import org.zmail.cs.service.UserServlet.HttpInputStream;
+import org.zmail.cs.util.BuildInfo;
 
 public class WebDavClient {
 
@@ -60,7 +60,7 @@ public class WebDavClient {
 	
 	public WebDavClient(String baseUrl, String app) {
 		mBaseUrl = baseUrl;
-		mClient = ZimbraHttpConnectionManager.getInternalHttpConnMgr().newHttpClient();
+		mClient = ZmailHttpConnectionManager.getInternalHttpConnMgr().newHttpClient();
 		HttpProxyUtil.configureProxy(mClient);
 		setAppName(app);
 	}
@@ -94,7 +94,7 @@ public class WebDavClient {
 			if (status >= 400)
 				throw new DavException("DAV server returned an error: "+status, status);
 			
-			Document doc = com.zimbra.common.soap.Element.getSAXReader().read(m.getResponseBodyAsStream());
+			Document doc = org.zmail.common.soap.Element.getSAXReader().read(m.getResponseBodyAsStream());
 			Element top = doc.getRootElement();
 			for (Object obj : top.elements(DavElements.E_RESPONSE)) {
 				if (obj instanceof Element) {
@@ -128,7 +128,7 @@ public class WebDavClient {
 			put = new PutMethod(mBaseUrl + href);
 			put.setRequestEntity(new ByteArrayRequestEntity(buf, contentType));
 			if (mDebugEnabled && contentType.startsWith("text"))
-				ZimbraLog.dav.debug("PUT payload: \n"+new String(buf, "UTF-8"));
+				ZmailLog.dav.debug("PUT payload: \n"+new String(buf, "UTF-8"));
 			if (etag != null)
 				put.setRequestHeader(DavProtocol.HEADER_IF_MATCH, etag);
 			if (headers != null)
@@ -140,7 +140,7 @@ public class WebDavClient {
 				Header newLocation = put.getResponseHeader("Location");
 				if (newLocation != null) {
 					href = newLocation.getValue();
-					ZimbraLog.dav.debug("redirect to new url = "+href);
+					ZmailLog.dav.debug("redirect to new url = "+href);
 					put.releaseConnection();
 					continue;
 				}
@@ -160,7 +160,7 @@ public class WebDavClient {
 				Header newLocation = method.getResponseHeader("Location");
 				if (newLocation != null) {
 					String uri = newLocation.getValue();
-					ZimbraLog.dav.debug("redirect to new url = "+uri);
+					ZmailLog.dav.debug("redirect to new url = "+uri);
 					method.releaseConnection();
 					req.setRedirectUrl(uri);
 					continue;
@@ -173,7 +173,7 @@ public class WebDavClient {
 	
 	protected HttpMethod execute(DavRequest req) throws IOException {
 		if (mDebugEnabled)
-			ZimbraLog.dav.debug("Request payload: \n"+req.getRequestMessageString());
+			ZmailLog.dav.debug("Request payload: \n"+req.getRequestMessageString());
 		HttpMethod m = req.getHttpMethod(mBaseUrl);
         for (Pair<String,String> header : req.getRequestHeaders()) {
             m.addRequestHeader(header.getFirst(), header.getSecond());
@@ -181,7 +181,7 @@ public class WebDavClient {
 		return executeMethod(m, req.getDepth());
 	}
 	protected HttpMethod executeMethod(HttpMethod m, Depth d) throws IOException {
-		ZimbraLog.dav.debug("WebDAV request (depth="+d+"): "+m.getPath());
+		ZmailLog.dav.debug("WebDAV request (depth="+d+"): "+m.getPath());
 
 		HttpMethodParams p = m.getParams();
 		if ( p != null )
@@ -201,7 +201,7 @@ public class WebDavClient {
 		m.setRequestHeader("Depth", depth);
 		HttpClientUtil.executeMethod(mClient, m);
 		if (mDebugEnabled && m.getResponseBody() != null)
-			ZimbraLog.dav.debug("WebDAV response:\n"+new String(m.getResponseBody(), "UTF-8"));
+			ZmailLog.dav.debug("WebDAV response:\n"+new String(m.getResponseBody(), "UTF-8"));
 
         return m;
 	}
@@ -252,7 +252,7 @@ public class WebDavClient {
 	}
 	
 	public void setAppName(String app) {
-		mUserAgent = "Zimbra " + app + "/" + BuildInfo.VERSION + " (" + BuildInfo.DATE + ")";
+		mUserAgent = "Zmail " + app + "/" + BuildInfo.VERSION + " (" + BuildInfo.DATE + ")";
 	}
 	
 	private String mUserAgent;

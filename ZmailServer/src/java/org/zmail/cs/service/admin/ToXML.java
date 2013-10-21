@@ -12,7 +12,7 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.service.admin;
+package org.zmail.cs.service.admin;
 
 import java.util.Iterator;
 import java.util.HashSet;
@@ -20,18 +20,18 @@ import java.util.Map;
 import java.util.Set;
 import java.util.Map.Entry;
 
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.common.soap.AccountConstants;
-import com.zimbra.common.soap.AdminConstants;
-import com.zimbra.common.soap.Element;
-import com.zimbra.common.util.ZimbraLog;
-import com.zimbra.cs.account.Account;
-import com.zimbra.cs.account.AttributeManager;
-import com.zimbra.cs.account.CalendarResource;
-import com.zimbra.cs.account.IDNUtil;
-import com.zimbra.cs.account.Provisioning;
-import com.zimbra.cs.account.AccessManager.AttrRightChecker;
-import com.zimbra.cs.account.AttributeManager.IDNType;
+import org.zmail.common.service.ServiceException;
+import org.zmail.common.soap.AccountConstants;
+import org.zmail.common.soap.AdminConstants;
+import org.zmail.common.soap.Element;
+import org.zmail.common.util.ZmailLog;
+import org.zmail.cs.account.Account;
+import org.zmail.cs.account.AttributeManager;
+import org.zmail.cs.account.CalendarResource;
+import org.zmail.cs.account.IDNUtil;
+import org.zmail.cs.account.Provisioning;
+import org.zmail.cs.account.AccessManager.AttrRightChecker;
+import org.zmail.cs.account.AttributeManager.IDNType;
 
 public class ToXML {
     public static Element encodeAccount(Element parent, Account account) {
@@ -60,7 +60,7 @@ public class ToXML {
                 boolean isExternal = account.isAccountExternal();
                 acctElem.addAttribute(AccountConstants.A_IS_EXTERNAL, isExternal);
             } catch (ServiceException e) {
-                ZimbraLog.account.warn("unable to determine if account is external", e);
+                ZmailLog.account.warn("unable to determine if account is external", e);
             }
         }
         Map attrs = account.getUnicodeAttrs(applyCos);
@@ -101,7 +101,7 @@ public class ToXML {
         try {
             attrMgr = AttributeManager.getInstance();
         } catch (ServiceException se) {
-            ZimbraLog.account.warn("failed to get AttributeManager instance", se);
+            ZmailLog.account.warn("failed to get AttributeManager instance", se);
         }
 
         Set<String> reqAttrsLowerCase = null;
@@ -118,7 +118,7 @@ public class ToXML {
             Object value = entry.getValue();
 
             // Never return data source passwords
-            if (name.equalsIgnoreCase(Provisioning.A_zimbraDataSourcePassword)) {
+            if (name.equalsIgnoreCase(Provisioning.A_zmailDataSourcePassword)) {
                 continue;
             }
             
@@ -134,7 +134,7 @@ public class ToXML {
 
             // Never return password.
             if (name.equalsIgnoreCase(Provisioning.A_userPassword) || 
-                name.equalsIgnoreCase(Provisioning.A_zimbraUCPassword)) {
+                name.equalsIgnoreCase(Provisioning.A_zmailUCPassword)) {
                 value = "VALUE-BLOCKED";
             }
             
@@ -148,7 +148,7 @@ public class ToXML {
                     encodeAttr(e, name, sv[i], AdminConstants.E_A, key, idnType, allowed);
                 }
             } else if (value instanceof String) {
-                value = com.zimbra.cs.service.account.ToXML.fixupZimbraPrefTimeZoneId(name, (String)value);
+                value = org.zmail.cs.service.account.ToXML.fixupZmailPrefTimeZoneId(name, (String)value);
                 encodeAttr(e, name, (String)value, AdminConstants.E_A, key, idnType, allowed);
             }
         }       

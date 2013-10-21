@@ -13,7 +13,7 @@
  * ***** END LICENSE BLOCK *****
  */
 
-package com.zimbra.cs.service.admin;
+package org.zmail.cs.service.admin;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
@@ -27,23 +27,23 @@ import javax.mail.internet.MimeMessage;
 import org.apache.commons.lang.RandomStringUtils;
 
 import com.google.common.base.Objects;
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.common.soap.AdminConstants;
-import com.zimbra.common.soap.Element;
-import com.zimbra.common.util.ZimbraLog;
-import com.zimbra.cs.account.Account;
-import com.zimbra.cs.account.Provisioning;
-import com.zimbra.cs.mailbox.Mailbox;
-import com.zimbra.cs.mailbox.MailboxManager;
-import com.zimbra.cs.mime.Mime;
-import com.zimbra.cs.mime.ParsedMessage;
-import com.zimbra.cs.store.Blob;
-import com.zimbra.cs.store.MailboxBlob;
-import com.zimbra.cs.store.StagedBlob;
-import com.zimbra.cs.store.StoreManager;
-import com.zimbra.cs.util.JMSession;
-import com.zimbra.qa.unittest.AccountTestUtil;
-import com.zimbra.soap.ZimbraSoapContext;
+import org.zmail.common.service.ServiceException;
+import org.zmail.common.soap.AdminConstants;
+import org.zmail.common.soap.Element;
+import org.zmail.common.util.ZmailLog;
+import org.zmail.cs.account.Account;
+import org.zmail.cs.account.Provisioning;
+import org.zmail.cs.mailbox.Mailbox;
+import org.zmail.cs.mailbox.MailboxManager;
+import org.zmail.cs.mime.Mime;
+import org.zmail.cs.mime.ParsedMessage;
+import org.zmail.cs.store.Blob;
+import org.zmail.cs.store.MailboxBlob;
+import org.zmail.cs.store.StagedBlob;
+import org.zmail.cs.store.StoreManager;
+import org.zmail.cs.util.JMSession;
+import org.zmail.qa.unittest.AccountTestUtil;
+import org.zmail.soap.ZmailSoapContext;
 
 /**
  * Utility for verifying StoreManager functionality. Intended to be available for 3rd party integrators
@@ -77,7 +77,7 @@ public class VerifyStoreManager extends AdminDocumentHandler {
         }
     }
 
-    private String USER_NAME = "zimbraStoreVerifyUser";
+    private String USER_NAME = "zmailStoreVerifyUser";
 
     private byte[] readInputStream(InputStream is) throws IOException {
         ByteArrayOutputStream baos = new ByteArrayOutputStream();
@@ -185,7 +185,7 @@ public class VerifyStoreManager extends AdminDocumentHandler {
             msgs.add(getMessage(blobSize));
         }
         List<Blob> incoming = new ArrayList<Blob>();
-        ZimbraLog.store.info("starting store incoming loop");
+        ZmailLog.store.info("starting store incoming loop");
         long start = System.currentTimeMillis();
         for (ParsedMessage msg : msgs) {
             incoming.add(sm.storeIncoming(msg.getRawInputStream()));
@@ -193,7 +193,7 @@ public class VerifyStoreManager extends AdminDocumentHandler {
         long incomingTime = System.currentTimeMillis() - start;
 
         List<StagedBlob> staged = new ArrayList<StagedBlob>();
-        ZimbraLog.store.info("starting stage loop");
+        ZmailLog.store.info("starting stage loop");
         start = System.currentTimeMillis();
         for (Blob blob : incoming) {
             staged.add(sm.stage(blob, mbox));
@@ -201,7 +201,7 @@ public class VerifyStoreManager extends AdminDocumentHandler {
         long stageTime = System.currentTimeMillis() - start;
 
         List<MailboxBlob> linked = new ArrayList<MailboxBlob>();
-        ZimbraLog.store.info("starting link loop");
+        ZmailLog.store.info("starting link loop");
         start = System.currentTimeMillis();
         int i = 0; //fake itemId, never use this test with real userid
         for (StagedBlob blob : staged) {
@@ -210,7 +210,7 @@ public class VerifyStoreManager extends AdminDocumentHandler {
         long linkTime = System.currentTimeMillis() - start;
 
         List<MailboxBlob> fetched = new ArrayList<MailboxBlob>();
-        ZimbraLog.store.info("starting fetch loop");
+        ZmailLog.store.info("starting fetch loop");
         start = System.currentTimeMillis();
         i = 0;
         for (MailboxBlob mblob : linked) {
@@ -223,7 +223,7 @@ public class VerifyStoreManager extends AdminDocumentHandler {
             }
         }
 
-        ZimbraLog.store.info("starting delete loop");
+        ZmailLog.store.info("starting delete loop");
         start = System.currentTimeMillis();
         for (MailboxBlob mblob: fetched) {
             sm.delete(mblob);
@@ -238,7 +238,7 @@ public class VerifyStoreManager extends AdminDocumentHandler {
         if (AccountTestUtil.accountExists(USER_NAME)) {
             return false;
         }
-        ZimbraLog.store.info("creating account for test");
+        ZmailLog.store.info("creating account for test");
         Provisioning.getInstance().createAccount(AccountTestUtil.getAddress(USER_NAME), "test123", null);
         return true;
     }
@@ -251,20 +251,20 @@ public class VerifyStoreManager extends AdminDocumentHandler {
 
     @Override
     public synchronized Element handle(Element request, Map<String, Object> context) throws ServiceException {
-        ZimbraSoapContext zsc = getZimbraSoapContext(context);
+        ZmailSoapContext zsc = getZmailSoapContext(context);
         Element response = zsc.createElement(AdminConstants.VERIFY_STORE_MANAGER_RESPONSE);
 
         boolean created = createAccountIfNeeded();
         try {
             try {
-                ZimbraLog.store.info("verifying basic store functionality");
+                ZmailLog.store.info("verifying basic store functionality");
                 testStore();
             } catch (Exception e) {
                 throw ServiceException.FAILURE("store verification failed", e);
             }
             int blobSize = request.getAttributeInt(AdminConstants.A_FILE_SIZE, 1024);
             try {
-                ZimbraLog.store.info("running perf sanity tests");
+                ZmailLog.store.info("running perf sanity tests");
                 Stats stats = basicPerfTest(request.getAttributeInt(AdminConstants.A_NUM, 1000), blobSize,
                     request.getAttributeBool(AdminConstants.A_CHECK_BLOBS, true));
                 response.addAttribute("storeManagerClass", StoreManager.getInstance().getClass().getName())
@@ -279,7 +279,7 @@ public class VerifyStoreManager extends AdminDocumentHandler {
                     ". May need to use a smaller blob size or increase heap space", oome);
             }
         } finally {
-            ZimbraLog.store.info("deleting account for test");
+            ZmailLog.store.info("deleting account for test");
             if (created) {
                 deleteAccount();
             }

@@ -12,7 +12,7 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.index.query;
+package org.zmail.cs.index.query;
 
 import java.util.EnumSet;
 import java.util.Map;
@@ -20,9 +20,9 @@ import java.util.Map;
 import org.apache.lucene.analysis.Analyzer;
 
 import com.google.common.collect.ImmutableMap;
-import com.zimbra.common.service.ServiceException;
+import org.zmail.common.service.ServiceException;
 
-import com.zimbra.cs.mailbox.Mailbox;
+import org.zmail.cs.mailbox.Mailbox;
 
 /**
  * Built-in queries.

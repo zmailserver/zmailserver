@@ -12,7 +12,7 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.account.ldap.upgrade;
+package org.zmail.cs.account.ldap.upgrade;
 
 import java.util.Collection;
 import java.util.HashMap;
@@ -23,21 +23,21 @@ import java.util.Set;
 import org.apache.commons.cli.CommandLine;
 import org.apache.commons.cli.HelpFormatter;
 
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.common.util.Version;
-import com.zimbra.cs.account.AttributeCardinality;
-import com.zimbra.cs.account.AttributeClass;
-import com.zimbra.cs.account.AttributeInfo;
-import com.zimbra.cs.account.AttributeManager;
-import com.zimbra.cs.account.Config;
-import com.zimbra.cs.account.Cos;
-import com.zimbra.cs.account.Entry;
-import com.zimbra.cs.account.Provisioning;
-import com.zimbra.cs.ldap.LdapClient;
-import com.zimbra.cs.ldap.LdapServerType;
-import com.zimbra.cs.ldap.LdapUsage;
-import com.zimbra.cs.ldap.ZLdapContext;
-import com.zimbra.cs.util.BuildInfo;
+import org.zmail.common.service.ServiceException;
+import org.zmail.common.util.Version;
+import org.zmail.cs.account.AttributeCardinality;
+import org.zmail.cs.account.AttributeClass;
+import org.zmail.cs.account.AttributeInfo;
+import org.zmail.cs.account.AttributeManager;
+import org.zmail.cs.account.Config;
+import org.zmail.cs.account.Cos;
+import org.zmail.cs.account.Entry;
+import org.zmail.cs.account.Provisioning;
+import org.zmail.cs.ldap.LdapClient;
+import org.zmail.cs.ldap.LdapServerType;
+import org.zmail.cs.ldap.LdapUsage;
+import org.zmail.cs.ldap.ZLdapContext;
+import org.zmail.cs.util.BuildInfo;
 
 public class BUG_27075 extends UpgradeOp {
 
@@ -130,7 +130,7 @@ public class BUG_27075 extends UpgradeOp {
         /*
          * bug 56667
          * 
-         * zimbraFreebusyExchangeServerType was added in 6.0.11, *after* 7.0.0 and before 7.0.1
+         * zmailFreebusyExchangeServerType was added in 6.0.11, *after* 7.0.0 and before 7.0.1
          * 
          * [from] 7.0.0 -> [to] higher version
          * upgrades will miss it.
@@ -144,7 +144,7 @@ public class BUG_27075 extends UpgradeOp {
          *               - if 6.0.11 and above, no problem
          *               - if below 6.0.11, taken care by the regular logic, no problem.    
          */
-        if (Provisioning.A_zimbraFreebusyExchangeServerType.equalsIgnoreCase(attr)) {
+        if (Provisioning.A_zmailFreebusyExchangeServerType.equalsIgnoreCase(attr)) {
             boolean fromATroubledInstall = (mSince.compare("7.0.0") == 0);
             if (fromATroubledInstall) {
                 return true;
@@ -154,10 +154,10 @@ public class BUG_27075 extends UpgradeOp {
         /*
          * bug 58084
          * 
-         * zimbraMailEmptyFolderBatchThreshold was added in 6.0.13, *after* 7.1.0 and before 7.1.1
+         * zmailMailEmptyFolderBatchThreshold was added in 6.0.13, *after* 7.1.0 and before 7.1.1
          * 
          */
-        if (Provisioning.A_zimbraMailEmptyFolderBatchThreshold.equalsIgnoreCase(attr)) {
+        if (Provisioning.A_zmailMailEmptyFolderBatchThreshold.equalsIgnoreCase(attr)) {
             boolean fromATroubledInstall = (mSince.compare("7.0.0") >= 0 &&
                                             mSince.compare("7.1.1") < 0);
             if (fromATroubledInstall) {
@@ -256,7 +256,7 @@ public class BUG_27075 extends UpgradeOp {
     }
 
     private void doBug38425(Entry entry, String entryName) {
-        String theAttr = Provisioning.A_zimbraPrefMailDefaultCharset;
+        String theAttr = Provisioning.A_zmailPrefMailDefaultCharset;
         String sinceVer = mSince.toString();
         String thisVer = BuildInfo.VERSION;
 
@@ -286,12 +286,12 @@ public class BUG_27075 extends UpgradeOp {
         // check if the attribute already exists. It's possible that server may have been upgraded from 
         // 7.2.2->7.2.3, 7.2.3->8.0.0 and then 8.0.0->8.0.3. The 7.2.2->7.2.3 would have already added the attribute.
         HashMap<String,Object> attrs = new HashMap<String,Object>();
-        String attr = Provisioning.A_zimbraHttpThreadPoolMaxIdleTimeMillis;
+        String attr = Provisioning.A_zmailHttpThreadPoolMaxIdleTimeMillis;
         String curVal = config.getAttr(attr, null);
         if (curVal == null) {
             attrs.put(attr, config.getHttpThreadPoolMaxIdleTimeMillis());
         }
-        attr = Provisioning.A_zimbraHttpConnectorMaxIdleTimeMillis;
+        attr = Provisioning.A_zmailHttpConnectorMaxIdleTimeMillis;
         curVal = config.getAttr(attr, null);
         if (curVal == null) {
             attrs.put(attr, config.getHttpConnectorMaxIdleTimeMillis());

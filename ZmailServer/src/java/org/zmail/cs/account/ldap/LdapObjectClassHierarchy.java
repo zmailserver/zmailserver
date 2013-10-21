@@ -12,15 +12,15 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.account.ldap;
+package org.zmail.cs.account.ldap;
 
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 
-import com.zimbra.common.util.StringUtil;
-import com.zimbra.cs.account.ldap.LdapProv;
+import org.zmail.common.util.StringUtil;
+import org.zmail.cs.account.ldap.LdapProv;
 
 public class LdapObjectClassHierarchy {
 
@@ -80,8 +80,8 @@ public class LdapObjectClassHierarchy {
 
         for (String oc : ocs) {
             String ocLower = oc.toLowerCase();
-            // skip zimbra OCs
-            if (ocLower.startsWith("zimbra")) {
+            // skip zmail OCs
+            if (ocLower.startsWith("zmail")) {
                 continue;
             }
 

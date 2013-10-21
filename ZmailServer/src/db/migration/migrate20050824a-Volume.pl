@@ -23,7 +23,7 @@ sub removeMessageVolumeIdColumn() {
 ALTER TABLE mailbox DROP FOREIGN KEY fk_mailbox_message_volume_id;
 ALTER TABLE mailbox DROP COLUMN message_volume_id;
 END_OF_SQL
-    Migrate::log("Removing MESSAGE_VOLUME_ID colume from zimbra.mailbox table");
+    Migrate::log("Removing MESSAGE_VOLUME_ID colume from zmail.mailbox table");
     Migrate::runSql($sql);
 }
 

@@ -16,35 +16,35 @@
 /*
  * Created on May 26, 2004
  */
-package com.zimbra.cs.service.account;
+package org.zmail.cs.service.account;
 
-import com.zimbra.common.account.Key;
-import com.zimbra.common.account.Key.AccountBy;
-import com.zimbra.common.account.ZAttrProvisioning.AutoProvAuthMech;
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.common.soap.AccountConstants;
-import com.zimbra.common.soap.Element;
-import com.zimbra.common.util.ZimbraCookie;
-import com.zimbra.common.util.ZimbraLog;
-import com.zimbra.cs.account.Account;
-import com.zimbra.cs.account.AccountServiceException.AuthFailedServiceException;
-import com.zimbra.cs.account.AttributeFlag;
-import com.zimbra.cs.account.AttributeManager;
-import com.zimbra.cs.account.AuthToken;
-import com.zimbra.cs.account.AuthTokenException;
-import com.zimbra.cs.account.Domain;
-import com.zimbra.cs.account.Provisioning;
-import com.zimbra.cs.account.krb5.Krb5Principal;
-import com.zimbra.cs.account.names.NameUtil.EmailAddress;
-import com.zimbra.cs.account.Server;
-import com.zimbra.cs.account.auth.AuthContext;
-import com.zimbra.cs.service.AuthProvider;
-import com.zimbra.cs.session.Session;
-import com.zimbra.cs.util.AccountUtil;
-import com.zimbra.cs.util.SkinUtil;
-import com.zimbra.soap.SoapEngine;
-import com.zimbra.soap.SoapServlet;
-import com.zimbra.soap.ZimbraSoapContext;
+import org.zmail.common.account.Key;
+import org.zmail.common.account.Key.AccountBy;
+import org.zmail.common.account.ZAttrProvisioning.AutoProvAuthMech;
+import org.zmail.common.service.ServiceException;
+import org.zmail.common.soap.AccountConstants;
+import org.zmail.common.soap.Element;
+import org.zmail.common.util.ZmailCookie;
+import org.zmail.common.util.ZmailLog;
+import org.zmail.cs.account.Account;
+import org.zmail.cs.account.AccountServiceException.AuthFailedServiceException;
+import org.zmail.cs.account.AttributeFlag;
+import org.zmail.cs.account.AttributeManager;
+import org.zmail.cs.account.AuthToken;
+import org.zmail.cs.account.AuthTokenException;
+import org.zmail.cs.account.Domain;
+import org.zmail.cs.account.Provisioning;
+import org.zmail.cs.account.krb5.Krb5Principal;
+import org.zmail.cs.account.names.NameUtil.EmailAddress;
+import org.zmail.cs.account.Server;
+import org.zmail.cs.account.auth.AuthContext;
+import org.zmail.cs.service.AuthProvider;
+import org.zmail.cs.session.Session;
+import org.zmail.cs.util.AccountUtil;
+import org.zmail.cs.util.SkinUtil;
+import org.zmail.soap.SoapEngine;
+import org.zmail.soap.SoapServlet;
+import org.zmail.soap.ZmailSoapContext;
 
 import java.util.HashMap;
 import java.util.Iterator;
@@ -61,7 +61,7 @@ import javax.servlet.http.HttpServletResponse;
 public class Auth extends AccountDocumentHandler {
 
 	public Element handle(Element request, Map<String, Object> context) throws ServiceException {
-        ZimbraSoapContext zsc = getZimbraSoapContext(context);
+        ZmailSoapContext zsc = getZmailSoapContext(context);
         Provisioning prov = Provisioning.getInstance();
 
         // Look up the specified account.  It is optional in the <authToken> case.
@@ -167,9 +167,9 @@ public class Auth extends AccountDocumentHandler {
                             acctAutoProvisioned = true;
                         }
                     } catch (AuthFailedServiceException e) {
-                        ZimbraLog.account.debug("auth failed, unable to auto provisioing acct " + acctValue, e);
+                        ZmailLog.account.debug("auth failed, unable to auto provisioing acct " + acctValue, e);
                     } catch (ServiceException e) {
-                        ZimbraLog.account.info("unable to auto provisioing acct " + acctValue, e);
+                        ZmailLog.account.info("unable to auto provisioing acct " + acctValue, e);
                     }
                 }
             }
@@ -178,7 +178,7 @@ public class Auth extends AccountDocumentHandler {
                 throw AuthFailedServiceException.AUTH_FAILED(acctValue, acctValuePassedIn, "account not found");
             }
             
-            AccountUtil.addAccountToLogContext(prov, acct.getId(), ZimbraLog.C_NAME, ZimbraLog.C_ID, null);
+            AccountUtil.addAccountToLogContext(prov, acct.getId(), ZmailLog.C_NAME, ZmailLog.C_ID, null);
 
             // if account was auto provisioned, we had already authenticated the principal 
             if (!acctAutoProvisioned) {
@@ -199,7 +199,7 @@ public class Auth extends AccountDocumentHandler {
         }
     }
 
-    private Element doResponse(Element request, AuthToken at, ZimbraSoapContext zsc, 
+    private Element doResponse(Element request, AuthToken at, ZmailSoapContext zsc, 
             Map<String, Object> context, Account acct)
     throws ServiceException {
         Element response = zsc.createElement(AccountConstants.AUTH_RESPONSE);
@@ -212,22 +212,22 @@ public class Auth extends AccountDocumentHandler {
         HttpServletRequest httpReq = (HttpServletRequest)context.get(SoapServlet.SERVLET_REQUEST);
         HttpServletResponse httpResp = (HttpServletResponse)context.get(SoapServlet.SERVLET_RESPONSE);
         boolean rememberMe = request.getAttributeBool(AccountConstants.A_PERSIST_AUTH_TOKEN_COOKIE, false);
-        at.encode(httpResp, false, ZimbraCookie.secureCookie(httpReq), rememberMe);
+        at.encode(httpResp, false, ZmailCookie.secureCookie(httpReq), rememberMe);
         
         response.addAttribute(AccountConstants.E_LIFETIME, at.getExpires() - System.currentTimeMillis(), Element.Disposition.CONTENT);
         boolean isCorrectHost = Provisioning.onLocalServer(acct);
         if (isCorrectHost) {
             Session session = updateAuthenticatedAccount(zsc, at, context, true);
             if (session != null)
-                ZimbraSoapContext.encodeSession(response, session.getSessionId(), session.getSessionType());
+                ZmailSoapContext.encodeSession(response, session.getSessionId(), session.getSessionType());
         }
         
         Server localhost = Provisioning.getInstance().getLocalServer();
-        String referMode = localhost.getAttr(Provisioning.A_zimbraMailReferMode, "wronghost");
-        // if (!isCorrectHost || LC.zimbra_auth_always_send_refer.booleanValue()) {
+        String referMode = localhost.getAttr(Provisioning.A_zmailMailReferMode, "wronghost");
+        // if (!isCorrectHost || LC.zmail_auth_always_send_refer.booleanValue()) {
         if (Provisioning.MAIL_REFER_MODE_ALWAYS.equals(referMode) ||
             (Provisioning.MAIL_REFER_MODE_WRONGHOST.equals(referMode) && !isCorrectHost)) {
-            response.addAttribute(AccountConstants.E_REFERRAL, acct.getAttr(Provisioning.A_zimbraMailHost), Element.Disposition.CONTENT);
+            response.addAttribute(AccountConstants.E_REFERRAL, acct.getAttr(Provisioning.A_zmailMailHost), Element.Disposition.CONTENT);
         }
 
 		Element prefsRequest = request.getOptionalElement(AccountConstants.E_PREFS);
@@ -255,7 +255,7 @@ public class Auth extends AccountDocumentHandler {
 		Element requestedSkinEl = request.getOptionalElement(AccountConstants.E_REQUESTED_SKIN);
 		String requestedSkin = requestedSkinEl != null ? requestedSkinEl.getText() : null;  
 		String skin = SkinUtil.chooseSkin(acct, requestedSkin);
-		ZimbraLog.webclient.debug("chooseSkin() returned "+skin );
+		ZmailLog.webclient.debug("chooseSkin() returned "+skin );
 		if (skin != null) {
 			response.addElement(AccountConstants.E_SKIN).setText(skin);
 		}
@@ -271,9 +271,9 @@ public class Auth extends AccountDocumentHandler {
     public static void addAccountToLogContextByAuthToken(Provisioning prov, AuthToken at) {
         String id = at.getAccountId();
         if (id != null)
-            AccountUtil.addAccountToLogContext(prov, id, ZimbraLog.C_NAME, ZimbraLog.C_ID, null);
+            AccountUtil.addAccountToLogContext(prov, id, ZmailLog.C_NAME, ZmailLog.C_ID, null);
         String aid = at.getAdminAccountId();
         if (aid != null && !aid.equals(id))
-            AccountUtil.addAccountToLogContext(prov, aid, ZimbraLog.C_ANAME, ZimbraLog.C_AID, null);
+            AccountUtil.addAccountToLogContext(prov, aid, ZmailLog.C_ANAME, ZmailLog.C_AID, null);
     }
 }

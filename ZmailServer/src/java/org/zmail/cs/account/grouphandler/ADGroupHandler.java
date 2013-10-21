@@ -13,34 +13,34 @@
  * ***** END LICENSE BLOCK *****
  */
 
-package com.zimbra.cs.account.grouphandler;
+package org.zmail.cs.account.grouphandler;
 
 import java.util.List;
 import java.util.TreeSet;
 
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.common.util.ZimbraLog;
-import com.zimbra.cs.account.Account;
-import com.zimbra.cs.account.Domain;
-import com.zimbra.cs.account.EntryCacheDataKey;
-import com.zimbra.cs.account.Provisioning;
-import com.zimbra.cs.account.accesscontrol.ExternalGroup;
-import com.zimbra.cs.account.auth.AuthMechanism.AuthMech;
-import com.zimbra.cs.account.ldap.LdapHelper;
-import com.zimbra.cs.account.ldap.LdapProv;
-import com.zimbra.cs.ldap.IAttributes;
-import com.zimbra.cs.ldap.ILdapContext;
-import com.zimbra.cs.ldap.LdapClient;
-import com.zimbra.cs.ldap.LdapConstants;
-import com.zimbra.cs.ldap.LdapUtil;
-import com.zimbra.cs.ldap.SearchLdapOptions;
-import com.zimbra.cs.ldap.ZAttributes;
-import com.zimbra.cs.ldap.ZLdapContext;
-import com.zimbra.cs.ldap.ZLdapFilter;
-import com.zimbra.cs.ldap.ZLdapFilterFactory;
-import com.zimbra.cs.ldap.ZSearchScope;
-import com.zimbra.cs.ldap.IAttributes.CheckBinary;
-import com.zimbra.cs.ldap.SearchLdapOptions.SearchLdapVisitor;
+import org.zmail.common.service.ServiceException;
+import org.zmail.common.util.ZmailLog;
+import org.zmail.cs.account.Account;
+import org.zmail.cs.account.Domain;
+import org.zmail.cs.account.EntryCacheDataKey;
+import org.zmail.cs.account.Provisioning;
+import org.zmail.cs.account.accesscontrol.ExternalGroup;
+import org.zmail.cs.account.auth.AuthMechanism.AuthMech;
+import org.zmail.cs.account.ldap.LdapHelper;
+import org.zmail.cs.account.ldap.LdapProv;
+import org.zmail.cs.ldap.IAttributes;
+import org.zmail.cs.ldap.ILdapContext;
+import org.zmail.cs.ldap.LdapClient;
+import org.zmail.cs.ldap.LdapConstants;
+import org.zmail.cs.ldap.LdapUtil;
+import org.zmail.cs.ldap.SearchLdapOptions;
+import org.zmail.cs.ldap.ZAttributes;
+import org.zmail.cs.ldap.ZLdapContext;
+import org.zmail.cs.ldap.ZLdapFilter;
+import org.zmail.cs.ldap.ZLdapFilterFactory;
+import org.zmail.cs.ldap.ZSearchScope;
+import org.zmail.cs.ldap.IAttributes.CheckBinary;
+import org.zmail.cs.ldap.SearchLdapOptions.SearchLdapVisitor;
 
 public class ADGroupHandler extends GroupHandler {
 
@@ -54,7 +54,7 @@ public class ADGroupHandler extends GroupHandler {
                     Provisioning.A_objectClass, IAttributes.CheckBinary.NOCHECK);
             return objectclass.contains("group");
         } catch (ServiceException e) {
-            ZimbraLog.gal.warn("unable to get attribute " + Provisioning.A_objectClass, e);
+            ZmailLog.gal.warn("unable to get attribute " + Provisioning.A_objectClass, e);
         }
         return false;
     }
@@ -62,13 +62,13 @@ public class ADGroupHandler extends GroupHandler {
     @Override
     public String[] getMembers(ILdapContext ldapContext, String searchBase, 
             String entryDN, IAttributes ldapAttrs) throws ServiceException {
-        if (ZimbraLog.gal.isDebugEnabled()) {
+        if (ZmailLog.gal.isDebugEnabled()) {
             try {
-                ZimbraLog.gal.debug("Fetching members for group " + 
+                ZmailLog.gal.debug("Fetching members for group " + 
                         ldapAttrs.getAttrString(MAIL_ATTR) + 
                         " [" + entryDN + "]");
             } catch (ServiceException e) {
-                ZimbraLog.gal.debug("unable to get email address of group " + entryDN, e);
+                ZmailLog.gal.debug("unable to get email address of group " + entryDN, e);
             }
         }
         
@@ -96,7 +96,7 @@ public class ADGroupHandler extends GroupHandler {
                 }
             } catch (ServiceException e) {
                 // swallow exceptions and continue
-                ZimbraLog.gal.warn("unable to get attribute " + MAIL_ATTR + " from search result", e);
+                ZmailLog.gal.warn("unable to get attribute " + MAIL_ATTR + " from search result", e);
             }
         }
         
@@ -113,7 +113,7 @@ public class ADGroupHandler extends GroupHandler {
                 ldapHelper.searchLdap(zlc, searchOptions);
             } catch (ServiceException e) {
                 // log and continue
-                ZimbraLog.gal.warn("unable to search group members", e);
+                ZmailLog.gal.warn("unable to search group members", e);
             }
                         
             return result;
@@ -137,14 +137,14 @@ public class ADGroupHandler extends GroupHandler {
     
     /*
      * Check:
-     *   - zimbraAuthMechAdmin on the domain must be AD
+     *   - zmailAuthMechAdmin on the domain must be AD
      *   - domain of the account must be the same as the domain in the grant
      *   
      * TODO: pass in auth token and validate that the auth was indeed via AD 
      */
     private boolean legitimateDelegatedAdminAsGroupMember(ExternalGroup group, 
             Account acct, boolean asAdmin) throws ServiceException {
-        String zimbraDomainId = group.getZimbraDomainId();
+        String zmailDomainId = group.getZmailDomainId();
         Domain domain = Provisioning.getInstance().getDomain(acct);
         
         if (domain == null) {
@@ -155,7 +155,7 @@ public class ADGroupHandler extends GroupHandler {
             return false;
         }
         
-        if (!domain.getId().equals(zimbraDomainId)) {
+        if (!domain.getId().equals(zmailDomainId)) {
             return false;
         }
         
@@ -200,7 +200,7 @@ public class ADGroupHandler extends GroupHandler {
         String extDN = acct.getAuthLdapExternalDn();
         if (extDN == null) {
             // then try bind DN template on domain
-            // note: for AD auth, zimbraAuthLdapSearchFilter is not used, so we 
+            // note: for AD auth, zmailAuthLdapSearchFilter is not used, so we 
             //       skip that. See LdapProvisioning.externalLdapAuth
             String dnTemplate = domain.getAuthLdapBindDn();
             if (dnTemplate != null) {

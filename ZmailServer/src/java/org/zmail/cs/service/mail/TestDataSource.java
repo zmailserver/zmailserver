@@ -12,21 +12,21 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.service.mail;
+package org.zmail.cs.service.mail;
 
-import com.zimbra.common.account.Key;
-import com.zimbra.common.account.Key.DataSourceBy;
-import com.zimbra.soap.admin.type.DataSourceType;
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.common.soap.Element;
-import com.zimbra.common.soap.MailConstants;
-import com.zimbra.common.soap.SoapFaultException;
-import com.zimbra.common.util.SystemUtil;
-import com.zimbra.cs.account.Account;
-import com.zimbra.cs.account.DataSource;
-import com.zimbra.cs.account.Provisioning;
-import com.zimbra.cs.datasource.DataSourceManager;
-import com.zimbra.soap.ZimbraSoapContext;
+import org.zmail.common.account.Key;
+import org.zmail.common.account.Key.DataSourceBy;
+import org.zmail.soap.admin.type.DataSourceType;
+import org.zmail.common.service.ServiceException;
+import org.zmail.common.soap.Element;
+import org.zmail.common.soap.MailConstants;
+import org.zmail.common.soap.SoapFaultException;
+import org.zmail.common.util.SystemUtil;
+import org.zmail.cs.account.Account;
+import org.zmail.cs.account.DataSource;
+import org.zmail.cs.account.Provisioning;
+import org.zmail.cs.datasource.DataSourceManager;
+import org.zmail.soap.ZmailSoapContext;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -37,7 +37,7 @@ public class TestDataSource extends MailDocumentHandler {
     @Override
     public Element handle(Element request, Map<String, Object> context)
     throws ServiceException, SoapFaultException {
-        ZimbraSoapContext zsc = getZimbraSoapContext(context);
+        ZmailSoapContext zsc = getZmailSoapContext(context);
         Provisioning prov = Provisioning.getInstance();
         Account account = getRequestedAccount(zsc);
         
@@ -58,7 +58,7 @@ public class TestDataSource extends MailDocumentHandler {
             DataSource dsOrig = prov.get(account, Key.DataSourceBy.id, id);
             Map<String, Object> origAttrs = dsOrig.getAttrs();
             for (String key : origAttrs.keySet()) {
-                if (key.equals(Provisioning.A_zimbraDataSourcePassword)) {
+                if (key.equals(Provisioning.A_zmailDataSourcePassword)) {
                     password = dsOrig.getDecryptedPassword();
                 } else {
                     testAttrs.put(key, dsOrig.getAttr(key));
@@ -70,19 +70,19 @@ public class TestDataSource extends MailDocumentHandler {
         // values in the request override the persisted values.
         String value = eDataSource.getAttribute(MailConstants.A_DS_HOST, null);
         if (value != null) {
-            testAttrs.put(Provisioning.A_zimbraDataSourceHost, value);
+            testAttrs.put(Provisioning.A_zmailDataSourceHost, value);
         }
         value = eDataSource.getAttribute(MailConstants.A_DS_PORT, null);
         if (value != null) {
-            testAttrs.put(Provisioning.A_zimbraDataSourcePort, value);
+            testAttrs.put(Provisioning.A_zmailDataSourcePort, value);
         }
         value = eDataSource.getAttribute(MailConstants.A_DS_CONNECTION_TYPE, null);
         if (value != null) {
-            testAttrs.put(Provisioning.A_zimbraDataSourceConnectionType, value);
+            testAttrs.put(Provisioning.A_zmailDataSourceConnectionType, value);
         }
         value = eDataSource.getAttribute(MailConstants.A_DS_USERNAME, null);
         if (value != null) {
-            testAttrs.put(Provisioning.A_zimbraDataSourceUsername, value);
+            testAttrs.put(Provisioning.A_zmailDataSourceUsername, value);
         }
         value = eDataSource.getAttribute(MailConstants.A_DS_PASSWORD, null);
         if (value != null) {
@@ -90,24 +90,24 @@ public class TestDataSource extends MailDocumentHandler {
         }
         value = eDataSource.getAttribute(MailConstants.A_DS_LEAVE_ON_SERVER, null);
         if (value != null) {
-            testAttrs.put(Provisioning.A_zimbraDataSourceLeaveOnServer, value.toUpperCase());
+            testAttrs.put(Provisioning.A_zmailDataSourceLeaveOnServer, value.toUpperCase());
         }
         value = eDataSource.getAttribute(MailConstants.A_FOLDER, null);
         if (value != null) {
-            testAttrs.put(Provisioning.A_zimbraDataSourceFolderId, value);
+            testAttrs.put(Provisioning.A_zmailDataSourceFolderId, value);
         }
         
         if (password != null) {
             // Password has to be encrypted explicitly since this is a temporary object.
             // The current implementation of LdapDataSource doesn't perform encryption until
             // the DataSource is saved.
-            testAttrs.put(Provisioning.A_zimbraDataSourcePassword, DataSource.encryptData(testId, password));
+            testAttrs.put(Provisioning.A_zmailDataSourcePassword, DataSource.encryptData(testId, password));
         }
         
         // import class
         value = eDataSource.getAttribute(MailConstants.A_DS_IMPORT_CLASS, DataSourceManager.getDefaultImportClass(type));
         if (value != null) {
-        	testAttrs.put(Provisioning.A_zimbraDataSourceImportClassName, value);
+        	testAttrs.put(Provisioning.A_zmailDataSourceImportClassName, value);
         }
         
         // Common optional attributes

@@ -12,11 +12,11 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.store.external;
+package org.zmail.cs.store.external;
 
-import com.zimbra.cs.store.AbstractStoreManagerTest;
-import com.zimbra.cs.store.StoreManager;
-import com.zimbra.cs.store.external.SimpleStoreManager;
+import org.zmail.cs.store.AbstractStoreManagerTest;
+import org.zmail.cs.store.StoreManager;
+import org.zmail.cs.store.external.SimpleStoreManager;
 
 public class SimpleStoreManagerTest extends AbstractStoreManagerTest {
 

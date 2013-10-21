@@ -12,12 +12,12 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.examples.extns.soapservice;
+package org.zmail.examples.extns.soapservice;
 
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.common.soap.Element;
-import com.zimbra.soap.DocumentHandler;
-import com.zimbra.soap.ZimbraSoapContext;
+import org.zmail.common.service.ServiceException;
+import org.zmail.common.soap.Element;
+import org.zmail.soap.DocumentHandler;
+import org.zmail.soap.ZmailSoapContext;
 import org.dom4j.Namespace;
 import org.dom4j.QName;
 
@@ -30,8 +30,8 @@ import java.util.Map;
  */
 public class HelloWorld extends DocumentHandler {
 
-    static QName REQUEST_QNAME = new QName("HelloWorldRequest", Namespace.get("urn:zimbra:examples"));
-    static QName RESPONSE_QNAME = new QName("HelloWorldResponse", Namespace.get("urn:zimbra:examples"));
+    static QName REQUEST_QNAME = new QName("HelloWorldRequest", Namespace.get("urn:zmail:examples"));
+    static QName RESPONSE_QNAME = new QName("HelloWorldResponse", Namespace.get("urn:zmail:examples"));
 
     /**
      * Handles request.
@@ -45,7 +45,7 @@ public class HelloWorld extends DocumentHandler {
         Element callerElt = request.getElement("caller");
         String caller = callerElt.getTextTrim();
 
-        ZimbraSoapContext zsc = getZimbraSoapContext(context);
+        ZmailSoapContext zsc = getZmailSoapContext(context);
         Element response = zsc.createElement(HelloWorld.RESPONSE_QNAME);
         Element replyElt = response.addElement("reply");
         replyElt.setText("Hello " + caller + "!");

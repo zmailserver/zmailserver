@@ -12,10 +12,10 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.filter.jsieve;
+package org.zmail.cs.filter.jsieve;
 
-import com.zimbra.common.filter.Sieve;
-import com.zimbra.soap.mail.type.FilterTest;
+import org.zmail.common.filter.Sieve;
+import org.zmail.soap.mail.type.FilterTest;
 import org.apache.jsieve.Argument;
 import org.apache.jsieve.Arguments;
 import org.apache.jsieve.SieveContext;

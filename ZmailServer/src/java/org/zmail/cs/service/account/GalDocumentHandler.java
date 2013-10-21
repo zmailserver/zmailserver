@@ -12,19 +12,19 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.service.account;
+package org.zmail.cs.service.account;
 
 import java.util.Map;
 
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.common.soap.AccountConstants;
-import com.zimbra.common.soap.Element;
-import com.zimbra.cs.account.Account;
-import com.zimbra.cs.account.Provisioning;
-import com.zimbra.cs.account.Server;
-import com.zimbra.cs.service.AuthProvider;
-import com.zimbra.common.account.Key.AccountBy;
-import com.zimbra.soap.ZimbraSoapContext;
+import org.zmail.common.service.ServiceException;
+import org.zmail.common.soap.AccountConstants;
+import org.zmail.common.soap.Element;
+import org.zmail.cs.account.Account;
+import org.zmail.cs.account.Provisioning;
+import org.zmail.cs.account.Server;
+import org.zmail.cs.service.AuthProvider;
+import org.zmail.common.account.Key.AccountBy;
+import org.zmail.soap.ZmailSoapContext;
 
 public abstract class GalDocumentHandler extends AccountDocumentHandler {
 
@@ -38,7 +38,7 @@ public abstract class GalDocumentHandler extends AccountDocumentHandler {
     protected Element proxyIfNecessary(Element request, Map<String, Object> context) 
     throws ServiceException {
         try {
-            ZimbraSoapContext zsc = getZimbraSoapContext(context);
+            ZmailSoapContext zsc = getZmailSoapContext(context);
             
             Provisioning prov = Provisioning.getInstance();
             

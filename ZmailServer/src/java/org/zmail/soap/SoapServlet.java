@@ -13,7 +13,7 @@
  * ***** END LICENSE BLOCK *****
  */
 
-package com.zimbra.soap;
+package org.zmail.soap;
 
 import java.io.EOFException;
 import java.io.IOException;
@@ -33,32 +33,32 @@ import org.apache.commons.httpclient.ProtocolException;
 import com.google.common.base.Charsets;
 import com.google.common.base.Function;
 import com.google.common.collect.MapMaker;
-import com.zimbra.common.auth.ZAuthToken;
-import com.zimbra.common.localconfig.LC;
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.common.soap.Element;
-import com.zimbra.common.soap.SoapProtocol;
-import com.zimbra.common.util.BufferStream;
-import com.zimbra.common.util.Log;
-import com.zimbra.common.util.LogFactory;
-import com.zimbra.common.util.RemoteIP;
-import com.zimbra.common.util.ZimbraLog;
-import com.zimbra.common.util.ZimbraServletOutputStream;
-import com.zimbra.cs.account.Provisioning;
-import com.zimbra.cs.servlet.ZimbraServlet;
-import com.zimbra.cs.stats.ZimbraPerf;
-import com.zimbra.cs.util.Zimbra;
+import org.zmail.common.auth.ZAuthToken;
+import org.zmail.common.localconfig.LC;
+import org.zmail.common.service.ServiceException;
+import org.zmail.common.soap.Element;
+import org.zmail.common.soap.SoapProtocol;
+import org.zmail.common.util.BufferStream;
+import org.zmail.common.util.Log;
+import org.zmail.common.util.LogFactory;
+import org.zmail.common.util.RemoteIP;
+import org.zmail.common.util.ZmailLog;
+import org.zmail.common.util.ZmailServletOutputStream;
+import org.zmail.cs.account.Provisioning;
+import org.zmail.cs.servlet.ZmailServlet;
+import org.zmail.cs.stats.ZmailPerf;
+import org.zmail.cs.util.Zmail;
 
 /**
  * The soap service servlet
  */
-public class SoapServlet extends ZimbraServlet {
+public class SoapServlet extends ZmailServlet {
     private static final long serialVersionUID = 38710345271877593L;
 
     private static final String PARAM_ENGINE_HANDLER = "engine.handler.";
 
     /** context name of auth token extracted from cookie */
-    public static final String ZIMBRA_AUTH_TOKEN = "zimbra.authToken";
+    public static final String ZIMBRA_AUTH_TOKEN = "zmail.authToken";
     /** context name of servlet context */
     public static final String SERVLET_CONTEXT = "servlet.context";
     /** context name of servlet HTTP request */
@@ -66,9 +66,9 @@ public class SoapServlet extends ZimbraServlet {
     /** context name of servlet HTTP response */
     public static final String SERVLET_RESPONSE = "servlet.response";
     /** If this is a request sent to the admin port */
-    public static final String IS_ADMIN_REQUEST = "zimbra.isadminreq";
+    public static final String IS_ADMIN_REQUEST = "zmail.isadminreq";
     /** Flag for requests that want to force invalidation of client cookies */
-    public static final String INVALIDATE_COOKIES = "zimbra.invalidateCookies";
+    public static final String INVALIDATE_COOKIES = "zmail.invalidateCookies";
 
     // Used by sExtraServices
     private static class ArrayListFactory implements Function<String, List<DocumentService>> {
@@ -92,7 +92,7 @@ public class SoapServlet extends ZimbraServlet {
         LogFactory.init();
 
         String name = getServletName();
-        ZimbraLog.soap.info("Servlet " + name + " starting up");
+        ZmailLog.soap.info("Servlet " + name + " starting up");
         super.init();
 
         mEngine = new SoapEngine();
@@ -119,25 +119,25 @@ public class SoapServlet extends ZimbraServlet {
             throw new ServletException("Must specify at least one handler "+PARAM_ENGINE_HANDLER+i);
 
         try {
-            Zimbra.startup();
+            Zmail.startup();
         } catch (OutOfMemoryError e) {
-            Zimbra.halt("out of memory", e);
+            Zmail.halt("out of memory", e);
         } catch (Throwable t) {
-            ZimbraLog.soap.fatal("Unable to start servlet", t);
+            ZmailLog.soap.fatal("Unable to start servlet", t);
             throw new UnavailableException(t.getMessage());
         }
     }
 
     @Override public void destroy() {
         String name = getServletName();
-        ZimbraLog.soap.info("Servlet " + name + " shutting down");
+        ZmailLog.soap.info("Servlet " + name + " shutting down");
         try {
-            Zimbra.shutdown();
+            Zmail.shutdown();
         } catch (ServiceException e) {
             // Log as error and ignore.
-            ZimbraLog.soap.error("ServiceException while shutting down servlet " + name, e);
+            ZmailLog.soap.error("ServiceException while shutting down servlet " + name, e);
         } catch (RuntimeException e) {
-            ZimbraLog.soap.error("Unchecked Exception while shutting down servlet " + name, e);
+            ZmailLog.soap.error("Unchecked Exception while shutting down servlet " + name, e);
             throw e;
         }
         // FIXME: we might want to add mEngine.destroy()
@@ -154,7 +154,7 @@ public class SoapServlet extends ZimbraServlet {
         } catch (ClassNotFoundException cnfe) {
             throw new ServletException("can't find handler initializer class " + cname, cnfe);
         } catch (OutOfMemoryError e) {
-            Zimbra.halt("out of memory", e);
+            Zmail.halt("out of memory", e);
         } catch (Throwable t) {
             throw new ServletException("can't find handler initializer class " + cname, t);
         }
@@ -184,7 +184,7 @@ public class SoapServlet extends ZimbraServlet {
      */
     public static void addService(String servletName, DocumentService service) {
         synchronized (sExtraServices) {
-            ZimbraServlet servlet = ZimbraServlet.getServlet(servletName);
+            ZmailServlet servlet = ZmailServlet.getServlet(servletName);
             if (servlet != null) {
                 ((SoapServlet) servlet).addService(service);
             } else {
@@ -197,19 +197,19 @@ public class SoapServlet extends ZimbraServlet {
     }
 
     private void addService(DocumentService service) {
-        ZimbraLog.soap.info("Adding service %s to %s", service.getClass().getSimpleName(), getServletName());
+        ZmailLog.soap.info("Adding service %s to %s", service.getClass().getSimpleName(), getServletName());
         service.registerHandlers(mEngine.getDocumentDispatcher());
     }
 
     @Override public void doPost(HttpServletRequest req, HttpServletResponse resp) throws IOException {
-        ZimbraLog.clearContext();
-        long startTime = ZimbraPerf.STOPWATCH_SOAP.start();
+        ZmailLog.clearContext();
+        long startTime = ZmailPerf.STOPWATCH_SOAP.start();
 
         try {
             doWork(req, resp);
         } finally {
-            ZimbraLog.clearContext();
-            ZimbraPerf.STOPWATCH_SOAP.stop(startTime);
+            ZmailLog.clearContext();
+            ZmailPerf.STOPWATCH_SOAP.stop(startTime);
         }
     }
 
@@ -221,16 +221,16 @@ public class SoapServlet extends ZimbraServlet {
         // resuming from a Jetty Continuation does *not* reset the HttpRequest's input stream -
         // therefore we store the read buffer in the Continuation, and use the stored buffer
         // if we're resuming
-        buffer = (byte[])req.getAttribute("com.zimbra.request.buffer");
+        buffer = (byte[])req.getAttribute("org.zmail.request.buffer");
         if (buffer == null) {
             isResumed = false;
 
             // Look up max request size
             int maxSize = 0;
             try {
-                maxSize = Provisioning.getInstance().getLocalServer().getIntAttr(Provisioning.A_zimbraSoapRequestMaxSize, 0);
+                maxSize = Provisioning.getInstance().getLocalServer().getIntAttr(Provisioning.A_zmailSoapRequestMaxSize, 0);
             } catch (ServiceException e) {
-                ZimbraLog.soap.warn("Unable to look up %s.  Not limiting the request size.", Provisioning.A_zimbraSoapRequestMaxSize, e);
+                ZmailLog.soap.warn("Unable to look up %s.  Not limiting the request size.", Provisioning.A_zmailSoapRequestMaxSize, e);
             }
             if (maxSize <= 0) {
                 maxSize = Integer.MAX_VALUE;
@@ -255,16 +255,16 @@ public class SoapServlet extends ZimbraServlet {
             if (!success) {
                 String sizeString = (len < 0 ? "" : " size " + len);
                 String msg = String.format("Request%s exceeded limit of %d bytes set for %s.",
-                    sizeString, maxSize, Provisioning.A_zimbraSoapRequestMaxSize);
+                    sizeString, maxSize, Provisioning.A_zmailSoapRequestMaxSize);
                 ServiceException e = ServiceException.INVALID_REQUEST(msg, null);
-                ZimbraLog.soap.warn(null, e);
+                ZmailLog.soap.warn(null, e);
                 Element fault = SoapProtocol.Soap12.soapFault(e);
                 Element envelope = SoapProtocol.Soap12.soapEnvelope(fault);
                 sendResponse(req, resp, envelope);
                 return;
             }
 
-            req.setAttribute("com.zimbra.request.buffer", buffer);
+            req.setAttribute("org.zmail.request.buffer", buffer);
         }
 
         HashMap<String, Object> context = new HashMap<String, Object>();
@@ -276,11 +276,11 @@ public class SoapServlet extends ZimbraServlet {
             Boolean isAdminReq = isAdminRequest(req);
             context.put(IS_ADMIN_REQUEST, isAdminReq);
         } catch (ServiceException se) {
-            ZimbraLog.soap.warn("unable to determine isAdminReq", se);
+            ZmailLog.soap.warn("unable to determine isAdminReq", se);
         }
 
         // setup IPs in the context and add to logging context
-        RemoteIP remoteIp = new RemoteIP(req, ZimbraServlet.getTrustedIPs());
+        RemoteIP remoteIp = new RemoteIP(req, ZmailServlet.getTrustedIPs());
         context.put(SoapEngine.SOAP_REQUEST_IP, remoteIp.getClientIP());
         context.put(SoapEngine.ORIG_REQUEST_IP, remoteIp.getOrigIP());
         context.put(SoapEngine.REQUEST_IP, remoteIp.getRequestIP());
@@ -296,24 +296,24 @@ public class SoapServlet extends ZimbraServlet {
             }
         } catch (Throwable e) {
             if (e instanceof OutOfMemoryError) {
-                Zimbra.halt("handler exception", e);
+                Zmail.halt("handler exception", e);
             }
 
-            if (ZimbraLog.soap.isTraceEnabled() && !context.containsKey(SoapEngine.SOAP_REQUEST_LOGGED)) {
-                ZimbraLog.soap.trace(!isResumed ? "C:\n%s" : "C: (resumed)\n%s", new String(buffer, Charsets.UTF_8));
+            if (ZmailLog.soap.isTraceEnabled() && !context.containsKey(SoapEngine.SOAP_REQUEST_LOGGED)) {
+                ZmailLog.soap.trace(!isResumed ? "C:\n%s" : "C: (resumed)\n%s", new String(buffer, Charsets.UTF_8));
             }
 
             // don't interfere with Jetty Continuations -- pass the exception right up
             if (e.getClass().getName().equals("org.eclipse.jetty.continuation.ContinuationThrowable"))
                 throw (Error) e;
 
-            ZimbraLog.soap.warn("handler exception", e);
+            ZmailLog.soap.warn("handler exception", e);
             Element fault = SoapProtocol.Soap12.soapFault(ServiceException.FAILURE(e.toString(), e));
             envelope = SoapProtocol.Soap12.soapEnvelope(fault);
         }
 
-        if (ZimbraLog.soap.isTraceEnabled()) {
-            ZimbraLog.soap.trace("S:\n%s", envelope.prettyPrint());
+        if (ZmailLog.soap.isTraceEnabled()) {
+            ZmailLog.soap.trace("S:\n%s", envelope.prettyPrint());
         }
         sendResponse(req, resp, envelope);
     }
@@ -340,7 +340,7 @@ public class SoapServlet extends ZimbraServlet {
                 HttpVersion httpVer = HttpVersion.parse(proto);
                 chunkingEnabled = !httpVer.lessEquals(HttpVersion.HTTP_1_0);
             } catch (ProtocolException e) {
-                ZimbraLog.soap.warn("cannot parse http version in request: %s, http chunked transfer encoding disabled",
+                ZmailLog.soap.warn("cannot parse http version in request: %s, http chunked transfer encoding disabled",
                         proto, e);
                 chunkingEnabled = false;
             }
@@ -357,7 +357,7 @@ public class SoapServlet extends ZimbraServlet {
 
         if (chunkingEnabled) {
             // Let jetty chunk the response if applicable.
-            ZimbraServletOutputStream out = new ZimbraServletOutputStream(resp.getOutputStream());
+            ZmailServletOutputStream out = new ZmailServletOutputStream(resp.getOutputStream());
             envelope.output(out);
             out.flush();
         } else {

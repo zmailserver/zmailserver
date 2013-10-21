@@ -113,7 +113,7 @@ URL
               (default is "co,nsc", i.e. check both)
 
           fmt="sync" -- requests that the server return additional metadata in
-              response as X-Zimbra-* HTTP headers
+              response as X-Zmail-* HTTP headers
               (query param "nohdr=1" puts the headers only in HTTP; otherwise,
               they're also inlined in the response body)
 
@@ -191,7 +191,7 @@ A single ~ is allowed and references the authenticated user accessing the data.
 Some examples:
 
 /home/roland/inbox.rss                    // RSS feed of inbox
-/home/roland/inbox.xml                    // Zimbra XML representation of inbox
+/home/roland/inbox.xml                    // Zmail XML representation of inbox
 /home/roland/inbox.zip                    // A ZIP file of all messages in the inbox folder
 
 /home/roland/contacts                     // CSV view of contacts folder
@@ -247,7 +247,7 @@ color=defaultColor(0),
 SEARCHING
 ------------------------------------------------------------
 
-Since search is a big part of Zimbra, all item URLs should generally allow a search
+Since search is a big part of Zmail, all item URLs should generally allow a search
 query to either gather all results, or constrain them. For example:
 
 /home/roland/inbox.rss
@@ -274,44 +274,44 @@ to allow for paging, restricting what types of items are returned, etc:
  [cursorId="prevId"]
 
 ------------------------------------------------------------
-ACCESSING DATA ACROSS Zimbra DOMAINs
+ACCESSING DATA ACROSS Zmail DOMAINs
 ------------------------------------------------------------
 
-1. Intra-domain (authoratative domains within a Zimbra install)
+1. Intra-domain (authoratative domains within a Zmail install)
 
 to access items across domains within a Zimra install, specify an @ in the mailbox
 name:
 
-/home/schemers@zimbra.com/calendar
+/home/schemers@zmail.com/calendar
 /home/joer@zombo.com/calendar
 
-Both zimbra.com and zombo.com are part of the same Zimbra install, and thus accounts
+Both zmail.com and zombo.com are part of the same Zmail install, and thus accounts
 and mailbox locations on both can be resolved internally.
 
 2. Inter-domain
 
-To access items across domains that span Zimbra installations, use the
+To access items across domains that span Zmail installations, use the
 exact same naming convention.
 
-For example, if companyA installs Zimbra, and companyB installs Zimbra, someone at
+For example, if companyA installs Zmail, and companyB installs Zmail, someone at
 companyA should be able to reference an item from companyB using the same syntax:
 
 /home/john.smith@companyB.com/shared/contacts
 
 this can be accomplished with DNS SRV records. For example, companyB.com could
-publish a SRV record for _zimbra._tcp:
+publish a SRV record for _zmail._tcp:
 
-_zimbra._tcp.companyB.com. SRV   10  5   80      zimbra.companyB.com
+_zmail._tcp.companyB.com. SRV   10  5   80      zmail.companyB.com
 
-The Zimbra proxy at companyA can then detect that companyB.com is not a local Zimbra
+The Zmail proxy at companyA can then detect that companyB.com is not a local Zmail
 domain, and do a DNS lookup for:
 
-_zimbra._tcp.companyB.com
+_zmail._tcp.companyB.com
 
-And get back "zimbra.companyB.com" as the name of the Zimbra sever to
+And get back "zmail.companyB.com" as the name of the Zmail sever to
 direct the request to. It would then do the equivalent of:
 
-http://zimbra.companyB.com/home/john.smith@companyB.com/shared/contacts
+http://zmail.companyB.com/home/john.smith@companyB.com/shared/contacts
 
 ------------------------------------------------------------
 ISSUES/NOTES
@@ -411,7 +411,7 @@ Hula URLs
 ------------------------------------------------------------
 APPENDIX A: URL forms
 ------------------------------------------------------------
-Here various ways to access john.doe@zimbra.com's calendar:
+Here various ways to access john.doe@zmail.com's calendar:
 
 shortcut to yourself: 
   /home/~/calendar
@@ -421,5 +421,5 @@ explicit account:
    /~john.doe/calendar
    /home/john.doe/calendar
    /home/john.doe/?id=10
-   /home/john.doe@zimbra.com/calendar
+   /home/john.doe@zmail.com/calendar
    /home/34cc4086-801e-42a0-a67a-ea93c1590c4e/?id=10

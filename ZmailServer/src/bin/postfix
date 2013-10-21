@@ -18,33 +18,33 @@ progdir=`dirname $0`
 
 source `dirname $0`/zmshutil || exit 1
 zmsetvars \
-	zimbra_home \
+	zmail_home \
   postfix_mail_owner \
   postfix_setgid_group \
-	zimbra_server_hostname 
+	zmail_server_hostname 
 
-if [ "x${zimbra_home}" = "x" ]; then
-  zimbra_home=/opt/zimbra
+if [ "x${zmail_home}" = "x" ]; then
+  zmail_home=/opt/zmail
 fi
 
-platform=`/opt/zimbra/libexec/get_plat_tag.sh`
+platform=`/opt/zmail/libexec/get_plat_tag.sh`
 
 rewritemtaconfig() {
-    /opt/zimbra/libexec/zmmtainit
+    /opt/zmail/libexec/zmmtainit
 }
 
 rewriteconfig() {
-    /opt/zimbra/libexec/configrewrite mta > /dev/null 2>&1
+    /opt/zmail/libexec/configrewrite mta > /dev/null 2>&1
 }
 
 if [ "x$1" = "xstatus" -o "x$1" = "xstart" ]; then
-  if [ -L ${zimbra_home}/postfix ]; then
-    if [ ! -f ${zimbra_home}/postfix/conf/main.cf ]; then
-      touch ${zimbra_home}/postfix/conf/main.cf
-      ${zimbra_home}/postfix/sbin/postconf -e mail_owner=${postfix_mail_owner} setgid_group=${postfix_setgid_group}
+  if [ -L ${zmail_home}/postfix ]; then
+    if [ ! -f ${zmail_home}/postfix/conf/main.cf ]; then
+      touch ${zmail_home}/postfix/conf/main.cf
+      ${zmail_home}/postfix/sbin/postconf -e mail_owner=${postfix_mail_owner} setgid_group=${postfix_setgid_group}
     fi
   fi
-  sudo ${zimbra_home}/libexec/zmmtastatus 2> /dev/null
+  sudo ${zmail_home}/libexec/zmmtastatus 2> /dev/null
 	R=$?
 	if [ "x$1" = "xstart" ]; then
 		if [ "x$R" = "x0" ]; then
@@ -67,8 +67,8 @@ if [ "x$1" = "xstart" -o "x$1" = "xreload" ]; then
 fi
 
 if [ -f /etc/aliases ]; then
-  sudo ${zimbra_home}/postfix/sbin/postalias /etc/aliases
+  sudo ${zmail_home}/postfix/sbin/postalias /etc/aliases
 fi
 
-sudo ${zimbra_home}/postfix/sbin/postfix "$@"
+sudo ${zmail_home}/postfix/sbin/postfix "$@"
 

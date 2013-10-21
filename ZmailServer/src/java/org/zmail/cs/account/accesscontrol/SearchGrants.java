@@ -12,7 +12,7 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.account.accesscontrol;
+package org.zmail.cs.account.accesscontrol;
 
 import java.util.HashMap;
 import java.util.HashSet;
@@ -23,17 +23,17 @@ import com.google.common.base.Objects;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableSet;
 import com.google.common.collect.Sets;
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.common.util.ZimbraLog;
-import com.zimbra.cs.account.Account;
-import com.zimbra.cs.account.AttributeClass;
-import com.zimbra.cs.account.Entry;
-import com.zimbra.cs.account.GuestAccount;
-import com.zimbra.cs.account.Provisioning;
-import com.zimbra.cs.account.ldap.LdapProv;
-import com.zimbra.cs.ldap.IAttributes;
-import com.zimbra.cs.ldap.SearchLdapOptions.SearchLdapVisitor;
-import com.zimbra.soap.type.TargetBy;
+import org.zmail.common.service.ServiceException;
+import org.zmail.common.util.ZmailLog;
+import org.zmail.cs.account.Account;
+import org.zmail.cs.account.AttributeClass;
+import org.zmail.cs.account.Entry;
+import org.zmail.cs.account.GuestAccount;
+import org.zmail.cs.account.Provisioning;
+import org.zmail.cs.account.ldap.LdapProv;
+import org.zmail.cs.ldap.IAttributes;
+import org.zmail.cs.ldap.SearchLdapOptions.SearchLdapVisitor;
+import org.zmail.soap.type.TargetBy;
 
 /**
  * @author pshao
@@ -49,9 +49,9 @@ public final class SearchGrants {
     
     private final Set<String> fetchAttrs = Sets.newHashSet(
             Provisioning.A_cn, 
-            Provisioning.A_zimbraId,
+            Provisioning.A_zmailId,
             Provisioning.A_objectClass, 
-            Provisioning.A_zimbraACE);
+            Provisioning.A_zmailACE);
 
     SearchGrants(Provisioning prov, Set<TargetType> targetTypes, Set<String> granteeIds) {
         this.prov = prov;
@@ -85,9 +85,9 @@ public final class SearchGrants {
 
     static final class GrantsOnTarget {
         private Entry targetEntry;
-        private ZimbraACL acl;
+        private ZmailACL acl;
 
-        private GrantsOnTarget(Entry targetEntry, ZimbraACL acl) {
+        private GrantsOnTarget(Entry targetEntry, ZmailACL acl) {
             this.targetEntry = targetEntry;
             this.acl = acl;
         }
@@ -96,7 +96,7 @@ public final class SearchGrants {
             return targetEntry;
         }
 
-        ZimbraACL getAcl() {
+        ZmailACL getAcl() {
             return acl;
         }
     }
@@ -124,7 +124,7 @@ public final class SearchGrants {
         }
 
         /**
-         * Returns a map of target entry and ZimbraACL object on the target.
+         * Returns a map of target entry and ZmailACL object on the target.
          */
         Set<GrantsOnTarget> getResults() throws ServiceException {
             return getResults(false);
@@ -141,34 +141,34 @@ public final class SearchGrants {
         }
 
         /**
-         * Converts a {@link SearchGrantsResults} to {@code <Entry, ZimbraACL>} pair.
+         * Converts a {@link SearchGrantsResults} to {@code <Entry, ZmailACL>} pair.
          */
         private GrantsOnTarget getGrants(Provisioning prov, GrantsOnTargetRaw sgr, boolean needFullDL) 
         throws ServiceException {
             TargetType tt;
-            if (sgr.objectClass.contains(AttributeClass.OC_zimbraCalendarResource)) {
+            if (sgr.objectClass.contains(AttributeClass.OC_zmailCalendarResource)) {
                 tt = TargetType.calresource;
-            } else if (sgr.objectClass.contains(AttributeClass.OC_zimbraAccount)) {
+            } else if (sgr.objectClass.contains(AttributeClass.OC_zmailAccount)) {
                 tt = TargetType.account;
-            } else if (sgr.objectClass.contains(AttributeClass.OC_zimbraCOS)) {
+            } else if (sgr.objectClass.contains(AttributeClass.OC_zmailCOS)) {
                 tt = TargetType.cos;
-            } else if (sgr.objectClass.contains(AttributeClass.OC_zimbraDistributionList)) {
+            } else if (sgr.objectClass.contains(AttributeClass.OC_zmailDistributionList)) {
                 tt = TargetType.dl;
-            } else if (sgr.objectClass.contains(AttributeClass.OC_zimbraGroup)) {
+            } else if (sgr.objectClass.contains(AttributeClass.OC_zmailGroup)) {
                 tt = TargetType.group;    
-            } else if (sgr.objectClass.contains(AttributeClass.OC_zimbraDomain)) {
+            } else if (sgr.objectClass.contains(AttributeClass.OC_zmailDomain)) {
                 tt = TargetType.domain;
-            } else if (sgr.objectClass.contains(AttributeClass.OC_zimbraServer)) {
+            } else if (sgr.objectClass.contains(AttributeClass.OC_zmailServer)) {
                 tt = TargetType.server;
-            } else if (sgr.objectClass.contains(AttributeClass.OC_zimbraUCService)) {
+            } else if (sgr.objectClass.contains(AttributeClass.OC_zmailUCService)) {
                 tt = TargetType.ucservice;    
-            } else if (sgr.objectClass.contains(AttributeClass.OC_zimbraXMPPComponent)) {
+            } else if (sgr.objectClass.contains(AttributeClass.OC_zmailXMPPComponent)) {
                 tt = TargetType.xmppcomponent;
-            } else if (sgr.objectClass.contains(AttributeClass.OC_zimbraZimletEntry)) {
+            } else if (sgr.objectClass.contains(AttributeClass.OC_zmailZimletEntry)) {
                 tt = TargetType.zimlet;
-            } else if (sgr.objectClass.contains(AttributeClass.OC_zimbraGlobalConfig)) {
+            } else if (sgr.objectClass.contains(AttributeClass.OC_zmailGlobalConfig)) {
                 tt = TargetType.config;
-            } else if (sgr.objectClass.contains(AttributeClass.OC_zimbraAclTarget)) {
+            } else if (sgr.objectClass.contains(AttributeClass.OC_zmailAclTarget)) {
                 tt = TargetType.global;
             } else {
                 throw ServiceException.FAILURE(
@@ -179,16 +179,16 @@ public final class SearchGrants {
                 if (tt == TargetType.zimlet) {
                     entry = TargetType.lookupTarget(prov, tt, TargetBy.name, sgr.cn);
                 } else {
-                    entry = TargetType.lookupTarget(prov, tt, TargetBy.id, sgr.zimbraId, needFullDL, true);
+                    entry = TargetType.lookupTarget(prov, tt, TargetBy.id, sgr.zmailId, needFullDL, true);
                 }
                 if (entry == null) {
-                    ZimbraLog.acl.warn("canot find target by id %s", sgr.zimbraId);
-                    throw ServiceException.FAILURE("canot find target by id " + sgr.zimbraId + ". " + sgr, null);
+                    ZmailLog.acl.warn("canot find target by id %s", sgr.zmailId);
+                    throw ServiceException.FAILURE("canot find target by id " + sgr.zmailId + ". " + sgr, null);
                 }
-                ZimbraACL acl = new ZimbraACL(sgr.zimbraACE, tt, entry.getLabel());
+                ZmailACL acl = new ZmailACL(sgr.zmailACE, tt, entry.getLabel());
                 return new GrantsOnTarget(entry, acl);
             } catch (ServiceException e) {
-                throw ServiceException.FAILURE("canot find target by id " + sgr.zimbraId + ". " + sgr, null);
+                throw ServiceException.FAILURE("canot find target by id " + sgr.zmailId + ". " + sgr, null);
             }
         }
     }
@@ -198,24 +198,24 @@ public final class SearchGrants {
      */
     private static class GrantsOnTargetRaw {
         private final String cn;
-        private final String zimbraId;
+        private final String zmailId;
         private final Set<String> objectClass;
-        private final String[] zimbraACE;
+        private final String[] zmailACE;
 
         private GrantsOnTargetRaw(Map<String, Object> attrs) {
             cn = (String) attrs.get(Provisioning.A_cn);
-            zimbraId = (String) attrs.get(Provisioning.A_zimbraId);
+            zmailId = (String) attrs.get(Provisioning.A_zmailId);
             objectClass = ImmutableSet.copyOf(getMultiAttrString(attrs, Provisioning.A_objectClass));
-            zimbraACE = getMultiAttrString(attrs, Provisioning.A_zimbraACE);
+            zmailACE = getMultiAttrString(attrs, Provisioning.A_zmailACE);
         }
 
         @Override
         public String toString() {
             return Objects.toStringHelper(this)
                 .add("cn", cn)
-                .add("zimbraId", zimbraId)
+                .add("zmailId", zmailId)
                 .add("objectClass", objectClass)
-                .add("zimbraACE", ImmutableList.copyOf(zimbraACE))
+                .add("zmailACE", ImmutableList.copyOf(zmailACE))
                 .toString();
         }
 
@@ -233,7 +233,7 @@ public final class SearchGrants {
             // need to return something for the map key for SearchGrantVisitor.visit
             // id is only used for grants granted on group-ed entries (account, cr, dl)
             // in computeRightsOnGroupShape
-            return zimbraId != null ? zimbraId : cn;
+            return zmailId != null ? zmailId : cn;
         }
     }
 
@@ -289,12 +289,12 @@ public final class SearchGrants {
         
         if (rights == null) {
             for (String granteeId : getGranteeIds()) {
-                query.append('(').append(Provisioning.A_zimbraACE).append('=').append(granteeId).append("*)");
+                query.append('(').append(Provisioning.A_zmailACE).append('=').append(granteeId).append("*)");
             }
         } else {
             for (String granteeId : getGranteeIds()) {
                 for (Right right : rights) {
-                    query.append('(').append(Provisioning.A_zimbraACE).append('=').append(granteeId).append("*").append(right.getName()).append(")");
+                    query.append('(').append(Provisioning.A_zmailACE).append('=').append(granteeId).append("*").append(right.getName()).append(")");
                 }
             }
         }

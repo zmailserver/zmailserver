@@ -12,32 +12,32 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.account.ldap.upgrade;
+package org.zmail.cs.account.ldap.upgrade;
 
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 
-import com.zimbra.common.account.ProvisioningConstants;
-import com.zimbra.common.account.Key.AccountBy;
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.cs.account.Account;
-import com.zimbra.cs.account.Config;
-import com.zimbra.cs.account.Provisioning;
-import com.zimbra.cs.account.Entry.EntryType;
+import org.zmail.common.account.ProvisioningConstants;
+import org.zmail.common.account.Key.AccountBy;
+import org.zmail.common.service.ServiceException;
+import org.zmail.cs.account.Account;
+import org.zmail.cs.account.Config;
+import org.zmail.cs.account.Provisioning;
+import org.zmail.cs.account.Entry.EntryType;
 
 public class BUG_72007 extends UpgradeOp {
     
     private static final String[] ATTRS = new String[] {
-            Provisioning.A_zimbraIsSystemResource,
-            Provisioning.A_zimbraIsSystemAccount};
+            Provisioning.A_zmailIsSystemResource,
+            Provisioning.A_zmailIsSystemAccount};
 
     @Override
     void doUpgrade() throws ServiceException {
         
         Config config = prov.getConfig();
-        upgrdeAcount(config.getAttr(Provisioning.A_zimbraSpamIsNotSpamAccount));
-        upgrdeAcount(config.getAttr(Provisioning.A_zimbraSpamIsSpamAccount));
+        upgrdeAcount(config.getAttr(Provisioning.A_zmailSpamIsNotSpamAccount));
+        upgrdeAcount(config.getAttr(Provisioning.A_zmailSpamIsSpamAccount));
     }
     
     @Override
@@ -49,8 +49,8 @@ public class BUG_72007 extends UpgradeOp {
                 ProvisioningConstants.TRUE, 
                 String.format("Set %s of %s and %s accounts to %s", 
                         Arrays.deepToString(ATTRS), 
-                        Provisioning.A_zimbraSpamIsNotSpamAccount,
-                        Provisioning.A_zimbraSpamIsSpamAccount,
+                        Provisioning.A_zmailSpamIsNotSpamAccount,
+                        Provisioning.A_zmailSpamIsSpamAccount,
                         ProvisioningConstants.TRUE));
     }
     
@@ -60,10 +60,10 @@ public class BUG_72007 extends UpgradeOp {
             if (acct != null) {
                 Map<String, Object> attrs = new HashMap<String, Object>();
                 if (!acct.isIsSystemResource()) {
-                    attrs.put(Provisioning.A_zimbraIsSystemResource, ProvisioningConstants.TRUE);
+                    attrs.put(Provisioning.A_zmailIsSystemResource, ProvisioningConstants.TRUE);
                 }
                 if (!acct.isIsSystemAccount()) {
-                    attrs.put(Provisioning.A_zimbraIsSystemAccount, ProvisioningConstants.TRUE);
+                    attrs.put(Provisioning.A_zmailIsSystemAccount, ProvisioningConstants.TRUE);
                 }
                 modifyAttrs(acct, attrs);
             }

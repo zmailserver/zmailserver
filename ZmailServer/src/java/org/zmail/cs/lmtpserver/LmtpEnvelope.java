@@ -19,11 +19,11 @@
  * TODO To change the template for this generated file go to
  * Window - Preferences - Java - Code Style - Code Templates
  */
-package com.zimbra.cs.lmtpserver;
+package org.zmail.cs.lmtpserver;
 
 import com.google.common.collect.ArrayListMultimap;
 import com.google.common.collect.Multimap;
-import com.zimbra.common.util.ZimbraLog;
+import org.zmail.common.util.ZmailLog;
 
 import java.util.Collection;
 import java.util.LinkedList;
@@ -66,7 +66,7 @@ public class LmtpEnvelope {
 
     public void addRemoteRecipient(LmtpAddress recipient) {
         if (recipient.getRemoteServer() == null) {
-            ZimbraLog.lmtp.error("Server for remote recipient %s has not been set", recipient);
+            ZmailLog.lmtp.error("Server for remote recipient %s has not been set", recipient);
             return;
         }
     	mRecipients.add(recipient);

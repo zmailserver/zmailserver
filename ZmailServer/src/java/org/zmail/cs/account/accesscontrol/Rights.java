@@ -12,10 +12,10 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.account.accesscontrol;
+package org.zmail.cs.account.accesscontrol;
 
-import com.zimbra.cs.account.accesscontrol.generated.AdminRights;
-import com.zimbra.cs.account.accesscontrol.generated.UserRights;
+import org.zmail.cs.account.accesscontrol.generated.AdminRights;
+import org.zmail.cs.account.accesscontrol.generated.UserRights;
 
 /**
  * 

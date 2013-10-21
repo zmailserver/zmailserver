@@ -13,7 +13,7 @@
  * ***** END LICENSE BLOCK *****
  */
 
-package com.zimbra.cs.servlet;
+package org.zmail.cs.servlet;
 
 import java.net.InetAddress;
 import java.net.UnknownHostException;
@@ -22,11 +22,11 @@ import java.util.List;
 import javax.servlet.FilterConfig;
 import javax.servlet.ServletRequest;
 
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.common.util.LogFactory;
-import com.zimbra.common.util.ZimbraLog;
-import com.zimbra.cs.account.Provisioning;
-import com.zimbra.cs.account.Server;
+import org.zmail.common.service.ServiceException;
+import org.zmail.common.util.LogFactory;
+import org.zmail.common.util.ZmailLog;
+import org.zmail.cs.account.Provisioning;
+import org.zmail.cs.account.Server;
 
 
 public class DoSFilter extends org.eclipse.jetty.servlets.DoSFilter {
@@ -44,7 +44,7 @@ public class DoSFilter extends org.eclipse.jetty.servlets.DoSFilter {
                         addWhitelistAddress(address.getHostAddress());
                     }
                 } catch (UnknownHostException e) {
-                    ZimbraLog.misc.warn("Invalid hostname: " + server.getServiceHostname(), e);
+                    ZmailLog.misc.warn("Invalid hostname: " + server.getServiceHostname(), e);
                 }
             }
             String[] ips = Provisioning.getInstance().getLocalServer().getHttpThrottleSafeIPs();
@@ -52,16 +52,16 @@ public class DoSFilter extends org.eclipse.jetty.servlets.DoSFilter {
                 addWhitelistAddress(ip);
             }
         } catch (ServiceException e) {
-            ZimbraLog.misc.warn("Unable to get throttle safe IPs", e);
+            ZmailLog.misc.warn("Unable to get throttle safe IPs", e);
         }
         // add loopback addresses
         addWhitelistAddress("127.0.0.1");
         addWhitelistAddress("::1");
-        ZimbraLog.misc.info("DoSFilter: Configured whitelist IPs = " + getWhitelist());
+        ZmailLog.misc.info("DoSFilter: Configured whitelist IPs = " + getWhitelist());
     }
 
     @Override
     protected String extractUserId(ServletRequest request) {
-        return ZimbraQoSFilter.extractUserId(request);
+        return ZmailQoSFilter.extractUserId(request);
     }
 }

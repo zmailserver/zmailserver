@@ -12,12 +12,12 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.store.external;
+package org.zmail.cs.store.external;
 
 import java.io.File;
 
-import com.zimbra.common.util.FileCache;
-import com.zimbra.cs.store.Blob;
+import org.zmail.common.util.FileCache;
+import org.zmail.cs.store.Blob;
 
 /**
  * Wrapper around Blob for constructor visibility and to allow construction from FileCache.Item

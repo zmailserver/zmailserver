@@ -16,29 +16,29 @@
 
 
 
-if [ x`whoami` != "xzimbra" ]; then
-  echo "$0 must be run as user zimbra"
+if [ x`whoami` != "xzmail" ]; then
+  echo "$0 must be run as user zmail"
   exit 1
 fi
 
 source `dirname $0`/zmshutil || exit 1
 zmsetvars \
-  zimbra_home \
-  zimbra_server_hostname \
-  zimbra_log_directory \
-  zimbra_tmp_directory \
-  zimbra_java_home \
+  zmail_home \
+  zmail_server_hostname \
+  zmail_log_directory \
+  zmail_tmp_directory \
+  zmail_java_home \
   mailboxd_directory 
 
-sasl_conf_directory=${zimbra_home}/cyrus-sasl/etc
-if [ x"${mailboxd_directory}" = "${zimbra_home}/tomcat" ]; then
+sasl_conf_directory=${zmail_home}/cyrus-sasl/etc
+if [ x"${mailboxd_directory}" = "${zmail_home}/tomcat" ]; then
   mailboxd_server=tomcat
   mailboxd_conf_directory=${mailboxd_directory}/conf
 else
   mailboxd_server=jetty
   mailboxd_conf_directory=${mailboxd_directory}/etc
 fi
-jetty_web_xml=${zimbra_home}/jetty/etc
+jetty_web_xml=${zmail_home}/jetty/etc
 
 if [ $# -gt 1 ]; then
     echo "Usage: $0 [mixed|both|http|https|redirect|help]"
@@ -62,24 +62,24 @@ case "$1" in
     ;;
 esac
 
-export JAVA_HOME=${zimbra_java_home}
+export JAVA_HOME=${zmail_java_home}
 
-if [ "x${zimbra_tmp_directory}" = "x" ]; then
-  zimbra_tmp_directory=$zimbra_home/data/tmp
+if [ "x${zmail_tmp_directory}" = "x" ]; then
+  zmail_tmp_directory=$zmail_home/data/tmp
 fi
 
-if [ ! -d ${zimbra_tmp_directory} ]; then
-  mkdir -p ${zimbra_tmp_directory}
+if [ ! -d ${zmail_tmp_directory} ]; then
+  mkdir -p ${zmail_tmp_directory}
 fi
 
-if [ "x$zimbra_server_hostname" = "x" ]; then
+if [ "x$zmail_server_hostname" = "x" ]; then
   echo "ERROR: Unable to determine zmhostname"
   exit 1;
 fi
 
 rewriteConfigs() {
 	echo -n "Rewriting config files for cyrus-sasl, webxml and mailboxd..."
-	${zimbra_home}/libexec/configrewrite sasl webxml mailbox > /dev/null 2>&1
+	${zmail_home}/libexec/configrewrite sasl webxml mailbox > /dev/null 2>&1
 	if [ $? = 0 ]; then
 		echo "done."
 	else
@@ -89,8 +89,8 @@ rewriteConfigs() {
 }
 
 updateLdap() {
-	echo -n "Setting ldap config zimbraMailMode $MODE for ${zimbra_server_hostname}..."
-	${zimbra_home}/bin/zmprov -l ms ${zimbra_server_hostname} zimbraMailMode $MODE > /dev/null 2>&1
+	echo -n "Setting ldap config zmailMailMode $MODE for ${zmail_server_hostname}..."
+	${zmail_home}/bin/zmprov -l ms ${zmail_server_hostname} zmailMailMode $MODE > /dev/null 2>&1
 	if [ $? = 0 ]; then
 		echo "done."
 	else 

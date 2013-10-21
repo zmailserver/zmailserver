@@ -12,15 +12,15 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.account.callback;
+package org.zmail.cs.account.callback;
 
 import java.util.Map;
 
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.cs.account.AttributeCallback;
-import com.zimbra.cs.account.DynamicGroup;
-import com.zimbra.cs.account.Entry;
-import com.zimbra.cs.account.Provisioning;
+import org.zmail.common.service.ServiceException;
+import org.zmail.cs.account.AttributeCallback;
+import org.zmail.cs.account.DynamicGroup;
+import org.zmail.cs.account.Entry;
+import org.zmail.cs.account.Provisioning;
 
 public class MemberURL extends AttributeCallback {
 
@@ -35,16 +35,16 @@ public class MemberURL extends AttributeCallback {
 
         if (context.isCreate()) {
             // memberURL can be set to anything during create
-            // zimbraIsACLGroup will be checked in createDynamicGroup
+            // zmailIsACLGroup will be checked in createDynamicGroup
             return;
         }
 
-        // not creating, ensure zimbraIsACLGroup must be FALSE
-        boolean isACLGroup = entry.getBooleanAttr(Provisioning.A_zimbraIsACLGroup, true);
+        // not creating, ensure zmailIsACLGroup must be FALSE
+        boolean isACLGroup = entry.getBooleanAttr(Provisioning.A_zmailIsACLGroup, true);
 
         if (isACLGroup) {
             throw ServiceException.INVALID_REQUEST("cannot modify " + Provisioning.A_memberURL +
-                    " when " +  Provisioning.A_zimbraIsACLGroup + " is TRUE", null);
+                    " when " +  Provisioning.A_zmailIsACLGroup + " is TRUE", null);
         }
 
     }

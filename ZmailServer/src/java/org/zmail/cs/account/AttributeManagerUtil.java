@@ -12,7 +12,7 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.account;
+package org.zmail.cs.account;
 
 import java.io.BufferedWriter;
 import java.io.File;
@@ -41,17 +41,17 @@ import org.apache.commons.cli.Option;
 import org.apache.commons.cli.Options;
 import org.apache.commons.cli.ParseException;
 
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.common.util.ByteUtil;
-import com.zimbra.common.util.CliUtil;
-import com.zimbra.common.util.DateUtil;
-import com.zimbra.common.util.Log;
-import com.zimbra.common.util.LogFactory;
-import com.zimbra.common.util.SetUtil;
-import com.zimbra.common.util.StringUtil;
-import com.zimbra.common.util.ZimbraLog;
-import com.zimbra.cs.account.AttributeManager.ObjectClassInfo;
-import com.zimbra.cs.account.ldap.LdapProv;
+import org.zmail.common.service.ServiceException;
+import org.zmail.common.util.ByteUtil;
+import org.zmail.common.util.CliUtil;
+import org.zmail.common.util.DateUtil;
+import org.zmail.common.util.Log;
+import org.zmail.common.util.LogFactory;
+import org.zmail.common.util.SetUtil;
+import org.zmail.common.util.StringUtil;
+import org.zmail.common.util.ZmailLog;
+import org.zmail.cs.account.AttributeManager.ObjectClassInfo;
+import org.zmail.cs.account.ldap.LdapProv;
 
 public class AttributeManagerUtil {
 
@@ -117,11 +117,11 @@ public class AttributeManagerUtil {
         }
 
         public static String buildVersion() {
-            return get("zimbra.version", "unknown");
+            return get("zmail.version", "unknown");
         }
 
         public static String getBaseDn(String entry) {
-            return get(entry + ".basedn", "cn=zimbra");
+            return get(entry + ".basedn", "cn=zmail");
         }
 
         public static String getEntryName(String entry, String defaultValue) {
@@ -160,7 +160,7 @@ public class AttributeManagerUtil {
     private void generateDefaultCOSLdif(PrintWriter pw) {
         pw.println(doNotModifyDisclaimer("#"));
         pw.println("#");
-        pw.println("# LDAP entry for the default Zimbra COS.");
+        pw.println("# LDAP entry for the default Zmail COS.");
         pw.println("#");
 
         String baseDn = CLOptions.getBaseDn("cos");
@@ -169,8 +169,8 @@ public class AttributeManagerUtil {
 
         pw.println("dn: cn=" + cosName +",cn=cos," + baseDn);
         pw.println("cn: " + cosName);
-        pw.println("objectclass: zimbraCOS");
-        pw.println("zimbraId: " + cosId);
+        pw.println("objectclass: zmailCOS");
+        pw.println("zmailId: " + cosId);
         pw.println("description: The " + cosName + " COS");
 
         List<String> out = new LinkedList<String>();
@@ -201,8 +201,8 @@ public class AttributeManagerUtil {
 
         pw.println("dn: cn=" + cosName +",cn=cos," + baseDn);
         pw.println("cn: " + cosName);
-        pw.println("objectclass: zimbraCOS");
-        pw.println("zimbraId: " + cosId);
+        pw.println("objectclass: zmailCOS");
+        pw.println("zmailId: " + cosId);
         pw.println("description: The default external users COS");
 
         List<String> out = new LinkedList<String>();
@@ -231,14 +231,14 @@ public class AttributeManagerUtil {
     private void generateGlobalConfigLdif(PrintWriter pw) {
         pw.println(doNotModifyDisclaimer("#"));
         pw.println("#");
-        pw.println("# LDAP entry that contains initial default Zimbra global config.");
+        pw.println("# LDAP entry that contains initial default Zmail global config.");
         pw.println("#");
         
         String baseDn = CLOptions.getBaseDn("config");
         pw.println("dn: cn=config," + baseDn);
         pw.println("objectclass: organizationalRole");
         pw.println("cn: config");
-        pw.println("objectclass: zimbraGlobalConfig");
+        pw.println("objectclass: zmailGlobalConfig");
 
         List<String> out = new LinkedList<String>();
         for (AttributeInfo attr : getAttrs().values()) {
@@ -334,7 +334,7 @@ public class AttributeManagerUtil {
 
         BANNER.append(doNotModifyDisclaimer("#"));
         BANNER.append("#\n");
-        BANNER.append("# Zimbra LDAP Schema\n");
+        BANNER.append("# Zmail LDAP Schema\n");
         BANNER.append("#\n");
         BANNER.append("#\n");
         BANNER.append("#\n");
@@ -347,9 +347,9 @@ public class AttributeManagerUtil {
         BANNER.append("#");
     }
 
-    private void buildZimbraRootOIDs(StringBuilder ZIMBRA_ROOT_OIDS, String prefix) {
-        ZIMBRA_ROOT_OIDS.append(prefix + "ZimbraRoot 1.3.6.1.4.1.19348\n");
-        ZIMBRA_ROOT_OIDS.append(prefix + "ZimbraLDAP ZimbraRoot:2\n");
+    private void buildZmailRootOIDs(StringBuilder ZIMBRA_ROOT_OIDS, String prefix) {
+        ZIMBRA_ROOT_OIDS.append(prefix + "ZmailRoot 1.3.6.1.4.1.19348\n");
+        ZIMBRA_ROOT_OIDS.append(prefix + "ZmailLDAP ZmailRoot:2\n");
     }
    
     private void buildAttrDef(StringBuilder ATTRIBUTE_DEFINITIONS, AttributeInfo ai) {
@@ -374,7 +374,7 @@ public class AttributeManagerUtil {
             // there is no equality matching for 1.3.6.1.4.1.1466.115.121.1.5
             // 
             // Note: 1.3.6.1.4.1.1466.115.121.1.5 attrs, like userSMIMECertificate, when included in 
-            //       the zimbra schema, are declared as type="binary" in zimbra-attrs.xml.
+            //       the zmail schema, are declared as type="binary" in zmail-attrs.xml.
             //       Handling for the two (1.3.6.1.4.1.1466.115.121.1.5 and 1.3.6.1.4.1.1466.115.121.1.40)
             //       are *exactly the same* in ZCS.  They are:
             //       - transferred as binary on the wire, by setting the JNDI "java.naming.ldap.attributes.binary" 
@@ -537,7 +537,7 @@ public class AttributeManagerUtil {
             int i = iter.next();
 
             // OC_GROUP_OIDS
-            OC_GROUP_OIDS.append(prefix + getOCGroupMap().get(i) + " ZimbraLDAP:" + i + "\n");
+            OC_GROUP_OIDS.append(prefix + getOCGroupMap().get(i) + " ZmailLDAP:" + i + "\n");
 
             // List all ocs which we define and which belong in this group
             List<ObjectClassInfo> list = getOCList(i);
@@ -655,13 +655,13 @@ public class AttributeManagerUtil {
         StringBuilder OC_DEFINITIONS = new StringBuilder();
 
         buildSchemaBanner(BANNER);
-        buildZimbraRootOIDs(ZIMBRA_ROOT_OIDS, "objectIdentifier ");
+        buildZmailRootOIDs(ZIMBRA_ROOT_OIDS, "objectIdentifier ");
 
         for (Iterator<Integer> iter = getGroupMap().keySet().iterator(); iter.hasNext();) {
             int i = iter.next();
 
             //GROUP_OIDS
-            GROUP_OIDS.append("objectIdentifier " + getGroupMap().get(i) + " ZimbraLDAP:" + i + "\n");
+            GROUP_OIDS.append("objectIdentifier " + getGroupMap().get(i) + " ZmailLDAP:" + i + "\n");
 
             // List all attrs which we define and which belong in this group
             List<AttributeInfo> list = getAttrList(i);
@@ -719,13 +719,13 @@ public class AttributeManagerUtil {
         StringBuilder OC_DEFINITIONS = new StringBuilder();
 
         buildSchemaBanner(BANNER);
-        buildZimbraRootOIDs(ZIMBRA_ROOT_OIDS, "olcObjectIdentifier: ");
+        buildZmailRootOIDs(ZIMBRA_ROOT_OIDS, "olcObjectIdentifier: ");
 
         for (Iterator<Integer> iter = getGroupMap().keySet().iterator(); iter.hasNext();) {
             int i = iter.next();
 
             //GROUP_OIDS
-            ATTRIBUTE_GROUP_OIDS.append("olcObjectIdentifier: " + getGroupMap().get(i) + " ZimbraLDAP:" + i + "\n");
+            ATTRIBUTE_GROUP_OIDS.append("olcObjectIdentifier: " + getGroupMap().get(i) + " ZmailLDAP:" + i + "\n");
 
             // List all attrs which we define and which belong in this group
             List<AttributeInfo> list = getAttrList(i);
@@ -746,7 +746,7 @@ public class AttributeManagerUtil {
             sortAttrsByName(list);
 
             /* Hack to add the company attribute from Microsoft schema
-             * For generateLdapSchema, it is specified in the zimbra.schema-template file
+             * For generateLdapSchema, it is specified in the zmail.schema-template file
              * We don't use a template file for generateSchemaLdif thus hardcode here.
              * Move to template file if really necessary.
              *
@@ -780,9 +780,9 @@ public class AttributeManagerUtil {
         buildObjectClassDefs(OC_DEFINITIONS, "olcObjectClasses: ", false);
 
         pw.println(BANNER);
-        pw.println("dn: cn=zimbra,cn=schema,cn=config");
+        pw.println("dn: cn=zmail,cn=schema,cn=config");
         pw.println("objectClass: olcSchemaConfig");
-        pw.println("cn: zimbra");
+        pw.println("cn: zmail");
         pw.print(ZIMBRA_ROOT_OIDS);
         pw.print(ATTRIBUTE_GROUP_OIDS);
         pw.print(ATTRIBUTE_OIDS);
@@ -796,7 +796,7 @@ public class AttributeManagerUtil {
         StringBuilder result = new StringBuilder();
         
         result.append(doNotModifyDisclaimer("#"));
-        result.append("# Zimbra LDAP attributes." + "\n");
+        result.append("# Zmail LDAP attributes." + "\n");
         result.append("# \n");
         
         List<String> attrs = new ArrayList<String>(getAttrs().keySet());
@@ -860,7 +860,7 @@ public class AttributeManagerUtil {
 
     private static String enumName(AttributeInfo ai) {
         String enumName = ai.getName();
-        if (enumName.startsWith("zimbra")) enumName = enumName.substring(6);
+        if (enumName.startsWith("zmail")) enumName = enumName.substring(6);
         enumName = StringUtil.escapeJavaIdentifier(enumName.substring(0,1).toUpperCase() + enumName.substring(1));
         return enumName;
     }
@@ -948,7 +948,7 @@ public class AttributeManagerUtil {
                    generateSetters(result, ai, false, SetterType.unset);
                    break;
                default:
-                   if (ai.getName().equalsIgnoreCase("zimbraLocale")) {
+                   if (ai.getName().equalsIgnoreCase("zmailLocale")) {
                        generateGetter(result, ai, true, ac);
                    } else {
                        generateGetter(result, ai, false, ac);
@@ -1020,7 +1020,7 @@ public class AttributeManagerUtil {
        boolean asStringDoc = false;
 
        String methodName = ai.getName();
-       if (methodName.startsWith("zimbra")) methodName = methodName.substring(6);
+       if (methodName.startsWith("zmail")) methodName = methodName.substring(6);
        methodName = (type == AttributeType.TYPE_BOOLEAN ? "is" : "get")+methodName.substring(0,1).toUpperCase() + methodName.substring(1);
        if (asString) methodName += "AsString";
 
@@ -1060,7 +1060,7 @@ public class AttributeManagerUtil {
                } else {
                    defaultValue = "null";
                }
-               javaBody = String.format("try { String v = getAttr(Provisioning.A_%s); return v == null ? %s : ZAttrProvisioning.%s.fromString(v); } catch(com.zimbra.common.service.ServiceException e) { return %s; }", name, defaultValue,enumName(ai), defaultValue);
+               javaBody = String.format("try { String v = getAttr(Provisioning.A_%s); return v == null ? %s : ZAttrProvisioning.%s.fromString(v); } catch(org.zmail.common.service.ServiceException e) { return %s; }", name, defaultValue,enumName(ai), defaultValue);
                javaDocReturns = String.format(", or %s if unset and/or has invalid value", defaultValue);
                break;
            case TYPE_LONG:
@@ -1154,7 +1154,7 @@ public class AttributeManagerUtil {
 
        String methodNamePrefix;
        String methodName = ai.getName();
-       if (methodName.startsWith("zimbra")) methodName = methodName.substring(6);
+       if (methodName.startsWith("zmail")) methodName = methodName.substring(6);
        methodName = setterType.name()+methodName.substring(0,1).toUpperCase() + methodName.substring(1);
        if (asString) methodName += "AsString";
 
@@ -1237,7 +1237,7 @@ public class AttributeManagerUtil {
            result.append(String.format("     * @param attrs existing map to populate, or null to create a new map%n"));
            result.append("     * @return populated map to pass into Provisioning.modifyAttrs\n");
        } else {
-           result.append("     * @throws com.zimbra.common.service.ServiceException if error during update\n");
+           result.append("     * @throws org.zmail.common.service.ServiceException if error during update\n");
        }
        if (ai.getSince() != null) {
            result.append("     *\n");
@@ -1247,9 +1247,9 @@ public class AttributeManagerUtil {
        result.append(String.format("    @ZAttr(id=%d)%n", ai.getId()));
        if (noMap) {
            if (setterType !=  SetterType.unset)
-               result.append(String.format("    public void %s(%s %s) throws com.zimbra.common.service.ServiceException {%n", methodName, javaType, name));
+               result.append(String.format("    public void %s(%s %s) throws org.zmail.common.service.ServiceException {%n", methodName, javaType, name));
            else
-               result.append(String.format("    public void %s() throws com.zimbra.common.service.ServiceException {%n", methodName));
+               result.append(String.format("    public void %s() throws org.zmail.common.service.ServiceException {%n", methodName));
            result.append(String.format("        HashMap<String,Object> attrs = new HashMap<String,Object>();%n"));
            result.append(body);
            result.append(String.format("        getProvisioning().modifyAttrs(this, attrs);%n"));
@@ -1357,7 +1357,7 @@ public class AttributeManagerUtil {
             if (!cl.hasOption('i')) usage("no input attribute xml files specified");
             am = new AttributeManager(cl.getOptionValue('i'));
             if (am.hasErrors()) {
-                ZimbraLog.misc.warn(am.getErrors());
+                ZmailLog.misc.warn(am.getErrors());
                 System.exit(1);
             }
         }

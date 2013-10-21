@@ -14,7 +14,7 @@
 # ***** END LICENSE BLOCK *****
 # 
 use strict;
-use lib '/opt/zimbra/zimbramon/lib';
+use lib '/opt/zmail/zmailmon/lib';
 use Net::LDAP;
 use XML::Simple;
 use Getopt::Std;
@@ -23,15 +23,15 @@ my %options;
 
 getopts('de',\%options) or die "Unable to set options\n";
 
-if ( ! -d "/opt/zimbra/openldap/etc" ) {
+if ( ! -d "/opt/zmail/openldap/etc" ) {
   print "ERROR: openldap does not appear to be installed - exiting\n";
   exit(1);
 }
 
 my $id = getpwuid($<);
 chomp $id;
-if ($id ne "zimbra") {
-    print STDERR "Error: must be run as zimbra user\n";
+if ($id ne "zmail") {
+    print STDERR "Error: must be run as zmail user\n";
 	usage();
     exit (1);
 }
@@ -48,7 +48,7 @@ if ( $options{d} + $options{e} <= 0) {
 	exit (1);
 }
 
-my $localxml = XMLin("/opt/zimbra/conf/localconfig.xml");
+my $localxml = XMLin("/opt/zmail/conf/localconfig.xml");
 my $ldap_root_password = $localxml->{key}->{ldap_root_password}->{value};
 chomp($ldap_root_password);
 my $ldap_is_master = $localxml->{key}->{ldap_is_master}->{value};
@@ -58,21 +58,21 @@ my @acls;
 
 if($options{d}) {
 @acls=(
-  '{3}to attrs=objectclass  by dn.children="cn=admins,cn=zimbra" write  by dn.base="uid=zmpostfix,cn=appaccts,cn=zimbra" read  by dn.base="uid=zmamavis,cn=appaccts,cn=zimbra" read  by users read  by * none',
-  '{7}to filter="(!(zimbraHideInGal=TRUE))"  attrs=cn,co,company,dc,displayName,givenName,gn,initials,l,mail,o,ou,physicalDeliveryOfficeName,postalCode,sn,st,street,streetAddress,telephoneNumber,title,uid,homePhone,pager,mobile,userCertificate  by dn.children="cn=admins,cn=zimbra" write  by dn.base="uid=zmpostfix,cn=appaccts,cn=zimbra" read  by users read  by * none',
-  '{8}to attrs=zimbraId,zimbraMailAddress,zimbraMailAlias,zimbraMailCanonicalAddress,zimbraMailCatchAllAddress,zimbraMailCatchAllCanonicalAddress,zimbraMailCatchAllForwardingAddress,zimbraMailDeliveryAddress,zimbraMailForwardingAddress,zimbraPrefMailForwardingAddress,zimbraMailHost,zimbraMailStatus,zimbraMailTransport,zimbraDomainName,zimbraDomainType,zimbraPrefMailLocalDeliveryDisabled,member,memberURL,zimbraMemberOf  by dn.children="cn=admins,cn=zimbra" write  by dn.base="uid=zmpostfix,cn=appaccts,cn=zimbra" read  by dn.base="uid=zmamavis,cn=appaccts,cn=zimbra" read  by * none',
+  '{3}to attrs=objectclass  by dn.children="cn=admins,cn=zmail" write  by dn.base="uid=zmpostfix,cn=appaccts,cn=zmail" read  by dn.base="uid=zmamavis,cn=appaccts,cn=zmail" read  by users read  by * none',
+  '{7}to filter="(!(zmailHideInGal=TRUE))"  attrs=cn,co,company,dc,displayName,givenName,gn,initials,l,mail,o,ou,physicalDeliveryOfficeName,postalCode,sn,st,street,streetAddress,telephoneNumber,title,uid,homePhone,pager,mobile,userCertificate  by dn.children="cn=admins,cn=zmail" write  by dn.base="uid=zmpostfix,cn=appaccts,cn=zmail" read  by users read  by * none',
+  '{8}to attrs=zmailId,zmailMailAddress,zmailMailAlias,zmailMailCanonicalAddress,zmailMailCatchAllAddress,zmailMailCatchAllCanonicalAddress,zmailMailCatchAllForwardingAddress,zmailMailDeliveryAddress,zmailMailForwardingAddress,zmailPrefMailForwardingAddress,zmailMailHost,zmailMailStatus,zmailMailTransport,zmailDomainName,zmailDomainType,zmailPrefMailLocalDeliveryDisabled,member,memberURL,zmailMemberOf  by dn.children="cn=admins,cn=zmail" write  by dn.base="uid=zmpostfix,cn=appaccts,cn=zmail" read  by dn.base="uid=zmamavis,cn=appaccts,cn=zmail" read  by * none',
 );
 }
 
 if ($options{e}) {
 @acls=(
-  '{3}to attrs=objectclass  by dn.children="cn=admins,cn=zimbra" write  by dn.base="uid=zmpostfix,cn=appaccts,cn=zimbra" read  by dn.base="uid=zmamavis,cn=appaccts,cn=zimbra" read  by * read',
-  '{7}to filter="(!(zimbraHideInGal=TRUE))"  attrs=cn,co,company,dc,displayName,givenName,gn,initials,l,mail,o,ou,physicalDeliveryOfficeName,postalCode,sn,st,street,streetAddress,telephoneNumber,title,uid,homePhone,pager,mobile,userCertificate  by dn.children="cn=admins,cn=zimbra" write  by dn.base="uid=zmpostfix,cn=appaccts,cn=zimbra" read  by * read',
-  '{8}to attrs=zimbraId,zimbraMailAddress,zimbraMailAlias,zimbraMailCanonicalAddress,zimbraMailCatchAllAddress,zimbraMailCatchAllCanonicalAddress,zimbraMailCatchAllForwardingAddress,zimbraMailDeliveryAddress,zimbraMailForwardingAddress,zimbraPrefMailForwardingAddress,zimbraMailHost,zimbraMailStatus,zimbraMailTransport,zimbraDomainName,zimbraDomainType,zimbraPrefMailLocalDeliveryDisabled,member,memberURL,zimbraMemberOf  by dn.children="cn=admins,cn=zimbra" write  by dn.base="uid=zmpostfix,cn=appaccts,cn=zimbra" read  by dn.base="uid=zmamavis,cn=appaccts,cn=zimbra" read  by * read',
+  '{3}to attrs=objectclass  by dn.children="cn=admins,cn=zmail" write  by dn.base="uid=zmpostfix,cn=appaccts,cn=zmail" read  by dn.base="uid=zmamavis,cn=appaccts,cn=zmail" read  by * read',
+  '{7}to filter="(!(zmailHideInGal=TRUE))"  attrs=cn,co,company,dc,displayName,givenName,gn,initials,l,mail,o,ou,physicalDeliveryOfficeName,postalCode,sn,st,street,streetAddress,telephoneNumber,title,uid,homePhone,pager,mobile,userCertificate  by dn.children="cn=admins,cn=zmail" write  by dn.base="uid=zmpostfix,cn=appaccts,cn=zmail" read  by * read',
+  '{8}to attrs=zmailId,zmailMailAddress,zmailMailAlias,zmailMailCanonicalAddress,zmailMailCatchAllAddress,zmailMailCatchAllCanonicalAddress,zmailMailCatchAllForwardingAddress,zmailMailDeliveryAddress,zmailMailForwardingAddress,zmailPrefMailForwardingAddress,zmailMailHost,zmailMailStatus,zmailMailTransport,zmailDomainName,zmailDomainType,zmailPrefMailLocalDeliveryDisabled,member,memberURL,zmailMemberOf  by dn.children="cn=admins,cn=zmail" write  by dn.base="uid=zmpostfix,cn=appaccts,cn=zmail" read  by dn.base="uid=zmamavis,cn=appaccts,cn=zmail" read  by * read',
 );
 }
 
-my $ldap = Net::LDAP->new('ldapi://%2fopt%2fzimbra%2fopenldap%2fvar%2frun%2fldapi/') or die "$@";
+my $ldap = Net::LDAP->new('ldapi://%2fopt%2fzmail%2fopenldap%2fvar%2frun%2fldapi/') or die "$@";
 
 my $mesg = $ldap->bind("cn=config", password=>"$ldap_root_password");
 

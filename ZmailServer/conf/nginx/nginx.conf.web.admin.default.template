@@ -14,7 +14,7 @@ server
 
     location /
     {
-        # Proxy to Zimbra Upstream
+        # Proxy to Zmail Upstream
         proxy_pass          https://${web.admin.upstream.name};
 
         # For audit

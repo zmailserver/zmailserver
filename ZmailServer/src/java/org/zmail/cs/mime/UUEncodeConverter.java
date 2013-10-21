@@ -12,7 +12,7 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.mime;
+package org.zmail.cs.mime;
 
 import java.io.BufferedInputStream;
 import java.io.ByteArrayOutputStream;
@@ -30,15 +30,15 @@ import javax.mail.internet.MimeMessage;
 import javax.mail.internet.MimeMultipart;
 import javax.mail.util.ByteArrayDataSource;
 
-import com.zimbra.common.mime.ContentDisposition;
-import com.zimbra.common.mime.MimeConstants;
-import com.zimbra.common.mime.MimeDetect;
-import com.zimbra.common.util.ByteUtil;
-import com.zimbra.common.util.ByteUtil.PositionInputStream;
-import com.zimbra.common.util.FileUtil;
-import com.zimbra.common.util.ZimbraLog;
-import com.zimbra.common.zmime.ZMimeBodyPart;
-import com.zimbra.common.zmime.ZMimeMultipart;
+import org.zmail.common.mime.ContentDisposition;
+import org.zmail.common.mime.MimeConstants;
+import org.zmail.common.mime.MimeDetect;
+import org.zmail.common.util.ByteUtil;
+import org.zmail.common.util.ByteUtil.PositionInputStream;
+import org.zmail.common.util.FileUtil;
+import org.zmail.common.util.ZmailLog;
+import org.zmail.common.zmime.ZMimeBodyPart;
+import org.zmail.common.zmime.ZMimeMultipart;
 
 public class UUEncodeConverter extends MimeVisitor {
     @Override
@@ -151,10 +151,10 @@ public class UUEncodeConverter extends MimeVisitor {
                 ByteUtil.closeStream(isOrig);
             }
         } catch (MessagingException e) {
-            ZimbraLog.extensions.warn("exception while uudecoding message part; skipping part", e);
+            ZmailLog.extensions.warn("exception while uudecoding message part; skipping part", e);
             return false;
         } catch (IOException e) {
-            ZimbraLog.extensions.warn("exception while uudecoding message part; skipping part", e);
+            ZmailLog.extensions.warn("exception while uudecoding message part; skipping part", e);
             return false;
         }
 

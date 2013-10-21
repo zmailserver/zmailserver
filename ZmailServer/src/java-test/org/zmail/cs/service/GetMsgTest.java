@@ -14,7 +14,7 @@
  * 
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.service;
+package org.zmail.cs.service;
 
 import java.util.HashMap;
 import java.util.List;
@@ -28,22 +28,22 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 
 import com.ibm.icu.util.Calendar;
-import com.zimbra.common.mime.shim.JavaMailMimeMessage;
-import com.zimbra.common.soap.Element;
-import com.zimbra.common.soap.MailConstants;
-import com.zimbra.common.util.StringUtil;
-import com.zimbra.common.zmime.ZSharedFileInputStream;
-import com.zimbra.cs.account.MockProvisioning;
-import com.zimbra.cs.account.Provisioning;
-import com.zimbra.cs.mailbox.DeliveryOptions;
-import com.zimbra.cs.mailbox.Mailbox;
-import com.zimbra.cs.mailbox.MailboxManager;
-import com.zimbra.cs.mailbox.MailboxTestUtil;
-import com.zimbra.cs.mailbox.Message;
-import com.zimbra.cs.mime.ParsedMessage;
-import com.zimbra.cs.service.mail.GetMsg;
-import com.zimbra.cs.service.mail.ServiceTestUtil;
-import com.zimbra.cs.util.JMSession;
+import org.zmail.common.mime.shim.JavaMailMimeMessage;
+import org.zmail.common.soap.Element;
+import org.zmail.common.soap.MailConstants;
+import org.zmail.common.util.StringUtil;
+import org.zmail.common.zmime.ZSharedFileInputStream;
+import org.zmail.cs.account.MockProvisioning;
+import org.zmail.cs.account.Provisioning;
+import org.zmail.cs.mailbox.DeliveryOptions;
+import org.zmail.cs.mailbox.Mailbox;
+import org.zmail.cs.mailbox.MailboxManager;
+import org.zmail.cs.mailbox.MailboxTestUtil;
+import org.zmail.cs.mailbox.Message;
+import org.zmail.cs.mime.ParsedMessage;
+import org.zmail.cs.service.mail.GetMsg;
+import org.zmail.cs.service.mail.ServiceTestUtil;
+import org.zmail.cs.util.JMSession;
 
 public class GetMsgTest {
 
@@ -51,7 +51,7 @@ public class GetMsgTest {
     public static void init() throws Exception {
         MailboxTestUtil.initServer();
         Provisioning prov = Provisioning.getInstance();
-        prov.createAccount("test@zimbra.com", "secret", new HashMap<String, Object>());
+        prov.createAccount("test@zmail.com", "secret", new HashMap<String, Object>());
     }
 
     @Before

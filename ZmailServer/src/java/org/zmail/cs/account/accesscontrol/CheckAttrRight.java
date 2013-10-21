@@ -12,7 +12,7 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.account.accesscontrol;
+package org.zmail.cs.account.accesscontrol;
 
 import java.util.HashMap;
 import java.util.HashSet;
@@ -20,19 +20,19 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.common.util.Log;
-import com.zimbra.common.util.SetUtil;
-import com.zimbra.common.util.ZimbraLog;
-import com.zimbra.cs.account.AttributeClass;
-import com.zimbra.cs.account.AttributeManager;
-import com.zimbra.cs.account.Domain;
-import com.zimbra.cs.account.Entry;
-import com.zimbra.cs.account.Group;
-import com.zimbra.cs.account.accesscontrol.RightBearer.Grantee;
+import org.zmail.common.service.ServiceException;
+import org.zmail.common.util.Log;
+import org.zmail.common.util.SetUtil;
+import org.zmail.common.util.ZmailLog;
+import org.zmail.cs.account.AttributeClass;
+import org.zmail.cs.account.AttributeManager;
+import org.zmail.cs.account.Domain;
+import org.zmail.cs.account.Entry;
+import org.zmail.cs.account.Group;
+import org.zmail.cs.account.accesscontrol.RightBearer.Grantee;
 
 public class CheckAttrRight extends CheckRight {
-    private static final Log sLog = ZimbraLog.acl;
+    private static final Log sLog = ZmailLog.acl;
 
     private Grantee mGrantee;
     private AttrRight mAttrRightNeeded;
@@ -94,7 +94,7 @@ public class CheckAttrRight extends CheckRight {
         CollectAttrsResult car = CollectAttrsResult.SOME;
 
         // check the target entry itself
-        List<ZimbraACE> acl = ACLUtil.getAllACEs(mTarget);
+        List<ZmailACE> acl = ACLUtil.getAllACEs(mTarget);
         if (acl != null) {
             car = checkTarget(acl, relativity, false, allowSome, denySome);
             relativity += granteeRanksPerTarget;
@@ -140,9 +140,9 @@ public class CheckAttrRight extends CheckRight {
                 } else {
                     // end of group targets, put all collected denied and allowed grants into
                     // one list, as if they are granted on the same entry, then check.
-                    // We put denied in the front, so it is consistent with ZimbraACL.getAllACEs
+                    // We put denied in the front, so it is consistent with ZmailACL.getAllACEs
                     if (groupACLs != null) {
-                        List<ZimbraACE> aclsOnGroupTargets = groupACLs.getAllACLs();
+                        List<ZmailACE> aclsOnGroupTargets = groupACLs.getAllACLs();
                         if (aclsOnGroupTargets != null) {
                             car = checkTarget(aclsOnGroupTargets, relativity, false, allowSome, denySome);
                             relativity += granteeRanksPerTarget;
@@ -220,7 +220,7 @@ public class CheckAttrRight extends CheckRight {
     }
 
     private CollectAttrsResult checkTarget(
-            List<ZimbraACE> acl, Integer relativity, boolean subDomain,
+            List<ZmailACE> acl, Integer relativity, boolean subDomain,
             Map<String, Integer> allowSome, Map<String, Integer> denySome)
     throws ServiceException {
 
@@ -280,13 +280,13 @@ public class CheckAttrRight extends CheckRight {
      * @throws ServiceException
      */
     private CollectAttrsResult expandACLToAttrs(
-            List<ZimbraACE> acl, short granteeFlags, Integer relativity, boolean subDomain,
+            List<ZmailACE> acl, short granteeFlags, Integer relativity, boolean subDomain,
             Map<String, Integer> allowSome, Map<String, Integer> denySome)
     throws ServiceException {
 
         CollectAttrsResult result = null;
 
-        for (ZimbraACE ace : acl) {
+        for (ZmailACE ace : acl) {
             GranteeType granteeType = ace.getGranteeType();
             if (!granteeType.hasFlags(granteeFlags))
                 continue;
@@ -342,7 +342,7 @@ public class CheckAttrRight extends CheckRight {
     }
 
     private CollectAttrsResult expandAttrsGrantToAttrs(
-            ZimbraACE ace, AttrRight attrRightGranted, Integer relativity,
+            ZmailACE ace, AttrRight attrRightGranted, Integer relativity,
             Map<String, Integer> allowSome, Map<String, Integer> denySome)
     throws ServiceException {
 
@@ -357,7 +357,7 @@ public class CheckAttrRight extends CheckRight {
          * - AttrRight specific changes are done in this method.
          *   (i.e. checks can only be done on a AttrRight, not on combo right)
          *
-         * - ZimbraACE level checks are done in the caller (expandACLToAttrs).
+         * - ZmailACE level checks are done in the caller (expandACLToAttrs).
          */
 
         Right.RightType rightTypeNeeded = mAttrRightNeeded.getRightType();
@@ -370,7 +370,7 @@ public class CheckAttrRight extends CheckRight {
 
         /*
          * check if the granted attrs right is indeed applicable on the target type
-         * this is a sanity check in case someone somehow sneaked in a zimbraACE on
+         * this is a sanity check in case someone somehow sneaked in a zmailACE on
          * the wrong target.  e.g. put a setAttrs server right on a cos entry.
          * This should not happen if the grant is done via RightCommand.grantRight.
          */
@@ -383,19 +383,19 @@ public class CheckAttrRight extends CheckRight {
          * if right.grantableOnTargetType() is true.  This creates a problem for
          * granting attr right when:
          *
-         *   e.g. grant on domain d.com: {id-of-adminA} usr +set.domain.zimbraMailStatus
-         *        Note the grant is for the zimbraMailStatus on domain, not account(the
+         *   e.g. grant on domain d.com: {id-of-adminA} usr +set.domain.zmailMailStatus
+         *        Note the grant is for the zmailMailStatus on domain, not account(the
          *        attr is also on account)
          *
-         *        now, adminA trying to "ma usr1@d.com zimbraMailStatus enabled" is PERM_DENIED,
+         *        now, adminA trying to "ma usr1@d.org zmailMailStatus enabled" is PERM_DENIED,
          *        this is correct.  It is blocked in rightApplicableOnTargetType because
          *        the decision was made on right.executableOnTargetType (the path when
          *        canDelegateNeeded is false)
          *
-         *        but, adminA trying to "grr domain d.com usr adminB set.account.zimbraMailStatus"
+         *        but, adminA trying to "grr domain d.com usr adminB set.account.zmailMailStatus"
          *        is will be allowed, this is *wrong*.  The right adminA has is setting
-         *        zimbraMailStatus on domain, not on account, but it can end up granting the
-         *        set.account.zimbraMailStatus to admin B.  The following check fixes this
+         *        zmailMailStatus on domain, not on account, but it can end up granting the
+         *        set.account.zmailMailStatus to admin B.  The following check fixes this
          *        problem.
          *
          * This is not a problem for granting preset right because each preset right has a

@@ -12,37 +12,37 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.service.util;
+package org.zmail.cs.service.util;
 
 import java.io.IOException;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletResponse;
 
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.common.util.L10nUtil;
-import com.zimbra.common.util.L10nUtil.MsgKey;
-import com.zimbra.common.util.Pair;
-import com.zimbra.common.util.ZimbraLog;
-import com.zimbra.cs.account.AuthToken;
-import com.zimbra.cs.account.AuthTokenException;
-import com.zimbra.cs.account.GuestAccount;
-import com.zimbra.cs.account.Provisioning;
-import com.zimbra.cs.mailbox.Folder;
-import com.zimbra.cs.mailbox.MailItem;
-import com.zimbra.cs.mailbox.MailServiceException;
-import com.zimbra.cs.mailbox.MailServiceException.NoSuchItemException;
-import com.zimbra.cs.mailbox.Mailbox;
-import com.zimbra.cs.mailbox.MailboxManager;
-import com.zimbra.cs.mailbox.Mountpoint;
-import com.zimbra.cs.mailbox.OperationContext;
-import com.zimbra.cs.service.AuthProvider;
-import com.zimbra.cs.service.UserServlet;
-import com.zimbra.cs.service.UserServletContext;
-import com.zimbra.cs.service.UserServletException;
-import com.zimbra.cs.service.formatter.FormatterFactory.FormatType;
-import com.zimbra.cs.servlet.ZimbraServlet;
-import com.zimbra.cs.servlet.util.AuthUtil;
+import org.zmail.common.service.ServiceException;
+import org.zmail.common.util.L10nUtil;
+import org.zmail.common.util.L10nUtil.MsgKey;
+import org.zmail.common.util.Pair;
+import org.zmail.common.util.ZmailLog;
+import org.zmail.cs.account.AuthToken;
+import org.zmail.cs.account.AuthTokenException;
+import org.zmail.cs.account.GuestAccount;
+import org.zmail.cs.account.Provisioning;
+import org.zmail.cs.mailbox.Folder;
+import org.zmail.cs.mailbox.MailItem;
+import org.zmail.cs.mailbox.MailServiceException;
+import org.zmail.cs.mailbox.MailServiceException.NoSuchItemException;
+import org.zmail.cs.mailbox.Mailbox;
+import org.zmail.cs.mailbox.MailboxManager;
+import org.zmail.cs.mailbox.Mountpoint;
+import org.zmail.cs.mailbox.OperationContext;
+import org.zmail.cs.service.AuthProvider;
+import org.zmail.cs.service.UserServlet;
+import org.zmail.cs.service.UserServletContext;
+import org.zmail.cs.service.UserServletException;
+import org.zmail.cs.service.formatter.FormatterFactory.FormatType;
+import org.zmail.cs.servlet.ZmailServlet;
+import org.zmail.cs.servlet.util.AuthUtil;
 
 public class UserServletUtil {
 
@@ -58,10 +58,10 @@ public class UserServletUtil {
                 else
                     item.mailItem = context.targetMailbox.getItemById(context.opContext, item.id, MailItem.Type.UNKNOWN, context.fromDumpster);
             } catch (NoSuchItemException x) {
-                ZimbraLog.misc.info(x.getMessage());
+                ZmailLog.misc.info(x.getMessage());
             } catch (ServiceException x) {
                 if (x.getCode().equals(ServiceException.PERM_DENIED)) {
-                    ZimbraLog.misc.info(x.getMessage());
+                    ZmailLog.misc.info(x.getMessage());
                 } else {
                     throw x;
                 }
@@ -231,7 +231,7 @@ public class UserServletUtil {
                     AuthToken at = AuthProvider.getAuthToken(context.req, isAdminRequest);
                     if (at != null) {
 
-                        if (at.isZimbraUser()) {
+                        if (at.isZmailUser()) {
                             try {
                                 context.setAuthAccount(AuthProvider.validateAuthToken(Provisioning.getInstance(), at, false));
                             } catch (ServiceException e) {
@@ -261,12 +261,12 @@ public class UserServletUtil {
 
             // check query string
             if (context.queryParamAuthAllowed()) {
-                String auth = context.params.get(ZimbraServlet.QP_ZAUTHTOKEN);
+                String auth = context.params.get(ZmailServlet.QP_ZAUTHTOKEN);
                 if (auth == null)
                     auth = context.params.get(UserServlet.QP_AUTHTOKEN);  // not sure who uses this parameter; zauthtoken is preferred
                 if (auth != null) {
                     try {
-                        // Only supported by ZimbraAuthProvider
+                        // Only supported by ZmailAuthProvider
                         AuthToken at = AuthProvider.getAuthToken(auth);
 
                         try {
@@ -288,7 +288,7 @@ public class UserServletUtil {
             }
 
             /* AP-TODO-3:
-             *    http auth currently does not work for non-Zimbra auth provider,
+             *    http auth currently does not work for non-Zmail auth provider,
              *    for Yahoo Y&T, will probably need to retrieve Y&T cookies from a
              *    site in the basicAuthRequest after authenticating using user/pass.
              */

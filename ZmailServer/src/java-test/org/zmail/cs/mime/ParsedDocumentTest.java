@@ -12,14 +12,14 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.mime;
+package org.zmail.cs.mime;
 
 import java.io.File;
 
 import org.junit.Assert;
 import org.junit.Test;
 
-import com.zimbra.cs.store.Blob;
+import org.zmail.cs.store.Blob;
 
 public class ParsedDocumentTest {
 

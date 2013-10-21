@@ -13,7 +13,7 @@
  * ***** END LICENSE BLOCK *****
  */
 
-package com.zimbra.cs.util.tnef;
+package org.zmail.cs.util.tnef;
 
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
@@ -40,27 +40,27 @@ import net.fortuna.ical4j.data.ContentHandler;
 import net.fortuna.ical4j.data.ParserException;
 import net.fortuna.ical4j.model.Property;
 
-import com.zimbra.common.calendar.ZCalendar;
-import com.zimbra.common.calendar.ZCalendar.ZCalendarBuilder;
-import com.zimbra.common.calendar.ZCalendar.ZComponent;
-import com.zimbra.common.calendar.ZCalendar.ZParameter;
-import com.zimbra.common.calendar.ZCalendar.ZProperty;
-import com.zimbra.common.calendar.ZCalendar.ZVCalendar;
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.common.util.ByteUtil;
-import com.zimbra.common.util.Log;
-import com.zimbra.common.util.Log.Level;
-import com.zimbra.common.util.ZimbraLog;
-import com.zimbra.common.zmime.ZMimeMessage;
-import com.zimbra.common.zmime.ZSharedFileInputStream;
-import com.zimbra.cs.mime.MimeVisitor;
-import com.zimbra.cs.util.JMSession;
-import com.zimbra.cs.util.tnef.TNEFtoIcalendarServiceException.UnsupportedTnefCalendaringMsgException;
-import com.zimbra.cs.util.tnef.mapi.RecurrenceDefinition;
+import org.zmail.common.calendar.ZCalendar;
+import org.zmail.common.calendar.ZCalendar.ZCalendarBuilder;
+import org.zmail.common.calendar.ZCalendar.ZComponent;
+import org.zmail.common.calendar.ZCalendar.ZParameter;
+import org.zmail.common.calendar.ZCalendar.ZProperty;
+import org.zmail.common.calendar.ZCalendar.ZVCalendar;
+import org.zmail.common.service.ServiceException;
+import org.zmail.common.util.ByteUtil;
+import org.zmail.common.util.Log;
+import org.zmail.common.util.Log.Level;
+import org.zmail.common.util.ZmailLog;
+import org.zmail.common.zmime.ZMimeMessage;
+import org.zmail.common.zmime.ZSharedFileInputStream;
+import org.zmail.cs.mime.MimeVisitor;
+import org.zmail.cs.util.JMSession;
+import org.zmail.cs.util.tnef.TNEFtoIcalendarServiceException.UnsupportedTnefCalendaringMsgException;
+import org.zmail.cs.util.tnef.mapi.RecurrenceDefinition;
 
 public class TestMain {
 
-    static Log sLog = ZimbraLog.tnef;
+    static Log sLog = ZmailLog.tnef;
 
     private static TnefToICalendar getConverter() {
         return new DefaultTnefToICalendar();
@@ -162,7 +162,7 @@ public class TestMain {
     private static final String UTF8 = "utf-8";
 
     private static void usage() {
-        System.err.println("Usage: java com.zimbra.cs.util.tnef.TestMain [-v] [-debug]");
+        System.err.println("Usage: java org.zmail.cs.util.tnef.TestMain [-v] [-debug]");
         System.err.println("            -i <MIME file> [-o <iCalendar file>] [-t <tnef file>] [-r <recurInfo file>]");
         System.err.println("  or");
         System.err.println("            -D <Output Directory> <MIME files>...\n");
@@ -178,7 +178,7 @@ public class TestMain {
     }
 
     public static void main(String[] args) throws Exception {
-        ZimbraLog.toolSetupLog4jConsole("INFO", true, false);
+        ZmailLog.toolSetupLog4jConsole("INFO", true, false);
 
         boolean verbose = false;
         boolean inputWasIcs = false;
@@ -273,7 +273,7 @@ public class TestMain {
 //                // This doesn't check much...
 //                inv.sanitize(true);
 //            } catch (ServiceException e) {
-//                ZimbraLog.tnef.error(e.getMessage());
+//                ZmailLog.tnef.error(e.getMessage());
 //                allGood = false;
 //            }
 //        }
@@ -548,7 +548,7 @@ public class TestMain {
             if (mCurProperty != null) {
                 mCurProperty.addParameter(param);
             } else {
-                ZimbraLog.calendar.debug("ERROR: got parameter " + name + "," + value + " outside of Property");
+                ZmailLog.calendar.debug("ERROR: got parameter " + name + "," + value + " outside of Property");
             }
         }
     }

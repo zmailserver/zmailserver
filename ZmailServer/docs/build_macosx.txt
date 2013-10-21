@@ -26,14 +26,14 @@ install ports:
 	binutils 2.15_1 (active)
 
 
-create zimbra group
+create zmail group
 
-create zimbra user:
+create zmail user:
 	shell: /bin/bash
-	home: /opt/zimbra
-	group: zimbra
+	home: /opt/zmail
+	group: zmail
 
-checkout zimbra source to <source_root>
+checkout zmail source to <source_root>
 
 ThirdParty builds (perform as root)
 
@@ -42,14 +42,14 @@ cd <source root>/Thirdparty
 make allclean
 make
 
-Zimbra build (perform as any user)
+Zmail build (perform as any user)
 
-cd <source_root>/ZimbraBuild
+cd <source_root>/ZmailBuild
 make allclean
 make
 
 This will drop the install packages (and dmg) in:
-<source_root>/ZimbraBuild/ppc
+<source_root>/ZmailBuild/ppc
 
-rm -rf /opt/zimbra/*
+rm -rf /opt/zmail/*
 install zcs.mpkg

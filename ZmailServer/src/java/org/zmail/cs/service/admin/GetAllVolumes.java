@@ -12,34 +12,34 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.service.admin;
+package org.zmail.cs.service.admin;
 
 import java.util.List;
 import java.util.Map;
 
-import com.zimbra.cs.account.Provisioning;
-import com.zimbra.cs.account.accesscontrol.AdminRight;
-import com.zimbra.cs.account.accesscontrol.Rights.Admin;
-import com.zimbra.cs.volume.Volume;
-import com.zimbra.cs.volume.VolumeManager;
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.common.soap.Element;
-import com.zimbra.soap.JaxbUtil;
-import com.zimbra.soap.ZimbraSoapContext;
-import com.zimbra.soap.admin.message.GetAllVolumesRequest;
-import com.zimbra.soap.admin.message.GetAllVolumesResponse;
+import org.zmail.cs.account.Provisioning;
+import org.zmail.cs.account.accesscontrol.AdminRight;
+import org.zmail.cs.account.accesscontrol.Rights.Admin;
+import org.zmail.cs.volume.Volume;
+import org.zmail.cs.volume.VolumeManager;
+import org.zmail.common.service.ServiceException;
+import org.zmail.common.soap.Element;
+import org.zmail.soap.JaxbUtil;
+import org.zmail.soap.ZmailSoapContext;
+import org.zmail.soap.admin.message.GetAllVolumesRequest;
+import org.zmail.soap.admin.message.GetAllVolumesResponse;
 
 public final class GetAllVolumes extends AdminDocumentHandler {
 
     @Override
     public Element handle(Element req, Map<String, Object> ctx) throws ServiceException {
-        ZimbraSoapContext zsc = getZimbraSoapContext(ctx);
+        ZmailSoapContext zsc = getZmailSoapContext(ctx);
         return zsc.jaxbToElement(handle((GetAllVolumesRequest) JaxbUtil.elementToJaxb(req), ctx));
     }
 
     private GetAllVolumesResponse handle(@SuppressWarnings("unused") GetAllVolumesRequest req,
             Map<String, Object> ctx) throws ServiceException {
-        ZimbraSoapContext zsc = getZimbraSoapContext(ctx);
+        ZmailSoapContext zsc = getZmailSoapContext(ctx);
         checkRight(zsc, ctx, Provisioning.getInstance().getLocalServer(), Admin.R_manageVolume);
 
         GetAllVolumesResponse resp = new GetAllVolumesResponse();

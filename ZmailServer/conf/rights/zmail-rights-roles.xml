@@ -9,7 +9,7 @@
 
 <rights>
 
-<include file="zimbra-rights.xml"/>
+<include file="zmail-rights.xml"/>
 
 <right type="combo" name="crossMailboxSearchRights">
   <desc>rights for managing cross mailbox search tasks in admin console</desc>
@@ -17,10 +17,10 @@
     <r n="manageCrossMailboxSearchTask"/>
     <r n="listServer"/>
     <r n="get.server.description"/>
-    <r n="get.server.zimbraServiceEnabled"/>
-    <r n="get.server.zimbraServiceInstalled"/>
-    <r n="get.server.zimbraServiceHostname"/>
-    <r n="get.server.zimbraId"/>
+    <r n="get.server.zmailServiceEnabled"/>
+    <r n="get.server.zmailServiceInstalled"/>
+    <r n="get.server.zmailServiceHostname"/>
+    <r n="get.server.zmailId"/>
   </rights>
 </right>
       
@@ -30,10 +30,10 @@
     <r n="manageMailQueue"/>
     <r n="listServer"/>
     <r n="get.server.description"/>
-    <r n="get.server.zimbraServiceEnabled"/>
-    <r n="get.server.zimbraServiceInstalled"/>
-    <r n="get.server.zimbraServiceHostname"/>
-    <r n="get.server.zimbraId"/>
+    <r n="get.server.zmailServiceEnabled"/>
+    <r n="get.server.zmailServiceInstalled"/>
+    <r n="get.server.zmailServiceHostname"/>
+    <r n="get.server.zmailId"/>
   </rights>
 </right>
 

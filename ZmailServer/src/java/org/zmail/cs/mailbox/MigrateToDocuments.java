@@ -12,22 +12,22 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.mailbox;
+package org.zmail.cs.mailbox;
 
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.common.util.CliUtil;
-import com.zimbra.common.util.ZimbraLog;
-import com.zimbra.cs.account.Account;
-import com.zimbra.cs.account.Provisioning;
-import com.zimbra.cs.db.DbPool;
-import com.zimbra.cs.mime.ParsedDocument;
-import com.zimbra.cs.util.Zimbra;
-import com.zimbra.cs.wiki.WikiPage;
-import com.zimbra.cs.wiki.WikiTemplate;
+import org.zmail.common.service.ServiceException;
+import org.zmail.common.util.CliUtil;
+import org.zmail.common.util.ZmailLog;
+import org.zmail.cs.account.Account;
+import org.zmail.cs.account.Provisioning;
+import org.zmail.cs.db.DbPool;
+import org.zmail.cs.mime.ParsedDocument;
+import org.zmail.cs.util.Zmail;
+import org.zmail.cs.wiki.WikiPage;
+import org.zmail.cs.wiki.WikiTemplate;
 
 public class MigrateToDocuments {
 
@@ -50,7 +50,7 @@ public class MigrateToDocuments {
         if (destRoot == null)
             destRoot = mbox.createFolder(octxt, path, new Folder.FolderOptions().setDefaultView(MailItem.Type.DOCUMENT));
         if (destRoot == null) {
-            ZimbraLog.misc.warn("Can't create folder: %s", path);
+            ZmailLog.misc.warn("Can't create folder: %s", path);
             return;
         }
         moveToBackupFolder(root, destRoot);
@@ -69,9 +69,9 @@ public class MigrateToDocuments {
             } catch (MailServiceException e) {
                 if (e.getCode().equals(MailServiceException.ALREADY_EXISTS)) {
                     dest = mbox.getFolderByPath(octxt, path);
-                    ZimbraLog.misc.warn("Backup folder already exists: %s", source.getName());
+                    ZmailLog.misc.warn("Backup folder already exists: %s", source.getName());
                 } else {
-                    ZimbraLog.misc.warn("Can't create backup folder: %s", path);
+                    ZmailLog.misc.warn("Can't create backup folder: %s", path);
                     continue;
                 }
             }
@@ -82,9 +82,9 @@ public class MigrateToDocuments {
                 mbox.move(octxt, item.getId(), MailItem.Type.WIKI, to.getId());
             } catch (MailServiceException e) {
                 if (e.getCode().equals(MailServiceException.ALREADY_EXISTS)) {
-                    ZimbraLog.misc.warn("Item already exists: %s", item.getName());
+                    ZmailLog.misc.warn("Item already exists: %s", item.getName());
                 } else {
-                    ZimbraLog.misc.warn("Can't move item %s to backup folder %s", item.getName(), to.getPath());
+                    ZmailLog.misc.warn("Can't move item %s to backup folder %s", item.getName(), to.getPath());
                 }
             }
         }
@@ -107,17 +107,17 @@ public class MigrateToDocuments {
             try {
                 main = (Document) mbox.getItemByPath(octxt, to.getPath() + "/" + doc.getName());
             } catch (Exception e) {
-                ZimbraLog.misc.info("Creating new item: " + doc.getName());
+                ZmailLog.misc.info("Creating new item: " + doc.getName());
             }
             for (int rev = 1; rev < doc.getVersion(); rev++) {
                 Document revision = null;
                 try {
                     revision = (Document)mbox.getItemRevision(octxt, item.getId(), MailItem.Type.DOCUMENT, rev);
                 } catch (Exception e) {
-                    ZimbraLog.misc.warn("Can't get revision " + rev + " for item " + doc.getName(), e);
+                    ZmailLog.misc.warn("Can't get revision " + rev + " for item " + doc.getName(), e);
                 }
                 if (revision == null) {
-                    ZimbraLog.misc.warn("Empty revision " + rev + " for item " + doc.getName());
+                    ZmailLog.misc.warn("Empty revision " + rev + " for item " + doc.getName());
                     continue;
                 }
                 // name comes from the current revision
@@ -134,7 +134,7 @@ public class MigrateToDocuments {
             in = getContentStream(revision);
             String contentType = revision.getContentType();
             if (revision.getType() == MailItem.Type.WIKI)
-                contentType = "application/x-zimbra-doc; charset=utf-8";
+                contentType = "application/x-zmail-doc; charset=utf-8";
             ParsedDocument pd = new ParsedDocument(in, name, contentType, revision.getDate(), revision.getCreator(), revision.getDescription());
             if (main == null) {
                 main = mbox.createDocument(octxt, to.getId(), pd, MailItem.Type.DOCUMENT, revision.getFlagBitmask());
@@ -142,7 +142,7 @@ public class MigrateToDocuments {
                 mbox.addDocumentRevision(octxt, main.getId(), pd);
             }
         } catch (Exception e) {
-            ZimbraLog.misc.warn("Can't add new revision for " + name + " revision " + revision.getVersion(), e);
+            ZmailLog.misc.warn("Can't add new revision for " + name + " revision " + revision.getVersion(), e);
         } finally {
             if (in != null)
                 try {
@@ -169,7 +169,7 @@ public class MigrateToDocuments {
     public static void main(String[] args) throws Exception {
         CliUtil.toolSetup();
         DbPool.startup();
-        Zimbra.startupCLI();
+        Zmail.startupCLI();
         if (args.length == 0) {
             usage();
         }

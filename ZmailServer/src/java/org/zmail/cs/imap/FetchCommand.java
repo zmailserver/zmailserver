@@ -13,12 +13,12 @@
  * ***** END LICENSE BLOCK *****
  */
 
-package com.zimbra.cs.imap;
+package org.zmail.cs.imap;
 
 import java.util.List;
 
-import com.zimbra.common.util.StringUtil;
-import com.zimbra.common.util.ZimbraLog;
+import org.zmail.common.util.StringUtil;
+import org.zmail.common.util.ZmailLog;
 
 public class FetchCommand extends ImapCommand {
 
@@ -58,7 +58,7 @@ public class FetchCommand extends ImapCommand {
         // be processed
         if ((attributes & ImapHandler.FETCH_FROM_MIME) == 0 && parts != null && parts.size() == 1) {
             if (parts.get(0).isIgnoredExchangeHeader()) {
-                ZimbraLog.imap.warn("possible misconfigured client; requested ignored header in part %s", parts.get(0));
+                ZmailLog.imap.warn("possible misconfigured client; requested ignored header in part %s", parts.get(0));
                 parts.clear();
             }
         }

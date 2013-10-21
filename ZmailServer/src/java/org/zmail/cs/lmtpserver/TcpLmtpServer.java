@@ -12,23 +12,23 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.lmtpserver;
+package org.zmail.cs.lmtpserver;
 
 import java.util.HashMap;
 import java.util.Map;
 
-import com.zimbra.common.localconfig.LC;
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.common.stats.RealtimeStatsCallback;
-import com.zimbra.cs.stats.ZimbraPerf;
-import com.zimbra.cs.server.ProtocolHandler;
-import com.zimbra.cs.server.ServerThrottle;
-import com.zimbra.cs.server.TcpServer;
+import org.zmail.common.localconfig.LC;
+import org.zmail.common.service.ServiceException;
+import org.zmail.common.stats.RealtimeStatsCallback;
+import org.zmail.cs.stats.ZmailPerf;
+import org.zmail.cs.server.ProtocolHandler;
+import org.zmail.cs.server.ServerThrottle;
+import org.zmail.cs.server.TcpServer;
 
 public final class TcpLmtpServer extends TcpServer implements LmtpServer, RealtimeStatsCallback {
     public TcpLmtpServer(LmtpConfig config) throws ServiceException {
         super(config);
-        ZimbraPerf.addStatsCallback(this);
+        ZmailPerf.addStatsCallback(this);
         ServerThrottle.configureThrottle(config.getProtocol(), LC.lmtp_throttle_ip_limit.intValue(), 0, getThrottleSafeHosts());
     }
 
@@ -54,8 +54,8 @@ public final class TcpLmtpServer extends TcpServer implements LmtpServer, Realti
     @Override
     public Map<String, Object> getStatData() {
         Map<String, Object> data = new HashMap<String, Object>();
-        data.put(ZimbraPerf.RTS_LMTP_CONN, numActiveHandlers());
-        data.put(ZimbraPerf.RTS_LMTP_THREADS, numThreads());
+        data.put(ZmailPerf.RTS_LMTP_CONN, numActiveHandlers());
+        data.put(ZmailPerf.RTS_LMTP_THREADS, numThreads());
         return data;
     }
 }

@@ -1,4 +1,4 @@
-<Context path="/" docBase="${catalina.home}/webapps/zimbra" debug="0" >
+<Context path="/" docBase="${catalina.home}/webapps/zmail" debug="0" >
 
 </Context>
 

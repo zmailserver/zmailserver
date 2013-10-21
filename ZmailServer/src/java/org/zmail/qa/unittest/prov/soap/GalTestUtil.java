@@ -12,25 +12,25 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.qa.unittest.prov.soap;
+package org.zmail.qa.unittest.prov.soap;
 
 import org.junit.Assert;
 
-import com.zimbra.common.account.Key;
-import com.zimbra.common.account.Key.AccountBy;
-import com.zimbra.common.soap.AccountConstants;
-import com.zimbra.common.soap.AdminConstants;
-import com.zimbra.common.soap.Element;
-import com.zimbra.common.soap.SoapTransport;
-import com.zimbra.cs.account.Domain;
-import com.zimbra.cs.account.Provisioning;
-import com.zimbra.qa.unittest.TestUtil;
+import org.zmail.common.account.Key;
+import org.zmail.common.account.Key.AccountBy;
+import org.zmail.common.soap.AccountConstants;
+import org.zmail.common.soap.AdminConstants;
+import org.zmail.common.soap.Element;
+import org.zmail.common.soap.SoapTransport;
+import org.zmail.cs.account.Domain;
+import org.zmail.cs.account.Provisioning;
+import org.zmail.qa.unittest.TestUtil;
 
 public class GalTestUtil {
     static final String GAL_SYNC_ACCOUNT_NAME = "galsync";
 
     public static enum GSAType {
-        zimbra,
+        zmail,
         external,
         both
     }
@@ -56,7 +56,7 @@ public class GalTestUtil {
     public static void enableGalSyncAccount(Provisioning prov, String domainName, 
             String galSyncAcctLocalpart) 
     throws Exception {
-        enableGalSyncAccount(prov, domainName, galSyncAcctLocalpart, GSAType.zimbra);
+        enableGalSyncAccount(prov, domainName, galSyncAcctLocalpart, GSAType.zmail);
     }
     
     public static void enableGalSyncAccount(Provisioning prov, String domainName, GSAType type) 
@@ -88,10 +88,10 @@ public class GalTestUtil {
         String dataSourceName;
         String dataSourceType;
         String folderName;
-        if (type == GSAType.zimbra || type == GSAType.both) {
-            dataSourceName = "zimbra";
-            dataSourceType = "zimbra";
-            folderName = "zimbra-gal-contacts";
+        if (type == GSAType.zmail || type == GSAType.both) {
+            dataSourceName = "zmail";
+            dataSourceType = "zmail";
+            folderName = "zmail-gal-contacts";
         } else {
             dataSourceName = "external";
             dataSourceType = "ldap";
@@ -104,11 +104,11 @@ public class GalTestUtil {
         //
         // create gal sync account and data sources, then force sync
         //
-        String gsaZimbraId = GalTestUtil.createGalSyncAccountOrDataSource(
+        String gsaZmailId = GalTestUtil.createGalSyncAccountOrDataSource(
                 transport, galSyncAcctName, domainName, 
                 dataSourceName, dataSourceType, folderName);
         
-        GalTestUtil.syncGASDataSource(transport, gsaZimbraId, dataSourceName);
+        GalTestUtil.syncGASDataSource(transport, gsaZmailId, dataSourceName);
         
         if (type == GSAType.both) {
             dataSourceName = "external";
@@ -117,7 +117,7 @@ public class GalTestUtil {
             GalTestUtil.createGalSyncAccountOrDataSource(
                     transport, galSyncAcctName, domainName, 
                     dataSourceName, dataSourceType, folderName);
-            GalTestUtil.syncGASDataSource(transport, gsaZimbraId, dataSourceName);
+            GalTestUtil.syncGASDataSource(transport, gsaZmailId, dataSourceName);
         }
         
         //
@@ -127,7 +127,7 @@ public class GalTestUtil {
                 AdminConstants.REINDEX_REQUEST);
         eReIndex.addAttribute(AdminConstants.A_ACTION, "start");
         Element eMbox = eReIndex.addElement(AdminConstants.E_MAILBOX);
-        eMbox.addAttribute(AdminConstants.A_ID, gsaZimbraId);
+        eMbox.addAttribute(AdminConstants.A_ID, gsaZmailId);
         transport.invoke(eReIndex);
         
         // wait for the reindex to finish
@@ -161,14 +161,14 @@ public class GalTestUtil {
         return id;
     }
 
-    static void syncGASDataSource(SoapTransport transport, String gsaZimbraId, 
+    static void syncGASDataSource(SoapTransport transport, String gsaZmailId, 
             String dataSourceName) 
     throws Exception {
         Element eSyncReq = Element.create(transport.getRequestProtocol(), 
                 AdminConstants.SYNC_GAL_ACCOUNT_REQUEST);
         
         Element eAccount = eSyncReq.addElement(AdminConstants.E_ACCOUNT);
-        eAccount.addAttribute(AccountConstants.A_ID, gsaZimbraId);
+        eAccount.addAttribute(AccountConstants.A_ID, gsaZmailId);
         
         Element eDataSource = eAccount.addElement(AdminConstants.E_DATASOURCE);
         eDataSource.addAttribute(AdminConstants.A_RESET, "TRUE");

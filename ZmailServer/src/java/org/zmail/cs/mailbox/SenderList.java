@@ -12,7 +12,7 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.mailbox;
+package org.zmail.cs.mailbox;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -20,8 +20,8 @@ import java.util.Collections;
 import java.util.List;
 import java.util.ListIterator;
 
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.cs.mime.ParsedAddress;
+import org.zmail.common.service.ServiceException;
+import org.zmail.cs.mime.ParsedAddress;
 
 public class SenderList {
     public static class RefreshException extends Exception {

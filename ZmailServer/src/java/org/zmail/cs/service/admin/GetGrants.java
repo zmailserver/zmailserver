@@ -12,31 +12,31 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.service.admin;
+package org.zmail.cs.service.admin;
 
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-import com.zimbra.common.account.Key;
-import com.zimbra.common.account.Key.GranteeBy;
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.common.soap.AdminConstants;
-import com.zimbra.common.soap.Element;
-import com.zimbra.cs.account.Entry;
-import com.zimbra.cs.account.Provisioning;
-import com.zimbra.cs.account.accesscontrol.AdminRight;
-import com.zimbra.cs.account.accesscontrol.RightCommand;
-import com.zimbra.cs.account.accesscontrol.Rights.Admin;
-import com.zimbra.cs.account.accesscontrol.TargetType;
-import com.zimbra.soap.ZimbraSoapContext;
-import com.zimbra.soap.type.TargetBy;
+import org.zmail.common.account.Key;
+import org.zmail.common.account.Key.GranteeBy;
+import org.zmail.common.service.ServiceException;
+import org.zmail.common.soap.AdminConstants;
+import org.zmail.common.soap.Element;
+import org.zmail.cs.account.Entry;
+import org.zmail.cs.account.Provisioning;
+import org.zmail.cs.account.accesscontrol.AdminRight;
+import org.zmail.cs.account.accesscontrol.RightCommand;
+import org.zmail.cs.account.accesscontrol.Rights.Admin;
+import org.zmail.cs.account.accesscontrol.TargetType;
+import org.zmail.soap.ZmailSoapContext;
+import org.zmail.soap.type.TargetBy;
 
 public class GetGrants extends RightDocumentHandler {
     
     public Element handle(Element request, Map<String, Object> context) throws ServiceException {
-        ZimbraSoapContext zsc = getZimbraSoapContext(context);
+        ZmailSoapContext zsc = getZmailSoapContext(context);
         Provisioning prov = Provisioning.getInstance();
         
         String targetType = null;
@@ -76,7 +76,7 @@ public class GetGrants extends RightDocumentHandler {
                 targetType, targetBy, target,
                 granteeType, granteeBy, grantee, granteeIncludeGroupsGranteeBelongs);
         
-        // check if the authed admin can see the zimbraACE attr on 
+        // check if the authed admin can see the zmailACE attr on 
         // each of the target on which grants for the specified grantee are found
         Set<String> OKedTarget = new HashSet<String>();
         for (RightCommand.ACE ace : grants.getACEs()) {
@@ -98,10 +98,10 @@ public class GetGrants extends RightDocumentHandler {
     @Override
     public void docRights(List<AdminRight> relatedRights, List<String> notes) {
         relatedRights.add(Admin.R_viewGrants);
-        notes.add("Needs a get attr right of zimbraACE on each the target entry.  " +
+        notes.add("Needs a get attr right of zmailACE on each the target entry.  " +
                 "Granting the " + Admin.R_viewGrants.getName() + " is one way to do it, " +
                 "which will give the right on all target types.   Use inline right " +
                 "if more granularity is needed.   See doc for the " + Admin.R_viewGrants.getName() + 
-                " right in zimbra-rights.xml for more details.");
+                " right in zmail-rights.xml for more details.");
     }
 }

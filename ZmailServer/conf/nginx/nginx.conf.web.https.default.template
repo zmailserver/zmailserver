@@ -24,7 +24,7 @@ server
         # which attempts to send us to $host:$mailhostport, where:
         # 
         # $host is the host portion (excluding port) of the proxy URL
-        # $mailhostport is the zimbraMailPort as applies to the mailhost
+        # $mailhostport is the zmailMailPort as applies to the mailhost
         #   server being redirected to
         # 
         # This is the case when one mailhost in the upstream cluster is
@@ -44,7 +44,7 @@ server
 
         # End stray redirect hack
 
-        # Proxy to Zimbra Upstream
+        # Proxy to Zmail Upstream
         proxy_pass       ${web.upstream.target};
 
         # For audit
@@ -79,7 +79,7 @@ server
         # which attempts to send us to $host:$mailhostport, where:
         # 
         # $host is the host portion (excluding port) of the proxy URL
-        # $mailhostport is the zimbraMailPort as applies to the mailhost
+        # $mailhostport is the zmailMailPort as applies to the mailhost
         #   server being redirected to
         # 
         # This is the case when one mailhost in the upstream cluster is
@@ -99,7 +99,7 @@ server
 
         # End stray redirect hack
 
-        # Proxy to Zimbra Upstream
+        # Proxy to Zmail Upstream
         proxy_pass          ${web.upstream.target};
         proxy_read_timeout  ${web.upstream.polling.timeout};
         proxy_buffering     off;
@@ -135,7 +135,7 @@ server
         # which attempts to send us to $host:$mailhostport, where:
         #
         # $host is the host portion (excluding port) of the proxy URL
-        # $mailhostport is the zimbraMailPort as applies to the mailhost
+        # $mailhostport is the zmailMailPort as applies to the mailhost
         #   server being redirected to
         #
         # This is the case when one mailhost in the upstream cluster is
@@ -155,7 +155,7 @@ server
 
         # End stray redirect hack
 
-        # Proxy to Zimbra Upstream
+        # Proxy to Zmail Upstream
         proxy_pass          ${web.upstream.target};
         proxy_read_timeout  ${web.upstream.noop.timeout};
         proxy_buffering     off;
@@ -191,7 +191,7 @@ server
         # which attempts to send us to $host:$mailhostport, where:
         #
         # $host is the host portion (excluding port) of the proxy URL
-        # $mailhostport is the zimbraMailPort as applies to the mailhost
+        # $mailhostport is the zmailMailPort as applies to the mailhost
         #   server being redirected to
         #
         # This is the case when one mailhost in the upstream cluster is
@@ -211,7 +211,7 @@ server
 
         # End stray redirect hack
 
-        # Proxy to Zimbra Upstream
+        # Proxy to Zmail Upstream
         proxy_pass          ${web.upstream.target};
         proxy_read_timeout  ${web.upstream.waitset.timeout};
         proxy_buffering     off;

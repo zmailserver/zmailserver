@@ -16,11 +16,11 @@
 
 use strict;
 
-use lib "/opt/zimbra/zimbramon/lib";
-use Zimbra::Util::Common;
-use Zimbra::Mon::Logger;
+use lib "/opt/zmail/zmailmon/lib";
+use Zmail::Util::Common;
+use Zmail::Mon::Logger;
 
-my $platform=`/opt/zimbra/libexec/get_plat_tag.sh`;
+my $platform=`/opt/zmail/libexec/get_plat_tag.sh`;
 chomp $platform;
 
 my $MNTCMD;
@@ -43,8 +43,8 @@ clearPid();
 exit 0;
 
 sub checkPid {
-	if (-f "/opt/zimbra/log/zmqueuelog.pid") {
-		my $P = `cat /opt/zimbra/log/zmqueuelog.pid`;
+	if (-f "/opt/zmail/log/zmqueuelog.pid") {
+		my $P = `cat /opt/zmail/log/zmqueuelog.pid`;
 		chomp $P;
 		if ($P ne "") {
       system("kill -0 $P 2> /dev/null");
@@ -54,16 +54,16 @@ sub checkPid {
       }
 		}
 	}
-	`echo $$ > "/opt/zimbra/log/zmqueuelog.pid"`;
+	`echo $$ > "/opt/zmail/log/zmqueuelog.pid"`;
 }
 
 sub clearPid {
-	unlink ("/opt/zimbra/log/zmqueuelog.pid");
+	unlink ("/opt/zmail/log/zmqueuelog.pid");
 }
 
 sub logQueue {
 	my @status = ();
-	open STATUS, "/opt/zimbra/postfix/sbin/postqueue -p |" or die "Can't get status: $!";
+	open STATUS, "/opt/zmail/postfix/sbin/postqueue -p |" or die "Can't get status: $!";
 	@status = <STATUS>;
 	close STATUS;
 	my $kb = 0;
@@ -74,5 +74,5 @@ sub logQueue {
 		$kb = $foo[1];
 		$msgs = $foo[4];
 	}
-	Zimbra::Mon::Logger::Log( "info", "$dt, QUEUE: $kb $msgs" );
+	Zmail::Mon::Logger::Log( "info", "$dt, QUEUE: $kb $msgs" );
 }

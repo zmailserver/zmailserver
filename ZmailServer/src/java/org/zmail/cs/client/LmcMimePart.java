@@ -13,7 +13,7 @@
  * ***** END LICENSE BLOCK *****
  */
 
-package com.zimbra.cs.client;
+package org.zmail.cs.client;
 
 import java.util.ArrayList;
 import java.util.List;

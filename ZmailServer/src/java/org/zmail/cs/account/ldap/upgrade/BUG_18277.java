@@ -12,37 +12,37 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.account.ldap.upgrade;
+package org.zmail.cs.account.ldap.upgrade;
 
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.cs.account.Account;
-import com.zimbra.cs.account.Cos;
-import com.zimbra.cs.account.Domain;
-import com.zimbra.cs.account.Provisioning;
-import com.zimbra.common.account.Key;
-import com.zimbra.common.account.Key.AccountBy;
-import com.zimbra.common.account.ProvisioningConstants;
-import com.zimbra.cs.account.accesscontrol.GranteeType;
-import com.zimbra.cs.account.accesscontrol.InlineAttrRight;
-import com.zimbra.cs.account.accesscontrol.RightModifier;
-import com.zimbra.cs.account.accesscontrol.TargetType;
-import com.zimbra.cs.account.accesscontrol.generated.RightConsts;
-import com.zimbra.cs.account.ldap.LdapDIT;
-import com.zimbra.cs.ldap.IAttributes;
-import com.zimbra.cs.ldap.LdapClient;
-import com.zimbra.cs.ldap.LdapConstants;
-import com.zimbra.cs.ldap.LdapServerType;
-import com.zimbra.cs.ldap.LdapUsage;
-import com.zimbra.cs.ldap.SearchLdapOptions;
-import com.zimbra.cs.ldap.ZAttributes;
-import com.zimbra.cs.ldap.ZLdapContext;
-import com.zimbra.cs.ldap.ZSearchScope;
-import com.zimbra.soap.type.TargetBy;
+import org.zmail.common.service.ServiceException;
+import org.zmail.cs.account.Account;
+import org.zmail.cs.account.Cos;
+import org.zmail.cs.account.Domain;
+import org.zmail.cs.account.Provisioning;
+import org.zmail.common.account.Key;
+import org.zmail.common.account.Key.AccountBy;
+import org.zmail.common.account.ProvisioningConstants;
+import org.zmail.cs.account.accesscontrol.GranteeType;
+import org.zmail.cs.account.accesscontrol.InlineAttrRight;
+import org.zmail.cs.account.accesscontrol.RightModifier;
+import org.zmail.cs.account.accesscontrol.TargetType;
+import org.zmail.cs.account.accesscontrol.generated.RightConsts;
+import org.zmail.cs.account.ldap.LdapDIT;
+import org.zmail.cs.ldap.IAttributes;
+import org.zmail.cs.ldap.LdapClient;
+import org.zmail.cs.ldap.LdapConstants;
+import org.zmail.cs.ldap.LdapServerType;
+import org.zmail.cs.ldap.LdapUsage;
+import org.zmail.cs.ldap.SearchLdapOptions;
+import org.zmail.cs.ldap.ZAttributes;
+import org.zmail.cs.ldap.ZLdapContext;
+import org.zmail.cs.ldap.ZSearchScope;
+import org.zmail.soap.type.TargetBy;
 
 public class BUG_18277 extends UpgradeOp {
 
@@ -132,35 +132,35 @@ public class BUG_18277 extends UpgradeOp {
                 return;
             }
             
-            String globalAdminId = getZimbraIdIfGlobalAdmin(ldapAttrs);
+            String globalAdminId = getZmailIdIfGlobalAdmin(ldapAttrs);
             if (globalAdminId != null)
                 globalAdminIds.add(globalAdminId);
             else {
-                String domainAdminId = getZimbraIdIfDomainOnlyAdmin(ldapAttrs);
+                String domainAdminId = getZmailIdIfDomainOnlyAdmin(ldapAttrs);
                 if (domainAdminId != null)
                     domainAdminIds.add(domainAdminId);
             }
         }
         
         
-        private String getZimbraIdIfDomainOnlyAdmin(ZAttributes attrs) throws ServiceException {
-            String isAdmin = attrs.getAttrString(Provisioning.A_zimbraIsAdminAccount);
-            String isDomainAdmin = attrs.getAttrString(Provisioning.A_zimbraIsDomainAdminAccount);
-            String isDelegatedAdmin = attrs.getAttrString(Provisioning.A_zimbraIsDelegatedAdminAccount);
+        private String getZmailIdIfDomainOnlyAdmin(ZAttributes attrs) throws ServiceException {
+            String isAdmin = attrs.getAttrString(Provisioning.A_zmailIsAdminAccount);
+            String isDomainAdmin = attrs.getAttrString(Provisioning.A_zmailIsDomainAdminAccount);
+            String isDelegatedAdmin = attrs.getAttrString(Provisioning.A_zmailIsDelegatedAdminAccount);
             
             if (LdapConstants.LDAP_TRUE.equals(isDomainAdmin) &&
                 !LdapConstants.LDAP_TRUE.equals(isAdmin) &&         // is a global admin, don't touch it
                 !LdapConstants.LDAP_TRUE.equals(isDelegatedAdmin))  // already migrated, don't touch it
-                return attrs.getAttrString(Provisioning.A_zimbraId);
+                return attrs.getAttrString(Provisioning.A_zmailId);
             else
                 return null;
         }
         
-        private String getZimbraIdIfGlobalAdmin(ZAttributes attrs) throws ServiceException {
-            String isAdmin = attrs.getAttrString(Provisioning.A_zimbraIsAdminAccount);
+        private String getZmailIdIfGlobalAdmin(ZAttributes attrs) throws ServiceException {
+            String isAdmin = attrs.getAttrString(Provisioning.A_zmailIsAdminAccount);
             
             if (LdapConstants.LDAP_TRUE.equals(isAdmin))
-                return attrs.getAttrString(Provisioning.A_zimbraId);
+                return attrs.getAttrString(Provisioning.A_zmailId);
             else
                 return null;
         }
@@ -170,14 +170,14 @@ public class BUG_18277 extends UpgradeOp {
         
         LdapDIT dit = prov.getDIT();
         String returnAttrs[] = new String[] {Provisioning.A_objectClass,
-                                             Provisioning.A_zimbraId,
-                                             Provisioning.A_zimbraIsAdminAccount,
-                                             Provisioning.A_zimbraIsDomainAdminAccount,
-                                             Provisioning.A_zimbraIsDelegatedAdminAccount};
+                                             Provisioning.A_zmailId,
+                                             Provisioning.A_zmailIsAdminAccount,
+                                             Provisioning.A_zmailIsDomainAdminAccount,
+                                             Provisioning.A_zmailIsDelegatedAdminAccount};
         
         String configBranchBaseDn = dit.configBranchBaseDN();
         String base = dit.mailBranchBaseDN();
-        String query = "(&(objectclass=zimbraAccount)(|(zimbraIsDomainAdminAccount=TRUE)(zimbraIsAdminAccount=TRUE)))";
+        String query = "(&(objectclass=zmailAccount)(|(zmailIsDomainAdminAccount=TRUE)(zmailIsAdminAccount=TRUE)))";
         
         ZLdapContext zlc = null; 
         try {
@@ -202,7 +202,7 @@ public class BUG_18277 extends UpgradeOp {
         // turn it into a delegated admin
         //
         HashMap<String,Object> attrs = new HashMap<String,Object>();
-        attrs.put(Provisioning.A_zimbraIsDelegatedAdminAccount, ProvisioningConstants.TRUE);
+        attrs.put(Provisioning.A_zmailIsDelegatedAdminAccount, ProvisioningConstants.TRUE);
         prov.modifyAttrs(domainAdmin, attrs);
         
         //
@@ -236,16 +236,16 @@ public class BUG_18277 extends UpgradeOp {
         //
         // quota
         //
-        long maxQuota = domainAdmin.getLongAttr(Provisioning.A_zimbraDomainAdminMaxMailQuota, -1);
+        long maxQuota = domainAdmin.getLongAttr(Provisioning.A_zmailDomainAdminMaxMailQuota, -1);
         if (maxQuota == -1)  // they don't have permission to change quota
             prov.grantRight(TargetType.domain.getCode(), TargetBy.id, domain.getId(), 
                     GranteeType.GT_USER.getCode(), Key.GranteeBy.id, domainAdmin.getId(), null,
-                    InlineAttrRight.composeSetRight(TargetType.account, Provisioning.A_zimbraMailQuota), RightModifier.RM_DENY);
+                    InlineAttrRight.composeSetRight(TargetType.account, Provisioning.A_zmailMailQuota), RightModifier.RM_DENY);
             
     }
     
     private void grantCosRights(Domain domain, Account domainAdmin) throws ServiceException {
-        Set<String> allowedCoses = domain.getMultiAttrSet(Provisioning.A_zimbraDomainCOSMaxAccounts);
+        Set<String> allowedCoses = domain.getMultiAttrSet(Provisioning.A_zmailDomainCOSMaxAccounts);
         
         for (String c : allowedCoses) {
             String[] parts = c.split(":");
@@ -285,7 +285,7 @@ public class BUG_18277 extends UpgradeOp {
     
     private void setAdminUIComp(Account admin, String[] adminUIComp) throws ServiceException {
         
-        String attrName = Provisioning.A_zimbraAdminConsoleUIComponents;
+        String attrName = Provisioning.A_zmailAdminConsoleUIComponents;
         
         // do nothing if already set, should we?
         /*

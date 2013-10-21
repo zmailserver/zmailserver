@@ -12,18 +12,18 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.wiki;
+package org.zmail.cs.wiki;
 
 import java.util.Map;
 
-import com.zimbra.common.util.MapUtil;
+import org.zmail.common.util.MapUtil;
 
-import com.zimbra.cs.account.Account;
-import com.zimbra.cs.account.Provisioning;
-import com.zimbra.cs.account.Server;
-import com.zimbra.cs.mailbox.MailItem;
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.common.util.Pair;
+import org.zmail.cs.account.Account;
+import org.zmail.cs.account.Provisioning;
+import org.zmail.cs.account.Server;
+import org.zmail.cs.mailbox.MailItem;
+import org.zmail.common.service.ServiceException;
+import org.zmail.common.util.Pair;
 
 /**
  * Cache for the composited Wiki / Notebook pages.  Each pages are fully
@@ -36,7 +36,7 @@ import com.zimbra.common.util.Pair;
  * with the same set of privileges.
  * 
  * The size of the page cache is set by config variable 
- * <code>zimbraNotebookPageCacheSize</code>, either globally or by each server.
+ * <code>zmailNotebookPageCacheSize</code>, either globally or by each server.
  * 
  * @author jylee
  *
@@ -52,7 +52,7 @@ public class PageCache {
 		int cacheSize;
 		try {
 			Server localServer = prov.getLocalServer();
-			cacheSize = localServer.getIntAttr(Provisioning.A_zimbraNotebookPageCacheSize, DEFAULT_CACHE_SIZE);
+			cacheSize = localServer.getIntAttr(Provisioning.A_zmailNotebookPageCacheSize, DEFAULT_CACHE_SIZE);
 		} catch (ServiceException se) {
 			cacheSize = DEFAULT_CACHE_SIZE;
 		}

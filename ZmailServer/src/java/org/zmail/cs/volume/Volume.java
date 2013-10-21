@@ -12,17 +12,17 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.volume;
+package org.zmail.cs.volume;
 
 import java.io.File;
 
 import com.google.common.base.Objects;
 import com.google.common.base.Strings;
-import com.zimbra.common.localconfig.LC;
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.cs.mailbox.Metadata;
-import com.zimbra.cs.store.IncomingDirectory;
-import com.zimbra.soap.admin.type.VolumeInfo;
+import org.zmail.common.localconfig.LC;
+import org.zmail.common.service.ServiceException;
+import org.zmail.cs.mailbox.Metadata;
+import org.zmail.cs.store.IncomingDirectory;
+import org.zmail.soap.admin.type.VolumeInfo;
 
 /**
  * Based on default settings, there are 256 directories. We write blobs for id's 0-4095 to directory 0, 4096-8191 to
@@ -315,7 +315,7 @@ public final class Volume {
     }
 
     public static String getAbsolutePath(String path) {
-        return LC.zimbra_relative_volume_path.booleanValue() ? LC.zimbra_home.value() + File.separator + path : path;
+        return LC.zmail_relative_volume_path.booleanValue() ? LC.zmail_home.value() + File.separator + path : path;
     }
 
     private StringBuilder getMailboxDir(int mboxId, String subdir) {
@@ -353,7 +353,7 @@ public final class Volume {
      */
     private String normalizePath(String path) throws VolumeServiceException {
         // skip normalization for relative path
-        if (LC.zimbra_relative_volume_path.booleanValue()) {
+        if (LC.zmail_relative_volume_path.booleanValue()) {
             return path;
         }
         StringBuilder result = new StringBuilder();

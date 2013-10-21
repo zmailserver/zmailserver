@@ -13,21 +13,21 @@
  * ***** END LICENSE BLOCK *****
  */
 
-package com.zimbra.cs.index;
+package org.zmail.cs.index;
 
 import java.io.IOException;
 import java.util.LinkedList;
 import java.util.List;
 
-import com.zimbra.common.service.ServiceException;
+import org.zmail.common.service.ServiceException;
 
 /**
  * Groups hit results for various reasons.
  */
-public abstract class BufferingResultsGrouper implements ZimbraQueryResults {
+public abstract class BufferingResultsGrouper implements ZmailQueryResults {
 
-    protected final ZimbraQueryResults hits;
-    protected List<ZimbraHit> bufferedHit = new LinkedList<ZimbraHit>();
+    protected final ZmailQueryResults hits;
+    protected List<ZmailHit> bufferedHit = new LinkedList<ZmailHit>();
     protected boolean atStart = true;
 
     /**
@@ -43,7 +43,7 @@ public abstract class BufferingResultsGrouper implements ZimbraQueryResults {
         return hits.getSortBy();
     }
 
-    public BufferingResultsGrouper(ZimbraQueryResults hits) {
+    public BufferingResultsGrouper(ZmailQueryResults hits) {
         this.hits = hits;
     }
 
@@ -67,7 +67,7 @@ public abstract class BufferingResultsGrouper implements ZimbraQueryResults {
     }
 
     @Override
-    public ZimbraHit peekNext() throws ServiceException {
+    public ZmailHit peekNext() throws ServiceException {
         if (bufferHits()) {
             return bufferedHit.get(0);
         } else {
@@ -76,7 +76,7 @@ public abstract class BufferingResultsGrouper implements ZimbraQueryResults {
     }
 
     @Override
-    public ZimbraHit skipToHit(int hitNo) throws ServiceException {
+    public ZmailHit skipToHit(int hitNo) throws ServiceException {
         resetIterator();
         for (int i = 0; i < hitNo; i++) {
             if (!hasNext()) {
@@ -88,7 +88,7 @@ public abstract class BufferingResultsGrouper implements ZimbraQueryResults {
     }
 
     @Override
-    public ZimbraHit getNext() throws ServiceException {
+    public ZmailHit getNext() throws ServiceException {
         atStart = false;
         if (bufferHits()) {
             return bufferedHit.remove(0);

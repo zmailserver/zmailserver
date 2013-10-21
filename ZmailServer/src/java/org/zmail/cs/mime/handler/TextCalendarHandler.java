@@ -12,7 +12,7 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.mime.handler;
+package org.zmail.cs.mime.handler;
 
 import java.io.InputStream;
 import java.util.HashSet;
@@ -25,20 +25,20 @@ import net.fortuna.ical4j.data.ParserException;
 
 import org.apache.lucene.document.Document;
 
-import com.zimbra.common.calendar.ZCalendar.ICalTok;
-import com.zimbra.common.calendar.ZCalendar.ZCalendarBuilder;
-import com.zimbra.common.calendar.ZCalendar.ZComponent;
-import com.zimbra.common.calendar.ZCalendar.ZICalendarParseHandler;
-import com.zimbra.common.calendar.ZCalendar.ZProperty;
-import com.zimbra.common.calendar.ZCalendar.ZVCalendar;
-import com.zimbra.common.mime.MimeConstants;
-import com.zimbra.common.util.ByteUtil;
-import com.zimbra.common.util.ZimbraLog;
-import com.zimbra.cs.convert.AttachmentInfo;
-import com.zimbra.cs.mime.Mime;
-import com.zimbra.cs.mime.MimeHandler;
-import com.zimbra.cs.mime.MimeHandlerException;
-import com.zimbra.cs.mime.MimeHandlerManager;
+import org.zmail.common.calendar.ZCalendar.ICalTok;
+import org.zmail.common.calendar.ZCalendar.ZCalendarBuilder;
+import org.zmail.common.calendar.ZCalendar.ZComponent;
+import org.zmail.common.calendar.ZCalendar.ZICalendarParseHandler;
+import org.zmail.common.calendar.ZCalendar.ZProperty;
+import org.zmail.common.calendar.ZCalendar.ZVCalendar;
+import org.zmail.common.mime.MimeConstants;
+import org.zmail.common.util.ByteUtil;
+import org.zmail.common.util.ZmailLog;
+import org.zmail.cs.convert.AttachmentInfo;
+import org.zmail.cs.mime.Mime;
+import org.zmail.cs.mime.MimeHandler;
+import org.zmail.cs.mime.MimeHandlerException;
+import org.zmail.cs.mime.MimeHandlerManager;
 
 public class TextCalendarHandler extends MimeHandler {
     private String mContent;
@@ -104,7 +104,7 @@ public class TextCalendarHandler extends MimeHandler {
             }
         } catch (Exception e) {
             mContent = "";
-            ZimbraLog.index.warn("error reading text/calendar mime part", e);
+            ZmailLog.index.warn("error reading text/calendar mime part", e);
             throw new MimeHandlerException(e);
         } finally {
             ByteUtil.closeStream(is);

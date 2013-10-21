@@ -13,34 +13,34 @@
  * ***** END LICENSE BLOCK *****
  */
 
-package com.zimbra.cs.service.mail;
+package org.zmail.cs.service.mail;
 
 import java.util.Map;
 
 import javax.mail.MessagingException;
 
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.common.soap.Element;
-import com.zimbra.common.soap.MailConstants;
-import com.zimbra.common.util.ZimbraLog;
-import com.zimbra.cs.account.Account;
-import com.zimbra.cs.mailbox.CalendarItem;
-import com.zimbra.cs.mailbox.Mailbox;
-import com.zimbra.cs.mailbox.OperationContext;
-import com.zimbra.cs.mailbox.Mailbox.AddInviteData;
-import com.zimbra.cs.mailbox.Mailbox.SetCalendarItemData;
-import com.zimbra.cs.mailbox.calendar.CalendarMailSender;
-import com.zimbra.cs.mailbox.calendar.Invite;
-import com.zimbra.cs.mailbox.calendar.RecurId;
-import com.zimbra.cs.mailbox.calendar.ZOrganizer;
-import com.zimbra.cs.util.AccountUtil;
-import com.zimbra.soap.ZimbraSoapContext;
+import org.zmail.common.service.ServiceException;
+import org.zmail.common.soap.Element;
+import org.zmail.common.soap.MailConstants;
+import org.zmail.common.util.ZmailLog;
+import org.zmail.cs.account.Account;
+import org.zmail.cs.mailbox.CalendarItem;
+import org.zmail.cs.mailbox.Mailbox;
+import org.zmail.cs.mailbox.OperationContext;
+import org.zmail.cs.mailbox.Mailbox.AddInviteData;
+import org.zmail.cs.mailbox.Mailbox.SetCalendarItemData;
+import org.zmail.cs.mailbox.calendar.CalendarMailSender;
+import org.zmail.cs.mailbox.calendar.Invite;
+import org.zmail.cs.mailbox.calendar.RecurId;
+import org.zmail.cs.mailbox.calendar.ZOrganizer;
+import org.zmail.cs.util.AccountUtil;
+import org.zmail.soap.ZmailSoapContext;
 
 public class AddCalendarItemInvite extends CalendarRequest {
 
     protected class AddInviteParser extends ParseMimeMessage.InviteParser {
         @Override
-        public ParseMimeMessage.InviteParserResult parseInviteElement(ZimbraSoapContext lc, OperationContext octxt,
+        public ParseMimeMessage.InviteParserResult parseInviteElement(ZmailSoapContext lc, OperationContext octxt,
                 Account account, Element inviteElem) throws ServiceException {
             return CalendarUtils.parseInviteForAddInvite(account, getItemType(), inviteElem, null);
         }
@@ -48,7 +48,7 @@ public class AddCalendarItemInvite extends CalendarRequest {
 
     @Override
     public Element handle(Element request, Map<String, Object> context) throws ServiceException {
-        ZimbraSoapContext zsc = getZimbraSoapContext(context);
+        ZmailSoapContext zsc = getZmailSoapContext(context);
         Account acct = getRequestedAccount(zsc);
         Mailbox mbox = getRequestedMailbox(zsc);
         OperationContext octxt = getOperationContext(zsc, context);
@@ -71,7 +71,7 @@ public class AddCalendarItemInvite extends CalendarRequest {
         // it's the correct organizer.
         if (!inv.hasOrganizer() && inv.hasOtherAttendees()) {
             if (scid.message == null) {
-                ZimbraLog.calendar.info(
+                ZmailLog.calendar.info(
                         "Got malformed invite without organizer.  Clearing attendees to prevent inadvertent cancels.");
                 inv.clearAttendees();
             } else {
@@ -88,13 +88,13 @@ public class AddCalendarItemInvite extends CalendarRequest {
                     }
                     if (intendedForAddress != null && intendedForAddress.length() > 0) {
                         if (intendedForAddress.equalsIgnoreCase(fromEmail)) {
-                            ZimbraLog.calendar.info(
+                            ZmailLog.calendar.info(
                                     "Got malformed invite without organizer.  Clearing attendees to prevent inadvertent cancels.");
                             inv.clearAttendees();
                             dangerousSender = true;
                         }
                     } else if (AccountUtil.addressMatchesAccount(acct, fromEmail)) {
-                        ZimbraLog.calendar.info(
+                        ZmailLog.calendar.info(
                                 "Got malformed invite without organizer.  Clearing attendees to prevent inadvertent cancels.");
                         inv.clearAttendees();
                         dangerousSender = true;
@@ -105,7 +105,7 @@ public class AddCalendarItemInvite extends CalendarRequest {
                         if (senderEmail != null && !senderEmail.equalsIgnoreCase(fromEmail))
                             org.setSentBy(senderEmail);
                         inv.setOrganizer(org);
-                        ZimbraLog.calendar.info(
+                        ZmailLog.calendar.info(
                                 "Got malformed invite that lists attendees without specifying an organizer.  " +
                                 "Defaulting organizer to: " + org.toString());
                     }
@@ -116,11 +116,11 @@ public class AddCalendarItemInvite extends CalendarRequest {
         // trace logging
         String calItemIdStr = calItem != null ? Integer.toString(calItem.getId()) : "(new)";
         if (!inv.hasRecurId())
-            ZimbraLog.calendar.info("<AddCalendarItemInvite> id=%s, folderId=%d, subject=\"%s\", UID=%s",
+            ZmailLog.calendar.info("<AddCalendarItemInvite> id=%s, folderId=%d, subject=\"%s\", UID=%s",
                     calItemIdStr, folderId, inv.isPublic() ? inv.getName() : "(private)",
                     inv.getUid());
         else
-            ZimbraLog.calendar.info("<AddCalendarItemInvite> id=%s, folderId=%d, subject=\"%s\", UID=%s, recurId=%s",
+            ZmailLog.calendar.info("<AddCalendarItemInvite> id=%s, folderId=%d, subject=\"%s\", UID=%s, recurId=%s",
                     calItemIdStr, folderId, inv.isPublic() ? inv.getName() : "(private)",
                     inv.getUid(), inv.getRecurId().getDtZ());
 

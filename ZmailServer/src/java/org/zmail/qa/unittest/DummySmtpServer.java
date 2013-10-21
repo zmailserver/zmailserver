@@ -13,7 +13,7 @@
  * ***** END LICENSE BLOCK *****
  */
 
-package com.zimbra.qa.unittest;
+package org.zmail.qa.unittest;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -27,7 +27,7 @@ import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import com.zimbra.common.util.ZimbraLog;
+import org.zmail.common.util.ZmailLog;
 
 public class DummySmtpServer
 implements Runnable
@@ -102,7 +102,7 @@ implements Runnable
                 }
             }
         } catch (Exception e) {
-            ZimbraLog.test.error("Error in %s.", DummySmtpServer.class.getSimpleName(), e);
+            ZmailLog.test.error("Error in %s.", DummySmtpServer.class.getSimpleName(), e);
         } finally {
             try {
                 if (mOut != null) {

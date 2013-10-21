@@ -12,9 +12,9 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.datasource;
+package org.zmail.cs.datasource;
 
-import com.zimbra.cs.account.DataSource;
+import org.zmail.cs.account.DataSource;
 
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.Map;

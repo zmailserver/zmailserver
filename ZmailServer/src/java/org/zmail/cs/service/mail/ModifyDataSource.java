@@ -12,29 +12,29 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.service.mail;
+package org.zmail.cs.service.mail;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
 
-import com.zimbra.common.account.Key;
-import com.zimbra.common.account.Key.DataSourceBy;
-import com.zimbra.soap.admin.type.DataSourceType;
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.common.soap.Element;
-import com.zimbra.common.soap.MailConstants;
-import com.zimbra.common.soap.SoapFaultException;
-import com.zimbra.cs.account.Account;
-import com.zimbra.cs.account.DataSource;
-import com.zimbra.cs.account.Provisioning;
-import com.zimbra.cs.datasource.DataSourceManager;
-import com.zimbra.cs.db.DbDataSource;
-import com.zimbra.cs.db.DbPop3Message;
-import com.zimbra.cs.ldap.LdapUtil;
-import com.zimbra.cs.mailbox.Mailbox;
-import com.zimbra.soap.ZimbraSoapContext;
+import org.zmail.common.account.Key;
+import org.zmail.common.account.Key.DataSourceBy;
+import org.zmail.soap.admin.type.DataSourceType;
+import org.zmail.common.service.ServiceException;
+import org.zmail.common.soap.Element;
+import org.zmail.common.soap.MailConstants;
+import org.zmail.common.soap.SoapFaultException;
+import org.zmail.cs.account.Account;
+import org.zmail.cs.account.DataSource;
+import org.zmail.cs.account.Provisioning;
+import org.zmail.cs.datasource.DataSourceManager;
+import org.zmail.cs.db.DbDataSource;
+import org.zmail.cs.db.DbPop3Message;
+import org.zmail.cs.ldap.LdapUtil;
+import org.zmail.cs.mailbox.Mailbox;
+import org.zmail.soap.ZmailSoapContext;
 
 
 public class ModifyDataSource extends MailDocumentHandler {
@@ -42,7 +42,7 @@ public class ModifyDataSource extends MailDocumentHandler {
     @Override
     public Element handle(Element request, Map<String, Object> context)
     throws ServiceException, SoapFaultException {
-        ZimbraSoapContext zsc = getZimbraSoapContext(context);
+        ZmailSoapContext zsc = getZmailSoapContext(context);
         Provisioning prov = Provisioning.getInstance();
         Account account = getRequestedAccount(zsc);
 
@@ -63,38 +63,38 @@ public class ModifyDataSource extends MailDocumentHandler {
         Map<String, Object> dsAttrs = new HashMap<String, Object>();
         String value = eDataSource.getAttribute(MailConstants.A_NAME, null);
         if (value != null)
-            dsAttrs.put(Provisioning.A_zimbraDataSourceName, value);
+            dsAttrs.put(Provisioning.A_zmailDataSourceName, value);
         value = eDataSource.getAttribute(MailConstants.A_DS_IS_ENABLED, null);
         if (value != null)
-            dsAttrs.put(Provisioning.A_zimbraDataSourceEnabled,
+            dsAttrs.put(Provisioning.A_zmailDataSourceEnabled,
                 LdapUtil.getLdapBooleanString(eDataSource.getAttributeBool(MailConstants.A_DS_IS_ENABLED)));
         value = eDataSource.getAttribute(MailConstants.A_FOLDER, null);
         if (value != null) {
             Mailbox mbox = getRequestedMailbox(zsc);
             CreateDataSource.validateFolderId(account, mbox, eDataSource, type);
-        	dsAttrs.put(Provisioning.A_zimbraDataSourceFolderId, value);
+        	dsAttrs.put(Provisioning.A_zmailDataSourceFolderId, value);
         }
 
         value = eDataSource.getAttribute(MailConstants.A_DS_HOST, null);
         if (value != null && !value.equals(ds.getHost())) {
-            dsAttrs.put(Provisioning.A_zimbraDataSourceHost, value);
+            dsAttrs.put(Provisioning.A_zmailDataSourceHost, value);
         }
 
         value = eDataSource.getAttribute(MailConstants.A_DS_PORT, null);
         if (value != null)
-        	dsAttrs.put(Provisioning.A_zimbraDataSourcePort, value);
+        	dsAttrs.put(Provisioning.A_zmailDataSourcePort, value);
         value = eDataSource.getAttribute(MailConstants.A_DS_CONNECTION_TYPE, null);
         if (value != null)
-            dsAttrs.put(Provisioning.A_zimbraDataSourceConnectionType, value);
+            dsAttrs.put(Provisioning.A_zmailDataSourceConnectionType, value);
 
         value = eDataSource.getAttribute(MailConstants.A_DS_USERNAME, null);
         if (value != null && !value.equals(ds.getUsername())) {
-        	dsAttrs.put(Provisioning.A_zimbraDataSourceUsername, value);
+        	dsAttrs.put(Provisioning.A_zmailDataSourceUsername, value);
         }
 
         value = eDataSource.getAttribute(MailConstants.A_DS_PASSWORD, null);
         if (value != null)
-        	dsAttrs.put(Provisioning.A_zimbraDataSourcePassword, value);
+        	dsAttrs.put(Provisioning.A_zmailDataSourcePassword, value);
 
         value = eDataSource.getAttribute(MailConstants.A_DS_LEAVE_ON_SERVER, null);
         if (value != null) {
@@ -105,7 +105,7 @@ public class ModifyDataSource extends MailDocumentHandler {
             }
             boolean newValue = eDataSource.getAttributeBool(MailConstants.A_DS_LEAVE_ON_SERVER);
             if (newValue != ds.leaveOnServer()) {
-                dsAttrs.put(Provisioning.A_zimbraDataSourceLeaveOnServer,
+                dsAttrs.put(Provisioning.A_zmailDataSourceLeaveOnServer,
                     LdapUtil.getLdapBooleanString(newValue));
                 Mailbox mbox = getRequestedMailbox(zsc);
                 DbPop3Message.deleteUids(mbox, ds.getId());
@@ -115,13 +115,13 @@ public class ModifyDataSource extends MailDocumentHandler {
 
         value = eDataSource.getAttribute(MailConstants.A_DS_POLLING_INTERVAL, null);
         if (value != null) {
-            dsAttrs.put(Provisioning.A_zimbraDataSourcePollingInterval, value);
+            dsAttrs.put(Provisioning.A_zmailDataSourcePollingInterval, value);
         }
 
         // import class
         String importClass = eDataSource.getAttribute(MailConstants.A_DS_IMPORT_CLASS, DataSourceManager.getDefaultImportClass(type));
         if (importClass != null) {
-        	dsAttrs.put(Provisioning.A_zimbraDataSourceImportClassName, importClass);
+        	dsAttrs.put(Provisioning.A_zmailDataSourceImportClassName, importClass);
         }
 
         processCommonOptionalAttrs(dsAttrs, eDataSource);
@@ -138,35 +138,35 @@ public class ModifyDataSource extends MailDocumentHandler {
 
         value = eDataSource.getAttribute(MailConstants.A_DS_EMAIL_ADDRESS, null);
         if (value != null)
-            dsAttrs.put(Provisioning.A_zimbraDataSourceEmailAddress, value);
+            dsAttrs.put(Provisioning.A_zmailDataSourceEmailAddress, value);
 
         value = eDataSource.getAttribute(MailConstants.A_DS_USE_ADDRESS_FOR_FORWARD_REPLY, null);
         if (value != null)
-            dsAttrs.put(Provisioning.A_zimbraDataSourceUseAddressForForwardReply,
+            dsAttrs.put(Provisioning.A_zmailDataSourceUseAddressForForwardReply,
                     LdapUtil.getLdapBooleanString(eDataSource.getAttributeBool(MailConstants.A_DS_USE_ADDRESS_FOR_FORWARD_REPLY, false)));
 
         value = eDataSource.getAttribute(MailConstants.A_DS_DEFAULT_SIGNATURE, null);
         if (value != null)
-            dsAttrs.put(Provisioning.A_zimbraPrefDefaultSignatureId, value);
+            dsAttrs.put(Provisioning.A_zmailPrefDefaultSignatureId, value);
 
         value = eDataSource.getAttribute(MailConstants.A_DS_FORWARD_REPLY_SIGNATURE, null);
         if (value != null)
-            dsAttrs.put(Provisioning.A_zimbraPrefForwardReplySignatureId, value);
+            dsAttrs.put(Provisioning.A_zmailPrefForwardReplySignatureId, value);
 
         value = eDataSource.getAttribute(MailConstants.A_DS_FROM_DISPLAY, null);
         if (value != null)
-            dsAttrs.put(Provisioning.A_zimbraPrefFromDisplay, value);
+            dsAttrs.put(Provisioning.A_zmailPrefFromDisplay, value);
 
         value = eDataSource.getAttribute(MailConstants.A_DS_REPLYTO_ADDRESS, null);
         if (value != null)
-            dsAttrs.put(Provisioning.A_zimbraPrefReplyToAddress, value);
+            dsAttrs.put(Provisioning.A_zmailPrefReplyToAddress, value);
 
         value = eDataSource.getAttribute(MailConstants.A_DS_REPLYTO_DISPLAY, null);
         if (value != null)
-            dsAttrs.put(Provisioning.A_zimbraPrefReplyToDisplay, value);
+            dsAttrs.put(Provisioning.A_zmailPrefReplyToDisplay, value);
         value = eDataSource.getAttribute(MailConstants.A_DS_POLLING_INTERVAL, null);
         if (value != null)
-            dsAttrs.put(Provisioning.A_zimbraDataSourcePollingInterval, value);
+            dsAttrs.put(Provisioning.A_zmailDataSourcePollingInterval, value);
 
         Iterator<Element> attrs = eDataSource.elementIterator(MailConstants.E_ATTRIBUTE);
         if (attrs != null && attrs.hasNext()) {
@@ -174,7 +174,7 @@ public class ModifyDataSource extends MailDocumentHandler {
         	while (attrs.hasNext()) {
         		attrList.add(attrs.next().getText());
         	}
-        	dsAttrs.put(Provisioning.A_zimbraDataSourceAttribute, attrList.toArray(new String[0]));
+        	dsAttrs.put(Provisioning.A_zmailDataSourceAttribute, attrList.toArray(new String[0]));
         }
     }
 }

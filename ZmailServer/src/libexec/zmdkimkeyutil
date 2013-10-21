@@ -14,22 +14,22 @@
 # ***** END LICENSE BLOCK *****
 #
 use strict;
-use lib '/opt/zimbra/zimbramon/lib';
+use lib '/opt/zmail/zmailmon/lib';
 use Net::LDAP;
 use Net::LDAP::Util qw ( ldap_error_name );
 use XML::Simple;
 use Getopt::Long;
 use Data::UUID;
 
-if ( ! -d "/opt/zimbra/opendkim" ) {
+if ( ! -d "/opt/zmail/opendkim" ) {
   print "ERROR: opendkim does not appear to be installed - exiting\n";
   exit(1);
 }
 
 my $id = getpwuid($<);
 chomp $id;
-if ($id ne "zimbra") {
-  print STDERR "Error: must be run as zimbra user\n";
+if ($id ne "zmail") {
+  print STDERR "Error: must be run as zmail user\n";
   exit (1);
 }
 
@@ -70,20 +70,20 @@ if ($add+$query+$update+$delete > 1) {
   usage(0);
 }
 
-my $localxml = XMLin("/opt/zimbra/conf/localconfig.xml");
+my $localxml = XMLin("/opt/zmail/conf/localconfig.xml");
 my $ldap_master_url = $localxml->{key}->{ldap_master_url}->{value};
-my $zimbra_admin_dn = $localxml->{key}->{zimbra_ldap_userdn}->{value};
-my $zimbra_admin_password = $localxml->{key}->{zimbra_ldap_password}->{value};
-chomp($zimbra_admin_password);
-my $zimbra_home = $localxml->{key}->{zimbra_home}->{value};
+my $zmail_admin_dn = $localxml->{key}->{zmail_ldap_userdn}->{value};
+my $zmail_admin_password = $localxml->{key}->{zmail_ldap_password}->{value};
+chomp($zmail_admin_password);
+my $zmail_home = $localxml->{key}->{zmail_home}->{value};
 my $ldap_starttls_supported = $localxml->{key}->{ldap_starttls_supported}->{value};
-my $zimbra_require_interprocess_security = $localxml->{key}->{zimbra_require_interprocess_security}->{value};
+my $zmail_require_interprocess_security = $localxml->{key}->{zmail_require_interprocess_security}->{value};
 
-if ($zimbra_home eq "") {
-  $zimbra_home = "/opt/zimbra";
+if ($zmail_home eq "") {
+  $zmail_home = "/opt/zmail";
 }
 
-my $keygen = "${zimbra_home}/opendkim/sbin/opendkim-genkey";
+my $keygen = "${zmail_home}/opendkim/sbin/opendkim-genkey";
 
 my $mesg;
 my @masters=split(/ /, $ldap_master_url);
@@ -94,7 +94,7 @@ if ($ldap_master_url !~ /^ldaps/i) {
   if ($ldap_starttls_supported) {
     $mesg = $ldap->start_tls(
         verify => 'none',
-        capath => "${zimbra_home}/conf/ca",
+        capath => "${zmail_home}/conf/ca",
      ) or die "start_tls: $@";
      $mesg->code && die "Could not execute StartTLS\n";
   }
@@ -102,13 +102,13 @@ if ($ldap_master_url !~ /^ldaps/i) {
 if (!defined($ldap)) {
   die "Server down\n";
 }
-$mesg = $ldap->bind($zimbra_admin_dn, password=>$zimbra_admin_password);
+$mesg = $ldap->bind($zmail_admin_dn, password=>$zmail_admin_password);
 $mesg->code && die "Bind: ". $mesg->error . "\n";
 
 if ($domain) {
   $mesg = $ldap ->search(
       base=>"",
-      filter=>"(&(objectClass=zimbraDomain)(zimbraDomainName=$domain))",
+      filter=>"(&(objectClass=zmailDomain)(zmailDomainName=$domain))",
       scope=>"sub",
   );
   
@@ -122,7 +122,7 @@ if ($domain) {
 if($add) {
   $mesg = $ldap->search(
       base=>"",
-      filter=>"(&(objectClass=zimbraDomain)(zimbraDomainName=$domain)(DKIMSelector=*))",
+      filter=>"(&(objectClass=zmailDomain)(zmailDomainName=$domain)(DKIMSelector=*))",
       scope=>"sub",
   );
   my $size = $mesg->count;
@@ -132,7 +132,7 @@ if($add) {
   }
   $mesg = $ldap->search(
       base=>"",
-      filter=>"(&(objectClass=zimbraDomain)(zimbraDomainName=$domain))",
+      filter=>"(&(objectClass=zmailDomain)(zmailDomainName=$domain))",
       scope=>"sub",
   );
   my $entry = $mesg->entry($size-1);
@@ -145,13 +145,13 @@ if($add) {
      if ($bits < 1024) {
        print "Bit size less than 1024 is not allowed, as it is insecure.\n";
      } else {
-      `$keygen -b $bits -s $selector -d $domain -D /opt/zimbra/data/tmp`;
+      `$keygen -b $bits -s $selector -d $domain -D /opt/zmail/data/tmp`;
      }
   } else {
-    `$keygen -s $selector -d $domain -D /opt/zimbra/data/tmp`;
+    `$keygen -s $selector -d $domain -D /opt/zmail/data/tmp`;
   }
-  my $privatekey = "${zimbra_home}/data/tmp/${selector}.private";
-  my $publickey = "${zimbra_home}/data/tmp/${selector}.txt";
+  my $privatekey = "${zmail_home}/data/tmp/${selector}.private";
+  my $publickey = "${zmail_home}/data/tmp/${selector}.txt";
   if (-f $privatekey && -s $privatekey && -f $publickey && -s $publickey) {
     my $private;
     my $public;
@@ -194,13 +194,13 @@ if($add) {
   if (!($selector)) {
     $mesg = $ldap->search(
       base=>"",
-      filter=>"(&(objectClass=zimbraDomain)(zimbraDomainName=$domain)(DKIMSelector=*))",
+      filter=>"(&(objectClass=zmailDomain)(zmailDomainName=$domain)(DKIMSelector=*))",
       scope=>"sub",
     );
   } else {
     $mesg = $ldap->search(
       base=>"",
-      filter=>"(&(objectClass=zimbraDomain)(DKIMSelector=$selector))",
+      filter=>"(&(objectClass=zmailDomain)(DKIMSelector=$selector))",
       scope=>"sub",
     );
   }
@@ -229,7 +229,7 @@ if($add) {
 } elsif ($update) {
   $mesg = $ldap->search(
       base=>"",
-      filter=>"(&(objectClass=zimbraDomain)(zimbraDomainName=$domain)(DKIMSelector=*))",
+      filter=>"(&(objectClass=zmailDomain)(zmailDomainName=$domain)(DKIMSelector=*))",
       scope=>"sub",
   );
   my $size = $mesg->count;
@@ -247,13 +247,13 @@ if($add) {
      if ($bits < 1024) {
        print "Bit size less than 1024 is not allowed, as it is insecure.\n";
      } else {
-      `$keygen -b $bits -s $selector -d $domain -D /opt/zimbra/data/tmp`;
+      `$keygen -b $bits -s $selector -d $domain -D /opt/zmail/data/tmp`;
      }
   } else {
-    `$keygen -s $selector -d $domain -D /opt/zimbra/data/tmp`;
+    `$keygen -s $selector -d $domain -D /opt/zmail/data/tmp`;
   }
-  my $privatekey = "${zimbra_home}/data/tmp/${selector}.private";
-  my $publickey = "${zimbra_home}/data/tmp/${selector}.txt";
+  my $privatekey = "${zmail_home}/data/tmp/${selector}.private";
+  my $publickey = "${zmail_home}/data/tmp/${selector}.txt";
   if (-f $privatekey && -s $privatekey && -f $publickey && -s $publickey) {
     my $private;
     my $public;
@@ -293,7 +293,7 @@ if($add) {
 } elsif ($delete) {
   $mesg = $ldap->search(
       base=>"",
-      filter=>"(&(objectClass=zimbraDomain)(zimbraDomainName=$domain)(DKIMSelector=*))",
+      filter=>"(&(objectClass=zmailDomain)(zmailDomainName=$domain)(DKIMSelector=*))",
       scope=>"sub",
   );
   my $size = $mesg->count;

@@ -13,24 +13,24 @@
  * ***** END LICENSE BLOCK *****
  */
 
-package com.zimbra.cs.index;
+package org.zmail.cs.index;
 
 import java.io.IOException;
 import java.util.List;
 import java.util.Set;
 
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.cs.mailbox.MailItem;
+import org.zmail.common.service.ServiceException;
+import org.zmail.cs.mailbox.MailItem;
 
 /**
  * UngroupedQueryResults which do NOT group (ie return parts or messages in whatever mix)
  *
  * @since Nov 3, 2004
  */
-final class UngroupedQueryResults extends ZimbraQueryResultsImpl {
-    private final ZimbraQueryResults results;
+final class UngroupedQueryResults extends ZmailQueryResultsImpl {
+    private final ZmailQueryResults results;
 
-    UngroupedQueryResults(ZimbraQueryResults results, Set<MailItem.Type> types, SortBy sort, SearchParams.Fetch fetch) {
+    UngroupedQueryResults(ZmailQueryResults results, Set<MailItem.Type> types, SortBy sort, SearchParams.Fetch fetch) {
         super(types, sort, fetch);
         this.results = results;
     }
@@ -46,12 +46,12 @@ final class UngroupedQueryResults extends ZimbraQueryResultsImpl {
     }
 
     @Override
-    public ZimbraHit getNext() throws ServiceException {
+    public ZmailHit getNext() throws ServiceException {
         return results.getNext();
     }
 
     @Override
-    public ZimbraHit peekNext() throws ServiceException {
+    public ZmailHit peekNext() throws ServiceException {
         return results.peekNext();
     }
 
@@ -61,7 +61,7 @@ final class UngroupedQueryResults extends ZimbraQueryResultsImpl {
     }
 
     @Override
-    public ZimbraHit skipToHit(int hitNo) throws ServiceException {
+    public ZmailHit skipToHit(int hitNo) throws ServiceException {
         return results.skipToHit(hitNo);
     }
 

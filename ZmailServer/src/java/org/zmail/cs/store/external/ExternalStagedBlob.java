@@ -13,10 +13,10 @@
  * ***** END LICENSE BLOCK *****
  */
 
-package com.zimbra.cs.store.external;
+package org.zmail.cs.store.external;
 
-import com.zimbra.cs.mailbox.Mailbox;
-import com.zimbra.cs.store.StagedBlob;
+import org.zmail.cs.mailbox.Mailbox;
+import org.zmail.cs.store.StagedBlob;
 
 public class ExternalStagedBlob extends StagedBlob {
 

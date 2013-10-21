@@ -12,7 +12,7 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.qa.unittest.prov.ldap;
+package org.zmail.qa.unittest.prov.ldap;
 
 import java.util.HashMap;
 import java.util.List;
@@ -21,11 +21,11 @@ import java.util.Map;
 import org.junit.*;
 import static org.junit.Assert.*;
 
-import com.zimbra.cs.account.AccountServiceException;
-import com.zimbra.cs.account.Provisioning;
-import com.zimbra.cs.account.Zimlet;
-import com.zimbra.qa.unittest.prov.Names;
-import com.zimbra.soap.admin.type.CacheEntryType;
+import org.zmail.cs.account.AccountServiceException;
+import org.zmail.cs.account.Provisioning;
+import org.zmail.cs.account.Zimlet;
+import org.zmail.qa.unittest.prov.Names;
+import org.zmail.soap.admin.type.CacheEntryType;
 
 public class TestLdapProvZimlet extends LdapTest {
     private static LdapProvTestUtil provUtil;
@@ -42,7 +42,7 @@ public class TestLdapProvZimlet extends LdapTest {
         assertNull(zimlet);
         
         Map<String, Object> attrs = new HashMap<String, Object>();
-        attrs.put(Provisioning.A_zimbraZimletVersion, "1.0");
+        attrs.put(Provisioning.A_zmailZimletVersion, "1.0");
         zimlet = prov.createZimlet(zimletName, attrs);
         assertNotNull(zimlet);
         
@@ -77,7 +77,7 @@ public class TestLdapProvZimlet extends LdapTest {
         boolean caughtException = false;
         try {
             Map<String, Object> attrs = new HashMap<String, Object>();
-            attrs.put(Provisioning.A_zimbraZimletVersion, "1.0");
+            attrs.put(Provisioning.A_zmailZimletVersion, "1.0");
             zimlet = prov.createZimlet(ZIMLET_NAME, attrs);
         } catch (AccountServiceException e) {
             if (AccountServiceException.ZIMLET_EXISTS.equals(e.getCode())) {

@@ -12,16 +12,16 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.service.mail;
+package org.zmail.cs.service.mail;
 
 import java.util.Map;
 
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.common.soap.MailConstants;
-import com.zimbra.common.soap.Element;
-import com.zimbra.cs.mailbox.Mailbox;
-import com.zimbra.cs.service.util.ItemId;
-import com.zimbra.soap.ZimbraSoapContext;
+import org.zmail.common.service.ServiceException;
+import org.zmail.common.soap.MailConstants;
+import org.zmail.common.soap.Element;
+import org.zmail.cs.mailbox.Mailbox;
+import org.zmail.cs.service.util.ItemId;
+import org.zmail.soap.ZmailSoapContext;
 
 public class PurgeRevision extends MailDocumentHandler {
 
@@ -29,7 +29,7 @@ public class PurgeRevision extends MailDocumentHandler {
     protected String[] getProxiedIdPath(Element request)     { return TARGET_PATH; }
 
     public Element handle(Element request, Map<String, Object> context) throws ServiceException {
-        ZimbraSoapContext zsc = getZimbraSoapContext(context);
+        ZmailSoapContext zsc = getZmailSoapContext(context);
         Element revisionElem = request.getElement(MailConstants.E_REVISION);
         ItemId iid = new ItemId(revisionElem.getAttribute(MailConstants.A_ID), zsc);
         int rev = (int)revisionElem.getAttributeLong(MailConstants.A_VERSION);

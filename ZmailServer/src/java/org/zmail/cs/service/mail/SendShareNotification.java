@@ -12,7 +12,7 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.service.mail;
+package org.zmail.cs.service.mail;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
@@ -30,48 +30,48 @@ import javax.mail.internet.MimeMultipart;
 
 import com.google.common.collect.Lists;
 import com.google.common.collect.Sets;
-import com.zimbra.common.account.Key.AccountBy;
-import com.zimbra.common.account.Key.DistributionListBy;
-import com.zimbra.common.localconfig.DebugConfig;
-import com.zimbra.common.mime.MimeConstants;
-import com.zimbra.common.mime.shim.JavaMailInternetAddress;
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.common.soap.Element;
-import com.zimbra.common.soap.MailConstants;
-import com.zimbra.common.util.CharsetUtil;
-import com.zimbra.common.util.L10nUtil;
-import com.zimbra.common.util.L10nUtil.MsgKey;
-import com.zimbra.common.util.Log;
-import com.zimbra.common.util.LogFactory;
-import com.zimbra.common.util.Pair;
-import com.zimbra.cs.account.Account;
-import com.zimbra.cs.account.Domain;
-import com.zimbra.cs.account.Group;
-import com.zimbra.cs.account.MailTarget;
-import com.zimbra.cs.account.NamedEntry;
-import com.zimbra.cs.account.Provisioning;
-import com.zimbra.cs.account.Provisioning.GroupMemberEmailAddrs;
-import com.zimbra.cs.account.ShareInfo;
-import com.zimbra.cs.account.ShareInfoData;
-import com.zimbra.cs.mailbox.ACL;
-import com.zimbra.cs.mailbox.Folder;
-import com.zimbra.cs.mailbox.MailItem;
-import com.zimbra.cs.mailbox.MailServiceException;
-import com.zimbra.cs.mailbox.Mailbox;
-import com.zimbra.cs.mailbox.MailboxManager;
-import com.zimbra.cs.mailbox.Mountpoint;
-import com.zimbra.cs.mailbox.OperationContext;
-import com.zimbra.cs.mime.Mime;
-import com.zimbra.cs.service.UserServlet;
-import com.zimbra.cs.service.util.ItemId;
-import com.zimbra.cs.util.AccountUtil;
-import com.zimbra.cs.util.JMSession;
-import com.zimbra.cs.util.Zimbra;
-import com.zimbra.soap.JaxbUtil;
-import com.zimbra.soap.ZimbraSoapContext;
-import com.zimbra.soap.mail.message.SendShareNotificationRequest;
-import com.zimbra.soap.mail.message.SendShareNotificationRequest.Action;
-import com.zimbra.soap.mail.type.EmailAddrInfo;
+import org.zmail.common.account.Key.AccountBy;
+import org.zmail.common.account.Key.DistributionListBy;
+import org.zmail.common.localconfig.DebugConfig;
+import org.zmail.common.mime.MimeConstants;
+import org.zmail.common.mime.shim.JavaMailInternetAddress;
+import org.zmail.common.service.ServiceException;
+import org.zmail.common.soap.Element;
+import org.zmail.common.soap.MailConstants;
+import org.zmail.common.util.CharsetUtil;
+import org.zmail.common.util.L10nUtil;
+import org.zmail.common.util.L10nUtil.MsgKey;
+import org.zmail.common.util.Log;
+import org.zmail.common.util.LogFactory;
+import org.zmail.common.util.Pair;
+import org.zmail.cs.account.Account;
+import org.zmail.cs.account.Domain;
+import org.zmail.cs.account.Group;
+import org.zmail.cs.account.MailTarget;
+import org.zmail.cs.account.NamedEntry;
+import org.zmail.cs.account.Provisioning;
+import org.zmail.cs.account.Provisioning.GroupMemberEmailAddrs;
+import org.zmail.cs.account.ShareInfo;
+import org.zmail.cs.account.ShareInfoData;
+import org.zmail.cs.mailbox.ACL;
+import org.zmail.cs.mailbox.Folder;
+import org.zmail.cs.mailbox.MailItem;
+import org.zmail.cs.mailbox.MailServiceException;
+import org.zmail.cs.mailbox.Mailbox;
+import org.zmail.cs.mailbox.MailboxManager;
+import org.zmail.cs.mailbox.Mountpoint;
+import org.zmail.cs.mailbox.OperationContext;
+import org.zmail.cs.mime.Mime;
+import org.zmail.cs.service.UserServlet;
+import org.zmail.cs.service.util.ItemId;
+import org.zmail.cs.util.AccountUtil;
+import org.zmail.cs.util.JMSession;
+import org.zmail.cs.util.Zmail;
+import org.zmail.soap.JaxbUtil;
+import org.zmail.soap.ZmailSoapContext;
+import org.zmail.soap.mail.message.SendShareNotificationRequest;
+import org.zmail.soap.mail.message.SendShareNotificationRequest.Action;
+import org.zmail.soap.mail.type.EmailAddrInfo;
 
 public class SendShareNotification extends MailDocumentHandler {
 
@@ -88,7 +88,7 @@ public class SendShareNotification extends MailDocumentHandler {
 
     @Override
     public Element handle(Element request, Map<String, Object> context) throws ServiceException {
-        ZimbraSoapContext zsc = getZimbraSoapContext(context);
+        ZmailSoapContext zsc = getZmailSoapContext(context);
         OperationContext octxt = getOperationContext(zsc, context);
         Account account = getRequestedAccount(zsc);
         Mailbox mbox = MailboxManager.getInstance().getMailboxByAccount(account, false);
@@ -126,7 +126,7 @@ public class SendShareNotification extends MailDocumentHandler {
         return zsc.createElement(MailConstants.SEND_SHARE_NOTIFICATION_RESPONSE);
     }
 
-    private Collection<ShareInfoData> validateRequest(ZimbraSoapContext zsc,
+    private Collection<ShareInfoData> validateRequest(ZmailSoapContext zsc,
             Map<String, Object> context, OperationContext octxt,
             Mailbox mbox, Element request) throws ServiceException {
 
@@ -193,7 +193,7 @@ public class SendShareNotification extends MailDocumentHandler {
     }
 
     @Deprecated
-    private ShareInfoData validateShareRecipient(ZimbraSoapContext zsc,
+    private ShareInfoData validateShareRecipient(ZmailSoapContext zsc,
             Map<String,Object> context, OperationContext octxt, Mailbox mbox, Element eShare)
     throws ServiceException {
 
@@ -257,7 +257,7 @@ public class SendShareNotification extends MailDocumentHandler {
     }
 
     private ShareInfoData getShareInfoData(
-            ZimbraSoapContext zsc,
+            ZmailSoapContext zsc,
             Map<String,Object> context,
             Account ownerAcct,
             OperationContext octxt,
@@ -342,8 +342,8 @@ public class SendShareNotification extends MailDocumentHandler {
             mGrant = grant;
         }
 
-        MatchingGrant(String zimbraId, byte type, short rights) {
-            mGrantee = zimbraId;
+        MatchingGrant(String zmailId, byte type, short rights) {
+            mGrantee = zmailId;
             mType    = type;
             mRights  = rights;
         }
@@ -400,7 +400,7 @@ public class SendShareNotification extends MailDocumentHandler {
         return null;
     }
 
-    private MatchingGrant getMatchingGrantRemote(ZimbraSoapContext zsc, Map<String, Object> context,
+    private MatchingGrant getMatchingGrantRemote(ZmailSoapContext zsc, Map<String, Object> context,
             byte granteeType, String granteeId, Account ownerAcct, int remoteFolderId)
     throws ServiceException {
 
@@ -451,7 +451,7 @@ public class SendShareNotification extends MailDocumentHandler {
     }
 
 
-    private Element fetchRemoteFolder(ZimbraSoapContext zsc, Map<String, Object> context,
+    private Element fetchRemoteFolder(ZmailSoapContext zsc, Map<String, Object> context,
             String ownerId, int remoteId)
     throws ServiceException {
         Element request = zsc.createRequestElement(MailConstants.GET_FOLDER_REQUEST);
@@ -474,7 +474,7 @@ public class SendShareNotification extends MailDocumentHandler {
      * @return
      * @throws ServiceException
      */
-    private Pair<NamedEntry, String> getGrantee(ZimbraSoapContext zsc, byte granteeType,
+    private Pair<NamedEntry, String> getGrantee(ZmailSoapContext zsc, byte granteeType,
             String granteeId, String granteeName)
     throws ServiceException {
 
@@ -482,7 +482,7 @@ public class SendShareNotification extends MailDocumentHandler {
         NamedEntry entryByName = null;
 
         if (granteeId != null) {
-            entryById = FolderAction.lookupGranteeByZimbraId(granteeId, granteeType);
+            entryById = FolderAction.lookupGranteeByZmailId(granteeId, granteeType);
             if (entryById == null)
                 throw MailServiceException.NO_SUCH_GRANTEE(granteeId, null);
         }
@@ -553,7 +553,7 @@ public class SendShareNotification extends MailDocumentHandler {
     throws ServiceException, MessagingException {
         Locale locale = authAccount.getLocale();
         String charset = authAccount.getAttr(
-                Provisioning.A_zimbraPrefMailDefaultCharset, MimeConstants.P_CHARSET_UTF8);
+                Provisioning.A_zmailPrefMailDefaultCharset, MimeConstants.P_CHARSET_UTF8);
 
         MimeMessage mm = new Mime.FixedMimeMessage(JMSession.getSmtpSession(authAccount));
 
@@ -612,7 +612,7 @@ public class SendShareNotification extends MailDocumentHandler {
         mm.saveChanges();
 
         if (sLog.isDebugEnabled()) {
-            // log4j.logger.com.zimbra.cs.service.mail=DEBUG
+            // log4j.logger.org.zmail.cs.service.mail=DEBUG
             try {
                 ByteArrayOutputStream buf = new ByteArrayOutputStream();
                 mm.writeTo(buf);
@@ -719,7 +719,7 @@ public class SendShareNotification extends MailDocumentHandler {
                     sendNotificationEmailToGroupExternalMembers(octxt, mbox,
                             authAccount, ownerAccount, sid, notes, action, extMembers);
                 } catch (OutOfMemoryError e) {
-                    Zimbra.halt("OutOfMemoryError while sending share notification to external group members", e);
+                    Zmail.halt("OutOfMemoryError while sending share notification to external group members", e);
                 }
             }
         };

@@ -1,4 +1,4 @@
-package com.zimbra.cs.mailbox.calendar;
+package org.zmail.cs.mailbox.calendar;
 
 /*
  * ***** BEGIN LICENSE BLOCK *****
@@ -22,22 +22,22 @@ import java.util.List;
 import java.util.Locale;
 import java.util.TimeZone;
 
-import com.zimbra.common.calendar.ParsedDateTime;
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.common.util.L10nUtil;
-import com.zimbra.common.util.Log;
-import com.zimbra.common.util.StringUtil;
-import com.zimbra.common.util.ZimbraLog;
-import com.zimbra.cs.account.Account;
-import com.zimbra.cs.mailbox.CalendarItem;
-import com.zimbra.cs.mailbox.Mailbox;
-import com.zimbra.cs.mailbox.MailboxManager;
-import com.zimbra.cs.mailbox.calendar.Invite;
-import com.zimbra.cs.mailbox.calendar.Recurrence;
-import com.zimbra.cs.mailbox.calendar.ZAttendee;
-import com.zimbra.cs.mailbox.calendar.ZRecur;
-import com.zimbra.cs.mailbox.calendar.Recurrence.IRecurrence;
-import com.zimbra.cs.mailbox.calendar.ZRecur.ZWeekDayNum;
+import org.zmail.common.calendar.ParsedDateTime;
+import org.zmail.common.service.ServiceException;
+import org.zmail.common.util.L10nUtil;
+import org.zmail.common.util.Log;
+import org.zmail.common.util.StringUtil;
+import org.zmail.common.util.ZmailLog;
+import org.zmail.cs.account.Account;
+import org.zmail.cs.mailbox.CalendarItem;
+import org.zmail.cs.mailbox.Mailbox;
+import org.zmail.cs.mailbox.MailboxManager;
+import org.zmail.cs.mailbox.calendar.Invite;
+import org.zmail.cs.mailbox.calendar.Recurrence;
+import org.zmail.cs.mailbox.calendar.ZAttendee;
+import org.zmail.cs.mailbox.calendar.ZRecur;
+import org.zmail.cs.mailbox.calendar.Recurrence.IRecurrence;
+import org.zmail.cs.mailbox.calendar.ZRecur.ZWeekDayNum;
 
 /**
  * Class FriendlyCalendaringDescription represents the text used in text/plain
@@ -46,7 +46,7 @@ import com.zimbra.cs.mailbox.calendar.ZRecur.ZWeekDayNum;
  * @author gren
  */
 public class FriendlyCalendaringDescription {
-    static Log sLog = ZimbraLog.calendar;
+    static Log sLog = ZmailLog.calendar;
     private boolean mDoneGenerate;
     private boolean mDefinitelyModified;
     private StringBuilder mPlainText;

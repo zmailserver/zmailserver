@@ -12,27 +12,27 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.service.mail;
+package org.zmail.cs.service.mail;
 
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import com.zimbra.soap.admin.type.DataSourceType;
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.common.soap.Element;
-import com.zimbra.common.soap.MailConstants;
-import com.zimbra.common.soap.SoapFaultException;
-import com.zimbra.common.util.ZimbraLog;
-import com.zimbra.cs.account.Account;
-import com.zimbra.cs.account.DataSource;
-import com.zimbra.cs.account.Provisioning;
-import com.zimbra.cs.datasource.DataSourceManager;
-import com.zimbra.cs.ldap.LdapUtil;
-import com.zimbra.cs.mailbox.Folder;
-import com.zimbra.cs.mailbox.Mailbox;
-import com.zimbra.cs.mailbox.MailServiceException.NoSuchItemException;
-import com.zimbra.soap.ZimbraSoapContext;
+import org.zmail.soap.admin.type.DataSourceType;
+import org.zmail.common.service.ServiceException;
+import org.zmail.common.soap.Element;
+import org.zmail.common.soap.MailConstants;
+import org.zmail.common.soap.SoapFaultException;
+import org.zmail.common.util.ZmailLog;
+import org.zmail.cs.account.Account;
+import org.zmail.cs.account.DataSource;
+import org.zmail.cs.account.Provisioning;
+import org.zmail.cs.datasource.DataSourceManager;
+import org.zmail.cs.ldap.LdapUtil;
+import org.zmail.cs.mailbox.Folder;
+import org.zmail.cs.mailbox.Mailbox;
+import org.zmail.cs.mailbox.MailServiceException.NoSuchItemException;
+import org.zmail.soap.ZmailSoapContext;
 
 
 public class CreateDataSource extends MailDocumentHandler {
@@ -40,7 +40,7 @@ public class CreateDataSource extends MailDocumentHandler {
     @Override
     public Element handle(Element request, Map<String, Object> context)
     throws ServiceException, SoapFaultException {
-        ZimbraSoapContext zsc = getZimbraSoapContext(context);
+        ZmailSoapContext zsc = getZmailSoapContext(context);
         Provisioning prov = Provisioning.getInstance();
         Account account = getRequestedAccount(zsc);
 
@@ -57,34 +57,34 @@ public class CreateDataSource extends MailDocumentHandler {
         // Common attributes
         validateFolderId(account, mbox, eDataSource, type);
         String name = eDataSource.getAttribute(MailConstants.A_NAME);
-        dsAttrs.put(Provisioning.A_zimbraDataSourceFolderId, eDataSource.getAttribute(MailConstants.A_FOLDER));
-        dsAttrs.put(Provisioning.A_zimbraDataSourceEnabled,
+        dsAttrs.put(Provisioning.A_zmailDataSourceFolderId, eDataSource.getAttribute(MailConstants.A_FOLDER));
+        dsAttrs.put(Provisioning.A_zmailDataSourceEnabled,
             LdapUtil.getLdapBooleanString(eDataSource.getAttributeBool(MailConstants.A_DS_IS_ENABLED)));
-        dsAttrs.put(Provisioning.A_zimbraDataSourceImportOnly,
+        dsAttrs.put(Provisioning.A_zmailDataSourceImportOnly,
                 LdapUtil.getLdapBooleanString(eDataSource.getAttributeBool(MailConstants.A_DS_IS_IMPORTONLY,false)));
-        dsAttrs.put(Provisioning.A_zimbraDataSourceHost, eDataSource.getAttribute(MailConstants.A_DS_HOST));
-        dsAttrs.put(Provisioning.A_zimbraDataSourcePort, eDataSource.getAttribute(MailConstants.A_DS_PORT));
-        dsAttrs.put(Provisioning.A_zimbraDataSourceConnectionType, eDataSource.getAttribute(MailConstants.A_DS_CONNECTION_TYPE));
-        dsAttrs.put(Provisioning.A_zimbraDataSourceUsername, eDataSource.getAttribute(MailConstants.A_DS_USERNAME));
-        dsAttrs.put(Provisioning.A_zimbraDataSourcePassword, eDataSource.getAttribute(MailConstants.A_DS_PASSWORD));
+        dsAttrs.put(Provisioning.A_zmailDataSourceHost, eDataSource.getAttribute(MailConstants.A_DS_HOST));
+        dsAttrs.put(Provisioning.A_zmailDataSourcePort, eDataSource.getAttribute(MailConstants.A_DS_PORT));
+        dsAttrs.put(Provisioning.A_zmailDataSourceConnectionType, eDataSource.getAttribute(MailConstants.A_DS_CONNECTION_TYPE));
+        dsAttrs.put(Provisioning.A_zmailDataSourceUsername, eDataSource.getAttribute(MailConstants.A_DS_USERNAME));
+        dsAttrs.put(Provisioning.A_zmailDataSourcePassword, eDataSource.getAttribute(MailConstants.A_DS_PASSWORD));
         
         String defaultSignature = eDataSource.getAttribute(MailConstants.A_DS_DEFAULT_SIGNATURE, null);
         if (defaultSignature != null) {
-            dsAttrs.put(Provisioning.A_zimbraPrefDefaultSignatureId, defaultSignature);
+            dsAttrs.put(Provisioning.A_zmailPrefDefaultSignatureId, defaultSignature);
         }
         
         String forwardReplySignature = eDataSource.getAttribute(MailConstants.A_DS_FORWARD_REPLY_SIGNATURE, null);
         if (forwardReplySignature != null) {
-            dsAttrs.put(Provisioning.A_zimbraPrefForwardReplySignatureId, forwardReplySignature);
+            dsAttrs.put(Provisioning.A_zmailPrefForwardReplySignatureId, forwardReplySignature);
         }
         
         // type
-        dsAttrs.put(Provisioning.A_zimbraDataSourceType, type.toString());
+        dsAttrs.put(Provisioning.A_zmailDataSourceType, type.toString());
         
         // import class
         String importClass = eDataSource.getAttribute(MailConstants.A_DS_IMPORT_CLASS, DataSourceManager.getDefaultImportClass(type));
         if (importClass != null) {
-        	dsAttrs.put(Provisioning.A_zimbraDataSourceImportClassName, importClass);
+        	dsAttrs.put(Provisioning.A_zmailDataSourceImportClassName, importClass);
         }
         
         // Common optional attributes
@@ -92,12 +92,12 @@ public class CreateDataSource extends MailDocumentHandler {
         
         // POP3-specific attributes
         if (type == DataSourceType.pop3) {
-            dsAttrs.put(Provisioning.A_zimbraDataSourceLeaveOnServer,
+            dsAttrs.put(Provisioning.A_zmailDataSourceLeaveOnServer,
                 LdapUtil.getLdapBooleanString(eDataSource.getAttributeBool(MailConstants.A_DS_LEAVE_ON_SERVER, true)));
         }
         
         DataSource ds = prov.createDataSource(account, type, name, dsAttrs);
-        ZimbraLog.addDataSourceNameToContext(ds.getName());
+        ZmailLog.addDataSourceNameToContext(ds.getName());
         
         // Assemble response
         Element response = zsc.createElement(MailConstants.CREATE_DATA_SOURCE_RESPONSE);

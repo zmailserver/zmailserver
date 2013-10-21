@@ -33,22 +33,22 @@ import org.json.JSONTokener;
 import com.proviciel.db.JournalDbMailItem;
 import com.proviciel.db.JournalItem;
 import com.proviciel.utils.ProvicielLog;
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.common.zmime.ZMimeMultipart;
-import com.zimbra.cs.account.Account;
-import com.zimbra.cs.account.AuthTokenException;
-import com.zimbra.cs.db.DbMailItem.SearchOpts;
-import com.zimbra.cs.index.SortBy;
-import com.zimbra.cs.mailbox.Folder;
-import com.zimbra.cs.mailbox.MailItem;
-import com.zimbra.cs.mailbox.MailItem.Type;
-import com.zimbra.cs.mailbox.Mailbox;
-import com.zimbra.cs.mailbox.MailboxManager;
-import com.zimbra.cs.mailbox.OperationContext;
-import com.zimbra.cs.mime.Mime;
-import com.zimbra.cs.mime.ParsedMessage;
-import com.zimbra.cs.service.util.ItemId;
-import com.zimbra.cs.util.JMSession;
+import org.zmail.common.service.ServiceException;
+import org.zmail.common.zmime.ZMimeMultipart;
+import org.zmail.cs.account.Account;
+import org.zmail.cs.account.AuthTokenException;
+import org.zmail.cs.db.DbMailItem.SearchOpts;
+import org.zmail.cs.index.SortBy;
+import org.zmail.cs.mailbox.Folder;
+import org.zmail.cs.mailbox.MailItem;
+import org.zmail.cs.mailbox.MailItem.Type;
+import org.zmail.cs.mailbox.Mailbox;
+import org.zmail.cs.mailbox.MailboxManager;
+import org.zmail.cs.mailbox.OperationContext;
+import org.zmail.cs.mime.Mime;
+import org.zmail.cs.mime.ParsedMessage;
+import org.zmail.cs.service.util.ItemId;
+import org.zmail.cs.util.JMSession;
 
 
 public class MessagesServlet extends HttpServlet {

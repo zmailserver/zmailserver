@@ -16,39 +16,39 @@
 /*
  * Created on Aug 30, 2004
  */
-package com.zimbra.cs.service.mail;
+package org.zmail.cs.service.mail;
 
 import com.google.common.collect.ImmutableSet;
 import com.google.common.collect.Sets;
-import com.zimbra.common.account.Key;
-import com.zimbra.common.account.Key.AccountBy;
-import com.zimbra.common.mime.InternetAddress;
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.common.soap.Element;
-import com.zimbra.common.soap.MailConstants;
-import com.zimbra.cs.account.Account;
-import com.zimbra.cs.account.AccountServiceException;
-import com.zimbra.cs.account.Domain;
-import com.zimbra.cs.account.Group;
-import com.zimbra.cs.account.GuestAccount;
-import com.zimbra.cs.account.MailTarget;
-import com.zimbra.cs.account.NamedEntry;
-import com.zimbra.cs.account.Provisioning;
-import com.zimbra.cs.account.SearchDirectoryOptions;
-import com.zimbra.cs.fb.FreeBusyProvider;
-import com.zimbra.cs.ldap.ZLdapFilterFactory.FilterId;
-import com.zimbra.cs.mailbox.ACL;
-import com.zimbra.cs.mailbox.Flag;
-import com.zimbra.cs.mailbox.MailItem;
-import com.zimbra.cs.mailbox.MailServiceException;
-import com.zimbra.cs.mailbox.Mailbox;
-import com.zimbra.cs.mailbox.Mailbox.FolderNode;
-import com.zimbra.cs.mailbox.OperationContext;
-import com.zimbra.cs.service.util.ItemId;
-import com.zimbra.cs.service.util.ItemIdFormatter;
-import com.zimbra.cs.util.AccountUtil;
-import com.zimbra.soap.ZimbraSoapContext;
-import com.zimbra.soap.mail.type.RetentionPolicy;
+import org.zmail.common.account.Key;
+import org.zmail.common.account.Key.AccountBy;
+import org.zmail.common.mime.InternetAddress;
+import org.zmail.common.service.ServiceException;
+import org.zmail.common.soap.Element;
+import org.zmail.common.soap.MailConstants;
+import org.zmail.cs.account.Account;
+import org.zmail.cs.account.AccountServiceException;
+import org.zmail.cs.account.Domain;
+import org.zmail.cs.account.Group;
+import org.zmail.cs.account.GuestAccount;
+import org.zmail.cs.account.MailTarget;
+import org.zmail.cs.account.NamedEntry;
+import org.zmail.cs.account.Provisioning;
+import org.zmail.cs.account.SearchDirectoryOptions;
+import org.zmail.cs.fb.FreeBusyProvider;
+import org.zmail.cs.ldap.ZLdapFilterFactory.FilterId;
+import org.zmail.cs.mailbox.ACL;
+import org.zmail.cs.mailbox.Flag;
+import org.zmail.cs.mailbox.MailItem;
+import org.zmail.cs.mailbox.MailServiceException;
+import org.zmail.cs.mailbox.Mailbox;
+import org.zmail.cs.mailbox.Mailbox.FolderNode;
+import org.zmail.cs.mailbox.OperationContext;
+import org.zmail.cs.service.util.ItemId;
+import org.zmail.cs.service.util.ItemIdFormatter;
+import org.zmail.cs.util.AccountUtil;
+import org.zmail.soap.ZmailSoapContext;
+import org.zmail.soap.mail.type.RetentionPolicy;
 
 import java.util.List;
 import java.util.Map;
@@ -97,7 +97,7 @@ public class FolderAction extends ItemAction {
     );
 
     @Override public Element handle(Element request, Map<String, Object> context) throws ServiceException {
-        ZimbraSoapContext zsc = getZimbraSoapContext(context);
+        ZmailSoapContext zsc = getZmailSoapContext(context);
 
         Element action = request.getElement(MailConstants.E_ACTION);
         String operation = action.getAttribute(MailConstants.A_OPERATION).toLowerCase();
@@ -126,7 +126,7 @@ public class FolderAction extends ItemAction {
     throws ServiceException {
         Element action = request.getElement(MailConstants.E_ACTION);
 
-        ZimbraSoapContext zsc = getZimbraSoapContext(context);
+        ZmailSoapContext zsc = getZmailSoapContext(context);
         Mailbox mbox = getRequestedMailbox(zsc);
         OperationContext octxt = getOperationContext(zsc, context);
         ItemIdFormatter ifmt = new ItemIdFormatter(zsc);
@@ -212,7 +212,7 @@ public class FolderAction extends ItemAction {
                 // get the optional accesskey
                 secret = grant.getAttribute(MailConstants.A_ACCESSKEY, null);
             } else if (zid != null) {
-                nentry = lookupGranteeByZimbraId(zid, gtype);
+                nentry = lookupGranteeByZmailId(zid, gtype);
             } else {
                 try {
                     nentry = lookupGranteeByName(grant.getAttribute(MailConstants.A_DISPLAY), gtype, zsc);
@@ -235,7 +235,7 @@ public class FolderAction extends ItemAction {
 
             ACL.Grant g =  mbox.grantAccess(octxt, iid.getId(), zid, gtype, rights, secret, expiry);
 
-            // kinda hacky -- return the zimbra id and name of the grantee in the response
+            // kinda hacky -- return the zmail id and name of the grantee in the response
             result.addAttribute(MailConstants.A_ZIMBRA_ID, zid);
             if (nentry != null)
                 result.addAttribute(MailConstants.A_DISPLAY, nentry.getName());
@@ -345,7 +345,7 @@ public class FolderAction extends ItemAction {
         return nentry;
     }
 
-    static NamedEntry lookupGranteeByName(String name, byte type, ZimbraSoapContext zsc) throws ServiceException {
+    static NamedEntry lookupGranteeByName(String name, byte type, ZmailSoapContext zsc) throws ServiceException {
         if (type == ACL.GRANTEE_AUTHUSER || type == ACL.GRANTEE_PUBLIC || type == ACL.GRANTEE_GUEST || type == ACL.GRANTEE_KEY)
             return null;
 
@@ -378,7 +378,7 @@ public class FolderAction extends ItemAction {
         }
     }
 
-    public static NamedEntry lookupGranteeByZimbraId(String zid, byte type) {
+    public static NamedEntry lookupGranteeByZmailId(String zid, byte type) {
         Provisioning prov = Provisioning.getInstance();
         try {
             switch (type) {
@@ -414,7 +414,7 @@ public class FolderAction extends ItemAction {
             throw ServiceException.INVALID_REQUEST("invalid grantee type for revokeOrphanGrants", null);
         }
         
-        String query = "(" + Provisioning.A_zimbraId + "=" + granteeId + ")";
+        String query = "(" + Provisioning.A_zmailId + "=" + granteeId + ")";
         opts.setFilterString(FilterId.SEARCH_GRANTEE, query);
         opts.setOnMaster(true);  // search the grantee on LDAP master
         List<NamedEntry> entries = Provisioning.getInstance().searchDirectory(opts);

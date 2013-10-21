@@ -18,19 +18,19 @@
 
 use strict;
 use Getopt::Long;
-use lib "/opt/zimbra/zimbramon/lib";
-use Zimbra::Mon::Zmstat;
-use Zimbra::Mon::Logger;
+use lib "/opt/zmail/zmailmon/lib";
+use Zmail::Mon::Zmstat;
+use Zmail::Mon::Logger;
 use vars qw($LOGFH $CONSOLE $LOGFILE $ROTATE_NOW $ROTATE_DEFER);
 
 zmstatInit();
 
 my $DISK_CRIT_THRESHOLD = getLocalConfig("zmdisklog_critical_threshold") || 95;
 my $DISK_WARN_THRESHOLD = getLocalConfig("zmdisklog_warn_threshold") || 85;
-my $hostname = `/opt/zimbra/bin/zmhostname`;
+my $hostname = `/opt/zmail/bin/zmhostname`;
 chomp $hostname;
 
-my $platform = `/opt/zimbra/libexec/get_plat_tag.sh`;
+my $platform = `/opt/zmail/libexec/get_plat_tag.sh`;
 chomp $platform;
 
 my $DF = '/bin/df -k';
@@ -88,7 +88,7 @@ sub usage {
 Usage: zmstat-df [options]
 Monitor disk usage
 -i, --interval: output a line every N seconds
--l, --log:      log file (default is /opt/zimbra/zmstat/df.csv)
+-l, --log:      log file (default is /opt/zmail/zmstat/df.csv)
 -c, --console:  output to stdout
 
 If logging to a file, rotation occurs when a HUP signal is sent or when
@@ -101,7 +101,7 @@ _USAGE_
 $| = 1;
 
 $LOGFILE = getLogFilePath('df.csv');
-my $interval = $Zimbra::Mon::Zmstat::LC{'zmstat_disk_interval'};
+my $interval = $Zmail::Mon::Zmstat::LC{'zmstat_disk_interval'};
 my $opts_good = GetOptions(
     'interval=i' => \$interval,
     'log=s' => \$LOGFILE,
@@ -134,11 +134,11 @@ while (1) {
             $skip_vol = 1 if (($vol eq $mnt) || ($vol eq $dev));
         }
         if (($skip_vol == 1) && (($pct >= $DISK_CRIT_THRESHOLD) || ($pct >= $DISK_WARN_THRESHOLD))) {
-            Zimbra::Mon::Logger::Log( "info", "Disk warning: ${hostname}: $mnt on device $dev at $pct%");
+            Zmail::Mon::Logger::Log( "info", "Disk warning: ${hostname}: $mnt on device $dev at $pct%");
         } elsif ($pct >= $DISK_CRIT_THRESHOLD) {
-            Zimbra::Mon::Logger::Log( "crit", "Disk warning: ${hostname}: $mnt on device $dev at $pct%"); 
+            Zmail::Mon::Logger::Log( "crit", "Disk warning: ${hostname}: $mnt on device $dev at $pct%"); 
     	} elsif ($pct >= $DISK_WARN_THRESHOLD) {
-            Zimbra::Mon::Logger::Log( "err", "Disk warning: ${hostname}: $mnt on device $dev at $pct%");
+            Zmail::Mon::Logger::Log( "err", "Disk warning: ${hostname}: $mnt on device $dev at $pct%");
     	}
     }
     my $tstamp = getTstamp();
@@ -153,7 +153,7 @@ while (1) {
                            $stat->{path}, $stat->{disk}, $stat->{disk_use},
                            $stat->{disk_space}, $stat->{disk_pct_used});
         $LOGFH->print("$line\n");
-        Zimbra::Mon::Logger::LogStats( "info", "zmstat df.csv: ${HEADING}:: $line"); 
+        Zmail::Mon::Logger::LogStats( "info", "zmstat df.csv: ${HEADING}:: $line"); 
     }
     $LOGFH->flush();
     $ROTATE_DEFER = 0;
@@ -169,7 +169,7 @@ sub getLocalConfig {
     return $ENV{$key};
   }
   open CONF,
-    "/opt/zimbra/bin/zmlocalconfig -q -m shell |" or die "Can't open local config: $!";
+    "/opt/zmail/bin/zmlocalconfig -q -m shell |" or die "Can't open local config: $!";
   my @conf = <CONF>;
   close CONF;
 

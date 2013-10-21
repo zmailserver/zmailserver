@@ -13,11 +13,11 @@
  * ***** END LICENSE BLOCK *****
  */
 
-package com.zimbra.cs.imap;
+package org.zmail.cs.imap;
 
 import java.util.List;
 
-import com.zimbra.cs.imap.ImapHandler.StoreAction;
+import org.zmail.cs.imap.ImapHandler.StoreAction;
 
 public class StoreCommand extends ImapCommand {
     private String sequenceSet;

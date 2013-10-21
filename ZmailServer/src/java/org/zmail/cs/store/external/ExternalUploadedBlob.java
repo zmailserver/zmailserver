@@ -12,11 +12,11 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.store.external;
+package org.zmail.cs.store.external;
 
 import java.io.IOException;
 
-import com.zimbra.cs.store.Blob;
+import org.zmail.cs.store.Blob;
 
 /**
  * Blob which has been streamed to a remote store while also being written to local incoming cache. Used during streaming upload to optimize the stage operation.

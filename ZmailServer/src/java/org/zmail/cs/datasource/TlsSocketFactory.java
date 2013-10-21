@@ -12,9 +12,9 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.datasource;
+package org.zmail.cs.datasource;
 
-import com.zimbra.common.net.SocketFactories;
+import org.zmail.common.net.SocketFactories;
 
 import javax.net.ssl.SSLSocketFactory;
 import javax.net.SocketFactory;

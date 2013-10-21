@@ -12,12 +12,12 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.service.mail;
+package org.zmail.cs.service.mail;
 
-import com.zimbra.soap.DocumentDispatcher;
-import com.zimbra.soap.DocumentService;
-import com.zimbra.common.localconfig.LC;
-import com.zimbra.common.soap.MailConstants;
+import org.zmail.soap.DocumentDispatcher;
+import org.zmail.soap.DocumentService;
+import org.zmail.common.localconfig.LC;
+import org.zmail.common.soap.MailConstants;
 
 /**
  * @zm-service-description The Mail Service includes commands for managing mail and calendar information.
@@ -170,10 +170,10 @@ public final class MailService implements DocumentService {
         dispatcher.registerHandler(MailConstants.GET_SPELL_DICTIONARIES_REQUEST, new GetSpellDictionaries());
 
         // Documents
-        dispatcher.registerHandler(MailConstants.SAVE_DOCUMENT_REQUEST, new com.zimbra.cs.service.doc.SaveDocument());
-        dispatcher.registerHandler(MailConstants.DIFF_DOCUMENT_REQUEST, new com.zimbra.cs.service.doc.DiffDocument());
-        dispatcher.registerHandler(MailConstants.LIST_DOCUMENT_REVISIONS_REQUEST, new com.zimbra.cs.service.doc.ListDocumentRevisions());
-        dispatcher.registerHandler(MailConstants.PURGE_REVISION_REQUEST, new com.zimbra.cs.service.mail.PurgeRevision());
+        dispatcher.registerHandler(MailConstants.SAVE_DOCUMENT_REQUEST, new org.zmail.cs.service.doc.SaveDocument());
+        dispatcher.registerHandler(MailConstants.DIFF_DOCUMENT_REQUEST, new org.zmail.cs.service.doc.DiffDocument());
+        dispatcher.registerHandler(MailConstants.LIST_DOCUMENT_REVISIONS_REQUEST, new org.zmail.cs.service.doc.ListDocumentRevisions());
+        dispatcher.registerHandler(MailConstants.PURGE_REVISION_REQUEST, new org.zmail.cs.service.mail.PurgeRevision());
 
         // data source
         dispatcher.registerHandler(MailConstants.GET_DATA_SOURCES_REQUEST, new GetDataSources());

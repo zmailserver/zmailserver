@@ -14,14 +14,14 @@
 # ***** END LICENSE BLOCK *****
 # 
 #
-# Change password for zimbra_ldap_password, and optionally for
-# ldap_root_password.  Updates both the Zimbra local config file and
-# ldap configs, and reruns zimbra.ldif
+# Change password for zmail_ldap_password, and optionally for
+# ldap_root_password.  Updates both the Zmail local config file and
+# ldap configs, and reruns zmail.ldif
 #
 
 use strict;
-use lib "/opt/zimbra/zimbramon/lib";
-use Zimbra::Util::Common;
+use lib "/opt/zmail/zmailmon/lib";
+use Zmail::Util::Common;
 use File::Path;
 use Getopt::Std;
 use Net::LDAP;
@@ -34,10 +34,10 @@ our %options = ();
 our %loaded = ();
 our %saved = ();
 
-my $zimbra_home = getLocalConfig("zimbra_home");
+my $zmail_home = getLocalConfig("zmail_home");
 my $cur_rootdn_passwd = getLocalConfig("ldap_root_password");
 my $ldap_starttls_supported = getLocalConfig("ldap_starttls_supported");
-my $zimbra_tmp_directory = getLocalConfig("zimbra_tmp_directory");
+my $zmail_tmp_directory = getLocalConfig("zmail_tmp_directory");
 my $isLdapMaster = getLocalConfig("ldap_is_master");
 
 chomp($isLdapMaster);
@@ -47,8 +47,8 @@ if (lc($isLdapMaster) eq "true" ) {
   $isLdapMaster = 0;
 }
 
-if ( !-d $zimbra_tmp_directory ) {
-  File::Path::mkpath("$zimbra_tmp_directory");
+if ( !-d $zmail_tmp_directory ) {
+  File::Path::mkpath("$zmail_tmp_directory");
 }
 
 getopts('arcblnph',\%options) or die "Unable to set options\n";
@@ -96,14 +96,14 @@ print "Updating local config and LDAP\n";
 if (!$options{r} && !$options{c}) {
   $ldap = Net::LDAP->new($master_ref)  or  die "$@";
 } else {
-  $ldap = Net::LDAP->new('ldapi://%2fopt%2fzimbra%2fopenldap%2fvar%2frun%2fldapi/')  or  die "$@";
+  $ldap = Net::LDAP->new('ldapi://%2fopt%2fzmail%2fopenldap%2fvar%2frun%2fldapi/')  or  die "$@";
 }
 
 if (!$options{r} && !$options{c}) {
   if ( $ldap_starttls_supported ) {
     my $mesg = $ldap->start_tls(
          verify => 'require',
-         capath => "$zimbra_home/conf/ca",
+         capath => "$zmail_home/conf/ca",
        ) or die "start_tls: $@";
     $mesg->code && die "TLS: " . $mesg->error . "\n";
   }
@@ -124,19 +124,19 @@ if ( $options{r}) {
   }
 } elsif ( $options{l} ) {
   setLocalConfig("ldap_replication_password", "$password");
-  my $mesg = $ldap->bind('uid=zmreplica,cn=admins,cn=zimbra', password=>"$password");
+  my $mesg = $ldap->bind('uid=zmreplica,cn=admins,cn=zmail', password=>"$password");
   if ($mesg->code) {
     $mesg = $ldap->bind("cn=config", password=>"$cur_rootdn_passwd");
     if (!$options{c}) {
       $mesg = $ldap->modify(
-        'uid=zmreplica,cn=admins,cn=zimbra',
+        'uid=zmreplica,cn=admins,cn=zmail',
         replace => [ userPassword => $password]
       );
     }
   }
   if (!$options{c}) {
-    my $infile = "$zimbra_home/conf/zimbra.ldif";
-    my $outfile = "$zimbra_tmp_directory/zimbra.ldif.$$";
+    my $infile = "$zmail_home/conf/zmail.ldif";
+    my $outfile = "$zmail_tmp_directory/zmail.ldif.$$";
     my $ldifin = Net::LDAP::LDIF->new( "$infile", "r", onerror => 'undef' );
     my $ldifout = Net::LDAP::LDIF->new("$outfile", "w", onerror => 'undef' );
     my $entry;
@@ -146,7 +146,7 @@ if ( $options{r}) {
         print "Error msg: ", $ldifin->error ( ), "\n";
         print "Error lines:\n", $ldifin->error_lines ( ), "\n";
       } else {
-        if ($entry->dn() eq "uid=zmreplica,cn=admins,cn=zimbra") {
+        if ($entry->dn() eq "uid=zmreplica,cn=admins,cn=zmail") {
           $entry->replace (
             userPassword => "$ssha_password",
           );
@@ -198,16 +198,16 @@ if ( $options{r}) {
   }
 } elsif ( $options{p} ) {
   setLocalConfig("ldap_postfix_password", "$password");
-  my $mesg = $ldap->bind('uid=zmpostfix,cn=appaccts,cn=zimbra', password=>"$password");
+  my $mesg = $ldap->bind('uid=zmpostfix,cn=appaccts,cn=zmail', password=>"$password");
   if ($mesg->code) {
     $mesg = $ldap->bind("cn=config", password=>"$cur_rootdn_passwd");
     $mesg = $ldap->modify(
-      'uid=zmpostfix,cn=appaccts,cn=zimbra',
+      'uid=zmpostfix,cn=appaccts,cn=zmail',
       replace => [ userPassword => $password ],
     );
   }
-  my $infile = "$zimbra_home/conf/zimbra.ldif";
-  my $outfile = "$zimbra_tmp_directory/zimbra.ldif.$$";
+  my $infile = "$zmail_home/conf/zmail.ldif";
+  my $outfile = "$zmail_tmp_directory/zmail.ldif.$$";
   my $ldifin = Net::LDAP::LDIF->new( "$infile", "r", onerror => 'undef' );
   my $ldifout = Net::LDAP::LDIF->new("$outfile", "w", onerror => 'undef' );
   my $entry;
@@ -217,7 +217,7 @@ if ( $options{r}) {
       print "Error msg: ", $ldifin->error ( ), "\n";
       print "Error lines:\n", $ldifin->error_lines ( ), "\n";
     } else {
-      if ($entry->dn() eq "uid=zmpostfix,cn=appaccts,cn=zimbra") {
+      if ($entry->dn() eq "uid=zmpostfix,cn=appaccts,cn=zmail") {
         $entry->replace (
           userPassword => "$ssha_password",
         );
@@ -245,16 +245,16 @@ if ( $options{r}) {
   }
 } elsif ( $options{a} ) {
   setLocalConfig("ldap_amavis_password", "$password");
-  my $mesg = $ldap->bind('uid=zmamavis,cn=appaccts,cn=zimbra', password=>"$password");
+  my $mesg = $ldap->bind('uid=zmamavis,cn=appaccts,cn=zmail', password=>"$password");
   if ($mesg->code) {
     $mesg = $ldap->bind("cn=config", password=>"$cur_rootdn_passwd");
     $mesg = $ldap->modify(
-      'uid=zmamavis,cn=appaccts,cn=zimbra',
+      'uid=zmamavis,cn=appaccts,cn=zmail',
       replace  => [ userPassword => $password ],
     );
   }
-  my $infile = "$zimbra_home/conf/zimbra.ldif";
-  my $outfile = "$zimbra_tmp_directory/zimbra.ldif.$$";
+  my $infile = "$zmail_home/conf/zmail.ldif";
+  my $outfile = "$zmail_tmp_directory/zmail.ldif.$$";
   my $ldifin = Net::LDAP::LDIF->new( "$infile", "r", onerror => 'undef' );
   my $ldifout = Net::LDAP::LDIF->new("$outfile", "w", onerror => 'undef' );
   my $entry;
@@ -264,7 +264,7 @@ if ( $options{r}) {
       print "Error msg: ", $ldifin->error ( ), "\n";
       print "Error lines:\n", $ldifin->error_lines ( ), "\n";
     } else {
-      if ($entry->dn() eq "uid=zmamavis,cn=appaccts,cn=zimbra") {
+      if ($entry->dn() eq "uid=zmamavis,cn=appaccts,cn=zmail") {
         $entry->replace (
           userPassword => "$ssha_password",
         );
@@ -292,16 +292,16 @@ if ( $options{r}) {
   }
 } elsif ( $options{n} ) {
   setLocalConfig("ldap_nginx_password", "$password");
-  my $mesg = $ldap->bind( 'uid=zmnginx,cn=appaccts,cn=zimbra', password=>"$password");
+  my $mesg = $ldap->bind( 'uid=zmnginx,cn=appaccts,cn=zmail', password=>"$password");
   if ($mesg->code) {
     $mesg = $ldap->bind("cn=config", password=>"$cur_rootdn_passwd");
     $mesg = $ldap->modify(
-      'uid=zmnginx,cn=appaccts,cn=zimbra',
+      'uid=zmnginx,cn=appaccts,cn=zmail',
       replace  => [ userPassword => $password ],
     );
   }
-  my $infile = "$zimbra_home/conf/zimbra.ldif";
-  my $outfile = "$zimbra_tmp_directory/zimbra.ldif.$$";
+  my $infile = "$zmail_home/conf/zmail.ldif";
+  my $outfile = "$zmail_tmp_directory/zmail.ldif.$$";
   my $ldifin = Net::LDAP::LDIF->new( "$infile", "r", onerror => 'undef' );
   my $ldifout = Net::LDAP::LDIF->new("$outfile", "w", onerror => 'undef' );
   my $entry;
@@ -311,7 +311,7 @@ if ( $options{r}) {
       print "Error msg: ", $ldifin->error ( ), "\n";
       print "Error lines:\n", $ldifin->error_lines ( ), "\n";
     } else {
-      if ($entry->dn() eq "uid=zmnginx,cn=appaccts,cn=zimbra") {
+      if ($entry->dn() eq "uid=zmnginx,cn=appaccts,cn=zmail") {
         $entry->replace (
           userPassword => "$ssha_password",
         );
@@ -339,16 +339,16 @@ if ( $options{r}) {
   }
 } elsif ( $options{b} ) {
   setLocalConfig("ldap_bes_searcher_password", "$password");
-  my $mesg = $ldap->bind('uid=zmbes-searcher,cn=appaccts,cn=zimbra', password=>"$password");
+  my $mesg = $ldap->bind('uid=zmbes-searcher,cn=appaccts,cn=zmail', password=>"$password");
   if ($mesg->code) {
     $mesg = $ldap->bind("cn=config", password=>"$cur_rootdn_passwd");
     $mesg = $ldap->modify(
-      'uid=zmbes-searcher,cn=appaccts,cn=zimbra',
+      'uid=zmbes-searcher,cn=appaccts,cn=zmail',
       replace  => [ userPassword => $password ],
     );
   }
-  my $infile = "$zimbra_home/conf/zimbra.ldif";
-  my $outfile = "$zimbra_tmp_directory/zimbra.ldif.$$";
+  my $infile = "$zmail_home/conf/zmail.ldif";
+  my $outfile = "$zmail_tmp_directory/zmail.ldif.$$";
   my $ldifin = Net::LDAP::LDIF->new( "$infile", "r", onerror => 'undef' );
   my $ldifout = Net::LDAP::LDIF->new("$outfile", "w", onerror => 'undef' );
   my $entry;
@@ -358,7 +358,7 @@ if ( $options{r}) {
       print "Error msg: ", $ldifin->error ( ), "\n";
       print "Error lines:\n", $ldifin->error_lines ( ), "\n";
     } else {
-      if ($entry->dn() eq "uid=zmbes-searcher,cn=appaccts,cn=zimbra") {
+      if ($entry->dn() eq "uid=zmbes-searcher,cn=appaccts,cn=zmail") {
         $entry->replace (
           userPassword => "$ssha_password",
         );
@@ -385,18 +385,18 @@ if ( $options{r}) {
     }
   }
 } else {
-  my $zimbra_ldap_userdn = getLocalConfig("zimbra_ldap_userdn");
-  setLocalConfig("zimbra_ldap_password", "$password");
-  my $mesg = $ldap->bind("$zimbra_ldap_userdn", password=>"$password");
+  my $zmail_ldap_userdn = getLocalConfig("zmail_ldap_userdn");
+  setLocalConfig("zmail_ldap_password", "$password");
+  my $mesg = $ldap->bind("$zmail_ldap_userdn", password=>"$password");
   if ($mesg->code) {
     $mesg = $ldap->bind("cn=config", password=>"$cur_rootdn_passwd");
     $mesg = $ldap->modify(
-      "$zimbra_ldap_userdn",
+      "$zmail_ldap_userdn",
       replace => [ userPassword => $password ],
     );
   }
-  my $infile = "$zimbra_home/conf/zimbra.ldif";
-  my $outfile = "$zimbra_tmp_directory/zimbra.ldif.$$";
+  my $infile = "$zmail_home/conf/zmail.ldif";
+  my $outfile = "$zmail_tmp_directory/zmail.ldif.$$";
   my $ldifin = Net::LDAP::LDIF->new( "$infile", "r", onerror => 'undef' );
   my $ldifout = Net::LDAP::LDIF->new("$outfile", "w", onerror => 'undef' );
   my $entry;
@@ -406,7 +406,7 @@ if ( $options{r}) {
       print "Error msg: ", $ldifin->error ( ), "\n";
       print "Error lines:\n", $ldifin->error_lines ( ), "\n";
     } else {
-      if ($entry->dn() eq "$zimbra_ldap_userdn") {
+      if ($entry->dn() eq "$zmail_ldap_userdn") {
         $entry->replace (
           userPassword => "$ssha_password",
         );
@@ -451,7 +451,7 @@ sub usage() {
   print "\t-p: change ldap_postfix_password\n";
   print "\t-r: change ldap_root_passwd\n";
   print "\tOnly one of a, l, n, p, or r may be specified\n";
-  print "\tWithout options zimbra_ldap_password is changed\n\n";
+  print "\tWithout options zmail_ldap_password is changed\n\n";
   print "\tOption -c requires -l and must be run on a replica after\n";
   print "\tchanging the password on the master (using -l by itself).\n\n";
   exit 1;
@@ -466,7 +466,7 @@ sub setLocalConfig {
     return;
   }
   $main::saved{lc}{$key} = $val;
-  `/opt/zimbra/bin/zmlocalconfig -f -e ${key}=\'${val}\' 2> /dev/null`;
+  `/opt/zmail/bin/zmlocalconfig -f -e ${key}=\'${val}\' 2> /dev/null`;
 }
 
 sub getLocalConfig {
@@ -475,7 +475,7 @@ sub getLocalConfig {
   return $main::loaded{lc}{$key}
     if (exists $main::loaded{lc}{$key});
 
-  my $val = `/opt/zimbra/bin/zmlocalconfig -x -s -m nokey ${key} 2> /dev/null`;
+  my $val = `/opt/zmail/bin/zmlocalconfig -x -s -m nokey ${key} 2> /dev/null`;
   chomp $val;
   $main::loaded{lc}{$key} = $val;
   return $val;

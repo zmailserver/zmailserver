@@ -12,7 +12,7 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.qa.unittest;
+package org.zmail.qa.unittest;
 
 import java.io.BufferedReader;
 import java.io.StringReader;
@@ -22,11 +22,11 @@ import java.util.Map.Entry;
 
 import junit.framework.TestCase;
 
-import com.zimbra.cs.service.formatter.ContactCSV;
+import org.zmail.cs.service.formatter.ContactCSV;
 
 /**
  * Unit test for {@link ContactCSV}.
- * Note that ContactCSV import requires /opt/zimbra/conf/zimbra-contact-fields.xml 
+ * Note that ContactCSV import requires /opt/zmail/conf/zmail-contact-fields.xml 
  *
  */
 public final class TestContactCSV

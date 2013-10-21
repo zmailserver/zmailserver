@@ -12,7 +12,7 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.filter;
+package org.zmail.cs.filter;
 
 import java.util.Collection;
 import java.util.List;
@@ -20,22 +20,22 @@ import java.util.List;
 import javax.mail.internet.MimeMessage;
 
 import com.google.common.collect.Sets;
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.common.util.Pair;
-import com.zimbra.common.util.StringUtil;
-import com.zimbra.common.util.ZimbraLog;
-import com.zimbra.cs.filter.jsieve.ActionFlag;
-import com.zimbra.cs.mailbox.Folder;
-import com.zimbra.cs.mailbox.MailItem;
-import com.zimbra.cs.mailbox.Mailbox;
-import com.zimbra.cs.mailbox.Message;
-import com.zimbra.cs.mailbox.Mountpoint;
-import com.zimbra.cs.mailbox.DeliveryContext;
-import com.zimbra.cs.mailbox.OperationContext;
-import com.zimbra.cs.mailbox.MailServiceException.NoSuchItemException;
-import com.zimbra.cs.mime.ParsedMessage;
-import com.zimbra.cs.mime.ParsedMessageOptions;
-import com.zimbra.cs.service.util.ItemId;
+import org.zmail.common.service.ServiceException;
+import org.zmail.common.util.Pair;
+import org.zmail.common.util.StringUtil;
+import org.zmail.common.util.ZmailLog;
+import org.zmail.cs.filter.jsieve.ActionFlag;
+import org.zmail.cs.mailbox.Folder;
+import org.zmail.cs.mailbox.MailItem;
+import org.zmail.cs.mailbox.Mailbox;
+import org.zmail.cs.mailbox.Message;
+import org.zmail.cs.mailbox.Mountpoint;
+import org.zmail.cs.mailbox.DeliveryContext;
+import org.zmail.cs.mailbox.OperationContext;
+import org.zmail.cs.mailbox.MailServiceException.NoSuchItemException;
+import org.zmail.cs.mime.ParsedMessage;
+import org.zmail.cs.mime.ParsedMessageOptions;
+import org.zmail.cs.service.util.ItemId;
 
 /**
  * Mail filtering implementation for messages already in the user's mailbox.
@@ -105,7 +105,7 @@ public final class ExistingMessageHandler implements FilterHandler {
 
     @Override
     public void discard() throws ServiceException {
-        ZimbraLog.filter.info("Discarding existing message with id %d.", messageId);
+        ZmailLog.filter.info("Discarding existing message with id %d.", messageId);
         mailbox.delete(octxt, messageId, MailItem.Type.MESSAGE);
         filtered = true;
     }
@@ -113,7 +113,7 @@ public final class ExistingMessageHandler implements FilterHandler {
 
     @Override
     public Message implicitKeep(Collection<ActionFlag> flagActions, String[] tags) throws ServiceException {
-        ZimbraLog.filter.debug("Implicitly keeping existing message %d.", messageId);
+        ZmailLog.filter.debug("Implicitly keeping existing message %d.", messageId);
         Message msg = getMessage();
         updateTagsAndFlagsIfNecessary(msg, flagActions, tags);
         kept = true;
@@ -122,7 +122,7 @@ public final class ExistingMessageHandler implements FilterHandler {
 
     @Override
     public Message explicitKeep(Collection<ActionFlag> flagActions, String[] tags) throws ServiceException {
-        ZimbraLog.filter.debug("Explicitly keeping existing message %d.", messageId);
+        ZmailLog.filter.debug("Explicitly keeping existing message %d.", messageId);
         Message msg = getMessage();
         updateTagsAndFlagsIfNecessary(msg, flagActions, tags);
         kept = true;
@@ -135,7 +135,7 @@ public final class ExistingMessageHandler implements FilterHandler {
         String[] tags = FilterUtil.getTagsUnion(existingTags, newTags);
         int flags = FilterUtil.getFlagBitmask(flagActions, msg.getFlagBitmask());
         if (!Sets.newHashSet(existingTags).equals(Sets.newHashSet(tags)) || msg.getFlagBitmask() != flags) {
-            ZimbraLog.filter.info("Updating flags to %d, tags to %s on message %d.", flags, tags, msg.getId());
+            ZmailLog.filter.info("Updating flags to %d, tags to %s on message %d.", flags, tags, msg.getId());
             mailbox.setTags(octxt, msg.getId(), MailItem.Type.MESSAGE, flags, tags);
             filtered = true;
         }
@@ -153,13 +153,13 @@ public final class ExistingMessageHandler implements FilterHandler {
         } catch (NoSuchItemException ignored) {
         }
         if (targetFolder != null && source.getFolderId() == targetFolder.getId()) {
-            ZimbraLog.filter.debug("Ignoring fileinto action for message %d.  It is already in %s.",
+            ZmailLog.filter.debug("Ignoring fileinto action for message %d.  It is already in %s.",
                 messageId, folderPath);
             updateTagsAndFlagsIfNecessary(source, flagActions, tags);
             return null;
         }
 
-        ZimbraLog.filter.info("Copying existing message %d to folder %s.", messageId, folderPath);
+        ZmailLog.filter.info("Copying existing message %d to folder %s.", messageId, folderPath);
         if (isLocalExistingFolder(folderPath)) {
             // Copy item into to a local folder.
             Folder target = mailbox.getFolderByPath(octxt, folderPath);
@@ -202,19 +202,19 @@ public final class ExistingMessageHandler implements FilterHandler {
 
     @Override
     public void redirect(String destinationAddress) {
-        ZimbraLog.filter.debug("Ignoring attempt to redirect existing message %d to %s.",
+        ZmailLog.filter.debug("Ignoring attempt to redirect existing message %d to %s.",
             messageId, destinationAddress);
     }
 
     @Override
     public void reply(String bodyTemplate) {
-        ZimbraLog.filter.debug("Ignoring attempt to reply to existing message %d", messageId);
+        ZmailLog.filter.debug("Ignoring attempt to reply to existing message %d", messageId);
     }
 
     @Override
     public void notify(
             String emailAddr, String subjectTemplate, String bodyTemplate, int maxBodyBytes, List<String> origHeaders) {
-        ZimbraLog.filter.debug("Ignoring attempt to notify for existing message %d", messageId);
+        ZmailLog.filter.debug("Ignoring attempt to notify for existing message %d", messageId);
     }
 
     @Override
@@ -224,7 +224,7 @@ public final class ExistingMessageHandler implements FilterHandler {
     @Override
     public void afterFiltering() throws ServiceException {
         if (filed && !kept) {
-            ZimbraLog.filter.info("Deleting original message %d after filing to another folder.", messageId);
+            ZmailLog.filter.info("Deleting original message %d after filing to another folder.", messageId);
             mailbox.delete(octxt, messageId, MailItem.Type.MESSAGE);
         }
     }

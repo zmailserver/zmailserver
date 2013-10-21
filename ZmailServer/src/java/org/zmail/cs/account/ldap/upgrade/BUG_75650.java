@@ -12,22 +12,22 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.account.ldap.upgrade;
+package org.zmail.cs.account.ldap.upgrade;
 
 import java.util.HashMap;
 import java.util.Map;
 
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.cs.account.Entry;
-import com.zimbra.cs.account.Provisioning;
-import com.zimbra.cs.ldap.LdapClient;
-import com.zimbra.cs.ldap.LdapServerType;
-import com.zimbra.cs.ldap.LdapUsage;
-import com.zimbra.cs.ldap.ZLdapContext;
+import org.zmail.common.service.ServiceException;
+import org.zmail.cs.account.Entry;
+import org.zmail.cs.account.Provisioning;
+import org.zmail.cs.ldap.LdapClient;
+import org.zmail.cs.ldap.LdapServerType;
+import org.zmail.cs.ldap.LdapUsage;
+import org.zmail.cs.ldap.ZLdapContext;
 
 public class BUG_75650 extends UpgradeOp {
 
-    private static final String ATTR_NAME = Provisioning.A_zimbraMailPurgeBatchSize;
+    private static final String ATTR_NAME = Provisioning.A_zmailMailPurgeBatchSize;
     private static final int OLD_VALUE = 10000;
     private static final int NEW_VALUE = 1000;
 
@@ -56,7 +56,7 @@ public class BUG_75650 extends UpgradeOp {
         if (curValue == OLD_VALUE) {
             Map<String, Object> attrs = new HashMap<String, Object>();
             printer.println("Changing " + ATTR_NAME + " on " + entryName + " from " + OLD_VALUE + " to " + NEW_VALUE);
-            attrs.put(Provisioning.A_zimbraMailPurgeBatchSize, NEW_VALUE);
+            attrs.put(Provisioning.A_zmailMailPurgeBatchSize, NEW_VALUE);
             modifyAttrs(entry, attrs);
         } else {
             printer.println("Current value of " + ATTR_NAME + " on " + entryName + " is " + curValue + " - not changed");

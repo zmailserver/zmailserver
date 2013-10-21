@@ -12,23 +12,23 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.account.accesscontrol;
+package org.zmail.cs.account.accesscontrol;
 
 import java.util.Map;
 import java.util.Set;
 
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.common.util.Log;
-import com.zimbra.common.util.ZimbraLog;
-import com.zimbra.cs.account.AccessManager;
-import com.zimbra.cs.account.Entry;
-import com.zimbra.cs.account.Provisioning;
-import com.zimbra.cs.account.accesscontrol.Right.RightType;
-import com.zimbra.cs.account.accesscontrol.RightBearer.Grantee;
+import org.zmail.common.service.ServiceException;
+import org.zmail.common.util.Log;
+import org.zmail.common.util.ZmailLog;
+import org.zmail.cs.account.AccessManager;
+import org.zmail.cs.account.Entry;
+import org.zmail.cs.account.Provisioning;
+import org.zmail.cs.account.accesscontrol.Right.RightType;
+import org.zmail.cs.account.accesscontrol.RightBearer.Grantee;
 
 public class AllowedAttrs implements AccessManager.AttrRightChecker {
     
-    private static final Log sLog = ZimbraLog.acl;
+    private static final Log sLog = ZmailLog.acl;
     
     public enum Result {
         ALLOW_ALL,
@@ -149,14 +149,14 @@ public class AllowedAttrs implements AccessManager.AttrRightChecker {
         boolean hasConstraints = (constraints != null && !constraints.isEmpty());
         
         if (hasConstraints) {
-            // see if the grantee can set zimbraConstraint on the constraint entry
+            // see if the grantee can set zmailConstraint on the constraint entry
             // if so, the grantee can set attrs to any value (not restricted by the constraints)
             AllowedAttrs allowedAttrsOnConstraintEntry = 
                 CheckAttrRight.accessibleAttrs(grantee, constraintEntry, AdminRight.PR_SET_ATTRS, false);
             
             if (allowedAttrsOnConstraintEntry.getResult() == AllowedAttrs.Result.ALLOW_ALL ||
                 (allowedAttrsOnConstraintEntry.getResult() == AllowedAttrs.Result.ALLOW_SOME &&
-                 allowedAttrsOnConstraintEntry.getAllowed().contains(Provisioning.A_zimbraConstraint)))
+                 allowedAttrsOnConstraintEntry.getAllowed().contains(Provisioning.A_zmailConstraint)))
                 hasConstraints = false;
         }
         

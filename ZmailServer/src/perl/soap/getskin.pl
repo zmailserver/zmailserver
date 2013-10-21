@@ -38,7 +38,7 @@ my $password = $ARGV[1];
 die "Usage: getskin.pl account password" 
     if (!defined($account) || !defined($password));
 
-my $URN_ZIMBRA_ACCOUNT = "urn:zimbraAccount";
+my $URN_ZIMBRA_ACCOUNT = "urn:zmailAccount";
 
 my $url = "http://localhost:7070/service/soap/";
 
@@ -59,7 +59,7 @@ print "authToken($authToken)\n";
 my $sessionId = $authResponse->find_child('sessionId')->content;
 print "sessionId = $sessionId\n";
 
-my $context = $SOAP->zimbraContext($authToken, $sessionId);
+my $context = $SOAP->zmailContext($authToken, $sessionId);
 
 my $contextStr = $context->to_string("pretty");
 print("Context = $contextStr\n");

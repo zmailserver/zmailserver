@@ -12,16 +12,16 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.mailbox;
+package org.zmail.cs.mailbox;
 
 import com.google.common.base.Objects;
-import com.zimbra.common.mailbox.Color;
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.common.util.ZimbraLog;
-import com.zimbra.cs.db.DbMailItem;
-import com.zimbra.cs.mailbox.MailItem.CustomMetadata.CustomMetadataList;
-import com.zimbra.cs.service.util.ItemId;
-import com.zimbra.cs.session.PendingModifications.Change;
+import org.zmail.common.mailbox.Color;
+import org.zmail.common.service.ServiceException;
+import org.zmail.common.util.ZmailLog;
+import org.zmail.cs.db.DbMailItem;
+import org.zmail.cs.mailbox.MailItem.CustomMetadata.CustomMetadataList;
+import org.zmail.cs.service.util.ItemId;
+import org.zmail.cs.session.PendingModifications.Change;
 
 /**
  * @since Jul 3, 2005
@@ -37,7 +37,7 @@ public class Mountpoint extends Folder {
         super(mbox, ud);
     }
 
-    /** Returns the <code>zimbraId</code> of the remote shared item's
+    /** Returns the <code>zmailId</code> of the remote shared item's
      *  mailbox's owner.
      *
      * @see Mailbox#getAccountId() */
@@ -113,7 +113,7 @@ public class Mountpoint extends Folder {
      * @param id        The id for the new mountpoint.
      * @param parent    The folder to place the new mountpoint in.
      * @param name      The new mountpoint's name.
-     * @param ownerId   The remote mailbox's owner's <code>zimbraId</code>.
+     * @param ownerId   The remote mailbox's owner's <code>zmailId</code>.
      * @param remoteId  The remote item's numeric id.
      * @param view      The (optional) default object type for the folder.
      * @param flags     Folder flags (e.g. {@link Flag#BITMASK_CHECKED}).
@@ -164,7 +164,7 @@ public class Mountpoint extends Folder {
         data.setSubject(name);
         data.metadata = encodeMetadata(color, 1, 1, custom, view, ownerId, remoteId, remoteUuid, reminderEnabled);
         data.contentChanged(mbox);
-        ZimbraLog.mailop.info("Adding Mountpoint %s: id=%d, parentId=%d, parentName=%s.",
+        ZmailLog.mailop.info("Adding Mountpoint %s: id=%d, parentId=%d, parentName=%s.",
                 name, data.id, parent.getId(), parent.getName());
         new DbMailItem(mbox).create(data);
 

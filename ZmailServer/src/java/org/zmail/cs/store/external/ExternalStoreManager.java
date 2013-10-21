@@ -13,7 +13,7 @@
  * ***** END LICENSE BLOCK *****
  */
 
-package com.zimbra.cs.store.external;
+package org.zmail.cs.store.external;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -26,22 +26,22 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.google.common.annotations.VisibleForTesting;
-import com.zimbra.common.localconfig.LC;
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.common.util.ByteUtil;
-import com.zimbra.common.util.FileCache;
-import com.zimbra.common.util.FileUtil;
-import com.zimbra.common.util.ZimbraLog;
-import com.zimbra.cs.mailbox.Mailbox;
-import com.zimbra.cs.mailbox.MessageCache;
-import com.zimbra.cs.store.Blob;
-import com.zimbra.cs.store.BlobBuilder;
-import com.zimbra.cs.store.BlobInputStream;
-import com.zimbra.cs.store.FileDescriptorCache;
-import com.zimbra.cs.store.IncomingDirectory;
-import com.zimbra.cs.store.MailboxBlob;
-import com.zimbra.cs.store.StagedBlob;
-import com.zimbra.cs.store.StoreManager;
+import org.zmail.common.localconfig.LC;
+import org.zmail.common.service.ServiceException;
+import org.zmail.common.util.ByteUtil;
+import org.zmail.common.util.FileCache;
+import org.zmail.common.util.FileUtil;
+import org.zmail.common.util.ZmailLog;
+import org.zmail.cs.mailbox.Mailbox;
+import org.zmail.cs.mailbox.MessageCache;
+import org.zmail.cs.store.Blob;
+import org.zmail.cs.store.BlobBuilder;
+import org.zmail.cs.store.BlobInputStream;
+import org.zmail.cs.store.FileDescriptorCache;
+import org.zmail.cs.store.IncomingDirectory;
+import org.zmail.cs.store.MailboxBlob;
+import org.zmail.cs.store.StagedBlob;
+import org.zmail.cs.store.StoreManager;
 
 /**
  * Abstract base class for external store integration.
@@ -49,7 +49,7 @@ import com.zimbra.cs.store.StoreManager;
  */
 public abstract class ExternalStoreManager extends StoreManager implements ExternalBlobIO {
 
-    private final IncomingDirectory incoming = new IncomingDirectory(LC.zimbra_tmp_directory.value() + File.separator + "incoming");
+    private final IncomingDirectory incoming = new IncomingDirectory(LC.zmail_tmp_directory.value() + File.separator + "incoming");
     protected FileCache<String> localCache;
 
     @Override
@@ -59,7 +59,7 @@ public abstract class ExternalStoreManager extends StoreManager implements Exter
         IncomingDirectory.startSweeper();
 
         // create a local cache for downloading remote blobs
-        File tmpDir = new File(LC.zimbra_tmp_directory.value());
+        File tmpDir = new File(LC.zmail_tmp_directory.value());
         File localCacheDir = new File(tmpDir, "blobs");
         FileUtil.deleteDir(localCacheDir);
         FileUtil.ensureDirExists(localCacheDir);
@@ -219,13 +219,13 @@ public abstract class ExternalStoreManager extends StoreManager implements Exter
     @Override
     public StagedBlob stage(Blob blob, Mailbox mbox) throws IOException, ServiceException {
         if (supports(StoreFeature.RESUMABLE_UPLOAD) && blob instanceof ExternalUploadedBlob) {
-            ZimbraLog.store.debug("blob already uploaded, just need to commit");
+            ZmailLog.store.debug("blob already uploaded, just need to commit");
             String locator = ((ExternalResumableUpload) this).finishUpload((ExternalUploadedBlob) blob);
             if (locator != null) {
-                ZimbraLog.store.debug("wrote to locator %s",locator);
+                ZmailLog.store.debug("wrote to locator %s",locator);
                 localCache.put(locator, getContent(blob));
             } else {
-                ZimbraLog.store.warn("blob staging returned null locator");
+                ZmailLog.store.warn("blob staging returned null locator");
             }
             return new ExternalStagedBlob(mbox, blob.getDigest(), blob.getRawSize(), locator);
         } else {
@@ -263,9 +263,9 @@ public abstract class ExternalStoreManager extends StoreManager implements Exter
         try {
             String locator = writeStreamToStore(pin, actualSize, mbox);
             if (locator != null) {
-                ZimbraLog.store.debug("wrote to locator %s",locator);
+                ZmailLog.store.debug("wrote to locator %s",locator);
             } else {
-                ZimbraLog.store.warn("blob staging returned null locator");
+                ZmailLog.store.warn("blob staging returned null locator");
             }
             return new ExternalStagedBlob(mbox, ByteUtil.encodeFSSafeBase64(digest.digest()), pin.getPosition(), locator);
         } catch (IOException e) {

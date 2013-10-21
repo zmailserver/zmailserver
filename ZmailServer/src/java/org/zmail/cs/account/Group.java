@@ -12,7 +12,7 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.account;
+package org.zmail.cs.account;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -22,17 +22,17 @@ import java.util.Map;
 import java.util.Set;
 
 import com.google.common.collect.Sets;
-import com.zimbra.common.account.Key;
-import com.zimbra.common.account.ProvisioningConstants;
-import com.zimbra.common.account.ZAttrProvisioning.DistributionListSubscriptionPolicy;
-import com.zimbra.common.account.ZAttrProvisioning.DistributionListUnsubscriptionPolicy;
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.cs.account.Provisioning.GroupMembership;
-import com.zimbra.cs.account.accesscontrol.ACLUtil;
-import com.zimbra.cs.account.accesscontrol.GranteeType;
-import com.zimbra.cs.account.accesscontrol.Right;
-import com.zimbra.cs.account.accesscontrol.ZimbraACE;
-import com.zimbra.cs.account.accesscontrol.Rights.User;
+import org.zmail.common.account.Key;
+import org.zmail.common.account.ProvisioningConstants;
+import org.zmail.common.account.ZAttrProvisioning.DistributionListSubscriptionPolicy;
+import org.zmail.common.account.ZAttrProvisioning.DistributionListUnsubscriptionPolicy;
+import org.zmail.common.service.ServiceException;
+import org.zmail.cs.account.Provisioning.GroupMembership;
+import org.zmail.cs.account.accesscontrol.ACLUtil;
+import org.zmail.cs.account.accesscontrol.GranteeType;
+import org.zmail.cs.account.accesscontrol.Right;
+import org.zmail.cs.account.accesscontrol.ZmailACE;
+import org.zmail.cs.account.accesscontrol.Rights.User;
 
 /**
  * @author pshao
@@ -77,12 +77,12 @@ public abstract class Group extends MailTarget implements AliasedEntry {
     public abstract DistributionListUnsubscriptionPolicy getDistributionListUnsubscriptionPolicy();
 
     public boolean hideInGal() {
-        String hideInGal = getAttr(Provisioning.A_zimbraHideInGal);
+        String hideInGal = getAttr(Provisioning.A_zmailHideInGal);
         return ProvisioningConstants.TRUE.equals(hideInGal);
     }
 
     public Server getServer() throws ServiceException {
-        String serverName = getAttr(Provisioning.A_zimbraMailHost);
+        String serverName = getAttr(Provisioning.A_zmailMailHost);
         return (serverName == null ? null : getProvisioning().get(Key.ServerBy.name, serverName));
     }
 
@@ -115,7 +115,7 @@ public abstract class Group extends MailTarget implements AliasedEntry {
         if (getName().equals(addr)) {
             return true;
         } else {
-            Set<String> aliases = getMultiAttrSet(Provisioning.A_zimbraMailAlias);
+            Set<String> aliases = getMultiAttrSet(Provisioning.A_zmailMailAlias);
             return aliases.contains(addr);
         }
     }
@@ -124,7 +124,7 @@ public abstract class Group extends MailTarget implements AliasedEntry {
     public Set<String> getAllAddrsSet() {
         Set<String> addrs = Sets.newHashSet();
         addrs.add(getName());
-        addrs.addAll(getMultiAttrSet(Provisioning.A_zimbraMailAlias));
+        addrs.addAll(getMultiAttrSet(Provisioning.A_zmailMailAlias));
         return Collections.unmodifiableSet(addrs);
     }
 
@@ -144,7 +144,7 @@ public abstract class Group extends MailTarget implements AliasedEntry {
         private String id;
         private String name;
 
-        private GroupOwner(ZimbraACE ace, boolean needName) {
+        private GroupOwner(ZmailACE ace, boolean needName) {
             type = ace.getGranteeType();
             id = ace.getGrantee();
             if (needName) {
@@ -229,9 +229,9 @@ public abstract class Group extends MailTarget implements AliasedEntry {
              * No need to check rights granted on the domain or globalgrant,
              * The ownDistList can only be granted on group target.
              */
-            List<ZimbraACE> acl = ACLUtil.getAllACEs(group);
+            List<ZmailACE> acl = ACLUtil.getAllACEs(group);
             if (acl != null) {
-                for (ZimbraACE ace : acl) {
+                for (ZmailACE ace : acl) {
                     Right right = ace.getRight();
                     if (GROUP_OWNER_RIGHT == right) {
                         owners.add(new GroupOwner(ace, needName));
@@ -248,9 +248,9 @@ public abstract class Group extends MailTarget implements AliasedEntry {
              * No need to check rights granted on the doamin or globalgrant,
              * The ownDistList can only be granted on group target.
              */
-            List<ZimbraACE> acl = ACLUtil.getACEs(group, Collections.singleton(GROUP_OWNER_RIGHT));
+            List<ZmailACE> acl = ACLUtil.getACEs(group, Collections.singleton(GROUP_OWNER_RIGHT));
             if (acl != null) {
-                for (ZimbraACE ace : acl) {
+                for (ZmailACE ace : acl) {
                     Right right = ace.getRight();
                     result.add(ace.getGranteeDisplayName());
                 }

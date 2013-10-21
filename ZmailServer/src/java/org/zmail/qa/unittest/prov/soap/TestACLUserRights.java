@@ -12,7 +12,7 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.qa.unittest.prov.soap;
+package org.zmail.qa.unittest.prov.soap;
 
 import java.util.List;
 import java.util.ArrayList;
@@ -21,16 +21,16 @@ import org.junit.*;
 
 import static org.junit.Assert.*;
 
-import com.zimbra.cs.account.Account;
-import com.zimbra.cs.account.Domain;
-import com.zimbra.cs.account.Provisioning;
-import com.zimbra.cs.mailbox.ACL;
-import com.zimbra.client.ZAce;
-import com.zimbra.client.ZFolder;
-import com.zimbra.client.ZGrant;
-import com.zimbra.client.ZMailbox;
-import com.zimbra.qa.QA.Bug;
-import com.zimbra.qa.unittest.TestUtil;
+import org.zmail.cs.account.Account;
+import org.zmail.cs.account.Domain;
+import org.zmail.cs.account.Provisioning;
+import org.zmail.cs.mailbox.ACL;
+import org.zmail.client.ZAce;
+import org.zmail.client.ZFolder;
+import org.zmail.client.ZGrant;
+import org.zmail.client.ZMailbox;
+import org.zmail.qa.QA.Bug;
+import org.zmail.qa.unittest.TestUtil;
 
 public class TestACLUserRights extends SoapTest {
 

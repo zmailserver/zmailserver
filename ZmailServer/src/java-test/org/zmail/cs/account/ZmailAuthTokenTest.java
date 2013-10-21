@@ -12,44 +12,44 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.account;
+package org.zmail.cs.account;
 
 import java.util.HashMap;
 
 import org.junit.BeforeClass;
 import org.junit.Test;
 
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.common.account.Key.AccountBy;
+import org.zmail.common.service.ServiceException;
+import org.zmail.common.account.Key.AccountBy;
 
 /**
- * Unit test for {@link ZimbraAuthToken}.
+ * Unit test for {@link ZmailAuthToken}.
  *
  * @author ysasaki
  */
-public class ZimbraAuthTokenTest {
+public class ZmailAuthTokenTest {
 
     @BeforeClass
     public static void init() throws ServiceException {
         MockProvisioning prov = new MockProvisioning();
-        prov.createAccount("user1@example.zimbra.com", "secret", new HashMap<String, Object>());
+        prov.createAccount("user1@example.zmail.com", "secret", new HashMap<String, Object>());
         Provisioning.setInstance(prov);
     }
 
     @Test
     public void test() throws Exception {
-        Account a = Provisioning.getInstance().get(AccountBy.name, "user1@example.zimbra.com");
-        ZimbraAuthToken at = new ZimbraAuthToken(a);
+        Account a = Provisioning.getInstance().get(AccountBy.name, "user1@example.zmail.com");
+        ZmailAuthToken at = new ZmailAuthToken(a);
         long start = System.currentTimeMillis();
         String encoded = at.getEncoded();
         for (int i = 0; i < 1000; i++) {
-            new ZimbraAuthToken(encoded);
+            new ZmailAuthToken(encoded);
         }
         System.out.println("Encoded 1000 auth-tokens elapsed=" + (System.currentTimeMillis() - start));
 
         start = System.currentTimeMillis();
         for (int i = 0; i < 1000; i++) {
-            ZimbraAuthToken.getAuthToken(encoded);
+            ZmailAuthToken.getAuthToken(encoded);
         }
         System.out.println("Decoded 1000 auth-tokens elapsed=" + (System.currentTimeMillis() - start));
     }

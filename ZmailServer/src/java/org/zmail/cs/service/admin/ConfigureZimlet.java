@@ -12,25 +12,25 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.service.admin;
+package org.zmail.cs.service.admin;
 
 import java.io.IOException;
 import java.util.List;
 import java.util.Map;
 
-import com.zimbra.cs.account.accesscontrol.AdminRight;
-import com.zimbra.cs.account.accesscontrol.Rights.Admin;
-import com.zimbra.cs.mailbox.MailServiceException;
-import com.zimbra.cs.service.FileUploadServlet;
-import com.zimbra.cs.service.FileUploadServlet.Upload;
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.common.util.ByteUtil;
-import com.zimbra.common.soap.MailConstants;
-import com.zimbra.common.soap.AdminConstants;
-import com.zimbra.common.soap.Element;
-import com.zimbra.cs.zimlet.ZimletException;
-import com.zimbra.cs.zimlet.ZimletUtil;
-import com.zimbra.soap.ZimbraSoapContext;
+import org.zmail.cs.account.accesscontrol.AdminRight;
+import org.zmail.cs.account.accesscontrol.Rights.Admin;
+import org.zmail.cs.mailbox.MailServiceException;
+import org.zmail.cs.service.FileUploadServlet;
+import org.zmail.cs.service.FileUploadServlet.Upload;
+import org.zmail.common.service.ServiceException;
+import org.zmail.common.util.ByteUtil;
+import org.zmail.common.soap.MailConstants;
+import org.zmail.common.soap.AdminConstants;
+import org.zmail.common.soap.Element;
+import org.zmail.cs.zimlet.ZimletException;
+import org.zmail.cs.zimlet.ZimletUtil;
+import org.zmail.soap.ZmailSoapContext;
 
 public class ConfigureZimlet extends AdminDocumentHandler {
 
@@ -39,7 +39,7 @@ public class ConfigureZimlet extends AdminDocumentHandler {
 	    
 	    checkRightTODO();
 	    
-		ZimbraSoapContext zsc = getZimbraSoapContext(context);
+		ZmailSoapContext zsc = getZmailSoapContext(context);
         Element content = request.getElement(MailConstants.E_CONTENT);
         String attachment = content.getAttribute(MailConstants.A_ATTACHMENT_ID, null);
         Upload up = FileUploadServlet.fetchUpload(zsc.getAuthtokenAccountId(), attachment, zsc.getAuthToken());

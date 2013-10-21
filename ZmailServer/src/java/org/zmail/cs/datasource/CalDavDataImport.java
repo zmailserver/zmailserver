@@ -12,7 +12,7 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.datasource;
+package org.zmail.cs.datasource;
 
 import java.io.CharArrayWriter;
 import java.io.IOException;
@@ -24,35 +24,35 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
-import com.zimbra.common.calendar.ICalTimeZone;
-import com.zimbra.common.calendar.ZCalendar;
-import com.zimbra.common.calendar.ZCalendar.ZComponent;
-import com.zimbra.common.calendar.ZCalendar.ZProperty;
-import com.zimbra.common.localconfig.LC;
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.common.util.ZimbraLog;
-import com.zimbra.cs.account.DataSource;
-import com.zimbra.cs.account.Provisioning;
-import com.zimbra.cs.dav.DavElements;
-import com.zimbra.cs.dav.DavException;
-import com.zimbra.cs.dav.client.CalDavClient;
-import com.zimbra.cs.dav.client.CalDavClient.Appointment;
-import com.zimbra.cs.dav.client.DavObject;
-import com.zimbra.cs.dav.client.DavRequest;
-import com.zimbra.cs.db.DbDataSource;
-import com.zimbra.cs.db.DbDataSource.DataSourceItem;
-import com.zimbra.cs.mailbox.CalendarItem;
-import com.zimbra.cs.mailbox.Flag;
-import com.zimbra.cs.mailbox.Folder;
-import com.zimbra.cs.mailbox.MailItem;
-import com.zimbra.cs.mailbox.MailServiceException;
-import com.zimbra.cs.mailbox.MailServiceException.NoSuchItemException;
-import com.zimbra.cs.mailbox.Mailbox;
-import com.zimbra.cs.mailbox.Mailbox.SetCalendarItemData;
-import com.zimbra.cs.mailbox.Metadata;
-import com.zimbra.cs.mailbox.OperationContext;
-import com.zimbra.cs.mailbox.calendar.Invite;
-import com.zimbra.soap.type.DataSource.ConnectionType;
+import org.zmail.common.calendar.ICalTimeZone;
+import org.zmail.common.calendar.ZCalendar;
+import org.zmail.common.calendar.ZCalendar.ZComponent;
+import org.zmail.common.calendar.ZCalendar.ZProperty;
+import org.zmail.common.localconfig.LC;
+import org.zmail.common.service.ServiceException;
+import org.zmail.common.util.ZmailLog;
+import org.zmail.cs.account.DataSource;
+import org.zmail.cs.account.Provisioning;
+import org.zmail.cs.dav.DavElements;
+import org.zmail.cs.dav.DavException;
+import org.zmail.cs.dav.client.CalDavClient;
+import org.zmail.cs.dav.client.CalDavClient.Appointment;
+import org.zmail.cs.dav.client.DavObject;
+import org.zmail.cs.dav.client.DavRequest;
+import org.zmail.cs.db.DbDataSource;
+import org.zmail.cs.db.DbDataSource.DataSourceItem;
+import org.zmail.cs.mailbox.CalendarItem;
+import org.zmail.cs.mailbox.Flag;
+import org.zmail.cs.mailbox.Folder;
+import org.zmail.cs.mailbox.MailItem;
+import org.zmail.cs.mailbox.MailServiceException;
+import org.zmail.cs.mailbox.MailServiceException.NoSuchItemException;
+import org.zmail.cs.mailbox.Mailbox;
+import org.zmail.cs.mailbox.Mailbox.SetCalendarItemData;
+import org.zmail.cs.mailbox.Metadata;
+import org.zmail.cs.mailbox.OperationContext;
+import org.zmail.cs.mailbox.calendar.Invite;
+import org.zmail.soap.type.DataSource.ConnectionType;
 
 public class CalDavDataImport extends MailItemImport {
 
@@ -125,7 +125,7 @@ public class CalDavDataImport extends MailItemImport {
 
     protected String getDefaultPrincipalUrl() {
         DataSource ds = getDataSource();
-        String attrs[] = ds.getMultiAttr(Provisioning.A_zimbraDataSourceAttribute);
+        String attrs[] = ds.getMultiAttr(Provisioning.A_zmailDataSourceAttribute);
         for (String a : attrs) {
             if (a.startsWith("p:")) {
                 return a.substring(2).replaceAll("_USERNAME_", getUsername());
@@ -204,7 +204,7 @@ public class CalDavDataImport extends MailItemImport {
             rootFolder = mbox.getFolderById(octxt, getRootFolderId(ds));
         } catch (NoSuchItemException e) {
             // folder may be deleted. delete the datasource
-            ZimbraLog.datasource.info("Folder %d was deleted.  Deleting data source %s.",
+            ZmailLog.datasource.info("Folder %d was deleted.  Deleting data source %s.",
                     getRootFolderId(ds), ds.getName());
             mbox.getAccount().deleteDataSource(ds.getId());
             // return empty array
@@ -274,7 +274,7 @@ public class CalDavDataImport extends MailItemImport {
                 mbox.setSyncDate(octxt, folder.getId(), mbox.getLastChangeID());
                 DbDataSource.addMapping(ds, f);
             } else if (f.md == null) {
-                ZimbraLog.datasource.warn("syncFolders: empty metadata for item %d", f.itemId);
+                ZmailLog.datasource.warn("syncFolders: empty metadata for item %d", f.itemId);
                 f.folderId = folder.getFolderId();
                 f.remoteId = url;
                 f.md = new Metadata();
@@ -293,11 +293,11 @@ public class CalDavDataImport extends MailItemImport {
             }
             String fname = folder.getName();
             if (!fname.equals(name)) {
-                ZimbraLog.datasource.warn("renaming folder %s to %s", fname, name);
+                ZmailLog.datasource.warn("renaming folder %s to %s", fname, name);
                 try {
                     mbox.rename(octxt, f.itemId, MailItem.Type.FOLDER, name, folder.getFolderId());
                 } catch (ServiceException e) {
-                    ZimbraLog.datasource.warn("folder rename failed", e);
+                    ZmailLog.datasource.warn("folder rename failed", e);
                 }
             }
             allFolders.remove(url);
@@ -323,7 +323,7 @@ public class CalDavDataImport extends MailItemImport {
                 try {
                     mbox.delete(octxt, fidArray, MailItem.Type.FOLDER, null);
                 } catch (ServiceException e) {
-                    ZimbraLog.datasource.warn("folder delete failed", e);
+                    ZmailLog.datasource.warn("folder delete failed", e);
                 }
             }
         }
@@ -331,7 +331,7 @@ public class CalDavDataImport extends MailItemImport {
         return ret;
     }
     private void deleteRemoteFolder(String url) throws ServiceException, IOException, DavException {
-        ZimbraLog.datasource.debug("deleteRemoteFolder: deleting remote folder %s", url);
+        ZmailLog.datasource.debug("deleteRemoteFolder: deleting remote folder %s", url);
         getClient().sendRequest(DavRequest.DELETE(url));
     }
     private boolean pushDelete(Collection<Integer> itemIds) throws ServiceException {
@@ -343,7 +343,7 @@ public class CalDavDataImport extends MailItemImport {
                 deleteRemoteItem(DbDataSource.getMapping(ds, itemId));
                 toDelete.add(itemId);
             } catch (Exception e) {
-                ZimbraLog.datasource.warn("pushDelete: can't delete remote item for item "+itemId, e);
+                ZmailLog.datasource.warn("pushDelete: can't delete remote item for item "+itemId, e);
             }
         }
         if (toDelete.size() > 0) {
@@ -354,7 +354,7 @@ public class CalDavDataImport extends MailItemImport {
     }
     private void deleteRemoteItem(DataSourceItem item) throws ServiceException, IOException, DavException {
         if (item.itemId <= 0 || item.md == null) {
-            ZimbraLog.datasource.warn("pushDelete: empty item %d", item.itemId);
+            ZmailLog.datasource.warn("pushDelete: empty item %d", item.itemId);
             return;
         }
         String type = item.md.get(METADATA_KEY_TYPE, null);
@@ -364,17 +364,17 @@ public class CalDavDataImport extends MailItemImport {
         }
         String uri = item.remoteId;
         if (uri == null) {
-            ZimbraLog.datasource.warn("pushDelete: empty uri for item %d", item.itemId);
+            ZmailLog.datasource.warn("pushDelete: empty uri for item %d", item.itemId);
             return;
         }
         if (METADATA_TYPE_FOLDER.equals(type)) {
-            ZimbraLog.datasource.debug("pushDelete: deleting remote folder %s", uri);
+            ZmailLog.datasource.debug("pushDelete: deleting remote folder %s", uri);
             getClient().sendRequest(DavRequest.DELETE(uri));
         } else if (METADATA_TYPE_APPOINTMENT.equals(type)) {
-            ZimbraLog.datasource.debug("pushDelete: deleting remote appointment %s", uri);
+            ZmailLog.datasource.debug("pushDelete: deleting remote appointment %s", uri);
             getClient().sendRequest(DavRequest.DELETE(uri));
         } else {
-            ZimbraLog.datasource.warn("pushDelete: unrecognized item type for %d: %s", item.itemId, type);
+            ZmailLog.datasource.warn("pushDelete: unrecognized item type for %d: %s", item.itemId, type);
         }
     }
     private String createTargetUrl(MailItem mitem) throws ServiceException {
@@ -410,17 +410,17 @@ public class CalDavDataImport extends MailItemImport {
         String type = item.md.get(METADATA_KEY_TYPE);
         if (METADATA_TYPE_FOLDER.equals(type)) {
             if (mitem.getType() != MailItem.Type.FOLDER) {
-                ZimbraLog.datasource.warn("pushModify: item type doesn't match in metadata for item %d", itemId);
+                ZmailLog.datasource.warn("pushModify: item type doesn't match in metadata for item %d", itemId);
                 return;
             }
             // detect and push rename
         } else if (METADATA_TYPE_APPOINTMENT.equals(type)) {
             if (mitem.getType() != MailItem.Type.APPOINTMENT) {
-                ZimbraLog.datasource.warn("pushModify: item type doesn't match in metadata for item %d", itemId);
+                ZmailLog.datasource.warn("pushModify: item type doesn't match in metadata for item %d", itemId);
                 return;
             }
             // push modified appt
-            ZimbraLog.datasource.debug("pushModify: sending appointment %s", item.remoteId);
+            ZmailLog.datasource.debug("pushModify: sending appointment %s", item.remoteId);
             String etag = putAppointment((CalendarItem)mitem, item);
             if (etag == null) {
                 Appointment appt = mClient.getEtag(item.remoteId);
@@ -434,7 +434,7 @@ public class CalDavDataImport extends MailItemImport {
                 DbDataSource.updateMapping(ds, item);
             }
         } else {
-            ZimbraLog.datasource.warn("pushModify: unrecognized item type for %d: %s", itemId, type);
+            ZmailLog.datasource.warn("pushModify: unrecognized item type for %d: %s", itemId, type);
             return;
         }
     }
@@ -444,7 +444,7 @@ public class CalDavDataImport extends MailItemImport {
 
         buf.append("BEGIN:VCALENDAR\r\n");
         buf.append("VERSION:").append(ZCalendar.sIcalVersion).append("\r\n");
-        buf.append("PRODID:").append(ZCalendar.sZimbraProdID).append("\r\n");
+        buf.append("PRODID:").append(ZCalendar.sZmailProdID).append("\r\n");
         Iterator<ICalTimeZone> iter = calItem.getTimeZoneMap().tzIterator();
         while (iter.hasNext()) {
             ICalTimeZone tz = iter.next();
@@ -476,7 +476,7 @@ public class CalDavDataImport extends MailItemImport {
         return getClient().sendCalendarData(appt);
     }
     private List<RemoteItem> getRemoteItems(Folder folder) throws ServiceException, IOException, DavException {
-        ZimbraLog.datasource.debug("Refresh folder %s", folder.getPath());
+        ZmailLog.datasource.debug("Refresh folder %s", folder.getPath());
         DataSource ds = getDataSource();
         DataSourceItem item = DbDataSource.getMapping(ds, folder.getId());
         if (item.md == null)
@@ -505,7 +505,7 @@ public class CalDavDataImport extends MailItemImport {
             rci.itemId = deletedItem.itemId;
             ret.add(rci);
             deletedIds.add(deletedItem.itemId);
-            ZimbraLog.datasource.debug("deleting: %d (%s) ", deletedItem.itemId, deletedItem.remoteId);
+            ZmailLog.datasource.debug("deleting: %d (%s) ", deletedItem.itemId, deletedItem.remoteId);
         }
         if (!deletedIds.isEmpty())
             DbDataSource.deleteMappings(ds, deletedIds);
@@ -513,7 +513,7 @@ public class CalDavDataImport extends MailItemImport {
     }
     private MailItem applyRemoteItem(RemoteItem remoteItem, Folder where) throws ServiceException, IOException {
         if (!(remoteItem instanceof RemoteCalendarItem)) {
-            ZimbraLog.datasource.warn("applyRemoteItem: not a calendar item: %s", remoteItem);
+            ZmailLog.datasource.warn("applyRemoteItem: not a calendar item: %s", remoteItem);
             return null;
         }
         RemoteCalendarItem item = (RemoteCalendarItem) remoteItem;
@@ -535,13 +535,13 @@ public class CalDavDataImport extends MailItemImport {
             try {
                 mi = mbox.getItemById(octxt, dsItem.itemId, MailItem.Type.UNKNOWN);
             } catch (MailServiceException.NoSuchItemException se) {
-                ZimbraLog.datasource.warn("applyRemoteItem: calendar item not found: ", remoteItem);
+                ZmailLog.datasource.warn("applyRemoteItem: calendar item not found: ", remoteItem);
             }
             if (item.etag == null) {
-                ZimbraLog.datasource.warn("No Etag returned for item %s", item.href);
+                ZmailLog.datasource.warn("No Etag returned for item %s", item.href);
                 isStale = true;
             } else if (etag == null) {
-                ZimbraLog.datasource.warn("Empty etag for item %d", dsItem.itemId);
+                ZmailLog.datasource.warn("Empty etag for item %d", dsItem.itemId);
                 isStale = true;
             } else {
                 isStale = !item.etag.equals(etag);
@@ -550,7 +550,7 @@ public class CalDavDataImport extends MailItemImport {
                 isStale = true;
         }
         if (item.status == Status.deleted) {
-            ZimbraLog.datasource.debug("Deleting appointment %s", item.href);
+            ZmailLog.datasource.debug("Deleting appointment %s", item.href);
             try {
                 mi = mbox.getItemById(octxt, item.itemId, MailItem.Type.UNKNOWN);
             } catch (NoSuchItemException se) {
@@ -559,10 +559,10 @@ public class CalDavDataImport extends MailItemImport {
             try {
                 mbox.delete(octxt, item.itemId, MailItem.Type.UNKNOWN);
             } catch (ServiceException se) {
-                ZimbraLog.datasource.warn("Error deleting remotely deleted item %d (%s)", item.itemId, dsItem.remoteId);
+                ZmailLog.datasource.warn("Error deleting remotely deleted item %d (%s)", item.itemId, dsItem.remoteId);
             }
         } else if (isStale) {
-            ZimbraLog.datasource.debug("Updating stale appointment %s", item.href);
+            ZmailLog.datasource.debug("Updating stale appointment %s", item.href);
             ZCalendar.ZVCalendar vcalendar;
             SetCalendarItemData main = new SetCalendarItemData();
             SetCalendarItemData exceptions[] = null;
@@ -575,7 +575,7 @@ public class CalDavDataImport extends MailItemImport {
 
             Appointment appt = client.getCalendarData(new Appointment(item.href, item.etag));
             if (appt.data == null) {
-                ZimbraLog.datasource.warn("No appointment found at "+item.href);
+                ZmailLog.datasource.warn("No appointment found at "+item.href);
                 return null;
             }
             dsItem.md.put(METADATA_KEY_ETAG, appt.etag);
@@ -599,7 +599,7 @@ public class CalDavDataImport extends MailItemImport {
                     }
                 }
             } catch (Exception e) {
-                ZimbraLog.datasource.warn("Error parsing appointment ", e);
+                ZmailLog.datasource.warn("Error parsing appointment ", e);
                 return null;
             }
             mi = mbox.setCalendarItem(octxt, where.getId(), 0, null, main, exceptions, null, CalendarItem.NEXT_ALARM_KEEP_CURRENT);
@@ -611,7 +611,7 @@ public class CalDavDataImport extends MailItemImport {
                 DbDataSource.updateMapping(ds, dsItem);
             }
         } else {
-            ZimbraLog.datasource.debug("Appointment up to date %s", item.href);
+            ZmailLog.datasource.debug("Appointment up to date %s", item.href);
             try {
                 mi = mbox.getItemById(octxt, dsItem.itemId, MailItem.Type.UNKNOWN);
             } catch (NoSuchItemException se) {
@@ -669,7 +669,7 @@ public class CalDavDataImport extends MailItemImport {
                     try {
                         pushModify(item);
                     } catch (Exception e) {
-                        ZimbraLog.datasource.info("Failed to push item "+item.getId(), e);
+                        ZmailLog.datasource.info("Failed to push item "+item.getId(), e);
                     }
                     allDone = false;
                 }

@@ -12,19 +12,19 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.account.ldap.entry;
+package org.zmail.cs.account.ldap.entry;
 
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
 
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.cs.account.Account;
-import com.zimbra.cs.account.AttributeClass;
-import com.zimbra.cs.account.AttributeManager;
-import com.zimbra.cs.account.Provisioning;
-import com.zimbra.cs.account.Signature;
-import com.zimbra.cs.ldap.LdapUtil;
+import org.zmail.common.service.ServiceException;
+import org.zmail.cs.account.Account;
+import org.zmail.cs.account.AttributeClass;
+import org.zmail.cs.account.AttributeManager;
+import org.zmail.cs.account.Provisioning;
+import org.zmail.cs.account.Signature;
+import org.zmail.cs.ldap.LdapUtil;
 
 /**
  * 
@@ -39,13 +39,13 @@ public abstract class LdapSignatureBase extends Signature implements LdapEntry {
     
     /*
      * For backward compatibility (in the case when upgrade script is not run) to preserve the 
-     * signature on the account, we need to check for presence of A_zimbraPrefMailSignature.
+     * signature on the account, we need to check for presence of A_zmailPrefMailSignature.
      * 
-     * We also need to check for presence of A_zimbraPrefSignatureName, because in the new scheme
+     * We also need to check for presence of A_zmailPrefSignatureName, because in the new scheme
      * a signature can have a name but not a value.
      * 
-     * The account signature is considered present if either A_zimbraPrefMailSignature or 
-     * A_zimbraPrefSignatureName on the account is set.  If A_zimbraPrefSignatureName is not set,
+     * The account signature is considered present if either A_zmailPrefMailSignature or 
+     * A_zmailPrefSignatureName on the account is set.  If A_zmailPrefSignatureName is not set,
      * getAccountSignature uses the account's name for the signature name.
      * 
      * Note: we do not set/writeback to LDAP the default signature to the account signature even 
@@ -53,9 +53,9 @@ public abstract class LdapSignatureBase extends Signature implements LdapEntry {
      * 
      */
     private static boolean hasAccountSignature(Account acct) {
-        return (acct.getAttr(Provisioning.A_zimbraPrefMailSignature) != null || 
-                acct.getAttr(Provisioning.A_zimbraSignatureName) != null ||
-                acct.getAttr(Provisioning.A_zimbraSignatureId) != null);
+        return (acct.getAttr(Provisioning.A_zmailPrefMailSignature) != null || 
+                acct.getAttr(Provisioning.A_zmailSignatureName) != null ||
+                acct.getAttr(Provisioning.A_zmailSignatureId) != null);
     }
     
     public static Signature getAccountSignature(Provisioning prov, Account acct) throws ServiceException {
@@ -72,18 +72,18 @@ public abstract class LdapSignatureBase extends Signature implements LdapEntry {
         }
         
         // for backward compatibility, we recognize an existing signature on the account if 
-        // it has a A_zimbraPrefMailSignature value.  We write back name and id if they are not
+        // it has a A_zmailPrefMailSignature value.  We write back name and id if they are not
         // present.  This write back should happen only once for the account.
         Map<String, Object> putbackAttrs = new HashMap<String, Object>();
-        String sigName = acct.getAttr(Provisioning.A_zimbraSignatureName);
+        String sigName = acct.getAttr(Provisioning.A_zmailSignatureName);
         if (sigName == null) {
             sigName = acct.getName();
-            putbackAttrs.put(Provisioning.A_zimbraSignatureName, sigName);
+            putbackAttrs.put(Provisioning.A_zmailSignatureName, sigName);
         }
-        String sigId = acct.getAttr(Provisioning.A_zimbraSignatureId);
+        String sigId = acct.getAttr(Provisioning.A_zmailSignatureId);
         if (sigId == null) {
             sigId = LdapUtil.generateUUID();
-            putbackAttrs.put(Provisioning.A_zimbraSignatureId, sigId);
+            putbackAttrs.put(Provisioning.A_zmailSignatureId, sigId);
         }
         if (putbackAttrs.size() > 0)
             prov.modifyAttrs(acct, putbackAttrs);
@@ -96,7 +96,7 @@ public abstract class LdapSignatureBase extends Signature implements LdapEntry {
      * one signature and we don't want to create an ldap signature entry for that.
      */ 
     public static boolean isAccountSignature(Account acct, String signatureId) {
-        String acctSigId = acct.getAttr(Provisioning.A_zimbraSignatureId);
+        String acctSigId = acct.getAttr(Provisioning.A_zmailSignatureId);
         return (signatureId.equals(acctSigId));
     }
     
@@ -106,8 +106,8 @@ public abstract class LdapSignatureBase extends Signature implements LdapEntry {
     
     public static void createAccountSignature(Provisioning prov, Account acct, Map<String, Object>signatureAttrs, boolean setAsDefault) throws ServiceException {
         if (setAsDefault) {
-            String signatureId = (String)signatureAttrs.get(Provisioning.A_zimbraSignatureId);
-            signatureAttrs.put(Provisioning.A_zimbraPrefDefaultSignatureId, signatureId);
+            String signatureId = (String)signatureAttrs.get(Provisioning.A_zmailSignatureId);
+            signatureAttrs.put(Provisioning.A_zmailPrefDefaultSignatureId, signatureId);
         }
         prov.modifyAttrs(acct, signatureAttrs);
     }

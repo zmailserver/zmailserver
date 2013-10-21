@@ -14,4 +14,4 @@
 # ***** END LICENSE BLOCK *****
 # 
 
-zmjava com.zimbra.cs.wiki.WikiDigestFixup
+zmjava org.zmail.cs.wiki.WikiDigestFixup

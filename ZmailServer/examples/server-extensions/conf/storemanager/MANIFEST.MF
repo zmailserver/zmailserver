@@ -1,2 +1,2 @@
-Zimbra-Extension-Class: com.zimbra.examples.extns.storemanager.ExampleStoreManager
+Zmail-Extension-Class: org.zmail.examples.extns.storemanager.ExampleStoreManager
 

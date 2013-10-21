@@ -13,7 +13,7 @@
 # basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
 # ***** END LICENSE BLOCK *****
 # 
-source /opt/zimbra/bin/zmshutil || exit 1
+source /opt/zmail/bin/zmshutil || exit 1
 zmsetvars
 
 
@@ -26,12 +26,12 @@ uname -a
 echo "----------------"
 hostname
 echo "----------------"
-H=`/opt/zimbra/bin/zmhostname`
+H=`/opt/zmail/bin/zmhostname`
 echo $H
 echo "----------------"
 host $H 
 echo "----------------"
-P=`/opt/zimbra/libexec/get_plat_tag.sh`
+P=`/opt/zmail/libexec/get_plat_tag.sh`
 echo $P
 echo "----------------"
 df -h
@@ -40,14 +40,14 @@ echo "----------------"
 echo "----------------"
 
 if [[ x$P == "xMACOSX"* ]]; then
-	ls -ld /Library/Receipts/zimbra-*
+	ls -ld /Library/Receipts/zmail-*
 elif [[ "x$P" == "xUBUNTU"* || "x$P" == "DEBIAN"* ]]; then
-	apt-cache show zimbra-core
+	apt-cache show zmail-core
 else
-	rpm -qi zimbra-core
+	rpm -qi zmail-core
 fi
 echo "----------------"
-ls -l /opt/zimbra
+ls -l /opt/zmail
 echo "----------------"
 uptime
 echo "----------------"

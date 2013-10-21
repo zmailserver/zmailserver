@@ -17,7 +17,7 @@
  * Created on Apr 14, 2005
  *
  */
-package com.zimbra.cs.mime;
+package org.zmail.cs.mime;
 
 import java.util.Set;
 
@@ -37,7 +37,7 @@ public interface MimeTypeInfo {
     
     /**
      * Gets the name of the handler class. If no package is specified, 
-     * com.zimbra.cs.mime.handler is assumed. 
+     * org.zmail.cs.mime.handler is assumed. 
      * @return
      */
     public String getHandlerClass();

@@ -12,20 +12,20 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.zimlet;
+package org.zmail.cs.zimlet;
 
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.Iterator;
 
-import com.zimbra.common.util.ByteUtil;
-import com.zimbra.common.util.ZimbraLog;
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.common.soap.Element;
-import com.zimbra.common.soap.W3cDomUtil;
-import com.zimbra.common.soap.XmlParseException;
-import com.zimbra.common.soap.ZimletConstants;
+import org.zmail.common.util.ByteUtil;
+import org.zmail.common.util.ZmailLog;
+import org.zmail.common.service.ServiceException;
+import org.zmail.common.soap.Element;
+import org.zmail.common.soap.W3cDomUtil;
+import org.zmail.common.soap.XmlParseException;
+import org.zmail.common.soap.ZimletConstants;
 
 /**
  * Parses the Zimlet description files, <zimlet>.xml and config.xml.
@@ -148,7 +148,7 @@ public abstract class ZimletMeta {
 			}
 			return W3cDomUtil.parseXML(mGeneratedXML, f).toString();
 		} catch (XmlParseException e) {
-			ZimbraLog.zimlet.warn("error parsing the Zimlet file "+mName);
+			ZmailLog.zimlet.warn("error parsing the Zimlet file "+mName);
 		}
 		return "";
 	}

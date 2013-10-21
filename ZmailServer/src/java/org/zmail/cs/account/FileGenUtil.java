@@ -12,7 +12,7 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.account;
+package org.zmail.cs.account;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
@@ -22,10 +22,10 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.Map;
 
-import com.zimbra.common.util.ByteUtil;
-import com.zimbra.common.util.StringUtil;
-import com.zimbra.cs.account.AttributeManagerUtil.CLOptions;
-import com.zimbra.cs.util.BuildInfo;
+import org.zmail.common.util.ByteUtil;
+import org.zmail.common.util.StringUtil;
+import org.zmail.cs.account.AttributeManagerUtil.CLOptions;
+import org.zmail.cs.util.BuildInfo;
 
 public class FileGenUtil {
     

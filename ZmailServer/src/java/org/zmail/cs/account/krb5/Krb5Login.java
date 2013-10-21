@@ -13,10 +13,10 @@
  * ***** END LICENSE BLOCK *****
  */
 
-package com.zimbra.cs.account.krb5;
+package org.zmail.cs.account.krb5;
 
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.common.util.ZimbraLog;
+import org.zmail.common.service.ServiceException;
+import org.zmail.common.util.ZmailLog;
 
 import java.security.PrivilegedExceptionAction;
 import java.security.PrivilegedActionException;
@@ -53,7 +53,7 @@ public class Krb5Login {
                 try {
                     lc.logout();
                 } catch(LoginException le) {
-                    ZimbraLog.account.warn("krb5 logout failed", le);
+                    ZmailLog.account.warn("krb5 logout failed", le);
                 }
             }
         }
@@ -74,7 +74,7 @@ public class Krb5Login {
                 try {
                     lc.logout();
                 } catch(LoginException le) {
-                    ZimbraLog.account.warn("krb5 logout failed", le);
+                    ZmailLog.account.warn("krb5 logout failed", le);
                 }
             }
         }

@@ -13,7 +13,7 @@
  * ***** END LICENSE BLOCK *****
  */
 
-package com.zimbra.cs.account.ldap;
+package org.zmail.cs.account.ldap;
 
 import java.util.HashMap;
 import java.util.HashSet;
@@ -21,33 +21,33 @@ import java.util.Map;
 import java.util.Set;
 
 import com.google.common.collect.Maps;
-import com.zimbra.common.account.Key;
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.common.soap.AdminConstants;
-import com.zimbra.common.util.EmailUtil;
-import com.zimbra.common.util.Log;
-import com.zimbra.common.util.LogFactory;
-import com.zimbra.common.util.StringUtil;
-import com.zimbra.cs.account.Account;
-import com.zimbra.cs.account.AccountServiceException;
-import com.zimbra.cs.account.Alias;
-import com.zimbra.cs.account.Config;
-import com.zimbra.cs.account.DistributionList;
-import com.zimbra.cs.account.Domain;
-import com.zimbra.cs.account.DynamicGroup;
-import com.zimbra.cs.account.Entry;
-import com.zimbra.cs.account.NamedEntry;
-import com.zimbra.cs.account.Provisioning;
-import com.zimbra.cs.account.SearchDirectoryOptions;
-import com.zimbra.cs.account.Server;
-import com.zimbra.cs.account.SearchDirectoryOptions.ObjectType;
-import com.zimbra.cs.account.XMPPComponent;
-import com.zimbra.cs.account.ldap.entry.LdapEntry;
-import com.zimbra.cs.account.soap.SoapProvisioning;
-import com.zimbra.cs.httpclient.URLUtil;
-import com.zimbra.cs.ldap.ILdapContext;
-import com.zimbra.cs.ldap.ZLdapFilterFactory.FilterId;
-import com.zimbra.soap.admin.type.CacheEntryType;
+import org.zmail.common.account.Key;
+import org.zmail.common.service.ServiceException;
+import org.zmail.common.soap.AdminConstants;
+import org.zmail.common.util.EmailUtil;
+import org.zmail.common.util.Log;
+import org.zmail.common.util.LogFactory;
+import org.zmail.common.util.StringUtil;
+import org.zmail.cs.account.Account;
+import org.zmail.cs.account.AccountServiceException;
+import org.zmail.cs.account.Alias;
+import org.zmail.cs.account.Config;
+import org.zmail.cs.account.DistributionList;
+import org.zmail.cs.account.Domain;
+import org.zmail.cs.account.DynamicGroup;
+import org.zmail.cs.account.Entry;
+import org.zmail.cs.account.NamedEntry;
+import org.zmail.cs.account.Provisioning;
+import org.zmail.cs.account.SearchDirectoryOptions;
+import org.zmail.cs.account.Server;
+import org.zmail.cs.account.SearchDirectoryOptions.ObjectType;
+import org.zmail.cs.account.XMPPComponent;
+import org.zmail.cs.account.ldap.entry.LdapEntry;
+import org.zmail.cs.account.soap.SoapProvisioning;
+import org.zmail.cs.httpclient.URLUtil;
+import org.zmail.cs.ldap.ILdapContext;
+import org.zmail.cs.ldap.ZLdapFilterFactory.FilterId;
+import org.zmail.soap.admin.type.CacheEntryType;
 
 
 public class RenameDomain {
@@ -76,10 +76,10 @@ public class RenameDomain {
         throws ServiceException;
         
         public abstract void renameAddressesInAllDistributionLists(Map<String, String> changedPairs);
-        public abstract void renameXMPPComponent(String zimbraId, String newName) throws ServiceException;
+        public abstract void renameXMPPComponent(String zmailId, String newName) throws ServiceException;
     }
  
-    private static final Log sRenameDomainLog = LogFactory.getLog("zimbra.provisioning.renamedomain");
+    private static final Log sRenameDomainLog = LogFactory.getLog("zmail.provisioning.renamedomain");
     
     private LdapProv mProv;
     private RenameDomainLdapHelper mLdapHelper;
@@ -182,8 +182,8 @@ public class RenameDomain {
          * 3. Delete the old domain
          */ 
         debug("Deleting old domain %s(%s)", mOldDomainName, mOldDomainId);
-        // save zimbraDefaultDomainName because deleteDomain will erase it if it is the old domain
-        String curDefaultDomain = mProv.getConfig().getAttr(Provisioning.A_zimbraDefaultDomainName);
+        // save zmailDefaultDomainName because deleteDomain will erase it if it is the old domain
+        String curDefaultDomain = mProv.getConfig().getAttr(Provisioning.A_zmailDefaultDomainName);
         mProv.deleteDomain(mOldDomainId);
         
         /*
@@ -193,7 +193,7 @@ public class RenameDomain {
         
         /*
          * 5. activate the new domain
-         *    - restore zimbraId to the id of the old domain on the new domain
+         *    - restore zmailId to the id of the old domain on the new domain
          *    - activate/enable the new domain
          */
         endRenameDomain(newDomain, mOldDomainId);
@@ -211,7 +211,7 @@ public class RenameDomain {
     
     public static enum RenamePhase {
         /*
-         * Note: the following text is written in zimbraDomainRenameInfo - 
+         * Note: the following text is written in zmailDomainRenameInfo - 
          * change would require migration!!
          */
         RENAME_ENTRIES,
@@ -274,7 +274,7 @@ public class RenameDomain {
         
         static RenameInfo load(Domain domain, boolean expectingSrc) throws ServiceException {
             /*
-             * rename info is stored in zimbraDomainRenameInfo. 
+             * rename info is stored in zmailDomainRenameInfo. 
              * The format is:
              *     On the source(old) domain:
              *         SRC,{phase}:{destination-domain-name}
@@ -282,26 +282,26 @@ public class RenameDomain {
              *         DEST:{source-domain-name}
              */
             
-            String renameInfo = domain.getAttr(Provisioning.A_zimbraDomainRenameInfo);
+            String renameInfo = domain.getAttr(Provisioning.A_zmailDomainRenameInfo);
             if (StringUtil.isNullOrEmpty(renameInfo)) {
                 debug("RenameInfo.load: domain=%s(%s), %s=not set", 
-                        domain.getName(), domain.getId(), Provisioning.A_zimbraDomainRenameInfo);
+                        domain.getName(), domain.getId(), Provisioning.A_zmailDomainRenameInfo);
                 return null;
             }
             debug("RenameInfo.load: domain=%s(%s), %s=%s", 
-                    domain.getName(), domain.getId(), Provisioning.A_zimbraDomainRenameInfo, renameInfo);
+                    domain.getName(), domain.getId(), Provisioning.A_zmailDomainRenameInfo, renameInfo);
             
             int idx = renameInfo.indexOf(COLON);
             if (idx == -1) {
                 throw ServiceException.FAILURE("invalid value in " + 
-                        Provisioning.A_zimbraDomainRenameInfo + ": " + renameInfo + 
+                        Provisioning.A_zmailDomainRenameInfo + ": " + renameInfo + 
                         " missing " + COLON, null);
             }
             String statusPart = renameInfo.substring(0, idx);
             String domainName = renameInfo.substring(idx+1);
             if (StringUtil.isNullOrEmpty(domainName)) {
                 throw ServiceException.FAILURE("invalid value in " + 
-                        Provisioning.A_zimbraDomainRenameInfo + ": " + renameInfo + 
+                        Provisioning.A_zmailDomainRenameInfo + ": " + renameInfo + 
                         " missing domain name", null);
             }
             
@@ -316,13 +316,13 @@ public class RenameDomain {
             if (srcOrDest.equals(SRC)) {
                 if (!expectingSrc) {
                     throw ServiceException.FAILURE("invalid value in " + 
-                            Provisioning.A_zimbraDomainRenameInfo + ": " + renameInfo + 
+                            Provisioning.A_zmailDomainRenameInfo + ": " + renameInfo + 
                             " missing " + DEST + " keyword", null);
                 }
                 
                 if (phase == null) {
                     throw ServiceException.FAILURE("invalid value in " + 
-                            Provisioning.A_zimbraDomainRenameInfo + ": " + renameInfo + 
+                            Provisioning.A_zmailDomainRenameInfo + ": " + renameInfo + 
                             " missing phase info for source domain" , null);
                 }
                     
@@ -330,7 +330,7 @@ public class RenameDomain {
             } else {
                 if (expectingSrc) {
                     throw ServiceException.FAILURE("invalid value in " + 
-                            Provisioning.A_zimbraDomainRenameInfo + ": " + renameInfo + 
+                            Provisioning.A_zmailDomainRenameInfo + ": " + renameInfo + 
                             " missing " + SRC + " keyword", null);
                 }
                 
@@ -347,10 +347,10 @@ public class RenameDomain {
                 renameInfoStr = encodeSrc();
             else
                 renameInfoStr = encodeDest();
-            attrs.put(Provisioning.A_zimbraDomainRenameInfo, renameInfoStr);
+            attrs.put(Provisioning.A_zmailDomainRenameInfo, renameInfoStr);
             
             debug("RenameInfo.write: domain=%s(%s), %s=%s", 
-                    domain.getName(), domain.getId(), Provisioning.A_zimbraDomainRenameInfo, renameInfoStr);
+                    domain.getName(), domain.getId(), Provisioning.A_zmailDomainRenameInfo, renameInfoStr);
             prov.modifyAttrs(domain, attrs);
         }
     }
@@ -380,8 +380,8 @@ public class RenameDomain {
         // mProv.modifyDomainStatus(mOldDomain, Provisioning.DOMAIN_STATUS_SHUTDOWN);
         debug("Locking old domain %s(%s)", mOldDomainName, mOldDomainId);
         Map<String, String> attrs = new HashMap<String, String>();
-        attrs.put(Provisioning.A_zimbraDomainStatus, Provisioning.DOMAIN_STATUS_SHUTDOWN);
-        attrs.put(Provisioning.A_zimbraMailStatus, Provisioning.MAIL_STATUS_DISABLED);
+        attrs.put(Provisioning.A_zmailDomainStatus, Provisioning.DOMAIN_STATUS_SHUTDOWN);
+        attrs.put(Provisioning.A_zmailMailStatus, Provisioning.MAIL_STATUS_DISABLED);
         mProv.modifyAttrs(mOldDomain, attrs, false, false);  // skip callback
                 
         RenamePhase phase = RenamePhase.RENAME_ENTRIES;
@@ -413,26 +413,26 @@ public class RenameDomain {
         domainAttrs.remove(Provisioning.A_dc);
         domainAttrs.remove(Provisioning.A_objectClass);
         
-        // use a new zimbraId so getDomainById of the old domain will not return this half baked domain
-        domainAttrs.remove(Provisioning.A_zimbraId);  
-        domainAttrs.remove(Provisioning.A_zimbraDomainName);
-        domainAttrs.remove(Provisioning.A_zimbraMailStatus);
+        // use a new zmailId so getDomainById of the old domain will not return this half baked domain
+        domainAttrs.remove(Provisioning.A_zmailId);  
+        domainAttrs.remove(Provisioning.A_zmailDomainName);
+        domainAttrs.remove(Provisioning.A_zmailMailStatus);
         
         // will the new domain get a new create timestamp? or should it inherit the 
         // old domain's timestamp?  use new timestamp seems more right.
-        domainAttrs.remove(Provisioning.A_zimbraCreateTimestamp);
+        domainAttrs.remove(Provisioning.A_zmailCreateTimestamp);
         
         // domain level system accounts should be updated to use the new domain name
-        String curNotebookAcctName = (String)domainAttrs.get(Provisioning.A_zimbraNotebookAccount);
+        String curNotebookAcctName = (String)domainAttrs.get(Provisioning.A_zmailNotebookAccount);
         String newNotebookAcctName = getNewAddress(curNotebookAcctName);
         if (curNotebookAcctName != null && newNotebookAcctName != null) {
-            domainAttrs.remove(Provisioning.A_zimbraNotebookAccount);
-            domainAttrs.put(Provisioning.A_zimbraNotebookAccount, newNotebookAcctName);
+            domainAttrs.remove(Provisioning.A_zmailNotebookAccount);
+            domainAttrs.put(Provisioning.A_zmailNotebookAccount, newNotebookAcctName);
         }
         
         // the new domain is created shutdown and rejecting mails
-        domainAttrs.put(Provisioning.A_zimbraDomainStatus, Provisioning.DOMAIN_STATUS_SHUTDOWN);
-        domainAttrs.put(Provisioning.A_zimbraMailStatus, Provisioning.MAIL_STATUS_DISABLED);
+        domainAttrs.put(Provisioning.A_zmailDomainStatus, Provisioning.DOMAIN_STATUS_SHUTDOWN);
+        domainAttrs.put(Provisioning.A_zmailMailStatus, Provisioning.MAIL_STATUS_DISABLED);
         
         Domain newDomain = null;
         try {
@@ -475,7 +475,7 @@ public class RenameDomain {
     
     /*
      * activate the domain.
-     * if domainId is not null, set domain's zimbraId to the id.
+     * if domainId is not null, set domain's zmailId to the id.
      */
     private void endRenameDomain(Domain domain, String domainId) throws ServiceException {
         
@@ -484,10 +484,10 @@ public class RenameDomain {
         
         HashMap<String, Object> attrs = new HashMap<String, Object>();
         if (domainId != null)
-            attrs.put(Provisioning.A_zimbraId, domainId);
-        attrs.put(Provisioning.A_zimbraDomainRenameInfo, "");
-        attrs.put(Provisioning.A_zimbraDomainStatus, Provisioning.DOMAIN_STATUS_ACTIVE);
-        attrs.put(Provisioning.A_zimbraMailStatus, Provisioning.MAIL_STATUS_ENABLED);
+            attrs.put(Provisioning.A_zmailId, domainId);
+        attrs.put(Provisioning.A_zmailDomainRenameInfo, "");
+        attrs.put(Provisioning.A_zmailDomainStatus, Provisioning.DOMAIN_STATUS_ACTIVE);
+        attrs.put(Provisioning.A_zmailMailStatus, Provisioning.MAIL_STATUS_ENABLED);
         mLdapHelper.modifyLdapAttrs(domain, attrs);  // skip callback
         
         flushCacheOnAllServers(CacheEntryType.domain);
@@ -505,32 +505,32 @@ public class RenameDomain {
         static {
             sAddrContainsDomainOnly = new HashSet<String>();
             
-            sAddrContainsDomainOnly.add(Provisioning.A_zimbraMailCatchAllAddress);
-            sAddrContainsDomainOnly.add(Provisioning.A_zimbraMailCatchAllCanonicalAddress);
-            sAddrContainsDomainOnly.add(Provisioning.A_zimbraMailCatchAllForwardingAddress);
+            sAddrContainsDomainOnly.add(Provisioning.A_zmailMailCatchAllAddress);
+            sAddrContainsDomainOnly.add(Provisioning.A_zmailMailCatchAllCanonicalAddress);
+            sAddrContainsDomainOnly.add(Provisioning.A_zmailMailCatchAllForwardingAddress);
         }
     
         private static final String[] sDLAttrsNeedRename = {
                 Provisioning.A_mail, 
-                Provisioning.A_zimbraMailAlias,
-                Provisioning.A_zimbraMailForwardingAddress,
-                Provisioning.A_zimbraMailDeliveryAddress, // ?
-                Provisioning.A_zimbraMailCanonicalAddress,
-                Provisioning.A_zimbraMailCatchAllAddress,
-                Provisioning.A_zimbraMailCatchAllCanonicalAddress,
-                Provisioning.A_zimbraMailCatchAllForwardingAddress,
-                Provisioning.A_zimbraPrefAllowAddressForDelegatedSender};
+                Provisioning.A_zmailMailAlias,
+                Provisioning.A_zmailMailForwardingAddress,
+                Provisioning.A_zmailMailDeliveryAddress, // ?
+                Provisioning.A_zmailMailCanonicalAddress,
+                Provisioning.A_zmailMailCatchAllAddress,
+                Provisioning.A_zmailMailCatchAllCanonicalAddress,
+                Provisioning.A_zmailMailCatchAllForwardingAddress,
+                Provisioning.A_zmailPrefAllowAddressForDelegatedSender};
     
         private static final String[] sAcctAttrsNeedRename = {
                 Provisioning.A_mail, 
-                Provisioning.A_zimbraMailAlias,
-                Provisioning.A_zimbraMailForwardingAddress,
-                Provisioning.A_zimbraMailDeliveryAddress, // ?
-                Provisioning.A_zimbraMailCanonicalAddress,
-                Provisioning.A_zimbraMailCatchAllAddress,
-                Provisioning.A_zimbraMailCatchAllCanonicalAddress,
-                Provisioning.A_zimbraMailCatchAllForwardingAddress,
-                Provisioning.A_zimbraPrefAllowAddressForDelegatedSender};
+                Provisioning.A_zmailMailAlias,
+                Provisioning.A_zmailMailForwardingAddress,
+                Provisioning.A_zmailMailDeliveryAddress, // ?
+                Provisioning.A_zmailMailCanonicalAddress,
+                Provisioning.A_zmailMailCatchAllAddress,
+                Provisioning.A_zmailMailCatchAllCanonicalAddress,
+                Provisioning.A_zmailMailCatchAllForwardingAddress,
+                Provisioning.A_zmailPrefAllowAddressForDelegatedSender};
     
     
         private static boolean addrContainsDomainOnly(String addr) {
@@ -617,7 +617,7 @@ public class RenameDomain {
             // move aliases in the old domain if there are any
             for (int i=0; i<aliases.length; i++) {
             
-                // for dl and dynamic group, the main dl addr is also in the zimbraMailAlias.  
+                // for dl and dynamic group, the main dl addr is also in the zmailMailAlias.  
                 // To be consistent with account, we don't move that when we move aliases; 
                 // and will move it when we move the entry itself
                 if (aliases[i].equals(targetEntry.getName()))
@@ -799,7 +799,7 @@ public class RenameDomain {
                 targetEntry = mProv.searchAliasTarget(alias, false);
             } catch (ServiceException e) {
                 warn(e, "handleForeignAlias", "target entry not found for alias" + "alias=[%s], target=[%s]", 
-                        alias.getName(), alias.getAttr(Provisioning.A_zimbraAliasTargetId));
+                        alias.getName(), alias.getAttr(Provisioning.A_zmailAliasTargetId));
                 return;
             }
             
@@ -915,7 +915,7 @@ public class RenameDomain {
             if (oldNewPair != null)
                 changedPairs.put(oldNewPair[0], oldNewPair[1]);
             
-            String[] aliasesAddrs = entry.getMultiAttr(Provisioning.A_zimbraMailAlias, false);
+            String[] aliasesAddrs = entry.getMultiAttr(Provisioning.A_zmailMailAlias, false);
             for (String aliasAddr : aliasesAddrs) {
                 oldNewPair = changedAddrPairs(aliasAddr);
                 if (oldNewPair != null)
@@ -1008,14 +1008,14 @@ public class RenameDomain {
             Config config = mProv.getConfig();
             
             HashMap<String, Object> attrMap = new HashMap<String, Object>();
-            updateSystemAccount(config, Provisioning.A_zimbraNotebookAccount, attrMap);
-            updateSystemAccount(config, Provisioning.A_zimbraSpamIsSpamAccount, attrMap);
-            updateSystemAccount(config, Provisioning.A_zimbraSpamIsNotSpamAccount, attrMap);
-            updateSystemAccount(config, Provisioning.A_zimbraAmavisQuarantineAccount, attrMap);
+            updateSystemAccount(config, Provisioning.A_zmailNotebookAccount, attrMap);
+            updateSystemAccount(config, Provisioning.A_zmailSpamIsSpamAccount, attrMap);
+            updateSystemAccount(config, Provisioning.A_zmailSpamIsNotSpamAccount, attrMap);
+            updateSystemAccount(config, Provisioning.A_zmailAmavisQuarantineAccount, attrMap);
             
             String newDomainName = getNewDomain(curDefaultDomainName);
             if (curDefaultDomainName != null && newDomainName != null)
-                attrMap.put(Provisioning.A_zimbraDefaultDomainName, newDomainName);
+                attrMap.put(Provisioning.A_zmailDefaultDomainName, newDomainName);
             
             mProv.modifyAttrs(config, attrMap);
             flushCacheOnAllServers(CacheEntryType.config);
@@ -1058,7 +1058,7 @@ public class RenameDomain {
             soapProv.soapSetURI(adminUrl);
             
             try {
-                soapProv.soapZimbraAdminAuthenticate();
+                soapProv.soapZmailAdminAuthenticate();
                 soapProv.flushCache(type, null);
                 
             } catch (ServiceException e) {

@@ -16,7 +16,7 @@
 /*
  * Created on May 26, 2004
  */
-package com.zimbra.cs.service.mail;
+package org.zmail.cs.service.mail;
 
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
@@ -26,14 +26,14 @@ import javax.servlet.http.HttpServletRequest;
 import org.eclipse.jetty.continuation.Continuation;
 import org.eclipse.jetty.continuation.ContinuationSupport;
 
-import com.zimbra.common.localconfig.LC;
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.common.soap.MailConstants;
-import com.zimbra.common.soap.Element;
-import com.zimbra.common.util.Constants;
-import com.zimbra.common.util.ZimbraLog;
-import com.zimbra.soap.SoapServlet;
-import com.zimbra.soap.ZimbraSoapContext;
+import org.zmail.common.localconfig.LC;
+import org.zmail.common.service.ServiceException;
+import org.zmail.common.soap.MailConstants;
+import org.zmail.common.soap.Element;
+import org.zmail.common.util.Constants;
+import org.zmail.common.util.ZmailLog;
+import org.zmail.soap.SoapServlet;
+import org.zmail.soap.ZmailSoapContext;
 
 /**
  * Do nothing. The main intent of this Soap call is for the client
@@ -50,9 +50,9 @@ public class NoOp extends MailDocumentHandler  {
     private static final long MAX_TIMEOUT;
     
     static {
-        DEFAULT_TIMEOUT = LC.zimbra_noop_default_timeout.longValue() * 1000;
-        MIN_TIMEOUT = LC.zimbra_noop_min_timeout.longValue() * 1000;
-        MAX_TIMEOUT = LC.zimbra_noop_max_timeout.longValue() * 1000;
+        DEFAULT_TIMEOUT = LC.zmail_noop_default_timeout.longValue() * 1000;
+        MIN_TIMEOUT = LC.zmail_noop_min_timeout.longValue() * 1000;
+        MAX_TIMEOUT = LC.zmail_noop_max_timeout.longValue() * 1000;
     }
     
     private static long parseTimeout(Element request) throws ServiceException {
@@ -70,11 +70,11 @@ public class NoOp extends MailDocumentHandler  {
         super.preProxy(request, context);
     }
     
-    ConcurrentHashMap<String /*AccountId*/, ZimbraSoapContext> sBlockedNops = 
-        new ConcurrentHashMap<String /*AccountId*/, ZimbraSoapContext>(5000, 0.75f, 50);
+    ConcurrentHashMap<String /*AccountId*/, ZmailSoapContext> sBlockedNops = 
+        new ConcurrentHashMap<String /*AccountId*/, ZmailSoapContext>(5000, 0.75f, 50);
 
 	public Element handle(Element request, Map<String, Object> context) throws ServiceException {
-	    ZimbraSoapContext zsc = getZimbraSoapContext(context);
+	    ZmailSoapContext zsc = getZmailSoapContext(context);
         boolean wait = request.getAttributeBool(MailConstants.A_WAIT, false);
         boolean includeDelegates = request.getAttributeBool(MailConstants.A_DELEGATE, true);
         HttpServletRequest servletRequest = (HttpServletRequest) context.get(SoapServlet.SERVLET_REQUEST);
@@ -92,14 +92,14 @@ public class NoOp extends MailDocumentHandler  {
                 throw ServiceException.INVALID_REQUEST("Cannot execute a NoOpRequest with wait=\"1\" without a session."+
                                                        "  Set the <session> flag in the <context> of your request", null);
             }
-            ZimbraSoapContext origContext = (ZimbraSoapContext)(servletRequest.getAttribute("nop_origcontext"));
+            ZmailSoapContext origContext = (ZmailSoapContext)(servletRequest.getAttribute("nop_origcontext"));
             if (origContext == null) { // Initial
                 servletRequest.setAttribute("nop_origcontext", zsc);
                 // NOT a resumed request -- block if necessary
                 Continuation continuation = ContinuationSupport.getContinuation(servletRequest);
                 if (zsc.beginWaitForNotifications(continuation, includeDelegates)) {
                     if (enforceLimit) {
-                        ZimbraSoapContext otherContext = sBlockedNops.put(zsc.getAuthtokenAccountId(), zsc);
+                        ZmailSoapContext otherContext = sBlockedNops.put(zsc.getAuthtokenAccountId(), zsc);
                         if (otherContext != null) {
                             otherContext.signalNotification(true);
                         }
@@ -109,8 +109,8 @@ public class NoOp extends MailDocumentHandler  {
                         if (zsc.waitingForNotifications()) {
                             //assert (!(continuation instanceof WaitingContinuation) || ((WaitingContinuation) continuation).getMutex() == zsc); 
                             long timeout = parseTimeout(request);
-                            if (ZimbraLog.soap.isTraceEnabled())
-                                ZimbraLog.soap.trace("Suspending <NoOpRequest> for %dms", timeout);
+                            if (ZmailLog.soap.isTraceEnabled())
+                                ZmailLog.soap.trace("Suspending <NoOpRequest> for %dms", timeout);
                             continuation.setTimeout(timeout);
                             continuation.suspend();
                             continuation.undispatch();

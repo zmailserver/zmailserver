@@ -12,21 +12,21 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.service.admin;
+package org.zmail.cs.service.admin;
 
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.common.soap.AdminConstants;
-import com.zimbra.common.soap.Element;
-import com.zimbra.cs.account.Account;
-import com.zimbra.cs.account.Provisioning;
-import com.zimbra.cs.account.accesscontrol.AdminRight;
-import com.zimbra.cs.account.accesscontrol.Rights.Admin;
-import com.zimbra.soap.ZimbraSoapContext;
+import org.zmail.common.service.ServiceException;
+import org.zmail.common.soap.AdminConstants;
+import org.zmail.common.soap.Element;
+import org.zmail.cs.account.Account;
+import org.zmail.cs.account.Provisioning;
+import org.zmail.cs.account.accesscontrol.AdminRight;
+import org.zmail.cs.account.accesscontrol.Rights.Admin;
+import org.zmail.soap.ZmailSoapContext;
 
 
 public class GetAdminSavedSearches extends AdminDocumentHandler {    
@@ -39,7 +39,7 @@ public class GetAdminSavedSearches extends AdminDocumentHandler {
     }
     
     public Element handle(Element request, Map<String, Object> context) throws ServiceException {
-        ZimbraSoapContext zsc = getZimbraSoapContext(context);
+        ZmailSoapContext zsc = getZmailSoapContext(context);
         Account acct = getRequestedAccount(zsc);
         
         checkAccountRight(zsc, acct, Admin.R_viewAdminSavedSearch);
@@ -61,7 +61,7 @@ public class GetAdminSavedSearches extends AdminDocumentHandler {
     }
     
     public void handle(Account acct, Element response, HashSet<String> specificSearches) throws ServiceException {
-        String[] searches = acct.getMultiAttr(Provisioning.A_zimbraAdminSavedSearches);
+        String[] searches = acct.getMultiAttr(Provisioning.A_zmailAdminSavedSearches);
         
         for (int i = 0; i < searches.length; i++) {
             String search = searches[i];

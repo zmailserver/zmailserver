@@ -12,18 +12,18 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.examples.extns.samlprovider;
+package org.zmail.examples.extns.samlprovider;
 
-import com.zimbra.common.localconfig.LC;
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.common.soap.Element;
-import com.zimbra.common.soap.SoapProtocol;
-import com.zimbra.common.util.SystemUtil;
-import com.zimbra.common.util.ZimbraLog;
-import com.zimbra.cs.account.AuthToken;
-import com.zimbra.cs.account.AuthTokenException;
-import com.zimbra.cs.service.AuthProvider;
-import com.zimbra.cs.service.AuthProviderException;
+import org.zmail.common.localconfig.LC;
+import org.zmail.common.service.ServiceException;
+import org.zmail.common.soap.Element;
+import org.zmail.common.soap.SoapProtocol;
+import org.zmail.common.util.SystemUtil;
+import org.zmail.common.util.ZmailLog;
+import org.zmail.cs.account.AuthToken;
+import org.zmail.cs.account.AuthTokenException;
+import org.zmail.cs.service.AuthProvider;
+import org.zmail.cs.service.AuthProviderException;
 import org.apache.commons.httpclient.HttpClient;
 import org.apache.commons.httpclient.methods.PostMethod;
 import org.apache.commons.httpclient.methods.StringRequestEntity;
@@ -43,7 +43,7 @@ import java.util.TimeZone;
  *
  * <pre>
  * &lt;soap:Header&gt;
- *     &lt;context xmlns='urn:zimbra'&gt;
+ *     &lt;context xmlns='urn:zmail'&gt;
  *         &lt;authToken type='SAML_AUTH_PROVIDER'&gt;saml_assertion_id&lt;/authToken&gt;
  *     &lt;/context&gt;
  * &lt;/soap:Header&gt;
@@ -103,7 +103,7 @@ public class SamlAuthProvider extends AuthProvider {
         } catch (AuthProviderException ape) {
             throw ape;
         } catch (ServiceException se) {
-            ZimbraLog.extensions.error(SystemUtil.getStackTrace(se));
+            ZmailLog.extensions.error(SystemUtil.getStackTrace(se));
             throw AuthProviderException.NO_AUTH_DATA();
         }
         if (!"SAML_AUTH_PROVIDER".equals(type)) {
@@ -122,8 +122,8 @@ public class SamlAuthProvider extends AuthProvider {
         PostMethod post = new PostMethod(samlAuthorityUrl);
         Element samlAssertionReq = getSamlAssertionRequest(samlAssertionId);
         String samlAssertionReqStr = samlAssertionReq.toString();
-        if (ZimbraLog.extensions.isDebugEnabled()) {
-            ZimbraLog.extensions.debug("SAML assertion request: " + samlAssertionReqStr);
+        if (ZmailLog.extensions.isDebugEnabled()) {
+            ZmailLog.extensions.debug("SAML assertion request: " + samlAssertionReqStr);
         }
         try {
             post.setRequestEntity(new StringRequestEntity(samlAssertionReqStr, "text/xml", "utf-8"));
@@ -139,7 +139,7 @@ public class SamlAuthProvider extends AuthProvider {
         } catch (AuthTokenException ate) {
             throw ate;
         } catch (Exception e) {
-            ZimbraLog.extensions.error(SystemUtil.getStackTrace(e));
+            ZmailLog.extensions.error(SystemUtil.getStackTrace(e));
             throw new AuthTokenException("Exception in executing SAML assertion request", e);
         }
     }

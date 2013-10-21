@@ -12,29 +12,29 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.service.account;
+package org.zmail.cs.service.account;
 
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import com.zimbra.common.account.Key;
-import com.zimbra.common.account.Key.SignatureBy;
-import com.zimbra.common.account.SignatureUtil;
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.common.soap.AccountConstants;
-import com.zimbra.cs.account.Account;
-import com.zimbra.cs.account.AccountServiceException;
-import com.zimbra.cs.account.Provisioning;
-import com.zimbra.cs.account.Signature;
-import com.zimbra.soap.DocumentHandler;
-import com.zimbra.common.soap.Element;
-import com.zimbra.soap.ZimbraSoapContext;
+import org.zmail.common.account.Key;
+import org.zmail.common.account.Key.SignatureBy;
+import org.zmail.common.account.SignatureUtil;
+import org.zmail.common.service.ServiceException;
+import org.zmail.common.soap.AccountConstants;
+import org.zmail.cs.account.Account;
+import org.zmail.cs.account.AccountServiceException;
+import org.zmail.cs.account.Provisioning;
+import org.zmail.cs.account.Signature;
+import org.zmail.soap.DocumentHandler;
+import org.zmail.common.soap.Element;
+import org.zmail.soap.ZmailSoapContext;
 
 public class ModifySignature extends DocumentHandler {
     
     public Element handle(Element request, Map<String, Object> context) throws ServiceException {
-        ZimbraSoapContext zsc = getZimbraSoapContext(context);
+        ZmailSoapContext zsc = getZmailSoapContext(context);
         Account account = getRequestedAccount(zsc);
         
         if (!canModifyOptions(zsc, account))
@@ -67,11 +67,11 @@ public class ModifySignature extends DocumentHandler {
         
         String name = eSignature.getAttribute(AccountConstants.A_NAME, null);
         if (name != null)
-            attrs.put(Provisioning.A_zimbraSignatureName, name);
+            attrs.put(Provisioning.A_zmailSignatureName, name);
         
         Element eContactId = eSignature.getOptionalElement(AccountConstants.E_CONTACT_ID);
         if (eContactId != null)
-            attrs.put(Provisioning.A_zimbraPrefMailSignatureContactId, eContactId.getText());
+            attrs.put(Provisioning.A_zmailPrefMailSignatureContactId, eContactId.getText());
         
         prov.modifySignature(account, signature.getId(), attrs);
         

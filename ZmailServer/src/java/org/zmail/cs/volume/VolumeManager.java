@@ -12,7 +12,7 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.volume;
+package org.zmail.cs.volume;
 
 import java.io.File;
 import java.util.List;
@@ -22,17 +22,17 @@ import com.google.common.base.Strings;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.common.util.ZimbraLog;
-import com.zimbra.cs.db.DbPool;
-import com.zimbra.cs.db.DbVolume;
-import com.zimbra.cs.db.DbPool.DbConnection;
-import com.zimbra.cs.redolog.op.CreateVolume;
-import com.zimbra.cs.redolog.op.DeleteVolume;
-import com.zimbra.cs.redolog.op.ModifyVolume;
-import com.zimbra.cs.redolog.op.RedoableOp;
-import com.zimbra.cs.redolog.op.SetCurrentVolume;
-import com.zimbra.cs.store.IncomingDirectory;
+import org.zmail.common.service.ServiceException;
+import org.zmail.common.util.ZmailLog;
+import org.zmail.cs.db.DbPool;
+import org.zmail.cs.db.DbVolume;
+import org.zmail.cs.db.DbPool.DbConnection;
+import org.zmail.cs.redolog.op.CreateVolume;
+import org.zmail.cs.redolog.op.DeleteVolume;
+import org.zmail.cs.redolog.op.ModifyVolume;
+import org.zmail.cs.redolog.op.RedoableOp;
+import org.zmail.cs.redolog.op.SetCurrentVolume;
+import org.zmail.cs.store.IncomingDirectory;
 
 public final class VolumeManager {
 
@@ -47,7 +47,7 @@ public final class VolumeManager {
         try {
             load();
         } catch (ServiceException e){
-            ZimbraLog.store.error("Failed to initialize VolumeManager", e);
+            ZmailLog.store.error("Failed to initialize VolumeManager", e);
         }
     }
 
@@ -63,28 +63,28 @@ public final class VolumeManager {
 
             DbVolume.CurrentVolumes current = DbVolume.getCurrentVolumes(conn);
             if (current == null) {
-                ZimbraLog.store.warn("Missing current volumes info from configuration");
+                ZmailLog.store.warn("Missing current volumes info from configuration");
                 return;
             }
 
             if (current.msgVolId != Volume.ID_NONE) {
                 currentMessageVolume = id2volume.get(current.msgVolId);
                 if (currentMessageVolume == null) {
-                    ZimbraLog.store.warn("Unknown current message volume id=%d", current.msgVolId);
+                    ZmailLog.store.warn("Unknown current message volume id=%d", current.msgVolId);
                 }
             }
 
             if (current.secondaryMsgVolId != Volume.ID_NONE) {
                 currentSecondaryMessageVolume = id2volume.get(current.secondaryMsgVolId);
                 if (currentSecondaryMessageVolume == null) {
-                    ZimbraLog.store.warn("Unknown current secondary message volume id=%d", current.secondaryMsgVolId);
+                    ZmailLog.store.warn("Unknown current secondary message volume id=%d", current.secondaryMsgVolId);
                 }
             }
 
             if (current.indexVolId != Volume.ID_NONE) {
                 currentIndexVolume = id2volume.get(current.indexVolId);
                 if (currentIndexVolume == null) {
-                    ZimbraLog.store.warn("Unknown current index volume id=%d", current.indexVolId);
+                    ZmailLog.store.warn("Unknown current index volume id=%d", current.indexVolId);
                 }
             }
         } finally {
@@ -214,7 +214,7 @@ public final class VolumeManager {
                     DbConnection conn = DbPool.getConnection();
                     try {
                         if (DbVolume.isVolumeReferenced(conn, id)) {
-                            ZimbraLog.store.warn("volume %d referenced by mail_item cannot be deleted", id);
+                            ZmailLog.store.warn("volume %d referenced by mail_item cannot be deleted", id);
                             throw VolumeServiceException.CANNOT_DELETE_VOLUME_IN_USE(id, null);
                         }
                     } finally {

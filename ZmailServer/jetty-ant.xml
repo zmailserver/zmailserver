@@ -18,10 +18,10 @@
 
   <property name="jetty_webapps" location="build/jetty/webapps" />
   <property name="config.dir" location="conf" />
-  <property name="common.jars.dir" location="../ZimbraCommon/jars" />
+  <property name="common.jars.dir" location="../ZmailCommon/jars" />
   <property name="service.dir" location="${jetty_webapps}/service" />
   <property name="lib.dir" location="${service.dir}/WEB-INF/lib" />
-  <property name="war.exclude" value="ical4j*.jar,servlet-api.jar,jsp-api.jar,zimbra-native.jar,javamail-1.4.3.jar,ldap.jar,jetty-*.jar" />
+  <property name="war.exclude" value="ical4j*.jar,servlet-api.jar,jsp-api.jar,zmail-native.jar,javamail-1.4.3.jar,ldap.jar,jetty-*.jar" />
 
   <target name="jetty.webinf">
     <mkdir dir="${jetty_webapps}" />
@@ -40,10 +40,10 @@
 
   <property name="project.outputDirectory" value="build" />
   <property name="jetty.version" value="7.6.10.z5" />
-  <property name="jetty_run_base" location="/opt/zimbra" />
+  <property name="jetty_run_base" location="/opt/zmail" />
 
   <path id="jetty.plugin.classpath">
-    <fileset dir="/opt/zimbra/jetty/lib">
+    <fileset dir="/opt/zmail/jetty/lib">
       <include name="*.jar" />
       <include name="ext/*.jar" />
       <include name="plus/*.jar" />
@@ -64,28 +64,28 @@
     <jetty tempDirectory="${project.outputDirectory}" jettyXml="jetty-ant-config.xml">
       <connectors>
         <selectChannelConnector port="7070" />
-        <sslConnector port="7071" keystore="${jetty_run_base}/jetty/etc/keystore" password="zimbra" KeyPassword="zimbra" />
+        <sslConnector port="7071" keystore="${jetty_run_base}/jetty/etc/keystore" password="zmail" KeyPassword="zmail" />
       </connectors>
 
       <systemProperties>
-        <systemproperty name="zimbra.config" value="${jetty_run_base}/conf/localconfig.xml" />
+        <systemproperty name="zmail.config" value="${jetty_run_base}/conf/localconfig.xml" />
         <systemproperty name="java.library.path" value="${jetty_run_base}/lib" />
       </systemProperties>
 
-      <webApp name="ZimbraServer" warfile="${jetty_webapps}/service" contextpath="/service">
-        <lib dir="${jetty_run_base}/jetty/common/lib" includes="*.jar" excludes="not-needed.jar,zimbracommon.jar" />
+      <webApp name="ZmailServer" warfile="${jetty_webapps}/service" contextpath="/service">
+        <lib dir="${jetty_run_base}/jetty/common/lib" includes="*.jar" excludes="not-needed.jar,zmailcommon.jar" />
         <lib dir="${jetty_run_base}/lib" includes="*.jar" excludes="not-needed.jar" />
         <lib dir="${jetty_run_base}/lib/jars" includes="*.jar" excludes="not-needed.jar" />
-        <classes dir="../ZimbraCommon/build/classes" />
-        <classes dir="../ZimbraSoap/build/classes" />
-        <classes dir="../ZimbraServer/build/classes" />
-        <classes dir="../ZimbraClient/build/classes" />
+        <classes dir="../ZmailCommon/build/classes" />
+        <classes dir="../ZmailSoap/build/classes" />
+        <classes dir="../ZmailServer/build/classes" />
+        <classes dir="../ZmailClient/build/classes" />
         <attributes>
           <attribute name="org.eclipse.jetty.server.webapp.ContainerIncludeJarPattern" value=".*/.*jsp-api-[^/]*\.jar$|.*/.*jsp-[^/]*\.jar$|.*/.*taglibs[^/]*\.jar$"/>
         </attributes>
       </webApp>
 
-      <webApp name="ZimbraWebClient" warfile="${jetty_run_base}/jetty/webapps/zimbra" contextpath="/zimbra">
+      <webApp name="ZmailWebClient" warfile="${jetty_run_base}/jetty/webapps/zmail" contextpath="/zmail">
         <lib dir="${jetty_run_base}/jetty/common/lib" includes="*.jar" excludes="not-needed.jar" /> 
         <lib dir="${jetty_run_base}/lib" includes="*.jar" excludes="not-needed.jar" />
         <lib dir="${jetty_run_base}/lib/jars" includes="*.jar" excludes="not-needed.jar" />
@@ -94,7 +94,7 @@
           <attribute name="org.eclipse.jetty.server.webapp.ContainerIncludeJarPattern" value=".*/.*jsp-api-[^/]*\.jar$|.*/.*jsp-[^/]*\.jar$|.*/.*taglibs[^/]*\.jar$"/>
         </attributes>
       </webApp>
-      <webApp name="ZimbraAdmin" warfile="${jetty_run_base}/jetty/webapps/zimbraAdmin" contextpath="/zimbraAdmin">
+      <webApp name="ZmailAdmin" warfile="${jetty_run_base}/jetty/webapps/zmailAdmin" contextpath="/zmailAdmin">
         <lib dir="${jetty_run_base}/jetty/common/lib" includes="*.jar" excludes="not-needed.jar" />
         <lib dir="${jetty_run_base}/lib" includes="*.jar" excludes="not-needed.jar" />
         <lib dir="${jetty_run_base}/lib/jars" includes="*.jar" excludes="not-needed.jar" />

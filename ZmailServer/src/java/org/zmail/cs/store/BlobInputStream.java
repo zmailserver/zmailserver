@@ -12,7 +12,7 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.store;
+package org.zmail.cs.store;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -21,10 +21,10 @@ import java.io.InputStream;
 
 import javax.mail.internet.SharedInputStream;
 
-import com.zimbra.common.localconfig.LC;
-import com.zimbra.common.mime.MimePart.InputStreamSource;
-import com.zimbra.common.util.Log;
-import com.zimbra.common.util.LogFactory;
+import org.zmail.common.localconfig.LC;
+import org.zmail.common.mime.MimePart.InputStreamSource;
+import org.zmail.common.util.Log;
+import org.zmail.common.util.LogFactory;
 
 public class BlobInputStream extends InputStream
 implements SharedInputStream, InputStreamSource {
@@ -72,7 +72,7 @@ implements SharedInputStream, InputStreamSource {
 
     private BlobInputStream mRoot;
 
-    private static int BUFFER_SIZE = Math.max(LC.zimbra_blob_input_stream_buffer_size_kb.intValue(), 1) * 1024;
+    private static int BUFFER_SIZE = Math.max(LC.zmail_blob_input_stream_buffer_size_kb.intValue(), 1) * 1024;
 
     /**
      * Read buffer.

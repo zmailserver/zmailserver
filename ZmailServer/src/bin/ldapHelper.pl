@@ -17,7 +17,7 @@
 use strict;
 no strict "refs";
 
-use Zimbra::Util::LDAP;
+use Zmail::Util::LDAP;
 
 sub logMsg{
 	print join (' ',@_),"\n";
@@ -28,4 +28,4 @@ our %config = (
 	ldap_root_password	=>	$ARGV[1],
 	);
 
-Zimbra::Util::LDAP->doLdap($ARGV[2],$ARGV[3]);
+Zmail::Util::LDAP->doLdap($ARGV[2],$ARGV[3]);

@@ -13,26 +13,26 @@
  * ***** END LICENSE BLOCK *****
  */
 
-package com.zimbra.cs.account.grouphandler;
+package org.zmail.cs.account.grouphandler;
 
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.common.util.StringUtil;
-import com.zimbra.common.util.ZimbraLog;
-import com.zimbra.cs.account.Account;
-import com.zimbra.cs.account.Domain;
-import com.zimbra.cs.account.Provisioning;
-import com.zimbra.cs.account.accesscontrol.ExternalGroup;
-import com.zimbra.cs.extension.ExtensionUtil;
-import com.zimbra.cs.gal.ZimbraGalGroupHandler;
-import com.zimbra.cs.ldap.IAttributes;
-import com.zimbra.cs.ldap.ILdapContext;
-import com.zimbra.cs.ldap.LdapClient;
-import com.zimbra.cs.ldap.LdapUsage;
-import com.zimbra.cs.ldap.ZLdapContext;
-import com.zimbra.cs.ldap.LdapServerConfig.ExternalLdapConfig;
+import org.zmail.common.service.ServiceException;
+import org.zmail.common.util.StringUtil;
+import org.zmail.common.util.ZmailLog;
+import org.zmail.cs.account.Account;
+import org.zmail.cs.account.Domain;
+import org.zmail.cs.account.Provisioning;
+import org.zmail.cs.account.accesscontrol.ExternalGroup;
+import org.zmail.cs.extension.ExtensionUtil;
+import org.zmail.cs.gal.ZmailGalGroupHandler;
+import org.zmail.cs.ldap.IAttributes;
+import org.zmail.cs.ldap.ILdapContext;
+import org.zmail.cs.ldap.LdapClient;
+import org.zmail.cs.ldap.LdapUsage;
+import org.zmail.cs.ldap.ZLdapContext;
+import org.zmail.cs.ldap.LdapServerConfig.ExternalLdapConfig;
 
 public abstract class GroupHandler {
 
@@ -64,7 +64,7 @@ public abstract class GroupHandler {
     }
 
     private static GroupHandler newDefaultHandler() {
-        return new ZimbraGalGroupHandler();
+        return new ZmailGalGroupHandler();
     }
 
     private static HandlerInfo loadHandler(String className) {
@@ -74,9 +74,9 @@ public abstract class GroupHandler {
             handlerInfo.mClass = ExtensionUtil.findClass(className).asSubclass(GroupHandler.class);
         } catch (ClassNotFoundException e) {
             // miss configuration or the extension is disabled
-            ZimbraLog.gal.warn("GAL group handler %s not found, default to ZimbraGalGroupHandler", className);
-            // Fall back to ZimbraGalGroupHandler
-            handlerInfo.mClass = ZimbraGalGroupHandler.class;
+            ZmailLog.gal.warn("GAL group handler %s not found, default to ZmailGalGroupHandler", className);
+            // Fall back to ZmailGalGroupHandler
+            handlerInfo.mClass = ZmailGalGroupHandler.class;
         }
         return handlerInfo;
     }
@@ -111,7 +111,7 @@ public abstract class GroupHandler {
         String[] ldapUrl = domain.getAuthLdapURL();
         if (ldapUrl == null || ldapUrl.length == 0) {
             throw ServiceException.INVALID_REQUEST("ubable to search external group, " +
-                    "missing " + Provisioning.A_zimbraAuthLdapURL, null);
+                    "missing " + Provisioning.A_zmailAuthLdapURL, null);
         }
 
         boolean startTLSEnabled = domain.isAuthLdapStartTlsEnabled();

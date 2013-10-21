@@ -13,35 +13,35 @@
  * ***** END LICENSE BLOCK *****
  */
 
-package com.zimbra.cs.index;
+package org.zmail.cs.index;
 
 import java.util.Comparator;
 
 import com.google.common.base.Objects;
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.common.util.ZimbraLog;
-import com.zimbra.cs.imap.ImapMessage;
-import com.zimbra.cs.mailbox.Mailbox;
-import com.zimbra.cs.mailbox.MailItem;
-import com.zimbra.cs.service.util.ItemId;
+import org.zmail.common.service.ServiceException;
+import org.zmail.common.util.ZmailLog;
+import org.zmail.cs.imap.ImapMessage;
+import org.zmail.cs.mailbox.Mailbox;
+import org.zmail.cs.mailbox.MailItem;
+import org.zmail.cs.service.util.ItemId;
 
 /**
- * Base class for a search "hit". Generally one iterates over a {@link ZimbraQueryResults}
+ * Base class for a search "hit". Generally one iterates over a {@link ZmailQueryResults}
  * to get the hits for a given query.
  *
  * @since Oct 15, 2004
  */
-public abstract class ZimbraHit {
+public abstract class ZmailHit {
 
     protected final Mailbox mailbox;
-    protected final ZimbraQueryResults results;
+    protected final ZmailQueryResults results;
     protected final Object sortValue;
     protected String cachedName;
     protected ImapMessage cachedImapMessage;
     protected int cachedModseq = -1;
     protected int cachedParentId = 0;
 
-    public ZimbraHit(ZimbraQueryResults results, Mailbox mbx, Object sort) {
+    public ZmailHit(ZmailQueryResults results, Mailbox mbx, Object sort) {
         mailbox = mbx;
         this.results = results;
 
@@ -168,8 +168,8 @@ public abstract class ZimbraHit {
         return mailbox;
     }
 
-    final ZimbraQueryResultsImpl getResults() {
-        return (ZimbraQueryResultsImpl) results;
+    final ZmailQueryResultsImpl getResults() {
+        return (ZmailQueryResultsImpl) results;
     }
 
     /**
@@ -181,7 +181,7 @@ public abstract class ZimbraHit {
      * @return {@code <0} if "this" is BEFORE other, {@code 0} if EQUAL, {@code >0} if this AFTER other
      * @throws ServiceException failed to compare
      */
-    int compareTo(SortBy sort, ZimbraHit other) throws ServiceException {
+    int compareTo(SortBy sort, ZmailHit other) throws ServiceException {
         switch (sort) {
             case DATE_ASC:
             case SIZE_ASC:
@@ -264,19 +264,19 @@ public abstract class ZimbraHit {
      *
      * @param sortOrder
      */
-    static Comparator<ZimbraHit> getSortAndIdComparator(SortBy sortOrder) {
-        return new ZimbraHitSortAndIdComparator(sortOrder);
+    static Comparator<ZmailHit> getSortAndIdComparator(SortBy sortOrder) {
+        return new ZmailHitSortAndIdComparator(sortOrder);
     }
 
-    private static class ZimbraHitSortAndIdComparator implements Comparator<ZimbraHit> {
+    private static class ZmailHitSortAndIdComparator implements Comparator<ZmailHit> {
         private final SortBy sort;
 
-        ZimbraHitSortAndIdComparator(SortBy sort){
+        ZmailHitSortAndIdComparator(SortBy sort){
             this.sort = sort;
         }
 
         @Override
-        public int compare(ZimbraHit lhs, ZimbraHit rhs) {
+        public int compare(ZmailHit lhs, ZmailHit rhs) {
             try {
                 int result = lhs.compareTo(sort, rhs);
                 if (result == 0) {
@@ -297,7 +297,7 @@ public abstract class ZimbraHit {
                 }
                 return result;
             } catch (ServiceException e) {
-                ZimbraLog.search.error("Failed to compare %s and %s", lhs, rhs, e);
+                ZmailLog.search.error("Failed to compare %s and %s", lhs, rhs, e);
                 return 0;
             }
         }

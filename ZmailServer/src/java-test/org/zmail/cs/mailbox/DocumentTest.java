@@ -13,7 +13,7 @@
  * ***** END LICENSE BLOCK *****
  */
 
-package com.zimbra.cs.mailbox;
+package org.zmail.cs.mailbox;
 
 import static org.junit.Assert.assertTrue;
 
@@ -28,16 +28,16 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 
 import com.google.common.base.Strings;
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.common.soap.Element;
-import com.zimbra.common.soap.Element.XMLElement;
-import com.zimbra.common.soap.MailConstants;
-import com.zimbra.cs.account.MockProvisioning;
-import com.zimbra.cs.account.Provisioning;
-import com.zimbra.cs.mime.ParsedDocument;
-import com.zimbra.cs.service.mail.ToXML;
-import com.zimbra.cs.service.util.ItemIdFormatter;
-import com.zimbra.qa.unittest.TestUtil;
+import org.zmail.common.service.ServiceException;
+import org.zmail.common.soap.Element;
+import org.zmail.common.soap.Element.XMLElement;
+import org.zmail.common.soap.MailConstants;
+import org.zmail.cs.account.MockProvisioning;
+import org.zmail.cs.account.Provisioning;
+import org.zmail.cs.mime.ParsedDocument;
+import org.zmail.cs.service.mail.ToXML;
+import org.zmail.cs.service.util.ItemIdFormatter;
+import org.zmail.qa.unittest.TestUtil;
 
 /**
  * Unit test for {@link Document}.
@@ -48,7 +48,7 @@ public final class DocumentTest {
     public static void init() throws Exception {
         MailboxTestUtil.initServer();
         Provisioning prov = Provisioning.getInstance();
-        prov.createAccount("test@zimbra.com", "secret", new HashMap<String, Object>());
+        prov.createAccount("test@zmail.com", "secret", new HashMap<String, Object>());
     }
 
     @Before

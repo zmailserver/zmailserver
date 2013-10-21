@@ -18,8 +18,8 @@
 accounts=`zmprov gaa`
 
 for a in $accounts; do
-    mh=`zmprov ga $a | grep '^zimbraMailHost' | awk -F: '{ print $2; }'`
-    cmd="zmprov ma $a zimbraMailHost $mh"
+    mh=`zmprov ga $a | grep '^zmailMailHost' | awk -F: '{ print $2; }'`
+    cmd="zmprov ma $a zmailMailHost $mh"
     if [ "x$1" = "x-f" ]; then
         echo "Running: $cmd"
         $cmd

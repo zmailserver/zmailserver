@@ -12,7 +12,7 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.index;
+package org.zmail.cs.index;
 
 import java.text.Collator;
 import java.util.Comparator;
@@ -20,8 +20,8 @@ import java.util.Locale;
 import java.util.Map;
 
 import com.google.common.collect.ImmutableMap;
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.common.util.ZimbraLog;
+import org.zmail.common.service.ServiceException;
+import org.zmail.common.util.ZmailLog;
 
 /**
  * Sort order.
@@ -110,11 +110,11 @@ public enum SortBy {
         return name != null ? name : name();
     }
 
-    public Comparator<ZimbraHit> getHitComparator(Locale locale) {
+    public Comparator<ZmailHit> getHitComparator(Locale locale) {
         return new NameComparator(this, Collator.getInstance(locale));
     }
 
-    private static final class NameComparator implements Comparator<ZimbraHit> {
+    private static final class NameComparator implements Comparator<ZmailHit> {
         private final SortBy sort;
         private final Collator collator;
 
@@ -124,7 +124,7 @@ public enum SortBy {
         }
 
         @Override
-        public int compare(ZimbraHit lhs, ZimbraHit rhs) {
+        public int compare(ZmailHit lhs, ZmailHit rhs) {
             int result = 0;
             try {
                 result = collator.compare(lhs.getName(), rhs.getName());
@@ -135,7 +135,7 @@ public enum SortBy {
                     result = -1 * result;
                 }
             } catch (ServiceException e) {
-                ZimbraLog.index.debug("Failed to compare %s and %s", lhs, rhs, e);
+                ZmailLog.index.debug("Failed to compare %s and %s", lhs, rhs, e);
                 result = 0;
             }
             return result;
