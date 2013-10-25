@@ -180,7 +180,17 @@ public final class ZmailLog {
     public static final Log pop = LogFactory.getLog("zmail.pop");
 
     /**
-     * the "zmail.milter" logger. For MILTER-related events
+     * the "zimbra.activesync.client" logger. For ACTIVESYNC client related events.
+     */
+    public static final Log activesync_client = LogFactory.getLog("zimbra.activesync-client");
+
+    /**
+     * the "zimbra.activesync" logger. For ACTIVESYNC server related events.
+     */
+    public static final Log activesync = LogFactory.getLog("zimbra.activesync");
+
+    /**
+     * the "zimbra.milter" logger. For MILTER-related events
      */
     public static final Log milter = LogFactory.getLog("zmail.milter");
 

@@ -37,7 +37,7 @@ public abstract class ZAttrAccount  extends MailTarget {
 
     ///// BEGIN-AUTO-GEN-REPLACE
 
-    /* build: 9.0.0_BETA1_1111 rgadipuuri 20130510-1145 */
+    /* build: 8.0.0_BETA1_1111 norman 20131010-1457 */
 
     /**
      * RFC2256: ISO-3166 country 2-letter code
@@ -6269,6 +6269,124 @@ public abstract class ZAttrAccount  extends MailTarget {
     public Map<String,Object> unsetCustomerCareTier(Map<String,Object> attrs) {
         if (attrs == null) attrs = new HashMap<String,Object>();
         attrs.put(Provisioning.A_zmailCustomerCareTier, "");
+        return attrs;
+    }
+
+    /**
+     * The time interval between automated data imports for a ActiveSync data
+     * source. If unset or 0, the data source will not be scheduled for
+     * automated polling. . Must be in valid duration format:
+     * {digits}{time-unit}. digits: 0-9, time-unit: [hmsd]|ms. h - hours, m -
+     * minutes, s - seconds, d - days, ms - milliseconds. If time unit is not
+     * specified, the default is s(seconds).
+     *
+     * <p>Use getDataSourceActiveSyncPollingIntervalAsString to access value as a string.
+     *
+     * @see #getDataSourceActiveSyncPollingIntervalAsString()
+     *
+     * @return zimbraDataSourceActiveSyncPollingInterval in millseconds, or -1 if unset
+     *
+     * @since ZCS 6.0.0_BETA1
+     */
+    @ZAttr(id=1441)
+    public long getDataSourceActiveSyncPollingInterval() {
+        return getTimeInterval(Provisioning.A_zimbraDataSourceActiveSyncPollingInterval, -1L);
+    }
+
+    /**
+     * The time interval between automated data imports for a ActiveSync data
+     * source. If unset or 0, the data source will not be scheduled for
+     * automated polling. . Must be in valid duration format:
+     * {digits}{time-unit}. digits: 0-9, time-unit: [hmsd]|ms. h - hours, m -
+     * minutes, s - seconds, d - days, ms - milliseconds. If time unit is not
+     * specified, the default is s(seconds).
+     *
+     * @return zimbraDataSourceActiveSyncPollingInterval, or null if unset
+     *
+     * @since ZCS 6.0.0_BETA1
+     */
+    @ZAttr(id=1441)
+    public String getDataSourceActiveSyncPollingIntervalAsString() {
+        return getAttr(Provisioning.A_zimbraDataSourceActiveSyncPollingInterval, null);
+    }
+
+    /**
+     * The time interval between automated data imports for a ActiveSync data
+     * source. If unset or 0, the data source will not be scheduled for
+     * automated polling. . Must be in valid duration format:
+     * {digits}{time-unit}. digits: 0-9, time-unit: [hmsd]|ms. h - hours, m -
+     * minutes, s - seconds, d - days, ms - milliseconds. If time unit is not
+     * specified, the default is s(seconds).
+     *
+     * @param zimbraDataSourceActiveSyncPollingInterval new value
+     * @throws com.zimbra.common.service.ServiceException if error during update
+     *
+     * @since ZCS 6.0.0_BETA1
+     */
+    @ZAttr(id=1441)
+    public void setDataSourceActiveSyncPollingInterval(String zimbraDataSourceActiveSyncPollingInterval) throws com.zimbra.common.service.ServiceException {
+        HashMap<String,Object> attrs = new HashMap<String,Object>();
+        attrs.put(Provisioning.A_zimbraDataSourceActiveSyncPollingInterval, zimbraDataSourceActiveSyncPollingInterval);
+        getProvisioning().modifyAttrs(this, attrs);
+    }
+
+    /**
+     * The time interval between automated data imports for a ActiveSync data
+     * source. If unset or 0, the data source will not be scheduled for
+     * automated polling. . Must be in valid duration format:
+     * {digits}{time-unit}. digits: 0-9, time-unit: [hmsd]|ms. h - hours, m -
+     * minutes, s - seconds, d - days, ms - milliseconds. If time unit is not
+     * specified, the default is s(seconds).
+     *
+     * @param zimbraDataSourceActiveSyncPollingInterval new value
+     * @param attrs existing map to populate, or null to create a new map
+     * @return populated map to pass into Provisioning.modifyAttrs
+     *
+     * @since ZCS 6.0.0_BETA1
+     */
+    @ZAttr(id=1441)
+    public Map<String,Object> setDataSourceActiveSyncPollingInterval(String zimbraDataSourceActiveSyncPollingInterval, Map<String,Object> attrs) {
+        if (attrs == null) attrs = new HashMap<String,Object>();
+        attrs.put(Provisioning.A_zimbraDataSourceActiveSyncPollingInterval, zimbraDataSourceActiveSyncPollingInterval);
+        return attrs;
+    }
+
+    /**
+     * The time interval between automated data imports for a ActiveSync data
+     * source. If unset or 0, the data source will not be scheduled for
+     * automated polling. . Must be in valid duration format:
+     * {digits}{time-unit}. digits: 0-9, time-unit: [hmsd]|ms. h - hours, m -
+     * minutes, s - seconds, d - days, ms - milliseconds. If time unit is not
+     * specified, the default is s(seconds).
+     *
+     * @throws com.zimbra.common.service.ServiceException if error during update
+     *
+     * @since ZCS 6.0.0_BETA1
+     */
+    @ZAttr(id=1441)
+    public void unsetDataSourceActiveSyncPollingInterval() throws com.zimbra.common.service.ServiceException {
+        HashMap<String,Object> attrs = new HashMap<String,Object>();
+        attrs.put(Provisioning.A_zimbraDataSourceActiveSyncPollingInterval, "");
+        getProvisioning().modifyAttrs(this, attrs);
+    }
+
+    /**
+     * The time interval between automated data imports for a ActiveSync data
+     * source. If unset or 0, the data source will not be scheduled for
+     * automated polling. . Must be in valid duration format:
+     * {digits}{time-unit}. digits: 0-9, time-unit: [hmsd]|ms. h - hours, m -
+     * minutes, s - seconds, d - days, ms - milliseconds. If time unit is not
+     * specified, the default is s(seconds).
+     *
+     * @param attrs existing map to populate, or null to create a new map
+     * @return populated map to pass into Provisioning.modifyAttrs
+     *
+     * @since ZCS 6.0.0_BETA1
+     */
+    @ZAttr(id=1441)
+    public Map<String,Object> unsetDataSourceActiveSyncPollingInterval(Map<String,Object> attrs) {
+        if (attrs == null) attrs = new HashMap<String,Object>();
+        attrs.put(Provisioning.A_zimbraDataSourceActiveSyncPollingInterval, "");
         return attrs;
     }
 
@@ -23615,7 +23733,8 @@ public abstract class ZAttrAccount  extends MailTarget {
         return attrs;
     }
 
-    /** whether the Bluetooth capabilities are allowed on the device. The
+    /**
+     * whether the Bluetooth capabilities are allowed on the device. The
      * available options are Disable, HandsfreeOnly, and Allow. 0 - DISABLE 1
      * - HANDSFREE 2 - ALLOW ignored if
      * zmailFeatureMobilePolicyEnabled=FALSE or

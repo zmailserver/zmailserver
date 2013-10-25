@@ -197,6 +197,9 @@ public class DataSource extends AccountProperty {
             case pop3:
                 interval = account.getDataSourcePop3PollingInterval();
                 break;
+            case activesync:
+                interval = account.getDataSourceActiveSyncPollingInterval();
+                break;
             case imap:
                 interval = account.getDataSourceImapPollingInterval();
                 break;

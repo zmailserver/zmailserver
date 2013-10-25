@@ -41,7 +41,7 @@ public abstract class ZAttrServer extends NamedEntry {
 
     ///// BEGIN-AUTO-GEN-REPLACE
 
-    /* build: 9.0.0_BETA1_1111 rgadipuuri 20130510-1145 */
+    /* build: 8.0.0_BETA1_1111 norman 20131010-1457 */
 
     /**
      * RFC2256: common name(s) for which the entity is known by
@@ -352,6 +352,777 @@ public abstract class ZAttrServer extends NamedEntry {
     public Map<String,Object> unsetACE(Map<String,Object> attrs) {
         if (attrs == null) attrs = new HashMap<String,Object>();
         attrs.put(Provisioning.A_zmailACE, "");
+        return attrs;
+    }
+
+    /**
+     * name to use in greeting and sign-off; if empty, uses hostname
+     *
+     * @return zimbraActiveSyncAdvertisedName, or null if unset
+     */
+    @ZAttr(id=92)
+    public String getActiveSyncAdvertisedName() {
+        return getAttr(Provisioning.A_zimbraActiveSyncAdvertisedName, null);
+    }
+
+    /**
+     * name to use in greeting and sign-off; if empty, uses hostname
+     *
+     * @param zimbraActiveSyncAdvertisedName new value
+     * @throws com.zimbra.common.service.ServiceException if error during update
+     */
+    @ZAttr(id=92)
+    public void setActiveSyncAdvertisedName(String zimbraActiveSyncAdvertisedName) throws com.zimbra.common.service.ServiceException {
+        HashMap<String,Object> attrs = new HashMap<String,Object>();
+        attrs.put(Provisioning.A_zimbraActiveSyncAdvertisedName, zimbraActiveSyncAdvertisedName);
+        getProvisioning().modifyAttrs(this, attrs);
+    }
+
+    /**
+     * name to use in greeting and sign-off; if empty, uses hostname
+     *
+     * @param zimbraActiveSyncAdvertisedName new value
+     * @param attrs existing map to populate, or null to create a new map
+     * @return populated map to pass into Provisioning.modifyAttrs
+     */
+    @ZAttr(id=92)
+    public Map<String,Object> setActiveSyncAdvertisedName(String zimbraActiveSyncAdvertisedName, Map<String,Object> attrs) {
+        if (attrs == null) attrs = new HashMap<String,Object>();
+        attrs.put(Provisioning.A_zimbraActiveSyncAdvertisedName, zimbraActiveSyncAdvertisedName);
+        return attrs;
+    }
+
+    /**
+     * name to use in greeting and sign-off; if empty, uses hostname
+     *
+     * @throws com.zimbra.common.service.ServiceException if error during update
+     */
+    @ZAttr(id=92)
+    public void unsetActiveSyncAdvertisedName() throws com.zimbra.common.service.ServiceException {
+        HashMap<String,Object> attrs = new HashMap<String,Object>();
+        attrs.put(Provisioning.A_zimbraActiveSyncAdvertisedName, "");
+        getProvisioning().modifyAttrs(this, attrs);
+    }
+
+    /**
+     * name to use in greeting and sign-off; if empty, uses hostname
+     *
+     * @param attrs existing map to populate, or null to create a new map
+     * @return populated map to pass into Provisioning.modifyAttrs
+     */
+    @ZAttr(id=92)
+    public Map<String,Object> unsetActiveSyncAdvertisedName(Map<String,Object> attrs) {
+        if (attrs == null) attrs = new HashMap<String,Object>();
+        attrs.put(Provisioning.A_zimbraActiveSyncAdvertisedName, "");
+        return attrs;
+    }
+
+    /**
+     * interface address on which ActiveSync server should listen; if empty,
+     * binds to all interfaces
+     *
+     * @return zimbraActiveSyncBindAddress, or empty array if unset
+     */
+    @ZAttr(id=89)
+    public String[] getActiveSyncBindAddress() {
+        return getMultiAttr(Provisioning.A_zimbraActiveSyncBindAddress);
+    }
+
+    /**
+     * interface address on which ActiveSync server should listen; if empty,
+     * binds to all interfaces
+     *
+     * @param zimbraActiveSyncBindAddress new value
+     * @throws com.zimbra.common.service.ServiceException if error during update
+     */
+    @ZAttr(id=89)
+    public void setActiveSyncBindAddress(String[] zimbraActiveSyncBindAddress) throws com.zimbra.common.service.ServiceException {
+        HashMap<String,Object> attrs = new HashMap<String,Object>();
+        attrs.put(Provisioning.A_zimbraActiveSyncBindAddress, zimbraActiveSyncBindAddress);
+        getProvisioning().modifyAttrs(this, attrs);
+    }
+
+    /**
+     * interface address on which ActiveSync server should listen; if empty,
+     * binds to all interfaces
+     *
+     * @param zimbraActiveSyncBindAddress new value
+     * @param attrs existing map to populate, or null to create a new map
+     * @return populated map to pass into Provisioning.modifyAttrs
+     */
+    @ZAttr(id=89)
+    public Map<String,Object> setActiveSyncBindAddress(String[] zimbraActiveSyncBindAddress, Map<String,Object> attrs) {
+        if (attrs == null) attrs = new HashMap<String,Object>();
+        attrs.put(Provisioning.A_zimbraActiveSyncBindAddress, zimbraActiveSyncBindAddress);
+        return attrs;
+    }
+
+    /**
+     * interface address on which ActiveSync server should listen; if empty,
+     * binds to all interfaces
+     *
+     * @param zimbraActiveSyncBindAddress new to add to existing values
+     * @throws com.zimbra.common.service.ServiceException if error during update
+     */
+    @ZAttr(id=89)
+    public void addActiveSyncBindAddress(String zimbraActiveSyncBindAddress) throws com.zimbra.common.service.ServiceException {
+        HashMap<String,Object> attrs = new HashMap<String,Object>();
+        StringUtil.addToMultiMap(attrs, "+" + Provisioning.A_zimbraActiveSyncBindAddress, zimbraActiveSyncBindAddress);
+        getProvisioning().modifyAttrs(this, attrs);
+    }
+
+    /**
+     * interface address on which ActiveSync server should listen; if empty,
+     * binds to all interfaces
+     *
+     * @param zimbraActiveSyncBindAddress new to add to existing values
+     * @param attrs existing map to populate, or null to create a new map
+     * @return populated map to pass into Provisioning.modifyAttrs
+     */
+    @ZAttr(id=89)
+    public Map<String,Object> addActiveSyncBindAddress(String zimbraActiveSyncBindAddress, Map<String,Object> attrs) {
+        if (attrs == null) attrs = new HashMap<String,Object>();
+        StringUtil.addToMultiMap(attrs, "+" + Provisioning.A_zimbraActiveSyncBindAddress, zimbraActiveSyncBindAddress);
+        return attrs;
+    }
+
+    /**
+     * interface address on which ActiveSync server should listen; if empty,
+     * binds to all interfaces
+     *
+     * @param zimbraActiveSyncBindAddress existing value to remove
+     * @throws com.zimbra.common.service.ServiceException if error during update
+     */
+    @ZAttr(id=89)
+    public void removeActiveSyncBindAddress(String zimbraActiveSyncBindAddress) throws com.zimbra.common.service.ServiceException {
+        HashMap<String,Object> attrs = new HashMap<String,Object>();
+        StringUtil.addToMultiMap(attrs, "-" + Provisioning.A_zimbraActiveSyncBindAddress, zimbraActiveSyncBindAddress);
+        getProvisioning().modifyAttrs(this, attrs);
+    }
+
+    /**
+     * interface address on which ActiveSync server should listen; if empty,
+     * binds to all interfaces
+     *
+     * @param zimbraActiveSyncBindAddress existing value to remove
+     * @param attrs existing map to populate, or null to create a new map
+     * @return populated map to pass into Provisioning.modifyAttrs
+     */
+    @ZAttr(id=89)
+    public Map<String,Object> removeActiveSyncBindAddress(String zimbraActiveSyncBindAddress, Map<String,Object> attrs) {
+        if (attrs == null) attrs = new HashMap<String,Object>();
+        StringUtil.addToMultiMap(attrs, "-" + Provisioning.A_zimbraActiveSyncBindAddress, zimbraActiveSyncBindAddress);
+        return attrs;
+    }
+
+    /**
+     * interface address on which ActiveSync server should listen; if empty,
+     * binds to all interfaces
+     *
+     * @throws com.zimbra.common.service.ServiceException if error during update
+     */
+    @ZAttr(id=89)
+    public void unsetActiveSyncBindAddress() throws com.zimbra.common.service.ServiceException {
+        HashMap<String,Object> attrs = new HashMap<String,Object>();
+        attrs.put(Provisioning.A_zimbraActiveSyncBindAddress, "");
+        getProvisioning().modifyAttrs(this, attrs);
+    }
+
+    /**
+     * interface address on which ActiveSync server should listen; if empty,
+     * binds to all interfaces
+     *
+     * @param attrs existing map to populate, or null to create a new map
+     * @return populated map to pass into Provisioning.modifyAttrs
+     */
+    @ZAttr(id=89)
+    public Map<String,Object> unsetActiveSyncBindAddress(Map<String,Object> attrs) {
+        if (attrs == null) attrs = new HashMap<String,Object>();
+        attrs.put(Provisioning.A_zimbraActiveSyncBindAddress, "");
+        return attrs;
+    }
+
+    /**
+     * port number on which ActiveSync server should listen
+     *
+     * <p>Use getActiveSyncBindPortAsString to access value as a string.
+     *
+     * @see #getActiveSyncBindPortAsString()
+     *
+     * @return zimbraActiveSyncBindPort, or 9110 if unset
+     */
+    @ZAttr(id=88)
+    public int getActiveSyncBindPort() {
+        return getIntAttr(Provisioning.A_zimbraActiveSyncBindPort, 9110);
+    }
+
+    /**
+     * port number on which ActiveSync server should listen
+     *
+     * @return zimbraActiveSyncBindPort, or "9110" if unset
+     */
+    @ZAttr(id=88)
+    public String getActiveSyncBindPortAsString() {
+        return getAttr(Provisioning.A_zimbraActiveSyncBindPort, "9110");
+    }
+
+    /**
+     * port number on which ActiveSync server should listen
+     *
+     * @param zimbraActiveSyncBindPort new value
+     * @throws com.zimbra.common.service.ServiceException if error during update
+     */
+    @ZAttr(id=88)
+    public void setActiveSyncBindPort(int zimbraActiveSyncBindPort) throws com.zimbra.common.service.ServiceException {
+        HashMap<String,Object> attrs = new HashMap<String,Object>();
+        attrs.put(Provisioning.A_zimbraActiveSyncBindPort, Integer.toString(zimbraActiveSyncBindPort));
+        getProvisioning().modifyAttrs(this, attrs);
+    }
+
+    /**
+     * port number on which ActiveSync server should listen
+     *
+     * @param zimbraActiveSyncBindPort new value
+     * @param attrs existing map to populate, or null to create a new map
+     * @return populated map to pass into Provisioning.modifyAttrs
+     */
+    @ZAttr(id=88)
+    public Map<String,Object> setActiveSyncBindPort(int zimbraActiveSyncBindPort, Map<String,Object> attrs) {
+        if (attrs == null) attrs = new HashMap<String,Object>();
+        attrs.put(Provisioning.A_zimbraActiveSyncBindPort, Integer.toString(zimbraActiveSyncBindPort));
+        return attrs;
+    }
+
+    /**
+     * port number on which ActiveSync server should listen
+     *
+     * @param zimbraActiveSyncBindPort new value
+     * @throws com.zimbra.common.service.ServiceException if error during update
+     */
+    @ZAttr(id=88)
+    public void setActiveSyncBindPortAsString(String zimbraActiveSyncBindPort) throws com.zimbra.common.service.ServiceException {
+        HashMap<String,Object> attrs = new HashMap<String,Object>();
+        attrs.put(Provisioning.A_zimbraActiveSyncBindPort, zimbraActiveSyncBindPort);
+        getProvisioning().modifyAttrs(this, attrs);
+    }
+
+    /**
+     * port number on which ActiveSync server should listen
+     *
+     * @param zimbraActiveSyncBindPort new value
+     * @param attrs existing map to populate, or null to create a new map
+     * @return populated map to pass into Provisioning.modifyAttrs
+     */
+    @ZAttr(id=88)
+    public Map<String,Object> setActiveSyncBindPortAsString(String zimbraActiveSyncBindPort, Map<String,Object> attrs) {
+        if (attrs == null) attrs = new HashMap<String,Object>();
+        attrs.put(Provisioning.A_zimbraActiveSyncBindPort, zimbraActiveSyncBindPort);
+        return attrs;
+    }
+
+    /**
+     * port number on which ActiveSync server should listen
+     *
+     * @throws com.zimbra.common.service.ServiceException if error during update
+     */
+    @ZAttr(id=88)
+    public void unsetActiveSyncBindPort() throws com.zimbra.common.service.ServiceException {
+        HashMap<String,Object> attrs = new HashMap<String,Object>();
+        attrs.put(Provisioning.A_zimbraActiveSyncBindPort, "");
+        getProvisioning().modifyAttrs(this, attrs);
+    }
+
+    /**
+     * port number on which ActiveSync server should listen
+     *
+     * @param attrs existing map to populate, or null to create a new map
+     * @return populated map to pass into Provisioning.modifyAttrs
+     */
+    @ZAttr(id=88)
+    public Map<String,Object> unsetActiveSyncBindPort(Map<String,Object> attrs) {
+        if (attrs == null) attrs = new HashMap<String,Object>();
+        attrs.put(Provisioning.A_zimbraActiveSyncBindPort, "");
+        return attrs;
+    }
+
+    /**
+     * Whether to expose version on POP3 banner
+     *
+     * @return zimbraActiveSyncExposeVersionOnBanner, or false if unset
+     */
+    @ZAttr(id=91)
+    public boolean isActiveSyncExposeVersionOnBanner() {
+        return getBooleanAttr(Provisioning.A_zimbraActiveSyncExposeVersionOnBanner, false);
+    }
+
+    /**
+     * Whether to expose version on POP3 banner
+     *
+     * @param zimbraActiveSyncExposeVersionOnBanner new value
+     * @throws com.zimbra.common.service.ServiceException if error during update
+     */
+    @ZAttr(id=91)
+    public void setActiveSyncExposeVersionOnBanner(boolean zimbraActiveSyncExposeVersionOnBanner) throws com.zimbra.common.service.ServiceException {
+        HashMap<String,Object> attrs = new HashMap<String,Object>();
+        attrs.put(Provisioning.A_zimbraActiveSyncExposeVersionOnBanner, zimbraActiveSyncExposeVersionOnBanner ? Provisioning.TRUE : Provisioning.FALSE);
+        getProvisioning().modifyAttrs(this, attrs);
+    }
+
+    /**
+     * Whether to expose version on POP3 banner
+     *
+     * @param zimbraActiveSyncExposeVersionOnBanner new value
+     * @param attrs existing map to populate, or null to create a new map
+     * @return populated map to pass into Provisioning.modifyAttrs
+     */
+    @ZAttr(id=91)
+    public Map<String,Object> setActiveSyncExposeVersionOnBanner(boolean zimbraActiveSyncExposeVersionOnBanner, Map<String,Object> attrs) {
+        if (attrs == null) attrs = new HashMap<String,Object>();
+        attrs.put(Provisioning.A_zimbraActiveSyncExposeVersionOnBanner, zimbraActiveSyncExposeVersionOnBanner ? Provisioning.TRUE : Provisioning.FALSE);
+        return attrs;
+    }
+
+    /**
+     * Whether to expose version on POP3 banner
+     *
+     * @throws com.zimbra.common.service.ServiceException if error during update
+     */
+    @ZAttr(id=91)
+    public void unsetActiveSyncExposeVersionOnBanner() throws com.zimbra.common.service.ServiceException {
+        HashMap<String,Object> attrs = new HashMap<String,Object>();
+        attrs.put(Provisioning.A_zimbraActiveSyncExposeVersionOnBanner, "");
+        getProvisioning().modifyAttrs(this, attrs);
+    }
+
+    /**
+     * Whether to expose version on POP3 banner
+     *
+     * @param attrs existing map to populate, or null to create a new map
+     * @return populated map to pass into Provisioning.modifyAttrs
+     */
+    @ZAttr(id=91)
+    public Map<String,Object> unsetActiveSyncExposeVersionOnBanner(Map<String,Object> attrs) {
+        if (attrs == null) attrs = new HashMap<String,Object>();
+        attrs.put(Provisioning.A_zimbraActiveSyncExposeVersionOnBanner, "");
+        return attrs;
+    }
+
+    /**
+     * Maximum number of concurrent ActiveSync connections allowed. New
+     * connections exceeding this limit are rejected.
+     *
+     * @return zimbraActiveSyncMaxConnections, or 200 if unset
+     */
+    @ZAttr(id=84)
+    public int getActiveSyncMaxConnections() {
+        return getIntAttr(Provisioning.A_zimbraActiveSyncMaxConnections, 200);
+    }
+
+    /**
+     * Maximum number of concurrent ActiveSync connections allowed. New
+     * connections exceeding this limit are rejected.
+     *
+     * @param zimbraActiveSyncMaxConnections new value
+     * @throws com.zimbra.common.service.ServiceException if error during update
+     */
+    @ZAttr(id=84)
+    public void setActiveSyncMaxConnections(int zimbraActiveSyncMaxConnections) throws com.zimbra.common.service.ServiceException {
+        HashMap<String,Object> attrs = new HashMap<String,Object>();
+        attrs.put(Provisioning.A_zimbraActiveSyncMaxConnections, Integer.toString(zimbraActiveSyncMaxConnections));
+        getProvisioning().modifyAttrs(this, attrs);
+    }
+
+    /**
+     * Maximum number of concurrent ActiveSync connections allowed. New
+     * connections exceeding this limit are rejected.
+     *
+     * @param zimbraActiveSyncMaxConnections new value
+     * @param attrs existing map to populate, or null to create a new map
+     * @return populated map to pass into Provisioning.modifyAttrs
+     */
+    @ZAttr(id=84)
+    public Map<String,Object> setActiveSyncMaxConnections(int zimbraActiveSyncMaxConnections, Map<String,Object> attrs) {
+        if (attrs == null) attrs = new HashMap<String,Object>();
+        attrs.put(Provisioning.A_zimbraActiveSyncMaxConnections, Integer.toString(zimbraActiveSyncMaxConnections));
+        return attrs;
+    }
+
+    /**
+     * Maximum number of concurrent ActiveSync connections allowed. New
+     * connections exceeding this limit are rejected.
+     *
+     * @throws com.zimbra.common.service.ServiceException if error during update
+     */
+    @ZAttr(id=84)
+    public void unsetActiveSyncMaxConnections() throws com.zimbra.common.service.ServiceException {
+        HashMap<String,Object> attrs = new HashMap<String,Object>();
+        attrs.put(Provisioning.A_zimbraActiveSyncMaxConnections, "");
+        getProvisioning().modifyAttrs(this, attrs);
+    }
+
+    /**
+     * Maximum number of concurrent ActiveSync connections allowed. New
+     * connections exceeding this limit are rejected.
+     *
+     * @param attrs existing map to populate, or null to create a new map
+     * @return populated map to pass into Provisioning.modifyAttrs
+     */
+    @ZAttr(id=84)
+    public Map<String,Object> unsetActiveSyncMaxConnections(Map<String,Object> attrs) {
+        if (attrs == null) attrs = new HashMap<String,Object>();
+        attrs.put(Provisioning.A_zimbraActiveSyncMaxConnections, "");
+        return attrs;
+    }
+
+    /**
+     * number of handler threads
+     *
+     * @return zimbraActiveSyncNumThreads, or 100 if unset
+     */
+    @ZAttr(id=85)
+    public int getActiveSyncNumThreads() {
+        return getIntAttr(Provisioning.A_zimbraActiveSyncNumThreads, 100);
+    }
+
+    /**
+     * number of handler threads
+     *
+     * @param zimbraActiveSyncNumThreads new value
+     * @throws com.zimbra.common.service.ServiceException if error during update
+     */
+    @ZAttr(id=85)
+    public void setActiveSyncNumThreads(int zimbraActiveSyncNumThreads) throws com.zimbra.common.service.ServiceException {
+        HashMap<String,Object> attrs = new HashMap<String,Object>();
+        attrs.put(Provisioning.A_zimbraActiveSyncNumThreads, Integer.toString(zimbraActiveSyncNumThreads));
+        getProvisioning().modifyAttrs(this, attrs);
+    }
+
+    /**
+     * number of handler threads
+     *
+     * @param zimbraActiveSyncNumThreads new value
+     * @param attrs existing map to populate, or null to create a new map
+     * @return populated map to pass into Provisioning.modifyAttrs
+     */
+    @ZAttr(id=85)
+    public Map<String,Object> setActiveSyncNumThreads(int zimbraActiveSyncNumThreads, Map<String,Object> attrs) {
+        if (attrs == null) attrs = new HashMap<String,Object>();
+        attrs.put(Provisioning.A_zimbraActiveSyncNumThreads, Integer.toString(zimbraActiveSyncNumThreads));
+        return attrs;
+    }
+
+    /**
+     * number of handler threads
+     *
+     * @throws com.zimbra.common.service.ServiceException if error during update
+     */
+    @ZAttr(id=85)
+    public void unsetActiveSyncNumThreads() throws com.zimbra.common.service.ServiceException {
+        HashMap<String,Object> attrs = new HashMap<String,Object>();
+        attrs.put(Provisioning.A_zimbraActiveSyncNumThreads, "");
+        getProvisioning().modifyAttrs(this, attrs);
+    }
+
+    /**
+     * number of handler threads
+     *
+     * @param attrs existing map to populate, or null to create a new map
+     * @return populated map to pass into Provisioning.modifyAttrs
+     */
+    @ZAttr(id=85)
+    public Map<String,Object> unsetActiveSyncNumThreads(Map<String,Object> attrs) {
+        if (attrs == null) attrs = new HashMap<String,Object>();
+        attrs.put(Provisioning.A_zimbraActiveSyncNumThreads, "");
+        return attrs;
+    }
+
+    /**
+     * interface address on which ActiveSync server should listen; if empty,
+     * binds to all interfaces
+     *
+     * @return zimbraActiveSyncSSLBindAddress, or empty array if unset
+     */
+    @ZAttr(id=90)
+    public String[] getActiveSyncSSLBindAddress() {
+        return getMultiAttr(Provisioning.A_zimbraActiveSyncSSLBindAddress);
+    }
+
+    /**
+     * interface address on which ActiveSync server should listen; if empty,
+     * binds to all interfaces
+     *
+     * @param zimbraActiveSyncSSLBindAddress new value
+     * @throws com.zimbra.common.service.ServiceException if error during update
+     */
+    @ZAttr(id=90)
+    public void setActiveSyncSSLBindAddress(String[] zimbraActiveSyncSSLBindAddress) throws com.zimbra.common.service.ServiceException {
+        HashMap<String,Object> attrs = new HashMap<String,Object>();
+        attrs.put(Provisioning.A_zimbraActiveSyncSSLBindAddress, zimbraActiveSyncSSLBindAddress);
+        getProvisioning().modifyAttrs(this, attrs);
+    }
+
+    /**
+     * interface address on which ActiveSync server should listen; if empty,
+     * binds to all interfaces
+     *
+     * @param zimbraActiveSyncSSLBindAddress new value
+     * @param attrs existing map to populate, or null to create a new map
+     * @return populated map to pass into Provisioning.modifyAttrs
+     */
+    @ZAttr(id=90)
+    public Map<String,Object> setActiveSyncSSLBindAddress(String[] zimbraActiveSyncSSLBindAddress, Map<String,Object> attrs) {
+        if (attrs == null) attrs = new HashMap<String,Object>();
+        attrs.put(Provisioning.A_zimbraActiveSyncSSLBindAddress, zimbraActiveSyncSSLBindAddress);
+        return attrs;
+    }
+
+    /**
+     * interface address on which ActiveSync server should listen; if empty,
+     * binds to all interfaces
+     *
+     * @param zimbraActiveSyncSSLBindAddress new to add to existing values
+     * @throws com.zimbra.common.service.ServiceException if error during update
+     */
+    @ZAttr(id=90)
+    public void addActiveSyncSSLBindAddress(String zimbraActiveSyncSSLBindAddress) throws com.zimbra.common.service.ServiceException {
+        HashMap<String,Object> attrs = new HashMap<String,Object>();
+        StringUtil.addToMultiMap(attrs, "+" + Provisioning.A_zimbraActiveSyncSSLBindAddress, zimbraActiveSyncSSLBindAddress);
+        getProvisioning().modifyAttrs(this, attrs);
+    }
+
+    /**
+     * interface address on which ActiveSync server should listen; if empty,
+     * binds to all interfaces
+     *
+     * @param zimbraActiveSyncSSLBindAddress new to add to existing values
+     * @param attrs existing map to populate, or null to create a new map
+     * @return populated map to pass into Provisioning.modifyAttrs
+     */
+    @ZAttr(id=90)
+    public Map<String,Object> addActiveSyncSSLBindAddress(String zimbraActiveSyncSSLBindAddress, Map<String,Object> attrs) {
+        if (attrs == null) attrs = new HashMap<String,Object>();
+        StringUtil.addToMultiMap(attrs, "+" + Provisioning.A_zimbraActiveSyncSSLBindAddress, zimbraActiveSyncSSLBindAddress);
+        return attrs;
+    }
+
+    /**
+     * interface address on which ActiveSync server should listen; if empty,
+     * binds to all interfaces
+     *
+     * @param zimbraActiveSyncSSLBindAddress existing value to remove
+     * @throws com.zimbra.common.service.ServiceException if error during update
+     */
+    @ZAttr(id=90)
+    public void removeActiveSyncSSLBindAddress(String zimbraActiveSyncSSLBindAddress) throws com.zimbra.common.service.ServiceException {
+        HashMap<String,Object> attrs = new HashMap<String,Object>();
+        StringUtil.addToMultiMap(attrs, "-" + Provisioning.A_zimbraActiveSyncSSLBindAddress, zimbraActiveSyncSSLBindAddress);
+        getProvisioning().modifyAttrs(this, attrs);
+    }
+
+    /**
+     * interface address on which ActiveSync server should listen; if empty,
+     * binds to all interfaces
+     *
+     * @param zimbraActiveSyncSSLBindAddress existing value to remove
+     * @param attrs existing map to populate, or null to create a new map
+     * @return populated map to pass into Provisioning.modifyAttrs
+     */
+    @ZAttr(id=90)
+    public Map<String,Object> removeActiveSyncSSLBindAddress(String zimbraActiveSyncSSLBindAddress, Map<String,Object> attrs) {
+        if (attrs == null) attrs = new HashMap<String,Object>();
+        StringUtil.addToMultiMap(attrs, "-" + Provisioning.A_zimbraActiveSyncSSLBindAddress, zimbraActiveSyncSSLBindAddress);
+        return attrs;
+    }
+
+    /**
+     * interface address on which ActiveSync server should listen; if empty,
+     * binds to all interfaces
+     *
+     * @throws com.zimbra.common.service.ServiceException if error during update
+     */
+    @ZAttr(id=90)
+    public void unsetActiveSyncSSLBindAddress() throws com.zimbra.common.service.ServiceException {
+        HashMap<String,Object> attrs = new HashMap<String,Object>();
+        attrs.put(Provisioning.A_zimbraActiveSyncSSLBindAddress, "");
+        getProvisioning().modifyAttrs(this, attrs);
+    }
+
+    /**
+     * interface address on which ActiveSync server should listen; if empty,
+     * binds to all interfaces
+     *
+     * @param attrs existing map to populate, or null to create a new map
+     * @return populated map to pass into Provisioning.modifyAttrs
+     */
+    @ZAttr(id=90)
+    public Map<String,Object> unsetActiveSyncSSLBindAddress(Map<String,Object> attrs) {
+        if (attrs == null) attrs = new HashMap<String,Object>();
+        attrs.put(Provisioning.A_zimbraActiveSyncSSLBindAddress, "");
+        return attrs;
+    }
+
+    /**
+     * port number on which ActiveSync server should listen
+     *
+     * <p>Use getActiveSyncSSLBindPortAsString to access value as a string.
+     *
+     * @see #getActiveSyncSSLBindPortAsString()
+     *
+     * @return zimbraActiveSyncSSLBindPort, or 9995 if unset
+     */
+    @ZAttr(id=87)
+    public int getActiveSyncSSLBindPort() {
+        return getIntAttr(Provisioning.A_zimbraActiveSyncSSLBindPort, 9995);
+    }
+
+    /**
+     * port number on which ActiveSync server should listen
+     *
+     * @return zimbraActiveSyncSSLBindPort, or "9995" if unset
+     */
+    @ZAttr(id=87)
+    public String getActiveSyncSSLBindPortAsString() {
+        return getAttr(Provisioning.A_zimbraActiveSyncSSLBindPort, "9995");
+    }
+
+    /**
+     * port number on which ActiveSync server should listen
+     *
+     * @param zimbraActiveSyncSSLBindPort new value
+     * @throws com.zimbra.common.service.ServiceException if error during update
+     */
+    @ZAttr(id=87)
+    public void setActiveSyncSSLBindPort(int zimbraActiveSyncSSLBindPort) throws com.zimbra.common.service.ServiceException {
+        HashMap<String,Object> attrs = new HashMap<String,Object>();
+        attrs.put(Provisioning.A_zimbraActiveSyncSSLBindPort, Integer.toString(zimbraActiveSyncSSLBindPort));
+        getProvisioning().modifyAttrs(this, attrs);
+    }
+
+    /**
+     * port number on which ActiveSync server should listen
+     *
+     * @param zimbraActiveSyncSSLBindPort new value
+     * @param attrs existing map to populate, or null to create a new map
+     * @return populated map to pass into Provisioning.modifyAttrs
+     */
+    @ZAttr(id=87)
+    public Map<String,Object> setActiveSyncSSLBindPort(int zimbraActiveSyncSSLBindPort, Map<String,Object> attrs) {
+        if (attrs == null) attrs = new HashMap<String,Object>();
+        attrs.put(Provisioning.A_zimbraActiveSyncSSLBindPort, Integer.toString(zimbraActiveSyncSSLBindPort));
+        return attrs;
+    }
+
+    /**
+     * port number on which ActiveSync server should listen
+     *
+     * @param zimbraActiveSyncSSLBindPort new value
+     * @throws com.zimbra.common.service.ServiceException if error during update
+     */
+    @ZAttr(id=87)
+    public void setActiveSyncSSLBindPortAsString(String zimbraActiveSyncSSLBindPort) throws com.zimbra.common.service.ServiceException {
+        HashMap<String,Object> attrs = new HashMap<String,Object>();
+        attrs.put(Provisioning.A_zimbraActiveSyncSSLBindPort, zimbraActiveSyncSSLBindPort);
+        getProvisioning().modifyAttrs(this, attrs);
+    }
+
+    /**
+     * port number on which ActiveSync server should listen
+     *
+     * @param zimbraActiveSyncSSLBindPort new value
+     * @param attrs existing map to populate, or null to create a new map
+     * @return populated map to pass into Provisioning.modifyAttrs
+     */
+    @ZAttr(id=87)
+    public Map<String,Object> setActiveSyncSSLBindPortAsString(String zimbraActiveSyncSSLBindPort, Map<String,Object> attrs) {
+        if (attrs == null) attrs = new HashMap<String,Object>();
+        attrs.put(Provisioning.A_zimbraActiveSyncSSLBindPort, zimbraActiveSyncSSLBindPort);
+        return attrs;
+    }
+
+    /**
+     * port number on which ActiveSync server should listen
+     *
+     * @throws com.zimbra.common.service.ServiceException if error during update
+     */
+    @ZAttr(id=87)
+    public void unsetActiveSyncSSLBindPort() throws com.zimbra.common.service.ServiceException {
+        HashMap<String,Object> attrs = new HashMap<String,Object>();
+        attrs.put(Provisioning.A_zimbraActiveSyncSSLBindPort, "");
+        getProvisioning().modifyAttrs(this, attrs);
+    }
+
+    /**
+     * port number on which ActiveSync server should listen
+     *
+     * @param attrs existing map to populate, or null to create a new map
+     * @return populated map to pass into Provisioning.modifyAttrs
+     */
+    @ZAttr(id=87)
+    public Map<String,Object> unsetActiveSyncSSLBindPort(Map<String,Object> attrs) {
+        if (attrs == null) attrs = new HashMap<String,Object>();
+        attrs.put(Provisioning.A_zimbraActiveSyncSSLBindPort, "");
+        return attrs;
+    }
+
+    /**
+     * number of seconds to wait before forcing ActiveSync server shutdown
+     *
+     * @return zimbraActiveSyncShutdownGraceSeconds, or 10 if unset
+     */
+    @ZAttr(id=86)
+    public int getActiveSyncShutdownGraceSeconds() {
+        return getIntAttr(Provisioning.A_zimbraActiveSyncShutdownGraceSeconds, 10);
+    }
+
+    /**
+     * number of seconds to wait before forcing ActiveSync server shutdown
+     *
+     * @param zimbraActiveSyncShutdownGraceSeconds new value
+     * @throws com.zimbra.common.service.ServiceException if error during update
+     */
+    @ZAttr(id=86)
+    public void setActiveSyncShutdownGraceSeconds(int zimbraActiveSyncShutdownGraceSeconds) throws com.zimbra.common.service.ServiceException {
+        HashMap<String,Object> attrs = new HashMap<String,Object>();
+        attrs.put(Provisioning.A_zimbraActiveSyncShutdownGraceSeconds, Integer.toString(zimbraActiveSyncShutdownGraceSeconds));
+        getProvisioning().modifyAttrs(this, attrs);
+    }
+
+    /**
+     * number of seconds to wait before forcing ActiveSync server shutdown
+     *
+     * @param zimbraActiveSyncShutdownGraceSeconds new value
+     * @param attrs existing map to populate, or null to create a new map
+     * @return populated map to pass into Provisioning.modifyAttrs
+     */
+    @ZAttr(id=86)
+    public Map<String,Object> setActiveSyncShutdownGraceSeconds(int zimbraActiveSyncShutdownGraceSeconds, Map<String,Object> attrs) {
+        if (attrs == null) attrs = new HashMap<String,Object>();
+        attrs.put(Provisioning.A_zimbraActiveSyncShutdownGraceSeconds, Integer.toString(zimbraActiveSyncShutdownGraceSeconds));
+        return attrs;
+    }
+
+    /**
+     * number of seconds to wait before forcing ActiveSync server shutdown
+     *
+     * @throws com.zimbra.common.service.ServiceException if error during update
+     */
+    @ZAttr(id=86)
+    public void unsetActiveSyncShutdownGraceSeconds() throws com.zimbra.common.service.ServiceException {
+        HashMap<String,Object> attrs = new HashMap<String,Object>();
+        attrs.put(Provisioning.A_zimbraActiveSyncShutdownGraceSeconds, "");
+        getProvisioning().modifyAttrs(this, attrs);
+    }
+
+    /**
+     * number of seconds to wait before forcing ActiveSync server shutdown
+     *
+     * @param attrs existing map to populate, or null to create a new map
+     * @return populated map to pass into Provisioning.modifyAttrs
+     */
+    @ZAttr(id=86)
+    public Map<String,Object> unsetActiveSyncShutdownGraceSeconds(Map<String,Object> attrs) {
+        if (attrs == null) attrs = new HashMap<String,Object>();
+        attrs.put(Provisioning.A_zimbraActiveSyncShutdownGraceSeconds, "");
         return attrs;
     }
 
@@ -3755,7 +4526,7 @@ public abstract class ZAttrServer extends NamedEntry {
     }
 
     /**
-     * Maximum size in bytes for file uploads
+     * Maximum size in bytes for attachments
      *
      * @return zmailFileUploadMaxSize, or 10485760 if unset
      */
@@ -3765,7 +4536,7 @@ public abstract class ZAttrServer extends NamedEntry {
     }
 
     /**
-     * Maximum size in bytes for file uploads
+     * Maximum size in bytes for attachments
      *
      * @param zmailFileUploadMaxSize new value
      * @throws org.zmail.common.service.ServiceException if error during update
@@ -3778,7 +4549,7 @@ public abstract class ZAttrServer extends NamedEntry {
     }
 
     /**
-     * Maximum size in bytes for file uploads
+     * Maximum size in bytes for attachments
      *
      * @param zmailFileUploadMaxSize new value
      * @param attrs existing map to populate, or null to create a new map
@@ -3792,7 +4563,7 @@ public abstract class ZAttrServer extends NamedEntry {
     }
 
     /**
-     * Maximum size in bytes for file uploads
+     * Maximum size in bytes for attachments
      *
      * @throws org.zmail.common.service.ServiceException if error during update
      */
@@ -3804,7 +4575,7 @@ public abstract class ZAttrServer extends NamedEntry {
     }
 
     /**
-     * Maximum size in bytes for file uploads
+     * Maximum size in bytes for attachments
      *
      * @param attrs existing map to populate, or null to create a new map
      * @return populated map to pass into Provisioning.modifyAttrs

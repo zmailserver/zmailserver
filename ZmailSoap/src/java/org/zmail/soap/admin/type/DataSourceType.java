@@ -24,7 +24,7 @@ import org.zmail.common.service.ServiceException;
 @XmlEnum
 public enum DataSourceType {
     // case must match protocol
-    pop3, imap, caldav, contacts, yab, rss, cal, gal, xsync, tagmap;
+    pop3, activesync, imap, caldav, contacts, yab, rss, cal, gal, xsync, tagmap;
 
     public static DataSourceType fromString(String s) throws ServiceException {
         try {

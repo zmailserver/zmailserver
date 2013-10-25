@@ -42,7 +42,7 @@ public abstract class ZAttrDomain extends NamedEntry {
 
     ///// BEGIN-AUTO-GEN-REPLACE
 
-    /* build: 9.0.0_BETA1_1111 rgadipuuri 20130510-1145 */
+    /* build: 8.0.0_BETA1_1111 norman 20131010-1457 */
 
     /**
      * RFC2256: descriptive information
@@ -3074,6 +3074,7 @@ public abstract class ZAttrDomain extends NamedEntry {
      * singleton listener instance is invoked after each account is auto
      * created in Zmail. Listener can be plugged in as a server extension to
      * handle tasks like updating the account auto provision status in the
+<<<<<<< HEAD:ZmailServer/src/java/org/zmail/cs/account/ZAttrDomain.java
      * external LDAP directory. At each eager provision interval, ZCS does an
      * LDAP search based on the value configured in
      * zmailAutoProvLdapSearchFilter. Returned entries from this search are
@@ -3093,6 +3094,9 @@ public abstract class ZAttrDomain extends NamedEntry {
      * just provisioned in ZCS. The attribute can be included as a condition
      * in the zmailAutoProvLdapSearchFilter, so the entry won&#039;t be
      * returned again by the LDAP search in the next interval.
+=======
+     * external LDAP directory.
+>>>>>>> Added ActiveSync Config parameters.:ZimbraServer/src/java/com/zimbra/cs/account/ZAttrDomain.java
      *
      * @param zmailAutoProvListenerClass new value
      * @throws org.zmail.common.service.ServiceException if error during update
@@ -3113,6 +3117,7 @@ public abstract class ZAttrDomain extends NamedEntry {
      * singleton listener instance is invoked after each account is auto
      * created in Zmail. Listener can be plugged in as a server extension to
      * handle tasks like updating the account auto provision status in the
+<<<<<<< HEAD:ZmailServer/src/java/org/zmail/cs/account/ZAttrDomain.java
      * external LDAP directory. At each eager provision interval, ZCS does an
      * LDAP search based on the value configured in
      * zmailAutoProvLdapSearchFilter. Returned entries from this search are
@@ -3132,6 +3137,9 @@ public abstract class ZAttrDomain extends NamedEntry {
      * just provisioned in ZCS. The attribute can be included as a condition
      * in the zmailAutoProvLdapSearchFilter, so the entry won&#039;t be
      * returned again by the LDAP search in the next interval.
+=======
+     * external LDAP directory.
+>>>>>>> Added ActiveSync Config parameters.:ZimbraServer/src/java/com/zimbra/cs/account/ZAttrDomain.java
      *
      * @param zmailAutoProvListenerClass new value
      * @param attrs existing map to populate, or null to create a new map
@@ -3153,6 +3161,7 @@ public abstract class ZAttrDomain extends NamedEntry {
      * singleton listener instance is invoked after each account is auto
      * created in Zmail. Listener can be plugged in as a server extension to
      * handle tasks like updating the account auto provision status in the
+<<<<<<< HEAD:ZmailServer/src/java/org/zmail/cs/account/ZAttrDomain.java
      * external LDAP directory. At each eager provision interval, ZCS does an
      * LDAP search based on the value configured in
      * zmailAutoProvLdapSearchFilter. Returned entries from this search are
@@ -3172,6 +3181,9 @@ public abstract class ZAttrDomain extends NamedEntry {
      * just provisioned in ZCS. The attribute can be included as a condition
      * in the zmailAutoProvLdapSearchFilter, so the entry won&#039;t be
      * returned again by the LDAP search in the next interval.
+=======
+     * external LDAP directory.
+>>>>>>> Added ActiveSync Config parameters.:ZimbraServer/src/java/com/zimbra/cs/account/ZAttrDomain.java
      *
      * @throws org.zmail.common.service.ServiceException if error during update
      *
@@ -3191,6 +3203,7 @@ public abstract class ZAttrDomain extends NamedEntry {
      * singleton listener instance is invoked after each account is auto
      * created in Zmail. Listener can be plugged in as a server extension to
      * handle tasks like updating the account auto provision status in the
+<<<<<<< HEAD:ZmailServer/src/java/org/zmail/cs/account/ZAttrDomain.java
      * external LDAP directory. At each eager provision interval, ZCS does an
      * LDAP search based on the value configured in
      * zmailAutoProvLdapSearchFilter. Returned entries from this search are
@@ -3210,6 +3223,9 @@ public abstract class ZAttrDomain extends NamedEntry {
      * just provisioned in ZCS. The attribute can be included as a condition
      * in the zmailAutoProvLdapSearchFilter, so the entry won&#039;t be
      * returned again by the LDAP search in the next interval.
+=======
+     * external LDAP directory.
+>>>>>>> Added ActiveSync Config parameters.:ZimbraServer/src/java/com/zimbra/cs/account/ZAttrDomain.java
      *
      * @param attrs existing map to populate, or null to create a new map
      * @return populated map to pass into Provisioning.modifyAttrs

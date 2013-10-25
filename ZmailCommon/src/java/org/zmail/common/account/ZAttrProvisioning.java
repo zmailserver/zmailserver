@@ -28,7 +28,7 @@ public class ZAttrProvisioning {
 
     ///// BEGIN-AUTO-GEN-REPLACE
 
-    /* build: 9.0.0_BETA1_1111 rgadipuuri 20130510-1145 */
+    /* build: 8.0.0_BETA1_1111 norman 20131010-1457 */
 
     public static enum AccountCalendarUserType {
         RESOURCE("RESOURCE"),
@@ -1740,6 +1740,63 @@ public class ZAttrProvisioning {
     public static final String A_zmailACE = "zmailACE";
 
     /**
+     * name to use in greeting and sign-off; if empty, uses hostname
+     */
+    @ZAttr(id=92)
+    public static final String A_zimbraActiveSyncAdvertisedName = "zimbraActiveSyncAdvertisedName";
+
+    /**
+     * interface address on which ActiveSync server should listen; if empty,
+     * binds to all interfaces
+     */
+    @ZAttr(id=89)
+    public static final String A_zimbraActiveSyncBindAddress = "zimbraActiveSyncBindAddress";
+
+    /**
+     * port number on which ActiveSync server should listen
+     */
+    @ZAttr(id=88)
+    public static final String A_zimbraActiveSyncBindPort = "zimbraActiveSyncBindPort";
+
+    /**
+     * Whether to expose version on POP3 banner
+     */
+    @ZAttr(id=91)
+    public static final String A_zimbraActiveSyncExposeVersionOnBanner = "zimbraActiveSyncExposeVersionOnBanner";
+
+    /**
+     * Maximum number of concurrent ActiveSync connections allowed. New
+     * connections exceeding this limit are rejected.
+     */
+    @ZAttr(id=84)
+    public static final String A_zimbraActiveSyncMaxConnections = "zimbraActiveSyncMaxConnections";
+
+    /**
+     * number of handler threads
+     */
+    @ZAttr(id=85)
+    public static final String A_zimbraActiveSyncNumThreads = "zimbraActiveSyncNumThreads";
+
+    /**
+     * number of seconds to wait before forcing ActiveSync server shutdown
+     */
+    @ZAttr(id=86)
+    public static final String A_zimbraActiveSyncShutdownGraceSeconds = "zimbraActiveSyncShutdownGraceSeconds";
+
+    /**
+     * interface address on which ActiveSync server should listen; if empty,
+     * binds to all interfaces
+     */
+    @ZAttr(id=90)
+    public static final String A_zimbraActiveSyncSSLBindAddress = "zimbraActiveSyncSSLBindAddress";
+
+    /**
+     * port number on which ActiveSync server should listen
+     */
+    @ZAttr(id=87)
+    public static final String A_zimbraActiveSyncSSLBindPort = "zimbraActiveSyncSSLBindPort";
+
+    /**
      * access control mechanism for admin access acl: ACL based access
      * control (a.k.a. delegated admin). global: allows only global admins.
      *
@@ -3060,6 +3117,19 @@ public class ZAttrProvisioning {
      */
     @ZAttr(id=1038)
     public static final String A_zmailDatabaseSlowSqlThreshold = "zmailDatabaseSlowSqlThreshold";
+
+    /**
+     * The time interval between automated data imports for a ActiveSync data
+     * source. If unset or 0, the data source will not be scheduled for
+     * automated polling. . Must be in valid duration format:
+     * {digits}{time-unit}. digits: 0-9, time-unit: [hmsd]|ms. h - hours, m -
+     * minutes, s - seconds, d - days, ms - milliseconds. If time unit is not
+     * specified, the default is s(seconds).
+     *
+     * @since ZCS 6.0.0_BETA1
+     */
+    @ZAttr(id=1441)
+    public static final String A_zimbraDataSourceActiveSyncPollingInterval = "zimbraDataSourceActiveSyncPollingInterval";
 
     /**
      * properties for data source
@@ -4678,7 +4748,7 @@ public class ZAttrProvisioning {
     public static final String A_zmailFileShareLifetime = "zmailFileShareLifetime";
 
     /**
-     * Maximum size in bytes for file uploads
+     * Maximum size in bytes for attachments
      */
     @ZAttr(id=227)
     public static final String A_zmailFileUploadMaxSize = "zmailFileUploadMaxSize";

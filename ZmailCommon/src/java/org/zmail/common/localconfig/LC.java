@@ -747,6 +747,7 @@ public final class LC {
 
     public static final KnownKey nio_imap_enabled = KnownKey.newKey(true);
     public static final KnownKey nio_pop3_enabled = KnownKey.newKey(true);
+    public static final KnownKey nio_activesync_enabled = KnownKey.newKey(true);
 
     public static final KnownKey nio_max_write_queue_size = KnownKey.newKey(10000);
 
@@ -776,6 +777,13 @@ public final class LC {
     public static final KnownKey pop3_throttle_ip_limit = KnownKey.newKey(200);
     public static final KnownKey pop3_throttle_acct_limit = KnownKey.newKey(200);
     public static final KnownKey pop3_max_consecutive_error = KnownKey.newKey(5);
+
+    public static final KnownKey activesync_write_timeout = KnownKey.newKey(10);
+    public static final KnownKey activesync_thread_keep_alive_time = KnownKey.newKey(60);
+    public static final KnownKey activesync_max_idle_time = KnownKey.newKey(60);
+    public static final KnownKey activesync_throttle_ip_limit = KnownKey.newKey(200);
+    public static final KnownKey activesync_throttle_acct_limit = KnownKey.newKey(200);
+    public static final KnownKey activesync_max_consecutive_error = KnownKey.newKey(5);
 
     public static final KnownKey lmtp_throttle_ip_limit = KnownKey.newKey(0);
 
@@ -909,14 +917,18 @@ public final class LC {
      */
     public static final KnownKey javamail_zparser = KnownKey.newKey(true);
     public static final KnownKey javamail_pop3_debug = KnownKey.newKey(false);
+    public static final KnownKey javamail_activesync_debug = KnownKey.newKey(false);
     public static final KnownKey javamail_imap_debug = KnownKey.newKey(false);
     public static final KnownKey javamail_smtp_debug = KnownKey.newKey(false);
     public static final KnownKey javamail_pop3_timeout = KnownKey.newKey(60);
+    public static final KnownKey javamail_activesync_timeout = KnownKey.newKey(60);
     public static final KnownKey javamail_imap_timeout = KnownKey.newKey(60);
     public static final KnownKey javamail_smtp_timeout = KnownKey.newKey(60);
     public static final KnownKey javamail_pop3_test_timeout = KnownKey.newKey(20);
+    public static final KnownKey javamail_activesync_test_timeout = KnownKey.newKey(20);
     public static final KnownKey javamail_imap_test_timeout = KnownKey.newKey(20);
     public static final KnownKey javamail_pop3_enable_starttls = KnownKey.newKey(true);
+    public static final KnownKey javamail_activesync_enable_starttls = KnownKey.newKey(true);
     public static final KnownKey javamail_imap_enable_starttls = KnownKey.newKey(true);
     public static final KnownKey javamail_smtp_enable_starttls = KnownKey.newKey(true);
 
