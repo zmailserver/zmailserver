@@ -13,7 +13,7 @@
  * limitations under the License.
  */
 
-package com.zimbra.cs.mailclient.activesync;
+package org.zmail.cs.mailclient.activesync;
 
 import java.io.ByteArrayInputStream;
 import java.io.InputStream;
@@ -34,8 +34,8 @@ import org.xml.sax.InputSource;
 import org.xml.sax.XMLReader;
 import org.xml.sax.helpers.XMLReaderFactory;
 
-import com.zimbra.cs.mailclient.activesync.WBXML;
-import com.zimbra.cs.mailclient.activesync.ASTypes;
+import org.zmail.cs.mailclient.activesync.WBXML;
+import org.zmail.cs.mailclient.activesync.ASTypes;
 
 /**
  * @author Vivek Iyer

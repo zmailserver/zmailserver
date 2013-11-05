@@ -12,11 +12,11 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.mailclient.activesync;
+package org.zmail.cs.mailclient.activesync;
 
-import com.zimbra.common.util.ZimbraLog;
-import com.zimbra.cs.mailclient.MailConfig;
-import com.zimbra.cs.mailclient.util.Config;
+import org.zmail.common.util.ZmailLog;
+import org.zmail.cs.mailclient.MailConfig;
+import org.zmail.cs.mailclient.util.Config;
 
 import java.util.Properties;
 import java.io.File;
@@ -65,7 +65,7 @@ public class ActiveSyncConfig extends MailConfig {
      * Creates a new {@link ActiveSyncConfig}.
      */
     public ActiveSyncConfig() {
-        super(ZimbraLog.activesync_client);
+        super(ZmailLog.activesync_client);
     }
 
     /**
@@ -74,8 +74,8 @@ public class ActiveSyncConfig extends MailConfig {
      * @param host the server host name
      */
     public ActiveSyncConfig(String host) {
-        super(ZimbraLog.activesync_client, host);
-        setLogger(ZimbraLog.activesync_client);
+        super(ZmailLog.activesync_client, host);
+        setLogger(ZmailLog.activesync_client);
     }
 
     /**

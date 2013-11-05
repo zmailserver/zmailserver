@@ -41,7 +41,7 @@ public abstract class ZAttrServer extends NamedEntry {
 
     ///// BEGIN-AUTO-GEN-REPLACE
 
-    /* build: 8.0.0_BETA1_1111 norman 20131010-1457 */
+    /* build: 8.0.0_BETA1_1111 norman 20131025-1439 */
 
     /**
      * RFC2256: common name(s) for which the entity is known by
@@ -358,49 +358,49 @@ public abstract class ZAttrServer extends NamedEntry {
     /**
      * name to use in greeting and sign-off; if empty, uses hostname
      *
-     * @return zimbraActiveSyncAdvertisedName, or null if unset
+     * @return zmailActiveSyncAdvertisedName, or null if unset
      */
     @ZAttr(id=92)
     public String getActiveSyncAdvertisedName() {
-        return getAttr(Provisioning.A_zimbraActiveSyncAdvertisedName, null);
+        return getAttr(Provisioning.A_zmailActiveSyncAdvertisedName, null);
     }
 
     /**
      * name to use in greeting and sign-off; if empty, uses hostname
      *
-     * @param zimbraActiveSyncAdvertisedName new value
-     * @throws com.zimbra.common.service.ServiceException if error during update
+     * @param zmailActiveSyncAdvertisedName new value
+     * @throws org.zmail.common.service.ServiceException if error during update
      */
     @ZAttr(id=92)
-    public void setActiveSyncAdvertisedName(String zimbraActiveSyncAdvertisedName) throws com.zimbra.common.service.ServiceException {
+    public void setActiveSyncAdvertisedName(String zmailActiveSyncAdvertisedName) throws org.zmail.common.service.ServiceException {
         HashMap<String,Object> attrs = new HashMap<String,Object>();
-        attrs.put(Provisioning.A_zimbraActiveSyncAdvertisedName, zimbraActiveSyncAdvertisedName);
+        attrs.put(Provisioning.A_zmailActiveSyncAdvertisedName, zmailActiveSyncAdvertisedName);
         getProvisioning().modifyAttrs(this, attrs);
     }
 
     /**
      * name to use in greeting and sign-off; if empty, uses hostname
      *
-     * @param zimbraActiveSyncAdvertisedName new value
+     * @param zmailActiveSyncAdvertisedName new value
      * @param attrs existing map to populate, or null to create a new map
      * @return populated map to pass into Provisioning.modifyAttrs
      */
     @ZAttr(id=92)
-    public Map<String,Object> setActiveSyncAdvertisedName(String zimbraActiveSyncAdvertisedName, Map<String,Object> attrs) {
+    public Map<String,Object> setActiveSyncAdvertisedName(String zmailActiveSyncAdvertisedName, Map<String,Object> attrs) {
         if (attrs == null) attrs = new HashMap<String,Object>();
-        attrs.put(Provisioning.A_zimbraActiveSyncAdvertisedName, zimbraActiveSyncAdvertisedName);
+        attrs.put(Provisioning.A_zmailActiveSyncAdvertisedName, zmailActiveSyncAdvertisedName);
         return attrs;
     }
 
     /**
      * name to use in greeting and sign-off; if empty, uses hostname
      *
-     * @throws com.zimbra.common.service.ServiceException if error during update
+     * @throws org.zmail.common.service.ServiceException if error during update
      */
     @ZAttr(id=92)
-    public void unsetActiveSyncAdvertisedName() throws com.zimbra.common.service.ServiceException {
+    public void unsetActiveSyncAdvertisedName() throws org.zmail.common.service.ServiceException {
         HashMap<String,Object> attrs = new HashMap<String,Object>();
-        attrs.put(Provisioning.A_zimbraActiveSyncAdvertisedName, "");
+        attrs.put(Provisioning.A_zmailActiveSyncAdvertisedName, "");
         getProvisioning().modifyAttrs(this, attrs);
     }
 
@@ -413,7 +413,7 @@ public abstract class ZAttrServer extends NamedEntry {
     @ZAttr(id=92)
     public Map<String,Object> unsetActiveSyncAdvertisedName(Map<String,Object> attrs) {
         if (attrs == null) attrs = new HashMap<String,Object>();
-        attrs.put(Provisioning.A_zimbraActiveSyncAdvertisedName, "");
+        attrs.put(Provisioning.A_zmailActiveSyncAdvertisedName, "");
         return attrs;
     }
 
@@ -421,24 +421,24 @@ public abstract class ZAttrServer extends NamedEntry {
      * interface address on which ActiveSync server should listen; if empty,
      * binds to all interfaces
      *
-     * @return zimbraActiveSyncBindAddress, or empty array if unset
+     * @return zmailActiveSyncBindAddress, or empty array if unset
      */
     @ZAttr(id=89)
     public String[] getActiveSyncBindAddress() {
-        return getMultiAttr(Provisioning.A_zimbraActiveSyncBindAddress);
+        return getMultiAttr(Provisioning.A_zmailActiveSyncBindAddress);
     }
 
     /**
      * interface address on which ActiveSync server should listen; if empty,
      * binds to all interfaces
      *
-     * @param zimbraActiveSyncBindAddress new value
-     * @throws com.zimbra.common.service.ServiceException if error during update
+     * @param zmailActiveSyncBindAddress new value
+     * @throws org.zmail.common.service.ServiceException if error during update
      */
     @ZAttr(id=89)
-    public void setActiveSyncBindAddress(String[] zimbraActiveSyncBindAddress) throws com.zimbra.common.service.ServiceException {
+    public void setActiveSyncBindAddress(String[] zmailActiveSyncBindAddress) throws org.zmail.common.service.ServiceException {
         HashMap<String,Object> attrs = new HashMap<String,Object>();
-        attrs.put(Provisioning.A_zimbraActiveSyncBindAddress, zimbraActiveSyncBindAddress);
+        attrs.put(Provisioning.A_zmailActiveSyncBindAddress, zmailActiveSyncBindAddress);
         getProvisioning().modifyAttrs(this, attrs);
     }
 
@@ -446,14 +446,14 @@ public abstract class ZAttrServer extends NamedEntry {
      * interface address on which ActiveSync server should listen; if empty,
      * binds to all interfaces
      *
-     * @param zimbraActiveSyncBindAddress new value
+     * @param zmailActiveSyncBindAddress new value
      * @param attrs existing map to populate, or null to create a new map
      * @return populated map to pass into Provisioning.modifyAttrs
      */
     @ZAttr(id=89)
-    public Map<String,Object> setActiveSyncBindAddress(String[] zimbraActiveSyncBindAddress, Map<String,Object> attrs) {
+    public Map<String,Object> setActiveSyncBindAddress(String[] zmailActiveSyncBindAddress, Map<String,Object> attrs) {
         if (attrs == null) attrs = new HashMap<String,Object>();
-        attrs.put(Provisioning.A_zimbraActiveSyncBindAddress, zimbraActiveSyncBindAddress);
+        attrs.put(Provisioning.A_zmailActiveSyncBindAddress, zmailActiveSyncBindAddress);
         return attrs;
     }
 
@@ -461,13 +461,13 @@ public abstract class ZAttrServer extends NamedEntry {
      * interface address on which ActiveSync server should listen; if empty,
      * binds to all interfaces
      *
-     * @param zimbraActiveSyncBindAddress new to add to existing values
-     * @throws com.zimbra.common.service.ServiceException if error during update
+     * @param zmailActiveSyncBindAddress new to add to existing values
+     * @throws org.zmail.common.service.ServiceException if error during update
      */
     @ZAttr(id=89)
-    public void addActiveSyncBindAddress(String zimbraActiveSyncBindAddress) throws com.zimbra.common.service.ServiceException {
+    public void addActiveSyncBindAddress(String zmailActiveSyncBindAddress) throws org.zmail.common.service.ServiceException {
         HashMap<String,Object> attrs = new HashMap<String,Object>();
-        StringUtil.addToMultiMap(attrs, "+" + Provisioning.A_zimbraActiveSyncBindAddress, zimbraActiveSyncBindAddress);
+        StringUtil.addToMultiMap(attrs, "+" + Provisioning.A_zmailActiveSyncBindAddress, zmailActiveSyncBindAddress);
         getProvisioning().modifyAttrs(this, attrs);
     }
 
@@ -475,14 +475,14 @@ public abstract class ZAttrServer extends NamedEntry {
      * interface address on which ActiveSync server should listen; if empty,
      * binds to all interfaces
      *
-     * @param zimbraActiveSyncBindAddress new to add to existing values
+     * @param zmailActiveSyncBindAddress new to add to existing values
      * @param attrs existing map to populate, or null to create a new map
      * @return populated map to pass into Provisioning.modifyAttrs
      */
     @ZAttr(id=89)
-    public Map<String,Object> addActiveSyncBindAddress(String zimbraActiveSyncBindAddress, Map<String,Object> attrs) {
+    public Map<String,Object> addActiveSyncBindAddress(String zmailActiveSyncBindAddress, Map<String,Object> attrs) {
         if (attrs == null) attrs = new HashMap<String,Object>();
-        StringUtil.addToMultiMap(attrs, "+" + Provisioning.A_zimbraActiveSyncBindAddress, zimbraActiveSyncBindAddress);
+        StringUtil.addToMultiMap(attrs, "+" + Provisioning.A_zmailActiveSyncBindAddress, zmailActiveSyncBindAddress);
         return attrs;
     }
 
@@ -490,13 +490,13 @@ public abstract class ZAttrServer extends NamedEntry {
      * interface address on which ActiveSync server should listen; if empty,
      * binds to all interfaces
      *
-     * @param zimbraActiveSyncBindAddress existing value to remove
-     * @throws com.zimbra.common.service.ServiceException if error during update
+     * @param zmailActiveSyncBindAddress existing value to remove
+     * @throws org.zmail.common.service.ServiceException if error during update
      */
     @ZAttr(id=89)
-    public void removeActiveSyncBindAddress(String zimbraActiveSyncBindAddress) throws com.zimbra.common.service.ServiceException {
+    public void removeActiveSyncBindAddress(String zmailActiveSyncBindAddress) throws org.zmail.common.service.ServiceException {
         HashMap<String,Object> attrs = new HashMap<String,Object>();
-        StringUtil.addToMultiMap(attrs, "-" + Provisioning.A_zimbraActiveSyncBindAddress, zimbraActiveSyncBindAddress);
+        StringUtil.addToMultiMap(attrs, "-" + Provisioning.A_zmailActiveSyncBindAddress, zmailActiveSyncBindAddress);
         getProvisioning().modifyAttrs(this, attrs);
     }
 
@@ -504,14 +504,14 @@ public abstract class ZAttrServer extends NamedEntry {
      * interface address on which ActiveSync server should listen; if empty,
      * binds to all interfaces
      *
-     * @param zimbraActiveSyncBindAddress existing value to remove
+     * @param zmailActiveSyncBindAddress existing value to remove
      * @param attrs existing map to populate, or null to create a new map
      * @return populated map to pass into Provisioning.modifyAttrs
      */
     @ZAttr(id=89)
-    public Map<String,Object> removeActiveSyncBindAddress(String zimbraActiveSyncBindAddress, Map<String,Object> attrs) {
+    public Map<String,Object> removeActiveSyncBindAddress(String zmailActiveSyncBindAddress, Map<String,Object> attrs) {
         if (attrs == null) attrs = new HashMap<String,Object>();
-        StringUtil.addToMultiMap(attrs, "-" + Provisioning.A_zimbraActiveSyncBindAddress, zimbraActiveSyncBindAddress);
+        StringUtil.addToMultiMap(attrs, "-" + Provisioning.A_zmailActiveSyncBindAddress, zmailActiveSyncBindAddress);
         return attrs;
     }
 
@@ -519,12 +519,12 @@ public abstract class ZAttrServer extends NamedEntry {
      * interface address on which ActiveSync server should listen; if empty,
      * binds to all interfaces
      *
-     * @throws com.zimbra.common.service.ServiceException if error during update
+     * @throws org.zmail.common.service.ServiceException if error during update
      */
     @ZAttr(id=89)
-    public void unsetActiveSyncBindAddress() throws com.zimbra.common.service.ServiceException {
+    public void unsetActiveSyncBindAddress() throws org.zmail.common.service.ServiceException {
         HashMap<String,Object> attrs = new HashMap<String,Object>();
-        attrs.put(Provisioning.A_zimbraActiveSyncBindAddress, "");
+        attrs.put(Provisioning.A_zmailActiveSyncBindAddress, "");
         getProvisioning().modifyAttrs(this, attrs);
     }
 
@@ -538,7 +538,7 @@ public abstract class ZAttrServer extends NamedEntry {
     @ZAttr(id=89)
     public Map<String,Object> unsetActiveSyncBindAddress(Map<String,Object> attrs) {
         if (attrs == null) attrs = new HashMap<String,Object>();
-        attrs.put(Provisioning.A_zimbraActiveSyncBindAddress, "");
+        attrs.put(Provisioning.A_zmailActiveSyncBindAddress, "");
         return attrs;
     }
 
@@ -549,86 +549,86 @@ public abstract class ZAttrServer extends NamedEntry {
      *
      * @see #getActiveSyncBindPortAsString()
      *
-     * @return zimbraActiveSyncBindPort, or 9110 if unset
+     * @return zmailActiveSyncBindPort, or 9110 if unset
      */
     @ZAttr(id=88)
     public int getActiveSyncBindPort() {
-        return getIntAttr(Provisioning.A_zimbraActiveSyncBindPort, 9110);
+        return getIntAttr(Provisioning.A_zmailActiveSyncBindPort, 9110);
     }
 
     /**
      * port number on which ActiveSync server should listen
      *
-     * @return zimbraActiveSyncBindPort, or "9110" if unset
+     * @return zmailActiveSyncBindPort, or "9110" if unset
      */
     @ZAttr(id=88)
     public String getActiveSyncBindPortAsString() {
-        return getAttr(Provisioning.A_zimbraActiveSyncBindPort, "9110");
+        return getAttr(Provisioning.A_zmailActiveSyncBindPort, "9110");
     }
 
     /**
      * port number on which ActiveSync server should listen
      *
-     * @param zimbraActiveSyncBindPort new value
-     * @throws com.zimbra.common.service.ServiceException if error during update
+     * @param zmailActiveSyncBindPort new value
+     * @throws org.zmail.common.service.ServiceException if error during update
      */
     @ZAttr(id=88)
-    public void setActiveSyncBindPort(int zimbraActiveSyncBindPort) throws com.zimbra.common.service.ServiceException {
+    public void setActiveSyncBindPort(int zmailActiveSyncBindPort) throws org.zmail.common.service.ServiceException {
         HashMap<String,Object> attrs = new HashMap<String,Object>();
-        attrs.put(Provisioning.A_zimbraActiveSyncBindPort, Integer.toString(zimbraActiveSyncBindPort));
+        attrs.put(Provisioning.A_zmailActiveSyncBindPort, Integer.toString(zmailActiveSyncBindPort));
         getProvisioning().modifyAttrs(this, attrs);
     }
 
     /**
      * port number on which ActiveSync server should listen
      *
-     * @param zimbraActiveSyncBindPort new value
+     * @param zmailActiveSyncBindPort new value
      * @param attrs existing map to populate, or null to create a new map
      * @return populated map to pass into Provisioning.modifyAttrs
      */
     @ZAttr(id=88)
-    public Map<String,Object> setActiveSyncBindPort(int zimbraActiveSyncBindPort, Map<String,Object> attrs) {
+    public Map<String,Object> setActiveSyncBindPort(int zmailActiveSyncBindPort, Map<String,Object> attrs) {
         if (attrs == null) attrs = new HashMap<String,Object>();
-        attrs.put(Provisioning.A_zimbraActiveSyncBindPort, Integer.toString(zimbraActiveSyncBindPort));
+        attrs.put(Provisioning.A_zmailActiveSyncBindPort, Integer.toString(zmailActiveSyncBindPort));
         return attrs;
     }
 
     /**
      * port number on which ActiveSync server should listen
      *
-     * @param zimbraActiveSyncBindPort new value
-     * @throws com.zimbra.common.service.ServiceException if error during update
+     * @param zmailActiveSyncBindPort new value
+     * @throws org.zmail.common.service.ServiceException if error during update
      */
     @ZAttr(id=88)
-    public void setActiveSyncBindPortAsString(String zimbraActiveSyncBindPort) throws com.zimbra.common.service.ServiceException {
+    public void setActiveSyncBindPortAsString(String zmailActiveSyncBindPort) throws org.zmail.common.service.ServiceException {
         HashMap<String,Object> attrs = new HashMap<String,Object>();
-        attrs.put(Provisioning.A_zimbraActiveSyncBindPort, zimbraActiveSyncBindPort);
+        attrs.put(Provisioning.A_zmailActiveSyncBindPort, zmailActiveSyncBindPort);
         getProvisioning().modifyAttrs(this, attrs);
     }
 
     /**
      * port number on which ActiveSync server should listen
      *
-     * @param zimbraActiveSyncBindPort new value
+     * @param zmailActiveSyncBindPort new value
      * @param attrs existing map to populate, or null to create a new map
      * @return populated map to pass into Provisioning.modifyAttrs
      */
     @ZAttr(id=88)
-    public Map<String,Object> setActiveSyncBindPortAsString(String zimbraActiveSyncBindPort, Map<String,Object> attrs) {
+    public Map<String,Object> setActiveSyncBindPortAsString(String zmailActiveSyncBindPort, Map<String,Object> attrs) {
         if (attrs == null) attrs = new HashMap<String,Object>();
-        attrs.put(Provisioning.A_zimbraActiveSyncBindPort, zimbraActiveSyncBindPort);
+        attrs.put(Provisioning.A_zmailActiveSyncBindPort, zmailActiveSyncBindPort);
         return attrs;
     }
 
     /**
      * port number on which ActiveSync server should listen
      *
-     * @throws com.zimbra.common.service.ServiceException if error during update
+     * @throws org.zmail.common.service.ServiceException if error during update
      */
     @ZAttr(id=88)
-    public void unsetActiveSyncBindPort() throws com.zimbra.common.service.ServiceException {
+    public void unsetActiveSyncBindPort() throws org.zmail.common.service.ServiceException {
         HashMap<String,Object> attrs = new HashMap<String,Object>();
-        attrs.put(Provisioning.A_zimbraActiveSyncBindPort, "");
+        attrs.put(Provisioning.A_zmailActiveSyncBindPort, "");
         getProvisioning().modifyAttrs(this, attrs);
     }
 
@@ -641,56 +641,56 @@ public abstract class ZAttrServer extends NamedEntry {
     @ZAttr(id=88)
     public Map<String,Object> unsetActiveSyncBindPort(Map<String,Object> attrs) {
         if (attrs == null) attrs = new HashMap<String,Object>();
-        attrs.put(Provisioning.A_zimbraActiveSyncBindPort, "");
+        attrs.put(Provisioning.A_zmailActiveSyncBindPort, "");
         return attrs;
     }
 
     /**
      * Whether to expose version on POP3 banner
      *
-     * @return zimbraActiveSyncExposeVersionOnBanner, or false if unset
+     * @return zmailActiveSyncExposeVersionOnBanner, or false if unset
      */
     @ZAttr(id=91)
     public boolean isActiveSyncExposeVersionOnBanner() {
-        return getBooleanAttr(Provisioning.A_zimbraActiveSyncExposeVersionOnBanner, false);
+        return getBooleanAttr(Provisioning.A_zmailActiveSyncExposeVersionOnBanner, false);
     }
 
     /**
      * Whether to expose version on POP3 banner
      *
-     * @param zimbraActiveSyncExposeVersionOnBanner new value
-     * @throws com.zimbra.common.service.ServiceException if error during update
+     * @param zmailActiveSyncExposeVersionOnBanner new value
+     * @throws org.zmail.common.service.ServiceException if error during update
      */
     @ZAttr(id=91)
-    public void setActiveSyncExposeVersionOnBanner(boolean zimbraActiveSyncExposeVersionOnBanner) throws com.zimbra.common.service.ServiceException {
+    public void setActiveSyncExposeVersionOnBanner(boolean zmailActiveSyncExposeVersionOnBanner) throws org.zmail.common.service.ServiceException {
         HashMap<String,Object> attrs = new HashMap<String,Object>();
-        attrs.put(Provisioning.A_zimbraActiveSyncExposeVersionOnBanner, zimbraActiveSyncExposeVersionOnBanner ? Provisioning.TRUE : Provisioning.FALSE);
+        attrs.put(Provisioning.A_zmailActiveSyncExposeVersionOnBanner, zmailActiveSyncExposeVersionOnBanner ? Provisioning.TRUE : Provisioning.FALSE);
         getProvisioning().modifyAttrs(this, attrs);
     }
 
     /**
      * Whether to expose version on POP3 banner
      *
-     * @param zimbraActiveSyncExposeVersionOnBanner new value
+     * @param zmailActiveSyncExposeVersionOnBanner new value
      * @param attrs existing map to populate, or null to create a new map
      * @return populated map to pass into Provisioning.modifyAttrs
      */
     @ZAttr(id=91)
-    public Map<String,Object> setActiveSyncExposeVersionOnBanner(boolean zimbraActiveSyncExposeVersionOnBanner, Map<String,Object> attrs) {
+    public Map<String,Object> setActiveSyncExposeVersionOnBanner(boolean zmailActiveSyncExposeVersionOnBanner, Map<String,Object> attrs) {
         if (attrs == null) attrs = new HashMap<String,Object>();
-        attrs.put(Provisioning.A_zimbraActiveSyncExposeVersionOnBanner, zimbraActiveSyncExposeVersionOnBanner ? Provisioning.TRUE : Provisioning.FALSE);
+        attrs.put(Provisioning.A_zmailActiveSyncExposeVersionOnBanner, zmailActiveSyncExposeVersionOnBanner ? Provisioning.TRUE : Provisioning.FALSE);
         return attrs;
     }
 
     /**
      * Whether to expose version on POP3 banner
      *
-     * @throws com.zimbra.common.service.ServiceException if error during update
+     * @throws org.zmail.common.service.ServiceException if error during update
      */
     @ZAttr(id=91)
-    public void unsetActiveSyncExposeVersionOnBanner() throws com.zimbra.common.service.ServiceException {
+    public void unsetActiveSyncExposeVersionOnBanner() throws org.zmail.common.service.ServiceException {
         HashMap<String,Object> attrs = new HashMap<String,Object>();
-        attrs.put(Provisioning.A_zimbraActiveSyncExposeVersionOnBanner, "");
+        attrs.put(Provisioning.A_zmailActiveSyncExposeVersionOnBanner, "");
         getProvisioning().modifyAttrs(this, attrs);
     }
 
@@ -703,7 +703,7 @@ public abstract class ZAttrServer extends NamedEntry {
     @ZAttr(id=91)
     public Map<String,Object> unsetActiveSyncExposeVersionOnBanner(Map<String,Object> attrs) {
         if (attrs == null) attrs = new HashMap<String,Object>();
-        attrs.put(Provisioning.A_zimbraActiveSyncExposeVersionOnBanner, "");
+        attrs.put(Provisioning.A_zmailActiveSyncExposeVersionOnBanner, "");
         return attrs;
     }
 
@@ -711,24 +711,24 @@ public abstract class ZAttrServer extends NamedEntry {
      * Maximum number of concurrent ActiveSync connections allowed. New
      * connections exceeding this limit are rejected.
      *
-     * @return zimbraActiveSyncMaxConnections, or 200 if unset
+     * @return zmailActiveSyncMaxConnections, or 200 if unset
      */
     @ZAttr(id=84)
     public int getActiveSyncMaxConnections() {
-        return getIntAttr(Provisioning.A_zimbraActiveSyncMaxConnections, 200);
+        return getIntAttr(Provisioning.A_zmailActiveSyncMaxConnections, 200);
     }
 
     /**
      * Maximum number of concurrent ActiveSync connections allowed. New
      * connections exceeding this limit are rejected.
      *
-     * @param zimbraActiveSyncMaxConnections new value
-     * @throws com.zimbra.common.service.ServiceException if error during update
+     * @param zmailActiveSyncMaxConnections new value
+     * @throws org.zmail.common.service.ServiceException if error during update
      */
     @ZAttr(id=84)
-    public void setActiveSyncMaxConnections(int zimbraActiveSyncMaxConnections) throws com.zimbra.common.service.ServiceException {
+    public void setActiveSyncMaxConnections(int zmailActiveSyncMaxConnections) throws org.zmail.common.service.ServiceException {
         HashMap<String,Object> attrs = new HashMap<String,Object>();
-        attrs.put(Provisioning.A_zimbraActiveSyncMaxConnections, Integer.toString(zimbraActiveSyncMaxConnections));
+        attrs.put(Provisioning.A_zmailActiveSyncMaxConnections, Integer.toString(zmailActiveSyncMaxConnections));
         getProvisioning().modifyAttrs(this, attrs);
     }
 
@@ -736,14 +736,14 @@ public abstract class ZAttrServer extends NamedEntry {
      * Maximum number of concurrent ActiveSync connections allowed. New
      * connections exceeding this limit are rejected.
      *
-     * @param zimbraActiveSyncMaxConnections new value
+     * @param zmailActiveSyncMaxConnections new value
      * @param attrs existing map to populate, or null to create a new map
      * @return populated map to pass into Provisioning.modifyAttrs
      */
     @ZAttr(id=84)
-    public Map<String,Object> setActiveSyncMaxConnections(int zimbraActiveSyncMaxConnections, Map<String,Object> attrs) {
+    public Map<String,Object> setActiveSyncMaxConnections(int zmailActiveSyncMaxConnections, Map<String,Object> attrs) {
         if (attrs == null) attrs = new HashMap<String,Object>();
-        attrs.put(Provisioning.A_zimbraActiveSyncMaxConnections, Integer.toString(zimbraActiveSyncMaxConnections));
+        attrs.put(Provisioning.A_zmailActiveSyncMaxConnections, Integer.toString(zmailActiveSyncMaxConnections));
         return attrs;
     }
 
@@ -751,12 +751,12 @@ public abstract class ZAttrServer extends NamedEntry {
      * Maximum number of concurrent ActiveSync connections allowed. New
      * connections exceeding this limit are rejected.
      *
-     * @throws com.zimbra.common.service.ServiceException if error during update
+     * @throws org.zmail.common.service.ServiceException if error during update
      */
     @ZAttr(id=84)
-    public void unsetActiveSyncMaxConnections() throws com.zimbra.common.service.ServiceException {
+    public void unsetActiveSyncMaxConnections() throws org.zmail.common.service.ServiceException {
         HashMap<String,Object> attrs = new HashMap<String,Object>();
-        attrs.put(Provisioning.A_zimbraActiveSyncMaxConnections, "");
+        attrs.put(Provisioning.A_zmailActiveSyncMaxConnections, "");
         getProvisioning().modifyAttrs(this, attrs);
     }
 
@@ -770,56 +770,56 @@ public abstract class ZAttrServer extends NamedEntry {
     @ZAttr(id=84)
     public Map<String,Object> unsetActiveSyncMaxConnections(Map<String,Object> attrs) {
         if (attrs == null) attrs = new HashMap<String,Object>();
-        attrs.put(Provisioning.A_zimbraActiveSyncMaxConnections, "");
+        attrs.put(Provisioning.A_zmailActiveSyncMaxConnections, "");
         return attrs;
     }
 
     /**
      * number of handler threads
      *
-     * @return zimbraActiveSyncNumThreads, or 100 if unset
+     * @return zmailActiveSyncNumThreads, or 100 if unset
      */
     @ZAttr(id=85)
     public int getActiveSyncNumThreads() {
-        return getIntAttr(Provisioning.A_zimbraActiveSyncNumThreads, 100);
+        return getIntAttr(Provisioning.A_zmailActiveSyncNumThreads, 100);
     }
 
     /**
      * number of handler threads
      *
-     * @param zimbraActiveSyncNumThreads new value
-     * @throws com.zimbra.common.service.ServiceException if error during update
+     * @param zmailActiveSyncNumThreads new value
+     * @throws org.zmail.common.service.ServiceException if error during update
      */
     @ZAttr(id=85)
-    public void setActiveSyncNumThreads(int zimbraActiveSyncNumThreads) throws com.zimbra.common.service.ServiceException {
+    public void setActiveSyncNumThreads(int zmailActiveSyncNumThreads) throws org.zmail.common.service.ServiceException {
         HashMap<String,Object> attrs = new HashMap<String,Object>();
-        attrs.put(Provisioning.A_zimbraActiveSyncNumThreads, Integer.toString(zimbraActiveSyncNumThreads));
+        attrs.put(Provisioning.A_zmailActiveSyncNumThreads, Integer.toString(zmailActiveSyncNumThreads));
         getProvisioning().modifyAttrs(this, attrs);
     }
 
     /**
      * number of handler threads
      *
-     * @param zimbraActiveSyncNumThreads new value
+     * @param zmailActiveSyncNumThreads new value
      * @param attrs existing map to populate, or null to create a new map
      * @return populated map to pass into Provisioning.modifyAttrs
      */
     @ZAttr(id=85)
-    public Map<String,Object> setActiveSyncNumThreads(int zimbraActiveSyncNumThreads, Map<String,Object> attrs) {
+    public Map<String,Object> setActiveSyncNumThreads(int zmailActiveSyncNumThreads, Map<String,Object> attrs) {
         if (attrs == null) attrs = new HashMap<String,Object>();
-        attrs.put(Provisioning.A_zimbraActiveSyncNumThreads, Integer.toString(zimbraActiveSyncNumThreads));
+        attrs.put(Provisioning.A_zmailActiveSyncNumThreads, Integer.toString(zmailActiveSyncNumThreads));
         return attrs;
     }
 
     /**
      * number of handler threads
      *
-     * @throws com.zimbra.common.service.ServiceException if error during update
+     * @throws org.zmail.common.service.ServiceException if error during update
      */
     @ZAttr(id=85)
-    public void unsetActiveSyncNumThreads() throws com.zimbra.common.service.ServiceException {
+    public void unsetActiveSyncNumThreads() throws org.zmail.common.service.ServiceException {
         HashMap<String,Object> attrs = new HashMap<String,Object>();
-        attrs.put(Provisioning.A_zimbraActiveSyncNumThreads, "");
+        attrs.put(Provisioning.A_zmailActiveSyncNumThreads, "");
         getProvisioning().modifyAttrs(this, attrs);
     }
 
@@ -832,7 +832,7 @@ public abstract class ZAttrServer extends NamedEntry {
     @ZAttr(id=85)
     public Map<String,Object> unsetActiveSyncNumThreads(Map<String,Object> attrs) {
         if (attrs == null) attrs = new HashMap<String,Object>();
-        attrs.put(Provisioning.A_zimbraActiveSyncNumThreads, "");
+        attrs.put(Provisioning.A_zmailActiveSyncNumThreads, "");
         return attrs;
     }
 
@@ -840,24 +840,24 @@ public abstract class ZAttrServer extends NamedEntry {
      * interface address on which ActiveSync server should listen; if empty,
      * binds to all interfaces
      *
-     * @return zimbraActiveSyncSSLBindAddress, or empty array if unset
+     * @return zmailActiveSyncSSLBindAddress, or empty array if unset
      */
     @ZAttr(id=90)
     public String[] getActiveSyncSSLBindAddress() {
-        return getMultiAttr(Provisioning.A_zimbraActiveSyncSSLBindAddress);
+        return getMultiAttr(Provisioning.A_zmailActiveSyncSSLBindAddress);
     }
 
     /**
      * interface address on which ActiveSync server should listen; if empty,
      * binds to all interfaces
      *
-     * @param zimbraActiveSyncSSLBindAddress new value
-     * @throws com.zimbra.common.service.ServiceException if error during update
+     * @param zmailActiveSyncSSLBindAddress new value
+     * @throws org.zmail.common.service.ServiceException if error during update
      */
     @ZAttr(id=90)
-    public void setActiveSyncSSLBindAddress(String[] zimbraActiveSyncSSLBindAddress) throws com.zimbra.common.service.ServiceException {
+    public void setActiveSyncSSLBindAddress(String[] zmailActiveSyncSSLBindAddress) throws org.zmail.common.service.ServiceException {
         HashMap<String,Object> attrs = new HashMap<String,Object>();
-        attrs.put(Provisioning.A_zimbraActiveSyncSSLBindAddress, zimbraActiveSyncSSLBindAddress);
+        attrs.put(Provisioning.A_zmailActiveSyncSSLBindAddress, zmailActiveSyncSSLBindAddress);
         getProvisioning().modifyAttrs(this, attrs);
     }
 
@@ -865,14 +865,14 @@ public abstract class ZAttrServer extends NamedEntry {
      * interface address on which ActiveSync server should listen; if empty,
      * binds to all interfaces
      *
-     * @param zimbraActiveSyncSSLBindAddress new value
+     * @param zmailActiveSyncSSLBindAddress new value
      * @param attrs existing map to populate, or null to create a new map
      * @return populated map to pass into Provisioning.modifyAttrs
      */
     @ZAttr(id=90)
-    public Map<String,Object> setActiveSyncSSLBindAddress(String[] zimbraActiveSyncSSLBindAddress, Map<String,Object> attrs) {
+    public Map<String,Object> setActiveSyncSSLBindAddress(String[] zmailActiveSyncSSLBindAddress, Map<String,Object> attrs) {
         if (attrs == null) attrs = new HashMap<String,Object>();
-        attrs.put(Provisioning.A_zimbraActiveSyncSSLBindAddress, zimbraActiveSyncSSLBindAddress);
+        attrs.put(Provisioning.A_zmailActiveSyncSSLBindAddress, zmailActiveSyncSSLBindAddress);
         return attrs;
     }
 
@@ -880,13 +880,13 @@ public abstract class ZAttrServer extends NamedEntry {
      * interface address on which ActiveSync server should listen; if empty,
      * binds to all interfaces
      *
-     * @param zimbraActiveSyncSSLBindAddress new to add to existing values
-     * @throws com.zimbra.common.service.ServiceException if error during update
+     * @param zmailActiveSyncSSLBindAddress new to add to existing values
+     * @throws org.zmail.common.service.ServiceException if error during update
      */
     @ZAttr(id=90)
-    public void addActiveSyncSSLBindAddress(String zimbraActiveSyncSSLBindAddress) throws com.zimbra.common.service.ServiceException {
+    public void addActiveSyncSSLBindAddress(String zmailActiveSyncSSLBindAddress) throws org.zmail.common.service.ServiceException {
         HashMap<String,Object> attrs = new HashMap<String,Object>();
-        StringUtil.addToMultiMap(attrs, "+" + Provisioning.A_zimbraActiveSyncSSLBindAddress, zimbraActiveSyncSSLBindAddress);
+        StringUtil.addToMultiMap(attrs, "+" + Provisioning.A_zmailActiveSyncSSLBindAddress, zmailActiveSyncSSLBindAddress);
         getProvisioning().modifyAttrs(this, attrs);
     }
 
@@ -894,14 +894,14 @@ public abstract class ZAttrServer extends NamedEntry {
      * interface address on which ActiveSync server should listen; if empty,
      * binds to all interfaces
      *
-     * @param zimbraActiveSyncSSLBindAddress new to add to existing values
+     * @param zmailActiveSyncSSLBindAddress new to add to existing values
      * @param attrs existing map to populate, or null to create a new map
      * @return populated map to pass into Provisioning.modifyAttrs
      */
     @ZAttr(id=90)
-    public Map<String,Object> addActiveSyncSSLBindAddress(String zimbraActiveSyncSSLBindAddress, Map<String,Object> attrs) {
+    public Map<String,Object> addActiveSyncSSLBindAddress(String zmailActiveSyncSSLBindAddress, Map<String,Object> attrs) {
         if (attrs == null) attrs = new HashMap<String,Object>();
-        StringUtil.addToMultiMap(attrs, "+" + Provisioning.A_zimbraActiveSyncSSLBindAddress, zimbraActiveSyncSSLBindAddress);
+        StringUtil.addToMultiMap(attrs, "+" + Provisioning.A_zmailActiveSyncSSLBindAddress, zmailActiveSyncSSLBindAddress);
         return attrs;
     }
 
@@ -909,13 +909,13 @@ public abstract class ZAttrServer extends NamedEntry {
      * interface address on which ActiveSync server should listen; if empty,
      * binds to all interfaces
      *
-     * @param zimbraActiveSyncSSLBindAddress existing value to remove
-     * @throws com.zimbra.common.service.ServiceException if error during update
+     * @param zmailActiveSyncSSLBindAddress existing value to remove
+     * @throws org.zmail.common.service.ServiceException if error during update
      */
     @ZAttr(id=90)
-    public void removeActiveSyncSSLBindAddress(String zimbraActiveSyncSSLBindAddress) throws com.zimbra.common.service.ServiceException {
+    public void removeActiveSyncSSLBindAddress(String zmailActiveSyncSSLBindAddress) throws org.zmail.common.service.ServiceException {
         HashMap<String,Object> attrs = new HashMap<String,Object>();
-        StringUtil.addToMultiMap(attrs, "-" + Provisioning.A_zimbraActiveSyncSSLBindAddress, zimbraActiveSyncSSLBindAddress);
+        StringUtil.addToMultiMap(attrs, "-" + Provisioning.A_zmailActiveSyncSSLBindAddress, zmailActiveSyncSSLBindAddress);
         getProvisioning().modifyAttrs(this, attrs);
     }
 
@@ -923,14 +923,14 @@ public abstract class ZAttrServer extends NamedEntry {
      * interface address on which ActiveSync server should listen; if empty,
      * binds to all interfaces
      *
-     * @param zimbraActiveSyncSSLBindAddress existing value to remove
+     * @param zmailActiveSyncSSLBindAddress existing value to remove
      * @param attrs existing map to populate, or null to create a new map
      * @return populated map to pass into Provisioning.modifyAttrs
      */
     @ZAttr(id=90)
-    public Map<String,Object> removeActiveSyncSSLBindAddress(String zimbraActiveSyncSSLBindAddress, Map<String,Object> attrs) {
+    public Map<String,Object> removeActiveSyncSSLBindAddress(String zmailActiveSyncSSLBindAddress, Map<String,Object> attrs) {
         if (attrs == null) attrs = new HashMap<String,Object>();
-        StringUtil.addToMultiMap(attrs, "-" + Provisioning.A_zimbraActiveSyncSSLBindAddress, zimbraActiveSyncSSLBindAddress);
+        StringUtil.addToMultiMap(attrs, "-" + Provisioning.A_zmailActiveSyncSSLBindAddress, zmailActiveSyncSSLBindAddress);
         return attrs;
     }
 
@@ -938,12 +938,12 @@ public abstract class ZAttrServer extends NamedEntry {
      * interface address on which ActiveSync server should listen; if empty,
      * binds to all interfaces
      *
-     * @throws com.zimbra.common.service.ServiceException if error during update
+     * @throws org.zmail.common.service.ServiceException if error during update
      */
     @ZAttr(id=90)
-    public void unsetActiveSyncSSLBindAddress() throws com.zimbra.common.service.ServiceException {
+    public void unsetActiveSyncSSLBindAddress() throws org.zmail.common.service.ServiceException {
         HashMap<String,Object> attrs = new HashMap<String,Object>();
-        attrs.put(Provisioning.A_zimbraActiveSyncSSLBindAddress, "");
+        attrs.put(Provisioning.A_zmailActiveSyncSSLBindAddress, "");
         getProvisioning().modifyAttrs(this, attrs);
     }
 
@@ -957,7 +957,7 @@ public abstract class ZAttrServer extends NamedEntry {
     @ZAttr(id=90)
     public Map<String,Object> unsetActiveSyncSSLBindAddress(Map<String,Object> attrs) {
         if (attrs == null) attrs = new HashMap<String,Object>();
-        attrs.put(Provisioning.A_zimbraActiveSyncSSLBindAddress, "");
+        attrs.put(Provisioning.A_zmailActiveSyncSSLBindAddress, "");
         return attrs;
     }
 
@@ -968,86 +968,86 @@ public abstract class ZAttrServer extends NamedEntry {
      *
      * @see #getActiveSyncSSLBindPortAsString()
      *
-     * @return zimbraActiveSyncSSLBindPort, or 9995 if unset
+     * @return zmailActiveSyncSSLBindPort, or 9995 if unset
      */
     @ZAttr(id=87)
     public int getActiveSyncSSLBindPort() {
-        return getIntAttr(Provisioning.A_zimbraActiveSyncSSLBindPort, 9995);
+        return getIntAttr(Provisioning.A_zmailActiveSyncSSLBindPort, 9995);
     }
 
     /**
      * port number on which ActiveSync server should listen
      *
-     * @return zimbraActiveSyncSSLBindPort, or "9995" if unset
+     * @return zmailActiveSyncSSLBindPort, or "9995" if unset
      */
     @ZAttr(id=87)
     public String getActiveSyncSSLBindPortAsString() {
-        return getAttr(Provisioning.A_zimbraActiveSyncSSLBindPort, "9995");
+        return getAttr(Provisioning.A_zmailActiveSyncSSLBindPort, "9995");
     }
 
     /**
      * port number on which ActiveSync server should listen
      *
-     * @param zimbraActiveSyncSSLBindPort new value
-     * @throws com.zimbra.common.service.ServiceException if error during update
+     * @param zmailActiveSyncSSLBindPort new value
+     * @throws org.zmail.common.service.ServiceException if error during update
      */
     @ZAttr(id=87)
-    public void setActiveSyncSSLBindPort(int zimbraActiveSyncSSLBindPort) throws com.zimbra.common.service.ServiceException {
+    public void setActiveSyncSSLBindPort(int zmailActiveSyncSSLBindPort) throws org.zmail.common.service.ServiceException {
         HashMap<String,Object> attrs = new HashMap<String,Object>();
-        attrs.put(Provisioning.A_zimbraActiveSyncSSLBindPort, Integer.toString(zimbraActiveSyncSSLBindPort));
+        attrs.put(Provisioning.A_zmailActiveSyncSSLBindPort, Integer.toString(zmailActiveSyncSSLBindPort));
         getProvisioning().modifyAttrs(this, attrs);
     }
 
     /**
      * port number on which ActiveSync server should listen
      *
-     * @param zimbraActiveSyncSSLBindPort new value
+     * @param zmailActiveSyncSSLBindPort new value
      * @param attrs existing map to populate, or null to create a new map
      * @return populated map to pass into Provisioning.modifyAttrs
      */
     @ZAttr(id=87)
-    public Map<String,Object> setActiveSyncSSLBindPort(int zimbraActiveSyncSSLBindPort, Map<String,Object> attrs) {
+    public Map<String,Object> setActiveSyncSSLBindPort(int zmailActiveSyncSSLBindPort, Map<String,Object> attrs) {
         if (attrs == null) attrs = new HashMap<String,Object>();
-        attrs.put(Provisioning.A_zimbraActiveSyncSSLBindPort, Integer.toString(zimbraActiveSyncSSLBindPort));
+        attrs.put(Provisioning.A_zmailActiveSyncSSLBindPort, Integer.toString(zmailActiveSyncSSLBindPort));
         return attrs;
     }
 
     /**
      * port number on which ActiveSync server should listen
      *
-     * @param zimbraActiveSyncSSLBindPort new value
-     * @throws com.zimbra.common.service.ServiceException if error during update
+     * @param zmailActiveSyncSSLBindPort new value
+     * @throws org.zmail.common.service.ServiceException if error during update
      */
     @ZAttr(id=87)
-    public void setActiveSyncSSLBindPortAsString(String zimbraActiveSyncSSLBindPort) throws com.zimbra.common.service.ServiceException {
+    public void setActiveSyncSSLBindPortAsString(String zmailActiveSyncSSLBindPort) throws org.zmail.common.service.ServiceException {
         HashMap<String,Object> attrs = new HashMap<String,Object>();
-        attrs.put(Provisioning.A_zimbraActiveSyncSSLBindPort, zimbraActiveSyncSSLBindPort);
+        attrs.put(Provisioning.A_zmailActiveSyncSSLBindPort, zmailActiveSyncSSLBindPort);
         getProvisioning().modifyAttrs(this, attrs);
     }
 
     /**
      * port number on which ActiveSync server should listen
      *
-     * @param zimbraActiveSyncSSLBindPort new value
+     * @param zmailActiveSyncSSLBindPort new value
      * @param attrs existing map to populate, or null to create a new map
      * @return populated map to pass into Provisioning.modifyAttrs
      */
     @ZAttr(id=87)
-    public Map<String,Object> setActiveSyncSSLBindPortAsString(String zimbraActiveSyncSSLBindPort, Map<String,Object> attrs) {
+    public Map<String,Object> setActiveSyncSSLBindPortAsString(String zmailActiveSyncSSLBindPort, Map<String,Object> attrs) {
         if (attrs == null) attrs = new HashMap<String,Object>();
-        attrs.put(Provisioning.A_zimbraActiveSyncSSLBindPort, zimbraActiveSyncSSLBindPort);
+        attrs.put(Provisioning.A_zmailActiveSyncSSLBindPort, zmailActiveSyncSSLBindPort);
         return attrs;
     }
 
     /**
      * port number on which ActiveSync server should listen
      *
-     * @throws com.zimbra.common.service.ServiceException if error during update
+     * @throws org.zmail.common.service.ServiceException if error during update
      */
     @ZAttr(id=87)
-    public void unsetActiveSyncSSLBindPort() throws com.zimbra.common.service.ServiceException {
+    public void unsetActiveSyncSSLBindPort() throws org.zmail.common.service.ServiceException {
         HashMap<String,Object> attrs = new HashMap<String,Object>();
-        attrs.put(Provisioning.A_zimbraActiveSyncSSLBindPort, "");
+        attrs.put(Provisioning.A_zmailActiveSyncSSLBindPort, "");
         getProvisioning().modifyAttrs(this, attrs);
     }
 
@@ -1060,56 +1060,56 @@ public abstract class ZAttrServer extends NamedEntry {
     @ZAttr(id=87)
     public Map<String,Object> unsetActiveSyncSSLBindPort(Map<String,Object> attrs) {
         if (attrs == null) attrs = new HashMap<String,Object>();
-        attrs.put(Provisioning.A_zimbraActiveSyncSSLBindPort, "");
+        attrs.put(Provisioning.A_zmailActiveSyncSSLBindPort, "");
         return attrs;
     }
 
     /**
      * number of seconds to wait before forcing ActiveSync server shutdown
      *
-     * @return zimbraActiveSyncShutdownGraceSeconds, or 10 if unset
+     * @return zmailActiveSyncShutdownGraceSeconds, or 10 if unset
      */
     @ZAttr(id=86)
     public int getActiveSyncShutdownGraceSeconds() {
-        return getIntAttr(Provisioning.A_zimbraActiveSyncShutdownGraceSeconds, 10);
+        return getIntAttr(Provisioning.A_zmailActiveSyncShutdownGraceSeconds, 10);
     }
 
     /**
      * number of seconds to wait before forcing ActiveSync server shutdown
      *
-     * @param zimbraActiveSyncShutdownGraceSeconds new value
-     * @throws com.zimbra.common.service.ServiceException if error during update
+     * @param zmailActiveSyncShutdownGraceSeconds new value
+     * @throws org.zmail.common.service.ServiceException if error during update
      */
     @ZAttr(id=86)
-    public void setActiveSyncShutdownGraceSeconds(int zimbraActiveSyncShutdownGraceSeconds) throws com.zimbra.common.service.ServiceException {
+    public void setActiveSyncShutdownGraceSeconds(int zmailActiveSyncShutdownGraceSeconds) throws org.zmail.common.service.ServiceException {
         HashMap<String,Object> attrs = new HashMap<String,Object>();
-        attrs.put(Provisioning.A_zimbraActiveSyncShutdownGraceSeconds, Integer.toString(zimbraActiveSyncShutdownGraceSeconds));
+        attrs.put(Provisioning.A_zmailActiveSyncShutdownGraceSeconds, Integer.toString(zmailActiveSyncShutdownGraceSeconds));
         getProvisioning().modifyAttrs(this, attrs);
     }
 
     /**
      * number of seconds to wait before forcing ActiveSync server shutdown
      *
-     * @param zimbraActiveSyncShutdownGraceSeconds new value
+     * @param zmailActiveSyncShutdownGraceSeconds new value
      * @param attrs existing map to populate, or null to create a new map
      * @return populated map to pass into Provisioning.modifyAttrs
      */
     @ZAttr(id=86)
-    public Map<String,Object> setActiveSyncShutdownGraceSeconds(int zimbraActiveSyncShutdownGraceSeconds, Map<String,Object> attrs) {
+    public Map<String,Object> setActiveSyncShutdownGraceSeconds(int zmailActiveSyncShutdownGraceSeconds, Map<String,Object> attrs) {
         if (attrs == null) attrs = new HashMap<String,Object>();
-        attrs.put(Provisioning.A_zimbraActiveSyncShutdownGraceSeconds, Integer.toString(zimbraActiveSyncShutdownGraceSeconds));
+        attrs.put(Provisioning.A_zmailActiveSyncShutdownGraceSeconds, Integer.toString(zmailActiveSyncShutdownGraceSeconds));
         return attrs;
     }
 
     /**
      * number of seconds to wait before forcing ActiveSync server shutdown
      *
-     * @throws com.zimbra.common.service.ServiceException if error during update
+     * @throws org.zmail.common.service.ServiceException if error during update
      */
     @ZAttr(id=86)
-    public void unsetActiveSyncShutdownGraceSeconds() throws com.zimbra.common.service.ServiceException {
+    public void unsetActiveSyncShutdownGraceSeconds() throws org.zmail.common.service.ServiceException {
         HashMap<String,Object> attrs = new HashMap<String,Object>();
-        attrs.put(Provisioning.A_zimbraActiveSyncShutdownGraceSeconds, "");
+        attrs.put(Provisioning.A_zmailActiveSyncShutdownGraceSeconds, "");
         getProvisioning().modifyAttrs(this, attrs);
     }
 
@@ -1122,7 +1122,7 @@ public abstract class ZAttrServer extends NamedEntry {
     @ZAttr(id=86)
     public Map<String,Object> unsetActiveSyncShutdownGraceSeconds(Map<String,Object> attrs) {
         if (attrs == null) attrs = new HashMap<String,Object>();
-        attrs.put(Provisioning.A_zimbraActiveSyncShutdownGraceSeconds, "");
+        attrs.put(Provisioning.A_zmailActiveSyncShutdownGraceSeconds, "");
         return attrs;
     }
 
@@ -1787,9 +1787,9 @@ public abstract class ZAttrServer extends NamedEntry {
      * factors: zmailAutoProvBatchSize and number of domains configured in
      * zmailAutoProvScheduledDomains. At each interval, the auto provision
      * thread iterates through all domains in zmailAutoProvScheduledDomains
-     * and auto creates up to domain.zmailAutoProvBatchSize accounts. If
-     * that process takes longer than zmailAutoProvPollingInterval then the
-     * next iteration will start immediately instead of waiting for
+     * and auto creates up to domain.zmailAutoProvBatchSize accounts. If that
+     * process takes longer than zmailAutoProvPollingInterval then the next
+     * iteration will start immediately instead of waiting for
      * zmailAutoProvPollingInterval amount of time. If set to 0 when server
      * starts up, the auto provision thread will not start. If changed from a
      * non-0 value to 0 while server is running, the auto provision thread
@@ -1820,9 +1820,9 @@ public abstract class ZAttrServer extends NamedEntry {
      * factors: zmailAutoProvBatchSize and number of domains configured in
      * zmailAutoProvScheduledDomains. At each interval, the auto provision
      * thread iterates through all domains in zmailAutoProvScheduledDomains
-     * and auto creates up to domain.zmailAutoProvBatchSize accounts. If
-     * that process takes longer than zmailAutoProvPollingInterval then the
-     * next iteration will start immediately instead of waiting for
+     * and auto creates up to domain.zmailAutoProvBatchSize accounts. If that
+     * process takes longer than zmailAutoProvPollingInterval then the next
+     * iteration will start immediately instead of waiting for
      * zmailAutoProvPollingInterval amount of time. If set to 0 when server
      * starts up, the auto provision thread will not start. If changed from a
      * non-0 value to 0 while server is running, the auto provision thread
@@ -1849,9 +1849,9 @@ public abstract class ZAttrServer extends NamedEntry {
      * factors: zmailAutoProvBatchSize and number of domains configured in
      * zmailAutoProvScheduledDomains. At each interval, the auto provision
      * thread iterates through all domains in zmailAutoProvScheduledDomains
-     * and auto creates up to domain.zmailAutoProvBatchSize accounts. If
-     * that process takes longer than zmailAutoProvPollingInterval then the
-     * next iteration will start immediately instead of waiting for
+     * and auto creates up to domain.zmailAutoProvBatchSize accounts. If that
+     * process takes longer than zmailAutoProvPollingInterval then the next
+     * iteration will start immediately instead of waiting for
      * zmailAutoProvPollingInterval amount of time. If set to 0 when server
      * starts up, the auto provision thread will not start. If changed from a
      * non-0 value to 0 while server is running, the auto provision thread
@@ -1881,9 +1881,9 @@ public abstract class ZAttrServer extends NamedEntry {
      * factors: zmailAutoProvBatchSize and number of domains configured in
      * zmailAutoProvScheduledDomains. At each interval, the auto provision
      * thread iterates through all domains in zmailAutoProvScheduledDomains
-     * and auto creates up to domain.zmailAutoProvBatchSize accounts. If
-     * that process takes longer than zmailAutoProvPollingInterval then the
-     * next iteration will start immediately instead of waiting for
+     * and auto creates up to domain.zmailAutoProvBatchSize accounts. If that
+     * process takes longer than zmailAutoProvPollingInterval then the next
+     * iteration will start immediately instead of waiting for
      * zmailAutoProvPollingInterval amount of time. If set to 0 when server
      * starts up, the auto provision thread will not start. If changed from a
      * non-0 value to 0 while server is running, the auto provision thread
@@ -1914,9 +1914,9 @@ public abstract class ZAttrServer extends NamedEntry {
      * factors: zmailAutoProvBatchSize and number of domains configured in
      * zmailAutoProvScheduledDomains. At each interval, the auto provision
      * thread iterates through all domains in zmailAutoProvScheduledDomains
-     * and auto creates up to domain.zmailAutoProvBatchSize accounts. If
-     * that process takes longer than zmailAutoProvPollingInterval then the
-     * next iteration will start immediately instead of waiting for
+     * and auto creates up to domain.zmailAutoProvBatchSize accounts. If that
+     * process takes longer than zmailAutoProvPollingInterval then the next
+     * iteration will start immediately instead of waiting for
      * zmailAutoProvPollingInterval amount of time. If set to 0 when server
      * starts up, the auto provision thread will not start. If changed from a
      * non-0 value to 0 while server is running, the auto provision thread
@@ -1945,9 +1945,9 @@ public abstract class ZAttrServer extends NamedEntry {
      * factors: zmailAutoProvBatchSize and number of domains configured in
      * zmailAutoProvScheduledDomains. At each interval, the auto provision
      * thread iterates through all domains in zmailAutoProvScheduledDomains
-     * and auto creates up to domain.zmailAutoProvBatchSize accounts. If
-     * that process takes longer than zmailAutoProvPollingInterval then the
-     * next iteration will start immediately instead of waiting for
+     * and auto creates up to domain.zmailAutoProvBatchSize accounts. If that
+     * process takes longer than zmailAutoProvPollingInterval then the next
+     * iteration will start immediately instead of waiting for
      * zmailAutoProvPollingInterval amount of time. If set to 0 when server
      * starts up, the auto provision thread will not start. If changed from a
      * non-0 value to 0 while server is running, the auto provision thread
@@ -4399,10 +4399,10 @@ public abstract class ZAttrServer extends NamedEntry {
      * Interval between successive executions of the task that: - disables an
      * external virtual account when all its accessible shares have been
      * revoked or expired. - deletes an external virtual account after
-     * zmailExternalAccountLifetimeAfterDisabled of being disabled. . Must
-     * be in valid duration format: {digits}{time-unit}. digits: 0-9,
-     * time-unit: [hmsd]|ms. h - hours, m - minutes, s - seconds, d - days,
-     * ms - milliseconds. If time unit is not specified, the default is
+     * zmailExternalAccountLifetimeAfterDisabled of being disabled. . Must be
+     * in valid duration format: {digits}{time-unit}. digits: 0-9, time-unit:
+     * [hmsd]|ms. h - hours, m - minutes, s - seconds, d - days, ms -
+     * milliseconds. If time unit is not specified, the default is
      * s(seconds).
      *
      * <p>Use getExternalAccountStatusCheckIntervalAsString to access value as a string.
@@ -4422,10 +4422,10 @@ public abstract class ZAttrServer extends NamedEntry {
      * Interval between successive executions of the task that: - disables an
      * external virtual account when all its accessible shares have been
      * revoked or expired. - deletes an external virtual account after
-     * zmailExternalAccountLifetimeAfterDisabled of being disabled. . Must
-     * be in valid duration format: {digits}{time-unit}. digits: 0-9,
-     * time-unit: [hmsd]|ms. h - hours, m - minutes, s - seconds, d - days,
-     * ms - milliseconds. If time unit is not specified, the default is
+     * zmailExternalAccountLifetimeAfterDisabled of being disabled. . Must be
+     * in valid duration format: {digits}{time-unit}. digits: 0-9, time-unit:
+     * [hmsd]|ms. h - hours, m - minutes, s - seconds, d - days, ms -
+     * milliseconds. If time unit is not specified, the default is
      * s(seconds).
      *
      * @return zmailExternalAccountStatusCheckInterval, or "1d" if unset
@@ -4441,10 +4441,10 @@ public abstract class ZAttrServer extends NamedEntry {
      * Interval between successive executions of the task that: - disables an
      * external virtual account when all its accessible shares have been
      * revoked or expired. - deletes an external virtual account after
-     * zmailExternalAccountLifetimeAfterDisabled of being disabled. . Must
-     * be in valid duration format: {digits}{time-unit}. digits: 0-9,
-     * time-unit: [hmsd]|ms. h - hours, m - minutes, s - seconds, d - days,
-     * ms - milliseconds. If time unit is not specified, the default is
+     * zmailExternalAccountLifetimeAfterDisabled of being disabled. . Must be
+     * in valid duration format: {digits}{time-unit}. digits: 0-9, time-unit:
+     * [hmsd]|ms. h - hours, m - minutes, s - seconds, d - days, ms -
+     * milliseconds. If time unit is not specified, the default is
      * s(seconds).
      *
      * @param zmailExternalAccountStatusCheckInterval new value
@@ -4463,10 +4463,10 @@ public abstract class ZAttrServer extends NamedEntry {
      * Interval between successive executions of the task that: - disables an
      * external virtual account when all its accessible shares have been
      * revoked or expired. - deletes an external virtual account after
-     * zmailExternalAccountLifetimeAfterDisabled of being disabled. . Must
-     * be in valid duration format: {digits}{time-unit}. digits: 0-9,
-     * time-unit: [hmsd]|ms. h - hours, m - minutes, s - seconds, d - days,
-     * ms - milliseconds. If time unit is not specified, the default is
+     * zmailExternalAccountLifetimeAfterDisabled of being disabled. . Must be
+     * in valid duration format: {digits}{time-unit}. digits: 0-9, time-unit:
+     * [hmsd]|ms. h - hours, m - minutes, s - seconds, d - days, ms -
+     * milliseconds. If time unit is not specified, the default is
      * s(seconds).
      *
      * @param zmailExternalAccountStatusCheckInterval new value
@@ -4486,10 +4486,10 @@ public abstract class ZAttrServer extends NamedEntry {
      * Interval between successive executions of the task that: - disables an
      * external virtual account when all its accessible shares have been
      * revoked or expired. - deletes an external virtual account after
-     * zmailExternalAccountLifetimeAfterDisabled of being disabled. . Must
-     * be in valid duration format: {digits}{time-unit}. digits: 0-9,
-     * time-unit: [hmsd]|ms. h - hours, m - minutes, s - seconds, d - days,
-     * ms - milliseconds. If time unit is not specified, the default is
+     * zmailExternalAccountLifetimeAfterDisabled of being disabled. . Must be
+     * in valid duration format: {digits}{time-unit}. digits: 0-9, time-unit:
+     * [hmsd]|ms. h - hours, m - minutes, s - seconds, d - days, ms -
+     * milliseconds. If time unit is not specified, the default is
      * s(seconds).
      *
      * @throws org.zmail.common.service.ServiceException if error during update
@@ -4507,10 +4507,10 @@ public abstract class ZAttrServer extends NamedEntry {
      * Interval between successive executions of the task that: - disables an
      * external virtual account when all its accessible shares have been
      * revoked or expired. - deletes an external virtual account after
-     * zmailExternalAccountLifetimeAfterDisabled of being disabled. . Must
-     * be in valid duration format: {digits}{time-unit}. digits: 0-9,
-     * time-unit: [hmsd]|ms. h - hours, m - minutes, s - seconds, d - days,
-     * ms - milliseconds. If time unit is not specified, the default is
+     * zmailExternalAccountLifetimeAfterDisabled of being disabled. . Must be
+     * in valid duration format: {digits}{time-unit}. digits: 0-9, time-unit:
+     * [hmsd]|ms. h - hours, m - minutes, s - seconds, d - days, ms -
+     * milliseconds. If time unit is not specified, the default is
      * s(seconds).
      *
      * @param attrs existing map to populate, or null to create a new map
@@ -4706,12 +4706,12 @@ public abstract class ZAttrServer extends NamedEntry {
     }
 
     /**
-     * Deprecated since: 6.0.0_BETA2. deprecated in favor for
-     * zmailHsmPolicy. Orig desc: Minimum age of mail items whose filesystem
-     * data will be moved to secondary storage.. Must be in valid duration
-     * format: {digits}{time-unit}. digits: 0-9, time-unit: [hmsd]|ms. h -
-     * hours, m - minutes, s - seconds, d - days, ms - milliseconds. If time
-     * unit is not specified, the default is s(seconds).
+     * Deprecated since: 6.0.0_BETA2. deprecated in favor for zmailHsmPolicy.
+     * Orig desc: Minimum age of mail items whose filesystem data will be
+     * moved to secondary storage.. Must be in valid duration format:
+     * {digits}{time-unit}. digits: 0-9, time-unit: [hmsd]|ms. h - hours, m -
+     * minutes, s - seconds, d - days, ms - milliseconds. If time unit is not
+     * specified, the default is s(seconds).
      *
      * <p>Use getHsmAgeAsString to access value as a string.
      *
@@ -4725,12 +4725,12 @@ public abstract class ZAttrServer extends NamedEntry {
     }
 
     /**
-     * Deprecated since: 6.0.0_BETA2. deprecated in favor for
-     * zmailHsmPolicy. Orig desc: Minimum age of mail items whose filesystem
-     * data will be moved to secondary storage.. Must be in valid duration
-     * format: {digits}{time-unit}. digits: 0-9, time-unit: [hmsd]|ms. h -
-     * hours, m - minutes, s - seconds, d - days, ms - milliseconds. If time
-     * unit is not specified, the default is s(seconds).
+     * Deprecated since: 6.0.0_BETA2. deprecated in favor for zmailHsmPolicy.
+     * Orig desc: Minimum age of mail items whose filesystem data will be
+     * moved to secondary storage.. Must be in valid duration format:
+     * {digits}{time-unit}. digits: 0-9, time-unit: [hmsd]|ms. h - hours, m -
+     * minutes, s - seconds, d - days, ms - milliseconds. If time unit is not
+     * specified, the default is s(seconds).
      *
      * @return zmailHsmAge, or "30d" if unset
      */
@@ -4740,12 +4740,12 @@ public abstract class ZAttrServer extends NamedEntry {
     }
 
     /**
-     * Deprecated since: 6.0.0_BETA2. deprecated in favor for
-     * zmailHsmPolicy. Orig desc: Minimum age of mail items whose filesystem
-     * data will be moved to secondary storage.. Must be in valid duration
-     * format: {digits}{time-unit}. digits: 0-9, time-unit: [hmsd]|ms. h -
-     * hours, m - minutes, s - seconds, d - days, ms - milliseconds. If time
-     * unit is not specified, the default is s(seconds).
+     * Deprecated since: 6.0.0_BETA2. deprecated in favor for zmailHsmPolicy.
+     * Orig desc: Minimum age of mail items whose filesystem data will be
+     * moved to secondary storage.. Must be in valid duration format:
+     * {digits}{time-unit}. digits: 0-9, time-unit: [hmsd]|ms. h - hours, m -
+     * minutes, s - seconds, d - days, ms - milliseconds. If time unit is not
+     * specified, the default is s(seconds).
      *
      * @param zmailHsmAge new value
      * @throws org.zmail.common.service.ServiceException if error during update
@@ -4758,12 +4758,12 @@ public abstract class ZAttrServer extends NamedEntry {
     }
 
     /**
-     * Deprecated since: 6.0.0_BETA2. deprecated in favor for
-     * zmailHsmPolicy. Orig desc: Minimum age of mail items whose filesystem
-     * data will be moved to secondary storage.. Must be in valid duration
-     * format: {digits}{time-unit}. digits: 0-9, time-unit: [hmsd]|ms. h -
-     * hours, m - minutes, s - seconds, d - days, ms - milliseconds. If time
-     * unit is not specified, the default is s(seconds).
+     * Deprecated since: 6.0.0_BETA2. deprecated in favor for zmailHsmPolicy.
+     * Orig desc: Minimum age of mail items whose filesystem data will be
+     * moved to secondary storage.. Must be in valid duration format:
+     * {digits}{time-unit}. digits: 0-9, time-unit: [hmsd]|ms. h - hours, m -
+     * minutes, s - seconds, d - days, ms - milliseconds. If time unit is not
+     * specified, the default is s(seconds).
      *
      * @param zmailHsmAge new value
      * @param attrs existing map to populate, or null to create a new map
@@ -4777,12 +4777,12 @@ public abstract class ZAttrServer extends NamedEntry {
     }
 
     /**
-     * Deprecated since: 6.0.0_BETA2. deprecated in favor for
-     * zmailHsmPolicy. Orig desc: Minimum age of mail items whose filesystem
-     * data will be moved to secondary storage.. Must be in valid duration
-     * format: {digits}{time-unit}. digits: 0-9, time-unit: [hmsd]|ms. h -
-     * hours, m - minutes, s - seconds, d - days, ms - milliseconds. If time
-     * unit is not specified, the default is s(seconds).
+     * Deprecated since: 6.0.0_BETA2. deprecated in favor for zmailHsmPolicy.
+     * Orig desc: Minimum age of mail items whose filesystem data will be
+     * moved to secondary storage.. Must be in valid duration format:
+     * {digits}{time-unit}. digits: 0-9, time-unit: [hmsd]|ms. h - hours, m -
+     * minutes, s - seconds, d - days, ms - milliseconds. If time unit is not
+     * specified, the default is s(seconds).
      *
      * @throws org.zmail.common.service.ServiceException if error during update
      */
@@ -4794,12 +4794,12 @@ public abstract class ZAttrServer extends NamedEntry {
     }
 
     /**
-     * Deprecated since: 6.0.0_BETA2. deprecated in favor for
-     * zmailHsmPolicy. Orig desc: Minimum age of mail items whose filesystem
-     * data will be moved to secondary storage.. Must be in valid duration
-     * format: {digits}{time-unit}. digits: 0-9, time-unit: [hmsd]|ms. h -
-     * hours, m - minutes, s - seconds, d - days, ms - milliseconds. If time
-     * unit is not specified, the default is s(seconds).
+     * Deprecated since: 6.0.0_BETA2. deprecated in favor for zmailHsmPolicy.
+     * Orig desc: Minimum age of mail items whose filesystem data will be
+     * moved to secondary storage.. Must be in valid duration format:
+     * {digits}{time-unit}. digits: 0-9, time-unit: [hmsd]|ms. h - hours, m -
+     * minutes, s - seconds, d - days, ms - milliseconds. If time unit is not
+     * specified, the default is s(seconds).
      *
      * @param attrs existing map to populate, or null to create a new map
      * @return populated map to pass into Provisioning.modifyAttrs
@@ -14049,8 +14049,8 @@ public abstract class ZAttrServer extends NamedEntry {
 
     /**
      * Deprecated since: 6.0.0_BETA1. deprecated in favor of
-     * zmailMtaTlsSecurityLevel and zmailMtaSaslAuthEnable. Orig desc:
-     * Value for postconf smtpd_tls_security_level
+     * zmailMtaTlsSecurityLevel and zmailMtaSaslAuthEnable. Orig desc: Value
+     * for postconf smtpd_tls_security_level
      *
      * @return zmailMtaAuthEnabled, or true if unset
      */
@@ -14061,8 +14061,8 @@ public abstract class ZAttrServer extends NamedEntry {
 
     /**
      * Deprecated since: 6.0.0_BETA1. deprecated in favor of
-     * zmailMtaTlsSecurityLevel and zmailMtaSaslAuthEnable. Orig desc:
-     * Value for postconf smtpd_tls_security_level
+     * zmailMtaTlsSecurityLevel and zmailMtaSaslAuthEnable. Orig desc: Value
+     * for postconf smtpd_tls_security_level
      *
      * @param zmailMtaAuthEnabled new value
      * @throws org.zmail.common.service.ServiceException if error during update
@@ -14076,8 +14076,8 @@ public abstract class ZAttrServer extends NamedEntry {
 
     /**
      * Deprecated since: 6.0.0_BETA1. deprecated in favor of
-     * zmailMtaTlsSecurityLevel and zmailMtaSaslAuthEnable. Orig desc:
-     * Value for postconf smtpd_tls_security_level
+     * zmailMtaTlsSecurityLevel and zmailMtaSaslAuthEnable. Orig desc: Value
+     * for postconf smtpd_tls_security_level
      *
      * @param zmailMtaAuthEnabled new value
      * @param attrs existing map to populate, or null to create a new map
@@ -14092,8 +14092,8 @@ public abstract class ZAttrServer extends NamedEntry {
 
     /**
      * Deprecated since: 6.0.0_BETA1. deprecated in favor of
-     * zmailMtaTlsSecurityLevel and zmailMtaSaslAuthEnable. Orig desc:
-     * Value for postconf smtpd_tls_security_level
+     * zmailMtaTlsSecurityLevel and zmailMtaSaslAuthEnable. Orig desc: Value
+     * for postconf smtpd_tls_security_level
      *
      * @throws org.zmail.common.service.ServiceException if error during update
      */
@@ -14106,8 +14106,8 @@ public abstract class ZAttrServer extends NamedEntry {
 
     /**
      * Deprecated since: 6.0.0_BETA1. deprecated in favor of
-     * zmailMtaTlsSecurityLevel and zmailMtaSaslAuthEnable. Orig desc:
-     * Value for postconf smtpd_tls_security_level
+     * zmailMtaTlsSecurityLevel and zmailMtaSaslAuthEnable. Orig desc: Value
+     * for postconf smtpd_tls_security_level
      *
      * @param attrs existing map to populate, or null to create a new map
      * @return populated map to pass into Provisioning.modifyAttrs
@@ -20334,7 +20334,7 @@ public abstract class ZAttrServer extends NamedEntry {
     /**
      * Log level for NGINX Proxy error log
      *
-     * <p>Valid values: [warn, debug_http, error, crit, debug_mail, debug, debug_zmail, notice, debug_core, info]
+     * <p>Valid values: [debug_zmail, warn, debug_http, error, crit, debug_mail, debug, notice, debug_core, info]
      *
      * @return zmailReverseProxyLogLevel, or ZAttrProvisioning.ReverseProxyLogLevel.info if unset and/or has invalid value
      *
@@ -20348,7 +20348,7 @@ public abstract class ZAttrServer extends NamedEntry {
     /**
      * Log level for NGINX Proxy error log
      *
-     * <p>Valid values: [warn, debug_http, error, crit, debug_mail, debug, debug_zmail, notice, debug_core, info]
+     * <p>Valid values: [debug_zmail, warn, debug_http, error, crit, debug_mail, debug, notice, debug_core, info]
      *
      * @return zmailReverseProxyLogLevel, or "info" if unset
      *
@@ -20362,7 +20362,7 @@ public abstract class ZAttrServer extends NamedEntry {
     /**
      * Log level for NGINX Proxy error log
      *
-     * <p>Valid values: [warn, debug_http, error, crit, debug_mail, debug, debug_zmail, notice, debug_core, info]
+     * <p>Valid values: [debug_zmail, warn, debug_http, error, crit, debug_mail, debug, notice, debug_core, info]
      *
      * @param zmailReverseProxyLogLevel new value
      * @throws org.zmail.common.service.ServiceException if error during update
@@ -20379,7 +20379,7 @@ public abstract class ZAttrServer extends NamedEntry {
     /**
      * Log level for NGINX Proxy error log
      *
-     * <p>Valid values: [warn, debug_http, error, crit, debug_mail, debug, debug_zmail, notice, debug_core, info]
+     * <p>Valid values: [debug_zmail, warn, debug_http, error, crit, debug_mail, debug, notice, debug_core, info]
      *
      * @param zmailReverseProxyLogLevel new value
      * @param attrs existing map to populate, or null to create a new map
@@ -20397,7 +20397,7 @@ public abstract class ZAttrServer extends NamedEntry {
     /**
      * Log level for NGINX Proxy error log
      *
-     * <p>Valid values: [warn, debug_http, error, crit, debug_mail, debug, debug_zmail, notice, debug_core, info]
+     * <p>Valid values: [debug_zmail, warn, debug_http, error, crit, debug_mail, debug, notice, debug_core, info]
      *
      * @param zmailReverseProxyLogLevel new value
      * @throws org.zmail.common.service.ServiceException if error during update
@@ -20414,7 +20414,7 @@ public abstract class ZAttrServer extends NamedEntry {
     /**
      * Log level for NGINX Proxy error log
      *
-     * <p>Valid values: [warn, debug_http, error, crit, debug_mail, debug, debug_zmail, notice, debug_core, info]
+     * <p>Valid values: [debug_zmail, warn, debug_http, error, crit, debug_mail, debug, notice, debug_core, info]
      *
      * @param zmailReverseProxyLogLevel new value
      * @param attrs existing map to populate, or null to create a new map
@@ -20432,7 +20432,7 @@ public abstract class ZAttrServer extends NamedEntry {
     /**
      * Log level for NGINX Proxy error log
      *
-     * <p>Valid values: [warn, debug_http, error, crit, debug_mail, debug, debug_zmail, notice, debug_core, info]
+     * <p>Valid values: [debug_zmail, warn, debug_http, error, crit, debug_mail, debug, notice, debug_core, info]
      *
      * @throws org.zmail.common.service.ServiceException if error during update
      *
@@ -20448,7 +20448,7 @@ public abstract class ZAttrServer extends NamedEntry {
     /**
      * Log level for NGINX Proxy error log
      *
-     * <p>Valid values: [warn, debug_http, error, crit, debug_mail, debug, debug_zmail, notice, debug_core, info]
+     * <p>Valid values: [debug_zmail, warn, debug_http, error, crit, debug_mail, debug, notice, debug_core, info]
      *
      * @param attrs existing map to populate, or null to create a new map
      * @return populated map to pass into Provisioning.modifyAttrs

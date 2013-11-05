@@ -15,7 +15,7 @@
 // Config file: japigen/jas.apigen
 // Module name: AS
 
-package com.zimbra.cs.mailclient.activesync;
+package org.zmail.cs.mailclient.activesync;
 
 import java.util.*;
 import java.lang.String;
@@ -1752,15 +1752,15 @@ public class ASTypes {
         };
     }
     
-    public enum AS_store {
+    public enum AS_Store {
         document_library("Document Library"),
         mailbox("Mailbox");
         public final String value;
-        AS_store(String value) { this.value = value; }
-        public AS_store fromString(String x) {
+        AS_Store(String value) { this.value = value; }
+        public AS_Store fromString(String x) {
             switch (x) {
-            case "Document Library": return AS_store.document_library;
-            case "Mailbox": return AS_store.mailbox;
+            case "Document Library": return AS_Store.document_library;
+            case "Mailbox": return AS_Store.mailbox;
             }
             return null;
         }
@@ -1816,7 +1816,7 @@ public class ASTypes {
     }
     
     public class AS_ItemOperationsFetch {
-        public AS_store Store;
+        public AS_Store Store;
         public String LinkId;
         public String LongId;
         public String CollectionId;
@@ -1824,7 +1824,7 @@ public class ASTypes {
         public String FileReference;
         public AS_ItemOperationsFetchOptions Options;
         public AS_ItemOperationsFetch() { }
-        public AS_ItemOperationsFetch(AS_store Store,String LinkId,String LongId,String CollectionId,String ServerId,String FileReference,AS_ItemOperationsFetchOptions Options) {
+        public AS_ItemOperationsFetch(AS_Store Store,String LinkId,String LongId,String CollectionId,String ServerId,String FileReference,AS_ItemOperationsFetchOptions Options) {
             this.Store = Store;
             this.LinkId = LinkId;
             this.LongId = LongId;
@@ -1833,7 +1833,7 @@ public class ASTypes {
             this.FileReference = FileReference;
             this.Options = Options;
         }
-        public AS_ItemOperationsFetch set_Store(AS_store Store) {
+        public AS_ItemOperationsFetch set_Store(AS_Store Store) {
             this.Store = Store;
             return this;
         };
@@ -2216,7 +2216,7 @@ public class ASTypes {
             null // Preview
         );
     }
-    public AS_store store_default() { return AS_store.document_library; }
+    public AS_Store Store_default() { return AS_Store.document_library; }
     public AS_ItemOperationsFetchOptions ItemOperationsFetchOptions_default() {
         return new AS_ItemOperationsFetchOptions(
             null, // Schema
@@ -2230,7 +2230,7 @@ public class ASTypes {
     }
     public AS_ItemOperationsFetch ItemOperationsFetch_default() {
         return new AS_ItemOperationsFetch(
-            store_default(), // Store
+            Store_default(), // Store
             null, // LinkId
             null, // LongId
             null, // CollectionId
@@ -2276,7 +2276,7 @@ public class ASTypes {
     }
     
     public String pack_ItemOperationsFetch(
-        AS_store Store,
+        AS_Store Store,
         String LinkId,
         String LongId,
         String CollectionId,
@@ -2285,8 +2285,8 @@ public class ASTypes {
         AS_ItemOperationsFetchOptions Options
     ) {
         return "<Fetch xmlns=\"ItemOperations\">"
-             + "<store>"+Store.toString()
-             + "</store>"
+             + "<Store>"+Store.toString()
+             + "</Store>"
              + ((LinkId!=null)?("<LinkId xmlns=\"DocumentLibrary\">"+LinkId+"</LinkId>"):"")
              + ((LongId!=null)?("<LongId xmlns=\"Search\">"+LongId+"</LongId>"):"")
              + ((CollectionId!=null)?("<CollectionId xmlns=\"AirSync\">"+CollectionId+"</CollectionId>"):"")
@@ -2310,19 +2310,19 @@ public class ASTypes {
         );
     }
     
-    public String pack_store(
-        AS_store store
+    public String pack_Store(
+        AS_Store Store
     ) {
         return ""
-             + "<store>"+store.toString()
-             + "</store>"
+             + "<Store>"+Store.toString()
+             + "</Store>"
              + "";
     }
     
-    public String packc_store(
-        AS_store store_48
+    public String packc_Store(
+        AS_Store store_48
     ) {
-        return pack_store(
+        return pack_Store(
         store_48
         );
     }

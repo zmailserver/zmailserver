@@ -12,33 +12,33 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
  * ***** END LICENSE BLOCK *****
  */
-package com.zimbra.cs.datasource;
+package org.zmail.cs.datasource;
 
 import java.util.List;
-import com.zimbra.common.localconfig.LC;
-import com.zimbra.common.net.SocketFactories;
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.common.util.Log;
-import com.zimbra.common.util.ZimbraLog;
-import com.zimbra.cs.account.DataSource;
-import com.zimbra.cs.filter.RuleManager;
-import com.zimbra.cs.mailbox.DeliveryContext;
-import com.zimbra.cs.mailbox.Flag;
-import com.zimbra.cs.mailbox.Message;
-import com.zimbra.cs.mailclient.MailConfig;
-import com.zimbra.cs.mailclient.MailConfig.Security;
-import com.zimbra.cs.mime.ParsedMessage;
-import com.zimbra.soap.type.DataSource.ConnectionType;
-import com.zimbra.cs.mailclient.activesync.*;
-import com.zimbra.cs.mailclient.activesync.ActiveSync.Callable2;
-import com.zimbra.cs.mailclient.activesync.ASTypes.*;
+import org.zmail.common.localconfig.LC;
+import org.zmail.common.net.SocketFactories;
+import org.zmail.common.service.ServiceException;
+import org.zmail.common.util.Log;
+import org.zmail.common.util.ZmailLog;
+import org.zmail.cs.account.DataSource;
+import org.zmail.cs.filter.RuleManager;
+import org.zmail.cs.mailbox.DeliveryContext;
+import org.zmail.cs.mailbox.Flag;
+import org.zmail.cs.mailbox.Message;
+import org.zmail.cs.mailclient.MailConfig;
+import org.zmail.cs.mailclient.MailConfig.Security;
+import org.zmail.cs.mime.ParsedMessage;
+import org.zmail.soap.type.DataSource.ConnectionType;
+import org.zmail.cs.mailclient.activesync.*;
+import org.zmail.cs.mailclient.activesync.ActiveSync.Callable2;
+import org.zmail.cs.mailclient.activesync.ASTypes.*;
 
 public class ActiveSyncSync extends MailItemImport {
     private final ActiveSyncConfig config;
     private final ActiveSync as;
     private final boolean indexAttachments;
 
-    private static final Log LOG = ZimbraLog.datasource;
+    private static final Log LOG = ZmailLog.datasource;
 
     // Zimbra UID format is: item_id "." blob_digest
     //private static final Pattern PATTERN_ZIMBRA_UID = Pattern.compile("(\\d+)\\.([^\\.]+)");
@@ -71,7 +71,7 @@ public class ActiveSyncSync extends MailItemImport {
         config.setAuthenticationId(ds.getUsername());
         config.setSecurity(getSecurity(ds.getConnectionType()));
         if (ds.isDebugTraceEnabled()) {
-            config.setLogger(SyncUtil.getTraceLogger(ZimbraLog.pop_client, ds.getId()));
+            config.setLogger(SyncUtil.getTraceLogger(ZmailLog.pop_client, ds.getId()));
         }
         config.setSocketFactory(SocketFactories.defaultSocketFactory());
         config.setSSLSocketFactory(SocketFactories.defaultSSLSocketFactory());
@@ -155,6 +155,7 @@ public class ActiveSyncSync extends MailItemImport {
                         msgTracker.add();
                     }
                     break;
+                    // TODO: change, delete
                 default:
                     break;
                 }
@@ -178,7 +179,9 @@ public class ActiveSyncSync extends MailItemImport {
             as.convertToMimeMessages(syncb,
                                      new Callable2<String,javax.mail.Message>() {
                                          @Override
-                                         public void call(String code, javax.mail.Message message) { handleMessage(code, message); }
+                                         public void call(String code, javax.mail.Message message) {
+                                             handleMessage(code, message);
+                                         }
                                      });
         } catch (Exception e) {
             throw ServiceException.FAILURE(

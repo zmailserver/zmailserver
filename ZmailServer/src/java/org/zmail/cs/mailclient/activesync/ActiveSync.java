@@ -1,8 +1,8 @@
-package com.zimbra.cs.mailclient.activesync;
+package org.zmail.cs.mailclient.activesync;
 
-import com.zimbra.cs.mailclient.activesync.ASTypes;
-import com.zimbra.cs.mailclient.activesync.ASFunctions;
-import com.zimbra.cs.mailclient.activesync.ASTypes.*;
+import org.zmail.cs.mailclient.activesync.ASTypes;
+import org.zmail.cs.mailclient.activesync.ASFunctions;
+import org.zmail.cs.mailclient.activesync.ASTypes.*;
 
 import java.io.*;
 import java.nio.file.*;
@@ -200,12 +200,12 @@ public class ActiveSync {
         AS_Fetch fetch = mAst.new AS_Fetch();
         List<AS_ItemOperationsFetch> iofs = new ArrayList<AS_ItemOperationsFetch>(1);
         AS_ItemOperationsFetch iof = mAst.new AS_ItemOperationsFetch();
-        iof.set_Store(AS_store.mailbox); 
+        iof.set_Store(AS_Store.mailbox); 
         iof.set_FileReference(attachment.FileReference);
         iofs.add(iof);
         fetch.set_Fetch(iofs);
         AS_AttachFetchResponse fetchresponse = mAsf.itemoperationsfetch(null,fetch);
-        if (fetchresponse.FileReference != attachment.FileReference) {
+        if (!fetchresponse.FileReference.equalsIgnoreCase(attachment.FileReference)) {
             throw new Exception("mismatching FileReferences, expected "+attachment.FileReference+
                                 " got "+fetchresponse.FileReference);
         }
@@ -261,7 +261,7 @@ public class ActiveSync {
         if (data.Cc != null)
             for (String cc : data.Cc.split("\\s*,\\s*")) message.addRecipient(Message.RecipientType.CC, new InternetAddress(cc));
         if (data.DateReceived != null) {
-            Date dateReceived = new SimpleDateFormat("EEE, dd MMM yyyy HH:mm:ss Z").parse(data.DateReceived);
+            Date dateReceived = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSXXX").parse(data.DateReceived);
             message.setSentDate(dateReceived);
         } else {
             message.setSentDate(new Date());
@@ -281,13 +281,16 @@ public class ActiveSync {
         String contentType;
         BodyPart part;
         contentType = emailBodyType(data);
-        //???message.setHeader("Content-Length",Integer.toString(data.Body.Data.length()));
         if (data.Attachments.size() == 0) {
-            message.setContent(new ByteArrayDataSource(data.Body.Data.getBytes(), contentType), contentType);
+            if (data.Body.Data != null) {
+                message.setContent(new ByteArrayDataSource(data.Body.Data.getBytes(), contentType), contentType);
+            }
         } else {
             Multipart multi = new MimeMultipart("mixed");
             part = new MimeBodyPart();
-            part.setContent(new ByteArrayDataSource(data.Body.Data.getBytes(), contentType), contentType);
+            if (data.Body.Data != null) {
+                part.setContent(new ByteArrayDataSource(data.Body.Data.getBytes(), contentType), contentType);
+            }
             multi.addBodyPart(part);
             for (AS_Attachments attachment : data.Attachments) {
                 AS_AttachFetchResponse downloadedAttachment;

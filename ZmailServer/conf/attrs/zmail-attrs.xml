@@ -650,49 +650,49 @@ TODO - add support for multi-line values in globalConfigValue and defaultCOSValu
   <desc>how frequently writes to redo log get fsynced to disk</desc>
 </attr>
 
-<attr id="84" name="zimbraActiveSyncMaxConnections" type="integer" cardinality="single" optionalIn="globalConfig,server" flags="serverInherited" requiresRestart="mailbox">
+<attr id="84" name="zmailActiveSyncMaxConnections" type="integer" cardinality="single" optionalIn="globalConfig,server" flags="serverInherited" requiresRestart="mailbox">
   <globalConfigValue>200</globalConfigValue>
   <desc>Maximum number of concurrent ActiveSync connections allowed. New connections exceeding this limit are rejected.</desc>
 </attr>
 
-<attr id="85" name="zimbraActiveSyncNumThreads" type="integer" cardinality="single" optionalIn="globalConfig,server" flags="serverInherited" requiresRestart="mailbox">
+<attr id="85" name="zmailActiveSyncNumThreads" type="integer" cardinality="single" optionalIn="globalConfig,server" flags="serverInherited" requiresRestart="mailbox">
   <globalConfigValue>100</globalConfigValue>
   <desc>number of handler threads</desc>
 </attr>
 
-<attr id="86" name="zimbraActiveSyncShutdownGraceSeconds" type="integer" cardinality="single" optionalIn="globalConfig,server" flags="serverInherited">
+<attr id="86" name="zmailActiveSyncShutdownGraceSeconds" type="integer" cardinality="single" optionalIn="globalConfig,server" flags="serverInherited">
   <globalConfigValue>10</globalConfigValue>
   <desc>number of seconds to wait before forcing ActiveSync server shutdown</desc>
 </attr>
 
-<attr id="87" name="zimbraActiveSyncSSLBindPort" type="port" cardinality="single" optionalIn="globalConfig,server" flags="serverInherited" callback="CheckPortConflict" requiresRestart="mailbox">
+<attr id="87" name="zmailActiveSyncSSLBindPort" type="port" cardinality="single" optionalIn="globalConfig,server" flags="serverInherited" callback="CheckPortConflict" requiresRestart="mailbox">
   <globalConfigValue>9995</globalConfigValue>
   <desc>port number on which ActiveSync server should listen</desc>
 </attr>
 
-<attr id="88" name="zimbraActiveSyncBindPort" type="port" cardinality="single" optionalIn="globalConfig,server" flags="serverInherited" callback="CheckPortConflict" requiresRestart="mailbox">
+<attr id="88" name="zmailActiveSyncBindPort" type="port" cardinality="single" optionalIn="globalConfig,server" flags="serverInherited" callback="CheckPortConflict" requiresRestart="mailbox">
   <globalConfigValue>9110</globalConfigValue>
   <desc>port number on which ActiveSync server should listen</desc>
 </attr>
 
-<attr id="89" name="zimbraActiveSyncBindAddress" type="string" max="128" cardinality="multi" optionalIn="server" requiresRestart="mailbox">
+<attr id="89" name="zmailActiveSyncBindAddress" type="string" max="128" cardinality="multi" optionalIn="server" requiresRestart="mailbox">
   <desc>interface address on which ActiveSync server should listen; if empty, binds to all interfaces</desc>
 </attr>
 
-<attr id="90" name="zimbraActiveSyncSSLBindAddress" type="string" max="128" cardinality="multi" optionalIn="server" requiresRestart="mailbox">
+<attr id="90" name="zmailActiveSyncSSLBindAddress" type="string" max="128" cardinality="multi" optionalIn="server" requiresRestart="mailbox">
   <desc>interface address on which ActiveSync server should listen; if empty, binds to all interfaces</desc>
 </attr>
 
-<attr id="91" name="zimbraActiveSyncExposeVersionOnBanner" type="boolean" cardinality="single" optionalIn="globalConfig,server" flags="serverInherited" requiresRestart="mailbox">
+<attr id="91" name="zmailActiveSyncExposeVersionOnBanner" type="boolean" cardinality="single" optionalIn="globalConfig,server" flags="serverInherited" requiresRestart="mailbox">
   <globalConfigValue>FALSE</globalConfigValue>
   <desc>Whether to expose version on POP3 banner</desc>
 </attr>
 
-<attr id="92" name="zimbraActiveSyncAdvertisedName" type="string" max="128" cardinality="single" optionalIn="server" requiresRestart="mailbox">
+<attr id="92" name="zmailActiveSyncAdvertisedName" type="string" max="128" cardinality="single" optionalIn="server" requiresRestart="mailbox">
   <desc>name to use in greeting and sign-off; if empty, uses hostname</desc>
 </attr>
 
-<attr id="93" name="zimbraPop3AdvertisedName" type="string" max="128" cardinality="single" optionalIn="server" requiresRestart="mailbox">
+<attr id="93" name="zmailPop3AdvertisedName" type="string" max="128" cardinality="single" optionalIn="server" requiresRestart="mailbox">
   <desc>name to use in greeting and sign-off; if empty, uses hostname</desc>
 </attr>
 
@@ -7187,7 +7187,7 @@ TODO: delete them permanently from here
   </desc>
 </attr>
 
-<attr id="1441" name="zimbraDataSourceActiveSyncPollingInterval" type="duration" min="0" cardinality="single" optionalIn="account,cos" callback="DataSourceCallback" flags="accountInfo,accountInherited,domainAdminModifiable" since="6.0.0_BETA1">
+<attr id="1441" name="zmailDataSourceActiveSyncPollingInterval" type="duration" min="0" cardinality="single" optionalIn="account,cos" callback="DataSourceCallback" flags="accountInfo,accountInherited,domainAdminModifiable" since="6.0.0_BETA1">
   <desc>
     The time interval between automated data imports for a ActiveSync data source.
     If unset or 0, the data source will not be scheduled for automated polling.

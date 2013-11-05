@@ -42,7 +42,7 @@ public abstract class ZAttrConfig extends Entry {
 
     ///// BEGIN-AUTO-GEN-REPLACE
 
-    /* build: 8.0.0_BETA1_1111 norman 20131010-1457 */
+    /* build: 8.0.0_BETA1_1111 norman 20131025-1439 */
 
     /**
      * RFC2256: descriptive information
@@ -551,86 +551,86 @@ public abstract class ZAttrConfig extends Entry {
      *
      * @see #getActiveSyncBindPortAsString()
      *
-     * @return zimbraActiveSyncBindPort, or 9110 if unset
+     * @return zmailActiveSyncBindPort, or 9110 if unset
      */
     @ZAttr(id=88)
     public int getActiveSyncBindPort() {
-        return getIntAttr(Provisioning.A_zimbraActiveSyncBindPort, 9110);
+        return getIntAttr(Provisioning.A_zmailActiveSyncBindPort, 9110);
     }
 
     /**
      * port number on which ActiveSync server should listen
      *
-     * @return zimbraActiveSyncBindPort, or "9110" if unset
+     * @return zmailActiveSyncBindPort, or "9110" if unset
      */
     @ZAttr(id=88)
     public String getActiveSyncBindPortAsString() {
-        return getAttr(Provisioning.A_zimbraActiveSyncBindPort, "9110");
+        return getAttr(Provisioning.A_zmailActiveSyncBindPort, "9110");
     }
 
     /**
      * port number on which ActiveSync server should listen
      *
-     * @param zimbraActiveSyncBindPort new value
-     * @throws com.zimbra.common.service.ServiceException if error during update
+     * @param zmailActiveSyncBindPort new value
+     * @throws org.zmail.common.service.ServiceException if error during update
      */
     @ZAttr(id=88)
-    public void setActiveSyncBindPort(int zimbraActiveSyncBindPort) throws com.zimbra.common.service.ServiceException {
+    public void setActiveSyncBindPort(int zmailActiveSyncBindPort) throws org.zmail.common.service.ServiceException {
         HashMap<String,Object> attrs = new HashMap<String,Object>();
-        attrs.put(Provisioning.A_zimbraActiveSyncBindPort, Integer.toString(zimbraActiveSyncBindPort));
+        attrs.put(Provisioning.A_zmailActiveSyncBindPort, Integer.toString(zmailActiveSyncBindPort));
         getProvisioning().modifyAttrs(this, attrs);
     }
 
     /**
      * port number on which ActiveSync server should listen
      *
-     * @param zimbraActiveSyncBindPort new value
+     * @param zmailActiveSyncBindPort new value
      * @param attrs existing map to populate, or null to create a new map
      * @return populated map to pass into Provisioning.modifyAttrs
      */
     @ZAttr(id=88)
-    public Map<String,Object> setActiveSyncBindPort(int zimbraActiveSyncBindPort, Map<String,Object> attrs) {
+    public Map<String,Object> setActiveSyncBindPort(int zmailActiveSyncBindPort, Map<String,Object> attrs) {
         if (attrs == null) attrs = new HashMap<String,Object>();
-        attrs.put(Provisioning.A_zimbraActiveSyncBindPort, Integer.toString(zimbraActiveSyncBindPort));
+        attrs.put(Provisioning.A_zmailActiveSyncBindPort, Integer.toString(zmailActiveSyncBindPort));
         return attrs;
     }
 
     /**
      * port number on which ActiveSync server should listen
      *
-     * @param zimbraActiveSyncBindPort new value
-     * @throws com.zimbra.common.service.ServiceException if error during update
+     * @param zmailActiveSyncBindPort new value
+     * @throws org.zmail.common.service.ServiceException if error during update
      */
     @ZAttr(id=88)
-    public void setActiveSyncBindPortAsString(String zimbraActiveSyncBindPort) throws com.zimbra.common.service.ServiceException {
+    public void setActiveSyncBindPortAsString(String zmailActiveSyncBindPort) throws org.zmail.common.service.ServiceException {
         HashMap<String,Object> attrs = new HashMap<String,Object>();
-        attrs.put(Provisioning.A_zimbraActiveSyncBindPort, zimbraActiveSyncBindPort);
+        attrs.put(Provisioning.A_zmailActiveSyncBindPort, zmailActiveSyncBindPort);
         getProvisioning().modifyAttrs(this, attrs);
     }
 
     /**
      * port number on which ActiveSync server should listen
      *
-     * @param zimbraActiveSyncBindPort new value
+     * @param zmailActiveSyncBindPort new value
      * @param attrs existing map to populate, or null to create a new map
      * @return populated map to pass into Provisioning.modifyAttrs
      */
     @ZAttr(id=88)
-    public Map<String,Object> setActiveSyncBindPortAsString(String zimbraActiveSyncBindPort, Map<String,Object> attrs) {
+    public Map<String,Object> setActiveSyncBindPortAsString(String zmailActiveSyncBindPort, Map<String,Object> attrs) {
         if (attrs == null) attrs = new HashMap<String,Object>();
-        attrs.put(Provisioning.A_zimbraActiveSyncBindPort, zimbraActiveSyncBindPort);
+        attrs.put(Provisioning.A_zmailActiveSyncBindPort, zmailActiveSyncBindPort);
         return attrs;
     }
 
     /**
      * port number on which ActiveSync server should listen
      *
-     * @throws com.zimbra.common.service.ServiceException if error during update
+     * @throws org.zmail.common.service.ServiceException if error during update
      */
     @ZAttr(id=88)
-    public void unsetActiveSyncBindPort() throws com.zimbra.common.service.ServiceException {
+    public void unsetActiveSyncBindPort() throws org.zmail.common.service.ServiceException {
         HashMap<String,Object> attrs = new HashMap<String,Object>();
-        attrs.put(Provisioning.A_zimbraActiveSyncBindPort, "");
+        attrs.put(Provisioning.A_zmailActiveSyncBindPort, "");
         getProvisioning().modifyAttrs(this, attrs);
     }
 
@@ -643,56 +643,56 @@ public abstract class ZAttrConfig extends Entry {
     @ZAttr(id=88)
     public Map<String,Object> unsetActiveSyncBindPort(Map<String,Object> attrs) {
         if (attrs == null) attrs = new HashMap<String,Object>();
-        attrs.put(Provisioning.A_zimbraActiveSyncBindPort, "");
+        attrs.put(Provisioning.A_zmailActiveSyncBindPort, "");
         return attrs;
     }
 
     /**
      * Whether to expose version on POP3 banner
      *
-     * @return zimbraActiveSyncExposeVersionOnBanner, or false if unset
+     * @return zmailActiveSyncExposeVersionOnBanner, or false if unset
      */
     @ZAttr(id=91)
     public boolean isActiveSyncExposeVersionOnBanner() {
-        return getBooleanAttr(Provisioning.A_zimbraActiveSyncExposeVersionOnBanner, false);
+        return getBooleanAttr(Provisioning.A_zmailActiveSyncExposeVersionOnBanner, false);
     }
 
     /**
      * Whether to expose version on POP3 banner
      *
-     * @param zimbraActiveSyncExposeVersionOnBanner new value
-     * @throws com.zimbra.common.service.ServiceException if error during update
+     * @param zmailActiveSyncExposeVersionOnBanner new value
+     * @throws org.zmail.common.service.ServiceException if error during update
      */
     @ZAttr(id=91)
-    public void setActiveSyncExposeVersionOnBanner(boolean zimbraActiveSyncExposeVersionOnBanner) throws com.zimbra.common.service.ServiceException {
+    public void setActiveSyncExposeVersionOnBanner(boolean zmailActiveSyncExposeVersionOnBanner) throws org.zmail.common.service.ServiceException {
         HashMap<String,Object> attrs = new HashMap<String,Object>();
-        attrs.put(Provisioning.A_zimbraActiveSyncExposeVersionOnBanner, zimbraActiveSyncExposeVersionOnBanner ? Provisioning.TRUE : Provisioning.FALSE);
+        attrs.put(Provisioning.A_zmailActiveSyncExposeVersionOnBanner, zmailActiveSyncExposeVersionOnBanner ? Provisioning.TRUE : Provisioning.FALSE);
         getProvisioning().modifyAttrs(this, attrs);
     }
 
     /**
      * Whether to expose version on POP3 banner
      *
-     * @param zimbraActiveSyncExposeVersionOnBanner new value
+     * @param zmailActiveSyncExposeVersionOnBanner new value
      * @param attrs existing map to populate, or null to create a new map
      * @return populated map to pass into Provisioning.modifyAttrs
      */
     @ZAttr(id=91)
-    public Map<String,Object> setActiveSyncExposeVersionOnBanner(boolean zimbraActiveSyncExposeVersionOnBanner, Map<String,Object> attrs) {
+    public Map<String,Object> setActiveSyncExposeVersionOnBanner(boolean zmailActiveSyncExposeVersionOnBanner, Map<String,Object> attrs) {
         if (attrs == null) attrs = new HashMap<String,Object>();
-        attrs.put(Provisioning.A_zimbraActiveSyncExposeVersionOnBanner, zimbraActiveSyncExposeVersionOnBanner ? Provisioning.TRUE : Provisioning.FALSE);
+        attrs.put(Provisioning.A_zmailActiveSyncExposeVersionOnBanner, zmailActiveSyncExposeVersionOnBanner ? Provisioning.TRUE : Provisioning.FALSE);
         return attrs;
     }
 
     /**
      * Whether to expose version on POP3 banner
      *
-     * @throws com.zimbra.common.service.ServiceException if error during update
+     * @throws org.zmail.common.service.ServiceException if error during update
      */
     @ZAttr(id=91)
-    public void unsetActiveSyncExposeVersionOnBanner() throws com.zimbra.common.service.ServiceException {
+    public void unsetActiveSyncExposeVersionOnBanner() throws org.zmail.common.service.ServiceException {
         HashMap<String,Object> attrs = new HashMap<String,Object>();
-        attrs.put(Provisioning.A_zimbraActiveSyncExposeVersionOnBanner, "");
+        attrs.put(Provisioning.A_zmailActiveSyncExposeVersionOnBanner, "");
         getProvisioning().modifyAttrs(this, attrs);
     }
 
@@ -705,7 +705,7 @@ public abstract class ZAttrConfig extends Entry {
     @ZAttr(id=91)
     public Map<String,Object> unsetActiveSyncExposeVersionOnBanner(Map<String,Object> attrs) {
         if (attrs == null) attrs = new HashMap<String,Object>();
-        attrs.put(Provisioning.A_zimbraActiveSyncExposeVersionOnBanner, "");
+        attrs.put(Provisioning.A_zmailActiveSyncExposeVersionOnBanner, "");
         return attrs;
     }
 
@@ -713,24 +713,24 @@ public abstract class ZAttrConfig extends Entry {
      * Maximum number of concurrent ActiveSync connections allowed. New
      * connections exceeding this limit are rejected.
      *
-     * @return zimbraActiveSyncMaxConnections, or 200 if unset
+     * @return zmailActiveSyncMaxConnections, or 200 if unset
      */
     @ZAttr(id=84)
     public int getActiveSyncMaxConnections() {
-        return getIntAttr(Provisioning.A_zimbraActiveSyncMaxConnections, 200);
+        return getIntAttr(Provisioning.A_zmailActiveSyncMaxConnections, 200);
     }
 
     /**
      * Maximum number of concurrent ActiveSync connections allowed. New
      * connections exceeding this limit are rejected.
      *
-     * @param zimbraActiveSyncMaxConnections new value
-     * @throws com.zimbra.common.service.ServiceException if error during update
+     * @param zmailActiveSyncMaxConnections new value
+     * @throws org.zmail.common.service.ServiceException if error during update
      */
     @ZAttr(id=84)
-    public void setActiveSyncMaxConnections(int zimbraActiveSyncMaxConnections) throws com.zimbra.common.service.ServiceException {
+    public void setActiveSyncMaxConnections(int zmailActiveSyncMaxConnections) throws org.zmail.common.service.ServiceException {
         HashMap<String,Object> attrs = new HashMap<String,Object>();
-        attrs.put(Provisioning.A_zimbraActiveSyncMaxConnections, Integer.toString(zimbraActiveSyncMaxConnections));
+        attrs.put(Provisioning.A_zmailActiveSyncMaxConnections, Integer.toString(zmailActiveSyncMaxConnections));
         getProvisioning().modifyAttrs(this, attrs);
     }
 
@@ -738,14 +738,14 @@ public abstract class ZAttrConfig extends Entry {
      * Maximum number of concurrent ActiveSync connections allowed. New
      * connections exceeding this limit are rejected.
      *
-     * @param zimbraActiveSyncMaxConnections new value
+     * @param zmailActiveSyncMaxConnections new value
      * @param attrs existing map to populate, or null to create a new map
      * @return populated map to pass into Provisioning.modifyAttrs
      */
     @ZAttr(id=84)
-    public Map<String,Object> setActiveSyncMaxConnections(int zimbraActiveSyncMaxConnections, Map<String,Object> attrs) {
+    public Map<String,Object> setActiveSyncMaxConnections(int zmailActiveSyncMaxConnections, Map<String,Object> attrs) {
         if (attrs == null) attrs = new HashMap<String,Object>();
-        attrs.put(Provisioning.A_zimbraActiveSyncMaxConnections, Integer.toString(zimbraActiveSyncMaxConnections));
+        attrs.put(Provisioning.A_zmailActiveSyncMaxConnections, Integer.toString(zmailActiveSyncMaxConnections));
         return attrs;
     }
 
@@ -753,12 +753,12 @@ public abstract class ZAttrConfig extends Entry {
      * Maximum number of concurrent ActiveSync connections allowed. New
      * connections exceeding this limit are rejected.
      *
-     * @throws com.zimbra.common.service.ServiceException if error during update
+     * @throws org.zmail.common.service.ServiceException if error during update
      */
     @ZAttr(id=84)
-    public void unsetActiveSyncMaxConnections() throws com.zimbra.common.service.ServiceException {
+    public void unsetActiveSyncMaxConnections() throws org.zmail.common.service.ServiceException {
         HashMap<String,Object> attrs = new HashMap<String,Object>();
-        attrs.put(Provisioning.A_zimbraActiveSyncMaxConnections, "");
+        attrs.put(Provisioning.A_zmailActiveSyncMaxConnections, "");
         getProvisioning().modifyAttrs(this, attrs);
     }
 
@@ -772,56 +772,56 @@ public abstract class ZAttrConfig extends Entry {
     @ZAttr(id=84)
     public Map<String,Object> unsetActiveSyncMaxConnections(Map<String,Object> attrs) {
         if (attrs == null) attrs = new HashMap<String,Object>();
-        attrs.put(Provisioning.A_zimbraActiveSyncMaxConnections, "");
+        attrs.put(Provisioning.A_zmailActiveSyncMaxConnections, "");
         return attrs;
     }
 
     /**
      * number of handler threads
      *
-     * @return zimbraActiveSyncNumThreads, or 100 if unset
+     * @return zmailActiveSyncNumThreads, or 100 if unset
      */
     @ZAttr(id=85)
     public int getActiveSyncNumThreads() {
-        return getIntAttr(Provisioning.A_zimbraActiveSyncNumThreads, 100);
+        return getIntAttr(Provisioning.A_zmailActiveSyncNumThreads, 100);
     }
 
     /**
      * number of handler threads
      *
-     * @param zimbraActiveSyncNumThreads new value
-     * @throws com.zimbra.common.service.ServiceException if error during update
+     * @param zmailActiveSyncNumThreads new value
+     * @throws org.zmail.common.service.ServiceException if error during update
      */
     @ZAttr(id=85)
-    public void setActiveSyncNumThreads(int zimbraActiveSyncNumThreads) throws com.zimbra.common.service.ServiceException {
+    public void setActiveSyncNumThreads(int zmailActiveSyncNumThreads) throws org.zmail.common.service.ServiceException {
         HashMap<String,Object> attrs = new HashMap<String,Object>();
-        attrs.put(Provisioning.A_zimbraActiveSyncNumThreads, Integer.toString(zimbraActiveSyncNumThreads));
+        attrs.put(Provisioning.A_zmailActiveSyncNumThreads, Integer.toString(zmailActiveSyncNumThreads));
         getProvisioning().modifyAttrs(this, attrs);
     }
 
     /**
      * number of handler threads
      *
-     * @param zimbraActiveSyncNumThreads new value
+     * @param zmailActiveSyncNumThreads new value
      * @param attrs existing map to populate, or null to create a new map
      * @return populated map to pass into Provisioning.modifyAttrs
      */
     @ZAttr(id=85)
-    public Map<String,Object> setActiveSyncNumThreads(int zimbraActiveSyncNumThreads, Map<String,Object> attrs) {
+    public Map<String,Object> setActiveSyncNumThreads(int zmailActiveSyncNumThreads, Map<String,Object> attrs) {
         if (attrs == null) attrs = new HashMap<String,Object>();
-        attrs.put(Provisioning.A_zimbraActiveSyncNumThreads, Integer.toString(zimbraActiveSyncNumThreads));
+        attrs.put(Provisioning.A_zmailActiveSyncNumThreads, Integer.toString(zmailActiveSyncNumThreads));
         return attrs;
     }
 
     /**
      * number of handler threads
      *
-     * @throws com.zimbra.common.service.ServiceException if error during update
+     * @throws org.zmail.common.service.ServiceException if error during update
      */
     @ZAttr(id=85)
-    public void unsetActiveSyncNumThreads() throws com.zimbra.common.service.ServiceException {
+    public void unsetActiveSyncNumThreads() throws org.zmail.common.service.ServiceException {
         HashMap<String,Object> attrs = new HashMap<String,Object>();
-        attrs.put(Provisioning.A_zimbraActiveSyncNumThreads, "");
+        attrs.put(Provisioning.A_zmailActiveSyncNumThreads, "");
         getProvisioning().modifyAttrs(this, attrs);
     }
 
@@ -834,7 +834,7 @@ public abstract class ZAttrConfig extends Entry {
     @ZAttr(id=85)
     public Map<String,Object> unsetActiveSyncNumThreads(Map<String,Object> attrs) {
         if (attrs == null) attrs = new HashMap<String,Object>();
-        attrs.put(Provisioning.A_zimbraActiveSyncNumThreads, "");
+        attrs.put(Provisioning.A_zmailActiveSyncNumThreads, "");
         return attrs;
     }
 
@@ -845,86 +845,86 @@ public abstract class ZAttrConfig extends Entry {
      *
      * @see #getActiveSyncSSLBindPortAsString()
      *
-     * @return zimbraActiveSyncSSLBindPort, or 9995 if unset
+     * @return zmailActiveSyncSSLBindPort, or 9995 if unset
      */
     @ZAttr(id=87)
     public int getActiveSyncSSLBindPort() {
-        return getIntAttr(Provisioning.A_zimbraActiveSyncSSLBindPort, 9995);
+        return getIntAttr(Provisioning.A_zmailActiveSyncSSLBindPort, 9995);
     }
 
     /**
      * port number on which ActiveSync server should listen
      *
-     * @return zimbraActiveSyncSSLBindPort, or "9995" if unset
+     * @return zmailActiveSyncSSLBindPort, or "9995" if unset
      */
     @ZAttr(id=87)
     public String getActiveSyncSSLBindPortAsString() {
-        return getAttr(Provisioning.A_zimbraActiveSyncSSLBindPort, "9995");
+        return getAttr(Provisioning.A_zmailActiveSyncSSLBindPort, "9995");
     }
 
     /**
      * port number on which ActiveSync server should listen
      *
-     * @param zimbraActiveSyncSSLBindPort new value
-     * @throws com.zimbra.common.service.ServiceException if error during update
+     * @param zmailActiveSyncSSLBindPort new value
+     * @throws org.zmail.common.service.ServiceException if error during update
      */
     @ZAttr(id=87)
-    public void setActiveSyncSSLBindPort(int zimbraActiveSyncSSLBindPort) throws com.zimbra.common.service.ServiceException {
+    public void setActiveSyncSSLBindPort(int zmailActiveSyncSSLBindPort) throws org.zmail.common.service.ServiceException {
         HashMap<String,Object> attrs = new HashMap<String,Object>();
-        attrs.put(Provisioning.A_zimbraActiveSyncSSLBindPort, Integer.toString(zimbraActiveSyncSSLBindPort));
+        attrs.put(Provisioning.A_zmailActiveSyncSSLBindPort, Integer.toString(zmailActiveSyncSSLBindPort));
         getProvisioning().modifyAttrs(this, attrs);
     }
 
     /**
      * port number on which ActiveSync server should listen
      *
-     * @param zimbraActiveSyncSSLBindPort new value
+     * @param zmailActiveSyncSSLBindPort new value
      * @param attrs existing map to populate, or null to create a new map
      * @return populated map to pass into Provisioning.modifyAttrs
      */
     @ZAttr(id=87)
-    public Map<String,Object> setActiveSyncSSLBindPort(int zimbraActiveSyncSSLBindPort, Map<String,Object> attrs) {
+    public Map<String,Object> setActiveSyncSSLBindPort(int zmailActiveSyncSSLBindPort, Map<String,Object> attrs) {
         if (attrs == null) attrs = new HashMap<String,Object>();
-        attrs.put(Provisioning.A_zimbraActiveSyncSSLBindPort, Integer.toString(zimbraActiveSyncSSLBindPort));
+        attrs.put(Provisioning.A_zmailActiveSyncSSLBindPort, Integer.toString(zmailActiveSyncSSLBindPort));
         return attrs;
     }
 
     /**
      * port number on which ActiveSync server should listen
      *
-     * @param zimbraActiveSyncSSLBindPort new value
-     * @throws com.zimbra.common.service.ServiceException if error during update
+     * @param zmailActiveSyncSSLBindPort new value
+     * @throws org.zmail.common.service.ServiceException if error during update
      */
     @ZAttr(id=87)
-    public void setActiveSyncSSLBindPortAsString(String zimbraActiveSyncSSLBindPort) throws com.zimbra.common.service.ServiceException {
+    public void setActiveSyncSSLBindPortAsString(String zmailActiveSyncSSLBindPort) throws org.zmail.common.service.ServiceException {
         HashMap<String,Object> attrs = new HashMap<String,Object>();
-        attrs.put(Provisioning.A_zimbraActiveSyncSSLBindPort, zimbraActiveSyncSSLBindPort);
+        attrs.put(Provisioning.A_zmailActiveSyncSSLBindPort, zmailActiveSyncSSLBindPort);
         getProvisioning().modifyAttrs(this, attrs);
     }
 
     /**
      * port number on which ActiveSync server should listen
      *
-     * @param zimbraActiveSyncSSLBindPort new value
+     * @param zmailActiveSyncSSLBindPort new value
      * @param attrs existing map to populate, or null to create a new map
      * @return populated map to pass into Provisioning.modifyAttrs
      */
     @ZAttr(id=87)
-    public Map<String,Object> setActiveSyncSSLBindPortAsString(String zimbraActiveSyncSSLBindPort, Map<String,Object> attrs) {
+    public Map<String,Object> setActiveSyncSSLBindPortAsString(String zmailActiveSyncSSLBindPort, Map<String,Object> attrs) {
         if (attrs == null) attrs = new HashMap<String,Object>();
-        attrs.put(Provisioning.A_zimbraActiveSyncSSLBindPort, zimbraActiveSyncSSLBindPort);
+        attrs.put(Provisioning.A_zmailActiveSyncSSLBindPort, zmailActiveSyncSSLBindPort);
         return attrs;
     }
 
     /**
      * port number on which ActiveSync server should listen
      *
-     * @throws com.zimbra.common.service.ServiceException if error during update
+     * @throws org.zmail.common.service.ServiceException if error during update
      */
     @ZAttr(id=87)
-    public void unsetActiveSyncSSLBindPort() throws com.zimbra.common.service.ServiceException {
+    public void unsetActiveSyncSSLBindPort() throws org.zmail.common.service.ServiceException {
         HashMap<String,Object> attrs = new HashMap<String,Object>();
-        attrs.put(Provisioning.A_zimbraActiveSyncSSLBindPort, "");
+        attrs.put(Provisioning.A_zmailActiveSyncSSLBindPort, "");
         getProvisioning().modifyAttrs(this, attrs);
     }
 
@@ -937,56 +937,56 @@ public abstract class ZAttrConfig extends Entry {
     @ZAttr(id=87)
     public Map<String,Object> unsetActiveSyncSSLBindPort(Map<String,Object> attrs) {
         if (attrs == null) attrs = new HashMap<String,Object>();
-        attrs.put(Provisioning.A_zimbraActiveSyncSSLBindPort, "");
+        attrs.put(Provisioning.A_zmailActiveSyncSSLBindPort, "");
         return attrs;
     }
 
     /**
      * number of seconds to wait before forcing ActiveSync server shutdown
      *
-     * @return zimbraActiveSyncShutdownGraceSeconds, or 10 if unset
+     * @return zmailActiveSyncShutdownGraceSeconds, or 10 if unset
      */
     @ZAttr(id=86)
     public int getActiveSyncShutdownGraceSeconds() {
-        return getIntAttr(Provisioning.A_zimbraActiveSyncShutdownGraceSeconds, 10);
+        return getIntAttr(Provisioning.A_zmailActiveSyncShutdownGraceSeconds, 10);
     }
 
     /**
      * number of seconds to wait before forcing ActiveSync server shutdown
      *
-     * @param zimbraActiveSyncShutdownGraceSeconds new value
-     * @throws com.zimbra.common.service.ServiceException if error during update
+     * @param zmailActiveSyncShutdownGraceSeconds new value
+     * @throws org.zmail.common.service.ServiceException if error during update
      */
     @ZAttr(id=86)
-    public void setActiveSyncShutdownGraceSeconds(int zimbraActiveSyncShutdownGraceSeconds) throws com.zimbra.common.service.ServiceException {
+    public void setActiveSyncShutdownGraceSeconds(int zmailActiveSyncShutdownGraceSeconds) throws org.zmail.common.service.ServiceException {
         HashMap<String,Object> attrs = new HashMap<String,Object>();
-        attrs.put(Provisioning.A_zimbraActiveSyncShutdownGraceSeconds, Integer.toString(zimbraActiveSyncShutdownGraceSeconds));
+        attrs.put(Provisioning.A_zmailActiveSyncShutdownGraceSeconds, Integer.toString(zmailActiveSyncShutdownGraceSeconds));
         getProvisioning().modifyAttrs(this, attrs);
     }
 
     /**
      * number of seconds to wait before forcing ActiveSync server shutdown
      *
-     * @param zimbraActiveSyncShutdownGraceSeconds new value
+     * @param zmailActiveSyncShutdownGraceSeconds new value
      * @param attrs existing map to populate, or null to create a new map
      * @return populated map to pass into Provisioning.modifyAttrs
      */
     @ZAttr(id=86)
-    public Map<String,Object> setActiveSyncShutdownGraceSeconds(int zimbraActiveSyncShutdownGraceSeconds, Map<String,Object> attrs) {
+    public Map<String,Object> setActiveSyncShutdownGraceSeconds(int zmailActiveSyncShutdownGraceSeconds, Map<String,Object> attrs) {
         if (attrs == null) attrs = new HashMap<String,Object>();
-        attrs.put(Provisioning.A_zimbraActiveSyncShutdownGraceSeconds, Integer.toString(zimbraActiveSyncShutdownGraceSeconds));
+        attrs.put(Provisioning.A_zmailActiveSyncShutdownGraceSeconds, Integer.toString(zmailActiveSyncShutdownGraceSeconds));
         return attrs;
     }
 
     /**
      * number of seconds to wait before forcing ActiveSync server shutdown
      *
-     * @throws com.zimbra.common.service.ServiceException if error during update
+     * @throws org.zmail.common.service.ServiceException if error during update
      */
     @ZAttr(id=86)
-    public void unsetActiveSyncShutdownGraceSeconds() throws com.zimbra.common.service.ServiceException {
+    public void unsetActiveSyncShutdownGraceSeconds() throws org.zmail.common.service.ServiceException {
         HashMap<String,Object> attrs = new HashMap<String,Object>();
-        attrs.put(Provisioning.A_zimbraActiveSyncShutdownGraceSeconds, "");
+        attrs.put(Provisioning.A_zmailActiveSyncShutdownGraceSeconds, "");
         getProvisioning().modifyAttrs(this, attrs);
     }
 
@@ -999,7 +999,7 @@ public abstract class ZAttrConfig extends Entry {
     @ZAttr(id=86)
     public Map<String,Object> unsetActiveSyncShutdownGraceSeconds(Map<String,Object> attrs) {
         if (attrs == null) attrs = new HashMap<String,Object>();
-        attrs.put(Provisioning.A_zimbraActiveSyncShutdownGraceSeconds, "");
+        attrs.put(Provisioning.A_zmailActiveSyncShutdownGraceSeconds, "");
         return attrs;
     }
 
@@ -3195,9 +3195,9 @@ public abstract class ZAttrConfig extends Entry {
      * factors: zmailAutoProvBatchSize and number of domains configured in
      * zmailAutoProvScheduledDomains. At each interval, the auto provision
      * thread iterates through all domains in zmailAutoProvScheduledDomains
-     * and auto creates up to domain.zmailAutoProvBatchSize accounts. If
-     * that process takes longer than zmailAutoProvPollingInterval then the
-     * next iteration will start immediately instead of waiting for
+     * and auto creates up to domain.zmailAutoProvBatchSize accounts. If that
+     * process takes longer than zmailAutoProvPollingInterval then the next
+     * iteration will start immediately instead of waiting for
      * zmailAutoProvPollingInterval amount of time. If set to 0 when server
      * starts up, the auto provision thread will not start. If changed from a
      * non-0 value to 0 while server is running, the auto provision thread
@@ -3228,9 +3228,9 @@ public abstract class ZAttrConfig extends Entry {
      * factors: zmailAutoProvBatchSize and number of domains configured in
      * zmailAutoProvScheduledDomains. At each interval, the auto provision
      * thread iterates through all domains in zmailAutoProvScheduledDomains
-     * and auto creates up to domain.zmailAutoProvBatchSize accounts. If
-     * that process takes longer than zmailAutoProvPollingInterval then the
-     * next iteration will start immediately instead of waiting for
+     * and auto creates up to domain.zmailAutoProvBatchSize accounts. If that
+     * process takes longer than zmailAutoProvPollingInterval then the next
+     * iteration will start immediately instead of waiting for
      * zmailAutoProvPollingInterval amount of time. If set to 0 when server
      * starts up, the auto provision thread will not start. If changed from a
      * non-0 value to 0 while server is running, the auto provision thread
@@ -3257,9 +3257,9 @@ public abstract class ZAttrConfig extends Entry {
      * factors: zmailAutoProvBatchSize and number of domains configured in
      * zmailAutoProvScheduledDomains. At each interval, the auto provision
      * thread iterates through all domains in zmailAutoProvScheduledDomains
-     * and auto creates up to domain.zmailAutoProvBatchSize accounts. If
-     * that process takes longer than zmailAutoProvPollingInterval then the
-     * next iteration will start immediately instead of waiting for
+     * and auto creates up to domain.zmailAutoProvBatchSize accounts. If that
+     * process takes longer than zmailAutoProvPollingInterval then the next
+     * iteration will start immediately instead of waiting for
      * zmailAutoProvPollingInterval amount of time. If set to 0 when server
      * starts up, the auto provision thread will not start. If changed from a
      * non-0 value to 0 while server is running, the auto provision thread
@@ -3289,9 +3289,9 @@ public abstract class ZAttrConfig extends Entry {
      * factors: zmailAutoProvBatchSize and number of domains configured in
      * zmailAutoProvScheduledDomains. At each interval, the auto provision
      * thread iterates through all domains in zmailAutoProvScheduledDomains
-     * and auto creates up to domain.zmailAutoProvBatchSize accounts. If
-     * that process takes longer than zmailAutoProvPollingInterval then the
-     * next iteration will start immediately instead of waiting for
+     * and auto creates up to domain.zmailAutoProvBatchSize accounts. If that
+     * process takes longer than zmailAutoProvPollingInterval then the next
+     * iteration will start immediately instead of waiting for
      * zmailAutoProvPollingInterval amount of time. If set to 0 when server
      * starts up, the auto provision thread will not start. If changed from a
      * non-0 value to 0 while server is running, the auto provision thread
@@ -3322,9 +3322,9 @@ public abstract class ZAttrConfig extends Entry {
      * factors: zmailAutoProvBatchSize and number of domains configured in
      * zmailAutoProvScheduledDomains. At each interval, the auto provision
      * thread iterates through all domains in zmailAutoProvScheduledDomains
-     * and auto creates up to domain.zmailAutoProvBatchSize accounts. If
-     * that process takes longer than zmailAutoProvPollingInterval then the
-     * next iteration will start immediately instead of waiting for
+     * and auto creates up to domain.zmailAutoProvBatchSize accounts. If that
+     * process takes longer than zmailAutoProvPollingInterval then the next
+     * iteration will start immediately instead of waiting for
      * zmailAutoProvPollingInterval amount of time. If set to 0 when server
      * starts up, the auto provision thread will not start. If changed from a
      * non-0 value to 0 while server is running, the auto provision thread
@@ -3353,9 +3353,9 @@ public abstract class ZAttrConfig extends Entry {
      * factors: zmailAutoProvBatchSize and number of domains configured in
      * zmailAutoProvScheduledDomains. At each interval, the auto provision
      * thread iterates through all domains in zmailAutoProvScheduledDomains
-     * and auto creates up to domain.zmailAutoProvBatchSize accounts. If
-     * that process takes longer than zmailAutoProvPollingInterval then the
-     * next iteration will start immediately instead of waiting for
+     * and auto creates up to domain.zmailAutoProvBatchSize accounts. If that
+     * process takes longer than zmailAutoProvPollingInterval then the next
+     * iteration will start immediately instead of waiting for
      * zmailAutoProvPollingInterval amount of time. If set to 0 when server
      * starts up, the auto provision thread will not start. If changed from a
      * non-0 value to 0 while server is running, the auto provision thread
@@ -8819,9 +8819,9 @@ public abstract class ZAttrConfig extends Entry {
     }
 
     /**
-     * domain status. enum values are akin to those of zmailAccountStatus
-     * but the status affects all accounts on the domain. See table below for
-     * how zmailDomainStatus affects account status. active - see
+     * domain status. enum values are akin to those of zmailAccountStatus but
+     * the status affects all accounts on the domain. See table below for how
+     * zmailDomainStatus affects account status. active - see
      * zmailAccountStatus maintenance - see zmailAccountStatus locked - see
      * zmailAccountStatus closed - see zmailAccountStatus suspended -
      * maintenance + no creating/deleting/modifying accounts/DLs under the
@@ -8833,12 +8833,12 @@ public abstract class ZAttrConfig extends Entry {
      * cannot be done in admin console or zmprov. How zmailDomainStatus
      * affects account behavior : -------------------------------------
      * zmailDomainStatus account behavior
-     * ------------------------------------- active zmailAccountStatus
-     * locked zmailAccountStatus if it is maintenance or pending or closed,
-     * else locked maintenance zmailAccountStatus if it is pending or
-     * closed, else maintenance suspended zmailAccountStatus if it is
-     * pending or closed, else maintenance shutdown zmailAccountStatus if it
-     * is pending or closed, else maintenance closed closed
+     * ------------------------------------- active zmailAccountStatus locked
+     * zmailAccountStatus if it is maintenance or pending or closed, else
+     * locked maintenance zmailAccountStatus if it is pending or closed, else
+     * maintenance suspended zmailAccountStatus if it is pending or closed,
+     * else maintenance shutdown zmailAccountStatus if it is pending or
+     * closed, else maintenance closed closed
      *
      * <p>Valid values: [active, closed, locked, suspended, maintenance, shutdown]
      *
@@ -8852,9 +8852,9 @@ public abstract class ZAttrConfig extends Entry {
     }
 
     /**
-     * domain status. enum values are akin to those of zmailAccountStatus
-     * but the status affects all accounts on the domain. See table below for
-     * how zmailDomainStatus affects account status. active - see
+     * domain status. enum values are akin to those of zmailAccountStatus but
+     * the status affects all accounts on the domain. See table below for how
+     * zmailDomainStatus affects account status. active - see
      * zmailAccountStatus maintenance - see zmailAccountStatus locked - see
      * zmailAccountStatus closed - see zmailAccountStatus suspended -
      * maintenance + no creating/deleting/modifying accounts/DLs under the
@@ -8866,12 +8866,12 @@ public abstract class ZAttrConfig extends Entry {
      * cannot be done in admin console or zmprov. How zmailDomainStatus
      * affects account behavior : -------------------------------------
      * zmailDomainStatus account behavior
-     * ------------------------------------- active zmailAccountStatus
-     * locked zmailAccountStatus if it is maintenance or pending or closed,
-     * else locked maintenance zmailAccountStatus if it is pending or
-     * closed, else maintenance suspended zmailAccountStatus if it is
-     * pending or closed, else maintenance shutdown zmailAccountStatus if it
-     * is pending or closed, else maintenance closed closed
+     * ------------------------------------- active zmailAccountStatus locked
+     * zmailAccountStatus if it is maintenance or pending or closed, else
+     * locked maintenance zmailAccountStatus if it is pending or closed, else
+     * maintenance suspended zmailAccountStatus if it is pending or closed,
+     * else maintenance shutdown zmailAccountStatus if it is pending or
+     * closed, else maintenance closed closed
      *
      * <p>Valid values: [active, closed, locked, suspended, maintenance, shutdown]
      *
@@ -8885,9 +8885,9 @@ public abstract class ZAttrConfig extends Entry {
     }
 
     /**
-     * domain status. enum values are akin to those of zmailAccountStatus
-     * but the status affects all accounts on the domain. See table below for
-     * how zmailDomainStatus affects account status. active - see
+     * domain status. enum values are akin to those of zmailAccountStatus but
+     * the status affects all accounts on the domain. See table below for how
+     * zmailDomainStatus affects account status. active - see
      * zmailAccountStatus maintenance - see zmailAccountStatus locked - see
      * zmailAccountStatus closed - see zmailAccountStatus suspended -
      * maintenance + no creating/deleting/modifying accounts/DLs under the
@@ -8899,12 +8899,12 @@ public abstract class ZAttrConfig extends Entry {
      * cannot be done in admin console or zmprov. How zmailDomainStatus
      * affects account behavior : -------------------------------------
      * zmailDomainStatus account behavior
-     * ------------------------------------- active zmailAccountStatus
-     * locked zmailAccountStatus if it is maintenance or pending or closed,
-     * else locked maintenance zmailAccountStatus if it is pending or
-     * closed, else maintenance suspended zmailAccountStatus if it is
-     * pending or closed, else maintenance shutdown zmailAccountStatus if it
-     * is pending or closed, else maintenance closed closed
+     * ------------------------------------- active zmailAccountStatus locked
+     * zmailAccountStatus if it is maintenance or pending or closed, else
+     * locked maintenance zmailAccountStatus if it is pending or closed, else
+     * maintenance suspended zmailAccountStatus if it is pending or closed,
+     * else maintenance shutdown zmailAccountStatus if it is pending or
+     * closed, else maintenance closed closed
      *
      * <p>Valid values: [active, closed, locked, suspended, maintenance, shutdown]
      *
@@ -8921,9 +8921,9 @@ public abstract class ZAttrConfig extends Entry {
     }
 
     /**
-     * domain status. enum values are akin to those of zmailAccountStatus
-     * but the status affects all accounts on the domain. See table below for
-     * how zmailDomainStatus affects account status. active - see
+     * domain status. enum values are akin to those of zmailAccountStatus but
+     * the status affects all accounts on the domain. See table below for how
+     * zmailDomainStatus affects account status. active - see
      * zmailAccountStatus maintenance - see zmailAccountStatus locked - see
      * zmailAccountStatus closed - see zmailAccountStatus suspended -
      * maintenance + no creating/deleting/modifying accounts/DLs under the
@@ -8935,12 +8935,12 @@ public abstract class ZAttrConfig extends Entry {
      * cannot be done in admin console or zmprov. How zmailDomainStatus
      * affects account behavior : -------------------------------------
      * zmailDomainStatus account behavior
-     * ------------------------------------- active zmailAccountStatus
-     * locked zmailAccountStatus if it is maintenance or pending or closed,
-     * else locked maintenance zmailAccountStatus if it is pending or
-     * closed, else maintenance suspended zmailAccountStatus if it is
-     * pending or closed, else maintenance shutdown zmailAccountStatus if it
-     * is pending or closed, else maintenance closed closed
+     * ------------------------------------- active zmailAccountStatus locked
+     * zmailAccountStatus if it is maintenance or pending or closed, else
+     * locked maintenance zmailAccountStatus if it is pending or closed, else
+     * maintenance suspended zmailAccountStatus if it is pending or closed,
+     * else maintenance shutdown zmailAccountStatus if it is pending or
+     * closed, else maintenance closed closed
      *
      * <p>Valid values: [active, closed, locked, suspended, maintenance, shutdown]
      *
@@ -8958,9 +8958,9 @@ public abstract class ZAttrConfig extends Entry {
     }
 
     /**
-     * domain status. enum values are akin to those of zmailAccountStatus
-     * but the status affects all accounts on the domain. See table below for
-     * how zmailDomainStatus affects account status. active - see
+     * domain status. enum values are akin to those of zmailAccountStatus but
+     * the status affects all accounts on the domain. See table below for how
+     * zmailDomainStatus affects account status. active - see
      * zmailAccountStatus maintenance - see zmailAccountStatus locked - see
      * zmailAccountStatus closed - see zmailAccountStatus suspended -
      * maintenance + no creating/deleting/modifying accounts/DLs under the
@@ -8972,12 +8972,12 @@ public abstract class ZAttrConfig extends Entry {
      * cannot be done in admin console or zmprov. How zmailDomainStatus
      * affects account behavior : -------------------------------------
      * zmailDomainStatus account behavior
-     * ------------------------------------- active zmailAccountStatus
-     * locked zmailAccountStatus if it is maintenance or pending or closed,
-     * else locked maintenance zmailAccountStatus if it is pending or
-     * closed, else maintenance suspended zmailAccountStatus if it is
-     * pending or closed, else maintenance shutdown zmailAccountStatus if it
-     * is pending or closed, else maintenance closed closed
+     * ------------------------------------- active zmailAccountStatus locked
+     * zmailAccountStatus if it is maintenance or pending or closed, else
+     * locked maintenance zmailAccountStatus if it is pending or closed, else
+     * maintenance suspended zmailAccountStatus if it is pending or closed,
+     * else maintenance shutdown zmailAccountStatus if it is pending or
+     * closed, else maintenance closed closed
      *
      * <p>Valid values: [active, closed, locked, suspended, maintenance, shutdown]
      *
@@ -8994,9 +8994,9 @@ public abstract class ZAttrConfig extends Entry {
     }
 
     /**
-     * domain status. enum values are akin to those of zmailAccountStatus
-     * but the status affects all accounts on the domain. See table below for
-     * how zmailDomainStatus affects account status. active - see
+     * domain status. enum values are akin to those of zmailAccountStatus but
+     * the status affects all accounts on the domain. See table below for how
+     * zmailDomainStatus affects account status. active - see
      * zmailAccountStatus maintenance - see zmailAccountStatus locked - see
      * zmailAccountStatus closed - see zmailAccountStatus suspended -
      * maintenance + no creating/deleting/modifying accounts/DLs under the
@@ -9008,12 +9008,12 @@ public abstract class ZAttrConfig extends Entry {
      * cannot be done in admin console or zmprov. How zmailDomainStatus
      * affects account behavior : -------------------------------------
      * zmailDomainStatus account behavior
-     * ------------------------------------- active zmailAccountStatus
-     * locked zmailAccountStatus if it is maintenance or pending or closed,
-     * else locked maintenance zmailAccountStatus if it is pending or
-     * closed, else maintenance suspended zmailAccountStatus if it is
-     * pending or closed, else maintenance shutdown zmailAccountStatus if it
-     * is pending or closed, else maintenance closed closed
+     * ------------------------------------- active zmailAccountStatus locked
+     * zmailAccountStatus if it is maintenance or pending or closed, else
+     * locked maintenance zmailAccountStatus if it is pending or closed, else
+     * maintenance suspended zmailAccountStatus if it is pending or closed,
+     * else maintenance shutdown zmailAccountStatus if it is pending or
+     * closed, else maintenance closed closed
      *
      * <p>Valid values: [active, closed, locked, suspended, maintenance, shutdown]
      *
@@ -9031,9 +9031,9 @@ public abstract class ZAttrConfig extends Entry {
     }
 
     /**
-     * domain status. enum values are akin to those of zmailAccountStatus
-     * but the status affects all accounts on the domain. See table below for
-     * how zmailDomainStatus affects account status. active - see
+     * domain status. enum values are akin to those of zmailAccountStatus but
+     * the status affects all accounts on the domain. See table below for how
+     * zmailDomainStatus affects account status. active - see
      * zmailAccountStatus maintenance - see zmailAccountStatus locked - see
      * zmailAccountStatus closed - see zmailAccountStatus suspended -
      * maintenance + no creating/deleting/modifying accounts/DLs under the
@@ -9045,12 +9045,12 @@ public abstract class ZAttrConfig extends Entry {
      * cannot be done in admin console or zmprov. How zmailDomainStatus
      * affects account behavior : -------------------------------------
      * zmailDomainStatus account behavior
-     * ------------------------------------- active zmailAccountStatus
-     * locked zmailAccountStatus if it is maintenance or pending or closed,
-     * else locked maintenance zmailAccountStatus if it is pending or
-     * closed, else maintenance suspended zmailAccountStatus if it is
-     * pending or closed, else maintenance shutdown zmailAccountStatus if it
-     * is pending or closed, else maintenance closed closed
+     * ------------------------------------- active zmailAccountStatus locked
+     * zmailAccountStatus if it is maintenance or pending or closed, else
+     * locked maintenance zmailAccountStatus if it is pending or closed, else
+     * maintenance suspended zmailAccountStatus if it is pending or closed,
+     * else maintenance shutdown zmailAccountStatus if it is pending or
+     * closed, else maintenance closed closed
      *
      * <p>Valid values: [active, closed, locked, suspended, maintenance, shutdown]
      *
@@ -9066,9 +9066,9 @@ public abstract class ZAttrConfig extends Entry {
     }
 
     /**
-     * domain status. enum values are akin to those of zmailAccountStatus
-     * but the status affects all accounts on the domain. See table below for
-     * how zmailDomainStatus affects account status. active - see
+     * domain status. enum values are akin to those of zmailAccountStatus but
+     * the status affects all accounts on the domain. See table below for how
+     * zmailDomainStatus affects account status. active - see
      * zmailAccountStatus maintenance - see zmailAccountStatus locked - see
      * zmailAccountStatus closed - see zmailAccountStatus suspended -
      * maintenance + no creating/deleting/modifying accounts/DLs under the
@@ -9080,12 +9080,12 @@ public abstract class ZAttrConfig extends Entry {
      * cannot be done in admin console or zmprov. How zmailDomainStatus
      * affects account behavior : -------------------------------------
      * zmailDomainStatus account behavior
-     * ------------------------------------- active zmailAccountStatus
-     * locked zmailAccountStatus if it is maintenance or pending or closed,
-     * else locked maintenance zmailAccountStatus if it is pending or
-     * closed, else maintenance suspended zmailAccountStatus if it is
-     * pending or closed, else maintenance shutdown zmailAccountStatus if it
-     * is pending or closed, else maintenance closed closed
+     * ------------------------------------- active zmailAccountStatus locked
+     * zmailAccountStatus if it is maintenance or pending or closed, else
+     * locked maintenance zmailAccountStatus if it is pending or closed, else
+     * maintenance suspended zmailAccountStatus if it is pending or closed,
+     * else maintenance shutdown zmailAccountStatus if it is pending or
+     * closed, else maintenance closed closed
      *
      * <p>Valid values: [active, closed, locked, suspended, maintenance, shutdown]
      *
@@ -9177,10 +9177,10 @@ public abstract class ZAttrConfig extends Entry {
      * Interval between successive executions of the task that: - disables an
      * external virtual account when all its accessible shares have been
      * revoked or expired. - deletes an external virtual account after
-     * zmailExternalAccountLifetimeAfterDisabled of being disabled. . Must
-     * be in valid duration format: {digits}{time-unit}. digits: 0-9,
-     * time-unit: [hmsd]|ms. h - hours, m - minutes, s - seconds, d - days,
-     * ms - milliseconds. If time unit is not specified, the default is
+     * zmailExternalAccountLifetimeAfterDisabled of being disabled. . Must be
+     * in valid duration format: {digits}{time-unit}. digits: 0-9, time-unit:
+     * [hmsd]|ms. h - hours, m - minutes, s - seconds, d - days, ms -
+     * milliseconds. If time unit is not specified, the default is
      * s(seconds).
      *
      * <p>Use getExternalAccountStatusCheckIntervalAsString to access value as a string.
@@ -9200,10 +9200,10 @@ public abstract class ZAttrConfig extends Entry {
      * Interval between successive executions of the task that: - disables an
      * external virtual account when all its accessible shares have been
      * revoked or expired. - deletes an external virtual account after
-     * zmailExternalAccountLifetimeAfterDisabled of being disabled. . Must
-     * be in valid duration format: {digits}{time-unit}. digits: 0-9,
-     * time-unit: [hmsd]|ms. h - hours, m - minutes, s - seconds, d - days,
-     * ms - milliseconds. If time unit is not specified, the default is
+     * zmailExternalAccountLifetimeAfterDisabled of being disabled. . Must be
+     * in valid duration format: {digits}{time-unit}. digits: 0-9, time-unit:
+     * [hmsd]|ms. h - hours, m - minutes, s - seconds, d - days, ms -
+     * milliseconds. If time unit is not specified, the default is
      * s(seconds).
      *
      * @return zmailExternalAccountStatusCheckInterval, or "1d" if unset
@@ -9219,10 +9219,10 @@ public abstract class ZAttrConfig extends Entry {
      * Interval between successive executions of the task that: - disables an
      * external virtual account when all its accessible shares have been
      * revoked or expired. - deletes an external virtual account after
-     * zmailExternalAccountLifetimeAfterDisabled of being disabled. . Must
-     * be in valid duration format: {digits}{time-unit}. digits: 0-9,
-     * time-unit: [hmsd]|ms. h - hours, m - minutes, s - seconds, d - days,
-     * ms - milliseconds. If time unit is not specified, the default is
+     * zmailExternalAccountLifetimeAfterDisabled of being disabled. . Must be
+     * in valid duration format: {digits}{time-unit}. digits: 0-9, time-unit:
+     * [hmsd]|ms. h - hours, m - minutes, s - seconds, d - days, ms -
+     * milliseconds. If time unit is not specified, the default is
      * s(seconds).
      *
      * @param zmailExternalAccountStatusCheckInterval new value
@@ -9241,10 +9241,10 @@ public abstract class ZAttrConfig extends Entry {
      * Interval between successive executions of the task that: - disables an
      * external virtual account when all its accessible shares have been
      * revoked or expired. - deletes an external virtual account after
-     * zmailExternalAccountLifetimeAfterDisabled of being disabled. . Must
-     * be in valid duration format: {digits}{time-unit}. digits: 0-9,
-     * time-unit: [hmsd]|ms. h - hours, m - minutes, s - seconds, d - days,
-     * ms - milliseconds. If time unit is not specified, the default is
+     * zmailExternalAccountLifetimeAfterDisabled of being disabled. . Must be
+     * in valid duration format: {digits}{time-unit}. digits: 0-9, time-unit:
+     * [hmsd]|ms. h - hours, m - minutes, s - seconds, d - days, ms -
+     * milliseconds. If time unit is not specified, the default is
      * s(seconds).
      *
      * @param zmailExternalAccountStatusCheckInterval new value
@@ -9264,10 +9264,10 @@ public abstract class ZAttrConfig extends Entry {
      * Interval between successive executions of the task that: - disables an
      * external virtual account when all its accessible shares have been
      * revoked or expired. - deletes an external virtual account after
-     * zmailExternalAccountLifetimeAfterDisabled of being disabled. . Must
-     * be in valid duration format: {digits}{time-unit}. digits: 0-9,
-     * time-unit: [hmsd]|ms. h - hours, m - minutes, s - seconds, d - days,
-     * ms - milliseconds. If time unit is not specified, the default is
+     * zmailExternalAccountLifetimeAfterDisabled of being disabled. . Must be
+     * in valid duration format: {digits}{time-unit}. digits: 0-9, time-unit:
+     * [hmsd]|ms. h - hours, m - minutes, s - seconds, d - days, ms -
+     * milliseconds. If time unit is not specified, the default is
      * s(seconds).
      *
      * @throws org.zmail.common.service.ServiceException if error during update
@@ -9285,10 +9285,10 @@ public abstract class ZAttrConfig extends Entry {
      * Interval between successive executions of the task that: - disables an
      * external virtual account when all its accessible shares have been
      * revoked or expired. - deletes an external virtual account after
-     * zmailExternalAccountLifetimeAfterDisabled of being disabled. . Must
-     * be in valid duration format: {digits}{time-unit}. digits: 0-9,
-     * time-unit: [hmsd]|ms. h - hours, m - minutes, s - seconds, d - days,
-     * ms - milliseconds. If time unit is not specified, the default is
+     * zmailExternalAccountLifetimeAfterDisabled of being disabled. . Must be
+     * in valid duration format: {digits}{time-unit}. digits: 0-9, time-unit:
+     * [hmsd]|ms. h - hours, m - minutes, s - seconds, d - days, ms -
+     * milliseconds. If time unit is not specified, the default is
      * s(seconds).
      *
      * @param attrs existing map to populate, or null to create a new map
@@ -9628,8 +9628,8 @@ public abstract class ZAttrConfig extends Entry {
     }
 
     /**
-     * Whether to force clear zmail auth cookies when SOAP session ends
-     * (i.e. force logout on browser tab close)
+     * Whether to force clear zmail auth cookies when SOAP session ends (i.e.
+     * force logout on browser tab close)
      *
      * @return zmailForceClearCookies, or false if unset
      *
@@ -9641,8 +9641,8 @@ public abstract class ZAttrConfig extends Entry {
     }
 
     /**
-     * Whether to force clear zmail auth cookies when SOAP session ends
-     * (i.e. force logout on browser tab close)
+     * Whether to force clear zmail auth cookies when SOAP session ends (i.e.
+     * force logout on browser tab close)
      *
      * @param zmailForceClearCookies new value
      * @throws org.zmail.common.service.ServiceException if error during update
@@ -9657,8 +9657,8 @@ public abstract class ZAttrConfig extends Entry {
     }
 
     /**
-     * Whether to force clear zmail auth cookies when SOAP session ends
-     * (i.e. force logout on browser tab close)
+     * Whether to force clear zmail auth cookies when SOAP session ends (i.e.
+     * force logout on browser tab close)
      *
      * @param zmailForceClearCookies new value
      * @param attrs existing map to populate, or null to create a new map
@@ -9674,8 +9674,8 @@ public abstract class ZAttrConfig extends Entry {
     }
 
     /**
-     * Whether to force clear zmail auth cookies when SOAP session ends
-     * (i.e. force logout on browser tab close)
+     * Whether to force clear zmail auth cookies when SOAP session ends (i.e.
+     * force logout on browser tab close)
      *
      * @throws org.zmail.common.service.ServiceException if error during update
      *
@@ -9689,8 +9689,8 @@ public abstract class ZAttrConfig extends Entry {
     }
 
     /**
-     * Whether to force clear zmail auth cookies when SOAP session ends
-     * (i.e. force logout on browser tab close)
+     * Whether to force clear zmail auth cookies when SOAP session ends (i.e.
+     * force logout on browser tab close)
      *
      * @param attrs existing map to populate, or null to create a new map
      * @return populated map to pass into Provisioning.modifyAttrs
@@ -11347,8 +11347,8 @@ public abstract class ZAttrConfig extends Entry {
 
     /**
      * LDAP page size for paged search control while accessing LDAP server
-     * for GAL. This applies to both Zmail and external LDAP servers. A
-     * value of 0 means paging is not enabled.
+     * for GAL. This applies to both Zmail and external LDAP servers. A value
+     * of 0 means paging is not enabled.
      *
      * @return zmailGalLdapPageSize, or 1000 if unset
      *
@@ -11361,8 +11361,8 @@ public abstract class ZAttrConfig extends Entry {
 
     /**
      * LDAP page size for paged search control while accessing LDAP server
-     * for GAL. This applies to both Zmail and external LDAP servers. A
-     * value of 0 means paging is not enabled.
+     * for GAL. This applies to both Zmail and external LDAP servers. A value
+     * of 0 means paging is not enabled.
      *
      * @param zmailGalLdapPageSize new value
      * @throws org.zmail.common.service.ServiceException if error during update
@@ -11378,8 +11378,8 @@ public abstract class ZAttrConfig extends Entry {
 
     /**
      * LDAP page size for paged search control while accessing LDAP server
-     * for GAL. This applies to both Zmail and external LDAP servers. A
-     * value of 0 means paging is not enabled.
+     * for GAL. This applies to both Zmail and external LDAP servers. A value
+     * of 0 means paging is not enabled.
      *
      * @param zmailGalLdapPageSize new value
      * @param attrs existing map to populate, or null to create a new map
@@ -11396,8 +11396,8 @@ public abstract class ZAttrConfig extends Entry {
 
     /**
      * LDAP page size for paged search control while accessing LDAP server
-     * for GAL. This applies to both Zmail and external LDAP servers. A
-     * value of 0 means paging is not enabled.
+     * for GAL. This applies to both Zmail and external LDAP servers. A value
+     * of 0 means paging is not enabled.
      *
      * @throws org.zmail.common.service.ServiceException if error during update
      *
@@ -11412,8 +11412,8 @@ public abstract class ZAttrConfig extends Entry {
 
     /**
      * LDAP page size for paged search control while accessing LDAP server
-     * for GAL. This applies to both Zmail and external LDAP servers. A
-     * value of 0 means paging is not enabled.
+     * for GAL. This applies to both Zmail and external LDAP servers. A value
+     * of 0 means paging is not enabled.
      *
      * @param attrs existing map to populate, or null to create a new map
      * @return populated map to pass into Provisioning.modifyAttrs
@@ -12701,12 +12701,12 @@ public abstract class ZAttrConfig extends Entry {
     }
 
     /**
-     * Deprecated since: 6.0.0_BETA2. deprecated in favor for
-     * zmailHsmPolicy. Orig desc: Minimum age of mail items whose filesystem
-     * data will be moved to secondary storage.. Must be in valid duration
-     * format: {digits}{time-unit}. digits: 0-9, time-unit: [hmsd]|ms. h -
-     * hours, m - minutes, s - seconds, d - days, ms - milliseconds. If time
-     * unit is not specified, the default is s(seconds).
+     * Deprecated since: 6.0.0_BETA2. deprecated in favor for zmailHsmPolicy.
+     * Orig desc: Minimum age of mail items whose filesystem data will be
+     * moved to secondary storage.. Must be in valid duration format:
+     * {digits}{time-unit}. digits: 0-9, time-unit: [hmsd]|ms. h - hours, m -
+     * minutes, s - seconds, d - days, ms - milliseconds. If time unit is not
+     * specified, the default is s(seconds).
      *
      * <p>Use getHsmAgeAsString to access value as a string.
      *
@@ -12720,12 +12720,12 @@ public abstract class ZAttrConfig extends Entry {
     }
 
     /**
-     * Deprecated since: 6.0.0_BETA2. deprecated in favor for
-     * zmailHsmPolicy. Orig desc: Minimum age of mail items whose filesystem
-     * data will be moved to secondary storage.. Must be in valid duration
-     * format: {digits}{time-unit}. digits: 0-9, time-unit: [hmsd]|ms. h -
-     * hours, m - minutes, s - seconds, d - days, ms - milliseconds. If time
-     * unit is not specified, the default is s(seconds).
+     * Deprecated since: 6.0.0_BETA2. deprecated in favor for zmailHsmPolicy.
+     * Orig desc: Minimum age of mail items whose filesystem data will be
+     * moved to secondary storage.. Must be in valid duration format:
+     * {digits}{time-unit}. digits: 0-9, time-unit: [hmsd]|ms. h - hours, m -
+     * minutes, s - seconds, d - days, ms - milliseconds. If time unit is not
+     * specified, the default is s(seconds).
      *
      * @return zmailHsmAge, or "30d" if unset
      */
@@ -12735,12 +12735,12 @@ public abstract class ZAttrConfig extends Entry {
     }
 
     /**
-     * Deprecated since: 6.0.0_BETA2. deprecated in favor for
-     * zmailHsmPolicy. Orig desc: Minimum age of mail items whose filesystem
-     * data will be moved to secondary storage.. Must be in valid duration
-     * format: {digits}{time-unit}. digits: 0-9, time-unit: [hmsd]|ms. h -
-     * hours, m - minutes, s - seconds, d - days, ms - milliseconds. If time
-     * unit is not specified, the default is s(seconds).
+     * Deprecated since: 6.0.0_BETA2. deprecated in favor for zmailHsmPolicy.
+     * Orig desc: Minimum age of mail items whose filesystem data will be
+     * moved to secondary storage.. Must be in valid duration format:
+     * {digits}{time-unit}. digits: 0-9, time-unit: [hmsd]|ms. h - hours, m -
+     * minutes, s - seconds, d - days, ms - milliseconds. If time unit is not
+     * specified, the default is s(seconds).
      *
      * @param zmailHsmAge new value
      * @throws org.zmail.common.service.ServiceException if error during update
@@ -12753,12 +12753,12 @@ public abstract class ZAttrConfig extends Entry {
     }
 
     /**
-     * Deprecated since: 6.0.0_BETA2. deprecated in favor for
-     * zmailHsmPolicy. Orig desc: Minimum age of mail items whose filesystem
-     * data will be moved to secondary storage.. Must be in valid duration
-     * format: {digits}{time-unit}. digits: 0-9, time-unit: [hmsd]|ms. h -
-     * hours, m - minutes, s - seconds, d - days, ms - milliseconds. If time
-     * unit is not specified, the default is s(seconds).
+     * Deprecated since: 6.0.0_BETA2. deprecated in favor for zmailHsmPolicy.
+     * Orig desc: Minimum age of mail items whose filesystem data will be
+     * moved to secondary storage.. Must be in valid duration format:
+     * {digits}{time-unit}. digits: 0-9, time-unit: [hmsd]|ms. h - hours, m -
+     * minutes, s - seconds, d - days, ms - milliseconds. If time unit is not
+     * specified, the default is s(seconds).
      *
      * @param zmailHsmAge new value
      * @param attrs existing map to populate, or null to create a new map
@@ -12772,12 +12772,12 @@ public abstract class ZAttrConfig extends Entry {
     }
 
     /**
-     * Deprecated since: 6.0.0_BETA2. deprecated in favor for
-     * zmailHsmPolicy. Orig desc: Minimum age of mail items whose filesystem
-     * data will be moved to secondary storage.. Must be in valid duration
-     * format: {digits}{time-unit}. digits: 0-9, time-unit: [hmsd]|ms. h -
-     * hours, m - minutes, s - seconds, d - days, ms - milliseconds. If time
-     * unit is not specified, the default is s(seconds).
+     * Deprecated since: 6.0.0_BETA2. deprecated in favor for zmailHsmPolicy.
+     * Orig desc: Minimum age of mail items whose filesystem data will be
+     * moved to secondary storage.. Must be in valid duration format:
+     * {digits}{time-unit}. digits: 0-9, time-unit: [hmsd]|ms. h - hours, m -
+     * minutes, s - seconds, d - days, ms - milliseconds. If time unit is not
+     * specified, the default is s(seconds).
      *
      * @throws org.zmail.common.service.ServiceException if error during update
      */
@@ -12789,12 +12789,12 @@ public abstract class ZAttrConfig extends Entry {
     }
 
     /**
-     * Deprecated since: 6.0.0_BETA2. deprecated in favor for
-     * zmailHsmPolicy. Orig desc: Minimum age of mail items whose filesystem
-     * data will be moved to secondary storage.. Must be in valid duration
-     * format: {digits}{time-unit}. digits: 0-9, time-unit: [hmsd]|ms. h -
-     * hours, m - minutes, s - seconds, d - days, ms - milliseconds. If time
-     * unit is not specified, the default is s(seconds).
+     * Deprecated since: 6.0.0_BETA2. deprecated in favor for zmailHsmPolicy.
+     * Orig desc: Minimum age of mail items whose filesystem data will be
+     * moved to secondary storage.. Must be in valid duration format:
+     * {digits}{time-unit}. digits: 0-9, time-unit: [hmsd]|ms. h - hours, m -
+     * minutes, s - seconds, d - days, ms - milliseconds. If time unit is not
+     * specified, the default is s(seconds).
      *
      * @param attrs existing map to populate, or null to create a new map
      * @return populated map to pass into Provisioning.modifyAttrs
@@ -22335,8 +22335,8 @@ public abstract class ZAttrConfig extends Entry {
 
     /**
      * Deprecated since: 6.0.0_BETA1. deprecated in favor of
-     * zmailMtaTlsSecurityLevel and zmailMtaSaslAuthEnable. Orig desc:
-     * Value for postconf smtpd_tls_security_level
+     * zmailMtaTlsSecurityLevel and zmailMtaSaslAuthEnable. Orig desc: Value
+     * for postconf smtpd_tls_security_level
      *
      * @return zmailMtaAuthEnabled, or true if unset
      */
@@ -22347,8 +22347,8 @@ public abstract class ZAttrConfig extends Entry {
 
     /**
      * Deprecated since: 6.0.0_BETA1. deprecated in favor of
-     * zmailMtaTlsSecurityLevel and zmailMtaSaslAuthEnable. Orig desc:
-     * Value for postconf smtpd_tls_security_level
+     * zmailMtaTlsSecurityLevel and zmailMtaSaslAuthEnable. Orig desc: Value
+     * for postconf smtpd_tls_security_level
      *
      * @param zmailMtaAuthEnabled new value
      * @throws org.zmail.common.service.ServiceException if error during update
@@ -22362,8 +22362,8 @@ public abstract class ZAttrConfig extends Entry {
 
     /**
      * Deprecated since: 6.0.0_BETA1. deprecated in favor of
-     * zmailMtaTlsSecurityLevel and zmailMtaSaslAuthEnable. Orig desc:
-     * Value for postconf smtpd_tls_security_level
+     * zmailMtaTlsSecurityLevel and zmailMtaSaslAuthEnable. Orig desc: Value
+     * for postconf smtpd_tls_security_level
      *
      * @param zmailMtaAuthEnabled new value
      * @param attrs existing map to populate, or null to create a new map
@@ -22378,8 +22378,8 @@ public abstract class ZAttrConfig extends Entry {
 
     /**
      * Deprecated since: 6.0.0_BETA1. deprecated in favor of
-     * zmailMtaTlsSecurityLevel and zmailMtaSaslAuthEnable. Orig desc:
-     * Value for postconf smtpd_tls_security_level
+     * zmailMtaTlsSecurityLevel and zmailMtaSaslAuthEnable. Orig desc: Value
+     * for postconf smtpd_tls_security_level
      *
      * @throws org.zmail.common.service.ServiceException if error during update
      */
@@ -22392,8 +22392,8 @@ public abstract class ZAttrConfig extends Entry {
 
     /**
      * Deprecated since: 6.0.0_BETA1. deprecated in favor of
-     * zmailMtaTlsSecurityLevel and zmailMtaSaslAuthEnable. Orig desc:
-     * Value for postconf smtpd_tls_security_level
+     * zmailMtaTlsSecurityLevel and zmailMtaSaslAuthEnable. Orig desc: Value
+     * for postconf smtpd_tls_security_level
      *
      * @param attrs existing map to populate, or null to create a new map
      * @return populated map to pass into Provisioning.modifyAttrs
@@ -26979,8 +26979,8 @@ public abstract class ZAttrConfig extends Entry {
     }
 
     /**
-     * whether this instance of Zmail is running ZCS or some other
-     * derivative product
+     * whether this instance of Zmail is running ZCS or some other derivative
+     * product
      *
      * <p>Valid values: [ZCS]
      *
@@ -26994,8 +26994,8 @@ public abstract class ZAttrConfig extends Entry {
     }
 
     /**
-     * whether this instance of Zmail is running ZCS or some other
-     * derivative product
+     * whether this instance of Zmail is running ZCS or some other derivative
+     * product
      *
      * <p>Valid values: [ZCS]
      *
@@ -27009,8 +27009,8 @@ public abstract class ZAttrConfig extends Entry {
     }
 
     /**
-     * whether this instance of Zmail is running ZCS or some other
-     * derivative product
+     * whether this instance of Zmail is running ZCS or some other derivative
+     * product
      *
      * <p>Valid values: [ZCS]
      *
@@ -27027,8 +27027,8 @@ public abstract class ZAttrConfig extends Entry {
     }
 
     /**
-     * whether this instance of Zmail is running ZCS or some other
-     * derivative product
+     * whether this instance of Zmail is running ZCS or some other derivative
+     * product
      *
      * <p>Valid values: [ZCS]
      *
@@ -27046,8 +27046,8 @@ public abstract class ZAttrConfig extends Entry {
     }
 
     /**
-     * whether this instance of Zmail is running ZCS or some other
-     * derivative product
+     * whether this instance of Zmail is running ZCS or some other derivative
+     * product
      *
      * <p>Valid values: [ZCS]
      *
@@ -27064,8 +27064,8 @@ public abstract class ZAttrConfig extends Entry {
     }
 
     /**
-     * whether this instance of Zmail is running ZCS or some other
-     * derivative product
+     * whether this instance of Zmail is running ZCS or some other derivative
+     * product
      *
      * <p>Valid values: [ZCS]
      *
@@ -27083,8 +27083,8 @@ public abstract class ZAttrConfig extends Entry {
     }
 
     /**
-     * whether this instance of Zmail is running ZCS or some other
-     * derivative product
+     * whether this instance of Zmail is running ZCS or some other derivative
+     * product
      *
      * <p>Valid values: [ZCS]
      *
@@ -27100,8 +27100,8 @@ public abstract class ZAttrConfig extends Entry {
     }
 
     /**
-     * whether this instance of Zmail is running ZCS or some other
-     * derivative product
+     * whether this instance of Zmail is running ZCS or some other derivative
+     * product
      *
      * <p>Valid values: [ZCS]
      *
@@ -31575,7 +31575,7 @@ public abstract class ZAttrConfig extends Entry {
     /**
      * Log level for NGINX Proxy error log
      *
-     * <p>Valid values: [warn, debug_http, error, crit, debug_mail, debug, debug_zmail, notice, debug_core, info]
+     * <p>Valid values: [debug_zmail, warn, debug_http, error, crit, debug_mail, debug, notice, debug_core, info]
      *
      * @return zmailReverseProxyLogLevel, or ZAttrProvisioning.ReverseProxyLogLevel.info if unset and/or has invalid value
      *
@@ -31589,7 +31589,7 @@ public abstract class ZAttrConfig extends Entry {
     /**
      * Log level for NGINX Proxy error log
      *
-     * <p>Valid values: [warn, debug_http, error, crit, debug_mail, debug, debug_zmail, notice, debug_core, info]
+     * <p>Valid values: [debug_zmail, warn, debug_http, error, crit, debug_mail, debug, notice, debug_core, info]
      *
      * @return zmailReverseProxyLogLevel, or "info" if unset
      *
@@ -31603,7 +31603,7 @@ public abstract class ZAttrConfig extends Entry {
     /**
      * Log level for NGINX Proxy error log
      *
-     * <p>Valid values: [warn, debug_http, error, crit, debug_mail, debug, debug_zmail, notice, debug_core, info]
+     * <p>Valid values: [debug_zmail, warn, debug_http, error, crit, debug_mail, debug, notice, debug_core, info]
      *
      * @param zmailReverseProxyLogLevel new value
      * @throws org.zmail.common.service.ServiceException if error during update
@@ -31620,7 +31620,7 @@ public abstract class ZAttrConfig extends Entry {
     /**
      * Log level for NGINX Proxy error log
      *
-     * <p>Valid values: [warn, debug_http, error, crit, debug_mail, debug, debug_zmail, notice, debug_core, info]
+     * <p>Valid values: [debug_zmail, warn, debug_http, error, crit, debug_mail, debug, notice, debug_core, info]
      *
      * @param zmailReverseProxyLogLevel new value
      * @param attrs existing map to populate, or null to create a new map
@@ -31638,7 +31638,7 @@ public abstract class ZAttrConfig extends Entry {
     /**
      * Log level for NGINX Proxy error log
      *
-     * <p>Valid values: [warn, debug_http, error, crit, debug_mail, debug, debug_zmail, notice, debug_core, info]
+     * <p>Valid values: [debug_zmail, warn, debug_http, error, crit, debug_mail, debug, notice, debug_core, info]
      *
      * @param zmailReverseProxyLogLevel new value
      * @throws org.zmail.common.service.ServiceException if error during update
@@ -31655,7 +31655,7 @@ public abstract class ZAttrConfig extends Entry {
     /**
      * Log level for NGINX Proxy error log
      *
-     * <p>Valid values: [warn, debug_http, error, crit, debug_mail, debug, debug_zmail, notice, debug_core, info]
+     * <p>Valid values: [debug_zmail, warn, debug_http, error, crit, debug_mail, debug, notice, debug_core, info]
      *
      * @param zmailReverseProxyLogLevel new value
      * @param attrs existing map to populate, or null to create a new map
@@ -31673,7 +31673,7 @@ public abstract class ZAttrConfig extends Entry {
     /**
      * Log level for NGINX Proxy error log
      *
-     * <p>Valid values: [warn, debug_http, error, crit, debug_mail, debug, debug_zmail, notice, debug_core, info]
+     * <p>Valid values: [debug_zmail, warn, debug_http, error, crit, debug_mail, debug, notice, debug_core, info]
      *
      * @throws org.zmail.common.service.ServiceException if error during update
      *
@@ -31689,7 +31689,7 @@ public abstract class ZAttrConfig extends Entry {
     /**
      * Log level for NGINX Proxy error log
      *
-     * <p>Valid values: [warn, debug_http, error, crit, debug_mail, debug, debug_zmail, notice, debug_core, info]
+     * <p>Valid values: [debug_zmail, warn, debug_http, error, crit, debug_mail, debug, notice, debug_core, info]
      *
      * @param attrs existing map to populate, or null to create a new map
      * @return populated map to pass into Provisioning.modifyAttrs
@@ -35314,24 +35314,23 @@ public abstract class ZAttrConfig extends Entry {
     }
 
     /**
-     * Whether or not to discover search base DNs if
-     * zmailSMIMELdapSearchBase is not set. Allowed values are TRUE or
-     * FALSE. If zmailSMIMELdapSearchBase is set for a config, this
-     * attribute is ignored for the config. If not set, default for the
-     * config is FALSE. In that case, if zmailSMIMELdapSearchBase is not
-     * set, the search will default to the rootDSE. If multiple DNs are
-     * discovered, the ldap search will use them one by one until a hit is
-     * returned. All SMIME attributes are in the format of
-     * {config-name}:{value}. A &#039;SMIME config&#039; is a set of SMIME
-     * attribute values with the same {config-name}. Multiple SMIME configs
-     * can be configured on a domain or on globalconfig. Note: SMIME
-     * attributes on domains do not inherited values from globalconfig, they
-     * are not domain-inherited attributes. During SMIME public key lookup,
-     * if there are any SMIME config on the domain of the account, they are
-     * used. SMIME configs on globalconfig will be used only when there is no
-     * SMIME config on the domain. SMIME attributes cannot be modified
-     * directly with zmprov md/mcf commands. Use zmprov
-     * gcsc/gdsc/mcsc/mdsc/rcsc/rdsc command instead.
+     * Whether or not to discover search base DNs if zmailSMIMELdapSearchBase
+     * is not set. Allowed values are TRUE or FALSE. If
+     * zmailSMIMELdapSearchBase is set for a config, this attribute is
+     * ignored for the config. If not set, default for the config is FALSE.
+     * In that case, if zmailSMIMELdapSearchBase is not set, the search will
+     * default to the rootDSE. If multiple DNs are discovered, the ldap
+     * search will use them one by one until a hit is returned. All SMIME
+     * attributes are in the format of {config-name}:{value}. A &#039;SMIME
+     * config&#039; is a set of SMIME attribute values with the same
+     * {config-name}. Multiple SMIME configs can be configured on a domain or
+     * on globalconfig. Note: SMIME attributes on domains do not inherited
+     * values from globalconfig, they are not domain-inherited attributes.
+     * During SMIME public key lookup, if there are any SMIME config on the
+     * domain of the account, they are used. SMIME configs on globalconfig
+     * will be used only when there is no SMIME config on the domain. SMIME
+     * attributes cannot be modified directly with zmprov md/mcf commands.
+     * Use zmprov gcsc/gdsc/mcsc/mdsc/rcsc/rdsc command instead.
      *
      * @return zmailSMIMELdapDiscoverSearchBaseEnabled, or empty array if unset
      *
@@ -35343,24 +35342,23 @@ public abstract class ZAttrConfig extends Entry {
     }
 
     /**
-     * Whether or not to discover search base DNs if
-     * zmailSMIMELdapSearchBase is not set. Allowed values are TRUE or
-     * FALSE. If zmailSMIMELdapSearchBase is set for a config, this
-     * attribute is ignored for the config. If not set, default for the
-     * config is FALSE. In that case, if zmailSMIMELdapSearchBase is not
-     * set, the search will default to the rootDSE. If multiple DNs are
-     * discovered, the ldap search will use them one by one until a hit is
-     * returned. All SMIME attributes are in the format of
-     * {config-name}:{value}. A &#039;SMIME config&#039; is a set of SMIME
-     * attribute values with the same {config-name}. Multiple SMIME configs
-     * can be configured on a domain or on globalconfig. Note: SMIME
-     * attributes on domains do not inherited values from globalconfig, they
-     * are not domain-inherited attributes. During SMIME public key lookup,
-     * if there are any SMIME config on the domain of the account, they are
-     * used. SMIME configs on globalconfig will be used only when there is no
-     * SMIME config on the domain. SMIME attributes cannot be modified
-     * directly with zmprov md/mcf commands. Use zmprov
-     * gcsc/gdsc/mcsc/mdsc/rcsc/rdsc command instead.
+     * Whether or not to discover search base DNs if zmailSMIMELdapSearchBase
+     * is not set. Allowed values are TRUE or FALSE. If
+     * zmailSMIMELdapSearchBase is set for a config, this attribute is
+     * ignored for the config. If not set, default for the config is FALSE.
+     * In that case, if zmailSMIMELdapSearchBase is not set, the search will
+     * default to the rootDSE. If multiple DNs are discovered, the ldap
+     * search will use them one by one until a hit is returned. All SMIME
+     * attributes are in the format of {config-name}:{value}. A &#039;SMIME
+     * config&#039; is a set of SMIME attribute values with the same
+     * {config-name}. Multiple SMIME configs can be configured on a domain or
+     * on globalconfig. Note: SMIME attributes on domains do not inherited
+     * values from globalconfig, they are not domain-inherited attributes.
+     * During SMIME public key lookup, if there are any SMIME config on the
+     * domain of the account, they are used. SMIME configs on globalconfig
+     * will be used only when there is no SMIME config on the domain. SMIME
+     * attributes cannot be modified directly with zmprov md/mcf commands.
+     * Use zmprov gcsc/gdsc/mcsc/mdsc/rcsc/rdsc command instead.
      *
      * @param zmailSMIMELdapDiscoverSearchBaseEnabled new value
      * @throws org.zmail.common.service.ServiceException if error during update
@@ -35375,24 +35373,23 @@ public abstract class ZAttrConfig extends Entry {
     }
 
     /**
-     * Whether or not to discover search base DNs if
-     * zmailSMIMELdapSearchBase is not set. Allowed values are TRUE or
-     * FALSE. If zmailSMIMELdapSearchBase is set for a config, this
-     * attribute is ignored for the config. If not set, default for the
-     * config is FALSE. In that case, if zmailSMIMELdapSearchBase is not
-     * set, the search will default to the rootDSE. If multiple DNs are
-     * discovered, the ldap search will use them one by one until a hit is
-     * returned. All SMIME attributes are in the format of
-     * {config-name}:{value}. A &#039;SMIME config&#039; is a set of SMIME
-     * attribute values with the same {config-name}. Multiple SMIME configs
-     * can be configured on a domain or on globalconfig. Note: SMIME
-     * attributes on domains do not inherited values from globalconfig, they
-     * are not domain-inherited attributes. During SMIME public key lookup,
-     * if there are any SMIME config on the domain of the account, they are
-     * used. SMIME configs on globalconfig will be used only when there is no
-     * SMIME config on the domain. SMIME attributes cannot be modified
-     * directly with zmprov md/mcf commands. Use zmprov
-     * gcsc/gdsc/mcsc/mdsc/rcsc/rdsc command instead.
+     * Whether or not to discover search base DNs if zmailSMIMELdapSearchBase
+     * is not set. Allowed values are TRUE or FALSE. If
+     * zmailSMIMELdapSearchBase is set for a config, this attribute is
+     * ignored for the config. If not set, default for the config is FALSE.
+     * In that case, if zmailSMIMELdapSearchBase is not set, the search will
+     * default to the rootDSE. If multiple DNs are discovered, the ldap
+     * search will use them one by one until a hit is returned. All SMIME
+     * attributes are in the format of {config-name}:{value}. A &#039;SMIME
+     * config&#039; is a set of SMIME attribute values with the same
+     * {config-name}. Multiple SMIME configs can be configured on a domain or
+     * on globalconfig. Note: SMIME attributes on domains do not inherited
+     * values from globalconfig, they are not domain-inherited attributes.
+     * During SMIME public key lookup, if there are any SMIME config on the
+     * domain of the account, they are used. SMIME configs on globalconfig
+     * will be used only when there is no SMIME config on the domain. SMIME
+     * attributes cannot be modified directly with zmprov md/mcf commands.
+     * Use zmprov gcsc/gdsc/mcsc/mdsc/rcsc/rdsc command instead.
      *
      * @param zmailSMIMELdapDiscoverSearchBaseEnabled new value
      * @param attrs existing map to populate, or null to create a new map
@@ -35408,24 +35405,23 @@ public abstract class ZAttrConfig extends Entry {
     }
 
     /**
-     * Whether or not to discover search base DNs if
-     * zmailSMIMELdapSearchBase is not set. Allowed values are TRUE or
-     * FALSE. If zmailSMIMELdapSearchBase is set for a config, this
-     * attribute is ignored for the config. If not set, default for the
-     * config is FALSE. In that case, if zmailSMIMELdapSearchBase is not
-     * set, the search will default to the rootDSE. If multiple DNs are
-     * discovered, the ldap search will use them one by one until a hit is
-     * returned. All SMIME attributes are in the format of
-     * {config-name}:{value}. A &#039;SMIME config&#039; is a set of SMIME
-     * attribute values with the same {config-name}. Multiple SMIME configs
-     * can be configured on a domain or on globalconfig. Note: SMIME
-     * attributes on domains do not inherited values from globalconfig, they
-     * are not domain-inherited attributes. During SMIME public key lookup,
-     * if there are any SMIME config on the domain of the account, they are
-     * used. SMIME configs on globalconfig will be used only when there is no
-     * SMIME config on the domain. SMIME attributes cannot be modified
-     * directly with zmprov md/mcf commands. Use zmprov
-     * gcsc/gdsc/mcsc/mdsc/rcsc/rdsc command instead.
+     * Whether or not to discover search base DNs if zmailSMIMELdapSearchBase
+     * is not set. Allowed values are TRUE or FALSE. If
+     * zmailSMIMELdapSearchBase is set for a config, this attribute is
+     * ignored for the config. If not set, default for the config is FALSE.
+     * In that case, if zmailSMIMELdapSearchBase is not set, the search will
+     * default to the rootDSE. If multiple DNs are discovered, the ldap
+     * search will use them one by one until a hit is returned. All SMIME
+     * attributes are in the format of {config-name}:{value}. A &#039;SMIME
+     * config&#039; is a set of SMIME attribute values with the same
+     * {config-name}. Multiple SMIME configs can be configured on a domain or
+     * on globalconfig. Note: SMIME attributes on domains do not inherited
+     * values from globalconfig, they are not domain-inherited attributes.
+     * During SMIME public key lookup, if there are any SMIME config on the
+     * domain of the account, they are used. SMIME configs on globalconfig
+     * will be used only when there is no SMIME config on the domain. SMIME
+     * attributes cannot be modified directly with zmprov md/mcf commands.
+     * Use zmprov gcsc/gdsc/mcsc/mdsc/rcsc/rdsc command instead.
      *
      * @param zmailSMIMELdapDiscoverSearchBaseEnabled new to add to existing values
      * @throws org.zmail.common.service.ServiceException if error during update
@@ -35440,24 +35436,23 @@ public abstract class ZAttrConfig extends Entry {
     }
 
     /**
-     * Whether or not to discover search base DNs if
-     * zmailSMIMELdapSearchBase is not set. Allowed values are TRUE or
-     * FALSE. If zmailSMIMELdapSearchBase is set for a config, this
-     * attribute is ignored for the config. If not set, default for the
-     * config is FALSE. In that case, if zmailSMIMELdapSearchBase is not
-     * set, the search will default to the rootDSE. If multiple DNs are
-     * discovered, the ldap search will use them one by one until a hit is
-     * returned. All SMIME attributes are in the format of
-     * {config-name}:{value}. A &#039;SMIME config&#039; is a set of SMIME
-     * attribute values with the same {config-name}. Multiple SMIME configs
-     * can be configured on a domain or on globalconfig. Note: SMIME
-     * attributes on domains do not inherited values from globalconfig, they
-     * are not domain-inherited attributes. During SMIME public key lookup,
-     * if there are any SMIME config on the domain of the account, they are
-     * used. SMIME configs on globalconfig will be used only when there is no
-     * SMIME config on the domain. SMIME attributes cannot be modified
-     * directly with zmprov md/mcf commands. Use zmprov
-     * gcsc/gdsc/mcsc/mdsc/rcsc/rdsc command instead.
+     * Whether or not to discover search base DNs if zmailSMIMELdapSearchBase
+     * is not set. Allowed values are TRUE or FALSE. If
+     * zmailSMIMELdapSearchBase is set for a config, this attribute is
+     * ignored for the config. If not set, default for the config is FALSE.
+     * In that case, if zmailSMIMELdapSearchBase is not set, the search will
+     * default to the rootDSE. If multiple DNs are discovered, the ldap
+     * search will use them one by one until a hit is returned. All SMIME
+     * attributes are in the format of {config-name}:{value}. A &#039;SMIME
+     * config&#039; is a set of SMIME attribute values with the same
+     * {config-name}. Multiple SMIME configs can be configured on a domain or
+     * on globalconfig. Note: SMIME attributes on domains do not inherited
+     * values from globalconfig, they are not domain-inherited attributes.
+     * During SMIME public key lookup, if there are any SMIME config on the
+     * domain of the account, they are used. SMIME configs on globalconfig
+     * will be used only when there is no SMIME config on the domain. SMIME
+     * attributes cannot be modified directly with zmprov md/mcf commands.
+     * Use zmprov gcsc/gdsc/mcsc/mdsc/rcsc/rdsc command instead.
      *
      * @param zmailSMIMELdapDiscoverSearchBaseEnabled new to add to existing values
      * @param attrs existing map to populate, or null to create a new map
@@ -35473,24 +35468,23 @@ public abstract class ZAttrConfig extends Entry {
     }
 
     /**
-     * Whether or not to discover search base DNs if
-     * zmailSMIMELdapSearchBase is not set. Allowed values are TRUE or
-     * FALSE. If zmailSMIMELdapSearchBase is set for a config, this
-     * attribute is ignored for the config. If not set, default for the
-     * config is FALSE. In that case, if zmailSMIMELdapSearchBase is not
-     * set, the search will default to the rootDSE. If multiple DNs are
-     * discovered, the ldap search will use them one by one until a hit is
-     * returned. All SMIME attributes are in the format of
-     * {config-name}:{value}. A &#039;SMIME config&#039; is a set of SMIME
-     * attribute values with the same {config-name}. Multiple SMIME configs
-     * can be configured on a domain or on globalconfig. Note: SMIME
-     * attributes on domains do not inherited values from globalconfig, they
-     * are not domain-inherited attributes. During SMIME public key lookup,
-     * if there are any SMIME config on the domain of the account, they are
-     * used. SMIME configs on globalconfig will be used only when there is no
-     * SMIME config on the domain. SMIME attributes cannot be modified
-     * directly with zmprov md/mcf commands. Use zmprov
-     * gcsc/gdsc/mcsc/mdsc/rcsc/rdsc command instead.
+     * Whether or not to discover search base DNs if zmailSMIMELdapSearchBase
+     * is not set. Allowed values are TRUE or FALSE. If
+     * zmailSMIMELdapSearchBase is set for a config, this attribute is
+     * ignored for the config. If not set, default for the config is FALSE.
+     * In that case, if zmailSMIMELdapSearchBase is not set, the search will
+     * default to the rootDSE. If multiple DNs are discovered, the ldap
+     * search will use them one by one until a hit is returned. All SMIME
+     * attributes are in the format of {config-name}:{value}. A &#039;SMIME
+     * config&#039; is a set of SMIME attribute values with the same
+     * {config-name}. Multiple SMIME configs can be configured on a domain or
+     * on globalconfig. Note: SMIME attributes on domains do not inherited
+     * values from globalconfig, they are not domain-inherited attributes.
+     * During SMIME public key lookup, if there are any SMIME config on the
+     * domain of the account, they are used. SMIME configs on globalconfig
+     * will be used only when there is no SMIME config on the domain. SMIME
+     * attributes cannot be modified directly with zmprov md/mcf commands.
+     * Use zmprov gcsc/gdsc/mcsc/mdsc/rcsc/rdsc command instead.
      *
      * @param zmailSMIMELdapDiscoverSearchBaseEnabled existing value to remove
      * @throws org.zmail.common.service.ServiceException if error during update
@@ -35505,24 +35499,23 @@ public abstract class ZAttrConfig extends Entry {
     }
 
     /**
-     * Whether or not to discover search base DNs if
-     * zmailSMIMELdapSearchBase is not set. Allowed values are TRUE or
-     * FALSE. If zmailSMIMELdapSearchBase is set for a config, this
-     * attribute is ignored for the config. If not set, default for the
-     * config is FALSE. In that case, if zmailSMIMELdapSearchBase is not
-     * set, the search will default to the rootDSE. If multiple DNs are
-     * discovered, the ldap search will use them one by one until a hit is
-     * returned. All SMIME attributes are in the format of
-     * {config-name}:{value}. A &#039;SMIME config&#039; is a set of SMIME
-     * attribute values with the same {config-name}. Multiple SMIME configs
-     * can be configured on a domain or on globalconfig. Note: SMIME
-     * attributes on domains do not inherited values from globalconfig, they
-     * are not domain-inherited attributes. During SMIME public key lookup,
-     * if there are any SMIME config on the domain of the account, they are
-     * used. SMIME configs on globalconfig will be used only when there is no
-     * SMIME config on the domain. SMIME attributes cannot be modified
-     * directly with zmprov md/mcf commands. Use zmprov
-     * gcsc/gdsc/mcsc/mdsc/rcsc/rdsc command instead.
+     * Whether or not to discover search base DNs if zmailSMIMELdapSearchBase
+     * is not set. Allowed values are TRUE or FALSE. If
+     * zmailSMIMELdapSearchBase is set for a config, this attribute is
+     * ignored for the config. If not set, default for the config is FALSE.
+     * In that case, if zmailSMIMELdapSearchBase is not set, the search will
+     * default to the rootDSE. If multiple DNs are discovered, the ldap
+     * search will use them one by one until a hit is returned. All SMIME
+     * attributes are in the format of {config-name}:{value}. A &#039;SMIME
+     * config&#039; is a set of SMIME attribute values with the same
+     * {config-name}. Multiple SMIME configs can be configured on a domain or
+     * on globalconfig. Note: SMIME attributes on domains do not inherited
+     * values from globalconfig, they are not domain-inherited attributes.
+     * During SMIME public key lookup, if there are any SMIME config on the
+     * domain of the account, they are used. SMIME configs on globalconfig
+     * will be used only when there is no SMIME config on the domain. SMIME
+     * attributes cannot be modified directly with zmprov md/mcf commands.
+     * Use zmprov gcsc/gdsc/mcsc/mdsc/rcsc/rdsc command instead.
      *
      * @param zmailSMIMELdapDiscoverSearchBaseEnabled existing value to remove
      * @param attrs existing map to populate, or null to create a new map
@@ -35538,24 +35531,23 @@ public abstract class ZAttrConfig extends Entry {
     }
 
     /**
-     * Whether or not to discover search base DNs if
-     * zmailSMIMELdapSearchBase is not set. Allowed values are TRUE or
-     * FALSE. If zmailSMIMELdapSearchBase is set for a config, this
-     * attribute is ignored for the config. If not set, default for the
-     * config is FALSE. In that case, if zmailSMIMELdapSearchBase is not
-     * set, the search will default to the rootDSE. If multiple DNs are
-     * discovered, the ldap search will use them one by one until a hit is
-     * returned. All SMIME attributes are in the format of
-     * {config-name}:{value}. A &#039;SMIME config&#039; is a set of SMIME
-     * attribute values with the same {config-name}. Multiple SMIME configs
-     * can be configured on a domain or on globalconfig. Note: SMIME
-     * attributes on domains do not inherited values from globalconfig, they
-     * are not domain-inherited attributes. During SMIME public key lookup,
-     * if there are any SMIME config on the domain of the account, they are
-     * used. SMIME configs on globalconfig will be used only when there is no
-     * SMIME config on the domain. SMIME attributes cannot be modified
-     * directly with zmprov md/mcf commands. Use zmprov
-     * gcsc/gdsc/mcsc/mdsc/rcsc/rdsc command instead.
+     * Whether or not to discover search base DNs if zmailSMIMELdapSearchBase
+     * is not set. Allowed values are TRUE or FALSE. If
+     * zmailSMIMELdapSearchBase is set for a config, this attribute is
+     * ignored for the config. If not set, default for the config is FALSE.
+     * In that case, if zmailSMIMELdapSearchBase is not set, the search will
+     * default to the rootDSE. If multiple DNs are discovered, the ldap
+     * search will use them one by one until a hit is returned. All SMIME
+     * attributes are in the format of {config-name}:{value}. A &#039;SMIME
+     * config&#039; is a set of SMIME attribute values with the same
+     * {config-name}. Multiple SMIME configs can be configured on a domain or
+     * on globalconfig. Note: SMIME attributes on domains do not inherited
+     * values from globalconfig, they are not domain-inherited attributes.
+     * During SMIME public key lookup, if there are any SMIME config on the
+     * domain of the account, they are used. SMIME configs on globalconfig
+     * will be used only when there is no SMIME config on the domain. SMIME
+     * attributes cannot be modified directly with zmprov md/mcf commands.
+     * Use zmprov gcsc/gdsc/mcsc/mdsc/rcsc/rdsc command instead.
      *
      * @throws org.zmail.common.service.ServiceException if error during update
      *
@@ -35569,24 +35561,23 @@ public abstract class ZAttrConfig extends Entry {
     }
 
     /**
-     * Whether or not to discover search base DNs if
-     * zmailSMIMELdapSearchBase is not set. Allowed values are TRUE or
-     * FALSE. If zmailSMIMELdapSearchBase is set for a config, this
-     * attribute is ignored for the config. If not set, default for the
-     * config is FALSE. In that case, if zmailSMIMELdapSearchBase is not
-     * set, the search will default to the rootDSE. If multiple DNs are
-     * discovered, the ldap search will use them one by one until a hit is
-     * returned. All SMIME attributes are in the format of
-     * {config-name}:{value}. A &#039;SMIME config&#039; is a set of SMIME
-     * attribute values with the same {config-name}. Multiple SMIME configs
-     * can be configured on a domain or on globalconfig. Note: SMIME
-     * attributes on domains do not inherited values from globalconfig, they
-     * are not domain-inherited attributes. During SMIME public key lookup,
-     * if there are any SMIME config on the domain of the account, they are
-     * used. SMIME configs on globalconfig will be used only when there is no
-     * SMIME config on the domain. SMIME attributes cannot be modified
-     * directly with zmprov md/mcf commands. Use zmprov
-     * gcsc/gdsc/mcsc/mdsc/rcsc/rdsc command instead.
+     * Whether or not to discover search base DNs if zmailSMIMELdapSearchBase
+     * is not set. Allowed values are TRUE or FALSE. If
+     * zmailSMIMELdapSearchBase is set for a config, this attribute is
+     * ignored for the config. If not set, default for the config is FALSE.
+     * In that case, if zmailSMIMELdapSearchBase is not set, the search will
+     * default to the rootDSE. If multiple DNs are discovered, the ldap
+     * search will use them one by one until a hit is returned. All SMIME
+     * attributes are in the format of {config-name}:{value}. A &#039;SMIME
+     * config&#039; is a set of SMIME attribute values with the same
+     * {config-name}. Multiple SMIME configs can be configured on a domain or
+     * on globalconfig. Note: SMIME attributes on domains do not inherited
+     * values from globalconfig, they are not domain-inherited attributes.
+     * During SMIME public key lookup, if there are any SMIME config on the
+     * domain of the account, they are used. SMIME configs on globalconfig
+     * will be used only when there is no SMIME config on the domain. SMIME
+     * attributes cannot be modified directly with zmprov md/mcf commands.
+     * Use zmprov gcsc/gdsc/mcsc/mdsc/rcsc/rdsc command instead.
      *
      * @param attrs existing map to populate, or null to create a new map
      * @return populated map to pass into Provisioning.modifyAttrs
@@ -42190,8 +42181,8 @@ public abstract class ZAttrConfig extends Entry {
     }
 
     /**
-     * email address to send mail to for the Zmail version check
-     * notification message
+     * email address to send mail to for the Zmail version check notification
+     * message
      *
      * @return zmailVersionCheckNotificationEmail, or null if unset
      *
@@ -42203,8 +42194,8 @@ public abstract class ZAttrConfig extends Entry {
     }
 
     /**
-     * email address to send mail to for the Zmail version check
-     * notification message
+     * email address to send mail to for the Zmail version check notification
+     * message
      *
      * @param zmailVersionCheckNotificationEmail new value
      * @throws org.zmail.common.service.ServiceException if error during update
@@ -42219,8 +42210,8 @@ public abstract class ZAttrConfig extends Entry {
     }
 
     /**
-     * email address to send mail to for the Zmail version check
-     * notification message
+     * email address to send mail to for the Zmail version check notification
+     * message
      *
      * @param zmailVersionCheckNotificationEmail new value
      * @param attrs existing map to populate, or null to create a new map
@@ -42236,8 +42227,8 @@ public abstract class ZAttrConfig extends Entry {
     }
 
     /**
-     * email address to send mail to for the Zmail version check
-     * notification message
+     * email address to send mail to for the Zmail version check notification
+     * message
      *
      * @throws org.zmail.common.service.ServiceException if error during update
      *
@@ -42251,8 +42242,8 @@ public abstract class ZAttrConfig extends Entry {
     }
 
     /**
-     * email address to send mail to for the Zmail version check
-     * notification message
+     * email address to send mail to for the Zmail version check notification
+     * message
      *
      * @param attrs existing map to populate, or null to create a new map
      * @return populated map to pass into Provisioning.modifyAttrs

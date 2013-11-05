@@ -860,7 +860,7 @@ public class AttributeManagerUtil {
 
     private static String enumName(AttributeInfo ai) {
         String enumName = ai.getName();
-        if (enumName.startsWith("zmail")) enumName = enumName.substring(6);
+        if (enumName.startsWith("zmail")) enumName = enumName.substring(5);
         enumName = StringUtil.escapeJavaIdentifier(enumName.substring(0,1).toUpperCase() + enumName.substring(1));
         return enumName;
     }
@@ -1020,7 +1020,7 @@ public class AttributeManagerUtil {
        boolean asStringDoc = false;
 
        String methodName = ai.getName();
-       if (methodName.startsWith("zmail")) methodName = methodName.substring(6);
+       if (methodName.startsWith("zmail")) methodName = methodName.substring(5);
        methodName = (type == AttributeType.TYPE_BOOLEAN ? "is" : "get")+methodName.substring(0,1).toUpperCase() + methodName.substring(1);
        if (asString) methodName += "AsString";
 
@@ -1154,7 +1154,7 @@ public class AttributeManagerUtil {
 
        String methodNamePrefix;
        String methodName = ai.getName();
-       if (methodName.startsWith("zmail")) methodName = methodName.substring(6);
+       if (methodName.startsWith("zmail")) methodName = methodName.substring(5);
        methodName = setterType.name()+methodName.substring(0,1).toUpperCase() + methodName.substring(1);
        if (asString) methodName += "AsString";
 

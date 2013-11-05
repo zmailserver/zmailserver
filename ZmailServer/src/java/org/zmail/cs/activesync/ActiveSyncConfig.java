@@ -13,17 +13,17 @@
  * ***** END LICENSE BLOCK *****
  */
 
-package com.zimbra.cs.activesync;
+package org.zmail.cs.activesync;
 
-import com.zimbra.common.localconfig.LC;
-import com.zimbra.common.service.ServiceException;
-import com.zimbra.common.util.Log;
-import com.zimbra.common.util.ZimbraLog;
-import com.zimbra.cs.server.ServerConfig;
-import com.zimbra.cs.util.BuildInfo;
-import com.zimbra.cs.util.Config;
+import org.zmail.common.localconfig.LC;
+import org.zmail.common.service.ServiceException;
+import org.zmail.common.util.Log;
+import org.zmail.common.util.ZmailLog;
+import org.zmail.cs.server.ServerConfig;
+import org.zmail.cs.util.BuildInfo;
+import org.zmail.cs.util.Config;
 
-import static com.zimbra.cs.account.Provisioning.*;
+import static org.zmail.cs.account.Provisioning.*;
 
 public class ActiveSyncConfig extends ServerConfig {
     private static final String PROTOCOL = "ACTIVESYNC";
@@ -34,31 +34,31 @@ public class ActiveSyncConfig extends ServerConfig {
 
     @Override
     public String getServerName() {
-        return getAttr(A_zimbraActiveSyncAdvertisedName, LC.zimbra_server_hostname.value());
+        return getAttr(A_zmailActiveSyncAdvertisedName, LC.zmail_server_hostname.value());
     }
 
     @Override
     public String getServerVersion() {
-        return getBooleanAttr(A_zimbraActiveSyncExposeVersionOnBanner, false) ?
+        return getBooleanAttr(A_zmailActiveSyncExposeVersionOnBanner, false) ?
             BuildInfo.VERSION : null;
     }
 
     @Override
     public String getBindAddress() {
         return getAttr(isSslEnabled() ?
-            A_zimbraActiveSyncSSLBindAddress : A_zimbraActiveSyncBindAddress, null);
+            A_zmailActiveSyncSSLBindAddress : A_zmailActiveSyncBindAddress, null);
     }
 
     @Override
     public int getBindPort() {
         return isSslEnabled() ?
-            getIntAttr(A_zimbraActiveSyncSSLBindPort, Config.D_ACTIVESYNC_SSL_BIND_PORT) :
-            getIntAttr(A_zimbraActiveSyncBindPort, Config.D_ACTIVESYNC_BIND_PORT);
+            getIntAttr(A_zmailActiveSyncSSLBindPort, Config.D_ACTIVESYNC_SSL_BIND_PORT) :
+            getIntAttr(A_zmailActiveSyncBindPort, Config.D_ACTIVESYNC_BIND_PORT);
     }
 
     @Override
     public int getShutdownTimeout() {
-       return getIntAttr(A_zimbraActiveSyncShutdownGraceSeconds, super.getShutdownTimeout());
+       return getIntAttr(A_zmailActiveSyncShutdownGraceSeconds, super.getShutdownTimeout());
     }
 
     @Override
@@ -68,7 +68,7 @@ public class ActiveSyncConfig extends ServerConfig {
 
     @Override
     public int getMaxThreads() {
-        return getIntAttr(A_zimbraActiveSyncNumThreads, super.getMaxThreads());
+        return getIntAttr(A_zmailActiveSyncNumThreads, super.getMaxThreads());
     }
 
     @Override
@@ -78,7 +78,7 @@ public class ActiveSyncConfig extends ServerConfig {
 
     @Override
     public int getMaxConnections() {
-        return getIntAttr(A_zimbraActiveSyncMaxConnections, super.getMaxConnections());
+        return getIntAttr(A_zmailActiveSyncMaxConnections, super.getMaxConnections());
     }
 
     @Override
@@ -88,7 +88,7 @@ public class ActiveSyncConfig extends ServerConfig {
 
     @Override
     public Log getLog() {
-        return ZimbraLog.pop;
+        return ZmailLog.pop;
     }
 
     @Override
@@ -98,11 +98,11 @@ public class ActiveSyncConfig extends ServerConfig {
 
     /*
     public boolean isCleartextLoginsEnabled() {
-        return getBooleanAttr(A_zimbraActiveSyncCleartextLoginEnabled, false);
+        return getBooleanAttr(A_zmailActiveSyncCleartextLoginEnabled, false);
     }
 
     public boolean isSaslGssapiEnabled() {
-        return getBooleanAttr(A_zimbraActiveSyncSaslGssapiEnabled, false);
+        return getBooleanAttr(A_zmailActiveSyncSaslGssapiEnabled, false);
     }
     */
 

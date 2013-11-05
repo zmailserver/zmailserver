@@ -42,7 +42,7 @@ public abstract class ZAttrDomain extends NamedEntry {
 
     ///// BEGIN-AUTO-GEN-REPLACE
 
-    /* build: 8.0.0_BETA1_1111 norman 20131010-1457 */
+    /* build: 8.0.0_BETA1_1111 norman 20131025-1439 */
 
     /**
      * RFC2256: descriptive information
@@ -1575,8 +1575,8 @@ public abstract class ZAttrDomain extends NamedEntry {
     }
 
     /**
-     * mechanism to use for verifying password. Valid values are zmail,
-     * ldap, ad, kerberos5, custom:{handler-name} [arg1 arg2 ...]
+     * mechanism to use for verifying password. Valid values are zmail, ldap,
+     * ad, kerberos5, custom:{handler-name} [arg1 arg2 ...]
      *
      * @return zmailAuthMech, or null if unset
      */
@@ -1586,8 +1586,8 @@ public abstract class ZAttrDomain extends NamedEntry {
     }
 
     /**
-     * mechanism to use for verifying password. Valid values are zmail,
-     * ldap, ad, kerberos5, custom:{handler-name} [arg1 arg2 ...]
+     * mechanism to use for verifying password. Valid values are zmail, ldap,
+     * ad, kerberos5, custom:{handler-name} [arg1 arg2 ...]
      *
      * @param zmailAuthMech new value
      * @throws org.zmail.common.service.ServiceException if error during update
@@ -1600,8 +1600,8 @@ public abstract class ZAttrDomain extends NamedEntry {
     }
 
     /**
-     * mechanism to use for verifying password. Valid values are zmail,
-     * ldap, ad, kerberos5, custom:{handler-name} [arg1 arg2 ...]
+     * mechanism to use for verifying password. Valid values are zmail, ldap,
+     * ad, kerberos5, custom:{handler-name} [arg1 arg2 ...]
      *
      * @param zmailAuthMech new value
      * @param attrs existing map to populate, or null to create a new map
@@ -1615,8 +1615,8 @@ public abstract class ZAttrDomain extends NamedEntry {
     }
 
     /**
-     * mechanism to use for verifying password. Valid values are zmail,
-     * ldap, ad, kerberos5, custom:{handler-name} [arg1 arg2 ...]
+     * mechanism to use for verifying password. Valid values are zmail, ldap,
+     * ad, kerberos5, custom:{handler-name} [arg1 arg2 ...]
      *
      * @throws org.zmail.common.service.ServiceException if error during update
      */
@@ -1628,8 +1628,8 @@ public abstract class ZAttrDomain extends NamedEntry {
     }
 
     /**
-     * mechanism to use for verifying password. Valid values are zmail,
-     * ldap, ad, kerberos5, custom:{handler-name} [arg1 arg2 ...]
+     * mechanism to use for verifying password. Valid values are zmail, ldap,
+     * ad, kerberos5, custom:{handler-name} [arg1 arg2 ...]
      *
      * @param attrs existing map to populate, or null to create a new map
      * @return populated map to pass into Provisioning.modifyAttrs
@@ -1808,10 +1808,10 @@ public abstract class ZAttrDomain extends NamedEntry {
      * external directory will be populated in Zmail directory. Invalid
      * mapping configuration will cause the account creation to fail.
      * Examples of bad mapping: - invalid external attribute name. - invalid
-     * Zmail attribute name. - external attribute has multiple values but
-     * the zmail attribute is single-valued. - syntax violation. e.g. Value
-     * on the external attribute is a String but the Zmail attribute is
-     * declared an integer.
+     * Zmail attribute name. - external attribute has multiple values but the
+     * zmail attribute is single-valued. - syntax violation. e.g. Value on
+     * the external attribute is a String but the Zmail attribute is declared
+     * an integer.
      *
      * @return zmailAutoProvAttrMap, or empty array if unset
      *
@@ -1830,10 +1830,10 @@ public abstract class ZAttrDomain extends NamedEntry {
      * external directory will be populated in Zmail directory. Invalid
      * mapping configuration will cause the account creation to fail.
      * Examples of bad mapping: - invalid external attribute name. - invalid
-     * Zmail attribute name. - external attribute has multiple values but
-     * the zmail attribute is single-valued. - syntax violation. e.g. Value
-     * on the external attribute is a String but the Zmail attribute is
-     * declared an integer.
+     * Zmail attribute name. - external attribute has multiple values but the
+     * zmail attribute is single-valued. - syntax violation. e.g. Value on
+     * the external attribute is a String but the Zmail attribute is declared
+     * an integer.
      *
      * @param zmailAutoProvAttrMap new value
      * @throws org.zmail.common.service.ServiceException if error during update
@@ -1855,10 +1855,10 @@ public abstract class ZAttrDomain extends NamedEntry {
      * external directory will be populated in Zmail directory. Invalid
      * mapping configuration will cause the account creation to fail.
      * Examples of bad mapping: - invalid external attribute name. - invalid
-     * Zmail attribute name. - external attribute has multiple values but
-     * the zmail attribute is single-valued. - syntax violation. e.g. Value
-     * on the external attribute is a String but the Zmail attribute is
-     * declared an integer.
+     * Zmail attribute name. - external attribute has multiple values but the
+     * zmail attribute is single-valued. - syntax violation. e.g. Value on
+     * the external attribute is a String but the Zmail attribute is declared
+     * an integer.
      *
      * @param zmailAutoProvAttrMap new value
      * @param attrs existing map to populate, or null to create a new map
@@ -1881,10 +1881,10 @@ public abstract class ZAttrDomain extends NamedEntry {
      * external directory will be populated in Zmail directory. Invalid
      * mapping configuration will cause the account creation to fail.
      * Examples of bad mapping: - invalid external attribute name. - invalid
-     * Zmail attribute name. - external attribute has multiple values but
-     * the zmail attribute is single-valued. - syntax violation. e.g. Value
-     * on the external attribute is a String but the Zmail attribute is
-     * declared an integer.
+     * Zmail attribute name. - external attribute has multiple values but the
+     * zmail attribute is single-valued. - syntax violation. e.g. Value on
+     * the external attribute is a String but the Zmail attribute is declared
+     * an integer.
      *
      * @param zmailAutoProvAttrMap new to add to existing values
      * @throws org.zmail.common.service.ServiceException if error during update
@@ -1906,10 +1906,10 @@ public abstract class ZAttrDomain extends NamedEntry {
      * external directory will be populated in Zmail directory. Invalid
      * mapping configuration will cause the account creation to fail.
      * Examples of bad mapping: - invalid external attribute name. - invalid
-     * Zmail attribute name. - external attribute has multiple values but
-     * the zmail attribute is single-valued. - syntax violation. e.g. Value
-     * on the external attribute is a String but the Zmail attribute is
-     * declared an integer.
+     * Zmail attribute name. - external attribute has multiple values but the
+     * zmail attribute is single-valued. - syntax violation. e.g. Value on
+     * the external attribute is a String but the Zmail attribute is declared
+     * an integer.
      *
      * @param zmailAutoProvAttrMap new to add to existing values
      * @param attrs existing map to populate, or null to create a new map
@@ -1932,10 +1932,10 @@ public abstract class ZAttrDomain extends NamedEntry {
      * external directory will be populated in Zmail directory. Invalid
      * mapping configuration will cause the account creation to fail.
      * Examples of bad mapping: - invalid external attribute name. - invalid
-     * Zmail attribute name. - external attribute has multiple values but
-     * the zmail attribute is single-valued. - syntax violation. e.g. Value
-     * on the external attribute is a String but the Zmail attribute is
-     * declared an integer.
+     * Zmail attribute name. - external attribute has multiple values but the
+     * zmail attribute is single-valued. - syntax violation. e.g. Value on
+     * the external attribute is a String but the Zmail attribute is declared
+     * an integer.
      *
      * @param zmailAutoProvAttrMap existing value to remove
      * @throws org.zmail.common.service.ServiceException if error during update
@@ -1957,10 +1957,10 @@ public abstract class ZAttrDomain extends NamedEntry {
      * external directory will be populated in Zmail directory. Invalid
      * mapping configuration will cause the account creation to fail.
      * Examples of bad mapping: - invalid external attribute name. - invalid
-     * Zmail attribute name. - external attribute has multiple values but
-     * the zmail attribute is single-valued. - syntax violation. e.g. Value
-     * on the external attribute is a String but the Zmail attribute is
-     * declared an integer.
+     * Zmail attribute name. - external attribute has multiple values but the
+     * zmail attribute is single-valued. - syntax violation. e.g. Value on
+     * the external attribute is a String but the Zmail attribute is declared
+     * an integer.
      *
      * @param zmailAutoProvAttrMap existing value to remove
      * @param attrs existing map to populate, or null to create a new map
@@ -1983,10 +1983,10 @@ public abstract class ZAttrDomain extends NamedEntry {
      * external directory will be populated in Zmail directory. Invalid
      * mapping configuration will cause the account creation to fail.
      * Examples of bad mapping: - invalid external attribute name. - invalid
-     * Zmail attribute name. - external attribute has multiple values but
-     * the zmail attribute is single-valued. - syntax violation. e.g. Value
-     * on the external attribute is a String but the Zmail attribute is
-     * declared an integer.
+     * Zmail attribute name. - external attribute has multiple values but the
+     * zmail attribute is single-valued. - syntax violation. e.g. Value on
+     * the external attribute is a String but the Zmail attribute is declared
+     * an integer.
      *
      * @throws org.zmail.common.service.ServiceException if error during update
      *
@@ -2007,10 +2007,10 @@ public abstract class ZAttrDomain extends NamedEntry {
      * external directory will be populated in Zmail directory. Invalid
      * mapping configuration will cause the account creation to fail.
      * Examples of bad mapping: - invalid external attribute name. - invalid
-     * Zmail attribute name. - external attribute has multiple values but
-     * the zmail attribute is single-valued. - syntax violation. e.g. Value
-     * on the external attribute is a String but the Zmail attribute is
-     * declared an integer.
+     * Zmail attribute name. - external attribute has multiple values but the
+     * zmail attribute is single-valued. - syntax violation. e.g. Value on
+     * the external attribute is a String but the Zmail attribute is declared
+     * an integer.
      *
      * @param attrs existing map to populate, or null to create a new map
      * @return populated map to pass into Provisioning.modifyAttrs
@@ -2247,9 +2247,9 @@ public abstract class ZAttrDomain extends NamedEntry {
     }
 
     /**
-     * EAGER mode: for Zmail internal use only - do not change it. LAZY
-     * mode: N/A MANUAL mode: N/A Timestamp when the external domain is last
-     * polled for EAGER auto provision. The poll (LDAP search) for the next
+     * EAGER mode: for Zmail internal use only - do not change it. LAZY mode:
+     * N/A MANUAL mode: N/A Timestamp when the external domain is last polled
+     * for EAGER auto provision. The poll (LDAP search) for the next
      * iteration will fetch external entries with create timestamp later than
      * the timestamp recorded from the previous iteration.
      *
@@ -2267,9 +2267,9 @@ public abstract class ZAttrDomain extends NamedEntry {
     }
 
     /**
-     * EAGER mode: for Zmail internal use only - do not change it. LAZY
-     * mode: N/A MANUAL mode: N/A Timestamp when the external domain is last
-     * polled for EAGER auto provision. The poll (LDAP search) for the next
+     * EAGER mode: for Zmail internal use only - do not change it. LAZY mode:
+     * N/A MANUAL mode: N/A Timestamp when the external domain is last polled
+     * for EAGER auto provision. The poll (LDAP search) for the next
      * iteration will fetch external entries with create timestamp later than
      * the timestamp recorded from the previous iteration.
      *
@@ -2283,9 +2283,9 @@ public abstract class ZAttrDomain extends NamedEntry {
     }
 
     /**
-     * EAGER mode: for Zmail internal use only - do not change it. LAZY
-     * mode: N/A MANUAL mode: N/A Timestamp when the external domain is last
-     * polled for EAGER auto provision. The poll (LDAP search) for the next
+     * EAGER mode: for Zmail internal use only - do not change it. LAZY mode:
+     * N/A MANUAL mode: N/A Timestamp when the external domain is last polled
+     * for EAGER auto provision. The poll (LDAP search) for the next
      * iteration will fetch external entries with create timestamp later than
      * the timestamp recorded from the previous iteration.
      *
@@ -2302,9 +2302,9 @@ public abstract class ZAttrDomain extends NamedEntry {
     }
 
     /**
-     * EAGER mode: for Zmail internal use only - do not change it. LAZY
-     * mode: N/A MANUAL mode: N/A Timestamp when the external domain is last
-     * polled for EAGER auto provision. The poll (LDAP search) for the next
+     * EAGER mode: for Zmail internal use only - do not change it. LAZY mode:
+     * N/A MANUAL mode: N/A Timestamp when the external domain is last polled
+     * for EAGER auto provision. The poll (LDAP search) for the next
      * iteration will fetch external entries with create timestamp later than
      * the timestamp recorded from the previous iteration.
      *
@@ -2322,9 +2322,9 @@ public abstract class ZAttrDomain extends NamedEntry {
     }
 
     /**
-     * EAGER mode: for Zmail internal use only - do not change it. LAZY
-     * mode: N/A MANUAL mode: N/A Timestamp when the external domain is last
-     * polled for EAGER auto provision. The poll (LDAP search) for the next
+     * EAGER mode: for Zmail internal use only - do not change it. LAZY mode:
+     * N/A MANUAL mode: N/A Timestamp when the external domain is last polled
+     * for EAGER auto provision. The poll (LDAP search) for the next
      * iteration will fetch external entries with create timestamp later than
      * the timestamp recorded from the previous iteration.
      *
@@ -2341,9 +2341,9 @@ public abstract class ZAttrDomain extends NamedEntry {
     }
 
     /**
-     * EAGER mode: for Zmail internal use only - do not change it. LAZY
-     * mode: N/A MANUAL mode: N/A Timestamp when the external domain is last
-     * polled for EAGER auto provision. The poll (LDAP search) for the next
+     * EAGER mode: for Zmail internal use only - do not change it. LAZY mode:
+     * N/A MANUAL mode: N/A Timestamp when the external domain is last polled
+     * for EAGER auto provision. The poll (LDAP search) for the next
      * iteration will fetch external entries with create timestamp later than
      * the timestamp recorded from the previous iteration.
      *
@@ -2361,9 +2361,9 @@ public abstract class ZAttrDomain extends NamedEntry {
     }
 
     /**
-     * EAGER mode: for Zmail internal use only - do not change it. LAZY
-     * mode: N/A MANUAL mode: N/A Timestamp when the external domain is last
-     * polled for EAGER auto provision. The poll (LDAP search) for the next
+     * EAGER mode: for Zmail internal use only - do not change it. LAZY mode:
+     * N/A MANUAL mode: N/A Timestamp when the external domain is last polled
+     * for EAGER auto provision. The poll (LDAP search) for the next
      * iteration will fetch external entries with create timestamp later than
      * the timestamp recorded from the previous iteration.
      *
@@ -2379,9 +2379,9 @@ public abstract class ZAttrDomain extends NamedEntry {
     }
 
     /**
-     * EAGER mode: for Zmail internal use only - do not change it. LAZY
-     * mode: N/A MANUAL mode: N/A Timestamp when the external domain is last
-     * polled for EAGER auto provision. The poll (LDAP search) for the next
+     * EAGER mode: for Zmail internal use only - do not change it. LAZY mode:
+     * N/A MANUAL mode: N/A Timestamp when the external domain is last polled
+     * for EAGER auto provision. The poll (LDAP search) for the next
      * iteration will fetch external entries with create timestamp later than
      * the timestamp recorded from the previous iteration.
      *
@@ -2670,10 +2670,9 @@ public abstract class ZAttrDomain extends NamedEntry {
 
     /**
      * EAGER mode: required LAZY mode: required (if using
-     * zmailAutoProvLdapSearchFilter), MANUAL mode: required LDAP search
-     * base for auto provision, used in conjunction with
-     * zmailAutoProvLdapSearchFilter. If not set, LDAP root DSE will be
-     * used.
+     * zmailAutoProvLdapSearchFilter), MANUAL mode: required LDAP search base
+     * for auto provision, used in conjunction with
+     * zmailAutoProvLdapSearchFilter. If not set, LDAP root DSE will be used.
      *
      * @return zmailAutoProvLdapSearchBase, or null if unset
      *
@@ -2686,10 +2685,9 @@ public abstract class ZAttrDomain extends NamedEntry {
 
     /**
      * EAGER mode: required LAZY mode: required (if using
-     * zmailAutoProvLdapSearchFilter), MANUAL mode: required LDAP search
-     * base for auto provision, used in conjunction with
-     * zmailAutoProvLdapSearchFilter. If not set, LDAP root DSE will be
-     * used.
+     * zmailAutoProvLdapSearchFilter), MANUAL mode: required LDAP search base
+     * for auto provision, used in conjunction with
+     * zmailAutoProvLdapSearchFilter. If not set, LDAP root DSE will be used.
      *
      * @param zmailAutoProvLdapSearchBase new value
      * @throws org.zmail.common.service.ServiceException if error during update
@@ -2705,10 +2703,9 @@ public abstract class ZAttrDomain extends NamedEntry {
 
     /**
      * EAGER mode: required LAZY mode: required (if using
-     * zmailAutoProvLdapSearchFilter), MANUAL mode: required LDAP search
-     * base for auto provision, used in conjunction with
-     * zmailAutoProvLdapSearchFilter. If not set, LDAP root DSE will be
-     * used.
+     * zmailAutoProvLdapSearchFilter), MANUAL mode: required LDAP search base
+     * for auto provision, used in conjunction with
+     * zmailAutoProvLdapSearchFilter. If not set, LDAP root DSE will be used.
      *
      * @param zmailAutoProvLdapSearchBase new value
      * @param attrs existing map to populate, or null to create a new map
@@ -2725,10 +2722,9 @@ public abstract class ZAttrDomain extends NamedEntry {
 
     /**
      * EAGER mode: required LAZY mode: required (if using
-     * zmailAutoProvLdapSearchFilter), MANUAL mode: required LDAP search
-     * base for auto provision, used in conjunction with
-     * zmailAutoProvLdapSearchFilter. If not set, LDAP root DSE will be
-     * used.
+     * zmailAutoProvLdapSearchFilter), MANUAL mode: required LDAP search base
+     * for auto provision, used in conjunction with
+     * zmailAutoProvLdapSearchFilter. If not set, LDAP root DSE will be used.
      *
      * @throws org.zmail.common.service.ServiceException if error during update
      *
@@ -2743,10 +2739,9 @@ public abstract class ZAttrDomain extends NamedEntry {
 
     /**
      * EAGER mode: required LAZY mode: required (if using
-     * zmailAutoProvLdapSearchFilter), MANUAL mode: required LDAP search
-     * base for auto provision, used in conjunction with
-     * zmailAutoProvLdapSearchFilter. If not set, LDAP root DSE will be
-     * used.
+     * zmailAutoProvLdapSearchFilter), MANUAL mode: required LDAP search base
+     * for auto provision, used in conjunction with
+     * zmailAutoProvLdapSearchFilter. If not set, LDAP root DSE will be used.
      *
      * @param attrs existing map to populate, or null to create a new map
      * @return populated map to pass into Provisioning.modifyAttrs
@@ -3038,25 +3033,7 @@ public abstract class ZAttrDomain extends NamedEntry {
      * singleton listener instance is invoked after each account is auto
      * created in Zmail. Listener can be plugged in as a server extension to
      * handle tasks like updating the account auto provision status in the
-     * external LDAP directory. At each eager provision interval, ZCS does an
-     * LDAP search based on the value configured in
-     * zmailAutoProvLdapSearchFilter. Returned entries from this search are
-     * candidates to be auto provisioned in this batch. The
-     * zmailAutoProvLdapSearchFilter should include an assertion that will
-     * only hit entries in the external directory that have not yet been
-     * provisioned in ZCS, otherwise it&#039;s likely the same entries will
-     * be repeated pulled in to ZCS. After an account is auto provisioned in
-     * ZCS,
-     * org.zmail.cs.account.Account.AutoProvisionListener.postCreate(Domain
-     * domain, Account acct, String externalDN) will be called by the auto
-     * provisioning framework. Customer can implement the
-     * AutoProvisionListener interface in a ZCS server extension and get
-     * their AutoProvisionListener.postCreate() get called. The
-     * implementation of customer&#039;s postCreate method can be, for
-     * example, setting an attribute in the external directory on the account
-     * just provisioned in ZCS. The attribute can be included as a condition
-     * in the zmailAutoProvLdapSearchFilter, so the entry won&#039;t be
-     * returned again by the LDAP search in the next interval.
+     * external LDAP directory.
      *
      * @return zmailAutoProvListenerClass, or null if unset
      *
@@ -3074,29 +3051,7 @@ public abstract class ZAttrDomain extends NamedEntry {
      * singleton listener instance is invoked after each account is auto
      * created in Zmail. Listener can be plugged in as a server extension to
      * handle tasks like updating the account auto provision status in the
-<<<<<<< HEAD:ZmailServer/src/java/org/zmail/cs/account/ZAttrDomain.java
-     * external LDAP directory. At each eager provision interval, ZCS does an
-     * LDAP search based on the value configured in
-     * zmailAutoProvLdapSearchFilter. Returned entries from this search are
-     * candidates to be auto provisioned in this batch. The
-     * zmailAutoProvLdapSearchFilter should include an assertion that will
-     * only hit entries in the external directory that have not yet been
-     * provisioned in ZCS, otherwise it&#039;s likely the same entries will
-     * be repeated pulled in to ZCS. After an account is auto provisioned in
-     * ZCS,
-     * org.zmail.cs.account.Account.AutoProvisionListener.postCreate(Domain
-     * domain, Account acct, String externalDN) will be called by the auto
-     * provisioning framework. Customer can implement the
-     * AutoProvisionListener interface in a ZCS server extension and get
-     * their AutoProvisionListener.postCreate() get called. The
-     * implementation of customer&#039;s postCreate method can be, for
-     * example, setting an attribute in the external directory on the account
-     * just provisioned in ZCS. The attribute can be included as a condition
-     * in the zmailAutoProvLdapSearchFilter, so the entry won&#039;t be
-     * returned again by the LDAP search in the next interval.
-=======
      * external LDAP directory.
->>>>>>> Added ActiveSync Config parameters.:ZimbraServer/src/java/com/zimbra/cs/account/ZAttrDomain.java
      *
      * @param zmailAutoProvListenerClass new value
      * @throws org.zmail.common.service.ServiceException if error during update
@@ -3117,29 +3072,7 @@ public abstract class ZAttrDomain extends NamedEntry {
      * singleton listener instance is invoked after each account is auto
      * created in Zmail. Listener can be plugged in as a server extension to
      * handle tasks like updating the account auto provision status in the
-<<<<<<< HEAD:ZmailServer/src/java/org/zmail/cs/account/ZAttrDomain.java
-     * external LDAP directory. At each eager provision interval, ZCS does an
-     * LDAP search based on the value configured in
-     * zmailAutoProvLdapSearchFilter. Returned entries from this search are
-     * candidates to be auto provisioned in this batch. The
-     * zmailAutoProvLdapSearchFilter should include an assertion that will
-     * only hit entries in the external directory that have not yet been
-     * provisioned in ZCS, otherwise it&#039;s likely the same entries will
-     * be repeated pulled in to ZCS. After an account is auto provisioned in
-     * ZCS,
-     * org.zmail.cs.account.Account.AutoProvisionListener.postCreate(Domain
-     * domain, Account acct, String externalDN) will be called by the auto
-     * provisioning framework. Customer can implement the
-     * AutoProvisionListener interface in a ZCS server extension and get
-     * their AutoProvisionListener.postCreate() get called. The
-     * implementation of customer&#039;s postCreate method can be, for
-     * example, setting an attribute in the external directory on the account
-     * just provisioned in ZCS. The attribute can be included as a condition
-     * in the zmailAutoProvLdapSearchFilter, so the entry won&#039;t be
-     * returned again by the LDAP search in the next interval.
-=======
      * external LDAP directory.
->>>>>>> Added ActiveSync Config parameters.:ZimbraServer/src/java/com/zimbra/cs/account/ZAttrDomain.java
      *
      * @param zmailAutoProvListenerClass new value
      * @param attrs existing map to populate, or null to create a new map
@@ -3161,29 +3094,7 @@ public abstract class ZAttrDomain extends NamedEntry {
      * singleton listener instance is invoked after each account is auto
      * created in Zmail. Listener can be plugged in as a server extension to
      * handle tasks like updating the account auto provision status in the
-<<<<<<< HEAD:ZmailServer/src/java/org/zmail/cs/account/ZAttrDomain.java
-     * external LDAP directory. At each eager provision interval, ZCS does an
-     * LDAP search based on the value configured in
-     * zmailAutoProvLdapSearchFilter. Returned entries from this search are
-     * candidates to be auto provisioned in this batch. The
-     * zmailAutoProvLdapSearchFilter should include an assertion that will
-     * only hit entries in the external directory that have not yet been
-     * provisioned in ZCS, otherwise it&#039;s likely the same entries will
-     * be repeated pulled in to ZCS. After an account is auto provisioned in
-     * ZCS,
-     * org.zmail.cs.account.Account.AutoProvisionListener.postCreate(Domain
-     * domain, Account acct, String externalDN) will be called by the auto
-     * provisioning framework. Customer can implement the
-     * AutoProvisionListener interface in a ZCS server extension and get
-     * their AutoProvisionListener.postCreate() get called. The
-     * implementation of customer&#039;s postCreate method can be, for
-     * example, setting an attribute in the external directory on the account
-     * just provisioned in ZCS. The attribute can be included as a condition
-     * in the zmailAutoProvLdapSearchFilter, so the entry won&#039;t be
-     * returned again by the LDAP search in the next interval.
-=======
      * external LDAP directory.
->>>>>>> Added ActiveSync Config parameters.:ZimbraServer/src/java/com/zimbra/cs/account/ZAttrDomain.java
      *
      * @throws org.zmail.common.service.ServiceException if error during update
      *
@@ -3203,29 +3114,7 @@ public abstract class ZAttrDomain extends NamedEntry {
      * singleton listener instance is invoked after each account is auto
      * created in Zmail. Listener can be plugged in as a server extension to
      * handle tasks like updating the account auto provision status in the
-<<<<<<< HEAD:ZmailServer/src/java/org/zmail/cs/account/ZAttrDomain.java
-     * external LDAP directory. At each eager provision interval, ZCS does an
-     * LDAP search based on the value configured in
-     * zmailAutoProvLdapSearchFilter. Returned entries from this search are
-     * candidates to be auto provisioned in this batch. The
-     * zmailAutoProvLdapSearchFilter should include an assertion that will
-     * only hit entries in the external directory that have not yet been
-     * provisioned in ZCS, otherwise it&#039;s likely the same entries will
-     * be repeated pulled in to ZCS. After an account is auto provisioned in
-     * ZCS,
-     * org.zmail.cs.account.Account.AutoProvisionListener.postCreate(Domain
-     * domain, Account acct, String externalDN) will be called by the auto
-     * provisioning framework. Customer can implement the
-     * AutoProvisionListener interface in a ZCS server extension and get
-     * their AutoProvisionListener.postCreate() get called. The
-     * implementation of customer&#039;s postCreate method can be, for
-     * example, setting an attribute in the external directory on the account
-     * just provisioned in ZCS. The attribute can be included as a condition
-     * in the zmailAutoProvLdapSearchFilter, so the entry won&#039;t be
-     * returned again by the LDAP search in the next interval.
-=======
      * external LDAP directory.
->>>>>>> Added ActiveSync Config parameters.:ZimbraServer/src/java/com/zimbra/cs/account/ZAttrDomain.java
      *
      * @param attrs existing map to populate, or null to create a new map
      * @return populated map to pass into Provisioning.modifyAttrs
@@ -3240,8 +3129,8 @@ public abstract class ZAttrDomain extends NamedEntry {
     }
 
     /**
-     * EAGER mode: for Zmail internal use only - do not change it. LAZY
-     * mode: N/A MANUAL mode: N/A For EAGER auto provision, a domain can be
+     * EAGER mode: for Zmail internal use only - do not change it. LAZY mode:
+     * N/A MANUAL mode: N/A For EAGER auto provision, a domain can be
      * scheduled on multiple server. To avoid conflict, only one server can
      * perform provisioning for a domain at one time. This attribute servers
      * a lock for the test-and-set LDAP operation to synchronize EAGER auto
@@ -3257,8 +3146,8 @@ public abstract class ZAttrDomain extends NamedEntry {
     }
 
     /**
-     * EAGER mode: for Zmail internal use only - do not change it. LAZY
-     * mode: N/A MANUAL mode: N/A For EAGER auto provision, a domain can be
+     * EAGER mode: for Zmail internal use only - do not change it. LAZY mode:
+     * N/A MANUAL mode: N/A For EAGER auto provision, a domain can be
      * scheduled on multiple server. To avoid conflict, only one server can
      * perform provisioning for a domain at one time. This attribute servers
      * a lock for the test-and-set LDAP operation to synchronize EAGER auto
@@ -3277,8 +3166,8 @@ public abstract class ZAttrDomain extends NamedEntry {
     }
 
     /**
-     * EAGER mode: for Zmail internal use only - do not change it. LAZY
-     * mode: N/A MANUAL mode: N/A For EAGER auto provision, a domain can be
+     * EAGER mode: for Zmail internal use only - do not change it. LAZY mode:
+     * N/A MANUAL mode: N/A For EAGER auto provision, a domain can be
      * scheduled on multiple server. To avoid conflict, only one server can
      * perform provisioning for a domain at one time. This attribute servers
      * a lock for the test-and-set LDAP operation to synchronize EAGER auto
@@ -3298,8 +3187,8 @@ public abstract class ZAttrDomain extends NamedEntry {
     }
 
     /**
-     * EAGER mode: for Zmail internal use only - do not change it. LAZY
-     * mode: N/A MANUAL mode: N/A For EAGER auto provision, a domain can be
+     * EAGER mode: for Zmail internal use only - do not change it. LAZY mode:
+     * N/A MANUAL mode: N/A For EAGER auto provision, a domain can be
      * scheduled on multiple server. To avoid conflict, only one server can
      * perform provisioning for a domain at one time. This attribute servers
      * a lock for the test-and-set LDAP operation to synchronize EAGER auto
@@ -3317,8 +3206,8 @@ public abstract class ZAttrDomain extends NamedEntry {
     }
 
     /**
-     * EAGER mode: for Zmail internal use only - do not change it. LAZY
-     * mode: N/A MANUAL mode: N/A For EAGER auto provision, a domain can be
+     * EAGER mode: for Zmail internal use only - do not change it. LAZY mode:
+     * N/A MANUAL mode: N/A For EAGER auto provision, a domain can be
      * scheduled on multiple server. To avoid conflict, only one server can
      * perform provisioning for a domain at one time. This attribute servers
      * a lock for the test-and-set LDAP operation to synchronize EAGER auto
@@ -3349,9 +3238,9 @@ public abstract class ZAttrDomain extends NamedEntry {
      * source and select an entry from the search result to create the
      * corresponding Zmail account for the external entry. In all cases,
      * localpart of the Zmail account is mapped from an attribute on the
-     * external entry based on zmailAutoProvAccountNameMap. The Zmail
-     * account is populated with attributes mapped from the external entry
-     * based on zmailAutoProvAttrMap.
+     * external entry based on zmailAutoProvAccountNameMap. The Zmail account
+     * is populated with attributes mapped from the external entry based on
+     * zmailAutoProvAttrMap.
      *
      * <p>Valid values: [MANUAL, LAZY, EAGER]
      *
@@ -3377,9 +3266,9 @@ public abstract class ZAttrDomain extends NamedEntry {
      * source and select an entry from the search result to create the
      * corresponding Zmail account for the external entry. In all cases,
      * localpart of the Zmail account is mapped from an attribute on the
-     * external entry based on zmailAutoProvAccountNameMap. The Zmail
-     * account is populated with attributes mapped from the external entry
-     * based on zmailAutoProvAttrMap.
+     * external entry based on zmailAutoProvAccountNameMap. The Zmail account
+     * is populated with attributes mapped from the external entry based on
+     * zmailAutoProvAttrMap.
      *
      * <p>Valid values: [MANUAL, LAZY, EAGER]
      *
@@ -3408,9 +3297,9 @@ public abstract class ZAttrDomain extends NamedEntry {
      * source and select an entry from the search result to create the
      * corresponding Zmail account for the external entry. In all cases,
      * localpart of the Zmail account is mapped from an attribute on the
-     * external entry based on zmailAutoProvAccountNameMap. The Zmail
-     * account is populated with attributes mapped from the external entry
-     * based on zmailAutoProvAttrMap.
+     * external entry based on zmailAutoProvAccountNameMap. The Zmail account
+     * is populated with attributes mapped from the external entry based on
+     * zmailAutoProvAttrMap.
      *
      * <p>Valid values: [MANUAL, LAZY, EAGER]
      *
@@ -3440,9 +3329,9 @@ public abstract class ZAttrDomain extends NamedEntry {
      * source and select an entry from the search result to create the
      * corresponding Zmail account for the external entry. In all cases,
      * localpart of the Zmail account is mapped from an attribute on the
-     * external entry based on zmailAutoProvAccountNameMap. The Zmail
-     * account is populated with attributes mapped from the external entry
-     * based on zmailAutoProvAttrMap.
+     * external entry based on zmailAutoProvAccountNameMap. The Zmail account
+     * is populated with attributes mapped from the external entry based on
+     * zmailAutoProvAttrMap.
      *
      * <p>Valid values: [MANUAL, LAZY, EAGER]
      *
@@ -3471,9 +3360,9 @@ public abstract class ZAttrDomain extends NamedEntry {
      * source and select an entry from the search result to create the
      * corresponding Zmail account for the external entry. In all cases,
      * localpart of the Zmail account is mapped from an attribute on the
-     * external entry based on zmailAutoProvAccountNameMap. The Zmail
-     * account is populated with attributes mapped from the external entry
-     * based on zmailAutoProvAttrMap.
+     * external entry based on zmailAutoProvAccountNameMap. The Zmail account
+     * is populated with attributes mapped from the external entry based on
+     * zmailAutoProvAttrMap.
      *
      * <p>Valid values: [MANUAL, LAZY, EAGER]
      *
@@ -3503,9 +3392,9 @@ public abstract class ZAttrDomain extends NamedEntry {
      * source and select an entry from the search result to create the
      * corresponding Zmail account for the external entry. In all cases,
      * localpart of the Zmail account is mapped from an attribute on the
-     * external entry based on zmailAutoProvAccountNameMap. The Zmail
-     * account is populated with attributes mapped from the external entry
-     * based on zmailAutoProvAttrMap.
+     * external entry based on zmailAutoProvAccountNameMap. The Zmail account
+     * is populated with attributes mapped from the external entry based on
+     * zmailAutoProvAttrMap.
      *
      * <p>Valid values: [MANUAL, LAZY, EAGER]
      *
@@ -3533,9 +3422,9 @@ public abstract class ZAttrDomain extends NamedEntry {
      * source and select an entry from the search result to create the
      * corresponding Zmail account for the external entry. In all cases,
      * localpart of the Zmail account is mapped from an attribute on the
-     * external entry based on zmailAutoProvAccountNameMap. The Zmail
-     * account is populated with attributes mapped from the external entry
-     * based on zmailAutoProvAttrMap.
+     * external entry based on zmailAutoProvAccountNameMap. The Zmail account
+     * is populated with attributes mapped from the external entry based on
+     * zmailAutoProvAttrMap.
      *
      * <p>Valid values: [MANUAL, LAZY, EAGER]
      *
@@ -5697,9 +5586,9 @@ public abstract class ZAttrDomain extends NamedEntry {
     }
 
     /**
-     * domain status. enum values are akin to those of zmailAccountStatus
-     * but the status affects all accounts on the domain. See table below for
-     * how zmailDomainStatus affects account status. active - see
+     * domain status. enum values are akin to those of zmailAccountStatus but
+     * the status affects all accounts on the domain. See table below for how
+     * zmailDomainStatus affects account status. active - see
      * zmailAccountStatus maintenance - see zmailAccountStatus locked - see
      * zmailAccountStatus closed - see zmailAccountStatus suspended -
      * maintenance + no creating/deleting/modifying accounts/DLs under the
@@ -5711,12 +5600,12 @@ public abstract class ZAttrDomain extends NamedEntry {
      * cannot be done in admin console or zmprov. How zmailDomainStatus
      * affects account behavior : -------------------------------------
      * zmailDomainStatus account behavior
-     * ------------------------------------- active zmailAccountStatus
-     * locked zmailAccountStatus if it is maintenance or pending or closed,
-     * else locked maintenance zmailAccountStatus if it is pending or
-     * closed, else maintenance suspended zmailAccountStatus if it is
-     * pending or closed, else maintenance shutdown zmailAccountStatus if it
-     * is pending or closed, else maintenance closed closed
+     * ------------------------------------- active zmailAccountStatus locked
+     * zmailAccountStatus if it is maintenance or pending or closed, else
+     * locked maintenance zmailAccountStatus if it is pending or closed, else
+     * maintenance suspended zmailAccountStatus if it is pending or closed,
+     * else maintenance shutdown zmailAccountStatus if it is pending or
+     * closed, else maintenance closed closed
      *
      * <p>Valid values: [active, closed, locked, suspended, maintenance, shutdown]
      *
@@ -5730,9 +5619,9 @@ public abstract class ZAttrDomain extends NamedEntry {
     }
 
     /**
-     * domain status. enum values are akin to those of zmailAccountStatus
-     * but the status affects all accounts on the domain. See table below for
-     * how zmailDomainStatus affects account status. active - see
+     * domain status. enum values are akin to those of zmailAccountStatus but
+     * the status affects all accounts on the domain. See table below for how
+     * zmailDomainStatus affects account status. active - see
      * zmailAccountStatus maintenance - see zmailAccountStatus locked - see
      * zmailAccountStatus closed - see zmailAccountStatus suspended -
      * maintenance + no creating/deleting/modifying accounts/DLs under the
@@ -5744,12 +5633,12 @@ public abstract class ZAttrDomain extends NamedEntry {
      * cannot be done in admin console or zmprov. How zmailDomainStatus
      * affects account behavior : -------------------------------------
      * zmailDomainStatus account behavior
-     * ------------------------------------- active zmailAccountStatus
-     * locked zmailAccountStatus if it is maintenance or pending or closed,
-     * else locked maintenance zmailAccountStatus if it is pending or
-     * closed, else maintenance suspended zmailAccountStatus if it is
-     * pending or closed, else maintenance shutdown zmailAccountStatus if it
-     * is pending or closed, else maintenance closed closed
+     * ------------------------------------- active zmailAccountStatus locked
+     * zmailAccountStatus if it is maintenance or pending or closed, else
+     * locked maintenance zmailAccountStatus if it is pending or closed, else
+     * maintenance suspended zmailAccountStatus if it is pending or closed,
+     * else maintenance shutdown zmailAccountStatus if it is pending or
+     * closed, else maintenance closed closed
      *
      * <p>Valid values: [active, closed, locked, suspended, maintenance, shutdown]
      *
@@ -5763,9 +5652,9 @@ public abstract class ZAttrDomain extends NamedEntry {
     }
 
     /**
-     * domain status. enum values are akin to those of zmailAccountStatus
-     * but the status affects all accounts on the domain. See table below for
-     * how zmailDomainStatus affects account status. active - see
+     * domain status. enum values are akin to those of zmailAccountStatus but
+     * the status affects all accounts on the domain. See table below for how
+     * zmailDomainStatus affects account status. active - see
      * zmailAccountStatus maintenance - see zmailAccountStatus locked - see
      * zmailAccountStatus closed - see zmailAccountStatus suspended -
      * maintenance + no creating/deleting/modifying accounts/DLs under the
@@ -5777,12 +5666,12 @@ public abstract class ZAttrDomain extends NamedEntry {
      * cannot be done in admin console or zmprov. How zmailDomainStatus
      * affects account behavior : -------------------------------------
      * zmailDomainStatus account behavior
-     * ------------------------------------- active zmailAccountStatus
-     * locked zmailAccountStatus if it is maintenance or pending or closed,
-     * else locked maintenance zmailAccountStatus if it is pending or
-     * closed, else maintenance suspended zmailAccountStatus if it is
-     * pending or closed, else maintenance shutdown zmailAccountStatus if it
-     * is pending or closed, else maintenance closed closed
+     * ------------------------------------- active zmailAccountStatus locked
+     * zmailAccountStatus if it is maintenance or pending or closed, else
+     * locked maintenance zmailAccountStatus if it is pending or closed, else
+     * maintenance suspended zmailAccountStatus if it is pending or closed,
+     * else maintenance shutdown zmailAccountStatus if it is pending or
+     * closed, else maintenance closed closed
      *
      * <p>Valid values: [active, closed, locked, suspended, maintenance, shutdown]
      *
@@ -5799,9 +5688,9 @@ public abstract class ZAttrDomain extends NamedEntry {
     }
 
     /**
-     * domain status. enum values are akin to those of zmailAccountStatus
-     * but the status affects all accounts on the domain. See table below for
-     * how zmailDomainStatus affects account status. active - see
+     * domain status. enum values are akin to those of zmailAccountStatus but
+     * the status affects all accounts on the domain. See table below for how
+     * zmailDomainStatus affects account status. active - see
      * zmailAccountStatus maintenance - see zmailAccountStatus locked - see
      * zmailAccountStatus closed - see zmailAccountStatus suspended -
      * maintenance + no creating/deleting/modifying accounts/DLs under the
@@ -5813,12 +5702,12 @@ public abstract class ZAttrDomain extends NamedEntry {
      * cannot be done in admin console or zmprov. How zmailDomainStatus
      * affects account behavior : -------------------------------------
      * zmailDomainStatus account behavior
-     * ------------------------------------- active zmailAccountStatus
-     * locked zmailAccountStatus if it is maintenance or pending or closed,
-     * else locked maintenance zmailAccountStatus if it is pending or
-     * closed, else maintenance suspended zmailAccountStatus if it is
-     * pending or closed, else maintenance shutdown zmailAccountStatus if it
-     * is pending or closed, else maintenance closed closed
+     * ------------------------------------- active zmailAccountStatus locked
+     * zmailAccountStatus if it is maintenance or pending or closed, else
+     * locked maintenance zmailAccountStatus if it is pending or closed, else
+     * maintenance suspended zmailAccountStatus if it is pending or closed,
+     * else maintenance shutdown zmailAccountStatus if it is pending or
+     * closed, else maintenance closed closed
      *
      * <p>Valid values: [active, closed, locked, suspended, maintenance, shutdown]
      *
@@ -5836,9 +5725,9 @@ public abstract class ZAttrDomain extends NamedEntry {
     }
 
     /**
-     * domain status. enum values are akin to those of zmailAccountStatus
-     * but the status affects all accounts on the domain. See table below for
-     * how zmailDomainStatus affects account status. active - see
+     * domain status. enum values are akin to those of zmailAccountStatus but
+     * the status affects all accounts on the domain. See table below for how
+     * zmailDomainStatus affects account status. active - see
      * zmailAccountStatus maintenance - see zmailAccountStatus locked - see
      * zmailAccountStatus closed - see zmailAccountStatus suspended -
      * maintenance + no creating/deleting/modifying accounts/DLs under the
@@ -5850,12 +5739,12 @@ public abstract class ZAttrDomain extends NamedEntry {
      * cannot be done in admin console or zmprov. How zmailDomainStatus
      * affects account behavior : -------------------------------------
      * zmailDomainStatus account behavior
-     * ------------------------------------- active zmailAccountStatus
-     * locked zmailAccountStatus if it is maintenance or pending or closed,
-     * else locked maintenance zmailAccountStatus if it is pending or
-     * closed, else maintenance suspended zmailAccountStatus if it is
-     * pending or closed, else maintenance shutdown zmailAccountStatus if it
-     * is pending or closed, else maintenance closed closed
+     * ------------------------------------- active zmailAccountStatus locked
+     * zmailAccountStatus if it is maintenance or pending or closed, else
+     * locked maintenance zmailAccountStatus if it is pending or closed, else
+     * maintenance suspended zmailAccountStatus if it is pending or closed,
+     * else maintenance shutdown zmailAccountStatus if it is pending or
+     * closed, else maintenance closed closed
      *
      * <p>Valid values: [active, closed, locked, suspended, maintenance, shutdown]
      *
@@ -5872,9 +5761,9 @@ public abstract class ZAttrDomain extends NamedEntry {
     }
 
     /**
-     * domain status. enum values are akin to those of zmailAccountStatus
-     * but the status affects all accounts on the domain. See table below for
-     * how zmailDomainStatus affects account status. active - see
+     * domain status. enum values are akin to those of zmailAccountStatus but
+     * the status affects all accounts on the domain. See table below for how
+     * zmailDomainStatus affects account status. active - see
      * zmailAccountStatus maintenance - see zmailAccountStatus locked - see
      * zmailAccountStatus closed - see zmailAccountStatus suspended -
      * maintenance + no creating/deleting/modifying accounts/DLs under the
@@ -5886,12 +5775,12 @@ public abstract class ZAttrDomain extends NamedEntry {
      * cannot be done in admin console or zmprov. How zmailDomainStatus
      * affects account behavior : -------------------------------------
      * zmailDomainStatus account behavior
-     * ------------------------------------- active zmailAccountStatus
-     * locked zmailAccountStatus if it is maintenance or pending or closed,
-     * else locked maintenance zmailAccountStatus if it is pending or
-     * closed, else maintenance suspended zmailAccountStatus if it is
-     * pending or closed, else maintenance shutdown zmailAccountStatus if it
-     * is pending or closed, else maintenance closed closed
+     * ------------------------------------- active zmailAccountStatus locked
+     * zmailAccountStatus if it is maintenance or pending or closed, else
+     * locked maintenance zmailAccountStatus if it is pending or closed, else
+     * maintenance suspended zmailAccountStatus if it is pending or closed,
+     * else maintenance shutdown zmailAccountStatus if it is pending or
+     * closed, else maintenance closed closed
      *
      * <p>Valid values: [active, closed, locked, suspended, maintenance, shutdown]
      *
@@ -5909,9 +5798,9 @@ public abstract class ZAttrDomain extends NamedEntry {
     }
 
     /**
-     * domain status. enum values are akin to those of zmailAccountStatus
-     * but the status affects all accounts on the domain. See table below for
-     * how zmailDomainStatus affects account status. active - see
+     * domain status. enum values are akin to those of zmailAccountStatus but
+     * the status affects all accounts on the domain. See table below for how
+     * zmailDomainStatus affects account status. active - see
      * zmailAccountStatus maintenance - see zmailAccountStatus locked - see
      * zmailAccountStatus closed - see zmailAccountStatus suspended -
      * maintenance + no creating/deleting/modifying accounts/DLs under the
@@ -5923,12 +5812,12 @@ public abstract class ZAttrDomain extends NamedEntry {
      * cannot be done in admin console or zmprov. How zmailDomainStatus
      * affects account behavior : -------------------------------------
      * zmailDomainStatus account behavior
-     * ------------------------------------- active zmailAccountStatus
-     * locked zmailAccountStatus if it is maintenance or pending or closed,
-     * else locked maintenance zmailAccountStatus if it is pending or
-     * closed, else maintenance suspended zmailAccountStatus if it is
-     * pending or closed, else maintenance shutdown zmailAccountStatus if it
-     * is pending or closed, else maintenance closed closed
+     * ------------------------------------- active zmailAccountStatus locked
+     * zmailAccountStatus if it is maintenance or pending or closed, else
+     * locked maintenance zmailAccountStatus if it is pending or closed, else
+     * maintenance suspended zmailAccountStatus if it is pending or closed,
+     * else maintenance shutdown zmailAccountStatus if it is pending or
+     * closed, else maintenance closed closed
      *
      * <p>Valid values: [active, closed, locked, suspended, maintenance, shutdown]
      *
@@ -5944,9 +5833,9 @@ public abstract class ZAttrDomain extends NamedEntry {
     }
 
     /**
-     * domain status. enum values are akin to those of zmailAccountStatus
-     * but the status affects all accounts on the domain. See table below for
-     * how zmailDomainStatus affects account status. active - see
+     * domain status. enum values are akin to those of zmailAccountStatus but
+     * the status affects all accounts on the domain. See table below for how
+     * zmailDomainStatus affects account status. active - see
      * zmailAccountStatus maintenance - see zmailAccountStatus locked - see
      * zmailAccountStatus closed - see zmailAccountStatus suspended -
      * maintenance + no creating/deleting/modifying accounts/DLs under the
@@ -5958,12 +5847,12 @@ public abstract class ZAttrDomain extends NamedEntry {
      * cannot be done in admin console or zmprov. How zmailDomainStatus
      * affects account behavior : -------------------------------------
      * zmailDomainStatus account behavior
-     * ------------------------------------- active zmailAccountStatus
-     * locked zmailAccountStatus if it is maintenance or pending or closed,
-     * else locked maintenance zmailAccountStatus if it is pending or
-     * closed, else maintenance suspended zmailAccountStatus if it is
-     * pending or closed, else maintenance shutdown zmailAccountStatus if it
-     * is pending or closed, else maintenance closed closed
+     * ------------------------------------- active zmailAccountStatus locked
+     * zmailAccountStatus if it is maintenance or pending or closed, else
+     * locked maintenance zmailAccountStatus if it is pending or closed, else
+     * maintenance suspended zmailAccountStatus if it is pending or closed,
+     * else maintenance shutdown zmailAccountStatus if it is pending or
+     * closed, else maintenance closed closed
      *
      * <p>Valid values: [active, closed, locked, suspended, maintenance, shutdown]
      *
@@ -7774,8 +7663,8 @@ public abstract class ZAttrDomain extends NamedEntry {
     }
 
     /**
-     * Whether to force clear zmail auth cookies when SOAP session ends
-     * (i.e. force logout on browser tab close)
+     * Whether to force clear zmail auth cookies when SOAP session ends (i.e.
+     * force logout on browser tab close)
      *
      * @return zmailForceClearCookies, or false if unset
      *
@@ -7787,8 +7676,8 @@ public abstract class ZAttrDomain extends NamedEntry {
     }
 
     /**
-     * Whether to force clear zmail auth cookies when SOAP session ends
-     * (i.e. force logout on browser tab close)
+     * Whether to force clear zmail auth cookies when SOAP session ends (i.e.
+     * force logout on browser tab close)
      *
      * @param zmailForceClearCookies new value
      * @throws org.zmail.common.service.ServiceException if error during update
@@ -7803,8 +7692,8 @@ public abstract class ZAttrDomain extends NamedEntry {
     }
 
     /**
-     * Whether to force clear zmail auth cookies when SOAP session ends
-     * (i.e. force logout on browser tab close)
+     * Whether to force clear zmail auth cookies when SOAP session ends (i.e.
+     * force logout on browser tab close)
      *
      * @param zmailForceClearCookies new value
      * @param attrs existing map to populate, or null to create a new map
@@ -7820,8 +7709,8 @@ public abstract class ZAttrDomain extends NamedEntry {
     }
 
     /**
-     * Whether to force clear zmail auth cookies when SOAP session ends
-     * (i.e. force logout on browser tab close)
+     * Whether to force clear zmail auth cookies when SOAP session ends (i.e.
+     * force logout on browser tab close)
      *
      * @throws org.zmail.common.service.ServiceException if error during update
      *
@@ -7835,8 +7724,8 @@ public abstract class ZAttrDomain extends NamedEntry {
     }
 
     /**
-     * Whether to force clear zmail auth cookies when SOAP session ends
-     * (i.e. force logout on browser tab close)
+     * Whether to force clear zmail auth cookies when SOAP session ends (i.e.
+     * force logout on browser tab close)
      *
      * @param attrs existing map to populate, or null to create a new map
      * @return populated map to pass into Provisioning.modifyAttrs
@@ -9578,8 +9467,8 @@ public abstract class ZAttrDomain extends NamedEntry {
 
     /**
      * external LDAP GAL authentication mechanism none: anonymous binding
-     * simple: zmailGalLdapBindDn and zmailGalLdapBindPassword has to be
-     * set kerberos5: zmailGalLdapKerberos5Principal and
+     * simple: zmailGalLdapBindDn and zmailGalLdapBindPassword has to be set
+     * kerberos5: zmailGalLdapKerberos5Principal and
      * zmailGalLdapKerberos5Keytab has to be set
      *
      * <p>Valid values: [none, kerberos5, simple]
@@ -9595,8 +9484,8 @@ public abstract class ZAttrDomain extends NamedEntry {
 
     /**
      * external LDAP GAL authentication mechanism none: anonymous binding
-     * simple: zmailGalLdapBindDn and zmailGalLdapBindPassword has to be
-     * set kerberos5: zmailGalLdapKerberos5Principal and
+     * simple: zmailGalLdapBindDn and zmailGalLdapBindPassword has to be set
+     * kerberos5: zmailGalLdapKerberos5Principal and
      * zmailGalLdapKerberos5Keytab has to be set
      *
      * <p>Valid values: [none, kerberos5, simple]
@@ -9612,8 +9501,8 @@ public abstract class ZAttrDomain extends NamedEntry {
 
     /**
      * external LDAP GAL authentication mechanism none: anonymous binding
-     * simple: zmailGalLdapBindDn and zmailGalLdapBindPassword has to be
-     * set kerberos5: zmailGalLdapKerberos5Principal and
+     * simple: zmailGalLdapBindDn and zmailGalLdapBindPassword has to be set
+     * kerberos5: zmailGalLdapKerberos5Principal and
      * zmailGalLdapKerberos5Keytab has to be set
      *
      * <p>Valid values: [none, kerberos5, simple]
@@ -9632,8 +9521,8 @@ public abstract class ZAttrDomain extends NamedEntry {
 
     /**
      * external LDAP GAL authentication mechanism none: anonymous binding
-     * simple: zmailGalLdapBindDn and zmailGalLdapBindPassword has to be
-     * set kerberos5: zmailGalLdapKerberos5Principal and
+     * simple: zmailGalLdapBindDn and zmailGalLdapBindPassword has to be set
+     * kerberos5: zmailGalLdapKerberos5Principal and
      * zmailGalLdapKerberos5Keytab has to be set
      *
      * <p>Valid values: [none, kerberos5, simple]
@@ -9653,8 +9542,8 @@ public abstract class ZAttrDomain extends NamedEntry {
 
     /**
      * external LDAP GAL authentication mechanism none: anonymous binding
-     * simple: zmailGalLdapBindDn and zmailGalLdapBindPassword has to be
-     * set kerberos5: zmailGalLdapKerberos5Principal and
+     * simple: zmailGalLdapBindDn and zmailGalLdapBindPassword has to be set
+     * kerberos5: zmailGalLdapKerberos5Principal and
      * zmailGalLdapKerberos5Keytab has to be set
      *
      * <p>Valid values: [none, kerberos5, simple]
@@ -9673,8 +9562,8 @@ public abstract class ZAttrDomain extends NamedEntry {
 
     /**
      * external LDAP GAL authentication mechanism none: anonymous binding
-     * simple: zmailGalLdapBindDn and zmailGalLdapBindPassword has to be
-     * set kerberos5: zmailGalLdapKerberos5Principal and
+     * simple: zmailGalLdapBindDn and zmailGalLdapBindPassword has to be set
+     * kerberos5: zmailGalLdapKerberos5Principal and
      * zmailGalLdapKerberos5Keytab has to be set
      *
      * <p>Valid values: [none, kerberos5, simple]
@@ -9694,8 +9583,8 @@ public abstract class ZAttrDomain extends NamedEntry {
 
     /**
      * external LDAP GAL authentication mechanism none: anonymous binding
-     * simple: zmailGalLdapBindDn and zmailGalLdapBindPassword has to be
-     * set kerberos5: zmailGalLdapKerberos5Principal and
+     * simple: zmailGalLdapBindDn and zmailGalLdapBindPassword has to be set
+     * kerberos5: zmailGalLdapKerberos5Principal and
      * zmailGalLdapKerberos5Keytab has to be set
      *
      * <p>Valid values: [none, kerberos5, simple]
@@ -9713,8 +9602,8 @@ public abstract class ZAttrDomain extends NamedEntry {
 
     /**
      * external LDAP GAL authentication mechanism none: anonymous binding
-     * simple: zmailGalLdapBindDn and zmailGalLdapBindPassword has to be
-     * set kerberos5: zmailGalLdapKerberos5Principal and
+     * simple: zmailGalLdapBindDn and zmailGalLdapBindPassword has to be set
+     * kerberos5: zmailGalLdapKerberos5Principal and
      * zmailGalLdapKerberos5Keytab has to be set
      *
      * <p>Valid values: [none, kerberos5, simple]
@@ -10140,8 +10029,8 @@ public abstract class ZAttrDomain extends NamedEntry {
 
     /**
      * LDAP page size for paged search control while accessing LDAP server
-     * for GAL. This applies to both Zmail and external LDAP servers. A
-     * value of 0 means paging is not enabled.
+     * for GAL. This applies to both Zmail and external LDAP servers. A value
+     * of 0 means paging is not enabled.
      *
      * @return zmailGalLdapPageSize, or 1000 if unset
      *
@@ -10154,8 +10043,8 @@ public abstract class ZAttrDomain extends NamedEntry {
 
     /**
      * LDAP page size for paged search control while accessing LDAP server
-     * for GAL. This applies to both Zmail and external LDAP servers. A
-     * value of 0 means paging is not enabled.
+     * for GAL. This applies to both Zmail and external LDAP servers. A value
+     * of 0 means paging is not enabled.
      *
      * @param zmailGalLdapPageSize new value
      * @throws org.zmail.common.service.ServiceException if error during update
@@ -10171,8 +10060,8 @@ public abstract class ZAttrDomain extends NamedEntry {
 
     /**
      * LDAP page size for paged search control while accessing LDAP server
-     * for GAL. This applies to both Zmail and external LDAP servers. A
-     * value of 0 means paging is not enabled.
+     * for GAL. This applies to both Zmail and external LDAP servers. A value
+     * of 0 means paging is not enabled.
      *
      * @param zmailGalLdapPageSize new value
      * @param attrs existing map to populate, or null to create a new map
@@ -10189,8 +10078,8 @@ public abstract class ZAttrDomain extends NamedEntry {
 
     /**
      * LDAP page size for paged search control while accessing LDAP server
-     * for GAL. This applies to both Zmail and external LDAP servers. A
-     * value of 0 means paging is not enabled.
+     * for GAL. This applies to both Zmail and external LDAP servers. A value
+     * of 0 means paging is not enabled.
      *
      * @throws org.zmail.common.service.ServiceException if error during update
      *
@@ -10205,8 +10094,8 @@ public abstract class ZAttrDomain extends NamedEntry {
 
     /**
      * LDAP page size for paged search control while accessing LDAP server
-     * for GAL. This applies to both Zmail and external LDAP servers. A
-     * value of 0 means paging is not enabled.
+     * for GAL. This applies to both Zmail and external LDAP servers. A value
+     * of 0 means paging is not enabled.
      *
      * @param attrs existing map to populate, or null to create a new map
      * @return populated map to pass into Provisioning.modifyAttrs
@@ -10912,8 +10801,8 @@ public abstract class ZAttrDomain extends NamedEntry {
      * external LDAP GAL authentication mechanism for GAL sync none:
      * anonymous binding simple: zmailGalLdapBindDn and
      * zmailGalLdapBindPassword has to be set kerberos5:
-     * zmailGalLdapKerberos5Principal and zmailGalLdapKerberos5Keytab has
-     * to be set if not set fallback to zmailGalLdapAuthMech
+     * zmailGalLdapKerberos5Principal and zmailGalLdapKerberos5Keytab has to
+     * be set if not set fallback to zmailGalLdapAuthMech
      *
      * <p>Valid values: [none, kerberos5, simple]
      *
@@ -10930,8 +10819,8 @@ public abstract class ZAttrDomain extends NamedEntry {
      * external LDAP GAL authentication mechanism for GAL sync none:
      * anonymous binding simple: zmailGalLdapBindDn and
      * zmailGalLdapBindPassword has to be set kerberos5:
-     * zmailGalLdapKerberos5Principal and zmailGalLdapKerberos5Keytab has
-     * to be set if not set fallback to zmailGalLdapAuthMech
+     * zmailGalLdapKerberos5Principal and zmailGalLdapKerberos5Keytab has to
+     * be set if not set fallback to zmailGalLdapAuthMech
      *
      * <p>Valid values: [none, kerberos5, simple]
      *
@@ -10948,8 +10837,8 @@ public abstract class ZAttrDomain extends NamedEntry {
      * external LDAP GAL authentication mechanism for GAL sync none:
      * anonymous binding simple: zmailGalLdapBindDn and
      * zmailGalLdapBindPassword has to be set kerberos5:
-     * zmailGalLdapKerberos5Principal and zmailGalLdapKerberos5Keytab has
-     * to be set if not set fallback to zmailGalLdapAuthMech
+     * zmailGalLdapKerberos5Principal and zmailGalLdapKerberos5Keytab has to
+     * be set if not set fallback to zmailGalLdapAuthMech
      *
      * <p>Valid values: [none, kerberos5, simple]
      *
@@ -10969,8 +10858,8 @@ public abstract class ZAttrDomain extends NamedEntry {
      * external LDAP GAL authentication mechanism for GAL sync none:
      * anonymous binding simple: zmailGalLdapBindDn and
      * zmailGalLdapBindPassword has to be set kerberos5:
-     * zmailGalLdapKerberos5Principal and zmailGalLdapKerberos5Keytab has
-     * to be set if not set fallback to zmailGalLdapAuthMech
+     * zmailGalLdapKerberos5Principal and zmailGalLdapKerberos5Keytab has to
+     * be set if not set fallback to zmailGalLdapAuthMech
      *
      * <p>Valid values: [none, kerberos5, simple]
      *
@@ -10991,8 +10880,8 @@ public abstract class ZAttrDomain extends NamedEntry {
      * external LDAP GAL authentication mechanism for GAL sync none:
      * anonymous binding simple: zmailGalLdapBindDn and
      * zmailGalLdapBindPassword has to be set kerberos5:
-     * zmailGalLdapKerberos5Principal and zmailGalLdapKerberos5Keytab has
-     * to be set if not set fallback to zmailGalLdapAuthMech
+     * zmailGalLdapKerberos5Principal and zmailGalLdapKerberos5Keytab has to
+     * be set if not set fallback to zmailGalLdapAuthMech
      *
      * <p>Valid values: [none, kerberos5, simple]
      *
@@ -11012,8 +10901,8 @@ public abstract class ZAttrDomain extends NamedEntry {
      * external LDAP GAL authentication mechanism for GAL sync none:
      * anonymous binding simple: zmailGalLdapBindDn and
      * zmailGalLdapBindPassword has to be set kerberos5:
-     * zmailGalLdapKerberos5Principal and zmailGalLdapKerberos5Keytab has
-     * to be set if not set fallback to zmailGalLdapAuthMech
+     * zmailGalLdapKerberos5Principal and zmailGalLdapKerberos5Keytab has to
+     * be set if not set fallback to zmailGalLdapAuthMech
      *
      * <p>Valid values: [none, kerberos5, simple]
      *
@@ -11034,8 +10923,8 @@ public abstract class ZAttrDomain extends NamedEntry {
      * external LDAP GAL authentication mechanism for GAL sync none:
      * anonymous binding simple: zmailGalLdapBindDn and
      * zmailGalLdapBindPassword has to be set kerberos5:
-     * zmailGalLdapKerberos5Principal and zmailGalLdapKerberos5Keytab has
-     * to be set if not set fallback to zmailGalLdapAuthMech
+     * zmailGalLdapKerberos5Principal and zmailGalLdapKerberos5Keytab has to
+     * be set if not set fallback to zmailGalLdapAuthMech
      *
      * <p>Valid values: [none, kerberos5, simple]
      *
@@ -11054,8 +10943,8 @@ public abstract class ZAttrDomain extends NamedEntry {
      * external LDAP GAL authentication mechanism for GAL sync none:
      * anonymous binding simple: zmailGalLdapBindDn and
      * zmailGalLdapBindPassword has to be set kerberos5:
-     * zmailGalLdapKerberos5Principal and zmailGalLdapKerberos5Keytab has
-     * to be set if not set fallback to zmailGalLdapAuthMech
+     * zmailGalLdapKerberos5Principal and zmailGalLdapKerberos5Keytab has to
+     * be set if not set fallback to zmailGalLdapAuthMech
      *
      * <p>Valid values: [none, kerberos5, simple]
      *
@@ -11698,8 +11587,7 @@ public abstract class ZAttrDomain extends NamedEntry {
     }
 
     /**
-     * LDAP URL for external GAL sync, if not set fallback to
-     * zmailGalLdapURL
+     * LDAP URL for external GAL sync, if not set fallback to zmailGalLdapURL
      *
      * @return zmailGalSyncLdapURL, or empty array if unset
      *
@@ -11711,8 +11599,7 @@ public abstract class ZAttrDomain extends NamedEntry {
     }
 
     /**
-     * LDAP URL for external GAL sync, if not set fallback to
-     * zmailGalLdapURL
+     * LDAP URL for external GAL sync, if not set fallback to zmailGalLdapURL
      *
      * @param zmailGalSyncLdapURL new value
      * @throws org.zmail.common.service.ServiceException if error during update
@@ -11727,8 +11614,7 @@ public abstract class ZAttrDomain extends NamedEntry {
     }
 
     /**
-     * LDAP URL for external GAL sync, if not set fallback to
-     * zmailGalLdapURL
+     * LDAP URL for external GAL sync, if not set fallback to zmailGalLdapURL
      *
      * @param zmailGalSyncLdapURL new value
      * @param attrs existing map to populate, or null to create a new map
@@ -11744,8 +11630,7 @@ public abstract class ZAttrDomain extends NamedEntry {
     }
 
     /**
-     * LDAP URL for external GAL sync, if not set fallback to
-     * zmailGalLdapURL
+     * LDAP URL for external GAL sync, if not set fallback to zmailGalLdapURL
      *
      * @param zmailGalSyncLdapURL new to add to existing values
      * @throws org.zmail.common.service.ServiceException if error during update
@@ -11760,8 +11645,7 @@ public abstract class ZAttrDomain extends NamedEntry {
     }
 
     /**
-     * LDAP URL for external GAL sync, if not set fallback to
-     * zmailGalLdapURL
+     * LDAP URL for external GAL sync, if not set fallback to zmailGalLdapURL
      *
      * @param zmailGalSyncLdapURL new to add to existing values
      * @param attrs existing map to populate, or null to create a new map
@@ -11777,8 +11661,7 @@ public abstract class ZAttrDomain extends NamedEntry {
     }
 
     /**
-     * LDAP URL for external GAL sync, if not set fallback to
-     * zmailGalLdapURL
+     * LDAP URL for external GAL sync, if not set fallback to zmailGalLdapURL
      *
      * @param zmailGalSyncLdapURL existing value to remove
      * @throws org.zmail.common.service.ServiceException if error during update
@@ -11793,8 +11676,7 @@ public abstract class ZAttrDomain extends NamedEntry {
     }
 
     /**
-     * LDAP URL for external GAL sync, if not set fallback to
-     * zmailGalLdapURL
+     * LDAP URL for external GAL sync, if not set fallback to zmailGalLdapURL
      *
      * @param zmailGalSyncLdapURL existing value to remove
      * @param attrs existing map to populate, or null to create a new map
@@ -11810,8 +11692,7 @@ public abstract class ZAttrDomain extends NamedEntry {
     }
 
     /**
-     * LDAP URL for external GAL sync, if not set fallback to
-     * zmailGalLdapURL
+     * LDAP URL for external GAL sync, if not set fallback to zmailGalLdapURL
      *
      * @throws org.zmail.common.service.ServiceException if error during update
      *
@@ -11825,8 +11706,7 @@ public abstract class ZAttrDomain extends NamedEntry {
     }
 
     /**
-     * LDAP URL for external GAL sync, if not set fallback to
-     * zmailGalLdapURL
+     * LDAP URL for external GAL sync, if not set fallback to zmailGalLdapURL
      *
      * @param attrs existing map to populate, or null to create a new map
      * @return populated map to pass into Provisioning.modifyAttrs
@@ -16572,24 +16452,23 @@ public abstract class ZAttrDomain extends NamedEntry {
     }
 
     /**
-     * Whether or not to discover search base DNs if
-     * zmailSMIMELdapSearchBase is not set. Allowed values are TRUE or
-     * FALSE. If zmailSMIMELdapSearchBase is set for a config, this
-     * attribute is ignored for the config. If not set, default for the
-     * config is FALSE. In that case, if zmailSMIMELdapSearchBase is not
-     * set, the search will default to the rootDSE. If multiple DNs are
-     * discovered, the ldap search will use them one by one until a hit is
-     * returned. All SMIME attributes are in the format of
-     * {config-name}:{value}. A &#039;SMIME config&#039; is a set of SMIME
-     * attribute values with the same {config-name}. Multiple SMIME configs
-     * can be configured on a domain or on globalconfig. Note: SMIME
-     * attributes on domains do not inherited values from globalconfig, they
-     * are not domain-inherited attributes. During SMIME public key lookup,
-     * if there are any SMIME config on the domain of the account, they are
-     * used. SMIME configs on globalconfig will be used only when there is no
-     * SMIME config on the domain. SMIME attributes cannot be modified
-     * directly with zmprov md/mcf commands. Use zmprov
-     * gcsc/gdsc/mcsc/mdsc/rcsc/rdsc command instead.
+     * Whether or not to discover search base DNs if zmailSMIMELdapSearchBase
+     * is not set. Allowed values are TRUE or FALSE. If
+     * zmailSMIMELdapSearchBase is set for a config, this attribute is
+     * ignored for the config. If not set, default for the config is FALSE.
+     * In that case, if zmailSMIMELdapSearchBase is not set, the search will
+     * default to the rootDSE. If multiple DNs are discovered, the ldap
+     * search will use them one by one until a hit is returned. All SMIME
+     * attributes are in the format of {config-name}:{value}. A &#039;SMIME
+     * config&#039; is a set of SMIME attribute values with the same
+     * {config-name}. Multiple SMIME configs can be configured on a domain or
+     * on globalconfig. Note: SMIME attributes on domains do not inherited
+     * values from globalconfig, they are not domain-inherited attributes.
+     * During SMIME public key lookup, if there are any SMIME config on the
+     * domain of the account, they are used. SMIME configs on globalconfig
+     * will be used only when there is no SMIME config on the domain. SMIME
+     * attributes cannot be modified directly with zmprov md/mcf commands.
+     * Use zmprov gcsc/gdsc/mcsc/mdsc/rcsc/rdsc command instead.
      *
      * @return zmailSMIMELdapDiscoverSearchBaseEnabled, or empty array if unset
      *
@@ -16601,24 +16480,23 @@ public abstract class ZAttrDomain extends NamedEntry {
     }
 
     /**
-     * Whether or not to discover search base DNs if
-     * zmailSMIMELdapSearchBase is not set. Allowed values are TRUE or
-     * FALSE. If zmailSMIMELdapSearchBase is set for a config, this
-     * attribute is ignored for the config. If not set, default for the
-     * config is FALSE. In that case, if zmailSMIMELdapSearchBase is not
-     * set, the search will default to the rootDSE. If multiple DNs are
-     * discovered, the ldap search will use them one by one until a hit is
-     * returned. All SMIME attributes are in the format of
-     * {config-name}:{value}. A &#039;SMIME config&#039; is a set of SMIME
-     * attribute values with the same {config-name}. Multiple SMIME configs
-     * can be configured on a domain or on globalconfig. Note: SMIME
-     * attributes on domains do not inherited values from globalconfig, they
-     * are not domain-inherited attributes. During SMIME public key lookup,
-     * if there are any SMIME config on the domain of the account, they are
-     * used. SMIME configs on globalconfig will be used only when there is no
-     * SMIME config on the domain. SMIME attributes cannot be modified
-     * directly with zmprov md/mcf commands. Use zmprov
-     * gcsc/gdsc/mcsc/mdsc/rcsc/rdsc command instead.
+     * Whether or not to discover search base DNs if zmailSMIMELdapSearchBase
+     * is not set. Allowed values are TRUE or FALSE. If
+     * zmailSMIMELdapSearchBase is set for a config, this attribute is
+     * ignored for the config. If not set, default for the config is FALSE.
+     * In that case, if zmailSMIMELdapSearchBase is not set, the search will
+     * default to the rootDSE. If multiple DNs are discovered, the ldap
+     * search will use them one by one until a hit is returned. All SMIME
+     * attributes are in the format of {config-name}:{value}. A &#039;SMIME
+     * config&#039; is a set of SMIME attribute values with the same
+     * {config-name}. Multiple SMIME configs can be configured on a domain or
+     * on globalconfig. Note: SMIME attributes on domains do not inherited
+     * values from globalconfig, they are not domain-inherited attributes.
+     * During SMIME public key lookup, if there are any SMIME config on the
+     * domain of the account, they are used. SMIME configs on globalconfig
+     * will be used only when there is no SMIME config on the domain. SMIME
+     * attributes cannot be modified directly with zmprov md/mcf commands.
+     * Use zmprov gcsc/gdsc/mcsc/mdsc/rcsc/rdsc command instead.
      *
      * @param zmailSMIMELdapDiscoverSearchBaseEnabled new value
      * @throws org.zmail.common.service.ServiceException if error during update
@@ -16633,24 +16511,23 @@ public abstract class ZAttrDomain extends NamedEntry {
     }
 
     /**
-     * Whether or not to discover search base DNs if
-     * zmailSMIMELdapSearchBase is not set. Allowed values are TRUE or
-     * FALSE. If zmailSMIMELdapSearchBase is set for a config, this
-     * attribute is ignored for the config. If not set, default for the
-     * config is FALSE. In that case, if zmailSMIMELdapSearchBase is not
-     * set, the search will default to the rootDSE. If multiple DNs are
-     * discovered, the ldap search will use them one by one until a hit is
-     * returned. All SMIME attributes are in the format of
-     * {config-name}:{value}. A &#039;SMIME config&#039; is a set of SMIME
-     * attribute values with the same {config-name}. Multiple SMIME configs
-     * can be configured on a domain or on globalconfig. Note: SMIME
-     * attributes on domains do not inherited values from globalconfig, they
-     * are not domain-inherited attributes. During SMIME public key lookup,
-     * if there are any SMIME config on the domain of the account, they are
-     * used. SMIME configs on globalconfig will be used only when there is no
-     * SMIME config on the domain. SMIME attributes cannot be modified
-     * directly with zmprov md/mcf commands. Use zmprov
-     * gcsc/gdsc/mcsc/mdsc/rcsc/rdsc command instead.
+     * Whether or not to discover search base DNs if zmailSMIMELdapSearchBase
+     * is not set. Allowed values are TRUE or FALSE. If
+     * zmailSMIMELdapSearchBase is set for a config, this attribute is
+     * ignored for the config. If not set, default for the config is FALSE.
+     * In that case, if zmailSMIMELdapSearchBase is not set, the search will
+     * default to the rootDSE. If multiple DNs are discovered, the ldap
+     * search will use them one by one until a hit is returned. All SMIME
+     * attributes are in the format of {config-name}:{value}. A &#039;SMIME
+     * config&#039; is a set of SMIME attribute values with the same
+     * {config-name}. Multiple SMIME configs can be configured on a domain or
+     * on globalconfig. Note: SMIME attributes on domains do not inherited
+     * values from globalconfig, they are not domain-inherited attributes.
+     * During SMIME public key lookup, if there are any SMIME config on the
+     * domain of the account, they are used. SMIME configs on globalconfig
+     * will be used only when there is no SMIME config on the domain. SMIME
+     * attributes cannot be modified directly with zmprov md/mcf commands.
+     * Use zmprov gcsc/gdsc/mcsc/mdsc/rcsc/rdsc command instead.
      *
      * @param zmailSMIMELdapDiscoverSearchBaseEnabled new value
      * @param attrs existing map to populate, or null to create a new map
@@ -16666,24 +16543,23 @@ public abstract class ZAttrDomain extends NamedEntry {
     }
 
     /**
-     * Whether or not to discover search base DNs if
-     * zmailSMIMELdapSearchBase is not set. Allowed values are TRUE or
-     * FALSE. If zmailSMIMELdapSearchBase is set for a config, this
-     * attribute is ignored for the config. If not set, default for the
-     * config is FALSE. In that case, if zmailSMIMELdapSearchBase is not
-     * set, the search will default to the rootDSE. If multiple DNs are
-     * discovered, the ldap search will use them one by one until a hit is
-     * returned. All SMIME attributes are in the format of
-     * {config-name}:{value}. A &#039;SMIME config&#039; is a set of SMIME
-     * attribute values with the same {config-name}. Multiple SMIME configs
-     * can be configured on a domain or on globalconfig. Note: SMIME
-     * attributes on domains do not inherited values from globalconfig, they
-     * are not domain-inherited attributes. During SMIME public key lookup,
-     * if there are any SMIME config on the domain of the account, they are
-     * used. SMIME configs on globalconfig will be used only when there is no
-     * SMIME config on the domain. SMIME attributes cannot be modified
-     * directly with zmprov md/mcf commands. Use zmprov
-     * gcsc/gdsc/mcsc/mdsc/rcsc/rdsc command instead.
+     * Whether or not to discover search base DNs if zmailSMIMELdapSearchBase
+     * is not set. Allowed values are TRUE or FALSE. If
+     * zmailSMIMELdapSearchBase is set for a config, this attribute is
+     * ignored for the config. If not set, default for the config is FALSE.
+     * In that case, if zmailSMIMELdapSearchBase is not set, the search will
+     * default to the rootDSE. If multiple DNs are discovered, the ldap
+     * search will use them one by one until a hit is returned. All SMIME
+     * attributes are in the format of {config-name}:{value}. A &#039;SMIME
+     * config&#039; is a set of SMIME attribute values with the same
+     * {config-name}. Multiple SMIME configs can be configured on a domain or
+     * on globalconfig. Note: SMIME attributes on domains do not inherited
+     * values from globalconfig, they are not domain-inherited attributes.
+     * During SMIME public key lookup, if there are any SMIME config on the
+     * domain of the account, they are used. SMIME configs on globalconfig
+     * will be used only when there is no SMIME config on the domain. SMIME
+     * attributes cannot be modified directly with zmprov md/mcf commands.
+     * Use zmprov gcsc/gdsc/mcsc/mdsc/rcsc/rdsc command instead.
      *
      * @param zmailSMIMELdapDiscoverSearchBaseEnabled new to add to existing values
      * @throws org.zmail.common.service.ServiceException if error during update
@@ -16698,24 +16574,23 @@ public abstract class ZAttrDomain extends NamedEntry {
     }
 
     /**
-     * Whether or not to discover search base DNs if
-     * zmailSMIMELdapSearchBase is not set. Allowed values are TRUE or
-     * FALSE. If zmailSMIMELdapSearchBase is set for a config, this
-     * attribute is ignored for the config. If not set, default for the
-     * config is FALSE. In that case, if zmailSMIMELdapSearchBase is not
-     * set, the search will default to the rootDSE. If multiple DNs are
-     * discovered, the ldap search will use them one by one until a hit is
-     * returned. All SMIME attributes are in the format of
-     * {config-name}:{value}. A &#039;SMIME config&#039; is a set of SMIME
-     * attribute values with the same {config-name}. Multiple SMIME configs
-     * can be configured on a domain or on globalconfig. Note: SMIME
-     * attributes on domains do not inherited values from globalconfig, they
-     * are not domain-inherited attributes. During SMIME public key lookup,
-     * if there are any SMIME config on the domain of the account, they are
-     * used. SMIME configs on globalconfig will be used only when there is no
-     * SMIME config on the domain. SMIME attributes cannot be modified
-     * directly with zmprov md/mcf commands. Use zmprov
-     * gcsc/gdsc/mcsc/mdsc/rcsc/rdsc command instead.
+     * Whether or not to discover search base DNs if zmailSMIMELdapSearchBase
+     * is not set. Allowed values are TRUE or FALSE. If
+     * zmailSMIMELdapSearchBase is set for a config, this attribute is
+     * ignored for the config. If not set, default for the config is FALSE.
+     * In that case, if zmailSMIMELdapSearchBase is not set, the search will
+     * default to the rootDSE. If multiple DNs are discovered, the ldap
+     * search will use them one by one until a hit is returned. All SMIME
+     * attributes are in the format of {config-name}:{value}. A &#039;SMIME
+     * config&#039; is a set of SMIME attribute values with the same
+     * {config-name}. Multiple SMIME configs can be configured on a domain or
+     * on globalconfig. Note: SMIME attributes on domains do not inherited
+     * values from globalconfig, they are not domain-inherited attributes.
+     * During SMIME public key lookup, if there are any SMIME config on the
+     * domain of the account, they are used. SMIME configs on globalconfig
+     * will be used only when there is no SMIME config on the domain. SMIME
+     * attributes cannot be modified directly with zmprov md/mcf commands.
+     * Use zmprov gcsc/gdsc/mcsc/mdsc/rcsc/rdsc command instead.
      *
      * @param zmailSMIMELdapDiscoverSearchBaseEnabled new to add to existing values
      * @param attrs existing map to populate, or null to create a new map
@@ -16731,24 +16606,23 @@ public abstract class ZAttrDomain extends NamedEntry {
     }
 
     /**
-     * Whether or not to discover search base DNs if
-     * zmailSMIMELdapSearchBase is not set. Allowed values are TRUE or
-     * FALSE. If zmailSMIMELdapSearchBase is set for a config, this
-     * attribute is ignored for the config. If not set, default for the
-     * config is FALSE. In that case, if zmailSMIMELdapSearchBase is not
-     * set, the search will default to the rootDSE. If multiple DNs are
-     * discovered, the ldap search will use them one by one until a hit is
-     * returned. All SMIME attributes are in the format of
-     * {config-name}:{value}. A &#039;SMIME config&#039; is a set of SMIME
-     * attribute values with the same {config-name}. Multiple SMIME configs
-     * can be configured on a domain or on globalconfig. Note: SMIME
-     * attributes on domains do not inherited values from globalconfig, they
-     * are not domain-inherited attributes. During SMIME public key lookup,
-     * if there are any SMIME config on the domain of the account, they are
-     * used. SMIME configs on globalconfig will be used only when there is no
-     * SMIME config on the domain. SMIME attributes cannot be modified
-     * directly with zmprov md/mcf commands. Use zmprov
-     * gcsc/gdsc/mcsc/mdsc/rcsc/rdsc command instead.
+     * Whether or not to discover search base DNs if zmailSMIMELdapSearchBase
+     * is not set. Allowed values are TRUE or FALSE. If
+     * zmailSMIMELdapSearchBase is set for a config, this attribute is
+     * ignored for the config. If not set, default for the config is FALSE.
+     * In that case, if zmailSMIMELdapSearchBase is not set, the search will
+     * default to the rootDSE. If multiple DNs are discovered, the ldap
+     * search will use them one by one until a hit is returned. All SMIME
+     * attributes are in the format of {config-name}:{value}. A &#039;SMIME
+     * config&#039; is a set of SMIME attribute values with the same
+     * {config-name}. Multiple SMIME configs can be configured on a domain or
+     * on globalconfig. Note: SMIME attributes on domains do not inherited
+     * values from globalconfig, they are not domain-inherited attributes.
+     * During SMIME public key lookup, if there are any SMIME config on the
+     * domain of the account, they are used. SMIME configs on globalconfig
+     * will be used only when there is no SMIME config on the domain. SMIME
+     * attributes cannot be modified directly with zmprov md/mcf commands.
+     * Use zmprov gcsc/gdsc/mcsc/mdsc/rcsc/rdsc command instead.
      *
      * @param zmailSMIMELdapDiscoverSearchBaseEnabled existing value to remove
      * @throws org.zmail.common.service.ServiceException if error during update
@@ -16763,24 +16637,23 @@ public abstract class ZAttrDomain extends NamedEntry {
     }
 
     /**
-     * Whether or not to discover search base DNs if
-     * zmailSMIMELdapSearchBase is not set. Allowed values are TRUE or
-     * FALSE. If zmailSMIMELdapSearchBase is set for a config, this
-     * attribute is ignored for the config. If not set, default for the
-     * config is FALSE. In that case, if zmailSMIMELdapSearchBase is not
-     * set, the search will default to the rootDSE. If multiple DNs are
-     * discovered, the ldap search will use them one by one until a hit is
-     * returned. All SMIME attributes are in the format of
-     * {config-name}:{value}. A &#039;SMIME config&#039; is a set of SMIME
-     * attribute values with the same {config-name}. Multiple SMIME configs
-     * can be configured on a domain or on globalconfig. Note: SMIME
-     * attributes on domains do not inherited values from globalconfig, they
-     * are not domain-inherited attributes. During SMIME public key lookup,
-     * if there are any SMIME config on the domain of the account, they are
-     * used. SMIME configs on globalconfig will be used only when there is no
-     * SMIME config on the domain. SMIME attributes cannot be modified
-     * directly with zmprov md/mcf commands. Use zmprov
-     * gcsc/gdsc/mcsc/mdsc/rcsc/rdsc command instead.
+     * Whether or not to discover search base DNs if zmailSMIMELdapSearchBase
+     * is not set. Allowed values are TRUE or FALSE. If
+     * zmailSMIMELdapSearchBase is set for a config, this attribute is
+     * ignored for the config. If not set, default for the config is FALSE.
+     * In that case, if zmailSMIMELdapSearchBase is not set, the search will
+     * default to the rootDSE. If multiple DNs are discovered, the ldap
+     * search will use them one by one until a hit is returned. All SMIME
+     * attributes are in the format of {config-name}:{value}. A &#039;SMIME
+     * config&#039; is a set of SMIME attribute values with the same
+     * {config-name}. Multiple SMIME configs can be configured on a domain or
+     * on globalconfig. Note: SMIME attributes on domains do not inherited
+     * values from globalconfig, they are not domain-inherited attributes.
+     * During SMIME public key lookup, if there are any SMIME config on the
+     * domain of the account, they are used. SMIME configs on globalconfig
+     * will be used only when there is no SMIME config on the domain. SMIME
+     * attributes cannot be modified directly with zmprov md/mcf commands.
+     * Use zmprov gcsc/gdsc/mcsc/mdsc/rcsc/rdsc command instead.
      *
      * @param zmailSMIMELdapDiscoverSearchBaseEnabled existing value to remove
      * @param attrs existing map to populate, or null to create a new map
@@ -16796,24 +16669,23 @@ public abstract class ZAttrDomain extends NamedEntry {
     }
 
     /**
-     * Whether or not to discover search base DNs if
-     * zmailSMIMELdapSearchBase is not set. Allowed values are TRUE or
-     * FALSE. If zmailSMIMELdapSearchBase is set for a config, this
-     * attribute is ignored for the config. If not set, default for the
-     * config is FALSE. In that case, if zmailSMIMELdapSearchBase is not
-     * set, the search will default to the rootDSE. If multiple DNs are
-     * discovered, the ldap search will use them one by one until a hit is
-     * returned. All SMIME attributes are in the format of
-     * {config-name}:{value}. A &#039;SMIME config&#039; is a set of SMIME
-     * attribute values with the same {config-name}. Multiple SMIME configs
-     * can be configured on a domain or on globalconfig. Note: SMIME
-     * attributes on domains do not inherited values from globalconfig, they
-     * are not domain-inherited attributes. During SMIME public key lookup,
-     * if there are any SMIME config on the domain of the account, they are
-     * used. SMIME configs on globalconfig will be used only when there is no
-     * SMIME config on the domain. SMIME attributes cannot be modified
-     * directly with zmprov md/mcf commands. Use zmprov
-     * gcsc/gdsc/mcsc/mdsc/rcsc/rdsc command instead.
+     * Whether or not to discover search base DNs if zmailSMIMELdapSearchBase
+     * is not set. Allowed values are TRUE or FALSE. If
+     * zmailSMIMELdapSearchBase is set for a config, this attribute is
+     * ignored for the config. If not set, default for the config is FALSE.
+     * In that case, if zmailSMIMELdapSearchBase is not set, the search will
+     * default to the rootDSE. If multiple DNs are discovered, the ldap
+     * search will use them one by one until a hit is returned. All SMIME
+     * attributes are in the format of {config-name}:{value}. A &#039;SMIME
+     * config&#039; is a set of SMIME attribute values with the same
+     * {config-name}. Multiple SMIME configs can be configured on a domain or
+     * on globalconfig. Note: SMIME attributes on domains do not inherited
+     * values from globalconfig, they are not domain-inherited attributes.
+     * During SMIME public key lookup, if there are any SMIME config on the
+     * domain of the account, they are used. SMIME configs on globalconfig
+     * will be used only when there is no SMIME config on the domain. SMIME
+     * attributes cannot be modified directly with zmprov md/mcf commands.
+     * Use zmprov gcsc/gdsc/mcsc/mdsc/rcsc/rdsc command instead.
      *
      * @throws org.zmail.common.service.ServiceException if error during update
      *
@@ -16827,24 +16699,23 @@ public abstract class ZAttrDomain extends NamedEntry {
     }
 
     /**
-     * Whether or not to discover search base DNs if
-     * zmailSMIMELdapSearchBase is not set. Allowed values are TRUE or
-     * FALSE. If zmailSMIMELdapSearchBase is set for a config, this
-     * attribute is ignored for the config. If not set, default for the
-     * config is FALSE. In that case, if zmailSMIMELdapSearchBase is not
-     * set, the search will default to the rootDSE. If multiple DNs are
-     * discovered, the ldap search will use them one by one until a hit is
-     * returned. All SMIME attributes are in the format of
-     * {config-name}:{value}. A &#039;SMIME config&#039; is a set of SMIME
-     * attribute values with the same {config-name}. Multiple SMIME configs
-     * can be configured on a domain or on globalconfig. Note: SMIME
-     * attributes on domains do not inherited values from globalconfig, they
-     * are not domain-inherited attributes. During SMIME public key lookup,
-     * if there are any SMIME config on the domain of the account, they are
-     * used. SMIME configs on globalconfig will be used only when there is no
-     * SMIME config on the domain. SMIME attributes cannot be modified
-     * directly with zmprov md/mcf commands. Use zmprov
-     * gcsc/gdsc/mcsc/mdsc/rcsc/rdsc command instead.
+     * Whether or not to discover search base DNs if zmailSMIMELdapSearchBase
+     * is not set. Allowed values are TRUE or FALSE. If
+     * zmailSMIMELdapSearchBase is set for a config, this attribute is
+     * ignored for the config. If not set, default for the config is FALSE.
+     * In that case, if zmailSMIMELdapSearchBase is not set, the search will
+     * default to the rootDSE. If multiple DNs are discovered, the ldap
+     * search will use them one by one until a hit is returned. All SMIME
+     * attributes are in the format of {config-name}:{value}. A &#039;SMIME
+     * config&#039; is a set of SMIME attribute values with the same
+     * {config-name}. Multiple SMIME configs can be configured on a domain or
+     * on globalconfig. Note: SMIME attributes on domains do not inherited
+     * values from globalconfig, they are not domain-inherited attributes.
+     * During SMIME public key lookup, if there are any SMIME config on the
+     * domain of the account, they are used. SMIME configs on globalconfig
+     * will be used only when there is no SMIME config on the domain. SMIME
+     * attributes cannot be modified directly with zmprov md/mcf commands.
+     * Use zmprov gcsc/gdsc/mcsc/mdsc/rcsc/rdsc command instead.
      *
      * @param attrs existing map to populate, or null to create a new map
      * @return populated map to pass into Provisioning.modifyAttrs

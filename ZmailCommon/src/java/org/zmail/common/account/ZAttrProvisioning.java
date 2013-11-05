@@ -28,7 +28,7 @@ public class ZAttrProvisioning {
 
     ///// BEGIN-AUTO-GEN-REPLACE
 
-    /* build: 8.0.0_BETA1_1111 norman 20131010-1457 */
+    /* build: 8.0.0_BETA1_1111 norman 20131025-1439 */
 
     public static enum AccountCalendarUserType {
         RESOURCE("RESOURCE"),
@@ -1200,13 +1200,13 @@ public class ZAttrProvisioning {
 
     public static enum ReverseProxyLogLevel {
         warn("warn"),
+        debug_zmail("debug_zmail"),
         debug_http("debug_http"),
         error("error"),
         crit("crit"),
         debug("debug"),
         debug_mail("debug_mail"),
         notice("notice"),
-        debug_zmail("debug_zmail"),
         debug_core("debug_core"),
         info("info");
         private String mValue;
@@ -1219,13 +1219,13 @@ public class ZAttrProvisioning {
              throw ServiceException.INVALID_REQUEST("invalid value: "+s+", valid values: "+ Arrays.asList(values()), null);
         }
         public boolean isWarn() { return this == warn;}
+        public boolean isDebug_zmail() { return this == debug_zmail;}
         public boolean isDebug_http() { return this == debug_http;}
         public boolean isError() { return this == error;}
         public boolean isCrit() { return this == crit;}
         public boolean isDebug() { return this == debug;}
         public boolean isDebug_mail() { return this == debug_mail;}
         public boolean isNotice() { return this == notice;}
-        public boolean isDebug_zmail() { return this == debug_zmail;}
         public boolean isDebug_core() { return this == debug_core;}
         public boolean isInfo() { return this == info;}
     }
@@ -1743,58 +1743,58 @@ public class ZAttrProvisioning {
      * name to use in greeting and sign-off; if empty, uses hostname
      */
     @ZAttr(id=92)
-    public static final String A_zimbraActiveSyncAdvertisedName = "zimbraActiveSyncAdvertisedName";
+    public static final String A_zmailActiveSyncAdvertisedName = "zmailActiveSyncAdvertisedName";
 
     /**
      * interface address on which ActiveSync server should listen; if empty,
      * binds to all interfaces
      */
     @ZAttr(id=89)
-    public static final String A_zimbraActiveSyncBindAddress = "zimbraActiveSyncBindAddress";
+    public static final String A_zmailActiveSyncBindAddress = "zmailActiveSyncBindAddress";
 
     /**
      * port number on which ActiveSync server should listen
      */
     @ZAttr(id=88)
-    public static final String A_zimbraActiveSyncBindPort = "zimbraActiveSyncBindPort";
+    public static final String A_zmailActiveSyncBindPort = "zmailActiveSyncBindPort";
 
     /**
      * Whether to expose version on POP3 banner
      */
     @ZAttr(id=91)
-    public static final String A_zimbraActiveSyncExposeVersionOnBanner = "zimbraActiveSyncExposeVersionOnBanner";
+    public static final String A_zmailActiveSyncExposeVersionOnBanner = "zmailActiveSyncExposeVersionOnBanner";
 
     /**
      * Maximum number of concurrent ActiveSync connections allowed. New
      * connections exceeding this limit are rejected.
      */
     @ZAttr(id=84)
-    public static final String A_zimbraActiveSyncMaxConnections = "zimbraActiveSyncMaxConnections";
+    public static final String A_zmailActiveSyncMaxConnections = "zmailActiveSyncMaxConnections";
 
     /**
      * number of handler threads
      */
     @ZAttr(id=85)
-    public static final String A_zimbraActiveSyncNumThreads = "zimbraActiveSyncNumThreads";
+    public static final String A_zmailActiveSyncNumThreads = "zmailActiveSyncNumThreads";
 
     /**
      * number of seconds to wait before forcing ActiveSync server shutdown
      */
     @ZAttr(id=86)
-    public static final String A_zimbraActiveSyncShutdownGraceSeconds = "zimbraActiveSyncShutdownGraceSeconds";
+    public static final String A_zmailActiveSyncShutdownGraceSeconds = "zmailActiveSyncShutdownGraceSeconds";
 
     /**
      * interface address on which ActiveSync server should listen; if empty,
      * binds to all interfaces
      */
     @ZAttr(id=90)
-    public static final String A_zimbraActiveSyncSSLBindAddress = "zimbraActiveSyncSSLBindAddress";
+    public static final String A_zmailActiveSyncSSLBindAddress = "zmailActiveSyncSSLBindAddress";
 
     /**
      * port number on which ActiveSync server should listen
      */
     @ZAttr(id=87)
-    public static final String A_zimbraActiveSyncSSLBindPort = "zimbraActiveSyncSSLBindPort";
+    public static final String A_zmailActiveSyncSSLBindPort = "zmailActiveSyncSSLBindPort";
 
     /**
      * access control mechanism for admin access acl: ACL based access
@@ -2138,8 +2138,8 @@ public class ZAttrProvisioning {
     public static final String A_zmailAuthLdapURL = "zmailAuthLdapURL";
 
     /**
-     * mechanism to use for verifying password. Valid values are zmail,
-     * ldap, ad, kerberos5, custom:{handler-name} [arg1 arg2 ...]
+     * mechanism to use for verifying password. Valid values are zmail, ldap,
+     * ad, kerberos5, custom:{handler-name} [arg1 arg2 ...]
      */
     @ZAttr(id=42)
     public static final String A_zmailAuthMech = "zmailAuthMech";
@@ -2206,10 +2206,10 @@ public class ZAttrProvisioning {
      * external directory will be populated in Zmail directory. Invalid
      * mapping configuration will cause the account creation to fail.
      * Examples of bad mapping: - invalid external attribute name. - invalid
-     * Zmail attribute name. - external attribute has multiple values but
-     * the zmail attribute is single-valued. - syntax violation. e.g. Value
-     * on the external attribute is a String but the Zmail attribute is
-     * declared an integer.
+     * Zmail attribute name. - external attribute has multiple values but the
+     * zmail attribute is single-valued. - syntax violation. e.g. Value on
+     * the external attribute is a String but the Zmail attribute is declared
+     * an integer.
      *
      * @since ZCS 8.0.0
      */
@@ -2238,9 +2238,9 @@ public class ZAttrProvisioning {
     public static final String A_zmailAutoProvBatchSize = "zmailAutoProvBatchSize";
 
     /**
-     * EAGER mode: for Zmail internal use only - do not change it. LAZY
-     * mode: N/A MANUAL mode: N/A Timestamp when the external domain is last
-     * polled for EAGER auto provision. The poll (LDAP search) for the next
+     * EAGER mode: for Zmail internal use only - do not change it. LAZY mode:
+     * N/A MANUAL mode: N/A Timestamp when the external domain is last polled
+     * for EAGER auto provision. The poll (LDAP search) for the next
      * iteration will fetch external entries with create timestamp later than
      * the timestamp recorded from the previous iteration.
      *
@@ -2286,10 +2286,9 @@ public class ZAttrProvisioning {
 
     /**
      * EAGER mode: required LAZY mode: required (if using
-     * zmailAutoProvLdapSearchFilter), MANUAL mode: required LDAP search
-     * base for auto provision, used in conjunction with
-     * zmailAutoProvLdapSearchFilter. If not set, LDAP root DSE will be
-     * used.
+     * zmailAutoProvLdapSearchFilter), MANUAL mode: required LDAP search base
+     * for auto provision, used in conjunction with
+     * zmailAutoProvLdapSearchFilter. If not set, LDAP root DSE will be used.
      *
      * @since ZCS 8.0.0
      */
@@ -2338,25 +2337,7 @@ public class ZAttrProvisioning {
      * singleton listener instance is invoked after each account is auto
      * created in Zmail. Listener can be plugged in as a server extension to
      * handle tasks like updating the account auto provision status in the
-     * external LDAP directory. At each eager provision interval, ZCS does an
-     * LDAP search based on the value configured in
-     * zmailAutoProvLdapSearchFilter. Returned entries from this search are
-     * candidates to be auto provisioned in this batch. The
-     * zmailAutoProvLdapSearchFilter should include an assertion that will
-     * only hit entries in the external directory that have not yet been
-     * provisioned in ZCS, otherwise it&#039;s likely the same entries will
-     * be repeated pulled in to ZCS. After an account is auto provisioned in
-     * ZCS,
-     * org.zmail.cs.account.Account.AutoProvisionListener.postCreate(Domain
-     * domain, Account acct, String externalDN) will be called by the auto
-     * provisioning framework. Customer can implement the
-     * AutoProvisionListener interface in a ZCS server extension and get
-     * their AutoProvisionListener.postCreate() get called. The
-     * implementation of customer&#039;s postCreate method can be, for
-     * example, setting an attribute in the external directory on the account
-     * just provisioned in ZCS. The attribute can be included as a condition
-     * in the zmailAutoProvLdapSearchFilter, so the entry won&#039;t be
-     * returned again by the LDAP search in the next interval.
+     * external LDAP directory.
      *
      * @since ZCS 8.0.0
      */
@@ -2364,8 +2345,8 @@ public class ZAttrProvisioning {
     public static final String A_zmailAutoProvListenerClass = "zmailAutoProvListenerClass";
 
     /**
-     * EAGER mode: for Zmail internal use only - do not change it. LAZY
-     * mode: N/A MANUAL mode: N/A For EAGER auto provision, a domain can be
+     * EAGER mode: for Zmail internal use only - do not change it. LAZY mode:
+     * N/A MANUAL mode: N/A For EAGER auto provision, a domain can be
      * scheduled on multiple server. To avoid conflict, only one server can
      * perform provisioning for a domain at one time. This attribute servers
      * a lock for the test-and-set LDAP operation to synchronize EAGER auto
@@ -2389,9 +2370,9 @@ public class ZAttrProvisioning {
      * source and select an entry from the search result to create the
      * corresponding Zmail account for the external entry. In all cases,
      * localpart of the Zmail account is mapped from an attribute on the
-     * external entry based on zmailAutoProvAccountNameMap. The Zmail
-     * account is populated with attributes mapped from the external entry
-     * based on zmailAutoProvAttrMap.
+     * external entry based on zmailAutoProvAccountNameMap. The Zmail account
+     * is populated with attributes mapped from the external entry based on
+     * zmailAutoProvAttrMap.
      *
      * @since ZCS 8.0.0
      */
@@ -2436,9 +2417,9 @@ public class ZAttrProvisioning {
      * factors: zmailAutoProvBatchSize and number of domains configured in
      * zmailAutoProvScheduledDomains. At each interval, the auto provision
      * thread iterates through all domains in zmailAutoProvScheduledDomains
-     * and auto creates up to domain.zmailAutoProvBatchSize accounts. If
-     * that process takes longer than zmailAutoProvPollingInterval then the
-     * next iteration will start immediately instead of waiting for
+     * and auto creates up to domain.zmailAutoProvBatchSize accounts. If that
+     * process takes longer than zmailAutoProvPollingInterval then the next
+     * iteration will start immediately instead of waiting for
      * zmailAutoProvPollingInterval amount of time. If set to 0 when server
      * starts up, the auto provision thread will not start. If changed from a
      * non-0 value to 0 while server is running, the auto provision thread
@@ -2655,8 +2636,8 @@ public class ZAttrProvisioning {
     public static final String A_zmailCalendarCalDavSyncEnd = "zmailCalendarCalDavSyncEnd";
 
     /**
-     * zmailCalendarCalDavSyncStart and zmailCalendarCalDavSyncEnd limits
-     * the window of appointment data available via CalDAV. for example when
+     * zmailCalendarCalDavSyncStart and zmailCalendarCalDavSyncEnd limits the
+     * window of appointment data available via CalDAV. for example when
      * zmailCalendarCalDavSyncStart is set to 30 days, and
      * zmailCalendarCalDavSyncEnd is set to 1 years, then the appointments
      * between (now - 30 days) and (now + 1 year) will be available via
@@ -2942,8 +2923,8 @@ public class ZAttrProvisioning {
 
     /**
      * Deprecated since: 5.0.0. deprecated in favor of user-settable
-     * attribute zmailPrefChildVisibleAccount . Orig desc: zmailId of
-     * visible child accounts
+     * attribute zmailPrefChildVisibleAccount . Orig desc: zmailId of visible
+     * child accounts
      */
     @ZAttr(id=450)
     public static final String A_zmailChildVisibleAccount = "zmailChildVisibleAccount";
@@ -3129,7 +3110,7 @@ public class ZAttrProvisioning {
      * @since ZCS 6.0.0_BETA1
      */
     @ZAttr(id=1441)
-    public static final String A_zimbraDataSourceActiveSyncPollingInterval = "zimbraDataSourceActiveSyncPollingInterval";
+    public static final String A_zmailDataSourceActiveSyncPollingInterval = "zmailDataSourceActiveSyncPollingInterval";
 
     /**
      * properties for data source
@@ -3358,10 +3339,10 @@ public class ZAttrProvisioning {
     public static final String A_zmailDataSourceMaxTraceSize = "zmailDataSourceMaxTraceSize";
 
     /**
-     * Shortest allowed duration for zmailDataSourcePollingInterval.. Must
-     * be in valid duration format: {digits}{time-unit}. digits: 0-9,
-     * time-unit: [hmsd]|ms. h - hours, m - minutes, s - seconds, d - days,
-     * ms - milliseconds. If time unit is not specified, the default is
+     * Shortest allowed duration for zmailDataSourcePollingInterval.. Must be
+     * in valid duration format: {digits}{time-unit}. digits: 0-9, time-unit:
+     * [hmsd]|ms. h - hours, m - minutes, s - seconds, d - days, ms -
+     * milliseconds. If time unit is not specified, the default is
      * s(seconds).
      *
      * @since ZCS 5.0.0
@@ -3389,13 +3370,12 @@ public class ZAttrProvisioning {
      * are migrated to protocol specific
      * zmailDataSource{proto}PollingInterval attributes. 1. if
      * zmailDataSourcePollingInterval is set on data source, use it 2.
-     * otherwise use the zmailDataSource{Proto}PollingInterval on
-     * account/cos 3. if zmailDataSource{Proto}PollingInterval is not set on
-     * account/cos, use 0, which means no automated polling. . Must be in
-     * valid duration format: {digits}{time-unit}. digits: 0-9, time-unit:
-     * [hmsd]|ms. h - hours, m - minutes, s - seconds, d - days, ms -
-     * milliseconds. If time unit is not specified, the default is
-     * s(seconds).
+     * otherwise use the zmailDataSource{Proto}PollingInterval on account/cos
+     * 3. if zmailDataSource{Proto}PollingInterval is not set on account/cos,
+     * use 0, which means no automated polling. . Must be in valid duration
+     * format: {digits}{time-unit}. digits: 0-9, time-unit: [hmsd]|ms. h -
+     * hours, m - minutes, s - seconds, d - days, ms - milliseconds. If time
+     * unit is not specified, the default is s(seconds).
      */
     @ZAttr(id=455)
     public static final String A_zmailDataSourcePollingInterval = "zmailDataSourcePollingInterval";
@@ -3759,9 +3739,9 @@ public class ZAttrProvisioning {
     public static final String A_zmailDomainRenameInfo = "zmailDomainRenameInfo";
 
     /**
-     * domain status. enum values are akin to those of zmailAccountStatus
-     * but the status affects all accounts on the domain. See table below for
-     * how zmailDomainStatus affects account status. active - see
+     * domain status. enum values are akin to those of zmailAccountStatus but
+     * the status affects all accounts on the domain. See table below for how
+     * zmailDomainStatus affects account status. active - see
      * zmailAccountStatus maintenance - see zmailAccountStatus locked - see
      * zmailAccountStatus closed - see zmailAccountStatus suspended -
      * maintenance + no creating/deleting/modifying accounts/DLs under the
@@ -3773,12 +3753,12 @@ public class ZAttrProvisioning {
      * cannot be done in admin console or zmprov. How zmailDomainStatus
      * affects account behavior : -------------------------------------
      * zmailDomainStatus account behavior
-     * ------------------------------------- active zmailAccountStatus
-     * locked zmailAccountStatus if it is maintenance or pending or closed,
-     * else locked maintenance zmailAccountStatus if it is pending or
-     * closed, else maintenance suspended zmailAccountStatus if it is
-     * pending or closed, else maintenance shutdown zmailAccountStatus if it
-     * is pending or closed, else maintenance closed closed
+     * ------------------------------------- active zmailAccountStatus locked
+     * zmailAccountStatus if it is maintenance or pending or closed, else
+     * locked maintenance zmailAccountStatus if it is pending or closed, else
+     * maintenance suspended zmailAccountStatus if it is pending or closed,
+     * else maintenance shutdown zmailAccountStatus if it is pending or
+     * closed, else maintenance closed closed
      *
      * @since ZCS 5.0.0
      */
@@ -3872,10 +3852,10 @@ public class ZAttrProvisioning {
      * Interval between successive executions of the task that: - disables an
      * external virtual account when all its accessible shares have been
      * revoked or expired. - deletes an external virtual account after
-     * zmailExternalAccountLifetimeAfterDisabled of being disabled. . Must
-     * be in valid duration format: {digits}{time-unit}. digits: 0-9,
-     * time-unit: [hmsd]|ms. h - hours, m - minutes, s - seconds, d - days,
-     * ms - milliseconds. If time unit is not specified, the default is
+     * zmailExternalAccountLifetimeAfterDisabled of being disabled. . Must be
+     * in valid duration format: {digits}{time-unit}. digits: 0-9, time-unit:
+     * [hmsd]|ms. h - hours, m - minutes, s - seconds, d - days, ms -
+     * milliseconds. If time unit is not specified, the default is
      * s(seconds).
      *
      * @since ZCS 8.0.0
@@ -4803,8 +4783,8 @@ public class ZAttrProvisioning {
     public static final String A_zmailFilterSleepInterval = "zmailFilterSleepInterval";
 
     /**
-     * Whether to force clear zmail auth cookies when SOAP session ends
-     * (i.e. force logout on browser tab close)
+     * Whether to force clear zmail auth cookies when SOAP session ends (i.e.
+     * force logout on browser tab close)
      *
      * @since ZCS 8.0.4
      */
@@ -5011,8 +4991,8 @@ public class ZAttrProvisioning {
 
     /**
      * external LDAP GAL authentication mechanism none: anonymous binding
-     * simple: zmailGalLdapBindDn and zmailGalLdapBindPassword has to be
-     * set kerberos5: zmailGalLdapKerberos5Principal and
+     * simple: zmailGalLdapBindDn and zmailGalLdapBindPassword has to be set
+     * kerberos5: zmailGalLdapKerberos5Principal and
      * zmailGalLdapKerberos5Keytab has to be set
      *
      * @since ZCS 5.0.0
@@ -5071,8 +5051,8 @@ public class ZAttrProvisioning {
 
     /**
      * LDAP page size for paged search control while accessing LDAP server
-     * for GAL. This applies to both Zmail and external LDAP servers. A
-     * value of 0 means paging is not enabled.
+     * for GAL. This applies to both Zmail and external LDAP servers. A value
+     * of 0 means paging is not enabled.
      *
      * @since ZCS 5.0.1
      */
@@ -5172,8 +5152,8 @@ public class ZAttrProvisioning {
      * external LDAP GAL authentication mechanism for GAL sync none:
      * anonymous binding simple: zmailGalLdapBindDn and
      * zmailGalLdapBindPassword has to be set kerberos5:
-     * zmailGalLdapKerberos5Principal and zmailGalLdapKerberos5Keytab has
-     * to be set if not set fallback to zmailGalLdapAuthMech
+     * zmailGalLdapKerberos5Principal and zmailGalLdapKerberos5Keytab has to
+     * be set if not set fallback to zmailGalLdapAuthMech
      *
      * @since ZCS 5.0.2
      */
@@ -5255,8 +5235,7 @@ public class ZAttrProvisioning {
     public static final String A_zmailGalSyncLdapStartTlsEnabled = "zmailGalSyncLdapStartTlsEnabled";
 
     /**
-     * LDAP URL for external GAL sync, if not set fallback to
-     * zmailGalLdapURL
+     * LDAP URL for external GAL sync, if not set fallback to zmailGalLdapURL
      *
      * @since ZCS 5.0.2
      */
@@ -5365,12 +5344,12 @@ public class ZAttrProvisioning {
     public static final String A_zmailHideInGal = "zmailHideInGal";
 
     /**
-     * Deprecated since: 6.0.0_BETA2. deprecated in favor for
-     * zmailHsmPolicy. Orig desc: Minimum age of mail items whose filesystem
-     * data will be moved to secondary storage.. Must be in valid duration
-     * format: {digits}{time-unit}. digits: 0-9, time-unit: [hmsd]|ms. h -
-     * hours, m - minutes, s - seconds, d - days, ms - milliseconds. If time
-     * unit is not specified, the default is s(seconds).
+     * Deprecated since: 6.0.0_BETA2. deprecated in favor for zmailHsmPolicy.
+     * Orig desc: Minimum age of mail items whose filesystem data will be
+     * moved to secondary storage.. Must be in valid duration format:
+     * {digits}{time-unit}. digits: 0-9, time-unit: [hmsd]|ms. h - hours, m -
+     * minutes, s - seconds, d - days, ms - milliseconds. If time unit is not
+     * specified, the default is s(seconds).
      */
     @ZAttr(id=8)
     public static final String A_zmailHsmAge = "zmailHsmAge";
@@ -6597,8 +6576,8 @@ public class ZAttrProvisioning {
     /**
      * Retention period of messages in the Trash folder. 0 means that all
      * messages will be retained. This admin-modifiable attribute works in
-     * conjunction with zmailPrefTrashLifetime, which is user-modifiable.
-     * The shorter duration is used. . Must be in valid duration format:
+     * conjunction with zmailPrefTrashLifetime, which is user-modifiable. The
+     * shorter duration is used. . Must be in valid duration format:
      * {digits}{time-unit}. digits: 0-9, time-unit: [hmsd]|ms. h - hours, m -
      * minutes, s - seconds, d - days, ms - milliseconds. If time unit is not
      * specified, the default is s(seconds).
@@ -6920,9 +6899,8 @@ public class ZAttrProvisioning {
     /**
      * whether the Bluetooth capabilities are allowed on the device. The
      * available options are Disable, HandsfreeOnly, and Allow. 0 - DISABLE 1
-     * - HANDSFREE 2 - ALLOW ignored if
-     * zmailFeatureMobilePolicyEnabled=FALSE or
-     * zmailMobilePolicyAllowBluetooth value is set to -1
+     * - HANDSFREE 2 - ALLOW ignored if zmailFeatureMobilePolicyEnabled=FALSE
+     * or zmailMobilePolicyAllowBluetooth value is set to -1
      *
      * @since ZCS 8.0.0
      */
@@ -6942,8 +6920,8 @@ public class ZAttrProvisioning {
 
     /**
      * whether to allow camera on device; ignored if
-     * zmailFeatureMobilePolicyEnabled=FALSE or
-     * zmailMobilePolicyAllowCamera value is set to -1
+     * zmailFeatureMobilePolicyEnabled=FALSE or zmailMobilePolicyAllowCamera
+     * value is set to -1
      *
      * @since ZCS 8.0.0
      */
@@ -7058,8 +7036,8 @@ public class ZAttrProvisioning {
      * support the specified encryption algorithm; 0 - BlockNegotiation 1 -
      * OnlyStrongAlgorithmNegotiation 2 - AllowAnyAlgorithmNegotiation
      * ignored if zmailFeatureMobilePolicyEnabled=FALSE or
-     * zmailMobilePolicyAllowSMIMEEncryptionAlgorithmNegotiation value is
-     * set to -1
+     * zmailMobilePolicyAllowSMIMEEncryptionAlgorithmNegotiation value is set
+     * to -1
      *
      * @since ZCS 8.0.0
      */
@@ -7409,8 +7387,8 @@ public class ZAttrProvisioning {
 
     /**
      * Deprecated since: 6.0.0_BETA1. deprecated in favor of
-     * zmailMtaTlsSecurityLevel and zmailMtaSaslAuthEnable. Orig desc:
-     * Value for postconf smtpd_tls_security_level
+     * zmailMtaTlsSecurityLevel and zmailMtaSaslAuthEnable. Orig desc: Value
+     * for postconf smtpd_tls_security_level
      */
     @ZAttr(id=194)
     public static final String A_zmailMtaAuthEnabled = "zmailMtaAuthEnabled";
@@ -8991,8 +8969,8 @@ public class ZAttrProvisioning {
     /**
      * Retention period of messages in the Junk folder. 0 means that all
      * messages will be retained. This user-modifiable attribute works in
-     * conjunction with zmailMailSpamLifetime, which is admin-modifiable.
-     * The shorter duration is used. . Must be in valid duration format:
+     * conjunction with zmailMailSpamLifetime, which is admin-modifiable. The
+     * shorter duration is used. . Must be in valid duration format:
      * {digits}{time-unit}. digits: 0-9, time-unit: [hmsd]|ms. h - hours, m -
      * minutes, s - seconds, d - days, ms - milliseconds. If time unit is not
      * specified, the default is s(seconds).
@@ -9692,8 +9670,8 @@ public class ZAttrProvisioning {
     public static final String A_zmailPrefZimletTreeOpen = "zmailPrefZimletTreeOpen";
 
     /**
-     * whether this instance of Zmail is running ZCS or some other
-     * derivative product
+     * whether this instance of Zmail is running ZCS or some other derivative
+     * product
      *
      * @since ZCS 8.0.0
      */
@@ -10845,24 +10823,23 @@ public class ZAttrProvisioning {
     public static final String A_zmailSMIMELdapBindPassword = "zmailSMIMELdapBindPassword";
 
     /**
-     * Whether or not to discover search base DNs if
-     * zmailSMIMELdapSearchBase is not set. Allowed values are TRUE or
-     * FALSE. If zmailSMIMELdapSearchBase is set for a config, this
-     * attribute is ignored for the config. If not set, default for the
-     * config is FALSE. In that case, if zmailSMIMELdapSearchBase is not
-     * set, the search will default to the rootDSE. If multiple DNs are
-     * discovered, the ldap search will use them one by one until a hit is
-     * returned. All SMIME attributes are in the format of
-     * {config-name}:{value}. A &#039;SMIME config&#039; is a set of SMIME
-     * attribute values with the same {config-name}. Multiple SMIME configs
-     * can be configured on a domain or on globalconfig. Note: SMIME
-     * attributes on domains do not inherited values from globalconfig, they
-     * are not domain-inherited attributes. During SMIME public key lookup,
-     * if there are any SMIME config on the domain of the account, they are
-     * used. SMIME configs on globalconfig will be used only when there is no
-     * SMIME config on the domain. SMIME attributes cannot be modified
-     * directly with zmprov md/mcf commands. Use zmprov
-     * gcsc/gdsc/mcsc/mdsc/rcsc/rdsc command instead.
+     * Whether or not to discover search base DNs if zmailSMIMELdapSearchBase
+     * is not set. Allowed values are TRUE or FALSE. If
+     * zmailSMIMELdapSearchBase is set for a config, this attribute is
+     * ignored for the config. If not set, default for the config is FALSE.
+     * In that case, if zmailSMIMELdapSearchBase is not set, the search will
+     * default to the rootDSE. If multiple DNs are discovered, the ldap
+     * search will use them one by one until a hit is returned. All SMIME
+     * attributes are in the format of {config-name}:{value}. A &#039;SMIME
+     * config&#039; is a set of SMIME attribute values with the same
+     * {config-name}. Multiple SMIME configs can be configured on a domain or
+     * on globalconfig. Note: SMIME attributes on domains do not inherited
+     * values from globalconfig, they are not domain-inherited attributes.
+     * During SMIME public key lookup, if there are any SMIME config on the
+     * domain of the account, they are used. SMIME configs on globalconfig
+     * will be used only when there is no SMIME config on the domain. SMIME
+     * attributes cannot be modified directly with zmprov md/mcf commands.
+     * Use zmprov gcsc/gdsc/mcsc/mdsc/rcsc/rdsc command instead.
      *
      * @since ZCS 7.1.1
      */
@@ -11528,8 +11505,8 @@ public class ZAttrProvisioning {
     public static final String A_zmailVersionCheckNotificationBody = "zmailVersionCheckNotificationBody";
 
     /**
-     * email address to send mail to for the Zmail version check
-     * notification message
+     * email address to send mail to for the Zmail version check notification
+     * message
      *
      * @since ZCS 6.0.2
      */

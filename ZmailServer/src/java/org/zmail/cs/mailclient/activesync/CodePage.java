@@ -13,7 +13,7 @@
  * limitations under the License.
  */
 
-package com.zimbra.cs.mailclient.activesync;
+package org.zmail.cs.mailclient.activesync;
 
 import java.util.HashMap;
 

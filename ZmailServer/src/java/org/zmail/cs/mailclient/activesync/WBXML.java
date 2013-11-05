@@ -13,7 +13,7 @@
  * limitations under the License.
  */
 
-package com.zimbra.cs.mailclient.activesync;
+package org.zmail.cs.mailclient.activesync;
 
 import java.io.BufferedOutputStream;
 import java.io.BufferedInputStream;
@@ -28,8 +28,8 @@ import java.util.Stack;
 
 import javax.xml.bind.DatatypeConverter;
 
-import com.zimbra.cs.mailclient.activesync.CodePage;
-import com.zimbra.cs.mailclient.activesync.codepages.*;
+import org.zmail.cs.mailclient.activesync.CodePage;
+import org.zmail.cs.mailclient.activesync.codepages.*;
 
 import org.xml.sax.Attributes;
 import org.xml.sax.InputSource;

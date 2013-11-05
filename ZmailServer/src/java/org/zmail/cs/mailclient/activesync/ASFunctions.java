@@ -15,13 +15,13 @@
 // Config file: japigen/jas.apigen
 // Module name: AS
 
-package com.zimbra.cs.mailclient.activesync;
+package org.zmail.cs.mailclient.activesync;
 
 import java.util.*;
 import java.lang.String;
 import org.apache.commons.httpclient.methods.*;
-import com.zimbra.cs.mailclient.activesync.ActiveSyncManager;
-import com.zimbra.cs.mailclient.activesync.ASTypes.*;
+import org.zmail.cs.mailclient.activesync.ActiveSyncManager;
+import org.zmail.cs.mailclient.activesync.ASTypes.*;
 
 
 public class ASFunctions {

@@ -15,14 +15,14 @@
 // Config file: japigen/jas.apigen
 // Module name: AS
 
-package com.zimbra.cs.mailclient.activesync;
+package org.zmail.cs.mailclient.activesync;
 
 import java.util.*;
 import org.xml.sax.Attributes;
 import org.xml.sax.SAXException;
 import org.xml.sax.helpers.DefaultHandler;
 import javax.xml.bind.DatatypeConverter;
-import com.zimbra.cs.mailclient.activesync.ASTypes.*;
+import org.zmail.cs.mailclient.activesync.ASTypes.*;
 
 
 public class ASXMLParser extends DefaultHandler {

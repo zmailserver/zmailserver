@@ -37,7 +37,7 @@ public abstract class ZAttrAccount  extends MailTarget {
 
     ///// BEGIN-AUTO-GEN-REPLACE
 
-    /* build: 8.0.0_BETA1_1111 norman 20131010-1457 */
+    /* build: 8.0.0_BETA1_1111 norman 20131025-1439 */
 
     /**
      * RFC2256: ISO-3166 country 2-letter code
@@ -4828,8 +4828,8 @@ public abstract class ZAttrAccount  extends MailTarget {
     }
 
     /**
-     * zmailCalendarCalDavSyncStart and zmailCalendarCalDavSyncEnd limits
-     * the window of appointment data available via CalDAV. for example when
+     * zmailCalendarCalDavSyncStart and zmailCalendarCalDavSyncEnd limits the
+     * window of appointment data available via CalDAV. for example when
      * zmailCalendarCalDavSyncStart is set to 30 days, and
      * zmailCalendarCalDavSyncEnd is set to 1 years, then the appointments
      * between (now - 30 days) and (now + 1 year) will be available via
@@ -4853,8 +4853,8 @@ public abstract class ZAttrAccount  extends MailTarget {
     }
 
     /**
-     * zmailCalendarCalDavSyncStart and zmailCalendarCalDavSyncEnd limits
-     * the window of appointment data available via CalDAV. for example when
+     * zmailCalendarCalDavSyncStart and zmailCalendarCalDavSyncEnd limits the
+     * window of appointment data available via CalDAV. for example when
      * zmailCalendarCalDavSyncStart is set to 30 days, and
      * zmailCalendarCalDavSyncEnd is set to 1 years, then the appointments
      * between (now - 30 days) and (now + 1 year) will be available via
@@ -4874,8 +4874,8 @@ public abstract class ZAttrAccount  extends MailTarget {
     }
 
     /**
-     * zmailCalendarCalDavSyncStart and zmailCalendarCalDavSyncEnd limits
-     * the window of appointment data available via CalDAV. for example when
+     * zmailCalendarCalDavSyncStart and zmailCalendarCalDavSyncEnd limits the
+     * window of appointment data available via CalDAV. for example when
      * zmailCalendarCalDavSyncStart is set to 30 days, and
      * zmailCalendarCalDavSyncEnd is set to 1 years, then the appointments
      * between (now - 30 days) and (now + 1 year) will be available via
@@ -4898,8 +4898,8 @@ public abstract class ZAttrAccount  extends MailTarget {
     }
 
     /**
-     * zmailCalendarCalDavSyncStart and zmailCalendarCalDavSyncEnd limits
-     * the window of appointment data available via CalDAV. for example when
+     * zmailCalendarCalDavSyncStart and zmailCalendarCalDavSyncEnd limits the
+     * window of appointment data available via CalDAV. for example when
      * zmailCalendarCalDavSyncStart is set to 30 days, and
      * zmailCalendarCalDavSyncEnd is set to 1 years, then the appointments
      * between (now - 30 days) and (now + 1 year) will be available via
@@ -4923,8 +4923,8 @@ public abstract class ZAttrAccount  extends MailTarget {
     }
 
     /**
-     * zmailCalendarCalDavSyncStart and zmailCalendarCalDavSyncEnd limits
-     * the window of appointment data available via CalDAV. for example when
+     * zmailCalendarCalDavSyncStart and zmailCalendarCalDavSyncEnd limits the
+     * window of appointment data available via CalDAV. for example when
      * zmailCalendarCalDavSyncStart is set to 30 days, and
      * zmailCalendarCalDavSyncEnd is set to 1 years, then the appointments
      * between (now - 30 days) and (now + 1 year) will be available via
@@ -4946,8 +4946,8 @@ public abstract class ZAttrAccount  extends MailTarget {
     }
 
     /**
-     * zmailCalendarCalDavSyncStart and zmailCalendarCalDavSyncEnd limits
-     * the window of appointment data available via CalDAV. for example when
+     * zmailCalendarCalDavSyncStart and zmailCalendarCalDavSyncEnd limits the
+     * window of appointment data available via CalDAV. for example when
      * zmailCalendarCalDavSyncStart is set to 30 days, and
      * zmailCalendarCalDavSyncEnd is set to 1 years, then the appointments
      * between (now - 30 days) and (now + 1 year) will be available via
@@ -5539,8 +5539,8 @@ public abstract class ZAttrAccount  extends MailTarget {
 
     /**
      * Deprecated since: 5.0.0. deprecated in favor of user-settable
-     * attribute zmailPrefChildVisibleAccount . Orig desc: zmailId of
-     * visible child accounts
+     * attribute zmailPrefChildVisibleAccount . Orig desc: zmailId of visible
+     * child accounts
      *
      * @return zmailChildVisibleAccount, or empty array if unset
      */
@@ -5551,8 +5551,8 @@ public abstract class ZAttrAccount  extends MailTarget {
 
     /**
      * Deprecated since: 5.0.0. deprecated in favor of user-settable
-     * attribute zmailPrefChildVisibleAccount . Orig desc: zmailId of
-     * visible child accounts
+     * attribute zmailPrefChildVisibleAccount . Orig desc: zmailId of visible
+     * child accounts
      *
      * @param zmailChildVisibleAccount new value
      * @throws org.zmail.common.service.ServiceException if error during update
@@ -5566,8 +5566,8 @@ public abstract class ZAttrAccount  extends MailTarget {
 
     /**
      * Deprecated since: 5.0.0. deprecated in favor of user-settable
-     * attribute zmailPrefChildVisibleAccount . Orig desc: zmailId of
-     * visible child accounts
+     * attribute zmailPrefChildVisibleAccount . Orig desc: zmailId of visible
+     * child accounts
      *
      * @param zmailChildVisibleAccount new value
      * @param attrs existing map to populate, or null to create a new map
@@ -5582,8 +5582,8 @@ public abstract class ZAttrAccount  extends MailTarget {
 
     /**
      * Deprecated since: 5.0.0. deprecated in favor of user-settable
-     * attribute zmailPrefChildVisibleAccount . Orig desc: zmailId of
-     * visible child accounts
+     * attribute zmailPrefChildVisibleAccount . Orig desc: zmailId of visible
+     * child accounts
      *
      * @param zmailChildVisibleAccount new to add to existing values
      * @throws org.zmail.common.service.ServiceException if error during update
@@ -5597,8 +5597,8 @@ public abstract class ZAttrAccount  extends MailTarget {
 
     /**
      * Deprecated since: 5.0.0. deprecated in favor of user-settable
-     * attribute zmailPrefChildVisibleAccount . Orig desc: zmailId of
-     * visible child accounts
+     * attribute zmailPrefChildVisibleAccount . Orig desc: zmailId of visible
+     * child accounts
      *
      * @param zmailChildVisibleAccount new to add to existing values
      * @param attrs existing map to populate, or null to create a new map
@@ -5613,8 +5613,8 @@ public abstract class ZAttrAccount  extends MailTarget {
 
     /**
      * Deprecated since: 5.0.0. deprecated in favor of user-settable
-     * attribute zmailPrefChildVisibleAccount . Orig desc: zmailId of
-     * visible child accounts
+     * attribute zmailPrefChildVisibleAccount . Orig desc: zmailId of visible
+     * child accounts
      *
      * @param zmailChildVisibleAccount existing value to remove
      * @throws org.zmail.common.service.ServiceException if error during update
@@ -5628,8 +5628,8 @@ public abstract class ZAttrAccount  extends MailTarget {
 
     /**
      * Deprecated since: 5.0.0. deprecated in favor of user-settable
-     * attribute zmailPrefChildVisibleAccount . Orig desc: zmailId of
-     * visible child accounts
+     * attribute zmailPrefChildVisibleAccount . Orig desc: zmailId of visible
+     * child accounts
      *
      * @param zmailChildVisibleAccount existing value to remove
      * @param attrs existing map to populate, or null to create a new map
@@ -5644,8 +5644,8 @@ public abstract class ZAttrAccount  extends MailTarget {
 
     /**
      * Deprecated since: 5.0.0. deprecated in favor of user-settable
-     * attribute zmailPrefChildVisibleAccount . Orig desc: zmailId of
-     * visible child accounts
+     * attribute zmailPrefChildVisibleAccount . Orig desc: zmailId of visible
+     * child accounts
      *
      * @throws org.zmail.common.service.ServiceException if error during update
      */
@@ -5658,8 +5658,8 @@ public abstract class ZAttrAccount  extends MailTarget {
 
     /**
      * Deprecated since: 5.0.0. deprecated in favor of user-settable
-     * attribute zmailPrefChildVisibleAccount . Orig desc: zmailId of
-     * visible child accounts
+     * attribute zmailPrefChildVisibleAccount . Orig desc: zmailId of visible
+     * child accounts
      *
      * @param attrs existing map to populate, or null to create a new map
      * @return populated map to pass into Provisioning.modifyAttrs
@@ -6284,13 +6284,13 @@ public abstract class ZAttrAccount  extends MailTarget {
      *
      * @see #getDataSourceActiveSyncPollingIntervalAsString()
      *
-     * @return zimbraDataSourceActiveSyncPollingInterval in millseconds, or -1 if unset
+     * @return zmailDataSourceActiveSyncPollingInterval in millseconds, or -1 if unset
      *
      * @since ZCS 6.0.0_BETA1
      */
     @ZAttr(id=1441)
     public long getDataSourceActiveSyncPollingInterval() {
-        return getTimeInterval(Provisioning.A_zimbraDataSourceActiveSyncPollingInterval, -1L);
+        return getTimeInterval(Provisioning.A_zmailDataSourceActiveSyncPollingInterval, -1L);
     }
 
     /**
@@ -6301,13 +6301,13 @@ public abstract class ZAttrAccount  extends MailTarget {
      * minutes, s - seconds, d - days, ms - milliseconds. If time unit is not
      * specified, the default is s(seconds).
      *
-     * @return zimbraDataSourceActiveSyncPollingInterval, or null if unset
+     * @return zmailDataSourceActiveSyncPollingInterval, or null if unset
      *
      * @since ZCS 6.0.0_BETA1
      */
     @ZAttr(id=1441)
     public String getDataSourceActiveSyncPollingIntervalAsString() {
-        return getAttr(Provisioning.A_zimbraDataSourceActiveSyncPollingInterval, null);
+        return getAttr(Provisioning.A_zmailDataSourceActiveSyncPollingInterval, null);
     }
 
     /**
@@ -6318,15 +6318,15 @@ public abstract class ZAttrAccount  extends MailTarget {
      * minutes, s - seconds, d - days, ms - milliseconds. If time unit is not
      * specified, the default is s(seconds).
      *
-     * @param zimbraDataSourceActiveSyncPollingInterval new value
-     * @throws com.zimbra.common.service.ServiceException if error during update
+     * @param zmailDataSourceActiveSyncPollingInterval new value
+     * @throws org.zmail.common.service.ServiceException if error during update
      *
      * @since ZCS 6.0.0_BETA1
      */
     @ZAttr(id=1441)
-    public void setDataSourceActiveSyncPollingInterval(String zimbraDataSourceActiveSyncPollingInterval) throws com.zimbra.common.service.ServiceException {
+    public void setDataSourceActiveSyncPollingInterval(String zmailDataSourceActiveSyncPollingInterval) throws org.zmail.common.service.ServiceException {
         HashMap<String,Object> attrs = new HashMap<String,Object>();
-        attrs.put(Provisioning.A_zimbraDataSourceActiveSyncPollingInterval, zimbraDataSourceActiveSyncPollingInterval);
+        attrs.put(Provisioning.A_zmailDataSourceActiveSyncPollingInterval, zmailDataSourceActiveSyncPollingInterval);
         getProvisioning().modifyAttrs(this, attrs);
     }
 
@@ -6338,16 +6338,16 @@ public abstract class ZAttrAccount  extends MailTarget {
      * minutes, s - seconds, d - days, ms - milliseconds. If time unit is not
      * specified, the default is s(seconds).
      *
-     * @param zimbraDataSourceActiveSyncPollingInterval new value
+     * @param zmailDataSourceActiveSyncPollingInterval new value
      * @param attrs existing map to populate, or null to create a new map
      * @return populated map to pass into Provisioning.modifyAttrs
      *
      * @since ZCS 6.0.0_BETA1
      */
     @ZAttr(id=1441)
-    public Map<String,Object> setDataSourceActiveSyncPollingInterval(String zimbraDataSourceActiveSyncPollingInterval, Map<String,Object> attrs) {
+    public Map<String,Object> setDataSourceActiveSyncPollingInterval(String zmailDataSourceActiveSyncPollingInterval, Map<String,Object> attrs) {
         if (attrs == null) attrs = new HashMap<String,Object>();
-        attrs.put(Provisioning.A_zimbraDataSourceActiveSyncPollingInterval, zimbraDataSourceActiveSyncPollingInterval);
+        attrs.put(Provisioning.A_zmailDataSourceActiveSyncPollingInterval, zmailDataSourceActiveSyncPollingInterval);
         return attrs;
     }
 
@@ -6359,14 +6359,14 @@ public abstract class ZAttrAccount  extends MailTarget {
      * minutes, s - seconds, d - days, ms - milliseconds. If time unit is not
      * specified, the default is s(seconds).
      *
-     * @throws com.zimbra.common.service.ServiceException if error during update
+     * @throws org.zmail.common.service.ServiceException if error during update
      *
      * @since ZCS 6.0.0_BETA1
      */
     @ZAttr(id=1441)
-    public void unsetDataSourceActiveSyncPollingInterval() throws com.zimbra.common.service.ServiceException {
+    public void unsetDataSourceActiveSyncPollingInterval() throws org.zmail.common.service.ServiceException {
         HashMap<String,Object> attrs = new HashMap<String,Object>();
-        attrs.put(Provisioning.A_zimbraDataSourceActiveSyncPollingInterval, "");
+        attrs.put(Provisioning.A_zmailDataSourceActiveSyncPollingInterval, "");
         getProvisioning().modifyAttrs(this, attrs);
     }
 
@@ -6386,7 +6386,7 @@ public abstract class ZAttrAccount  extends MailTarget {
     @ZAttr(id=1441)
     public Map<String,Object> unsetDataSourceActiveSyncPollingInterval(Map<String,Object> attrs) {
         if (attrs == null) attrs = new HashMap<String,Object>();
-        attrs.put(Provisioning.A_zimbraDataSourceActiveSyncPollingInterval, "");
+        attrs.put(Provisioning.A_zmailDataSourceActiveSyncPollingInterval, "");
         return attrs;
     }
 
@@ -7120,10 +7120,10 @@ public abstract class ZAttrAccount  extends MailTarget {
     }
 
     /**
-     * Shortest allowed duration for zmailDataSourcePollingInterval.. Must
-     * be in valid duration format: {digits}{time-unit}. digits: 0-9,
-     * time-unit: [hmsd]|ms. h - hours, m - minutes, s - seconds, d - days,
-     * ms - milliseconds. If time unit is not specified, the default is
+     * Shortest allowed duration for zmailDataSourcePollingInterval.. Must be
+     * in valid duration format: {digits}{time-unit}. digits: 0-9, time-unit:
+     * [hmsd]|ms. h - hours, m - minutes, s - seconds, d - days, ms -
+     * milliseconds. If time unit is not specified, the default is
      * s(seconds).
      *
      * <p>Use getDataSourceMinPollingIntervalAsString to access value as a string.
@@ -7140,10 +7140,10 @@ public abstract class ZAttrAccount  extends MailTarget {
     }
 
     /**
-     * Shortest allowed duration for zmailDataSourcePollingInterval.. Must
-     * be in valid duration format: {digits}{time-unit}. digits: 0-9,
-     * time-unit: [hmsd]|ms. h - hours, m - minutes, s - seconds, d - days,
-     * ms - milliseconds. If time unit is not specified, the default is
+     * Shortest allowed duration for zmailDataSourcePollingInterval.. Must be
+     * in valid duration format: {digits}{time-unit}. digits: 0-9, time-unit:
+     * [hmsd]|ms. h - hours, m - minutes, s - seconds, d - days, ms -
+     * milliseconds. If time unit is not specified, the default is
      * s(seconds).
      *
      * @return zmailDataSourceMinPollingInterval, or "1m" if unset
@@ -7156,10 +7156,10 @@ public abstract class ZAttrAccount  extends MailTarget {
     }
 
     /**
-     * Shortest allowed duration for zmailDataSourcePollingInterval.. Must
-     * be in valid duration format: {digits}{time-unit}. digits: 0-9,
-     * time-unit: [hmsd]|ms. h - hours, m - minutes, s - seconds, d - days,
-     * ms - milliseconds. If time unit is not specified, the default is
+     * Shortest allowed duration for zmailDataSourcePollingInterval.. Must be
+     * in valid duration format: {digits}{time-unit}. digits: 0-9, time-unit:
+     * [hmsd]|ms. h - hours, m - minutes, s - seconds, d - days, ms -
+     * milliseconds. If time unit is not specified, the default is
      * s(seconds).
      *
      * @param zmailDataSourceMinPollingInterval new value
@@ -7175,10 +7175,10 @@ public abstract class ZAttrAccount  extends MailTarget {
     }
 
     /**
-     * Shortest allowed duration for zmailDataSourcePollingInterval.. Must
-     * be in valid duration format: {digits}{time-unit}. digits: 0-9,
-     * time-unit: [hmsd]|ms. h - hours, m - minutes, s - seconds, d - days,
-     * ms - milliseconds. If time unit is not specified, the default is
+     * Shortest allowed duration for zmailDataSourcePollingInterval.. Must be
+     * in valid duration format: {digits}{time-unit}. digits: 0-9, time-unit:
+     * [hmsd]|ms. h - hours, m - minutes, s - seconds, d - days, ms -
+     * milliseconds. If time unit is not specified, the default is
      * s(seconds).
      *
      * @param zmailDataSourceMinPollingInterval new value
@@ -7195,10 +7195,10 @@ public abstract class ZAttrAccount  extends MailTarget {
     }
 
     /**
-     * Shortest allowed duration for zmailDataSourcePollingInterval.. Must
-     * be in valid duration format: {digits}{time-unit}. digits: 0-9,
-     * time-unit: [hmsd]|ms. h - hours, m - minutes, s - seconds, d - days,
-     * ms - milliseconds. If time unit is not specified, the default is
+     * Shortest allowed duration for zmailDataSourcePollingInterval.. Must be
+     * in valid duration format: {digits}{time-unit}. digits: 0-9, time-unit:
+     * [hmsd]|ms. h - hours, m - minutes, s - seconds, d - days, ms -
+     * milliseconds. If time unit is not specified, the default is
      * s(seconds).
      *
      * @throws org.zmail.common.service.ServiceException if error during update
@@ -7213,10 +7213,10 @@ public abstract class ZAttrAccount  extends MailTarget {
     }
 
     /**
-     * Shortest allowed duration for zmailDataSourcePollingInterval.. Must
-     * be in valid duration format: {digits}{time-unit}. digits: 0-9,
-     * time-unit: [hmsd]|ms. h - hours, m - minutes, s - seconds, d - days,
-     * ms - milliseconds. If time unit is not specified, the default is
+     * Shortest allowed duration for zmailDataSourcePollingInterval.. Must be
+     * in valid duration format: {digits}{time-unit}. digits: 0-9, time-unit:
+     * [hmsd]|ms. h - hours, m - minutes, s - seconds, d - days, ms -
+     * milliseconds. If time unit is not specified, the default is
      * s(seconds).
      *
      * @param attrs existing map to populate, or null to create a new map
@@ -7239,13 +7239,12 @@ public abstract class ZAttrAccount  extends MailTarget {
      * are migrated to protocol specific
      * zmailDataSource{proto}PollingInterval attributes. 1. if
      * zmailDataSourcePollingInterval is set on data source, use it 2.
-     * otherwise use the zmailDataSource{Proto}PollingInterval on
-     * account/cos 3. if zmailDataSource{Proto}PollingInterval is not set on
-     * account/cos, use 0, which means no automated polling. . Must be in
-     * valid duration format: {digits}{time-unit}. digits: 0-9, time-unit:
-     * [hmsd]|ms. h - hours, m - minutes, s - seconds, d - days, ms -
-     * milliseconds. If time unit is not specified, the default is
-     * s(seconds).
+     * otherwise use the zmailDataSource{Proto}PollingInterval on account/cos
+     * 3. if zmailDataSource{Proto}PollingInterval is not set on account/cos,
+     * use 0, which means no automated polling. . Must be in valid duration
+     * format: {digits}{time-unit}. digits: 0-9, time-unit: [hmsd]|ms. h -
+     * hours, m - minutes, s - seconds, d - days, ms - milliseconds. If time
+     * unit is not specified, the default is s(seconds).
      *
      * <p>Use getDataSourcePollingIntervalAsString to access value as a string.
      *
@@ -7266,13 +7265,12 @@ public abstract class ZAttrAccount  extends MailTarget {
      * are migrated to protocol specific
      * zmailDataSource{proto}PollingInterval attributes. 1. if
      * zmailDataSourcePollingInterval is set on data source, use it 2.
-     * otherwise use the zmailDataSource{Proto}PollingInterval on
-     * account/cos 3. if zmailDataSource{Proto}PollingInterval is not set on
-     * account/cos, use 0, which means no automated polling. . Must be in
-     * valid duration format: {digits}{time-unit}. digits: 0-9, time-unit:
-     * [hmsd]|ms. h - hours, m - minutes, s - seconds, d - days, ms -
-     * milliseconds. If time unit is not specified, the default is
-     * s(seconds).
+     * otherwise use the zmailDataSource{Proto}PollingInterval on account/cos
+     * 3. if zmailDataSource{Proto}PollingInterval is not set on account/cos,
+     * use 0, which means no automated polling. . Must be in valid duration
+     * format: {digits}{time-unit}. digits: 0-9, time-unit: [hmsd]|ms. h -
+     * hours, m - minutes, s - seconds, d - days, ms - milliseconds. If time
+     * unit is not specified, the default is s(seconds).
      *
      * @return zmailDataSourcePollingInterval, or null if unset
      */
@@ -7289,13 +7287,12 @@ public abstract class ZAttrAccount  extends MailTarget {
      * are migrated to protocol specific
      * zmailDataSource{proto}PollingInterval attributes. 1. if
      * zmailDataSourcePollingInterval is set on data source, use it 2.
-     * otherwise use the zmailDataSource{Proto}PollingInterval on
-     * account/cos 3. if zmailDataSource{Proto}PollingInterval is not set on
-     * account/cos, use 0, which means no automated polling. . Must be in
-     * valid duration format: {digits}{time-unit}. digits: 0-9, time-unit:
-     * [hmsd]|ms. h - hours, m - minutes, s - seconds, d - days, ms -
-     * milliseconds. If time unit is not specified, the default is
-     * s(seconds).
+     * otherwise use the zmailDataSource{Proto}PollingInterval on account/cos
+     * 3. if zmailDataSource{Proto}PollingInterval is not set on account/cos,
+     * use 0, which means no automated polling. . Must be in valid duration
+     * format: {digits}{time-unit}. digits: 0-9, time-unit: [hmsd]|ms. h -
+     * hours, m - minutes, s - seconds, d - days, ms - milliseconds. If time
+     * unit is not specified, the default is s(seconds).
      *
      * @param zmailDataSourcePollingInterval new value
      * @throws org.zmail.common.service.ServiceException if error during update
@@ -7315,13 +7312,12 @@ public abstract class ZAttrAccount  extends MailTarget {
      * are migrated to protocol specific
      * zmailDataSource{proto}PollingInterval attributes. 1. if
      * zmailDataSourcePollingInterval is set on data source, use it 2.
-     * otherwise use the zmailDataSource{Proto}PollingInterval on
-     * account/cos 3. if zmailDataSource{Proto}PollingInterval is not set on
-     * account/cos, use 0, which means no automated polling. . Must be in
-     * valid duration format: {digits}{time-unit}. digits: 0-9, time-unit:
-     * [hmsd]|ms. h - hours, m - minutes, s - seconds, d - days, ms -
-     * milliseconds. If time unit is not specified, the default is
-     * s(seconds).
+     * otherwise use the zmailDataSource{Proto}PollingInterval on account/cos
+     * 3. if zmailDataSource{Proto}PollingInterval is not set on account/cos,
+     * use 0, which means no automated polling. . Must be in valid duration
+     * format: {digits}{time-unit}. digits: 0-9, time-unit: [hmsd]|ms. h -
+     * hours, m - minutes, s - seconds, d - days, ms - milliseconds. If time
+     * unit is not specified, the default is s(seconds).
      *
      * @param zmailDataSourcePollingInterval new value
      * @param attrs existing map to populate, or null to create a new map
@@ -7342,13 +7338,12 @@ public abstract class ZAttrAccount  extends MailTarget {
      * are migrated to protocol specific
      * zmailDataSource{proto}PollingInterval attributes. 1. if
      * zmailDataSourcePollingInterval is set on data source, use it 2.
-     * otherwise use the zmailDataSource{Proto}PollingInterval on
-     * account/cos 3. if zmailDataSource{Proto}PollingInterval is not set on
-     * account/cos, use 0, which means no automated polling. . Must be in
-     * valid duration format: {digits}{time-unit}. digits: 0-9, time-unit:
-     * [hmsd]|ms. h - hours, m - minutes, s - seconds, d - days, ms -
-     * milliseconds. If time unit is not specified, the default is
-     * s(seconds).
+     * otherwise use the zmailDataSource{Proto}PollingInterval on account/cos
+     * 3. if zmailDataSource{Proto}PollingInterval is not set on account/cos,
+     * use 0, which means no automated polling. . Must be in valid duration
+     * format: {digits}{time-unit}. digits: 0-9, time-unit: [hmsd]|ms. h -
+     * hours, m - minutes, s - seconds, d - days, ms - milliseconds. If time
+     * unit is not specified, the default is s(seconds).
      *
      * @throws org.zmail.common.service.ServiceException if error during update
      */
@@ -7367,13 +7362,12 @@ public abstract class ZAttrAccount  extends MailTarget {
      * are migrated to protocol specific
      * zmailDataSource{proto}PollingInterval attributes. 1. if
      * zmailDataSourcePollingInterval is set on data source, use it 2.
-     * otherwise use the zmailDataSource{Proto}PollingInterval on
-     * account/cos 3. if zmailDataSource{Proto}PollingInterval is not set on
-     * account/cos, use 0, which means no automated polling. . Must be in
-     * valid duration format: {digits}{time-unit}. digits: 0-9, time-unit:
-     * [hmsd]|ms. h - hours, m - minutes, s - seconds, d - days, ms -
-     * milliseconds. If time unit is not specified, the default is
-     * s(seconds).
+     * otherwise use the zmailDataSource{Proto}PollingInterval on account/cos
+     * 3. if zmailDataSource{Proto}PollingInterval is not set on account/cos,
+     * use 0, which means no automated polling. . Must be in valid duration
+     * format: {digits}{time-unit}. digits: 0-9, time-unit: [hmsd]|ms. h -
+     * hours, m - minutes, s - seconds, d - days, ms - milliseconds. If time
+     * unit is not specified, the default is s(seconds).
      *
      * @param attrs existing map to populate, or null to create a new map
      * @return populated map to pass into Provisioning.modifyAttrs
@@ -17429,8 +17423,8 @@ public abstract class ZAttrAccount  extends MailTarget {
     }
 
     /**
-     * Whether to force clear zmail auth cookies when SOAP session ends
-     * (i.e. force logout on browser tab close)
+     * Whether to force clear zmail auth cookies when SOAP session ends (i.e.
+     * force logout on browser tab close)
      *
      * @return zmailForceClearCookies, or false if unset
      *
@@ -17442,8 +17436,8 @@ public abstract class ZAttrAccount  extends MailTarget {
     }
 
     /**
-     * Whether to force clear zmail auth cookies when SOAP session ends
-     * (i.e. force logout on browser tab close)
+     * Whether to force clear zmail auth cookies when SOAP session ends (i.e.
+     * force logout on browser tab close)
      *
      * @param zmailForceClearCookies new value
      * @throws org.zmail.common.service.ServiceException if error during update
@@ -17458,8 +17452,8 @@ public abstract class ZAttrAccount  extends MailTarget {
     }
 
     /**
-     * Whether to force clear zmail auth cookies when SOAP session ends
-     * (i.e. force logout on browser tab close)
+     * Whether to force clear zmail auth cookies when SOAP session ends (i.e.
+     * force logout on browser tab close)
      *
      * @param zmailForceClearCookies new value
      * @param attrs existing map to populate, or null to create a new map
@@ -17475,8 +17469,8 @@ public abstract class ZAttrAccount  extends MailTarget {
     }
 
     /**
-     * Whether to force clear zmail auth cookies when SOAP session ends
-     * (i.e. force logout on browser tab close)
+     * Whether to force clear zmail auth cookies when SOAP session ends (i.e.
+     * force logout on browser tab close)
      *
      * @throws org.zmail.common.service.ServiceException if error during update
      *
@@ -17490,8 +17484,8 @@ public abstract class ZAttrAccount  extends MailTarget {
     }
 
     /**
-     * Whether to force clear zmail auth cookies when SOAP session ends
-     * (i.e. force logout on browser tab close)
+     * Whether to force clear zmail auth cookies when SOAP session ends (i.e.
+     * force logout on browser tab close)
      *
      * @param attrs existing map to populate, or null to create a new map
      * @return populated map to pass into Provisioning.modifyAttrs
@@ -22808,8 +22802,8 @@ public abstract class ZAttrAccount  extends MailTarget {
     /**
      * Retention period of messages in the Trash folder. 0 means that all
      * messages will be retained. This admin-modifiable attribute works in
-     * conjunction with zmailPrefTrashLifetime, which is user-modifiable.
-     * The shorter duration is used. . Must be in valid duration format:
+     * conjunction with zmailPrefTrashLifetime, which is user-modifiable. The
+     * shorter duration is used. . Must be in valid duration format:
      * {digits}{time-unit}. digits: 0-9, time-unit: [hmsd]|ms. h - hours, m -
      * minutes, s - seconds, d - days, ms - milliseconds. If time unit is not
      * specified, the default is s(seconds).
@@ -22828,8 +22822,8 @@ public abstract class ZAttrAccount  extends MailTarget {
     /**
      * Retention period of messages in the Trash folder. 0 means that all
      * messages will be retained. This admin-modifiable attribute works in
-     * conjunction with zmailPrefTrashLifetime, which is user-modifiable.
-     * The shorter duration is used. . Must be in valid duration format:
+     * conjunction with zmailPrefTrashLifetime, which is user-modifiable. The
+     * shorter duration is used. . Must be in valid duration format:
      * {digits}{time-unit}. digits: 0-9, time-unit: [hmsd]|ms. h - hours, m -
      * minutes, s - seconds, d - days, ms - milliseconds. If time unit is not
      * specified, the default is s(seconds).
@@ -22844,8 +22838,8 @@ public abstract class ZAttrAccount  extends MailTarget {
     /**
      * Retention period of messages in the Trash folder. 0 means that all
      * messages will be retained. This admin-modifiable attribute works in
-     * conjunction with zmailPrefTrashLifetime, which is user-modifiable.
-     * The shorter duration is used. . Must be in valid duration format:
+     * conjunction with zmailPrefTrashLifetime, which is user-modifiable. The
+     * shorter duration is used. . Must be in valid duration format:
      * {digits}{time-unit}. digits: 0-9, time-unit: [hmsd]|ms. h - hours, m -
      * minutes, s - seconds, d - days, ms - milliseconds. If time unit is not
      * specified, the default is s(seconds).
@@ -22863,8 +22857,8 @@ public abstract class ZAttrAccount  extends MailTarget {
     /**
      * Retention period of messages in the Trash folder. 0 means that all
      * messages will be retained. This admin-modifiable attribute works in
-     * conjunction with zmailPrefTrashLifetime, which is user-modifiable.
-     * The shorter duration is used. . Must be in valid duration format:
+     * conjunction with zmailPrefTrashLifetime, which is user-modifiable. The
+     * shorter duration is used. . Must be in valid duration format:
      * {digits}{time-unit}. digits: 0-9, time-unit: [hmsd]|ms. h - hours, m -
      * minutes, s - seconds, d - days, ms - milliseconds. If time unit is not
      * specified, the default is s(seconds).
@@ -22883,8 +22877,8 @@ public abstract class ZAttrAccount  extends MailTarget {
     /**
      * Retention period of messages in the Trash folder. 0 means that all
      * messages will be retained. This admin-modifiable attribute works in
-     * conjunction with zmailPrefTrashLifetime, which is user-modifiable.
-     * The shorter duration is used. . Must be in valid duration format:
+     * conjunction with zmailPrefTrashLifetime, which is user-modifiable. The
+     * shorter duration is used. . Must be in valid duration format:
      * {digits}{time-unit}. digits: 0-9, time-unit: [hmsd]|ms. h - hours, m -
      * minutes, s - seconds, d - days, ms - milliseconds. If time unit is not
      * specified, the default is s(seconds).
@@ -22901,8 +22895,8 @@ public abstract class ZAttrAccount  extends MailTarget {
     /**
      * Retention period of messages in the Trash folder. 0 means that all
      * messages will be retained. This admin-modifiable attribute works in
-     * conjunction with zmailPrefTrashLifetime, which is user-modifiable.
-     * The shorter duration is used. . Must be in valid duration format:
+     * conjunction with zmailPrefTrashLifetime, which is user-modifiable. The
+     * shorter duration is used. . Must be in valid duration format:
      * {digits}{time-unit}. digits: 0-9, time-unit: [hmsd]|ms. h - hours, m -
      * minutes, s - seconds, d - days, ms - milliseconds. If time unit is not
      * specified, the default is s(seconds).
@@ -23736,9 +23730,8 @@ public abstract class ZAttrAccount  extends MailTarget {
     /**
      * whether the Bluetooth capabilities are allowed on the device. The
      * available options are Disable, HandsfreeOnly, and Allow. 0 - DISABLE 1
-     * - HANDSFREE 2 - ALLOW ignored if
-     * zmailFeatureMobilePolicyEnabled=FALSE or
-     * zmailMobilePolicyAllowBluetooth value is set to -1
+     * - HANDSFREE 2 - ALLOW ignored if zmailFeatureMobilePolicyEnabled=FALSE
+     * or zmailMobilePolicyAllowBluetooth value is set to -1
      *
      * @return zmailMobilePolicyAllowBluetooth, or 2 if unset
      *
@@ -23752,9 +23745,8 @@ public abstract class ZAttrAccount  extends MailTarget {
     /**
      * whether the Bluetooth capabilities are allowed on the device. The
      * available options are Disable, HandsfreeOnly, and Allow. 0 - DISABLE 1
-     * - HANDSFREE 2 - ALLOW ignored if
-     * zmailFeatureMobilePolicyEnabled=FALSE or
-     * zmailMobilePolicyAllowBluetooth value is set to -1
+     * - HANDSFREE 2 - ALLOW ignored if zmailFeatureMobilePolicyEnabled=FALSE
+     * or zmailMobilePolicyAllowBluetooth value is set to -1
      *
      * @param zmailMobilePolicyAllowBluetooth new value
      * @throws org.zmail.common.service.ServiceException if error during update
@@ -23771,9 +23763,8 @@ public abstract class ZAttrAccount  extends MailTarget {
     /**
      * whether the Bluetooth capabilities are allowed on the device. The
      * available options are Disable, HandsfreeOnly, and Allow. 0 - DISABLE 1
-     * - HANDSFREE 2 - ALLOW ignored if
-     * zmailFeatureMobilePolicyEnabled=FALSE or
-     * zmailMobilePolicyAllowBluetooth value is set to -1
+     * - HANDSFREE 2 - ALLOW ignored if zmailFeatureMobilePolicyEnabled=FALSE
+     * or zmailMobilePolicyAllowBluetooth value is set to -1
      *
      * @param zmailMobilePolicyAllowBluetooth new value
      * @param attrs existing map to populate, or null to create a new map
@@ -23791,9 +23782,8 @@ public abstract class ZAttrAccount  extends MailTarget {
     /**
      * whether the Bluetooth capabilities are allowed on the device. The
      * available options are Disable, HandsfreeOnly, and Allow. 0 - DISABLE 1
-     * - HANDSFREE 2 - ALLOW ignored if
-     * zmailFeatureMobilePolicyEnabled=FALSE or
-     * zmailMobilePolicyAllowBluetooth value is set to -1
+     * - HANDSFREE 2 - ALLOW ignored if zmailFeatureMobilePolicyEnabled=FALSE
+     * or zmailMobilePolicyAllowBluetooth value is set to -1
      *
      * @throws org.zmail.common.service.ServiceException if error during update
      *
@@ -23809,9 +23799,8 @@ public abstract class ZAttrAccount  extends MailTarget {
     /**
      * whether the Bluetooth capabilities are allowed on the device. The
      * available options are Disable, HandsfreeOnly, and Allow. 0 - DISABLE 1
-     * - HANDSFREE 2 - ALLOW ignored if
-     * zmailFeatureMobilePolicyEnabled=FALSE or
-     * zmailMobilePolicyAllowBluetooth value is set to -1
+     * - HANDSFREE 2 - ALLOW ignored if zmailFeatureMobilePolicyEnabled=FALSE
+     * or zmailMobilePolicyAllowBluetooth value is set to -1
      *
      * @param attrs existing map to populate, or null to create a new map
      * @return populated map to pass into Provisioning.modifyAttrs
@@ -23914,8 +23903,8 @@ public abstract class ZAttrAccount  extends MailTarget {
 
     /**
      * whether to allow camera on device; ignored if
-     * zmailFeatureMobilePolicyEnabled=FALSE or
-     * zmailMobilePolicyAllowCamera value is set to -1
+     * zmailFeatureMobilePolicyEnabled=FALSE or zmailMobilePolicyAllowCamera
+     * value is set to -1
      *
      * @return zmailMobilePolicyAllowCamera, or 1 if unset
      *
@@ -23928,8 +23917,8 @@ public abstract class ZAttrAccount  extends MailTarget {
 
     /**
      * whether to allow camera on device; ignored if
-     * zmailFeatureMobilePolicyEnabled=FALSE or
-     * zmailMobilePolicyAllowCamera value is set to -1
+     * zmailFeatureMobilePolicyEnabled=FALSE or zmailMobilePolicyAllowCamera
+     * value is set to -1
      *
      * @param zmailMobilePolicyAllowCamera new value
      * @throws org.zmail.common.service.ServiceException if error during update
@@ -23945,8 +23934,8 @@ public abstract class ZAttrAccount  extends MailTarget {
 
     /**
      * whether to allow camera on device; ignored if
-     * zmailFeatureMobilePolicyEnabled=FALSE or
-     * zmailMobilePolicyAllowCamera value is set to -1
+     * zmailFeatureMobilePolicyEnabled=FALSE or zmailMobilePolicyAllowCamera
+     * value is set to -1
      *
      * @param zmailMobilePolicyAllowCamera new value
      * @param attrs existing map to populate, or null to create a new map
@@ -23963,8 +23952,8 @@ public abstract class ZAttrAccount  extends MailTarget {
 
     /**
      * whether to allow camera on device; ignored if
-     * zmailFeatureMobilePolicyEnabled=FALSE or
-     * zmailMobilePolicyAllowCamera value is set to -1
+     * zmailFeatureMobilePolicyEnabled=FALSE or zmailMobilePolicyAllowCamera
+     * value is set to -1
      *
      * @throws org.zmail.common.service.ServiceException if error during update
      *
@@ -23979,8 +23968,8 @@ public abstract class ZAttrAccount  extends MailTarget {
 
     /**
      * whether to allow camera on device; ignored if
-     * zmailFeatureMobilePolicyEnabled=FALSE or
-     * zmailMobilePolicyAllowCamera value is set to -1
+     * zmailFeatureMobilePolicyEnabled=FALSE or zmailMobilePolicyAllowCamera
+     * value is set to -1
      *
      * @param attrs existing map to populate, or null to create a new map
      * @return populated map to pass into Provisioning.modifyAttrs
@@ -24748,8 +24737,8 @@ public abstract class ZAttrAccount  extends MailTarget {
      * support the specified encryption algorithm; 0 - BlockNegotiation 1 -
      * OnlyStrongAlgorithmNegotiation 2 - AllowAnyAlgorithmNegotiation
      * ignored if zmailFeatureMobilePolicyEnabled=FALSE or
-     * zmailMobilePolicyAllowSMIMEEncryptionAlgorithmNegotiation value is
-     * set to -1
+     * zmailMobilePolicyAllowSMIMEEncryptionAlgorithmNegotiation value is set
+     * to -1
      *
      * @return zmailMobilePolicyAllowSMIMEEncryptionAlgorithmNegotiation, or 2 if unset
      *
@@ -24766,8 +24755,8 @@ public abstract class ZAttrAccount  extends MailTarget {
      * support the specified encryption algorithm; 0 - BlockNegotiation 1 -
      * OnlyStrongAlgorithmNegotiation 2 - AllowAnyAlgorithmNegotiation
      * ignored if zmailFeatureMobilePolicyEnabled=FALSE or
-     * zmailMobilePolicyAllowSMIMEEncryptionAlgorithmNegotiation value is
-     * set to -1
+     * zmailMobilePolicyAllowSMIMEEncryptionAlgorithmNegotiation value is set
+     * to -1
      *
      * @param zmailMobilePolicyAllowSMIMEEncryptionAlgorithmNegotiation new value
      * @throws org.zmail.common.service.ServiceException if error during update
@@ -24787,8 +24776,8 @@ public abstract class ZAttrAccount  extends MailTarget {
      * support the specified encryption algorithm; 0 - BlockNegotiation 1 -
      * OnlyStrongAlgorithmNegotiation 2 - AllowAnyAlgorithmNegotiation
      * ignored if zmailFeatureMobilePolicyEnabled=FALSE or
-     * zmailMobilePolicyAllowSMIMEEncryptionAlgorithmNegotiation value is
-     * set to -1
+     * zmailMobilePolicyAllowSMIMEEncryptionAlgorithmNegotiation value is set
+     * to -1
      *
      * @param zmailMobilePolicyAllowSMIMEEncryptionAlgorithmNegotiation new value
      * @param attrs existing map to populate, or null to create a new map
@@ -24809,8 +24798,8 @@ public abstract class ZAttrAccount  extends MailTarget {
      * support the specified encryption algorithm; 0 - BlockNegotiation 1 -
      * OnlyStrongAlgorithmNegotiation 2 - AllowAnyAlgorithmNegotiation
      * ignored if zmailFeatureMobilePolicyEnabled=FALSE or
-     * zmailMobilePolicyAllowSMIMEEncryptionAlgorithmNegotiation value is
-     * set to -1
+     * zmailMobilePolicyAllowSMIMEEncryptionAlgorithmNegotiation value is set
+     * to -1
      *
      * @throws org.zmail.common.service.ServiceException if error during update
      *
@@ -24829,8 +24818,8 @@ public abstract class ZAttrAccount  extends MailTarget {
      * support the specified encryption algorithm; 0 - BlockNegotiation 1 -
      * OnlyStrongAlgorithmNegotiation 2 - AllowAnyAlgorithmNegotiation
      * ignored if zmailFeatureMobilePolicyEnabled=FALSE or
-     * zmailMobilePolicyAllowSMIMEEncryptionAlgorithmNegotiation value is
-     * set to -1
+     * zmailMobilePolicyAllowSMIMEEncryptionAlgorithmNegotiation value is set
+     * to -1
      *
      * @param attrs existing map to populate, or null to create a new map
      * @return populated map to pass into Provisioning.modifyAttrs
@@ -39988,8 +39977,8 @@ public abstract class ZAttrAccount  extends MailTarget {
     /**
      * Retention period of messages in the Junk folder. 0 means that all
      * messages will be retained. This user-modifiable attribute works in
-     * conjunction with zmailMailSpamLifetime, which is admin-modifiable.
-     * The shorter duration is used. . Must be in valid duration format:
+     * conjunction with zmailMailSpamLifetime, which is admin-modifiable. The
+     * shorter duration is used. . Must be in valid duration format:
      * {digits}{time-unit}. digits: 0-9, time-unit: [hmsd]|ms. h - hours, m -
      * minutes, s - seconds, d - days, ms - milliseconds. If time unit is not
      * specified, the default is s(seconds).
@@ -40010,8 +39999,8 @@ public abstract class ZAttrAccount  extends MailTarget {
     /**
      * Retention period of messages in the Junk folder. 0 means that all
      * messages will be retained. This user-modifiable attribute works in
-     * conjunction with zmailMailSpamLifetime, which is admin-modifiable.
-     * The shorter duration is used. . Must be in valid duration format:
+     * conjunction with zmailMailSpamLifetime, which is admin-modifiable. The
+     * shorter duration is used. . Must be in valid duration format:
      * {digits}{time-unit}. digits: 0-9, time-unit: [hmsd]|ms. h - hours, m -
      * minutes, s - seconds, d - days, ms - milliseconds. If time unit is not
      * specified, the default is s(seconds).
@@ -40028,8 +40017,8 @@ public abstract class ZAttrAccount  extends MailTarget {
     /**
      * Retention period of messages in the Junk folder. 0 means that all
      * messages will be retained. This user-modifiable attribute works in
-     * conjunction with zmailMailSpamLifetime, which is admin-modifiable.
-     * The shorter duration is used. . Must be in valid duration format:
+     * conjunction with zmailMailSpamLifetime, which is admin-modifiable. The
+     * shorter duration is used. . Must be in valid duration format:
      * {digits}{time-unit}. digits: 0-9, time-unit: [hmsd]|ms. h - hours, m -
      * minutes, s - seconds, d - days, ms - milliseconds. If time unit is not
      * specified, the default is s(seconds).
@@ -40049,8 +40038,8 @@ public abstract class ZAttrAccount  extends MailTarget {
     /**
      * Retention period of messages in the Junk folder. 0 means that all
      * messages will be retained. This user-modifiable attribute works in
-     * conjunction with zmailMailSpamLifetime, which is admin-modifiable.
-     * The shorter duration is used. . Must be in valid duration format:
+     * conjunction with zmailMailSpamLifetime, which is admin-modifiable. The
+     * shorter duration is used. . Must be in valid duration format:
      * {digits}{time-unit}. digits: 0-9, time-unit: [hmsd]|ms. h - hours, m -
      * minutes, s - seconds, d - days, ms - milliseconds. If time unit is not
      * specified, the default is s(seconds).
@@ -40071,8 +40060,8 @@ public abstract class ZAttrAccount  extends MailTarget {
     /**
      * Retention period of messages in the Junk folder. 0 means that all
      * messages will be retained. This user-modifiable attribute works in
-     * conjunction with zmailMailSpamLifetime, which is admin-modifiable.
-     * The shorter duration is used. . Must be in valid duration format:
+     * conjunction with zmailMailSpamLifetime, which is admin-modifiable. The
+     * shorter duration is used. . Must be in valid duration format:
      * {digits}{time-unit}. digits: 0-9, time-unit: [hmsd]|ms. h - hours, m -
      * minutes, s - seconds, d - days, ms - milliseconds. If time unit is not
      * specified, the default is s(seconds).
@@ -40091,8 +40080,8 @@ public abstract class ZAttrAccount  extends MailTarget {
     /**
      * Retention period of messages in the Junk folder. 0 means that all
      * messages will be retained. This user-modifiable attribute works in
-     * conjunction with zmailMailSpamLifetime, which is admin-modifiable.
-     * The shorter duration is used. . Must be in valid duration format:
+     * conjunction with zmailMailSpamLifetime, which is admin-modifiable. The
+     * shorter duration is used. . Must be in valid duration format:
      * {digits}{time-unit}. digits: 0-9, time-unit: [hmsd]|ms. h - hours, m -
      * minutes, s - seconds, d - days, ms - milliseconds. If time unit is not
      * specified, the default is s(seconds).
